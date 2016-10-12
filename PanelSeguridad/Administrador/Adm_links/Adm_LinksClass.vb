@@ -2,7 +2,7 @@
 #Region "campos"
     Private _Link_ID As String
     Private _Descripcion As String
-    Private _Param1 As Integer
+    Private _Param1 As String
     Private _Param2 As String
     Private _Img As String
     Private _LinkPag As String
@@ -26,11 +26,11 @@
             Me._Descripcion = value
         End Set
     End Property
-    Public Property Param1() As Integer
+    Public Property Param1() As String
         Get
             Return Me._Param1
         End Get
-        Set(ByVal value As Integer)
+        Set(ByVal value As String)
             Me._Param1 = value
         End Set
     End Property
