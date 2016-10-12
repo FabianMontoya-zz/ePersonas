@@ -8,10 +8,15 @@ var estado;
 var editNit_ID;
 var index_ID;
 var editID;
+
+var Vigencia = "";
+var Nit_Proccess = "";
+
 /*--------------- region de variables globales --------------------*/
 
 //evento load de los Links
 $(document).ready(function () {
+
     transacionAjax_EmpresaNit('Cliente');
 
     $("#ESelect").css("display", "none");
@@ -51,6 +56,7 @@ function Capture_Tarjeta_ID() {
     $("#TxtIDTarjeta").change(function () {
         var StrID = $(this).val();
         if (StrID.length == 10) {
+            ValidaParametros();
             $("#TxtIDTarjeta").attr("disabled", "disabled");
             $("#Complementos_c").css("display", "inline-table");
         }
@@ -59,8 +65,53 @@ function Capture_Tarjeta_ID() {
             $("#Complementos_c").css("display", "none");
         }
     });
+
 }
 
+
+//verifica si vienen parametros por la ruta 
+function ValidaParametros() {
+
+    for (item in ArrayMenu) {
+        if (ArrayMenu[item].Tipo == 2) {
+            if (ArrayMenu[item].IDlink == Link) {
+                Nit_Proccess = ArrayMenu[item].Parametro_1;
+                Vigencia = ArrayMenu[item].Parametro_2;
+                ModalidadVista();
+            }
+        }
+    }
+}
+
+//muestra el tipo de vista para el carge de niventario
+function ModalidadVista() {
+    
+    switch (Nit_Proccess.length) {
+        case 0:
+            $("#Select_EmpresaNit").removeAttr("disabled");
+            break;
+
+        default:
+            $("#Select_EmpresaNit").val(Nit_Proccess);
+            $("#Select_EmpresaNit").attr("disabled", "disabled");
+            break;
+    }
+    $('.C_Chosen').trigger('chosen:updated');
+
+    switch (Vigencia) {
+        case "N":
+            $("#TR_Vigencia").css("display", "none");
+            break;
+
+        case "S":
+            $("#TR_Vigencia").css("display", "inline-table");
+            break;
+
+        default:
+            $("#TR_Vigencia").css("display", "inline-table");
+            break;
+    }
+}
 
 //valida campos de fechas
 function Change_Select_Vigencia() {

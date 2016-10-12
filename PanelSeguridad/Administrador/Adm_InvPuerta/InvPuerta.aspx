@@ -79,7 +79,7 @@
                             </tr>
                         </table>
                         <table id="Tabla_2" style="width: 700px; text-align: left;">
-                            <tr>
+                            <tr id="TR_Vigencia">
                                 <td style="width: 88px;" class="Label_Bold">
                                     Vigencia
                                 </td>

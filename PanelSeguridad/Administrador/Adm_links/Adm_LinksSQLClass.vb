@@ -207,7 +207,7 @@ Public Class Adm_LinksSQLClass
             'cargamos datos sobre el objeto de login
             objLinks.Link_ID = ReadConsulta.GetString(0)
             objLinks.Descripcion = ReadConsulta.GetString(1)
-            If Not (IsDBNull(ReadConsulta.GetValue(2))) Then objLinks.Param1 = ReadConsulta.GetValue(2) Else objLinks.Param1 = 0
+            If Not (IsDBNull(ReadConsulta.GetValue(2))) Then objLinks.Param1 = ReadConsulta.GetValue(2) Else objLinks.Param1 = ""
             If Not (IsDBNull(ReadConsulta.GetValue(3))) Then objLinks.Param2 = ReadConsulta.GetString(3) Else objLinks.Param2 = ""
             If Not (IsDBNull(ReadConsulta.GetValue(4))) Then objLinks.Img = ReadConsulta.GetString(4) Else objLinks.Img = ""
             If Not (IsDBNull(ReadConsulta.GetValue(5))) Then objLinks.LinkPag = ReadConsulta.GetString(5) Else objLinks.LinkPag = ""

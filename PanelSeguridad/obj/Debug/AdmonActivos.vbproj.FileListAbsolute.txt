@@ -1,0 +1,9 @@
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\PanelSeguridad.dll
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\PanelSeguridad.pdb
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\PanelSeguridad.xml
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\AdmonActivos.vbprojResolveAssemblyReference.cache
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.Resources.resources
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\AdmonActivos.vbproj.GenerateResource.Cache
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.dll
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.xml
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.pdb

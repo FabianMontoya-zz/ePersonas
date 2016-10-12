@@ -105,8 +105,8 @@
                         </td>
                         <td>
                             <span class="cssToolTip_Form">
-                                <input type="text" id="TxtParam1" maxlength="18" title="Parametro 1" class="Numeric" />
-                                <span class="Spam_AN"></span></span>
+                                <input type="text" id="TxtParam1" maxlength="18" title="Parametro 1" class="Numeric_letter" />
+                                <span class="Spam_AST"></span></span>
                         </td>
                         <td>
                         </td>
@@ -115,7 +115,7 @@
                         </td>
                         <td>
                             <span class="cssToolTip_Form">
-                                <input type="text" id="TxtParam2" maxlength="50" title="Parametro 2" />
+                                <input type="text" id="TxtParam2" maxlength="50" title="Parametro 2" class="Numeric_letter" />
                                 <span class="Spam_AST"></span></span>
                         </td>
                         <td>

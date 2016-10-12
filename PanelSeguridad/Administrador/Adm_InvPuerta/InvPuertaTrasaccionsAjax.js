@@ -16,7 +16,7 @@ function transacionAjax_EmpresaNit(State) {
             }
             else {
                 ArrayEmpresaNit = JSON.parse(result);
-                charge_CatalogList(ArrayEmpresaNit, "Select_EmpresaNit", 1);
+                charge_CatalogList(ArrayEmpresaNit, "Select_EmpresaNit", "Generico");
             }
         },
         error: function () {
