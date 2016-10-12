@@ -1,0 +1,57 @@
+D:\SASIF\AdmonActivos\AdmonActivos\PanelSeguridad\bin\PanelSeguridad.dll
+D:\SASIF\AdmonActivos\AdmonActivos\PanelSeguridad\bin\PanelSeguridad.pdb
+D:\SASIF\AdmonActivos\AdmonActivos\PanelSeguridad\bin\PanelSeguridad.xml
+D:\SASIF\AdmonActivos\AdmonActivos\PanelSeguridad\obj\Release\AdmonActivos.vbprojResolveAssemblyReference.cache
+D:\SASIF\AdmonActivos\AdmonActivos\PanelSeguridad\obj\Release\PanelSeguridad.Resources.resources
+D:\SASIF\AdmonActivos\AdmonActivos\PanelSeguridad\obj\Release\AdmonActivos.vbproj.GenerateResource.Cache
+D:\SASIF\AdmonActivos\AdmonActivos\PanelSeguridad\obj\Release\PanelSeguridad.dll
+D:\SASIF\AdmonActivos\AdmonActivos\PanelSeguridad\obj\Release\PanelSeguridad.xml
+D:\SASIF\AdmonActivos\AdmonActivos\PanelSeguridad\obj\Release\PanelSeguridad.pdb
+D:\SASIF GERMAX\AdmonActivos\AdmonActivos\PanelSeguridad\bin\PanelSeguridad.dll
+D:\SASIF GERMAX\AdmonActivos\AdmonActivos\PanelSeguridad\bin\PanelSeguridad.pdb
+D:\SASIF GERMAX\AdmonActivos\AdmonActivos\PanelSeguridad\bin\PanelSeguridad.xml
+D:\SASIF GERMAX\AdmonActivos\AdmonActivos\PanelSeguridad\obj\Release\ResolveAssemblyReference.cache
+D:\SASIF GERMAX\AdmonActivos\AdmonActivos\PanelSeguridad\obj\Release\PanelSeguridad.Resources.resources
+D:\SASIF GERMAX\AdmonActivos\AdmonActivos\PanelSeguridad\obj\Release\GenerateResource.read.1.tlog
+D:\SASIF GERMAX\AdmonActivos\AdmonActivos\PanelSeguridad\obj\Release\GenerateResource.write.1.tlog
+D:\SASIF GERMAX\AdmonActivos\AdmonActivos\PanelSeguridad\obj\Release\PanelSeguridad.dll
+D:\SASIF GERMAX\AdmonActivos\AdmonActivos\PanelSeguridad\obj\Release\PanelSeguridad.xml
+D:\SASIF GERMAX\AdmonActivos\AdmonActivos\PanelSeguridad\obj\Release\PanelSeguridad.pdb
+D:\SASIF GERMAN\IMPUESTOS\AdmonActivos\AdmonActivos\PanelSeguridad\bin\PanelSeguridad.dll
+D:\SASIF GERMAN\IMPUESTOS\AdmonActivos\AdmonActivos\PanelSeguridad\bin\PanelSeguridad.pdb
+D:\SASIF GERMAN\IMPUESTOS\AdmonActivos\AdmonActivos\PanelSeguridad\bin\PanelSeguridad.xml
+D:\SASIF GERMAN\IMPUESTOS\AdmonActivos\AdmonActivos\PanelSeguridad\obj\Release\ResolveAssemblyReference.cache
+D:\SASIF GERMAN\IMPUESTOS\AdmonActivos\AdmonActivos\PanelSeguridad\obj\Release\PanelSeguridad.Resources.resources
+D:\SASIF GERMAN\IMPUESTOS\AdmonActivos\AdmonActivos\PanelSeguridad\obj\Release\GenerateResource.read.1.tlog
+D:\SASIF GERMAN\IMPUESTOS\AdmonActivos\AdmonActivos\PanelSeguridad\obj\Release\GenerateResource.write.1.tlog
+D:\SASIF GERMAN\IMPUESTOS\AdmonActivos\AdmonActivos\PanelSeguridad\obj\Release\PanelSeguridad.dll
+D:\SASIF GERMAN\IMPUESTOS\AdmonActivos\AdmonActivos\PanelSeguridad\obj\Release\PanelSeguridad.xml
+D:\SASIF GERMAN\IMPUESTOS\AdmonActivos\AdmonActivos\PanelSeguridad\obj\Release\PanelSeguridad.pdb
+D:\SASIF_GERMAN\IMPUESTOS\AdmonActivos\AdmonActivos\PanelSeguridad\bin\PanelSeguridad.dll
+D:\SASIF_GERMAN\IMPUESTOS\AdmonActivos\AdmonActivos\PanelSeguridad\bin\PanelSeguridad.pdb
+D:\SASIF_GERMAN\IMPUESTOS\AdmonActivos\AdmonActivos\PanelSeguridad\bin\PanelSeguridad.xml
+D:\SASIF_GERMAN\IMPUESTOS\AdmonActivos\AdmonActivos\PanelSeguridad\obj\Release\ResolveAssemblyReference.cache
+D:\SASIF_GERMAN\IMPUESTOS\AdmonActivos\AdmonActivos\PanelSeguridad\obj\Release\PanelSeguridad.Resources.resources
+D:\SASIF_GERMAN\IMPUESTOS\AdmonActivos\AdmonActivos\PanelSeguridad\obj\Release\GenerateResource.read.1.tlog
+D:\SASIF_GERMAN\IMPUESTOS\AdmonActivos\AdmonActivos\PanelSeguridad\obj\Release\GenerateResource.write.1.tlog
+D:\SASIF_GERMAN\IMPUESTOS\AdmonActivos\AdmonActivos\PanelSeguridad\obj\Release\PanelSeguridad.dll
+D:\SASIF_GERMAN\IMPUESTOS\AdmonActivos\AdmonActivos\PanelSeguridad\obj\Release\PanelSeguridad.xml
+D:\SASIF_GERMAN\IMPUESTOS\AdmonActivos\AdmonActivos\PanelSeguridad\obj\Release\PanelSeguridad.pdb
+D:\SASIF\Sasif_Activos\PanelSeguridad\bin\PanelSeguridad.dll
+D:\SASIF\Sasif_Activos\PanelSeguridad\bin\PanelSeguridad.pdb
+D:\SASIF\Sasif_Activos\PanelSeguridad\bin\PanelSeguridad.xml
+D:\SASIF\Sasif_Activos\PanelSeguridad\obj\Release\AdmonActivos.vbprojResolveAssemblyReference.cache
+D:\SASIF\Sasif_Activos\PanelSeguridad\obj\Release\PanelSeguridad.Resources.resources
+D:\SASIF\Sasif_Activos\PanelSeguridad\obj\Release\AdmonActivos.vbproj.GenerateResource.Cache
+D:\SASIF\Sasif_Activos\PanelSeguridad\obj\Release\PanelSeguridad.dll
+D:\SASIF\Sasif_Activos\PanelSeguridad\obj\Release\PanelSeguridad.xml
+D:\SASIF\Sasif_Activos\PanelSeguridad\obj\Release\PanelSeguridad.pdb
+Y:\Sasif_Activos\PanelSeguridad\bin\PanelSeguridad.dll
+Y:\Sasif_Activos\PanelSeguridad\bin\PanelSeguridad.pdb
+Y:\Sasif_Activos\PanelSeguridad\bin\PanelSeguridad.xml
+Y:\Sasif_Activos\PanelSeguridad\obj\Release\PanelSeguridad.Resources.resources
+Y:\Sasif_Activos\PanelSeguridad\obj\Release\AdmonActivos.vbproj.GenerateResource.Cache
+Y:\Sasif_Activos\PanelSeguridad\obj\Release\PanelSeguridad.dll
+Y:\Sasif_Activos\PanelSeguridad\obj\Release\PanelSeguridad.xml
+Y:\Sasif_Activos\PanelSeguridad\obj\Release\PanelSeguridad.pdb
+Y:\Sasif_Activos\PanelSeguridad\obj\Release\AdmonActivos.vbprojResolveAssemblyReference.cache
