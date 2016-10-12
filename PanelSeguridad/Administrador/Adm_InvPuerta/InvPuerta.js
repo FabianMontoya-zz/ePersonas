@@ -83,15 +83,17 @@ function ValidaParametros() {
     }
 }
 
+var TypeValida;
 //muestra el tipo de vista para el carge de niventario
 function ModalidadVista() {
-    
     switch (Nit_Proccess.length) {
         case 0:
+            TypeValida = 1;
             $("#Select_EmpresaNit").removeAttr("disabled");
             break;
 
         default:
+            TypeValida = 2;
             $("#Select_EmpresaNit").val(Nit_Proccess);
             $("#Select_EmpresaNit").attr("disabled", "disabled");
             break;
@@ -100,17 +102,21 @@ function ModalidadVista() {
 
     switch (Vigencia) {
         case "N":
+            TypeValida = TypeValida + "_1";
             $("#TR_Vigencia").css("display", "none");
             break;
 
         case "S":
+            TypeValida = TypeValida + "_2";
             $("#TR_Vigencia").css("display", "inline-table");
             break;
 
         default:
+            TypeValida = TypeValida + "_0";
             $("#TR_Vigencia").css("display", "inline-table");
             break;
     }
+    console.log(TypeValida);
 }
 
 //valida campos de fechas
@@ -124,7 +130,6 @@ function Change_Select_Vigencia() {
     });
 
 }
-
 
 //salida del formulario
 function btnSalir() {
