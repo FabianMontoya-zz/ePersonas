@@ -3015,55 +3015,11 @@ To modify move field declaration from designer file to code-behind file.
  </summary>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.InvPuertaSQLClass.Read_AllInvPuerta(System.String,System.String,System.String)">
-	<summary>
- creala consulta para la tabla InvPuerta parametrizada (READ)
- </summary>
-	<param name="vp_S_Filtro"></param>
-	<param name="vp_S_Opcion"></param>
-	<param name="vp_S_Contenido"></param>
-	<returns></returns>
-	<remarks></remarks>
 </member><member name="M:PanelSeguridad.InvPuertaSQLClass.InsertInvPuerta(PanelSeguridad.InvPuertaClass)">
 	<summary>
  funcion que crea el query para la insercion de nuevo InvPuerta (INSERT)
  </summary>
 	<param name="vp_Obj_InvPuerta"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.InvPuertaSQLClass.UpdateInvPuerta(PanelSeguridad.InvPuertaClass)">
-	<summary>
- funcion que crea el query para la modificacion del InvPuerta (UPDATE)
- </summary>
-	<param name="vp_Obj_InvPuerta"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.InvPuertaSQLClass.EraseInvPuerta(PanelSeguridad.InvPuertaClass)">
-	<summary>
- funcion que crea el query para la eliminacion del InvPuerta (DELETE)
- </summary>
-	<param name="vp_Obj_InvPuerta"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.InvPuertaSQLClass.ReadCharge_DropList(System.String)">
-	<summary>
- crea la consulta para cargar el combo
- </summary>
-	<param name="vp_S_Table"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.InvPuertaSQLClass.Charge_DropListInvPuertaDepend(System.String)">
-	<summary>
- crea la consulta para cargar el combo
- </summary>
-	<param name="vp_S_NitEmpresa"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.InvPuertaSQLClass.Charge_DropListSeguridad(System.String)">
-	<summary>
- crea la consulta para cargar el combo
- </summary>
-	<param name="vp_S_Table"></param>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.InvPuertaSQLClass.listInvPuerta(System.String,System.String,System.String)">
@@ -3079,12 +3035,6 @@ To modify move field declaration from designer file to code-behind file.
  averigua si esta repetido
  </summary>
 	<param name="vp_O_Obj"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.InvPuertaSQLClass.Matrix_InvPuerta">
-	<summary>
- lee la matriz de puertas de acceso
- </summary>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.Adm_ResetUserAjax.Consulta_Existe(System.String)">
@@ -3377,29 +3327,9 @@ To modify move field declaration from designer file to code-behind file.
  borra documentos de la ruta relativa 
  </summary>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.InvPuertaAjax.Consulta_InvPuerta">
-	<summary>
- traemos todos los datos para tabla InvPuerta (READ)
- </summary>
-	<remarks></remarks>
 </member><member name="M:PanelSeguridad.InvPuertaAjax.InsertInvPuerta">
 	<summary>
  funcion que inserta en la tabla InvPuerta (INSERT)
- </summary>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.InvPuertaAjax.UpdateInvPuerta">
-	<summary>
- funcion que actualiza en la tabla InvPuerta (UPDATE)
- </summary>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.InvPuertaAjax.EraseInvPuerta">
-	<summary>
- funcion que elimina en la tabla InvPuerta (DELETE)
- </summary>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.InvPuertaAjax.CargarDroplist">
-	<summary>
- funcion que carga el objeto DDL Links
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.InvPuertaAjax.CargarCliente">

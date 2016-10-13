@@ -11,23 +11,11 @@ Public Class InvPuertaAjax
 
             Select Case vl_S_option_login
 
-                Case "cargar_droplist_busqueda"
-                    CargarDroplist()
-
                 Case "Cliente"
                     CargarCliente()
 
-                Case "consulta"
-                    Consulta_InvPuerta()
-
                 Case "crear"
                     InsertInvPuerta()
-
-                Case "modificar"
-                    UpdateInvPuerta()
-
-                Case "elimina"
-                    EraseInvPuerta()
 
             End Select
 
@@ -35,38 +23,6 @@ Public Class InvPuertaAjax
     End Sub
 
 #Region "CRUD"
-
-    ''' <summary>
-    ''' traemos todos los datos para tabla InvPuerta (READ)
-    ''' </summary>
-    ''' <remarks></remarks>
-    Protected Sub Consulta_InvPuerta()
-
-        Dim SQL_InvPuerta As New InvPuertaSQLClass
-        Dim ObjListInvPuerta As New List(Of InvPuertaClass)
-
-
-        Dim vl_S_filtro As String = Request.Form("filtro")
-        Dim vl_S_opcion As String = Request.Form("opcion")
-        Dim vl_S_contenido As String = Request.Form("contenido")
-
-        ObjListInvPuerta = SQL_InvPuerta.Read_AllInvPuerta(vl_S_filtro, vl_S_opcion, vl_S_contenido)
-
-        If ObjListInvPuerta Is Nothing Then
-
-            Dim objInvPuerta As New InvPuertaClass
-            ObjListInvPuerta = New List(Of InvPuertaClass)
-
-            objInvPuerta.Descripcion = ""
-            objInvPuerta.FechaActualizacion = ""
-            objInvPuerta.UsuarioCreacion = ""
-
-            ObjListInvPuerta.Add(objInvPuerta)
-        End If
-
-        Response.Write(JsonConvert.SerializeObject(ObjListInvPuerta.ToArray()))
-
-    End Sub
 
     ''' <summary>
     ''' funcion que inserta en la tabla InvPuerta (INSERT)
@@ -77,106 +33,57 @@ Public Class InvPuertaAjax
         Dim objInvPuerta As New InvPuertaClass
         Dim SQL_InvPuerta As New InvPuertaSQLClass
         Dim ObjListInvPuerta As New List(Of InvPuertaClass)
+        Dim objListPersona As New List(Of ClienteClass)
+        Dim SQL_Persona As New ClienteSQLClass
 
-        Dim result As String
+        Dim result As String = ""
         Dim vl_s_IDxiste As String
 
         objInvPuerta.Nit_ID = Request.Form("Nit_ID")
-        objInvPuerta.InvPuerta_ID = Request.Form("ID")
+        objInvPuerta.Tarjeta_ID = Request.Form("ID_Tarjeta")
 
         'validamos si la llave existe
         vl_s_IDxiste = SQL_InvPuerta.Consulta_Repetido(objInvPuerta)
 
-        If vl_s_IDxiste = 0 Then
+        Select Case vl_s_IDxiste
+            Case "Asignada"
+                result = "Asignada"
 
-            objInvPuerta.Descripcion = Request.Form("descripcion")
-            objInvPuerta.Cod_Numeric = Request.Form("CNumeric")
-            objInvPuerta.Cod_AlfaNumeric = Request.Form("CAlfaNumeric")
+            Case "Existe"
+                result = "Existe"
 
-            objInvPuerta.UsuarioCreacion = Request.Form("user")
-            objInvPuerta.FechaCreacion = Date.Now
-            objInvPuerta.UsuarioActualizacion = Request.Form("user")
-            objInvPuerta.FechaActualizacion = Date.Now
+            Case "Nuevo"
+                objInvPuerta.Estado = 0
+                objInvPuerta.MotivoBloqueo = 0
+                objInvPuerta.ChequeaVigencias = Request.Form("Vigencia")
+                objInvPuerta.Fecha_Inicio_Vigencia = Request.Form("FechaInicial")
+                objInvPuerta.Fecha_Final_Vigencia = Request.Form("FechaFinal")
 
-            ObjListInvPuerta.Add(objInvPuerta)
+                objInvPuerta.UsuarioCreacion = Request.Form("user")
+                objInvPuerta.FechaCreacion = Date.Now
+                objInvPuerta.UsuarioActualizacion = Request.Form("user")
+                objInvPuerta.FechaActualizacion = Date.Now
 
-            result = SQL_InvPuerta.InsertInvPuerta(objInvPuerta)
+                objListPersona = SQL_Persona.InformacionUsuario(objInvPuerta.UsuarioCreacion)
 
-            Response.Write(result)
-        Else
-            result = "Existe"
-            Response.Write(result)
-        End If
+                For Each item_list As ClienteClass In objListPersona
+                    objInvPuerta.Nit_ID_Custodia = item_list.Nit_ID
+                    objInvPuerta.TypeDocument_ID_Custodia = item_list.TypeDocument_ID
+                    objInvPuerta.Document_ID_Custodia = item_list.Document_ID
+                Next
 
-    End Sub
+                ObjListInvPuerta.Add(objInvPuerta)
+                result = SQL_InvPuerta.InsertInvPuerta(objInvPuerta)
 
-    ''' <summary>
-    ''' funcion que actualiza en la tabla InvPuerta (UPDATE)
-    ''' </summary>
-    ''' <remarks></remarks>
-    Protected Sub UpdateInvPuerta()
-
-        Dim objInvPuerta As New InvPuertaClass
-        Dim SQL_InvPuerta As New InvPuertaSQLClass
-        Dim ObjListInvPuerta As New List(Of InvPuertaClass)
-
-        Dim result As String
-
-        objInvPuerta.Nit_ID = Request.Form("Nit_ID")
-        objInvPuerta.InvPuerta_ID = Request.Form("ID")
-        objInvPuerta.Descripcion = Request.Form("descripcion")
-        objInvPuerta.Cod_Numeric = Request.Form("CNumeric")
-        objInvPuerta.Cod_AlfaNumeric = Request.Form("CAlfaNumeric")
-
-        objInvPuerta.UsuarioActualizacion = Request.Form("user")
-        objInvPuerta.FechaActualizacion = Date.Now
-
-        ObjListInvPuerta.Add(objInvPuerta)
-
-        result = SQL_InvPuerta.UpdateInvPuerta(objInvPuerta)
+        End Select
 
         Response.Write(result)
 
-    End Sub
-
-    ''' <summary>
-    ''' funcion que elimina en la tabla InvPuerta (DELETE)
-    ''' </summary>
-    ''' <remarks></remarks>
-    Protected Sub EraseInvPuerta()
-
-        Dim objInvPuerta As New InvPuertaClass
-        Dim SQL_InvPuerta As New InvPuertaSQLClass
-        Dim ObjListInvPuerta As New List(Of InvPuertaClass)
-
-        Dim result As String
-
-        objInvPuerta.Nit_ID = Request.Form("Nit_ID")
-        objInvPuerta.InvPuerta_ID = Request.Form("ID")
-        ObjListInvPuerta.Add(objInvPuerta)
-
-        result = SQL_InvPuerta.EraseInvPuerta(objInvPuerta)
-        Response.Write(result)
     End Sub
 
 #End Region
 
 #Region "DROP LIST"
-
-    ''' <summary>
-    ''' funcion que carga el objeto DDL Links
-    ''' </summary>
-    ''' <remarks></remarks>
-    Protected Sub CargarDroplist()
-
-        Dim SQL_InvPuerta As New InvPuertaSQLClass
-        Dim ObjListDroplist As New List(Of Droplist_Class)
-        Dim vl_S_Tabla As String = Request.Form("tabla")
-
-        ObjListDroplist = SQL_InvPuerta.ReadCharge_DropList(vl_S_Tabla)
-        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
-
-    End Sub
 
     ''' <summary>
     ''' funcion que carga el objeto DDL consulta

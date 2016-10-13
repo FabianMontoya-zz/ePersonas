@@ -729,6 +729,21 @@ Public Class ClienteSQLClass
 
                 End While
 
+            Case "DatosUsuario"
+                'recorremos la consulta por la cantidad de datos en la BD
+                While ReadConsulta.Read
+
+                    Dim objCliente As New ClienteClass
+                    'cargamos datos sobre el objeto de login
+                    objCliente.Nit_ID = ReadConsulta.GetValue(0)
+                    objCliente.TypeDocument_ID = ReadConsulta.GetValue(1)
+                    objCliente.Document_ID = ReadConsulta.GetValue(2)
+                   
+                    'agregamos a la lista
+                    ObjListCliente.Add(objCliente)
+
+                End While
+
         End Select
 
         'cerramos conexiones
@@ -947,6 +962,29 @@ Public Class ClienteSQLClass
 
     End Function
 
+    Public Function InformacionUsuario(ByVal vp_S_Usuario As String)
+
+        Dim ObjList As New List(Of ClienteClass)
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("2")
+        Dim BD_Admin As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDAdmin").ToString
+
+        Dim sql As New StringBuilder
+
+        sql.Append("  SELECT CLI_Nit_ID,  " & _
+                                "                 CLI_TypeDocument_ID, " & _
+                                "                 CLI_Document_ID " & _
+                                "  FROM CLIENTE C " & _
+                                "  INNER JOIN " & BD_Admin & ".dbo.USUARIOS U ON U.U_Documento = C.CLI_Document_ID  " & _
+                                "  WHERE  U.U_Usuario_ID = '" & vp_S_Usuario & "'")
+        Dim StrQuery As String = sql.ToString
+
+        ObjList = list(StrQuery, Conexion, "DatosUsuario")
+
+        Return ObjList
+
+
+    End Function
 #End Region
 
 End Class
