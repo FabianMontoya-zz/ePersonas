@@ -53,8 +53,10 @@
                                 ID Tarjeta
                             </td>
                             <td>
-                                <input type="text" id="TxtIDTarjeta" maxlength="10" class="Numeric" style="width: 165px;
-                                    height: 25px; font: 20px/20px Verdana,sans-serif; text-align: center;" />
+                                <span class="cssToolTip_Form">
+                                    <input type="text" id="TxtIDTarjeta" maxlength="10" class="Numeric" style="width: 165px;
+                                        height: 25px; font: 20px/20px Verdana,sans-serif; text-align: center;" />
+                                    <span class="SpamALEC"></span></span>
                             </td>
                             <td style="padding-bottom: 25px; width: 250px;">
                             </td>
@@ -125,7 +127,7 @@
                                 </td>
                             </tr>
                         </table>
-                        <table id="Tabla_5" style="width:100%;">
+                        <table id="Tabla_5" style="width: 100%;">
                             <tr>
                                 <td colspan="4" align="center">
                                     <p>
