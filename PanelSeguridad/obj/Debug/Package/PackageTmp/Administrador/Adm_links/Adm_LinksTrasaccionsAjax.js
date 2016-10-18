@@ -67,20 +67,12 @@ function transacionAjax_link(State, filtro, opcion) {
 function transacionAjax_link_create(State) {
 
     var ID;
-    var param;
-
+ 
     if (State == "modificar") {
         ID = editID;
     } else {
         ID = $("#Txt_ID").val();
     }
-
-    if ($("#TxtParam1").val() == "") {
-        param = 0;
-    } else {
-        param = $("#TxtParam1").val();
-    }
-
 
     $.ajax({
         url: "Adm_LinksAjax.aspx",
@@ -89,7 +81,7 @@ function transacionAjax_link_create(State) {
         data: { "action": State,
             "ID": ID,
             "descripcion": $("#TxtDescription").val(),
-            "param1": param,
+            "param1": $("#TxtParam1").val(),
             "paran2": $("#TxtParam2").val(),
             "link": $("#TxtRuta").val()
         },
@@ -99,7 +91,7 @@ function transacionAjax_link_create(State) {
 
                 case "Error":
                     $("#dialog").dialog("option", "title", "Disculpenos :(");
-                    $("#Mensaje_alert").text("No se realizo El ingreso del link!");
+                    $("#Mensaje_alert").html("No se realizo El ingreso del link!");
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "block");
                     $("#SE").css("display", "none");
@@ -107,7 +99,7 @@ function transacionAjax_link_create(State) {
 
                 case "Existe":
                     $("#dialog").dialog("option", "title", "Ya Existe");
-                    $("#Mensaje_alert").text("El codigo ingresado ya existe en la base de datos!");
+                    $("#Mensaje_alert").html("El codigo ingresado ya existe en la base de datos!");
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "block");
                     $("#SE").css("display", "none");
@@ -116,7 +108,7 @@ function transacionAjax_link_create(State) {
                 case "Exito":
                     if (estado == "modificar") {
                         $("#dialog").dialog("option", "title", "Exito");
-                        $("#Mensaje_alert").text("El link fue modificado exitosamente! ");
+                        $("#Mensaje_alert").html("El link fue modificado exitosamente! ");
                         $("#dialog").dialog("open");
                         $("#DE").css("display", "none");
                         $("#SE").css("display", "block");
@@ -124,7 +116,7 @@ function transacionAjax_link_create(State) {
                     }
                     else {
                         $("#dialog").dialog("option", "title", "Exito");
-                        $("#Mensaje_alert").text("El link fue creado exitosamente! ");
+                        $("#Mensaje_alert").html("El link fue creado exitosamente! ");
                         $("#dialog").dialog("open");
                         $("#DE").css("display", "none");
                         $("#SE").css("display", "block");

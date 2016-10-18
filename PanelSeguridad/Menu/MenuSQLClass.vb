@@ -76,7 +76,7 @@ Public Class MenuSQLClass
                         "       Ruta ," & _
                         "       Usuario " & _
                         " FROM T_TEMPORAL " & _
-                        " ORDER BY Tipo, IDOpcionRol asc, Consecutivo ")
+                        " ORDER BY Tipo, IDOpcionRol asc, Consecutivo desc")
         End If
 
         StrQuery = sql.ToString

@@ -134,6 +134,10 @@
     <Content Include="Administrador\Adm_roles\Adm_Roles.js" />
     <Content Include="Administrador\Adm_roles\Adm_RolesAjax.aspx" />
     <Content Include="Administrador\Adm_roles\Adm_RolesTrasaccionsAjax.js" />
+    <Content Include="Administrador\Adm_R_Persona_Tarjeta\R_Persona_Tarjeta.aspx" />
+    <Content Include="Administrador\Adm_R_Persona_Tarjeta\R_Persona_Tarjeta.js" />
+    <Content Include="Administrador\Adm_R_Persona_Tarjeta\R_Persona_TarjetaAjax.aspx" />
+    <Content Include="Administrador\Adm_R_Persona_Tarjeta\R_Persona_TarjetaTrasaccionsAjax.js" />
     <Content Include="Administrador\Adm_R_PuertaAcc_Area\R_PuertaAcc_Area.aspx" />
     <Content Include="Administrador\Adm_R_PuertaAcc_Area\R_PuertaAcc_Area.js" />
     <Content Include="Administrador\Adm_R_PuertaAcc_Area\R_PuertaAcc_AreaAjax.aspx" />
@@ -556,6 +560,22 @@
     </Compile>
     <Compile Include="Administrador\Adm_roles\Adm_RolesClass.vb" />
     <Compile Include="Administrador\Adm_roles\Adm_RolesSQLClass.vb" />
+    <Compile Include="Administrador\Adm_R_Persona_Tarjeta\R_Persona_Tarjeta.aspx.designer.vb">
+      <DependentUpon>R_Persona_Tarjeta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Adm_R_Persona_Tarjeta\R_Persona_Tarjeta.aspx.vb">
+      <DependentUpon>R_Persona_Tarjeta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Adm_R_Persona_Tarjeta\R_Persona_TarjetaAjax.aspx.designer.vb">
+      <DependentUpon>R_Persona_TarjetaAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Adm_R_Persona_Tarjeta\R_Persona_TarjetaAjax.aspx.vb">
+      <DependentUpon>R_Persona_TarjetaAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Adm_R_Persona_Tarjeta\R_Persona_TarjetaClass.vb" />
+    <Compile Include="Administrador\Adm_R_Persona_Tarjeta\R_Persona_TarjetaSQLClass.vb" />
     <Compile Include="Administrador\Adm_R_PuertaAcc_Area\R_PuertaAcc_Area.aspx.designer.vb">
       <DependentUpon>R_PuertaAcc_Area.aspx</DependentUpon>
     </Compile>
@@ -1211,6 +1231,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Repository_Document\TEMP\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

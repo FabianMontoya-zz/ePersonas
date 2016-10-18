@@ -50,7 +50,7 @@ Public Class Crud_DocAjax
                     CargarMConsecutivos()
 
                 Case "MATRIX_CLIENTE_DEP"
-                    CargarMClienteDep()
+                    CargarMPersonaDep()
 
                 Case "MATRIX_CONTRATO"
                     CargarMContrato()
@@ -308,6 +308,20 @@ Public Class Crud_DocAjax
 #End Region
 
 #Region "DROP LIST"
+    ''' <summary>
+    ''' funcion que carga  Matrix PERSONAS 
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarMPersonaDep()
+
+        Dim SQL As New ClienteSQLClass
+        Dim ObjList As New List(Of ClienteClass)
+
+        ObjList = SQL.Matrix_PersonasDep()
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
+
 
     ''' <summary>
     ''' funcion que carga  rutas operacion
@@ -332,21 +346,6 @@ Public Class Crud_DocAjax
         Dim ObjList As New List(Of ConsecutivosClass)
 
         ObjList = SQL.MatrixConcecutivo()
-        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
-
-    End Sub
-
-
-    ''' <summary>
-    ''' funcion que carga  Matrix PERSONAS 
-    ''' </summary>
-    ''' <remarks></remarks>
-    Protected Sub CargarMClienteDep()
-
-        Dim SQL As New ClienteSQLClass
-        Dim ObjList As New List(Of ClienteClass)
-
-        ObjList = SQL.Matrix_PersonasDep()
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub

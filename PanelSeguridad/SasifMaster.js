@@ -189,8 +189,8 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
 
         case "Select_Documento_V":
             for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID == Nit) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Secuencia_ID + "'>" + Matrix[Item].Nombre_Save + "</option>");
+                if (Matrix[Item].Nit_ID == Nit || Matrix[Item].Nit_ID == "0") {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Documento_ID + "'>" + Matrix[Item].Descripcion + "</option>");
                 }
             }
             break;
@@ -223,6 +223,14 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
             for (Item in Matrix) {
                 if (Matrix[Item].Nit_ID == Nit) {
                     $("#" + Selector).append("<option value='" + Matrix[Item].PuertaAcceso_ID + "'>" + Matrix[Item].Descripcion + "</option>");
+                }
+            }
+            break;
+
+        case "Select_Tarjeta":
+            for (Item in Matrix) {
+                if (Matrix[Item].Nit_ID_Custodia == Nit && Matrix[Item].Document_ID_Asigna == "0") {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Tarjeta_ID + "'>" + Matrix[Item].Tarjeta_ID + "</option>");
                 }
             }
             break;
@@ -405,15 +413,6 @@ function ResetError() {
     $("#Img12").css("display", "none");
 }
 
-
-//muestra el documento cargado inicialmente
-function VerDocumento() {
-    $("#IF_Visor").css("display", "inline-table");
-    $("#IF_Visor").attr("width", "100%");
-    $("#IF_Visor").attr("height", "100%");
-    $("#IF_Visor").attr("src", "../../Repository_Document/TEMP/" + Doc_name);
-}
-
 // Función que suma o resta días a la fecha indicada
 sumaFecha = function (d, fecha) {
     var Fecha = new Date();
@@ -526,4 +525,12 @@ function UpLoad_Document(NameAjax, NameFile_ID, Form) {
 
     }
 
+}
+
+//muestra el documento cargado inicialmente
+function VerDocumento() {
+    $("#IF_Visor").css("display", "inline-table");
+    $("#IF_Visor").attr("width", "100%");
+    $("#IF_Visor").attr("height", "100%");
+    $("#IF_Visor").attr("src", "../../Repository_Document/TEMP/" + Doc_name);
 }

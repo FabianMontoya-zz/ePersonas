@@ -22,11 +22,15 @@ $(document).ready(function () {
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
-        autoOpen: false
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true
     });
 
     $("#dialog_eliminar").dialog({
-        autoOpen: false
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true
     });
 
 
@@ -34,7 +38,7 @@ $(document).ready(function () {
 
 //salida del formulario
 function btnSalir() {
-    window.location = "../../Menu/menu.aspx?User=" + $("#User").html();
+    window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
 }
 
 //habilita el panel de crear o consulta
@@ -46,6 +50,8 @@ function HabilitarPanel(opcion) {
             $("#TablaDatos").css("display", "inline-table");
             $("#TablaConsulta").css("display", "none");
             $("#Txt_ID").removeAttr("disabled");
+            $("#Btnguardar").attr("value", "Guardar");
+            ResetError();
             Clear();
             estado = opcion;
             break;
@@ -63,6 +69,7 @@ function HabilitarPanel(opcion) {
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_Trol").html("");
             estado = opcion;
+            ResetError();
             Clear();
             break;
 
@@ -194,7 +201,7 @@ function Table_rol() {
 
 //grid con el boton eliminar
 function Tabla_eliminar() {
-    var html_TRol = "<table id='matriz' border='1' cellpadding='1' cellspacing='1' class='BtnPerson' style='width: 100%'><thead><tr><th>Eliminar</th><th>Codigo</th><th>Descripción</th><th>Sigla</th><th>Estado</th></tr></thead><tbody>";
+    var html_TRol = "<table id='TRol' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Codigo</th><th>Descripción</th><th>Sigla</th><th>Estado</th></tr></thead><tbody>";
     for (itemArray in ArrayRoles) {
 
         html_TRol += "<tr id= 'TRol_" + ArrayRoles[itemArray].Rol_ID + "'><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar('" + ArrayRoles[itemArray].Rol_ID + "')\"></input></td><td>" + ArrayRoles[itemArray].Rol_ID + "</td><td>" + ArrayRoles[itemArray].Descripcion + "</td><td>" + ArrayRoles[itemArray].Sigla + "</td><td> " + ArrayRoles[itemArray].Estado + " </td></tr>";
@@ -205,7 +212,13 @@ function Tabla_eliminar() {
 
     $(".Eliminar").click(function () {
     });
+
+    $("#TRol").dataTable({
+       "bJQueryUI": true, "iDisplayLength": 1000,
+        "bDestroy": true
+    });
 }
+
 
 //muestra el registro a eliminar
 function Eliminar(index_rol) {
@@ -222,7 +235,7 @@ function Eliminar(index_rol) {
 
 //grid con el boton editar
 function Tabla_modificar() {
-    var html_TRol = "<table id='matriz' border='1' cellpadding='1' cellspacing='1' class='BtnPerson' style='width: 100%'><thead><tr><th>Editar</th><th>Codigo</th><th>Descripción</th><th>Sigla</th><th>Estado</th></tr></thead><tbody>";
+    var html_TRol = "<table id='TRol' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Codigo</th><th>Descripción</th><th>Sigla</th><th>Estado</th></tr></thead><tbody>";
     for (itemArray in ArrayRoles) {
         html_TRol += "<tr id= 'TRol_" + ArrayRoles[itemArray].Rol_ID + "'><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Editar('" + ArrayRoles[itemArray].Rol_ID + "')\"></input></td><td>" + ArrayRoles[itemArray].Rol_ID + "</td><td>" + ArrayRoles[itemArray].Descripcion + "</td><td>" + ArrayRoles[itemArray].Sigla + "</td><td> " + ArrayRoles[itemArray].Estado + " </td></tr>";
     }
@@ -231,6 +244,11 @@ function Tabla_modificar() {
     $("#container_Trol").html(html_TRol);
 
     $(".Editar").click(function () {
+    });
+    
+    $("#TRol").dataTable({
+       "bJQueryUI": true, "iDisplayLength": 1000,
+        "bDestroy": true
     });
 }
 
@@ -254,7 +272,7 @@ function Editar(index_rol) {
 
 //grid sin botones para ver resultado
 function Tabla_consulta() {
-    var html_TRol = "<table id='matriz' border='1' class='BtnPerson' cellpadding='1' cellspacing='1' style='width: 100%'><thead><tr><th>Codigo</th><th>Descripción</th><th>Sigla</th><th>Estado</th></tr></thead><tbody>";
+    var html_TRol = "<table id='TRol' border='1'  cellpadding='1' cellspacing='1' style='width: 100%'><thead><tr><th>Codigo</th><th>Descripción</th><th>Sigla</th><th>Estado</th></tr></thead><tbody>";
     for (itemArray in ArrayRoles) {
         html_TRol += "<tr id= 'TRol_" + ArrayRoles[itemArray].Rol_ID + "'><td>" + ArrayRoles[itemArray].Rol_ID + "</td><td>" + ArrayRoles[itemArray].Descripcion + "</td><td>" + ArrayRoles[itemArray].Sigla + "</td><td> " + ArrayRoles[itemArray].Estado + " </td></tr>";
     }
@@ -262,6 +280,10 @@ function Tabla_consulta() {
     $("#container_Trol").html("");
     $("#container_Trol").html(html_TRol);
 
+    $("#TRol").dataTable({
+       "bJQueryUI": true, "iDisplayLength": 1000,
+        "bDestroy": true
+    });
 }
 
 //evento del boton salir

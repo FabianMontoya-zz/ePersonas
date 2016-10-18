@@ -97,10 +97,9 @@ function arbol() {
                 IDInicial = ArrayMenu[itemArray].IDRol;
                 IDFinal = ArrayMenu[itemArray].IDRol;
             }
-            else {
+            else 
                 IDFinal = ArrayMenu[itemArray].IDRol;
-            }
-
+            
             if (IDInicial != IDFinal) {
                 contP = 0;
                 IDInicial = ArrayMenu[itemArray].IDRol;
@@ -119,10 +118,9 @@ function arbol() {
                 SubFinal = ArrayMenu[itemArray].Sub_Rol;
                 HtmlTree_Interno = "";
             }
-            else {
+            else 
                 SubFinal = ArrayMenu[itemArray].Sub_Rol;
-            }
-
+            
             if (SubInicial != SubFinal) {
                 cont = 0;
                 SubInicial = ArrayMenu[itemArray].Sub_Rol;

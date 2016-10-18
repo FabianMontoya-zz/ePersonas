@@ -286,7 +286,7 @@ Public Class DocumentosSQLClass
                                                 " A_Secuencia_Doc " & _
                                 " FROM DOCUMENTOS_EXISTENTES DE " & _
                                 " INNER JOIN ASOCIACION_DOCUMENTOS AD ON AD.A_Secuencia_ID = DE.DE_Secuencia_ID AND DE.DE_Nit_ID =AD.A_Nit_ID " & _
-                                " LEFT JOIN DOCUMENTOS D ON D.DOC_Documentos_ID = DE.DE_Documento_ID AND AD.A_Nit_ID = D.DOC_Nit_ID " & _
+                                " LEFT JOIN DOCUMENTOS D ON D.DOC_Documentos_ID = DE.DE_Documento_ID " & _
                                 " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D1 ON D1.DDL_ID = DE.DE_Formato AND D1.DDL_Tabla = 'DOCUMENTOS' " & _
                                 " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D2 ON D2.DDL_ID = D.DOC_TipoContenido AND D2.DDL_Tabla = 'TIPO_CONTENIDO' " & _
                                 " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D3 ON D3.DDL_ID = D.DOC_TipoVersion AND D3.DDL_Tabla = 'TIPO_VERSION' " & _

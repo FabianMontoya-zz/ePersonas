@@ -6,12 +6,12 @@
 li
 {
     position: relative;
-    margin-left: -15px;
+    margin-left: -22px;
     list-style: none;
 }
 li.file
 {
-    margin-left: -1px !important;
+    margin-left: 12px !important;
 }
 li.file a
 {
@@ -20,6 +20,7 @@ li.file a
     padding-left: 21px;
     text-decoration: none;
     display: block;
+    font: 14px/20px Verdana,sans-serif;
 }
 li input
 {
@@ -51,13 +52,14 @@ li label
     cursor: pointer;
     display: block;
     padding-left: 37px;
+    font: 14px/20px Verdana,sans-serif;
 }
 
 li input:checked + ol
 {
     background: url(../css/icons/toggle-small.png) 40px 5px no-repeat;
     margin: -1.25em 0 0 -44px; /* 20px */
-    padding: 1.563em 0 0 80px;
+    padding: 1.563em 0 0 60px;
     height: auto;
 }
 li input:checked + ol > li
@@ -85,12 +87,33 @@ li input:checked + ol > li:last-child
 
 #Exit
 {
-    width: 80%;
-    padding-right: 25px;
+    padding-right: 15px;
     text-align: end;
 }
 
 .title
 {
     padding-top: 15px;
+}
+
+#M_header
+{
+    width: 1270px;
+    height:100px;
+}
+
+#M_Bar
+{
+    width: 1270px;
+    height:50px;
+}
+
+#M_Container
+{
+    width: 1270px;
+}
+
+#M_Footer
+{
+    width: 1270px;
 }

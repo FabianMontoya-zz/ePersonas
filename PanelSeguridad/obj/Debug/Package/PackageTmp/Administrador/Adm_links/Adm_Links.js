@@ -22,22 +22,22 @@ $(document).ready(function () {
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
-        autoOpen: false
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true
     });
 
     $("#dialog_eliminar").dialog({
-        autoOpen: false
-    });
-
-    $('.solo-numero').keyup(function () {
-        this.value = (this.value + '').replace(/[^0-9]/g, '');
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true
     });
 
 });
 
 //salida del formulario
 function btnSalir() {
-    window.location = "../../Menu/menu.aspx?User=" + $("#User").html();
+    window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link; 
 }
 
 //habilita el panel de crear o consulta
@@ -49,6 +49,8 @@ function HabilitarPanel(opcion) {
             $("#TablaDatos").css("display", "inline-table");
             $("#TablaConsulta").css("display", "none");
             $("#Txt_ID").removeAttr("disabled");
+            $("#Btnguardar").attr("value", "Guardar");
+            ResetError();
             Clear();
             estado = opcion;
             break;
@@ -66,6 +68,7 @@ function HabilitarPanel(opcion) {
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_Tlink").html("");
             estado = opcion;
+            ResetError();
             Clear();
             break;
 
@@ -200,7 +203,7 @@ function Table_links() {
 
 //grid con el boton eliminar
 function Tabla_eliminar() {
-    var html_Tlink = "<table id='matriz' border='1' cellpadding='1' cellspacing='1' class='BtnPerson' style='width: 100%'><thead><tr><th>Eliminar</th><th>Codigo</th><th>Descripción</th><th>Parametro 1</th><th>Parametro 2</th><th>Link</th><th>Estado</th></tr></thead><tbody>";
+    var html_Tlink = "<table id='TLink' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Codigo</th><th>Descripción</th><th>Parametro 1</th><th>Parametro 2</th><th>Link</th><th>Estado</th></tr></thead><tbody>";
     for (itemArray in ArrayLinks) {
 
         html_Tlink += "<tr id= 'TLink_" + ArrayLinks[itemArray].Link_ID + "'><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar('" + ArrayLinks[itemArray].Link_ID + "')\"></input></td><td>" + ArrayLinks[itemArray].Link_ID + "</td><td>" + ArrayLinks[itemArray].Descripcion + "</td><td>" + ArrayLinks[itemArray].Param1 + "</td><td>" + ArrayLinks[itemArray].Param2 + "</td><td> " + ArrayLinks[itemArray].LinkPag + " </td><td> " + ArrayLinks[itemArray].Estado + " </td></tr>";
@@ -210,6 +213,11 @@ function Tabla_eliminar() {
     $("#container_Tlink").html(html_Tlink);
 
     $(".Eliminar").click(function () {
+    });
+
+    $("#TLink").dataTable({
+       "bJQueryUI": true, "iDisplayLength": 1000,
+        "bDestroy": true
     });
 }
 
@@ -229,7 +237,7 @@ function Eliminar(index_link) {
 
 //grid con el boton editar
 function Tabla_modificar() {
-    var html_Tlink = "<table id='matriz' border='1' cellpadding='1' cellspacing='1' class='BtnPerson' style='width: 100%'><thead><tr><th>Editar</th><th>Codigo</th><th>Descripción</th><th>Parametro 1</th><th>Parametro 2</th><th>Link</th><th>Estado</th></tr></thead><tbody>";
+    var html_Tlink = "<table id='TLink' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Codigo</th><th>Descripción</th><th>Parametro 1</th><th>Parametro 2</th><th>Link</th><th>Estado</th></tr></thead><tbody>";
     for (itemArray in ArrayLinks) {
         html_Tlink += "<tr id= 'TLink_" + ArrayLinks[itemArray].Link_ID + "'><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Editar('" + ArrayLinks[itemArray].Link_ID + "')\"></input></td><td>" + ArrayLinks[itemArray].Link_ID + "</td><td>" + ArrayLinks[itemArray].Descripcion + "</td><td>" + ArrayLinks[itemArray].Param1 + "</td><td>" + ArrayLinks[itemArray].Param2 + "</td><td> " + ArrayLinks[itemArray].LinkPag + " </td><td> " + ArrayLinks[itemArray].Estado + " </td></tr>";
     }
@@ -238,6 +246,11 @@ function Tabla_modificar() {
     $("#container_Tlink").html(html_Tlink);
 
     $(".Editar").click(function () {
+    });
+
+    $("#TLink").dataTable({
+       "bJQueryUI": true, "iDisplayLength": 1000,
+        "bDestroy": true
     });
 }
 
@@ -263,13 +276,18 @@ function Editar(index_link) {
 
 //grid sin botones para ver resultado
 function Tabla_consulta() {
-    var html_Tlink = "<table id='matriz' border='1' class='BtnPerson' cellpadding='1' cellspacing='1' style='width: 100%'><thead><tr><th>Codigo</th><th>Descripción</th><th>Parametro 1</th><th>Parametro 2</th><th>Link</th><th>Estado</th></tr></thead><tbody>";
+    var html_Tlink = "<table id='TLink' border='1'  cellpadding='1' cellspacing='1' style='width: 100%'><thead><tr><th>Codigo</th><th>Descripción</th><th>Parametro 1</th><th>Parametro 2</th><th>Link</th><th>Estado</th></tr></thead><tbody>";
     for (itemArray in ArrayLinks) {
         html_Tlink += "<tr id= 'TLink_" + ArrayLinks[itemArray].Link_ID + "'><td>" + ArrayLinks[itemArray].Link_ID + "</td><td>" + ArrayLinks[itemArray].Descripcion + "</td><td>" + ArrayLinks[itemArray].Param1 + "</td><td>" + ArrayLinks[itemArray].Param2 + "</td><td> " + ArrayLinks[itemArray].LinkPag + " </td><td> " + ArrayLinks[itemArray].Estado + " </td></tr>";
     }
     html_Tlink += "</tbody></table>";
     $("#container_Tlink").html("");
     $("#container_Tlink").html(html_Tlink);
+    
+    $("#TLink").dataTable({
+       "bJQueryUI": true, "iDisplayLength": 1000,
+        "bDestroy": true
+    });
 
 }
 

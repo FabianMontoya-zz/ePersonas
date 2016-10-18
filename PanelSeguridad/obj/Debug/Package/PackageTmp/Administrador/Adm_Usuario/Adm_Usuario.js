@@ -12,7 +12,7 @@ $(document).ready(function () {
 
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_CargaRol('cargar_Rol');
-   
+
     $("#ESelect").css("display", "none");
     $("#ImgID").css("display", "none");
     $("#Img1").css("display", "none");
@@ -28,22 +28,22 @@ $(document).ready(function () {
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
-        autoOpen: false
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true
     });
 
     $("#dialog_eliminar").dialog({
-        autoOpen: false
-    });
-
-    $('.solo-numero').keyup(function () {
-        this.value = (this.value + '').replace(/[^0-9]/g, '');
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true
     });
 
 });
 
 //salida del formulario
 function btnSalir() {
-    window.location = "../../Menu/menu.aspx?User=" + $("#User").html();
+    window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
 }
 
 //habilita el panel de crear o consulta
@@ -55,6 +55,8 @@ function HabilitarPanel(opcion) {
             $("#TablaDatos").css("display", "inline-table");
             $("#TablaConsulta").css("display", "none");
             $("#Txt_ID").removeAttr("disabled");
+            $("#Btnguardar").attr("value", "Guardar");
+            ResetError();
             Clear();
             estado = opcion;
             break;
@@ -72,6 +74,7 @@ function HabilitarPanel(opcion) {
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TUser").html("");
             estado = opcion;
+            ResetError();
             Clear();
             break;
 
@@ -206,7 +209,7 @@ function Table_User() {
 
 //grid con el boton eliminar
 function Tabla_eliminar() {
-    var html_TUser = "<table id='matriz' border='1' cellpadding='1' cellspacing='1' class='BtnPerson' style='width: 100%'><thead><tr><th>Eliminar</th><th>Usuario</th><th>Documento</th><th>Nombre</th><th>Rol</th></th></th><th>Estado</th></tr></thead><tbody>";
+    var html_TUser = "<table id='TUser' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Usuario</th><th>Documento</th><th>Nombre</th><th>Rol</th></th></th><th>Estado</th></tr></thead><tbody>";
     for (itemArray in ArrayUser) {
         html_TUser += "<tr id= 'TUser_" + ArrayUser[itemArray].Usuario_ID + "'><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar('" + ArrayUser[itemArray].Usuario_ID + "')\"></input></td><td>" + ArrayUser[itemArray].Usuario_ID + "</td><td>" + ArrayUser[itemArray].Documento + "</td><td>" + ArrayUser[itemArray].Nombre + "</td><td>" + ArrayUser[itemArray].Rol_ID + "</td><td> " + ArrayUser[itemArray].Estado + " </td></tr>";
     }
@@ -215,6 +218,11 @@ function Tabla_eliminar() {
     $("#container_TUser").html(html_TUser);
 
     $(".Eliminar").click(function () {
+    });
+
+    $("#TUser").dataTable({
+        "bJQueryUI": true, "iDisplayLength": 1000,
+        "bDestroy": true
     });
 }
 
@@ -234,7 +242,7 @@ function Eliminar(index_User) {
 
 //grid con el boton editar
 function Tabla_modificar() {
-    var html_TUser = "<table id='matriz' border='1' cellpadding='1' cellspacing='1' class='BtnPerson' style='width: 100%'><thead><tr><th>Editar</th><th>Usuario</th><th>Documento</th><th>Nombre</th><th>Rol</th></th></th><th>Estado</th></tr></thead><tbody>";
+    var html_TUser = "<table id='TUser' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Usuario</th><th>Documento</th><th>Nombre</th><th>Rol</th></th></th><th>Estado</th></tr></thead><tbody>";
     for (itemArray in ArrayUser) {
         html_TUser += "<tr id= 'TUser_" + ArrayUser[itemArray].Usuario_ID + "'><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Editar('" + ArrayUser[itemArray].Usuario_ID + "')\"></input></td><td>" + ArrayUser[itemArray].Usuario_ID + "</td><td>" + ArrayUser[itemArray].Documento + "</td><td>" + ArrayUser[itemArray].Nombre + "</td><td>" + ArrayUser[itemArray].Rol_ID + "</td><td> " + ArrayUser[itemArray].Estado + " </td></tr>";
     }
@@ -243,6 +251,11 @@ function Tabla_modificar() {
     $("#container_TUser").html(html_TUser);
 
     $(".Editar").click(function () {
+    });
+
+    $("#TUser").dataTable({
+        "bJQueryUI": true, "iDisplayLength": 1000,
+        "bDestroy": true
     });
 }
 
@@ -262,13 +275,16 @@ function Editar(index_User) {
             $("#TxtUser").val(ArrayUser[itemArray].Nick);
             editID = ArrayUser[itemArray].Usuario_ID;
             $("#Btnguardar").attr("value", "Actualizar");
+
+            $('.C_Chosen').trigger('chosen:updated');
+
         }
     }
 }
 
 //grid sin botones para ver resultado
 function Tabla_consulta() {
-    var html_TUser = "<table id='matriz' border='1' cellpadding='1' cellspacing='1' class='BtnPerson' style='width: 100%'><thead><tr><th>Usuario</th><th>Documento</th><th>Nombre</th><th>Rol</th></th></th><th>Estado</th></tr></thead><tbody>";
+    var html_TUser = "<table id='TUser' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Usuario</th><th>Documento</th><th>Nombre</th><th>Rol</th></th></th><th>Estado</th></tr></thead><tbody>";
     for (itemArray in ArrayUser) {
         html_TUser += "<tr id= 'TUser_" + ArrayUser[itemArray].Usuario_ID + "'><td>" + ArrayUser[itemArray].Usuario_ID + "</td><td>" + ArrayUser[itemArray].Documento + "</td><td>" + ArrayUser[itemArray].Nombre + "</td><td>" + ArrayUser[itemArray].Rol_ID + "</td><td> " + ArrayUser[itemArray].Estado + " </td></tr>";
     }
@@ -276,6 +292,10 @@ function Tabla_consulta() {
     $("#container_TUser").html("");
     $("#container_TUser").html(html_TUser);
 
+    $("#TUser").dataTable({
+        "bJQueryUI": true, "iDisplayLength": 1000,
+        "bDestroy": true
+    });
 }
 
 
@@ -298,4 +318,6 @@ function Clear() {
     $("#DDLRol").val("-1");
     $("#TxtRead").val("");
     $("#DDLColumns").val("-1");
+
+    $('.C_Chosen').trigger('chosen:updated');
 }
