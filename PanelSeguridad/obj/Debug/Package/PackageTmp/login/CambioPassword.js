@@ -7,7 +7,6 @@ $(document).ready(function () {
     $("#TdUser").html(User.toUpperCase());
     $("#User").html(User.toUpperCase());
 
-    $("#tituloPrincipal").html("GESTION Y CONTROL DE ORDENES DE TRABAJO");
     //evento del boton ingresar
     $("#BtnCambiar").click(function () {
         //llamamos la funcion de validar
@@ -24,7 +23,7 @@ $(document).ready(function () {
 
     //evento del boton salir
     $("#BtnExit").click(function () {
-        window.location = "../login/Login_CGA.aspx"
+        window.location = "../login/Login.aspx"
     });
 
 
@@ -32,7 +31,9 @@ $(document).ready(function () {
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
-        autoOpen: false
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true
     });
 
     $("#E1").css("display", "none");

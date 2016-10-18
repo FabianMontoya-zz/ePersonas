@@ -851,6 +851,41 @@ PanelSeguridad
 	<param name="vp_O_Obj"></param>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.R_Persona_TarjetaSQLClass.InsertR_Persona_Tarjeta(PanelSeguridad.R_Persona_TarjetaClass)">
+	<summary>
+ funcion que crea el query para la insercion de nuevo R_Persona_Tarjeta (INSERT)
+ </summary>
+	<param name="vp_Obj_R_Persona_Tarjeta"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.R_Persona_TarjetaSQLClass.Charge_DropListR_Persona_TarjetaDepend(System.String)">
+	<summary>
+ crea la consulta para cargar el combo
+ </summary>
+	<param name="vp_S_NitEmpresa"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.R_Persona_TarjetaSQLClass.listR_Persona_Tarjeta(System.String,System.String,System.String)">
+	<summary>
+ funcion que trae el listado de R_Persona_Tarjeta para armar la tabla
+ </summary>
+	<param name="vp_S_StrQuery"></param>
+	<param name="vg_S_StrConexion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.R_Persona_TarjetaSQLClass.Consulta_Repetido(PanelSeguridad.R_Persona_TarjetaClass)">
+	<summary>
+ averigua si esta repetido
+ </summary>
+	<param name="vp_O_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.R_Persona_TarjetaSQLClass.Matrix_RTP">
+	<summary>
+ consulta que trae los datos de asignar tarjeta
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.AutorizacionDocumentosAjax.Consulta_AutorizacionDocumentos">
 	<summary>
  traemos todos los datos para tabla AutorizacionDocumentos (READ)
@@ -874,6 +909,11 @@ PanelSeguridad
 </member><member name="M:PanelSeguridad.AutorizacionDocumentosAjax.EraseAutorizacionDocumentos">
 	<summary>
  funcion que elimina en la tabla AutorizacionDocumentos (DELETE)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AutorizacionDocumentosAjax.CargarMDocumento">
+	<summary>
+ funcion que carga  Matrix contrato
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.AutorizacionDocumentosAjax.CargarRutasOp">
@@ -3022,6 +3062,13 @@ To modify move field declaration from designer file to code-behind file.
 	<param name="vp_Obj_InvPuerta"></param>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.InvPuertaSQLClass.UpdateAsignacionTarjeta(PanelSeguridad.InvPuertaClass)">
+	<summary>
+ actualizacion por sasignacion de tarjeta a una persona
+ </summary>
+	<param name="vp_Obj_InvPuerta"></param>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.InvPuertaSQLClass.listInvPuerta(System.String,System.String,System.String)">
 	<summary>
  funcion que trae el listado de InvPuerta para armar la tabla
@@ -3037,12 +3084,43 @@ To modify move field declaration from designer file to code-behind file.
 	<param name="vp_O_Obj"></param>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.InvPuertaSQLClass.MatrixTarjeta">
+	<summary>
+ consulta que trae los datos de asignar tarjeta
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.Adm_ResetUserAjax.Consulta_Existe(System.String)">
 	<summary>
  funcion que valida si el id esta en la BD
  </summary>
 	<param name="vp_S_exist"></param>
 	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.R_Persona_TarjetaAjax.InsertR_Persona_Tarjeta">
+	<summary>
+ funcion que inserta en la tabla R_Persona_Tarjeta (INSERT)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.R_Persona_TarjetaAjax.CargarMPersonaDep">
+	<summary>
+ funcion que carga  Matrix PERSONAS 
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.R_Persona_TarjetaAjax.Cargar_MatrixTarjeta">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.R_Persona_TarjetaAjax.CargarMRTP">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.R_Persona_TarjetaAjax.CargarCliente">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.Crud_DocAjax.Consulta_Crud_Doc">
 	<summary>
@@ -3074,6 +3152,11 @@ To modify move field declaration from designer file to code-behind file.
  funcion que elimina en la tabla Crud_Doc (DELETE)
  </summary>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.Crud_DocAjax.CargarMPersonaDep">
+	<summary>
+ funcion que carga  Matrix PERSONAS 
+ </summary>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.Crud_DocAjax.CargarRutasOp">
 	<summary>
  funcion que carga  rutas operacion
@@ -3082,11 +3165,6 @@ To modify move field declaration from designer file to code-behind file.
 </member><member name="M:PanelSeguridad.Crud_DocAjax.CargarMConsecutivos">
 	<summary>
  funcion que carga  Matrix consecutivos 
- </summary>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.Crud_DocAjax.CargarMClienteDep">
-	<summary>
- funcion que carga  Matrix PERSONAS 
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.Crud_DocAjax.CargarMSecuencia">

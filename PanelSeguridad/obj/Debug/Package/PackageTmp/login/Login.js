@@ -1,7 +1,6 @@
 ﻿//evento load del login
 $(document).ready(function () {
     teclaEnter();
-    $("#tituloPrincipal").html("GESTION Y CONTROL DE ORDENES DE TRABAJO");
     //evento del boton ingresar
     $("#BtnIngresar").click(function () {
         //llamamos la funcion de validar
@@ -18,6 +17,8 @@ $(document).ready(function () {
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
+        dialogClass: "Dialog_Sasif",
+        modal: true,
         autoOpen: false
     });
 
@@ -50,7 +51,7 @@ function transacionAjax(State) {
             "user": $("#TxtUser").val(),
             "password": $("#TxtPassword").val()
         },
-       //Transaccion Ajax en proceso
+        //Transaccion Ajax en proceso
         success: function (result) {
             result = JSON.parse(result);
 
@@ -62,25 +63,21 @@ function transacionAjax(State) {
                 case 1: //contraseña incorrecta
                     $("#EPassword").css("display", "-webkit-inline-box");
                     $("#EUser").css("display", "-webkit-inline-box");
-                    $("#EPassword").attr("title", "* Contraseña incorrecta");
-                    $("#EUser").attr("title", "Usuario Incorrecto");
-                    $("#TxtUser").attr("title", "Revise Contraseña");
-                    $("#TxtPassword").attr("title", "Revise Contraseña");
+                    $("#S_User").html(ArrayMensajes[7].Mensajes_ID + ": " + ArrayMensajes[7].Descripcion);
+                    $("#S_Pass").html(ArrayMensajes[4].Mensajes_ID + ": " + ArrayMensajes[4].Descripcion);
                     break;
                 case 2: //no existe usuario
                     $("#EPassword").css("display", "-webkit-inline-box");
                     $("#EUser").css("display", "-webkit-inline-box");
-                    $("#EPassword").attr("title", "Contraseña incorrecta");
-                    $("#EUser").attr("title", "* Usuario Incorrecto");
-                    $("#TxtUser").attr("title", "Revise Usuario");
-                    $("#TxtPassword").attr("title", "Revise Usuario");
+                    $("#S_User").html(ArrayMensajes[6].Mensajes_ID + ": " + ArrayMensajes[6].Descripcion);
+                    $("#S_Pass").html(ArrayMensajes[5].Mensajes_ID + ": " + ArrayMensajes[5].Descripcion);
                     break;
                 case 3: // cambio de contraseña
                     window.location = "../login/CambioPassword.aspx?User=" + $("#TxtUser").val();
                     break
                 case 4: //usuario deshabilitado
                     $("#dialog").dialog("option", "title", "Desactivado!");
-                    $("#Mensaje_alert").text("El usuario esta deshabilitado comuniquese con el administrador del sistema");
+                    $("#Mensaje_alert").text(ArrayMensajes[8].Mensajes_ID + ": " + ArrayMensajes[8].Descripcion);
                     $("#dialog").dialog("open");
                     break;
             }
@@ -106,14 +103,14 @@ function ValidarCampos() {
         flag_valida = 1;
         if (user === "") {
             $("#EUser").css("display", "-webkit-inline-box");
-            $("#EUser").attr("title", "Usuario Requerido");
+            $("#S_User").html(ArrayMensajes[0].Mensajes_ID + ": " + ArrayMensajes[0].Descripcion);
         }
         else {
             $("#EUser").css("display", "none");
         }
         if (password === "") {
             $("#EPassword").css("display", "-webkit-inline-box");
-            $("#EPassword").attr("title", "Contraseña requerida");
+            $("#S_Pass").html(ArrayMensajes[0].Mensajes_ID + ": " + ArrayMensajes[0].Descripcion);
         }
         else {
             $("#EPassword").css("display", "none");

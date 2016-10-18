@@ -482,7 +482,6 @@ Public Class Crud_DocSQLClass
         Dim sql As New StringBuilder
 
         sql.AppendLine(" SELECT DOC_Crud_Docs_ID AS ID, CAST(DOC_Crud_Docs_ID AS NVARCHAR(10)) + ' - ' + DOC_Descripcion AS Descripcion, DOC_Nit_ID  FROM Crud_DocS ")
-
         StrQuery = sql.ToString
 
         ObjListCrud_Doc = listCrud_Doc(StrQuery, Conexion, "Matrix")

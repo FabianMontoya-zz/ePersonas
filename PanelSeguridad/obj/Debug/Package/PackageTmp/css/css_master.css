@@ -1,44 +1,21 @@
-﻿#User
+﻿/* --------------------------------------------------------------------------- */
+/* --------------------------- HEADER MASTER PAGE ---------------------------- */
+/* --------------------------------------------------------------------------- */
+
+/* -------       Label Usuario          ------*/
+#User, #Name_User
 {
-    color: #ffffff;
+    color: #ffffff;;
     font-weight: bold;
 }
+
+/* -------       Label Titulo          ------*/
 #tituloPrincipal
 {
-    color: #ffffff;
-}
-/*manejo de fondos*/
-.header
-{
-    background: url(../images/cabeza2.jpg) no-repeat;
-    background-position: center;
+    color: #ffffff;;
 }
 
-.Bar
-{
-    background: url(../images/menu3.jpg) no-repeat;
-    background-position: center;
-}
-#Header
-{
-    float: none;
-    height: 145px;
-}
-
-/*manejo de fondos*/
-.main
-{
-    background: url(../images/fondo11.jpg) no-repeat center center fixed; /*background-repeat: no-repeat;*/
-}
-
-.footer
-{
-    background-image: url(../images/cabeza2.jpg);
-    background-repeat: no-repeat;
-    background-position: center; /*background-size: cover;*/
-}
-
-
+/* -------       Label Hora           ------*/
 #Hours
 {
     top: 4em;
@@ -48,14 +25,52 @@
     font-weight: bold;
 }
 
-#panel_menu
+/* -------       div encabezado      ------*/
+#Header
 {
-    width: 100px;
-    height: 500px;
-    vertical-align: text-top;
-    padding-left: 10px;
+    float: none;
+    height: 145px;
 }
 
+/* -------         fondo            ------*/
+.header
+{
+    background: url(../images/cabeza2.jpg) no-repeat;
+    background-position: center;
+}
+
+/* --------------------------------------------------------------------------- */
+/* ------------------------- BAR MENU MASTER PAGE ---------------------------- */
+/* --------------------------------------------------------------------------- */
+
+/* -------         fondo            ------*/
+.Bar
+{
+    background: url(../images/menu3.jpg) no-repeat;
+    background-position: center;
+}
+
+
+/* --------------------------------------------------------------------------- */
+/* ------------------------- CONTENT MASTER PAGE ------_---------------------- */
+/* --------------------------------------------------------------------------- */
+
+/* -------         fondo            ------*/
+.main
+{
+    background: url(../images/fondo11.jpg) no-repeat center center fixed; /*background-repeat: no-repeat;*/
+}
+
+/* -------         dimencion panel 1            ------*/
+#panel_menu
+{
+    width: 150px;
+    height: 500px;
+    vertical-align: text-top;
+    padding-left: 1px;
+}
+
+/* -------         dimencion panel21            ------*/
 #container_menu
 {
     width: 200px;
@@ -66,7 +81,19 @@
     border: 1px solid #000000;
 }
 
+/* --------------------------------------------------------------------------- */
+/* ------------------------- FOOTER MASTER PAGE ------_---------------------- */
+/* --------------------------------------------------------------------------- */
 
+/* -------         fondo            ------*/
+.footer
+{
+    background-image: url(../images/cabeza2.jpg);
+    background-repeat: no-repeat;
+    background-position: center; /*background-size: cover;*/
+}
+
+/* -------         parrafos            ------*/
 #Parraf_1, #Parraf_2, #Parraf_3
 {
     color: #ffffff;

@@ -8,7 +8,7 @@ function transacionAjax_CargaBusqueda(State) {
         data: { "action": State,
             "tabla": 'OPTION_ROL'
         },
-       //Transaccion Ajax en proceso
+        //Transaccion Ajax en proceso
         success: function (result) {
             if (result == "") {
                 ArrayCombo = [];
@@ -35,7 +35,7 @@ function transacionAjax_CargaRol(State) {
         data: { "action": State
 
         },
-       //Transaccion Ajax en proceso
+        //Transaccion Ajax en proceso
         success: function (result) {
             if (result == "") {
                 ArrayComboSubRol = [];
@@ -59,9 +59,6 @@ function transacionAjax_CargaRol(State) {
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_CargaLinks(State, tipo_link) {
 
-    console.log(tipo_link);
-    console.log(State);
-
     $.ajax({
         url: "Adm_OpcRolAjax.aspx",
         type: "POST",
@@ -70,7 +67,7 @@ function transacionAjax_CargaLinks(State, tipo_link) {
             "tipo_link": tipo_link
 
         },
-       //Transaccion Ajax en proceso
+        //Transaccion Ajax en proceso
         success: function (result) {
             if (result == "") {
                 ArrayComboLinks = [];
@@ -150,7 +147,7 @@ function transacionAjax_opcRol_create(State) {
             "subrol_rol": $("#DDLSubRol_Rol").val(),
             "link_ID": $("#DDLLink_ID").val()
         },
-       //Transaccion Ajax en proceso
+        //Transaccion Ajax en proceso
         success: function (result) {
             switch (result) {
 
@@ -209,7 +206,7 @@ function transacionAjax_opcRol_delete(State) {
             "ID": editID,
             "DeleteConsecutivo": DeleteConsecutivo
         },
-       //Transaccion Ajax en proceso
+        //Transaccion Ajax en proceso
         success: function (result) {
             if (result == "Error") {
                 $("#dialog").dialog("option", "title", "Disculpenos :(");

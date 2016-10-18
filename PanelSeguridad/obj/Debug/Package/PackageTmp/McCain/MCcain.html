@@ -1,0 +1,333 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>DEMO Mc-Cain</title>
+    <script src="Script/jquery-1.4.1.js"></script>
+    <script src="Script/jquery.min.js"></script>
+    <script src="Script/jquery-ui-1.10.4.custom.js"></script>
+    <script src="Script/jquery.dataTables.min.js"></script>
+    <script src="Script/SasifMaster.js"></script>
+    <script src="Script/McCain.js"></script>
+    <link rel="stylesheet" type="text/css" href="Style/jquery-ui-1.10.4.custom.css" />
+    <link rel="stylesheet" type="text/css" href="Style/css_controles.css" />
+    <link rel="stylesheet" type="text/css" href="Style/css_master.css" />
+</head>
+<body>
+    <div class="header">
+        <div class="title">
+            <table width="100%">
+                <tr>
+                    <td id="LogoInt" rowspan="3" style="width: 15%; text-align: center;">
+                        <img id="logo_2" src="Image/sasif1.gif" alt="SASIF S.A." style="height: 80px; width: 120px;
+                            padding-top: 25px" />
+                    </td>
+                    <td id="Hours" colspan="3" style="width: 70%; text-align: center;">
+                    </td>
+                    <td id="logoExt" rowspan="3" height="50px" width="50px" style="padding-top: 30px;">
+                        &nbsp;<img alt="" src="Image/McCain.png" />
+                    </td>
+                </tr>
+                <tr>
+                    <td id="Title" colspan="3" style="width: 70%; text-align: center;">
+                        <h2 id="tituloPrincipal">
+                            VALIDACIÓN PROVEEDORES</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="User" colspan="3" style="width: 70%; text-align: center;">
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div>
+        <table id="info" style="width: 1000px; margin-top: 30px; margin-left: 100px;">
+            <tr>
+                <td id="T_Doc" colspan="6" align="center" class="Title_Bold">
+                    DOCUMENTACIÓN
+                </td>
+            </tr>
+            <tr style="text-align: left; height: 35px;">
+                <td class="Label_Bold" style="width: 100px;">
+                    Tipo de documento
+                </td>
+                <td style="width: 60px; width: 100px;">
+                    <select id="Select_TD">
+                        <option value="-1">Seleccione...</option>
+                        <option value="1">Cedula</option>
+                        <option value="2">Nit</option>
+                        <option value="3">Cedula Extranjera</option>
+                    </select>
+                </td>
+                <td style="padding-bottom: 25px; width: 100px;">
+                    <span class="cssToolTip">
+                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img1"
+                            src="Image/error.png" />
+                        <span>Campo Obligatorio!</span></span>
+                </td>
+                <td class="Label_Bold" style="width: 100px;">
+                    Identificación
+                </td>
+                <td style="width: 150px;">
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="TxtDoc" maxlength="19" class="Numeric" style="width: 150px;" />
+                        <span>Digite solo numeros</span></span>
+                </td>
+                <td style="padding-bottom: 25px; width: 100px;">
+                    <span class="cssToolTip">
+                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img2"
+                            src="Image/error.png" />
+                        <span>Campo Obligatorio!</span></span>
+                </td>
+                <td style="width: 100px;">
+                    <input id="Btnguardar" type="button" value="Consultar" onclick="BtnConsulta();" />
+                </td>
+            </tr>
+        </table>
+        <table id="info_C" style="width: 55%; margin-top: 15px; margin-left: 250px; font-family: Verdana,sans-serif;">
+            <tr>
+                <td class="Label_Bold">
+                    Nombre
+                </td>
+                <td id="L_Nombre">
+                </td>
+                <td class="Label_Bold">
+                    Empresa
+                </td>
+                <td id="L_Empresa">
+                </td>
+                <td rowspan="3">
+                    <img alt="error" title="" style="padding-left: 1em; height: 100px; width: 80px;"
+                        id="ImgMen" src="Image/MEN.jpg" />
+                    <img alt="error" title="" style="padding-left: 1em; height: 100px; width: 80px;"
+                        id="ImgWomen" src="Image/WOMEN.jpg" />
+                </td>
+                <tr style="text-align: left;">
+                </tr>
+                <td class="Label_Bold">
+                    Area
+                </td>
+                <td id="L_Area">
+                </td>
+                <td class="Label_Bold">
+                    Cargo
+                </td>
+                <td id="L_Cargo">
+                </td>
+            </tr>
+        </table>
+        <table id="T_Documentos" style="width: 700px; margin-top: 30px; margin-left: 220px;
+            font-family: Verdana,sans-serif;">
+            <thead>
+                <tr style="text-align: left;">
+                    <th class="Label_Bold">
+                        DOCUMENTOS REQUERIDOS EMPLEADO
+                    </th>
+                    <th class="Label_Bold">
+                        FECHA VENCIMIENTO
+                    </th>
+                    <th class="Label_Bold">
+                        ESTADO
+                    </th>
+                    <th class="Label_Bold">
+                        VER DOCUMENTO
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="text-align: left;">
+                    <td>
+                        Aporte Para-Fiscales
+                    </td>
+                    <td id="TxtPF_F">
+                    </td>
+                    <td id="TxtPF_E">
+                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="A1"
+                            src="Image/activo.png" />
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="I1"
+                                src="Image/inactivo.png" />
+                            <span>NO EXISTE!</span></span>
+                    </td>
+                    <td>
+                        <span class="cssToolTip_Form"><a target='_blank' href='Image/PasadoJudicial.pdf'>
+                            <img alt="ww" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="V1"
+                                src="Image/ver.png" />
+                        </a><span>Ver Documento</span></span>
+                    </td>
+                </tr>
+                <tr style="text-align: left;">
+                    <td>
+                        Certificado de Riesgos de altura
+                    </td>
+                    <td id="TxtRA_F">
+                    </td>
+                    <td id="TxtRA_E">
+                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="A2"
+                            src="Image/activo.png" />
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="I2"
+                                src="Image/inactivo.png" />
+                            <span>NO EXISTE!</span></span>
+                    </td>
+                    <td>
+                        <span class="cssToolTip_Form"><a target='_blank' href='Image/PasadoJudicial.pdf'>
+                            <img alt="ww" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="V2"
+                                src="Image/ver.png" />
+                        </a><span>Ver Documento</span></span>
+                    </td>
+                </tr>
+                <tr style="text-align: left;">
+                    <td>
+                        Otros
+                    </td>
+                    <td id="TxtO_F">
+                    </td>
+                    <td id="TxtO_E">
+                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="A3"
+                            src="Image/activo.png" />
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="I3"
+                                src="Image/inactivo.png" />
+                            <span>NO EXISTE!</span></span>
+                    </td>
+                    <td>
+                        <span class="cssToolTip_Form"><a target='_blank' href='Image/PasadoJudicial.pdf'>
+                            <img alt="ww" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="V3"
+                                src="Image/ver.png" />
+                        </a><span>Ver Documento</span></span>
+                    </td>
+                </tr>
+                <tr style="text-align: left;">
+                    <td class="Label_Bold" style="width: 100px;">
+                        DOCUMENTOS REQUERIDOS EMPRESA
+                    </td>
+                    <td class="Label_Bold" style="width: 100px;">
+                        FECHA VENCIMIENTO
+                    </td>
+                    <td class="Label_Bold" style="width: 100px;">
+                        ESTADO
+                    </td>
+                    <td class="Label_Bold" style="width: 50px;">
+                        VER DOCUMENTO
+                    </td>
+                </tr>
+                <tr style="text-align: left;">
+                    <td>
+                        Rut
+                    </td>
+                    <td id="TxtPR_F">
+                    </td>
+                    <td>
+                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="A4"
+                            src="Image/activo.png" />
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="I4"
+                                src="Image/inactivo.png" />
+                            <span>VENCIDO</span></span>
+                    </td>
+                    <td>
+                        <span class="cssToolTip_Form"><a target='_blank' href='Image/Cedula.pdf'>
+                            <img alt="ww" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="V4"
+                                src="Image/ver.png" />
+                        </a><span>Ver Documento</span></span>
+                    </td>
+                </tr>
+                <tr style="text-align: left;">
+                    <td>
+                        Camara y comercio
+                    </td>
+                    <td id="TxtPC_F">
+                    </td>
+                    <td>
+                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="A5"
+                            src="Image/activo.png" />
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="I5"
+                                src="Image/inactivo.png" />
+                            <span>VENCIDO</span></span>
+                    </td>
+                    <td>
+                        <span class="cssToolTip_Form"><a target='_blank' href='Image/Cedula.pdf'>
+                            <img alt="ww" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="V5"
+                                src="Image/ver.png" />
+                        </a><span>Ver Documento</span></span>
+                    </td>
+                </tr>
+                <tr style="text-align: left;">
+                    <td>
+                        Otros
+                    </td>
+                    <td id="TxtO2_F">
+                    </td>
+                    <td>
+                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="A6"
+                            src="Image/activo.png" />
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="I6"
+                                src="Image/inactivo.png" />
+                            <span>VENCIDO</span></span>
+                    </td>
+                    <td>
+                        <span class="cssToolTip_Form"><a target='_blank' href='Image/Cedula.pdf'>
+                            <img alt="ww" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="V6"
+                                src="Image/ver.png" />
+                        </a><span>Ver Documento</span></span>
+                    </td>
+                </tr>
+        </table>
+        <div id="Complete">
+            <table id="InfoVisit" style="width: 500px; margin-top: 30px; margin-left: 250px;
+                font-family: Verdana,sans-serif;">
+                <tr style="text-align: left;">
+                    <td class="Label_Bold" style="width: 100px;">
+                        Area Visita
+                    </td>
+                    <td id="L_AV">
+                    </td>
+                </tr>
+                <tr style="text-align: left;">
+                    <td class="Label_Bold">
+                        Persona Visita
+                    </td>
+                    <td id="L_PV">
+                    </td>
+                </tr>
+                <tr style="text-align: left;">
+                    <td class="Label_Bold">
+                        motivo
+                    </td>
+                    <td id="L_MV">
+                    </td>
+                </tr>
+            </table>
+            <table id="infoTime" style="width: 800px; margin-top: 30px; margin-left: 200px; font-family: Verdana,sans-serif;">
+                <tr style="text-align: left;">
+                    <th class="Label_Bold" style="width: 100px;">
+                        Fecha/Hora Ingreso
+                    </th>
+                    <th class="Label_Bold">
+                        Tiempo Estimado
+                    </th>
+                    <th class="Label_Bold">
+                        Fecha/Hora Salida (Planeada)
+                    </th>
+                    <th class="Label_Bold">
+                        Fecha/Hora Salida (Real)
+                    </th>
+                </tr>
+                <tr style="text-align: left;">
+                    <td id="FH_I">
+                    </td>
+                    <td id="TE">
+                    </td>
+                    <td id="FHS_P">
+                    </td>
+                    <td id="FHS_R">
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

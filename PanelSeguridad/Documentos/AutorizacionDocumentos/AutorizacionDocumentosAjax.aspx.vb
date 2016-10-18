@@ -37,6 +37,9 @@ Public Class AutorizacionDocumentosAjax
 
             Select Case vl_S_option_login
 
+                Case "MATRIX_DOCUMENTO"
+                    CargarMDocumento()
+
                 Case "RUTAS_OPERACION"
                     CargarRutasOp()
 
@@ -240,6 +243,21 @@ Public Class AutorizacionDocumentosAjax
 #End Region
 
 #Region "DROP LIST"
+
+
+    ''' <summary>
+    ''' funcion que carga  Matrix contrato
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarMDocumento()
+
+        Dim SQL As New DocumentoSQLClass
+        Dim ObjList As New List(Of DocumentoClass)
+
+        ObjList = SQL.Matrix_Documento()
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
 
     ''' <summary>
     ''' funcion que carga  rutas operacion

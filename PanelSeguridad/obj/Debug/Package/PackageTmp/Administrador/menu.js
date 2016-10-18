@@ -10,6 +10,22 @@ var Link;
 
 //evento load del menu
 $(document).ready(function () {
+
+    //funcion para las ventanas emergentes
+    $("#Dialog_Warning").dialog({
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        show: {
+            effect: 'fade',
+            duration: 600
+        },
+        hide: {
+            effect: 'fade',
+            duration: 600
+        },
+        modal: true
+    });
+
     //capturamos la url
     var URLPage = window.location.search.substring(1);
     var URLVariables = URLPage.split('&');
@@ -24,8 +40,6 @@ $(document).ready(function () {
 
     $("#User").html(User.toUpperCase());
 
-    $("#tituloPrincipal").html("GESTION Y CONTROL DE ORDENES DE TRABAJO");
-
     //traemos los datos
     transacionAjax_menu("consulta");
 
@@ -39,7 +53,7 @@ function transacionAjax_menu(State) {
         data: { "action": State,
             "user": $("#User").html()
         },
-       //Transaccion Ajax en proceso
+        //Transaccion Ajax en proceso
         success: function (result) {
             if (result == "") {
                 ArrayMenu = [];
@@ -64,7 +78,6 @@ function transacionAjax_menu(State) {
     });
 }
 
-
 //hace el menu dinamico desde la consulta de la BD
 function arbol() {
 
@@ -78,7 +91,7 @@ function arbol() {
         }
         //raiz del arbol
         if (ArrayMenu[itemArray].Usuario === User.toUpperCase()) {
-            HtmlTree = "<ol class='tree'><li><label for='C_" + ArrayMenu[itemArray].Sigla + "'title='" + ArrayMenu[itemArray].DescripcionRol + "' >" + ArrayMenu[itemArray].Sigla + "</label><input type='checkbox' id='C_" + ArrayMenu[itemArray].Sigla + "' title='" + ArrayMenu[itemArray].DescripcionRol + "' /><ol><li id='Container_" + ArrayMenu[itemArray].Sigla + "' title='" + ArrayMenu[itemArray].DescripcionRol + "'></li></ol></li></ol>";
+            HtmlTree = "<ol id='Tree_Menu' class='tree'><li><span class='cssToolTip_ver'><label for='C_" + ArrayMenu[itemArray].Sigla + "' >" + ArrayMenu[itemArray].Sigla + "</label><span>" + ArrayMenu[itemArray].DescripcionRol + "</span></span><input type='checkbox' id='C_" + ArrayMenu[itemArray].Sigla + "'/><ol><li id='Container_" + ArrayMenu[itemArray].Sigla + "'></li></ol></li></ol>";
             $("#Name_User").html(ArrayMenu[itemArray].Nombre);
         }
     }
@@ -92,9 +105,10 @@ function arbol() {
     var cont = 0;
     var SubInicial = "";
     var SubFinal = "";
+    var padre = "";
 
     for (itemArray in ArrayMenu) {
-        //construir Carpetas 
+        //construir Carpetas
         if (ArrayMenu[itemArray].Tipo == 1) {
 
             if (contP == 0) {
@@ -111,7 +125,7 @@ function arbol() {
                 IDFinal = ArrayMenu[itemArray].IDRol;
                 HtmlTree_Interno = "";
             }
-            HtmlTree_Interno += "<ol><li><label for='C_" + ArrayMenu[itemArray].Sub_Rol + "' title='" + ArrayMenu[itemArray].DescripcionLink + "'>" + ArrayMenu[itemArray].Sub_Rol + "</label><input type='checkbox' id='C_" + ArrayMenu[itemArray].Sub_Rol + "' title='" + ArrayMenu[itemArray].DescripcionLink + "'/><ol><li id='Container_" + ArrayMenu[itemArray].Sub_Rol + "'title='" + ArrayMenu[itemArray].DescripcionLink + "'></li></ol></li></ol>";
+            HtmlTree_Interno += "<ol><li><span class='cssToolTip_ver'><label for='C_" + ArrayMenu[itemArray].Sub_Rol + "'>" + ArrayMenu[itemArray].Sub_Rol + "</label><span>" + ArrayMenu[itemArray].DescripcionLink + "</span></span><input type='checkbox' id='C_" + ArrayMenu[itemArray].Sub_Rol + "' /><ol><li id='Container_" + ArrayMenu[itemArray].Sub_Rol + "'></li></ol></li></ol>";
             contP = contP + 1;
             //pintar carpetas
             $("#Container_" + ArrayMenu[itemArray].IDRol).html(HtmlTree_Interno);
@@ -133,12 +147,106 @@ function arbol() {
                 SubFinal = ArrayMenu[itemArray].Sub_Rol;
                 HtmlTree_Interno = "";
             }
-            HtmlTree_Interno += "<li class='file'><a href='" + ArrayMenu[itemArray].Ruta + User + "&LINK=" + ArrayMenu[itemArray].IDlink + "'>" + ArrayMenu[itemArray].DescripcionLink + "</a></li>";
+            HtmlTree_Interno += "<li class='file'><span class='cssToolTip_ver'><a class='Pagina' href='" + ArrayMenu[itemArray].Ruta + User + "&LINK=" + ArrayMenu[itemArray].IDlink + "'>" + ArrayMenu[itemArray].DescripcionLink + "</a><span>" + ArrayMenu[itemArray].DescripcionLink + "</span></span></li>";
             cont = cont + 1;
             //pintar links
             $("#Container_" + ArrayMenu[itemArray].Sub_Rol).html(HtmlTree_Interno);
         }
     }
 
+    for (itemArray in ArrayMenu) {
+        //construir Carpetas 
+        if (ArrayMenu[itemArray].Tipo == 1) {
 
+            if (contP == 0) {
+                IDInicial = ArrayMenu[itemArray].IDRol;
+                IDFinal = ArrayMenu[itemArray].IDRol;
+            }
+            else {
+                IDFinal = ArrayMenu[itemArray].IDRol;
+            }
+
+            if (IDInicial != IDFinal) {
+                contP = 0;
+                IDInicial = ArrayMenu[itemArray].IDRol;
+                IDFinal = ArrayMenu[itemArray].IDRol;
+                HtmlTree_Interno = "";
+            }
+        }
+        //construir links
+        else {
+            if (cont == 0) {
+                SubInicial = ArrayMenu[itemArray].Sub_Rol;
+                SubFinal = ArrayMenu[itemArray].Sub_Rol;
+                HtmlTree_Interno = "";
+            }
+            else {
+                SubFinal = ArrayMenu[itemArray].Sub_Rol;
+            }
+
+            if (SubInicial != SubFinal) {
+                cont = 0;
+                SubInicial = ArrayMenu[itemArray].Sub_Rol;
+                SubFinal = ArrayMenu[itemArray].Sub_Rol;
+                HtmlTree_Interno = "";
+            }
+            HtmlTree_Interno += "<li class='file'><span class='cssToolTip_ver'><a href='" + ArrayMenu[itemArray].Ruta + User + "&LINK=" + ArrayMenu[itemArray].IDlink + "'>" + ArrayMenu[itemArray].DescripcionLink + "</a><span>" + ArrayMenu[itemArray].DescripcionLink + "</span></span></li>";
+            cont = cont + 1;
+            //pintar links
+            $("#Container_" + ArrayMenu[itemArray].Sub_Rol).html(HtmlTree_Interno);
+        }
+    }
+
+    $('.Pagina').bind('click', function (e) {
+        e.preventDefault();
+    })
+
+    setTimeout("Ruta_Menu()", 400);
+}
+
+//posiciona el menu
+function Ruta_Menu() {
+
+    var ArrayRuta = [];
+    var L_Estruc = Estructura.length;
+    var Padre = Estructura[0].Padre;
+    var Num = 0;
+    var Hijo;
+
+    for (item in ArrayMenu) {
+        if (Link == ArrayMenu[item].IDlink) {
+            Hijo = ArrayMenu[item].IDOpcionRol;
+            ArrayRuta[Num] = Hijo;
+            Num = Num + 1;
+        }
+    }
+
+    for (index = L_Estruc - 1; index >= 0; index--) {
+        if (Hijo == Estructura[index].Hijo) {
+            ArrayRuta[Num] = Estructura[index].Padre;
+            Hijo = Estructura[index].Padre;
+            Num = Num + 1;
+        }
+    }
+
+    var L_Ruta = ArrayRuta.length;
+
+    for (index = L_Ruta - 1; index >= 0; index--) {
+        $("#C_" + ArrayRuta[index]).prop("checked", true);
+    }
+
+    Advertencia();
+}
+
+//Informa el bloque del menu
+function Advertencia() {
+
+    $("#Tree_Menu").mouseenter(function () {
+        $("#Dialog_Warning").dialog("open");
+        $("#Mensaje_Warning").html("No puede cambiar de pagina hasta no cerrar (" + $("#Title_form").html() + ")");
+    });
+
+    $("#Tree_Menu").mouseout(function () {
+        $("#Dialog_Warning").dialog("close");
+    });
 }

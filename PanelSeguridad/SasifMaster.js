@@ -64,7 +64,8 @@ function RevisarAyudas() {
     $(".Spam_ACliente").html(ArrayAyudas[20].Ayudas_ID + ": " + ArrayAyudas[20].Descripcion);
     $(".Spam_AT5").html(ArrayAyudas[21].Ayudas_ID + ": " + ArrayAyudas[21].Descripcion);
     $(".Spam_ARel").html(ArrayAyudas[22].Ayudas_ID + ": " + ArrayAyudas[22].Descripcion);
-
+    $(".SpamALEC").html(ArrayAyudas[23].Ayudas_ID + ": " + ArrayAyudas[23].Descripcion);
+    
     $(".Spam_CT1").html(ArrayAyudas[6].Descripcion);
     $(".Spam_CT2").html(ArrayAyudas[7].Descripcion);
     $(".Spam_CT4").html(ArrayAyudas[19].Descripcion);
@@ -188,8 +189,8 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
 
         case "Select_Documento_V":
             for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID == Nit) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Secuencia_ID + "'>" + Matrix[Item].Nombre_Save + "</option>");
+                if (Matrix[Item].Nit_ID == Nit || Matrix[Item].Nit_ID == "0") {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Documento_ID + "'>" + Matrix[Item].Descripcion + "</option>");
                 }
             }
             break;
@@ -225,6 +226,23 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
                 }
             }
             break;
+
+        case "Select_Tarjeta":
+            for (Item in Matrix) {
+                if (Matrix[Item].Nit_ID_Custodia == Nit && Matrix[Item].Document_ID_Asigna == 0) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Tarjeta_ID + "'>" + Matrix[Item].Tarjeta_ID + "</option>");
+                }
+            }
+            break;
+
+        case "Select_Tarjeta_Ent":
+            for (Item in Matrix) {
+                if (Matrix[Item].Nit_ID_Asigna == Nit) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Tarjeta_ID + "'>" + Matrix[Item].Tarjeta_ID + "</option>");
+                }
+            }
+            break;
+            
     }
 
     $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
@@ -404,15 +422,6 @@ function ResetError() {
     $("#Img12").css("display", "none");
 }
 
-
-//muestra el documento cargado inicialmente
-function VerDocumento() {
-    $("#IF_Visor").css("display", "inline-table");
-    $("#IF_Visor").attr("width", "100%");
-    $("#IF_Visor").attr("height", "100%");
-    $("#IF_Visor").attr("src", "../../Repository_Document/TEMP/" + Doc_name);
-}
-
 // Función que suma o resta días a la fecha indicada
 sumaFecha = function (d, fecha) {
     var Fecha = new Date();
@@ -525,4 +534,12 @@ function UpLoad_Document(NameAjax, NameFile_ID, Form) {
 
     }
 
+}
+
+//muestra el documento cargado inicialmente
+function VerDocumento() {
+    $("#IF_Visor").css("display", "inline-table");
+    $("#IF_Visor").attr("width", "100%");
+    $("#IF_Visor").attr("height", "100%");
+    $("#IF_Visor").attr("src", "../../Repository_Document/TEMP/" + Doc_name);
 }

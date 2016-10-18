@@ -2,7 +2,9 @@
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
-        autoOpen: false
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true
     });
 
     $("#ImgID").css("display", "none");
@@ -13,7 +15,7 @@
 
 //salida del formulario
 function btnSalir() {
-    window.location = "../../Menu/menu.aspx?User=" + $("#User").html();
+    window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
 }
 
 //crear link en la BD
@@ -70,7 +72,7 @@ function transacionAjax_Reset(State) {
             "ID": $("#Txt_ID").val(),
             "estado": $("#DDLTipo").val()
         },
-       //Transaccion Ajax en proceso
+        //Transaccion Ajax en proceso
         success: function (result) {
             if (result == "NO") {
                 $("#dialog").dialog("option", "title", "No Existe!");
