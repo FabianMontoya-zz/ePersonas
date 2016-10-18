@@ -359,7 +359,7 @@ function Search_Document(secuencia, Nit, type) {
               Matrix_DocWork[itemArray].Secuencia_ID == secuencia) {
 
                 $("#Vista_Secuencia").html(Matrix_DocWork[itemArray].Secuencia_ID);
-                $("#Vista_Documento").html(Matrix_DocWork[itemArray].Nombre_Save);
+                $("#Vista_Documento").html(Matrix_DocWork[itemArray].Descripcion);
                 $("#Vista_Formato").html(Matrix_DocWork[itemArray].DescripFormato);
 
                 $("#Vista_Indcativo").html(Matrix_DocWork[itemArray].Indicativo);
@@ -393,7 +393,7 @@ function Search_Document(secuencia, Nit, type) {
              Matrix_DocWork[itemArray].Secuencia_ID == secuencia) {
 
                 $("#Vista_Secuencia").html(Matrix_DocWork[itemArray].Secuencia_ID);
-                $("#Vista_Documento").html(Matrix_DocWork[itemArray].Nombre_Save);
+                $("#Vista_Documento").html(Matrix_DocWork[itemArray].Descripcion);
                 $("#Vista_Formato").html(Matrix_DocWork[itemArray].DescripFormato);
 
                 $("#Vista_Indcativo").html(Matrix_DocWork[itemArray].Indicativo);

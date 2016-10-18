@@ -163,6 +163,7 @@ Public Class InvPuertaSQLClass
                     If Not (IsDBNull(ReadConsulta.GetValue(3))) Then objInvPuerta.Document_ID_Asigna = ReadConsulta.GetValue(3) Else objInvPuerta.Document_ID_Asigna = 0
                     If Not (IsDBNull(ReadConsulta.GetValue(4))) Then objInvPuerta.TypeDocument_ID_Entrega = ReadConsulta.GetValue(4) Else objInvPuerta.TypeDocument_ID_Entrega = 0
                     If Not (IsDBNull(ReadConsulta.GetValue(5))) Then objInvPuerta.Document_ID_Entrega = ReadConsulta.GetValue(5) Else objInvPuerta.Document_ID_Entrega = 0
+                    If Not (IsDBNull(ReadConsulta.GetValue(6))) Then objInvPuerta.Nit_ID_Asigna = ReadConsulta.GetValue(6) Else objInvPuerta.Nit_ID_Asigna = 0
 
                     'agregamos a la lista
                     ObjListInvPuerta.Add(objInvPuerta)
@@ -240,7 +241,7 @@ Public Class InvPuertaSQLClass
 
         Dim sql As New StringBuilder
 
-        sql.AppendLine(" SELECT IT_Tarjeta_ID ,  IT_Nit_ID_Custodia,  IT_TypeDocument_Asigna, IT_Document_ID_Asigna, IT_TypeDocument_Entrega, IT_Document_ID_Entrega  FROM INVENTARIO_TARJETAS ")
+        sql.AppendLine(" SELECT IT_Tarjeta_ID ,  IT_Nit_ID_Custodia,  IT_TypeDocument_Asigna, IT_Document_ID_Asigna, IT_TypeDocument_Entrega, IT_Document_ID_Entrega,  IT_Nit_ID_Asigna   FROM INVENTARIO_TARJETAS ")
         StrQuery = sql.ToString
 
         ObjListCrud_Doc = listInvPuerta(StrQuery, Conexion, "Matrix_Asigna")

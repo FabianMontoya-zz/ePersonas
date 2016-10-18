@@ -880,6 +880,12 @@ PanelSeguridad
 	<param name="vp_O_Obj"></param>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.R_Persona_TarjetaSQLClass.Matrix_RTP">
+	<summary>
+ consulta que trae los datos de asignar tarjeta
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.AutorizacionDocumentosAjax.Consulta_AutorizacionDocumentos">
 	<summary>
  traemos todos los datos para tabla AutorizacionDocumentos (READ)
@@ -3102,6 +3108,11 @@ To modify move field declaration from designer file to code-behind file.
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.R_Persona_TarjetaAjax.Cargar_MatrixTarjeta">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.R_Persona_TarjetaAjax.CargarMRTP">
 	<summary>
  funcion que carga el objeto DDL consulta
  </summary>

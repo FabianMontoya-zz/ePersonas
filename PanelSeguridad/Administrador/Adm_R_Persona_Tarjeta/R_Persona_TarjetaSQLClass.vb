@@ -112,26 +112,21 @@ Public Class R_Persona_TarjetaSQLClass
         Select Case vg_S_Type
 
             Case "List"
-                'recorremos la consulta por la cantidad de datos en la BD
+
+
+            Case "Matrix_RTP"
                 While ReadConsulta.Read
 
                     Dim objR_Persona_Tarjeta As New R_Persona_TarjetaClass
                     'cargamos datos sobre el objeto de login
                     objR_Persona_Tarjeta.Nit_ID = ReadConsulta.GetValue(0)
-               
-                    objR_Persona_Tarjeta.UsuarioCreacion = ReadConsulta.GetValue(3)
-                    objR_Persona_Tarjeta.FechaCreacion = ReadConsulta.GetValue(4)
-                    objR_Persona_Tarjeta.UsuarioActualizacion = ReadConsulta.GetValue(5)
-                    objR_Persona_Tarjeta.FechaActualizacion = ReadConsulta.GetValue(6)
-
-                    objR_Persona_Tarjeta.Index = ReadConsulta.GetValue(10)
+                    objR_Persona_Tarjeta.TypeDocument_ID = ReadConsulta.GetValue(1)
+                    objR_Persona_Tarjeta.Document_ID = ReadConsulta.GetValue(2)
+                    objR_Persona_Tarjeta.Tarjeta_ID = ReadConsulta.GetValue(3)
 
                     'agregamos a la lista
                     ObjListR_Persona_Tarjeta.Add(objR_Persona_Tarjeta)
-
                 End While
-
-            Case "Matrix"
 
 
         End Select
@@ -173,6 +168,30 @@ Public Class R_Persona_TarjetaSQLClass
         Result = conex.IDis(StrQuery, "1")
 
         Return Result
+    End Function
+
+
+    ''' <summary>
+    ''' consulta que trae los datos de asignar tarjeta
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Matrix_RTP()
+
+        Dim ObjListCrud_Doc As New List(Of R_Persona_TarjetaClass)
+        Dim StrQuery As String = ""
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("1")
+
+        Dim sql As New StringBuilder
+
+        sql.AppendLine(" SELECT  RTP_Nit_ID, RTP_TypeDocument_ID, RTP_Document_ID, RTP_Tarjeta_ID  FROM  R_TARJETA_PERSONA")
+        StrQuery = sql.ToString
+
+        ObjListCrud_Doc = listR_Persona_Tarjeta(StrQuery, Conexion, "Matrix_RTP")
+
+        Return ObjListCrud_Doc
+
     End Function
 
 #End Region

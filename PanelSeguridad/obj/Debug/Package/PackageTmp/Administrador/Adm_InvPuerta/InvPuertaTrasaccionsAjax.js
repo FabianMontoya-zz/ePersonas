@@ -25,8 +25,6 @@ function transacionAjax_EmpresaNit(State) {
     });
 }
 
-
-
 /*------------------------------ consulta ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax_InvPuerta(State, filtro, opcion) {
@@ -38,8 +36,7 @@ function transacionAjax_InvPuerta(State, filtro, opcion) {
     else {
         contenido = $("#TxtRead").val();
     }
-
-
+    
     $.ajax({
         url: "InvPuertaAjax.aspx",
         type: "POST",
@@ -124,6 +121,15 @@ function transacionAjax_InvPuerta_create(State) {
                     Clear();
                     break;
 
+                case "NO_USER":
+                    $("#dialog").dialog("option", "title", "Advertecia!");
+                    $("#Mensaje_alert").text("No se puede ingresar la tarjeta este usurio no esta registrado en Clientes! ");
+                    $("#dialog").dialog("open");
+                    $("#DE").css("display", "none");
+                    $("#SE").css("display", "none");
+                    $("#WE").css("display", "block");
+                    Clear();
+                    break;
             }
 
         },

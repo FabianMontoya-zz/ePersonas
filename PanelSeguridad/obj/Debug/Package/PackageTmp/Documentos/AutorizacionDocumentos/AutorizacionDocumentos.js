@@ -508,7 +508,7 @@ function Search_Document(secuencia, Nit) {
         if (Matrix_DocWork[itemArray].Secuencia_ID == secuencia && Matrix_DocWork[itemArray].Nit_ID == Nit) {
 
             $("#Vista_Secuencia").html(Matrix_DocWork[itemArray].Secuencia_ID);
-            $("#Vista_Documento").html(Matrix_DocWork[itemArray].Nombre_Save);
+            $("#Vista_Documento").html(Matrix_DocWork[itemArray].Descripcion);
             $("#Vista_Formato").html(Matrix_DocWork[itemArray].DescripFormato);
 
             $("#Vista_Indcativo").html(Matrix_DocWork[itemArray].Indicativo);

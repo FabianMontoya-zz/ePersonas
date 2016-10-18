@@ -134,6 +134,9 @@
     <Content Include="Administrador\Adm_roles\Adm_Roles.js" />
     <Content Include="Administrador\Adm_roles\Adm_RolesAjax.aspx" />
     <Content Include="Administrador\Adm_roles\Adm_RolesTrasaccionsAjax.js" />
+    <Content Include="Administrador\Adm_R_Persona_Tarjeta\EntregaTarjeta.aspx" />
+    <Content Include="Administrador\Adm_R_Persona_Tarjeta\EntregaTarjeta.js" />
+    <Content Include="Administrador\Adm_R_Persona_Tarjeta\EntregaTarjetaTrasaccionsAjax.js" />
     <Content Include="Administrador\Adm_R_Persona_Tarjeta\R_Persona_Tarjeta.aspx" />
     <Content Include="Administrador\Adm_R_Persona_Tarjeta\R_Persona_Tarjeta.js" />
     <Content Include="Administrador\Adm_R_Persona_Tarjeta\R_Persona_TarjetaAjax.aspx" />
@@ -560,6 +563,13 @@
     </Compile>
     <Compile Include="Administrador\Adm_roles\Adm_RolesClass.vb" />
     <Compile Include="Administrador\Adm_roles\Adm_RolesSQLClass.vb" />
+    <Compile Include="Administrador\Adm_R_Persona_Tarjeta\EntregaTarjeta.aspx.designer.vb">
+      <DependentUpon>EntregaTarjeta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Adm_R_Persona_Tarjeta\EntregaTarjeta.aspx.vb">
+      <DependentUpon>EntregaTarjeta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Administrador\Adm_R_Persona_Tarjeta\R_Persona_Tarjeta.aspx.designer.vb">
       <DependentUpon>R_Persona_Tarjeta.aspx</DependentUpon>
     </Compile>

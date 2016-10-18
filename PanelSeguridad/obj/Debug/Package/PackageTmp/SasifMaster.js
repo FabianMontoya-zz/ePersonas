@@ -229,11 +229,20 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
 
         case "Select_Tarjeta":
             for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID_Custodia == Nit && Matrix[Item].Document_ID_Asigna == "0") {
+                if (Matrix[Item].Nit_ID_Custodia == Nit && Matrix[Item].Document_ID_Asigna == 0) {
                     $("#" + Selector).append("<option value='" + Matrix[Item].Tarjeta_ID + "'>" + Matrix[Item].Tarjeta_ID + "</option>");
                 }
             }
             break;
+
+        case "Select_Tarjeta_Ent":
+            for (Item in Matrix) {
+                if (Matrix[Item].Nit_ID_Asigna == Nit) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Tarjeta_ID + "'>" + Matrix[Item].Tarjeta_ID + "</option>");
+                }
+            }
+            break;
+            
     }
 
     $('#' + Selector).append("<option value='-1'>Seleccione...</option>");

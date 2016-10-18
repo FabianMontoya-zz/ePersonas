@@ -17,6 +17,9 @@ Public Class R_Persona_TarjetaAjax
                 Case "MATRIX_PERSONA"
                     CargarMPersonaDep()
 
+                Case "MATRIX_RTP"
+                    CargarMRTP()
+
                 Case "Cliente"
                     CargarCliente()
 
@@ -43,7 +46,7 @@ Public Class R_Persona_TarjetaAjax
         Dim result As String
         Dim vl_s_IDxiste As String
 
-        objR_Persona_Tarjeta.Nit_ID = Request.Form("Nit_ID_Asig")
+        objR_Persona_Tarjeta.Nit_ID = Request.Form("Nit_ID")
         objR_Persona_Tarjeta.TypeDocument_ID = Request.Form("TDoc")
         objR_Persona_Tarjeta.Document_ID = Request.Form("Doc")
         objR_Persona_Tarjeta.Tarjeta_ID = Request.Form("Tarjeta")
@@ -71,7 +74,7 @@ Public Class R_Persona_TarjetaAjax
             ObjInvPuerta.Tarjeta_ID = Request.Form("Tarjeta")
             ObjInvPuerta.Estado = 1
 
-            ObjInvPuerta.Nit_ID_Asigna = Request.Form("Nit_ID_Asig")
+            ObjInvPuerta.Nit_ID_Asigna = Request.Form("Nit_ID")
             ObjInvPuerta.TypeDocument_ID_Asigna = Request.Form("TDoc")
             ObjInvPuerta.Document_ID_Asigna = Request.Form("Doc")
             ObjInvPuerta.FechaAsignacion = Date.Now
@@ -123,6 +126,21 @@ Public Class R_Persona_TarjetaAjax
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
+
+    ''' <summary>
+    ''' funcion que carga el objeto DDL consulta
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarMRTP()
+
+        Dim SQL As New R_Persona_TarjetaSQLClass
+        Dim ObjList As New List(Of R_Persona_TarjetaClass)
+
+        ObjList = SQL.Matrix_RTP()
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
+
 
     ''' <summary>
     ''' funcion que carga el objeto DDL consulta

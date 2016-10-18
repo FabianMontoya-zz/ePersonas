@@ -51,7 +51,7 @@ Public Class MenuSQLClass
                         "       Ruta ," & _
                         "       Usuario " & _
                         " FROM T_TEMPORAL " & _
-                        " ORDER BY Tipo, IDOpcionRol asc, Consecutivo ")
+                        " ORDER BY Tipo, IDOpcionRol asc, Consecutivo")
         Else
             sql.Append(" EXEC MENU_TEMPORAL '" & rol & "'")
             StrQuery = sql.ToString
@@ -76,7 +76,7 @@ Public Class MenuSQLClass
                         "       Ruta ," & _
                         "       Usuario " & _
                         " FROM T_TEMPORAL " & _
-                        " ORDER BY Tipo, IDOpcionRol asc, Consecutivo desc")
+                        " ORDER BY Tipo, IDOpcionRol asc, Consecutivo")
         End If
 
         StrQuery = sql.ToString
