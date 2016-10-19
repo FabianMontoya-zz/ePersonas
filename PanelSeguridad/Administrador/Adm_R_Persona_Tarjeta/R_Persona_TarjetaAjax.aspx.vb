@@ -26,6 +26,9 @@ Public Class R_Persona_TarjetaAjax
                 Case "crear"
                     InsertR_Persona_Tarjeta()
 
+                Case "UpdateEntrega"
+                    UpdateInvTarjeta_Entrega()
+
             End Select
 
         End If
@@ -94,6 +97,34 @@ Public Class R_Persona_TarjetaAjax
 
     End Sub
 
+    ''' <summary>
+    ''' funcion que Actualiza en la tabla Inventario Tarjeta(UPDATE)
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub UpdateInvTarjeta_Entrega()
+
+        Dim SQLInvPuerta As New InvPuertaSQLClass
+        Dim ObjListInvPuerta As New List(Of InvPuertaClass)
+        Dim ObjInvPuerta As New InvPuertaClass
+
+        ObjInvPuerta.Tarjeta_ID = Request.Form("Tarjeta")
+        ObjInvPuerta.Estado = 2
+        ObjInvPuerta.Nit_ID_Entrega = Request.Form("Nit_ID")
+
+        ObjInvPuerta.TypeDocument_ID_Entrega = Request.Form("TDoc")
+        ObjInvPuerta.Document_ID_Entrega = Request.Form("Doc")
+        ObjInvPuerta.FechaEntrega = Date.Now
+
+        ObjInvPuerta.UsuarioActualizacion = Request.Form("user")
+        ObjInvPuerta.FechaActualizacion = Date.Now
+
+        ObjListInvPuerta.Add(ObjInvPuerta)
+
+        Dim result As String = SQLInvPuerta.UpdateEntregaTarjeta(ObjInvPuerta)
+
+        Response.Write(result)
+
+    End Sub
 
 #End Region
 
@@ -140,7 +171,6 @@ Public Class R_Persona_TarjetaAjax
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
-
 
     ''' <summary>
     ''' funcion que carga el objeto DDL consulta

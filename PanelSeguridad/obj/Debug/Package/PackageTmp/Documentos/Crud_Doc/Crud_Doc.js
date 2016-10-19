@@ -20,8 +20,8 @@ var index_ID;
 var editID;
 var Nit_ID_proccess;
 var ConsecutivoOrigen;
-var ConsecutivoNuevo; 
- var NameDoc_Final;
+var ConsecutivoNuevo;
+var NameDoc_Final;
 var Formato_ID;
 var IndicativoFoto;
 var CheckVigencias;
@@ -179,13 +179,16 @@ function BtnIngresar() {
 //trae el consecutivo y actualiza
 function CaptureConsecutivo() {
 
+    var ConsecutivoExist = 0;
+
     for (item in Matrix_Consecutivo) {
         if (Matrix_Consecutivo[item].Nit_ID == Nit_ID_proccess) {
             ConsecutivoOrigen = Matrix_Consecutivo[item].Consecutivo;
             ConsecutivoNuevo = parseInt(Matrix_Consecutivo[item].Consecutivo) + 1;
-            transacionAjax_CopyDocument("Copiar_Doc");
+            ConsecutivoExist = 1;
         }
     }
+    return ConsecutivoExist;
 }
 
 //valida los campos obligatorios

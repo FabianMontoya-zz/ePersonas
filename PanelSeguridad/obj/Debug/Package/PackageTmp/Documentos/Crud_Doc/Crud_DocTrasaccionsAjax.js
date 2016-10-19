@@ -204,7 +204,22 @@ function transaccionAjax_MConsecutivo(State) {
                 Matrix_Consecutivo = JSON.parse(result);
 
                 if (CheckVigencias != "S") {
-                    CaptureConsecutivo();
+                    var ConsecutivoExist = CaptureConsecutivo();
+                    switch (ConsecutivoExist) {
+                        case 1:
+                            transacionAjax_CopyDocument("Copiar_Doc");
+                            break;
+
+                        case 0:
+                            $("#dialog").dialog("option", "title", "Exito");
+                            $("#Mensaje_alert").text("El documento no se puede crear no hay consecutivos! ");
+                            $("#dialog").dialog("open");
+                            $("#DE").css("display", "none");
+                            $("#SE").css("display", "none");
+                            $("#WE").css("display", "block");
+        
+                    }
+                    
                 }
                 else {
                     var validar = ValidarCamposVigencia();

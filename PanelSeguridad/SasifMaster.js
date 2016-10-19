@@ -237,7 +237,7 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
 
         case "Select_Tarjeta_Ent":
             for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID_Asigna == Nit) {
+                if (Matrix[Item].Nit_ID_Asigna == Nit && Matrix[Item].Document_ID_Entrega == 0) {
                     $("#" + Selector).append("<option value='" + Matrix[Item].Tarjeta_ID + "'>" + Matrix[Item].Tarjeta_ID + "</option>");
                 }
             }

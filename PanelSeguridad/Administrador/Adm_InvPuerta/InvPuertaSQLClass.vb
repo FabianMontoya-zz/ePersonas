@@ -63,7 +63,7 @@ Public Class InvPuertaSQLClass
     End Function
 
     ''' <summary>
-    ''' actualizacion por sasignacion de tarjeta a una persona
+    ''' actualizacion por Asignacion de tarjeta a una persona
     ''' </summary>
     ''' <param name="vp_Obj_InvPuerta"></param>
     ''' <returns></returns>
@@ -82,6 +82,37 @@ Public Class InvPuertaSQLClass
                     " IT_TypeDocument_Asigna ='" & vp_Obj_InvPuerta.TypeDocument_ID_Asigna & "', " & _
                     " IT_Document_ID_Asigna ='" & vp_Obj_InvPuerta.Document_ID_Asigna & "', " & _
                     " IT_FechaAsignacion ='" & vp_Obj_InvPuerta.FechaAsignacion & "', " & _
+                    " IT_Usuario_Actualizacion ='" & vp_Obj_InvPuerta.UsuarioActualizacion & "', " & _
+                    " IT_FechaActualizacion ='" & vp_Obj_InvPuerta.FechaActualizacion & "' " & _
+                    " WHERE IT_Tarjeta_ID = '" & vp_Obj_InvPuerta.Tarjeta_ID & "'")
+        StrQuery = sql.ToString
+
+        Result = conex.StrInsert_and_Update_All(StrQuery, "1")
+
+        Return Result
+
+    End Function
+
+    ''' <summary>
+    ''' actualizacion por Entrega de tarjeta a una persona
+    ''' </summary>
+    ''' <param name="vp_Obj_InvPuerta"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function UpdateEntregaTarjeta(ByVal vp_Obj_InvPuerta As InvPuertaClass)
+
+        Dim conex As New Conector
+        Dim Result As String
+        ' definiendo los objetos
+        Dim sql As New StringBuilder
+        Dim StrQuery As String = ""
+
+        sql.AppendLine("UPDATE INVENTARIO_TARJETAS SET " & _
+                    " IT_Estado ='" & vp_Obj_InvPuerta.Estado & "', " & _
+                    " IT_Nit_ID_Entrega ='" & vp_Obj_InvPuerta.Nit_ID_Entrega & "', " & _
+                    " IT_TypeDocument_Entrega ='" & vp_Obj_InvPuerta.TypeDocument_ID_Entrega & "', " & _
+                    " IT_Document_ID_Entrega ='" & vp_Obj_InvPuerta.Document_ID_Entrega & "', " & _
+                    " IT_FechaEntrega ='" & vp_Obj_InvPuerta.FechaEntrega & "', " & _
                     " IT_Usuario_Actualizacion ='" & vp_Obj_InvPuerta.UsuarioActualizacion & "', " & _
                     " IT_FechaActualizacion ='" & vp_Obj_InvPuerta.FechaActualizacion & "' " & _
                     " WHERE IT_Tarjeta_ID = '" & vp_Obj_InvPuerta.Tarjeta_ID & "'")

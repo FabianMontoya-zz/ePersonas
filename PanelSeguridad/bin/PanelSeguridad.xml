@@ -3064,7 +3064,14 @@ To modify move field declaration from designer file to code-behind file.
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.InvPuertaSQLClass.UpdateAsignacionTarjeta(PanelSeguridad.InvPuertaClass)">
 	<summary>
- actualizacion por sasignacion de tarjeta a una persona
+ actualizacion por Asignacion de tarjeta a una persona
+ </summary>
+	<param name="vp_Obj_InvPuerta"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.InvPuertaSQLClass.UpdateEntregaTarjeta(PanelSeguridad.InvPuertaClass)">
+	<summary>
+ actualizacion por Entrega de tarjeta a una persona
  </summary>
 	<param name="vp_Obj_InvPuerta"></param>
 	<returns></returns>
@@ -3100,6 +3107,11 @@ To modify move field declaration from designer file to code-behind file.
 </member><member name="M:PanelSeguridad.R_Persona_TarjetaAjax.InsertR_Persona_Tarjeta">
 	<summary>
  funcion que inserta en la tabla R_Persona_Tarjeta (INSERT)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.R_Persona_TarjetaAjax.UpdateInvTarjeta_Entrega">
+	<summary>
+ funcion que Actualiza en la tabla Inventario Tarjeta(UPDATE)
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.R_Persona_TarjetaAjax.CargarMPersonaDep">

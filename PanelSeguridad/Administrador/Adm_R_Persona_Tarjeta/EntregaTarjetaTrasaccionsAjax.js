@@ -101,7 +101,7 @@ function transacionAjax_EmpresaNit(State) {
 
 /*------------------------------ crear ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
-function transacionAjax_R_Persona_Tarjeta_create(State) {
+function transacionAjax_UpdateEntrega(State) {
     var StrPersona = $("#Select_Persona option:selected").html();
     var SPersona = StrPersona.split("  -  ");
     
@@ -111,11 +111,10 @@ function transacionAjax_R_Persona_Tarjeta_create(State) {
         type: "POST",
         //crear json
         data: { "action": State,
-            "Nit_ID": $("#Select_EmpresaNit_2").val(),
-            "Nit_ID_Asig": $("#Select_EmpresaNit").val(),
+            "Nit_ID": $("#Select_EmpresaNit").val(),
             "TDoc": SPersona[1],
             "Doc": SPersona[0],
-            "Tarjeta": $("#Select_Tarjeta").val(),
+            "Tarjeta": $("#Select_Tarjeta_Ent").val(),
             "user": User.toUpperCase()
         },
         //Transaccion Ajax en proceso
@@ -124,7 +123,7 @@ function transacionAjax_R_Persona_Tarjeta_create(State) {
 
                 case "Error":
                     $("#dialog").dialog("option", "title", "Disculpenos :(");
-                    $("#Mensaje_alert").text("No se realizo  la asignación de la tarjeta!");
+                    $("#Mensaje_alert").text("No se realizo  la Entrega de la tarjeta!");
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "block");
                     $("#SE").css("display", "none");
@@ -142,7 +141,7 @@ function transacionAjax_R_Persona_Tarjeta_create(State) {
 
                 case "Exito":
                     $("#dialog").dialog("option", "title", "Exito");
-                    $("#Mensaje_alert").text("La asignación de la tarjeta fue generada exitosamente! ");
+                    $("#Mensaje_alert").text("La Entrega de la tarjeta fue generada exitosamente! ");
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "none");
                     $("#SE").css("display", "block");
