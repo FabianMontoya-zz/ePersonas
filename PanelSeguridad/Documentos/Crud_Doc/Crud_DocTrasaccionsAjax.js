@@ -202,15 +202,22 @@ function transaccionAjax_MConsecutivo(State) {
             }
             else {
                 Matrix_Consecutivo = JSON.parse(result);
+                switch (CheckVigencias) {
 
-                if (CheckVigencias != "S") {
-                    CaptureConsecutivo();
+                    case "N":
+                        var ConsecutivoExist = CaptureConsecutivo();
+                        ValideConsecutivo(ConsecutivoExist);
+                        break;
+
+                    case "S":
+                        var validar = ValidarCamposVigencia();
+                        if (validar == 0) {
+                            var ConsecutivoExist = CaptureConsecutivo();
+                            ValideConsecutivo(ConsecutivoExist);
+                        }
+                        break;
                 }
-                else {
-                    var validar = ValidarCamposVigencia();
-                    if (validar == 0)
-                        CaptureConsecutivo();
-                }
+
             }
         },
         error: function () {

@@ -8,7 +8,6 @@ var ArrayR_Persona_TarjetaDep = [];
 
 var estado;
 var editNit_ID;
-var index_ID;
 var editID;
 var editDocID;
 /*--------------- region de variables globales --------------------*/
@@ -18,8 +17,10 @@ $(document).ready(function () {
     transaccionAjax_MPersona('MATRIX_PERSONA');
     transaccionAjax_MTarjeta('MATRIX_TARJETA');
     transaccionAjax_MRTP('MATRIX_RTP');
-    
+
     Change_Select_Nit();
+    Change_Select_Persona();
+    Change_Select_Tarjeta();
     transacionAjax_EmpresaNit('Cliente');
 
     $("#ESelect").css("display", "none");
@@ -29,7 +30,7 @@ $(document).ready(function () {
     $("#Img5").css("display", "none");
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
-    $("#WE").css("display", "none");
+    //  $("#WE").css("display", "none");
 
 
     //funcion para las ventanas emergentes
@@ -54,10 +55,62 @@ function Change_Select_Nit() {
         Charge_Combos_Depend_Nit(Matrix_Persona, "Select_Persona", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Tarjeta, "Select_Tarjeta_Ent", index_ID, "");
     });
+}
+var Container_Tarjeta = "N";
 
+//valida los cambios del combo  de tarjeta y carga
+function Change_Select_Persona() {
+    $("#Select_Persona").change(function () {
+        var index_ID = $(this).val();
+
+        for (item in Matrix_RTP) {
+            if (Matrix_RTP[item].Document_ID == index_ID) {
+                $("#Select_Tarjeta_Ent").val(Matrix_RTP[item].Tarjeta_ID);
+                Container_Tarjeta = "S";
+                Monitoreo_Tarjeta();
+                break;
+            }
+        }
+    });
+}
+
+function Monitoreo_Tarjeta() {
+
+    switch (Container_Tarjeta) {
+        case "N":
+            $("#Select_Tarjeta_Ent").val("-1");
+            $("#Select_Tarjeta_Ent").attr("disabled", "disabled");
+            $('.C_Chosen').trigger('chosen:updated');
+
+            $("#dialog").dialog("option", "title", "No tiene Tarjeta!");
+            $("#Mensaje_alert").text("La persona seleccionada no tiene tarjeta asignada!");
+            $("#dialog").dialog("open");
+            $("#DE").css("display", "None");
+            $("#SE").css("display", "none");
+            $("#WE").css("display", "block");
+            break;
+
+        case "S":
+            $("#Select_Tarjeta_Ent").removeAttr("disabled");
+            $('.C_Chosen').trigger('chosen:updated');
+            break;
+    }
 
 }
 
+//valida los cambios del combo de Persona y carga
+function Change_Select_Tarjeta() {
+    $("#Select_Tarjeta_Ent").change(function () {
+        var index_ID = $(this).val();
+        for (item in Matrix_RTP) {
+            if (Matrix_RTP[item].Tarjeta_ID = index_ID) {
+                $("#Select_Persona").val(Matrix_RTP[item].Document_ID);
+                $('.C_Chosen').trigger('chosen:updated');
+                break;
+            }
+        }
+    });
+}
 
 //salida del formulario
 function btnSalir() {
