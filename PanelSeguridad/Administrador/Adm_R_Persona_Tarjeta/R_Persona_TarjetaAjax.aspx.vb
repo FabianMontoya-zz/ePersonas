@@ -23,11 +23,17 @@ Public Class R_Persona_TarjetaAjax
                 Case "Cliente"
                     CargarCliente()
 
+                Case "C_Bloqueo"
+                    CargarBloqueo()
+
                 Case "crear"
                     InsertR_Persona_Tarjeta()
 
                 Case "UpdateEntrega"
                     UpdateInvTarjeta_Entrega()
+
+                Case "UpdateBloqueo"
+                    UpdateInvTarjeta_Bloqueo()
 
             End Select
 
@@ -98,7 +104,7 @@ Public Class R_Persona_TarjetaAjax
     End Sub
 
     ''' <summary>
-    ''' funcion que Actualiza en la tabla Inventario Tarjeta(UPDATE)
+    ''' funcion que Actualiza en la tabla Inventario Tarjeta entrega(UPDATE)
     ''' </summary>
     ''' <remarks></remarks>
     Protected Sub UpdateInvTarjeta_Entrega()
@@ -121,6 +127,32 @@ Public Class R_Persona_TarjetaAjax
         ObjListInvPuerta.Add(ObjInvPuerta)
 
         Dim result As String = SQLInvPuerta.UpdateEntregaTarjeta(ObjInvPuerta)
+
+        Response.Write(result)
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que Actualiza en la tabla Inventario Tarjeta bloqueo(UPDATE)
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub UpdateInvTarjeta_Bloqueo()
+
+        Dim SQLInvPuerta As New InvPuertaSQLClass
+        Dim ObjListInvPuerta As New List(Of InvPuertaClass)
+        Dim ObjInvPuerta As New InvPuertaClass
+
+        ObjInvPuerta.Tarjeta_ID = Request.Form("Tarjeta")
+        ObjInvPuerta.Estado = Request.Form("Estado")
+        ObjInvPuerta.MotivoBloqueo = Request.Form("Bloqueo")
+        ObjInvPuerta.Observaciones = Request.Form("Observaciones")
+
+        ObjInvPuerta.UsuarioActualizacion = Request.Form("user")
+        ObjInvPuerta.FechaActualizacion = Date.Now
+
+        ObjListInvPuerta.Add(ObjInvPuerta)
+
+        Dim result As String = SQLInvPuerta.UpdateBloqueoTarjeta(ObjInvPuerta)
 
         Response.Write(result)
 
@@ -183,6 +215,21 @@ Public Class R_Persona_TarjetaAjax
         Dim vl_S_Tabla As String = Request.Form("tabla")
 
         ObjListDroplist = SQL.Charge_DropListCliente(vl_S_Tabla)
+        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga el objeto DDL consulta
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarBloqueo()
+
+        Dim SQL As New InvPuertaSQLClass
+        Dim ObjListDroplist As New List(Of Droplist_Class)
+        Dim vl_S_Tabla As String = Request.Form("tabla")
+
+        ObjListDroplist = SQL.Charge_DropListBloqueo()
         Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
 
     End Sub

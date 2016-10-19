@@ -124,9 +124,62 @@ Public Class InvPuertaSQLClass
 
     End Function
 
+    ''' <summary>
+    ''' actualizacion por bloqueo de tarjeta a una persona
+    ''' </summary>
+    ''' <param name="vp_Obj_InvPuerta"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function UpdateBloqueoTarjeta(ByVal vp_Obj_InvPuerta As InvPuertaClass)
+
+        Dim conex As New Conector
+        Dim Result As String
+        ' definiendo los objetos
+        Dim sql As New StringBuilder
+        Dim StrQuery As String = ""
+
+        sql.AppendLine("UPDATE INVENTARIO_TARJETAS SET " & _
+                    " IT_Estado ='" & vp_Obj_InvPuerta.Estado & "', " & _
+                    " IT_MotivoBloqueo ='" & vp_Obj_InvPuerta.MotivoBloqueo & "', " & _
+                    " IT_Observaciones ='" & vp_Obj_InvPuerta.Observaciones & "', " & _
+                    " IT_Usuario_Actualizacion ='" & vp_Obj_InvPuerta.UsuarioActualizacion & "', " & _
+                    " IT_FechaActualizacion ='" & vp_Obj_InvPuerta.FechaActualizacion & "' " & _
+                    " WHERE IT_Tarjeta_ID = '" & vp_Obj_InvPuerta.Tarjeta_ID & "'")
+        StrQuery = sql.ToString
+
+        Result = conex.StrInsert_and_Update_All(StrQuery, "1")
+
+        Return Result
+
+    End Function
+
 #End Region
 
 #Region "CONSULTAS DROP LIST"
+
+    ''' <summary>
+    ''' crea la consulta para cargar el combo
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Charge_DropListBloqueo()
+
+        Dim ObjListDroplist As New List(Of Droplist_Class)
+        Dim StrQuery As String = ""
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("1")
+
+        Dim SQLGeneral As New GeneralSQLClass
+        Dim sql As New StringBuilder
+
+        sql.Append(" SELECT DDL_ID AS ID, CAST(DDL_ID AS NVARCHAR(2)) + ' - '  +  DDLL_Descripcion AS descripcion FROM TC_DDL_TIPO WHERE DDL_Tabla='BLOQUEO' ")
+        StrQuery = sql.ToString
+
+        ObjListDroplist = SQLGeneral.listdrop(StrQuery, Conexion)
+
+        Return ObjListDroplist
+
+    End Function
 
 #End Region
 
@@ -196,6 +249,7 @@ Public Class InvPuertaSQLClass
                     If Not (IsDBNull(ReadConsulta.GetValue(5))) Then objInvPuerta.Document_ID_Entrega = ReadConsulta.GetValue(5) Else objInvPuerta.Document_ID_Entrega = 0
                     If Not (IsDBNull(ReadConsulta.GetValue(6))) Then objInvPuerta.Nit_ID_Asigna = ReadConsulta.GetValue(6) Else objInvPuerta.Nit_ID_Asigna = 0
 
+                    objInvPuerta.Estado = ReadConsulta.GetValue(7)
                     'agregamos a la lista
                     ObjListInvPuerta.Add(objInvPuerta)
 
@@ -272,7 +326,7 @@ Public Class InvPuertaSQLClass
 
         Dim sql As New StringBuilder
 
-        sql.AppendLine(" SELECT IT_Tarjeta_ID ,  IT_Nit_ID_Custodia,  IT_TypeDocument_Asigna, IT_Document_ID_Asigna, IT_TypeDocument_Entrega, IT_Document_ID_Entrega,  IT_Nit_ID_Asigna   FROM INVENTARIO_TARJETAS ")
+        sql.AppendLine(" SELECT IT_Tarjeta_ID ,  IT_Nit_ID_Custodia,  IT_TypeDocument_Asigna, IT_Document_ID_Asigna, IT_TypeDocument_Entrega, IT_Document_ID_Entrega,  IT_Nit_ID_Asigna, IT_Estado   FROM INVENTARIO_TARJETAS ")
         StrQuery = sql.ToString
 
         ObjListCrud_Doc = listInvPuerta(StrQuery, Conexion, "Matrix_Asigna")

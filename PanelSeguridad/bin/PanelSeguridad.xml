@@ -3076,6 +3076,19 @@ To modify move field declaration from designer file to code-behind file.
 	<param name="vp_Obj_InvPuerta"></param>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.InvPuertaSQLClass.UpdateBloqueoTarjeta(PanelSeguridad.InvPuertaClass)">
+	<summary>
+ actualizacion por bloqueo de tarjeta a una persona
+ </summary>
+	<param name="vp_Obj_InvPuerta"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.InvPuertaSQLClass.Charge_DropListBloqueo">
+	<summary>
+ crea la consulta para cargar el combo
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.InvPuertaSQLClass.listInvPuerta(System.String,System.String,System.String)">
 	<summary>
  funcion que trae el listado de InvPuerta para armar la tabla
@@ -3111,7 +3124,12 @@ To modify move field declaration from designer file to code-behind file.
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.R_Persona_TarjetaAjax.UpdateInvTarjeta_Entrega">
 	<summary>
- funcion que Actualiza en la tabla Inventario Tarjeta(UPDATE)
+ funcion que Actualiza en la tabla Inventario Tarjeta entrega(UPDATE)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.R_Persona_TarjetaAjax.UpdateInvTarjeta_Bloqueo">
+	<summary>
+ funcion que Actualiza en la tabla Inventario Tarjeta bloqueo(UPDATE)
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.R_Persona_TarjetaAjax.CargarMPersonaDep">
@@ -3130,6 +3148,11 @@ To modify move field declaration from designer file to code-behind file.
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.R_Persona_TarjetaAjax.CargarCliente">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.R_Persona_TarjetaAjax.CargarBloqueo">
 	<summary>
  funcion que carga el objeto DDL consulta
  </summary>
