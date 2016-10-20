@@ -678,6 +678,14 @@ PanelSeguridad
 	<param name="vp_S_Ruta"></param>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.DocumentosClass.ValidaFormato_Documento(System.String,System.String)">
+	<summary>
+ validar el formato del documento contra el parametrizado
+ </summary>
+	<param name="vp_S_Ext_Asignado"></param>
+	<param name="vp_S_Ext_File"></param>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.DocumentosClass.Rename_doc(System.String,System.String,System.String)">
 	<summary>
  renombra el archivo
