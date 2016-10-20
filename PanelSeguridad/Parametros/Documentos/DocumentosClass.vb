@@ -501,12 +501,13 @@ Public Class DocumentosClass
         Dim fileName As String = String.Empty
         Dim DocumentsTmpList As New List(Of DocumentosClass)
         Dim Up_Document As Integer = 0
+        Dim DocVal As String = ""
 
         'Se recorre la lista de archivos cargados al servidor
         For i As Integer = 0 To vp_H_files.Count - 1
 
             Dim file As HttpPostedFile = vp_H_files(i)
-
+          
             If file.ContentLength > 0 Then
 
                 strFileName = file.FileName.Split("\".ToCharArray)
@@ -527,15 +528,14 @@ Public Class DocumentosClass
 
                     'Se agrega el objeto de tipo documento a la lista de documentos
                     DocumentsTmpList.Add(objDocument)
-                    Return fileName & "|" & vl_S_NombreDoc
-
+                    DocVal = fileName & "|" & vl_S_NombreDoc
                 Else
-                    Return vl_S_Correcto
+                    DocVal = vl_S_Correcto
                 End If
             End If
-
         Next
 
+        Return DocVal
     End Function
 
     ''' <summary>
