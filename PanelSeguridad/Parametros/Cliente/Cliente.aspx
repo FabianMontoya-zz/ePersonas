@@ -1550,7 +1550,7 @@
             </tr>
             <tr>
                 <td colspan="10" style="width: 180px;">
-                    <input id="BtnPadre" type="button" value="Ver Doc Padre" />
+                    <input id="BtnPadre" type="button" value="Ver Doc Padre" onclick="VerDocPadre();"/>
                 </td>
             </tr>
         </table>
