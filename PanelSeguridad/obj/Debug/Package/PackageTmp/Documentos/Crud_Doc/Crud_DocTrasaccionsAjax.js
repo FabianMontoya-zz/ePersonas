@@ -202,30 +202,22 @@ function transaccionAjax_MConsecutivo(State) {
             }
             else {
                 Matrix_Consecutivo = JSON.parse(result);
+                switch (CheckVigencias) {
 
-                if (CheckVigencias != "S") {
-                    var ConsecutivoExist = CaptureConsecutivo();
-                    switch (ConsecutivoExist) {
-                        case 1:
-                            transacionAjax_CopyDocument("Copiar_Doc");
-                            break;
+                    case "N":
+                        var ConsecutivoExist = CaptureConsecutivo();
+                        ValideConsecutivo(ConsecutivoExist);
+                        break;
 
-                        case 0:
-                            $("#dialog").dialog("option", "title", "Exito");
-                            $("#Mensaje_alert").text("El documento no se puede crear no hay consecutivos! ");
-                            $("#dialog").dialog("open");
-                            $("#DE").css("display", "none");
-                            $("#SE").css("display", "none");
-                            $("#WE").css("display", "block");
-        
-                    }
-                    
+                    case "S":
+                        var validar = ValidarCamposVigencia();
+                        if (validar == 0) {
+                            var ConsecutivoExist = CaptureConsecutivo();
+                            ValideConsecutivo(ConsecutivoExist);
+                        }
+                        break;
                 }
-                else {
-                    var validar = ValidarCamposVigencia();
-                    if (validar == 0)
-                        CaptureConsecutivo();
-                }
+
             }
         },
         error: function () {

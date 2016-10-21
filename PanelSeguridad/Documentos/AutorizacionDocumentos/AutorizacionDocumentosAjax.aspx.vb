@@ -17,17 +17,19 @@ Public Class AutorizacionDocumentosAjax
             Dim NameDocument As String = Doc.UpLoad_Document(Request.Files, vl_S_RutaTemporal, vl_S_NombreDoc)
 
             If NameDocument <> "" Then
+                If NameDocument = "N" Then
+                    Response.Write("NO_FORMAT")
+                Else
+                    Dim AFileDoc = Split(NameDocument, "|")
+                    Dim ADoc = Split(AFileDoc(0), ".")
+                    Dim vl_S_NameFormat As String = ADoc(0).Replace(" ", "")
+                    vl_S_NameFormat = vl_S_NameFormat.Replace("_", "")
+                    Dim NewNameDoc = AFileDoc(1).Replace("TEMP", UCase(vl_S_NameFormat))
 
-                Dim AFileDoc = Split(NameDocument, "|")
-                Dim ADoc = Split(AFileDoc(0), ".")
-                Dim vl_S_NameFormat As String = ADoc(0).Replace(" ", "")
-                vl_S_NameFormat = vl_S_NameFormat.Replace("_", "")
-                Dim NewNameDoc = AFileDoc(1).Replace("TEMP", UCase(vl_S_NameFormat))
-
-                Doc.Rename_doc(vl_S_RutaTemporal, NewNameDoc, vl_S_NombreDoc)
-                Response.Write(NewNameDoc)
+                    Doc.Rename_doc(vl_S_RutaTemporal, NewNameDoc, vl_S_NombreDoc)
+                    Response.Write(NewNameDoc)
+                End If
             End If
-
             Exit Sub
         End If
 
@@ -203,7 +205,7 @@ Public Class AutorizacionDocumentosAjax
 
         Dim result As String = ""
 
-          objAutorizacionDocumentos.Nombre_Save = Request.Form("Documento")
+        objAutorizacionDocumentos.Nombre_Save = Request.Form("Documento")
         objAutorizacionDocumentos.Verificado = Request.Form("Verificacion_ID")
         objAutorizacionDocumentos.Fecha_Verifico = Request.Form("FVerificacion")
         objAutorizacionDocumentos.Observaciones_Validacion = Request.Form("Observacion")
@@ -280,7 +282,7 @@ Public Class AutorizacionDocumentosAjax
 
         Dim SQL As New AutorizacionDocumentosSQLClass
         Dim ObjListDroplist As New List(Of Droplist_Class)
-    
+
         ObjListDroplist = SQL.Charge_DropListVerificacion()
         Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
 
@@ -393,7 +395,7 @@ Public Class AutorizacionDocumentosAjax
 
         Dim vl_S_RutaDestino As String = Request.Form("Ruta")
         Dim vl_S_Doc_name As String = Request.Form("Doc_name")
-     
+
         Dim Delete As Integer = Doc.Delete_Document_Folder_View(vl_S_RutaDestino, vl_S_Doc_name)
 
         Response.Write(Delete)
@@ -454,13 +456,13 @@ Public Class AutorizacionDocumentosAjax
                 Result = Sql_DocAsociados.UpdateDocPadre(item_list)
                 Flag = 1
             End If
-         Next
+        Next
 
         For Each item_list As DocumentosClass In ListDocCopy
             Doc.Copy_Document_Folder_View(item_list.RutaRelativaDocumento, item_list.RutaDocumentoDestino, item_list.Nombre_Old, item_list.Nombre_Save, item_list.Trama)
         Next
 
-        
+
         Response.Write(Result)
     End Sub
 

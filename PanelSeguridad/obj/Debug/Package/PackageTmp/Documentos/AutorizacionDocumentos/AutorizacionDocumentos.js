@@ -72,7 +72,7 @@ $(document).ready(function () {
     $("#dialog").dialog({
         autoOpen: false,
         dialogClass: "Dialog_Sasif",
-        modal: true
+        modal: true,
     });
 
     $("#dialog_eliminar").dialog({
@@ -90,6 +90,14 @@ $(document).ready(function () {
         overlay: {
             opacity: 0.5,
             background: "black"
+        },
+         create: function() {
+            $(this).closest('div.ui-dialog')
+                   .find('.ui-dialog-titlebar-close')
+                   .click(function(e) {
+                       Clear();
+                       e.preventDefault();
+                   });
         }
     });
 
@@ -506,7 +514,13 @@ function Search_Document(secuencia, Nit) {
 
     for (itemArray in Matrix_DocWork) {
         if (Matrix_DocWork[itemArray].Secuencia_ID == secuencia && Matrix_DocWork[itemArray].Nit_ID == Nit) {
-
+                
+            $("#Vis_Persona_2").val(Matrix_DocWork[itemArray].TypeDocument_ID + " - " + Matrix_DocWork[itemArray].Document_ID + " - " + Matrix_DocWork[itemArray].DescripEmpresa);
+            $("#Vis_Persona_3").val(Matrix_DocWork[itemArray].TypeDocument_ID + " - " + Matrix_DocWork[itemArray].Document_ID + " - " + Matrix_DocWork[itemArray].DescripEmpresa);
+           
+            $("#Vis_Documento_2").val(Matrix_DocWork[itemArray].Descripcion);
+            $("#Vis_Documento_3").val(Matrix_DocWork[itemArray].Descripcion);
+            
             $("#Vista_Secuencia").html(Matrix_DocWork[itemArray].Secuencia_ID);
             $("#Vista_Documento").html(Matrix_DocWork[itemArray].Descripcion);
             $("#Vista_Formato").html(Matrix_DocWork[itemArray].DescripFormato);
@@ -565,6 +579,14 @@ function Clear() {
     $("#IF_Visor_D").attr("src", "");
     $('#Select_Documento_V').empty();
 
+    $("#Vis_EmpresaNit").val("");
+    $("#Vis_Persona").val("");
+    $("#Vis_Secuencia").val("");
+    $("#Vis_Contrato").val("");
+    $("#Vis_Activo").val("");
+    $("#Vis_Factura").val("");
+    $("#Vis_Documento").val("");
+    Nivel_Filtro = "0";
     $('.C_Chosen').trigger('chosen:updated');
 }
 
