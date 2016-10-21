@@ -128,7 +128,7 @@ Public Class DocumentosSQLClass
                     If Not (IsDBNull(ReadConsulta.GetValue(6))) Then obj.Indicativo = ReadConsulta.GetValue(6) Else obj.Indicativo = ""
                     If Not (IsDBNull(ReadConsulta.GetValue(7))) Then obj.Verificado = ReadConsulta.GetValue(7) Else obj.Verificado = 0
                     If Not (IsDBNull(ReadConsulta.GetValue(8))) Then obj.Usuario_Verifico = ReadConsulta.GetValue(8) Else obj.Usuario_Verifico = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(9))) Then obj.Fecha_Vencimiento = ReadConsulta.GetValue(9) Else obj.Fecha_Vencimiento = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(9))) Then obj.Fecha_Verifico = ReadConsulta.GetValue(9) Else obj.Fecha_Vencimiento = ""
                     If Not (IsDBNull(ReadConsulta.GetValue(10))) Then obj.Observaciones_Captura = ReadConsulta.GetValue(10) Else obj.Observaciones_Captura = ""
                     If Not (IsDBNull(ReadConsulta.GetValue(11))) Then obj.Observaciones_Validacion = ReadConsulta.GetValue(11) Else obj.Observaciones_Validacion = ""
                     If Not (IsDBNull(ReadConsulta.GetValue(12))) Then obj.Fecha_Vencimiento = ReadConsulta.GetValue(12) Else obj.Fecha_Vencimiento = ""
@@ -162,6 +162,7 @@ Public Class DocumentosSQLClass
                     If Not (IsDBNull(ReadConsulta.GetValue(40))) Then obj.DescripEmpresa = ReadConsulta.GetValue(40) Else obj.DescripEmpresa = ""
                     If Not (IsDBNull(ReadConsulta.GetValue(41))) Then obj.Consecutivo = ReadConsulta.GetValue(41) Else obj.Consecutivo = 0
                     If Not (IsDBNull(ReadConsulta.GetValue(42))) Then obj.Secuencia_Doc = ReadConsulta.GetValue(42) Else obj.Secuencia_Doc = 0
+                    'if Not (IsDBNull(ReadConsulta.GetValue(43))) Then obj.DescripEmpresa = ReadConsulta.GetValue(43) Else obj.DescripEmpresa = ""
 
                     Dim StrArchivo As String = obj.Nombre_Save & "." & obj.DescripFormato
 
@@ -282,9 +283,9 @@ Public Class DocumentosSQLClass
                                                "  R.TR_Ruta_Visualizacion, " & _
                                                 " D4.DDLL_Descripcion, " & _
                                                 " C.CLI_Nombre + ' ' + C.CLI_Nombre_2  + ' ' +C.CLI_Apellido_1 + ' ' + C.CLI_Apellido_2 AS Nombre, " & _
-                                                " CLI_N_Consecutivo, " & _
+                                                " C.CLI_N_Consecutivo, " & _
                                                 " A_Secuencia_Doc " & _
-                                " FROM DOCUMENTOS_EXISTENTES DE " & _
+                                 " FROM DOCUMENTOS_EXISTENTES DE " & _
                                 " INNER JOIN ASOCIACION_DOCUMENTOS AD ON AD.A_Secuencia_ID = DE.DE_Secuencia_ID AND DE.DE_Nit_ID =AD.A_Nit_ID " & _
                                 " LEFT JOIN DOCUMENTOS D ON D.DOC_Documentos_ID = DE.DE_Documento_ID " & _
                                 " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D1 ON D1.DDL_ID = DE.DE_Formato AND D1.DDL_Tabla = 'DOCUMENTOS' " & _

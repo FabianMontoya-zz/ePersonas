@@ -501,38 +501,82 @@ Public Class DocumentosClass
         Dim fileName As String = String.Empty
         Dim DocumentsTmpList As New List(Of DocumentosClass)
         Dim Up_Document As Integer = 0
+        Dim DocVal As String = ""
 
         'Se recorre la lista de archivos cargados al servidor
         For i As Integer = 0 To vp_H_files.Count - 1
 
             Dim file As HttpPostedFile = vp_H_files(i)
-
+          
             If file.ContentLength > 0 Then
 
                 strFileName = file.FileName.Split("\".ToCharArray)
-
                 ' capturar nombre original
                 fileName = strFileName(strFileName.Length - 1)
 
-                ' determinanado la ruta destino
-                Dim sFullPath As String = vp_S_Ruta & vl_S_NombreDoc
+                Dim vl_S_Correcto = ValidaFormato_Documento(vl_S_NombreDoc, fileName)
 
-                'Subiendo el archivo al server
-                file.SaveAs(sFullPath)
+                If vl_S_Correcto = "S" Then
+                    ' determinanado la ruta destino
+                    Dim sFullPath As String = vp_S_Ruta & vl_S_NombreDoc
+                    'Subiendo el archivo al server
+                    file.SaveAs(sFullPath)
 
-                'Se instancia un objeto de tipo documento y se pobla con la info. reuqerida.
-                Dim objDocument As New DocumentosClass()
-                objDocument.namefile = vl_S_NombreDoc
+                    'Se instancia un objeto de tipo documento y se pobla con la info. reuqerida.
+                    Dim objDocument As New DocumentosClass()
+                    objDocument.namefile = vl_S_NombreDoc
 
-                'Se agrega el objeto de tipo documento a la lista de documentos
-                DocumentsTmpList.Add(objDocument)
-
+                    'Se agrega el objeto de tipo documento a la lista de documentos
+                    DocumentsTmpList.Add(objDocument)
+                    DocVal = fileName & "|" & vl_S_NombreDoc
+                Else
+                    DocVal = vl_S_Correcto
+                End If
             End If
-
         Next
 
-        Return fileName & "|" & vl_S_NombreDoc
+        Return DocVal
+    End Function
 
+    ''' <summary>
+    ''' validar el formato del documento contra el parametrizado
+    ''' </summary>
+    ''' <param name="vp_S_Ext_Asignado"></param>
+    ''' <param name="vp_S_Ext_File"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function ValidaFormato_Documento(ByVal vp_S_Ext_Asignado As String, ByVal vp_S_Ext_File As String)
+
+        Dim StrExt_Asignado = Split(vp_S_Ext_Asignado, ".")
+        Dim StrExt_File = Split(vp_S_Ext_File, ".")
+        Dim Estado As String = "N"
+
+        Select Case StrExt_Asignado(1)
+
+            Case "JPG"
+                If StrExt_Asignado(1) = UCase(StrExt_File(1)) Then
+                    Estado = "S"
+                End If
+                If UCase(StrExt_File(1)) = "PNG" Then
+                    Estado = "S"
+                End If
+
+            Case "PNG"
+                If StrExt_Asignado(1) = UCase(StrExt_File(1)) Then
+                    Estado = "S"
+                End If
+                If UCase(StrExt_File(1)) = "JPG" Then
+                    Estado = "S"
+                End If
+
+            Case Else
+                If StrExt_Asignado(1) = UCase(StrExt_File(1)) Then
+                    Estado = "S"
+                End If
+
+        End Select
+
+        Return Estado
     End Function
 
     ''' <summary>

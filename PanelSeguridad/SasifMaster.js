@@ -510,27 +510,41 @@ function UpLoad_Document(NameAjax, NameFile_ID, Form) {
             processData: false,
             success: function (result) {
 
-                //creamos variables
                 var filename = result;
-                filename = $.trim(filename)
-                filename = filename.replace(/\s/g, '_');
-                Doc_name = filename;
-                var objectfile = data;
-                var description = "xxxxx";
-
-                $("#" + NameFile_ID).val("");
-
-                switch (Form) {
-                    case "1":
-                        VerDocumento();
+                switch (filename) {
+                    case "NO_FORMAT":
+                        $("#dialog").dialog("option", "title", "Formato Incorrecto!");
+                        $("#Mensaje_alert").text("El documento no se puede generar, el formato es diferente a la parametrización asignada! ");
+                        $("#dialog").dialog("open");
+                        $("#DE").css("display", "none");
+                        $("#SE").css("display", "none");
+                        $("#WE").css("display", "block");
                         break;
 
-                    case "2":
-                        VerDocumento_Validacion();
-                        break;
                     default:
-                        VerDocumento();
+                        //creamos variables
+                        filename = $.trim(filename)
+                        filename = filename.replace(/\s/g, '_');
+                        Doc_name = filename;
+                        var objectfile = data;
+                        var description = "xxxxx";
+
+                        $("#" + NameFile_ID).val("");
+
+                        switch (Form) {
+                            case "1":
+                                VerDocumento();
+                                break;
+
+                            case "2":
+                                VerDocumento_Validacion();
+                                break;
+                            default:
+                                VerDocumento();
+                        }
+                        break;
                 }
+
             },
             error: function (error) {
                 alert("Ocurrió un error inesperado, por favor intente de nuevo mas tarde: " + error);

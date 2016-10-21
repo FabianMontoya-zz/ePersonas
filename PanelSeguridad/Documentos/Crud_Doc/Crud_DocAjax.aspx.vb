@@ -17,15 +17,18 @@ Public Class Crud_DocAjax
             Dim NameDocument As String = Doc.UpLoad_Document(Request.Files, vl_S_RutaTemporal, vl_S_NombreDoc)
 
             If NameDocument <> "" Then
+                If NameDocument = "N" Then
+                    Response.Write("NO_FORMAT")
+                Else
+                    Dim AFileDoc = Split(NameDocument, "|")
+                    Dim ADoc = Split(AFileDoc(0), ".")
+                    Dim vl_S_NameFormat As String = ADoc(0).Replace(" ", "")
+                    vl_S_NameFormat = vl_S_NameFormat.Replace("_", "")
+                    Dim NewNameDoc = AFileDoc(1).Replace("TEMP", UCase(vl_S_NameFormat))
 
-                Dim AFileDoc = Split(NameDocument, "|")
-                Dim ADoc = Split(AFileDoc(0), ".")
-                Dim vl_S_NameFormat As String = ADoc(0).Replace(" ", "")
-                vl_S_NameFormat = vl_S_NameFormat.Replace("_", "")
-                Dim NewNameDoc = AFileDoc(1).Replace("TEMP", UCase(vl_S_NameFormat))
-
-                Doc.Rename_doc(vl_S_RutaTemporal, NewNameDoc, vl_S_NombreDoc)
-                Response.Write(NewNameDoc)
+                    Doc.Rename_doc(vl_S_RutaTemporal, NewNameDoc, vl_S_NombreDoc)
+                    Response.Write(NewNameDoc)
+                End If
             End If
 
             Exit Sub

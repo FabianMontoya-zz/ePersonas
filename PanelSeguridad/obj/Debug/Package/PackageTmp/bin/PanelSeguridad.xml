@@ -678,6 +678,14 @@ PanelSeguridad
 	<param name="vp_S_Ruta"></param>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.DocumentosClass.ValidaFormato_Documento(System.String,System.String)">
+	<summary>
+ validar el formato del documento contra el parametrizado
+ </summary>
+	<param name="vp_S_Ext_Asignado"></param>
+	<param name="vp_S_Ext_File"></param>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.DocumentosClass.Rename_doc(System.String,System.String,System.String)">
 	<summary>
  renombra el archivo
@@ -3064,9 +3072,29 @@ To modify move field declaration from designer file to code-behind file.
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.InvPuertaSQLClass.UpdateAsignacionTarjeta(PanelSeguridad.InvPuertaClass)">
 	<summary>
- actualizacion por sasignacion de tarjeta a una persona
+ actualizacion por Asignacion de tarjeta a una persona
  </summary>
 	<param name="vp_Obj_InvPuerta"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.InvPuertaSQLClass.UpdateEntregaTarjeta(PanelSeguridad.InvPuertaClass)">
+	<summary>
+ actualizacion por Entrega de tarjeta a una persona
+ </summary>
+	<param name="vp_Obj_InvPuerta"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.InvPuertaSQLClass.UpdateBloqueoTarjeta(PanelSeguridad.InvPuertaClass)">
+	<summary>
+ actualizacion por bloqueo de tarjeta a una persona
+ </summary>
+	<param name="vp_Obj_InvPuerta"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.InvPuertaSQLClass.Charge_DropListBloqueo">
+	<summary>
+ crea la consulta para cargar el combo
+ </summary>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.InvPuertaSQLClass.listInvPuerta(System.String,System.String,System.String)">
@@ -3102,6 +3130,16 @@ To modify move field declaration from designer file to code-behind file.
  funcion que inserta en la tabla R_Persona_Tarjeta (INSERT)
  </summary>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.R_Persona_TarjetaAjax.UpdateInvTarjeta_Entrega">
+	<summary>
+ funcion que Actualiza en la tabla Inventario Tarjeta entrega(UPDATE)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.R_Persona_TarjetaAjax.UpdateInvTarjeta_Bloqueo">
+	<summary>
+ funcion que Actualiza en la tabla Inventario Tarjeta bloqueo(UPDATE)
+ </summary>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.R_Persona_TarjetaAjax.CargarMPersonaDep">
 	<summary>
  funcion que carga  Matrix PERSONAS 
@@ -3118,6 +3156,11 @@ To modify move field declaration from designer file to code-behind file.
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.R_Persona_TarjetaAjax.CargarCliente">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.R_Persona_TarjetaAjax.CargarBloqueo">
 	<summary>
  funcion que carga el objeto DDL consulta
  </summary>

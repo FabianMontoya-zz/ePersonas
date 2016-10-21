@@ -1458,16 +1458,6 @@
                         <span class="Spam_ACI"></span></span>
                 </td>
             </tr>
-            <tr>
-                <td style="width: 120px;" class="Label_Bold">
-                    Documento
-                </td>
-                <td style="width: 200px;">
-                    <span class="cssToolTip_Form">
-                        <input type="text" id="Vis_Documento_2" readonly="readonly" style="width: 200px;" />
-                        <span class="Spam_ACI"></span></span>
-                </td>
-            </tr>
         </table>
         <table style="width: 900px; text-align: left; margin-left: 40px; margin-top: 40px;">
             <tr>
@@ -1560,7 +1550,7 @@
             </tr>
             <tr>
                 <td colspan="10" style="width: 180px;">
-                    <input id="BtnPadre" type="button" value="Ver Doc Padre" />
+                    <input id="BtnPadre" type="button" value="Ver Doc Padre" onclick="VerDocPadre();"/>
                 </td>
             </tr>
         </table>
@@ -1643,17 +1633,7 @@
                         <span class="Spam_ACI"></span></span>
                 </td>
             </tr>
-            <tr>
-                <td style="width: 120px;" class="Label_Bold">
-                    Documento
-                </td>
-                <td style="width: 200px;">
-                    <span class="cssToolTip_Form">
-                        <input type="text" id="Vis_Documento" readonly="readonly" style="width: 200px;" />
-                        <span class="Spam_ACI"></span></span>
-                </td>
-            </tr>
-        </table>
+       </table>
         <div id="container_Document">
         </div>
         <div id="Div6" style="width: 100%; text-align: center; margin-top: 25px; font: 12px/20px Verdana,sans-serif;">

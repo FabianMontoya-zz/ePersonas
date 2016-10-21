@@ -99,22 +99,49 @@ function transacionAjax_EmpresaNit(State) {
     });
 }
 
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_Bloqueo(State) {
+    $.ajax({
+        url: "R_Persona_TarjetaAjax.aspx",
+        type: "POST",
+        //crear json
+        data: { "action": State,
+            "tabla": 'bloqueo'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                ArrayBloqueo = [];
+            }
+            else {
+                ArrayBloqueo = JSON.parse(result);
+                charge_CatalogList(ArrayBloqueo, "Select_Bloqueo", 1);
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+
 /*------------------------------ crear ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
-function transacionAjax_UpdateEntrega(State) {
+function transacionAjax_UpdateBloqueo(State) {
     var StrPersona = $("#Select_Persona option:selected").html();
     var SPersona = StrPersona.split("  -  ");
-    
+
     undefined
     $.ajax({
         url: "R_Persona_TarjetaAjax.aspx",
         type: "POST",
         //crear json
         data: { "action": State,
-            "Nit_ID": $("#Select_EmpresaNit").val(),
-            "TDoc": SPersona[1],
-            "Doc": SPersona[0],
-            "Tarjeta": $("#Select_Tarjeta_Ent").val(),
+            "Tarjeta": $("#Select_Tarjeta_Blo").val(),
+            "Estado": "3",
+            "Bloqueo": $("#Select_Bloqueo").val(),
+            "Observaciones": $("#TxtA_Observacion").val(),
             "user": User.toUpperCase()
         },
         //Transaccion Ajax en proceso
@@ -123,7 +150,7 @@ function transacionAjax_UpdateEntrega(State) {
 
                 case "Error":
                     $("#dialog").dialog("option", "title", "Disculpenos :(");
-                    $("#Mensaje_alert").text("No se realizo  la Entrega de la tarjeta!");
+                    $("#Mensaje_alert").text("No se realizo el Bloqueo de la tarjeta!");
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "block");
                     $("#SE").css("display", "none");
@@ -141,7 +168,7 @@ function transacionAjax_UpdateEntrega(State) {
 
                 case "Exito":
                     $("#dialog").dialog("option", "title", "Exito");
-                    $("#Mensaje_alert").text("La Entrega de la tarjeta fue generada exitosamente! ");
+                    $("#Mensaje_alert").text("El Bloqueo de la tarjeta fue generada exitosamente! ");
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "none");
                     $("#SE").css("display", "block");

@@ -65,7 +65,7 @@ function RevisarAyudas() {
     $(".Spam_AT5").html(ArrayAyudas[21].Ayudas_ID + ": " + ArrayAyudas[21].Descripcion);
     $(".Spam_ARel").html(ArrayAyudas[22].Ayudas_ID + ": " + ArrayAyudas[22].Descripcion);
     $(".SpamALEC").html(ArrayAyudas[23].Ayudas_ID + ": " + ArrayAyudas[23].Descripcion);
-    
+
     $(".Spam_CT1").html(ArrayAyudas[6].Descripcion);
     $(".Spam_CT2").html(ArrayAyudas[7].Descripcion);
     $(".Spam_CT4").html(ArrayAyudas[19].Descripcion);
@@ -237,12 +237,20 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
 
         case "Select_Tarjeta_Ent":
             for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID_Asigna == Nit) {
+                if (Matrix[Item].Nit_ID_Asigna == Nit && Matrix[Item].Document_ID_Entrega == 0) {
                     $("#" + Selector).append("<option value='" + Matrix[Item].Tarjeta_ID + "'>" + Matrix[Item].Tarjeta_ID + "</option>");
                 }
             }
             break;
-            
+
+        case "Select_Tarjeta_Blo":
+            for (Item in Matrix) {
+                if ((Matrix[Item].Nit_ID_Asigna == Nit) && (Matrix[Item].Estado != 3 || Matrix[Item].Estado != 4)) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Tarjeta_ID + "'>" + Matrix[Item].Tarjeta_ID + "</option>");
+                }
+            }
+            break;
+
     }
 
     $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
@@ -502,27 +510,41 @@ function UpLoad_Document(NameAjax, NameFile_ID, Form) {
             processData: false,
             success: function (result) {
 
-                //creamos variables
                 var filename = result;
-                filename = $.trim(filename)
-                filename = filename.replace(/\s/g, '_');
-                Doc_name = filename;
-                var objectfile = data;
-                var description = "xxxxx";
-
-                $("#" + NameFile_ID).val("");
-
-                switch (Form) {
-                    case "1":
-                        VerDocumento();
+                switch (filename) {
+                    case "NO_FORMAT":
+                        $("#dialog").dialog("option", "title", "Formato Incorrecto!");
+                        $("#Mensaje_alert").text("El documento no se puede generar, el formato es diferente a la parametrización asignada! ");
+                        $("#dialog").dialog("open");
+                        $("#DE").css("display", "none");
+                        $("#SE").css("display", "none");
+                        $("#WE").css("display", "block");
                         break;
 
-                    case "2":
-                        VerDocumento_Validacion();
-                        break;
                     default:
-                        VerDocumento();
+                        //creamos variables
+                        filename = $.trim(filename)
+                        filename = filename.replace(/\s/g, '_');
+                        Doc_name = filename;
+                        var objectfile = data;
+                        var description = "xxxxx";
+
+                        $("#" + NameFile_ID).val("");
+
+                        switch (Form) {
+                            case "1":
+                                VerDocumento();
+                                break;
+
+                            case "2":
+                                VerDocumento_Validacion();
+                                break;
+                            default:
+                                VerDocumento();
+                        }
+                        break;
                 }
+
             },
             error: function (error) {
                 alert("Ocurrió un error inesperado, por favor intente de nuevo mas tarde: " + error);
