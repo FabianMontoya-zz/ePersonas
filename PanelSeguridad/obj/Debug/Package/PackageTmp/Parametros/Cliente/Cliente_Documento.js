@@ -356,7 +356,15 @@ function Search_Document(secuencia, Nit, type) {
     if (type == "ANEXO") {
         for (itemArray in Matrix_DocWork) {
             if (Matrix_DocWork[itemArray].Nit_ID == Nit &&
-              Matrix_DocWork[itemArray].Secuencia_ID == secuencia) {
+               Matrix_DocWork[itemArray].Secuencia_ID == secuencia) {
+
+                $("#Vis_MultiEmpresa_2").val(Matrix_DocWork[itemArray].Nit_ID);
+                $("#Vis_MultiEmpresa_3").val(Matrix_DocWork[itemArray].Nit_ID);
+
+                $("#Vis_Persona_2").val(Matrix_DocWork[itemArray].TypeDocument_ID + " - " + Matrix_DocWork[itemArray].Document_ID + " - " + Matrix_DocWork[itemArray].DescripEmpresa);
+                $("#Vis_Persona_3").val(Matrix_DocWork[itemArray].TypeDocument_ID + " - " + Matrix_DocWork[itemArray].Document_ID + " - " + Matrix_DocWork[itemArray].DescripEmpresa);
+                $("#Vis_Documento_2").val(Matrix_DocWork[itemArray].Descripcion);
+                $("#Vis_Documento_3").val(Matrix_DocWork[itemArray].Descripcion);
 
                 $("#Vista_Secuencia").html(Matrix_DocWork[itemArray].Secuencia_ID);
                 $("#Vista_Documento").html(Matrix_DocWork[itemArray].Descripcion);
@@ -379,18 +387,32 @@ function Search_Document(secuencia, Nit, type) {
 
                 if (Matrix_DocWork[itemArray].Secuencia_Doc == 0)
                     $("#BtnPadre").css("display", "none");
-                else
-                    $("#BtnPadre").css("display", "inline-table");
-
+                else {
+                    if (Matrix_DocWork[itemArray].Secuencia_Doc != Matrix_DocWork[itemArray].Secuencia_ID) {
+                        $("#BtnPadre").css("display", "inline-table");
+                        SearchPadre(Matrix_DocWork[itemArray].Secuencia_Doc, Matrix_DocWork[itemArray].Nit_ID);
+                    }
+                    else
+                        $("#BtnPadre").css("display", "none");
+                }
             }
         }
     }
     else {
+        $("#BtnPadre").css("display", "none");
         for (itemArray in Matrix_DocWork) {
             if (Matrix_DocWork[itemArray].Nit_ID == Nit &&
-             Matrix_DocWork[itemArray].TypeDocument_ID == $("#Select_Documento").val() &&
-             Matrix_DocWork[itemArray].Document_ID == $("#Txt_Ident").val() &&
-             Matrix_DocWork[itemArray].Secuencia_ID == secuencia) {
+                 Matrix_DocWork[itemArray].TypeDocument_ID == $("#Select_Documento").val() &&
+                 Matrix_DocWork[itemArray].Document_ID == $("#Txt_Ident").val() &&
+                 Matrix_DocWork[itemArray].Secuencia_ID == secuencia) {
+
+                $("#Vis_MultiEmpresa_2").val(Matrix_DocWork[itemArray].Nit_ID);
+                $("#Vis_MultiEmpresa_3").val(Matrix_DocWork[itemArray].Nit_ID);
+
+                $("#Vis_Persona_2").val(Matrix_DocWork[itemArray].TypeDocument_ID + " - " + Matrix_DocWork[itemArray].Document_ID + " - " + Matrix_DocWork[itemArray].DescripEmpresa);
+                $("#Vis_Persona_3").val(Matrix_DocWork[itemArray].TypeDocument_ID + " - " + Matrix_DocWork[itemArray].Document_ID + " - " + Matrix_DocWork[itemArray].DescripEmpresa);
+                $("#Vis_Documento_2").val(Matrix_DocWork[itemArray].Descripcion);
+                $("#Vis_Documento_3").val(Matrix_DocWork[itemArray].Descripcion);
 
                 $("#Vista_Secuencia").html(Matrix_DocWork[itemArray].Secuencia_ID);
                 $("#Vista_Documento").html(Matrix_DocWork[itemArray].Descripcion);
@@ -411,15 +433,38 @@ function Search_Document(secuencia, Nit, type) {
                 $("#Vista_FechaCreacion").html(Matrix_DocWork[itemArray].UsuarioCreacion + "   " + Matrix_DocWork[itemArray].FechaCreacion);
                 $("#Vista_FechaActualizacion").html(Matrix_DocWork[itemArray].UsuarioActualizacion + "    " + Matrix_DocWork[itemArray].FechaActualizacion);
 
-                if (Matrix_DocWork[itemArray].Secuencia_Doc == 0)
-                    $("#BtnPadre").css("display", "none");
-                else
-                    $("#BtnPadre").css("display", "inline-table");
-
+             
             }
         }
     }
 }
+
+
+var RutaPadre;
+var NombrePadre;
+
+//buscamos los datos del padre para manejo de boton y datos
+function SearchPadre(Index_Padre, Nit) {
+    for (itemArray in Matrix_DocWork) {
+        if (Matrix_DocWork[itemArray].Secuencia_ID == Index_Padre && Matrix_DocWork[itemArray].Nit_ID == Nit) {
+            $("#Vis_Persona_2").val(Matrix_DocWork[itemArray].TypeDocument_ID + " - " + Matrix_DocWork[itemArray].Document_ID + " - " + Matrix_DocWork[itemArray].DescripEmpresa);
+            $("#Vis_Persona_3").val(Matrix_DocWork[itemArray].TypeDocument_ID + " - " + Matrix_DocWork[itemArray].Document_ID + " - " + Matrix_DocWork[itemArray].DescripEmpresa);
+            $("#Vis_Secuencia_2").val(Matrix_DocWork[itemArray].TypeDocument_ID + " - " + Matrix_DocWork[itemArray].Document_ID + " - " + Matrix_DocWork[itemArray].Secuencia_Doc);
+            $("#Vis_Secuencia_3").val(Matrix_DocWork[itemArray].TypeDocument_ID + " - " + Matrix_DocWork[itemArray].Document_ID + " - " + Matrix_DocWork[itemArray].Secuencia_Doc);
+            $("#Vis_Documento_2").val(Matrix_DocWork[itemArray].Descripcion);
+            $("#Vis_Documento_3").val(Matrix_DocWork[itemArray].Descripcion);
+
+            RutaPadre = Matrix_DocWork[itemArray].RutaRelativaDocumento + Matrix_DocWork[itemArray].Nombre_Save + "." + Matrix_DocWork[itemArray].DescripFormato;
+            NombrePadre = Matrix_DocWork[itemArray].Nombre_Save;
+        }
+    }
+}
+
+//boton que llama al padre
+function VerDocPadre() {
+    VerDocumento(RutaPadre, NombrePadre);
+}
+
 
 //elimina del array el dato seleccionado
 function Delete_Document(Nit_Document, TC_Document, Cuenta_Document) {

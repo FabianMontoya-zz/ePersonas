@@ -225,7 +225,7 @@
                 <tr>
                     <td colspan="4" align="center" id="TD3">
                         <input id="Btn_G" type="button" value="Guardar" onclick="Add_Doc();" />
-                        <input id="Btn_S" type="button" value="Regresar" onclick="" />
+                        <input id="Btn_S" type="button" value="Regresar" onclick="CerrarDialogCap();" />
                     </td>
                 </tr>
             </table>
@@ -402,7 +402,7 @@
             </tr>
             <tr>
                 <td colspan="10" style="width: 180px;">
-                    <input id="BtnPadre" type="button" value="Ver Doc Padre" />
+                    <input id="BtnPadre" type="button" value="Ver Doc Padre"  onclick="javascript:VerDocPadre();"/>
                 </td>
             </tr>
         </table>
