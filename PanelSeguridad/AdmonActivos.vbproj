@@ -190,6 +190,10 @@
     <Content Include="Documentos\GrpDocumentos\GrpDocumentosAjax.aspx" />
     <Content Include="Documentos\GrpDocumentos\GrpDocumentosTrasaccionsAjax.js" />
     <Content Include="Documentos\menu.js" />
+    <Content Include="Documentos\RDoc_Verificacion\RDoc_Verificacion.aspx" />
+    <Content Include="Documentos\RDoc_Verificacion\RDoc_Verificacion.js" />
+    <Content Include="Documentos\RDoc_Verificacion\RDoc_VerificacionAjax.aspx" />
+    <Content Include="Documentos\RDoc_Verificacion\RDoc_VerificacionTrasaccionsAjax.js" />
     <Content Include="Documentos\RGrpDoc_Doc\RGrpDoc_Doc.aspx" />
     <Content Include="Documentos\RGrpDoc_Doc\RGrpDoc_Doc.js" />
     <Content Include="Documentos\RGrpDoc_Doc\RGrpDoc_DocAjax.aspx" />
@@ -735,6 +739,22 @@
     </Compile>
     <Compile Include="Documentos\GrpDocumentos\GrpDocumentosClass.vb" />
     <Compile Include="Documentos\GrpDocumentos\GrpDocumentosSQLClass.vb" />
+    <Compile Include="Documentos\RDoc_Verificacion\RDoc_Verificacion.aspx.designer.vb">
+      <DependentUpon>RDoc_Verificacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentos\RDoc_Verificacion\RDoc_Verificacion.aspx.vb">
+      <DependentUpon>RDoc_Verificacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentos\RDoc_Verificacion\RDoc_VerificacionAjax.aspx.designer.vb">
+      <DependentUpon>RDoc_VerificacionAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentos\RDoc_Verificacion\RDoc_VerificacionAjax.aspx.vb">
+      <DependentUpon>RDoc_VerificacionAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentos\RDoc_Verificacion\RDoc_VerificacionClass.vb" />
+    <Compile Include="Documentos\RDoc_Verificacion\RDoc_VerificacionSQLClass.vb" />
     <Compile Include="Documentos\RGrpDoc_Doc\RGrpDoc_Doc.aspx.designer.vb">
       <DependentUpon>RGrpDoc_Doc.aspx</DependentUpon>
     </Compile>

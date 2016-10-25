@@ -608,6 +608,71 @@ PanelSeguridad
 	<param name="vg_S_StrConexion"></param>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.RDoc_VerificacionSQLClass.Read_AllRDoc_Verificacion(System.String,System.String,System.String)">
+	<summary>
+ creala consulta para la tabla RDoc_Verificacion parametrizada (READ)
+ </summary>
+	<param name="vp_S_Filtro"></param>
+	<param name="vp_S_Opcion"></param>
+	<param name="vp_S_Contenido"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.RDoc_VerificacionSQLClass.InsertRDoc_Verificacion(PanelSeguridad.RDoc_VerificacionClass)">
+	<summary>
+ funcion que crea el query para la insercion de nuevo RDoc_Verificacion (INSERT)
+ </summary>
+	<param name="vp_Obj_RDoc_Verificacion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.RDoc_VerificacionSQLClass.EraseRDoc_Verificacion(PanelSeguridad.RDoc_VerificacionClass)">
+	<summary>
+ funcion que crea el query para la eliminacion del RDoc_Verificacion (DELETE)
+ </summary>
+	<param name="vp_Obj_RDoc_Verificacion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.RDoc_VerificacionSQLClass.ReadCharge_DropList(System.String)">
+	<summary>
+ crea la consulta para cargar el combo
+ </summary>
+	<param name="vp_S_Table"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.RDoc_VerificacionSQLClass.Charge_DropListRDoc_VerificacionDepend(System.String)">
+	<summary>
+ crea la consulta para cargar el combo
+ </summary>
+	<param name="vp_S_NitEmpresa"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.RDoc_VerificacionSQLClass.Charge_DropListSeguridad(System.String)">
+	<summary>
+ crea la consulta para cargar el combo
+ </summary>
+	<param name="vp_S_Table"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.RDoc_VerificacionSQLClass.listRDoc_Verificacion(System.String,System.String,System.String)">
+	<summary>
+ funcion que trae el listado de RDoc_Verificacion para armar la tabla
+ </summary>
+	<param name="vp_S_StrQuery"></param>
+	<param name="vg_S_StrConexion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.RDoc_VerificacionSQLClass.Consulta_Repetido(PanelSeguridad.RDoc_VerificacionClass)">
+	<summary>
+ averigua si esta repetido
+ </summary>
+	<param name="vp_O_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.RDoc_VerificacionSQLClass.Matrix_R_Documento_Verificacion">
+	<summary>
+ Carga matrix de relacion documentos verificacion
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.RutaDocumentosAjax.Consulta_RutaDocumentos">
 	<summary>
  traemos todos los datos para tabla RutaDocumentos (READ)
@@ -930,6 +995,11 @@ PanelSeguridad
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.AutorizacionDocumentosAjax.Cargar_Matrix_Verificacion">
+	<summary>
+ cara la matriz de  verificacion documento 
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AutorizacionDocumentosAjax.Cargar_Matrix_R_Doc_Verificacion">
 	<summary>
  cara la matriz de  verificacion documento 
  </summary>
@@ -1995,6 +2065,41 @@ To modify move field declaration from designer file to code-behind file.
  trae las rutas de trabajo del ambiente
  </summary>
 	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.RDoc_VerificacionAjax.Consulta_RDoc_Verificacion">
+	<summary>
+ traemos todos los datos para tabla RDoc_Verificacion (READ)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.RDoc_VerificacionAjax.InsertRDoc_Verificacion">
+	<summary>
+ funcion que inserta en la tabla RDoc_Verificacion (INSERT)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.RDoc_VerificacionAjax.EraseRDoc_Verificacion">
+	<summary>
+ funcion que elimina en la tabla RDoc_Verificacion (DELETE)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.RDoc_VerificacionAjax.Cargar_MatrixGrpDocumento">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.RDoc_VerificacionAjax.Cargar_MatrixDocumento">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.RDoc_VerificacionAjax.CargarDroplist">
+	<summary>
+ funcion que carga el objeto DDL Links
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.RDoc_VerificacionAjax.CargarCliente">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.ClienteSQLClass.Read_All(System.String,System.String,System.String)">
 	<summary>

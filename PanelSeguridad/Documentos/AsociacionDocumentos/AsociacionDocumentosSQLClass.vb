@@ -58,7 +58,6 @@ Public Class AsociacionDocumentosSQLClass
 
 #End Region
 
-
 #Region "OTRAS FUNCIONES"
 
     Public Function UpdateDocPadre(ByVal vp_Obj As AsociacionDocumentosClass)

@@ -50,6 +50,32 @@ function transaccionAjax_MDocumento(State) {
     });
 }
 
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_MRDocVerif(State) {
+    $.ajax({
+        url: "AutorizacionDocumentosAjax.aspx",
+        type: "POST",
+        //crear json
+        data: { "action": State,
+            "tabla": 'RUTA'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_Doc_Verificacion = [];
+            }
+            else {
+                Matrix_Doc_Verificacion = JSON.parse(result);
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transaccionAjax_MDocWork(State) {

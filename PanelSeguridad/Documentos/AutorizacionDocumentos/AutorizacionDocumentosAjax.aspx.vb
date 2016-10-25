@@ -51,6 +51,9 @@ Public Class AutorizacionDocumentosAjax
                 Case "MATRIX_VERIFICAR"
                     Cargar_Matrix_Verificacion()
 
+                Case "MATRIX_R_DOC_VERIFICACION"
+                    Cargar_Matrix_R_Doc_Verificacion()
+
                 Case "Copiar_Doc"
                     CopiaDoc_Origen()
 
@@ -246,7 +249,6 @@ Public Class AutorizacionDocumentosAjax
 
 #Region "DROP LIST"
 
-
     ''' <summary>
     ''' funcion que carga  Matrix contrato
     ''' </summary>
@@ -285,6 +287,21 @@ Public Class AutorizacionDocumentosAjax
 
         ObjListDroplist = SQL.Charge_DropListVerificacion()
         Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
+
+
+    End Sub
+
+    ''' <summary>
+    ''' cara la matriz de  verificacion documento 
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub Cargar_Matrix_R_Doc_Verificacion()
+
+        Dim SQL As New RDoc_VerificacionSQLClass
+        Dim ObjList As New List(Of RDoc_VerificacionClass)
+
+        ObjList = SQL.Matrix_R_Documento_Verificacion()
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
 
     End Sub

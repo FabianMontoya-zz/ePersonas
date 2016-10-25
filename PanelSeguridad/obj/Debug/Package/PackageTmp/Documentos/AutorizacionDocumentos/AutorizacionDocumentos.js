@@ -1,6 +1,7 @@
 ﻿/*--------------- region de variables globales --------------------*/
 var Matrix_DocWork = [];
 var Matrix_Consecutivo = [];
+var Matrix_Doc_Verificacion = [];
 var Array_Documento_Hijo = [];
 var listDocAnexos = [];
 var Matrix_Documento = [];
@@ -23,6 +24,7 @@ var editID;
 
 var Nit_ID_proccess;
 var ConsecutivoNuevo;
+var Consecutivo_Empresa;
 var Formato_ID;
 var Secuencia_Padre;
 var Documento_ID;
@@ -46,6 +48,7 @@ $(document).ready(function () {
 
     transaccionAjax_MDocumento('MATRIX_DOCUMENTO');
     transaccionAjax_RutasOperacion('RUTAS_OPERACION');
+    transaccionAjax_MRDocVerif('MATRIX_R_DOC_VERIFICACION');
     transaccionAjax_MConsecutivo('MATRIX_CONSECUTIVOS');
     transaccionAjax_MVerificacion('MATRIX_VERIFICAR');
     transaccionAjax_MDocWork('MATIRXDOC_WORK');
@@ -63,6 +66,7 @@ $(document).ready(function () {
     $("#Img8").css("display", "none");
     $("#Img9").css("display", "none");
     $("#Img10").css("display", "none");
+    $("#TFile").css("display","none");
 
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
@@ -558,7 +562,8 @@ function ValideDocument(Secuencia, Ruta, Nombre, Nit) {
     $("#IF_Visor_View").attr("width", "100%");
     $("#IF_Visor_View").attr("height", "100%");
     $("#IF_Visor_View").attr("src", Ruta);
-    Search_Document(Secuencia, Nit);
+   
+   Search_Document(Secuencia, Nit);
 
 }
 
@@ -609,11 +614,36 @@ function Search_Document(secuencia, Nit) {
             var Consecutivo_ME = Matrix_DocWork[itemArray].Nombre_Save;
             Consecutivo_ME = Consecutivo_ME.split("_");
             Secuencia_Padre = Consecutivo_ME[4];
-            Documento_ID = Matrix_DocWork[itemArray].Documento_ID;
-            RutaDestino = Matrix_DocWork[itemArray].RutaDocumento;
-            Nit_ID_proccess = Matrix_DocWork[itemArray].Nit_ID;
-            Formato_ID = Matrix_DocWork[itemArray].Formato;
-            ContruyeName_Temp("TEMP", Consecutivo_ME[1], Matrix_DocWork[itemArray].DescripFormato);
+            Consecutivo_Empresa = Consecutivo_ME[1];
+             Nit_ID_proccess = Matrix_DocWork[itemArray].Nit_ID;
+          
+            Charge_Combos_Depend_Verificacion(Matrix_Doc_Verificacion, "Select_Doc_Verif", Nit, Matrix_DocWork[itemArray].Documento_ID,"");
+            break;
+        }
+    }
+   Change_Doc_Verificado();
+ }
+
+//mostramos el fileupload de documentos anexos 
+function Change_Doc_Verificado(){
+    $("#Select_Doc_Verif").change(function () {
+            var index_ID = $(this).val();
+            $("#TFile").css("display","inline-table");
+            Search_Document_Verificar(Nit_ID_proccess,index_ID);
+    });
+    
+}
+
+//busca los datos por el documento seleccionado seleccionado
+function Search_Document_Verificar(Nit, documento_ID) {
+
+    for (itemArray in Matrix_Documento) {
+        if (Matrix_Documento[itemArray].Documento_ID == documento_ID && Matrix_Documento[itemArray].Nit_ID == Nit) {
+            Documento_ID = Matrix_Documento[itemArray].Documento_ID;
+            RutaDestino = Matrix_Documento[itemArray].RutaDocumentoDestino;
+            Formato_ID = Matrix_Documento[itemArray].Formato_ID;
+            ContruyeName_Temp("TEMP", Consecutivo_Empresa, Matrix_Documento[itemArray].DescripFormato);
+            break;
         }
     }
 }
@@ -631,9 +661,10 @@ function SearchPadre(Index_Padre, Nit){
               $("#Vis_Secuencia_3").val(Matrix_DocWork[itemArray].TypeDocument_ID + " - " + Matrix_DocWork[itemArray].Document_ID + " - " + Matrix_DocWork[itemArray].Secuencia_Doc);
               $("#Vis_Documento_2").val(Matrix_DocWork[itemArray].Descripcion);
               $("#Vis_Documento_3").val(Matrix_DocWork[itemArray].Descripcion);
-          
+               
               RutaPadre = Matrix_DocWork[itemArray].RutaRelativaDocumento + Matrix_DocWork[itemArray].Nombre_Save + "." + Matrix_DocWork[itemArray].DescripFormato;
               NombrePadre = Matrix_DocWork[itemArray].Nombre_Save; 
+                break;
        }
     }
 }
@@ -716,6 +747,9 @@ function Add_Doc() {
     Array_Documento_Hijo.push(JsonDoc);
     Cont_Hijo = Cont_Hijo + 1;
     $("#Dialog_Visor_View_Validacion").dialog("close");
+    $("#TFile").css("display","none");
+    $("#Select_Doc_Verif").val("-1");
+    $('.C_Chosen').trigger('chosen:updated');
     Table_Doc_H();
 }
 
@@ -794,4 +828,7 @@ function TableDocument_Anexos(Secuencia) {
 //cierra el dialog de  captura de documentos hijos
 function CerrarDialogCap(){
     $("#Dialog_Visor_View_Validacion").dialog("close");
+    $("#TFile").css("display","none");
+    $("#Select_Doc_Verif").val("-1");
+    $('.C_Chosen').trigger('chosen:updated');
 }
