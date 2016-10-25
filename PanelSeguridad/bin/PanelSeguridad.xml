@@ -667,6 +667,12 @@ PanelSeguridad
 	<param name="vp_O_Obj"></param>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.RDoc_VerificacionSQLClass.Matrix_R_Documento_Verificacion">
+	<summary>
+ Carga matrix de relacion documentos verificacion
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.RutaDocumentosAjax.Consulta_RutaDocumentos">
 	<summary>
  traemos todos los datos para tabla RutaDocumentos (READ)
@@ -989,6 +995,11 @@ PanelSeguridad
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.AutorizacionDocumentosAjax.Cargar_Matrix_Verificacion">
+	<summary>
+ cara la matriz de  verificacion documento 
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AutorizacionDocumentosAjax.Cargar_Matrix_R_Doc_Verificacion">
 	<summary>
  cara la matriz de  verificacion documento 
  </summary>

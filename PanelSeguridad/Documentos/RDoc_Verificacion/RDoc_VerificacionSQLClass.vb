@@ -305,7 +305,20 @@ Public Class RDoc_VerificacionSQLClass
                 End While
 
             Case "Matrix"
+                'recorremos la consulta por la cantidad de datos en la BD
+                While ReadConsulta.Read
 
+                    Dim objRDoc_Verificacion As New RDoc_VerificacionClass
+                    'cargamos datos sobre el objeto de login
+                    objRDoc_Verificacion.Nit_ID = ReadConsulta.GetValue(0)
+                    objRDoc_Verificacion.Doc_ID = ReadConsulta.GetValue(1)
+                    objRDoc_Verificacion.Doc_ID_Verif = ReadConsulta.GetValue(2)
+                    objRDoc_Verificacion.DescripDoc = ReadConsulta.GetValue(3)
+                    objRDoc_Verificacion.DescripDoc_Verif = ReadConsulta.GetValue(4)
+                    'agregamos a la lista
+                    ObjListRDoc_Verificacion.Add(objRDoc_Verificacion)
+
+                End While
 
         End Select
 
@@ -314,6 +327,7 @@ Public Class RDoc_VerificacionSQLClass
         objConexBD.Close()
         'retornamos la consulta
         Return ObjListRDoc_Verificacion
+
 
     End Function
 
@@ -345,6 +359,31 @@ Public Class RDoc_VerificacionSQLClass
         Result = conex.IDis(StrQuery, "3")
 
         Return Result
+    End Function
+
+    ''' <summary>
+    ''' Carga matrix de relacion documentos verificacion
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Matrix_R_Documento_Verificacion()
+
+        Dim ObjList As New List(Of RDoc_VerificacionClass)
+        Dim StrQuery As String = ""
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("3")
+
+        Dim sql As New StringBuilder
+
+        sql.AppendLine(" SELECT RDV_Nit_ID, RDV_Documentos_ID, RDV_Documentos_ID_Verif, D_1.DOC_Descripcion, D_2.DOC_Descripcion  FROM R_DOCUMENTO_VERIFICACION  RDV" & _
+                                        " INNER JOIN DOCUMENTOS D_1 ON D_1.DOC_Documentos_ID = RDV.RDV_Documentos_ID " & _
+                                        " INNER JOIN DOCUMENTOS D_2 ON D_2.DOC_Documentos_ID = RDV.RDV_Documentos_ID_Verif ")
+        StrQuery = sql.ToString
+
+        ObjList = listRDoc_Verificacion(StrQuery, Conexion, "Matrix")
+
+        Return ObjList
+
     End Function
 
 #End Region

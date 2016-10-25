@@ -115,6 +115,28 @@ function charge_CatalogList(objCatalog, nameList, selector) {
     $('.C_Chosen').trigger('chosen:updated');
 }
 
+//carga los combps dependiendo del nit
+function Charge_Combos_Depend_Verificacion(Matrix, Selector, Nit, Doc_ID, Index_Edit) {
+
+    $('#' + Selector).empty();
+    var objList = $("[id$='" + Selector + "']");
+    for (Item in Matrix) {
+        if (Matrix[Item].Nit_ID == Nit && Matrix[Item].Doc_ID == Doc_ID) {
+            $("#" + Selector).append("<option value='" + Matrix[Item].Doc_ID_Verif + "'>" + Matrix[Item].Doc_ID_Verif + " - " + Matrix[Item].DescripDoc_Verif + "</option>");
+        }
+    }
+    $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
+
+    if (Index_Edit == "")
+        $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
+    else
+        $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
+
+    $("#" + Selector).trigger("liszt:updated");
+    $('.C_Chosen').trigger('chosen:updated');
+
+}
+
 
 //carga los combps dependiendo del nit
 function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
