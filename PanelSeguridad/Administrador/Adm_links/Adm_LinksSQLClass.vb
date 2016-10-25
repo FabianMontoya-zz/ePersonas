@@ -99,7 +99,7 @@ Public Class Adm_LinksSQLClass
         Dim StrQuery As String = ""
         sql.AppendLine("UPDATE LINKS SET " & _
                        " L_Descripcion ='" & vp_Obj_Link.Descripcion & "', " & _
-                       " L_Param1 =" & vp_Obj_Link.Param1 & ", " & _
+                       " L_Param1 ='" & vp_Obj_Link.Param1 & "', " & _
                        " L_Param2 ='" & vp_Obj_Link.Param2 & "', " & _
                        " L_Img ='" & vp_Obj_Link.Img & "', " & _
                        " l_LinkPag ='" & vp_Obj_Link.LinkPag & "' " & _

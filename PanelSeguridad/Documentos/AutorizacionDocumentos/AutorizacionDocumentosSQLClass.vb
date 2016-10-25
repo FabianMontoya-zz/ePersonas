@@ -295,7 +295,7 @@ Public Class AutorizacionDocumentosSQLClass
 
         Dim sql As New StringBuilder
 
-        sql.Append(" SELECT DDL_ID AS ID, DDL_ID +' - ' + DDLL_Descripcion AS DESCRIPCION FROM TC_DDL_TIPO WHERE DDL_Tabla = 'VERIFICACION'")
+        sql.Append(" SELECT DDL_ID AS ID, DDL_ID +' - ' + DDLL_Descripcion AS DESCRIPCION FROM TC_DDL_TIPO WHERE DDL_Tabla = 'VERIFICACION' AND DDL_ID <> 0")
         StrQuery = sql.ToString
 
         ObjListDroplist = SQLGeneral.listdrop(StrQuery, Conexion)
