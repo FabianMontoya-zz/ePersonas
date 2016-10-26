@@ -45,7 +45,7 @@ $(document).ready(function () {
 
 });
 
-//carga el combo de Area dependiente
+//carga el combo de nit dependiente
 function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {
         var index_ID = $(this).val();
@@ -70,6 +70,7 @@ function Change_Persona() {
                 break;
             }
         }
+        Valida_PersonaAsignacion();
     });
 }
 
@@ -81,6 +82,9 @@ function Valida_PersonaAsignacion() {
     }
     else {
         $("#Select_EmpresaNit_2").attr("disabled", "disabled");
+        $("#Select_EmpresaNit_2").val("-1");
+        $("#Select_Tarjeta").val("-1");
+    
         $("#Select_Tarjeta").attr("disabled", "disabled");
         $("#dialog").dialog("option", "title", "Ya Existe");
         $("#Mensaje_alert").text("La persona ya tiene una Tarjeta Asignada!");
@@ -88,6 +92,7 @@ function Valida_PersonaAsignacion() {
         $("#DE").css("display", "None");
         $("#SE").css("display", "none");
         $("#WE").css("display", "block");
+        Persona_Tiene = 0;
     }
     $('.C_Chosen').trigger('chosen:updated');
 
@@ -98,8 +103,6 @@ function btnSalir() {
     window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
 }
 
-
-
 //crear link en la BD
 function BtnCrear() {
 
@@ -107,9 +110,7 @@ function BtnCrear() {
     validate = validarCamposCrear();
 
     if (validate == 0) {
-        if ($("#Btnguardar").val() == "Guardar") {
-            transacionAjax_R_Persona_Tarjeta_create("crear");
-        }
+        transacionAjax_R_Persona_Tarjeta_create("crear");
     }
 }
 
