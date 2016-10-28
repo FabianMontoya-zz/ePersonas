@@ -102,6 +102,19 @@
     border-style: outset;
 }
 
+#TablaDatos_D_Max
+{
+    width: 860px;
+    height: 380px;
+    overflow: auto;
+    background-color: silver;
+    padding: 40px 30px;
+    border-radius: 20px;
+    border-color: gray;
+    border-width: 5px;
+    border-style: outset;
+}
+
 #TablaProductos_D
 {
     width: 985px;
@@ -172,7 +185,7 @@
 /*                                                           ESTILOS PAISES                                                               */
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
- #container_TRDoc_Verificacion, #container_TR_PuertaAcc_Area,#container_TPuertaAcceso,#container_TConsecutivos_General, #container_TConsecutivos, #container_TRGrpDoc_Doc, #container_TDocumento, #container_TRutaDocumentos, #container_TGrpDocumentos, #container_TCargo, #container_TProductos, #container_TTransacciones, #container_TTP_Activo, #container_TTP_Leasing, #container_TSActivo, #container_TActivo, #container_TSTP_Leasing, #container_TFasecolda, #container_TMonedaCot, #container_TPaises, #container_TMensajes, #container_TAyudas, #container_TCiudades, #container_TImpuesto_Gasto, #container_Tlink, #container_Trol, #container_TopcRol, #container_TUser, #container_TInf_Impuesto, #container_TPorcen_Descuentos, #container_TCliente, #container_TMonedaCod, #container_TArea, #container_TEmpleado, #container_TFestivo
+#container_TRDoc_Verificacion, #container_TR_PuertaAcc_Area, #container_TPuertaAcceso, #container_TConsecutivos_General, #container_TConsecutivos, #container_TRGrpDoc_Doc, #container_TDocumento, #container_TRutaDocumentos, #container_TGrpDocumentos, #container_TCargo, #container_TProductos, #container_TTransacciones, #container_TTP_Activo, #container_TTP_Leasing, #container_TSActivo, #container_TActivo, #container_TSTP_Leasing, #container_TFasecolda, #container_TMonedaCot, #container_TPaises, #container_TMensajes, #container_TAyudas, #container_TCiudades, #container_TImpuesto_Gasto, #container_Tlink, #container_Trol, #container_TopcRol, #container_TUser, #container_TInf_Impuesto, #container_TPorcen_Descuentos, #container_TCliente, #container_TMonedaCod, #container_TArea, #container_TEmpleado, #container_TFestivo
 {
     width: 800px;
     height: 238px;

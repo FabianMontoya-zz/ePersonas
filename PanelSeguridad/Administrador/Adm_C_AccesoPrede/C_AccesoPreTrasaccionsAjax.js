@@ -1,0 +1,261 @@
+﻿/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_CargaBusqueda(State) {
+    $.ajax({
+        url: "C_AccesoPreAjax.aspx",
+        type: "POST",
+        //crear json
+        data: { "action": State,
+            "tabla": 'R_PERSONAS_ACCESOS_PREDETER'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                ArrayCombo = [];
+            }
+            else {
+                ArrayCombo = JSON.parse(result);
+                charge_CatalogList(ArrayCombo, "DDLColumns", 1);
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_MTarjeta(State) {
+    $.ajax({
+        url: "C_AccesoPreAjax.aspx",
+        type: "POST",
+        //crear json
+        data: { "action": State,
+            "tabla": 'RUTA'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_Tarjeta = [];
+            }
+            else {
+                Matrix_Tarjeta = JSON.parse(result);
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_MPersona(State) {
+    $.ajax({
+        url: "C_AccesoPreAjax.aspx",
+        type: "POST",
+        //crear json
+        data: { "action": State,
+            "tabla": 'RUTA'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_Persona = [];
+            }
+            else {
+                Matrix_Persona = JSON.parse(result);
+            }
+        },
+        error: function () {
+        }
+    });
+}
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_MPAccesos(State) {
+    $.ajax({
+        url: "C_AccesoPreAjax.aspx",
+        type: "POST",
+        //crear json
+        data: { "action": State,
+            "tabla": 'RUTA'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_PAccesos = [];
+            }
+            else {
+                Matrix_PAccesos = JSON.parse(result);
+            }
+        },
+        error: function () {
+        }
+    });
+}
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_MPAcceso_Area(State) {
+    $.ajax({
+        url: "C_AccesoPreAjax.aspx",
+        type: "POST",
+        //crear json
+        data: { "action": State,
+            "tabla": 'RUTA'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_PAcceso_Area = [];
+            }
+            else {
+                Matrix_PAcceso_Area = JSON.parse(result);
+            }
+        },
+        error: function () {
+        }
+    });
+}
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_MRTP(State) {
+    $.ajax({
+        url: "C_AccesoPreAjax.aspx",
+        type: "POST",
+        //crear json
+        data: { "action": State,
+            "tabla": 'RUTA'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_RTP = [];
+            }
+            else {
+                Matrix_RTP = JSON.parse(result);
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_EmpresaNit(State) {
+    $.ajax({
+        url: "C_AccesoPreAjax.aspx",
+        type: "POST",
+        //crear json
+        data: { "action": State,
+            "tabla": 'CLIENTE'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                ArrayEmpresaNit = [];
+            }
+            else {
+                ArrayEmpresaNit = JSON.parse(result);
+                charge_CatalogList(ArrayEmpresaNit, "Select_EmpresaNit", 1);
+                charge_CatalogList(ArrayEmpresaNit, "Select_EmpresaNit_Ing", 1);
+                
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_Tipo_Ingreso(State) {
+    $.ajax({
+        url: "C_AccesoPreAjax.aspx",
+        type: "POST",
+        //crear json
+        data: { "action": State,
+            "tabla": 'CLIENTE'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                ArrayTipo_ing = [];
+            }
+            else {
+                ArrayTipo_ing = JSON.parse(result);
+                charge_CatalogList(ArrayTipo_ing, "Select_TypeIngreso", 1);
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+/*------------------------------ crear ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax
+function transacionAjax_UpdateEntrega(State) {
+    var StrPersona = $("#Select_Persona option:selected").html();
+    var SPersona = StrPersona.split("  -  ");
+    
+    undefined
+    $.ajax({
+        url: "C_AccesoPreAjax.aspx",
+        type: "POST",
+        //crear json
+        data: { "action": State,
+            "Nit_ID": $("#Select_EmpresaNit").val(),
+            "TDoc": SPersona[1],
+            "Doc": SPersona[0],
+            "Tarjeta": $("#Select_Tarjeta_Ent").val(),
+            "user": User.toUpperCase()
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            switch (result) {
+
+                case "Error":
+                    $("#dialog").dialog("option", "title", "Disculpenos :(");
+                    $("#Mensaje_alert").text("No se realizo  la Entrega de la tarjeta!");
+                    $("#dialog").dialog("open");
+                    $("#DE").css("display", "block");
+                    $("#SE").css("display", "none");
+                    $("#WE").css("display", "none");
+                    break;
+
+                case "Existe":
+                    $("#dialog").dialog("option", "title", "Ya Existe");
+                    $("#Mensaje_alert").text("El codigo ingresado ya existe en la base de datos!");
+                    $("#dialog").dialog("open");
+                    $("#DE").css("display", "None");
+                    $("#SE").css("display", "none");
+                    $("#WE").css("display", "block");
+                    break;
+
+                case "Exito":
+                    $("#dialog").dialog("option", "title", "Exito");
+                    $("#Mensaje_alert").text("La Entrega de la tarjeta fue generada exitosamente! ");
+                    $("#dialog").dialog("open");
+                    $("#DE").css("display", "none");
+                    $("#SE").css("display", "block");
+                    $("#WE").css("display", "none");
+                    transaccionAjax_MTarjeta('MATRIX_TARJETA');
+                    Clear();
+                    break;
+            }
+
+        },
+        error: function () {
+
+        }
+    });
+}
+

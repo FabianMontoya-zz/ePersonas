@@ -24,6 +24,9 @@ $(document).ready(function () {
         this.value = (this.value + '').replace(/[^0-9a-zA-Z]/g, '');
     });
 
+    $('.Hours').focus(function () {
+        this.value = "";
+    });
 });
 
 
@@ -225,6 +228,14 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
             }
             break;
 
+        case "Select_Persona_Enc":
+            for (Item in Matrix) {
+                if (Matrix[Item].Nit_ID == Nit) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Document_ID + "'>" + Matrix[Item].Nombre + "</option>");
+                }
+            }
+            break;
+
         case "Select_Contrato":
             for (Item in Matrix) {
                 if (Matrix[Item].Nit_ID == Nit) {
@@ -285,6 +296,14 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
             for (Item in Matrix) {
                 if ((Matrix[Item].Nit_ID == Nit) && (Matrix[Item].RequiereVerificacion == "N")) {
                     $("#" + Selector).append("<option value='" + Matrix[Item].Documento_ID + "'>" + Matrix[Item].Descripcion + "</option>");
+                }
+            }
+            break;
+
+        case "Select_AreaAcceso":
+            for (Item in Matrix) {
+                if (Matrix[Item].PuertaAcceso_ID == Nit) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Area_ID + "'>" + Matrix[Item].Area_ID + " - " + Matrix[Item].DescripArea + "</option>");
                 }
             }
             break;

@@ -152,7 +152,7 @@ function Change_Select_Tarjeta() {
     $("#Select_Tarjeta_Blo").change(function () {
         var index_ID = $(this).val();
         for (item in Matrix_RTP) {
-            if (Matrix_RTP[item].Tarjeta_ID = index_ID) {
+            if (Matrix_RTP[item].Tarjeta_ID == index_ID) {
                 $("#Select_Persona").val(Matrix_RTP[item].Document_ID);
                 $('.C_Chosen').trigger('chosen:updated');
                 break;

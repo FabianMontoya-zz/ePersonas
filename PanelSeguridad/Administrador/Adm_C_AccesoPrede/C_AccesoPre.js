@@ -2,6 +2,9 @@
 var Matrix_Tarjeta = [];
 var Matrix_Persona = [];
 var Matrix_RTP = [];
+var ArrayTipo_ing = [];
+var Matrix_PAccesos = [];
+var Matrix_PAcceso_Area = [];
 
 var ArrayR_Persona_Tarjeta = [];
 var ArrayR_Persona_TarjetaDep = [];
@@ -10,26 +13,47 @@ var estado;
 var editNit_ID;
 var editID;
 var editDocID;
+var Container_Tarjeta;
 /*--------------- region de variables globales --------------------*/
 
 //evento load de los Links
 $(document).ready(function () {
+
+    transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transaccionAjax_MPersona('MATRIX_PERSONA');
     transaccionAjax_MTarjeta('MATRIX_TARJETA');
     transaccionAjax_MRTP('MATRIX_RTP');
+    transaccionAjax_MPAccesos('MATRIX_PACCESOS');
+    transaccionAjax_MPAcceso_Area('MATRIX_PACCESO_AREA');
+
     transacionAjax_EmpresaNit('Cliente');
+    transacionAjax_Tipo_Ingreso('Tipo_Ing');
 
     Change_Select_Nit();
+    Change_Select_Persona();
     Change_Select_Tarjeta();
-
+    Change_Select_Vigencia();
+    
     $("#ESelect").css("display", "none");
     $("#Img1").css("display", "none");
     $("#Img2").css("display", "none");
     $("#Img3").css("display", "none");
     $("#Img5").css("display", "none");
+    $("#Img6").css("display", "none");
+    $("#Img7").css("display", "none");
+    $("#Img8").css("display", "none");
+    $("#Img9").css("display", "none");
+    $("#Img10").css("display", "none");
+    $("#Img11").css("display", "none");
+    $("#Img12").css("display", "none");
+    $("#Img13").css("display", "none");
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
     $("#WE").css("display", "none");
+    $("#T_Vigencia_Ing").css("display", "none");
+
+    $("#TablaDatos_D").css("display", "none");
+    $("#TablaConsulta").css("display", "none");
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
@@ -44,7 +68,95 @@ $(document).ready(function () {
         modal: true
     });
 
+    $(function () {
+        $("#TxtFinicial").datepicker({ dateFormat: 'yy-mm-dd' });
+        $("#txt_HIVigencia").timepicker();
+        $("#TxtFfinal").datepicker({ dateFormat: 'yy-mm-dd' });
+        $("#txt_HFVigencia").timepicker();
+    });
 });
+
+//salida del formulario
+function btnSalir() {
+    window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
+}
+//habilita el panel de crear o consulta
+function HabilitarPanel(opcion) {
+
+    switch (opcion) {
+
+        case "crear":
+            $("#TablaDatos_D").css("display", "inline-table");
+            $("#TablaConsulta").css("display", "none");
+            $("#Select_EmpresaNit").removeAttr("disabled");
+            $("#Txt_ID").removeAttr("disabled");
+            $("#Btnguardar").attr("value", "Guardar");
+            $('.C_Chosen').trigger('chosen:updated');
+            ResetError();
+            Clear();
+            estado = opcion;
+            break;
+
+        case "buscar":
+            $("#TablaDatos_D").css("display", "none");
+            $("#TablaConsulta").css("display", "inline-table");
+            $("#container_TConsecutivos").html("");
+            estado = opcion;
+            Clear();
+            break;
+
+        case "modificar":
+            $("#TablaDatos_D").css("display", "none");
+            $("#TablaConsulta").css("display", "inline-table");
+            $("#container_TConsecutivos").html("");
+            estado = opcion;
+            ResetError();
+            Clear();
+            break;
+
+        case "eliminar":
+            $("#TablaDatos_D").css("display", "none");
+            $("#TablaConsulta").css("display", "inline-table");
+            $("#container_TConsecutivos").html("");
+            estado = opcion;
+            Clear();
+            break;
+
+    }
+}
+
+//consulta del del crud(READ)
+function BtnConsulta() {
+
+    var filtro;
+    var ValidateSelect = ValidarDroplist();
+    var opcion;
+
+    if (ValidateSelect == 1) {
+        filtro = "N";
+        opcion = "ALL";
+        transacionAjax_Consecutivos("consulta", filtro, opcion);
+    }
+    else {
+        filtro = "S";
+        opcion = $("#DDLColumns").val();
+        transacionAjax_Consecutivos("consulta", filtro, opcion);
+    }
+
+}
+//validamos si han escogido una columna
+function ValidarDroplist() {
+    var flag;
+    var contenido = $("#DDLColumns").val();
+
+    if (contenido == '-1') {
+        flag = 1;
+    }
+    else {
+        flag = 0;
+    }
+    return flag;
+}
 
 //carga el combo de Area dependiente
 function Change_Select_Nit() {
@@ -53,12 +165,45 @@ function Change_Select_Nit() {
         Charge_Combos_Depend_Nit(Matrix_Persona, "Select_Persona", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Tarjeta, "Select_Tarjeta_Ent", index_ID, "");
         $("#Img5").css("display", "none");
-
     });
-    Change_Select_Persona();
+
+    $("#Select_EmpresaNit_Ing").change(function () {
+        var index_ID = $(this).val();
+        Charge_Combos_Depend_Nit(Matrix_PAccesos, "Select_PAcceso", index_ID, "");
+        Charge_Combos_Depend_Nit(Matrix_Persona, "Select_Persona_Enc", index_ID, "");
+        Change_Select_RPAA();
+    });
 }
 
-var Container_Tarjeta;
+//carga el combo de Area dependiente
+function Change_Select_Vigencia() {
+    $("#Select_CheckVigencia").change(function () {
+        var index_ID = $(this).val();
+
+        switch (index_ID) {
+            case "S":
+                $("#T_Vigencia_Ing").css("display", "inline-table");
+                break;
+
+            case "N":
+                $("#T_Vigencia_Ing").css("display", "none");
+                break;
+
+            default:
+                $("#T_Vigencia_Ing").css("display", "none");
+                break;
+        }
+    });
+}
+
+//valida los cambios del combo  de tarjeta y carga
+function Change_Select_RPAA() {
+    $("#Select_PAcceso").change(function () {
+        var index_ID = $(this).val();
+
+        Charge_Combos_Depend_Nit(Matrix_PAcceso_Area, "Select_AreaAcceso", index_ID, "");
+    });
+}
 
 //valida los cambios del combo  de tarjeta y carga
 function Change_Select_Persona() {
@@ -71,7 +216,7 @@ function Change_Select_Persona() {
             if (Matrix_RTP[item].Document_ID == index_ID) {
                 $("#Select_Tarjeta_Ent").val(Matrix_RTP[item].Tarjeta_ID);
                 Container_Tarjeta = "S";
-                break;
+                $('.C_Chosen').trigger('chosen:updated');
             }
         }
         ValidarAsignacion(Container_Tarjeta);
@@ -99,26 +244,7 @@ function ValidarAsignacion(Container_Tarjeta) {
         case "S":
             $("#Select_Tarjeta_Ent").removeAttr("disabled");
             $('.C_Chosen').trigger('chosen:updated');
-            ValidarEntregaTarjeta();
             break;
-    }
-
-}
-
-//valida si la persona ya tiene tarjeta entregada
-function ValidarEntregaTarjeta() {
-
-    var validaEntrega = $("#Select_Persona").val();
-    for (item in Matrix_Tarjeta) {
-        if (Matrix_Tarjeta[item].Document_ID_Entrega == validaEntrega) {
-            $("#dialog").dialog("option", "title", "Ya tiene Tarjeta!");
-            $("#Mensaje_alert").text("La persona seleccionada ya se le entrego tarjeta!");
-            $("#dialog").dialog("open");
-            $("#DE").css("display", "None");
-            $("#SE").css("display", "none");
-            $("#WE").css("display", "block");
-            break;
-        }
     }
 
 }
@@ -131,15 +257,9 @@ function Change_Select_Tarjeta() {
             if (Matrix_RTP[item].Tarjeta_ID == index_ID) {
                 $("#Select_Persona").val(Matrix_RTP[item].Document_ID);
                 $('.C_Chosen').trigger('chosen:updated');
-                break;
             }
         }
     });
-}
-
-//salida del formulario
-function btnSalir() {
-    window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
 }
 
 //crear link en la BD
