@@ -55,7 +55,8 @@ Public Class C_AccesoPreSQLClass
                                     " CASE	 SUBSTRING(RPAP.RPAP_Nit_ID,0,LEN(RPAP.RPAP_Nit_ID)) " & _
                                     "                 WHEN '' THEN 0 " & _
                                     "                ELSE SUBSTRING(RPAP.RPAP_Nit_ID,0,LEN(RPAP.RPAP_Nit_ID))   " & _
-                                    " END ")
+                                    " END " & _
+                                    " WHERE RPAP_Estado = '1'")
         Else
 
             If vp_S_Contenido = "ALL" Then
@@ -88,7 +89,8 @@ Public Class C_AccesoPreSQLClass
                                     " CASE	 SUBSTRING(RPAP.RPAP_Nit_ID,0,LEN(RPAP.RPAP_Nit_ID)) " & _
                                     "                 WHEN '' THEN 0 " & _
                                     "                ELSE SUBSTRING(RPAP.RPAP_Nit_ID,0,LEN(RPAP.RPAP_Nit_ID))   " & _
-                                    " END ")
+                                    " END " & _
+                                    " WHERE RPAP_Estado = '1'")
             Else
                 sql.Append(" SELECT  RPAP_Nit_ID, " & _
                                     " 			   RPAP_TypeDocument_ID, " & _
@@ -120,7 +122,8 @@ Public Class C_AccesoPreSQLClass
                                     "                 WHEN '' THEN 0 " & _
                                     "                ELSE SUBSTRING(RPAP.RPAP_Nit_ID,0,LEN(RPAP.RPAP_Nit_ID))   " & _
                                     " END " & _
-                                    " WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
+                                    " WHERE RPAP_Estado = '1'" & _
+                                    " AND " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
             End If
         End If
 
@@ -200,7 +203,7 @@ Public Class C_AccesoPreSQLClass
     End Function
 
     ''' <summary>
-    ''' funcion que crea el query para la modificacion del Documento (UPDATE)
+    ''' funcion que crea el query para la modificacion del C_AccesoPre (UPDATE)
     ''' </summary>
     ''' <param name="vp_Obj_C_AccesoPre"></param>
     ''' <returns></returns>
@@ -238,6 +241,42 @@ Public Class C_AccesoPreSQLClass
 
     End Function
 
+    ''' <summary>
+    ''' funcion que crea el query para la eliminacion del C_AccesoPre (DELETE)
+    ''' </summary>
+    ''' <param name="vp_Obj_C_AccesoPre"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function EraseC_AccesoPre(ByVal vp_Obj_C_AccesoPre As C_AccesoPreClass)
+
+        Dim conex As New Conector
+        Dim Result As String = ""
+        ' definiendo los objetos
+        Dim sql As New StringBuilder
+        Dim StrQuery As String
+        Dim SQL_general As New GeneralSQLClass
+
+        sql.AppendLine("UPDATE R_PERSONAS_ACCESOS_PREDETER SET " & _
+                       " RPAP_Estado ='" & vp_Obj_C_AccesoPre.Estado & "', " & _
+                       " RPAP_Usuario_Eliminacion ='" & vp_Obj_C_AccesoPre.UsuarioEliminacion & "', " & _
+                       " RPAP_FechaEliminacion ='" & vp_Obj_C_AccesoPre.FechaEliminacion & "' " & _
+                       " WHERE RPAP_Nit_ID = '" & vp_Obj_C_AccesoPre.Nit_ID & "'" & _
+                       " AND RPAP_TypeDocument_ID = '" & vp_Obj_C_AccesoPre.TypeDocument_ID & "'" & _
+                       " AND RPAP_Document_ID = '" & vp_Obj_C_AccesoPre.Document_ID & "'" & _
+                       " AND RPAP_Tarjeta_ID = '" & vp_Obj_C_AccesoPre.Tarjeta_ID & "'" & _
+                       " AND RPAP_Nit_ID_EmpVisita = '" & vp_Obj_C_AccesoPre.Nit_ID_EmpVisita & "'" & _
+                       " AND RPAP_PuertaAcceso_ID = '" & vp_Obj_C_AccesoPre.PuertaAcceso_ID & "'" & _
+                       " AND RPAP_Area_ID = '" & vp_Obj_C_AccesoPre.Area_ID & "'" & _
+                       " AND RPAP_TypeDocument_ID_Per_Encargada = '" & vp_Obj_C_AccesoPre.TypeDocument_ID_Per_Encargada & "'" & _
+                       " AND RPAP_Document_ID_Per_Encargada = '" & vp_Obj_C_AccesoPre.Document_ID_Per_Encargada & "'")
+        StrQuery = sql.ToString
+        Result = conex.StrInsert_and_Update_All(StrQuery, "1")
+
+        Return Result
+
+    End Function
+
+ 
 
 #End Region
 

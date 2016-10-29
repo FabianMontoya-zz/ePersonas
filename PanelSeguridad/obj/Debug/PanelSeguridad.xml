@@ -480,6 +480,11 @@ To modify move field declaration from designer file to code-behind file.
  funcion que actualiza en la tabla C_AccesoPre (UPDATE)
  </summary>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_AccesoPreAjax.EraseC_AccesoPre">
+	<summary>
+ funcion que elimina en la tabla C_AccesoPre (DELETE)
+ </summary>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.C_AccesoPreAjax.CargarDroplist">
 	<summary>
  funcion que carga el objeto DDL Links
@@ -737,7 +742,14 @@ To modify move field declaration from designer file to code-behind file.
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.C_AccesoPreSQLClass.UpdateC_AccesoPre(PanelSeguridad.C_AccesoPreClass)">
 	<summary>
- funcion que crea el query para la modificacion del Documento (UPDATE)
+ funcion que crea el query para la modificacion del C_AccesoPre (UPDATE)
+ </summary>
+	<param name="vp_Obj_C_AccesoPre"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_AccesoPreSQLClass.EraseC_AccesoPre(PanelSeguridad.C_AccesoPreClass)">
+	<summary>
+ funcion que crea el query para la eliminacion del C_AccesoPre (DELETE)
  </summary>
 	<param name="vp_Obj_C_AccesoPre"></param>
 	<returns></returns>

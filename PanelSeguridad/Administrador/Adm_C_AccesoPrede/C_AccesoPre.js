@@ -13,7 +13,14 @@ var ArrayR_Persona_TarjetaDep = [];
 var estado;
 var editNit_ID;
 var editID;
-var editDocID;
+var editTDoc;
+var editDoc;
+var editTarjeta;
+var editNit_Ing_ID;
+var editPuertaAcceso_ID;
+var editAreaAcceso_ID;
+var editTDoc_Enc;
+var editDoc_Enc;
 var Container_Tarjeta;
 /*--------------- region de variables globales --------------------*/
 
@@ -81,6 +88,12 @@ $(document).ready(function () {
 function btnSalir() {
     window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
 }
+
+//elimina de la BD
+function BtnElimina() {
+    transacionAjax_Delete_AccesoPredet("elimina");
+}
+
 //habilita el panel de crear o consulta
 function HabilitarPanel(opcion) {
 
@@ -239,6 +252,14 @@ function Table_Grid() {
 function Eliminar(Index) {
 
     editNit_ID = ArrayAccesoPredet[Index].Nit_ID;
+    editTDoc = ArrayAccesoPredet[Index].TypeDocument_ID;
+    editDoc = ArrayAccesoPredet[Index].Document_ID;
+    editTarjeta = ArrayAccesoPredet[Index].Tarjeta_ID;
+    editNit_Ing_ID = ArrayAccesoPredet[Index].Nit_ID_EmpVisita;
+    editPuertaAcceso_ID = ArrayAccesoPredet[Index].PuertaAcceso_ID;
+    editAreaAcceso_ID = ArrayAccesoPredet[Index].Area_ID;
+    editTDoc_Enc = ArrayAccesoPredet[Index].TypeDocument_ID_Per_Encargada;
+    editDoc_Enc = ArrayAccesoPredet[Index].Document_ID_Per_Encargada;
 
     $("#dialog_eliminar").dialog("option", "title", "Eliminar?");
     $("#dialog_eliminar").dialog("open");
@@ -307,7 +328,7 @@ function Clear() {
     $("#TxtFfinal").val("");
     $("#txt_HFVigencia").val("");
     $("#T_Vigencia_Ing").css("display", "none");
-        
+
     $('.C_Chosen').trigger('chosen:updated');
 }
 

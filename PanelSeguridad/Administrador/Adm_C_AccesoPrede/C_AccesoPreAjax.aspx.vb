@@ -45,7 +45,7 @@ Public Class C_AccesoPreAjax
                     UpdateC_AccesoPre()
 
                 Case "elimina"
-                    ' EraseC_AccesoPre()
+                    EraseC_AccesoPre()
 
             End Select
 
@@ -108,14 +108,14 @@ Public Class C_AccesoPreAjax
         objC_AccesoPre.Area_ID = Request.Form("AreaAcceso_ID")
         objC_AccesoPre.TypeDocument_ID_Per_Encargada = Request.Form("TDoc_Enc")
         objC_AccesoPre.Document_ID_Per_Encargada = Request.Form("Doc_Enc")
-        objC_AccesoPre.FechaInicio_Vigencia = Request.Form("FI")
-        objC_AccesoPre.HoraInicio = Request.Form("HI")
-
+      
         'validamos si la llave existe
         vl_s_IDxiste = SQL_C_AccesoPre.Consulta_Repetido(objC_AccesoPre)
 
         If vl_s_IDxiste = 0 Then
 
+            objC_AccesoPre.FechaInicio_Vigencia = Request.Form("FI")
+            objC_AccesoPre.HoraInicio = Request.Form("HI")
             objC_AccesoPre.ControlVigencia = Request.Form("CheckVigencia")
             objC_AccesoPre.FechaFin_Vigencia = Request.Form("FF")
             objC_AccesoPre.HoraFin = Request.Form("HF")
@@ -176,6 +176,38 @@ Public Class C_AccesoPreAjax
 
         Response.Write(result)
 
+    End Sub
+
+    ''' <summary>
+    ''' funcion que elimina en la tabla C_AccesoPre (DELETE)
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub EraseC_AccesoPre()
+
+        Dim objC_AccesoPre As New C_AccesoPreClass
+        Dim SQL_C_AccesoPre As New C_AccesoPreSQLClass
+        Dim ObjListC_AccesoPre As New List(Of C_AccesoPreClass)
+
+        Dim result As String
+
+        objC_AccesoPre.Nit_ID = Request.Form("Nit_ID")
+        objC_AccesoPre.TypeDocument_ID = Request.Form("TDoc")
+        objC_AccesoPre.Document_ID = Request.Form("Doc")
+        objC_AccesoPre.Tarjeta_ID = Request.Form("Tarjeta")
+        objC_AccesoPre.Nit_ID_EmpVisita = Request.Form("Nit_Ing_ID")
+        objC_AccesoPre.PuertaAcceso_ID = Request.Form("PuertaAcceso_ID")
+        objC_AccesoPre.Area_ID = Request.Form("AreaAcceso_ID")
+        objC_AccesoPre.TypeDocument_ID_Per_Encargada = Request.Form("TDoc_Enc")
+        objC_AccesoPre.Document_ID_Per_Encargada = Request.Form("Doc_Enc")
+
+        objC_AccesoPre.Estado = 2
+
+        objC_AccesoPre.UsuarioEliminacion = Request.Form("user")
+        objC_AccesoPre.FechaEliminacion = Date.Now
+
+        result = SQL_C_AccesoPre.EraseC_AccesoPre(objC_AccesoPre)
+
+        Response.Write(result)
     End Sub
 
 #End Region

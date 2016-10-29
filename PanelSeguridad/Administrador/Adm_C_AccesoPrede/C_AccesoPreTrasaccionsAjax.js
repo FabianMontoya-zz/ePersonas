@@ -331,7 +331,7 @@ function transacionAjax_Insert_AccesoPredet(State) {
                         $("#WE").css("display", "none");
                         transaccionAjax_MTarjeta('MATRIX_TARJETA');
                         Clear();
-                     }
+                    }
                     else {
                         $("#dialog").dialog("option", "title", "Exito");
                         $("#Mensaje_alert").text("El Acceso Predeterminado fue generado exitosamente! ");
@@ -342,7 +342,7 @@ function transacionAjax_Insert_AccesoPredet(State) {
                         transaccionAjax_MTarjeta('MATRIX_TARJETA');
                         Clear();
                     }
-                   
+
                     break;
             }
 
@@ -353,3 +353,58 @@ function transacionAjax_Insert_AccesoPredet(State) {
     });
 }
 
+/*------------------------------ eliminar ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax
+function transacionAjax_Delete_AccesoPredet(State) {
+
+    $.ajax({
+        url: "C_AccesoPreAjax.aspx",
+        type: "POST",
+        //crear json
+        data: { "action": State,
+            "Nit_ID": editNit_ID,
+            "TDoc": editTDoc,
+            "Doc": editDoc,
+            "Tarjeta": editTarjeta,
+            "Nit_Ing_ID": editNit_Ing_ID,
+            "PuertaAcceso_ID": editPuertaAcceso_ID,
+            "AreaAcceso_ID": editAreaAcceso_ID,
+            "TDoc_Enc": editTDoc_Enc,
+            "Doc_Enc": editDoc_Enc,
+            "user": User.toUpperCase()
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            switch (result) {
+
+                case "Error":
+                    $("#dialog").dialog("option", "title", "Disculpenos :(");
+                    $("#Mensaje_alert").text("No se elimino El Acceso Predeterminado!");
+                    $("#dialog").dialog("open");
+                    $("#DE").css("display", "block");
+                    $("#SE").css("display", "none");
+                    $("#WE").css("display", "none");
+                    $("#dialog_eliminar").dialog("close");
+                    break;
+
+                case "Exito":
+                    $("#dialog_eliminar").dialog("close");
+                    $("#dialog").dialog("option", "title", "Exito");
+                    $("#Mensaje_alert").text("El Acceso Predeterminado fue eliminado exitosamente! ");
+                    $("#dialog").dialog("open");
+                    $("#DE").css("display", "none");
+                    $("#SE").css("display", "block");
+                    $("#WE").css("display", "none");
+                    $("#dialog_eliminar").dialog("close");
+                    transacionAjax_AccesoPredet("consulta", "N", "ALL");
+                    Clear();
+                    break;
+            }
+
+        },
+        error: function () {
+
+        }
+    });
+
+}
