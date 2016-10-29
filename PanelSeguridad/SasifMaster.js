@@ -313,11 +313,20 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
 
     $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
 
-    if (Index_Edit == "")
-        $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
-    else
-        $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
+    switch (Index_Edit) {
+        case "":
+            $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
+            break;
 
+        case "0":
+            $("#" + Selector + " option[value= '0'] ").attr("selected", true);
+            break;
+
+        default:
+            $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
+            break;
+    }
+    
     $("#" + Selector).trigger("liszt:updated");
     $('.C_Chosen').trigger('chosen:updated');
 

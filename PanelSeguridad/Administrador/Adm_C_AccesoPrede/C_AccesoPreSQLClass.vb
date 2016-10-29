@@ -48,6 +48,7 @@ Public Class C_AccesoPreSQLClass
                                     " 			   RPAP_Usuario_Eliminacion, " & _
                                     " 			   RPAP_FechaEliminacion, " & _
                                     "              C.CLI_Nombre, " & _
+                                    "              RPAP_HorarioIngreso, " & _
                                     " 			  ROW_NUMBER() OVER(ORDER BY RPAP_Nit_ID  DESC) AS Index_C_AccesoPre " & _
                                     " FROM R_PERSONAS_ACCESOS_PREDETER  RPAP " & _
                                     " LEFT JOIN " & BD_Param & ".dbo.CLIENTE C ON C.CLI_Document_ID =  " & _
@@ -80,6 +81,7 @@ Public Class C_AccesoPreSQLClass
                                     " 			   RPAP_Usuario_Eliminacion, " & _
                                     " 			   RPAP_FechaEliminacion, " & _
                                     "              C.CLI_Nombre, " & _
+                                    "              RPAP_HorarioIngreso, " & _
                                     " 			  ROW_NUMBER() OVER(ORDER BY RPAP_Nit_ID  DESC) AS Index_C_AccesoPre " & _
                                     " FROM R_PERSONAS_ACCESOS_PREDETER  RPAP " & _
                                     " LEFT JOIN " & BD_Param & ".dbo.CLIENTE C ON C.CLI_Document_ID =  " & _
@@ -110,6 +112,7 @@ Public Class C_AccesoPreSQLClass
                                     " 			   RPAP_Usuario_Eliminacion, " & _
                                     " 			   RPAP_FechaEliminacion, " & _
                                     "              C.CLI_Nombre, " & _
+                                    "              RPAP_HorarioIngreso, " & _
                                     " 			  ROW_NUMBER() OVER(ORDER BY RPAP_Nit_ID  DESC) AS Index_C_AccesoPre " & _
                                     " FROM R_PERSONAS_ACCESOS_PREDETER  RPAP " & _
                                     " LEFT JOIN " & BD_Param & ".dbo.CLIENTE C ON C.CLI_Document_ID =  " & _
@@ -160,6 +163,7 @@ Public Class C_AccesoPreSQLClass
             "RPAP_FechaFin_Vigencia," & _
             "RPAP_HoraFin," & _
             "RPAP_Estado," & _
+            "RPAP_HorarioIngreso, " & _
             "RPAP_Usuario_Creacion," & _
             "RPAP_FechaCreacion," & _
             "RPAP_Usuario_Actualizacion," & _
@@ -181,6 +185,7 @@ Public Class C_AccesoPreSQLClass
         sql.AppendLine("'" & vp_Obj_C_AccesoPre.FechaFin_Vigencia & "',")
         sql.AppendLine("'" & vp_Obj_C_AccesoPre.HoraFin & "',")
         sql.AppendLine("'" & vp_Obj_C_AccesoPre.Estado & "',")
+        sql.AppendLine("'" & vp_Obj_C_AccesoPre.TipoIngreso & "',")
         sql.AppendLine("'" & vp_Obj_C_AccesoPre.UsuarioCreacion & "',")
         sql.AppendLine("'" & vp_Obj_C_AccesoPre.FechaCreacion & "',")
         sql.AppendLine("'" & vp_Obj_C_AccesoPre.UsuarioActualizacion & "',")
@@ -193,6 +198,46 @@ Public Class C_AccesoPreSQLClass
         Return Result
 
     End Function
+
+    ''' <summary>
+    ''' funcion que crea el query para la modificacion del Documento (UPDATE)
+    ''' </summary>
+    ''' <param name="vp_Obj_C_AccesoPre"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function UpdateC_AccesoPre(ByVal vp_Obj_C_AccesoPre As C_AccesoPreClass)
+
+        Dim conex As New Conector
+        Dim Result As String
+        ' definiendo los objetos
+        Dim sql As New StringBuilder
+        Dim StrQuery As String = ""
+        sql.AppendLine("UPDATE R_PERSONAS_ACCESOS_PREDETER SET " & _
+                       " RPAP_CotrolVigencia ='" & vp_Obj_C_AccesoPre.ControlVigencia & "', " & _
+                       " RPAP_FechaInicio_Vigencia ='" & vp_Obj_C_AccesoPre.FechaInicio_Vigencia & "', " & _
+                       " RPAP_HoraInicio ='" & vp_Obj_C_AccesoPre.HoraInicio & "', " & _
+                       " RPAP_FechaFin_Vigencia ='" & vp_Obj_C_AccesoPre.FechaFin_Vigencia & "', " & _
+                       " RPAP_HoraFin ='" & vp_Obj_C_AccesoPre.HoraFin & "', " & _
+                       " RPAP_HorarioIngreso ='" & vp_Obj_C_AccesoPre.TipoIngreso & "', " & _
+                        " RPAP_Usuario_Actualizacion ='" & vp_Obj_C_AccesoPre.UsuarioActualizacion & "', " & _
+                       " RPAP_FechaActualizacion ='" & vp_Obj_C_AccesoPre.FechaActualizacion & "' " & _
+                       " WHERE RPAP_Nit_ID = '" & vp_Obj_C_AccesoPre.Nit_ID & "'" & _
+                       " AND RPAP_TypeDocument_ID = '" & vp_Obj_C_AccesoPre.TypeDocument_ID & "'" & _
+                       " AND RPAP_Document_ID = '" & vp_Obj_C_AccesoPre.Document_ID & "'" & _
+                       " AND RPAP_Tarjeta_ID = '" & vp_Obj_C_AccesoPre.Tarjeta_ID & "'" & _
+                       " AND RPAP_Nit_ID_EmpVisita = '" & vp_Obj_C_AccesoPre.Nit_ID_EmpVisita & "'" & _
+                       " AND RPAP_PuertaAcceso_ID = '" & vp_Obj_C_AccesoPre.PuertaAcceso_ID & "'" & _
+                       " AND RPAP_Area_ID = '" & vp_Obj_C_AccesoPre.Area_ID & "'" & _
+                       " AND RPAP_TypeDocument_ID_Per_Encargada = '" & vp_Obj_C_AccesoPre.TypeDocument_ID_Per_Encargada & "'" & _
+                       " AND RPAP_Document_ID_Per_Encargada = '" & vp_Obj_C_AccesoPre.Document_ID_Per_Encargada & "'")
+        StrQuery = sql.ToString
+
+        Result = conex.StrInsert_and_Update_All(StrQuery, "1")
+
+        Return Result
+
+    End Function
+
 
 #End Region
 
@@ -284,7 +329,8 @@ Public Class C_AccesoPreSQLClass
                     If Not (IsDBNull(ReadConsulta.GetValue(20))) Then objC_AccesoPre.FechaEliminacion = ReadConsulta.GetValue(20) Else objC_AccesoPre.FechaEliminacion = ""
 
                     objC_AccesoPre.DescripEmpresa = ReadConsulta.GetValue(21)
-                    objC_AccesoPre.Index = ReadConsulta.GetValue(22)
+                    objC_AccesoPre.TipoIngreso = ReadConsulta.GetValue(22)
+                    objC_AccesoPre.Index = ReadConsulta.GetValue(23)
 
                     'agregamos a la lista
                     ObjListC_AccesoPre.Add(objC_AccesoPre)
@@ -343,9 +389,7 @@ Public Class C_AccesoPreSQLClass
                        " AND RPAP_PuertaAcceso_ID = '" & vp_O_Obj.PuertaAcceso_ID & "'" & _
                        " AND RPAP_Area_ID = '" & vp_O_Obj.Area_ID & "'" & _
                        " AND RPAP_TypeDocument_ID_Per_Encargada = '" & vp_O_Obj.TypeDocument_ID_Per_Encargada & "'" & _
-                       " AND RPAP_Document_ID_Per_Encargada = '" & vp_O_Obj.Document_ID_Per_Encargada & "'" & _
-                       " AND RPAP_FechaInicio_Vigencia = '" & vp_O_Obj.FechaInicio_Vigencia & "'" & _
-                       " AND RPAP_HoraInicio = '" & vp_O_Obj.HoraInicio & "'")
+                       " AND RPAP_Document_ID_Per_Encargada = '" & vp_O_Obj.Document_ID_Per_Encargada & "'" )
         StrQuery = sql.ToString
 
         Result = conex.IDis(StrQuery, "1")

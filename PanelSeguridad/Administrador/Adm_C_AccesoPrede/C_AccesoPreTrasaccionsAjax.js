@@ -305,7 +305,7 @@ function transacionAjax_Insert_AccesoPredet(State) {
 
                 case "Error":
                     $("#dialog").dialog("option", "title", "Disculpenos :(");
-                    $("#Mensaje_alert").text("No se realizo  la Entrega de la tarjeta!");
+                    $("#Mensaje_alert").text("No se realizo  El Acceso Predeterminado!");
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "block");
                     $("#SE").css("display", "none");
@@ -322,14 +322,27 @@ function transacionAjax_Insert_AccesoPredet(State) {
                     break;
 
                 case "Exito":
-                    $("#dialog").dialog("option", "title", "Exito");
-                    $("#Mensaje_alert").text("La Entrega de la tarjeta fue generada exitosamente! ");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "none");
-                    $("#SE").css("display", "block");
-                    $("#WE").css("display", "none");
-                    transaccionAjax_MTarjeta('MATRIX_TARJETA');
-                    Clear();
+                    if (estado == "modificar") {
+                        $("#dialog").dialog("option", "title", "Exito");
+                        $("#Mensaje_alert").text("El Acceso Predeterminado fue Actualizado exitosamente! ");
+                        $("#dialog").dialog("open");
+                        $("#DE").css("display", "none");
+                        $("#SE").css("display", "block");
+                        $("#WE").css("display", "none");
+                        transaccionAjax_MTarjeta('MATRIX_TARJETA');
+                        Clear();
+                     }
+                    else {
+                        $("#dialog").dialog("option", "title", "Exito");
+                        $("#Mensaje_alert").text("El Acceso Predeterminado fue generado exitosamente! ");
+                        $("#dialog").dialog("open");
+                        $("#DE").css("display", "none");
+                        $("#SE").css("display", "block");
+                        $("#WE").css("display", "none");
+                        transaccionAjax_MTarjeta('MATRIX_TARJETA');
+                        Clear();
+                    }
+                   
                     break;
             }
 

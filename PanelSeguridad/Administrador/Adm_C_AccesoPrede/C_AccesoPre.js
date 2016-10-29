@@ -1,4 +1,4 @@
-﻿/*--------------- region de variables globales --------------------*/
+﻿/*-----------2---- region de variables globales --------------------*/
 var Matrix_Tarjeta = [];
 var Matrix_Persona = [];
 var Matrix_RTP = [];
@@ -94,6 +94,7 @@ function HabilitarPanel(opcion) {
             $("#Btnguardar").attr("value", "Guardar");
             $('.C_Chosen').trigger('chosen:updated');
             ResetError();
+            EnableControls();
             Clear();
             estado = opcion;
             break;
@@ -247,6 +248,7 @@ function Eliminar(Index) {
 // muestra el registro a editar
 function Editar(Index) {
 
+    console.log(Index);
     $("#TablaDatos_D").css("display", "inline-table");
     $("#TablaConsulta").css("display", "none");
 
@@ -254,26 +256,38 @@ function Editar(Index) {
 
     $("#Select_EmpresaNit").val(ArrayAccesoPredet[Index].Nit_ID);
     $("#Select_EmpresaNit_Ing").val(ArrayAccesoPredet[Index].Nit_ID_EmpVisita);
-
-    $("#Select_EmpresaNit").attr("disabled", "disabled");
-    $("#Select_EmpresaNit_Ing").attr("disabled", "disabled");
+    $("#Select_CheckVigencia").val(ArrayAccesoPredet[Index].ControlVigencia);
+    $("#Select_TypeIngreso").val(ArrayAccesoPredet[Index].TipoIngreso);
 
     Charge_Combos_Depend_Nit(Matrix_Persona, "Select_Persona", ArrayAccesoPredet[Index].Nit_ID, ArrayAccesoPredet[Index].Document_ID);
     Charge_Combos_Depend_Nit(Matrix_Tarjeta, "Select_Tarjeta_Ent", ArrayAccesoPredet[Index].Nit_ID, ArrayAccesoPredet[Index].Tarjeta_ID);
-    $("#Select_Persona").attr("disabled", "disabled");
-    $("#Select_Tarjeta_Ent").attr("disabled", "disabled");
 
     Charge_Combos_Depend_Nit(Matrix_PAccesos, "Select_PAcceso", ArrayAccesoPredet[Index].Nit_ID_EmpVisita, ArrayAccesoPredet[Index].PuertaAcceso_ID);
     Charge_Combos_Depend_Nit(Matrix_Persona, "Select_Persona_Enc", ArrayAccesoPredet[Index].Nit_ID_EmpVisita, ArrayAccesoPredet[Index].Document_ID_Per_Encargada);
-    $("#Select_PAcceso").attr("disabled", "disabled");
-    $("#Select_Persona_Enc").attr("disabled", "disabled");
 
     Charge_Combos_Depend_Nit(Matrix_PAcceso_Area, "Select_AreaAcceso", ArrayAccesoPredet[Index].PuertaAcceso_ID, ArrayAccesoPredet[Index].Area_ID);
-    $("#Select_AreaAcceso").attr("disabled", "disabled");
 
     $("#Btnguardar").attr("value", "Actualizar");
-
     $('.C_Chosen').trigger('chosen:updated');
+
+    switch (ArrayAccesoPredet[Index].ControlVigencia) {
+        case "S":
+            $("#T_Vigencia_Ing").css("display", "inline-table");
+            $("#TxtFinicial").val(ArrayAccesoPredet[Index].FechaInicio_Vigencia);
+            $("#txt_HIVigencia").val(ArrayAccesoPredet[Index].HoraInicio);
+            $("#TxtFfinal").val(ArrayAccesoPredet[Index].FechaFin_Vigencia);
+            $("#txt_HFVigencia").val(ArrayAccesoPredet[Index].HoraFin);
+            break;
+
+        case "N":
+            $("#T_Vigencia_Ing").css("display", "none");
+            break;
+
+        default:
+            $("#T_Vigencia_Ing").css("display", "none");
+            break;
+    }
+    DisableControls();
 }
 
 //limpiar campos
@@ -281,7 +295,42 @@ function Clear() {
     $("#Select_EmpresaNit").val("-1");
     $("#Select_Persona").val("-1");
     $("#Select_Tarjeta_Ent").val("-1");
+    $("#Select_CheckVigencia").val("-1");
+    $("#Select_TypeIngreso").val("-1");
+    $("#Select_EmpresaNit_Ing").val("-1");
+    $("#Select_PAcceso").val("-1");
+    $("#Select_Persona_Enc").val("-1");
+    $("#Select_AreaAcceso").val("-1");
 
+    $("#TxtFinicial").val("");
+    $("#txt_HIVigencia").val("");
+    $("#TxtFfinal").val("");
+    $("#txt_HFVigencia").val("");
+    $("#T_Vigencia_Ing").css("display", "none");
+        
     $('.C_Chosen').trigger('chosen:updated');
+}
 
+//bloquear controles
+function DisableControls() {
+    $("#Select_EmpresaNit").attr("disabled", "disabled");
+    $("#Select_EmpresaNit_Ing").attr("disabled", "disabled");
+    $("#Select_Persona").attr("disabled", "disabled");
+    $("#Select_Tarjeta_Ent").attr("disabled", "disabled");
+    $("#Select_PAcceso").attr("disabled", "disabled");
+    $("#Select_Persona_Enc").attr("disabled", "disabled");
+    $("#Select_AreaAcceso").attr("disabled", "disabled");
+    $('.C_Chosen').trigger('chosen:updated');
+}
+
+//bloquear controles
+function EnableControls() {
+    $("#Select_EmpresaNit").removeAttr("disabled");
+    $("#Select_EmpresaNit_Ing").removeAttr("disabled");
+    $("#Select_Persona").removeAttr("disabled");
+    $("#Select_Tarjeta_Ent").removeAttr("disabled");
+    $("#Select_PAcceso").removeAttr("disabled");
+    $("#Select_Persona_Enc").removeAttr("disabled");
+    $("#Select_AreaAcceso").removeAttr("disabled");
+    $('.C_Chosen').trigger('chosen:updated');
 }

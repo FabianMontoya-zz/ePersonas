@@ -41,6 +41,12 @@ Public Class C_AccesoPreAjax
                 Case "crear"
                     InsertC_AccesoPre()
 
+                Case "modificar"
+                    UpdateC_AccesoPre()
+
+                Case "elimina"
+                    ' EraseC_AccesoPre()
+
             End Select
 
         End If
@@ -129,6 +135,46 @@ Public Class C_AccesoPreAjax
             result = "Existe"
             Response.Write(result)
         End If
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que actualiza en la tabla C_AccesoPre (UPDATE)
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub UpdateC_AccesoPre()
+
+        Dim objC_AccesoPre As New C_AccesoPreClass
+        Dim SQL_C_AccesoPre As New C_AccesoPreSQLClass
+        Dim ObjListC_AccesoPre As New List(Of C_AccesoPreClass)
+
+        Dim result As String
+        objC_AccesoPre.Nit_ID = Request.Form("Nit_ID")
+        objC_AccesoPre.TypeDocument_ID = Request.Form("TDoc")
+        objC_AccesoPre.Document_ID = Request.Form("Doc")
+        objC_AccesoPre.Tarjeta_ID = Request.Form("Tarjeta")
+        objC_AccesoPre.Nit_ID_EmpVisita = Request.Form("Nit_Ing_ID")
+        objC_AccesoPre.PuertaAcceso_ID = Request.Form("PuertaAcceso_ID")
+        objC_AccesoPre.Area_ID = Request.Form("AreaAcceso_ID")
+        objC_AccesoPre.TypeDocument_ID_Per_Encargada = Request.Form("TDoc_Enc")
+        objC_AccesoPre.Document_ID_Per_Encargada = Request.Form("Doc_Enc")
+        objC_AccesoPre.FechaInicio_Vigencia = Request.Form("FI")
+        objC_AccesoPre.HoraInicio = Request.Form("HI")
+
+        objC_AccesoPre.ControlVigencia = Request.Form("CheckVigencia")
+        objC_AccesoPre.FechaFin_Vigencia = Request.Form("FF")
+        objC_AccesoPre.HoraFin = Request.Form("HF")
+        objC_AccesoPre.TipoIngreso = Request.Form("TypeIngreso")
+        objC_AccesoPre.Estado = 1
+
+        objC_AccesoPre.UsuarioActualizacion = Request.Form("user")
+        objC_AccesoPre.FechaActualizacion = Date.Now
+
+        ObjListC_AccesoPre.Add(objC_AccesoPre)
+
+        result = SQL_C_AccesoPre.UpdateC_AccesoPre(objC_AccesoPre)
+
+        Response.Write(result)
 
     End Sub
 

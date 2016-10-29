@@ -7,3 +7,12 @@ D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\AdmonActivos.vbpro
 D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.dll
 D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.xml
 D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.pdb
+E:\REPOSITORIOS GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\PanelSeguridad.dll
+E:\REPOSITORIOS GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\PanelSeguridad.pdb
+E:\REPOSITORIOS GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\PanelSeguridad.xml
+E:\REPOSITORIOS GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\AdmonActivos.vbprojResolveAssemblyReference.cache
+E:\REPOSITORIOS GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.Resources.resources
+E:\REPOSITORIOS GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\AdmonActivos.vbproj.GenerateResource.Cache
+E:\REPOSITORIOS GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.dll
+E:\REPOSITORIOS GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.xml
+E:\REPOSITORIOS GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.pdb
