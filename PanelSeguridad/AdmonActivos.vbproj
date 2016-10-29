@@ -115,6 +115,7 @@
     <Content Include="Administrador\Adm_C_AccesoPrede\C_AccesoPre.js" />
     <Content Include="Administrador\Adm_C_AccesoPrede\C_AccesoPreAjax.aspx" />
     <Content Include="Administrador\Adm_C_AccesoPrede\C_AccesoPreTrasaccionsAjax.js" />
+    <Content Include="Administrador\Adm_C_AccesoPrede\C_AccesoPre_Carga_Valida.js" />
     <Content Include="Administrador\Adm_InvPuerta\InvPuerta.aspx" />
     <Content Include="Administrador\Adm_InvPuerta\InvPuerta.js" />
     <Content Include="Administrador\Adm_InvPuerta\InvPuertaAjax.aspx" />

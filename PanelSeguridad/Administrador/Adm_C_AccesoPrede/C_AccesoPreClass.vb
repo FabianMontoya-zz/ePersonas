@@ -27,6 +27,8 @@
     Private _UsuarioEliminacion As String
     Private _FechaEliminacion As String
 
+    Private _DescripEmpresa As String
+
 #End Region
 
 #Region "propiedades"
@@ -222,6 +224,15 @@
         End Get
         Set(ByVal value As String)
             Me._FechaEliminacion = value
+        End Set
+    End Property
+
+    Public Property DescripEmpresa() As String
+        Get
+            Return Me._DescripEmpresa
+        End Get
+        Set(ByVal value As String)
+            Me._DescripEmpresa = value
         End Set
     End Property
 #End Region

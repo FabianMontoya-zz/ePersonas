@@ -6,6 +6,7 @@
     <script src="../../SasifMaster.js" type="text/javascript"></script>
     <script src="../SasifMaster_Cosult.js" type="text/javascript"></script>
     <script src="C_AccesoPre.js" type="text/javascript"></script>
+    <script src="C_AccesoPre_Carga_Valida.js" type="text/javascript"></script>
     <script src="C_AccesoPreTrasaccionsAjax.js" type="text/javascript"></script>
     <link href="../../css/css_login.css" rel="stylesheet" type="text/css" />
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
@@ -74,7 +75,7 @@
                 </tr>
                 <tr>
                     <td colspan="4">
-                        <div id="container_TConsecutivos">
+                        <div id="container_TGrid">
                         </div>
                     </td>
                 </tr>
@@ -302,7 +303,7 @@
                                 <select id="Select_TypeIngreso" class="C_Chosen">
                                 </select>
                             </td>
-                            <td style="padding-bottom: 25px; width: 300px;">
+                            <td style="padding-bottom: 25px; width: 200px;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img13"
                                         src="../../images/error.png" />

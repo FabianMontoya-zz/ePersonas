@@ -229,6 +229,7 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
             break;
 
         case "Select_Persona_Enc":
+            $('#' + Selector).append("<option value='0'>Todos</option>");
             for (Item in Matrix) {
                 if (Matrix[Item].Nit_ID == Nit) {
                     $("#" + Selector).append("<option value='" + Matrix[Item].Document_ID + "'>" + Matrix[Item].Nombre + "</option>");
@@ -301,6 +302,7 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
             break;
 
         case "Select_AreaAcceso":
+            $('#' + Selector).append("<option value='0'>Todos</option>");
             for (Item in Matrix) {
                 if (Matrix[Item].PuertaAcceso_ID == Nit) {
                     $("#" + Selector).append("<option value='" + Matrix[Item].Area_ID + "'>" + Matrix[Item].Area_ID + " - " + Matrix[Item].DescripArea + "</option>");

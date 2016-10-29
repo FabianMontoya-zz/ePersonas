@@ -403,6 +403,15 @@ PanelSeguridad
 	<param name="vp_S_ID"></param>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_AccesoPreSQLClass.Read_AllC_AccesoPre(System.String,System.String,System.String)">
+	<summary>
+ creala consulta para la tabla C_AccesoPre parametrizada (READ)
+ </summary>
+	<param name="vp_S_Filtro"></param>
+	<param name="vp_S_Opcion"></param>
+	<param name="vp_S_Contenido"></param>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.C_AccesoPreSQLClass.InsertC_AccesoPre(PanelSeguridad.C_AccesoPreClass)">
 	<summary>
  funcion que crea el query para la insercion de nuevo C_AccesoPre (INSERT)
@@ -1904,9 +1913,19 @@ To modify move field declaration from designer file to code-behind file.
 	<param name="vp_S_StrQuery"></param>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_AccesoPreAjax.Consulta_C_AccesoPre">
+	<summary>
+ traemos todos los datos para tabla R_PuertaAcc_Area (READ)
+ </summary>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.C_AccesoPreAjax.InsertC_AccesoPre">
 	<summary>
  funcion que inserta en la tabla C_AccesoPre (INSERT)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_AccesoPreAjax.CargarDroplist">
+	<summary>
+ funcion que carga el objeto DDL Links
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.C_AccesoPreAjax.CargarMPersonaDep">

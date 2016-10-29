@@ -246,7 +246,6 @@ function Table_Consecutivos() {
 
 }
 
-
 //muestra el registro a eliminar
 function Eliminar(Index) {
 

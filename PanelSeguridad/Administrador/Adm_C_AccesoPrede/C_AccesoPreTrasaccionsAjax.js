@@ -165,7 +165,7 @@ function transacionAjax_EmpresaNit(State) {
                 ArrayEmpresaNit = JSON.parse(result);
                 charge_CatalogList(ArrayEmpresaNit, "Select_EmpresaNit", 1);
                 charge_CatalogList(ArrayEmpresaNit, "Select_EmpresaNit_Ing", 1);
-                
+
             }
         },
         error: function () {
@@ -200,22 +200,103 @@ function transacionAjax_Tipo_Ingreso(State) {
     });
 }
 
-/*------------------------------ crear ---------------------------*/
+/*------------------------------ consulta ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
-function transacionAjax_UpdateEntrega(State) {
-    var StrPersona = $("#Select_Persona option:selected").html();
-    var SPersona = StrPersona.split("  -  ");
-    
-    undefined
+function transacionAjax_AccesoPredet(State, filtro, opcion) {
+    var contenido;
+
+    if ($("#TxtRead").val() == "") {
+        contenido = "ALL";
+    }
+    else {
+        contenido = $("#TxtRead").val();
+    }
+
+
     $.ajax({
         url: "C_AccesoPreAjax.aspx",
         type: "POST",
         //crear json
         data: { "action": State,
-            "Nit_ID": $("#Select_EmpresaNit").val(),
+            "filtro": filtro,
+            "opcion": opcion,
+            "contenido": contenido
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                ArrayAccesoPredet = [];
+            }
+            else {
+                ArrayAccesoPredet = JSON.parse(result);
+                Table_Grid();
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+
+/*------------------------------ crear ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax
+function transacionAjax_Insert_AccesoPredet(State) {
+    var StrPersona = $("#Select_Persona option:selected").html();
+    var SPersona = StrPersona.split("  -  ");
+
+    var StrPersona_Enc = $("#Select_Persona_Enc option:selected").html();
+    var SPersona_Enc = StrPersona_Enc.split("  -  ");
+
+    if (StrPersona_Enc == "Todos") {
+        SPersona_Enc[0] = 0;
+        SPersona_Enc[1] = 0;
+    }
+
+
+    var ID;
+    var Nit_ID;
+    var FI = "";
+    var HI = "";
+    var FF = "";
+    var HF = "";
+
+    if (State == "modificar") {
+        Nit_ID = editNit_ID;
+        ID = editID;
+    }
+    else {
+        Nit_ID = $("#Select_EmpresaNit").val();
+        ID = $("#Txt_ID").val();
+    }
+
+    if ($("#Select_CheckVigencia").val() == "S") {
+        FI = $("#TxtFinicial").val();
+        HI = $("#txt_HIVigencia").val();
+        FF = $("#TxtFfinal").val();
+        HF = $("#txt_HFVigencia").val();
+    }
+
+    $.ajax({
+        url: "C_AccesoPreAjax.aspx",
+        type: "POST",
+        //crear json
+        data: { "action": State,
+            "Nit_ID": Nit_ID,
             "TDoc": SPersona[1],
             "Doc": SPersona[0],
             "Tarjeta": $("#Select_Tarjeta_Ent").val(),
+            "Nit_Ing_ID": $("#Select_EmpresaNit_Ing").val(),
+            "PuertaAcceso_ID": $("#Select_PAcceso").val(),
+            "AreaAcceso_ID": $("#Select_AreaAcceso").val(),
+            "TDoc_Enc": SPersona_Enc[1],
+            "Doc_Enc": SPersona_Enc[0],
+            "FI": FI,
+            "HI": HI,
+            "FF": FF,
+            "HF": HF,
+            "CheckVigencia": $("#Select_CheckVigencia").val(),
+            "TypeIngreso": $("#Select_TypeIngreso").val(),
             "user": User.toUpperCase()
         },
         //Transaccion Ajax en proceso
