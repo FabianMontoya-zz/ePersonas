@@ -81,248 +81,6 @@
                 </tr>
             </table>
             <div id="TablaDatos_D">
-                <div id="container_create" style="width: 855px; height: 300px; overflow: auto;">
-                    <table id="Tabla_1" style="width: 700px; text-align: left;">
-                        <tr>
-                            <td colspan="6" align="left" class="Title_Bold">
-                                Datos de la persona que Ingresa
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="width: 150px;" class="Label_Bold">
-                                Empresa
-                            </td>
-                            <td>
-                                <select id="Select_EmpresaNit" class="C_Chosen">
-                                </select>
-                            </td>
-                            <td style="padding-bottom: 25px; width: 250px;">
-                                <span class="cssToolTip">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img1"
-                                        src="../../images/error.png" />
-                                    <span class="SpamEG"></span></span>
-                            </td>
-                        </tr>
-                    </table>
-                    <table id="Tabla_2" style="width: 700px; text-align: left;">
-                        <tr>
-                            <td style="width: 150px;" class="Label_Bold">
-                                Persona
-                            </td>
-                            <td>
-                                <select id="Select_Persona" class="C_Chosen">
-                                </select>
-                            </td>
-                            <td style="padding-bottom: 25px; width: 100px;">
-                                <span class="cssToolTip">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img2"
-                                        src="../../images/error.png" />
-                                    <span class="SpamEG"></span></span>
-                            </td>
-                        </tr>
-                    </table>
-                    <table id="Tabla_3" style="width: 700px; text-align: left;">
-                        <tr>
-                            <td style="width: 150px;" class="Label_Bold">
-                                Tarjeta
-                            </td>
-                            <td>
-                                <select id="Select_Tarjeta_Ent" class="C_Chosen">
-                                </select>
-                            </td>
-                            <td style="padding-bottom: 25px; width: 300px;">
-                                <span class="cssToolTip_L">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img3"
-                                        src="../../images/error.png" />
-                                    <span class="SpamEG"></span></span>
-                            </td>
-                        </tr>
-                    </table>
-                    <table id="Tabla_4" style="width: 700px; text-align: left;">
-                        <tr>
-                            <td colspan="6" align="left" class="Title_Bold">
-                                Datos y Permisos a la empresa que Ingresa
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="width: 150px;" class="Label_Bold">
-                                Empresa a Ingresar
-                            </td>
-                            <td>
-                                <select id="Select_EmpresaNit_Ing" class="C_Chosen">
-                                </select>
-                            </td>
-                            <td style="padding-bottom: 25px; width: 250px;">
-                                <span class="cssToolTip">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img5"
-                                        src="../../images/error.png" />
-                                    <span class="SpamEG"></span></span>
-                            </td>
-                        </tr>
-                    </table>
-                    <table id="Tabla_5" style="width: 700px; text-align: left;">
-                        <tr>
-                            <td style="width: 150px;" class="Label_Bold">
-                                Puerta de Acceso
-                            </td>
-                            <td>
-                                <select id="Select_PAcceso" class="C_Chosen">
-                                </select>
-                            </td>
-                            <td style="padding-bottom: 25px; width: 300px;">
-                                <span class="cssToolTip">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img6"
-                                        src="../../images/error.png" />
-                                    <span class="SpamEG"></span></span>
-                            </td>
-                        </tr>
-                    </table>
-                    <table id="Tabla_6" style="width: 700px; text-align: left;">
-                        <tr>
-                            <td style="width: 150px;" class="Label_Bold">
-                                Área de Acceso
-                            </td>
-                            <td>
-                                <select id="Select_AreaAcceso" class="C_Chosen">
-                                </select>
-                            </td>
-                            <td style="padding-bottom: 25px; width: 300px;">
-                                <span class="cssToolTip">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img7"
-                                        src="../../images/error.png" />
-                                    <span class="SpamEG"></span></span>
-                            </td>
-                        </tr>
-                    </table>
-                    <table id="Tabla_7" style="width: 700px; text-align: left;">
-                        <tr>
-                            <td style="width: 150px;" class="Label_Bold">
-                                Persona Encargada
-                            </td>
-                            <td>
-                                <select id="Select_Persona_Enc" class="C_Chosen">
-                                </select>
-                            </td>
-                            <td style="padding-bottom: 25px; width: 100px;">
-                                <span class="cssToolTip">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img8"
-                                        src="../../images/error.png" />
-                                    <span class="SpamEG"></span></span>
-                            </td>
-                        </tr>
-                    </table>
-                    <table id="Tabla_8" style="width: 700px; text-align: left;">
-                        <tr>
-                            <td colspan="6" align="left" class="Title_Bold">
-                                Datos de Ingreso
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="width: 115px;" class="Label_Bold">
-                                C. Acceso Vigencia
-                            </td>
-                            <td style="width: 80px;">
-                                <select id="Select_CheckVigencia" class="C_Chosen" style="width: 80px;">
-                                    <option value="N">No</option>
-                                    <option value="S">Si</option>
-                                </select>
-                            </td>
-                            <td style="padding-bottom: 25px; width: 325px;">
-                            </td>
-                        </tr>
-                    </table>
-                    <table id="T_Vigencia_Ing" style="width: 700px; text-align: left;">
-                        <tr>
-                            <td style="width: 160px;" class="Label_Bold">
-                                Fecha Inicial
-                            </td>
-                            <td>
-                                <span class="cssToolTip_Form">
-                                    <input id="TxtFinicial" type="text" readonly="readonly" style="width: 100px;" />
-                                    <span class="Spam_AF"></span></span>
-                            </td>
-                            <td style="padding-bottom: 25px; width: 80px;">
-                                <span class="cssToolTip">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img9"
-                                        src="../../images/error.png" />
-                                    <span class="SpamEG"></span></span>
-                            </td>
-                            <td style="width: 150px;" class="Label_Bold">
-                                Hora de Inicio
-                            </td>
-                            <td>
-                                <span class="cssToolTip_Form">
-                                    <input type="text" id="txt_HIVigencia" style="width: 80px;" class="Hours" readonly="readonly" />
-                                    <span class="Spam_AH"></span></span>
-                            </td>
-                            <td style="padding-bottom: 25px; width: 60px;">
-                                <span class="cssToolTip">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img10"
-                                        src="../../images/error.png" />
-                                    <span class="SpamEG"></span></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="width: 160px;" class="Label_Bold">
-                                Fecha Final
-                            </td>
-                            <td>
-                                <span class="cssToolTip_Form">
-                                    <input id="TxtFfinal" type="text" readonly="readonly" style="width: 100px;" />
-                                    <span class="Spam_AF"></span></span>
-                            </td>
-                            <td style="padding-bottom: 25px; width: 80px;">
-                                <span class="cssToolTip">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img11"
-                                        src="../../images/error.png" />
-                                    <span class="SpamEG"></span></span>
-                            </td>
-                            <td style="width: 150px;" class="Label_Bold">
-                                Hora de Salida
-                            </td>
-                            <td>
-                                <span class="cssToolTip_Form">
-                                    <input type="text" id="txt_HFVigencia" style="width: 80px;" maxlength="5" class="Hours"
-                                        readonly="readonly" />
-                                    <span class="Spam_AH"></span></span>
-                            </td>
-                            <td style="padding-bottom: 25px; width: 60px;">
-                                <span class="cssToolTip">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img12"
-                                        src="../../images/error.png" />
-                                    <span class="SpamEG"></span></span>
-                            </td>
-                        </tr>
-                    </table>
-                    <table id="Tabla_9" style="width: 700px; text-align: left;">
-                        <tr>
-                            <td style="width: 150px;" class="Label_Bold">
-                                Tipo de Ingreso
-                            </td>
-                            <td>
-                                <select id="Select_TypeIngreso" class="C_Chosen">
-                                </select>
-                            </td>
-                            <td style="padding-bottom: 25px; width: 200px;">
-                                <span class="cssToolTip">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img13"
-                                        src="../../images/error.png" />
-                                    <span class="SpamEG"></span></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="4" align="center">
-                                <p>
-                                </p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="6" align="center">
-                                <input id="Btnguardar" type="button" value="Guardar" onclick="BtnCrear();" />
-                            </td>
-                        </tr>
-                    </table>
-                </div>
             </div>
         </div>
     </div>
@@ -364,5 +122,399 @@
                 </td>
             </tr>
         </table>
+    </div>
+    <div id="Dialog_Create">
+        <div id="container_Create" style="width: 100px; height: 400px;">
+            <table id="Tabla_1" style="width: 700px; text-align: left;">
+                <tr>
+                    <td colspan="6" align="left" class="Title_Bold">
+                        Datos de la persona que Ingresa
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 150px;" class="Label_Bold">
+                        Empresa
+                    </td>
+                    <td>
+                        <select id="Select_EmpresaNit" class="C_Chosen">
+                        </select>
+                    </td>
+                    <td style="padding-bottom: 25px; width: 250px;">
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img1"
+                                src="../../images/error.png" />
+                            <span class="SpamEG"></span></span>
+                    </td>
+                </tr>
+            </table>
+            <table id="Tabla_2" style="width: 700px; text-align: left;">
+                <tr>
+                    <td style="width: 150px;" class="Label_Bold">
+                        Persona
+                    </td>
+                    <td>
+                        <select id="Select_Persona" class="C_Chosen">
+                        </select>
+                    </td>
+                    <td style="padding-bottom: 25px; width: 100px;">
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img2"
+                                src="../../images/error.png" />
+                            <span class="SpamEG"></span></span>
+                    </td>
+                </tr>
+            </table>
+            <table id="Tabla_3" style="width: 700px; text-align: left;">
+                <tr>
+                    <td style="width: 150px;" class="Label_Bold">
+                        Tarjeta
+                    </td>
+                    <td>
+                        <select id="Select_Tarjeta_Ent" class="C_Chosen">
+                        </select>
+                    </td>
+                    <td style="padding-bottom: 25px; width: 300px;">
+                        <span class="cssToolTip_L">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img3"
+                                src="../../images/error.png" />
+                            <span class="SpamEG"></span></span>
+                    </td>
+                </tr>
+            </table>
+            <table id="Tabla_4" style="width: 700px; text-align: left;">
+                <tr>
+                    <td colspan="6" align="left" class="Title_Bold">
+                        Datos y Permisos a la empresa que Ingresa
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 150px;" class="Label_Bold">
+                        Empresa a Ingresar
+                    </td>
+                    <td>
+                        <select id="Select_EmpresaNit_Ing" class="C_Chosen">
+                        </select>
+                    </td>
+                    <td style="padding-bottom: 25px; width: 250px;">
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img5"
+                                src="../../images/error.png" />
+                            <span class="SpamEG"></span></span>
+                    </td>
+                </tr>
+            </table>
+            <table id="Tabla_5" style="width: 700px; text-align: left;">
+                <tr>
+                    <td style="width: 150px;" class="Label_Bold">
+                        Puerta de Acceso
+                    </td>
+                    <td>
+                        <select id="Select_PAcceso" class="C_Chosen">
+                        </select>
+                    </td>
+                    <td style="padding-bottom: 25px; width: 300px;">
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img6"
+                                src="../../images/error.png" />
+                            <span class="SpamEG"></span></span>
+                    </td>
+                </tr>
+            </table>
+            <table id="Tabla_6" style="width: 700px; text-align: left;">
+                <tr>
+                    <td style="width: 150px;" class="Label_Bold">
+                        Área de Acceso
+                    </td>
+                    <td>
+                        <select id="Select_AreaAcceso" class="C_Chosen">
+                        </select>
+                    </td>
+                    <td style="padding-bottom: 25px; width: 300px;">
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img7"
+                                src="../../images/error.png" />
+                            <span class="SpamEG"></span></span>
+                    </td>
+                </tr>
+            </table>
+            <table id="Tabla_7" style="width: 700px; text-align: left;">
+                <tr>
+                    <td style="width: 150px;" class="Label_Bold">
+                        Persona Encargada
+                    </td>
+                    <td>
+                        <select id="Select_Persona_Enc" class="C_Chosen">
+                        </select>
+                    </td>
+                    <td style="padding-bottom: 25px; width: 100px;">
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img8"
+                                src="../../images/error.png" />
+                            <span class="SpamEG"></span></span>
+                    </td>
+                </tr>
+            </table>
+            <table id="Tabla_8" style="width: 700px; text-align: left;">
+                <tr>
+                    <td colspan="6" align="left" class="Title_Bold">
+                        Datos de Ingreso
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 115px;" class="Label_Bold">
+                        C. Acceso Vigencia
+                    </td>
+                    <td style="width: 80px;">
+                        <select id="Select_CheckVigencia" class="C_Chosen" style="width: 80px;">
+                            <option value="N">No</option>
+                            <option value="S">Si</option>
+                        </select>
+                    </td>
+                    <td style="padding-bottom: 25px; width: 325px;">
+                    </td>
+                </tr>
+            </table>
+            <table id="T_Vigencia_Ing" style="width: 700px; text-align: left;">
+                <tr>
+                    <td style="width: 160px;" class="Label_Bold">
+                        Fecha Inicial
+                    </td>
+                    <td>
+                        <span class="cssToolTip_Form">
+                            <input id="TxtFinicial" type="text" readonly="readonly" style="width: 100px;" />
+                            <span class="Spam_AF"></span></span>
+                    </td>
+                    <td style="padding-bottom: 25px; width: 80px;">
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img9"
+                                src="../../images/error.png" />
+                            <span class="SpamEG"></span></span>
+                    </td>
+                    <td style="width: 150px;" class="Label_Bold">
+                        Hora de Inicio
+                    </td>
+                    <td>
+                        <span class="cssToolTip_Form">
+                            <input type="text" id="txt_HIVigencia" style="width: 80px;" class="Hours" readonly="readonly" />
+                            <span class="Spam_AH"></span></span>
+                    </td>
+                    <td style="padding-bottom: 25px; width: 60px;">
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img10"
+                                src="../../images/error.png" />
+                            <span class="SpamEG"></span></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 160px;" class="Label_Bold">
+                        Fecha Final
+                    </td>
+                    <td>
+                        <span class="cssToolTip_Form">
+                            <input id="TxtFfinal" type="text" readonly="readonly" style="width: 100px;" />
+                            <span class="Spam_AF"></span></span>
+                    </td>
+                    <td style="padding-bottom: 25px; width: 80px;">
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img11"
+                                src="../../images/error.png" />
+                            <span class="SpamEG"></span></span>
+                    </td>
+                    <td style="width: 150px;" class="Label_Bold">
+                        Hora de Salida
+                    </td>
+                    <td>
+                        <span class="cssToolTip_Form">
+                            <input type="text" id="txt_HFVigencia" style="width: 80px;" maxlength="5" class="Hours"
+                                readonly="readonly" />
+                            <span class="Spam_AH"></span></span>
+                    </td>
+                    <td style="padding-bottom: 25px; width: 60px;">
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img12"
+                                src="../../images/error.png" />
+                            <span class="SpamEG"></span></span>
+                    </td>
+                </tr>
+            </table>
+            <table id="Tabla_9" style="width: 700px; text-align: left;">
+                <tr>
+                    <td style="width: 150px;" class="Label_Bold">
+                        Tipo de Ingreso
+                    </td>
+                    <td>
+                        <select id="Select_TypeIngreso" class="C_Chosen">
+                        </select>
+                    </td>
+                    <td style="padding-bottom: 25px; width: 200px;">
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img13"
+                                src="../../images/error.png" />
+                            <span class="SpamEG"></span></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" align="center">
+                        <p>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="6" align="center">
+                        <input id="Btnguardar" type="button" value="Guardar" onclick="BtnCrear();" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="container_Read" style="width: 100px; height: 400px;">
+            <table id="Tabla_1_1" style="width: 700px; text-align: left;">
+                <tr>
+                    <td colspan="6" align="left" class="Title_Bold">
+                        Datos de la persona que Ingresa
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 150px;" class="Label_Bold">
+                        Empresa
+                    </td>
+                    <td id="Vis_EmpresaNit">
+                    </td>
+                    <td style="padding-bottom: 25px; width: 250px;">
+                    </td>
+                </tr>
+            </table>
+            <table id="Tabla_2_2" style="width: 700px; text-align: left;">
+                <tr>
+                    <td style="width: 150px;" class="Label_Bold">
+                        Persona
+                    </td>
+                    <td id="Vis_Persona">
+                    </td>
+                    <td style="padding-bottom: 25px; width: 100px;">
+                    </td>
+                </tr>
+            </table>
+            <table id="Tabla_3_3" style="width: 700px; text-align: left;">
+                <tr>
+                    <td style="width: 150px;" class="Label_Bold">
+                        Tarjeta
+                    </td>
+                    <td id="Vis_Tarjeta_Ent">
+                    </td>
+                    <td style="padding-bottom: 25px; width: 300px;">
+                    </td>
+                </tr>
+            </table>
+            <table id="Tabla_4_4" style="width: 700px; text-align: left;">
+                <tr>
+                    <td colspan="6" align="left" class="Title_Bold">
+                        Datos y Permisos a la empresa que Ingresa
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 150px;" class="Label_Bold">
+                        Empresa a Ingresar
+                    </td>
+                    <td id="Vis_EmpresaNit_Ing">
+                    </td>
+                    <td style="padding-bottom: 25px; width: 250px;">
+                    </td>
+                </tr>
+            </table>
+            <table id="Tabla_5_5" style="width: 700px; text-align: left;">
+                <tr>
+                    <td style="width: 150px;" class="Label_Bold">
+                        Puerta de Acceso
+                    </td>
+                    <td id="Vis_PAcceso">
+                    </td>
+                    <td style="padding-bottom: 25px; width: 300px;">
+                    </td>
+                </tr>
+            </table>
+            <table id="Tabla_6_6" style="width: 700px; text-align: left;">
+                <tr>
+                    <td style="width: 150px;" class="Label_Bold">
+                        Área de Acceso
+                    </td>
+                    <td id="Vis_AreaAcceso">
+                    </td>
+                    <td style="padding-bottom: 25px; width: 300px;">
+                    </td>
+                </tr>
+            </table>
+            <table id="Tabla_7_7" style="width: 700px; text-align: left;">
+                <tr>
+                    <td style="width: 150px;" class="Label_Bold">
+                        Persona Encargada
+                    </td>
+                    <td id="Vis_Persona_Enc">
+                    </td>
+                    <td style="padding-bottom: 25px; width: 100px;">
+                    </td>
+                </tr>
+            </table>
+            <table id="Tabla_8_8" style="width: 700px; text-align: left;">
+                <tr>
+                    <td colspan="6" align="left" class="Title_Bold">
+                        Datos de Ingreso
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 115px;" class="Label_Bold">
+                        C. Acceso Vigencia
+                    </td>
+                    <td id="Vis_CheckVigencia" style="width: 80px;">
+                    </td>
+                    <td style="padding-bottom: 25px; width: 325px;">
+                    </td>
+                </tr>
+            </table>
+            <table id="Table1" style="width: 700px; text-align: left;">
+                <tr>
+                    <td style="width: 160px;" class="Label_Bold">
+                        Fecha Inicial
+                    </td>
+                    <td id="Vis_Finicial">
+                    </td>
+                    <td style="padding-bottom: 25px; width: 80px;">
+                    </td>
+                    <td style="width: 150px;" class="Label_Bold">
+                        Hora de Inicio
+                    </td>
+                    <td id="Vis_HIVigencia">
+                    </td>
+                    <td style="padding-bottom: 25px; width: 60px;">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 160px;" class="Label_Bold">
+                        Fecha Final
+                    </td>
+                    <td id="Vis_Ffinal">
+                    </td>
+                    <td style="padding-bottom: 25px; width: 80px;">
+                    </td>
+                    <td style="width: 150px;" class="Label_Bold">
+                        Hora de Salida
+                    </td>
+                    <td id="Vis_HFVigencia">
+                    </td>
+                    <td style="padding-bottom: 25px; width: 60px;">
+                    </td>
+                </tr>
+            </table>
+            <table id="Tabla_9_9" style="width: 700px; text-align: left;">
+                <tr>
+                    <td style="width: 150px;" class="Label_Bold">
+                        Tipo de Ingreso
+                    </td>
+                    <td id="Vis_TypeIngreso">
+                    </td>
+                    <td style="padding-bottom: 25px; width: 200px;">
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
 </asp:Content>

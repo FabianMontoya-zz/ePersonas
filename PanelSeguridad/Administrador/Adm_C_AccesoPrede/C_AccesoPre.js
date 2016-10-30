@@ -76,6 +76,18 @@ $(document).ready(function () {
         modal: true
     });
 
+    $("#Dialog_Create").dialog({
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true,
+        width: 800,
+        height: 560,
+        overlay: {
+            opacity: 0.5,
+            background: "black"
+        }
+    });
+
     $(function () {
         $("#TxtFinicial").datepicker({ dateFormat: 'yy-mm-dd' });
         $("#txt_HIVigencia").timepicker();
@@ -100,12 +112,15 @@ function HabilitarPanel(opcion) {
     switch (opcion) {
 
         case "crear":
-            $("#TablaDatos_D").css("display", "inline-table");
             $("#TablaConsulta").css("display", "none");
             $("#Select_EmpresaNit").removeAttr("disabled");
             $("#Txt_ID").removeAttr("disabled");
             $("#Btnguardar").attr("value", "Guardar");
             $('.C_Chosen').trigger('chosen:updated');
+            $("#Dialog_Create").dialog("open");
+            $("#Dialog_Create").dialog("option", "title", "Creación Acceso Prederterminado");
+            $("#container_Create").css("display", "inline-table");
+            $("#container_Read").css("display", "none");
             ResetError();
             EnableControls();
             Clear();
@@ -116,6 +131,7 @@ function HabilitarPanel(opcion) {
             $("#TablaDatos_D").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TGrid").html("");
+            $("#Dialog_Create").dialog("close");
             estado = opcion;
             Clear();
             break;
@@ -124,6 +140,7 @@ function HabilitarPanel(opcion) {
             $("#TablaDatos_D").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TGrid").html("");
+            $("#Dialog_Create").dialog("close");
             estado = opcion;
             ResetError();
             Clear();
@@ -133,6 +150,7 @@ function HabilitarPanel(opcion) {
             $("#TablaDatos_D").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TGrid").html("");
+            $("#Dialog_Create").dialog("close");
             estado = opcion;
             Clear();
             break;
@@ -187,12 +205,10 @@ function BtnCrear() {
     }
 }
 
-
 //evento del boton salir
 function x() {
     $("#dialog").dialog("close");
 }
-
 
 // crea la tabla en el cliente
 function Table_Grid() {
@@ -202,10 +218,11 @@ function Table_Grid() {
     switch (estado) {
 
         case "buscar":
-            Html_Grid = "<table id='TGrid' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Empresa</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
+            Html_Grid = "<table id='TGrid' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Opcion</th><th>Empresa</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
             for (itemArray in ArrayAccesoPredet) {
                 if (ArrayAccesoPredet[itemArray].Nit_ID != 0) {
-                    Html_Grid += "<tr id= 'TGrid_" + ArrayAccesoPredet[itemArray].Nit_ID + "'><td>" + ArrayAccesoPredet[itemArray].Nit_ID_EmpVisita + " - " + ArrayAccesoPredet[itemArray].DescripEmpresa + "</td><td>" + ArrayAccesoPredet[itemArray].UsuarioCreacion + "</td><td>" + ArrayAccesoPredet[itemArray].FechaCreacion + "</td><td>" + ArrayAccesoPredet[itemArray].UsuarioActualizacion + "</td><td>" + ArrayAccesoPredet[itemArray].FechaActualizacion + "</td></tr>";
+                    Index_Pos = parseInt(ArrayAccesoPredet[itemArray].Index) - 1;
+                    Html_Grid += "<tr id= 'TGrid_" + ArrayAccesoPredet[itemArray].Nit_ID + "'><td><select id='Select_" + Index_Pos + "' class='Opciones' onchange=\"Select_Option_Documento(this,'" + Index_Pos + "');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option></select></td><td>" + ArrayAccesoPredet[itemArray].Nit_ID_EmpVisita + " - " + ArrayAccesoPredet[itemArray].DescripEmpresa + "</td><td>" + ArrayAccesoPredet[itemArray].UsuarioCreacion + "</td><td>" + ArrayAccesoPredet[itemArray].FechaCreacion + "</td><td>" + ArrayAccesoPredet[itemArray].UsuarioActualizacion + "</td><td>" + ArrayAccesoPredet[itemArray].FechaActualizacion + "</td></tr>";
                 }
             }
             break;
@@ -215,7 +232,7 @@ function Table_Grid() {
             for (itemArray in ArrayAccesoPredet) {
                 if (ArrayAccesoPredet[itemArray].Nit_ID != 0) {
                     Index_Pos = parseInt(ArrayAccesoPredet[itemArray].Index) - 1;
-                    Html_Grid += "<tr id= 'TGrid_" + ArrayAccesoPredet[itemArray].Nit_ID + "'><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Editar('" + Index_Pos + "')\"></input></td><td>" + ArrayAccesoPredet[itemArray].Nit_ID_EmpVisita + " - " + ArrayAccesoPredet[itemArray].DescripEmpresa + "</td><td>" + ArrayAccesoPredet[itemArray].UsuarioCreacion + "</td><td>" + ArrayAccesoPredet[itemArray].FechaCreacion + "</td><td>" + ArrayAccesoPredet[itemArray].UsuarioActualizacion + "</td><td>" + ArrayAccesoPredet[itemArray].FechaActualizacion + "</td></tr>";
+                    Html_Grid += "<tr id= 'TGrid_" + ArrayAccesoPredet[itemArray].Nit_ID + "'><td><select id='Select_" + Index_Pos + "' class='Opciones' onchange=\"Select_Option_Documento(this,'" + Index_Pos + "');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='M'>Editar</option></select></td><td>" + ArrayAccesoPredet[itemArray].Nit_ID_EmpVisita + " - " + ArrayAccesoPredet[itemArray].DescripEmpresa + "</td><td>" + ArrayAccesoPredet[itemArray].UsuarioCreacion + "</td><td>" + ArrayAccesoPredet[itemArray].FechaCreacion + "</td><td>" + ArrayAccesoPredet[itemArray].UsuarioActualizacion + "</td><td>" + ArrayAccesoPredet[itemArray].FechaActualizacion + "</td></tr>";
                 }
             }
             break;
@@ -225,7 +242,7 @@ function Table_Grid() {
             for (itemArray in ArrayAccesoPredet) {
                 if (ArrayAccesoPredet[itemArray].Nit_ID != 0) {
                     Index_Pos = parseInt(ArrayAccesoPredet[itemArray].Index) - 1;
-                    Html_Grid += "<tr id= 'TGrid_" + ArrayAccesoPredet[itemArray].Nit_ID + "'><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar('" + Index_Pos + "')\"></input></td><td>" + ArrayAccesoPredet[itemArray].Nit_ID_EmpVisita + " - " + ArrayAccesoPredet[itemArray].DescripEmpresa + "</td><td>" + ArrayAccesoPredet[itemArray].UsuarioCreacion + "</td><td>" + ArrayAccesoPredet[itemArray].FechaCreacion + "</td><td>" + ArrayAccesoPredet[itemArray].UsuarioActualizacion + "</td><td>" + ArrayAccesoPredet[itemArray].FechaActualizacion + "</td></tr>";
+                    Html_Grid += "<tr id= 'TGrid_" + ArrayAccesoPredet[itemArray].Nit_ID + "'><td><select id='Select_" + Index_Pos + "' class='Opciones' onchange=\"Select_Option_Documento(this,'" + Index_Pos + "');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='E'>Eliminar</option></select></td><td>" + ArrayAccesoPredet[itemArray].Nit_ID_EmpVisita + " - " + ArrayAccesoPredet[itemArray].DescripEmpresa + "</td><td>" + ArrayAccesoPredet[itemArray].UsuarioCreacion + "</td><td>" + ArrayAccesoPredet[itemArray].FechaCreacion + "</td><td>" + ArrayAccesoPredet[itemArray].UsuarioActualizacion + "</td><td>" + ArrayAccesoPredet[itemArray].FechaActualizacion + "</td></tr>";
                 }
             }
             break;
@@ -235,10 +252,7 @@ function Table_Grid() {
     $("#container_TGrid").html("");
     $("#container_TGrid").html(Html_Grid);
 
-    $(".Eliminar").click(function () {
-    });
-
-    $(".Editar").click(function () {
+    $(".Opciones").click(function () {
     });
 
     $("#TGrid").dataTable({
@@ -246,6 +260,26 @@ function Table_Grid() {
         "bDestroy": true
     });
 
+}
+
+//selecciona que tipo de operacion desea con el registro seleccionado
+function Select_Option_Documento(Select_control, Index_Pos, Type) {
+
+    var Select_Value = $(Select_control).val();
+
+    switch (Select_Value) {
+        case "M": //modificar
+            Editar(Index_Pos, "M");
+            break;
+
+        case "V": //visualizar
+            Ver(Index_Pos);
+            break;
+
+        case "E": //eliminar
+            Eliminar(Index_Pos);
+            break;
+    }
 }
 
 //muestra el registro a eliminar
@@ -266,12 +300,28 @@ function Eliminar(Index) {
 
 }
 
+// muestra el registro a ver
+function Ver(Index_Cliente) {
+    Editar(Index_Cliente, "V");
+}
+
 // muestra el registro a editar
-function Editar(Index) {
+function Editar(Index, Type) {
 
     console.log(Index);
-    $("#TablaDatos_D").css("display", "inline-table");
-    $("#TablaConsulta").css("display", "none");
+    $("#Dialog_Create").dialog("open");
+     $("#TablaConsulta").css("display", "none");
+
+     if (Type == "M") {
+         $("#Dialog_Create").dialog("option", "title", "Actualización Acceso Prederterminado");
+        $("#container_Create").css("display", "inline-table");
+        $("#container_Read").css("display", "none");
+    }
+    else {
+        $("#Dialog_Create").dialog("option", "title", "Ver Acceso Prederterminado");
+        $("#container_Create").css("display", "none");
+        $("#container_Read").css("display", "inline-table");
+    }
 
     editNit_ID = ArrayAccesoPredet[Index].Nit_ID;
 
@@ -279,7 +329,7 @@ function Editar(Index) {
     $("#Select_EmpresaNit_Ing").val(ArrayAccesoPredet[Index].Nit_ID_EmpVisita);
     $("#Select_CheckVigencia").val(ArrayAccesoPredet[Index].ControlVigencia);
     $("#Select_TypeIngreso").val(ArrayAccesoPredet[Index].TipoIngreso);
-
+      
     Charge_Combos_Depend_Nit(Matrix_Persona, "Select_Persona", ArrayAccesoPredet[Index].Nit_ID, ArrayAccesoPredet[Index].Document_ID);
     Charge_Combos_Depend_Nit(Matrix_Tarjeta, "Select_Tarjeta_Ent", ArrayAccesoPredet[Index].Nit_ID, ArrayAccesoPredet[Index].Tarjeta_ID);
 
@@ -309,6 +359,20 @@ function Editar(Index) {
             break;
     }
     DisableControls();
+    $("#Vis_EmpresaNit").html($("#Select_EmpresaNit option:selected").html());
+    $("#Vis_EmpresaNit_Ing").html($("#Select_EmpresaNit_Ing option:selected").html());
+    $("#Vis_CheckVigencia").html($("#Select_CheckVigencia option:selected").html());
+    $("#Vis_TypeIngreso").html($("#Select_TypeIngreso option:selected").html());
+    $("#Vis_Persona").html($("#Select_Persona option:selected").html());
+    $("#Vis_Tarjeta_Ent").html($("#Select_Tarjeta_Ent option:selected").html());
+    $("#Vis_PAcceso").html($("#Select_PAcceso option:selected").html());
+    $("#Vis_Persona_Enc").html($("#Select_Persona_Enc option:selected").html());
+    $("#Vis_AreaAcceso").html($("#Select_AreaAcceso option:selected").html());
+    $("#Vis_Finicial").html(ArrayAccesoPredet[Index].FechaInicio_Vigencia);
+    $("#Vis_HIVigencia").html(ArrayAccesoPredet[Index].HoraInicio);
+    $("#Vis_Ffinal").html(ArrayAccesoPredet[Index].FechaFin_Vigencia);
+    $("#Vis_HFVigencia").html(ArrayAccesoPredet[Index].HoraFin);
+ 
 }
 
 //limpiar campos
