@@ -29,6 +29,13 @@
 
     Private _DescripEmpresa As String
 
+    Private _DescripPersona_Ing As String
+    Private _DescripEmpresa_Ing As String
+    Private _DescripPersona_Enc As String
+    Private _DescripPuertaAcceso As String
+    Private _DescripAreaAcceso As String
+    Private _DescripTipoIngreso As String
+
 #End Region
 
 #Region "propiedades"
@@ -233,6 +240,55 @@
         End Get
         Set(ByVal value As String)
             Me._DescripEmpresa = value
+        End Set
+    End Property
+
+    Public Property DescripPersona_Ing() As String
+        Get
+            Return Me._DescripPersona_Ing
+        End Get
+        Set(ByVal value As String)
+            Me._DescripPersona_Ing = value
+        End Set
+    End Property
+    Public Property DescripEmpresa_Ing() As String
+        Get
+            Return Me._DescripEmpresa_Ing
+        End Get
+        Set(ByVal value As String)
+            Me._DescripEmpresa_Ing = value
+        End Set
+    End Property
+    Public Property DescripPersona_Enc() As String
+        Get
+            Return Me._DescripPersona_Enc
+        End Get
+        Set(ByVal value As String)
+            Me._DescripPersona_Enc = value
+        End Set
+    End Property
+    Public Property DescripPuertaAcceso() As String
+        Get
+            Return Me._DescripPuertaAcceso
+        End Get
+        Set(ByVal value As String)
+            Me._DescripPuertaAcceso = value
+        End Set
+    End Property
+    Public Property DescripAreaAcceso() As String
+        Get
+            Return Me._DescripAreaAcceso
+        End Get
+        Set(ByVal value As String)
+            Me._DescripAreaAcceso = value
+        End Set
+    End Property
+    Public Property DescripTipoIngreso() As String
+        Get
+            Return Me._DescripTipoIngreso
+        End Get
+        Set(ByVal value As String)
+            Me._DescripTipoIngreso = value
         End Set
     End Property
 #End Region

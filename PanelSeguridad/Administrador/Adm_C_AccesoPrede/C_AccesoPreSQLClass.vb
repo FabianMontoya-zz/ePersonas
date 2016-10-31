@@ -47,15 +47,31 @@ Public Class C_AccesoPreSQLClass
                                     " 			   RPAP_FechaActualizacion, " & _
                                     " 			   RPAP_Usuario_Eliminacion, " & _
                                     " 			   RPAP_FechaEliminacion, " & _
-                                    "              C.CLI_Nombre, " & _
+                                    "              C.CLI_Nombre + ' ' + C.CLI_Nombre_2 + ' ' + C.CLI_Apellido_1 + ' ' + C.CLI_Apellido_2, " & _
                                     "              RPAP_HorarioIngreso, " & _
+                                    "              C2.CLI_Nombre + ' ' + C2.CLI_Nombre_2 + ' ' + C2.CLI_Apellido_1 + ' ' + C2.CLI_Apellido_2 AS P_ING, " & _
+                                    "              C3.CLI_Nombre + ' ' + C3.CLI_Nombre_2 + ' ' + C3.CLI_Apellido_1 + ' ' + C3.CLI_Apellido_2 AS EMP_ING, " & _
+                                    "              C4.CLI_Nombre + ' ' + C4.CLI_Nombre_2 + ' ' + C4.CLI_Apellido_1 + ' ' + C4.CLI_Apellido_2 AS P_ENC, " & _
+                                    "              PA.PA_Descripcion, " & _
+                                    "              A.A_Descripcion, " & _
+                                    "              DDL.DDLL_Descripcion, " & _
                                     " 			  ROW_NUMBER() OVER(ORDER BY RPAP_Nit_ID  DESC) AS Index_C_AccesoPre " & _
                                     " FROM R_PERSONAS_ACCESOS_PREDETER  RPAP " & _
+                                    " LEFT JOIN  PUERTAS_ACCESO PA ON PA.PA_PuertaAcceso_ID = RPAP.RPAP_PuertaAcceso_ID " & _
+                                    " LEFT JOIN   TC_DDL_TIPO DDL ON DDL.DDL_ID = RPAP.RPAP_HorarioIngreso AND DDL.DDL_Tabla='TIPO_INGRESO' " & _
+                                    " LEFT JOIN  " & BD_Param & ".dbo.CLIENTE C2 ON C2.CLI_Document_ID = RPAP.RPAP_Document_ID " & _
+                                    " LEFT JOIN  " & BD_Param & ".dbo.CLIENTE C4 ON C4.CLI_Document_ID = RPAP.RPAP_Document_ID_Per_Encargada " & _
+                                    " LEFT JOIN  " & BD_Param & ".dbo.AREA A ON A.A_Area_ID = RPAP.RPAP_Area_ID " & _
                                     " LEFT JOIN " & BD_Param & ".dbo.CLIENTE C ON C.CLI_Document_ID =  " & _
                                     " CASE	 SUBSTRING(RPAP.RPAP_Nit_ID,0,LEN(RPAP.RPAP_Nit_ID)) " & _
                                     "                 WHEN '' THEN 0 " & _
                                     "                ELSE SUBSTRING(RPAP.RPAP_Nit_ID,0,LEN(RPAP.RPAP_Nit_ID))   " & _
                                     " END " & _
+                                    " LEFT JOIN  " & BD_Param & ".dbo.CLIENTE C3 ON C3.CLI_Document_ID =  " & _
+                                    " CASE	 SUBSTRING(RPAP.RPAP_Nit_ID_EmpVisita,0,LEN(RPAP.RPAP_Nit_ID_EmpVisita)) " & _
+                                    "   WHEN '' THEN 0 " & _
+                                    "   ELSE SUBSTRING(RPAP.RPAP_Nit_ID_EmpVisita,0,LEN(RPAP.RPAP_Nit_ID_EmpVisita))  " & _
+                                    " END  " & _
                                     " WHERE RPAP_Estado = '1'")
         Else
 
@@ -81,15 +97,31 @@ Public Class C_AccesoPreSQLClass
                                     " 			   RPAP_FechaActualizacion, " & _
                                     " 			   RPAP_Usuario_Eliminacion, " & _
                                     " 			   RPAP_FechaEliminacion, " & _
-                                    "              C.CLI_Nombre, " & _
+                                    "              C.CLI_Nombre + ' ' + C.CLI_Nombre_2 + ' ' + C.CLI_Apellido_1 + ' ' + C.CLI_Apellido_2, " & _
                                     "              RPAP_HorarioIngreso, " & _
+                                    "              C2.CLI_Nombre + ' ' + C2.CLI_Nombre_2 + ' ' + C2.CLI_Apellido_1 + ' ' + C2.CLI_Apellido_2 AS P_ING, " & _
+                                    "              C3.CLI_Nombre + ' ' + C3.CLI_Nombre_2 + ' ' + C3.CLI_Apellido_1 + ' ' + C3.CLI_Apellido_2 AS EMP_ING, " & _
+                                    "              C4.CLI_Nombre + ' ' + C4.CLI_Nombre_2 + ' ' + C4.CLI_Apellido_1 + ' ' + C4.CLI_Apellido_2 AS P_ENC, " & _
+                                    "              PA.PA_Descripcion, " & _
+                                    "              A.A_Descripcion, " & _
+                                    "              DDL.DDLL_Descripcion, " & _
                                     " 			  ROW_NUMBER() OVER(ORDER BY RPAP_Nit_ID  DESC) AS Index_C_AccesoPre " & _
                                     " FROM R_PERSONAS_ACCESOS_PREDETER  RPAP " & _
+                                    " LEFT JOIN  PUERTAS_ACCESO PA ON PA.PA_PuertaAcceso_ID = RPAP.RPAP_PuertaAcceso_ID " & _
+                                    " LEFT JOIN   TC_DDL_TIPO DDL ON DDL.DDL_ID = RPAP.RPAP_HorarioIngreso AND DDL.DDL_Tabla='TIPO_INGRESO' " & _
+                                    " LEFT JOIN  " & BD_Param & ".dbo.CLIENTE C2 ON C2.CLI_Document_ID = RPAP.RPAP_Document_ID " & _
+                                    " LEFT JOIN  " & BD_Param & ".dbo.CLIENTE C4 ON C4.CLI_Document_ID = RPAP.RPAP_Document_ID_Per_Encargada " & _
+                                    " LEFT JOIN  " & BD_Param & ".dbo.AREA A ON A.A_Area_ID = RPAP.RPAP_Area_ID " & _
                                     " LEFT JOIN " & BD_Param & ".dbo.CLIENTE C ON C.CLI_Document_ID =  " & _
                                     " CASE	 SUBSTRING(RPAP.RPAP_Nit_ID,0,LEN(RPAP.RPAP_Nit_ID)) " & _
                                     "                 WHEN '' THEN 0 " & _
                                     "                ELSE SUBSTRING(RPAP.RPAP_Nit_ID,0,LEN(RPAP.RPAP_Nit_ID))   " & _
                                     " END " & _
+                                    " LEFT JOIN  " & BD_Param & ".dbo.CLIENTE C3 ON C3.CLI_Document_ID =  " & _
+                                    " CASE	 SUBSTRING(RPAP.RPAP_Nit_ID_EmpVisita,0,LEN(RPAP.RPAP_Nit_ID_EmpVisita)) " & _
+                                    "   WHEN '' THEN 0 " & _
+                                    "   ELSE SUBSTRING(RPAP.RPAP_Nit_ID_EmpVisita,0,LEN(RPAP.RPAP_Nit_ID_EmpVisita))  " & _
+                                    " END  " & _
                                     " WHERE RPAP_Estado = '1'")
             Else
                 sql.Append(" SELECT  RPAP_Nit_ID, " & _
@@ -113,15 +145,31 @@ Public Class C_AccesoPreSQLClass
                                     " 			   RPAP_FechaActualizacion, " & _
                                     " 			   RPAP_Usuario_Eliminacion, " & _
                                     " 			   RPAP_FechaEliminacion, " & _
-                                    "              C.CLI_Nombre, " & _
+                                    "              C.CLI_Nombre + ' ' + C.CLI_Nombre_2 + ' ' + C.CLI_Apellido_1 + ' ' + C.CLI_Apellido_2, " & _
                                     "              RPAP_HorarioIngreso, " & _
+                                    "              C2.CLI_Nombre + ' ' + C2.CLI_Nombre_2 + ' ' + C2.CLI_Apellido_1 + ' ' + C2.CLI_Apellido_2 AS P_ING, " & _
+                                    "              C3.CLI_Nombre + ' ' + C3.CLI_Nombre_2 + ' ' + C3.CLI_Apellido_1 + ' ' + C3.CLI_Apellido_2 AS EMP_ING, " & _
+                                    "              C4.CLI_Nombre + ' ' + C4.CLI_Nombre_2 + ' ' + C4.CLI_Apellido_1 + ' ' + C4.CLI_Apellido_2 AS P_ENC, " & _
+                                    "              PA.PA_Descripcion, " & _
+                                    "              A.A_Descripcion, " & _
+                                    "              DDL.DDLL_Descripcion, " & _
                                     " 			  ROW_NUMBER() OVER(ORDER BY RPAP_Nit_ID  DESC) AS Index_C_AccesoPre " & _
                                     " FROM R_PERSONAS_ACCESOS_PREDETER  RPAP " & _
+                                    " LEFT JOIN  PUERTAS_ACCESO PA ON PA.PA_PuertaAcceso_ID = RPAP.RPAP_PuertaAcceso_ID " & _
+                                    " LEFT JOIN   TC_DDL_TIPO DDL ON DDL.DDL_ID = RPAP.RPAP_HorarioIngreso AND DDL.DDL_Tabla='TIPO_INGRESO' " & _
+                                    " LEFT JOIN  " & BD_Param & ".dbo.CLIENTE C2 ON C2.CLI_Document_ID = RPAP.RPAP_Document_ID " & _
+                                    " LEFT JOIN  " & BD_Param & ".dbo.CLIENTE C4 ON C4.CLI_Document_ID = RPAP.RPAP_Document_ID_Per_Encargada " & _
+                                    " LEFT JOIN  " & BD_Param & ".dbo.AREA A ON A.A_Area_ID = RPAP.RPAP_Area_ID " & _
                                     " LEFT JOIN " & BD_Param & ".dbo.CLIENTE C ON C.CLI_Document_ID =  " & _
                                     " CASE	 SUBSTRING(RPAP.RPAP_Nit_ID,0,LEN(RPAP.RPAP_Nit_ID)) " & _
                                     "                 WHEN '' THEN 0 " & _
                                     "                ELSE SUBSTRING(RPAP.RPAP_Nit_ID,0,LEN(RPAP.RPAP_Nit_ID))   " & _
                                     " END " & _
+                                    " LEFT JOIN  " & BD_Param & ".dbo.CLIENTE C3 ON C3.CLI_Document_ID =  " & _
+                                    " CASE	 SUBSTRING(RPAP.RPAP_Nit_ID_EmpVisita,0,LEN(RPAP.RPAP_Nit_ID_EmpVisita)) " & _
+                                    "   WHEN '' THEN 0 " & _
+                                    "   ELSE SUBSTRING(RPAP.RPAP_Nit_ID_EmpVisita,0,LEN(RPAP.RPAP_Nit_ID_EmpVisita))  " & _
+                                    " END  " & _
                                     " WHERE RPAP_Estado = '1'" & _
                                     " AND " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
             End If
@@ -276,13 +324,13 @@ Public Class C_AccesoPreSQLClass
 
     End Function
 
- 
+
 
 #End Region
 
 #Region "CONSULTAS DROP LIST"
 
-     ''' <summary>
+    ''' <summary>
     ''' crea la consulta para cargar el combo
     ''' </summary>
     ''' <returns></returns>
@@ -369,12 +417,18 @@ Public Class C_AccesoPreSQLClass
 
                     objC_AccesoPre.DescripEmpresa = ReadConsulta.GetValue(21)
                     objC_AccesoPre.TipoIngreso = ReadConsulta.GetValue(22)
-                    objC_AccesoPre.Index = ReadConsulta.GetValue(23)
+
+                    If Not (IsDBNull(ReadConsulta.GetValue(23))) Then objC_AccesoPre.DescripPersona_Ing = ReadConsulta.GetValue(23) Else objC_AccesoPre.DescripPersona_Ing = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(24))) Then objC_AccesoPre.DescripEmpresa_Ing = ReadConsulta.GetValue(24) Else objC_AccesoPre.DescripEmpresa_Ing = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(25))) Then objC_AccesoPre.DescripPersona_Enc = ReadConsulta.GetValue(25) Else objC_AccesoPre.DescripPersona_Enc = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(26))) Then objC_AccesoPre.DescripPuertaAcceso = ReadConsulta.GetValue(26) Else objC_AccesoPre.DescripPuertaAcceso = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(27))) Then objC_AccesoPre.DescripAreaAcceso = ReadConsulta.GetValue(27) Else objC_AccesoPre.DescripAreaAcceso = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(28))) Then objC_AccesoPre.DescripTipoIngreso = ReadConsulta.GetValue(28) Else objC_AccesoPre.DescripTipoIngreso = ""
+                    objC_AccesoPre.Index = ReadConsulta.GetValue(29)
 
                     'agregamos a la lista
                     ObjListC_AccesoPre.Add(objC_AccesoPre)
                 End While
-
 
             Case "Matrix_RTP"
                 While ReadConsulta.Read
@@ -428,7 +482,7 @@ Public Class C_AccesoPreSQLClass
                        " AND RPAP_PuertaAcceso_ID = '" & vp_O_Obj.PuertaAcceso_ID & "'" & _
                        " AND RPAP_Area_ID = '" & vp_O_Obj.Area_ID & "'" & _
                        " AND RPAP_TypeDocument_ID_Per_Encargada = '" & vp_O_Obj.TypeDocument_ID_Per_Encargada & "'" & _
-                       " AND RPAP_Document_ID_Per_Encargada = '" & vp_O_Obj.Document_ID_Per_Encargada & "'" )
+                       " AND RPAP_Document_ID_Per_Encargada = '" & vp_O_Obj.Document_ID_Per_Encargada & "'")
         StrQuery = sql.ToString
 
         Result = conex.IDis(StrQuery, "1")
