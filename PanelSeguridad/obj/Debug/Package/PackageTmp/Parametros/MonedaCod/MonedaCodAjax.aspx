@@ -1,1 +1,0 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="MonedaCodAjax.aspx.vb" Inherits="PanelSeguridad.MonedaCodAjax" %>

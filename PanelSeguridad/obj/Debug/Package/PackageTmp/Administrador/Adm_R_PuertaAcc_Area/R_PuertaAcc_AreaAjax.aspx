@@ -1,1 +1,0 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="R_PuertaAcc_AreaAjax.aspx.vb" Inherits="PanelSeguridad.R_PuertaAcc_AreaAjax" %>

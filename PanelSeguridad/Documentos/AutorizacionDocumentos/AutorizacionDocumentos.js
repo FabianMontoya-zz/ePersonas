@@ -552,9 +552,11 @@ function ReadDocument(Secuencia, Ruta, Nombre, Nit) {
 
 }
 
+var Doc_name_save;
 //funcion que abre la ventana para la validacion de documentos
 function ValideDocument(Secuencia, Ruta, Nombre, Nit) {
 
+    Doc_name_save = Nombre;
     $("#Dialog_Valida_Document").dialog("open");
     $("#Dialog_Valida_Document").dialog("option", "title", "Validación del documento: " + Nombre);
     $("#Vis_Documento_3").val(Nombre);

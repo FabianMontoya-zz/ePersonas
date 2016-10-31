@@ -217,7 +217,7 @@ Public Class AutorizacionDocumentosSQLClass
                        " DE_Usuario_Verifico ='" & vp_Obj_AutorizacionDocumentos.Usuario_Verifico & "', " & _
                        " DE_Usuario_Actualizacion ='" & vp_Obj_AutorizacionDocumentos.UsuarioActualizacion & "', " & _
                        " DE_FechaActualizacion ='" & vp_Obj_AutorizacionDocumentos.FechaActualizacion & "' " & _
-                       " WHERE  DE_Nombre_Save = '" & vp_Obj_AutorizacionDocumentos.Nombre_Save & "'")
+                       " WHERE  DE_Nombre_Save = '" & vp_Obj_AutorizacionDocumentos.DescripVerificacion & "'")
         StrQuery = sql.ToString
 
         Result = conex.StrInsert_and_Update_All(StrQuery, "3")
