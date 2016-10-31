@@ -111,6 +111,11 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Administrador\Adm_C_AccesoPrede\C_AccesoPre.aspx" />
+    <Content Include="Administrador\Adm_C_AccesoPrede\C_AccesoPre.js" />
+    <Content Include="Administrador\Adm_C_AccesoPrede\C_AccesoPreAjax.aspx" />
+    <Content Include="Administrador\Adm_C_AccesoPrede\C_AccesoPreTrasaccionsAjax.js" />
+    <Content Include="Administrador\Adm_C_AccesoPrede\C_AccesoPre_Carga_Valida.js" />
     <Content Include="Administrador\Adm_InvPuerta\InvPuerta.aspx" />
     <Content Include="Administrador\Adm_InvPuerta\InvPuerta.js" />
     <Content Include="Administrador\Adm_InvPuerta\InvPuertaAjax.aspx" />
@@ -476,6 +481,22 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Administrador\Adm_C_AccesoPrede\C_AccesoPre.aspx.designer.vb">
+      <DependentUpon>C_AccesoPre.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Adm_C_AccesoPrede\C_AccesoPre.aspx.vb">
+      <DependentUpon>C_AccesoPre.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Adm_C_AccesoPrede\C_AccesoPreAjax.aspx.designer.vb">
+      <DependentUpon>C_AccesoPreAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Adm_C_AccesoPrede\C_AccesoPreAjax.aspx.vb">
+      <DependentUpon>C_AccesoPreAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Adm_C_AccesoPrede\C_AccesoPreClass.vb" />
+    <Compile Include="Administrador\Adm_C_AccesoPrede\C_AccesoPreSQLClass.vb" />
     <Compile Include="Administrador\Adm_InvPuerta\InvPuerta.aspx.designer.vb">
       <DependentUpon>InvPuerta.aspx</DependentUpon>
     </Compile>

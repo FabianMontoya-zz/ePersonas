@@ -209,6 +209,7 @@ Public Class AutorizacionDocumentosAjax
         Dim result As String = ""
 
         objAutorizacionDocumentos.Nombre_Save = Request.Form("Documento")
+        objAutorizacionDocumentos.DescripVerificacion = Request.Form("NameDocumento")
         objAutorizacionDocumentos.Verificado = Request.Form("Verificacion_ID")
         objAutorizacionDocumentos.Fecha_Verifico = Request.Form("FVerificacion")
         objAutorizacionDocumentos.Observaciones_Validacion = Request.Form("Observacion")

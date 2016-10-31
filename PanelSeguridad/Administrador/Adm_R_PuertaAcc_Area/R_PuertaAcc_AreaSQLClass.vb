@@ -305,7 +305,20 @@ Public Class R_PuertaAcc_AreaSQLClass
                 End While
 
             Case "Matrix"
+                'recorremos la consulta por la cantidad de datos en la BD
+                While ReadConsulta.Read
 
+                    Dim objR_PuertaAcc_Area As New R_PuertaAcc_AreaClass
+                    'cargamos datos sobre el objeto de login
+                    objR_PuertaAcc_Area.Nit_ID = ReadConsulta.GetValue(0)
+                    objR_PuertaAcc_Area.PuertaAcceso_ID = ReadConsulta.GetValue(1)
+                    objR_PuertaAcc_Area.Area_ID = ReadConsulta.GetValue(2)
+                    objR_PuertaAcc_Area.DescripArea = ReadConsulta.GetValue(3)
+
+                    'agregamos a la lista
+                    ObjListR_PuertaAcc_Area.Add(objR_PuertaAcc_Area)
+
+                End While
 
         End Select
 
@@ -345,6 +358,31 @@ Public Class R_PuertaAcc_AreaSQLClass
         Result = conex.IDis(StrQuery, "1")
 
         Return Result
+    End Function
+
+    ''' <summary>
+    ''' lee la matriz de puertas de acceso
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Matrix_R_PuertaAcceso_Area()
+
+        Dim ObjList As New List(Of R_PuertaAcc_AreaClass)
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("1")
+        Dim BD_Param As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDParam").ToString
+
+        Dim sql As New StringBuilder
+
+        sql.Append(" SELECT RPA_Nit_ID, RPA_PuertaAcceso_ID, RPA_Area_ID, A.A_Descripcion  FROM R_PACCESO_AREA RPA " & _
+                                 " INNER JOIN " & BD_Param & ".dbo.AREA A ON A.A_Area_ID = RPA.RPA_Area_ID 	AND RPA.RPA_Nit_ID = A.A_Nit_ID " & _
+                                 " ORDER BY RPA_PuertaAcceso_ID ASC ")
+        Dim StrQuery As String = sql.ToString
+
+        ObjList = listR_PuertaAcc_Area(StrQuery, Conexion, "Matrix")
+
+        Return ObjList
+
     End Function
 
 #End Region

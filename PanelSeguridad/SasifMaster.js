@@ -24,6 +24,9 @@ $(document).ready(function () {
         this.value = (this.value + '').replace(/[^0-9a-zA-Z]/g, '');
     });
 
+    $('.Hours').focus(function () {
+        this.value = "";
+    });
 });
 
 
@@ -225,6 +228,15 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
             }
             break;
 
+        case "Select_Persona_Enc":
+            $('#' + Selector).append("<option value='0'>Todos</option>");
+            for (Item in Matrix) {
+                if (Matrix[Item].Nit_ID == Nit) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Document_ID + "'>" + Matrix[Item].Nombre + "</option>");
+                }
+            }
+            break;
+
         case "Select_Contrato":
             for (Item in Matrix) {
                 if (Matrix[Item].Nit_ID == Nit) {
@@ -288,15 +300,33 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
                 }
             }
             break;
+
+        case "Select_AreaAcceso":
+            $('#' + Selector).append("<option value='0'>Todos</option>");
+            for (Item in Matrix) {
+                if (Matrix[Item].PuertaAcceso_ID == Nit) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Area_ID + "'>" + Matrix[Item].Area_ID + " - " + Matrix[Item].DescripArea + "</option>");
+                }
+            }
+            break;
     }
 
     $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
 
-    if (Index_Edit == "")
-        $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
-    else
-        $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
+    switch (Index_Edit) {
+        case "":
+            $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
+            break;
 
+        case "0":
+            $("#" + Selector + " option[value= '0'] ").attr("selected", true);
+            break;
+
+        default:
+            $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
+            break;
+    }
+    
     $("#" + Selector).trigger("liszt:updated");
     $('.C_Chosen').trigger('chosen:updated');
 

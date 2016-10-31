@@ -243,6 +243,7 @@ function transaccionAjax_Update_Verificacion(State) {
         data: { "action": State,
             "Nit_ID": Nit,
             "Documento": $("#Vis_Documento_3").val(),
+            "NameDocumento": Doc_name_save,
             "Verificacion_ID": $("#Select_TVerificacion").val(),
             "FVerificacion": $("#TxtFVerificacion").val(),
             "Observacion": $("#TxtA_Observacion").val(),

@@ -403,6 +403,63 @@ PanelSeguridad
 	<param name="vp_S_ID"></param>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_AccesoPreSQLClass.Read_AllC_AccesoPre(System.String,System.String,System.String)">
+	<summary>
+ creala consulta para la tabla C_AccesoPre parametrizada (READ)
+ </summary>
+	<param name="vp_S_Filtro"></param>
+	<param name="vp_S_Opcion"></param>
+	<param name="vp_S_Contenido"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_AccesoPreSQLClass.InsertC_AccesoPre(PanelSeguridad.C_AccesoPreClass)">
+	<summary>
+ funcion que crea el query para la insercion de nuevo C_AccesoPre (INSERT)
+ </summary>
+	<param name="vp_Obj_C_AccesoPre"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_AccesoPreSQLClass.UpdateC_AccesoPre(PanelSeguridad.C_AccesoPreClass)">
+	<summary>
+ funcion que crea el query para la modificacion del C_AccesoPre (UPDATE)
+ </summary>
+	<param name="vp_Obj_C_AccesoPre"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_AccesoPreSQLClass.EraseC_AccesoPre(PanelSeguridad.C_AccesoPreClass)">
+	<summary>
+ funcion que crea el query para la eliminacion del C_AccesoPre (DELETE)
+ </summary>
+	<param name="vp_Obj_C_AccesoPre"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_AccesoPreSQLClass.Charge_DropListTipo_Ingreso">
+	<summary>
+ crea la consulta para cargar el combo
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_AccesoPreSQLClass.listC_AccesoPre(System.String,System.String,System.String)">
+	<summary>
+ funcion que trae el listado de C_AccesoPre para armar la tabla
+ </summary>
+	<param name="vp_S_StrQuery"></param>
+	<param name="vg_S_StrConexion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_AccesoPreSQLClass.Consulta_Repetido(PanelSeguridad.C_AccesoPreClass)">
+	<summary>
+ averigua si esta repetido
+ </summary>
+	<param name="vp_O_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_AccesoPreSQLClass.Matrix_RTP">
+	<summary>
+ consulta que trae los datos de asignar tarjeta
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.Adm_UsuarioSQLClass.Read_AllUser(System.String,System.String,System.String)">
 	<summary>
  crea la consulta para la tabla Usuarios parametrizada (READ)
@@ -1869,6 +1926,66 @@ To modify move field declaration from designer file to code-behind file.
  </summary>
 	<param name="vp_S_StrQuery"></param>
 	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_AccesoPreAjax.Consulta_C_AccesoPre">
+	<summary>
+ traemos todos los datos para tabla R_PuertaAcc_Area (READ)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_AccesoPreAjax.InsertC_AccesoPre">
+	<summary>
+ funcion que inserta en la tabla C_AccesoPre (INSERT)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_AccesoPreAjax.UpdateC_AccesoPre">
+	<summary>
+ funcion que actualiza en la tabla C_AccesoPre (UPDATE)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_AccesoPreAjax.EraseC_AccesoPre">
+	<summary>
+ funcion que elimina en la tabla C_AccesoPre (DELETE)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_AccesoPreAjax.CargarDroplist">
+	<summary>
+ funcion que carga el objeto DDL Links
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_AccesoPreAjax.CargarMPersonaDep">
+	<summary>
+ funcion que carga  Matrix PERSONAS 
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_AccesoPreAjax.Cargar_MatrixTarjeta">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_AccesoPreAjax.CargarMRTP">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_AccesoPreAjax.CargarMPAccesos">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_AccesoPreAjax.CargarMPAccesos_Area">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_AccesoPreAjax.CargarCliente">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_AccesoPreAjax.CargarTipo_Ingreso">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.Crud_DocSQLClass.Read_AllCrud_Doc(System.String,System.String,System.String)">
 	<summary>
@@ -4224,6 +4341,12 @@ To modify move field declaration from designer file to code-behind file.
  averigua si esta repetido
  </summary>
 	<param name="vp_O_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.R_PuertaAcc_AreaSQLClass.Matrix_R_PuertaAcceso_Area">
+	<summary>
+ lee la matriz de puertas de acceso
+ </summary>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.menuAjax.Consulta_menu">

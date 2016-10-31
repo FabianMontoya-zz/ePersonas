@@ -1,1 +1,0 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="TipoProduct_LeasingAjax.aspx.vb" Inherits="PanelSeguridad.TipoProduct_LeasingAjax" %>
