@@ -6,7 +6,131 @@ PanelSeguridad
 </name>
 </assembly>
 <members>
-<member name="M:PanelSeguridad.R_PuertaAcc_AreaAjax.Consulta_R_PuertaAcc_Area">
+<member name="M:PanelSeguridad.AccesoAjax.Consulta_Acceso">
+	<summary>
+ traemos todos los datos para tabla Acceso (READ)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AccesoAjax.InsertAcceso">
+	<summary>
+ funcion que inserta en la tabla Acceso (INSERT)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AccesoAjax.EraseAcceso">
+	<summary>
+ funcion que elimina en la tabla Acceso (DELETE)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AccesoAjax.Cargar_MatrixArea">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AccesoAjax.Cargar_MatrixPAcceso">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AccesoAjax.CargarDroplist">
+	<summary>
+ funcion que carga el objeto DDL Links
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AccesoAjax.CargarCliente">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AccesoSQLClass.Read_AllAcceso(System.String,System.String,System.String)">
+	<summary>
+ creala consulta para la tabla Acceso parametrizada (READ)
+ </summary>
+	<param name="vp_S_Filtro"></param>
+	<param name="vp_S_Opcion"></param>
+	<param name="vp_S_Contenido"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AccesoSQLClass.InsertAcceso(PanelSeguridad.AccesoClass)">
+	<summary>
+ funcion que crea el query para la insercion de nuevo Acceso (INSERT)
+ </summary>
+	<param name="vp_Obj_Acceso"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AccesoSQLClass.EraseAcceso(PanelSeguridad.AccesoClass)">
+	<summary>
+ funcion que crea el query para la eliminacion del Acceso (DELETE)
+ </summary>
+	<param name="vp_Obj_Acceso"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AccesoSQLClass.ReadCharge_DropList(System.String)">
+	<summary>
+ crea la consulta para cargar el combo
+ </summary>
+	<param name="vp_S_Table"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AccesoSQLClass.Charge_DropListAccesoDepend(System.String)">
+	<summary>
+ crea la consulta para cargar el combo
+ </summary>
+	<param name="vp_S_NitEmpresa"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AccesoSQLClass.Charge_DropListSeguridad(System.String)">
+	<summary>
+ crea la consulta para cargar el combo
+ </summary>
+	<param name="vp_S_Table"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AccesoSQLClass.listAcceso(System.String,System.String,System.String)">
+	<summary>
+ funcion que trae el listado de Acceso para armar la tabla
+ </summary>
+	<param name="vp_S_StrQuery"></param>
+	<param name="vg_S_StrConexion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AccesoSQLClass.Consulta_Repetido(PanelSeguridad.AccesoClass)">
+	<summary>
+ averigua si esta repetido
+ </summary>
+	<param name="vp_O_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AccesoSQLClass.Matrix_R_PuertaAcceso_Area">
+	<summary>
+ lee la matriz de puertas de acceso
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="F:PanelSeguridad.Sasif.head">
+	<summary>
+head control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:PanelSeguridad.Sasif.form1">
+	<summary>
+form1 control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:PanelSeguridad.Sasif.main">
+	<summary>
+main control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="M:PanelSeguridad.R_PuertaAcc_AreaAjax.Consulta_R_PuertaAcc_Area">
 	<summary>
  traemos todos los datos para tabla R_PuertaAcc_Area (READ)
  </summary>
@@ -1380,7 +1504,7 @@ PanelSeguridad
  funcion que carga el objeto DDL consulta
  </summary>
 	<remarks></remarks>
-</member><member name="F:PanelSeguridad.Sasif.head">
+</member><member name="F:PanelSeguridad.Sasif_Ing.head">
 	<summary>
 head control.
 </summary>
@@ -1388,7 +1512,7 @@ head control.
 Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
-</member><member name="F:PanelSeguridad.Sasif.form1">
+</member><member name="F:PanelSeguridad.Sasif_Ing.form1">
 	<summary>
 form1 control.
 </summary>
@@ -1396,7 +1520,7 @@ form1 control.
 Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
-</member><member name="F:PanelSeguridad.Sasif.main">
+</member><member name="F:PanelSeguridad.Sasif_Ing.main">
 	<summary>
 main control.
 </summary>

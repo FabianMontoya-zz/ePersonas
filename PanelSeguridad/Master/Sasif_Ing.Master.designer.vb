@@ -11,7 +11,7 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Sasif_Ing
+Partial Public Class Sasif
 
     '''<summary>
     '''head control.

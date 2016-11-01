@@ -111,6 +111,10 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Ingreso\Acceso\Acceso.aspx" />
+    <Content Include="Ingreso\Acceso\Acceso.js" />
+    <Content Include="Ingreso\Acceso\AccesoAjax.aspx" />
+    <Content Include="Ingreso\Acceso\AccesoTrasaccionsAjax.js" />
     <Content Include="Administrador\Adm_C_AccesoPrede\C_AccesoPre.aspx" />
     <Content Include="Administrador\Adm_C_AccesoPrede\C_AccesoPre.js" />
     <Content Include="Administrador\Adm_C_AccesoPrede\C_AccesoPreAjax.aspx" />
@@ -172,6 +176,7 @@
     <Content Include="css\Chosen\oss-credit.png" />
     <Content Include="css\Chosen\prism.css" />
     <Content Include="css\Chosen\style.css" />
+    <Content Include="css\css_master_Ing.css" />
     <Content Include="Documentos\AutorizacionDocumentos\AutorizacionDocumentos.aspx" />
     <Content Include="Documentos\AutorizacionDocumentos\AutorizacionDocumentos.js" />
     <Content Include="Documentos\AutorizacionDocumentos\AutorizacionDocumentosAjax.aspx" />
@@ -221,6 +226,9 @@
     <Content Include="images\relations.png" />
     <Content Include="images\search.png" />
     <Content Include="images\user.png" />
+    <Content Include="Ingreso\menu.js" />
+    <Content Include="Ingreso\SasifMaster_Cosult.js" />
+    <Content Include="Master\Sasif_Ing.js" />
     <Content Include="McCain\Image\activo.png" />
     <Content Include="McCain\Image\alert.png" />
     <Content Include="McCain\Image\cabeza2.jpg" />
@@ -481,6 +489,22 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ingreso\Acceso\Acceso.aspx.designer.vb">
+      <DependentUpon>Acceso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ingreso\Acceso\Acceso.aspx.vb">
+      <DependentUpon>Acceso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ingreso\Acceso\AccesoAjax.aspx.designer.vb">
+      <DependentUpon>AccesoAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ingreso\Acceso\AccesoAjax.aspx.vb">
+      <DependentUpon>AccesoAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ingreso\Acceso\AccesoClass.vb" />
+    <Compile Include="Ingreso\Acceso\AccesoSQLClass.vb" />
     <Compile Include="Administrador\Adm_C_AccesoPrede\C_AccesoPre.aspx.designer.vb">
       <DependentUpon>C_AccesoPre.aspx</DependentUpon>
     </Compile>
@@ -808,6 +832,12 @@
     </Compile>
     <Compile Include="Documentos\RutaDocumentos\RutaDocumentosClass.vb" />
     <Compile Include="Documentos\RutaDocumentos\RutaDocumentosSQLClass.vb" />
+    <Compile Include="Master\Sasif_Ing.Master.designer.vb">
+      <DependentUpon>Sasif_Ing.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Master\Sasif_Ing.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Parametros\Area\Area.aspx.designer.vb">
       <DependentUpon>Area.aspx</DependentUpon>
     </Compile>
@@ -1275,6 +1305,8 @@
     <Content Include="Contratos\Sasif_menu.Master" />
     <None Include="css\datatables\images\Sorting icons.psd" />
     <Content Include="Documentos\Sasif_menu.Master" />
+    <Content Include="Master\Sasif_Ing.Master" />
+    <Content Include="Ingreso\Sasif_menu.Master" />
     <None Include="McCain\Image\Cedula.pdf" />
     <None Include="McCain\Image\PasadoJudicial.pdf" />
     <None Include="My Project\Application.myapp">

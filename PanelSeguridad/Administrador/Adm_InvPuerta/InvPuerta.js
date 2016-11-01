@@ -52,6 +52,7 @@ $(document).ready(function () {
     $("#TxtIDTarjeta").focus();
 });
 
+//captura tarjeta y mustra complementos a llenar
 function Capture_Tarjeta_ID() {
     $("#TxtIDTarjeta").change(function () {
         var StrID = $(this).val();
@@ -67,7 +68,6 @@ function Capture_Tarjeta_ID() {
     });
 
 }
-
 
 //verifica si vienen parametros por la ruta 
 function ValidaParametros() {
