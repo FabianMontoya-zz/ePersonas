@@ -111,6 +111,7 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\css_WebAcceso.css" />
     <Content Include="Ingreso\Acceso\Acceso.aspx" />
     <Content Include="Ingreso\Acceso\Acceso.js" />
     <Content Include="Ingreso\Acceso\AccesoAjax.aspx" />

@@ -1,57 +1,5 @@
 ﻿/*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transaccionAjax_MPersonas(State) {
-    $.ajax({
-        url: "AccesoAjax.aspx",
-        type: "POST",
-        //crear json
-        data: { "action": State,
-            "tabla": 'RUTA'
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            if (result == "") {
-                Matrix_Persona = [];
-            }
-            else {
-                Matrix_Persona  = JSON.parse(result);
-            }
-        },
-        error: function () {
-
-        }
-    });
-}
-
-/*-------------------- carga ---------------------------*/
-//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transaccionAjax_MDocWork(State) {
-    $.ajax({
-        url: "AccesoAjax.aspx",
-        type: "POST",
-        //crear json
-        data: { "action": State,
-            "tabla": 'RUTA'
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            if (result == "") {
-                Matrix_DocWork = [];
-            }
-            else {
-                Matrix_DocWork = JSON.parse(result);
-            }
-        },
-        error: function () {
-
-        }
-    });
-}
-
-
-
-/*-------------------- carga ---------------------------*/
-//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transaccionAjax_MPAcceso(State) {
     $.ajax({
         url: "AccesoAjax.aspx",
@@ -92,32 +40,6 @@ function transaccionAjax_MArea(State) {
             }
             else {
                 Matrix_Area = JSON.parse(result);
-            }
-        },
-        error: function () {
-
-        }
-    });
-}
-
-/*-------------------- carga ---------------------------*/
-//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_Documento(State) {
-    $.ajax({
-        url: "AccesoAjax.aspx",
-        type: "POST",
-        //crear json
-        data: { "action": State,
-            "tabla": 'IMPUESTO_GASTO'
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            if (result == "") {
-                ArrayTdoc = [];
-            }
-            else {
-                ArrayTdoc = JSON.parse(result);
-                charge_CatalogList(ArrayTdoc, "Select_Documento", 1);
             }
         },
         error: function () {

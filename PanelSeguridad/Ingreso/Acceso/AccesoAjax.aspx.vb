@@ -11,6 +11,12 @@ Public Class AccesoAjax
 
             Select Case vl_S_option_login
 
+                Case "MATRIX_PERSONAS"
+                    CargarM_Personas()
+
+                Case "MATIRXDOC_WORK"
+                    Carga_Matrix_DocWork()
+
                 Case "MATRIX_PACCESO"
                     Cargar_MatrixPAcceso()
 
@@ -20,8 +26,13 @@ Public Class AccesoAjax
                 Case "cargar_droplist_busqueda"
                     CargarDroplist()
 
+
+
                 Case "Cliente"
                     CargarCliente()
+
+                Case "Documento"
+                    CargarDocumento()
 
                 Case "consulta"
                     Consulta_Acceso()
@@ -133,6 +144,35 @@ Public Class AccesoAjax
 #End Region
 
 #Region "DROP LIST"
+
+    ''' <summary>
+    ''' funcion que carga el objeto DDL consulta
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarM_Personas()
+
+        Dim SQL As New ClienteSQLClass
+        Dim ObjList As New List(Of ClienteClass)
+
+        ObjList = SQL.Matrix_DatosPagAcceso()
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' cara la matriz de documento para trabajo
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub Carga_Matrix_DocWork()
+
+        Dim SQL As New DocumentosSQLClass
+        Dim ObjList As New List(Of DocumentosClass)
+
+        ObjList = SQL.MatrixDocumentWork()
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
+
     ''' <summary>
     ''' funcion que carga el objeto DDL consulta
     ''' </summary>
@@ -161,7 +201,6 @@ Public Class AccesoAjax
 
     End Sub
 
-
     ''' <summary>
     ''' funcion que carga el objeto DDL Links
     ''' </summary>
@@ -188,6 +227,21 @@ Public Class AccesoAjax
         Dim vl_S_Tabla As String = Request.Form("tabla")
 
         ObjListDroplist = SQL.Charge_DropListCliente(vl_S_Tabla)
+        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga el objeto DDL consulta
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarDocumento()
+
+        Dim SQL As New ClienteSQLClass
+        Dim ObjListDroplist As New List(Of Droplist_Class)
+        Dim vl_S_Tabla As String = Request.Form("tabla")
+
+        ObjListDroplist = SQL.Charge_DropListDocumento(vl_S_Tabla)
         Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
 
     End Sub

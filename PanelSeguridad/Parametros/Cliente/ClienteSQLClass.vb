@@ -744,6 +744,26 @@ Public Class ClienteSQLClass
 
                 End While
 
+            Case "Matrix_Pag_Acceso"
+                'recorremos la consulta por la cantidad de datos en la BD
+                While ReadConsulta.Read
+
+                    Dim objCliente As New ClienteClass
+                    'cargamos datos sobre el objeto de login
+                    objCliente.Nombre = ReadConsulta.GetValue(0)
+                    objCliente.Area_ID = ReadConsulta.GetValue(1)
+                    objCliente.Cargo_ID = ReadConsulta.GetValue(2)
+                    objCliente.Nit_ID = ReadConsulta.GetValue(3)
+                    If Not (IsDBNull(ReadConsulta.GetValue(4))) Then objCliente.DescripArea = ReadConsulta.GetValue(4) Else objCliente.DescripArea = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(5))) Then objCliente.DescripCargo = ReadConsulta.GetValue(5) Else objCliente.DescripCargo = ""
+                    objCliente.DescripEmpresa = ReadConsulta.GetValue(6)
+                    objCliente.TypeDocument_ID = ReadConsulta.GetValue(7)
+                    objCliente.Document_ID = ReadConsulta.GetValue(8)
+
+                    'agregamos a la lista
+                    ObjListCliente.Add(objCliente)
+
+                End While
         End Select
 
         'cerramos conexiones
@@ -962,6 +982,12 @@ Public Class ClienteSQLClass
 
     End Function
 
+    ''' <summary>
+    ''' Consuta usuario cliente
+    ''' </summary>
+    ''' <param name="vp_S_Usuario"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function InformacionUsuario(ByVal vp_S_Usuario As String)
 
         Dim ObjList As New List(Of ClienteClass)
@@ -982,9 +1008,46 @@ Public Class ClienteSQLClass
         ObjList = list(StrQuery, Conexion, "DatosUsuario")
 
         Return ObjList
+    End Function
 
+    ''' <summary>
+    ''' lee matrix para pagina de acceso
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Matrix_DatosPagAcceso()
+
+        Dim ObjList As New List(Of ClienteClass)
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("2")
+
+        Dim sql As New StringBuilder
+
+        sql.Append("  SELECT C.CLI_Nombre +' '+ C.CLI_Nombre_2 +' '+ C.CLI_Apellido_1 +' '+ C.CLI_Apellido_2 AS NOMBRE,  " & _
+                               "                  C.CLI_Area_ID, " & _
+                               "                  C.CLI_Cargo_ID, " & _
+                               "                  C.CLI_Nit_ID, " & _
+                               "                  A.A_Descripcion, " & _
+                               "                  CAR.C_Descripcion, " & _
+                               "                  C2.CLI_Nombre +' '+ C2.CLI_Nombre_2 +' '+ C2.CLI_Apellido_1 +' '+ C2.CLI_Apellido_2 AS EMPRESA, " & _
+                               "                  C.CLI_TypeDocument_ID, " & _
+                               "                  C.CLI_Document_ID " & _
+                               "  FROM CLIENTE C " & _
+                               "  LEFT JOIN AREA A  ON A.A_Area_ID = C.CLI_Area_ID " & _
+                               "  LEFT JOIN CARGO CAR ON CAR.C_Cargo_ID = C.CLI_Cargo_ID " & _
+                               "  LEFT JOIN CLIENTE C2 ON C2.CLI_Document_ID = " & _
+                               "                      CASE	 SUBSTRING(C.CLI_Nit_ID,0,LEN(C.CLI_Nit_ID)) " & _
+                               "                                     WHEN '' THEN 0 " & _
+                               "                                     ELSE SUBSTRING(C.CLI_Nit_ID,0,LEN(C.CLI_Nit_ID)) " & _
+                               "                      END  ")
+        Dim StrQuery As String = sql.ToString
+
+        ObjList = list(StrQuery, Conexion, "Matrix_Pag_Acceso")
+
+        Return ObjList
 
     End Function
+
 #End Region
 
 End Class
