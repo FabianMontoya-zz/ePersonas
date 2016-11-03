@@ -17,8 +17,7 @@ function Documentos(Option_Document) {
         $("#BtnSave_Document").css("display", "none");
     else
         $("#BtnSave_Document").css("display", "inline-table");
-
-
+        
     switch (Option_Document) {
         case "V":
             $("#Txt_Nit_Doc").val(D_Nit);
@@ -127,6 +126,7 @@ function Tabla_General_Document(Opc_Link) {
     });
 }
 
+//ver documento en pantalla
 function VerDocumento(RutaDocumento, Documento) {
 
     $("#IF_Visor").attr("width", "100%");
@@ -136,8 +136,6 @@ function VerDocumento(RutaDocumento, Documento) {
     $("#Dialog_Visor").dialog("open");
     $("#Dialog_Visor").dialog("option", "title", Documento + " de: " + Nombre_Persona);
 }
-
-
 
 /*---------------------------------------------------------------------------------------------------------------*/
 /*                      CASOS DE LLAMADO SEGUN LA OPERACION DE DOCUMENTOS                             */
@@ -199,7 +197,6 @@ function Select_Option_Document(Select_control, Secuencia, Ruta, Nombre, Nit, ty
     }
 
 }
-
 
 /*---------------------------------------------------------------------------------------------------------------*/
 /*                                        CREAR DE DOCUMENTOS                                                                       */

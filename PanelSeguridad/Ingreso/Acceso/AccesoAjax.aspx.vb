@@ -17,6 +17,9 @@ Public Class AccesoAjax
                 Case "MATIRXDOC_WORK"
                     Carga_Matrix_DocWork()
 
+                Case "MATRIX_PERSONAS_DOC"
+                    Carga_Matrix_Personas_Doc()
+
                 Case "MATRIX_PACCESO"
                     Cargar_MatrixPAcceso()
 
@@ -169,6 +172,20 @@ Public Class AccesoAjax
         Dim ObjList As New List(Of DocumentosClass)
 
         ObjList = SQL.MatrixDocumentWork()
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' cara la matriz de documento para trabajo
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub Carga_Matrix_Personas_Doc()
+
+        Dim SQL As New ClienteSQLClass
+        Dim ObjList As New List(Of DocumentosClass)
+
+        ObjList = SQL.Matrix_Personas_Documentos()
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub

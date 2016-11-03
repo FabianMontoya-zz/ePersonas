@@ -48,7 +48,30 @@ function transaccionAjax_MDocWork(State) {
     });
 }
 
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_MPersona_Doc(State) {
+    $.ajax({
+        url: "AccesoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: { "action": State,
+            "tabla": 'RUTA'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_PersonaDoc= [];
+            }
+            else {
+                Matrix_PersonaDoc = JSON.parse(result);
+            }
+        },
+        error: function () {
 
+        }
+    });
+}
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist

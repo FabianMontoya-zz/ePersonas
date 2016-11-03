@@ -11,107 +11,85 @@
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
     <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />
     <link href="../../css/custom/charge.css" rel="stylesheet" type="text/css" />
-    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
     <link href="../../css/Chosen/chosen.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/jquery.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Chosen/chosen.jquery.js" type="text/javascript"></script>
     <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/css_WebAcceso.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
     <div id="Container_title_Form">
     </div>
-    <div id="Marco_link">
-        <div id="Marco_trabajo_Form">
+    <div id="Marco_Web">
+        <div id="Marco_trabajo_Web">
             <div id="Container_controls">
-                <table id="T_Radio" style="width: 400px; text-align: left;">
+                <table id="Tabla_Captura" style="width: 1100px; text-align: left;">
                     <tr>
-                        <td style="width: 100px;" class="Label_Bold">
-                            Lector
+                        <td class="Label_Bold" style="width: 150px;">
+                            Tipo Documento
                         </td>
-                        <td>
-                            <input type="radio" name="Captura" value="L" />
+                        <td style="width: 350px;">
+                            <select id="Select_Documento" class="C_Chosen">
+                            </select>
                         </td>
-                        <td style="width: 100px;" class="Label_Bold">
-                            Digitación
+                        <td style="padding-bottom: 25px; width: 80px;">
+                            <span class="cssToolTip">
+                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img1"
+                                    src="../../images/error.png" />
+                                <span class="SpamEG"></span></span>
                         </td>
-                        <td>
-                            <input type="radio" name="Captura" value="D" />
+                        <td class="Label_Bold" style="width: 100px;">
+                            Identificación
+                        </td>
+                        <td style="width: 150px;">
+                            <span class="cssToolTip_Form">
+                                <input type="text" id="TxtDoc" maxlength="18" class="Numeric" style="width: 150px;" />
+                                <span class="Spam_AN"></span></span>
+                        </td>
+                        <td style="padding-bottom: 25px; width: 100px;">
+                            <span class="cssToolTip">
+                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img2"
+                                    src="../../images/error.png" />
+                                <span class="SpamEG"></span></span>
+                        </td>
+                        <td style="width: 100px;">
+                            <input id="Btnguardar" class="BWeb" type="button" value="Consultar" onclick="BtnConsulta();" />
                         </td>
                     </tr>
                 </table>
-                <div id="Div_L">
-                    <table id="Tabla_4" style="width: 700px; text-align: left;">
-                        <tr>
-                            <td style="width: 105px;" class="Label_Bold">
-                                ID Tarjeta
-                            </td>
-                            <td>
-                                <span class="cssToolTip_Form">
-                                    <input type="text" id="TxtIDTarjeta" maxlength="10" class="Numeric" style="width: 165px;
-                                        height: 25px; font: 20px/20px Verdana,sans-serif; text-align: center;" />
-                                    <span class="SpamALEC"></span></span>
-                            </td>
-                            <td style="padding-bottom: 25px; width: 250px;">
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div id="Div_D">
-                    <table id="Table1" style="width: 700px; text-align: left;">
-                        <tr>
-                            <td class="Label_Bold" style="width: 100px;">
-                                Tipo Documento
-                            </td>
-                            <td style="width: 60px; width: 100px;">
-                                <select id="Select_TD" class="C_Chosen">
-                                    <option value="-1">Seleccione...</option>
-                                    <option value="1">Cedula</option>
-                                    <option value="2">Nit</option>
-                                    <option value="3">Cedula Extranjera</option>
-                                </select>
-                            </td>
-                            <td style="padding-bottom: 25px; width: 100px;">
-                                <span class="cssToolTip">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img1"
-                                        src="../../images/error.png" />
-                                    <span class="SpamEG"></span></span>
-                            </td>
-                            <td class="Label_Bold" style="width: 100px;">
-                                Identificación
-                            </td>
-                            <td style="width: 150px;">
-                                <span class="cssToolTip_Form">
-                                    <input type="text" id="TxtDoc" maxlength="19" class="Numeric" style="width: 150px;" />
-                                    <span class="SpamAN"></span></span>
-                            </td>
-                            <td style="padding-bottom: 25px; width: 100px;">
-                                <span class="cssToolTip">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img2"
-                                        src="../../images/error.png" />
-                                    <span class="SpamEG"></span></span>
-                            </td>
-                        </tr>
-                    </table>
-                    <table id="Tabla_1" style="width: 700px; text-align: left;">
-                        <tr>
-                            <td style="width: 150px;" class="Label_Bold">
-                                Multi - Empresa
-                            </td>
-                            <td>
-                                <select id="Select_EmpresaNit" class="C_Chosen">
-                                </select>
-                            </td>
-                            <td style="padding-bottom: 25px; width: 250px;">
-                                <span class="cssToolTip">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img3"
-                                        src="../../images/error.png" />
-                                    <span class="SpamEG"></span></span>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
+                <table id="Inf_persona">
+                    <tr>
+                        <td class="Label_Bold" style="width: 100px;">
+                            Nombre
+                        </td>
+                        <td id="L_Nombre" style="width: 350px;">
+                        </td>
+                        <td class="Label_Bold" style="width: 100px;">
+                            Empresa
+                        </td>
+                        <td id="L_Empresa" style="width: 350px;">
+                        </td>
+                        <td id="imagen" rowspan="2" style="text-align: end;">
+                            <img alt="foto" title="" style="height: 100px; width: 80px; border-radius: 4px;
+                                border-color: #420101; border-width: 2px; border-style: outset;" id="Imgfoto"
+                                src="../../images/avatar.png" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Label_Bold">
+                            Area
+                        </td>
+                        <td id="L_Area">
+                        </td>
+                        <td class="Label_Bold">
+                            Cargo
+                        </td>
+                        <td id="L_Cargo">
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
@@ -130,7 +108,7 @@
             </tr>
             <tr>
                 <td colspan="2" align="center">
-                    <input id="BtnExitD" type="button" value="Salir" style="width: 40%;" onclick="x();" />
+                    <input id="BtnExitD" class="BWeb" type="button" value="Salir" style="width: 40%;" onclick="x();" />
                 </td>
             </tr>
         </table>

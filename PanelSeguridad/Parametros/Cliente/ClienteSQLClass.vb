@@ -738,7 +738,7 @@ Public Class ClienteSQLClass
                     objCliente.Nit_ID = ReadConsulta.GetValue(0)
                     objCliente.TypeDocument_ID = ReadConsulta.GetValue(1)
                     objCliente.Document_ID = ReadConsulta.GetValue(2)
-                   
+
                     'agregamos a la lista
                     ObjListCliente.Add(objCliente)
 
@@ -759,11 +759,30 @@ Public Class ClienteSQLClass
                     objCliente.DescripEmpresa = ReadConsulta.GetValue(6)
                     objCliente.TypeDocument_ID = ReadConsulta.GetValue(7)
                     objCliente.Document_ID = ReadConsulta.GetValue(8)
+                    If Not (IsDBNull(ReadConsulta.GetValue(9))) Then objCliente.GrpDocumentos = ReadConsulta.GetValue(9) Else objCliente.GrpDocumentos = 0
 
                     'agregamos a la lista
                     ObjListCliente.Add(objCliente)
 
                 End While
+
+            Case "Matrix_Personas_Documentos"
+                While ReadConsulta.Read
+                    Dim obj As New DocumentosClass
+
+                    obj.Nit_ID = ReadConsulta.GetValue(0)
+                    obj.TypeDocument_ID = ReadConsulta.GetValue(1)
+                    obj.Document_ID = ReadConsulta.GetValue(2)
+
+                    If Not (IsDBNull(ReadConsulta.GetValue(3))) Then obj.GrpDocumentos_ID = ReadConsulta.GetValue(3) Else obj.GrpDocumentos_ID = 0
+                    If Not (IsDBNull(ReadConsulta.GetValue(4))) Then obj.Documento_ID = ReadConsulta.GetValue(4) Else obj.Documento_ID = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(5))) Then obj.Descripcion = ReadConsulta.GetValue(5) Else obj.Descripcion = ""
+
+                    'agregamos a la lista
+                    ObjListDoc.Add(obj)
+
+                End While
+
         End Select
 
         'cerramos conexiones
@@ -771,12 +790,17 @@ Public Class ClienteSQLClass
         objConexBD.Close()
         'retornamos la consulta
 
-        If vp_S_TypeList = "Matrix_GrpDoc" Then
-            Return ObjListDoc
-        Else
-            Return ObjListCliente
-        End If
-      
+        Select Case vp_S_TypeList
+
+            Case "Matrix_Personas_Documentos"
+                Return ObjListDoc
+            Case "Matrix_GrpDoc"
+                Return ObjListDoc
+
+            Case Else
+                Return ObjListCliente
+        End Select
+
     End Function
 
 #End Region
@@ -1031,8 +1055,9 @@ Public Class ClienteSQLClass
                                "                  CAR.C_Descripcion, " & _
                                "                  C2.CLI_Nombre +' '+ C2.CLI_Nombre_2 +' '+ C2.CLI_Apellido_1 +' '+ C2.CLI_Apellido_2 AS EMPRESA, " & _
                                "                  C.CLI_TypeDocument_ID, " & _
-                               "                  C.CLI_Document_ID " & _
-                               "  FROM CLIENTE C " & _
+                               "                  C.CLI_Document_ID, " & _
+                                "                  C.CLI_GrpDocumentos " & _
+                                "  FROM CLIENTE C " & _
                                "  LEFT JOIN AREA A  ON A.A_Area_ID = C.CLI_Area_ID " & _
                                "  LEFT JOIN CARGO CAR ON CAR.C_Cargo_ID = C.CLI_Cargo_ID " & _
                                "  LEFT JOIN CLIENTE C2 ON C2.CLI_Document_ID = " & _
@@ -1046,6 +1071,38 @@ Public Class ClienteSQLClass
 
         Return ObjList
 
+    End Function
+
+    ''' <summary>
+    ''' lee matrix para documentos personas empresas
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Matrix_Personas_Documentos()
+
+        Dim ObjList As New List(Of DocumentosClass)
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("2")
+
+        Dim sql As New StringBuilder
+
+        sql.Append("SELECT  CLI_Nit_ID,  " & _
+                              "                  CLI_TypeDocument_ID, " & _
+                              "                  CLI_Document_ID, " & _
+                              "                  CLI_GrpDocumentos, " & _
+                              "                  RGRD.RGD_Documentos_ID, " & _
+                              "                  D.DOC_Descripcion " & _
+                              "  FROM CLIENTE C " & _
+                              "     LEFT JOIN DOCUMENTOS_D.dbo.GRUPO_DOCUMENTO GD ON GD.GD_Grp_Documento_ID = C.CLI_GrpDocumentos AND GD.GD_Nit_ID = C.CLI_Nit_ID " & _
+                              "     LEFT JOIN DOCUMENTOS_D.dbo.R_GRPDOC_DOCUMENTOS  RGRD ON RGRD.RGD_Grp_Documento_ID = GD.GD_Grp_Documento_ID " & _
+                              "     LEFT JOIN  DOCUMENTOS_D.dbo.DOCUMENTOS D ON D.DOC_Documentos_ID= RGRD.RGD_Documentos_ID " & _
+                              "  ORDER BY CLI_Nit_ID ASC")
+
+        Dim StrQuery As String = sql.ToString
+
+        ObjList = list(StrQuery, Conexion, "Matrix_Personas_Documentos")
+
+        Return ObjList
     End Function
 
 #End Region

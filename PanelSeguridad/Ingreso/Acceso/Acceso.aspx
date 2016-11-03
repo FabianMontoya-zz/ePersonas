@@ -72,9 +72,8 @@
                         <td id="L_Empresa" style="width: 350px;">
                         </td>
                         <td id="imagen" rowspan="2" style="text-align: end;">
-                            <img alt="foto" title="" style="height: 100px; width: 80px; border-radius: 4px;
-                                border-color: #420101; border-width: 2px; border-style: outset;" id="Imgfoto"
-                                src="../../images/avatar.png" />
+                            <img alt="foto" title="" style="height: 100px; width: 80px; border-radius: 4px; border-color: #420101;
+                                border-width: 2px; border-style: outset;" id="Imgfoto" src="../../images/avatar.png" />
                         </td>
                     </tr>
                     <tr>
@@ -90,6 +89,12 @@
                         </td>
                     </tr>
                 </table>
+            </div>
+            <div id="Container_BloqueAcceso">
+                <div id="container_T_DP" style="margin-top: 10px;">
+                </div>
+                <div id="container_T_DE" style="margin-top: 10px;">
+                </div>
             </div>
         </div>
     </div>
@@ -108,7 +113,8 @@
             </tr>
             <tr>
                 <td colspan="2" align="center">
-                    <input id="BtnExitD" class="BWeb" type="button" value="Salir" style="width: 40%;" onclick="x();" />
+                    <input id="BtnExitD" class="BWeb" type="button" value="Salir" style="width: 40%;"
+                        onclick="x();" />
                 </td>
             </tr>
         </table>
@@ -128,6 +134,15 @@
             <tr>
                 <td colspan="2" align="center">
                     <input id="BtnElimin" type="button" value="Confirmar" onclick="BtnElimina();" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="Dialog_Visor">
+        <table style="width: 100%; height: 100%;">
+            <tr>
+                <td>
+                    <iframe id="IF_Visor" src=""></iframe>
                 </td>
             </tr>
         </table>

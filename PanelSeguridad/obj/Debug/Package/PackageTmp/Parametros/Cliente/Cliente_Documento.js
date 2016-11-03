@@ -432,8 +432,6 @@ function Search_Document(secuencia, Nit, type) {
 
                 $("#Vista_FechaCreacion").html(Matrix_DocWork[itemArray].UsuarioCreacion + "   " + Matrix_DocWork[itemArray].FechaCreacion);
                 $("#Vista_FechaActualizacion").html(Matrix_DocWork[itemArray].UsuarioActualizacion + "    " + Matrix_DocWork[itemArray].FechaActualizacion);
-
-
             }
         }
     }
@@ -488,7 +486,7 @@ function TableDocument_Anexos(Secuencia) {
         if (Matrix_DocWork[itemArray].Secuencia_Doc == Secuencia) {
             if (Matrix_DocWork[itemArray].Secuencia_Doc != Matrix_DocWork[itemArray].Secuencia_ID) {
                 var StrRutadocument = Matrix_DocWork[itemArray].RutaRelativaDocumento + Matrix_DocWork[itemArray].Nombre_Save + "." + Matrix_DocWork[itemArray].DescripFormato;
-                Html += "<tr id= 'TDoc_H_" + Matrix_DocWork[itemArray].Index + "'><td><select id='Select_" + Matrix_DocWork[itemArray].Secuencia_ID + "' class='Opciones' onchange=\"Select_Option_Document(this,'" + Matrix_DocWork[itemArray].Secuencia_ID + "','" + StrRutadocument + "','" + Matrix_DocWork[itemArray].Nombre_Save + "','" + Matrix_DocWork[itemArray].Nit_ID + "');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='R'>Detalle</option></select></td><td>" + Matrix_DocWork[itemArray].Descripcion + "</td></tr>";
+                Html += "<tr id= 'TDoc_H_" + Matrix_DocWork[itemArray].Index + "'><td><select id='Select_" + Matrix_DocWork[itemArray].Secuencia_ID + "' class='Opciones' onchange=\"Select_Option_Document(this,'" + Matrix_DocWork[itemArray].Secuencia_ID + "','" + StrRutadocument + "','" + Matrix_DocWork[itemArray].Nombre_Save + "','" + Matrix_DocWork[itemArray].Nit_ID + "','ANEXO');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='R'>Detalle</option></select></td><td>" + Matrix_DocWork[itemArray].Descripcion + "</td></tr>";
             }
         }
     }

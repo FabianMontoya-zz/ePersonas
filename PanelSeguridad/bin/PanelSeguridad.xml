@@ -303,6 +303,11 @@ PanelSeguridad
  cara la matriz de documento para trabajo
  </summary>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AccesoAjax.Carga_Matrix_Personas_Doc">
+	<summary>
+ cara la matriz de documento para trabajo
+ </summary>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.AccesoAjax.Cargar_MatrixArea">
 	<summary>
  funcion que carga el objeto DDL consulta
@@ -2423,6 +2428,12 @@ To modify move field declaration from designer file to code-behind file.
 </member><member name="M:PanelSeguridad.ClienteSQLClass.Matrix_DatosPagAcceso">
 	<summary>
  lee matrix para pagina de acceso
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.ClienteSQLClass.Matrix_Personas_Documentos">
+	<summary>
+ lee matrix para documentos personas empresas
  </summary>
 	<returns></returns>
 	<remarks></remarks>
