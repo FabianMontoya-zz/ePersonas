@@ -91,6 +91,54 @@ function fecha() {
 
 }
 
+function validate_fechaMayorQue(fechaInicial, fechaFinal, Type) {
+
+    var Resultado;
+    var valuesStart;
+    var valuesEnd;
+    var dateStart;
+    var dateEnd;
+
+    switch (Type) {
+
+        case "SystemCompare":
+            var SysFecha = new Date();
+            var Fecha_System = SysFecha.getDate() + "-" + (SysFecha.getMonth() + 1) + "-" + SysFecha.getFullYear();
+            valuesStart = fechaInicial.split("-");
+            valuesEnd = Fecha_System.split("-");
+
+            dateStart = new Date(valuesStart[0], (valuesStart[1] - 1), valuesStart[2]);
+            dateEnd = new Date(valuesEnd[2], (valuesEnd[1] - 1), valuesEnd[0]);
+
+            console.log(dateStart + ">=" + dateEnd);
+            if (dateStart >= dateEnd)
+                Resultado = "Menor";
+            else
+                Resultado = "Mayor";
+            break;
+
+            break;
+
+        case "DefaultCompare":
+            valuesStart = fechaInicial.split("-");
+            valuesEnd = fechaFinal.split("-");
+
+            // Verificamos que la fecha no sea posterior a la actual
+            dateStart = new Date(valuesStart[2], (valuesStart[1] - 1), valuesStart[0]);
+            dateEnd = new Date(valuesEnd[2], (valuesEnd[1] - 1), valuesEnd[0]);
+
+            if (dateStart >= dateEnd)
+                Resultado = "Menor";
+            else
+                Resultado = "Mayor";
+            break;
+
+    }
+
+
+    return Resultado;
+}
+
 //cargar combos
 function charge_CatalogList(objCatalog, nameList, selector) {
 
@@ -326,7 +374,7 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
             $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
             break;
     }
-    
+
     $("#" + Selector).trigger("liszt:updated");
     $('.C_Chosen').trigger('chosen:updated');
 

@@ -15,6 +15,7 @@ Public Class DocumentosClass
 
     Private _DocExist_ID As Integer
     Private _Documento_ID As String
+    Private _GrpDocumentos_ID As Integer
 
     Private _RutaDocumento As String
     Private _RutaDocumentoDestino As String
@@ -94,6 +95,16 @@ Public Class DocumentosClass
             Me._Document_ID = value
         End Set
     End Property
+    Public Property GrpDocumentos_ID() As Integer
+        Get
+            Return Me._GrpDocumentos_ID
+        End Get
+        Set(ByVal value As Integer)
+            Me._GrpDocumentos_ID = value
+        End Set
+    End Property
+
+
 
     Public Property DocExist_ID() As Integer
         Get
