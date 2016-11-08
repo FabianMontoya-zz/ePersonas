@@ -27,8 +27,14 @@
             <div id="Container_controls">
                 <table id="Tabla_Captura" style="width: 1100px; text-align: left;">
                     <tr>
-                        <td class="Label_Bold" style="width: 150px;">
-                            Tipo Documento
+                        <td style="width: 105px;" class="Label_Bold">ID Tarjeta
+                        </td>
+                        <td>
+                            <span class="cssToolTip_Form">
+                                <input type="text" id="TxtIDTarjeta" maxlength="10" class="Numeric" style="width: 165px; height: 25px; font: 20px/20px Verdana,sans-serif; text-align: center;" />
+                                <span class="SpamALEC"></span></span>
+                        </td>
+                        <td class="Label_Bold" style="width: 150px;">Tipo Documento
                         </td>
                         <td style="width: 350px;">
                             <select id="Select_Documento" class="C_Chosen">
@@ -40,8 +46,7 @@
                                     src="../../images/error.png" />
                                 <span class="SpamEG"></span></span>
                         </td>
-                        <td class="Label_Bold" style="width: 100px;">
-                            Identificación
+                        <td class="Label_Bold" style="width: 100px;">Identificación
                         </td>
                         <td style="width: 150px;">
                             <span class="cssToolTip_Form">
@@ -61,32 +66,24 @@
                 </table>
                 <table id="Inf_persona">
                     <tr>
-                        <td class="Label_Bold" style="width: 100px;">
-                            Nombre
+                        <td class="Label_Bold" style="width: 100px;">Nombre
                         </td>
-                        <td id="L_Nombre" style="width: 350px;">
+                        <td id="L_Nombre" style="width: 350px;"></td>
+                        <td class="Label_Bold" style="width: 100px;">Empresa
                         </td>
-                        <td class="Label_Bold" style="width: 100px;">
-                            Empresa
-                        </td>
-                        <td id="L_Empresa" style="width: 350px;">
-                        </td>
+                        <td id="L_Empresa" style="width: 350px;"></td>
                         <td id="imagen" rowspan="2" style="text-align: end;">
-                            <img alt="foto" title="" style="height: 100px; width: 80px; border-radius: 4px; border-color: #420101;
-                                border-width: 2px; border-style: outset;" id="Imgfoto" src="../../images/avatar.png" />
+                            <img alt="foto" title="" style="height: 100px; width: 80px; border-radius: 4px; border-color: #420101; border-width: 2px; border-style: outset;"
+                                id="Imgfoto" src="../../images/avatar.png" />
                         </td>
                     </tr>
                     <tr>
-                        <td class="Label_Bold">
-                            Area
+                        <td class="Label_Bold">Area
                         </td>
-                        <td id="L_Area">
+                        <td id="L_Area"></td>
+                        <td class="Label_Bold">Cargo
                         </td>
-                        <td class="Label_Bold">
-                            Cargo
-                        </td>
-                        <td id="L_Cargo">
-                        </td>
+                        <td id="L_Cargo"></td>
                     </tr>
                 </table>
             </div>
