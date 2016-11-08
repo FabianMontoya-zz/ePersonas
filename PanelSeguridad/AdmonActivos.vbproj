@@ -21,6 +21,10 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>4.0</OldToolsVersion>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -265,6 +269,10 @@
     <Content Include="Parametros\Ayudas\Ayudas.js" />
     <Content Include="Parametros\Ayudas\AyudasAjax.aspx" />
     <Content Include="Parametros\Ayudas\AyudasTrasaccionsAjax.js" />
+    <Content Include="Parametros\Calendario\Calendario.aspx" />
+    <Content Include="Parametros\Calendario\Calendario.js" />
+    <Content Include="Parametros\Calendario\CalendarioAjax.aspx" />
+    <Content Include="Parametros\Calendario\CalendarioTrasaccionsAjax.js" />
     <Content Include="Parametros\Cargo\Cargo.aspx" />
     <Content Include="Parametros\Cargo\Cargo.js" />
     <Content Include="Parametros\Cargo\CargoAjax.aspx" />
@@ -877,6 +885,22 @@
     </Compile>
     <Compile Include="Parametros\Ayudas\AyudasClass.vb" />
     <Compile Include="Parametros\Ayudas\AyudasSQLClass.vb" />
+    <Compile Include="Parametros\Calendario\Calendario.aspx.designer.vb">
+      <DependentUpon>Calendario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Calendario\Calendario.aspx.vb">
+      <DependentUpon>Calendario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Calendario\CalendarioAjax.aspx.designer.vb">
+      <DependentUpon>CalendarioAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Calendario\CalendarioAjax.aspx.vb">
+      <DependentUpon>CalendarioAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Calendario\CalendarioClass.vb" />
+    <Compile Include="Parametros\Calendario\CalendarioSQLClass.vb" />
     <Compile Include="Parametros\Cargo\Cargo.aspx.designer.vb">
       <DependentUpon>Cargo.aspx</DependentUpon>
     </Compile>

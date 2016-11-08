@@ -442,29 +442,3 @@ function Clear() {
 
 }
 
-//llamado de mensajes
-function Mensaje_General(Title, Msn, Type) {
-    $("#dialog").dialog("open");
-    $("#dialog").dialog("option", "title", Title);
-    $("#Mensaje_alert").text(Msn);
-
-    switch (Type) {
-        case "E":
-            $("#DE").css("display", "block");
-            $("#SE").css("display", "none");
-            $("#WE").css("display", "none");
-            break;
-
-        case "W":
-            $("#DE").css("display", "none");
-            $("#SE").css("display", "none");
-            $("#WE").css("display", "block");
-            break;
-
-        case "S":
-            $("#DE").css("display", "none");
-            $("#SE").css("display", "block");
-            $("#WE").css("display", "none");
-            break;
-    }
-}
