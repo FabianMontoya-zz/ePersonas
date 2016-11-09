@@ -237,6 +237,7 @@
     <Content Include="images\relations.png" />
     <Content Include="images\search.png" />
     <Content Include="images\user.png" />
+    <Content Include="Ingreso\Acceso\Acceso_Tarjeta.js" />
     <Content Include="Ingreso\menu.js" />
     <Content Include="Ingreso\SasifMaster_Cosult.js" />
     <Content Include="Master\Sasif_Ing.js" />

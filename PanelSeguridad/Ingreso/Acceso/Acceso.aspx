@@ -6,6 +6,7 @@
     <script src="../../SasifMaster.js" type="text/javascript"></script>
     <script src="../SasifMaster_Cosult.js" type="text/javascript"></script>
     <script src="Acceso.js" type="text/javascript"></script>
+    <script src="Acceso_Tarjeta.js" type="text/javascript"></script>
     <script src="AccesoTrasaccionsAjax.js" type="text/javascript"></script>
     <link href="../../css/css_login.css" rel="stylesheet" type="text/css" />
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
@@ -72,6 +73,12 @@
                         <td class="Label_Bold" style="width: 100px;">Empresa
                         </td>
                         <td id="L_Empresa" style="width: 350px;"></td>
+                        <td id="Semaforo" rowspan="2" style="text-align: end;">
+                            <span class='cssToolTip_Form'>
+                                <img id="Sucess" alt='No' title='' style='height: 35px; width: 35px;' src='../../images/C_GREEN.png' /><span >Documentos completos, Vigentes y Verificados</span></span>
+                           <span class="cssToolTip_L">
+                                  <img id="Fail" alt='No' title='' style='height: 35px; width: 35px;' src='../../images/C_RED.png' /><span id="Spam_Mensaje"></span></span>
+                        </td>
                         <td id="imagen" rowspan="2" style="text-align: end;">
                             <img alt="foto" title="" style="height: 100px; width: 80px; border-radius: 4px; border-color: #420101; border-width: 2px; border-style: outset;"
                                 id="Imgfoto" src="../../images/avatar.png" />
