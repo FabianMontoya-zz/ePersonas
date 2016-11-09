@@ -269,6 +269,10 @@
     <Content Include="Parametros\Ayudas\Ayudas.js" />
     <Content Include="Parametros\Ayudas\AyudasAjax.aspx" />
     <Content Include="Parametros\Ayudas\AyudasTrasaccionsAjax.js" />
+    <Content Include="Parametros\CalendarioProgresivo\CalendarioProgresivo.aspx" />
+    <Content Include="Parametros\CalendarioProgresivo\CalendarioProgresivo.js" />
+    <Content Include="Parametros\CalendarioProgresivo\CalendarioProgresivoAjax.aspx" />
+    <Content Include="Parametros\CalendarioProgresivo\CalendarioProgresivoTrasaccionsAjax.js" />
     <Content Include="Parametros\Calendario\Calendario.aspx" />
     <Content Include="Parametros\Calendario\Calendario.js" />
     <Content Include="Parametros\Calendario\CalendarioAjax.aspx" />
@@ -885,6 +889,22 @@
     </Compile>
     <Compile Include="Parametros\Ayudas\AyudasClass.vb" />
     <Compile Include="Parametros\Ayudas\AyudasSQLClass.vb" />
+    <Compile Include="Parametros\CalendarioProgresivo\CalendarioProgresivo.aspx.designer.vb">
+      <DependentUpon>CalendarioProgresivo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\CalendarioProgresivo\CalendarioProgresivo.aspx.vb">
+      <DependentUpon>CalendarioProgresivo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\CalendarioProgresivo\CalendarioProgresivoAjax.aspx.designer.vb">
+      <DependentUpon>CalendarioProgresivoAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\CalendarioProgresivo\CalendarioProgresivoAjax.aspx.vb">
+      <DependentUpon>CalendarioProgresivoAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\CalendarioProgresivo\CalendarioProgresivoClass.vb" />
+    <Compile Include="Parametros\CalendarioProgresivo\CalendarioProgresivoSQLClass.vb" />
     <Compile Include="Parametros\Calendario\Calendario.aspx.designer.vb">
       <DependentUpon>Calendario.aspx</DependentUpon>
     </Compile>

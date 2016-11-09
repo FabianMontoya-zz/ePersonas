@@ -66,7 +66,7 @@ function HabilitarPanel(opcion) {
         case "buscar":
             $("#TablaDatos_D").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TCalendario").html("");
+            $("#container_TGrid").html("");
             estado = opcion;
             Clear();
             break;
@@ -74,7 +74,7 @@ function HabilitarPanel(opcion) {
         case "modificar":
             $("#TablaDatos_D").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TCalendario").html("");
+            $("#container_TGrid").html("");
             estado = opcion;
             ResetError();
             Clear();
@@ -83,7 +83,7 @@ function HabilitarPanel(opcion) {
         case "eliminar":
             $("#TablaDatos_D").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TCalendario").html("");
+            $("#container_TGrid").html("");
             estado = opcion;
             Clear();
             break;
@@ -226,6 +226,8 @@ function Eliminar(index_Nit, index_Calendario) {
 
     for (itemArray in ArrayCalendario) {
         if (index_Nit == ArrayCalendario[itemArray].Nit_ID && index_Calendario == ArrayCalendario[itemArray].Calendario_ID) {
+
+            editNit_ID = ArrayCalendario[itemArray].Nit_ID;
             editID = ArrayCalendario[itemArray].Calendario_ID;
             $("#dialog_eliminar").dialog("option", "title", "Eliminar?");
             $("#dialog_eliminar").dialog("open");
