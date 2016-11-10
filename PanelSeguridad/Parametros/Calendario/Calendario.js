@@ -39,6 +39,19 @@ $(document).ready(function () {
         dialogClass: "Dialog_Sasif",
         modal: true
     });
+
+    $("#Dialog_Calendar").dialog({
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true,
+        width: 1030,
+        height: 550,
+        overlay: {
+            opacity: 0.5,
+            background: "black"
+        }
+    });
+        
 });
 
 //salida del formulario
@@ -61,6 +74,7 @@ function HabilitarPanel(opcion) {
             ResetError();
             Clear();
             estado = opcion;
+            $("#Dialog_Calendar").dialog("open");
             break;
 
         case "buscar":
@@ -97,7 +111,7 @@ function BtnConsulta() {
     var filtro;
     var ValidateSelect = ValidarDroplist();
     var opcion;
-    
+
     if (ValidateSelect == 1) {
         filtro = "N";
         opcion = "ALL";

@@ -66,85 +66,289 @@
                         </td>
                     </tr>
                 </table>
-                <div id="TablaDatos_D">
-                    <table id="Tabla_1" style="width: 700px; text-align: left;">
-                        <tr>
-                            <td style="width: 150px;" class="Label_Bold">Multi - Empresa
-                            </td>
-                            <td>
-                                <select id="Select_EmpresaNit" class="C_Chosen">
-                                </select>
-                            </td>
-                            <td style="padding-bottom: 25px; width: 250px;">
-                                <span class="cssToolTip">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img1"
-                                        src="../../images/error.png" />
-                                    <span class="SpamEG"></span></span>
-                            </td>
-                        </tr>
-                    </table>
-                    <table id="Tabla_2" style="width: 700px; text-align: left;">
-                        <tr>
-                            <td style="width: 150px;" class="Label_Bold">Codigo
-                            </td>
-                            <td style="width: 70px;">
-                                <span class="cssToolTip_Form">
-                                    <input type="text" id="Txt_ID" maxlength="5" class="Numeric" style="width: 70px;" />
-                                    <span class="Spam_AN"></span></span>
-                            </td>
-                            <td style="padding-bottom: 25px; width: 40px;">
-                                <span class="cssToolTip">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img2"
-                                        src="../../images/error.png" />
-                                    <span class="SpamEG"></span></span>
-                            </td>
-                            <td class="Label_Bold" style="width: 80px;">Descripción
-                            </td>
-                            <td style="width: 200px;">
-                                <span class="cssToolTip_Form">
-                                    <input type="text" id="TxtDescription" maxlength="50" style="width: 200px;" />
-                                    <span class="Spam_AST"></span></span>
-                            </td>
-                            <td style="padding-bottom: 25px;">
-                                <span class="cssToolTip">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img3"
-                                        src="../../images/error.png" />
-                                    <span class="SpamEG"></span></span>
-                            </td>
-                        </tr>
-                    </table>
-                    <table id="Tabla_3" style="width: 700px; text-align: left;">
-                        <tr>
-                            <td style="width: 150px;" class="Label_Bold">Tipo Calendario
-                            </td>
-                            <td>
-                                <select id="Select_TipoCalendario" class="C_Chosen">
-                                    <option value="-1">Seleccione...</option>
-                                    <option value="1">Por día de la semana</option>
-                                    <option value="2">Fechas progresivas</option>
-                                </select>
-                            </td>
-                            <td style="padding-bottom: 25px; width: 320px;">
-                                <span class="cssToolTip">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img5"
-                                        src="../../images/error.png" />
-                                    <span class="SpamEG"></span></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="width: 150px;" class="Label_Bold">
-                                <p>
-                                </p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="4" align="center">
-                                <input id="Btnguardar" type="button" value="Guardar" onclick="BtnCrear();" />
-                            </td>
-                        </tr>
-                    </table>
-                </div>
             </div>
+        </div>
+    </div>
+    <div id="Dialog_Calendar">
+        <div id="TablaDatos_D">
+            <table id="Tabla_1" style="width: 700px; text-align: left;">
+                <tr>
+                    <td style="width: 150px;" class="Label_Bold">Multi - Empresa
+                    </td>
+                    <td>
+                        <select id="Select_EmpresaNit" class="C_Chosen">
+                        </select>
+                    </td>
+                    <td style="padding-bottom: 25px; width: 250px;">
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img1"
+                                src="../../images/error.png" />
+                            <span class="SpamEG"></span></span>
+                    </td>
+                </tr>
+            </table>
+            <table id="Tabla_2" style="width: 700px; text-align: left;">
+                <tr>
+                    <td style="width: 70px;" class="Label_Bold">Codigo
+                    </td>
+                    <td style="width: 100px;">
+                        <span class="cssToolTip_Form">
+                            <input type="text" id="Txt_ID" maxlength="5" class="Numeric" style="width: 70px;" />
+                            <span class="Spam_AN"></span></span>
+                    </td>
+                    <td style="padding-bottom: 25px; width: 72px;">
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img2"
+                                src="../../images/error.png" />
+                            <span class="SpamEG"></span></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="Label_Bold" style="width: 70px;">Descripción
+                    </td>
+                    <td style="width: 100px;">
+                        <span class="cssToolTip_Form">
+                            <input type="text" id="TxtDescription" maxlength="50" style="width: 200px;" />
+                            <span class="Spam_AST"></span></span>
+                    </td>
+                    <td style="padding-bottom: 25px;">
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img3"
+                                src="../../images/error.png" />
+                            <span class="SpamEG"></span></span>
+                    </td>
+                </tr>
+            </table>
+            <table id="Tabla_3" style="width: 700px; text-align: left;">
+                <tr>
+                    <td style="width: 150px;" class="Label_Bold">Tipo Calendario
+                    </td>
+                    <td>
+                        <select id="Select_TipoCalendario" class="C_Chosen">
+                            <option value="-1">Seleccione...</option>
+                            <option value="1">Por día de la semana</option>
+                            <option value="2">Fechas progresivas</option>
+                        </select>
+                    </td>
+                    <td style="padding-bottom: 25px; width: 320px;">
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img5"
+                                src="../../images/error.png" />
+                            <span class="SpamEG"></span></span>
+                    </td>
+                </tr>
+            </table>
+            <table id="TablaHoras">
+                <thead>
+                    <tr style="text-align: center;">
+
+                        <th align="center" colspan="2">Lunes
+                        </th>
+                        <th align="center" colspan="2">Martes
+                        </th>
+                        <th align="center" colspan="2">Miercoles
+                        </th>
+                        <th align="center" colspan="2">Jueves
+                        </th>
+                        <th align="center" colspan="2">Viernes
+                        </th>
+                        <th align="center" colspan="2">Sabado
+                        </th>
+                        <th align="center" colspan="2">Domingo
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="text-align: center;">
+
+                        <td align="center" colspan="2">
+                            <font face="Verdana" size="2 " color="black">
+                                <select id="Select_StateLun" class="C_Chosen">
+                                    <option value="L">Laboral</option>
+                                    <option value="F">Festivo</option>
+                                </select>
+                            </font>
+                        </td>
+                        <td align="center" colspan="2">
+                            <font face="Verdana" size="2 " color="black">
+                                <select id="Select1" class="C_Chosen">
+                                    <option value="L">Laboral</option>
+                                    <option value="F">Festivo</option>
+                                </select>
+                            </font>
+                        </td>
+                        <td align="center" colspan="2">
+                            <font face="Verdana" size="2 " color="black">
+                                <select id="Select2" class="C_Chosen">
+                                    <option value="L">Laboral</option>
+                                    <option value="F">Festivo</option>
+                                </select>
+                            </font>
+                        </td>
+                        <td align="center" colspan="2">
+                            <font face="Verdana" size="2 " color="black">
+                                <select id="Select3" class="C_Chosen">
+                                    <option value="L">Laboral</option>
+                                    <option value="F">Festivo</option>
+                                </select>
+                            </font>
+                        </td>
+                        <td align="center" colspan="2">
+                            <font face="Verdana" size="2 " color="black">
+                                <select id="Select4" class="C_Chosen">
+                                    <option value="L">Laboral</option>
+                                    <option value="F">Festivo</option>
+                                </select>
+                            </font>
+                        </td>
+                        <td align="center" colspan="2">
+                            <font face="Verdana" size="2 " color="black">
+                                <select id="Select5" class="C_Chosen">
+                                    <option value="L">Laboral</option>
+                                    <option value="F">Festivo</option>
+                                </select>
+                            </font>
+                        </td>
+                        <td align="center" colspan="2">
+                            <font face="Verdana" size="2 " color="black">
+                                <select id="Select6" class="C_Chosen">
+                                    <option value="L">Laboral</option>
+                                    <option value="F">Festivo</option>
+                                </select>
+                            </font>
+                        </td>
+                    </tr>
+                    <tr style="text-align: center;">
+                        <td>
+                            <font face="Verdana" size="2 " color="black"><b>Hora Inicial</b> </font>
+                        </td>
+                        <td>
+                            <font face="Verdana" size="2 " color="black"><b>Hora Final</b> </font>
+                        </td>
+                        <td>
+                            <font face="Verdana" size="2 " color="black"><b>Hora Inicial</b> </font>
+                        </td>
+                        <td>
+                            <font face="Verdana" size="2 " color="black"><b>Hora Final</b> </font>
+                        </td>
+                        <td>
+                            <font face="Verdana" size="2 " color="black"><b>Hora Inicial</b> </font>
+                        </td>
+                        <td>
+                            <font face="Verdana" size="2 " color="black"><b>Hora Final</b> </font>
+                        </td>
+                        <td>
+                            <font face="Verdana" size="2 " color="black"><b>Hora Inicial</b> </font>
+                        </td>
+                        <td>
+                            <font face="Verdana" size="2 " color="black"><b>Hora Final</b> </font>
+                        </td>
+                        <td>
+                            <font face="Verdana" size="2 " color="black"><b>Hora Inicial</b> </font>
+                        </td>
+                        <td>
+                            <font face="Verdana" size="2 " color="black"><b>Hora Final</b> </font>
+                        </td>
+                        <td>
+                            <font face="Verdana" size="2 " color="black"><b>Hora Inicial</b> </font>
+                        </td>
+                        <td>
+                            <font face="Verdana" size="2 " color="black"><b>Hora Final</b> </font>
+                        </td>
+                        <td>
+                            <font face="Verdana" size="2 " color="black"><b>Hora Inicial</b> </font>
+                        </td>
+                        <td>
+                            <font face="Verdana" size="2 " color="black"><b>Hora Final</b> </font>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="cssToolTip_Form">
+                                <input id="TxtIniMar1" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                    class="Spam_AH"></span></span>
+                        </td>
+                        <td>
+                            <span class="cssToolTip_Form">
+                                <input id="TxtFinMar1" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                    class="Spam_AH"></span></span>
+                        </td>
+                        <td>
+                            <span class="cssToolTip_Form">
+                                <input id="TxtIniMar2" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                    class="Spam_AH"></span></span>
+                        </td>
+                        <td>
+                            <span class="cssToolTip_Form">
+                                <input id="TxtFinMar2" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                    class="Spam_AH"></span></span>
+                        </td>
+                        <td>
+                            <span class="cssToolTip_Form">
+                                <input id="TxtIniMar3" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                    class="Spam_AH"></span></span>
+                        </td>
+                        <td>
+                            <span class="cssToolTip_Form">
+                                <input id="TxtFinMar3" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                    class="Spam_AH"></span></span>
+                        </td>
+                        <td>
+                            <span class="cssToolTip_Form">
+                                <input id="TxtIniMar4" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                    class="Spam_AH"></span></span>
+                        </td>
+                        <td>
+                            <span class="cssToolTip_Form">
+                                <input id="TxtFinMar4" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                    class="Spam_AH"></span></span>
+                        </td>
+                        <td>
+                            <span class="cssToolTip_Form">
+                                <input id="Text1" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                    class="Spam_AH"></span></span>
+                        </td>
+                        <td>
+                            <span class="cssToolTip_Form">
+                                <input id="Text2" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                    class="Spam_AH"></span></span>
+                        </td>
+                        <td>
+                            <span class="cssToolTip_Form">
+                                <input id="Text3" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                    class="Spam_AH"></span></span>
+                        </td>
+                        <td>
+                            <span class="cssToolTip_Form">
+                                <input id="Text4" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                    class="Spam_AH"></span></span>
+                        </td>
+                        <td>
+                            <span class="cssToolTip_Form">
+                                <input id="Text5" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                    class="Spam_AH"></span></span>
+                        </td>
+                        <td>
+                            <span class="cssToolTip_Form">
+                                <input id="Text6" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                    class="Spam_AH"></span></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table>
+                <tr>
+                    <td style="width: 150px;" class="Label_Bold">
+                        <p>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" align="center">
+                        <input id="Btnguardar" type="button" value="Guardar" onclick="BtnCrear();" />
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
     <div id="dialog" title="Basic dialog">
