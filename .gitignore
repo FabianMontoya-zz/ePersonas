@@ -1,6 +1,8 @@
 /PanelSeguridad/bin/PanelSeguridad.pdb
 /PanelSeguridad/bin/PanelSeguridad.xml
 /PanelSeguridad/obj/Debug
+/PanelSeguridad/obj/Release
 AdmonActivos.suo
 *.pdb
 PanelSeguridad/bin/PanelSeguridad.xml
+PanelSeguridad/AdmonActivos.vbproj.user
