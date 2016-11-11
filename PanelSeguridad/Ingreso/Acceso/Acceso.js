@@ -56,6 +56,8 @@ $(document).ready(function () {
     $("#Fail").css("display", "none");
 
     $("#Inf_persona").css("display", "none");
+    $("#Inf_Ingreso").css("display", "none");
+
     $("#Div_D").css("display", "none");
 
     //funcion para las ventanas emergentes
@@ -77,18 +79,6 @@ $(document).ready(function () {
         modal: true,
         width: 1000,
         height: 520,
-        overlay: {
-            opacity: 0.5,
-            background: "black"
-        }
-    });
-
-    $("#Dialog_AccesoPredeterminado").dialog({
-        autoOpen: false,
-        dialogClass: "Dialog_Sasif_Web",
-        modal: true,
-        width: 700,
-        height: 400,
         overlay: {
             opacity: 0.5,
             background: "black"
@@ -206,6 +196,7 @@ function SearchEmpresa() {
         case 0:
             $("#Sucess").css("display", "inline-table");
             $("#Fail").css("display", "none");
+            $("#Inf_Ingreso").css("display", "inline-table");
             Tabla_AccesosPredeterminados();
             break;
         default:
@@ -507,6 +498,8 @@ function Clear() {
     $("#TxtDoc").removeAttr("disabled");
 
     $("#Inf_persona").css("display", "None");
+    $("#Inf_Ingreso").css("display", "none");
+
     $("#L_Nombre").html("");
     $("#L_Empresa").html("");
     $("#L_Area").html("");
@@ -514,6 +507,7 @@ function Clear() {
 
     $("#container_T_DP").html("");
     $("#container_T_DE").html("");
+    $("#Container_Acceso").html("");
 
     $("#Sucess").css("display", "none");
     $("#Fail").css("display", "none");

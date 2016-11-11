@@ -100,7 +100,13 @@
                     </tr>
                 </table>
             </div>
-            <div id="Container_BloqueAcceso">
+            <div id="Inf_Ingreso" style="margin-top: 10px; width: 100%;">
+                <div id="Cointainer_ingreso">
+                </div>
+                <div id="Container_Acceso">
+                </div>
+            </div>
+            <div id="Container_BloqueAcceso" style="width: 100%;">
                 <div id="container_T_DP" style="margin-top: 10px;">
                 </div>
                 <div id="container_T_DE" style="margin-top: 10px;">
@@ -156,9 +162,5 @@
                 </td>
             </tr>
         </table>
-    </div>
-    <div id="Dialog_AccesoPredeterminado">
-        <div id="Container_Acceso">
-        </div>
     </div>
 </asp:Content>
