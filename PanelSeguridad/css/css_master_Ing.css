@@ -29,7 +29,7 @@
 #Header
 {
     float: none;
-    height: 145px;
+    height: 125px;
 }
 
 /* -------         fondo            ------*/
@@ -57,7 +57,7 @@
 .main
 {
     text-align: center;
-    padding-left:50px;
+    padding-left: 50px;
 }
 
 /* -------         dimencion panel 1            ------*/
@@ -78,6 +78,7 @@
     overflow-x: scroll;
     overflow-y: scroll;
     border: 1px solid #000000;
+    position: relative;
 }
 
 /* --------------------------------------------------------------------------- */
@@ -85,16 +86,37 @@
 /* --------------------------------------------------------------------------- */
 
 /* -------         fondo            ------*/
-.footer
+#Footer
 {
-    background-repeat: no-repeat;
-    background-position: center; /*background-size: cover;*/
+    position: absolute;
+    border-radius: 3px;
+    background: -webkit-linear-gradient(#b70d0d, #631111); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#b70d0d, #631111); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#b70d0d, #631111); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#b70d0d, #631111); /* Standard syntax (must be last)*/
+    margin-top: 5px;
+    width: 95%;
+    margin-left: 25px;
+    bottom: 0;
+    z-index: 100;
 }
+
+.Dimencion_Footer
+{
+    height: 40px;
+    transition: all 0.8s ease;
+}
+
+    .Dimencion_Footer:hover
+    {
+        height: 100px;
+        transition: all 0.8s ease;
+    }
 
 /* -------         parrafos            ------*/
 #Parraf_1, #Parraf_2, #Parraf_3
 {
-    color: #b70d0d;
+    color: #ffffff;
     font-weight: bold;
     font-size: small;
 }
