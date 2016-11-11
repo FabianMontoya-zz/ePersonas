@@ -1,1 +1,0 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="R_Persona_TarjetaAjax.aspx.vb" Inherits="PanelSeguridad.R_Persona_TarjetaAjax" %>

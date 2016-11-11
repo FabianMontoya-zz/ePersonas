@@ -2,3 +2,5 @@
 /PanelSeguridad/bin/PanelSeguridad.xml
 /PanelSeguridad/obj/Debug
 AdmonActivos.suo
+*.pdb
+PanelSeguridad/bin/PanelSeguridad.xml
