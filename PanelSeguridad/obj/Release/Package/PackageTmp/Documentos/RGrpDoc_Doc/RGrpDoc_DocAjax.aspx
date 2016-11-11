@@ -1,1 +1,0 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="RGrpDoc_DocAjax.aspx.vb" Inherits="PanelSeguridad.RGrpDoc_DocAjax" %>
