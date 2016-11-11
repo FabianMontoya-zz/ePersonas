@@ -109,6 +109,7 @@ function fecha() {
 
 }
 
+//Valida que la fecha inicial y final sean coherentes
 function validate_fechaMayorQue(fechaInicial, fechaFinal, Type) {
 
     var Resultado;
@@ -151,6 +152,24 @@ function validate_fechaMayorQue(fechaInicial, fechaFinal, Type) {
 
     }
     return Resultado;
+}
+
+//valida las hora inicial y final que sean coherentes
+function Validahora(V_HoraInicial, V_HoraFinal) {
+
+    var A_V_HoraInicial = V_HoraInicial.split(":");
+    var A_V_HoraFinal = V_HoraFinal.split(":");
+
+    var Valida = 0;
+
+    if (parseInt(A_V_HoraInicial[0]) > parseInt(A_V_HoraFinal[0]))
+        Valida = 1;
+
+    if (Valida == 0)
+        if (parseInt(A_V_HoraInicial[1]) > parseInt(A_V_HoraFinal[1]))
+            Valida = 1;
+
+        return Valida;
 }
 
 //llamado de mensajes

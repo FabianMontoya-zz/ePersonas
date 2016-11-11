@@ -69,7 +69,7 @@ $(document).ready(function () {
         $("#TxtIniDom").timepicker();
         $("#TxtFinDom").timepicker();
     });
-   
+
 });
 
 //salida del formulario
