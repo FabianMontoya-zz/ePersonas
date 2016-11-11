@@ -122,6 +122,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\css_WebAcceso.css" />
+    <Content Include="images\C_GREEN.png" />
+    <Content Include="images\C_RED.png" />
+    <Content Include="images\C_YELLOW.png" />
+    <Content Include="images\LOOK_BLACK.png" />
+    <Content Include="images\LOOK_WHITE.png" />
+    <Content Include="images\SASIF_NEW.png" />
     <Content Include="Ingreso\Acceso\Acceso.aspx" />
     <Content Include="Ingreso\Acceso\Acceso.js" />
     <Content Include="Ingreso\Acceso\AccesoAjax.aspx" />
@@ -233,7 +239,6 @@
     <Content Include="images\documentos.png" />
     <Content Include="images\error_2.png" />
     <Content Include="images\logo.png" />
-    <Content Include="images\people_online.png" />
     <Content Include="images\relations.png" />
     <Content Include="images\search.png" />
     <Content Include="images\user.png" />
@@ -402,48 +407,20 @@
     <Content Include="css\theme_blue_Sky\images\ui-icons_72a7cf_256x240.png" />
     <Content Include="css\theme_blue_Sky\images\ui-icons_ffffff_256x240.png" />
     <Content Include="css\theme_blue_Sky\theme.css" />
-    <Content Include="images\actualizar.gif" />
-    <Content Include="images\add.gif" />
     <Content Include="images\alert.png" />
-    <Content Include="images\archivo.gif" />
-    <Content Include="images\autorizar.gif" />
-    <Content Include="images\ayuda.gif" />
-    <Content Include="images\barra_de_progreso.gif" />
     <Content Include="images\cabeza2.jpg" />
-    <Content Include="images\carga.gif" />
-    <Content Include="images\componentes.gif" />
-    <Content Include="images\consulta.gif" />
-    <Content Include="images\correo.gif" />
-    <Content Include="images\crear.gif" />
-    <Content Include="images\cronograma.gif" />
-    <Content Include="images\del.gif" />
-    <Content Include="images\document.gif" />
-    <Content Include="images\Documentos.gif" />
-    <Content Include="images\eliminar.gif" />
     <Content Include="images\error.png" />
     <Content Include="images\exit.png" />
     <Content Include="images\file.jpg" />
-    <Content Include="images\folder_collapsed.gif" />
-    <Content Include="images\folder_extended.gif" />
     <Content Include="images\fondo1.jpg" />
     <Content Include="images\fondo11.jpg" />
-    <Content Include="images\informa.gif" />
     <Content Include="images\logo-actual.png" />
-    <Content Include="images\mapa.gif" />
-    <Content Include="images\mensajes.gif" />
     <Content Include="images\menu1.jpg" />
     <Content Include="images\menu2.jpg" />
     <Content Include="images\menu3.jpg" />
     <Content Include="images\menu4.jpg" />
-    <Content Include="images\presupuesto.gif" />
-    <Content Include="images\salir.gif" />
     <Content Include="images\sasif1.gif" />
-    <Content Include="images\semam.gif" />
-    <Content Include="images\semro.gif" />
-    <Content Include="images\semve.gif" />
     <Content Include="images\success.png" />
-    <Content Include="images\tabla.gif" />
-    <Content Include="images\unidad.gif" />
     <Content Include="images\validation.png" />
     <Content Include="login\CambioPassword.aspx" />
     <Content Include="login\CambioPassword.js" />
@@ -1365,6 +1342,7 @@
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
+    <None Include="My Project\PublishProfiles\Profile1.pubxml" />
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>
