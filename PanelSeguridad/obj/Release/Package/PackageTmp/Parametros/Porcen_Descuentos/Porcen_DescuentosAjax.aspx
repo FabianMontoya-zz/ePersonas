@@ -1,1 +1,0 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Porcen_DescuentosAjax.aspx.vb" Inherits="PanelSeguridad.Porcen_DescuentosAjax" %>

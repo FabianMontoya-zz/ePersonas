@@ -1,8 +1,0 @@
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\PanelSeguridad.dll
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\PanelSeguridad.pdb
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\PanelSeguridad.xml
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Release\PanelSeguridad.Resources.resources
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Release\AdmonActivos.vbproj.GenerateResource.Cache
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Release\PanelSeguridad.dll
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Release\PanelSeguridad.xml
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Release\PanelSeguridad.pdb
