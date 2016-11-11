@@ -308,6 +308,11 @@ PanelSeguridad
  cara la matriz de documento para trabajo
  </summary>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AccesoAjax.Cargar_Matrix_AccesoPredeterminado">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.AccesoAjax.Cargar_MatrixArea">
 	<summary>
  funcion que carga el objeto DDL consulta
@@ -512,6 +517,12 @@ PanelSeguridad
 </member><member name="M:PanelSeguridad.C_AccesoPreSQLClass.Matrix_RTP">
 	<summary>
  consulta que trae los datos de asignar tarjeta
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_AccesoPreSQLClass.Matrix_TAccesoPreddeterminado">
+	<summary>
+ consulta que trae todos los datos de accesos predeterminados
  </summary>
 	<returns></returns>
 	<remarks></remarks>

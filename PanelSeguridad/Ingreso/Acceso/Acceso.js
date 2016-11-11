@@ -3,6 +3,7 @@ var Matrix_Persona = [];
 var Matrix_DocWork = [];
 var Matrix_PersonaDoc = [];
 var Matrix_Valida_Ingreso = [];
+var Matrix_AccesoPredeterminados = [];
 
 var Matrix_PAcceso = [];
 var Matrix_Area = [];
@@ -30,9 +31,12 @@ var editDocID;
 
 //evento load de los Links
 $(document).ready(function () {
+
+    ConsultaParametrosURL();
     transaccionAjax_MPersonas('MATRIX_PERSONAS');
     transaccionAjax_MDocWork('MATIRXDOC_WORK');
     transaccionAjax_MPersona_Doc('MATRIX_PERSONAS_DOC');
+    transaccionAjax_MAccesoPrede('MATRIX_ACCESOPREDETER');
 
     transaccionAjax_MPAcceso('MATRIX_PACCESO');
     transaccionAjax_MArea('MATRIX_AREA');
@@ -79,24 +83,46 @@ $(document).ready(function () {
         }
     });
 
+    $("#Dialog_AccesoPredeterminado").dialog({
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif_Web",
+        modal: true,
+        width: 700,
+        height: 400,
+        overlay: {
+            opacity: 0.5,
+            background: "black"
+        }
+    });
+
     Capture_Tarjeta_ID();
     $("#TxtIDTarjeta").focus();
 });
 
 //consuta datos
 function BtnConsulta() {
-    var validate = Campos();
 
-    if (validate == 0) {
-        var Exist = SearchPersona();
-        if (Exist == 1) {
-            $("#Inf_persona").css("display", "inline-table");
-            SearchEmpresa();
-        }
-        else {
-            Mensaje_General("No existe!", "La persona a ingresar No existe en el Sistema!", "W");
-            $("#Inf_persona").css("display", "none");
-        }
+    switch ($("#Btnguardar").val()) {
+
+        case "Consultar":
+            var validate = Campos();
+
+            if (validate == 0) {
+                var Exist = SearchPersona();
+                if (Exist == 1) {
+                    $("#Inf_persona").css("display", "inline-table");
+                    SearchEmpresa();
+                }
+                else {
+                    Mensaje_General("No existe!", "La persona a ingresar No existe en el Sistema!", "W");
+                    $("#Inf_persona").css("display", "none");
+                }
+            }
+            break;
+
+        case "Nueva Consulta":
+            Clear();
+            break;
     }
 }
 
@@ -128,6 +154,8 @@ function Campos() {
 
 //buscar persona en la matrix
 function SearchPersona() {
+    $("#Btnguardar").attr("value", "Nueva Consulta");
+
     var TDoc = $("#Select_Documento").val();
     var Doc = $("#TxtDoc").val();
     var GrpDoc;
@@ -145,7 +173,7 @@ function SearchPersona() {
             $("#L_Area").html(Matrix_Persona[item].DescripArea);
             $("#L_Cargo").html(Matrix_Persona[item].DescripCargo);
 
-            VerificacionTarjeta(Matrix_Persona[item].Nombre, Matrix_Persona[item].EstadoTarjeta, Matrix_Persona[item].CheckVigencia_Tarjeta, Matrix_Persona[item].FechaVencimientoTarjeta, Matrix_Persona[item].DescripMotivoBloqueo,"D");
+            VerificacionTarjeta(Matrix_Persona[item].Nombre, Matrix_Persona[item].EstadoTarjeta, Matrix_Persona[item].CheckVigencia_Tarjeta, Matrix_Persona[item].FechaVencimientoTarjeta, Matrix_Persona[item].DescripMotivoBloqueo, "D");
             SearchFoto(TDoc, Doc);
             Tabla_Docs(Nit_ID_Proccess, TDoc, Doc, GrpDoc, "Empleado");
             break;
@@ -178,6 +206,7 @@ function SearchEmpresa() {
         case 0:
             $("#Sucess").css("display", "inline-table");
             $("#Fail").css("display", "none");
+            Tabla_AccesosPredeterminados();
             break;
         default:
             $("#Sucess").css("display", "none");
@@ -461,40 +490,42 @@ function ConstruyeMensaje(Doc, Existe, Verificado, Vigencia) {
     $("#Spam_Mensaje").html(Mensaje_Semaforo);
 }
 
-//salida del formulario
-function btnSalir() {
-    window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
-}
-
-
-
-//muestra el registro a eliminar
-function Eliminar(Index_GrpDocumento) {
-
-    editNit_ID = ArrayAcceso[Index_GrpDocumento].Nit_ID;
-    editID = ArrayAcceso[Index_GrpDocumento].PuertaAcceso_ID;
-    editDocID = ArrayAcceso[Index_GrpDocumento].Area_ID;
-
-    $("#dialog_eliminar").dialog("option", "title", "Eliminar?");
-    $("#dialog_eliminar").dialog("open");
-
-}
-
 //evento del boton salir
 function x() {
     $("#dialog").dialog("close");
+    Clear();
 }
 
-//limpiar campos
+//limpiar pagina para nueva consulta
 function Clear() {
-    $("#Select_EmpresaNit").val("-1");
-    $("#Select_PAcceso").val("-1");
-    $("#Select_Area").val("-1");
+    $("#Select_Documento").val("-1");
+    $("#TxtIDTarjeta").val("");
+    $("#TxtDoc").val("");
 
-    $("#TxtRead").val("");
-    $("#DDLColumns").val("-1");
+    $("#TxtIDTarjeta").removeAttr("disabled");
+    $("#Select_Documento").removeAttr("disabled");
+    $("#TxtDoc").removeAttr("disabled");
 
+    $("#Inf_persona").css("display", "None");
+    $("#L_Nombre").html("");
+    $("#L_Empresa").html("");
+    $("#L_Area").html("");
+    $("#L_Cargo").html("");
+
+    $("#container_T_DP").html("");
+    $("#container_T_DE").html("");
+
+    $("#Sucess").css("display", "none");
+    $("#Fail").css("display", "none");
+
+    $("#Btnguardar").attr("value", "Consultar");
     $('.C_Chosen').trigger('chosen:updated');
+    $("#TxtIDTarjeta").focus();
 
 }
 
+
+//salida del formulario
+function btnSalir() {
+    window.location = "../../Menu/menu.aspx?User=" + User + "&L_L=" + Link;
+}

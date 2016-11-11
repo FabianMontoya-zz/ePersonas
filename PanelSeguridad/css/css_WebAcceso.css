@@ -41,9 +41,8 @@
 #Container_BloqueAcceso
 {
     width: 100%;
-    height:350px;
-    overflow: auto;
-}
+    height:370px;
+ }
     
 .Dialog_Sasif_Web
 {
@@ -238,7 +237,7 @@ img[src='../images/error.png'], img[src='../../images/error.png']
     background: linear-gradient(#b70d0d, #631111); /* Standard syntax (must be last)*/
     font: 14px/20px Verdana,sans-serif;
     color: White;
-    width: 110px;
+    width: 120px;
     border: none;
 }
 
@@ -253,7 +252,7 @@ img[src='../images/error.png'], img[src='../../images/error.png']
     background: linear-gradient(#ab5b5b, #543c3c); /* Standard syntax (must be last)*/
     font: 14px/20px Verdana,sans-serif;
     color: #ffc9c9;
-    width: 110px;
+    width: 120px;
     border: none;
 }
 

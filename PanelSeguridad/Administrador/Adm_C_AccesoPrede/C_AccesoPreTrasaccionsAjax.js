@@ -285,7 +285,7 @@ function transacionAjax_Insert_AccesoPredet(State) {
             "Nit_ID": Nit_ID,
             "TDoc": SPersona[1],
             "Doc": SPersona[0],
-            "Tarjeta": $("#Select_Tarjeta_Ent").val(),
+            "Tarjeta": $("#Select_Tarjeta_AccPre").val(),
             "Nit_Ing_ID": $("#Select_EmpresaNit_Ing").val(),
             "PuertaAcceso_ID": $("#Select_PAcceso").val(),
             "AreaAcceso_ID": $("#Select_AreaAcceso").val(),

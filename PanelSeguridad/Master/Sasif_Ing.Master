@@ -34,7 +34,9 @@
                         <td id="User" colspan="3" style="width: 70%; text-align: center;">
                         </td>
                          <td id="Regresa" style="width: 70%; text-align: center;">
-                        </td>
+                            <input id="BtnExit" class="BWeb" type="button" value="Regresar a Personas" style="width: 90%;"
+                        onclick="btnSalir();" />
+                         </td>
                     </tr>
                 </table>
             </div>

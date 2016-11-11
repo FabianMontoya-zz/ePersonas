@@ -18,6 +18,18 @@
     <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="../../Scripts/Dialog/datepicker.js" type="text/javascript"></script>
+    <script src="../../Scripts/Dialog/timepicker.js" type="text/javascript"></script>
+    <style type="text/css">
+        .ui-widget
+        {
+            background: silver;
+            border: solid;
+            border-color: gray;
+            border-width: 1px;
+            border-radius: 5px 5px 5px 5px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
     <div id="Container_title_Form">
@@ -171,7 +183,7 @@
                         </td>
                         <td align="center" colspan="2">
                             <font face="Verdana" size="2 " color="black">
-                                <select id="Select1" class="C_Chosen">
+                                <select id="Select_StateMar" class="C_Chosen">
                                     <option value="L">Laboral</option>
                                     <option value="F">Festivo</option>
                                 </select>
@@ -179,7 +191,7 @@
                         </td>
                         <td align="center" colspan="2">
                             <font face="Verdana" size="2 " color="black">
-                                <select id="Select2" class="C_Chosen">
+                                <select id="Select_StateMie" class="C_Chosen">
                                     <option value="L">Laboral</option>
                                     <option value="F">Festivo</option>
                                 </select>
@@ -187,7 +199,7 @@
                         </td>
                         <td align="center" colspan="2">
                             <font face="Verdana" size="2 " color="black">
-                                <select id="Select3" class="C_Chosen">
+                                <select id="Select_StateJue" class="C_Chosen">
                                     <option value="L">Laboral</option>
                                     <option value="F">Festivo</option>
                                 </select>
@@ -195,7 +207,7 @@
                         </td>
                         <td align="center" colspan="2">
                             <font face="Verdana" size="2 " color="black">
-                                <select id="Select4" class="C_Chosen">
+                                <select id="Select_StateVie" class="C_Chosen">
                                     <option value="L">Laboral</option>
                                     <option value="F">Festivo</option>
                                 </select>
@@ -203,7 +215,7 @@
                         </td>
                         <td align="center" colspan="2">
                             <font face="Verdana" size="2 " color="black">
-                                <select id="Select5" class="C_Chosen">
+                                <select id="Select_StateSab" class="C_Chosen">
                                     <option value="L">Laboral</option>
                                     <option value="F">Festivo</option>
                                 </select>
@@ -211,7 +223,7 @@
                         </td>
                         <td align="center" colspan="2">
                             <font face="Verdana" size="2 " color="black">
-                                <select id="Select6" class="C_Chosen">
+                                <select id="Select_StateDom" class="C_Chosen">
                                     <option value="L">Laboral</option>
                                     <option value="F">Festivo</option>
                                 </select>
@@ -265,72 +277,72 @@
                     <tr>
                         <td>
                             <span class="cssToolTip_Form">
-                                <input id="TxtIniMar1" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                <input id="TxtIniLun" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
                                     class="Spam_AH"></span></span>
                         </td>
                         <td>
                             <span class="cssToolTip_Form">
-                                <input id="TxtFinMar1" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                <input id="TxtFinLun" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
                                     class="Spam_AH"></span></span>
                         </td>
                         <td>
                             <span class="cssToolTip_Form">
-                                <input id="TxtIniMar2" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                <input id="TxtIniMar" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
                                     class="Spam_AH"></span></span>
                         </td>
                         <td>
                             <span class="cssToolTip_Form">
-                                <input id="TxtFinMar2" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                <input id="TxtFinMar" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
                                     class="Spam_AH"></span></span>
                         </td>
                         <td>
                             <span class="cssToolTip_Form">
-                                <input id="TxtIniMar3" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                <input id="TxtIniMie" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
                                     class="Spam_AH"></span></span>
                         </td>
                         <td>
                             <span class="cssToolTip_Form">
-                                <input id="TxtFinMar3" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                <input id="TxtFinMie" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
                                     class="Spam_AH"></span></span>
                         </td>
                         <td>
                             <span class="cssToolTip_Form">
-                                <input id="TxtIniMar4" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                <input id="TxtIniJue" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
                                     class="Spam_AH"></span></span>
                         </td>
                         <td>
                             <span class="cssToolTip_Form">
-                                <input id="TxtFinMar4" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                <input id="TxtFinJue" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
                                     class="Spam_AH"></span></span>
                         </td>
                         <td>
                             <span class="cssToolTip_Form">
-                                <input id="Text1" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                <input id="TxtIniVie" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
                                     class="Spam_AH"></span></span>
                         </td>
                         <td>
                             <span class="cssToolTip_Form">
-                                <input id="Text2" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                <input id="TxtFinVie" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
                                     class="Spam_AH"></span></span>
                         </td>
                         <td>
                             <span class="cssToolTip_Form">
-                                <input id="Text3" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                <input id="TxtIniSab" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
                                     class="Spam_AH"></span></span>
                         </td>
                         <td>
                             <span class="cssToolTip_Form">
-                                <input id="Text4" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                <input id="TxtFinSab" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
                                     class="Spam_AH"></span></span>
                         </td>
                         <td>
                             <span class="cssToolTip_Form">
-                                <input id="Text5" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                <input id="TxtIniDom" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
                                     class="Spam_AH"></span></span>
                         </td>
                         <td>
                             <span class="cssToolTip_Form">
-                                <input id="Text6" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                <input id="TxtFinDom" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
                                     class="Spam_AH"></span></span>
                         </td>
                     </tr>

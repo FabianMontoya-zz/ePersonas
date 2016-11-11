@@ -1,4 +1,8 @@
-﻿
+﻿/*--------------- region de variables globales --------------------*/
+var User;
+var Link;
+/*--------------- region de variables globales --------------------*/
+
 $(document).ready(function () {
     fecha();
 
@@ -29,6 +33,20 @@ $(document).ready(function () {
     });
 });
 
+//capturar el link y usuario para el proceso
+function ConsultaParametrosURL() {
+    //capturamos la url
+    var URLPage = window.location.search.substring(1);
+    var URLVariables = URLPage.split('&');
+
+
+    if (URLVariables.length <= 1)
+        User = URLVariables[0].replace("User=", "");
+    else {
+        User = URLVariables[0].replace("User=", "");
+        Link = URLVariables[1].replace("L_L=", "");
+    }
+}
 
 //integra los mensajes de error en la pagina
 function RevisarMensajes() {
@@ -116,7 +134,7 @@ function validate_fechaMayorQue(fechaInicial, fechaFinal, Type) {
             else
                 Resultado = "Mayor";
             break;
-                      
+
         case "DefaultCompare":
             valuesStart = fechaInicial.split("-");
             valuesEnd = fechaFinal.split("-");
@@ -343,6 +361,14 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
         case "Select_Tarjeta_Ent":
             for (Item in Matrix) {
                 if (Matrix[Item].Nit_ID_Asigna == Nit && Matrix[Item].Document_ID_Entrega == 0) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Tarjeta_ID + "'>" + Matrix[Item].Tarjeta_ID + "</option>");
+                }
+            }
+            break;
+
+        case "Select_Tarjeta_AccPre":
+            for (Item in Matrix) {
+                if (Matrix[Item].Nit_ID_Asigna == Nit && Matrix[Item].Document_ID_Entrega != 0) {
                     $("#" + Selector).append("<option value='" + Matrix[Item].Tarjeta_ID + "'>" + Matrix[Item].Tarjeta_ID + "</option>");
                 }
             }

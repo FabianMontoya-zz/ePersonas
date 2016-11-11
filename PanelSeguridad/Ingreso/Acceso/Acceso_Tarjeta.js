@@ -17,6 +17,8 @@ function Capture_Tarjeta_ID() {
 
 //validamos el estado de la tarjeta y datos de la persona asignada a ella
 function validaTarjeta(Tarjeta_ID) {
+    $("#Btnguardar").attr("value", "Nueva Consulta");
+
     for (item in Matrix_Persona) {
         if (Matrix_Persona[item].Tarjeta_ID == Tarjeta_ID) {
 
@@ -91,4 +93,35 @@ function VerificaVigenciaTarjeta(Nombre, CheckVigencia, FechaVigencia, TipoIngre
                 Mensaje_General("Tiene Tarjeta!", "El Sr(a) " + Nombre + " Tiene tarjeta se nesecita para el ingreso a las instalaciones ", "W");
             break;
     }
+}
+
+/*--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*---                                                                   PROCESO DE ACESSO PREDETERMINADOS                                                                                                            ---*/
+/*--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+//contruye vista de accesos predeterminados
+function Tabla_AccesosPredeterminados() {
+    $("#Dialog_AccesoPredeterminado").dialog("open");
+
+    var html_AP;
+
+    html_AP = "<table id='TAP' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Acceso</th><th>Area</th></tr></thead><tbody>";
+    for (item in Matrix_AccesoPredeterminados) {
+        if (Matrix_AccesoPredeterminados[item].Document_ID == Doc_VT &&
+           Matrix_AccesoPredeterminados[item].Nit_ID == Nit_ID_Proccess &&
+            Matrix_AccesoPredeterminados[item].Estado == "1") {
+            html_AP += "<tr id= 'TAP_" + Matrix_AccesoPredeterminados[item].Nit_ID + "'><td>" + Matrix_AccesoPredeterminados[item].PuertaAcceso_ID + " - " + Matrix_AccesoPredeterminados[item].DescripPuertaAcceso + "</td><td>" + Matrix_AccesoPredeterminados[item].Area_ID + " - " + Matrix_AccesoPredeterminados[item].DescripAreaAcceso + "</td></tr>";
+        }
+    }
+
+    html_AP += "</tbody></table>";
+    $("#Container_Acceso").html("");
+    $("#Container_Acceso").html(html_AP);
+
+    $("#TAP").dataTable({
+        "bJQueryUI": true, "iDisplayLength": 1000,
+        "bDestroy": true
+    });
+
+
 }

@@ -51,7 +51,25 @@ $(document).ready(function () {
             background: "black"
         }
     });
-        
+
+    $(function () {
+        $("#Txtfecha").datepicker({ dateFormat: 'yy-mm-dd' });
+        $("#TxtIniLun").timepicker();
+        $("#TxtFinLun").timepicker();
+        $("#TxtIniMar").timepicker();
+        $("#TxtFinMar").timepicker();
+        $("#TxtIniMie").timepicker();
+        $("#TxtFinMie").timepicker();
+        $("#TxtIniJue").timepicker();
+        $("#TxtFinJue").timepicker();
+        $("#TxtIniVie").timepicker();
+        $("#TxtFinVie").timepicker();
+        $("#TxtIniSab").timepicker();
+        $("#TxtFinSab").timepicker();
+        $("#TxtIniDom").timepicker();
+        $("#TxtFinDom").timepicker();
+    });
+   
 });
 
 //salida del formulario

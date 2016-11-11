@@ -28,14 +28,14 @@
             <div id="Container_controls">
                 <table id="Tabla_Captura" style="width: 1100px; text-align: left;">
                     <tr>
-                        <td style="width: 105px;" class="Label_Bold">ID Tarjeta
+                        <td style="width: 105px;" class="Label_Bold">Tarjeta
                         </td>
                         <td>
                             <span class="cssToolTip_Form">
                                 <input type="text" id="TxtIDTarjeta" maxlength="10" class="Numeric" style="width: 165px; height: 25px; font: 20px/20px Verdana,sans-serif; text-align: center;" />
                                 <span class="SpamALEC"></span></span>
                         </td>
-                        <td class="Label_Bold" style="width: 150px;">Tipo Documento
+                        <td class="Label_Bold" style="width: 150px;">Documento
                         </td>
                         <td style="width: 350px;">
                             <select id="Select_Documento" class="C_Chosen">
@@ -73,11 +73,11 @@
                         <td class="Label_Bold" style="width: 100px;">Empresa
                         </td>
                         <td id="L_Empresa" style="width: 350px;"></td>
-                        <td id="Semaforo" rowspan="2" style="text-align: end;">
+                        <td id="Semaforo" rowspan="2" style="text-align: left; width: 70px;">
                             <span class='cssToolTip_Form'>
-                                <img id="Sucess" alt='No' title='' style='height: 35px; width: 35px;' src='../../images/C_GREEN.png' /><span >Documentos completos, Vigentes y Verificados</span></span>
-                           <span class="cssToolTip_L">
-                                  <img id="Fail" alt='No' title='' style='height: 35px; width: 35px;' src='../../images/C_RED.png' /><span id="Spam_Mensaje"></span></span>
+                                <img id="Sucess" alt='No' title='' style='height: 35px; width: 35px;' src='../../images/C_GREEN.png' /><span>Documentos completos, Vigentes y Verificados</span></span>
+                            <span class="cssToolTip_L">
+                                <img id="Fail" alt='No' title='' style='height: 35px; width: 35px;' src='../../images/C_RED.png' /><span id="Spam_Mensaje"></span></span>
                         </td>
                         <td id="imagen" rowspan="2" style="text-align: end;">
                             <img alt="foto" title="" style="height: 100px; width: 80px; border-radius: 4px; border-color: #420101; border-width: 2px; border-style: outset;"
@@ -150,5 +150,9 @@
                 </td>
             </tr>
         </table>
+    </div>
+    <div id="Dialog_AccesoPredeterminado">
+        <div id="Container_Acceso">
+        </div>
     </div>
 </asp:Content>

@@ -20,6 +20,11 @@ Public Class AccesoAjax
                 Case "MATRIX_PERSONAS_DOC"
                     Carga_Matrix_Personas_Doc()
 
+                Case "MATRIX_ACCESOPREDETER"
+                    Cargar_Matrix_AccesoPredeterminado()
+
+
+
                 Case "MATRIX_PACCESO"
                     Cargar_MatrixPAcceso()
 
@@ -28,8 +33,6 @@ Public Class AccesoAjax
 
                 Case "cargar_droplist_busqueda"
                     CargarDroplist()
-
-
 
                 Case "Cliente"
                     CargarCliente()
@@ -189,6 +192,22 @@ Public Class AccesoAjax
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
+
+    ''' <summary>
+    ''' funcion que carga el objeto DDL consulta
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub Cargar_Matrix_AccesoPredeterminado()
+
+        Dim SQL As New C_AccesoPreSQLClass
+        Dim ObjList As New List(Of C_AccesoPreClass)
+
+        ObjList = SQL.Matrix_TAccesoPreddeterminado()
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
+
+
 
     ''' <summary>
     ''' funcion que carga el objeto DDL consulta
