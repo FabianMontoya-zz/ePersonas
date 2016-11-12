@@ -1,6 +1,8 @@
 ﻿/*--------------- region de variables globales --------------------*/
 var User;
 var Link;
+var NameTemporal;
+var Doc_name;
 /*--------------- region de variables globales --------------------*/
 
 $(document).ready(function () {
@@ -33,6 +35,9 @@ $(document).ready(function () {
     });
 });
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                 INICIO DE PROCESOS                                                                                                            ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //capturar el link y usuario para el proceso
 function ConsultaParametrosURL() {
     //capturamos la url
@@ -50,7 +55,6 @@ function ConsultaParametrosURL() {
 
 //integra los mensajes de error en la pagina
 function RevisarMensajes() {
-
     $(".SpamEG").html(ArrayMensajes[0].Mensajes_ID + ": " + ArrayMensajes[0].Descripcion);
     $(".SpamEC").html(ArrayMensajes[1].Mensajes_ID + ": " + ArrayMensajes[1].Descripcion);
     $(".SpamEFY").html(ArrayMensajes[2].Mensajes_ID + ": " + ArrayMensajes[2].Descripcion);
@@ -60,7 +64,6 @@ function RevisarMensajes() {
 
 //integra las Ayudas en la pagina
 function RevisarAyudas() {
-
     $(".Spam_AN").html(ArrayAyudas[0].Ayudas_ID + ": " + ArrayAyudas[0].Descripcion);
     $(".Spam_ANL").html(ArrayAyudas[1].Ayudas_ID + ": " + ArrayAyudas[1].Descripcion);
     $(".Spam_AST").html(ArrayAyudas[2].Ayudas_ID + ": " + ArrayAyudas[2].Descripcion);
@@ -91,14 +94,89 @@ function RevisarAyudas() {
     $(".Spam_CT2").html(ArrayAyudas[7].Descripcion);
     $(".Spam_CT4").html(ArrayAyudas[19].Descripcion);
     $(".Spam_CT5").html(ArrayAyudas[21].Descripcion);
-
 }
 
+//llamado de mensajes
+function Mensaje_General(Title, Msn, Type) {
+    $("#dialog").dialog("open");
+    $("#dialog").dialog("option", "title", Title);
+    $("#Mensaje_alert").text(Msn);
 
+    switch (Type) {
+        case "E":
+            $("#DE").css("display", "block");
+            $("#SE").css("display", "none");
+            $("#WE").css("display", "none");
+            break;
+
+        case "W":
+            $("#DE").css("display", "none");
+            $("#SE").css("display", "none");
+            $("#WE").css("display", "block");
+            break;
+
+        case "S":
+            $("#DE").css("display", "none");
+            $("#SE").css("display", "block");
+            $("#WE").css("display", "none");
+            break;
+    }
+}
+
+//escondemos los iconos obligatorios
+function ResetError() {
+    $("#ImgC_Doc").css("display", "none");
+    $("#ImgMul").css("display", "none");
+    $("#ImgPais").css("display", "none");
+    $("#ImgID").css("display", "none");
+    $("#Img1").css("display", "none");
+    $("#Img2").css("display", "none");
+    $("#Img3").css("display", "none");
+    $("#Img5").css("display", "none");
+    $("#Img9").css("display", "none");
+    $("#Img10").css("display", "none");
+    $("#Img11").css("display", "none");
+    $("#Img12").css("display", "none");
+}
+
+//funcion para control de carga
+function carga_eventos(str_objeto) {
+
+    $("#" + str_objeto).dialog({
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true,
+        width: 400,
+        height: 400,
+        overlay: {
+            opacity: 0.5,
+            background: "black"
+        },
+        show: {
+            effect: 'fade',
+            duration: 2000
+        },
+        hide: {
+            effect: 'fade',
+            duration: 1000
+        },
+        open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+    });
+
+    $(document).ajaxStart(function () {
+        $("#" + str_objeto).dialog("open");
+    }).ajaxStop(function () {
+        $("#" + str_objeto).dialog("close");
+    });
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                             VALIDACIONES FECHAS Y HORAS                                                                                                            ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //funcion para capturar la fecha
 function fecha() {
-    var d = new Date();
 
+    var d = new Date();
     var month = d.getMonth() + 1;
     var day = d.getDate();
 
@@ -159,46 +237,165 @@ function Validahora(V_HoraInicial, V_HoraFinal) {
 
     var A_V_HoraInicial = V_HoraInicial.split(":");
     var A_V_HoraFinal = V_HoraFinal.split(":");
-
     var Valida = 0;
 
-    if (parseInt(A_V_HoraInicial[0]) > parseInt(A_V_HoraFinal[0]))
+    if (parseInt(A_V_HoraInicial[0]) > parseInt(A_V_HoraFinal[0])) {
+        console.log(parseInt(A_V_HoraInicial[0]) + ">" + parseInt(A_V_HoraFinal[0]));
         Valida = 1;
+    }
 
-    if (Valida == 0)
-        if (parseInt(A_V_HoraInicial[1]) > parseInt(A_V_HoraFinal[1]))
+    if (parseInt(A_V_HoraInicial[0]) == parseInt(A_V_HoraFinal[0])) {
+        if (parseInt(A_V_HoraInicial[1]) > parseInt(A_V_HoraFinal[1])) {
+            console.log(parseInt(A_V_HoraInicial[1]) + ">" + parseInt(A_V_HoraFinal[1]));
             Valida = 1;
+        }
+    }
 
-        return Valida;
+    return Valida;
 }
 
-//llamado de mensajes
-function Mensaje_General(Title, Msn, Type) {
-    $("#dialog").dialog("open");
-    $("#dialog").dialog("option", "title", Title);
-    $("#Mensaje_alert").text(Msn);
+//VALIDAR FORMATO DE LA FECHA PARA LOS GRID
+function valFecha(str) {
+    var Result;
 
-    switch (Type) {
-        case "E":
-            $("#DE").css("display", "block");
-            $("#SE").css("display", "none");
-            $("#WE").css("display", "none");
-            break;
+    if (str == '1900-01-01')
+        Result = "";
+    else
+        Result = str;
+    return Result;
+}
 
-        case "W":
-            $("#DE").css("display", "none");
-            $("#SE").css("display", "none");
-            $("#WE").css("display", "block");
-            break;
+// Función que suma o resta días a la fecha indicada
+sumaFecha = function (d, fecha) {
+    var Fecha = new Date();
+    var sFecha = fecha || (Fecha.getDate() + "/" + (Fecha.getMonth() + 1) + "/" + Fecha.getFullYear());
+    var sep = sFecha.indexOf('/') != -1 ? '/' : '-';
+    var aFecha = sFecha.split(sep);
+    var fecha = aFecha[2] + '/' + aFecha[1] + '/' + aFecha[0];
+    fecha = new Date(fecha);
+    fecha.setDate(fecha.getDate() + parseInt(d));
+    var anno = fecha.getFullYear();
+    var mes = fecha.getMonth() + 1;
+    var dia = fecha.getDate();
+    mes = (mes < 10) ? ("0" + mes) : mes;
+    dia = (dia < 10) ? ("0" + dia) : dia;
+    var fechaFinal = dia + sep + mes + sep + anno;
+    return (fechaFinal);
+}
 
-        case "S":
-            $("#DE").css("display", "none");
-            $("#SE").css("display", "block");
-            $("#WE").css("display", "none");
-            break;
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                             VALIDACIONES DE CAMPOS Y NUMERICOS                                                                                         ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//formato de miles en tiempo real
+function dinner_format(input) {
+    var valida = 0;
+    var num = input.value.replace(/\./g, "");
+    if (!isNaN(num)) {
+        num = num.toString().split("").reverse().join("").replace(/(?=\d*\.?)(\d{3})/g, "$1.");
+        num = num.split("").reverse().join("").replace(/^[\.]/, "");
+        input.value = num;
+    }
+    else {
+        valida = 1;
+        input.value = input.value.replace(/[^\d\.]*/g, "");
+    }
+    return valida;
+}
+
+//funcion para añadir formato miles a los numeros en la vista
+function dinner_format_grid(str, type) {
+
+    var output = "";
+
+    if (str != 0) {
+        var amount = new String(str);
+        amount = amount.split("").reverse();
+
+        for (var i = 0; i <= amount.length - 1; i++) {
+            output = amount[i] + output;
+            if ((i + 1) % 3 == 0 && (amount.length - 1) !== i) output = '.' + output;
+        }
+
+        if (type == "1")
+            output = "$ " + output;
+    }
+
+    return output;
+}
+
+//funcion que calcula el digito de verificacion
+function DigitoVerificacion(StrValor) {
+
+    if (StrValor != "") {
+
+        var Vector = [];
+        var DigitoVerificado = 0;
+        var Temp = 0;
+        var Length_Document = StrValor.length;
+
+        Vector[1] = 3;
+        Vector[2] = 7;
+        Vector[3] = 13;
+        Vector[4] = 17;
+        Vector[5] = 19;
+        Vector[6] = 23;
+        Vector[7] = 29;
+        Vector[8] = 37;
+        Vector[9] = 41;
+        Vector[10] = 43;
+        Vector[11] = 47;
+        Vector[12] = 53;
+        Vector[13] = 59;
+        Vector[14] = 67;
+        Vector[15] = 71;
+
+        for (var contador = 0; contador < Length_Document; contador++) {
+            Temp = (StrValor.substr(contador, 1));
+            DigitoVerificado += (Temp * Vector[Length_Document - contador]);
+        }
+
+        Temp = DigitoVerificado % 11;
+
+        return (Temp > 1) ? 11 - Temp : Temp;
     }
 }
 
+//validar E-Mail
+function ValidarEmail(email) {
+    var validate = 0;
+    var expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+    if (!expr.test(email))
+        validate = 1;
+
+    return validate;
+}
+
+//funcion de formateo para la insercion en la Base de Datos
+function F_NumericBD(Index) {
+
+    var Output = 0;
+
+    if (Index != "") {
+        Output = Index.replace(/\./g, "");
+    }
+
+    return Output;
+}
+
+//convierte numero para ingresar el decimal exacto en la BD
+function Convert_Decimal(index) {
+
+    var Output = 0;
+    if (index != "") {
+        Output = index.replace(".", ",");
+    }
+    return Output;
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                             FUNCIONES PARA CARGA DE DROP LIST                                                                                               ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //cargar combos
 function charge_CatalogList(objCatalog, nameList, selector) {
 
@@ -247,7 +444,6 @@ function Charge_Combos_Depend_Verificacion(Matrix, Selector, Nit, Doc_ID, Index_
     $('.C_Chosen').trigger('chosen:updated');
 
 }
-
 
 //carga los combps dependiendo del nit
 function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
@@ -448,191 +644,9 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
 
 }
 
-//funcion para las ventanas emergentes
-function carga_eventos(str_objeto) {
-
-    $("#" + str_objeto).dialog({
-        autoOpen: false,
-        dialogClass: "Dialog_Sasif",
-        modal: true,
-        width: 400,
-        height: 400,
-        overlay: {
-            opacity: 0.5,
-            background: "black"
-        },
-        show: {
-            effect: 'fade',
-            duration: 2000
-        },
-        hide: {
-            effect: 'fade',
-            duration: 1000
-        },
-        open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-    });
-
-    $(document).ajaxStart(function () {
-        $("#" + str_objeto).dialog("open");
-    }).ajaxStop(function () {
-        $("#" + str_objeto).dialog("close");
-    });
-}
-
-//formato de miles en tiempo real
-function dinner_format(input) {
-    var valida = 0;
-    var num = input.value.replace(/\./g, "");
-    if (!isNaN(num)) {
-        num = num.toString().split("").reverse().join("").replace(/(?=\d*\.?)(\d{3})/g, "$1.");
-        num = num.split("").reverse().join("").replace(/^[\.]/, "");
-        input.value = num;
-    }
-    else {
-        valida = 1;
-        input.value = input.value.replace(/[^\d\.]*/g, "");
-    }
-    return valida;
-}
-
-//funcion para añadir formato miles a los numeros en la vista
-function dinner_format_grid(str, type) {
-
-    var output = "";
-
-    if (str != 0) {
-        var amount = new String(str);
-        amount = amount.split("").reverse();
-
-        for (var i = 0; i <= amount.length - 1; i++) {
-            output = amount[i] + output;
-            if ((i + 1) % 3 == 0 && (amount.length - 1) !== i) output = '.' + output;
-        }
-
-        if (type == "1")
-            output = "$ " + output;
-    }
-
-    return output;
-}
-
-//funcion que calcula el digito de verificacion
-function DigitoVerificacion(StrValor) {
-
-    if (StrValor != "") {
-
-        var Vector = [];
-        var DigitoVerificado = 0;
-        var Temp = 0;
-        var Length_Document = StrValor.length;
-
-        Vector[1] = 3;
-        Vector[2] = 7;
-        Vector[3] = 13;
-        Vector[4] = 17;
-        Vector[5] = 19;
-        Vector[6] = 23;
-        Vector[7] = 29;
-        Vector[8] = 37;
-        Vector[9] = 41;
-        Vector[10] = 43;
-        Vector[11] = 47;
-        Vector[12] = 53;
-        Vector[13] = 59;
-        Vector[14] = 67;
-        Vector[15] = 71;
-
-        for (var contador = 0; contador < Length_Document; contador++) {
-            Temp = (StrValor.substr(contador, 1));
-            DigitoVerificado += (Temp * Vector[Length_Document - contador]);
-        }
-
-        Temp = DigitoVerificado % 11;
-
-        return (Temp > 1) ? 11 - Temp : Temp;
-    }
-}
-
-//validar E-Mail
-function ValidarEmail(email) {
-    var validate = 0;
-    var expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-
-    if (!expr.test(email))
-        validate = 1;
-
-    return validate;
-}
-
-//VALIDAR FORMATO DE LA FECHA PARA LOS GRID
-function valFecha(str) {
-    var Result;
-
-    if (str == '1900-01-01')
-        Result = "";
-    else
-        Result = str;
-    return Result;
-}
-
-//funcion de formateo para la insercion en la Base de Datos
-function F_NumericBD(Index) {
-
-    var Output = 0;
-
-    if (Index != "") {
-        Output = Index.replace(/\./g, "");
-    }
-
-    return Output;
-}
-
-//convierte numero para ingresar el decimal exacto en la BD
-function Convert_Decimal(index) {
-
-    var Output = 0;
-    if (index != "") {
-        Output = index.replace(".", ",");
-    }
-    return Output;
-}
-
-//escondemos los iconos obligatorios
-function ResetError() {
-    $("#ImgC_Doc").css("display", "none");
-    $("#ImgMul").css("display", "none");
-    $("#ImgPais").css("display", "none");
-    $("#ImgID").css("display", "none");
-    $("#Img1").css("display", "none");
-    $("#Img2").css("display", "none");
-    $("#Img3").css("display", "none");
-    $("#Img5").css("display", "none");
-    $("#Img9").css("display", "none");
-    $("#Img10").css("display", "none");
-    $("#Img11").css("display", "none");
-    $("#Img12").css("display", "none");
-}
-
-// Función que suma o resta días a la fecha indicada
-sumaFecha = function (d, fecha) {
-    var Fecha = new Date();
-    var sFecha = fecha || (Fecha.getDate() + "/" + (Fecha.getMonth() + 1) + "/" + Fecha.getFullYear());
-    var sep = sFecha.indexOf('/') != -1 ? '/' : '-';
-    var aFecha = sFecha.split(sep);
-    var fecha = aFecha[2] + '/' + aFecha[1] + '/' + aFecha[0];
-    fecha = new Date(fecha);
-    fecha.setDate(fecha.getDate() + parseInt(d));
-    var anno = fecha.getFullYear();
-    var mes = fecha.getMonth() + 1;
-    var dia = fecha.getDate();
-    mes = (mes < 10) ? ("0" + mes) : mes;
-    dia = (dia < 10) ? ("0" + dia) : dia;
-    var fechaFinal = dia + sep + mes + sep + anno;
-    return (fechaFinal);
-}
-
-var NameTemporal;
-
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                         FUNCIONES PARA CARGA DE DOCUMENTOS AL SERVIDOR                                                                                  ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //costruimos el nombre del documento temporal
 function ContruyeName_Temp(StrDocument, StrConsecutivo_Empresa, StrConsecutivo) {
 
@@ -659,9 +673,6 @@ function ContruyeName_Temp(StrDocument, StrConsecutivo_Empresa, StrConsecutivo) 
     NameTemporal = StrDoc_Name_Temp
     console.log(StrDoc_Name_Temp);
 }
-
-
-var Doc_name;
 
 //carga de documentos global
 function UpLoad_Document(NameAjax, NameFile_ID, Form) {

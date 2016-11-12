@@ -153,7 +153,6 @@
             <table id="TablaHoras">
                 <thead>
                     <tr style="text-align: center;">
-
                         <th align="center" colspan="2">Lunes
                         </th>
                         <th align="center" colspan="2">Martes
@@ -168,11 +167,11 @@
                         </th>
                         <th align="center" colspan="2">Domingo
                         </th>
+                        <th align="center" colspan="2"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr style="text-align: center;">
-
                         <td align="center" colspan="2">
                             <font face="Verdana" size="2 " color="black">
                                 <select id="Select_StateLun" class="C_Chosen">
@@ -229,49 +228,97 @@
                                 </select>
                             </font>
                         </td>
+                        <td align="center" colspan="2">
+                            <font face="Verdana" size="2 " color="black">
+                                <select id="Select_Festivo" class="C_Chosen">
+                                    <option value="L">Laboral</option>
+                                    <option value="F">Festivo</option>
+                                </select>
+                            </font>
+                        </td>
+                    </tr>
+                    <tr style="text-align: center;">
+                        <td align="center" colspan="2">
+                            <font face="Verdana" size="2 " color="black"><b>Hora</b>
+                            </font>
+                        </td>
+                        <td align="center" colspan="2">
+                            <font face="Verdana" size="2 " color="black"><b>Hora</b>
+                            </font>
+                        </td>
+                        <td align="center" colspan="2">
+                            <font face="Verdana" size="2 " color="black"><b>Hora</b>
+                            </font>
+                        </td>
+                        <td align="center" colspan="2">
+                            <font face="Verdana" size="2 " color="black"><b>Hora</b>
+                            </font>
+                        </td>
+                        <td align="center" colspan="2">
+                            <font face="Verdana" size="2 " color="black"><b>Hora</b>
+                            </font>
+                        </td>
+                        <td align="center" colspan="2">
+                            <font face="Verdana" size="2 " color="black"><b>Hora</b>
+                            </font>
+                        </td>
+                        <td align="center" colspan="2">
+                            <font face="Verdana" size="2 " color="black"><b>Hora</b>
+                            </font>
+                        </td>
+                        <td align="center" colspan="2">
+                            <font face="Verdana" size="2 " color="black"><b>Hora</b>
+                            </font>
+                        </td>
                     </tr>
                     <tr style="text-align: center;">
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Hora Inicial</b> </font>
+                            <font face="Verdana" size="2 " color="black"><b>Inicial</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Hora Final</b> </font>
+                            <font face="Verdana" size="2 " color="black"><b>Final</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Hora Inicial</b> </font>
+                            <font face="Verdana" size="2 " color="black"><b>Inicial</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Hora Final</b> </font>
+                            <font face="Verdana" size="2 " color="black"><b>Final</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Hora Inicial</b> </font>
+                            <font face="Verdana" size="2 " color="black"><b>Inicial</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Hora Final</b> </font>
+                            <font face="Verdana" size="2 " color="black"><b>Final</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Hora Inicial</b> </font>
+                            <font face="Verdana" size="2 " color="black"><b>Inicial</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Hora Final</b> </font>
+                            <font face="Verdana" size="2 " color="black"><b>Final</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Hora Inicial</b> </font>
+                            <font face="Verdana" size="2 " color="black"><b>Inicial</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Hora Final</b> </font>
+                            <font face="Verdana" size="2 " color="black"><b>Final</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Hora Inicial</b> </font>
+                            <font face="Verdana" size="2 " color="black"><b>Inicial</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Hora Final</b> </font>
+                            <font face="Verdana" size="2 " color="black"><b>Final</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Hora Inicial</b> </font>
+                            <font face="Verdana" size="2 " color="black"><b>Inicial</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Hora Final</b> </font>
+                            <font face="Verdana" size="2 " color="black"><b>Final</b> </font>
+                        </td>
+                        <td>
+                            <font face="Verdana" size="2 " color="black"><b>Inicial</b> </font>
+                        </td>
+                        <td>
+                            <font face="Verdana" size="2 " color="black"><b>Final</b> </font>
                         </td>
                     </tr>
                     <tr>
@@ -344,6 +391,27 @@
                             <span class="cssToolTip_Form">
                                 <input id="TxtFinDom" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
                                     class="Spam_AH"></span></span>
+                        </td>
+                        <td>
+                            <span class="cssToolTip_Form">
+                                <input id="TxtIniF" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                    class="Spam_AH"></span></span>
+                        </td>
+                        <td>
+                            <span class="cssToolTip_Form">
+                                <input id="TxtFinF" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                    class="Spam_AH"></span></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Label_Bold">
+                            <p>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="20" align="center">
+                            <input id="BtnAgregar" type="button" value="Agregar" onclick="BtnAgregaCalendario();" />
                         </td>
                     </tr>
                 </tbody>

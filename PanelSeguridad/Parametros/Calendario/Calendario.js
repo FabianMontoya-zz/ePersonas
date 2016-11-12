@@ -4,6 +4,7 @@ var ArrayCombo = [];
 var ArrayCalendarioDep = [];
 var ArraySeguridad = [];
 
+var MensajeHora = "";
 var estado;
 var editNit_ID;
 var index_ID;
@@ -44,8 +45,8 @@ $(document).ready(function () {
         autoOpen: false,
         dialogClass: "Dialog_Sasif",
         modal: true,
-        width: 1030,
-        height: 550,
+        width: 1160,
+        height: 600,
         overlay: {
             opacity: 0.5,
             background: "black"
@@ -68,14 +69,71 @@ $(document).ready(function () {
         $("#TxtFinSab").timepicker();
         $("#TxtIniDom").timepicker();
         $("#TxtFinDom").timepicker();
+        $("#TxtIniF").timepicker();
+        $("#TxtFinF").timepicker();
     });
-
 });
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                 REGION BOTONES                                                                                                                   ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //salida del formulario
 function btnSalir() {
     window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
 }
+
+//consulta del del crud(READ)
+function BtnConsulta() {
+
+    var filtro;
+    var ValidateSelect = ValidarDroplist();
+    var opcion;
+
+    if (ValidateSelect == 1) {
+        filtro = "N";
+        opcion = "ALL";
+        transacionAjax_Calendario("consulta", filtro, opcion);
+    }
+    else {
+        filtro = "S";
+        opcion = $("#DDLColumns").val();
+        transacionAjax_Calendario("consulta", filtro, opcion);
+    }
+
+}
+
+//crear link en la BD
+function BtnCrear() {
+
+    var validate;
+    validate = validarCamposCrear();
+
+    if (validate == 0) {
+        if ($("#Btnguardar").val() == "Guardar") {
+            transacionAjax_Calendario_create("crear");
+        }
+        else {
+            transacionAjax_Calendario_create("modificar");
+        }
+    }
+}
+
+//elimina de la BD
+function BtnElimina() {
+    transacionAjax_Calendario_delete("elimina");
+}
+
+//agrega calendario a un array
+function BtnAgregaCalendario() {
+
+    var validate = ValidaHoras();
+    if (validate == 1)
+        Mensaje_General("Advertencia!", "La hora inicial es mayor que la hora final! en el dia (" + MensajeHora + ")", "W");
+    else
+        alert("Mi Pitbull");
+}
+
+
 
 //habilita el panel de crear o consulta
 function HabilitarPanel(opcion) {
@@ -123,46 +181,7 @@ function HabilitarPanel(opcion) {
     }
 }
 
-//consulta del del crud(READ)
-function BtnConsulta() {
 
-    var filtro;
-    var ValidateSelect = ValidarDroplist();
-    var opcion;
-
-    if (ValidateSelect == 1) {
-        filtro = "N";
-        opcion = "ALL";
-        transacionAjax_Calendario("consulta", filtro, opcion);
-    }
-    else {
-        filtro = "S";
-        opcion = $("#DDLColumns").val();
-        transacionAjax_Calendario("consulta", filtro, opcion);
-    }
-
-}
-
-//crear link en la BD
-function BtnCrear() {
-
-    var validate;
-    validate = validarCamposCrear();
-
-    if (validate == 0) {
-        if ($("#Btnguardar").val() == "Guardar") {
-            transacionAjax_Calendario_create("crear");
-        }
-        else {
-            transacionAjax_Calendario_create("modificar");
-        }
-    }
-}
-
-//elimina de la BD
-function BtnElimina() {
-    transacionAjax_Calendario_delete("elimina");
-}
 
 //validamos campos para la creacion del link
 function validarCamposCrear() {
@@ -202,6 +221,101 @@ function ValidarDroplist() {
         flag = 0;
     }
     return flag;
+}
+
+//valida horas
+function ValidaHoras() {
+    var validate = 0;
+    var V_H;
+    //Lunes
+    if ($("#TxtIniLun").val() != "" || $("#TxtFinLun").val() != "") {
+        V_H = Validahora($("#TxtIniLun").val(), $("#TxtFinLun").val());
+        if (V_H == 1) {
+            validate = 1;
+            if (MensajeHora == "")
+                MensajeHora = MensajeHora + " Lunes"
+            else
+                MensajeHora = MensajeHora + ", Lunes"
+        }
+    }
+    //Martes
+    if ($("#TxtIniMar").val() != "" || $("#TxtFinMar").val() != "") {
+        V_H = Validahora($("#TxtIniMar").val(), $("#TxtFinMar").val());
+        if (V_H == 1) {
+            validate = 1;
+            if (MensajeHora == "")
+                MensajeHora = MensajeHora + " Martes"
+            else
+                MensajeHora = MensajeHora + ", Martes"
+        }
+    }
+    //Miercoles
+    if ($("#TxtIniMie").val() != "" || $("#TxtFinMie").val() != "") {
+        V_H = Validahora($("#TxtIniMie").val(), $("#TxtFinMie").val());
+        if (V_H == 1) {
+            validate = 1;
+            if (MensajeHora == "")
+                MensajeHora = MensajeHora + " Miercoles"
+            else
+                MensajeHora = MensajeHora + ", Miercoles"
+        }
+    }
+    //Jueves
+    if ($("#TxtIniJue").val() != "" || $("#TxtFinJue").val() != "") {
+        V_H = Validahora($("#TxtIniJue").val(), $("#TxtFinJue").val());
+        if (V_H == 1) {
+            validate = 1;
+            if (MensajeHora == "")
+                MensajeHora = MensajeHora + " Jueves"
+            else
+                MensajeHora = MensajeHora + ", Jueves"
+        }
+    }
+    //Viernes
+    if ($("#TxtIniVie").val() != "" || $("#TxtFinVie").val() != "") {
+        V_H = Validahora($("#TxtIniVie").val(), $("#TxtFinVie").val());
+        if (V_H == 1) {
+            validate = 1;
+            if (MensajeHora == "")
+                MensajeHora = MensajeHora + " Viernes"
+            else
+                MensajeHora = MensajeHora + ", Viernes"
+        }
+    }
+    //Sabado
+    if ($("#TxtIniSab").val() != "" || $("#TxtFinSab").val() != "") {
+        V_H = Validahora($("#TxtIniSab").val(), $("#TxtFinSab").val());
+        if (V_H == 1) {
+            validate = 1;
+            if (MensajeHora == "")
+                MensajeHora = MensajeHora + " Sabado"
+            else
+                MensajeHora = MensajeHora + ", Sabado"
+        }
+    }
+    //Domingo
+    if ($("#TxtIniDom").val() != "" || $("#TxtFinDom").val() != "") {
+        V_H = Validahora($("#TxtIniDom").val(), $("#TxtFinDom").val());
+        if (V_H == 1) {
+            validate = 1;
+            if (MensajeHora == "")
+                MensajeHora = MensajeHora + " Domingo"
+            else
+                MensajeHora = MensajeHora + ", Domingo"
+        }
+    }
+    //FESTIVO
+    if ($("#TxtIniF").val() != "" || $("#TxtFinF").val() != "") {
+        V_H = Validahora($("#TxtIniF").val(), $("#TxtFinF").val());
+        if (V_H == 1) {
+            validate = 1;
+            if (MensajeHora == "")
+                MensajeHora = MensajeHora + " FESTIVO"
+            else
+                MensajeHora = MensajeHora + ", FESTIVO"
+        }
+    }
+    return validate;
 }
 
 // crea la tabla en el cliente
