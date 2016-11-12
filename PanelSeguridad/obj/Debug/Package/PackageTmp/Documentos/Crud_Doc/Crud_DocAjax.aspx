@@ -1,1 +1,0 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Crud_DocAjax.aspx.vb" Inherits="PanelSeguridad.Crud_DocAjax" %>

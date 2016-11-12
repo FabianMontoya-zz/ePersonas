@@ -41,6 +41,26 @@ PanelSeguridad
  funcion que carga el objeto DDL consulta
  </summary>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.Conector.StrInsert_and_Update_All(System.String,System.String)">
+	<summary>
+ funcion generica para la insercion, actualizacion o eliminar de datos en la BD
+ </summary>
+	<param name="vp_S_StrQuery"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.Conector.IDis(System.String,System.String)">
+	<summary>
+ funcion generica para consultas de un solo resultado tipo integer
+ </summary>
+	<param name="vp_S_StrQuery"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.Conector.typeConexion(System.String)">
+	<summary>
+ funcion de swicheo de conexion a BD por medio de vlores del web config
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.ConsecutivosSQLClass.Read_AllConsecutivos(System.String,System.String,System.String)">
 	<summary>
  creala consulta para la tabla consecutivos parametrizada (READ)
@@ -142,6 +162,39 @@ PanelSeguridad
  </summary>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="P:PanelSeguridad.My.MyWebExtension.Application">
+	<summary>
+ Returns information about the current application.
+ </summary>
+</member><member name="P:PanelSeguridad.My.MyWebExtension.Computer">
+	<summary>
+ Returns information about the host computer.
+ </summary>
+</member><member name="P:PanelSeguridad.My.MyWebExtension.User">
+	<summary>
+ Returns information for the current Web user.
+ </summary>
+</member><member name="P:PanelSeguridad.My.MyWebExtension.Request">
+	<summary>
+ Returns Request object.
+ </summary>
+</member><member name="P:PanelSeguridad.My.MyWebExtension.Response">
+	<summary>
+ Returns Response object.
+ </summary>
+</member><member name="P:PanelSeguridad.My.MyWebExtension.Log">
+	<summary>
+ Returns the Asp log object.
+ </summary>
+</member><member name="P:PanelSeguridad.My.MyWebExtension.WebServices">
+	<summary>
+ Provides access to WebServices added to this project.
+ </summary>
+</member><member name="T:PanelSeguridad.My.MyWebExtension">
+	<summary>
+ Module used to define the properties that are available in the My Namespace for Web projects.
+ </summary>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.DireccionesSQLClass.Read_All(System.String,System.String,System.String)">
 	<summary>
  creala consulta para la tabla direcciones parametrizada (READ)
@@ -225,59 +278,6 @@ PanelSeguridad
 	<param name="vp_O_Obj"></param>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.Conector.StrInsert_and_Update_All(System.String,System.String)">
-	<summary>
- funcion generica para la insercion, actualizacion o eliminar de datos en la BD
- </summary>
-	<param name="vp_S_StrQuery"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.Conector.IDis(System.String,System.String)">
-	<summary>
- funcion generica para consultas de un solo resultado tipo integer
- </summary>
-	<param name="vp_S_StrQuery"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.Conector.typeConexion(System.String)">
-	<summary>
- funcion de swicheo de conexion a BD por medio de vlores del web config
- </summary>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="P:PanelSeguridad.My.MyWebExtension.Application">
-	<summary>
- Returns information about the current application.
- </summary>
-</member><member name="P:PanelSeguridad.My.MyWebExtension.Computer">
-	<summary>
- Returns information about the host computer.
- </summary>
-</member><member name="P:PanelSeguridad.My.MyWebExtension.User">
-	<summary>
- Returns information for the current Web user.
- </summary>
-</member><member name="P:PanelSeguridad.My.MyWebExtension.Request">
-	<summary>
- Returns Request object.
- </summary>
-</member><member name="P:PanelSeguridad.My.MyWebExtension.Response">
-	<summary>
- Returns Response object.
- </summary>
-</member><member name="P:PanelSeguridad.My.MyWebExtension.Log">
-	<summary>
- Returns the Asp log object.
- </summary>
-</member><member name="P:PanelSeguridad.My.MyWebExtension.WebServices">
-	<summary>
- Provides access to WebServices added to this project.
- </summary>
-</member><member name="T:PanelSeguridad.My.MyWebExtension">
-	<summary>
- Module used to define the properties that are available in the My Namespace for Web projects.
- </summary>
-	<remarks></remarks>
 </member><member name="M:PanelSeguridad.AccesoAjax.Consulta_Acceso">
 	<summary>
  traemos todos los datos para tabla Acceso (READ)
@@ -306,6 +306,11 @@ PanelSeguridad
 </member><member name="M:PanelSeguridad.AccesoAjax.Carga_Matrix_Personas_Doc">
 	<summary>
  cara la matriz de documento para trabajo
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AccesoAjax.Cargar_Matrix_AccesoPredeterminado">
+	<summary>
+ funcion que carga el objeto DDL consulta
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.AccesoAjax.Cargar_MatrixArea">
@@ -512,6 +517,12 @@ PanelSeguridad
 </member><member name="M:PanelSeguridad.C_AccesoPreSQLClass.Matrix_RTP">
 	<summary>
  consulta que trae los datos de asignar tarjeta
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_AccesoPreSQLClass.Matrix_TAccesoPreddeterminado">
+	<summary>
+ consulta que trae todos los datos de accesos predeterminados
  </summary>
 	<returns></returns>
 	<remarks></remarks>
@@ -1273,6 +1284,36 @@ main control.
 Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
+</member><member name="M:PanelSeguridad.CalendarioAjax.Consulta_Calendario">
+	<summary>
+ traemos todos los datos para tabla Calendario (READ)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CalendarioAjax.InsertCalendario">
+	<summary>
+ funcion que inserta en la tabla Calendario (INSERT)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CalendarioAjax.UpdateCalendario">
+	<summary>
+ funcion que actualiza en la tabla Calendario (UPDATE)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CalendarioAjax.EraseCalendario">
+	<summary>
+ funcion que elimina en la tabla Calendario (DELETE)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CalendarioAjax.CargarDroplist">
+	<summary>
+ funcion que carga el objeto DDL Links
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CalendarioAjax.CargarCliente">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.MonedaCotSQLClass.Read_AllMonedaCot(System.String,System.String,System.String)">
 	<summary>
  creala consulta para la tabla MonedaCot parametrizada (READ)
@@ -1743,6 +1784,52 @@ To modify move field declaration from designer file to code-behind file.
  </summary>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.LoginAjax.ingresar">
+	<summary>
+ 'funcion que valida contra la BD si el usuario y contraseña son correctos
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.LoginSQLClass.Update_ChagePassword(System.String,System.String)">
+	<summary>
+ funcion query para la actualizacion de la contrazeña desde el login
+ </summary>
+	<param name="pl_S_User"></param>
+	<param name="pl_S_Password"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.LoginSQLClass.Update_PasswordADM(PanelSeguridad.LoginClass)">
+	<summary>
+ funcion query para la actualizacion de la contraseña desde el panel administrativo
+ </summary>
+	<param name="pl_obj_User"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.LoginSQLClass.Read_AllUserLogin">
+	<summary>
+ funcion query para la consulta tabla Usuarios para ingreso a la aplicacion
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.LoginSQLClass.ListLogin(System.String,System.String)">
+	<summary>
+ trae el listado solicitado por login
+ </summary>
+	<param name="vp_S_StrQuery"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.MenuSQLClass.Read_AllOptionsMenu(System.String)">
+	<summary>
+ crea la consulta para el menu
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.MenuSQLClass.listMenu(System.String,System.String)">
+	<summary>
+ funcion que trae el listado para armar el menu
+ </summary>
+	<param name="vp_S_StrQuery"></param>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.ClienteAjax.Consulta">
 	<summary>
  traemos todos los datos para tabla Cliente (READ)
@@ -1960,52 +2047,6 @@ To modify move field declaration from designer file to code-behind file.
 	<param name="vg_S_StrConexion"></param>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.LoginAjax.ingresar">
-	<summary>
- 'funcion que valida contra la BD si el usuario y contraseña son correctos
- </summary>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.LoginSQLClass.Update_ChagePassword(System.String,System.String)">
-	<summary>
- funcion query para la actualizacion de la contrazeña desde el login
- </summary>
-	<param name="pl_S_User"></param>
-	<param name="pl_S_Password"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.LoginSQLClass.Update_PasswordADM(PanelSeguridad.LoginClass)">
-	<summary>
- funcion query para la actualizacion de la contraseña desde el panel administrativo
- </summary>
-	<param name="pl_obj_User"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.LoginSQLClass.Read_AllUserLogin">
-	<summary>
- funcion query para la consulta tabla Usuarios para ingreso a la aplicacion
- </summary>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.LoginSQLClass.ListLogin(System.String,System.String)">
-	<summary>
- trae el listado solicitado por login
- </summary>
-	<param name="vp_S_StrQuery"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.MenuSQLClass.Read_AllOptionsMenu(System.String)">
-	<summary>
- crea la consulta para el menu
- </summary>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.MenuSQLClass.listMenu(System.String,System.String)">
-	<summary>
- funcion que trae el listado para armar el menu
- </summary>
-	<param name="vp_S_StrQuery"></param>
-	<returns></returns>
-	<remarks></remarks>
 </member><member name="M:PanelSeguridad.C_AccesoPreAjax.Consulta_C_AccesoPre">
 	<summary>
  traemos todos los datos para tabla R_PuertaAcc_Area (READ)
@@ -2153,6 +2194,78 @@ To modify move field declaration from designer file to code-behind file.
 	<param name="SourceText"></param>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CalendarioProgresivoSQLClass.Read_AllCalendarioProgresivo(System.String,System.String,System.String)">
+	<summary>
+ creala consulta para la tabla CalendarioProgresivo parametrizada (READ)
+ </summary>
+	<param name="vp_S_Filtro"></param>
+	<param name="vp_S_Opcion"></param>
+	<param name="vp_S_Contenido"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CalendarioProgresivoSQLClass.InsertCalendarioProgresivo(PanelSeguridad.CalendarioProgresivoClass)">
+	<summary>
+ funcion que crea el query para la insercion de nuevo CalendarioProgresivo (INSERT)
+ </summary>
+	<param name="vp_Obj_CalendarioProgresivo"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CalendarioProgresivoSQLClass.UpdateCalendarioProgresivo(PanelSeguridad.CalendarioProgresivoClass)">
+	<summary>
+ funcion que crea el query para la modificacion del CalendarioProgresivo (UPDATE)
+ </summary>
+	<param name="vp_Obj_CalendarioProgresivo"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CalendarioProgresivoSQLClass.EraseCalendarioProgresivo(PanelSeguridad.CalendarioProgresivoClass)">
+	<summary>
+ funcion que crea el query para la eliminacion del CalendarioProgresivo (DELETE)
+ </summary>
+	<param name="vp_Obj_CalendarioProgresivo"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CalendarioProgresivoSQLClass.ReadCharge_DropList(System.String)">
+	<summary>
+ crea la consulta para cargar el combo
+ </summary>
+	<param name="vp_S_Table"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CalendarioProgresivoSQLClass.Charge_DropListCalendarioProgresivoDepend(System.String)">
+	<summary>
+ crea la consulta para cargar el combo
+ </summary>
+	<param name="vp_S_NitEmpresa"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CalendarioProgresivoSQLClass.Charge_DropListSeguridad(System.String)">
+	<summary>
+ crea la consulta para cargar el combo
+ </summary>
+	<param name="vp_S_Table"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CalendarioProgresivoSQLClass.listCalendarioProgresivo(System.String,System.String,System.String)">
+	<summary>
+ funcion que trae el listado de CalendarioProgresivo para armar la tabla
+ </summary>
+	<param name="vp_S_StrQuery"></param>
+	<param name="vg_S_StrConexion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CalendarioProgresivoSQLClass.Consulta_Repetido(PanelSeguridad.CalendarioProgresivoClass)">
+	<summary>
+ averigua si esta repetido
+ </summary>
+	<param name="vp_O_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CalendarioProgresivoSQLClass.Read_Matrix_CalendarioProgresivo">
+	<summary>
+ lee la matriz de CalendarioProgresivos
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.C_ContratoAjax.InsertC_Contrato">
 	<summary>
  funcion que inserta en la tabla C_Contrato (INSERT)
@@ -2295,6 +2408,11 @@ To modify move field declaration from designer file to code-behind file.
 </member><member name="M:PanelSeguridad.RDoc_VerificacionAjax.CargarCliente">
 	<summary>
  funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CambioPasswordAjax.CambioContraseña">
+	<summary>
+ funcion que ejecuta el proceso de cambio de clave
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.ClienteSQLClass.Read_All(System.String,System.String,System.String)">
@@ -2772,11 +2890,6 @@ To modify move field declaration from designer file to code-behind file.
 	<param name="vp_O_Obj"></param>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CambioPasswordAjax.CambioContraseña">
-	<summary>
- funcion que ejecuta el proceso de cambio de clave
- </summary>
-	<remarks></remarks>
 </member><member name="M:PanelSeguridad.AsociacionDocumentosSQLClass.InsertDocumentosAsociados(PanelSeguridad.AsociacionDocumentosClass)">
 	<summary>
  funcion que crea el query para la insercion de nuevo documento existente (INSERT)
@@ -2882,6 +2995,108 @@ To modify move field declaration from designer file to code-behind file.
 	<summary>
  funcion que carga el objeto DDL consulta
  </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CalendarioProgresivoAjax.Consulta_CalendarioProgresivo">
+	<summary>
+ traemos todos los datos para tabla CalendarioProgresivo (READ)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CalendarioProgresivoAjax.InsertCalendarioProgresivo">
+	<summary>
+ funcion que inserta en la tabla CalendarioProgresivo (INSERT)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CalendarioProgresivoAjax.UpdateCalendarioProgresivo">
+	<summary>
+ funcion que actualiza en la tabla CalendarioProgresivo (UPDATE)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CalendarioProgresivoAjax.EraseCalendarioProgresivo">
+	<summary>
+ funcion que elimina en la tabla CalendarioProgresivo (DELETE)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CalendarioProgresivoAjax.CargarDroplist">
+	<summary>
+ funcion que carga el objeto DDL Links
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CalendarioProgresivoAjax.CargarCliente">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CalendarioSQLClass.Read_AllCalendario(System.String,System.String,System.String)">
+	<summary>
+ creala consulta para la tabla Calendario parametrizada (READ)
+ </summary>
+	<param name="vp_S_Filtro"></param>
+	<param name="vp_S_Opcion"></param>
+	<param name="vp_S_Contenido"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CalendarioSQLClass.InsertCalendario(PanelSeguridad.CalendarioClass)">
+	<summary>
+ funcion que crea el query para la insercion de nuevo Calendario (INSERT)
+ </summary>
+	<param name="vp_Obj_Calendario"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CalendarioSQLClass.UpdateCalendario(PanelSeguridad.CalendarioClass)">
+	<summary>
+ funcion que crea el query para la modificacion del Calendario (UPDATE)
+ </summary>
+	<param name="vp_Obj_Calendario"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CalendarioSQLClass.EraseCalendario(PanelSeguridad.CalendarioClass)">
+	<summary>
+ funcion que crea el query para la eliminacion del Calendario (DELETE)
+ </summary>
+	<param name="vp_Obj_Calendario"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CalendarioSQLClass.ReadCharge_DropList(System.String)">
+	<summary>
+ crea la consulta para cargar el combo
+ </summary>
+	<param name="vp_S_Table"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CalendarioSQLClass.Charge_DropListCalendarioDepend(System.String)">
+	<summary>
+ crea la consulta para cargar el combo
+ </summary>
+	<param name="vp_S_NitEmpresa"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CalendarioSQLClass.Charge_DropListSeguridad(System.String)">
+	<summary>
+ crea la consulta para cargar el combo
+ </summary>
+	<param name="vp_S_Table"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CalendarioSQLClass.listCalendario(System.String,System.String,System.String)">
+	<summary>
+ funcion que trae el listado de Calendario para armar la tabla
+ </summary>
+	<param name="vp_S_StrQuery"></param>
+	<param name="vg_S_StrConexion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CalendarioSQLClass.Consulta_Repetido(PanelSeguridad.CalendarioClass)">
+	<summary>
+ averigua si esta repetido
+ </summary>
+	<param name="vp_O_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CalendarioSQLClass.Read_Matrix_Calendario">
+	<summary>
+ lee la matriz de Calendarios
+ </summary>
+	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.CargoAjax.Consulta_Cargo">
 	<summary>
@@ -3238,6 +3453,30 @@ To modify move field declaration from designer file to code-behind file.
  funcion que carga el objeto DDL consulta
  </summary>
 	<remarks></remarks>
+</member><member name="F:PanelSeguridad.Sasif_menu.head">
+	<summary>
+head control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:PanelSeguridad.Sasif_menu.form1">
+	<summary>
+form1 control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:PanelSeguridad.Sasif_menu.main">
+	<summary>
+main control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
 </member><member name="M:PanelSeguridad.CiudadesAjax.Consulta_Ciudades">
 	<summary>
  traemos todos los datos para tabla Ciudades (READ)
@@ -3327,30 +3566,6 @@ To modify move field declaration from designer file to code-behind file.
 	<param name="vp_O_Obj"></param>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="F:PanelSeguridad.Sasif_menu.head">
-	<summary>
-head control.
-</summary>
-	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member><member name="F:PanelSeguridad.Sasif_menu.form1">
-	<summary>
-form1 control.
-</summary>
-	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member><member name="F:PanelSeguridad.Sasif_menu.main">
-	<summary>
-main control.
-</summary>
-	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
 </member><member name="M:PanelSeguridad.DocumentosSQLClass.Read_All(System.String,System.String,System.String)">
 	<summary>
  creala consulta para la tabla Releciones Financieras parametrizada (READ)
@@ -3913,71 +4128,6 @@ To modify move field declaration from designer file to code-behind file.
 	<param name="vg_S_StrConexion"></param>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.AccesoSQLClass.Read_AllAcceso(System.String,System.String,System.String)">
-	<summary>
- creala consulta para la tabla Acceso parametrizada (READ)
- </summary>
-	<param name="vp_S_Filtro"></param>
-	<param name="vp_S_Opcion"></param>
-	<param name="vp_S_Contenido"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.AccesoSQLClass.InsertAcceso(PanelSeguridad.AccesoClass)">
-	<summary>
- funcion que crea el query para la insercion de nuevo Acceso (INSERT)
- </summary>
-	<param name="vp_Obj_Acceso"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.AccesoSQLClass.EraseAcceso(PanelSeguridad.AccesoClass)">
-	<summary>
- funcion que crea el query para la eliminacion del Acceso (DELETE)
- </summary>
-	<param name="vp_Obj_Acceso"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.AccesoSQLClass.ReadCharge_DropList(System.String)">
-	<summary>
- crea la consulta para cargar el combo
- </summary>
-	<param name="vp_S_Table"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.AccesoSQLClass.Charge_DropListAccesoDepend(System.String)">
-	<summary>
- crea la consulta para cargar el combo
- </summary>
-	<param name="vp_S_NitEmpresa"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.AccesoSQLClass.Charge_DropListSeguridad(System.String)">
-	<summary>
- crea la consulta para cargar el combo
- </summary>
-	<param name="vp_S_Table"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.AccesoSQLClass.listAcceso(System.String,System.String,System.String)">
-	<summary>
- funcion que trae el listado de Acceso para armar la tabla
- </summary>
-	<param name="vp_S_StrQuery"></param>
-	<param name="vg_S_StrConexion"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.AccesoSQLClass.Consulta_Repetido(PanelSeguridad.AccesoClass)">
-	<summary>
- averigua si esta repetido
- </summary>
-	<param name="vp_O_Obj"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.AccesoSQLClass.Matrix_R_PuertaAcceso_Area">
-	<summary>
- lee la matriz de puertas de acceso
- </summary>
-	<returns></returns>
-	<remarks></remarks>
 </member><member name="M:PanelSeguridad.Adm_OpcRolAjax.Consulta_OpcRol">
 	<summary>
  traemos todos los datos para tabla opcion roles (READ)
@@ -4157,6 +4307,71 @@ To modify move field declaration from designer file to code-behind file.
 </member><member name="M:PanelSeguridad.AutorizacionDocumentosSQLClass.Matrix_AutorizacionDocumentos">
 	<summary>
  Carga matrix de AutorizacionDocumentoss
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AccesoSQLClass.Read_AllAcceso(System.String,System.String,System.String)">
+	<summary>
+ creala consulta para la tabla Acceso parametrizada (READ)
+ </summary>
+	<param name="vp_S_Filtro"></param>
+	<param name="vp_S_Opcion"></param>
+	<param name="vp_S_Contenido"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AccesoSQLClass.InsertAcceso(PanelSeguridad.AccesoClass)">
+	<summary>
+ funcion que crea el query para la insercion de nuevo Acceso (INSERT)
+ </summary>
+	<param name="vp_Obj_Acceso"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AccesoSQLClass.EraseAcceso(PanelSeguridad.AccesoClass)">
+	<summary>
+ funcion que crea el query para la eliminacion del Acceso (DELETE)
+ </summary>
+	<param name="vp_Obj_Acceso"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AccesoSQLClass.ReadCharge_DropList(System.String)">
+	<summary>
+ crea la consulta para cargar el combo
+ </summary>
+	<param name="vp_S_Table"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AccesoSQLClass.Charge_DropListAccesoDepend(System.String)">
+	<summary>
+ crea la consulta para cargar el combo
+ </summary>
+	<param name="vp_S_NitEmpresa"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AccesoSQLClass.Charge_DropListSeguridad(System.String)">
+	<summary>
+ crea la consulta para cargar el combo
+ </summary>
+	<param name="vp_S_Table"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AccesoSQLClass.listAcceso(System.String,System.String,System.String)">
+	<summary>
+ funcion que trae el listado de Acceso para armar la tabla
+ </summary>
+	<param name="vp_S_StrQuery"></param>
+	<param name="vg_S_StrConexion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AccesoSQLClass.Consulta_Repetido(PanelSeguridad.AccesoClass)">
+	<summary>
+ averigua si esta repetido
+ </summary>
+	<param name="vp_O_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AccesoSQLClass.Matrix_R_PuertaAcceso_Area">
+	<summary>
+ lee la matriz de puertas de acceso
  </summary>
 	<returns></returns>
 	<remarks></remarks>
@@ -4517,6 +4732,19 @@ To modify move field declaration from designer file to code-behind file.
  traemos todos los datos para construir el menu
  </summary>
 	<remarks></remarks>
+</member><member name="P:PanelSeguridad.My.Resources.Resources.ResourceManager">
+	<summary>
+  Devuelve la instancia de ResourceManager almacenada en caché utilizada por esta clase.
+</summary>
+</member><member name="P:PanelSeguridad.My.Resources.Resources.Culture">
+	<summary>
+  Reemplaza la propiedad CurrentUICulture del subproceso actual para todas las
+  búsquedas de recursos mediante esta clase de recurso fuertemente tipado.
+</summary>
+</member><member name="T:PanelSeguridad.My.Resources.Resources">
+	<summary>
+  Clase de recurso fuertemente tipado, para buscar cadenas traducidas, etc.
+</summary>
 </member><member name="M:PanelSeguridad.Impuesto_GastoAjax.Consulta_Impuesto_Gasto">
 	<summary>
  traemos todos los datos para tabla Impuesto_Gasto (READ)

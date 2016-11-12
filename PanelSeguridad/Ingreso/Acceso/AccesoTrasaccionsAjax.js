@@ -5,7 +5,8 @@ function transaccionAjax_MPersonas(State) {
         url: "AccesoAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'RUTA'
         },
         //Transaccion Ajax en proceso
@@ -14,7 +15,7 @@ function transaccionAjax_MPersonas(State) {
                 Matrix_Persona = [];
             }
             else {
-                Matrix_Persona  = JSON.parse(result);
+                Matrix_Persona = JSON.parse(result);
             }
         },
         error: function () {
@@ -30,7 +31,8 @@ function transaccionAjax_MDocWork(State) {
         url: "AccesoAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'RUTA'
         },
         //Transaccion Ajax en proceso
@@ -55,13 +57,14 @@ function transaccionAjax_MPersona_Doc(State) {
         url: "AccesoAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'RUTA'
         },
         //Transaccion Ajax en proceso
         success: function (result) {
             if (result == "") {
-                Matrix_PersonaDoc= [];
+                Matrix_PersonaDoc = [];
             }
             else {
                 Matrix_PersonaDoc = JSON.parse(result);
@@ -75,12 +78,40 @@ function transaccionAjax_MPersona_Doc(State) {
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_MAccesoPrede(State) {
+    $.ajax({
+        url: "AccesoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'RUTA'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_AccesoPredeterminados = [];
+            }
+            else {
+                Matrix_AccesoPredeterminados = JSON.parse(result);
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transaccionAjax_MPAcceso(State) {
     $.ajax({
         url: "AccesoAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'RUTA'
         },
         //Transaccion Ajax en proceso
@@ -105,7 +136,8 @@ function transaccionAjax_MArea(State) {
         url: "AccesoAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'RUTA'
         },
         //Transaccion Ajax en proceso
@@ -130,7 +162,8 @@ function transacionAjax_Documento(State) {
         url: "AccesoAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'IMPUESTO_GASTO'
         },
         //Transaccion Ajax en proceso
@@ -156,7 +189,8 @@ function transacionAjax_EmpresaNit(State) {
         url: "AccesoAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'CLIENTE'
         },
         //Transaccion Ajax en proceso
@@ -191,7 +225,8 @@ function transacionAjax_Acceso(State, filtro, opcion) {
         url: "AccesoAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "filtro": filtro,
             "opcion": opcion,
             "contenido": contenido
@@ -218,12 +253,13 @@ function transacionAjax_Acceso_create(State) {
 
     var ID;
     var Nit_ID;
-   
+
     $.ajax({
         url: "AccesoAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Nit_ID": $("#Select_EmpresaNit").val(),
             "PAcceso": $("#Select_PAcceso").val(),
             "Area": $("#Select_Area").val(),
@@ -277,7 +313,8 @@ function transacionAjax_Acceso_delete(State) {
         url: "AccesoAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Nit_ID": editNit_ID,
             "PAcceso": editID,
             "Area": editDocID,

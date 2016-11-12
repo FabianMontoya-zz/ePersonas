@@ -331,7 +331,7 @@ function Editar(Index, Type) {
     $("#Select_TypeIngreso").val(ArrayAccesoPredet[Index].TipoIngreso);
       
     Charge_Combos_Depend_Nit(Matrix_Persona, "Select_Persona", ArrayAccesoPredet[Index].Nit_ID, ArrayAccesoPredet[Index].Document_ID);
-    Charge_Combos_Depend_Nit(Matrix_Tarjeta, "Select_Tarjeta_Ent", ArrayAccesoPredet[Index].Nit_ID, ArrayAccesoPredet[Index].Tarjeta_ID);
+    Charge_Combos_Depend_Nit(Matrix_Tarjeta, "Select_Tarjeta_AccPre", ArrayAccesoPredet[Index].Nit_ID, ArrayAccesoPredet[Index].Tarjeta_ID);
 
     Charge_Combos_Depend_Nit(Matrix_PAccesos, "Select_PAcceso", ArrayAccesoPredet[Index].Nit_ID_EmpVisita, ArrayAccesoPredet[Index].PuertaAcceso_ID);
     Charge_Combos_Depend_Nit(Matrix_Persona, "Select_Persona_Enc", ArrayAccesoPredet[Index].Nit_ID_EmpVisita, ArrayAccesoPredet[Index].Document_ID_Per_Encargada);
@@ -364,7 +364,7 @@ function Editar(Index, Type) {
     $("#Vis_CheckVigencia").html($("#Select_CheckVigencia option:selected").html());
     $("#Vis_TypeIngreso").html($("#Select_TypeIngreso option:selected").html());
     $("#Vis_Persona").html($("#Select_Persona option:selected").html());
-    $("#Vis_Tarjeta_Ent").html($("#Select_Tarjeta_Ent option:selected").html());
+    $("#Vis_Tarjeta_Ent").html($("#Select_Tarjeta_AccPre option:selected").html());
     $("#Vis_PAcceso").html($("#Select_PAcceso option:selected").html());
     $("#Vis_Persona_Enc").html($("#Select_Persona_Enc option:selected").html());
     $("#Vis_AreaAcceso").html($("#Select_AreaAcceso option:selected").html());
@@ -379,7 +379,7 @@ function Editar(Index, Type) {
 function Clear() {
     $("#Select_EmpresaNit").val("-1");
     $("#Select_Persona").val("-1");
-    $("#Select_Tarjeta_Ent").val("-1");
+    $("#Select_Tarjeta_AccPre").val("-1");
     $("#Select_CheckVigencia").val("-1");
     $("#Select_TypeIngreso").val("-1");
     $("#Select_EmpresaNit_Ing").val("-1");
@@ -401,7 +401,7 @@ function DisableControls() {
     $("#Select_EmpresaNit").attr("disabled", "disabled");
     $("#Select_EmpresaNit_Ing").attr("disabled", "disabled");
     $("#Select_Persona").attr("disabled", "disabled");
-    $("#Select_Tarjeta_Ent").attr("disabled", "disabled");
+    $("#Select_Tarjeta_AccPre").attr("disabled", "disabled");
     $("#Select_PAcceso").attr("disabled", "disabled");
     $("#Select_Persona_Enc").attr("disabled", "disabled");
     $("#Select_AreaAcceso").attr("disabled", "disabled");
@@ -413,7 +413,7 @@ function EnableControls() {
     $("#Select_EmpresaNit").removeAttr("disabled");
     $("#Select_EmpresaNit_Ing").removeAttr("disabled");
     $("#Select_Persona").removeAttr("disabled");
-    $("#Select_Tarjeta_Ent").removeAttr("disabled");
+    $("#Select_Tarjeta_AccPre").removeAttr("disabled");
     $("#Select_PAcceso").removeAttr("disabled");
     $("#Select_Persona_Enc").removeAttr("disabled");
     $("#Select_AreaAcceso").removeAttr("disabled");

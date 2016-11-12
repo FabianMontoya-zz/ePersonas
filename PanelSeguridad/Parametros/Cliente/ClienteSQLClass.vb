@@ -760,6 +760,12 @@ Public Class ClienteSQLClass
                     objCliente.TypeDocument_ID = ReadConsulta.GetValue(7)
                     objCliente.Document_ID = ReadConsulta.GetValue(8)
                     If Not (IsDBNull(ReadConsulta.GetValue(9))) Then objCliente.GrpDocumentos = ReadConsulta.GetValue(9) Else objCliente.GrpDocumentos = 0
+                    If Not (IsDBNull(ReadConsulta.GetValue(10))) Then objCliente.Tarjeta_ID = ReadConsulta.GetValue(10) Else objCliente.Tarjeta_ID = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(11))) Then objCliente.EstadoTarjeta = ReadConsulta.GetValue(11) Else objCliente.EstadoTarjeta = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(12))) Then objCliente.CheckVigencia_Tarjeta = ReadConsulta.GetValue(12) Else objCliente.CheckVigencia_Tarjeta = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(13))) Then objCliente.FechaVencimientoTarjeta = ReadConsulta.GetValue(13) Else objCliente.FechaVencimientoTarjeta = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(14))) Then objCliente.MotivoBloqueo = ReadConsulta.GetValue(14) Else objCliente.MotivoBloqueo = 0
+                    If Not (IsDBNull(ReadConsulta.GetValue(15))) Then objCliente.DescripMotivoBloqueo = ReadConsulta.GetValue(15) Else objCliente.DescripMotivoBloqueo = ""
 
                     'agregamos a la lista
                     ObjListCliente.Add(objCliente)
@@ -776,7 +782,7 @@ Public Class ClienteSQLClass
 
                     If Not (IsDBNull(ReadConsulta.GetValue(3))) Then obj.GrpDocumentos_ID = ReadConsulta.GetValue(3) Else obj.GrpDocumentos_ID = 0
                     If Not (IsDBNull(ReadConsulta.GetValue(4))) Then obj.Documento_ID = ReadConsulta.GetValue(4) Else obj.Documento_ID = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(5))) Then obj.Descripcion = ReadConsulta.GetValue(5) Else obj.Descripcion = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(5))) Then obj.Descripcion = ReadConsulta.GetValue(5) Else obj.Descripcion = 0
 
                     'agregamos a la lista
                     ObjListDoc.Add(obj)
@@ -1044,6 +1050,7 @@ Public Class ClienteSQLClass
         Dim ObjList As New List(Of ClienteClass)
         Dim conex As New Conector
         Dim Conexion As String = conex.typeConexion("2")
+        Dim BD_Admin As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDAdmin").ToString
 
         Dim sql As New StringBuilder
 
@@ -1056,10 +1063,18 @@ Public Class ClienteSQLClass
                                "                  C2.CLI_Nombre +' '+ C2.CLI_Nombre_2 +' '+ C2.CLI_Apellido_1 +' '+ C2.CLI_Apellido_2 AS EMPRESA, " & _
                                "                  C.CLI_TypeDocument_ID, " & _
                                "                  C.CLI_Document_ID, " & _
-                                "                  C.CLI_GrpDocumentos " & _
-                                "  FROM CLIENTE C " & _
+                               "                  C.CLI_GrpDocumentos, " & _
+                               "                  IT.IT_Tarjeta_ID, " & _
+                               "                  IT.IT_Estado, " & _
+                               "                  IT.IT_ChequeaVigencias, " & _
+                               "                  IT.IT_Fecha_Fin_Vigencia, " & _
+                               "                  IT.IT_MotivoBloqueo, " & _
+                               "                  DDL.DDLL_Descripcion " & _
+                               "  FROM CLIENTE C " & _
                                "  LEFT JOIN AREA A  ON A.A_Area_ID = C.CLI_Area_ID " & _
                                "  LEFT JOIN CARGO CAR ON CAR.C_Cargo_ID = C.CLI_Cargo_ID " & _
+                               "  LEFT JOIN  " & BD_Admin & ".dbo.INVENTARIO_TARJETAS IT ON IT.IT_TypeDocument_Asigna = C.CLI_TypeDocument_ID AND IT.IT_Document_ID_Asigna =C.CLI_Document_ID " & _
+                               "  LEFT JOIN  " & BD_Admin & ".dbo.TC_DDL_TIPO DDL ON DDL.DDL_ID = IT.IT_MotivoBloqueo AND DDL.DDL_Tabla = 'BLOQUEO'  " & _
                                "  LEFT JOIN CLIENTE C2 ON C2.CLI_Document_ID = " & _
                                "                      CASE	 SUBSTRING(C.CLI_Nit_ID,0,LEN(C.CLI_Nit_ID)) " & _
                                "                                     WHEN '' THEN 0 " & _

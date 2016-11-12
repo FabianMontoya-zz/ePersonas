@@ -170,7 +170,7 @@
                         Tarjeta
                     </td>
                     <td>
-                        <select id="Select_Tarjeta_Ent" class="C_Chosen">
+                        <select id="Select_Tarjeta_AccPre" class="C_Chosen">
                         </select>
                     </td>
                     <td style="padding-bottom: 25px; width: 300px;">

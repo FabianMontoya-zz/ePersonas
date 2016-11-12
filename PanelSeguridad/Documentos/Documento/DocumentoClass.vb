@@ -37,7 +37,7 @@
     Private _Consecutivo As Integer
 #End Region
 
-#Region "proiedades"
+#Region "propiedades"
     Public Property Index() As Long
         Get
             Return Me._Index

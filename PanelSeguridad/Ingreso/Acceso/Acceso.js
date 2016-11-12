@@ -2,6 +2,8 @@
 var Matrix_Persona = [];
 var Matrix_DocWork = [];
 var Matrix_PersonaDoc = [];
+var Matrix_Valida_Ingreso = [];
+var Matrix_AccesoPredeterminados = [];
 
 var Matrix_PAcceso = [];
 var Matrix_Area = [];
@@ -17,6 +19,9 @@ var Fecha_Vencimiento;
 var RutaDocumento;
 var Imagen_Vencimiento;
 var EstadoVerif;
+var Est_Verifica;
+var Est_Vigencia;
+var Mensaje_Semaforo = "";
 
 var editNit_ID;
 var index_ID;
@@ -26,9 +31,12 @@ var editDocID;
 
 //evento load de los Links
 $(document).ready(function () {
+
+    ConsultaParametrosURL();
     transaccionAjax_MPersonas('MATRIX_PERSONAS');
     transaccionAjax_MDocWork('MATIRXDOC_WORK');
     transaccionAjax_MPersona_Doc('MATRIX_PERSONAS_DOC');
+    transaccionAjax_MAccesoPrede('MATRIX_ACCESOPREDETER');
 
     transaccionAjax_MPAcceso('MATRIX_PACCESO');
     transaccionAjax_MArea('MATRIX_AREA');
@@ -44,7 +52,12 @@ $(document).ready(function () {
     $("#SE").css("display", "none");
     $("#WE").css("display", "none");
 
+    $("#Sucess").css("display", "none");
+    $("#Fail").css("display", "none");
+
     $("#Inf_persona").css("display", "none");
+    $("#Inf_Ingreso").css("display", "none");
+
     $("#Div_D").css("display", "none");
 
     //funcion para las ventanas emergentes
@@ -73,22 +86,33 @@ $(document).ready(function () {
     });
 
     Capture_Tarjeta_ID();
+    $("#TxtIDTarjeta").focus();
 });
 
 //consuta datos
 function BtnConsulta() {
-    var validate = Campos();
 
-    if (validate == 0) {
-        var Exist = SearchPersona();
-        if (Exist == 1) {
-            $("#Inf_persona").css("display", "inline-table");
-            SearchEmpresa();
-        }
-        else {
-            Mensaje_General("No existe!", "La persona A ingresar No existe en el Sistema!", "W");
-            $("#Inf_persona").css("display", "none");
-        }
+    switch ($("#Btnguardar").val()) {
+
+        case "Consultar":
+            var validate = Campos();
+
+            if (validate == 0) {
+                var Exist = SearchPersona();
+                if (Exist == 1) {
+                    $("#Inf_persona").css("display", "inline-table");
+                    SearchEmpresa();
+                }
+                else {
+                    Mensaje_General("No existe!", "La persona a ingresar No existe en el Sistema!", "W");
+                    $("#Inf_persona").css("display", "none");
+                }
+            }
+            break;
+
+        case "Nueva Consulta":
+            Clear();
+            break;
     }
 }
 
@@ -120,6 +144,8 @@ function Campos() {
 
 //buscar persona en la matrix
 function SearchPersona() {
+    $("#Btnguardar").attr("value", "Nueva Consulta");
+
     var TDoc = $("#Select_Documento").val();
     var Doc = $("#TxtDoc").val();
     var GrpDoc;
@@ -136,8 +162,10 @@ function SearchPersona() {
             $("#L_Empresa").html(Matrix_Persona[item].DescripEmpresa);
             $("#L_Area").html(Matrix_Persona[item].DescripArea);
             $("#L_Cargo").html(Matrix_Persona[item].DescripCargo);
+
+            VerificacionTarjeta(Matrix_Persona[item].Nombre, Matrix_Persona[item].EstadoTarjeta, Matrix_Persona[item].CheckVigencia_Tarjeta, Matrix_Persona[item].FechaVencimientoTarjeta, Matrix_Persona[item].DescripMotivoBloqueo, "D");
             SearchFoto(TDoc, Doc);
-            Tabla_Docs(Matrix_Persona[item].Nit_ID, TDoc, Doc, GrpDoc, "Empleado");
+            Tabla_Docs(Nit_ID_Proccess, TDoc, Doc, GrpDoc, "Empleado");
             break;
         }
     }
@@ -162,6 +190,21 @@ function SearchEmpresa() {
             break;
         }
     }
+
+    var Semaforo_P = ValidaAccesoPrincipal();
+    switch (Semaforo_P) {
+        case 0:
+            $("#Sucess").css("display", "inline-table");
+            $("#Fail").css("display", "none");
+            $("#Inf_Ingreso").css("display", "inline-table");
+            Tabla_AccesosPredeterminados();
+            break;
+        default:
+            $("#Sucess").css("display", "none");
+            $("#Fail").css("display", "inline-table");
+            break;
+    }
+
 }
 
 //buscar Foto de la persona
@@ -169,7 +212,7 @@ function SearchFoto(TDoc, Doc) {
     var StrSrc = "";
     for (item in Matrix_DocWork) {
         if (Matrix_DocWork[item].TypeDocument_ID == TDoc &&
-             Matrix_DocWork[item].Document_ID &&
+             Matrix_DocWork[item].Document_ID == Doc &&
              Matrix_DocWork[item].Indicativo == "S") {
             StrSrc = Matrix_DocWork[item].RutaRelativaDocumento + Matrix_DocWork[item].Nombre_Save + '.' + Matrix_DocWork[item].DescripFormato;
             break;
@@ -195,6 +238,9 @@ function Tabla_Docs(Nit, TDoc, Doc, GrpDoc, Type) {
     switch (Type) {
         case "Empleado":
             html_DP = "<table id='TDP' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th class='T_head' colspan='6'>Documentación Empleado</th></tr><tr><th>Documento</th><th>Existe</th><th>Verificado</th><th>Vigencia</th><th>Fecha Vencimiento</th><th>Ver</th></tr></thead><tbody>";
+            var JsonVerifDoc;
+            var TotalEstado = 0;
+
             for (itemArray in Matrix_PersonaDoc) {
                 Fecha_Vencimiento = "";
                 if (Matrix_PersonaDoc[itemArray].Nit_ID == Nit &&
@@ -205,30 +251,40 @@ function Tabla_Docs(Nit, TDoc, Doc, GrpDoc, Type) {
 
                     switch (Existe_Doc) {
                         case "NO":
+                            JsonVerifDoc = { "Doc_P": Matrix_PersonaDoc[itemArray].Document_ID, "Document": Matrix_PersonaDoc[itemArray].Descripcion, "Existe": 1, "Verificado": 1, "Vigencia": 1, "Estado_Doc": 1 };
                             html_DP += "<tr id= 'TDP_" + Matrix_PersonaDoc[itemArray].Nit_ID + "'><td>" + Matrix_PersonaDoc[itemArray].Descripcion + "</td><td><span class='cssToolTip'><img alt='No' title='' style='height: 21px; width: 21px;' src='../../images/C_RED.png' /><span>No existe " + Matrix_PersonaDoc[itemArray].Descripcion + "!</span></span></td><td></td><td></td><td></td><td></td></tr>";
                             break;
 
                         case "EXISTE":
+                            JsonVerifDoc = { "Doc_P": Matrix_PersonaDoc[itemArray].Document_ID, "Document": Matrix_PersonaDoc[itemArray].Descripcion, "Existe": 0, "Verificado": 1, "Vigencia": 1, "Estado_Doc": 1 };
                             html_DP += "<tr id= 'TDP_" + Matrix_PersonaDoc[itemArray].Nit_ID + "'><td>" + Matrix_PersonaDoc[itemArray].Descripcion + "</td><td><img alt='No' title='' style='height: 21px; width: 21px;' src='../../images/C_GREEN.png' /></td><td></td><td></td><td></td><td></td></tr>";
                             break;
 
                         case "PEND":
+                            TotalEstado = parseInt(Est_Verifica) + parseInt(Est_Vigencia);
+                            JsonVerifDoc = { "Doc_P": Matrix_PersonaDoc[itemArray].Document_ID, "Document": Matrix_PersonaDoc[itemArray].Descripcion, "Existe": 0, "Verificado": Est_Verifica, "Vigencia": Est_Vigencia, "Estado_Doc": TotalEstado };
                             html_DP += "<tr id= 'TDP_" + Matrix_PersonaDoc[itemArray].Nit_ID + "'><td>" + Matrix_PersonaDoc[itemArray].Descripcion + "</td><td><img alt='No' title='' style='height: 21px; width: 21px;' src='../../images/C_GREEN.png' /></td><td><span class='cssToolTip'><img alt='No' title='' style='height: 21px; width: 21px;' src='../../images/C_YELLOW.png' /><span>" + EstadoVerif + "</span></span></td><td><img alt='No' title='' style='height: 21px; width: 21px;' src='../../images/" + Imagen_Vencimiento + "' /></td><td>" + Fecha_Vencimiento + "</td><td><span class='cssToolTip_Form_L'><img alt='' title='' style=' height: 21px; width: 21px;' src='../../images/LOOK_BLACK.png' onclick=\"VerDocumento('" + RutaDocumento + "','" + $("#L_Nombre").html() + "');\" /><span>Ver Documento</span></span></td></tr>";
                             break;
 
                         case "VERIF":
+                            TotalEstado = parseInt(Est_Verifica) + parseInt(Est_Vigencia);
+                            JsonVerifDoc = { "Doc_P": Matrix_PersonaDoc[itemArray].Document_ID, "Document": Matrix_PersonaDoc[itemArray].Descripcion, "Existe": 0, "Verificado": Est_Verifica, "Vigencia": Est_Vigencia, "Estado_Doc": TotalEstado };
                             html_DP += "<tr id= 'TDP_" + Matrix_PersonaDoc[itemArray].Nit_ID + "'><td>" + Matrix_PersonaDoc[itemArray].Descripcion + "</td><td><img alt='No' title='' style='height: 21px; width: 21px;' src='../../images/C_GREEN.png' /></td><td><span class='cssToolTip_Form'><img alt='No' title='' style='height: 21px; width: 21px;' src='../../images/C_GREEN.png' /><span>" + EstadoVerif + "</span></span></td><td><img alt='No' title='' style='height: 21px; width: 21px;' src='../../images/" + Imagen_Vencimiento + "' /></td><td>" + Fecha_Vencimiento + "</td><td><span class='cssToolTip_Form_L'><img alt='' title='' style=' height: 21px; width: 21px;' src='../../images/LOOK_BLACK.png' onclick=\"VerDocumento('" + RutaDocumento + "','" + $("#L_Nombre").html() + "');\" /><span>Ver Documento</span></span></td></tr>";
                             break;
 
                         case "RECHA":
+                            TotalEstado = parseInt(Est_Verifica) + parseInt(Est_Vigencia);
+                            JsonVerifDoc = { "Doc_P": Matrix_PersonaDoc[itemArray].Document_ID, "Document": Matrix_PersonaDoc[itemArray].Descripcion, "Existe": 0, "Verificado": Est_Verifica, "Vigencia": Est_Vigencia, "Estado_Doc": TotalEstado };
                             html_DP += "<tr id= 'TDP_" + Matrix_PersonaDoc[itemArray].Nit_ID + "'><td>" + Matrix_PersonaDoc[itemArray].Descripcion + "</td><td><img alt='No' title='' style='height: 21px; width: 21px;' src='../../images/C_GREEN.png' /></td><td><span class='cssToolTip'><img alt='No' title='' style='height: 21px; width: 21px;' src='../../images/C_RED.png' /><span>" + EstadoVerif + "</span></span></td><td><img alt='No' title='' style='height: 21px; width: 21px;' src='../../images/" + Imagen_Vencimiento + "' /></td><td>" + Fecha_Vencimiento + "</td><td><span class='cssToolTip_Form_L'><img alt='' title='' style=' height: 21px; width: 21px;' src='../../images/LOOK_BLACK.png' onclick=\"VerDocumento('" + RutaDocumento + "','" + $("#L_Nombre").html() + "');\" /><span>Ver Documento</span></span></td></tr>";
                             break;
 
                         default:
+                            TotalEstado = parseInt(Est_Verifica) + parseInt(Est_Vigencia);
+                            JsonVerifDoc = { "Doc_P": Matrix_PersonaDoc[itemArray].Document_ID, "Document": Matrix_PersonaDoc[itemArray].Descripcion, "Existe": 0, "Verificado": Est_Verifica, "Vigencia": Est_Vigencia, "Estado_Doc": TotalEstado };
                             html_DP += "<tr id= 'TDP_" + Matrix_PersonaDoc[itemArray].Nit_ID + "'><td>" + Matrix_PersonaDoc[itemArray].Descripcion + "</td><td><img alt='No' title='' style='height: 21px; width: 21px;' src='../../images/C_RED.png' /></td><td></td><td></td><td></td><td></td></tr>";
                             break;
                     }
-
+                    Matrix_Valida_Ingreso.push(JsonVerifDoc);
                 }
             }
             html_DP += "</tbody></table>";
@@ -243,12 +299,52 @@ function Tabla_Docs(Nit, TDoc, Doc, GrpDoc, Type) {
 
         case "Empresa":
             html_DP = "<table id='TDE' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th class='T_head' colspan='6'>Documentación Empresa</th></tr><tr><th>Documento</th><th>Existe</th><th>Verificado</th><th>Vigencia</th><th>Fecha Vencimiento</th><th>Ver</th></tr></thead><tbody>";
+            var JsonVerifDoc;
+
             for (itemArray in Matrix_PersonaDoc) {
                 if (Matrix_PersonaDoc[itemArray].Nit_ID == Nit &&
              Matrix_PersonaDoc[itemArray].TypeDocument_ID == TDoc &&
              Matrix_PersonaDoc[itemArray].Document_ID == Doc &&
              Matrix_PersonaDoc[itemArray].GrpDocumentos_ID == GrpDoc) {
-                    html_DP += "<tr id= 'TDP_" + Matrix_PersonaDoc[itemArray].Nit_ID + "'><td>" + Matrix_PersonaDoc[itemArray].Descripcion + "</td><td></td><td></td><td></td><td></td><td></td></tr>";
+
+                    var Existe_Doc = ValidaDoc(Matrix_PersonaDoc[itemArray].Nit_ID, Matrix_PersonaDoc[itemArray].Document_ID, Matrix_PersonaDoc[itemArray].Documento_ID);
+
+                    switch (Existe_Doc) {
+                        case "NO":
+                            JsonVerifDoc = { "Doc_P": Matrix_PersonaDoc[itemArray].Document_ID, "Document": Matrix_PersonaDoc[itemArray].Descripcion, "Existe": 1, "Verificado": 1, "Vigencia": 1, "Estado_Doc": 1 };
+                            html_DP += "<tr id= 'TDP_" + Matrix_PersonaDoc[itemArray].Nit_ID + "'><td>" + Matrix_PersonaDoc[itemArray].Descripcion + "</td><td><span class='cssToolTip'><img alt='No' title='' style='height: 21px; width: 21px;' src='../../images/C_RED.png' /><span>No existe " + Matrix_PersonaDoc[itemArray].Descripcion + "!</span></span></td><td></td><td></td><td></td><td></td></tr>";
+                            break;
+
+                        case "EXISTE":
+                            JsonVerifDoc = { "Doc_P": Matrix_PersonaDoc[itemArray].Document_ID, "Document": Matrix_PersonaDoc[itemArray].Descripcion, "Existe": 0, "Verificado": 1, "Vigencia": 1, "Estado_Doc": 1 };
+                            html_DP += "<tr id= 'TDP_" + Matrix_PersonaDoc[itemArray].Nit_ID + "'><td>" + Matrix_PersonaDoc[itemArray].Descripcion + "</td><td><img alt='No' title='' style='height: 21px; width: 21px;' src='../../images/C_GREEN.png' /></td><td></td><td></td><td></td><td></td></tr>";
+                            break;
+
+                        case "PEND":
+                            TotalEstado = parseInt(Est_Verifica) + parseInt(Est_Vigencia);
+                            JsonVerifDoc = { "Doc_P": Matrix_PersonaDoc[itemArray].Document_ID, "Document": Matrix_PersonaDoc[itemArray].Descripcion, "Existe": 0, "Verificado": Est_Verifica, "Vigencia": Est_Vigencia, "Estado_Doc": TotalEstado };
+                            html_DP += "<tr id= 'TDP_" + Matrix_PersonaDoc[itemArray].Nit_ID + "'><td>" + Matrix_PersonaDoc[itemArray].Descripcion + "</td><td><img alt='No' title='' style='height: 21px; width: 21px;' src='../../images/C_GREEN.png' /></td><td><span class='cssToolTip'><img alt='No' title='' style='height: 21px; width: 21px;' src='../../images/C_YELLOW.png' /><span>" + EstadoVerif + "</span></span></td><td><img alt='No' title='' style='height: 21px; width: 21px;' src='../../images/" + Imagen_Vencimiento + "' /></td><td>" + Fecha_Vencimiento + "</td><td><span class='cssToolTip_Form_L'><img alt='' title='' style=' height: 21px; width: 21px;' src='../../images/LOOK_BLACK.png' onclick=\"VerDocumento('" + RutaDocumento + "','" + $("#L_Nombre").html() + "');\" /><span>Ver Documento</span></span></td></tr>";
+                            break;
+
+                        case "VERIF":
+                            TotalEstado = parseInt(Est_Verifica) + parseInt(Est_Vigencia);
+                            JsonVerifDoc = { "Doc_P": Matrix_PersonaDoc[itemArray].Document_ID, "Document": Matrix_PersonaDoc[itemArray].Descripcion, "Existe": 0, "Verificado": Est_Verifica, "Vigencia": Est_Vigencia, "Estado_Doc": TotalEstado };
+                            html_DP += "<tr id= 'TDP_" + Matrix_PersonaDoc[itemArray].Nit_ID + "'><td>" + Matrix_PersonaDoc[itemArray].Descripcion + "</td><td><img alt='No' title='' style='height: 21px; width: 21px;' src='../../images/C_GREEN.png' /></td><td><span class='cssToolTip_Form'><img alt='No' title='' style='height: 21px; width: 21px;' src='../../images/C_GREEN.png' /><span>" + EstadoVerif + "</span></span></td><td><img alt='No' title='' style='height: 21px; width: 21px;' src='../../images/" + Imagen_Vencimiento + "' /></td><td>" + Fecha_Vencimiento + "</td><td><span class='cssToolTip_Form_L'><img alt='' title='' style=' height: 21px; width: 21px;' src='../../images/LOOK_BLACK.png' onclick=\"VerDocumento('" + RutaDocumento + "','" + $("#L_Nombre").html() + "');\" /><span>Ver Documento</span></span></td></tr>";
+                            break;
+
+                        case "RECHA":
+                            TotalEstado = parseInt(Est_Verifica) + parseInt(Est_Vigencia);
+                            JsonVerifDoc = { "Doc_P": Matrix_PersonaDoc[itemArray].Document_ID, "Document": Matrix_PersonaDoc[itemArray].Descripcion, "Existe": 0, "Verificado": Est_Verifica, "Vigencia": Est_Vigencia, "Estado_Doc": TotalEstado };
+                            html_DP += "<tr id= 'TDP_" + Matrix_PersonaDoc[itemArray].Nit_ID + "'><td>" + Matrix_PersonaDoc[itemArray].Descripcion + "</td><td><img alt='No' title='' style='height: 21px; width: 21px;' src='../../images/C_GREEN.png' /></td><td><span class='cssToolTip'><img alt='No' title='' style='height: 21px; width: 21px;' src='../../images/C_RED.png' /><span>" + EstadoVerif + "</span></span></td><td><img alt='No' title='' style='height: 21px; width: 21px;' src='../../images/" + Imagen_Vencimiento + "' /></td><td>" + Fecha_Vencimiento + "</td><td><span class='cssToolTip_Form_L'><img alt='' title='' style=' height: 21px; width: 21px;' src='../../images/LOOK_BLACK.png' onclick=\"VerDocumento('" + RutaDocumento + "','" + $("#L_Nombre").html() + "');\" /><span>Ver Documento</span></span></td></tr>";
+                            break;
+
+                        default:
+                            TotalEstado = parseInt(Est_Verifica) + parseInt(Est_Vigencia);
+                            JsonVerifDoc = { "Doc_P": Matrix_PersonaDoc[itemArray].Document_ID, "Document": Matrix_PersonaDoc[itemArray].Descripcion, "Existe": 0, "Verificado": Est_Verifica, "Vigencia": Est_Vigencia, "Estado_Doc": TotalEstado };
+                            html_DP += "<tr id= 'TDP_" + Matrix_PersonaDoc[itemArray].Nit_ID + "'><td>" + Matrix_PersonaDoc[itemArray].Descripcion + "</td><td><img alt='No' title='' style='height: 21px; width: 21px;' src='../../images/C_RED.png' /></td><td></td><td></td><td></td><td></td></tr>";
+                            break;
+                    }
+                    Matrix_Valida_Ingreso.push(JsonVerifDoc);
                 }
             }
             html_DP += "</tbody></table>";
@@ -266,7 +362,6 @@ function Tabla_Docs(Nit, TDoc, Doc, GrpDoc, Type) {
 //verificar documento
 function ValidaDoc(Nit, PDoc, Doc_ID) {
     var estado = "NO";
-    console.log(Nit + "," + PDoc + "," + Doc_ID);
     for (item in Matrix_DocWork) {
         if (Matrix_DocWork[item].Nit_ID == Nit &&
             Matrix_DocWork[item].Document_ID == PDoc &&
@@ -274,28 +369,57 @@ function ValidaDoc(Nit, PDoc, Doc_ID) {
             var verifico = Matrix_DocWork[item].Verificado;
             Fecha_Vencimiento = Matrix_DocWork[item].Fecha_Vencimiento;
             RutaDocumento = Matrix_DocWork[item].RutaRelativaDocumento + Matrix_DocWork[item].Nombre_Save + "." + Matrix_DocWork[item].DescripFormato;
+            var comparacion;
 
-            var comparacion = validate_fechaMayorQue(Fecha_Vencimiento, "", "SystemCompare");
-
-            if (comparacion == "Mayor")
-                Imagen_Vencimiento = "C_RED.png";
-            else
+            if (Fecha_Vencimiento != "") {
+                comparacion = validate_fechaMayorQue(Fecha_Vencimiento, "", "SystemCompare");
+                if (comparacion == "Mayor") {
+                    Imagen_Vencimiento = "C_RED.png";
+                    Est_Vigencia = 1;
+                }
+                else {
+                    Imagen_Vencimiento = "C_GREEN.png";
+                    Est_Vigencia = 0;
+                }
+            }
+            else {
                 Imagen_Vencimiento = "C_GREEN.png";
+                Est_Vigencia = 0;
+            }
 
             switch (verifico) {
                 case "1":
+                    Est_Verifica = 1;
                     estado = "PEND";
                     EstadoVerif = "Pendiente por Verificar";
                     break;
+
                 case "2":
+                    Est_Verifica = 0;
                     estado = "VERIF";
                     EstadoVerif = "verificado";
                     break;
+
                 case "3":
+                    Est_Verifica = 3;
                     estado = "RECHA";
                     EstadoVerif = "Rechazado";
                     break;
+
+                case "0":
+                    Est_Verifica = 0;
+                    estado = "VERIF";
+                    EstadoVerif = "verificado";
+                    break;
+
+                case "":
+                    Est_Verifica = 0;
+                    estado = "VERIF";
+                    EstadoVerif = "verificado";
+                    break;
+
                 default:
+                    Est_Verifica = 1;
                     estado = "EXISTE";
                     break;
             }
@@ -316,79 +440,86 @@ function VerDocumento(RutaDocumento, Documento) {
     $("#Dialog_Visor").dialog("option", "title", Documento);
 }
 
+//revisamos ingreso segun documentos solicitados
+function ValidaAccesoPrincipal() {
+    var contador_semaforo = 0;
 
-
-
-
-//captura el numero y uesta info
-function Capture_Tarjeta_ID() {
-    $("#ID_Tarjeta_Cap").change(function () {
-        var StrID = $(this).val();
-        console.log("E2");
-    });
-
+    for (item in Matrix_Valida_Ingreso) {
+        contador_semaforo = contador_semaforo + parseInt(Matrix_Valida_Ingreso[item].Estado_Doc);
+        if (Matrix_Valida_Ingreso[item].Estado_Doc >= 1) {
+            ConstruyeMensaje(Matrix_Valida_Ingreso[item].Document, Matrix_Valida_Ingreso[item].Existe, Matrix_Valida_Ingreso[item].Verificado, Matrix_Valida_Ingreso[item].Vigencia);
+        }
+    }
+    return contador_semaforo;
 }
 
-//salida del formulario
-function btnSalir() {
-    window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
-}
+//construye el mensaje
+function ConstruyeMensaje(Doc, Existe, Verificado, Vigencia) {
 
+    if (Mensaje_Semaforo != "")
+        Mensaje_Semaforo = Mensaje_Semaforo + ",\n ";
+    else
+        Mensaje_Semaforo = "Documentos no cumplen los requisitos:\n ";
 
+    if (Existe == 1)
+        Mensaje_Semaforo = Mensaje_Semaforo + Doc + " No existe en el sistema!";
+    else {
 
-//muestra el registro a eliminar
-function Eliminar(Index_GrpDocumento) {
+        switch (Verificado) {
+            case 1:
+                Mensaje_Semaforo = Mensaje_Semaforo + Doc + " Pendiente por Verificar  ";
+                break;
+            case 3:
+                Mensaje_Semaforo = Mensaje_Semaforo + Doc + " Rechazado en la verificación  ";
+                break;
+        }
 
-    editNit_ID = ArrayAcceso[Index_GrpDocumento].Nit_ID;
-    editID = ArrayAcceso[Index_GrpDocumento].PuertaAcceso_ID;
-    editDocID = ArrayAcceso[Index_GrpDocumento].Area_ID;
-
-    $("#dialog_eliminar").dialog("option", "title", "Eliminar?");
-    $("#dialog_eliminar").dialog("open");
-
+        if (Vigencia == 1) {
+            Mensaje_Semaforo = Mensaje_Semaforo + Doc + "  Esta vencido!";
+        }
+    }
+    $("#Spam_Mensaje").html(Mensaje_Semaforo);
 }
 
 //evento del boton salir
 function x() {
     $("#dialog").dialog("close");
+    Clear();
 }
 
-//limpiar campos
+//limpiar pagina para nueva consulta
 function Clear() {
-    $("#Select_EmpresaNit").val("-1");
-    $("#Select_PAcceso").val("-1");
-    $("#Select_Area").val("-1");
+    $("#Select_Documento").val("-1");
+    $("#TxtIDTarjeta").val("");
+    $("#TxtDoc").val("");
 
-    $("#TxtRead").val("");
-    $("#DDLColumns").val("-1");
+    $("#TxtIDTarjeta").removeAttr("disabled");
+    $("#Select_Documento").removeAttr("disabled");
+    $("#TxtDoc").removeAttr("disabled");
 
+    $("#Inf_persona").css("display", "None");
+    $("#Inf_Ingreso").css("display", "none");
+
+    $("#L_Nombre").html("");
+    $("#L_Empresa").html("");
+    $("#L_Area").html("");
+    $("#L_Cargo").html("");
+
+    $("#container_T_DP").html("");
+    $("#container_T_DE").html("");
+    $("#Container_Acceso").html("");
+
+    $("#Sucess").css("display", "none");
+    $("#Fail").css("display", "none");
+
+    $("#Btnguardar").attr("value", "Consultar");
     $('.C_Chosen').trigger('chosen:updated');
+    $("#TxtIDTarjeta").focus();
 
 }
 
-//llamado de mensajes
-function Mensaje_General(Title, Msn, Type) {
-    $("#dialog").dialog("open");
-    $("#dialog").dialog("option", "title", Title);
-    $("#Mensaje_alert").text(Msn);
 
-    switch (Type) {
-        case "E":
-            $("#DE").css("display", "block");
-            $("#SE").css("display", "none");
-            $("#WE").css("display", "none");
-            break;
-
-        case "W":
-            $("#DE").css("display", "none");
-            $("#SE").css("display", "none");
-            $("#WE").css("display", "block");
-            break;
-
-        case "S":
-            $("#DE").css("display", "none");
-            $("#SE").css("display", "block");
-            $("#WE").css("display", "none");
-            break;
-    }
+//salida del formulario
+function btnSalir() {
+    window.location = "../../Menu/menu.aspx?User=" + User + "&L_L=" + Link;
 }

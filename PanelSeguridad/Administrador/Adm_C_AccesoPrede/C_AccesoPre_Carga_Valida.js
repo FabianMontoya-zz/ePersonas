@@ -3,7 +3,7 @@ function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {
         var index_ID = $(this).val();
         Charge_Combos_Depend_Nit(Matrix_Persona, "Select_Persona", index_ID, "");
-        Charge_Combos_Depend_Nit(Matrix_Tarjeta, "Select_Tarjeta_Ent", index_ID, "");
+        Charge_Combos_Depend_Nit(Matrix_Tarjeta, "Select_Tarjeta_AccPre", index_ID, "");
         $("#Img5").css("display", "none");
     });
 
@@ -54,7 +54,7 @@ function Change_Select_Persona() {
 
         for (item in Matrix_RTP) {
             if (Matrix_RTP[item].Document_ID == index_ID) {
-                $("#Select_Tarjeta_Ent").val(Matrix_RTP[item].Tarjeta_ID);
+                $("#Select_Tarjeta_AccPre").val(Matrix_RTP[item].Tarjeta_ID);
                 Container_Tarjeta = "S";
                 $('.C_Chosen').trigger('chosen:updated');
             }
@@ -69,8 +69,8 @@ function ValidarAsignacion(Container_Tarjeta) {
 
     switch (Container_Tarjeta) {
         case "N":
-            $("#Select_Tarjeta_Ent").val("-1");
-            $("#Select_Tarjeta_Ent").attr("disabled", "disabled");
+            $("#Select_Tarjeta_AccPre").val("-1");
+            $("#Select_Tarjeta_AccPre").attr("disabled", "disabled");
             $('.C_Chosen').trigger('chosen:updated');
 
             $("#dialog").dialog("option", "title", "No tiene Tarjeta!");
@@ -82,7 +82,7 @@ function ValidarAsignacion(Container_Tarjeta) {
             break;
 
         case "S":
-            $("#Select_Tarjeta_Ent").removeAttr("disabled");
+            $("#Select_Tarjeta_AccPre").removeAttr("disabled");
             $('.C_Chosen').trigger('chosen:updated');
             break;
     }
@@ -91,7 +91,7 @@ function ValidarAsignacion(Container_Tarjeta) {
 
 //valida los cambios del combo de Persona y carga
 function Change_Select_Tarjeta() {
-    $("#Select_Tarjeta_Ent").change(function () {
+    $("#Select_Tarjeta_AccPre").change(function () {
         var index_ID = $(this).val();
         for (item in Matrix_RTP) {
             if (Matrix_RTP[item].Tarjeta_ID == index_ID) {
@@ -108,7 +108,7 @@ function validarCamposCrear() {
 
     var Campo_1 = $("#Select_EmpresaNit").val();
     var Campo_2 = $("#Select_Persona").val();
-    var Campo_3 = $("#Select_Tarjeta_Ent").val();
+    var Campo_3 = $("#Select_Tarjeta_AccPre").val();
     var Campo_4 = $("#Select_EmpresaNit_Ing").val();
     var Campo_5 = $("#Select_PAcceso").val();
     var Campo_6 = $("#Select_AreaAcceso").val();

@@ -1,0 +1,1205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+Este archivo es utilizado por el proceso de paquete/publicación de nuestro proyecto Web. Puede personalizar el comportamiento de este proceso
+editando este archivo MSBuild. Para conocer más acerca de esto, visite http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <LastUsedBuildConfiguration>Release</LastUsedBuildConfiguration>
+    <LastUsedPlatform>Any CPU</LastUsedPlatform>
+    <TimeStampOfAssociatedLegacyPublishXmlFile>2016-11-11T09:55:32.5725156-05:00</TimeStampOfAssociatedLegacyPublishXmlFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="Administrador/Adm_C_AccesoPrede/C_AccesoPre.aspx">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Administrador/Adm_C_AccesoPrede/C_AccesoPre.js">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Administrador/Adm_C_AccesoPrede/C_AccesoPreAjax.aspx">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Administrador/Adm_C_AccesoPrede/C_AccesoPreTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Administrador/Adm_C_AccesoPrede/C_AccesoPre_Carga_Valida.js">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Administrador/Adm_InvPuerta/InvPuerta.aspx">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Administrador/Adm_InvPuerta/InvPuerta.js">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Administrador/Adm_InvPuerta/InvPuertaAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Administrador/Adm_InvPuerta/InvPuertaTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Administrador/Adm_links/Adm_Links.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Administrador/Adm_links/Adm_Links.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Administrador/Adm_links/Adm_LinksAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Administrador/Adm_links/Adm_LinksTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Administrador/Adm_opcrol/Adm_OpcRol.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Administrador/Adm_opcrol/Adm_OpcRol.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Administrador/Adm_opcrol/Adm_OpcRolAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Administrador/Adm_opcrol/Adm_OpcRolTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Administrador/Adm_PuertaAcceso/PuertaAcceso.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Administrador/Adm_PuertaAcceso/PuertaAcceso.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Administrador/Adm_PuertaAcceso/PuertaAccesoAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Administrador/Adm_PuertaAcceso/PuertaAccesoTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Administrador/Adm_ResetUser/Adm_ResetUser.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Administrador/Adm_ResetUser/Adm_ResetUser.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Administrador/Adm_ResetUser/Adm_ResetUserAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Administrador/Adm_roles/Adm_Roles.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Administrador/Adm_roles/Adm_Roles.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Administrador/Adm_roles/Adm_RolesAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Administrador/Adm_roles/Adm_RolesTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Administrador/Adm_R_Persona_Tarjeta/BloqueoTarjeta.aspx">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Administrador/Adm_R_Persona_Tarjeta/BloqueoTarjeta.js">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Administrador/Adm_R_Persona_Tarjeta/BloqueoTarjetaTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Administrador/Adm_R_Persona_Tarjeta/EntregaTarjeta.aspx">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Administrador/Adm_R_Persona_Tarjeta/EntregaTarjeta.js">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Administrador/Adm_R_Persona_Tarjeta/EntregaTarjetaTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Administrador/Adm_R_Persona_Tarjeta/R_Persona_Tarjeta.aspx">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Administrador/Adm_R_Persona_Tarjeta/R_Persona_Tarjeta.js">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Administrador/Adm_R_Persona_Tarjeta/R_Persona_TarjetaAjax.aspx">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Administrador/Adm_R_Persona_Tarjeta/R_Persona_TarjetaTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Administrador/Adm_R_PuertaAcc_Area/R_PuertaAcc_Area.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Administrador/Adm_R_PuertaAcc_Area/R_PuertaAcc_Area.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Administrador/Adm_R_PuertaAcc_Area/R_PuertaAcc_AreaAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Administrador/Adm_R_PuertaAcc_Area/R_PuertaAcc_AreaTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Administrador/Adm_Usuario/Adm_Usuario.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Administrador/Adm_Usuario/Adm_Usuario.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Administrador/Adm_Usuario/Adm_UsuarioAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Administrador/Adm_Usuario/Adm_UsuarioTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Administrador/menu.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Administrador/SasifMaster_Cosult.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Administrador/Sasif_menu.Master">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="bin/PanelSeguridad.dll">
+      <publishTime>11/11/2016 11:04:48</publishTime>
+    </File>
+    <File Include="bin/PanelSeguridad.pdb">
+      <publishTime>11/02/2016 11:54:00</publishTime>
+    </File>
+    <File Include="bin/PanelSeguridad.xml">
+      <publishTime>11/11/2016 11:04:48</publishTime>
+    </File>
+    <File Include="bin/System.Data.SqlClient.dll">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Contratos/Creacion/C_Contrato.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Contratos/Creacion/C_Contrato.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Contratos/Creacion/C_ContratoAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Contratos/Creacion/C_ContratoTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Contratos/menu.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Contratos/SasifMaster_Cosult.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Contratos/Sasif_menu.Master">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/Chosen/chosen-sprite%402x.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/Chosen/chosen-sprite.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/Chosen/chosen.css">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/Chosen/chosen.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/Chosen/oss-credit.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/Chosen/prism.css">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/Chosen/style.css">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/css_controles.css">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/css_form.css">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="css/css_login.css">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/css_master.css">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/css_master_Ing.css">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="css/css_menu.css">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/css_WebAcceso.css">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="css/custom/charge.css">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/datatables/images/back_disabled.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/datatables/images/back_enabled.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/datatables/images/back_enabled_hover.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/datatables/images/favicon.ico">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/datatables/images/forward_disabled.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/datatables/images/forward_enabled.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/datatables/images/forward_enabled_hover.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/datatables/images/sort_asc.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/datatables/images/sort_asc_disabled.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/datatables/images/sort_both.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/datatables/images/sort_desc.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/datatables/images/sort_desc_disabled.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/datatables/jquery.dataTables.css">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/datatables/jquery.dataTables_themeroller.css">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/Dialog/images/animated-overlay.gif">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/Dialog/images/ui-bg_glass_75_d0e5f5_1x400.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/Dialog/images/ui-bg_glass_85_dfeffc_1x400.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/Dialog/images/ui-bg_glass_95_fef1ec_1x400.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/Dialog/images/ui-bg_gloss-wave_55_5c9ccc_500x100.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/Dialog/images/ui-bg_inset-hard_100_f5f8f9_1x100.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/Dialog/images/ui-bg_inset-hard_100_fcfdfd_1x100.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/Dialog/images/ui-icons_217bc0_256x240.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/Dialog/images/ui-icons_2e83ff_256x240.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/Dialog/images/ui-icons_469bdd_256x240.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/Dialog/images/ui-icons_6da8d5_256x240.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/Dialog/images/ui-icons_cd0a0a_256x240.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/Dialog/images/ui-icons_d8e7f3_256x240.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/Dialog/images/ui-icons_f9bd01_256x240.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/Dialog/jquery-ui-1.10.4.custom.css">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/Dialog/jquery-ui.css">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/icons/document.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/icons/folder-horizontal.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/icons/right.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/icons/toggle-small-expand.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/icons/toggle-small.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/PIE.htc">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/theme_blue_Sky/images/active.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/theme_blue_Sky/images/default.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/theme_blue_Sky/images/header.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/theme_blue_Sky/images/ui-bg_diagonals-thick_90_eeeeee_40x40.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/theme_blue_Sky/images/ui-bg_flat_15_cd0a0a_40x100.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/theme_blue_Sky/images/ui-bg_highlight-hard_100_f2f5f7_1x100.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/theme_blue_Sky/images/ui-bg_highlight-hard_70_000000_1x100.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/theme_blue_Sky/images/ui-bg_highlight-soft_100_deedf7_1x100.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/theme_blue_Sky/images/ui-bg_highlight-soft_25_ffef8f_1x100.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/theme_blue_Sky/images/ui-icons_2e83ff_256x240.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/theme_blue_Sky/images/ui-icons_3d80b3_256x240.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/theme_blue_Sky/images/ui-icons_72a7cf_256x240.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/theme_blue_Sky/images/ui-icons_ffffff_256x240.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="css/theme_blue_Sky/theme.css">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Documentos/AutorizacionDocumentos/AutorizacionDocumentos.aspx">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Documentos/AutorizacionDocumentos/AutorizacionDocumentos.js">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Documentos/AutorizacionDocumentos/AutorizacionDocumentosAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Documentos/AutorizacionDocumentos/AutorizacionDocumentosTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Documentos/Consecutivos/Consecutivos.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Documentos/Consecutivos/Consecutivos.js">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Documentos/Consecutivos/ConsecutivosAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Documentos/Consecutivos/ConsecutivosTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Documentos/Consecutivos/Consecutivos_General.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Documentos/Consecutivos/Consecutivos_General.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Documentos/Crud_Doc/Crud_Doc.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Documentos/Crud_Doc/Crud_Doc.js">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Documentos/Crud_Doc/Crud_DocAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Documentos/Crud_Doc/Crud_DocTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Documentos/Documento/Documento.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Documentos/Documento/Documento.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Documentos/Documento/DocumentoAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Documentos/Documento/DocumentoTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Documentos/GrpDocumentos/GrpDocumentos.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Documentos/GrpDocumentos/GrpDocumentos.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Documentos/GrpDocumentos/GrpDocumentosAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Documentos/GrpDocumentos/GrpDocumentosTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Documentos/menu.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Documentos/RDoc_Verificacion/RDoc_Verificacion.aspx">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Documentos/RDoc_Verificacion/RDoc_Verificacion.js">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Documentos/RDoc_Verificacion/RDoc_VerificacionAjax.aspx">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Documentos/RDoc_Verificacion/RDoc_VerificacionTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Documentos/RGrpDoc_Doc/RGrpDoc_Doc.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Documentos/RGrpDoc_Doc/RGrpDoc_Doc.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Documentos/RGrpDoc_Doc/RGrpDoc_DocAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Documentos/RGrpDoc_Doc/RGrpDoc_DocTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Documentos/RutaDocumentos/RutaDocumentos.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Documentos/RutaDocumentos/RutaDocumentos.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Documentos/RutaDocumentos/RutaDocumentosAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Documentos/RutaDocumentos/RutaDocumentosTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Documentos/SasifMaster_Cosult.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Documentos/Sasif_menu.Master">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="images/actualizar.gif">
+      <publishTime>09/20/2016 09:19:24</publishTime>
+    </File>
+    <File Include="images/add.gif">
+      <publishTime>09/20/2016 09:19:24</publishTime>
+    </File>
+    <File Include="images/add.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="images/adress_book.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="images/alert.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="images/archivo.gif">
+      <publishTime>09/20/2016 09:19:24</publishTime>
+    </File>
+    <File Include="images/autorizar.gif">
+      <publishTime>09/20/2016 09:19:24</publishTime>
+    </File>
+    <File Include="images/avatar.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="images/ayuda.gif">
+      <publishTime>09/20/2016 09:19:24</publishTime>
+    </File>
+    <File Include="images/bank.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="images/barra_de_progreso.gif">
+      <publishTime>09/20/2016 09:19:24</publishTime>
+    </File>
+    <File Include="images/cabeza2.jpg">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="images/carga.gif">
+      <publishTime>09/20/2016 09:19:24</publishTime>
+    </File>
+    <File Include="images/componentes.gif">
+      <publishTime>09/20/2016 09:19:24</publishTime>
+    </File>
+    <File Include="images/consulta.gif">
+      <publishTime>09/20/2016 09:19:24</publishTime>
+    </File>
+    <File Include="images/correo.gif">
+      <publishTime>09/20/2016 09:19:24</publishTime>
+    </File>
+    <File Include="images/crear.gif">
+      <publishTime>09/20/2016 09:19:24</publishTime>
+    </File>
+    <File Include="images/cronograma.gif">
+      <publishTime>09/20/2016 09:19:24</publishTime>
+    </File>
+    <File Include="images/C_GREEN.png">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="images/C_RED.png">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="images/C_YELLOW.png">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="images/del.gif">
+      <publishTime>09/20/2016 09:19:24</publishTime>
+    </File>
+    <File Include="images/Descarga.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="images/DocAuto.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="images/document.gif">
+      <publishTime>09/20/2016 09:19:24</publishTime>
+    </File>
+    <File Include="images/Documentos.gif">
+      <publishTime>09/20/2016 09:19:24</publishTime>
+    </File>
+    <File Include="images/documentos.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="images/eliminar.gif">
+      <publishTime>09/20/2016 09:19:24</publishTime>
+    </File>
+    <File Include="images/error.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="images/error_2.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="images/exit.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="images/file.jpg">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="images/folder_collapsed.gif">
+      <publishTime>09/20/2016 09:19:24</publishTime>
+    </File>
+    <File Include="images/folder_extended.gif">
+      <publishTime>09/20/2016 09:19:24</publishTime>
+    </File>
+    <File Include="images/fondo1.jpg">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="images/fondo11.jpg">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="images/informa.gif">
+      <publishTime>09/20/2016 09:19:24</publishTime>
+    </File>
+    <File Include="images/logo-actual.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="images/logo.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="images/LOOK_BLACK.png">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="images/LOOK_WHITE.png">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="images/mapa.gif">
+      <publishTime>09/20/2016 09:19:24</publishTime>
+    </File>
+    <File Include="images/mensajes.gif">
+      <publishTime>09/20/2016 09:19:24</publishTime>
+    </File>
+    <File Include="images/menu1.jpg">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="images/menu2.jpg">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="images/menu3.jpg">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="images/menu4.jpg">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="images/people_online.png">
+      <publishTime>09/20/2016 09:19:24</publishTime>
+    </File>
+    <File Include="images/presupuesto.gif">
+      <publishTime>09/20/2016 09:19:24</publishTime>
+    </File>
+    <File Include="images/relations.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="images/salir.gif">
+      <publishTime>09/20/2016 09:19:24</publishTime>
+    </File>
+    <File Include="images/sasif1.gif">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="images/SASIF_NEW.png">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="images/search.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="images/semam.gif">
+      <publishTime>09/20/2016 09:19:24</publishTime>
+    </File>
+    <File Include="images/semro.gif">
+      <publishTime>09/20/2016 09:19:24</publishTime>
+    </File>
+    <File Include="images/semve.gif">
+      <publishTime>09/20/2016 09:19:24</publishTime>
+    </File>
+    <File Include="images/success.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="images/tabla.gif">
+      <publishTime>09/20/2016 09:19:24</publishTime>
+    </File>
+    <File Include="images/unidad.gif">
+      <publishTime>09/20/2016 09:19:24</publishTime>
+    </File>
+    <File Include="images/user.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="images/validation.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Ingreso/Acceso/Acceso.aspx">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Ingreso/Acceso/Acceso.js">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Ingreso/Acceso/AccesoAjax.aspx">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Ingreso/Acceso/AccesoTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Ingreso/Acceso/Acceso_Tarjeta.js">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Ingreso/menu.js">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Ingreso/SasifMaster_Cosult.js">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Ingreso/Sasif_menu.Master">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="login/CambioPassword.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="login/CambioPassword.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="login/CambioPasswordAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="login/Login.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="login/Login.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="login/LoginAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Master/Sasif_Ing.js">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Master/Sasif_Ing.Master">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="McCain/Image/activo.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="McCain/Image/alert.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="McCain/Image/cabeza2.jpg">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="McCain/Image/error.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="McCain/Image/inactivo.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="McCain/Image/McCain.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="McCain/Image/MEN.jpg">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="McCain/Image/menu3.jpg">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="McCain/Image/sasif1.gif">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="McCain/Image/ver.png">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="McCain/Image/WOMEN.jpg">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="McCain/MCcain.html">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="McCain/Script/jquery-1.4.1.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="McCain/Script/jquery-ui-1.10.4.custom.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="McCain/Script/jquery.dataTables.min.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="McCain/Script/jquery.min.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="McCain/Script/McCain.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="McCain/Script/SasifMaster.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="McCain/Style/css_controles.css">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="McCain/Style/css_master.css">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="McCain/Style/jquery-ui-1.10.4.custom.css">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Menu/menu.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Menu/menu.js">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Menu/menuAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Menu/SasifMaster_Cosult.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Menu/Sasif_menu.Master">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Area/Area.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Area/Area.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Area/AreaAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Area/AreaTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Ayudas/Ayudas.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Ayudas/Ayudas.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Ayudas/AyudasAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Ayudas/AyudasTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Calendario/Calendario.aspx">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Parametros/Calendario/Calendario.js">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Parametros/Calendario/CalendarioAjax.aspx">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Parametros/Calendario/CalendarioTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Parametros/CalendarioProgresivo/CalendarioProgresivo.aspx">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Parametros/CalendarioProgresivo/CalendarioProgresivo.js">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Parametros/CalendarioProgresivo/CalendarioProgresivoAjax.aspx">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Parametros/CalendarioProgresivo/CalendarioProgresivoTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Parametros/Cargo/Cargo.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Cargo/Cargo.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Cargo/CargoAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Cargo/CargoTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Ciudades/Ciudades.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Ciudades/Ciudades.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Ciudades/CiudadesAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Ciudades/CiudadesTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Cliente/Cliente.aspx">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Parametros/Cliente/Cliente.js">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Parametros/Cliente/ClienteAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Cliente/ClienteTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Cliente/Cliente_Direccion.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Cliente/Cliente_DocAutorizado.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Cliente/Cliente_Documento.js">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Parametros/Cliente/Cliente_EntFinan.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Cliente/Cliente_Matrix.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Cliente/Cliente_Validacion.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Fasecolda/Fasecolda.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Fasecolda/Fasecolda.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Fasecolda/FasecoldaAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Fasecolda/FasecoldaTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Festivos/Festivos.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Festivos/Festivos.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Festivos/FestivosAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Festivos/FestivosTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Impuesto_Gasto/Impuesto_Gasto.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Impuesto_Gasto/Impuesto_Gasto.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Impuesto_Gasto/Impuesto_GastoAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Impuesto_Gasto/Impuesto_GastoTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Inf_Impuesto/Inf_Impuesto.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Inf_Impuesto/Inf_Impuesto.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Inf_Impuesto/Inf_ImpuestoAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Inf_Impuesto/Inf_ImpuestoTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Mensajes/Mensajes.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Mensajes/Mensajes.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Mensajes/MensajesAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Mensajes/MensajesTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/menu.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/MonedaCod/MonedaCod.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/MonedaCod/MonedaCod.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/MonedaCod/MonedaCodAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/MonedaCod/MonedaCodTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/MonedaCot/MonedaCot.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/MonedaCot/MonedaCot.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/MonedaCot/MonedaCotAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/MonedaCot/MonedaCotTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Paises/Paises.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Paises/Paises.js">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="Parametros/Paises/PaisesAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Paises/PaisesTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Porcen_Descuentos/Porcen_Descuentos.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Porcen_Descuentos/Porcen_Descuentos.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Porcen_Descuentos/Porcen_DescuentosAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Porcen_Descuentos/Porcen_DescuentosTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Productos/Productos.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Productos/Productos.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Productos/ProductosAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Productos/ProductosTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Relation_Tipo_Subtipo_Activo/Relation_Tipo_Subtipo_Activo.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Relation_Tipo_Subtipo_Activo/Relation_Tipo_Subtipo_Activo.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Relation_Tipo_Subtipo_Activo/Relation_Tipo_Subtipo_ActivoAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Relation_Tipo_Subtipo_Activo/Relation_Tipo_Subtipo_ActivoTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Relation_Tipo_Subtipo_Leasing/Relation_Tipo_Subtipo_Leasing.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Relation_Tipo_Subtipo_Leasing/Relation_Tipo_Subtipo_Leasing.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Relation_Tipo_Subtipo_Leasing/Relation_Tipo_Subtipo_LeasingAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Relation_Tipo_Subtipo_Leasing/Relation_Tipo_Subtipo_LeasingTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/SasifMaster_Cosult.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Sasif_menu.Master">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/SubTipoActivo/SubTipoActivo.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/SubTipoActivo/SubTipoActivo.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/SubTipoActivo/SubTipoActivoAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/SubTipoActivo/SubTipoActivoTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/SubTipoProduct_Leasing/SubTipoProduct_Leasing.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/SubTipoProduct_Leasing/SubTipoProduct_Leasing.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/SubTipoProduct_Leasing/SubTipoProduct_LeasingAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/SubTipoProduct_Leasing/SubTipoProduct_LeasingTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/TipoActivo/TipoActivo.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/TipoActivo/TipoActivo.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/TipoActivo/TipoActivoAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/TipoActivo/TipoActivoTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/TipoProduct_Leasing/TipoProduct_Leasing.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/TipoProduct_Leasing/TipoProduct_Leasing.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/TipoProduct_Leasing/TipoProduct_LeasingAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/TipoProduct_Leasing/TipoProduct_LeasingTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Transacciones/Transacciones.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Transacciones/Transacciones.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Transacciones/TransaccionesAjax.aspx">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Parametros/Transacciones/TransaccionesTrasaccionsAjax.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="procesos_generales/SasifMasterAjax.aspx">
+      <publishTime>11/11/2016 09:55:25</publishTime>
+    </File>
+    <File Include="Sasif.Master">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="SasifMaster.js">
+      <publishTime>11/11/2016 09:55:32</publishTime>
+    </File>
+    <File Include="SasifMaster_Cosult.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Scripts/Chosen/chosen.jquery.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Scripts/Chosen/chosen.jquery.min.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Scripts/Chosen/prism.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Scripts/Dialog/datepicker.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Scripts/Dialog/jquery-1.10.2.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Scripts/Dialog/jquery-ui-1.10.4.custom.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Scripts/Dialog/jquery-ui-1.10.4.custom.min.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Scripts/Dialog/jquery-ui.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Scripts/Dialog/timepicker.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.4.1-vsdoc.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.4.1.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.4.1.min.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.6.4.min.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Scripts/jquery-ui.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Scripts/jquery-ui.min.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Scripts/jquery.dataTables.min.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Scripts/jquery.fileupload.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Scripts/jquery.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Scripts/jquery.min.js">
+      <publishTime>11/11/2016 09:55:24</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>11/11/2016 11:04:49</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

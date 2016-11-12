@@ -22,7 +22,7 @@
     Private _OP_Asesor As String
     Private _Other_1 As String
     Private _Other_2 As String
-   
+
     Private _Cod_Bank As Long
     Private _DocCiudad As Long
     Private _TipoPersona As String
@@ -59,7 +59,13 @@
     Private _DescripJefe As String
     Private _DescripGrupoDocumentos As String
 
-#End Region
+    Private _Tarjeta_ID As String
+    Private _EstadoTarjeta As String
+    Private _CheckVigencia_Tarjeta As String
+    Private _FechaVencimientoTarjeta As String
+    Private _MotivoBloqueo As String
+    Private _DescripMotivoBloqueo As String
+ #End Region
 
 #Region "Propiedades"
     Public Property Index() As Long
@@ -456,5 +462,53 @@
         End Set
     End Property
 
+    Public Property Tarjeta_ID() As String
+        Get
+            Return Me._Tarjeta_ID
+        End Get
+        Set(ByVal value As String)
+            Me._Tarjeta_ID = value
+        End Set
+    End Property
+    Public Property EstadoTarjeta() As String
+        Get
+            Return Me._EstadoTarjeta
+        End Get
+        Set(ByVal value As String)
+            Me._EstadoTarjeta = value
+        End Set
+    End Property
+    Public Property CheckVigencia_Tarjeta() As String
+        Get
+            Return Me._CheckVigencia_Tarjeta
+        End Get
+        Set(ByVal value As String)
+            Me._CheckVigencia_Tarjeta = value
+        End Set
+    End Property
+    Public Property FechaVencimientoTarjeta() As String
+        Get
+            Return Me._FechaVencimientoTarjeta
+        End Get
+        Set(ByVal value As String)
+            Me._FechaVencimientoTarjeta = value
+        End Set
+    End Property
+    Public Property MotivoBloqueo() As String
+        Get
+            Return Me._MotivoBloqueo
+        End Get
+        Set(ByVal value As String)
+            Me._MotivoBloqueo = value
+        End Set
+    End Property
+    Public Property DescripMotivoBloqueo() As String
+        Get
+            Return Me._DescripMotivoBloqueo
+        End Get
+        Set(ByVal value As String)
+            Me._DescripMotivoBloqueo = value
+        End Set
+    End Property
 #End Region
 End Class
