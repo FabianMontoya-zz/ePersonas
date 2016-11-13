@@ -185,7 +185,7 @@
 /*                                                           ESTILOS PAISES                                                               */
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
- #container_TGrid, #container_TRDoc_Verificacion, #container_TR_PuertaAcc_Area, #container_TPuertaAcceso, #container_TConsecutivos_General, #container_TConsecutivos, #container_TRGrpDoc_Doc, #container_TDocumento, #container_TRutaDocumentos, #container_TGrpDocumentos, #container_TCargo, #container_TProductos, #container_TTransacciones, #container_TTP_Activo, #container_TTP_Leasing, #container_TSActivo, #container_TActivo, #container_TSTP_Leasing, #container_TFasecolda, #container_TMonedaCot, #container_TPaises, #container_TMensajes, #container_TAyudas, #container_TCiudades, #container_TImpuesto_Gasto, #container_Tlink, #container_Trol, #container_TopcRol, #container_TUser, #container_TInf_Impuesto, #container_TPorcen_Descuentos, #container_TCliente, #container_TMonedaCod, #container_TArea, #container_TEmpleado, #container_TFestivo
+#container_TGrid, #container_TRDoc_Verificacion, #container_TR_PuertaAcc_Area, #container_TPuertaAcceso, #container_TConsecutivos_General, #container_TConsecutivos, #container_TRGrpDoc_Doc, #container_TDocumento, #container_TRutaDocumentos, #container_TGrpDocumentos, #container_TCargo, #container_TProductos, #container_TTransacciones, #container_TTP_Activo, #container_TTP_Leasing, #container_TSActivo, #container_TActivo, #container_TSTP_Leasing, #container_TFasecolda, #container_TMonedaCot, #container_TPaises, #container_TMensajes, #container_TAyudas, #container_TCiudades, #container_TImpuesto_Gasto, #container_Tlink, #container_Trol, #container_TopcRol, #container_TUser, #container_TInf_Impuesto, #container_TPorcen_Descuentos, #container_TCliente, #container_TMonedaCod, #container_TArea, #container_TEmpleado, #container_TFestivo
 {
     width: 800px;
     height: 238px;
@@ -195,7 +195,7 @@
     text-align: center;
 }
 
-#container_Document, #container_direccion, #container_Bank
+#container_Document, #container_direccion, #container_Bank, #container_TGrid_2
 {
     width: 970px;
     height: 340px;
@@ -203,6 +203,17 @@
     border: solid 1px #CACACA;
     font: 12px/20px Verdana,sans-serif;
     text-align: center;
+}
+
+ #container_TGrid_2
+{
+    width: 1070px;
+    height: 190px;
+    overflow: auto;
+    border: solid 1px #CACACA;
+    font: 12px/20px Verdana,sans-serif;
+    text-align: center;
+    margin-top:5px;
 }
 
 #container_TDoc_H
@@ -392,16 +403,16 @@
 }
 
 
-.Option_Cliente:hover
-{
-    background: -webkit-linear-gradient(#89B8DA, #6EA7D2);
-    background: -o-linear-gradient(#89B8DA, #6EA7D2);
-    background: -moz-linear-gradient(#89B8DA, #6EA7D2);
-    background: linear-gradient(#89B8DA, #6EA7D2);
-    border: solid 1px white;
-    color: white;
-    cursor: pointer;
-}
+    .Option_Cliente:hover
+    {
+        background: -webkit-linear-gradient(#89B8DA, #6EA7D2);
+        background: -o-linear-gradient(#89B8DA, #6EA7D2);
+        background: -moz-linear-gradient(#89B8DA, #6EA7D2);
+        background: linear-gradient(#89B8DA, #6EA7D2);
+        border: solid 1px white;
+        color: white;
+        cursor: pointer;
+    }
 
 .C_Image
 {

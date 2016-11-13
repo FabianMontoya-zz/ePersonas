@@ -441,6 +441,9 @@ function ValidaHoras() {
     return validate;
 }
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                              PROCESO DE CARGUE GRID CALENDARIO                                                                                   ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //construye el Json con los datos proporcionados
 function CargeJson() {
 
@@ -477,14 +480,15 @@ function CargeJson() {
 
     ArrayCalendario.push(JsonCalendario);
     TGridCalendar();
+    Clear_Agregar();
 
 }
 
-
+//grid de calendario asignados
 function TGridCalendar() {
 
     var html_Calendario;
-    html_Calendario = "<table id='TCalendario' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th colspan='3'>Lunes</th><th colspan='3'>Martes</th><th colspan='3'>Miercoles</th><th colspan='3'>Jueves</th><th colspan='3'>Viernes</th><th colspan='3'>Sabado</th><th colspan='3'>Domingo</th><th colspan='3'>Festivo</th></tr><tr><th>Tipo</th><th>H. Inicial</th><th>H. Final</th><th>Tipo</th><th>H. Inicial</th><th>H. Final</th><th>Tipo</th><th>H. Inicial</th><th>H. Final</th><th>Tipo</th><th>H. Inicial</th><th>H. Final</th><th>Tipo</th><th>H. Inicial</th><th>H. Final</th><th>Tipo</th><th>H. Inicial</th><th>H. Final</th><th>Tipo</th><th>H. Inicial</th><th>H. Final</th><th>Tipo</th><th>H. Inicial</th><th>H. Final</th></tr></thead><tbody>";
+    html_Calendario = "<table id='TCalendario' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th colspan='3' class='Grid_Head' >Lunes</th><th colspan='3' class='Grid_Head' >Martes</th><th colspan='3' class='Grid_Head' >Miercoles</th><th colspan='3' class='Grid_Head' >Jueves</th><th colspan='3' class='Grid_Head' >Viernes</th><th colspan='3' class='Grid_Head' >Sabado</th><th colspan='3' class='Grid_Head' >Domingo</th><th colspan='3' class='Grid_Head' >Festivo</th></tr><tr><th>Tipo</th><th>H. Inicial</th><th>H. Final</th><th>Tipo</th><th>H. Inicial</th><th>H. Final</th><th>Tipo</th><th>H. Inicial</th><th>H. Final</th><th>Tipo</th><th>H. Inicial</th><th>H. Final</th><th>Tipo</th><th>H. Inicial</th><th>H. Final</th><th>Tipo</th><th>H. Inicial</th><th>H. Final</th><th>Tipo</th><th>H. Inicial</th><th>H. Final</th><th>Tipo</th><th>H. Inicial</th><th>H. Final</th></tr></thead><tbody>";
     for (itemArray in ArrayCalendario) {
         html_Calendario += "<tr id= 'TCalendario_" + ArrayCalendario[itemArray].Calendario_ID + "'><td>" + ArrayCalendario[itemArray].StateLun + "</td><td>" + ArrayCalendario[itemArray].IniLun + "</td><td>" + ArrayCalendario[itemArray].FinLun + "</td><td>" + ArrayCalendario[itemArray].StateMar + "</td><td>" + ArrayCalendario[itemArray].IniMar + "</td><td>" + ArrayCalendario[itemArray].FinMar + "</td><td>" + ArrayCalendario[itemArray].StateMie + "</td><td>" + ArrayCalendario[itemArray].IniMie + "</td><td>" + ArrayCalendario[itemArray].FinMie + "</td><td>" + ArrayCalendario[itemArray].StateJue + "</td><td>" + ArrayCalendario[itemArray].IniJue + "</td><td>" + ArrayCalendario[itemArray].FinJue + "</td><td>" + ArrayCalendario[itemArray].StateVie + "</td><td>" + ArrayCalendario[itemArray].IniVie + "</td><td>" + ArrayCalendario[itemArray].FinVie + "</td><td>" + ArrayCalendario[itemArray].StateSab + "</td><td>" + ArrayCalendario[itemArray].IniSab + "</td><td>" + ArrayCalendario[itemArray].FinSab + "</td><td>" + ArrayCalendario[itemArray].StateDom + "</td><td>" + ArrayCalendario[itemArray].IniDom + "</td><td>" + ArrayCalendario[itemArray].FinDom + "</td><td>" + ArrayCalendario[itemArray].StateFestivo + "</td><td>" + ArrayCalendario[itemArray].IniF + "</td><td>" + ArrayCalendario[itemArray].FinF + "</td></tr>";
     }
@@ -498,6 +502,39 @@ function TGridCalendar() {
         "bDestroy": true
     });
 }
+
+//limpieza de campos despues de agregar un calendario al grid
+function Clear_Agregar() {
+
+    $("#Select_StateLun").val("L");
+    $("#Select_StateMar").val("L");
+    $("#Select_StateMie").val("L");
+    $("#Select_StateJue").val("L");
+    $("#Select_StateVie").val("L");
+    $("#Select_StateSab").val("L");
+    $("#Select_StateDom").val("L");
+    $("#Select_Festivo").val("L");
+
+    $("#TxtIniLun").val("");
+    $("#TxtFinLun").val("");
+    $("#TxtIniMar").val("");
+    $("#TxtFinMar").val("");
+    $("#TxtIniMie").val("");
+    $("#TxtFinMie").val("");
+    $("#TxtIniJue").val("");
+    $("#TxtFinJue").val("");
+    $("#TxtIniVie").val("");
+    $("#TxtFinVie").val("");
+    $("#TxtIniSab").val("");
+    $("#TxtFinSab").val("");
+    $("#TxtIniDom").val("");
+    $("#TxtFinDom").val("");
+    $("#TxtIniF").val("");
+    $("#TxtFinF").val("");
+
+    $('.C_Chosen').trigger('chosen:updated');
+}
+
 
 // crea la tabla de consulta
 function Table_Calendario() {

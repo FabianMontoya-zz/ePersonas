@@ -416,7 +416,10 @@
                     </tr>
                 </tbody>
             </table>
-            <table>
+
+            <div id="container_TGrid_2">
+            </div>
+            <table style="width: 100%;">
                 <tr>
                     <td style="width: 150px;" class="Label_Bold">
                         <p>
@@ -429,8 +432,6 @@
                     </td>
                 </tr>
             </table>
-            <div id="container_TGrid_2">
-            </div>
         </div>
     </div>
     <div id="dialog" title="Basic dialog">
