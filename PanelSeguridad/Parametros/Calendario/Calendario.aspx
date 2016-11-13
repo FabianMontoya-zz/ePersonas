@@ -429,6 +429,8 @@
                     </td>
                 </tr>
             </table>
+            <div id="container_TGrid_2">
+            </div>
         </div>
     </div>
     <div id="dialog" title="Basic dialog">

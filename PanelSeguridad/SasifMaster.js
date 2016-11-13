@@ -251,6 +251,12 @@ function Validahora(V_HoraInicial, V_HoraFinal) {
         }
     }
 
+    if (V_HoraInicial == "")
+        Valida = 2;
+
+    if (V_HoraFinal == "")
+        Valida = 2;
+
     return Valida;
 }
 
