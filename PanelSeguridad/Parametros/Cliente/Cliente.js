@@ -326,12 +326,9 @@ function Change_Select_TDoc() {
     });
 }
 
-
-
 //muestra las relacion del cliente
 function BtnRelacion() {
     $("#Dialog_Relation").dialog("open");
-
 }
 
 //salida del formulario
