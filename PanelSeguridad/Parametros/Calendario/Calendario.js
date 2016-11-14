@@ -27,7 +27,6 @@ $(document).ready(function () {
     $("#SE").css("display", "none");
     $("#WE").css("display", "none");
 
-    $("#TablaDatos_D").css("display", "none");
     $("#TablaConsulta").css("display", "none");
 
     //funcion para las ventanas emergentes
@@ -47,8 +46,8 @@ $(document).ready(function () {
         autoOpen: false,
         dialogClass: "Dialog_Sasif",
         modal: true,
-        width: 1160,
-        height: 600,
+        width: 1220,
+        height: 760,
         overlay: {
             opacity: 0.5,
             background: "black"
@@ -56,8 +55,8 @@ $(document).ready(function () {
     });
 
     $(function () {
-        $("#Txtfecha").datepicker({ dateFormat: 'yy-mm-dd' });
-        $("#TxtIniLun").timepicker();
+        $("#TxtF_Start").datepicker({ dateFormat: 'yy-mm-dd' });
+        $("#TxtF_End").datepicker({ dateFormat: 'yy-mm-dd' });
         $("#TxtFinLun").timepicker();
         $("#TxtIniMar").timepicker();
         $("#TxtFinMar").timepicker();
@@ -73,6 +72,7 @@ $(document).ready(function () {
         $("#TxtFinDom").timepicker();
         $("#TxtIniF").timepicker();
         $("#TxtFinF").timepicker();
+
     });
 });
 
@@ -164,7 +164,7 @@ function HabilitarPanel(opcion) {
     switch (opcion) {
 
         case "crear":
-            $("#TablaDatos_D").css("display", "inline-table");
+            $("#TablaDatos_D_Calen").css("display", "inline-table");
             $("#TablaConsulta").css("display", "none");
             $("#Select_EmpresaNit").removeAttr("disabled");
             $("#Txt_ID").removeAttr("disabled");
@@ -177,7 +177,7 @@ function HabilitarPanel(opcion) {
             break;
 
         case "buscar":
-            $("#TablaDatos_D").css("display", "none");
+            $("#TablaDatos_D_Calen").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TGrid").html("");
             estado = opcion;
@@ -185,7 +185,7 @@ function HabilitarPanel(opcion) {
             break;
 
         case "modificar":
-            $("#TablaDatos_D").css("display", "none");
+            $("#TablaDatos_D_Calen").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TGrid").html("");
             estado = opcion;
@@ -194,7 +194,7 @@ function HabilitarPanel(opcion) {
             break;
 
         case "eliminar":
-            $("#TablaDatos_D").css("display", "none");
+            $("#TablaDatos_D_Calen").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TGrid").html("");
             estado = opcion;
@@ -488,9 +488,9 @@ function CargeJson() {
 function TGridCalendar() {
 
     var html_Calendario;
-    html_Calendario = "<table id='TCalendario' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th colspan='3' class='Grid_Head' >Lunes</th><th colspan='3' class='Grid_Head' >Martes</th><th colspan='3' class='Grid_Head' >Miercoles</th><th colspan='3' class='Grid_Head' >Jueves</th><th colspan='3' class='Grid_Head' >Viernes</th><th colspan='3' class='Grid_Head' >Sabado</th><th colspan='3' class='Grid_Head' >Domingo</th><th colspan='3' class='Grid_Head' >Festivo</th></tr><tr><th>Tipo</th><th>H. Inicial</th><th>H. Final</th><th>Tipo</th><th>H. Inicial</th><th>H. Final</th><th>Tipo</th><th>H. Inicial</th><th>H. Final</th><th>Tipo</th><th>H. Inicial</th><th>H. Final</th><th>Tipo</th><th>H. Inicial</th><th>H. Final</th><th>Tipo</th><th>H. Inicial</th><th>H. Final</th><th>Tipo</th><th>H. Inicial</th><th>H. Final</th><th>Tipo</th><th>H. Inicial</th><th>H. Final</th></tr></thead><tbody>";
+    html_Calendario = "<table id='TCalendario' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th colspan='2' class='Grid_Head' >Lunes</th><th colspan='2' class='Grid_Head' >Martes</th><th colspan='2' class='Grid_Head' >Miercoles</th><th colspan='2' class='Grid_Head' >Jueves</th><th colspan='2' class='Grid_Head' >Viernes</th><th colspan='2' class='Grid_Head' >Sabado</th><th colspan='2' class='Grid_Head' >Domingo</th><th colspan='2' class='Grid_Head' >Festivo</th></tr><tr><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th></tr><tr><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th></tr></thead><tbody>";
     for (itemArray in ArrayCalendario) {
-        html_Calendario += "<tr id= 'TCalendario_" + ArrayCalendario[itemArray].Calendario_ID + "'><td>" + ArrayCalendario[itemArray].StateLun + "</td><td>" + ArrayCalendario[itemArray].IniLun + "</td><td>" + ArrayCalendario[itemArray].FinLun + "</td><td>" + ArrayCalendario[itemArray].StateMar + "</td><td>" + ArrayCalendario[itemArray].IniMar + "</td><td>" + ArrayCalendario[itemArray].FinMar + "</td><td>" + ArrayCalendario[itemArray].StateMie + "</td><td>" + ArrayCalendario[itemArray].IniMie + "</td><td>" + ArrayCalendario[itemArray].FinMie + "</td><td>" + ArrayCalendario[itemArray].StateJue + "</td><td>" + ArrayCalendario[itemArray].IniJue + "</td><td>" + ArrayCalendario[itemArray].FinJue + "</td><td>" + ArrayCalendario[itemArray].StateVie + "</td><td>" + ArrayCalendario[itemArray].IniVie + "</td><td>" + ArrayCalendario[itemArray].FinVie + "</td><td>" + ArrayCalendario[itemArray].StateSab + "</td><td>" + ArrayCalendario[itemArray].IniSab + "</td><td>" + ArrayCalendario[itemArray].FinSab + "</td><td>" + ArrayCalendario[itemArray].StateDom + "</td><td>" + ArrayCalendario[itemArray].IniDom + "</td><td>" + ArrayCalendario[itemArray].FinDom + "</td><td>" + ArrayCalendario[itemArray].StateFestivo + "</td><td>" + ArrayCalendario[itemArray].IniF + "</td><td>" + ArrayCalendario[itemArray].FinF + "</td></tr>";
+        html_Calendario += "<tr id= 'TCalendario_" + ArrayCalendario[itemArray].Calendario_ID + "'><td>" + ArrayCalendario[itemArray].IniLun + "</td><td>" + ArrayCalendario[itemArray].FinLun + "</td><td>" + ArrayCalendario[itemArray].IniMar + "</td><td>" + ArrayCalendario[itemArray].FinMar + "</td><td>" + ArrayCalendario[itemArray].IniMie + "</td><td>" + ArrayCalendario[itemArray].FinMie + "</td><td>" + ArrayCalendario[itemArray].IniJue + "</td><td>" + ArrayCalendario[itemArray].FinJue + "</td><td>" + ArrayCalendario[itemArray].IniVie + "</td><td>" + ArrayCalendario[itemArray].FinVie + "</td><td>" + ArrayCalendario[itemArray].IniSab + "</td><td>" + ArrayCalendario[itemArray].FinSab + "</td><td>" + ArrayCalendario[itemArray].IniDom + "</td><td>" + ArrayCalendario[itemArray].FinDom + "</td><td>" + ArrayCalendario[itemArray].IniF + "</td><td>" + ArrayCalendario[itemArray].FinF + "</td></tr>";
     }
 
     html_Calendario += "</tbody></table>";
@@ -506,14 +506,14 @@ function TGridCalendar() {
 //limpieza de campos despues de agregar un calendario al grid
 function Clear_Agregar() {
 
-    $("#Select_StateLun").val("L");
+    /*$("#Select_StateLun").val("L");
     $("#Select_StateMar").val("L");
     $("#Select_StateMie").val("L");
     $("#Select_StateJue").val("L");
     $("#Select_StateVie").val("L");
     $("#Select_StateSab").val("L");
     $("#Select_StateDom").val("L");
-    $("#Select_Festivo").val("L");
+    $("#Select_Festivo").val("L");*/
 
     $("#TxtIniLun").val("");
     $("#TxtFinLun").val("");

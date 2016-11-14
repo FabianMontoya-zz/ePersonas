@@ -115,6 +115,19 @@
     border-style: outset;
 }
 
+#TablaDatos_D_Calen
+{
+    width: 1120px;
+    height: 350px;
+    overflow: auto;
+    background-color: silver;
+    padding: 40px 30px;
+    border-radius: 20px;
+    border-color: gray;
+    border-width: 5px;
+    border-style: outset;
+}
+
 #TablaProductos_D
 {
     width: 985px;
@@ -207,7 +220,7 @@
 
  #container_TGrid_2
 {
-    width: 1070px;
+    width: 1120px;
     height: 190px;
     overflow: auto;
     border: solid 1px #CACACA;

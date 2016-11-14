@@ -82,7 +82,7 @@
         </div>
     </div>
     <div id="Dialog_Calendar">
-        <div id="TablaDatos_D">
+        <div id="TablaDatos_D_Calen">
             <table id="Tabla_1" style="width: 700px; text-align: left;">
                 <tr>
                     <td style="width: 150px;" class="Label_Bold">Multi - Empresa
@@ -131,20 +131,42 @@
                     </td>
                 </tr>
             </table>
-            <table id="Tabla_3" style="width: 700px; text-align: left;">
+            <table id="Tabla_3" style="width: 1000px; text-align: left;">
                 <tr>
                     <td style="width: 150px;" class="Label_Bold">Tipo Calendario
                     </td>
-                    <td>
-                        <select id="Select_TipoCalendario" class="C_Chosen">
+                    <td style="width: 230px;">
+                        <select id="Select_TipoCalendario" style="width: 230px;" class="C_Chosen">
                             <option value="-1">Seleccione...</option>
                             <option value="1">Por día de la semana</option>
                             <option value="2">Fechas progresivas</option>
                         </select>
                     </td>
-                    <td style="padding-bottom: 25px; width: 320px;">
+                    <td style="padding-bottom: 25px; width: 150px;">
                         <span class="cssToolTip">
                             <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img5"
+                                src="../../images/error.png" />
+                            <span class="SpamEG"></span></span>
+                    </td>
+                    <td>
+                        <span class="cssToolTip_Form">
+                            <input type="text" id="TxtF_Start" maxlength="50" style="width: 100px;" />
+                            <span class="Spam_AF"></span></span>
+                    </td>
+                    <td style="padding-bottom: 25px; width: 90px;">
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img6"
+                                src="../../images/error.png" />
+                            <span class="SpamEG"></span></span>
+                    </td>
+                    <td>
+                        <span class="cssToolTip_Form">
+                            <input type="text" id="TxtF_End" maxlength="50" style="width: 100px;" />
+                            <span class="Spam_AF"></span></span>
+                    </td>
+                    <td style="padding-bottom: 25px; width: 200px;">
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img7"
                                 src="../../images/error.png" />
                             <span class="SpamEG"></span></span>
                     </td>
