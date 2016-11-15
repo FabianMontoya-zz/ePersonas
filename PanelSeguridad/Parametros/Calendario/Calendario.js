@@ -6,6 +6,7 @@ var ArraySeguridad = [];
 
 var MensajeHora = "";
 var V_ONE = 0;
+var JsonCalendario;
 
 var estado;
 var editNit_ID;
@@ -23,11 +24,14 @@ $(document).ready(function () {
     $("#Img2").css("display", "none");
     $("#Img3").css("display", "none");
     $("#Img5").css("display", "none");
+    $("#Img6").css("display", "none");
+    $("#Img7").css("display", "none");
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
     $("#WE").css("display", "none");
 
     $("#TablaConsulta").css("display", "none");
+    $("#Tabla_10").css("display", "none");
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
@@ -57,6 +61,7 @@ $(document).ready(function () {
     $(function () {
         $("#TxtF_Start").datepicker({ dateFormat: 'yy-mm-dd' });
         $("#TxtF_End").datepicker({ dateFormat: 'yy-mm-dd' });
+        $("#TxtIniLun").timepicker();
         $("#TxtFinLun").timepicker();
         $("#TxtIniMar").timepicker();
         $("#TxtFinMar").timepicker();
@@ -72,8 +77,8 @@ $(document).ready(function () {
         $("#TxtFinDom").timepicker();
         $("#TxtIniF").timepicker();
         $("#TxtFinF").timepicker();
-
     });
+    Change_Tipo_Calendario();
 });
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -134,7 +139,7 @@ function BtnAgregaCalendario() {
             if (V_ONE == 0)
                 Mensaje_General("Advertencia!", "Debe minimo seleccionar un agendamiento", "W");
             else
-                CargeJson();
+                validaTipoC();
             break;
 
         case 1:
@@ -145,8 +150,6 @@ function BtnAgregaCalendario() {
             Mensaje_General("Advertencia!", "La hora inicial ó  la hora final! en el dia (" + MensajeHora + ")", "W");
             break;
     }
-
-
 }
 
 //evento del boton salir
@@ -207,7 +210,7 @@ function HabilitarPanel(opcion) {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                           REGION DE VALIDACIONES                                                                                                   ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-//validamos campos para la creacion del link
+//validamos campos para la creacion del calendario
 function validarCamposCrear() {
 
     var Campo_1 = $("#Select_EmpresaNit").val();
@@ -229,6 +232,26 @@ function validarCamposCrear() {
         $("#Img2").css("display", "none");
         $("#Img3").css("display", "none");
         $("#Img5").css("display", "none");
+    }
+    return validar;
+}
+
+//validamos campos para la creacion del calendario
+function validarCamposFechas() {
+
+    var Campo_1 = $("#TxtF_Start").val();
+    var Campo_2 = $("#TxtF_End").val();
+
+    var validar = 0;
+
+    if (Campo_2 == "" || Campo_1 == "") {
+        validar = 1;
+        if (Campo_1 == "") { $("#Img6").css("display", "inline-table"); } else { $("#Img6").css("display", "none"); }
+        if (Campo_2 == "") { $("#Img7").css("display", "inline-table"); } else { $("#Img7").css("display", "none"); }
+    }
+    else {
+        $("#Img6").css("display", "none");
+        $("#Img7").css("display", "none");
     }
     return validar;
 }
@@ -444,36 +467,46 @@ function ValidaHoras() {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                              PROCESO DE CARGUE GRID CALENDARIO                                                                                   ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+function validaTipoC() {
+    var Ingresa;
+
+    switch ($("#Select_TipoCalendario").val()) {
+        case "1":
+            CargeJson();
+            break;
+
+        case "2":
+            Ingresa = ValidaFechas();
+            console.log(Ingresa);
+            if (Ingresa == 0) {
+                CargeJson();
+             }
+            break;
+    }
+}
+
 //construye el Json con los datos proporcionados
 function CargeJson() {
 
-    var JsonCalendario = {
+    JsonCalendario = {
         "Nit_ID": $("#Select_EmpresaNit").val(),
         "Calendario_ID": $("#Txt_ID").val(),
         "Descripcion": $("#Txt_ID").val(),
         "TipoCalendario": $("#Select_TipoCalendario").val(),
-        "StateLun": $("#Select_StateLun").val(),
         "IniLun": $("#TxtIniLun").val(),
         "FinLun": $("#TxtFinLun").val(),
-        "StateMar": $("#Select_StateMar").val(),
         "IniMar": $("#TxtIniMar").val(),
         "FinMar": $("#TxtFinMar").val(),
-        "StateMie": $("#Select_StateMie").val(),
         "IniMie": $("#TxtIniMie").val(),
         "FinMie": $("#TxtFinMie").val(),
-        "StateJue": $("#Select_StateJue").val(),
         "IniJue": $("#TxtIniJue").val(),
         "FinJue": $("#TxtFinJue").val(),
-        "StateVie": $("#Select_StateVie").val(),
         "IniVie": $("#TxtIniVie").val(),
         "FinVie": $("#TxtFinVie").val(),
-        "StateSab": $("#Select_StateSab").val(),
         "IniSab": $("#TxtIniSab").val(),
         "FinSab": $("#TxtFinSab").val(),
-        "StateDom": $("#Select_StateDom").val(),
         "IniDom": $("#TxtIniDom").val(),
         "FinDom": $("#TxtFinDom").val(),
-        "StateFestivo": $("#Select_Festivo").val(),
         "IniF": $("#TxtIniF").val(),
         "FinF": $("#TxtFinF").val()
     };

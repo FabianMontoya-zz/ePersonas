@@ -6,6 +6,7 @@
     <script src="../../SasifMaster.js" type="text/javascript"></script>
     <script src="../SasifMaster_Cosult.js" type="text/javascript"></script>
     <script src="Calendario.js" type="text/javascript"></script>
+    <script src="CalendarioProgresivo.js" type="text/javascript"></script>
     <script src="CalendarioTrasaccionsAjax.js" type="text/javascript"></script>
     <link href="../../css/css_login.css" rel="stylesheet" type="text/css" />
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
@@ -99,16 +100,50 @@
                     </td>
                 </tr>
             </table>
+            <table id="Tabla_10" style="width: 500px; text-align: left; position: absolute; margin-left: 600px; margin-bottom: 100px;">
+                <tr>
+                    <td class="Label_Bold">Fecha Inicial
+                    </td>
+                    <td></td>
+                    <td class="Label_Bold">Fecha Final
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="cssToolTip_Form">
+                            <input type="text" id="TxtF_Start" maxlength="50" style="width: 100px;" />
+                            <span class="Spam_AF"></span></span>
+                    </td>
+                    <td style="padding-bottom: 25px; width: 90px;">
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img6"
+                                src="../../images/error.png" />
+                            <span class="SpamEG"></span></span>
+                    </td>
+                    <td style="width: 120px;">
+                        <span class="cssToolTip_Form">
+                            <input type="text" id="TxtF_End" maxlength="50" style="width: 100px;" />
+                            <span class="Spam_AF"></span></span>
+                    </td>
+                    <td style="padding-bottom: 25px; width: 200px;">
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img7"
+                                src="../../images/error.png" />
+                            <span class="SpamEG"></span></span>
+                    </td>
+                </tr>
+            </table>
             <table id="Tabla_2" style="width: 700px; text-align: left;">
                 <tr>
-                    <td style="width: 70px;" class="Label_Bold">Codigo
+                    <td style="width: 100px;" class="Label_Bold">Codigo
                     </td>
-                    <td style="width: 100px;">
+                    <td style="width: 150px;">
                         <span class="cssToolTip_Form">
                             <input type="text" id="Txt_ID" maxlength="5" class="Numeric" style="width: 70px;" />
                             <span class="Spam_AN"></span></span>
                     </td>
-                    <td style="padding-bottom: 25px; width: 72px;">
+                    <td style="padding-bottom: 25px; width: 340px;">
                         <span class="cssToolTip">
                             <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img2"
                                 src="../../images/error.png" />
@@ -116,9 +151,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="Label_Bold" style="width: 70px;">Descripción
+                    <td class="Label_Bold" style="width: 150px;">Descripción
                     </td>
-                    <td style="width: 100px;">
+                    <td style="width: 50px;">
                         <span class="cssToolTip_Form">
                             <input type="text" id="TxtDescription" maxlength="50" style="width: 200px;" />
                             <span class="Spam_AST"></span></span>
@@ -131,9 +166,9 @@
                     </td>
                 </tr>
             </table>
-            <table id="Tabla_3" style="width: 1000px; text-align: left;">
+            <table id="Tabla_3" style="width: 700px; text-align: left;">
                 <tr>
-                    <td style="width: 150px;" class="Label_Bold">Tipo Calendario
+                    <td style="width: 153px;" class="Label_Bold">Tipo Calendario
                     </td>
                     <td style="width: 230px;">
                         <select id="Select_TipoCalendario" style="width: 230px;" class="C_Chosen">
@@ -142,31 +177,9 @@
                             <option value="2">Fechas progresivas</option>
                         </select>
                     </td>
-                    <td style="padding-bottom: 25px; width: 150px;">
+                    <td style="padding-bottom: 25px; width: 350px;">
                         <span class="cssToolTip">
                             <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img5"
-                                src="../../images/error.png" />
-                            <span class="SpamEG"></span></span>
-                    </td>
-                    <td>
-                        <span class="cssToolTip_Form">
-                            <input type="text" id="TxtF_Start" maxlength="50" style="width: 100px;" />
-                            <span class="Spam_AF"></span></span>
-                    </td>
-                    <td style="padding-bottom: 25px; width: 90px;">
-                        <span class="cssToolTip">
-                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img6"
-                                src="../../images/error.png" />
-                            <span class="SpamEG"></span></span>
-                    </td>
-                    <td>
-                        <span class="cssToolTip_Form">
-                            <input type="text" id="TxtF_End" maxlength="50" style="width: 100px;" />
-                            <span class="Spam_AF"></span></span>
-                    </td>
-                    <td style="padding-bottom: 25px; width: 200px;">
-                        <span class="cssToolTip">
-                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img7"
                                 src="../../images/error.png" />
                             <span class="SpamEG"></span></span>
                     </td>
@@ -189,7 +202,8 @@
                         </th>
                         <th align="center" colspan="2">Domingo
                         </th>
-                        <th align="center" colspan="2"></th>
+                        <th align="center" colspan="2">Festivo
+                        </th>
                     </tr>
                 </thead>
                 <tbody>

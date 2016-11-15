@@ -219,9 +219,9 @@ function validate_fechaMayorQue(fechaInicial, fechaFinal, Type) {
             valuesEnd = fechaFinal.split("-");
 
             // Verificamos que la fecha no sea posterior a la actual
-            dateStart = new Date(valuesStart[2], (valuesStart[1] - 1), valuesStart[0]);
-            dateEnd = new Date(valuesEnd[2], (valuesEnd[1] - 1), valuesEnd[0]);
-
+            dateStart = new Date(valuesStart[0], (valuesStart[1] - 1), valuesStart[2]);
+            dateEnd = new Date(valuesEnd[0], (valuesEnd[1] - 1), valuesEnd[2]);
+            console.log(dateStart + " >= " + dateEnd);
             if (dateStart >= dateEnd)
                 Resultado = "Menor";
             else

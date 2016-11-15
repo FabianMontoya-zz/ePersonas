@@ -399,6 +399,7 @@
     <Content Include="Parametros\Calendario\Calendario.aspx" />
     <Content Include="Parametros\Calendario\Calendario.js" />
     <Content Include="Parametros\Calendario\CalendarioAjax.aspx" />
+    <Content Include="Parametros\Calendario\CalendarioProgresivo.js" />
     <Content Include="Parametros\Calendario\CalendarioTrasaccionsAjax.js" />
     <Content Include="Parametros\Cargo\Cargo.aspx" />
     <Content Include="Parametros\Cargo\Cargo.js" />
