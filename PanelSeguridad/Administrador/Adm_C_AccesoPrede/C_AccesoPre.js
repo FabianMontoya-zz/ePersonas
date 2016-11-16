@@ -24,7 +24,7 @@ var editDoc_Enc;
 var Container_Tarjeta;
 /*--------------- region de variables globales --------------------*/
 
-//evento load de los Links
+//Evento load JS
 $(document).ready(function () {
 
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');

@@ -14,7 +14,7 @@ var editID;
 var editDocID;
 /*--------------- region de variables globales --------------------*/
 
-//evento load de los Links
+//Evento load JS
 $(document).ready(function () {
     transaccionAjax_MGrpDoc('MATRIX_GRPDOC');
     transaccionAjax_MDoc('MATRIX_DOC');

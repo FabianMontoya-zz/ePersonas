@@ -1,0 +1,1 @@
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Relation_Tipo_Subtipo_ActivoAjax.aspx.vb" Inherits="PanelSeguridad.Relation_Tipo_Subtipo_ActivoAjax" %>

@@ -23,7 +23,7 @@
                 <table id="M_header">
                     <tr>
                         <td id="logoExt" rowspan="4" style="width: 15%; text-align: center;">
-                            <img id="logo_2" src="" alt="SASIF S.A." style="height: 80px; width: 120px" />
+                            <img id="logo_2" src="" alt="SASIF S.A.S." style="height: 85px; width: 70px; padding-top: 25px"  />
                         </td>
                         <td id="Hours" colspan="3" style="width: 70%; text-align: center;">
                         </td>

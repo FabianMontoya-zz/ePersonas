@@ -29,7 +29,7 @@ var editID;
 var editDocID;
 /*--------------- region de variables globales --------------------*/
 
-//evento load de los Links
+//Evento load JS
 $(document).ready(function () {
 
     ConsultaParametrosURL();
@@ -51,6 +51,10 @@ $(document).ready(function () {
     $("#Img2").css("display", "none");
     $("#Img3").css("display", "none");
     $("#Img5").css("display", "none");
+    $("#Img6").css("display", "none");
+    $("#Img7").css("display", "none");
+    $("#Img8").css("display", "none");
+
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
     $("#WE").css("display", "none");
@@ -92,6 +96,9 @@ $(document).ready(function () {
     $("#TxtIDTarjeta").focus();
 });
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                 REGION BOTONES                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //consuta datos
 function BtnConsulta() {
 
@@ -119,6 +126,21 @@ function BtnConsulta() {
     }
 }
 
+//evento del boton salir
+function x() {
+    $("#dialog").dialog("close");
+    Clear();
+}
+
+//salida del formulario
+function btnSalir() {
+    window.location = "../../Menu/menu.aspx?User=" + User + "&L_L=" + Link;
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                           REGION DE VALIDACIONES                                                                                                   ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
 // validamos campos de captura
 function Campos() {
 
@@ -145,6 +167,92 @@ function Campos() {
     return validar;
 }
 
+//verificar documento
+function ValidaDoc(Nit, PDoc, Doc_ID) {
+    var estado = "NO";
+    for (item in Matrix_DocWork) {
+        if (Matrix_DocWork[item].Nit_ID == Nit &&
+            Matrix_DocWork[item].Document_ID == PDoc &&
+            Matrix_DocWork[item].Documento_ID == Doc_ID) {
+            var verifico = Matrix_DocWork[item].Verificado;
+            Fecha_Vencimiento = Matrix_DocWork[item].Fecha_Vencimiento;
+            RutaDocumento = Matrix_DocWork[item].RutaRelativaDocumento + Matrix_DocWork[item].Nombre_Save + "." + Matrix_DocWork[item].DescripFormato;
+            var comparacion;
+
+            if (Fecha_Vencimiento != "") {
+                comparacion = validate_fechaMayorQue(Fecha_Vencimiento, "", "SystemCompare");
+                if (comparacion == "Mayor") {
+                    Imagen_Vencimiento = "C_RED.png";
+                    Est_Vigencia = 1;
+                }
+                else {
+                    Imagen_Vencimiento = "C_GREEN.png";
+                    Est_Vigencia = 0;
+                }
+            }
+            else {
+                Imagen_Vencimiento = "C_GREEN.png";
+                Est_Vigencia = 0;
+            }
+
+            switch (verifico) {
+                case "1":
+                    Est_Verifica = 1;
+                    estado = "PEND";
+                    EstadoVerif = "Pendiente por Verificar";
+                    break;
+
+                case "2":
+                    Est_Verifica = 0;
+                    estado = "VERIF";
+                    EstadoVerif = "verificado";
+                    break;
+
+                case "3":
+                    Est_Verifica = 3;
+                    estado = "RECHA";
+                    EstadoVerif = "Rechazado";
+                    break;
+
+                case "0":
+                    Est_Verifica = 0;
+                    estado = "VERIF";
+                    EstadoVerif = "verificado";
+                    break;
+
+                case "":
+                    Est_Verifica = 0;
+                    estado = "VERIF";
+                    EstadoVerif = "verificado";
+                    break;
+
+                default:
+                    Est_Verifica = 1;
+                    estado = "EXISTE";
+                    break;
+            }
+        }
+    }
+
+    return estado;
+}
+
+//revisamos ingreso segun documentos solicitados
+function ValidaAccesoPrincipal() {
+    var contador_semaforo = 0;
+
+    for (item in Matrix_Valida_Ingreso) {
+        contador_semaforo = contador_semaforo + parseInt(Matrix_Valida_Ingreso[item].Estado_Doc);
+        if (Matrix_Valida_Ingreso[item].Estado_Doc >= 1) {
+            ConstruyeMensaje(Matrix_Valida_Ingreso[item].Document, Matrix_Valida_Ingreso[item].Existe, Matrix_Valida_Ingreso[item].Verificado, Matrix_Valida_Ingreso[item].Vigencia);
+        }
+    }
+    return contador_semaforo;
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                              PROCESO DE CARGUE GRID PAGINA DE ACCESO                                                                             ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //buscar persona en la matrix
 function SearchPersona() {
     $("#Btnguardar").attr("value", "Nueva Consulta");
@@ -166,9 +274,7 @@ function SearchPersona() {
             $("#L_Area").html(Matrix_Persona[item].DescripArea);
             $("#L_Cargo").html(Matrix_Persona[item].DescripCargo);
 
-            Charge_Combos_Depend_Nit(Matrix_PAcceso, "Select_PAcceso", Nit_ID_Proccess, "");
-            Charge_Combos_Depend_Nit(Matrix_Persona, "Select_Persona_Enc", Nit_ID_Proccess, "");
-            //Charge_Combos_Depend_Nit(Matrix_PAcceso_Area, "Select_AreaAcceso_Ing", Nit_ID_Proccess,"");
+            HabilitaCombosIngreso();
 
             TDoc_VT = TDoc;
             Doc_VT = Doc;
@@ -369,76 +475,9 @@ function Tabla_Docs(Nit, TDoc, Doc, GrpDoc, Type) {
     }
 }
 
-//verificar documento
-function ValidaDoc(Nit, PDoc, Doc_ID) {
-    var estado = "NO";
-    for (item in Matrix_DocWork) {
-        if (Matrix_DocWork[item].Nit_ID == Nit &&
-            Matrix_DocWork[item].Document_ID == PDoc &&
-            Matrix_DocWork[item].Documento_ID == Doc_ID) {
-            var verifico = Matrix_DocWork[item].Verificado;
-            Fecha_Vencimiento = Matrix_DocWork[item].Fecha_Vencimiento;
-            RutaDocumento = Matrix_DocWork[item].RutaRelativaDocumento + Matrix_DocWork[item].Nombre_Save + "." + Matrix_DocWork[item].DescripFormato;
-            var comparacion;
-
-            if (Fecha_Vencimiento != "") {
-                comparacion = validate_fechaMayorQue(Fecha_Vencimiento, "", "SystemCompare");
-                if (comparacion == "Mayor") {
-                    Imagen_Vencimiento = "C_RED.png";
-                    Est_Vigencia = 1;
-                }
-                else {
-                    Imagen_Vencimiento = "C_GREEN.png";
-                    Est_Vigencia = 0;
-                }
-            }
-            else {
-                Imagen_Vencimiento = "C_GREEN.png";
-                Est_Vigencia = 0;
-            }
-
-            switch (verifico) {
-                case "1":
-                    Est_Verifica = 1;
-                    estado = "PEND";
-                    EstadoVerif = "Pendiente por Verificar";
-                    break;
-
-                case "2":
-                    Est_Verifica = 0;
-                    estado = "VERIF";
-                    EstadoVerif = "verificado";
-                    break;
-
-                case "3":
-                    Est_Verifica = 3;
-                    estado = "RECHA";
-                    EstadoVerif = "Rechazado";
-                    break;
-
-                case "0":
-                    Est_Verifica = 0;
-                    estado = "VERIF";
-                    EstadoVerif = "verificado";
-                    break;
-
-                case "":
-                    Est_Verifica = 0;
-                    estado = "VERIF";
-                    EstadoVerif = "verificado";
-                    break;
-
-                default:
-                    Est_Verifica = 1;
-                    estado = "EXISTE";
-                    break;
-            }
-        }
-    }
-
-    return estado;
-}
-
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                              MENSAJES, VISUALIZACION Y LIMPIEZA                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //ver documento en pantalla
 function VerDocumento(RutaDocumento, Documento) {
 
@@ -448,19 +487,6 @@ function VerDocumento(RutaDocumento, Documento) {
 
     $("#Dialog_Visor").dialog("open");
     $("#Dialog_Visor").dialog("option", "title", Documento);
-}
-
-//revisamos ingreso segun documentos solicitados
-function ValidaAccesoPrincipal() {
-    var contador_semaforo = 0;
-
-    for (item in Matrix_Valida_Ingreso) {
-        contador_semaforo = contador_semaforo + parseInt(Matrix_Valida_Ingreso[item].Estado_Doc);
-        if (Matrix_Valida_Ingreso[item].Estado_Doc >= 1) {
-            ConstruyeMensaje(Matrix_Valida_Ingreso[item].Document, Matrix_Valida_Ingreso[item].Existe, Matrix_Valida_Ingreso[item].Verificado, Matrix_Valida_Ingreso[item].Vigencia);
-        }
-    }
-    return contador_semaforo;
 }
 
 //construye el mensaje
@@ -489,12 +515,6 @@ function ConstruyeMensaje(Doc, Existe, Verificado, Vigencia) {
         }
     }
     $("#Spam_Mensaje").html(Mensaje_Semaforo);
-}
-
-//evento del boton salir
-function x() {
-    $("#dialog").dialog("close");
-    Clear();
 }
 
 //limpiar pagina para nueva consulta
@@ -529,7 +549,3 @@ function Clear() {
 }
 
 
-//salida del formulario
-function btnSalir() {
-    window.location = "../../Menu/menu.aspx?User=" + User + "&L_L=" + Link;
-}

@@ -50,7 +50,7 @@
     border-style: outset;
     padding-top: 10px;
     padding-bottom: 20px;
-    margin-bottom:5px;
+    margin-bottom: 5px;
 }
 
 .Dialog_Sasif_Web
@@ -265,7 +265,7 @@ img[src='../images/error.png'], img[src='../../images/error.png']
         border: none;
     }
 
-input[type='text'], input[type='password']
+input[type='text'], input[type='password'], input[type='number']
 {
     border: none;
     padding: 2px 0px 2px 8px;

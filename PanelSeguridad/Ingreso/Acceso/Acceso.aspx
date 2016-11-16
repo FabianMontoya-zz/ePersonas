@@ -102,6 +102,49 @@
             </div>
             <div id="Inf_Ingreso" style="margin-top: 10px; width: 100%;">
                 <div id="Cointainer_ingreso">
+                    <table id="Tabla_10" style="width: 500px; text-align: left; position: absolute; margin-left: 650px; margin-bottom: 200px;">
+                        <tr>
+                            <td class="Label_Bold" colspan="4" align="center">Tiempo de la Visita 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 50px;" class="Label_Bold">Horas
+                            </td>
+                            <td style="width: 30px;">
+                                <span class="cssToolTip_Form">
+                                    <input type="number" id="TxtHora" class="Numeric" maxlength="2" min="0" max="24" style="width: 40px;" oninput="maxLengthTypeNumber(this)" />
+                                    <span class="Spam_AN"></span></span>
+                            </td>
+                            <td style="padding-bottom: 25px; width: 30px;">
+                                <span class="cssToolTip">
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img3"
+                                        src="../../images/error.png" />
+                                    <span class="SpamEG"></span></span>
+                            </td>
+                            <td class="Label_Bold" style="width: 50px;">Minutos
+                            </td>
+                            <td style="width: 30px;">
+                                <span class="cssToolTip_Form">
+                                    <input type="number" id="TxtMinutos" class="Numeric" maxlength="2" style="width: 40px;" min="0" max="59" oninput="maxLengthTypeNumber(this)" />
+                                    <span class="Spam_AN"></span></span>
+                            </td>
+                            <td style="padding-bottom: 25px; width: 200px;">
+                                <span class="cssToolTip">
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img5"
+                                        src="../../images/error.png" />
+                                    <span class="SpamEG"></span></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="Label_Bold">Fecha/hora Ingreso
+                            </td>
+                            <td style="width: 50px;"></td>
+                            <td colspan="2" class="Label_Bold">Fecha/hora Estimado Salida
+                            </td>
+                            <td style="width: 50px;" class="Label_Bold"></td>
+
+                        </tr>
+                    </table>
                     <table id="Tabla_5" style="width: 700px; text-align: left;">
                         <tr>
                             <td style="width: 150px;" class="Label_Bold">Puerta de Acceso

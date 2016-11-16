@@ -9,7 +9,7 @@ var EditLink;
 var DeleteConsecutivo;
 /*--------------- region de variables globales --------------------*/
 
-//evento load de los Links
+//Evento load JS
 $(document).ready(function () {
 
     carga_eventos("Dialog_Charge");
