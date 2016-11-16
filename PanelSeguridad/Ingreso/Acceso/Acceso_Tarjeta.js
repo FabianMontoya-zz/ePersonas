@@ -1,5 +1,13 @@
-﻿var TDoc_VT;
+﻿/*--------------- region de variables globales --------------------*/
+var TDoc_VT;
 var Doc_VT;
+var FIV;
+var FFV;
+var Hours_Live;
+var Minutes_Live;
+var Flag_ingreso;
+var Ingreso_Live;
+/*--------------- region de variables globales --------------------*/
 
 //captura tarjeta y muestra 
 function Capture_Tarjeta_ID() {
@@ -109,10 +117,37 @@ function Tabla_AccesosPredeterminados() {
         if (Matrix_AccesoPredeterminados[item].Document_ID == Doc_VT &&
            Matrix_AccesoPredeterminados[item].Nit_ID == Nit_ID_Proccess &&
             Matrix_AccesoPredeterminados[item].Estado == "1") {
-            if (Matrix_AccesoPredeterminados[item].ControlVigencia == "N") 
+            if (Matrix_AccesoPredeterminados[item].ControlVigencia == "N")
                 html_AP += "<tr id= 'TAP_" + Matrix_AccesoPredeterminados[item].Nit_ID + "'><td><input type='checkbox' id='Check_" + Matrix_AccesoPredeterminados[item].Index + "' value='TR" + Matrix_AccesoPredeterminados[item].Index + "' /></td><td><img alt='No' title='' style='height: 21px; width: 21px;' src='../../images/C_GREEN.png' /></td><td>" + Matrix_AccesoPredeterminados[item].PuertaAcceso_ID + " - " + Matrix_AccesoPredeterminados[item].DescripPuertaAcceso + "</td><td>" + Matrix_AccesoPredeterminados[item].Area_ID + " - " + Matrix_AccesoPredeterminados[item].DescripAreaAcceso + "</td><td>" + Matrix_AccesoPredeterminados[item].Document_ID_Per_Encargada + " - " + Matrix_AccesoPredeterminados[item].DescripPersona_Enc + "</td><td>" + Matrix_AccesoPredeterminados[item].FechaInicio_Vigencia + "</td><td>" + Matrix_AccesoPredeterminados[item].FechaFin_Vigencia + "</td><td>" + Matrix_AccesoPredeterminados[item].HoraInicio + "</td><td>" + Matrix_AccesoPredeterminados[item].HoraFin + "</td><td>" + Matrix_AccesoPredeterminados[item].DescripTipoIngreso + "</td></tr>";
-            else
-                html_AP += "<tr id= 'TAP_" + Matrix_AccesoPredeterminados[item].Nit_ID + "'><td></td><td><img alt='No' title='' style='height: 21px; width: 21px;' src='../../images/C_RED.png' /></td><td>" + Matrix_AccesoPredeterminados[item].PuertaAcceso_ID + " - " + Matrix_AccesoPredeterminados[item].DescripPuertaAcceso + "</td><td>" + Matrix_AccesoPredeterminados[item].Area_ID + " - " + Matrix_AccesoPredeterminados[item].DescripAreaAcceso + "</td><td>" + Matrix_AccesoPredeterminados[item].Document_ID_Per_Encargada + " - " + Matrix_AccesoPredeterminados[item].DescripPersona_Enc + "</td><td>" + Matrix_AccesoPredeterminados[item].FechaInicio_Vigencia + "</td><td>" + Matrix_AccesoPredeterminados[item].FechaFin_Vigencia + "</td><td>" + Matrix_AccesoPredeterminados[item].HoraInicio + "</td><td>" + Matrix_AccesoPredeterminados[item].HoraFin + "</td><td>" + Matrix_AccesoPredeterminados[item].DescripTipoIngreso + "</td></tr>";
+            else {
+
+                FIV = Matrix_AccesoPredeterminados[item].HoraInicio;
+                FFV = Matrix_AccesoPredeterminados[item].HoraFin;
+
+                var A_FIV = FIV.split(":");
+                var A_FFV = FFV.split(":");
+
+                if ((parseInt(A_FIV[0]) >= parseInt(Hours_Live)) || (parseInt(A_FFV[0]) <= parseInt(Hours_Live))) {
+                    if ((parseInt(A_FIV[0]) == parseInt(Hours_Live)) || (parseInt(A_FFV[0]) == parseInt(Hours_Live))) {
+                        if ((parseInt(A_FIV[1]) > parseInt(Minutes_Live)) || (parseInt(A_FFV[1]) < parseInt(Minutes_Live))) {
+                            html_AP += "<tr id= 'TAP_" + Matrix_AccesoPredeterminados[item].Nit_ID + "'><td></td><td><img alt='No' title='' style='height: 21px; width: 21px;' src='../../images/C_RED.png' /></td><td>" + Matrix_AccesoPredeterminados[item].PuertaAcceso_ID + " - " + Matrix_AccesoPredeterminados[item].DescripPuertaAcceso + "</td><td>" + Matrix_AccesoPredeterminados[item].Area_ID + " - " + Matrix_AccesoPredeterminados[item].DescripAreaAcceso + "</td><td>" + Matrix_AccesoPredeterminados[item].Document_ID_Per_Encargada + " - " + Matrix_AccesoPredeterminados[item].DescripPersona_Enc + "</td><td>" + Matrix_AccesoPredeterminados[item].FechaInicio_Vigencia + "</td><td>" + Matrix_AccesoPredeterminados[item].FechaFin_Vigencia + "</td><td>" + Matrix_AccesoPredeterminados[item].HoraInicio + "</td><td>" + Matrix_AccesoPredeterminados[item].HoraFin + "</td><td>" + Matrix_AccesoPredeterminados[item].DescripTipoIngreso + "</td></tr>";
+                            Flag_ingreso = "ROJO";
+                        }
+                        else {
+                            html_AP += "<tr id= 'TAP_" + Matrix_AccesoPredeterminados[item].Nit_ID + "'><td><input type='checkbox' id='Check_" + Matrix_AccesoPredeterminados[item].Index + "' value='TR" + Matrix_AccesoPredeterminados[item].Index + "' /></td><td><img alt='No' title='' style='height: 21px; width: 21px;' src='../../images/C_GREEN.png' /></td><td>" + Matrix_AccesoPredeterminados[item].PuertaAcceso_ID + " - " + Matrix_AccesoPredeterminados[item].DescripPuertaAcceso + "</td><td>" + Matrix_AccesoPredeterminados[item].Area_ID + " - " + Matrix_AccesoPredeterminados[item].DescripAreaAcceso + "</td><td>" + Matrix_AccesoPredeterminados[item].Document_ID_Per_Encargada + " - " + Matrix_AccesoPredeterminados[item].DescripPersona_Enc + "</td><td>" + Matrix_AccesoPredeterminados[item].FechaInicio_Vigencia + "</td><td>" + Matrix_AccesoPredeterminados[item].FechaFin_Vigencia + "</td><td>" + Matrix_AccesoPredeterminados[item].HoraInicio + "</td><td>" + Matrix_AccesoPredeterminados[item].HoraFin + "</td><td>" + Matrix_AccesoPredeterminados[item].DescripTipoIngreso + "</td></tr>";
+                            Flag_ingreso = "VERDE";
+                        }
+                    }
+                    else {
+                        html_AP += "<tr id= 'TAP_" + Matrix_AccesoPredeterminados[item].Nit_ID + "'><td></td><td><img alt='No' title='' style='height: 21px; width: 21px;' src='../../images/C_RED.png' /></td><td>" + Matrix_AccesoPredeterminados[item].PuertaAcceso_ID + " - " + Matrix_AccesoPredeterminados[item].DescripPuertaAcceso + "</td><td>" + Matrix_AccesoPredeterminados[item].Area_ID + " - " + Matrix_AccesoPredeterminados[item].DescripAreaAcceso + "</td><td>" + Matrix_AccesoPredeterminados[item].Document_ID_Per_Encargada + " - " + Matrix_AccesoPredeterminados[item].DescripPersona_Enc + "</td><td>" + Matrix_AccesoPredeterminados[item].FechaInicio_Vigencia + "</td><td>" + Matrix_AccesoPredeterminados[item].FechaFin_Vigencia + "</td><td>" + Matrix_AccesoPredeterminados[item].HoraInicio + "</td><td>" + Matrix_AccesoPredeterminados[item].HoraFin + "</td><td>" + Matrix_AccesoPredeterminados[item].DescripTipoIngreso + "</td></tr>";
+                        Flag_ingreso = "ROJO";
+                    }
+                }
+                else {
+                    html_AP += "<tr id= 'TAP_" + Matrix_AccesoPredeterminados[item].Nit_ID + "'><td><input type='checkbox' id='Check_" + Matrix_AccesoPredeterminados[item].Index + "' value='TR" + Matrix_AccesoPredeterminados[item].Index + "' /></td><td><img alt='No' title='' style='height: 21px; width: 21px;' src='../../images/C_GREEN.png' /></td><td>" + Matrix_AccesoPredeterminados[item].PuertaAcceso_ID + " - " + Matrix_AccesoPredeterminados[item].DescripPuertaAcceso + "</td><td>" + Matrix_AccesoPredeterminados[item].Area_ID + " - " + Matrix_AccesoPredeterminados[item].DescripAreaAcceso + "</td><td>" + Matrix_AccesoPredeterminados[item].Document_ID_Per_Encargada + " - " + Matrix_AccesoPredeterminados[item].DescripPersona_Enc + "</td><td>" + Matrix_AccesoPredeterminados[item].FechaInicio_Vigencia + "</td><td>" + Matrix_AccesoPredeterminados[item].FechaFin_Vigencia + "</td><td>" + Matrix_AccesoPredeterminados[item].HoraInicio + "</td><td>" + Matrix_AccesoPredeterminados[item].HoraFin + "</td><td>" + Matrix_AccesoPredeterminados[item].DescripTipoIngreso + "</td></tr>";
+                    Flag_ingreso = "VERDE";
+                }
+            }
         }
     }
 
@@ -125,5 +160,128 @@ function Tabla_AccesosPredeterminados() {
         "bDestroy": true
     });
 
+}
 
+//muestra la hora en tiempo real
+function MostrarHora() {
+    if (!document.layers && !document.all && !document.getElementById)
+        return
+
+    var Digital = new Date();
+    var hours = Digital.getHours();
+    var minutes = Digital.getMinutes();
+    var seconds = Digital.getSeconds();
+
+    /*  construcion para hora normal
+    var dn = "PM";
+    if (hours < 12)
+        dn = "AM";
+    if (hours > 12)
+        hours = hours - 12;
+    if (hours == 0)
+        hours = 12;
+    */
+    if (minutes <= 9)
+        minutes = "0" + minutes;
+    if (seconds <= 9)
+        seconds = "0" + seconds;
+    //change font size here to your desire
+    myclock = "<font size='3' face='Arial' ><b></br>" + hours + ":" + minutes + ":" + seconds + " </b></font>";
+    if (document.layers) {
+        document.layers.liveclock.document.write(myclock);
+        document.layers.liveclock.document.close();
+    }
+    else if (document.all)
+        liveclock.innerHTML = myclock;
+    else if (document.getElementById)
+        document.getElementById("liveclock").innerHTML = myclock;
+
+    Hours_Live = hours;
+    Minutes_Live = minutes;
+    ComparaIngreso();
+
+    setTimeout("MostrarHora()", 1000);
+}
+
+//comparacion tiempos de vigencia
+function ComparaIngreso() {
+    switch (Flag_ingreso) {
+        case "VERDE":
+            CierreIngreso();
+            break;
+
+        case "ROJO":
+            AbreIngreso();
+            break;
+    }
+}
+
+// validacion por cierre de ingreso (verde) 
+function CierreIngreso() {
+    for (item in Matrix_AccesoPredeterminados) {
+        if (Matrix_AccesoPredeterminados[item].Document_ID == Doc_VT &&
+           Matrix_AccesoPredeterminados[item].Nit_ID == Nit_ID_Proccess &&
+            Matrix_AccesoPredeterminados[item].Estado == "1") {
+            if (Matrix_AccesoPredeterminados[item].ControlVigencia == "S") {
+
+                FIV = Matrix_AccesoPredeterminados[item].HoraInicio;
+                FFV = Matrix_AccesoPredeterminados[item].HoraFin;
+
+                var A_FIV = FIV.split(":");
+                var A_FFV = FFV.split(":");
+
+                if ((parseInt(A_FIV[0]) >= parseInt(Hours_Live)) || (parseInt(A_FFV[0]) <= parseInt(Hours_Live))) {
+                    if ((parseInt(A_FIV[0]) == parseInt(Hours_Live)) || (parseInt(A_FFV[0]) == parseInt(Hours_Live))) {
+                        if ((parseInt(A_FIV[1]) > parseInt(Minutes_Live)) || (parseInt(A_FFV[1]) < parseInt(Minutes_Live))) {
+                            if (Flag_ingreso == Ingreso_Live) {
+                                Tabla_AccesosPredeterminados();
+                                Ingreso_Live = "ROJO";
+                            }
+                        }
+                        else
+                            Ingreso_Live = "VERDE";
+                    }
+                    else
+                        Ingreso_Live = "ROJO";
+                }
+                else
+                    Ingreso_Live = "VERDE";
+            }
+        }
+    }
+}
+
+// validacion por apertura de ingreso (ROJO) 
+function AbreIngreso() {
+    for (item in Matrix_AccesoPredeterminados) {
+        if (Matrix_AccesoPredeterminados[item].Document_ID == Doc_VT &&
+           Matrix_AccesoPredeterminados[item].Nit_ID == Nit_ID_Proccess &&
+            Matrix_AccesoPredeterminados[item].Estado == "1") {
+            if (Matrix_AccesoPredeterminados[item].ControlVigencia == "S") {
+
+                FIV = Matrix_AccesoPredeterminados[item].HoraInicio;
+                FFV = Matrix_AccesoPredeterminados[item].HoraFin;
+
+                var A_FIV = FIV.split(":");
+                var A_FFV = FFV.split(":");
+
+                if ((parseInt(A_FIV[0]) >= parseInt(Hours_Live)) || (parseInt(A_FFV[0]) <= parseInt(Hours_Live))) {
+                    if ((parseInt(A_FIV[0]) == parseInt(Hours_Live)) || (parseInt(A_FFV[0]) == parseInt(Hours_Live))) {
+                        if ((parseInt(A_FIV[1]) > parseInt(Minutes_Live)) || (parseInt(A_FFV[1]) < parseInt(Minutes_Live)))
+                            Ingreso_Live = "ROJO";
+                        else {
+                            if (Flag_ingreso == Ingreso_Live) {
+                                Tabla_AccesosPredeterminados();
+                                Ingreso_Live = "VERDE";
+                            }
+                        }
+                    }
+                    else
+                        Ingreso_Live = "ROJO";
+                }
+                else
+                    Ingreso_Live = "VERDE";
+            }
+        }
+    }
 }

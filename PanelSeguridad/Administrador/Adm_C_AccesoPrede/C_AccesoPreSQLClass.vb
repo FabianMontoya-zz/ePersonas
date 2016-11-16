@@ -558,11 +558,11 @@ Public Class C_AccesoPreSQLClass
                                  "              DDL.DDLL_Descripcion, " & _
                                  " 			  ROW_NUMBER() OVER(ORDER BY RPAP_Nit_ID  DESC) AS Index_C_AccesoPre " & _
                                  " FROM R_PERSONAS_ACCESOS_PREDETER  RPAP " & _
-                                 " LEFT JOIN  PUERTAS_ACCESO PA ON PA.PA_PuertaAcceso_ID = RPAP.RPAP_PuertaAcceso_ID " & _
+                                 " LEFT JOIN  PUERTAS_ACCESO PA ON PA.PA_PuertaAcceso_ID = RPAP.RPAP_PuertaAcceso_ID AND PA.PA_Nit_ID = RPAP.RPAP_Nit_ID " & _
                                  " LEFT JOIN   TC_DDL_TIPO DDL ON DDL.DDL_ID = RPAP.RPAP_HorarioIngreso AND DDL.DDL_Tabla='TIPO_INGRESO' " & _
-                                 " LEFT JOIN  " & BD_Param & ".dbo.CLIENTE C2 ON C2.CLI_Document_ID = RPAP.RPAP_Document_ID " & _
-                                 " LEFT JOIN  " & BD_Param & ".dbo.CLIENTE C4 ON C4.CLI_Document_ID = RPAP.RPAP_Document_ID_Per_Encargada " & _
-                                 " LEFT JOIN  " & BD_Param & ".dbo.AREA A ON A.A_Area_ID = RPAP.RPAP_Area_ID " & _
+                                 " LEFT JOIN  " & BD_Param & ".dbo.CLIENTE C2 ON C2.CLI_Document_ID = RPAP.RPAP_Document_ID  AND C2.CLI_Nit_ID = RPAP.RPAP_Nit_ID " & _
+                                 " LEFT JOIN  " & BD_Param & ".dbo.CLIENTE C4 ON C4.CLI_Document_ID = RPAP.RPAP_Document_ID_Per_Encargada AND C4.CLI_Nit_ID = RPAP.RPAP_Nit_ID " & _
+                                 " LEFT JOIN  " & BD_Param & ".dbo.AREA A ON A.A_Area_ID = RPAP.RPAP_Area_ID AND A.A_Nit_ID = RPAP.RPAP_Nit_ID " & _
                                  " LEFT JOIN " & BD_Param & ".dbo.CLIENTE C ON C.CLI_Document_ID =  " & _
                                  " CASE	 SUBSTRING(RPAP.RPAP_Nit_ID,0,LEN(RPAP.RPAP_Nit_ID)) " & _
                                  "                 WHEN '' THEN 0 " & _
@@ -572,7 +572,7 @@ Public Class C_AccesoPreSQLClass
                                  " CASE	 SUBSTRING(RPAP.RPAP_Nit_ID_EmpVisita,0,LEN(RPAP.RPAP_Nit_ID_EmpVisita)) " & _
                                  "   WHEN '' THEN 0 " & _
                                  "   ELSE SUBSTRING(RPAP.RPAP_Nit_ID_EmpVisita,0,LEN(RPAP.RPAP_Nit_ID_EmpVisita))  " & _
-                                 " END  " )
+                                 " END  ")
        StrQuery = sql.ToString
 
         ObjListCrud_Doc = listC_AccesoPre(StrQuery, Conexion, "List")

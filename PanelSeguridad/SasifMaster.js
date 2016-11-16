@@ -240,14 +240,12 @@ function Validahora(V_HoraInicial, V_HoraFinal) {
     var Valida = 0;
 
     if (parseInt(A_V_HoraInicial[0]) > parseInt(A_V_HoraFinal[0])) {
-        console.log(parseInt(A_V_HoraInicial[0]) + ">" + parseInt(A_V_HoraFinal[0]));
-        Valida = 1;
+         Valida = 1;
     }
 
     if (parseInt(A_V_HoraInicial[0]) == parseInt(A_V_HoraFinal[0])) {
         if (parseInt(A_V_HoraInicial[1]) > parseInt(A_V_HoraFinal[1])) {
-            console.log(parseInt(A_V_HoraInicial[1]) + ">" + parseInt(A_V_HoraFinal[1]));
-            Valida = 1;
+           Valida = 1;
         }
     }
 

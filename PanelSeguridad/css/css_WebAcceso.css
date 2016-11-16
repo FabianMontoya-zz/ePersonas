@@ -352,3 +352,9 @@ table.dataTable tr.even td.sorting_3
     color: #ffffff;
     border-color: White;
 }
+
+#Cointainer_ingreso, #Container_Acceso, #container_T_DP, #container_T_DE
+{
+    font: 12px/20px Verdana,sans-serif;
+    text-align: center;
+}

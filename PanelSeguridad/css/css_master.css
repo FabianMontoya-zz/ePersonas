@@ -5,14 +5,16 @@
 /* -------       Label Usuario          ------*/
 #User, #Name_User
 {
-    color: #ffffff;;
+    color: #ffffff;
+    ;
     font-weight: bold;
 }
 
 /* -------       Label Titulo          ------*/
 #tituloPrincipal
 {
-    color: #ffffff;;
+    color: #ffffff;
+    ;
 }
 
 /* -------       Label Hora           ------*/
@@ -86,12 +88,31 @@
 /* --------------------------------------------------------------------------- */
 
 /* -------         fondo            ------*/
-.footer
+#Footer
 {
     background-image: url(../images/cabeza2.jpg);
     background-repeat: no-repeat;
     background-position: center; /*background-size: cover;*/
+    position: absolute;
+    margin-top: 5px;
+    width: 95%;
+    margin-left: 25px;
+    bottom: 0;
+    z-index: 100;
 }
+
+
+.Dimencion_Footer
+{
+    height: 40px;
+    transition: all 0.8s ease;
+}
+
+    .Dimencion_Footer:hover
+    {
+        height: 100px;
+        transition: all 0.8s ease;
+    }
 
 /* -------         parrafos            ------*/
 #Parraf_1, #Parraf_2, #Parraf_3

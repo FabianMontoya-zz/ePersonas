@@ -101,9 +101,9 @@
                 </table>
             </div>
             <div id="Inf_Ingreso" style="margin-top: 10px; width: 100%;">
-                <div id="Cointainer_ingreso">
+                  <div id="Container_Acceso">
                 </div>
-                <div id="Container_Acceso">
+                <div id="Cointainer_ingreso">
                 </div>
             </div>
             <div id="Container_BloqueAcceso" style="width: 100%;">

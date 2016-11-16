@@ -84,7 +84,7 @@ $(document).ready(function () {
             background: "black"
         }
     });
-
+    MostrarHora();
     Capture_Tarjeta_ID();
     $("#TxtIDTarjeta").focus();
 });
