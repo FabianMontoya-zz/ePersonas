@@ -38,7 +38,6 @@ function validaTarjeta(Tarjeta_ID) {
             $("#TxtDoc").attr("disabled", "disabled");
             $("#Select_Documento").attr("disabled", "disabled");
 
-
             $("#Inf_persona").css("display", "inline-table");
             $("#L_Nombre").html(Matrix_Persona[item].Nombre);
             $("#L_Empresa").html(Matrix_Persona[item].DescripEmpresa);
@@ -106,7 +105,6 @@ function VerificaVigenciaTarjeta(Nombre, CheckVigencia, FechaVigencia, TipoIngre
 /*--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*---                                                                   PROCESO DE ACESSO PREDETERMINADOS                                                                                                            ---*/
 /*--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
 //contruye vista de accesos predeterminados
 function Tabla_AccesosPredeterminados() {
 
@@ -198,7 +196,7 @@ function MostrarHora() {
 
     Hours_Live = hours;
     Minutes_Live = minutes;
-    ComparaIngreso();
+    //  ComparaIngreso();
 
     setTimeout("MostrarHora()", 1000);
 }

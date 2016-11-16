@@ -4,9 +4,9 @@ var Matrix_DocWork = [];
 var Matrix_PersonaDoc = [];
 var Matrix_Valida_Ingreso = [];
 var Matrix_AccesoPredeterminados = [];
-
 var Matrix_PAcceso = [];
 var Matrix_Area = [];
+var Matrix_PAcceso_Area = [];
 
 var ArrayAcceso = [];
 var ArrayCombo = [];
@@ -38,8 +38,11 @@ $(document).ready(function () {
     transaccionAjax_MPersona_Doc('MATRIX_PERSONAS_DOC');
     transaccionAjax_MAccesoPrede('MATRIX_ACCESOPREDETER');
 
+    transaccionAjax_MPersona('MATRIX_PERSONA');
     transaccionAjax_MPAcceso('MATRIX_PACCESO');
     transaccionAjax_MArea('MATRIX_AREA');
+    transaccionAjax_MPAcceso_Area('MATRIX_PACCESO_AREA');
+
     //transacionAjax_EmpresaNit('Cliente');
     transacionAjax_Documento('Documento');
 
@@ -162,6 +165,13 @@ function SearchPersona() {
             $("#L_Empresa").html(Matrix_Persona[item].DescripEmpresa);
             $("#L_Area").html(Matrix_Persona[item].DescripArea);
             $("#L_Cargo").html(Matrix_Persona[item].DescripCargo);
+
+            Charge_Combos_Depend_Nit(Matrix_PAcceso, "Select_PAcceso", Nit_ID_Proccess, "");
+            Charge_Combos_Depend_Nit(Matrix_Persona, "Select_Persona_Enc", Nit_ID_Proccess, "");
+            //Charge_Combos_Depend_Nit(Matrix_PAcceso_Area, "Select_AreaAcceso_Ing", Nit_ID_Proccess,"");
+
+            TDoc_VT = TDoc;
+            Doc_VT = Doc;
 
             VerificacionTarjeta(Matrix_Persona[item].Nombre, Matrix_Persona[item].EstadoTarjeta, Matrix_Persona[item].CheckVigencia_Tarjeta, Matrix_Persona[item].FechaVencimientoTarjeta, Matrix_Persona[item].DescripMotivoBloqueo, "D");
             SearchFoto(TDoc, Doc);

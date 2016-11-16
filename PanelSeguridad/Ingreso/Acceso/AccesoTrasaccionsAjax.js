@@ -26,6 +26,31 @@ function transaccionAjax_MPersonas(State) {
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_MPersona(State) {
+    $.ajax({
+        url: "AccesoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'RUTA'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_Persona = [];
+            }
+            else {
+                Matrix_Persona = JSON.parse(result);
+            }
+        },
+        error: function () {
+        }
+    });
+}
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transaccionAjax_MDocWork(State) {
     $.ajax({
         url: "AccesoAjax.aspx",
@@ -154,6 +179,32 @@ function transaccionAjax_MArea(State) {
         }
     });
 }
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_MPAcceso_Area(State) {
+    $.ajax({
+        url: "AccesoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'RUTA'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_PAcceso_Area = [];
+            }
+            else {
+                Matrix_PAcceso_Area = JSON.parse(result);
+            }
+        },
+        error: function () {
+        }
+    });
+}
+
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist

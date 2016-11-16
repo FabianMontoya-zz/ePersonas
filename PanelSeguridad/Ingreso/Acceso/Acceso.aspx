@@ -101,9 +101,57 @@
                 </table>
             </div>
             <div id="Inf_Ingreso" style="margin-top: 10px; width: 100%;">
-                  <div id="Container_Acceso">
-                </div>
                 <div id="Cointainer_ingreso">
+                    <table id="Tabla_5" style="width: 700px; text-align: left;">
+                        <tr>
+                            <td style="width: 150px;" class="Label_Bold">Puerta de Acceso
+                            </td>
+                            <td>
+                                <select id="Select_PAcceso" class="C_Chosen">
+                                </select>
+                            </td>
+                            <td style="padding-bottom: 25px; width: 300px;">
+                                <span class="cssToolTip">
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img6"
+                                        src="../../images/error.png" />
+                                    <span class="SpamEG"></span></span>
+                            </td>
+                        </tr>
+                    </table>
+                    <table id="Tabla_6" style="width: 700px; text-align: left;">
+                        <tr>
+                            <td style="width: 150px;" class="Label_Bold">Área de Acceso
+                            </td>
+                            <td>
+                                <select id="Select_AreaAcceso" class="C_Chosen">
+                                </select>
+                            </td>
+                            <td style="padding-bottom: 25px; width: 300px;">
+                                <span class="cssToolTip">
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img7"
+                                        src="../../images/error.png" />
+                                    <span class="SpamEG"></span></span>
+                            </td>
+                        </tr>
+                    </table>
+                    <table id="Tabla_7" style="width: 700px; text-align: left;">
+                        <tr>
+                            <td style="width: 150px;" class="Label_Bold">Persona Encargada
+                            </td>
+                            <td>
+                                <select id="Select_Persona_Enc" class="C_Chosen">
+                                </select>
+                            </td>
+                            <td style="padding-bottom: 25px; width: 100px;">
+                                <span class="cssToolTip">
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img8"
+                                        src="../../images/error.png" />
+                                    <span class="SpamEG"></span></span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="Container_Acceso">
                 </div>
             </div>
             <div id="Container_BloqueAcceso" style="width: 100%;">
