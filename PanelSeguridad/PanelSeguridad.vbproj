@@ -257,7 +257,7 @@
     <Content Include="css\Dialog\jquery-ui.css" />
     <Content Include="css\icons\document.png" />
     <Content Include="css\icons\folder-horizontal.png" />
-    <Content Include="css\icons\right.png" />
+    <Content Include="css\icons\right1.png" />
     <Content Include="css\icons\toggle-small-expand.png" />
     <Content Include="css\icons\toggle-small.png" />
     <Content Include="css\PIE.htc" />

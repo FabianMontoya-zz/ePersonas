@@ -11,20 +11,19 @@
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
     <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />
     <link href="../../css/custom/charge.css" rel="stylesheet" type="text/css" />
-    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
     <link href="../../css/Chosen/chosen.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/jquery.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Chosen/chosen.jquery.js" type="text/javascript"></script>
     <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
+    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
     <div id="Container_title_Form">
         <table id="Tabla_Title_form">
             <tr>
-                <td id="Title_form">
-                </td>
+                <td id="Title_form"></td>
                 <td id="image_exit">
                     <span class="cssToolTip_Form_L">
                         <input id="BtnExit" type="button" value="X" onclick="btnSalir();" /><span class="Spam_AEXIT_MOD"></span></span>
@@ -32,13 +31,12 @@
             </tr>
         </table>
     </div>
-    <div id="Marco_link">
+    <div id="Marco_Container">
         <div id="Container_controls">
             <div id="TablaDatos_D">
                 <table id="Tabla_1" style="width: 700px; text-align: left;">
                     <tr>
-                        <td style="width: 150px;" class="Label_Bold">
-                            Empresa Entrega
+                        <td style="width: 150px;" class="Label_Bold">Empresa Entrega
                         </td>
                         <td>
                             <select id="Select_EmpresaNit" class="C_Chosen">
@@ -54,8 +52,7 @@
                 </table>
                 <table id="Tabla_2" style="width: 700px; text-align: left;">
                     <tr>
-                        <td style="width: 150px;" class="Label_Bold">
-                            Persona
+                        <td style="width: 150px;" class="Label_Bold">Persona
                         </td>
                         <td>
                             <select id="Select_Persona" class="C_Chosen">
@@ -71,8 +68,7 @@
                 </table>
                 <table id="Tabla_3" style="width: 700px; text-align: left;">
                     <tr>
-                        <td style="width: 150px;" class="Label_Bold">
-                            Tarjeta
+                        <td style="width: 150px;" class="Label_Bold">Tarjeta
                         </td>
                         <td>
                             <select id="Select_Tarjeta_Blo" class="C_Chosen">
@@ -89,8 +85,7 @@
                 <div id="DIV_Bloqueo">
                     <table id="Tabla_4" style="width: 700px; text-align: left;">
                         <tr>
-                            <td style="width: 150px;" class="Label_Bold">
-                                Motivo Bloqueo
+                            <td style="width: 150px;" class="Label_Bold">Motivo Bloqueo
                             </td>
                             <td>
                                 <select id="Select_Bloqueo" class="C_Chosen">
@@ -106,8 +101,7 @@
                     </table>
                     <table id="Tabla_5" style="width: 100%; text-align: left;">
                         <tr>
-                            <td style="width: 140px;" class="Label_Bold">
-                                Observaciones
+                            <td style="width: 140px;" class="Label_Bold">Observaciones
                             </td>
                             <td style="width: 200px;">
                                 <span class="cssToolTip_Form">

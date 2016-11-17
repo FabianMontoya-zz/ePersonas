@@ -64,7 +64,7 @@
             <table id="M_Container">
                 <tr>
                     <td id="panel_menu">
-                        <div id="container_menu">
+                        <div id="container_menu" class="Dimencion_Menu">
                         </div>
                     </td>
                     <td id="panel_pag">

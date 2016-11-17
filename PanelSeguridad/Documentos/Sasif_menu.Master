@@ -28,7 +28,7 @@
                     <table id="M_header">
                         <tr>
                             <td id="logoExt" rowspan="4" style="width: 15%; text-align: center;">
-                                <img id="logo_2" src="" alt="SASIF S.A.S." style="height: 85px; width: 70px; padding-top: 25px"  />
+                                <img id="logo_2" src="" alt="SASIF S.A.S." style="height: 85px; width: 70px; padding-top: 25px" />
                             </td>
                             <td id="Hours" colspan="3" style="width: 70%; text-align: center;"></td>
                             <td rowspan="4" style="width: 15%; text-align: center;">&nbsp;<img alt="" src="" />
@@ -50,8 +50,7 @@
                 <div class="Bar">
                     <table id="M_Bar">
                         <tr>
-                            <td id="TMenu">MENU
-                            </td>
+                            <td id="TMenu"></td>
                             <td id="Exit">
                                 <input id="BtnExitApp" type="button" value="SALIDA" onclick="window.location = '../../login/Login.aspx'" />
                             </td>
@@ -63,7 +62,13 @@
                 <table id="M_Container">
                     <tr>
                         <td id="panel_menu">
-                            <div id="container_menu">
+                            <div id="container_menu" class="Dimencion_Menu">
+                            </div>
+                            <div id="Bar_TMenu">
+                                M<br />
+                                E<br />
+                                N<br />
+                                U
                             </div>
                         </td>
                         <td id="panel_pag">

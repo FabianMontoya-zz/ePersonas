@@ -29,7 +29,13 @@
 #Header
 {
     float: none;
-    height: 125px;
+    height: 140px;
+    background: -webkit-linear-gradient(#f6f6f6, #e8e8e8); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#f6f6f6, #e8e8e8); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#f6f6f6, #e8e8e8); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#f6f6f6, #e8e8e8); /* Standard syntax (must be last)*/
+    border-radius: 3px;
+    border: solid 1px #ccc;
 }
 
 /* -------         fondo            ------*/
@@ -51,6 +57,8 @@
     background: -o-linear-gradient(#b70d0d, #631111); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#b70d0d, #631111); /* For Firefox 3.6 to 15 */
     background: linear-gradient(#b70d0d, #631111); /* Standard syntax (must be last)*/
+    border-radius: 3px;
+    border: solid 1px #b3b3b3;
 }
 
 
@@ -67,25 +75,60 @@
 /* -------         dimencion panel 1            ------*/
 #panel_menu
 {
-    width: 150px;
-    height: 500px;
+    height: 70%;
     vertical-align: text-top;
     padding-left: 1px;
 }
 
-/* -------         dimencion panel21            ------*/
+.Dimencion_Menu
+{
+    width: 48px;
+    transition: all 0.8s ease;
+}
+
+    .Dimencion_Menu:hover
+    {
+        width: 350px;
+        transition: all 0.8s ease;
+    }
+
+/* -------         dimencion panel            ------*/
 #container_menu
 {
-    width: 200px;
-    height: 585px;
-    background-color: white;
+    height: 620px;
+    background: -webkit-linear-gradient(#f6f6f6, #e8e8e8); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#f6f6f6, #e8e8e8); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#f6f6f6, #e8e8e8); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#f6f6f6, #e8e8e8); /* Standard syntax (must be last)*/
     overflow-x: scroll;
     overflow-y: scroll;
-    border: 1px solid #000000;
+    border-radius: 3px;
+    border: solid 1px #ccc;
+    position: absolute;
+    float: left;
+    z-index: 40;
+}
+
+#Bar_TMenu
+{
+    background: -webkit-linear-gradient(#b70d0d, #921919); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#b70d0d, #921919); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#b70d0d, #921919); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#b70d0d, #921919);
+    border: solid 1px #ccc;
+    float: left;
+    width: 20px;
+    height: 580px;
+    padding-right: 10px;
+    color: #FFFFFF;
+    text-align: right;
+    padding-top: 40px;
+    position: absolute;
+    z-index: 50;
 }
 
 /* --------------------------------------------------------------------------- */
-/* ------------------------- FOOTER MASTER PAGE ------_---------------------- */
+/* ------------------------- FOOTER MASTER PAGE ---------------------------- */
 /* --------------------------------------------------------------------------- */
 
 /* -------         fondo            ------*/

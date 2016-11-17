@@ -43,7 +43,7 @@
             </tr>
         </table>
     </div>
-    <div id="Marco_link">
+    <div id="Marco_Container">
         <div id="Marco_trabajo_Form">
             <div id="Container_controls">
                 <div id="TablaDatos_D">

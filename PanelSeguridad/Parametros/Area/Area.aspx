@@ -32,7 +32,7 @@
             </tr>
         </table>
     </div>
-    <div id="Marco_link">
+    <div id="Marco_Container">
         <div id="Marco_btn_Form">
             <input id="BtnShearh" type="button" value="Consulta" onclick="HabilitarPanel('buscar');" />
             <input id="BtnCreate" type="button" value="Crear" onclick="HabilitarPanel('crear');" />
@@ -44,7 +44,7 @@
                 <table id="TablaConsulta">
                     <tr>
                         <td id="TD1">
-                            <select id="DDLColumns">
+                            <select id="DDLColumns" class="C_Chosen">
                             </select>
                         </td>
                         <td id="TD2">

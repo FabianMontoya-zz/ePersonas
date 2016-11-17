@@ -178,26 +178,51 @@ option
 
 .ui-tabs .ui-tabs-panel
 {
-    background: -webkit-linear-gradient(#C6DEFF, #E2EFF9); /* For Safari 5.1 to 6.0*/
-    background: -o-linear-gradient(#C6DEFF, #E2EFF9); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#C6DEFF, #E2EFF9); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#C6DEFF, #E2EFF9); /* Standard syntax (must be last)*/
-    padding: 10px 10px;
-    border-color: #79b7e7;
-    border-width: 1px;
+    border: 1px solid #c5dbec;
+    background: -webkit-linear-gradient(#b70d0d, #631111); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#b70d0d, #631111); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#b70d0d, #631111); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#b70d0d, #631111); /* Standard syntax (must be last)*/
     font: 14px/20px Verdana,sans-serif;
+    font-weight: bold;
+    color: #ffffff;
+    border-color: White;
 }
+
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default
+{
+    border: 1px solid #c5dbec;
+    background: -webkit-linear-gradient(#b70d0d, #631111); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#b70d0d, #631111); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#b70d0d, #631111); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#b70d0d, #631111); /* Standard syntax (must be last)*/
+    font: 14px/20px Verdana,sans-serif;
+    font-weight: bold;
+    color: #ffffff;
+    border-color: White;
+}
+
 
 .ui-tabs .ui-tabs-nav li.ui-tabs-active
 {
     border-color: White;
     color: White;
-    background: -webkit-linear-gradient(#89B7DA, #6EA7D2); /*For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#89B7DA, #6EA7D2); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#89B7DA, #6EA7D2); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#89B7DA, #6EA7D2); /* Standard syntax (must be last)*/
+    background: -webkit-linear-gradient(#583101, #735323); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#583101, #735323); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#583101, #735323); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#583101, #735323); /* Standard syntax (must be last)*/
 }
 
+.ui-widget-header
+{
+    background: -webkit-linear-gradient(#b70d0d, #631111); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#b70d0d, #631111); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#b70d0d, #631111); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#b70d0d, #631111); /* Standard syntax (must be last)*/
+    color: #ffffff;
+    border: 1px solid #630f0f;
+}
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*                                                               DIALOG JQUERY                                                                                  */
@@ -206,12 +231,11 @@ option
 
 .Dialog_personal
 {
-    background: silver;
-    border-radius: 15px 15px 15px 15px;
-    border-color: gray;
-    border-width: 5px;
+    background-color: #d8d8d8;
+    border-radius: 10px;
+    border-color: #420101;
+    border-width: 2px;
     border-style: outset;
-    padding: 20px 26px;
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -389,22 +413,28 @@ label
 
 .Grid_Head
 {
-    background: -webkit-linear-gradient(#89B8DA, #6EA7D2);
-    background: -o-linear-gradient(#89B8DA, #6EA7D2);
-    background: -moz-linear-gradient(#89B8DA, #6EA7D2);
-    background: linear-gradient(#89B8DA, #6EA7D2);
-    color: white;
-    border: solid 1px #8A8A8A;
+    border-radius: 5px 5px 0 0;
+    background: -webkit-linear-gradient(#b70d0d, #631111); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#b70d0d, #631111); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#b70d0d, #631111); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#b70d0d, #631111); /* Standard syntax (must be last)*/
+    font: 14px/20px Verdana,sans-serif;
+    font-weight: bold;
+    color: #ffffff;
+    border-color: White;
 }
 
 .Grid_Head_2
 {
-    background: -webkit-linear-gradient(#EAF5FE, #E2F1FD);
-    background: -o-linear-gradient(#EAF5FE, #E2F1FD);
-    background: -moz-linear-gradient(#EAF5FE, #E2F1FD);
-    background: linear-gradient(#EAF5FE, #E2F1FD);
-    color: black;
-    border: none;
+    border-radius: 5px 5px 0 0;
+    background: -webkit-linear-gradient(#b70d0d, #631111); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#b70d0d, #631111); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#b70d0d, #631111); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#b70d0d, #631111); /* Standard syntax (must be last)*/
+    font: 14px/20px Verdana,sans-serif;
+    font-weight: bold;
+    color: #ffffff;
+    border-color: White;
 }
 
 textarea

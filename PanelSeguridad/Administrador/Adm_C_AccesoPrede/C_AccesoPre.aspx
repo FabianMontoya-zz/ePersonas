@@ -12,7 +12,6 @@
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
     <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />
     <link href="../../css/custom/charge.css" rel="stylesheet" type="text/css" />
-    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
     <link href="../../css/Chosen/chosen.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/jquery.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Chosen/chosen.jquery.js" type="text/javascript"></script>
@@ -21,6 +20,7 @@
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Dialog/datepicker.js" type="text/javascript"></script>
     <script src="../../Scripts/Dialog/timepicker.js" type="text/javascript"></script>
+    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
         .ui-widget
         {
@@ -36,8 +36,7 @@
     <div id="Container_title_Form">
         <table id="Tabla_Title_form">
             <tr>
-                <td id="Title_form">
-                </td>
+                <td id="Title_form"></td>
                 <td id="image_exit">
                     <span class="cssToolTip_Form_L">
                         <input id="BtnExit" type="button" value="X" onclick="btnSalir();" /><span class="Spam_AEXIT_MOD"></span></span>
@@ -45,7 +44,7 @@
             </tr>
         </table>
     </div>
-    <div id="Marco_link">
+    <div id="Marco_Container">
         <div id="Marco_btn_Form">
             <input id="BtnShearh" type="button" value="Consulta" onclick="HabilitarPanel('buscar');" />
             <input id="BtnCreate" type="button" value="Crear" onclick="HabilitarPanel('crear');" />
@@ -56,7 +55,7 @@
             <table id="TablaConsulta">
                 <tr>
                     <td id="TD1">
-                        <select id="DDLColumns">
+                        <select id="DDLColumns" class="C_Chosen">
                         </select>
                     </td>
                     <td id="TD2">
@@ -69,8 +68,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="4">
-                        &nbsp;
+                    <td colspan="4">&nbsp;
                     </td>
                 </tr>
                 <tr>
@@ -127,13 +125,11 @@
         <div id="container_Create" style="width: 100px; height: 400px;">
             <table id="Tabla_1" style="width: 700px; text-align: left;">
                 <tr>
-                    <td colspan="6" align="left" class="Title_Bold">
-                        Datos de la persona que Ingresa
+                    <td colspan="6" align="left" class="Title_Bold">Datos de la persona que Ingresa
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 150px;" class="Label_Bold">
-                        Empresa
+                    <td style="width: 150px;" class="Label_Bold">Empresa
                     </td>
                     <td>
                         <select id="Select_EmpresaNit" class="C_Chosen">
@@ -149,8 +145,7 @@
             </table>
             <table id="Tabla_2" style="width: 700px; text-align: left;">
                 <tr>
-                    <td style="width: 150px;" class="Label_Bold">
-                        Persona
+                    <td style="width: 150px;" class="Label_Bold">Persona
                     </td>
                     <td>
                         <select id="Select_Persona" class="C_Chosen">
@@ -166,8 +161,7 @@
             </table>
             <table id="Tabla_3" style="width: 700px; text-align: left;">
                 <tr>
-                    <td style="width: 150px;" class="Label_Bold">
-                        Tarjeta
+                    <td style="width: 150px;" class="Label_Bold">Tarjeta
                     </td>
                     <td>
                         <select id="Select_Tarjeta_AccPre" class="C_Chosen">
@@ -183,13 +177,11 @@
             </table>
             <table id="Tabla_4" style="width: 700px; text-align: left;">
                 <tr>
-                    <td colspan="6" align="left" class="Title_Bold">
-                        Datos y Permisos a la empresa que Ingresa
+                    <td colspan="6" align="left" class="Title_Bold">Datos y Permisos a la empresa que Ingresa
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 150px;" class="Label_Bold">
-                        Empresa a Ingresar
+                    <td style="width: 150px;" class="Label_Bold">Empresa a Ingresar
                     </td>
                     <td>
                         <select id="Select_EmpresaNit_Ing" class="C_Chosen">
@@ -205,8 +197,7 @@
             </table>
             <table id="Tabla_5" style="width: 700px; text-align: left;">
                 <tr>
-                    <td style="width: 150px;" class="Label_Bold">
-                        Puerta de Acceso
+                    <td style="width: 150px;" class="Label_Bold">Puerta de Acceso
                     </td>
                     <td>
                         <select id="Select_PAcceso" class="C_Chosen">
@@ -222,8 +213,7 @@
             </table>
             <table id="Tabla_6" style="width: 700px; text-align: left;">
                 <tr>
-                    <td style="width: 150px;" class="Label_Bold">
-                        Área de Acceso
+                    <td style="width: 150px;" class="Label_Bold">Área de Acceso
                     </td>
                     <td>
                         <select id="Select_AreaAcceso" class="C_Chosen">
@@ -239,8 +229,7 @@
             </table>
             <table id="Tabla_7" style="width: 700px; text-align: left;">
                 <tr>
-                    <td style="width: 150px;" class="Label_Bold">
-                        Persona Encargada
+                    <td style="width: 150px;" class="Label_Bold">Persona Encargada
                     </td>
                     <td>
                         <select id="Select_Persona_Enc" class="C_Chosen">
@@ -256,13 +245,11 @@
             </table>
             <table id="Tabla_8" style="width: 700px; text-align: left;">
                 <tr>
-                    <td colspan="6" align="left" class="Title_Bold">
-                        Datos de Ingreso
+                    <td colspan="6" align="left" class="Title_Bold">Datos de Ingreso
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 115px;" class="Label_Bold">
-                        C. Acceso Vigencia
+                    <td style="width: 115px;" class="Label_Bold">C. Acceso Vigencia
                     </td>
                     <td style="width: 80px;">
                         <select id="Select_CheckVigencia" class="C_Chosen" style="width: 80px;">
@@ -270,14 +257,12 @@
                             <option value="S">Si</option>
                         </select>
                     </td>
-                    <td style="padding-bottom: 25px; width: 325px;">
-                    </td>
+                    <td style="padding-bottom: 25px; width: 325px;"></td>
                 </tr>
             </table>
             <table id="T_Vigencia_Ing" style="width: 700px; text-align: left;">
                 <tr>
-                    <td style="width: 160px;" class="Label_Bold">
-                        Fecha Inicial
+                    <td style="width: 160px;" class="Label_Bold">Fecha Inicial
                     </td>
                     <td>
                         <span class="cssToolTip_Form">
@@ -290,8 +275,7 @@
                                 src="../../images/error.png" />
                             <span class="SpamEG"></span></span>
                     </td>
-                    <td style="width: 150px;" class="Label_Bold">
-                        Hora de Inicio
+                    <td style="width: 150px;" class="Label_Bold">Hora de Inicio
                     </td>
                     <td>
                         <span class="cssToolTip_Form">
@@ -306,8 +290,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 160px;" class="Label_Bold">
-                        Fecha Final
+                    <td style="width: 160px;" class="Label_Bold">Fecha Final
                     </td>
                     <td>
                         <span class="cssToolTip_Form">
@@ -320,8 +303,7 @@
                                 src="../../images/error.png" />
                             <span class="SpamEG"></span></span>
                     </td>
-                    <td style="width: 150px;" class="Label_Bold">
-                        Hora de Salida
+                    <td style="width: 150px;" class="Label_Bold">Hora de Salida
                     </td>
                     <td>
                         <span class="cssToolTip_Form">
@@ -339,8 +321,7 @@
             </table>
             <table id="Tabla_9" style="width: 700px; text-align: left;">
                 <tr>
-                    <td style="width: 150px;" class="Label_Bold">
-                        Tipo de Ingreso
+                    <td style="width: 150px;" class="Label_Bold">Tipo de Ingreso
                     </td>
                     <td>
                         <select id="Select_TypeIngreso" class="C_Chosen">
@@ -369,150 +350,108 @@
         <div id="container_Read" style="width: 100px; height: 400px;">
             <table id="Tabla_1_1" style="width: 700px; text-align: left;">
                 <tr>
-                    <td colspan="6" align="left" class="Title_Bold">
-                        Datos de la persona que Ingresa
+                    <td colspan="6" align="left" class="Title_Bold">Datos de la persona que Ingresa
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 150px;" class="Label_Bold">
-                        Empresa
+                    <td style="width: 150px;" class="Label_Bold">Empresa
                     </td>
-                    <td id="Vis_EmpresaNit">
-                    </td>
-                    <td style="padding-bottom: 25px; width: 250px;">
-                    </td>
+                    <td id="Vis_EmpresaNit"></td>
+                    <td style="padding-bottom: 25px; width: 250px;"></td>
                 </tr>
             </table>
             <table id="Tabla_2_2" style="width: 700px; text-align: left;">
                 <tr>
-                    <td style="width: 150px;" class="Label_Bold">
-                        Persona
+                    <td style="width: 150px;" class="Label_Bold">Persona
                     </td>
-                    <td id="Vis_Persona">
-                    </td>
-                    <td style="padding-bottom: 25px; width: 100px;">
-                    </td>
+                    <td id="Vis_Persona"></td>
+                    <td style="padding-bottom: 25px; width: 100px;"></td>
                 </tr>
             </table>
             <table id="Tabla_3_3" style="width: 700px; text-align: left;">
                 <tr>
-                    <td style="width: 150px;" class="Label_Bold">
-                        Tarjeta
+                    <td style="width: 150px;" class="Label_Bold">Tarjeta
                     </td>
-                    <td id="Vis_Tarjeta_Ent">
-                    </td>
-                    <td style="padding-bottom: 25px; width: 300px;">
-                    </td>
+                    <td id="Vis_Tarjeta_Ent"></td>
+                    <td style="padding-bottom: 25px; width: 300px;"></td>
                 </tr>
             </table>
             <table id="Tabla_4_4" style="width: 700px; text-align: left;">
                 <tr>
-                    <td colspan="6" align="left" class="Title_Bold">
-                        Datos y Permisos a la empresa que Ingresa
+                    <td colspan="6" align="left" class="Title_Bold">Datos y Permisos a la empresa que Ingresa
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 150px;" class="Label_Bold">
-                        Empresa a Ingresar
+                    <td style="width: 150px;" class="Label_Bold">Empresa a Ingresar
                     </td>
-                    <td id="Vis_EmpresaNit_Ing">
-                    </td>
-                    <td style="padding-bottom: 25px; width: 250px;">
-                    </td>
+                    <td id="Vis_EmpresaNit_Ing"></td>
+                    <td style="padding-bottom: 25px; width: 250px;"></td>
                 </tr>
             </table>
             <table id="Tabla_5_5" style="width: 700px; text-align: left;">
                 <tr>
-                    <td style="width: 150px;" class="Label_Bold">
-                        Puerta de Acceso
+                    <td style="width: 150px;" class="Label_Bold">Puerta de Acceso
                     </td>
-                    <td id="Vis_PAcceso">
-                    </td>
-                    <td style="padding-bottom: 25px; width: 300px;">
-                    </td>
+                    <td id="Vis_PAcceso"></td>
+                    <td style="padding-bottom: 25px; width: 300px;"></td>
                 </tr>
             </table>
             <table id="Tabla_6_6" style="width: 700px; text-align: left;">
                 <tr>
-                    <td style="width: 150px;" class="Label_Bold">
-                        Área de Acceso
+                    <td style="width: 150px;" class="Label_Bold">Área de Acceso
                     </td>
-                    <td id="Vis_AreaAcceso">
-                    </td>
-                    <td style="padding-bottom: 25px; width: 300px;">
-                    </td>
+                    <td id="Vis_AreaAcceso"></td>
+                    <td style="padding-bottom: 25px; width: 300px;"></td>
                 </tr>
             </table>
             <table id="Tabla_7_7" style="width: 700px; text-align: left;">
                 <tr>
-                    <td style="width: 150px;" class="Label_Bold">
-                        Persona Encargada
+                    <td style="width: 150px;" class="Label_Bold">Persona Encargada
                     </td>
-                    <td id="Vis_Persona_Enc">
-                    </td>
-                    <td style="padding-bottom: 25px; width: 100px;">
-                    </td>
+                    <td id="Vis_Persona_Enc"></td>
+                    <td style="padding-bottom: 25px; width: 100px;"></td>
                 </tr>
             </table>
             <table id="Tabla_8_8" style="width: 700px; text-align: left;">
                 <tr>
-                    <td colspan="6" align="left" class="Title_Bold">
-                        Datos de Ingreso
+                    <td colspan="6" align="left" class="Title_Bold">Datos de Ingreso
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 115px;" class="Label_Bold">
-                        C. Acceso Vigencia
+                    <td style="width: 115px;" class="Label_Bold">C. Acceso Vigencia
                     </td>
-                    <td id="Vis_CheckVigencia" style="width: 80px;">
-                    </td>
-                    <td style="padding-bottom: 25px; width: 325px;">
-                    </td>
+                    <td id="Vis_CheckVigencia" style="width: 80px;"></td>
+                    <td style="padding-bottom: 25px; width: 325px;"></td>
                 </tr>
             </table>
             <table id="Table1" style="width: 700px; text-align: left;">
                 <tr>
-                    <td style="width: 160px;" class="Label_Bold">
-                        Fecha Inicial
+                    <td style="width: 160px;" class="Label_Bold">Fecha Inicial
                     </td>
-                    <td id="Vis_Finicial">
+                    <td id="Vis_Finicial"></td>
+                    <td style="padding-bottom: 25px; width: 80px;"></td>
+                    <td style="width: 150px;" class="Label_Bold">Hora de Inicio
                     </td>
-                    <td style="padding-bottom: 25px; width: 80px;">
-                    </td>
-                    <td style="width: 150px;" class="Label_Bold">
-                        Hora de Inicio
-                    </td>
-                    <td id="Vis_HIVigencia">
-                    </td>
-                    <td style="padding-bottom: 25px; width: 60px;">
-                    </td>
+                    <td id="Vis_HIVigencia"></td>
+                    <td style="padding-bottom: 25px; width: 60px;"></td>
                 </tr>
                 <tr>
-                    <td style="width: 160px;" class="Label_Bold">
-                        Fecha Final
+                    <td style="width: 160px;" class="Label_Bold">Fecha Final
                     </td>
-                    <td id="Vis_Ffinal">
+                    <td id="Vis_Ffinal"></td>
+                    <td style="padding-bottom: 25px; width: 80px;"></td>
+                    <td style="width: 150px;" class="Label_Bold">Hora de Salida
                     </td>
-                    <td style="padding-bottom: 25px; width: 80px;">
-                    </td>
-                    <td style="width: 150px;" class="Label_Bold">
-                        Hora de Salida
-                    </td>
-                    <td id="Vis_HFVigencia">
-                    </td>
-                    <td style="padding-bottom: 25px; width: 60px;">
-                    </td>
+                    <td id="Vis_HFVigencia"></td>
+                    <td style="padding-bottom: 25px; width: 60px;"></td>
                 </tr>
             </table>
             <table id="Tabla_9_9" style="width: 700px; text-align: left;">
                 <tr>
-                    <td style="width: 150px;" class="Label_Bold">
-                        Tipo de Ingreso
+                    <td style="width: 150px;" class="Label_Bold">Tipo de Ingreso
                     </td>
-                    <td id="Vis_TypeIngreso">
-                    </td>
-                    <td style="padding-bottom: 25px; width: 200px;">
-                    </td>
+                    <td id="Vis_TypeIngreso"></td>
+                    <td style="padding-bottom: 25px; width: 200px;"></td>
                 </tr>
             </table>
         </div>

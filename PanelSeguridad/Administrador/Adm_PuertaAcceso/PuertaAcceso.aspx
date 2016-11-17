@@ -11,20 +11,19 @@
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
     <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />
     <link href="../../css/custom/charge.css" rel="stylesheet" type="text/css" />
-    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
     <link href="../../css/Chosen/chosen.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/jquery.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Chosen/chosen.jquery.js" type="text/javascript"></script>
     <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
+    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
     <div id="Container_title_Form">
         <table id="Tabla_Title_form">
             <tr>
-                <td id="Title_form">
-                </td>
+                <td id="Title_form"></td>
                 <td id="image_exit">
                     <span class="cssToolTip_Form_L">
                         <input id="BtnExit" type="button" value="X" onclick="btnSalir();" /><span class="Spam_AEXIT_MOD"></span></span>
@@ -32,7 +31,7 @@
             </tr>
         </table>
     </div>
-    <div id="Marco_link">
+    <div id="Marco_Container">
         <div id="Marco_btn_Form">
             <input id="BtnShearh" type="button" value="Consulta" onclick="HabilitarPanel('buscar');" />
             <input id="BtnCreate" type="button" value="Crear" onclick="HabilitarPanel('crear');" />
@@ -44,7 +43,7 @@
                 <table id="TablaConsulta">
                     <tr>
                         <td id="TD1">
-                            <select id="DDLColumns">
+                            <select id="DDLColumns" class="C_Chosen">
                             </select>
                         </td>
                         <td id="TD2">
@@ -57,8 +56,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="4">
-                            &nbsp;
+                        <td colspan="4">&nbsp;
                         </td>
                     </tr>
                     <tr>
@@ -71,8 +69,7 @@
                 <div id="TablaDatos_D">
                     <table id="Tabla_1" style="width: 700px; text-align: left;">
                         <tr>
-                            <td style="width: 105px;" class="Label_Bold">
-                                Multi - Empresa
+                            <td style="width: 105px;" class="Label_Bold">Multi - Empresa
                             </td>
                             <td>
                                 <select id="Select_EmpresaNit" class="C_Chosen">
@@ -88,8 +85,7 @@
                     </table>
                     <table id="Tabla_2" style="width: 700px; text-align: left;">
                         <tr>
-                            <td style="width: 150px;" class="Label_Bold">
-                                N° Iden. Puerta
+                            <td style="width: 150px;" class="Label_Bold">N° Iden. Puerta
                             </td>
                             <td style="width: 70px;">
                                 <span class="cssToolTip_Form">
@@ -102,38 +98,32 @@
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
-                            <td class="Label_Bold" style="width: 80px;">
-                                Descripción
+                            <td class="Label_Bold" style="width: 80px;">Descripción
                             </td>
                             <td style="width: 200px;">
                                 <span class="cssToolTip_Form">
                                     <input type="text" id="TxtDescription" maxlength="50" style="width: 200px;" />
                                     <span class="Spam_AST"></span></span>
                             </td>
-                            <td style="padding-bottom: 25px;">
-                            </td>
+                            <td style="padding-bottom: 25px;"></td>
                         </tr>
                         <tr>
-                            <td style="width: 100px;" class="Label_Bold">
-                                Cod. Numerico
+                            <td style="width: 100px;" class="Label_Bold">Cod. Numerico
                             </td>
                             <td style="width: 190px;">
                                 <span class="cssToolTip_Form">
                                     <input type="text" id="TxtCNumeric" maxlength="20" class="Numeric" style="width: 200px;" />
                                     <span class="Spam_AN"></span></span>
                             </td>
-                            <td style="padding-bottom: 25px; width: 30px;">
-                            </td>
-                            <td class="Label_Bold" style="width: 140px;">
-                                Cod. AlfaNum.
+                            <td style="padding-bottom: 25px; width: 30px;"></td>
+                            <td class="Label_Bold" style="width: 140px;">Cod. AlfaNum.
                             </td>
                             <td style="width: 190px;">
                                 <span class="cssToolTip_Form">
                                     <input type="text" id="TxtCAlfaNumeric" maxlength="20" class="Numeric_letter" style="width: 200px;" />
                                     <span class="Spam_ANL"></span></span>
                             </td>
-                            <td style="padding-bottom: 25px;">
-                            </td>
+                            <td style="padding-bottom: 25px;"></td>
                         </tr>
                         <tr>
                             <td colspan="4" align="center">
