@@ -8,12 +8,12 @@
     <link href="../css/css_login.css" rel="stylesheet" type="text/css" />
     <link href="../css/Dialog/jquery-ui.css" rel="stylesheet" type="text/css" />
     <script src="../SasifMaster_Cosult.js" type="text/javascript"></script>
-    <link href="../css/css_controles.css" rel="stylesheet" type="text/css" />
     <link href="../../css/Chosen/chosen.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/jquery.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Chosen/chosen.jquery.js" type="text/javascript"></script>
     <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
+    <link href="../css/css_controles.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
         html, body
         {

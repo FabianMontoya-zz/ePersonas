@@ -11,20 +11,19 @@
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
     <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />
     <link href="../../css/custom/charge.css" rel="stylesheet" type="text/css" />
-    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
     <link href="../../css/Chosen/chosen.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/jquery.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Chosen/chosen.jquery.js" type="text/javascript"></script>
     <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
+    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
     <div id="Container_title_Form">
         <table id="Tabla_Title_form">
             <tr>
-                <td id="Title_form">
-                </td>
+                <td id="Title_form"></td>
                 <td id="image_exit">
                     <span class="cssToolTip_Form_L">
                         <input id="BtnExit" type="button" value="X" onclick="btnSalir();" /><span class="Spam_AEXIT_MOD"></span></span>
@@ -57,8 +56,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="4">
-                            &nbsp;
+                        <td colspan="4">&nbsp;
                         </td>
                     </tr>
                     <tr>
@@ -71,8 +69,7 @@
                 <div id="TablaDatos_D">
                     <table id="Tabla_1" style="width: 700px; text-align: left;">
                         <tr>
-                            <td style="width: 150px;" class="Label_Bold">
-                                Multi - Empresa
+                            <td style="width: 150px;" class="Label_Bold">Multi - Empresa
                             </td>
                             <td>
                                 <select id="Select_EmpresaNit" class="C_Chosen">
@@ -88,8 +85,7 @@
                     </table>
                     <table id="Tabla_2" style="width: 700px; text-align: left;">
                         <tr>
-                            <td style="width: 165px;" class="Label_Bold">
-                                Documento
+                            <td style="width: 165px;" class="Label_Bold">Documento
                             </td>
                             <td style="width: 110px;">
                                 <span class="cssToolTip_Form">
@@ -102,8 +98,7 @@
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
-                            <td class="Label_Bold" style="width: 80px;">
-                                Descripción
+                            <td class="Label_Bold" style="width: 80px;">Descripción
                             </td>
                             <td style="width: 250px;">
                                 <span class="cssToolTip_Form">
@@ -120,8 +115,7 @@
                     </table>
                     <table id="Tabla_3" style="width: 700px; text-align: left;">
                         <tr>
-                            <td style="width: 115px;" class="Label_Bold">
-                                Chequea Vigencia
+                            <td style="width: 115px;" class="Label_Bold">Chequea Vigencia
                             </td>
                             <td style="width: 80px;">
                                 <select id="Select_CheckVigencia" class="C_Chosen" style="width: 80px;">
@@ -129,10 +123,8 @@
                                     <option value="S">Si</option>
                                 </select>
                             </td>
-                            <td style="padding-bottom: 25px; width: 60px;">
-                            </td>
-                            <td style="width: 100px;" class="Label_Bold">
-                                Dias de Vigencia
+                            <td style="padding-bottom: 25px; width: 60px;"></td>
+                            <td style="width: 100px;" class="Label_Bold">Dias de Vigencia
                             </td>
                             <td style="width: 70px;">
                                 <span class="cssToolTip_Form">
@@ -149,8 +141,7 @@
                     </table>
                     <table id="Tabla_4" style="width: 700px; text-align: left;">
                         <tr>
-                            <td style="width: 150px;" class="Label_Bold">
-                                Tipo de Contenido
+                            <td style="width: 150px;" class="Label_Bold">Tipo de Contenido
                             </td>
                             <td>
                                 <select id="Select_TContenido" class="C_Chosen">
@@ -168,8 +159,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="width: 150px;" class="Label_Bold">
-                                Formato
+                            <td style="width: 150px;" class="Label_Bold">Formato
                             </td>
                             <td>
                                 <select id="Select_Formato" class="C_Chosen">
@@ -183,8 +173,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="width: 150px;" class="Label_Bold">
-                                Tipo de Versión
+                            <td style="width: 150px;" class="Label_Bold">Tipo de Versión
                             </td>
                             <td>
                                 <select id="Select_TVersion" class="C_Chosen">
@@ -203,8 +192,7 @@
                     </table>
                     <table id="Tabla_5" style="width: 700px; text-align: left;">
                         <tr>
-                            <td style="width: 150px;" class="Label_Bold">
-                                Ruta Documento
+                            <td style="width: 150px;" class="Label_Bold">Ruta Documento
                             </td>
                             <td>
                                 <select id="Select_RutaDocumento" class="C_Chosen">
@@ -218,35 +206,30 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="width: 150px;" class="Label_Bold">
-                                Ruta Plantilla
+                            <td style="width: 150px;" class="Label_Bold">Ruta Plantilla
                             </td>
                             <td>
                                 <select id="Select_RutaPlantilla" class="C_Chosen">
                                 </select>
                             </td>
-                            <td style="padding-bottom: 25px; width: 250px;">
-                            </td>
+                            <td style="padding-bottom: 25px; width: 250px;"></td>
                         </tr>
                     </table>
                     <table id="Tabla_6" style="width: 700px; text-align: left;">
                         <tr>
-                            <td class="Label_Bold" style="width: 150px;">
-                                Nombre Plantilla
+                            <td class="Label_Bold" style="width: 150px;">Nombre Plantilla
                             </td>
                             <td style="width: 250px;">
                                 <span class="cssToolTip_Form">
                                     <input type="text" id="TxtNamePlanilla" maxlength="50" style="width: 250px;" />
                                     <span class="Spam_AST"></span></span>
                             </td>
-                            <td style="padding-bottom: 25px;">
-                            </td>
+                            <td style="padding-bottom: 25px;"></td>
                         </tr>
                     </table>
                     <table id="Tabla_7" style="width: 700px; text-align: left;">
                         <tr>
-                            <td style="width: 115px;" class="Label_Bold">
-                                Requiere Verificación
+                            <td style="width: 115px;" class="Label_Bold">Requiere Verificación
                             </td>
                             <td style="width: 80px;">
                                 <select id="Select_CheckVerificacion" class="C_Chosen" style="width: 80px;">
@@ -254,10 +237,8 @@
                                     <option value="S">Si</option>
                                 </select>
                             </td>
-                            <td style="padding-bottom: 25px; width: 60px;">
-                            </td>
-                            <td style="width: 115px;" class="Label_Bold">
-                                Indicativo Foto
+                            <td style="padding-bottom: 25px; width: 60px;"></td>
+                            <td style="width: 115px;" class="Label_Bold">Indicativo Foto
                             </td>
                             <td style="width: 80px;">
                                 <select id="Select_Foto" class="C_Chosen" style="width: 80px;">
@@ -265,8 +246,7 @@
                                     <option value="S">Si</option>
                                 </select>
                             </td>
-                            <td style="padding-bottom: 25px; width: 60px;">
-                            </td>
+                            <td style="padding-bottom: 25px; width: 60px;"></td>
                         </tr>
                         <tr>
                             <td colspan="4" align="center">
@@ -284,127 +264,88 @@
                 <div id="TablaDatos_D_Vista">
                     <table id="Table1" style="width: 700px; text-align: left;">
                         <tr>
-                            <td style="width: 150px;" class="Label_Bold">
-                                Multi - Empresa
+                            <td style="width: 150px;" class="Label_Bold">Multi - Empresa
                             </td>
-                            <td id="Con_EmpresaNit">
-                            </td>
-                            <td style="padding-bottom: 25px; width: 250px;">
-                            </td>
+                            <td id="Con_EmpresaNit"></td>
+                            <td style="padding-bottom: 25px; width: 250px;"></td>
                         </tr>
                     </table>
                     <table id="Table2" style="width: 700px; text-align: left;">
                         <tr>
-                            <td style="width: 165px;" class="Label_Bold">
-                                Documento
+                            <td style="width: 165px;" class="Label_Bold">Documento
                             </td>
-                            <td id="Con_ID" style="width: 110px;">
+                            <td id="Con_ID" style="width: 110px;"></td>
+                            <td style="padding-bottom: 25px; width: 80px;"></td>
+                            <td class="Label_Bold" style="width: 80px;">Descripción
                             </td>
-                            <td style="padding-bottom: 25px; width: 80px;">
-                            </td>
-                            <td class="Label_Bold" style="width: 80px;">
-                                Descripción
-                            </td>
-                            <td id="Con_Description" style="width: 250px;">
-                            </td>
-                            <td style="padding-bottom: 25px;">
-                            </td>
+                            <td id="Con_Description" style="width: 250px;"></td>
+                            <td style="padding-bottom: 25px;"></td>
                         </tr>
                     </table>
                     <table id="Table3" style="width: 700px; text-align: left;">
                         <tr>
-                            <td style="width: 115px;" class="Label_Bold">
-                                Chequea Vigencia
+                            <td style="width: 115px;" class="Label_Bold">Chequea Vigencia
                             </td>
-                            <td id="Con_CheckVigencia" style="width: 80px;">
+                            <td id="Con_CheckVigencia" style="width: 80px;"></td>
+                            <td style="padding-bottom: 25px; width: 60px;"></td>
+                            <td style="width: 100px;" class="Label_Bold">Dias de Vigencia
                             </td>
-                            <td style="padding-bottom: 25px; width: 60px;">
-                            </td>
-                            <td style="width: 100px;" class="Label_Bold">
-                                Dias de Vigencia
-                            </td>
-                            <td id="Con_DiaVigencia" style="width: 70px;">
-                            </td>
-                            <td style="padding-bottom: 25px; width: 80px;">
-                            </td>
+                            <td id="Con_DiaVigencia" style="width: 70px;"></td>
+                            <td style="padding-bottom: 25px; width: 80px;"></td>
                         </tr>
                     </table>
                     <table id="Table4" style="width: 700px; text-align: left;">
                         <tr>
-                            <td style="width: 150px;" class="Label_Bold">
-                                Tipo de Contenido
+                            <td style="width: 150px;" class="Label_Bold">Tipo de Contenido
                             </td>
-                            <td id="Con_TContenido">
-                            </td>
-                            <td style="padding-bottom: 25px; width: 300px;">
-                            </td>
+                            <td id="Con_TContenido"></td>
+                            <td style="padding-bottom: 25px; width: 300px;"></td>
                         </tr>
                         <tr>
-                            <td style="width: 150px;" class="Label_Bold">
-                                Formato
+                            <td style="width: 150px;" class="Label_Bold">Formato
                             </td>
-                            <td id="Con_Formato">
-                            </td>
-                            <td style="padding-bottom: 25px; width: 300px;">
-                            </td>
+                            <td id="Con_Formato"></td>
+                            <td style="padding-bottom: 25px; width: 300px;"></td>
                         </tr>
                         <tr>
-                            <td style="width: 150px;" class="Label_Bold">
-                                Tipo de Versión
+                            <td style="width: 150px;" class="Label_Bold">Tipo de Versión
                             </td>
-                            <td id="Con_TVersion">
-                            </td>
-                            <td style="padding-bottom: 25px; width: 300px;">
-                            </td>
+                            <td id="Con_TVersion"></td>
+                            <td style="padding-bottom: 25px; width: 300px;"></td>
                         </tr>
                     </table>
                     <table id="Table5" style="width: 700px; text-align: left;">
                         <tr>
-                            <td style="width: 150px;" class="Label_Bold">
-                                Ruta Documento
+                            <td style="width: 150px;" class="Label_Bold">Ruta Documento
                             </td>
-                            <td id="Con_RutaDocumento">
-                            </td>
-                            <td style="padding-bottom: 25px; width: 250px;">
-                            </td>
+                            <td id="Con_RutaDocumento"></td>
+                            <td style="padding-bottom: 25px; width: 250px;"></td>
                         </tr>
                         <tr>
-                            <td style="width: 150px;" class="Label_Bold">
-                                Ruta Plantilla
+                            <td style="width: 150px;" class="Label_Bold">Ruta Plantilla
                             </td>
-                            <td id="Con_RutaPlantilla">
-                            </td>
-                            <td style="padding-bottom: 25px; width: 250px;">
-                            </td>
+                            <td id="Con_RutaPlantilla"></td>
+                            <td style="padding-bottom: 25px; width: 250px;"></td>
                         </tr>
                     </table>
                     <table id="Table6" style="width: 700px; text-align: left;">
                         <tr>
-                            <td class="Label_Bold" style="width: 150px;">
-                                Nombre Plantilla
+                            <td class="Label_Bold" style="width: 150px;">Nombre Plantilla
                             </td>
-                            <td id="Con_NamePlanilla"  style="width: 250px;">
-                            </td>
-                            <td style="padding-bottom: 25px;">
-                            </td>
+                            <td id="Con_NamePlanilla" style="width: 250px;"></td>
+                            <td style="padding-bottom: 25px;"></td>
                         </tr>
                     </table>
                     <table id="Table7" style="width: 700px; text-align: left;">
                         <tr>
-                            <td style="width: 115px;" class="Label_Bold">
-                                Requiere Verificación
+                            <td style="width: 115px;" class="Label_Bold">Requiere Verificación
                             </td>
-                            <td id="Con_CheckVerificacion" style="width: 80px;">
+                            <td id="Con_CheckVerificacion" style="width: 80px;"></td>
+                            <td style="padding-bottom: 25px; width: 60px;"></td>
+                            <td style="width: 115px;" class="Label_Bold">Indicativo Foto
                             </td>
-                            <td style="padding-bottom: 25px; width: 60px;">
-                            </td>
-                            <td style="width: 115px;" class="Label_Bold">
-                                Indicativo Foto
-                            </td>
-                            <td id="Con_Foto" style="width: 80px;">
-                            </td>
-                            <td style="padding-bottom: 25px; width: 60px;">
-                            </td>
+                            <td id="Con_Foto" style="width: 80px;"></td>
+                            <td style="padding-bottom: 25px; width: 60px;"></td>
                         </tr>
                     </table>
                 </div>

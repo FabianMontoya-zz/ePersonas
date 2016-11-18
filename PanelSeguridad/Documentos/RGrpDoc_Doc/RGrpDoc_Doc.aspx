@@ -11,20 +11,19 @@
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
     <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />
     <link href="../../css/custom/charge.css" rel="stylesheet" type="text/css" />
-    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
     <link href="../../css/Chosen/chosen.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/jquery.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Chosen/chosen.jquery.js" type="text/javascript"></script>
     <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
+    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
     <div id="Container_title_Form">
         <table id="Tabla_Title_form">
             <tr>
-                <td id="Title_form">
-                </td>
+                <td id="Title_form"></td>
                 <td id="image_exit">
                     <span class="cssToolTip_Form_L">
                         <input id="BtnExit" type="button" value="X" onclick="btnSalir();" /><span class="Spam_AEXIT_MOD"></span></span>
@@ -36,7 +35,7 @@
         <div id="Marco_btn_Form">
             <input id="BtnShearh" type="button" value="Consulta" onclick="HabilitarPanel('buscar');" />
             <input id="BtnCreate" type="button" value="Crear" onclick="HabilitarPanel('crear');" />
-             <input id="BtnDelete" type="button" value="Eliminar" onclick="HabilitarPanel('eliminar');" />
+            <input id="BtnDelete" type="button" value="Eliminar" onclick="HabilitarPanel('eliminar');" />
         </div>
         <div id="Marco_trabajo_Form">
             <div id="Container_controls">
@@ -56,8 +55,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="4">
-                            &nbsp;
+                        <td colspan="4">&nbsp;
                         </td>
                     </tr>
                     <tr>
@@ -70,8 +68,7 @@
                 <div id="TablaDatos_D">
                     <table id="Tabla_1" style="width: 700px; text-align: left;">
                         <tr>
-                            <td style="width: 150px;" class="Label_Bold">
-                                Multi - Empresa
+                            <td style="width: 150px;" class="Label_Bold">Multi - Empresa
                             </td>
                             <td>
                                 <select id="Select_EmpresaNit" class="C_Chosen">
@@ -87,8 +84,7 @@
                     </table>
                     <table id="Tabla_2" style="width: 700px; text-align: left;">
                         <tr>
-                            <td style="width: 150px;" class="Label_Bold">
-                                Grupo Documento
+                            <td style="width: 150px;" class="Label_Bold">Grupo Documento
                             </td>
                             <td>
                                 <select id="Select_GrpDocumento" class="C_Chosen">
@@ -104,14 +100,13 @@
                     </table>
                     <table id="Tabla_3" style="width: 700px; text-align: left;">
                         <tr>
-                            <td style="width: 150px;"  class="Label_Bold">
-                                Documento
+                            <td style="width: 150px;" class="Label_Bold">Documento
                             </td>
                             <td>
                                 <select id="Select_Documento" class="C_Chosen">
                                 </select>
                             </td>
-                            <td style="padding-bottom: 25px; width: 300px; ">
+                            <td style="padding-bottom: 25px; width: 300px;">
                                 <span class="cssToolTip_L">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img3"
                                         src="../../images/error.png" />

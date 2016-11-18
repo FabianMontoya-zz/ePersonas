@@ -234,6 +234,21 @@ function Mostrar_AccesoPredeterminado(Index_AP) {
     Charge_Combos_Depend_Nit(Matrix_PAcceso_Area, "Select_AreaAcceso", Matrix_AccesoPredeterminados[Index_AP].PuertaAcceso_ID, Matrix_AccesoPredeterminados[Index_AP].Area_ID);
 }
 
+function CalculaHoraEstimada() {
+
+    var HV_P = $("#TxtHora").val();
+    var MV_P = $("#TxtMinutos").val();
+    var Minuto_Estimado = 0;
+    var Minuto_Flotante = parseInt(MV_P) + parseInt(Minutes_Live);
+
+    if (Minuto_Flotante > 59)
+        Minuto_Estimado = parseInt(Minuto_Flotante) - 59;
+    else
+        Minuto_Estimado = Minuto_Flotante;
+
+    console.log("Minuto_Flotante " + Minuto_Flotante + " Minuto_Estimado " + Minuto_Estimado);
+}
+
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                     VALIDACION EN LINEA ACCESO PREDETERMINADO                                                                                                         ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/

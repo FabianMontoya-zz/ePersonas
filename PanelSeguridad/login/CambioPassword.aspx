@@ -8,32 +8,28 @@
     <link href="../css/css_login.css" rel="stylesheet" type="text/css" />
     <script src="../SasifMaster_Cosult.js" type="text/javascript"></script>
     <link href="../css/custom/charge.css" rel="stylesheet" type="text/css" />
-    <link href="../css/css_controles.css" rel="stylesheet" type="text/css" />
     <link href="../../css/Chosen/chosen.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/jquery.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Chosen/chosen.jquery.js" type="text/javascript"></script>
     <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
+    <link href="../css/css_controles.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
     <div id="Container_title">
-        <h2 id="titulo_login">
-            CAMBIO DE CONTRASEÑA</h2>
+        <h2 id="titulo_login">CAMBIO DE CONTRASEÑA</h2>
     </div>
     <div id="marco_CC">
         <table id="TablaContraseña">
             <tr>
-                <td class="Label_bold">
-                    Nombre de Usuario
+                <td class="Label_bold">Nombre de Usuario
                 </td>
             </tr>
             <tr>
-                <td id="TdUser" class="Label_bold">
-                </td>
+                <td id="TdUser" class="Label_bold"></td>
             </tr>
             <tr>
-                <td class="Label_bold">
-                    Digite Contraseña
+                <td class="Label_bold">Digite Contraseña
                 </td>
             </tr>
             <tr>
@@ -47,12 +43,10 @@
                 </td>
             </tr>
             <tr>
-                <td id="TdHelpPassword">
-                </td>
+                <td id="TdHelpPassword"></td>
             </tr>
             <tr>
-                <td class="Label_bold">
-                    Confirme Contraseña
+                <td class="Label_bold">Confirme Contraseña
                 </td>
             </tr>
             <tr>
@@ -66,8 +60,7 @@
                 </td>
             </tr>
             <tr>
-                <td id="TdHelpConfirmPassword">
-                </td>
+                <td id="TdHelpConfirmPassword"></td>
             </tr>
             <%--<tr>
                     <td id="TdCheck">
@@ -77,8 +70,7 @@
                     </td>
                 </tr>--%>
             <tr>
-                <td>
-                </td>
+                <td></td>
             </tr>
             <tr>
                 <td id="TdControl" colspan="2" style="text-align: center;">

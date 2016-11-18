@@ -20,13 +20,14 @@
     <script src="../../Scripts/Dialog/datepicker.js" type="text/javascript"></script>
     <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
-        .ui-widget
+       .ui-widget
         {
-            background: silver;
-            border: solid;
-            border-color: gray;
-            border-width: 1px;
-            border-radius: 5px 5px 5px 5px;
+            background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+            background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+            background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+            background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+            border: solid 1px #921919;
+            border-radius: 5px;
         }
     </style>
 </asp:Content>

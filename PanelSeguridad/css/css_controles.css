@@ -1,12 +1,10 @@
 ﻿/*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*                                                           CONTROLES FUENTE PARA TODOS LOS CAMPOS POR DEFECTO                                                                                 */
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
 h1, h2, h3, h4
 {
     font-family: 16px/20px Verdana,sans-serif;
 }
-
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*                                                           CONTROLES INPUT TYPE TEXT & PASSWORD                                                                                 */
@@ -36,7 +34,6 @@ input[id='Circulo']
 {
     font-weight: bold;
 }
-
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*                                                           CONTROLES INPUT TYPE BUTTON                                                                                 */
@@ -160,17 +157,13 @@ option
 
 .ui-accordion .ui-accordion-header:hover
 {
-    border-color: gray;
-    color: White;
-    background: -webkit-linear-gradient(#89B8DA, #6EA7D2); /* For Safari 5.1 to 6.0*/
-    background: -o-linear-gradient(#89B8DA, #6EA7D2); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#89B8DA, #6EA7D2); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#89B8DA, #6EA7D2); /* Standard syntax (must be last)*/
-    border-radius: 7px 7px 0px 0px;
-    border-color: gray;
-    border-width: 2px;
-    border-style: outset;
-}
+    border: 1px solid #c5dbec;
+    background: -webkit-linear-gradient(#b70d0d, #631111); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#b70d0d, #631111); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#b70d0d, #631111); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#b70d0d, #631111); /* Standard syntax (must be last)*/
+    border-radius: 7px;
+    }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*                                                               TABS JQUERY                                                                                  */
@@ -309,17 +302,17 @@ option
 .cssToolTip_ver
 {
     position: relative; /* Esta clase tiene que tener posicion relativa */
-    color: #87cefa; /* Color del texto */
+    color: #ffffff; /* Color del texto */
 }
 
     /* El tooltip */
     .cssToolTip_ver span
     {
         background: rgba(20,20,20,0.7);
-        border: 2px solid #87cefa;
+        border: 2px solid #ffffff;
         border-radius: 5px;
         box-shadow: 5px 5px 5px #333;
-        color: #87cefa;
+        color: #ffffff;
         display: none; /* El tooltip por defecto estara oculto */
         font-size: 0.8em;
         padding: 10px 10px 10px 10px;
@@ -341,17 +334,17 @@ option
 .cssToolTip_Form
 {
     position: relative; /* Esta clase tiene que tener posicion relativa */
-    color: #87cefa; /* Color del texto */
+    color: #ffffff; /* Color del texto */
 }
 
     /* El tooltip */
     .cssToolTip_Form span
     {
         background: rgba(20,20,20,0.7);
-        border: 2px solid #87cefa;
+        border: 2px solid #ffffff;
         border-radius: 5px;
         box-shadow: 5px 5px 5px #333;
-        color: #87cefa;
+        color: #ffffff;
         display: none; /* El tooltip por defecto estara oculto */
         font-size: 0.8em;
         padding: 10px 10px 10px 10px;
@@ -372,17 +365,17 @@ option
 .cssToolTip_Form_L
 {
     position: relative; /* Esta clase tiene que tener posicion relativa */
-    color: #87cefa; /* Color del texto */
+    color: #ffffff; /* Color del texto */
 }
 
     /* El tooltip */
     .cssToolTip_Form_L span
     {
         background: rgba(20,20,20,0.7);
-        border: 2px solid #87cefa;
+        border: 2px solid #ffffff;
         border-radius: 5px;
         box-shadow: 5px 5px 5px #333;
-        color: #87cefa;
+        color: #ffffff;
         display: none; /* El tooltip por defecto estara oculto */
         font-size: 0.8em;
         padding: 10px 10px 10px 10px;

@@ -94,7 +94,7 @@
                                 <input id="TxtRead" type="text" />
                                 <span class="Spam_AST"></span></span>
                         </td>
-                        <td colspan="4" align="center" id="TD3">
+                        <td  align="center" id="TD3">
                             <input id="BtnRead" type="button" value="Buscar" onclick="BtnConsulta();" />
                         </td>
                     </tr>
