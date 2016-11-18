@@ -2204,78 +2204,6 @@ To modify move field declaration from designer file to code-behind file.
 	<param name="SourceText"></param>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CalendarioProgresivoSQLClass.Read_AllCalendarioProgresivo(System.String,System.String,System.String)">
-	<summary>
- creala consulta para la tabla CalendarioProgresivo parametrizada (READ)
- </summary>
-	<param name="vp_S_Filtro"></param>
-	<param name="vp_S_Opcion"></param>
-	<param name="vp_S_Contenido"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CalendarioProgresivoSQLClass.InsertCalendarioProgresivo(PanelSeguridad.CalendarioProgresivoClass)">
-	<summary>
- funcion que crea el query para la insercion de nuevo CalendarioProgresivo (INSERT)
- </summary>
-	<param name="vp_Obj_CalendarioProgresivo"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CalendarioProgresivoSQLClass.UpdateCalendarioProgresivo(PanelSeguridad.CalendarioProgresivoClass)">
-	<summary>
- funcion que crea el query para la modificacion del CalendarioProgresivo (UPDATE)
- </summary>
-	<param name="vp_Obj_CalendarioProgresivo"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CalendarioProgresivoSQLClass.EraseCalendarioProgresivo(PanelSeguridad.CalendarioProgresivoClass)">
-	<summary>
- funcion que crea el query para la eliminacion del CalendarioProgresivo (DELETE)
- </summary>
-	<param name="vp_Obj_CalendarioProgresivo"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CalendarioProgresivoSQLClass.ReadCharge_DropList(System.String)">
-	<summary>
- crea la consulta para cargar el combo
- </summary>
-	<param name="vp_S_Table"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CalendarioProgresivoSQLClass.Charge_DropListCalendarioProgresivoDepend(System.String)">
-	<summary>
- crea la consulta para cargar el combo
- </summary>
-	<param name="vp_S_NitEmpresa"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CalendarioProgresivoSQLClass.Charge_DropListSeguridad(System.String)">
-	<summary>
- crea la consulta para cargar el combo
- </summary>
-	<param name="vp_S_Table"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CalendarioProgresivoSQLClass.listCalendarioProgresivo(System.String,System.String,System.String)">
-	<summary>
- funcion que trae el listado de CalendarioProgresivo para armar la tabla
- </summary>
-	<param name="vp_S_StrQuery"></param>
-	<param name="vg_S_StrConexion"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CalendarioProgresivoSQLClass.Consulta_Repetido(PanelSeguridad.CalendarioProgresivoClass)">
-	<summary>
- averigua si esta repetido
- </summary>
-	<param name="vp_O_Obj"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CalendarioProgresivoSQLClass.Read_Matrix_CalendarioProgresivo">
-	<summary>
- lee la matriz de CalendarioProgresivos
- </summary>
-	<returns></returns>
-	<remarks></remarks>
 </member><member name="M:PanelSeguridad.C_ContratoAjax.InsertC_Contrato">
 	<summary>
  funcion que inserta en la tabla C_Contrato (INSERT)
@@ -3002,36 +2930,6 @@ To modify move field declaration from designer file to code-behind file.
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.AreaAjax.CargarSeguridad">
-	<summary>
- funcion que carga el objeto DDL consulta
- </summary>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CalendarioProgresivoAjax.Consulta_CalendarioProgresivo">
-	<summary>
- traemos todos los datos para tabla CalendarioProgresivo (READ)
- </summary>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CalendarioProgresivoAjax.InsertCalendarioProgresivo">
-	<summary>
- funcion que inserta en la tabla CalendarioProgresivo (INSERT)
- </summary>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CalendarioProgresivoAjax.UpdateCalendarioProgresivo">
-	<summary>
- funcion que actualiza en la tabla CalendarioProgresivo (UPDATE)
- </summary>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CalendarioProgresivoAjax.EraseCalendarioProgresivo">
-	<summary>
- funcion que elimina en la tabla CalendarioProgresivo (DELETE)
- </summary>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CalendarioProgresivoAjax.CargarDroplist">
-	<summary>
- funcion que carga el objeto DDL Links
- </summary>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CalendarioProgresivoAjax.CargarCliente">
 	<summary>
  funcion que carga el objeto DDL consulta
  </summary>

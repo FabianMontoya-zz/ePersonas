@@ -721,7 +721,7 @@
         </table>
     </div>
     <div id="Dialog_Direcciones">
-        <div id="Controls_direcciones" style="width: 100%; text-align: center; font: 12px/20px Verdana,sans-serif;">
+        <div id="Controls_direcciones" style="width: 100%; text-align: center; font: 12px/20px CenturyGothic,sans-serif;">
             <table style="width: 100%">
                 <tr>
                     <td class="Label_Bold">Nit Empresa
@@ -750,12 +750,12 @@
         </div>
         <div id="container_direccion">
         </div>
-        <div id="Div_Control_Save" style="width: 100%; text-align: center; margin-top: 25px; font: 12px/20px Verdana,sans-serif;">
+        <div id="Div_Control_Save" style="width: 100%; text-align: center; margin-top: 25px; font: 12px/20px CenturyGothic,sans-serif;">
             <input id="BtnSave_Adress" type="button" value="Guardar" onclick="BtnSave_Adress_Client()" />
         </div>
     </div>
     <div id="Dialog_EntidadFinanciera">
-        <div id="Div2" style="width: 100%; text-align: center; font: 12px/20px Verdana,sans-serif;">
+        <div id="Div2" style="width: 100%; text-align: center; font: 12px/20px CenturyGothic,sans-serif;">
             <table style="width: 100%">
                 <tr>
                     <td class="Label_Bold">Nit Empresa
@@ -784,12 +784,12 @@
         </div>
         <div id="container_Bank">
         </div>
-        <div id="Div4" style="width: 100%; text-align: center; margin-top: 25px; font: 12px/20px Verdana,sans-serif;">
+        <div id="Div4" style="width: 100%; text-align: center; margin-top: 25px; font: 12px/20px CenturyGothic,sans-serif;">
             <input id="BtnSave_Bank" type="button" value="Guardar" onclick="BtnSave_Bank_Client()" />
         </div>
     </div>
     <div id="Dialog_C_R_U_D">
-        <table style="width: 100%; text-align: center; font: 12px/20px Verdana,sans-serif;">
+        <table style="width: 100%; text-align: center; font: 12px/20px CenturyGothic,sans-serif;">
             <tr>
                 <td class="Label_Bold">Nit Empresa
                 </td>
@@ -1017,7 +1017,7 @@
         </div>
     </div>
     <div id="Dialog_Format_Adress">
-        <table style="width: 100%; text-align: center; font: 12px/20px Verdana,sans-serif;">
+        <table style="width: 100%; text-align: center; font: 12px/20px CenturyGothic,sans-serif;">
             <tr>
                 <td>
                     <select id="Select_Type_Adress" class="Select_medium">
@@ -1168,7 +1168,7 @@
         </table>
     </div>
     <div id="Dialog_C_R_U_D_Bank">
-        <table style="width: 100%; text-align: center; font: 12px/20px Verdana,sans-serif;">
+        <table style="width: 100%; text-align: center; font: 12px/20px CenturyGothic,sans-serif;">
             <tr>
                 <td class="Label_Bold">Nit Empresa
                 </td>
@@ -1446,12 +1446,12 @@
         </table>
         <div id="container_Document">
         </div>
-        <div id="Div6" style="width: 100%; text-align: center; margin-top: 25px; font: 12px/20px Verdana,sans-serif;">
+        <div id="Div6" style="width: 100%; text-align: center; margin-top: 25px; font: 12px/20px CenturyGothic,sans-serif;">
             <input id="BtnSave_Document" type="button" value="Guardar" onclick="BtnSave_Document_Client()" />
         </div>
     </div>
     <div id="Dialog_Doc_Autorizados">
-        <div id="Div1" style="width: 100%; text-align: center; font: 12px/20px Verdana,sans-serif;">
+        <div id="Div1" style="width: 100%; text-align: center; font: 12px/20px CenturyGothic,sans-serif;">
             <table style="width: 100%">
                 <tr>
                     <td class="Label_Bold">Nit Empresa
@@ -1480,7 +1480,7 @@
         </div>
         <div id="container_DocAuto">
         </div>
-        <div id="Div7" style="width: 100%; text-align: center; margin-top: 25px; font: 12px/20px Verdana,sans-serif;">
+        <div id="Div7" style="width: 100%; text-align: center; margin-top: 25px; font: 12px/20px CenturyGothic,sans-serif;">
             <input id="BtnSave_Document_A" type="button" value="Guardar" onclick="BtnSave_Document_A_Client()" />
         </div>
     </div>

@@ -134,59 +134,59 @@
                     <table id="TablaHoras">
                         <tr style="text-align: center;">
                             <td>
-                                <font face="Verdana" size="2 " color="black"></font>
+                                <font face="CenturyGothic" size="2 " color="black"></font>
                             </td>
                             <td>
-                                <font face="Verdana" size="2 " color="black"><b>Estado Dia</b> </font>
+                                <font face="CenturyGothic" size="2 " color="black"><b>Estado Dia</b> </font>
                             </td>
                             <td align="center" colspan="2">
-                                <font face="Verdana" size="2 " color="black"><b>Rango 1</b> </font>
+                                <font face="CenturyGothic" size="2 " color="black"><b>Rango 1</b> </font>
                             </td>
                             <td align="center" colspan="2">
-                                <font face="Verdana" size="2 " color="black"><b>Rango 2</b> </font>
+                                <font face="CenturyGothic" size="2 " color="black"><b>Rango 2</b> </font>
                             </td>
                             <td align="center" colspan="2">
-                                <font face="Verdana" size="2 " color="black"><b>Rango 3</b> </font>
+                                <font face="CenturyGothic" size="2 " color="black"><b>Rango 3</b> </font>
                             </td>
                             <td align="center" colspan="2">
-                                <font face="Verdana" size="2 " color="black"><b>Rango 4</b> </font>
+                                <font face="CenturyGothic" size="2 " color="black"><b>Rango 4</b> </font>
                             </td>
                         </tr>
                         <tr style="text-align: center;">
                             <td>
-                                <font face="Verdana" size="2 " color="black"><b>&nbsp;&nbsp;&nbsp;&nbsp;</b> </font>
+                                <font face="CenturyGothic" size="2 " color="black"><b>&nbsp;&nbsp;&nbsp;&nbsp;</b> </font>
                             </td>
                             <td>
-                                <font face="Verdana" size="2 " color="black"><b>Festivo/Laboral</b> </font>
+                                <font face="CenturyGothic" size="2 " color="black"><b>Festivo/Laboral</b> </font>
                             </td>
                             <td>
-                                <font face="Verdana" size="2 " color="black"><b>Hora Inicial</b> </font>
+                                <font face="CenturyGothic" size="2 " color="black"><b>Hora Inicial</b> </font>
                             </td>
                             <td>
-                                <font face="Verdana" size="2 " color="black"><b>Hora Final</b> </font>
+                                <font face="CenturyGothic" size="2 " color="black"><b>Hora Final</b> </font>
                             </td>
                             <td>
-                                <font face="Verdana" size="2 " color="black"><b>Hora Inicial</b> </font>
+                                <font face="CenturyGothic" size="2 " color="black"><b>Hora Inicial</b> </font>
                             </td>
                             <td>
-                                <font face="Verdana" size="2 " color="black"><b>Hora Final</b> </font>
+                                <font face="CenturyGothic" size="2 " color="black"><b>Hora Final</b> </font>
                             </td>
                             <td>
-                                <font face="Verdana" size="2 " color="black"><b>Hora Inicial</b> </font>
+                                <font face="CenturyGothic" size="2 " color="black"><b>Hora Inicial</b> </font>
                             </td>
                             <td>
-                                <font face="Verdana" size="2 " color="black"><b>Hora Final</b> </font>
+                                <font face="CenturyGothic" size="2 " color="black"><b>Hora Final</b> </font>
                             </td>
                             <td>
-                                <font face="Verdana" size="2 " color="black"><b>Hora Inicial</b> </font>
+                                <font face="CenturyGothic" size="2 " color="black"><b>Hora Inicial</b> </font>
                             </td>
                             <td>
-                                <font face="Verdana" size="2 " color="black"><b>Hora Final</b> </font>
+                                <font face="CenturyGothic" size="2 " color="black"><b>Hora Final</b> </font>
                             </td>
                         </tr>
                         <tr style="text-align: center;">
                             <td>
-                                <font face="Verdana" size="2 " color="black"><b>Lunes</b> </font>
+                                <font face="CenturyGothic" size="2 " color="black"><b>Lunes</b> </font>
                             </td>
                             <td>
                                 <select id="Select_StateLun" class="C_Chosen">
@@ -237,7 +237,7 @@
                         </tr>
                         <tr style="text-align: center;">
                             <td>
-                                <font face="Verdana" size="2 " color="black"><b>Martes</b> </font>
+                                <font face="CenturyGothic" size="2 " color="black"><b>Martes</b> </font>
                             </td>
                             <td>
                                 <select id="Select_StateMar" class="C_Chosen">
@@ -288,7 +288,7 @@
                         </tr>
                         <tr style="text-align: center;">
                             <td>
-                                <font face="Verdana" size="2 " color="black"><b>Miercoles</b> </font>
+                                <font face="CenturyGothic" size="2 " color="black"><b>Miercoles</b> </font>
                             </td>
                             <td>
                                 <select id="Select_StateMie" class="C_Chosen">
@@ -339,7 +339,7 @@
                         </tr>
                         <tr style="text-align: center;">
                             <td>
-                                <font face="Verdana" size="2 " color="black"><b>Jueves</b> </font>
+                                <font face="CenturyGothic" size="2 " color="black"><b>Jueves</b> </font>
                             </td>
                             <td>
                                 <select id="Select_StateJue" class="C_Chosen">
@@ -390,7 +390,7 @@
                         </tr>
                         <tr style="text-align: center;">
                             <td>
-                                <font face="Verdana" size="2 " color="black"><b>Viernes</b> </font>
+                                <font face="CenturyGothic" size="2 " color="black"><b>Viernes</b> </font>
                             </td>
                             <td>
                                 <select id="Select_StateVie" class="C_Chosen">
@@ -441,7 +441,7 @@
                         </tr>
                         <tr style="text-align: center;">
                             <td>
-                                <font face="Verdana" size="2 " color="black"><b>Sabado</b> </font>
+                                <font face="CenturyGothic" size="2 " color="black"><b>Sabado</b> </font>
                             </td>
                             <td>
                                 <select id="Select_StateSab" class="C_Chosen">
@@ -492,7 +492,7 @@
                         </tr>
                         <tr style="text-align: center;">
                             <td>
-                                <font face="Verdana" size="2 " color="black"><b>Domingo</b> </font>
+                                <font face="CenturyGothic" size="2 " color="black"><b>Domingo</b> </font>
                             </td>
                             <td>
                                 <select id="Select_StateDom" class="C_Chosen">

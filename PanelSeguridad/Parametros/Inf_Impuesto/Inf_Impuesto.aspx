@@ -326,7 +326,7 @@
         </table>
     </div>
     <div id="Dialog_Direcciones">
-        <div id="Controls_direcciones" style="width: 100%; text-align: center; font: 12px/20px Verdana,sans-serif;">
+        <div id="Controls_direcciones" style="width: 100%; text-align: center; font: 12px/20px CenturyGothic,sans-serif;">
             <table style="width: 100%">
                 <tr>
                     <td class="Label_Bold">Nit Empresa
@@ -357,7 +357,7 @@
         </div>
     </div>
     <div id="Dialog_C_R_U_D">
-        <table style="width: 100%; text-align: center; font: 12px/20px Verdana,sans-serif;">
+        <table style="width: 100%; text-align: center; font: 12px/20px CenturyGothic,sans-serif;">
             <tr>
                 <td class="Label_Bold">Nit Empresa
                 </td>

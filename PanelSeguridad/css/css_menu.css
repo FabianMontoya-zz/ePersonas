@@ -23,7 +23,7 @@ li
             padding-left: 21px;
             text-decoration: none;
             display: block;
-            font: 14px/20px Verdana,sans-serif;
+            font: 14px/20px CenturyGothic,sans-serif;
         }
 
     li input
@@ -59,7 +59,7 @@ li
         cursor: pointer;
         display: block;
         padding-left: 37px;
-        font: 14px/20px Verdana,sans-serif;
+        font: 14px/20px CenturyGothic,sans-serif;
     }
 
     li input:checked + ol

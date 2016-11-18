@@ -3,7 +3,7 @@
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 h1, h2, h3, h4
 {
-    font-family: 16px/20px Verdana,sans-serif;
+    font-family: 16px/20px CenturyGothic,sans-serif;
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -14,7 +14,7 @@ input[type='text'], input[type='password']
     border: none;
     padding: 2px 0px 2px 8px;
     border-radius: 3px;
-    font-family: Verdana, Geneva, sans-serif;
+    font-family: CenturyGothic, CenturyGothic, sans-serif;
     font-size: inherit;
     font-weight: inherit;
     line-height: inherit;
@@ -42,37 +42,41 @@ input[type='button']
 {
     padding: 5px 2px 5px 2px;
     border-radius: 3px;
-    border-color: White;
+    border: solid 1px gray;
     background: -webkit-linear-gradient(#b70d0d, #631111); /*For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#b70d0d, #631111); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#b70d0d, #631111); /* For Firefox 3.6 to 15 */
     background: linear-gradient(#b70d0d, #631111); /* Standard syntax (must be last)*/
-    font: 14px/20px Verdana,sans-serif;
+    font: 14px/20px CenturyGothic,sans-serif;
     color: White;
     width: 120px;
-    border: none;
+    margin: 1px;
+    transition: all 0.8s ease;
 }
 
     input[type='button']:hover
     {
         padding: 5px 2px 5px 2px;
         border-radius: 3px;
-        border-color: White;
-        background: -webkit-linear-gradient(#ab5b5b, #543c3c); /*For Safari 5.1 to 6.0 */
-        background: -o-linear-gradient(#ab5b5b, #543c3c); /* For Opera 11.1 to 12.0 */
-        background: -moz-linear-gradient(#ab5b5b, #543c3c); /* For Firefox 3.6 to 15 */
-        background: linear-gradient(#ab5b5b, #543c3c); /* Standard syntax (must be last)*/
-        font: 14px/20px Verdana,sans-serif;
-        color: #ffc9c9;
+        border: solid 1px #6d0101;
+        background: -webkit-linear-gradient(#ccc, #e4e4e4); /*For Safari 5.1 to 6.0 */
+        background: -o-linear-gradient(#ccc, #e4e4e4); /* For Opera 11.1 to 12.0 */
+        background: -moz-linear-gradient(#ccc, #e4e4e4); /* For Firefox 3.6 to 15 */
+        background: linear-gradient(#ccc, #e4e4e4); /* Standard syntax (must be last)*/
+        font: 14px/20px CenturyGothic,sans-serif;
+        color: #6d0101;
+        font-weight: bold;
         width: 120px;
-        border: none;
+        margin: 1px;
+        transition: all 0.8s ease;
     }
 
 #BtnExit
 {
     width: 20px;
     height: 20px;
-    padding: 1px 2px 1px 2px;
+    padding: 0px 2px 5px 2px;
+    font-weight: bold;
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -82,46 +86,50 @@ select
 {
     width: 80%;
     height: 20px;
-    background: url(../css/theme_blue_Sky/images/default.png);
-    background-repeat: repeat;
+    background: -webkit-linear-gradient(#b70d0d, #631111); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#b70d0d, #631111); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#b70d0d, #631111); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#b70d0d, #631111); /* Standard syntax (must be last)*/
+    border: solid 1px gray;
+    color: #ffffff;
     border-radius: 3px;
     vertical-align: text-top;
-    border: none;
 }
 
 option
 {
-    font: 14px/20px Verdana,sans-serif;
-    color: #194769;
-    background: #C6DEFF;
+    font: 14px/20px CenturyGothic,sans-serif;
+    color: #ffffff;
+    background-color: #631111;
+    border: solid 1px gray;
 }
 
 .select_medium
 {
     padding: 2px 0px 2px 8px;
     border-radius: 3px;
-    border-color: White;
-    background: -webkit-linear-gradient(#89B7DA, #6EA7D2); /*For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#89B7DA, #6EA7D2); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#89B7DA, #6EA7D2); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#89B7DA, #6EA7D2); /* Standard syntax (must be last)*/
+    background: -webkit-linear-gradient(#b70d0d, #631111); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#b70d0d, #631111); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#b70d0d, #631111); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#b70d0d, #631111); /* Standard syntax (must be last)*/
+    border: solid 1px gray;
     width: 220px;
     color: White;
-    font: 14px/20px Verdana,sans-serif;
+    font: 14px/20px CenturyGothic,sans-serif;
 }
 
 .select_large
 {
     padding: 2px 0px 2px 8px;
     border-radius: 3px;
-    border-color: White;
-    background: -webkit-linear-gradient(#89B7DA, #6EA7D2); /*For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#89B7DA, #6EA7D2); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#89B7DA, #6EA7D2); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#89B7DA, #6EA7D2); /* Standard syntax (must be last)*/
+    background: -webkit-linear-gradient(#b70d0d, #631111); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#b70d0d, #631111); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#b70d0d, #631111); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#b70d0d, #631111); /* Standard syntax (must be last)*/
+    border: solid 1px gray;
     width: 350px;
     color: White;
-    font: 14px/20px Verdana,sans-serif;
+    font: 14px/20px CenturyGothic,sans-serif;
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -136,7 +144,7 @@ option
     border-width: 1px;
     border-style: outset;
     padding: 10px 10px;
-    font: 14px/20px Verdana,sans-serif;
+    font: 14px/20px CenturyGothic,sans-serif;
 }
 
 .ui-accordion .ui-accordion-header
@@ -144,7 +152,7 @@ option
     border-radius: 7px 7px 0px 0px;
     border-color: #79b7e7;
     border-width: 1px;
-    font: 14px/20px Verdana,sans-serif;
+    font: 14px/20px CenturyGothic,sans-serif;
     color: #2E6E9E;
     font-weight: bold;
     border-style: outset;
@@ -163,7 +171,7 @@ option
     background: -moz-linear-gradient(#b70d0d, #631111); /* For Firefox 3.6 to 15 */
     background: linear-gradient(#b70d0d, #631111); /* Standard syntax (must be last)*/
     border-radius: 7px;
-    }
+}
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*                                                               TABS JQUERY                                                                                  */
@@ -176,7 +184,7 @@ option
     background: -o-linear-gradient(#b70d0d, #631111); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#b70d0d, #631111); /* For Firefox 3.6 to 15 */
     background: linear-gradient(#b70d0d, #631111); /* Standard syntax (must be last)*/
-    font: 14px/20px Verdana,sans-serif;
+    font: 14px/20px CenturyGothic,sans-serif;
     font-weight: bold;
     color: #ffffff;
     border-color: White;
@@ -190,7 +198,7 @@ option
     background: -o-linear-gradient(#b70d0d, #631111); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#b70d0d, #631111); /* For Firefox 3.6 to 15 */
     background: linear-gradient(#b70d0d, #631111); /* Standard syntax (must be last)*/
-    font: 14px/20px Verdana,sans-serif;
+    font: 14px/20px CenturyGothic,sans-serif;
     font-weight: bold;
     color: #ffffff;
     border-color: White;
@@ -411,7 +419,7 @@ label
     background: -o-linear-gradient(#b70d0d, #631111); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#b70d0d, #631111); /* For Firefox 3.6 to 15 */
     background: linear-gradient(#b70d0d, #631111); /* Standard syntax (must be last)*/
-    font: 14px/20px Verdana,sans-serif;
+    font: 14px/20px CenturyGothic,sans-serif;
     font-weight: bold;
     color: #ffffff;
     border-color: White;
@@ -424,7 +432,7 @@ label
     background: -o-linear-gradient(#b70d0d, #631111); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#b70d0d, #631111); /* For Firefox 3.6 to 15 */
     background: linear-gradient(#b70d0d, #631111); /* Standard syntax (must be last)*/
-    font: 14px/20px Verdana,sans-serif;
+    font: 14px/20px CenturyGothic,sans-serif;
     font-weight: bold;
     color: #ffffff;
     border-color: White;
@@ -435,5 +443,5 @@ textarea
     border: none;
     padding: 2px 0px 2px 8px;
     border-radius: 3px;
-    font-family: Verdana, Geneva, sans-serif;
+    font-family: CenturyGothic, CenturyGothic, sans-serif;
 }

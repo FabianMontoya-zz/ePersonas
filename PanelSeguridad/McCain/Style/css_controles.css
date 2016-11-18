@@ -4,7 +4,7 @@
 
 h1, h2, h3, h4
 {
-    font-family: 16px/20px Verdana,sans-serif;
+    font-family: 16px/20px CenturyGothic,sans-serif;
 }
 
 
@@ -15,7 +15,7 @@ input[type='text'], input[type='password']
 {
     padding: 2px 0px 2px 8px;
     border-radius: 3px;
-    font-family: Verdana, Geneva, sans-serif;
+    font-family: CenturyGothic, CenturyGothic, sans-serif;
     font-size: inherit;
     font-weight: inherit;
     line-height: inherit;
@@ -33,14 +33,14 @@ input[id='Circulo']
 
 .Title_Bold
 {
-    font: 20px/28px Verdana,sans-serif;
+    font: 20px/28px CenturyGothic,sans-serif;
     font-weight: bold;
     color: #2C2C2C;
 }
 
 .Label_Bold
 {
-    font: 12px/20px Verdana,sans-serif;
+    font: 12px/20px CenturyGothic,sans-serif;
     font-weight: bold;
 }
 
@@ -57,7 +57,7 @@ input[type='button']
     background: -o-linear-gradient(#89B7DA, #6EA7D2); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#89B7DA, #6EA7D2); /* For Firefox 3.6 to 15 */
     background: linear-gradient(#89B7DA, #6EA7D2); /* Standard syntax (must be last)*/
-    font: 14px/20px Verdana,sans-serif;
+    font: 14px/20px CenturyGothic,sans-serif;
     color: White;
     width: 110px;
     border: none;
@@ -72,7 +72,7 @@ input[type='button']:hover
     background: -o-linear-gradient(#ADC3D4, #88B3D4); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#ADC3D4, #88B3D4); /* For Firefox 3.6 to 15 */
     background: linear-gradient(#ADC3D4, #88B3D4); /* Standard syntax (must be last)*/
-    font: 14px/20px Verdana,sans-serif;
+    font: 14px/20px CenturyGothic,sans-serif;
     color: Aqua;
     width: 110px;
     border: none;
@@ -100,12 +100,12 @@ select
     background: linear-gradient(#89B7DA, #6EA7D2); /* Standard syntax (must be last)*/
     width: 170px;
     color: White;
-    font: 14px/20px Verdana,sans-serif;
+    font: 14px/20px CenturyGothic,sans-serif;
 }
 
 option
 {
-    font: 14px/20px Verdana,sans-serif;
+    font: 14px/20px CenturyGothic,sans-serif;
     color: #194769;
     background: #C6DEFF;
 }
@@ -121,7 +121,7 @@ option
     background: linear-gradient(#89B7DA, #6EA7D2); /* Standard syntax (must be last)*/
     width: 220px;
     color: White;
-    font: 14px/20px Verdana,sans-serif;
+    font: 14px/20px CenturyGothic,sans-serif;
 }
 
 .select_large
@@ -135,7 +135,7 @@ option
     background: linear-gradient(#89B7DA, #6EA7D2); /* Standard syntax (must be last)*/
     width: 350px;
     color: White;
-    font: 14px/20px Verdana,sans-serif;
+    font: 14px/20px CenturyGothic,sans-serif;
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -150,7 +150,7 @@ option
     border-width: 1px;
     border-style: outset;
     padding: 10px 10px;
-    font: 14px/20px Verdana,sans-serif;
+    font: 14px/20px CenturyGothic,sans-serif;
 }
 
 .ui-accordion .ui-accordion-header
@@ -158,7 +158,7 @@ option
     border-radius: 7px 7px 0px 0px;
     border-color: #79b7e7;
     border-width: 1px;
-    font: 14px/20px Verdana,sans-serif;
+    font: 14px/20px CenturyGothic,sans-serif;
     color: #2E6E9E;
     font-weight: bold;
     border-style: outset;
@@ -195,7 +195,7 @@ option
     padding: 10px 10px;
     border-color: #79b7e7;
     border-width: 1px;
-    font: 14px/20px Verdana,sans-serif;
+    font: 14px/20px CenturyGothic,sans-serif;
 }
 
 .ui-tabs .ui-tabs-nav li.ui-tabs-active
@@ -422,5 +422,5 @@ textarea
     border: none;
     padding: 2px 0px 2px 8px;
     border-radius: 3px;
-    font-family: Verdana, Geneva, sans-serif;
+    font-family: CenturyGothic, CenturyGothic, sans-serif;
 }

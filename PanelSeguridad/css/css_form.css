@@ -14,10 +14,10 @@
     background: linear-gradient(#b70d0d, #631111); /* Standard syntax (must be last)*/
     border-radius: 3px;
     margin-left: 25px;
-    padding-right: 22px;
+    padding-right: 0.5em;
     font-weight: bold;
     color: #ffffff;
-    width: 97%;
+    width: 97.5%;
 }
 
 #Tabla_Title_form
@@ -50,7 +50,7 @@
     background: linear-gradient(#f6f6f6, #e8e8e8); /* Standard syntax (must be last)*/
     border-radius: 5px;
     border: solid 1px #ccc;
-    width: 96%;
+    width: 95.5%;
     height: 40%;
 }
 
@@ -201,7 +201,7 @@
 /*------------------- ajuste de grid administracion -----------------------------------------------*/
 #TLink, #TOpcRol, #TRol, #TUser
 {
-    font: 12px/20px Verdana,sans-serif;
+    font: 12px/20px CenturyGothic,sans-serif;
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -211,7 +211,7 @@
 /*------------------- ajuste de grid parametrizacion -----------------------------------------------*/
 #TArea, #TEmpleado, #TFestivo
 {
-    font: 12px/20px Verdana,sans-serif;
+    font: 12px/20px CenturyGothic,sans-serif;
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -224,7 +224,7 @@
     height: 238px;
     overflow: auto;
     border: solid 1px #CACACA;
-    font: 12px/20px Verdana,sans-serif;
+    font: 12px/20px CenturyGothic,sans-serif;
     text-align: center;
 }
 
@@ -234,7 +234,7 @@
     height: 340px;
     overflow: auto;
     border: solid 1px #CACACA;
-    font: 12px/20px Verdana,sans-serif;
+    font: 12px/20px CenturyGothic,sans-serif;
     text-align: center;
 }
 
@@ -244,7 +244,7 @@
     height: 190px;
     overflow: auto;
     border: solid 1px #CACACA;
-    font: 12px/20px Verdana,sans-serif;
+    font: 12px/20px CenturyGothic,sans-serif;
     text-align: center;
     margin-top: 5px;
 }
@@ -255,7 +255,7 @@
     height: 150px;
     overflow: auto;
     border: solid 1px #CACACA;
-    font: 12px/20px Verdana,sans-serif;
+    font: 12px/20px CenturyGothic,sans-serif;
     text-align: center;
 }
 
@@ -265,7 +265,7 @@
     height: 360px;
     overflow: auto;
     border: solid 1px #CACACA;
-    font: 12px/20px Verdana,sans-serif;
+    font: 12px/20px CenturyGothic,sans-serif;
     text-align: center;
 }
 
@@ -283,19 +283,19 @@
 
 #D_Impuestos
 {
-    font: 12px/20px Verdana,sans-serif;
+    font: 12px/20px CenturyGothic,sans-serif;
 }
 
 .Title_Bold
 {
-    font: 20px/28px Verdana,sans-serif;
+    font: 20px/28px CenturyGothic,sans-serif;
     font-weight: bold;
     color: #2C2C2C;
 }
 
 .Label_Bold
 {
-    font: 12px/20px Verdana,sans-serif;
+    font: 12px/20px CenturyGothic,sans-serif;
     font-weight: bold;
 }
 
@@ -344,7 +344,7 @@
     width: 740px;
     border-radius: 20px;
     border-width: 5px;
-    font: 12px/20px Verdana,sans-serif;
+    font: 12px/20px CenturyGothic,sans-serif;
 }
 
 #D_Impuestos, #D_Clientes_Z
@@ -357,12 +357,12 @@
     background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
     background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
     border: solid 1px #921919;
-    font: 12px/20px Verdana,sans-serif;
+    font: 12px/20px CenturyGothic,sans-serif;
 }
 
 #container_direccion
 {
-    font: 12px/20px Verdana,sans-serif;
+    font: 12px/20px CenturyGothic,sans-serif;
     text-align: center;
 }
 

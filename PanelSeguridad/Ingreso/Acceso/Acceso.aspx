@@ -38,7 +38,7 @@
                         </td>
                         <td>
                             <span class="cssToolTip_Form">
-                                <input type="text" id="TxtIDTarjeta" maxlength="10" class="Numeric" style="width: 165px; height: 25px; font: 20px/20px Verdana,sans-serif; text-align: center;" />
+                                <input type="text" id="TxtIDTarjeta" maxlength="10" class="Numeric" style="width: 165px; height: 25px; font: 20px/20px CenturyGothic,sans-serif; text-align: center;" />
                                 <span class="SpamALEC"></span></span>
                         </td>
                         <td class="Label_Bold" style="width: 150px;">Documento

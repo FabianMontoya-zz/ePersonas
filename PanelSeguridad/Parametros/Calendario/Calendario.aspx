@@ -210,7 +210,7 @@
                 <tbody>
                     <tr style="text-align: center;">
                         <td align="center" colspan="2">
-                            <font face="Verdana" size="2 " color="black">
+                            <font face="CenturyGothic" size="2 " color="black">
                                 <select id="Select_StateLun" class="C_Chosen">
                                     <option value="L">Laboral</option>
                                     <option value="F">Festivo</option>
@@ -218,7 +218,7 @@
                             </font>
                         </td>
                         <td align="center" colspan="2">
-                            <font face="Verdana" size="2 " color="black">
+                            <font face="CenturyGothic" size="2 " color="black">
                                 <select id="Select_StateMar" class="C_Chosen">
                                     <option value="L">Laboral</option>
                                     <option value="F">Festivo</option>
@@ -226,7 +226,7 @@
                             </font>
                         </td>
                         <td align="center" colspan="2">
-                            <font face="Verdana" size="2 " color="black">
+                            <font face="CenturyGothic" size="2 " color="black">
                                 <select id="Select_StateMie" class="C_Chosen">
                                     <option value="L">Laboral</option>
                                     <option value="F">Festivo</option>
@@ -234,7 +234,7 @@
                             </font>
                         </td>
                         <td align="center" colspan="2">
-                            <font face="Verdana" size="2 " color="black">
+                            <font face="CenturyGothic" size="2 " color="black">
                                 <select id="Select_StateJue" class="C_Chosen">
                                     <option value="L">Laboral</option>
                                     <option value="F">Festivo</option>
@@ -242,7 +242,7 @@
                             </font>
                         </td>
                         <td align="center" colspan="2">
-                            <font face="Verdana" size="2 " color="black">
+                            <font face="CenturyGothic" size="2 " color="black">
                                 <select id="Select_StateVie" class="C_Chosen">
                                     <option value="L">Laboral</option>
                                     <option value="F">Festivo</option>
@@ -250,7 +250,7 @@
                             </font>
                         </td>
                         <td align="center" colspan="2">
-                            <font face="Verdana" size="2 " color="black">
+                            <font face="CenturyGothic" size="2 " color="black">
                                 <select id="Select_StateSab" class="C_Chosen">
                                     <option value="L">Laboral</option>
                                     <option value="F">Festivo</option>
@@ -258,7 +258,7 @@
                             </font>
                         </td>
                         <td align="center" colspan="2">
-                            <font face="Verdana" size="2 " color="black">
+                            <font face="CenturyGothic" size="2 " color="black">
                                 <select id="Select_StateDom" class="C_Chosen">
                                     <option value="L">Laboral</option>
                                     <option value="F">Festivo</option>
@@ -266,7 +266,7 @@
                             </font>
                         </td>
                         <td align="center" colspan="2">
-                            <font face="Verdana" size="2 " color="black">
+                            <font face="CenturyGothic" size="2 " color="black">
                                 <select id="Select_Festivo" class="C_Chosen">
                                     <option value="L">Laboral</option>
                                     <option value="F">Festivo</option>
@@ -276,86 +276,86 @@
                     </tr>
                     <tr style="text-align: center;">
                         <td align="center" colspan="2">
-                            <font face="Verdana" size="2 " color="black"><b>Hora</b>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Hora</b>
                             </font>
                         </td>
                         <td align="center" colspan="2">
-                            <font face="Verdana" size="2 " color="black"><b>Hora</b>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Hora</b>
                             </font>
                         </td>
                         <td align="center" colspan="2">
-                            <font face="Verdana" size="2 " color="black"><b>Hora</b>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Hora</b>
                             </font>
                         </td>
                         <td align="center" colspan="2">
-                            <font face="Verdana" size="2 " color="black"><b>Hora</b>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Hora</b>
                             </font>
                         </td>
                         <td align="center" colspan="2">
-                            <font face="Verdana" size="2 " color="black"><b>Hora</b>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Hora</b>
                             </font>
                         </td>
                         <td align="center" colspan="2">
-                            <font face="Verdana" size="2 " color="black"><b>Hora</b>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Hora</b>
                             </font>
                         </td>
                         <td align="center" colspan="2">
-                            <font face="Verdana" size="2 " color="black"><b>Hora</b>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Hora</b>
                             </font>
                         </td>
                         <td align="center" colspan="2">
-                            <font face="Verdana" size="2 " color="black"><b>Hora</b>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Hora</b>
                             </font>
                         </td>
                     </tr>
                     <tr style="text-align: center;">
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Inicial</b> </font>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Inicial</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Final</b> </font>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Final</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Inicial</b> </font>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Inicial</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Final</b> </font>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Final</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Inicial</b> </font>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Inicial</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Final</b> </font>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Final</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Inicial</b> </font>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Inicial</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Final</b> </font>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Final</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Inicial</b> </font>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Inicial</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Final</b> </font>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Final</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Inicial</b> </font>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Inicial</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Final</b> </font>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Final</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Inicial</b> </font>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Inicial</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Final</b> </font>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Final</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Inicial</b> </font>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Inicial</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Final</b> </font>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Final</b> </font>
                         </td>
                     </tr>
                     <tr>
