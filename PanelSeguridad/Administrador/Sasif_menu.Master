@@ -24,35 +24,40 @@
 <body>
     <form id="form1" runat="server">
         <div class="page">
-            <div class="header">
-                <div class="title">
+            <div id="Header" class="header ">
+                <div class="Dimencion_Header">
                     <table id="M_header">
                         <tr>
                             <td id="logoExt" rowspan="4" style="width: 15%; text-align: center;">
-                                <img id="logo_2" src="" alt="SASIF S.A.S." style="height: 85px; width: 70px; padding-top: 25px" />
+                                <img id="logo_2" class="Logo_1" src="" alt="SASIF S.A.S." />
                             </td>
-                            <td id="Hours" colspan="3" style="width: 70%; text-align: center;"></td>
+                            <td id="Name_User" colspan="3" style="width: 70%; text-align: center;"></td>
                             <td rowspan="4" style="width: 15%; text-align: center;">&nbsp;<img alt="" src="" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td id="Title" colspan="3" style="width: 70%; text-align: center;">
-                                <h2 id="tituloPrincipal">&nbsp;</h2>
                             </td>
                         </tr>
                         <tr>
                             <td id="User" colspan="3" style="width: 70%; text-align: center;"></td>
                         </tr>
                         <tr>
-                            <td id="Name_User" colspan="3" style="width: 70%; text-align: center;"></td>
+                            <td id="Title" colspan="3" class="Titulo_1" style="width: 70%; text-align: center;">
+                                <spam id="tituloPrincipal" style="font-weight: bold;">&nbsp;</spam>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="Hours" colspan="3" style="width: 70%; text-align: center;"></td>
                         </tr>
                     </table>
                 </div>
                 <div class="Bar">
                     <table id="M_Bar">
                         <tr>
-                            <td id="TMenu"></td>
-                            <td id="Exit">
+                            <td id="TMenu" style="width: 15%">
+                                <img id="logo_2_W" class="Logo_2" src="" alt="SASIF S.A.S." />
+                            </td>
+                            <td style="width: 70%; text-align: center;" class="Titulo_2">
+                                <spam id="tituloPrincipal_2" style="color: #FFFFFF; font-weight: bold;">&nbsp;</spam>
+                            </td>
+                            <td id="Exit" style="width: 15%">
                                 <input id="BtnExitApp" type="button" value="SALIDA" onclick="window.location = '../../login/Login.aspx'" />
                             </td>
                         </tr>

@@ -29,7 +29,6 @@
 #Header
 {
     float: none;
-    height: 140px;
     background: -webkit-linear-gradient(#f6f6f6, #e8e8e8); /*For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#f6f6f6, #e8e8e8); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#f6f6f6, #e8e8e8); /* For Firefox 3.6 to 15 */
@@ -44,6 +43,18 @@
     background-position: center;
 }
 
+.Dimencion_Header
+{
+    height: 50px;
+    transition: all 0.8s ease;
+}
+
+    .Dimencion_Header:hover
+    {
+        height: 110px;
+        transition: all 0.8s ease;
+    }
+
 /* --------------------------------------------------------------------------- */
 /* ------------------------- BAR MENU MASTER PAGE ---------------------------- */
 /* --------------------------------------------------------------------------- */
@@ -51,14 +62,15 @@
 /* -------         fondo            ------*/
 .Bar
 {
-    /*background: url(../images/menu3.jpg) no-repeat;
-       background-position: center;*/
     background: -webkit-linear-gradient(#b70d0d, #631111); /*For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#b70d0d, #631111); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#b70d0d, #631111); /* For Firefox 3.6 to 15 */
     background: linear-gradient(#b70d0d, #631111); /* Standard syntax (must be last)*/
     border-radius: 3px;
     border: solid 1px #b3b3b3;
+    position: absolute;
+    width: 98.9%;
+    z-index: 50;
 }
 
 
@@ -69,7 +81,7 @@
 /* -------         fondo            ------*/
 .main
 {
-    /*background: url(../images/fondo11.jpg) no-repeat center center fixed; */
+    margin-top: 48px;
 }
 
 /* -------         dimencion panel 1            ------*/
@@ -95,7 +107,7 @@
 /* -------         dimencion panel            ------*/
 #container_menu
 {
-    height: 66%;
+    height: 79%;
     background: -webkit-linear-gradient(#f6f6f6, #e8e8e8); /*For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#f6f6f6, #e8e8e8); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#f6f6f6, #e8e8e8); /* For Firefox 3.6 to 15 */
@@ -107,6 +119,7 @@
     position: absolute;
     float: left;
     z-index: 40;
+    margin-top: 4px;
 }
 
 #Bar_TMenu
@@ -118,13 +131,14 @@
     border: solid 1px #ccc;
     float: left;
     width: 20px;
-    height: 61%;
+    height: 74%;
     padding-right: 10px;
     color: #FFFFFF;
     text-align: right;
     padding-top: 40px;
     position: absolute;
     z-index: 50;
+    margin-top: 4px;
 }
 
 /* --------------------------------------------------------------------------- */
@@ -134,10 +148,6 @@
 /* -------         fondo            ------*/
 #Footer
 {
-    /*background-image: url(../images/cabeza2.jpg);
-    background-repeat: no-repeat;
-    background-position: center; 
-    background-size: cover;*/
     background: -webkit-linear-gradient(#b70d0d, #631111); /*For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#b70d0d, #631111); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#b70d0d, #631111); /* For Firefox 3.6 to 15 */

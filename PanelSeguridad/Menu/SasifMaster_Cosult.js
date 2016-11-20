@@ -20,7 +20,8 @@ function transacionAjax_Titulo(State, TypeMaster) {
         url: "/procesos_generales/SasifMasterAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "ID": TypeMaster
         },
         //Transaccion Ajax en proceso
@@ -34,8 +35,10 @@ function transacionAjax_Titulo(State, TypeMaster) {
                 $("#Parraf_2").html(ArraySasif[0].parrafo_2);
                 $("#Parraf_3").html(ArraySasif[0].parrafo_3);
                 $("#tituloPrincipal").html(ArraySasif[0].Titulo);
+                $("#tituloPrincipal_2").html(ArraySasif[0].Titulo);
                 $("#logo_1").attr("src", ArraySasif[0].LogoSasif);
                 $("#logo_2").attr("src", ArraySasif[0].LogoEmpresa);
+                $("#logo_2_W").attr("src", ArraySasif[0].LogoEmpresa);
             }
         },
         error: function () {
@@ -51,7 +54,8 @@ function transacionAjax_Men(State) {
         url: "/procesos_generales/SasifMasterAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State
+        data: {
+            "action": State
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -75,7 +79,8 @@ function transacionAjax_Ayu(State) {
         url: "/procesos_generales/SasifMasterAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State
+        data: {
+            "action": State
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -90,4 +95,4 @@ function transacionAjax_Ayu(State) {
         error: function () {
         }
     });
-}      
+}

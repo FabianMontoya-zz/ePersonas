@@ -100,15 +100,9 @@ li
     text-align: end;
 }
 
-.title
-{
-    padding-top: 15px;
-}
-
 #M_header
 {
     width: 100%;
-    height: 100px;
     background: -webkit-linear-gradient(#f6f6f6, #e8e8e8); /*For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#f6f6f6, #e8e8e8); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#f6f6f6, #e8e8e8); /* For Firefox 3.6 to 15 */
@@ -120,7 +114,7 @@ li
 #M_Bar
 {
     width: 100%;
-    height: 50px;
+    height: 53px;
 }
 
 #M_Container
@@ -131,4 +125,56 @@ li
 #M_Footer
 {
     width: 100%;
+}
+
+.Titulo_1
+{
+    font-size: 0px;
+    transition: all 0.8s ease;
+}
+
+.Titulo_2
+{
+    font-size: 25px;
+    transition: all 0.8s ease;
+}
+
+#Header:hover .Titulo_2
+{
+    font-size: 0px;
+    transition: all 0.8s ease;
+}
+
+#Header:hover .Titulo_1
+{
+    font-size: 25px;
+    transition: all 0.8s ease;
+}
+
+.Logo_1
+{
+    height: 0px; 
+    width: 0px;
+    transition: all 0.8s ease;
+}
+
+.Logo_2
+{
+    height: 35px;
+    width: 35px;
+    transition: all 0.8s ease;
+}
+
+#Header:hover .Logo_2
+{
+    height: 0px;
+    width: 0px;
+    transition: all 0.8s ease;
+}
+
+#Header:hover .Logo_1
+{
+    height: 85px; 
+    width: 70px;
+    transition: all 0.8s ease;
 }
