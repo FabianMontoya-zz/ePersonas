@@ -36,6 +36,7 @@
 #Region "campos Encabezado"
     Private _Titulo As String
     Private _LogoSasif As String
+    Private _LogoSasif_2 As String
     Private _LogoEmpresa As String
     Private _parrafo_1 As String
     Private _parrafo_2 As String
@@ -57,6 +58,14 @@
         End Get
         Set(ByVal value As String)
             Me._LogoSasif = value
+        End Set
+    End Property
+    Public Property LogoSasif_2() As String
+        Get
+            Return Me._LogoSasif_2
+        End Get
+        Set(ByVal value As String)
+            Me._LogoSasif_2 = value
         End Set
     End Property
     Public Property LogoEmpresa() As String

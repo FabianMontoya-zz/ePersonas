@@ -35,7 +35,7 @@ function transacionAjax_Titulo(State, TypeMaster) {
                 $("#tituloPrincipal_2").html(ArraySasif[0].Titulo);
                 $("#logo_1").attr("src", ArraySasif[0].LogoSasif);
                 $("#logo_2").attr("src", ArraySasif[0].LogoEmpresa);
-                $("#logo_2_W").attr("src", ArraySasif[0].LogoEmpresa);
+                $("#logo_2_W").attr("src", ArraySasif[0].LogoSasif_2);
             }
         },
         error: function () {
