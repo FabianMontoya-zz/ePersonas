@@ -476,6 +476,38 @@
     z-index: 50;
 }
 
+#DivA:hover .ImaAddress
+{
+    content: url("../../images/adress_book_w.png");
+}
+
+.ImaAddress
+{
+    content: url("../../images/adress_book.png");
+}
+
+/*CONTROL IMAGEN BANCO*/
+#DivB:hover .ImaBank
+{
+    content: url("../../images/bank_w.png");
+}
+
+.ImaBank
+{
+    content: url("../../images/bank.png");
+}
+
+/*CONTROL IMAGEN BANCO*/
+#DivD:hover .ImaDoc
+{
+    content: url("../../images/documentos_w.png");
+}
+
+.ImaDoc
+{
+    content: url("../../images/documentos.png");
+}
+
 #Foto_Persona
 {
     width: 100px;
