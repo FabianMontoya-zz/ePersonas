@@ -465,30 +465,6 @@ To modify move field declaration from designer file to code-behind file.
  funcion que carga el objeto DDL consulta
  </summary>
 	<remarks></remarks>
-</member><member name="F:PanelSeguridad.Sasif_Ing.head">
-	<summary>
-head control.
-</summary>
-	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member><member name="F:PanelSeguridad.Sasif_Ing.form1">
-	<summary>
-form1 control.
-</summary>
-	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member><member name="F:PanelSeguridad.Sasif_Ing.main">
-	<summary>
-main control.
-</summary>
-	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
 </member><member name="M:PanelSeguridad.C_AccesoPreAjax.Consulta_C_AccesoPre">
 	<summary>
  traemos todos los datos para tabla R_PuertaAcc_Area (READ)
@@ -3517,27 +3493,27 @@ To modify move field declaration from designer file to code-behind file.
 	<remarks></remarks>
 </member><member name="F:PanelSeguridad.Sasif_menu.head">
 	<summary>
-head control.
+Control head.
 </summary>
 	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
 </remarks>
 </member><member name="F:PanelSeguridad.Sasif_menu.form1">
 	<summary>
-form1 control.
+Control form1.
 </summary>
 	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
 </remarks>
 </member><member name="F:PanelSeguridad.Sasif_menu.main">
 	<summary>
-main control.
+Control main.
 </summary>
 	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
 </remarks>
 </member><member name="M:PanelSeguridad.CalendarioSQLClass.Read_AllCalendario(System.String,System.String,System.String)">
 	<summary>

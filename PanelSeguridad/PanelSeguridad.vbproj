@@ -340,6 +340,7 @@
     <Content Include="Images\relations.png" />
     <Content Include="Images\sasif1.gif" />
     <Content Include="Images\SASIF_NEW.png" />
+    <Content Include="Images\SASIF_NEW_WHITE.png" />
     <Content Include="Images\search.png" />
     <Content Include="Images\success.png" />
     <Content Include="Images\user.png" />
@@ -507,6 +508,7 @@
     <Content Include="Scripts\jquery.fileupload.js" />
     <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\Refresh.js" />
     <Content Include="Scripts\WebForms\DetailsView.js" />
     <Content Include="Scripts\WebForms\Focus.js" />
     <Content Include="Scripts\WebForms\GridView.js" />
