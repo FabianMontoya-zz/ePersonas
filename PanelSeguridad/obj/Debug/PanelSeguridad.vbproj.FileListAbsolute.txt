@@ -40,48 +40,6 @@ c:\users\rodriguez quintero\documents\visual studio 2012\Projects\PanelSeguridad
 c:\users\rodriguez quintero\documents\visual studio 2012\Projects\PanelSeguridad\PanelSeguridad\obj\Debug\PanelSeguridad.dll
 c:\users\rodriguez quintero\documents\visual studio 2012\Projects\PanelSeguridad\PanelSeguridad\obj\Debug\PanelSeguridad.xml
 c:\users\rodriguez quintero\documents\visual studio 2012\Projects\PanelSeguridad\PanelSeguridad\obj\Debug\PanelSeguridad.pdb
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\PanelSeguridad.dll
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\PanelSeguridad.pdb
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\PanelSeguridad.xml
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\Antlr3.Runtime.dll
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\AspNet.ScriptManager.jQuery.dll
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\AspNet.ScriptManager.jQuery.UI.Combined.dll
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\DotNetOpenAuth.AspNet.dll
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\DotNetOpenAuth.Core.dll
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\DotNetOpenAuth.OAuth.Consumer.dll
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\DotNetOpenAuth.OAuth.dll
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\DotNetOpenAuth.OpenId.dll
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\EntityFramework.dll
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\Microsoft.AspNet.FriendlyUrls.dll
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\Microsoft.AspNet.Membership.OpenAuth.dll
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\Microsoft.AspNet.Web.Optimization.WebForms.dll
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\Microsoft.ScriptManager.MSAjax.dll
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\Microsoft.ScriptManager.WebForms.dll
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\Microsoft.Web.Infrastructure.dll
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\System.Web.Optimization.dll
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\System.Web.Providers.dll
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\WebGrease.dll
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\EntityFramework.xml
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\DotNetOpenAuth.Core.xml
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\DotNetOpenAuth.OAuth.xml
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\DotNetOpenAuth.OAuth.Consumer.xml
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\DotNetOpenAuth.OpenId.xml
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\DotNetOpenAuth.AspNet.xml
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\Microsoft.AspNet.Membership.OpenAuth.xml
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\Microsoft.AspNet.FriendlyUrls.xml
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\es\EntityFramework.resources.dll
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\es\System.Web.Optimization.resources.dll
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\es\System.Web.Providers.resources.dll
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\es\Microsoft.AspNet.Membership.OpenAuth.resources.dll
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\es\Microsoft.AspNet.FriendlyUrls.resources.dll
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.vbprojResolveAssemblyReference.cache
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.Resources.resources
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.vbproj.GenerateResource.Cache
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.dll
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.xml
-D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.pdb
 E:\REPOSITORIOS GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\PanelSeguridad.dll
 E:\REPOSITORIOS GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\PanelSeguridad.pdb
 E:\REPOSITORIOS GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\PanelSeguridad.xml
@@ -124,3 +82,45 @@ E:\REPOSITORIOS GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.vb
 E:\REPOSITORIOS GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.dll
 E:\REPOSITORIOS GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.xml
 E:\REPOSITORIOS GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.pdb
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\PanelSeguridad.dll
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\PanelSeguridad.pdb
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\PanelSeguridad.xml
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\Antlr3.Runtime.dll
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\AspNet.ScriptManager.jQuery.dll
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\AspNet.ScriptManager.jQuery.UI.Combined.dll
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\DotNetOpenAuth.AspNet.dll
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\DotNetOpenAuth.Core.dll
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\DotNetOpenAuth.OAuth.Consumer.dll
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\DotNetOpenAuth.OAuth.dll
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\DotNetOpenAuth.OpenId.dll
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\EntityFramework.dll
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\Microsoft.AspNet.FriendlyUrls.dll
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\Microsoft.AspNet.Membership.OpenAuth.dll
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\Microsoft.AspNet.Web.Optimization.WebForms.dll
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\Microsoft.ScriptManager.MSAjax.dll
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\Microsoft.ScriptManager.WebForms.dll
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\Microsoft.Web.Infrastructure.dll
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\System.Web.Optimization.dll
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\System.Web.Providers.dll
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\WebGrease.dll
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\EntityFramework.xml
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\DotNetOpenAuth.Core.xml
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\DotNetOpenAuth.OAuth.xml
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\DotNetOpenAuth.OAuth.Consumer.xml
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\DotNetOpenAuth.OpenId.xml
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\DotNetOpenAuth.AspNet.xml
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\Microsoft.AspNet.Membership.OpenAuth.xml
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\Microsoft.AspNet.FriendlyUrls.xml
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\es\EntityFramework.resources.dll
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\es\System.Web.Optimization.resources.dll
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\es\System.Web.Providers.resources.dll
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\es\Microsoft.AspNet.Membership.OpenAuth.resources.dll
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\es\Microsoft.AspNet.FriendlyUrls.resources.dll
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.vbprojResolveAssemblyReference.cache
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.Resources.resources
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.vbproj.GenerateResource.Cache
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.dll
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.xml
+D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.pdb

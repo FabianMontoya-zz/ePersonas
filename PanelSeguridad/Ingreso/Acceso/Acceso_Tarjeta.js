@@ -175,24 +175,6 @@ function Tabla_AccesosPredeterminados() {
                 var A_FFV = FFV.split(":");
 
 
-                //1 PASO 1 VALIDAD ENTRADA
-                if ((parseInt(Hours_Live)) >= parseInt(A_FIV[0])) {// revisamos si la hora actual es mayor o igual a la hora capturada
-                    console.log("Ent hora Ok " + A_FIV[0]);
-                    if (parseInt(Hours_Live) == (parseInt(A_FIV[0]))) {// revisamos si la hora es igual a la hora actual
-                        if ((parseInt(A_FIV[1]) >= parseInt(Minutes_Live))) {// revisamos si los minutos son mayor a los minutos actuales
-                            console.log("Ent Minutos Ok " + A_FIV[1]);
-                        }
-                        else {
-                            console.log("Ent Minutos Fail " + A_FIV[1]);
-                        }
-                    }
-                }
-                else {
-                    console.log("Ent hora Fail " + A_FIV[0]);
-                }
-
-
-
 
                 if ((parseInt(A_FIV[0]) >= parseInt(Hours_Live)) || (parseInt(A_FFV[0]) <= parseInt(Hours_Live))) {
                     if ((parseInt(A_FIV[0]) == parseInt(Hours_Live)) || (parseInt(A_FFV[0]) == parseInt(Hours_Live))) {
@@ -235,6 +217,55 @@ function Tabla_AccesosPredeterminados() {
 
 }
 
+//valida el ingreso y salida
+function validaEntradaSalida(A_FIV, A_FFV) {
+    var EstadoEnt = "";
+    var EstadoSal = "";
+    var Estado = "";
+
+    //1 PASO 1 VALIDAD ENTRADA
+    if ((parseInt(Hours_Live)) >= parseInt(A_FIV[0])) {// revisamos si la hora actual es mayor o igual a la hora capturada
+        console.log("Ent hora Ok " + A_FIV[0]);
+        EstadoEnt = "VERDE";
+        if (parseInt(Hours_Live) == (parseInt(A_FIV[0]))) {// revisamos si la hora es igual a la hora actual
+            if ((parseInt(A_FIV[1]) >= parseInt(Minutes_Live))) {// revisamos si los minutos son mayor a los minutos actuales
+                console.log("Ent Minutos Ok " + A_FIV[1]);
+                EstadoEnt = "VERDE";
+            }
+            else {
+                console.log("Ent Minutos Fail " + A_FIV[1]);
+                EstadoEnt = "ROJO";
+            }
+        }
+    }
+    else {
+        console.log("Ent hora Fail " + A_FIV[0]);
+        EstadoEnt = "ROJO";
+    }
+
+    //2 PASO 1 VALIDA SALIDA
+    if ((parseInt(Hours_Live)) >= parseInt(A_FFV[0])) {// revisamos si la hora actual es menor o igual a la hora salida capturada
+        console.log("Sal hora Ok " + A_FFV[0]);
+        EstadoSal = "ROJO";
+
+        if (parseInt(A_FFV[0]) == (parseInt(Hours_Live))) {// revisamos si la hora es igual a la hora actual
+            console.log("Sal hora Igual" + A_FFV[0]);
+            if ((parseInt(A_FFV[1]) >= parseInt(Minutes_Live))) {// revisamos si los minutos son mayor a los minutos actuales
+                console.log("Sal Minutos Ok " + A_FFV[1]);
+            }
+            else {
+                console.log("Minutos Vigentes " + A_FFV[1]);
+            }
+        }
+    }
+    else {
+        console.log("hora Vigente " + A_FFV[0]);
+    }
+
+
+
+    return Estado;
+}
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                PROCESO DE CARGUE INGRESO                                                                                                                          ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
