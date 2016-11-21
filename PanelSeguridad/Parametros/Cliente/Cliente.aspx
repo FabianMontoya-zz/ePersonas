@@ -48,7 +48,7 @@
         <div id="Marco_trabajo_Form">
             <div id="Admin_Anexos">
                 <span id="T_option" class="T_options Label_Bold">Información Persona</span><a href="javascript:Complemento();">
-                    <img alt="error" title="" style="height: 32px; width: 32px; position: absolute; padding-left: 10px; padding-top: 15px; z-index: 30;"
+                    <img alt="logo" title="" style="height: 32px; width: 32px; position: absolute; padding-left: 10px; padding-top: 15px; z-index: 30;"
                         id="Imglogo" src="../../images/logo.png" />
                 </a>
                 <div id="Container_Complementos">

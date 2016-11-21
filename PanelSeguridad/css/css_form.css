@@ -444,7 +444,6 @@
     color: gray;
 }
 
-
     .Option_Cliente:hover
     {
         background: -webkit-linear-gradient(#b70d0d, #631111);
@@ -476,6 +475,7 @@
     z-index: 50;
 }
 
+/*CONTROL IMAGEN DIRECCION*/
 #DivA:hover .ImaAddress
 {
     content: url("../../images/adress_book_w.png");
