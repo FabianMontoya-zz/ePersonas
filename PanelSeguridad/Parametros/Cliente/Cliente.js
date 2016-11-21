@@ -102,9 +102,7 @@ $(document).ready(function () {
 
     $("#Anexos").css("display", "none");
     $("#TR_Nit").css("display", "none");
-    $("#Admin_Anexos").css("display", "none");
-
-
+  
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
         autoOpen: false,
