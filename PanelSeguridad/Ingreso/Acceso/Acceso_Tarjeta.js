@@ -174,9 +174,18 @@ function Tabla_AccesosPredeterminados() {
                 var A_FIV = FIV.split(":");
                 var A_FFV = FFV.split(":");
 
+                Flag_Ingreso = validaEntradaSalida(A_FIV, A_FFV);
 
+                switch (Flag_Ingreso) {
+                    case "VERDE":
+                        html_AP += "<tr id= 'TAP_" + Matrix_AccesoPredeterminados[item].Nit_ID + "'><td><input type='radio' name='Asig' id='Check_" + Matrix_AccesoPredeterminados[item].Index + "' value='TR" + Matrix_AccesoPredeterminados[item].Index + "'  onclick=\"Mostrar_AccesoPredeterminado('" + Matrix_AccesoPredeterminados[item].Index + "')\" /></td><td><img alt='No' title='' style='height: 21px; width: 21px;' src='../../images/C_GREEN.png' /></td><td>" + Matrix_AccesoPredeterminados[item].PuertaAcceso_ID + " - " + Matrix_AccesoPredeterminados[item].DescripPuertaAcceso + "</td><td>" + Matrix_AccesoPredeterminados[item].Area_ID + " - " + Matrix_AccesoPredeterminados[item].DescripAreaAcceso + "</td><td>" + Matrix_AccesoPredeterminados[item].Document_ID_Per_Encargada + " - " + Matrix_AccesoPredeterminados[item].DescripPersona_Enc + "</td><td>" + Matrix_AccesoPredeterminados[item].FechaInicio_Vigencia + "</td><td>" + Matrix_AccesoPredeterminados[item].FechaFin_Vigencia + "</td><td>" + Matrix_AccesoPredeterminados[item].HoraInicio + "</td><td>" + Matrix_AccesoPredeterminados[item].HoraFin + "</td><td>" + Matrix_AccesoPredeterminados[item].DescripTipoIngreso + "</td></tr>";
+                        break;
+                    case "ROJO":
+                        html_AP += "<tr id= 'TAP_" + Matrix_AccesoPredeterminados[item].Nit_ID + "'><td><input type='radio' name='Asig' id='Check_" + Matrix_AccesoPredeterminados[item].Index + "' value='TR" + Matrix_AccesoPredeterminados[item].Index + "'  onclick=\"Mostrar_AccesoPredeterminado('" + Matrix_AccesoPredeterminados[item].Index + "')\" /></td><td><img alt='No' title='' style='height: 21px; width: 21px;' src='../../images/C_RED.png' /></td><td>" + Matrix_AccesoPredeterminados[item].PuertaAcceso_ID + " - " + Matrix_AccesoPredeterminados[item].DescripPuertaAcceso + "</td><td>" + Matrix_AccesoPredeterminados[item].Area_ID + " - " + Matrix_AccesoPredeterminados[item].DescripAreaAcceso + "</td><td>" + Matrix_AccesoPredeterminados[item].Document_ID_Per_Encargada + " - " + Matrix_AccesoPredeterminados[item].DescripPersona_Enc + "</td><td>" + Matrix_AccesoPredeterminados[item].FechaInicio_Vigencia + "</td><td>" + Matrix_AccesoPredeterminados[item].FechaFin_Vigencia + "</td><td>" + Matrix_AccesoPredeterminados[item].HoraInicio + "</td><td>" + Matrix_AccesoPredeterminados[item].HoraFin + "</td><td>" + Matrix_AccesoPredeterminados[item].DescripTipoIngreso + "</td></tr>";
+                        break;
+                }
 
-                if ((parseInt(A_FIV[0]) >= parseInt(Hours_Live)) || (parseInt(A_FFV[0]) <= parseInt(Hours_Live))) {
+                /*if ((parseInt(A_FIV[0]) >= parseInt(Hours_Live)) || (parseInt(A_FFV[0]) <= parseInt(Hours_Live))) {
                     if ((parseInt(A_FIV[0]) == parseInt(Hours_Live)) || (parseInt(A_FFV[0]) == parseInt(Hours_Live))) {
                         if ((parseInt(A_FIV[1]) >= parseInt(Minutes_Live))) {
                             html_AP += "<tr id= 'TAP_" + Matrix_AccesoPredeterminados[item].Nit_ID + "'><td><input type='radio' name='Asig' id='Check_" + Matrix_AccesoPredeterminados[item].Index + "' value='TR" + Matrix_AccesoPredeterminados[item].Index + "'  onclick=\"Mostrar_AccesoPredeterminado('" + Matrix_AccesoPredeterminados[item].Index + "')\" /></td><td><img alt='No' title='' style='height: 21px; width: 21px;' src='../../images/C_RED.png' /></td><td>" + Matrix_AccesoPredeterminados[item].PuertaAcceso_ID + " - " + Matrix_AccesoPredeterminados[item].DescripPuertaAcceso + "</td><td>" + Matrix_AccesoPredeterminados[item].Area_ID + " - " + Matrix_AccesoPredeterminados[item].DescripAreaAcceso + "</td><td>" + Matrix_AccesoPredeterminados[item].Document_ID_Per_Encargada + " - " + Matrix_AccesoPredeterminados[item].DescripPersona_Enc + "</td><td>" + Matrix_AccesoPredeterminados[item].FechaInicio_Vigencia + "</td><td>" + Matrix_AccesoPredeterminados[item].FechaFin_Vigencia + "</td><td>" + Matrix_AccesoPredeterminados[item].HoraInicio + "</td><td>" + Matrix_AccesoPredeterminados[item].HoraFin + "</td><td>" + Matrix_AccesoPredeterminados[item].DescripTipoIngreso + "</td></tr>";
@@ -201,7 +210,7 @@ function Tabla_AccesosPredeterminados() {
                 else {
                     html_AP += "<tr id= 'TAP_" + Matrix_AccesoPredeterminados[item].Nit_ID + "'><td><input type='radio' name='Asig' id='Check_" + Matrix_AccesoPredeterminados[item].Index + "' value='TR" + Matrix_AccesoPredeterminados[item].Index + "' onclick=\"Mostrar_AccesoPredeterminado('" + Matrix_AccesoPredeterminados[item].Index + "')\"/></td><td><img alt='No' title='' style='height: 21px; width: 21px;' src='../../images/C_GREEN.png' /></td><td>" + Matrix_AccesoPredeterminados[item].PuertaAcceso_ID + " - " + Matrix_AccesoPredeterminados[item].DescripPuertaAcceso + "</td><td>" + Matrix_AccesoPredeterminados[item].Area_ID + " - " + Matrix_AccesoPredeterminados[item].DescripAreaAcceso + "</td><td>" + Matrix_AccesoPredeterminados[item].Document_ID_Per_Encargada + " - " + Matrix_AccesoPredeterminados[item].DescripPersona_Enc + "</td><td>" + Matrix_AccesoPredeterminados[item].FechaInicio_Vigencia + "</td><td>" + Matrix_AccesoPredeterminados[item].FechaFin_Vigencia + "</td><td>" + Matrix_AccesoPredeterminados[item].HoraInicio + "</td><td>" + Matrix_AccesoPredeterminados[item].HoraFin + "</td><td>" + Matrix_AccesoPredeterminados[item].DescripTipoIngreso + "</td></tr>";
                     Flag_ingreso = "VERDE";
-                }
+                }*/
             }
         }
     }
@@ -247,22 +256,33 @@ function validaEntradaSalida(A_FIV, A_FFV) {
     if ((parseInt(Hours_Live)) >= parseInt(A_FFV[0])) {// revisamos si la hora actual es menor o igual a la hora salida capturada
         console.log("Sal hora Ok " + A_FFV[0]);
         EstadoSal = "ROJO";
-
         if (parseInt(A_FFV[0]) == (parseInt(Hours_Live))) {// revisamos si la hora es igual a la hora actual
             console.log("Sal hora Igual" + A_FFV[0]);
+            EstadoSal = "VERDE";
             if ((parseInt(A_FFV[1]) >= parseInt(Minutes_Live))) {// revisamos si los minutos son mayor a los minutos actuales
                 console.log("Sal Minutos Ok " + A_FFV[1]);
+                EstadoSal = "ROJO";
             }
             else {
                 console.log("Minutos Vigentes " + A_FFV[1]);
+                EstadoSal = "VERDE";
             }
         }
     }
     else {
         console.log("hora Vigente " + A_FFV[0]);
+        EstadoSal = "VERDE";
     }
 
+    if (EstadoEnt == "VERDE" && EstadoSal == "VERDE")
+        Estado = "VERDE"
+    else
+        Estado = "ROJO"
 
+    if (EstadoEnt == "ROJO" && EstadoSal == "VERDE")
+        Estado = "VERDE"
+    else
+        Estado = "ROJO"
 
     return Estado;
 }
