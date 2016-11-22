@@ -3482,6 +3482,12 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
  </summary>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.InvPuertaSQLClass.Read_All_Tarjetas">
+	<summary>
+ creala consulta para la tabla InvPuerta parametrizada (READ)
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.InvPuertaSQLClass.InsertInvPuerta(PanelSeguridad.InvPuertaClass)">
 	<summary>
  funcion que crea el query para la insercion de nuevo InvPuerta (INSERT)

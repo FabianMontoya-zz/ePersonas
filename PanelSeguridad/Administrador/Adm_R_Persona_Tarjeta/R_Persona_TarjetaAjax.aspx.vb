@@ -35,12 +35,24 @@ Public Class R_Persona_TarjetaAjax
                 Case "UpdateBloqueo"
                     UpdateInvTarjeta_Bloqueo()
 
+                Case "Read_Tarjeta"
+                    ReadTarjeta()
+
             End Select
 
         End If
     End Sub
 
 #Region "CRUD"
+    Function ReadTarjeta()
+
+        Dim ObjList_Tarjeta As New List(Of InvPuertaClass)
+        Dim SQL As New InvPuertaSQLClass
+
+        ObjList_Tarjeta = SQL.Read_All_Tarjetas()
+        Response.Write(JsonConvert.SerializeObject(ObjList_Tarjeta.ToArray()))
+
+    End Function
 
     ''' <summary>
     ''' funcion que inserta en la tabla R_Persona_Tarjeta (INSERT)

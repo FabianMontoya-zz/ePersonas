@@ -11,9 +11,5 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Sasif
-
-    'Protected WithEvents head As Global.System.Web.UI.WebControls.ContentPlaceHolder
-    'Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
-    'Protected WithEvents main As Global.System.Web.UI.WebControls.ContentPlaceHolder
+Partial Public Class ConsultaTarjeta
 End Class

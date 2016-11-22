@@ -105,8 +105,8 @@
 #TablaDatos_D, #TablaDatos_D_Vista
 {
     width: 96%;
-    height: 140px;
-    padding: 60px 30px;
+    height: 100%;
+    padding: 2%;
     border-radius: 10px;
     background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
@@ -223,6 +223,14 @@
     height: 238px;
     overflow: auto;
     border: solid 1px #CACACA;
+    font: 12px/20px CenturyGothic,sans-serif;
+    text-align: center;
+}
+
+#Container_Consulta
+{
+    width: 100%;
+    overflow: auto;
     font: 12px/20px CenturyGothic,sans-serif;
     text-align: center;
 }

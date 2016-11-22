@@ -32,10 +32,16 @@
     Private _FechaActualizacion As String
 
     Private _DescripEmpresa As String
+
     Private _DescripEmpresaCustodia As String
     Private _DescripEmpresaAsigna As String
     Private _DescripEmpresaEntrega As String
 
+    Private _DescripEstado As String
+    Private _DescripBloqueo As String
+    Private _DescripPersonaCustodia As String
+    Private _DescripPersonaAsigna As String
+    Private _DescripPersonaEntrega As String
 #End Region
 
 #Region "proiedades"
@@ -275,6 +281,47 @@
         End Get
         Set(ByVal value As String)
             Me._DescripEmpresaEntrega = value
+        End Set
+    End Property
+
+    Public Property DescripEstado() As String
+        Get
+            Return Me._DescripEstado
+        End Get
+        Set(ByVal value As String)
+            Me._DescripEstado = value
+        End Set
+    End Property
+    Public Property DescripBloqueo() As String
+        Get
+            Return Me._DescripBloqueo
+        End Get
+        Set(ByVal value As String)
+            Me._DescripBloqueo = value
+        End Set
+    End Property
+    Public Property DescripPersonaCustodia() As String
+        Get
+            Return Me._DescripPersonaCustodia
+        End Get
+        Set(ByVal value As String)
+            Me._DescripPersonaCustodia = value
+        End Set
+    End Property
+    Public Property DescripPersonaAsigna() As String
+        Get
+            Return Me._DescripPersonaAsigna
+        End Get
+        Set(ByVal value As String)
+            Me._DescripPersonaAsigna = value
+        End Set
+    End Property
+    Public Property DescripPersonaEntrega() As String
+        Get
+            Return Me._DescripPersonaEntrega
+        End Get
+        Set(ByVal value As String)
+            Me._DescripPersonaEntrega = value
         End Set
     End Property
 #End Region

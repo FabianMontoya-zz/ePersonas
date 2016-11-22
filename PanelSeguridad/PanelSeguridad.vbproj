@@ -186,6 +186,9 @@
     <Content Include="Administrador\Adm_R_Persona_Tarjeta\BloqueoTarjeta.aspx" />
     <Content Include="Administrador\Adm_R_Persona_Tarjeta\BloqueoTarjeta.js" />
     <Content Include="Administrador\Adm_R_Persona_Tarjeta\BloqueoTarjetaTrasaccionsAjax.js" />
+    <Content Include="Administrador\Adm_R_Persona_Tarjeta\ConsultaTarjeta.aspx" />
+    <Content Include="Administrador\Adm_R_Persona_Tarjeta\ConsultaTarjeta.js" />
+    <Content Include="Administrador\Adm_R_Persona_Tarjeta\ConsultaTarjetaTrasaccionsAjax.js" />
     <Content Include="Administrador\Adm_R_Persona_Tarjeta\EntregaTarjeta.aspx" />
     <Content Include="Administrador\Adm_R_Persona_Tarjeta\EntregaTarjeta.js" />
     <Content Include="Administrador\Adm_R_Persona_Tarjeta\EntregaTarjetaTrasaccionsAjax.js" />
@@ -680,6 +683,13 @@
     </Compile>
     <Compile Include="Administrador\Adm_R_Persona_Tarjeta\BloqueoTarjeta.aspx.vb">
       <DependentUpon>BloqueoTarjeta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Adm_R_Persona_Tarjeta\ConsultaTarjeta.aspx.designer.vb">
+      <DependentUpon>ConsultaTarjeta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Adm_R_Persona_Tarjeta\ConsultaTarjeta.aspx.vb">
+      <DependentUpon>ConsultaTarjeta.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Administrador\Adm_R_Persona_Tarjeta\EntregaTarjeta.aspx.designer.vb">
