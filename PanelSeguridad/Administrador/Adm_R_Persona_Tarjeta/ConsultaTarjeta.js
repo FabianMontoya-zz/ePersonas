@@ -9,6 +9,8 @@ var editDocID;
 
 //Evento load JS
 $(document).ready(function () {
+
+    $("#TablaDatos_D").css("padding-bottom", "35%");
     transacionAjax_EmpresaNit('Cliente');
     Change_Select_Nit();
 

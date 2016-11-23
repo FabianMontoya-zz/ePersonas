@@ -421,7 +421,12 @@ Public Class InvPuertaSQLClass
                     If Not (IsDBNull(ReadConsulta.GetValue(5))) Then objInvPuerta.Document_ID_Entrega = ReadConsulta.GetValue(5) Else objInvPuerta.Document_ID_Entrega = 0
                     If Not (IsDBNull(ReadConsulta.GetValue(6))) Then objInvPuerta.Nit_ID_Asigna = ReadConsulta.GetValue(6) Else objInvPuerta.Nit_ID_Asigna = 0
 
-                    objInvPuerta.Estado = ReadConsulta.GetValue(7)
+                    If Not (IsDBNull(ReadConsulta.GetValue(7))) Then objInvPuerta.Estado = ReadConsulta.GetValue(7) Else objInvPuerta.Estado = 0
+                    If Not (IsDBNull(ReadConsulta.GetValue(8))) Then objInvPuerta.MotivoBloqueo = ReadConsulta.GetValue(8) Else objInvPuerta.MotivoBloqueo = 0
+                    If Not (IsDBNull(ReadConsulta.GetValue(9))) Then objInvPuerta.Observaciones = ReadConsulta.GetValue(9) Else objInvPuerta.Observaciones = 0
+                    If Not (IsDBNull(ReadConsulta.GetValue(10))) Then objInvPuerta.DescripBloqueo = ReadConsulta.GetValue(10) Else objInvPuerta.DescripBloqueo = 0
+                    If Not (IsDBNull(ReadConsulta.GetValue(11))) Then objInvPuerta.DescripPersonaEntrega = ReadConsulta.GetValue(11) Else objInvPuerta.DescripPersonaEntrega = 0
+
                     'agregamos a la lista
                     ObjListInvPuerta.Add(objInvPuerta)
 
@@ -498,7 +503,21 @@ Public Class InvPuertaSQLClass
 
         Dim sql As New StringBuilder
 
-        sql.AppendLine(" SELECT IT_Tarjeta_ID ,  IT_Nit_ID_Custodia,  IT_TypeDocument_Asigna, IT_Document_ID_Asigna, IT_TypeDocument_Entrega, IT_Document_ID_Entrega,  IT_Nit_ID_Asigna, IT_Estado   FROM INVENTARIO_TARJETAS ")
+        sql.Append(" SELECT  IT_Tarjeta_ID, " & _
+                                  "           IT_Nit_ID_Custodia, " & _
+                                  "           IT_TypeDocument_Asigna, " & _
+                                  "           IT_Document_ID_Asigna, " & _
+                                  "           IT_TypeDocument_Entrega, " & _
+                                  "           IT_Document_ID_Entrega, " & _
+                                  "           IT_Nit_ID_Asigna, " & _
+                                  "           IT_Estado, " & _
+                                  "           IT_MotivoBloqueo, " & _
+                                  "           IT_Observaciones, " & _
+                                  "           BT.DDLL_Descripcion, " & _
+                                  "           PE.CLI_Nombre + ' ' + PE.CLI_Nombre_2 + ' ' + PE.CLI_Apellido_1 + ' ' + PE.CLI_Apellido_2 AS P_Entrega " & _
+                                  "  FROM INVENTARIO_TARJETAS IT " & _
+                                  "  LEFT JOIN TC_DDL_TIPO BT ON BT.DDL_ID =IT.IT_MotivoBloqueo AND BT.DDL_Tabla = 'BLOQUEO' " & _
+                                  " LEFT JOIN PARAMETRIZACION_D.dbo.CLIENTE PE ON PE.CLI_Nit_ID = IT.IT_Nit_ID_Entrega AND PE.CLI_TypeDocument_ID =IT.IT_TypeDocument_Entrega AND PE.CLI_Document_ID = IT.IT_Document_ID_Entrega ")
         StrQuery = sql.ToString
 
         ObjListCrud_Doc = listInvPuerta(StrQuery, Conexion, "Matrix_Asigna")

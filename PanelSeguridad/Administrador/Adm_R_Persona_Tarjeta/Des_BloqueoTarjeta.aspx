@@ -52,34 +52,25 @@
                 </table>
                 <table id="Tabla_2" style="width: 100%; text-align: left;">
                     <tr>
-                        <td style="width: 5%;" class="Label_Bold">Persona
+                        <td style="width: 5%;" class="Label_Bold">Tarjeta
                         </td>
                         <td>
-                            <select id="Select_Persona" class="C_Chosen">
+                            <select id="Select_Tarjeta_DBlo" class="C_Chosen">
                             </select>
                         </td>
-                        <td style="padding-bottom: 25px; width: 30%;">
-                            <span class="cssToolTip">
-                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img2"
-                                    src="../../images/error.png" />
-                                <span class="SpamEG"></span></span>
-                        </td>
-                    </tr>
-                </table>
-                <table id="Tabla_3" style="width: 700px; text-align: left;">
-                    <tr>
-                        <td style="width: 150px;" class="Label_Bold">Tarjeta
-                        </td>
-                        <td>
-                            <select id="Select_Tarjeta_Blo" class="C_Chosen">
-                            </select>
-                        </td>
-                        <td style="padding-bottom: 25px; width: 300px;">
+                        <td style="padding-bottom: 25px; width: 70%;">
                             <span class="cssToolTip_L">
                                 <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img5"
                                     src="../../images/error.png" />
                                 <span class="SpamEG"></span></span>
                         </td>
+                    </tr>
+                </table>
+                <table id="Tabla_3" style="width: 100%; text-align: left;">
+                    <tr>
+                        <td style="width: 5%;" class="Label_Bold">Persona
+                        </td>
+                        <td id="V_Persona"></td>
                     </tr>
                 </table>
                 <div id="DIV_Des_Bloqueo">

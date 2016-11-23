@@ -607,6 +607,14 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
             }
             break;
 
+        case "Select_Tarjeta_DBlo":
+            for (Item in Matrix) {
+                if ((Matrix[Item].Nit_ID_Asigna == Nit) && (Matrix[Item].Estado == 3 || Matrix[Item].Estado == 4)) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Tarjeta_ID + "'>" + Matrix[Item].Tarjeta_ID + "</option>");
+                }
+            }
+            break;
+         
         case "Select_Documento_1":
             for (Item in Matrix) {
                 if ((Matrix[Item].Nit_ID == Nit) && (Matrix[Item].RequiereVerificacion == "S")) {

@@ -4,7 +4,6 @@ var Matrix_Persona = [];
 var Matrix_RTP = [];
 var ArrayDes_Bloqueo = [];
 
-
 var ArrayR_Persona_Tarjeta = [];
 var ArrayR_Persona_TarjetaDep = [];
 
@@ -16,6 +15,9 @@ var editDocID;
 
 //Evento load JS
 $(document).ready(function () {
+
+    $("#TablaDatos_D").css("padding-bottom", "25%");
+
     transaccionAjax_MPersona('MATRIX_PERSONA');
     transaccionAjax_MTarjeta('MATRIX_TARJETA');
     transaccionAjax_MRTP('MATRIX_RTP');
@@ -55,8 +57,7 @@ $(document).ready(function () {
 function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {
         var index_ID = $(this).val();
-        Charge_Combos_Depend_Nit(Matrix_Persona, "Select_Persona", index_ID, "");
-        Charge_Combos_Depend_Nit(Matrix_Tarjeta, "Select_Tarjeta_Blo", index_ID, "");
+         Charge_Combos_Depend_Nit(Matrix_Tarjeta, "Select_Tarjeta_DBlo", index_ID, "");
         $("#Img5").css("display", "none");
         $("#DIV_Des_Bloqueo").css("display", "none");
     });
