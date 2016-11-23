@@ -2,7 +2,7 @@
 /*fuente para todos los campos*/
 h1, h2, h3, h4, table, tr, td
 {
-    font-family: Verdana, Geneva, sans-serif;
+    font-family: CenturyGothic, CenturyGothic, sans-serif;
 }
 
 /*----------------------- TITULO ---------------------------*/
@@ -33,11 +33,12 @@ h1, h2, h3, h4, table, tr, td
 {
     width: 100%;
     padding: 20px 26px;
-    background-color: silver;
-    border-radius: 0 0 20px 20px;
-    border-color: gray;
-    border-width: 5px;
-    border-style: outset;
+    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+    border: outset 3px #921919;
+    border-radius: 10px;
 }
 /*perzonalizacion de labels*/
 #LblPassword, #Lbluser, #lblConfirmPassword, #LblShow
@@ -66,12 +67,13 @@ h1, h2, h3, h4, table, tr, td
 #TablaContraseña
 {
     width: 100%;
-    background-color: silver;
     padding: 20px 26px;
-    border-radius: 0 0 20px 20px;
-    border-color: gray;
-    border-width: 5px;
-    border-style: outset;
+    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+    border: outset 3px #921919;
+    border-radius: 10px;
 }
 
 #marco_CC
@@ -88,10 +90,10 @@ h1, h2, h3, h4, table, tr, td
     padding-left: 35%;
     padding-right: 35%;
 }
+
 #txtConfirmPassword
 {
     width: 80%;
     -webkit-appearance: none;
     border: none;
 }
-

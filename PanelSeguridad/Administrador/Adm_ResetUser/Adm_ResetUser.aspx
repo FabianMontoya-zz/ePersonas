@@ -10,19 +10,18 @@
     <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
     <link href="../../css/custom/charge.css" rel="stylesheet" type="text/css" />
-    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
     <link href="../../css/Chosen/chosen.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/jquery.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Chosen/chosen.jquery.js" type="text/javascript"></script>
     <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
+    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
     <div id="Container_title_Form">
         <table id="Tabla_Title_form">
             <tr>
-                <td id="Title_form">
-                </td>
+                <td id="Title_form"></td>
                 <td id="image_exit">
                     <span class="cssToolTip_Form_L">
                         <input id="BtnExit" type="button" value="X" onclick="btnSalir();" /><span class="Spam_AEXIT_MOD"></span></span>
@@ -33,8 +32,7 @@
     <div id="marco_RC">
         <table id="TablaContraseña">
             <tr>
-                <td class="Label_Bold">
-                    Digite Usuario
+                <td class="Label_Bold">Digite Usuario
                 </td>
             </tr>
             <tr>
@@ -51,8 +49,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="Label_Bold">
-                    Estado
+                <td class="Label_Bold">Estado
                 </td>
             </tr>
             <tr>
@@ -71,8 +68,7 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="4" align="center">
-                    &nbsp;
+                <td colspan="4" align="center">&nbsp;
                 </td>
             </tr>
             <tr>

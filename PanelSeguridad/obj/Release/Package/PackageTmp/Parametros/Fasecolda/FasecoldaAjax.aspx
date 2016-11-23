@@ -1,0 +1,1 @@
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="FasecoldaAjax.aspx.vb" Inherits="PanelSeguridad.FasecoldaAjax" %>

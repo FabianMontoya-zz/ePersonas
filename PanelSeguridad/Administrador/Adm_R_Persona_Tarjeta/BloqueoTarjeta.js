@@ -14,7 +14,7 @@ var editID;
 var editDocID;
 /*--------------- region de variables globales --------------------*/
 
-//evento load de los Links
+//Evento load JS
 $(document).ready(function () {
     transaccionAjax_MPersona('MATRIX_PERSONA');
     transaccionAjax_MTarjeta('MATRIX_TARJETA');
@@ -76,12 +76,32 @@ function Change_Select_Persona() {
             if (Matrix_RTP[item].Document_ID == index_ID) {
                 $("#Select_Tarjeta_Blo").val(Matrix_RTP[item].Tarjeta_ID);
                 Container_Tarjeta = "S";
+               
                 break;
             }
         }
         ValidarAsignacion(Container_Tarjeta);
     });
 }
+
+//valida los cambios del combo de Persona y carga
+function Change_Select_Tarjeta() {
+    $("#Select_Tarjeta_Blo").change(function () {
+        Container_Tarjeta = "S";
+
+        var index_ID = $(this).val();
+        for (item in Matrix_RTP) {
+            if (Matrix_RTP[item].Tarjeta_ID == index_ID) {
+                $("#Select_Persona").val(Matrix_RTP[item].Document_ID);
+                $('.C_Chosen').trigger('chosen:updated');
+                break;
+            }
+        }
+        ValidarAsignacion(Container_Tarjeta);
+    });
+}
+
+
 
 //valida si tiene tarjeta asignada
 function ValidarAsignacion(Container_Tarjeta) {
@@ -147,19 +167,6 @@ function ValidarBloqueoTarjeta() {
 }
 
 
-//valida los cambios del combo de Persona y carga
-function Change_Select_Tarjeta() {
-    $("#Select_Tarjeta_Blo").change(function () {
-        var index_ID = $(this).val();
-        for (item in Matrix_RTP) {
-            if (Matrix_RTP[item].Tarjeta_ID == index_ID) {
-                $("#Select_Persona").val(Matrix_RTP[item].Document_ID);
-                $('.C_Chosen').trigger('chosen:updated');
-                break;
-            }
-        }
-    });
-}
 
 //salida del formulario
 function btnSalir() {

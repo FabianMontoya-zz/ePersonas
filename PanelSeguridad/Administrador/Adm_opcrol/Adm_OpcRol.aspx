@@ -11,20 +11,19 @@
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
     <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />
     <link href="../../css/custom/charge.css" rel="stylesheet" type="text/css" />
-    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
     <link href="../../css/Chosen/chosen.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/jquery.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Chosen/chosen.jquery.js" type="text/javascript"></script>
     <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
+    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
     <div id="Container_title_Form">
         <table id="Tabla_Title_form">
             <tr>
-                <td id="Title_form">
-                </td>
+                <td id="Title_form"></td>
                 <td id="image_exit">
                     <span class="cssToolTip_Form_L">
                         <input id="BtnExit" type="button" value="X" onclick="btnSalir();" /><span class="Spam_AEXIT_MOD"></span></span>
@@ -32,7 +31,7 @@
             </tr>
         </table>
     </div>
-    <div id="Marco_link">
+    <div id="Marco_Container">
         <div id="Marco_btn_Form">
             <input id="BtnShearh" type="button" value="Consulta" onclick="HabilitarPanel('buscar');" />
             <input id="BtnCreate" type="button" value="Crear" onclick="HabilitarPanel('crear');" />
@@ -43,7 +42,7 @@
                 <table id="TablaConsulta">
                     <tr>
                         <td>
-                            <select id="DDLColumns">
+                            <select id="DDLColumns" class="C_Chosen">
                             </select>
                         </td>
                         <td>
@@ -56,8 +55,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="4">
-                            &nbsp;
+                        <td colspan="4">&nbsp;
                         </td>
                     </tr>
                     <tr>
@@ -70,8 +68,7 @@
                 <div id="TablaDatos_D">
                     <table id="Tabla_1" style="width: 700px; margin-left: 100px;">
                         <tr>
-                            <td class="Label_Bold" style="width: 150px;">
-                                Padre
+                            <td class="Label_Bold" style="width: 150px;">Padre
                             </td>
                             <td>
                                 <select id="DDL_ID" class="C_Chosen">
@@ -87,8 +84,7 @@
                     </table>
                     <table id="Tabla_2" style="width: 700px; margin-left: 100px;">
                         <tr>
-                            <td class="Label_Bold" style="width: 150px;">
-                                Consecutivo
+                            <td class="Label_Bold" style="width: 150px;">Consecutivo
                             </td>
                             <td id="TD_Tconsecutivo" style="width: 100px;">
                                 <span class="cssToolTip_Form">
@@ -106,8 +102,7 @@
                     </table>
                     <table id="Tabla_3" style="width: 700px; margin-left: 100px;">
                         <tr>
-                            <td class="Label_Bold" style="width: 150px;">
-                                SubRol o Rol
+                            <td class="Label_Bold" style="width: 150px;">SubRol o Rol
                             </td>
                             <td>
                                 <select id="DDLSubRol_Rol" class="C_Chosen">
@@ -123,8 +118,7 @@
                     </table>
                     <table id="Tabla_4" style="width: 700px; margin-left: 100px;">
                         <tr>
-                            <td class="Label_Bold" style="width: 150px;">
-                                Tipo (Carpeta o Link)
+                            <td class="Label_Bold" style="width: 150px;">Tipo (Carpeta o Link)
                             </td>
                             <td id="TD_Ttipo">
                                 <select id="DDLTipo" class="C_Chosen">
@@ -143,8 +137,7 @@
                     </table>
                     <table id="Tabla_5" style="width: 700px; margin-left: 100px;">
                         <tr>
-                            <td class="Label_Bold" style="width: 150px;">
-                                Links disponibles
+                            <td class="Label_Bold" style="width: 150px;">Links disponibles
                             </td>
                             <td>
                                 <select id="DDLLink_ID" class="C_Chosen">
@@ -160,8 +153,7 @@
                     </table>
                     <table id="Tabla_6" style="width: 100%;">
                         <tr>
-                            <td align="center">
-                                &nbsp;
+                            <td align="center">&nbsp;
                             </td>
                         </tr>
                         <tr>
@@ -223,7 +215,6 @@
                 </div>
             </div>
         </div>
-        <h5>
-            Procesando información espere un momento...</h5>
+        <h5>Procesando información espere un momento...</h5>
     </div>
 </asp:Content>

@@ -13,7 +13,7 @@
 #tituloPrincipal
 {
     color: #ffffff;
-	font: 20px/35px Verdana,sans-serif;
+	font: 20px/35px CenturyGothic,sans-serif;
 }
 
 /* -------       Label Hora           ------*/
@@ -22,7 +22,7 @@
     top: 4em;
     right: 1em;
     color: #ffffff;
-    font: 14px/20px Verdana,sans-serif;
+    font: 14px/20px CenturyGothic,sans-serif;
     font-weight: bold;
 }
 

@@ -12,7 +12,7 @@ var Doc;
 
 /*--------------- region de variables globales --------------------*/
 
-//evento load de los Links
+//Evento load JS
 $(document).ready(function () {
 
     transacionAjax_EmpresaNit('Cliente')

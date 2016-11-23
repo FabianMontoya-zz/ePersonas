@@ -6,12 +6,12 @@
     <script src="../../SasifMaster.js" type="text/javascript"></script>
     <script src="../SasifMaster_Cosult.js" type="text/javascript"></script>
     <script src="Calendario.js" type="text/javascript"></script>
+    <script src="CalendarioProgresivo.js" type="text/javascript"></script>
     <script src="CalendarioTrasaccionsAjax.js" type="text/javascript"></script>
     <link href="../../css/css_login.css" rel="stylesheet" type="text/css" />
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
     <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />
     <link href="../../css/custom/charge.css" rel="stylesheet" type="text/css" />
-    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
     <link href="../../css/Chosen/chosen.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/jquery.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Chosen/chosen.jquery.js" type="text/javascript"></script>
@@ -20,14 +20,16 @@
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Dialog/datepicker.js" type="text/javascript"></script>
     <script src="../../Scripts/Dialog/timepicker.js" type="text/javascript"></script>
+    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
         .ui-widget
         {
-            background: silver;
-            border: solid;
-            border-color: gray;
-            border-width: 1px;
-            border-radius: 5px 5px 5px 5px;
+            background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+            background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+            background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+            background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+            border: solid 1px #921919;
+            border-radius: 5px;
         }
     </style>
 </asp:Content>
@@ -43,7 +45,7 @@
             </tr>
         </table>
     </div>
-    <div id="Marco_link">
+    <div id="Marco_Container">
         <div id="Marco_btn_Form">
             <input id="BtnShearh" type="button" value="Consulta" onclick="HabilitarPanel('buscar');" />
             <input id="BtnCreate" type="button" value="Crear" onclick="HabilitarPanel('crear');" />
@@ -55,7 +57,7 @@
                 <table id="TablaConsulta">
                     <tr>
                         <td id="TD1">
-                            <select id="DDLColumns">
+                            <select id="DDLColumns" class="C_Chosen">
                             </select>
                         </td>
                         <td id="TD2">
@@ -82,7 +84,7 @@
         </div>
     </div>
     <div id="Dialog_Calendar">
-        <div id="TablaDatos_D">
+        <div id="TablaDatos_D_Calen">
             <table id="Tabla_1" style="width: 700px; text-align: left;">
                 <tr>
                     <td style="width: 150px;" class="Label_Bold">Multi - Empresa
@@ -99,16 +101,50 @@
                     </td>
                 </tr>
             </table>
+            <table id="Tabla_10" style="width: 500px; text-align: left; position: absolute; margin-left: 600px; margin-bottom: 100px;">
+                <tr>
+                    <td class="Label_Bold">Fecha Inicial
+                    </td>
+                    <td></td>
+                    <td class="Label_Bold">Fecha Final
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="cssToolTip_Form">
+                            <input type="text" id="TxtF_Start" maxlength="50" style="width: 100px;" />
+                            <span class="Spam_AF"></span></span>
+                    </td>
+                    <td style="padding-bottom: 25px; width: 90px;">
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img6"
+                                src="../../images/error.png" />
+                            <span class="SpamEG"></span></span>
+                    </td>
+                    <td style="width: 120px;">
+                        <span class="cssToolTip_Form">
+                            <input type="text" id="TxtF_End" maxlength="50" style="width: 100px;" />
+                            <span class="Spam_AF"></span></span>
+                    </td>
+                    <td style="padding-bottom: 25px; width: 200px;">
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img7"
+                                src="../../images/error.png" />
+                            <span class="SpamEG"></span></span>
+                    </td>
+                </tr>
+            </table>
             <table id="Tabla_2" style="width: 700px; text-align: left;">
                 <tr>
-                    <td style="width: 70px;" class="Label_Bold">Codigo
+                    <td style="width: 100px;" class="Label_Bold">Codigo
                     </td>
-                    <td style="width: 100px;">
+                    <td style="width: 150px;">
                         <span class="cssToolTip_Form">
                             <input type="text" id="Txt_ID" maxlength="5" class="Numeric" style="width: 70px;" />
                             <span class="Spam_AN"></span></span>
                     </td>
-                    <td style="padding-bottom: 25px; width: 72px;">
+                    <td style="padding-bottom: 25px; width: 340px;">
                         <span class="cssToolTip">
                             <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img2"
                                 src="../../images/error.png" />
@@ -116,9 +152,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="Label_Bold" style="width: 70px;">Descripción
+                    <td class="Label_Bold" style="width: 150px;">Descripción
                     </td>
-                    <td style="width: 100px;">
+                    <td style="width: 50px;">
                         <span class="cssToolTip_Form">
                             <input type="text" id="TxtDescription" maxlength="50" style="width: 200px;" />
                             <span class="Spam_AST"></span></span>
@@ -133,16 +169,16 @@
             </table>
             <table id="Tabla_3" style="width: 700px; text-align: left;">
                 <tr>
-                    <td style="width: 150px;" class="Label_Bold">Tipo Calendario
+                    <td style="width: 153px;" class="Label_Bold">Tipo Calendario
                     </td>
-                    <td>
-                        <select id="Select_TipoCalendario" class="C_Chosen">
+                    <td style="width: 230px;">
+                        <select id="Select_TipoCalendario" style="width: 230px;" class="C_Chosen">
                             <option value="-1">Seleccione...</option>
                             <option value="1">Por día de la semana</option>
                             <option value="2">Fechas progresivas</option>
                         </select>
                     </td>
-                    <td style="padding-bottom: 25px; width: 320px;">
+                    <td style="padding-bottom: 25px; width: 350px;">
                         <span class="cssToolTip">
                             <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img5"
                                 src="../../images/error.png" />
@@ -167,13 +203,14 @@
                         </th>
                         <th align="center" colspan="2">Domingo
                         </th>
-                        <th align="center" colspan="2"></th>
+                        <th align="center" colspan="2">Festivo
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr style="text-align: center;">
                         <td align="center" colspan="2">
-                            <font face="Verdana" size="2 " color="black">
+                            <font face="CenturyGothic" size="2 " color="black">
                                 <select id="Select_StateLun" class="C_Chosen">
                                     <option value="L">Laboral</option>
                                     <option value="F">Festivo</option>
@@ -181,7 +218,7 @@
                             </font>
                         </td>
                         <td align="center" colspan="2">
-                            <font face="Verdana" size="2 " color="black">
+                            <font face="CenturyGothic" size="2 " color="black">
                                 <select id="Select_StateMar" class="C_Chosen">
                                     <option value="L">Laboral</option>
                                     <option value="F">Festivo</option>
@@ -189,7 +226,7 @@
                             </font>
                         </td>
                         <td align="center" colspan="2">
-                            <font face="Verdana" size="2 " color="black">
+                            <font face="CenturyGothic" size="2 " color="black">
                                 <select id="Select_StateMie" class="C_Chosen">
                                     <option value="L">Laboral</option>
                                     <option value="F">Festivo</option>
@@ -197,7 +234,7 @@
                             </font>
                         </td>
                         <td align="center" colspan="2">
-                            <font face="Verdana" size="2 " color="black">
+                            <font face="CenturyGothic" size="2 " color="black">
                                 <select id="Select_StateJue" class="C_Chosen">
                                     <option value="L">Laboral</option>
                                     <option value="F">Festivo</option>
@@ -205,7 +242,7 @@
                             </font>
                         </td>
                         <td align="center" colspan="2">
-                            <font face="Verdana" size="2 " color="black">
+                            <font face="CenturyGothic" size="2 " color="black">
                                 <select id="Select_StateVie" class="C_Chosen">
                                     <option value="L">Laboral</option>
                                     <option value="F">Festivo</option>
@@ -213,7 +250,7 @@
                             </font>
                         </td>
                         <td align="center" colspan="2">
-                            <font face="Verdana" size="2 " color="black">
+                            <font face="CenturyGothic" size="2 " color="black">
                                 <select id="Select_StateSab" class="C_Chosen">
                                     <option value="L">Laboral</option>
                                     <option value="F">Festivo</option>
@@ -221,7 +258,7 @@
                             </font>
                         </td>
                         <td align="center" colspan="2">
-                            <font face="Verdana" size="2 " color="black">
+                            <font face="CenturyGothic" size="2 " color="black">
                                 <select id="Select_StateDom" class="C_Chosen">
                                     <option value="L">Laboral</option>
                                     <option value="F">Festivo</option>
@@ -229,7 +266,7 @@
                             </font>
                         </td>
                         <td align="center" colspan="2">
-                            <font face="Verdana" size="2 " color="black">
+                            <font face="CenturyGothic" size="2 " color="black">
                                 <select id="Select_Festivo" class="C_Chosen">
                                     <option value="L">Laboral</option>
                                     <option value="F">Festivo</option>
@@ -239,86 +276,86 @@
                     </tr>
                     <tr style="text-align: center;">
                         <td align="center" colspan="2">
-                            <font face="Verdana" size="2 " color="black"><b>Hora</b>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Hora</b>
                             </font>
                         </td>
                         <td align="center" colspan="2">
-                            <font face="Verdana" size="2 " color="black"><b>Hora</b>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Hora</b>
                             </font>
                         </td>
                         <td align="center" colspan="2">
-                            <font face="Verdana" size="2 " color="black"><b>Hora</b>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Hora</b>
                             </font>
                         </td>
                         <td align="center" colspan="2">
-                            <font face="Verdana" size="2 " color="black"><b>Hora</b>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Hora</b>
                             </font>
                         </td>
                         <td align="center" colspan="2">
-                            <font face="Verdana" size="2 " color="black"><b>Hora</b>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Hora</b>
                             </font>
                         </td>
                         <td align="center" colspan="2">
-                            <font face="Verdana" size="2 " color="black"><b>Hora</b>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Hora</b>
                             </font>
                         </td>
                         <td align="center" colspan="2">
-                            <font face="Verdana" size="2 " color="black"><b>Hora</b>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Hora</b>
                             </font>
                         </td>
                         <td align="center" colspan="2">
-                            <font face="Verdana" size="2 " color="black"><b>Hora</b>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Hora</b>
                             </font>
                         </td>
                     </tr>
                     <tr style="text-align: center;">
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Inicial</b> </font>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Inicial</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Final</b> </font>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Final</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Inicial</b> </font>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Inicial</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Final</b> </font>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Final</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Inicial</b> </font>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Inicial</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Final</b> </font>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Final</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Inicial</b> </font>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Inicial</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Final</b> </font>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Final</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Inicial</b> </font>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Inicial</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Final</b> </font>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Final</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Inicial</b> </font>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Inicial</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Final</b> </font>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Final</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Inicial</b> </font>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Inicial</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Final</b> </font>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Final</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Inicial</b> </font>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Inicial</b> </font>
                         </td>
                         <td>
-                            <font face="Verdana" size="2 " color="black"><b>Final</b> </font>
+                            <font face="CenturyGothic" size="2 " color="black"><b>Final</b> </font>
                         </td>
                     </tr>
                     <tr>
@@ -416,7 +453,10 @@
                     </tr>
                 </tbody>
             </table>
-            <table>
+
+            <div id="container_TGrid_2">
+            </div>
+            <table style="width: 100%;">
                 <tr>
                     <td style="width: 150px;" class="Label_Bold">
                         <p>

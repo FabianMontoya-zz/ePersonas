@@ -219,9 +219,9 @@ function validate_fechaMayorQue(fechaInicial, fechaFinal, Type) {
             valuesEnd = fechaFinal.split("-");
 
             // Verificamos que la fecha no sea posterior a la actual
-            dateStart = new Date(valuesStart[2], (valuesStart[1] - 1), valuesStart[0]);
-            dateEnd = new Date(valuesEnd[2], (valuesEnd[1] - 1), valuesEnd[0]);
-
+            dateStart = new Date(valuesStart[0], (valuesStart[1] - 1), valuesStart[2]);
+            dateEnd = new Date(valuesEnd[0], (valuesEnd[1] - 1), valuesEnd[2]);
+            console.log(dateStart + " >= " + dateEnd);
             if (dateStart >= dateEnd)
                 Resultado = "Menor";
             else
@@ -240,16 +240,20 @@ function Validahora(V_HoraInicial, V_HoraFinal) {
     var Valida = 0;
 
     if (parseInt(A_V_HoraInicial[0]) > parseInt(A_V_HoraFinal[0])) {
-        console.log(parseInt(A_V_HoraInicial[0]) + ">" + parseInt(A_V_HoraFinal[0]));
-        Valida = 1;
+         Valida = 1;
     }
 
     if (parseInt(A_V_HoraInicial[0]) == parseInt(A_V_HoraFinal[0])) {
         if (parseInt(A_V_HoraInicial[1]) > parseInt(A_V_HoraFinal[1])) {
-            console.log(parseInt(A_V_HoraInicial[1]) + ">" + parseInt(A_V_HoraFinal[1]));
-            Valida = 1;
+           Valida = 1;
         }
     }
+
+    if (V_HoraInicial == "")
+        Valida = 2;
+
+    if (V_HoraFinal == "")
+        Valida = 2;
 
     return Valida;
 }
@@ -391,6 +395,12 @@ function Convert_Decimal(index) {
         Output = index.replace(".", ",");
     }
     return Output;
+}
+
+//validar la longitud del campo number
+function maxLengthTypeNumber(object) {
+    if (object.value.length > object.maxLength)
+        object.value = object.value.slice(0, object.maxLength)
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -597,6 +607,14 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
             }
             break;
 
+        case "Select_Tarjeta_DBlo":
+            for (Item in Matrix) {
+                if ((Matrix[Item].Nit_ID_Asigna == Nit) && (Matrix[Item].Estado == 3 || Matrix[Item].Estado == 4)) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Tarjeta_ID + "'>" + Matrix[Item].Tarjeta_ID + "</option>");
+                }
+            }
+            break;
+         
         case "Select_Documento_1":
             for (Item in Matrix) {
                 if ((Matrix[Item].Nit_ID == Nit) && (Matrix[Item].RequiereVerificacion == "S")) {

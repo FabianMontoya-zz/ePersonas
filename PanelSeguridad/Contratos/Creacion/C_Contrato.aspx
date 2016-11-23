@@ -11,20 +11,19 @@
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
     <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />
     <link href="../../css/custom/charge.css" rel="stylesheet" type="text/css" />
-    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
     <link href="../../css/Chosen/chosen.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/jquery.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Chosen/chosen.jquery.js" type="text/javascript"></script>
     <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
+    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
     <div id="Container_title_Form">
         <table id="Tabla_Title_form">
             <tr>
-                <td id="Title_form">
-                </td>
+                <td id="Title_form"></td>
                 <td id="image_exit">
                     <span class="cssToolTip_Form_L">
                         <input id="BtnExit" type="button" value="X" onclick="btnSalir();" /><span class="Spam_AEXIT_MOD"></span></span>
@@ -37,8 +36,7 @@
             <div id="Container_controls">
                 <table id="T_Encabezado" style="width: 700px;">
                     <tr>
-                        <td id="TD_ID" style="width: 120px;" class="Label_Bold">
-                            Nit Empresa
+                        <td id="TD_ID" style="width: 120px;" class="Label_Bold">Nit Empresa
                         </td>
                         <td id="TD_TID">
                             <select id="Select_EmpresaNit" class="C_Chosen">
@@ -54,8 +52,7 @@
                 </table>
                 <table id="T_Datos_P1">
                     <tr>
-                        <td class="Label_Bold" style="width: 120px;">
-                            Contrato
+                        <td class="Label_Bold" style="width: 120px;">Contrato
                         </td>
                         <td>
                             <span class="cssToolTip_Form">
@@ -70,8 +67,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="Label_Bold" style="width: 100px;">
-                            Descripción
+                        <td class="Label_Bold" style="width: 100px;">Descripción
                         </td>
                         <td style="width: 100px;">
                             <span class="cssToolTip_Form">
@@ -88,8 +84,7 @@
                 </table>
                 <table style="width: 700px;">
                     <tr>
-                        <td style="width: 120px;" class="Label_Bold">
-                            Cliente Principal
+                        <td style="width: 120px;" class="Label_Bold">Cliente Principal
                         </td>
                         <td>
                             <select id="Select_H_Cliente" class="C_Chosen">
@@ -103,8 +98,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="Label_Bold">
-                            Estado
+                        <td class="Label_Bold">Estado
                         </td>
                         <td>
                             <select id="Select_Estado" class="C_Chosen">
@@ -118,8 +112,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="Label_Bold">
-                            Moneda
+                        <td class="Label_Bold">Moneda
                         </td>
                         <td>
                             <select id="Select_Moneda" class="C_Chosen">
@@ -135,81 +128,60 @@
                 </table>
                 <table id="T_Datos_3">
                     <tr>
-                        <td class="Label_Bold" style="width: 120px;">
-                            Secuencia Cargue
+                        <td class="Label_Bold" style="width: 120px;">Secuencia Cargue
                         </td>
                         <td>
                             <span class="cssToolTip_Form">
                                 <input type="text" id="TxtSecuenciaCargue" maxlength="7" class="Numeric" />
                                 <span class="Spam_AN"></span></span>
                         </td>
-                        <td style="width: 40px; padding-bottom: 25px;">
-                        </td>
-                        <td class="Label_Bold">
-                        </td>
-                        <td>
-                        </td>
-                        <td style="width: 40px; padding-bottom: 25px;">
-                        </td>
+                        <td style="width: 40px; padding-bottom: 25px;"></td>
+                        <td class="Label_Bold"></td>
+                        <td></td>
+                        <td style="width: 40px; padding-bottom: 25px;"></td>
                     </tr>
                 </table>
                 <table id="T_Valores">
                     <tr>
-                        <td align="center" class="Title_Bold" colspan="8">
-                            VALORES
+                        <td align="center" class="Title_Bold" colspan="8">VALORES
                         </td>
                     </tr>
                     <tr>
-                        <td class="Label_Bold" style="padding-left: 25px; width: 100px;">
-                            Contrato
+                        <td class="Label_Bold" style="padding-left: 25px; width: 100px;">Contrato
                         </td>
-                        <td id="Td_Vr_Contr" style="width: 110px;">
-                            0
+                        <td id="Td_Vr_Contr" style="width: 110px;">0
                         </td>
-                        <td class="Label_Bold" style="width: 100px;">
-                            Financiado
+                        <td class="Label_Bold" style="width: 100px;">Financiado
                         </td>
-                        <td id="Td_Vr_Finan" style="width: 110px;">
-                            0
+                        <td id="Td_Vr_Finan" style="width: 110px;">0
                         </td>
-                        <td class="Label_Bold" style="width: 100px;">
-                            Opcion Compra
+                        <td class="Label_Bold" style="width: 100px;">Opcion Compra
                         </td>
-                        <td id="Td_Vr_OpCompra" style="width: 110px;">
-                            0
+                        <td id="Td_Vr_OpCompra" style="width: 110px;">0
                         </td>
                     </tr>
                 </table>
                 <table id="T_Saldos">
                     <tr>
-                        <td align="center" class="Title_Bold" colspan="8">
-                            SALDOS
+                        <td align="center" class="Title_Bold" colspan="8">SALDOS
                         </td>
                     </tr>
                     <tr>
-                        <td class="Label_Bold" style="width: 70px;">
-                            Capital
+                        <td class="Label_Bold" style="width: 70px;">Capital
                         </td>
-                        <td id="Td_S_Capital" style="width: 110px;">
-                            0
+                        <td id="Td_S_Capital" style="width: 110px;">0
                         </td>
-                        <td class="Label_Bold" style="width: 70px;">
-                            Interes
+                        <td class="Label_Bold" style="width: 70px;">Interes
                         </td>
-                        <td id="Td_S_Interes" style="width: 110px;">
-                            0
+                        <td id="Td_S_Interes" style="width: 110px;">0
                         </td>
-                        <td class="Label_Bold" style="width: 70px;">
-                            Mora
+                        <td class="Label_Bold" style="width: 70px;">Mora
                         </td>
-                        <td id="Td_S_Mora" style="width: 110px;">
-                            0
+                        <td id="Td_S_Mora" style="width: 110px;">0
                         </td>
-                        <td class="Label_Bold" style="width: 70px;">
-                            Otros
+                        <td class="Label_Bold" style="width: 70px;">Otros
                         </td>
-                        <td id="Td_S_Otros" style="width: 110px;">
-                            0
+                        <td id="Td_S_Otros" style="width: 110px;">0
                         </td>
                     </tr>
                     <tr>
@@ -219,8 +191,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="8" style="text-align: center;">
-                        </td>
+                        <td colspan="8" style="text-align: center;"></td>
                     </tr>
                 </table>
                 <table id="Complementos">
@@ -234,37 +205,26 @@
                                                 <img alt="Activo" class="Add" onclick="javascript:Add_Activos();" id="Crear" height='20px'
                                                     width='20px' src='../../images/add.png' /><span>Agregar Nuevo Activo</span></span>
                                         </th>
-                                        <th>
-                                            Identificación Activo
+                                        <th>Identificación Activo
                                         </th>
-                                        <th>
-                                            Identificación Activo
+                                        <th>Identificación Activo
                                         </th>
-                                        <th>
-                                            Identificación Activo
+                                        <th>Identificación Activo
                                         </th>
-                                        <th>
-                                            Producto
+                                        <th>Producto
                                         </th>
-                                        <th>
-                                            Moneda
+                                        <th>Moneda
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>
-                                        </td>
-                                        <td>
-                                        </td>
-                                        <td>
-                                        </td>
-                                        <td>
-                                        </td>
-                                        <td>
-                                        </td>
-                                        <td>
-                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                     </tr>
                                 </tbody>
                             </table>

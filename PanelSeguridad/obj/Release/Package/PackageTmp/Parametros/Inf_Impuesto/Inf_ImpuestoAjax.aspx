@@ -1,0 +1,1 @@
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Inf_ImpuestoAjax.aspx.vb" Inherits="PanelSeguridad.Inf_ImpuestoAjax" %>

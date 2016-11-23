@@ -23,13 +23,18 @@ Public Class AccesoAjax
                 Case "MATRIX_ACCESOPREDETER"
                     Cargar_Matrix_AccesoPredeterminado()
 
-
-
                 Case "MATRIX_PACCESO"
                     Cargar_MatrixPAcceso()
 
                 Case "MATRIX_AREA"
                     Cargar_MatrixArea()
+
+                Case "MATRIX_PERSONA"
+                    CargarMPersonaDep()
+
+                Case "MATRIX_PACCESO_AREA"
+                    CargarMPAccesos_Area()
+
 
                 Case "cargar_droplist_busqueda"
                     CargarDroplist()
@@ -166,6 +171,20 @@ Public Class AccesoAjax
     End Sub
 
     ''' <summary>
+    ''' funcion que carga  Matrix PERSONAS 
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarMPersonaDep()
+
+        Dim SQL As New ClienteSQLClass
+        Dim ObjList As New List(Of ClienteClass)
+
+        ObjList = SQL.Matrix_PersonasDep()
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
+
+    ''' <summary>
     ''' cara la matriz de documento para trabajo
     ''' </summary>
     ''' <remarks></remarks>
@@ -207,8 +226,6 @@ Public Class AccesoAjax
 
     End Sub
 
-
-
     ''' <summary>
     ''' funcion que carga el objeto DDL consulta
     ''' </summary>
@@ -233,6 +250,20 @@ Public Class AccesoAjax
         Dim ObjList As New List(Of PuertaAccesoClass)
 
         ObjList = SQL.Matrix_PuertaAcceso()
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga el objeto DDL consulta
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarMPAccesos_Area()
+
+        Dim SQL As New R_PuertaAcc_AreaSQLClass
+        Dim ObjList As New List(Of R_PuertaAcc_AreaClass)
+
+        ObjList = SQL.Matrix_R_PuertaAcceso_Area()
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub

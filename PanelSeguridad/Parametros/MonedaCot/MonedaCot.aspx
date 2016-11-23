@@ -11,7 +11,6 @@
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
     <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />
     <link href="../../css/custom/charge.css" rel="stylesheet" type="text/css" />
-    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
     <link href="../../css/Chosen/chosen.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/jquery.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Chosen/chosen.jquery.js" type="text/javascript"></script>
@@ -19,14 +18,16 @@
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Dialog/datepicker.js" type="text/javascript"></script>
-    <style>
+    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
         .ui-widget
         {
-            background: silver;
-            border: solid;
-            border-color: gray;
-            border-width: 1px;
-            border-radius: 5px 5px 5px 5px;
+            background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+            background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+            background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+            background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+            border: solid 1px #921919;
+            border-radius: 5px;
         }
     </style>
 </asp:Content>
@@ -34,8 +35,7 @@
     <div id="Container_title_Form">
         <table id="Tabla_Title_form">
             <tr>
-                <td id="Title_form">
-                </td>
+                <td id="Title_form"></td>
                 <td id="image_exit">
                     <span class="cssToolTip_Form_L">
                         <input id="BtnExit" type="button" value="X" onclick="btnSalir();" /><span class="Spam_AEXIT_MOD"></span></span>
@@ -43,7 +43,7 @@
             </tr>
         </table>
     </div>
-    <div id="Marco_link">
+    <div id="Marco_Container">
         <div id="Marco_btn_Form">
             <input id="BtnShearh" type="button" value="Consulta" onclick="HabilitarPanel('buscar');" />
             <input id="BtnCreate" type="button" value="Crear" onclick="HabilitarPanel('crear');" />
@@ -55,7 +55,7 @@
                 <table id="TablaConsulta">
                     <tr>
                         <td id="TD1">
-                            <select id="DDLColumns">
+                            <select id="DDLColumns" class="C_Chosen">
                             </select>
                         </td>
                         <td id="TD2">
@@ -68,8 +68,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="4">
-                            &nbsp;
+                        <td colspan="4">&nbsp;
                         </td>
                     </tr>
                     <tr>
@@ -82,8 +81,7 @@
                 <div id="TablaDatos_D">
                     <table id="Tabla_1" style="width: 700px; margin-left: 100px;">
                         <tr>
-                            <td class="Label_Bold" style="width: 70px;">
-                                Moneda
+                            <td class="Label_Bold" style="width: 70px;">Moneda
                             </td>
                             <td>
                                 <select id="Select_Moneda" class="C_Chosen">
@@ -99,8 +97,7 @@
                     </table>
                     <table id="Tabla_2" style="width: 550px; margin-left: 100px;">
                         <tr>
-                            <td class="Label_Bold" style="width: 70px;">
-                                Fecha
+                            <td class="Label_Bold" style="width: 70px;">Fecha
                             </td>
                             <td style="width: 80px;">
                                 <span class="cssToolTip_Form">
@@ -113,8 +110,7 @@
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
-                            <td class="Label_Bold" style="width: 70px;">
-                                Valor
+                            <td class="Label_Bold" style="width: 70px;">Valor
                             </td>
                             <td style="width: 150px;">
                                 <span class="cssToolTip_Form">
@@ -129,8 +125,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4" align="center">
-                                &nbsp;
+                            <td colspan="4" align="center">&nbsp;
                             </td>
                         </tr>
                         <tr>
@@ -143,7 +138,7 @@
             </div>
         </div>
     </div>
-   <div id="dialog" title="Basic dialog">
+    <div id="dialog" title="Basic dialog">
         <table style="width: 100%; text-align: center;">
             <tr>
                 <td class="Label_Bold">

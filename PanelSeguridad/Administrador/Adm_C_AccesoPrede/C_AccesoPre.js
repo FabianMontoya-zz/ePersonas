@@ -1,4 +1,4 @@
-﻿/*-----------2---- region de variables globales --------------------*/
+﻿/*--------------- region de variables globales --------------------*/
 var Matrix_Tarjeta = [];
 var Matrix_Persona = [];
 var Matrix_RTP = [];
@@ -24,7 +24,7 @@ var editDoc_Enc;
 var Container_Tarjeta;
 /*--------------- region de variables globales --------------------*/
 
-//evento load de los Links
+//Evento load JS
 $(document).ready(function () {
 
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
@@ -177,6 +177,7 @@ function BtnConsulta() {
     }
 
 }
+
 //validamos si han escogido una columna
 function ValidarDroplist() {
     var flag;
@@ -190,7 +191,6 @@ function ValidarDroplist() {
     }
     return flag;
 }
-
 
 //crear link en la BD
 function BtnCrear() {

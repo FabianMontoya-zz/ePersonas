@@ -186,6 +186,12 @@
     <Content Include="Administrador\Adm_R_Persona_Tarjeta\BloqueoTarjeta.aspx" />
     <Content Include="Administrador\Adm_R_Persona_Tarjeta\BloqueoTarjeta.js" />
     <Content Include="Administrador\Adm_R_Persona_Tarjeta\BloqueoTarjetaTrasaccionsAjax.js" />
+    <Content Include="Administrador\Adm_R_Persona_Tarjeta\ConsultaTarjeta.aspx" />
+    <Content Include="Administrador\Adm_R_Persona_Tarjeta\ConsultaTarjeta.js" />
+    <Content Include="Administrador\Adm_R_Persona_Tarjeta\ConsultaTarjetaTrasaccionsAjax.js" />
+    <Content Include="Administrador\Adm_R_Persona_Tarjeta\Des_BloqueoTarjeta.aspx" />
+    <Content Include="Administrador\Adm_R_Persona_Tarjeta\Des_BloqueoTarjeta.js" />
+    <Content Include="Administrador\Adm_R_Persona_Tarjeta\Des_BloqueoTarjetaTrasaccionsAjax.js" />
     <Content Include="Administrador\Adm_R_Persona_Tarjeta\EntregaTarjeta.aspx" />
     <Content Include="Administrador\Adm_R_Persona_Tarjeta\EntregaTarjeta.js" />
     <Content Include="Administrador\Adm_R_Persona_Tarjeta\EntregaTarjetaTrasaccionsAjax.js" />
@@ -255,11 +261,10 @@
     <Content Include="css\Dialog\images\ui-icons_f9bd01_256x240.png" />
     <Content Include="css\Dialog\jquery-ui-1.10.4.custom.css" />
     <Content Include="css\Dialog\jquery-ui.css" />
-    <Content Include="css\icons\document.png" />
-    <Content Include="css\icons\folder-horizontal.png" />
-    <Content Include="css\icons\right.png" />
-    <Content Include="css\icons\toggle-small-expand.png" />
-    <Content Include="css\icons\toggle-small.png" />
+    <Content Include="css\icons\arrow_down.png" />
+    <Content Include="css\icons\arrow_right.png" />
+    <Content Include="css\icons\folder.png" />
+    <Content Include="css\icons\right1.png" />
     <Content Include="css\PIE.htc" />
     <Content Include="css\theme_blue_Sky\images\active.png" />
     <Content Include="css\theme_blue_Sky\images\default.png" />
@@ -314,33 +319,43 @@
     <Content Include="Global.asax" />
     <Content Include="Images\add.png" />
     <Content Include="Images\adress_book.png" />
+    <Content Include="Images\adress_book_w.png" />
     <Content Include="Images\alert.png" />
     <Content Include="Images\avatar.png" />
     <Content Include="Images\bank.png" />
-    <Content Include="Images\cabeza2.jpg" />
+    <Content Include="Images\bank_w.png" />
     <Content Include="Images\C_GREEN.png" />
     <Content Include="Images\C_RED.png" />
     <Content Include="Images\C_YELLOW.png" />
     <Content Include="Images\Descarga.png" />
     <Content Include="Images\DocAuto.png" />
     <Content Include="Images\documentos.png" />
+    <Content Include="Images\documentos_w.png" />
     <Content Include="Images\error.png" />
     <Content Include="Images\error_2.png" />
     <Content Include="Images\exit.png" />
     <Content Include="Images\file.jpg" />
-    <Content Include="Images\fondo1.jpg" />
-    <Content Include="Images\fondo11.jpg" />
     <Content Include="Images\logo-actual.png" />
     <Content Include="Images\logo.png" />
+    <Content Include="Images\logo_2.png" />
     <Content Include="Images\LOOK_BLACK.png" />
     <Content Include="Images\LOOK_WHITE.png" />
-    <Content Include="Images\menu1.jpg" />
-    <Content Include="Images\menu2.jpg" />
-    <Content Include="Images\menu3.jpg" />
-    <Content Include="Images\menu4.jpg" />
+    <Content Include="Images\old\adress_book.png" />
+    <Content Include="Images\old\bank.png" />
+    <Content Include="Images\old\cabeza2.jpg" />
+    <Content Include="Images\old\documentos.png" />
+    <Content Include="Images\old\fondo1.jpg" />
+    <Content Include="Images\old\fondo11.jpg" />
+    <Content Include="Images\old\logo_old.png" />
+    <Content Include="Images\old\menu1.jpg" />
+    <Content Include="Images\old\menu2.jpg" />
+    <Content Include="Images\old\menu3.jpg" />
+    <Content Include="Images\old\menu4.jpg" />
+    <Content Include="Images\old\relations.png" />
+    <Content Include="Images\old\sasif1.gif" />
     <Content Include="Images\relations.png" />
-    <Content Include="Images\sasif1.gif" />
     <Content Include="Images\SASIF_NEW.png" />
+    <Content Include="Images\SASIF_NEW_WHITE.png" />
     <Content Include="Images\search.png" />
     <Content Include="Images\success.png" />
     <Content Include="Images\user.png" />
@@ -392,13 +407,10 @@
     <Content Include="Parametros\Ayudas\Ayudas.js" />
     <Content Include="Parametros\Ayudas\AyudasAjax.aspx" />
     <Content Include="Parametros\Ayudas\AyudasTrasaccionsAjax.js" />
-    <Content Include="Parametros\CalendarioProgresivo\CalendarioProgresivo.aspx" />
-    <Content Include="Parametros\CalendarioProgresivo\CalendarioProgresivo.js" />
-    <Content Include="Parametros\CalendarioProgresivo\CalendarioProgresivoAjax.aspx" />
-    <Content Include="Parametros\CalendarioProgresivo\CalendarioProgresivoTrasaccionsAjax.js" />
     <Content Include="Parametros\Calendario\Calendario.aspx" />
     <Content Include="Parametros\Calendario\Calendario.js" />
     <Content Include="Parametros\Calendario\CalendarioAjax.aspx" />
+    <Content Include="Parametros\Calendario\CalendarioProgresivo.js" />
     <Content Include="Parametros\Calendario\CalendarioTrasaccionsAjax.js" />
     <Content Include="Parametros\Cargo\Cargo.aspx" />
     <Content Include="Parametros\Cargo\Cargo.js" />
@@ -511,6 +523,7 @@
     <Content Include="Scripts\jquery.fileupload.js" />
     <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\Refresh.js" />
     <Content Include="Scripts\WebForms\DetailsView.js" />
     <Content Include="Scripts\WebForms\Focus.js" />
     <Content Include="Scripts\WebForms\GridView.js" />
@@ -673,6 +686,20 @@
     </Compile>
     <Compile Include="Administrador\Adm_R_Persona_Tarjeta\BloqueoTarjeta.aspx.vb">
       <DependentUpon>BloqueoTarjeta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Adm_R_Persona_Tarjeta\ConsultaTarjeta.aspx.designer.vb">
+      <DependentUpon>ConsultaTarjeta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Adm_R_Persona_Tarjeta\ConsultaTarjeta.aspx.vb">
+      <DependentUpon>ConsultaTarjeta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Adm_R_Persona_Tarjeta\Des_BloqueoTarjeta.aspx.designer.vb">
+      <DependentUpon>Des_BloqueoTarjeta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Adm_R_Persona_Tarjeta\Des_BloqueoTarjeta.aspx.vb">
+      <DependentUpon>Des_BloqueoTarjeta.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Administrador\Adm_R_Persona_Tarjeta\EntregaTarjeta.aspx.designer.vb">
@@ -1016,22 +1043,6 @@
     </Compile>
     <Compile Include="Parametros\Ayudas\AyudasClass.vb" />
     <Compile Include="Parametros\Ayudas\AyudasSQLClass.vb" />
-    <Compile Include="Parametros\CalendarioProgresivo\CalendarioProgresivo.aspx.designer.vb">
-      <DependentUpon>CalendarioProgresivo.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Parametros\CalendarioProgresivo\CalendarioProgresivo.aspx.vb">
-      <DependentUpon>CalendarioProgresivo.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Parametros\CalendarioProgresivo\CalendarioProgresivoAjax.aspx.designer.vb">
-      <DependentUpon>CalendarioProgresivoAjax.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Parametros\CalendarioProgresivo\CalendarioProgresivoAjax.aspx.vb">
-      <DependentUpon>CalendarioProgresivoAjax.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Parametros\CalendarioProgresivo\CalendarioProgresivoClass.vb" />
-    <Compile Include="Parametros\CalendarioProgresivo\CalendarioProgresivoSQLClass.vb" />
     <Compile Include="Parametros\Calendario\Calendario.aspx.designer.vb">
       <DependentUpon>Calendario.aspx</DependentUpon>
     </Compile>

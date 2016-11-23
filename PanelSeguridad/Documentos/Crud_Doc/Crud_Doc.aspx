@@ -11,7 +11,6 @@
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
     <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />
     <link href="../../css/custom/charge.css" rel="stylesheet" type="text/css" />
-    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
     <link href="../../css/Chosen/chosen.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/jquery.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Chosen/chosen.jquery.js" type="text/javascript"></script>
@@ -19,14 +18,16 @@
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Dialog/datepicker.js" type="text/javascript"></script>
+    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
         .ui-widget
         {
-            background: silver;
-            border: solid;
-            border-color: gray;
-            border-width: 1px;
-            border-radius: 5px 5px 5px 5px;
+            background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+            background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+            background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+            background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+            border: solid 1px #921919;
+            border-radius: 5px;
         }
     </style>
 </asp:Content>
@@ -34,8 +35,7 @@
     <div id="Container_title_Form">
         <table id="Tabla_Title_form">
             <tr>
-                <td id="Title_form">
-                </td>
+                <td id="Title_form"></td>
                 <td id="image_exit">
                     <span class="cssToolTip_Form_L">
                         <input id="BtnExit" type="button" value="X" onclick="btnSalir();" /><span class="Spam_AEXIT_MOD"></span></span>
@@ -43,14 +43,13 @@
             </tr>
         </table>
     </div>
-    <div id="Marco_link">
+    <div id="Marco_Container">
         <div id="Marco_trabajo_Form">
             <div id="Container_controls">
                 <div id="TablaDatos_D">
                     <table id="Tabla_1" style="width: 700px; text-align: left;">
                         <tr>
-                            <td style="width: 150px;" class="Label_Bold">
-                                Multi - Empresa
+                            <td style="width: 150px;" class="Label_Bold">Multi - Empresa
                             </td>
                             <td>
                                 <select id="Select_EmpresaNit" class="C_Chosen">
@@ -66,8 +65,7 @@
                     </table>
                     <table id="Tabla_2" style="width: 700px; text-align: left;">
                         <tr>
-                            <td style="width: 150px;" class="Label_Bold">
-                                Persona
+                            <td style="width: 150px;" class="Label_Bold">Persona
                             </td>
                             <td>
                                 <select id="Select_Persona" class="C_Chosen">
@@ -83,8 +81,7 @@
                     </table>
                     <table id="Tabla_3" style="width: 700px; text-align: left;">
                         <tr>
-                            <td style="width: 150px;" class="Label_Bold">
-                                Secuencia
+                            <td style="width: 150px;" class="Label_Bold">Secuencia
                             </td>
                             <td>
                                 <select id="Select_Secuencia" class="C_Chosen">
@@ -100,8 +97,7 @@
                     </table>
                     <table id="Tabla_4" style="width: 700px; text-align: left;">
                         <tr>
-                            <td style="width: 150px;" class="Label_Bold">
-                                Contrato
+                            <td style="width: 150px;" class="Label_Bold">Contrato
                             </td>
                             <td>
                                 <select id="Select_Contrato" class="C_Chosen">
@@ -117,8 +113,7 @@
                     </table>
                     <table id="Tabla_5" style="width: 700px; text-align: left;">
                         <tr>
-                            <td style="width: 150px;" class="Label_Bold">
-                                Activos
+                            <td style="width: 150px;" class="Label_Bold">Activos
                             </td>
                             <td>
                                 <select id="Select_Activo" class="C_Chosen">
@@ -135,8 +130,7 @@
                     </table>
                     <table id="Tabla_6" style="width: 700px; text-align: left;">
                         <tr>
-                            <td style="width: 150px;" class="Label_Bold">
-                                Facturas
+                            <td style="width: 150px;" class="Label_Bold">Facturas
                             </td>
                             <td>
                                 <select id="Select_Factura" class="C_Chosen">
@@ -153,8 +147,7 @@
                     </table>
                     <table id="Tabla_7" style="width: 700px; text-align: left;">
                         <tr>
-                            <td style="width: 150px;" class="Label_Bold">
-                                Documento
+                            <td style="width: 150px;" class="Label_Bold">Documento
                             </td>
                             <td>
                                 <select id="Select_Documento" class="C_Chosen">
@@ -225,8 +218,7 @@
     <div id="Dialog_Visor">
         <table id="Tabla_0" style="width: 700px; text-align: left;">
             <tr>
-                <td style="width: 120px;" class="Label_Bold">
-                    Multi - Empresa
+                <td style="width: 120px;" class="Label_Bold">Multi - Empresa
                 </td>
                 <td style="width: 300px;">
                     <span class="cssToolTip_Form">
@@ -235,8 +227,7 @@
                 </td>
             </tr>
             <tr>
-                <td style="width: 120px;" class="Label_Bold">
-                    Persona
+                <td style="width: 120px;" class="Label_Bold">Persona
                 </td>
                 <td style="width: 500px;">
                     <span class="cssToolTip_Form">
@@ -245,8 +236,7 @@
                 </td>
             </tr>
             <tr>
-                <td style="width: 120px;" class="Label_Bold">
-                    Secuencia
+                <td style="width: 120px;" class="Label_Bold">Secuencia
                 </td>
                 <td style="width: 200px;">
                     <span class="cssToolTip_Form">
@@ -257,24 +247,21 @@
         </table>
         <table id="Tabla_s" style="width: 100%; text-align: left;">
             <tr>
-                <td style="width: 110px;" class="Label_Bold">
-                    Contrato
+                <td style="width: 110px;" class="Label_Bold">Contrato
                 </td>
                 <td style="width: 200px;">
                     <span class="cssToolTip_Form">
                         <input type="text" id="Vis_Contrato" readonly="readonly" style="width: 200px;" />
                         <span class="Spam_ACI"></span></span>
                 </td>
-                <td style="width: 110px;" class="Label_Bold">
-                    Activos
+                <td style="width: 110px;" class="Label_Bold">Activos
                 </td>
                 <td style="width: 200px;">
                     <span class="cssToolTip_Form">
                         <input type="text" id="Vis_Activo" readonly="readonly" style="width: 200px;" />
                         <span class="Spam_ACI"></span></span>
                 </td>
-                <td style="width: 110px;" class="Label_Bold">
-                    Facturas
+                <td style="width: 110px;" class="Label_Bold">Facturas
                 </td>
                 <td style="width: 200px;">
                     <span class="cssToolTip_Form">
@@ -283,8 +270,7 @@
                 </td>
             </tr>
             <tr>
-                <td style="width: 110px;" class="Label_Bold">
-                    Documento
+                <td style="width: 110px;" class="Label_Bold">Documento
                 </td>
                 <td style="width: 200px;">
                     <span class="cssToolTip_Form">
@@ -296,8 +282,7 @@
         <div id="Container_Vigencia">
             <table id="T_Vigencia" style="width: 700px; text-align: left;">
                 <tr>
-                    <td style="width: 160px;" class="Label_Bold">
-                        Fecha inicial
+                    <td style="width: 160px;" class="Label_Bold">Fecha inicial
                     </td>
                     <td>
                         <span class="cssToolTip_Form">
@@ -310,8 +295,7 @@
                                 src="../../images/error.png" />
                             <span class="SpamEG"></span></span>
                     </td>
-                    <td style="width: 150px;" class="Label_Bold">
-                        Dias Vigencia
+                    <td style="width: 150px;" class="Label_Bold">Dias Vigencia
                     </td>
                     <td>
                         <span class="cssToolTip_Form">
@@ -324,8 +308,7 @@
                                 src="../../images/error.png" />
                             <span class="SpamEG"></span></span>
                     </td>
-                    <td style="width: 150px;" class="Label_Bold">
-                        Fecha vencimiento
+                    <td style="width: 150px;" class="Label_Bold">Fecha vencimiento
                     </td>
                     <td>
                         <span class="cssToolTip_Form">
@@ -337,8 +320,7 @@
         </div>
         <table id="Table1" style="width: 100%; text-align: left;">
             <tr>
-                <td style="width: 105px;" class="Label_Bold">
-                    Observaciones
+                <td style="width: 105px;" class="Label_Bold">Observaciones
                 </td>
                 <td style="width: 200px;">
                     <span class="cssToolTip_Form">
@@ -351,12 +333,11 @@
             <tr>
                 <td class="Label_Bold" style="width: 200px;">
                     <input id="fileupload" type="file" name="files[]" />
-                    <a id="lnkAttch" style="cursor: pointer" onclick="AddFileInput(F1)" visible="false">
-                    </a>
+                    <a id="lnkAttch" style="cursor: pointer" onclick="AddFileInput(F1)" visible="false"></a>
                 </td>
                 <td style="width: 300px;">
                     <input id="Btncharge_file" type="button" value="Adjuntar un archivo" name="Add_files"
-                        style="width: 200px;" onclick="UpLoad_Document('Crud_Doc','fileupload','1');HabilitarControl();" />
+                        style="width: 200px;" onclick="UpLoad_Document('Crud_Doc', 'fileupload', '1'); HabilitarControl();" />
                 </td>
             </tr>
         </table>

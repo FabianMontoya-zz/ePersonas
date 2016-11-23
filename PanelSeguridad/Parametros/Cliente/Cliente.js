@@ -31,7 +31,7 @@ var OpcWordComplementos;
 
 /*--------------- region de variables globales --------------------*/
 
-//evento load de los Links
+//Evento load JS
 $(document).ready(function () {
 
     transaccionAjax_MDocWork('MATIRXDOC_WORK');
@@ -102,9 +102,7 @@ $(document).ready(function () {
 
     $("#Anexos").css("display", "none");
     $("#TR_Nit").css("display", "none");
-    $("#Admin_Anexos").css("display", "none");
-
-
+  
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
         autoOpen: false,
@@ -326,12 +324,9 @@ function Change_Select_TDoc() {
     });
 }
 
-
-
 //muestra las relacion del cliente
 function BtnRelacion() {
     $("#Dialog_Relation").dialog("open");
-
 }
 
 //salida del formulario

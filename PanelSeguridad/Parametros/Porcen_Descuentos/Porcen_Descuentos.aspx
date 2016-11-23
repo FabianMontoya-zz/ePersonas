@@ -12,7 +12,6 @@
     <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
     <link href="../../css/custom/charge.css" rel="stylesheet" type="text/css" />
-    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
     <link href="../../css/Chosen/chosen.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/jquery.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Chosen/chosen.jquery.js" type="text/javascript"></script>
@@ -20,14 +19,16 @@
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Dialog/datepicker.js" type="text/javascript"></script>
-    <style>
+    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
         .ui-widget
         {
-            background: silver;
-            border: solid;
-            border-color: gray;
-            border-width: 1px;
-            border-radius: 5px 5px 5px 5px;
+            background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+            background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+            background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+            background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+            border: solid 1px #921919;
+            border-radius: 5px;
         }
     </style>
 </asp:Content>
@@ -35,8 +36,7 @@
     <div id="Container_title_Form">
         <table id="Tabla_Title_form">
             <tr>
-                <td id="Title_form">
-                </td>
+                <td id="Title_form"></td>
                 <td id="image_exit">
                     <span class="cssToolTip_Form_L">
                         <input id="BtnExit" type="button" value="X" onclick="btnSalir();" /><span class="Spam_AEXIT_MOD"></span></span>
@@ -44,7 +44,7 @@
             </tr>
         </table>
     </div>
-    <div id="Marco_link">
+    <div id="Marco_Container">
         <div id="Marco_btn_Form">
             <input id="BtnShearh" type="button" value="Consulta" onclick="HabilitarPanel('buscar');" />
             <input id="BtnCreate" type="button" value="Crear" onclick="HabilitarPanel('crear');" />
@@ -56,7 +56,7 @@
                 <table id="TablaConsulta">
                     <tr>
                         <td id="TD1">
-                            <select id="DDLColumns">
+                            <select id="DDLColumns" class="C_Chosen">
                             </select>
                         </td>
                         <td id="TD2">
@@ -69,8 +69,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="4">
-                            &nbsp;
+                        <td colspan="4">&nbsp;
                         </td>
                     </tr>
                     <tr>
@@ -85,8 +84,7 @@
                         <td>
                             <table id="Tabla_2" style="width: 700px; text-align: left;">
                                 <tr>
-                                    <td class="Label_Bold" style="width: 120px;">
-                                        Pais
+                                    <td class="Label_Bold" style="width: 120px;">Pais
                                     </td>
                                     <td>
                                         <select id="Select_Pais" class="C_Chosen">
@@ -100,8 +98,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="Label_Bold">
-                                        Ciudad
+                                    <td class="Label_Bold">Ciudad
                                     </td>
                                     <td>
                                         <select id="Select_Ciudad" class="C_Chosen">
@@ -117,8 +114,7 @@
                             </table>
                             <table id="Tabla_3" style="width: 700px; text-align: left;">
                                 <tr>
-                                    <td style="width: 120px;" class="Label_Bold">
-                                        Impuesto
+                                    <td style="width: 120px;" class="Label_Bold">Impuesto
                                     </td>
                                     <td>
                                         <select id="Select_Impuesto" class="C_Chosen">
@@ -134,16 +130,14 @@
                             </table>
                             <table id="Tabla_4" style="width: 500px; text-align: left;">
                                 <tr>
-                                    <td class="Label_Bold" style="width: 150px;">
-                                        Periodo: Inferior
+                                    <td class="Label_Bold" style="width: 150px;">Periodo: Inferior
                                     </td>
                                     <td style="width: 110px;">
                                         <span class="cssToolTip_Form">
                                             <input id="TxtRInicial" type="text" readonly="readonly" style="width: 100px;">
                                             <span class="Spam_AF"></span></span>
                                     </td>
-                                    <td class="Label_Bold" style="width: 80px;">
-                                        Superior
+                                    <td class="Label_Bold" style="width: 80px;">Superior
                                     </td>
                                     <td style="width: 200px;">
                                         <span class="cssToolTip_Form">
@@ -154,8 +148,7 @@
                             </table>
                             <table id="Tabla_5" style="width: 700px; text-align: left;">
                                 <tr>
-                                    <td class="Label_Bold" style="width: 110px;">
-                                        Limite: Tipo
+                                    <td class="Label_Bold" style="width: 110px;">Limite: Tipo
                                     </td>
                                     <td style="width: 120px;">
                                         <select id="Select_LTipo" class="C_Chosen">
@@ -166,16 +159,14 @@
                                             <option value="4">Otros</option>
                                         </select>
                                     </td>
-                                    <td class="Label_Bold" style="width: 60px; padding-left: 20px;">
-                                        Inferior
+                                    <td class="Label_Bold" style="width: 60px; padding-left: 20px;">Inferior
                                     </td>
                                     <td style="width: 120px;">
                                         <span class="cssToolTip_Form">
                                             <input id="Txt_LInf" type="text" maxlength="20" style="width: 110px;">
                                             <span class="Spam_AST"></span></span>
                                     </td>
-                                    <td class="Label_Bold" style="width: 60px;">
-                                        Superior
+                                    <td class="Label_Bold" style="width: 60px;">Superior
                                     </td>
                                     <td style="width: 120px;">
                                         <span class="cssToolTip_Form">
@@ -188,30 +179,23 @@
                     </tr>
                     <tr>
                         <td>
-                            <table id="Vencimiento" style="margin-left: 90px; width: 50%; padding-left: 100px;
-                                padding-right: 100px; text-align: center;">
+                            <table id="Vencimiento" style="margin-left: 90px; width: 50%; padding-left: 100px; padding-right: 100px; text-align: center;">
                                 <tr>
-                                    <td align="center" class="Title_Bold" colspan="4">
-                                        Vencimientos
+                                    <td align="center" class="Title_Bold" colspan="4">Vencimientos
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 50px" class="Label_Bold">
-                                        Corte
+                                    <td style="width: 50px" class="Label_Bold">Corte
                                     </td>
-                                    <td style="width: 100px" class="Label_Bold">
-                                        Fecha
+                                    <td style="width: 100px" class="Label_Bold">Fecha
                                     </td>
-                                    <td style="width: 50px" class="Label_Bold">
-                                        Porcentaje
+                                    <td style="width: 50px" class="Label_Bold">Porcentaje
                                     </td>
-                                    <td style="width: 250px" class="Label_Bold">
-                                        Valor
+                                    <td style="width: 250px" class="Label_Bold">Valor
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="Label_Bold">
-                                        1
+                                    <td class="Label_Bold">1
                                     </td>
                                     <td>
                                         <span class="cssToolTip_Form">
@@ -222,16 +206,15 @@
                                                 <input type="text" id="TxtPorcen_1" maxlength="5" style="width: 70px;" class="Decimal" />
                                                 <span class="Spam_ADec"></span></span>
                                         </td>
-                                    <td>
-                                        <span class="cssToolTip_Form">
-                                            <input type="text" id="TxtValor_1" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }"
-                                                onchange="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
-                                            <span class="Spam_AVal"></span></span>
-                                    </td>
+                                        <td>
+                                            <span class="cssToolTip_Form">
+                                                <input type="text" id="TxtValor_1" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }"
+                                                    onchange="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
+                                                <span class="Spam_AVal"></span></span>
+                                        </td>
                                 </tr>
                                 <tr>
-                                    <td class="Label_Bold">
-                                        2
+                                    <td class="Label_Bold">2
                                     </td>
                                     <td>
                                         <span class="cssToolTip_Form">
@@ -251,8 +234,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="Label_Bold">
-                                        3
+                                    <td class="Label_Bold">3
                                     </td>
                                     <td>
                                         <span class="cssToolTip_Form">
@@ -272,8 +254,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="Label_Bold">
-                                        4
+                                    <td class="Label_Bold">4
                                     </td>
                                     <td>
                                         <span class="cssToolTip_Form">
@@ -293,8 +274,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="4" align="center">
-                                        &nbsp;
+                                    <td colspan="4" align="center">&nbsp;
                                     </td>
                                 </tr>
                                 <tr>
@@ -351,171 +331,127 @@
     <div id="Dialog_Visualiza">
         <table id="D_Impuestos" style="width: 100%">
             <tr>
-                <td class="Label_Bold">
-                    Pais
+                <td class="Label_Bold">Pais
                 </td>
-                <td id="V_Pais">
-                </td>
+                <td id="V_Pais"></td>
             </tr>
             <tr>
-                <td class="Label_Bold">
-                    Ciudad
+                <td class="Label_Bold">Ciudad
                 </td>
-                <td id="V_Ciudad">
-                </td>
+                <td id="V_Ciudad"></td>
             </tr>
             <tr>
-                <td class="Label_Bold">
-                    Impuesto
+                <td class="Label_Bold">Impuesto
                 </td>
-                <td id="V_Municipio">
-                </td>
+                <td id="V_Municipio"></td>
             </tr>
             <tr>
-                <td class="Label_Bold">
-                    Rango Inicial
+                <td class="Label_Bold">Rango Inicial
                 </td>
-                <td id="V_Inicial">
-                </td>
+                <td id="V_Inicial"></td>
             </tr>
             <tr>
-                <td class="Label_Bold">
-                    Rango Final
+                <td class="Label_Bold">Rango Final
                 </td>
-                <td id="V_Final">
-                </td>
+                <td id="V_Final"></td>
             </tr>
             <tr>
-                <td class="Label_Bold">
-                    Tipo de Limite
+                <td class="Label_Bold">Tipo de Limite
                 </td>
-                <td id="V_TL">
-                </td>
+                <td id="V_TL"></td>
             </tr>
             <tr>
-                <td class="Label_Bold">
-                    Limite Inferior
+                <td class="Label_Bold">Limite Inferior
                 </td>
-                <td id="V_LMin">
-                </td>
+                <td id="V_LMin"></td>
             </tr>
             <tr>
-                <td class="Label_Bold">
-                    Limite Superior
+                <td class="Label_Bold">Limite Superior
                 </td>
-                <td id="V_LMax">
-                </td>
+                <td id="V_LMax"></td>
         </table>
         <div id="Acordeon_Dat" style="margin: 40px;">
-            <h3>
-                Primera fecha
+            <h3>Primera fecha
             </h3>
             <div>
                 <table style="width: 100%">
                     <tr>
-                        <td class="Label_Bold">
-                            Mes/dia
+                        <td class="Label_Bold">Mes/dia
                         </td>
-                        <td id="V_F_1">
-                        </td>
+                        <td id="V_F_1"></td>
                     </tr>
                     <tr>
-                        <td class="Label_Bold">
-                            Descuento
+                        <td class="Label_Bold">Descuento
                         </td>
-                        <td id="V_Des_1">
-                        </td>
+                        <td id="V_Des_1"></td>
                     </tr>
                     <tr>
-                        <td class="Label_Bold">
-                            Valor
+                        <td class="Label_Bold">Valor
                         </td>
-                        <td id="V_Valor_1">
-                        </td>
+                        <td id="V_Valor_1"></td>
                     </tr>
                 </table>
             </div>
-            <h3>
-                Segunda fecha
+            <h3>Segunda fecha
             </h3>
             <div>
                 <table style="width: 100%">
                     <tr>
-                        <td class="Label_Bold">
-                            Mes/dia
+                        <td class="Label_Bold">Mes/dia
                         </td>
-                        <td id="V_F_2">
-                        </td>
+                        <td id="V_F_2"></td>
                     </tr>
                     <tr>
-                        <td class="Label_Bold">
-                            Descuento
+                        <td class="Label_Bold">Descuento
                         </td>
-                        <td id="V_Des_2">
-                        </td>
+                        <td id="V_Des_2"></td>
                     </tr>
                     <tr>
-                        <td class="Label_Bold">
-                            Valor
+                        <td class="Label_Bold">Valor
                         </td>
-                        <td id="V_Valor_2">
-                        </td>
+                        <td id="V_Valor_2"></td>
                     </tr>
                 </table>
             </div>
-            <h3>
-                Tercera fecha
+            <h3>Tercera fecha
             </h3>
             <div>
                 <table style="width: 100%">
                     <tr>
-                        <td class="Label_Bold">
-                            Mes/dia
+                        <td class="Label_Bold">Mes/dia
                         </td>
-                        <td id="V_F_3">
-                        </td>
+                        <td id="V_F_3"></td>
                     </tr>
                     <tr>
-                        <td class="Label_Bold">
-                            Descuento
+                        <td class="Label_Bold">Descuento
                         </td>
-                        <td id="V_Des_3">
-                        </td>
+                        <td id="V_Des_3"></td>
                     </tr>
                     <tr>
-                        <td class="Label_Bold">
-                            Valor
+                        <td class="Label_Bold">Valor
                         </td>
-                        <td id="V_Valor_3">
-                        </td>
+                        <td id="V_Valor_3"></td>
                     </tr>
                 </table>
             </div>
-            <h3>
-                Cuarta fecha
+            <h3>Cuarta fecha
             </h3>
             <div>
                 <table style="width: 100%">
                     <tr>
-                        <td class="Label_Bold">
-                            Mes/dia
+                        <td class="Label_Bold">Mes/dia
                         </td>
-                        <td id="V_F_4">
-                        </td>
+                        <td id="V_F_4"></td>
                     </tr>
                     <tr>
-                        <td class="Label_Bold">
-                            Descuento
+                        <td class="Label_Bold">Descuento
                         </td>
-                        <td id="V_Des_4">
-                        </td>
+                        <td id="V_Des_4"></td>
                     </tr>
                     <tr>
-                        <td class="Label_Bold">
-                            Valor
+                        <td class="Label_Bold">Valor
                         </td>
-                        <td id="V_Valor_4">
-                        </td>
+                        <td id="V_Valor_4"></td>
                     </tr>
                 </table>
             </div>

@@ -5,14 +5,14 @@
 /* -------       Label Usuario          ------*/
 #User, #Name_User
 {
-    color: #ffffff;;
+    color: #b70d0d;
     font-weight: bold;
 }
 
 /* -------       Label Titulo          ------*/
 #tituloPrincipal
 {
-    color: #ffffff;;
+    color: #b70d0d;
 }
 
 /* -------       Label Hora           ------*/
@@ -20,8 +20,8 @@
 {
     top: 4em;
     right: 1em;
-    color: #ffffff;
-    font: 14px/20px Verdana,sans-serif;
+    color: #b70d0d;
+    font: 14px/20px CenturyGothic,sans-serif;
     font-weight: bold;
 }
 
@@ -29,15 +29,31 @@
 #Header
 {
     float: none;
-    height: 145px;
+    background: -webkit-linear-gradient(#f6f6f6, #e8e8e8); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#f6f6f6, #e8e8e8); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#f6f6f6, #e8e8e8); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#f6f6f6, #e8e8e8); /* Standard syntax (must be last)*/
+    border-radius: 3px;
+    border: solid 1px #ccc;
 }
 
 /* -------         fondo            ------*/
 .header
 {
-    background: url(../images/cabeza2.jpg) no-repeat;
     background-position: center;
 }
+
+.Dimencion_Header
+{
+    height: 50px;
+    transition: all 0.8s ease;
+}
+
+    .Dimencion_Header:hover
+    {
+        height: 110px;
+        transition: all 0.8s ease;
+    }
 
 /* --------------------------------------------------------------------------- */
 /* ------------------------- BAR MENU MASTER PAGE ---------------------------- */
@@ -46,8 +62,15 @@
 /* -------         fondo            ------*/
 .Bar
 {
-    background: url(../images/menu3.jpg) no-repeat;
-    background-position: center;
+    background: -webkit-linear-gradient(#b70d0d, #631111); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#b70d0d, #631111); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#b70d0d, #631111); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#b70d0d, #631111); /* Standard syntax (must be last)*/
+    border-radius: 3px;
+    border: solid 1px #b3b3b3;
+    position: absolute;
+    width: 98.9%;
+    z-index: 50;
 }
 
 
@@ -58,40 +81,98 @@
 /* -------         fondo            ------*/
 .main
 {
-    background: url(../images/fondo11.jpg) no-repeat center center fixed; /*background-repeat: no-repeat;*/
+    margin-top: 48px;
 }
 
 /* -------         dimencion panel 1            ------*/
 #panel_menu
 {
-    width: 150px;
-    height: 500px;
+    height: 70%;
     vertical-align: text-top;
     padding-left: 1px;
 }
 
-/* -------         dimencion panel21            ------*/
+.Dimencion_Menu
+{
+    width: 48px;
+    transition: all 0.8s ease;
+}
+
+    .Dimencion_Menu:hover
+    {
+        width: 350px;
+        transition: all 0.8s ease;
+    }
+
+/* -------         dimencion panel            ------*/
 #container_menu
 {
-    width: 200px;
-    height: 585px;
-    background-color: white;
+    height: 79%;
+    background: -webkit-linear-gradient(#f6f6f6, #e8e8e8); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#f6f6f6, #e8e8e8); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#f6f6f6, #e8e8e8); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#f6f6f6, #e8e8e8); /* Standard syntax (must be last)*/
     overflow-x: scroll;
     overflow-y: scroll;
-    border: 1px solid #000000;
+    border-radius: 3px;
+    border: solid 1px #ccc;
+    position: absolute;
+    float: left;
+    z-index: 40;
+    margin-top: 4px;
+}
+
+#Bar_TMenu
+{
+    background: -webkit-linear-gradient(#b70d0d, #921919); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#b70d0d, #921919); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#b70d0d, #921919); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#b70d0d, #921919);
+    border: solid 1px #ccc;
+    float: left;
+    width: 20px;
+    height: 74%;
+    padding-right: 10px;
+    color: #FFFFFF;
+    text-align: right;
+    padding-top: 40px;
+    position: absolute;
+    z-index: 50;
+    margin-top: 4px;
 }
 
 /* --------------------------------------------------------------------------- */
-/* ------------------------- FOOTER MASTER PAGE ------_---------------------- */
+/* ------------------------- FOOTER MASTER PAGE ---------------------------- */
 /* --------------------------------------------------------------------------- */
 
 /* -------         fondo            ------*/
-.footer
+#Footer
 {
-    background-image: url(../images/cabeza2.jpg);
-    background-repeat: no-repeat;
-    background-position: center; /*background-size: cover;*/
+    background: -webkit-linear-gradient(#b70d0d, #631111); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#b70d0d, #631111); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#b70d0d, #631111); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#b70d0d, #631111); /* Standard syntax (must be last)*/
+    border-radius: 3px;
+    position: absolute;
+    margin-top: 5px;
+    width: 95%;
+    margin-left: 25px;
+    bottom: 0;
+    z-index: 100;
 }
+
+
+.Dimencion_Footer
+{
+    height: 40px;
+    transition: all 0.8s ease;
+}
+
+    .Dimencion_Footer:hover
+    {
+        height: 100px;
+        transition: all 0.8s ease;
+    }
 
 /* -------         parrafos            ------*/
 #Parraf_1, #Parraf_2, #Parraf_3

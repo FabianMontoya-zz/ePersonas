@@ -6,13 +6,17 @@
 /*personalizacion de la barra de titulo*/
 #Container_title_Form
 {
-    background: url(../css/theme_blue_Sky/images/header.png);
-    background-repeat: repeat;
+    background: -webkit-linear-gradient(#b70d0d, #631111); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#b70d0d, #631111); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#b70d0d, #631111); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#b70d0d, #631111); /* Standard syntax (must be last)*/
     border-radius: 3px;
-    padding-left: 5px;
-    padding-right: 5px;
+    margin-left: 25px;
+    margin-top: 5px;
+    padding-right: 0.5em;
     font-weight: bold;
-    width: 95%;
+    color: #ffffff;
+    width: 97.5%;
 }
 
 #Tabla_Title_form
@@ -34,16 +38,19 @@
 /*----------------------- TITULO ---------------------------*/
 /*personalizacion marco del formulario*/
 
-#Marco_link
+#Marco_Container
 {
     margin-top: 10px;
-    padding: 20px 26px;
-    background-color: silver;
-    border-radius: 20px 20px 20px 20px;
-    border-color: gray;
-    border-width: 5px;
-    border-style: outset;
-    width: 90%;
+    margin-left: 25px;
+    padding: 14px 14px;
+    background: -webkit-linear-gradient(#f6f6f6, #e8e8e8); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#f6f6f6, #e8e8e8); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#f6f6f6, #e8e8e8); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#f6f6f6, #e8e8e8); /* Standard syntax (must be last)*/
+    border-radius: 5px;
+    border: solid 1px #ccc;
+    width: 95.5%;
+    height: 40%;
 }
 
 #Marco_btn_Form
@@ -51,12 +58,14 @@
     margin-top: 1px;
     padding: 20px 20px;
     background-color: silver;
-    border-radius: 15px 15px 15px 15px;
-    border-color: gray;
-    border-width: 5px;
-    border-style: outset;
-    width: 95%;
-    height: 40px;
+    border-radius: 10px;
+    background: -webkit-linear-gradient(#f6f6f6, #e8e8e8); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#f6f6f6, #e8e8e8); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#f6f6f6, #e8e8e8); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#f6f6f6, #e8e8e8); /* Standard syntax (must be last)*/
+    border: solid 1px #ccc;
+    width: 97%;
+    height: 10%;
     text-align: center;
 }
 
@@ -65,13 +74,14 @@
     position: relative;
     margin-top: 10px;
     padding: 20px 20px;
-    background-color: silver;
-    border-radius: 15px 15px 15px 15px;
-    border-color: gray;
-    border-width: 5px;
-    border-style: outset;
-    width: 95%;
-    height: 350px;
+    border-radius: 10px;
+    background: -webkit-linear-gradient(#f6f6f6, #e8e8e8); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#f6f6f6, #e8e8e8); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#f6f6f6, #e8e8e8); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#f6f6f6, #e8e8e8); /* Standard syntax (must be last)*/
+    border: solid 1px #ccc;
+    width: 97%;
+    height: 430px;
     overflow: auto;
 }
 
@@ -83,23 +93,27 @@
 #TablaDatos
 {
     width: 100%;
-    background-color: silver;
     padding: 20px 26px;
-    border-radius: 0 0 20px 20px;
-    border-color: gray;
-    border-width: 5px;
-    border-style: outset;
+    border-radius: 10px;
+    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+    border: solid 1px #921919;
 }
 
 #TablaDatos_D, #TablaDatos_D_Vista
 {
-    width: 800px;
-    background-color: silver;
-    padding: 40px 30px;
-    border-radius: 0 0 20px 20px;
-    border-color: gray;
-    border-width: 5px;
-    border-style: outset;
+    width: 96%;
+    height: 100%;
+    padding: 2%;
+    border-radius: 10px;
+    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+    border: solid 1px #921919;
+    overflow: auto;
 }
 
 #TablaDatos_D_Max
@@ -107,46 +121,64 @@
     width: 860px;
     height: 380px;
     overflow: auto;
-    background-color: silver;
     padding: 40px 30px;
-    border-radius: 20px;
-    border-color: gray;
-    border-width: 5px;
-    border-style: outset;
+    border-radius: 10px;
+    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+    border: solid 1px #921919;
+}
+
+#TablaDatos_D_Calen
+{
+    width: 1120px;
+    height: 350px;
+    overflow: auto;
+    padding: 40px 30px;
+    border-radius: 10px;
+    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+    border: solid 1px #921919;
 }
 
 #TablaProductos_D
 {
     width: 985px;
-    background-color: silver;
     padding: 40px 30px;
-    border-radius: 0 0 20px 20px;
-    border-color: gray;
-    border-width: 5px;
-    border-style: outset;
+    border-radius: 10px;
+    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+    border: solid 1px #921919;
 }
 
 #Datos_Direc_D, #Datos_Bank_D
 {
     margin-top: 20px;
     width: 90%;
-    background-color: silver;
     padding: 40px 30px;
-    border-radius: 20px 20px 20px 20px;
-    border-color: gray;
-    border-width: 5px;
-    border-style: outset;
+    border-radius: 10px;
+    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+    border: solid 1px #921919;
 }
 
 #TablaConsulta
 {
     width: 100%;
-    background-color: silver;
     padding: 20px 26px;
-    border-radius: 0 0 20px 20px;
-    border-color: gray;
-    border-width: 5px;
-    border-style: outset;
+    border-radius: 10px;
+    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+    border: solid 1px #921919;
 }
 
 /*personalizacion de las cajas de texto */
@@ -168,7 +200,7 @@
 /*------------------- ajuste de grid administracion -----------------------------------------------*/
 #TLink, #TOpcRol, #TRol, #TUser
 {
-    font: 12px/20px Verdana,sans-serif;
+    font: 12px/20px CenturyGothic,sans-serif;
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -178,31 +210,50 @@
 /*------------------- ajuste de grid parametrizacion -----------------------------------------------*/
 #TArea, #TEmpleado, #TFestivo
 {
-    font: 12px/20px Verdana,sans-serif;
+    font: 12px/20px CenturyGothic,sans-serif;
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*                                                           ESTILOS PAISES                                                               */
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
- #container_TGrid, #container_TRDoc_Verificacion, #container_TR_PuertaAcc_Area, #container_TPuertaAcceso, #container_TConsecutivos_General, #container_TConsecutivos, #container_TRGrpDoc_Doc, #container_TDocumento, #container_TRutaDocumentos, #container_TGrpDocumentos, #container_TCargo, #container_TProductos, #container_TTransacciones, #container_TTP_Activo, #container_TTP_Leasing, #container_TSActivo, #container_TActivo, #container_TSTP_Leasing, #container_TFasecolda, #container_TMonedaCot, #container_TPaises, #container_TMensajes, #container_TAyudas, #container_TCiudades, #container_TImpuesto_Gasto, #container_Tlink, #container_Trol, #container_TopcRol, #container_TUser, #container_TInf_Impuesto, #container_TPorcen_Descuentos, #container_TCliente, #container_TMonedaCod, #container_TArea, #container_TEmpleado, #container_TFestivo
+#container_TGrid, #container_TRDoc_Verificacion, #container_TR_PuertaAcc_Area, #container_TPuertaAcceso, #container_TConsecutivos_General, #container_TConsecutivos, #container_TRGrpDoc_Doc, #container_TDocumento, #container_TRutaDocumentos, #container_TGrpDocumentos, #container_TCargo, #container_TProductos, #container_TTransacciones, #container_TTP_Activo, #container_TTP_Leasing, #container_TSActivo, #container_TActivo, #container_TSTP_Leasing, #container_TFasecolda, #container_TMonedaCot, #container_TPaises, #container_TMensajes, #container_TAyudas, #container_TCiudades, #container_TImpuesto_Gasto, #container_Tlink, #container_Trol, #container_TopcRol, #container_TUser, #container_TInf_Impuesto, #container_TPorcen_Descuentos, #container_TCliente, #container_TMonedaCod, #container_TArea, #container_TEmpleado, #container_TFestivo
 {
-    width: 800px;
+    width: 1050px;
     height: 238px;
     overflow: auto;
     border: solid 1px #CACACA;
-    font: 12px/20px Verdana,sans-serif;
+    font: 12px/20px CenturyGothic,sans-serif;
     text-align: center;
 }
 
-#container_Document, #container_direccion, #container_Bank
+#Container_Consulta
+{
+    width: 100%;
+    overflow: auto;
+    font: 12px/20px CenturyGothic,sans-serif;
+    text-align: center;
+}
+
+#container_Document, #container_direccion, #container_Bank, #container_TGrid_2
 {
     width: 970px;
     height: 340px;
     overflow: auto;
     border: solid 1px #CACACA;
-    font: 12px/20px Verdana,sans-serif;
+    font: 12px/20px CenturyGothic,sans-serif;
     text-align: center;
+}
+
+#container_TGrid_2
+{
+    width: 1120px;
+    height: 190px;
+    overflow: auto;
+    border: solid 1px #CACACA;
+    font: 12px/20px CenturyGothic,sans-serif;
+    text-align: center;
+    margin-top: 5px;
 }
 
 #container_TDoc_H
@@ -211,7 +262,7 @@
     height: 150px;
     overflow: auto;
     border: solid 1px #CACACA;
-    font: 12px/20px Verdana,sans-serif;
+    font: 12px/20px CenturyGothic,sans-serif;
     text-align: center;
 }
 
@@ -221,36 +272,37 @@
     height: 360px;
     overflow: auto;
     border: solid 1px #CACACA;
-    font: 12px/20px Verdana,sans-serif;
+    font: 12px/20px CenturyGothic,sans-serif;
     text-align: center;
 }
 
 
 .Dialog_Sasif
 {
-    background: silver;
-    border-radius: 15px 15px 15px 15px;
-    border-color: gray;
-    border-width: 5px;
-    border-style: outset;
+    border-radius: 10px;
     padding: 20px 26px;
+    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+    border: solid 1px #921919;
 }
 
 #D_Impuestos
 {
-    font: 12px/20px Verdana,sans-serif;
+    font: 12px/20px CenturyGothic,sans-serif;
 }
 
 .Title_Bold
 {
-    font: 20px/28px Verdana,sans-serif;
+    font: 20px/28px CenturyGothic,sans-serif;
     font-weight: bold;
     color: #2C2C2C;
 }
 
 .Label_Bold
 {
-    font: 12px/20px Verdana,sans-serif;
+    font: 12px/20px CenturyGothic,sans-serif;
     font-weight: bold;
 }
 
@@ -258,12 +310,13 @@
 {
     margin-top: 15px;
     width: 100%;
-    background-color: silver;
     padding: 20px 26px;
     border-radius: 20px;
-    border-color: gray;
-    border-width: 5px;
-    border-style: outset;
+    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+    border: solid 1px #921919;
 }
 
 #Controls
@@ -298,24 +351,25 @@
     width: 740px;
     border-radius: 20px;
     border-width: 5px;
-    font: 12px/20px Verdana,sans-serif;
+    font: 12px/20px CenturyGothic,sans-serif;
 }
 
 #D_Impuestos, #D_Clientes_Z
 {
     margin-top: 15px;
-    background-color: silver;
     padding: 20px 26px;
-    border-radius: 20px;
-    border-color: gray;
-    border-width: 5px;
-    border-style: outset;
-    font: 12px/20px Verdana,sans-serif;
+    border-radius: 10px;
+    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+    border: solid 1px #921919;
+    font: 12px/20px CenturyGothic,sans-serif;
 }
 
 #container_direccion
 {
-    font: 12px/20px Verdana,sans-serif;
+    font: 12px/20px CenturyGothic,sans-serif;
     text-align: center;
 }
 
@@ -323,12 +377,13 @@
 {
     margin-top: 10px;
     width: 100%;
-    background-color: silver;
     padding: 20px 26px;
-    border-radius: 20px;
-    border-color: gray;
-    border-width: 5px;
-    border-style: outset;
+    border-radius: 10px;
+    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+    border: solid 1px #921919;
 }
 
 #T_Valores, #T_Saldos
@@ -342,11 +397,12 @@
 {
     margin-top: 10px;
     padding: 20px 26px;
-    background-color: silver;
-    border-radius: 20px 20px 20px 20px;
-    border-color: gray;
-    border-width: 5px;
-    border-style: outset;
+    border-radius: 10px;
+    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+    border: solid 1px #921919;
     width: 90%;
     height: 470px;
 }
@@ -355,11 +411,12 @@
 {
     margin-top: 10px;
     padding: 20px 20px;
-    background-color: silver;
-    border-radius: 15px 15px 15px 15px;
-    border-color: gray;
-    border-width: 5px;
-    border-style: outset;
+    border-radius: 10px;
+    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+    border: solid 1px #921919;
     width: 95%;
     height: 410px;
     overflow: auto;
@@ -370,12 +427,13 @@
     height: 170px;
     width: 200px;
     position: absolute;
-    background-color: silver;
     padding-top: 40px;
     border-radius: 10px;
-    border-color: gray;
-    border-width: 5px;
-    border-style: outset;
+    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+    border: solid 1px #921919;
     z-index: 20;
     margin-left: 5px;
     margin-top: 10px;
@@ -383,25 +441,27 @@
 
 .Option_Cliente
 {
-    background-color: silver;
+    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
     width: 100%;
     height: 50px;
     text-align: left;
-    border: solid 1px silver;
+    border: solid 1px #e0e0e0;
     color: gray;
 }
 
-
-.Option_Cliente:hover
-{
-    background: -webkit-linear-gradient(#89B8DA, #6EA7D2);
-    background: -o-linear-gradient(#89B8DA, #6EA7D2);
-    background: -moz-linear-gradient(#89B8DA, #6EA7D2);
-    background: linear-gradient(#89B8DA, #6EA7D2);
-    border: solid 1px white;
-    color: white;
-    cursor: pointer;
-}
+    .Option_Cliente:hover
+    {
+        background: -webkit-linear-gradient(#b70d0d, #631111);
+        background: -o-linear-gradient(#b70d0d, #631111);
+        background: -moz-linear-gradient(#b70d0d, #631111);
+        background: linear-gradient(#b70d0d, #631111);
+        border: solid 1px white;
+        color: white;
+        cursor: pointer;
+    }
 
 .C_Image
 {
@@ -421,6 +481,39 @@
     margin-left: 50px;
     position: absolute;
     z-index: 50;
+}
+
+/*CONTROL IMAGEN DIRECCION*/
+#DivA:hover .ImaAddress
+{
+    content: url("../../images/adress_book_w.png");
+}
+
+.ImaAddress
+{
+    content: url("../../images/adress_book.png");
+}
+
+/*CONTROL IMAGEN BANCO*/
+#DivB:hover .ImaBank
+{
+    content: url("../../images/bank_w.png");
+}
+
+.ImaBank
+{
+    content: url("../../images/bank.png");
+}
+
+/*CONTROL IMAGEN BANCO*/
+#DivD:hover .ImaDoc
+{
+    content: url("../../images/documentos_w.png");
+}
+
+.ImaDoc
+{
+    content: url("../../images/documentos.png");
 }
 
 #Foto_Persona

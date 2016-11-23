@@ -298,6 +298,11 @@ PanelSeguridad
  funcion que carga el objeto DDL consulta
  </summary>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AccesoAjax.CargarMPersonaDep">
+	<summary>
+ funcion que carga  Matrix PERSONAS 
+ </summary>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.AccesoAjax.Carga_Matrix_DocWork">
 	<summary>
  cara la matriz de documento para trabajo
@@ -319,6 +324,11 @@ PanelSeguridad
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.AccesoAjax.Cargar_MatrixPAcceso">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AccesoAjax.CargarMPAccesos_Area">
 	<summary>
  funcion que carga el objeto DDL consulta
  </summary>
@@ -1500,30 +1510,6 @@ To modify move field declaration from designer file to code-behind file.
  funcion que carga el objeto DDL consulta
  </summary>
 	<remarks></remarks>
-</member><member name="F:PanelSeguridad.Sasif_Ing.head">
-	<summary>
-head control.
-</summary>
-	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member><member name="F:PanelSeguridad.Sasif_Ing.form1">
-	<summary>
-form1 control.
-</summary>
-	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member><member name="F:PanelSeguridad.Sasif_Ing.main">
-	<summary>
-main control.
-</summary>
-	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
 </member><member name="M:PanelSeguridad.PuertaAccesoSQLClass.Read_AllPuertaAcceso(System.String,System.String,System.String)">
 	<summary>
  creala consulta para la tabla PuertaAcceso parametrizada (READ)
@@ -2192,78 +2178,6 @@ To modify move field declaration from designer file to code-behind file.
  funcion para encriptacion del password MD5
  </summary>
 	<param name="SourceText"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CalendarioProgresivoSQLClass.Read_AllCalendarioProgresivo(System.String,System.String,System.String)">
-	<summary>
- creala consulta para la tabla CalendarioProgresivo parametrizada (READ)
- </summary>
-	<param name="vp_S_Filtro"></param>
-	<param name="vp_S_Opcion"></param>
-	<param name="vp_S_Contenido"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CalendarioProgresivoSQLClass.InsertCalendarioProgresivo(PanelSeguridad.CalendarioProgresivoClass)">
-	<summary>
- funcion que crea el query para la insercion de nuevo CalendarioProgresivo (INSERT)
- </summary>
-	<param name="vp_Obj_CalendarioProgresivo"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CalendarioProgresivoSQLClass.UpdateCalendarioProgresivo(PanelSeguridad.CalendarioProgresivoClass)">
-	<summary>
- funcion que crea el query para la modificacion del CalendarioProgresivo (UPDATE)
- </summary>
-	<param name="vp_Obj_CalendarioProgresivo"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CalendarioProgresivoSQLClass.EraseCalendarioProgresivo(PanelSeguridad.CalendarioProgresivoClass)">
-	<summary>
- funcion que crea el query para la eliminacion del CalendarioProgresivo (DELETE)
- </summary>
-	<param name="vp_Obj_CalendarioProgresivo"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CalendarioProgresivoSQLClass.ReadCharge_DropList(System.String)">
-	<summary>
- crea la consulta para cargar el combo
- </summary>
-	<param name="vp_S_Table"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CalendarioProgresivoSQLClass.Charge_DropListCalendarioProgresivoDepend(System.String)">
-	<summary>
- crea la consulta para cargar el combo
- </summary>
-	<param name="vp_S_NitEmpresa"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CalendarioProgresivoSQLClass.Charge_DropListSeguridad(System.String)">
-	<summary>
- crea la consulta para cargar el combo
- </summary>
-	<param name="vp_S_Table"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CalendarioProgresivoSQLClass.listCalendarioProgresivo(System.String,System.String,System.String)">
-	<summary>
- funcion que trae el listado de CalendarioProgresivo para armar la tabla
- </summary>
-	<param name="vp_S_StrQuery"></param>
-	<param name="vg_S_StrConexion"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CalendarioProgresivoSQLClass.Consulta_Repetido(PanelSeguridad.CalendarioProgresivoClass)">
-	<summary>
- averigua si esta repetido
- </summary>
-	<param name="vp_O_Obj"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CalendarioProgresivoSQLClass.Read_Matrix_CalendarioProgresivo">
-	<summary>
- lee la matriz de CalendarioProgresivos
- </summary>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.C_ContratoAjax.InsertC_Contrato">
@@ -2996,36 +2910,6 @@ To modify move field declaration from designer file to code-behind file.
  funcion que carga el objeto DDL consulta
  </summary>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CalendarioProgresivoAjax.Consulta_CalendarioProgresivo">
-	<summary>
- traemos todos los datos para tabla CalendarioProgresivo (READ)
- </summary>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CalendarioProgresivoAjax.InsertCalendarioProgresivo">
-	<summary>
- funcion que inserta en la tabla CalendarioProgresivo (INSERT)
- </summary>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CalendarioProgresivoAjax.UpdateCalendarioProgresivo">
-	<summary>
- funcion que actualiza en la tabla CalendarioProgresivo (UPDATE)
- </summary>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CalendarioProgresivoAjax.EraseCalendarioProgresivo">
-	<summary>
- funcion que elimina en la tabla CalendarioProgresivo (DELETE)
- </summary>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CalendarioProgresivoAjax.CargarDroplist">
-	<summary>
- funcion que carga el objeto DDL Links
- </summary>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CalendarioProgresivoAjax.CargarCliente">
-	<summary>
- funcion que carga el objeto DDL consulta
- </summary>
-	<remarks></remarks>
 </member><member name="M:PanelSeguridad.CalendarioSQLClass.Read_AllCalendario(System.String,System.String,System.String)">
 	<summary>
  creala consulta para la tabla Calendario parametrizada (READ)
@@ -3455,27 +3339,27 @@ To modify move field declaration from designer file to code-behind file.
 	<remarks></remarks>
 </member><member name="F:PanelSeguridad.Sasif_menu.head">
 	<summary>
-head control.
+Control head.
 </summary>
 	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
 </remarks>
 </member><member name="F:PanelSeguridad.Sasif_menu.form1">
 	<summary>
-form1 control.
+Control form1.
 </summary>
 	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
 </remarks>
 </member><member name="F:PanelSeguridad.Sasif_menu.main">
 	<summary>
-main control.
+Control main.
 </summary>
 	<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
 </remarks>
 </member><member name="M:PanelSeguridad.CiudadesAjax.Consulta_Ciudades">
 	<summary>
@@ -3595,6 +3479,12 @@ To modify move field declaration from designer file to code-behind file.
 </member><member name="M:PanelSeguridad.DocumentosSQLClass.MatrixDocumentWork">
 	<summary>
  carga matrix de trabajo documentos
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.InvPuertaSQLClass.Read_All_Tarjetas(System.String)">
+	<summary>
+ creala consulta para la tabla InvPuerta parametrizada (READ)
  </summary>
 	<returns></returns>
 	<remarks></remarks>
