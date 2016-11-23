@@ -49,7 +49,9 @@ Public Class R_Persona_TarjetaAjax
         Dim ObjList_Tarjeta As New List(Of InvPuertaClass)
         Dim SQL As New InvPuertaSQLClass
 
-        ObjList_Tarjeta = SQL.Read_All_Tarjetas()
+        Dim Nit_ID As String = Request.Form("Nit")
+
+        ObjList_Tarjeta = SQL.Read_All_Tarjetas(Nit_ID)
         Response.Write(JsonConvert.SerializeObject(ObjList_Tarjeta.ToArray()))
 
     End Function

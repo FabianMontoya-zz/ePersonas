@@ -3482,7 +3482,7 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
  </summary>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.InvPuertaSQLClass.Read_All_Tarjetas">
+</member><member name="M:PanelSeguridad.InvPuertaSQLClass.Read_All_Tarjetas(System.String)">
 	<summary>
  creala consulta para la tabla InvPuerta parametrizada (READ)
  </summary>

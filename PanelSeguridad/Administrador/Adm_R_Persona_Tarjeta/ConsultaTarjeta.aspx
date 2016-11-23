@@ -34,6 +34,17 @@
     <div id="Marco_Container">
         <div id="Container_controls">
             <div id="TablaDatos_D">
+                <table id="Tabla_1" style="width: 100%; text-align: left;">
+                    <tr>
+                        <td style="width: 5%;" class="Label_Bold">Empresa 
+                        </td>
+                        <td>
+                            <select id="Select_EmpresaNit" class="C_Chosen">
+                            </select>
+                        </td>
+                        <td style="padding-bottom: 25px; width: 50%;"></td>
+                    </tr>
+                </table>
                 <div id="Container_Consulta">
                 </div>
             </div>
@@ -96,7 +107,7 @@
                 </td>
                 <td id="V_MotivoBloqueo"></td>
             </tr>
-              <tr>
+            <tr>
                 <td class="Label_Bold">Observaciones
                 </td>
                 <td id="V_Observacion" colspan="3"></td>

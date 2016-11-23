@@ -9,16 +9,8 @@ var editDocID;
 
 //Evento load JS
 $(document).ready(function () {
-    transacionAjax_Consulta("Read_Tarjeta");
-
-    $("#ESelect").css("display", "none");
-    $("#Img1").css("display", "none");
-    $("#Img2").css("display", "none");
-    $("#Img3").css("display", "none");
-    $("#Img5").css("display", "none");
-    $("#DE").css("display", "none");
-    $("#SE").css("display", "none");
-    $("#WE").css("display", "none");
+    transacionAjax_EmpresaNit('Cliente');
+    Change_Select_Nit();
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
@@ -46,7 +38,6 @@ $(document).ready(function () {
     });
 });
 
-
 //salida del formulario
 function btnSalir() {
     window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
@@ -56,6 +47,19 @@ function btnSalir() {
 function x() {
     $("#dialog").dialog("close");
 }
+
+//evento de cambio de empresa
+function Change_Select_Nit() {
+    $("#Select_EmpresaNit").change(function () {
+        var index_ID = $(this).val();
+
+        if (index_ID == "-1")
+            index_ID = "ALL";
+
+        transacionAjax_Consulta("Read_Tarjeta", index_ID);
+    });
+}
+
 
 // crea la tabla en el cliente
 function Table_Tarjetas() {

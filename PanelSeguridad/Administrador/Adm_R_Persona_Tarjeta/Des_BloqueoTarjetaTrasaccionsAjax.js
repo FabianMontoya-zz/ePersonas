@@ -125,7 +125,6 @@ function transacionAjax_Des_Bloqueo(State) {
     });
 }
 
-
 /*------------------------------ crear ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax_UpdateDes_Bloqueo(State) {

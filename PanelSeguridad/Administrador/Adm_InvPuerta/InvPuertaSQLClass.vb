@@ -10,7 +10,7 @@ Public Class InvPuertaSQLClass
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Read_All_Tarjetas()
+    Public Function Read_All_Tarjetas(ByVal vp_S_Nit As String)
 
         Dim ObjListCliente As New List(Of InvPuertaClass)
         Dim StrQuery As String = ""
@@ -21,7 +21,67 @@ Public Class InvPuertaSQLClass
 
         Dim sql As New StringBuilder
 
-        sql.Append(" SELECT  IT_Nit_ID, " & _
+        If vp_S_Nit = "ALL" Then
+
+            sql.Append(" SELECT  IT_Nit_ID, " & _
+                                  "               IT_Tarjeta_ID, " & _
+                                  "               IT_Estado, " & _
+                                  "               IT_MotivoBloqueo, " & _
+                                  "               IT_ChequeaVigencias, " & _
+                                  "               IT_Fecha_Inicio_Vigencia, " & _
+                                  "               IT_Fecha_Fin_Vigencia, " & _
+                                  "               IT_Nit_ID_Custodia, " & _
+                                  "               IT_TypeDocument_ID_Custodia, " & _
+                                  "               IT_Document_ID_Custodia, " & _
+                                  "               IT_FechaCustodia, " & _
+                                  "               IT_Nit_ID_Asigna, " & _
+                                  "               IT_TypeDocument_Asigna, " & _
+                                  "               IT_Document_ID_Asigna, " & _
+                                  "               IT_FechaAsignacion, " & _
+                                  "               IT_Nit_ID_Entrega, " & _
+                                  "               IT_TypeDocument_Entrega, " & _
+                                  "               IT_Document_ID_Entrega, " & _
+                                  "               IT_FechaEntrega, " & _
+                                  "               IT_Observaciones, " & _
+                                  "               IT_Usuario_Creacion, " & _
+                                  "               IT_FechaCreacion, " & _
+                                  "               IT_Usuario_Actualizacion, " & _
+                                  "               IT_FechaActualizacion, " & _
+                                  "               ET.DDLL_Descripcion, " & _
+                                  "               BT.DDLL_Descripcion, " & _
+                                  "               EC.CLI_Nombre + ' ' + EC.CLI_Nombre_2 + ' ' + EC.CLI_Apellido_1 + ' ' + EC.CLI_Apellido_2 AS Emp_Custodia, " & _
+                                  "               PC.CLI_Nombre + ' ' + PC.CLI_Nombre_2 + ' ' + PC.CLI_Apellido_1 + ' ' + PC.CLI_Apellido_2 AS P_Custodia, " & _
+                                  "               EA.CLI_Nombre + ' ' + EA.CLI_Nombre_2 + ' ' + EA.CLI_Apellido_1 + ' ' + EA.CLI_Apellido_2 AS Emp_Asignada, " & _
+                                  "               PA.CLI_Nombre + ' ' + PA.CLI_Nombre_2 + ' ' + PA.CLI_Apellido_1 + ' ' + PA.CLI_Apellido_2 AS P_Asignada, " & _
+                                  "               EE.CLI_Nombre + ' ' + EE.CLI_Nombre_2 + ' ' + EE.CLI_Apellido_1 + ' ' + EE.CLI_Apellido_2 AS Emp_Entrega, " & _
+                                  "               PE.CLI_Nombre + ' ' + PE.CLI_Nombre_2 + ' ' + PE.CLI_Apellido_1 + ' ' + PE.CLI_Apellido_2 AS P_Entrega, " & _
+                                  "               ROW_NUMBER() OVER(ORDER BY IT.IT_Tarjeta_ID ASC) AS Index_Tarjeta " & _
+                                  " FROM INVENTARIO_TARJETAS IT " & _
+                                  "     LEFT JOIN TC_DDL_TIPO ET ON ET.DDL_ID =IT.IT_Estado AND ET.DDL_Tabla = 'ESTADO_TARJETA' " & _
+                                  "     LEFT JOIN TC_DDL_TIPO BT ON BT.DDL_ID =IT.IT_MotivoBloqueo AND BT.DDL_Tabla = 'BLOQUEO' " & _
+                                  "     LEFT JOIN " & BD_Param & ".dbo.CLIENTE PC ON PC.CLI_Nit_ID = IT.IT_Nit_ID_Custodia AND PC.CLI_TypeDocument_ID =IT.IT_TypeDocument_ID_Custodia AND PC.CLI_Document_ID = IT.IT_Document_ID_Custodia " & _
+                                  "     LEFT JOIN " & BD_Param & ".dbo.CLIENTE PA ON PA.CLI_Nit_ID = IT.IT_Nit_ID_Asigna AND PA.CLI_TypeDocument_ID =IT.IT_TypeDocument_Asigna AND PA.CLI_Document_ID = IT.IT_Document_ID_Asigna " & _
+                                  "     LEFT JOIN " & BD_Param & ".dbo.CLIENTE PE ON PE.CLI_Nit_ID = IT.IT_Nit_ID_Entrega AND PE.CLI_TypeDocument_ID =IT.IT_TypeDocument_Entrega AND PE.CLI_Document_ID = IT.IT_Document_ID_Entrega " & _
+                                  "     LEFT JOIN " & BD_Param & ".dbo.CLIENTE EC ON EC.CLI_Document_ID = " & _
+                                  "                                                                     CASE	 SUBSTRING((IT.IT_Nit_ID_Custodia),0,LEN(IT.IT_Nit_ID_Custodia)) " & _
+                                  "                                                                                  WHEN '' THEN 0  " & _
+                                  "                                                                                  ELSE SUBSTRING((IT.IT_Nit_ID_Custodia),0,LEN(IT.IT_Nit_ID_Custodia)) " & _
+                                  "                                                                     END " & _
+                                  "    LEFT JOIN " & BD_Param & ".dbo.CLIENTE EA ON EA.CLI_Document_ID =  " & _
+                                  "                                                                     CASE	 SUBSTRING((IT.IT_Nit_ID_Asigna),0,LEN(IT.IT_Nit_ID_Asigna)) " & _
+                                  "                                                                                  WHEN '' THEN 0  " & _
+                                  "                                                                                  ELSE SUBSTRING((IT.IT_Nit_ID_Asigna),0,LEN(IT.IT_Nit_ID_Asigna)) " & _
+                                  "                                                                     END " & _
+                                  "    LEFT JOIN " & BD_Param & ".dbo.CLIENTE EE ON EE.CLI_Document_ID =   " & _
+                                  "                                                                     CASE	 SUBSTRING((IT.IT_Nit_ID_Entrega),0,LEN(IT.IT_Nit_ID_Entrega)) " & _
+                                  "                                                                                  WHEN '' THEN 0  " & _
+                                  "                                                                                  ELSE SUBSTRING((IT.IT_Nit_ID_Entrega),0,LEN(IT.IT_Nit_ID_Entrega)) " & _
+                                  "                                                                     END " & _
+                                  " ORDER BY IT.IT_Tarjeta_ID ASC ")
+
+        Else
+
+            sql.Append(" SELECT  IT_Nit_ID, " & _
                               "               IT_Tarjeta_ID, " & _
                               "               IT_Estado, " & _
                               "               IT_MotivoBloqueo, " & _
@@ -75,10 +135,11 @@ Public Class InvPuertaSQLClass
                               "                                                                                  WHEN '' THEN 0  " & _
                               "                                                                                  ELSE SUBSTRING((IT.IT_Nit_ID_Entrega),0,LEN(IT.IT_Nit_ID_Entrega)) " & _
                               "                                                                     END " & _
+                              "  WHERE IT_Nit_ID = '" & vp_S_Nit & "' " & _
                               " ORDER BY IT.IT_Tarjeta_ID ASC ")
+        End If
 
         StrQuery = sql.ToString
-
         ObjListCliente = listInvPuerta(StrQuery, Conexion, "List")
 
         Return ObjListCliente
