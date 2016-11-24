@@ -1064,6 +1064,13 @@ PanelSeguridad
 	<param name="vp_Obj_R_Persona_Tarjeta"></param>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.R_Persona_TarjetaSQLClass.DeleteRTP_Desbloqueo(System.String)">
+	<summary>
+ proceso que elimina la relacion de persona tarje por desbloqueo para asignarla nuevamentae 
+ </summary>
+	<param name="vp_s_Tarjeta_ID"></param>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.R_Persona_TarjetaSQLClass.Charge_DropListR_Persona_TarjetaDepend(System.String)">
 	<summary>
  crea la consulta para cargar el combo
@@ -3516,6 +3523,13 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
 	<param name="vp_Obj_InvPuerta"></param>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.InvPuertaSQLClass.UpdateDesBloqueoTarjeta(PanelSeguridad.InvPuertaClass)">
+	<summary>
+ actualizacion por Desbloqueo de tarjeta por recuperacion
+ </summary>
+	<param name="vp_Obj_InvPuerta"></param>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.InvPuertaSQLClass.Charge_DropListBloqueo">
 	<summary>
  crea la consulta para cargar el combo
@@ -3561,6 +3575,11 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.R_Persona_TarjetaAjax.UpdateInvTarjeta_Bloqueo">
+	<summary>
+ funcion que Actualiza en la tabla Inventario Tarjeta bloqueo(UPDATE)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.R_Persona_TarjetaAjax.UpdateInvTarjeta_DesBloqueo">
 	<summary>
  funcion que Actualiza en la tabla Inventario Tarjeta bloqueo(UPDATE)
  </summary>

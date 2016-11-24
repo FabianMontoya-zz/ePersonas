@@ -294,6 +294,48 @@ Public Class InvPuertaSQLClass
 
     End Function
 
+    ''' <summary>
+    ''' actualizacion por Desbloqueo de tarjeta por recuperacion
+    ''' </summary>
+    ''' <param name="vp_Obj_InvPuerta"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function UpdateDesBloqueoTarjeta(ByVal vp_Obj_InvPuerta As InvPuertaClass)
+
+        Dim conex As New Conector
+        Dim Result As String
+        ' definiendo los objetos
+        Dim sql As New StringBuilder
+        Dim StrQuery As String = ""
+
+        sql.AppendLine("UPDATE INVENTARIO_TARJETAS SET " & _
+                    " IT_Estado ='" & vp_Obj_InvPuerta.Estado & "', " & _
+                    " IT_MotivoBloqueo ='" & vp_Obj_InvPuerta.MotivoBloqueo & "', " & _
+                    " IT_Nit_ID_Custodia ='" & vp_Obj_InvPuerta.Nit_ID_Custodia & "', " & _
+                    " IT_TypeDocument_ID_Custodia ='" & vp_Obj_InvPuerta.TypeDocument_ID_Custodia & "', " & _
+                    " IT_Document_ID_Custodia ='" & vp_Obj_InvPuerta.Document_ID_Custodia & "', " & _
+                    " IT_FechaCustodia ='" & vp_Obj_InvPuerta.FechaCustodia & "', " & _
+                    " IT_Nit_ID_Asigna ='', " & _
+                    " IT_TypeDocument_Asigna ='0', " & _
+                    " IT_Document_ID_Asigna ='0', " & _
+                    " IT_FechaAsignacion ='', " & _
+                    " IT_Nit_ID_Entrega ='', " & _
+                    " IT_TypeDocument_Entrega ='0', " & _
+                    " IT_Document_ID_Entrega ='0', " & _
+                    " IT_FechaEntrega ='', " & _
+                    " IT_Observaciones ='" & vp_Obj_InvPuerta.Observaciones & "', " & _
+                    " IT_Usuario_Actualizacion ='" & vp_Obj_InvPuerta.UsuarioActualizacion & "', " & _
+                    " IT_FechaActualizacion ='" & vp_Obj_InvPuerta.FechaActualizacion & "' " & _
+                    " WHERE IT_Tarjeta_ID = '" & vp_Obj_InvPuerta.Tarjeta_ID & "'")
+        StrQuery = sql.ToString
+
+        Result = conex.StrInsert_and_Update_All(StrQuery, "1")
+
+        Return Result
+
+    End Function
+
+
 #End Region
 
 #Region "CONSULTAS DROP LIST"

@@ -35,6 +35,9 @@ Public Class R_Persona_TarjetaAjax
                 Case "UpdateBloqueo"
                     UpdateInvTarjeta_Bloqueo()
 
+                Case "Update_DesBloqueo"
+                    UpdateInvTarjeta_DesBloqueo()
+
                 Case "Read_Tarjeta"
                     ReadTarjeta()
 
@@ -167,6 +170,52 @@ Public Class R_Persona_TarjetaAjax
         ObjListInvPuerta.Add(ObjInvPuerta)
 
         Dim result As String = SQLInvPuerta.UpdateBloqueoTarjeta(ObjInvPuerta)
+
+        Response.Write(result)
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que Actualiza en la tabla Inventario Tarjeta bloqueo(UPDATE)
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub UpdateInvTarjeta_DesBloqueo()
+
+        Dim SQLInvPuerta As New InvPuertaSQLClass
+        Dim ObjListInvPuerta As New List(Of InvPuertaClass)
+        Dim ObjInvPuerta As New InvPuertaClass
+        Dim objListPersona As New List(Of ClienteClass)
+        Dim SQL_Persona As New ClienteSQLClass
+        Dim SQL_R_Persona_Tarjeta As New R_Persona_TarjetaSQLClass
+
+        Dim result As String
+
+        ObjInvPuerta.Tarjeta_ID = Request.Form("Tarjeta")
+        ObjInvPuerta.Estado = Request.Form("Estado")
+        ObjInvPuerta.MotivoBloqueo = Request.Form("Bloqueo")
+        ObjInvPuerta.Observaciones = Request.Form("Observaciones")
+
+        ObjInvPuerta.UsuarioActualizacion = Request.Form("user")
+        ObjInvPuerta.FechaActualizacion = Date.Now
+
+        Dim user_log As Integer = 0
+        objListPersona = SQL_Persona.InformacionUsuario(ObjInvPuerta.UsuarioActualizacion)
+
+        For Each item_list As ClienteClass In objListPersona
+            user_log = 1
+            ObjInvPuerta.Nit_ID_Custodia = item_list.Nit_ID
+            ObjInvPuerta.TypeDocument_ID_Custodia = item_list.TypeDocument_ID
+            ObjInvPuerta.Document_ID_Custodia = item_list.Document_ID
+            ObjInvPuerta.FechaCustodia = Date.Now
+        Next
+
+        If user_log = 1 Then
+            ObjListInvPuerta.Add(ObjInvPuerta)
+            SQL_R_Persona_Tarjeta.DeleteRTP_Desbloqueo(Request.Form("Tarjeta").ToString())
+            result = SQLInvPuerta.UpdateDesBloqueoTarjeta(ObjInvPuerta)
+        Else
+            result = "NO_USER"
+        End If
 
         Response.Write(result)
 
