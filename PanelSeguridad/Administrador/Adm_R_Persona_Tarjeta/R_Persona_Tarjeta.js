@@ -14,6 +14,8 @@ var editDocID;
 
 //Evento load JS
 $(document).ready(function () {
+    $("#TablaDatos_D").css("padding-bottom", "20%");
+
     transaccionAjax_MPersona('MATRIX_PERSONA');
     transaccionAjax_MTarjeta('MATRIX_TARJETA');
     Change_Select_Nit();

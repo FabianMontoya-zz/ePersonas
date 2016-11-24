@@ -33,6 +33,7 @@ $(document).ready(function () {
     $('.Hours').focus(function () {
         this.value = "";
     });
+
 });
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -240,12 +241,12 @@ function Validahora(V_HoraInicial, V_HoraFinal) {
     var Valida = 0;
 
     if (parseInt(A_V_HoraInicial[0]) > parseInt(A_V_HoraFinal[0])) {
-         Valida = 1;
+        Valida = 1;
     }
 
     if (parseInt(A_V_HoraInicial[0]) == parseInt(A_V_HoraFinal[0])) {
         if (parseInt(A_V_HoraInicial[1]) > parseInt(A_V_HoraFinal[1])) {
-           Valida = 1;
+            Valida = 1;
         }
     }
 
@@ -285,6 +286,90 @@ sumaFecha = function (d, fecha) {
     dia = (dia < 10) ? ("0" + dia) : dia;
     var fechaFinal = dia + sep + mes + sep + anno;
     return (fechaFinal);
+}
+
+var primerslap = false;
+var segundoslap = false;
+var Tercerslap = false;
+
+function formateafecha(fecha) {
+    var long = fecha.length;
+    var dia;
+    var mes_c;
+    var ano;
+
+    //validacion año
+    if ((long >= 4) && (primerslap == false)) {
+        ano = fecha.substr(0, 4);
+        if (IsNumeric(ano) == true) {
+            if ((ano == 0) || (ano < 1900) || (ano > 2100))
+                fecha = "";
+            else {
+                fecha = fecha.substr(0, 4) + "-" + fecha.substr(5, 5);
+                primerslap = true;
+            }
+        }
+        else {
+            fecha = "";
+            primerslap = false;
+        }
+    }
+    else {
+        ano = fecha.substr(0, 3);
+        if (IsNumeric(ano) == false)
+            fecha = "";
+        if ((long <= 4) && (primerslap == true)) {
+            fecha = fecha.substr(0, 3);
+            primerslap = false;
+        }
+    }
+
+    //validacion mes
+    if (((long >= 5) || (long <= 7)) && ((primerslap == true) && (Tercerslap == false))) {
+        mes_c = fecha.substr(5, 2);
+        if ((IsNumeric(mes_c) == true) && (mes_c <= 12) && (mes_c != "00")) {
+            fecha = fecha.substr(0, 4) + "-" + fecha.substr(5, 2);
+            segundoslap = true;
+        }
+        else {
+            if ((segundoslap == true) && (long <= 7)) {
+                fecha = fecha.substr(0, 4) + "-";
+                segundoslap = false;
+            }
+        }
+    }
+
+    if (long >= 7 && Tercerslap == false ) {
+        //   fecha = fecha.substr(0, 7) + "-" + fecha.substr(7, 2);
+        dia = fecha.substr(7, 2);
+        console.log(dia);
+        if ((IsNumeric(dia) == true) && (dia <= 31) && (dia != "00")) {
+            fecha = fecha.substr(0, 7) + "-" + fecha.substr(7, 3);
+            //Tercerslap = true;
+        }
+        else {
+            fecha = fecha.substr(0, 7) + "-";
+            //Tercerslap = false;
+        }
+
+    }
+
+    return (fecha);
+}
+
+//valida si el campo es numerico en la digitacion de la fecha en tiempo real
+function IsNumeric(valor) {
+    var log = valor.length;
+    var sw = "S";
+
+    for (x = 0; x < log; x++) {
+        v1 = valor.substr(x, 1);
+        v2 = parseInt(v1);
+        //Compruebo si es un valor numérico 
+        if (isNaN(v2)) { sw = "N"; }
+    }
+
+    if (sw == "S") { return true; } else { return false; }
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -614,7 +699,7 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
                 }
             }
             break;
-         
+
         case "Select_Documento_1":
             for (Item in Matrix) {
                 if ((Matrix[Item].Nit_ID == Nit) && (Matrix[Item].RequiereVerificacion == "S")) {

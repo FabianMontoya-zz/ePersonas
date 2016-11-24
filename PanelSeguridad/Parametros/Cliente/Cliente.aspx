@@ -54,7 +54,7 @@
                 <div id="Container_Complementos">
                     <div id="DivA" class="Option_Cliente" onclick="javascript:BlockAnexos('Direcciones');">
                         <div class="C_Image">
-                            <img  alt="Direc" class="ImaAddress" id="Direccion" src="../../images/adress_book.png" height="35px"
+                            <img alt="Direc" class="ImaAddress" id="Direccion" src="../../images/adress_book.png" height="35px"
                                 width="35px" style="margin-top: 7px;" />
                         </div>
                         <div class="Spam_CT1 C_Text Label_Bold">
@@ -62,7 +62,7 @@
                     </div>
                     <div id="DivB" class="Option_Cliente" onclick="javascript:BlockAnexos('Banco');">
                         <div class="C_Image">
-                            <img alt="Bank"  class="ImaBank" id="Bancos" src="../../images/bank.png" height="40px" width="40px"
+                            <img alt="Bank" class="ImaBank" id="Bancos" src="../../images/bank.png" height="40px" width="40px"
                                 style="margin-top: 3px;" />
                         </div>
                         <div class="Spam_CT2 C_Text Label_Bold">
@@ -70,7 +70,7 @@
                     </div>
                     <div id="DivD" class="Option_Cliente" onclick="javascript:BlockAnexos('Documento');">
                         <div class="C_Image">
-                            <img alt="Bank"  class="ImaDoc" id="Documentos" src="../../images/documentos.png" height="35px" width="35px"
+                            <img alt="Bank" class="ImaDoc" id="Documentos" src="../../images/documentos.png" height="35px" width="35px"
                                 style="margin-top: 7px;" />
                         </div>
                         <div class="Spam_CT4 C_Text Label_Bold">
@@ -94,7 +94,7 @@
                                 <input id="TxtRead" type="text" />
                                 <span class="Spam_AST"></span></span>
                         </td>
-                        <td  align="center" id="TD3">
+                        <td align="center" id="TD3">
                             <input id="BtnRead" type="button" value="Buscar" onclick="BtnConsulta();" />
                         </td>
                     </tr>
@@ -304,6 +304,16 @@
                             </td>
                             <td style="padding-bottom: 25px;"></td>
                         </tr>
+                        <tr>
+                            <td class="Label_Bold" style="width: 120px;">Fecha De Nacimiento
+                            </td>
+                            <td>
+                                <span class="cssToolTip_Form">
+                                    <input type="text" id="Txt_FechaNacimiento" maxlength="50" style="width: 150px;" onkeyup="this.value=formateafecha(this.value);" />
+                                    <span class="Spam_AST"></span></span>
+                            </td>
+                        </tr>
+
                     </table>
                     <table id="Tabla_8" style="width: 700px; text-align: left;">
                         <tr>
