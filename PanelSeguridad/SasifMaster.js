@@ -3,6 +3,21 @@ var User;
 var Link;
 var NameTemporal;
 var Doc_name;
+var Matrix_Mes = [];
+
+Matrix_Mes[0] = [1, "Enero", 31];
+Matrix_Mes[1] = [2, "Febrero", 28];
+Matrix_Mes[2] = [3, "Marzo", 31];
+Matrix_Mes[3] = [4, "Abril", 30];
+Matrix_Mes[4] = [5, "Mayo", 31];
+Matrix_Mes[5] = [6, "Junio", 30];
+Matrix_Mes[6] = [7, "Julio", 31];
+Matrix_Mes[7] = [8, "Agosto", 31];
+Matrix_Mes[8] = [9, "Septiembre", 30];
+Matrix_Mes[9] = [10, "Octubre", 31];
+Matrix_Mes[10] = [11, "Noviembre", 30];
+Matrix_Mes[11] = [12, "Diciembre", 31];
+
 /*--------------- region de variables globales --------------------*/
 
 $(document).ready(function () {
@@ -33,6 +48,7 @@ $(document).ready(function () {
     $('.Hours').focus(function () {
         this.value = "";
     });
+
 
 });
 
@@ -288,88 +304,26 @@ sumaFecha = function (d, fecha) {
     return (fechaFinal);
 }
 
-var primerslap = false;
-var segundoslap = false;
-var Tercerslap = false;
+//validamos año bisiesto
+function Valida_Bisiesto(Year) {
 
-function formateafecha(fecha) {
-    var long = fecha.length;
-    var dia;
-    var mes_c;
-    var ano;
+    var valida = "N";
 
-    //validacion año
-    if ((long >= 4) && (primerslap == false)) {
-        ano = fecha.substr(0, 4);
-        if (IsNumeric(ano) == true) {
-            if ((ano == 0) || (ano < 1900) || (ano > 2100))
-                fecha = "";
-            else {
-                fecha = fecha.substr(0, 4) + "-" + fecha.substr(5, 5);
-                primerslap = true;
-            }
-        }
-        else {
-            fecha = "";
-            primerslap = false;
-        }
-    }
-    else {
-        ano = fecha.substr(0, 3);
-        if (IsNumeric(ano) == false)
-            fecha = "";
-        if ((long <= 4) && (primerslap == true)) {
-            fecha = fecha.substr(0, 3);
-            primerslap = false;
-        }
-    }
+    var R_4 = parseInt(Year) % 4;
+    var R_100 = parseInt(Year) % 100;
+    var M_100 = R_100 % 4;
 
-    //validacion mes
-    if (((long >= 5) || (long <= 7)) && ((primerslap == true) && (Tercerslap == false))) {
-        mes_c = fecha.substr(5, 2);
-        if ((IsNumeric(mes_c) == true) && (mes_c <= 12) && (mes_c != "00")) {
-            fecha = fecha.substr(0, 4) + "-" + fecha.substr(5, 2);
-            segundoslap = true;
-        }
-        else {
-            if ((segundoslap == true) && (long <= 7)) {
-                fecha = fecha.substr(0, 4) + "-";
-                segundoslap = false;
+    var R_400 = parseInt(Year) % 400;
+    var M_400 = R_400 % 4;
+
+    if (R_4 == 0) {
+        if (M_100 == 0) {
+            if (M_400 == 0) {
+                valida = "Y";
             }
         }
     }
-
-    if (long >= 7 && Tercerslap == false ) {
-        //   fecha = fecha.substr(0, 7) + "-" + fecha.substr(7, 2);
-        dia = fecha.substr(7, 2);
-        console.log(dia);
-        if ((IsNumeric(dia) == true) && (dia <= 31) && (dia != "00")) {
-            fecha = fecha.substr(0, 7) + "-" + fecha.substr(7, 3);
-            //Tercerslap = true;
-        }
-        else {
-            fecha = fecha.substr(0, 7) + "-";
-            //Tercerslap = false;
-        }
-
-    }
-
-    return (fecha);
-}
-
-//valida si el campo es numerico en la digitacion de la fecha en tiempo real
-function IsNumeric(valor) {
-    var log = valor.length;
-    var sw = "S";
-
-    for (x = 0; x < log; x++) {
-        v1 = valor.substr(x, 1);
-        v2 = parseInt(v1);
-        //Compruebo si es un valor numérico 
-        if (isNaN(v2)) { sw = "N"; }
-    }
-
-    if (sw == "S") { return true; } else { return false; }
+    return valida;
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -746,6 +700,112 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
     $('.C_Chosen').trigger('chosen:updated');
 
 }
+
+//carga combo de años
+function CargaYear(Select_Control, Rango, Option_Year, Index_Edit) {
+
+    var ActualYear = $("#Hours").html();
+    var A_Date = ActualYear.split("-");
+    var Ciclo = 0;
+
+    var Year_F = parseInt(A_Date[0]) - parseInt(Option_Year);
+    var Year_I = parseInt(Year_F) - parseInt(Rango);
+
+    $('#' + Select_Control).empty();
+    var objList = $("[id$='" + Select_Control + "']");
+    $('#' + Select_Control).append("<option value='-1'>Año...</option>");
+
+    for (Ciclo; Ciclo <= Rango; Ciclo++) {
+        $("#" + Select_Control).append("<option value='" + Year_I + "'>" + Year_I + "</option>");
+        Year_I = Year_I + 1;
+    }
+
+    if (Index_Edit == "")
+        $("#" + Select_Control + " option[value= '-1'] ").attr("selected", true);
+    else
+        $("#" + Select_Control + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
+
+    $("#" + Select_Control).trigger("liszt:updated");
+    $('.C_Chosen').trigger('chosen:updated');
+
+}
+
+//cargar combo de meses
+function CargaMonth(Select_Control, Index_Edit) {
+
+    $('#' + Select_Control).empty();
+    var objList = $("[id$='" + Select_Control + "']");
+    $('#' + Select_Control).append("<option value='-1'>Mes...</option>");
+
+    for (itemArray in Matrix_Mes) {
+        $("#" + Select_Control).append("<option value='" + Matrix_Mes[itemArray][0] + "'>" + Matrix_Mes[itemArray][1] + "</option>");
+    }
+
+    if (Index_Edit == "")
+        $("#" + Select_Control + " option[value= '-1'] ").attr("selected", true);
+    else
+        $("#" + Select_Control + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
+
+    $("#" + Select_Control).trigger("liszt:updated");
+    $('.C_Chosen').trigger('chosen:updated');
+
+}
+
+//
+function CargaDay(Select_C_Year, Select_C_Month, Select_Control, Index_Edit) {
+
+    var Select_Y = $("#" + Select_C_Year).val();
+    var Select_M = $("#" + Select_C_Month).val();
+    var N_Day_M = 0;
+
+    if (Select_Y == "-1" || Select_M == "-1") {
+
+        if (Select_Y == "-1") {
+            Mensaje_General("No Hay Año", "Debe seleccionar El año!", "W");
+        }
+        if (Select_M == "-1") {
+            Mensaje_General("No Hay Mes", "Debe seleccionar El Mes!", "W");
+        }
+    }
+    else {
+
+        var YearBis = Valida_Bisiesto(Select_Y);
+        var Ciclo = 1;
+       
+        for (itemArray in Matrix_Mes) {
+            if (Matrix_Mes[itemArray][0] == Select_M) {
+                console.log(YearBis);
+                console.log(Select_M);
+
+                if (YearBis == "Y" && Select_M == "2")
+                    N_Day_M = 29;
+                else
+                    N_Day_M = Matrix_Mes[itemArray][2];
+            }
+        }
+
+        var objList = $("[id$='" + Select_Control + "']");
+
+        $('#' + Select_Control).empty();
+        var objList = $("[id$='" + Select_Control + "']");
+        $('#' + Select_Control).append("<option value='-1'>Dia...</option>");
+
+        for (Ciclo; Ciclo <= N_Day_M; Ciclo++) {
+            $("#" + Select_Control).append("<option value='" + Ciclo + "'>" + Ciclo + "</option>");
+        }
+
+        if (Index_Edit == "")
+            $("#" + Select_Control + " option[value= '-1'] ").attr("selected", true);
+        else
+            $("#" + Select_Control + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
+
+        $("#" + Select_Control).trigger("liszt:updated");
+        $('.C_Chosen').trigger('chosen:updated');
+
+    }
+
+}
+
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                         FUNCIONES PARA CARGA DE DOCUMENTOS AL SERVIDOR                                                                                  ----*/

@@ -424,17 +424,17 @@
 
 #Container_Complementos
 {
-    height: 170px;
-    width: 200px;
+    height: 45%;
+    width: 20%;
     position: absolute;
-    padding-top: 40px;
+    padding-top: 4%;
     border-radius: 10px;
     background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
     background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
     border: solid 1px #921919;
-    z-index: 20;
+    z-index: 40;
     margin-left: 5px;
     margin-top: 10px;
 }
@@ -518,18 +518,18 @@
 
 #Foto_Persona
 {
-    width: 100px;
+    width: 86%;
     height: 120px;
     position: absolute;
-    z-index: 50;
-    margin-left: 755px;
+    z-index: 0;
+   text-align:right;
     margin-top: 10px;
 }
 
 #Footer_Det
 {
     position: absolute;
-    margin-top: 50px;
+    margin-top: 55px;
     border: solid 1px;
     border-radius: 3px;
     border-style: outset;

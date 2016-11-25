@@ -24,7 +24,7 @@ $(document).ready(function () {
     transacionAjax_EmpresaNit('Cliente');
 
     Change_Select_Nit();
-
+    
     $("#ESelect").css("display", "none");
     $("#Img1").css("display", "none");
     $("#Img2").css("display", "none");

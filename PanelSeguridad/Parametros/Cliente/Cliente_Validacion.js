@@ -322,7 +322,6 @@ function valida_Banco() {
     return validar;
 }
 
-
 //validacion campos adicionales para empleados
 function valida_Empleados() {
 

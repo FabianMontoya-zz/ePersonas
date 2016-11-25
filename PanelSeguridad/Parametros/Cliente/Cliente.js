@@ -7,7 +7,7 @@ var Matrix_Jefe = [];
 var Matrix_GrpDocumentos = [];
 var Matrix_DocWork = [];
 
-var ArrayRegimen= [];
+var ArrayRegimen = [];
 
 var ArrayCliente = [];
 var ArrayCombo = [];
@@ -28,7 +28,6 @@ var NitAlter = "";
 var ValidatorCampos = 1;
 var OpcComplementos = 0;
 var OpcWordComplementos;
-
 /*--------------- region de variables globales --------------------*/
 
 //Evento load JS
@@ -41,6 +40,7 @@ $(document).ready(function () {
     transaccionAjax_MJefe('MATRIX_JEFE');
     transaccionAjax_MGrpDoc('MATRIX_GRP');
 
+    CargaMonth("Select_Mont", "");
     M_Regimen();
 
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
@@ -77,6 +77,11 @@ $(document).ready(function () {
     $("#Img14").css("display", "none");
     $("#Img15").css("display", "none");
     $("#Img16").css("display", "none");
+    $("#Img19").css("display", "none");
+    $("#Img20").css("display", "none");
+    $("#Img21").css("display", "none");
+    $("#Img24").css("display", "none");
+
     $("#Img22").css("display", "none");
     $("#Img23").css("display", "none");
 
@@ -102,7 +107,7 @@ $(document).ready(function () {
 
     $("#Anexos").css("display", "none");
     $("#TR_Nit").css("display", "none");
-  
+
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
         autoOpen: false,
@@ -298,6 +303,7 @@ $(document).ready(function () {
     ValideAnexos();
     Change_Select_TDoc();
     Change_Select_Nit();
+    Change_Mes();
 
 });
 
@@ -310,17 +316,48 @@ function Change_Select_TDoc() {
 
             ResetError();
             $("#TR_Nit").css("display", "none");
-            $(".Desvanecer").css("display", "inline-block");
-            $(".TR_1").css("width", "150%");
+            $(".Desvanecer").css("display", "inline-table");
+            $(".TR_1").css("width", "100%");
             ValidatorCampos = 1;
+
+            $("#TD_1").css("width", "15.2%");
+            $("#TD_2").css("width", "10%");
+            $("#TD_3").css("width", "3%");
+            $("#TD_4").css("width", "3%");
+            $("#TD_5").css("width", "5%");
+            $("#TD_6").css("width", "2%");
+            $("#TD_7").css("width", "35%");
+            $("#TD_8").css("width", "15%");
+            $("#Select_Ciudad_Doc").css("width", "80%");
+
+            $("#TD_A1").css("width", "12%");
+            $("#TD_HA1").css("width", "3.7%");
+            $("#TD_A2").css("width", "15%");
+
+
         }
         else {
+            $("#TD_1").css("width", "13%");
+            $("#TD_2").css("width", "10%");
+            $("#TD_3").css("width", "1%");
+            $("#TD_4").css("width", "5%");
+            $("#TD_5").css("width", "5%");
+            $("#TD_6").css("width", "50%");
+            $("#TD_7").css("width", "50%");
+            $("#TD_8").css("width", "50%");
 
             ResetError();
-            $("#TR_Nit").css("display", "inline-block");
+            $("#TR_Nit").css("display", "inline-table");
             $(".Desvanecer").css("display", "none");
             ValidatorCampos = 2;
         }
+    });
+}
+
+//Carga los dias del mes correspondiente
+function Change_Mes() {
+    $("#Select_Mont").change(function () {
+        CargaDay("Select_Year", "Select_Mont", "Select_Day", "");
     });
 }
 
@@ -342,6 +379,7 @@ function HabilitarPanel(opcion) {
 
         case "crear":
             ResetError();
+            CargaYear("Select_Year", 80, 17, "");
             $("#TablaDatos_D").css("display", "inline-table");
             $("#TablaDatos_D_Vista").css("display", "none");
             $("#Admin_Anexos").css("display", "none");
@@ -358,7 +396,7 @@ function HabilitarPanel(opcion) {
 
             $("#BtnLimpiar").css("display", "inline-table");
             $("#Btnguardar").css("display", "inline-table");
-    
+
             $("#Txt_Nit").removeAttr("disabled");
             $("#Txt_Ident").removeAttr("disabled");
             $("#Btnguardar").attr("value", "Guardar");
@@ -378,7 +416,7 @@ function HabilitarPanel(opcion) {
             $("#Controls").css("display", "none");
             $("#Anexos").css("display", "none");
             $("#BtnLimpiar").css("display", "none");
-        
+
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TCliente").html("");
             estado = opcion;
@@ -397,7 +435,7 @@ function HabilitarPanel(opcion) {
             $("#C_Banco").css("display", "none");
             $("#C_Empleado").css("display", "none");
             $("#BtnLimpiar").css("display", "none");
-        
+
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TCliente").html("");
             estado = opcion;
@@ -414,7 +452,7 @@ function HabilitarPanel(opcion) {
             $("#Controls").css("display", "none");
             $("#Anexos").css("display", "none");
             $("#BtnLimpiar").css("display", "none");
-        
+
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TCliente").html("");
             estado = opcion;
@@ -693,7 +731,7 @@ function ConsultaPersona(Index_Cliente) {
     $("#Con_Ident").html(ArrayCliente[Index_Cliente].Document_ID);
     $("#ConVerif").html(ArrayCliente[Index_Cliente].Digito_Verificacion);
     $("#Con_Consecutivo").html(ArrayCliente[Index_Cliente].Consecutivo);
-    
+
     if (ArrayCliente[Index_Cliente].TypeDocument_ID == "2") {
         $("#ConNombreNit").html(ArrayCliente[Index_Cliente].Nombre);
         $("#TR_Nit_C").css("display", "inline-block");
@@ -710,7 +748,7 @@ function ConsultaPersona(Index_Cliente) {
         $("#C_MultiEmpresa").css("display", "inline-block");
     else
         $("#C_MultiEmpresa").css("display", "none");
-   
+
     $("#ConNombre_2").html(ArrayCliente[Index_Cliente].Nombre_2);
     $("#Con_Ape_1").html(ArrayCliente[Index_Cliente].Apellido_1);
     $("#Con_Ape_2").html(ArrayCliente[Index_Cliente].Apellido_2);
@@ -857,7 +895,7 @@ function Clear() {
     $("#Select_Regimen").val("-1");
     $("#Select_Acceso").val("N");
     $("#Select_GrpDocument").val("-1");
-    
+
     $('.C_Chosen').trigger('chosen:updated');
 
 }
