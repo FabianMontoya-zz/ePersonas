@@ -530,7 +530,7 @@ Public Class ClienteAjax
     Protected Sub Carga_Matriz_PaisCiudad()
 
         Dim SQLC As New CiudadesSQLClass
-     
+
         Dim ObjList_MatrixCiudad As New List(Of CiudadesClass)
         ObjList_MatrixCiudad = SQLC.Read_Matrix_Ciudad()
 
@@ -735,6 +735,11 @@ Public Class ClienteAjax
 
             Obj.Pais_ID = Item.Pais_ID
             Obj.Ciudad_ID = Item.Ciudad_ID
+
+            Obj.Tipo_1 = Item.Tipo_1
+            Obj.Tipo_2 = Item.Tipo_2
+            Obj.Tipo_3 = Item.Tipo_3
+            Obj.Tipo_4 = Item.Tipo_4
 
             If Convert.ToString(Item.Telefono_1) = "" Then
                 Obj.Telefono_1 = 0

@@ -344,14 +344,14 @@
                             <td class="Label_Bold" style="width: 5%">Sexo
                             </td>
                             <td style="width: 10%;" colspan="2">
-                                <select id="Select_Sex" class="C_Chosen" style="width:100px;">
+                                <select id="Select_Sex" class="C_Chosen">
                                     <option value="-1">Seleccione...</option>
                                     <option value="M">Masculino</option>
                                     <option value="F">Femenino</option>
                                     <option value="O">Otros</option>
                                 </select>
                             </td>
-                            <td style="width: 90%;  padding-bottom: 25px;" colspan="5">
+                            <td style="width: 90%; padding-bottom: 25px;" colspan="5">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img24"
                                         src="../../images/error.png" />
@@ -976,25 +976,24 @@
                     </td>
                 </tr>
             </table>
-            <table id="Tabla_Telefono">
-                <tr align="center">
-                    <td class="Label_Bold" style="width: 120px;"></td>
-                    <td class="Label_Bold">Ind.
-                    </td>
-                    <td class="Label_Bold">Tel. ó Cel
-                    </td>
-                    <td class="Label_Bold">Ext.
-                    </td>
-                    <td class="Label_Bold" style="width: 120px;"></td>
-                    <td class="Label_Bold">Ind.
-                    </td>
-                    <td class="Label_Bold">Tel. ó Cel
-                    </td>
-                    <td class="Label_Bold">Ext.
-                    </td>
+            <table id="Tabla_Telefono" style="width: 100%; padding-left:50px;">
+                <tr align="left">
+                    <td class="Label_Bold" style="width: 70px;"></td>
+                    <td class="Label_Bold" style="width: 80px;">Tipo Telefono</td>
+                    <td class="Label_Bold" style="width: 20px;">Ind.</td>
+                    <td class="Label_Bold" style="width: 50px;">Tel. ó Cel</td>
+                    <td class="Label_Bold" style="width: 0px;">Ext.</td>
                 </tr>
                 <tr>
-                    <td class="Label_Bold" style="width: 120px;">Telefono 1
+                    <td class="Label_Bold" style="width: 50px;">Telefono 1
+                    </td>
+                    <td style="width: 80px;">
+                        <select id="Select_TypeTel_1" class="C_Chosen" style="width: 80px;">
+                            <option value="-1">Seleccione...</option>
+                            <option value="C">Casa</option>
+                            <option value="F">Oficina</option>
+                            <option value="O">Otro</option>
+                        </select>
                     </td>
                     <td>
                         <span class="cssToolTip_Form">
@@ -1011,7 +1010,17 @@
                             <input type="text" id="TxtExt1" maxlength="5" class="Numeric" style="width: 50px;" />
                             <span class="Spam_AN"></span></span>
                     </td>
-                    <td class="Label_Bold" style="width: 120px;">Telefono 2
+                </tr>
+                <tr>
+                    <td class="Label_Bold" style="width: 50px;">Telefono 2
+                    </td>
+                    <td style="width: 80px;">
+                        <select id="Select_TypeTel_2" class="C_Chosen" style="width: 80px;">
+                            <option value="-1">Seleccione...</option>
+                            <option value="C">Casa</option>
+                            <option value="F">Oficina</option>
+                            <option value="O">Otro</option>
+                        </select>
                     </td>
                     <td>
                         <span class="cssToolTip_Form">
@@ -1032,6 +1041,14 @@
                 <tr>
                     <td class="Label_Bold">Telefono 3
                     </td>
+                    <td style="width: 80px;">
+                        <select id="Select_TypeTel_3" class="C_Chosen" style="width: 80px;">
+                            <option value="-1">Seleccione...</option>
+                            <option value="C">Casa</option>
+                            <option value="F">Oficina</option>
+                            <option value="O">Otro</option>
+                        </select>
+                    </td>
                     <td>
                         <span class="cssToolTip_Form">
                             <input type="text" id="TxtInd3" maxlength="5" class="Numeric" style="width: 50px;" />
@@ -1047,7 +1064,17 @@
                             <input type="text" id="TxtExt3" maxlength="5" class="Numeric" style="width: 50px;" />
                             <span class="Spam_AN"></span></span>
                     </td>
+                </tr>
+                <tr>
                     <td class="Label_Bold">Telefono 4
+                    </td>
+                    <td style="width: 80px;">
+                        <select id="Select_TypeTel_4" class="C_Chosen" style="width: 80px;">
+                            <option value="-1">Seleccione...</option>
+                            <option value="C">Casa</option>
+                            <option value="F">Oficina</option>
+                            <option value="O">Otro</option>
+                        </select>
                     </td>
                     <td>
                         <span class="cssToolTip_Form">

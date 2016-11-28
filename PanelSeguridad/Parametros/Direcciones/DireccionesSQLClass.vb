@@ -88,6 +88,10 @@ Public Class DireccionesSQLClass
             " D_Correo_2, " & _
             " D_Pais_ID, " & _
             " D_Ciudad_ID, " & _
+            " D_Tipo_1, " & _
+            " D_Tipo_2, " & _
+            " D_Tipo_3, " & _
+            " D_Tipo_4, " & _
             " D_FechaActualizacion, " & _
             " D_Usuario " & _
              ")")
@@ -107,6 +111,10 @@ Public Class DireccionesSQLClass
         sql.AppendLine("'" & vp_O_Obj.Correo_2 & "',")
         sql.AppendLine("'" & vp_O_Obj.Pais_ID & "',")
         sql.AppendLine("'" & vp_O_Obj.Ciudad_ID & "',")
+        sql.AppendLine("'" & vp_O_Obj.Tipo_1 & "',")
+        sql.AppendLine("'" & vp_O_Obj.Tipo_2 & "',")
+        sql.AppendLine("'" & vp_O_Obj.Tipo_3 & "',")
+        sql.AppendLine("'" & vp_O_Obj.Tipo_4 & "',")
         sql.AppendLine("'" & vp_O_Obj.FechaActualizacion & "',")
         sql.AppendLine("'" & vp_O_Obj.Usuario & "' ) ")
 

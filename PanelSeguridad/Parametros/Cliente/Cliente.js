@@ -206,7 +206,7 @@ $(document).ready(function () {
         dialogClass: "Dialog_Sasif",
         modal: true,
         width: 850,
-        height: 550,
+        height: 620,
         overlay: {
             opacity: 0.5,
             background: "black"

@@ -23,7 +23,7 @@ function Direcciones(Option_Adress) {
         $("#BtnSave_Adress").css("display", "none");
     else
         $("#BtnSave_Adress").css("display", "inline-table");
-        
+
     switch (Option_Adress) {
         case "V":
             $("#Txt_Nit_V").val(D_Nit);
@@ -358,7 +358,11 @@ function Convert_and_Valide_Json() {
         "Pais_ID": $("#Select_Pais_D").val(),
         "DescripPais": $("#Select_Pais_D option:selected").html(),
         "Ciudad_ID": $("#Select_Ciudad_D").val(),
-        "DescripCiudad": $("#Select_Ciudad_D option:selected").html()
+        "DescripCiudad": $("#Select_Ciudad_D option:selected").html(),
+        "Tipo_1": $("#Select_TypeTel_1").val(),
+        "Tipo_2": $("#Select_TypeTel_2").val(),
+        "Tipo_3": $("#Select_TypeTel_3").val(),
+        "Tipo_4": $("#Select_TypeTel_4").val()
     }
 
     return Json_Direccion;
