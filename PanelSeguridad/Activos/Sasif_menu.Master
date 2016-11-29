@@ -1,0 +1,117 @@
+﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="Sasif_menu.master.vb"
+    Inherits="PanelSeguridad.Sasif_menu" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <script src="<% = ResolveClientUrl("~/Scripts/jquery-1.4.1.js") %>" type="text/javascript"></script>
+    <script src="<% = ResolveClientUrl("~/Scripts/Refresh.js")%>" type="text/javascript"></script>
+    <script src="../../SasifMaster.js" type="text/javascript"></script>
+    <link href="../css/css_menu.css" rel="stylesheet" type="text/css" />
+    <script src="../menu.js" type="text/javascript"></script>
+    <link href="../css/css_controles.css" rel="stylesheet" type="text/css" />
+    <link href="../css/css_master.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        html, body
+        {
+            overflow: hidden;
+        }
+    </style>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="page">
+            <div id="Header" class="header ">
+                <div class="Dimencion_Header">
+                    <table id="M_header">
+                        <tr>
+                            <td id="logoExt" rowspan="4" style="width: 15%; text-align: center;">
+                                <img id="logo_2" class="Logo_1" src="" alt="SASIF S.A.S." />
+                            </td>
+                            <td id="Name_User" colspan="3" style="width: 70%; text-align: center;"></td>
+                            <td rowspan="4" style="width: 15%; text-align: center;">&nbsp;<img alt="" src="" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="User" colspan="3" style="width: 70%; text-align: center;"></td>
+                        </tr>
+                        <tr>
+                            <td id="Title" colspan="3" class="Titulo_1" style="width: 70%; text-align: center;">
+                                <spam id="tituloPrincipal" style="font-weight: bold;">&nbsp;</spam>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="Hours" colspan="3" style="width: 70%; text-align: center;"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="Bar">
+                    <table id="M_Bar">
+                        <tr>
+                            <td id="TMenu" style="width: 15%">
+                                <img id="logo_2_W" class="Logo_2" src="" alt="SASIF S.A.S." />
+                            </td>
+                            <td style="width: 70%; text-align: center;" class="Titulo_2">
+                                <spam id="tituloPrincipal_2" style="color: #FFFFFF; font-weight: bold;">&nbsp;</spam>
+                            </td>
+                            <td id="Exit" style="width: 15%">
+                                <input id="BtnExitApp" type="button" value="SALIDA" onclick="window.location = '../../login/Login.aspx'" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div id="Medium" class="main">
+                <table id="M_Container">
+                    <tr>
+                        <td id="panel_menu">
+                            <div id="container_menu" class="Dimencion_Menu">
+                            </div>
+                            <div id="Bar_TMenu">
+                                M<br />
+                                E<br />
+                                N<br />
+                                U
+                            </div>
+                        </td>
+                        <td id="panel_pag">
+                            <asp:ContentPlaceHolder ID="main" runat="server">
+                            </asp:ContentPlaceHolder>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="Footer" class="Dimencion_Footer">
+                <table id="M_Footer">
+                    <tr>
+                        <td style="text-align: center;">
+                            <p id="Parraf_1">
+                            </p>
+                            <p id="Parraf_2">
+                            </p>
+                            <p id="Parraf_3">
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="Dialog_Warning" title="Advertencia">
+                <table>
+                    <tr>
+                        <td>
+                            <p class="Label_Bold" id="Mensaje_Warning">
+                            </p>
+                        </td>
+                        <td>
+                            <img alt="Warning" id="WE" src="../../images/alert.png" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

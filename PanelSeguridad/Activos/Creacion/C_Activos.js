@@ -1,5 +1,5 @@
 ﻿/*--------------- region de variables globales --------------------*/
-var ArrayC_Contrato = [];
+var ArrayC_Activos = [];
 var ArrayMoneda = [];
 var ArrayEmpresaNit = [];
 var Array_Hijo_Cliente = [];
@@ -14,9 +14,11 @@ var Doc;
 
 //Evento load JS
 $(document).ready(function () {
-    $("#Marco_trabajo_Contrato").css("height", "520px");
+
+    $("#Marco_trabajo_Contrato").css("height", "520px;");
 
     transacionAjax_EmpresaNit('Cliente')
+    transacionAjax_Estado('Estado');
     transacionAjax_Moneda('Moneda');
 
     $("#Img7").css("display", "none");
@@ -47,7 +49,7 @@ $(document).ready(function () {
         dialogClass: "Dialog_Sasif",
         modal: true,
         width: 1100,
-        height: 600,
+        height: 620,
         overlay: {
             opacity: 0.5,
             background: "black"
@@ -57,10 +59,6 @@ $(document).ready(function () {
     $("#T_Activo_Grid").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,
         "bDestroy": true
-    });    
-
-    $(function () { //Función de control del picker de la fecha
-        $("#TXT_Fecha_Apertura").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0});
     });
 
     Change_Select_Nit();
@@ -96,7 +94,7 @@ function BtnCrear() {
     validate = validarCamposCrear();
 
     if (validate == 0) {
-        transacionAjax_C_Contrato_create("crear");
+        transacionAjax_C_Activos_create("crear");
     }
 }
 

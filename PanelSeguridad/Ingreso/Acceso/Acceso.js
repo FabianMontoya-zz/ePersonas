@@ -54,6 +54,7 @@ $(document).ready(function () {
     $("#Img6").css("display", "none");
     $("#Img7").css("display", "none");
     $("#Img8").css("display", "none");
+    $("#Control_Ingreso").css("display", "none");
 
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
@@ -129,7 +130,10 @@ function BtnConsulta() {
 //evento del boton salir
 function x() {
     $("#dialog").dialog("close");
-    Clear();
+    if (Process_Manual_Ingreso == 0)
+        Clear();
+    else
+        Process_Manual_Ingreso = 0;
 }
 
 //salida del formulario
@@ -137,6 +141,28 @@ function btnSalir() {
     window.location = "../../Menu/menu.aspx?User=" + User + "&L_L=" + Link;
 }
 
+//ingreso de acceso
+function BtnAgregarAcceso() {
+
+    var validate = ValidaCamposIngreso();
+
+    if (validate == 0) {
+        CalculaHoraEstimada();
+    }
+
+}
+
+//confirmacion de registro
+function Registrar_Ingreso_Log() {
+    $("#dialog_eliminar").dialog("open");
+    $("#Mensaje_confirma").html("¿Esta seguro?, de la configuración de ingreso de la persona " + $("#L_Nombre").html());
+}
+
+//ingreso de registro
+function BtnConfirmaIngreso() {
+    Clear();
+    $("#dialog_eliminar").dialog("close");
+}
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                           REGION DE VALIDACIONES                                                                                                   ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -528,7 +554,7 @@ function Clear() {
 
     $("#Inf_persona").css("display", "None");
     $("#Inf_Ingreso").css("display", "none");
-
+    $("#Control_Ingreso").css("display", "none");
     $("#L_Nombre").html("");
     $("#L_Empresa").html("");
     $("#L_Area").html("");
@@ -547,4 +573,17 @@ function Clear() {
 
 }
 
+//limpiar pagina para nueva consulta
+function Clear_Ingreso() {
+    $("#Select_PAcceso").val("-1");
+    $("#Select_AreaAcceso").val("-1");
+    $("#Select_Persona_Enc").val("-1");
+
+    $("#TxtHora").val("");
+    $("#TxtMinutos").val("");
+    $("#HA_Ingreso").html("");
+    $("#HE_Salida").html("");
+
+    $('.C_Chosen').trigger('chosen:updated');
+}
 

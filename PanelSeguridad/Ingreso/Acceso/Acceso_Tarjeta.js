@@ -1,12 +1,16 @@
 ﻿/*--------------- region de variables globales --------------------*/
+var Array_IngresoLog = [];
+
 var TDoc_VT;
 var Doc_VT;
 var FIV;
 var FFV;
 var Hours_Live;
 var Minutes_Live;
-var Flag_ingreso;
 var Ingreso_Live;
+var Process_Manual_Ingreso = 0;
+var Cant_Ingreso = 0;
+
 /*--------------- region de variables globales --------------------*/
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -158,8 +162,9 @@ function MostrarHora() {
 function Tabla_AccesosPredeterminados() {
 
     var html_AP;
+    var Flag_ingreso;
 
-    html_AP = "<table id='TAP' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th style='width: 2%;'>Selección</th><th></th><th>Acceso</th><th>Area</th><th>Persona Encargada</th><th style='width: 10%;'>Fecha inicial</th><th style='width: 10%;'>Fecha final</th><th style='width: 12%;'>Hora Entrada</th><th style='width: 12%;'>Hora Salida</th><th>Horario de ingreso</th></tr></thead><tbody>";
+    html_AP = "<table id='TAP' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th class='T_head' colspan='10' style='margin-top: 5px;' >AccesosPredetermminados</th></tr><tr><th style='width: 2%;'>Selección</th><th></th><th>Acceso</th><th>Area</th><th>Persona Encargada</th><th style='width: 10%;'>Fecha inicial</th><th style='width: 10%;'>Fecha final</th><th style='width: 12%;'>Hora Entrada</th><th style='width: 12%;'>Hora Salida</th><th>Horario de ingreso</th></tr></thead><tbody>";
     for (item in Matrix_AccesoPredeterminados) {
         if (Matrix_AccesoPredeterminados[item].Document_ID == Doc_VT &&
            Matrix_AccesoPredeterminados[item].Nit_ID == Nit_ID_Proccess &&
@@ -232,14 +237,16 @@ function validaEntradaSalida(A_FIV, A_FFV) {
     else
         EstadoSal = "VERDE";
 
+    //console.log("EstadoEnt: " + EstadoEnt + "  EstadoSal : " + EstadoSal);
+
     if (EstadoEnt == "VERDE" && EstadoSal == "VERDE")
-        Estado = "VERDE"
+        Estado = "VERDE";
     else if (EstadoEnt == "VERDE" && EstadoSal == "ROJO")
-        Estado = "VERDE"
+        Estado = "ROJO";
     else if (EstadoEnt == "ROJO" && EstadoSal == "VERDE")
-        Estado = "ROJO"
+        Estado = "ROJO";
     else if (EstadoEnt == "ROJO" && EstadoSal == "ROJO")
-        Estado = "ROJO"
+        Estado = "ROJO";
 
 
     return Estado;
@@ -263,11 +270,38 @@ function CargaComboAreas() {
     });
 }
 
+//valida si se puede ingresar a la tabla de ingresos
 function Mostrar_AccesoPredeterminado(Index_AP) {
+
     Index_AP = Index_AP - 1;
-    Charge_Combos_Depend_Nit(Matrix_PAcceso, "Select_PAcceso", Nit_ID_Proccess, Matrix_AccesoPredeterminados[Index_AP].PuertaAcceso_ID);
-    Charge_Combos_Depend_Nit(Matrix_Persona, "Select_Persona_Enc", Nit_ID_Proccess, Matrix_AccesoPredeterminados[Index_AP].Document_ID_Per_Encargada);
-    Charge_Combos_Depend_Nit(Matrix_PAcceso_Area, "Select_AreaAcceso", Matrix_AccesoPredeterminados[Index_AP].PuertaAcceso_ID, Matrix_AccesoPredeterminados[Index_AP].Area_ID);
+    var Flag_ingreso;
+    var A_FIV = [];
+    var A_FFV = [];
+
+    var Index_E = parseInt(Index_AP) + 1;
+
+    var TVigen = Matrix_AccesoPredeterminados[Index_AP].ControlVigencia;
+    A_FIV[0] = [$("#TxtHoraIni_" + Index_E).val(), $("#TxtMinutosIni_" + Index_E).val()];
+    A_FFV[0] = [$("#TxtHoraSal_" + Index_E).val(), $("#TxtMinutosSal_" + Index_E).val()];
+
+    if (TVigen == "N")
+        Flag_Ingreso = "VERDE";
+    else
+        Flag_Ingreso = validaEntradaSalida(A_FIV, A_FFV);
+
+    switch (Flag_Ingreso) {
+        case "ROJO":
+            Process_Manual_Ingreso = 1;
+            Mensaje_General("Ha expirado a Vigencia", "El tiempo Esta vencido para el ingreso, puede editar la horas de entrada si lo desea", "W");
+            break;
+
+        case "VERDE":
+            Charge_Combos_Depend_Nit(Matrix_PAcceso, "Select_PAcceso", Nit_ID_Proccess, Matrix_AccesoPredeterminados[Index_AP].PuertaAcceso_ID);
+            Charge_Combos_Depend_Nit(Matrix_Persona, "Select_Persona_Enc", Nit_ID_Proccess, Matrix_AccesoPredeterminados[Index_AP].Document_ID_Per_Encargada);
+            Charge_Combos_Depend_Nit(Matrix_PAcceso_Area, "Select_AreaAcceso", Matrix_AccesoPredeterminados[Index_AP].PuertaAcceso_ID, Matrix_AccesoPredeterminados[Index_AP].Area_ID);
+            break;
+    }
+
 }
 
 //calcula la hora estimada de salida de la persona
@@ -296,9 +330,10 @@ function CalculaHoraEstimada() {
         Hora_Estimado = parseInt(Hours_Live) + parseInt(HV_P);
     }
 
+    $("#HA_Ingreso").html(Fecha_actual + " || " + Hours_Live + " : " + Minutes_Live);
+    $("#HE_Salida").html(Fecha_actual + " || " + Hora_Estimado + " : " + Minuto_Estimado);
 
-    $("#HA_Ingreso").html(Fecha_actual + " || " + Hours_Live + "  :  " + Minutes_Live);
-    $("#HE_Salida").html(Fecha_actual + " || " + Hora_Estimado + "  :  " + Minuto_Estimado);
+    CreateJSON_IngresoLog();
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -385,4 +420,127 @@ function AbreIngreso() {
             }
         }
     }
+}
+
+//valida los campos de acceso asignado
+function ValidaCamposIngreso() {
+
+    var validar = 0;
+    var Campo_1 = $("#Select_PAcceso").val();
+    var Campo_2 = $("#Select_AreaAcceso").val();
+    var Campo_3 = $("#Select_Persona_Enc").val();
+    var Campo_4 = $("#TxtHora").val();
+    var Campo_5 = $("#TxtMinutos").val();
+
+    if (Campo_5 == "" || Campo_4 == "" || Campo_3 == "-1" || Campo_2 == "-1" || Campo_1 == "-1") {
+        validar = 1;
+        if (Campo_1 == "-1") { $("#Img6").css("display", "inline-table"); } else { $("#Img6").css("display", "none"); }
+        if (Campo_2 == "-1") { $("#Img7").css("display", "inline-table"); } else { $("#Img7").css("display", "none"); }
+        if (Campo_3 == "-1") { $("#Img8").css("display", "inline-table"); } else { $("#Img8").css("display", "none"); }
+        if (Campo_4 == "") { $("#Img3").css("display", "inline-table"); } else { $("#Img3").css("display", "none"); }
+        if (Campo_5 == "") { $("#Img5").css("display", "inline-table"); } else { $("#Img5").css("display", "none"); }
+    }
+    else {
+        $("#Img6").css("display", "none");
+        $("#Img7").css("display", "none");
+        $("#Img8").css("display", "none");
+        $("#Img3").css("display", "none");
+        $("#Img5").css("display", "none");
+    }
+
+    return validar;
+}
+
+//crea array de ingresos
+function CreateJSON_IngresoLog() {
+
+    var Dato_Ingreso = $("#HA_Ingreso").html();
+    var Dato_PlanSalida = $("#HE_Salida").html();
+    var Dato_PA = $("#Select_PAcceso option:selected").html();
+    var Dato_A = $("#Select_AreaAcceso option:selected").html();
+
+    var A_Ingreso = Dato_Ingreso.split("||");
+    var A_PlanSalida = Dato_PlanSalida.split("||");
+    var A_PA = Dato_PA.split("-");
+
+    var D_Area;
+    if (Dato_A == "Todos")
+        D_Area = "Todos"
+    else {
+        var A_A = Dato_A.split("-");
+        D_Area = A_A[1];
+    }
+
+    var FIng = A_Ingreso[0].trim();
+    var HIng = A_Ingreso[1].trim();
+
+    var FPSal = A_PlanSalida[0].trim();
+    var HPSal = A_PlanSalida[1].trim();
+
+    var JSON_IngresoLog = {
+        "Index": Cant_Ingreso,
+        "Nit_ID": Nit_ID_Proccess,
+        "TypeDocument_ID": $("#Select_Documento").val(),
+        "Document_ID": $("#TxtDoc").val(),
+        "Tarjeta_ID": $("#Tarjeta_ID").val(),
+        "Nit_ID_EmpVisita": Nit_ID_Proccess,
+        "PuertaAcceso_ID": $("#Select_PAcceso").val(),
+        "Area_ID": $("#Select_AreaAcceso").val(),
+        "TypeDocument_ID_Per_Encargada": $("#Select_Documento").val(),
+        "Document_ID_Per_Encargada": $("#Select_Persona_Enc").val(),
+        "FechaEntrada": FIng,
+        "HoraEntrada": HIng,
+        "Tiempo_PlanVisita": $("#TxtHora").val() + ":" + $("#TxtMinutos").val(),
+        "Fecha_PlanSalida": FPSal,
+        "Hora_PlanSalida": HPSal,
+        "Fecha_RealSalida": "",
+        "Hora_RealSalida": "",
+        "Estado": "",
+        "IngAutomatico_Porteria": "",
+        "TipoPersona": "",
+        "Num_UnicoVisita": "",
+        "Usuario_Ingreso": User.toUpperCase(),
+        "FechaIngreso": $("#HA_Ingreso").html().replace("||", ""),
+        "Usuario_Salida": "",
+        "FechaSalida": "",
+        "DescripPuertaAcceso": A_PA[1],
+        "DescripAreaAcceso": D_Area,
+        "DescripPersona_Enc": $("#Select_Persona_Enc option:selected").html()
+    }
+
+    Array_IngresoLog.push(JSON_IngresoLog);
+    Cant_Ingreso = Cant_Ingreso + 1;
+    Tabla_Ingreso();
+}
+
+//crea el grid de ingreso
+function Tabla_Ingreso() {
+    var html = "<table id='TIng' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th class='T_head' colspan='7' style='margin-top: 5px;' >Registro de Ingresos</th></tr><tr><th style='width: 2%;'>Eliminar</th><th>Puerta</th><th>Area</th><th>Persona Encargada</th><th>Tiempo Visita</th><th>Fecha/Hora Ingreso</th><th>Fecha/Hora Estimada Salida</th></tr></thead><tbody>";
+
+    for (item in Array_IngresoLog) {
+        html += "<tr id= 'TIng_" + Array_IngresoLog[item].Index + "'><td><input type='radio' name='Asig' id='Check_" + Array_IngresoLog[item].Index + "' value='TR" + Array_IngresoLog[item].Index + "' onclick=\"EliminarIngreso('" + Array_IngresoLog[item].Index + "')\"/></td><td>" + Array_IngresoLog[item].PuertaAcceso_ID + " - " + Array_IngresoLog[item].DescripPuertaAcceso + "</td><td>" + Array_IngresoLog[item].Area_ID + " - " + Array_IngresoLog[item].DescripAreaAcceso + "</td><td>" + Array_IngresoLog[item].Document_ID_Per_Encargada + " - " + Array_IngresoLog[item].DescripPersona_Enc + "</td><td>" + Array_IngresoLog[item].Tiempo_PlanVisita + "</td><td>" + Array_IngresoLog[item].FechaIngreso + "</td><td>" + Array_IngresoLog[item].Fecha_PlanSalida + "  " + Array_IngresoLog[item].Hora_PlanSalida + "</td></tr>";
+    }
+
+    html += "</tbody></table>";
+    $("#Cointainer_ingreso").html("");
+    $("#Cointainer_ingreso").html(html);
+
+    $("#TIng").dataTable({
+        "bJQueryUI": true, "iDisplayLength": 1000,
+        "bDestroy": true
+    });
+    Clear_Ingreso();
+    $("#Control_Ingreso").css("display", "inline-table");
+
+}
+
+//eliminar ingreso de l array
+function EliminarIngreso(index) {
+    //borramos el Registro deseado
+    for (item in Array_IngresoLog) {
+        if (Array_IngresoLog[item].Index == index) {
+            Array_IngresoLog.splice(item, 1);
+        }
+    }
+    Tabla_Ingreso();
 }
