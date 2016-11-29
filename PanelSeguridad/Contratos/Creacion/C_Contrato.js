@@ -92,12 +92,7 @@ function Ocultar_IMGS_Errores() {
     $("#Img17").css("display", "none");
     $("#Img18").css("display", "none");
     $("#Img19").css("display", "none");
-    $("#Img20").css("display", "none");
-    $("#Img21").css("display", "none");
-    $("#Img22").css("display", "none");
-    $("#Img23").css("display", "none");
-    $("#Img24").css("display", "none");
-    $("#Img25").css("display", "none");
+    
 }
 
 //Función de control del picker de las fechas
@@ -141,8 +136,9 @@ function BtnCrear() {
 
     if (validate == 0) {
         transacionAjax_C_Contrato_create("crear");
-    } else if (validate == 1) {        
-        Mensaje_General("¡Falta Completar Campos!", "Debe completar los campos obligatorios. Los campos faltantes se han señalado con una (X)", "W");
+    } else if (validate == 1) {
+        var mensaje = "";
+        Mensaje_General("¡Falta Completar Campos!", "Debe completar los campos obligatorios. Los campos faltantes se han marcado con una (X)", "W");
     }
 }
 
