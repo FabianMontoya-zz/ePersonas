@@ -116,7 +116,7 @@
                                 <select id="Select_PAcceso" class="C_Chosen" style="width: 95%">
                                 </select>
                             </td>
-                            <td style="width: 5%">
+                            <td style="width: 5%; padding-bottom: 22px;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img6"
                                         src="../../images/error.png" />
@@ -128,7 +128,7 @@
                                 <select id="Select_AreaAcceso" class="C_Chosen" style="width: 95%">
                                 </select>
                             </td>
-                            <td style="width: 5%">
+                            <td style="width: 5%; padding-bottom: 22px;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img7"
                                         src="../../images/error.png" />
@@ -140,8 +140,8 @@
                                 <select id="Select_Persona_Enc" class="C_Chosen" style="width: 95%">
                                 </select>
                             </td>
-                            <td style="width: 5%">
-                                <span class="cssToolTip">
+                            <td style="width: 5%; padding-bottom: 22px;">
+                                <span class="cssToolTip_L">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img8"
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
@@ -154,8 +154,8 @@
                             </td>
                             <td class="Title_Bold" colspan="4">Fecha / Hora
                             </td>
-                            <td class="Title_Bold" rowspan="2" style="width:10%">
-                                  <input id="Button1" class="BWeb" type="button" value="Ingresar" onclick="BtnAgregarAcceso();" />
+                            <td class="Title_Bold" rowspan="2" style="width: 10%">
+                                <input id="Button1" class="BWeb" type="button" value="Ingresar" onclick="BtnAgregarAcceso();" />
                             </td>
                         </tr>
                         <tr>
@@ -166,7 +166,7 @@
                                     <input type="number" id="TxtHora" class="Numeric" maxlength="2" min="0" max="24" style="width: 40px;" oninput="maxLengthTypeNumber(this)" />
                                     <span class="Spam_AN"></span></span>
                             </td>
-                            <td style="width: 5%;">
+                            <td style="width: 5%; padding-bottom: 22px;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img3"
                                         src="../../images/error.png" />
@@ -179,7 +179,7 @@
                                     <input type="number" id="TxtMinutos" class="Numeric" maxlength="2" style="width: 40px;" min="0" max="59" oninput="maxLengthTypeNumber(this)" />
                                     <span class="Spam_AN"></span></span>
                             </td>
-                            <td style="width: 5%;">
+                            <td style="width: 5%; padding-bottom: 22px;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img5"
                                         src="../../images/error.png" />
@@ -187,7 +187,7 @@
                             </td>
                             <td class="Label_Bold" style="width: 5%">Ingreso
                             </td>
-                            <td  id="HA_Ingreso" style="width: 20%;" ></td>
+                            <td id="HA_Ingreso" style="width: 20%;"></td>
                             <td class="Label_Bold" style="width: 7%;">Estimado Salida</td>
                             <td id="HE_Salida" style="width: 20%;"></td>
                         </tr>
@@ -196,8 +196,13 @@
 
             </div>
             <div id="Inf_Ingreso" style="margin-top: 10px; width: 100%;">
-                <div id="Cointainer_ingreso">
+                <div id="Cointainer_ingreso" style="margin-bottom: 10px;">
                 </div>
+                <div id="Control_Ingreso" style="margin-top: 10px; width: 100%; margin-bottom: 10px; text-align:center" >
+                    <input id="BtnRegistroIngreso" class="BWeb" type="button" value="Registrar Ingreso" style="width: 40%;"
+                        onclick="Ingresar_Log()" />
+                </div>
+
                 <div id="Container_Acceso">
                 </div>
             </div>
