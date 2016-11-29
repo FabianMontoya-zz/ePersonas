@@ -258,7 +258,6 @@ option
     position: relative; /* Esta clase tiene que tener posicion relativa */
     color: #D8D104; /* Color del texto */
 }
-
     /* El tooltip */
     .cssToolTip span
     {

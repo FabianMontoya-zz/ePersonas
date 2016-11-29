@@ -14,18 +14,15 @@ var Doc;
 
 //Evento load JS
 $(document).ready(function () {
-    $("#Marco_trabajo_Contrato").css("height", "580px");
+    $("#Marco_trabajo_Contrato").css("height", "500px");
     $("#Marco_trabajo_Contrato").css("width", "95%");
 
     transacionAjax_EmpresaNit('Cliente')
     transacionAjax_Moneda('Moneda');
+    
+    Ocultar_IMGS_Errores();
 
-    $("#Img7").css("display", "none");
-    $("#Img6").css("display", "none");
-    $("#Img5").css("display", "none");
-    $("#Img3").css("display", "none");
-    $("#Img2").css("display", "none");
-    $("#Img1").css("display", "none");
+    //Imagenes de los dialog con mensajes
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
     $("#WE").css("display", "none");
@@ -60,12 +57,9 @@ $(document).ready(function () {
         "bDestroy": true
     });
 
-    $(function () { //Función de control del picker de la fecha
-        $("#TXT_Fecha_Apertura").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 });       
-    });
+    Picker_Fechas();    
 
     $(function () { //Función del acordeon
-        
         $("#Acordeon_Contrato").accordion({
             heightStyle: "content"
         });
@@ -76,6 +70,46 @@ $(document).ready(function () {
     Change_Select_Nit();
     Change_Select_H_Cliente();
 });
+
+//Ocultamos las imagenes de error al iniciar la pantalla
+function Ocultar_IMGS_Errores() {
+    $("#Img1").css("display", "none");
+    $("#Img2").css("display", "none");
+    $("#Img3").css("display", "none");
+    $("#Img4").css("display", "none"); //Img del Warning del Alert
+    $("#Img5").css("display", "none");
+    $("#Img6").css("display", "none");
+    $("#Img7").css("display", "none");
+    $("#Img8").css("display", "none");
+    $("#Img9").css("display", "none");
+    $("#Img10").css("display", "none");
+    $("#Img11").css("display", "none");
+    $("#Img12").css("display", "none");
+    $("#Img13").css("display", "none");
+    $("#Img14").css("display", "none");
+    $("#Img15").css("display", "none");
+    $("#Img16").css("display", "none");
+    $("#Img17").css("display", "none");
+    $("#Img18").css("display", "none");
+    $("#Img19").css("display", "none");
+    $("#Img20").css("display", "none");
+    $("#Img21").css("display", "none");
+    $("#Img22").css("display", "none");
+    $("#Img23").css("display", "none");
+    $("#Img24").css("display", "none");
+    $("#Img25").css("display", "none");
+}
+
+//Función de control del picker de las fechas
+function Picker_Fechas() {
+    $("#TXT_Fecha_Apertura").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 });
+    $("#TXT_Fecha_Activacion").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 });
+    $("#TXT_Fecha_Finalizacion").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 });
+    $("#TXT_Fecha_Cancelacion").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 });
+    $("#TXT_Fecha_Ult_Causacion").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 });
+    $("#TXT_Fecha_Ult_Factura").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 });
+    $("#TXT_Fecha_Prox_Factura").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 });
+}
 
 //salida del formulario
 function btnSalir() {
@@ -107,10 +141,12 @@ function BtnCrear() {
 
     if (validate == 0) {
         transacionAjax_C_Contrato_create("crear");
+    } else if (validate == 1) {        
+        Mensaje_General("Falta Completar Campos", "Debe completar los campos obligatorios. Los campos faltantes se han señalado con una (X)", "W");
     }
 }
 
-//validamos campos para la creacion del link
+//validamos campos para la creacion del link y envio de los datos
 function validarCamposCrear() {
 
     var Campo_1 = $("#Select_EmpresaNit").val();
@@ -163,12 +199,7 @@ function validarCamposCrear() {
 
     }
     else {
-        $("#Img7").css("display", "none");
-        $("#Img6").css("display", "none");
-        $("#Img5").css("display", "none");
-        $("#Img3").css("display", "none");
-        $("#Img2").css("display", "none");
-        $("#Img1").css("display", "none");
+        Ocultar_IMGS_Errores();
     }
     return validar;
 }
