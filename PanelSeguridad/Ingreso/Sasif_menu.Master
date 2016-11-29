@@ -91,7 +91,7 @@
                             </p>
                         </td>
                         <td>
-                            <img alt="Warning" id="WA" src="../../images/alert.png" />
+                            <img alt="Warning" id="W" src="../../images/alert.png" />
                         </td>
                     </tr>
                 </table>

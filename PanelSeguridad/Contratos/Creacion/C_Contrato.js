@@ -142,7 +142,7 @@ function BtnCrear() {
     if (validate == 0) {
         transacionAjax_C_Contrato_create("crear");
     } else if (validate == 1) {        
-        Mensaje_General("Falta Completar Campos", "Debe completar los campos obligatorios. Los campos faltantes se han señalado con una (X)", "W");
+        Mensaje_General("¡Falta Completar Campos!", "Debe completar los campos obligatorios. Los campos faltantes se han señalado con una (X)", "W");
     }
 }
 
