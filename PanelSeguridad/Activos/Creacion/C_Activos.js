@@ -29,8 +29,8 @@ $(document).ready(function () {
     transacionAjax_Tipo('Tipo');
 
     transacionAjax_EmpresaNit('Cliente')
-    transacionAjax_Estado('Estado');
-    transacionAjax_Moneda('Moneda');
+   // transacionAjax_Estado('Estado');
+  //  transacionAjax_Moneda('Moneda');
     $("#Img1").css("display", "none");
     $("#Img2").css("display", "none");
     $("#Img3").css("display", "none");
@@ -213,7 +213,6 @@ function Change_Select_TA() {
     });
 }
 
-
 //crea la matrix de pais
 function F_Matrix_pais() {
 
@@ -249,10 +248,24 @@ function F_Matrix_pais() {
         }
         II = II + 1;
     }
-    V2();
+    CargaPais();
 }
 
+//revicion y carge de combos paises
+function CargaPais() {
+    for (e = 0; e < A.length; e++) {
+        i = 0;
+        for (i = 0; i < A_0.length; i++) {
+            if (A[e] - 1 == A_0[i]) {
+                var Val_F = A_0[i + 1] + e;
+                Matrix_Pais[P[e]].IndexFinal = Val_F;
+            }
+        }
+    }
 
+    charge_CatalogList(Matrix_Pais, "Select_Pais_U", 1);
+   // charge_CatalogList(Matrix_Pais, "Select_Pais_D", 1);
+}
 
 
 //limpiar campos

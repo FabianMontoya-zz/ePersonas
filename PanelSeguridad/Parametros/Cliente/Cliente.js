@@ -1050,21 +1050,6 @@ function BlockAnexos(Modulo) {
 
 }
 
-//revicion y carge de combos paises
-function V2() {
-    for (e = 0; e < A.length; e++) {
-        i = 0;
-        for (i = 0; i < A_0.length; i++) {
-            if (A[e] - 1 == A_0[i]) {
-                var Val_F = A_0[i + 1] + e;
-                Matrix_Pais[P[e]].IndexFinal = Val_F;
-            }
-        }
-    }
-
-    charge_CatalogList(Matrix_Pais, "Select_Pais", 1);
-    charge_CatalogList(Matrix_Pais, "Select_Pais_D", 1);
-}
 
 //limpia los campos
 function BtnLimpia() {

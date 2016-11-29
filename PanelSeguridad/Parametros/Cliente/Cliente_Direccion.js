@@ -60,7 +60,6 @@ function Direcciones(Option_Adress) {
 
 }
 
-
 //grid direcciones cliente
 function Tabla_General(Opc_Link) {
     var html = "";
@@ -396,7 +395,6 @@ function lego_Phone(Index) {
 
 var StrCiudad_D;
 
-
 //busca los datos por el consecutivo seleccionado
 function Search_Adress(Index_Adress) {
 
@@ -474,7 +472,6 @@ function LegoView_Phone() {
 
     }
 }
-
 
 //elimina del array el dato seleccionado
 function Delete_Adress(Index_Adress) {
@@ -598,7 +595,6 @@ function lego_Adress() {
     });
 }
 
-
 //limpia los campos de direccion
 function Clear_Adress() {
 
@@ -643,7 +639,6 @@ function Add_Adress() {
 
     $("#Dialog_Format_Adress").dialog("close");
 }
-
 
 /*---------------------------------------------------------------------------------------------------------------*/
 /*                           FUNCIONES VALIDACION  Y LIMPIEZA DE CAMPOS                                                                      */
@@ -730,7 +725,6 @@ function ValidaDireccion() {
     return validar;
 }
 
-
 //limpiar campos de direcciones
 function clearDireccion() {
     $("#TxtContact").val("");
@@ -761,7 +755,6 @@ function clearDireccion() {
 /*---------------------------------------------------------------------------------------------------------------*/
 /*                           FUNCIONES BLOQUEO Y DESBLOQUEO DE CAMPOS                                                                      */
 /*---------------------------------------------------------------------------------------------------------------*/
-
 
 //bloquear campos de direcciones
 function Disabled_Direccion() {
