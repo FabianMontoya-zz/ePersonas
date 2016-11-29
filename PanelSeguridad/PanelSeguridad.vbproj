@@ -155,6 +155,12 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Activos\Creacion\C_Activos.aspx" />
+    <Content Include="Activos\Creacion\C_Activos.js" />
+    <Content Include="Activos\Creacion\C_ActivosAjax.aspx" />
+    <Content Include="Activos\Creacion\C_ActivosTrasaccionsAjax.js" />
+    <Content Include="Activos\menu.js" />
+    <Content Include="Activos\SasifMaster_Cosult.js" />
     <Content Include="Administrador\Adm_C_AccesoPrede\C_AccesoPre.aspx" />
     <Content Include="Administrador\Adm_C_AccesoPrede\C_AccesoPre.js" />
     <Content Include="Administrador\Adm_C_AccesoPrede\C_AccesoPreAjax.aspx" />
@@ -513,6 +519,7 @@
     <Content Include="Scripts\Dialog\jquery-ui.js" />
     <Content Include="Scripts\Dialog\timepicker.js" />
     <Content Include="Sasif.Master" />
+    <Content Include="Activos\Sasif_menu.Master" />
     <None Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
@@ -571,6 +578,22 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activos\Creacion\C_Activos.aspx.designer.vb">
+      <DependentUpon>C_Activos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Activos\Creacion\C_Activos.aspx.vb">
+      <DependentUpon>C_Activos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Activos\Creacion\C_ActivosAjax.aspx.designer.vb">
+      <DependentUpon>C_ActivosAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Activos\Creacion\C_ActivosAjax.aspx.vb">
+      <DependentUpon>C_ActivosAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Activos\Creacion\C_ActivosClass.vb" />
+    <Compile Include="Activos\Creacion\C_ActivosSQLClass.vb" />
     <Compile Include="Administrador\Adm_C_AccesoPrede\C_AccesoPre.aspx.designer.vb">
       <DependentUpon>C_AccesoPre.aspx</DependentUpon>
     </Compile>

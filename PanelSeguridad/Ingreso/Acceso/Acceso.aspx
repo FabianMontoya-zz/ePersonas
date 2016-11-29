@@ -155,7 +155,7 @@
                             <td class="Title_Bold" colspan="4">Fecha / Hora
                             </td>
                             <td class="Title_Bold" rowspan="2" style="width: 10%">
-                                <input id="Button1" class="BWeb" type="button" value="Ingresar" onclick="BtnAgregarAcceso();" />
+                                <input id="BtnIngresar" class="BWeb" type="button" value="Ingresar" onclick="BtnAgregarAcceso();" />
                             </td>
                         </tr>
                         <tr>
@@ -200,7 +200,7 @@
                 </div>
                 <div id="Control_Ingreso" style="margin-top: 10px; width: 100%; margin-bottom: 10px; text-align:center" >
                     <input id="BtnRegistroIngreso" class="BWeb" type="button" value="Registrar Ingreso" style="width: 40%;"
-                        onclick="Ingresar_Log()" />
+                        onclick="Registrar_Ingreso_Log()" />
                 </div>
 
                 <div id="Container_Acceso">
@@ -239,8 +239,7 @@
         <table style="width: 100%; text-align: center;">
             <tr>
                 <td>
-                    <p class="Label_Bold" id="P1">
-                        Desea eliminar el siguiente registro?
+                    <p class="Label_Bold" id="Mensaje_confirma">
                     </p>
                 </td>
                 <td>
@@ -249,7 +248,7 @@
             </tr>
             <tr>
                 <td colspan="2" align="center">
-                    <input id="BtnElimin" type="button" value="Confirmar" onclick="BtnElimina();" />
+                    <input id="BtnElimin" class="BWeb" type="button" value="Confirmar" onclick="BtnConfirmaIngreso();" />
                 </td>
             </tr>
         </table>

@@ -404,7 +404,7 @@
     background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
     border: solid 1px #921919;
     width: 90%;
-    height: 470px;
+    margin-left: 25px;
 }
 
 #Marco_trabajo_Contrato
@@ -418,7 +418,6 @@
     background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
     border: solid 1px #921919;
     width: 95%;
-    height: 410px;
     overflow: auto;
 }
 

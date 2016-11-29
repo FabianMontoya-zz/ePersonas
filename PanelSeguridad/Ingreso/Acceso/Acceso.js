@@ -55,7 +55,7 @@ $(document).ready(function () {
     $("#Img7").css("display", "none");
     $("#Img8").css("display", "none");
     $("#Control_Ingreso").css("display", "none");
-    
+
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
     $("#WE").css("display", "none");
@@ -152,6 +152,17 @@ function BtnAgregarAcceso() {
 
 }
 
+//confirmacion de registro
+function Registrar_Ingreso_Log() {
+    $("#dialog_eliminar").dialog("open");
+    $("#Mensaje_confirma").html("¿Esta seguro?, de la configuración de ingreso de la persona " + $("#L_Nombre").html());
+}
+
+//ingreso de registro
+function BtnConfirmaIngreso() {
+    Clear();
+    $("#dialog_eliminar").dialog("close");
+}
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                           REGION DE VALIDACIONES                                                                                                   ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/

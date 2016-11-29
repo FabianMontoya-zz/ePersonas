@@ -6,7 +6,75 @@ PanelSeguridad
 </name>
 </assembly>
 <members>
-<member name="M:PanelSeguridad.R_PuertaAcc_AreaAjax.Consulta_R_PuertaAcc_Area">
+<member name="M:PanelSeguridad.C_ActivosAjax.InsertC_Activos">
+	<summary>
+ funcion que inserta en la tabla C_Activos (INSERT)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosAjax.CargarMoneda">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosAjax.Cargar_EstadoContrato">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosAjax.CargarCliente">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosAjax.Cargar_HijoCliente">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosSQLClass.InsertC_Activos(PanelSeguridad.C_ActivosClass)">
+	<summary>
+ funcion que crea el query para la insercion de nuevo C_Activos (INSERT)
+ </summary>
+	<param name="vp_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosSQLClass.Charge_DropListMoneda(System.String)">
+	<summary>
+ crea la consulta para cargar el combo
+ </summary>
+	<param name="vp_S_ID"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosSQLClass.Charge_DropListEstado_Contrato(System.String)">
+	<summary>
+ crea la consulta para cargar el combo
+ </summary>
+	<param name="vp_S_ID"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosSQLClass.Charge_DropListHijo_Cliente(System.String)">
+	<summary>
+ crea la consulta para cargar el combo
+ </summary>
+	<param name="vp_S_ID"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosSQLClass.listC_Activos(System.String,System.String,System.String)">
+	<summary>
+ funcion que trae el listado de C_Activos para armar la tabla
+ </summary>
+	<param name="vp_S_StrQuery"></param>
+	<param name="vg_S_StrConexion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosSQLClass.Consulta_Repetido(PanelSeguridad.C_ActivosClass)">
+	<summary>
+ funcion que valida si esta repetido el registro a ingresar
+ </summary>
+	<param name="vp_O_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.R_PuertaAcc_AreaAjax.Consulta_R_PuertaAcc_Area">
 	<summary>
  traemos todos los datos para tabla R_PuertaAcc_Area (READ)
  </summary>
