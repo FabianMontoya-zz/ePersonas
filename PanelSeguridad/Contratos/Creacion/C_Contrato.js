@@ -14,7 +14,7 @@ var Doc;
 
 //Evento load JS
 $(document).ready(function () {
-    $("#Marco_trabajo_Contrato").css("height", "620px");
+    $("#Marco_trabajo_Contrato").css("height", "580px");
     $("#Marco_trabajo_Contrato").css("width", "95%");
 
     transacionAjax_EmpresaNit('Cliente')
@@ -61,9 +61,12 @@ $(document).ready(function () {
     });
 
     $(function () { //Función de control del picker de la fecha
-        $("#TXT_Fecha_Apertura").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 });
+        $("#TXT_Fecha_Apertura").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 });       
+    });
 
-        $("#Acordeon_Dat").accordion({
+    $(function () { //Función del acordeon
+        
+        $("#Acordeon_Contrato").accordion({
             heightStyle: "content"
         });
     });
@@ -111,8 +114,8 @@ function BtnCrear() {
 function validarCamposCrear() {
 
     var Campo_1 = $("#Select_EmpresaNit").val();
-    var Campo_2 = $("#Txt_ID").val();
-    var Campo_3 = $("#TxtDescripcion").val();
+    var Campo_2 = $("#TXT_ID_Colocacion").val();
+    var Campo_3 = $("#TXT_Descripcion").val();
     var Campo_4 = $("#Select_H_Cliente").val();
     var Campo_5 = $("#Select_Estado").val();
     var Campo_6 = $("#Select_Moneda").val();
