@@ -678,6 +678,14 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
                 }
             }
             break;
+
+        case "Select_SubTipo":
+            for (Item in Matrix) {
+                if (Matrix[Item].Tipo_ID == Nit) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].SubTipo_ID + "'>" + Matrix[Item].SubTipo_ID + " - " + Matrix[Item].DescripSubTipo + "</option>");
+                }
+            }
+            break;
     }
 
     $('#' + Selector).append("<option value='-1'>Seleccione...</option>");

@@ -10,6 +10,12 @@ Public Class C_ActivosAjax
 
             Select Case vl_S_option_login
 
+                Case "MATRIX_RTSTA"
+                    Matrix_RTSTA()
+
+                Case "Tipo"
+                    CargarTipo()
+
                 Case "Cliente"
                     CargarCliente()
 
@@ -87,6 +93,36 @@ Public Class C_ActivosAjax
 #End Region
 
 #Region "DROP LIST"
+
+    ''' <summary>
+    ''' funcion que carga el objeto DDL consulta
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarTipo()
+
+        Dim SQL As New Relation_Tipo_Subtipo_ActivoSQLClass
+        Dim ObjListDroplist As New List(Of Droplist_Class)
+        Dim vl_S_Tabla As String = Request.Form("tabla")
+
+        ObjListDroplist = SQL.Charge_DropListTipo(vl_S_Tabla)
+        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga el objeto DDL consulta
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub Matrix_RTSTA()
+
+        Dim SQL As New Relation_Tipo_Subtipo_ActivoSQLClass
+        Dim ObjList As New List(Of Relation_Tipo_Subtipo_ActivoClass)
+
+        ObjList = SQL.Matrix_RTSTA()
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
+
 
     ''' <summary>
     ''' funcion que carga el objeto DDL consulta

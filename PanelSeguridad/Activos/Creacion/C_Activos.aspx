@@ -36,13 +36,13 @@
             <div id="Container_controls">
                 <table id="T_Encabezado" style="width: 100%;">
                     <tr>
-                        <td style="width: 10%;" class="Label_Bold">Nit Empresa
+                        <td style="width: 7%;" class="Label_Bold">Nit Empresa
                         </td>
                         <td style="width: 20%;">
                             <select id="Select_EmpresaNit" class="C_Chosen">
                             </select>
                         </td>
-                        <td style="width: 40%; padding-bottom: 25px;">
+                        <td style="width: 41%; padding-bottom: 25px;">
                             <span class="cssToolTip">
                                 <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img1"
                                     src="../../images/error.png" />
@@ -50,9 +50,9 @@
                         </td>
                     </tr>
                 </table>
-                <table id="T_Datos_P1" style="width: 100%;">
+                <table id="T_Datos_Activo" style="width: 100%;">
                     <tr>
-                        <td class="Label_Bold" style="width: 10%;">Tipo de Activo
+                        <td class="Label_Bold" style="width: 7.5%;">Tipo de Activo
                         </td>
                         <td style="width: 20%;">
                             <select id="Select_Tipo" class="C_Chosen">
@@ -60,7 +60,7 @@
                         </td>
                         <td style="width: 6%; padding-bottom: 25px;">
                             <span class="cssToolTip">
-                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgID"
+                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img2"
                                     src="../../images/error.png" />
                                 <span class="SpamEG"></span></span>
                         </td>
@@ -70,14 +70,71 @@
                             <select id="Select_SubTipo" class="C_Chosen">
                             </select>
                         </td>
+                        <td style="width: 10%; padding-bottom: 25px;"></td>
+                    </tr>
+                </table>
+                <table id="Tabla_LLave_Inmueble" style="width: 100%;">
+                    <tr>
+                        <td class="Label_Bold" style="width: 12%;">Cedula Catastral
+                        </td>
+                        <td style="width: 15%;">
+                            <span class="cssToolTip_Form">
+                                <input type="text" id="TxtRef_1" maxlength="17" style="width: 180px;" />
+                                <span class="Spam_AST"></span></span>
+                        </td>
                         <td style="width: 5%; padding-bottom: 25px;">
-                            <span class="cssToolTip_L">
-                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img8"
+                            <span class="cssToolTip">
+                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img3"
+                                    src="../../images/error.png" />
+                                <span class="SpamEG"></span></span>
+                        </td>
+                        <td class="Label_Bold" style="width: 14%;">Matricula Imbiliaria
+                        </td>
+                        <td style="width: 15%;">
+                            <span class="cssToolTip_Form">
+                                <input type="text" id="TxtRef_2" maxlength="17" style="width: 180px;" />
+                                <span class="Spam_AST"></span></span>
+                        </td>
+                        <td style="width: 5%; padding-bottom: 25px;">
+                            <span class="cssToolTip">
+                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img5"
+                                    src="../../images/error.png" />
+                                <span class="SpamEG"></span></span>
+                        </td>
+                        <td class="Label_Bold" style="width: 12%;">Numero Unico ID
+                        </td>
+                        <td style="width: 15%;">
+                            <span class="cssToolTip_Form">
+                                <input type="text" id="Text1" maxlength="17" style="width: 180px;" />
+                                <span class="Spam_AST"></span></span>
+                        </td>
+                        <td style="width: 5%; padding-bottom: 25px;">
+                            <span class="cssToolTip">
+                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img6"
+                                    src="../../images/error.png" />
+                                <span class="SpamEG"></span></span>
+
+                        </td>
+                    </tr>
+                </table>
+                <table id="Tabla_LLave_Vehiculos" style="width: 100%;">
+                    <tr>
+                        <td class="Label_Bold" style="width: 7.7%;">Placa
+                        </td>
+                        <td style="width: 15%;">
+                            <span class="cssToolTip_Form">
+                                <input type="text" id="Text2" maxlength="17" style="width: 180px;" />
+                                <span class="Spam_AST"></span></span>
+                        </td>
+                        <td style="width: 50%; padding-bottom: 25px;">
+                            <span class="cssToolTip">
+                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img7"
                                     src="../../images/error.png" />
                                 <span class="SpamEG"></span></span>
                         </td>
                     </tr>
                 </table>
+
                 <table style="width: 700px;">
                     <tr>
                         <td style="width: 120px;" class="Label_Bold">Cliente Principal
@@ -86,12 +143,7 @@
                             <select id="Select_H_Cliente" class="C_Chosen">
                             </select>
                         </td>
-                        <td style="width: 300px; padding-bottom: 25px;">
-                            <span class="cssToolTip">
-                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img5"
-                                    src="../../images/error.png" />
-                                <span class="SpamEG"></span></span>
-                        </td>
+                        <td style="width: 300px; padding-bottom: 25px;"></td>
                     </tr>
                     <tr>
                         <td class="Label_Bold">Estado
@@ -102,7 +154,7 @@
                         </td>
                         <td style="padding-bottom: 25px;">
                             <span class="cssToolTip">
-                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img6"
+                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img8"
                                     src="../../images/error.png" />
                                 <span class="SpamEG"></span></span>
                         </td>
@@ -116,7 +168,7 @@
                         </td>
                         <td style="padding-bottom: 25px;">
                             <span class="cssToolTip">
-                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img7"
+                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img9"
                                     src="../../images/error.png" />
                                 <span class="SpamEG"></span></span>
                         </td>

@@ -11,6 +11,16 @@ PanelSeguridad
  funcion que inserta en la tabla C_Activos (INSERT)
  </summary>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosAjax.CargarTipo">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosAjax.Matrix_RTSTA">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.C_ActivosAjax.CargarMoneda">
 	<summary>
  funcion que carga el objeto DDL consulta
@@ -3467,7 +3477,7 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
 	<param name="vp_S_Table"></param>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.Relation_Tipo_Subtipo_ActivoSQLClass.listTP_Activo(System.String,System.String)">
+</member><member name="M:PanelSeguridad.Relation_Tipo_Subtipo_ActivoSQLClass.listTP_Activo(System.String,System.String,System.String)">
 	<summary>
  funcion que trae el listado de TP_Activo para armar la tabla
  </summary>
@@ -3480,6 +3490,12 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
  funcion que valida si esta repetido el registro a ingresar
  </summary>
 	<param name="vp_O_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.Relation_Tipo_Subtipo_ActivoSQLClass.Matrix_RTSTA">
+	<summary>
+ carga matrix relacion de activos sub tipos de activos
+ </summary>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.DocumentosSQLClass.Read_All(System.String,System.String,System.String)">

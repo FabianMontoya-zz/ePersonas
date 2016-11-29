@@ -1,7 +1,9 @@
 ﻿/*--------------- region de variables globales --------------------*/
+var Matrix_RTSTA = [];
+var ArrayEmpresaNit = [];
+
 var ArrayC_Activos = [];
 var ArrayMoneda = [];
-var ArrayEmpresaNit = [];
 var Array_Hijo_Cliente = [];
 var ArrayEstado = [];
 
@@ -16,6 +18,8 @@ var Doc;
 $(document).ready(function () {
 
     $("#Marco_trabajo_Contrato").css("height", "520px;");
+    transaccionAjax_MRTSTA("MATRIX_RTSTA");
+    transacionAjax_Tipo('Tipo');
 
     transacionAjax_EmpresaNit('Cliente')
     transacionAjax_Estado('Estado');
@@ -30,6 +34,9 @@ $(document).ready(function () {
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
     $("#WE").css("display", "none");
+
+    $("#Tabla_LLave_Inmueble").css("display", "none");
+    $("#Tabla_LLave_Vehiculos").css("display", "none");
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
@@ -62,32 +69,12 @@ $(document).ready(function () {
     });
 
     Change_Select_Nit();
-    Change_Select_H_Cliente();
+    Change_Select_TA();
 });
 
-//salida del formulario
-function btnSalir() {
-    window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
-}
-
-//carga el combo de clientes hijo
-function Change_Select_Nit() {
-    $("#Select_EmpresaNit").change(function () {
-        var TD_ID = this.value;
-        transacionAjax_Hijo_Cliente('Hijo_Cliente', TD_ID);
-    });
-}
-
-//sacamos documento y tipo de documento requerido para contrato
-function Change_Select_H_Cliente() {
-    $("#Select_H_Cliente").change(function () {
-        var Str_H_cliente = $("#Select_H_Cliente option:selected").html();
-        var SplitCliente = Str_H_cliente.split(" - ");
-        T_Doc = SplitCliente[0];
-        Doc = SplitCliente[1];
-    });
-}
-
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                 REGION BOTONES                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //crear link en la BD
 function BtnCrear() {
     var validate;
@@ -98,7 +85,21 @@ function BtnCrear() {
     }
 }
 
-//validamos campos para la creacion del link
+//salida del formulario
+function btnSalir() {
+    window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
+}
+
+
+//evento del boton salir
+function x() {
+    $("#dialog").dialog("close");
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                           REGION DE VALIDACIONES                                                                                                   ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//validamos campos para la creacion del formulario
 function validarCamposCrear() {
 
     var Campo_1 = $("#Select_EmpresaNit").val();
@@ -161,10 +162,45 @@ function validarCamposCrear() {
     return validar;
 }
 
-//evento del boton salir
-function x() {
-    $("#dialog").dialog("close");
+
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                     PROCESO DE CARGUE                                                                                                                                        ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//carga el combo 
+function Change_Select_Nit() {
+    $("#Select_EmpresaNit").change(function () {
+        var TD_ID = this.value;
+        //transacionAjax_Hijo_Cliente('Hijo_Cliente', TD_ID);
+    });
 }
+
+//carga los subtipos
+function Change_Select_TA() {
+    $("#Select_Tipo").change(function () {
+        var index_ID = this.value;
+        Charge_Combos_Depend_Nit(Matrix_RTSTA, "Select_SubTipo", index_ID, "");
+        if (index_ID != 2) {
+            $("#Tabla_LLave_Inmueble").css("display", "inline-table");
+            $("#Tabla_LLave_Vehiculos").css("display", "none");
+        }
+        else {
+            $("#Tabla_LLave_Inmueble").css("display", "none");
+            $("#Tabla_LLave_Vehiculos").css("display", "inline-table");
+        }
+    });
+}
+
+//sacamos documento y tipo de documento requerido para contrato
+function Change_Select_H_Cliente() {
+    $("#Select_H_Cliente").change(function () {
+        var Str_H_cliente = $("#Select_H_Cliente option:selected").html();
+        var SplitCliente = Str_H_cliente.split(" - ");
+        T_Doc = SplitCliente[0];
+        Doc = SplitCliente[1];
+    });
+}
+
 
 //limpiar campos
 function Clear() {
