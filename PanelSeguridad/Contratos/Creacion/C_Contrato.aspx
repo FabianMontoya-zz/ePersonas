@@ -17,7 +17,19 @@
     <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="../../Scripts/Dialog/datepicker.js" type="text/javascript"></script>
     <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .ui-widget
+        {
+            background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+            background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+            background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+            background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+            border: solid 1px #921919;
+            border-radius: 5px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
     <div id="Container_title_Form">
@@ -31,18 +43,20 @@
             </tr>
         </table>
     </div>
+
+    <!--Dialog que contiene la pantalla de las colocaciones/contratos -->
     <div id="Marco_Contrato">
         <div id="Marco_trabajo_Contrato">
             <div id="Container_controls">
-                <table id="T_Encabezado" style="width: 700px;">
+                <table id="T_Encabezado" style="width: 100%;">
                     <tr>
-                        <td id="TD_ID" style="width: 120px;" class="Label_Bold">Nit Empresa
+                        <td id="TD_ID" style="width: 10%;" class="Label_Bold">NIT Empresa
                         </td>
-                        <td id="TD_TID">
+                        <td id="TD_TID" style="width: 20%;">
                             <select id="Select_EmpresaNit" class="C_Chosen">
                             </select>
                         </td>
-                        <td style="width: 300px; padding-bottom: 25px;">
+                        <td style="width: 40%; padding-bottom: 25px;">
                             <span class="cssToolTip">
                                 <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img1"
                                     src="../../images/error.png" />
@@ -50,47 +64,61 @@
                         </td>
                     </tr>
                 </table>
-                <table id="T_Datos_P1">
+                <table id="T_Datos_P1" style="width: 100%;">
                     <tr>
-                        <td class="Label_Bold" style="width: 120px;">Contrato
+                        <td class="Label_Bold" style="width: 10%;">Número Colocación
                         </td>
                         <td>
-                            <span class="cssToolTip_Form">
-                                <input type="text" id="Txt_ID" maxlength="17" class="Numeric_letter" />
+                            <span class="cssToolTip_Form" style="width: 20%;">
+                                <input type="text" id="TXT_ID_Colocacion" maxlength="17" class="Numeric_letter" />
                                 <span class="Spam_ANL"></span></span>
                         </td>
-                        <td style="padding-bottom: 25px;">
+                        <td style="padding-bottom: 25px; width: 5%;">
                             <span class="cssToolTip">
                                 <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img2"
                                     src="../../images/error.png" />
                                 <span class="SpamEG"></span></span>
                         </td>
-                    </tr>
-                    <tr>
-                        <td class="Label_Bold" style="width: 100px;">Descripción
+                        <td class="Label_Bold" style="width: 10%;">Descripción
                         </td>
-                        <td style="width: 100px;">
-                            <span class="cssToolTip_Form">
+                        <td>
+                            <span class="cssToolTip_Form" style="width: 5%;">
                                 <input type="text" id="TxtDescripcion" maxlength="50" />
                                 <span class="Spam_AST"></span></span>
                         </td>
-                        <td style="width: 40px; padding-bottom: 25px;">
+                        <td style="width: 40%; padding-bottom: 25px;">
                             <span class="cssToolTip">
                                 <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img3"
                                     src="../../images/error.png" />
                                 <span class="SpamEG"></span></span>
                         </td>
                     </tr>
+
                 </table>
                 <table style="width: 700px;">
                     <tr>
-                        <td style="width: 120px;" class="Label_Bold">Cliente Principal
+                        <td style="width: 120px;" class="Label_Bold">Tipo de Identificación
                         </td>
                         <td>
-                            <select id="Select_H_Cliente" class="C_Chosen">
+                            <select id="Select_Identificacion" class="C_Chosen">
                             </select>
                         </td>
                         <td style="width: 300px; padding-bottom: 25px;">
+                            <span class="cssToolTip">
+                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img4"
+                                    src="../../images/error.png" />
+                                <span class="SpamEG"></span></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Label_Bold">Número de Identificación
+                        </td>
+                        <td>
+                            <span class="cssToolTip_Form">
+                                <input type="text" id="TXT_Identificacion" maxlength="17" class="Numeric" />
+                                <span class="Spam_AN"></span></span>
+                        </td>
+                        <td style="padding-bottom: 25px;">
                             <span class="cssToolTip">
                                 <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img5"
                                     src="../../images/error.png" />
@@ -98,13 +126,13 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="Label_Bold">Estado
+                        <td style="width: 120px;" class="Label_Bold">Sucursal
                         </td>
                         <td>
-                            <select id="Select_Estado" class="C_Chosen">
+                            <select id="Select_Sucursal" class="C_Chosen">
                             </select>
                         </td>
-                        <td style="padding-bottom: 25px;">
+                        <td style="width: 300px; padding-bottom: 25px;">
                             <span class="cssToolTip">
                                 <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img6"
                                     src="../../images/error.png" />
@@ -121,6 +149,77 @@
                         <td style="padding-bottom: 25px;">
                             <span class="cssToolTip">
                                 <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img7"
+                                    src="../../images/error.png" />
+                                <span class="SpamEG"></span></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Label_Bold" style="width: 120px;">Producto
+                        </td>
+                        <td>
+                            <select id="Select_Producto" class="C_Chosen">
+                            </select>
+                        </td>
+                        <td style="padding-bottom: 25px;">
+                            <span class="cssToolTip">
+                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img8"
+                                    src="../../images/error.png" />
+                                <span class="SpamEG"></span></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Label_Bold">Condición de Financiación
+                        </td>
+                        <td>
+                            <select id="Select_Condicion_Financiacion" class="C_Chosen">
+                            </select>
+                        </td>
+                        <td style="padding-bottom: 25px;">
+                            <span class="cssToolTip">
+                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img9"
+                                    src="../../images/error.png" />
+                                <span class="SpamEG"></span></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Label_Bold">Unidad de Tiempo
+                        </td>
+                        <td>
+                            <select id="Select_Tiempo" class="C_Chosen">
+                            </select>
+                        </td>
+                        <td style="padding-bottom: 25px;">
+                            <span class="cssToolTip">
+                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img10"
+                                    src="../../images/error.png" />
+                                <span class="SpamEG"></span></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Label_Bold">Fecha Apertura
+                        </td>
+                        <td>
+                            <span class="cssToolTip_Form">
+                                <input id="TXT_Fecha_Apertura" type="text" readonly="readonly" style="width: 100px;" />
+                                <span class="Spam_AF"></span></span>
+                        </td>
+                        <td style="padding-bottom: 25px; width: 80px;">
+                            <span class="cssToolTip">
+                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img11"
+                                    src="../../images/error.png" />
+                                <span class="SpamEG"></span></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Label_Bold">Plazo</td>
+                        <td>
+                            <span class="cssToolTip_Form">
+                                <input type="text" id="Text_Plazo" maxlength="17" class="Numeric" />
+                                <span class="Spam_AN"></span></span>
+                        </td>
+                        <td style="padding-bottom: 25px;">
+                            <span class="cssToolTip">
+                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img12"
                                     src="../../images/error.png" />
                                 <span class="SpamEG"></span></span>
                         </td>
@@ -231,7 +330,7 @@
                         </td>
                     </tr>
                 </table>
-                <div style="width: 100; text-align: center; margin-top: 25px;">
+                <div style="width: 100%; text-align: center; margin-top: 25px;">
                     <input id="Btnguardar" type="button" value="Guardar" onclick="BtnCrear();" />
                 </div>
             </div>
@@ -280,4 +379,7 @@
         <div id="container_TActivos">
         </div>
     </div>
+
 </asp:Content>
+
+

@@ -25,32 +25,6 @@ function transacionAjax_EmpresaNit(State) {
     });
 }
 
-/*-------------------- carga ---------------------------*/
-//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_Estado(State) {
-    $.ajax({
-        url: "C_ContratoAjax.aspx",
-        type: "POST",
-        //crear json
-        data: { "action": State,
-            "tabla": 'TIPO'
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            if (result == "") {
-                ArrayEstado = [];
-            }
-            else {
-                ArrayEstado = JSON.parse(result);
-                charge_CatalogList(ArrayEstado, "Select_Estado", 1);
-            }
-        },
-        error: function () {
-
-        }
-    });
-}
-
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
@@ -70,34 +44,6 @@ function transacionAjax_Moneda(State) {
             else {
                 ArrayMoneda = JSON.parse(result);
                 charge_CatalogList(ArrayMoneda, "Select_Moneda", 1);
-            }
-        },
-        error: function () {
-
-        }
-    });
-}
-
-/*-------------------- carga ---------------------------*/
-//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_Hijo_Cliente(State, Index) {
-    $.ajax({
-        url: "C_ContratoAjax.aspx",
-        type: "POST",
-        //crear json
-        data: { "action": State,
-            "tabla": 'TIPO',
-            "ID": Index
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            if (result == "") {
-                Array_Hijo_Cliente = [];
-            }
-            else {
-                Array_Hijo_Cliente = JSON.parse(result);
-                charge_CatalogList(Array_Hijo_Cliente, "Select_H_Cliente", 1);
-               
             }
         },
         error: function () {

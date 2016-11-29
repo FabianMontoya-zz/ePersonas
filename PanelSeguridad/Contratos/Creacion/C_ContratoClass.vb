@@ -26,7 +26,7 @@
 
 #End Region
 
-#Region "proiedades"
+#Region "propiedades"
 
     Public Property Nit_ID() As String
         Get

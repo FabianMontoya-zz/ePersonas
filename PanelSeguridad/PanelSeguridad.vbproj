@@ -327,15 +327,12 @@
     <Content Include="Images\C_GREEN.png" />
     <Content Include="Images\C_RED.png" />
     <Content Include="Images\C_YELLOW.png" />
-    <Content Include="Images\Descarga.png" />
-    <Content Include="Images\DocAuto.png" />
     <Content Include="Images\documentos.png" />
     <Content Include="Images\documentos_w.png" />
     <Content Include="Images\error.png" />
     <Content Include="Images\error_2.png" />
     <Content Include="Images\exit.png" />
     <Content Include="Images\file.jpg" />
-    <Content Include="Images\logo-actual.png" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\logo_2.png" />
     <Content Include="Images\LOOK_BLACK.png" />
@@ -356,10 +353,7 @@
     <Content Include="Images\relations.png" />
     <Content Include="Images\SASIF_NEW.png" />
     <Content Include="Images\SASIF_NEW_WHITE.png" />
-    <Content Include="Images\search.png" />
     <Content Include="Images\success.png" />
-    <Content Include="Images\user.png" />
-    <Content Include="Images\validation.png" />
     <Content Include="Ingreso\Acceso\Acceso.aspx" />
     <Content Include="Ingreso\Acceso\Acceso.js" />
     <Content Include="Ingreso\Acceso\AccesoAjax.aspx" />

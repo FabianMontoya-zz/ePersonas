@@ -16,7 +16,6 @@ var Doc;
 $(document).ready(function () {
 
     transacionAjax_EmpresaNit('Cliente')
-    transacionAjax_Estado('Estado');
     transacionAjax_Moneda('Moneda');
 
     $("#Img7").css("display", "none");
@@ -47,7 +46,7 @@ $(document).ready(function () {
         dialogClass: "Dialog_Sasif",
         modal: true,
         width: 1100,
-        height: 620,
+        height: 600,
         overlay: {
             opacity: 0.5,
             background: "black"
@@ -57,6 +56,10 @@ $(document).ready(function () {
     $("#T_Activo_Grid").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,
         "bDestroy": true
+    });    
+
+    $(function () { //Función de control del picker de la fecha
+        $("#TXT_Fecha_Apertura").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0});
     });
 
     Change_Select_Nit();

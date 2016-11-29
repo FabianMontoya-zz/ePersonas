@@ -5,8 +5,11 @@
     Private _Descripcion As String
     Private _TP_ID As Long
     Private _STP_ID As Long
-    Private _TA_ID As Long
-    Private _STA_ID As Long
+    Private _Causacion_Interes As String
+    Private _Causacion_Mora As String
+    Private _Base_Mora As String
+    Private _Capitalizacion As String
+    Private _Control_Activo As String
 
     Private _Tran_ID_1 As Long
     Private _Tran_ID_2 As Long
@@ -101,6 +104,47 @@
             Me._Descripcion = value
         End Set
     End Property
+    Public Property Causacion_Interes() As String
+        Get
+            Return Me._Causacion_Interes
+        End Get
+        Set(ByVal value As String)
+            Me._Causacion_Interes = value
+        End Set
+    End Property
+    Public Property Causacion_Mora() As String
+        Get
+            Return Me._Causacion_Mora
+        End Get
+        Set(ByVal value As String)
+            Me._Causacion_Mora = value
+        End Set
+    End Property
+    Public Property Base_Mora() As String
+        Get
+            Return Me._Base_Mora
+        End Get
+        Set(ByVal value As String)
+            Me._Base_Mora = value
+        End Set
+    End Property
+    Public Property Capitalizacion() As String
+        Get
+            Return Me._Capitalizacion
+        End Get
+        Set(ByVal value As String)
+            Me._Capitalizacion = value
+        End Set
+    End Property
+    Public Property Control_Activo() As String
+        Get
+            Return Me._Control_Activo
+        End Get
+        Set(ByVal value As String)
+            Me._Control_Activo = value
+        End Set
+    End Property
+
     Public Property TP_ID() As Long
         Get
             Return Me._TP_ID
@@ -117,23 +161,6 @@
             Me._STP_ID = value
         End Set
     End Property
-    Public Property TA_ID() As Long
-        Get
-            Return Me._TA_ID
-        End Get
-        Set(ByVal value As Long)
-            Me._TA_ID = value
-        End Set
-    End Property
-    Public Property STA_ID() As Long
-        Get
-            Return Me._STA_ID
-        End Get
-        Set(ByVal value As Long)
-            Me._STA_ID = value
-        End Set
-    End Property
-
     Public Property Tran_ID_1() As Long
         Get
             Return Me._Tran_ID_1
