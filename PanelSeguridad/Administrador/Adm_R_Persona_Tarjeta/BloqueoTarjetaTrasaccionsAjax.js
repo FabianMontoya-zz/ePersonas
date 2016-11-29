@@ -154,7 +154,7 @@ function transacionAjax_UpdateBloqueo(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "block");
                     $("#SE").css("display", "none");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     break;
 
                 case "Existe":
@@ -172,7 +172,7 @@ function transacionAjax_UpdateBloqueo(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "none");
                     $("#SE").css("display", "block");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     transaccionAjax_MTarjeta('MATRIX_TARJETA');
                     Clear();
                     break;

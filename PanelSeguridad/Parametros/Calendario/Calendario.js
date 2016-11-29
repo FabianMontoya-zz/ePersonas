@@ -28,7 +28,7 @@ $(document).ready(function () {
     $("#Img7").css("display", "none");
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
-    $("#WE").css("display", "none");
+    $("#WA").css("display", "none");
 
     $("#TablaConsulta").css("display", "none");
     $("#Tabla_10").css("display", "none");

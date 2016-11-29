@@ -545,7 +545,7 @@ function transacionAjax_Cliente_create(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "block");
                     $("#SE").css("display", "none");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     break;
 
                 case "Existe":
@@ -564,7 +564,7 @@ function transacionAjax_Cliente_create(State) {
                         $("#dialog").dialog("open");
                         $("#DE").css("display", "none");
                         $("#SE").css("display", "block");
-                        $("#WE").css("display", "none");
+                        $("#WA").css("display", "none");
                         NitAlter = $("#Select_EmpresaNit").val();
                     }
                     else {
@@ -573,7 +573,7 @@ function transacionAjax_Cliente_create(State) {
                         $("#dialog").dialog("open");
                         $("#DE").css("display", "none");
                         $("#SE").css("display", "block");
-                        $("#WE").css("display", "none");
+                        $("#WA").css("display", "none");
                         OpcWordComplementos = "U";
                         NitAlter = $("#Select_EmpresaNit").val();
                         $("#Admin_Anexos").css("display", "inline-table");
@@ -614,7 +614,7 @@ function transacionAjax_Cliente_delete(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "block");
                     $("#SE").css("display", "none");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     $("#dialog_eliminar").dialog("close");
                     break;
 
@@ -635,7 +635,7 @@ function transacionAjax_Cliente_delete(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "none");
                     $("#SE").css("display", "block");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     $("#dialog_eliminar").dialog("close");
                     transacionAjax_Cliente("consulta", "N", "ALL");
                     Clear();
@@ -714,7 +714,7 @@ function transacionAjax_Adress_create(State, Nit, TypeDoc, Doc) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "block");
                     $("#SE").css("display", "none");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     break;
 
                 case "CREO":
@@ -724,7 +724,7 @@ function transacionAjax_Adress_create(State, Nit, TypeDoc, Doc) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "none");
                     $("#SE").css("display", "block");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     $("#Dialog_Direcciones").dialog("close");
                     break;
             }
@@ -799,7 +799,7 @@ function transacionAjax_Bank_create(State, Nit, TypeDoc, Doc) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "block");
                     $("#SE").css("display", "none");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     break;
 
                 case "CREO":
@@ -809,7 +809,7 @@ function transacionAjax_Bank_create(State, Nit, TypeDoc, Doc) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "none");
                     $("#SE").css("display", "block");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     $("#Dialog_Direcciones").dialog("close");
                     break;
             }
@@ -921,7 +921,7 @@ function transacionAjax_Document_create(State, Nit, TypeDoc, Doc) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "block");
                     $("#SE").css("display", "none");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     break;
 
                 case "CREO":
@@ -931,7 +931,7 @@ function transacionAjax_Document_create(State, Nit, TypeDoc, Doc) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "none");
                     $("#SE").css("display", "block");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     $("#Dialog_Direcciones").dialog("close");
                     break;
             }

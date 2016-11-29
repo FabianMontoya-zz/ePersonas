@@ -58,7 +58,7 @@ $(document).ready(function () {
 
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
-    $("#WE").css("display", "none");
+    $("#WA").css("display", "none");
 
     $("#Sucess").css("display", "none");
     $("#Fail").css("display", "none");

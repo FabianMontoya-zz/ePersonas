@@ -140,7 +140,7 @@ function Add_Array_Adress() {
     $("#dialog").dialog("open");
     $("#DE").css("display", "none");
     $("#SE").css("display", "block");
-    $("#WE").css("display", "none");
+    $("#WA").css("display", "none");
     $("#Dialog_C_R_U_D").dialog("close");
     clearDireccion();
 
@@ -241,7 +241,7 @@ function Update_Array_Adress() {
     $("#dialog").dialog("open");
     $("#DE").css("display", "none");
     $("#SE").css("display", "block");
-    $("#WE").css("display", "none");
+    $("#WA").css("display", "none");
     $("#Dialog_C_R_U_D").dialog("close");
     clearDireccion();
 
@@ -275,7 +275,7 @@ function Confirm_Adress(Confirm) {
         $("#dialog").dialog("open");
         $("#DE").css("display", "none");
         $("#SE").css("display", "block");
-        $("#WE").css("display", "none");
+        $("#WA").css("display", "none");
         $("#Dialog_C_R_U_D").dialog("close");
         $("#Dialog_Delete_Adress").dialog("close");
 

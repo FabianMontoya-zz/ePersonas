@@ -42,7 +42,7 @@ $(document).ready(function () {
     $("#Img6").css("display", "none");
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
-    $("#WE").css("display", "none");
+    $("#WA").css("display", "none");
 
     $("#TablaPais").css("display", "none");
     $("#TablaCiudad").css("display", "none");

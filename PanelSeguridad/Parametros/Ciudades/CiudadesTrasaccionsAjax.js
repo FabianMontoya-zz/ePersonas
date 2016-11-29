@@ -126,7 +126,7 @@ function transacionAjax_Ciudades_create(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "block");
                     $("#SE").css("display", "none");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     break;
 
                 case "Existe":
@@ -145,7 +145,7 @@ function transacionAjax_Ciudades_create(State) {
                         $("#dialog").dialog("open");
                         $("#DE").css("display", "none");
                         $("#SE").css("display", "block");
-                        $("#WE").css("display", "none");
+                        $("#WA").css("display", "none");
                         Clear();
                     }
                     else {
@@ -154,7 +154,7 @@ function transacionAjax_Ciudades_create(State) {
                         $("#dialog").dialog("open");
                         $("#DE").css("display", "none");
                         $("#SE").css("display", "block");
-                        $("#WE").css("display", "none");
+                        $("#WA").css("display", "none");
                         Clear();
                     }
                     break;
@@ -190,7 +190,7 @@ function transacionAjax_Ciudades_delete(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "block");
                     $("#SE").css("display", "none");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     $("#dialog_eliminar").dialog("close");
                     break;
 
@@ -211,7 +211,7 @@ function transacionAjax_Ciudades_delete(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "none");
                     $("#SE").css("display", "block");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     $("#dialog_eliminar").dialog("close");
                     Clear();
                     break;

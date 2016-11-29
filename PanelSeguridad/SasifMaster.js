@@ -123,19 +123,19 @@ function Mensaje_General(Title, Msn, Type) {
         case "E":
             $("#DE").css("display", "block");
             $("#SE").css("display", "none");
-            $("#WE").css("display", "none");
+            $("#WA").css("display", "none");
             break;
 
         case "W":
             $("#DE").css("display", "none");
             $("#SE").css("display", "none");
-            $("#WE").css("display", "block");
+            $("#WA").css("display", "block");
             break;
 
         case "S":
             $("#DE").css("display", "none");
             $("#SE").css("display", "block");
-            $("#WE").css("display", "none");
+            $("#WA").css("display", "none");
             break;
     }
 }

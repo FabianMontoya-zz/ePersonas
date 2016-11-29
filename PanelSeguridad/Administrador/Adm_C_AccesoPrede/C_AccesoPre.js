@@ -57,7 +57,7 @@ $(document).ready(function () {
     $("#Img13").css("display", "none");
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
-    $("#WE").css("display", "none");
+    $("#WA").css("display", "none");
     $("#T_Vigencia_Ing").css("display", "none");
 
     $("#TablaDatos_D").css("display", "none");

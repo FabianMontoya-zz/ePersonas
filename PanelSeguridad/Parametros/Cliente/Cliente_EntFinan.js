@@ -184,7 +184,7 @@ function Add_Array_Bank() {
     $("#dialog").dialog("open");
     $("#DE").css("display", "none");
     $("#SE").css("display", "block");
-    $("#WE").css("display", "none");
+    $("#WA").css("display", "none");
     $("#Dialog_C_R_U_D_Bank").dialog("close");
     ClearBank();
 
@@ -216,7 +216,7 @@ function Confirm_Bank(Confirm) {
         $("#dialog").dialog("open");
         $("#DE").css("display", "none");
         $("#SE").css("display", "block");
-        $("#WE").css("display", "none");
+        $("#WA").css("display", "none");
         $("#Dialog_C_R_U_D_Bank").dialog("close");
         $("#Dialog_Delete_Bank").dialog("close");
 

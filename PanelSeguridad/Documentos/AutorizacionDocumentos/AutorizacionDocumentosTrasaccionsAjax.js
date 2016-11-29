@@ -259,7 +259,7 @@ function transaccionAjax_Update_Verificacion(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "block");
                     $("#SE").css("display", "none");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     break;
 
                 case "Exito":
@@ -269,7 +269,7 @@ function transaccionAjax_Update_Verificacion(State) {
                         $("#dialog").dialog("open");
                         $("#DE").css("display", "none");
                         $("#SE").css("display", "block");
-                        $("#WE").css("display", "none");
+                        $("#WA").css("display", "none");
                         $("#Dialog_Visor_View").dialog("close");
                         $("#Dialog_Visor").dialog("close");
                         $("#Dialog_Valida_Document").dialog("close");
@@ -337,7 +337,7 @@ function transacionAjax_ListDocument_Anexos(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "block");
                     $("#SE").css("display", "none");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     break;
 
                 case "Exito":
@@ -346,7 +346,7 @@ function transacionAjax_ListDocument_Anexos(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "none");
                     $("#SE").css("display", "block");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     $("#Dialog_Visor_View").dialog("close");
                     $("#Dialog_Visor").dialog("close");
                     $("#Dialog_Valida_Document").dialog("close");

@@ -189,7 +189,7 @@ function transacionAjax_Cargo_create(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "block");
                     $("#SE").css("display", "none");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     break;
 
                 case "Existe":
@@ -208,7 +208,7 @@ function transacionAjax_Cargo_create(State) {
                         $("#dialog").dialog("open");
                         $("#DE").css("display", "none");
                         $("#SE").css("display", "block");
-                        $("#WE").css("display", "none");
+                        $("#WA").css("display", "none");
                         Clear();
                     }
                     else {
@@ -217,7 +217,7 @@ function transacionAjax_Cargo_create(State) {
                         $("#dialog").dialog("open");
                         $("#DE").css("display", "none");
                         $("#SE").css("display", "block");
-                        $("#WE").css("display", "none");
+                        $("#WA").css("display", "none");
                         transacionAjax_CargoDepend('Cargo_Dep', index_ID);
                         Clear();
                     }
@@ -254,7 +254,7 @@ function transacionAjax_Cargo_delete(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "block");
                     $("#SE").css("display", "none");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     $("#dialog_eliminar").dialog("close");
                     break;
 
@@ -275,7 +275,7 @@ function transacionAjax_Cargo_delete(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "none");
                     $("#SE").css("display", "block");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     $("#dialog_eliminar").dialog("close");
                     Clear();
                     break;

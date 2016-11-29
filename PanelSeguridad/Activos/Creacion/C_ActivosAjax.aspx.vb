@@ -13,6 +13,9 @@ Public Class C_ActivosAjax
                 Case "MATRIX_RTSTA"
                     Matrix_RTSTA()
 
+                Case "MATRIX_PAIS_CIUDAD"
+                    Carga_Matriz_PaisCiudad()
+
                 Case "Tipo"
                     CargarTipo()
 
@@ -120,6 +123,21 @@ Public Class C_ActivosAjax
 
         ObjList = SQL.Matrix_RTSTA()
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga La matrix
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub Carga_Matriz_PaisCiudad()
+
+        Dim SQLC As New CiudadesSQLClass
+
+        Dim ObjList_MatrixCiudad As New List(Of CiudadesClass)
+        ObjList_MatrixCiudad = SQLC.Read_Matrix_Ciudad()
+
+        Response.Write(JsonConvert.SerializeObject(ObjList_MatrixCiudad.ToArray()))
 
     End Sub
 

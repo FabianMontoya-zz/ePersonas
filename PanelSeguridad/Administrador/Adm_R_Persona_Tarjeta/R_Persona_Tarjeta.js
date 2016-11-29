@@ -29,7 +29,7 @@ $(document).ready(function () {
     $("#Img5").css("display", "none");
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
-    $("#WE").css("display", "none");
+    $("#WA").css("display", "none");
 
 
     //funcion para las ventanas emergentes

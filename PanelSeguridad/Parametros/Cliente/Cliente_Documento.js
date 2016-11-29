@@ -223,7 +223,7 @@ function Add_Array_Document() {
     $("#dialog").dialog("open");
     $("#DE").css("display", "none");
     $("#SE").css("display", "block");
-    $("#WE").css("display", "none");
+    $("#WA").css("display", "none");
     $("#Dialog_C_R_U_D_Document").dialog("close");
     ClearDocument();
 
@@ -255,7 +255,7 @@ function Confirm_Document(Confirm) {
         $("#dialog").dialog("open");
         $("#DE").css("display", "none");
         $("#SE").css("display", "block");
-        $("#WE").css("display", "none");
+        $("#WA").css("display", "none");
         $("#Dialog_C_R_U_D_Document").dialog("close");
         $("#Dialog_Delete_Document").dialog("close");
 

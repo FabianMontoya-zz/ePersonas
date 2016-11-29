@@ -88,7 +88,7 @@ function transacionAjax_InvPuerta_create(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "block");
                     $("#SE").css("display", "none");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     break;
 
                 case "Existe":
@@ -107,7 +107,7 @@ function transacionAjax_InvPuerta_create(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "none");
                     $("#SE").css("display", "block");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     Clear();
                     break;
 

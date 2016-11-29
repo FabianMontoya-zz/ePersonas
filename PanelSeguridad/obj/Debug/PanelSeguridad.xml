@@ -21,6 +21,11 @@ PanelSeguridad
  funcion que carga el objeto DDL consulta
  </summary>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosAjax.Carga_Matriz_PaisCiudad">
+	<summary>
+ funcion que carga La matrix
+ </summary>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.C_ActivosAjax.CargarMoneda">
 	<summary>
  funcion que carga el objeto DDL consulta

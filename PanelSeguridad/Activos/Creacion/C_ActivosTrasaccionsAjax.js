@@ -24,7 +24,32 @@ function transaccionAjax_MRTSTA(State) {
     });
 }
 
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_MPaises_Ciudades(State) {
+    $.ajax({
+        url: "C_ActivosAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'CIUDADES'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_Ciudad = [];
+            }
+            else {
+                Matrix_Ciudad = JSON.parse(result);
+                F_Matrix_pais();
+            }
+        },
+        error: function () {
 
+        }
+    });
+}
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
@@ -208,7 +233,7 @@ function transacionAjax_C_Activos_create(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "block");
                     $("#SE").css("display", "none");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     break;
 
                 case "Existe":
@@ -226,7 +251,7 @@ function transacionAjax_C_Activos_create(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "none");
                     $("#SE").css("display", "block");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     Clear();
                     break;
             }

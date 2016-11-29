@@ -18,7 +18,7 @@ $(document).ready(function () {
     $("#Img2").css("display", "none");
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
-    $("#WE").css("display", "none");
+    $("#WA").css("display", "none");
 
     $("#TablaDatos_D").css("display", "none");
     $("#TablaHoras").css("display", "none");

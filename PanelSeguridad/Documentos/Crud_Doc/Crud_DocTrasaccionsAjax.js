@@ -336,7 +336,7 @@ function transacionAjax_DocumentosExitentes(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "block");
                     $("#SE").css("display", "none");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     break;
 
                 case "Exito":
@@ -402,7 +402,7 @@ function transacionAjax_AsociacionDocumentos(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "block");
                     $("#SE").css("display", "none");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     break;
 
                 case "Exito":
@@ -411,7 +411,7 @@ function transacionAjax_AsociacionDocumentos(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "none");
                     $("#SE").css("display", "block");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     $("#Dialog_Visor").dialog("close");
                     Clear();
                     break;

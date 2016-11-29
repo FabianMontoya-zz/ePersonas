@@ -309,7 +309,7 @@ function transacionAjax_Insert_AccesoPredet(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "block");
                     $("#SE").css("display", "none");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     break;
 
                 case "Existe":
@@ -328,7 +328,7 @@ function transacionAjax_Insert_AccesoPredet(State) {
                         $("#dialog").dialog("open");
                         $("#DE").css("display", "none");
                         $("#SE").css("display", "block");
-                        $("#WE").css("display", "none");
+                        $("#WA").css("display", "none");
                         transaccionAjax_MTarjeta('MATRIX_TARJETA');
                         Clear();
                     }
@@ -338,7 +338,7 @@ function transacionAjax_Insert_AccesoPredet(State) {
                         $("#dialog").dialog("open");
                         $("#DE").css("display", "none");
                         $("#SE").css("display", "block");
-                        $("#WE").css("display", "none");
+                        $("#WA").css("display", "none");
                         transaccionAjax_MTarjeta('MATRIX_TARJETA');
                         Clear();
                     }
@@ -383,7 +383,7 @@ function transacionAjax_Delete_AccesoPredet(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "block");
                     $("#SE").css("display", "none");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     $("#dialog_eliminar").dialog("close");
                     break;
 
@@ -394,7 +394,7 @@ function transacionAjax_Delete_AccesoPredet(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "none");
                     $("#SE").css("display", "block");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     $("#dialog_eliminar").dialog("close");
                     transacionAjax_AccesoPredet("consulta", "N", "ALL");
                     Clear();

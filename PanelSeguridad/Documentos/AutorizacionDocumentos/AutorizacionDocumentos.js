@@ -70,7 +70,7 @@ $(document).ready(function () {
 
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
-    $("#WE").css("display", "none");
+    $("#WA").css("display", "none");
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({

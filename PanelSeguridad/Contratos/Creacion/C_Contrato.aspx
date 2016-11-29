@@ -455,7 +455,7 @@
                 <td>
                     <img alt="error" id="DE" src="../../images/error_2.png" />
                     <img alt="success" id="SE" src="../../images/success.png" />
-                    <img alt="Warning" id="WE" src="../../images/alert.png" />
+                    <img alt="Warning" id="WA" src="../../images/alert.png" />
                 </td>
             </tr>
             <tr>

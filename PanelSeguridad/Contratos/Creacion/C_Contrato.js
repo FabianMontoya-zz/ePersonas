@@ -25,7 +25,7 @@ $(document).ready(function () {
     //Imagenes de los dialog con mensajes
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
-    $("#WE").css("display", "none");
+    $("#WA").css("display", "none");
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({

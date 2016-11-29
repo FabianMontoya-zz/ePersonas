@@ -1,6 +1,7 @@
 ﻿/*--------------- region de variables globales --------------------*/
 var Matrix_RTSTA = [];
 var ArrayEmpresaNit = [];
+var Matrix_Pais = [];
 
 var ArrayC_Activos = [];
 var ArrayMoneda = [];
@@ -10,8 +11,12 @@ var ArrayEstado = [];
 var ID;
 var T_Doc;
 var Doc;
-
-
+var A = [];
+var P = [];
+var A_0 = [];
+var A_C = 0;
+var A0 = 0;
+var C_P = 0;
 /*--------------- region de variables globales --------------------*/
 
 //Evento load JS
@@ -19,24 +24,33 @@ $(document).ready(function () {
 
     $("#Marco_trabajo_Contrato").css("height", "520px;");
     transaccionAjax_MRTSTA("MATRIX_RTSTA");
+    transaccionAjax_MPaises_Ciudades('MATRIX_PAIS_CIUDAD');
+
     transacionAjax_Tipo('Tipo');
 
     transacionAjax_EmpresaNit('Cliente')
     transacionAjax_Estado('Estado');
     transacionAjax_Moneda('Moneda');
-
-    $("#Img7").css("display", "none");
-    $("#Img6").css("display", "none");
-    $("#Img5").css("display", "none");
-    $("#Img3").css("display", "none");
-    $("#Img2").css("display", "none");
     $("#Img1").css("display", "none");
+    $("#Img2").css("display", "none");
+    $("#Img3").css("display", "none");
+    $("#Img5").css("display", "none");
+    $("#Img6").css("display", "none");
+    $("#Img7").css("display", "none");
+
+    $("#Img8").css("display", "none");
+    $("#Img9").css("display", "none");
+    $("#Img10").css("display", "none");
+    $("#Img11").css("display", "none");
+
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
-    $("#WE").css("display", "none");
+    $("#WA").css("display", "none");
 
     $("#Tabla_LLave_Inmueble").css("display", "none");
-    $("#Tabla_LLave_Vehiculos").css("display", "none");
+    $("#Tabla_LLave_Vehiculos").css("display", "inline-table");
+    $("#Txtkey_1").html("Codigo Generico");
+
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
@@ -89,7 +103,6 @@ function BtnCrear() {
 function btnSalir() {
     window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
 }
-
 
 //evento del boton salir
 function x() {
@@ -162,8 +175,6 @@ function validarCamposCrear() {
     return validar;
 }
 
-
-
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                     PROCESO DE CARGUE                                                                                                                                        ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -171,7 +182,6 @@ function validarCamposCrear() {
 function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {
         var TD_ID = this.value;
-        //transacionAjax_Hijo_Cliente('Hijo_Cliente', TD_ID);
     });
 }
 
@@ -180,26 +190,69 @@ function Change_Select_TA() {
     $("#Select_Tipo").change(function () {
         var index_ID = this.value;
         Charge_Combos_Depend_Nit(Matrix_RTSTA, "Select_SubTipo", index_ID, "");
-        if (index_ID != 2) {
-            $("#Tabla_LLave_Inmueble").css("display", "inline-table");
-            $("#Tabla_LLave_Vehiculos").css("display", "none");
+
+        switch (index_ID) {
+            case "1":
+                $("#Tabla_LLave_Inmueble").css("display", "inline-table");
+                $("#Tabla_LLave_Vehiculos").css("display", "none");
+                break;
+
+            case "2":
+                $("#Tabla_LLave_Inmueble").css("display", "none");
+                $("#Tabla_LLave_Vehiculos").css("display", "inline-table");
+                $("#Txtkey_1").html("Placa");
+                break;
+
+            default:
+                $("#Tabla_LLave_Inmueble").css("display", "none");
+                $("#Tabla_LLave_Vehiculos").css("display", "inline-table");
+                $("#Txtkey_1").html("Codigo Generico");
+                break;
         }
-        else {
-            $("#Tabla_LLave_Inmueble").css("display", "none");
-            $("#Tabla_LLave_Vehiculos").css("display", "inline-table");
-        }
+
     });
 }
 
-//sacamos documento y tipo de documento requerido para contrato
-function Change_Select_H_Cliente() {
-    $("#Select_H_Cliente").change(function () {
-        var Str_H_cliente = $("#Select_H_Cliente option:selected").html();
-        var SplitCliente = Str_H_cliente.split(" - ");
-        T_Doc = SplitCliente[0];
-        Doc = SplitCliente[1];
-    });
+
+//crea la matrix de pais
+function F_Matrix_pais() {
+
+    var JJ = 0;    //CONTADOR TABLA  1
+    var II = 0;    //CONTADOR DE REGISTROS X PAIS
+    var PAIS_ID = 0;
+
+    for (Item in Matrix_Ciudad) {
+
+        var Json_Matrix_Pais;
+        if (Matrix_Ciudad[Item].Ciudades_ID == 0) {
+            Json_Matrix_Pais = { "ID": Matrix_Ciudad[II].Pais_ID, "descripcion": Matrix_Ciudad[II].DescripPais, "IndexInicial": 0, "IndexFinal": 0 };
+            C_P = C_P + 1
+            Matrix_Pais.push(Json_Matrix_Pais);
+            JJ = JJ + 1;
+            A_0[A0] = JJ - 1;
+            A0 = A0 + 1;
+        }
+        else {
+            Json_Matrix_Pais = { "ID": Matrix_Ciudad[II].Pais_ID, "descripcion": Matrix_Ciudad[II].DescripPais, "IndexInicial": JJ, "IndexFinal": 0 };
+
+            if (Matrix_Ciudad[Item].Pais_ID == PAIS_ID) {
+                JJ = JJ + 1;
+            }
+            else {
+                PAIS_ID = Matrix_Ciudad[Item].Pais_ID;
+                P[A_C] = C_P;
+                Matrix_Pais.push(Json_Matrix_Pais);
+                C_P = C_P + 1
+                A[A_C] = JJ;
+                A_C = A_C + 1;
+            }
+        }
+        II = II + 1;
+    }
+    V2();
 }
+
+
 
 
 //limpiar campos
@@ -215,8 +268,20 @@ function Add_Activos(index) {
     Table_Activos();
 }
 
+
+
 function Table_Activos() {
 
     $("#container_TActivos").html("");
 
+}
+
+//sacamos documento y tipo de documento requerido para contrato
+function Change_Select_H_Cliente() {
+    $("#Select_H_Cliente").change(function () {
+        var Str_H_cliente = $("#Select_H_Cliente option:selected").html();
+        var SplitCliente = Str_H_cliente.split(" - ");
+        T_Doc = SplitCliente[0];
+        Doc = SplitCliente[1];
+    });
 }
