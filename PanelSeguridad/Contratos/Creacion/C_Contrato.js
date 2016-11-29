@@ -14,7 +14,8 @@ var Doc;
 
 //Evento load JS
 $(document).ready(function () {
-    $("#Marco_trabajo_Contrato").css("height", "520px");
+    $("#Marco_trabajo_Contrato").css("height", "620px");
+    $("#Marco_trabajo_Contrato").css("width", "95%");
 
     transacionAjax_EmpresaNit('Cliente')
     transacionAjax_Moneda('Moneda');
@@ -57,11 +58,17 @@ $(document).ready(function () {
     $("#T_Activo_Grid").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,
         "bDestroy": true
-    });    
+    });
 
     $(function () { //Función de control del picker de la fecha
-        $("#TXT_Fecha_Apertura").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0});
+        $("#TXT_Fecha_Apertura").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 });
+
+        $("#Acordeon_Dat").accordion({
+            heightStyle: "content"
+        });
     });
+
+
 
     Change_Select_Nit();
     Change_Select_H_Cliente();
