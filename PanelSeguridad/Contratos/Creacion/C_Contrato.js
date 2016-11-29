@@ -14,7 +14,7 @@ var Doc;
 
 //Evento load JS
 $(document).ready(function () {
-    $("#Marco_trabajo_Contrato").css("height", "620px");
+    $("#Marco_trabajo_Contrato").css("height", "580px");
     $("#Marco_trabajo_Contrato").css("width", "95%");
 
     transacionAjax_EmpresaNit('Cliente')
@@ -114,8 +114,8 @@ function BtnCrear() {
 function validarCamposCrear() {
 
     var Campo_1 = $("#Select_EmpresaNit").val();
-    var Campo_2 = $("#Txt_ID").val();
-    var Campo_3 = $("#TxtDescripcion").val();
+    var Campo_2 = $("#TXT_ID_Colocacion").val();
+    var Campo_3 = $("#TXT_Descripcion").val();
     var Campo_4 = $("#Select_H_Cliente").val();
     var Campo_5 = $("#Select_Estado").val();
     var Campo_6 = $("#Select_Moneda").val();
