@@ -61,9 +61,12 @@ $(document).ready(function () {
     });
 
     $(function () { //Función de control del picker de la fecha
-        $("#TXT_Fecha_Apertura").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 });
+        $("#TXT_Fecha_Apertura").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 });       
+    });
 
-        $("#Acordeon_Dat").accordion({
+    $(function () { //Función del acordeon
+        
+        $("#Acordeon_Contrato").accordion({
             heightStyle: "content"
         });
     });

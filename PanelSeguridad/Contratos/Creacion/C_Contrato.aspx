@@ -46,94 +46,10 @@
 
     <!--Dialog que contiene la pantalla de las colocaciones/contratos -->
     <div id="Marco_Contrato">
-        <div id="Marco_trabajo_Contrato">
-        <div id="Acordeon_Dat" style="margin: 40px;">
-            <h3>Primera fecha
+        <div id="Acordeon_Contrato" style="width: 100%">
+            <h3>Captura Colocación
             </h3>
-            <div>
-                <table style="width: 100%">
-                    <tr>
-                        <td class="Label_Bold">Mes/dia
-                        </td>
-                        <td id="V_F_1"></td>
-                    </tr>
-                    <tr>
-                        <td class="Label_Bold">Descuento
-                        </td>
-                        <td id="V_Des_1"></td>
-                    </tr>
-                    <tr>
-                        <td class="Label_Bold">Valor
-                        </td>
-                        <td id="V_Valor_1"></td>
-                    </tr>
-                </table>
-            </div>
-            <h3>Segunda fecha
-            </h3>
-            <div>
-                <table style="width: 100%">
-                    <tr>
-                        <td class="Label_Bold">Mes/dia
-                        </td>
-                        <td id="V_F_2"></td>
-                    </tr>
-                    <tr>
-                        <td class="Label_Bold">Descuento
-                        </td>
-                        <td id="V_Des_2"></td>
-                    </tr>
-                    <tr>
-                        <td class="Label_Bold">Valor
-                        </td>
-                        <td id="V_Valor_2"></td>
-                    </tr>
-                </table>
-            </div>
-            <h3>Tercera fecha
-            </h3>
-            <div>
-                <table style="width: 100%">
-                    <tr>
-                        <td class="Label_Bold">Mes/dia
-                        </td>
-                        <td id="V_F_3"></td>
-                    </tr>
-                    <tr>
-                        <td class="Label_Bold">Descuento
-                        </td>
-                        <td id="V_Des_3"></td>
-                    </tr>
-                    <tr>
-                        <td class="Label_Bold">Valor
-                        </td>
-                        <td id="V_Valor_3"></td>
-                    </tr>
-                </table>
-            </div>
-            <h3>Cuarta fecha
-            </h3>
-            <div>
-                <table style="width: 100%">
-                    <tr>
-                        <td class="Label_Bold">Mes/dia
-                        </td>
-                        <td id="V_F_4"></td>
-                    </tr>
-                    <tr>
-                        <td class="Label_Bold">Descuento
-                        </td>
-                        <td id="V_Des_4"></td>
-                    </tr>
-                    <tr>
-                        <td class="Label_Bold">Valor
-                        </td>
-                        <td id="V_Valor_4"></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-            <div id="Container_controls">
+            <div id="Div_Captura_Colocacion">
                 <table id="T_Encabezado" style="width: 100%;">
                     <tr>
                         <td id="TD_ID" style="width: 10%;" class="Label_Bold">NIT Empresa
@@ -191,7 +107,7 @@
                         </td>
                         <td style="width: 300px; padding-bottom: 25px;">
                             <span class="cssToolTip">
-                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img4"
+                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img5"
                                     src="../../images/error.png" />
                                 <span class="SpamEG"></span></span>
                         </td>
@@ -206,7 +122,7 @@
                         </td>
                         <td style="padding-bottom: 25px;">
                             <span class="cssToolTip">
-                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img5"
+                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img6"
                                     src="../../images/error.png" />
                                 <span class="SpamEG"></span></span>
                         </td>
@@ -220,7 +136,7 @@
                         </td>
                         <td style="width: 300px; padding-bottom: 25px;">
                             <span class="cssToolTip">
-                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img6"
+                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img7"
                                     src="../../images/error.png" />
                                 <span class="SpamEG"></span></span>
                         </td>
@@ -234,7 +150,7 @@
                         </td>
                         <td style="padding-bottom: 25px;">
                             <span class="cssToolTip">
-                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img7"
+                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img8"
                                     src="../../images/error.png" />
                                 <span class="SpamEG"></span></span>
                         </td>
@@ -248,7 +164,7 @@
                         </td>
                         <td style="padding-bottom: 25px;">
                             <span class="cssToolTip">
-                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img8"
+                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img9"
                                     src="../../images/error.png" />
                                 <span class="SpamEG"></span></span>
                         </td>
@@ -262,7 +178,7 @@
                         </td>
                         <td style="padding-bottom: 25px;">
                             <span class="cssToolTip">
-                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img9"
+                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img10"
                                     src="../../images/error.png" />
                                 <span class="SpamEG"></span></span>
                         </td>
@@ -276,7 +192,7 @@
                         </td>
                         <td style="padding-bottom: 25px;">
                             <span class="cssToolTip">
-                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img10"
+                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img11"
                                     src="../../images/error.png" />
                                 <span class="SpamEG"></span></span>
                         </td>
@@ -291,7 +207,7 @@
                         </td>
                         <td style="padding-bottom: 25px; width: 80px;">
                             <span class="cssToolTip">
-                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img11"
+                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img12"
                                     src="../../images/error.png" />
                                 <span class="SpamEG"></span></span>
                         </td>
@@ -305,7 +221,7 @@
                         </td>
                         <td style="padding-bottom: 25px;">
                             <span class="cssToolTip">
-                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img12"
+                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img13"
                                     src="../../images/error.png" />
                                 <span class="SpamEG"></span></span>
                         </td>
@@ -326,26 +242,14 @@
                         <td style="width: 40px; padding-bottom: 25px;"></td>
                     </tr>
                 </table>
-                <table id="T_Valores">
-                    <tr>
-                        <td align="center" class="Title_Bold" colspan="8">VALORES
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="Label_Bold" style="padding-left: 25px; width: 100px;">Contrato
-                        </td>
-                        <td id="Td_Vr_Contr" style="width: 110px;">0
-                        </td>
-                        <td class="Label_Bold" style="width: 100px;">Financiado
-                        </td>
-                        <td id="Td_Vr_Finan" style="width: 110px;">0
-                        </td>
-                        <td class="Label_Bold" style="width: 100px;">Opcion Compra
-                        </td>
-                        <td id="Td_Vr_OpCompra" style="width: 110px;">0
-                        </td>
-                    </tr>
-                </table>
+            </div>
+            <h3>Condiciones Financieras
+            </h3>
+            <div id="Div_Condiciones_Financieras">
+            </div>
+            <h3>Saldos
+            </h3>
+            <div id="Div_Saldos">
                 <table id="T_Saldos">
                     <tr>
                         <td align="center" class="Title_Bold" colspan="8">SALDOS
@@ -379,46 +283,77 @@
                         <td colspan="8" style="text-align: center;"></td>
                     </tr>
                 </table>
-                <table id="Complementos">
-                    <tr>
-                        <td>
-                            <table id="T_Activo_Grid" border="1" cellpadding="1" cellspacing="1">
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            <span class="cssToolTip_ver">
-                                                <img alt="Activo" class="Add" onclick="javascript:Add_Activos();" id="Crear" height='20px'
-                                                    width='20px' src='../../images/add.png' /><span>Agregar Nuevo Activo</span></span>
-                                        </th>
-                                        <th>Identificación Activo
-                                        </th>
-                                        <th>Identificación Activo
-                                        </th>
-                                        <th>Identificación Activo
-                                        </th>
-                                        <th>Producto
-                                        </th>
-                                        <th>Moneda
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                    </tr>
+            </div>
+            <h3>Control de Cuotas
+            </h3>
+            <div id="Div_Control_Cuotas">
+            </div>
+            <h3>Estados -- Añadir Activos
+            </h3>
+            <div id="Div_Estados">
+                <table id="T_Activo_Grid" border="1" cellpadding="1" cellspacing="1">
+                    <thead>
+                        <tr>
+                            <th>
+                                <span class="cssToolTip_ver">
+                                    <img alt="Activo" class="Add" onclick="javascript:Add_Activos();" id="Crear" height='20px'
+                                        width='20px' src='../../images/add.png' /><span>Agregar Nuevo Activo</span></span>
+                            </th>
+                            <th>Identificación Activo
+                            </th>
+                            <th>Identificación Activo
+                            </th>
+                            <th>Identificación Activo
+                            </th>
+                            <th>Producto
+                            </th>
+                            <th>Moneda
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
                 </table>
-                <div style="width: 100%; text-align: center; margin-top: 25px;">
-                    <input id="Btnguardar" type="button" value="Guardar" onclick="BtnCrear();" />
-                </div>
+            </div>
+            <h3>Datos Generales
+            </h3>
+            <div id="Div_Datos_Generales">
+            </div>
+        </div>
+        <div id="Container_controls">
+
+            <table id="T_Valores">
+                <tr>
+                    <td align="center" class="Title_Bold" colspan="8">VALORES
+                    </td>
+                </tr>
+                <tr>
+                    <td class="Label_Bold" style="padding-left: 25px; width: 100px;">Contrato
+                    </td>
+                    <td id="Td_Vr_Contr" style="width: 110px;">0
+                    </td>
+                    <td class="Label_Bold" style="width: 100px;">Financiado
+                    </td>
+                    <td id="Td_Vr_Finan" style="width: 110px;">0
+                    </td>
+                    <td class="Label_Bold" style="width: 100px;">Opcion Compra
+                    </td>
+                    <td id="Td_Vr_OpCompra" style="width: 110px;">0
+                    </td>
+                </tr>
+            </table>
+
+
+            <div style="width: 100%; text-align: center; margin-top: 25px;">
+                <input id="Btnguardar" type="button" value="Guardar" onclick="BtnCrear();" />
             </div>
         </div>
     </div>
