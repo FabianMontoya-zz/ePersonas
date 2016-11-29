@@ -47,6 +47,92 @@
     <!--Dialog que contiene la pantalla de las colocaciones/contratos -->
     <div id="Marco_Contrato">
         <div id="Marco_trabajo_Contrato">
+        <div id="Acordeon_Dat" style="margin: 40px;">
+            <h3>Primera fecha
+            </h3>
+            <div>
+                <table style="width: 100%">
+                    <tr>
+                        <td class="Label_Bold">Mes/dia
+                        </td>
+                        <td id="V_F_1"></td>
+                    </tr>
+                    <tr>
+                        <td class="Label_Bold">Descuento
+                        </td>
+                        <td id="V_Des_1"></td>
+                    </tr>
+                    <tr>
+                        <td class="Label_Bold">Valor
+                        </td>
+                        <td id="V_Valor_1"></td>
+                    </tr>
+                </table>
+            </div>
+            <h3>Segunda fecha
+            </h3>
+            <div>
+                <table style="width: 100%">
+                    <tr>
+                        <td class="Label_Bold">Mes/dia
+                        </td>
+                        <td id="V_F_2"></td>
+                    </tr>
+                    <tr>
+                        <td class="Label_Bold">Descuento
+                        </td>
+                        <td id="V_Des_2"></td>
+                    </tr>
+                    <tr>
+                        <td class="Label_Bold">Valor
+                        </td>
+                        <td id="V_Valor_2"></td>
+                    </tr>
+                </table>
+            </div>
+            <h3>Tercera fecha
+            </h3>
+            <div>
+                <table style="width: 100%">
+                    <tr>
+                        <td class="Label_Bold">Mes/dia
+                        </td>
+                        <td id="V_F_3"></td>
+                    </tr>
+                    <tr>
+                        <td class="Label_Bold">Descuento
+                        </td>
+                        <td id="V_Des_3"></td>
+                    </tr>
+                    <tr>
+                        <td class="Label_Bold">Valor
+                        </td>
+                        <td id="V_Valor_3"></td>
+                    </tr>
+                </table>
+            </div>
+            <h3>Cuarta fecha
+            </h3>
+            <div>
+                <table style="width: 100%">
+                    <tr>
+                        <td class="Label_Bold">Mes/dia
+                        </td>
+                        <td id="V_F_4"></td>
+                    </tr>
+                    <tr>
+                        <td class="Label_Bold">Descuento
+                        </td>
+                        <td id="V_Des_4"></td>
+                    </tr>
+                    <tr>
+                        <td class="Label_Bold">Valor
+                        </td>
+                        <td id="V_Valor_4"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
             <div id="Container_controls">
                 <table id="T_Encabezado" style="width: 100%;">
                     <tr>
