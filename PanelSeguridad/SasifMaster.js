@@ -695,6 +695,13 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
                 }
             }
             break;
+
+        case "Select_Moneda":
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].MonedaCod_ID + "'>" + Matrix[Item].MonedaCod_ID + " - " + Matrix[Item].Descripcion + "</option>");
+
+            }
+            break;
     }
 
     $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
@@ -983,7 +990,7 @@ function VerDocumento() {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //habilita la ventana emergente de direciones
 function Format_Adress(ObjText) {
-    $("#" + ObjText).mouseover(function () {
+    $("#" + ObjText).click(function () {
         Control_Work = ObjText;
         if ($("#" + ObjText).val == "") {
         } else {

@@ -104,6 +104,33 @@ function transaccionAjax_MSucursal(State) {
     });
 }
 
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_MMoneda(State) {
+    $.ajax({
+        url: "C_ActivosAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'TIPO'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_Moneda = [];
+            }
+            else {
+                Matrix_Moneda = JSON.parse(result);
+                Charge_Combos_Depend_Nit(Matrix_Moneda, "Select_Moneda", "", "");
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
@@ -189,31 +216,6 @@ function transacionAjax_Estado(State) {
 }
 
 
-/*-------------------- carga ---------------------------*/
-//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_Moneda(State) {
-    $.ajax({
-        url: "C_ActivosAjax.aspx",
-        type: "POST",
-        //crear json
-        data: { "action": State,
-            "tabla": 'TIPO'
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            if (result == "") {
-                ArrayMoneda = [];
-            }
-            else {
-                ArrayMoneda = JSON.parse(result);
-                charge_CatalogList(ArrayMoneda, "Select_Moneda", 1);
-            }
-        },
-        error: function () {
-
-        }
-    });
-}
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist

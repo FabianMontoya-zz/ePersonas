@@ -22,6 +22,10 @@ Public Class C_ActivosAjax
                 Case "MATRIX_SUCURSAL"
                     Carga_MSucursal()
 
+                Case "MATRIX_MONEDA"
+                    Carga_MMoneda()
+
+
                 Case "Tipo"
                     CargarTipo()
 
@@ -34,9 +38,7 @@ Public Class C_ActivosAjax
                 Case "Estado"
                     Cargar_EstadoContrato()
 
-                Case "Moneda"
-                    CargarMoneda()
-
+          
                 Case "crear"
                     InsertC_Activos()
 
@@ -177,19 +179,17 @@ Public Class C_ActivosAjax
 
     End Sub
 
-
     ''' <summary>
-    ''' funcion que carga el objeto DDL consulta
+    ''' funcion que carga La matrix
     ''' </summary>
     ''' <remarks></remarks>
-    Protected Sub CargarMoneda()
+    Protected Sub Carga_MMoneda()
 
-        Dim SQL As New C_ActivosSQLClass
-        Dim ObjListDroplist As New List(Of Droplist_Class)
-        Dim vl_S_Tabla As String = Request.Form("tabla")
+        Dim SQL As New MonedaCodSQLClass
+        Dim ObjList As New List(Of MonedaCodClass)
 
-        ObjListDroplist = SQL.Charge_DropListMoneda(vl_S_Tabla)
-        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
+        ObjList = SQL.Matrix_Moneda()
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
 

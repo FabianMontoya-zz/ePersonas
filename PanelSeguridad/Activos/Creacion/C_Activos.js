@@ -4,9 +4,10 @@ var ArrayEmpresaNit = [];
 var Matrix_Pais = [];
 var Matrix_Personas = [];
 var Matrix_Sucursal = [];
+var ArrayMoneda = [];
+
 
 var ArrayC_Activos = [];
-var ArrayMoneda = [];
 var Array_Hijo_Cliente = [];
 var ArrayEstado = [];
 
@@ -26,8 +27,9 @@ $(document).ready(function () {
 
     transacionAjax_EmpresaNit('Cliente')
     transacionAjax_Tipo('Tipo');
+    transacionAjax_MMoneda('MATRIX_MONEDA');
+
     // transacionAjax_Estado('Estado');
-    //  transacionAjax_Moneda('Moneda');
     $("#Img1").css("display", "none");
     $("#Img2").css("display", "none");
     $("#Img3").css("display", "none");
@@ -40,6 +42,7 @@ $(document).ready(function () {
     $("#Img10").css("display", "none");
     $("#Img11").css("display", "none");
     $("#Img12").css("display", "none");
+    $("#Img13").css("display", "none");
 
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
@@ -95,6 +98,7 @@ $(document).ready(function () {
     Change_Select_TA();
     Change_Select_pais();
     Format_Adress("Txt_Adress_U");
+    
 });
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
