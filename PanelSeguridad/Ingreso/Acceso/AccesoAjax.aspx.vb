@@ -35,9 +35,8 @@ Public Class AccesoAjax
                 Case "MATRIX_PACCESO_AREA"
                     CargarMPAccesos_Area()
 
-
-                Case "cargar_droplist_busqueda"
-                    CargarDroplist()
+                Case "Save_Log_Ingreso"
+                    Save_Log_Ingreso()
 
                 Case "Cliente"
                     CargarCliente()
@@ -45,14 +44,6 @@ Public Class AccesoAjax
                 Case "Documento"
                     CargarDocumento()
 
-                Case "consulta"
-                    Consulta_Acceso()
-
-                Case "crear"
-                    InsertAcceso()
-
-                Case "elimina"
-                    EraseAcceso()
             End Select
 
         End If
@@ -61,95 +52,30 @@ Public Class AccesoAjax
 #Region "CRUD"
 
     ''' <summary>
-    ''' traemos todos los datos para tabla Acceso (READ)
-    ''' </summary>
-    ''' <remarks></remarks>
-    Protected Sub Consulta_Acceso()
-
-        Dim SQL_Acceso As New AccesoSQLClass
-        Dim ObjListAcceso As New List(Of AccesoClass)
-
-
-        Dim vl_S_filtro As String = Request.Form("filtro")
-        Dim vl_S_opcion As String = Request.Form("opcion")
-        Dim vl_S_contenido As String = Request.Form("contenido")
-
-        ObjListAcceso = SQL_Acceso.Read_AllAcceso(vl_S_filtro, vl_S_opcion, vl_S_contenido)
-
-        If ObjListAcceso Is Nothing Then
-
-            Dim objAcceso As New AccesoClass
-            ObjListAcceso = New List(Of AccesoClass)
-
-            objAcceso.PuertaAcceso_ID = 0
-            objAcceso.FechaActualizacion = ""
-            objAcceso.UsuarioCreacion = ""
-
-            ObjListAcceso.Add(objAcceso)
-        End If
-
-        Response.Write(JsonConvert.SerializeObject(ObjListAcceso.ToArray()))
-
-    End Sub
-
-    ''' <summary>
     ''' funcion que inserta en la tabla Acceso (INSERT)
     ''' </summary>
     ''' <remarks></remarks>
-    Protected Sub InsertAcceso()
+    Protected Sub Save_Log_Ingreso()
 
-        Dim objAcceso As New AccesoClass
-        Dim SQL_Acceso As New AccesoSQLClass
-        Dim ObjListAcceso As New List(Of AccesoClass)
+        Dim objAcceso As New ControlAccesoClass
+        Dim SQL_Acceso As New ControlAccesoSQLClass
+        Dim ObjListAcceso As New List(Of ControlAccesoClass)
 
-        Dim result As String
-        Dim vl_s_IDxiste As String
+        Dim result As String = ""
 
-        objAcceso.Nit_ID = Request.Form("Nit_ID")
-        objAcceso.PuertaAcceso_ID = Request.Form("PAcceso")
-        objAcceso.Area_ID = Request.Form("Area")
+        Dim List As New List(Of ControlAccesoClass)
+        List = Create_List_ControlAcceso()
 
-        'validamos si la llave existe
-        vl_s_IDxiste = SQL_Acceso.Consulta_Repetido(objAcceso)
-
-        If vl_s_IDxiste = 0 Then
-
-            objAcceso.UsuarioCreacion = Request.Form("user")
-            objAcceso.FechaCreacion = Date.Now
-            objAcceso.UsuarioActualizacion = Request.Form("user")
-            objAcceso.FechaActualizacion = Date.Now
-
-            ObjListAcceso.Add(objAcceso)
-
-            result = SQL_Acceso.InsertAcceso(objAcceso)
-
-            Response.Write(result)
-        Else
-            result = "Existe"
-            Response.Write(result)
-        End If
-
-    End Sub
-
-    ''' <summary>
-    ''' funcion que elimina en la tabla Acceso (DELETE)
-    ''' </summary>
-    ''' <remarks></remarks>
-    Protected Sub EraseAcceso()
-
-        Dim objAcceso As New AccesoClass
-        Dim SQL_Acceso As New AccesoSQLClass
-        Dim ObjListAcceso As New List(Of AccesoClass)
-
-        Dim result As String
-
-        objAcceso.Nit_ID = Request.Form("Nit_ID")
-        objAcceso.PuertaAcceso_ID = Request.Form("PAcceso")
-        objAcceso.Area_ID = Request.Form("Area")
-        ObjListAcceso.Add(objAcceso)
-
-        result = SQL_Acceso.EraseAcceso(objAcceso)
+        For Each item_list As ControlAccesoClass In List
+            result = SQL_Acceso.InsertControlAcceso(item_list)
+            If result <> "Exito" Then
+                result = "Error"
+                Response.Write(result)
+                Stop
+            End If
+        Next
         Response.Write(result)
+
     End Sub
 
 #End Region
@@ -316,6 +242,51 @@ Public Class AccesoAjax
 #End Region
 
 #Region "FUNCIONES"
+
+    ''' <summary>
+    ''' crea lista clase de control de acesso
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Create_List_ControlAcceso()
+        Dim S_list As String = Request.Form("ListIngresoLog").ToString
+        Dim NewList = JsonConvert.DeserializeObject(Of List(Of ControlAccesoClass))(S_list)
+
+        Dim ObjList As New List(Of ControlAccesoClass)
+
+        For Each item As ControlAccesoClass In NewList
+            Dim Obj As New ControlAccesoClass
+
+            Obj.Nit_ID = item.Nit_ID
+            Obj.TypeDocument_ID = item.TypeDocument_ID
+            Obj.Document_ID = item.Document_ID
+            Obj.Tarjeta_ID = item.Tarjeta_ID
+            Obj.Nit_ID_EmpVisita = item.Nit_ID_EmpVisita
+            Obj.PuertaAcceso_ID = item.PuertaAcceso_ID
+            Obj.Area_ID = item.Area_ID
+            Obj.TypeDocument_ID_Per_Encargada = item.TypeDocument_ID_Per_Encargada
+            Obj.Document_ID_Per_Encargada = item.Document_ID_Per_Encargada
+            Obj.FechaEntrada = item.FechaEntrada
+            Obj.HoraEntrada = item.HoraEntrada
+            Obj.Tiempo_PlanVisita = item.Tiempo_PlanVisita
+            Obj.Fecha_PlanSalida = item.Fecha_PlanSalida
+            Obj.Hora_PlanSalida = item.Hora_PlanSalida
+            Obj.Fecha_RealSalida = item.Fecha_RealSalida
+            Obj.Hora_RealSalida = item.Hora_RealSalida
+            Obj.Estado = item.Estado
+            Obj.IngAutomatico_Porteria = item.IngAutomatico_Porteria
+            Obj.TipoPersona = item.TipoPersona
+            Obj.Num_UnicoVisita = item.Num_UnicoVisita
+            Obj.Usuario_Ingreso = item.Usuario_Ingreso
+            Obj.FechaIngreso = item.FechaIngreso
+            Obj.Usuario_Salida = item.Usuario_Salida
+            Obj.FechaSalida = item.FechaSalida
+
+            ObjList.Add(Obj)
+        Next
+
+        Return ObjList
+    End Function
 
 #End Region
 

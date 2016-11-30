@@ -950,6 +950,8 @@
     </Compile>
     <Compile Include="Ingreso\Acceso\AccesoClass.vb" />
     <Compile Include="Ingreso\Acceso\AccesoSQLClass.vb" />
+    <Compile Include="Ingreso\ControlAcceso\ControlAccesoClass.vb" />
+    <Compile Include="Ingreso\ControlAcceso\ControlAccesoSQLClass.vb" />
     <Compile Include="login\CambioPassword.aspx.designer.vb">
       <DependentUpon>CambioPassword.aspx</DependentUpon>
     </Compile>

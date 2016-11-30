@@ -160,8 +160,7 @@ function Registrar_Ingreso_Log() {
 
 //ingreso de registro
 function BtnConfirmaIngreso() {
-    Clear();
-    $("#dialog_eliminar").dialog("close");
+    transacionAjax_LogAcceso_create("Save_Log_Ingreso");
 }
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                           REGION DE VALIDACIONES                                                                                                   ----*/

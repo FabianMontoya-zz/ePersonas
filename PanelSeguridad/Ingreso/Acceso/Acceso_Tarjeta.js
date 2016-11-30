@@ -1,5 +1,6 @@
 ﻿/*--------------- region de variables globales --------------------*/
 var Array_IngresoLog = [];
+var ListIngresoLog = [];
 
 var TDoc_VT;
 var Doc_VT;
@@ -498,7 +499,7 @@ function CreateJSON_IngresoLog() {
         "Estado": "",
         "IngAutomatico_Porteria": "",
         "TipoPersona": "",
-        "Num_UnicoVisita": "",
+        "Num_UnicoVisita": Cant_Ingreso,
         "Usuario_Ingreso": User.toUpperCase(),
         "FechaIngreso": $("#HA_Ingreso").html().replace("||", ""),
         "Usuario_Salida": "",
