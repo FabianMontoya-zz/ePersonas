@@ -4,6 +4,7 @@ var Link;
 var NameTemporal;
 var Doc_name;
 var Matrix_Mes = [];
+var Control_Work;
 
 Matrix_Mes[0] = [1, "Enero", 31];
 Matrix_Mes[1] = [2, "Febrero", 28];
@@ -755,7 +756,6 @@ function Charge_Combo_Persona(Matrix, Selector, Nit, Index_Edit) {
 
 }
 
-
 //carga combo de años
 function CargaYear(Select_Control, Rango, Option_Year, Index_Edit) {
 
@@ -860,7 +860,6 @@ function CargaDay(Select_C_Year, Select_C_Month, Select_Control, Index_Edit) {
     }
 
 }
-
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                         FUNCIONES PARA CARGA DE DOCUMENTOS AL SERVIDOR                                                                                  ----*/
@@ -976,4 +975,172 @@ function VerDocumento() {
     $("#IF_Visor").attr("width", "100%");
     $("#IF_Visor").attr("height", "100%");
     $("#IF_Visor").attr("src", "../../Repository_Document/TEMP/" + Doc_name);
+}
+
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                     PROCESO DE FORMATEO DE DIRECCIONES                                                                   ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//habilita la ventana emergente de direciones
+function Format_Adress(ObjText) {
+    $("#" + ObjText).mouseover(function () {
+        Control_Work = ObjText;
+        if ($("#" + ObjText).val == "") {
+        } else {
+            console.log($("#" + ObjText).val());
+            Clear_Adress();
+            $("#Txt_End_Adress").val($("#" + ObjText).val());
+        }
+
+        $("#Txt_Special").css("display", "none");
+        $("#Dialog_Format_Adress").dialog("open");
+        $("#Dialog_Format_Adress").dialog("option", "title", "Ingrese Dirección ");
+
+        lego_Adress();
+    });
+}
+
+//construye el string de la direccion
+function lego_Adress() {
+
+    var Str_Adress = "";
+
+    $("#Select_Type_Adress").change(function () {
+        ArrayStrAdress[0] = $("#Select_Type_Adress").val();
+        if (ArrayStrAdress[0] == "Kl") {
+            $("#Txt_Special").css("display", "block");
+
+            $("#Select_Letter_1").css("display", "none");
+            $("#Txt_N2").css("display", "none");
+            $("#Select_Letter_2").css("display", "none");
+            $("#Txt_N3").css("display", "none");
+            $("#Select_Orientacion").css("display", "none");
+            $("#Select_Type_Cons").css("display", "none");
+            $("#Txt_N4").css("display", "none");
+            $("#Select_Type_Cons2").css("display", "none");
+            $("#Txt_N5").css("display", "none");
+            $("#Txt_Texto").css("display", "none");
+
+        }
+        else {
+            $("#Txt_Special").css("display", "none");
+
+            $("#Select_Letter_1").css("display", "block");
+            $("#Txt_N2").css("display", "block");
+            $("#Select_Letter_2").css("display", "block");
+            $("#Txt_N3").css("display", "block");
+            $("#Select_Orientacion").css("display", "block");
+            $("#Select_Type_Cons").css("display", "block");
+            $("#Txt_N4").css("display", "block");
+            $("#Select_Type_Cons2").css("display", "block");
+            $("#Txt_N5").css("display", "block");
+            $("#Txt_Texto").css("display", "block");
+
+        }
+        StrLego();
+    });
+
+    $("#Txt_N1").change(function () {
+        ArrayStrAdress[1] = " " + $("#Txt_N1").val();
+        StrLego();
+    });
+
+    $("#Select_Letter_1").change(function () {
+        ArrayStrAdress[2] = $("#Select_Letter_1").val();
+        StrLego();
+    });
+
+    $("#Txt_Special").change(function () {
+        ArrayStrAdress[2] = " " + $("#Txt_Special").val().toUpperCase();
+        StrLego();
+    });
+
+    $("#Txt_N2").change(function () {
+        ArrayStrAdress[3] = " " + $("#Txt_N2").val();
+        StrLego();
+    });
+
+    $("#Select_Letter_2").change(function () {
+        ArrayStrAdress[4] = $("#Select_Letter_2").val();
+        StrLego();
+    });
+
+    $("#Txt_N3").change(function () {
+        ArrayStrAdress[5] = " - " + $("#Txt_N3").val();
+        StrLego();
+    });
+
+    $("#Select_Orientacion").change(function () {
+        ArrayStrAdress[6] = " " + $("#Select_Orientacion").val();
+        StrLego();
+    });
+
+    $("#Select_Type_Cons").change(function () {
+        ArrayStrAdress[7] = " " + $("#Select_Type_Cons").val();
+        StrLego();
+    });
+
+    $("#Txt_N4").change(function () {
+        ArrayStrAdress[8] = " " + $("#Txt_N4").val();
+        StrLego();
+    });
+
+    $("#Select_Type_Cons2").change(function () {
+        ArrayStrAdress[9] = " " + $("#Select_Type_Cons2").val();
+        StrLego();
+    });
+
+    $("#Txt_N5").change(function () {
+        ArrayStrAdress[10] = " " + $("#Txt_N5").val();
+        StrLego();
+    });
+
+    $("#Txt_Texto").change(function () {
+        ArrayStrAdress[11] = " " + $("#Txt_Texto").val().toUpperCase();
+        StrLego();
+    });
+}
+
+//recorre el vector para construir la direccion
+function StrLego() {
+
+    var Str_Adress = "";
+
+    for (item in ArrayStrAdress) {
+
+        if (ArrayStrAdress[item] != "") {
+            Str_Adress = Str_Adress + ArrayStrAdress[item];
+            $("#Txt_End_Adress").val(Str_Adress);
+        }
+    }
+}
+
+//llena el campo de direccion con el string armado
+function Add_Adress() {
+
+    if ($("#Txt_End_Adress").val() != "")
+        $("#" + Control_Work).val($("#Txt_End_Adress").val());
+
+    $("#Dialog_Format_Adress").dialog("close");
+}
+
+//limpia los campos de direccion
+function Clear_Adress() {
+
+    ArrayStrAdress = [];
+    $("#Select_Type_Adress").val("");
+    $("#Select_Letter_1").val("");
+    $("#Txt_N1").val("");
+    $("#Txt_Special").val("");
+    $("#Txt_N2").val("");
+    $("#Select_Letter_2").val("");
+    $("#Txt_N3").val("");
+    $("#Select_Orientacion").val("");
+    $("#Select_Type_Cons").val("");
+    $("#Txt_N4").val("");
+    $("#Select_Type_Cons2").val("");
+    $("#Txt_N5").val("");
+    $("#Txt_Texto").val("");
+
+    $("#Txt_End_Adress").val("");
 }

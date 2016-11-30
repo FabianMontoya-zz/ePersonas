@@ -297,7 +297,7 @@ $(document).ready(function () {
         }
     });
 
-    Format_Adress();
+    Format_Adress("TxtDireccion");
     Change_Select_pais();
     Change_Select_TPersona("", "");
     ValideAnexos();
