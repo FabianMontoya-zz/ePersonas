@@ -16,6 +16,12 @@ Public Class C_ActivosAjax
                 Case "MATRIX_PAIS_CIUDAD"
                     Carga_Matriz_PaisCiudad()
 
+                Case "MATRIX_PERSONAS"
+                    Carga_MPersonas()
+
+                Case "MATRIX_SUCURSAL"
+                    Carga_MSucursal()
+
                 Case "Tipo"
                     CargarTipo()
 
@@ -138,6 +144,36 @@ Public Class C_ActivosAjax
         ObjList_MatrixCiudad = SQLC.Read_Matrix_Ciudad()
 
         Response.Write(JsonConvert.SerializeObject(ObjList_MatrixCiudad.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga La matrix
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub Carga_MPersonas()
+
+        Dim SQL As New ClienteSQLClass
+
+        Dim ObjList_Matrix As New List(Of ClienteClass)
+        ObjList_Matrix = SQL.Matrix_PersonasDep()
+
+        Response.Write(JsonConvert.SerializeObject(ObjList_Matrix.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga La matrix
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub Carga_MSucursal()
+
+        Dim SQL As New SucursalSQLClass
+
+        Dim ObjList_Matrix As New List(Of SucursalClass)
+        ObjList_Matrix = SQL.Matrix_Sucursal()
+
+        Response.Write(JsonConvert.SerializeObject(ObjList_Matrix.ToArray()))
 
     End Sub
 

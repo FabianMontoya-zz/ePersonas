@@ -1138,7 +1138,7 @@
                         <option value="P">P</option>
                         <option value="Q">Q</option>
                         <option value="R">R</option>
-                        <option value="S">D</option>
+                        <option value="S">S</option>
                         <option value="T">T</option>
                         <option value="U">U</option>
                         <option value="V">V</option>
@@ -1172,7 +1172,7 @@
                         <option value="P">P</option>
                         <option value="Q">Q</option>
                         <option value="R">R</option>
-                        <option value="S">D</option>
+                        <option value="S">S</option>
                         <option value="T">T</option>
                         <option value="U">U</option>
                         <option value="V">V</option>
@@ -1592,5 +1592,5 @@
         <div id="container_TDoc_Anexos" style="margin-top: 10px; margin-bottom: 10px;">
         </div>
     </div>
-    <div id="Dialog_Valida_Document">
+    <div id="Dialog_Valida_Document"></div>
 </asp:Content>

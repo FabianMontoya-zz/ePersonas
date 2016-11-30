@@ -53,6 +53,60 @@ function transaccionAjax_MPaises_Ciudades(State) {
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_MPersonas(State) {
+    $.ajax({
+        url: "C_ActivosAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'CIUDADES'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_Personas = [];
+            }
+            else {
+                Matrix_Personas = JSON.parse(result);
+                Charge_Combo_Persona(Matrix_Personas, "Select_Persona_R", "","");
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_MSucursal(State) {
+    $.ajax({
+        url: "C_ActivosAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'CIUDADES'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_Sucursal = [];
+            }
+            else {
+                Matrix_Sucursal  = JSON.parse(result);
+           }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_EmpresaNit(State) {
     $.ajax({
         url: "C_ActivosAjax.aspx",
@@ -76,7 +130,6 @@ function transacionAjax_EmpresaNit(State) {
         }
     });
 }
-
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist

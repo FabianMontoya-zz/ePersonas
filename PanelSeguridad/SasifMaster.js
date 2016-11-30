@@ -686,6 +686,14 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
                 }
             }
             break;
+
+        case "Select_Sucursal":
+            for (Item in Matrix) {
+                if (Matrix[Item].Nit_ID == Nit) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Sucursal_ID + "'>" + Matrix[Item].Descripcion + "</option>");
+                }
+            }
+            break;
     }
 
     $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
@@ -708,6 +716,45 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
     $('.C_Chosen').trigger('chosen:updated');
 
 }
+
+//carga los combo persona segun opcion de la persona
+function Charge_Combo_Persona(Matrix, Selector, Nit, Index_Edit) {
+
+    $('#' + Selector).empty();
+    var objList = $("[id$='" + Selector + "']");
+
+    switch (Selector) {
+
+        case "Select_Persona_R"://persona registro
+            for (Item in Matrix) {
+                if (Matrix[Item].OP_Hacienda == "S" || Matrix[Item].OP_Transito == "S") {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Document_ID + "'>" + Matrix[Item].Nombre + "</option>");
+                }
+            }
+            break;
+    }
+
+    $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
+
+    switch (Index_Edit) {
+        case "":
+            $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
+            break;
+
+        case "0":
+            $("#" + Selector + " option[value= '0'] ").attr("selected", true);
+            break;
+
+        default:
+            $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
+            break;
+    }
+
+    $("#" + Selector).trigger("liszt:updated");
+    $('.C_Chosen').trigger('chosen:updated');
+
+}
+
 
 //carga combo de años
 function CargaYear(Select_Control, Rango, Option_Year, Index_Edit) {
@@ -759,7 +806,7 @@ function CargaMonth(Select_Control, Index_Edit) {
 
 }
 
-//
+//carga el como dia
 function CargaDay(Select_C_Year, Select_C_Month, Select_Control, Index_Edit) {
 
     var Select_Y = $("#" + Select_C_Year).val();
@@ -779,7 +826,7 @@ function CargaDay(Select_C_Year, Select_C_Month, Select_Control, Index_Edit) {
 
         var YearBis = Valida_Bisiesto(Select_Y);
         var Ciclo = 1;
-       
+
         for (itemArray in Matrix_Mes) {
             if (Matrix_Mes[itemArray][0] == Select_M) {
                 console.log(YearBis);

@@ -2,6 +2,8 @@
 var Matrix_RTSTA = [];
 var ArrayEmpresaNit = [];
 var Matrix_Pais = [];
+var Matrix_Personas = [];
+var Matrix_Sucursal = [];
 
 var ArrayC_Activos = [];
 var ArrayMoneda = [];
@@ -11,12 +13,6 @@ var ArrayEstado = [];
 var ID;
 var T_Doc;
 var Doc;
-var A = [];
-var P = [];
-var A_0 = [];
-var A_C = 0;
-var A0 = 0;
-var C_P = 0;
 /*--------------- region de variables globales --------------------*/
 
 //Evento load JS
@@ -25,12 +21,13 @@ $(document).ready(function () {
     $("#Marco_trabajo_Contrato").css("height", "520px;");
     transaccionAjax_MRTSTA("MATRIX_RTSTA");
     transaccionAjax_MPaises_Ciudades('MATRIX_PAIS_CIUDAD');
-
-    transacionAjax_Tipo('Tipo');
+    transaccionAjax_MPersonas('MATRIX_PERSONAS');
+    transaccionAjax_MSucursal('MATRIX_SUCURSAL');
 
     transacionAjax_EmpresaNit('Cliente')
-   // transacionAjax_Estado('Estado');
-  //  transacionAjax_Moneda('Moneda');
+    transacionAjax_Tipo('Tipo');
+    // transacionAjax_Estado('Estado');
+    //  transacionAjax_Moneda('Moneda');
     $("#Img1").css("display", "none");
     $("#Img2").css("display", "none");
     $("#Img3").css("display", "none");
@@ -42,6 +39,7 @@ $(document).ready(function () {
     $("#Img9").css("display", "none");
     $("#Img10").css("display", "none");
     $("#Img11").css("display", "none");
+    $("#Img12").css("display", "none");
 
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
@@ -50,7 +48,6 @@ $(document).ready(function () {
     $("#Tabla_LLave_Inmueble").css("display", "none");
     $("#Tabla_LLave_Vehiculos").css("display", "inline-table");
     $("#Txtkey_1").html("Codigo Generico");
-
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
@@ -63,6 +60,18 @@ $(document).ready(function () {
         autoOpen: false,
         dialogClass: "Dialog_Sasif",
         modal: true
+    });
+
+    $("#Dialog_Format_Adress").dialog({
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true,
+        width: 1000,
+        height: 250,
+        overlay: {
+            opacity: 0.5,
+            background: "black"
+        }
     });
 
     $("#Dialog_Activos").dialog({
@@ -84,6 +93,8 @@ $(document).ready(function () {
 
     Change_Select_Nit();
     Change_Select_TA();
+    Change_Select_pais();
+    Format_Adress("Txt_Adress_U");
 });
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -181,7 +192,9 @@ function validarCamposCrear() {
 //carga el combo 
 function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {
-        var TD_ID = this.value;
+        var index_ID = this.value;
+        Charge_Combos_Depend_Nit(Matrix_Sucursal, "Select_Sucursal", index_ID, "");
+
     });
 }
 
@@ -213,60 +226,6 @@ function Change_Select_TA() {
     });
 }
 
-//crea la matrix de pais
-function F_Matrix_pais() {
-
-    var JJ = 0;    //CONTADOR TABLA  1
-    var II = 0;    //CONTADOR DE REGISTROS X PAIS
-    var PAIS_ID = 0;
-
-    for (Item in Matrix_Ciudad) {
-
-        var Json_Matrix_Pais;
-        if (Matrix_Ciudad[Item].Ciudades_ID == 0) {
-            Json_Matrix_Pais = { "ID": Matrix_Ciudad[II].Pais_ID, "descripcion": Matrix_Ciudad[II].DescripPais, "IndexInicial": 0, "IndexFinal": 0 };
-            C_P = C_P + 1
-            Matrix_Pais.push(Json_Matrix_Pais);
-            JJ = JJ + 1;
-            A_0[A0] = JJ - 1;
-            A0 = A0 + 1;
-        }
-        else {
-            Json_Matrix_Pais = { "ID": Matrix_Ciudad[II].Pais_ID, "descripcion": Matrix_Ciudad[II].DescripPais, "IndexInicial": JJ, "IndexFinal": 0 };
-
-            if (Matrix_Ciudad[Item].Pais_ID == PAIS_ID) {
-                JJ = JJ + 1;
-            }
-            else {
-                PAIS_ID = Matrix_Ciudad[Item].Pais_ID;
-                P[A_C] = C_P;
-                Matrix_Pais.push(Json_Matrix_Pais);
-                C_P = C_P + 1
-                A[A_C] = JJ;
-                A_C = A_C + 1;
-            }
-        }
-        II = II + 1;
-    }
-    CargaPais();
-}
-
-//revicion y carge de combos paises
-function CargaPais() {
-    for (e = 0; e < A.length; e++) {
-        i = 0;
-        for (i = 0; i < A_0.length; i++) {
-            if (A[e] - 1 == A_0[i]) {
-                var Val_F = A_0[i + 1] + e;
-                Matrix_Pais[P[e]].IndexFinal = Val_F;
-            }
-        }
-    }
-
-    charge_CatalogList(Matrix_Pais, "Select_Pais_U", 1);
-   // charge_CatalogList(Matrix_Pais, "Select_Pais_D", 1);
-}
-
 
 //limpiar campos
 function Clear() {
@@ -289,12 +248,3 @@ function Table_Activos() {
 
 }
 
-//sacamos documento y tipo de documento requerido para contrato
-function Change_Select_H_Cliente() {
-    $("#Select_H_Cliente").change(function () {
-        var Str_H_cliente = $("#Select_H_Cliente option:selected").html();
-        var SplitCliente = Str_H_cliente.split(" - ");
-        T_Doc = SplitCliente[0];
-        Doc = SplitCliente[1];
-    });
-}

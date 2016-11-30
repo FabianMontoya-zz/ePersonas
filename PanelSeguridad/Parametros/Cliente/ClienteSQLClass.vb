@@ -723,6 +723,15 @@ Public Class ClienteSQLClass
                     objCliente.TypeDocument_ID = ReadConsulta.GetValue(1)
                     objCliente.Nombre = ReadConsulta.GetValue(2)
                     objCliente.Nit_ID = ReadConsulta.GetValue(3)
+                    objCliente.OP_Cliente = ReadConsulta.GetValue(4)
+                    objCliente.OP_Avaluador = ReadConsulta.GetValue(5)
+                    objCliente.OP_Transito = ReadConsulta.GetValue(6)
+                    objCliente.OP_Hacienda = ReadConsulta.GetValue(7)
+                    objCliente.OP_Empresa = ReadConsulta.GetValue(8)
+                    objCliente.OP_Empleado = ReadConsulta.GetValue(9)
+                    objCliente.OP_Asesor = ReadConsulta.GetValue(10)
+                    objCliente.Other_1 = ReadConsulta.GetValue(11)
+                    objCliente.Other_2 = ReadConsulta.GetValue(12)
 
                     'agregamos a la lista
                     ObjListCliente.Add(objCliente)
@@ -995,14 +1004,23 @@ Public Class ClienteSQLClass
         Dim sql As New StringBuilder
 
         sql.Append("  SELECT CLI_Document_ID,  " & _
-                                "  CLI_TypeDocument_ID, " & _
-                                "  CAST(CLI_Document_ID AS NVARCHAR(20)) + '  -  ' +  " & _
-                                "  CAST(CLI_TypeDocument_ID AS NVARCHAR(2)) + '  -  ' + " & _
-                                "  CLI_Nombre + ' ' +  " & _
-                                "  CASE  WHEN  CLI_Nombre_2  IS NULL THEN ''  ELSE CLI_Nombre_2 END  + ' ' + " & _
-                                "  CASE  WHEN  CLI_Apellido_1  IS NULL THEN ''  ELSE CLI_Apellido_1 END  + ' ' + " & _
-                                "  CASE  WHEN  CLI_Apellido_2  IS NULL THEN ''  ELSE CLI_Apellido_2 END AS DESCRIPCION, " & _
-                                "  CLI_Nit_ID  " & _
+                                "             CLI_TypeDocument_ID, " & _
+                                "             CAST(CLI_Document_ID AS NVARCHAR(20)) + '  -  ' +  " & _
+                                "             CAST(CLI_TypeDocument_ID AS NVARCHAR(2)) + '  -  ' + " & _
+                                "             CLI_Nombre + ' ' +  " & _
+                                "             CASE  WHEN  CLI_Nombre_2  IS NULL THEN ''  ELSE CLI_Nombre_2 END  + ' ' + " & _
+                                "             CASE  WHEN  CLI_Apellido_1  IS NULL THEN ''  ELSE CLI_Apellido_1 END  + ' ' + " & _
+                                "             CASE  WHEN  CLI_Apellido_2  IS NULL THEN ''  ELSE CLI_Apellido_2 END AS DESCRIPCION, " & _
+                                "             CLI_Nit_ID,  " & _
+                                "             CLI_OP_Cliente,  " & _
+                                "             CLI_OP_Avaluador,  " & _
+                                "             CLI_OP_Transito,  " & _
+                                "             CLI_OP_Hacienda,  " & _
+                                "             CLI_OP_Empresa,  " & _
+                                "             CLI_OP_Empleado,  " & _
+                                "             CLI_OP_Asesor,  " & _
+                                "             CLI_Other_1,  " & _
+                                "             CLI_Other_2  " & _
                                 "  FROM CLIENTE  ")
         Dim StrQuery As String = sql.ToString
 

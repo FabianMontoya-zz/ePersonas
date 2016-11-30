@@ -18,6 +18,9 @@ function M_Regimen() {
     ArrayRegimen.push(Json_Regimen);
 }
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                     PROCESO DE CARGUE PAIS CIUDAD                                                                                                                                       ----*/
+/*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //crea la matrix de pais
 function F_Matrix_pais() {
 
@@ -71,7 +74,6 @@ function CargaPais() {
     charge_CatalogList(Matrix_Pais, "Select_Pais", 1);
     charge_CatalogList(Matrix_Pais, "Select_Pais_D", 1);
 }
-
 
 //carga el combo de Ciudades
 function Change_Select_pais() {
@@ -188,9 +190,6 @@ function Change_Select_TPersona(index, Regimen) {
         $('.C_Chosen').trigger('chosen:updated');
     }
 }
-
-
-
 
 //carga el combo de Area dependiente
 function Change_Select_Nit() {

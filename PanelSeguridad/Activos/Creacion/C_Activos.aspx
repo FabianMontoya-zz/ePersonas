@@ -7,6 +7,7 @@
     <script src="../SasifMaster_Cosult.js" type="text/javascript"></script>
     <script src="C_Activos.js" type="text/javascript"></script>
     <script src="C_ActivosTrasaccionsAjax.js" type="text/javascript"></script>
+    <script src="C_Activos_Complementos.js" type="text/javascript"></script>
     <link href="../../css/css_login.css" rel="stylesheet" type="text/css" />
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
     <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />
@@ -45,6 +46,22 @@
                         <td style="width: 41%; padding-bottom: 25px;">
                             <span class="cssToolTip">
                                 <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img1"
+                                    src="../../images/error.png" />
+                                <span class="SpamEG"></span></span>
+                        </td>
+                    </tr>
+                </table>
+                <table id="T_Sucursal" style="width: 100%;">
+                    <tr>
+                        <td style="width: 7%;" class="Label_Bold">Sucursal
+                        </td>
+                        <td style="width: 20%;">
+                            <select id="Select_Sucursal" class="C_Chosen">
+                            </select>
+                        </td>
+                        <td style="width: 41%; padding-bottom: 25px;">
+                            <span class="cssToolTip">
+                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img12"
                                     src="../../images/error.png" />
                                 <span class="SpamEG"></span></span>
                         </td>
@@ -134,7 +151,6 @@
                         </td>
                     </tr>
                 </table>
-
                 <table id="Tabla_datos_Or" style="width: 100%;">
                     <tr>
                         <td class="Label_Bold" style="width: 7.5%;">Descripción
@@ -186,7 +202,7 @@
                         </td>
                         <td style="width: 10%;">
                             <span class="cssToolTip_Form">
-                                <input type="text" id="Txt_Adress_U" maxlength="50" style="width: 120px;" />
+                                <input type="text" id="Txt_Adress_U" maxlength="50" style="width: 120px;" readonly="readonly" />
                                 <span class="Spam_AST"></span></span>
                         </td>
                         <td style="width: 5%; padding-bottom: 25px;">
@@ -195,6 +211,44 @@
                                     src="../../images/error.png" />
                                 <span class="SpamEG"></span></span>
                         </td>
+                    </tr>
+                </table>
+                <table id="Tabla_Registro" style="width: 100%;">
+                    <tr>
+                        <td class="Title_Bold" colspan="9">Registro
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Label_Bold" style="width: 7%;">Pais
+                        </td>
+                        <td style="width: 25%;">
+                            <select id="Select_Pais_R" class="C_Chosen">
+                            </select>
+                        </td>
+                        <td style="width: 5%; padding-bottom: 25px;"></td>
+                        <td class="Label_Bold" style="width: 7%;">Ciudad
+                        </td>
+                        <td style="width: 25%;">
+                            <select id="Select_Ciudad_R" class="C_Chosen">
+                            </select>
+                        </td>
+                        <td style="width: 5%; padding-bottom: 25px;"></td>
+                        <td class="Label_Bold" style="width: 10%;"></td>
+                        <td style="width: 10%;"></td>
+                        <td style="width: 5%; padding-bottom: 25px;"></td>
+                    </tr>
+                    <tr>
+                        <td class="Label_Bold" style="width: 7%;">Persona
+                        </td>
+                        <td style="width: 25%;" colspan="3">
+                            <select id="Select_Persona_R" class="C_Chosen">
+                            </select>
+                        </td>
+                        <td style="width: 5%; padding-bottom: 25px;"></td>
+                        <td class="Label_Bold" style="width: 7%;"></td>
+                        <td style="width: 25%;"></td>
+                        <td style="width: 5%; padding-bottom: 25px;"></td>
+                        <td class="Label_Bold" style="width: 10%;"></td>
                     </tr>
                 </table>
                 <table id="Complementos">
@@ -234,7 +288,7 @@
                         </td>
                     </tr>
                 </table>
-                <div style="width: 100; text-align: center; margin-top: 25px;">
+                <div style="width: 100%; text-align: center; margin-top: 25px;">
                     <input id="Btnguardar" type="button" value="Guardar" onclick="BtnCrear();" />
                 </div>
             </div>
@@ -283,4 +337,156 @@
         <div id="container_TActivos">
         </div>
     </div>
+    <div id="Dialog_Format_Adress">
+        <table style="width: 100%; text-align: center; font: 12px/20px CenturyGothic,sans-serif;">
+            <tr>
+                <td>
+                    <select id="Select_Type_Adress" class="Select_medium">
+                        <option value="">Nomenclatura</option>
+                        <option value="Cl">Calle</option>
+                        <option value="Cra">Carrera</option>
+                        <option value="Cir">Circular</option>
+                        <option value="Dia">Diagonal</option>
+                        <option value="Tra">Transversal</option>
+                        <option value="Av">Avenida</option>
+                        <option value="Kl">Kilometro</option>
+                    </select>
+                </td>
+                <td>
+                    <input type="text" id="Txt_N1" maxlength="4" class="Numeric" style="width: 40px" />
+                </td>
+                <td>
+                    <input type="text" id="Txt_Special" maxlength="200" class="" style="width: 400px" />
+                    <select id="Select_Letter_1" class="Select_tiny">
+                        <option value="">Letra</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+                        <option value="F">F</option>
+                        <option value="G">G</option>
+                        <option value="H">H</option>
+                        <option value="I">I</option>
+                        <option value="J">J</option>
+                        <option value="K">K</option>
+                        <option value="L">L</option>
+                        <option value="M">M</option>
+                        <option value="N">N</option>
+                        <option value="O">O</option>
+                        <option value="P">P</option>
+                        <option value="Q">Q</option>
+                        <option value="R">R</option>
+                        <option value="S">S</option>
+                        <option value="T">T</option>
+                        <option value="U">U</option>
+                        <option value="V">V</option>
+                        <option value="W">W</option>
+                        <option value="X">X</option>
+                        <option value="Y">Y</option>
+                        <option value="Z">Z</option>
+                    </select>
+                </td>
+                <td>
+                    <input type="text" id="Txt_N2" maxlength="4" class="Numeric" style="width: 40px" />
+                </td>
+                <td>
+                    <select id="Select_Letter_2" class="Select_tiny">
+                        <option value="">Letra</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+                        <option value="F">F</option>
+                        <option value="G">G</option>
+                        <option value="H">H</option>
+                        <option value="I">I</option>
+                        <option value="J">J</option>
+                        <option value="K">K</option>
+                        <option value="L">L</option>
+                        <option value="M">M</option>
+                        <option value="N">N</option>
+                        <option value="O">O</option>
+                        <option value="P">P</option>
+                        <option value="Q">Q</option>
+                        <option value="R">R</option>
+                        <option value="S">S</option>
+                        <option value="T">T</option>
+                        <option value="U">U</option>
+                        <option value="V">V</option>
+                        <option value="W">W</option>
+                        <option value="X">X</option>
+                        <option value="Y">Y</option>
+                        <option value="Z">Z</option>
+                    </select>
+                </td>
+                <td>
+                    <input type="text" id="Txt_N3" maxlength="4" class="Numeric" style="width: 40px" />
+                </td>
+                <td>
+                    <select id="Select_Orientacion" class="Select_medium">
+                        <option value="">Orientacion</option>
+                        <option value="Norte">Norte</option>
+                        <option value="Sur">Sur</option>
+                        <option value="Oeste">Oeste</option>
+                        <option value="Este">Este</option>
+                    </select>
+                </td>
+                <td>
+                    <select id="Select_Type_Cons" class="Select_medium">
+                        <option value="">Vivienda</option>
+                        <option value="Apto">Apartamento</option>
+                        <option value="Casa">Casa</option>
+                        <option value="Lote">Lote</option>
+                        <option value="Local">Local</option>
+                        <option value="Bodega">Bodega</option>
+                        <option value="Stan">Stand</option>
+                    </select>
+                </td>
+                <td>
+                    <input type="text" id="Txt_N4" maxlength="4" class="Numeric" style="width: 40px" />
+                </td>
+                <td>
+                    <select id="Select_Type_Cons2" class="Select_medium">
+                        <option value="">Tipo</option>
+                        <option value="Bloque">Bloque</option>
+                        <option value="Interior">Interior</option>
+                        <option value="Piso">Piso</option>
+                        <option value="Manzana">Manzana</option>
+                        <option value="Torre">Torre</option>
+                    </select>
+                </td>
+                <td>
+                    <input type="text" id="Txt_N5" maxlength="4" class="Numeric" style="width: 40px" />
+                </td>
+                <td>
+                    <input type="text" id="Txt_Texto" maxlength="120" class="Letter" style="width: 200px" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="10">
+                    <p>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="13">
+                    <input type="text" id="Txt_End_Adress" maxlength="4" readonly="readonly" style="width: 500px; text-align: center;" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="8">
+                    <p>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="13" style="text-align: center;">
+                    <input id="BtnStrAdress" type="button" value="Aceptar" onclick="Add_Adress();" />
+                </td>
+            </tr>
+        </table>
+    </div>
+
 </asp:Content>
