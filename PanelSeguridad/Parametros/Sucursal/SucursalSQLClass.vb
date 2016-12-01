@@ -5,7 +5,7 @@ Public Class SucursalSQLClass
 #Region "CARGAR LISTAS"
 
     ''' <summary>
-    ''' funcion que trae el listado de Cliente para armar la tabla
+    ''' funcion que trae el listado de Sucursal para armar la tabla
     ''' </summary>
     ''' <param name="vp_S_StrQuery"></param>
     ''' <param name="vg_S_StrConexion"></param>
@@ -36,7 +36,7 @@ Public Class SucursalSQLClass
                 While ReadConsulta.Read
 
                     Dim obj As New SucursalClass
-                    'cargamos datos sobre el objeto de login
+                    'cargamos datos sobre el objeto
                     obj.Nit_ID = ReadConsulta.GetValue(0)
                     obj.Sucursal_ID = ReadConsulta.GetValue(1)
                     obj.Descripcion = ReadConsulta.GetValue(2)
@@ -54,7 +54,7 @@ Public Class SucursalSQLClass
                 While ReadConsulta.Read
 
                     Dim obj As New SucursalClass
-                    'cargamos datos sobre el objeto de login
+                    'cargamos datos sobre el objeto
                     obj.Nit_ID = ReadConsulta.GetValue(0)
                     obj.Sucursal_ID = ReadConsulta.GetValue(1)
                     obj.Descripcion = ReadConsulta.GetValue(2)
@@ -79,7 +79,7 @@ Public Class SucursalSQLClass
 #Region "OTRAS CONSULTAS"
 
     ''' <summary>
-    ''' lee la matriz de Grupo documentos
+    ''' lee la matriz de Sucursales
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>

@@ -51,7 +51,7 @@
                 <h3>Captura Colocación
                 </h3>
                 <div id="Div_Captura_Colocacion">
-                    <table id="T_Encabezado" style="width: 100%;" border="1">
+                    <table id="T_Encabezado" style="width: 100%;">
                         <tr>
                             <td id="TD_ID" style="width: 6.7%;" class="Label_Bold">NIT Empresa</td>
                             <td id="TD_TID" style="width: 20%;">
@@ -66,7 +66,23 @@
                             </td>
                         </tr>
                     </table>
-                    <table id="T_Datos_Colocacion" style="width: 100%;" border="1">
+                    <table id="T_Sucursal" style="width: 100%;">
+                        <tr>
+                            <td style="width: 10%;" class="Label_Bold">Sucursal
+                            </td>
+                            <td style="width: 30%;">
+                                <select id="Select_Sucursal_C" class="C_Chosen">
+                                </select>
+                            </td>
+                            <td style="padding-bottom: 25px; width: 60%;">
+                                <span class="cssToolTip">
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img7"
+                                        src="../../images/error.png" />
+                                    <span class="SpamEG"></span></span>
+                            </td>
+                        </tr>
+                    </table>
+                    <table id="T_Datos_Colocacion" style="width: 100%;">
                         <tr>
                             <td class="Label_Bold" style="width: 10%;">Número Colocación
                             </td>
@@ -97,7 +113,7 @@
                         </tr>
 
                     </table>
-                    <table id="T_Datos_Identificacion" style="width: 100%;" border="1">
+                    <table id="T_Datos_Identificacion" style="width: 100%;">
                         <tr>
                             <td class="Label_Bold" style="width: 10%;">Tipo de Identificación
                             </td>
@@ -111,7 +127,7 @@
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
-                            <td class="Label_Bold" style="width: 8%;" >Número de Identificación
+                            <td class="Label_Bold" style="width: 8%;">Número de Identificación
                             </td>
                             <td>
                                 <span class="cssToolTip_Form">
@@ -126,28 +142,12 @@
                             </td>
                         </tr>
                     </table>
-                    <table id="T_Sucursal" style="width: 100%;" border="1">
-                        <tr>
-                            <td style="width: 10%;" class="Label_Bold">Sucursal
-                            </td>
-                            <td style="width: 30%;">
-                                <select id="Select_Sucursal" class="C_Chosen">
-                                </select>
-                            </td>
-                            <td style="padding-bottom: 25px; width: 60%;">
-                                <span class="cssToolTip">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img7"
-                                        src="../../images/error.png" />
-                                    <span class="SpamEG"></span></span>
-                            </td>
-                        </tr>
-                    </table>
-                    <table id="T_Moneda" style="width: 100%;" border="1">
+                    <table id="T_Moneda" style="width: 100%;">
                         <tr>
                             <td style="width: 10%;" class="Label_Bold">Moneda
                             </td>
                             <td style="width: 30%;">
-                                <select id="Select_Moneda" class="C_Chosen">
+                                <select id="Select_Moneda_C" class="C_Chosen">
                                 </select>
                             </td>
                             <td style="padding-bottom: 25px; width: 60%;">
@@ -158,7 +158,7 @@
                             </td>
                         </tr>
                     </table>
-                    <table id="T_Producto_Condiciones" style="width: 100%;" border="1">
+                    <table id="T_Producto_Condiciones" style="width: 100%;">
                         <tr>
                             <td class="Label_Bold" style="width: 10%;">Producto
                             </td>
@@ -186,7 +186,7 @@
                             </td>
                         </tr>
                     </table>
-                    <table id="T_Tiempos" style="width: 100%;" border="1">
+                    <table id="T_Tiempos" style="width: 100%;">
                         <tr>
                             <td class="Label_Bold" id="Unidad_De_Tiempo" style="width: 7%;">Unidad de Tiempo</td>
                             <td style="width: 15%;">
@@ -225,7 +225,7 @@
                             </td>
                         </tr>
                     </table>
-                    <table id="T_Ciclo_y_Base" style="width: 100%;" border="1">
+                    <table id="T_Ciclo_y_Base" style="width: 100%;">
                         <tr>
                             <td class="Label_Bold" style="width: 10%;">Ciclo
                             </td>
@@ -253,7 +253,7 @@
                             </td>
                         </tr>
                     </table>
-                    <table id="T_Correspondiente" style="width: 100%;" border="1">
+                    <table id="T_Correspondiente" style="width: 100%;">
                         <tr>
                             <td style="width: 20%;" class="Label_Bold">Dirección de Correspondencia
                             </td>
@@ -269,7 +269,7 @@
                             </td>
                         </tr>
                     </table>
-                    <table id="T_Valores" style="width: 100%; padding-top: 5px; padding-bottom: 5px;" border="1">
+                    <table id="T_Valores" style="width: 100%; padding-top: 5px; padding-bottom: 5px;">
                         <tr>
                             <td class="Title_Bold" colspan="6">Valor</td>
                         </tr>
@@ -296,7 +296,7 @@
                             <td style="padding-bottom: 25px; width: 10%;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img18"
-                                        src="../../images/error.png"/>
+                                        src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
                             <td class="Label_Bold" style="width: 12%;">Opción de Compra</td>
@@ -313,7 +313,7 @@
                                     <span class="SpamEG"></span></span>
                             </td>
                         </tr>
-                    </table>                    
+                    </table>
                 </div>
                 <h3>Condiciones Financieras
                 </h3>

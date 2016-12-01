@@ -344,7 +344,7 @@ function ValidaFechaDigitada(ObjText) {
         var SegundoGuion = Strfecha.charAt(7);
 
         var SysFecha = new Date();
-        var Year_System = parseInt(SysFecha.getFullYear())-17;
+        var Year_System = parseInt(SysFecha.getFullYear()) - 17;
 
         if (SegundoGuion == "-" && PrimerGuion == "-") {
             var A_FN = Strfecha.split("-");
@@ -395,7 +395,7 @@ function ValidaFechaDigitada(ObjText) {
                 }
             }
             else {
-                Mensaje_General("Formato incorrecto!", "El año debe ser entre 1900 y "+  Year_System, "W");
+                Mensaje_General("Formato incorrecto!", "El año debe ser entre 1900 y " + Year_System, "W");
                 $("#" + ObjText).val("YYYY-MM-DD");
                 $("#" + ObjText).css("color", "#921919")
             }
@@ -777,7 +777,22 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
             }
             break;
 
+        case "Select_Sucursal_C":
+            for (Item in Matrix) {
+                if (Matrix[Item].Nit_ID == Nit) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Sucursal_ID + "'>" + Matrix[Item].Descripcion + "</option>");
+                }
+            }
+            break;
+
         case "Select_Moneda":
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].MonedaCod_ID + "'>" + Matrix[Item].MonedaCod_ID + " - " + Matrix[Item].Descripcion + "</option>");
+
+            }
+            break;
+
+        case "Select_Moneda_C":
             for (Item in Matrix) {
                 $("#" + Selector).append("<option value='" + Matrix[Item].MonedaCod_ID + "'>" + Matrix[Item].MonedaCod_ID + " - " + Matrix[Item].Descripcion + "</option>");
 

@@ -28,22 +28,23 @@ function transacionAjax_EmpresaNit(State) {
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_Moneda(State) {
+function transacionAjax_MMoneda(State) {
     $.ajax({
         url: "C_ContratoAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'TIPO'
         },
         //Transaccion Ajax en proceso
         success: function (result) {
             if (result == "") {
-                ArrayMoneda = [];
+                Matrix_Moneda = [];
             }
             else {
-                ArrayMoneda = JSON.parse(result);
-                charge_CatalogList(ArrayMoneda, "Select_Moneda", 1);
+                Matrix_Moneda = JSON.parse(result);
+                Charge_Combos_Depend_Nit(Matrix_Moneda, "Select_Moneda_C", "", "");
             }
         },
         error: function () {
@@ -118,6 +119,32 @@ function transacionAjax_C_Contrato_create(State) {
                     break;
             }
 
+        },
+        error: function () {
+
+        }
+    });
+}
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_MSucursal(State) {
+    $.ajax({
+        url: "C_ContratoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'CIUDADES'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_Sucursal = [];
+            }
+            else {
+                Matrix_Sucursal = JSON.parse(result);
+            }
         },
         error: function () {
 
