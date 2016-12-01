@@ -321,7 +321,6 @@ function Change_Select_TDoc() {
             ValidatorCampos = 1;
 
             $("#TD_1").css("width", "15.2%");
-            $("#TD_2").css("width", "10%");
             $("#TD_3").css("width", "3%");
             $("#TD_4").css("width", "3%");
             $("#TD_5").css("width", "5%");
@@ -330,15 +329,11 @@ function Change_Select_TDoc() {
             $("#TD_8").css("width", "15%");
             $("#Select_Ciudad_Doc").css("width", "80%");
 
-            $("#TD_A1").css("width", "12%");
-            $("#TD_HA1").css("width", "3.7%");
-            $("#TD_A2").css("width", "15%");
 
 
         }
         else {
             $("#TD_1").css("width", "13%");
-            $("#TD_2").css("width", "10%");
             $("#TD_3").css("width", "1%");
             $("#TD_4").css("width", "5%");
             $("#TD_5").css("width", "5%");

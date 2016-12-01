@@ -788,14 +788,12 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
         case "Select_Moneda":
             for (Item in Matrix) {
                 $("#" + Selector).append("<option value='" + Matrix[Item].MonedaCod_ID + "'>" + Matrix[Item].MonedaCod_ID + " - " + Matrix[Item].Descripcion + "</option>");
-
             }
             break;
 
         case "Select_Moneda_C":
             for (Item in Matrix) {
                 $("#" + Selector).append("<option value='" + Matrix[Item].MonedaCod_ID + "'>" + Matrix[Item].MonedaCod_ID + " - " + Matrix[Item].Descripcion + "</option>");
-
             }
             break;
     }
