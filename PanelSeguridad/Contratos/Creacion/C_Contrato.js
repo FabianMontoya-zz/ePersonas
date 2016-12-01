@@ -63,6 +63,19 @@ $(document).ready(function () {
         "bDestroy": true
     });
 
+    //Dialog para agregar la dirección
+    $("#Dialog_Format_Adress").dialog({
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true,
+        width: 1000,
+        height: 250,
+        overlay: {
+            opacity: 0.5,
+            background: "black"
+        }
+    });
+
     Picker_Fechas();    
 
     $(function () { //Función del acordeon
@@ -75,6 +88,7 @@ $(document).ready(function () {
 
     Change_Select_Nit();
     Change_Select_H_Cliente();
+    Format_Adress("Txt_Adress_C");
 });
 
 //Ocultamos las imagenes de error al iniciar la pantalla
@@ -159,12 +173,25 @@ function BtnCrear() {
 //validamos campos para la creacion del link y envio de los datos
 function validarCamposCrear() {
 
-    var Campo_1 = $("#Select_EmpresaNit").val();
-    var Campo_2 = $("#TXT_ID_Colocacion").val();
-    var Campo_3 = $("#TXT_Descripcion").val();
-    var Campo_4 = $("#Select_H_Cliente").val();
-    var Campo_5 = $("#Select_Estado").val();
-    var Campo_6 = $("#Select_Moneda").val();
+    var Campo_1 = $("#Select_EmpresaNit").val(); //Img1
+    var Campo_2 = $("#Select_Sucursal_C").val(); //Img7
+    var Campo_3 = $("#TXT_ID_Colocacion").val(); //Img2
+    var Campo_4 = $("#TXT_Descripcion").val(); //Img3
+    var Campo_5 = $("#").val(); //Img4
+    var Campo_6 = $("#").val(); //Img5
+    var Campo_7 = $("#Select_Persona_C").val(); //Img6
+    var Campo_8 = $("#Select_Moneda_C").val(); //img8
+    var Campo_9 = $("#Select_Producto").val(); //Img9
+    var Campo_10 = $("#Select_Condicion_Financiacion").val(); //Img10
+    var Campo_11 = $("#Select_Tiempo").val(); //Img11
+    var Campo_12 = $("#TXT_Fecha_Apertura").val(); //Img12
+    var Campo_13 = $("#TXT_Plazo").val(); //Img13
+    var Campo_14 = $("#Select_Ciclo").val(); //Img14
+    var Campo_15 = $("#Select_Base_Calculo").val(); //Img15
+    var Campo_16 = $("#Select_Correspondencia").val(); //Img16
+    var Campo_17 = $("#TXT_Valor_Total").val(); //Img17
+    var Campo_5 = $("#TXT_Valor_Financiado").val(); //Img18
+    var Campo_5 = $("#TXT_Valor_Opcion_Compra").val(); //Img19
 
     var validar = 0;
 

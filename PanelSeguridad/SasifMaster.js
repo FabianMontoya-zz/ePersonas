@@ -843,7 +843,7 @@ function Charge_Combo_Persona(Matrix, Selector, Nit, Index_Edit) {
             }
             break;
 
-        case "Select_Persona_C"://persona registro
+        case "Select_Persona_C"://persona registro por NIT ID
             for (Item in Matrix) {
                 if (Matrix[Item].Nit_ID == Nit) {
                     $("#" + Selector).append("<option value='" + Matrix[Item].Document_ID + "'>" + Matrix[Item].Nombre + "</option>");
