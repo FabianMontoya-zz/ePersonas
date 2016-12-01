@@ -265,9 +265,9 @@
                 </table>
                 <table id="Tabla_Valor" style="width: 100%;">
                     <tr>
-                        <td class="Label_Bold" style="width: 7%;">Valor Bien
+                        <td class="Label_Bold" style="width: 7.5%;">Valor Bien
                         </td>
-                        <td id="V_Sigla_1" style="width: 4%" class="Sigla"></td>
+                        <td id="V_Sigla_1" style="width: 3%" class="Sigla"></td>
                         <td style="width: 15%;">
                             <span class="cssToolTip_Form">
                                 <input type="text" id="TxtValor_Bien" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
@@ -279,7 +279,50 @@
                         <td class="Label_Bold" id="V_TFacturas" style="width: 30%;"></td>
                     </tr>
                 </table>
-
+                <table id="Tabla_Valor_Compra" style="width: 100%;">
+                    <tr>
+                        <td class="Label_Bold" style="width: 6.8%;">Valor Compra
+                        </td>
+                        <td id="V_Sigla_3" style="width: 2.8%" class="Sigla"></td>
+                        <td style="width: 11.5%;">
+                            <span class="cssToolTip_Form">
+                                <input type="text" id="TxtValor_Compra" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
+                                <span class="Spam_AVal"></span></span>
+                        </td>
+                        <td class="Label_Bold" style="width: 5%;">Compra Bien</td>
+                        <td style="width: 10%">
+                            <select id="Select_CompraBien" class="C_Chosen" style="width: 80px;">
+                                <option value="0">No Aplica</option>
+                                <option value="1">Nuevo</option>
+                                <option value="2">Usado</option>
+                            </select></td>
+                        <td class="Label_Bold" style="width: 25%;"></td>
+                    </tr>
+                </table>
+                <table id="T_Datos_Final" style="width: 100%;">
+                    <tr>
+                        <td class="Label_Bold" style="width: 4.6%;">Asegurado (S/N)
+                        </td>
+                        <td style="width: 5%;">
+                            <select id="Select_Asegurado" class="C_Chosen">
+                                <option value="N">No</option>
+                                <option value="S">Si</option>
+                            </select>
+                        </td>
+                        <td style="width: 6.5%; padding-bottom: 25px;"></td>
+                        <td class="Label_Bold" style="width: 6.5%;text-align: right;">Tipo Administración
+                        </td>
+                        <td style="width: 20%;">
+                            <select id="Select_TipoAdmin" class="C_Chosen">
+                                <option value="1">1 - Cliente paga</option>
+                                <option value="2">2 - Exento</option>
+                                <option value="3">3 - Pago BBVA</option>
+                                <option value="4">4 - Pago cliente con soporte</option>
+                            </select>
+                        </td>
+                        <td style="width: 10%; padding-bottom: 25px;"></td>
+                    </tr>
+                </table>
                 <table id="Complementos">
                     <tr>
                         <td>

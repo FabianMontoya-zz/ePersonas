@@ -209,12 +209,11 @@ function Change_Select_Moneda() {
             if (Matrix_Moneda[item].MonedaCod_ID == index_ID) {
                 $("#V_Sigla_1").html(Matrix_Moneda[item].Sigla);
                 $("#V_Sigla_2").html(Matrix_Moneda[item].Sigla);
+                $("#V_Sigla_3").html(Matrix_Moneda[item].Sigla);
             }
         }
     });
 }
-
-
 
 //carga los subtipos
 function Change_Select_TA() {
