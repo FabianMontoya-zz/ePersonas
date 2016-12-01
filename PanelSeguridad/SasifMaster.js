@@ -1173,7 +1173,7 @@ function lego_Adress() {
     });
 
     $("#Txt_N2").change(function () {
-        ArrayStrAdress[3] = " " + $("#Txt_N2").val();
+        ArrayStrAdress[3] = " N° " + $("#Txt_N2").val();
         StrLego();
     });
 

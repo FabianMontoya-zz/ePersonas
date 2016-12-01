@@ -2248,6 +2248,11 @@ To modify move field declaration from designer file to code-behind file.
  funcion que carga La matrix
  </summary>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_MPersonas">
+	<summary>
+ funcion que carga La matrix
+ </summary>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.C_ContratoAjax.Cargar_EstadoContrato">
 	<summary>
  funcion que carga el objeto DDL consulta
