@@ -357,11 +357,11 @@
                             <td style="width: 20%;"></td>
                         </tr>
                     </table>
-                    <table id="Tabla_9" style="width: 700px; text-align: left;">
+                    <table id="Tabla_9" style="width: 40%; text-align: center; margin-top: 2%; margin-left: 25%; border: solid 1px #921919; border-radius: 10px; padding-bottom: 1%; padding-top: 1%;">
                         <tr>
-                            <td style="width: 120px;" class="Label_Bold">Tipo de Relación
+                            <td style="width: 50%;" class="Label_Bold">Tipo de Relación
                             </td>
-                            <td style="width: 195px;">
+                            <td style="width: 50%;">
                                 <span class="cssToolTip_Form_L"><a href="javascript:BtnRelacion();">
                                     <img alt="error" title="" style="padding-left: 1em; height: 50px; width: 50px;" id="Imgrelations"
                                         src="../../images/relations.png" /></a> <span class="Spam_ARel"></span></span>
@@ -906,7 +906,9 @@
                     <td class="Label_Bold" style="width: 100px;">Dirección
                     </td>
                     <td>
-                        <input type="text" id="TxtDireccion" style="width: 200px;" maxlength="50" readonly="readonly" />
+                        <span class="cssToolTip_Form">
+                            <input type="text" id="TxtDireccion" style="width: 200px;" maxlength="50" readonly="readonly" />
+                            <span class="Spam_A_Addres"></span></span>
                     </td>
                     <td style="width: 40px; padding-bottom: 25px;">
                         <span class="cssToolTip">

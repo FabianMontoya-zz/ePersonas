@@ -4,8 +4,7 @@ var ArrayEmpresaNit = [];
 var Matrix_Pais = [];
 var Matrix_Personas = [];
 var Matrix_Sucursal = [];
-var ArrayMoneda = [];
-
+var Matrix_Moneda = []
 
 var ArrayC_Activos = [];
 var Array_Hijo_Cliente = [];
@@ -97,8 +96,9 @@ $(document).ready(function () {
     Change_Select_Nit();
     Change_Select_TA();
     Change_Select_pais();
+    Change_Select_Moneda();
     Format_Adress("Txt_Adress_U");
-    
+
 });
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -201,6 +201,20 @@ function Change_Select_Nit() {
 
     });
 }
+
+function Change_Select_Moneda() {
+    $("#Select_Moneda").change(function () {
+        var index_ID = this.value;
+        for (item in Matrix_Moneda) {
+            if (Matrix_Moneda[item].MonedaCod_ID == index_ID) {
+                $("#V_Sigla_1").html(Matrix_Moneda[item].Sigla);
+                $("#V_Sigla_2").html(Matrix_Moneda[item].Sigla);
+            }
+        }
+    });
+}
+
+
 
 //carga los subtipos
 function Change_Select_TA() {

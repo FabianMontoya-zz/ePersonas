@@ -205,7 +205,7 @@
                         <td style="width: 20%;">
                             <span class="cssToolTip_Form">
                                 <input type="text" id="Txt_Adress_U" maxlength="50" style="width: 200px;" readonly="readonly" />
-                                <span class="Spam_AST"></span></span>
+                                <span class="Spam_A_Addres"></span></span>
                         </td>
                         <td style="width: 6%; padding-bottom: 25px;" colspan="3">
                             <span class="cssToolTip">
@@ -263,6 +263,23 @@
                         </td>
                     </tr>
                 </table>
+                <table id="Tabla_Valor" style="width: 100%;">
+                    <tr>
+                        <td class="Label_Bold" style="width: 7%;">Valor Bien
+                        </td>
+                        <td id="V_Sigla_1" style="width: 4%" class="Sigla"></td>
+                        <td style="width: 15%;">
+                            <span class="cssToolTip_Form">
+                                <input type="text" id="TxtValor_Bien" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
+                                <span class="Spam_AVal"></span></span>
+                        </td>
+                        <td class="Label_Bold" style="width: 10%;">Sumatoria Facturas
+                        </td>
+                        <td id="V_Sigla_2" style="width: 4%" class="Sigla"></td>
+                        <td class="Label_Bold" id="V_TFacturas" style="width: 30%;"></td>
+                    </tr>
+                </table>
+
                 <table id="Complementos">
                     <tr>
                         <td>

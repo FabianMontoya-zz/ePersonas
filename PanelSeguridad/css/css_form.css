@@ -519,7 +519,7 @@
     height: 120px;
     position: absolute;
     z-index: 0;
-   text-align:right;
+    text-align: right;
     margin-top: 10px;
 }
 
@@ -530,4 +530,11 @@
     border: solid 1px;
     border-radius: 3px;
     border-style: outset;
+}
+
+.Sigla
+{
+    text-align: right;
+    font-size: 10px;
+    font-weight: bold;
 }

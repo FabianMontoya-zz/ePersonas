@@ -107,6 +107,7 @@ function RevisarAyudas() {
     $(".Spam_AT5").html(ArrayAyudas[21].Ayudas_ID + ": " + ArrayAyudas[21].Descripcion);
     $(".Spam_ARel").html(ArrayAyudas[22].Ayudas_ID + ": " + ArrayAyudas[22].Descripcion);
     $(".SpamALEC").html(ArrayAyudas[23].Ayudas_ID + ": " + ArrayAyudas[23].Descripcion);
+    $(".Spam_A_Addres").html(ArrayAyudas[24].Ayudas_ID + ": " + ArrayAyudas[24].Descripcion);
 
     $(".Spam_CT1").html(ArrayAyudas[6].Descripcion);
     $(".Spam_CT2").html(ArrayAyudas[7].Descripcion);

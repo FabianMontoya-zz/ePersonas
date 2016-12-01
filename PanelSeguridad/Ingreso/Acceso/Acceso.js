@@ -290,6 +290,7 @@ function SearchPersona() {
     var Doc = $("#TxtDoc").val();
     var GrpDoc;
     var Exist = 0;
+
     for (item in Matrix_Persona) {
         if (TDoc == Matrix_Persona[item].TypeDocument_ID &&
              Doc == Matrix_Persona[item].Document_ID) {
