@@ -298,7 +298,12 @@
                                     <input type="text" id="Txt_Ape_2" maxlength="50" style="width: 150px;" />
                                     <span class="Spam_AST"></span></span>
                             </td>
-                            <td style="padding-bottom: 25px;"></td>
+                            <td style="padding-bottom: 25px;">
+                                <span class="cssToolTip">
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img19"
+                                        src="../../images/error.png" />
+                                    <span class="SpamEG"></span></span>
+                            </td>
                         </tr>
                     </table>
                     <table id="Tabla_7" style="width: 100%; text-align: left; margin-top: 1%; padding-left: 3%;">
@@ -309,39 +314,6 @@
                                 <span class="cssToolTip_Form_L">
                                     <input type="text" id="Text_fechaNacimiento" maxlength="12" style="width: 150px;" />
                                     <span class="Spam_AST"></span></span>
-                            </td>
-                            <td style="width: 5%">
-                                <select id="Select_Year" class="C_Chosen">
-                                    <option value="-1">Año...</option>
-                                </select>
-                            </td>
-                            <td style="width: 3%; padding-bottom: 25px;">
-                                <span class="cssToolTip">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img19"
-                                        src="../../images/error.png" />
-                                    <span class="SpamEG"></span></span>
-                            </td>
-                            <td style="width: 5%;">
-                                <select id="Select_Mont" class="C_Chosen">
-                                    <option value="-1">Mes...</option>
-                                </select>
-                            </td>
-                            <td style="width: 3%; padding-bottom: 25px;">
-                                <span class="cssToolTip">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img20"
-                                        src="../../images/error.png" />
-                                    <span class="SpamEG"></span></span>
-                            </td>
-                            <td style="width: 5%;">
-                                <select id="Select_Day" class="C_Chosen">
-                                    <option value="-1">Dia...</option>
-                                </select>
-                            </td>
-                            <td style="width: 3%; padding-bottom: 25px;">
-                                <span class="cssToolTip">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img21"
-                                        src="../../images/error.png" />
-                                    <span class="SpamEG"></span></span>
                             </td>
                             <td style="width: 25%;"></td>
                         </tr>

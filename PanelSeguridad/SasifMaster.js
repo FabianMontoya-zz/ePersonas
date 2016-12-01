@@ -327,6 +327,87 @@ function Valida_Bisiesto(Year) {
     return valida;
 }
 
+//validar fecha  digitada
+function ValidaFechaDigitada(ObjText) {
+    //colocamos mascara
+    $("#" + ObjText).val("YYYY-MM-DD");
+    $("#" + ObjText).css("color", "#921919")
+    //limpiamos mascara
+    $("#" + ObjText).focus(function () {
+        $("#" + ObjText).val("");
+        $("#" + ObjText).css("color", "#000000")
+    });
+
+    $("#" + ObjText).blur(function () {
+        var Strfecha = $("#" + ObjText).val();
+        var PrimerGuion = Strfecha.charAt(4);
+        var SegundoGuion = Strfecha.charAt(7);
+
+        var SysFecha = new Date();
+        var Year_System = parseInt(SysFecha.getFullYear())-17;
+
+        if (SegundoGuion == "-" && PrimerGuion == "-") {
+            var A_FN = Strfecha.split("-");
+            //validar año
+            if ((parseInt(A_FN[0]) > 1900)) {
+                if ((parseInt(A_FN[0]) < Year_System)) {
+                    //validar mes
+                    if ((parseInt(A_FN[1]) > 0)) {
+                        if ((parseInt(A_FN[1]) < 13)) {
+                            //primero validamos bisiesto
+                            var bisiesto = Valida_Bisiesto(A_FN[0]);
+                            var busca_Mes = parseInt(A_FN[1]) - 1;
+                            var Diafinal = Matrix_Mes[busca_Mes][2];
+                            if ((bisiesto == "Y") && (parseInt(A_FN[1]) == 2)) { Diafinal = 29; }
+                            //validar mes dia
+                            if ((parseInt(A_FN[2]) > 0)) {
+                                if ((parseInt(A_FN[2]) < Diafinal)) {
+                                    console.log("OK");
+                                }
+                                else {
+                                    Mensaje_General("Formato incorrecto!", "El Dia debe ser entre 1 y " + Diafinal, "W");
+                                    $("#" + ObjText).val("YYYY-MM-DD");
+                                    $("#" + ObjText).css("color", "#921919")
+                                }
+                            }
+                            else {
+                                Mensaje_General("Formato incorrecto!", "El Dia debe ser entre 1 y " + Diafinal, "W");
+                                $("#" + ObjText).val("YYYY-MM-DD");
+                                $("#" + ObjText).css("color", "#921919")
+                            }
+                        }
+                        else {
+                            Mensaje_General("Formato incorrecto!", "El Mes debe ser entre 1 y 12 ", "W");
+                            $("#" + ObjText).val("YYYY-MM-DD");
+                            $("#" + ObjText).css("color", "#921919")
+                        }
+                    }
+                    else {
+                        Mensaje_General("Formato incorrecto!", "El Mes debe ser entre 1 y 12 ", "W");
+                        $("#" + ObjText).val("YYYY-MM-DD");
+                        $("#" + ObjText).css("color", "#921919")
+                    }
+                }
+                else {
+                    Mensaje_General("Formato incorrecto!", "El año debe ser entre 1900 y " + Year_System, "W");
+                    $("#" + ObjText).val("YYYY-MM-DD");
+                    $("#" + ObjText).css("color", "#921919")
+                }
+            }
+            else {
+                Mensaje_General("Formato incorrecto!", "El año debe ser entre 1900 y "+  Year_System, "W");
+                $("#" + ObjText).val("YYYY-MM-DD");
+                $("#" + ObjText).css("color", "#921919")
+            }
+        }
+        else {
+            Mensaje_General("Formato incorrecto!", "La fecha debe ser YYYY/MM/DD ", "W");
+            $("#" + ObjText).val("YYYY-MM-DD");
+            $("#" + ObjText).css("color", "#921919")
+        }
+    });
+}
+
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                             VALIDACIONES DE CAMPOS Y NUMERICOS                                                                                         ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/

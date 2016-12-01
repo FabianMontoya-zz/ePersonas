@@ -6,21 +6,7 @@ PanelSeguridad
 </name>
 </assembly>
 <members>
-<member name="M:PanelSeguridad.SucursalSQLClass.list(System.String,System.String,System.String)">
-	<summary>
- funcion que trae el listado de Cliente para armar la tabla
- </summary>
-	<param name="vp_S_StrQuery"></param>
-	<param name="vg_S_StrConexion"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.SucursalSQLClass.Matrix_Sucursal">
-	<summary>
- lee la matriz de Grupo documentos
- </summary>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.C_ActivosAjax.InsertC_Activos">
+<member name="M:PanelSeguridad.C_ActivosAjax.InsertC_Activos">
 	<summary>
  funcion que inserta en la tabla C_Activos (INSERT)
  </summary>
@@ -4069,6 +4055,20 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
  </summary>
 	<param name="vp_S_StrQuery"></param>
 	<param name="vg_S_StrConexion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.SucursalSQLClass.list(System.String,System.String,System.String)">
+	<summary>
+ funcion que trae el listado de Cliente para armar la tabla
+ </summary>
+	<param name="vp_S_StrQuery"></param>
+	<param name="vg_S_StrConexion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.SucursalSQLClass.Matrix_Sucursal">
+	<summary>
+ lee la matriz de Grupo documentos
+ </summary>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.TipoActivoSQLClass.Read_AllActivo(System.String,System.String,System.String)">
