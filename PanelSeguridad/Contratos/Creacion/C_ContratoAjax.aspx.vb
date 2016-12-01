@@ -10,6 +10,13 @@ Public Class C_ContratoAjax
 
             Select Case vl_S_option_login
 
+                Case "MATRIX_SUCURSAL"
+                    Carga_MSucursal()
+
+                Case "MATRIX_MONEDA"
+                    Carga_MMoneda()
+
+
                 Case "Cliente"
                     CargarCliente()
 
@@ -19,9 +26,7 @@ Public Class C_ContratoAjax
                 Case "Estado"
                     Cargar_EstadoContrato()
 
-                Case "Moneda"
-                    CargarMoneda()
-
+                
                 Case "crear"
                     InsertC_Contrato()
 
@@ -89,17 +94,31 @@ Public Class C_ContratoAjax
 #Region "DROP LIST"
 
     ''' <summary>
-    ''' funcion que carga el objeto DDL consulta
+    ''' funcion que carga La matrix
     ''' </summary>
     ''' <remarks></remarks>
-    Protected Sub CargarMoneda()
+    Protected Sub Carga_MSucursal()
 
-        Dim SQL As New C_ContratoSQLClass
-        Dim ObjListDroplist As New List(Of Droplist_Class)
-        Dim vl_S_Tabla As String = Request.Form("tabla")
+        Dim SQL As New SucursalSQLClass
 
-        ObjListDroplist = SQL.Charge_DropListMoneda(vl_S_Tabla)
-        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
+        Dim ObjList_Matrix As New List(Of SucursalClass)
+        ObjList_Matrix = SQL.Matrix_Sucursal()
+
+        Response.Write(JsonConvert.SerializeObject(ObjList_Matrix.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga La matrix
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub Carga_MMoneda()
+
+        Dim SQL As New MonedaCodSQLClass
+        Dim ObjList As New List(Of MonedaCodClass)
+
+        ObjList = SQL.Matrix_Moneda()
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
 

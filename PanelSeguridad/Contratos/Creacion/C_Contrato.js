@@ -1,6 +1,7 @@
 ﻿/*--------------- region de variables globales --------------------*/
+var Matrix_Sucursal = [];
+var Matrix_Moneda = [];
 var ArrayC_Contrato = [];
-var ArrayMoneda = [];
 var ArrayEmpresaNit = [];
 var Array_Hijo_Cliente = [];
 var ArrayEstado = [];
@@ -18,8 +19,8 @@ $(document).ready(function () {
     $("#Marco_trabajo_Contrato").css("width", "95%");
 
     transacionAjax_EmpresaNit('Cliente')
-    transacionAjax_Moneda('Moneda');
-    
+    transacionAjax_MMoneda('MATRIX_MONEDA');
+    transaccionAjax_MSucursal('MATRIX_SUCURSAL');
     Ocultar_IMGS_Errores();
 
     //Imagenes de los dialog con mensajes
@@ -111,11 +112,14 @@ function btnSalir() {
     window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
 }
 
-//carga el combo de clientes hijo
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                     PROCESO DE CARGUE                                                                                                                                        ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//carga el combo 
 function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {
-        var TD_ID = this.value;
-        transacionAjax_Hijo_Cliente('Hijo_Cliente', TD_ID);
+        var index_ID = this.value;
+        Charge_Combos_Depend_Nit(Matrix_Sucursal, "Select_Sucursal_C", index_ID, "");
     });
 }
 

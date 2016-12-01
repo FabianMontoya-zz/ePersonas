@@ -65,32 +65,6 @@ Public Class C_ContratoSQLClass
     End Function
 
 #Region "CONSULTAS DROP LIST"
-
-    ''' <summary>
-    ''' crea la consulta para cargar el combo
-    ''' </summary>
-    ''' <param name="vp_S_ID"></param>
-    ''' <returns></returns>
-    ''' <remarks></remarks>
-    Public Function Charge_DropListMoneda(ByVal vp_S_ID As String)
-
-        Dim ObjListDroplist As New List(Of Droplist_Class)
-        Dim StrQuery As String = ""
-        Dim conex As New Conector
-        Dim Conexion As String = conex.typeConexion("2")
-
-        Dim SQLGeneral As New GeneralSQLClass
-        Dim sql As New StringBuilder
-
-        sql.Append(" SELECT CM_Cod_Moneda_ID AS ID, CAST(CM_Cod_Moneda_ID AS NVARCHAR(10))+ ' - ' + CM_Descripcion AS Descripcion FROM MONEDA_COD ")
-        StrQuery = sql.ToString
-
-        ObjListDroplist = SQLGeneral.listdrop(StrQuery, Conexion)
-
-        Return ObjListDroplist
-
-    End Function
-
     ''' <summary>
     ''' crea la consulta para cargar el combo
     ''' </summary>
