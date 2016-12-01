@@ -662,6 +662,13 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
                 }
             }
             break;
+        case "Select_Persona_C":
+            for (Item in Matrix) {
+                if (Matrix[Item].Nit_ID == Nit) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Document_ID + "'>" + Matrix[Item].Nombre + "</option>");
+                }
+            }
+            break;
 
         case "Select_Persona_Enc":
             $('#' + Selector).append("<option value='0'>Todos</option>");
@@ -830,6 +837,14 @@ function Charge_Combo_Persona(Matrix, Selector, Nit, Index_Edit) {
         case "Select_Persona_R"://persona registro
             for (Item in Matrix) {
                 if (Matrix[Item].OP_Hacienda == "S" || Matrix[Item].OP_Transito == "S") {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Document_ID + "'>" + Matrix[Item].Nombre + "</option>");
+                }
+            }
+            break;
+
+        case "Select_Persona_C"://persona registro
+            for (Item in Matrix) {
+                if (Matrix[Item].Nit_ID == Nit) {
                     $("#" + Selector).append("<option value='" + Matrix[Item].Document_ID + "'>" + Matrix[Item].Nombre + "</option>");
                 }
             }

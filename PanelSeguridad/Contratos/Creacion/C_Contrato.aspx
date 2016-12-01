@@ -115,31 +115,20 @@
                     </table>
                     <table id="T_Datos_Identificacion" style="width: 100%;">
                         <tr>
-                            <td class="Label_Bold" style="width: 10%;">Tipo de Identificación
+                            <td class="Label_Bold" style="width: 7.7%;">Persona
                             </td>
-                            <td style="width: 21%;">
-                                <select style="width: 100%;" id="Select_Identificacion" class="C_Chosen">
+                            <td style="width: 20%;" colspan="3">
+                                <select id="Select_Persona_C" class="C_Chosen">
                                 </select>
                             </td>
-                            <td style="padding-bottom: 25px; width: 6%;">
-                                <span class="cssToolTip">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img5"
-                                        src="../../images/error.png" />
-                                    <span class="SpamEG"></span></span>
-                            </td>
-                            <td class="Label_Bold" style="width: 8%;">Número de Identificación
-                            </td>
-                            <td>
-                                <span class="cssToolTip_Form">
-                                    <input style="width: 75%;" type="text" id="TXT_Identificacion" maxlength="17" class="Numeric" />
-                                    <span class="Spam_AN"></span></span>
-                            </td>
+                            <td style="width: 6%; padding-bottom: 25px;" colspan="3"></td>
                             <td style="padding-bottom: 25px; width: 35%;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img6"
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
+
                         </tr>
                     </table>
                     <table id="T_Moneda" style="width: 100%;">

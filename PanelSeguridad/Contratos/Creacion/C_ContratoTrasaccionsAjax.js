@@ -53,6 +53,32 @@ function transacionAjax_MMoneda(State) {
     });
 }
 
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_MPersonas(State) {
+    $.ajax({
+        url: "C_ContratoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'CIUDADES'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_Personas = [];
+            }
+            else {
+                Matrix_Personas = JSON.parse(result);
+                Charge_Combo_Persona(Matrix_Personas, "Select_Persona_C", "", "");
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
 
 /*------------------------------ crear ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax

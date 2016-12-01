@@ -1,6 +1,9 @@
 ﻿/*--------------- region de variables globales --------------------*/
 var Matrix_Sucursal = [];
 var Matrix_Moneda = [];
+var Matrix_Sucursal = [];
+var Matrix_Personas = [];
+
 var ArrayC_Contrato = [];
 var ArrayEmpresaNit = [];
 var Array_Hijo_Cliente = [];
@@ -15,12 +18,14 @@ var Doc;
 
 //Evento load JS
 $(document).ready(function () {
-    $("#Marco_trabajo_Contrato").css("height", "500px");
+    $("#Marco_trabajo_Contrato").css("height", "440px");
     $("#Marco_trabajo_Contrato").css("width", "95%");
 
-    transacionAjax_EmpresaNit('Cliente')
+    transacionAjax_EmpresaNit('Cliente');
+    transaccionAjax_MPersonas('MATRIX_PERSONAS');
     transacionAjax_MMoneda('MATRIX_MONEDA');
     transaccionAjax_MSucursal('MATRIX_SUCURSAL');
+
     Ocultar_IMGS_Errores();
 
     //Imagenes de los dialog con mensajes
@@ -79,16 +84,19 @@ function Ocultar_IMGS_Errores() {
     $("#Img3").css("display", "none");
     $("#Img4").css("display", "none"); //Img del Warning del Alert
     $("#Img5").css("display", "none");
+
     $("#Img6").css("display", "none");
     $("#Img7").css("display", "none");
     $("#Img8").css("display", "none");
     $("#Img9").css("display", "none");
     $("#Img10").css("display", "none");
+
     $("#Img11").css("display", "none");
     $("#Img12").css("display", "none");
     $("#Img13").css("display", "none");
     $("#Img14").css("display", "none");
     $("#Img15").css("display", "none");
+
     $("#Img16").css("display", "none");
     $("#Img17").css("display", "none");
     $("#Img18").css("display", "none");
@@ -120,6 +128,8 @@ function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {
         var index_ID = this.value;
         Charge_Combos_Depend_Nit(Matrix_Sucursal, "Select_Sucursal_C", index_ID, "");
+        Charge_Combo_Persona(Matrix_Personas, "Select_Persona_C", index_ID, "");
+
     });
 }
 

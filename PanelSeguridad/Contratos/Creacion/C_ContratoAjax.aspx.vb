@@ -16,6 +16,8 @@ Public Class C_ContratoAjax
                 Case "MATRIX_MONEDA"
                     Carga_MMoneda()
 
+                Case "MATRIX_PERSONAS"
+                    Carga_MPersonas()
 
                 Case "Cliente"
                     CargarCliente()
@@ -119,6 +121,21 @@ Public Class C_ContratoAjax
 
         ObjList = SQL.Matrix_Moneda()
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga La matrix
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub Carga_MPersonas()
+
+        Dim SQL As New ClienteSQLClass
+
+        Dim ObjList_Matrix As New List(Of ClienteClass)
+        ObjList_Matrix = SQL.Matrix_PersonasDep()
+
+        Response.Write(JsonConvert.SerializeObject(ObjList_Matrix.ToArray()))
 
     End Sub
 
