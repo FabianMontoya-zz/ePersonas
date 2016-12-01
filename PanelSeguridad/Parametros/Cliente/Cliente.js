@@ -304,6 +304,7 @@ $(document).ready(function () {
     Change_Select_TDoc();
     Change_Select_Nit();
     Change_Mes();
+    ValidaFechaDigitada("Text_fechaNacimiento")
 
 });
 
@@ -351,6 +352,33 @@ function Change_Select_TDoc() {
             $(".Desvanecer").css("display", "none");
             ValidatorCampos = 2;
         }
+    });
+}
+
+
+//
+function ValidaFechaDigitada(ObjText) {
+    $("#" + ObjText).blur(function () {
+
+        var Strfecha = $("#" + ObjText).val();
+        var PrimerGuion = Strfecha.charAt(4);
+        var SegundoGuion = Strfecha.charAt(7);
+        if (SegundoGuion == "-" && PrimerGuion == "-") {
+            var A_FN = Strfecha.split("-");
+            //validar año
+            if ((A_FN[0] == 0) || (A_FN[0] < 1900) || (A_FN[0] > 2100)) {
+
+            }
+            else {
+                Mensaje_General("Formato incorrecto!", "El año debe ser entre 1900 y 2100 ", "W");
+            }
+        }
+        else {
+            Mensaje_General("Formato incorrecto!", "La fecha debe ser YYYY/MM/DD ", "W");
+
+        }
+
+
     });
 }
 

@@ -305,6 +305,11 @@
                         <tr class="Desvanecer TR_1">
                             <td class="Label_Bold" style="width: 10%">Fecha De Nacimiento
                             </td>
+                            <td style="width: 20%">
+                                <span class="cssToolTip_Form_L">
+                                    <input type="text" id="Text_fechaNacimiento" maxlength="12" style="width: 150px;" />
+                                    <span class="Spam_AST"></span></span>
+                            </td>
                             <td style="width: 5%">
                                 <select id="Select_Year" class="C_Chosen">
                                     <option value="-1">Año...</option>
@@ -976,7 +981,7 @@
                     </td>
                 </tr>
             </table>
-            <table id="Tabla_Telefono" style="width: 100%; padding-left:50px;">
+            <table id="Tabla_Telefono" style="width: 100%; padding-left: 50px;">
                 <tr align="left">
                     <td class="Label_Bold" style="width: 70px;"></td>
                     <td class="Label_Bold" style="width: 80px;">Tipo Telefono</td>
