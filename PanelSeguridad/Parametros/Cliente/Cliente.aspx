@@ -240,9 +240,9 @@
                             </td>
                         </tr>
                     </table>
-                    <table id="Table_5" style="width: 100%; text-align: left; margin-top: 1%; padding-left: 3%;">
+                    <table id="Table_5" style="width: 100%; text-align: left; margin-top: 1%;">
                         <tr id="TR_Nit">
-                            <td id="TD4" class="Label_Bold " style="width: 10%;">Nombre
+                            <td id="TD4" class="Label_Bold " style="width: 15%;">Nombre
                             </td>
                             <td class="TD_2" style="width: 40%;">
                                 <span class="cssToolTip_Form">
@@ -260,42 +260,42 @@
                             <td style="padding-bottom: 25px;"></td>
                         </tr>
                         <tr class="Desvanecer TR_1">
-                            <td id="TD_Nombre" class="Label_Bold TD_1" style="width: 120px;">Primer Nombre
+                            <td id="TD_Nombre" class="Label_Bold TD_1" style="width: 13%;">Primer Nombre
                             </td>
-                            <td class="TD_2" style="width: 150px;">
+                            <td class="TD_2" style="width: 15%;">
                                 <span class="cssToolTip_Form">
-                                    <input type="text" id="TxtNombre" maxlength="50" style="width: 150px;" />
+                                    <input type="text" id="TxtNombre" maxlength="50" style="width: 200px;" />
                                     <span class="Spam_AST"></span></span>
                             </td>
-                            <td style="width: 35px; padding-bottom: 25px;">
+                            <td style="width: 3%; padding-bottom: 25px;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img5"
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
-                            <td class="Label_Bold " style="width: 15%;">Segundo Nombre
+                            <td class="Label_Bold " style="width: 10%;">Segundo Nombre
                             </td>
                             <td>
                                 <span class="cssToolTip_Form_L">
-                                    <input type="text" id="TxtNombre_2" maxlength="50" style="width: 150px;" />
+                                    <input type="text" id="TxtNombre_2" maxlength="50" style="width: 200px;" />
                                     <span class="Spam_AST"></span></span>
                             </td>
-                            <td style="padding-bottom: 25px;"></td>
+                            <td style="width: 22%; padding-bottom: 25px;"></td>
                         </tr>
                         <tr class="Desvanecer TR_1">
-                            <td id="TD_A1" class="Label_Bold" style="width: 10%;">Primer Apellido
+                            <td id="TD_A1" class="Label_Bold" >Primer Apellido
                             </td>
-                            <td style="width: 10%;">
+                            <td >
                                 <span class="cssToolTip_Form">
-                                    <input type="text" id="Txt_Ape_1" maxlength="50" style="width: 150px;" />
+                                    <input type="text" id="Txt_Ape_1" maxlength="50" style="width: 200px;" />
                                     <span class="Spam_AST"></span></span>
                             </td>
-                            <td id="TD_HA1" style="width: 5%; padding-bottom: 25px;"></td>
-                            <td id="TD_A2" class="Label_Bold " style="width: 10%;">Segundo Apellido
+                            <td id="TD_HA1" style="padding-bottom: 25px;"></td>
+                            <td id="TD_A2" class="Label_Bold " >Segundo Apellido
                             </td>
                             <td style="width: 10%;">
                                 <span class="cssToolTip_Form_L">
-                                    <input type="text" id="Txt_Ape_2" maxlength="50" style="width: 150px;" />
+                                    <input type="text" id="Txt_Ape_2" maxlength="50" style="width: 200px;" />
                                     <span class="Spam_AST"></span></span>
                             </td>
                             <td style="padding-bottom: 25px;">
@@ -306,9 +306,9 @@
                             </td>
                         </tr>
                     </table>
-                    <table id="Tabla_7" style="width: 100%; text-align: left; margin-top: 1%; padding-left: 3%;">
+                    <table id="Tabla_7" style="width: 100%; text-align: left; margin-top: 1%;">
                         <tr class="Desvanecer TR_1">
-                            <td class="Label_Bold" style="width: 10%">Fecha De Nacimiento
+                            <td class="Label_Bold" style="width: 15%">Fecha De Nacimiento
                             </td>
                             <td style="width: 20%">
                                 <span class="cssToolTip_Form_L">
