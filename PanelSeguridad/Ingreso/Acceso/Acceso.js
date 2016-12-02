@@ -304,14 +304,22 @@ function SearchPersona() {
             $("#L_Area").html(Matrix_Persona[item].DescripArea);
             $("#L_Cargo").html(Matrix_Persona[item].DescripCargo);
 
-            HabilitaCombosIngreso();
 
-            TDoc_VT = TDoc;
-            Doc_VT = Doc;
+            switch (GrpDoc) {
+                case 0:
+                    Mensaje_General("Proceso Imcompleto", "La persona no tiene Grupo de ducumentos asignados, comuniquese con el administrador del sistema!", "E");
+                    break;
+                default:
+                    HabilitaCombosIngreso();
 
-            VerificacionTarjeta(Matrix_Persona[item].Nombre, Matrix_Persona[item].EstadoTarjeta, Matrix_Persona[item].CheckVigencia_Tarjeta, Matrix_Persona[item].FechaVencimientoTarjeta, Matrix_Persona[item].DescripMotivoBloqueo, "D");
-            SearchFoto(TDoc, Doc);
-            Tabla_Docs(Nit_ID_Proccess, TDoc, Doc, GrpDoc, "Empleado");
+                    TDoc_VT = TDoc;
+                    Doc_VT = Doc;
+
+                    VerificacionTarjeta(Matrix_Persona[item].Nombre, Matrix_Persona[item].EstadoTarjeta, Matrix_Persona[item].CheckVigencia_Tarjeta, Matrix_Persona[item].FechaVencimientoTarjeta, Matrix_Persona[item].DescripMotivoBloqueo, "D");
+                    SearchFoto(TDoc, Doc);
+                    Tabla_Docs(Nit_ID_Proccess, TDoc, Doc, GrpDoc, "Empleado");
+                    break;
+            }
             break;
         }
     }
@@ -332,7 +340,15 @@ function SearchEmpresa() {
             GrpDoc = Matrix_Persona[item].GrpDocumentos;
             TDoc = Matrix_Persona[item].TypeDocument_ID;
 
-            Tabla_Docs(Nit_ID_Proccess, TDoc, Nit_Emp, GrpDoc, "Empresa");
+            switch (GrpDoc) {
+                case 0:
+                    Mensaje_General("Proceso Imcompleto", "La Empresa de la persona no tiene Grupo de ducumentos asignados, comuniquese con el administrador del sistema!", "E");
+                    break;
+                default:
+                    console.log(GrpDoc);
+                    Tabla_Docs(Nit_ID_Proccess, TDoc, Nit_Emp, GrpDoc, "Empresa");
+                    break;
+            }
             break;
         }
     }

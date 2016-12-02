@@ -89,6 +89,9 @@
                         </td>
                         <td style="width: 10%; padding-bottom: 25px;"></td>
                     </tr>
+                    <tr>
+                        <td id="Title_Activo" class="Title_Bold" colspan="10">Tipo Activo</td>
+                    </tr>
                 </table>
                 <table id="Tabla_LLave_Inmueble" style="width: 100%;">
                     <tr>
@@ -122,7 +125,7 @@
                         </td>
                         <td style="width: 15%;">
                             <span class="cssToolTip_Form">
-                                <input type="text" id="Text1" maxlength="17" style="width: 180px;" />
+                                <input type="text" id="TxtRef_3" maxlength="17" style="width: 180px;" />
                                 <span class="Spam_AST"></span></span>
                         </td>
                         <td style="width: 5%; padding-bottom: 25px;">
@@ -140,7 +143,7 @@
                         </td>
                         <td style="width: 15%;">
                             <span class="cssToolTip_Form">
-                                <input type="text" id="Text2" maxlength="17" style="width: 180px;" />
+                                <input type="text" id="TxtRef_Other" maxlength="17" style="width: 180px;" />
                                 <span class="Spam_AST"></span></span>
                         </td>
                         <td style="width: 50%; padding-bottom: 25px;">
@@ -148,6 +151,33 @@
                                 <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img8"
                                     src="../../images/error.png" />
                                 <span class="SpamEG"></span></span>
+                        </td>
+                    </tr>
+                </table>
+                <table id="Blo_Inmuebles">
+                    <tr>
+                        <td>
+                            <table id="T_Datos_Inmueble" style="width: 100%;">
+                                <tr>
+                                    <td class="Label_Bold" style="width: 7.5%;">Tipo Escritura
+                                    </td>
+                                    <td style="width: 20%;">
+                                        <select id="Select_TipoEscritura" class="C_Chosen">
+                                            <option value="1">1 - Ligada inmueble principal</option>
+                                            <option value="2">2 - Escritura independiente</option>
+                                        </select>
+                                    </td>
+                                    <td style="width: 6%; padding-bottom: 25px;"></td>
+                                    <td class="Label_Bold" style="width: 15%;">N° Escritura Inmueble Notaria
+                                    </td>
+                                    <td style="width: 20%;">
+                                        <span class="cssToolTip_Form">
+                                            <input type="text" class="Numeric_letter" id="Txt_NunImobiliaria" maxlength="17" style="width: 180px;" />
+                                            <span class="Spam_ANL"></span></span>
+                                    </td>
+                                    <td style="width: 10%; padding-bottom: 25px;"></td>
+                                </tr>
+                            </table>
                         </td>
                     </tr>
                 </table>
@@ -310,7 +340,7 @@
                             </select>
                         </td>
                         <td style="width: 6.5%; padding-bottom: 25px;"></td>
-                        <td class="Label_Bold" style="width: 6.5%;text-align: right;">Tipo Administración
+                        <td class="Label_Bold" style="width: 6.5%; text-align: right;">Tipo Administración
                         </td>
                         <td style="width: 20%;">
                             <select id="Select_TipoAdmin" class="C_Chosen">
@@ -416,13 +446,13 @@
                 <td>
                     <select id="Select_Type_Adress" class="Select_medium">
                         <option value="">Nomenclatura</option>
-                        <option value="Cl">Calle</option>
+                        <option value="Cll">Calle</option>
                         <option value="Cra">Carrera</option>
                         <option value="Cir">Circular</option>
-                        <option value="Dia">Diagonal</option>
-                        <option value="Tra">Transversal</option>
+                        <option value="Diag">Diagonal</option>
+                        <option value="Trans">Transversal</option>
                         <option value="Av">Avenida</option>
-                        <option value="Kl">Kilometro</option>
+                        <option value="Km">Kilometro</option>
                     </select>
                 </td>
                 <td>
@@ -534,7 +564,7 @@
                     <input type="text" id="Txt_N5" maxlength="4" class="Numeric" style="width: 40px" />
                 </td>
                 <td>
-                    <input type="text" id="Txt_Texto" maxlength="120" class="Letter" style="width: 200px" />
+                    <input type="text" id="Txt_Texto" maxlength="40" class="Letter" style="width: 200px" />
                 </td>
             </tr>
             <tr>

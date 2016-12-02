@@ -306,12 +306,13 @@
     font-weight: bold;
 }
 
-#Relacion, #Complementos, #Complementos_Read, #Vencimiento, #Complementos_Read_Cliente, #Anexos
+#Relacion, #Complementos, #Complementos_Read, #Vencimiento, #Complementos_Read_Cliente, #Anexos, #Blo_Inmuebles
 {
-    margin-top: 15px;
+    margin-top: 1%;
+    margin-bottom: 1%;
     width: 100%;
     padding: 20px 26px;
-    border-radius: 20px;
+    border-radius: 10px;
     background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */

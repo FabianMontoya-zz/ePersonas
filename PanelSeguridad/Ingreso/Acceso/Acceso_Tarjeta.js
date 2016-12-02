@@ -34,10 +34,8 @@ function Capture_Tarjeta_ID() {
 //validamos el estado de la tarjeta y datos de la persona asignada a ella
 function validaTarjeta(Tarjeta_ID) {
     $("#Btnguardar").attr("value", "Nueva Consulta");
-
     for (item in Matrix_Persona) {
         if (Matrix_Persona[item].Tarjeta_ID == Tarjeta_ID) {
-
             $("#TxtDoc").val(Matrix_Persona[item].Document_ID);
             $("#Select_Documento").val(Matrix_Persona[item].TypeDocument_ID);
             TDoc_VT = Matrix_Persona[item].TypeDocument_ID;
@@ -55,13 +53,22 @@ function validaTarjeta(Tarjeta_ID) {
             Nit_ID_Proccess = Matrix_Persona[item].Nit_ID;
             GrpDoc = Matrix_Persona[item].GrpDocumentos;
 
-            HabilitaCombosIngreso();
+            switch (GrpDoc) {
+                case 0:
+                    Mensaje_General("Proceso Imcompleto", "La persona no tiene Grupo de ducumentos asignados, comuniquese con el administrador del sistema!", "E");
+                    break;
+                default:
+                    HabilitaCombosIngreso();
 
-            VerificacionTarjeta(Matrix_Persona[item].Nombre, Matrix_Persona[item].EstadoTarjeta, Matrix_Persona[item].CheckVigencia_Tarjeta, Matrix_Persona[item].FechaVencimientoTarjeta, Matrix_Persona[item].DescripMotivoBloqueo, "T");
-            SearchFoto(TDoc_VT, Doc_VT);
-
+                    VerificacionTarjeta(Matrix_Persona[item].Nombre, Matrix_Persona[item].EstadoTarjeta, Matrix_Persona[item].CheckVigencia_Tarjeta, Matrix_Persona[item].FechaVencimientoTarjeta, Matrix_Persona[item].DescripMotivoBloqueo, "T");
+                    SearchFoto(TDoc_VT, Doc_VT);
+                    break;
+            }
             $('.C_Chosen').trigger('chosen:updated');
             break;
+        }
+        else {
+            Mensaje_General("Tarjeta No registrada", "Esta tarjeta no existe en el sistema ó no esta asignada comuniquese con el administrador del sistema!", "W");
         }
     }
 }

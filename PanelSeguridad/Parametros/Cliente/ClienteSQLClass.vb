@@ -1117,6 +1117,8 @@ Public Class ClienteSQLClass
         Dim conex As New Conector
         Dim Conexion As String = conex.typeConexion("2")
 
+        Dim BD_Doc As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDDocument").ToString
+
         Dim sql As New StringBuilder
 
         sql.Append("SELECT  CLI_Nit_ID,  " & _
@@ -1126,9 +1128,9 @@ Public Class ClienteSQLClass
                               "                  RGRD.RGD_Documentos_ID, " & _
                               "                  D.DOC_Descripcion " & _
                               "  FROM CLIENTE C " & _
-                              "     LEFT JOIN DOCUMENTOS_D.dbo.GRUPO_DOCUMENTO GD ON GD.GD_Grp_Documento_ID = C.CLI_GrpDocumentos AND GD.GD_Nit_ID = C.CLI_Nit_ID " & _
-                              "     LEFT JOIN DOCUMENTOS_D.dbo.R_GRPDOC_DOCUMENTOS  RGRD ON RGRD.RGD_Grp_Documento_ID = GD.GD_Grp_Documento_ID " & _
-                              "     LEFT JOIN  DOCUMENTOS_D.dbo.DOCUMENTOS D ON D.DOC_Documentos_ID= RGRD.RGD_Documentos_ID " & _
+                              "     LEFT JOIN " & BD_Doc & ".dbo.GRUPO_DOCUMENTO GD ON GD.GD_Grp_Documento_ID = C.CLI_GrpDocumentos AND GD.GD_Nit_ID = C.CLI_Nit_ID " & _
+                              "     LEFT JOIN " & BD_Doc & ".dbo.R_GRPDOC_DOCUMENTOS  RGRD ON RGRD.RGD_Grp_Documento_ID = GD.GD_Grp_Documento_ID " & _
+                              "     LEFT JOIN  " & BD_Doc & ".dbo.DOCUMENTOS D ON D.DOC_Documentos_ID= RGRD.RGD_Documentos_ID " & _
                               "  ORDER BY CLI_Nit_ID ASC")
 
         Dim StrQuery As String = sql.ToString

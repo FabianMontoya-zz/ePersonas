@@ -1083,13 +1083,13 @@
                 <td>
                     <select id="Select_Type_Adress" class="Select_medium">
                         <option value="">Nomenclatura</option>
-                        <option value="Cl">Calle</option>
+                         <option value="Cll">Calle</option>
                         <option value="Cra">Carrera</option>
                         <option value="Cir">Circular</option>
-                        <option value="Dia">Diagonal</option>
-                        <option value="Tra">Transversal</option>
+                        <option value="Diag">Diagonal</option>
+                        <option value="Trans">Transversal</option>
                         <option value="Av">Avenida</option>
-                        <option value="Kl">Kilometro</option>
+                        <option value="Km">Kilometro</option>
                     </select>
                 </td>
                 <td>
@@ -1201,7 +1201,7 @@
                     <input type="text" id="Txt_N5" maxlength="4" class="Numeric" style="width: 40px" />
                 </td>
                 <td>
-                    <input type="text" id="Txt_Texto" maxlength="120" class="Letter" style="width: 200px" />
+                    <input type="text" id="Txt_Texto" maxlength="40" class="Letter" style="width: 200px" />
                 </td>
             </tr>
             <tr>

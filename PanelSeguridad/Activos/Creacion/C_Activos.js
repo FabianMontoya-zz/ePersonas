@@ -18,7 +18,7 @@ var Doc;
 //Evento load JS
 $(document).ready(function () {
 
-    $("#Marco_trabajo_Contrato").css("height", "520px;");
+    $("#Marco_trabajo_Contrato").css("height", "490px");
     transaccionAjax_MRTSTA("MATRIX_RTSTA");
     transaccionAjax_MPaises_Ciudades('MATRIX_PAIS_CIUDAD');
     transaccionAjax_MPersonas('MATRIX_PERSONAS');
@@ -43,13 +43,15 @@ $(document).ready(function () {
     $("#Img12").css("display", "none");
     $("#Img13").css("display", "none");
 
+    $("#Blo_Inmuebles").css("display", "none");
+    
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
     $("#WA").css("display", "none");
 
     $("#Tabla_LLave_Inmueble").css("display", "none");
     $("#Tabla_LLave_Vehiculos").css("display", "inline-table");
-    $("#Txtkey_1").html("Codigo Generico");
+    $("#Txtkey_1").html("C. Identificación");
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
@@ -223,20 +225,32 @@ function Change_Select_TA() {
 
         switch (index_ID) {
             case "1":
+                $("#Title_Activo").html($("#Select_Tipo option:selected").html());
                 $("#Tabla_LLave_Inmueble").css("display", "inline-table");
                 $("#Tabla_LLave_Vehiculos").css("display", "none");
+                $("#Blo_Inmuebles").css("display", "inline-table");
                 break;
 
             case "2":
+                $("#Title_Activo").html($("#Select_Tipo option:selected").html());
                 $("#Tabla_LLave_Inmueble").css("display", "none");
                 $("#Tabla_LLave_Vehiculos").css("display", "inline-table");
+                $("#Blo_Inmuebles").css("display", "none");
                 $("#Txtkey_1").html("Placa");
                 break;
 
+            case "-1":
+                $("#Title_Activo").html("Tipo Activo");
+                $("#Tabla_LLave_Inmueble").css("display", "none");
+                $("#Tabla_LLave_Vehiculos").css("display", "none");
+                $("#Blo_Inmuebles").css("display", "none");
+                break;
             default:
+                $("#Title_Activo").html($("#Select_Tipo option:selected").html());
                 $("#Tabla_LLave_Inmueble").css("display", "none");
                 $("#Tabla_LLave_Vehiculos").css("display", "inline-table");
-                $("#Txtkey_1").html("Codigo Generico");
+                $("#Blo_Inmuebles").css("display", "none");
+                $("#Txtkey_1").html("C. Identificación");
                 break;
         }
 
