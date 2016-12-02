@@ -6,7 +6,7 @@ function transacionAjax_CargaBusqueda(State) {
         type: "POST",
         //crear json
         data: { "action": State,
-            "tabla": 'RUTA'
+            "tabla": 'PUERTAS_ACCESO'
         },
         //Transaccion Ajax en proceso
         success: function (result) {

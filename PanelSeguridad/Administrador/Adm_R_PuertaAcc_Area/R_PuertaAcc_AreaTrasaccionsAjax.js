@@ -6,7 +6,7 @@ function transacionAjax_CargaBusqueda(State) {
         type: "POST",
         //crear json
         data: { "action": State,
-            "tabla": 'R_GRPDOC_DOCUMENTOS'
+            "tabla": 'R_PACCESO_AREA'
         },
         //Transaccion Ajax en proceso
         success: function (result) {
