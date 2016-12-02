@@ -88,6 +88,7 @@ $(document).ready(function () {
 
     Change_Select_Nit();
     Change_Select_H_Cliente();
+    Change_Select_Moneda();
     Format_Adress("Txt_Adress_C");
 });
 
@@ -154,6 +155,21 @@ function Change_Select_H_Cliente() {
         var SplitCliente = Str_H_cliente.split(" - ");
         T_Doc = SplitCliente[0];
         Doc = SplitCliente[1];
+    });
+}
+
+function Change_Select_Moneda() {
+    $("#Select_Moneda_C").change(function () {
+        var index_ID = this.value;
+        for (item in Matrix_Moneda) {
+            if (Matrix_Moneda[item].MonedaCod_ID == index_ID) {
+                $("#L_Moneda").html(Matrix_Moneda[item].Sigla);
+                $("#L_Moneda_1").html(Matrix_Moneda[item].Sigla);
+                $("#L_Moneda_2").html(Matrix_Moneda[item].Sigla);
+                $("#L_Moneda_3").html(Matrix_Moneda[item].Sigla);
+                $("#L_Moneda_4").html(Matrix_Moneda[item].Sigla);
+            }
+        }
     });
 }
 

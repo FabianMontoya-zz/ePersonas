@@ -281,15 +281,15 @@
                                 </span>
                             </td>
                             <td class="Label_Bold" style="width: 8%;">Total Activos</td>
-                            <td id="L_Moneda2" class="Sigla" style="width: 4%;"></td>
-                            <td id="L_Total_Activos" style="width: 50%;">1.000.000</td>
+                            <td id="L_Moneda_2" class="Sigla" style="width: 4%;"></td>
+                            <td id="L_Total_Activos" style="width: 50%;">[1.000.000]</td>
                             
                         </tr>
                     </table>
                     <table id="T_Valores_2" style="width: 100%">
                         <tr>
                             <td class="Label_Bold" style="width: 10.5%;">Financiado</td>
-                            <td id="L_Moneda_2" class="Sigla" style="width: 4%;"></td>
+                            <td id="L_Moneda_3" class="Sigla" style="width: 4%;"></td>
                             <td style="width: 13.5%;">
                                 <span class="cssToolTip_Form">
                                     <input style="width:100%;" type="text" id="TXT_Valor_Financiado" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }"
@@ -303,7 +303,7 @@
                                     <span class="SpamEG"></span></span>
                             </td>
                             <td class="Label_Bold" style="width: 8%;">Opción de Compra</td>
-                            <td id="L_Moneda_3" class="Sigla" style="width: 4%;"></td>
+                            <td id="L_Moneda_4" class="Sigla" style="width: 4%;"></td>
                             <td style="width: 14%;">
                                 <span class="cssToolTip_Form">
                                     <input style="width:100%;" type="text" id="TXT_Valor_Opcion_Compra" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }"
