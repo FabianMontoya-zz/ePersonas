@@ -1,21 +1,21 @@
 ﻿Imports System.Data.SqlClient
 Imports System.Data.OleDb
 
-Public Class ProductosSQLClass
+Public Class FinanciacionSQLClass
 
 #Region "CRUD"
 
     ''' <summary>
-    ''' creala consulta para la tabla Productos parametrizada (READ)
+    ''' creala consulta para la tabla Financiacion parametrizada (READ)
     ''' </summary>
     ''' <param name="vp_S_Filtro"></param>
     ''' <param name="vp_S_Opcion"></param>
     ''' <param name="vp_S_Contenido"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Read_AllProductos(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String)
+    Public Function Read_AllFinanciacion(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String)
 
-        Dim ObjListProductos As New List(Of ProductosClass)
+        Dim ObjListFinanciacion As New List(Of FinanciacionClass)
         Dim StrQuery As String = ""
         Dim conex As New Conector
         Dim Conexion As String = conex.typeConexion("2")
@@ -88,7 +88,7 @@ Public Class ProductosSQLClass
                                   "PRO_Base_Mora," & _
                                   "PRO_Capitalizacion," & _
                                   "PRO_Control_Activo" & _
-                                " FROM PRODUCTOS")
+                                " FROM Financiacion")
         Else
 
             If vp_S_Contenido = "ALL" Then
@@ -157,7 +157,7 @@ Public Class ProductosSQLClass
                                   "PRO_Base_Mora," & _
                                   "PRO_Capitalizacion," & _
                                   "PRO_Control_Activo" & _
-                                " FROM PRODUCTOS")
+                                " FROM Financiacion")
             Else
                 sql.Append(" SELECT PRO_producto_ID," & _
                                   "PRO_Descripcion," & _
@@ -224,26 +224,26 @@ Public Class ProductosSQLClass
                                   "PRO_Base_Mora," & _
                                   "PRO_Capitalizacion," & _
                                   "PRO_Control_Activo" & _
-                                " FROM PRODUCTOS" & _
+                                " FROM Financiacion" & _
                           " WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
             End If
         End If
 
         StrQuery = sql.ToString
 
-        ObjListProductos = listProductos(StrQuery, Conexion, "List")
+        ObjListFinanciacion = listFinanciacion(StrQuery, Conexion, "List")
 
-        Return ObjListProductos
+        Return ObjListFinanciacion
 
     End Function
 
     ''' <summary>
-    ''' funcion que crea el query para la insercion de nuevo Productos (INSERT)
+    ''' funcion que crea el query para la insercion de nuevo Financiacion (INSERT)
     ''' </summary>
     ''' <param name="vp_Obj"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function InsertProductos(ByVal vp_Obj As ProductosClass)
+    Public Function InsertFinanciacion(ByVal vp_Obj As FinanciacionClass)
 
         Dim conex As New Conector
         Dim Result As String
@@ -252,7 +252,7 @@ Public Class ProductosSQLClass
         Dim StrQueryID As String = ""
         Dim StrQuery As String = ""
 
-        sql.AppendLine("INSERT PRODUCTOS (" & _
+        sql.AppendLine("INSERT Financiacion (" & _
             "PRO_Nit_ID," & _
             "PRO_producto_ID," & _
             "PRO_Descripcion," & _
@@ -400,7 +400,7 @@ Public Class ProductosSQLClass
     ''' <param name="vp_O_Obj"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Update(ByVal vp_O_Obj As ProductosClass)
+    Public Function Update(ByVal vp_O_Obj As FinanciacionClass)
 
         Dim conex As New Conector
         Dim Result As String
@@ -408,7 +408,7 @@ Public Class ProductosSQLClass
         Dim sql As New StringBuilder
 
         Dim StrQuery As String = ""
-        sql.AppendLine(" UPDATE PRODUCTOS SET " & _
+        sql.AppendLine(" UPDATE Financiacion SET " & _
                           " PRO_Descripcion ='" & vp_O_Obj.Descripcion & "', " & _
                           " PRO_TP_ID ='" & vp_O_Obj.TP_ID & "', " & _
                           " PRO_STP_ID ='" & vp_O_Obj.STP_ID & "', " & _
@@ -473,7 +473,7 @@ Public Class ProductosSQLClass
                           " PRO_Capitalizacion ='" & vp_O_Obj.Capitalizacion & "', " & _
                           " PRO_Control_Activo ='" & vp_O_Obj.Control_Activo & "'" & _
                        " WHERE PRO_producto_ID = '" & vp_O_Obj.Producto_ID & "' AND PRO_Nit_ID = '" & vp_O_Obj.Nit_ID & "'")
-       
+
         StrQuery = sql.ToString
 
         Result = conex.StrInsert_and_Update_All(StrQuery, "2")
@@ -483,12 +483,12 @@ Public Class ProductosSQLClass
     End Function
 
     ''' <summary>
-    ''' funcion que crea el query para la eliminacion del Productos (DELETE)
+    ''' funcion que crea el query para la eliminacion del Financiacion (DELETE)
     ''' </summary>
     ''' <param name="vp_Obj"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function EraseProductos(ByVal vp_Obj As ProductosClass)
+    Public Function EraseFinanciacion(ByVal vp_Obj As FinanciacionClass)
 
         Dim conex As New Conector
         Dim Result As String = ""
@@ -497,7 +497,7 @@ Public Class ProductosSQLClass
         Dim StrQuery As String
         Dim SQL_general As New GeneralSQLClass
 
-        sql.AppendLine("DELETE PRODUCTOS WHERE PRO_producto_ID = '" & vp_Obj.Producto_ID & "' AND PRO_Nit_ID = '" & vp_Obj.Nit_ID & "'")
+        sql.AppendLine("DELETE Financiacion WHERE PRO_producto_ID = '" & vp_Obj.Producto_ID & "' AND PRO_Nit_ID = '" & vp_Obj.Nit_ID & "'")
         StrQuery = sql.ToString
         Result = conex.StrInsert_and_Update_All(StrQuery, "2")
 
@@ -669,13 +669,13 @@ Public Class ProductosSQLClass
 #Region "CARGAR LISTAS"
 
     ''' <summary>
-    ''' funcion que trae el listado de Productos para armar la tabla
+    ''' funcion que trae el listado de Financiacion para armar la tabla
     ''' </summary>
     ''' <param name="vp_S_StrQuery"></param>
     ''' <param name="vg_S_StrConexion"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function listProductos(ByVal vp_S_StrQuery As String, ByVal vg_S_StrConexion As String, ByVal vp_S_TypeList As String)
+    Public Function listFinanciacion(ByVal vp_S_StrQuery As String, ByVal vg_S_StrConexion As String, ByVal vp_S_TypeList As String)
 
         'inicializamos conexiones a la BD
         Dim objcmd As OleDbCommand = Nothing
@@ -685,7 +685,7 @@ Public Class ProductosSQLClass
 
         objcmd = objConexBD.CreateCommand
 
-        Dim ObjListProductos As New List(Of ProductosClass)
+        Dim ObjListFinanciacion As New List(Of FinanciacionClass)
 
         'abrimos conexion
         objConexBD.Open()
@@ -700,101 +700,101 @@ Public Class ProductosSQLClass
                 'recorremos la consulta por la cantidad de datos en la BD
                 While ReadConsulta.Read
 
-                    Dim objProductos As New ProductosClass
+                    Dim objFinanciacion As New FinanciacionClass
                     'cargamos datos sobre el objeto de login
 
-                    objProductos.Producto_ID = ReadConsulta.GetValue(0)
-                    objProductos.Descripcion = ReadConsulta.GetValue(1)
-                    objProductos.TP_ID = ReadConsulta.GetValue(2)
-                    objProductos.STP_ID = ReadConsulta.GetValue(3)
-                    objProductos.Tran_ID_1 = ReadConsulta.GetValue(4)
-                    objProductos.Tran_ID_2 = ReadConsulta.GetValue(5)
-                    objProductos.Tran_ID_3 = ReadConsulta.GetValue(6)
+                    objFinanciacion.Producto_ID = ReadConsulta.GetValue(0)
+                    objFinanciacion.Descripcion = ReadConsulta.GetValue(1)
+                    objFinanciacion.TP_ID = ReadConsulta.GetValue(2)
+                    objFinanciacion.STP_ID = ReadConsulta.GetValue(3)
+                    objFinanciacion.Tran_ID_1 = ReadConsulta.GetValue(4)
+                    objFinanciacion.Tran_ID_2 = ReadConsulta.GetValue(5)
+                    objFinanciacion.Tran_ID_3 = ReadConsulta.GetValue(6)
 
-                    If Not (IsDBNull(ReadConsulta.GetValue(7))) Then objProductos.Cuenta_1 = ReadConsulta.GetValue(7) Else objProductos.Cuenta_1 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(8))) Then objProductos.Cuenta_2 = ReadConsulta.GetValue(8) Else objProductos.Cuenta_2 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(9))) Then objProductos.Cuenta_3 = ReadConsulta.GetValue(9) Else objProductos.Cuenta_3 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(10))) Then objProductos.Cuenta_4 = ReadConsulta.GetValue(10) Else objProductos.Cuenta_4 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(11))) Then objProductos.Cuenta_5 = ReadConsulta.GetValue(11) Else objProductos.Cuenta_5 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(12))) Then objProductos.Cuenta_6 = ReadConsulta.GetValue(12) Else objProductos.Cuenta_6 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(13))) Then objProductos.Cuenta_7 = ReadConsulta.GetValue(13) Else objProductos.Cuenta_7 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(14))) Then objProductos.Cuenta_8 = ReadConsulta.GetValue(14) Else objProductos.Cuenta_8 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(15))) Then objProductos.Cuenta_9 = ReadConsulta.GetValue(15) Else objProductos.Cuenta_9 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(16))) Then objProductos.Cuenta_10 = ReadConsulta.GetValue(16) Else objProductos.Cuenta_10 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(7))) Then objFinanciacion.Cuenta_1 = ReadConsulta.GetValue(7) Else objFinanciacion.Cuenta_1 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(8))) Then objFinanciacion.Cuenta_2 = ReadConsulta.GetValue(8) Else objFinanciacion.Cuenta_2 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(9))) Then objFinanciacion.Cuenta_3 = ReadConsulta.GetValue(9) Else objFinanciacion.Cuenta_3 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(10))) Then objFinanciacion.Cuenta_4 = ReadConsulta.GetValue(10) Else objFinanciacion.Cuenta_4 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(11))) Then objFinanciacion.Cuenta_5 = ReadConsulta.GetValue(11) Else objFinanciacion.Cuenta_5 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(12))) Then objFinanciacion.Cuenta_6 = ReadConsulta.GetValue(12) Else objFinanciacion.Cuenta_6 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(13))) Then objFinanciacion.Cuenta_7 = ReadConsulta.GetValue(13) Else objFinanciacion.Cuenta_7 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(14))) Then objFinanciacion.Cuenta_8 = ReadConsulta.GetValue(14) Else objFinanciacion.Cuenta_8 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(15))) Then objFinanciacion.Cuenta_9 = ReadConsulta.GetValue(15) Else objFinanciacion.Cuenta_9 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(16))) Then objFinanciacion.Cuenta_10 = ReadConsulta.GetValue(16) Else objFinanciacion.Cuenta_10 = ""
 
-                    If Not (IsDBNull(ReadConsulta.GetValue(17))) Then objProductos.Cuenta_11 = ReadConsulta.GetValue(17) Else objProductos.Cuenta_11 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(18))) Then objProductos.Cuenta_12 = ReadConsulta.GetValue(18) Else objProductos.Cuenta_12 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(19))) Then objProductos.Cuenta_13 = ReadConsulta.GetValue(19) Else objProductos.Cuenta_13 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(20))) Then objProductos.Cuenta_14 = ReadConsulta.GetValue(20) Else objProductos.Cuenta_14 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(21))) Then objProductos.Cuenta_15 = ReadConsulta.GetValue(21) Else objProductos.Cuenta_15 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(22))) Then objProductos.Cuenta_16 = ReadConsulta.GetValue(22) Else objProductos.Cuenta_16 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(23))) Then objProductos.Cuenta_17 = ReadConsulta.GetValue(23) Else objProductos.Cuenta_17 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(24))) Then objProductos.Cuenta_18 = ReadConsulta.GetValue(24) Else objProductos.Cuenta_18 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(25))) Then objProductos.Cuenta_19 = ReadConsulta.GetValue(25) Else objProductos.Cuenta_19 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(26))) Then objProductos.Cuenta_20 = ReadConsulta.GetValue(26) Else objProductos.Cuenta_20 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(17))) Then objFinanciacion.Cuenta_11 = ReadConsulta.GetValue(17) Else objFinanciacion.Cuenta_11 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(18))) Then objFinanciacion.Cuenta_12 = ReadConsulta.GetValue(18) Else objFinanciacion.Cuenta_12 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(19))) Then objFinanciacion.Cuenta_13 = ReadConsulta.GetValue(19) Else objFinanciacion.Cuenta_13 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(20))) Then objFinanciacion.Cuenta_14 = ReadConsulta.GetValue(20) Else objFinanciacion.Cuenta_14 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(21))) Then objFinanciacion.Cuenta_15 = ReadConsulta.GetValue(21) Else objFinanciacion.Cuenta_15 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(22))) Then objFinanciacion.Cuenta_16 = ReadConsulta.GetValue(22) Else objFinanciacion.Cuenta_16 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(23))) Then objFinanciacion.Cuenta_17 = ReadConsulta.GetValue(23) Else objFinanciacion.Cuenta_17 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(24))) Then objFinanciacion.Cuenta_18 = ReadConsulta.GetValue(24) Else objFinanciacion.Cuenta_18 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(25))) Then objFinanciacion.Cuenta_19 = ReadConsulta.GetValue(25) Else objFinanciacion.Cuenta_19 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(26))) Then objFinanciacion.Cuenta_20 = ReadConsulta.GetValue(26) Else objFinanciacion.Cuenta_20 = ""
 
-                    If Not (IsDBNull(ReadConsulta.GetValue(27))) Then objProductos.Cuenta_21 = ReadConsulta.GetValue(27) Else objProductos.Cuenta_21 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(28))) Then objProductos.Cuenta_22 = ReadConsulta.GetValue(28) Else objProductos.Cuenta_22 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(29))) Then objProductos.Cuenta_23 = ReadConsulta.GetValue(29) Else objProductos.Cuenta_23 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(30))) Then objProductos.Cuenta_24 = ReadConsulta.GetValue(30) Else objProductos.Cuenta_24 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(31))) Then objProductos.Cuenta_25 = ReadConsulta.GetValue(31) Else objProductos.Cuenta_25 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(32))) Then objProductos.Cuenta_26 = ReadConsulta.GetValue(32) Else objProductos.Cuenta_26 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(33))) Then objProductos.Cuenta_27 = ReadConsulta.GetValue(33) Else objProductos.Cuenta_27 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(34))) Then objProductos.Cuenta_28 = ReadConsulta.GetValue(34) Else objProductos.Cuenta_28 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(35))) Then objProductos.Cuenta_29 = ReadConsulta.GetValue(35) Else objProductos.Cuenta_29 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(36))) Then objProductos.Cuenta_30 = ReadConsulta.GetValue(36) Else objProductos.Cuenta_30 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(27))) Then objFinanciacion.Cuenta_21 = ReadConsulta.GetValue(27) Else objFinanciacion.Cuenta_21 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(28))) Then objFinanciacion.Cuenta_22 = ReadConsulta.GetValue(28) Else objFinanciacion.Cuenta_22 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(29))) Then objFinanciacion.Cuenta_23 = ReadConsulta.GetValue(29) Else objFinanciacion.Cuenta_23 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(30))) Then objFinanciacion.Cuenta_24 = ReadConsulta.GetValue(30) Else objFinanciacion.Cuenta_24 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(31))) Then objFinanciacion.Cuenta_25 = ReadConsulta.GetValue(31) Else objFinanciacion.Cuenta_25 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(32))) Then objFinanciacion.Cuenta_26 = ReadConsulta.GetValue(32) Else objFinanciacion.Cuenta_26 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(33))) Then objFinanciacion.Cuenta_27 = ReadConsulta.GetValue(33) Else objFinanciacion.Cuenta_27 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(34))) Then objFinanciacion.Cuenta_28 = ReadConsulta.GetValue(34) Else objFinanciacion.Cuenta_28 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(35))) Then objFinanciacion.Cuenta_29 = ReadConsulta.GetValue(35) Else objFinanciacion.Cuenta_29 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(36))) Then objFinanciacion.Cuenta_30 = ReadConsulta.GetValue(36) Else objFinanciacion.Cuenta_30 = ""
 
-                    If Not (IsDBNull(ReadConsulta.GetValue(37))) Then objProductos.Cuenta_31 = ReadConsulta.GetValue(37) Else objProductos.Cuenta_31 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(38))) Then objProductos.Cuenta_32 = ReadConsulta.GetValue(38) Else objProductos.Cuenta_32 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(39))) Then objProductos.Cuenta_33 = ReadConsulta.GetValue(39) Else objProductos.Cuenta_33 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(40))) Then objProductos.Cuenta_34 = ReadConsulta.GetValue(40) Else objProductos.Cuenta_34 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(41))) Then objProductos.Cuenta_35 = ReadConsulta.GetValue(41) Else objProductos.Cuenta_35 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(42))) Then objProductos.Cuenta_36 = ReadConsulta.GetValue(42) Else objProductos.Cuenta_36 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(43))) Then objProductos.Cuenta_37 = ReadConsulta.GetValue(43) Else objProductos.Cuenta_37 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(44))) Then objProductos.Cuenta_38 = ReadConsulta.GetValue(44) Else objProductos.Cuenta_38 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(45))) Then objProductos.Cuenta_39 = ReadConsulta.GetValue(45) Else objProductos.Cuenta_39 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(46))) Then objProductos.Cuenta_40 = ReadConsulta.GetValue(46) Else objProductos.Cuenta_40 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(37))) Then objFinanciacion.Cuenta_31 = ReadConsulta.GetValue(37) Else objFinanciacion.Cuenta_31 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(38))) Then objFinanciacion.Cuenta_32 = ReadConsulta.GetValue(38) Else objFinanciacion.Cuenta_32 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(39))) Then objFinanciacion.Cuenta_33 = ReadConsulta.GetValue(39) Else objFinanciacion.Cuenta_33 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(40))) Then objFinanciacion.Cuenta_34 = ReadConsulta.GetValue(40) Else objFinanciacion.Cuenta_34 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(41))) Then objFinanciacion.Cuenta_35 = ReadConsulta.GetValue(41) Else objFinanciacion.Cuenta_35 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(42))) Then objFinanciacion.Cuenta_36 = ReadConsulta.GetValue(42) Else objFinanciacion.Cuenta_36 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(43))) Then objFinanciacion.Cuenta_37 = ReadConsulta.GetValue(43) Else objFinanciacion.Cuenta_37 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(44))) Then objFinanciacion.Cuenta_38 = ReadConsulta.GetValue(44) Else objFinanciacion.Cuenta_38 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(45))) Then objFinanciacion.Cuenta_39 = ReadConsulta.GetValue(45) Else objFinanciacion.Cuenta_39 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(46))) Then objFinanciacion.Cuenta_40 = ReadConsulta.GetValue(46) Else objFinanciacion.Cuenta_40 = ""
 
-                    If Not (IsDBNull(ReadConsulta.GetValue(47))) Then objProductos.Cuenta_41 = ReadConsulta.GetValue(47) Else objProductos.Cuenta_41 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(48))) Then objProductos.Cuenta_42 = ReadConsulta.GetValue(48) Else objProductos.Cuenta_42 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(49))) Then objProductos.Cuenta_43 = ReadConsulta.GetValue(49) Else objProductos.Cuenta_43 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(50))) Then objProductos.Cuenta_44 = ReadConsulta.GetValue(50) Else objProductos.Cuenta_44 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(51))) Then objProductos.Cuenta_45 = ReadConsulta.GetValue(51) Else objProductos.Cuenta_45 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(52))) Then objProductos.Cuenta_46 = ReadConsulta.GetValue(52) Else objProductos.Cuenta_46 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(53))) Then objProductos.Cuenta_47 = ReadConsulta.GetValue(53) Else objProductos.Cuenta_47 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(54))) Then objProductos.Cuenta_48 = ReadConsulta.GetValue(54) Else objProductos.Cuenta_48 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(55))) Then objProductos.Cuenta_49 = ReadConsulta.GetValue(55) Else objProductos.Cuenta_49 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(56))) Then objProductos.Cuenta_50 = ReadConsulta.GetValue(56) Else objProductos.Cuenta_40 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(47))) Then objFinanciacion.Cuenta_41 = ReadConsulta.GetValue(47) Else objFinanciacion.Cuenta_41 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(48))) Then objFinanciacion.Cuenta_42 = ReadConsulta.GetValue(48) Else objFinanciacion.Cuenta_42 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(49))) Then objFinanciacion.Cuenta_43 = ReadConsulta.GetValue(49) Else objFinanciacion.Cuenta_43 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(50))) Then objFinanciacion.Cuenta_44 = ReadConsulta.GetValue(50) Else objFinanciacion.Cuenta_44 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(51))) Then objFinanciacion.Cuenta_45 = ReadConsulta.GetValue(51) Else objFinanciacion.Cuenta_45 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(52))) Then objFinanciacion.Cuenta_46 = ReadConsulta.GetValue(52) Else objFinanciacion.Cuenta_46 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(53))) Then objFinanciacion.Cuenta_47 = ReadConsulta.GetValue(53) Else objFinanciacion.Cuenta_47 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(54))) Then objFinanciacion.Cuenta_48 = ReadConsulta.GetValue(54) Else objFinanciacion.Cuenta_48 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(55))) Then objFinanciacion.Cuenta_49 = ReadConsulta.GetValue(55) Else objFinanciacion.Cuenta_49 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(56))) Then objFinanciacion.Cuenta_50 = ReadConsulta.GetValue(56) Else objFinanciacion.Cuenta_40 = ""
 
-                    objProductos.FechaActualizacion = ReadConsulta.GetValue(57)
-                    objProductos.Usuario = ReadConsulta.GetValue(58)
-                    objProductos.Nit_ID = ReadConsulta.GetValue(59)
+                    objFinanciacion.FechaActualizacion = ReadConsulta.GetValue(57)
+                    objFinanciacion.Usuario = ReadConsulta.GetValue(58)
+                    objFinanciacion.Nit_ID = ReadConsulta.GetValue(59)
 
-                    If Not (IsDBNull(ReadConsulta.GetValue(60))) Then objProductos.Causacion_Interes = ReadConsulta.GetValue(60) Else objProductos.Causacion_Interes = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(61))) Then objProductos.Causacion_Mora = ReadConsulta.GetValue(61) Else objProductos.Causacion_Mora = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(62))) Then objProductos.Base_Mora = ReadConsulta.GetValue(62) Else objProductos.Base_Mora = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(63))) Then objProductos.Capitalizacion = ReadConsulta.GetValue(63) Else objProductos.Capitalizacion = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(64))) Then objProductos.Control_Activo = ReadConsulta.GetValue(64) Else objProductos.Control_Activo = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(60))) Then objFinanciacion.Causacion_Interes = ReadConsulta.GetValue(60) Else objFinanciacion.Causacion_Interes = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(61))) Then objFinanciacion.Causacion_Mora = ReadConsulta.GetValue(61) Else objFinanciacion.Causacion_Mora = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(62))) Then objFinanciacion.Base_Mora = ReadConsulta.GetValue(62) Else objFinanciacion.Base_Mora = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(63))) Then objFinanciacion.Capitalizacion = ReadConsulta.GetValue(63) Else objFinanciacion.Capitalizacion = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(64))) Then objFinanciacion.Control_Activo = ReadConsulta.GetValue(64) Else objFinanciacion.Control_Activo = ""
 
                     'agregamos a la lista
-                    ObjListProductos.Add(objProductos)
+                    ObjListFinanciacion.Add(objFinanciacion)
 
                 End While
 
             Case "Matrix"
                 While ReadConsulta.Read
 
-                    Dim objProductos As New ProductosClass
+                    Dim objFinanciacion As New FinanciacionClass
                     'cargamos datos sobre el objeto de login
 
-                    objProductos.Nit_ID = ReadConsulta.GetValue(0)
-                    objProductos.Producto_ID = ReadConsulta.GetValue(1)
-                    objProductos.Descripcion = ReadConsulta.GetValue(2)
-                    objProductos.TP_ID = ReadConsulta.GetValue(3)
-                    objProductos.STP_ID = ReadConsulta.GetValue(4)
+                    objFinanciacion.Nit_ID = ReadConsulta.GetValue(0)
+                    objFinanciacion.Producto_ID = ReadConsulta.GetValue(1)
+                    objFinanciacion.Descripcion = ReadConsulta.GetValue(2)
+                    objFinanciacion.TP_ID = ReadConsulta.GetValue(3)
+                    objFinanciacion.STP_ID = ReadConsulta.GetValue(4)
 
                     'agregamos a la lista
-                    ObjListProductos.Add(objProductos)
+                    ObjListFinanciacion.Add(objFinanciacion)
 
                 End While
 
@@ -807,150 +807,7 @@ Public Class ProductosSQLClass
         ReadConsulta.Close()
         objConexBD.Close()
         'retornamos la consulta
-        Return ObjListProductos
-
-    End Function
-
-    ''' <summary>
-    ''' funcion que trae el listado de Productos para armar la tabla
-    ''' </summary>
-    ''' <param name="vp_S_StrQuery"></param>
-    ''' <param name="vg_S_StrConexion"></param>
-    ''' <returns></returns>
-    ''' <remarks></remarks>
-    Public Function listProductos(ByVal vp_S_StrQuery As String, ByVal vg_S_StrConexion As String, ByVal vp_S_TypeList As String)
-
-        'inicializamos conexiones a la BD
-        Dim objcmd As OleDbCommand = Nothing
-        Dim objConexBD As OleDbConnection = Nothing
-        objConexBD = New OleDbConnection(vg_S_StrConexion)
-        Dim ReadConsulta As OleDbDataReader = Nothing
-
-        objcmd = objConexBD.CreateCommand
-
-        Dim ObjListProductos As New List(Of ProductosClass)
-
-        'abrimos conexion
-        objConexBD.Open()
-        'cargamos consulta
-        objcmd.CommandText = vp_S_StrQuery
-        'ejecutamos consulta
-        ReadConsulta = objcmd.ExecuteReader()
-
-
-        Select Case vp_S_TypeList
-            Case "List"
-                'recorremos la consulta por la cantidad de datos en la BD
-                While ReadConsulta.Read
-
-                    Dim objProductos As New ProductosClass
-                    'cargamos datos sobre el objeto de login
-
-                    objProductos.Producto_ID = ReadConsulta.GetValue(0)
-                    objProductos.Descripcion = ReadConsulta.GetValue(1)
-                    objProductos.TP_ID = ReadConsulta.GetValue(2)
-                    objProductos.STP_ID = ReadConsulta.GetValue(3)
-                    objProductos.Tran_ID_1 = ReadConsulta.GetValue(4)
-                    objProductos.Tran_ID_2 = ReadConsulta.GetValue(5)
-                    objProductos.Tran_ID_3 = ReadConsulta.GetValue(6)
-
-                    If Not (IsDBNull(ReadConsulta.GetValue(7))) Then objProductos.Cuenta_1 = ReadConsulta.GetValue(7) Else objProductos.Cuenta_1 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(8))) Then objProductos.Cuenta_2 = ReadConsulta.GetValue(8) Else objProductos.Cuenta_2 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(9))) Then objProductos.Cuenta_3 = ReadConsulta.GetValue(9) Else objProductos.Cuenta_3 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(10))) Then objProductos.Cuenta_4 = ReadConsulta.GetValue(10) Else objProductos.Cuenta_4 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(11))) Then objProductos.Cuenta_5 = ReadConsulta.GetValue(11) Else objProductos.Cuenta_5 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(12))) Then objProductos.Cuenta_6 = ReadConsulta.GetValue(12) Else objProductos.Cuenta_6 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(13))) Then objProductos.Cuenta_7 = ReadConsulta.GetValue(13) Else objProductos.Cuenta_7 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(14))) Then objProductos.Cuenta_8 = ReadConsulta.GetValue(14) Else objProductos.Cuenta_8 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(15))) Then objProductos.Cuenta_9 = ReadConsulta.GetValue(15) Else objProductos.Cuenta_9 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(16))) Then objProductos.Cuenta_10 = ReadConsulta.GetValue(16) Else objProductos.Cuenta_10 = ""
-
-                    If Not (IsDBNull(ReadConsulta.GetValue(17))) Then objProductos.Cuenta_11 = ReadConsulta.GetValue(17) Else objProductos.Cuenta_11 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(18))) Then objProductos.Cuenta_12 = ReadConsulta.GetValue(18) Else objProductos.Cuenta_12 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(19))) Then objProductos.Cuenta_13 = ReadConsulta.GetValue(19) Else objProductos.Cuenta_13 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(20))) Then objProductos.Cuenta_14 = ReadConsulta.GetValue(20) Else objProductos.Cuenta_14 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(21))) Then objProductos.Cuenta_15 = ReadConsulta.GetValue(21) Else objProductos.Cuenta_15 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(22))) Then objProductos.Cuenta_16 = ReadConsulta.GetValue(22) Else objProductos.Cuenta_16 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(23))) Then objProductos.Cuenta_17 = ReadConsulta.GetValue(23) Else objProductos.Cuenta_17 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(24))) Then objProductos.Cuenta_18 = ReadConsulta.GetValue(24) Else objProductos.Cuenta_18 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(25))) Then objProductos.Cuenta_19 = ReadConsulta.GetValue(25) Else objProductos.Cuenta_19 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(26))) Then objProductos.Cuenta_20 = ReadConsulta.GetValue(26) Else objProductos.Cuenta_20 = ""
-
-                    If Not (IsDBNull(ReadConsulta.GetValue(27))) Then objProductos.Cuenta_21 = ReadConsulta.GetValue(27) Else objProductos.Cuenta_21 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(28))) Then objProductos.Cuenta_22 = ReadConsulta.GetValue(28) Else objProductos.Cuenta_22 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(29))) Then objProductos.Cuenta_23 = ReadConsulta.GetValue(29) Else objProductos.Cuenta_23 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(30))) Then objProductos.Cuenta_24 = ReadConsulta.GetValue(30) Else objProductos.Cuenta_24 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(31))) Then objProductos.Cuenta_25 = ReadConsulta.GetValue(31) Else objProductos.Cuenta_25 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(32))) Then objProductos.Cuenta_26 = ReadConsulta.GetValue(32) Else objProductos.Cuenta_26 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(33))) Then objProductos.Cuenta_27 = ReadConsulta.GetValue(33) Else objProductos.Cuenta_27 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(34))) Then objProductos.Cuenta_28 = ReadConsulta.GetValue(34) Else objProductos.Cuenta_28 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(35))) Then objProductos.Cuenta_29 = ReadConsulta.GetValue(35) Else objProductos.Cuenta_29 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(36))) Then objProductos.Cuenta_30 = ReadConsulta.GetValue(36) Else objProductos.Cuenta_30 = ""
-
-                    If Not (IsDBNull(ReadConsulta.GetValue(37))) Then objProductos.Cuenta_31 = ReadConsulta.GetValue(37) Else objProductos.Cuenta_31 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(38))) Then objProductos.Cuenta_32 = ReadConsulta.GetValue(38) Else objProductos.Cuenta_32 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(39))) Then objProductos.Cuenta_33 = ReadConsulta.GetValue(39) Else objProductos.Cuenta_33 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(40))) Then objProductos.Cuenta_34 = ReadConsulta.GetValue(40) Else objProductos.Cuenta_34 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(41))) Then objProductos.Cuenta_35 = ReadConsulta.GetValue(41) Else objProductos.Cuenta_35 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(42))) Then objProductos.Cuenta_36 = ReadConsulta.GetValue(42) Else objProductos.Cuenta_36 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(43))) Then objProductos.Cuenta_37 = ReadConsulta.GetValue(43) Else objProductos.Cuenta_37 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(44))) Then objProductos.Cuenta_38 = ReadConsulta.GetValue(44) Else objProductos.Cuenta_38 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(45))) Then objProductos.Cuenta_39 = ReadConsulta.GetValue(45) Else objProductos.Cuenta_39 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(46))) Then objProductos.Cuenta_40 = ReadConsulta.GetValue(46) Else objProductos.Cuenta_40 = ""
-
-                    If Not (IsDBNull(ReadConsulta.GetValue(47))) Then objProductos.Cuenta_41 = ReadConsulta.GetValue(47) Else objProductos.Cuenta_41 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(48))) Then objProductos.Cuenta_42 = ReadConsulta.GetValue(48) Else objProductos.Cuenta_42 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(49))) Then objProductos.Cuenta_43 = ReadConsulta.GetValue(49) Else objProductos.Cuenta_43 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(50))) Then objProductos.Cuenta_44 = ReadConsulta.GetValue(50) Else objProductos.Cuenta_44 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(51))) Then objProductos.Cuenta_45 = ReadConsulta.GetValue(51) Else objProductos.Cuenta_45 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(52))) Then objProductos.Cuenta_46 = ReadConsulta.GetValue(52) Else objProductos.Cuenta_46 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(53))) Then objProductos.Cuenta_47 = ReadConsulta.GetValue(53) Else objProductos.Cuenta_47 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(54))) Then objProductos.Cuenta_48 = ReadConsulta.GetValue(54) Else objProductos.Cuenta_48 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(55))) Then objProductos.Cuenta_49 = ReadConsulta.GetValue(55) Else objProductos.Cuenta_49 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(56))) Then objProductos.Cuenta_50 = ReadConsulta.GetValue(56) Else objProductos.Cuenta_40 = ""
-
-                    objProductos.FechaActualizacion = ReadConsulta.GetValue(57)
-                    objProductos.Usuario = ReadConsulta.GetValue(58)
-                    objProductos.Nit_ID = ReadConsulta.GetValue(59)
-
-                    If Not (IsDBNull(ReadConsulta.GetValue(60))) Then objProductos.Causacion_Interes = ReadConsulta.GetValue(60) Else objProductos.Causacion_Interes = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(61))) Then objProductos.Causacion_Mora = ReadConsulta.GetValue(61) Else objProductos.Causacion_Mora = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(62))) Then objProductos.Base_Mora = ReadConsulta.GetValue(62) Else objProductos.Base_Mora = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(63))) Then objProductos.Capitalizacion = ReadConsulta.GetValue(63) Else objProductos.Capitalizacion = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(64))) Then objProductos.Control_Activo = ReadConsulta.GetValue(64) Else objProductos.Control_Activo = ""
-
-                    'agregamos a la lista
-                    ObjListProductos.Add(objProductos)
-
-                End While
-
-            Case "Matrix"
-                While ReadConsulta.Read
-
-                    Dim objProductos As New ProductosClass
-                    'cargamos datos sobre el objeto de login
-
-                    objProductos.Nit_ID = ReadConsulta.GetValue(0)
-                    objProductos.Producto_ID = ReadConsulta.GetValue(1)
-                    objProductos.Descripcion = ReadConsulta.GetValue(2)
-                    objProductos.TP_ID = ReadConsulta.GetValue(3)
-                    objProductos.STP_ID = ReadConsulta.GetValue(4)
-
-                    'agregamos a la lista
-                    ObjListProductos.Add(objProductos)
-
-                End While
-
-
-        End Select
-
-
-
-        'cerramos conexiones
-        ReadConsulta.Close()
-        objConexBD.Close()
-        'retornamos la consulta
-        Return ObjListProductos
+        Return ObjListFinanciacion
 
     End Function
 
@@ -964,7 +821,7 @@ Public Class ProductosSQLClass
     ''' <param name="vp_O_Obj"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Consulta_Repetido(ByVal vp_O_Obj As ProductosClass)
+    Public Function Consulta_Repetido(ByVal vp_O_Obj As FinanciacionClass)
 
         Dim StrQuery As String = ""
         Dim Result As String = ""
@@ -972,7 +829,7 @@ Public Class ProductosSQLClass
 
         Dim sql As New StringBuilder
 
-        sql.AppendLine(" SELECT COUNT(1) FROM PRODUCTOS " & _
+        sql.AppendLine(" SELECT COUNT(1) FROM Financiacion " & _
                        " WHERE PRO_producto_ID = '" & vp_O_Obj.Producto_ID & "' AND PRO_Nit_ID = '" & vp_O_Obj.Nit_ID & "'")
 
         StrQuery = sql.ToString
@@ -983,13 +840,13 @@ Public Class ProductosSQLClass
     End Function
 
     ''' <summary>
-    ''' lee la matriz de Productos
+    ''' lee la matriz de Financiacion
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Matrix_Productos()
+    Public Function Matrix_Financiacion()
 
-        Dim ObjList As New List(Of ProductosClass)
+        Dim ObjList As New List(Of FinanciacionClass)
         Dim conex As New Conector
         Dim Conexion As String = conex.typeConexion("2")
 
@@ -1000,11 +857,50 @@ Public Class ProductosSQLClass
                    "         PRO_Descripcion , " & _
                    "         PRO_TP_ID, " & _
                    "         PRO_STP_ID " & _
-                   " FROM PRODUCTOS " & _
+                   " FROM Financiacion " & _
                    " ORDER BY PRO_producto_ID ASC")
         Dim StrQuery As String = sql.ToString
 
-        ObjList = listProductos(StrQuery, Conexion, "Matrix")
+        ObjList = listFinanciacion(StrQuery, Conexion, "Matrix")
+
+        Return ObjList
+
+    End Function
+
+    ''' <summary>
+    ''' lee la matriz de Financiacion
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Matrix_Financiacion()
+
+        Dim ObjList As New List(Of FinanciacionClass)
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("2")
+
+        Dim sql As New StringBuilder
+
+        sql.Append(" SELECT	FIN_Nit_ID, " & _
+                   " 		FIN_Financiacion_ID, " & _
+                   "		FIN_Descripcion, " & _
+                   "		FIN_Calculo, " & _
+                   "		FIN_Calculo_Cuota_Final, " & _
+                   "		FIN_Modalidad_Pago," & _
+                   "		FIN_Periodo_Pago, " & _
+                   "		FIN_Tipo_Cuota, " & _
+                   "		FIN_Formula_FK, " & _
+                   "		FIN_Base_Calculo, " & _
+                   "		FIN_Tasa_FK," & _
+                   "		FIN_Tipo_Tasa, " & _
+                   "		FIN_Puntos_Adicionales, " & _
+                   "		FIN_Tasa_Mora_FK," & _
+                   "		FIN_Tasa_Usura_FK, " & _
+                   "		FIN_Ciclo_Cobro_FK" & _
+                   " FROM FINANCIACION  " & _
+                   " ORDER BY FIN_Nit_ID, FIN_Financiacion_ID ASC")
+        Dim StrQuery As String = sql.ToString
+
+        ObjList = listFinanciacion(StrQuery, Conexion, "Matrix")
 
         Return ObjList
 

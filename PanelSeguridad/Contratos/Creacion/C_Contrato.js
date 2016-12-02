@@ -87,7 +87,7 @@ $(document).ready(function () {
     });
 
 
-
+    $("#Select_Base_Calculo").prop('disabled', true); //Desactivamos el Chosen
     Change_Select_Nit();
     Change_Select_Sucursal();
     Change_Select_Persona();
@@ -200,6 +200,12 @@ function Change_Select_Moneda() {
                 $("#L_Moneda_2").html(Matrix_Moneda[item].Sigla);
                 $("#L_Moneda_3").html(Matrix_Moneda[item].Sigla);
                 $("#L_Moneda_4").html(Matrix_Moneda[item].Sigla);
+            } else if (index_ID == "-1") {
+                $("#L_Moneda").html("");
+                $("#L_Moneda_1").html("");
+                $("#L_Moneda_2").html("");
+                $("#L_Moneda_3").html("");
+                $("#L_Moneda_4").html("");
             }
         }
     });
@@ -235,17 +241,25 @@ function Change_Select_Unidad_Tiempo() {
         } else {
             $("#Img11").css("display", "none");
         }
+
+        var index_ID = this.value;
+        if (index_ID == "D") {
+            $("#L_Tiempo").html("Días");
+        } else if (index_ID == "M") {
+            $("#L_Tiempo").html("Meses");
+        } else if (index_ID == "S") {
+            $("#L_Tiempo").html("Semestres");
+        } else if (index_ID == "Y") {
+            $("#L_Tiempo").html("Años");
+        } else {
+            $("#L_Tiempo").html("");
+        }
     });
 }
 
 function Change_Select_Ciclo() {
     $("#Select_Ciclo").change(function () {
-        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
-        if ($("#Select_Ciclo").val() == "-1") {
-            $("#Img14").css("display", "inline-table");
-        } else {
-            $("#Img14").css("display", "none");
-        }
+        /*El campo no es obligatorio así que no se valida selección*/        
     });
 }
 
@@ -289,7 +303,7 @@ function validarCamposCrear() {
     var Campo_11 = $("#Select_Tiempo").val(); //Img11
     var Campo_12 = $("#TXT_Fecha_Apertura").val(); //Img12
     var Campo_13 = $("#TXT_Plazo").val(); //Img13
-    var Campo_14 = $("#Select_Ciclo").val(); //Img14
+    var Campo_14 = $("#Select_Ciclo").val(); //Img14 -- Campo no obligatorio
     var Campo_15 = $("#Select_Base_Calculo").val(); //Img15
     var Campo_16 = $("#Txt_Adress_C").val(); //Img16
     var Campo_17 = $("#TXT_Valor_Total").val(); //Img17
@@ -367,10 +381,10 @@ function validarCamposCrear() {
             $("#Img13").css("display", "none");
         }
         //--14--
-        if (Campo_14 == "-1" || Campo_14 == null || Campo_14 == "") {
-            $("#Img14").css("display", "inline-table");
+        if (Campo_14 == "-1" || Campo_14 == null || Campo_14 == "") { /*No es obligatorio, no se muestra error*/
+            Campo_14 = "";
         } else {
-            $("#Img14").css("display", "none");
+            Campo_14 = Campo_14;
         }
         //--15--
         if (Campo_15 == "-1" || Campo_15 == "" || Campo_15 == null) {

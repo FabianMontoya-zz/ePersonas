@@ -179,6 +179,11 @@
                             <td class="Label_Bold" id="Unidad_De_Tiempo" style="width: 10.5%;">Unidad de Tiempo</td>
                             <td style="width: 30%;">
                                 <select id="Select_Tiempo" class="C_Chosen">
+                                    <option value="-1">Seleccione...</option>
+                                    <option value="D">D - Diario</option>
+                                    <option value="M">M - Mensual</option>
+                                    <option value="S">S - Semestral</option>
+                                    <option value="Y">Y - Anual</option>
                                 </select>
                             </td>
                             <td style="padding-bottom: 25px; width: 6.5%;">
@@ -198,8 +203,8 @@
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img12"
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
-                            </td>                            
-                        </tr>                        
+                            </td>
+                        </tr>
                     </table>
                     <table id="T_Plazo">
                         <tr>
@@ -216,8 +221,8 @@
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
-                            </tr>
-                            </table>
+                        </tr>
+                    </table>
                     <table id="T_Ciclo_y_Base" style="width: 100%;">
                         <tr>
                             <td class="Label_Bold" style="width: 10.5%;">Ciclo
@@ -227,6 +232,7 @@
                                 </select>
                             </td>
                             <td style="padding-bottom: 25px; width: 6.5%;">
+                                <!--Campo no obligatorio, no utilizamos el mensaje de Erro -->
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img14"
                                         src="../../images/error.png" />
@@ -234,9 +240,12 @@
                             </td>
                             <td class="Label_Bold" style="width: 10%;">Base de Cálculo
                             </td>
-                            <td style="width: 30%;">
-                                <select id="Select_Base_Calculo" class="C_Chosen">
-                                </select>
+                            <td style="width: 30%;">                                
+                                    <select id="Select_Base_Calculo" class="C_Chosen">
+                                        <option value="-1">Seleccione...</option>
+                                        <option value="1">1 - 360/360</option>
+                                        <option value="2">2 - 365/365</option>
+                                    </select>
                             </td>
                             <td style="padding-bottom: 25px; width: 35%;">
                                 <span class="cssToolTip">
@@ -272,7 +281,7 @@
                             <td id="L_Moneda" class="Sigla" style="width: 7%"></td>
                             <td style="width: 13.5%;">
                                 <span class="cssToolTip_Form">
-                                    <input style="width:100%;" type ="text" id="TXT_Valor_Total" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }"
+                                    <input style="width: 100%;" type="text" id="TXT_Valor_Total" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }"
                                         onchange="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
                                     <span class="Spam_AVal"></span></span>
                             </td>
@@ -287,7 +296,7 @@
                             <td class="Label_Bold" style="width: 9%;">Total Activos</td>
                             <td id="L_Moneda_2" class="Sigla" style="width: 7%"></td>
                             <td id="L_Total_Activos" style="width: 50%;">[1.000.000]</td>
-                            
+
                         </tr>
                     </table>
                     <table id="T_Valores_2" style="width: 100%">
@@ -296,7 +305,7 @@
                             <td id="L_Moneda_3" class="Sigla" style="width: 7%"></td>
                             <td style="width: 13.5%;">
                                 <span class="cssToolTip_Form">
-                                    <input style="width:100%;" type="text" id="TXT_Valor_Financiado" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }"
+                                    <input style="width: 100%;" type="text" id="TXT_Valor_Financiado" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }"
                                         onchange="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
                                     <span class="Spam_AVal"></span></span>
                             </td>
@@ -310,7 +319,7 @@
                             <td id="L_Moneda_4" class="Sigla" style="width: 7%"></td>
                             <td style="width: 13.5%;">
                                 <span class="cssToolTip_Form">
-                                    <input style="width:100%;" type="text" id="TXT_Valor_Opcion_Compra" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }"
+                                    <input style="width: 100%;" type="text" id="TXT_Valor_Opcion_Compra" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }"
                                         onchange="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
                                     <span class="Spam_AVal"></span></span>
                             </td>
@@ -429,9 +438,9 @@
                     </select>
                 </td>
                 <td>
-                <span class="cssToolTip_Form">
-                    <input type="text" id="Txt_N1" maxlength="4" class="Numeric" style="width: 40px" />
-                     <span class="Spam_AN"></span></span>
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="Txt_N1" maxlength="4" class="Numeric" style="width: 40px" />
+                        <span class="Spam_AN"></span></span>
                 </td>
                 <td>
                     <input type="text" id="Txt_Special" maxlength="200" class="" style="width: 400px" />
@@ -466,9 +475,9 @@
                     </select>
                 </td>
                 <td>
-                <span class="cssToolTip_Form">
-                    <input type="text" id="Txt_N2" maxlength="4" class="Numeric" style="width: 40px" />
-                    <span class="Spam_AN"></span></span>
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="Txt_N2" maxlength="4" class="Numeric" style="width: 40px" />
+                        <span class="Spam_AN"></span></span>
                 </td>
                 <td>
                     <select id="Select_Letter_2" class="Select_tiny">
@@ -502,9 +511,9 @@
                     </select>
                 </td>
                 <td>
-                <span class="cssToolTip_Form">
-                    <input type="text" id="Txt_N3" maxlength="4" class="Numeric" style="width: 40px" />
-                     <span class="Spam_AN"></span></span>
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="Txt_N3" maxlength="4" class="Numeric" style="width: 40px" />
+                        <span class="Spam_AN"></span></span>
                 </td>
                 <td>
                     <select id="Select_Orientacion" class="Select_medium">
@@ -527,9 +536,9 @@
                     </select>
                 </td>
                 <td>
-                <span class="cssToolTip_Form">
-                    <input type="text" id="Txt_N4" maxlength="4" class="Numeric" style="width: 40px" />
-                     <span class="Spam_AN"></span></span>
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="Txt_N4" maxlength="4" class="Numeric" style="width: 40px" />
+                        <span class="Spam_AN"></span></span>
                 </td>
                 <td>
                     <select id="Select_Type_Cons2" class="Select_medium">
@@ -542,14 +551,14 @@
                     </select>
                 </td>
                 <td>
-                <span class="cssToolTip_Form">
-                    <input type="text" id="Txt_N5" maxlength="4" class="Numeric" style="width: 40px" />
-                    <span class="Spam_AN"></span></span>
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="Txt_N5" maxlength="4" class="Numeric" style="width: 40px" />
+                        <span class="Spam_AN"></span></span>
                 </td>
                 <td>
-                <span class="cssToolTip_Form">
-                    <input type="text" id="Txt_Texto" maxlength="40" class="Letter" style="width: 200px" />
-                    <span class="Spam_AWords"></span></span>
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="Txt_Texto" maxlength="40" class="Letter" style="width: 200px" />
+                        <span class="Spam_AWords"></span></span>
                 </td>
             </tr>
             <tr>

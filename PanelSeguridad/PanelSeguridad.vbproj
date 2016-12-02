@@ -444,6 +444,10 @@
     <Content Include="Parametros\Cliente\Cliente_EntFinan.js" />
     <Content Include="Parametros\Cliente\Cliente_Matrix.js" />
     <Content Include="Parametros\Cliente\Cliente_Validacion.js" />
+    <Content Include="Parametros\Financiacion\Financiacion.aspx" />
+    <Content Include="Parametros\Financiacion\Financiacion.js" />
+    <Content Include="Parametros\Financiacion\FinanciacionAjax.aspx" />
+    <Content Include="Parametros\Financiacion\FinanciacionTrasaccionsAjax.js" />
     <Content Include="Parametros\Fasecolda\Fasecolda.aspx" />
     <Content Include="Parametros\Fasecolda\Fasecolda.js" />
     <Content Include="Parametros\Fasecolda\FasecoldaAjax.aspx" />
@@ -1140,6 +1144,22 @@
     </Compile>
     <Compile Include="Parametros\Cliente\ClienteClass.vb" />
     <Compile Include="Parametros\Cliente\ClienteSQLClass.vb" />
+    <Compile Include="Parametros\Financiacion\Financiacion.aspx.designer.vb">
+      <DependentUpon>Financiacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Financiacion\Financiacion.aspx.vb">
+      <DependentUpon>Financiacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Financiacion\FinanciacionAjax.aspx.designer.vb">
+      <DependentUpon>FinanciacionAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Financiacion\FinanciacionAjax.aspx.vb">
+      <DependentUpon>FinanciacionAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Financiacion\FinanciacionClass.vb" />
+    <Compile Include="Parametros\Financiacion\FinanciacionSQLClass.vb" />
     <Compile Include="Parametros\Direcciones\DireccionesClass.vb" />
     <Compile Include="Parametros\Direcciones\DireccionesSQLClass.vb" />
     <Compile Include="Parametros\Documentos\DocumentosClass.vb" />
