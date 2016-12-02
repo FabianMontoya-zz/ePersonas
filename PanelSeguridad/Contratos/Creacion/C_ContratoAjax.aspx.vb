@@ -19,6 +19,9 @@ Public Class C_ContratoAjax
                 Case "MATRIX_PERSONAS"
                     Carga_MPersonas()
 
+                Case "MATRIX_PRODUCTOS"
+                    Carga_MProductos()
+
                 Case "Cliente"
                     CargarCliente()
 
@@ -96,7 +99,7 @@ Public Class C_ContratoAjax
 #Region "DROP LIST"
 
     ''' <summary>
-    ''' funcion que carga La matrix
+    ''' funcion que carga La matrix Sucursal
     ''' </summary>
     ''' <remarks></remarks>
     Protected Sub Carga_MSucursal()
@@ -111,7 +114,7 @@ Public Class C_ContratoAjax
     End Sub
 
     ''' <summary>
-    ''' funcion que carga La matrix
+    ''' funcion que carga La matrix Moneda
     ''' </summary>
     ''' <remarks></remarks>
     Protected Sub Carga_MMoneda()
@@ -125,7 +128,7 @@ Public Class C_ContratoAjax
     End Sub
 
     ''' <summary>
-    ''' funcion que carga La matrix
+    ''' funcion que carga La matrix Personas
     ''' </summary>
     ''' <remarks></remarks>
     Protected Sub Carga_MPersonas()
@@ -134,6 +137,21 @@ Public Class C_ContratoAjax
 
         Dim ObjList_Matrix As New List(Of ClienteClass)
         ObjList_Matrix = SQL.Matrix_PersonasDep()
+
+        Response.Write(JsonConvert.SerializeObject(ObjList_Matrix.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga La matrix Productos
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub Carga_MProductos()
+
+        Dim SQL As New ProductosSQLClass
+
+        Dim ObjList_Matrix As New List(Of ProductosClass)
+        ObjList_Matrix = SQL.Matrix_Productos()
 
         Response.Write(JsonConvert.SerializeObject(ObjList_Matrix.ToArray()))
 

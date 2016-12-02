@@ -3,6 +3,7 @@ var Matrix_Sucursal = [];
 var Matrix_Moneda = [];
 var Matrix_Sucursal = [];
 var Matrix_Personas = [];
+var Matrix_Productos = [];
 
 var ArrayC_Contrato = [];
 var ArrayEmpresaNit = [];
@@ -25,6 +26,7 @@ $(document).ready(function () {
     transaccionAjax_MPersonas('MATRIX_PERSONAS');
     transacionAjax_MMoneda('MATRIX_MONEDA');
     transaccionAjax_MSucursal('MATRIX_SUCURSAL');
+    transacionAjax_Productos('MATRIX_PRODUCTOS');
 
     Ocultar_IMGS_Errores();
 
@@ -76,7 +78,7 @@ $(document).ready(function () {
         }
     });
 
-    Picker_Fechas();    
+    Picker_Fechas();
 
     $(function () { //Función del acordeon
         $("#Acordeon_Contrato").accordion({
@@ -87,8 +89,14 @@ $(document).ready(function () {
 
 
     Change_Select_Nit();
-    Change_Select_H_Cliente();
+    Change_Select_Sucursal();
+    Change_Select_Persona();
     Change_Select_Moneda();
+    Change_Select_Producto();
+    Change_Select_Condicion_Financiacion();
+    Change_Select_Unidad_Tiempo();
+    Change_Select_Ciclo();
+    Change_Select_Base_Calculo();
     Format_Adress("Txt_Adress_C");
 });
 
@@ -116,7 +124,7 @@ function Ocultar_IMGS_Errores() {
     $("#Img17").css("display", "none");
     $("#Img18").css("display", "none");
     $("#Img19").css("display", "none");
-    
+
 }
 
 //Función de control del picker de las fechas
@@ -141,25 +149,49 @@ function btnSalir() {
 //carga el combo 
 function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_EmpresaNit").val() == "-1") {
+            $("#Img1").css("display", "inline-table");
+        } else {
+            $("#Img1").css("display", "none");
+        }
         var index_ID = this.value;
         Charge_Combos_Depend_Nit(Matrix_Sucursal, "Select_Sucursal_C", index_ID, "");
         Charge_Combo_Persona(Matrix_Personas, "Select_Persona_C", index_ID, "");
-
+        Charge_Combos_Depend_Nit(Matrix_Productos, "Select_Producto", index_ID, "");
     });
 }
 
-//sacamos documento y tipo de documento requerido para contrato
-function Change_Select_H_Cliente() {
-    $("#Select_H_Cliente").change(function () {
-        var Str_H_cliente = $("#Select_H_Cliente option:selected").html();
-        var SplitCliente = Str_H_cliente.split(" - ");
-        T_Doc = SplitCliente[0];
-        Doc = SplitCliente[1];
+function Change_Select_Sucursal() {
+    $("#Select_Sucursal_C").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_Sucursal_C").val() == "-1") {
+            $("#Img7").css("display", "inline-table");
+        } else {
+            $("#Img7").css("display", "none");
+        }
+    });
+}
+
+function Change_Select_Persona() {
+    $("#Select_Persona_C").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_Persona_C").val() == "-1") {
+            $("#Img6").css("display", "inline-table");
+        } else {
+            $("#Img6").css("display", "none");
+        }
     });
 }
 
 function Change_Select_Moneda() {
     $("#Select_Moneda_C").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_Moneda_C").val() == "-1") {
+            $("#Img8").css("display", "inline-table");
+        } else {
+            $("#Img8").css("display", "none");
+        }
         var index_ID = this.value;
         for (item in Matrix_Moneda) {
             if (Matrix_Moneda[item].MonedaCod_ID == index_ID) {
@@ -169,6 +201,61 @@ function Change_Select_Moneda() {
                 $("#L_Moneda_3").html(Matrix_Moneda[item].Sigla);
                 $("#L_Moneda_4").html(Matrix_Moneda[item].Sigla);
             }
+        }
+    });
+}
+
+function Change_Select_Producto() {
+    $("#Select_Producto").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_Producto").val() == "-1") {
+            $("#Img9").css("display", "inline-table");
+        } else {
+            $("#Img9").css("display", "none");
+        }
+    });
+}
+
+function Change_Select_Condicion_Financiacion() {
+    $("#Select_Condicion_Financiacion").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_Condicion_Financiacion").val() == "-1") {
+            $("#Img10").css("display", "inline-table");
+        } else {
+            $("#Img10").css("display", "none");
+        }
+    });
+}
+
+function Change_Select_Unidad_Tiempo() {
+    $("#Select_Tiempo").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_Tiempo").val() == "-1") {
+            $("#Img11").css("display", "inline-table");
+        } else {
+            $("#Img11").css("display", "none");
+        }
+    });
+}
+
+function Change_Select_Ciclo() {
+    $("#Select_Ciclo").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_Ciclo").val() == "-1") {
+            $("#Img14").css("display", "inline-table");
+        } else {
+            $("#Img14").css("display", "none");
+        }
+    });
+}
+
+function Change_Select_Base_Calculo() {
+    $("#Select_Base_Calculo").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_Base_Calculo").val() == "-1") {
+            $("#Img15").css("display", "inline-table");
+        } else {
+            $("#Img15").css("display", "none");
         }
     });
 }
@@ -193,8 +280,8 @@ function validarCamposCrear() {
     var Campo_2 = $("#Select_Sucursal_C").val(); //Img7
     var Campo_3 = $("#TXT_ID_Colocacion").val(); //Img2
     var Campo_4 = $("#TXT_Descripcion").val(); //Img3
-    var Campo_5 = $("#").val(); //Img4
-    var Campo_6 = $("#").val(); //Img5
+    //var Campo_5 = $("#").val(); //Img4 - Es el Warning ---           ------           --- No está agregado en la condición
+    //var Campo_6 = $("#").val(); //Img5 - No existe [No se está usando está imagen]    --- No está agregado en la condición
     var Campo_7 = $("#Select_Persona_C").val(); //Img6
     var Campo_8 = $("#Select_Moneda_C").val(); //img8
     var Campo_9 = $("#Select_Producto").val(); //Img9
@@ -204,52 +291,117 @@ function validarCamposCrear() {
     var Campo_13 = $("#TXT_Plazo").val(); //Img13
     var Campo_14 = $("#Select_Ciclo").val(); //Img14
     var Campo_15 = $("#Select_Base_Calculo").val(); //Img15
-    var Campo_16 = $("#Select_Correspondencia").val(); //Img16
+    var Campo_16 = $("#Txt_Adress_C").val(); //Img16
     var Campo_17 = $("#TXT_Valor_Total").val(); //Img17
-    var Campo_5 = $("#TXT_Valor_Financiado").val(); //Img18
-    var Campo_5 = $("#TXT_Valor_Opcion_Compra").val(); //Img19
+    var Campo_18 = $("#TXT_Valor_Financiado").val(); //Img18
+    var Campo_19 = $("#TXT_Valor_Opcion_Compra").val(); //Img19
 
     var validar = 0;
 
-    if (Campo_6 == "-1" || Campo_5 == "-1" || Campo_4 == "-1" || Campo_3 == "" || Campo_2 == "" || Campo_1 == "-1") {
+    if (Campo_2 == "-1" || Campo_2 == "-1" || Campo_3 == "" || Campo_4 == "" || Campo_7 == "-1" || Campo_8 == "-1" || Campo_9 == "-1" || Campo_10 == "-1" || Campo_11 == "-1" || Campo_12 == "" || Campo_13 == "" || Campo_14 == "-1" || Campo_15 == "-1" || Campo_16 == "-1" || Campo_17 == "" || Campo_18 == "" || Campo_19 == "") {
         validar = 1;
-        if (Campo_1 == "-1") {
+        //--1--
+        if (Campo_1 == "-1" || Campo_1 == "" || Campo_1 == null) {
             $("#Img1").css("display", "inline-table");
-        }
-        else {
+        } else {
             $("#Img1").css("display", "none");
         }
-        if (Campo_2 == "") {
-            $("#Img2").css("display", "inline-table");
-        }
-        else {
-            $("#Img2").css("display", "none");
-        }
-        if (Campo_3 == "") {
-            $("#Img3").css("display", "inline-table");
-        }
-        else {
-            $("#Img3").css("display", "none");
-        }
-        if (Campo_4 == "-1") {
-            $("#Img5").css("display", "inline-table");
-        }
-        else {
-            $("#Img5").css("display", "none");
-        }
-        if (Campo_5 == "-1") {
-            $("#Img6").css("display", "inline-table");
-        }
-        else {
-            $("#Img6").css("display", "none");
-        }
-        if (Campo_6 == "-1") {
+        //--2--
+        if (Campo_2 == "-1" || Campo_2 == "" || Campo_2 == null) {
             $("#Img7").css("display", "inline-table");
-        }
-        else {
+        } else {
             $("#Img7").css("display", "none");
         }
-
+        //--3--
+        if (Campo_3 == "") {
+            $("#Img2").css("display", "inline-table");
+        } else {
+            $("#Img2").css("display", "none");
+        }
+        //--4--
+        if (Campo_4 == "") {
+            $("#Img3").css("display", "inline-table");
+        } else {
+            $("#Img3").css("display", "none");
+        }
+        //--7--
+        if (Campo_7 == "-1" || Campo_7 == "" || Campo_7 == null) {
+            $("#Img6").css("display", "inline-table");
+        } else {
+            $("#Img6").css("display", "none");
+        }
+        //--8--
+        if (Campo_8 == "-1" || Campo_8 == "" || Campo_8 == null) {
+            $("#Img8").css("display", "inline-table");
+        } else {
+            $("#Img8").css("display", "none");
+        }
+        //--9--
+        if (Campo_9 == "-1" || Campo_9 == "" || Campo_9 == null) {
+            $("#Img9").css("display", "inline-table");
+        } else {
+            $("#Img9").css("display", "none");
+        }
+        //--10--
+        if (Campo_10 == "-1" || Campo_10 == "" || Campo_10 == null) {
+            $("#Img10").css("display", "inline-table");
+        } else {
+            $("#Img10").css("display", "none");
+        }
+        //--11--
+        if (Campo_11 == "-1" || Campo_11 == "" || Campo_11 == null) {
+            $("#Img11").css("display", "inline-table");
+        } else {
+            $("#Img11").css("display", "none");
+        }
+        //--12--
+        if (Campo_12 == "") {
+            $("#Img12").css("display", "inline-table");
+        } else {
+            $("#Img12").css("display", "none");
+        }
+        //--13--
+        if (Campo_13 == "") {
+            $("#Img13").css("display", "inline-table");
+        } else {
+            $("#Img13").css("display", "none");
+        }
+        //--14--
+        if (Campo_14 == "-1" || Campo_14 == null || Campo_14 == "") {
+            $("#Img14").css("display", "inline-table");
+        } else {
+            $("#Img14").css("display", "none");
+        }
+        //--15--
+        if (Campo_15 == "-1" || Campo_15 == "" || Campo_15 == null) {
+            $("#Img15").css("display", "inline-table");
+        } else {
+            $("#Img15").css("display", "none");
+        }
+        //--16--
+        if (Campo_16 == "-1" || Campo_16 == "") {
+            $("#Img16").css("display", "inline-table");
+        } else {
+            $("#Img16").css("display", "none");
+        }
+        //--17--
+        if (Campo_17 == "") {
+            $("#Img17").css("display", "inline-table");
+        } else {
+            $("#Img17").css("display", "none");
+        }
+        //--18--
+        if (Campo_18 == "") {
+            $("#Img18").css("display", "inline-table");
+        } else {
+            $("#Img18").css("display", "none");
+        }
+        //--19--
+        if (Campo_19 == "") {
+            $("#Img19").css("display", "inline-table");
+        } else {
+            $("#Img19").css("display", "none");
+        }
     }
     else {
         Ocultar_IMGS_Errores();
@@ -264,9 +416,7 @@ function x() {
 
 //limpiar campos
 function Clear() {
-
-    $("#Txt_ID").val("");
-
+    /*[Todo el código para limpiar los campos]*/
 }
 
 function Add_Activos(index) {

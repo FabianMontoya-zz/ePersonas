@@ -790,10 +790,9 @@ Public Class ProductosSQLClass
                     objProductos.Nit_ID = ReadConsulta.GetValue(0)
                     objProductos.Producto_ID = ReadConsulta.GetValue(1)
                     objProductos.Descripcion = ReadConsulta.GetValue(2)
-                    objProductos.STP_ID = ReadConsulta.GetValue(3)
-                    objProductos.TP_ID = ReadConsulta.GetValue(4)
-                    objProductos.STP_ID = ReadConsulta.GetValue(5)
-                   
+                    objProductos.TP_ID = ReadConsulta.GetValue(3)
+                    objProductos.STP_ID = ReadConsulta.GetValue(4)
+
                     'agregamos a la lista
                     ObjListProductos.Add(objProductos)
 
@@ -854,11 +853,12 @@ Public Class ProductosSQLClass
         Dim sql As New StringBuilder
 
         sql.Append(" SELECT  PRO_Nit_ID, " & _
-                              "                PRO_producto_ID, " & _
-                              "                PRO_Descripcion , " & _
-                              "                PRO_TP_ID, " & _
-                              "                PRO_STP_ID  " & _
-                              " FROM PRODUCTOS ")
+                   "         PRO_producto_ID, " & _
+                   "         PRO_Descripcion , " & _
+                   "         PRO_TP_ID, " & _
+                   "         PRO_STP_ID " & _
+                   " FROM PRODUCTOS " & _
+                   " ORDER BY PRO_producto_ID ASC")
         Dim StrQuery As String = sql.ToString
 
         ObjList = listProductos(StrQuery, Conexion, "Matrix")

@@ -82,6 +82,32 @@ function transaccionAjax_MPersonas(State) {
 
 /*------------------------------ crear ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
+function transacionAjax_Productos(State) {
+    $.ajax({
+        url: "C_ContratoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'Producto'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_Productos = [];
+            }
+            else {
+                Matrix_Productos = JSON.parse(result);
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+/*------------------------------ crear ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax_C_Contrato_create(State) {
     var SC;
 

@@ -121,8 +121,7 @@
                                 <select id="Select_Persona_C" class="C_Chosen">
                                 </select>
                             </td>
-                            <td style="width: 6%; padding-bottom: 25px;" colspan="3"></td>
-                            <td style="padding-bottom: 25px; width: 40%;">
+                            <td style="padding-bottom: 25px; width: 43.5%;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img6"
                                         src="../../images/error.png" />
@@ -242,7 +241,7 @@
                             </td>
                         </tr>
                     </table>
-                    <table id="T_Correspondiente" style="width: 100%;">
+                    <table id="T_Direccion_Correspondiente" style="width: 100%;">
                         <tr>
                             <td style="width: 10.5%;" class="Label_Bold">Dirección de Correspondencia
                             </td>
