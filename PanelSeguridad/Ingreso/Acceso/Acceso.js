@@ -307,7 +307,7 @@ function SearchPersona() {
 
             switch (GrpDoc) {
                 case 0:
-                    Mensaje_General("Proceso Imcompleto", "La persona no tiene Grupo de ducumentos asignados, comuniquese con el administrador del sistema!", "E");
+                    Mensaje_General("Proceso Imcompleto", "La persona no tiene (Grupo de Documentos) asignados, comuniquese con el administrador del sistema!", "E");
                     break;
                 default:
                     HabilitaCombosIngreso();
@@ -342,7 +342,7 @@ function SearchEmpresa() {
 
             switch (GrpDoc) {
                 case 0:
-                    Mensaje_General("Proceso Imcompleto", "La Empresa de la persona no tiene Grupo de ducumentos asignados, comuniquese con el administrador del sistema!", "E");
+                    Mensaje_General("Proceso Imcompleto", "La Empresa de la persona no tiene (Grupo de Documentos) asignados, comuniquese con el administrador del sistema!", "E");
                     break;
                 default:
                     console.log(GrpDoc);
