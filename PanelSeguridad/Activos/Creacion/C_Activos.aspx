@@ -353,6 +353,31 @@
                         <td style="width: 10%; padding-bottom: 25px;"></td>
                     </tr>
                 </table>
+                <table id="Tabla_NoFinan" style="width: 100%;">
+                    <tr>
+                        <td class="Title_Bold" colspan="9">Activos NO Financieros
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Label_Bold" style="width: 4.6%;">Fecha contable Recibo
+                        </td>
+                        <td style="width: 10%;">
+                            <span class="cssToolTip_Form">
+                                <input id="TxtFecha_Recibo" type="text" readonly="readonly" style="width: 100%;" />
+                                <span class="Spam_AF"></span></span>
+                        </td>
+                        <td style="width: 6.5%; padding-bottom: 25px;"></td>
+                        <td class="Label_Bold" style="width: 6.5%; text-align: right;">Fecha Contable Retiro
+                        </td>
+                        <td style="width: 20%;">
+                            <span class="cssToolTip_Form">
+                                <input id="TxtFecha_Retiro" type="text" readonly="readonly" style="width: 100%;" />
+                                <span class="Spam_AF"></span></span>
+
+                        </td>
+                        <td style="width: 10%; padding-bottom: 25px;"></td>
+                    </tr>
+                </table>
                 <table id="Complementos">
                     <tr>
                         <td>
