@@ -25,6 +25,9 @@ Public Class C_ContratoAjax
                 Case "MATRIX_FINANCIACION"
                     Carga_MFinanciacion()
 
+                Case "Cliente"
+                    CargarCliente()
+
                 Case "crear"
                     InsertC_Contrato()
 
@@ -158,12 +161,28 @@ Public Class C_ContratoAjax
 
         Dim SQL As New FinanciacionSQLClass
 
-        Dim ObjList_Matrix As New List(Of ProductosClass)
+        Dim ObjList_Matrix As New List(Of FinanciacionClass)
         ObjList_Matrix = SQL.Matrix_Financiacion()
 
         Response.Write(JsonConvert.SerializeObject(ObjList_Matrix.ToArray()))
 
     End Sub
+
+    ''' <summary>
+    ''' funcion que carga el objeto DDL consulta
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarCliente()
+
+        Dim SQL As New ClienteSQLClass
+        Dim ObjListDroplist As New List(Of Droplist_Class)
+        Dim vl_S_Tabla As String = Request.Form("tabla")
+
+        ObjListDroplist = SQL.Charge_DropListCliente(vl_S_Tabla)
+        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
+
+    End Sub
+
 #End Region
 
 #Region "FUNCIONES"

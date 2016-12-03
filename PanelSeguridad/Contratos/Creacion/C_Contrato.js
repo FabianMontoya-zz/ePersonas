@@ -28,6 +28,7 @@ $(document).ready(function () {
     transacionAjax_MMoneda('MATRIX_MONEDA');
     transaccionAjax_MSucursal('MATRIX_SUCURSAL');
     transacionAjax_Productos('MATRIX_PRODUCTOS');
+    transacionAjax_Financiacion('MATRIX_FINANCIACION');
 
     Ocultar_IMGS_Errores();
 
@@ -190,7 +191,7 @@ function Change_Select_Moneda() {
     $("#Select_Moneda_C").change(function () {
         /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
         if ($("#Select_Moneda_C").val() == "-1") {
-            $("#Img8").css("display", "inline-table");
+            $("#Img8").css("display", "inline-table"); 
         } else {
             $("#Img8").css("display", "none");
         }

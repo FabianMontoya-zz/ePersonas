@@ -92,25 +92,25 @@ Public Class FinanciacionSQLClass
         Dim sql As New StringBuilder
 
         sql.AppendLine(" SELECT	FIN_Nit_ID, " & _
-                                         "FIN_Financiacion_ID, " & _
-                                         "FIN_Descripcion, " & _
-                                         "FIN_Unidad_Tiempo, " & _
-                                         "FIN_Calculo, " & _
-                                         "FIN_Calculo_Cuota_Final, " & _
-                                         "FIN_Modalidad_Pago, " & _
-                                         "FIN_Periodo_Pago, " & _
-                                         "FIN_Tipo_Cuota, " & _
-                                         "FIN_Formula_FK, " & _
-                                         "FIN_Base_Calculo, " & _
-                                         "FIN_Tasa_FK, " & _
-                                         "FIN_Tipo_Tasa, " & _
-                                         "FIN_Puntos_Adicionales, " & _
-                                         "FIN_Tasa_Mora_FK, " & _
-                                         "FIN_Tasa_Usura_FK, " & _
-                                         "FIN_Ciclo_Cobro_FK, " & _
-                                         "ROW_NUMBER() OVER(ORDER BY FIN_Financiacion_ID ASC) AS Index_Financiacion" & _
-                                         "FROM Financiacion " & _
-                                         "ORDER BY FIN_Nit_ID, FIN_Financiacion_ID ASC")
+                                         " FIN_Financiacion_ID, " & _
+                                         " FIN_Descripcion, " & _
+                                         " FIN_Unidad_Tiempo, " & _
+                                         " FIN_Calculo, " & _
+                                         " FIN_Calculo_Cuota_Final, " & _
+                                         " FIN_Modalidad_Pago, " & _
+                                         " FIN_Periodo_Pago, " & _
+                                         " FIN_Tipo_Cuota, " & _
+                                         " FIN_Formula_FK, " & _
+                                         " FIN_Base_Calculo, " & _
+                                         " FIN_Tasa_FK, " & _
+                                         " FIN_Tipo_Tasa, " & _
+                                         " FIN_Puntos_Adicionales, " & _
+                                         " FIN_Tasa_Mora_FK, " & _
+                                         " FIN_Tasa_Usura_FK, " & _
+                                         " FIN_Ciclo_Cobro_FK, " & _
+                                         " ROW_NUMBER() OVER(ORDER BY FIN_Financiacion_ID ASC) AS Index_Financiacion " & _
+                                         " FROM Financiacion " & _
+                                         " ORDER BY FIN_Nit_ID, FIN_Financiacion_ID ASC")
 
         StrQuery = sql.ToString
 

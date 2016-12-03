@@ -6,21 +6,7 @@ PanelSeguridad
 </name>
 </assembly>
 <members>
-<member name="M:PanelSeguridad.CicloSQLClass.listCiclo(System.String,System.String,System.String)">
-	<summary>
- funcion que trae el listado de Ciclo para armar la tabla
- </summary>
-	<param name="vp_S_StrQuery"></param>
-	<param name="vg_S_StrConexion"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CicloSQLClass.Matrix_Ciclo">
-	<summary>
- Carga matrix de Ciclos
- </summary>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.C_ActivosAjax.InsertC_Activos">
+<member name="M:PanelSeguridad.C_ActivosAjax.InsertC_Activos">
 	<summary>
  funcion que inserta en la tabla C_Activos (INSERT)
  </summary>
@@ -2297,6 +2283,11 @@ To modify move field declaration from designer file to code-behind file.
  funcion que carga La matrix Financiacion
  </summary>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.CargarCliente">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.DocumentoSQLClass.Read_AllDocumento(System.String,System.String,System.String)">
 	<summary>
  creala consulta para la tabla Documento parametrizada (READ)
@@ -3992,6 +3983,20 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
 	<summary>
  funcion que carga el objeto DDL consulta
  </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CicloSQLClass.listCiclo(System.String,System.String,System.String)">
+	<summary>
+ funcion que trae el listado de Ciclo para armar la tabla
+ </summary>
+	<param name="vp_S_StrQuery"></param>
+	<param name="vg_S_StrConexion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CicloSQLClass.Matrix_Ciclo">
+	<summary>
+ Carga matrix de Ciclos
+ </summary>
+	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.MonedaCodSQLClass.Read_AllMonedaCod(System.String,System.String,System.String)">
 	<summary>
