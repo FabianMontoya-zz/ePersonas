@@ -36,7 +36,6 @@ Public Class FinanciacionSQLClass
             Case "Matrix"
                 'recorremos la consulta por la cantidad de datos en la BD
                 While ReadConsulta.Read
-
                     Dim objFinanciacion As New FinanciacionClass
                     'cargamos datos sobre el objeto de login
                     objFinanciacion.Nit_ID = ReadConsulta.GetValue(0)
@@ -60,7 +59,6 @@ Public Class FinanciacionSQLClass
                     objFinanciacion.Tasa_Usura_FK = ReadConsulta.GetValue(15)
                     objFinanciacion.Ciclo_Cobro_FK = ReadConsulta.GetValue(16)
                     objFinanciacion.Index = ReadConsulta.GetValue(17)
-
                     'agregamos a la lista
                     ObjListFinanciacion.Add(objFinanciacion)
                 End While
