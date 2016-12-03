@@ -3,6 +3,7 @@ var Matrix_Sucursal = [];
 var Matrix_Moneda = [];
 var Matrix_Sucursal = [];
 var Matrix_Personas = [];
+var Matrix_Ciclo = [];
 var Matrix_Productos = [];
 var Matrix_Financiacion = [];
 
@@ -15,7 +16,6 @@ var ID;
 var T_Doc;
 var Doc;
 
-
 /*--------------- region de variables globales --------------------*/
 
 //Evento load JS
@@ -27,6 +27,7 @@ $(document).ready(function () {
     transaccionAjax_MPersonas('MATRIX_PERSONAS');
     transacionAjax_MMoneda('MATRIX_MONEDA');
     transaccionAjax_MSucursal('MATRIX_SUCURSAL');
+    transaccionAjax_MCiclo('MATRIX_CICLO');
     transacionAjax_Productos('MATRIX_PRODUCTOS');
     transacionAjax_Financiacion('MATRIX_FINANCIACION');
 
@@ -97,7 +98,6 @@ $(document).ready(function () {
     Change_Select_Producto();
     Change_Select_Condicion_Financiacion();
     Change_Select_Unidad_Tiempo();
-    Change_Select_Ciclo();
     Change_Select_Base_Calculo();
     Format_Adress("Txt_Adress_C");
 });
@@ -191,7 +191,7 @@ function Change_Select_Moneda() {
     $("#Select_Moneda_C").change(function () {
         /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
         if ($("#Select_Moneda_C").val() == "-1") {
-            $("#Img8").css("display", "inline-table"); 
+            $("#Img8").css("display", "inline-table");
         } else {
             $("#Img8").css("display", "none");
         }
@@ -233,6 +233,17 @@ function Change_Select_Condicion_Financiacion() {
         } else {
             $("#Img10").css("display", "none");
         }
+
+        var index_ID = this.value; //el value es el index
+        index_ID = parseInt(index_ID) - 1;
+        var tiempo = Matrix_Financiacion[index_ID].Unidad_Tiempo;
+        var baseCalculo = Matrix_Financiacion[index_ID].Base_Calculo;
+        var ciclo = Matrix_Financiacion[index_ID].Ciclo_Cobro_FK;
+
+        $("#Select_Tiempo").val(tiempo).trigger("chosen:updated");
+        $("#Select_Base_Calculo").val(baseCalculo).trigger("chosen:updated");
+        $("#Select_Ciclo").val(ciclo).trigger("chosen:updated");
+        CambiarTiempo(tiempo);
     });
 }
 
@@ -246,24 +257,22 @@ function Change_Select_Unidad_Tiempo() {
         }
 
         var index_ID = this.value;
-        if (index_ID == "D") {
-            $("#L_Tiempo").html("Días");
-        } else if (index_ID == "M") {
-            $("#L_Tiempo").html("Meses");
-        } else if (index_ID == "S") {
-            $("#L_Tiempo").html("Semestres");
-        } else if (index_ID == "Y") {
-            $("#L_Tiempo").html("Años");
-        } else {
-            $("#L_Tiempo").html("");
-        }
+        CambiarTiempo(index_ID);
     });
 }
 
-function Change_Select_Ciclo() {
-    $("#Select_Ciclo").change(function () {
-        /*El campo no es obligatorio así que no se valida selección*/        
-    });
+function CambiarTiempo(index_ID) {
+    if (index_ID == "D") {
+        $("#L_Tiempo").html("Días");
+    } else if (index_ID == "M") {
+        $("#L_Tiempo").html("Meses");
+    } else if (index_ID == "S") {
+        $("#L_Tiempo").html("Semestres");
+    } else if (index_ID == "Y") {
+        $("#L_Tiempo").html("Años");
+    } else {
+        $("#L_Tiempo").html("");
+    }
 }
 
 function Change_Select_Base_Calculo() {

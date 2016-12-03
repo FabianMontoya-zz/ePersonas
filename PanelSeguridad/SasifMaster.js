@@ -817,8 +817,14 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
         case "Select_Condicion_Financiacion":
             for (Item in Matrix) {
                 if ((Matrix[Item].Nit_ID == Nit) || (Matrix[Item].Nit_ID == 0)) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Financiacion_ID + "'>" + Matrix[Item].Nit_ID + " - " + Matrix[Item].Financiacion_ID + " - " + Matrix[Item].Descripcion + "</option>");
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'>" + Matrix[Item].Nit_ID + " - " + Matrix[Item].Financiacion_ID + " - " + Matrix[Item].Descripcion + "</option>");
                 }
+            }
+            break;
+
+        case "Select_Ciclo":
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].ID_Ciclo + "'> " + Matrix[Item].ID_Ciclo + "</option>");
             }
             break;
     }

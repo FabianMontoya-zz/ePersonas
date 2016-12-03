@@ -76,11 +76,11 @@ Public Class CicloSQLClass
         Dim sql As New StringBuilder
 
         sql.AppendLine(" SELECT  CIC_ID_Ciclo, " & _
-                                                     "CIC_Fecha_Corte, " & _
-                                                     "CIC_Fecha_Pago, " & _
-                                                     "ROW_NUMBER() OVER(ORDER BY CIC_ID_Ciclo ASC) AS Index_Ciclo" & _
-                                    "FROM CICLO " & _
-                                    "ORDER BY CIC_ID_Ciclo ASC")
+                                                     " CIC_Fecha_Corte, " & _
+                                                     " CIC_Fecha_Pago, " & _
+                                                     " ROW_NUMBER() OVER(ORDER BY CIC_ID_Ciclo ASC) AS Index_Ciclo " & _
+                                    " FROM CICLO " & _
+                                    " ORDER BY CIC_ID_Ciclo ASC")
 
         StrQuery = sql.ToString
 

@@ -25,6 +25,9 @@ Public Class C_ContratoAjax
                 Case "MATRIX_FINANCIACION"
                     Carga_MFinanciacion()
 
+                Case "MATRIX_CICLO"
+                    Carga_MCiclo()
+
                 Case "Cliente"
                     CargarCliente()
 
@@ -180,6 +183,21 @@ Public Class C_ContratoAjax
 
         ObjListDroplist = SQL.Charge_DropListCliente(vl_S_Tabla)
         Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga La matrix Ciclo
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub Carga_MCiclo()
+
+        Dim SQL As New CicloSQLClass
+
+        Dim ObjList_Matrix As New List(Of CicloClass)
+        ObjList_Matrix = SQL.Matrix_Ciclo()
+
+        Response.Write(JsonConvert.SerializeObject(ObjList_Matrix.ToArray()))
 
     End Sub
 

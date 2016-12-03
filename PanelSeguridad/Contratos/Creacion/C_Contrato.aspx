@@ -105,7 +105,7 @@
                                     <span class="Spam_AST"></span></span>
                             </td>
                             <td style="padding-bottom: 25px; width: 15%;">
-                                <span class="cssToolTip">
+                                <span class="cssToolTip_L">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img3"
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
@@ -162,12 +162,12 @@
                             </td>
                             <td class="Label_Bold" style="width: 10%;">Condición de Financiación
                             </td>
-                            <td style="width: 30%;">
+                            <td style="width: 36%;">
                                 <select id="Select_Condicion_Financiacion" class="C_Chosen">
                                 </select>
                             </td>
-                            <td style="padding-bottom: 25px; width: 35%;">
-                                <span class="cssToolTip">
+                            <td style="padding-bottom: 25px; width: 28%;">
+                                <span class="cssToolTip_L">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img10"
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
@@ -248,7 +248,7 @@
                                     </select>
                             </td>
                             <td style="padding-bottom: 25px; width: 35%;">
-                                <span class="cssToolTip">
+                                <span class="cssToolTip_L">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img15"
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
@@ -265,7 +265,7 @@
                                     <span class="Spam_A_Addres"></span></span>
                             </td>
                             <td style="padding-bottom: 15px; width: 9%;">
-                                <span class="cssToolTip">
+                                <span class="cssToolTip_L">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img16"
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
@@ -324,7 +324,7 @@
                                     <span class="Spam_AVal"></span></span>
                             </td>
                             <td style="padding-bottom: 25px; width: 40%;">
-                                <span class="cssToolTip_L">
+                                <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img19"
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
@@ -335,7 +335,9 @@
                 <h3>Condiciones Financieras
                 </h3>
                 <div id="Div_Condiciones_Financieras">
-                    <table></table>
+                    <table id="Condiciones">
+
+                    </table>
                 </div>
                 <h3>Añadir Activos
                 </h3>

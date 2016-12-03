@@ -157,6 +157,35 @@ function transacionAjax_Financiacion(State) {
     });
 }
 
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_MCiclo(State) {
+    $.ajax({
+        url: "C_ContratoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'Ciclo'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_Ciclo = [];
+            }
+            else {
+                Matrix_Ciclo = JSON.parse(result);
+                Charge_Combos_Depend_Nit(Matrix_Ciclo, "Select_Ciclo", "", "");
+                
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+
 /*------------------------------ crear ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax_C_Contrato_create(State) {
