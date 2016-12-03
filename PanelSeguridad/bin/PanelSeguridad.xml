@@ -394,6 +394,20 @@ PanelSeguridad
  </summary>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.FinanciacionSQLClass.listFinanciacion(System.String,System.String,System.String)">
+	<summary>
+ funcion que trae el listado de Financiacion para armar la tabla
+ </summary>
+	<param name="vp_S_StrQuery"></param>
+	<param name="vg_S_StrConexion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.FinanciacionSQLClass.Matrix_Financiacion">
+	<summary>
+ Carga matrix de Financiacions
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.C_ContratoSQLClass.InsertC_Contrato(PanelSeguridad.C_ContratoClass)">
 	<summary>
  funcion que crea el query para la insercion de nuevo C_Contrato (INSERT)
@@ -1081,7 +1095,7 @@ PanelSeguridad
 	<param name="vp_S_ID"></param>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.ProductosSQLClass.listProductos(System.String,System.String)">
+</member><member name="M:PanelSeguridad.ProductosSQLClass.listProductos(System.String,System.String,System.String)">
 	<summary>
  funcion que trae el listado de Productos para armar la tabla
  </summary>
@@ -1094,6 +1108,12 @@ PanelSeguridad
  funcion que valida si esta repetido el registro a ingresar
  </summary>
 	<param name="vp_O_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.ProductosSQLClass.Matrix_Productos">
+	<summary>
+ lee la matriz de Productos
+ </summary>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.R_Persona_TarjetaSQLClass.InsertR_Persona_Tarjeta(PanelSeguridad.R_Persona_TarjetaClass)">
@@ -2240,17 +2260,22 @@ To modify move field declaration from designer file to code-behind file.
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_MSucursal">
 	<summary>
- funcion que carga La matrix
+ funcion que carga La matrix Sucursal
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_MMoneda">
 	<summary>
- funcion que carga La matrix
+ funcion que carga La matrix Moneda
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_MPersonas">
 	<summary>
- funcion que carga La matrix
+ funcion que carga La matrix Personas
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_MProductos">
+	<summary>
+ funcion que carga La matrix Productos
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.C_ContratoAjax.Cargar_EstadoContrato">
