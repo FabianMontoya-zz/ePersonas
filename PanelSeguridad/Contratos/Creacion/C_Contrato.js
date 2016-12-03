@@ -4,6 +4,7 @@ var Matrix_Moneda = [];
 var Matrix_Sucursal = [];
 var Matrix_Personas = [];
 var Matrix_Productos = [];
+var Matrix_Financiacion = [];
 
 var ArrayC_Contrato = [];
 var ArrayEmpresaNit = [];
@@ -159,6 +160,7 @@ function Change_Select_Nit() {
         Charge_Combos_Depend_Nit(Matrix_Sucursal, "Select_Sucursal_C", index_ID, "");
         Charge_Combo_Persona(Matrix_Personas, "Select_Persona_C", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Productos, "Select_Producto", index_ID, "");
+        Charge_Combos_Depend_Nit(Matrix_Financiacion, "Select_Condicion_Financiacion", index_ID, "");
     });
 }
 

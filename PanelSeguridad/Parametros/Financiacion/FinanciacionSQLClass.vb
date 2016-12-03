@@ -119,5 +119,6 @@ Public Class FinanciacionSQLClass
         Return ObjListFinanciacion
 
     End Function
+
 #End Region
 End Class

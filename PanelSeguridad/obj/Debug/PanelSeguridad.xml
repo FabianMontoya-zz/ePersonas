@@ -6,7 +6,21 @@ PanelSeguridad
 </name>
 </assembly>
 <members>
-<member name="M:PanelSeguridad.C_ActivosAjax.InsertC_Activos">
+<member name="M:PanelSeguridad.CicloSQLClass.listCiclo(System.String,System.String,System.String)">
+	<summary>
+ funcion que trae el listado de Ciclo para armar la tabla
+ </summary>
+	<param name="vp_S_StrQuery"></param>
+	<param name="vg_S_StrConexion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CicloSQLClass.Matrix_Ciclo">
+	<summary>
+ Carga matrix de Ciclos
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosAjax.InsertC_Activos">
 	<summary>
  funcion que inserta en la tabla C_Activos (INSERT)
  </summary>
@@ -2278,19 +2292,9 @@ To modify move field declaration from designer file to code-behind file.
  funcion que carga La matrix Productos
  </summary>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.C_ContratoAjax.Cargar_EstadoContrato">
+</member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_MFinanciacion">
 	<summary>
- funcion que carga el objeto DDL consulta
- </summary>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.C_ContratoAjax.CargarCliente">
-	<summary>
- funcion que carga el objeto DDL consulta
- </summary>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.C_ContratoAjax.Cargar_HijoCliente">
-	<summary>
- funcion que carga el objeto DDL consulta
+ funcion que carga La matrix Financiacion
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.DocumentoSQLClass.Read_AllDocumento(System.String,System.String,System.String)">

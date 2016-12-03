@@ -22,16 +22,9 @@ Public Class C_ContratoAjax
                 Case "MATRIX_PRODUCTOS"
                     Carga_MProductos()
 
-                Case "Cliente"
-                    CargarCliente()
+                Case "MATRIX_FINANCIACION"
+                    Carga_MFinanciacion()
 
-                Case "Hijo_Cliente"
-                    Cargar_HijoCliente()
-
-                Case "Estado"
-                    Cargar_EstadoContrato()
-
-                
                 Case "crear"
                     InsertC_Contrato()
 
@@ -158,51 +151,19 @@ Public Class C_ContratoAjax
     End Sub
 
     ''' <summary>
-    ''' funcion que carga el objeto DDL consulta
+    ''' funcion que carga La matrix Financiacion
     ''' </summary>
     ''' <remarks></remarks>
-    Protected Sub Cargar_EstadoContrato()
+    Protected Sub Carga_MFinanciacion()
 
-        Dim SQL As New C_ContratoSQLClass
-        Dim ObjListDroplist As New List(Of Droplist_Class)
-        Dim vl_S_Tabla As String = Request.Form("tabla")
+        Dim SQL As New FinanciacionSQLClass
 
-        ObjListDroplist = SQL.Charge_DropListEstado_Contrato(vl_S_Tabla)
-        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
+        Dim ObjList_Matrix As New List(Of ProductosClass)
+        ObjList_Matrix = SQL.Matrix_Financiacion()
 
-    End Sub
-
-    ''' <summary>
-    ''' funcion que carga el objeto DDL consulta
-    ''' </summary>
-    ''' <remarks></remarks>
-    Protected Sub CargarCliente()
-
-        Dim SQL As New ClienteSQLClass
-        Dim ObjListDroplist As New List(Of Droplist_Class)
-        Dim vl_S_Tabla As String = Request.Form("tabla")
-
-        ObjListDroplist = SQL.Charge_DropListCliente(vl_S_Tabla)
-        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
+        Response.Write(JsonConvert.SerializeObject(ObjList_Matrix.ToArray()))
 
     End Sub
-
-    ''' <summary>
-    ''' funcion que carga el objeto DDL consulta
-    ''' </summary>
-    ''' <remarks></remarks>
-    Protected Sub Cargar_HijoCliente()
-
-        Dim SQL As New C_ContratoSQLClass
-        Dim ObjListDroplist As New List(Of Droplist_Class)
-        Dim vl_S_ID As String = Request.Form("ID")
-
-        ObjListDroplist = SQL.Charge_DropListHijo_Cliente(vl_S_ID)
-        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
-
-    End Sub
-
-
 #End Region
 
 #Region "FUNCIONES"
