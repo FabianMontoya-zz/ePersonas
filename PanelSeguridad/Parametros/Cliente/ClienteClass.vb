@@ -539,4 +539,101 @@
         End Set
     End Property
 #End Region
+
+#Region "Campos Direccion"
+    Private _Telefono_1 As String
+    Private _Telefono_2 As String
+    Private _Telefono_3 As String
+    Private _Telefono_4 As String
+    Private _Tipo_1 As String
+    Private _Tipo_2 As String
+    Private _Tipo_3 As String
+    Private _Tipo_4 As String
+    Private _Correo_1 As String
+    Private _Correo_2 As String
+#End Region
+
+#Region "Propiedades Direccion"
+    Public Property Telefono_1() As String
+        Get
+            Return Me._Telefono_1
+        End Get
+        Set(ByVal value As String)
+            Me._Telefono_1 = value
+        End Set
+    End Property
+    Public Property Telefono_2() As String
+        Get
+            Return Me._Telefono_2
+        End Get
+        Set(ByVal value As String)
+            Me._Telefono_2 = value
+        End Set
+    End Property
+    Public Property Telefono_3() As String
+        Get
+            Return Me._Telefono_3
+        End Get
+        Set(ByVal value As String)
+            Me._Telefono_3 = value
+        End Set
+    End Property
+    Public Property Telefono_4() As String
+        Get
+            Return Me._Telefono_4
+        End Get
+        Set(ByVal value As String)
+            Me._Telefono_4 = value
+        End Set
+    End Property
+    Public Property Tipo_1() As String
+        Get
+            Return Me._Tipo_1
+        End Get
+        Set(ByVal value As String)
+            Me._Tipo_1 = value
+        End Set
+    End Property
+    Public Property Tipo_2() As String
+        Get
+            Return Me._Tipo_2
+        End Get
+        Set(ByVal value As String)
+            Me._Tipo_2 = value
+        End Set
+    End Property
+    Public Property Tipo_3() As String
+        Get
+            Return Me._Tipo_3
+        End Get
+        Set(ByVal value As String)
+            Me._Tipo_3 = value
+        End Set
+    End Property
+    Public Property Tipo_4() As String
+        Get
+            Return Me._Tipo_4
+        End Get
+        Set(ByVal value As String)
+            Me._Tipo_4 = value
+        End Set
+    End Property
+    Public Property Correo_1() As String
+        Get
+            Return Me._Correo_1
+        End Get
+        Set(ByVal value As String)
+            Me._Correo_1 = value
+        End Set
+    End Property
+    Public Property Correo_2() As String
+        Get
+            Return Me._Correo_2
+        End Get
+        Set(ByVal value As String)
+            Me._Correo_2 = value
+        End Set
+    End Property
+#End Region
+
 End Class

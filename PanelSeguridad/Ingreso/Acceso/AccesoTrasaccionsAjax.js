@@ -206,6 +206,57 @@ function transaccionAjax_MPAcceso_Area(State) {
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_MDatosUsuario(State) {
+    $.ajax({
+        url: "AccesoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "User_Porteria": User_Porteria
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "")
+                Matrix_Datos_Empresa = [];
+            else {
+                Matrix_Datos_Empresa = JSON.parse(result);
+                transaccionAjax_MEmpleados("MATRIX_EMPLEADOS", Matrix_Datos_Empresa[0].Nit_ID);
+            }
+        },
+        error: function () {
+        }
+    });
+}
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_MEmpleados(State, Nit_Empresa) {
+    $.ajax({
+        url: "AccesoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "Nit": Nit_Empresa
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_Empleados = [];
+            }
+            else {
+                Matrix_Empleados = JSON.parse(result);
+            }
+        },
+        error: function () {
+        }
+    });
+}
+
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_Documento(State) {
     $.ajax({
         url: "AccesoAjax.aspx",

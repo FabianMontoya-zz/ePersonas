@@ -227,6 +227,17 @@
     text-align: center;
 }
 
+#container_TGrid_New
+{
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    border: solid 1px #CACACA;
+    font: 12px/20px CenturyGothic,sans-serif;
+    text-align: center;
+}
+
+
 #Container_Consulta
 {
     width: 100%;

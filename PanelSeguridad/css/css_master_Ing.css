@@ -126,3 +126,14 @@
     font-weight: bold;
     font-size: small;
 }
+
+/*CONTROL IMAGEN DIRECCION*/
+#logoExt:hover .Ext
+{
+    content: url("../../images/agenda_gray.png");
+}
+
+.Ext
+{
+    content: url("../../images/agenda.png");
+}

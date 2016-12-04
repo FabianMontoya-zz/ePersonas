@@ -35,6 +35,12 @@ Public Class AccesoAjax
                 Case "MATRIX_PACCESO_AREA"
                     CargarMPAccesos_Area()
 
+                Case "MATRIX_PERSONA_INGRESA"
+                    CargaDatosEmpresaEmpleado()
+
+                Case "MATRIX_EMPLEADOS"
+                    CargaEmpleados()
+
                 Case "Save_Log_Ingreso"
                     Save_Log_Ingreso()
 
@@ -195,17 +201,32 @@ Public Class AccesoAjax
     End Sub
 
     ''' <summary>
-    ''' funcion que carga el objeto DDL Links
+    ''' cara la matriz de documento para trabajo
     ''' </summary>
     ''' <remarks></remarks>
-    Protected Sub CargarDroplist()
+    Protected Sub CargaDatosEmpresaEmpleado()
 
-        Dim SQL_Acceso As New AccesoSQLClass
-        Dim ObjListDroplist As New List(Of Droplist_Class)
-        Dim vl_S_Tabla As String = Request.Form("tabla")
+        Dim SQL As New ClienteSQLClass
+        Dim ObjList As New List(Of ClienteClass)
+        Dim vl_S_User As String = Request.Form("User_Porteria")
 
-        ObjListDroplist = SQL_Acceso.ReadCharge_DropList(vl_S_Tabla)
-        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
+        ObjList = SQL.InformacionUsuario(UCase(vl_S_User))
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' carga la matriz de datos de los empleados
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargaEmpleados()
+
+        Dim SQL As New ClienteSQLClass
+        Dim ObjList As New List(Of ClienteClass)
+        Dim vl_S_Nit As String = Request.Form("Nit")
+
+        ObjList = SQL.Matrix_DatosEmpleados(vl_S_Nit)
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
 

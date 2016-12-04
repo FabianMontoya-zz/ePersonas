@@ -803,6 +803,29 @@ Public Class ClienteSQLClass
 
                 End While
 
+            Case "Matrix_PersonasEmpleados"
+                While ReadConsulta.Read
+
+                    Dim objCliente As New ClienteClass
+                    'cargamos datos sobre el objeto de login
+                    objCliente.Nit_ID = ReadConsulta.GetValue(0)
+                    objCliente.Nombre = ReadConsulta.GetValue(1)
+                    If Not (IsDBNull(ReadConsulta.GetValue(2))) Then objCliente.Tipo_1 = ReadConsulta.GetValue(2) Else objCliente.Tipo_1 = ""
+                    objCliente.Telefono_1 = ReadConsulta.GetValue(3)
+                    If Not (IsDBNull(ReadConsulta.GetValue(4))) Then objCliente.Tipo_2 = ReadConsulta.GetValue(4) Else objCliente.Tipo_2 = ""
+                    objCliente.Telefono_2 = ReadConsulta.GetValue(5)
+                    If Not (IsDBNull(ReadConsulta.GetValue(6))) Then objCliente.Tipo_3 = ReadConsulta.GetValue(6) Else objCliente.Tipo_3 = ""
+                    objCliente.Telefono_3 = ReadConsulta.GetValue(7)
+                    If Not (IsDBNull(ReadConsulta.GetValue(8))) Then objCliente.Tipo_4 = ReadConsulta.GetValue(8) Else objCliente.Tipo_4 = ""
+                    objCliente.Telefono_4 = ReadConsulta.GetValue(9)
+                    objCliente.Correo_1 = ReadConsulta.GetValue(10)
+                    objCliente.Correo_2 = ReadConsulta.GetValue(11)
+
+                    'agregamos a la lista
+                    ObjListCliente.Add(objCliente)
+
+                End While
+
             Case "Matrix_Personas_Documentos"
                 While ReadConsulta.Read
                     Dim obj As New DocumentosClass
@@ -1123,6 +1146,47 @@ Public Class ClienteSQLClass
         Dim StrQuery As String = sql.ToString
 
         ObjList = list(StrQuery, Conexion, "Matrix_Pag_Acceso")
+
+        Return ObjList
+
+    End Function
+
+    ''' <summary>
+    ''' lee matrix para pagina de acceso
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Matrix_DatosEmpleados(ByVal vp_S_NitEmpresa As String)
+
+        Dim ObjList As New List(Of ClienteClass)
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("2")
+        Dim BD_Admin As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDAdmin").ToString
+
+        Dim sql As New StringBuilder
+
+        sql.Append(" SELECT    CLI_Nit_ID, " & _
+                                "                   CLI_Nombre + ' ' + " & _
+                                "                   CASE  WHEN  CLI_Nombre_2  IS NULL THEN ''  ELSE CLI_Nombre_2 END  + ' ' +  " & _
+                                "   				CASE  WHEN  CLI_Apellido_1  IS NULL THEN ''  ELSE CLI_Apellido_1 END  + ' ' +  " & _
+                                "   				CASE  WHEN  CLI_Apellido_2  IS NULL THEN ''  ELSE CLI_Apellido_2 END AS DESCRIPCION, " & _
+                                "                   D_Tipo_1, " & _
+                                "                   D_Telefono_1, " & _
+                                "                   D_Tipo_2 , " & _
+                                "                   D_Telefono_2, " & _
+                                "                   D_Tipo_3 , " & _
+                                "                   D_Telefono_3, " & _
+                                "                   D_Tipo_4 , " & _
+                                "                   D_Telefono_4, " & _
+                                "                   D_Correo_1, " & _
+                                "                   D_Correo_2 " & _
+                                " FROM CLIENTE C   " & _
+                                "   INNER JOIN DIRECCIONES D ON D.D_Nit_ID = C.CLI_Nit_ID AND D.D_Document_ID = C.CLI_Document_ID   " & _
+                                "   WHERE C.CLI_OP_Empleado='S'  AND  " & _
+                                "   CLI_Nit_ID = '" & vp_S_NitEmpresa & "'")
+        Dim StrQuery As String = sql.ToString
+
+        ObjList = list(StrQuery, Conexion, "Matrix_PersonasEmpleados")
 
         Return ObjList
 

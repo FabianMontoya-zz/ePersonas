@@ -21,7 +21,7 @@
                             </td>
                             <td id="Hours" colspan="3" style="width: 70%; text-align: center;"></td>
                             <td id="logoExt" rowspan="2" style="width: 15%; text-align: center;">
-                                    <img id="Agenda" src="../../images/agenda.png" alt="Extenciones" style="height: 60px; width: 60px;" onclick="VerExtenciones()"  />
+                                    <img id="Agenda"  class="Ext" src="" alt="Extenciones" style="height: 60px; width: 60px;" onclick="VerExtenciones()"  />
                             </td>
                         </tr>
                         <tr>

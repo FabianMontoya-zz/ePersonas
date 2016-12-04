@@ -58,6 +58,7 @@ $(document).ready(function () {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //capturar el link y usuario para el proceso
 function ConsultaParametrosURL() {
+
     //capturamos la url
     var URLPage = window.location.search.substring(1);
     var URLVariables = URLPage.split('&');
@@ -69,6 +70,8 @@ function ConsultaParametrosURL() {
         User = URLVariables[0].replace("User=", "");
         Link = URLVariables[1].replace("L_L=", "");
     }
+
+    return User;
 }
 
 //integra los mensajes de error en la pagina

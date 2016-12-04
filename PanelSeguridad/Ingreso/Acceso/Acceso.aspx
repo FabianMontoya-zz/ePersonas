@@ -198,7 +198,7 @@
             <div id="Inf_Ingreso" style="margin-top: 10px; width: 100%;">
                 <div id="Cointainer_ingreso" style="margin-bottom: 10px;">
                 </div>
-                <div id="Control_Ingreso" style="margin-top: 10px; width: 100%; margin-bottom: 10px; text-align:center" >
+                <div id="Control_Ingreso" style="margin-top: 10px; width: 100%; margin-bottom: 10px; text-align: center">
                     <input id="BtnRegistroIngreso" class="BWeb" type="button" value="Registrar Ingreso" style="width: 40%;"
                         onclick="Registrar_Ingreso_Log()" />
                 </div>
@@ -261,5 +261,8 @@
                 </td>
             </tr>
         </table>
+    </div>
+    <div id="Dialog_Extencion">
+        <div id="container_TGrid_New"></div>
     </div>
 </asp:Content>

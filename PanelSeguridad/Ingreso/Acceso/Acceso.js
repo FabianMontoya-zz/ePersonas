@@ -7,12 +7,15 @@ var Matrix_AccesoPredeterminados = [];
 var Matrix_PAcceso = [];
 var Matrix_Area = [];
 var Matrix_PAcceso_Area = [];
+var Matrix_Datos_Empresa = [];
+var Matrix_Empleados = [];
 
 var ArrayAcceso = [];
 var ArrayCombo = [];
 var ArrayAccesoDep = [];
 var ArraySeguridad = [];
 var ArrayTdoc = [];
+
 
 var Nit_ID_Proccess;
 var Fecha_Vencimiento;
@@ -22,6 +25,7 @@ var EstadoVerif;
 var Est_Verifica;
 var Est_Vigencia;
 var Mensaje_Semaforo = "";
+var User_Porteria;
 
 var editNit_ID;
 var index_ID;
@@ -32,7 +36,7 @@ var editDocID;
 //Evento load JS
 $(document).ready(function () {
 
-    ConsultaParametrosURL();
+    User_Porteria = ConsultaParametrosURL();
     transaccionAjax_MPersonas('MATRIX_PERSONAS');
     transaccionAjax_MDocWork('MATIRXDOC_WORK');
     transaccionAjax_MPersona_Doc('MATRIX_PERSONAS_DOC');
@@ -43,8 +47,8 @@ $(document).ready(function () {
     transaccionAjax_MArea('MATRIX_AREA');
     transaccionAjax_MPAcceso_Area('MATRIX_PACCESO_AREA');
 
-    //transacionAjax_EmpresaNit('Cliente');
     transacionAjax_Documento('Documento');
+    transaccionAjax_MDatosUsuario('MATRIX_PERSONA_INGRESA');
 
     $("#ESelect").css("display", "none");
     $("#Img1").css("display", "none");
@@ -87,6 +91,18 @@ $(document).ready(function () {
         modal: true,
         width: 1000,
         height: 520,
+        overlay: {
+            opacity: 0.5,
+            background: "black"
+        }
+    });
+
+    $("#Dialog_Extencion").dialog({
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif_Web",
+        modal: true,
+        width: 1000,
+        height: 400,
         overlay: {
             opacity: 0.5,
             background: "black"
@@ -164,8 +180,9 @@ function BtnConfirmaIngreso() {
 }
 
 function VerExtenciones() {
-    Process_Manual_Ingreso = 1;
-    Mensaje_General("Disculpenos :(", "En Construccion estamos trabajando en ello", "W");
+    $("#Dialog_Extencion").dialog("open");
+    Table_Extenciones();
+    //Mensaje_General("Disculpenos :(", "En Construccion estamos trabajando en ello", "W");
 }
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                           REGION DE VALIDACIONES                                                                                                   ----*/
@@ -607,4 +624,57 @@ function Clear_Ingreso() {
 
     $('.C_Chosen').trigger('chosen:updated');
 }
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                              GRID EXTENCIONES                                                                                                                        ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+// crea la tabla en el cliente
+function Table_Extenciones() {
+
+    var html;
+    var StrTelefono = "";
+
+    html = "<table id='TGridExtencion' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Nombre</th><th>Telefono</th><th>Correo 1</th><th>Correo 2</th></tr></thead><tbody>";
+    for (itemArray in Matrix_Empleados) {
+        if (Matrix_Empleados[itemArray].Nit_ID != 0) {
+            if (Matrix_Empleados[itemArray].Tipo_4 == "" && Matrix_Empleados[itemArray].Tipo_3 == "" && Matrix_Empleados[itemArray].Tipo_2 == "" && Matrix_Empleados[itemArray].Tipo_1 == "")
+                StrTelefono = "No Tiene asignado";
+            else {
+                if (Matrix_Empleados[itemArray].Tipo_4 == "F")
+                    StrTelefono = Matrix_Empleados[itemArray].Telefono_4;
+                else {
+                    if (Matrix_Empleados[itemArray].Tipo_3 == "F")
+                        StrTelefono = Matrix_Empleados[itemArray].Telefono_3;
+                    else {
+                        if (Matrix_Empleados[itemArray].Tipo_2 == "F")
+                            StrTelefono = Matrix_Empleados[itemArray].Telefono_2;
+                        else {
+                            if (Matrix_Empleados[itemArray].Tipo_1 == "F")
+                                StrTelefono = Matrix_Empleados[itemArray].Telefono_1;
+                            else
+                                StrTelefono = "Desactualizado";
+                        }
+                    }
+                }
+            }
+            html += "<tr id= 'TExtencion_" + Matrix_Empleados[itemArray].Nit_ID + "'><td>" + Matrix_Empleados[itemArray].Nombre + "</td><td>" + StrTelefono + "</td><td>" + Matrix_Empleados[itemArray].Correo_1 + "</td><td>" + Matrix_Empleados[itemArray].Correo_2 + "</td></tr>";
+        }
+
+    }
+    html += "</tbody></table>";
+    $("#container_TGrid_New").html("");
+    $("#container_TGrid_New").html(html);
+
+    $(".Opciones").click(function () {
+    });
+
+    $("#TGridExtencion").dataTable({
+        "bJQueryUI": true, "iDisplayLength": 1000,
+        "bDestroy": true
+    });
+
+}
+
+
 
