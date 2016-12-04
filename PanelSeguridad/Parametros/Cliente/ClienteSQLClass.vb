@@ -73,10 +73,14 @@ Public Class ClienteSQLClass
                         "       CLI_3.CLI_Nombre + ' ' + CLI_3.CLI_Nombre_2 + ' ' + CLI_3.CLI_Apellido_1 + ' ' + CLI_3.CLI_Apellido_2, " & _
                         "      	GD.GD_Descripcion, " & _
                         "      	CLI.CLI_N_Consecutivo, " & _
-                        "      	ROW_NUMBER() OVER(ORDER BY CLI.CLI_Nit_ID DESC) AS Index_Cliente  " & _
-                        " FROM CLIENTE CLI " & _
+                        "      	ROW_NUMBER() OVER(ORDER BY CLI.CLI_Nit_ID DESC) AS Index_Cliente,  " & _
+                        "      	CLI.CLI_Sex, " & _
+                        "      	CLI.CLI_FechaNacimiento, " & _
+                        "       SEX.DDLL_Descripcion AS DescripSex " & _
+                       " FROM CLIENTE CLI " & _
                         " INNER JOIN PAISES P ON P.P_Cod = CLI.CLI_Pais_ID " & _
                         " INNER JOIN CIUDADES C ON C.C_Ciudad_ID = CLI.CLI_Ciudad_ID " & _
+                        " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO SEX ON SEX.DDL_ID = CLI.CLI_Sex AND SEX.DDL_Tabla = 'SEXO' " & _
                         " LEFT JOIN " & BD_Admin & ".dbo.TC_TIPO_DOCUMENTO TD ON TD.TD_ID_TDoc = CLI.CLI_TypeDocument_ID " & _
                         " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D1 ON D1.DDL_ID = CLI.CLI_TipoPersona AND D1.DDL_Tabla = 'TIPO_PERSONA' " & _
                         " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D2 ON D2.DDL_ID = CLI.CLI_Regimen AND D2.DDL_Tabla = 'REGIMEN' " & _
@@ -137,10 +141,14 @@ Public Class ClienteSQLClass
                         "       CLI_3.CLI_Nombre + ' ' + CLI_3.CLI_Nombre_2 + ' ' + CLI_3.CLI_Apellido_1 + ' ' + CLI_3.CLI_Apellido_2, " & _
                         "      	GD.GD_Descripcion, " & _
                         "      	CLI.CLI_N_Consecutivo, " & _
-                        "      	ROW_NUMBER() OVER(ORDER BY CLI.CLI_Nit_ID DESC) AS Index_Cliente  " & _
+                        "      	ROW_NUMBER() OVER(ORDER BY CLI.CLI_Nit_ID DESC) AS Index_Cliente,  " & _
+                        "      	CLI.CLI_Sex, " & _
+                        "      	CLI.CLI_FechaNacimiento, " & _
+                        "       SEX.DDLL_Descripcion AS DescripSex " & _
                         " FROM CLIENTE CLI " & _
                         " INNER JOIN PAISES P ON P.P_Cod = CLI.CLI_Pais_ID " & _
                         " INNER JOIN CIUDADES C ON C.C_Ciudad_ID = CLI.CLI_Ciudad_ID " & _
+                        " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO SEX ON SEX.DDL_ID = CLI.CLI_Sex AND SEX.DDL_Tabla = 'SEXO' " & _
                         " LEFT JOIN " & BD_Admin & ".dbo.TC_TIPO_DOCUMENTO TD ON TD.TD_ID_TDoc = CLI.CLI_TypeDocument_ID " & _
                         " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D1 ON D1.DDL_ID = CLI.CLI_TipoPersona AND D1.DDL_Tabla = 'TIPO_PERSONA' " & _
                         " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D2 ON D2.DDL_ID = CLI.CLI_Regimen AND D2.DDL_Tabla = 'REGIMEN' " & _
@@ -199,10 +207,14 @@ Public Class ClienteSQLClass
                         "       CLI_3.CLI_Nombre + ' ' + CLI_3.CLI_Nombre_2 + ' ' + CLI_3.CLI_Apellido_1 + ' ' + CLI_3.CLI_Apellido_2, " & _
                         "      	GD.GD_Descripcion, " & _
                         "      	CLI.CLI_N_Consecutivo, " & _
-                        "      	ROW_NUMBER() OVER(ORDER BY CLI.CLI_Nit_ID DESC) AS Index_Cliente  " & _
+                        "      	ROW_NUMBER() OVER(ORDER BY CLI.CLI_Nit_ID DESC) AS Index_Cliente,  " & _
+                        "      	CLI.CLI_Sex, " & _
+                        "      	CLI.CLI_FechaNacimiento, " & _
+                        "       SEX.DDLL_Descripcion AS DescripSex " & _
                         " FROM CLIENTE CLI " & _
                         " INNER JOIN PAISES P ON P.P_Cod = CLI.CLI_Pais_ID " & _
                         " INNER JOIN CIUDADES C ON C.C_Ciudad_ID = CLI.CLI_Ciudad_ID " & _
+                        " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO SEX ON SEX.DDL_ID = CLI.CLI_Sex AND SEX.DDL_Tabla = 'SEXO' " & _
                         " LEFT JOIN " & BD_Admin & ".dbo.TC_TIPO_DOCUMENTO TD ON TD.TD_ID_TDoc = CLI.CLI_TypeDocument_ID " & _
                         " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D1 ON D1.DDL_ID = CLI.CLI_TipoPersona AND D1.DDL_Tabla = 'TIPO_PERSONA' " & _
                         " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D2 ON D2.DDL_ID = CLI.CLI_Regimen AND D2.DDL_Tabla = 'REGIMEN' " & _
@@ -274,6 +286,8 @@ Public Class ClienteSQLClass
             " CLI_Politica_ID, " & _
             " CLI_GrpDocumentos, " & _
             " CLI_N_Consecutivo, " & _
+            " CLI_FechaNacimiento, " & _
+            " CLI_Sex, " & _
             " CLI_Usuario_Creacion, " & _
             " CLI_FechaCreacion, " & _
             " CLI_Usuario_Actualizacion, " & _
@@ -311,6 +325,8 @@ Public Class ClienteSQLClass
         sql.AppendLine("'" & vp_O_Obj.Politica_ID & "',")
         sql.AppendLine("'" & vp_O_Obj.GrpDocumentos & "',")
         sql.AppendLine("'" & Consecutivo & "',")
+        sql.AppendLine("'" & vp_O_Obj.FechaNacimiento & "',")
+        sql.AppendLine("'" & vp_O_Obj.Sex & "',")
         sql.AppendLine("'" & vp_O_Obj.UsuarioCreacion & "',")
         sql.AppendLine("'" & vp_O_Obj.FechaCreacion & "',")
         sql.AppendLine("'" & vp_O_Obj.UsuarioActualizacion & "',")
@@ -364,6 +380,8 @@ Public Class ClienteSQLClass
                           " CLI_Document_ID_Jefe ='" & vp_O_Obj.Document_ID_Jefe & "', " & _
                           " CLI_Politica_ID ='" & vp_O_Obj.Politica_ID & "', " & _
                           " CLI_GrpDocumentos ='" & vp_O_Obj.GrpDocumentos & "', " & _
+                          " CLI_Sex ='" & vp_O_Obj.Sex & "', " & _
+                          " CLI_FechaNacimiento ='" & vp_O_Obj.FechaNacimiento & "', " & _
                           " CLI_Usuario_Actualizacion ='" & vp_O_Obj.UsuarioActualizacion & "', " & _
                           " CLI_FechaActualizacion ='" & vp_O_Obj.FechaActualizacion & "'" & _
                        " WHERE CLI_Nit_ID = '" & vp_O_Obj.Nit_ID & "'" & _
@@ -679,6 +697,10 @@ Public Class ClienteSQLClass
 
                     objCliente.Consecutivo = ReadConsulta.GetValue(46)
                     objCliente.Index = ReadConsulta.GetValue(47)
+
+                    If Not (IsDBNull(ReadConsulta.GetValue(48))) Then objCliente.Sex = ReadConsulta.GetValue(48) Else objCliente.Sex = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(49))) Then objCliente.FechaNacimiento = ReadConsulta.GetValue(49) Else objCliente.FechaNacimiento = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(50))) Then objCliente.DescripSexo = ReadConsulta.GetValue(50) Else objCliente.DescripSexo = ""
 
                     'agregamos a la lista
                     ObjListCliente.Add(objCliente)

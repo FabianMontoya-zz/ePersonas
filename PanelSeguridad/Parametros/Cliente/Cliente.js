@@ -643,6 +643,10 @@ function Editar(Index_Cliente, Type) {
     $("#Select_TPersona").val(ArrayCliente[Index_Cliente].TipoPersona);
     $("#Select_Acceso").val(ArrayCliente[Index_Cliente].AccesoSistema);
 
+    $("#Text_fechaNacimiento").val(ArrayCliente[Index_Cliente].FechaNacimiento);
+    $("#Select_Sex").val(ArrayCliente[Index_Cliente].Sex);
+    $("#Text_fechaNacimiento" ).css("color", "#000000")
+    
     StrPolitica = ArrayCliente[Index_Cliente].Politica_ID;
 
     if (StrPolitica == 0)
@@ -717,6 +721,9 @@ function ConsultaPersona(Index_Cliente) {
     $("#Con_Pais").html(ArrayCliente[Index_Cliente].DescripPais);
     $("#Con_Acceso").html(ArrayCliente[Index_Cliente].AccesoSistema);
 
+    $("#Con_Sex").html(ArrayCliente[Index_Cliente].DescripSexo);
+    $("#Con_fechaNacimiento").html(ArrayCliente[Index_Cliente].FechaNacimiento);
+    
     $("#Con_Ident").html(ArrayCliente[Index_Cliente].Document_ID);
     $("#ConVerif").html(ArrayCliente[Index_Cliente].Digito_Verificacion);
     $("#Con_Consecutivo").html(ArrayCliente[Index_Cliente].Consecutivo);

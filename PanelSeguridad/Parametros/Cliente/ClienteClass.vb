@@ -10,6 +10,8 @@
     Private _Nombre_2 As String
     Private _Apellido_1 As String
     Private _Apellido_2 As String
+    Private _Sex As String
+    Private _FechaNacimiento As String
 
     Private _Pais_ID As Integer
     Private _Ciudad_ID As Integer
@@ -65,7 +67,9 @@
     Private _FechaVencimientoTarjeta As String
     Private _MotivoBloqueo As String
     Private _DescripMotivoBloqueo As String
- #End Region
+    Private _DescripSexo As String
+
+#End Region
 
 #Region "Propiedades"
     Public Property Index() As Long
@@ -82,6 +86,22 @@
         End Get
         Set(ByVal value As String)
             Me._Nit_ID = value
+        End Set
+    End Property
+    Public Property Sex() As String
+        Get
+            Return Me._Sex
+        End Get
+        Set(ByVal value As String)
+            Me._Sex = value
+        End Set
+    End Property
+    Public Property FechaNacimiento() As String
+        Get
+            Return Me._FechaNacimiento
+        End Get
+        Set(ByVal value As String)
+            Me._FechaNacimiento = value
         End Set
     End Property
     Public Property TypeDocument_ID() As Integer
@@ -508,6 +528,14 @@
         End Get
         Set(ByVal value As String)
             Me._DescripMotivoBloqueo = value
+        End Set
+    End Property
+    Public Property DescripSexo() As String
+        Get
+            Return Me._DescripSexo
+        End Get
+        Set(ByVal value As String)
+            Me._DescripSexo = value
         End Set
     End Property
 #End Region

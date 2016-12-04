@@ -406,14 +406,19 @@ function Search_Adress(Index_Adress) {
             $("#TxtCorreo_1").val(ArrayDirecciones[itemArray].Correo_1);
             $("#TxtCorreo_2").val(ArrayDirecciones[itemArray].Correo_2);
             $("#TxtDireccion").val(ArrayDirecciones[itemArray].Direccion);
-            $("#TxtWeb").val(ArrayDirecciones[itemArray].PaginaWeb);
+
+            $("#Select_TypeTel_1").val(ArrayDirecciones[itemArray].Tipo_1);
+            $("#Select_TypeTel_2").val(ArrayDirecciones[itemArray].Tipo_2);
+            $("#Select_TypeTel_3").val(ArrayDirecciones[itemArray].Tipo_3);
+            $("#Select_TypeTel_4").val(ArrayDirecciones[itemArray].Tipo_4);
+
+            $("#TxtDireccion").val(ArrayDirecciones[itemArray].Direccion);
 
             $("#Select_Pais_D").val(ArrayDirecciones[itemArray].Pais_ID);
             StrCiudad_D = ArrayDirecciones[itemArray].Ciudad_ID;
 
             setTimeout("$('#Select_Pais_D').trigger('change');", 200);
-
-
+            
             ArrayStrPhones[0] = ArrayDirecciones[itemArray].Telefono_1;
             ArrayStrPhones[1] = ArrayDirecciones[itemArray].Telefono_2;
             ArrayStrPhones[2] = ArrayDirecciones[itemArray].Telefono_3;

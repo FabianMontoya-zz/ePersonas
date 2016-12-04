@@ -313,7 +313,7 @@
                                     <input type="text" id="Text_fechaNacimiento" maxlength="12" style="width: 150px;" />
                                     <span class="Spam_AST"></span></span>
                             </td>
-                            <td style="width: 3%;">
+                            <td style="width: 3%; padding-bottom: 25px;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img20"
                                         src="../../images/error.png" />
@@ -369,7 +369,7 @@
                         </tr>
                     </table>
                 </div>
-                <div id="TablaDatos_D_Vista">
+                <div id="TablaDatos_D_Vista" style="padding-top: 5%; padding-left: 10%;">
                     <table id="Table2" style="width: 700px; text-align: left;">
                         <tr>
                             <td style="width: 120px;" class="Label_Bold">Multi - Empresa
@@ -460,6 +460,16 @@
                             </td>
                             <td id="Con_Ape_2" class="T120px"></td>
                             <td style="padding-bottom: 25px;"></td>
+                        </tr>
+                        <tr>
+                            <td class="Label_Bold" style="width: 15%">Fecha De Nacimiento
+                            </td>
+                            <td style="width: 15%" id="Con_fechaNacimiento"></td>
+                            <td style="width: 3%; padding-bottom: 25px;"></td>
+                            <td class="Label_Bold" style="width: 11%">Sexo
+                            </td>
+                            <td id="Con_Sex"></td>
+                            <td style="width: 22%; padding-bottom: 25px;"></td>
                         </tr>
                     </table>
                     <table id="Table9" style="width: 700px; text-align: left;">
@@ -1083,7 +1093,7 @@
                 <td>
                     <select id="Select_Type_Adress" class="Select_medium">
                         <option value="">Nomenclatura</option>
-                         <option value="Cll">Calle</option>
+                        <option value="Cll">Calle</option>
                         <option value="Cra">Carrera</option>
                         <option value="Cir">Circular</option>
                         <option value="Diag">Diagonal</option>

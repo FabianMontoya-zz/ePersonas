@@ -49,7 +49,6 @@ function transaccionAjax_MDocWork(State) {
     });
 }
 
-
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_EmpresaNit(State) {
@@ -75,7 +74,6 @@ function transacionAjax_EmpresaNit(State) {
         }
     });
 }
-
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
@@ -286,7 +284,6 @@ function transacionAjax_Ciudad_D(State, Index) {
     });
 }
 
-
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_Documento(State) {
@@ -405,6 +402,7 @@ function transacionAjax_Cliente_create(State) {
     var PR;
     var EB;
 
+    
     if ($("#Select_Area").val() != "-1")
         Area = $("#Select_Area").val();
 
@@ -532,6 +530,8 @@ function transacionAjax_Cliente_create(State) {
             "TDocJefe": TDocJefe,
             "DocJefe": DocJefe,
             "Politica": Politica,
+            "Sexo": $("#Select_Sex").val(),
+            "FechaNacimiento": $("#Text_fechaNacimiento").val(),
             "GrpDocumento": GrpDocumento,
             "user": User.toUpperCase()
         },

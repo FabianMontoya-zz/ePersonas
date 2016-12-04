@@ -189,6 +189,9 @@ Public Class ClienteAjax
             objCliente.Document_ID_Jefe = Request.Form("DocJefe")
             objCliente.Politica_ID = Request.Form("Politica")
 
+            objCliente.Sex = Request.Form("Sexo")
+            objCliente.FechaNacimiento = Request.Form("FechaNacimiento")
+
             objCliente.GrpDocumentos = Request.Form("GrpDocumento")
 
             objCliente.UsuarioCreacion = Request.Form("user")
@@ -244,6 +247,8 @@ Public Class ClienteAjax
         objCliente.Apellido_2 = Request.Form("Ape_2")
         objCliente.Cod_Bank = Request.Form("CodBank")
         objCliente.DocCiudad = Request.Form("CiuDoc")
+        objCliente.Sex = Request.Form("Sexo")
+        objCliente.FechaNacimiento = Request.Form("FechaNacimiento")
 
         objCliente.TipoPersona = Request.Form("TipoPersona")
         objCliente.Regimen = Request.Form("Regimen")
