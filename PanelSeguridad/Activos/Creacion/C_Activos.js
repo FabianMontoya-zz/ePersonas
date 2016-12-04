@@ -19,6 +19,7 @@ var Doc;
 $(document).ready(function () {
 
     $("#Marco_trabajo_Contrato").css("height", "490px");
+    Picker_Fechas();
     transaccionAjax_MRTSTA("MATRIX_RTSTA");
     transaccionAjax_MPaises_Ciudades('MATRIX_PAIS_CIUDAD');
     transaccionAjax_MPersonas('MATRIX_PERSONAS');
@@ -44,7 +45,7 @@ $(document).ready(function () {
     $("#Img13").css("display", "none");
 
     $("#Blo_Inmuebles").css("display", "none");
-    
+
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
     $("#WA").css("display", "none");
@@ -93,6 +94,12 @@ $(document).ready(function () {
     $("#T_Activo_Grid").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,
         "bDestroy": true
+    });
+       
+    $(function () { //Función del acordeon
+        $("#Acordeon_Activo").accordion({
+            heightStyle: "content"
+        });
     });
 
     Change_Select_Nit();
@@ -195,6 +202,13 @@ function validarCamposCrear() {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                     PROCESO DE CARGUE                                                                                                                                        ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+//Función de control del picker de las fechas
+function Picker_Fechas() {
+    $("#TxtFecha_Recibo").datepicker({ dateFormat: 'yy-mm-dd' });
+    $("#TxtFecha_Retiro").datepicker({ dateFormat: 'yy-mm-dd' });
+}
+
 //carga el combo 
 function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {
@@ -204,6 +218,7 @@ function Change_Select_Nit() {
     });
 }
 
+//coloca la sigla de la moneda
 function Change_Select_Moneda() {
     $("#Select_Moneda").change(function () {
         var index_ID = this.value;
@@ -225,32 +240,37 @@ function Change_Select_TA() {
 
         switch (index_ID) {
             case "1":
-                $("#Title_Activo").html($("#Select_Tipo option:selected").html());
+                $("#TitleActivo_2").html($("#Select_Tipo option:selected").html());
                 $("#Tabla_LLave_Inmueble").css("display", "inline-table");
                 $("#Tabla_LLave_Vehiculos").css("display", "none");
                 $("#Blo_Inmuebles").css("display", "inline-table");
+                $("#Acordeon_Activo").accordion("option", "active", 1);
                 break;
 
             case "2":
-                $("#Title_Activo").html($("#Select_Tipo option:selected").html());
+                $("#TitleActivo_2").html($("#Select_Tipo option:selected").html());
                 $("#Tabla_LLave_Inmueble").css("display", "none");
                 $("#Tabla_LLave_Vehiculos").css("display", "inline-table");
                 $("#Blo_Inmuebles").css("display", "none");
                 $("#Txtkey_1").html("Placa");
+                $("#Acordeon_Activo").accordion("option", "active", 1);
                 break;
 
             case "-1":
-                $("#Title_Activo").html("Tipo Activo");
-                $("#Tabla_LLave_Inmueble").css("display", "none");
-                $("#Tabla_LLave_Vehiculos").css("display", "none");
-                $("#Blo_Inmuebles").css("display", "none");
-                break;
-            default:
-                $("#Title_Activo").html($("#Select_Tipo option:selected").html());
+                $("#TitleActivo_2").html("Activo");
                 $("#Tabla_LLave_Inmueble").css("display", "none");
                 $("#Tabla_LLave_Vehiculos").css("display", "inline-table");
                 $("#Blo_Inmuebles").css("display", "none");
                 $("#Txtkey_1").html("C. Identificación");
+                break;
+
+            default:
+                $("#TitleActivo_2").html($("#Select_Tipo option:selected").html());
+                $("#Tabla_LLave_Inmueble").css("display", "none");
+                $("#Tabla_LLave_Vehiculos").css("display", "inline-table");
+                $("#Blo_Inmuebles").css("display", "none");
+                $("#Txtkey_1").html("C. Identificación");
+                $("#Acordeon_Activo").accordion("option", "active", 1);
                 break;
         }
 

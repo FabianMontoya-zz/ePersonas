@@ -200,7 +200,6 @@ option
     border-color: White;
 }
 
-
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default
 {
     border: 1px solid #c5dbec;
@@ -213,7 +212,6 @@ option
     color: #ffffff;
     border-color: White;
 }
-
 
 .ui-tabs .ui-tabs-nav li.ui-tabs-active
 {
@@ -238,7 +236,6 @@ option
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*                                                               DIALOG JQUERY                                                                                  */
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
 
 .Dialog_personal
 {
@@ -405,6 +402,39 @@ option
 
     /* El tooltip cuando se muestra */
     .cssToolTip_Form_L:hover span
+    {
+        display: inline; /* Para mostrarlo simplemente usamos display block por ejemplo */
+    }
+
+
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* Clase que tendra el tooltip */
+.cssToolTip_Form_T
+{
+    position: relative; /* Esta clase tiene que tener posicion relativa */
+    color: #ffffff; /* Color del texto */
+}
+
+    /* El tooltip */
+    .cssToolTip_Form_T span
+    {
+        background: rgba(20,20,20,0.7);
+        border: 2px solid #ffffff;
+        border-radius: 5px;
+        box-shadow: 5px 5px 5px #333;
+        color: #ffffff;
+        display: none; /* El tooltip por defecto estara oculto */
+        font-size: 0.8em;
+        padding: 10px 10px 10px 10px;
+        max-width: 6000px;
+        position: absolute; /* El tooltip se posiciona de forma absoluta para no modificar el aspezto del resto de la pagina */
+        bottom: 5px; /* Posicion apartir de la parte superior del primer elemento padre con posicion relativa */
+        right: 50px; /* Posicion apartir de la parte izquierda del primer elemento padre con posicion relativa */
+        z-index: 1000; /* Poner un z-index alto para que aparezca por encima del resto de elementos */
+    }
+
+    /* El tooltip cuando se muestra */
+    .cssToolTip_Form_T:hover span
     {
         display: inline; /* Para mostrarlo simplemente usamos display block por ejemplo */
     }
