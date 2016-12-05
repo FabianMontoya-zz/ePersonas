@@ -87,7 +87,8 @@ $(document).ready(function () {
 
     $(function () { //Función del acordeon
         $("#Acordeon_Contrato").accordion({
-            heightStyle: "content"
+            heightStyle: "content",
+            collapsible : true
         });
     });
 
@@ -103,8 +104,6 @@ $(document).ready(function () {
     Change_Select_Base_Calculo();
     Format_Adress("Txt_Adress_C");
     Restric_long_decimal("TXT_Puntos_Adicionales");
-      
-
 });
 
 //Ocultamos las imagenes de error al iniciar la pantalla
