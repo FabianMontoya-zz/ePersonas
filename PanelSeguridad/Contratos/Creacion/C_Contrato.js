@@ -131,13 +131,15 @@ function Ocultar_IMGS_Errores() {
 
 //Función de control del picker de las fechas
 function Picker_Fechas() {
-    $("#TXT_Fecha_Apertura").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 });
-    $("#TXT_Fecha_Activacion").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 });
-    $("#TXT_Fecha_Finalizacion").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 });
-    $("#TXT_Fecha_Cancelacion").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 });
-    $("#TXT_Fecha_Ult_Causacion").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 });
-    $("#TXT_Fecha_Ult_Factura").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 });
-    $("#TXT_Fecha_Prox_Factura").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 });
+    $("#TXT_Fecha_Apertura").datepicker({ dateFormat: 'yy-mm-dd', changeYear: true, changeMonth: true }); //Inicializa Datapicker
+    $("#TXT_Fecha_Apertura").datepicker("option", "yearRange", "-99:+0"); //Rango años hacia atras (-99)
+    $("#TXT_Fecha_Apertura").datepicker("option", "maxDate", "+0m +0d"); //Rango días (Llega hasta el actual y bloquea los futuros)
+    //$("#TXT_Fecha_Activacion").datepicker({ dateFormat: 'yy-mm-dd'});
+    //$("#TXT_Fecha_Finalizacion").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 }); //Bloquea las fechas pasadas, solo fechas futuras
+    //$("#TXT_Fecha_Cancelacion").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 });
+    //$("#TXT_Fecha_Ult_Causacion").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 });
+    //$("#TXT_Fecha_Ult_Factura").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 });
+    //$("#TXT_Fecha_Prox_Factura").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 });
 }
 
 //salida del formulario
@@ -203,12 +205,14 @@ function Change_Select_Moneda() {
                 $("#L_Moneda_2").html(Matrix_Moneda[item].Sigla);
                 $("#L_Moneda_3").html(Matrix_Moneda[item].Sigla);
                 $("#L_Moneda_4").html(Matrix_Moneda[item].Sigla);
+                $("#L_Moneda_5").html(Matrix_Moneda[item].Sigla);
             } else if (index_ID == "-1") {
                 $("#L_Moneda").html("");
                 $("#L_Moneda_1").html("");
                 $("#L_Moneda_2").html("");
                 $("#L_Moneda_3").html("");
                 $("#L_Moneda_4").html("");
+                $("#L_Moneda_5").html(Matrix_Moneda[item].Sigla);
             }
         }
     });

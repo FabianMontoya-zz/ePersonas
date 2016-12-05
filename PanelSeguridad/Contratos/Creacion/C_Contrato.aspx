@@ -43,7 +43,6 @@
             </tr>
         </table>
     </div>
-
     <!--Dialog que contiene la pantalla de las colocaciones/contratos -->
     <div id="Marco_Contrato">
         <div id="Marco_trabajo_Contrato">
@@ -240,12 +239,12 @@
                             </td>
                             <td class="Label_Bold" style="width: 10%;">Base de Cálculo
                             </td>
-                            <td style="width: 30%;">                                
-                                    <select id="Select_Base_Calculo" class="C_Chosen">
-                                        <option value="-1">Seleccione...</option>
-                                        <option value="1">1 - 360/360</option>
-                                        <option value="2">2 - 365/365</option>
-                                    </select>
+                            <td style="width: 30%;">
+                                <select id="Select_Base_Calculo" class="C_Chosen">
+                                    <option value="-1">Seleccione...</option>
+                                    <option value="1">1 - 360/360</option>
+                                    <option value="2">2 - 365/365</option>
+                                </select>
                             </td>
                             <td style="padding-bottom: 25px; width: 35%;">
                                 <span class="cssToolTip_L">
@@ -290,13 +289,11 @@
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img17"
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span>
-
                                 </span>
                             </td>
                             <td class="Label_Bold" style="width: 9%;">Total Activos</td>
                             <td id="L_Moneda_2" class="Sigla" style="width: 7%"></td>
                             <td id="L_Total_Activos" style="width: 50%;">[1.000.000]</td>
-
                         </tr>
                     </table>
                     <table id="T_Valores_2" style="width: 100%">
@@ -335,8 +332,60 @@
                 <h3>Condiciones Financieras
                 </h3>
                 <div id="Div_Condiciones_Financieras">
-                    <table id="Condiciones">
+                    <table id="T_Calculo_Pagos" style="width: 100%; padding-top: 5px; padding-bottom: 5px;">
+                        <tr>
+                            <td class="Label_Bold" style="width: 10%;">Total Cuota/Tasa</td>
+                            <td id="L_Moneda_5" class="Sigla" style="width: 7%"></td>
+                            <td id="L_Cuota_Tasa" style="width: 17%;">[1.000.000.000]</td>
 
+                            <td class="Label_Bold" style="width: 10%;">Modalidad Pago</td>
+                            <td id="L_Modalidad_Pago" style="width: 17%;">[1.000.000.000]</td>
+
+                            <td class="Label_Bold" style="width: 10%;">Periodo Pago</td>
+                            <td id="L_Periodo_Pago" style="width: 17%;">[1.000.000.000]</td>
+                        </tr>
+                    </table>
+                    <table id="T_Cuota_Tasa" style="width: 100%;">
+                        <tr>
+                            <td class="Label_Bold" style="width: 10%;">Tipo Cuota</td>
+                            <td id="L_Tipo_Cuota" style="width: 23%;">[1.000.000.000]</td>
+
+                            <td class="Label_Bold" style="width: 10%;">Base Calculo</td>
+                            <td id="L_Base_Calculo" style="width: 16%;">[1.000.000.000]</td>
+
+                            <td class="Label_Bold" style="width: 10%;">Código Tasa</td>
+                            <td id="L_Codigo_Tasa" style="width: 16.5%;">[1.000.000.000]</td>
+                        </tr>
+                    </table>
+                    <table id="T_Puntos_Ciclo" style="width: 100%;">
+                        <tr>
+                            <td class="Label_Bold" style="width: 10.7%;">Puntos Adicionales
+                            </td>
+                            <td style="width: 7%; padding-left: 10px;">
+                                <span class="cssToolTip_Form">
+                                    <input style="width: 100%;" type="text" id="TXT_Puntos_Adicionales" maxlength="7" class="Decimal" />
+                                    <span class="Spam_ADec"></span></span>
+                            </td>
+                            <td style="width: 30%;"></td>
+                            <td class="Label_Bold" style="width: 10%;">Ciclo
+                            </td>
+                            <td style="width: 30%;">
+                                <select id="Select_Ciclo_2" class="C_Chosen">
+                                </select>
+                            </td>
+                            <td style="width: 20%;"></td>
+                        </tr>
+                    </table>
+                    <table id="T_Tasas" style="width: 100%">
+                        <tr>
+                            <td class="Label_Bold" style="width: 11.5%;">Tasa de Mora</td>
+                            <td id="L_Tasa_Mora" class="Label_Bold" style="width: 10%;">1 - 26.6%</td>
+                            <td style="padding-bottom: 25px; width: 26%;"></td>
+
+                            <td class="Label_Bold" style="width: 10.2%;">Tasa de Usura</td>
+                            <td id="L_Tasa_Usura" class="Label_Bold" style="width: 15%;">2 - 38.6%</td>                            
+                            <td style="padding-bottom: 25px; width: 40%;"></td>
+                        </tr>
                     </table>
                 </div>
                 <h3>Añadir Activos

@@ -176,6 +176,7 @@ function transaccionAjax_MCiclo(State) {
             else {
                 Matrix_Ciclo = JSON.parse(result);
                 Charge_Combos_Depend_Nit(Matrix_Ciclo, "Select_Ciclo", "", "");
+                Charge_Combos_Depend_Nit(Matrix_Ciclo, "Select_Ciclo_2", "", "");
                 
             }
         },
