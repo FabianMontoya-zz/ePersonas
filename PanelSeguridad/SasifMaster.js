@@ -533,6 +533,34 @@ function maxLengthTypeNumber(object) {
         object.value = object.value.slice(0, object.maxLength)
 }
 
+//validar la longitud de 4 decimales
+function Restric_long_decimal(object) {
+
+    $("#" + object).blur(function () {
+
+        var ValStr = $('#' + object).val();
+        var A_Decimal = ValStr.split(".");
+
+        var valida = 0;
+
+        if (A_Decimal.length == 1)
+            valida = 1;
+        else {
+            if (A_Decimal.length == 2) {
+                if (A_Decimal[1].length == 4)
+                    valida = 0;
+                else
+                    valida = 1;
+            }
+        }
+        //validamos formato y mensaje
+        if (valida == 1) {
+            Mensaje_General("¡Formato Incorrecto!", "El campo debe diligenciarse con el formato xx.xxxx, por ejemplo: 12.3456", "E");
+            $("#" + object).val("");
+        }
+    });
+}
+
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                             FUNCIONES PARA CARGA DE DROP LIST                                                                                               ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -569,7 +597,7 @@ function Charge_Combos_Depend_Verificacion(Matrix, Selector, P_1, P_2, Index_Edi
     $('#' + Selector).empty();
     var objList = $("[id$='" + Selector + "']");
 
-     switch (Selector) {
+    switch (Selector) {
         case "Select_Doc_Verif":
             for (Item in Matrix) {
                 if (Matrix[Item].Nit_ID == P_1 && Matrix[Item].Doc_ID == P_2) {
@@ -917,6 +945,14 @@ function Charge_Combo_Persona(Matrix, Selector, Nit, Index_Edit) {
             for (Item in Matrix) {
                 if (Matrix[Item].Nit_ID == Nit) {
                     $("#" + Selector).append("<option value='" + Matrix[Item].Document_ID + "'>" + Matrix[Item].Nombre + "</option>");
+                }
+            }
+            break;
+
+        case "Select_Direccion"://Direcciones por persona
+            for (Item in Matrix) {
+                if (Matrix[Item].Document_ID == Nit) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Index_Direccion + "'>" + Matrix[Item].Direccion + "</option>");
                 }
             }
             break;

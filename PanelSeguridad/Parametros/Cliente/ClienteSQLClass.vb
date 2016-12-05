@@ -868,7 +868,9 @@ Public Class ClienteSQLClass
                     If Not (IsDBNull(ReadConsulta.GetValue(14))) Then objCliente.Telefono_4 = ReadConsulta.GetValue(14) Else objCliente.Telefono_4 = ""
 
                     If Not (IsDBNull(ReadConsulta.GetValue(15))) Then objCliente.Correo_1 = ReadConsulta.GetValue(15) Else objCliente.Correo_1 = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(15))) Then objCliente.Correo_1 = ReadConsulta.GetValue(16) Else objCliente.Correo_2 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(16))) Then objCliente.Correo_2 = ReadConsulta.GetValue(16) Else objCliente.Correo_2 = ""
+
+                    objCliente.Index_Direccion = ReadConsulta.GetValue(17)
 
                     'agregamos a la lista
                     ObjListCliente.Add(objCliente)
@@ -1287,7 +1289,8 @@ Public Class ClienteSQLClass
                         " d.D_Telefono_3, " & _
                         " d.D_Telefono_4, " & _
                         " d.D_Correo_1, " & _
-                        " d.D_Correo_2 " & _
+                        " d.D_Correo_2, " & _
+                        " ROW_NUMBER() OVER(ORDER BY c.CLI_Nit_ID ASC) AS Index_Direcciones " & _
                         "  FROM CLIENTE c " & _
                         "  LEFT JOIN DIRECCIONES d " & _
                         "  ON d.D_Document_ID = c.CLI_Document_ID " & _

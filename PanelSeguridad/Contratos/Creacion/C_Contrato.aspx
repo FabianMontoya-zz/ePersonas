@@ -292,7 +292,7 @@
                             </td>
                             <td class="Label_Bold" style="width: 9%;">Total Activos</td>
                             <td id="L_Moneda_2" class="Sigla" style="width: 7%"></td>
-                            <td id="L_Total_Activos" style="width: 50%;">[1.000.000]</td>
+                            <td id="L_Total_Activos" style="width: 50%;">[Total_Activos]</td>
                         </tr>
                     </table>
                     <table id="T_Valores_2" style="width: 100%">
@@ -335,7 +335,7 @@
                         <tr>
                             <td class="Label_Bold" style="width: 10%;">Total Cuota/Tasa</td>
                             <td id="L_Moneda_5" class="Sigla" style="width: 7%"></td>
-                            <td id="L_Cuota_Tasa" style="width: 17%;">[1.000.000.000]</td>
+                            <td id="L_Cuota_Tasa" style="width: 17%;">[Total cuota/tasa]</td>
 
                             <td class="Label_Bold" style="width: 10%;">Modalidad Pago</td>
                             <td id="L_Modalidad_Pago" style="width: 17%;"></td>

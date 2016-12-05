@@ -31,7 +31,7 @@ $(document).ready(function () {
     transaccionAjax_MCiclo('MATRIX_CICLO');
     transacionAjax_Productos('MATRIX_PRODUCTOS');
     transacionAjax_Financiacion('MATRIX_FINANCIACION');
-    transacionAjax_Financiacion('MATRIX_DIRECCIONES');
+    transaccionAjax_MDirecciones('MATRIX_DIRECCIONES');
 
     Ocultar_IMGS_Errores();
 
@@ -102,6 +102,9 @@ $(document).ready(function () {
     Change_Select_Unidad_Tiempo();
     Change_Select_Base_Calculo();
     Format_Adress("Txt_Adress_C");
+    Restric_long_decimal("TXT_Puntos_Adicionales");
+      
+
 });
 
 //Ocultamos las imagenes de error al iniciar la pantalla
@@ -165,8 +168,7 @@ function Change_Select_Nit() {
         Charge_Combos_Depend_Nit(Matrix_Sucursal, "Select_Sucursal_C", index_ID, "");
         Charge_Combo_Persona(Matrix_Personas, "Select_Persona_C", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Productos, "Select_Producto", index_ID, "");
-        Charge_Combos_Depend_Nit(Matrix_Financiacion, "Select_Condicion_Financiacion", index_ID, "");
-        
+        Charge_Combos_Depend_Nit(Matrix_Financiacion, "Select_Condicion_Financiacion", index_ID, "");        
     });
 }
 

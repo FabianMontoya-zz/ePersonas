@@ -1265,6 +1265,11 @@ To modify move field declaration from designer file to code-behind file.
  funcion que carga La matrix Ciclo
  </summary>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_MDirecciones">
+	<summary>
+ funcion que carga La matrix Direcciones
+ </summary>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.Crud_DocAjax.Consulta_Crud_Doc">
 	<summary>
  traemos todos los datos para tabla Crud_Doc (READ)
@@ -2662,6 +2667,16 @@ To modify move field declaration from designer file to code-behind file.
 </member><member name="M:PanelSeguridad.C_ActivosAjax.Carga_Lista_Clase_Facecolda">
 	<summary>
  funcion que carga La lista de clases
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosAjax.Carga_MMarca_Clase_Facecolda">
+	<summary>
+ funcion que carga matrix de marca clases fasecolda
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosAjax.Carga_MLinea_Marca_Clase_Facecolda">
+	<summary>
+ funcion que carga matrix de lineas marca clases fasecolda
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.C_ActivosAjax.Cargar_EstadoContrato">
@@ -4164,6 +4179,18 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
 </member><member name="M:PanelSeguridad.FasecoldaSQLClass.List_Clases_Fasecolda">
 	<summary>
  lee la lista de clases de facecolda
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.FasecoldaSQLClass.Matrix_Marca_Clases_Fasecolda">
+	<summary>
+ trae la matrix marcas clases fasecolda
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.FasecoldaSQLClass.Matrix_Linea_Marca_Clases_Fasecolda">
+	<summary>
+ trae la matrix lineas marcas clases fasecolda
  </summary>
 	<returns></returns>
 	<remarks></remarks>

@@ -203,7 +203,7 @@ function transaccionAjax_MDirecciones(State) {
                 Matrix_Direcciones = [];
             }
             else {
-                Matrix_Ciclo = JSON.parse(result);
+                Matrix_Direcciones = JSON.parse(result);
             }
         },
         error: function () {

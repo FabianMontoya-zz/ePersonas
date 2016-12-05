@@ -92,6 +92,8 @@
     Private _Tipo_2 As String
     Private _Tipo_3 As String
     Private _Tipo_4 As String
+
+    Private _Index_Direccion As Long
 #End Region
 
 #Region "Propiedades Clientes"
@@ -666,6 +668,14 @@
         End Get
         Set(ByVal value As String)
             Me._Tipo_4 = value
+        End Set
+    End Property
+    Public Property Index_Direccion() As Long
+        Get
+            Return Me._Index_Direccion
+        End Get
+        Set(ByVal value As Long)
+            Me._Index_Direccion = value
         End Set
     End Property
 #End Region
