@@ -339,22 +339,22 @@
                             <td id="L_Cuota_Tasa" style="width: 17%;">[1.000.000.000]</td>
 
                             <td class="Label_Bold" style="width: 10%;">Modalidad Pago</td>
-                            <td id="L_Modalidad_Pago" style="width: 17%;">[Modalidad de Pago]</td>
+                            <td id="L_Modalidad_Pago" style="width: 17%;"></td>
 
                             <td class="Label_Bold" style="width: 10%;">Periodo Pago</td>
-                            <td id="L_Periodo_Pago" style="width: 17%;">[Periodo de Pago]</td>
+                            <td id="L_Periodo_Pago" style="width: 17%;"></td>
                         </tr>
                     </table>
                     <table id="T_Cuota_Tasa" style="width: 100%;">
                         <tr>
                             <td class="Label_Bold" style="width: 10%;">Tipo Cuota</td>
-                            <td id="L_Tipo_Cuota" style="width: 23%;">[Tipo de Cuota]</td>
+                            <td id="L_Tipo_Cuota" style="width: 23%;"></td>
 
                             <td class="Label_Bold" style="width: 10%;">Base Calculo</td>
-                            <td id="L_Base_Calculo" style="width: 16%;">[Base de Calculo]</td>
+                            <td id="L_Base_Calculo" style="width: 16%;"></td>
 
                             <td class="Label_Bold" style="width: 10%;">Código Tasa</td>
-                            <td id="L_Codigo_Tasa" style="width: 16.5%;">[Código de Tasa]</td>
+                            <td id="L_Codigo_Tasa" style="width: 16.5%;"></td>
                         </tr>
                     </table>
                     <table id="T_Puntos_Ciclo" style="width: 100%;">

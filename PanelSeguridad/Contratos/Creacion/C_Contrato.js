@@ -240,14 +240,75 @@ function Change_Select_Condicion_Financiacion() {
 
         var index_ID = this.value; //el value es el index
         index_ID = parseInt(index_ID) - 1;
+
         var tiempo = Matrix_Financiacion[index_ID].Unidad_Tiempo;
         var baseCalculo = Matrix_Financiacion[index_ID].Base_Calculo;
         var ciclo = Matrix_Financiacion[index_ID].Ciclo_Cobro_FK;
+        var Modalidad = Matrix_Financiacion[index_ID].Modalidad_Pago;
+        var Periodo_Pago = Matrix_Financiacion[index_ID].Periodo_Pago;
+
+        var Tipo_Cuota = Matrix_Financiacion[index_ID].Tipo_Cuota;
+        var Base_Calculo = Matrix_Financiacion[index_ID].Base_Calculo;
+        var Tasa = Matrix_Financiacion[index_ID].Tasa_FK;
 
         $("#Select_Tiempo").val(tiempo).trigger("chosen:updated");
         $("#Select_Base_Calculo").val(baseCalculo).trigger("chosen:updated");
         $("#Select_Ciclo").val(ciclo).trigger("chosen:updated");
+        $("#Select_Ciclo_2").val(ciclo).trigger("chosen:updated");
         CambiarTiempo(tiempo);
+
+        /*Cambio L_Modalidad de pago*/
+        if (Modalidad == "A") {
+            $("#L_Modalidad_Pago").html("A - Anticipado");
+        } else if (Modalidad == "V") {
+            $("#L_Modalidad_Pago").html("V - Vencido");
+        } else {
+            $("#L_Modalidad_Pago").html("");
+        }
+
+        /*Cambio L_Periodo_Pago*/
+        if (Periodo_Pago == "D") {
+            $("#L_Periodo_Pago").html("A - Solicitud");
+        } else if (Periodo_Pago == "D") {
+            $("#L_Periodo_Pago").html("D - Días");
+        } else if (Periodo_Pago == "M") {
+            $("#L_Periodo_Pago").html("M - Meses");
+        } else if (Periodo_Pago == "S") {
+            $("#L_Periodo_Pago").html("S - Semestres");
+        } else if (Periodo_Pago == "Y") {
+            $("#L_Periodo_Pago").html("A - Años");
+        } else {
+            $("#L_Periodo_Pago").html("");
+        }
+
+        /*Cambio L_Tipo_Cuota*/
+        if(Tipo_Cuota == 1){
+            $("#L_Tipo_Cuota").html("1 - Capital");
+        } else if (Tipo_Cuota == 2) {
+            $("#L_Tipo_Cuota").html("2 - Solo Interés");
+        } else if (Tipo_Cuota == 3) {
+            $("#L_Tipo_Cuota").html("3 - Capital + Interés");
+        } else if (Tipo_Cuota == 4) {
+            $("#L_Tipo_Cuota").html("4 - Capital + Interés + Otros Conceptos");
+        } else if (Tipo_Cuota == 5) {
+            $("#L_Tipo_Cuota").html("5 - Otros Conceptos");
+        } else if (Tipo_Cuota == 6) {
+            $("#L_Tipo_Cuota").html("6 - Canon de Arriendo");
+        } else if (Tipo_Cuota == 7) {
+            $("#L_Tipo_Cuota").html("7 - A Solicitud");
+        }
+
+        /*Cambio L_Base_Calculo*/
+        if (Base_Calculo == 1) {
+            $("#L_Base_Calculo").html("1 - 360/360");
+        } else if (Base_Calculo == 2) {
+            $("#L_Base_Calculo").html("2 - 365/365");
+        }
+
+        /*Escritura de L_Codigo_Tasa*/
+        $("#L_Codigo_Tasa").html(Tasa);
+
+
     });
 }
 
