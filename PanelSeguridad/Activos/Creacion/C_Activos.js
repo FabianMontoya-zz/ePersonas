@@ -107,7 +107,8 @@ $(document).ready(function () {
 
     $(function () { //Función del acordeon
         $("#Acordeon_Activo").accordion({
-            heightStyle: "content"
+            heightStyle: "content",
+            collapsible: true
         });
     });
 

@@ -535,12 +535,10 @@ function maxLengthTypeNumber(object) {
 
 //validar la longitud de 4 decimales
 function Restric_long_decimal(object) {
-
     $("#" + object).blur(function () {
 
         var ValStr = $('#' + object).val();
         var A_Decimal = ValStr.split(".");
-
         var valida = 0;
 
         if (A_Decimal.length == 1)
