@@ -132,6 +132,30 @@ function transacionAjax_MMoneda(State) {
 }
 
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_MFasecolda(State) {
+    $.ajax({
+        url: "C_ActivosAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'TIPO'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_Fasecolda = [];
+            }
+            else {
+                Matrix_Fasecolda = JSON.parse(result);
+            }
+        },
+        error: function () {
+        }
+    });
+}
+
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_MMarcaClase_F(State) {
     $.ajax({
         url: "C_ActivosAjax.aspx",

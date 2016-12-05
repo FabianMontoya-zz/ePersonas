@@ -5,6 +5,7 @@ var Matrix_Pais = [];
 var Matrix_Personas = [];
 var Matrix_Sucursal = [];
 var Matrix_Moneda = [];
+var Matrix_Fasecolda = [];
 var Matrix_MarcaClase_F = [];
 var Matrix_LineaMarcaClase_F = [];
 
@@ -13,7 +14,6 @@ var Lista_Clase_F = [];
 var ArrayC_Activos = [];
 var Array_Hijo_Cliente = [];
 var ArrayEstado = [];
-
 
 var ID;
 var T_Doc;
@@ -32,6 +32,7 @@ $(document).ready(function () {
     transaccionAjax_MSucursal('MATRIX_SUCURSAL');
     transacionAjax_ListaClaseFasecolda("LIST_CLASE_F");
     transacionAjax_MMoneda('MATRIX_MONEDA');
+    transacionAjax_MFasecolda("MATRIX_FASECOLDA");
     transacionAjax_MMarcaClase_F("MATRIX_MARCA_CLASE_F");
     transacionAjax_MLineaMarcaClase_F("MATRIX_LINEA_MARCA_CLASE_F");
 

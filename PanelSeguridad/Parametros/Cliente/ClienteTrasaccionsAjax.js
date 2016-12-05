@@ -401,10 +401,15 @@ function transacionAjax_Cliente_create(State) {
     var AS;
     var PR;
     var EB;
+    var Sex="";
 
     
+    if ($("#Select_Sex").val() != "-1")
+        Area = $("#Select_Sex").val();
+
     if ($("#Select_Area").val() != "-1")
-        Area = $("#Select_Area").val();
+        Sex = $("#Select_Area").val();
+
 
     if ($("#Select_Cargo").val() != "-1")
         Cargo = $("#Select_Cargo").val();
@@ -530,7 +535,7 @@ function transacionAjax_Cliente_create(State) {
             "TDocJefe": TDocJefe,
             "DocJefe": DocJefe,
             "Politica": Politica,
-            "Sexo": $("#Select_Sex").val(),
+            "Sexo": Sex,
             "FechaNacimiento": $("#Text_fechaNacimiento").val(),
             "GrpDocumento": GrpDocumento,
             "user": User.toUpperCase()

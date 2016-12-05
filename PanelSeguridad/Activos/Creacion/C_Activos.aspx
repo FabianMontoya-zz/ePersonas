@@ -201,6 +201,17 @@
                         <table id="Blo_Fasecolda">
                             <tr>
                                 <td>
+                                    <table id="Codigo_Fasecolda" style="width: 100%;">
+                                        <tr>
+                                            <td class="Label_Bold" style="width: 2%;">Codigo Fasecolda
+                                            </td>
+                                            <td style="width: 90%;">
+                                                <span class="cssToolTip_Form">
+                                                    <input type="text" class="Numeric" id="TxtFasecolda_iD" maxlength="8" style="width: 180px;" />
+                                                    <span class="Spam_ANL"></span></span>
+                                            </td>
+                                        </tr>
+                                    </table>
                                     <table id="T_Datos_Fasecolda" style="width: 100%;">
                                         <tr>
                                             <td class="Label_Bold" style="width: 5%;">Clase

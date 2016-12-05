@@ -25,15 +25,17 @@ Public Class C_ActivosAjax
                 Case "MATRIX_MONEDA"
                     Carga_MMoneda()
 
+                Case "MATRIX_FASECOLDA"
+                    Carga_MFasecolda()
+
                 Case "MATRIX_MARCA_CLASE_F"
-                    Carga_MMarca_Clase_Facecolda()
+                    Carga_MMarca_Clase_Fasecolda()
 
                 Case "MATRIX_LINEA_MARCA_CLASE_F"
-                    Carga_MLinea_Marca_Clase_Facecolda()
+                    Carga_MLinea_Marca_Clase_Fasecolda()
 
                 Case "LIST_CLASE_F"
-                    Carga_Lista_Clase_Facecolda()
-
+                    Carga_Lista_Clase_Fasecolda()
 
 
                 Case "Tipo"
@@ -207,7 +209,7 @@ Public Class C_ActivosAjax
     ''' funcion que carga La lista de clases
     ''' </summary>
     ''' <remarks></remarks>
-    Protected Sub Carga_Lista_Clase_Facecolda()
+    Protected Sub Carga_Lista_Clase_Fasecolda()
 
         Dim SQL As New FasecoldaSQLClass
         Dim ObjList As New List(Of FasecoldaClass)
@@ -221,7 +223,7 @@ Public Class C_ActivosAjax
     ''' funcion que carga matrix de marca clases fasecolda
     ''' </summary>
     ''' <remarks></remarks>
-    Protected Sub Carga_MMarca_Clase_Facecolda()
+    Protected Sub Carga_MMarca_Clase_Fasecolda()
 
         Dim SQL As New FasecoldaSQLClass
         Dim ObjList As New List(Of FasecoldaClass)
@@ -235,12 +237,26 @@ Public Class C_ActivosAjax
     ''' funcion que carga matrix de lineas marca clases fasecolda
     ''' </summary>
     ''' <remarks></remarks>
-    Protected Sub Carga_MLinea_Marca_Clase_Facecolda()
+    Protected Sub Carga_MLinea_Marca_Clase_Fasecolda()
 
         Dim SQL As New FasecoldaSQLClass
         Dim ObjList As New List(Of FasecoldaClass)
 
         ObjList = SQL.Matrix_Linea_Marca_Clases_Fasecolda()
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga matrix de fasecolda
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub Carga_MFasecolda()
+
+        Dim SQL As New FasecoldaSQLClass
+        Dim ObjList As New List(Of FasecoldaClass)
+
+        ObjList = SQL.Matrix_Fasecolda()
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
