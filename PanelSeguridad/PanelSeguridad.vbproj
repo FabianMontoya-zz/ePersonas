@@ -1376,6 +1376,8 @@
     <Compile Include="Parametros\SubTipoProduct_Leasing\SubTipoProduct_LeasingSQLClass.vb" />
     <Compile Include="Parametros\Sucursal\SucursalClass.vb" />
     <Compile Include="Parametros\Sucursal\SucursalSQLClass.vb" />
+    <Compile Include="Parametros\Tasas\TasasClass.vb" />
+    <Compile Include="Parametros\Tasas\TasasSQLClass.vb" />
     <Compile Include="Parametros\TipoActivo\TipoActivo.aspx.designer.vb">
       <DependentUpon>TipoActivo.aspx</DependentUpon>
     </Compile>

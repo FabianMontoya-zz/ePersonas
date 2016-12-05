@@ -1,6 +1,8 @@
 ﻿Public Class FinanciacionClass
 #Region "campos"
     Private _Index As Integer
+    Private _Index_Tasa As Integer
+    Private _Index_Detalles_Tasa As Integer
     Private _Nit_ID As String
     Private _Financiacion_ID As Integer
     Private _Descripcion As String
