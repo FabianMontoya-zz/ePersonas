@@ -553,7 +553,7 @@ function Restric_long_decimal(object) {
         }
         //validamos formato y mensaje
         if (valida == 1) {
-            Mensaje_General("¡Formato Incorrecto!", "El campo debe diligenciarse con el formato xx.xxxx, por ejemplo: 12.3456", "E");
+            Mensaje_General("¡Formato Incorrecto!", "El campo debe diligenciarse con el formato xxx.xxxx, por ejemplo: 123.4567", "E");
             $("#" + object).val("");
         }
     });
