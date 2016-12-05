@@ -25,6 +25,8 @@ Public Class C_ActivosAjax
                 Case "MATRIX_MONEDA"
                     Carga_MMoneda()
 
+                Case "LIST_CLASE_F"
+                    Carga_Lista_Clase_Facecolda()
 
                 Case "Tipo"
                     CargarTipo()
@@ -194,6 +196,21 @@ Public Class C_ActivosAjax
     End Sub
 
     ''' <summary>
+    ''' funcion que carga La lista de clases
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub Carga_Lista_Clase_Facecolda()
+
+        Dim SQL As New FasecoldaSQLClass
+        Dim ObjList As New List(Of FasecoldaClass)
+
+        ObjList = SQL.List_Clases_Fasecolda()
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
+
+
+    ''' <summary>
     ''' funcion que carga el objeto DDL consulta
     ''' </summary>
     ''' <remarks></remarks>
@@ -237,6 +254,7 @@ Public Class C_ActivosAjax
         Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
 
     End Sub
+
 
 
 #End Region

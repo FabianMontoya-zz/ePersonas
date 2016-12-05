@@ -1103,7 +1103,9 @@
                     </select>
                 </td>
                 <td>
-                    <input type="text" id="Txt_N1" maxlength="4" class="Numeric" style="width: 40px" />
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="Txt_N1" maxlength="4" class="Numeric" style="width: 40px" />
+                        <span class="Spam_AN"></span></span>
                 </td>
                 <td>
                     <input type="text" id="Txt_Special" maxlength="200" class="" style="width: 400px" />
@@ -1138,7 +1140,9 @@
                     </select>
                 </td>
                 <td>
-                    <input type="text" id="Txt_N2" maxlength="4" class="Numeric" style="width: 40px" />
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="Txt_N2" maxlength="4" class="Numeric" style="width: 40px" />
+                        <span class="Spam_AN"></span></span>
                 </td>
                 <td>
                     <select id="Select_Letter_2" class="Select_tiny">
@@ -1172,7 +1176,9 @@
                     </select>
                 </td>
                 <td>
-                    <input type="text" id="Txt_N3" maxlength="4" class="Numeric" style="width: 40px" />
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="Txt_N3" maxlength="4" class="Numeric" style="width: 40px" />
+                        <span class="Spam_AN"></span></span>
                 </td>
                 <td>
                     <select id="Select_Orientacion" class="Select_medium">
@@ -1191,11 +1197,13 @@
                         <option value="Lote">Lote</option>
                         <option value="Local">Local</option>
                         <option value="Bodega">Bodega</option>
-                        <option value="Stan">Stand</option>
+                        <option value="Stand">Stand</option>
                     </select>
                 </td>
                 <td>
-                    <input type="text" id="Txt_N4" maxlength="4" class="Numeric" style="width: 40px" />
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="Txt_N4" maxlength="4" class="Numeric" style="width: 40px" />
+                        <span class="Spam_AN"></span></span>
                 </td>
                 <td>
                     <select id="Select_Type_Cons2" class="Select_medium">
@@ -1208,10 +1216,14 @@
                     </select>
                 </td>
                 <td>
-                    <input type="text" id="Txt_N5" maxlength="4" class="Numeric" style="width: 40px" />
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="Txt_N5" maxlength="4" class="Numeric" style="width: 40px" />
+                        <span class="Spam_AN"></span></span>
                 </td>
                 <td>
-                    <input type="text" id="Txt_Texto" maxlength="40" class="Letter" style="width: 200px" />
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="Txt_Texto" maxlength="40" class="Letter" style="width: 200px" />
+                        <span class="Spam_AWords"></span></span>
                 </td>
             </tr>
             <tr>

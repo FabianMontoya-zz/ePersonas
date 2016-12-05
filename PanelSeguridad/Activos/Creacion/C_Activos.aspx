@@ -47,7 +47,6 @@
     <div id="Marco_Contrato">
         <div id="Marco_trabajo_Contrato">
             <div id="Container_controls">
-
                 <div id="Acordeon_Activo" style="width: 100%">
                     <h3>Datos Activos
                     </h3>
@@ -160,7 +159,7 @@
                                 <td id="Txtkey_1" class="Label_Bold" style="width: 7.7%;">Placa
                                 </td>
                                 <td style="width: 15%;">
-                                    <span class="cssToolTip_Form">
+                                    <span class="cssToolTip_Form_T">
                                         <input type="text" id="TxtRef_Other" maxlength="17" style="width: 180px;" />
                                         <span class="Spam_AST"></span></span>
                                 </td>
@@ -194,6 +193,34 @@
                                                     <span class="Spam_ANL"></span></span>
                                             </td>
                                             <td style="width: 10%; padding-bottom: 25px;"></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <table id="Blo_Fasecolda">
+                            <tr>
+                                <td>
+                                    <table id="T_Datos_Fasecolda" style="width: 100%;">
+                                        <tr>
+                                            <td class="Label_Bold" style="width: 7.5%;">Clase
+                                            </td>
+                                            <td style="width: 20%;">
+                                                <select id="Select_ClaseF" class="C_Chosen">
+                                                </select>
+                                            </td>
+                                            <td class="Label_Bold" style="width: 15%;">Marca
+                                            </td>
+                                            <td style="width: 20%;">
+                                                <select id="Select_MarcaF" class="C_Chosen">
+                                                </select>
+                                            </td>
+                                            <td class="Label_Bold" style="width: 10%;">Linea
+                                            </td>
+                                            <td style="width: 10%;">
+                                                <select id="Select_LineaF" class="C_Chosen">
+                                                </select>
+                                            </td>
                                         </tr>
                                     </table>
                                 </td>
@@ -266,7 +293,7 @@
                     </div>
                     <h3>Registro
                     </h3>
-                    <div id="RegistroActivo"  style="height: 240px">
+                    <div id="RegistroActivo" style="height: 240px">
                         <table id="Tabla_Registro" style="width: 100%;">
                             <tr>
                                 <td class="Label_Bold" style="width: 7.7%;">Pais
@@ -333,7 +360,7 @@
                                 </td>
                                 <td id="V_Sigla_3" style="width: 2.8%" class="Sigla"></td>
                                 <td style="width: 11.5%;">
-                                    <span class="cssToolTip_Form">
+                                    <span class="cssToolTip_Form_T">
                                         <input type="text" id="TxtValor_Compra" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
                                         <span class="Spam_AVal"></span></span>
                                 </td>
@@ -374,7 +401,7 @@
                     </div>
                     <h3>Activos NO Financieros
                     </h3>
-                    <div id="ActivosNOFinancieros">
+                    <div id="ActivosNOFinancieros" style="height: 150px;">
                         <table id="Tabla_NoFinan" style="width: 100%;">
                             <tr>
                                 <td class="Label_Bold" style="width: 10%;">Fecha contable Recibo
@@ -396,8 +423,6 @@
                         </table>
                     </div>
                 </div>
-
-
                 <table id="Complementos">
                     <tr>
                         <td>
@@ -435,7 +460,6 @@
                         </td>
                     </tr>
                 </table>
-
                 <div style="width: 100%; text-align: center; margin-top: 25px;">
                     <input id="Btnguardar" type="button" value="Guardar" onclick="BtnCrear();" />
                 </div>
@@ -501,7 +525,9 @@
                     </select>
                 </td>
                 <td>
-                    <input type="text" id="Txt_N1" maxlength="4" class="Numeric" style="width: 40px" />
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="Txt_N1" maxlength="4" class="Numeric" style="width: 40px" />
+                        <span class="Spam_AN"></span></span>
                 </td>
                 <td>
                     <input type="text" id="Txt_Special" maxlength="200" class="" style="width: 400px" />
@@ -536,7 +562,9 @@
                     </select>
                 </td>
                 <td>
-                    <input type="text" id="Txt_N2" maxlength="4" class="Numeric" style="width: 40px" />
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="Txt_N2" maxlength="4" class="Numeric" style="width: 40px" />
+                        <span class="Spam_AN"></span></span>
                 </td>
                 <td>
                     <select id="Select_Letter_2" class="Select_tiny">
@@ -570,7 +598,9 @@
                     </select>
                 </td>
                 <td>
-                    <input type="text" id="Txt_N3" maxlength="4" class="Numeric" style="width: 40px" />
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="Txt_N3" maxlength="4" class="Numeric" style="width: 40px" />
+                        <span class="Spam_AN"></span></span>
                 </td>
                 <td>
                     <select id="Select_Orientacion" class="Select_medium">
@@ -589,11 +619,13 @@
                         <option value="Lote">Lote</option>
                         <option value="Local">Local</option>
                         <option value="Bodega">Bodega</option>
-                        <option value="Stan">Stand</option>
+                        <option value="Stand">Stand</option>
                     </select>
                 </td>
                 <td>
-                    <input type="text" id="Txt_N4" maxlength="4" class="Numeric" style="width: 40px" />
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="Txt_N4" maxlength="4" class="Numeric" style="width: 40px" />
+                        <span class="Spam_AN"></span></span>
                 </td>
                 <td>
                     <select id="Select_Type_Cons2" class="Select_medium">
@@ -606,10 +638,14 @@
                     </select>
                 </td>
                 <td>
-                    <input type="text" id="Txt_N5" maxlength="4" class="Numeric" style="width: 40px" />
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="Txt_N5" maxlength="4" class="Numeric" style="width: 40px" />
+                        <span class="Spam_AN"></span></span>
                 </td>
                 <td>
-                    <input type="text" id="Txt_Texto" maxlength="40" class="Letter" style="width: 200px" />
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="Txt_Texto" maxlength="40" class="Letter" style="width: 200px" />
+                        <span class="Spam_AWords"></span></span>
                 </td>
             </tr>
             <tr>
@@ -636,5 +672,4 @@
             </tr>
         </table>
     </div>
-
 </asp:Content>

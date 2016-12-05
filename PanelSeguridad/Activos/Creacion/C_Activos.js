@@ -4,7 +4,10 @@ var ArrayEmpresaNit = [];
 var Matrix_Pais = [];
 var Matrix_Personas = [];
 var Matrix_Sucursal = [];
-var Matrix_Moneda = []
+var Matrix_Moneda = [];
+
+
+var Lista_Clase_F = [];
 
 var ArrayC_Activos = [];
 var Array_Hijo_Cliente = [];
@@ -24,11 +27,11 @@ $(document).ready(function () {
     transaccionAjax_MPaises_Ciudades('MATRIX_PAIS_CIUDAD');
     transaccionAjax_MPersonas('MATRIX_PERSONAS');
     transaccionAjax_MSucursal('MATRIX_SUCURSAL');
-
+    transacionAjax_ListaClaseFasecolda("LIST_CLASE_F");
+    transacionAjax_MMoneda('MATRIX_MONEDA');
+    
     transacionAjax_EmpresaNit('Cliente')
     transacionAjax_Tipo('Tipo');
-    transacionAjax_MMoneda('MATRIX_MONEDA');
-
     // transacionAjax_Estado('Estado');
     $("#Img1").css("display", "none");
     $("#Img2").css("display", "none");
@@ -45,6 +48,7 @@ $(document).ready(function () {
     $("#Img13").css("display", "none");
 
     $("#Blo_Inmuebles").css("display", "none");
+    $("#Blo_Fasecolda").css("display", "none");
 
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
@@ -95,7 +99,7 @@ $(document).ready(function () {
         "bJQueryUI": true, "iDisplayLength": 1000,
         "bDestroy": true
     });
-       
+
     $(function () { //Función del acordeon
         $("#Acordeon_Activo").accordion({
             heightStyle: "content"
@@ -244,6 +248,7 @@ function Change_Select_TA() {
                 $("#Tabla_LLave_Inmueble").css("display", "inline-table");
                 $("#Tabla_LLave_Vehiculos").css("display", "none");
                 $("#Blo_Inmuebles").css("display", "inline-table");
+                $("#Blo_Fasecolda").css("display", "none");
                 $("#Acordeon_Activo").accordion("option", "active", 1);
                 break;
 
@@ -252,6 +257,7 @@ function Change_Select_TA() {
                 $("#Tabla_LLave_Inmueble").css("display", "none");
                 $("#Tabla_LLave_Vehiculos").css("display", "inline-table");
                 $("#Blo_Inmuebles").css("display", "none");
+                $("#Blo_Fasecolda").css("display", "inline-table");
                 $("#Txtkey_1").html("Placa");
                 $("#Acordeon_Activo").accordion("option", "active", 1);
                 break;
@@ -261,6 +267,7 @@ function Change_Select_TA() {
                 $("#Tabla_LLave_Inmueble").css("display", "none");
                 $("#Tabla_LLave_Vehiculos").css("display", "inline-table");
                 $("#Blo_Inmuebles").css("display", "none");
+                $("#Blo_Fasecolda").css("display", "none");
                 $("#Txtkey_1").html("C. Identificación");
                 break;
 
@@ -269,6 +276,7 @@ function Change_Select_TA() {
                 $("#Tabla_LLave_Inmueble").css("display", "none");
                 $("#Tabla_LLave_Vehiculos").css("display", "inline-table");
                 $("#Blo_Inmuebles").css("display", "none");
+                $("#Blo_Fasecolda").css("display", "none");
                 $("#Txtkey_1").html("C. Identificación");
                 $("#Acordeon_Activo").accordion("option", "active", 1);
                 break;

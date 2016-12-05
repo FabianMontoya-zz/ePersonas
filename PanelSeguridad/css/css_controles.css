@@ -428,8 +428,8 @@ option
         padding: 10px 10px 10px 10px;
         max-width: 6000px;
         position: absolute; /* El tooltip se posiciona de forma absoluta para no modificar el aspezto del resto de la pagina */
-        bottom: 5px; /* Posicion apartir de la parte superior del primer elemento padre con posicion relativa */
-        right: 50px; /* Posicion apartir de la parte izquierda del primer elemento padre con posicion relativa */
+        bottom: 1px; /* Posicion apartir de la parte superior del primer elemento padre con posicion relativa */
+        left: 150px; /* Posicion apartir de la parte izquierda del primer elemento padre con posicion relativa */
         z-index: 1000; /* Poner un z-index alto para que aparezca por encima del resto de elementos */
     }
 

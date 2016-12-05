@@ -131,7 +131,6 @@ function transacionAjax_MMoneda(State) {
     });
 }
 
-
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_EmpresaNit(State) {
@@ -177,6 +176,33 @@ function transacionAjax_Tipo(State) {
             else {
                 ArrayTipo = JSON.parse(result);
                 charge_CatalogList(ArrayTipo, "Select_Tipo", 1);
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_ListaClaseFasecolda(State) {
+    $.ajax({
+        url: "C_ActivosAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'TIPO'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Lista_Clase_F = [];
+            }
+            else {
+                Lista_Clase_F = JSON.parse(result);
+                Charge_Combos_Depend_Nit(Lista_Clase_F, "Select_ClaseF", "", "");
             }
         },
         error: function () {
