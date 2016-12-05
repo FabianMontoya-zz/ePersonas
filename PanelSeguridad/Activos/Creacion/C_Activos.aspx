@@ -203,7 +203,7 @@
                                 <td>
                                     <table id="Codigo_Fasecolda" style="width: 100%;">
                                         <tr>
-                                            <td class="Label_Bold" style="width: 2%;">Codigo Fasecolda
+                                            <td class="Label_Bold" style="width: 15.5%;">Codigo Fasecolda
                                             </td>
                                             <td style="width: 90%;">
                                                 <span class="cssToolTip_Form">

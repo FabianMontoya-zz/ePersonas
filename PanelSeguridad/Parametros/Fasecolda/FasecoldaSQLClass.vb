@@ -468,6 +468,7 @@ Public Class FasecoldaSQLClass
                     objFasecolda.Marca = ReadConsulta.GetValue(1)
                     objFasecolda.Clase = ReadConsulta.GetValue(2)
                     objFasecolda.Fasecolda_ID = ReadConsulta.GetValue(3)
+                    objFasecolda.Cilindraje = ReadConsulta.GetValue(4)
 
                     'agregamos a la lista
                     ObjListFasecolda.Add(objFasecolda)
@@ -617,7 +618,7 @@ Public Class FasecoldaSQLClass
 
         Dim sql As New StringBuilder
 
-        sql.Append(" SELECT DISTINCT(FAS_Linea), FAS_Marca, FAS_Clase, FAS_Fasecolda_ID FROM FASECOLDA ORDER BY  FAS_Clase,FAS_Marca,FAS_Linea  ASC ")
+        sql.Append(" SELECT DISTINCT(FAS_Linea), FAS_Marca, FAS_Clase, FAS_Fasecolda_ID,FAS_Cilindraje FROM FASECOLDA ORDER BY  FAS_Clase,FAS_Marca,FAS_Linea,FAS_Cilindraje  ASC ")
         Dim StrQuery As String = sql.ToString
 
         ObjList = listFasecolda(StrQuery, Conexion, "Matrix_Linea_Clases_Marca_Fasecolda")
