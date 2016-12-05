@@ -456,7 +456,5 @@ function Add_Activos(index) {
 }
 
 function Table_Activos() {
-
     $("#container_TActivos").html("");
-
 }
