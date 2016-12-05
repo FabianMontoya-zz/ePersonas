@@ -437,14 +437,27 @@ Public Class FasecoldaSQLClass
                     'cargamos datos sobre el objeto de login
 
                     objFasecolda.Clase = ReadConsulta.GetValue(0)
-                    objFasecolda.Linea = ReadConsulta.GetValue(0)
+                    objFasecolda.Linea = ReadConsulta.GetValue(1)
 
                     'agregamos a la lista
                     ObjListFasecolda.Add(objFasecolda)
 
                 End While
 
-            Case "Matrix"
+            Case "Matrix_Clases_Marca_Fasecolda"
+                'recorremos la consulta por la cantidad de datos en la BD
+                While ReadConsulta.Read
+
+                    Dim objFasecolda As New FasecoldaClass
+                    'cargamos datos sobre el objeto de login
+
+                    objFasecolda.Marca = ReadConsulta.GetValue(0)
+                    objFasecolda.Clase = ReadConsulta.GetValue(1)
+
+                    'agregamos a la lista
+                    ObjListFasecolda.Add(objFasecolda)
+
+                End While
 
         End Select
 
@@ -501,6 +514,28 @@ Public Class FasecoldaSQLClass
         Dim StrQuery As String = sql.ToString
 
         ObjList = listFasecolda(StrQuery, Conexion, "List_Clases_Fasecolda")
+
+        Return ObjList
+
+    End Function
+
+    ''' <summary>
+    ''' trae la matrix marcas clases fasecolda
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Matrix_Marca_Clases_Fasecolda()
+
+        Dim ObjList As New List(Of FasecoldaClass)
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("2")
+
+        Dim sql As New StringBuilder
+
+        sql.Append(" SELECT DISTINCT(FAS_Marca), FAS_Clase FROM FASECOLDA ORDER BY  FAS_Clase,FAS_Marca ASC ")
+        Dim StrQuery As String = sql.ToString
+
+        ObjList = listFasecolda(StrQuery, Conexion, "Matrix_Clases_Marca_Fasecolda")
 
         Return ObjList
 

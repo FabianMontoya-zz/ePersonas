@@ -131,6 +131,32 @@ function transacionAjax_MMoneda(State) {
     });
 }
 
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_MMarcaClase_F(State) {
+    $.ajax({
+        url: "C_ActivosAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'TIPO'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_MarcaClase_F = [];
+            }
+            else {
+                Matrix_MarcaClase_F = JSON.parse(result);
+             }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_EmpresaNit(State) {

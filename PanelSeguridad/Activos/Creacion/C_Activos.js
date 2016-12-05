@@ -5,7 +5,7 @@ var Matrix_Pais = [];
 var Matrix_Personas = [];
 var Matrix_Sucursal = [];
 var Matrix_Moneda = [];
-
+var Matrix_MarcaClase_F = [];
 
 var Lista_Clase_F = [];
 
@@ -29,6 +29,7 @@ $(document).ready(function () {
     transaccionAjax_MSucursal('MATRIX_SUCURSAL');
     transacionAjax_ListaClaseFasecolda("LIST_CLASE_F");
     transacionAjax_MMoneda('MATRIX_MONEDA');
+    transacionAjax_MMarcaClase_F("MATRIX_MARCA_CLASE_F");
     
     transacionAjax_EmpresaNit('Cliente')
     transacionAjax_Tipo('Tipo');
@@ -111,6 +112,7 @@ $(document).ready(function () {
     Change_Select_pais();
     Change_Select_Moneda();
     Format_Adress("Txt_Adress_U");
+    Change_Select_Clase();
 
 });
 
@@ -284,6 +286,15 @@ function Change_Select_TA() {
 
     });
 }
+
+//carga marcas segun la clase
+function Change_Select_Clase() {
+    $("#Select_ClaseF").change(function () {
+        var index_ID = this.value;
+        Charge_Combos_Depend_Nit(Matrix_MarcaClase_F, "Select_MarcaF", index_ID, "");
+    });
+}
+
 
 
 //limpiar campos
