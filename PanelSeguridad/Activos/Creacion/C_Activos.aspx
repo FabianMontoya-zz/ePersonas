@@ -203,21 +203,21 @@
                                 <td>
                                     <table id="T_Datos_Fasecolda" style="width: 100%;">
                                         <tr>
-                                            <td class="Label_Bold" style="width: 7.5%;">Clase
+                                            <td class="Label_Bold" style="width: 5%;">Clase
                                             </td>
                                             <td style="width: 20%;">
                                                 <select id="Select_ClaseF" class="C_Chosen">
                                                 </select>
                                             </td>
-                                            <td class="Label_Bold" style="width: 15%;">Marca
+                                            <td class="Label_Bold" style="width: 5%;">Marca
                                             </td>
-                                            <td style="width: 20%;">
+                                            <td style="width: 10%;">
                                                 <select id="Select_MarcaF" class="C_Chosen">
                                                 </select>
                                             </td>
-                                            <td class="Label_Bold" style="width: 10%;">Linea
+                                            <td class="Label_Bold" style="width: 5%;">Linea
                                             </td>
-                                            <td style="width: 10%;">
+                                            <td style="width: 20%;">
                                                 <select id="Select_LineaF" class="C_Chosen">
                                                 </select>
                                             </td>

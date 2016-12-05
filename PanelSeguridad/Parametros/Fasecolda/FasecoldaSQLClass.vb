@@ -459,6 +459,22 @@ Public Class FasecoldaSQLClass
 
                 End While
 
+            Case "Matrix_Linea_Clases_Marca_Fasecolda"
+                'recorremos la consulta por la cantidad de datos en la BD
+                While ReadConsulta.Read
+
+                    Dim objFasecolda As New FasecoldaClass
+                    'cargamos datos sobre el objeto de login
+
+                    objFasecolda.Linea = ReadConsulta.GetValue(0)
+                    objFasecolda.Marca = ReadConsulta.GetValue(1)
+                    objFasecolda.Clase = ReadConsulta.GetValue(2)
+                    objFasecolda.Fasecolda_ID = ReadConsulta.GetValue(3)
+
+                    'agregamos a la lista
+                    ObjListFasecolda.Add(objFasecolda)
+
+                End While
         End Select
 
         'cerramos conexiones
@@ -540,6 +556,29 @@ Public Class FasecoldaSQLClass
         Return ObjList
 
     End Function
+
+    ''' <summary>
+    ''' trae la matrix lineas marcas clases fasecolda
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Matrix_Linea_Marca_Clases_Fasecolda()
+
+        Dim ObjList As New List(Of FasecoldaClass)
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("2")
+
+        Dim sql As New StringBuilder
+
+        sql.Append(" SELECT DISTINCT(FAS_Linea), FAS_Marca, FAS_Clase, FAS_Fasecolda_ID FROM FASECOLDA ORDER BY  FAS_Clase,FAS_Marca,FAS_Linea  ASC ")
+        Dim StrQuery As String = sql.ToString
+
+        ObjList = listFasecolda(StrQuery, Conexion, "Matrix_Linea_Clases_Marca_Fasecolda")
+
+        Return ObjList
+
+    End Function
+
 
 #End Region
 

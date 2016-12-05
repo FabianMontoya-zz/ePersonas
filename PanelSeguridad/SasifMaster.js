@@ -564,15 +564,29 @@ function charge_CatalogList(objCatalog, nameList, selector) {
 }
 
 //carga los combps dependiendo del nit
-function Charge_Combos_Depend_Verificacion(Matrix, Selector, Nit, Doc_ID, Index_Edit) {
+function Charge_Combos_Depend_Verificacion(Matrix, Selector, P_1, P_2, Index_Edit) {
 
     $('#' + Selector).empty();
     var objList = $("[id$='" + Selector + "']");
-    for (Item in Matrix) {
-        if (Matrix[Item].Nit_ID == Nit && Matrix[Item].Doc_ID == Doc_ID) {
-            $("#" + Selector).append("<option value='" + Matrix[Item].Doc_ID_Verif + "'>" + Matrix[Item].Doc_ID_Verif + " - " + Matrix[Item].DescripDoc_Verif + "</option>");
-        }
+
+     switch (Selector) {
+        case "Select_Doc_Verif":
+            for (Item in Matrix) {
+                if (Matrix[Item].Nit_ID == P_1 && Matrix[Item].Doc_ID == P_2) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Doc_ID_Verif + "'>" + Matrix[Item].Doc_ID_Verif + " - " + Matrix[Item].DescripDoc_Verif + "</option>");
+                }
+            }
+            break;
+
+        case "Select_LineaF":
+            for (Item in Matrix) {
+                if (Matrix[Item].Marca == P_1 && Matrix[Item].Clase == P_2) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Fasecolda_ID + "'>" + Matrix[Item].Linea + "</option>");
+                }
+            }
+            break;
     }
+
     $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
 
     if (Index_Edit == "")
@@ -827,7 +841,7 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
                 if ((Matrix[Item].Nit_ID == Nit) || (Matrix[Item].Nit_ID == 0)) {
                     if (Matrix[Item].Nit_ID == Nit) {
                         Tipo_Condicion = "PROP";
-                    }else if (Matrix[Item].Nit_ID == 0){
+                    } else if (Matrix[Item].Nit_ID == 0) {
                         Tipo_Condicion = "GENE";
                     }
 
@@ -851,6 +865,13 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
         case "Select_ClaseF":
             for (Item in Matrix) {
                 $("#" + Selector).append("<option value='" + Matrix[Item].Clase + "'> " + Matrix[Item].Linea + "</option>");
+            }
+            break;
+
+        case "Select_MarcaF":
+            for (Item in Matrix) {
+                if (Matrix[Item].Clase == Nit)
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Marca + "'> " + Matrix[Item].Marca + "</option>");
             }
             break;
     }

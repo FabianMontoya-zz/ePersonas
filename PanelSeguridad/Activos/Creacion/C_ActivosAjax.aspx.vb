@@ -28,6 +28,9 @@ Public Class C_ActivosAjax
                 Case "MATRIX_MARCA_CLASE_F"
                     Carga_MMarca_Clase_Facecolda()
 
+                Case "MATRIX_LINEA_MARCA_CLASE_F"
+                    Carga_MLinea_Marca_Clase_Facecolda()
+
                 Case "LIST_CLASE_F"
                     Carga_Lista_Clase_Facecolda()
 
@@ -224,6 +227,20 @@ Public Class C_ActivosAjax
         Dim ObjList As New List(Of FasecoldaClass)
 
         ObjList = SQL.Matrix_Marca_Clases_Fasecolda()
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga matrix de lineas marca clases fasecolda
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub Carga_MLinea_Marca_Clase_Facecolda()
+
+        Dim SQL As New FasecoldaSQLClass
+        Dim ObjList As New List(Of FasecoldaClass)
+
+        ObjList = SQL.Matrix_Linea_Marca_Clases_Fasecolda()
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub

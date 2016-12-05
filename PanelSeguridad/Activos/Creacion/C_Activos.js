@@ -6,6 +6,7 @@ var Matrix_Personas = [];
 var Matrix_Sucursal = [];
 var Matrix_Moneda = [];
 var Matrix_MarcaClase_F = [];
+var Matrix_LineaMarcaClase_F = [];
 
 var Lista_Clase_F = [];
 
@@ -13,9 +14,11 @@ var ArrayC_Activos = [];
 var Array_Hijo_Cliente = [];
 var ArrayEstado = [];
 
+
 var ID;
 var T_Doc;
 var Doc;
+var Clase_Index;
 /*--------------- region de variables globales --------------------*/
 
 //Evento load JS
@@ -30,7 +33,8 @@ $(document).ready(function () {
     transacionAjax_ListaClaseFasecolda("LIST_CLASE_F");
     transacionAjax_MMoneda('MATRIX_MONEDA');
     transacionAjax_MMarcaClase_F("MATRIX_MARCA_CLASE_F");
-    
+    transacionAjax_MLineaMarcaClase_F("MATRIX_LINEA_MARCA_CLASE_F");
+
     transacionAjax_EmpresaNit('Cliente')
     transacionAjax_Tipo('Tipo');
     // transacionAjax_Estado('Estado');
@@ -113,6 +117,7 @@ $(document).ready(function () {
     Change_Select_Moneda();
     Format_Adress("Txt_Adress_U");
     Change_Select_Clase();
+    Change_Select_Marca();
 
 });
 
@@ -291,11 +296,19 @@ function Change_Select_TA() {
 function Change_Select_Clase() {
     $("#Select_ClaseF").change(function () {
         var index_ID = this.value;
+        Clase_Index = index_ID;
+        $("#Select_LineaF").empty();
         Charge_Combos_Depend_Nit(Matrix_MarcaClase_F, "Select_MarcaF", index_ID, "");
     });
 }
 
-
+//carga lineas  segun la marca y clase
+function Change_Select_Marca() {
+    $("#Select_MarcaF").change(function () {
+        var index_ID = this.value;
+        Charge_Combos_Depend_Verificacion(Matrix_LineaMarcaClase_F, "Select_LineaF", index_ID, Clase_Index, "");
+    });
+}
 
 //limpiar campos
 function Clear() {
@@ -310,11 +323,7 @@ function Add_Activos(index) {
     Table_Activos();
 }
 
-
-
 function Table_Activos() {
-
     $("#container_TActivos").html("");
-
 }
 
