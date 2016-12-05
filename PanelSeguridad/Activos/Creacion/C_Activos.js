@@ -19,6 +19,8 @@ var ID;
 var T_Doc;
 var Doc;
 var Clase_Index;
+var Year_work;
+
 /*--------------- region de variables globales --------------------*/
 
 //Evento load JS
@@ -258,7 +260,7 @@ function Change_Select_TA() {
                 $("#Tabla_LLave_Vehiculos").css("display", "none");
                 $("#Blo_Inmuebles").css("display", "inline-table");
                 $("#Blo_Fasecolda").css("display", "none");
-                $("#Acordeon_Activo").accordion("option", "active", 1);
+                // $("#Acordeon_Activo").accordion("option", "active", 1);
                 break;
 
             case "2":
@@ -268,7 +270,8 @@ function Change_Select_TA() {
                 $("#Blo_Inmuebles").css("display", "none");
                 $("#Blo_Fasecolda").css("display", "inline-table");
                 $("#Txtkey_1").html("Placa");
-                $("#Acordeon_Activo").accordion("option", "active", 1);
+                //   $("#Acordeon_Activo").accordion("option", "active", 1);
+                Year_work = Captura_parametro();
                 break;
 
             case "-1":
@@ -310,6 +313,22 @@ function Change_Select_Marca() {
         var index_ID = this.value;
         Charge_Combos_Depend_Verificacion(Matrix_LineaMarcaClase_F, "Select_LineaF", index_ID, Clase_Index, "");
     });
+}
+
+function Captura_parametro() {
+    var Year_actual;
+    for (item in ArrayMenu) {
+        if (ArrayMenu[item].IDlink == Link) {
+            Year_actual = ArrayMenu[item].Parametro_1;
+
+            var ActualYear = $("#Hours").html();
+            var A_Date = ActualYear.split("-");
+            var Year_F = parseInt(A_Date[0]) - parseInt(Year_actual);
+
+            CargaYear("Select_modelo", 25, Year_F, "");
+        }
+    }
+    return Year_actual;
 }
 
 //limpiar campos

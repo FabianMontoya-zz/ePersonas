@@ -609,7 +609,7 @@ function Charge_Combos_Depend_Verificacion(Matrix, Selector, P_1, P_2, Index_Edi
         case "Select_LineaF":
             for (Item in Matrix) {
                 if (Matrix[Item].Marca == P_1 && Matrix[Item].Clase == P_2) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Fasecolda_ID + "'>" + Matrix[Item].Linea + "</option>");
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Fasecolda_ID + "'>" + Matrix[Item].Linea + " C.C. " + Matrix[Item].Cilindraje  + "</option>");
                 }
             }
             break;

@@ -214,25 +214,43 @@
                                     </table>
                                     <table id="T_Datos_Fasecolda" style="width: 100%;">
                                         <tr>
-                                            <td class="Label_Bold" style="width: 5%;">Clase
+                                            <td class="Label_Bold" style="width: 10%;">Clase
                                             </td>
                                             <td style="width: 20%;">
                                                 <select id="Select_ClaseF" class="C_Chosen">
                                                 </select>
                                             </td>
+                                            <td style="width: 50%;"></td>
+                                        </tr>
+                                        <tr>
                                             <td class="Label_Bold" style="width: 5%;">Marca
                                             </td>
                                             <td style="width: 10%;">
                                                 <select id="Select_MarcaF" class="C_Chosen">
                                                 </select>
                                             </td>
+                                            <td style="width: 50%;"></td>
+
+                                        </tr>
+                                        <tr>
                                             <td class="Label_Bold" style="width: 5%;">Linea
                                             </td>
                                             <td style="width: 20%;">
                                                 <select id="Select_LineaF" class="C_Chosen">
                                                 </select>
                                             </td>
+                                            <td style="width: 50%;"></td>
                                         </tr>
+                                        <tr>
+                                            <td class="Label_Bold" style="width: 5%;">Modelo
+                                            </td>
+                                            <td style="width: 20%;">
+                                                <select id="Select_modelo" class="C_Chosen">
+                                                </select>
+                                            </td>
+                                            <td style="width: 50%;"></td>
+                                        </tr>
+
                                     </table>
                                 </td>
                             </tr>
