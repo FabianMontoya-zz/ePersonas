@@ -843,6 +843,38 @@ Public Class ClienteSQLClass
 
                 End While
 
+            Case "Matrix_Personas_Direcciones"
+                While ReadConsulta.Read
+
+                    Dim objCliente As New ClienteClass
+
+                    objCliente.Nit_ID = ReadConsulta.GetValue(0)
+                    objCliente.TypeDocument_ID = ReadConsulta.GetValue(1)
+                    objCliente.Document_ID = ReadConsulta.GetValue(2)
+                    objCliente.Digito_Verificacion = ReadConsulta.GetValue(3)
+
+                    If Not (IsDBNull(ReadConsulta.GetValue(4))) Then objCliente.Nombre = ReadConsulta.GetValue(4) Else objCliente.Nombre = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(5))) Then objCliente.Nombre_2 = ReadConsulta.GetValue(5) Else objCliente.Nombre_2 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(6))) Then objCliente.Apellido_1 = ReadConsulta.GetValue(6) Else objCliente.Apellido_1 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(7))) Then objCliente.Apellido_2 = ReadConsulta.GetValue(7) Else objCliente.Apellido_2 = ""
+
+                    If Not (IsDBNull(ReadConsulta.GetValue(8))) Then objCliente.Ciudad_ID = ReadConsulta.GetValue(8) Else objCliente.Ciudad_ID = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(9))) Then objCliente.PaginaWeb = ReadConsulta.GetValue(9) Else objCliente.PaginaWeb = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(10))) Then objCliente.Direccion = ReadConsulta.GetValue(10) Else objCliente.Direccion = ""
+
+                    If Not (IsDBNull(ReadConsulta.GetValue(11))) Then objCliente.Telefono_1 = ReadConsulta.GetValue(11) Else objCliente.Telefono_1 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(12))) Then objCliente.Telefono_2 = ReadConsulta.GetValue(12) Else objCliente.Telefono_2 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(13))) Then objCliente.Telefono_3 = ReadConsulta.GetValue(13) Else objCliente.Telefono_3 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(14))) Then objCliente.Telefono_4 = ReadConsulta.GetValue(14) Else objCliente.Telefono_4 = ""
+
+                    If Not (IsDBNull(ReadConsulta.GetValue(15))) Then objCliente.Correo_1 = ReadConsulta.GetValue(15) Else objCliente.Correo_1 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(15))) Then objCliente.Correo_1 = ReadConsulta.GetValue(16) Else objCliente.Correo_2 = ""
+
+                    'agregamos a la lista
+                    ObjListCliente.Add(objCliente)
+
+                End While
+
         End Select
 
         'cerramos conexiones
@@ -1225,6 +1257,50 @@ Public Class ClienteSQLClass
 
         Return ObjList
     End Function
+
+    ''' <summary>
+    ''' lee matrix para Direccion de las personas
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Matrix_Personas_Direcciones()
+
+        Dim ObjList As New List(Of ClienteClass)
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("2")
+
+        Dim sql As New StringBuilder
+
+        sql.Append("SELECT  c.CLI_Nit_ID, " & _
+                        " c.CLI_TypeDocument_ID, " & _
+                        " c.CLI_Document_ID, " & _
+                        " c.CLI_Digito_Verificacion, " & _
+                        " c.CLI_Nombre, " & _
+                        " c.CLI_Nombre_2, " & _
+                        " c.CLI_Apellido_1, " & _
+                        " c.CLI_Apellido_2, " & _
+                        " c.CLI_Ciudad_ID, " & _
+                        " d.D_PaginaWeb, " & _
+                        " d.D_Direccion, " & _
+                        " d.D_Telefono_1, " & _
+                        " d.D_Telefono_2, " & _
+                        " d.D_Telefono_3, " & _
+                        " d.D_Telefono_4, " & _
+                        " d.D_Correo_1, " & _
+                        " d.D_Correo_2 " & _
+                        "  FROM CLIENTE c " & _
+                        "  LEFT JOIN DIRECCIONES d " & _
+                        "  ON d.D_Document_ID = c.CLI_Document_ID " & _
+                        "  ORDER BY c.CLI_Nit_ID, c.CLI_Document_ID ASC")
+
+        Dim StrQuery As String = sql.ToString
+
+        ObjList = list(StrQuery, Conexion, "Matrix_Personas_Direcciones")
+
+        Return ObjList
+    End Function
+
+
 
 #End Region
 

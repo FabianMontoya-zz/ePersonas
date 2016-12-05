@@ -28,6 +28,9 @@ Public Class C_ContratoAjax
                 Case "MATRIX_CICLO"
                     Carga_MCiclo()
 
+                Case "MATRIX_DIRECCIONES"
+                    Carga_MDirecciones()
+
                 Case "Cliente"
                     CargarCliente()
 
@@ -196,6 +199,21 @@ Public Class C_ContratoAjax
 
         Dim ObjList_Matrix As New List(Of CicloClass)
         ObjList_Matrix = SQL.Matrix_Ciclo()
+
+        Response.Write(JsonConvert.SerializeObject(ObjList_Matrix.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga La matrix Direcciones
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub Carga_MDirecciones()
+
+        Dim SQL As New ClienteSQLClass
+
+        Dim ObjList_Matrix As New List(Of ClienteClass)
+        ObjList_Matrix = SQL.Matrix_Personas_Direcciones
 
         Response.Write(JsonConvert.SerializeObject(ObjList_Matrix.ToArray()))
 

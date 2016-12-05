@@ -1,5 +1,5 @@
 ﻿Public Class ClienteClass
-#Region "Campos"
+#Region "Campos Clientes"
 
     Private _Index As Long
     Private _Nit_ID As String
@@ -69,9 +69,32 @@
     Private _DescripMotivoBloqueo As String
     Private _DescripSexo As String
 
+
+
 #End Region
 
-#Region "Propiedades"
+#Region "Campos Direccion"
+    Private _PaginaWeb As String
+
+    Private _Correo_1 As String
+    Private _Correo_2 As String
+
+    Private _Contacto As String
+
+    Private _Telefono_1 As String
+    Private _Telefono_2 As String
+    Private _Telefono_3 As String
+    Private _Telefono_4 As String
+
+    Private _Direccion As String
+
+    Private _Tipo_1 As String
+    Private _Tipo_2 As String
+    Private _Tipo_3 As String
+    Private _Tipo_4 As String
+#End Region
+
+#Region "Propiedades Clientes"
     Public Property Index() As Long
         Get
             Return Me._Index
@@ -540,20 +563,39 @@
     End Property
 #End Region
 
-#Region "Campos Direccion"
-    Private _Telefono_1 As String
-    Private _Telefono_2 As String
-    Private _Telefono_3 As String
-    Private _Telefono_4 As String
-    Private _Tipo_1 As String
-    Private _Tipo_2 As String
-    Private _Tipo_3 As String
-    Private _Tipo_4 As String
-    Private _Correo_1 As String
-    Private _Correo_2 As String
-#End Region
-
 #Region "Propiedades Direccion"
+    Public Property PaginaWeb() As String
+        Get
+            Return Me._PaginaWeb
+        End Get
+        Set(ByVal value As String)
+            Me._PaginaWeb = value
+        End Set
+    End Property
+    Public Property Correo_1() As String
+        Get
+            Return Me._Correo_1
+        End Get
+        Set(ByVal value As String)
+            Me._Correo_1 = value
+        End Set
+    End Property
+    Public Property Correo_2() As String
+        Get
+            Return Me._Correo_2
+        End Get
+        Set(ByVal value As String)
+            Me._Correo_2 = value
+        End Set
+    End Property
+    Public Property Contacto() As String
+        Get
+            Return Me._Contacto
+        End Get
+        Set(ByVal value As String)
+            Me._Contacto = value
+        End Set
+    End Property
     Public Property Telefono_1() As String
         Get
             Return Me._Telefono_1
@@ -586,6 +628,14 @@
             Me._Telefono_4 = value
         End Set
     End Property
+    Public Property Direccion() As String
+        Get
+            Return Me._Direccion
+        End Get
+        Set(ByVal value As String)
+            Me._Direccion = value
+        End Set
+    End Property
     Public Property Tipo_1() As String
         Get
             Return Me._Tipo_1
@@ -616,22 +666,6 @@
         End Get
         Set(ByVal value As String)
             Me._Tipo_4 = value
-        End Set
-    End Property
-    Public Property Correo_1() As String
-        Get
-            Return Me._Correo_1
-        End Get
-        Set(ByVal value As String)
-            Me._Correo_1 = value
-        End Set
-    End Property
-    Public Property Correo_2() As String
-        Get
-            Return Me._Correo_2
-        End Get
-        Set(ByVal value As String)
-            Me._Correo_2 = value
         End Set
     End Property
 #End Region

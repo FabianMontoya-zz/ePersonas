@@ -6,6 +6,7 @@ var Matrix_Personas = [];
 var Matrix_Ciclo = [];
 var Matrix_Productos = [];
 var Matrix_Financiacion = [];
+var Matrix_Direcciones = [];
 
 var ArrayC_Contrato = [];
 var ArrayEmpresaNit = [];
@@ -30,6 +31,7 @@ $(document).ready(function () {
     transaccionAjax_MCiclo('MATRIX_CICLO');
     transacionAjax_Productos('MATRIX_PRODUCTOS');
     transacionAjax_Financiacion('MATRIX_FINANCIACION');
+    transacionAjax_Financiacion('MATRIX_DIRECCIONES');
 
     Ocultar_IMGS_Errores();
 
@@ -164,6 +166,7 @@ function Change_Select_Nit() {
         Charge_Combo_Persona(Matrix_Personas, "Select_Persona_C", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Productos, "Select_Producto", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Financiacion, "Select_Condicion_Financiacion", index_ID, "");
+        
     });
 }
 
@@ -186,6 +189,8 @@ function Change_Select_Persona() {
         } else {
             $("#Img6").css("display", "none");
         }
+        var index_ID = this.value;
+        Charge_Combo_Persona(Matrix_Direcciones, "Select_Direccion", index_ID, "");
     });
 }
 
@@ -382,7 +387,7 @@ function validarCamposCrear() {
     var Campo_13 = $("#TXT_Plazo").val(); //Img13
     var Campo_14 = $("#Select_Ciclo").val(); //Img14 -- Campo no obligatorio
     var Campo_15 = $("#Select_Base_Calculo").val(); //Img15
-    var Campo_16 = $("#Txt_Adress_C").val(); //Img16
+    var Campo_16 = $("#Select_Direccion").val(); //Img16
     var Campo_17 = $("#TXT_Valor_Total").val(); //Img17
     var Campo_18 = $("#TXT_Valor_Financiado").val(); //Img18
     var Campo_19 = $("#TXT_Valor_Opcion_Compra").val(); //Img19
@@ -470,7 +475,7 @@ function validarCamposCrear() {
             $("#Img15").css("display", "none");
         }
         //--16--
-        if (Campo_16 == "-1" || Campo_16 == "") {
+        if (Campo_16 == "-1" || Campo_16 == "" || Campo_16 == null) {
             $("#Img16").css("display", "inline-table");
         } else {
             $("#Img16").css("display", "none");

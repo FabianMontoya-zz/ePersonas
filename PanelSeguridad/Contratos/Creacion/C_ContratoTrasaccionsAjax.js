@@ -186,6 +186,31 @@ function transaccionAjax_MCiclo(State) {
     });
 }
 
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_MDirecciones(State) {
+    $.ajax({
+        url: "C_ContratoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'Direcciones'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_Direcciones = [];
+            }
+            else {
+                Matrix_Ciclo = JSON.parse(result);
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
 
 /*------------------------------ crear ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
