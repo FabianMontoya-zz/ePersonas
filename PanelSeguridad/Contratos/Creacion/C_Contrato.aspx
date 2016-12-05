@@ -335,7 +335,7 @@
                         <tr>
                             <td class="Label_Bold" style="width: 10%;">Total Cuota/Tasa</td>
                             <td id="L_Moneda_5" class="Sigla" style="width: 7%"></td>
-                            <td id="L_Cuota_Tasa" style="width: 17%;">[Total cuota/tasa]</td>
+                            <td id="L_Cuota_Tasa" style="width: 17%;">00.000.0000</td>
 
                             <td class="Label_Bold" style="width: 10%;">Modalidad Pago</td>
                             <td id="L_Modalidad_Pago" style="width: 17%;"></td>
@@ -362,7 +362,7 @@
                             </td>
                             <td style="width: 7%; padding-left: 10px;">
                                 <span class="cssToolTip_Form">
-                                    <input style="width: 100%;" type="text" id="TXT_Puntos_Adicionales" maxlength="7" class="Decimal" />
+                                    <input style="width: 100%;" type="text" id="TXT_Puntos_Adicionales" maxlength="8" class="Decimal" />
                                     <span class="Spam_ADec"></span></span>
                             </td>
                             <td style="width: 30%;"></td>
