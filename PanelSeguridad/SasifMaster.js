@@ -535,10 +535,12 @@ function maxLengthTypeNumber(object) {
 
 //validar la longitud de 4 decimales
 function Restric_long_decimal(object) {
+
     $("#" + object).blur(function () {
 
         var ValStr = $('#' + object).val();
         var A_Decimal = ValStr.split(".");
+
         var valida = 0;
 
         if (A_Decimal.length == 1)
@@ -553,7 +555,7 @@ function Restric_long_decimal(object) {
         }
         //validamos formato y mensaje
         if (valida == 1) {
-            Mensaje_General("¡Formato Incorrecto!", "El campo debe diligenciarse con el formato xxx.xxxx, por ejemplo: 123.4567", "E");
+            Mensaje_General("¡Formato Incorrecto!", "El campo debe diligenciarse con el formato xx.xxxx, por ejemplo: 12.3456", "E");
             $("#" + object).val("");
         }
     });
