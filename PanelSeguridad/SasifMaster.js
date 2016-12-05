@@ -834,9 +834,16 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
                 $("#" + Selector).append("<option value='" + Matrix[Item].ID_Ciclo + "'> " + Matrix[Item].ID_Ciclo + "</option>");
             }
             break;
+
         case "Select_Ciclo_2":
             for (Item in Matrix) {
                 $("#" + Selector).append("<option value='" + Matrix[Item].ID_Ciclo + "'> " + Matrix[Item].ID_Ciclo + "</option>");
+            }
+            break;
+
+        case "Select_ClaseF":
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].Clase + "'> " + Matrix[Item].Linea + "</option>");
             }
             break;
     }
