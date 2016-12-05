@@ -405,10 +405,10 @@ function transacionAjax_Cliente_create(State) {
 
     
     if ($("#Select_Sex").val() != "-1")
-        Area = $("#Select_Sex").val();
+        Sex = $("#Select_Sex").val();
 
     if ($("#Select_Area").val() != "-1")
-        Sex = $("#Select_Area").val();
+        Area = $("#Select_Area").val();
 
 
     if ($("#Select_Cargo").val() != "-1")
