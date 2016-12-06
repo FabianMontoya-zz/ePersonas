@@ -106,7 +106,7 @@ Public Class FinanciacionSQLClass
                                          " FIN_Tasa_Mora_FK, " & _
                                          " FIN_Tasa_Usura_FK, " & _
                                          " FIN_Ciclo_Cobro_FK, " & _
-                                         " ROW_NUMBER() OVER(ORDER BY FIN_Financiacion_ID ASC) AS Index_Financiacion " & _
+                                         " ROW_NUMBER() OVER(ORDER BY FIN_Nit_ID, FIN_Financiacion_ID ASC) AS Index_Financiacion " & _
                                          " FROM Financiacion " & _
                                          " ORDER BY FIN_Nit_ID, FIN_Financiacion_ID ASC")
 

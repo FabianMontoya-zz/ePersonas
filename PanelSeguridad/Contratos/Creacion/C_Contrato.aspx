@@ -335,22 +335,24 @@
                         <tr>
                             <td class="Label_Bold" style="width: 10%;">Total Cuota/Tasa</td>
                             <td id="L_Moneda_5" class="Sigla" style="width: 7%"></td>
-                            <td id="L_Cuota_Tasa" style="width: 17%;">00.000.0000</td>
+                            <td id="L_Cuota_Tasa" style="width: 17%;">[00.000.0000]</td>
 
                             <td class="Label_Bold" style="width: 10%;">Modalidad Pago</td>
                             <td id="L_Modalidad_Pago" style="width: 17%;"></td>
 
                             <td class="Label_Bold" style="width: 10%;">Período Pago</td>
-                            <td id="L_Periodo_Pago" style="width: 17%;"></td>
+                            <td id="L_Tiempo_2" class="Label_Bold" style="width: 6%;"></td>
+                            <td id="L_Periodo_Pago" style="width: 11%;"></td>
+                            
                         </tr>
                     </table>
                     <table id="T_Cuota_Base_Ciclo" style="width: 100%;">
                         <tr>
                             <td class="Label_Bold" style="width: 10.5%;">Tipo Cuota</td>
-                            <td id="L_Tipo_Cuota" style="width: 24%;">1 - CAPITAL</td>
+                            <td id="L_Tipo_Cuota" style="width: 24%;"></td>
 
                             <td class="Label_Bold" style="width: 10%;">Base Cálculo</td>
-                            <td id="L_Base_Calculo" style="width: 17%;">1 - 365/365</td>
+                            <td id="L_Base_Calculo" style="width: 17%;"></td>
 
                             <td class="Label_Bold" style="width: 10%;">Ciclo
                             </td>
@@ -364,9 +366,9 @@
                     <table id="T_Tasa_Puntos" style="width: 100%;">
                         <tr>
                             <td class="Label_Bold" style="width: 7%;">Tasa</td>
-                            <td id="L_Tasa" style="width: 16.5%;">1 - Descripción Tasa 1 - Sasif</td>
+                            <td id="L_Tasa" style="width: 16.5%;"></td>
                             <td class="Label_Bold" style="width: 7%;">Periodo</td>
-                            <td id="Td1" style="width: 11.5%;">M.V.</td>
+                            <td id="L_Periodo" style="width: 11.5%;"></td>
                             <td class="Label_Bold" style="width: 7%;">Puntos Adicionales
                             </td>
                             <td style="width: 1%;">
@@ -386,22 +388,22 @@
                     <table id="T_Equivalencia_Nominal">
                         <tr>
                             <td class="Label_Bold" style="width: 11.5%;">Equivalencia Efectiva</td>
-                            <td id="L_Equivalencia_Efectiva" class="Label_Bold" style="width: 10%;">30,123000%</td>
+                            <td id="L_Equivalencia_Efectiva" class="Label_Bold" style="width: 10%;"></td>
                             <td style="padding-bottom: 25px; width: 26%;"></td>
 
                             <td class="Label_Bold" style="width: 10.2%;">Nominal Anual</td>
-                            <td id="L_Nominal_Actual" class="Label_Bold" style="width: 15%;">32,653594%</td>
+                            <td id="L_Nominal_Actual" class="Label_Bold" style="width: 15%;"></td>
                             <td style="padding-bottom: 25px; width: 40%;"></td>
                         </tr>
                     </table>
                     <table id="T_Tasas" style="width: 100%">
                         <tr>
                             <td class="Label_Bold" style="width: 11.5%;">Tasa de Mora</td>
-                            <td id="L_Tasa_Mora" class="Label_Bold" style="width: 10%;">1 - 26.6%</td>
+                            <td id="L_Tasa_Mora" class="Label_Bold" style="width: 10%;"></td>
                             <td style="padding-bottom: 25px; width: 26%;"></td>
 
                             <td class="Label_Bold" style="width: 10.2%;">Tasa de Usura</td>
-                            <td id="L_Tasa_Usura" class="Label_Bold" style="width: 15%;">2 - 38.6%</td>
+                            <td id="L_Tasa_Usura" class="Label_Bold" style="width: 15%;"></td>
                             <td style="padding-bottom: 25px; width: 40%;"></td>
                         </tr>
                     </table>

@@ -90,11 +90,10 @@ $(document).ready(function () {
     $(function () { //Función del acordeon
         $("#Acordeon_Contrato").accordion({
             heightStyle: "content",
-            collapsible : true
+            collapsible: true
         });
-    });
-
-
+    });   
+    
     $("#Select_Base_Calculo").prop('disabled', true); //Desactivamos el Chosen
     Change_Select_Nit();
     Change_Select_Sucursal();
@@ -170,6 +169,12 @@ function Change_Select_Nit() {
         Charge_Combo_Persona(Matrix_Personas, "Select_Persona_C", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Productos, "Select_Producto", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Financiacion, "Select_Condicion_Financiacion", index_ID, "");
+
+        /*Escritura de L_Tasa_Mora*/
+        $("#L_Tasa_Mora").html(TasaMora);
+
+        /*Escritura de L_Tasa_Usura*/
+        $("#L_Tasa_Usura").html(TasaUsura);
     });
 }
 
@@ -255,11 +260,12 @@ function Change_Select_Condicion_Financiacion() {
         var baseCalculo = Matrix_Financiacion[index_ID].Base_Calculo;
         var ciclo = Matrix_Financiacion[index_ID].Ciclo_Cobro_FK;
         var Modalidad = Matrix_Financiacion[index_ID].Modalidad_Pago;
-        var Periodo_Pago = Matrix_Financiacion[index_ID].Periodo_Pago;
 
+        var Periodo_Pago = Matrix_Financiacion[index_ID].Periodo_Pago;
         var Tipo_Cuota = Matrix_Financiacion[index_ID].Tipo_Cuota;
         var Base_Calculo = Matrix_Financiacion[index_ID].Base_Calculo;
         var Tasa = Matrix_Financiacion[index_ID].Tasa_FK;
+        var Pto_Adicionales = Matrix_Financiacion[index_ID].Puntos_Adicionales;
 
         $("#Select_Tiempo").val(tiempo).trigger("chosen:updated");
         $("#Select_Base_Calculo").val(baseCalculo).trigger("chosen:updated");
@@ -277,22 +283,10 @@ function Change_Select_Condicion_Financiacion() {
         }
 
         /*Cambio L_Periodo_Pago*/
-        if (Periodo_Pago == "D") {
-            $("#L_Periodo_Pago").html("A - Solicitud");
-        } else if (Periodo_Pago == "D") {
-            $("#L_Periodo_Pago").html("D - Días");
-        } else if (Periodo_Pago == "M") {
-            $("#L_Periodo_Pago").html("M - Meses");
-        } else if (Periodo_Pago == "S") {
-            $("#L_Periodo_Pago").html("S - Semestres");
-        } else if (Periodo_Pago == "Y") {
-            $("#L_Periodo_Pago").html("A - Años");
-        } else {
-            $("#L_Periodo_Pago").html("");
-        }
+        $("#L_Periodo_Pago").html(Periodo_Pago);
 
         /*Cambio L_Tipo_Cuota*/
-        if(Tipo_Cuota == 1){
+        if (Tipo_Cuota == 1) {
             $("#L_Tipo_Cuota").html("1 - Capital");
         } else if (Tipo_Cuota == 2) {
             $("#L_Tipo_Cuota").html("2 - Solo Interés");
@@ -322,12 +316,40 @@ function Change_Select_Condicion_Financiacion() {
                 indexTasa = Matrix_Tasas[item].Index;
             }
         }
-        console.log("NIT: " + NIT);
-        console.log("Tasa: " + Tasa);
-        console.log("Tasa index: " + indexTasa);
-        /*Escritura de L_Codigo_Tasa*/
-        $("#L_Tasa").html(Tasa);
 
+
+        /*--------------------*/
+        /*Validamos si el número que entra es negativo o no para mostrarlo en el TXT de puntos adicionales*/
+        var signo = Pto_Adicionales.toString().substring(0, 1);
+        var numero;
+        if (signo == "-") {
+            /*Si hay signo negativo se cambia el combo del simbolo y se toman solo el número sin el signo*/
+            numero = Pto_Adicionales.toString().substring(1, Pto_Adicionales.toString().length);
+            $("#Select_Signo_Puntos").val(signo).trigger("chosen:updated");
+        } else {
+            numero = Pto_Adicionales;
+            $("#Select_Signo_Puntos").val("+").trigger("chosen:updated");
+        }
+        /*Si hay puntos adicionales los escribimos en el TXT, sino, dejamos en blanco*/
+        if (numero == 0) {
+            $("#TXT_Puntos_Adicionales").val(""); /*Dejamos en blanco si no hay puntos adicionales*/
+        } else {
+            numero = LlenarCeros(numero, 4);
+            $("#TXT_Puntos_Adicionales").val(numero); /*Escribimos los puntos adicionales que trae la financiacion seleccionada*/
+        }
+        /*--------------------*/
+
+        /*Escritura de L_Codigo_Tasa*/
+        $("#L_Tasa").html(Descripcion_Tasa(indexTasa)); /*Mandamos en indice de la matriz de tasas y traemos la descripción armada*/
+
+        /*Escritura L_Periodo*/
+        $("#L_Periodo").html(Periodo_Tasa(indexTasa)); /*Mandamos el indice de la matriz de tasas y traemos el Periodo armado*/
+
+        /*Escritura L_Equivalencia_Efectiva*/
+        $("#L_Equivalencia_Efectiva").html(Equivalencia_Efectiva(indexTasa)); /*Mandamos el indice de la matriz de tasas y traemos el valor armado con %*/
+
+        /*Escritura L_Equivalencia_Efectiva*/
+        $("#L_Nominal_Actual").html(Nominal_Anual(indexTasa)); /*Mandamos el indice de la matriz de tasas y traemos el valor armado con %*/      
 
     });
 }
@@ -349,14 +371,19 @@ function Change_Select_Unidad_Tiempo() {
 function CambiarTiempo(index_ID) {
     if (index_ID == "D") {
         $("#L_Tiempo").html("Días");
+        $("#L_Tiempo_2").html("Días");
     } else if (index_ID == "M") {
         $("#L_Tiempo").html("Meses");
+        $("#L_Tiempo_2").html("Meses");
     } else if (index_ID == "S") {
         $("#L_Tiempo").html("Semestres");
-    } else if (index_ID == "Y") {
+        $("#L_Tiempo_2").html("Semestres");
+    } else if (index_ID == "A") {
         $("#L_Tiempo").html("Años");
+        $("#L_Tiempo_2").html("Años");
     } else {
         $("#L_Tiempo").html("");
+        $("#L_Tiempo_2").html("");
     }
 }
 
@@ -539,4 +566,103 @@ function Add_Activos(index) {
 
 function Table_Activos() {
     $("#container_TActivos").html("");
+}
+
+function Descripcion_Tasa(index) {
+    var i = index - 1;
+    var descripcion;
+
+    var id = Matrix_Tasas[i].Codigo_ID;
+    var desc = Matrix_Tasas[i].Descripcion;
+
+    descripcion = id + " - " + desc;
+    return descripcion;
+}
+
+function Periodo_Tasa(index) {
+    var i = index - 1;
+    var Periodo;
+
+    var per = Matrix_Tasas[i].Periodo;
+    var tipo = Matrix_Tasas[i].Tipo;
+
+    Periodo = per + "." + tipo + ".";
+
+    return Periodo;
+}
+
+function Equivalencia_Efectiva(index) {
+    var i = index - 1;
+    var valor;
+
+    valor = Matrix_Tasas[i].Equivalencia_Efectiva.toString();
+    valor = valor + "%";
+
+    return valor;
+}
+
+function Nominal_Anual(index) {
+    var i = index - 1;
+    var valor;
+
+    valor = Matrix_Tasas[i].Nominal_Anual.toString();
+    valor = valor + "%";
+
+    return valor;
+}
+
+function TasaUsura() {    
+    var valor;
+    var id;
+    var num;
+
+    id = Matrix_Tasas[1].Codigo_ID.toString();
+    num = Matrix_Tasas[1].Equivalencia_Efectiva.toString();
+    valor = id + " - " + num+"%";
+
+    return valor;
+}
+
+function TasaMora() {
+    var valor;
+    var id;
+    var num;
+
+    id = Matrix_Tasas[0].Codigo_ID.toString();
+    num = Matrix_Tasas[0].Equivalencia_Efectiva.toString();
+    valor = id + " - " + num + "%";
+
+    return valor;
+
+    return valor;
+}
+
+function LlenarCeros(valor, longitud) {
+
+    var numero;
+    var A_Decimal = valor.toString().split(".");
+
+    if (A_Decimal[1].length == 4) {
+        A_Decimal[1] = A_Decimal[1];
+    }
+    else {
+        while (A_Decimal[1].length < longitud) {
+            A_Decimal[1] = A_Decimal[1] + "0";
+        }
+    }
+
+    numero = A_Decimal[0] + "." + A_Decimal[1];
+
+    return numero;
+}
+
+function TasaNominal(Base, Unidad_Tiempo, Numero, Tipo) { 
+    /*
+        Base = 1 - 360 || 2 - 365
+        Unidad Tiempo: A - Años || D - Días || M - Meses || S - Semestre || T - Trimestre
+        Número: Es la cantidad expresado en la unidad de tiempo
+        Tipo: A - Anticipado || V - Vencido
+    */
+
+
 }
