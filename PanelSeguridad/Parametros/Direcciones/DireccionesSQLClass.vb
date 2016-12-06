@@ -41,10 +41,7 @@ Public Class DireccionesSQLClass
                    "       D_Ciudad_ID,  " & _
                    "       P_Name, " & _
                    "       D_Tipo_1, " & _
-                   "       D_Tipo_2, " & _
-                   "       D_Tipo_3, " & _
-                   "       D_Tipo_4, " & _
-                   "       C_Descripcion  " & _
+                  "       C_Descripcion  " & _
                    " FROM DIRECCIONES D " & _
                    " INNER JOIN PAISES P ON P.P_Cod = D.D_Pais_ID " & _
                    " INNER JOIN CIUDADES C ON C.C_Ciudad_ID = D.D_Ciudad_ID " & _
@@ -93,9 +90,6 @@ Public Class DireccionesSQLClass
             " D_Pais_ID, " & _
             " D_Ciudad_ID, " & _
             " D_Tipo_1, " & _
-            " D_Tipo_2, " & _
-            " D_Tipo_3, " & _
-            " D_Tipo_4, " & _
             " D_FechaActualizacion, " & _
             " D_Usuario " & _
              ")")
@@ -116,9 +110,6 @@ Public Class DireccionesSQLClass
         sql.AppendLine("'" & vp_O_Obj.Pais_ID & "',")
         sql.AppendLine("'" & vp_O_Obj.Ciudad_ID & "',")
         sql.AppendLine("'" & vp_O_Obj.Tipo_1 & "',")
-        sql.AppendLine("'" & vp_O_Obj.Tipo_2 & "',")
-        sql.AppendLine("'" & vp_O_Obj.Tipo_3 & "',")
-        sql.AppendLine("'" & vp_O_Obj.Tipo_4 & "',")
         sql.AppendLine("'" & vp_O_Obj.FechaActualizacion & "',")
         sql.AppendLine("'" & vp_O_Obj.Usuario & "' ) ")
 
@@ -215,11 +206,8 @@ Public Class DireccionesSQLClass
             objDirecciones.DescripPais = ReadConsulta.GetValue(17)
 
             If Not (IsDBNull(ReadConsulta.GetValue(18))) Then objDirecciones.Tipo_1 = ReadConsulta.GetValue(18) Else objDirecciones.Tipo_1 = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(19))) Then objDirecciones.Tipo_2 = ReadConsulta.GetValue(19) Else objDirecciones.Tipo_2 = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(20))) Then objDirecciones.Tipo_3 = ReadConsulta.GetValue(20) Else objDirecciones.Tipo_3 = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(21))) Then objDirecciones.Tipo_4 = ReadConsulta.GetValue(21) Else objDirecciones.Tipo_4 = ""
-
-            objDirecciones.DescripCiudad = ReadConsulta.GetValue(22)
+        
+            objDirecciones.DescripCiudad = ReadConsulta.GetValue(19)
 
             'agregamos a la lista
             ObjList.Add(objDirecciones)

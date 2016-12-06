@@ -612,6 +612,24 @@
                                     <td style="padding-bottom: 25px; width: 200px;"></td>
                                 </tr>
                             </table>
+                            <table id="C_Socio" style="width: 100%">
+                                <tr>
+                                    <td class="Label_Bold " style="width: 100px;">% Participación
+                                    </td>
+                                    <td>
+                                        <span class="cssToolTip_Form">
+                                            <input type="text" id="TxtPor_Participacion" style="width: 50px;" maxlength="3" class="Numeric" />
+                                            <span class="Spam_AN"></span></span>
+                                    </td>
+                                    <td style="padding-bottom: 25px; width: 700px;">
+                                        <span class="cssToolTip">
+                                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img24"
+                                                src="../../images/error.png" />
+                                            <span class="SpamEG"></span></span>
+                                    </td>
+                                </tr>
+                            </table>
+                            
                         </td>
                     </tr>
                 </table>
@@ -666,54 +684,89 @@
         </table>
     </div>
     <div id="Dialog_Relation" title="Relaciones de la Persona">
-        <table style="width: 100%; text-align: center; margin-top: 20px;">
+        <table style="width: 100%; text-align: left; margin-top: 20px;">
             <tr>
-                <td class="Label_Bold">Cliente
-                </td>
                 <td>
                     <input type="checkbox" id="Check_Cliente" value="CL" />
                 </td>
-                <td class="Label_Bold">Avaluador
-                </td>
-                <td>
-                    <input type="checkbox" id="Check_Avaluador" value="AV" />
-                </td>
-                <td class="Label_Bold">Org. transito
-                </td>
-                <td>
-                    <input type="checkbox" id="Check_Transito" value="TR" />
-                </td>
-                <td class="Label_Bold">Hacienda
-                </td>
-                <td>
-                    <input type="checkbox" id="Check_Hacienda" value="HA" />
-                </td>
-                <td class="Label_Bold">Multi-Empresa
-                </td>
-                <td>
-                    <input type="checkbox" id="Check_MultiEmpresa" value="ME" />
+                <td class="Label_Bold">Cliente
                 </td>
             </tr>
             <tr>
-                <td class="Label_Bold">Empleado
+                <td>
+                    <input type="checkbox" id="Check_Avaluador" value="AV" />
                 </td>
+                <td class="Label_Bold">Avaluador / Perito
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" id="Check_Transito" value="TR" />
+                </td>
+                <td class="Label_Bold">Organismos de Transito
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" id="Check_Hacienda" value="HA" />
+                </td>
+                <td class="Label_Bold">Hacienda / Notaria / Entes Gubernamentales / Registro
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" id="Check_MultiEmpresa" value="ME" />
+                </td>
+                <td class="Label_Bold">Multi - Empresa
+                </td>
+            </tr>
+            <tr>
                 <td>
                     <input type="checkbox" id="Check_Empleado" value="EM" />
                 </td>
-                <td class="Label_Bold">Asesor
+                <td class="Label_Bold">Empleado
                 </td>
+            </tr>
+            <tr>
                 <td>
                     <input type="checkbox" id="Check_Asesor" value="AS" />
                 </td>
-                <td class="Label_Bold">Proveedor
+                <td class="Label_Bold">Asesor
                 </td>
+            </tr>
+            <tr>
                 <td>
                     <input type="checkbox" id="Check_Proveedor" value="PR" />
                 </td>
-                <td class="Label_Bold">Ent. Bancaria
+                <td class="Label_Bold">Proveedor
                 </td>
+            </tr>
+            <tr>
                 <td>
-                    <input type="checkbox" id="Check_EntBancaria" value="EB">
+                    <input type="checkbox" id="Check_EntBancaria" value="EB" />
+                </td>
+                <td class="Label_Bold">Entidades Financieras / Aseguradoras / Fondos de Pensiones
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" id="Check_Visitante" value="EB" />
+                </td>
+                <td class="Label_Bold">Visitante
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" id="Check_RepLegal" value="EB" />
+                </td>
+                <td class="Label_Bold">Representante Legal 
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" id="Check_Socio" value="EB" />
+                </td>
+                <td class="Label_Bold">Socio
                 </td>
             </tr>
         </table>
@@ -911,6 +964,21 @@
                     </td>
                 </tr>
             </table>
+            <table id="Tabla_tipo" style="width: 100%; text-align: left; margin-top: 2%;">
+                <tr>
+                    <td style="width: 14%;" class="Label_Bold">Tipo Dirección
+                    </td>
+                    <td>
+                        <select id="Select_TypeTel_1" class="C_Chosen" style="width: 80px;">
+                            <option value="-1">Seleccione...</option>
+                            <option value="C">Casa</option>
+                            <option value="F">Oficina</option>
+                            <option value="O">Otro</option>
+                        </select>
+                    </td>
+                    <td style="width: 40%;"></td>
+                </tr>
+            </table>
             <table id="Tabla_Direccion">
                 <tr>
                     <td class="Label_Bold" style="width: 100px;">Dirección
@@ -968,7 +1036,6 @@
             <table id="Tabla_Telefono" style="width: 100%; padding-left: 50px;">
                 <tr align="left">
                     <td class="Label_Bold" style="width: 70px;"></td>
-                    <td class="Label_Bold" style="width: 80px;">Tipo Telefono</td>
                     <td class="Label_Bold" style="width: 20px;">Ind.</td>
                     <td class="Label_Bold" style="width: 50px;">Tel. ó Cel</td>
                     <td class="Label_Bold" style="width: 0px;">Ext.</td>
@@ -976,14 +1043,7 @@
                 <tr>
                     <td class="Label_Bold" style="width: 50px;">Telefono 1
                     </td>
-                    <td style="width: 80px;">
-                        <select id="Select_TypeTel_1" class="C_Chosen" style="width: 80px;">
-                            <option value="-1">Seleccione...</option>
-                            <option value="C">Casa</option>
-                            <option value="F">Oficina</option>
-                            <option value="O">Otro</option>
-                        </select>
-                    </td>
+
                     <td>
                         <span class="cssToolTip_Form">
                             <input type="text" id="TxtInd1" maxlength="5" class="Numeric" style="width: 50px;" />
@@ -1003,14 +1063,7 @@
                 <tr>
                     <td class="Label_Bold" style="width: 50px;">Telefono 2
                     </td>
-                    <td style="width: 80px;">
-                        <select id="Select_TypeTel_2" class="C_Chosen" style="width: 80px;">
-                            <option value="-1">Seleccione...</option>
-                            <option value="C">Casa</option>
-                            <option value="F">Oficina</option>
-                            <option value="O">Otro</option>
-                        </select>
-                    </td>
+
                     <td>
                         <span class="cssToolTip_Form">
                             <input type="text" id="TxtInd2" maxlength="5" class="Numeric" style="width: 50px;" />
@@ -1029,14 +1082,6 @@
                 </tr>
                 <tr>
                     <td class="Label_Bold">Telefono 3
-                    </td>
-                    <td style="width: 80px;">
-                        <select id="Select_TypeTel_3" class="C_Chosen" style="width: 80px;">
-                            <option value="-1">Seleccione...</option>
-                            <option value="C">Casa</option>
-                            <option value="F">Oficina</option>
-                            <option value="O">Otro</option>
-                        </select>
                     </td>
                     <td>
                         <span class="cssToolTip_Form">
@@ -1057,14 +1102,7 @@
                 <tr>
                     <td class="Label_Bold">Telefono 4
                     </td>
-                    <td style="width: 80px;">
-                        <select id="Select_TypeTel_4" class="C_Chosen" style="width: 80px;">
-                            <option value="-1">Seleccione...</option>
-                            <option value="C">Casa</option>
-                            <option value="F">Oficina</option>
-                            <option value="O">Otro</option>
-                        </select>
-                    </td>
+
                     <td>
                         <span class="cssToolTip_Form">
                             <input type="text" id="TxtInd4" maxlength="5" class="Numeric" style="width: 50px;" />

@@ -1,5 +1,6 @@
 ﻿var Empleado_true = 0;
 var Banco_true = 0;
+var Socio_true = 0;
 
 var Campo_1;
 var Campo_2;
@@ -28,43 +29,43 @@ var Nombre_Persona;
 function ValideAnexos() {
 
     $('#Check_Cliente').change(function () {
-        if (Banco_true == 0 && Empleado_true == 0) {
+        if (Banco_true == 0 && Empleado_true == 0 && Socio_true == 0) {
             $("#Anexos").css("display", "none");
         }
     });
 
     $('#Check_Avaluador').change(function () {
-        if (Banco_true == 0 && Empleado_true == 0) {
+        if (Banco_true == 0 && Empleado_true == 0 && Socio_true == 0) {
             $("#Anexos").css("display", "none");
         }
     });
 
     $('#Check_Transito').change(function () {
-        if (Banco_true == 0 && Empleado_true == 0) {
+        if (Banco_true == 0 && Empleado_true == 0 && Socio_true == 0) {
             $("#Anexos").css("display", "none");
         }
     });
 
     $('#Check_Hacienda').change(function () {
-        if (Banco_true == 0 && Empleado_true == 0) {
+        if (Banco_true == 0 && Empleado_true == 0 && Socio_true == 0) {
             $("#Anexos").css("display", "none");
         }
     });
 
     $('#Check_MultiEmpresa').change(function () {
-        if (Banco_true == 0 && Empleado_true == 0) {
+        if (Banco_true == 0 && Empleado_true == 0 && Socio_true == 0) {
             $("#Anexos").css("display", "none");
         }
     });
 
     $('#Check_Asesor').change(function () {
-        if (Banco_true == 0 && Empleado_true == 0) {
+        if (Banco_true == 0 && Empleado_true == 0 && Socio_true == 0) {
             $("#Anexos").css("display", "none");
         }
     });
 
     $('#Check_Proveedor').click(function () {
-        if (Banco_true == 0 && Empleado_true == 0) {
+        if (Banco_true == 0 && Empleado_true == 0 && Socio_true == 0) {
             $("#Anexos").css("display", "none");
         }
     });
@@ -81,7 +82,7 @@ function ValideAnexos() {
             Empleado_true = 0;
         }
 
-        if (Banco_true == 0 && Empleado_true == 0) {
+        if (Banco_true == 0 && Empleado_true == 0 && Socio_true == 0) {
             $("#Anexos").css("display", "none");
         }
 
@@ -98,11 +99,46 @@ function ValideAnexos() {
             Banco_true = 0;
         }
 
-        if (Banco_true == 0 && Empleado_true == 0) {
+        if (Banco_true == 0 && Empleado_true == 0 && Socio_true == 0) {
             $("#Anexos").css("display", "none");
         }
     });
+
+    $('#Check_Socio').change(function () {
+
+        if ($(this).is(':checked')) {
+            $("#Anexos").css("display", "inline-table");
+            $("#C_Socio").css("display", "inline-table");
+
+            Socio_true = 1;
+        }
+        else {
+            $("#C_Socio").css("display", "none");
+            Socio_true = 0;
+        }
+
+        if (Banco_true == 0 && Empleado_true == 0 && Socio_true == 0) {
+            $("#Anexos").css("display", "none");
+        }
+
+    });
 }
+
+//validacion de campo
+function ValidaPorcentaje(Objeto, Limite) {
+    $("#" + Objeto).blur(function () {
+
+        var P_Numero = $("#" + Objeto).val();
+
+        if (parseInt(P_Numero) > parseInt(Limite)) {
+            Mensaje_General("Porcentaje Invalido!", "El porcentaje no debe se mayor a " + Limite, "W");
+            $("#" + Objeto).val("");
+            $("#" + Objeto).focus();
+        }
+    });
+}
+
+
 
 //validamos campos para la creacion del link
 function validarCamposCrear() {

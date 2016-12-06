@@ -97,6 +97,8 @@ $(document).ready(function () {
     $("#Container_Complementos").css("display", "none");
     $("#C_Empleado").css("display", "none");
     $("#C_Banco").css("display", "none");
+    $("#C_Socio").css("display", "none");
+
     $("#C_Banco_Vista").css("display", "none");
     $("#C_Empleado_Vista").css("display", "none");
     $("#C_MultiEmpresa").css("display", "none");
@@ -277,8 +279,8 @@ $(document).ready(function () {
         autoOpen: false,
         dialogClass: "Dialog_Sasif",
         modal: true,
-        width: 600,
-        height: 150,
+        width: 450,
+        height: 410,
         overlay: {
             opacity: 0.5,
             background: "black"
@@ -304,6 +306,7 @@ $(document).ready(function () {
     Change_Select_TDoc();
     Change_Select_Nit();
     ValidaFechaDigitada("Text_fechaNacimiento");
+    ValidaPorcentaje("TxtPor_Participacion", 100);
 
 });
 
@@ -886,6 +889,10 @@ function Clear() {
     $("#Check_Asesor").prop("checked", false);
     $("#Check_Proveedor").prop("checked", false);
     $("#Check_EntBancaria").prop("checked", false);
+
+    $("#Check_Visitante").prop("checked", false);
+    $("#Check_RepLegal").prop("checked", false);
+    $("#Check_Socio").prop("checked", false);
 
     $("#Select_TPersona").val("-1");
     $("#Select_Regimen").val("-1");

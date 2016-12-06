@@ -812,14 +812,11 @@ Public Class ClienteSQLClass
                     objCliente.Nombre = ReadConsulta.GetValue(1)
                     If Not (IsDBNull(ReadConsulta.GetValue(2))) Then objCliente.Tipo_1 = ReadConsulta.GetValue(2) Else objCliente.Tipo_1 = ""
                     objCliente.Telefono_1 = ReadConsulta.GetValue(3)
-                    If Not (IsDBNull(ReadConsulta.GetValue(4))) Then objCliente.Tipo_2 = ReadConsulta.GetValue(4) Else objCliente.Tipo_2 = ""
-                    objCliente.Telefono_2 = ReadConsulta.GetValue(5)
-                    If Not (IsDBNull(ReadConsulta.GetValue(6))) Then objCliente.Tipo_3 = ReadConsulta.GetValue(6) Else objCliente.Tipo_3 = ""
-                    objCliente.Telefono_3 = ReadConsulta.GetValue(7)
-                    If Not (IsDBNull(ReadConsulta.GetValue(8))) Then objCliente.Tipo_4 = ReadConsulta.GetValue(8) Else objCliente.Tipo_4 = ""
-                    objCliente.Telefono_4 = ReadConsulta.GetValue(9)
-                    objCliente.Correo_1 = ReadConsulta.GetValue(10)
-                    objCliente.Correo_2 = ReadConsulta.GetValue(11)
+                    objCliente.Telefono_2 = ReadConsulta.GetValue(4)
+                    objCliente.Telefono_3 = ReadConsulta.GetValue(5)
+                    objCliente.Telefono_4 = ReadConsulta.GetValue(6)
+                    objCliente.Correo_1 = ReadConsulta.GetValue(7)
+                    objCliente.Correo_2 = ReadConsulta.GetValue(8)
 
                     'agregamos a la lista
                     ObjListCliente.Add(objCliente)
@@ -1206,11 +1203,8 @@ Public Class ClienteSQLClass
                                 "   				CASE  WHEN  CLI_Apellido_2  IS NULL THEN ''  ELSE CLI_Apellido_2 END AS DESCRIPCION, " & _
                                 "                   D_Tipo_1, " & _
                                 "                   D_Telefono_1, " & _
-                                "                   D_Tipo_2 , " & _
                                 "                   D_Telefono_2, " & _
-                                "                   D_Tipo_3 , " & _
                                 "                   D_Telefono_3, " & _
-                                "                   D_Tipo_4 , " & _
                                 "                   D_Telefono_4, " & _
                                 "                   D_Correo_1, " & _
                                 "                   D_Correo_2 " & _

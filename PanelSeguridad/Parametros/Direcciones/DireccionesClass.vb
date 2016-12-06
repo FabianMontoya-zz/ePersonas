@@ -22,10 +22,7 @@
     Private _Usuario As String
 
     Private _Tipo_1 As String
-    Private _Tipo_2 As String
-    Private _Tipo_3 As String
-    Private _Tipo_4 As String
-
+  
     Private _DescripCiudad As String
     Private _DescripPais As String
 #End Region
@@ -178,30 +175,7 @@
             Me._Tipo_1 = value
         End Set
     End Property
-    Public Property Tipo_2() As String
-        Get
-            Return Me._Tipo_2
-        End Get
-        Set(ByVal value As String)
-            Me._Tipo_2 = value
-        End Set
-    End Property
-    Public Property Tipo_3() As String
-        Get
-            Return Me._Tipo_3
-        End Get
-        Set(ByVal value As String)
-            Me._Tipo_3 = value
-        End Set
-    End Property
-    Public Property Tipo_4() As String
-        Get
-            Return Me._Tipo_4
-        End Get
-        Set(ByVal value As String)
-            Me._Tipo_4 = value
-        End Set
-    End Property
+   
 
     Public Property DescripCiudad() As String
         Get
