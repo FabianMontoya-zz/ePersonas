@@ -1,8 +1,6 @@
 ﻿Public Class FinanciacionClass
 #Region "campos"
     Private _Index As Integer
-    Private _Index_Tasa As Integer
-    Private _Index_Detalles_Tasa As Integer
     Private _Nit_ID As String
     Private _Financiacion_ID As Integer
     Private _Descripcion As String
@@ -11,7 +9,7 @@
 
     Private _Calculo_Cuota_Final As String
     Private _Modalidad_Pago As String
-    Private _Periodo_Pago As String
+    Private _Periodo_Pago As Integer
     Private _Tipo_Cuota As String
     Private _Formula_FK As Integer
 
@@ -97,11 +95,11 @@
             Me._Modalidad_Pago = value
         End Set
     End Property
-    Public Property Periodo_Pago() As String
+    Public Property Periodo_Pago() As Integer
         Get
             Return Me._Periodo_Pago
         End Get
-        Set(ByVal value As String)
+        Set(ByVal value As Integer)
             Me._Periodo_Pago = value
         End Set
     End Property

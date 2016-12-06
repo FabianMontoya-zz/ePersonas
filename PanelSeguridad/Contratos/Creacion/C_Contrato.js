@@ -249,6 +249,8 @@ function Change_Select_Condicion_Financiacion() {
         var index_ID = this.value; //el value es el index
         index_ID = parseInt(index_ID) - 1;
 
+
+        var NIT = Matrix_Financiacion[index_ID].Nit_ID;
         var tiempo = Matrix_Financiacion[index_ID].Unidad_Tiempo;
         var baseCalculo = Matrix_Financiacion[index_ID].Base_Calculo;
         var ciclo = Matrix_Financiacion[index_ID].Ciclo_Cobro_FK;
@@ -313,8 +315,18 @@ function Change_Select_Condicion_Financiacion() {
             $("#L_Base_Calculo").html("2 - 365/365");
         }
 
+
+        var indexTasa;
+        for (item in Matrix_Tasas) {
+            if (Matrix_Tasas[item].Codigo_ID == Tasa && Matrix_Tasas[item].Nit_ID == NIT) {
+                indexTasa = Matrix_Tasas[item].Index;
+            }
+        }
+        console.log("NIT: " + NIT);
+        console.log("Tasa: " + Tasa);
+        console.log("Tasa index: " + indexTasa);
         /*Escritura de L_Codigo_Tasa*/
-        $("#L_Codigo_Tasa").html(Tasa);
+        $("#L_Tasa").html(Tasa);
 
 
     });

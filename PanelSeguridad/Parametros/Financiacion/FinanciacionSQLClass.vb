@@ -86,8 +86,6 @@ Public Class FinanciacionSQLClass
         Dim StrQuery As String = ""
         Dim conex As New Conector
         Dim Conexion As String = conex.typeConexion("2")
-        Dim BD_Admin As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDAdmin").ToString
-        Dim BD_Param As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDParam").ToString
 
         Dim sql As New StringBuilder
 

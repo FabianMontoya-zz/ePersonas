@@ -609,7 +609,7 @@ function Charge_Combos_Depend_Verificacion(Matrix, Selector, P_1, P_2, Index_Edi
         case "Select_LineaF":
             for (Item in Matrix) {
                 if (Matrix[Item].Marca == P_1 && Matrix[Item].Clase == P_2) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Fasecolda_ID + "'>" + Matrix[Item].Linea + " C.C. " + Matrix[Item].Cilindraje  + "</option>");
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Fasecolda_ID + "'>" + Matrix[Item].Linea + " C.C. " + Matrix[Item].Cilindraje + "</option>");
                 }
             }
             break;
@@ -872,16 +872,9 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
             break;
 
         case "Select_Condicion_Financiacion":
-            var Tipo_Condicion;
             for (Item in Matrix) {
                 if ((Matrix[Item].Nit_ID == Nit) || (Matrix[Item].Nit_ID == 0)) {
-                    if (Matrix[Item].Nit_ID == Nit) {
-                        Tipo_Condicion = "PROP";
-                    } else if (Matrix[Item].Nit_ID == 0) {
-                        Tipo_Condicion = "GENE";
-                    }
-
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'>" + Tipo_Condicion + " - " + Matrix[Item].Financiacion_ID + " - " + Matrix[Item].Descripcion + "</option>");
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'>" + Matrix[Item].Financiacion_ID + " - " + Matrix[Item].Descripcion + "</option>");
                 }
             }
             break;

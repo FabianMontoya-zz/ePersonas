@@ -259,7 +259,7 @@
                             <td style="width: 10.5%;" class="Label_Bold">Dirección de Correspondencia
                             </td>
                             <td style="width: 80%;">
-                               <select id="Select_Direccion" class="C_Chosen">
+                                <select id="Select_Direccion" class="C_Chosen">
                                 </select>
                             </td>
                             <td style="padding-bottom: 15px; width: 7%;">
@@ -344,35 +344,54 @@
                             <td id="L_Periodo_Pago" style="width: 17%;"></td>
                         </tr>
                     </table>
-                    <table id="T_Cuota_Tasa" style="width: 100%;">
+                    <table id="T_Cuota_Base_Ciclo" style="width: 100%;">
                         <tr>
-                            <td class="Label_Bold" style="width: 10%;">Tipo Cuota</td>
-                            <td id="L_Tipo_Cuota" style="width: 23%;"></td>
+                            <td class="Label_Bold" style="width: 10.5%;">Tipo Cuota</td>
+                            <td id="L_Tipo_Cuota" style="width: 24%;">1 - CAPITAL</td>
 
                             <td class="Label_Bold" style="width: 10%;">Base Cálculo</td>
-                            <td id="L_Base_Calculo" style="width: 16%;"></td>
+                            <td id="L_Base_Calculo" style="width: 17%;">1 - 365/365</td>
 
-                            <td class="Label_Bold" style="width: 10%;">Código Tasa</td>
-                            <td id="L_Codigo_Tasa" style="width: 16.5%;"></td>
-                        </tr>
-                    </table>
-                    <table id="T_Puntos_Ciclo" style="width: 100%;">
-                        <tr>
-                            <td class="Label_Bold" style="width: 10.7%;">Puntos Adicionales
-                            </td>
-                            <td style="width: 7%; padding-left: 10px;">
-                                <span class="cssToolTip_Form">
-                                    <input style="width: 100%;" type="text" id="TXT_Puntos_Adicionales" maxlength="8" class="Decimal" />
-                                    <span class="Spam_ADec"></span></span>
-                            </td>
-                            <td style="width: 30%;"></td>
                             <td class="Label_Bold" style="width: 10%;">Ciclo
                             </td>
-                            <td style="width: 30%;">
+                            <td style="width: 17%;">
                                 <select id="Select_Ciclo_2" class="C_Chosen">
                                 </select>
                             </td>
-                            <td style="width: 20%;"></td>
+                            <td style="width: 0.5%;"></td>
+                        </tr>
+                    </table>
+                    <table id="T_Tasa_Puntos" style="width: 100%;">
+                        <tr>
+                            <td class="Label_Bold" style="width: 7%;">Tasa</td>
+                            <td id="L_Tasa" style="width: 16.5%;">1 - Descripción Tasa 1 - Sasif</td>
+                            <td class="Label_Bold" style="width: 7%;">Periodo</td>
+                            <td id="Td1" style="width: 11.5%;">M.V.</td>
+                            <td class="Label_Bold" style="width: 7%;">Puntos Adicionales
+                            </td>
+                            <td style="width: 1%;">
+                                <select id="Select_Signo_Puntos" class="C_Chosen">
+                                    <option value="+">+</option>
+                                    <option value="-">-</option>
+                                </select>
+                            </td>
+                            <td style="width: 4%; padding-left: 10px;">
+                                <span class="cssToolTip_Form">
+                                    <input style="width: 100%;" type="text" id="TXT_Puntos_Adicionales" maxlength="7" class="Decimal" />
+                                    <span class="Spam_ADec"></span></span>
+                            </td>
+                            <td style="width: 4.5%;"></td>
+                        </tr>
+                    </table>
+                    <table id="T_Equivalencia_Nominal">
+                        <tr>
+                            <td class="Label_Bold" style="width: 11.5%;">Equivalencia Efectiva</td>
+                            <td id="L_Equivalencia_Efectiva" class="Label_Bold" style="width: 10%;">30,123000%</td>
+                            <td style="padding-bottom: 25px; width: 26%;"></td>
+
+                            <td class="Label_Bold" style="width: 10.2%;">Nominal Anual</td>
+                            <td id="L_Nominal_Actual" class="Label_Bold" style="width: 15%;">32,653594%</td>
+                            <td style="padding-bottom: 25px; width: 40%;"></td>
                         </tr>
                     </table>
                     <table id="T_Tasas" style="width: 100%">
@@ -382,7 +401,7 @@
                             <td style="padding-bottom: 25px; width: 26%;"></td>
 
                             <td class="Label_Bold" style="width: 10.2%;">Tasa de Usura</td>
-                            <td id="L_Tasa_Usura" class="Label_Bold" style="width: 15%;">2 - 38.6%</td>                            
+                            <td id="L_Tasa_Usura" class="Label_Bold" style="width: 15%;">2 - 38.6%</td>
                             <td style="padding-bottom: 25px; width: 40%;"></td>
                         </tr>
                     </table>
