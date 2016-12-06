@@ -1270,6 +1270,11 @@ To modify move field declaration from designer file to code-behind file.
  funcion que carga La matrix Direcciones
  </summary>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_MTasas">
+	<summary>
+ funcion que carga La matrix Tasas
+ </summary>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.Crud_DocAjax.Consulta_Crud_Doc">
 	<summary>
  traemos todos los datos para tabla Crud_Doc (READ)
@@ -1384,6 +1389,20 @@ To modify move field declaration from designer file to code-behind file.
  </summary>
 	<param name="vp_S_StrQuery"></param>
 	<param name="vg_S_StrConexion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.TasasSQLClass.listTasas(System.String,System.String,System.String)">
+	<summary>
+ funcion que trae el listado de Tasas para armar la tabla
+ </summary>
+	<param name="vp_S_StrQuery"></param>
+	<param name="vg_S_StrConexion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.TasasSQLClass.Matrix_Tasas">
+	<summary>
+ Carga matrix de todas las Tasas junto con sus Detalles
+ </summary>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.TipoProduct_LeasingSQLClass.Read_AllTP_Leasing(System.String,System.String,System.String)">

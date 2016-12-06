@@ -7,6 +7,7 @@ var Matrix_Ciclo = [];
 var Matrix_Productos = [];
 var Matrix_Financiacion = [];
 var Matrix_Direcciones = [];
+var Matrix_Tasas = [];
 
 var ArrayC_Contrato = [];
 var ArrayEmpresaNit = [];
@@ -32,6 +33,7 @@ $(document).ready(function () {
     transacionAjax_Productos('MATRIX_PRODUCTOS');
     transacionAjax_Financiacion('MATRIX_FINANCIACION');
     transaccionAjax_MDirecciones('MATRIX_DIRECCIONES');
+    transaccionAjax_MTasas('MATRIX_TASAS');
 
     Ocultar_IMGS_Errores();
 
@@ -167,7 +169,7 @@ function Change_Select_Nit() {
         Charge_Combos_Depend_Nit(Matrix_Sucursal, "Select_Sucursal_C", index_ID, "");
         Charge_Combo_Persona(Matrix_Personas, "Select_Persona_C", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Productos, "Select_Producto", index_ID, "");
-        Charge_Combos_Depend_Nit(Matrix_Financiacion, "Select_Condicion_Financiacion", index_ID, "");        
+        Charge_Combos_Depend_Nit(Matrix_Financiacion, "Select_Condicion_Financiacion", index_ID, "");
     });
 }
 
@@ -363,7 +365,8 @@ function BtnCrear() {
     validate = validarCamposCrear();
 
     if (validate == 0) {
-        transacionAjax_C_Contrato_create("crear");
+        //transacionAjax_C_Contrato_create("crear");
+        Mensaje_General("¡Colocación Agregada!", "La colocación se ha agregado correctamente.", "S");
     } else if (validate == 1) {
         var mensaje = "";
         Mensaje_General("¡Falta Completar Campos!", "Debe completar los campos obligatorios. Los campos faltantes se han marcado con una (X)", "W");

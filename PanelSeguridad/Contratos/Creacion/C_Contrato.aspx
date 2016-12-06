@@ -340,7 +340,7 @@
                             <td class="Label_Bold" style="width: 10%;">Modalidad Pago</td>
                             <td id="L_Modalidad_Pago" style="width: 17%;"></td>
 
-                            <td class="Label_Bold" style="width: 10%;">Periodo Pago</td>
+                            <td class="Label_Bold" style="width: 10%;">Período Pago</td>
                             <td id="L_Periodo_Pago" style="width: 17%;"></td>
                         </tr>
                     </table>
@@ -349,7 +349,7 @@
                             <td class="Label_Bold" style="width: 10%;">Tipo Cuota</td>
                             <td id="L_Tipo_Cuota" style="width: 23%;"></td>
 
-                            <td class="Label_Bold" style="width: 10%;">Base Calculo</td>
+                            <td class="Label_Bold" style="width: 10%;">Base Cálculo</td>
                             <td id="L_Base_Calculo" style="width: 16%;"></td>
 
                             <td class="Label_Bold" style="width: 10%;">Código Tasa</td>

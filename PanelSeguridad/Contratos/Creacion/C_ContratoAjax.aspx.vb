@@ -31,6 +31,9 @@ Public Class C_ContratoAjax
                 Case "MATRIX_DIRECCIONES"
                     Carga_MDirecciones()
 
+                Case "MATRIX_TASAS"
+                    Carga_MTasas()
+
                 Case "Cliente"
                     CargarCliente()
 
@@ -214,6 +217,21 @@ Public Class C_ContratoAjax
 
         Dim ObjList_Matrix As New List(Of ClienteClass)
         ObjList_Matrix = SQL.Matrix_Personas_Direcciones
+
+        Response.Write(JsonConvert.SerializeObject(ObjList_Matrix.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga La matrix Tasas
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub Carga_MTasas()
+
+        Dim SQL As New TasasSQLClass
+
+        Dim ObjList_Matrix As New List(Of TasasClass)
+        ObjList_Matrix = SQL.Matrix_Tasas()
 
         Response.Write(JsonConvert.SerializeObject(ObjList_Matrix.ToArray()))
 

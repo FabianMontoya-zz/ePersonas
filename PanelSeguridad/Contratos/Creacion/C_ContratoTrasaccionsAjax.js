@@ -212,6 +212,32 @@ function transaccionAjax_MDirecciones(State) {
     });
 }
 
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_MTasas(State) {
+    $.ajax({
+        url: "C_ContratoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'Tasas'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_Tasas = [];
+            }
+            else {
+                Matrix_Tasas = JSON.parse(result);
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
 /*------------------------------ crear ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax_C_Contrato_create(State) {
