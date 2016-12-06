@@ -229,7 +229,7 @@ function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {
         var index_ID = this.value;
         Charge_Combos_Depend_Nit(Matrix_Sucursal, "Select_Sucursal", index_ID, "");
-
+        Charge_Combos_Depend_Nit(Matrix_Personas, "Select_Persona_A", index_ID, "");
     });
 }
 

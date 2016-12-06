@@ -50,7 +50,7 @@
                 <div id="Acordeon_Activo" style="width: 100%">
                     <h3>Datos Activos
                     </h3>
-                    <div id="DatosActivos" style="height: 200px;">
+                    <div id="DatosActivos">
                         <table id="T_Encabezado" style="width: 100%;">
                             <tr>
                                 <td style="width: 7%;" class="Label_Bold">Nit Empresa
@@ -106,10 +106,6 @@
                                 <td style="width: 10%; padding-bottom: 25px;"></td>
                             </tr>
                         </table>
-                    </div>
-                    <h3 id="TitleActivo_2">Activo
-                    </h3>
-                    <div id="TipoActivo">
                         <table id="Tabla_LLave_Inmueble" style="width: 100%;">
                             <tr>
                                 <td class="Label_Bold" style="width: 12%;">Cedula Catastral
@@ -171,6 +167,120 @@
                                 </td>
                             </tr>
                         </table>
+                        <table id="T_Datos_Identificacion" style="width: 100%;">
+                            <tr>
+                                <td class="Label_Bold" style="width: 10.5%;">Responsable
+                                </td>
+                                <td style="width: 46.5%;" colspan="3">
+                                    <select id="Select_Persona_A" class="C_Chosen">
+                                    </select>
+                                </td>
+                                <td style="padding-bottom: 25px; width: 42%;">
+                                    <span class="cssToolTip">
+                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img14"
+                                            src="../../images/error.png" />
+                                        <span class="SpamEG"></span></span>
+                                </td>
+
+                            </tr>
+                        </table>
+                        <table id="Tabla_datos_Or" style="width: 100%;">
+                            <tr>
+                                <td class="Label_Bold" style="width: 7.5%;">Descripción
+                                </td>
+                                <td style="width: 10%;">
+                                    <span class="cssToolTip_Form_T">
+                                        <input type="text" id="txtDescripcion" maxlength="50" style="width: 300px;" />
+                                        <span class="Spam_AST"></span></span>
+                                </td>
+                                <td style="width: 40%; padding-bottom: 25px;">
+                                    <span class="cssToolTip">
+                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img9"
+                                            src="../../images/error.png" />
+                                        <span class="SpamEG"></span></span>
+                                </td>
+                            </tr>
+                        </table>
+                        <table id="Tabla_Moneda" style="width: 100%;">
+                            <tr>
+                                <td class="Label_Bold" style="width: 7%;">Moneda
+                                </td>
+                                <td style="width: 20%;">
+                                    <select id="Select_Moneda" class="C_Chosen">
+                                    </select>
+                                </td>
+                                <td style="padding-bottom: 25px; width: 41%;">
+                                    <span class="cssToolTip">
+                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img13"
+                                            src="../../images/error.png" />
+                                        <span class="SpamEG"></span></span>
+                                </td>
+                            </tr>
+                        </table>
+                        <table id="Tabla_Valor" style="width: 100%;">
+                            <tr>
+                                <td class="Label_Bold" style="width: 7.5%;">Valor Bien
+                                </td>
+                                <td id="V_Sigla_1" style="width: 3%" class="Sigla"></td>
+                                <td style="width: 15%;">
+                                    <span class="cssToolTip_Form">
+                                        <input type="text" id="TxtValor_Bien" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
+                                        <span class="Spam_AVal"></span></span>
+                                </td>
+                                <td class="Label_Bold" style="width: 10%;">Sumatoria Facturas
+                                </td>
+                                <td id="V_Sigla_2" style="width: 4%" class="Sigla"></td>
+                                <td class="Label_Bold" id="V_TFacturas" style="width: 30%;"></td>
+                            </tr>
+                        </table>
+                        <table id="Tabla_Valor_Compra" style="width: 100%;">
+                            <tr>
+                                <td class="Label_Bold" style="width: 6.8%;">Valor Compra
+                                </td>
+                                <td id="V_Sigla_3" style="width: 2.8%" class="Sigla"></td>
+                                <td style="width: 11.5%;">
+                                    <span class="cssToolTip_Form_T">
+                                        <input type="text" id="TxtValor_Compra" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
+                                        <span class="Spam_AVal"></span></span>
+                                </td>
+                                <td class="Label_Bold" style="width: 5%;">Compra Bien</td>
+                                <td style="width: 10%">
+                                    <select id="Select_CompraBien" class="C_Chosen" style="width: 80px;">
+                                        <option value="0">No Aplica</option>
+                                        <option value="1">Nuevo</option>
+                                        <option value="2">Usado</option>
+                                    </select></td>
+                                <td class="Label_Bold" style="width: 25%;"></td>
+                            </tr>
+                        </table>
+                        <table id="T_Datos_Final" style="width: 100%;">
+                            <tr>
+                                <td class="Label_Bold" style="width: 4.6%;">Asegurado (S/N)
+                                </td>
+                                <td style="width: 5%;">
+                                    <select id="Select_Asegurado" class="C_Chosen">
+                                        <option value="N">No</option>
+                                        <option value="S">Si</option>
+                                    </select>
+                                </td>
+                                <td style="width: 6.5%; padding-bottom: 25px;"></td>
+                                <td class="Label_Bold" style="width: 6.5%; text-align: right;">Tipo Administración
+                                </td>
+                                <td style="width: 20%;">
+                                    <select id="Select_TipoAdmin" class="C_Chosen">
+                                        <option value="1">1 - Cliente paga</option>
+                                        <option value="2">2 - Exento</option>
+                                        <option value="3">3 - Pago BBVA</option>
+                                        <option value="4">4 - Pago cliente con soporte</option>
+                                    </select>
+                                </td>
+                                <td style="width: 10%; padding-bottom: 25px;"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <h3 id="TitleActivo_2">Activo
+                    </h3>
+                    <div id="TipoActivo">
                         <table id="Blo_Inmuebles">
                             <tr>
                                 <td>
@@ -255,25 +365,8 @@
                                 </td>
                             </tr>
                         </table>
-                        <table id="Tabla_datos_Or" style="width: 100%;">
-                            <tr>
-                                <td class="Label_Bold" style="width: 7.5%;">Descripción
-                                </td>
-                                <td style="width: 10%;">
-                                    <span class="cssToolTip_Form_T">
-                                        <input type="text" id="txtDescripcion" maxlength="50" style="width: 300px;" />
-                                        <span class="Spam_AST"></span></span>
-                                </td>
-                                <td style="width: 40%; padding-bottom: 25px;">
-                                    <span class="cssToolTip">
-                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img9"
-                                            src="../../images/error.png" />
-                                        <span class="SpamEG"></span></span>
-                                </td>
-                            </tr>
-                        </table>
                     </div>
-                    <h3>Ubicación del Bien
+                    <h3>Ubicación
                     </h3>
                     <div id="UbicacionBien" style="height: 200px;">
                         <table id="Tabla_Ubicacion" style="width: 100%;">
@@ -349,82 +442,6 @@
                                 </td>
                                 <td style="width: 6%; padding-bottom: 25px;" colspan="3"></td>
 
-                            </tr>
-                        </table>
-                        <table id="Tabla_Moneda" style="width: 100%;">
-                            <tr>
-                                <td class="Label_Bold" style="width: 7%;">Moneda
-                                </td>
-                                <td style="width: 20%;">
-                                    <select id="Select_Moneda" class="C_Chosen">
-                                    </select>
-                                </td>
-                                <td style="padding-bottom: 25px; width: 41%;">
-                                    <span class="cssToolTip">
-                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img13"
-                                            src="../../images/error.png" />
-                                        <span class="SpamEG"></span></span>
-                                </td>
-                            </tr>
-                        </table>
-                        <table id="Tabla_Valor" style="width: 100%;">
-                            <tr>
-                                <td class="Label_Bold" style="width: 7.5%;">Valor Bien
-                                </td>
-                                <td id="V_Sigla_1" style="width: 3%" class="Sigla"></td>
-                                <td style="width: 15%;">
-                                    <span class="cssToolTip_Form">
-                                        <input type="text" id="TxtValor_Bien" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
-                                        <span class="Spam_AVal"></span></span>
-                                </td>
-                                <td class="Label_Bold" style="width: 10%;">Sumatoria Facturas
-                                </td>
-                                <td id="V_Sigla_2" style="width: 4%" class="Sigla"></td>
-                                <td class="Label_Bold" id="V_TFacturas" style="width: 30%;"></td>
-                            </tr>
-                        </table>
-                        <table id="Tabla_Valor_Compra" style="width: 100%;">
-                            <tr>
-                                <td class="Label_Bold" style="width: 6.8%;">Valor Compra
-                                </td>
-                                <td id="V_Sigla_3" style="width: 2.8%" class="Sigla"></td>
-                                <td style="width: 11.5%;">
-                                    <span class="cssToolTip_Form_T">
-                                        <input type="text" id="TxtValor_Compra" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
-                                        <span class="Spam_AVal"></span></span>
-                                </td>
-                                <td class="Label_Bold" style="width: 5%;">Compra Bien</td>
-                                <td style="width: 10%">
-                                    <select id="Select_CompraBien" class="C_Chosen" style="width: 80px;">
-                                        <option value="0">No Aplica</option>
-                                        <option value="1">Nuevo</option>
-                                        <option value="2">Usado</option>
-                                    </select></td>
-                                <td class="Label_Bold" style="width: 25%;"></td>
-                            </tr>
-                        </table>
-                        <table id="T_Datos_Final" style="width: 100%;">
-                            <tr>
-                                <td class="Label_Bold" style="width: 4.6%;">Asegurado (S/N)
-                                </td>
-                                <td style="width: 5%;">
-                                    <select id="Select_Asegurado" class="C_Chosen">
-                                        <option value="N">No</option>
-                                        <option value="S">Si</option>
-                                    </select>
-                                </td>
-                                <td style="width: 6.5%; padding-bottom: 25px;"></td>
-                                <td class="Label_Bold" style="width: 6.5%; text-align: right;">Tipo Administración
-                                </td>
-                                <td style="width: 20%;">
-                                    <select id="Select_TipoAdmin" class="C_Chosen">
-                                        <option value="1">1 - Cliente paga</option>
-                                        <option value="2">2 - Exento</option>
-                                        <option value="3">3 - Pago BBVA</option>
-                                        <option value="4">4 - Pago cliente con soporte</option>
-                                    </select>
-                                </td>
-                                <td style="width: 10%; padding-bottom: 25px;"></td>
                             </tr>
                         </table>
                     </div>
