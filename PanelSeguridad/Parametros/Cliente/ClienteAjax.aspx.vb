@@ -173,6 +173,11 @@ Public Class ClienteAjax
             objCliente.Other_1 = Request.Form("Other_1")
             objCliente.Other_2 = Request.Form("Other_2")
 
+            objCliente.OP_Visitante = Request.Form("OP_Visitante")
+            objCliente.OP_Representante = Request.Form("OP_Representante")
+            objCliente.OP_Socio = Request.Form("OP_socio")
+            objCliente.Por_Participacion = Request.Form("Por_Participacion")
+
             objCliente.Nombre_2 = Request.Form("Nombre_2")
             objCliente.Apellido_1 = Request.Form("Ape_1")
             objCliente.Apellido_2 = Request.Form("Ape_2")
@@ -241,6 +246,11 @@ Public Class ClienteAjax
         objCliente.OP_Asesor = Request.Form("OP_Asesor")
         objCliente.Other_1 = Request.Form("Other_1")
         objCliente.Other_2 = Request.Form("Other_2")
+
+        objCliente.OP_Visitante = Request.Form("OP_Visitante")
+        objCliente.OP_Representante = Request.Form("OP_Representante")
+        objCliente.OP_Socio = Request.Form("OP_socio")
+        objCliente.Por_Participacion = Request.Form("Por_Participacion")
 
         objCliente.Nombre_2 = Request.Form("Nombre_2")
         objCliente.Apellido_1 = Request.Form("Ape_1")

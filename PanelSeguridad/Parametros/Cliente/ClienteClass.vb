@@ -25,6 +25,17 @@
     Private _Other_1 As String
     Private _Other_2 As String
 
+
+    Private _OP_Visitante As String
+    Private _OP_Representante As String
+    Private _OP_Socio As String
+    Private _Other_3 As String
+    Private _Other_4 As String
+    Private _Other_5 As String
+    Private _Other_6 As String
+    Private _Other_7 As String
+    Private _Por_Participacion As Integer
+
     Private _Cod_Bank As Long
     Private _DocCiudad As Long
     Private _TipoPersona As String
@@ -68,8 +79,6 @@
     Private _MotivoBloqueo As String
     Private _DescripMotivoBloqueo As String
     Private _DescripSexo As String
-
-
 
 #End Region
 
@@ -265,6 +274,31 @@
             Me._Other_1 = value
         End Set
     End Property
+
+    Public Property OP_Visitante() As String
+        Get
+            Return Me._OP_Visitante
+        End Get
+        Set(ByVal value As String)
+            Me._OP_Visitante = value
+        End Set
+    End Property
+    Public Property OP_Representante() As String
+        Get
+            Return Me._OP_Representante
+        End Get
+        Set(ByVal value As String)
+            Me._OP_Representante = value
+        End Set
+    End Property
+    Public Property OP_Socio() As String
+        Get
+            Return Me._OP_Socio
+        End Get
+        Set(ByVal value As String)
+            Me._OP_Socio = value
+        End Set
+    End Property
     Public Property Other_2() As String
         Get
             Return Me._Other_2
@@ -273,6 +307,55 @@
             Me._Other_2 = value
         End Set
     End Property
+    Public Property Other_3() As String
+        Get
+            Return Me._Other_3
+        End Get
+        Set(ByVal value As String)
+            Me._Other_3 = value
+        End Set
+    End Property
+    Public Property Other_4() As String
+        Get
+            Return Me._Other_4
+        End Get
+        Set(ByVal value As String)
+            Me._Other_4 = value
+        End Set
+    End Property
+    Public Property Other_5() As String
+        Get
+            Return Me._Other_5
+        End Get
+        Set(ByVal value As String)
+            Me._Other_5 = value
+        End Set
+    End Property
+    Public Property Other_6() As String
+        Get
+            Return Me._Other_6
+        End Get
+        Set(ByVal value As String)
+            Me._Other_6 = value
+        End Set
+    End Property
+    Public Property Other_7() As String
+        Get
+            Return Me._Other_7
+        End Get
+        Set(ByVal value As String)
+            Me._Other_7 = value
+        End Set
+    End Property
+    Public Property Por_Participacion() As Integer
+        Get
+            Return Me._Por_Participacion
+        End Get
+        Set(ByVal value As Integer)
+            Me._Por_Participacion = value
+        End Set
+    End Property
+
     Public Property UsuarioCreacion() As String
         Get
             Return Me._UsuarioCreacion

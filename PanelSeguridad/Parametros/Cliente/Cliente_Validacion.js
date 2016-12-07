@@ -124,22 +124,6 @@ function ValideAnexos() {
     });
 }
 
-//validacion de campo
-function ValidaPorcentaje(Objeto, Limite) {
-    $("#" + Objeto).blur(function () {
-
-        var P_Numero = $("#" + Objeto).val();
-
-        if (parseInt(P_Numero) > parseInt(Limite)) {
-            Mensaje_General("Porcentaje Invalido!", "El porcentaje no debe se mayor a " + Limite, "W");
-            $("#" + Objeto).val("");
-            $("#" + Objeto).focus();
-        }
-    });
-}
-
-
-
 //validamos campos para la creacion del link
 function validarCamposCrear() {
 

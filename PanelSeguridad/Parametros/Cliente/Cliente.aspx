@@ -526,6 +526,14 @@
                             <td style="padding-bottom: 25px; width: 200px;"></td>
                         </tr>
                     </table>
+                    <table id="C_Socio_Vista" style="width: 100%">
+                        <tr>
+                            <td class="Label_Bold " style="width: 100px;">% Participación
+                            </td>
+                            <td id="Con_Por_Participacion"></td>
+                            <td style="padding-bottom: 25px; width: 700px;"></td>
+                        </tr>
+                    </table>
                     <table id="Table10" style="width: 700px; text-align: left;">
                         <tr>
                             <td style="width: 120px;" class="Label_Bold">Tipo de Relación
@@ -629,7 +637,6 @@
                                     </td>
                                 </tr>
                             </table>
-                            
                         </td>
                     </tr>
                 </table>

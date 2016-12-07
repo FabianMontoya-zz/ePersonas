@@ -561,6 +561,20 @@ function Restric_long_decimal(object) {
     });
 }
 
+//validacion de campo porcentajes
+function ValidaPorcentaje(Objeto, Limite) {
+    $("#" + Objeto).blur(function () {
+
+        var P_Numero = $("#" + Objeto).val();
+
+        if (parseInt(P_Numero) > parseInt(Limite)) {
+            Mensaje_General("Porcentaje Invalido!", "El porcentaje no debe se mayor a " + Limite, "W");
+            $("#" + Objeto).val("");
+            $("#" + Objeto).focus();
+        }
+    });
+}
+
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                             FUNCIONES PARA CARGA DE DROP LIST                                                                                               ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/

@@ -76,8 +76,12 @@ Public Class ClienteSQLClass
                         "      	ROW_NUMBER() OVER(ORDER BY CLI.CLI_Nit_ID DESC) AS Index_Cliente,  " & _
                         "      	CLI.CLI_Sex, " & _
                         "      	CLI.CLI_FechaNacimiento, " & _
-                        "       SEX.DDLL_Descripcion AS DescripSex " & _
-                       " FROM CLIENTE CLI " & _
+                        "       SEX.DDLL_Descripcion AS DescripSex, " & _
+                         "      CLI.CLI_OP_Visitante, " & _
+                        "       CLI.CLI_OP_Representante, " & _
+                        "       CLI.CLI_OP_socio, " & _
+                        "       CLI.CLI_Por_Participacion " & _
+                        " FROM CLIENTE CLI " & _
                         " INNER JOIN PAISES P ON P.P_Cod = CLI.CLI_Pais_ID " & _
                         " INNER JOIN CIUDADES C ON C.C_Ciudad_ID = CLI.CLI_Ciudad_ID " & _
                         " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO SEX ON SEX.DDL_ID = CLI.CLI_Sex AND SEX.DDL_Tabla = 'SEXO' " & _
@@ -144,7 +148,11 @@ Public Class ClienteSQLClass
                         "      	ROW_NUMBER() OVER(ORDER BY CLI.CLI_Nit_ID DESC) AS Index_Cliente,  " & _
                         "      	CLI.CLI_Sex, " & _
                         "      	CLI.CLI_FechaNacimiento, " & _
-                        "       SEX.DDLL_Descripcion AS DescripSex " & _
+                        "       SEX.DDLL_Descripcion AS DescripSex, " & _
+                        "       CLI.CLI_OP_Visitante, " & _
+                        "       CLI.CLI_OP_Representante, " & _
+                        "       CLI.CLI_OP_socio, " & _
+                        "       CLI.CLI_Por_Participacion " & _
                         " FROM CLIENTE CLI " & _
                         " INNER JOIN PAISES P ON P.P_Cod = CLI.CLI_Pais_ID " & _
                         " INNER JOIN CIUDADES C ON C.C_Ciudad_ID = CLI.CLI_Ciudad_ID " & _
@@ -210,7 +218,11 @@ Public Class ClienteSQLClass
                         "      	ROW_NUMBER() OVER(ORDER BY CLI.CLI_Nit_ID DESC) AS Index_Cliente,  " & _
                         "      	CLI.CLI_Sex, " & _
                         "      	CLI.CLI_FechaNacimiento, " & _
-                        "       SEX.DDLL_Descripcion AS DescripSex " & _
+                        "       SEX.DDLL_Descripcion AS DescripSex, " & _
+                        "       CLI.CLI_OP_Visitante, " & _
+                        "       CLI.CLI_OP_Representante, " & _
+                        "       CLI.CLI_OP_socio, " & _
+                        "       CLI.CLI_Por_Participacion " & _
                         " FROM CLIENTE CLI " & _
                         " INNER JOIN PAISES P ON P.P_Cod = CLI.CLI_Pais_ID " & _
                         " INNER JOIN CIUDADES C ON C.C_Ciudad_ID = CLI.CLI_Ciudad_ID " & _
@@ -288,6 +300,10 @@ Public Class ClienteSQLClass
             " CLI_N_Consecutivo, " & _
             " CLI_FechaNacimiento, " & _
             " CLI_Sex, " & _
+            " CLI_OP_Visitante, " & _
+            " CLI_OP_Representante, " & _
+            " CLI_OP_socio, " & _
+            " CLI_Por_Participacion, " & _
             " CLI_Usuario_Creacion, " & _
             " CLI_FechaCreacion, " & _
             " CLI_Usuario_Actualizacion, " & _
@@ -327,6 +343,10 @@ Public Class ClienteSQLClass
         sql.AppendLine("'" & Consecutivo & "',")
         sql.AppendLine("'" & vp_O_Obj.FechaNacimiento & "',")
         sql.AppendLine("'" & vp_O_Obj.Sex & "',")
+        sql.AppendLine("'" & vp_O_Obj.OP_Visitante & "',")
+        sql.AppendLine("'" & vp_O_Obj.OP_Representante & "',")
+        sql.AppendLine("'" & vp_O_Obj.OP_Socio & "',")
+        sql.AppendLine("'" & vp_O_Obj.Por_Participacion & "',")
         sql.AppendLine("'" & vp_O_Obj.UsuarioCreacion & "',")
         sql.AppendLine("'" & vp_O_Obj.FechaCreacion & "',")
         sql.AppendLine("'" & vp_O_Obj.UsuarioActualizacion & "',")
@@ -382,6 +402,10 @@ Public Class ClienteSQLClass
                           " CLI_GrpDocumentos ='" & vp_O_Obj.GrpDocumentos & "', " & _
                           " CLI_Sex ='" & vp_O_Obj.Sex & "', " & _
                           " CLI_FechaNacimiento ='" & vp_O_Obj.FechaNacimiento & "', " & _
+                          " CLI_OP_Visitante ='" & vp_O_Obj.OP_Visitante & "', " & _
+                          " CLI_OP_Representante ='" & vp_O_Obj.OP_Representante & "', " & _
+                          " CLI_OP_socio ='" & vp_O_Obj.OP_Socio & "', " & _
+                          " CLI_Por_Participacion ='" & vp_O_Obj.Por_Participacion & "', " & _
                           " CLI_Usuario_Actualizacion ='" & vp_O_Obj.UsuarioActualizacion & "', " & _
                           " CLI_FechaActualizacion ='" & vp_O_Obj.FechaActualizacion & "'" & _
                        " WHERE CLI_Nit_ID = '" & vp_O_Obj.Nit_ID & "'" & _
@@ -701,6 +725,11 @@ Public Class ClienteSQLClass
                     If Not (IsDBNull(ReadConsulta.GetValue(48))) Then objCliente.Sex = ReadConsulta.GetValue(48) Else objCliente.Sex = ""
                     If Not (IsDBNull(ReadConsulta.GetValue(49))) Then objCliente.FechaNacimiento = ReadConsulta.GetValue(49) Else objCliente.FechaNacimiento = ""
                     If Not (IsDBNull(ReadConsulta.GetValue(50))) Then objCliente.DescripSexo = ReadConsulta.GetValue(50) Else objCliente.DescripSexo = ""
+
+                    objCliente.OP_Visitante = ReadConsulta.GetValue(51)
+                    objCliente.OP_Representante = ReadConsulta.GetValue(52)
+                    objCliente.OP_Socio = ReadConsulta.GetValue(53)
+                    If Not (IsDBNull(ReadConsulta.GetValue(54))) Then objCliente.Por_Participacion = ReadConsulta.GetValue(54) Else objCliente.Por_Participacion = 0
 
                     'agregamos a la lista
                     ObjListCliente.Add(objCliente)
