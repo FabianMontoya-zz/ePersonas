@@ -18,6 +18,23 @@ var ID;
 var T_Doc;
 var Doc;
 
+var NIT;
+var tiempo;
+var baseCalculo;
+var ciclo;
+var Modalidad;
+
+var Periodo_Pago;
+var Tipo_Cuota;
+var Tasa;
+var Pto_Adicionales;
+
+var TEbase;
+var TNbase;
+
+var signo;
+var numero;
+
 /*--------------- region de variables globales --------------------*/
 
 //Evento load JS
@@ -107,9 +124,11 @@ $(document).ready(function () {
     Change_Select_Producto();
     Change_Select_Condicion_Financiacion();
     Change_Select_Unidad_Tiempo();
+    Change_Select_Signo_Puntos();
     Change_Select_Base_Calculo();
     Format_Adress("Txt_Adress_C");
     Restric_long_decimal("TXT_Puntos_Adicionales");
+    ReCalcularTasas("TXT_Puntos_Adicionales")
 });
 
 //Ocultamos las imagenes de error al iniciar la pantalla
@@ -155,6 +174,14 @@ function Picker_Fechas() {
 //salida del formulario
 function btnSalir() {
     window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
+}
+
+//salida del formulario
+function ReCalcularTasas(object) {
+    $("#" + object).blur(function () {
+        puntos = $("#TXT_Puntos_Adicionales").val();
+        PuntosAdicionales_Tasas(TNbase, puntos);
+    });
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -260,17 +287,17 @@ function Change_Select_Condicion_Financiacion() {
         index_ID = parseInt(index_ID) - 1;
 
 
-        var NIT = Matrix_Financiacion[index_ID].Nit_ID;
-        var tiempo = Matrix_Financiacion[index_ID].Unidad_Tiempo;
-        var baseCalculo = Matrix_Financiacion[index_ID].Base_Calculo;
-        var ciclo = Matrix_Financiacion[index_ID].Ciclo_Cobro_FK;
-        var Modalidad = Matrix_Financiacion[index_ID].Modalidad_Pago;
+        NIT = Matrix_Financiacion[index_ID].Nit_ID;
+        tiempo = Matrix_Financiacion[index_ID].Unidad_Tiempo;
+        baseCalculo = Matrix_Financiacion[index_ID].Base_Calculo;
+        ciclo = Matrix_Financiacion[index_ID].Ciclo_Cobro_FK;
+        Modalidad = Matrix_Financiacion[index_ID].Modalidad_Pago;
 
-        var Periodo_Pago = Matrix_Financiacion[index_ID].Periodo_Pago;
-        var Tipo_Cuota = Matrix_Financiacion[index_ID].Tipo_Cuota;
-        var Base_Calculo = Matrix_Financiacion[index_ID].Base_Calculo;
-        var Tasa = Matrix_Financiacion[index_ID].Tasa_FK;
-        var Pto_Adicionales = Matrix_Financiacion[index_ID].Puntos_Adicionales;
+        Periodo_Pago = Matrix_Financiacion[index_ID].Periodo_Pago;
+        Tipo_Cuota = Matrix_Financiacion[index_ID].Tipo_Cuota;
+        Base_Calculo = Matrix_Financiacion[index_ID].Base_Calculo;
+        Tasa = Matrix_Financiacion[index_ID].Tasa_FK;
+        Pto_Adicionales = Matrix_Financiacion[index_ID].Puntos_Adicionales;
 
         $("#Select_Tiempo").val(tiempo).trigger("chosen:updated");
         $("#Select_Base_Calculo").val(baseCalculo).trigger("chosen:updated");
@@ -308,9 +335,9 @@ function Change_Select_Condicion_Financiacion() {
         }
 
         /*Cambio L_Base_Calculo*/
-        if (Base_Calculo == 1) {
+        if (baseCalculo == 1) {
             $("#L_Base_Calculo").html("1 - 360/360");
-        } else if (Base_Calculo == 2) {
+        } else if (baseCalculo == 2) {
             $("#L_Base_Calculo").html("2 - 365/365");
         }
 
@@ -325,22 +352,28 @@ function Change_Select_Condicion_Financiacion() {
 
         /*--------------------*/
         /*Validamos si el número que entra es negativo o no para mostrarlo en el TXT de puntos adicionales*/
-        var signo = Pto_Adicionales.toString().substring(0, 1);
-        var numero;
+        signo = Pto_Adicionales.toString().substring(0, 1);
+
         if (signo == "-") {
             /*Si hay signo negativo se cambia el combo del simbolo y se toman solo el número sin el signo*/
             numero = Pto_Adicionales.toString().substring(1, Pto_Adicionales.toString().length);
             $("#Select_Signo_Puntos").val(signo).trigger("chosen:updated");
         } else {
             numero = Pto_Adicionales;
-            $("#Select_Signo_Puntos").val("+").trigger("chosen:updated");
+            signo = "+";
+            $("#Select_Signo_Puntos").val(signo).trigger("chosen:updated");
         }
+
+        TNbase = Nominal_Anual(indexTasa);
+        TEbase = Equivalencia_Efectiva(indexTasa);
         /*Si hay puntos adicionales los escribimos en el TXT, sino, dejamos en blanco*/
         if (numero == 0) {
             $("#TXT_Puntos_Adicionales").val(""); /*Dejamos en blanco si no hay puntos adicionales*/
+            escribirTasas(TNbase, TEbase); //Cómo no hay puntos adicionales no recalculamos las Tasas
         } else {
             numero = LlenarCeros(numero, 4);
             $("#TXT_Puntos_Adicionales").val(numero); /*Escribimos los puntos adicionales que trae la financiacion seleccionada*/
+            PuntosAdicionales_Tasas(TNbase, numero); //Como hay puntos adicionales recalculamos la TE y la TN
         }
         /*--------------------*/
 
@@ -350,11 +383,7 @@ function Change_Select_Condicion_Financiacion() {
         /*Escritura L_Periodo*/
         $("#L_Periodo").html(Periodo_Tasa(indexTasa)); /*Mandamos el indice de la matriz de tasas y traemos el Periodo armado*/
 
-        /*Escritura L_Equivalencia_Efectiva*/
-        $("#L_Equivalencia_Efectiva").html(Equivalencia_Efectiva(indexTasa)); /*Mandamos el indice de la matriz de tasas y traemos el valor armado con %*/
 
-        /*Escritura L_Equivalencia_Efectiva*/
-        $("#L_Nominal_Actual").html(Nominal_Anual(indexTasa)); /*Mandamos el indice de la matriz de tasas y traemos el valor armado con %*/
 
     });
 }
@@ -370,6 +399,14 @@ function Change_Select_Unidad_Tiempo() {
 
         var index_ID = this.value;
         CambiarTiempo(index_ID);
+    });
+}
+
+function Change_Select_Signo_Puntos() {
+    $("#Select_Signo_Puntos").change(function () {
+        signo = this.value; //Tomamos el signo que cambia
+        puntos = $("#TXT_Puntos_Adicionales").val(); //Retomamos el valor de los puntos adicionales que hayan en en TXT
+        PuntosAdicionales_Tasas(TNbase, puntos); //Llamamos función para recalcular las TE y TN según el nuevo simbolo
     });
 }
 
@@ -390,6 +427,45 @@ function CambiarTiempo(index_ID) {
         $("#L_Tiempo").html("");
         $("#L_Tiempo_2").html("");
     }
+}
+
+//Funcion que suma los puntos adicionales a la TN y re calculo la TE de acuerdo a este
+function PuntosAdicionales_Tasas(tn, pts) {
+
+    var TE = 0;
+    var TN = 0;
+    var PUNTOS = 0;
+
+    if (baseCalculo == 1) {
+        base = 360;
+    } else if (baseCalculo == 2) {
+        base = 365;
+    }
+    console.log("Base_Cal: " + baseCalculo + " / base = " + base);
+    TN = tn / 100;
+    PUNTO = pts / 100;
+
+    switch (signo) {
+        case "-":
+            TN = TN - (PUNTO);
+            break;
+        case "+":
+            TN = TN + (PUNTO);
+            break;
+    }
+
+    TE = TasaEfectiva(base, tiempo, 1, Modalidad, TN);
+
+    TN = TN * 100;
+    TE = TE * 100;
+
+    escribirTasas(TN, TE);
+}
+
+//Función que escribe los respectivos valores de TN y TE en los labels
+function escribirTasas(TN, TE) {
+    $("#L_Nominal_Actual").html(TN + "%"); /*Mandamos el indice de la matriz de tasas y traemos el valor*/
+    $("#L_Equivalencia_Efectiva").html(TE + "%"); /*Mandamos el indice de la matriz de tasas y traemos el valor*/
 }
 
 function Change_Select_Base_Calculo() {
@@ -596,22 +672,24 @@ function Periodo_Tasa(index) {
     return Periodo;
 }
 
+//Función que busca la TASA EFECTIVA que tiene esa financiacion
 function Equivalencia_Efectiva(index) {
     var i = index - 1;
     var valor;
 
     valor = Matrix_Tasas[i].Equivalencia_Efectiva.toString();
-    valor = valor + "%";
+    valor = valor;
 
     return valor;
 }
 
+//Función que busca la TASA NOMINAL que tiene esa financiacion
 function Nominal_Anual(index) {
     var i = index - 1;
     var valor;
 
     valor = Matrix_Tasas[i].Nominal_Anual.toString();
-    valor = valor + "%";
+    valor = valor;
 
     return valor;
 }

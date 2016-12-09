@@ -410,25 +410,25 @@ function ValidaFechaDigitada(ObjText) {
                                     console.log("OK");
                                 }
                                 else {
-                                    Mensaje_General("Formato incorrecto!", "El Dia debe ser entre 1 y " + Diafinal, "W");
+                                    Mensaje_General("¡Formato incorrecto!", "El Dia debe ser entre 1 y " + Diafinal, "W");
                                     $("#" + ObjText).val("YYYY-MM-DD");
                                     $("#" + ObjText).css("color", "#921919")
                                 }
                             }
                             else {
-                                Mensaje_General("Formato incorrecto!", "El Dia debe ser entre 1 y " + Diafinal, "W");
+                                Mensaje_General("¡Formato incorrecto!", "El Dia debe ser entre 1 y " + Diafinal, "W");
                                 $("#" + ObjText).val("YYYY-MM-DD");
                                 $("#" + ObjText).css("color", "#921919")
                             }
                         }
                         else {
-                            Mensaje_General("Formato incorrecto!", "El Mes debe ser entre 1 y 12 ", "W");
+                            Mensaje_General("¡Formato incorrecto!", "El Mes debe ser entre 1 y 12 ", "W");
                             $("#" + ObjText).val("YYYY-MM-DD");
                             $("#" + ObjText).css("color", "#921919")
                         }
                     }
                     else {
-                        Mensaje_General("Formato incorrecto!", "El Mes debe ser entre 1 y 12 ", "W");
+                        Mensaje_General("¡Formato incorrecto!", "El Mes debe ser entre 1 y 12 ", "W");
                         $("#" + ObjText).val("YYYY-MM-DD");
                         $("#" + ObjText).css("color", "#921919")
                     }
