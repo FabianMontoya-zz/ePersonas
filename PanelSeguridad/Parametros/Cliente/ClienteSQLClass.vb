@@ -1326,7 +1326,50 @@ Public Class ClienteSQLClass
         Return ObjList
     End Function
 
+    ''' <summary>
+    ''' trae el nombre del cliente segun el filtro por tipo de documento, documento y nit empresa
+    ''' </summary>
+    ''' <param name="vp_S_Nit_ID"></param>
+    ''' <param name="vp_S_TDoc"></param>
+    ''' <param name="vp_S_Doc"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function SearchPeople_Exists(ByVal vp_S_Nit_ID As String, ByVal vp_S_TDoc As String, ByVal vp_S_Doc As String)
 
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("2")
+        Dim StrQuery As String
+
+        Dim sql_body As New StringBuilder
+        Dim sql_Filter As New StringBuilder
+
+        sql_body.Append(" SELECT CLI_Nombre + ' ' + " & _
+                                          "             CASE  WHEN  CLI_Nombre_2  IS NULL THEN ''  ELSE CLI_Nombre_2 END  + ' ' + " & _
+                                          "             CASE  WHEN  CLI_Apellido_1  IS NULL THEN ''  ELSE CLI_Apellido_1 END  + ' ' + " & _
+                                          "             CASE  WHEN  CLI_Apellido_2  IS NULL THEN ''  ELSE CLI_Apellido_2 END AS DESCRIPCION" & _
+                                          " FROM CLIENTE " & _
+                                          " WHERE CLI_TypeDocument_ID ='" & vp_S_TDoc & "'" & _
+                                          " AND CLI_Document_ID = '" & vp_S_Doc & "'")
+
+        If vp_S_Nit_ID <> "" Then
+            sql_Filter.Append(" AND CLI_Nit_ID  = '" & vp_S_Nit_ID & "'")
+            StrQuery = sql_body.ToString & sql_Filter.ToString
+        Else
+            StrQuery = sql_body.ToString
+        End If
+
+        Dim People As String = conex.Shearch_Date_String(StrQuery, "2")
+
+        Select Case People
+            Case ""
+                People = "NO"
+                Return People
+
+            Case Else
+                Return People
+        End Select
+
+    End Function
 
 #End Region
 

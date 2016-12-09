@@ -155,6 +155,33 @@ function transacionAjax_MFasecolda(State) {
     });
 }
 
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_Documento(State) {
+    $.ajax({
+        url: "C_ActivosAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'IMPUESTO_GASTO'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                ArrayTdoc = [];
+            }
+            else {
+                ArrayTdoc = JSON.parse(result);
+                charge_CatalogList(ArrayTdoc, "Select_Documento", 1);
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_MMarcaClase_F(State) {
     $.ajax({
@@ -204,6 +231,38 @@ function transacionAjax_MLineaMarcaClase_F(State) {
         }
     });
 }
+
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_ShearchPeople(State, TD, D, NIT) {
+    $.ajax({
+        url: "C_ActivosAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "TD": TD,
+            "D": D,
+            "NIT":NIT
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            switch (result) {
+                case "NO":
+                    Mensaje_General("No existe", "Los datos diligenciados No coinciden con las personas registradas en el sitema", "W");
+                    $("#V_Responsable").html("");
+                    break;
+
+                default:
+                    $("#V_Responsable").html(result);
+                    break;
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
 
 
 /*-------------------- carga ---------------------------*/

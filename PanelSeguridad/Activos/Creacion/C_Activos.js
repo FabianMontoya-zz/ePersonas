@@ -39,8 +39,12 @@ $(document).ready(function () {
     transacionAjax_MLineaMarcaClase_F("MATRIX_LINEA_MARCA_CLASE_F");
 
     transacionAjax_EmpresaNit('Cliente')
+    transacionAjax_Documento('Documento');
     transacionAjax_Tipo('Tipo');
     // transacionAjax_Estado('Estado');
+    $("#Img_TD").css("display", "none");
+    $("#Img_D").css("display", "none");
+
     $("#Img1").css("display", "none");
     $("#Img2").css("display", "none");
     $("#Img3").css("display", "none");
@@ -122,7 +126,7 @@ $(document).ready(function () {
     Format_Adress("Txt_Adress_U");
     Change_Select_Clase();
     Change_Select_Marca();
-
+    Date_Document();
 });
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -214,6 +218,27 @@ function validarCamposCrear() {
     return validar;
 }
 
+//valida campos de documentos para buscar persona
+function ValidaCamposPeople() {
+    var valida = 0;
+    var C_Nit_ID = $("#Select_EmpresaNit").val();
+    var C_TD = $("#Select_Documento").val();
+    var C_D = $("#TxtDoc").val();
+
+    if (C_Nit_ID == "-1" || C_TD == "-1" || C_D == "") {
+        valida = 1;
+        if (C_TD == "-1") { $("#Img_TD").css("display", "inline-table"); } else { $("#Img_TD").css("display", "none"); }
+        if (C_D == "") { $("#Img_D").css("display", "inline-table"); } else { $("#Img_D").css("display", "none"); }
+        if (C_Nit_ID == "-1") { $("#Img1").css("display", "inline-table"); } else { $("#Img1").css("display", "none"); }
+    }
+    else {
+        $("#Img1").css("display", "none");
+        $("#Img_TD").css("display", "none");
+        $("#Img_D").css("display", "none");
+    }
+    return valida;
+}
+
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                     PROCESO DE CARGUE                                                                                                                                        ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -230,6 +255,26 @@ function Change_Select_Nit() {
         var index_ID = this.value;
         Charge_Combos_Depend_Nit(Matrix_Sucursal, "Select_Sucursal", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Personas, "Select_Persona_A", index_ID, "");
+    });
+}
+
+//valida campo y consulta datos de persona
+function Date_Document() {
+
+    $("#TxtDoc").blur(function () {
+
+        var valida_people = ValidaCamposPeople();
+        if (valida_people == 1) {
+            Mensaje_General("campos Incompletos!", "los campos (Nit Empresa),(Tipo de documento) y (documento) NO han sido diligenciados", "E");
+        }
+        else {
+            var C_TD = $("#Select_Documento").val();
+            var C_D = $("#TxtDoc").val();
+            var Nit = $("#Select_EmpresaNit").val();
+
+            transacionAjax_ShearchPeople("Buscar_Persona", C_TD, C_D, Nit);
+        }
+
     });
 }
 

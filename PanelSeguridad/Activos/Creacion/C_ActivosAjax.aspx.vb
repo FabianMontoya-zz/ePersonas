@@ -37,6 +37,11 @@ Public Class C_ActivosAjax
                 Case "LIST_CLASE_F"
                     Carga_Lista_Clase_Fasecolda()
 
+                Case "Documento"
+                    CargarDocumento()
+
+                Case "Buscar_Persona"
+                    Search_People()
 
                 Case "Tipo"
                     CargarTipo()
@@ -281,6 +286,21 @@ Public Class C_ActivosAjax
     ''' funcion que carga el objeto DDL consulta
     ''' </summary>
     ''' <remarks></remarks>
+    Protected Sub CargarDocumento()
+
+        Dim SQL As New ClienteSQLClass
+        Dim ObjListDroplist As New List(Of Droplist_Class)
+        Dim vl_S_Tabla As String = Request.Form("tabla")
+
+        ObjListDroplist = SQL.Charge_DropListDocumento(vl_S_Tabla)
+        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga el objeto DDL consulta
+    ''' </summary>
+    ''' <remarks></remarks>
     Protected Sub CargarCliente()
 
         Dim SQL As New ClienteSQLClass
@@ -312,6 +332,22 @@ Public Class C_ActivosAjax
 #End Region
 
 #Region "FUNCIONES"
+
+    ''' <summary>
+    ''' consulta si existe la persona digitada 
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub Search_People()
+
+        Dim SQL As New ClienteSQLClass
+        Dim vl_S_Nit As String = Request.Form("NIT")
+        Dim vl_S_TD As String = Request.Form("TD")
+        Dim vl_S_D As String = Request.Form("D")
+    
+        Dim Str_People As String = SQL.SearchPeople_Exists(vl_S_Nit, vl_S_TD, vl_S_D)
+        Response.Write(Str_People)
+
+    End Sub
 
 #End Region
 

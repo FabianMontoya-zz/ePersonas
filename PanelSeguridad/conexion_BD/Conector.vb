@@ -118,6 +118,53 @@ Public Class Conector
     End Function
 
     ''' <summary>
+    ''' funcion generica para consultas de un solo resultado tipo sTRING
+    ''' </summary>
+    ''' <param name="vp_S_StrQuery"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Shearch_Date_String(ByVal vp_S_StrQuery As String, ByVal vp_S_TypeConex As String)
+
+        Dim Select_BD As String
+        Select Case vp_S_TypeConex
+
+            Case 1
+                Select_BD = vg_S_StrConexion
+            Case 2
+                Select_BD = vg_S_StrConexion_2
+            Case 3
+                Select_BD = vg_S_StrConexion_3
+            Case Else
+                Select_BD = vg_S_StrConexion
+
+        End Select
+
+        'inicializamos conexiones a la BD
+        Dim objcmd As OleDbCommand = Nothing
+        Dim objConexBD As OleDbConnection = Nothing
+        objConexBD = New OleDbConnection(Select_BD)
+        Dim ReadConsulta As OleDbDataReader = Nothing
+
+        objcmd = objConexBD.CreateCommand
+        Dim resultQuery As String = ""
+
+        objConexBD.Open()
+        objcmd.CommandText = vp_S_StrQuery
+
+        ReadConsulta = objcmd.ExecuteReader()
+
+        While ReadConsulta.Read
+            resultQuery = ReadConsulta.GetValue(0)
+        End While
+
+        ReadConsulta.Close()
+        objConexBD.Close()
+
+        Return resultQuery
+
+    End Function
+
+    ''' <summary>
     ''' funcion de swicheo de conexion a BD por medio de vlores del web config
     ''' </summary>
     ''' <returns></returns>
