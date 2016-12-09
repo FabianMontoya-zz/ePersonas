@@ -15,6 +15,7 @@ function transaccionAjax_MPersonas(State) {
                 Matrix_Persona = [];
             }
             else {
+              //  OpenControl();
                 Matrix_Persona = JSON.parse(result);
             }
         },
@@ -23,6 +24,35 @@ function transaccionAjax_MPersonas(State) {
         }
     });
 }
+
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_MDocWork(State) {
+    $.ajax({
+        url: "AccesoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'RUTA'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_DocWork = [];
+            }
+            else {
+                Matrix_DocWork = JSON.parse(result);
+                //CloseControl();
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
@@ -45,32 +75,6 @@ function transaccionAjax_MPersona(State) {
             }
         },
         error: function () {
-        }
-    });
-}
-
-/*-------------------- carga ---------------------------*/
-//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transaccionAjax_MDocWork(State) {
-    $.ajax({
-        url: "AccesoAjax.aspx",
-        type: "POST",
-        //crear json
-        data: {
-            "action": State,
-            "tabla": 'RUTA'
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            if (result == "") {
-                Matrix_DocWork = [];
-            }
-            else {
-                Matrix_DocWork = JSON.parse(result);
-            }
-        },
-        error: function () {
-
         }
     });
 }
@@ -220,7 +224,7 @@ function transaccionAjax_MDatosUsuario(State) {
             if (result == "")
                 Matrix_Datos_Empresa = [];
             else {
-                Matrix_Datos_Empresa = JSON.parse(result);
+               Matrix_Datos_Empresa = JSON.parse(result);
                 transaccionAjax_MEmpleados("MATRIX_EMPLEADOS", Matrix_Datos_Empresa[0].Nit_ID);
             }
         },

@@ -1,6 +1,7 @@
 ﻿
 $(document).ready(function () {
-    fecha();
+    
+     fecha();
 
     $(".C_Chosen").chosen({
         width: "100%",
@@ -28,7 +29,6 @@ $(document).ready(function () {
         this.value = "";
     });
 });
-
 
 //integra los mensajes de error en la pagina
 function RevisarMensajes() {
@@ -76,6 +76,42 @@ function RevisarAyudas() {
 
 }
 
+
+//funcion para control de carga
+function Carga_Control_Sasif(str_objeto) {
+
+    var w = $(window).width();
+    var h = $(window).height();
+
+    $("#" + str_objeto).dialog({
+        autoOpen: false,
+        dialogClass: "Dialog_Control_Sasif",
+        modal: true,
+        width: w,
+        height: h,
+        overlay: {
+            opacity: 0.5,
+            background: "black"
+        },
+        show: {
+            effect: 'fade',
+            duration: 1000
+        },
+        hide: {
+            effect: 'fade',
+            duration: 1000
+        },
+        open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+    });
+
+    $(document).ajaxStart(function () {
+        $("#" + str_objeto).dialog("open");
+        $("#" + str_objeto).dialog("option", "title", "Procesando información espere un momento...");
+
+    }).ajaxStop(function () {
+        $("#" + str_objeto).dialog("close");
+     });
+}
 
 //funcion para capturar la fecha
 function fecha() {
@@ -140,6 +176,14 @@ function Charge_Combos_Depend_Verificacion(Matrix, Selector, Nit, Doc_ID, Index_
 
 }
 
+//validacion de 0 en los grid o vista
+function Convert_Valores_0(index) {
+    var Output = "";
+
+    if (index != 0)
+        Output = index;
+    return Output;
+}
 
 //carga los combps dependiendo del nit
 function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
@@ -326,7 +370,7 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
             $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
             break;
     }
-    
+
     $("#" + Selector).trigger("liszt:updated");
     $('.C_Chosen').trigger('chosen:updated');
 

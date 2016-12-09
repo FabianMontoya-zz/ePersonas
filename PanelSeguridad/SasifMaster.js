@@ -171,7 +171,7 @@ function carga_eventos(str_objeto) {
 
     $("#" + str_objeto).dialog({
         autoOpen: false,
-        dialogClass: "Dialog_Sasif",
+        dialogClass: "Dialog_Control_Sasif",
         modal: true,
         width: 400,
         height: 400,
@@ -192,6 +192,42 @@ function carga_eventos(str_objeto) {
 
     $(document).ajaxStart(function () {
         $("#" + str_objeto).dialog("open");
+    }).ajaxStop(function () {
+        $("#" + str_objeto).dialog("close");
+    });
+}
+
+//funcion para control de carga
+function Carga_Control_Sasif(str_objeto) {
+
+    var w = $(window).width();
+    var h = $(window).height();
+
+    $("#" + str_objeto).dialog({
+        autoOpen: false,
+        dialogClass: "Dialog_Control_Sasif",
+        modal: true,
+        width: w,
+        height: h,
+        overlay: {
+            opacity: 0.5,
+            background: "black"
+        },
+        show: {
+            effect: 'fade',
+            duration: 1000
+        },
+        hide: {
+            effect: 'fade',
+            duration: 1000
+        },
+        open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+    });
+
+    $(document).ajaxStart(function () {
+        $("#" + str_objeto).dialog("open");
+        $("#" + str_objeto).dialog("option", "title", "Procesando información espere un momento...");
+
     }).ajaxStop(function () {
         $("#" + str_objeto).dialog("close");
     });
@@ -575,6 +611,14 @@ function ValidaPorcentaje(Objeto, Limite) {
     });
 }
 
+//validacion de 0 en los grid o vista
+function Convert_Valores_0(index) {
+    var Output = "";
+
+    if (index != 0)
+        Output = index;
+    return Output;
+}
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                             FUNCIONES PARA CARGA DE DROP LIST                                                                                               ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/

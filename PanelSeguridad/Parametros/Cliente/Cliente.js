@@ -32,7 +32,7 @@ var OpcWordComplementos;
 
 //Evento load JS
 $(document).ready(function () {
-
+    Carga_Control_Sasif("Dialog_Control");
     transaccionAjax_MDocWork('MATIRXDOC_WORK');
     transaccionAjax_MPaises_Ciudades('MATRIX_PAIS_CIUDAD');
     transaccionAjax_MArea('MATRIX_AREA');
@@ -117,30 +117,12 @@ $(document).ready(function () {
         modal: true
     });
 
-    $("#Dialog_Charge").dialog({
-        autoOpen: false,
-        dialogClass: "Dialog_Sasif",
-        modal: true,
-        width: 400,
-        height: 400,
-        overlay: {
-            opacity: 0.5,
-            background: "black"
-        },
-        show: {
-            effect: 'fade',
-            duration: 1000
-        },
-        hide: {
-            effect: 'fade',
-            duration: 1000
-        }
-    });
 
     $("#dialog_eliminar").dialog({
         autoOpen: false,
         dialogClass: "Dialog_Sasif",
-        modal: true
+        modal: true,
+        open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show(); }
     });
 
     $("#Dialog_Direcciones").dialog({
@@ -152,7 +134,8 @@ $(document).ready(function () {
         overlay: {
             opacity: 0.5,
             background: "black"
-        }
+        },
+        open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show(); }
     });
 
     $("#Dialog_Ver_Anexos").dialog({
@@ -164,7 +147,8 @@ $(document).ready(function () {
         overlay: {
             opacity: 0.5,
             background: "black"
-        }
+        },
+        open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show(); }
     });
 
     $("#Dialog_EntidadFinanciera").dialog({
@@ -176,7 +160,8 @@ $(document).ready(function () {
         overlay: {
             opacity: 0.5,
             background: "black"
-        }
+        },
+        open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show(); }
     });
 
     $("#Dialog_Documentos").dialog({
@@ -188,7 +173,8 @@ $(document).ready(function () {
         overlay: {
             opacity: 0.5,
             background: "black"
-        }
+        },
+        open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show(); }
     });
 
     $("#Dialog_Doc_Autorizados").dialog({
@@ -200,7 +186,8 @@ $(document).ready(function () {
         overlay: {
             opacity: 0.5,
             background: "black"
-        }
+        },
+        open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show(); }
     });
 
     $("#Dialog_C_R_U_D").dialog({
@@ -212,7 +199,8 @@ $(document).ready(function () {
         overlay: {
             opacity: 0.5,
             background: "black"
-        }
+        },
+        open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show(); }
     });
 
     $("#Dialog_C_R_U_D_Bank").dialog({
@@ -224,7 +212,8 @@ $(document).ready(function () {
         overlay: {
             opacity: 0.5,
             background: "black"
-        }
+        },
+        open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show(); }
     });
 
     $("#Dialog_Detalle_Document").dialog({
@@ -236,7 +225,8 @@ $(document).ready(function () {
         overlay: {
             opacity: 0.5,
             background: "black"
-        }
+        },
+        open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show(); }
     });
 
     $("#Dialog_Delete_Adress").dialog({
@@ -248,7 +238,8 @@ $(document).ready(function () {
         overlay: {
             opacity: 0.5,
             background: "black"
-        }
+        },
+        open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show(); }
     });
 
     $("#Dialog_Delete_Bank").dialog({
@@ -260,7 +251,8 @@ $(document).ready(function () {
         overlay: {
             opacity: 0.5,
             background: "black"
-        }
+        },
+        open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show(); }
     });
 
     $("#Dialog_Format_Adress").dialog({
@@ -272,7 +264,8 @@ $(document).ready(function () {
         overlay: {
             opacity: 0.5,
             background: "black"
-        }
+        },
+        open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show(); }
     });
 
     $("#Dialog_Relation").dialog({
@@ -284,7 +277,8 @@ $(document).ready(function () {
         overlay: {
             opacity: 0.5,
             background: "black"
-        }
+        },
+        open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show(); }
     });
 
     $("#Dialog_Visor").dialog({
@@ -296,7 +290,8 @@ $(document).ready(function () {
         overlay: {
             opacity: 0.5,
             background: "black"
-        }
+        },
+        open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show(); }
     });
 
     Format_Adress("TxtDireccion");
@@ -331,9 +326,7 @@ function Change_Select_TDoc() {
             $("#TD_7").css("width", "35%");
             $("#TD_8").css("width", "15%");
             $("#Select_Ciudad_Doc").css("width", "80%");
-
-
-
+            
         }
         else {
             $("#TD_1").css("width", "13%");
@@ -514,7 +507,7 @@ function Table_Cliente() {
 
     var html_Cliente;
     var StrCiudad;
-    var StrPorcentaje="";
+    var StrPorcentaje = "";
     var ArraySplit;
 
     switch (estado) {
@@ -530,7 +523,7 @@ function Table_Cliente() {
 
                     if (ArrayCliente[itemArray].Por_Participacion != 0)
                         StrPorcentaje = ArrayCliente[itemArray].Por_Participacion + " %";
-                    
+
                     html_Cliente += "<tr><td><select id='Select_" + ArrayCliente[itemArray].Cliente_ID + "' class='Opciones' onchange=\"Select_Option_Cliente(this,'" + ArrayCliente[itemArray].Index + "','');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option></select></td><td>" + ArrayCliente[itemArray].Nit_ID + "</td><td>" + ArrayCliente[itemArray].DescripTypeDocument + "</td><td>" + ArrayCliente[itemArray].Document_ID + "</td><td>" + ArrayCliente[itemArray].Digito_Verificacion + "</td><td>" + ArrayCliente[itemArray].Nombre + " " + ArrayCliente[itemArray].Nombre_2 + " " + ArrayCliente[itemArray].Apellido_1 + " " + ArrayCliente[itemArray].Apellido_2 + "</td><td>" + ArrayCliente[itemArray].DescripTipoPersona + "</td><td>" + ArrayCliente[itemArray].DescripRegimen + "</td><td>" + ArrayCliente[itemArray].DescripPais + "</td><td>" + ArrayCliente[itemArray].DescripCiudad + "</td><td>" + ArrayCliente[itemArray].OP_Cliente + "</td><td>" + ArrayCliente[itemArray].OP_Avaluador + "</td><td>" + ArrayCliente[itemArray].OP_Transito + "</td><td>" + ArrayCliente[itemArray].OP_Hacienda + "</td><td>" + ArrayCliente[itemArray].OP_Empresa + "</td><td>" + ArrayCliente[itemArray].OP_Empleado + "</td><td>" + ArrayCliente[itemArray].OP_Asesor + "</td><td>" + ArrayCliente[itemArray].Other_1 + "</td><td>" + ArrayCliente[itemArray].Other_2 + "</td><td>" + ArrayCliente[itemArray].OP_Visitante + "</td><td>" + ArrayCliente[itemArray].OP_Representante + "</td><td>" + ArrayCliente[itemArray].OP_Socio + "</td><td>" + StrPorcentaje + "</td></tr>";
 
                 }
@@ -662,8 +655,8 @@ function Editar(Index_Cliente, Type) {
 
     $("#Text_fechaNacimiento").val(ArrayCliente[Index_Cliente].FechaNacimiento);
     $("#Select_Sex").val(ArrayCliente[Index_Cliente].Sex);
-    $("#Text_fechaNacimiento" ).css("color", "#000000")
-    
+    $("#Text_fechaNacimiento").css("color", "#000000")
+
     StrPolitica = ArrayCliente[Index_Cliente].Politica_ID;
 
     if (StrPolitica == 0)
@@ -741,7 +734,7 @@ function ConsultaPersona(Index_Cliente) {
 
     $("#Con_Sex").html(ArrayCliente[Index_Cliente].DescripSexo);
     $("#Con_fechaNacimiento").html(ArrayCliente[Index_Cliente].FechaNacimiento);
-    
+
     $("#Con_Ident").html(ArrayCliente[Index_Cliente].Document_ID);
     $("#ConVerif").html(ArrayCliente[Index_Cliente].Digito_Verificacion);
     $("#Con_Consecutivo").html(ArrayCliente[Index_Cliente].Consecutivo);

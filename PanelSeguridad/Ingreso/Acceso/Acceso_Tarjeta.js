@@ -11,6 +11,7 @@ var Minutes_Live;
 var Ingreso_Live;
 var Process_Manual_Ingreso = 0;
 var Cant_Ingreso = 0;
+var existe_tarjeta = 0;
 
 /*--------------- region de variables globales --------------------*/
 
@@ -35,7 +36,10 @@ function Capture_Tarjeta_ID() {
 function validaTarjeta(Tarjeta_ID) {
     $("#Btnguardar").attr("value", "Nueva Consulta");
     for (item in Matrix_Persona) {
+        console.log(Tarjeta_ID + " == " + Matrix_Persona[item].Tarjeta_ID);
         if (Matrix_Persona[item].Tarjeta_ID == Tarjeta_ID) {
+
+            existe_tarjeta = 1;
             $("#TxtDoc").val(Matrix_Persona[item].Document_ID);
             $("#Select_Documento").val(Matrix_Persona[item].TypeDocument_ID);
             TDoc_VT = Matrix_Persona[item].TypeDocument_ID;
@@ -67,10 +71,11 @@ function validaTarjeta(Tarjeta_ID) {
             $('.C_Chosen').trigger('chosen:updated');
             break;
         }
-        else {
-            Mensaje_General("Tarjeta No registrada", "Esta tarjeta no existe en el sistema ó no esta asignada comuniquese con el administrador del sistema!", "W");
-        }
     }
+
+    if (existe_tarjeta == 0)
+        Mensaje_General("Tarjeta No registrada", "Esta tarjeta no existe en el sistema ó no esta asignada comuniquese con el administrador del sistema!", "W");
+
 }
 
 //verificamos el estado de la tarjeta
@@ -503,8 +508,8 @@ function CreateJSON_IngresoLog() {
         "Hora_PlanSalida": HPSal,
         "Fecha_RealSalida": "",
         "Hora_RealSalida": "",
-        "Estado": "",
-        "IngAutomatico_Porteria": "",
+        "Estado": 1,
+        "IngAutomatico_Porteria": 2,
         "TipoPersona": "",
         "Num_UnicoVisita": Cant_Ingreso,
         "Usuario_Ingreso": User.toUpperCase(),

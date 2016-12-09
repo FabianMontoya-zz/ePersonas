@@ -16,7 +16,7 @@
     <link href="../../css/css_login.css" rel="stylesheet" type="text/css" />
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
     <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />
-    <link href="../../css/custom/charge.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" />
     <link href="../../css/Chosen/chosen.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/jquery.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Chosen/chosen.jquery.js" type="text/javascript"></script>
@@ -364,7 +364,7 @@
                             <td style="width: 50%;">
                                 <span class="cssToolTip_Form_L"><a href="javascript:BtnRelacion();">
                                     <img alt="error" title="" style="padding-left: 1em; height: 50px; width: 50px;" id="Imgrelations"
-                                        src="../../images/relations.png" /></a> <span class="Spam_ARel"></span></span>
+                                        src="../../images/Relations.gif" /></a> <span class="Spam_ARel"></span></span>
                             </td>
                         </tr>
                     </table>
@@ -1621,19 +1621,14 @@
             </tr>
         </table>
     </div>
-    <div id="Dialog_Charge" style="width: 100%; text-align: center;">
-        <div class="cssload-circle">
-            <div class="cssload-up">
-                <div class="cssload-innera">
-                </div>
-            </div>
-            <div class="cssload-down">
-                <div class="cssload-innerb">
-                </div>
+    <div id="Dialog_Control" style="width: 100%; text-align: center;">
+        <div class="cssload-container" style="margin-top: 25%">
+            <div class="cssload-whirlpool"></div>
+            <div>
+                <img id="Sasif" class="Logo_3" src="../../images/SASIF_NEW_WHITE.png" alt="SASIF S.A.S." />
             </div>
         </div>
-        <h5>Procesando información espere un momento...</h5>
-    </div>
+     </div>
     <div id="Dialog_Ver_Anexos">
         <div id="container_TDoc_Anexos" style="margin-top: 10px; margin-bottom: 10px;">
         </div>

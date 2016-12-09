@@ -11,6 +11,8 @@ var Link;
 //evento load del menu
 $(document).ready(function () {
 
+    Carga_Control_Sasif("Dialog_Control");
+
     //funcion para las ventanas emergentes
     $("#Dialog_Warning").dialog({
         autoOpen: false,

@@ -165,6 +165,13 @@ li
     transition: all 0.8s ease;
 }
 
+.Logo_3
+{
+    height: 55px;
+    width: 55px;
+    transition: all 0.8s ease;
+}
+
 #Header:hover .Logo_2
 {
     height: 0px;
