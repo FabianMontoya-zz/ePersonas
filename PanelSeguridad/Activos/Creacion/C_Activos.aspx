@@ -440,6 +440,148 @@
                                             <td class="Label_Bold" style="width: 4.9%;"></td>
                                         </tr>
                                     </table>
+                                    <table id="T_F_Servicio" style="width: 100%;">
+                                        <tr>
+                                            <td class="Label_Bold" style="width: 8.3%;">Tipo Servicio
+                                            </td>
+                                            <td style="width: 10%;">
+                                                <select id="Select_TServicio" class="C_Chosen">
+                                                    <option value="-1">Seleccione...</option>
+                                                    <option value="1">1 - Particular</option>
+                                                    <option value="2">2 - Publico</option>
+                                                    <option value="3">3 - Diplomatico</option>
+                                                    <option value="4">4 - Oficial</option>
+                                                    <option value="5">5 - RNMA</option>
+                                                </select>
+                                            </td>
+                                            <td style="width: 10%; padding-bottom: 25px;">
+                                                <span class="cssToolTip">
+                                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img9"
+                                                        src="../../images/error.png" />
+                                                    <span class="SpamEG"></span></span>
+                                            </td>
+                                            <td class="Label_Bold" style="width: 13%;">Modalidad Servicio
+                                            </td>
+                                            <td style="width: 20%;">
+                                                <select id="Select_MServicio" class="C_Chosen">
+                                                    <option value="1">1 - Pasajeros</option>
+                                                    <option value="2">2 - Carga</option>
+                                                    <option value="3">3 - Mixto</option>
+                                                </select>
+                                            </td>
+                                            <td style="width: 2%; padding-bottom: 25px;"></td>
+                                        </tr>
+                                    </table>
+                                    <table id="T_F_Combus" style="width: 100%;">
+                                        <tr>
+                                            <td class="Label_Bold" style="width: 8.3%;">Combustible
+                                            </td>
+                                            <td style="width: 10%;">
+                                                <select id="Select_Combustible" class="C_Chosen">
+                                                    <option value="-1">Seleccione...</option>
+                                                    <option value="1">1 - Gasolina</option>
+                                                    <option value="2">2 - Diesel</option>
+                                                    <option value="3">3 - Gas</option>
+                                                    <option value="4">4 - Mixto</option>
+                                                    <option value="5">5 - Electrico</option>
+                                                    <option value="6">6 - Hidrogeno</option>
+                                                    <option value="7">7 - Etanol</option>
+                                                    <option value="8">8 - BioDiesel</option>
+                                                </select>
+                                            </td>
+                                            <td style="width: 10%; padding-bottom: 25px;">
+                                                <span class="cssToolTip">
+                                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img15"
+                                                        src="../../images/error.png" />
+                                                    <span class="SpamEG"></span></span>
+                                            </td>
+                                            <td class="Label_Bold" style="width: 13%;">N° Pasajeros
+                                            </td>
+                                            <td style="width: 20%;">
+                                                <span class="cssToolTip_Form">
+                                                    <input type="text" class="Numeric" id="Txt_NPasajeros" maxlength="3" style="width: 20%;" />
+                                                    <span class="Spam_ANL"></span></span>
+                                            </td>
+                                            <td style="width: 2%; padding-bottom: 25px;"></td>
+                                        </tr>
+                                    </table>
+                                    <table id="T_F_ColorCap" style="width: 100%;">
+                                        <tr>
+                                            <td class="Label_Bold" style="width: 8.9%;">Color
+                                            </td>
+                                            <td style="width: 6%;">
+                                                <select id="Select_Color" class="C_Chosen">
+                                                </select>
+                                            </td>
+                                            <td style="width: 11.3%; padding-bottom: 25px;">
+                                                <span class="cssToolTip">
+                                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img16"
+                                                        src="../../images/error.png" />
+                                                    <span class="SpamEG"></span></span>
+                                            </td>
+                                            <td class="Label_Bold" style="width: 14%;">N° Capacidad
+                                            </td>
+                                            <td style="width: 19%;">
+                                                <span class="cssToolTip_Form">
+                                                    <input type="text" class="Numeric" id="Txt_Capacidad" maxlength="2" style="width: 22%;" />
+                                                    <span class="Spam_ANL"></span></span>
+                                            </td>
+                                            <td style="width: 5%; padding-bottom: 25px;">
+                                                <span class="cssToolTip">
+                                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img17"
+                                                        src="../../images/error.png" />
+                                                    <span class="SpamEG"></span></span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table id="Tabla_Blo_2" style="width: 100%;">
+                                        <tr>
+                                            <td class="Label_Bold" style="width: 5%;">Potencia
+                                            </td>
+                                            <td style="width: 10%;">
+                                                <span class="cssToolTip_Form">
+                                                    <input type="text" class="Numeric" id="Txt_Potencia" maxlength="5" style="width: 30%;" />
+                                                    <span class="Spam_ANL"></span></span>
+                                            </td>
+                                            <td style="width: 5%; padding-bottom: 25px;">
+                                                <span class="cssToolTip">
+                                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img18"
+                                                        src="../../images/error.png" />
+                                                    <span class="SpamEG"></span></span>
+                                            </td>
+                                            <td class="Label_Bold" style="width: 8.5%;"></td>
+                                            <td style="width: 10%;"></td>
+                                            <td style="width: 5%;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="Label_Bold" style="width: 5%;">Carroceria
+                                            </td>
+                                            <td style="width: 10%;">
+                                                <span class="cssToolTip_Form">
+                                                    <input type="text" class="Numeric_letter" id="Txt_Carroceria" maxlength="30" style="width: 100%;" />
+                                                    <span class="Spam_ANL"></span></span>
+                                            </td>
+                                            <td style="width: 5%; padding-bottom: 25px;">
+                                                <span class="cssToolTip">
+                                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img19"
+                                                        src="../../images/error.png" />
+                                                    <span class="SpamEG"></span></span>
+                                            </td>
+                                            <td class="Label_Bold" style="width: 8.5%;">Tipo de Carroceria
+                                            </td>
+                                            <td style="width: 10%;">
+                                                <span class="cssToolTip_Form">
+                                                    <input type="text" class="Numeric_letter" id="Txt_TCarroceria" maxlength="30" style="width: 100%;" />
+                                                    <span class="Spam_ANL"></span></span>
+                                            </td>
+                                            <td style="width: 5%; padding-bottom: 25px;">
+                                                <span class="cssToolTip">
+                                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img20"
+                                                        src="../../images/error.png" />
+                                                    <span class="SpamEG"></span></span>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
                             </tr>
                         </table>
