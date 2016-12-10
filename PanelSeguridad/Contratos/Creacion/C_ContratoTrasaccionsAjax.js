@@ -80,23 +80,54 @@ function transacionAjax_MMoneda(State) {
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transaccionAjax_MPersonas(State) {
+function transacionAjax_Documento(State) {
     $.ajax({
         url: "C_ContratoAjax.aspx",
         type: "POST",
         //crear json
         data: {
             "action": State,
-            "tabla": 'CIUDADES'
+            "tabla": 'IMPUESTO_GASTO'
         },
         //Transaccion Ajax en proceso
         success: function (result) {
             if (result == "") {
-                Matrix_Personas = [];
+                ArrayTdoc = [];
             }
             else {
-                Matrix_Personas = JSON.parse(result);
-                Charge_Combo_Persona(Matrix_Personas, "Select_Persona_C", "", "");
+                ArrayTdoc = JSON.parse(result);
+                charge_CatalogList(ArrayTdoc, "Select_Documento_C", 1);
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_ShearchPeople(State, TD, D, NIT) {
+    $.ajax({
+        url: "C_ContratoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "TD": TD,
+            "D": D,
+            "NIT": NIT
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            switch (result) {
+                case "NO":
+                    Mensaje_General("¡Datos Inexistentes!", "La persona que desea relacionar no está inscrita en el sistema. Por favor revisar los datos.", "W");
+                    $("#V_Persona").html("------");
+                    break;
+
+                default:
+                    $("#V_Persona").html(result);
+                    break;
             }
         },
         error: function () {
@@ -188,14 +219,16 @@ function transaccionAjax_MCiclo(State) {
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transaccionAjax_MDirecciones(State) {
+function transaccionAjax_MDirecciones(State, TD, D) {
     $.ajax({
         url: "C_ContratoAjax.aspx",
         type: "POST",
         //crear json
         data: {
             "action": State,
-            "tabla": 'Direcciones'
+            "tabla": 'Direcciones',
+            "TD": TD,
+            "D": D,
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -204,6 +237,7 @@ function transaccionAjax_MDirecciones(State) {
             }
             else {
                 Matrix_Direcciones = JSON.parse(result);
+                Charge_Combo_Persona(Matrix_Direcciones, "Select_Direccion", "", "");
             }
         },
         error: function () {

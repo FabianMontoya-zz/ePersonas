@@ -1010,9 +1010,7 @@ function Charge_Combo_Persona(Matrix, Selector, Nit, Index_Edit) {
 
         case "Select_Direccion"://Direcciones por persona
             for (Item in Matrix) {
-                if (Matrix[Item].Document_ID == Nit) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Index_Direccion + "'>" + Matrix[Item].Direccion + "</option>");
-                }
+                   $("#" + Selector).append("<option value='" + Matrix[Item].Index_Direccion + "'>" + Matrix[Item].Direccion + "</option>");
             }
             break;
     }

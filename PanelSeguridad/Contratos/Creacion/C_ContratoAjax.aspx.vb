@@ -16,8 +16,11 @@ Public Class C_ContratoAjax
                 Case "MATRIX_MONEDA"
                     Carga_MMoneda()
 
-                Case "MATRIX_PERSONAS"
-                    Carga_MPersonas()
+                Case "Documento"
+                    CargarDocumento()
+
+                Case "Buscar_Persona"
+                    Search_People()
 
                 Case "MATRIX_PRODUCTOS"
                     Carga_MProductos()
@@ -133,17 +136,17 @@ Public Class C_ContratoAjax
     End Sub
 
     ''' <summary>
-    ''' funcion que carga La matrix Personas
+    ''' funcion que carga el objeto DDL consulta
     ''' </summary>
     ''' <remarks></remarks>
-    Protected Sub Carga_MPersonas()
+    Protected Sub CargarDocumento()
 
         Dim SQL As New ClienteSQLClass
+        Dim ObjListDroplist As New List(Of Droplist_Class)
+        Dim vl_S_Tabla As String = Request.Form("tabla")
 
-        Dim ObjList_Matrix As New List(Of ClienteClass)
-        ObjList_Matrix = SQL.Matrix_PersonasDep()
-
-        Response.Write(JsonConvert.SerializeObject(ObjList_Matrix.ToArray()))
+        ObjListDroplist = SQL.Charge_DropListDocumento(vl_S_Tabla)
+        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
 
     End Sub
 
@@ -215,8 +218,11 @@ Public Class C_ContratoAjax
 
         Dim SQL As New ClienteSQLClass
 
+        Dim vl_S_TD As String = Request.Form("TD")
+        Dim vl_S_D As String = Request.Form("D")
+
         Dim ObjList_Matrix As New List(Of ClienteClass)
-        ObjList_Matrix = SQL.Matrix_Personas_Direcciones
+        ObjList_Matrix = SQL.Matrix_Personas_Direcciones(vl_S_TD, vl_S_D)
 
         Response.Write(JsonConvert.SerializeObject(ObjList_Matrix.ToArray()))
 
@@ -240,7 +246,21 @@ Public Class C_ContratoAjax
 #End Region
 
 #Region "FUNCIONES"
+    ''' <summary>
+    ''' consulta si existe la persona digitada 
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub Search_People()
 
+        Dim SQL As New ClienteSQLClass
+        Dim vl_S_Nit As String = Request.Form("NIT")
+        Dim vl_S_TD As String = Request.Form("TD")
+        Dim vl_S_D As String = Request.Form("D")
+
+        Dim Str_People As String = SQL.SearchPeople_Exists(vl_S_Nit, vl_S_TD, vl_S_D)
+        Response.Write(Str_People)
+
+    End Sub
 #End Region
 
 End Class

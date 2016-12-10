@@ -2,7 +2,7 @@
 var Matrix_Sucursal = [];
 var Matrix_Moneda = [];
 var Matrix_Sucursal = [];
-var Matrix_Personas = [];
+var ArrayTdoc = [];
 var Matrix_Ciclo = [];
 var Matrix_Productos = [];
 var Matrix_Financiacion = [];
@@ -43,13 +43,13 @@ $(document).ready(function () {
     $("#Marco_trabajo_Contrato").css("width", "95%");
 
     transacionAjax_EmpresaNit('Cliente');
-    transaccionAjax_MPersonas('MATRIX_PERSONAS');
+    transacionAjax_Documento('Documento');
     transacionAjax_MMoneda('MATRIX_MONEDA');
     transaccionAjax_MSucursal('MATRIX_SUCURSAL');
     transaccionAjax_MCiclo('MATRIX_CICLO');
     transacionAjax_Productos('MATRIX_PRODUCTOS');
     transacionAjax_Financiacion('MATRIX_FINANCIACION');
-    transaccionAjax_MDirecciones('MATRIX_DIRECCIONES');
+    //transaccionAjax_MDirecciones('MATRIX_DIRECCIONES');
     transaccionAjax_MTasas('MATRIX_TASAS');
 
     Ocultar_IMGS_Errores();
@@ -84,8 +84,25 @@ $(document).ready(function () {
         }
     });
 
+    $("#Dialog_Terceros").dialog({
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true,
+        width: 1100,
+        height: 600,
+        overlay: {
+            opacity: 0.5,
+            background: "black"
+        }
+    });
+
     $("#T_Activo_Grid").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,
+        "bDestroy": true
+    });
+
+    $("#T_Terceros").dataTable({
+        "bJQueryUI": true, "iDisplayLength": 800,
         "bDestroy": true
     });
 
@@ -111,24 +128,22 @@ $(document).ready(function () {
         });
     });
 
-    /*var TE = TasaEfectiva(360, "M", 1, "V", 0.2480);
-    console.log("TE = " + TE);
-    var TN = TasaNominal(360, "M", 1, "V", TE)
-    console.log("TN = " + TN);*/
-
     $("#Select_Base_Calculo").prop('disabled', true); //Desactivamos el Chosen
     Change_Select_Nit();
     Change_Select_Sucursal();
-    Change_Select_Persona();
     Change_Select_Moneda();
+    Change_Select_Documento_C();
+
     Change_Select_Producto();
     Change_Select_Condicion_Financiacion();
     Change_Select_Unidad_Tiempo();
     Change_Select_Signo_Puntos();
     Change_Select_Base_Calculo();
+
     Format_Adress("Txt_Adress_C");
     Restric_long_decimal("TXT_Puntos_Adicionales");
-    ReCalcularTasas("TXT_Puntos_Adicionales")
+    ReCalcularTasas("TXT_Puntos_Adicionales");
+    Date_Document();
 });
 
 //Ocultamos las imagenes de error al iniciar la pantalla
@@ -156,6 +171,8 @@ function Ocultar_IMGS_Errores() {
     $("#Img18").css("display", "none");
     $("#Img19").css("display", "none");
 
+    $("#Img_TD_C").css("display", "none");
+    $("#Img_D_C").css("display", "none");
 }
 
 //Función de control del picker de las fechas
@@ -184,6 +201,51 @@ function ReCalcularTasas(object) {
     });
 }
 
+//valida campos de documentos para buscar persona
+function ValidaCamposPeople() {
+    var valida = 0;
+    var C_Nit_ID = $("#Select_EmpresaNit").val();
+    var C_TD = $("#Select_Documento_C").val();
+    var C_D = $("#TxtDoc_C").val();
+
+    if (C_Nit_ID == "-1" || C_TD == "-1" || C_D == "") {
+        valida = 1;
+        if (C_TD == "-1") { $("#Img_TD_C").css("display", "inline-table"); } else { $("#Img_TD_C").css("display", "none"); }
+        if (C_D == "") { $("#Img_D_C").css("display", "inline-table"); } else { $("#Img_D_C").css("display", "none"); }
+        if (C_Nit_ID == "-1") { $("#Img1").css("display", "inline-table"); } else { $("#Img1").css("display", "none"); }
+    }
+    else {
+        $("#Img1").css("display", "none");
+        $("#Img_TD_C").css("display", "none");
+        $("#Img_D_C").css("display", "none");
+    }
+    return valida;
+}
+
+function ValidarIDColocacion() {
+    var valido = false;
+    var NIT = $("#Select_EmpresaNit").val();
+    var ID_Colocacion = $("#TXT_ID_Colocacion").val();
+
+    if (NIT == "-1" || NIT == null || ID_Colocacion == "" || ID_Colocacion == null) {
+        Mensaje_General("¡Campos Incompletos!", "Los campos [NIT Empresa] y [Número de Colocación] son obligatorios para poder agregar una persona.", "E");
+
+        if (NIT == "-1" || NIT == null) {
+            $("#Img1").css("display", "inline-table");
+        }
+
+        if (ID_Colocacion == "" || ID_Colocacion == null) {
+            $("#Img2").css("display", "inline-table");
+        }
+
+    } else {
+        $("#Img2").css("display", "none");
+        $("#Img1").css("display", "none");
+        Add_Terceros();
+    }
+}
+
+
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                     PROCESO DE CARGUE                                                                                                                                        ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -198,7 +260,6 @@ function Change_Select_Nit() {
         }
         var index_ID = this.value;
         Charge_Combos_Depend_Nit(Matrix_Sucursal, "Select_Sucursal_C", index_ID, "");
-        Charge_Combo_Persona(Matrix_Personas, "Select_Persona_C", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Productos, "Select_Producto", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Financiacion, "Select_Condicion_Financiacion", index_ID, "");
 
@@ -221,16 +282,35 @@ function Change_Select_Sucursal() {
     });
 }
 
-function Change_Select_Persona() {
-    $("#Select_Persona_C").change(function () {
-        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
-        if ($("#Select_Persona_C").val() == "-1") {
-            $("#Img6").css("display", "inline-table");
-        } else {
-            $("#Img6").css("display", "none");
+//valida campo y consulta datos de persona
+function Date_Document() {
+
+    $("#TxtDoc_C").blur(function () {
+
+        var valida_people = ValidaCamposPeople();
+        if (valida_people == 1) {
+            Mensaje_General("¡Campos Incompletos!", "Los campos [NIT Empresa], [Documento] e [Identificación] deben ser diligenciados para consultar la persona.", "E");
         }
-        var index_ID = this.value;
-        Charge_Combo_Persona(Matrix_Direcciones, "Select_Direccion", index_ID, "");
+        else {
+            var C_TD = $("#Select_Documento_C").val();
+            var C_D = $("#TxtDoc_C").val();
+            var Nit = $("#Select_EmpresaNit").val();
+
+            transacionAjax_ShearchPeople("Buscar_Persona", C_TD, C_D, Nit);
+            transaccionAjax_MDirecciones("MATRIX_DIRECCIONES", C_TD, C_D);            
+        }
+
+    });
+}
+
+function Change_Select_Documento_C() {
+    $("#Select_Documento_C").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_Documento_C").val() == "-1") {
+            $("#Img_TD_C").css("display", "inline-table");
+        } else {
+            $("#Img_TD_C").css("display", "none");
+        }
     });
 }
 
@@ -645,8 +725,18 @@ function Add_Activos(index) {
     Table_Activos();
 }
 
+function Add_Terceros(index) {
+    $("#Dialog_Terceros").dialog("open");
+    $("#Dialog_Terceros").dialog("option", "title", "Agregar Persona");
+    Table_Terceros();
+}
+
 function Table_Activos() {
     $("#container_TActivos").html("");
+}
+
+function Table_Terceros() {
+    $("#Container_Terceros").html("");
 }
 
 function Descripcion_Tasa(index) {

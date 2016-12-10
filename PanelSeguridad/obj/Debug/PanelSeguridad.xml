@@ -1240,9 +1240,9 @@ To modify move field declaration from designer file to code-behind file.
  funcion que carga La matrix Moneda
  </summary>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_MPersonas">
+</member><member name="M:PanelSeguridad.C_ContratoAjax.CargarDocumento">
 	<summary>
- funcion que carga La matrix Personas
+ funcion que carga el objeto DDL consulta
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_MProductos">
@@ -1273,6 +1273,11 @@ To modify move field declaration from designer file to code-behind file.
 </member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_MTasas">
 	<summary>
  funcion que carga La matrix Tasas
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.Search_People">
+	<summary>
+ consulta si existe la persona digitada 
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.Crud_DocAjax.Consulta_Crud_Doc">
@@ -4659,7 +4664,7 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
  </summary>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.ClienteSQLClass.Matrix_Personas_Direcciones">
+</member><member name="M:PanelSeguridad.ClienteSQLClass.Matrix_Personas_Direcciones(System.Object,System.Object)">
 	<summary>
  lee matrix para Direccion de las personas
  </summary>

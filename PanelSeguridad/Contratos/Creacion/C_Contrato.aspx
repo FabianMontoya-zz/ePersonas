@@ -114,19 +114,38 @@
                     </table>
                     <table id="T_Datos_Identificacion" style="width: 100%;">
                         <tr>
-                            <td class="Label_Bold" style="width: 10.5%;">Persona
-                            </td>
-                            <td style="width: 46.5%;" colspan="3">
-                                <select id="Select_Persona_C" class="C_Chosen">
+                            <td class="Label_Bold" style="width: 10.5%;">Documento</td>
+                            <td style="width: 47%;">
+                                <select style="width: 100%;" id="Select_Documento_C" class="C_Chosen">
                                 </select>
                             </td>
-                            <td style="padding-bottom: 25px; width: 42%;">
+                            <td style="width: 60%; padding-bottom: 25px;">
                                 <span class="cssToolTip">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img6"
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img_TD_C"
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
-
+                        </tr>
+                    </table>
+                    <table id="Table_Persona" style="width: 100%;">
+                        <tr>
+                            <td class="Label_Bold" style="width: 10.7%;">Identificación
+                            </td>
+                            <td style="width: 15%;">
+                                <span class="cssToolTip_Form">
+                                    <input type="text" id="TxtDoc_C" maxlength="18" class="Numeric" style="width: 100%;" />
+                                    <span class="Spam_AN"></span></span>
+                            </td>
+                            <td style="padding-bottom: 25px; width: 21%;">
+                                <span class="cssToolTip_L">
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img_D_C"
+                                        src="../../images/error.png" />
+                                    <span class="SpamEG"></span></span>
+                            </td>
+                            <td class="Label_Bold" style="width: 10%;">Persona
+                            </td>
+                            <td id="V_Persona" style="width: 35%;" colspan="3"></td>
+                            <td style="padding-bottom: 25px; width: 15%;"></td>
                         </tr>
                     </table>
                     <table id="T_Moneda" style="width: 100%;">
@@ -343,7 +362,7 @@
                             <td class="Label_Bold" style="width: 10%;">Período Pago</td>
                             <td id="L_Tiempo_2" class="Label_Bold" style="width: 6%;"></td>
                             <td id="L_Periodo_Pago" style="width: 11%;"></td>
-                            
+
                         </tr>
                     </table>
                     <table id="T_Cuota_Base_Ciclo" style="width: 100%;">
@@ -444,6 +463,39 @@
                     </table>
                 </div>
 
+                <h3>Añadir Terceros
+                </h3>
+                <div id="Div_Terceros">
+                    <table id="T_Terceros" border="1" cellpadding="1" cellspacing="1">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <span class="cssToolTip_ver">
+                                        <img alt="Activo" class="Add" onclick="javascript:ValidarIDColocacion();" id="Crear_Terceros" height='20px'
+                                            width='20px' src='../../images/add.png' /><span>Agregar Persona</span></span>
+                                </th>
+                                <th>Tipo Documento
+                                </th>
+                                <th>Identificación
+                                </th>
+                                <th>Nombre
+                                </th>
+                                <th>Tipo de relación
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
         </div>
         <div id="Div_BTN_Guardar" style="width: 100%; text-align: center; margin-top: 11px;">
@@ -490,7 +542,20 @@
         </table>
     </div>
     <div id="Dialog_Activos">
-        <div id="container_TActivos">
+        
+    </div>
+
+    <div id="Dialog_Terceros">
+    <table id="T_DatosColocacion" style="width: 100%;">
+                <tr>
+                    <td id="TD1" style="width: 10.5%;" class="Label_Bold">Empresa</td>
+                    <td id="L_Empresa" style="width: 35%;">123123 - SASIF S.A.S.</td>
+                    <td id="TD2" style="width: 10.5%;" class="Label_Bold">Colocación</td>
+                    <td id="L_Colocacion" style="width: 35%;">ASD123456789DSA</td>
+                </tr>
+            </table>
+        <div id="Container_Terceros">
+            
         </div>
     </div>
 

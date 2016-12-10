@@ -1288,7 +1288,7 @@ Public Class ClienteSQLClass
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Matrix_Personas_Direcciones()
+    Public Function Matrix_Personas_Direcciones(ByVal vp_S_TDoc, ByVal vp_S_Doc)
 
         Dim ObjList As New List(Of ClienteClass)
         Dim conex As New Conector
@@ -1317,6 +1317,8 @@ Public Class ClienteSQLClass
                         "  FROM CLIENTE c " & _
                         "  LEFT JOIN DIRECCIONES d " & _
                         "  ON d.D_Document_ID = c.CLI_Document_ID " & _
+                        " WHERE CLI_TypeDocument_ID ='" & vp_S_TDoc & "'" & _
+                                          " AND CLI_Document_ID = '" & vp_S_Doc & "'" & _
                         "  ORDER BY c.CLI_Nit_ID, c.CLI_Document_ID ASC")
 
         Dim StrQuery As String = sql.ToString
