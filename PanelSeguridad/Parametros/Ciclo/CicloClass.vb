@@ -2,6 +2,7 @@
 #Region "campos"
     Private _Index As Integer
     Private _ID_Ciclo As Integer
+    Private _Descripcion As String
     Private _Fecha_Corte As String
     Private _Fecha_Pago As String
 
@@ -26,6 +27,14 @@
         End Get
         Set(ByVal value As Integer)
             Me._ID_Ciclo = value
+        End Set
+    End Property
+    Public Property Descripcion() As String
+        Get
+            Return Me._Descripcion
+        End Get
+        Set(ByVal value As String)
+            Me._Descripcion = value
         End Set
     End Property
     Public Property Fecha_Corte() As String

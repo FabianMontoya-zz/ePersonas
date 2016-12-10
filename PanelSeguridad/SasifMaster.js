@@ -939,13 +939,13 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
 
         case "Select_Ciclo":
             for (Item in Matrix) {
-                $("#" + Selector).append("<option value='" + Matrix[Item].ID_Ciclo + "'> " + Matrix[Item].ID_Ciclo + "</option>");
+                $("#" + Selector).append("<option value='" + Matrix[Item].ID_Ciclo + "'> " + Matrix[Item].ID_Ciclo + " - " + Matrix[Item].Descripcion + "</option>");
             }
             break;
 
         case "Select_Ciclo_2":
             for (Item in Matrix) {
-                $("#" + Selector).append("<option value='" + Matrix[Item].ID_Ciclo + "'> " + Matrix[Item].ID_Ciclo + "</option>");
+                $("#" + Selector).append("<option value='" + Matrix[Item].ID_Ciclo + "'> " + Matrix[Item].ID_Ciclo + " - " + Matrix[Item].Descripcion + "</option>");
             }
             break;
 

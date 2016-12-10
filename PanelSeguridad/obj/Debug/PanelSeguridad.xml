@@ -2708,6 +2708,11 @@ To modify move field declaration from designer file to code-behind file.
  funcion que carga el objeto DDL consulta
  </summary>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosAjax.CargarDocumento">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.C_ActivosAjax.CargarCliente">
 	<summary>
  funcion que carga el objeto DDL consulta
@@ -2716,6 +2721,11 @@ To modify move field declaration from designer file to code-behind file.
 </member><member name="M:PanelSeguridad.C_ActivosAjax.Cargar_HijoCliente">
 	<summary>
  funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosAjax.Search_People">
+	<summary>
+ consulta si existe la persona digitada 
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.R_Persona_TarjetaSQLClass.InsertR_Persona_Tarjeta(PanelSeguridad.R_Persona_TarjetaClass)">
@@ -4655,6 +4665,15 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
  </summary>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.ClienteSQLClass.SearchPeople_Exists(System.String,System.String,System.String)">
+	<summary>
+ trae el nombre del cliente segun el filtro por tipo de documento, documento y nit empresa
+ </summary>
+	<param name="vp_S_Nit_ID"></param>
+	<param name="vp_S_TDoc"></param>
+	<param name="vp_S_Doc"></param>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.MensajesSQLClass.Read_AllMensajes(System.String,System.String,System.String)">
 	<summary>
  creala consulta para la tabla Mensajes parametrizada (READ)
@@ -4814,6 +4833,13 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
 </member><member name="M:PanelSeguridad.Conector.IDis(System.String,System.String)">
 	<summary>
  funcion generica para consultas de un solo resultado tipo integer
+ </summary>
+	<param name="vp_S_StrQuery"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.Conector.Shearch_Date_String(System.String,System.String)">
+	<summary>
+ funcion generica para consultas de un solo resultado tipo sTRING
  </summary>
 	<param name="vp_S_StrQuery"></param>
 	<returns></returns>

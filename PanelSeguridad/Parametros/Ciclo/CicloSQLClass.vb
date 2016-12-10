@@ -39,9 +39,10 @@ Public Class CicloSQLClass
                     Dim objCiclo As New CicloClass
                     'cargamos datos sobre el objeto de login
                     objCiclo.ID_Ciclo = ReadConsulta.GetValue(0)
-                    If Not (IsDBNull(ReadConsulta.GetValue(1))) Then objCiclo.Fecha_Corte = ReadConsulta.GetValue(1) Else objCiclo.Fecha_Corte = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(2))) Then objCiclo.Fecha_Pago = ReadConsulta.GetValue(2) Else objCiclo.Fecha_Pago = ""
-                    objCiclo.Index = ReadConsulta.GetValue(3)
+                    If Not (IsDBNull(ReadConsulta.GetValue(1))) Then objCiclo.Descripcion = ReadConsulta.GetValue(1) Else objCiclo.Descripcion = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(2))) Then objCiclo.Fecha_Corte = ReadConsulta.GetValue(2) Else objCiclo.Fecha_Corte = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(3))) Then objCiclo.Fecha_Pago = ReadConsulta.GetValue(3) Else objCiclo.Fecha_Pago = ""
+                    objCiclo.Index = ReadConsulta.GetValue(4)
 
                     'agregamos a la lista
                     ObjListCiclo.Add(objCiclo)
@@ -70,17 +71,18 @@ Public Class CicloSQLClass
         Dim StrQuery As String = ""
         Dim conex As New Conector
         Dim Conexion As String = conex.typeConexion("2")
-        Dim BD_Admin As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDAdmin").ToString
-        Dim BD_Param As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDParam").ToString
 
         Dim sql As New StringBuilder
 
-        sql.AppendLine(" SELECT  CIC_ID_Ciclo, " & _
-                                                     " CIC_Fecha_Corte, " & _
-                                                     " CIC_Fecha_Pago, " & _
-                                                     " ROW_NUMBER() OVER(ORDER BY CIC_ID_Ciclo ASC) AS Index_Ciclo " & _
-                                    " FROM CICLO " & _
-                                    " ORDER BY CIC_ID_Ciclo ASC")
+        sql.AppendLine(" SELECT  c.CIC_ID_Ciclo, " & _
+                               " c.CIC_Descripcion, " & _
+                               " dc.DCI_Fecha_Corte, " & _
+                               " dc.DCI_Fecha_Pago, " & _
+                               " ROW_NUMBER() OVER(ORDER BY c.CIC_ID_Ciclo ASC) AS Index_Ciclo " & _
+                               " FROM CICLO c " & _
+                               " LEFT JOIN DETALLES_CICLO dc " & _
+                               " ON c.CIC_ID_Ciclo = dc.DCI_ID_Ciclo " & _
+                               " ORDER BY c.CIC_ID_Ciclo ASC")
 
         StrQuery = sql.ToString
 
