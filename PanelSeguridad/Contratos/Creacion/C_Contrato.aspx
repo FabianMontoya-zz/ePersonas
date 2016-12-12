@@ -529,7 +529,7 @@
             <tr>
                 <td>
                     <p class="Label_Bold" id="P1">
-                        Desea eliminar el siguiente registro?
+                        Pulse Confirmar para eliminar el registro seleccionado.
                     </p>
                 </td>
                 <td>
@@ -538,7 +538,7 @@
             </tr>
             <tr>
                 <td colspan="2" align="center">
-                    <input id="BtnElimin" type="button" value="Confirmar" onclick="BtnElimina();" />
+                    <input id="BtnElimin" type="button" value="Confirmar" onclick="Eliminar_Persona_Array();" />
                 </td>
             </tr>
         </table>

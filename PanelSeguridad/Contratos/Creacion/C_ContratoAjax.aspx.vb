@@ -217,9 +217,10 @@ Public Class C_ContratoAjax
 
         Dim vl_S_TD As String = Request.Form("TD")
         Dim vl_S_D As String = Request.Form("D")
+        Dim vl_S_NIT As String = Request.Form("NIT")
 
         Dim ObjList_Matrix As New List(Of ClienteClass)
-        ObjList_Matrix = SQL.Matrix_Personas_Direcciones(vl_S_TD, vl_S_D)
+        ObjList_Matrix = SQL.Matrix_Personas_Direcciones(vl_S_TD, vl_S_D, vl_S_NIT)
 
         Response.Write(JsonConvert.SerializeObject(ObjList_Matrix.ToArray()))
 

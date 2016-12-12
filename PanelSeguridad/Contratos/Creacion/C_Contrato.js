@@ -37,6 +37,9 @@ var signo;
 var numero;
 var namePersona;
 
+var indexTerceros;
+var indexActivos;
+
 var Persona1 = false;
 var Persona2 = false;
 var ContTerceros = 0;
@@ -383,8 +386,8 @@ function Date_Document() {
             var C_D = $("#TxtDoc_C").val();
             var Nit = $("#Select_EmpresaNit").val();
 
-            transacionAjax_ShearchPeople("Buscar_Persona", C_TD, C_D, Nit, "V_Persona");
-            transaccionAjax_MDirecciones("MATRIX_DIRECCIONES", C_TD, C_D);
+            transacionAjax_ShearchPeople("Buscar_Persona", C_TD, C_D, Nit, "V_Persona", "Persona1");
+            transaccionAjax_MDirecciones("MATRIX_DIRECCIONES", C_TD, C_D, Nit);
         }
 
     });
@@ -403,7 +406,7 @@ function Date_Document2() {
             var C_D = $("#TxtDoc_C2").val();
             var Nit = $("#Select_EmpresaNit").val();
 
-            transacionAjax_ShearchPeople("Buscar_Persona", C_TD, C_D, Nit, "V_Persona2");
+            transacionAjax_ShearchPeople("Buscar_Persona", C_TD, C_D, Nit, "V_Persona2", "Persona2");
         }
 
     });
@@ -605,6 +608,17 @@ function Change_Select_Unidad_Tiempo() {
     });
 }
 
+function Change_Select_Direccion() {
+    $("#Select_Direccion").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_Direccion").val() == "-1") {
+            $("#Img16").css("display", "inline-table");
+        } else {
+            $("#Img16").css("display", "none");
+        }
+    });
+}
+
 function Change_Select_Signo_Puntos() {
     $("#Select_Signo_Puntos").change(function () {
         signo = this.value; //Tomamos el signo que cambia
@@ -644,7 +658,6 @@ function PuntosAdicionales_Tasas(tn, pts) {
     } else if (baseCalculo == 2) {
         base = 365;
     }
-    console.log("Base_Cal: " + baseCalculo + " / base = " + base);
     TN = tn / 100;
     PUNTO = pts / 100;
 
@@ -688,8 +701,16 @@ function BtnCrear() {
     validate = validarCamposCrear();
 
     if (validate == 0) {
-        //transacionAjax_C_Contrato_create("crear");
-        Mensaje_General("¡Colocación Agregada!", "La colocación se ha agregado correctamente.", "S");
+        if (Persona1 == true) {
+            //transacionAjax_C_Contrato_create("crear");
+            Mensaje_General("¡Colocación Agregada!", "La colocación se ha agregado correctamente.", "S");
+            Ocultar_IMGS_Errores();
+        }
+        else {
+            Mensaje_General("¡Falta Completar Campos!", "No puede agregar una colocación a un cliente que no esté registrado en el sistema.", "E");
+            $("#Img_D_C").css("display", "inline-table");
+            $("#Img_TD_C").css("display", "inline-table");
+        }
     } else if (validate == 1) {
         var mensaje = "";
         Mensaje_General("¡Falta Completar Campos!", "Debe completar los campos obligatorios. Los campos faltantes se han marcado con una (X)", "W");
@@ -704,8 +725,8 @@ function validarCamposCrear() {
     var Campo_3 = $("#TXT_ID_Colocacion").val(); //Img2
     var Campo_4 = $("#TXT_Descripcion").val(); //Img3
     //var Campo_5 = $("#").val(); //Img4 - Es el Warning ---           ------           --- No está agregado en la condición
-    //var Campo_6 = $("#").val(); //Img5 - No existe [No se está usando está imagen]    --- No está agregado en la condición
-    var Campo_7 = $("#Select_Persona_C").val(); //Img6
+    var Campo_6 = $("#TxtDoc_C").val(); //Img_D_C
+    var Campo_7 = $("#Select_Documento_C").val(); //Img_TD_C
     var Campo_8 = $("#Select_Moneda_C").val(); //img8
     var Campo_9 = $("#Select_Producto").val(); //Img9
     var Campo_10 = $("#Select_Condicion_Financiacion").val(); //Img10
@@ -747,11 +768,17 @@ function validarCamposCrear() {
         } else {
             $("#Img3").css("display", "none");
         }
+        //--6--
+        if (Campo_6 == "") {
+            $("#Img_D_C").css("display", "inline-table");
+        } else {
+            $("#Img_D_C").css("display", "none");
+        }
         //--7--
         if (Campo_7 == "-1" || Campo_7 == "" || Campo_7 == null) {
-            $("#Img6").css("display", "inline-table");
+            $("#Img_TD_C").css("display", "inline-table");
         } else {
-            $("#Img6").css("display", "none");
+            $("#Img_TD_C").css("display", "none");
         }
         //--8--
         if (Campo_8 == "-1" || Campo_8 == "" || Campo_8 == null) {
@@ -861,11 +888,6 @@ function Add_Activos(index) {
     Table_Activos();
 }
 
-//limpiar campos
-function Clear() {
-    /*[Todo el código para limpiar los campos]*/
-}
-
 function Add_Terceros(index) {
     $("#Dialog_Terceros").dialog("open");
     $("#Dialog_Terceros").dialog("option", "title", "Agregar Persona");
@@ -892,14 +914,14 @@ function BTNAgregarTercero() {
     }
 }
 
-//Crea la tabla de documentos hijos
+//Crea la tabla de Terceros
 function AddArrayToTable() {
     var Html;
 
     Html = "<table id='T_T' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th><span class='cssToolTip_ver'><img alt='Activo' class='Add' onclick='javascript:ValidarIDColocacion();' id='Crear_Terceros' height='20px' width='20px' src='../../images/add.png' /><span>Agregar Persona</span></span></th><th>Tipo Documento</th><th>Identificación</th><th>Nombre</th><th>Tipo de relación</th></tr></thead><tbody>";
     for (itemArray in ArrayTerceros) {
         if (ArrayTerceros[itemArray].Contrato_ID != 0) {
-            Html += "<tr id= 'T_T_" + ArrayTerceros[itemArray].Index + "'><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar_Doc_H('" + ArrayTerceros[itemArray].Index + "')\"></input></td><td>" + ArrayTerceros[itemArray].Descrip_TypeDocumento + "</td><td>" + ArrayTerceros[itemArray].Document_ID + "</td><td>" + ArrayTerceros[itemArray].Descrip_Persona + "</td><td>" + ArrayTerceros[itemArray].Descrip_TypeRelation + "</td></tr>";
+            Html += "<tr id= 'T_T_" + ArrayTerceros[itemArray].Index + "'><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar_Registro('" + ArrayTerceros[itemArray].Index + "')\"></input></td><td>" + ArrayTerceros[itemArray].Descrip_TypeDocumento + "</td><td>" + ArrayTerceros[itemArray].Document_ID + "</td><td>" + ArrayTerceros[itemArray].Descrip_Persona + "</td><td>" + ArrayTerceros[itemArray].Descrip_TypeRelation + "</td></tr>";
         }
     }
 
@@ -907,15 +929,31 @@ function AddArrayToTable() {
     $("#Container_Terceros").html("");
     $("#Container_Terceros").html(Html);
 
-    $(".Eliminar").click(function () {
-    });
-
     $("#T_T").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,
         "bDestroy": true
     });
 }
 
+//Dialog para eliminar Personas de Tabla de Terceros
+function Eliminar_Registro(index) {
+    $("#dialog_eliminar").dialog("open");
+    $("#dialog_eliminar").dialog("option", "title", "Eliminar Persona");
+    indexTerceros = index;
+}
+
+//eliminar Personas de Tabla de Terceros
+function Eliminar_Persona_Array() {
+    //borramos La persona deseada
+    for (item in ArrayTerceros) {
+        if (ArrayTerceros[item].Index == indexTerceros) {
+            ArrayTerceros.splice(item, 1);
+        }
+    }
+    AddArrayToTable();
+    indexTerceros = "";
+    $("#dialog_eliminar").dialog("close");
+}
 
 function Json_Terceros() {
 
@@ -972,8 +1010,7 @@ function Table_Activos() {
 function Table_Terceros() {
     var colocacion;
     $("#L_Empresa").html($("#Select_EmpresaNit option:selected").html());
-    $("#L_Colocacion").html($("#TXT_ID_Colocacion").val());
-    $("#Container_Terceros").html("");
+    $("#L_Colocacion").html($("#TXT_ID_Colocacion").val());    
 }
 
 function Descripcion_Tasa(index) {

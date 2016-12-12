@@ -108,7 +108,7 @@ function transacionAjax_Documento(State) {
 }
 
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_ShearchPeople(State, TD, D, NIT, Vista) {
+function transacionAjax_ShearchPeople(State, TD, D, NIT, Vista, Variable) {
     $.ajax({
         url: "C_ContratoAjax.aspx",
         type: "POST",
@@ -125,20 +125,29 @@ function transacionAjax_ShearchPeople(State, TD, D, NIT, Vista) {
                 case "NO":
                     Mensaje_General("¡Datos Inexistentes!", "La persona que desea relacionar no está inscrita en el sistema. Por favor revisar los datos.", "W");
                     $("#" + Vista).html("------");
-                    Persona2 = false;
+                    if (Variable == "Persona1") {
+                        Persona1 = false;
+                    } else if (Variable == "Persona2") {
+                        Persona2 = false;
+                    }
                     break;
 
-                default:
+                default:                    
                     $("#" + Vista).html(result);
                     namePersona = result;
-                    Persona2 = true;
+                    if (Variable == "Persona1") {
+                        Persona1 = true;
+                    } else if (Variable == "Persona2") {
+                        Persona2 = true;
+                    }
+                    ;
                     break;
             }
         },
         error: function () {
 
         }
-    });
+    }); 
 }
 
 //*-------------------- carga ---------------------------*/
@@ -224,7 +233,7 @@ function transaccionAjax_MCiclo(State) {
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transaccionAjax_MDirecciones(State, TD, D) {
+function transaccionAjax_MDirecciones(State, TD, D, NIT) {
     $.ajax({
         url: "C_ContratoAjax.aspx",
         type: "POST",
@@ -234,6 +243,7 @@ function transaccionAjax_MDirecciones(State, TD, D) {
             "tabla": 'Direcciones',
             "TD": TD,
             "D": D,
+            "NIT": NIT,
         },
         //Transaccion Ajax en proceso
         success: function (result) {
