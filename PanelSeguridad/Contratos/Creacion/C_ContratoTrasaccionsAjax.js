@@ -290,13 +290,7 @@ function transaccionAjax_MTasas(State) {
 /*------------------------------ crear ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax_C_Contrato_create(State) {
-    var SC;
-
-    if ($("#TxtSecuenciaCargue").val() == "")
-        SC = 0;
-    else
-        SC = $("#TxtSecuenciaCargue").val();
-
+    
     $.ajax({
         url: "C_ContratoAjax.aspx",
         type: "POST",
@@ -304,20 +298,23 @@ function transacionAjax_C_Contrato_create(State) {
         data: {
             "action": State,
             "Nit_ID": $("#Select_EmpresaNit").val(),
-            "ID": $("#Txt_ID").val(),
-            "Descripcion": $("#TxtDescripcion").val(),
-            "TDoc": T_Doc,
-            "Doc": Doc,
-            "Moneda": $("#Select_Moneda").val(),
-            "Es_Contract": $("#Select_Estado").val(),
-            "SecuenciaCargue": SC,
-            "VContrato": $("#Td_Vr_Contr").html(),
-            "VFinanciado": $("#Td_Vr_Finan").html(),
-            "VOpCompra": $("#Td_Vr_OpCompra").html(),
-            "SCapital": $("#Td_S_Capital").html(),
-            "SInteres": $("#Td_S_Interes").html(),
-            "SMora": $("#Td_S_Mora").html(),
-            "SOtros": $("#Td_S_Otros").html(),
+            "Sucursal": $("#Select_Sucursal_C").val(),
+            "Colocacion": $("#TXT_ID_Colocacion").val(),
+            "Descripcion": $("#TXT_Descripcion").val(),
+            "TypeDocument": $("#Select_Documento_C").val(),
+            "Document": $("#TxtDoc_C").val(),
+            "Moneda": $("#Select_Moneda_C").val(),
+            "Producto": $("#Select_Producto").val(),
+            "CondicionFinanciacion": $("#Select_Condicion_Financiacion").val(),
+            "UnidadTiempo": $("#Select_Tiempo").val(),
+            "FechaApertura": $("#TXT_Fecha_Apertura").val(),
+            "Plazo": $("#TXT_Plazo").val(),
+            "Ciclo": $("#Select_Ciclo").val(),
+            "BaseCalculo": $("#Select_Base_Calculo").val(),
+            "Direccion": $("#Select_Direccion").val(),
+            "Total": F_NumericBD($("#TXT_Valor_Total").val()), //Falta validar la suma de ACtivos y el total digitado
+            "Financiado": F_NumericBD($("#TXT_Valor_Financiado").val()),
+            "OpcionCompra": F_NumericBD($("#TXT_Valor_Opcion_Compra").val()),
             "user": User
         },
         //Transaccion Ajax en proceso

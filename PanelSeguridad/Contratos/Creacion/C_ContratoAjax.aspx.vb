@@ -64,26 +64,36 @@ Public Class C_ContratoAjax
         Dim vl_s_IDxiste As String
 
         objC_Contrato.Nit_ID = Request.Form("Nit_ID")
-        objC_Contrato.Contrato_ID = Request.Form("ID")
+        objC_Contrato.Sucursal_ID = Request.Form("Sucursal")
+        objC_Contrato.Colocacion_ID = Request.Form("Colocacion")
 
         'validamos si la llave existe
-        vl_s_IDxiste = SQL_C_Contrato.Consulta_Repetido(objC_Contrato)
-
+        'vl_s_IDxiste = SQL_C_Contrato.Consulta_Repetido(objC_Contrato)
+        vl_s_IDxiste = 0
         If vl_s_IDxiste = 0 Then
 
             objC_Contrato.Descripcion = Request.Form("Descripcion")
-            objC_Contrato.TypeDocument_ID = Request.Form("TDoc")
-            objC_Contrato.Document_ID = Request.Form("Doc")
-            objC_Contrato.Cod_Moneda_ID = Request.Form("Moneda")
-            objC_Contrato.Estado_Cont_ID = Request.Form("Es_Contract")
-            objC_Contrato.Secuencia_Cargue = Request.Form("SecuenciaCargue")
-            objC_Contrato.Val_Cont = Request.Form("VContrato")
-            objC_Contrato.Val_Finan = Request.Form("VFinanciado")
-            objC_Contrato.Val_Op_Compra = Request.Form("VOpCompra")
-            objC_Contrato.Saldo_Cap = Request.Form("SCapital")
-            objC_Contrato.Saldo_Int = Request.Form("SInteres")
-            objC_Contrato.Saldo_Int_Mora = Request.Form("SMora")
-            objC_Contrato.Saldo_Otros = Request.Form("SOtros")
+            objC_Contrato.TypeDocument_ID = Request.Form("TypeDocument")
+            objC_Contrato.Document_ID = Request.Form("Document")
+            objC_Contrato.Moneda_ID = Request.Form("Moneda")
+            objC_Contrato.Producto_ID = Request.Form("Producto")
+
+            objC_Contrato.Condi_Financiacion_ID = Request.Form("CondicionFinanciacion")
+            objC_Contrato.Unidad_Tiempo_ID = Request.Form("UnidadTiempo")
+            objC_Contrato.Fecha_Apertura = Request.Form("FechaApertura")
+            objC_Contrato.Plazo = Request.Form("Plazo")
+            objC_Contrato.Ciclo_ID = Request.Form("Ciclo")
+
+            objC_Contrato.Base_Calculo_ID = Request.Form("BaseCalculo")
+            objC_Contrato.Direccion_Correspondiente = Request.Form("Direccion")
+            objC_Contrato.Valor_Total = Request.Form("Total")
+            objC_Contrato.Valor_Financiado = Request.Form("Financiado")
+            objC_Contrato.Valor_Opc_Compra = Request.Form("OpcionCompra")
+
+            objC_Contrato.UsuarioCreacion = Request.Form("user")
+            objC_Contrato.FechaCreacion = Date.Now
+            objC_Contrato.UsuarioActualizacion = Request.Form("user")
+            objC_Contrato.FechaActualizacion = Date.Now
 
             ObjListC_Contrato.Add(objC_Contrato)
 
