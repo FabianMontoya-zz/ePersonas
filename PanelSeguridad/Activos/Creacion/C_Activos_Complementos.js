@@ -9,6 +9,119 @@ var A0 = 0;
 var C_P = 0;
 /*--------------- region de variables globales --------------------*/
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                    CHANGE DE DROP LIST                                                                                                       ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//carga el combo 
+function Change_Select_Nit() {
+    $("#Select_EmpresaNit").change(function () {
+        var index_ID = this.value;
+        Charge_Combos_Depend_Nit(Matrix_Sucursal, "Select_Sucursal", index_ID, "");
+        Charge_Combos_Depend_Nit(Matrix_Personas, "Select_Persona_A", index_ID, "");
+    });
+}
+
+//muestra los campos de diligenciamiento fasecolda
+function Change_Select_Modelo() {
+    $("#Select_modelo").change(function () {
+        var index_ID = this.value;
+        $("#Bloque_datosIngreso").css("display", "inline-table");
+    });
+}
+
+//MUESTRA LOS CAMPOS DE BLINDAJE
+function Change_Select_blindaje() {
+    $("#Select_Blindaje").change(function () {
+        var index_ID = this.value;
+
+        if (index_ID == "S")
+            $("#T_Datos_Identificacion_blin").css("display", "inline-table");
+        else
+            $("#T_Datos_Identificacion_blin").css("display", "none");
+
+    });
+}
+
+//coloca la sigla de la moneda
+function Change_Select_Moneda() {
+    $("#Select_Moneda").change(function () {
+        var index_ID = this.value;
+        for (item in Matrix_Moneda) {
+            if (Matrix_Moneda[item].MonedaCod_ID == index_ID) {
+                $("#V_Sigla_1").html(Matrix_Moneda[item].Sigla);
+                $("#V_Sigla_2").html(Matrix_Moneda[item].Sigla);
+                $("#V_Sigla_3").html(Matrix_Moneda[item].Sigla);
+            }
+        }
+    });
+}
+
+//carga los subtipos
+function Change_Select_TA() {
+    $("#Select_Tipo").change(function () {
+        var index_ID = this.value;
+        Charge_Combos_Depend_Nit(Matrix_RTSTA, "Select_SubTipo", index_ID, "");
+
+        switch (index_ID) {
+            case "1":
+                $("#TitleActivo_2").html($("#Select_Tipo option:selected").html());
+                $("#Tabla_LLave_Inmueble").css("display", "inline-table");
+                $("#Tabla_LLave_Vehiculos").css("display", "none");
+                $("#Blo_Inmuebles").css("display", "inline-table");
+                $("#Blo_Fasecolda").css("display", "none");
+                // $("#Acordeon_Activo").accordion("option", "active", 1);
+                break;
+
+            case "2":
+                $("#TitleActivo_2").html($("#Select_Tipo option:selected").html());
+                $("#Tabla_LLave_Inmueble").css("display", "none");
+                $("#Tabla_LLave_Vehiculos").css("display", "inline-table");
+                $("#Blo_Inmuebles").css("display", "none");
+                $("#Blo_Fasecolda").css("display", "inline-table");
+                $("#Txtkey_1").html("Placa");
+                //   $("#Acordeon_Activo").accordion("option", "active", 1);
+                Year_work = Captura_parametro();
+                break;
+
+            case "-1":
+                $("#TitleActivo_2").html("Activo");
+                $("#Tabla_LLave_Inmueble").css("display", "none");
+                $("#Tabla_LLave_Vehiculos").css("display", "inline-table");
+                $("#Blo_Inmuebles").css("display", "none");
+                $("#Blo_Fasecolda").css("display", "none");
+                $("#Txtkey_1").html("C. Identificación");
+                break;
+
+            default:
+                $("#TitleActivo_2").html($("#Select_Tipo option:selected").html());
+                $("#Tabla_LLave_Inmueble").css("display", "none");
+                $("#Tabla_LLave_Vehiculos").css("display", "inline-table");
+                $("#Blo_Inmuebles").css("display", "none");
+                $("#Blo_Fasecolda").css("display", "none");
+                $("#Txtkey_1").html("C. Identificación");
+                $("#Acordeon_Activo").accordion("option", "active", 1);
+                break;
+        }
+    });
+}
+
+//carga marcas segun la clase
+function Change_Select_Clase() {
+    $("#Select_ClaseF").change(function () {
+        var index_ID = this.value;
+        Clase_Index = index_ID;
+        $("#Select_LineaF").empty();
+        Charge_Combos_Depend_Nit(Matrix_MarcaClase_F, "Select_MarcaF", index_ID, "");
+    });
+}
+
+//carga lineas  segun la marca y clase
+function Change_Select_Marca() {
+    $("#Select_MarcaF").change(function () {
+        var index_ID = this.value;
+        Charge_Combos_Depend_Verificacion(Matrix_LineaMarcaClase_F, "Select_LineaF", index_ID, Clase_Index, "");
+    });
+}
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                     PROCESO DE CARGUE PAIS CIUDAD                                                                                                                                       ----*/
