@@ -174,6 +174,7 @@ function transacionAjax_Documento(State) {
             else {
                 ArrayTdoc = JSON.parse(result);
                 charge_CatalogList(ArrayTdoc, "Select_Documento", 1);
+                charge_CatalogList(ArrayTdoc, "Select_Documento_Blin", 1);
             }
         },
         error: function () {

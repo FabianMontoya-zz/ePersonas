@@ -1010,7 +1010,7 @@ function Charge_Combo_Persona(Matrix, Selector, Nit, Index_Edit) {
 
         case "Select_Direccion"://Direcciones por persona
             for (Item in Matrix) {
-                   $("#" + Selector).append("<option value='" + Matrix[Item].Index_Direccion + "'>" + Matrix[Item].Direccion + "</option>");
+                $("#" + Selector).append("<option value='" + Matrix[Item].Index_Direccion + "'>" + Matrix[Item].Direccion + "</option>");
             }
             break;
     }
@@ -1037,7 +1037,7 @@ function Charge_Combo_Persona(Matrix, Selector, Nit, Index_Edit) {
 }
 
 //carga combo de años
-function CargaYear(Select_Control, Rango, Option_Year, Index_Edit) {
+function CargaYear(Select_Control, Rango, Option_Year, Index_Edit, Value_Option) {
 
     var ActualYear = $("#Hours").html();
     var A_Date = ActualYear.split("-");
@@ -1050,9 +1050,20 @@ function CargaYear(Select_Control, Rango, Option_Year, Index_Edit) {
     var objList = $("[id$='" + Select_Control + "']");
     $('#' + Select_Control).append("<option value='-1'>Año...</option>");
 
-    for (Ciclo; Ciclo <= Rango; Ciclo++) {
-        $("#" + Select_Control).append("<option value='" + Year_I + "'>" + Year_I + "</option>");
-        Year_I = Year_I + 1;
+    switch (Value_Option) {
+        case "":
+            for (Ciclo; Ciclo <= Rango; Ciclo++) {
+                $("#" + Select_Control).append("<option value='" + Year_I + "'>" + Year_I + "</option>");
+                Year_I = Year_I + 1;
+            }
+            break;
+        default:
+            for (Ciclo; Ciclo <= Rango; Ciclo++) {
+                var Index_option = parseInt(Ciclo) + 1;
+                $("#" + Select_Control).append("<option value='" + Value_Option + Index_option + "'>" + Year_I + "</option>");
+                Year_I = Year_I + 1;
+            }
+            break;
     }
 
     if (Index_Edit == "")

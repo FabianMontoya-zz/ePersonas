@@ -61,6 +61,9 @@ $(document).ready(function () {
 
     $("#Blo_Inmuebles").css("display", "none");
     $("#Blo_Fasecolda").css("display", "none");
+    $("#T_Datos_Identificacion_blin").css("display", "none");
+
+    $("#Bloque_datosIngreso").css("display", "none");
 
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
@@ -107,7 +110,7 @@ $(document).ready(function () {
         }
     });
 
-    $("#T_Activo_Grid").dataTable({
+    $("#T_Factura_Grid").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,
         "bDestroy": true
     });
@@ -119,14 +122,18 @@ $(document).ready(function () {
         });
     });
 
+    Change_Select_Clase();
+    Change_Select_Marca();
     Change_Select_Nit();
     Change_Select_TA();
     Change_Select_pais();
     Change_Select_Moneda();
+    Change_Select_blindaje();
+    Change_Select_Modelo();
+
     Format_Adress("Txt_Adress_U");
-    Change_Select_Clase();
-    Change_Select_Marca();
     Date_Document();
+
 });
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -152,9 +159,84 @@ function x() {
     $("#dialog").dialog("close");
 }
 
+//valida y mustra campos
+function BtnBuscarFacecolda() {
+    var validar = ValidaCamposConsultaFasecolda();
+
+    switch (validar) {
+        case 0:
+
+            break;
+
+        case 1:
+            Mensaje_General("¡Campos sin Datos!", "¡Al buscar por Clase, Marca, linea, modelo los campos deben ser diligenciados!", "W");
+            break;
+
+        case 2:
+            Mensaje_General("¡No existe!", "¡El Codigo digitado no se encuentra en la Tabla Fasecolda!", "W");
+            break;
+
+      
+    }
+}
+
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                           REGION DE VALIDACIONES                                                                                                   ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//valida campos de documentos para buscar persona
+function ValidaCamposPeople() {
+    var valida = 0;
+    var C_Nit_ID = $("#Select_EmpresaNit").val();
+    var C_TD = $("#Select_Documento").val();
+    var C_D = $("#TxtDoc").val();
+
+    if (C_Nit_ID == "-1" || C_TD == "-1" || C_D == "") {
+        valida = 1;
+        if (C_TD == "-1") { $("#Img_TD").css("display", "inline-table"); } else { $("#Img_TD").css("display", "none"); }
+        if (C_D == "") { $("#Img_D").css("display", "inline-table"); } else { $("#Img_D").css("display", "none"); }
+        if (C_Nit_ID == "-1") { $("#Img1").css("display", "inline-table"); } else { $("#Img1").css("display", "none"); }
+    }
+    else {
+        $("#Img1").css("display", "none");
+        $("#Img_TD").css("display", "none");
+        $("#Img_D").css("display", "none");
+    }
+    return valida;
+}
+
+//validamos que tipo de busqueda es y verificamos
+function ValidaCamposConsultaFasecolda() {
+
+    var TipoBusqueda;
+    var Busqueda;
+
+    var Campo_BF_1 = $("#TxtFasecolda_ID").val();
+    var Campo_BF_2 = $("#Select_ClaseF").val();
+    var Campo_BF_3 = $("#Select_MarcaF").val();
+    var Campo_BF_4 = $("#Select_LineaF").val();
+    var Campo_BF_5 = $("#Select_modelo").val();
+
+    switch (Campo_BF_1) {
+
+        case "":
+            TipoBusqueda = 0;
+            if (Campo_BF_5 == "-1" || Campo_BF_4 == "" || Campo_BF_3 == "" || Campo_BF_4 == "-1" || Campo_BF_3 == "-1" || Campo_BF_2 == "-1") {
+                Busqueda = 1;
+            }
+            else {
+                Busqueda = Search_Fasecolda(TipoBusqueda, "", Campo_BF_2, Campo_BF_3, Campo_BF_4, Campo_BF_5);
+            }
+            break;
+
+        default:
+            TipoBusqueda = 1;
+            Busqueda = Search_Fasecolda(TipoBusqueda, Campo_BF_1, "", "", "", "");
+            break;
+    }
+
+    return Busqueda;
+}
+
 //validamos campos para la creacion del formulario
 function validarCamposCrear() {
 
@@ -218,44 +300,14 @@ function validarCamposCrear() {
     return validar;
 }
 
-//valida campos de documentos para buscar persona
-function ValidaCamposPeople() {
-    var valida = 0;
-    var C_Nit_ID = $("#Select_EmpresaNit").val();
-    var C_TD = $("#Select_Documento").val();
-    var C_D = $("#TxtDoc").val();
-
-    if (C_Nit_ID == "-1" || C_TD == "-1" || C_D == "") {
-        valida = 1;
-        if (C_TD == "-1") { $("#Img_TD").css("display", "inline-table"); } else { $("#Img_TD").css("display", "none"); }
-        if (C_D == "") { $("#Img_D").css("display", "inline-table"); } else { $("#Img_D").css("display", "none"); }
-        if (C_Nit_ID == "-1") { $("#Img1").css("display", "inline-table"); } else { $("#Img1").css("display", "none"); }
-    }
-    else {
-        $("#Img1").css("display", "none");
-        $("#Img_TD").css("display", "none");
-        $("#Img_D").css("display", "none");
-    }
-    return valida;
-}
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                     PROCESO DE CARGUE                                                                                                                                        ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
 //Función de control del picker de las fechas
 function Picker_Fechas() {
     $("#TxtFecha_Recibo").datepicker({ dateFormat: 'yy-mm-dd' });
     $("#TxtFecha_Retiro").datepicker({ dateFormat: 'yy-mm-dd' });
-}
-
-//carga el combo 
-function Change_Select_Nit() {
-    $("#Select_EmpresaNit").change(function () {
-        var index_ID = this.value;
-        Charge_Combos_Depend_Nit(Matrix_Sucursal, "Select_Sucursal", index_ID, "");
-        Charge_Combos_Depend_Nit(Matrix_Personas, "Select_Persona_A", index_ID, "");
-    });
 }
 
 //valida campo y consulta datos de persona
@@ -278,102 +330,52 @@ function Date_Document() {
     });
 }
 
-//coloca la sigla de la moneda
-function Change_Select_Moneda() {
-    $("#Select_Moneda").change(function () {
-        var index_ID = this.value;
-        for (item in Matrix_Moneda) {
-            if (Matrix_Moneda[item].MonedaCod_ID == index_ID) {
-                $("#V_Sigla_1").html(Matrix_Moneda[item].Sigla);
-                $("#V_Sigla_2").html(Matrix_Moneda[item].Sigla);
-                $("#V_Sigla_3").html(Matrix_Moneda[item].Sigla);
-            }
-        }
-    });
-}
-
-//carga los subtipos
-function Change_Select_TA() {
-    $("#Select_Tipo").change(function () {
-        var index_ID = this.value;
-        Charge_Combos_Depend_Nit(Matrix_RTSTA, "Select_SubTipo", index_ID, "");
-
-        switch (index_ID) {
-            case "1":
-                $("#TitleActivo_2").html($("#Select_Tipo option:selected").html());
-                $("#Tabla_LLave_Inmueble").css("display", "inline-table");
-                $("#Tabla_LLave_Vehiculos").css("display", "none");
-                $("#Blo_Inmuebles").css("display", "inline-table");
-                $("#Blo_Fasecolda").css("display", "none");
-                // $("#Acordeon_Activo").accordion("option", "active", 1);
-                break;
-
-            case "2":
-                $("#TitleActivo_2").html($("#Select_Tipo option:selected").html());
-                $("#Tabla_LLave_Inmueble").css("display", "none");
-                $("#Tabla_LLave_Vehiculos").css("display", "inline-table");
-                $("#Blo_Inmuebles").css("display", "none");
-                $("#Blo_Fasecolda").css("display", "inline-table");
-                $("#Txtkey_1").html("Placa");
-                //   $("#Acordeon_Activo").accordion("option", "active", 1);
-                Year_work = Captura_parametro();
-                break;
-
-            case "-1":
-                $("#TitleActivo_2").html("Activo");
-                $("#Tabla_LLave_Inmueble").css("display", "none");
-                $("#Tabla_LLave_Vehiculos").css("display", "inline-table");
-                $("#Blo_Inmuebles").css("display", "none");
-                $("#Blo_Fasecolda").css("display", "none");
-                $("#Txtkey_1").html("C. Identificación");
-                break;
-
-            default:
-                $("#TitleActivo_2").html($("#Select_Tipo option:selected").html());
-                $("#Tabla_LLave_Inmueble").css("display", "none");
-                $("#Tabla_LLave_Vehiculos").css("display", "inline-table");
-                $("#Blo_Inmuebles").css("display", "none");
-                $("#Blo_Fasecolda").css("display", "none");
-                $("#Txtkey_1").html("C. Identificación");
-                $("#Acordeon_Activo").accordion("option", "active", 1);
-                break;
-        }
-
-    });
-}
-
-//carga marcas segun la clase
-function Change_Select_Clase() {
-    $("#Select_ClaseF").change(function () {
-        var index_ID = this.value;
-        Clase_Index = index_ID;
-        $("#Select_LineaF").empty();
-        Charge_Combos_Depend_Nit(Matrix_MarcaClase_F, "Select_MarcaF", index_ID, "");
-    });
-}
-
-//carga lineas  segun la marca y clase
-function Change_Select_Marca() {
-    $("#Select_MarcaF").change(function () {
-        var index_ID = this.value;
-        Charge_Combos_Depend_Verificacion(Matrix_LineaMarcaClase_F, "Select_LineaF", index_ID, Clase_Index, "");
-    });
-}
-
+//trae parametro y cargar el combo de años
 function Captura_parametro() {
     var Year_actual;
     for (item in ArrayMenu) {
         if (ArrayMenu[item].IDlink == Link) {
-            Year_actual = ArrayMenu[item].Parametro_1;
+            Year_actual = parseInt(ArrayMenu[item].Parametro_1);
 
             var ActualYear = $("#Hours").html();
             var A_Date = ActualYear.split("-");
             var Year_F = parseInt(A_Date[0]) - parseInt(Year_actual);
 
-            CargaYear("Select_modelo", 25, Year_F, "");
+            CargaYear("Select_modelo", 24, Year_F, "", "Year_");
         }
     }
     return Year_actual;
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                     PROCESO BUSQUEDA FASECOLDA                                                                                  ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+//buscar en faseclda
+function Search_Fasecolda(Type, Cod_id, Clase, Marca, Linea, Modelo) {
+
+    var EncuentraDato = 2;
+
+    if (Type == 0) {
+        var StrYear = Modelo.split("_");
+        console.log(StrYear[1]);
+        for (itemArray in Matrix_Fasecolda) {
+            if (Matrix_Fasecolda[itemArray].Clase == Clase &&
+                Matrix_Fasecolda[itemArray].Clase == Marca &&
+                Matrix_Fasecolda[itemArray].Linea == Linea &&
+                Matrix_Fasecolda[itemArray].Year_ + StrYear[1] != "") {
+                EncuentraDato = 0;
+            }
+        }
+    } else {
+        for (itemArray in Matrix_Fasecolda) {
+            if (Matrix_Fasecolda[itemArray].Fasecolda_ID == Cod_id) {
+                EncuentraDato = 0;
+            }
+        }
+    }
+
+    return EncuentraDato;
 }
 
 //limpiar campos
@@ -383,9 +385,9 @@ function Clear() {
 
 }
 
-function Add_Activos(index) {
+function Add_Facturas(index) {
     $("#Dialog_Activos").dialog("open");
-    $("#Dialog_Activos").dialog("option", "title", "Crear Activo");
+    $("#Dialog_Activos").dialog("option", "title", "Crear Factura");
     Table_Activos();
 }
 
