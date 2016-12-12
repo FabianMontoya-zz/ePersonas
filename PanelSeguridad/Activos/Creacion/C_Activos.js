@@ -20,6 +20,7 @@ var T_Doc;
 var Doc;
 var Clase_Index;
 var Year_work;
+var Index_Year;
 
 /*--------------- region de variables globales --------------------*/
 
@@ -161,22 +162,28 @@ function x() {
 
 //valida y mustra campos
 function BtnBuscarFacecolda() {
-    var validar = ValidaCamposConsultaFasecolda();
 
-    switch (validar) {
-        case 0:
+    if ($("#Btn_ShearchFacecolda").val() == "Nueva Consulta") {
+        $("#Btn_ShearchFacecolda").attr("value", "Consulta Facecolda");
+        Enable_Consult_Fasecolda();
+        Clear_Consulta_Fasecolda();
+    }
+    else {
+        var validar = ValidaCamposConsultaFasecolda();
 
-            break;
+        switch (validar) {
+            case 0:
+                $("#Bloque_datosIngreso").css("display", "inline-table");
+                break;
 
-        case 1:
-            Mensaje_General("¡Campos sin Datos!", "¡Al buscar por Clase, Marca, linea, modelo los campos deben ser diligenciados!", "W");
-            break;
+            case 1:
+                Mensaje_General("¡Campos sin Datos!", "¡Al buscar por Clase, Marca, linea, modelo los campos deben ser diligenciados!", "W");
+                break;
 
-        case 2:
-            Mensaje_General("¡No existe!", "¡El Codigo digitado no se encuentra en la Tabla Fasecolda!", "W");
-            break;
-
-      
+            case 2:
+                Mensaje_General("¡No existe!", "¡El Codigo digitado no se encuentra en la Tabla Fasecolda!", "W");
+                break;
+        }
     }
 }
 
@@ -300,7 +307,6 @@ function validarCamposCrear() {
     return validar;
 }
 
-
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                     PROCESO DE CARGUE                                                                                                                                        ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -358,19 +364,34 @@ function Search_Fasecolda(Type, Cod_id, Clase, Marca, Linea, Modelo) {
 
     if (Type == 0) {
         var StrYear = Modelo.split("_");
-        console.log(StrYear[1]);
+
         for (itemArray in Matrix_Fasecolda) {
             if (Matrix_Fasecolda[itemArray].Clase == Clase &&
-                Matrix_Fasecolda[itemArray].Clase == Marca &&
-                Matrix_Fasecolda[itemArray].Linea == Linea &&
-                Matrix_Fasecolda[itemArray].Year_ + StrYear[1] != "") {
+                Matrix_Fasecolda[itemArray].Marca == Marca &&
+                Matrix_Fasecolda[itemArray].Fasecolda_ID == Linea) {
                 EncuentraDato = 0;
+                $("#TxtFasecolda_ID").val(Matrix_Fasecolda[itemArray].Fasecolda_ID);
+                $("#Txt_Cilindraje").val(Matrix_Fasecolda[itemArray].Cilindraje);
+
+                var Str_Valor = Matrix_Fasecolda[itemArray]["Year_" + StrYear[1]];
+                Str_Valor = Str_Valor + "000";
+                $("#V_Valor_F").html(dinner_format_grid(Str_Valor, ""));
+                $("#Btn_ShearchFacecolda").attr("value", "Nueva Consulta");
+                Disable_Consult_Fasecolda();
             }
         }
-    } else {
+    }
+    else {
         for (itemArray in Matrix_Fasecolda) {
             if (Matrix_Fasecolda[itemArray].Fasecolda_ID == Cod_id) {
                 EncuentraDato = 0;
+                $("#Select_ClaseF").val(Matrix_Fasecolda[itemArray].Clase);
+                Charge_Combos_Depend_Nit(Matrix_MarcaClase_F, "Select_MarcaF", Matrix_Fasecolda[itemArray].Clase, Matrix_Fasecolda[itemArray].Marca);
+                Charge_Combos_Depend_Verificacion(Matrix_LineaMarcaClase_F, "Select_LineaF", Matrix_Fasecolda[itemArray].Marca, Matrix_Fasecolda[itemArray].Clase, Matrix_Fasecolda[itemArray].Fasecolda_ID);
+                Index_Year = itemArray;
+                $("#Txt_Cilindraje").val(Matrix_Fasecolda[itemArray].Cilindraje);
+                $("#Btn_ShearchFacecolda").attr("value", "Nueva Consulta");
+                Disable_Consult_Fasecolda();
             }
         }
     }
@@ -379,11 +400,43 @@ function Search_Fasecolda(Type, Cod_id, Clase, Marca, Linea, Modelo) {
 }
 
 //limpiar campos
-function Clear() {
+function Clear_Consulta_Fasecolda() {
 
-    $("#Txt_ID").val("");
+    $("#TxtFasecolda_ID").val("");
+    $("#Select_ClaseF").val("-1");
+    $("#Select_modelo").val("-1");
+    $('#Select_MarcaF').empty();
+    $('#Select_LineaF').empty();
 
+    $("#Txt_Cilindraje").val("");
+    $("#V_Valor_F").html("");
+
+    $('.C_Chosen').trigger('chosen:updated');
 }
+
+//Bloquea controles 
+function Disable_Consult_Fasecolda() {
+    $("#TxtFasecolda_ID").attr("disabled", "disabled");
+    $("#Select_ClaseF").attr("disabled", "disabled");
+    $("#Select_MarcaF").attr("disabled", "disabled");
+    $("#Select_LineaF").attr("disabled", "disabled");
+    $("#Select_modelo").attr("disabled", "disabled");
+
+    $('.C_Chosen').trigger('chosen:updated');
+}
+
+//Desbloquea controles 
+function Enable_Consult_Fasecolda() {
+    $("#TxtFasecolda_ID").removeAttr("disabled");
+    $("#Select_ClaseF").removeAttr("disabled");
+    $("#Select_MarcaF").removeAttr("disabled");
+    $("#Select_LineaF").removeAttr("disabled");
+    $("#Select_modelo").removeAttr("disabled");
+
+    $('.C_Chosen').trigger('chosen:updated');
+}
+
+
 
 function Add_Facturas(index) {
     $("#Dialog_Activos").dialog("open");

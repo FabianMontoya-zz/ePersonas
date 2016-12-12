@@ -332,10 +332,16 @@
                                         <tr>
                                             <td class="Label_Bold" style="width: 15.5%;">Codigo Fasecolda
                                             </td>
-                                            <td style="width: 90%;">
+                                            <td style="width: 70%;">
                                                 <span class="cssToolTip_Form">
-                                                    <input type="text" class="Numeric" id="TxtFasecolda_ID" maxlength="8" style="width: 180px;" />
+                                                    <input type="text" class="Numeric" id="TxtFasecolda_ID" maxlength="8" style="width: 100%;" />
                                                     <span class="Spam_ANL"></span></span>
+                                            </td>
+                                            <td style="width: 5%; padding-bottom: 25px;">
+                                                <span class="cssToolTip">
+                                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Fase_1"
+                                                        src="../../images/error.png" />
+                                                    <span class="SpamEG"></span></span>
                                             </td>
                                         </tr>
                                     </table>
@@ -347,7 +353,12 @@
                                                 <select id="Select_ClaseF" class="C_Chosen">
                                                 </select>
                                             </td>
-                                            <td style="width: 20%;"></td>
+                                            <td style="width: 20%; padding-bottom: 25px;">
+                                                <span class="cssToolTip">
+                                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Fase_2"
+                                                        src="../../images/error.png" />
+                                                    <span class="SpamEG"></span></span>
+                                            </td>
                                         </tr>
                                     </table>
                                     <table id="T_Datos_Fasecolda_2" style="width: 100%;">
@@ -358,7 +369,12 @@
                                                 <select id="Select_MarcaF" class="C_Chosen">
                                                 </select>
                                             </td>
-                                            <td style="width: 30%;"></td>
+                                            <td style="width: 30%; padding-bottom: 25px;">
+                                                <span class="cssToolTip">
+                                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Fase_3"
+                                                        src="../../images/error.png" />
+                                                    <span class="SpamEG"></span></span>
+                                            </td>
                                         </tr>
                                     </table>
                                     <table id="T_Datos_Fasecolda_3" style="width: 100%;">
@@ -369,7 +385,12 @@
                                                 <select id="Select_LineaF" class="C_Chosen">
                                                 </select>
                                             </td>
-                                            <td style="width: 5%;"></td>
+                                            <td style="width: 5%; padding-bottom: 25px;">
+                                                <span class="cssToolTip">
+                                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Fase_4"
+                                                        src="../../images/error.png" />
+                                                    <span class="SpamEG"></span></span>
+                                            </td>
                                         </tr>
                                     </table>
                                     <table id="T_Datos_Fasecolda_4" style="width: 100%;">
@@ -380,13 +401,28 @@
                                                 <select id="Select_modelo" class="C_Chosen">
                                                 </select>
                                             </td>
-                                            <td style="width: 40%;"></td>
+                                            <td style="width: 40%; padding-bottom: 25px;">
+                                                <span class="cssToolTip">
+                                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Fase_5"
+                                                        src="../../images/error.png" />
+                                                    <span class="SpamEG"></span></span>
+                                            </td>
                                         </tr>
                                     </table>
                                     <div style="width: 100%; text-align: center; margin-top: 25px;">
                                         <input id="Btn_ShearchFacecolda" type="button" style="width: 18%;" value="Consulta Facecolda" onclick="BtnBuscarFacecolda();" />
                                     </div>
                                     <div id="Bloque_datosIngreso">
+                                        <table id="Table1" style="width: 100%;">
+                                            <tr>
+                                                <td class="Label_Bold" style="width: 5.9%;">Valor Comercial
+                                                </td>
+                                                <td id="V_Sigla_5" style="width: 2%" class="Sigla"></td>
+                                                <td id="V_Valor_F" class="Title_Bold" align="left" style="width: 5%;"></td>
+                                                <td style="width: 30%"></td>
+                                                <td class="Label_Bold" style="width: 4.9%;"></td>
+                                            </tr>
+                                        </table>
                                         <table id="Tabla_Blo_1" style="width: 100%;">
                                             <tr>
                                                 <td class="Label_Bold" style="width: 5%;">Cilindraje

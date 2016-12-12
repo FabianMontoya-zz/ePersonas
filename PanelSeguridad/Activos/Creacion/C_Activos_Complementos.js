@@ -21,14 +21,6 @@ function Change_Select_Nit() {
     });
 }
 
-//muestra los campos de diligenciamiento fasecolda
-function Change_Select_Modelo() {
-    $("#Select_modelo").change(function () {
-        var index_ID = this.value;
-        $("#Bloque_datosIngreso").css("display", "inline-table");
-    });
-}
-
 //MUESTRA LOS CAMPOS DE BLINDAJE
 function Change_Select_blindaje() {
     $("#Select_Blindaje").change(function () {
@@ -51,6 +43,8 @@ function Change_Select_Moneda() {
                 $("#V_Sigla_1").html(Matrix_Moneda[item].Sigla);
                 $("#V_Sigla_2").html(Matrix_Moneda[item].Sigla);
                 $("#V_Sigla_3").html(Matrix_Moneda[item].Sigla);
+                $("#V_Sigla_4").html(Matrix_Moneda[item].Sigla);
+                $("#V_Sigla_5").html(Matrix_Moneda[item].Sigla);
             }
         }
     });
@@ -121,6 +115,20 @@ function Change_Select_Marca() {
         var index_ID = this.value;
         Charge_Combos_Depend_Verificacion(Matrix_LineaMarcaClase_F, "Select_LineaF", index_ID, Clase_Index, "");
     });
+}
+
+//muestra los campos de diligenciamiento fasecolda
+function Change_Select_Modelo() {
+    $("#Select_modelo").change(function () {
+        var index_ID = this.value;
+
+        var StrYear = index_ID.split("_");
+
+        var Str_Valor = Matrix_Fasecolda[Index_Year]["Year_" + StrYear[1]];
+        Str_Valor = Str_Valor + "000";
+        $("#V_Valor_F").html(dinner_format_grid(Str_Valor, ""));
+        $("#Txt_Cilindraje").val(Matrix_Fasecolda[Index_Year]["Cilindraje"]);
+     });
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
