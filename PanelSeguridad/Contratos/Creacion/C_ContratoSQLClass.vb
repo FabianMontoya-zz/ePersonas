@@ -53,8 +53,7 @@ Public Class C_ContratoSQLClass
         sql.AppendLine("'" & vp_Obj.Saldo_Int_Mora & "',")
         sql.AppendLine("'" & vp_Obj.Saldo_Otros & "',")
         sql.AppendLine("'" & vp_Obj.Secuencia_Cargue & "',")
-        sql.AppendLine("'" & vp_Obj.FechaActualizacion & "',")
-        sql.AppendLine("'" & vp_Obj.Usuario & "' ) ")
+        sql.AppendLine("'" & vp_Obj.FechaActualizacion & "' ) ")
 
         StrQuery = sql.ToString
 

@@ -21,8 +21,12 @@
     Private _Saldo_Otros As Long
     Private _Secuencia_Cargue As Long
 
+    Private _UsuarioCreacion As String
+    Private _FechaCreacion As String
+    Private _UsuarioActualizacion As String
     Private _FechaActualizacion As String
-    Private _Usuario As String
+
+    Private _DescripEmpresa As String
 
 #End Region
 
@@ -174,7 +178,31 @@
             Me._Secuencia_Cargue = value
         End Set
     End Property
-
+    '------
+    Public Property UsuarioCreacion() As String
+        Get
+            Return Me._UsuarioCreacion
+        End Get
+        Set(ByVal value As String)
+            Me._UsuarioCreacion = value
+        End Set
+    End Property
+    Public Property FechaCreacion() As String
+        Get
+            Return Me._FechaCreacion
+        End Get
+        Set(ByVal value As String)
+            Me._FechaCreacion = value
+        End Set
+    End Property
+    Public Property UsuarioActualizacion() As String
+        Get
+            Return Me._UsuarioActualizacion
+        End Get
+        Set(ByVal value As String)
+            Me._UsuarioActualizacion = value
+        End Set
+    End Property
     Public Property FechaActualizacion() As String
         Get
             Return Me._FechaActualizacion
@@ -183,12 +211,12 @@
             Me._FechaActualizacion = value
         End Set
     End Property
-    Public Property Usuario() As String
+    Public Property DescripEmpresa() As String
         Get
-            Return Me._Usuario
+            Return Me._DescripEmpresa
         End Get
         Set(ByVal value As String)
-            Me._Usuario = value
+            Me._DescripEmpresa = value
         End Set
     End Property
 #End Region

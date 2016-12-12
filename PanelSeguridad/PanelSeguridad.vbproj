@@ -1310,6 +1310,8 @@
     <Compile Include="Parametros\Productos\ProductosSQLClass.vb" />
     <Compile Include="Parametros\Relaciones_Financieras\Relaciones_FinancierasClass.vb" />
     <Compile Include="Parametros\Relaciones_Financieras\Relaciones_FinancierasSQLClass.vb" />
+    <Compile Include="Parametros\Relacion_Actores\Relacion_ActoresClass.vb" />
+    <Compile Include="Parametros\Relacion_Actores\Relacion_ActoresSQLClass.vb" />
     <Compile Include="Parametros\Relation_Tipo_Subtipo_Activo\Relation_Tipo_Subtipo_Activo.aspx.designer.vb">
       <DependentUpon>Relation_Tipo_Subtipo_Activo.aspx</DependentUpon>
     </Compile>

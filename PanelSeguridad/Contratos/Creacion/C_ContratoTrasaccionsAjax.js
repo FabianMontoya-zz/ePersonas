@@ -6,7 +6,8 @@ function transacionAjax_EmpresaNit(State) {
         url: "C_ContratoAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'CLIENTE'
         },
         //Transaccion Ajax en proceso
@@ -97,6 +98,7 @@ function transacionAjax_Documento(State) {
             else {
                 ArrayTdoc = JSON.parse(result);
                 charge_CatalogList(ArrayTdoc, "Select_Documento_C", 1);
+                charge_CatalogList(ArrayTdoc, "Select_Documento_C2", 1);
             }
         },
         error: function () {
@@ -106,7 +108,7 @@ function transacionAjax_Documento(State) {
 }
 
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_ShearchPeople(State, TD, D, NIT) {
+function transacionAjax_ShearchPeople(State, TD, D, NIT, Vista) {
     $.ajax({
         url: "C_ContratoAjax.aspx",
         type: "POST",
@@ -122,11 +124,14 @@ function transacionAjax_ShearchPeople(State, TD, D, NIT) {
             switch (result) {
                 case "NO":
                     Mensaje_General("¡Datos Inexistentes!", "La persona que desea relacionar no está inscrita en el sistema. Por favor revisar los datos.", "W");
-                    $("#V_Persona").html("------");
+                    $("#" + Vista).html("------");
+                    Persona2 = false;
                     break;
 
                 default:
-                    $("#V_Persona").html(result);
+                    $("#" + Vista).html(result);
+                    namePersona = result;
+                    Persona2 = true;
                     break;
             }
         },
@@ -208,7 +213,7 @@ function transaccionAjax_MCiclo(State) {
                 Matrix_Ciclo = JSON.parse(result);
                 Charge_Combos_Depend_Nit(Matrix_Ciclo, "Select_Ciclo", "", "");
                 Charge_Combos_Depend_Nit(Matrix_Ciclo, "Select_Ciclo_2", "", "");
-                
+
             }
         },
         error: function () {
@@ -286,7 +291,8 @@ function transacionAjax_C_Contrato_create(State) {
         url: "C_ContratoAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Nit_ID": $("#Select_EmpresaNit").val(),
             "ID": $("#Txt_ID").val(),
             "Descripcion": $("#TxtDescripcion").val(),

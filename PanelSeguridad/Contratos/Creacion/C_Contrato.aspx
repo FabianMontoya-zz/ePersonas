@@ -127,7 +127,7 @@
                             </td>
                         </tr>
                     </table>
-                    <table id="Table_Persona" style="width: 100%;">
+                    <table id="T_Persona" style="width: 100%;">
                         <tr>
                             <td class="Label_Bold" style="width: 10.7%;">Identificación
                             </td>
@@ -137,7 +137,7 @@
                                     <span class="Spam_AN"></span></span>
                             </td>
                             <td style="padding-bottom: 25px; width: 21%;">
-                                <span class="cssToolTip_L">
+                                <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img_D_C"
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
@@ -466,34 +466,36 @@
                 <h3>Añadir Terceros
                 </h3>
                 <div id="Div_Terceros">
-                    <table id="T_Terceros" border="1" cellpadding="1" cellspacing="1">
-                        <thead>
-                            <tr>
-                                <th>
-                                    <span class="cssToolTip_ver">
-                                        <img alt="Activo" class="Add" onclick="javascript:ValidarIDColocacion();" id="Crear_Terceros" height='20px'
-                                            width='20px' src='../../images/add.png' /><span>Agregar Persona</span></span>
-                                </th>
-                                <th>Tipo Documento
-                                </th>
-                                <th>Identificación
-                                </th>
-                                <th>Nombre
-                                </th>
-                                <th>Tipo de relación
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div id="Container_Terceros">
+                        <table id="T_Terceros" border="1" cellpadding="1" cellspacing="1">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <span class="cssToolTip_ver">
+                                            <img alt="Activo" class="Add" onclick="javascript:ValidarIDColocacion();" id="Crear_Terceros" height='20px'
+                                                width='20px' src='../../images/add.png' /><span>Agregar Persona</span></span>
+                                    </th>
+                                    <th>Tipo Documento
+                                    </th>
+                                    <th>Identificación
+                                    </th>
+                                    <th>Nombre
+                                    </th>
+                                    <th>Tipo de relación
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
             </div>
@@ -542,20 +544,75 @@
         </table>
     </div>
     <div id="Dialog_Activos">
-        
     </div>
 
     <div id="Dialog_Terceros">
-    <table id="T_DatosColocacion" style="width: 100%;">
-                <tr>
-                    <td id="TD1" style="width: 10.5%;" class="Label_Bold">Empresa</td>
-                    <td id="L_Empresa" style="width: 35%;">123123 - SASIF S.A.S.</td>
-                    <td id="TD2" style="width: 10.5%;" class="Label_Bold">Colocación</td>
-                    <td id="L_Colocacion" style="width: 35%;">ASD123456789DSA</td>
-                </tr>
-            </table>
-        <div id="Container_Terceros">
-            
+        <table id="T_DatosColocacion" style="width: 100%;">
+            <tr>
+                <td id="TD1" style="width: 10.5%;" class="Label_Bold">Empresa</td>
+                <td id="L_Empresa" style="width: 35%;">123123 - SASIF S.A.S.</td>
+                <td id="TD2" style="width: 10.5%;" class="Label_Bold">Colocación</td>
+                <td id="L_Colocacion" style="width: 35%;">ASD123456789DSA</td>
+            </tr>
+        </table>
+        <table id="T_Documento" style="width: 100%; padding-top: 20px;">
+            <tr>
+                <td class="Label_Bold" style="width: 10.5%;">Documento</td>
+                <td style="width: 63%;">
+                    <select style="width: 100%;" id="Select_Documento_C2" class="C_Chosen">
+                    </select>
+                </td>
+                <td style="width: 44%; padding-bottom: 25px;">
+                    <span class="cssToolTip">
+                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img_TD_C2"
+                            src="../../images/error.png" />
+                        <span class="SpamEG"></span></span>
+                </td>
+            </tr>
+        </table>
+        <table id="T_Identificacion" style="width: 100%;">
+            <tr>
+                <td class="Label_Bold" style="width: 10.8%;">Identificación
+                </td>
+                <td style="width: 15%;">
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="TxtDoc_C2" maxlength="18" class="Numeric" style="width: 100%;" />
+                        <span class="Spam_AN"></span></span>
+                </td>
+                <td style="padding-bottom: 25px; width: 25.4%;">
+                    <span class="cssToolTip">
+                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img_D_C2"
+                            src="../../images/error.png" />
+                        <span class="SpamEG"></span></span>
+                </td>
+                <td class="Label_Bold" style="width: 5%;">Persona
+                </td>
+                <td id="V_Persona2" style="width: 50%;" colspan="3"></td>
+                <td style="padding-bottom: 25px; width: 15%;"></td>
+            </tr>
+        </table>
+        <table id="T_Relacion" style="width: 100%;">
+            <tr>
+                <td class="Label_Bold" style="width: 10.5%;">Relación</td>
+                <td style="width: 37%;">
+                    <select style="width: 100%;" id="Select_Relacion" class="C_Chosen">
+                        <option value="-1">Seleccione...</option>
+                        <option value="1">1 - Locatario/Deudor Principal</option>
+                        <option value="2">2 - Segundo u otro Locatario</option>
+                        <option value="3">3 - Codeudor</option>
+                        <option value="4">4 - Otras relaciones</option>
+                    </select>
+                </td>
+                <td style="width: 70%; padding-bottom: 25px;">
+                    <span class="cssToolTip">
+                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img20"
+                            src="../../images/error.png" />
+                        <span class="SpamEG"></span></span>
+                </td>
+            </tr>
+        </table>
+        <div id="Div_Agregar" style="width: 100%; text-align: center; margin-top: 11px;">
+            <input id="BTN_Agregar" type="button" value="Guardar" onclick="BTNAgregarTercero();" />
         </div>
     </div>
 

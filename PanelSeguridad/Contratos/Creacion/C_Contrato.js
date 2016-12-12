@@ -13,6 +13,7 @@ var ArrayC_Contrato = [];
 var ArrayEmpresaNit = [];
 var Array_Hijo_Cliente = [];
 var ArrayEstado = [];
+var ArrayTerceros = [];
 
 var ID;
 var T_Doc;
@@ -34,6 +35,11 @@ var TNbase;
 
 var signo;
 var numero;
+var namePersona;
+
+var Persona1 = false;
+var Persona2 = false;
+var ContTerceros = 0;
 
 /*--------------- region de variables globales --------------------*/
 
@@ -49,7 +55,6 @@ $(document).ready(function () {
     transaccionAjax_MCiclo('MATRIX_CICLO');
     transacionAjax_Productos('MATRIX_PRODUCTOS');
     transacionAjax_Financiacion('MATRIX_FINANCIACION');
-    //transaccionAjax_MDirecciones('MATRIX_DIRECCIONES');
     transaccionAjax_MTasas('MATRIX_TASAS');
 
     Ocultar_IMGS_Errores();
@@ -88,8 +93,8 @@ $(document).ready(function () {
         autoOpen: false,
         dialogClass: "Dialog_Sasif",
         modal: true,
-        width: 1100,
-        height: 600,
+        width: 760,
+        height: 430,
         overlay: {
             opacity: 0.5,
             background: "black"
@@ -102,7 +107,7 @@ $(document).ready(function () {
     });
 
     $("#T_Terceros").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 800,
+        "bJQueryUI": true, "iDisplayLength": 1000,
         "bDestroy": true
     });
 
@@ -133,6 +138,7 @@ $(document).ready(function () {
     Change_Select_Sucursal();
     Change_Select_Moneda();
     Change_Select_Documento_C();
+    Change_Select_Documento_C2();
 
     Change_Select_Producto();
     Change_Select_Condicion_Financiacion();
@@ -144,6 +150,7 @@ $(document).ready(function () {
     Restric_long_decimal("TXT_Puntos_Adicionales");
     ReCalcularTasas("TXT_Puntos_Adicionales");
     Date_Document();
+    Date_Document2();
 });
 
 //Ocultamos las imagenes de error al iniciar la pantalla
@@ -170,9 +177,12 @@ function Ocultar_IMGS_Errores() {
     $("#Img17").css("display", "none");
     $("#Img18").css("display", "none");
     $("#Img19").css("display", "none");
+    $("#Img20").css("display", "none"); //Terceros
 
     $("#Img_TD_C").css("display", "none");
     $("#Img_D_C").css("display", "none");
+    $("#Img_TD_C2").css("display", "none");
+    $("#Img_D_C2").css("display", "none");
 }
 
 //Función de control del picker de las fechas
@@ -210,9 +220,24 @@ function ValidaCamposPeople() {
 
     if (C_Nit_ID == "-1" || C_TD == "-1" || C_D == "") {
         valida = 1;
-        if (C_TD == "-1") { $("#Img_TD_C").css("display", "inline-table"); } else { $("#Img_TD_C").css("display", "none"); }
-        if (C_D == "") { $("#Img_D_C").css("display", "inline-table"); } else { $("#Img_D_C").css("display", "none"); }
-        if (C_Nit_ID == "-1") { $("#Img1").css("display", "inline-table"); } else { $("#Img1").css("display", "none"); }
+        if (C_TD == "-1") {
+            $("#Img_TD_C").css("display", "inline-table");
+        }
+        else {
+            $("#Img_TD_C").css("display", "none");
+        }
+        if (C_D == "") {
+            $("#Img_D_C").css("display", "inline-table");
+        }
+        else {
+            $("#Img_D_C").css("display", "none");
+        }
+        if (C_Nit_ID == "-1") {
+            $("#Img1").css("display", "inline-table");
+        }
+        else {
+            $("#Img1").css("display", "none");
+        }
     }
     else {
         $("#Img1").css("display", "none");
@@ -222,6 +247,36 @@ function ValidaCamposPeople() {
     return valida;
 }
 
+//valida campos de documentos para buscar persona en agregar terceros
+function ValidaCamposPeople2() {
+    var valida = 0;
+    var C_TD = $("#Select_Documento_C2").val();
+    var C_D = $("#TxtDoc_C2").val();
+
+    if (C_TD == "-1" || C_TD == null || C_D == "" || C_D == null) {
+        valida = 1;
+        if (C_TD == "-1" || C_TD == null) {
+            $("#Img_TD_C2").css("display", "inline-table");
+        }
+        else {
+            $("#Img_TD_C2").css("display", "none");
+        }
+        if (C_D == "" || C_D == null) {
+            $("#Img_D_C2").css("display", "inline-table");
+        }
+        else {
+            $("#Img_D_C2").css("display", "none");
+        }
+
+    }
+    else {
+        $("#Img_TD_C2").css("display", "none");
+        $("#Img_D_C2").css("display", "none");
+    }
+    return valida;
+}
+
+//Valida que ya haya seleccionado una empresa y escrito el número de la colocación para agregar un tercero
 function ValidarIDColocacion() {
     var valido = false;
     var NIT = $("#Select_EmpresaNit").val();
@@ -243,6 +298,38 @@ function ValidarIDColocacion() {
         $("#Img1").css("display", "none");
         Add_Terceros();
     }
+}
+
+//Valida que ya haya seleccionado una empresa y escrito el número de la colocación para agregar un tercero
+function ValidarIngresoTerceros() {
+    var valido = false;
+    var TypeDocumento = $("#Select_Documento_C2").val();
+    var Documento = $("#TxtDoc_C2").val();
+    var Relacion = $("#Select_Relacion").val();
+
+    if (TypeDocumento == "-1" || TypeDocumento == null || Documento == "" || Documento == null || Relacion == "-1" || Relacion == null) {
+        Mensaje_General("¡Campos Incompletos!", "Debes completar los campos obligatorios para poder agregar una persona.", "E");
+
+        if (TypeDocumento == "-1" || TypeDocumento == null) {
+            $("#Img_TD_C2").css("display", "inline-table");
+        }
+
+        if (Relacion == "-1" || Relacion == null) {
+            $("#Img20").css("display", "inline-table");
+        }
+
+        if (Documento == "" || Documento == null) {
+            $("#Img_D_C2").css("display", "inline-table");
+        }
+
+    } else {
+        $("#Img_TD_C2").css("display", "none");
+        $("#Img_D_C2").css("display", "none");
+        $("#Img20").css("display", "none");
+        valido = true;
+    }
+
+    return valido;
 }
 
 
@@ -296,8 +383,27 @@ function Date_Document() {
             var C_D = $("#TxtDoc_C").val();
             var Nit = $("#Select_EmpresaNit").val();
 
-            transacionAjax_ShearchPeople("Buscar_Persona", C_TD, C_D, Nit);
-            transaccionAjax_MDirecciones("MATRIX_DIRECCIONES", C_TD, C_D);            
+            transacionAjax_ShearchPeople("Buscar_Persona", C_TD, C_D, Nit, "V_Persona");
+            transaccionAjax_MDirecciones("MATRIX_DIRECCIONES", C_TD, C_D);
+        }
+
+    });
+}
+
+function Date_Document2() {
+
+    $("#TxtDoc_C2").blur(function () {
+        Persona2 = false;
+        var valida_people = ValidaCamposPeople2();
+        if (valida_people == 1) {
+            Mensaje_General("¡Campos Incompletos!", "Los campos [Documento] e [Identificación] deben ser diligenciados para consultar la persona.", "E");
+        }
+        else {
+            var C_TD = $("#Select_Documento_C2").val();
+            var C_D = $("#TxtDoc_C2").val();
+            var Nit = $("#Select_EmpresaNit").val();
+
+            transacionAjax_ShearchPeople("Buscar_Persona", C_TD, C_D, Nit, "V_Persona2");
         }
 
     });
@@ -311,6 +417,23 @@ function Change_Select_Documento_C() {
         } else {
             $("#Img_TD_C").css("display", "none");
         }
+
+        $("#TxtDoc_C").val("");
+        $("#V_Persona").html(" ");
+    });
+}
+
+function Change_Select_Documento_C2() {
+    $("#Select_Documento_C2").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_Documento_C2").val() == "-1") {
+            $("#Img_TD_C2").css("display", "inline-table");
+        } else {
+            $("#Img_TD_C2").css("display", "none");
+        }
+
+        $("#TxtDoc_C2").val("");
+        $("#V_Persona2").html(" ");
     });
 }
 
@@ -714,6 +837,19 @@ function x() {
     $("#dialog").dialog("close");
 }
 
+//limpiar campos Dialog Activos
+function ClearActivos() {
+    /*[Todo el código para limpiar los campos]*/
+}
+
+//limpiar campos Dialog Terceros
+function ClearTerceros() {
+    $("#Select_Documento_C2").val("-1").trigger("chosen:updated");
+    $("#TxtDoc_C2").val("");
+    $("#V_Persona2").html(" ");
+    $("#Select_Relacion").val("-1").trigger("chosen:updated");
+}
+
 //limpiar campos
 function Clear() {
     /*[Todo el código para limpiar los campos]*/
@@ -725,10 +861,108 @@ function Add_Activos(index) {
     Table_Activos();
 }
 
+//limpiar campos
+function Clear() {
+    /*[Todo el código para limpiar los campos]*/
+}
+
 function Add_Terceros(index) {
     $("#Dialog_Terceros").dialog("open");
     $("#Dialog_Terceros").dialog("option", "title", "Agregar Persona");
+    ClearTerceros();
     Table_Terceros();
+}
+
+//Agregamos el tercero
+function BTNAgregarTercero() {
+
+    if (Persona2 == true) {
+        var valido = ValidarIngresoTerceros();
+
+        if (valido == true) {
+            var ok = Json_Terceros();
+
+            if (ok == true) {
+                Mensaje_General("¡Persona Relacionada!", "Se ha relacionado la persona correctamente.", "S");
+                ClearTerceros();
+            }
+        }
+    } else {
+        Mensaje_General("¡Datos Incompletos!", "No puedes ingresar una persona que no esté registrada en el sistema.", "W");
+    }
+}
+
+//Crea la tabla de documentos hijos
+function AddArrayToTable() {
+    var Html;
+
+    Html = "<table id='T_T' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th><span class='cssToolTip_ver'><img alt='Activo' class='Add' onclick='javascript:ValidarIDColocacion();' id='Crear_Terceros' height='20px' width='20px' src='../../images/add.png' /><span>Agregar Persona</span></span></th><th>Tipo Documento</th><th>Identificación</th><th>Nombre</th><th>Tipo de relación</th></tr></thead><tbody>";
+    for (itemArray in ArrayTerceros) {
+        if (ArrayTerceros[itemArray].Contrato_ID != 0) {
+            Html += "<tr id= 'T_T_" + ArrayTerceros[itemArray].Index + "'><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar_Doc_H('" + ArrayTerceros[itemArray].Index + "')\"></input></td><td>" + ArrayTerceros[itemArray].Descrip_TypeDocumento + "</td><td>" + ArrayTerceros[itemArray].Document_ID + "</td><td>" + ArrayTerceros[itemArray].Descrip_Persona + "</td><td>" + ArrayTerceros[itemArray].Descrip_TypeRelation + "</td></tr>";
+        }
+    }
+
+    Html += "</tbody></table>";
+    $("#Container_Terceros").html("");
+    $("#Container_Terceros").html(Html);
+
+    $(".Eliminar").click(function () {
+    });
+
+    $("#T_T").dataTable({
+        "bJQueryUI": true, "iDisplayLength": 1000,
+        "bDestroy": true
+    });
+}
+
+
+function Json_Terceros() {
+
+    var valido = false;
+
+    var validaRepetido = ConsultaRepetido();
+    switch (validaRepetido) {
+        case 0:
+            var STRTypeDocumento = $("#Select_Documento_C2 option:selected").html();
+            var STRTypeRelation = $("#Select_Relacion option:selected").html();
+            var JSON_terceros = {
+                "Nit_ID": $("#Select_EmpresaNit").val(),
+                "Contrato_ID": $("#TXT_ID_Colocacion").val(),
+                "TypeDocument_ID": $("#Select_Documento_C2").val(),
+                "Document_ID": $("#TxtDoc_C2").val(),
+                "Descrip_Persona": namePersona,
+                "TypeRelation": $("#Select_Relacion").val(),
+                "Descrip_TypeDocumento": STRTypeDocumento,
+                "Descrip_TypeRelation": STRTypeRelation,
+                "Index": ContTerceros
+            }
+            ArrayTerceros.push(JSON_terceros);
+            ContTerceros = ContTerceros + 1;
+            valido = true;
+            AddArrayToTable();
+            break;
+
+        case 1:
+            Mensaje_General("¡Persona Repetida!", "La persona ya se encuentra relacionada con estos mismos datos.", "W");
+            break;
+
+    }
+
+    return valido;
+}
+
+function ConsultaRepetido() {
+    var validar = 0;
+    for (itemArray in ArrayTerceros) {
+        if (ArrayTerceros[itemArray].TypeDocument_ID == $("#Select_Documento_C2").val() &&
+            ArrayTerceros[itemArray].Document_ID == $("#TxtDoc_C2").val() &&
+            ArrayTerceros[itemArray].TypeRelation == $("#Select_Relacion").val()) {
+            validar = 1;
+            break;
+        }
+    }
+    return validar;
 }
 
 function Table_Activos() {
@@ -736,6 +970,9 @@ function Table_Activos() {
 }
 
 function Table_Terceros() {
+    var colocacion;
+    $("#L_Empresa").html($("#Select_EmpresaNit option:selected").html());
+    $("#L_Colocacion").html($("#TXT_ID_Colocacion").val());
     $("#Container_Terceros").html("");
 }
 

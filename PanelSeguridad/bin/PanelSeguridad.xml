@@ -6,7 +6,22 @@ PanelSeguridad
 </name>
 </assembly>
 <members>
-<member name="M:PanelSeguridad.Adm_OpcRolAjax.Consulta_OpcRol">
+<member name="M:PanelSeguridad.Relacion_ActoresSQLClass.InsertCargo(PanelSeguridad.Relacion_ActoresClass)">
+	<summary>
+ funcion que crea el query para la insercion de nuevo Cargo (INSERT)
+ </summary>
+	<param name="vp_Obj_Relacion_Actores"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.Relacion_ActoresSQLClass.listRelacion_Actores(System.String,System.String,System.String)">
+	<summary>
+ funcion que trae el listado de Relacion_Actores para armar la tabla
+ </summary>
+	<param name="vp_S_StrQuery"></param>
+	<param name="vg_S_StrConexion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.Adm_OpcRolAjax.Consulta_OpcRol">
 	<summary>
  traemos todos los datos para tabla opcion roles (READ)
  </summary>

@@ -85,9 +85,6 @@ Public Class C_ContratoAjax
             objC_Contrato.Saldo_Int_Mora = Request.Form("SMora")
             objC_Contrato.Saldo_Otros = Request.Form("SOtros")
 
-            objC_Contrato.FechaActualizacion = Date.Now
-            objC_Contrato.Usuario = Request.Form("user")
-
             ObjListC_Contrato.Add(objC_Contrato)
 
             result = SQL_C_Contrato.InsertC_Contrato(objC_Contrato)
