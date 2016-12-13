@@ -68,8 +68,7 @@ Public Class C_ContratoAjax
         objC_Contrato.Colocacion_ID = Request.Form("Colocacion")
 
         'validamos si la llave existe
-        'vl_s_IDxiste = SQL_C_Contrato.Consulta_Repetido(objC_Contrato)
-        vl_s_IDxiste = 0
+        vl_s_IDxiste = SQL_C_Contrato.Consulta_Repetido(objC_Contrato)
         If vl_s_IDxiste = 0 Then
 
             objC_Contrato.Descripcion = Request.Form("Descripcion")

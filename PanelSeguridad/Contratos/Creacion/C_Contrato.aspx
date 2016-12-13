@@ -504,6 +504,7 @@
             <input id="Btnguardar" type="button" value="Guardar" onclick="BtnCrear();" />
         </div>
     </div>
+
     <div id="dialog" title="Basic dialog">
         <table style="width: 100%; text-align: center;">
             <tr>
@@ -524,6 +525,7 @@
             </tr>
         </table>
     </div>
+
     <div id="dialog_eliminar" title="Basic dialog">
         <table style="width: 100%; text-align: center;">
             <tr>
@@ -543,6 +545,7 @@
             </tr>
         </table>
     </div>
+
     <div id="Dialog_Activos">
     </div>
 

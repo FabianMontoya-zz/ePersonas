@@ -12,7 +12,7 @@
     Private _Moneda_ID As Integer
     Private _Producto_ID As Integer
     Private _Condi_Financiacion_ID As Integer
-    Private _Unidad_Tiempo_ID As Integer
+    Private _Unidad_Tiempo_ID As String
     Private _Fecha_Apertura As String
 
     Private _Plazo As Long
@@ -104,11 +104,11 @@
             Me._Condi_Financiacion_ID = value
         End Set
     End Property
-    Public Property Unidad_Tiempo_ID() As Integer
+    Public Property Unidad_Tiempo_ID() As String
         Get
             Return Me._Unidad_Tiempo_ID
         End Get
-        Set(ByVal value As Integer)
+        Set(ByVal value As String)
             Me._Unidad_Tiempo_ID = value
         End Set
     End Property

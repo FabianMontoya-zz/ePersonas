@@ -37,10 +37,10 @@ Public Class C_ContratoSQLClass
             "CON_Valor_Total, " & _
             "CON_Valor_Financiado, " & _
             "CON_Valor_Opc_Compra, " & _
-            "CON_Usuario_Creacion" & _
-            "CON_Fecha_Creacion" & _
-            "CON_Usuario_Actualizacion" & _
-            "CON_Fecha_Actualizacion" & _
+            "CON_Usuario_Creacion, " & _
+            "CON_Fecha_Creacion, " & _
+            "CON_Usuario_Actualizacion, " & _
+            "CON_Fecha_Actualizacion, " & _
             ")")
         sql.AppendLine("VALUES (")
         sql.AppendLine("'" & vp_Obj.Nit_ID & "',")
@@ -83,7 +83,31 @@ Public Class C_ContratoSQLClass
 #End Region
 
 #Region "OTRAS CONSULTAS"
+    ''' <summary>
+    ''' averigua si esta repetido
+    ''' </summary>
+    ''' <param name="vp_O_Obj"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Consulta_Repetido(ByVal vp_O_Obj As C_ContratoClass)
 
+        Dim StrQuery As String = ""
+        Dim Result As String = ""
+        Dim conex As New Conector
+
+        Dim sql As New StringBuilder
+
+        sql.AppendLine(" SELECT COUNT(1) FROM CONTRATOS " & _
+                       " WHERE CO_Nit_ID = '" & vp_O_Obj.Nit_ID & "'" & _
+                       " AND CO_Sucursal_ID = '" & vp_O_Obj.Sucursal_ID & "'" & _
+                       " AND CO_Colocacion_ID = '" & vp_O_Obj.Colocacion_ID & "'")
+
+        StrQuery = sql.ToString
+
+        Result = conex.IDis(StrQuery, "2")
+
+        Return Result
+    End Function
 #End Region
 
 End Class

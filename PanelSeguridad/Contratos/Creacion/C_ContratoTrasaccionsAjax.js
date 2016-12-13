@@ -289,8 +289,7 @@ function transaccionAjax_MTasas(State) {
 
 /*------------------------------ crear ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
-function transacionAjax_C_Contrato_create(State) {
-    
+function transacionAjax_C_Contrato_create(State) {    
     $.ajax({
         url: "C_ContratoAjax.aspx",
         type: "POST",
@@ -312,7 +311,7 @@ function transacionAjax_C_Contrato_create(State) {
             "Ciclo": $("#Select_Ciclo").val(),
             "BaseCalculo": $("#Select_Base_Calculo").val(),
             "Direccion": $("#Select_Direccion").val(),
-            "Total": F_NumericBD($("#TXT_Valor_Total").val()), //Falta validar la suma de ACtivos y el total digitado
+            "Total": F_NumericBD($("#TXT_Valor_Total").val()), //Falta validar la suma de Activos y el total digitado
             "Financiado": F_NumericBD($("#TXT_Valor_Financiado").val()),
             "OpcionCompra": F_NumericBD($("#TXT_Valor_Opcion_Compra").val()),
             "user": User
@@ -321,31 +320,16 @@ function transacionAjax_C_Contrato_create(State) {
         success: function (result) {
             switch (result) {
 
-                case "Error":
-                    $("#dialog").dialog("option", "title", "Disculpenos :(");
-                    $("#Mensaje_alert").text("No se realizo el ingreso del Contrato!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "block");
-                    $("#SE").css("display", "none");
-                    $("#WA").css("display", "none");
+                case "Error":                    
+                    Mensaje_General("Disculpenos :(", "No se realizó el ingreso de la nueva colocación.", "E");
                     break;
 
-                case "Existe":
-                    $("#dialog").dialog("option", "title", "Ya Existe");
-                    $("#Mensaje_alert").text("El codigo ingresado ya existe en la base de datos!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "None");
-                    $("#SE").css("display", "none");
-                    $("#WE").css("display", "block");
+                case "Existe":                    
+                    Mensaje_General("¡Código Repetido!", "El código ingresado ya se encuentra registrado en la Base de Datos.", "W");
                     break;
 
                 case "Exito":
-                    $("#dialog").dialog("option", "title", "Exito");
-                    $("#Mensaje_alert").text("El Contrato fue creado exitosamente! ");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "none");
-                    $("#SE").css("display", "block");
-                    $("#WA").css("display", "none");
+                    Mensaje_General("¡Colocación Agregada!", "La colocación se ha agregado correctamente.", "S");
                     Clear();
                     break;
             }

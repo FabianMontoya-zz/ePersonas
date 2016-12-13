@@ -137,16 +137,20 @@ $(document).ready(function () {
     });
 
     $("#Select_Base_Calculo").prop('disabled', true); //Desactivamos el Chosen
+
+    /*Carga de todas las funciones para detectar el Change en los Combos y formatos en los TXT*/
     Change_Select_Nit();
     Change_Select_Sucursal();
     Change_Select_Moneda();
     Change_Select_Documento_C();
     Change_Select_Documento_C2();
 
+    Change_Select_Relacion();
     Change_Select_Producto();
     Change_Select_Condicion_Financiacion();
     Change_Select_Unidad_Tiempo();
     Change_Select_Signo_Puntos();
+
     Change_Select_Base_Calculo();
 
     Format_Adress("Txt_Adress_C");
@@ -440,6 +444,17 @@ function Change_Select_Documento_C2() {
     });
 }
 
+function Change_Select_Relacion() {
+    $("#Select_Relacion").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_Relacion").val() == "-1") {
+            $("#Img20").css("display", "inline-table");
+        } else {
+            $("#Img20").css("display", "none");
+        }
+    });
+}
+
 function Change_Select_Moneda() {
     $("#Select_Moneda_C").change(function () {
         /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
@@ -702,8 +717,8 @@ function BtnCrear() {
 
     if (validate == 0) {
         if (Persona1 == true) {
-            //transacionAjax_C_Contrato_create("crear");
-            Mensaje_General("¡Colocación Agregada!", "La colocación se ha agregado correctamente.", "S");
+            transacionAjax_C_Contrato_create("crear");
+            //Mensaje_General("¡Colocación Agregada!", "La colocación se ha agregado correctamente.", "S");
             Ocultar_IMGS_Errores();
         }
         else {
@@ -877,9 +892,62 @@ function ClearTerceros() {
     $("#Select_Relacion").val("-1").trigger("chosen:updated");
 }
 
-//limpiar campos
+//limpia campos y tablas del formulario principal
 function Clear() {
-    /*[Todo el código para limpiar los campos]*/
+    $("#Select_EmpresaNit").val("-1").trigger("chosen:updated");
+    $("#Select_Sucursal_C").val("-1").trigger("chosen:updated");
+    $("#TXT_ID_Colocacion").val("");
+    $("#TXT_Descripcion").val("");
+    $("#Select_Documento_C").val("-1").trigger("chosen:updated");
+
+    $("#TxtDoc_C").val("");
+    $("#V_Persona").html("");
+    $("#Select_Moneda_C").val("-1").trigger("chosen:updated");
+    $("#Select_Producto").val("-1").trigger("chosen:updated");
+    $("#Select_Condicion_Financiacion").val("-1").trigger("chosen:updated");
+
+    $("#Select_Tiempo").val("-1").trigger("chosen:updated");
+    $("#TXT_Fecha_Apertura").val("");
+    $("#L_Tiempo").html("");
+    $("#TXT_Plazo").val("");
+    $("#Select_Ciclo").val("-1").trigger("chosen:updated");
+
+    $("#Select_Base_Calculo").val("-1").trigger("chosen:updated");
+    $("#Select_Direccion").val("-1").trigger("chosen:updated");
+    $("#L_Moneda").html("");
+    $("#TXT_Valor_Total").val("");
+    $("#L_Moneda_2").html("");
+
+    $("#L_Total_Activos").html("");
+    $("#L_Moneda_3").html("");
+    $("#TXT_Valor_Financiado").val("");
+    $("#L_Moneda_4").html("");
+    $("#TXT_Valor_Opcion_Compra").val("");
+
+    $("#L_Moneda_5").html("");
+    $("#L_Cuota_Tasa").html("");
+    $("#L_Modalidad_Pago").html("");
+    $("#L_Tiempo_2").html("");
+    $("#L_Periodo_Pago").html("");
+
+    $("#L_Tipo_Cuota").html("");
+    $("#L_Base_Calculo").html("");
+    $("#Select_Ciclo_2").val("-1").trigger("chosen:updated");
+    $("#L_Tasa").html("");
+    $("#L_Periodo").html("");
+
+    $("#Select_Signo_Puntos").val("+").trigger("chosen:updated");
+    $("#TXT_Puntos_Adicionales").val("");
+    $("#L_Equivalencia_Efectiva").html("");
+    $("#L_Nominal_Actual").html("");
+    $("#L_Tasa_Mora").html("");
+    $("#L_Tasa_Usura").html("");
+    /*Reiniciamos la tabla de activos*/
+
+    /*Reiniciamos la tabla de Terceros*/
+    ArrayTerceros = [];
+    AddArrayToTable();
+    ContTerceros = 0;   
 }
 
 function Add_Activos(index) {
@@ -897,20 +965,22 @@ function Add_Terceros(index) {
 
 //Agregamos el tercero
 function BTNAgregarTercero() {
+    var valido = ValidarIngresoTerceros();
 
-    if (Persona2 == true) {
-        var valido = ValidarIngresoTerceros();
-
-        if (valido == true) {
+    if (valido == true) {
+        if (Persona2 == true) {
             var ok = Json_Terceros();
 
             if (ok == true) {
                 Mensaje_General("¡Persona Relacionada!", "Se ha relacionado la persona correctamente.", "S");
                 ClearTerceros();
             }
+
+        } else {
+            Mensaje_General("¡Datos Incompletos!", "No puedes ingresar una persona que no esté registrada en el sistema.", "W");
+            $("#Img_D_C2").css("display", "inline-table");
+            $("#Img_TD_C2").css("display", "inline-table");
         }
-    } else {
-        Mensaje_General("¡Datos Incompletos!", "No puedes ingresar una persona que no esté registrada en el sistema.", "W");
     }
 }
 
@@ -938,7 +1008,7 @@ function AddArrayToTable() {
 //Dialog para eliminar Personas de Tabla de Terceros
 function Eliminar_Registro(index) {
     $("#dialog_eliminar").dialog("open");
-    $("#dialog_eliminar").dialog("option", "title", "Eliminar Persona");
+    $("#dialog_eliminar").dialog("option", "title", "¿Eliminar Persona?");
     indexTerceros = index;
 }
 
@@ -1010,7 +1080,7 @@ function Table_Activos() {
 function Table_Terceros() {
     var colocacion;
     $("#L_Empresa").html($("#Select_EmpresaNit option:selected").html());
-    $("#L_Colocacion").html($("#TXT_ID_Colocacion").val());    
+    $("#L_Colocacion").html($("#TXT_ID_Colocacion").val());
 }
 
 function Descripcion_Tasa(index) {
@@ -1078,8 +1148,6 @@ function TasaMora() {
     id = Matrix_Tasas[0].Codigo_ID.toString();
     num = Matrix_Tasas[0].Equivalencia_Efectiva.toString();
     valor = id + " - " + num + "%";
-
-    return valor;
 
     return valor;
 }
