@@ -39,22 +39,12 @@ Public Class C_ActivosSQLClass
             ")")
         sql.AppendLine("VALUES (")
         sql.AppendLine("'" & vp_Obj.Nit_ID & "',")
-        sql.AppendLine("'" & vp_Obj.Contrato_ID & "',")
         sql.AppendLine("'" & vp_Obj.Descripcion & "',")
-        sql.AppendLine("'" & vp_Obj.TypeDocument_ID & "',")
-        sql.AppendLine("'" & vp_Obj.Document_ID & "',")
         sql.AppendLine("'" & vp_Obj.Cod_Moneda_ID & "',")
-        sql.AppendLine("'" & vp_Obj.Val_Cont & "',")
-        sql.AppendLine("'" & vp_Obj.Val_Finan & "',")
         sql.AppendLine("'" & vp_Obj.Val_Op_Compra & "',")
-        sql.AppendLine("'" & vp_Obj.Estado_Cont_ID & "',")
-        sql.AppendLine("'" & vp_Obj.Saldo_Cap & "',")
-        sql.AppendLine("'" & vp_Obj.Saldo_Int & "',")
-        sql.AppendLine("'" & vp_Obj.Saldo_Int_Mora & "',")
-        sql.AppendLine("'" & vp_Obj.Saldo_Otros & "',")
         sql.AppendLine("'" & vp_Obj.Secuencia_Cargue & "',")
-        sql.AppendLine("'" & vp_Obj.FechaActualizacion & "',")
-        sql.AppendLine("'" & vp_Obj.Usuario & "' ) ")
+        sql.AppendLine("'" & vp_Obj.UsuarioActualizacion & "',")
+        sql.AppendLine("'" & vp_Obj.FechaActualizacion & "' ) ")
 
         StrQuery = sql.ToString
 
@@ -65,63 +55,6 @@ Public Class C_ActivosSQLClass
     End Function
 
 #Region "CONSULTAS DROP LIST"
-
-    ''' <summary>
-    ''' crea la consulta para cargar el combo
-    ''' </summary>
-    ''' <param name="vp_S_ID"></param>
-    ''' <returns></returns>
-    ''' <remarks></remarks>
-    Public Function Charge_DropListEstado_Contrato(ByVal vp_S_ID As String)
-
-        Dim ObjListDroplist As New List(Of Droplist_Class)
-        Dim StrQuery As String = ""
-        Dim conex As New Conector
-        Dim Conexion As String = conex.typeConexion("2")
-
-        Dim SQLGeneral As New GeneralSQLClass
-        Dim sql As New StringBuilder
-
-        sql.Append(" SELECT EC_ID AS ID, CAST(EC_ID AS NVARCHAR(10))+ ' - ' + EC_Descripcion AS Descripcion FROM CONTRATO_ESTADO " & _
-                   " ORDER BY EC_ID ASC  ")
-        StrQuery = sql.ToString
-
-        ObjListDroplist = SQLGeneral.listdrop(StrQuery, Conexion)
-
-        Return ObjListDroplist
-
-    End Function
-
-    ''' <summary>
-    ''' crea la consulta para cargar el combo
-    ''' </summary>
-    ''' <param name="vp_S_ID"></param>
-    ''' <returns></returns>
-    ''' <remarks></remarks>
-    Public Function Charge_DropListHijo_Cliente(ByVal vp_S_ID As String)
-
-        Dim ObjListDroplist As New List(Of Droplist_Class)
-        Dim StrQuery As String = ""
-        Dim conex As New Conector
-        Dim Conexion As String = conex.typeConexion("2")
-
-        Dim SQLGeneral As New GeneralSQLClass
-        Dim sql As New StringBuilder
-
-        sql.Append(" SELECT  CAST(CLI_TypeDocument_ID AS NVARCHAR(4)) + '_' + CAST(CLI_Document_ID AS NVARCHAR(20)) AS ID, " & _
-                   " CAST(CLI_TypeDocument_ID AS NVARCHAR(4)) + ' - ' + CAST(CLI_Document_ID AS NVARCHAR(20)) + ' - ' + CLI_Nombre AS Descripcion " & _
-                   " FROM CLIENTE " & _
-                   " WHERE CLI_OP_Cliente = 'S' " & _
-                   " AND CLI_Nit_ID = '" & vp_S_ID & "'" & _
-                   " ORDER BY CLI_Nombre ASC ")
-
-        StrQuery = sql.ToString
-
-        ObjListDroplist = SQLGeneral.listdrop(StrQuery, Conexion)
-
-        Return ObjListDroplist
-
-    End Function
 
 
 #End Region
@@ -157,20 +90,7 @@ Public Class C_ActivosSQLClass
         Select Case vp_S_Type
             Case "List"
 
-            Case "Matrix_Contrato"
-                'recorremos la consulta por la cantidad de datos en la BD
-                While ReadConsulta.Read
-
-                    Dim objC_Activos As New C_ActivosClass
-                    'cargamos datos sobre el objeto de login
-                    objC_Activos.Contrato_ID = ReadConsulta.GetValue(0)
-                    objC_Activos.Descripcion = ReadConsulta.GetValue(1)
-                    objC_Activos.Nit_ID = ReadConsulta.GetValue(2)
-
-                    'agregamos a la lista
-                    ObjListC_Activos.Add(objC_Activos)
-
-                End While
+         
 
         End Select
 
@@ -202,7 +122,7 @@ Public Class C_ActivosSQLClass
         Dim sql As New StringBuilder
 
         sql.AppendLine(" SELECT COUNT(1) FROM CONTRATOS " & _
-                       " WHERE CON_Nit_ID = '" & vp_O_Obj.Nit_ID & "' AND CON_Contrato_ID = '" & vp_O_Obj.Contrato_ID & "'")
+                       " WHERE CON_Nit_ID = '" & vp_O_Obj.Nit_ID & "' AND CON_Contrato_ID = '" & vp_O_Obj.TypeDocument_ID_R & "'")
 
         StrQuery = sql.ToString
 
@@ -211,22 +131,7 @@ Public Class C_ActivosSQLClass
         Return Result
     End Function
 
-    Function Matrix_Contratos()
 
-        Dim ObjList As New List(Of C_ActivosClass)
-        Dim conex As New Conector
-        Dim Conexion As String = conex.typeConexion("2")
-
-        Dim sql As New StringBuilder
-
-        sql.AppendLine(" SELECT CON_Contrato_ID, CAST(CON_Contrato_ID AS NVARCHAR(20)) + ' _ '+ CON_Descripcion AS DESCRIPCION, CON_Nit_ID FROM CONTRATOS ")
-
-        Dim StrQuery As String = sql.ToString
-
-        ObjList = listC_Activos(StrQuery, Conexion, "Matrix_Contrato")
-
-        Return ObjList
-    End Function
 
 #End Region
 

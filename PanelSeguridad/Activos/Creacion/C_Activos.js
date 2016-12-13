@@ -33,32 +33,25 @@ $(document).ready(function () {
     transaccionAjax_MPaises_Ciudades('MATRIX_PAIS_CIUDAD');
     transaccionAjax_MPersonas('MATRIX_PERSONAS');
     transaccionAjax_MSucursal('MATRIX_SUCURSAL');
-    transacionAjax_ListaClaseFasecolda("LIST_CLASE_F");
     transacionAjax_MMoneda('MATRIX_MONEDA');
     transacionAjax_MFasecolda("MATRIX_FASECOLDA");
     transacionAjax_MMarcaClase_F("MATRIX_MARCA_CLASE_F");
     transacionAjax_MLineaMarcaClase_F("MATRIX_LINEA_MARCA_CLASE_F");
+ transacionAjax_ListaClaseFasecolda("LIST_CLASE_F");
 
     transacionAjax_EmpresaNit('Cliente')
     transacionAjax_Documento('Documento');
+    transacionAjax_Colores("Colores");
     transacionAjax_Tipo('Tipo');
-    // transacionAjax_Estado('Estado');
-    $("#Img_TD").css("display", "none");
-    $("#Img_D").css("display", "none");
 
-    $("#Img1").css("display", "none");
-    $("#Img2").css("display", "none");
-    $("#Img3").css("display", "none");
-    $("#Img5").css("display", "none");
-    $("#Img6").css("display", "none");
-    $("#Img7").css("display", "none");
-
-    $("#Img8").css("display", "none");
-    $("#Img9").css("display", "none");
-    $("#Img10").css("display", "none");
-    $("#Img11").css("display", "none");
-    $("#Img12").css("display", "none");
-    $("#Img13").css("display", "none");
+    //CAMPOS GENERALES
+    Clear_Ima_G();
+    //CAMPOS LLAVES
+    Clear_Ima_K();
+    //CAMPOS INMUEBLE
+    Clear_Ima_I();
+    //CAMPOS  VEHICULOS
+    Clear_Ima_F();
 
     $("#Blo_Inmuebles").css("display", "none");
     $("#Blo_Fasecolda").css("display", "none");
@@ -99,7 +92,7 @@ $(document).ready(function () {
         }
     });
 
-    $("#Dialog_Activos").dialog({
+    $("#Dialog_Factura").dialog({
         autoOpen: false,
         dialogClass: "Dialog_Sasif",
         modal: true,
@@ -143,10 +136,11 @@ $(document).ready(function () {
 //crear link en la BD
 function BtnCrear() {
     var validate;
-    validate = validarCamposCrear();
+    validate = ValidarGuardado();
 
     if (validate == 0) {
-        transacionAjax_C_Activos_create("crear");
+        alert("mI PERRO pOR fIN");
+        //transacionAjax_C_Activos_create("crear");
     }
 }
 
@@ -165,6 +159,7 @@ function BtnBuscarFacecolda() {
 
     if ($("#Btn_ShearchFacecolda").val() == "Nueva Consulta") {
         $("#Btn_ShearchFacecolda").attr("value", "Consulta Facecolda");
+        Clear_Ima_F();
         Enable_Consult_Fasecolda();
         Clear_Consulta_Fasecolda();
     }
@@ -173,7 +168,10 @@ function BtnBuscarFacecolda() {
 
         switch (validar) {
             case 0:
+                Clear_Ima_F();
+                MostrarValor_Cilindraje_Fasecolda(Index_Modelo);
                 $("#Bloque_datosIngreso").css("display", "inline-table");
+
                 break;
 
             case 1:
@@ -187,124 +185,11 @@ function BtnBuscarFacecolda() {
     }
 }
 
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*----                                                                                                           REGION DE VALIDACIONES                                                                                                   ----*/
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-//valida campos de documentos para buscar persona
-function ValidaCamposPeople() {
-    var valida = 0;
-    var C_Nit_ID = $("#Select_EmpresaNit").val();
-    var C_TD = $("#Select_Documento").val();
-    var C_D = $("#TxtDoc").val();
-
-    if (C_Nit_ID == "-1" || C_TD == "-1" || C_D == "") {
-        valida = 1;
-        if (C_TD == "-1") { $("#Img_TD").css("display", "inline-table"); } else { $("#Img_TD").css("display", "none"); }
-        if (C_D == "") { $("#Img_D").css("display", "inline-table"); } else { $("#Img_D").css("display", "none"); }
-        if (C_Nit_ID == "-1") { $("#Img1").css("display", "inline-table"); } else { $("#Img1").css("display", "none"); }
-    }
-    else {
-        $("#Img1").css("display", "none");
-        $("#Img_TD").css("display", "none");
-        $("#Img_D").css("display", "none");
-    }
-    return valida;
-}
-
-//validamos que tipo de busqueda es y verificamos
-function ValidaCamposConsultaFasecolda() {
-
-    var TipoBusqueda;
-    var Busqueda;
-
-    var Campo_BF_1 = $("#TxtFasecolda_ID").val();
-    var Campo_BF_2 = $("#Select_ClaseF").val();
-    var Campo_BF_3 = $("#Select_MarcaF").val();
-    var Campo_BF_4 = $("#Select_LineaF").val();
-    var Campo_BF_5 = $("#Select_modelo").val();
-
-    switch (Campo_BF_1) {
-
-        case "":
-            TipoBusqueda = 0;
-            if (Campo_BF_5 == "-1" || Campo_BF_4 == "" || Campo_BF_3 == "" || Campo_BF_4 == "-1" || Campo_BF_3 == "-1" || Campo_BF_2 == "-1") {
-                Busqueda = 1;
-            }
-            else {
-                Busqueda = Search_Fasecolda(TipoBusqueda, "", Campo_BF_2, Campo_BF_3, Campo_BF_4, Campo_BF_5);
-            }
-            break;
-
-        default:
-            TipoBusqueda = 1;
-            Busqueda = Search_Fasecolda(TipoBusqueda, Campo_BF_1, "", "", "", "");
-            break;
-    }
-
-    return Busqueda;
-}
-
-//validamos campos para la creacion del formulario
-function validarCamposCrear() {
-
-    var Campo_1 = $("#Select_EmpresaNit").val();
-    var Campo_2 = $("#Txt_ID").val();
-    var Campo_3 = $("#TxtDescripcion").val();
-    var Campo_4 = $("#Select_H_Cliente").val();
-    var Campo_5 = $("#Select_Estado").val();
-    var Campo_6 = $("#Select_Moneda").val();
-
-    var validar = 0;
-
-    if (Campo_6 == "-1" || Campo_5 == "-1" || Campo_4 == "-1" || Campo_3 == "" || Campo_2 == "" || Campo_1 == "-1") {
-        validar = 1;
-        if (Campo_1 == "-1") {
-            $("#Img1").css("display", "inline-table");
-        }
-        else {
-            $("#Img1").css("display", "none");
-        }
-        if (Campo_2 == "") {
-            $("#Img2").css("display", "inline-table");
-        }
-        else {
-            $("#Img2").css("display", "none");
-        }
-        if (Campo_3 == "") {
-            $("#Img3").css("display", "inline-table");
-        }
-        else {
-            $("#Img3").css("display", "none");
-        }
-        if (Campo_4 == "-1") {
-            $("#Img5").css("display", "inline-table");
-        }
-        else {
-            $("#Img5").css("display", "none");
-        }
-        if (Campo_5 == "-1") {
-            $("#Img6").css("display", "inline-table");
-        }
-        else {
-            $("#Img6").css("display", "none");
-        }
-        if (Campo_6 == "-1") {
-            $("#Img7").css("display", "inline-table");
-        }
-        else {
-            $("#Img7").css("display", "none");
-        }
-
-    }
-    else {
-        $("#Img7").css("display", "none");
-        $("#Img6").css("display", "none");
-        $("#Img5").css("display", "none");
-        $("#Img3").css("display", "none");
-        $("#Img2").css("display", "none");
-        $("#Img1").css("display", "none");
-    }
-    return validar;
+//abre el dialog de agregar faturas
+function Add_Facturas(index) {
+    $("#Dialog_Factura").dialog("open");
+    $("#Dialog_Factura").dialog("option", "title", "Crear Factura");
+    Table_Activos();
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -361,9 +246,7 @@ function Captura_parametro() {
 function Search_Fasecolda(Type, Cod_id, Clase, Marca, Linea, Modelo) {
 
     var EncuentraDato = 2;
-
     if (Type == 0) {
-        var StrYear = Modelo.split("_");
 
         for (itemArray in Matrix_Fasecolda) {
             if (Matrix_Fasecolda[itemArray].Clase == Clase &&
@@ -371,17 +254,15 @@ function Search_Fasecolda(Type, Cod_id, Clase, Marca, Linea, Modelo) {
                 Matrix_Fasecolda[itemArray].Fasecolda_ID == Linea) {
                 EncuentraDato = 0;
                 $("#TxtFasecolda_ID").val(Matrix_Fasecolda[itemArray].Fasecolda_ID);
-                $("#Txt_Cilindraje").val(Matrix_Fasecolda[itemArray].Cilindraje);
 
-                var Str_Valor = Matrix_Fasecolda[itemArray]["Year_" + StrYear[1]];
-                Str_Valor = Str_Valor + "000";
-                $("#V_Valor_F").html(dinner_format_grid(Str_Valor, ""));
+                MostrarValor_Cilindraje_Fasecolda(Modelo);
                 $("#Btn_ShearchFacecolda").attr("value", "Nueva Consulta");
                 Disable_Consult_Fasecolda();
             }
         }
     }
     else {
+
         for (itemArray in Matrix_Fasecolda) {
             if (Matrix_Fasecolda[itemArray].Fasecolda_ID == Cod_id) {
                 EncuentraDato = 0;
@@ -389,7 +270,8 @@ function Search_Fasecolda(Type, Cod_id, Clase, Marca, Linea, Modelo) {
                 Charge_Combos_Depend_Nit(Matrix_MarcaClase_F, "Select_MarcaF", Matrix_Fasecolda[itemArray].Clase, Matrix_Fasecolda[itemArray].Marca);
                 Charge_Combos_Depend_Verificacion(Matrix_LineaMarcaClase_F, "Select_LineaF", Matrix_Fasecolda[itemArray].Marca, Matrix_Fasecolda[itemArray].Clase, Matrix_Fasecolda[itemArray].Fasecolda_ID);
                 Index_Year = itemArray;
-                $("#Txt_Cilindraje").val(Matrix_Fasecolda[itemArray].Cilindraje);
+
+                MostrarValor_Cilindraje_Fasecolda(Modelo);
                 $("#Btn_ShearchFacecolda").attr("value", "Nueva Consulta");
                 Disable_Consult_Fasecolda();
             }
@@ -399,7 +281,22 @@ function Search_Fasecolda(Type, Cod_id, Clase, Marca, Linea, Modelo) {
     return EncuentraDato;
 }
 
-//limpiar campos
+//ajusta y muestra el valor fasecolda y el cilindraje
+function MostrarValor_Cilindraje_Fasecolda(Str_val) {
+
+    var Str_Valor = "";
+    var StrYear = Str_val.split("_");
+
+    Str_Valor = Matrix_Fasecolda[Index_Year]["Year_" + StrYear[1]];
+    Str_Valor = Str_Valor + "000";
+    $("#V_Valor_F").html(dinner_format_grid(Str_Valor, ""));
+    $("#Txt_Cilindraje").val(Matrix_Fasecolda[Index_Year]["Cilindraje"]);
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                              MENSAJES, VISUALIZACION Y LIMPIEZA                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//limpiar campos fasecolda
 function Clear_Consulta_Fasecolda() {
 
     $("#TxtFasecolda_ID").val("");
@@ -412,6 +309,48 @@ function Clear_Consulta_Fasecolda() {
     $("#V_Valor_F").html("");
 
     $('.C_Chosen').trigger('chosen:updated');
+}
+
+//limpiar Imagenes fasecolda
+function Clear_Ima_F() {
+    $("#Fase_10").css("display", "none");
+    $("#Fase_9").css("display", "none");
+    $("#Fase_8").css("display", "none");
+    $("#Fase_7").css("display", "none");
+    $("#Fase_6").css("display", "none");
+    $("#Fase_5").css("display", "none");
+    $("#Fase_4").css("display", "none");
+    $("#Fase_3").css("display", "none");
+    $("#Fase_2").css("display", "none");
+    $("#Fase_1").css("display", "none");
+}
+
+//limpiar Imagenes Generales
+function Clear_Ima_G() {
+    $("#Img_TD").css("display", "none");
+    $("#Img_D").css("display", "none");
+    $("#Img1").css("display", "none");
+    $("#Img2").css("display", "none");
+    $("#Img3").css("display", "none");
+    $("#Img5").css("display", "none");
+    $("#Img6").css("display", "none");
+    $("#Img7").css("display", "none");
+    $("#Img8").css("display", "none");
+    $("#Img9").css("display", "none");
+}
+
+//limpiar Imagenes llaves
+function Clear_Ima_K() {
+    $("#K_1").css("display", "none");
+    $("#K_2").css("display", "none");
+    $("#K_3").css("display", "none");
+    $("#K_4").css("display", "none");
+}
+
+//limpiar Imagenes inmuebles
+function Clear_Ima_I() {
+    $("#Inmu_1").css("display", "none");
+    $("#Inmu_2").css("display", "none");
 }
 
 //Bloquea controles 
@@ -436,15 +375,4 @@ function Enable_Consult_Fasecolda() {
     $('.C_Chosen').trigger('chosen:updated');
 }
 
-
-
-function Add_Facturas(index) {
-    $("#Dialog_Activos").dialog("open");
-    $("#Dialog_Activos").dialog("option", "title", "Crear Factura");
-    Table_Activos();
-}
-
-function Table_Activos() {
-    $("#container_TActivos").html("");
-}
 

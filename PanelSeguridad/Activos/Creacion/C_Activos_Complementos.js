@@ -7,6 +7,8 @@ var A_0 = [];
 var A_C = 0;
 var A0 = 0;
 var C_P = 0;
+var Tipo_Activo;
+var Index_Modelo;
 /*--------------- region de variables globales --------------------*/
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -63,7 +65,7 @@ function Change_Select_TA() {
                 $("#Tabla_LLave_Vehiculos").css("display", "none");
                 $("#Blo_Inmuebles").css("display", "inline-table");
                 $("#Blo_Fasecolda").css("display", "none");
-                // $("#Acordeon_Activo").accordion("option", "active", 1);
+                Tipo_Activo = 1;
                 break;
 
             case "2":
@@ -73,8 +75,8 @@ function Change_Select_TA() {
                 $("#Blo_Inmuebles").css("display", "none");
                 $("#Blo_Fasecolda").css("display", "inline-table");
                 $("#Txtkey_1").html("Placa");
-                //   $("#Acordeon_Activo").accordion("option", "active", 1);
                 Year_work = Captura_parametro();
+                Tipo_Activo = 2;
                 break;
 
             case "-1":
@@ -84,6 +86,7 @@ function Change_Select_TA() {
                 $("#Blo_Inmuebles").css("display", "none");
                 $("#Blo_Fasecolda").css("display", "none");
                 $("#Txtkey_1").html("C. Identificación");
+                Tipo_Activo = 0;
                 break;
 
             default:
@@ -120,15 +123,8 @@ function Change_Select_Marca() {
 //muestra los campos de diligenciamiento fasecolda
 function Change_Select_Modelo() {
     $("#Select_modelo").change(function () {
-        var index_ID = this.value;
-
-        var StrYear = index_ID.split("_");
-
-        var Str_Valor = Matrix_Fasecolda[Index_Year]["Year_" + StrYear[1]];
-        Str_Valor = Str_Valor + "000";
-        $("#V_Valor_F").html(dinner_format_grid(Str_Valor, ""));
-        $("#Txt_Cilindraje").val(Matrix_Fasecolda[Index_Year]["Cilindraje"]);
-     });
+        Index_Modelo = this.value;
+    });
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/

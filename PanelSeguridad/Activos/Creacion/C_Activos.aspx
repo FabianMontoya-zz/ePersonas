@@ -8,6 +8,7 @@
     <script src="C_Activos.js" type="text/javascript"></script>
     <script src="C_ActivosTrasaccionsAjax.js" type="text/javascript"></script>
     <script src="C_Activos_Complementos.js" type="text/javascript"></script>
+    <script src="C_Activos_Validacion.js" type="text/javascript"></script>
     <link href="../../css/css_login.css" rel="stylesheet" type="text/css" />
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
     <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />
@@ -117,7 +118,7 @@
                                 </td>
                                 <td style="width: 5%; padding-bottom: 25px;">
                                     <span class="cssToolTip">
-                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img5"
+                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="K_1"
                                             src="../../images/error.png" />
                                         <span class="SpamEG"></span></span>
                                 </td>
@@ -130,7 +131,7 @@
                                 </td>
                                 <td style="width: 5%; padding-bottom: 25px;">
                                     <span class="cssToolTip">
-                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img6"
+                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="K_2"
                                             src="../../images/error.png" />
                                         <span class="SpamEG"></span></span>
                                 </td>
@@ -143,7 +144,7 @@
                                 </td>
                                 <td style="width: 5%; padding-bottom: 25px;">
                                     <span class="cssToolTip">
-                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img7"
+                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="K_3"
                                             src="../../images/error.png" />
                                         <span class="SpamEG"></span></span>
 
@@ -161,7 +162,7 @@
                                 </td>
                                 <td style="width: 50%; padding-bottom: 25px;">
                                     <span class="cssToolTip">
-                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img8"
+                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="K_4"
                                             src="../../images/error.png" />
                                         <span class="SpamEG"></span></span>
                                 </td>
@@ -212,7 +213,7 @@
                                 </td>
                                 <td style="width: 40%; padding-bottom: 25px;">
                                     <span class="cssToolTip">
-                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img10"
+                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img5"
                                             src="../../images/error.png" />
                                         <span class="SpamEG"></span></span>
                                 </td>
@@ -228,7 +229,7 @@
                                 </td>
                                 <td style="padding-bottom: 25px; width: 41%;">
                                     <span class="cssToolTip">
-                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img11"
+                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img6"
                                             src="../../images/error.png" />
                                         <span class="SpamEG"></span></span>
                                 </td>
@@ -295,6 +296,53 @@
                             </tr>
                         </table>
                     </div>
+                    <h3>Ubicación
+                    </h3>
+                    <div id="UbicacionBien" style="height: 200px;">
+                        <table id="Tabla_Ubicacion" style="width: 100%;">
+                            <tr>
+                                <td class="Label_Bold" style="width: 7.7%;">Pais
+                                </td>
+                                <td style="width: 20%;">
+                                    <select id="Select_Pais_U" class="C_Chosen">
+                                    </select>
+                                </td>
+                                <td style="width: 6%; padding-bottom: 25px;">
+                                    <span class="cssToolTip">
+                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img7"
+                                            src="../../images/error.png" />
+                                        <span class="SpamEG"></span></span>
+                                </td>
+                                <td class="Label_Bold" style="width: 10%; text-align: right">Ciudad
+                                </td>
+                                <td style="width: 20%;">
+                                    <select id="Select_Ciudad_U" class="C_Chosen">
+                                    </select>
+                                </td>
+                                <td style="width: 10%; padding-bottom: 25px;">
+                                    <span class="cssToolTip">
+                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img8"
+                                            src="../../images/error.png" />
+                                        <span class="SpamEG"></span></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="Label_Bold" style="width: 7.7%;">Dirección
+                                </td>
+                                <td style="width: 20%;">
+                                    <span class="cssToolTip_Form">
+                                        <input type="text" id="Txt_Adress_U" maxlength="50" style="width: 200px;" readonly="readonly" />
+                                        <span class="Spam_A_Addres"></span></span>
+                                </td>
+                                <td style="width: 6%; padding-bottom: 25px;" colspan="3">
+                                    <span class="cssToolTip">
+                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img9"
+                                            src="../../images/error.png" />
+                                        <span class="SpamEG"></span></span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                     <h3 id="TitleActivo_2">Activo
                     </h3>
                     <div id="TipoActivo">
@@ -311,15 +359,25 @@
                                                     <option value="2">2 - Escritura independiente</option>
                                                 </select>
                                             </td>
-                                            <td style="width: 6%; padding-bottom: 25px;"></td>
+                                            <td style="width: 6%; padding-bottom: 25px;">
+                                                <span class="cssToolTip">
+                                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Inmu_1"
+                                                        src="../../images/error.png" />
+                                                    <span class="SpamEG"></span></span>
+                                            </td>
                                             <td class="Label_Bold" style="width: 15%;">N° Escritura Inmueble Notaria
                                             </td>
                                             <td style="width: 20%;">
-                                                <span class="cssToolTip_Form">
+                                                <span class="cssToolTip_Form_T">
                                                     <input type="text" class="Numeric_letter" id="Txt_NunImobiliaria" maxlength="17" style="width: 180px;" />
                                                     <span class="Spam_ANL"></span></span>
                                             </td>
-                                            <td style="width: 10%; padding-bottom: 25px;"></td>
+                                            <td style="width: 10%; padding-bottom: 25px;">
+                                                <span class="cssToolTip_L">
+                                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Inmu_2"
+                                                        src="../../images/error.png" />
+                                                    <span class="SpamEG"></span></span>
+                                            </td>
                                         </tr>
                                     </table>
                                 </td>
@@ -330,14 +388,14 @@
                                 <td>
                                     <table id="Codigo_Fasecolda" style="width: 100%;">
                                         <tr>
-                                            <td class="Label_Bold" style="width: 15.5%;">Codigo Fasecolda
+                                            <td class="Label_Bold" style="width: 12.8%;">Codigo Fasecolda
                                             </td>
-                                            <td style="width: 70%;">
+                                            <td style="width: 20%;">
                                                 <span class="cssToolTip_Form">
-                                                    <input type="text" class="Numeric" id="TxtFasecolda_ID" maxlength="8" style="width: 100%;" />
+                                                    <input type="text" class="Numeric" id="TxtFasecolda_ID" maxlength="8" style="width: 90%;" />
                                                     <span class="Spam_ANL"></span></span>
                                             </td>
-                                            <td style="width: 5%; padding-bottom: 25px;">
+                                            <td style="width: 50%; padding-bottom: 25px;">
                                                 <span class="cssToolTip">
                                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Fase_1"
                                                         src="../../images/error.png" />
@@ -432,7 +490,13 @@
                                                         <input type="text" class="Numeric" id="Txt_Cilindraje" maxlength="5" style="width: 30%;" />
                                                         <span class="Spam_ANL"></span></span>
                                                 </td>
-                                                <td style="width: 5%;"></td>
+                                                <td style="width: 5%; padding-bottom: 25px;">
+                                                    <span class="cssToolTip">
+                                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Fase_6"
+                                                            src="../../images/error.png" />
+                                                        <span class="SpamEG"></span></span>
+
+                                                </td>
                                                 <td class="Label_Bold" style="width: 8.5%;">Número de motor
                                                 </td>
                                                 <td style="width: 10%;">
@@ -496,7 +560,7 @@
                                                 </td>
                                                 <td style="width: 10%; padding-bottom: 25px;">
                                                     <span class="cssToolTip">
-                                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img9"
+                                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Fase_7"
                                                             src="../../images/error.png" />
                                                         <span class="SpamEG"></span></span>
                                                 </td>
@@ -531,7 +595,7 @@
                                                 </td>
                                                 <td style="width: 10%; padding-bottom: 25px;">
                                                     <span class="cssToolTip">
-                                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img15"
+                                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Fase_8"
                                                             src="../../images/error.png" />
                                                         <span class="SpamEG"></span></span>
                                                 </td>
@@ -555,7 +619,7 @@
                                                 </td>
                                                 <td style="width: 11.3%; padding-bottom: 25px;">
                                                     <span class="cssToolTip">
-                                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img16"
+                                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Fase_9"
                                                             src="../../images/error.png" />
                                                         <span class="SpamEG"></span></span>
                                                 </td>
@@ -568,7 +632,7 @@
                                                 </td>
                                                 <td style="width: 5%; padding-bottom: 25px;">
                                                     <span class="cssToolTip">
-                                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img17"
+                                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Fase_10"
                                                             src="../../images/error.png" />
                                                         <span class="SpamEG"></span></span>
                                                 </td>
@@ -583,12 +647,7 @@
                                                         <input type="text" class="Numeric" id="Txt_Potencia" maxlength="5" style="width: 30%;" />
                                                         <span class="Spam_ANL"></span></span>
                                                 </td>
-                                                <td style="width: 5%; padding-bottom: 25px;">
-                                                    <span class="cssToolTip">
-                                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img18"
-                                                            src="../../images/error.png" />
-                                                        <span class="SpamEG"></span></span>
-                                                </td>
+                                                <td style="width: 5%; padding-bottom: 25px;"></td>
                                                 <td class="Label_Bold" style="width: 8.5%;"></td>
                                                 <td style="width: 10%;"></td>
                                                 <td style="width: 5%;"></td>
@@ -601,12 +660,7 @@
                                                         <input type="text" class="Numeric_letter" id="Txt_Carroceria" maxlength="30" style="width: 100%;" />
                                                         <span class="Spam_ANL"></span></span>
                                                 </td>
-                                                <td style="width: 5%; padding-bottom: 25px;">
-                                                    <span class="cssToolTip">
-                                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img19"
-                                                            src="../../images/error.png" />
-                                                        <span class="SpamEG"></span></span>
-                                                </td>
+                                                <td style="width: 5%; padding-bottom: 25px;"></td>
                                                 <td class="Label_Bold" style="width: 8.5%;">Tipo de Carroceria
                                                 </td>
                                                 <td style="width: 10%;">
@@ -614,12 +668,7 @@
                                                         <input type="text" class="Numeric_letter" id="Txt_TCarroceria" maxlength="30" style="width: 100%;" />
                                                         <span class="Spam_ANL"></span></span>
                                                 </td>
-                                                <td style="width: 5%; padding-bottom: 25px;">
-                                                    <span class="cssToolTip">
-                                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img20"
-                                                            src="../../images/error.png" />
-                                                        <span class="SpamEG"></span></span>
-                                                </td>
+                                                <td style="width: 5%; padding-bottom: 25px;"></td>
                                             </tr>
                                         </table>
                                         <table id="T_StateBlin" style="width: 100%;">
@@ -676,53 +725,6 @@
                                             </tr>
                                         </table>
                                     </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <h3>Ubicación
-                    </h3>
-                    <div id="UbicacionBien" style="height: 200px;">
-                        <table id="Tabla_Ubicacion" style="width: 100%;">
-                            <tr>
-                                <td class="Label_Bold" style="width: 7.7%;">Pais
-                                </td>
-                                <td style="width: 20%;">
-                                    <select id="Select_Pais_U" class="C_Chosen">
-                                    </select>
-                                </td>
-                                <td style="width: 6%; padding-bottom: 25px;">
-                                    <span class="cssToolTip">
-                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img12"
-                                            src="../../images/error.png" />
-                                        <span class="SpamEG"></span></span>
-                                </td>
-                                <td class="Label_Bold" style="width: 10%; text-align: right">Ciudad
-                                </td>
-                                <td style="width: 20%;">
-                                    <select id="Select_Ciudad_U" class="C_Chosen">
-                                    </select>
-                                </td>
-                                <td style="width: 10%; padding-bottom: 25px;">
-                                    <span class="cssToolTip">
-                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img13"
-                                            src="../../images/error.png" />
-                                        <span class="SpamEG"></span></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="Label_Bold" style="width: 7.7%;">Dirección
-                                </td>
-                                <td style="width: 20%;">
-                                    <span class="cssToolTip_Form">
-                                        <input type="text" id="Txt_Adress_U" maxlength="50" style="width: 200px;" readonly="readonly" />
-                                        <span class="Spam_A_Addres"></span></span>
-                                </td>
-                                <td style="width: 6%; padding-bottom: 25px;" colspan="3">
-                                    <span class="cssToolTip">
-                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img14"
-                                            src="../../images/error.png" />
-                                        <span class="SpamEG"></span></span>
                                 </td>
                             </tr>
                         </table>
@@ -865,9 +867,7 @@
             </tr>
         </table>
     </div>
-    <div id="Dialog_Activos">
-        <div id="container_TActivos">
-        </div>
+    <div id="Dialog_Factura">
     </div>
     <div id="Dialog_Format_Adress">
         <table style="width: 100%; text-align: center; font: 12px/20px CenturyGothic,sans-serif;">

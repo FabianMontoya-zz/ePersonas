@@ -40,6 +40,9 @@ Public Class C_ActivosAjax
                 Case "Documento"
                     CargarDocumento()
 
+                Case "Colores"
+                    CargarColor()
+
                 Case "Buscar_Persona"
                     Search_People()
 
@@ -49,13 +52,6 @@ Public Class C_ActivosAjax
                 Case "Cliente"
                     CargarCliente()
 
-                Case "Hijo_Cliente"
-                    Cargar_HijoCliente()
-
-                Case "Estado"
-                    Cargar_EstadoContrato()
-
-          
                 Case "crear"
                     InsertC_Activos()
 
@@ -80,29 +76,18 @@ Public Class C_ActivosAjax
         Dim vl_s_IDxiste As String
 
         objC_Activos.Nit_ID = Request.Form("Nit_ID")
-        objC_Activos.Contrato_ID = Request.Form("ID")
-
+   
         'validamos si la llave existe
         vl_s_IDxiste = SQL_C_Activos.Consulta_Repetido(objC_Activos)
 
         If vl_s_IDxiste = 0 Then
 
             objC_Activos.Descripcion = Request.Form("Descripcion")
-            objC_Activos.TypeDocument_ID = Request.Form("TDoc")
-            objC_Activos.Document_ID = Request.Form("Doc")
             objC_Activos.Cod_Moneda_ID = Request.Form("Moneda")
-            objC_Activos.Estado_Cont_ID = Request.Form("Es_Contract")
             objC_Activos.Secuencia_Cargue = Request.Form("SecuenciaCargue")
-            objC_Activos.Val_Cont = Request.Form("VContrato")
-            objC_Activos.Val_Finan = Request.Form("VFinanciado")
             objC_Activos.Val_Op_Compra = Request.Form("VOpCompra")
-            objC_Activos.Saldo_Cap = Request.Form("SCapital")
-            objC_Activos.Saldo_Int = Request.Form("SInteres")
-            objC_Activos.Saldo_Int_Mora = Request.Form("SMora")
-            objC_Activos.Saldo_Otros = Request.Form("SOtros")
 
             objC_Activos.FechaActualizacion = Date.Now
-            objC_Activos.Usuario = Request.Form("user")
 
             ObjListC_Activos.Add(objC_Activos)
 
@@ -178,6 +163,20 @@ Public Class C_ActivosAjax
         ObjList_Matrix = SQL.Matrix_PersonasDep()
 
         Response.Write(JsonConvert.SerializeObject(ObjList_Matrix.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga el objeto DDL consulta
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarColor()
+
+        Dim SQL As New ColoresSQLClass
+        Dim ObjListDroplist As New List(Of Droplist_Class)
+
+        ObjListDroplist = SQL.List_Colors()
+        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
 
     End Sub
 
@@ -267,20 +266,7 @@ Public Class C_ActivosAjax
     End Sub
 
 
-    ''' <summary>
-    ''' funcion que carga el objeto DDL consulta
-    ''' </summary>
-    ''' <remarks></remarks>
-    Protected Sub Cargar_EstadoContrato()
-
-        Dim SQL As New C_ActivosSQLClass
-        Dim ObjListDroplist As New List(Of Droplist_Class)
-        Dim vl_S_Tabla As String = Request.Form("tabla")
-
-        ObjListDroplist = SQL.Charge_DropListEstado_Contrato(vl_S_Tabla)
-        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
-
-    End Sub
+   
 
     ''' <summary>
     ''' funcion que carga el objeto DDL consulta
@@ -312,20 +298,7 @@ Public Class C_ActivosAjax
 
     End Sub
 
-    ''' <summary>
-    ''' funcion que carga el objeto DDL consulta
-    ''' </summary>
-    ''' <remarks></remarks>
-    Protected Sub Cargar_HijoCliente()
-
-        Dim SQL As New C_ActivosSQLClass
-        Dim ObjListDroplist As New List(Of Droplist_Class)
-        Dim vl_S_ID As String = Request.Form("ID")
-
-        ObjListDroplist = SQL.Charge_DropListHijo_Cliente(vl_S_ID)
-        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
-
-    End Sub
+   
 
 
 
@@ -343,7 +316,7 @@ Public Class C_ActivosAjax
         Dim vl_S_Nit As String = Request.Form("NIT")
         Dim vl_S_TD As String = Request.Form("TD")
         Dim vl_S_D As String = Request.Form("D")
-    
+
         Dim Str_People As String = SQL.SearchPeople_Exists(vl_S_Nit, vl_S_TD, vl_S_D)
         Response.Write(Str_People)
 

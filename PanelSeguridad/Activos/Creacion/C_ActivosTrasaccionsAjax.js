@@ -1,4 +1,7 @@
-﻿/*-------------------- carga ---------------------------*/
+﻿/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                          MATRICES DE CARGA                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transaccionAjax_MRTSTA(State) {
     $.ajax({
@@ -69,7 +72,7 @@ function transaccionAjax_MPersonas(State) {
             }
             else {
                 Matrix_Personas = JSON.parse(result);
-                Charge_Combo_Persona(Matrix_Personas, "Select_Persona_R", "","");
+                Charge_Combo_Persona(Matrix_Personas, "Select_Persona_R", "", "");
             }
         },
         error: function () {
@@ -95,8 +98,8 @@ function transaccionAjax_MSucursal(State) {
                 Matrix_Sucursal = [];
             }
             else {
-                Matrix_Sucursal  = JSON.parse(result);
-           }
+                Matrix_Sucursal = JSON.parse(result);
+            }
         },
         error: function () {
 
@@ -155,34 +158,6 @@ function transacionAjax_MFasecolda(State) {
     });
 }
 
-/*-------------------- carga ---------------------------*/
-//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_Documento(State) {
-    $.ajax({
-        url: "C_ActivosAjax.aspx",
-        type: "POST",
-        //crear json
-        data: {
-            "action": State,
-            "tabla": 'IMPUESTO_GASTO'
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            if (result == "") {
-                ArrayTdoc = [];
-            }
-            else {
-                ArrayTdoc = JSON.parse(result);
-                charge_CatalogList(ArrayTdoc, "Select_Documento", 1);
-                charge_CatalogList(ArrayTdoc, "Select_Documento_Blin", 1);
-            }
-        },
-        error: function () {
-
-        }
-    });
-}
-
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_MMarcaClase_F(State) {
     $.ajax({
@@ -200,7 +175,7 @@ function transacionAjax_MMarcaClase_F(State) {
             }
             else {
                 Matrix_MarcaClase_F = JSON.parse(result);
-             }
+            }
         },
         error: function () {
 
@@ -225,92 +200,6 @@ function transacionAjax_MLineaMarcaClase_F(State) {
             }
             else {
                 Matrix_LineaMarcaClase_F = JSON.parse(result);
-            }
-        },
-        error: function () {
-
-        }
-    });
-}
-
-//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_ShearchPeople(State, TD, D, NIT) {
-    $.ajax({
-        url: "C_ActivosAjax.aspx",
-        type: "POST",
-        //crear json
-        data: {
-            "action": State,
-            "TD": TD,
-            "D": D,
-            "NIT":NIT
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            switch (result) {
-                case "NO":
-                    Mensaje_General("No existe", "Los datos diligenciados No coinciden con las personas registradas en el sitema", "W");
-                    $("#V_Responsable").html("");
-                    break;
-
-                default:
-                    $("#V_Responsable").html(result);
-                    break;
-            }
-        },
-        error: function () {
-
-        }
-    });
-}
-
-
-
-/*-------------------- carga ---------------------------*/
-//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_EmpresaNit(State) {
-    $.ajax({
-        url: "C_ActivosAjax.aspx",
-        type: "POST",
-        //crear json
-        data: { "action": State,
-            "tabla": 'CLIENTE'
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            if (result == "") {
-                ArrayEmpresaNit = [];
-            }
-            else {
-                ArrayEmpresaNit = JSON.parse(result);
-                charge_CatalogList(ArrayEmpresaNit, "Select_EmpresaNit", 1);
-            }
-        },
-        error: function () {
-
-        }
-    });
-}
-
-/*-------------------- carga ---------------------------*/
-//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_Tipo(State) {
-    $.ajax({
-        url: "C_ActivosAjax.aspx",
-        type: "POST",
-        //crear json
-        data: {
-            "action": State,
-            "tabla": 'TIPO'
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            if (result == "") {
-                ArrayTipo = [];
-            }
-            else {
-                ArrayTipo = JSON.parse(result);
-                charge_CatalogList(ArrayTipo, "Select_Tipo", 1);
             }
         },
         error: function () {
@@ -346,28 +235,110 @@ function transacionAjax_ListaClaseFasecolda(State) {
     });
 }
 
-
-
-
-
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                          LISTAS DE CARGA                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_Estado(State) {
+function transacionAjax_EmpresaNit(State) {
     $.ajax({
         url: "C_ActivosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
+            "tabla": 'CLIENTE'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                ArrayEmpresaNit = [];
+            }
+            else {
+                ArrayEmpresaNit = JSON.parse(result);
+                charge_CatalogList(ArrayEmpresaNit, "Select_EmpresaNit", 1);
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_Documento(State) {
+    $.ajax({
+        url: "C_ActivosAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'IMPUESTO_GASTO'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                ArrayTdoc = [];
+            }
+            else {
+                ArrayTdoc = JSON.parse(result);
+                charge_CatalogList(ArrayTdoc, "Select_Documento", 1);
+                charge_CatalogList(ArrayTdoc, "Select_Documento_Blin", 1);
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_Colores(State) {
+    $.ajax({
+        url: "C_ActivosAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'IMPUESTO_GASTO'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                var Colores = [];
+            }
+            else {
+                var Colores = JSON.parse(result);
+                charge_CatalogList(Colores, "Select_Color", 1);
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_Tipo(State) {
+    $.ajax({
+        url: "C_ActivosAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
             "tabla": 'TIPO'
         },
         //Transaccion Ajax en proceso
         success: function (result) {
             if (result == "") {
-                ArrayEstado = [];
+                ArrayTipo = [];
             }
             else {
-                ArrayEstado = JSON.parse(result);
-                charge_CatalogList(ArrayEstado, "Select_Estado", 1);
+                ArrayTipo = JSON.parse(result);
+                charge_CatalogList(ArrayTipo, "Select_Tipo", 1);
             }
         },
         error: function () {
@@ -376,28 +347,32 @@ function transacionAjax_Estado(State) {
     });
 }
 
-
-
-/*-------------------- carga ---------------------------*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                          CONSULTAS EN PROCESO                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_Hijo_Cliente(State, Index) {
+function transacionAjax_ShearchPeople(State, TD, D, NIT) {
     $.ajax({
         url: "C_ActivosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
-            "tabla": 'TIPO',
-            "ID": Index
+        data: {
+            "action": State,
+            "TD": TD,
+            "D": D,
+            "NIT": NIT
         },
         //Transaccion Ajax en proceso
         success: function (result) {
-            if (result == "") {
-                Array_Hijo_Cliente = [];
-            }
-            else {
-                Array_Hijo_Cliente = JSON.parse(result);
-                charge_CatalogList(Array_Hijo_Cliente, "Select_H_Cliente", 1);
-               
+            switch (result) {
+                case "NO":
+                    Mensaje_General("No existe", "Los datos diligenciados No coinciden con las personas registradas en el sitema", "W");
+                    $("#V_Responsable").html("");
+                    break;
+
+                default:
+                    $("#V_Responsable").html(result);
+                    break;
             }
         },
         error: function () {
@@ -407,36 +382,116 @@ function transacionAjax_Hijo_Cliente(State, Index) {
 }
 
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                          PETICIONES CRUD ACTIVOS                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*------------------------------ crear ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax_C_Activos_create(State) {
-    var SC;
+    var Ref_1 = "";
+    var Ref_2 = "";
+    var Ref_3 = "";
+    var STActivo = 0;
+    var Pais_R = 0;
+    var Ciudad_R = 0;
+    var T_Doc_R = 0;
+    var Doc_R = 0;
+    var Valor_Bien = 0;
+    var Val_Op_Compra = 0;
+    var TipoEscritura = 0;
+    var NunImobiliaria = "";
+    var FechaC_Recibo = "";
+    var FechaC_Retiro = "";
 
-    if ($("#TxtSecuenciaCargue").val() == "")
-        SC = 0;
-    else
-        SC = $("#TxtSecuenciaCargue").val();
+    switch (Tipo_Activo) {
+        case 0:
+            Ref_1 = $("#TxtRef_Other").val();
+            break;
+
+        case 1:
+            if ($("#TxtRef_1").val() != "")
+                Ref_1 = $("#TxtRef_1").val();
+
+            if ($("#TxtRef_2").val() != "")
+                Ref_2 = $("#TxtRef_2").val();
+
+            if ($("#TxtRef_3").val() != "")
+                Ref_3 = $("#TxtRef_3").val();
+            break;
+
+        case 2:
+            Ref_1 = $("#TxtRef_Other").val();
+            break;
+    }
+
+    if ($("#Select_SubTipo").val() != "-1")
+        STActivo = $("#Select_SubTipo").val();
+
+    if ($("#Select_Pais_R").val() != "-1")
+        Pais_R = $("#Select_Pais_R").val();
+
+    if ($("#Select_Ciudad_R").val() != "-1" || $("#Select_SubTipo").val() != null)
+        Ciudad_R = $("#Select_Ciudad_R").val();
+
+    if ($("#Select_Persona_R").val() != "-1") {
+        var Str_C_R = $("#Select_Persona_R option:selected").html();
+        var SplitCR = Str_C_R.split(" - ");
+        T_Doc_R = SplitCR[1];
+        Doc_R = SplitCR[0];
+    }
+
+    if ($("#TxtValor_Bien").val() != "")
+        Valor_Bien = F_NumericBD($("#TxtValor_Bien").val());
+
+    if ($("#TxtValor_Compra").val() != "")
+        Val_Op_Compra = F_NumericBD($("#TxtValor_Compra").val());
+
+    if ($("#Select_TipoEscritura").val() != "-1")
+        TipoEscritura = $("#Select_TipoEscritura").val();
+
+    if ($("#Txt_NunImobiliaria").val() != "-1")
+        NunImobiliaria = $("#Txt_NunImobiliaria").val();
+
+    if ($("#TxtFecha_Recibo").val() != "-1")
+        FechaC_Recibo = $("#TxtFecha_Recibo").val();
+
+    if ($("#TxtFecha_Retiro").val() != "-1")
+        FechaC_Retiro = $("#TxtFecha_Retiro").val();
 
     $.ajax({
         url: "C_ActivosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Nit_ID": $("#Select_EmpresaNit").val(),
-            "ID": $("#Txt_ID").val(),
-            "Descripcion": $("#TxtDescripcion").val(),
-            "TDoc": T_Doc,
-            "Doc": Doc,
+            "Ref_1": Ref_1,
+            "Ref_2": Ref_2,
+            "Ref_3": Ref_3,
+            "Descripcion": $("#txtDescripcion").val(),
+            "TActivo": $("#Select_Tipo").val(),
+            "STActivo": STActivo,
+            "Pais_U": $("#Select_Pais_U").val(),
+            "Ciudad_U": $("#Select_Ciudad_U").val(),
+            "Direccion_U ": $("#Txt_Adress_U").val(),
+            "Pais_R": Pais_R,
+            "Ciudad_R": Ciudad_R,
+            "TDoc_R": T_Doc_R,
+            "Doc_R": Doc_R,
+            "Sucursal": $("#Select_Sucursal").val(),
             "Moneda": $("#Select_Moneda").val(),
-            "Es_Contract": $("#Select_Estado").val(),
-            "SecuenciaCargue": SC,
-            "VContrato": $("#Td_Vr_Contr").html(),
-            "VFinanciado": $("#Td_Vr_Finan").html(),
-            "VOpCompra": $("#Td_Vr_OpCompra").html(),
-            "SCapital": $("#Td_S_Capital").html(),
-            "SInteres": $("#Td_S_Interes").html(),
-            "SMora": $("#Td_S_Mora").html(),
-            "SOtros": $("#Td_S_Otros").html(),
+            "Valor_Bien": Valor_Bien,
+            "Val_Op_Compra": Val_Op_Compra,
+            "CompraBien": $("#Select_CompraBien").val(),
+            "Asegurado": $("#Select_Asegurado").val(),
+            "EstadoActivo": 1,
+            "TipoAdministracion": $("#Select_TipoAdmin").val(),
+            "TipoEscritura": TipoEscritura,
+            "NunImobiliaria": NunImobiliaria,
+            "FechaC_Recibo": FechaC_Recibo,
+            "FechaC_Retiro": FechaC_Retiro,
+            "TDoc_T": $("#Select_Documento").val(),
+            "Doc_T": $("#TxtDoc").val(),
             "user": User
         },
         //Transaccion Ajax en proceso
@@ -444,31 +499,16 @@ function transacionAjax_C_Activos_create(State) {
             switch (result) {
 
                 case "Error":
-                    $("#dialog").dialog("option", "title", "Disculpenos :(");
-                    $("#Mensaje_alert").text("No se realizo el ingreso del Contrato!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "block");
-                    $("#SE").css("display", "none");
-                    $("#WA").css("display", "none");
+                    Mensaje_General("Disculpenos :(", "No se realizo el ingreso del Activo", "E");
                     break;
 
                 case "Existe":
-                    $("#dialog").dialog("option", "title", "Ya Existe");
-                    $("#Mensaje_alert").text("El codigo ingresado ya existe en la base de datos!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "None");
-                    $("#SE").css("display", "none");
-                    $("#WE").css("display", "block");
+                    Mensaje_General("Ya Existe", "El codigo ingresado ya existe en la base de datos!", "W");
                     break;
 
                 case "Exito":
-                    $("#dialog").dialog("option", "title", "Exito");
-                    $("#Mensaje_alert").text("El Contrato fue creado exitosamente! ");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "none");
-                    $("#SE").css("display", "block");
-                    $("#WA").css("display", "none");
-                    Clear();
+                    Mensaje_General("Exito", "El Contrato fue creado exitosamente! ", "S");
+                    //Clear();
                     break;
             }
 
