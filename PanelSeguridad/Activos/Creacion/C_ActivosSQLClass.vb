@@ -3,6 +3,8 @@ Imports System.Data.OleDb
 
 Public Class C_ActivosSQLClass
 
+#Region "CRUD"
+
     ''' <summary>
     ''' funcion que crea el query para la insercion de nuevo C_Activos (INSERT)
     ''' </summary>
@@ -15,45 +17,83 @@ Public Class C_ActivosSQLClass
         Dim Result As String
         ' definiendo los objetos
         Dim sql As New StringBuilder
-        Dim StrQueryID As String = ""
-        Dim StrQuery As String = ""
-
-        sql.AppendLine("INSERT CONTRATOS (" & _
-            "CON_Nit_ID," & _
-            "CON_Contrato_ID," & _
-            "CON_Descripcion," & _
-            "CON_TypeDocument_ID," & _
-            "CON_Document_ID," & _
-            "CON_Cod_Moneda," & _
-            "CON_Val_Cont," & _
-            "CON_Val_Finan," & _
-            "CON_Val_Op_Compra," & _
-            "CON_Estado_Cont_ID," & _
-            "CON_Saldo_Cap," & _
-            "CON_Saldo_Int," & _
-            "CON_Saldo_Int_Mora," & _
-            "CON_Saldo_Otros," & _
-            "CON_Secuencia_Cargue," & _
-            "CON_FechaActualizacion," & _
-            "CON_Usuario" & _
+       
+        sql.AppendLine("INSERT ACTIVOS (" & _
+            "ACT_Nit_ID," & _
+            "ACT_Ref_1," & _
+            "ACT_Ref_2," & _
+            "ACT_Ref_3," & _
+            "ACT_Descripcion," & _
+            "ACT_TA_ID," & _
+            "ACT_STA_ID," & _
+            "ACT_Cod_Pais_U," & _
+            "ACT_Ciudad_ID_U," & _
+            "ACT_Direccion_U," & _
+            "ACT_Cod_Pais_R," & _
+            "ACT_Ciudad_ID_R," & _
+            "ACT_TypeDocument_ID_R," & _
+            "ACT_Document_ID_R," & _
+            "ACT_Surcursal_ID," & _
+            "ACT_Cod_Moneda," & _
+            "ACT_valor_Bien," & _
+            "ACT_Val_Op_Compra," & _
+            "ACT_CompraBien," & _
+            "ACT_Asegurado," & _
+            "ACT_EstadoActivo," & _
+            "ACT_TipoAdministracion," & _
+            "ACT_TipoEscritura," & _
+            "ACT_N_Escritura," & _
+            "ACT_FechaConta_Recibo," & _
+            "ACT_FechaConta_Retiro," & _
+            "ACT_TypeDocument_ID_T," & _
+            "ACT_Document_ID_T," & _
+            "ACT_Usuario_Creacion," & _
+            "ACT_FechaCreacion," & _
+            "ACT_Usuario_Actualizacion," & _
+            "ACT_FechaActualizacion" & _
             ")")
         sql.AppendLine("VALUES (")
         sql.AppendLine("'" & vp_Obj.Nit_ID & "',")
+        sql.AppendLine("'" & vp_Obj.Ref_1 & "',")
+        sql.AppendLine("'" & vp_Obj.Ref_2 & "',")
+        sql.AppendLine("'" & vp_Obj.Ref_3 & "',")
         sql.AppendLine("'" & vp_Obj.Descripcion & "',")
+        sql.AppendLine("'" & vp_Obj.TA_ID & "',")
+        sql.AppendLine("'" & vp_Obj.STA_ID & "',")
+        sql.AppendLine("'" & vp_Obj.Cod_Pais_U & "',")
+        sql.AppendLine("'" & vp_Obj.Ciudad_ID_U & "',")
+        sql.AppendLine("'" & vp_Obj.Direccion_U & "',")
+        sql.AppendLine("'" & vp_Obj.Cod_Pais_R & "',")
+        sql.AppendLine("'" & vp_Obj.Ciudad_ID_R & "',")
+        sql.AppendLine("'" & vp_Obj.TypeDocument_ID_R & "',")
+        sql.AppendLine("'" & vp_Obj.Document_ID_R & "',")
+        sql.AppendLine("'" & vp_Obj.Surcursal_ID & "',")
         sql.AppendLine("'" & vp_Obj.Cod_Moneda_ID & "',")
+        sql.AppendLine("'" & vp_Obj.Valor_Bien & "',")
         sql.AppendLine("'" & vp_Obj.Val_Op_Compra & "',")
-        sql.AppendLine("'" & vp_Obj.Secuencia_Cargue & "',")
+        sql.AppendLine("'" & vp_Obj.CompraBien & "',")
+        sql.AppendLine("'" & vp_Obj.Asegurado & "',")
+        sql.AppendLine("'" & vp_Obj.EstadoActivo & "',")
+        sql.AppendLine("'" & vp_Obj.TipoAdministracion & "',")
+        sql.AppendLine("'" & vp_Obj.TipoEscritura & "',")
+        sql.AppendLine("'" & vp_Obj.N_Escritura & "',")
+        sql.AppendLine("'" & vp_Obj.FechaConta_Recibo & "',")
+        sql.AppendLine("'" & vp_Obj.FechaConta_Retiro & "',")
+        sql.AppendLine("'" & vp_Obj.TypeDocument_ID_T & "',")
+        sql.AppendLine("'" & vp_Obj.Document_ID_T & "',")
+        sql.AppendLine("'" & vp_Obj.UsuarioCreacion & "',")
+        sql.AppendLine("'" & vp_Obj.FechaCreacion & "',")
         sql.AppendLine("'" & vp_Obj.UsuarioActualizacion & "',")
         sql.AppendLine("'" & vp_Obj.FechaActualizacion & "' ) ")
 
-        StrQuery = sql.ToString
-
+        Dim StrQuery As String = sql.ToString()
         Result = conex.StrInsert_and_Update_All(StrQuery, "2")
 
         Return Result
 
     End Function
 
+#End Region
 #Region "CONSULTAS DROP LIST"
 
 
@@ -90,7 +130,7 @@ Public Class C_ActivosSQLClass
         Select Case vp_S_Type
             Case "List"
 
-         
+
 
         End Select
 
@@ -121,8 +161,11 @@ Public Class C_ActivosSQLClass
 
         Dim sql As New StringBuilder
 
-        sql.AppendLine(" SELECT COUNT(1) FROM CONTRATOS " & _
-                       " WHERE CON_Nit_ID = '" & vp_O_Obj.Nit_ID & "' AND CON_Contrato_ID = '" & vp_O_Obj.TypeDocument_ID_R & "'")
+        sql.AppendLine(" SELECT COUNT(1) FROM ACTIVOS " & _
+                                      " WHERE ACT_Nit_ID = '" & vp_O_Obj.Nit_ID & "'" & _
+                                      "        AND ACT_Ref_1 = '" & vp_O_Obj.Ref_1 & "'" & _
+                                      "        AND ACT_Ref_2 = '" & vp_O_Obj.Ref_2 & "'" & _
+                                      "        AND ACT_Ref_3 = '" & vp_O_Obj.Ref_3 & "'")
 
         StrQuery = sql.ToString
 
@@ -130,8 +173,6 @@ Public Class C_ActivosSQLClass
 
         Return Result
     End Function
-
-
 
 #End Region
 

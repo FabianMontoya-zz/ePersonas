@@ -381,82 +381,105 @@ function transacionAjax_ShearchPeople(State, TD, D, NIT) {
     });
 }
 
-
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                          PETICIONES CRUD ACTIVOS                                                                                                                ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*------------------------------ crear ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax_C_Activos_create(State) {
-    var Ref_1 = "";
-    var Ref_2 = "";
-    var Ref_3 = "";
-    var STActivo = 0;
-    var Pais_R = 0;
-    var Ciudad_R = 0;
-    var T_Doc_R = 0;
-    var Doc_R = 0;
-    var Valor_Bien = 0;
-    var Val_Op_Compra = 0;
-    var TipoEscritura = 0;
-    var NunImobiliaria = "";
-    var FechaC_Recibo = "";
-    var FechaC_Retiro = "";
 
-    switch (Tipo_Activo) {
-        case 0:
-            Ref_1 = $("#TxtRef_Other").val();
-            break;
+    var valida_process = ValidaCampos_InsertBD_Activos();
 
-        case 1:
-            if ($("#TxtRef_1").val() != "")
-                Ref_1 = $("#TxtRef_1").val();
+    if (valida_process == 0) {
+        $.ajax({
+            url: "C_ActivosAjax.aspx",
+            type: "POST",
+            //crear json
+            data: {
+                "action": State,
+                "Nit_ID": $("#Select_EmpresaNit").val(),
+                "Ref_1": Ref_1.toUpperCase(),
+                "Ref_2": Ref_2.toUpperCase(),
+                "Ref_3": Ref_3.toUpperCase(),
+                "Descripcion": $("#txtDescripcion").val(),
+                "TActivo": $("#Select_Tipo").val(),
+                "STActivo": STActivo,
+                "Pais_U": $("#Select_Pais_U").val(),
+                "Ciudad_U": $("#Select_Ciudad_U").val(),
+                "Direccion_U": $("#Txt_Adress_U").val(),
+                "Pais_R": Pais_R,
+                "Ciudad_R": Ciudad_R,
+                "TDoc_R": T_Doc_R,
+                "Doc_R": Doc_R,
+                "Sucursal": $("#Select_Sucursal").val(),
+                "Moneda": $("#Select_Moneda").val(),
+                "Valor_Bien": Valor_Bien,
+                "Val_Op_Compra": Val_Op_Compra,
+                "CompraBien": $("#Select_CompraBien").val(),
+                "Asegurado": $("#Select_Asegurado").val(),
+                "EstadoActivo": 1,
+                "TipoAdministracion": $("#Select_TipoAdmin").val(),
+                "TipoEscritura": TipoEscritura,
+                "NunImobiliaria": NunImobiliaria.toUpperCase(),
+                "FechaC_Recibo": FechaC_Recibo,
+                "FechaC_Retiro": FechaC_Retiro,
+                "TDoc_T": $("#Select_Documento").val(),
+                "Doc_T": $("#TxtDoc").val(),
+                "user": User.toUpperCase()
+            },
+            //Transaccion Ajax en proceso
+            success: function (result) {
+                switch (result) {
 
-            if ($("#TxtRef_2").val() != "")
-                Ref_2 = $("#TxtRef_2").val();
+                    case "Error":
+                        Mensaje_General("Disculpenos :(", "No se realizo el ingreso del Activo", "E");
+                        break;
 
-            if ($("#TxtRef_3").val() != "")
-                Ref_3 = $("#TxtRef_3").val();
-            break;
+                    case "Existe":
+                        Mensaje_General("Ya Existe", "El codigo ingresado ya existe en la base de datos!", "W");
+                        break;
 
-        case 2:
-            Ref_1 = $("#TxtRef_Other").val();
-            break;
+                    case "Exito":
+                        Mensaje_General("Exito", "El Activo fue creado exitosamente! ", "S");
+                        //Clear();
+                        break;
+                }
+
+            },
+            error: function () {
+
+            }
+        });
     }
+}
 
-    if ($("#Select_SubTipo").val() != "-1")
-        STActivo = $("#Select_SubTipo").val();
+//hacemos la transaccion al code behind por medio de Ajax
+function transacionAjax_C_Vehiculos_create(State) {
 
-    if ($("#Select_Pais_R").val() != "-1")
-        Pais_R = $("#Select_Pais_R").val();
+    var ValorChasis = 0;
+    var Pasajeros = 0;
+    var Potencia = 0;
+    var TDoc_Blin = 0;
+    var Doc_Blin = 0;
+    var Nivel_Blin = 0;
 
-    if ($("#Select_Ciudad_R").val() != "-1" || $("#Select_SubTipo").val() != null)
-        Ciudad_R = $("#Select_Ciudad_R").val();
+    if ($("#TxtValor_Chasis").val() != "")
+        ValorChasis = F_NumericBD($("#TxtValor_Chasis").val());
 
-    if ($("#Select_Persona_R").val() != "-1") {
-        var Str_C_R = $("#Select_Persona_R option:selected").html();
-        var SplitCR = Str_C_R.split(" - ");
-        T_Doc_R = SplitCR[1];
-        Doc_R = SplitCR[0];
-    }
+    if ($("#Txt_NPasajeros").val() != "")
+        Pasajeros = $("#Txt_NPasajeros").val();
 
-    if ($("#TxtValor_Bien").val() != "")
-        Valor_Bien = F_NumericBD($("#TxtValor_Bien").val());
+    if ($("#Txt_Potencia").val() != "")
+        Potencia = $("#Txt_Potencia").val();
 
-    if ($("#TxtValor_Compra").val() != "")
-        Val_Op_Compra = F_NumericBD($("#TxtValor_Compra").val());
+    if ($("#Select_Documento_Blin").val() != "-1")
+        TDoc_Blin = $("#Select_Documento_Blin").val();
 
-    if ($("#Select_TipoEscritura").val() != "-1")
-        TipoEscritura = $("#Select_TipoEscritura").val();
+    if ($("#TxtDoc_Blin").val() != "-1")
+        Doc_Blin = $("#TxtDoc_Blin").val();
 
-    if ($("#Txt_NunImobiliaria").val() != "-1")
-        NunImobiliaria = $("#Txt_NunImobiliaria").val();
-
-    if ($("#TxtFecha_Recibo").val() != "-1")
-        FechaC_Recibo = $("#TxtFecha_Recibo").val();
-
-    if ($("#TxtFecha_Retiro").val() != "-1")
-        FechaC_Retiro = $("#TxtFecha_Retiro").val();
+    if ($("#Txt_Nivel_Blin").val() != "")
+        Nivel_Blin = $("#Txt_Nivel_Blin").val();
 
     $.ajax({
         url: "C_ActivosAjax.aspx",
@@ -465,34 +488,36 @@ function transacionAjax_C_Activos_create(State) {
         data: {
             "action": State,
             "Nit_ID": $("#Select_EmpresaNit").val(),
-            "Ref_1": Ref_1,
-            "Ref_2": Ref_2,
-            "Ref_3": Ref_3,
-            "Descripcion": $("#txtDescripcion").val(),
-            "TActivo": $("#Select_Tipo").val(),
-            "STActivo": STActivo,
-            "Pais_U": $("#Select_Pais_U").val(),
-            "Ciudad_U": $("#Select_Ciudad_U").val(),
-            "Direccion_U ": $("#Txt_Adress_U").val(),
-            "Pais_R": Pais_R,
-            "Ciudad_R": Ciudad_R,
-            "TDoc_R": T_Doc_R,
-            "Doc_R": Doc_R,
-            "Sucursal": $("#Select_Sucursal").val(),
-            "Moneda": $("#Select_Moneda").val(),
-            "Valor_Bien": Valor_Bien,
-            "Val_Op_Compra": Val_Op_Compra,
-            "CompraBien": $("#Select_CompraBien").val(),
-            "Asegurado": $("#Select_Asegurado").val(),
-            "EstadoActivo": 1,
-            "TipoAdministracion": $("#Select_TipoAdmin").val(),
-            "TipoEscritura": TipoEscritura,
-            "NunImobiliaria": NunImobiliaria,
-            "FechaC_Recibo": FechaC_Recibo,
-            "FechaC_Retiro": FechaC_Retiro,
-            "TDoc_T": $("#Select_Documento").val(),
-            "Doc_T": $("#TxtDoc").val(),
-            "user": User
+            "Ref_1": $("#TxtRef_Other").val().toUpperCase(),
+            "Ref_2": "",
+            "Ref_3": "",
+            "Facecolda_ID": $("#TxtFasecolda_ID").val(),
+            "Modelo": $("#Select_modelo option:selected").html(),
+            "Clase": $("#Select_ClaseF").val(),
+            "Marca": $("#Select_MarcaF").val(),
+            "Linea": $("#Select_LineaF").val(),
+            "ValorComercial": F_NumericBD($("#V_Valor_F").html()),
+            "Cilindraje": $("#Txt_Cilindraje").val(),
+            "Motor": $("#TxtN_Motor").val(),
+            "Chasis": $("#Txt_NChasis").val(),
+            "ValorChasis": ValorChasis,
+            "Serie": $("#Txt_NSerie").val(),
+            "VIN": $("#Txt_NVIN").val(),
+            "M_Servicio": $("#Select_MServicio").val(),
+            "Pasajeros": Pasajeros,
+            "TipoServicio": $("#Select_TServicio").val(),
+            "Combustible": $("#Select_Combustible").val(),
+            "Color": $("#Select_Color").val(),
+            "Capacidad": $("#Txt_Capacidad").val(),
+            "Potencia": Potencia,
+            "Carroceria": $("#Txt_Carroceria").val(),
+            "TipoCarroceria": $("#Txt_TCarroceria").val(),
+            "Blindaje": $("#Select_Blindaje").val(),
+            "TDoc_Blin": TDoc_Blin,
+            "Doc_Blin": Doc_Blin,
+            "Nivel_Blin": Nivel_Blin,
+            "GPS": $("#Text_NGPS").val(),
+            "user": User.toUpperCase()
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -507,7 +532,7 @@ function transacionAjax_C_Activos_create(State) {
                     break;
 
                 case "Exito":
-                    Mensaje_General("Exito", "El Contrato fue creado exitosamente! ", "S");
+                    transacionAjax_C_Activos_create("crear");
                     //Clear();
                     break;
             }
@@ -518,4 +543,5 @@ function transacionAjax_C_Activos_create(State) {
         }
     });
 }
+
 

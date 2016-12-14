@@ -9,6 +9,7 @@ var A0 = 0;
 var C_P = 0;
 var Tipo_Activo;
 var Index_Modelo;
+var Option_Blindaje = 0;
 /*--------------- region de variables globales --------------------*/
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -28,11 +29,14 @@ function Change_Select_blindaje() {
     $("#Select_Blindaje").change(function () {
         var index_ID = this.value;
 
-        if (index_ID == "S")
+        if (index_ID == "S") {
             $("#T_Datos_Identificacion_blin").css("display", "inline-table");
-        else
+            Option_Blindaje = 1;
+        }
+        else {
             $("#T_Datos_Identificacion_blin").css("display", "none");
-
+            Option_Blindaje = 0;
+        }
     });
 }
 

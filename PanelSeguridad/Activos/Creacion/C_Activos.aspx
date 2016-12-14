@@ -693,6 +693,24 @@
                                         </table>
                                         <table id="T_Datos_Identificacion_blin" style="width: 100%;">
                                             <tr>
+                                                <td class="Label_Bold" style="width: 4%;">Nivel Blindaje
+                                                </td>
+                                                <td style="width: 25%;">
+                                                    <span class="cssToolTip_Form">
+                                                        <input type="text" id="Txt_Nivel_Blin" maxlength="5" class="Numeric" style="width: 20%;" />
+                                                        <span class="Spam_AN"></span></span>
+                                                </td>
+                                                <td style="padding-bottom: 25px; width: 3%;">
+                                                    <span class="cssToolTip">
+                                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img_N_blin"
+                                                            src="../../images/error.png" />
+                                                        <span class="SpamEG"></span></span>
+                                                </td>
+                                                <td class="Label_Bold" style="width: 3%;"></td>
+                                                <td style="width: 10%;"></td>
+                                                <td style="padding-bottom: 25px; width: 7%;"></td>
+                                            </tr>
+                                            <tr>
                                                 <td class="Label_Bold" style="width: 4%;">Documento
                                                 </td>
                                                 <td style="width: 25%;">

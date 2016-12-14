@@ -37,7 +37,7 @@ $(document).ready(function () {
     transacionAjax_MFasecolda("MATRIX_FASECOLDA");
     transacionAjax_MMarcaClase_F("MATRIX_MARCA_CLASE_F");
     transacionAjax_MLineaMarcaClase_F("MATRIX_LINEA_MARCA_CLASE_F");
- transacionAjax_ListaClaseFasecolda("LIST_CLASE_F");
+    transacionAjax_ListaClaseFasecolda("LIST_CLASE_F");
 
     transacionAjax_EmpresaNit('Cliente')
     transacionAjax_Documento('Documento');
@@ -52,6 +52,8 @@ $(document).ready(function () {
     Clear_Ima_I();
     //CAMPOS  VEHICULOS
     Clear_Ima_F();
+    //CAMPOS  BLINDAJES
+    Clear_Ima_Bli();
 
     $("#Blo_Inmuebles").css("display", "none");
     $("#Blo_Fasecolda").css("display", "none");
@@ -139,8 +141,17 @@ function BtnCrear() {
     validate = ValidarGuardado();
 
     if (validate == 0) {
-        alert("mI PERRO pOR fIN");
-        //transacionAjax_C_Activos_create("crear");
+        switch (Tipo_Activo) {
+            case 2:
+                transacionAjax_C_Vehiculos_create("crear_vehiculo");
+                break;
+
+            default:
+                transacionAjax_C_Activos_create("crear");
+                break;
+        }
+
+
     }
 }
 
@@ -352,6 +363,15 @@ function Clear_Ima_I() {
     $("#Inmu_1").css("display", "none");
     $("#Inmu_2").css("display", "none");
 }
+
+//limpiar Imagenes blindaje
+function Clear_Ima_Bli() {
+    $("#Img_N_blin").css("display", "none");
+    $("#Img_TD_blin").css("display", "none");
+    $("#Img_D_blin").css("display", "none");
+}
+
+
 
 //Bloquea controles 
 function Disable_Consult_Fasecolda() {

@@ -1,5 +1,18 @@
 ﻿/*--------------- region de variables globales --------------------*/
-
+var Ref_1 = "";
+var Ref_2 = "";
+var Ref_3 = "";
+var STActivo = 0;
+var Pais_R = 0;
+var Ciudad_R = 0;
+var T_Doc_R = 0;
+var Doc_R = 0;
+var Valor_Bien = 0;
+var Val_Op_Compra = 0;
+var TipoEscritura = 0;
+var NunImobiliaria = "";
+var FechaC_Recibo = "";
+var FechaC_Retiro = "";
 /*--------------- region de variables globales --------------------*/
 
 
@@ -56,6 +69,83 @@ function ValidaCamposConsultaFasecolda() {
     }
 
     return Busqueda;
+}
+
+//validamos los campos y  asignamos baaloses segun proceso de insercion en activos
+function ValidaCampos_InsertBD_Activos() {
+    var valida_process = 0;
+
+    switch (Tipo_Activo) {
+        case 0:
+            Ref_1 = $("#TxtRef_Other").val();
+            break;
+
+        case 1:
+            if ($("#TxtRef_1").val() != "")
+                Ref_1 = $("#TxtRef_1").val();
+
+            if ($("#TxtRef_2").val() != "")
+                Ref_2 = $("#TxtRef_2").val();
+
+            if ($("#TxtRef_3").val() != "")
+                Ref_3 = $("#TxtRef_3").val();
+            break;
+
+        case 2:
+            Ref_1 = $("#TxtRef_Other").val();
+            break;
+    }
+
+    if ($("#Select_SubTipo").val() != "-1")
+        STActivo = $("#Select_SubTipo").val();
+
+    if ($("#Select_Pais_R").val() != "-1")
+        Pais_R = $("#Select_Pais_R").val();
+
+    switch ($("#Select_Ciudad_R").val()) {
+        case "-1":
+            Ciudad_R = 0;
+            break;
+
+        case null:
+            Ciudad_R = 0;
+            break;
+
+        case "undefined":
+            Ciudad_R = 0;
+            break;
+
+        default:
+            Ciudad_R = $("#Select_Ciudad_R").val();
+            break;
+    }
+
+    if ($("#Select_Persona_R").val() != "-1") {
+        var Str_C_R = $("#Select_Persona_R option:selected").html();
+        var SplitCR = Str_C_R.split(" - ");
+        T_Doc_R = SplitCR[1];
+        Doc_R = SplitCR[0];
+    }
+
+    if ($("#TxtValor_Bien").val() != "")
+        Valor_Bien = F_NumericBD($("#TxtValor_Bien").val());
+
+    if ($("#TxtValor_Compra").val() != "")
+        Val_Op_Compra = F_NumericBD($("#TxtValor_Compra").val());
+
+    if ($("#Select_TipoEscritura").val() != "-1")
+        TipoEscritura = $("#Select_TipoEscritura").val();
+
+    if ($("#Txt_NunImobiliaria").val() != "-1")
+        NunImobiliaria = $("#Txt_NunImobiliaria").val();
+
+    if ($("#TxtFecha_Recibo").val() != "-1")
+        FechaC_Recibo = $("#TxtFecha_Recibo").val();
+
+    if ($("#TxtFecha_Retiro").val() != "-1")
+        FechaC_Retiro = $("#TxtFecha_Retiro").val();
+
+    return valida_process;
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -170,7 +260,7 @@ function V_Campos_Immuebles() {
         $("#Inmu_2").css("display", "none");
     }
 
-    validar = Valida_Keys_Bloque("I", valida_llave, validar_inmueble);
+    validar = Valida_Keys_Bloque("I", valida_llave, validar_inmueble, "");
     return validar;
 }
 
@@ -181,6 +271,8 @@ function V_Campos_Vehiculos() {
 
     var validar;
     var validar_Vehiculo = 0;
+    var validar_Blindaje;
+
     var valida_llave = V_Campos_K("V");
 
     var Campo_F_1 = $("#TxtFasecolda_ID").val(); //Fase_1
@@ -225,8 +317,41 @@ function V_Campos_Vehiculos() {
         $("#Fase_1").css("display", "none");
     }
 
-    validar = Valida_Keys_Bloque("V", valida_llave, validar_Vehiculo);
-    return validar;
+    switch (Option_Blindaje) {
+        case 1:
+            validar_Blindaje = V_Campos_Blindaje();
+            break;
+        case 0:
+            validar_Blindaje = 0;
+            break;
+    }
+   validar = Valida_Keys_Bloque("V", valida_llave, validar_Vehiculo, validar_Blindaje);
+   return validar;
+}
+
+// paso 3.1
+//valida campos blindaje dependiendo de la opcion
+function V_Campos_Blindaje() {
+    var validar_blindaje = 0;
+
+    //1. identificar campos blindaje
+    var Campo_B_1 = $("#Txt_Nivel_Blin").val(); //Img_N_blin
+    var Campo_B_2 = $("#Select_Documento_Blin").val(); //Img_TD_blin
+    var Campo_B_3 = $("#TxtDoc_Blin").val(); //Img_D_blin
+
+    if (Campo_B_1 == "" || Campo_B_2 == "-1" || Campo_B_3 == "") {
+
+        validar_blindaje = 1;
+        if (Campo_B_1 == "") { $("#Img_N_blin").css("display", "inline-table"); } else { $("#Img_N_blin").css("display", "none"); }
+        if (Campo_B_2 == "-1") { $("#Img_TD_blin").css("display", "inline-table"); } else { $("#Img_TD_blin").css("display", "none"); }
+        if (Campo_B_3 == "") { $("#Img_D_blin").css("display", "inline-table"); } else { $("#Img_D_blin").css("display", "none"); }
+    }
+    else {
+        $("#Img_N_blin").css("display", "none");
+        $("#Img_TD_blin").css("display", "none");
+        $("#Img_D_blin").css("display", "none");
+    }
+    return validar_blindaje;
 }
 
 // paso 4
@@ -281,7 +406,7 @@ function V_Campos_K(Type) {
 
 // paso 5
 //valida el resultado de las llaves y bloque de tipo de activo seleccionado
-function Valida_Keys_Bloque(Type, Val_Key, Val_Bloque) {
+function Valida_Keys_Bloque(Type, Val_Key, Val_Bloque, Val_Bloque_2) {
     var validar;
 
     switch (Type) {
@@ -292,31 +417,35 @@ function Valida_Keys_Bloque(Type, Val_Key, Val_Bloque) {
             else {
                 validar = 1;
                 if (Val_Bloque == 1)
-                    Mensaje_General("Campos Inmueble Incompletos!", "Debe diligenciar los Campos de inmuebles requeridos (1 - Inmueble)", "E");
+                    Mensaje_General("Campos Inmueble Incompletos!", "Debe diligenciar los Campos de inmuebles requeridos (1 - Inmueble)", "W");
 
                 if (Val_Key == 1)
-                    Mensaje_General("Campos Llaves Inmueble!", "Debe diligenciar alguna de las 3 llaves de inmuebles (Cedula Catastral, Matricula Imbiliaria, Numero Unico ID)", "E");
+                    Mensaje_General("Campos Llaves Inmueble!", "Debe diligenciar alguna de las 3 llaves de inmuebles (Cedula Catastral, Matricula Imbiliaria, Numero Unico ID)", "W");
 
                 if (Val_Key == 1 && Val_Bloque == 1)
-                    Mensaje_General("Inmueble Incompleto!", "Debe diligenciar alguna de las 3 llaves de inmuebles (Cedula Catastral, Matricula Imbiliaria, Numero Unico ID) y revisar el modulo de (1 - Inmueble)", "E");
+                    Mensaje_General("Inmueble Incompleto!", "Debe diligenciar alguna de las 3 llaves de inmuebles (Cedula Catastral, Matricula Imbiliaria, Numero Unico ID) y revisar el modulo de (1 - Inmueble)", "W");
             }
             break;
 
         case "V":
-            if (Val_Bloque == 0 && Val_Key == 0)
+            if (Val_Bloque_2 == 0 && Val_Bloque == 0 && Val_Key == 0)
                 validar = 0;
             else {
                 validar = 1;
                 if (Val_Bloque == 1)
-                    Mensaje_General("Campos Vehículo Incompletos!", "Debe diligenciar los Campos de Vehículo requeridos (2 - Vehículos)", "E");
+                    Mensaje_General("Campos Vehículo Incompletos!", "Debe diligenciar los Campos de Vehículo requeridos (2 - Vehículos)", "W");
 
                 if (Val_Key == 1)
-                    Mensaje_General("Campos Llave Vehículo!", "Debe diligenciar la (Placa) del Vehículo", "E");
+                    Mensaje_General("Campos Llave Vehículo!", "Debe diligenciar la (Placa) del Vehículo", "W");
 
-                if (Val_Key == 1 && Val_Bloque == 1)
-                    Mensaje_General("Vehículo Incompleto!", "Debe diligenciar la (Placa) del Vehículo y revisar el modulo de (2 - Vehículos)", "E");
+                if (Val_Bloque_2 == 1)
+                    Mensaje_General("Campos blindaje Vehículo!", "Debe diligenciar blindaje del Vehículo", "W");
+
+                if (Val_Key == 1 && Val_Bloque == 1 && Val_Bloque_2 == 1)
+                    Mensaje_General("Vehículo Incompleto!", "Debe diligenciar la (Placa) del Vehículo y revisar el modulo de (2 - Vehículos), Configuración Blindaje Activa", "W");
             }
             break;
     }
+
     return validar;
 }

@@ -39,7 +39,7 @@
     Private _FechaActualizacion As String
 #End Region
 
-#Region "proiedades"
+#Region "propiedades"
 
     Public Property Nit_ID() As String
         Get
