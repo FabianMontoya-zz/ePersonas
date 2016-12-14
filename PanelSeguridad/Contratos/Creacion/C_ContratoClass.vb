@@ -18,7 +18,7 @@
     Private _Plazo As Long
     Private _Ciclo_ID As Integer
     Private _Base_Calculo_ID As Integer
-    Private _Direccion_Correspondiente As String
+    Private _Direccion_Correspondiente As Integer
     Private _Valor_Total As Long
     Private _Valor_Financiado As Long
     Private _Valor_Opc_Compra As Long
@@ -144,11 +144,11 @@
             Me._Base_Calculo_ID = value
         End Set
     End Property
-    Public Property Direccion_Correspondiente() As String
+    Public Property Direccion_Correspondiente() As Integer
         Get
             Return Me._Direccion_Correspondiente
         End Get
-        Set(ByVal value As String)
+        Set(ByVal value As Integer)
             Me._Direccion_Correspondiente = value
         End Set
     End Property

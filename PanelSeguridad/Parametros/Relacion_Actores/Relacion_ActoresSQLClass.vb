@@ -11,7 +11,7 @@ Public Class Relacion_ActoresSQLClass
     ''' <param name="vp_Obj_Relacion_Actores"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function InsertCargo(ByVal vp_Obj_Relacion_Actores As Relacion_ActoresClass)
+    Public Function InsertActores(ByVal vp_Obj_Relacion_Actores As Relacion_ActoresClass)
 
         Dim conex As New Conector
         Dim Result As String
@@ -22,10 +22,10 @@ Public Class Relacion_ActoresSQLClass
 
         sql.AppendLine("INSERT RELACION_ACTORES (" & _
             "RA_Nit_ID," & _
-            "RA_Cargo_ID," & _
-            "RA_Descripcion," & _
-            "RA_CargoDependencia," & _
-            "RA_Politica_ID," & _
+            "RA_Contrato," & _
+            "RA_TypeDocument_ID," & _
+            "RA_Document_ID," & _
+            "RA_TypeRelation," & _
             "RA_Usuario_Creacion," & _
             "RA_Fecha_Creacion," & _
             "RA_Usuario_Actualizacion," & _
@@ -112,6 +112,32 @@ Public Class Relacion_ActoresSQLClass
 
 #Region "OTRAS CONSULTAS"
 
+    ''' <summary>
+    ''' Averigua si el nuevo registro está repetido o no
+    ''' </summary>
+    ''' <param name="vp_O_Obj"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Consulta_Repetido(ByVal vp_O_Obj As Relacion_ActoresClass)
+
+        Dim StrQuery As String = ""
+        Dim Result As String = ""
+        Dim conex As New Conector
+
+        Dim sql As New StringBuilder
+
+        sql.AppendLine(" SELECT COUNT(1) FROM RELACION_ACTORES " & _
+                       " WHERE RA_Nit_ID = '" & vp_O_Obj.Nit_ID & "'" & _
+                       " AND RA_Contrato = '" & vp_O_Obj.Contrato_ID & "'" & _
+                       " AND RA_TypeDocument_ID = '" & vp_O_Obj.TypeDocument_ID & "'" & _
+                       " AND RA_Document_ID = '" & vp_O_Obj.Document_ID & "'")
+
+        StrQuery = sql.ToString
+
+        Result = conex.IDis(StrQuery, "2")
+
+        Return Result
+    End Function
 #End Region
 
 End Class

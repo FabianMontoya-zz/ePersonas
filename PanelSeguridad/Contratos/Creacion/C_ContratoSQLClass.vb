@@ -19,28 +19,28 @@ Public Class C_ContratoSQLClass
         Dim StrQuery As String = ""
 
         sql.AppendLine("INSERT CONTRATOS (" & _
-            "CON_Nit_ID," & _
-            "CON_Sucursal_ID, " & _
-            "CON_Colocacion_ID, " & _
-            "CON_Descripcion, " & _
-            "CON_TypeDocument_ID, " & _
-            "CON_Document_ID, " & _
-            "CON_Moneda_ID, " & _
-            "CON_Producto_ID, " & _
-            "CON_Condi_Financiacion_ID, " & _
-            "CON_Unidad_Tiempo_ID, " & _
-            "CON_Fecha_Apertura, " & _
-            "CON_Plazo, " & _
-            "CON_Ciclo_ID, " & _
-            "CON_Base_Calculo_ID, " & _
-            "CON_Direccion_Correspondiente" & _
-            "CON_Valor_Total, " & _
-            "CON_Valor_Financiado, " & _
-            "CON_Valor_Opc_Compra, " & _
-            "CON_Usuario_Creacion, " & _
-            "CON_Fecha_Creacion, " & _
-            "CON_Usuario_Actualizacion, " & _
-            "CON_Fecha_Actualizacion, " & _
+            "CO_Nit_ID," & _
+            "CO_Sucursal_ID, " & _
+            "CO_Colocacion_ID, " & _
+            "CO_Descripcion, " & _
+            "CO_TypeDocument_ID, " & _
+            "CO_Document_ID, " & _
+            "CO_Moneda_ID, " & _
+            "CO_Producto_ID, " & _
+            "CO_Condi_Financiacion_ID, " & _
+            "CO_Unidad_Tiempo_ID, " & _
+            "CO_Fecha_Apertura, " & _
+            "CO_Plazo, " & _
+            "CO_Ciclo_ID, " & _
+            "CO_Base_Calculo_ID, " & _
+            "CO_Direccion_Correspondiente, " & _
+            "CO_Valor_Total, " & _
+            "CO_Valor_Financiado, " & _
+            "CO_Valor_Opc_Compra, " & _
+            "CO_Usuario_Creacion, " & _
+            "CO_Fecha_Creacion, " & _
+            "CO_UsuarioActualizacion, " & _
+            "CO_Fecha_Actualizacion " & _
             ")")
         sql.AppendLine("VALUES (")
         sql.AppendLine("'" & vp_Obj.Nit_ID & "',")
@@ -83,6 +83,7 @@ Public Class C_ContratoSQLClass
 #End Region
 
 #Region "OTRAS CONSULTAS"
+
     ''' <summary>
     ''' averigua si esta repetido
     ''' </summary>

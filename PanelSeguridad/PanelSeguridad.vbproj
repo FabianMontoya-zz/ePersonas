@@ -160,6 +160,7 @@
     <Content Include="Activos\Creacion\C_Activos.js" />
     <Content Include="Activos\Creacion\C_ActivosAjax.aspx" />
     <Content Include="Activos\Creacion\C_ActivosTrasaccionsAjax.js" />
+    <Content Include="Activos\Creacion\C_Activos_Validacion.js" />
     <Content Include="Activos\menu.js" />
     <Content Include="Activos\SasifMaster_Cosult.js" />
     <Content Include="Administrador\Adm_C_AccesoPrede\C_AccesoPre.aspx" />

@@ -351,6 +351,7 @@ function Change_Select_Nit() {
             $("#Img1").css("display", "inline-table");
         } else {
             $("#Img1").css("display", "none");
+            $("#Select_EmpresaNit").prop('disabled', true); //Desactivamos el Chosen
         }
         var index_ID = this.value;
         Charge_Combos_Depend_Nit(Matrix_Sucursal, "Select_Sucursal_C", index_ID, "");
@@ -947,7 +948,9 @@ function Clear() {
     /*Reiniciamos la tabla de Terceros*/
     ArrayTerceros = [];
     AddArrayToTable();
-    ContTerceros = 0;   
+    ContTerceros = 0;
+    Persona1 = false;
+    Persona2 = false;
 }
 
 function Add_Activos(index) {
@@ -1035,8 +1038,6 @@ function Json_Terceros() {
             var STRTypeDocumento = $("#Select_Documento_C2 option:selected").html();
             var STRTypeRelation = $("#Select_Relacion option:selected").html();
             var JSON_terceros = {
-                "Nit_ID": $("#Select_EmpresaNit").val(),
-                "Contrato_ID": $("#TXT_ID_Colocacion").val(),
                 "TypeDocument_ID": $("#Select_Documento_C2").val(),
                 "Document_ID": $("#TxtDoc_C2").val(),
                 "Descrip_Persona": namePersona,
@@ -1052,7 +1053,7 @@ function Json_Terceros() {
             break;
 
         case 1:
-            Mensaje_General("¡Persona Repetida!", "La persona ya se encuentra relacionada con estos mismos datos.", "W");
+            Mensaje_General("¡Persona Repetida!", "La persona ya se encuentra relacionada, no puede relacionar dos veces a la misma persona.", "W");
             break;
 
     }
@@ -1064,8 +1065,7 @@ function ConsultaRepetido() {
     var validar = 0;
     for (itemArray in ArrayTerceros) {
         if (ArrayTerceros[itemArray].TypeDocument_ID == $("#Select_Documento_C2").val() &&
-            ArrayTerceros[itemArray].Document_ID == $("#TxtDoc_C2").val() &&
-            ArrayTerceros[itemArray].TypeRelation == $("#Select_Relacion").val()) {
+            ArrayTerceros[itemArray].Document_ID == $("#TxtDoc_C2").val()) {
             validar = 1;
             break;
         }

@@ -329,7 +329,56 @@ function transacionAjax_C_Contrato_create(State) {
                     break;
 
                 case "Exito":
-                    Mensaje_General("¡Colocación Agregada!", "La colocación se ha agregado correctamente.", "S");
+                    if (ArrayTerceros.length > 0) {
+                        transacionAjax_C_Terceros_create("CrearTercero");
+                    }
+                    else {
+                        Mensaje_General("¡Colocación Agregada!", "La colocación se ha agregado correctamente.", "S");
+                        Clear();
+                    }
+                    break;
+            }
+
+        },
+        error: function () {
+
+        }
+    });
+}
+
+var listTerceros = [];
+
+function transacionAjax_C_Terceros_create(State) {
+
+
+    //recorer array para el ingreso de los documentos hijos
+    listTerceros = JSON.stringify(ArrayTerceros);
+
+    $.ajax({
+        url: "C_ContratoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "Nit_ID": $("#Select_EmpresaNit").val(),
+            "Contrato_ID": $("#TXT_ID_Colocacion").val(),
+            "listTerceros":listTerceros,
+            "user": User
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            switch (result) {
+
+                case "Error":
+                    Mensaje_General("Disculpenos :(", "No se realizó el ingreso de los Terceros.", "E");
+                    break;
+
+                case "Existe":
+                    Mensaje_General("¡Código Repetido! - Terceros", "El código ingresado ya se encuentra registrado en la Base de Datos.", "W");
+                    break;
+
+                case "Exito":                    
+                    Mensaje_General("¡Terceros Agregados!", "La colocación se ha agregado correctamente.", "S");
                     Clear();
                     break;
             }
@@ -339,4 +388,5 @@ function transacionAjax_C_Contrato_create(State) {
 
         }
     });
+
 }

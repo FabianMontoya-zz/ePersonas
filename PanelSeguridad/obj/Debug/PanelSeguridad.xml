@@ -473,7 +473,7 @@ PanelSeguridad
  </summary>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.Relacion_ActoresSQLClass.InsertCargo(PanelSeguridad.Relacion_ActoresClass)">
+</member><member name="M:PanelSeguridad.Relacion_ActoresSQLClass.InsertActores(PanelSeguridad.Relacion_ActoresClass)">
 	<summary>
  funcion que crea el query para la insercion de nuevo Cargo (INSERT)
  </summary>
@@ -486,6 +486,13 @@ PanelSeguridad
  </summary>
 	<param name="vp_S_StrQuery"></param>
 	<param name="vg_S_StrConexion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.Relacion_ActoresSQLClass.Consulta_Repetido(PanelSeguridad.Relacion_ActoresClass)">
+	<summary>
+ Averigua si el nuevo registro está repetido o no
+ </summary>
+	<param name="vp_O_Obj"></param>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.Relation_Tipo_Subtipo_ActivoSQLClass.Read_AllTP_Activo(System.String,System.String,System.String)">
@@ -1251,6 +1258,11 @@ To modify move field declaration from designer file to code-behind file.
  funcion que inserta en la tabla C_Contrato (INSERT)
  </summary>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.InsertC_Terceros">
+	<summary>
+ funcion que inserta en la tabla C_Contrato (INSERT)
+ </summary>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_MSucursal">
 	<summary>
  funcion que carga La matrix Sucursal
@@ -1300,6 +1312,11 @@ To modify move field declaration from designer file to code-behind file.
 	<summary>
  consulta si existe la persona digitada 
  </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.Create_List_terceros">
+	<summary>
+	</summary>
+	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.Crud_DocAjax.Consulta_Crud_Doc">
 	<summary>

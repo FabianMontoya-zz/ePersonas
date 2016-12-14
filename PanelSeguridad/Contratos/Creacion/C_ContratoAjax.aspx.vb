@@ -43,6 +43,9 @@ Public Class C_ContratoAjax
                 Case "crear"
                     InsertC_Contrato()
 
+                Case "CrearTercero"
+                    InsertC_Terceros()
+
             End Select
 
         End If
@@ -106,7 +109,34 @@ Public Class C_ContratoAjax
 
     End Sub
 
-   
+    ''' <summary>
+    ''' funcion que inserta en la tabla C_Contrato (INSERT)
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub InsertC_Terceros()
+
+        Dim objC_Terceros As New Relacion_ActoresClass
+        Dim SQL_C_Terceros As New Relacion_ActoresSQLClass
+        Dim Result_list As String = "Exito"
+
+        Dim ListTerceros As New List(Of Relacion_ActoresClass)
+        ListTerceros = Create_List_terceros()
+
+        For Each item_list As Relacion_ActoresClass In ListTerceros
+            Dim Result As String = SQL_C_Terceros.InsertActores(item_list)
+
+            If Result = "Exito" Then
+                Result_list = "Exito"
+            Else
+                Result_list = "Error_Tercero"
+                Exit For
+            End If
+        Next
+
+        Response.Write(Result_list)
+
+
+    End Sub
 
 #End Region
 
@@ -268,6 +298,43 @@ Public Class C_ContratoAjax
         Response.Write(Str_People)
 
     End Sub
+
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Create_List_terceros()
+
+        Dim vl_S_Nit As String = Request.Form("Nit_ID")
+        Dim vl_S_Contrato As String = Request.Form("Contrato_ID")
+        Dim vl_S_User As String = Request.Form("user")
+
+        Dim S_list As String = Request.Form("listTerceros").ToString
+        Dim NewList = JsonConvert.DeserializeObject(Of List(Of Relacion_ActoresClass))(S_list)
+
+        Dim ObjlistTercero As New List(Of Relacion_ActoresClass)
+
+        For Each item As Relacion_ActoresClass In NewList
+
+            Dim Obj As New Relacion_ActoresClass
+
+            Obj.Nit_ID = vl_S_Nit
+            Obj.Contrato_ID = vl_S_contrato
+            Obj.TypeDocument_ID = item.TypeDocument_ID
+            Obj.Document_ID = item.Document_ID
+            Obj.TypeRelation = item.TypeRelation
+            Obj.UsuarioCreacion = vl_S_User
+            Obj.UsuarioActualizacion = vl_S_User
+            Obj.FechaCreacion = Date.Now
+            Obj.FechaActualizacion = Date.Now
+
+            ObjlistTercero.Add(Obj)
+
+        Next
+
+        Return ObjlistTercero
+    End Function
 #End Region
 
 End Class
