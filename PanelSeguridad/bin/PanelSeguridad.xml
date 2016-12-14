@@ -6,19 +6,10 @@ PanelSeguridad
 </name>
 </assembly>
 <members>
-<member name="M:PanelSeguridad.Relacion_ActoresSQLClass.InsertCargo(PanelSeguridad.Relacion_ActoresClass)">
+<member name="M:PanelSeguridad.ColoresSQLClass.List_Colors">
 	<summary>
- funcion que crea el query para la insercion de nuevo Cargo (INSERT)
+ Carga lista de colores
  </summary>
-	<param name="vp_Obj_Relacion_Actores"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.Relacion_ActoresSQLClass.listRelacion_Actores(System.String,System.String,System.String)">
-	<summary>
- funcion que trae el listado de Relacion_Actores para armar la tabla
- </summary>
-	<param name="vp_S_StrQuery"></param>
-	<param name="vg_S_StrConexion"></param>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.Adm_OpcRolAjax.Consulta_OpcRol">
@@ -480,6 +471,21 @@ PanelSeguridad
 	<summary>
  lee la matriz de Productos
  </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.Relacion_ActoresSQLClass.InsertCargo(PanelSeguridad.Relacion_ActoresClass)">
+	<summary>
+ funcion que crea el query para la insercion de nuevo Cargo (INSERT)
+ </summary>
+	<param name="vp_Obj_Relacion_Actores"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.Relacion_ActoresSQLClass.listRelacion_Actores(System.String,System.String,System.String)">
+	<summary>
+ funcion que trae el listado de Relacion_Actores para armar la tabla
+ </summary>
+	<param name="vp_S_StrQuery"></param>
+	<param name="vg_S_StrConexion"></param>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.Relation_Tipo_Subtipo_ActivoSQLClass.Read_AllTP_Activo(System.String,System.String,System.String)">
@@ -1345,11 +1351,6 @@ To modify move field declaration from designer file to code-behind file.
  funcion que carga  Matrix secuencia 
  </summary>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.Crud_DocAjax.CargarMContrato">
-	<summary>
- funcion que carga  Matrix contrato
- </summary>
-	<remarks></remarks>
 </member><member name="M:PanelSeguridad.Crud_DocAjax.CargarMDocumento">
 	<summary>
  funcion que carga  Matrix contrato
@@ -1623,20 +1624,6 @@ To modify move field declaration from designer file to code-behind file.
  funcion que crea el query para la insercion de nuevo C_Activos (INSERT)
  </summary>
 	<param name="vp_Obj"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.C_ActivosSQLClass.Charge_DropListEstado_Contrato(System.String)">
-	<summary>
- crea la consulta para cargar el combo
- </summary>
-	<param name="vp_S_ID"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.C_ActivosSQLClass.Charge_DropListHijo_Cliente(System.String)">
-	<summary>
- crea la consulta para cargar el combo
- </summary>
-	<param name="vp_S_ID"></param>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.C_ActivosSQLClass.listC_Activos(System.String,System.String,System.String)">
@@ -2693,6 +2680,11 @@ To modify move field declaration from designer file to code-behind file.
  funcion que carga La matrix
  </summary>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosAjax.CargarColor">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.C_ActivosAjax.Carga_MSucursal">
 	<summary>
  funcion que carga La matrix
@@ -2723,22 +2715,12 @@ To modify move field declaration from designer file to code-behind file.
  funcion que carga matrix de fasecolda
  </summary>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.C_ActivosAjax.Cargar_EstadoContrato">
-	<summary>
- funcion que carga el objeto DDL consulta
- </summary>
-	<remarks></remarks>
 </member><member name="M:PanelSeguridad.C_ActivosAjax.CargarDocumento">
 	<summary>
  funcion que carga el objeto DDL consulta
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.C_ActivosAjax.CargarCliente">
-	<summary>
- funcion que carga el objeto DDL consulta
- </summary>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.C_ActivosAjax.Cargar_HijoCliente">
 	<summary>
  funcion que carga el objeto DDL consulta
  </summary>
@@ -3123,31 +3105,9 @@ To modify move field declaration from designer file to code-behind file.
 	<param name="vp_Obj"></param>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.C_ContratoSQLClass.Charge_DropListEstado_Contrato(System.String)">
-	<summary>
- crea la consulta para cargar el combo
- </summary>
-	<param name="vp_S_ID"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.C_ContratoSQLClass.Charge_DropListHijo_Cliente(System.String)">
-	<summary>
- crea la consulta para cargar el combo
- </summary>
-	<param name="vp_S_ID"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.C_ContratoSQLClass.listC_Contrato(System.String,System.String,System.String)">
-	<summary>
- funcion que trae el listado de C_Contrato para armar la tabla
- </summary>
-	<param name="vp_S_StrQuery"></param>
-	<param name="vg_S_StrConexion"></param>
-	<returns></returns>
-	<remarks></remarks>
 </member><member name="M:PanelSeguridad.C_ContratoSQLClass.Consulta_Repetido(PanelSeguridad.C_ContratoClass)">
 	<summary>
- funcion que valida si esta repetido el registro a ingresar
+ averigua si esta repetido
  </summary>
 	<param name="vp_O_Obj"></param>
 	<returns></returns>
@@ -4679,7 +4639,7 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
  </summary>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.ClienteSQLClass.Matrix_Personas_Direcciones(System.Object,System.Object)">
+</member><member name="M:PanelSeguridad.ClienteSQLClass.Matrix_Personas_Direcciones(System.Object,System.Object,System.Object)">
 	<summary>
  lee matrix para Direccion de las personas
  </summary>

@@ -1142,6 +1142,8 @@
     </Compile>
     <Compile Include="Parametros\Cliente\ClienteClass.vb" />
     <Compile Include="Parametros\Cliente\ClienteSQLClass.vb" />
+    <Compile Include="Parametros\Colores\ColoresClass.vb" />
+    <Compile Include="Parametros\Colores\ColoresSQLClass.vb" />
     <Compile Include="Parametros\Financiacion\FinanciacionClass.vb" />
     <Compile Include="Parametros\Financiacion\FinanciacionSQLClass.vb" />
     <Compile Include="Parametros\Direcciones\DireccionesClass.vb" />
