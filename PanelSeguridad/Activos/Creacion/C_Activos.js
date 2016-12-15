@@ -371,7 +371,7 @@ function Clear_Limpiar() {
     $("#Blo_Inmuebles").css("display", "none");
     $("#Blo_Fasecolda").css("display", "none");
 
-    $("#Select_EmpresaNit").removeAttr("disabled")
+    $("#Select_EmpresaNit").removeAttr("disabled");
     $('.C_Chosen').trigger('chosen:updated');
 }
 
