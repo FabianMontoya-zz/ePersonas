@@ -133,6 +133,7 @@ $(document).ready(function () {
 
     Format_Adress("Txt_Adress_U");
     Date_Document();
+    Calcula_Valor_IVA("Txt_ValFactura", "Text_Val_Sin_IVA", "V_Val_IVA");
 
 });
 
@@ -459,15 +460,12 @@ function Clear_Ima_Bli() {
 
 //limpiar Imagenes Facturas
 function Clear_Img_Fact() {
-
     $("#Img_Fac_1").css("display", "none");
     $("#Img_Fac_2").css("display", "none");
     $("#Img_Fac_3").css("display", "none");
     $("#Img_Fac_4").css("display", "none");
-
+    $("#Img_Fac_5").css("display", "none");
 }
-
-
 
 //Bloquea controles 
 function Disable_Consult_Fasecolda() {

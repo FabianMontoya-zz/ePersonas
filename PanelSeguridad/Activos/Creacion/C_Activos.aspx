@@ -9,6 +9,7 @@
     <script src="C_ActivosTrasaccionsAjax.js" type="text/javascript"></script>
     <script src="C_Activos_Complementos.js" type="text/javascript"></script>
     <script src="C_Activos_Validacion.js" type="text/javascript"></script>
+    <script src="C_Activos_Facturas.js" type="text/javascript"></script>
     <link href="../../css/css_login.css" rel="stylesheet" type="text/css" />
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
     <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />
@@ -958,33 +959,43 @@
             </table>
             <table id="T_F_3" style="width: 100%;">
                 <tr>
-                    <td class="Label_Bold" style="width: 7.2%;">Valor Total
+                    <td class="Label_Bold" style="width: 8.5%;">Valor Total
                     </td>
-                    <td id="V_Sigla_6" style="width: 2%" class="Sigla"></td>
+                    <td id="V_Sigla_6" style="width: 3%" class="Sigla"></td>
                     <td style="width: 10%;">
                         <span class="cssToolTip_Form">
                             <input type="text" id="Txt_ValFactura" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
                             <span class="Spam_AVal"></span></span>
                     </td>
-                    <td style="padding-bottom: 25px; width: 5%;">
+                    <td style="padding-bottom: 25px; width: 3%;">
                         <span class="cssToolTip">
                             <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img_Fac_4"
                                 src="../../images/error.png" />
                             <span class="SpamEG"></span></span>
                     </td>
-                    <td class="Label_Bold" style="width: 5%;">Valor sin IVA
+                    <td class="Label_Bold" style="width: 7%;">Valor sin IVA
                     </td>
                     <td id="V_Sigla_7" style="width: 3%" class="Sigla"></td>
-                    <td class="Label_Bold" id="V_Val_S_IVA" style="width: 10%;"></td>
+                    <td style="width: 10%;">
+                        <span class="cssToolTip_Form">
+                            <input type="text" id="Text_Val_Sin_IVA" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
+                            <span class="Spam_AVal"></span></span>
+                    </td>
+                    <td style="padding-bottom: 25px; width: 3%;">
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img_Fac_5"
+                                src="../../images/error.png" />
+                            <span class="SpamEG"></span></span>
+                    </td>
                     <td class="Label_Bold" style="width: 5%;">Valor IVA
                     </td>
                     <td id="V_Sigla_8" style="width: 3%" class="Sigla"></td>
-                    <td class="Label_Bold" id="V_Val_IVA" style="width: 10%;"></td>
+                    <td class="Title_Bold" align="left" id="V_Val_IVA" style="width: 10%; padding-bottom: 5px;"></td>
                 </tr>
             </table>
         </div>
         <div style="width: 100%; text-align: center; margin-top: 25px;">
-            <input id="Button1" type="button" value="Agregar Factura" onclick="BtnFactura();"  style="width:150px;"/>
+            <input id="Button1" type="button" value="Agregar Factura" onclick="BtnFactura();" style="width: 150px;" />
         </div>
     </div>
     <div id="Dialog_Format_Adress">

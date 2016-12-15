@@ -1274,7 +1274,6 @@ function VerDocumento() {
     $("#IF_Visor").attr("src", "../../Repository_Document/TEMP/" + Doc_name);
 }
 
-
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                     PROCESO DE FORMATEO DE DIRECCIONES                                                                   ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -1622,4 +1621,20 @@ function añosDias(años, base) {
             break;
     }
     return dias;
+}
+
+//calcula valor del IVA
+function Calcula_Valor_IVA(Obj_Cap_1, Obj_Cap_2, ObjResutado) {
+    $("#" + Obj_Cap_2).blur(function () {
+
+        var Val_C_IVA = $("#" + Obj_Cap_1).val();
+        var Val_S_IVA = $("#" + Obj_Cap_2).val();
+
+        Val_C_IVA = F_NumericBD(Val_C_IVA);
+        Val_S_IVA = F_NumericBD(Val_S_IVA);
+
+        var operacion = parseInt(Val_C_IVA) - parseInt(Val_S_IVA);
+        $("#" + ObjResutado).html(dinner_format_grid(operacion));
+    });
+
 }
