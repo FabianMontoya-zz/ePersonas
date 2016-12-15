@@ -71,6 +71,7 @@ function transacionAjax_MMoneda(State) {
             else {
                 Matrix_Moneda = JSON.parse(result);
                 Charge_Combos_Depend_Nit(Matrix_Moneda, "Select_Moneda_C", "", "");
+                Charge_Combos_Depend_Nit(Matrix_Moneda, "Select_Moneda", "", ""); //Activos
             }
         },
         error: function () {
@@ -97,6 +98,7 @@ function transacionAjax_Documento(State) {
             }
             else {
                 ArrayTdoc = JSON.parse(result);
+                charge_CatalogList(ArrayTdoc, "Select_Documento", 1); //Activos
                 charge_CatalogList(ArrayTdoc, "Select_Documento_C", 1);
                 charge_CatalogList(ArrayTdoc, "Select_Documento_C2", 1);
             }

@@ -15,24 +15,9 @@ var Array_Hijo_Cliente = [];
 var ArrayEstado = [];
 var ArrayTerceros = [];
 
-var Matrix_Personas = [];
-var Matrix_RTSTA = [];
-var Matrix_Pais = [];
-var Matrix_Fasecolda = [];
-var Matrix_MarcaClase_F = [];
-var Matrix_LineaMarcaClase_F = [];
-
-var Lista_Clase_F = [];
-
-var ArrayC_Activos = [];
-
-
 var ID;
 var T_Doc;
 var Doc;
-var Clase_Index;
-var Year_work;
-var Index_Year;
 
 var index_NIT_ID;
 
@@ -76,17 +61,6 @@ $(document).ready(function () {
     transacionAjax_Productos('MATRIX_PRODUCTOS');
     transacionAjax_Financiacion('MATRIX_FINANCIACION');
     transaccionAjax_MTasas('MATRIX_TASAS');
-
-    transaccionAjax_MPersonas('MATRIX_PERSONAS');
-    transaccionAjax_MRTSTA("MATRIX_RTSTA");
-    transaccionAjax_MPaises_Ciudades('MATRIX_PAIS_CIUDAD');
-    transacionAjax_MFasecolda("MATRIX_FASECOLDA");
-    transacionAjax_MMarcaClase_F("MATRIX_MARCA_CLASE_F");
-    transacionAjax_MLineaMarcaClase_F("MATRIX_LINEA_MARCA_CLASE_F");
-    transacionAjax_ListaClaseFasecolda("LIST_CLASE_F");
-
-    transacionAjax_Colores("Colores");
-    transacionAjax_Tipo('Tipo');
 
     /*Funciones para configuración inicial de campos en vista*/
     Ocultar_IMGS_Errores();
@@ -165,14 +139,7 @@ function CargarAcordeons() {
             heightStyle: "content",
             collapsible: true
         });
-    });
-
-    $(function () { //Función del acordeon
-        $("#Acordeon_Activo").accordion({
-            heightStyle: "content",
-            collapsible: true
-        });
-    });
+    });    
 }
 
 //Función que Agrega el diseño a las tablas
@@ -385,9 +352,11 @@ function ValidarIDColocacion_A() {
     var valido = false;
     var NIT = $("#Select_EmpresaNit").val();
     var ID_Colocacion = $("#TXT_ID_Colocacion").val();
+    var Sucursal = $("#Select_Sucursal_C").val();
+    var Moneda = $("#Select_Moneda_C").val();
 
-    if (NIT == "-1" || NIT == null || ID_Colocacion == "" || ID_Colocacion == null) {
-        Mensaje_General("¡Campos Incompletos!", "Los campos [NIT Empresa] y [Número de Colocación] son obligatorios para poder agregar un activo.", "E");
+    if (NIT == "-1" || NIT == null || ID_Colocacion == "" || ID_Colocacion == null || Sucursal == "-1" || Sucursal == null || Moneda == "-1" || Moneda == null) {
+        Mensaje_General("¡Campos Incompletos!", "Los campos [NIT Empresa], [Sucursal], [Número de Colocación] y [Moneda] son obligatorios para poder agregar un activo.", "E");
 
         if (NIT == "-1" || NIT == null) {
             $("#Img1").css("display", "inline-table");
@@ -397,9 +366,19 @@ function ValidarIDColocacion_A() {
             $("#Img2").css("display", "inline-table");
         }
 
+        if (Sucursal == "-1" || Sucursal == null) {
+            $("#Img7").css("display", "inline-table");
+        }
+
+        if (Moneda == "-1" || Moneda == null) {
+            $("#Img8").css("display", "inline-table");
+        }
+
     } else {
         $("#Img2").css("display", "none");
         $("#Img1").css("display", "none");
+        $("#Img7").css("display", "none");
+        $("#Img8").css("display", "none");
         Add_Activos();
     }
 }
@@ -423,6 +402,7 @@ function Change_Select_Nit() {
         Charge_Combos_Depend_Nit(Matrix_Financiacion, "Select_Condicion_Financiacion", index_NIT_ID, "");
 
         /*Para Activos*/
+        console.log("Carga Select_Sucursal");
         Charge_Combos_Depend_Nit(Matrix_Sucursal, "Select_Sucursal", index_NIT_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Personas, "Select_Persona_A", index_NIT_ID, "");
         /*============*/
@@ -541,13 +521,33 @@ function Change_Select_Moneda() {
                 $("#L_Moneda_3").html(Matrix_Moneda[item].Sigla);
                 $("#L_Moneda_4").html(Matrix_Moneda[item].Sigla);
                 $("#L_Moneda_5").html(Matrix_Moneda[item].Sigla);
+                /*Monedas de Activos*/
+                $("#V_Sigla_1").html(Matrix_Moneda[item].Sigla);
+                $("#V_Sigla_2").html(Matrix_Moneda[item].Sigla);
+                $("#V_Sigla_3").html(Matrix_Moneda[item].Sigla);
+                $("#V_Sigla_4").html(Matrix_Moneda[item].Sigla);
+                $("#V_Sigla_5").html(Matrix_Moneda[item].Sigla);
+                $("#V_Sigla_6").html(Matrix_Moneda[item].Sigla);
+                $("#V_Sigla_7").html(Matrix_Moneda[item].Sigla);
+                $("#V_Sigla_8").html(Matrix_Moneda[item].Sigla);
+                /*=================*/
             } else if (index_ID == "-1") {
                 $("#L_Moneda").html("");
                 $("#L_Moneda_1").html("");
                 $("#L_Moneda_2").html("");
                 $("#L_Moneda_3").html("");
                 $("#L_Moneda_4").html("");
-                $("#L_Moneda_5").html(Matrix_Moneda[item].Sigla);
+                $("#L_Moneda_5").html("");
+                /*Monedas de Activos*/
+                $("#V_Sigla_1").html("");
+                $("#V_Sigla_2").html("");
+                $("#V_Sigla_3").html("");
+                $("#V_Sigla_4").html("");
+                $("#V_Sigla_5").html("");
+                $("#V_Sigla_6").html("");
+                $("#V_Sigla_7").html("");
+                $("#V_Sigla_8").html("");
+                /*=================*/
             }
         }
     });
@@ -1023,7 +1023,9 @@ function Clear() {
 
 function Add_Activos(index) {
     $("#Dialog_Activos").dialog("open");
-    $("#Dialog_Activos").dialog("option", "title", "Crear Activo");
+    $("#Dialog_Activos").dialog("option", "title", "Agregar Activo");
+    Clear_Limpiar(); /*C_Contrato_Activos.js*/
+    Clear_Consulta_Fasecolda(); /*C_Contrato_Activos.js*/
     Table_Activos();
 }
 
@@ -1143,6 +1145,7 @@ function ConsultaRepetido() {
 
 function Table_Activos() {
     $("#container_TActivos").html("");
+    Cargar_Variables(); /*C_Contrato_Activos.js*/
 }
 
 function Table_Terceros() {

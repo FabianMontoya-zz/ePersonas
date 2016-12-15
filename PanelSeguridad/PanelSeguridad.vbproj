@@ -160,6 +160,7 @@
     <Content Include="Activos\Creacion\C_Activos.js" />
     <Content Include="Activos\Creacion\C_ActivosAjax.aspx" />
     <Content Include="Activos\Creacion\C_ActivosTrasaccionsAjax.js" />
+    <Content Include="Activos\Creacion\C_Activos_Facturas.js" />
     <Content Include="Activos\Creacion\C_Activos_Validacion.js" />
     <Content Include="Activos\menu.js" />
     <Content Include="Activos\SasifMaster_Cosult.js" />
@@ -222,6 +223,9 @@
     <Content Include="Contratos\Creacion\C_Contrato.js" />
     <Content Include="Contratos\Creacion\C_ContratoAjax.aspx" />
     <Content Include="Contratos\Creacion\C_ContratoTrasaccionsAjax.js" />
+    <Content Include="Contratos\Creacion\C_Contrato_Activos.js" />
+    <Content Include="Contratos\Creacion\C_Contrato_Activos_Complementos.js" />
+    <Content Include="Contratos\Creacion\C_Contrato_Activos_Validacion.js" />
     <Content Include="Contratos\menu.js" />
     <Content Include="Contratos\SasifMaster_Cosult.js" />
     <Content Include="css\Chosen\chosen-sprite%402x.png" />
@@ -603,6 +607,8 @@
     </Compile>
     <Compile Include="Activos\Creacion\C_ActivosClass.vb" />
     <Compile Include="Activos\Creacion\C_ActivosSQLClass.vb" />
+    <Compile Include="Activos\Vehiculos\VehiculosClass.vb" />
+    <Compile Include="Activos\Vehiculos\VehiculosSQLClass.vb" />
     <Compile Include="Administrador\Adm_C_AccesoPrede\C_AccesoPre.aspx.designer.vb">
       <DependentUpon>C_AccesoPre.aspx</DependentUpon>
     </Compile>

@@ -6,6 +6,8 @@
     <script src="../../SasifMaster.js" type="text/javascript"></script>
     <script src="../SasifMaster_Cosult.js" type="text/javascript"></script>
     <script src="C_Contrato.js" type="text/javascript"></script>
+    <script src="C_Contrato_Activos_Validacion.js" type="text/javascript"></script>
+    <script src="C_Contrato_Activos.js" type="text/javascript"></script>
     <script src="C_Contrato_Activos_Complementos.js" type="text/javascript"></script>
     <script src="C_ContratoTrasaccionsAjax.js" type="text/javascript"></script>
     <link href="../../css/css_login.css" rel="stylesheet" type="text/css" />
@@ -547,6 +549,170 @@
         </table>
     </div>
 
+    <div id="Dialog_Format_Adress">
+        <table style="width: 100%; text-align: center; font: 12px/20px CenturyGothic,sans-serif;">
+            <tr>
+                <td>
+                    <select id="Select_Type_Adress" class="Select_medium">
+                        <option value="">Nomenclatura</option>
+                        <option value="Cll">Calle</option>
+                        <option value="Cra">Carrera</option>
+                        <option value="Cir">Circular</option>
+                        <option value="Diag">Diagonal</option>
+                        <option value="Trans">Transversal</option>
+                        <option value="Av">Avenida</option>
+                        <option value="Km">Kilometro</option>
+                    </select>
+                </td>
+                <td>
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="Txt_N1" maxlength="4" class="Numeric" style="width: 40px" />
+                        <span class="Spam_AN"></span></span>
+                </td>
+                <td>
+                    <input type="text" id="Txt_Special" maxlength="200" class="" style="width: 400px" />
+                    <select id="Select_Letter_1" class="Select_tiny">
+                        <option value="">Letra</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+                        <option value="F">F</option>
+                        <option value="G">G</option>
+                        <option value="H">H</option>
+                        <option value="I">I</option>
+                        <option value="J">J</option>
+                        <option value="K">K</option>
+                        <option value="L">L</option>
+                        <option value="M">M</option>
+                        <option value="N">N</option>
+                        <option value="O">O</option>
+                        <option value="P">P</option>
+                        <option value="Q">Q</option>
+                        <option value="R">R</option>
+                        <option value="S">S</option>
+                        <option value="T">T</option>
+                        <option value="U">U</option>
+                        <option value="V">V</option>
+                        <option value="W">W</option>
+                        <option value="X">X</option>
+                        <option value="Y">Y</option>
+                        <option value="Z">Z</option>
+                    </select>
+                </td>
+                <td>
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="Txt_N2" maxlength="4" class="Numeric" style="width: 40px" />
+                        <span class="Spam_AN"></span></span>
+                </td>
+                <td>
+                    <select id="Select_Letter_2" class="Select_tiny">
+                        <option value="">Letra</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+                        <option value="F">F</option>
+                        <option value="G">G</option>
+                        <option value="H">H</option>
+                        <option value="I">I</option>
+                        <option value="J">J</option>
+                        <option value="K">K</option>
+                        <option value="L">L</option>
+                        <option value="M">M</option>
+                        <option value="N">N</option>
+                        <option value="O">O</option>
+                        <option value="P">P</option>
+                        <option value="Q">Q</option>
+                        <option value="R">R</option>
+                        <option value="S">S</option>
+                        <option value="T">T</option>
+                        <option value="U">U</option>
+                        <option value="V">V</option>
+                        <option value="W">W</option>
+                        <option value="X">X</option>
+                        <option value="Y">Y</option>
+                        <option value="Z">Z</option>
+                    </select>
+                </td>
+                <td>
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="Txt_N3" maxlength="4" class="Numeric" style="width: 40px" />
+                        <span class="Spam_AN"></span></span>
+                </td>
+                <td>
+                    <select id="Select_Orientacion" class="Select_medium">
+                        <option value="">Orientacion</option>
+                        <option value="Norte">Norte</option>
+                        <option value="Sur">Sur</option>
+                        <option value="Oeste">Oeste</option>
+                        <option value="Este">Este</option>
+                    </select>
+                </td>
+                <td>
+                    <select id="Select_Type_Cons" class="Select_medium">
+                        <option value="">Vivienda</option>
+                        <option value="Apto">Apartamento</option>
+                        <option value="Casa">Casa</option>
+                        <option value="Lote">Lote</option>
+                        <option value="Local">Local</option>
+                        <option value="Bodega">Bodega</option>
+                        <option value="Stand">Stand</option>
+                    </select>
+                </td>
+                <td>
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="Txt_N4" maxlength="4" class="Numeric" style="width: 40px" />
+                        <span class="Spam_AN"></span></span>
+                </td>
+                <td>
+                    <select id="Select_Type_Cons2" class="Select_medium">
+                        <option value="">Tipo</option>
+                        <option value="Bloque">Bloque</option>
+                        <option value="Interior">Interior</option>
+                        <option value="Piso">Piso</option>
+                        <option value="Manzana">Manzana</option>
+                        <option value="Torre">Torre</option>
+                    </select>
+                </td>
+                <td>
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="Txt_N5" maxlength="4" class="Numeric" style="width: 40px" />
+                        <span class="Spam_AN"></span></span>
+                </td>
+                <td>
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="Txt_Texto" maxlength="40" class="Letter" style="width: 200px" />
+                        <span class="Spam_AWords"></span></span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="10">
+                    <p>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="13">
+                    <input type="text" id="Txt_End_Adress" maxlength="4" readonly="readonly" style="width: 500px; text-align: center;" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="8">
+                    <p>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="13" style="text-align: center;">
+                    <input id="BtnStrAdress" type="button" value="Aceptar" onclick="Add_Adress();" />
+                </td>
+            </tr>
+        </table>
+    </div>
+
     <div id="Dialog_Terceros">
         <div id="Bloque_datos_Terceros1">
             <table id="T_DatosColocacion" style="width: 100%;">
@@ -636,7 +802,7 @@
                     <h3>Datos Activos
                     </h3>
                     <div id="DatosActivos">
-                        <table id="Table2" style="width: 100%;">
+                        <table id="T_Sucursal_A" style="width: 100%;">
                             <tr>
                                 <td style="width: 7.2%;" class="Label_Bold">Sucursal
                                 </td>
@@ -736,7 +902,7 @@
                                 </td>
                             </tr>
                         </table>
-                        <table id="Table3" style="width: 100%;">
+                        <table id="T_Identificacion_Persona_A" style="width: 100%;">
                             <tr>
                                 <td class="Label_Bold" style="width: 4%;">Documento
                                 </td>

@@ -15,13 +15,6 @@ var Option_Blindaje = 0;
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                    CHANGE DE DROP LIST                                                                                                       ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-//carga el combo 
-function Change_Select_Nit() {
-    $("#Select_EmpresaNit").change(function () {
-        $("#Select_EmpresaNit").attr("disabled", "disabled");
-        var index_ID = this.value;
-    });
-}
 
 //MUESTRA LOS CAMPOS DE BLINDAJE
 function Change_Select_blindaje() {
@@ -40,7 +33,7 @@ function Change_Select_blindaje() {
 }
 
 //coloca la sigla de la moneda
-function Change_Select_Moneda() {
+function Change_Select_Moneda_A() {
     $("#Select_Moneda").change(function () {
         var index_ID = this.value;
         for (item in Matrix_Moneda) {
