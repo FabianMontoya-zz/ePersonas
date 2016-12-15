@@ -15,9 +15,26 @@ var Array_Hijo_Cliente = [];
 var ArrayEstado = [];
 var ArrayTerceros = [];
 
+var Matrix_Personas = [];
+var Matrix_RTSTA = [];
+var Matrix_Pais = [];
+var Matrix_Fasecolda = [];
+var Matrix_MarcaClase_F = [];
+var Matrix_LineaMarcaClase_F = [];
+
+var Lista_Clase_F = [];
+
+var ArrayC_Activos = [];
+
+
 var ID;
 var T_Doc;
 var Doc;
+var Clase_Index;
+var Year_work;
+var Index_Year;
+
+var index_NIT_ID;
 
 var NIT;
 var tiempo;
@@ -60,81 +77,24 @@ $(document).ready(function () {
     transacionAjax_Financiacion('MATRIX_FINANCIACION');
     transaccionAjax_MTasas('MATRIX_TASAS');
 
+    transaccionAjax_MPersonas('MATRIX_PERSONAS');
+    transaccionAjax_MRTSTA("MATRIX_RTSTA");
+    transaccionAjax_MPaises_Ciudades('MATRIX_PAIS_CIUDAD');
+    transacionAjax_MFasecolda("MATRIX_FASECOLDA");
+    transacionAjax_MMarcaClase_F("MATRIX_MARCA_CLASE_F");
+    transacionAjax_MLineaMarcaClase_F("MATRIX_LINEA_MARCA_CLASE_F");
+    transacionAjax_ListaClaseFasecolda("LIST_CLASE_F");
+
+    transacionAjax_Colores("Colores");
+    transacionAjax_Tipo('Tipo');
+
+    /*Funciones para configuración inicial de campos en vista*/
     Ocultar_IMGS_Errores();
-
-    //Imagenes de los dialog con mensajes
-    $("#DE").css("display", "none");
-    $("#SE").css("display", "none");
-    $("#WA").css("display", "none");
-
-    //funcion para las ventanas emergentes
-    $("#dialog").dialog({
-        autoOpen: false,
-        dialogClass: "Dialog_Sasif",
-        modal: true
-    });
-
-    $("#dialog_eliminar").dialog({
-        autoOpen: false,
-        dialogClass: "Dialog_Sasif",
-        modal: true
-    });
-
-    $("#Dialog_Activos").dialog({
-        autoOpen: false,
-        dialogClass: "Dialog_Sasif",
-        modal: true,
-        width: 1100,
-        height: 600,
-        overlay: {
-            opacity: 0.5,
-            background: "black"
-        }
-    });
-
-    $("#Dialog_Terceros").dialog({
-        autoOpen: false,
-        dialogClass: "Dialog_Sasif",
-        modal: true,
-        width: 760,
-        height: 430,
-        overlay: {
-            opacity: 0.5,
-            background: "black"
-        }
-    });
-
-    $("#T_Activo_Grid").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
-
-    $("#T_Terceros").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
-
-    //Dialog para agregar la dirección
-    $("#Dialog_Format_Adress").dialog({
-        autoOpen: false,
-        dialogClass: "Dialog_Sasif",
-        modal: true,
-        width: 1000,
-        height: 250,
-        overlay: {
-            opacity: 0.5,
-            background: "black"
-        }
-    });
-
     Picker_Fechas();
-
-    $(function () { //Función del acordeon
-        $("#Acordeon_Contrato").accordion({
-            heightStyle: "content",
-            collapsible: true
-        });
-    });
+    CargarAcordeons();
+    AgregarTablas();
+    VentanasEmergentes();
+    /*=====================================*/
 
     $("#Select_Base_Calculo").prop('disabled', true); //Desactivamos el Chosen
 
@@ -162,6 +122,12 @@ $(document).ready(function () {
 
 //Ocultamos las imagenes de error al iniciar la pantalla
 function Ocultar_IMGS_Errores() {
+
+    //Imagenes de los dialog con mensajes
+    $("#DE").css("display", "none");
+    $("#SE").css("display", "none");
+    $("#WA").css("display", "none");
+
     $("#Img1").css("display", "none");
     $("#Img2").css("display", "none");
     $("#Img3").css("display", "none");
@@ -184,12 +150,87 @@ function Ocultar_IMGS_Errores() {
     $("#Img17").css("display", "none");
     $("#Img18").css("display", "none");
     $("#Img19").css("display", "none");
-    $("#Img20").css("display", "none"); //Terceros
+    $("#Img20").css("display", "none"); //IMG de un campo de Terceros
 
     $("#Img_TD_C").css("display", "none");
     $("#Img_D_C").css("display", "none");
     $("#Img_TD_C2").css("display", "none");
     $("#Img_D_C2").css("display", "none");
+}
+
+//Función que carga los acordeones
+function CargarAcordeons() {
+    $(function () { //Función del acordeon
+        $("#Acordeon_Contrato").accordion({
+            heightStyle: "content",
+            collapsible: true
+        });
+    });
+
+    $(function () { //Función del acordeon
+        $("#Acordeon_Activo").accordion({
+            heightStyle: "content",
+            collapsible: true
+        });
+    });
+}
+
+//Función que Agrega el diseño a las tablas
+function AgregarTablas() {    
+    $("#T_Activo_Grid").dataTable({
+        "bJQueryUI": true, "iDisplayLength": 1000,
+        "bDestroy": true
+    });
+
+    $("#T_Terceros").dataTable({
+        "bJQueryUI": true, "iDisplayLength": 1000,
+        "bDestroy": true
+    });
+
+    $("#T_Factura_Grid").dataTable({
+        "bJQueryUI": true, "iDisplayLength": 1000,
+        "bDestroy": true
+    });
+}
+
+//Función que contiene las propiedades para las ventanas emergentes
+function VentanasEmergentes() {
+
+    $("#dialog").dialog({
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true
+    });
+
+    $("#dialog_eliminar").dialog({
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true
+    });
+
+    $("#Dialog_Activos").dialog({
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true,
+        width: 1200,
+        height: 850,
+        overlay: {
+            opacity: 0.5,
+            background: "black"
+        }
+    });
+
+    $("#Dialog_Terceros").dialog({
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true,
+        width: 760,
+        height: 480,
+        overlay: {
+            opacity: 0.5,
+            background: "black"
+        }
+    });
 }
 
 //Función de control del picker de las fechas
@@ -284,7 +325,7 @@ function ValidaCamposPeople2() {
 }
 
 //Valida que ya haya seleccionado una empresa y escrito el número de la colocación para agregar un tercero
-function ValidarIDColocacion() {
+function ValidarIDColocacion_T() {
     var valido = false;
     var NIT = $("#Select_EmpresaNit").val();
     var ID_Colocacion = $("#TXT_ID_Colocacion").val();
@@ -339,6 +380,29 @@ function ValidarIngresoTerceros() {
     return valido;
 }
 
+//Valida que ya haya seleccionado una empresa y escrito el número de la colocación para agregar un tercero
+function ValidarIDColocacion_A() {
+    var valido = false;
+    var NIT = $("#Select_EmpresaNit").val();
+    var ID_Colocacion = $("#TXT_ID_Colocacion").val();
+
+    if (NIT == "-1" || NIT == null || ID_Colocacion == "" || ID_Colocacion == null) {
+        Mensaje_General("¡Campos Incompletos!", "Los campos [NIT Empresa] y [Número de Colocación] son obligatorios para poder agregar un activo.", "E");
+
+        if (NIT == "-1" || NIT == null) {
+            $("#Img1").css("display", "inline-table");
+        }
+
+        if (ID_Colocacion == "" || ID_Colocacion == null) {
+            $("#Img2").css("display", "inline-table");
+        }
+
+    } else {
+        $("#Img2").css("display", "none");
+        $("#Img1").css("display", "none");
+        Add_Activos();
+    }
+}
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                     PROCESO DE CARGUE                                                                                                                                        ----*/
@@ -353,11 +417,15 @@ function Change_Select_Nit() {
             $("#Img1").css("display", "none");
             $("#Select_EmpresaNit").prop('disabled', true); //Desactivamos el Chosen
         }
-        var index_ID = this.value;
-        Charge_Combos_Depend_Nit(Matrix_Sucursal, "Select_Sucursal_C", index_ID, "");
-        Charge_Combos_Depend_Nit(Matrix_Productos, "Select_Producto", index_ID, "");
-        Charge_Combos_Depend_Nit(Matrix_Financiacion, "Select_Condicion_Financiacion", index_ID, "");
+        index_NIT_ID = this.value;
+        Charge_Combos_Depend_Nit(Matrix_Sucursal, "Select_Sucursal_C", index_NIT_ID, "");
+        Charge_Combos_Depend_Nit(Matrix_Productos, "Select_Producto", index_NIT_ID, "");
+        Charge_Combos_Depend_Nit(Matrix_Financiacion, "Select_Condicion_Financiacion", index_NIT_ID, "");
 
+        /*Para Activos*/
+        Charge_Combos_Depend_Nit(Matrix_Sucursal, "Select_Sucursal", index_NIT_ID, "");
+        Charge_Combos_Depend_Nit(Matrix_Personas, "Select_Persona_A", index_NIT_ID, "");
+        /*============*/
         /*Escritura de L_Tasa_Mora*/
         $("#L_Tasa_Mora").html(TasaMora);
 

@@ -390,3 +390,239 @@ function transacionAjax_C_Terceros_create(State) {
     });
 
 }
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                          MATRICES DE CARGA ACTIVOS                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_MPersonas(State) {
+    $.ajax({
+        url: "C_ContratoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'CIUDADES'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_Personas = [];
+            }
+            else {
+                Matrix_Personas = JSON.parse(result);
+                Charge_Combo_Persona(Matrix_Personas, "Select_Persona_R", "", "");
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_MRTSTA(State) {
+    $.ajax({
+        url: "C_ContratoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'RUTA'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_RTSTA = [];
+            }
+            else {
+                Matrix_RTSTA = JSON.parse(result);
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_MPaises_Ciudades(State) {
+    $.ajax({
+        url: "C_ContratoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'CIUDADES'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_Ciudad = [];
+            }
+            else {
+                Matrix_Ciudad = JSON.parse(result);
+                F_Matrix_pais();
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_MFasecolda(State) {
+    $.ajax({
+        url: "C_ContratoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'TIPO'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_Fasecolda = [];
+            }
+            else {
+                Matrix_Fasecolda = JSON.parse(result);
+            }
+        },
+        error: function () {
+        }
+    });
+}
+
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_MMarcaClase_F(State) {
+    $.ajax({
+        url: "C_ContratoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'TIPO'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_MarcaClase_F = [];
+            }
+            else {
+                Matrix_MarcaClase_F = JSON.parse(result);
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_MLineaMarcaClase_F(State) {
+    $.ajax({
+        url: "C_ContratoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'TIPO'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_LineaMarcaClase_F = [];
+            }
+            else {
+                Matrix_LineaMarcaClase_F = JSON.parse(result);
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_ListaClaseFasecolda(State) {
+    $.ajax({
+        url: "C_ContratoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'TIPO'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Lista_Clase_F = [];
+            }
+            else {
+                Lista_Clase_F = JSON.parse(result);
+                Charge_Combos_Depend_Nit(Lista_Clase_F, "Select_ClaseF", "", "");
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_Colores(State) {
+    $.ajax({
+        url: "C_ContratoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'IMPUESTO_GASTO'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                var Colores = [];
+            }
+            else {
+                var Colores = JSON.parse(result);
+                charge_CatalogList(Colores, "Select_Color", 1);
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_Tipo(State) {
+    $.ajax({
+        url: "C_ContratoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'TIPO'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                ArrayTipo = [];
+            }
+            else {
+                ArrayTipo = JSON.parse(result);
+                charge_CatalogList(ArrayTipo, "Select_Tipo", 1);
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
