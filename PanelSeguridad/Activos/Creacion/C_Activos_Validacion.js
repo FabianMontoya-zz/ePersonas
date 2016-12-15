@@ -40,6 +40,32 @@ function ValidaCamposPeople() {
     return valida;
 }
 
+//valida campos minimos para crear factura
+function ValidaMinimo() {
+
+    var valida = 0;
+    var valida_K = 0;
+    var valida_general;
+
+    var C_Nit_ID = $("#Select_EmpresaNit").val();
+    var C_TA = $("#Select_Tipo").val();
+    var C_M = $("#Select_Moneda").val();
+    var C_R1 = $("#TxtRef_1").val();
+    var C_R2 = $("#TxtRef_2").val();
+    var C_R3 = $("#TxtRef_3").val();
+    var C_R4 = $("#TxtRef_Other").val();
+    
+    if (C_Nit_ID == "-1" || C_TA == "-1" || C_M == "-1") { valida = 1; }
+    if (C_R1 == "" && C_R2 == "" && C_R3 == "" && C_R4 == "") { valida_K = 1; }
+
+    if (valida == 0 && valida_K == 0)
+        valida_general = 0;
+    else
+        valida_general = 1;
+
+    return valida_general;
+}
+
 //validamos que tipo de busqueda es y verificamos
 function ValidaCamposConsultaFasecolda() {
 
@@ -325,8 +351,8 @@ function V_Campos_Vehiculos() {
             validar_Blindaje = 0;
             break;
     }
-   validar = Valida_Keys_Bloque("V", valida_llave, validar_Vehiculo, validar_Blindaje);
-   return validar;
+    validar = Valida_Keys_Bloque("V", valida_llave, validar_Vehiculo, validar_Blindaje);
+    return validar;
 }
 
 // paso 3.1

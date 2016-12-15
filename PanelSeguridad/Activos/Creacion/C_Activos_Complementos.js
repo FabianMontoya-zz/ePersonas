@@ -18,6 +18,7 @@ var Option_Blindaje = 0;
 //carga el combo 
 function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {
+        $("#Select_EmpresaNit").attr("disabled", "disabled");
         var index_ID = this.value;
         Charge_Combos_Depend_Nit(Matrix_Sucursal, "Select_Sucursal", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Personas, "Select_Persona_A", index_ID, "");
@@ -51,6 +52,9 @@ function Change_Select_Moneda() {
                 $("#V_Sigla_3").html(Matrix_Moneda[item].Sigla);
                 $("#V_Sigla_4").html(Matrix_Moneda[item].Sigla);
                 $("#V_Sigla_5").html(Matrix_Moneda[item].Sigla);
+                $("#V_Sigla_6").html(Matrix_Moneda[item].Sigla);
+                $("#V_Sigla_7").html(Matrix_Moneda[item].Sigla);
+                $("#V_Sigla_8").html(Matrix_Moneda[item].Sigla);
             }
         }
     });
@@ -69,6 +73,9 @@ function Change_Select_TA() {
                 $("#Tabla_LLave_Vehiculos").css("display", "none");
                 $("#Blo_Inmuebles").css("display", "inline-table");
                 $("#Blo_Fasecolda").css("display", "none");
+                $("#B_I").css("display", "inline-table");
+                $("#B_V").css("display", "none");
+
                 Tipo_Activo = 1;
                 break;
 
@@ -79,6 +86,10 @@ function Change_Select_TA() {
                 $("#Blo_Inmuebles").css("display", "none");
                 $("#Blo_Fasecolda").css("display", "inline-table");
                 $("#Txtkey_1").html("Placa");
+                $("#B_I").css("display", "none");
+                $("#B_V").css("display", "inline-table");
+                $("#T_llave_Act").html("Placa");
+
                 Year_work = Captura_parametro();
                 Tipo_Activo = 2;
                 break;
@@ -90,6 +101,10 @@ function Change_Select_TA() {
                 $("#Blo_Inmuebles").css("display", "none");
                 $("#Blo_Fasecolda").css("display", "none");
                 $("#Txtkey_1").html("C. Identificación");
+                $("#B_I").css("display", "none");
+                $("#B_V").css("display", "none");
+                $("#T_llave_Act").html("C. Identificación");
+
                 Tipo_Activo = 0;
                 break;
 
@@ -99,8 +114,10 @@ function Change_Select_TA() {
                 $("#Tabla_LLave_Vehiculos").css("display", "inline-table");
                 $("#Blo_Inmuebles").css("display", "none");
                 $("#Blo_Fasecolda").css("display", "none");
+                $("#B_I").css("display", "none");
+                $("#B_V").css("display", "inline-table");
+                $("#T_llave_Act").html("C. Identificación");
                 $("#Txtkey_1").html("C. Identificación");
-                $("#Acordeon_Activo").accordion("option", "active", 1);
                 break;
         }
     });

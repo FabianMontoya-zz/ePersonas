@@ -126,6 +126,7 @@ function transacionAjax_MMoneda(State) {
             else {
                 Matrix_Moneda = JSON.parse(result);
                 Charge_Combos_Depend_Nit(Matrix_Moneda, "Select_Moneda", "", "");
+                Charge_Combos_Depend_Nit(Matrix_Moneda, "Select_Moneda_F", "", "");
             }
         },
         error: function () {
@@ -441,7 +442,11 @@ function transacionAjax_C_Activos_create(State) {
 
                     case "Exito":
                         Mensaje_General("Exito", "El Activo fue creado exitosamente! ", "S");
-                        //Clear();
+                        if (Tipo_Activo != 2) {
+                            Clear_Limpiar();
+                            Clear_Consulta_Fasecolda();
+                            Enable_Consult_Fasecolda();
+                        }
                         break;
                 }
 
@@ -533,7 +538,9 @@ function transacionAjax_C_Vehiculos_create(State) {
 
                 case "Exito":
                     transacionAjax_C_Activos_create("crear");
-                    //Clear();
+                    Clear_Limpiar();
+                    Clear_Consulta_Fasecolda();
+                    Enable_Consult_Fasecolda();
                     break;
             }
 

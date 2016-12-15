@@ -331,7 +331,7 @@
     border: solid 1px #921919;
 }
 
-#Bloque_datosIngreso, #T_Datos_Identificacion_blin
+#Bloque_datosIngreso, #T_Datos_Identificacion_blin, #Bloque_datos_activos, #Bloque_Datos_Factura
 {
     margin-top: 1%;
     margin-bottom: 1%;
