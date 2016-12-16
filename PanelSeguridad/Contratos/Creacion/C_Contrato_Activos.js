@@ -12,6 +12,8 @@ var ArrayC_Activos = [];
 
 var ArrayActivos = [];
 var ArrayVehiculos = [];
+var ListActivos = [];
+var ListVehiculos = [];
 
 var Clase_Index;
 var Year_work;

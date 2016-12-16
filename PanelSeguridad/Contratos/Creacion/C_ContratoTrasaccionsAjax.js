@@ -325,6 +325,8 @@ function transacionAjax_C_Contrato_create(State) {
         },
         //Transaccion Ajax en proceso
         success: function (result) {
+            var Mensaje = "La colocación se ha agregado correctamente junto con sus adicionales";
+
             switch (result) {
 
                 case "Error":
@@ -336,8 +338,18 @@ function transacionAjax_C_Contrato_create(State) {
                     break;
 
                 case "Exito":
-                    if (ArrayTerceros.length > 0) {
-                        transacionAjax_C_Terceros_create("CrearTercero");
+                    if (ArrayTerceros.length > 0 || ArrayActivos.length > 0) {
+                        if (ArrayTerceros.length > 0) {
+                            transacionAjax_C_Terceros_create("CrearTercero");
+                            Mensaje = Mensaje + " [Terceros]";
+                        }
+                        if (ArrayActivos.length > 0) {
+                            transacionAjax_C_Activos_create("CrearActivo");
+                            Mensaje = Mensaje + " [Activos]";
+                        }
+
+                        Mensaje_General("¡Colocación Agregada!", Mensaje, "S");
+                        Clear();
                     }
                     else {
                         Mensaje_General("¡Colocación Agregada!", "La colocación se ha agregado correctamente.", "S");
@@ -385,8 +397,49 @@ function transacionAjax_C_Terceros_create(State) {
                     break;
 
                 case "Exito":
-                    Mensaje_General("¡Terceros Agregados!", "La colocación se ha agregado correctamente.", "S");
-                    Clear();
+                    break;
+            }
+
+        },
+        error: function () {
+
+        }
+    });
+
+}
+
+function transacionAjax_C_Activos_create(State) {
+
+
+    //recorer array para el ingreso de los documentos hijos
+    ListActivos = JSON.stringify(ArrayActivos);
+    ListVehiculos = JSON.stringify(ArrayVehiculos);
+    
+    $.ajax({
+        url: "C_ContratoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "Nit_ID": $("#Select_EmpresaNit").val(),
+            "Contrato_ID": $("#TXT_ID_Colocacion").val(),
+            "ListActivos": ListActivos,
+            "ListVehiculos": ListVehiculos,
+            "user": User
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            switch (result) {
+
+                case "Error":
+                    Mensaje_General("Disculpenos :(", "No se realizó el ingreso de los Terceros.", "E");
+                    break;
+
+                case "Existe":
+                    Mensaje_General("¡Código Repetido! - Terceros", "El código ingresado ya se encuentra registrado en la Base de Datos.", "W");
+                    break;
+
+                case "Exito":
                     break;
             }
 
@@ -656,10 +709,17 @@ function transacionAjax_Consult_Activos_existe(State, tabla, index_NIT_ID, Ref_1
                         var json_V = JsonVehiculos();
 
                         if (json_V == 0) {
+                            Mensaje_General("¡Activo Agregado - Vehículo!", "Se ha agregado el Activo correctamente.", "S");
+                            Clear_Limpiar();
+                            Clear_Consulta_Fasecolda();
                         } else {
                             Mensaje_General("¡Error Vehículo!", "Lo sentimos, se produjo un error al guardar el nuevo vehículo. Para mayor información revisar el log.", "E");
                         }
 
+                    } else {
+                        Mensaje_General("¡Activo Agregado!", "Se ha agregado el Activo correctamente.", "S");
+                        Clear_Limpiar();
+                        Clear_Consulta_Fasecolda();
                     }
                 } else {
                     Mensaje_General("¡Error Activo!", "Lo sentimos, se produjo un error al guardar el nuevo activo.  Para mayor información revisar el log.", "E");

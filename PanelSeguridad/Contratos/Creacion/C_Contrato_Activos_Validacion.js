@@ -13,6 +13,14 @@ var TipoEscritura = 0;
 var NunImobiliaria = "";
 var FechaC_Recibo = "";
 var FechaC_Retiro = "";
+
+var ValorChasis = 0;
+var Pasajeros = 0;
+var Potencia = 0;
+var TDoc_Blin = 0;
+var Doc_Blin = 0;
+var Nivel_Blin = 0;
+
 /*--------------- region de variables globales --------------------*/
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -173,6 +181,31 @@ function ValidaCampos_InsertBD_Activos() {
     return valida_process;
 }
 
+//validamos los campos y  asignamos baaloses segun proceso de insercion en vehiculos
+function ValidaCampos_InsertBD_Vehiculos() {
+
+    var valida_process = 0;
+
+    if ($("#TxtValor_Chasis").val() != "")
+        ValorChasis = F_NumericBD($("#TxtValor_Chasis").val());
+
+    if ($("#Txt_NPasajeros").val() != "")
+        Pasajeros = $("#Txt_NPasajeros").val();
+
+    if ($("#Txt_Potencia").val() != "")
+        Potencia = $("#Txt_Potencia").val();
+
+    if ($("#Select_Documento_Blin").val() != "-1")
+        TDoc_Blin = $("#Select_Documento_Blin").val();
+
+    if ($("#TxtDoc_Blin").val() != "")
+        Doc_Blin = $("#TxtDoc_Blin").val();
+
+    if ($("#Txt_Nivel_Blin").val() != "")
+        Nivel_Blin = $("#Txt_Nivel_Blin").val();
+
+    return valida_process;
+}
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                           PROCESO DE VALIDACION CAMPOS   DINAMICOS                                                             ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/

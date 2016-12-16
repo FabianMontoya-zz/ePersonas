@@ -77,6 +77,10 @@ Public Class C_ContratoAjax
                 Case "ConsultarActivo"
                     ConsultActivo()
 
+                Case "CrearActivo"
+                    InsertC_Activos()
+
+
             End Select
 
         End If
@@ -368,6 +372,24 @@ Public Class C_ContratoAjax
     End Function
 #End Region
 
+#Region "CRUD ACTIVOS"
+
+    Protected Sub InsertC_Activos()
+
+        Dim SQL_C_Act As New C_ActivosSQLClass
+        Dim ObjListC_Activo As New List(Of C_ActivosClass)
+
+        Dim Result_list As String = "Exito"
+
+        Dim ListActivos As New List(Of C_ActivosClass)
+        ListActivos = Create_List_Activos()
+
+
+    End Sub
+
+
+#End Region
+
 #Region "DROP LIST ACTIVOS"
     ''' <summary>
     ''' funcion que carga el objeto DDL consulta
@@ -506,7 +528,7 @@ Public Class C_ContratoAjax
     ''' <remarks></remarks>
     Protected Sub ConsultActivo()
         Dim result As String = ""
-        
+
         Select Case Request.Form("tabla")
             Case "ACTIVOS"
                 Dim SQL As New C_ActivosSQLClass
@@ -523,10 +545,70 @@ Public Class C_ContratoAjax
 
         End Select
 
-
-
         Response.Write(result)
 
     End Sub
+
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Create_List_Activos()
+
+        Dim vl_S_Nit As String = Request.Form("Nit_ID")
+        Dim vl_S_User As String = Request.Form("user")
+
+        Dim S_list As String = Request.Form("ListActivos").ToString
+        Dim NewList = JsonConvert.DeserializeObject(Of List(Of C_ActivosClass))(S_list)
+
+        Dim ObjlistTercero As New List(Of C_ActivosClass)
+
+        For Each item As C_ActivosClass In NewList
+
+            Dim Obj As New C_ActivosClass
+
+            Obj.Nit_ID = vl_S_Nit
+
+
+            Obj.Ref_1 = item.Ref_1
+            Obj.Ref_2 = item.Ref_2
+            Obj.Ref_3 = item.Ref_3
+            Obj.Descripcion = item.Descripcion
+            Obj.TA_ID = item.TA_ID
+            Obj.STA_ID = item.STA_ID
+            Obj.Cod_Pais_U = item.Cod_Pais_U
+            Obj.Ciudad_ID_U = item.Ciudad_ID_U
+            Obj.Direccion_U = item.Direccion_U
+            Obj.Cod_Pais_R = item.Cod_Pais_R
+            Obj.Ciudad_ID_R = item.Ciudad_ID_R
+            Obj.TypeDocument_ID_R = item.TypeDocument_ID_R
+            Obj.Document_ID_R = item.Document_ID_R
+            Obj.Surcursal_ID = item.Surcursal_ID
+            Obj.Cod_Moneda_ID = item.Cod_Moneda_ID
+            Obj.Valor_Bien = item.Valor_Bien
+            Obj.Val_Op_Compra = item.Val_Op_Compra
+            Obj.CompraBien = item.CompraBien
+            Obj.Asegurado = item.Asegurado
+            Obj.EstadoActivo = item.EstadoActivo
+            Obj.TipoAdministracion = item.TipoAdministracion
+            Obj.TipoEscritura = item.TipoEscritura
+            Obj.N_Escritura = item.N_Escritura
+            Obj.FechaConta_Recibo = item.FechaConta_Recibo
+            Obj.FechaConta_Retiro = item.FechaConta_Retiro
+            Obj.TypeDocument_ID_T = item.TypeDocument_ID_T
+            Obj.Document_ID_T = item.Document_ID_T
+            Obj.UsuarioCreacion = item.UsuarioCreacion
+            Obj.UsuarioCreacion = vl_S_User
+            Obj.UsuarioActualizacion = vl_S_User
+            Obj.FechaCreacion = Date.Now
+            Obj.FechaActualizacion = Date.Now
+
+            ObjlistTercero.Add(Obj)
+
+        Next
+
+        Return ObjlistTercero
+    End Function
 #End Region
 End Class

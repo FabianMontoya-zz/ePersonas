@@ -175,6 +175,12 @@ function VentanasEmergentes() {
         modal: true
     });
 
+    $("#dialog_eliminar_A").dialog({
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true
+    });
+
     $("#Dialog_Activos").dialog({
         autoOpen: false,
         dialogClass: "Dialog_Sasif",
@@ -402,7 +408,7 @@ function Change_Select_Nit() {
         Charge_Combos_Depend_Nit(Matrix_Financiacion, "Select_Condicion_Financiacion", index_NIT_ID, "");
 
         /*Para Activos*/
-        console.log("Carga Select_Sucursal");
+        
         Charge_Combos_Depend_Nit(Matrix_Sucursal, "Select_Sucursal", index_NIT_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Personas, "Select_Persona_A", index_NIT_ID, "");
         /*============*/
@@ -1058,7 +1064,7 @@ function BTNAgregarTercero() {
 }
 
 //Crea la tabla de Terceros
-function AddArrayToTable() {
+function AddArrayTercerosToTable() {
     var Html;
 
     Html = "<table id='T_T' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th><span class='cssToolTip_ver'><img alt='Activo' class='Add' onclick='javascript:ValidarIDColocacion();' id='Crear_Terceros' height='20px' width='20px' src='../../images/add.png' /><span>Agregar Persona</span></span></th><th>Tipo Documento</th><th>Identificación</th><th>Nombre</th><th>Tipo de relación</th></tr></thead><tbody>";
@@ -1078,11 +1084,39 @@ function AddArrayToTable() {
     });
 }
 
+//Crea la tabla de Activos
+function AddArrayActivosToTable() {
+    var Html;
+
+    Html = "<table id='T_A' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th><span class='cssToolTip_ver'><img alt='Activo' class='Add' onclick='javascript:ValidarIDColocacion_A();' id='Crear_Activo' height='20px' width='20px' src='../../images/add.png' /><span>Agregar Nuevo Activo</span></span></th><th>Descripción</th><th>Referencia 1</th><th>Referencia 2</th><th>Referencia 3</th><th>Tipo de Activo</th></tr></thead><tbody>";
+    for (itemArray in ArrayActivos) {
+        if (ArrayActivos[itemArray].Contrato_ID != 0) {
+            Html += "<tr id= 'T_A_" + ArrayActivos[itemArray].Index_A + "'><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar_Registro_A('" + ArrayActivos[itemArray].Index_A + "')\"></input></td><td>" + ArrayActivos[itemArray].Descripcion + "</td><td>" + ArrayActivos[itemArray].Ref_1 + "</td><td>" + ArrayActivos[itemArray].Ref_2 + "</td><td>" + ArrayActivos[itemArray].Ref_3 + "</td><td>" + ArrayActivos[itemArray].Descrip_TActivos + "</td></tr>";
+        }
+    }
+
+    Html += "</tbody></table>";
+    $("#Container_Activos").html("");
+    $("#Container_Activos").html(Html);
+
+    $("#T_A").dataTable({
+        "bJQueryUI": true, "iDisplayLength": 1000,
+        "bDestroy": true
+    });
+}
+
 //Dialog para eliminar Personas de Tabla de Terceros
 function Eliminar_Registro(index) {
     $("#dialog_eliminar").dialog("open");
     $("#dialog_eliminar").dialog("option", "title", "¿Eliminar Persona?");
     indexTerceros = index;
+}
+
+//Dialog para eliminar Personas de Tabla de Terceros
+function Eliminar_Registro_A(index) {
+    $("#dialog_eliminar_A").dialog("open");
+    $("#dialog_eliminar_A").dialog("option", "title", "¿Eliminar Activo?");
+    indexActivos = index;
 }
 
 //eliminar Personas de Tabla de Terceros
@@ -1093,42 +1127,25 @@ function Eliminar_Persona_Array() {
             ArrayTerceros.splice(item, 1);
         }
     }
-    AddArrayToTable();
+    AddArrayTercerosToTable();
     indexTerceros = "";
     $("#dialog_eliminar").dialog("close");
 }
 
-function Json_Terceros() {
-
-    var valido = false;
-
-    var validaRepetido = ConsultaRepetido();
-    switch (validaRepetido) {
-        case 0:
-            var STRTypeDocumento = $("#Select_Documento_C2 option:selected").html();
-            var STRTypeRelation = $("#Select_Relacion option:selected").html();
-            var JSON_terceros = {
-                "TypeDocument_ID": $("#Select_Documento_C2").val(),
-                "Document_ID": $("#TxtDoc_C2").val(),
-                "Descrip_Persona": namePersona,
-                "TypeRelation": $("#Select_Relacion").val(),
-                "Descrip_TypeDocumento": STRTypeDocumento,
-                "Descrip_TypeRelation": STRTypeRelation,
-                "Index": ContTerceros
+//eliminar Activos de Tabla de Activos
+function Eliminar_Activo_Array() {
+    //borramos el Activo deseado
+    for (item in ArrayActivos) {
+        if (ArrayActivos[item].Index_A == indexActivos) {            
+            if (ArrayActivos[item].TActivo == "2") {
+                ArrayVehiculos.splice(indexActivos, 1);
             }
-            ArrayTerceros.push(JSON_terceros);
-            ContTerceros = ContTerceros + 1;
-            valido = true;
-            AddArrayToTable();
-            break;
-
-        case 1:
-            Mensaje_General("¡Persona Repetida!", "La persona ya se encuentra relacionada, no puede relacionar dos veces a la misma persona.", "W");
-            break;
-
+            ArrayActivos.splice(item, 1);
+        }
     }
-
-    return valido;
+    AddArrayActivosToTable();
+    indexActivos = "";
+    $("#dialog_eliminar_A").dialog("close");
 }
 
 function ConsultaRepetido() {

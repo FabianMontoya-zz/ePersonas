@@ -308,7 +308,6 @@ function Ver(Index_Cliente) {
 // muestra el registro a editar
 function Editar(Index, Type) {
 
-    console.log(Index);
     $("#Dialog_Create").dialog("open");
      $("#TablaConsulta").css("display", "none");
 

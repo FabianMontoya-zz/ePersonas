@@ -439,18 +439,18 @@
                             <tr>
                                 <th>
                                     <span class="cssToolTip_ver">
-                                        <img alt="Activo" class="Add" onclick="javascript:ValidarIDColocacion_A();" id="Crear" height='20px'
+                                        <img alt="Activo" class="Add" onclick="javascript:ValidarIDColocacion_A();" id="Crear_Activo" height='20px'
                                             width='20px' src='../../images/add.png' /><span>Agregar Nuevo Activo</span></span>
                                 </th>
-                                <th>Identificación Activo
+                                <th>Descripción
                                 </th>
-                                <th>Identificación Activo
+                                <th>Referencia 1
                                 </th>
-                                <th>Identificación Activo
+                                <th>Referencia 2
                                 </th>
-                                <th>Producto
+                                <th>Referencia 3
                                 </th>
-                                <th>Moneda
+                                <th>Tipo de Activo
                                 </th>
                             </tr>
                         </thead>
@@ -545,6 +545,26 @@
             <tr>
                 <td colspan="2" align="center">
                     <input id="BtnElimin" type="button" value="Confirmar" onclick="Eliminar_Persona_Array();" />
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="dialog_eliminar_A" title="Basic dialog">
+        <table style="width: 100%; text-align: center;">
+            <tr>
+                <td>
+                    <p class="Label_Bold" id="P2">
+                        Pulse Confirmar para eliminar el registro seleccionado.
+                    </p>
+                </td>
+                <td>
+                    <img alt="Warning_2" src="../../images/alert.png" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input id="BtnElimin_A" type="button" value="Confirmar" onclick="Eliminar_Activo_Array();" />
                 </td>
             </tr>
         </table>
@@ -783,9 +803,9 @@
                 </tr>
             </table>
         </div>
-    <div id="Div_BTN_AgregarTercero" style="width: 100%; text-align: center; margin-top: 11px;">
-        <input id="BTN_AgregarTercero" type="button" value="Guardar" onclick="BTNAgregarTercero();" />
-    </div>
+        <div id="Div_BTN_AgregarTercero" style="width: 100%; text-align: center; margin-top: 11px;">
+            <input id="BTN_AgregarTercero" type="button" value="Guardar" onclick="BTNAgregarTercero();" />
+        </div>
     </div>
 
     <div id="Dialog_Activos">

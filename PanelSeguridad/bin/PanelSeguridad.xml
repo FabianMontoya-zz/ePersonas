@@ -6,13 +6,7 @@ PanelSeguridad
 </name>
 </assembly>
 <members>
-<member name="M:PanelSeguridad.ColoresSQLClass.List_Colors">
-	<summary>
- Carga lista de colores
- </summary>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.Adm_OpcRolAjax.Consulta_OpcRol">
+<member name="M:PanelSeguridad.Adm_OpcRolAjax.Consulta_OpcRol">
 	<summary>
  traemos todos los datos para tabla opcion roles (READ)
  </summary>
@@ -1317,6 +1311,56 @@ To modify move field declaration from designer file to code-behind file.
 	<summary>
 	</summary>
 	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.CargarTipo">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.Matrix_RTSTA">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_Matriz_PaisCiudad">
+	<summary>
+ funcion que carga La matrix
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_MPersonas">
+	<summary>
+ funcion que carga La matrix
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.CargarColor">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_Lista_Clase_Fasecolda">
+	<summary>
+ funcion que carga La lista de clases
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_MMarca_Clase_Fasecolda">
+	<summary>
+ funcion que carga matrix de marca clases fasecolda
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_MLinea_Marca_Clase_Fasecolda">
+	<summary>
+ funcion que carga matrix de lineas marca clases fasecolda
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_MFasecolda">
+	<summary>
+ funcion que carga matrix de fasecolda
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.ConsultActivo">
+	<summary>
+ funcion que carga consulta el activo
+ </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.Crud_DocAjax.Consulta_Crud_Doc">
 	<summary>
@@ -2677,6 +2721,11 @@ To modify move field declaration from designer file to code-behind file.
  funcion que inserta en la tabla C_Activos (INSERT)
  </summary>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosAjax.Insert_Vehiculo">
+	<summary>
+ funcion que inserta en la tabla vehiculo (INSERT)
+ </summary>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.C_ActivosAjax.CargarTipo">
 	<summary>
  funcion que carga el objeto DDL consulta
@@ -3343,6 +3392,12 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
  </summary>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.ColoresSQLClass.List_Colors">
+	<summary>
+ Carga lista de colores
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.Inf_ImpuestoSQLClass.Read_All(System.String,System.String,System.String)">
 	<summary>
  creala consulta para la tabla Inf_Impuesto parametrizada (READ)
@@ -3446,6 +3501,20 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
  funcion que valida si el id esta en la BD
  </summary>
 	<param name="vp_S_ID"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.VehiculosSQLClass.InsertVehiculos(PanelSeguridad.VehiculosClass)">
+	<summary>
+ funcion que crea el query para la insercion de nuevo C_Activos (INSERT)
+ </summary>
+	<param name="vp_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.VehiculosSQLClass.Consulta_Repetido(PanelSeguridad.VehiculosClass)">
+	<summary>
+ funcion que valida si esta repetido el registro a ingresar
+ </summary>
+	<param name="vp_O_Obj"></param>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.C_AccesoPreAjax.Consulta_C_AccesoPre">

@@ -245,7 +245,6 @@ function Charge_CatalogList_Matriz_Depend(M1, M2, Select_Pais, selector, type, S
         $("#" + selector).append("<option value='-1'>Seleccione...</option>");
         $("#" + selector + " option[value= '-1'] ").attr("selected", true);
     }
-    console.log(Select_Ciudad);
 
     if (Select_Ciudad != "") {
         $("#" + selector).append("<option value='-1'>Seleccione...</option>");
