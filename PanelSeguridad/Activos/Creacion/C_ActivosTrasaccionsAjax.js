@@ -379,8 +379,38 @@ function transacionAjax_ShearchPeople(State, TD, D, NIT, Vista, Variable) {
                     if (Variable == "Persona_Exist") {
                         Persona_Exist = true;
                     }
-                      break;
+                    break;
             }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_Consult_Factura_Existe(State, tabla, index_NIT_ID, Ref_1, Ref_2, Ref_3, Factura_ID) {
+      $.ajax({
+        url: "C_ActivosAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": tabla,
+            "NIT": index_NIT_ID,
+            "Ref1": Ref_1,
+            "Ref2": Ref_2,
+            "Ref3": Ref_3,
+            "Factura_ID": Factura_ID
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == 0)
+                Json_Facturas(Ref_1, Ref_2, Ref_3);
+            else
+                Mensaje_General("¡Factura Repetido!", "La factura que desea ingresar ya se encuentra registrado en el sistema.", "W");
+
+
         },
         error: function () {
 

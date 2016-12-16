@@ -58,6 +58,9 @@ Public Class C_ActivosAjax
                 Case "crear_vehiculo"
                     Insert_Vehiculo()
 
+                Case "ConsultarFactura"
+                    ConsultFactura()
+
             End Select
 
         End If
@@ -417,6 +420,35 @@ Public Class C_ActivosAjax
 
     End Sub
 
+#End Region
+
+
+#Region "FUNCIONES FACTURA"
+    ''' <summary>
+    ''' funcion que carga consulta el activo
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub ConsultFactura()
+        Dim result As String = ""
+
+        Select Case Request.Form("tabla")
+            Case "FACT_ORD_COMPRA"
+                Dim SQL As New FacturaSQLClass
+                Dim Obj As New FacturaClass
+
+                Obj.Nit_ID = Request.Form("NIT")
+                Obj.Ref_1 = Request.Form("Ref1")
+                Obj.Ref_2 = Request.Form("Ref2")
+                Obj.Ref_3 = Request.Form("Ref3")
+                Obj.Fact_Oct_ID = Request.Form("Factura_ID")
+
+                result = SQL.Consulta_Repetido(Obj)
+
+        End Select
+
+        Response.Write(result)
+
+    End Sub
 #End Region
 
 End Class

@@ -232,11 +232,28 @@ function Add_Facturas(index) {
 //ingresa factura
 function BtnFactura() {
     var validaCampos = ValidaCamposFactura();
+    var R1;
+    var R2;
+    var R3;
+    var tipo_A = $("#Select_Tipo").val();
 
     switch (validaCampos) {
         case 0:
+            if (tipo_A == "1") {
+                R1 = $("#TxtRef_1").val();
+                R2 = $("#TxtRef_2").val();
+                R3 = $("#TxtRef_3").val();
+                transacionAjax_Consult_Factura_Existe("ConsultarFactura", "FACT_ORD_COMPRA", Nit_Proccess, R1, R2, R3, $("#Factura_ID").val());
+            }
+            else {
+                R1 = $("#TxtRef_Other").val();
+                R2 = "";
+                R3 = "";
+                transacionAjax_Consult_Factura_Existe("ConsultarFactura", "FACT_ORD_COMPRA", Nit_Proccess, R1, R2, R3, $("#Factura_ID").val());
+            }
             break;
         case 1:
+            Mensaje_General("Factura Incompleta!", "Tiene que diligenciar todos los campos de la factura!", "E");
             break;
     }
 }

@@ -10,6 +10,7 @@ var C_P = 0;
 var Tipo_Activo;
 var Index_Modelo;
 var Option_Blindaje = 0;
+var Nit_Proccess;
 /*--------------- region de variables globales --------------------*/
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -19,9 +20,10 @@ var Option_Blindaje = 0;
 function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {
         $("#Select_EmpresaNit").attr("disabled", "disabled");
-        var index_ID = this.value;
-        Charge_Combos_Depend_Nit(Matrix_Sucursal, "Select_Sucursal", index_ID, "");
-        Charge_Combos_Depend_Nit(Matrix_Personas, "Select_Persona_A", index_ID, "");
+        Nit_Proccess = this.value;
+        
+        Charge_Combos_Depend_Nit(Matrix_Sucursal, "Select_Sucursal", Nit_Proccess, "");
+        Charge_Combos_Depend_Nit(Matrix_Personas, "Select_Persona_A", Nit_Proccess, "");
     });
 }
 

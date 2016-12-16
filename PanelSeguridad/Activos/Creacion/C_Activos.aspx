@@ -807,37 +807,39 @@
                 <table id="Complementos">
                     <tr>
                         <td>
-                            <table id="T_Factura_Grid" border="1" cellpadding="1" cellspacing="1">
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            <span class="cssToolTip_ver">
-                                                <img alt="Activo" class="Add" onclick="javascript:Add_Facturas();" id="Crear" height='20px'
-                                                    width='20px' src='../../images/add.png' /><span>Agregar Nueva Factura</span></span>
-                                        </th>
-                                        <th>Identificación Factura
-                                        </th>
-                                        <th>Identificación Factura
-                                        </th>
-                                        <th>Identificación Factura
-                                        </th>
-                                        <th>Producto
-                                        </th>
-                                        <th>Moneda
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div id="Container_Facturas" style="width: 100%;">
+                                <table id="T_Factura_Grid" border="1" cellpadding="1" cellspacing="1">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <span class="cssToolTip_ver">
+                                                    <img alt="Activo" class="Add" onclick="javascript:Add_Facturas();" id="Crear" height='20px'
+                                                        width='20px' src='../../images/add.png' /><span>Agregar Nueva Factura</span></span>
+                                            </th>
+                                            <th>Identificación Factura
+                                            </th>
+                                            <th>Identificación Factura
+                                            </th>
+                                            <th>Identificación Factura
+                                            </th>
+                                            <th>Producto
+                                            </th>
+                                            <th>Moneda
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </td>
                     </tr>
                 </table>
