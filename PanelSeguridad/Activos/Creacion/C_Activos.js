@@ -15,6 +15,7 @@ var ArrayC_Activos = [];
 var Array_Hijo_Cliente = [];
 var ArrayEstado = [];
 
+var Persona_Exist;
 var ID;
 var T_Doc;
 var Doc;
@@ -146,18 +147,23 @@ function BtnCrear() {
     validate = ValidarGuardado();
 
     if (validate == 0) {
-        switch (Tipo_Activo) {
-            case 2:
-                transacionAjax_C_Vehiculos_create("crear_vehiculo");
-                break;
+        if (Persona_Exist == true) {
+            switch (Tipo_Activo) {
+                case 2:
+                    transacionAjax_C_Vehiculos_create("crear_vehiculo");
+                    break;
 
-            default:
-                transacionAjax_C_Activos_create("crear");
-                break;
+                default:
+                    transacionAjax_C_Activos_create("crear");
+                    break;
+            }
+        }
+        else {
+            Mensaje_General("No existe", "no puede agregar una persona que no existe en el Sistema", "W");
+
         }
     }
 }
-
 //salida del formulario
 function btnSalir() {
     window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
@@ -223,6 +229,18 @@ function Add_Facturas(index) {
     }
 }
 
+//ingresa factura
+function BtnFactura() {
+    var validaCampos = ValidaCamposFactura();
+
+    switch (validaCampos) {
+        case 0:
+            break;
+        case 1:
+            break;
+    }
+}
+
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                     PROCESO DE CARGUE                                                                                                                                        ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -247,7 +265,7 @@ function Date_Document() {
             var C_D = $("#TxtDoc").val();
             var Nit = $("#Select_EmpresaNit").val();
 
-            transacionAjax_ShearchPeople("Buscar_Persona", C_TD, C_D, Nit);
+            transacionAjax_ShearchPeople("Buscar_Persona", C_TD, C_D, Nit, "V_Responsable", "Persona_Exist");
         }
 
     });

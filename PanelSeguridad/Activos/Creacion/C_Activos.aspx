@@ -995,7 +995,7 @@
             </table>
         </div>
         <div style="width: 100%; text-align: center; margin-top: 25px;">
-            <input id="Button1" type="button" value="Agregar Factura" onclick="BtnFactura();" style="width: 150px;" />
+            <input id="Btn_Fact" type="button" value="Agregar Factura" onclick="BtnFactura();" style="width: 150px;" />
         </div>
     </div>
     <div id="Dialog_Format_Adress">

@@ -352,7 +352,7 @@ function transacionAjax_Tipo(State) {
 /*----                                                                          CONSULTAS EN PROCESO                                                                                                                ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_ShearchPeople(State, TD, D, NIT) {
+function transacionAjax_ShearchPeople(State, TD, D, NIT, Vista, Variable) {
     $.ajax({
         url: "C_ActivosAjax.aspx",
         type: "POST",
@@ -368,12 +368,18 @@ function transacionAjax_ShearchPeople(State, TD, D, NIT) {
             switch (result) {
                 case "NO":
                     Mensaje_General("No existe", "Los datos diligenciados No coinciden con las personas registradas en el sitema", "W");
-                    $("#V_Responsable").html("");
+                    $("#" + Vista).html("------");
+                    if (Variable == "Persona_Exist") {
+                        Persona_Exist = false;
+                    }
                     break;
 
                 default:
-                    $("#V_Responsable").html(result);
-                    break;
+                    $("#" + Vista).html(result);
+                    if (Variable == "Persona_Exist") {
+                        Persona_Exist = true;
+                    }
+                      break;
             }
         },
         error: function () {
@@ -461,94 +467,73 @@ function transacionAjax_C_Activos_create(State) {
 //hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax_C_Vehiculos_create(State) {
 
-    var ValorChasis = 0;
-    var Pasajeros = 0;
-    var Potencia = 0;
-    var TDoc_Blin = 0;
-    var Doc_Blin = 0;
-    var Nivel_Blin = 0;
+    var valida_process = ValidaCampos_InsertBD_Vehiculos();
 
-    if ($("#TxtValor_Chasis").val() != "")
-        ValorChasis = F_NumericBD($("#TxtValor_Chasis").val());
+    if (valida_process == 0) {
+        $.ajax({
+            url: "C_ActivosAjax.aspx",
+            type: "POST",
+            //crear json
+            data: {
+                "action": State,
+                "Nit_ID": $("#Select_EmpresaNit").val(),
+                "Ref_1": $("#TxtRef_Other").val().toUpperCase(),
+                "Ref_2": "",
+                "Ref_3": "",
+                "Facecolda_ID": $("#TxtFasecolda_ID").val(),
+                "Modelo": $("#Select_modelo option:selected").html(),
+                "Clase": $("#Select_ClaseF").val(),
+                "Marca": $("#Select_MarcaF").val(),
+                "Linea": $("#Select_LineaF").val(),
+                "ValorComercial": F_NumericBD($("#V_Valor_F").html()),
+                "Cilindraje": $("#Txt_Cilindraje").val(),
+                "Motor": $("#TxtN_Motor").val(),
+                "Chasis": $("#Txt_NChasis").val(),
+                "ValorChasis": ValorChasis,
+                "Serie": $("#Txt_NSerie").val(),
+                "VIN": $("#Txt_NVIN").val(),
+                "M_Servicio": $("#Select_MServicio").val(),
+                "Pasajeros": Pasajeros,
+                "TipoServicio": $("#Select_TServicio").val(),
+                "Combustible": $("#Select_Combustible").val(),
+                "Color": $("#Select_Color").val(),
+                "Capacidad": $("#Txt_Capacidad").val(),
+                "Potencia": Potencia,
+                "Carroceria": $("#Txt_Carroceria").val(),
+                "TipoCarroceria": $("#Txt_TCarroceria").val(),
+                "Blindaje": $("#Select_Blindaje").val(),
+                "TDoc_Blin": TDoc_Blin,
+                "Doc_Blin": Doc_Blin,
+                "Nivel_Blin": Nivel_Blin,
+                "GPS": $("#Text_NGPS").val(),
+                "user": User.toUpperCase()
+            },
+            //Transaccion Ajax en proceso
+            success: function (result) {
+                switch (result) {
 
-    if ($("#Txt_NPasajeros").val() != "")
-        Pasajeros = $("#Txt_NPasajeros").val();
+                    case "Error":
+                        Mensaje_General("Disculpenos :(", "No se realizo el ingreso del Activo", "E");
+                        break;
 
-    if ($("#Txt_Potencia").val() != "")
-        Potencia = $("#Txt_Potencia").val();
+                    case "Existe":
+                        Mensaje_General("Ya Existe", "El codigo ingresado ya existe en la base de datos!", "W");
+                        break;
 
-    if ($("#Select_Documento_Blin").val() != "-1")
-        TDoc_Blin = $("#Select_Documento_Blin").val();
+                    case "Exito":
+                        transacionAjax_C_Activos_create("crear");
+                        Clear_Limpiar();
+                        Clear_Consulta_Fasecolda();
+                        Enable_Consult_Fasecolda();
+                        break;
+                }
 
-    if ($("#TxtDoc_Blin").val() != "-1")
-        Doc_Blin = $("#TxtDoc_Blin").val();
+            },
+            error: function () {
 
-    if ($("#Txt_Nivel_Blin").val() != "")
-        Nivel_Blin = $("#Txt_Nivel_Blin").val();
-
-    $.ajax({
-        url: "C_ActivosAjax.aspx",
-        type: "POST",
-        //crear json
-        data: {
-            "action": State,
-            "Nit_ID": $("#Select_EmpresaNit").val(),
-            "Ref_1": $("#TxtRef_Other").val().toUpperCase(),
-            "Ref_2": "",
-            "Ref_3": "",
-            "Facecolda_ID": $("#TxtFasecolda_ID").val(),
-            "Modelo": $("#Select_modelo option:selected").html(),
-            "Clase": $("#Select_ClaseF").val(),
-            "Marca": $("#Select_MarcaF").val(),
-            "Linea": $("#Select_LineaF").val(),
-            "ValorComercial": F_NumericBD($("#V_Valor_F").html()),
-            "Cilindraje": $("#Txt_Cilindraje").val(),
-            "Motor": $("#TxtN_Motor").val(),
-            "Chasis": $("#Txt_NChasis").val(),
-            "ValorChasis": ValorChasis,
-            "Serie": $("#Txt_NSerie").val(),
-            "VIN": $("#Txt_NVIN").val(),
-            "M_Servicio": $("#Select_MServicio").val(),
-            "Pasajeros": Pasajeros,
-            "TipoServicio": $("#Select_TServicio").val(),
-            "Combustible": $("#Select_Combustible").val(),
-            "Color": $("#Select_Color").val(),
-            "Capacidad": $("#Txt_Capacidad").val(),
-            "Potencia": Potencia,
-            "Carroceria": $("#Txt_Carroceria").val(),
-            "TipoCarroceria": $("#Txt_TCarroceria").val(),
-            "Blindaje": $("#Select_Blindaje").val(),
-            "TDoc_Blin": TDoc_Blin,
-            "Doc_Blin": Doc_Blin,
-            "Nivel_Blin": Nivel_Blin,
-            "GPS": $("#Text_NGPS").val(),
-            "user": User.toUpperCase()
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            switch (result) {
-
-                case "Error":
-                    Mensaje_General("Disculpenos :(", "No se realizo el ingreso del Activo", "E");
-                    break;
-
-                case "Existe":
-                    Mensaje_General("Ya Existe", "El codigo ingresado ya existe en la base de datos!", "W");
-                    break;
-
-                case "Exito":
-                    transacionAjax_C_Activos_create("crear");
-                    Clear_Limpiar();
-                    Clear_Consulta_Fasecolda();
-                    Enable_Consult_Fasecolda();
-                    break;
             }
-
-        },
-        error: function () {
-
-        }
-    });
+        });
+    }
 }
 
 
