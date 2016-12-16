@@ -1042,7 +1042,7 @@ function BTNAgregarTercero() {
 
     if (valido == true) {
         if (Persona2 == true) {
-            var ok = Json_Terceros();
+            var ok = Json_Terceros(); /*C_Contrato_JSON.js*/
 
             if (ok == true) {
                 Mensaje_General("¡Persona Relacionada!", "Se ha relacionado la persona correctamente.", "S");

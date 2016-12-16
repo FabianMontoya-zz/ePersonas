@@ -10,9 +10,16 @@ var Lista_Clase_F = [];
 
 var ArrayC_Activos = [];
 
+var ArrayActivos = [];
+var ArrayVehiculos = [];
+
 var Clase_Index;
 var Year_work;
 var Index_Year;
+
+var ContActivos = 0;
+
+var Persona_A;
 
 /*--------------- region de variables globales --------------------*/
 
@@ -101,7 +108,7 @@ $(document).ready(function () {
     Picker_Fechas_A();
 
     Date_Document_A();
-    Format_Adress("Txt_Adress_U");    
+    Format_Adress("Txt_Adress_U");
     Calcula_Valor_IVA("Txt_ValFactura", "Text_Val_Sin_IVA", "V_Val_IVA");
     $("#Select_Sucursal").prop('disabled', true);
     $("#Select_Moneda").prop('disabled', true);
@@ -166,6 +173,24 @@ function Add_Facturas(index) {
     }
 }
 
+//crear link en la BD
+function BtnCrear_Act() {
+    var validate;
+    validate = ValidarGuardado();
+
+    if (Persona_A == true) {
+
+        if (validate == 0) {
+            transacionAjax_Consult_Activos_existe("ConsultarActivo", "ACTIVOS", index_NIT_ID, $("#TxtRef_1").val(), $("#TxtRef_2").val(), $("#TxtRef_3").val());
+        } else {
+        }
+
+    } else {
+        Mensaje_General("¡Persona Inexistentes!", "No puedes registrar un activo a nombre de una persona que no esté registrada en el sistema.", "W");
+    }
+}
+
+
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                     PROCESO DE CARGUE                                                                                                                                        ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -190,7 +215,7 @@ function Date_Document_A() {
             var C_D = $("#TxtDoc").val();
             var Nit = $("#Select_EmpresaNit").val();
 
-            transacionAjax_ShearchPeople("Buscar_Persona", C_TD, C_D, Nit, "V_Responsable", C_TD);
+            transacionAjax_ShearchPeople("Buscar_Persona", C_TD, C_D, Nit, "V_Responsable", "Persona_A");
         }
 
     });
@@ -219,9 +244,9 @@ function Cargar_Variables() {
 
     $("#L_Empresa_A").html($("#Select_EmpresaNit option:selected").html());
     $("#L_Colocacion_A").html($("#TXT_ID_Colocacion").val());
-    
+
     $("#Select_Sucursal").val(sucursal).trigger("chosen:updated");
-    $("#Select_Moneda").val(moneda).trigger("chosen:updated");   
+    $("#Select_Moneda").val(moneda).trigger("chosen:updated");
 
 }
 
@@ -285,7 +310,7 @@ function MostrarValor_Cilindraje_Fasecolda(Str_val) {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //limpiar campos activos
 function Clear_Limpiar() {
-    
+
     $("#Select_Documento").val("-1");
     $("#Select_Tipo").val("-1");
     $("#Select_CompraBien").val("0");
@@ -298,7 +323,6 @@ function Clear_Limpiar() {
     $('#Select_SubTipo').empty();
     $('#Select_Ciudad_U').empty();
     $('#Select_Ciudad_R').empty();
-    $('#Select_Persona_R').empty();
 
     $("#TxtRef_1").val("");
     $("#TxtRef_2").val("");
@@ -314,7 +338,7 @@ function Clear_Limpiar() {
     $("#TxtFecha_Retiro").val("");
 
     $("#V_Responsable").html("");
-    
+
     $("#V_TFacturas").html("");
 
     $("#Blo_Inmuebles").css("display", "none");
@@ -373,16 +397,15 @@ function Clear_Ima_F() {
 
 //limpiar Imagenes Generales
 function Clear_Ima_G() {
-    $("#Img_TD").css("display", "none");
-    $("#Img_D").css("display", "none");
-    $("#Img21").css("display", "none");
-    $("#Img22").css("display", "none");
-    $("#Img23").css("display", "none");
-    $("#Img24").css("display", "none");
-    $("#Img25").css("display", "none");
-    $("#Img26").css("display", "none");
-    $("#Img27").css("display", "none");
-    $("#Img28").css("display", "none");
+    $("#Img_TD_A").css("display", "none");
+    $("#Img_D_A").css("display", "none");
+    $("#Img_G1").css("display", "none");
+    $("#Img_G2").css("display", "none");
+    $("#Img_G3").css("display", "none");
+    $("#Img_G4").css("display", "none");
+    $("#Img_G5").css("display", "none");
+    $("#Img_G6").css("display", "none");
+    $("#Img_G7").css("display", "none");
 }
 
 //limpiar Imagenes llaves

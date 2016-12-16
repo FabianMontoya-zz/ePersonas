@@ -101,6 +101,7 @@ function transacionAjax_Documento(State) {
                 charge_CatalogList(ArrayTdoc, "Select_Documento", 1); //Activos
                 charge_CatalogList(ArrayTdoc, "Select_Documento_C", 1);
                 charge_CatalogList(ArrayTdoc, "Select_Documento_C2", 1);
+                charge_CatalogList(ArrayTdoc, "Select_Documento_Blin", 1);
             }
         },
         error: function () {
@@ -131,16 +132,20 @@ function transacionAjax_ShearchPeople(State, TD, D, NIT, Vista, Variable) {
                         Persona1 = false;
                     } else if (Variable == "Persona2") {
                         Persona2 = false;
+                    } else if (Variable == "Persona_A") {
+                        Persona_A = false;
                     }
                     break;
 
-                default:                    
+                default:
                     $("#" + Vista).html(result);
                     namePersona = result;
                     if (Variable == "Persona1") {
                         Persona1 = true;
                     } else if (Variable == "Persona2") {
                         Persona2 = true;
+                    } else if (Variable == "Persona_A") {
+                        Persona_A = true;
                     }
                     ;
                     break;
@@ -149,7 +154,7 @@ function transacionAjax_ShearchPeople(State, TD, D, NIT, Vista, Variable) {
         error: function () {
 
         }
-    }); 
+    });
 }
 
 //*-------------------- carga ---------------------------*/
@@ -291,7 +296,7 @@ function transaccionAjax_MTasas(State) {
 
 /*------------------------------ crear ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
-function transacionAjax_C_Contrato_create(State) {    
+function transacionAjax_C_Contrato_create(State) {
     $.ajax({
         url: "C_ContratoAjax.aspx",
         type: "POST",
@@ -322,11 +327,11 @@ function transacionAjax_C_Contrato_create(State) {
         success: function (result) {
             switch (result) {
 
-                case "Error":                    
+                case "Error":
                     Mensaje_General("Disculpenos :(", "No se realizó el ingreso de la nueva colocación.", "E");
                     break;
 
-                case "Existe":                    
+                case "Existe":
                     Mensaje_General("¡Código Repetido!", "El código ingresado ya se encuentra registrado en la Base de Datos.", "W");
                     break;
 
@@ -364,7 +369,7 @@ function transacionAjax_C_Terceros_create(State) {
             "action": State,
             "Nit_ID": $("#Select_EmpresaNit").val(),
             "Contrato_ID": $("#TXT_ID_Colocacion").val(),
-            "listTerceros":listTerceros,
+            "listTerceros": listTerceros,
             "user": User
         },
         //Transaccion Ajax en proceso
@@ -379,7 +384,7 @@ function transacionAjax_C_Terceros_create(State) {
                     Mensaje_General("¡Código Repetido! - Terceros", "El código ingresado ya se encuentra registrado en la Base de Datos.", "W");
                     break;
 
-                case "Exito":                    
+                case "Exito":
                     Mensaje_General("¡Terceros Agregados!", "La colocación se ha agregado correctamente.", "S");
                     Clear();
                     break;
@@ -622,6 +627,47 @@ function transacionAjax_Tipo(State) {
                 ArrayTipo = JSON.parse(result);
                 charge_CatalogList(ArrayTipo, "Select_Tipo", 1);
             }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+function transacionAjax_Consult_Activos_existe(State, tabla, index_NIT_ID, Ref_1, Ref_2, Ref_3) {
+    $.ajax({
+        url: "C_ContratoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": tabla,
+            "NIT": index_NIT_ID,
+            "Ref1": Ref_1,
+            "Ref2": Ref_2,
+            "Ref3": Ref_3
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == 0) {
+                var json_A = JsonActivos();
+                if (json_A == 0) {
+                    if ($("#Select_Tipo").val() == 2) {
+                        var json_V = JsonVehiculos();
+
+                        if (json_V == 0) {
+                        } else {
+                            Mensaje_General("¡Error Vehículo!", "Lo sentimos, se produjo un error al guardar el nuevo vehículo. Para mayor información revisar el log.", "E");
+                        }
+
+                    }
+                } else {
+                    Mensaje_General("¡Error Activo!", "Lo sentimos, se produjo un error al guardar el nuevo activo.  Para mayor información revisar el log.", "E");
+                }
+            } else {
+                Mensaje_General("¡Activo Repetido!", "El activo que desea ingresar ya se encuentra registrado en el sistema.", "W");
+            }
+
         },
         error: function () {
 

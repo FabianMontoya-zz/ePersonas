@@ -10,6 +10,7 @@
     <script src="C_Contrato_Activos.js" type="text/javascript"></script>
     <script src="C_Contrato_Activos_Complementos.js" type="text/javascript"></script>
     <script src="C_ContratoTrasaccionsAjax.js" type="text/javascript"></script>
+    <script src="C_Contrato_JSON.js" type="text/javascript"></script>
     <link href="../../css/css_login.css" rel="stylesheet" type="text/css" />
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
     <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />
@@ -812,7 +813,7 @@
                                 </td>
                                 <td style="width: 41%; padding-bottom: 25px;">
                                     <span class="cssToolTip">
-                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img6"
+                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img_G1"
                                             src="../../images/error.png" />
                                         <span class="SpamEG"></span></span>
                                 </td>
@@ -828,7 +829,7 @@
                                 </td>
                                 <td style="width: 6%; padding-bottom: 25px;">
                                     <span class="cssToolTip">
-                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img21"
+                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img_G2"
                                             src="../../images/error.png" />
                                         <span class="SpamEG"></span></span>
                                 </td>
@@ -912,7 +913,7 @@
                                 </td>
                                 <td style="padding-bottom: 25px; width: 3%;">
                                     <span class="cssToolTip">
-                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img_TD"
+                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img_TD_A"
                                             src="../../images/error.png" />
                                         <span class="SpamEG"></span></span>
                                 </td>
@@ -925,7 +926,7 @@
                                 </td>
                                 <td style="padding-bottom: 25px; width: 7%;">
                                     <span class="cssToolTip_L">
-                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img_D"
+                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img_D_A"
                                             src="../../images/error.png" />
                                         <span class="SpamEG"></span></span>
                                 </td>
@@ -947,7 +948,7 @@
                                 </td>
                                 <td style="width: 40%; padding-bottom: 25px;">
                                     <span class="cssToolTip">
-                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img22"
+                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img_G3"
                                             src="../../images/error.png" />
                                         <span class="SpamEG"></span></span>
                                 </td>
@@ -963,7 +964,7 @@
                                 </td>
                                 <td style="padding-bottom: 25px; width: 41%;">
                                     <span class="cssToolTip">
-                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img23"
+                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img_G4"
                                             src="../../images/error.png" />
                                         <span class="SpamEG"></span></span>
                                 </td>
@@ -1043,7 +1044,7 @@
                                 </td>
                                 <td style="width: 6%; padding-bottom: 25px;">
                                     <span class="cssToolTip">
-                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img24"
+                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img_G5"
                                             src="../../images/error.png" />
                                         <span class="SpamEG"></span></span>
                                 </td>
@@ -1055,7 +1056,7 @@
                                 </td>
                                 <td style="width: 10%; padding-bottom: 25px;">
                                     <span class="cssToolTip">
-                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img25"
+                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img_G6"
                                             src="../../images/error.png" />
                                         <span class="SpamEG"></span></span>
                                 </td>
@@ -1070,7 +1071,7 @@
                                 </td>
                                 <td style="width: 6%; padding-bottom: 25px;" colspan="3">
                                     <span class="cssToolTip">
-                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img26"
+                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img_G7"
                                             src="../../images/error.png" />
                                         <span class="SpamEG"></span></span>
                                 </td>
@@ -1575,7 +1576,7 @@
                     </tr>
                 </table>
                 <div id="Div_BTN_AgregarActivo" style="width: 100%; text-align: center; margin-top: 25px;">
-                    <input id="BTN_AgregarActivo" type="button" value="Guardar" onclick="BTNAgregarActivo();" />
+                    <input id="BTN_AgregarActivo" type="button" value="Guardar" onclick="BtnCrear_Act();" />
                 </div>
             </div>
         </div>

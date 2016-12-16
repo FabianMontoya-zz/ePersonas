@@ -73,6 +73,10 @@ Public Class C_ContratoAjax
 
                 Case "Tipo"
                     CargarTipo()
+
+                Case "ConsultarActivo"
+                    ConsultActivo()
+
             End Select
 
         End If
@@ -491,6 +495,37 @@ Public Class C_ContratoAjax
 
         ObjList = SQL.Matrix_Fasecolda()
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
+#End Region
+
+#Region "OTRAS CONSULTAS ACTIVOS"
+    ''' <summary>
+    ''' funcion que carga consulta el activo
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub ConsultActivo()
+        Dim result As String = ""
+        
+        Select Case Request.Form("tabla")
+            Case "ACTIVOS"
+                Dim SQL As New C_ActivosSQLClass
+                Dim ObjA As New C_ActivosClass
+
+                ObjA.Nit_ID = Request.Form("NIT")
+                ObjA.Ref_1 = Request.Form("Ref1")
+                ObjA.Ref_2 = Request.Form("Ref2")
+                ObjA.Ref_3 = Request.Form("Ref3")
+
+                result = SQL.Consulta_Repetido(ObjA)
+
+            Case "VEHICULOS"
+
+        End Select
+
+
+
+        Response.Write(result)
 
     End Sub
 #End Region

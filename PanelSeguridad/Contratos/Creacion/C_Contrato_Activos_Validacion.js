@@ -218,47 +218,43 @@ function V_Campos_Generales() {
 
     var validar = 0;
     //1. identificar campos generales
-    var Campo_G1 = $("#Select_EmpresaNit").val(); //Img21
-    var Campo_G2 = $("#Select_Sucursal").val(); //Img22
-    var Campo_G3 = $("#Select_Tipo").val(); //Img23
-    var Campo_G4 = $("#Select_Documento").val(); //Img_TD
-    var Campo_G5 = $("#TxtDoc").val();  //Img_D
-    var Campo_G6 = $("#txtDescripcion").val(); //Img_24
-    var Campo_G7 = $("#Select_Moneda").val(); //Img_25
-    var Campo_G8 = $("#Select_Pais_U").val(); //Img_26
-    var Campo_G9 = $("#Select_Ciudad_U").val(); //Img_27
-    var Campo_G10 = $("#Txt_Adress_U").val(); //Img_28
-
-    if (Campo_G1 == "-1" || Campo_G2 == "-1" ||
+    var Campo_G2 = $("#Select_Sucursal").val(); //Img_G1
+    var Campo_G3 = $("#Select_Tipo").val(); //Img_G2
+    var Campo_G4 = $("#Select_Documento").val(); //Img_TD_A
+    var Campo_G5 = $("#TxtDoc").val();  //Img_D_A
+    var Campo_G6 = $("#txtDescripcion").val(); //Img_G3
+    var Campo_G7 = $("#Select_Moneda").val(); //Img_G4
+    var Campo_G8 = $("#Select_Pais_U").val(); //Img_G5
+    var Campo_G9 = $("#Select_Ciudad_U").val(); //Img_G6
+    var Campo_G10 = $("#Txt_Adress_U").val(); //Img_G7
+   if (Campo_G2 == "-1" ||
         Campo_G3 == "-1" || Campo_G4 == "-1" ||
         Campo_G5 == "" || Campo_G6 == "" ||
         Campo_G7 == "-1" || Campo_G8 == "-1" ||
         Campo_G9 == "-1" || Campo_G10 == "") {
 
         validar = 1;
-        if (Campo_G1 == "-1") { $("#Img21").css("display", "inline-table"); } else { $("#Img21").css("display", "none"); }
-        if (Campo_G2 == "-1") { $("#Img22").css("display", "inline-table"); } else { $("#Img22").css("display", "none"); }
-        if (Campo_G3 == "-1") { $("#Img23").css("display", "inline-table"); } else { $("#Img23").css("display", "none"); }
-        if (Campo_G4 == "-1") { $("#Img_TD").css("display", "inline-table"); } else { $("#Img_TD").css("display", "none"); }
-        if (Campo_G5 == "") { $("#Img_D").css("display", "inline-table"); } else { $("#Img_D").css("display", "none"); }
-        if (Campo_G6 == "") { $("#Img24").css("display", "inline-table"); } else { $("#Img24").css("display", "none"); }
-        if (Campo_G7 == "-1") { $("#Img25").css("display", "inline-table"); } else { $("#Img25").css("display", "none"); }
-        if (Campo_G8 == "-1") { $("#Img26").css("display", "inline-table"); } else { $("#Img26").css("display", "none"); }
-        if (Campo_G9 == "-1") { $("#Img27").css("display", "inline-table"); } else { $("#Img27").css("display", "none"); }
-        if (Campo_G10 == "") { $("#Img28").css("display", "inline-table"); } else { $("#Img28").css("display", "none"); }
+        if (Campo_G2 == "-1") { $("#Img_G1").css("display", "inline-table"); } else { $("#Img_G1").css("display", "none"); }
+        if (Campo_G3 == "-1") { $("#Img_G2").css("display", "inline-table"); } else { $("#Img_G2").css("display", "none"); }
+        if (Campo_G4 == "-1") { $("#Img_TD_A").css("display", "inline-table"); } else { $("#Img_TD_A").css("display", "none"); }
+        if (Campo_G5 == "") { $("#Img_D_A").css("display", "inline-table"); } else { $("#Img_D_A").css("display", "none"); }
+        if (Campo_G6 == "") { $("#Img_G3").css("display", "inline-table"); } else { $("#Img_G3").css("display", "none"); }
+        if (Campo_G7 == "-1") { $("#Img_G4").css("display", "inline-table"); } else { $("#Img_G4").css("display", "none"); }
+        if (Campo_G8 == "-1") { $("#Img_G5").css("display", "inline-table"); } else { $("#Img_G5").css("display", "none"); }
+        if (Campo_G9 == "-1") { $("#Img_G6").css("display", "inline-table"); } else { $("#Img_G6").css("display", "none"); }
+        if (Campo_G10 == "") { $("#Img_G7").css("display", "inline-table"); } else { $("#Img_G7").css("display", "none"); }
     }
     else {
-        $("#Img_TD").css("display", "none");
-        $("#Img_D").css("display", "none");
+        $("#Img_TD_A").css("display", "none");
+        $("#Img_D_A").css("display", "none");
 
-        $("#Img28").css("display", "none");
-        $("#Img27").css("display", "none");
-        $("#Img26").css("display", "none");
-        $("#Img25").css("display", "none");
-        $("#Img24").css("display", "none");
-        $("#Img23").css("display", "none");
-        $("#Img22").css("display", "none");
-        $("#Img21").css("display", "none");
+        $("#Img_G1").css("display", "none");
+        $("#Img_G2").css("display", "none");
+        $("#Img_G3").css("display", "none");
+        $("#Img_G4").css("display", "none");
+        $("#Img_G5").css("display", "none");
+        $("#Img_G6").css("display", "none");
+        $("#Img_G7").css("display", "none");
     }
     return validar;
 }
