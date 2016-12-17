@@ -22,12 +22,15 @@ var Doc;
 var Clase_Index;
 var Year_work;
 var Index_Year;
+
 /*--------------- region de variables globales --------------------*/
 
 //Evento load JS
 $(document).ready(function () {
-
+   
     $("#Marco_trabajo_Contrato").css("height", "490px");
+    $("#V_TFacturas").html(Suma_Valor_Inicial);
+
     Picker_Fechas();
     transaccionAjax_MRTSTA("MATRIX_RTSTA");
     transaccionAjax_MPaises_Ciudades('MATRIX_PAIS_CIUDAD');

@@ -5,6 +5,8 @@ var NameTemporal;
 var Doc_name;
 var Matrix_Mes = [];
 var Control_Work;
+var Suma_Valor_Inicial = 0;
+var Valor_Operativo = 0;
 
 Matrix_Mes[0] = [1, "Enero", 31];
 Matrix_Mes[1] = [2, "Febrero", 28];
@@ -1637,4 +1639,28 @@ function Calcula_Valor_IVA(Obj_Cap_1, Obj_Cap_2, ObjResutado) {
         $("#" + ObjResutado).html(dinner_format_grid(operacion));
     });
 
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                            FUNCIONES CÁLCULO DE SUMA Y RESTA EN GRID                                                                                                              ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//operacion de suma en totalidad de grid
+function SumarValores_Grid(V1, VT, Obj_Vista) {
+
+    if (VT == 0)
+        VT = V1;
+    else
+        VT = parseInt(VT) + parseInt(V1);
+
+    Suma_Valor_Inicial = VT;
+    $("#" + Obj_Vista).html(dinner_format_grid(Suma_Valor_Inicial, ""));
+}
+
+//operacion de resta en totalidad de grid
+function RestarValores_Grid(VT, V_Ope, Obj_Vista) {
+
+    VT = parseInt(VT) - parseInt(V_Ope);
+
+    Suma_Valor_Inicial = VT;
+    $("#" + Obj_Vista).html(dinner_format_grid(Suma_Valor_Inicial, ""));
 }

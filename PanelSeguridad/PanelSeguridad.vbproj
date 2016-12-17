@@ -329,6 +329,8 @@
     <Content Include="Documentos\RutaDocumentos\RutaDocumentosAjax.aspx" />
     <Content Include="Documentos\RutaDocumentos\RutaDocumentosTrasaccionsAjax.js" />
     <Content Include="Documentos\SasifMaster_Cosult.js" />
+    <Content Include="Factura\menu.js" />
+    <Content Include="Factura\SasifMaster_Cosult.js" />
     <Content Include="Global.asax" />
     <Content Include="Images\add.png" />
     <Content Include="Images\adress_book.png" />
@@ -534,6 +536,7 @@
     <Content Include="Scripts\Dialog\timepicker.js" />
     <Content Include="Sasif.Master" />
     <Content Include="Activos\Sasif_menu.Master" />
+    <Content Include="Factura\Sasif_menu.Master" />
     <None Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
@@ -953,6 +956,8 @@
     <Compile Include="Documentos\RutaDocumentos\RutaDocumentosClass.vb" />
     <Compile Include="Documentos\RutaDocumentos\RutaDocumentosSQLClass.vb" />
     <Compile Include="encriptracion\EncriptarClass.vb" />
+    <Compile Include="Factura\Creacion\FacturaClass.vb" />
+    <Compile Include="Factura\Creacion\FacturaSQLClass.vb" />
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

@@ -249,7 +249,7 @@
                                 <td class="Label_Bold" style="width: 10%;">Sumatoria Facturas
                                 </td>
                                 <td id="V_Sigla_2" style="width: 4%" class="Sigla"></td>
-                                <td class="Label_Bold" id="V_TFacturas" style="width: 30%;"></td>
+                                <td class="Title_Bold" id="V_TFacturas" style="width: 30%;padding-bottom: 5px;" align="left"></td>
                             </tr>
                         </table>
                         <table id="Tabla_Valor_Compra" style="width: 100%;">
