@@ -342,6 +342,22 @@ Public Class CalendarioSQLClass
 
                 End While
 
+            Case "MatrixGenericos"
+                'recorremos la consulta por la cantidad de datos en la BD
+                While ReadConsulta.Read
+
+                    Dim objCalendario As New CalendarioClass
+                    'cargamos datos sobre el objeto de login
+                    objCalendario.Calendario_ID = ReadConsulta.GetValue(0)
+                    If Not (IsDBNull(ReadConsulta.GetValue(1))) Then objCalendario.Descripcion = ReadConsulta.GetValue(1) Else objCalendario.Descripcion = ""
+                    objCalendario.TipoCalendario = ReadConsulta.GetValue(2)
+                    objCalendario.Index = ReadConsulta.GetValue(3)
+
+                    'agregamos a la lista
+                    ObjListCalendario.Add(objCalendario)
+
+                End While
+
         End Select
 
 
@@ -402,6 +418,34 @@ Public Class CalendarioSQLClass
         Dim StrQuery As String = sql.ToString
 
         ObjList = listCalendario(StrQuery, Conexion, "Matrix")
+
+        Return ObjList
+
+    End Function
+
+    ''' <summary>
+    ''' Traemos los Calendarios para Empresa Genérica
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Read_Matrix_Calendarios_Genericos()
+
+        Dim ObjList As New List(Of CalendarioClass)
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("2")
+
+        Dim sql As New StringBuilder
+
+        sql.Append(" SELECT c.CA_Calendario_ID, " & _
+                   " c.CA_Descripcion, " & _
+                   " c.CA_TipoCalendario, " & _
+                   " ROW_NUMBER() OVER(ORDER BY c.CA_Nit_ID, c.CA_Calendario_ID ASC) AS Index_Calendario " & _
+                   " FROM CALENDARIOS c " & _
+                   " WHERE c.CA_Nit_ID = '0' " & _
+                   " ORDER BY c.CA_Nit_ID, c.CA_Calendario_ID ASC ")
+        Dim StrQuery As String = sql.ToString
+
+        ObjList = listCalendario(StrQuery, Conexion, "MatrixGenericos")
 
         Return ObjList
 

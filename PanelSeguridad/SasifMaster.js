@@ -921,7 +921,7 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
                 $("#" + Selector).append("<option value='" + Matrix[Item].MonedaCod_ID + "'>" + Matrix[Item].MonedaCod_ID + " - " + Matrix[Item].Descripcion + "</option>");
             }
             break;
-            
+
         case "Select_Moneda_C":
             for (Item in Matrix) {
                 $("#" + Selector).append("<option value='" + Matrix[Item].MonedaCod_ID + "'>" + Matrix[Item].MonedaCod_ID + " - " + Matrix[Item].Descripcion + "</option>");
@@ -1157,6 +1157,76 @@ function CargaDay(Select_C_Year, Select_C_Month, Select_Control, Index_Edit) {
 
     }
 
+}
+
+//Carga los calendarios
+function CargaCalendarios(Matrix, Selector, Index_Edit) {
+
+    $('#' + Selector).empty();
+    var objList = $("[id$='" + Selector + "']");
+
+    switch (Selector) {
+
+        case "Select_Calendario": //Calendario de Paises
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Index + " - " + Matrix[Item].Descripcion + "</option>");
+            }
+            break;
+    }
+
+    $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
+
+    switch (Index_Edit) {
+        case "":
+            $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
+            break;
+
+        case "0":
+            $("#" + Selector + " option[value= '0'] ").attr("selected", true);
+            break;
+
+        default:
+            $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
+            break;
+    }
+
+    $("#" + Selector).trigger("liszt:updated");
+    $('.C_Chosen').trigger('chosen:updated');
+}
+
+//Carga las Monedas
+function CargaMonedas(Matrix, Selector, Index_Edit) {
+
+    $('#' + Selector).empty();
+    var objList = $("[id$='" + Selector + "']");
+
+    switch (Selector) {
+
+        case "Select_moneda": //Moneda de Paises
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].MonedaCod_ID + "'>" + Matrix[Item].MonedaCod_ID + " - " + Matrix[Item].Descripcion + "</option>");
+            }
+            break;
+    }
+
+    $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
+
+    switch (Index_Edit) {
+        case "":
+            $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
+            break;
+
+        case "0":
+            $("#" + Selector + " option[value= '0'] ").attr("selected", true);
+            break;
+
+        default:
+            $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
+            break;
+    }
+
+    $("#" + Selector).trigger("liszt:updated");
+    $('.C_Chosen').trigger('chosen:updated');
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/

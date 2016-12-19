@@ -32,16 +32,42 @@ function transacionAjax_Moneda(State) {
         type: "POST",
         //crear json
         data: { "action": State,
-            "tabla": 'PAISES'
+            "tabla": "Moneda"
         },
         //Transaccion Ajax en proceso
         success: function (result) {
             if (result == "") {
-                ArrayMoneda = [];
+                Matrix_Moneda = [];
             }
             else {
-                ArrayMoneda = JSON.parse(result);
-                charge_CatalogList(ArrayMoneda, "Select_moneda", 1);
+                Matrix_Moneda = JSON.parse(result);
+                CargaMonedas(Matrix_Moneda, "Select_moneda", "");
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_Calendario(State) {
+    $.ajax({
+        url: "PaisesAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'CALENDARIOS'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_Calendarios = [];
+            }
+            else {
+                Matrix_Calendarios = JSON.parse(result);
+                CargaCalendarios(Matrix_Calendarios, "Select_Calendario", "");
             }
         },
         error: function () {

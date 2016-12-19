@@ -1,7 +1,9 @@
 ﻿/*--------------- region de variables globales --------------------*/
 var ArrayPaises = [];
 var ArrayCombo = [];
-var ArrayMoneda = [];
+
+var Matrix_Moneda = [];
+var Matrix_Calendarios = [];
 
 var estado;
 var editID;
@@ -10,8 +12,12 @@ var editDia;
 
 //Evento load JS
 $(document).ready(function () {
-    transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
-    transacionAjax_Moneda('Moneda');
+    transacionAjax_CargaBusqueda("cargar_droplist_busqueda");
+
+    transacionAjax_Moneda("Moneda");
+
+    transacionAjax_Calendario("MatrixCalendarios");
+
     $("#ESelect").css("display", "none");
     $("#ImgID").css("display", "none");
     $("#Img1").css("display", "none");

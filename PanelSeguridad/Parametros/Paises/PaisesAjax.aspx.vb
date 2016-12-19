@@ -29,6 +29,9 @@ Public Class PaisesAjax
                 Case "elimina"
                     ErasePaises()
 
+                Case "MatrixCalendarios"
+                    CargarCalendarios()
+
             End Select
 
         End If
@@ -185,11 +188,24 @@ Public Class PaisesAjax
     ''' <remarks></remarks>
     Protected Sub CargarMoneda()
 
-        Dim SQL As New PaisesSQLClass
-        Dim ObjListDroplist As New List(Of Droplist_Class)
-        Dim vl_S_Tabla As String = Request.Form("tabla")
+        Dim SQL As New MonedaCodSQLClass
+        Dim ObjList As New List(Of MonedaCodClass)
 
-        ObjListDroplist = SQL.Charge_DropListMoneda(vl_S_Tabla)
+        ObjList = SQL.Matrix_Moneda()
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga el objeto DDL consulta
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarCalendarios()
+
+        Dim SQL As New CalendarioSQLClass
+        Dim ObjListDroplist As New List(Of CalendarioClass)
+
+        ObjListDroplist = SQL.Read_Matrix_Calendarios_Genericos()
         Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
 
     End Sub
