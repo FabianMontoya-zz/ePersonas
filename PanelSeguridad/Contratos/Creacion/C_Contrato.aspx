@@ -864,7 +864,7 @@
                         </table>
                         <table id="Tabla_LLave_Inmueble" style="width: 100%;">
                             <tr>
-                                <td class="Label_Bold" style="width: 14%;">Cedula Catastral
+                                <td class="Label_Bold" style="width: 14%;">Cédula Catastral
                                 </td>
                                 <td style="width: 11%;">
                                     <span class="cssToolTip_Form">
@@ -877,7 +877,7 @@
                                             src="../../images/error.png" />
                                         <span class="SpamEG"></span></span>
                                 </td>
-                                <td class="Label_Bold" style="width: 15%;">Matricula Imbiliaria
+                                <td class="Label_Bold" style="width: 15%;">Matricula Inmobiliaria
                                 </td>
                                 <td style="width: 11%;">
                                     <span class="cssToolTip_Form">
@@ -890,7 +890,7 @@
                                             src="../../images/error.png" />
                                         <span class="SpamEG"></span></span>
                                 </td>
-                                <td class="Label_Bold" style="width: 14%;">Numero Unico ID
+                                <td class="Label_Bold" style="width: 14%;">Número Unico ID
                                 </td>
                                 <td style="width: 11%;">
                                     <span class="cssToolTip_Form">

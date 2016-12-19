@@ -57,6 +57,47 @@ function Change_Select_TA() {
         var index_ID = this.value;
         Charge_Combos_Depend_Nit(Matrix_RTSTA, "Select_SubTipo", index_ID, "");
 
+        Clear_Ima_F();
+        Clear_Ima_G();
+        Clear_Ima_K();
+        Clear_Ima_I();
+        Clear_Ima_Bli();
+        Clear_Img_Fact();
+
+        $("#TxtRef_1").val("");
+        $("#TxtRef_2").val("");
+        $("#TxtRef_3").val("");
+        $("#TxtRef_Other").val("");
+
+        $("#txtDescripcion").val("");
+        $("#TxtValor_Bien").val("");
+        $("#TxtValor_Compra").val("");
+        $("#TxtRef_Other").val("");
+        $("#Txt_NunImobiliaria").val("");
+        $("#Txt_Adress_U").val("");
+        $("#TxtFecha_Recibo").val("");
+        $("#TxtFecha_Retiro").val("");
+        $("#TxtDoc").val("");
+        $("#V_Responsable").html("");
+
+        $("#Select_Pais_U").val("-1");
+        $("#Select_Pais_R").val("-1");
+        $("#Select_TipoEscritura").val("1");
+
+        $('#Select_Ciudad_U').empty();
+        $('#Select_Ciudad_R').empty();      
+        
+
+        $("#Btn_ShearchFacecolda").attr("value", "Consulta Facecolda");
+        $("#Select_Documento").val("-1").trigger("chosen:updated");
+        $("#Select_Persona_R").val("-1").trigger("chosen:updated");
+
+        $('.C_Chosen').trigger('chosen:updated');
+
+        Clear_Consulta_Fasecolda();
+
+        $("Acordeon_Activo").hide();
+
         switch (index_ID) {
             case "1":
                 $("#TitleActivo_2").html($("#Select_Tipo option:selected").html());
@@ -64,6 +105,8 @@ function Change_Select_TA() {
                 $("#Tabla_LLave_Vehiculos").css("display", "none");
                 $("#Blo_Inmuebles").css("display", "inline-table");
                 $("#Blo_Fasecolda").css("display", "none");
+                $("#Bloque_datosIngreso").css("display", "none");
+                $("#T_Datos_Identificacion_blin").css("display", "none");
                 $("#B_I").css("display", "inline-table");
                 $("#B_V").css("display", "none");
 
@@ -80,7 +123,7 @@ function Change_Select_TA() {
                 $("#B_I").css("display", "none");
                 $("#B_V").css("display", "inline-table");
                 $("#T_llave_Act").html("Placa");
-
+                Enable_Consult_Fasecolda();
                 Year_work = Captura_parametro();
                 Tipo_Activo = 2;
                 break;
@@ -91,6 +134,8 @@ function Change_Select_TA() {
                 $("#Tabla_LLave_Vehiculos").css("display", "inline-table");
                 $("#Blo_Inmuebles").css("display", "none");
                 $("#Blo_Fasecolda").css("display", "none");
+                $("#Bloque_datosIngreso").css("display", "none");
+                $("#T_Datos_Identificacion_blin").css("display", "none");
                 $("#Txtkey_1").html("C. Identificación");
                 $("#B_I").css("display", "none");
                 $("#B_V").css("display", "none");
