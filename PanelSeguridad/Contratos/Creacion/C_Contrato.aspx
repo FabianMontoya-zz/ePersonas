@@ -301,7 +301,7 @@
                             <td class="Label_Bold" style="width: 10.5%;">Total</td>
                             <td id="L_Moneda" class="Sigla" style="width: 7%"></td>
                             <td style="width: 13.5%;">
-                                <span class="cssToolTip_Form">
+                                <span class="cssToolTip_Form_T">
                                     <input style="width: 100%;" type="text" id="TXT_Valor_Total" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }"
                                         onchange="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
                                     <span class="Spam_AVal"></span></span>
@@ -323,7 +323,7 @@
                             <td class="Label_Bold" style="width: 10.5%;">Financiado</td>
                             <td id="L_Moneda_3" class="Sigla" style="width: 7%"></td>
                             <td style="width: 13.5%;">
-                                <span class="cssToolTip_Form">
+                                <span class="cssToolTip_Form_T">
                                     <input style="width: 100%;" type="text" id="TXT_Valor_Financiado" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }"
                                         onchange="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
                                     <span class="Spam_AVal"></span></span>
@@ -337,7 +337,7 @@
                             <td class="Label_Bold" style="width: 9%;">Opción de Compra</td>
                             <td id="L_Moneda_4" class="Sigla" style="width: 7%"></td>
                             <td style="width: 13.5%;">
-                                <span class="cssToolTip_Form">
+                                <span class="cssToolTip_Form_T">
                                     <input style="width: 100%;" type="text" id="TXT_Valor_Opcion_Compra" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }"
                                         onchange="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
                                     <span class="Spam_AVal"></span></span>
@@ -864,7 +864,7 @@
                         </table>
                         <table id="Tabla_LLave_Inmueble" style="width: 100%;">
                             <tr>
-                                <td class="Label_Bold" style="width: 14%;">Cedula Catastral
+                                <td class="Label_Bold" style="width: 14%;">Cédula Catastral
                                 </td>
                                 <td style="width: 11%;">
                                     <span class="cssToolTip_Form">
@@ -877,7 +877,7 @@
                                             src="../../images/error.png" />
                                         <span class="SpamEG"></span></span>
                                 </td>
-                                <td class="Label_Bold" style="width: 15%;">Matricula Imbiliaria
+                                <td class="Label_Bold" style="width: 15%;">Matricula Inmobiliaria
                                 </td>
                                 <td style="width: 11%;">
                                     <span class="cssToolTip_Form">
@@ -890,7 +890,7 @@
                                             src="../../images/error.png" />
                                         <span class="SpamEG"></span></span>
                                 </td>
-                                <td class="Label_Bold" style="width: 14%;">Numero Unico ID
+                                <td class="Label_Bold" style="width: 14%;">Número Unico ID
                                 </td>
                                 <td style="width: 11%;">
                                     <span class="cssToolTip_Form">

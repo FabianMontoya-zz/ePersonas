@@ -224,7 +224,7 @@ function btnSalir() {
     window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
 }
 
-//salida del formulario
+//Captura el evento de cambio y vuelve a calcular las nuevas TE y TN
 function ReCalcularTasas(object) {
     $("#" + object).blur(function () {
         puntos = $("#TXT_Puntos_Adicionales").val();
@@ -390,7 +390,7 @@ function ValidarIDColocacion_A() {
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*----                                                                                                                     PROCESO DE CARGUE                                                                                                                                        ----*/
+/*----                                                                                                                     PROCESO DE CHANGES EN CONTROLES                                                                                                                                        ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //carga el combo 
 function Change_Select_Nit() {
@@ -427,6 +427,7 @@ function Change_Select_Sucursal() {
             $("#Img7").css("display", "inline-table");
         } else {
             $("#Img7").css("display", "none");
+            $("#Select_Sucursal_C").prop('disabled', true);
         }
     });
 }
@@ -793,7 +794,6 @@ function BtnCrear() {
     if (validate == 0) {
         if (Persona1 == true) {
             transacionAjax_C_Contrato_create("crear");
-            //Mensaje_General("¡Colocación Agregada!", "La colocación se ha agregado correctamente.", "S");
             Ocultar_IMGS_Errores();
         }
         else {
@@ -969,7 +969,9 @@ function ClearTerceros() {
 
 //limpia campos y tablas del formulario principal
 function Clear() {
+    $("#Select_EmpresaNit").prop('disabled', false);
     $("#Select_EmpresaNit").val("-1").trigger("chosen:updated");
+    $("#Select_Sucursal_C").prop('disabled', false);
     $("#Select_Sucursal_C").val("-1").trigger("chosen:updated");
     $("#TXT_ID_Colocacion").val("");
     $("#TXT_Descripcion").val("");
@@ -1020,8 +1022,9 @@ function Clear() {
     /*Reiniciamos la tabla de activos*/
 
     /*Reiniciamos la tabla de Terceros*/
-    ArrayTerceros = [];
-    AddArrayToTable();
+    
+    AddArrayTercerosToTable();   
+    AddArrayActivosToTable();
     ContTerceros = 0;
     Persona1 = false;
     Persona2 = false;
@@ -1148,6 +1151,7 @@ function Eliminar_Activo_Array() {
     $("#dialog_eliminar_A").dialog("close");
 }
 
+//Busca que la nueva persona que se desee crear no halla sido ya creada
 function ConsultaRepetido() {
     var validar = 0;
     for (itemArray in ArrayTerceros) {

@@ -12,8 +12,6 @@ var ArrayC_Activos = [];
 
 var ArrayActivos = [];
 var ArrayVehiculos = [];
-var ListActivos = [];
-var ListVehiculos = [];
 
 var Clase_Index;
 var Year_work;
@@ -183,7 +181,7 @@ function BtnCrear_Act() {
     if (Persona_A == true) {
 
         if (validate == 0) {
-            transacionAjax_Consult_Activos_existe("ConsultarActivo", "ACTIVOS", index_NIT_ID, $("#TxtRef_1").val(), $("#TxtRef_2").val(), $("#TxtRef_3").val());
+            transacionAjax_Consult_Activos_existe("ConsultarActivo", index_NIT_ID, $("#TxtRef_1").val(), $("#TxtRef_2").val(), $("#TxtRef_3").val());
         } else {
         }
 
@@ -313,6 +311,16 @@ function MostrarValor_Cilindraje_Fasecolda(Str_val) {
 //limpiar campos activos
 function Clear_Limpiar() {
 
+    Clear_Ima_F();
+    Clear_Ima_G();
+    Clear_Ima_K();
+    Clear_Ima_I();
+    Clear_Ima_Bli();
+    Clear_Img_Fact();
+
+    $("#Btn_ShearchFacecolda").attr("value", "Consulta Facecolda");
+    Clear_Consulta_Fasecolda();
+
     $("#Select_Documento").val("-1");
     $("#Select_Tipo").val("-1");
     $("#Select_CompraBien").val("0");
@@ -321,10 +329,12 @@ function Clear_Limpiar() {
     $("#Select_Pais_U").val("-1");
     $("#Select_Pais_R").val("-1");
     $("#Select_TipoEscritura").val("1");
+    $("#Select_Persona_R").val("-1").trigger("chosen:updated");
 
     $('#Select_SubTipo').empty();
     $('#Select_Ciudad_U').empty();
     $('#Select_Ciudad_R').empty();
+
 
     $("#TxtRef_1").val("");
     $("#TxtRef_2").val("");
@@ -345,8 +355,9 @@ function Clear_Limpiar() {
 
     $("#Blo_Inmuebles").css("display", "none");
     $("#Blo_Fasecolda").css("display", "none");
+    $("#Bloque_datosIngreso").css("display", "none");   
 
-    $('.C_Chosen').trigger('chosen:updated');
+    $('.C_Chosen').trigger('chosen:updated');    
 }
 
 //limpiar campos fasecolda
@@ -360,6 +371,7 @@ function Clear_Consulta_Fasecolda() {
 
     $("#Txt_Cilindraje").val("");
     $("#V_Valor_F").html("");
+    $("#Txt_NPasajeros").html("");
     $("#TxtN_Motor").val("");
     $("#Txt_NSerie").val("");
     $("#Txt_NChasis").val("");
@@ -379,6 +391,8 @@ function Clear_Consulta_Fasecolda() {
     $("#Select_Color").val("-1");
     $("#Select_Blindaje").val("-1");
     $("#Select_Documento_Blin").val("-1");
+
+    $("#T_Datos_Identificacion_blin").css("display", "none");
 
     $('.C_Chosen').trigger('chosen:updated');
 }

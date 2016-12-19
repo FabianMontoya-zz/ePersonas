@@ -310,7 +310,7 @@ function transacionAjax_Linea_F(State, Marca, Index) {
         //crear json
         data: {
             "action": State,
-            "Marca":Marca,
+            "Marca": Marca,
             "index": Index
         },
         //Transaccion Ajax en proceso
@@ -320,7 +320,7 @@ function transacionAjax_Linea_F(State, Marca, Index) {
             }
             else {
                 Matrix_Linea_F = JSON.parse(result);
-                Charge_Combos_Depend_Verificacion(Matrix_Linea_F, "Select_LineaF", "","", "");
+                Charge_Combos_Depend_Verificacion(Matrix_Linea_F, "Select_LineaF", "", "", "");
             }
         },
         error: function () {
@@ -575,7 +575,6 @@ function transacionAjax_C_Facturas_create(State) {
                     break;
 
                 case "Exito":
-                    console.log("Ok Facturas");
                     break;
             }
 

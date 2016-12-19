@@ -1,4 +1,6 @@
-﻿function Json_Terceros() {
+﻿/*Se generan todas las clases JSON que se utilizan en el Modulo*/
+
+function Json_Terceros() {
 
     var valido = false;
 
@@ -33,57 +35,64 @@
 
 function JsonActivos() {
     var valido = 0;
-
+      
     var validacion = ValidaCampos_InsertBD_Activos();
 
     if (validacion == 0) {
+        var Valido_Array = ValidarActivoArray(Ref_1.toUpperCase(), Ref_2.toUpperCase(), Ref_3.toUpperCase());
+        if (Valido_Array == true) {
+            try {
 
-        try {
+                var STRtActivo = $("#Select_Tipo option:selected").html();
 
-            var STRtActivo = $("#Select_Tipo option:selected").html();
-            
-            var JSON_Activos = {
-                "Ref_1": Ref_1.toUpperCase(),
-                "Ref_2": Ref_2.toUpperCase(),
-                "Ref_3": Ref_3.toUpperCase(),
-                "Descripcion": $("#txtDescripcion").val(),
-                "TActivo": $("#Select_Tipo").val(),
-                "STActivo": STActivo,
-                "Pais_U": $("#Select_Pais_U").val(),
-                "Ciudad_U": $("#Select_Ciudad_U").val(),
-                "Direccion_U": $("#Txt_Adress_U").val(),
-                "Pais_R": Pais_R,
-                "Ciudad_R": Ciudad_R,
-                "TDoc_R": T_Doc_R,
-                "Doc_R": Doc_R,
-                "Sucursal": $("#Select_Sucursal").val(),
-                "Moneda": $("#Select_Moneda").val(),
-                "Valor_Bien": Valor_Bien,
-                "Val_Op_Compra": Val_Op_Compra,
-                "CompraBien": $("#Select_CompraBien").val(),
-                "Asegurado": $("#Select_Asegurado").val(),
-                "EstadoActivo": 1,
-                "TipoAdministracion": $("#Select_TipoAdmin").val(),
-                "TipoEscritura": TipoEscritura,
-                "NunImobiliaria": NunImobiliaria.toUpperCase(),
-                "FechaC_Recibo": FechaC_Recibo,
-                "FechaC_Retiro": FechaC_Retiro,
-                "TDoc_T": $("#Select_Documento").val(),
-                "Doc_T": $("#TxtDoc").val(),
-                "Index_A": ContActivos,
-                "Descrip_TActivos": STRtActivo,
-                "user": User.toUpperCase()
+                var JSON_Activos = {
+                    "Ref_1": Ref_1.toUpperCase(),
+                    "Ref_2": Ref_2.toUpperCase(),
+                    "Ref_3": Ref_3.toUpperCase(),
+                    "Descripcion": $("#txtDescripcion").val(),
+                    "TA_ID": $("#Select_Tipo").val(),
+                    "STA_ID": STActivo,
+                    "Cod_Pais_U": $("#Select_Pais_U").val(),
+                    "Ciudad_ID_U": $("#Select_Ciudad_U").val(),
+                    "Direccion_U": $("#Txt_Adress_U").val(),
+                    "Cod_Pais_R": Pais_R,
+                    "Ciudad_ID_R": Ciudad_R,
+                    "TypeDocument_ID_R": T_Doc_R,
+                    "Document_ID_R": Doc_R,
+                    "Surcursal_ID": $("#Select_Sucursal").val(),
+                    "Cod_Moneda_ID": $("#Select_Moneda").val(),
+                    "Valor_Bien": Valor_Bien,
+                    "Val_Op_Compra": Val_Op_Compra,
+                    "CompraBien": $("#Select_CompraBien").val(),
+                    "Asegurado": $("#Select_Asegurado").val(),
+                    "EstadoActivo": 1,
+                    "TipoAdministracion": $("#Select_TipoAdmin").val(),
+                    "TipoEscritura": TipoEscritura,
+                    "N_Escritura": NunImobiliaria.toUpperCase(),
+                    "FechaConta_Recibo": FechaC_Recibo,
+                    "FechaConta_Retiro": FechaC_Retiro,
+                    "TypeDocument_ID_T": $("#Select_Documento").val(),
+                    "Document_ID_T": $("#TxtDoc").val(),
+                    "Index_A": ContActivos,
+                    "Descrip_TActivos": STRtActivo,
+                    "user": User.toUpperCase()
+                }
+                ArrayActivos.push(JSON_Activos);
+                ContActivos = ContActivos + 1;
+                AddArrayActivosToTable();
+            } catch (ex) {
+                valido = 1;
+                console.error("Error JSON Activos: " + ex);
             }
-            ArrayActivos.push(JSON_Activos);
-            ContActivos = ContActivos + 1;
-            AddArrayActivosToTable();
-        } catch (ex) {
-            valido = 1;
-            console.error("Error JSON Activos: " + ex);
-        }
 
-    } else {
+        } else {
+            valido = 2;
+            //Else de Valido_Array, El error se muestra en la Transacción Ajax
+        }
+    } else {        
+        //Else de Validacion [No muestra error ya que se usa para llenar los datos que se insertan en BD
     }
+
     return valido;
 }
 
@@ -99,32 +108,32 @@ function JsonVehiculos() {
                 "Ref_1": $("#TxtRef_Other").val().toUpperCase(),
                 "Ref_2": "",
                 "Ref_3": "",
-                "Facecolda_ID": $("#TxtFasecolda_ID").val(),
+                "Fasecolda_ID": $("#TxtFasecolda_ID").val(),
                 "Modelo": $("#Select_modelo option:selected").html(),
                 "Clase": $("#Select_ClaseF").val(),
                 "Marca": $("#Select_MarcaF").val(),
                 "Linea": $("#Select_LineaF").val(),
-                "ValorComercial": F_NumericBD($("#V_Valor_F").html()),
+                "ValorComer": F_NumericBD($("#V_Valor_F").html()),
                 "Cilindraje": $("#Txt_Cilindraje").val(),
-                "Motor": $("#TxtN_Motor").val(),
-                "Chasis": $("#Txt_NChasis").val(),
+                "N_Motor": $("#TxtN_Motor").val(),
+                "N_Chasis": $("#Txt_NChasis").val(),
                 "ValorChasis": ValorChasis,
-                "Serie": $("#Txt_NSerie").val(),
-                "VIN": $("#Txt_NVIN").val(),
-                "M_Servicio": $("#Select_MServicio").val(),
-                "Pasajeros": Pasajeros,
+                "N_Serie": $("#Txt_NSerie").val(),
+                "N_VIN": $("#Txt_NVIN").val(),
+                "Modalidad_Servicio": $("#Select_MServicio").val(),
+                "N_Pasajeros": Pasajeros,
                 "TipoServicio": $("#Select_TServicio").val(),
                 "Combustible": $("#Select_Combustible").val(),
-                "Color": $("#Select_Color").val(),
+                "Colores_ID": $("#Select_Color").val(),
                 "Capacidad": $("#Txt_Capacidad").val(),
                 "Potencia": Potencia,
                 "Carroceria": $("#Txt_Carroceria").val(),
                 "TipoCarroceria": $("#Txt_TCarroceria").val(),
                 "Blindaje": $("#Select_Blindaje").val(),
-                "TDoc_Blin": TDoc_Blin,
-                "Doc_Blin": Doc_Blin,
+                "N_TypeDocument_ID_Blind": TDoc_Blin,
+                "N_Document_ID_Blind": Doc_Blin,
                 "Nivel_Blin": Nivel_Blin,
-                "GPS": $("#Text_NGPS").val(),
+                "N_GPS": $("#Text_NGPS").val(),
                 "Index_A": ContActivos,
                 "user": User.toUpperCase()
             }
