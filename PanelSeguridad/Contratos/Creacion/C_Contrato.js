@@ -224,7 +224,7 @@ function btnSalir() {
     window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
 }
 
-//salida del formulario
+//Captura el evento de cambio y vuelve a calcular las nuevas TE y TN
 function ReCalcularTasas(object) {
     $("#" + object).blur(function () {
         puntos = $("#TXT_Puntos_Adicionales").val();
@@ -390,7 +390,7 @@ function ValidarIDColocacion_A() {
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*----                                                                                                                     PROCESO DE CARGUE                                                                                                                                        ----*/
+/*----                                                                                                                     PROCESO DE CHANGES EN CONTROLES                                                                                                                                        ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //carga el combo 
 function Change_Select_Nit() {
@@ -427,6 +427,7 @@ function Change_Select_Sucursal() {
             $("#Img7").css("display", "inline-table");
         } else {
             $("#Img7").css("display", "none");
+            $("#Select_Sucursal_C").prop('disabled', true);
         }
     });
 }
@@ -1148,6 +1149,7 @@ function Eliminar_Activo_Array() {
     $("#dialog_eliminar_A").dialog("close");
 }
 
+//Busca que la nueva persona que se desee crear no halla sido ya creada
 function ConsultaRepetido() {
     var validar = 0;
     for (itemArray in ArrayTerceros) {

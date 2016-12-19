@@ -206,6 +206,23 @@ function ValidaCampos_InsertBD_Vehiculos() {
 
     return valida_process;
 }
+
+//Validamos que el Activo que se desea crear no se halla sido creado ya dentro del array
+function ValidarActivoArray(REF1, REF2, REF3) {
+    var valido = true;
+    console.log("Entró ValidarActivoArray, Valido == " + valido);
+    for (itemArray in ArrayActivos) {
+        if (ArrayActivos[itemArray].Ref_1 == REF1 &&
+            ArrayActivos[itemArray].Ref_2 == REF2 &&
+            ArrayActivos[itemArray].Ref_3 == REF3) {
+            valido = false;
+            Mensaje_General("¡Activo Existente!-1", "El Activo que desea agregar ya se encuentra agregado a la lista de la colocación, no puedes ingresar dos veces el mismo Activo.", "W");
+            break;
+        }
+    }
+    console.log("Salió ValidarActivoArray, Valido == " + valido);
+    return valido;
+}
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                           PROCESO DE VALIDACION CAMPOS   DINAMICOS                                                             ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/

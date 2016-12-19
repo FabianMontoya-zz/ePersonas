@@ -414,7 +414,7 @@ function transacionAjax_C_Activos_create(State) {
     //recorer array para el ingreso de los documentos hijos
     ListActivos = JSON.stringify(ArrayActivos);
     ListVehiculos = JSON.stringify(ArrayVehiculos);
-    
+
     $.ajax({
         url: "C_ContratoAjax.aspx",
         type: "POST",
@@ -721,7 +721,32 @@ function transacionAjax_Consult_Activos_existe(State, tabla, index_NIT_ID, Ref_1
                         Clear_Limpiar();
                         Clear_Consulta_Fasecolda();
                     }
-                } else {
+                } else if (json_A == 2) {
+                    Mensaje_General("¡Activo Existente!", "El activo que desea agregar ya se encuentra en la lista de la colocación, no puedes ingresar dos veces el mismo Activo.", "W");
+                    var C_R1 = $("#TxtRef_1").val();
+                    var C_R2 = $("#TxtRef_2").val();
+                    var C_R3 = $("#TxtRef_3").val();
+                    //--
+                    if (C_R1.length > 0) {
+                        $("#K_1").css("display", "inline-table");
+                    } else {
+                        $("#K_1").css("display", "none");
+                    }
+                    //--
+                    if (C_R2.length > 0) {
+                        $("#K_2").css("display", "inline-table");
+                    } else {
+                        $("#K_2").css("display", "none");
+                    }
+                    //--
+                    if (C_R3.length > 0) {
+                        $("#K_3").css("display", "inline-table");
+                    } else {
+                        $("#K_3").css("display", "none");
+                    }
+                    //--
+                }
+                else {
                     Mensaje_General("¡Error Activo!", "Lo sentimos, se produjo un error al guardar el nuevo activo.  Para mayor información revisar el log.", "E");
                 }
             } else {

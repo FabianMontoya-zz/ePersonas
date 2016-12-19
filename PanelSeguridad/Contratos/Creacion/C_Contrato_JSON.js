@@ -34,56 +34,67 @@
 function JsonActivos() {
     var valido = 0;
 
+    console.log("Entró JsonActivos");
+
     var validacion = ValidaCampos_InsertBD_Activos();
 
     if (validacion == 0) {
+        console.log("Validacion OK -- REF1 = " + Ref_1.toUpperCase() + " REF2 = " + Ref_2.toUpperCase() + " REF3 = " + Ref_3.toUpperCase());
+        var Valido_Array = ValidarActivoArray(Ref_1.toUpperCase(), Ref_2.toUpperCase(), Ref_3.toUpperCase());
+        console.log("Valido_Array == " + Valido_Array);
+        if (Valido_Array == true) {
+            try {
 
-        try {
+                var STRtActivo = $("#Select_Tipo option:selected").html();
 
-            var STRtActivo = $("#Select_Tipo option:selected").html();
-            
-            var JSON_Activos = {
-                "Ref_1": Ref_1.toUpperCase(),
-                "Ref_2": Ref_2.toUpperCase(),
-                "Ref_3": Ref_3.toUpperCase(),
-                "Descripcion": $("#txtDescripcion").val(),
-                "TActivo": $("#Select_Tipo").val(),
-                "STActivo": STActivo,
-                "Pais_U": $("#Select_Pais_U").val(),
-                "Ciudad_U": $("#Select_Ciudad_U").val(),
-                "Direccion_U": $("#Txt_Adress_U").val(),
-                "Pais_R": Pais_R,
-                "Ciudad_R": Ciudad_R,
-                "TDoc_R": T_Doc_R,
-                "Doc_R": Doc_R,
-                "Sucursal": $("#Select_Sucursal").val(),
-                "Moneda": $("#Select_Moneda").val(),
-                "Valor_Bien": Valor_Bien,
-                "Val_Op_Compra": Val_Op_Compra,
-                "CompraBien": $("#Select_CompraBien").val(),
-                "Asegurado": $("#Select_Asegurado").val(),
-                "EstadoActivo": 1,
-                "TipoAdministracion": $("#Select_TipoAdmin").val(),
-                "TipoEscritura": TipoEscritura,
-                "NunImobiliaria": NunImobiliaria.toUpperCase(),
-                "FechaC_Recibo": FechaC_Recibo,
-                "FechaC_Retiro": FechaC_Retiro,
-                "TDoc_T": $("#Select_Documento").val(),
-                "Doc_T": $("#TxtDoc").val(),
-                "Index_A": ContActivos,
-                "Descrip_TActivos": STRtActivo,
-                "user": User.toUpperCase()
+                var JSON_Activos = {
+                    "Ref_1": Ref_1.toUpperCase(),
+                    "Ref_2": Ref_2.toUpperCase(),
+                    "Ref_3": Ref_3.toUpperCase(),
+                    "Descripcion": $("#txtDescripcion").val(),
+                    "TActivo": $("#Select_Tipo").val(),
+                    "STActivo": STActivo,
+                    "Pais_U": $("#Select_Pais_U").val(),
+                    "Ciudad_U": $("#Select_Ciudad_U").val(),
+                    "Direccion_U": $("#Txt_Adress_U").val(),
+                    "Pais_R": Pais_R,
+                    "Ciudad_R": Ciudad_R,
+                    "TDoc_R": T_Doc_R,
+                    "Doc_R": Doc_R,
+                    "Sucursal": $("#Select_Sucursal").val(),
+                    "Moneda": $("#Select_Moneda").val(),
+                    "Valor_Bien": Valor_Bien,
+                    "Val_Op_Compra": Val_Op_Compra,
+                    "CompraBien": $("#Select_CompraBien").val(),
+                    "Asegurado": $("#Select_Asegurado").val(),
+                    "EstadoActivo": 1,
+                    "TipoAdministracion": $("#Select_TipoAdmin").val(),
+                    "TipoEscritura": TipoEscritura,
+                    "NunImobiliaria": NunImobiliaria.toUpperCase(),
+                    "FechaC_Recibo": FechaC_Recibo,
+                    "FechaC_Retiro": FechaC_Retiro,
+                    "TDoc_T": $("#Select_Documento").val(),
+                    "Doc_T": $("#TxtDoc").val(),
+                    "Index_A": ContActivos,
+                    "Descrip_TActivos": STRtActivo,
+                    "user": User.toUpperCase()
+                }
+                ArrayActivos.push(JSON_Activos);
+                ContActivos = ContActivos + 1;
+                AddArrayActivosToTable();
+            } catch (ex) {
+                valido = 1;
+                console.error("Error JSON Activos: " + ex);
             }
-            ArrayActivos.push(JSON_Activos);
-            ContActivos = ContActivos + 1;
-            AddArrayActivosToTable();
-        } catch (ex) {
-            valido = 1;
-            console.error("Error JSON Activos: " + ex);
-        }
 
-    } else {
+        } else {
+            valido = 2;
+            //Else de Valido_Array, El error se muestra en la Transacción Ajax
+        }
+    } else {        
+        //Else de Validacion [No muestra error ya que se llenan para llenar en la BD
     }
+
     return valido;
 }
 
