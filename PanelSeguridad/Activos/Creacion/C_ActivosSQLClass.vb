@@ -94,6 +94,7 @@ Public Class C_ActivosSQLClass
     End Function
 
 #End Region
+
 #Region "CONSULTAS DROP LIST"
 
 

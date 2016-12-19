@@ -8,6 +8,7 @@
     Private _Fact_Oct_ID As String
     Private _F_Fecha As String
     Private _Cod_Moneda_ID As Integer
+    Private _Valor_Total As Long
     Private _Valor_Sin_IVA As Long
     Private _Valor_IVA As Long
     Private _Valor_Sin_IVA_Causado As Long
@@ -77,6 +78,14 @@
         End Get
         Set(ByVal value As Integer)
             Me._Cod_Moneda_ID = value
+        End Set
+    End Property
+    Public Property Valor_Total() As Long
+        Get
+            Return Me._Valor_Total
+        End Get
+        Set(ByVal value As Long)
+            Me._Valor_Total = value
         End Set
     End Property
     Public Property Valor_Sin_IVA() As Long

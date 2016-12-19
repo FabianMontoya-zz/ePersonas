@@ -56,14 +56,14 @@ function Json_Facturas(Ref_1, Ref_2, Ref_3) {
                 "Ref_2": Ref_2.toUpperCase(),
                 "Ref_3": Ref_3.toUpperCase(),
                 "Fact_Oct_ID": $("#Factura_ID").val().toUpperCase(),
-                "F_Fecha": $("#Select_Tipo").val(),
+                "F_Fecha": $("#Txt_Fecha_fact").val(),
                 "Cod_Moneda_ID": $("#Select_Moneda").val(),
                 "Valor_Sin_IVA": F_NumericBD($("#Text_Val_Sin_IVA").val()),
                 "Valor_IVA": F_NumericBD($("#V_Val_IVA").html()),
                 "Valor_Total": F_NumericBD($("#Txt_ValFactura").val()),
                 "Index": ContFactura,
                 "DescripMoneda": $("#Select_Moneda option:selected").html(),
-                "user": User.toUpperCase()
+                "UsuarioCreacion": User.toUpperCase()
             }
             ArrayFactura.push(JSON_Factura);
             Valor_Operativo = F_NumericBD($("#Txt_ValFactura").val());

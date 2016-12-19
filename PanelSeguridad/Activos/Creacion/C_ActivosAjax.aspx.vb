@@ -61,6 +61,9 @@ Public Class C_ActivosAjax
                 Case "ConsultarFactura"
                     ConsultFactura()
 
+                Case "crear_Factura"
+                    Insert_Factura()
+
             End Select
 
         End If
@@ -422,6 +425,34 @@ Public Class C_ActivosAjax
 
 #End Region
 
+#Region "CRUD FACTURA"
+
+    Protected Sub Insert_Factura()
+
+        Dim SQL_C_Fact As New FacturaSQLClass
+        Dim ObjListC_Activo As New List(Of FacturaClass)
+
+        Dim Result_list As String = "Exito"
+        Dim S_list As String = Request.Form("ListFacturas").ToString
+
+        Dim ListFact As New List(Of FacturaClass)
+        ListFact = SQL_C_Fact.Create_List_Factura(S_list)
+
+        For Each item_list As FacturaClass In ListFact
+            Dim Result As String = SQL_C_Fact.InsertC_Factura(item_list)
+
+            If Result = "Exito" Then
+                Result_list = "Exito"
+            Else
+                Result_list = "Error_Factura"
+                Exit For
+            End If
+        Next
+
+        Response.Write(Result_list)
+    End Sub
+
+#End Region
 
 #Region "FUNCIONES FACTURA"
     ''' <summary>

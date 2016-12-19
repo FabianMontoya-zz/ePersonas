@@ -477,18 +477,22 @@ function transacionAjax_C_Activos_create(State) {
                         break;
 
                     case "Exito":
-                        Mensaje_General("Exito", "El Activo fue creado exitosamente! ", "S");
                         if (Tipo_Activo != 2) {
                             Clear_Limpiar();
                             Clear_Consulta_Fasecolda();
                             Enable_Consult_Fasecolda();
                         }
+
+                        if (ArrayFactura.length != 0) {
+                            transacionAjax_C_Facturas_create("crear_Factura");
+                        }
+
+                        Mensaje_General("Exito", "El Activo fue creado exitosamente! ", "S");
                         break;
                 }
 
             },
             error: function () {
-
             }
         });
     }
@@ -577,27 +581,20 @@ function transacionAjax_C_Facturas_create(State) {
         //crear json
         data: {
             "action": State,
-            "ListFacturas": ListFacturas,
+            "ListFacturas": ListFactura,
             "user": User.toUpperCase()
         },
         //Transaccion Ajax en proceso
         success: function (result) {
             switch (result) {
 
-                case "Error":
-                    Mensaje_General("Disculpenos :(", "No se realizo el ingreso del Activo", "E");
+                case "Error_Factura":
+                    Mensaje_General("Disculpenos :(", "No se realizo el ingreso de la factura", "E");
                     break;
-
-                case "Existe":
-                    Mensaje_General("Ya Existe", "El codigo ingresado ya existe en la base de datos!", "W");
-                    break;
-
+                                 
                 case "Exito":
-                    transacionAjax_C_Activos_create("crear");
-                    Clear_Limpiar();
-                    Clear_Consulta_Fasecolda();
-                    Enable_Consult_Fasecolda();
-                    break;
+                    console.log("Ok Facturas");
+                           break;
             }
 
         },
