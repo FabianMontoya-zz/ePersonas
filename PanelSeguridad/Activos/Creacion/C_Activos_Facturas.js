@@ -1,9 +1,9 @@
 ﻿/*--------------- region de variables globales --------------------*/
 var ArrayFactura = [];
+var ListFactura = [];
 
 var ContFactura = 0;
 var Valor_Capturado = 0;
-
 
 /*--------------- region de variables globales --------------------*/
 
@@ -60,13 +60,14 @@ function Json_Facturas(Ref_1, Ref_2, Ref_3) {
                 "Cod_Moneda_ID": $("#Select_Moneda").val(),
                 "Valor_Sin_IVA": F_NumericBD($("#Text_Val_Sin_IVA").val()),
                 "Valor_IVA": F_NumericBD($("#V_Val_IVA").html()),
+                "Valor_Total": F_NumericBD($("#Txt_ValFactura").val()),
                 "Index": ContFactura,
                 "DescripMoneda": $("#Select_Moneda option:selected").html(),
                 "user": User.toUpperCase()
             }
             ArrayFactura.push(JSON_Factura);
             Valor_Operativo = F_NumericBD($("#Txt_ValFactura").val());
-            SumarValores_Grid(F_NumericBD($("#Txt_ValFactura").val()), F_NumericBD(Suma_Valor_Inicial), "V_TFacturas");
+            SumarValores_Grid(F_NumericBD($("#Txt_ValFactura").val()), Suma_Valor_Inicial, "V_TFacturas");
 
             ContFactura = ContFactura + 1;
             Tabla_factura();
@@ -130,6 +131,7 @@ function Tabla_factura() {
 //eliminar facturas del array y tabla
 function Eliminar_Registro(index) {
     //borramos registro deseado
+    var Valor_Operativo = ArrayFactura[index].Valor_Total;
     RestarValores_Grid(Suma_Valor_Inicial, Valor_Operativo, "V_TFacturas");
     ArrayFactura.splice(index, 1);
     Tabla_factura();

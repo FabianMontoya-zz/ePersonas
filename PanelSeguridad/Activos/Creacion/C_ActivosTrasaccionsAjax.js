@@ -390,7 +390,7 @@ function transacionAjax_ShearchPeople(State, TD, D, NIT, Vista, Variable) {
 
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_Consult_Factura_Existe(State, tabla, index_NIT_ID, Ref_1, Ref_2, Ref_3, Factura_ID) {
-      $.ajax({
+    $.ajax({
         url: "C_ActivosAjax.aspx",
         type: "POST",
         //crear json
@@ -566,4 +566,43 @@ function transacionAjax_C_Vehiculos_create(State) {
     }
 }
 
+//hacemos la transaccion al code behind por medio de Ajax
+function transacionAjax_C_Facturas_create(State) {
 
+    ListFactura = JSON.stringify(ArrayFactura);
+
+    $.ajax({
+        url: "C_ActivosAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "ListFacturas": ListFacturas,
+            "user": User.toUpperCase()
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            switch (result) {
+
+                case "Error":
+                    Mensaje_General("Disculpenos :(", "No se realizo el ingreso del Activo", "E");
+                    break;
+
+                case "Existe":
+                    Mensaje_General("Ya Existe", "El codigo ingresado ya existe en la base de datos!", "W");
+                    break;
+
+                case "Exito":
+                    transacionAjax_C_Activos_create("crear");
+                    Clear_Limpiar();
+                    Clear_Consulta_Fasecolda();
+                    Enable_Consult_Fasecolda();
+                    break;
+            }
+
+        },
+        error: function () {
+
+        }
+    });
+}

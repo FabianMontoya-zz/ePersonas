@@ -6,7 +6,6 @@ var Doc_name;
 var Matrix_Mes = [];
 var Control_Work;
 var Suma_Valor_Inicial = 0;
-var Valor_Operativo = 0;
 
 Matrix_Mes[0] = [1, "Enero", 31];
 Matrix_Mes[1] = [2, "Febrero", 28];
