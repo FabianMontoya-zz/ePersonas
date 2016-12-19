@@ -12,8 +12,6 @@ var ArrayC_Activos = [];
 
 var ArrayActivos = [];
 var ArrayVehiculos = [];
-var ListActivos = [];
-var ListVehiculos = [];
 
 var Clase_Index;
 var Year_work;
@@ -183,7 +181,7 @@ function BtnCrear_Act() {
     if (Persona_A == true) {
 
         if (validate == 0) {
-            transacionAjax_Consult_Activos_existe("ConsultarActivo", "ACTIVOS", index_NIT_ID, $("#TxtRef_1").val(), $("#TxtRef_2").val(), $("#TxtRef_3").val());
+            transacionAjax_Consult_Activos_existe("ConsultarActivo", index_NIT_ID, $("#TxtRef_1").val(), $("#TxtRef_2").val(), $("#TxtRef_3").val());
         } else {
         }
 

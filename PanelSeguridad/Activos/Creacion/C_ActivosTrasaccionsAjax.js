@@ -593,7 +593,6 @@ function transacionAjax_C_Facturas_create(State) {
                     break;
                                  
                 case "Exito":
-                    console.log("Ok Facturas");
                            break;
             }
 

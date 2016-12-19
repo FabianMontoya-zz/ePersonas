@@ -794,7 +794,6 @@ function BtnCrear() {
     if (validate == 0) {
         if (Persona1 == true) {
             transacionAjax_C_Contrato_create("crear");
-            //Mensaje_General("¡Colocación Agregada!", "La colocación se ha agregado correctamente.", "S");
             Ocultar_IMGS_Errores();
         }
         else {
@@ -970,7 +969,9 @@ function ClearTerceros() {
 
 //limpia campos y tablas del formulario principal
 function Clear() {
+    $("#Select_EmpresaNit").prop('disabled', false);
     $("#Select_EmpresaNit").val("-1").trigger("chosen:updated");
+    $("#Select_Sucursal_C").prop('disabled', false);
     $("#Select_Sucursal_C").val("-1").trigger("chosen:updated");
     $("#TXT_ID_Colocacion").val("");
     $("#TXT_Descripcion").val("");
@@ -1021,8 +1022,9 @@ function Clear() {
     /*Reiniciamos la tabla de activos*/
 
     /*Reiniciamos la tabla de Terceros*/
-    ArrayTerceros = [];
-    AddArrayToTable();
+    
+    AddArrayTercerosToTable();   
+    AddArrayActivosToTable();
     ContTerceros = 0;
     Persona1 = false;
     Persona2 = false;

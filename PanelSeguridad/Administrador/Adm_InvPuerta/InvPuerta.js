@@ -121,7 +121,6 @@ function ModalidadVista() {
             break;
     }
     $('.C_Chosen').trigger('chosen:updated');
-    console.log(TypeValida);
 }
 
 //valida campos de fechas

@@ -210,7 +210,6 @@ function ValidaCampos_InsertBD_Vehiculos() {
 //Validamos que el Activo que se desea crear no se halla sido creado ya dentro del array
 function ValidarActivoArray(REF1, REF2, REF3) {
     var valido = true;
-    console.log("Entró ValidarActivoArray, Valido == " + valido);
     for (itemArray in ArrayActivos) {
         if (ArrayActivos[itemArray].Ref_1 == REF1 &&
             ArrayActivos[itemArray].Ref_2 == REF2 &&
@@ -220,7 +219,6 @@ function ValidarActivoArray(REF1, REF2, REF3) {
             break;
         }
     }
-    console.log("Salió ValidarActivoArray, Valido == " + valido);
     return valido;
 }
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/

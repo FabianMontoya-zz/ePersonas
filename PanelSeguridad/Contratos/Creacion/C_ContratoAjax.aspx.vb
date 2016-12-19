@@ -80,6 +80,9 @@ Public Class C_ContratoAjax
                 Case "CrearActivo"
                     InsertC_Activos()
 
+                Case "CrearVehiculo"
+                    InsertC_Vehiculos()
+
 
             End Select
 
@@ -145,7 +148,7 @@ Public Class C_ContratoAjax
     End Sub
 
     ''' <summary>
-    ''' funcion que inserta en la tabla C_Contrato (INSERT)
+    ''' funcion que inserta en la tabla Relacion_Actores (INSERT)
     ''' </summary>
     ''' <remarks></remarks>
     Protected Sub InsertC_Terceros()
@@ -335,7 +338,7 @@ Public Class C_ContratoAjax
     End Sub
 
     ''' <summary>
-    ''' 
+    ''' Hace conversión de List de Terceros a una lista que se pueda insertar en BD
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
@@ -374,19 +377,59 @@ Public Class C_ContratoAjax
 
 #Region "CRUD ACTIVOS"
 
+    ''' <summary>
+    ''' Insert de Activos
+    ''' </summary>
+    ''' <remarks></remarks>
     Protected Sub InsertC_Activos()
 
         Dim SQL_C_Act As New C_ActivosSQLClass
         Dim ObjListC_Activo As New List(Of C_ActivosClass)
 
-        Dim Result_list As String = "Exito"
+        Dim Result_list As String
 
         Dim ListActivos As New List(Of C_ActivosClass)
         ListActivos = Create_List_Activos()
 
+        For Each item_list As C_ActivosClass In ListActivos
+            Dim Result As String = SQL_C_Act.InsertC_Activos(item_list)
+
+            If Result = "Exito" Then
+                Result_list = "Exito"
+            Else
+                Result_list = "Error_Activo"
+                Exit For
+            End If
+        Next
 
     End Sub
 
+    ''' <summary>
+    ''' Insert de Vehículos
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub InsertC_Vehiculos()
+
+        Dim SQL_C_Veh As New VehiculosSQLClass
+        Dim ObjListC_Vehiculo As New List(Of VehiculosClass)
+
+        Dim Result_list As String
+
+        Dim ListVehiculos As New List(Of VehiculosClass)
+        ListVehiculos = Create_List_Vehiculos()
+
+        For Each item_list As VehiculosClass In ListVehiculos
+            Dim Result As String = SQL_C_Veh.InsertVehiculos(item_list)
+
+            If Result = "Exito" Then
+                Result_list = "Exito"
+            Else
+                Result_list = "Error_Vehiculo"
+                Exit For
+            End If
+        Next
+
+    End Sub
 
 #End Region
 
@@ -522,6 +565,7 @@ Public Class C_ContratoAjax
 #End Region
 
 #Region "OTRAS CONSULTAS ACTIVOS"
+
     ''' <summary>
     ''' funcion que carga consulta el activo
     ''' </summary>
@@ -529,28 +573,39 @@ Public Class C_ContratoAjax
     Protected Sub ConsultActivo()
         Dim result As String = ""
 
-        Select Case Request.Form("tabla")
-            Case "ACTIVOS"
-                Dim SQL As New C_ActivosSQLClass
-                Dim ObjA As New C_ActivosClass
+        Dim tipo As Integer = Request.Form("Tipo")
+        Dim SQL As New C_ActivosSQLClass
+        Dim ObjA As New C_ActivosClass
 
-                ObjA.Nit_ID = Request.Form("NIT")
-                ObjA.Ref_1 = Request.Form("Ref1")
-                ObjA.Ref_2 = Request.Form("Ref2")
-                ObjA.Ref_3 = Request.Form("Ref3")
+        If tipo = 2 Then
 
-                result = SQL.Consulta_Repetido(ObjA)
+            ObjA.Nit_ID = Request.Form("NIT")
+            ObjA.Ref_1 = Request.Form("Ref_other")
+            ObjA.Ref_2 = Request.Form("Ref2")
+            ObjA.Ref_3 = Request.Form("Ref3")
 
-            Case "VEHICULOS"
+            result = SQL.Consulta_Repetido(ObjA)
 
-        End Select
+        Else
+            ObjA.Nit_ID = Request.Form("NIT")
+            ObjA.Ref_1 = Request.Form("Ref1")
+            ObjA.Ref_2 = Request.Form("Ref2")
+            ObjA.Ref_3 = Request.Form("Ref3")
+
+            result = SQL.Consulta_Repetido(ObjA)
+
+        End If
 
         Response.Write(result)
 
     End Sub
 
+#End Region
+
+#Region "FUNCIONES ACTIVOS"
+
     ''' <summary>
-    ''' 
+    ''' Hace conversión de List de Activos a una lista que se pueda insertar en BD
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
@@ -562,14 +617,13 @@ Public Class C_ContratoAjax
         Dim S_list As String = Request.Form("ListActivos").ToString
         Dim NewList = JsonConvert.DeserializeObject(Of List(Of C_ActivosClass))(S_list)
 
-        Dim ObjlistTercero As New List(Of C_ActivosClass)
+        Dim ObjlistActivos As New List(Of C_ActivosClass)
 
         For Each item As C_ActivosClass In NewList
 
             Dim Obj As New C_ActivosClass
 
             Obj.Nit_ID = vl_S_Nit
-
 
             Obj.Ref_1 = item.Ref_1
             Obj.Ref_2 = item.Ref_2
@@ -604,11 +658,74 @@ Public Class C_ContratoAjax
             Obj.FechaCreacion = Date.Now
             Obj.FechaActualizacion = Date.Now
 
-            ObjlistTercero.Add(Obj)
+            ObjlistActivos.Add(Obj)
 
         Next
 
-        Return ObjlistTercero
+        Return ObjlistActivos
     End Function
+
+    ''' <summary>
+    ''' Hace conversión de List de Vehiculos a una lista que se pueda insertar en BD
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Create_List_Vehiculos()
+
+        Dim vl_S_Nit As String = Request.Form("Nit_ID")
+        Dim vl_S_User As String = Request.Form("user")
+
+        Dim S_list As String = Request.Form("ListVehiculos").ToString
+        Dim NewList = JsonConvert.DeserializeObject(Of List(Of VehiculosClass))(S_list)
+
+        Dim ObjlistVehiculos As New List(Of VehiculosClass)
+
+        For Each item As VehiculosClass In NewList
+
+            Dim Obj As New VehiculosClass
+
+            Obj.Nit_ID = vl_S_Nit
+
+            Obj.Ref_1 = item.Ref_1
+            Obj.Ref_2 = item.Ref_2
+            Obj.Ref_3 = item.Ref_3
+            Obj.Fasecolda_ID = item.Fasecolda_ID
+            Obj.Modelo = item.Modelo
+            Obj.Clase = item.Clase
+            Obj.Marca = item.Marca
+            Obj.Linea = item.Linea
+            Obj.ValorComer = item.ValorComer
+            Obj.Cilindraje = item.Cilindraje
+            Obj.N_Motor = item.N_Motor
+            Obj.N_Chasis = item.N_Chasis
+            Obj.ValorChasis = item.ValorChasis
+            Obj.N_Serie = item.N_Serie
+            Obj.N_VIN = item.N_VIN
+            Obj.Modalidad_Servicio = item.Modalidad_Servicio
+            Obj.N_Pasajeros = item.N_Pasajeros
+            Obj.TipoServicio = item.TipoServicio
+            Obj.Combustible = item.Combustible
+            Obj.Colores_ID = item.Colores_ID
+            Obj.Capacidad = item.Capacidad
+            Obj.Potencia = item.Potencia
+            Obj.Carroceria = item.Carroceria
+            Obj.TipoCarroceria = item.TipoCarroceria
+            Obj.Blindaje = item.Blindaje
+            Obj.N_TypeDocument_ID_Blind = item.N_TypeDocument_ID_Blind
+            Obj.N_Document_ID_Blind = item.N_Document_ID_Blind
+            Obj.N_GPS = item.N_GPS
+            Obj.UsuarioCreacion = item.UsuarioCreacion
+            Obj.UsuarioCreacion = vl_S_User
+            Obj.UsuarioActualizacion = vl_S_User
+            Obj.FechaCreacion = Date.Now
+            Obj.FechaActualizacion = Date.Now
+
+            ObjlistVehiculos.Add(Obj)
+
+        Next
+
+        Return ObjlistVehiculos
+    End Function
+
 #End Region
 End Class

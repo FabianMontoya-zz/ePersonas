@@ -36,7 +36,6 @@ function Capture_Tarjeta_ID() {
 function validaTarjeta(Tarjeta_ID) {
     $("#Btnguardar").attr("value", "Nueva Consulta");
     for (item in Matrix_Persona) {
-        console.log(Tarjeta_ID + " == " + Matrix_Persona[item].Tarjeta_ID);
         if (Matrix_Persona[item].Tarjeta_ID == Tarjeta_ID) {
 
             existe_tarjeta = 1;
