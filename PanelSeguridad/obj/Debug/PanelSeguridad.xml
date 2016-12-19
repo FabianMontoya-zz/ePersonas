@@ -1254,7 +1254,7 @@ To modify move field declaration from designer file to code-behind file.
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.C_ContratoAjax.InsertC_Terceros">
 	<summary>
- funcion que inserta en la tabla C_Contrato (INSERT)
+ funcion que inserta en la tabla Relacion_Actores (INSERT)
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_MSucursal">
@@ -1309,8 +1309,19 @@ To modify move field declaration from designer file to code-behind file.
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.C_ContratoAjax.Create_List_terceros">
 	<summary>
-	</summary>
+ Hace conversión de List de Terceros a una lista que se pueda insertar en BD
+ </summary>
 	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.InsertC_Activos">
+	<summary>
+ Insert de Activos
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.InsertC_Vehiculos">
+	<summary>
+ Insert de Vehículos
+ </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.C_ContratoAjax.CargarTipo">
 	<summary>
@@ -1364,7 +1375,14 @@ To modify move field declaration from designer file to code-behind file.
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.C_ContratoAjax.Create_List_Activos">
 	<summary>
-	</summary>
+ Hace conversión de List de Activos a una lista que se pueda insertar en BD
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.Create_List_Vehiculos">
+	<summary>
+ Hace conversión de List de Vehiculos a una lista que se pueda insertar en BD
+ </summary>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.Crud_DocAjax.Consulta_Crud_Doc">
@@ -3806,11 +3824,25 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
  funcion que carga el objeto DDL consulta
  </summary>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.FacturaSQLClass.InsertC_Factura(PanelSeguridad.FacturaClass)">
+	<summary>
+ funcion que crea el query para la insercion de nuevo FACT_ORD_COMPRA (INSERT)
+ </summary>
+	<param name="vp_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.FacturaSQLClass.Consulta_Repetido(PanelSeguridad.FacturaClass)">
 	<summary>
  funcion que valida si esta repetido el registro a ingresar
  </summary>
 	<param name="vp_O_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.FacturaSQLClass.Create_List_Factura(System.String)">
+	<summary>
+ CREACION DE LISTA DE STRING A OBJ FACTURA PARA INSERCION EN ITERACION
+ </summary>
+	<param name="vp_S_listFactura"></param>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="P:PanelSeguridad.My.MyWebExtension.Application">
