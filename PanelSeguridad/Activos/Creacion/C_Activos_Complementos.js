@@ -8,6 +8,8 @@ var A_C = 0;
 var A0 = 0;
 var C_P = 0;
 var Tipo_Activo;
+
+var Index_Marca;
 var Index_Modelo;
 var Option_Blindaje = 0;
 var Nit_Proccess;
@@ -21,7 +23,7 @@ function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {
         $("#Select_EmpresaNit").attr("disabled", "disabled");
         Nit_Proccess = this.value;
-        
+
         Charge_Combos_Depend_Nit(Matrix_Sucursal, "Select_Sucursal", Nit_Proccess, "");
         Charge_Combos_Depend_Nit(Matrix_Personas, "Select_Persona_A", Nit_Proccess, "");
     });
@@ -125,23 +127,41 @@ function Change_Select_TA() {
     });
 }
 
-//carga marcas segun la clase
-function Change_Select_Clase() {
-    $("#Select_ClaseF").change(function () {
-        var index_ID = this.value;
-        Clase_Index = index_ID;
-        $("#Select_LineaF").empty();
-        Charge_Combos_Depend_Nit(Matrix_MarcaClase_F, "Select_MarcaF", index_ID, "");
-    });
-}
 
-//carga lineas  segun la marca y clase
+//carga marca linea segun la marca escogida 
 function Change_Select_Marca() {
     $("#Select_MarcaF").change(function () {
         var index_ID = this.value;
-        Charge_Combos_Depend_Verificacion(Matrix_LineaMarcaClase_F, "Select_LineaF", index_ID, Clase_Index, "");
+
+        switch (index_ID) {
+            case "-1":
+                break;
+
+            default:
+                Index_Marca = index_ID;
+                transacionAjax_Clase_F("LIST_CLASE_F", index_ID);
+                break;
+        }
     });
 }
+
+//carga las lineas segun la marca y clase
+function Change_Select_Clase() {
+    $("#Select_ClaseF").change(function () {
+        var index_ID = this.value;
+        
+        switch (index_ID) {
+            case "-1":
+                break;
+
+            default:
+                transacionAjax_Linea_F("MATRIX_LINEA_F", Index_Marca, index_ID);
+                break;
+        }
+    });
+}
+
+
 
 //muestra los campos de diligenciamiento fasecolda
 function Change_Select_Modelo() {

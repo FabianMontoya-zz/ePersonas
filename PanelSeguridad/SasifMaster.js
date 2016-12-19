@@ -626,7 +626,9 @@ function Convert_Valores_0(index) {
 //cargar combos
 function charge_CatalogList(objCatalog, nameList, selector) {
 
+    $("#" + nameList).empty();
     var objList = $('[id$=' + nameList + ']');
+
     //recorremos para llenar el combo de
     for (itemArray in objCatalog) {
         objList[0].options[itemArray] = new Option(objCatalog[itemArray].descripcion, objCatalog[itemArray].ID);
@@ -667,9 +669,7 @@ function Charge_Combos_Depend_Verificacion(Matrix, Selector, P_1, P_2, Index_Edi
 
         case "Select_LineaF":
             for (Item in Matrix) {
-                if (Matrix[Item].Marca == P_1 && Matrix[Item].Clase == P_2) {
                     $("#" + Selector).append("<option value='" + Matrix[Item].Fasecolda_ID + "'>" + Matrix[Item].Linea + " C.C. " + Matrix[Item].Cilindraje + "</option>");
-                }
             }
             break;
     }
@@ -921,7 +921,7 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
                 $("#" + Selector).append("<option value='" + Matrix[Item].MonedaCod_ID + "'>" + Matrix[Item].MonedaCod_ID + " - " + Matrix[Item].Descripcion + "</option>");
             }
             break;
-            
+
         case "Select_Moneda_C":
             for (Item in Matrix) {
                 $("#" + Selector).append("<option value='" + Matrix[Item].MonedaCod_ID + "'>" + Matrix[Item].MonedaCod_ID + " - " + Matrix[Item].Descripcion + "</option>");

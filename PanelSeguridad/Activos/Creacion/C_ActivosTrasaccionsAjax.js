@@ -135,107 +135,6 @@ function transacionAjax_MMoneda(State) {
     });
 }
 
-//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_MFasecolda(State) {
-    $.ajax({
-        url: "C_ActivosAjax.aspx",
-        type: "POST",
-        //crear json
-        data: {
-            "action": State,
-            "tabla": 'TIPO'
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            if (result == "") {
-                Matrix_Fasecolda = [];
-            }
-            else {
-                Matrix_Fasecolda = JSON.parse(result);
-            }
-        },
-        error: function () {
-        }
-    });
-}
-
-//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_MMarcaClase_F(State) {
-    $.ajax({
-        url: "C_ActivosAjax.aspx",
-        type: "POST",
-        //crear json
-        data: {
-            "action": State,
-            "tabla": 'TIPO'
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            if (result == "") {
-                Matrix_MarcaClase_F = [];
-            }
-            else {
-                Matrix_MarcaClase_F = JSON.parse(result);
-            }
-        },
-        error: function () {
-
-        }
-    });
-}
-
-//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_MLineaMarcaClase_F(State) {
-    $.ajax({
-        url: "C_ActivosAjax.aspx",
-        type: "POST",
-        //crear json
-        data: {
-            "action": State,
-            "tabla": 'TIPO'
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            if (result == "") {
-                Matrix_LineaMarcaClase_F = [];
-            }
-            else {
-                Matrix_LineaMarcaClase_F = JSON.parse(result);
-            }
-        },
-        error: function () {
-
-        }
-    });
-}
-
-/*-------------------- carga ---------------------------*/
-//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_ListaClaseFasecolda(State) {
-    $.ajax({
-        url: "C_ActivosAjax.aspx",
-        type: "POST",
-        //crear json
-        data: {
-            "action": State,
-            "tabla": 'TIPO'
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            if (result == "") {
-                Lista_Clase_F = [];
-            }
-            else {
-                Lista_Clase_F = JSON.parse(result);
-                Charge_Combos_Depend_Nit(Lista_Clase_F, "Select_ClaseF", "", "");
-            }
-        },
-        error: function () {
-
-        }
-    });
-}
-
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                          LISTAS DE CARGA                                                                                                                ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -347,6 +246,89 @@ function transacionAjax_Tipo(State) {
         }
     });
 }
+
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_Marca_F(State) {
+    $.ajax({
+        url: "C_ActivosAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Array_Marca_F = [];
+            }
+            else {
+                Array_Marca_F = JSON.parse(result);
+                charge_CatalogList(Array_Marca_F, "Select_MarcaF", 1);
+
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_Clase_F(State, Index) {
+    $.ajax({
+        url: "C_ActivosAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "index": Index
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Array_Clase_F = [];
+            }
+            else {
+                Array_Clase_F = JSON.parse(result);
+                charge_CatalogList(Array_Clase_F, "Select_ClaseF", 1);
+
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_Linea_F(State, Marca, Index) {
+    $.ajax({
+        url: "C_ActivosAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "Marca":Marca,
+            "index": Index
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_Linea_F = [];
+            }
+            else {
+                Matrix_Linea_F = JSON.parse(result);
+                Charge_Combos_Depend_Verificacion(Matrix_Linea_F, "Select_LineaF", "","", "");
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                          CONSULTAS EN PROCESO                                                                                                                ----*/
@@ -591,10 +573,10 @@ function transacionAjax_C_Facturas_create(State) {
                 case "Error_Factura":
                     Mensaje_General("Disculpenos :(", "No se realizo el ingreso de la factura", "E");
                     break;
-                                 
+
                 case "Exito":
                     console.log("Ok Facturas");
-                           break;
+                    break;
             }
 
         },

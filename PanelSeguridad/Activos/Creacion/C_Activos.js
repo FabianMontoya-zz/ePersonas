@@ -5,11 +5,10 @@ var Matrix_Pais = [];
 var Matrix_Personas = [];
 var Matrix_Sucursal = [];
 var Matrix_Moneda = [];
-var Matrix_Fasecolda = [];
-var Matrix_MarcaClase_F = [];
-var Matrix_LineaMarcaClase_F = [];
 
-var Lista_Clase_F = [];
+var Array_Marca_F = [];
+var Array_Clase_F = [];
+var Matrix_Linea_F = [];
 
 var ArrayC_Activos = [];
 var Array_Hijo_Cliente = [];
@@ -19,7 +18,6 @@ var Persona_Exist;
 var ID;
 var T_Doc;
 var Doc;
-var Clase_Index;
 var Year_work;
 var Index_Year;
 
@@ -37,11 +35,9 @@ $(document).ready(function () {
     transaccionAjax_MPersonas('MATRIX_PERSONAS');
     transaccionAjax_MSucursal('MATRIX_SUCURSAL');
     transacionAjax_MMoneda('MATRIX_MONEDA');
-    transacionAjax_MFasecolda("MATRIX_FASECOLDA");
-    transacionAjax_MMarcaClase_F("MATRIX_MARCA_CLASE_F");
-    transacionAjax_MLineaMarcaClase_F("MATRIX_LINEA_MARCA_CLASE_F");
-    transacionAjax_ListaClaseFasecolda("LIST_CLASE_F");
-
+    
+    transacionAjax_Marca_F("LIST_MARCA_F");
+   
     transacionAjax_EmpresaNit('Cliente')
     transacionAjax_Documento('Documento');
     transacionAjax_Colores("Colores");
@@ -126,8 +122,9 @@ $(document).ready(function () {
         });
     });
 
-    Change_Select_Clase();
     Change_Select_Marca();
+    Change_Select_Clase();
+
     Change_Select_Nit();
     Change_Select_TA();
     Change_Select_pais();
