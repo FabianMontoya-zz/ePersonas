@@ -321,6 +321,7 @@ function transacionAjax_Linea_F(State, Marca, Index) {
             else {
                 Matrix_Linea_F = JSON.parse(result);
                 Charge_Combos_Depend_Verificacion(Matrix_Linea_F, "Select_LineaF", "", "", "");
+
             }
         },
         error: function () {

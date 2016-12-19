@@ -162,6 +162,34 @@ function Change_Select_Clase() {
 }
 
 
+function Change_Select_Linea() {
+    $("#Select_LineaF").change(function () {
+        var index_ID = this.value;
+
+        switch (index_ID) {
+            case "-1":
+                break;
+
+            default:
+                var ciclo_year = 0;
+
+                for (var col = 1; col <= 25; col++) {
+                    var dato = "Year_" + col;
+                    ciclo_year = ciclo_year + 1;
+                    if (Matrix_Linea_F[92][dato] != 0) {
+                        console.log(ciclo_year);
+                    }
+                }
+                break;
+        }
+    });
+
+
+
+   
+
+}
+
 
 //muestra los campos de diligenciamiento fasecolda
 function Change_Select_Modelo() {
