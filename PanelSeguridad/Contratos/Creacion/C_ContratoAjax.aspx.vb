@@ -516,7 +516,7 @@ Public Class C_ContratoAjax
         Dim SQL As New FasecoldaSQLClass
         Dim ObjList As New List(Of FasecoldaClass)
 
-        ObjList = SQL.List_Clases_Fasecolda()
+        '   ObjList = SQL.List_Clases_Fasecolda()
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
@@ -530,7 +530,7 @@ Public Class C_ContratoAjax
         Dim SQL As New FasecoldaSQLClass
         Dim ObjList As New List(Of FasecoldaClass)
 
-        ObjList = SQL.Matrix_Marca_Clases_Fasecolda()
+        '  ObjList = SQL.Matrix_Marca_Clases_Fasecolda()
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
@@ -544,7 +544,7 @@ Public Class C_ContratoAjax
         Dim SQL As New FasecoldaSQLClass
         Dim ObjList As New List(Of FasecoldaClass)
 
-        ObjList = SQL.Matrix_Linea_Marca_Clases_Fasecolda()
+        '     ObjList = SQL.Matrix_Linea_Marca_Clases_Fasecolda()
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
@@ -558,7 +558,7 @@ Public Class C_ContratoAjax
         Dim SQL As New FasecoldaSQLClass
         Dim ObjList As New List(Of FasecoldaClass)
 
-        ObjList = SQL.Matrix_Fasecolda()
+        '   ObjList = SQL.Matrix_Fasecolda()
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub

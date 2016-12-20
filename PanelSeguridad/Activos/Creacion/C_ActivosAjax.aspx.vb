@@ -352,6 +352,7 @@ Public Class C_ActivosAjax
         Dim obj As New FasecoldaClass
         obj.Clase = Request.Form("index")
         obj.Marca = Request.Form("Marca")
+        obj.tipo_SQL = "M"
 
         ObjList = SQL.Matrix_Fasecolda_Filtrada(obj)
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))

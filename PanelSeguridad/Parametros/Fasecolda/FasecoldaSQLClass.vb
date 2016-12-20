@@ -465,6 +465,9 @@ Public Class FasecoldaSQLClass
                     If Not (IsDBNull(ReadConsulta.GetValue(25))) Then objFasecolda.Year_23 = ReadConsulta.GetValue(25) Else objFasecolda.Year_23 = ""
                     If Not (IsDBNull(ReadConsulta.GetValue(26))) Then objFasecolda.Year_24 = ReadConsulta.GetValue(26) Else objFasecolda.Year_24 = ""
                     If Not (IsDBNull(ReadConsulta.GetValue(27))) Then objFasecolda.Year_25 = ReadConsulta.GetValue(27) Else objFasecolda.Year_25 = ""
+                    objFasecolda.Marca = ReadConsulta.GetValue(28)
+                    objFasecolda.Clase = ReadConsulta.GetValue(29)
+                    objFasecolda.Index = ReadConsulta.GetValue(30)
 
                     'agregamos a la lista
                     ObjListFasecolda.Add(objFasecolda)
@@ -568,41 +571,52 @@ Public Class FasecoldaSQLClass
         Dim conex As New Conector
         Dim Conexion As String = conex.typeConexion("2")
 
-        Dim sql As New StringBuilder
+        Dim sql_struct As New StringBuilder
+        Dim sql_Where As New StringBuilder
+       
+        sql_struct.Append(" SELECT FAS_Fasecolda_ID,  " & _
+                                          "              FAS_Linea, " & _
+                                          "              FAS_Cilindraje, " & _
+                                          "              FAS_ValYear_1, " & _
+                                          "              FAS_ValYear_2, " & _
+                                          "              FAS_ValYear_3, " & _
+                                          "              FAS_ValYear_4, " & _
+                                          "              FAS_ValYear_5, " & _
+                                          "              FAS_ValYear_6, " & _
+                                          "              FAS_ValYear_7, " & _
+                                          "              FAS_ValYear_8, " & _
+                                          "              FAS_ValYear_9, " & _
+                                          "              FAS_ValYear_10, " & _
+                                          "              FAS_ValYear_11, " & _
+                                          "              FAS_ValYear_12, " & _
+                                          "              FAS_ValYear_13, " & _
+                                          "              FAS_ValYear_14, " & _
+                                          "              FAS_ValYear_15, " & _
+                                          "              FAS_ValYear_16, " & _
+                                          "              FAS_ValYear_17, " & _
+                                          "              FAS_ValYear_18, " & _
+                                          "              FAS_ValYear_19, " & _
+                                          "              FAS_ValYear_20, " & _
+                                          "              FAS_ValYear_21, " & _
+                                          "              FAS_ValYear_22, " & _
+                                          "              FAS_ValYear_23, " & _
+                                          "              FAS_ValYear_24, " & _
+                                          "              FAS_ValYear_25, " & _
+                                          "              FAS_Marca, " & _
+                                          "              FAS_Clase, " & _
+                                          " ROW_NUMBER() OVER(ORDER BY FAS_Fasecolda_ID ASC) AS Index_Fasecolda " & _
+                                          " FROM FASECOLDA ")
 
-        sql.Append(" SELECT FAS_Fasecolda_ID,  " & _
-                              "              FAS_Linea, " & _
-                              "              FAS_Cilindraje, " & _
-                              "              FAS_ValYear_1, " & _
-                              "              FAS_ValYear_2, " & _
-                              "              FAS_ValYear_3, " & _
-                              "              FAS_ValYear_4, " & _
-                              "              FAS_ValYear_5, " & _
-                              "              FAS_ValYear_6, " & _
-                              "              FAS_ValYear_7, " & _
-                              "              FAS_ValYear_8, " & _
-                              "              FAS_ValYear_9, " & _
-                              "              FAS_ValYear_10, " & _
-                              "              FAS_ValYear_11, " & _
-                              "              FAS_ValYear_12, " & _
-                              "              FAS_ValYear_13, " & _
-                              "              FAS_ValYear_14, " & _
-                              "              FAS_ValYear_15, " & _
-                              "              FAS_ValYear_16, " & _
-                              "              FAS_ValYear_17, " & _
-                              "              FAS_ValYear_18, " & _
-                              "              FAS_ValYear_19, " & _
-                              "              FAS_ValYear_20, " & _
-                              "              FAS_ValYear_21, " & _
-                              "              FAS_ValYear_22, " & _
-                              "              FAS_ValYear_23, " & _
-                              "              FAS_ValYear_24, " & _
-                              "              FAS_ValYear_25 " & _
-                              " FROM FASECOLDA " & _
-                              " WHERE  FAS_Marca = '" & vp_O_Obj.Marca & "' AND " & _
-                              " FAS_Clase = '" & vp_O_Obj.Clase & "'")
+        If vp_O_Obj.tipo_SQL = "M" Then
+            sql_Where.Append(" WHERE  FAS_Marca = '" & vp_O_Obj.Marca & "' AND " & _
+                                         " FAS_Clase = '" & vp_O_Obj.Clase & "'")
+        Else
+            sql_Where.Append(" WHERE  FAS_Fasecolda_ID = '" & vp_O_Obj.Fasecolda_ID & "'")
+        End If
 
-        Dim StrQuery As String = sql.ToString
+
+       
+        Dim StrQuery As String = sql_struct.ToString & sql_Where.ToString
 
         ObjList = listFasecolda(StrQuery, Conexion, "Matrix")
 

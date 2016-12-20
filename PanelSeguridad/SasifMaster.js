@@ -669,7 +669,7 @@ function Charge_Combos_Depend_Verificacion(Matrix, Selector, P_1, P_2, Index_Edi
 
         case "Select_LineaF":
             for (Item in Matrix) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Fasecolda_ID + "'>" + Matrix[Item].Linea + " C.C. " + Matrix[Item].Cilindraje + "</option>");
+                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'>" + Matrix[Item].Linea + " C.C. " + Matrix[Item].Cilindraje + "</option>");
             }
             break;
     }
@@ -1082,6 +1082,48 @@ function CargaYear(Select_Control, Rango, Option_Year, Index_Edit, Value_Option)
     $('.C_Chosen').trigger('chosen:updated');
 
 }
+
+//carga combo de años parametrizado
+function CargaYear_Parametrizado(Select_Control, Rango_Inicio, Rango_Final, Option_Year, Index_Edit, Value_Option) {
+
+    var ActualYear = $("#Hours").html();
+    var A_Date = ActualYear.split("-");
+    var Ciclo = parseInt(Rango_Inicio) - 1;
+    Rango_Final = parseInt(Rango_Final) - 1;
+
+    var Year_F = parseInt(A_Date[0]) - parseInt(Option_Year);
+    var Year_I = parseInt(Option_Year) - (parseInt(Rango_Final) - (parseInt(Rango_Inicio) - 1));
+
+    $('#' + Select_Control).empty();
+    var objList = $("[id$='" + Select_Control + "']");
+    $('#' + Select_Control).append("<option value='-1'>Año...</option>");
+
+    switch (Value_Option) {
+        case "":
+            for (Ciclo; Ciclo <= Rango_Final; Ciclo++) {
+                $("#" + Select_Control).append("<option value='" + Year_I + "'>" + Year_I + "</option>");
+                Year_I = Year_I + 1;
+            }
+            break;
+        default:
+            for (Ciclo; Ciclo <= Rango_Final; Ciclo++) {
+                var Index_option = parseInt(Ciclo) + 1;
+                $("#" + Select_Control).append("<option value='" + Value_Option + Index_option + "'>" + Year_I + "</option>");
+                Year_I = Year_I + 1;
+            }
+            break;
+    }
+
+    if (Index_Edit == "")
+        $("#" + Select_Control + " option[value= '-1'] ").attr("selected", true);
+    else
+        $("#" + Select_Control + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
+
+    $("#" + Select_Control).trigger("liszt:updated");
+    $('.C_Chosen').trigger('chosen:updated');
+
+}
+
 
 //cargar combo de meses
 function CargaMonth(Select_Control, Index_Edit) {

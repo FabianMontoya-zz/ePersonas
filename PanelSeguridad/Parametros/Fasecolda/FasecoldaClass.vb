@@ -1,5 +1,6 @@
 ﻿Public Class FasecoldaClass
 #Region "campos"
+    Private _Index As Long
     Private _Fasecolda_ID As Long
     Private _Clase As String
 
@@ -32,8 +33,9 @@
     Private _Year_23 As String
     Private _Year_24 As String
     Private _Year_25 As String
-   
+
     Private _Estado As String
+    Private _tipo_SQL As String
 
     Private _FechaActualizacion As String
     Private _Usuario As String
@@ -41,7 +43,14 @@
 #End Region
 
 #Region "proiedades"
-
+    Public Property Index() As Long
+        Get
+            Return Me._Index
+        End Get
+        Set(ByVal value As Long)
+            Me._Index = value
+        End Set
+    End Property
     Public Property Fasecolda_ID() As Long
         Get
             Return Me._Fasecolda_ID
@@ -285,6 +294,15 @@
         End Set
     End Property
  
+    Public Property tipo_SQL() As String
+        Get
+            Return Me._tipo_SQL
+        End Get
+        Set(ByVal value As String)
+            Me._tipo_SQL = value
+        End Set
+    End Property
+
     Public Property Estado() As String
         Get
             Return Me._Estado

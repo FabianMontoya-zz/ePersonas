@@ -20,12 +20,13 @@ var T_Doc;
 var Doc;
 var Year_work;
 var Index_Year;
+var Year_Parametro;
 
 /*--------------- region de variables globales --------------------*/
 
 //Evento load JS
 $(document).ready(function () {
-   
+
     $("#Marco_trabajo_Contrato").css("height", "490px");
     $("#V_TFacturas").html(Suma_Valor_Inicial);
 
@@ -35,9 +36,9 @@ $(document).ready(function () {
     transaccionAjax_MPersonas('MATRIX_PERSONAS');
     transaccionAjax_MSucursal('MATRIX_SUCURSAL');
     transacionAjax_MMoneda('MATRIX_MONEDA');
-    
+
     transacionAjax_Marca_F("LIST_MARCA_F");
-   
+
     transacionAjax_EmpresaNit('Cliente')
     transacionAjax_Documento('Documento');
     transacionAjax_Colores("Colores");
@@ -131,11 +132,12 @@ $(document).ready(function () {
     Change_Select_Moneda();
     Change_Select_blindaje();
     Change_Select_Modelo();
+    Change_Select_Linea();
 
     Format_Adress("Txt_Adress_U");
     Date_Document();
     Calcula_Valor_IVA("Txt_ValFactura", "Text_Val_Sin_IVA", "V_Val_IVA");
-
+    Cargue_Depent_Modelo();
 });
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -293,13 +295,7 @@ function Captura_parametro() {
     var Year_actual;
     for (item in ArrayMenu) {
         if (ArrayMenu[item].IDlink == Link) {
-            Year_actual = parseInt(ArrayMenu[item].Parametro_1);
-
-            var ActualYear = $("#Hours").html();
-            var A_Date = ActualYear.split("-");
-            var Year_F = parseInt(A_Date[0]) - parseInt(Year_actual);
-
-            CargaYear("Select_modelo", 24, Year_F, "", "Year_");
+            Year_Parametro = parseInt(ArrayMenu[item].Parametro_1);
         }
     }
     return Year_actual;
@@ -309,19 +305,16 @@ function Captura_parametro() {
 /*----                                                                                                                     PROCESO BUSQUEDA FASECOLDA                                                                                  ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-//buscar en faseclda
-function Search_Fasecolda(Type, Cod_id, Clase, Marca, Linea, Modelo) {
+//buscar en fasecolda
+function Search_Fasecolda(Type, Cod_id, Modelo) {
 
     var EncuentraDato = 2;
     if (Type == 0) {
 
-        for (itemArray in Matrix_Fasecolda) {
-            if (Matrix_Fasecolda[itemArray].Clase == Clase &&
-                Matrix_Fasecolda[itemArray].Marca == Marca &&
-                Matrix_Fasecolda[itemArray].Fasecolda_ID == Linea) {
+        for (itemArray in Matrix_Linea_F) {
+            if (Matrix_Linea_F[itemArray].Fasecolda_ID == Cod_id) {
                 EncuentraDato = 0;
-                $("#TxtFasecolda_ID").val(Matrix_Fasecolda[itemArray].Fasecolda_ID);
-
+                $("#TxtFasecolda_ID").val(Matrix_Linea_F[itemArray].Fasecolda_ID);
                 MostrarValor_Cilindraje_Fasecolda(Modelo);
                 $("#Btn_ShearchFacecolda").attr("value", "Nueva Consulta");
                 Disable_Consult_Fasecolda();
@@ -330,15 +323,13 @@ function Search_Fasecolda(Type, Cod_id, Clase, Marca, Linea, Modelo) {
     }
     else {
 
-        for (itemArray in Matrix_Fasecolda) {
-            if (Matrix_Fasecolda[itemArray].Fasecolda_ID == Cod_id) {
+        for (itemArray in Matrix_Linea_F) {
+            if (Matrix_Linea_F[itemArray].Fasecolda_ID == Cod_id) {
                 EncuentraDato = 0;
-                $("#Select_ClaseF").val(Matrix_Fasecolda[itemArray].Clase);
-                Charge_Combos_Depend_Nit(Matrix_MarcaClase_F, "Select_MarcaF", Matrix_Fasecolda[itemArray].Clase, Matrix_Fasecolda[itemArray].Marca);
-                Charge_Combos_Depend_Verificacion(Matrix_LineaMarcaClase_F, "Select_LineaF", Matrix_Fasecolda[itemArray].Marca, Matrix_Fasecolda[itemArray].Clase, Matrix_Fasecolda[itemArray].Fasecolda_ID);
-                Index_Year = itemArray;
-
-                MostrarValor_Cilindraje_Fasecolda(Modelo);
+                $("#Select_MarcaF").val(Matrix_Linea_F[itemArray].Marca);
+                Index_Year = parseInt(Matrix_Linea_F[itemArray].Index) - 1;
+                //MostrarValor_Cilindraje_Fasecolda(Modelo);
+                transacionAjax_Clase_F("LIST_CLASE_F", Matrix_Linea_F[itemArray].Marca);
                 $("#Btn_ShearchFacecolda").attr("value", "Nueva Consulta");
                 Disable_Consult_Fasecolda();
             }
@@ -351,13 +342,14 @@ function Search_Fasecolda(Type, Cod_id, Clase, Marca, Linea, Modelo) {
 //ajusta y muestra el valor fasecolda y el cilindraje
 function MostrarValor_Cilindraje_Fasecolda(Str_val) {
 
+    console.log(Str_val);
     var Str_Valor = "";
     var StrYear = Str_val.split("_");
 
-    Str_Valor = Matrix_Fasecolda[Index_Year]["Year_" + StrYear[1]];
+    Str_Valor = Matrix_Linea_F[Index_ID_Fasecolda]["Year_" + StrYear[1]];
     Str_Valor = Str_Valor + "000";
     $("#V_Valor_F").html(dinner_format_grid(Str_Valor, ""));
-    $("#Txt_Cilindraje").val(Matrix_Fasecolda[Index_Year]["Cilindraje"]);
+    $("#Txt_Cilindraje").val(Matrix_Linea_F[Index_ID_Fasecolda]["Cilindraje"]);
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -414,9 +406,9 @@ function Clear_Limpiar() {
 function Clear_Consulta_Fasecolda() {
 
     $("#TxtFasecolda_ID").val("");
-    $("#Select_ClaseF").val("-1");
-    $("#Select_modelo").val("-1");
-    $('#Select_MarcaF').empty();
+    $("#Select_MarcaF").val("-1");
+    $("#Select_modelo").empty();
+    $('#Select_ClaseF').empty();
     $('#Select_LineaF').empty();
 
     $("#Txt_Cilindraje").val("");
