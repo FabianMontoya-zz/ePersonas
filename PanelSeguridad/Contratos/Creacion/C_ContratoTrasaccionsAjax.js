@@ -72,6 +72,7 @@ function transacionAjax_MMoneda(State) {
                 Matrix_Moneda = JSON.parse(result);
                 Charge_Combos_Depend_Nit(Matrix_Moneda, "Select_Moneda_C", "", "");
                 Charge_Combos_Depend_Nit(Matrix_Moneda, "Select_Moneda", "", ""); //Activos
+                Charge_Combos_Depend_Nit(Matrix_Moneda, "Select_Moneda_F", "", ""); //Facturas
             }
         },
         error: function () {
@@ -338,7 +339,8 @@ function transacionAjax_C_Contrato_create(State) {
                     break;
 
                 case "Exito":
-                    if (ArrayTerceros.length > 0 || ArrayActivos.length > 0 || ArrayVehiculos.length > 0) {
+                    if (ArrayTerceros.length > 0 || ArrayActivos.length > 0 || ArrayVehiculos.length > 0 || ArrayFactura.length > 0) {
+                       
                         if (ArrayTerceros.length > 0) {
                             transacionAjax_C_Terceros_create("CrearTercero");
                             Mensaje = Mensaje + " [Terceros]";
@@ -355,9 +357,18 @@ function transacionAjax_C_Contrato_create(State) {
 
                         if (ArrayVehiculos.length > 0) {
                             transacionAjax_C_Activos_Vehiculos_Create("CrearVehiculo");
+                            Mensaje = Mensaje + " [Activos - Vehículos]";
                             ArrayVehiculos = [];
                         } else {
                         }
+
+                        if (ArrayFactura.length > 0) {
+                            transacionAjax_C_Facturas_create("crear_Factura");
+                            Mensaje = Mensaje + " [Activos - Facturas]";
+                            ArrayFactura = [];
+                        } else {
+                        }
+
                         Mensaje_General("¡Colocación Agregada!", Mensaje, "S");
                         Clear();
                     }else {
@@ -505,6 +516,41 @@ function transacionAjax_C_Activos_Vehiculos_Create(State) {
         }
     });
 
+}
+
+var ListFactura = [];
+
+//hacemos la transaccion al code behind por medio de Ajax
+function transacionAjax_C_Facturas_create(State) {
+
+    ListFactura = JSON.stringify(ArrayFactura);
+    console.log("Entra Ajax Facturas");
+    $.ajax({
+        url: "C_ContratoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "ListFacturas": ListFactura,
+            "user": User.toUpperCase()
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            switch (result) {
+
+                case "Error_Factura":
+                    Mensaje_General("Disculpenos :(", "No se realizo el ingreso de la factura", "E");
+                    break;
+
+                case "Exito":
+                    break;
+            }
+
+        },
+        error: function () {
+
+        }
+    });
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -810,6 +856,36 @@ function transacionAjax_Consult_Activos_existe(State, index_NIT_ID, Ref_1, Ref_2
             } else {
                 Mensaje_General("¡Activo Repetido!", "El activo que desea ingresar ya se encuentra registrado en el sistema.", "W");
             }
+
+        },
+        error: function () {
+
+        }
+    });
+}
+
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_Consult_Factura_Existe(State, tabla, index_NIT_ID, Ref_1, Ref_2, Ref_3, Factura_ID) {
+    $.ajax({
+        url: "C_ContratoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": tabla,
+            "NIT": index_NIT_ID,
+            "Ref1": Ref_1,
+            "Ref2": Ref_2,
+            "Ref3": Ref_3,
+            "Factura_ID": Factura_ID
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == 0)
+                Json_Facturas(Ref_1, Ref_2, Ref_3);
+            else
+                Mensaje_General("¡Factura Repetido!", "La factura que desea ingresar ya se encuentra registrado en el sistema.", "W");
+
 
         },
         error: function () {

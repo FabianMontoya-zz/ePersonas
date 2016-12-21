@@ -226,6 +226,7 @@
     <Content Include="Contratos\Creacion\C_Contrato_Activos.js" />
     <Content Include="Contratos\Creacion\C_Contrato_Activos_Complementos.js" />
     <Content Include="Contratos\Creacion\C_Contrato_Activos_Validacion.js" />
+    <Content Include="Contratos\Creacion\C_Contrato_Facturas.js" />
     <Content Include="Contratos\Creacion\C_Contrato_JSON.js" />
     <Content Include="Contratos\menu.js" />
     <Content Include="Contratos\SasifMaster_Cosult.js" />

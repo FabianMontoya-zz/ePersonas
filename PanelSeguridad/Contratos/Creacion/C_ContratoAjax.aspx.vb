@@ -83,6 +83,12 @@ Public Class C_ContratoAjax
                 Case "CrearVehiculo"
                     InsertC_Vehiculos()
 
+                Case "ConsultarFactura"
+                    ConsultFactura()
+
+                Case "crear_Factura"
+                    Insert_Factura()
+
 
             End Select
 
@@ -728,4 +734,62 @@ Public Class C_ContratoAjax
     End Function
 
 #End Region
+
+#Region "CRUD FACTURA"
+
+    Protected Sub Insert_Factura()
+
+        Dim SQL_C_Fact As New FacturaSQLClass
+        Dim ObjListC_Activo As New List(Of FacturaClass)
+
+        Dim Result_list As String = "Exito"
+        Dim S_list As String = Request.Form("ListFacturas").ToString
+
+        Dim ListFact As New List(Of FacturaClass)
+        ListFact = SQL_C_Fact.Create_List_Factura(S_list)
+
+        For Each item_list As FacturaClass In ListFact
+            Dim Result As String = SQL_C_Fact.InsertC_Factura(item_list)
+
+            If Result = "Exito" Then
+                Result_list = "Exito"
+            Else
+                Result_list = "Error_Factura"
+                Exit For
+            End If
+        Next
+
+        Response.Write(Result_list)
+    End Sub
+
+#End Region
+
+#Region "FUNCIONES FACTURA"
+    ''' <summary>
+    ''' funcion que carga consulta el activo
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub ConsultFactura()
+        Dim result As String = ""
+
+        Select Case Request.Form("tabla")
+            Case "FACT_ORD_COMPRA"
+                Dim SQL As New FacturaSQLClass
+                Dim Obj As New FacturaClass
+
+                Obj.Nit_ID = Request.Form("NIT")
+                Obj.Ref_1 = Request.Form("Ref1")
+                Obj.Ref_2 = Request.Form("Ref2")
+                Obj.Ref_3 = Request.Form("Ref3")
+                Obj.Fact_Oct_ID = Request.Form("Factura_ID")
+
+                result = SQL.Consulta_Repetido(Obj)
+
+        End Select
+
+        Response.Write(result)
+
+    End Sub
+#End Region
+
 End Class

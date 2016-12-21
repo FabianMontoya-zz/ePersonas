@@ -8,6 +8,7 @@
     <script src="C_Contrato.js" type="text/javascript"></script>
     <script src="C_Contrato_Activos_Validacion.js" type="text/javascript"></script>
     <script src="C_Contrato_Activos.js" type="text/javascript"></script>
+    <script src="C_Contrato_Facturas.js" type="text/javascript"></script>
     <script src="C_Contrato_Activos_Complementos.js" type="text/javascript"></script>
     <script src="C_ContratoTrasaccionsAjax.js" type="text/javascript"></script>
     <script src="C_Contrato_JSON.js" type="text/javascript"></script>
@@ -1561,37 +1562,39 @@
                 <table id="Complementos">
                     <tr>
                         <td>
-                            <table id="T_Factura_Grid" border="1" cellpadding="1" cellspacing="1">
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            <span class="cssToolTip_ver">
-                                                <img alt="Activo" class="Add" onclick="javascript:Add_Facturas();" id="Img27" height='20px'
-                                                    width='20px' src='../../images/add.png' /><span>Agregar Nueva Factura</span></span>
-                                        </th>
-                                        <th>Identificación Factura
-                                        </th>
-                                        <th>Identificación Factura
-                                        </th>
-                                        <th>Identificación Factura
-                                        </th>
-                                        <th>Producto
-                                        </th>
-                                        <th>Moneda
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div id="Container_Facturas" style="width: 100%;">
+                                <table id="T_Factura_Grid" border="1" cellpadding="1" cellspacing="1">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <span class="cssToolTip_ver">
+                                                    <img alt="Activo" class="Add" onclick="javascript:Add_Facturas();" id="Crear" height='20px'
+                                                        width='20px' src='../../images/add.png' /><span>Agregar Nueva Factura</span></span>
+                                            </th>
+                                            <th>Identificación Factura
+                                            </th>
+                                            <th>Identificación Factura
+                                            </th>
+                                            <th>Identificación Factura
+                                            </th>
+                                            <th>Producto
+                                            </th>
+                                            <th>Moneda
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </td>
                     </tr>
                 </table>
@@ -1601,6 +1604,119 @@
             </div>
         </div>
 
+    </div>
+
+    <div id="Dialog_Factura">
+        <div id="Bloque_datos_activos">
+            <table id="T_DatosActivo" style="width: 100%;">
+                <tr>
+                    <td style="width: 14.5%;" class="Label_Bold">Empresa</td>
+                    <td id="L_Empresa_Act" style="width: 90%;">xxxx</td>
+                </tr>
+            </table>
+            <table id="B_I" style="width: 100%;">
+                <tr>
+                    <td style="width: 12%;" class="Label_Bold">Cedula Catastral</td>
+                    <td id="L_K1_Act" style="width: 15%;"></td>
+                    <td style="width: 12%;" class="Label_Bold">Matricula Imbiliaria</td>
+                    <td id="L_K2_Act" style="width: 15%;"></td>
+                    <td style="width: 12%;" class="Label_Bold">Numero Unico ID</td>
+                    <td id="L_K3_Act" style="width: 15%;"></td>
+                </tr>
+            </table>
+            <table id="B_V" style="width: 100%;">
+                <tr>
+                    <td id="T_llave_Act" style="width: 14.5%;" class="Label_Bold">Placa</td>
+                    <td id="L_K4_Act" style="width: 90%;"></td>
+                </tr>
+            </table>
+        </div>
+        <div id="Bloque_Datos_Factura">
+            <table id="T_1_Fact" style="width: 100%;">
+                <tr>
+                    <td style="width: 5.1%;" class="Label_Bold">N° Factura</td>
+                    <td style="width: 10%;">
+                        <span class="cssToolTip_Form">
+                            <input type="text" id="Factura_ID" class="Numeric_letter" maxlength="17" style="width: 170px;" />
+                            <span class="Spam_AST"></span></span>
+                    </td>
+                    <td style="width: 5%; padding-bottom: 25px;">
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img_Fac_1"
+                                src="../../images/error.png" />
+                            <span class="SpamEG"></span></span>
+                    </td>
+                    <td class="Label_Bold" style="width: 10%;">Fecha 
+                    </td>
+                    <td style="width: 10%;">
+                        <span class="cssToolTip_Form">
+                            <input id="Txt_Fecha_fact" type="text" readonly="readonly" style="width: 80%;" />
+                            <span class="Spam_AF"></span></span>
+                    </td>
+                    <td style="width: 5%; padding-bottom: 25px;">
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img_Fac_2"
+                                src="../../images/error.png" />
+                            <span class="SpamEG"></span></span>
+                    </td>
+                </tr>
+            </table>
+            <table id="T_F_2" style="width: 100%;">
+                <tr>
+                    <td class="Label_Bold" style="width: 7.2%;">Moneda
+                    </td>
+                    <td style="width: 20%;">
+                        <select id="Select_Moneda_F" class="C_Chosen">
+                        </select>
+                    </td>
+                    <td style="padding-bottom: 25px; width: 41%;">
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img_Fac_3"
+                                src="../../images/error.png" />
+                            <span class="SpamEG"></span></span>
+                    </td>
+                </tr>
+            </table>
+            <table id="T_F_3" style="width: 100%;">
+                <tr>
+                    <td class="Label_Bold" style="width: 8.5%;">Valor Total
+                    </td>
+                    <td id="V_Sigla_6" style="width: 3%" class="Sigla"></td>
+                    <td style="width: 10%;">
+                        <span class="cssToolTip_Form">
+                            <input type="text" id="Txt_ValFactura" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
+                            <span class="Spam_AVal"></span></span>
+                    </td>
+                    <td style="padding-bottom: 25px; width: 3%;">
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img_Fac_4"
+                                src="../../images/error.png" />
+                            <span class="SpamEG"></span></span>
+                    </td>
+                    <td class="Label_Bold" style="width: 7%;">Valor sin IVA
+                    </td>
+                    <td id="V_Sigla_7" style="width: 3%" class="Sigla"></td>
+                    <td style="width: 10%;">
+                        <span class="cssToolTip_Form">
+                            <input type="text" id="Text_Val_Sin_IVA" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
+                            <span class="Spam_AVal"></span></span>
+                    </td>
+                    <td style="padding-bottom: 25px; width: 3%;">
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img_Fac_5"
+                                src="../../images/error.png" />
+                            <span class="SpamEG"></span></span>
+                    </td>
+                    <td class="Label_Bold" style="width: 5%;">Valor IVA
+                    </td>
+                    <td id="V_Sigla_8" style="width: 3%" class="Sigla"></td>
+                    <td class="Title_Bold" align="left" id="V_Val_IVA" style="width: 10%; padding-bottom: 5px;"></td>
+                </tr>
+            </table>
+        </div>
+        <div style="width: 100%; text-align: center; margin-top: 25px;">
+            <input id="Btn_Fact" type="button" value="Agregar Factura" onclick="BtnFactura();" style="width: 150px;" />
+        </div>
     </div>
 
 </asp:Content>

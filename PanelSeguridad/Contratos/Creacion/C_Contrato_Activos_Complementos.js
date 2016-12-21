@@ -7,10 +7,14 @@ var A_0 = [];
 var A_C = 0;
 var A0 = 0;
 var C_P = 0;
-var Tipo_Activo = 0;
+var Tipo_Activo;
+
+var Index_Marca;
 var Index_Modelo;
 var Option_Blindaje = 0;
-/*--------------- region de variables globales --------------------*/
+var Nit_Proccess;
+var Fasecolda_ID = 0;
+var Index_ID_Fasecolda = 0;/*--------------- region de variables globales --------------------*/
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                    CHANGE DE DROP LIST                                                                                                       ----*/
