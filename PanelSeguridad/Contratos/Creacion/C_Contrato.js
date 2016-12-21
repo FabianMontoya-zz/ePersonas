@@ -31,6 +31,7 @@ var Periodo_Pago;
 var Tipo_Cuota;
 var Tasa;
 var Pto_Adicionales;
+var TotalActivos = 0;
 
 var TEbase;
 var TNbase;
@@ -139,11 +140,11 @@ function CargarAcordeons() {
             heightStyle: "content",
             collapsible: true
         });
-    });    
+    });
 }
 
 //Función que Agrega el diseño a las tablas
-function AgregarTablas() {    
+function AgregarTablas() {
     $("#T_Activo_Grid").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,
         "bDestroy": true
@@ -408,7 +409,7 @@ function Change_Select_Nit() {
         Charge_Combos_Depend_Nit(Matrix_Financiacion, "Select_Condicion_Financiacion", index_NIT_ID, "");
 
         /*Para Activos*/
-        
+
         Charge_Combos_Depend_Nit(Matrix_Sucursal, "Select_Sucursal", index_NIT_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Personas, "Select_Persona_A", index_NIT_ID, "");
         /*============*/
@@ -1019,12 +1020,12 @@ function Clear() {
     $("#L_Nominal_Actual").html("");
     $("#L_Tasa_Mora").html("");
     $("#L_Tasa_Usura").html("");
-    /*Reiniciamos la tabla de activos*/
 
-    /*Reiniciamos la tabla de Terceros*/
-    
-    AddArrayTercerosToTable();   
+    /*Reiniciamos la tabla de activos*/
     AddArrayActivosToTable();
+    TotalActivos = 0
+    /*Reiniciamos la tabla de Terceros*/
+    AddArrayTercerosToTable();
     ContTerceros = 0;
     Persona1 = false;
     Persona2 = false;
@@ -1115,7 +1116,7 @@ function Eliminar_Registro(index) {
     indexTerceros = index;
 }
 
-//Dialog para eliminar Personas de Tabla de Terceros
+//Dialog para eliminar Activos de Tabla de Activos
 function Eliminar_Registro_A(index) {
     $("#dialog_eliminar_A").dialog("open");
     $("#dialog_eliminar_A").dialog("option", "title", "¿Eliminar Activo?");
@@ -1139,13 +1140,15 @@ function Eliminar_Persona_Array() {
 function Eliminar_Activo_Array() {
     //borramos el Activo deseado
     for (item in ArrayActivos) {
-        if (ArrayActivos[item].Index_A == indexActivos) {            
+        if (ArrayActivos[item].Index_A == indexActivos) {
+            RestarValores(ArrayActivos[item].Valor_Bien, "L_Total_Activos")
             if (ArrayActivos[item].TActivo == "2") {
                 ArrayVehiculos.splice(indexActivos, 1);
             }
             ArrayActivos.splice(item, 1);
         }
     }
+
     AddArrayActivosToTable();
     indexActivos = "";
     $("#dialog_eliminar_A").dialog("close");
@@ -1261,4 +1264,30 @@ function LlenarCeros(valor, longitud) {
     numero = A_Decimal[0] + "." + A_Decimal[1];
 
     return numero;
+}
+
+//operacion de suma en totalidad de grid
+function SumarValores(VS, Obj_Vista) {
+
+    TotalActivos = parseInt(TotalActivos) + parseInt(VS);
+
+    Valor_Total = TotalActivos;
+    if (TotalActivos == 0) {
+        $("#" + Obj_Vista).html("0");        
+    } else {
+        $("#" + Obj_Vista).html(dinner_format_grid(Valor_Total, ""));
+    }
+}
+
+//operacion de resta en totalidad de grid
+function RestarValores(VR, Obj_Vista) {
+    
+    TotalActivos = parseInt(TotalActivos) - parseInt(VR);
+
+    Valor_Total = TotalActivos;
+    if (TotalActivos == 0) {
+        $("#" + Obj_Vista).html("0");
+    } else {
+        $("#" + Obj_Vista).html(dinner_format_grid(Valor_Total, ""));
+    }
 }

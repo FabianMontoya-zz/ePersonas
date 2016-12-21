@@ -2387,6 +2387,11 @@ To modify move field declaration from designer file to code-behind file.
  funcion que carga el objeto DDL consulta
  </summary>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.PaisesAjax.CargarCalendarios">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.PaisesAjax.Consulta_Repetido(System.String)">
 	<summary>
  funcion que valida si el id esta en la BD
@@ -2784,24 +2789,19 @@ To modify move field declaration from designer file to code-behind file.
  funcion que carga La matrix
  </summary>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.C_ActivosAjax.Carga_Lista_Clase_Fasecolda">
-	<summary>
- funcion que carga La lista de clases
- </summary>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.C_ActivosAjax.Carga_MMarca_Clase_Fasecolda">
+</member><member name="M:PanelSeguridad.C_ActivosAjax.Carga_ListMarca_Fasecolda">
 	<summary>
  funcion que carga matrix de marca clases fasecolda
  </summary>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.C_ActivosAjax.Carga_MLinea_Marca_Clase_Fasecolda">
+</member><member name="M:PanelSeguridad.C_ActivosAjax.Carga_Lista_Clase_Fasecolda">
 	<summary>
- funcion que carga matrix de lineas marca clases fasecolda
+ funcion que carga La lista de clases SEGUN LA MARCA ESCOGIDA
  </summary>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.C_ActivosAjax.Carga_MFasecolda">
+</member><member name="M:PanelSeguridad.C_ActivosAjax.Carga_M_Fasecolda_Flitrada">
 	<summary>
- funcion que carga matrix de fasecolda
+ funcion que carga LISTA de lineas marca clases fasecolda
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.C_ActivosAjax.CargarDocumento">
@@ -4022,6 +4022,12 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
  </summary>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CalendarioSQLClass.Read_Matrix_Calendarios_Genericos">
+	<summary>
+ Traemos los Calendarios para Empresa Genérica
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.DocumentosClass.UpLoad_Document(System.Web.HttpFileCollection,System.String,System.String)">
 	<summary>
  subir documentos al servidor
@@ -4325,25 +4331,19 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
 	<param name="vp_O_Obj"></param>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.FasecoldaSQLClass.List_Clases_Fasecolda">
+</member><member name="M:PanelSeguridad.FasecoldaSQLClass.List_Marca_Fasecolda">
 	<summary>
- lee la lista de clases de facecolda
+ trae la LISTA marcas clases fasecolda
  </summary>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.FasecoldaSQLClass.Matrix_Marca_Clases_Fasecolda">
+</member><member name="M:PanelSeguridad.FasecoldaSQLClass.List_Clases_Fasecolda(PanelSeguridad.FasecoldaClass)">
 	<summary>
- trae la matrix marcas clases fasecolda
+ lee la lista de clases de facecolda SEGUN LA MARCA SELECCIONADA
  </summary>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.FasecoldaSQLClass.Matrix_Linea_Marca_Clases_Fasecolda">
-	<summary>
- trae la matrix lineas marcas clases fasecolda
- </summary>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.FasecoldaSQLClass.Matrix_Fasecolda">
+</member><member name="M:PanelSeguridad.FasecoldaSQLClass.Matrix_Fasecolda_Filtrada(PanelSeguridad.FasecoldaClass)">
 	<summary>
  trae la matrix fasecolda con valores
  </summary>

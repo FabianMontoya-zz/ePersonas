@@ -80,6 +80,7 @@ function JsonActivos() {
                 ArrayActivos.push(JSON_Activos);
                 ContActivos = ContActivos + 1;
                 AddArrayActivosToTable();
+                SumarValores(Valor_Bien, "L_Total_Activos")
             } catch (ex) {
                 valido = 1;
                 console.error("Error JSON Activos: " + ex);

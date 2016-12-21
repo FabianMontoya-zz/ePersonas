@@ -315,7 +315,7 @@
                             </td>
                             <td class="Label_Bold" style="width: 9%;">Total Activos</td>
                             <td id="L_Moneda_2" class="Sigla" style="width: 7%"></td>
-                            <td id="L_Total_Activos" style="width: 50%;">[Total_Activos]</td>
+                            <td id="L_Total_Activos" style="width: 50%;">0</td>
                         </tr>
                     </table>
                     <table id="T_Valores_2" style="width: 100%">
