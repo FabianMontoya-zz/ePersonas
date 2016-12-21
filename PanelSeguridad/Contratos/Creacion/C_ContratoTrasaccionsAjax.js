@@ -635,71 +635,24 @@ function transaccionAjax_MPaises_Ciudades(State) {
 }
 
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_MFasecolda(State) {
+function transacionAjax_Marca_F(State) {
     $.ajax({
         url: "C_ContratoAjax.aspx",
         type: "POST",
         //crear json
         data: {
             "action": State,
-            "tabla": 'TIPO'
+
         },
         //Transaccion Ajax en proceso
         success: function (result) {
             if (result == "") {
-                Matrix_Fasecolda = [];
+                Array_Marca_F = [];
             }
             else {
-                Matrix_Fasecolda = JSON.parse(result);
-            }
-        },
-        error: function () {
-        }
-    });
-}
+                Array_Marca_F = JSON.parse(result);
+                charge_CatalogList(Array_Marca_F, "Select_MarcaF", 1);
 
-//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_MMarcaClase_F(State) {
-    $.ajax({
-        url: "C_ContratoAjax.aspx",
-        type: "POST",
-        //crear json
-        data: {
-            "action": State,
-            "tabla": 'TIPO'
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            if (result == "") {
-                Matrix_MarcaClase_F = [];
-            }
-            else {
-                Matrix_MarcaClase_F = JSON.parse(result);
-            }
-        },
-        error: function () {
-
-        }
-    });
-}
-
-//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_MLineaMarcaClase_F(State) {
-    $.ajax({
-        url: "C_ContratoAjax.aspx",
-        type: "POST",
-        //crear json
-        data: {
-            "action": State,
-            "tabla": 'TIPO'
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            if (result == "") {
-                Matrix_LineaMarcaClase_F = [];
-            }
-            else {
-                Matrix_LineaMarcaClase_F = JSON.parse(result);
             }
         },
         error: function () {
@@ -710,23 +663,89 @@ function transacionAjax_MLineaMarcaClase_F(State) {
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_ListaClaseFasecolda(State) {
+function transacionAjax_Clase_F(State, Index) {
     $.ajax({
         url: "C_ContratoAjax.aspx",
         type: "POST",
         //crear json
         data: {
             "action": State,
-            "tabla": 'TIPO'
+            "index": Index
         },
         //Transaccion Ajax en proceso
         success: function (result) {
             if (result == "") {
-                Lista_Clase_F = [];
+                Array_Clase_F = [];
             }
             else {
-                Lista_Clase_F = JSON.parse(result);
-                Charge_Combos_Depend_Nit(Lista_Clase_F, "Select_ClaseF", "", "");
+                Array_Clase_F = JSON.parse(result);
+                charge_CatalogList(Array_Clase_F, "Select_ClaseF", 1);
+
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_Linea_F(State, Marca, Index, Proccess) {
+
+    $.ajax({
+        url: "C_ContratoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "Marca": Marca,
+            "index": Index
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_Linea_F = [];
+            }
+            else {
+                Matrix_Linea_F = JSON.parse(result);
+                Charge_Combos_Depend_Verificacion(Matrix_Linea_F, "Select_LineaF", "", "", "");
+                if (Proccess == "ID") {
+                    CargarValoresCombos();
+                }
+            }
+        },
+        error: function () {
+        }
+    });
+}
+
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_Linea_F_ID(State, Index) {
+
+    if (Index == "")
+        Index = 0;
+
+    $.ajax({
+        url: "C_ContratoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "index": Index
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_Linea_F_ID = [];
+            }
+            else {
+                Matrix_Linea_F_ID = JSON.parse(result);
+                if (Matrix_Linea_F_ID.length == 0) {
+                    Mensaje_General("No existe", "El codigo Fasecolda NO exite en el sitema", "W");
+                }
+                else {
+                    Crear_Rango_modelo(Matrix_Linea_F_ID, "", "ID");
+                }
             }
         },
         error: function () {

@@ -106,7 +106,7 @@ function ValidaCamposConsultaFasecolda() {
     return Busqueda;
 }
 
-
+//llama trasacion ajax para traer el dato fasecolda especifico
 function Cargue_Depent_Modelo() {
 
     $("#TxtFasecolda_ID").blur(function () {

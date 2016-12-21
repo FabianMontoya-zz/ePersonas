@@ -195,7 +195,6 @@ function BtnBuscarFacecolda() {
         switch (validar) {
             case 0:
                 Clear_Ima_F();
-                //MostrarValor_Cilindraje_Fasecolda(Index_Modelo);
                 $("#Bloque_datosIngreso").css("display", "inline-table");
 
                 break;

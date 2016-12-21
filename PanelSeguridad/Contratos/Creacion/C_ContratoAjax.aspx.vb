@@ -56,17 +56,17 @@ Public Class C_ContratoAjax
                 Case "MATRIX_PERSONAS"
                     Carga_MPersonas()
 
-                Case "MATRIX_FASECOLDA"
-                    Carga_MFasecolda()
-
-                Case "MATRIX_MARCA_CLASE_F"
-                    Carga_MMarca_Clase_Fasecolda()
-
-                Case "MATRIX_LINEA_MARCA_CLASE_F"
-                    Carga_MLinea_Marca_Clase_Fasecolda()
+                Case "LIST_MARCA_F"
+                    Carga_ListMarca_Fasecolda()
 
                 Case "LIST_CLASE_F"
                     Carga_Lista_Clase_Fasecolda()
+
+                Case "MATRIX_LINEA_F"
+                    Carga_M_Fasecolda_Flitrada()
+
+                Case "MATRIX_LINEA_F_ID"
+                    Carga_M_Fasecolda_Flitrada_ID()
 
                 Case "Colores"
                     CargarColor()
@@ -513,61 +513,77 @@ Public Class C_ContratoAjax
 
     End Sub
 
-    ''' <summary>
-    ''' funcion que carga La lista de clases
-    ''' </summary>
-    ''' <remarks></remarks>
-    Protected Sub Carga_Lista_Clase_Fasecolda()
-
-        Dim SQL As New FasecoldaSQLClass
-        Dim ObjList As New List(Of FasecoldaClass)
-
-        '   ObjList = SQL.List_Clases_Fasecolda()
-        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
-
-    End Sub
+   
 
     ''' <summary>
     ''' funcion que carga matrix de marca clases fasecolda
     ''' </summary>
     ''' <remarks></remarks>
-    Protected Sub Carga_MMarca_Clase_Fasecolda()
+    Protected Sub Carga_ListMarca_Fasecolda()
+
+        Dim SQL As New FasecoldaSQLClass
+
+        Dim ObjListDroplist As New List(Of Droplist_Class)
+        Dim vl_S_Tabla As String = Request.Form("tabla")
+
+        ObjListDroplist = SQL.List_Marca_Fasecolda()
+
+        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga La lista de clases SEGUN LA MARCA ESCOGIDA
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub Carga_Lista_Clase_Fasecolda()
+
+        Dim SQL As New FasecoldaSQLClass
+        Dim ObjListDroplist As New List(Of Droplist_Class)
+        Dim obj As New FasecoldaClass
+        obj.Marca = Request.Form("index")
+
+        ObjListDroplist = SQL.List_Clases_Fasecolda(obj)
+        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga LISTA de lineas marca clases fasecolda
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub Carga_M_Fasecolda_Flitrada()
 
         Dim SQL As New FasecoldaSQLClass
         Dim ObjList As New List(Of FasecoldaClass)
+        Dim obj As New FasecoldaClass
+        obj.Clase = Request.Form("index")
+        obj.Marca = Request.Form("Marca")
+        obj.tipo_SQL = "M"
 
-        '  ObjList = SQL.Matrix_Marca_Clases_Fasecolda()
+        ObjList = SQL.Matrix_Fasecolda_Filtrada(obj)
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
 
     ''' <summary>
-    ''' funcion que carga matrix de lineas marca clases fasecolda
+    ''' funcion que carga LISTA de lineas marca clases fasecolda
     ''' </summary>
     ''' <remarks></remarks>
-    Protected Sub Carga_MLinea_Marca_Clase_Fasecolda()
+    Protected Sub Carga_M_Fasecolda_Flitrada_ID()
 
         Dim SQL As New FasecoldaSQLClass
         Dim ObjList As New List(Of FasecoldaClass)
+        Dim obj As New FasecoldaClass
+        obj.Fasecolda_ID = Request.Form("index")
+        obj.tipo_SQL = "ID"
 
-        '     ObjList = SQL.Matrix_Linea_Marca_Clases_Fasecolda()
+        ObjList = SQL.Matrix_Fasecolda_Filtrada(obj)
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
 
-    ''' <summary>
-    ''' funcion que carga matrix de fasecolda
-    ''' </summary>
-    ''' <remarks></remarks>
-    Protected Sub Carga_MFasecolda()
 
-        Dim SQL As New FasecoldaSQLClass
-        Dim ObjList As New List(Of FasecoldaClass)
-
-        '   ObjList = SQL.Matrix_Fasecolda()
-        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
-
-    End Sub
 #End Region
 
 #Region "OTRAS CONSULTAS ACTIVOS"

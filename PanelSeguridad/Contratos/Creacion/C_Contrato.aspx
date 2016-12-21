@@ -1159,22 +1159,6 @@
                                             </td>
                                         </tr>
                                     </table>
-                                    <table id="T_Datos_Fasecolda_1" style="width: 100%;">
-                                        <tr>
-                                            <td class="Label_Bold" style="width: 7.3%;">Clase
-                                            </td>
-                                            <td style="width: 20%;">
-                                                <select id="Select_ClaseF" class="C_Chosen">
-                                                </select>
-                                            </td>
-                                            <td style="width: 20%; padding-bottom: 25px;">
-                                                <span class="cssToolTip">
-                                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Fase_2"
-                                                        src="../../images/error.png" />
-                                                    <span class="SpamEG"></span></span>
-                                            </td>
-                                        </tr>
-                                    </table>
                                     <table id="T_Datos_Fasecolda_2" style="width: 100%;">
                                         <tr>
                                             <td class="Label_Bold" style="width: 7.7%;">Marca
@@ -1186,6 +1170,22 @@
                                             <td style="width: 30%; padding-bottom: 25px;">
                                                 <span class="cssToolTip">
                                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Fase_3"
+                                                        src="../../images/error.png" />
+                                                    <span class="SpamEG"></span></span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table id="T_Datos_Fasecolda_1" style="width: 100%;">
+                                        <tr>
+                                            <td class="Label_Bold" style="width: 7.3%;">Clase
+                                            </td>
+                                            <td style="width: 20%;">
+                                                <select id="Select_ClaseF" class="C_Chosen">
+                                                </select>
+                                            </td>
+                                            <td style="width: 20%; padding-bottom: 25px;">
+                                                <span class="cssToolTip">
+                                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Fase_2"
                                                         src="../../images/error.png" />
                                                     <span class="SpamEG"></span></span>
                                             </td>

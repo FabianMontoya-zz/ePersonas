@@ -14,7 +14,9 @@ var Index_Modelo;
 var Option_Blindaje = 0;
 var Nit_Proccess;
 var Fasecolda_ID = 0;
-var Index_ID_Fasecolda = 0;/*--------------- region de variables globales --------------------*/
+var Index_ID_Fasecolda = 0;
+
+/*--------------- region de variables globales --------------------*/
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                    CHANGE DE DROP LIST                                                                                                       ----*/
@@ -163,22 +165,91 @@ function Change_Select_TA() {
     });
 }
 
-//carga marcas segun la clase
-function Change_Select_Clase() {
-    $("#Select_ClaseF").change(function () {
-        var index_ID = this.value;
-        Clase_Index = index_ID;
-        $("#Select_LineaF").empty();
-        Charge_Combos_Depend_Nit(Matrix_MarcaClase_F, "Select_MarcaF", index_ID, "");
-    });
-}
-
-//carga lineas  segun la marca y clase
+//carga marca linea segun la marca escogida 
 function Change_Select_Marca() {
     $("#Select_MarcaF").change(function () {
         var index_ID = this.value;
-        Charge_Combos_Depend_Verificacion(Matrix_LineaMarcaClase_F, "Select_LineaF", index_ID, Clase_Index, "");
+
+        switch (index_ID) {
+            case "-1":
+                break;
+
+            default:
+                Index_Marca = index_ID;
+                transacionAjax_Clase_F("LIST_CLASE_F", index_ID);
+                break;
+        }
     });
+}
+
+//carga las lineas segun la marca y clase
+function Change_Select_Clase() {
+    $("#Select_ClaseF").change(function () {
+        var index_ID = this.value;
+
+        switch (index_ID) {
+            case "-1":
+                break;
+
+            default:
+                transacionAjax_Linea_F("MATRIX_LINEA_F", Index_Marca, index_ID,"Matrix");
+                break;
+        }
+    });
+}
+
+//busca los años del periodos de la linea clase y marca escogida
+function Change_Select_Linea() {
+    $("#Select_LineaF").change(function () {
+        Index_ID_Fasecolda = this.value;
+
+        switch (Index_ID_Fasecolda) {
+            case "-1":
+                break;
+
+            default:
+                Crear_Rango_modelo(Matrix_Linea_F, Index_ID_Fasecolda, "Matrix");
+                break;
+        }
+    });
+}
+
+//construye y llama la funcion de cargar el drop list modelo
+function Crear_Rango_modelo(Matrix, Index_ID, Proccess) {
+
+    if (Proccess == "Matrix")
+        Index_ID = Index_ID - 1;
+    else
+        Index_ID = 0;
+
+    Fasecolda_ID = Matrix[Index_ID].Fasecolda_ID;
+    var Flag_inicio = 0;
+    var ciclo_year = 0;
+    var Rango_Inicio = 0;
+    var Rango_Final = 0;
+    var Year_Parametro_Condicional = 0;
+
+    for (var col = 1; col <= 25; col++) {
+        var dato = "Year_" + col;
+        ciclo_year = ciclo_year + 1;
+
+        if (Matrix[Index_ID][dato] != 0) {
+            if (Flag_inicio == 0) {
+                Flag_inicio = 1;
+                Rango_Inicio = ciclo_year;
+            }
+            Rango_Final = ciclo_year;
+        }
+    }
+    var Residuo_periodo = 25 - parseInt(Rango_Final);
+
+    if (Residuo_periodo != 0)
+        Year_Parametro_Condicional = parseInt(Year_Parametro) - Residuo_periodo;
+    else
+        Year_Parametro_Condicional = Year_Parametro;
+
+    CargaYear_Parametrizado("Select_modelo", Rango_Inicio, Rango_Final, Year_Parametro_Condicional, "", "Year_");
+
 }
 
 //muestra los campos de diligenciamiento fasecolda

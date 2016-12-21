@@ -2,11 +2,11 @@
 var Matrix_Personas = [];
 var Matrix_RTSTA = [];
 var Matrix_Pais = [];
-var Matrix_Fasecolda = [];
-var Matrix_MarcaClase_F = [];
-var Matrix_LineaMarcaClase_F = [];
 
-var Lista_Clase_F = [];
+var Array_Marca_F = [];
+var Array_Clase_F = [];
+var Matrix_Linea_F = [];
+var Matrix_Linea_F_ID = [];
 
 var ArrayC_Activos = [];
 
@@ -16,6 +16,11 @@ var ArrayVehiculos = [];
 var Clase_Index;
 var Year_work;
 var Index_Year;
+
+var Year_Parametro;
+var Con_Linea;
+var Con_Clase;
+
 
 var ContActivos = 0;
 
@@ -27,10 +32,7 @@ $(document).ready(function () {
     transaccionAjax_MPersonas('MATRIX_PERSONAS');
     transaccionAjax_MRTSTA("MATRIX_RTSTA");
     transaccionAjax_MPaises_Ciudades('MATRIX_PAIS_CIUDAD');
-    transacionAjax_MFasecolda("MATRIX_FASECOLDA");
-    transacionAjax_MMarcaClase_F("MATRIX_MARCA_CLASE_F");
-    transacionAjax_MLineaMarcaClase_F("MATRIX_LINEA_MARCA_CLASE_F");
-    transacionAjax_ListaClaseFasecolda("LIST_CLASE_F");
+    transacionAjax_Marca_F("LIST_MARCA_F");
 
     transacionAjax_Colores("Colores");
     transacionAjax_Tipo('Tipo');
@@ -104,6 +106,7 @@ $(document).ready(function () {
     Change_Select_pais();
     Change_Select_blindaje();
     Change_Select_Modelo();
+    Change_Select_Linea();
 
     Picker_Fechas_A();
 
@@ -112,6 +115,7 @@ $(document).ready(function () {
     Calcula_Valor_IVA("Txt_ValFactura", "Text_Val_Sin_IVA", "V_Val_IVA");
     $("#Select_Sucursal").prop('disabled', true);
     $("#Select_Moneda").prop('disabled', true);
+    Cargue_Depent_Modelo();
 });
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -133,7 +137,6 @@ function BtnBuscarFacecolda() {
         switch (validar) {
             case 0:
                 Clear_Ima_F();
-                MostrarValor_Cilindraje_Fasecolda(Index_Modelo);
                 $("#Bloque_datosIngreso").css("display", "inline-table");
 
                 break;
@@ -255,17 +258,12 @@ function Captura_parametro() {
     var Year_actual;
     for (item in ArrayMenu) {
         if (ArrayMenu[item].IDlink == Link) {
-            Year_actual = parseInt(ArrayMenu[item].Parametro_1);
-
-            var ActualYear = $("#Hours").html();
-            var A_Date = ActualYear.split("-");
-            var Year_F = parseInt(A_Date[0]) - parseInt(Year_actual);
-
-            CargaYear("Select_modelo", 24, Year_F, "", "Year_");
+            Year_Parametro = parseInt(ArrayMenu[item].Parametro_1);
         }
     }
     return Year_actual;
 }
+
 
 function Cargar_Variables() {
     var sucursal = $("#Select_Sucursal_C").val();
@@ -283,20 +281,18 @@ function Cargar_Variables() {
 /*----                                                                                                                     PROCESO BUSQUEDA FASECOLDA                                                                                  ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-//buscar en faseclda
-function Search_Fasecolda(Type, Cod_id, Clase, Marca, Linea, Modelo) {
+//buscar en fasecolda
+function Search_Fasecolda(Type, Cod_id, Modelo) {
 
     var EncuentraDato = 2;
     if (Type == 0) {
 
-        for (itemArray in Matrix_Fasecolda) {
-            if (Matrix_Fasecolda[itemArray].Clase == Clase &&
-                Matrix_Fasecolda[itemArray].Marca == Marca &&
-                Matrix_Fasecolda[itemArray].Fasecolda_ID == Linea) {
+        for (itemArray in Matrix_Linea_F) {
+            if (Matrix_Linea_F[itemArray].Fasecolda_ID == Cod_id) {
                 EncuentraDato = 0;
-                $("#TxtFasecolda_ID").val(Matrix_Fasecolda[itemArray].Fasecolda_ID);
+                $("#TxtFasecolda_ID").val(Matrix_Linea_F[itemArray].Fasecolda_ID);
+                MostrarValor_Cilindraje_Fasecolda(Matrix_Linea_F, Modelo, "Matrix");
 
-                MostrarValor_Cilindraje_Fasecolda(Modelo);
                 $("#Btn_ShearchFacecolda").attr("value", "Nueva Consulta");
                 Disable_Consult_Fasecolda();
             }
@@ -304,17 +300,21 @@ function Search_Fasecolda(Type, Cod_id, Clase, Marca, Linea, Modelo) {
     }
     else {
 
-        for (itemArray in Matrix_Fasecolda) {
-            if (Matrix_Fasecolda[itemArray].Fasecolda_ID == Cod_id) {
+        for (itemArray in Matrix_Linea_F_ID) {
+            if (Matrix_Linea_F_ID[itemArray].Fasecolda_ID == Cod_id) {
                 EncuentraDato = 0;
-                $("#Select_ClaseF").val(Matrix_Fasecolda[itemArray].Clase);
-                Charge_Combos_Depend_Nit(Matrix_MarcaClase_F, "Select_MarcaF", Matrix_Fasecolda[itemArray].Clase, Matrix_Fasecolda[itemArray].Marca);
-                Charge_Combos_Depend_Verificacion(Matrix_LineaMarcaClase_F, "Select_LineaF", Matrix_Fasecolda[itemArray].Marca, Matrix_Fasecolda[itemArray].Clase, Matrix_Fasecolda[itemArray].Fasecolda_ID);
-                Index_Year = itemArray;
+                $("#Select_MarcaF").val(Matrix_Linea_F_ID[itemArray].Marca);
+                Index_Year = parseInt(Matrix_Linea_F_ID[itemArray].Index) - 1;
+                transacionAjax_Clase_F("LIST_CLASE_F", Matrix_Linea_F_ID[itemArray].Marca);
+                transacionAjax_Linea_F("MATRIX_LINEA_F", Matrix_Linea_F_ID[itemArray].Marca, Matrix_Linea_F_ID[itemArray].Clase, "ID");
 
-                MostrarValor_Cilindraje_Fasecolda(Modelo);
-                $("#Btn_ShearchFacecolda").attr("value", "Nueva Consulta");
+                Con_Clase = Matrix_Linea_F_ID[itemArray].Clase;
+                Con_Linea = Matrix_Linea_F_ID[itemArray].Linea;
+                MostrarValor_Cilindraje_Fasecolda(Matrix_Linea_F_ID, Modelo, "ID");
+
                 Disable_Consult_Fasecolda();
+                $("#Btn_ShearchFacecolda").attr("value", "Nueva Consulta");
+
             }
         }
     }
@@ -323,16 +323,29 @@ function Search_Fasecolda(Type, Cod_id, Clase, Marca, Linea, Modelo) {
 }
 
 //ajusta y muestra el valor fasecolda y el cilindraje
-function MostrarValor_Cilindraje_Fasecolda(Str_val) {
+function MostrarValor_Cilindraje_Fasecolda(Matrix, Str_val, Proccess) {
+
+    if (Proccess == "Matrix")
+        Index_ID_Fasecolda = Index_ID_Fasecolda - 1;
+    else
+        Index_ID_Fasecolda = 0;
 
     var Str_Valor = "";
     var StrYear = Str_val.split("_");
 
-    Str_Valor = Matrix_Fasecolda[Index_Year]["Year_" + StrYear[1]];
+    Str_Valor = Matrix[Index_ID_Fasecolda]["Year_" + StrYear[1]];
     Str_Valor = Str_Valor + "000";
     $("#V_Valor_F").html(dinner_format_grid(Str_Valor, ""));
-    $("#Txt_Cilindraje").val(Matrix_Fasecolda[Index_Year]["Cilindraje"]);
+    $("#Txt_Cilindraje").val(Matrix[Index_ID_Fasecolda]["Cilindraje"]);
 }
+
+//muesta los valores de los combos
+function CargarValoresCombos() {
+    $("#Select_ClaseF").val(Con_Clase).trigger('chosen:updated');
+    $("#Select_LineaF :selected").html(Con_Linea).trigger('chosen:updated');
+}
+
+
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                              MENSAJES, VISUALIZACION Y LIMPIEZA                                                                                                ----*/
@@ -393,14 +406,13 @@ function Clear_Limpiar() {
 function Clear_Consulta_Fasecolda() {
 
     $("#TxtFasecolda_ID").val("");
-    $("#Select_ClaseF").val("-1");
-    $("#Select_modelo").val("-1");
-    $('#Select_MarcaF').empty();
+    $("#Select_MarcaF").val("-1");
+    $("#Select_modelo").empty();
+    $('#Select_ClaseF').empty();
     $('#Select_LineaF').empty();
 
     $("#Txt_Cilindraje").val("");
     $("#V_Valor_F").html("");
-    $("#Txt_NPasajeros").html("");
     $("#TxtN_Motor").val("");
     $("#Txt_NSerie").val("");
     $("#Txt_NChasis").val("");
@@ -420,8 +432,6 @@ function Clear_Consulta_Fasecolda() {
     $("#Select_Color").val("-1");
     $("#Select_Blindaje").val("-1");
     $("#Select_Documento_Blin").val("-1");
-
-    $("#T_Datos_Identificacion_blin").css("display", "none");
 
     $('.C_Chosen').trigger('chosen:updated');
 }

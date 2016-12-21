@@ -89,12 +89,12 @@ function ValidaCamposConsultaFasecolda() {
             if (Campo_BF_5 == "-1" || Campo_BF_4 == "" || Campo_BF_3 == "" || Campo_BF_4 == "-1" || Campo_BF_3 == "-1" || Campo_BF_2 == "-1")
                 Busqueda = 1;
             else
-                Busqueda = Search_Fasecolda(0, "", Campo_BF_2, Campo_BF_3, Campo_BF_4, Campo_BF_5);
+                Busqueda = Search_Fasecolda(0, Fasecolda_ID, Campo_BF_5);
             break;
 
         default:
             if (Campo_BF_5 != "-1") {
-                Busqueda = Search_Fasecolda(1, Campo_BF_1, "", "", "", Campo_BF_5);
+                Busqueda = Search_Fasecolda(1, Campo_BF_1, Campo_BF_5);
             }
             else
                 Busqueda = 1;
@@ -102,6 +102,15 @@ function ValidaCamposConsultaFasecolda() {
     }
 
     return Busqueda;
+}
+
+//llama trasacion ajax para traer el dato fasecolda especifico
+function Cargue_Depent_Modelo() {
+
+    $("#TxtFasecolda_ID").blur(function () {
+        Index_ID_Fasecolda = this.value;
+        transacionAjax_Linea_F_ID("MATRIX_LINEA_F_ID", Index_ID_Fasecolda);
+    });
 }
 
 //validamos los campos y  asignamos baaloses segun proceso de insercion en activos
