@@ -26,6 +26,7 @@ var tiempo;
 var baseCalculo;
 var ciclo;
 var Modalidad;
+var TotalActivosBD = 0;
 
 var Periodo_Pago;
 var Tipo_Cuota;
@@ -794,6 +795,8 @@ function BtnCrear() {
 
     if (validate == 0) {
         if (Persona1 == true) {
+            var totaldigitado = F_NumericBD($("#TXT_Valor_Total").val());
+            TotalActivosBD = parseInt(totaldigitado) + parseInt(TotalActivos);
             transacionAjax_C_Contrato_create("crear");
             Ocultar_IMGS_Errores();
         }
@@ -996,7 +999,7 @@ function Clear() {
     $("#TXT_Valor_Total").val("");
     $("#L_Moneda_2").html("");
 
-    $("#L_Total_Activos").html("");
+    $("#L_Total_Activos").html("0");
     $("#L_Moneda_3").html("");
     $("#TXT_Valor_Financiado").val("");
     $("#L_Moneda_4").html("");
@@ -1023,7 +1026,7 @@ function Clear() {
 
     /*Reiniciamos la tabla de activos*/
     AddArrayActivosToTable();
-    TotalActivos = 0
+    TotalActivos = 0;
     /*Reiniciamos la tabla de Terceros*/
     AddArrayTercerosToTable();
     ContTerceros = 0;

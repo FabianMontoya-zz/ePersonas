@@ -318,7 +318,7 @@ function transacionAjax_C_Contrato_create(State) {
             "Ciclo": $("#Select_Ciclo").val(),
             "BaseCalculo": $("#Select_Base_Calculo").val(),
             "Direccion": $("#Select_Direccion").val(),
-            "Total": F_NumericBD($("#TXT_Valor_Total").val()), //Falta validar la suma de Activos y el total digitado
+            "Total": TotalActivosBD, //Se hace la suma de lo digitado y la suma de activos en el C_Contrato.js BtnCrear
             "Financiado": F_NumericBD($("#TXT_Valor_Financiado").val()),
             "OpcionCompra": F_NumericBD($("#TXT_Valor_Opcion_Compra").val()),
             "user": User
