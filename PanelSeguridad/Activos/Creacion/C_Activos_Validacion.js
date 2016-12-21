@@ -111,7 +111,7 @@ function Cargue_Depent_Modelo() {
 
     $("#TxtFasecolda_ID").blur(function () {
         Index_ID_Fasecolda = this.value;
-        Crear_Rango_modelo(Index_ID_Fasecolda);
+        transacionAjax_Linea_F_ID("MATRIX_LINEA_F_ID", Index_ID_Fasecolda);
     });
 }
 

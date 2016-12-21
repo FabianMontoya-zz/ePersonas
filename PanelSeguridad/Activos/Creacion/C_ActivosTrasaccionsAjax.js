@@ -303,7 +303,8 @@ function transacionAjax_Clase_F(State, Index) {
 }
 
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_Linea_F(State, Marca, Index) {
+function transacionAjax_Linea_F(State, Marca, Index, Proccess) {
+
     $.ajax({
         url: "C_ActivosAjax.aspx",
         type: "POST",
@@ -321,7 +322,43 @@ function transacionAjax_Linea_F(State, Marca, Index) {
             else {
                 Matrix_Linea_F = JSON.parse(result);
                 Charge_Combos_Depend_Verificacion(Matrix_Linea_F, "Select_LineaF", "", "", "");
+                if (Proccess == "ID") {
+                    CargarValoresCombos();
+                }
+            }
+        },
+        error: function () {
+        }
+    });
+}
 
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_Linea_F_ID(State, Index) {
+
+    if (Index == "")
+        Index = 0;
+
+    $.ajax({
+        url: "C_ActivosAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "index": Index
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_Linea_F_ID = [];
+            }
+            else {
+                Matrix_Linea_F_ID = JSON.parse(result);
+                if (Matrix_Linea_F_ID.length == 0) {
+                    Mensaje_General("No existe", "El codigo Fasecolda NO exite en el sitema", "W");
+                }
+                else {
+                    Crear_Rango_modelo(Matrix_Linea_F_ID, "", "ID");
+                }
             }
         },
         error: function () {
@@ -329,6 +366,7 @@ function transacionAjax_Linea_F(State, Marca, Index) {
         }
     });
 }
+
 
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/

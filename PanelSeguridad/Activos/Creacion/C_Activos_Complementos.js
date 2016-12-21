@@ -157,7 +157,7 @@ function Change_Select_Clase() {
                 break;
 
             default:
-                transacionAjax_Linea_F("MATRIX_LINEA_F", Index_Marca, index_ID);
+                transacionAjax_Linea_F("MATRIX_LINEA_F", Index_Marca, index_ID,"Matrix");
                 break;
         }
     });
@@ -173,16 +173,21 @@ function Change_Select_Linea() {
                 break;
 
             default:
-                Crear_Rango_modelo(Index_ID_Fasecolda);
+                Crear_Rango_modelo(Matrix_Linea_F, Index_ID_Fasecolda, "Matrix");
                 break;
         }
     });
 }
 
 //construye y llama la funcion de cargar el drop list modelo
-function Crear_Rango_modelo(Index_ID_Fasecolda) {
-    Index_ID_Fasecolda = Index_ID_Fasecolda - 1;
-    Fasecolda_ID = Matrix_Linea_F[Index_ID_Fasecolda].Fasecolda_ID;
+function Crear_Rango_modelo(Matrix, Index_ID, Proccess) {
+
+    if (Proccess == "Matrix") 
+        Index_ID = Index_ID - 1;
+     else
+        Index_ID = 0;
+
+    Fasecolda_ID = Matrix[Index_ID].Fasecolda_ID;
     var Flag_inicio = 0;
     var ciclo_year = 0;
     var Rango_Inicio = 0;
@@ -193,7 +198,7 @@ function Crear_Rango_modelo(Index_ID_Fasecolda) {
         var dato = "Year_" + col;
         ciclo_year = ciclo_year + 1;
 
-        if (Matrix_Linea_F[Index_ID_Fasecolda][dato] != 0) {
+        if (Matrix[Index_ID][dato] != 0) {
             if (Flag_inicio == 0) {
                 Flag_inicio = 1;
                 Rango_Inicio = ciclo_year;

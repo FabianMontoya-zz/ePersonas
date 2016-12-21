@@ -9,6 +9,7 @@ var Matrix_Moneda = [];
 var Array_Marca_F = [];
 var Array_Clase_F = [];
 var Matrix_Linea_F = [];
+var Matrix_Linea_F_ID = [];
 
 var ArrayC_Activos = [];
 var Array_Hijo_Cliente = [];
@@ -21,6 +22,8 @@ var Doc;
 var Year_work;
 var Index_Year;
 var Year_Parametro;
+var Con_Linea;
+var Con_Clase;
 
 /*--------------- region de variables globales --------------------*/
 
@@ -166,6 +169,7 @@ function BtnCrear() {
         }
     }
 }
+
 //salida del formulario
 function btnSalir() {
     window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
@@ -191,7 +195,7 @@ function BtnBuscarFacecolda() {
         switch (validar) {
             case 0:
                 Clear_Ima_F();
-                MostrarValor_Cilindraje_Fasecolda(Index_Modelo);
+                //MostrarValor_Cilindraje_Fasecolda(Index_Modelo);
                 $("#Bloque_datosIngreso").css("display", "inline-table");
 
                 break;
@@ -315,7 +319,8 @@ function Search_Fasecolda(Type, Cod_id, Modelo) {
             if (Matrix_Linea_F[itemArray].Fasecolda_ID == Cod_id) {
                 EncuentraDato = 0;
                 $("#TxtFasecolda_ID").val(Matrix_Linea_F[itemArray].Fasecolda_ID);
-                MostrarValor_Cilindraje_Fasecolda(Modelo);
+                MostrarValor_Cilindraje_Fasecolda(Matrix_Linea_F, Modelo, "Matrix");
+
                 $("#Btn_ShearchFacecolda").attr("value", "Nueva Consulta");
                 Disable_Consult_Fasecolda();
             }
@@ -323,15 +328,21 @@ function Search_Fasecolda(Type, Cod_id, Modelo) {
     }
     else {
 
-        for (itemArray in Matrix_Linea_F) {
-            if (Matrix_Linea_F[itemArray].Fasecolda_ID == Cod_id) {
+        for (itemArray in Matrix_Linea_F_ID) {
+            if (Matrix_Linea_F_ID[itemArray].Fasecolda_ID == Cod_id) {
                 EncuentraDato = 0;
-                $("#Select_MarcaF").val(Matrix_Linea_F[itemArray].Marca);
-                Index_Year = parseInt(Matrix_Linea_F[itemArray].Index) - 1;
-                //MostrarValor_Cilindraje_Fasecolda(Modelo);
-                transacionAjax_Clase_F("LIST_CLASE_F", Matrix_Linea_F[itemArray].Marca);
-                $("#Btn_ShearchFacecolda").attr("value", "Nueva Consulta");
+                $("#Select_MarcaF").val(Matrix_Linea_F_ID[itemArray].Marca);
+                Index_Year = parseInt(Matrix_Linea_F_ID[itemArray].Index) - 1;
+                transacionAjax_Clase_F("LIST_CLASE_F", Matrix_Linea_F_ID[itemArray].Marca);
+                transacionAjax_Linea_F("MATRIX_LINEA_F", Matrix_Linea_F_ID[itemArray].Marca, Matrix_Linea_F_ID[itemArray].Clase, "ID");
+
+                Con_Clase = Matrix_Linea_F_ID[itemArray].Clase;
+                Con_Linea = Matrix_Linea_F_ID[itemArray].Linea;
+                MostrarValor_Cilindraje_Fasecolda(Matrix_Linea_F_ID, Modelo, "ID");
+
                 Disable_Consult_Fasecolda();
+                $("#Btn_ShearchFacecolda").attr("value", "Nueva Consulta");
+
             }
         }
     }
@@ -340,16 +351,26 @@ function Search_Fasecolda(Type, Cod_id, Modelo) {
 }
 
 //ajusta y muestra el valor fasecolda y el cilindraje
-function MostrarValor_Cilindraje_Fasecolda(Str_val) {
+function MostrarValor_Cilindraje_Fasecolda(Matrix, Str_val, Proccess) {
 
-    console.log(Str_val);
+    if (Proccess == "Matrix")
+        Index_ID_Fasecolda = Index_ID_Fasecolda - 1;
+    else
+        Index_ID_Fasecolda = 0;
+
     var Str_Valor = "";
     var StrYear = Str_val.split("_");
 
-    Str_Valor = Matrix_Linea_F[Index_ID_Fasecolda]["Year_" + StrYear[1]];
+    Str_Valor = Matrix[Index_ID_Fasecolda]["Year_" + StrYear[1]];
     Str_Valor = Str_Valor + "000";
     $("#V_Valor_F").html(dinner_format_grid(Str_Valor, ""));
-    $("#Txt_Cilindraje").val(Matrix_Linea_F[Index_ID_Fasecolda]["Cilindraje"]);
+    $("#Txt_Cilindraje").val(Matrix[Index_ID_Fasecolda]["Cilindraje"]);
+}
+
+//muesta los valores de los combos
+function CargarValoresCombos() {
+    $("#Select_ClaseF").val(Con_Clase).trigger('chosen:updated');
+    $("#Select_LineaF :selected").html(Con_Linea).trigger('chosen:updated');
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/

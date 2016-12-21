@@ -34,6 +34,8 @@ Public Class C_ActivosAjax
                 Case "MATRIX_LINEA_F"
                     Carga_M_Fasecolda_Flitrada()
 
+                Case "MATRIX_LINEA_F_ID"
+                    Carga_M_Fasecolda_Flitrada_ID()
 
                 Case "Documento"
                     CargarDocumento()
@@ -358,6 +360,26 @@ Public Class C_ActivosAjax
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
+
+    ''' <summary>
+    ''' funcion que carga LISTA de lineas marca clases fasecolda
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub Carga_M_Fasecolda_Flitrada_ID()
+
+        Dim SQL As New FasecoldaSQLClass
+        Dim ObjList As New List(Of FasecoldaClass)
+        Dim obj As New FasecoldaClass
+        obj.Fasecolda_ID = Request.Form("index")
+        obj.tipo_SQL = "ID"
+
+        ObjList = SQL.Matrix_Fasecolda_Filtrada(obj)
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
+
+
+
 
     ''' <summary>
     ''' funcion que carga el objeto DDL consulta

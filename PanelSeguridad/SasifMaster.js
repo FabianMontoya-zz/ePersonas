@@ -1124,7 +1124,6 @@ function CargaYear_Parametrizado(Select_Control, Rango_Inicio, Rango_Final, Opti
 
 }
 
-
 //cargar combo de meses
 function CargaMonth(Select_Control, Index_Edit) {
 
