@@ -40,8 +40,6 @@ $(document).ready(function () {
     transaccionAjax_MSucursal('MATRIX_SUCURSAL');
     transacionAjax_MMoneda('MATRIX_MONEDA');
 
-    transacionAjax_Marca_F("LIST_MARCA_F");
-
     transacionAjax_EmpresaNit('Cliente')
     transacionAjax_Documento('Documento');
     transacionAjax_Colores("Colores");

@@ -87,6 +87,7 @@ function Change_Select_TA() {
                 break;
 
             case "2":
+                transacionAjax_Marca_F("LIST_MARCA_F");
                 $("#TitleActivo_2").html($("#Select_Tipo option:selected").html());
                 $("#Tabla_LLave_Inmueble").css("display", "none");
                 $("#Tabla_LLave_Vehiculos").css("display", "inline-table");
