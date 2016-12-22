@@ -614,6 +614,9 @@ function transacionAjax_C_Facturas_create(State) {
                     break;
 
                 case "Exito":
+                    Clear_Factura();
+                    ArrayFactura = [];
+                    Tabla_factura();
                     break;
             }
 
