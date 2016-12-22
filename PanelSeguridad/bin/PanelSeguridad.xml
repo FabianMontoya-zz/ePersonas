@@ -1348,24 +1348,24 @@ To modify move field declaration from designer file to code-behind file.
  funcion que carga el objeto DDL consulta
  </summary>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_Lista_Clase_Fasecolda">
-	<summary>
- funcion que carga La lista de clases
- </summary>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_MMarca_Clase_Fasecolda">
+</member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_ListMarca_Fasecolda">
 	<summary>
  funcion que carga matrix de marca clases fasecolda
  </summary>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_MLinea_Marca_Clase_Fasecolda">
+</member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_Lista_Clase_Fasecolda">
 	<summary>
- funcion que carga matrix de lineas marca clases fasecolda
+ funcion que carga La lista de clases SEGUN LA MARCA ESCOGIDA
  </summary>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_MFasecolda">
+</member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_M_Fasecolda_Flitrada">
 	<summary>
- funcion que carga matrix de fasecolda
+ funcion que carga LISTA de lineas marca clases fasecolda
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_M_Fasecolda_Flitrada_ID">
+	<summary>
+ funcion que carga LISTA de lineas marca clases fasecolda
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.C_ContratoAjax.ConsultActivo">
@@ -2805,6 +2805,11 @@ To modify move field declaration from designer file to code-behind file.
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.C_ActivosAjax.Carga_M_Fasecolda_Flitrada">
+	<summary>
+ funcion que carga LISTA de lineas marca clases fasecolda
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosAjax.Carga_M_Fasecolda_Flitrada_ID">
 	<summary>
  funcion que carga LISTA de lineas marca clases fasecolda
  </summary>

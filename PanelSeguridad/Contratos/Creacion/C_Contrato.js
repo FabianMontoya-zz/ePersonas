@@ -1074,7 +1074,7 @@ function BTNAgregarTercero() {
 function AddArrayTercerosToTable() {
     var Html;
 
-    Html = "<table id='T_T' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th><span class='cssToolTip_ver'><img alt='Activo' class='Add' onclick='javascript:ValidarIDColocacion();' id='Crear_Terceros' height='20px' width='20px' src='../../images/add.png' /><span>Agregar Persona</span></span></th><th>Tipo Documento</th><th>Identificación</th><th>Nombre</th><th>Tipo de relación</th></tr></thead><tbody>";
+    Html = "<table id='T_T' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th><span class='cssToolTip_ver'><img alt='Activo' class='Add' onclick='javascript:ValidarIDColocacion_T();' id='Crear_Terceros' height='20px' width='20px' src='../../images/add.png' /><span>Agregar Persona</span></span></th><th>Tipo Documento</th><th>Identificación</th><th>Nombre</th><th>Tipo de relación</th></tr></thead><tbody>";
     for (itemArray in ArrayTerceros) {
         if (ArrayTerceros[itemArray].Contrato_ID != 0) {
             Html += "<tr id= 'T_T_" + ArrayTerceros[itemArray].Index + "'><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar_Registro('" + ArrayTerceros[itemArray].Index + "')\"></input></td><td>" + ArrayTerceros[itemArray].Descrip_TypeDocumento + "</td><td>" + ArrayTerceros[itemArray].Document_ID + "</td><td>" + ArrayTerceros[itemArray].Descrip_Persona + "</td><td>" + ArrayTerceros[itemArray].Descrip_TypeRelation + "</td></tr>";

@@ -113,7 +113,7 @@ function Tabla_factura() {
     Html = "<table id='T_Fact' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th><span class='cssToolTip_ver'><img alt='Activo' class='Add' onclick='javascript:Add_Facturas();' id='Crear' height='20px' width='20px' src='../../images/add.png' /><span>Agregar  Nueva Factura</span></span></th> <th>Identificación Factura</th><th>Identificación Factura</th><th>Identificación Factura</th><th>Producto</th><th>Moneda</th></tr></thead><tbody>";
     for (itemArray in ArrayFactura) {
         if (ArrayFactura[itemArray].Contrato_ID != 0) {
-            Html += "<tr id= 'T_Fact" + ArrayFactura[itemArray].Index + "'><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar_Registro('" + ArrayFactura[itemArray].Index + "')\"></input></td><td>" + ArrayFactura[itemArray].Ref_1 + "</td><td>" + ArrayFactura[itemArray].Ref_2 + "</td><td>" + ArrayFactura[itemArray].Ref_3 + "</td><td>" + ArrayFactura[itemArray].Fact_Oct_ID + "</td><td>" + ArrayFactura[itemArray].DescripMoneda + "</td></tr>";
+            Html += "<tr id= 'T_Fact" + ArrayFactura[itemArray].Index + "'><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar_Registro_F('" + ArrayFactura[itemArray].Index + "')\"></input></td><td>" + ArrayFactura[itemArray].Ref_1 + "</td><td>" + ArrayFactura[itemArray].Ref_2 + "</td><td>" + ArrayFactura[itemArray].Ref_3 + "</td><td>" + ArrayFactura[itemArray].Fact_Oct_ID + "</td><td>" + ArrayFactura[itemArray].DescripMoneda + "</td></tr>";
         }
     }
 
@@ -129,7 +129,7 @@ function Tabla_factura() {
 }
 
 //eliminar facturas del array y tabla
-function Eliminar_Registro(index) {
+function Eliminar_Registro_F(index) {
     //borramos registro deseado
     var Valor_Operativo = ArrayFactura[index].Valor_Total;
     RestarValores_Grid(Suma_Valor_Inicial, Valor_Operativo, "V_TFacturas");
