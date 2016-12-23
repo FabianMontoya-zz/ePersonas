@@ -304,11 +304,11 @@ Public Class DocumentosSQLClass
     End Function
 
     ''' <summary>
-    ''' carga matrix de trabajo documentos
+    ''' carga documentos de la persona seleccionada
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function SearchDocument_People()
+    Public Function SearchDocument_People(ByVal vp_Obj_persona As ClienteClass)
 
         Dim ObjList As New List(Of DocumentosClass)
         Dim sql As New StringBuilder()
@@ -371,7 +371,9 @@ Public Class DocumentosSQLClass
                                 " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D4 ON D4.DDL_ID = DE.DE_Verificado AND D4.DDL_Tabla = 'VERIFICACION' " & _
                                 " LEFT JOIN RUTAS_OPERACION R ON R.TR_Ruta_Temporal <> DE.DE_RutaDocumento " & _
                                 " LEFT JOIN " & BD_Param & ".dbo.CLIENTE C ON C.CLI_Document_ID = AD.A_Document_ID AND DE.DE_Nit_ID = C.CLI_Nit_ID " & _
-                                " ORDER BY DE_Secuencia_ID ASC  ")
+                                " WHERE C.CLI_TypeDocument_ID ='" & vp_Obj_persona.TypeDocument_ID & "'" & _
+                                " AND C.CLI_Document_ID = '" & vp_Obj_persona.Document_ID & "' AND DE.DE_IndicativoFoto = 'S'  " & _
+                                 " ORDER BY DE_Secuencia_ID ASC  ")
 
         StrQuery = sql.ToString
 

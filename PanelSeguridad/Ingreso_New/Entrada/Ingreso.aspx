@@ -6,6 +6,7 @@
     <script src="../../SasifMaster.js" type="text/javascript"></script>
     <script src="../SasifMaster_Cosult.js" type="text/javascript"></script>
     <script src="Ingreso.js" type="text/javascript"></script>
+    <script src="Ingreso_Tarjeta.js" type="text/javascript"></script>
     <script src="IngresoTrasaccionsAjax.js" type="text/javascript"></script>
     <link href="../../css/css_login.css" rel="stylesheet" type="text/css" />
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />

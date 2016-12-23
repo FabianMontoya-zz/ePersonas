@@ -36,7 +36,16 @@ function transacionAjax_Documento(State) {
 /*----                                                                          CONSULTAS EN PROCESO                                                                                                                ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_ShearchPeopleAccess(State, TD, D, NIT) {
+function transacionAjax_ShearchPeopleAccess(State, TD, D, NIT, Tarjeta_ID) {
+
+    if (Tarjeta_ID != "") {
+        TD = 0;
+        D = 0;
+    }
+    else {
+        Tarjeta_ID = 0;
+    }
+
     $.ajax({
         url: "IngresoAjax.aspx",
         type: "POST",
@@ -45,7 +54,8 @@ function transacionAjax_ShearchPeopleAccess(State, TD, D, NIT) {
             "action": State,
             "TD": TD,
             "D": D,
-            "NIT": NIT
+            "NIT": NIT,
+            "Tarjeta_ID": Tarjeta_ID
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -60,7 +70,7 @@ function transacionAjax_ShearchPeopleAccess(State, TD, D, NIT) {
                         break;
 
                     case 1:
-                        transacionAjax_Shearch_Foto("Buscar_Foto", TD, D, NIT);
+                        transacionAjax_Search_Foto("Buscar_Foto", TD, D);
                         break;
 
                     default:
@@ -77,7 +87,7 @@ function transacionAjax_ShearchPeopleAccess(State, TD, D, NIT) {
 }
 
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_Shearch_Foto(State, TD, D, NIT) {
+function transacionAjax_Search_Foto(State, TD, D) {
     $.ajax({
         url: "IngresoAjax.aspx",
         type: "POST",
@@ -85,19 +95,22 @@ function transacionAjax_Shearch_Foto(State, TD, D, NIT) {
         data: {
             "action": State,
             "TD": TD,
-            "D": D,
-            "NIT": NIT
+            "D": D
         },
         //Transaccion Ajax en proceso
         success: function (result) {
             Datos_principales();
+            if (result == "") {
+                Array_Foto = [];
+            }
+            else {
+                Array_Foto = JSON.parse(result);
+                SearchFoto();
+                Valida_Access_Minimo();
+            }
         },
         error: function () {
 
         }
     });
 }
-
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*----                                                                          PETICIONES CRUD ACTIVOS                                                                                                                ----*/
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/

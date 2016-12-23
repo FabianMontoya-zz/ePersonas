@@ -17,7 +17,7 @@ Public Class IngresoAjax
                     Search_People_Access()
 
                 Case "Buscar_Foto"
-
+                    Search_Document_Foto()
 
 
 
@@ -272,7 +272,6 @@ Public Class IngresoAjax
 
 #Region "FUNCIONES"
 
-
     ''' <summary>
     ''' consulta si existe la persona digitada 
     ''' </summary>
@@ -286,11 +285,30 @@ Public Class IngresoAjax
         Obj.Nit_ID = Request.Form("NIT")
         Obj.TypeDocument_ID = Request.Form("TD")
         Obj.Document_ID = Request.Form("D")
+        Obj.Tarjeta_ID = Request.Form("Tarjeta_ID")
 
         ObjList = SQL.SearchPeople_Access(Obj)
 
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
+    End Sub
+
+    ''' <summary>
+    ''' trae la foto del personaje a consultar
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub Search_Document_Foto()
+
+        Dim SQL As New DocumentosSQLClass
+        Dim Obj As New ClienteClass
+        Dim ObjList As New List(Of DocumentosClass)
+
+       Obj.TypeDocument_ID = Request.Form("TD")
+        Obj.Document_ID = Request.Form("D")
+
+        ObjList = SQL.SearchDocument_People(Obj)
+
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
     End Sub
 
 

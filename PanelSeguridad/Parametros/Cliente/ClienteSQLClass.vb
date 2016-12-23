@@ -1389,7 +1389,8 @@ Public Class ClienteSQLClass
         Dim BD_Admin As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDAdmin").ToString
 
         Dim sql_body As New StringBuilder
-     
+        Dim sql_where As New StringBuilder
+
         sql_body.Append("  SELECT C.CLI_Nombre +' '+ C.CLI_Nombre_2 +' '+ C.CLI_Apellido_1 +' '+ C.CLI_Apellido_2 AS NOMBRE,  " & _
                                "                  C.CLI_Area_ID, " & _
                                "                  C.CLI_Cargo_ID, " & _
@@ -1415,11 +1416,16 @@ Public Class ClienteSQLClass
                                "                      CASE	 SUBSTRING(C.CLI_Nit_ID,0,LEN(C.CLI_Nit_ID)) " & _
                                "                                     WHEN '' THEN 0 " & _
                                "                                     ELSE SUBSTRING(C.CLI_Nit_ID,0,LEN(C.CLI_Nit_ID)) " & _
-                               "                      END  " & _
-                               " WHERE C.CLI_TypeDocument_ID ='" & vp_Obj_persona.TypeDocument_ID & "'" & _
-                               " AND C.CLI_Document_ID = '" & vp_Obj_persona.Document_ID & "'")
+                               "                      END  ")
+                           
+        If vp_Obj_persona.Tarjeta_ID <> 0 Then
+            sql_where.Append(" WHERE IT.IT_Tarjeta_ID ='" & vp_Obj_persona.Tarjeta_ID & "'")
 
-                StrQuery = sql_body.ToString
+        Else
+            sql_where.Append(" WHERE C.CLI_TypeDocument_ID ='" & vp_Obj_persona.TypeDocument_ID & "'" & _
+                              " AND C.CLI_Document_ID = '" & vp_Obj_persona.Document_ID & "'")
+        End If
+        StrQuery = sql_body.ToString & sql_where.ToString
 
         ObjList = list(StrQuery, Conexion, "Matrix_Pag_Acceso")
         Return ObjList

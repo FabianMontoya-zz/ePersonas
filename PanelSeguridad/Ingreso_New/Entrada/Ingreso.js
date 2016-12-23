@@ -1,4 +1,10 @@
 ﻿/*--------------- region de variables globales --------------------*/
+var Array_People = [];
+var Array_Foto = [];
+/*--------------- region de variables globales --------------------*/
+
+
+
 var Matrix_Persona = [];
 var Matrix_DocWork = [];
 var Matrix_PersonaDoc = [];
@@ -15,10 +21,6 @@ var ArrayCombo = [];
 var ArrayAccesoDep = [];
 var ArraySeguridad = [];
 var ArrayTdoc = [];
-
-
-var Array_People = [];
-
 
 var Nit_ID_Proccess;
 var Fecha_Vencimiento;
@@ -92,7 +94,7 @@ $(document).ready(function () {
     $("#TI_1").css("display", "none");
     $("#TI_2").css("display", "none");
     $("#TI_3").css("display", "none");
-    
+
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
         autoOpen: false,
@@ -131,7 +133,7 @@ $(document).ready(function () {
     });
 
     //MostrarHora();
-    //Capture_Tarjeta_ID();
+    Capture_Tarjeta_ID();
     $("#TxtIDTarjeta").focus();
 
 
@@ -148,7 +150,7 @@ $(document).ready(function () {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                 REGION BOTONES                                                                                                                ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-//consuta datos
+//consuta si la persona esta en el sistema
 function BtnConsulta() {
     switch ($("#Btnguardar").val()) {
 
@@ -157,7 +159,7 @@ function BtnConsulta() {
 
             if (validate == 0) {
                 $("#Btnguardar").attr("value", "Nueva Consulta");
-                transacionAjax_ShearchPeopleAccess("Search_People_Access", $("#Select_Documento").val(), $("#TxtDoc").val(), 0);
+                transacionAjax_ShearchPeopleAccess("Search_People_Access", $("#Select_Documento").val(), $("#TxtDoc").val(), 0, "");
             }
             break;
 
@@ -166,6 +168,7 @@ function BtnConsulta() {
             break;
     }
 }
+
 
 //evento del boton salir
 function x() {
@@ -180,6 +183,8 @@ function x() {
 function btnSalir() {
     window.location = "../../Menu/menu.aspx?User=" + User + "&L_L=" + Link;
 }
+
+
 
 //ingreso de acceso
 function BtnAgregarAcceso() {
@@ -235,6 +240,19 @@ function Campos() {
         $("#Img2").css("display", "none");
     }
     return validar;
+}
+
+function Valida_Access_Minimo() {
+    if (Array_People[0].Tarjeta_ID == "") {
+
+    }
+    else {
+        if (Tarjeta_Proccess == 0) {
+            Mensaje_General("Tiene Tarjeta", "la persona tiene la tarjeta N° (" + Array_People[0].Tarjeta_ID + ") para el ingreso", "W");
+            Clear();
+        }
+    }
+
 }
 
 //verificar documento
@@ -339,6 +357,20 @@ function Datos_principales() {
 
 }
 
+//buscar Foto de la persona
+function SearchFoto() {
+    var StrSrc = "";
+    if (Array_Foto.length != 0)
+        StrSrc = Array_Foto[0].RutaRelativaDocumento + Array_Foto[0].Nombre_Save + '.' + Array_Foto[0].DescripFormato;
+    else
+        StrSrc = "../../images/avatar.png";
+
+    $("#Imgfoto").attr("src", StrSrc);
+}
+
+
+
+
 //buscar persona en la matrix
 function SearchPersona() {
     $("#Btnguardar").attr("value", "Nueva Consulta");
@@ -424,29 +456,7 @@ function SearchEmpresa() {
 
 }
 
-//buscar Foto de la persona
-function SearchFoto(TDoc, Doc) {
-    var StrSrc = "";
-    for (item in Matrix_DocWork) {
-        if (Matrix_DocWork[item].TypeDocument_ID == TDoc &&
-             Matrix_DocWork[item].Document_ID == Doc &&
-             Matrix_DocWork[item].Indicativo == "S") {
-            StrSrc = Matrix_DocWork[item].RutaRelativaDocumento + Matrix_DocWork[item].Nombre_Save + '.' + Matrix_DocWork[item].DescripFormato;
-            break;
-        }
-    }
-    ViewFoto(StrSrc);
-}
 
-//crear la ruta del src de la imagen
-function ViewFoto(StrSrc) {
-    if (StrSrc != "")
-        $("#Imgfoto").attr("src", StrSrc);
-    else {
-        StrSrc = "../../images/avatar.png";
-        $("#Imgfoto").attr("src", StrSrc);
-    }
-}
 
 // crea la tabla en el cliente
 function Tabla_Docs(Nit, TDoc, Doc, GrpDoc, Type) {
