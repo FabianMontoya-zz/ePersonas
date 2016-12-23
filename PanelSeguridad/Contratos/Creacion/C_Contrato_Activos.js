@@ -346,8 +346,6 @@ function CargarValoresCombos() {
     $('#Select_LineaF').find('option:contains("' + Con_Linea + '")').attr('selected', true).trigger('chosen:updated');
 }
 
-
-
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                              MENSAJES, VISUALIZACION Y LIMPIEZA                                                                                                ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -401,6 +399,8 @@ function Clear_Limpiar() {
     $("#Bloque_datosIngreso").css("display", "none");
 
     $('.C_Chosen').trigger('chosen:updated');
+    ArrayFactura = [];
+    Tabla_factura();
 }
 
 //limpiar campos fasecolda
@@ -426,6 +426,7 @@ function Clear_Consulta_Fasecolda() {
     $("#Text_NGPS").val("");
     $("#Txt_Nivel_Blin").val("");
     $("#TxtDoc_Blin").val("");
+    $("#Txt_NPasajeros").val("");
 
     $("#Select_TServicio").val("-1");
     $("#Select_MServicio").val("1");
@@ -434,7 +435,13 @@ function Clear_Consulta_Fasecolda() {
     $("#Select_Blindaje").val("-1");
     $("#Select_Documento_Blin").val("-1");
 
+    $("#T_Datos_Identificacion_blin").css("display", "none");
+    $("#Bloque_datosIngreso").css("display", "none");
+
     $('.C_Chosen').trigger('chosen:updated');
+
+    Clear_Ima_F();
+    Clear_Ima_Bli();
 }
 
 //limpiar Imagenes fasecolda

@@ -513,7 +513,7 @@ Public Class C_ContratoAjax
 
     End Sub
 
-   
+
 
     ''' <summary>
     ''' funcion que carga matrix de marca clases fasecolda
@@ -761,6 +761,7 @@ Public Class C_ContratoAjax
         Dim Result_list As String = "Exito"
         Dim S_list As String = Request.Form("ListFacturas").ToString
 
+
         Dim ListFact As New List(Of FacturaClass)
         ListFact = SQL_C_Fact.Create_List_Factura(S_list)
 
@@ -776,6 +777,7 @@ Public Class C_ContratoAjax
         Next
 
         Response.Write(Result_list)
+
     End Sub
 
 #End Region

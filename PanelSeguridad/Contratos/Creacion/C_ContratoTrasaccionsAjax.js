@@ -340,7 +340,7 @@ function transacionAjax_C_Contrato_create(State) {
 
                 case "Exito":
                     if (ArrayTerceros.length > 0 || ArrayActivos.length > 0 || ArrayVehiculos.length > 0 || ArrayFactura.length > 0) {
-                       
+
                         if (ArrayTerceros.length > 0) {
                             transacionAjax_C_Terceros_create("CrearTercero");
                             Mensaje = Mensaje + " [Terceros]";
@@ -351,7 +351,7 @@ function transacionAjax_C_Contrato_create(State) {
                         if (ArrayActivos.length > 0) {
                             transacionAjax_C_Activos_create("CrearActivo");
                             Mensaje = Mensaje + " [Activos]";
-                            ArrayActivos = [];                            
+                            ArrayActivos = [];
                         } else {
                         }
 
@@ -362,16 +362,16 @@ function transacionAjax_C_Contrato_create(State) {
                         } else {
                         }
 
-                        if (ArrayFactura.length > 0) {
+                        if (ArrayTodasFacturas.length > 0) {
                             transacionAjax_C_Facturas_create("crear_Factura");
                             Mensaje = Mensaje + " [Activos - Facturas]";
-                            ArrayFactura = [];
+                            
                         } else {
                         }
 
                         Mensaje_General("¡Colocación Agregada!", Mensaje, "S");
                         Clear();
-                    }else {
+                    } else {
                         Mensaje_General("¡Colocación Agregada!", "La colocación se ha agregado correctamente.", "S");
                         Clear();
                     }
@@ -463,7 +463,7 @@ function transacionAjax_C_Activos_create(State) {
                     console.warn("El código ingresado para Activos ya se encuentra registrado en la Base de Datos.");
                     break;
 
-                case "Exito":                    
+                case "Exito":
                     break;
             }
 
@@ -506,7 +506,7 @@ function transacionAjax_C_Activos_Vehiculos_Create(State) {
                     console.warn("El código ingresado para vehículo ya se encuentra registrado en la Base de Datos.");
                     break;
 
-                case "Exito":                    
+                case "Exito":
                     break;
             }
 
@@ -522,35 +522,38 @@ var ListFactura = [];
 
 //hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax_C_Facturas_create(State) {
+    
+    for (itemArray in ArrayTodasFacturas) {
 
-    ListFactura = JSON.stringify(ArrayFactura);
-    console.log("Entra Ajax Facturas");
-    $.ajax({
-        url: "C_ContratoAjax.aspx",
-        type: "POST",
-        //crear json
-        data: {
-            "action": State,
-            "ListFacturas": ListFactura,
-            "user": User.toUpperCase()
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            switch (result) {
+        ListFactura = JSON.stringify(ArrayTodasFacturas[itemArray]);
 
-                case "Error_Factura":
-                    Mensaje_General("Disculpenos :(", "No se realizo el ingreso de la factura", "E");
-                    break;
+        $.ajax({
+            url: "C_ContratoAjax.aspx",
+            type: "POST",
+            //crear json
+            data: {
+                "action": State,
+                "ListFacturas": ListFactura,
+                "user": User.toUpperCase()
+            },
+            //Transaccion Ajax en proceso
+            success: function (result) {
+                switch (result) {
 
-                case "Exito":
-                    break;
+                    case "Error_Factura":
+                        Mensaje_General("Disculpenos :(", "No se realizo el ingreso de la factura", "E");
+                        break;
+
+                    case "Exito":
+                        break;
+                }
+
+            },
+            error: function () {
+
             }
-
-        },
-        error: function () {
-
-        }
-    });
+        });
+    }
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -833,16 +836,18 @@ function transacionAjax_Consult_Activos_existe(State, index_NIT_ID, Ref_1, Ref_2
 
                         if (json_V == 0) {
                             Mensaje_General("¡Activo Agregado - Vehículo!", "Se ha agregado el Activo correctamente.", "S");
-                            Clear_Limpiar();
-                            Clear_Consulta_Fasecolda();
+                            ArrayTodasFacturas.push(ArrayFactura);
+                            Clear_Limpiar(); /*C_Contrato_activos.js*/
+                            Clear_Consulta_Fasecolda(); /*C_Contrato_activos.js*/
                         } else {
                             Mensaje_General("¡Error Vehículo!", "Lo sentimos, se produjo un error al guardar el nuevo vehículo. Para mayor información revisar el log.", "E");
                         }
 
                     } else {
                         Mensaje_General("¡Activo Agregado!", "Se ha agregado el Activo correctamente.", "S");
-                        Clear_Limpiar();
-                        Clear_Consulta_Fasecolda();
+                        ArrayTodasFacturas.push(ArrayFactura);
+                        Clear_Limpiar(); /*C_Contrato_activos.js*/
+                        Clear_Consulta_Fasecolda(); /*C_Contrato_activos.js*/
                     }
                 } else if (json_A == 2) {
                     Mensaje_General("¡Activo Existente!", "El activo que desea agregar ya se encuentra en la lista de la colocación, no puedes ingresar dos veces el mismo Activo.", "W");

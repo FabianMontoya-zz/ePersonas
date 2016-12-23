@@ -525,7 +525,7 @@
             </tr>
             <tr>
                 <td colspan="2" align="center">
-                    <input id="BtnExitD" type="button" value="Salir" style="width: 40%;" onclick="x();" />
+                    <input id="BtnExitD" type="button" value="Salir" style="width: 40%;" onclick="javascript:x();" />
                 </td>
             </tr>
         </table>

@@ -1035,6 +1035,7 @@ function Clear() {
     ContTerceros = 0;
     Persona1 = false;
     Persona2 = false;
+    ArrayTodasFacturas = [];
 }
 
 function Add_Activos(index) {
@@ -1151,7 +1152,16 @@ function Eliminar_Activo_Array() {
             if (ArrayActivos[item].TActivo == "2") {
                 ArrayVehiculos.splice(indexActivos, 1);
             }
-            ArrayActivos.splice(item, 1);
+
+            for (itemArray in ArrayTodasFacturas) {
+                for (item2 in ArrayTodasFacturas[itemArray]) {                    
+                    if (ArrayTodasFacturas[itemArray][item2].Ref_1 == ArrayActivos[item].Ref_1 && ArrayTodasFacturas[itemArray][item2].Ref_2 == ArrayActivos[item].Ref_2 && ArrayTodasFacturas[itemArray][item2].Ref_3 == ArrayActivos[item].Ref_3) {
+                        ArrayTodasFacturas.splice(itemArray, 1); //Borramos todas las facturas asociadas al activo
+                    }
+                }
+            }
+
+            ArrayActivos.splice(item, 1); //Borramos el activo
         }
     }
 

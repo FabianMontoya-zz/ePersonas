@@ -39,7 +39,7 @@ function JsonActivos() {
     var validacion = ValidaCampos_InsertBD_Activos();
 
     if (validacion == 0) {
-        var Valido_Array = ValidarActivoArray(Ref_1.toUpperCase(), Ref_2.toUpperCase(), Ref_3.toUpperCase());
+        var Valido_Array = ValidarActivoArray(Ref_1.toUpperCase(), Ref_2.toUpperCase(), Ref_3.toUpperCase()); /*C_Contrato_Activos_Validacion.js*/
         if (Valido_Array == true) {
             try {
 
@@ -146,4 +146,46 @@ function JsonVehiculos() {
     } else {
     }
     return valido;
+}
+
+//contruye JSON de facturas
+function Json_Facturas(Ref_1, Ref_2, Ref_3) {
+
+    var valido = 0;
+    try {
+        var Flag_rep_Array = Revisar_repetido(Ref_1, Ref_2, Ref_3);
+
+        if (Flag_rep_Array == 0) {
+            var JSON_Factura = {
+                "Nit_ID": $("#Select_EmpresaNit").val(),
+                "Ref_1": Ref_1.toUpperCase(),
+                "Ref_2": Ref_2.toUpperCase(),
+                "Ref_3": Ref_3.toUpperCase(),
+                "Fact_Oct_ID": $("#Factura_ID").val().toUpperCase(),
+                "F_Fecha": $("#Txt_Fecha_fact").val(),
+                "Cod_Moneda_ID": $("#Select_Moneda").val(),
+                "Valor_Sin_IVA": F_NumericBD($("#Text_Val_Sin_IVA").val()),
+                "Valor_IVA": F_NumericBD($("#V_Val_IVA").html()),
+                "Valor_Total": F_NumericBD($("#Txt_ValFactura").val()),
+                "Index": ContFactura,
+                "DescripMoneda": $("#Select_Moneda option:selected").html(),
+                "UsuarioCreacion": User.toUpperCase()
+            }
+            ArrayFactura.push(JSON_Factura);
+            Valor_Operativo = F_NumericBD($("#Txt_ValFactura").val());
+            SumarValores_Grid(F_NumericBD($("#Txt_ValFactura").val()), Suma_Valor_Inicial, "V_TFacturas");
+
+            ContFactura = ContFactura + 1;
+            Tabla_factura();
+            Clear_Factura();
+        }
+        else
+            Mensaje_General("¡Factura Repetida!", "La Factura ya fue ingresada en la lista.", "W");
+
+    } catch (ex) {
+        valido = 1;
+        console.error("Error JSON Facturas: " + ex);
+    }
+    return valido;
+
 }
