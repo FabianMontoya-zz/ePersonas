@@ -1374,6 +1374,59 @@ Public Class ClienteSQLClass
 
     End Function
 
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="vp_Obj_persona"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function SearchPeople_Access(ByVal vp_Obj_persona As ClienteClass)
+
+        Dim conex As New Conector
+        Dim ObjList As New List(Of ClienteClass)
+        Dim Conexion As String = conex.typeConexion("2")
+        Dim StrQuery As String
+        Dim BD_Admin As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDAdmin").ToString
+
+        Dim sql_body As New StringBuilder
+     
+        sql_body.Append("  SELECT C.CLI_Nombre +' '+ C.CLI_Nombre_2 +' '+ C.CLI_Apellido_1 +' '+ C.CLI_Apellido_2 AS NOMBRE,  " & _
+                               "                  C.CLI_Area_ID, " & _
+                               "                  C.CLI_Cargo_ID, " & _
+                               "                  C.CLI_Nit_ID, " & _
+                               "                  A.A_Descripcion, " & _
+                               "                  CAR.C_Descripcion, " & _
+                               "                  C2.CLI_Nombre +' '+ C2.CLI_Nombre_2 +' '+ C2.CLI_Apellido_1 +' '+ C2.CLI_Apellido_2 AS EMPRESA, " & _
+                               "                  C.CLI_TypeDocument_ID, " & _
+                               "                  C.CLI_Document_ID, " & _
+                               "                  C.CLI_GrpDocumentos, " & _
+                               "                  IT.IT_Tarjeta_ID, " & _
+                               "                  IT.IT_Estado, " & _
+                               "                  IT.IT_ChequeaVigencias, " & _
+                               "                  IT.IT_Fecha_Fin_Vigencia, " & _
+                               "                  IT.IT_MotivoBloqueo, " & _
+                               "                  DDL.DDLL_Descripcion " & _
+                               "  FROM CLIENTE C " & _
+                               "  LEFT JOIN AREA A  ON A.A_Area_ID = C.CLI_Area_ID " & _
+                               "  LEFT JOIN CARGO CAR ON CAR.C_Cargo_ID = C.CLI_Cargo_ID " & _
+                               "  LEFT JOIN  " & BD_Admin & ".dbo.INVENTARIO_TARJETAS IT ON IT.IT_TypeDocument_Asigna = C.CLI_TypeDocument_ID AND IT.IT_Document_ID_Asigna =C.CLI_Document_ID " & _
+                               "  LEFT JOIN  " & BD_Admin & ".dbo.TC_DDL_TIPO DDL ON DDL.DDL_ID = IT.IT_MotivoBloqueo AND DDL.DDL_Tabla = 'BLOQUEO'  " & _
+                               "  LEFT JOIN CLIENTE C2 ON C2.CLI_Document_ID = " & _
+                               "                      CASE	 SUBSTRING(C.CLI_Nit_ID,0,LEN(C.CLI_Nit_ID)) " & _
+                               "                                     WHEN '' THEN 0 " & _
+                               "                                     ELSE SUBSTRING(C.CLI_Nit_ID,0,LEN(C.CLI_Nit_ID)) " & _
+                               "                      END  " & _
+                               " WHERE C.CLI_TypeDocument_ID ='" & vp_Obj_persona.TypeDocument_ID & "'" & _
+                               " AND C.CLI_Document_ID = '" & vp_Obj_persona.Document_ID & "'")
+
+                StrQuery = sql_body.ToString
+
+        ObjList = list(StrQuery, Conexion, "Matrix_Pag_Acceso")
+        Return ObjList
+    End Function
+
+
+  
 #End Region
 
 End Class

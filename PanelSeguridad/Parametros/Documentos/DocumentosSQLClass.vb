@@ -303,6 +303,83 @@ Public Class DocumentosSQLClass
         Return ObjList
     End Function
 
+    ''' <summary>
+    ''' carga matrix de trabajo documentos
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function SearchDocument_People()
+
+        Dim ObjList As New List(Of DocumentosClass)
+        Dim sql As New StringBuilder()
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("3")
+        Dim StrQuery As String = ""
+
+        Dim BD_Admin As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDAdmin").ToString
+        Dim BD_Param As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDParam").ToString
+
+        sql.Append(" SELECT DE_Secuencia_ID, " & _
+                                                " DE_Documento_ID, " & _
+                                                " DE_Nombre_Save, " & _
+                                                " DE_RutaDocumento, " & _
+                                                " DE_Formato, " & _
+                                                " DE_Trama, " & _
+                                                " DE_IndicativoFoto, " & _
+                                                " DE_Verificado, " & _
+                                                " DE_Usuario_Verifico, " & _
+                                                " DE_Fecha_Verifico," & _
+                                                " DE_Observaciones_Captura, " & _
+                                                " DE_Observaciones_Validacion, " & _
+                                                " DE_Fecha_Vencimiento, " & _
+                                                " DE_Fecha_Inicio_Vigencia," & _
+                                                " DE_Dias_Vigencia, " & _
+                                                " A_Nit_ID, " & _
+                                                " A_TypeDocument_ID, " & _
+                                                " A_Document_ID, " & _
+                                                " A_Contrato_ID, " & _
+                                                " A_Ref_1, " & _
+                                                " A_Factura_ID, " & _
+                                                " DOC_Descripcion, " & _
+                                                " DOC_TipoContenido, " & _
+                                                " DOC_TipoVersion, " & _
+                                                " DOC_Ruta_ID_Plantilla, " & _
+                                                " DOC_NombrePlantilla, " & _
+                                                " DOC_ChequeaVigencias, " & _
+                                                " DOC_DiasVigencia, " & _
+                                                " DOC_RequiereVerificacion, " & _
+                                                " D1.DDLL_Descripcion, " & _
+                                                " D2.DDLL_Descripcion, " & _
+                                                " D3.DDLL_Descripcion, " & _
+                                                " DE_Usuario_Creacion, " & _
+                                                " DE_FechaCreacion, " & _
+                                                " DE_Usuario_Actualizacion, " & _
+                                                " DE_FechaActualizacion, " & _
+                                                " R.TR_Ruta_Relativa," & _
+                                                " R.TR_Ruta_Temporal, " & _
+                                               "  R.TR_Ruta_Visualizacion, " & _
+                                                " D4.DDLL_Descripcion, " & _
+                                                " C.CLI_Nombre + ' ' + C.CLI_Nombre_2  + ' ' +C.CLI_Apellido_1 + ' ' + C.CLI_Apellido_2 AS Nombre, " & _
+                                                " C.CLI_N_Consecutivo, " & _
+                                                " A_Secuencia_Doc " & _
+                                 " FROM DOCUMENTOS_EXISTENTES DE " & _
+                                " INNER JOIN ASOCIACION_DOCUMENTOS AD ON AD.A_Secuencia_ID = DE.DE_Secuencia_ID AND DE.DE_Nit_ID =AD.A_Nit_ID " & _
+                                " LEFT JOIN DOCUMENTOS D ON D.DOC_Documentos_ID = DE.DE_Documento_ID " & _
+                                " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D1 ON D1.DDL_ID = DE.DE_Formato AND D1.DDL_Tabla = 'DOCUMENTOS' " & _
+                                " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D2 ON D2.DDL_ID = D.DOC_TipoContenido AND D2.DDL_Tabla = 'TIPO_CONTENIDO' " & _
+                                " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D3 ON D3.DDL_ID = D.DOC_TipoVersion AND D3.DDL_Tabla = 'TIPO_VERSION' " & _
+                                " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D4 ON D4.DDL_ID = DE.DE_Verificado AND D4.DDL_Tabla = 'VERIFICACION' " & _
+                                " LEFT JOIN RUTAS_OPERACION R ON R.TR_Ruta_Temporal <> DE.DE_RutaDocumento " & _
+                                " LEFT JOIN " & BD_Param & ".dbo.CLIENTE C ON C.CLI_Document_ID = AD.A_Document_ID AND DE.DE_Nit_ID = C.CLI_Nit_ID " & _
+                                " ORDER BY DE_Secuencia_ID ASC  ")
+
+        StrQuery = sql.ToString
+
+        ObjList = list(StrQuery, Conexion, "MatrixDocWork")
+
+        Return ObjList
+    End Function
+
 #End Region
 
 End Class

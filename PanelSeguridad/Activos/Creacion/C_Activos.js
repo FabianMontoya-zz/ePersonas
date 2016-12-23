@@ -366,8 +366,8 @@ function MostrarValor_Cilindraje_Fasecolda(Matrix, Str_val, Proccess) {
 
 //muesta los valores de los combos
 function CargarValoresCombos() {
-    $("#Select_ClaseF").val(Con_Clase).trigger('chosen:updated');
-    $("#Select_LineaF :selected").html(Con_Linea).trigger('chosen:updated');
+    $("#Select_ClaseF").val(Con_Clase).attr('selected', true).trigger('chosen:updated');
+    $('#Select_LineaF').find('option:contains("' + Con_Linea + '")').attr('selected', true).trigger('chosen:updated');
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
