@@ -29,6 +29,7 @@ var Persona_A;
 /*--------------- region de variables globales --------------------*/
 
 $(document).ready(function () {
+   
     transaccionAjax_MPersonas('MATRIX_PERSONAS');
     transaccionAjax_MRTSTA("MATRIX_RTSTA");
     transaccionAjax_MPaises_Ciudades('MATRIX_PAIS_CIUDAD');
@@ -341,8 +342,8 @@ function MostrarValor_Cilindraje_Fasecolda(Matrix, Str_val, Proccess) {
 
 //muesta los valores de los combos
 function CargarValoresCombos() {
-    $("#Select_ClaseF").val(Con_Clase).trigger('chosen:updated');
-    $("#Select_LineaF :selected").html(Con_Linea).trigger('chosen:updated');
+    $("#Select_ClaseF").val(Con_Clase).attr('selected', true).trigger('chosen:updated');
+    $('#Select_LineaF').find('option:contains("' + Con_Linea + '")').attr('selected', true).trigger('chosen:updated');
 }
 
 
@@ -397,9 +398,9 @@ function Clear_Limpiar() {
 
     $("#Blo_Inmuebles").css("display", "none");
     $("#Blo_Fasecolda").css("display", "none");
-    $("#Bloque_datosIngreso").css("display", "none");   
+    $("#Bloque_datosIngreso").css("display", "none");
 
-    $('.C_Chosen').trigger('chosen:updated');    
+    $('.C_Chosen').trigger('chosen:updated');
 }
 
 //limpiar campos fasecolda

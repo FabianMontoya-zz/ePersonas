@@ -301,6 +301,7 @@ function ValidaCamposPeople2() {
 
 //Valida que ya haya seleccionado una empresa y escrito el número de la colocación para agregar un tercero
 function ValidarIDColocacion_T() {
+
     var valido = false;
     var NIT = $("#Select_EmpresaNit").val();
     var ID_Colocacion = $("#TXT_ID_Colocacion").val();
@@ -387,6 +388,8 @@ function ValidarIDColocacion_A() {
         $("#Img1").css("display", "none");
         $("#Img7").css("display", "none");
         $("#Img8").css("display", "none");
+
+        $("#T_Factura_Grid").css("width", "100%");
         Add_Activos();
     }
 }

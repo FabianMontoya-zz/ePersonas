@@ -271,7 +271,6 @@ function validate_fechaMayorQue(fechaInicial, fechaFinal, Type) {
             dateStart = new Date(valuesStart[0], (valuesStart[1] - 1), valuesStart[2]);
             dateEnd = new Date(valuesEnd[2], (valuesEnd[1] - 1), valuesEnd[0]);
 
-            console.log(dateStart + ">=" + dateEnd);
             if (dateStart >= dateEnd)
                 Resultado = "Menor";
             else
@@ -285,7 +284,6 @@ function validate_fechaMayorQue(fechaInicial, fechaFinal, Type) {
             // Verificamos que la fecha no sea posterior a la actual
             dateStart = new Date(valuesStart[0], (valuesStart[1] - 1), valuesStart[2]);
             dateEnd = new Date(valuesEnd[0], (valuesEnd[1] - 1), valuesEnd[2]);
-            console.log(dateStart + " >= " + dateEnd);
             if (dateStart >= dateEnd)
                 Resultado = "Menor";
             else
@@ -408,7 +406,7 @@ function ValidaFechaDigitada(ObjText) {
                             //validar mes dia
                             if ((parseInt(A_FN[2]) > 0)) {
                                 if ((parseInt(A_FN[2]) < Diafinal)) {
-                                    console.log("OK");
+                                    
                                 }
                                 else {
                                     Mensaje_General("¡Formato incorrecto!", "El Dia debe ser entre 1 y " + Diafinal, "W");
@@ -1168,9 +1166,7 @@ function CargaDay(Select_C_Year, Select_C_Month, Select_Control, Index_Edit) {
 
         for (itemArray in Matrix_Mes) {
             if (Matrix_Mes[itemArray][0] == Select_M) {
-                console.log(YearBis);
-                console.log(Select_M);
-
+                
                 if (YearBis == "Y" && Select_M == "2")
                     N_Day_M = 29;
                 else
@@ -1297,7 +1293,6 @@ function ContruyeName_Temp(StrDocument, StrConsecutivo_Empresa, StrConsecutivo) 
            Output_Date + "." + StrConsecutivo;
 
     NameTemporal = StrDoc_Name_Temp
-    console.log(StrDoc_Name_Temp);
 }
 
 //carga de documentos global
@@ -1368,7 +1363,6 @@ function UpLoad_Document(NameAjax, NameFile_ID, Form) {
             },
             error: function (error) {
                 alert("Ocurrió un error inesperado, por favor intente de nuevo mas tarde: " + error);
-                console.log(error);
             }
         });
     }
@@ -1395,7 +1389,6 @@ function Format_Adress(ObjText) {
         Control_Work = ObjText;
         if ($("#" + ObjText).val == "") {
         } else {
-            console.log($("#" + ObjText).val());
             Clear_Adress();
             $("#Txt_End_Adress").val($("#" + ObjText).val());
         }
@@ -1738,6 +1731,18 @@ function añosDias(años, base) {
 //calcula valor del IVA
 function Calcula_Valor_IVA(Obj_Cap_1, Obj_Cap_2, ObjResutado) {
     $("#" + Obj_Cap_2).blur(function () {
+
+        var Val_C_IVA = $("#" + Obj_Cap_1).val();
+        var Val_S_IVA = $("#" + Obj_Cap_2).val();
+
+        Val_C_IVA = F_NumericBD(Val_C_IVA);
+        Val_S_IVA = F_NumericBD(Val_S_IVA);
+
+        var operacion = parseInt(Val_C_IVA) - parseInt(Val_S_IVA);
+        $("#" + ObjResutado).html(dinner_format_grid(operacion));
+    });
+
+    $("#" + Obj_Cap_1).blur(function () {
 
         var Val_C_IVA = $("#" + Obj_Cap_1).val();
         var Val_S_IVA = $("#" + Obj_Cap_2).val();
