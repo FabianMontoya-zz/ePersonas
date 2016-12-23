@@ -390,6 +390,13 @@
     <Content Include="Ingreso\Acceso\Acceso_Tarjeta.js" />
     <Content Include="Ingreso\menu.js" />
     <Content Include="Ingreso\SasifMaster_Cosult.js" />
+    <Content Include="Ingreso_New\Entrada\Ingreso.aspx" />
+    <Content Include="Ingreso_New\Entrada\Ingreso.js" />
+    <Content Include="Ingreso_New\Entrada\IngresoAjax.aspx" />
+    <Content Include="Ingreso_New\Entrada\IngresoTrasaccionsAjax.js" />
+    <Content Include="Ingreso_New\Entrada\Ingreso_Tarjeta.js" />
+    <Content Include="Ingreso_New\menu.js" />
+    <Content Include="Ingreso_New\SasifMaster_Cosult.js" />
     <Content Include="login\CambioPassword.aspx" />
     <Content Include="login\CambioPassword.js" />
     <Content Include="login\CambioPasswordAjax.aspx" />
@@ -538,6 +545,7 @@
     <Content Include="Sasif.Master" />
     <Content Include="Activos\Sasif_menu.Master" />
     <Content Include="Factura\Sasif_menu.Master" />
+    <Content Include="Ingreso_New\Sasif_menu.Master" />
     <None Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
@@ -980,6 +988,22 @@
     <Compile Include="Ingreso\Acceso\AccesoSQLClass.vb" />
     <Compile Include="Ingreso\ControlAcceso\ControlAccesoClass.vb" />
     <Compile Include="Ingreso\ControlAcceso\ControlAccesoSQLClass.vb" />
+    <Compile Include="Ingreso_New\Entrada\Ingreso.aspx.designer.vb">
+      <DependentUpon>Ingreso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ingreso_New\Entrada\Ingreso.aspx.vb">
+      <DependentUpon>Ingreso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ingreso_New\Entrada\IngresoAjax.aspx.designer.vb">
+      <DependentUpon>IngresoAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ingreso_New\Entrada\IngresoAjax.aspx.vb">
+      <DependentUpon>IngresoAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ingreso_New\Entrada\IngresoClass.vb" />
+    <Compile Include="Ingreso_New\Entrada\IngresoSQLClass.vb" />
     <Compile Include="login\CambioPassword.aspx.designer.vb">
       <DependentUpon>CambioPassword.aspx</DependentUpon>
     </Compile>
