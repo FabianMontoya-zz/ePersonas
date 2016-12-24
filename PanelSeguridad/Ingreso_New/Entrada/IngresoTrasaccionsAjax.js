@@ -70,7 +70,10 @@ function transacionAjax_ShearchPeopleAccess(State, TD, D, NIT, Tarjeta_ID) {
                         break;
 
                     case 1:
-                        transacionAjax_Search_Foto("Buscar_Foto", TD, D);
+                        if (Tarjeta_Proccess==1)
+                            transacionAjax_Search_Foto("Buscar_Foto", Array_People[0].TypeDocument_ID, Array_People[0].Document_ID);
+                        else
+                            transacionAjax_Search_Foto("Buscar_Foto", TD, D);
                         break;
 
                     default:

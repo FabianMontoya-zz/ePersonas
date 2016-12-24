@@ -169,7 +169,6 @@ function BtnConsulta() {
     }
 }
 
-
 //evento del boton salir
 function x() {
     $("#dialog").dialog("close");
@@ -217,7 +216,7 @@ function VerExtenciones() {
 /*----                                                                                                           REGION DE VALIDACIONES                                                                                                   ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 // validamos campos de captura
-function Campos() {
+function Campos() {  //OK
 
     var Campo_1 = $("#Select_Documento").val();
     var Campo_2 = $("#TxtDoc").val();
@@ -242,18 +241,68 @@ function Campos() {
     return validar;
 }
 
+//valida si la persona tiene tarjeta o no
 function Valida_Access_Minimo() {
     if (Array_People[0].Tarjeta_ID == "") {
 
     }
     else {
-        if (Tarjeta_Proccess == 0) {
+        if (Tarjeta_Proccess == 1) {
+            Validaciones_Tarjeta();
+        }
+        else {
             Mensaje_General("Tiene Tarjeta", "la persona tiene la tarjeta N° (" + Array_People[0].Tarjeta_ID + ") para el ingreso", "W");
             Clear();
         }
     }
+}
+
+//validamos es estado de la tarjeta
+function Validaciones_Tarjeta() {
+
+    var Estado_Tarjeta = Array_People[0].EstadoTarjeta;
+
+    switch (Estado_Tarjeta) {
+        case "1":
+            Mensaje_General("Tarjeta No funcional!", "La Tarjeta  de " + Array_People[0].Nombre + " está sin Entregar en el Sistema comuniquese con su Administrador", "W");
+            break;
+
+        case "2":
+            Valida_VigenciaTarjeta();
+            break;
+
+        case "3":
+            Mensaje_General("Tarjeta Bloqueada!", "La Tarjeta  de " + Array_People[0].Nombre + " está " + Array_People[0].DescripMotivoBloqueo, "W");
+            break;
+    }
+}
+
+//valida la fecha de vencimiento de la tarjeta
+function Valida_VigenciaTarjeta() {
+
+    var CheckVigencia = Array_People[0].CheckVigencia_Tarjeta;
+    var FechaVigencia = Array_People[0].FechaVencimientoTarjeta;
+
+    switch (CheckVigencia) {
+        case "S":
+            comparacion = validate_fechaMayorQue(FechaVigencia, "", "SystemCompare");
+            if (comparacion == "Mayor")
+                Mensaje_General("Tarjeta Vencida!", "La Tarjeta  de " + Array_People[0].Nombre + " está vencida fecha de vencimiento ( " + FechaVigencia + ")", "W");
+            else {
+                //Tabla_Docs(Nit_ID_Proccess, TDoc_VT, Doc_VT, GrpDoc, "Empleado");
+                //SearchEmpresa();
+            }
+            break;
+        case "N":
+            //   Tabla_Docs(Nit_ID_Proccess, TDoc_VT, Doc_VT, GrpDoc, "Empleado");
+            //SearchEmpresa();
+            break;
+    }
 
 }
+
+
+
 
 //verificar documento
 function ValidaDoc(Nit, PDoc, Doc_ID) {
