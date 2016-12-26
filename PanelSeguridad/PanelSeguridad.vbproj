@@ -245,6 +245,7 @@
     <Content Include="css\css_menu.css" />
     <Content Include="css\css_WebAcceso.css" />
     <Content Include="css\custom\charge.css" />
+    <Content Include="css\custom\Control_Sasif.css" />
     <Content Include="css\datatables\images\back_disabled.png" />
     <Content Include="css\datatables\images\back_enabled.png" />
     <Content Include="css\datatables\images\back_enabled_hover.png" />

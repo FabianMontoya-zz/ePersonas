@@ -2,6 +2,7 @@
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_EmpresaNit(State) {
+    OpenControl();
     $.ajax({
         url: "C_ContratoAjax.aspx",
         type: "POST",
@@ -298,6 +299,10 @@ function transaccionAjax_MTasas(State) {
 /*------------------------------ crear ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax_C_Contrato_create(State) {
+
+    OpenControl();
+    var Mensaje = "La colocación se ha agregado correctamente junto con sus adicionales";
+    var caso = "A";
     $.ajax({
         url: "C_ContratoAjax.aspx",
         type: "POST",
@@ -326,8 +331,6 @@ function transacionAjax_C_Contrato_create(State) {
         },
         //Transaccion Ajax en proceso
         success: function (result) {
-            var Mensaje = "La colocación se ha agregado correctamente junto con sus adicionales";
-
             switch (result) {
 
                 case "Error":
@@ -365,22 +368,32 @@ function transacionAjax_C_Contrato_create(State) {
                         if (ArrayTodasFacturas.length > 0) {
                             transacionAjax_C_Facturas_create("crear_Factura");
                             Mensaje = Mensaje + " [Activos - Facturas]";
-                            
+
                         } else {
                         }
+                        caso = "B";
 
-                        Mensaje_General("¡Colocación Agregada!", Mensaje, "S");
-                        Clear();
                     } else {
-                        Mensaje_General("¡Colocación Agregada!", "La colocación se ha agregado correctamente.", "S");
-                        Clear();
+                        caso = "A";
                     }
                     break;
             }
 
+
         },
         error: function () {
 
+        }
+    }).done(function () {
+        switch (caso) {
+            case "A":
+                Mensaje_General("¡Colocación Agregada!", "La colocación se ha agregado correctamente.", "S");
+                Clear();
+                break;
+            case "B":
+                Mensaje_General("¡Colocación Agregada!", Mensaje, "S");
+                Clear();
+                break;
         }
     });
 }
@@ -522,7 +535,7 @@ var ListFactura = [];
 
 //hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax_C_Facturas_create(State) {
-    
+
     for (itemArray in ArrayTodasFacturas) {
 
         ListFactura = JSON.stringify(ArrayTodasFacturas[itemArray]);
@@ -713,7 +726,7 @@ function transacionAjax_Linea_F(State, Marca, Index, Proccess) {
                 Matrix_Linea_F = JSON.parse(result);
                 Charge_Combos_Depend_Verificacion(Matrix_Linea_F, "Select_LineaF", "", "", "");
                 if (Proccess == "ID") {
-                    CargarValoresCombos();
+                    setTimeout("CargarValoresCombos();", 300);
                 }
             }
         },

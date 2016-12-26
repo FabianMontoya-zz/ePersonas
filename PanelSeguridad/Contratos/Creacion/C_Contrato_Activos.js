@@ -159,6 +159,15 @@ function Add_Facturas(index) {
     var validaCampos = ValidaMinimo();
 
     if (validaCampos == 0) {
+
+
+        $("#Select_Tipo").prop('disabled', true);
+        $("#TxtRef_Other").prop('disabled', true);
+        $("#TxtRef_1").prop('disabled', true);
+        $("#TxtRef_2").prop('disabled', true);
+        $("#TxtRef_3").prop('disabled', true);
+        
+
         $("#Dialog_Factura").dialog("open");
         $("#Dialog_Factura").dialog("option", "title", "Crear Factura");
 
@@ -361,6 +370,13 @@ function Clear_Limpiar() {
 
     $("#Btn_ShearchFacecolda").attr("value", "Consulta Facecolda");
     Clear_Consulta_Fasecolda();
+
+    $("#Select_Tipo").prop('disabled', false);
+    $("#TxtRef_Other").prop('disabled', false);
+    $("#TxtRef_1").prop('disabled', false);
+    $("#TxtRef_2").prop('disabled', false);
+    $("#TxtRef_3").prop('disabled', false);
+
 
     $("#Select_Documento").val("-1");
     $("#Select_Tipo").val("-1");

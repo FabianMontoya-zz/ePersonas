@@ -14,7 +14,7 @@
     <script src="C_Contrato_JSON.js" type="text/javascript"></script>
     <link href="../../css/css_login.css" rel="stylesheet" type="text/css" />
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
-    <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />    
     <link href="../../css/custom/charge.css" rel="stylesheet" type="text/css" />
     <link href="../../css/Chosen/chosen.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/jquery.min.js" type="text/javascript"></script>
@@ -24,17 +24,8 @@
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Dialog/datepicker.js" type="text/javascript"></script>
     <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
-    <style type="text/css">
-        .ui-widget
-        {
-            background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
-            background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
-            background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
-            background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
-            border: solid 1px #921919;
-            border-radius: 5px;
-        }
-    </style>
+    <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" type="text/css" />
+    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
     <div id="Container_title_Form">
@@ -48,6 +39,7 @@
             </tr>
         </table>
     </div>
+    
     <!--Dialog que contiene la pantalla de las colocaciones/contratos -->
     <div id="Marco_Contrato">
         <div id="Marco_trabajo_Contrato">
@@ -510,6 +502,15 @@
         </div>
     </div>
 
+    <div id="Dialog_Control" style="width: 100%; text-align: center;">
+        <div class="cssload-container"  style="margin-top: 25%;">
+            <div class="cssload-whirlpool"></div>
+            <div>
+                <img id="Sasif" class="Logo_3" src="../../images/SASIF_NEW_WHITE.png" alt="SASIF S.A.S." />
+            </div>
+        </div>
+    </div>
+    
     <div id="dialog" title="Basic dialog">
         <table style="width: 100%; text-align: center;">
             <tr>

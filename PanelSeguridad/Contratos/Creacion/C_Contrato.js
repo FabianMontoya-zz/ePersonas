@@ -52,6 +52,15 @@ var ContTerceros = 0;
 
 //Evento load JS
 $(document).ready(function () {
+    /*Funciones para configuración inicial de campos en vista*/
+    VentanasEmergentes();
+    
+    Ocultar_IMGS_Errores();
+    Picker_Fechas();
+    CargarAcordeons();
+    AgregarTablas();    
+    /*=====================================*/
+    
     $("#Marco_trabajo_Contrato").css("height", "440px");
     $("#Marco_trabajo_Contrato").css("width", "95%");
 
@@ -64,13 +73,7 @@ $(document).ready(function () {
     transacionAjax_Financiacion('MATRIX_FINANCIACION');
     transaccionAjax_MTasas('MATRIX_TASAS');
 
-    /*Funciones para configuración inicial de campos en vista*/
-    Ocultar_IMGS_Errores();
-    Picker_Fechas();
-    CargarAcordeons();
-    AgregarTablas();
-    VentanasEmergentes();
-    /*=====================================*/
+    
 
     $("#Select_Base_Calculo").prop('disabled', true); //Desactivamos el Chosen
 
@@ -94,6 +97,7 @@ $(document).ready(function () {
     ReCalcularTasas("TXT_Puntos_Adicionales");
     Date_Document();
     Date_Document2();
+   
 });
 
 //Ocultamos las imagenes de error al iniciar la pantalla
@@ -159,11 +163,58 @@ function AgregarTablas() {
     $("#T_Factura_Grid").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,
         "bDestroy": true
-    });
+    });    
+}
+/*
+function OpenControl() {
+
+    $('#Dialog_Control')
+			.hide()
+			.ajaxStart(function () {
+			    $(this).show();
+			})
+			.ajaxStop(function () {
+			    CloseControl();
+			})
+    ;
+
+    $("#Dialog_Control").dialog("open");
+    $("#Dialog_Control").dialog("option", "title", "");
 }
 
+function CloseControl() {
+    $('#Dialog_Control')			
+			    $(this).hide();
+    ;
+
+    $("#Dialog_Control").dialog("close");
+}
+*/
 //Función que contiene las propiedades para las ventanas emergentes
 function VentanasEmergentes() {
+
+    var w = $(window).width();
+    var h = $(window).height();
+
+    $("#Dialog_Control").dialog({
+        autoOpen: false,
+        dialogClass: "Dialog_Control_Sasif",
+        modal: true,
+        width: w,
+        height: h,
+        overlay: {
+            opacity: 0.5,
+            background: "black"
+        },
+        show: {
+            effect: 'fade',
+            duration: 1000
+        },
+        hide: {
+            effect: 'fade',
+            duration: 1000
+        }
+    });
 
     $("#dialog").dialog({
         autoOpen: false,
