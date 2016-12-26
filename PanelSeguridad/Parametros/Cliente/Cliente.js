@@ -32,7 +32,6 @@ var OpcWordComplementos;
 
 //Evento load JS
 $(document).ready(function () {
-    Carga_Control_Sasif("Dialog_Control");
     transaccionAjax_MDocWork('MATIRXDOC_WORK');
     transaccionAjax_MPaises_Ciudades('MATRIX_PAIS_CIUDAD');
     transaccionAjax_MArea('MATRIX_AREA');
@@ -326,7 +325,7 @@ function Change_Select_TDoc() {
             $("#TD_7").css("width", "35%");
             $("#TD_8").css("width", "15%");
             $("#Select_Ciudad_Doc").css("width", "80%");
-            
+
         }
         else {
             $("#TD_1").css("width", "13%");
