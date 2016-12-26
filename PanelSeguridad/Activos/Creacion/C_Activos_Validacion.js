@@ -13,7 +13,7 @@ var TipoEscritura = 0;
 var NunImobiliaria = "";
 var FechaC_Recibo = "";
 var FechaC_Retiro = "";
-
+var Num_Poliza = "";
 var ValorChasis = 0;
 var Pasajeros = 0;
 var Potencia = 0;
@@ -21,7 +21,8 @@ var TDoc_Blin = 0;
 var Doc_Blin = 0;
 var Nivel_Blin = 0;
 
-
+var TDoc_Not = 0;
+var Doc_Not = 0;
 /*--------------- region de variables globales --------------------*/
 
 
@@ -146,6 +147,9 @@ function ValidaCampos_InsertBD_Activos() {
     if ($("#Select_Pais_R").val() != "-1")
         Pais_R = $("#Select_Pais_R").val();
 
+    if ($("#Txt_Num_poliza").val() != "")
+        Num_Poliza = $("#Txt_Num_poliza").val();
+    
     switch ($("#Select_Ciudad_R").val()) {
         case "-1":
             Ciudad_R = 0;
@@ -169,6 +173,13 @@ function ValidaCampos_InsertBD_Activos() {
         var SplitCR = Str_C_R.split(" - ");
         T_Doc_R = SplitCR[1];
         Doc_R = SplitCR[0];
+    }
+
+    if ($("#Select_Notaria_R").val() != "-1") {
+        var Str_C_N = $("#Select_Notaria_R option:selected").html();
+        var SplitCN = Str_C_N.split(" - ");
+        TDoc_Not = SplitCN[1];
+        Doc_Not = SplitCN[0];
     }
 
     if ($("#TxtValor_Bien").val() != "")
@@ -238,7 +249,7 @@ function ValidarGuardado() {
                 case 0: //activo default
                     Valida_Campos_Op = V_Campos_K("D");
                     if (Valida_Campos_Op == 1)
-                        Mensaje_General("Campo llave Incompleto!", "Debe diligenciar el Campo (C. Identificación)", "E");
+                        Mensaje_General("Campo llave Incompleto!", "Debe diligenciar el Campo (C. Identificación)", "W");
                     break;
 
                 case 1: //activo inmueble
@@ -250,6 +261,27 @@ function ValidarGuardado() {
                     break;
             }
             break;
+    }
+
+    switch (Opcion_Asegurado) {
+        case "S":
+            Valida_Campos_Op = V_Campo_Poliza();
+
+            if (Valida_Campos_Op == 1) {
+                Mensaje_General("Campo N° Poliza!", "Debe diligenciar el campo N° de Poliza si esta asegurado!", "W");
+            }
+            break;
+        case "N":
+            Valida_Campos_Op = 0;
+            break;
+    }
+
+    if (ArrayFactura.length != 0) {
+        var valida_facturas = Compara_Valor_Compra("TxtValor_Compra", "Val", "V_TFacturas", "Html", "", "Sumatoria Facturas", "Compra", "Enter");
+        if (valida_facturas == 1)
+            Valida_Campos_Op = 1;
+        else
+            Valida_Campos_Op = 0;
     }
 
     return Valida_Campos_Op;
@@ -307,6 +339,24 @@ function V_Campos_Generales() {
     return validar;
 }
 
+// paso 2.1
+//validamos campos para la creacion del formulario 
+//dinamico(campo poliza)
+function V_Campo_Poliza() {
+    var validar = 0;
+
+    var Campo_S1 = $("#Txt_Num_poliza").val(); //Seg_1
+
+    if (Campo_S1 == "") {
+        validar = 1;
+        if (Campo_S1 == "") { $("#Seg_1").css("display", "inline-table"); } else { $("#Seg_1").css("display", "none"); }
+    }
+    else
+        $("#Seg_1").css("display", "none");
+
+    return validar;
+}
+
 // paso 3
 //valida campos referentes a los inmuebles
 //Obligatorios (Campos Inmuebles)
@@ -318,15 +368,18 @@ function V_Campos_Immuebles() {
 
     var Campo_In_1 = $("#Select_TipoEscritura").val(); //Inmu_1
     var Campo_In_2 = $("#Txt_NunImobiliaria").val(); //Inmu_2
+    var Campo_In_3 = $("#Select_Notaria_R").val(); //Inmu_3
 
-    if (Campo_In_1 == "-1" || Campo_In_2 == "") {
+    if (Campo_In_1 == "-1" || Campo_In_2 == "" || Campo_In_3 == "-1") {
         validar_inmueble = 1;
         if (Campo_In_1 == "-1") { $("#Inmu_1").css("display", "inline-table"); } else { $("#Inmu_1").css("display", "none"); }
         if (Campo_In_2 == "") { $("#Inmu_2").css("display", "inline-table"); } else { $("#Inmu_2").css("display", "none"); }
+        if (Campo_In_3 == "-1") { $("#Inmu_3").css("display", "inline-table"); } else { $("#Inmu_3").css("display", "none"); }
     }
     else {
         $("#Inmu_1").css("display", "none");
         $("#Inmu_2").css("display", "none");
+        $("#Inmu_3").css("display", "none");
     }
 
     validar = Valida_Keys_Bloque("I", valida_llave, validar_inmueble, "");

@@ -23,7 +23,7 @@
     <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
     <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" type="text/css" />
     <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
-    
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
     <div id="Container_title_Form">
@@ -295,6 +295,23 @@
                                 <td style="width: 10%; padding-bottom: 25px;"></td>
                             </tr>
                         </table>
+                        <table id="Tabla_poliza" style="width: 100%; display: inline-table;">
+                            <tbody>
+                                <tr>
+                                    <td class="Label_Bold" style="width: 8%;">N° Poliza</td>
+                                    <td style="width: 15%;">
+                                        <span class="cssToolTip_Form_T">
+                                            <input type="text" id="Txt_Num_poliza" maxlength="30" style="width: 180px;" class="Numeric_letter" />
+                                            <span class="Spam_AST"></span></span>
+                                    </td>
+                                    <td style="width: 50%; padding-bottom: 25px;">
+                                        <span class="cssToolTip">
+                                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Seg_1" src="../../images/error.png" />
+                                            <span class="SpamEG"></span></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                     <h3>Ubicación
                     </h3>
@@ -331,7 +348,7 @@
                                 </td>
                                 <td style="width: 20%;">
                                     <span class="cssToolTip_Form">
-                                        <input type="text" id="Txt_Adress_U" maxlength="50" style="width: 200px;" readonly="readonly" />
+                                        <input type="text" id="Txt_Adress_U" maxlength="50" style="width: 400px;" readonly="readonly" />
                                         <span class="Spam_A_Addres"></span></span>
                                 </td>
                                 <td style="width: 6%; padding-bottom: 25px;" colspan="3">
@@ -375,6 +392,20 @@
                                             <td style="width: 10%; padding-bottom: 25px;">
                                                 <span class="cssToolTip_L">
                                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Inmu_2"
+                                                        src="../../images/error.png" />
+                                                    <span class="SpamEG"></span></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="Label_Bold" style="width: 7.7%;">Notaria
+                                            </td>
+                                            <td style="width: 20%;" colspan="3">
+                                                <select id="Select_Notaria_R" class="C_Chosen">
+                                                </select>
+                                            </td>
+                                            <td style="width: 6%; padding-bottom: 25px;" colspan="3">
+                                                <span class="cssToolTip_L">
+                                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Inmu_3"
                                                         src="../../images/error.png" />
                                                     <span class="SpamEG"></span></span>
                                             </td>
@@ -768,7 +799,7 @@
                                 <td style="width: 10%; padding-bottom: 25px;"></td>
                             </tr>
                             <tr>
-                                <td class="Label_Bold" style="width: 7.7%;">Persona
+                                <td class="Label_Bold" style="width: 7.7%;">Entidad
                                 </td>
                                 <td style="width: 20%;" colspan="3">
                                     <select id="Select_Persona_R" class="C_Chosen">

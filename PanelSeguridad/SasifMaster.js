@@ -986,13 +986,22 @@ function Charge_Combo_Persona(Matrix, Selector, Nit, Index_Edit) {
 
     switch (Selector) {
 
-        case "Select_Persona_R"://persona registro
+        case "Select_Persona_R"://entidad registro
             for (Item in Matrix) {
                 if (Matrix[Item].OP_Hacienda == "S" || Matrix[Item].OP_Transito == "S") {
                     $("#" + Selector).append("<option value='" + Matrix[Item].Document_ID + "'>" + Matrix[Item].Nombre + "</option>");
                 }
             }
             break;
+
+        case "Select_Notaria_R"://Notaria registro
+            for (Item in Matrix) {
+                if (Matrix[Item].OP_Hacienda == "S") {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Document_ID + "'>" + Matrix[Item].Nombre + "</option>");
+                }
+            }
+            break;
+
 
         case "Select_Persona_C"://persona registro por NIT ID
             for (Item in Matrix) {
@@ -1767,4 +1776,53 @@ function RestarValores_Grid(VT, V_Ope, Obj_Vista) {
 
     Suma_Valor_Inicial = VT;
     $("#" + Obj_Vista).html(dinner_format_grid(Suma_Valor_Inicial, ""));
+}
+
+//compara valores que no se pasen de lar inicial
+function Compara_Valor_Compra(str_v1, Obj1, str_v2, Obj2, objeto, Str_1, Str_Op, Tipo_Opc) {
+    var v1;
+    var v2;
+    var validar = 0;
+
+    if (Tipo_Opc == "Blur") {
+        $("#" + objeto).blur(function () {
+       
+            if (Obj1 == "Val")
+                v1 = F_NumericBD($("#" + str_v1).val());
+            else
+                v1 = F_NumericBD($("#" + str_v1).html());
+
+            if (Obj2 == "Val")
+                v2 = F_NumericBD($("#" + str_v2).val());
+            else
+                v2 = F_NumericBD($("#" + str_v2).html());
+
+            if (parseInt(v1) < parseInt(v2)) {
+                if (Obj2 == "Val")
+                    $("#" + str_v2).val("");
+                else
+                    $("#" + str_v2).html("");
+
+                Mensaje_General("¡Valor Incoherente !", "El valor " + Str_1 + " NO puede ser mayor al Valor " + Str_Op, "W");
+            }
+        });
+    }
+    else {
+     
+        if (Obj1 == "Val")
+            v1 = F_NumericBD($("#" + str_v1).val());
+        else
+            v1 = F_NumericBD($("#" + str_v1).html());
+
+        if (Obj2 == "Val")
+            v2 = F_NumericBD($("#" + str_v2).val());
+        else
+            v2 = F_NumericBD($("#" + str_v2).html());
+
+        if (parseInt(v1) < parseInt(v2))
+            validar = 1;
+            Mensaje_General("¡Valor Incoherente !", "El valor " + Str_1 + " NO puede ser mayor al Valor " + Str_Op, "W");
+    }
+
+    return validar;
 }

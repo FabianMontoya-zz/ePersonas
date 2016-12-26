@@ -33,6 +33,10 @@
     Private _FechaTrans As String
     Private _Secuencia_Cargue As Long
 
+    Private _TypeDocument_ID_Not As Integer
+    Private _Document_ID_Not As Long
+    Private _Num_Poliza As String
+
     Private _UsuarioCreacion As String
     Private _FechaCreacion As String
     Private _UsuarioActualizacion As String
@@ -287,6 +291,31 @@
         End Get
         Set(ByVal value As Long)
             Me._Secuencia_Cargue = value
+        End Set
+    End Property
+
+    Public Property TypeDocument_ID_Not() As Integer
+        Get
+            Return Me._TypeDocument_ID_Not
+        End Get
+        Set(ByVal value As Integer)
+            Me._TypeDocument_ID_Not = value
+        End Set
+    End Property
+    Public Property Document_ID_Not() As Long
+        Get
+            Return Me._Document_ID_Not
+        End Get
+        Set(ByVal value As Long)
+            Me._Document_ID_Not = value
+        End Set
+    End Property
+    Public Property Num_Poliza() As String
+        Get
+            Return Me._Num_Poliza
+        End Get
+        Set(ByVal value As String)
+            Me._Num_Poliza = value
         End Set
     End Property
 

@@ -47,6 +47,9 @@ Public Class C_ActivosSQLClass
             "ACT_FechaConta_Retiro," & _
             "ACT_TypeDocument_ID_T," & _
             "ACT_Document_ID_T," & _
+            "ACT_TypeDocument_ID_Not," & _
+            "ACT_Document_ID_Not," & _
+            "ACT_Num_Poliza," & _
             "ACT_Usuario_Creacion," & _
             "ACT_FechaCreacion," & _
             "ACT_Usuario_Actualizacion," & _
@@ -81,6 +84,9 @@ Public Class C_ActivosSQLClass
         sql.AppendLine("'" & vp_Obj.FechaConta_Retiro & "',")
         sql.AppendLine("'" & vp_Obj.TypeDocument_ID_T & "',")
         sql.AppendLine("'" & vp_Obj.Document_ID_T & "',")
+        sql.AppendLine("'" & vp_Obj.TypeDocument_ID_Not & "',")
+        sql.AppendLine("'" & vp_Obj.Document_ID_Not & "',")
+        sql.AppendLine("'" & vp_Obj.Num_Poliza & "',")
         sql.AppendLine("'" & vp_Obj.UsuarioCreacion & "',")
         sql.AppendLine("'" & vp_Obj.FechaCreacion & "',")
         sql.AppendLine("'" & vp_Obj.UsuarioActualizacion & "',")

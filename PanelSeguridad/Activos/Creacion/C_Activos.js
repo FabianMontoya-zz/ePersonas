@@ -75,7 +75,10 @@ $(document).ready(function () {
     $("#SE").css("display", "none");
     $("#WA").css("display", "none");
 
+    $("#Seg_1").css("display", "none"); //imagen de validacion de poliza
+    
     $("#Tabla_LLave_Inmueble").css("display", "none");
+    $("#Tabla_poliza").css("display", "none");
     $("#Tabla_LLave_Vehiculos").css("display", "inline-table");
     $("#Txtkey_1").html("C. Identificación");
 
@@ -89,12 +92,17 @@ $(document).ready(function () {
     Change_Select_blindaje();
     Change_Select_Modelo();
     Change_Select_Linea();
+    Change_Seguro();
 
     Format_Adress("Txt_Adress_U");
     Date_Document();
     Calcula_Valor_IVA("Txt_ValFactura", "Text_Val_Sin_IVA", "V_Val_IVA");
     Cargue_Depent_Modelo();
+
+    Compara_Valor_Compra("TxtValor_Bien", "Val", "TxtValor_Compra", "Val", "TxtValor_Compra", "Compra", "Bien", "Blur");
 });
+
+
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                 REGION BOTONES                                                                                                                ----*/
@@ -504,6 +512,7 @@ function Clear_Ima_K() {
 function Clear_Ima_I() {
     $("#Inmu_1").css("display", "none");
     $("#Inmu_2").css("display", "none");
+    $("#Inmu_3").css("display", "none");
 }
 
 //limpiar Imagenes blindaje

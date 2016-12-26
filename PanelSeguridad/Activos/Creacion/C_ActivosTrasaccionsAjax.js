@@ -73,6 +73,7 @@ function transaccionAjax_MPersonas(State) {
             else {
                 Matrix_Personas = JSON.parse(result);
                 Charge_Combo_Persona(Matrix_Personas, "Select_Persona_R", "", "");
+                Charge_Combo_Persona(Matrix_Personas, "Select_Notaria_R", "", "");
             }
         },
         error: function () {
@@ -323,7 +324,7 @@ function transacionAjax_Linea_F(State, Marca, Index, Proccess) {
                 Matrix_Linea_F = JSON.parse(result);
                 Charge_Combos_Depend_Verificacion(Matrix_Linea_F, "Select_LineaF", "", "", "");
                 if (Proccess == "ID") {
-                    CargarValoresCombos();
+                    setTimeout("CargarValoresCombos();", 300);
                 }
             }
         },
@@ -366,8 +367,6 @@ function transacionAjax_Linea_F_ID(State, Index) {
         }
     });
 }
-
-
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                          CONSULTAS EN PROCESO                                                                                                                ----*/
@@ -479,6 +478,9 @@ function transacionAjax_C_Activos_create(State) {
                 "TipoAdministracion": $("#Select_TipoAdmin").val(),
                 "TipoEscritura": TipoEscritura,
                 "NunImobiliaria": NunImobiliaria.toUpperCase(),
+                "TDoc_Not": TDoc_Not,
+                "Doc_Not": Doc_Not,
+                "Num_Poliza": Num_Poliza,
                 "FechaC_Recibo": FechaC_Recibo,
                 "FechaC_Retiro": FechaC_Retiro,
                 "TDoc_T": $("#Select_Documento").val(),

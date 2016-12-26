@@ -107,7 +107,7 @@ Public Class C_ActivosAjax
             objC_Activos.Surcursal_ID = Request.Form("Sucursal")
             objC_Activos.Cod_Moneda_ID = Request.Form("Moneda")
             objC_Activos.Valor_Bien = Request.Form("Valor_Bien")
-            objC_Activos.Val_Op_Compra = Request.Form("VOpCompra")
+            objC_Activos.Val_Op_Compra = Request.Form("Val_Op_Compra")
             objC_Activos.CompraBien = Request.Form("CompraBien")
             objC_Activos.Asegurado = Request.Form("Asegurado")
             objC_Activos.EstadoActivo = Request.Form("EstadoActivo")
@@ -116,6 +116,11 @@ Public Class C_ActivosAjax
             objC_Activos.N_Escritura = Request.Form("NunImobiliaria")
             objC_Activos.FechaConta_Recibo = Request.Form("FechaC_Recibo")
             objC_Activos.FechaConta_Retiro = Request.Form("FechaC_Retiro")
+            objC_Activos.TypeDocument_ID_Not = Request.Form("TDoc_Not")
+            objC_Activos.Document_ID_Not = Request.Form("Doc_Not")
+
+            objC_Activos.Num_Poliza = Request.Form("Num_Poliza")
+
             objC_Activos.TypeDocument_ID_T = Request.Form("TDoc_T")
             objC_Activos.Document_ID_T = Request.Form("Doc_T")
 
