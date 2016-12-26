@@ -33,7 +33,11 @@ $(document).ready(function () {
     $("#Marco_trabajo_Contrato").css("height", "490px");
     $("#V_TFacturas").html(Suma_Valor_Inicial);
 
+    Load_Charge_Sasif();
     Picker_Fechas();
+    VentanasEmergentes();
+    DiseñaObjetos();
+
     transaccionAjax_MRTSTA("MATRIX_RTSTA");
     transaccionAjax_MPaises_Ciudades('MATRIX_PAIS_CIUDAD');
     transaccionAjax_MPersonas('MATRIX_PERSONAS');
@@ -74,55 +78,6 @@ $(document).ready(function () {
     $("#Tabla_LLave_Inmueble").css("display", "none");
     $("#Tabla_LLave_Vehiculos").css("display", "inline-table");
     $("#Txtkey_1").html("C. Identificación");
-
-    //funcion para las ventanas emergentes
-    $("#dialog").dialog({
-        autoOpen: false,
-        dialogClass: "Dialog_Sasif",
-        modal: true
-    });
-
-    $("#dialog_eliminar").dialog({
-        autoOpen: false,
-        dialogClass: "Dialog_Sasif",
-        modal: true
-    });
-
-    $("#Dialog_Format_Adress").dialog({
-        autoOpen: false,
-        dialogClass: "Dialog_Sasif",
-        modal: true,
-        width: 1000,
-        height: 250,
-        overlay: {
-            opacity: 0.5,
-            background: "black"
-        }
-    });
-
-    $("#Dialog_Factura").dialog({
-        autoOpen: false,
-        dialogClass: "Dialog_Sasif",
-        modal: true,
-        width: 1100,
-        height: 420,
-        overlay: {
-            opacity: 0.5,
-            background: "black"
-        }
-    });
-
-    $("#T_Factura_Grid").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
-
-    $(function () { //Función del acordeon
-        $("#Acordeon_Activo").accordion({
-            heightStyle: "content",
-            collapsible: true
-        });
-    });
 
     Change_Select_Marca();
     Change_Select_Clase();
@@ -264,9 +219,64 @@ function BtnFactura() {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                     PROCESO DE CARGUE                                                                                                                                        ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//se instancian las ventanes emergentes del proceso de activos
+function VentanasEmergentes() {
+
+    $("#dialog").dialog({
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true
+    });
+
+    $("#dialog_eliminar").dialog({
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true
+    });
+
+    $("#Dialog_Format_Adress").dialog({
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true,
+        width: 1000,
+        height: 250,
+        overlay: {
+            opacity: 0.5,
+            background: "black"
+        }
+    });
+
+    $("#Dialog_Factura").dialog({
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true,
+        width: 1100,
+        height: 420,
+        overlay: {
+            opacity: 0.5,
+            background: "black"
+        }
+    });
+}
+
+//se instancias elementos alterdo de la paghina tablas  acordeon etc
+function DiseñaObjetos() {
+    $("#T_Factura_Grid").dataTable({
+        "bJQueryUI": true, "iDisplayLength": 1000,
+        "bDestroy": true
+    });
+
+    $(function () { //Función del acordeon
+        $("#Acordeon_Activo").accordion({
+            heightStyle: "content",
+            collapsible: true
+        });
+    });
+}
+
 //Función de control del picker de las fechas
 function Picker_Fechas() {
-    $("#TxtFecha_Recibo").datepicker({ dateFormat: 'yy-mm-dd' });
+    $("#TxtFecha_Recibo").datepicker({ dateFormat: 'yy-mm-dd', dialogClass: "Dialog_Sasif" });
     $("#TxtFecha_Retiro").datepicker({ dateFormat: 'yy-mm-dd' });
     $("#Txt_Fecha_fact").datepicker({ dateFormat: 'yy-mm-dd' });
 }

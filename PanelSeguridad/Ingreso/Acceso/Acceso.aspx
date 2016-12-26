@@ -11,14 +11,15 @@
     <link href="../../css/css_login.css" rel="stylesheet" type="text/css" />
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
     <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />
-    <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" />
     <link href="../../css/Chosen/chosen.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/jquery.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Chosen/chosen.jquery.js" type="text/javascript"></script>
-    <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
     <link href="../../css/css_WebAcceso.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" />
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
+
     <style type="text/css">
         html, body
         {
@@ -30,7 +31,7 @@
     <div id="Container_title_Form">
     </div>
     <div id="Dialog_Control" style="width: 100%; text-align: center;">
-        <div class="cssload-container"  style="margin-top: 25%;">
+        <div class="cssload-container" style="margin-top: 25%;">
             <div class="cssload-whirlpool"></div>
             <div>
                 <img id="Sasif" class="Logo_3" src="../../images/SASIF_NEW_WHITE.png" alt="SASIF S.A.S." />

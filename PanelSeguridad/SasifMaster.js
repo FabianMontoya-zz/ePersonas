@@ -168,43 +168,12 @@ function ResetError() {
 }
 
 //funcion para control de carga
-function carga_eventos(str_objeto) {
-
-    $("#" + str_objeto).dialog({
-        autoOpen: false,
-        dialogClass: "Dialog_Control_Sasif",
-        modal: true,
-        width: 400,
-        height: 400,
-        overlay: {
-            opacity: 0.5,
-            background: "black"
-        },
-        show: {
-            effect: 'fade',
-            duration: 2000
-        },
-        hide: {
-            effect: 'fade',
-            duration: 1000
-        },
-        open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-    });
-
-    $(document).ajaxStart(function () {
-        $("#" + str_objeto).dialog("open");
-    }).ajaxStop(function () {
-        $("#" + str_objeto).dialog("close");
-    });
-}
-
-//funcion para control de carga
-function Carga_Control_Sasif(str_objeto) {
+function Load_Charge_Sasif() {
 
     var w = $(window).width();
     var h = $(window).height();
 
-    $("#" + str_objeto).dialog({
+    $("#Dialog_Control").dialog({
         autoOpen: false,
         dialogClass: "Dialog_Control_Sasif",
         modal: true,
@@ -221,18 +190,23 @@ function Carga_Control_Sasif(str_objeto) {
         hide: {
             effect: 'fade',
             duration: 1000
-        },
-        open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+        }
     });
 
-    $(document).ajaxStart(function () {
-        $("#" + str_objeto).dialog("open");
-        $("#" + str_objeto).dialog("option", "title", "Procesando información espere un momento...");
-
-    }).ajaxStop(function () {
-        $("#" + str_objeto).dialog("close");
-    });
 }
+
+//Abre control de carga
+function OpenControl() {
+    $("#Dialog_Control").dialog("open");
+    $("#Dialog_Control").dialog("option", "title", "Procesando información espere un momento...");
+}
+
+//Cierra control de carga
+function CloseControl() {
+    $("#Dialog_Control").dialog("close");
+}
+
+
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                             VALIDACIONES FECHAS Y HORAS                                                                                                            ----*/
@@ -406,7 +380,7 @@ function ValidaFechaDigitada(ObjText) {
                             //validar mes dia
                             if ((parseInt(A_FN[2]) > 0)) {
                                 if ((parseInt(A_FN[2]) < Diafinal)) {
-                                    
+
                                 }
                                 else {
                                     Mensaje_General("¡Formato incorrecto!", "El Dia debe ser entre 1 y " + Diafinal, "W");
@@ -1166,7 +1140,7 @@ function CargaDay(Select_C_Year, Select_C_Month, Select_Control, Index_Edit) {
 
         for (itemArray in Matrix_Mes) {
             if (Matrix_Mes[itemArray][0] == Select_M) {
-                
+
                 if (YearBis == "Y" && Select_M == "2")
                     N_Day_M = 29;
                 else
