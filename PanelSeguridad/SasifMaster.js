@@ -215,7 +215,7 @@ function OpenControl() {
 //Cierra el Control de Carga
 function CloseControl() {
     $('#Dialog_Control')
-    $(this).hide();
+           .hide()
     ;
 
     $("#Dialog_Control").dialog("close");
