@@ -165,56 +165,11 @@ function AgregarTablas() {
         "bDestroy": true
     });    
 }
-/*
-function OpenControl() {
 
-    $('#Dialog_Control')
-			.hide()
-			.ajaxStart(function () {
-			    $(this).show();
-			})
-			.ajaxStop(function () {
-			    CloseControl();
-			})
-    ;
-
-    $("#Dialog_Control").dialog("open");
-    $("#Dialog_Control").dialog("option", "title", "");
-}
-
-function CloseControl() {
-    $('#Dialog_Control')			
-			    $(this).hide();
-    ;
-
-    $("#Dialog_Control").dialog("close");
-}
-*/
 //Función que contiene las propiedades para las ventanas emergentes
 function VentanasEmergentes() {
 
-    var w = $(window).width();
-    var h = $(window).height();
-
-    $("#Dialog_Control").dialog({
-        autoOpen: false,
-        dialogClass: "Dialog_Control_Sasif",
-        modal: true,
-        width: w,
-        height: h,
-        overlay: {
-            opacity: 0.5,
-            background: "black"
-        },
-        show: {
-            effect: 'fade',
-            duration: 1000
-        },
-        hide: {
-            effect: 'fade',
-            duration: 1000
-        }
-    });
+    Load_Charge_Sasif(); //Carga de "SasifMaster.js" el Control de Carga
 
     $("#dialog").dialog({
         autoOpen: false,

@@ -302,7 +302,7 @@ function transacionAjax_C_Contrato_create(State) {
 
     OpenControl();
     var Mensaje = "La colocación se ha agregado correctamente junto con sus adicionales";
-    var caso = "A";
+    var caso;
     $.ajax({
         url: "C_ContratoAjax.aspx",
         type: "POST",

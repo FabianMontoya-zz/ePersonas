@@ -197,12 +197,27 @@ function Load_Charge_Sasif() {
 
 //Abre control de carga
 function OpenControl() {
+
+    $('#Dialog_Control')
+			.hide()
+			.ajaxStart(function () {
+			    $(this).show();
+			})
+			.ajaxStop(function () {
+			    CloseControl();
+			})
+    ;
+
     $("#Dialog_Control").dialog("open");
-    $("#Dialog_Control").dialog("option", "title", "Procesando información espere un momento...");
+    $("#Dialog_Control").dialog("option", "title", "");
 }
 
-//Cierra control de carga
+//Cierra el Control de Carga
 function CloseControl() {
+    $('#Dialog_Control')
+    $(this).hide();
+    ;
+
     $("#Dialog_Control").dialog("close");
 }
 
