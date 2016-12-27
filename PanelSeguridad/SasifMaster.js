@@ -1801,7 +1801,6 @@ function Compara_Valor_Compra(str_v1, Obj1, str_v2, Obj2, objeto, Str_1, Str_Op,
         });
     }
     else {
-
         if (Obj1 == "Val")
             v1 = F_NumericBD($("#" + str_v1).val());
         else
@@ -1812,9 +1811,10 @@ function Compara_Valor_Compra(str_v1, Obj1, str_v2, Obj2, objeto, Str_1, Str_Op,
         else
             v2 = F_NumericBD($("#" + str_v2).html());
 
-        if (parseInt(v1) < parseInt(v2))
+        if (parseInt(v1) < parseInt(v2)) {
             validar = 1;
-        Mensaje_General("¡Valor Incoherente !", "El valor " + Str_1 + " NO puede ser mayor al Valor " + Str_Op, "W");
+            Mensaje_General("¡Valor Incoherente !", "El valor " + Str_1 + " NO puede ser mayor al Valor " + Str_Op, "W");
+        }
     }
 
     return validar;

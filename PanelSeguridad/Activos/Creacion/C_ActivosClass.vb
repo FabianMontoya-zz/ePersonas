@@ -36,6 +36,8 @@
     Private _TypeDocument_ID_Not As Integer
     Private _Document_ID_Not As Long
     Private _Num_Poliza As String
+    Private _N_Notaria As Integer
+
 
     Private _UsuarioCreacion As String
     Private _FechaCreacion As String
@@ -316,6 +318,14 @@
         End Get
         Set(ByVal value As String)
             Me._Num_Poliza = value
+        End Set
+    End Property
+    Public Property N_Notaria() As Integer
+        Get
+            Return Me._N_Notaria
+        End Get
+        Set(ByVal value As Integer)
+            Me._N_Notaria = value
         End Set
     End Property
 

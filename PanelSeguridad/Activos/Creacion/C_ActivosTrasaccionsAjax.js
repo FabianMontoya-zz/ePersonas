@@ -325,7 +325,7 @@ function transacionAjax_Linea_F(State, Marca, Index, Proccess) {
                 Matrix_Linea_F = JSON.parse(result);
                 Charge_Combos_Depend_Verificacion(Matrix_Linea_F, "Select_LineaF", "", "", "");
                 if (Proccess == "ID") {
-                    setTimeout("CargarValoresCombos();", 300);
+                    setTimeout("CargarValoresCombos();", 400);
                 }
             }
         },
@@ -482,6 +482,7 @@ function transacionAjax_C_Activos_create(State) {
                 "TDoc_Not": TDoc_Not,
                 "Doc_Not": Doc_Not,
                 "Num_Poliza": Num_Poliza,
+                "N_Notaria": N_Notaria,
                 "FechaC_Recibo": FechaC_Recibo,
                 "FechaC_Retiro": FechaC_Retiro,
                 "TDoc_T": $("#Select_Documento").val(),

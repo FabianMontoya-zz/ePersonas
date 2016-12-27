@@ -120,6 +120,7 @@ Public Class C_ActivosAjax
             objC_Activos.Document_ID_Not = Request.Form("Doc_Not")
 
             objC_Activos.Num_Poliza = Request.Form("Num_Poliza")
+            objC_Activos.N_Notaria = Request.Form("N_Notaria")
 
             objC_Activos.TypeDocument_ID_T = Request.Form("TDoc_T")
             objC_Activos.Document_ID_T = Request.Form("Doc_T")

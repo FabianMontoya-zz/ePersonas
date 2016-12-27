@@ -10,7 +10,6 @@
     <link href="../../css/css_login.css" rel="stylesheet" type="text/css" />
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
     <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />
-    <link href="../../css/custom/charge.css" rel="stylesheet" type="text/css" />
     <link href="../../css/Chosen/chosen.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/jquery.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Chosen/chosen.jquery.js" type="text/javascript"></script>
@@ -204,17 +203,5 @@
             </tr>
         </table>
     </div>
-    <div id="Dialog_Charge" style="width: 100%; text-align: center;">
-        <div class="cssload-circle">
-            <div class="cssload-up">
-                <div class="cssload-innera">
-                </div>
-            </div>
-            <div class="cssload-down">
-                <div class="cssload-innerb">
-                </div>
-            </div>
-        </div>
-        <h5>Procesando información espere un momento...</h5>
-    </div>
+  
 </asp:Content>

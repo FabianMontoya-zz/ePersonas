@@ -12,8 +12,7 @@ var DeleteConsecutivo;
 //Evento load JS
 $(document).ready(function () {
 
-    carga_eventos("Dialog_Charge");
-    transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
+     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_CargaRol('Carga_Rol');
     Ctipo();
 

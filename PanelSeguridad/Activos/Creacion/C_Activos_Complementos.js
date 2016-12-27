@@ -197,7 +197,8 @@ function Change_Select_Linea() {
 
 //construye y llama la funcion de cargar el drop list modelo
 function Crear_Rango_modelo(Matrix, Index_ID, Proccess) {
-
+    $("#Cambio_modelo").css("width", "33%");
+    
     if (Proccess == "Matrix")
         Index_ID = Index_ID - 1;
     else

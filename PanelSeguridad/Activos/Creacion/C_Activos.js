@@ -100,6 +100,7 @@ $(document).ready(function () {
     Cargue_Depent_Modelo();
 
     Compara_Valor_Compra("TxtValor_Bien", "Val", "TxtValor_Compra", "Val", "TxtValor_Compra", "Compra", "Bien", "Blur");
+    Compara_Valor_Compra("Txt_ValFactura", "Val", "Text_Val_Sin_IVA", "Val", "Text_Val_Sin_IVA", "sin IVA", " Total", "Blur");
 });
 
 
@@ -146,6 +147,7 @@ function BtnBuscarFacecolda() {
 
     if ($("#Btn_ShearchFacecolda").val() == "Nueva Consulta") {
         $("#Btn_ShearchFacecolda").attr("value", "Consulta Facecolda");
+        $("#Cambio_modelo").css("width", "29%");
         Clear_Ima_F();
         Enable_Consult_Fasecolda();
         Clear_Consulta_Fasecolda();
@@ -422,7 +424,7 @@ function Clear_Limpiar() {
     $("#Txt_NunImobiliaria").val("");
     $("#TxtFecha_Recibo").val("");
     $("#TxtFecha_Retiro").val("");
-
+  
     $("#V_Responsable").html("");
     $("#V_Sigla_1").html("");
     $("#V_Sigla_2").html("");
@@ -433,6 +435,11 @@ function Clear_Limpiar() {
 
     $("#Blo_Inmuebles").css("display", "none");
     $("#Blo_Fasecolda").css("display", "none");
+
+    $("#Text_Num_Notaria").val("");
+    $("#Txt_Num_poliza").val("");
+    $("#Tabla_poliza").css("display", "none");
+    Suma_Valor_Inicial = 0;
 
     $("#Select_EmpresaNit").removeAttr("disabled");
     $('.C_Chosen').trigger('chosen:updated');
