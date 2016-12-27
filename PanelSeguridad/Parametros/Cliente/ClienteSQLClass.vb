@@ -1375,7 +1375,7 @@ Public Class ClienteSQLClass
     End Function
 
     ''' <summary>
-    ''' 
+    ''' trae datos basicos segun la persona consultada
     ''' </summary>
     ''' <param name="vp_Obj_persona"></param>
     ''' <returns></returns>
@@ -1431,7 +1431,55 @@ Public Class ClienteSQLClass
         Return ObjList
     End Function
 
+    ''' <summary>
+    ''' trae documentos segun la seleccion de persona o empresa
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function List_Personas_Documentos(ByVal vp_Obj_persona As ClienteClass)
 
+        Dim ObjList As New List(Of DocumentosClass)
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("2")
+
+        Dim BD_Doc As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDDocument").ToString
+
+        Dim sql_estruc As New StringBuilder
+        Dim sql_order As New StringBuilder
+        Dim sql_where As New StringBuilder
+
+        sql_estruc.Append("SELECT  CLI_Nit_ID,  " & _
+                              "                  CLI_TypeDocument_ID, " & _
+                              "                  CLI_Document_ID, " & _
+                              "                  CLI_GrpDocumentos, " & _
+                              "                  RGRD.RGD_Documentos_ID, " & _
+                              "                  D.DOC_Descripcion " & _
+                              "  FROM CLIENTE C " & _
+                              "     LEFT JOIN " & BD_Doc & ".dbo.GRUPO_DOCUMENTO GD ON GD.GD_Grp_Documento_ID = C.CLI_GrpDocumentos AND GD.GD_Nit_ID = C.CLI_Nit_ID " & _
+                              "     LEFT JOIN " & BD_Doc & ".dbo.R_GRPDOC_DOCUMENTOS  RGRD ON RGRD.RGD_Grp_Documento_ID = GD.GD_Grp_Documento_ID " & _
+                              "     LEFT JOIN  " & BD_Doc & ".dbo.DOCUMENTOS D ON D.DOC_Documentos_ID= RGRD.RGD_Documentos_ID ")
+
+        If vp_Obj_persona.TipoSQL = "Persona" Then
+            sql_where.Append(" WHERE  " & _
+                                                " C.CLI_TypeDocument_ID = '" & vp_Obj_persona.TypeDocument_ID & "' AND " & _
+                                                " C.CLI_Document_ID = '" & vp_Obj_persona.Document_ID & "' AND " & _
+                                                " C.CLI_Nit_ID = '" & vp_Obj_persona.Nit_ID & "'")
+
+        Else
+            sql_where.Append(" WHERE  " & _
+                                                        " C.CLI_Document_ID = CASE SUBSTRING('" & vp_Obj_persona.Nit_ID & "',0,LEN('" & vp_Obj_persona.Nit_ID & "')) " & _
+                                                        "                                                 WHEN '' THEN 0 " & _
+                                                        "                                                 ELSE SUBSTRING('" & vp_Obj_persona.Nit_ID & "',0,LEN('" & vp_Obj_persona.Nit_ID & "')) " & _
+                                                        "                                                 END ")
+        End If
+
+        sql_order.Append(" ORDER BY C.CLI_Nit_ID ASC")
+        Dim StrQuery As String = sql_estruc.ToString & sql_where.ToString & sql_order.ToString
+
+        ObjList = list(StrQuery, Conexion, "Matrix_Personas_Documentos")
+
+        Return ObjList
+    End Function
   
 #End Region
 

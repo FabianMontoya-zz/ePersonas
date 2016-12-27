@@ -1,6 +1,11 @@
 ﻿/*--------------- region de variables globales --------------------*/
 var Array_People = [];
 var Array_Foto = [];
+var Array_InfDoc_Persona = [];
+var Array_InfDoc_Persona = [];
+
+var Tabla_Persona = 0;
+var Tabla_Empresa = 0;
 /*--------------- region de variables globales --------------------*/
 
 
@@ -98,7 +103,7 @@ $(document).ready(function () {
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
         autoOpen: false,
-        dialogClass: "Dialog_Sasif_Web",
+        dialogClass: "Dialog_Sasif",
         modal: true
     });
 
@@ -110,7 +115,7 @@ $(document).ready(function () {
 
     $("#Dialog_Visor").dialog({
         autoOpen: false,
-        dialogClass: "Dialog_Sasif_Web",
+        dialogClass: "Dialog_Sasif",
         modal: true,
         width: 1000,
         height: 520,
@@ -122,7 +127,7 @@ $(document).ready(function () {
 
     $("#Dialog_Extencion").dialog({
         autoOpen: false,
-        dialogClass: "Dialog_Sasif_Web",
+        dialogClass: "Dialog_Sasif",
         modal: true,
         width: 1100,
         height: 400,
@@ -244,7 +249,7 @@ function Campos() {  //OK
 //valida si la persona tiene tarjeta o no
 function Valida_Access_Minimo() {
     if (Array_People[0].Tarjeta_ID == "") {
-
+        valida_GrpDoc();
     }
     else {
         if (Tarjeta_Proccess == 1) {
@@ -289,11 +294,13 @@ function Valida_VigenciaTarjeta() {
             if (comparacion == "Mayor")
                 Mensaje_General("Tarjeta Vencida!", "La Tarjeta  de " + Array_People[0].Nombre + " está vencida fecha de vencimiento ( " + FechaVigencia + ")", "W");
             else {
+                valida_GrpDoc();
                 //Tabla_Docs(Nit_ID_Proccess, TDoc_VT, Doc_VT, GrpDoc, "Empleado");
                 //SearchEmpresa();
             }
             break;
         case "N":
+            valida_GrpDoc();
             //   Tabla_Docs(Nit_ID_Proccess, TDoc_VT, Doc_VT, GrpDoc, "Empleado");
             //SearchEmpresa();
             break;
@@ -301,6 +308,17 @@ function Valida_VigenciaTarjeta() {
 
 }
 
+//valida si tiene rupo de documento
+function valida_GrpDoc() {
+    if (GrpDoc != 0) {
+        transacionAjax_Shearch_DocPersona('Buscar_Doc_Persona', Array_People[0].TypeDocument_ID, Array_People[0].Document_ID, Array_People[0].Nit_ID);
+        transacionAjax_Shearch_DocEmpresa('Buscar_Doc_Empresa',  Array_People[0].Nit_ID);
+    }
+    else
+        Mensaje_General("Proceso Imcompleto", "La persona no tiene (Grupo de Documentos) asignados, comuniquese con el administrador del sistema!", "E");
+
+
+}
 
 
 

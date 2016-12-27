@@ -557,11 +557,6 @@ PanelSeguridad
  cara la matriz de documento para trabajo
  </summary>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.IngresoAjax.Carga_Matrix_Personas_Doc">
-	<summary>
- cara la matriz de documento para trabajo
- </summary>
-	<remarks></remarks>
 </member><member name="M:PanelSeguridad.IngresoAjax.Cargar_Matrix_AccesoPredeterminado">
 	<summary>
  funcion que carga el objeto DDL consulta
@@ -610,6 +605,16 @@ PanelSeguridad
 </member><member name="M:PanelSeguridad.IngresoAjax.Search_Document_Foto">
 	<summary>
  trae la foto del personaje a consultar
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.IngresoAjax.List_Personas_Doc">
+	<summary>
+ cara la matriz de documento para trabajo
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.IngresoAjax.List_Empresa_Doc">
+	<summary>
+ cara la matriz de documento para trabajo
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.IngresoAjax.Create_List_ControlAcceso">
@@ -2841,8 +2846,15 @@ To modify move field declaration from designer file to code-behind file.
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.ClienteSQLClass.SearchPeople_Access(PanelSeguridad.ClienteClass)">
 	<summary>
-	</summary>
+ trae datos basicos segun la persona consultada
+ </summary>
 	<param name="vp_Obj_persona"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.ClienteSQLClass.List_Personas_Documentos(PanelSeguridad.ClienteClass)">
+	<summary>
+ trae documentos segun la seleccion de persona o empresa
+ </summary>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.Impuesto_GastoSQLClass.Read_AllImpuesto_Gasto(System.String,System.String,System.String)">

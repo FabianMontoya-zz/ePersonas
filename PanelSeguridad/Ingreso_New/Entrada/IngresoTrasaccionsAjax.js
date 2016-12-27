@@ -117,3 +117,80 @@ function transacionAjax_Search_Foto(State, TD, D) {
         }
     });
 }
+
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_Shearch_DocPersona(State, TD, D, NIT) {
+
+    $.ajax({
+        url: "IngresoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "TD": TD,
+            "D": D,
+            "NIT": NIT,
+            "TipoSQL": "Persona"
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Array_InfDoc_Persona = [];
+            }
+            else {
+                Array_InfDoc_Persona = JSON.parse(result);
+                switch (Array_InfDoc_Persona.length) {
+                    case 0:
+                        Mensaje_General("No existe", "la persona No tiene Documentos Fisicos", "W");
+                        break;
+                    default:
+                        Tabla_Persona = 1;
+                        break;
+
+                }
+            }
+
+        },
+        error: function () {
+
+        }
+    });
+}
+
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_Shearch_DocEmpresa(State, NIT) {
+
+    $.ajax({
+        url: "IngresoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+             "NIT": NIT,
+            "TipoSQL": "Empresa"
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Array_InfDoc_Persona = [];
+            }
+            else {
+                Array_InfDoc_Empresa = JSON.parse(result);
+                switch (Array_InfDoc_Empresa.length) {
+                    case 0:
+                        Mensaje_General("No existe", "la Empresa No tiene Documentos Fisicos", "W");
+                        break;
+                    default:
+                        Tabla_Empresa = 1;
+                        break;
+
+                }
+            }
+
+        },
+        error: function () {
+
+        }
+    });
+}
+

@@ -80,6 +80,8 @@
     Private _DescripMotivoBloqueo As String
     Private _DescripSexo As String
 
+    Private _TipoSQL As String
+
 #End Region
 
 #Region "Campos Direccion"
@@ -642,6 +644,14 @@
         End Get
         Set(ByVal value As String)
             Me._DescripSexo = value
+        End Set
+    End Property
+    Public Property TipoSQL() As String
+        Get
+            Return Me._TipoSQL
+        End Get
+        Set(ByVal value As String)
+            Me._TipoSQL = value
         End Set
     End Property
 #End Region

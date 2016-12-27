@@ -19,14 +19,16 @@ Public Class IngresoAjax
                 Case "Buscar_Foto"
                     Search_Document_Foto()
 
+                Case "Buscar_Doc_Persona"
+                    List_Personas_Doc()
+
+                Case "Buscar_Doc_Empresa"
+                    List_Empresa_Doc()
 
 
 
                 Case "MATIRXDOC_WORK"
                     Carga_Matrix_DocWork()
-
-                Case "MATRIX_PERSONAS_DOC"
-                    Carga_Matrix_Personas_Doc()
 
                 Case "MATRIX_ACCESOPREDETER"
                     Cargar_Matrix_AccesoPredeterminado()
@@ -134,20 +136,6 @@ Public Class IngresoAjax
         Dim ObjList As New List(Of DocumentosClass)
 
         ObjList = SQL.MatrixDocumentWork()
-        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
-
-    End Sub
-
-    ''' <summary>
-    ''' cara la matriz de documento para trabajo
-    ''' </summary>
-    ''' <remarks></remarks>
-    Protected Sub Carga_Matrix_Personas_Doc()
-
-        Dim SQL As New ClienteSQLClass
-        Dim ObjList As New List(Of DocumentosClass)
-
-        ObjList = SQL.Matrix_Personas_Documentos()
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
@@ -309,6 +297,44 @@ Public Class IngresoAjax
         ObjList = SQL.SearchDocument_People(Obj)
 
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+    End Sub
+
+    ''' <summary>
+    ''' cara la matriz de documento para trabajo
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub List_Personas_Doc()
+
+        Dim SQL As New ClienteSQLClass
+        Dim Obj As New ClienteClass
+        Dim ObjList As New List(Of DocumentosClass)
+
+        Obj.Nit_ID = Request.Form("NIT")
+        Obj.TypeDocument_ID = Request.Form("TD")
+        Obj.Document_ID = Request.Form("D")
+        Obj.TipoSQL = Request.Form("TipoSQL")
+
+        ObjList = SQL.List_Personas_Documentos(Obj)
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' cara la matriz de documento para trabajo
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub List_Empresa_Doc()
+
+        Dim SQL As New ClienteSQLClass
+        Dim Obj As New ClienteClass
+        Dim ObjList As New List(Of DocumentosClass)
+
+        Obj.Nit_ID = Request.Form("NIT")
+         Obj.TipoSQL = Request.Form("TipoSQL")
+
+        ObjList = SQL.List_Personas_Documentos(Obj)
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
     End Sub
 
 
