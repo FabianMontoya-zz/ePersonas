@@ -44,7 +44,6 @@ function transaccionAjax_MDocWork(State) {
             }
             else {
                 Matrix_DocWork = JSON.parse(result);
-                //CloseControl();
             }
         },
         error: function () {

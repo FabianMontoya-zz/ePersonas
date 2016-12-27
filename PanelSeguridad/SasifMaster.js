@@ -189,7 +189,7 @@ function Load_Charge_Sasif() {
         },
         hide: {
             effect: 'fade',
-            duration: 1000
+            duration: 200
         }
     });
 
@@ -197,16 +197,13 @@ function Load_Charge_Sasif() {
 
 //Abre control de carga
 function OpenControl() {
-
-    $('#Dialog_Control')
-			.hide()
-			.ajaxStart(function () {
-			    $(this).show();
-			})
-			.ajaxStop(function () {
-			    CloseControl();
-			})
-    ;
+    $('#Dialog_Control').hide()
+             .ajaxStart(function () {
+                 $(this).show();
+             })
+             .ajaxStop(function () {
+                 CloseControl();
+             });
 
     $("#Dialog_Control").dialog("open");
     $("#Dialog_Control").dialog("option", "title", "");
@@ -214,10 +211,6 @@ function OpenControl() {
 
 //Cierra el Control de Carga
 function CloseControl() {
-    $('#Dialog_Control')
-           .hide()
-    ;
-
     $("#Dialog_Control").dialog("close");
 }
 
@@ -1786,7 +1779,7 @@ function Compara_Valor_Compra(str_v1, Obj1, str_v2, Obj2, objeto, Str_1, Str_Op,
 
     if (Tipo_Opc == "Blur") {
         $("#" + objeto).blur(function () {
-       
+
             if (Obj1 == "Val")
                 v1 = F_NumericBD($("#" + str_v1).val());
             else
@@ -1808,7 +1801,7 @@ function Compara_Valor_Compra(str_v1, Obj1, str_v2, Obj2, objeto, Str_1, Str_Op,
         });
     }
     else {
-     
+
         if (Obj1 == "Val")
             v1 = F_NumericBD($("#" + str_v1).val());
         else
@@ -1821,7 +1814,7 @@ function Compara_Valor_Compra(str_v1, Obj1, str_v2, Obj2, objeto, Str_1, Str_Op,
 
         if (parseInt(v1) < parseInt(v2))
             validar = 1;
-            Mensaje_General("¡Valor Incoherente !", "El valor " + Str_1 + " NO puede ser mayor al Valor " + Str_Op, "W");
+        Mensaje_General("¡Valor Incoherente !", "El valor " + Str_1 + " NO puede ser mayor al Valor " + Str_Op, "W");
     }
 
     return validar;
