@@ -39,27 +39,7 @@ $(document).ready(function () {
     var w = $(window).width();
     var h = $(window).height();
 
-    $("#Dialog_Control").dialog({
-        autoOpen: false,
-        dialogClass: "Dialog_Control_Sasif",
-        modal: true,
-        width: w,
-        height: h,
-        overlay: {
-            opacity: 0.5,
-            background: "black"
-        },
-        show: {
-            effect: 'fade',
-            duration: 1000
-        },
-        hide: {
-            effect: 'fade',
-            duration: 1000
-        },
-        open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-    });
-
+  
     User_Porteria = ConsultaParametrosURL();
     transaccionAjax_MPersonas('MATRIX_PERSONAS');
     transaccionAjax_MDocWork('MATIRXDOC_WORK');
@@ -137,14 +117,6 @@ $(document).ready(function () {
     Capture_Tarjeta_ID();
     $("#TxtIDTarjeta").focus();
 });
-
-function OpenControl() {
-    $("#Dialog_Control").dialog("open");
-    $("#Dialog_Control").dialog("option", "title", "Procesando información espere un momento...");
-}
-function CloseControl() {
-    $("#Dialog_Control").dialog("close");
-}
 
 
 
