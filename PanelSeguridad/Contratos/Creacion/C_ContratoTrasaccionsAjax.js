@@ -155,7 +155,9 @@ function transacionAjax_ShearchPeople(State, TD, D, NIT, Vista, Variable) {
         },
         error: function () {
 
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     });
 }
 
@@ -849,16 +851,20 @@ function transacionAjax_Consult_Activos_existe(State, index_NIT_ID, Ref_1, Ref_2
 
                         if (json_V == 0) {
                             Mensaje_General("¡Activo Agregado - Vehículo!", "Se ha agregado el Activo correctamente.", "S");
-                            ArrayTodasFacturas.push(ArrayFactura);
+                            if (ArrayFactura.length > 0) {
+                                ArrayTodasFacturas.push(ArrayFactura);
+                            }
                             Clear_Limpiar(); /*C_Contrato_activos.js*/
                             Clear_Consulta_Fasecolda(); /*C_Contrato_activos.js*/
                         } else {
-                            Mensaje_General("¡Error Vehículo!", "Lo sentimos, se produjo un error al guardar el nuevo vehículo. Para mayor información revisar el log.", "E");
+                            Mensaje_General("¡Error Vehículo!", "Lo sentimos, se produjo un error al guardar el nuevo vehículo. Para mayor información revisar el log (F12 - Console).", "E");
                         }
 
                     } else {
                         Mensaje_General("¡Activo Agregado!", "Se ha agregado el Activo correctamente.", "S");
-                        ArrayTodasFacturas.push(ArrayFactura);
+                        if (ArrayFactura.length > 0) {
+                            ArrayTodasFacturas.push(ArrayFactura);
+                        }
                         Clear_Limpiar(); /*C_Contrato_activos.js*/
                         Clear_Consulta_Fasecolda(); /*C_Contrato_activos.js*/
                     }
@@ -888,7 +894,7 @@ function transacionAjax_Consult_Activos_existe(State, index_NIT_ID, Ref_1, Ref_2
                     //--
                 }
                 else {
-                    Mensaje_General("¡Error Activo!", "Lo sentimos, se produjo un error al guardar el nuevo activo.  Para mayor información revisar el log.", "E");
+                    Mensaje_General("¡Error Activo!", "Lo sentimos, se produjo un error al guardar el nuevo activo.  Para mayor información revisar el log (F12 - Console).", "E");
                 }
             } else {
                 Mensaje_General("¡Activo Repetido!", "El activo que desea ingresar ya se encuentra registrado en el sistema.", "W");

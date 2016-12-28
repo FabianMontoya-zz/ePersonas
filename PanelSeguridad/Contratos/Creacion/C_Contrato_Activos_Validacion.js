@@ -24,6 +24,8 @@ var Nivel_Blin = 0;
 var TDoc_Not = 0;
 var Doc_Not = 0;
 var N_Notaria = 0;
+var Num_Poliza = "";
+
 
 /*--------------- region de variables globales --------------------*/
 

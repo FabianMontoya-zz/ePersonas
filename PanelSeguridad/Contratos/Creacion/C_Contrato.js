@@ -54,13 +54,13 @@ var ContTerceros = 0;
 $(document).ready(function () {
     /*Funciones para configuración inicial de campos en vista*/
     VentanasEmergentes();
-    
+
     Ocultar_IMGS_Errores();
     Picker_Fechas();
     CargarAcordeons();
-    AgregarTablas();    
+    AgregarTablas();
     /*=====================================*/
-    
+
     $("#Marco_trabajo_Contrato").css("height", "440px");
     $("#Marco_trabajo_Contrato").css("width", "95%");
 
@@ -73,7 +73,7 @@ $(document).ready(function () {
     transacionAjax_Financiacion('MATRIX_FINANCIACION');
     transaccionAjax_MTasas('MATRIX_TASAS');
 
-    
+
 
     $("#Select_Base_Calculo").prop('disabled', true); //Desactivamos el Chosen
 
@@ -97,7 +97,7 @@ $(document).ready(function () {
     ReCalcularTasas("TXT_Puntos_Adicionales");
     Date_Document();
     Date_Document2();
-   
+
 });
 
 //Ocultamos las imagenes de error al iniciar la pantalla
@@ -163,7 +163,7 @@ function AgregarTablas() {
     $("#T_Factura_Grid").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,
         "bDestroy": true
-    });    
+    });
 }
 
 //Función que contiene las propiedades para las ventanas emergentes
@@ -279,6 +279,10 @@ function ValidaCamposPeople() {
 //valida campos de documentos para buscar persona en agregar terceros
 function ValidaCamposPeople2() {
     var valida = 0;
+
+    var C_TD_1 = $("#Select_Documento_C").val();
+    var C_D_1 = $("#TxtDoc_C").val();
+
     var C_TD = $("#Select_Documento_C2").val();
     var C_D = $("#TxtDoc_C2").val();
 
@@ -297,6 +301,10 @@ function ValidaCamposPeople2() {
             $("#Img_D_C2").css("display", "none");
         }
 
+    } else if (C_TD_1 == C_TD && C_D_1 == C_D) {
+        $("#Img_TD_C2").css("display", "inline-table");
+        $("#Img_D_C2").css("display", "inline-table");
+        valida = 2;
     }
     else {
         $("#Img_TD_C2").css("display", "none");
@@ -312,8 +320,8 @@ function ValidarIDColocacion_T() {
     var NIT = $("#Select_EmpresaNit").val();
     var ID_Colocacion = $("#TXT_ID_Colocacion").val();
 
-    if (NIT == "-1" || NIT == null || ID_Colocacion == "" || ID_Colocacion == null) {
-        Mensaje_General("¡Campos Incompletos!", "Los campos [NIT Empresa] y [Número de Colocación] son obligatorios para poder agregar una persona.", "E");
+    if (NIT == "-1" || NIT == null || ID_Colocacion == "" || ID_Colocacion == null || Persona1 == false) {
+        Mensaje_General("¡Campos Incompletos!", "Debe completar los campos [NIT Empresa], [Número de Colocación] y relacionar una persona existente para poder agregar una tercero.", "E");
 
         if (NIT == "-1" || NIT == null) {
             $("#Img1").css("display", "inline-table");
@@ -323,9 +331,16 @@ function ValidarIDColocacion_T() {
             $("#Img2").css("display", "inline-table");
         }
 
+        if (Persona1 == false) {
+            $("#Img_D_C").css("display", "inline-table");
+            $("#Img_TD_C").css("display", "inline-table");
+        }
+
     } else {
         $("#Img2").css("display", "none");
         $("#Img1").css("display", "none");
+        $("#Img_D_C").css("display", "none");
+        $("#Img_TD_C").css("display", "none");
         Add_Terceros();
     }
 }
@@ -423,11 +438,12 @@ function Change_Select_Nit() {
         Charge_Combos_Depend_Nit(Matrix_Sucursal, "Select_Sucursal", index_NIT_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Personas, "Select_Persona_A", index_NIT_ID, "");
         /*============*/
-        /*Escritura de L_Tasa_Mora*/
-        $("#L_Tasa_Mora").html(TasaMora);
 
-        /*Escritura de L_Tasa_Usura*/
-        $("#L_Tasa_Usura").html(TasaUsura);
+        /*Escritura de L_Mora_ID y L_Mora_Magnitud*/
+        TasaMora();
+
+        /*Escritura de L_Usura_ID y L_Usura_Magnitud*/
+        TasaUsura();
     });
 }
 
@@ -471,8 +487,10 @@ function Date_Document2() {
         var valida_people = ValidaCamposPeople2();
         if (valida_people == 1) {
             Mensaje_General("¡Campos Incompletos!", "Los campos [Documento] e [Identificación] deben ser diligenciados para consultar la persona.", "E");
+        } else if (valida_people == 2) {
+            Mensaje_General("¡Persona no permitida!", "No puedes agregar a la misma persona que es titular del crédito.", "E");
         }
-        else {
+        else if (valida_people == 0) {
             var C_TD = $("#Select_Documento_C2").val();
             var C_D = $("#TxtDoc_C2").val();
             var Nit = $("#Select_EmpresaNit").val();
@@ -677,7 +695,7 @@ function Change_Select_Condicion_Financiacion() {
         /*Si hay puntos adicionales los escribimos en el TXT, sino, dejamos en blanco*/
         if (numero == 0) {
             $("#TXT_Puntos_Adicionales").val(""); /*Dejamos en blanco si no hay puntos adicionales*/
-            escribirTasas(TNbase, TEbase); //Cómo no hay puntos adicionales no recalculamos las Tasas
+            PuntosAdicionales_Tasas(TNbase, numero); //Calculamos la TE siempre, haya o no puntos adicionales
         } else {
             numero = LlenarCeros(numero, 4);
             $("#TXT_Puntos_Adicionales").val(numero); /*Escribimos los puntos adicionales que trae la financiacion seleccionada*/
@@ -990,6 +1008,9 @@ function Clear() {
     $("#TXT_Descripcion").val("");
     $("#Select_Documento_C").val("-1").trigger("chosen:updated");
 
+    $("#Select_Documento_C").prop('disabled', true);
+    $("#TxtDoc_C").prop('disabled', true);
+
     $("#TxtDoc_C").val("");
     $("#V_Persona").html("");
     $("#Select_Moneda_C").val("-1").trigger("chosen:updated");
@@ -1030,8 +1051,10 @@ function Clear() {
     $("#TXT_Puntos_Adicionales").val("");
     $("#L_Equivalencia_Efectiva").html("");
     $("#L_Nominal_Actual").html("");
-    $("#L_Tasa_Mora").html("");
-    $("#L_Tasa_Usura").html("");
+    $("#L_Mora_ID").html("");
+    $("#L_Mora_Magnitud").html("");
+    $("#L_Usura_ID").html("");
+    $("#L_Usura_Magnitud").html("");
 
     /*Reiniciamos la tabla de activos*/
     AddArrayActivosToTable();
@@ -1053,8 +1076,13 @@ function Add_Activos(index) {
 }
 
 function Add_Terceros(index) {
+
+    $("#Select_Documento_C").prop('disabled', true).trigger("chosen:updated");;
+    $("#TxtDoc_C").prop('disabled', true);
+
     $("#Dialog_Terceros").dialog("open");
     $("#Dialog_Terceros").dialog("option", "title", "Agregar Persona");
+    
     ClearTerceros();
     Table_Terceros();
 }
@@ -1073,7 +1101,7 @@ function BTNAgregarTercero() {
             }
 
         } else {
-            Mensaje_General("¡Datos Incompletos!", "No puedes ingresar una persona que no esté registrada en el sistema.", "W");
+            Mensaje_General("¡Datos Incompletos!", "No puedes ingresar una persona que no esté autorizada por el sistema.", "W");
             $("#Img_D_C2").css("display", "inline-table");
             $("#Img_TD_C2").css("display", "inline-table");
         }
@@ -1159,13 +1187,18 @@ function Eliminar_Activo_Array() {
                 ArrayVehiculos.splice(indexActivos, 1);
             }
 
+
             for (itemArray in ArrayTodasFacturas) {
-                for (item2 in ArrayTodasFacturas[itemArray]) {                    
-                    if (ArrayTodasFacturas[itemArray][item2].Ref_1 == ArrayActivos[item].Ref_1 && ArrayTodasFacturas[itemArray][item2].Ref_2 == ArrayActivos[item].Ref_2 && ArrayTodasFacturas[itemArray][item2].Ref_3 == ArrayActivos[item].Ref_3) {
-                        ArrayTodasFacturas.splice(itemArray, 1); //Borramos todas las facturas asociadas al activo
+                if (ArrayTodasFacturas.length > 0) { //Si hay facturas recorremos
+                    for (item2 in ArrayTodasFacturas[itemArray]) {
+                        if (ArrayTodasFacturas[itemArray][item2].Ref_1 == ArrayActivos[item].Ref_1 && ArrayTodasFacturas[itemArray][item2].Ref_2 == ArrayActivos[item].Ref_2 && ArrayTodasFacturas[itemArray][item2].Ref_3 == ArrayActivos[item].Ref_3) {
+                            ArrayTodasFacturas.splice(itemArray, 1); //Borramos todas las facturas asociadas al activo
+                            break; //Ya que encontró se detiene el ciclo
+                        }
                     }
                 }
             }
+
 
             ArrayActivos.splice(item, 1); //Borramos el activo
         }
@@ -1252,9 +1285,11 @@ function TasaUsura() {
 
     id = Matrix_Tasas[1].Codigo_ID.toString();
     num = Matrix_Tasas[1].Equivalencia_Efectiva.toString();
-    valor = id + " - " + num + "%";
+    valorID = "Código:   " + id;
+    valornum = "Magnitud:   " + num + "%";
 
-    return valor;
+    $("#L_Usura_ID").html(valorID);
+    $("#L_Usura_Magnitud").html(valornum);
 }
 
 function TasaMora() {
@@ -1264,9 +1299,11 @@ function TasaMora() {
 
     id = Matrix_Tasas[0].Codigo_ID.toString();
     num = Matrix_Tasas[0].Equivalencia_Efectiva.toString();
-    valor = id + " - " + num + "%";
+    valorID = "Código:   " + id;
+    valornum = "Magnitud:   " + num + "%";
 
-    return valor;
+    $("#L_Mora_ID").html(valorID);
+    $("#L_Mora_Magnitud").html(valornum);
 }
 
 function LlenarCeros(valor, longitud) {
@@ -1295,7 +1332,7 @@ function SumarValores(VS, Obj_Vista) {
 
     Valor_Total = TotalActivos;
     if (TotalActivos == 0) {
-        $("#" + Obj_Vista).html("0");        
+        $("#" + Obj_Vista).html("0");
     } else {
         $("#" + Obj_Vista).html(dinner_format_grid(Valor_Total, ""));
     }
@@ -1303,7 +1340,7 @@ function SumarValores(VS, Obj_Vista) {
 
 //operacion de resta en totalidad de grid
 function RestarValores(VR, Obj_Vista) {
-    
+
     TotalActivos = parseInt(TotalActivos) - parseInt(VR);
 
     Valor_Total = TotalActivos;

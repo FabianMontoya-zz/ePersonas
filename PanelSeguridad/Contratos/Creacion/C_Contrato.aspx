@@ -394,11 +394,11 @@
                                 </select>
                             </td>
                             <td style="width: 4%; padding-left: 10px;">
-                                <span class="cssToolTip_Form">
+                                <span class="cssToolTip_Form_L">
                                     <input style="width: 100%;" type="text" id="TXT_Puntos_Adicionales" maxlength="7" class="Decimal" />
                                     <span class="Spam_ADec"></span></span>
                             </td>
-                            <td style="width: 4.5%;"></td>
+                            <td class="Label_Bold" style="width: 4.5%; padding-left: 10px;">%</td>
                         </tr>
                     </table>
                     <table id="T_Equivalencia_Nominal">
@@ -412,17 +412,40 @@
                             <td style="padding-bottom: 25px; width: 40%;"></td>
                         </tr>
                     </table>
+                    <hr />
                     <table id="T_Tasas" style="width: 100%">
                         <tr>
-                            <td class="Label_Bold" style="width: 11.5%;">Tasa de Mora</td>
-                            <td id="L_Tasa_Mora" class="Label_Bold" style="width: 10%;"></td>
-                            <td style="padding-bottom: 25px; width: 26%;"></td>
-
-                            <td class="Label_Bold" style="width: 10.2%;">Tasa de Usura</td>
-                            <td id="L_Tasa_Usura" class="Label_Bold" style="width: 15%;"></td>
-                            <td style="padding-bottom: 25px; width: 40%;"></td>
+                            <td>
+                                <center>
+                                    <table id="T_TasaMora" style="width: 40%">
+                                        <tr>
+                                            <td class="Label_Bold" style="width: 11.5%;" rowspan="2">Tasa de Mora</td>
+                                            <td id="L_Mora_ID" class="Label_Bold" style="width: 10%;"></td>
+                                            <!--<td style="width: 25%;" rowspan="2"></td> -->
+                                        </tr>
+                                        <tr>
+                                            <td class="Label_Bold" id="L_Mora_Magnitud" style="width: 40%;">asd</td>
+                                        </tr>
+                                    </table>
+                                </center>
+                            </td>
+                            <td>
+                                <center>
+                                    <table id="T_TasaUsura" style="width: 80%">
+                                        <tr>
+                                            <td class="Label_Bold" style="width: 4%;" rowspan="2">Tasa de Usura</td>
+                                            <td id="L_Usura_ID" class="Label_Bold" style="width: 15%;"></td>
+                                            <!--<td style="width: 35%;" rowspan="2"></td> -->
+                                        </tr>
+                                        <tr>
+                                            <td class="Label_Bold" id="L_Usura_Magnitud" style="width: 40%;">asd</td>
+                                        </tr>
+                                    </table>
+                                </center>
+                            </td>
                         </tr>
                     </table>
+
                 </div>
                 <h3>Añadir Activos
                 </h3>
@@ -806,7 +829,7 @@
             </table>
         </div>
         <div id="Div_BTN_AgregarTercero" style="width: 100%; text-align: center; margin-top: 11px;">
-            <input id="BTN_AgregarTercero" type="button" value="Guardar" onclick="BTNAgregarTercero();" />
+            <input id="BTN_AgregarTercero" type="button" value="Adicionar Inf." onclick="BTNAgregarTercero();" />
         </div>
     </div>
 
@@ -1634,7 +1657,7 @@
                     </tr>
                 </table>
                 <div id="Div_BTN_AgregarActivo" style="width: 100%; text-align: center; margin-top: 25px;">
-                    <input id="BTN_AgregarActivo" type="button" value="Guardar" onclick="BtnCrear_Act();" />
+                    <input id="BTN_AgregarActivo" type="button" value="Adicionar Inf." onclick="BtnCrear_Act();" />
                 </div>
             </div>
         </div>
