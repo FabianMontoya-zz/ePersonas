@@ -61,8 +61,11 @@ $(document).ready(function () {
 
     $("#Bloque_datosIngreso").css("display", "none");
 
+    $("#Seg_1").css("display", "none"); //imagen de validacion de poliza
+
     $("#Tabla_LLave_Inmueble").css("display", "none");
     $("#Tabla_LLave_Vehiculos").css("display", "inline-table");
+    $("#Tabla_poliza").css("display", "none");
     $("#Txtkey_1").html("C. Identificación");
 
     $("#Dialog_Format_Adress").dialog({
@@ -108,6 +111,7 @@ $(document).ready(function () {
     Change_Select_blindaje();
     Change_Select_Modelo();
     Change_Select_Linea();
+    Change_Seguro();
 
     Picker_Fechas_A();
 
@@ -117,6 +121,9 @@ $(document).ready(function () {
     $("#Select_Sucursal").prop('disabled', true);
     $("#Select_Moneda").prop('disabled', true);
     Cargue_Depent_Modelo();
+    Compara_Valor_Compra("TxtValor_Bien", "Val", "TxtValor_Compra", "Val", "TxtValor_Compra", "Compra", "Bien", "Blur");
+    Compara_Valor_Compra("Txt_ValFactura", "Val", "Text_Val_Sin_IVA", "Val", "Text_Val_Sin_IVA", "sin IVA", " Total", "Blur");
+
 });
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -128,6 +135,7 @@ function BtnBuscarFacecolda() {
 
     if ($("#Btn_ShearchFacecolda").val() == "Nueva Consulta") {
         $("#Btn_ShearchFacecolda").attr("value", "Consulta Facecolda");
+        $("#Cambio_modelo").css("width", "29%");
         Clear_Ima_F();
         Enable_Consult_Fasecolda();
         Clear_Consulta_Fasecolda();
@@ -412,6 +420,12 @@ function Clear_Limpiar() {
 
     $("#Blo_Inmuebles").css("display", "none");
     $("#Blo_Fasecolda").css("display", "none");
+
+    $("#Text_Num_Notaria").val("");
+    $("#Txt_Num_poliza").val("");
+    $("#Tabla_poliza").css("display", "none");
+    Suma_Valor_Inicial = 0;
+
     $("#Bloque_datosIngreso").css("display", "none");
 
     $('.C_Chosen').trigger('chosen:updated');
@@ -499,6 +513,7 @@ function Clear_Ima_K() {
 function Clear_Ima_I() {
     $("#Inmu_1").css("display", "none");
     $("#Inmu_2").css("display", "none");
+    $("#Inmu_3").css("display", "none");
 }
 
 //limpiar Imagenes blindaje

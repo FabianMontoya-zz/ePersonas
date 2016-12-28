@@ -500,7 +500,7 @@
                                             </td>
                                         </tr>
                                     </table>
-                                    <div style="width: 100%; text-align: center; margin-top: 25px;">
+                                    <div id="DIV_Buscar_FASECOLDA" style="width: 100%; text-align: center; margin-top: 25px;">
                                         <input id="Btn_ShearchFacecolda" type="button" style="width: 18%;" value="Consulta Facecolda" onclick="BtnBuscarFacecolda();" />
                                     </div>
                                     <div id="Bloque_datosIngreso">

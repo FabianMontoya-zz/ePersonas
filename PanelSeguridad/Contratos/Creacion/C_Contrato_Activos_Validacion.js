@@ -21,6 +21,10 @@ var TDoc_Blin = 0;
 var Doc_Blin = 0;
 var Nivel_Blin = 0;
 
+var TDoc_Not = 0;
+var Doc_Not = 0;
+var N_Notaria = 0;
+
 /*--------------- region de variables globales --------------------*/
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -144,6 +148,9 @@ function ValidaCampos_InsertBD_Activos() {
     if ($("#Select_Pais_R").val() != "-1")
         Pais_R = $("#Select_Pais_R").val();
 
+    if ($("#Txt_Num_poliza").val() != "")
+        Num_Poliza = $("#Txt_Num_poliza").val();
+
     switch ($("#Select_Ciudad_R").val()) {
         case "-1":
             Ciudad_R = 0;
@@ -168,6 +175,16 @@ function ValidaCampos_InsertBD_Activos() {
         T_Doc_R = SplitCR[1];
         Doc_R = SplitCR[0];
     }
+
+    //if ($("#Select_Notaria_R").val() != "-1") {
+    //    var Str_C_N = $("#Select_Notaria_R option:selected").html();
+    //    var SplitCN = Str_C_N.split(" - ");
+    //    TDoc_Not = SplitCN[1];
+    //    Doc_Not = SplitCN[0];
+    //}
+
+    if ($("#Text_Num_Notaria").val() != "")
+        N_Notaria = $("#Text_Num_Notaria").val();
 
     if ($("#TxtValor_Bien").val() != "")
         Valor_Bien = F_NumericBD($("#TxtValor_Bien").val());
@@ -237,7 +254,12 @@ function ValidarActivoArray(REF1, REF2, REF3) {
 //valida fase de guardado
 function ValidarGuardado() {
 
+    var valida_Poliza;
+    var valida_Vehiculo;
+    var valida_facturas;
+    var valida_inmueble;
     var Valida_Campos_Op;
+
     var C_Generales = V_Campos_Generales();
 
     switch (C_Generales) {
@@ -251,17 +273,37 @@ function ValidarGuardado() {
                 case 0: //activo default
                     Valida_Campos_Op = V_Campos_K("D");
                     if (Valida_Campos_Op == 1)
-                        Mensaje_General("Campo llave Incompleto!", "Debe diligenciar el Campo (C. Identificación)", "E");
+                        Mensaje_General("Campo llave Incompleto!", "Debe diligenciar el Campo (C. Identificación)", "W");
                     break;
 
                 case 1: //activo inmueble
-                    Valida_Campos_Op = V_Campos_Immuebles();
+                    valida_inmueble = V_Campos_Immuebles();
                     break;
 
                 case 2: //activo automovil
-                    Valida_Campos_Op = V_Campos_Vehiculos();
+                    valida_Vehiculo = V_Campos_Vehiculos();
                     break;
             }
+
+            //validamos si tiene seguro y poliza
+            if (Opcion_Asegurado == "S")
+                valida_Poliza = V_Campo_Poliza();
+            else
+                valida_Poliza = 0;
+
+            //validamos valor de la factura
+            if (ArrayFactura.length != 0)
+                valida_facturas = Compara_Valor_Compra("TxtValor_Compra", "Val", "V_TFacturas", "html", "X", "Sumatoria Facturas", "Compra", "Enter");
+
+            //validamos las opciones
+            if (valida_Poliza == 1 || valida_facturas == 1 || valida_Vehiculo == 1 || valida_inmueble == 1) {
+                Valida_Campos_Op = 1;
+
+                if (valida_Poliza == 1)
+                    Mensaje_General("Campo N° Poliza!", "Debe diligenciar el campo N° de Poliza si esta asegurado!", "W");
+            }
+            else
+                Valida_Campos_Op = 0;
             break;
     }
 
@@ -284,11 +326,11 @@ function V_Campos_Generales() {
     var Campo_G8 = $("#Select_Pais_U").val(); //Img_G5
     var Campo_G9 = $("#Select_Ciudad_U").val(); //Img_G6
     var Campo_G10 = $("#Txt_Adress_U").val(); //Img_G7
-   if (Campo_G2 == "-1" ||
-        Campo_G3 == "-1" || Campo_G4 == "-1" ||
-        Campo_G5 == "" || Campo_G6 == "" ||
-        Campo_G7 == "-1" || Campo_G8 == "-1" ||
-        Campo_G9 == "-1" || Campo_G10 == "") {
+    if (Campo_G2 == "-1" ||
+         Campo_G3 == "-1" || Campo_G4 == "-1" ||
+         Campo_G5 == "" || Campo_G6 == "" ||
+         Campo_G7 == "-1" || Campo_G8 == "-1" ||
+         Campo_G9 == "-1" || Campo_G10 == "") {
 
         validar = 1;
         if (Campo_G2 == "-1") { $("#Img_G1").css("display", "inline-table"); } else { $("#Img_G1").css("display", "none"); }
@@ -316,6 +358,24 @@ function V_Campos_Generales() {
     return validar;
 }
 
+// paso 2.1
+//validamos campos para la creacion del formulario 
+//dinamico(campo poliza)
+function V_Campo_Poliza() {
+    var validar = 0;
+
+    var Campo_S1 = $("#Txt_Num_poliza").val(); //Seg_1
+
+    if (Campo_S1 == "") {
+        validar = 1;
+        if (Campo_S1 == "") { $("#Seg_1").css("display", "inline-table"); } else { $("#Seg_1").css("display", "none"); }
+    }
+    else
+        $("#Seg_1").css("display", "none");
+
+    return validar;
+}
+
 // paso 3
 //valida campos referentes a los inmuebles
 //Obligatorios (Campos Inmuebles)
@@ -327,15 +387,18 @@ function V_Campos_Immuebles() {
 
     var Campo_In_1 = $("#Select_TipoEscritura").val(); //Inmu_1
     var Campo_In_2 = $("#Txt_NunImobiliaria").val(); //Inmu_2
+    var Campo_In_3 = $("#Text_Num_Notaria").val(); //Inmu_3
 
-    if (Campo_In_1 == "-1" || Campo_In_2 == "") {
+    if (Campo_In_1 == "-1" || Campo_In_2 == "" || Campo_In_3 == "") {
         validar_inmueble = 1;
         if (Campo_In_1 == "-1") { $("#Inmu_1").css("display", "inline-table"); } else { $("#Inmu_1").css("display", "none"); }
         if (Campo_In_2 == "") { $("#Inmu_2").css("display", "inline-table"); } else { $("#Inmu_2").css("display", "none"); }
+        if (Campo_In_3 == "") { $("#Inmu_3").css("display", "inline-table"); } else { $("#Inmu_3").css("display", "none"); }
     }
     else {
         $("#Inmu_1").css("display", "none");
         $("#Inmu_2").css("display", "none");
+        $("#Inmu_3").css("display", "none");
     }
 
     validar = Valida_Keys_Bloque("I", valida_llave, validar_inmueble, "");

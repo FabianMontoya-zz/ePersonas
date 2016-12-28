@@ -15,6 +15,8 @@ var Option_Blindaje = 0;
 var Nit_Proccess;
 var Fasecolda_ID = 0;
 var Index_ID_Fasecolda = 0;
+var Opcion_Asegurado = "N";
+
 
 /*--------------- region de variables globales --------------------*/
 
@@ -165,6 +167,20 @@ function Change_Select_TA() {
     });
 }
 
+//verifi campo seguro
+function Change_Seguro() {
+    $("#Select_Asegurado").change(function () {
+        Opcion_Asegurado = this.value;
+
+        if (Opcion_Asegurado == "S") {
+            $("#Tabla_poliza").css("display", "inline-table");
+        }
+        else {
+            $("#Tabla_poliza").css("display", "none");
+        }
+    });
+}
+
 //carga marca linea segun la marca escogida 
 function Change_Select_Marca() {
     $("#Select_MarcaF").change(function () {
@@ -216,6 +232,8 @@ function Change_Select_Linea() {
 
 //construye y llama la funcion de cargar el drop list modelo
 function Crear_Rango_modelo(Matrix, Index_ID, Proccess) {
+
+    $("#Cambio_modelo").css("width", "33%");
 
     if (Proccess == "Matrix")
         Index_ID = Index_ID - 1;

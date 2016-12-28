@@ -670,6 +670,10 @@ Public Class C_ContratoAjax
             Obj.TipoAdministracion = item.TipoAdministracion
             Obj.TipoEscritura = item.TipoEscritura
             Obj.N_Escritura = item.N_Escritura
+            Obj.TypeDocument_ID_Not = item.TypeDocument_ID_Not
+            Obj.Document_ID_Not = item.Document_ID_Not
+            Obj.Num_Poliza = item.Num_Poliza
+            Obj.N_Notaria = item.N_Notaria
             Obj.FechaConta_Recibo = item.FechaConta_Recibo
             Obj.FechaConta_Retiro = item.FechaConta_Retiro
             Obj.TypeDocument_ID_T = item.TypeDocument_ID_T
