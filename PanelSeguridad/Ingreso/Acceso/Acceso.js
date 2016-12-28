@@ -35,11 +35,8 @@ var editDocID;
 
 //Evento load JS
 $(document).ready(function () {
-
-    var w = $(window).width();
-    var h = $(window).height();
-
-  
+    Load_Charge_Sasif();
+      
     User_Porteria = ConsultaParametrosURL();
     transaccionAjax_MPersonas('MATRIX_PERSONAS');
     transaccionAjax_MDocWork('MATIRXDOC_WORK');

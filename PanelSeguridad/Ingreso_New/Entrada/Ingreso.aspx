@@ -48,7 +48,7 @@
                 <div id="Acordeon_Ingreso" style="width: 100%;">
                     <h3>Ingreso
                     </h3>
-                    <div id="DatosPrincipal" style="height: 200px;">
+                    <div id="DatosPrincipal" style="height: 300px;">
                         <table id="Tabla_Captura" style="width: 100%; text-align: left;">
                             <tr>
                                 <td style="width: 3%;" class="Label_Bold">Tarjeta

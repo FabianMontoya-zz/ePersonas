@@ -32,6 +32,60 @@ function transacionAjax_Documento(State) {
     });
 }
 
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_Door_Access(State) {
+    var List_Puerta_Acceso = [];
+
+    $.ajax({
+        url: "IngresoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "NIT": Nit_ID_Proccess
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                List_Puerta_Acceso = [];
+            }
+            else {
+                List_Puerta_Acceso = JSON.parse(result);
+                Charge_Combos_Depend_Nit(List_Puerta_Acceso, "Select_PAcceso", Nit_ID_Proccess, "");
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_Door_Access_Area(State) {
+    $.ajax({
+        url: "IngresoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "NIT": Nit_ID_Proccess
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                List_PAcceso_Area = [];
+            }
+            else {
+                List_PAcceso_Area = JSON.parse(result);
+              }
+        },
+        error: function () {
+        }
+    });
+}
+
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                          CONSULTAS EN PROCESO                                                                                                                ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/

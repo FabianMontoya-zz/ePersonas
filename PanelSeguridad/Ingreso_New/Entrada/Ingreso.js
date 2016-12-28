@@ -6,6 +6,10 @@ var Array_InfDoc_Empresa = [];
 var Array_Doc_Persona = [];
 var Array_Doc_Empresa = [];
 var Array_Valida_Ingreso = [];
+
+var List_PAcceso_Area = [];
+
+
 var Tabla_Persona = 0;
 var Tabla_Empresa = 0;
 var GrpDoc_Persona;
@@ -301,22 +305,18 @@ function valida_GrpDoc() {
 
 }
 
-
-
 //revisamos ingreso segun documentos solicitados
 function ValidaAccesoPrincipal() {
     var contador_semaforo = 0;
 
-    for (item in Matrix_Valida_Ingreso) {
-        contador_semaforo = contador_semaforo + parseInt(Matrix_Valida_Ingreso[item].Estado_Doc);
-        if (Matrix_Valida_Ingreso[item].Estado_Doc >= 1) {
-            ConstruyeMensaje(Matrix_Valida_Ingreso[item].Document, Matrix_Valida_Ingreso[item].Existe, Matrix_Valida_Ingreso[item].Verificado, Matrix_Valida_Ingreso[item].Vigencia);
+    for (item in Array_Valida_Ingreso) {
+        contador_semaforo = contador_semaforo + parseInt(Array_Valida_Ingreso[item].Estado_Doc);
+        if (Array_Valida_Ingreso[item].Estado_Doc >= 1) {
+            ConstruyeMensaje(Array_Valida_Ingreso[item].Document, Array_Valida_Ingreso[item].Existe, Array_Valida_Ingreso[item].Verificado, Array_Valida_Ingreso[item].Vigencia);
         }
     }
     return contador_semaforo;
 }
-
-
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                              PROCESO DE CARGUE GRID PAGINA DE ACCESO                                                                             ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -352,7 +352,7 @@ function SearchFoto() {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                  TABLA DE DOCUMENTOS PERSONA EMPRESA                                                                                  ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-// crea la tabla en el cliente
+// crea la tabla  grid documentos empresas requeridos
 function Grid_Doc_People_Business(Matrix, Val_GrpDoc, Type) {
     var html_DP;
 
@@ -549,94 +549,36 @@ function Paint_Grid_Docs() {
     if (Tabla_Persona == 1 && Tabla_Empresa == 1) {
         Grid_Doc_People_Business(Array_InfDoc_Persona, GrpDoc_Persona, 'Empleado');
         Grid_Doc_People_Business(Array_InfDoc_Empresa, Array_InfDoc_Empresa[0].GrpDocumentos_ID, "Empresa");
-    }
-}
 
-
-
-
-
-//buscar persona en la matrix
-function SearchPersona() {
-    $("#Btnguardar").attr("value", "Nueva Consulta");
-    var TDoc = $("#Select_Documento").val();
-    var Doc = $("#TxtDoc").val();
-    var Exist = 0;
-
-    for (item in Matrix_Persona) {
-        if (TDoc == Matrix_Persona[item].TypeDocument_ID &&
-             Doc == Matrix_Persona[item].Document_ID) {
-
-            Exist = 1;
-
-            Nit_ID_Proccess = Matrix_Persona[item].Nit_ID;
-            GrpDoc = Matrix_Persona[item].GrpDocumentos;
-            $("#L_Nombre").html(Matrix_Persona[item].Nombre);
-            $("#L_Empresa").html(Matrix_Persona[item].DescripEmpresa);
-            $("#L_Area").html(Matrix_Persona[item].DescripArea);
-            $("#L_Cargo").html(Matrix_Persona[item].DescripCargo);
-
-
-            switch (GrpDoc) {
-                case 0:
-                    Mensaje_General("Proceso Imcompleto", "La persona no tiene (Grupo de Documentos) asignados, comuniquese con el administrador del sistema!", "E");
-                    break;
-                default:
-                    HabilitaCombosIngreso();
-
-                    TDoc_VT = TDoc;
-                    Doc_VT = Doc;
-
-                    VerificacionTarjeta(Matrix_Persona[item].Nombre, Matrix_Persona[item].EstadoTarjeta, Matrix_Persona[item].CheckVigencia_Tarjeta, Matrix_Persona[item].FechaVencimientoTarjeta, Matrix_Persona[item].DescripMotivoBloqueo, "D");
-                         break;
-            }
-            break;
+        var Semaforo_P = ValidaAccesoPrincipal();
+        switch (Semaforo_P) {
+            case 0:
+                $("#Sucess").css("display", "inline-table");
+                $("#Fail").css("display", "none");
+                $("#TI_2").css("display", "inline-table");
+                $("#TI_3").css("display", "inline-table");
+                transaccionAjax_Door_Access("Lista_Puerta_Acceso");
+                transaccionAjax_Door_Access_Area('Lista_Puerta_Acceso_Area');
+                CargaComboAreas();
+                //Tabla_AccesosPredeterminados();
+                break;
+            default:
+                $("#Sucess").css("display", "none");
+                $("#Fail").css("display", "inline-table");
+                break;
         }
     }
-    return Exist;
 }
 
-//buscar datos de la empresa del empleado
-function SearchEmpresa() {
-    var TDoc;
-    var GrpDoc;
-    var L_Nit = Nit_ID_Proccess.length;
-    var Nit_Emp = Nit_ID_Proccess.substring(0, parseInt(L_Nit) - 1);
-
-    for (item in Matrix_Persona) {
-        if (Nit_ID_Proccess == Matrix_Persona[item].Nit_ID &&
-             Nit_Emp == Matrix_Persona[item].Document_ID) {
-
-            GrpDoc = Matrix_Persona[item].GrpDocumentos;
-            TDoc = Matrix_Persona[item].TypeDocument_ID;
-
-            switch (GrpDoc) {
-                case 0:
-                    Mensaje_General("Proceso Imcompleto", "La Empresa de la persona no tiene (Grupo de Documentos) asignados, comuniquese con el administrador del sistema!", "E");
-                    break;
-                default:
-                    Tabla_Docs(Nit_ID_Proccess, TDoc, Nit_Emp, GrpDoc, "Empresa");
-                    break;
-            }
-            break;
-        }
-    }
-
-    var Semaforo_P = ValidaAccesoPrincipal();
-    switch (Semaforo_P) {
-        case 0:
-            $("#Sucess").css("display", "inline-table");
-            $("#Fail").css("display", "none");
-            $("#Inf_Ingreso").css("display", "inline-table");
-            Tabla_AccesosPredeterminados();
-            break;
-        default:
-            $("#Sucess").css("display", "none");
-            $("#Fail").css("display", "inline-table");
-            break;
-    }
-
+//carga combo dependiente de pertas de acceso
+function CargaComboAreas() {
+    $("#Select_PAcceso").change(function () {
+        var index_ID = $(this).val();
+        Charge_Combos_Depend_Nit(List_PAcceso_Area, "Select_AreaAcceso", index_ID, "");
+    });
 }
+
+
 
 
 
@@ -682,6 +624,7 @@ function ConstruyeMensaje(Doc, Existe, Verificado, Vigencia) {
     }
     $("#Spam_Mensaje").html(Mensaje_Semaforo);
 }
+
 
 //limpiar pagina para nueva consulta
 function Clear() {

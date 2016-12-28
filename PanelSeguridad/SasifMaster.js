@@ -4,6 +4,8 @@ var Link;
 var NameTemporal;
 var Doc_name;
 var Matrix_Mes = [];
+var Array_G_Usuario = [];
+
 var Control_Work;
 var Suma_Valor_Inicial = 0;
 

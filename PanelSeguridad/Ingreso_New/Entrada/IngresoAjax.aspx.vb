@@ -31,23 +31,25 @@ Public Class IngresoAjax
                 Case "Traer_Doc_Empresa"
                     List_Doc_Empresa()
 
+                Case "Lista_Puerta_Acceso"
+                    List_Puerta_Acceso()
+
+                Case "Lista_Puerta_Acceso_Area"
+                    List_PuertaAccesos_Area()
+
 
 
                 Case "MATRIX_ACCESOPREDETER"
                     Cargar_Matrix_AccesoPredeterminado()
 
-                Case "MATRIX_PACCESO"
-                    Cargar_MatrixPAcceso()
-
+                
                 Case "MATRIX_AREA"
                     Cargar_MatrixArea()
 
                 Case "MATRIX_PERSONA"
                     CargarMPersonaDep()
 
-                Case "MATRIX_PACCESO_AREA"
-                    CargarMPAccesos_Area()
-
+               
                 Case "MATRIX_PERSONA_INGRESA"
                     CargaDatosEmpresaEmpleado()
 
@@ -159,33 +161,9 @@ Public Class IngresoAjax
 
     End Sub
 
-    ''' <summary>
-    ''' funcion que carga el objeto DDL consulta
-    ''' </summary>
-    ''' <remarks></remarks>
-    Protected Sub Cargar_MatrixPAcceso()
+ 
 
-        Dim SQL As New PuertaAccesoSQLClass
-        Dim ObjList As New List(Of PuertaAccesoClass)
-
-        ObjList = SQL.Matrix_PuertaAcceso()
-        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
-
-    End Sub
-
-    ''' <summary>
-    ''' funcion que carga el objeto DDL consulta
-    ''' </summary>
-    ''' <remarks></remarks>
-    Protected Sub CargarMPAccesos_Area()
-
-        Dim SQL As New R_PuertaAcc_AreaSQLClass
-        Dim ObjList As New List(Of R_PuertaAcc_AreaClass)
-
-        ObjList = SQL.Matrix_R_PuertaAcceso_Area()
-        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
-
-    End Sub
+  
 
     ''' <summary>
     ''' cara la matriz de documento para trabajo
@@ -362,6 +340,38 @@ Public Class IngresoAjax
         Obj.TipoSQL = Request.Form("TipoSQL")
 
         ObjList = SQL.List_Document_Work(Obj)
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' trea la lista puertas de acceso area 
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub List_Puerta_Acceso()
+
+        Dim SQL As New PuertaAccesoSQLClass
+        Dim ObjList As New List(Of PuertaAccesoClass)
+
+        Dim vl_S_Nit_ID As String = Request.Form("NIT")
+
+        ObjList = SQL.List_PuertaAcceso(vl_S_Nit_ID)
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' trea la lista puertas de acceso area 
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub List_PuertaAccesos_Area()
+
+        Dim SQL As New R_PuertaAcc_AreaSQLClass
+        Dim ObjList As New List(Of R_PuertaAcc_AreaClass)
+
+        Dim vl_S_Nit_ID As String = Request.Form("NIT")
+
+        ObjList = SQL.List_R_PuertaAcceso_Area(vl_S_Nit_ID)
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
