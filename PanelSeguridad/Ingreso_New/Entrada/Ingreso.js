@@ -9,7 +9,6 @@ var Array_Valida_Ingreso = [];
 
 var List_PAcceso_Area = [];
 
-
 var Tabla_Persona = 0;
 var Tabla_Empresa = 0;
 var GrpDoc_Persona;
@@ -52,7 +51,6 @@ var editDocID;
 
 //Evento load JS
 $(document).ready(function () {
-
     Load_Charge_Sasif();
     transacionAjax_Documento('Documento');
     //User_Porteria = ConsultaParametrosURL();

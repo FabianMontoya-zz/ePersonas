@@ -26,6 +26,7 @@ Matrix_Mes[11] = [12, "Diciembre", 31];
 
 $(document).ready(function () {
     fecha();
+    JSON_User();
 
     $(".C_Chosen").chosen({
         width: "100%",
@@ -1820,4 +1821,30 @@ function Compara_Valor_Compra(str_v1, Obj1, str_v2, Obj2, objeto, Str_1, Str_Op,
     }
 
     return validar;
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                            funcion json para usurio quemado                                                                                                              ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+function JSON_User() {
+
+    var JSON_Usuario = {
+        "Nit_ID": "9001548739",
+        "Usuario_ID": "SASGARR",
+        "Type_Document": "1",
+        "Documento": "79884249",
+        "Nombre": "German Alejandro Rodriguez Rodriguez",
+        "Rol_ID": "ADMIN",
+        "Acceso_Informacion": "",
+        "Nivel_Politica_Seguridad_Grupo": "",
+        "Politica_Seguridad": "",
+        "Acceso_Documentos": "",
+        "Grupo_Documentos": "",
+        "Acceso_Informacion_Documentos": "",
+        "Acceso_Reportes": "",
+        "Grupo_Reportes": "",
+        "Acceso_Informacion_Reportes": ""
+    }
+    Array_G_Usuario.push(JSON_Usuario);
+
 }

@@ -562,16 +562,6 @@ PanelSeguridad
  funcion que carga el objeto DDL consulta
  </summary>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.IngresoAjax.Cargar_MatrixPAcceso">
-	<summary>
- funcion que carga el objeto DDL consulta
- </summary>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.IngresoAjax.CargarMPAccesos_Area">
-	<summary>
- funcion que carga el objeto DDL consulta
- </summary>
-	<remarks></remarks>
 </member><member name="M:PanelSeguridad.IngresoAjax.CargaDatosEmpresaEmpleado">
 	<summary>
  cara la matriz de documento para trabajo
@@ -620,6 +610,16 @@ PanelSeguridad
 </member><member name="M:PanelSeguridad.IngresoAjax.List_Doc_Empresa">
 	<summary>
  carga la lista de documentos de la empresa
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.IngresoAjax.List_Puerta_Acceso">
+	<summary>
+ trea la lista puertas de acceso area 
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.IngresoAjax.List_PuertaAccesos_Area">
+	<summary>
+ trea la lista puertas de acceso area 
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.IngresoAjax.Create_List_ControlAcceso">
@@ -1811,6 +1811,12 @@ To modify move field declaration from designer file to code-behind file.
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.PuertaAccesoSQLClass.Matrix_PuertaAcceso">
+	<summary>
+ lee la matriz de puertas de acceso
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.PuertaAccesoSQLClass.List_PuertaAcceso(System.String)">
 	<summary>
  lee la matriz de puertas de acceso
  </summary>
@@ -5122,6 +5128,13 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
 	<summary>
  lee la matriz de puertas de acceso
  </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.R_PuertaAcc_AreaSQLClass.List_R_PuertaAcceso_Area(System.String)">
+	<summary>
+ consulta listas de puertas de acceso segun nit
+ </summary>
+	<param name="vp_S_Nit_ID"></param>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.FacturaSQLClass.InsertC_Factura(PanelSeguridad.FacturaClass)">
