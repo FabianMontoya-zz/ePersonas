@@ -25,10 +25,13 @@ Public Class IngresoAjax
                 Case "Buscar_Doc_Empresa"
                     List_Empresa_Doc()
 
+                Case "Traer_Doc_Persona"
+                    List_Doc_Persona()
+
+                Case "Traer_Doc_Empresa"
+                    List_Doc_Empresa()
 
 
-                Case "MATIRXDOC_WORK"
-                    Carga_Matrix_DocWork()
 
                 Case "MATRIX_ACCESOPREDETER"
                     Cargar_Matrix_AccesoPredeterminado()
@@ -126,19 +129,7 @@ Public Class IngresoAjax
 
     End Sub
 
-    ''' <summary>
-    ''' cara la matriz de documento para trabajo
-    ''' </summary>
-    ''' <remarks></remarks>
-    Protected Sub Carga_Matrix_DocWork()
-
-        Dim SQL As New DocumentosSQLClass
-        Dim ObjList As New List(Of DocumentosClass)
-
-        ObjList = SQL.MatrixDocumentWork()
-        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
-
-    End Sub
+   
 
     ''' <summary>
     ''' funcion que carga el objeto DDL consulta
@@ -333,6 +324,44 @@ Public Class IngresoAjax
          Obj.TipoSQL = Request.Form("TipoSQL")
 
         ObjList = SQL.List_Personas_Documentos(Obj)
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' carga la lista de documentos de la persona
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub List_Doc_Persona()
+
+        Dim SQL As New DocumentosSQLClass
+        Dim Obj As New ClienteClass
+        Dim ObjList As New List(Of DocumentosClass)
+
+        Obj.Nit_ID = Request.Form("NIT")
+        Obj.TypeDocument_ID = Request.Form("TD")
+        Obj.Document_ID = Request.Form("D")
+        Obj.TipoSQL = Request.Form("TipoSQL")
+
+        ObjList = SQL.List_Document_Work(Obj)
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' carga la lista de documentos de la empresa
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub List_Doc_Empresa()
+
+        Dim SQL As New DocumentosSQLClass
+        Dim Obj As New ClienteClass
+        Dim ObjList As New List(Of DocumentosClass)
+
+        Obj.Nit_ID = Request.Form("NIT")
+        Obj.TipoSQL = Request.Form("TipoSQL")
+
+        ObjList = SQL.List_Document_Work(Obj)
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub

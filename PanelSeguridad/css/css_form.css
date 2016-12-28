@@ -35,6 +35,20 @@
     padding-left: 30px;
 }
 
+.T_head
+{
+    border-radius: 5px 5px 0 0;
+    background: -webkit-linear-gradient(#b70d0d, #631111); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#b70d0d, #631111); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#b70d0d, #631111); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#b70d0d, #631111); /* Standard syntax (must be last)*/
+    font: 14px/20px CenturyGothic,sans-serif;
+    font-weight: bold;
+    color: #ffffff;
+    border-color: White;
+}
+
+
 /*----------------------- TITULO ---------------------------*/
 /*personalizacion marco del formulario*/
 

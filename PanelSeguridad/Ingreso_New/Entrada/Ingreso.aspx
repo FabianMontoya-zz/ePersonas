@@ -19,10 +19,19 @@
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Dialog/datepicker.js" type="text/javascript"></script>
+    <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" type="text/css" />
     <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
     <div id="Container_title_Form">
+        <div id="Dialog_Control" style="width: 100%; text-align: center;">
+            <div class="cssload-container" style="margin-top: 25%;">
+                <div class="cssload-whirlpool"></div>
+                <div>
+                    <img id="Sasif" class="Logo_3" src="../../images/SASIF_NEW_WHITE.png" alt="SASIF S.A.S." />
+                </div>
+            </div>
+        </div>
         <table id="Tabla_Title_form">
             <tr>
                 <td id="Title_form"></td>
@@ -271,5 +280,17 @@
                 </td>
             </tr>
         </table>
+    </div>
+    <div id="Dialog_Visor">
+        <table style="width: 100%; height: 100%;">
+            <tr>
+                <td>
+                    <iframe id="IF_Visor" src=""></iframe>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="Dialog_Extencion">
+        <div id="container_TGrid_New"></div>
     </div>
 </asp:Content>

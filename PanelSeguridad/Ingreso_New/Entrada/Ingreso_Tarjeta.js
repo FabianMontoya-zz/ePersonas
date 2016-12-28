@@ -15,6 +15,7 @@ function Capture_Tarjeta_ID() {
         if (Tarjeta_ID.length == 10) {
             $("#TxtIDTarjeta").attr("disabled", "disabled");
             $("#Btnguardar").attr("value", "Nueva Consulta");
+            OpenControl();
             transacionAjax_ShearchPeopleAccess("Search_People_Access", $("#Select_Documento").val(), $("#TxtDoc").val(), 0, Tarjeta_ID);
         }
         else {

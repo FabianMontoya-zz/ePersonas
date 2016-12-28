@@ -70,7 +70,7 @@ function transacionAjax_ShearchPeopleAccess(State, TD, D, NIT, Tarjeta_ID) {
                         break;
 
                     case 1:
-                        if (Tarjeta_Proccess==1)
+                        if (Tarjeta_Proccess == 1)
                             transacionAjax_Search_Foto("Buscar_Foto", Array_People[0].TypeDocument_ID, Array_People[0].Document_ID);
                         else
                             transacionAjax_Search_Foto("Buscar_Foto", TD, D);
@@ -153,7 +153,9 @@ function transacionAjax_Shearch_DocPersona(State, TD, D, NIT) {
         },
         error: function () {
 
-        }
+        },
+        async: false,
+        cache:false
     });
 }
 
@@ -166,13 +168,13 @@ function transacionAjax_Shearch_DocEmpresa(State, NIT) {
         //crear json
         data: {
             "action": State,
-             "NIT": NIT,
+            "NIT": NIT,
             "TipoSQL": "Empresa"
         },
         //Transaccion Ajax en proceso
         success: function (result) {
             if (result == "") {
-                Array_InfDoc_Persona = [];
+                Array_InfDoc_Empresa = [];
             }
             else {
                 Array_InfDoc_Empresa = JSON.parse(result);
@@ -182,7 +184,81 @@ function transacionAjax_Shearch_DocEmpresa(State, NIT) {
                         break;
                     default:
                         Tabla_Empresa = 1;
+                           break;
+                }
+            }
+
+        },
+        error: function () {
+
+        },
+        async: false,
+        cache: false
+    });
+}
+
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_Bring_DocPersona(State, TD, D, NIT) {
+
+    $.ajax({
+        url: "IngresoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "TD": TD,
+            "D": D,
+            "NIT": NIT,
+            "TipoSQL": "Persona"
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Array_Doc_Persona = [];
+            }
+            else {
+                Array_Doc_Persona = JSON.parse(result);
+                switch (Array_Doc_Persona.length) {
+                    case 0:
+                        Mensaje_General("No existe", "la persona No tiene Documentos Fisicos", "W");
                         break;
+                    default:
+                         break;
+                }
+            }
+        },
+        error: function () {
+        },
+        async: false,
+        cache: false
+    });
+}
+
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_Bring_DocEmpresa(State, NIT) {
+
+    $.ajax({
+        url: "IngresoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "NIT": NIT,
+            "TipoSQL": "Empresa"
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Array_Doc_Persona = [];
+            }
+            else {
+                Array_Doc_Empresa = JSON.parse(result);
+                switch (Array_Doc_Empresa.length) {
+                    case 0:
+                        Mensaje_General("No existe", "la Empresa No tiene Documentos Fisicos", "W");
+                        break;
+                    default:
+                          break;
 
                 }
             }
@@ -190,7 +266,12 @@ function transacionAjax_Shearch_DocEmpresa(State, NIT) {
         },
         error: function () {
 
-        }
+        },
+        async: false,
+        cache: false
+    }).done(function () {
+        Paint_Grid_Docs();
     });
 }
+
 
