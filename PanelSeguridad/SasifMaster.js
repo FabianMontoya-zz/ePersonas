@@ -47,7 +47,7 @@ $(document).ready(function () {
     });
 
     $('.Numeric_letter').keyup(function () {
-        this.value = (this.value + '').replace(/[^0-9a-zA-Z\s\ñ\Ñ\ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç]/g, '');
+        this.value = (this.value + '').replace(/[^0-9a-zA-Z\ñ\Ñ\ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç]/g, '');
     });
 
     $('.Hours').focus(function () {
