@@ -44,6 +44,15 @@
     </div>
     <div id="Marco_Contrato">
         <div id="Marco_trabajo_Contrato">
+               <table width="100%">
+                       <tr>
+                            <td id="User" colspan="3" style="width: 70%; text-align: center;">
+                                <span id="liveclock" style="/*position: absolute; */ left: 0; top: 0;"></span>
+                            </td>
+                            <td  style="width: 70%; text-align: center;">
+                            </td>
+                        </tr>
+                    </table>
             <div id="Container_controls">
                 <div id="Acordeon_Ingreso" style="width: 100%;">
                     <h3>Ingreso

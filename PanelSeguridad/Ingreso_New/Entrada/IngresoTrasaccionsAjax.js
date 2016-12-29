@@ -79,13 +79,37 @@ function transaccionAjax_Door_Access_Area(State) {
             }
             else {
                 List_PAcceso_Area = JSON.parse(result);
-              }
+            }
         },
         error: function () {
         }
     });
 }
 
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_Access_Predeterminado(State) {
+    $.ajax({
+        url: "IngresoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "NIT": Array_G_Usuario[0].Nit_ID
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                List_Acceso_Predeterminado = [];
+            }
+            else {
+                List_Acceso_Predeterminado = JSON.parse(result);
+            }
+        },
+        error: function () {
+        }
+    });
+}
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                          CONSULTAS EN PROCESO                                                                                                                ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -209,7 +233,7 @@ function transacionAjax_Shearch_DocPersona(State, TD, D, NIT) {
 
         },
         async: false,
-        cache:false
+        cache: false
     });
 }
 
@@ -238,7 +262,7 @@ function transacionAjax_Shearch_DocEmpresa(State, NIT) {
                         break;
                     default:
                         Tabla_Empresa = 1;
-                           break;
+                        break;
                 }
             }
 
@@ -277,7 +301,7 @@ function transacionAjax_Bring_DocPersona(State, TD, D, NIT) {
                         Mensaje_General("No existe", "la persona No tiene Documentos Fisicos", "W");
                         break;
                     default:
-                         break;
+                        break;
                 }
             }
         },
@@ -312,7 +336,7 @@ function transacionAjax_Bring_DocEmpresa(State, NIT) {
                         Mensaje_General("No existe", "la Empresa No tiene Documentos Fisicos", "W");
                         break;
                     default:
-                          break;
+                        break;
 
                 }
             }

@@ -6,8 +6,8 @@ var Array_InfDoc_Empresa = [];
 var Array_Doc_Persona = [];
 var Array_Doc_Empresa = [];
 var Array_Valida_Ingreso = [];
-
 var List_PAcceso_Area = [];
+var List_Acceso_Predeterminado = [];
 
 var Tabla_Persona = 0;
 var Tabla_Empresa = 0;
@@ -117,7 +117,7 @@ $(document).ready(function () {
         }
     });
 
-    //MostrarHora();
+    MostrarHora();
     Capture_Tarjeta_ID();
     $("#TxtIDTarjeta").focus();
 
@@ -198,123 +198,6 @@ function VerExtenciones() {
     Table_Extenciones();
 }
 
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*----                                                                                                           REGION DE VALIDACIONES                                                                                                   ----*/
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-// validamos campos de captura
-function Campos() {  //OK
-
-    var Campo_1 = $("#Select_Documento").val();
-    var Campo_2 = $("#TxtDoc").val();
-    var validar = 0;
-
-    if (Campo_2 == "" || Campo_1 == "-1") {
-        validar = 1;
-        if (Campo_1 == "-1")
-            $("#Img1").css("display", "inline-table");
-        else
-            $("#Img1").css("display", "none");
-
-        if (Campo_2 == "")
-            $("#Img2").css("display", "inline-table");
-        else
-            $("#Img2").css("display", "none");
-    }
-    else {
-        $("#Img1").css("display", "none");
-        $("#Img2").css("display", "none");
-    }
-    return validar;
-}
-
-//valida si la persona tiene tarjeta o no
-function Valida_Access_Minimo() {
-    if (Array_People[0].Tarjeta_ID == "") {
-        valida_GrpDoc();
-    }
-    else {
-        if (Tarjeta_Proccess == 1) {
-            Validaciones_Tarjeta();
-        }
-        else {
-            Mensaje_General("Tiene Tarjeta", "la persona tiene la tarjeta N° (" + Array_People[0].Tarjeta_ID + ") para el ingreso", "W");
-            Clear();
-        }
-    }
-}
-
-//validamos es estado de la tarjeta
-function Validaciones_Tarjeta() {
-
-    var Estado_Tarjeta = Array_People[0].EstadoTarjeta;
-
-    switch (Estado_Tarjeta) {
-        case "1":
-            Mensaje_General("Tarjeta No funcional!", "La Tarjeta  de " + Array_People[0].Nombre + " está sin Entregar en el Sistema comuniquese con su Administrador", "W");
-            break;
-
-        case "2":
-            Valida_VigenciaTarjeta();
-            break;
-
-        case "3":
-            Mensaje_General("Tarjeta Bloqueada!", "La Tarjeta  de " + Array_People[0].Nombre + " está " + Array_People[0].DescripMotivoBloqueo, "W");
-            break;
-    }
-}
-
-//valida la fecha de vencimiento de la tarjeta
-function Valida_VigenciaTarjeta() {
-
-    var CheckVigencia = Array_People[0].CheckVigencia_Tarjeta;
-    var FechaVigencia = Array_People[0].FechaVencimientoTarjeta;
-
-    switch (CheckVigencia) {
-        case "S":
-            comparacion = validate_fechaMayorQue(FechaVigencia, "", "SystemCompare");
-            if (comparacion == "Mayor")
-                Mensaje_General("Tarjeta Vencida!", "La Tarjeta  de " + Array_People[0].Nombre + " está vencida fecha de vencimiento ( " + FechaVigencia + ")", "W");
-            else {
-                valida_GrpDoc();
-                //Tabla_Docs(Nit_ID_Proccess, TDoc_VT, Doc_VT, GrpDoc, "Empleado");
-                //SearchEmpresa();
-            }
-            break;
-        case "N":
-            valida_GrpDoc();
-            //   Tabla_Docs(Nit_ID_Proccess, TDoc_VT, Doc_VT, GrpDoc, "Empleado");
-            //SearchEmpresa();
-            break;
-    }
-
-}
-
-//valida si tiene rupo de documento
-function valida_GrpDoc() {
-    if (GrpDoc_Persona != 0) {
-        transacionAjax_Shearch_DocPersona('Buscar_Doc_Persona', Array_People[0].TypeDocument_ID, Array_People[0].Document_ID, Array_People[0].Nit_ID);
-        transacionAjax_Shearch_DocEmpresa('Buscar_Doc_Empresa', Array_People[0].Nit_ID);
-        transacionAjax_Bring_DocPersona('Traer_Doc_Persona', Array_People[0].TypeDocument_ID, Array_People[0].Document_ID, Array_People[0].Nit_ID);
-        transacionAjax_Bring_DocEmpresa('Traer_Doc_Empresa', Array_People[0].Nit_ID);
-    }
-    else
-        Mensaje_General("Proceso Imcompleto", "La persona no tiene (Grupo de Documentos) asignados, comuniquese con el administrador del sistema!", "E");
-
-
-}
-
-//revisamos ingreso segun documentos solicitados
-function ValidaAccesoPrincipal() {
-    var contador_semaforo = 0;
-
-    for (item in Array_Valida_Ingreso) {
-        contador_semaforo = contador_semaforo + parseInt(Array_Valida_Ingreso[item].Estado_Doc);
-        if (Array_Valida_Ingreso[item].Estado_Doc >= 1) {
-            ConstruyeMensaje(Array_Valida_Ingreso[item].Document, Array_Valida_Ingreso[item].Existe, Array_Valida_Ingreso[item].Verificado, Array_Valida_Ingreso[item].Vigencia);
-        }
-    }
-    return contador_semaforo;
-}
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                              PROCESO DE CARGUE GRID PAGINA DE ACCESO                                                                             ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -557,6 +440,8 @@ function Paint_Grid_Docs() {
                 $("#TI_3").css("display", "inline-table");
                 transaccionAjax_Door_Access("Lista_Puerta_Acceso");
                 transaccionAjax_Door_Access_Area('Lista_Puerta_Acceso_Area');
+                transaccionAjax_Access_Predeterminado("Lista_Accesos_Predeterminados");
+                
                 CargaComboAreas();
                 //Tabla_AccesosPredeterminados();
                 break;
@@ -574,6 +459,103 @@ function CargaComboAreas() {
         var index_ID = $(this).val();
         Charge_Combos_Depend_Nit(List_PAcceso_Area, "Select_AreaAcceso", index_ID, "");
     });
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                     PROCESO DE CARGUE GRID ACCESO PREDETERMINADO                                                                                                         ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//contruye vista de accesos predeterminados
+function Tabla_AccesosPredeterminados() {
+
+    var html_AP;
+    var Flag_ingreso;
+
+    html_AP = "<table id='TAP' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th class='T_head' colspan='10' style='margin-top: 5px;' >AccesosPredetermminados</th></tr><tr><th style='width: 2%;'>Selección</th><th></th><th>Acceso</th><th>Area</th><th>Persona Encargada</th><th style='width: 10%;'>Fecha inicial</th><th style='width: 10%;'>Fecha final</th><th style='width: 12%;'>Hora Entrada</th><th style='width: 12%;'>Hora Salida</th><th>Horario de ingreso</th></tr></thead><tbody>";
+    for (item in List_Acceso_Predeterminado) {
+        if (List_Acceso_Predeterminado[item].Document_ID == Doc_VT &&
+           List_Acceso_Predeterminado[item].Nit_ID == Nit_ID_Proccess &&
+            List_Acceso_Predeterminado[item].Estado == "1") {
+            if (List_Acceso_Predeterminado[item].ControlVigencia == "N")
+                html_AP += "<tr id= 'TAP_" + List_Acceso_Predeterminado[item].Nit_ID + "'><td><input type='radio' name='Asig' id='Check_" + List_Acceso_Predeterminado[item].Index + "' value='TR" + List_Acceso_Predeterminado[item].Index + "' onclick=\"Mostrar_AccesoPredeterminado('" + List_Acceso_Predeterminado[item].Index + "')\"/></td><td><img alt='No' title='' style='height: 21px; width: 21px;' src='../../images/C_GREEN.png' /></td><td>" + List_Acceso_Predeterminado[item].PuertaAcceso_ID + " - " + List_Acceso_Predeterminado[item].DescripPuertaAcceso + "</td><td>" + List_Acceso_Predeterminado[item].Area_ID + " - " + List_Acceso_Predeterminado[item].DescripAreaAcceso + "</td><td>" + List_Acceso_Predeterminado[item].Document_ID_Per_Encargada + " - " + List_Acceso_Predeterminado[item].DescripPersona_Enc + "</td><td>" + List_Acceso_Predeterminado[item].FechaInicio_Vigencia + "</td><td>" + List_Acceso_Predeterminado[item].FechaFin_Vigencia + "</td><td>" + List_Acceso_Predeterminado[item].HoraInicio + "</td><td>" + List_Acceso_Predeterminado[item].HoraFin + "</td><td>" + List_Acceso_Predeterminado[item].DescripTipoIngreso + "</td></tr>";
+            else {
+
+                FIV = List_Acceso_Predeterminado[item].HoraInicio;
+                FFV = List_Acceso_Predeterminado[item].HoraFin;
+
+                var A_FIV = FIV.split(":");
+                var A_FFV = FFV.split(":");
+
+                Flag_Ingreso = validaEntradaSalida(A_FIV, A_FFV);
+
+                switch (Flag_Ingreso) {
+                    case "VERDE":
+                        html_AP += "<tr id= 'TAP_" + List_Acceso_Predeterminado[item].Nit_ID + "'><td><input type='radio' name='Asig' id='Check_" + List_Acceso_Predeterminado[item].Index + "' value='TR" + List_Acceso_Predeterminado[item].Index + "'  onclick=\"Mostrar_AccesoPredeterminado('" + List_Acceso_Predeterminado[item].Index + "')\" /></td><td><img alt='No' title='' style='height: 21px; width: 21px;' src='../../images/C_GREEN.png' /></td><td>" + List_Acceso_Predeterminado[item].PuertaAcceso_ID + " - " + List_Acceso_Predeterminado[item].DescripPuertaAcceso + "</td><td>" + List_Acceso_Predeterminado[item].Area_ID + " - " + List_Acceso_Predeterminado[item].DescripAreaAcceso + "</td><td>" + List_Acceso_Predeterminado[item].Document_ID_Per_Encargada + " - " + List_Acceso_Predeterminado[item].DescripPersona_Enc + "</td><td>" + List_Acceso_Predeterminado[item].FechaInicio_Vigencia + "</td><td>" + List_Acceso_Predeterminado[item].FechaFin_Vigencia + "</td><td><input type='number' id='TxtHoraIni_" + List_Acceso_Predeterminado[item].Index + "' class='Numeric' maxlength='2' min='0' max='24' style='width: 30px;' oninput='maxLengthTypeNumber(this)'  value='" + A_FIV[0] + "' /> : <input type='number' id='TxtMinutosIni_" + List_Acceso_Predeterminado[item].Index + "' class='Numeric' maxlength='2' min='0' max='59' style='width: 30px;' oninput='maxLengthTypeNumber(this)' value='" + A_FIV[1] + "' /></td><td><input type='number' id='TxtHoraSal_" + List_Acceso_Predeterminado[item].Index + "' class='Numeric' maxlength='2' min='0' max='24' style='width: 30px;' oninput='maxLengthTypeNumber(this)'  value='" + A_FFV[0] + "' /> : <input type='number' id='TxtMinutosSal_" + List_Acceso_Predeterminado[item].Index + "' class='Numeric' maxlength='2' min='0' max='59' style='width: 30px;' oninput='maxLengthTypeNumber(this)' value='" + A_FFV[1] + "' /></td><td>" + List_Acceso_Predeterminado[item].DescripTipoIngreso + "</td></tr>";
+                        break;
+                    case "ROJO":
+                        html_AP += "<tr id= 'TAP_" + List_Acceso_Predeterminado[item].Nit_ID + "'><td><input type='radio' name='Asig' id='Check_" + List_Acceso_Predeterminado[item].Index + "' value='TR" + List_Acceso_Predeterminado[item].Index + "'  onclick=\"Mostrar_AccesoPredeterminado('" + List_Acceso_Predeterminado[item].Index + "')\" /></td><td><img alt='No' title='' style='height: 21px; width: 21px;' src='../../images/C_RED.png' /></td><td>" + List_Acceso_Predeterminado[item].PuertaAcceso_ID + " - " + List_Acceso_Predeterminado[item].DescripPuertaAcceso + "</td><td>" + List_Acceso_Predeterminado[item].Area_ID + " - " + List_Acceso_Predeterminado[item].DescripAreaAcceso + "</td><td>" + List_Acceso_Predeterminado[item].Document_ID_Per_Encargada + " - " + List_Acceso_Predeterminado[item].DescripPersona_Enc + "</td><td>" + List_Acceso_Predeterminado[item].FechaInicio_Vigencia + "</td><td>" + List_Acceso_Predeterminado[item].FechaFin_Vigencia + "</td><td><input type='number' id='TxtHoraIni_" + List_Acceso_Predeterminado[item].Index + "' class='Numeric' maxlength='2' min='0' max='24' style='width: 30px;' oninput='maxLengthTypeNumber(this)'  value='" + A_FIV[0] + "' /> : <input type='number' id='TxtMinutosIni_" + List_Acceso_Predeterminado[item].Index + "' class='Numeric' maxlength='2' min='0' max='59' style='width: 30px;' oninput='maxLengthTypeNumber(this)' value='" + A_FIV[1] + "'  /></td><td><input type='number' id='TxtHoraSal_" + List_Acceso_Predeterminado[item].Index + "' class='Numeric' maxlength='2' min='0' max='24' style='width: 30px;' oninput='maxLengthTypeNumber(this)'  value='" + A_FFV[0] + "' /> : <input type='number' id='TxtMinutosSal_" + List_Acceso_Predeterminado[item].Index + "' class='Numeric' maxlength='2' min='0' max='59' style='width: 30px;' oninput='maxLengthTypeNumber(this)' value='" + A_FFV[1] + "' /></td><td>" + List_Acceso_Predeterminado[item].DescripTipoIngreso + "</td></tr>";
+                        break;
+                }
+            }
+        }
+    }
+
+    html_AP += "</tbody></table>";
+    $("#Container_Acceso").html("");
+    $("#Container_Acceso").html(html_AP);
+
+    $("#TAP").dataTable({
+        "bJQueryUI": true, "iDisplayLength": 1000,
+        "bDestroy": true
+    });
+
+}
+
+//valida el ingreso y salida
+function validaEntradaSalida(A_FIV, A_FFV) {
+    var EstadoEnt = "";
+    var EstadoSal = "";
+    var Estado = "";
+
+    //1 PASO 1 VALIDAD ENTRADA
+    if ((parseInt(Hours_Live)) >= parseInt(A_FIV[0])) {// revisamos si la hora actual es mayor o igual a la hora capturada
+        EstadoEnt = "VERDE";
+        if (parseInt(Hours_Live) == (parseInt(A_FIV[0]))) {// revisamos si la hora es igual a la hora actual
+            if ((parseInt(Minutes_Live) >= parseInt(A_FIV[1]))) // revisamos si los minutos son mayor a los minutos actuales
+                EstadoEnt = "VERDE";
+            else if ((parseInt(A_FIV[1]) > parseInt(Minutes_Live)))
+                EstadoEnt = "ROJO";
+        }
+    }
+    else if ((parseInt(Hours_Live)) < parseInt(A_FIV[0]))
+        EstadoEnt = "ROJO";
+
+    //2 PASO 1 VALIDA SALIDA
+    if ((parseInt(Hours_Live)) >= parseInt(A_FFV[0])) {// revisamos si la hora actual es menor o igual a la hora salida capturada
+        EstadoSal = "ROJO";
+        if (parseInt(A_FFV[0]) == (parseInt(Hours_Live))) {// revisamos si la hora es igual a la hora actual
+            EstadoSal = "VERDE";
+            if ((parseInt(A_FFV[1]) >= parseInt(Minutes_Live))) // revisamos si los minutos son mayor a los minutos actuales
+                EstadoSal = "ROJO";
+            else
+                EstadoSal = "VERDE";
+        }
+    }
+    else
+        EstadoSal = "VERDE";
+
+    //console.log("EstadoEnt: " + EstadoEnt + "  EstadoSal : " + EstadoSal);
+
+    if (EstadoEnt == "VERDE" && EstadoSal == "VERDE")
+        Estado = "VERDE";
+    else if (EstadoEnt == "VERDE" && EstadoSal == "ROJO")
+        Estado = "ROJO";
+    else if (EstadoEnt == "ROJO" && EstadoSal == "VERDE")
+        Estado = "ROJO";
+    else if (EstadoEnt == "ROJO" && EstadoSal == "ROJO")
+        Estado = "ROJO";
+
+
+    return Estado;
 }
 
 

@@ -37,10 +37,9 @@ Public Class IngresoAjax
                 Case "Lista_Puerta_Acceso_Area"
                     List_PuertaAccesos_Area()
 
+                Case "Lista_Accesos_Predeterminados"
+                    List_Access_Predeterminado()
 
-
-                Case "MATRIX_ACCESOPREDETER"
-                    Cargar_Matrix_AccesoPredeterminado()
 
                 
                 Case "MATRIX_AREA"
@@ -49,7 +48,6 @@ Public Class IngresoAjax
                 Case "MATRIX_PERSONA"
                     CargarMPersonaDep()
 
-               
                 Case "MATRIX_PERSONA_INGRESA"
                     CargaDatosEmpresaEmpleado()
 
@@ -131,22 +129,6 @@ Public Class IngresoAjax
 
     End Sub
 
-   
-
-    ''' <summary>
-    ''' funcion que carga el objeto DDL consulta
-    ''' </summary>
-    ''' <remarks></remarks>
-    Protected Sub Cargar_Matrix_AccesoPredeterminado()
-
-        Dim SQL As New C_AccesoPreSQLClass
-        Dim ObjList As New List(Of C_AccesoPreClass)
-
-        ObjList = SQL.Matrix_TAccesoPreddeterminado()
-        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
-
-    End Sub
-
     ''' <summary>
     ''' funcion que carga el objeto DDL consulta
     ''' </summary>
@@ -160,10 +142,6 @@ Public Class IngresoAjax
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
-
- 
-
-  
 
     ''' <summary>
     ''' cara la matriz de documento para trabajo
@@ -376,6 +354,21 @@ Public Class IngresoAjax
 
     End Sub
 
+    ''' <summary>
+    ''' carga la lista de accesos predeterminados
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub List_Access_Predeterminado()
+
+        Dim SQL As New C_AccesoPreSQLClass
+        Dim ObjList As New List(Of C_AccesoPreClass)
+
+        Dim vp_S_Nit_Bussines_Visit As String = Request.Form("NIT")
+
+        ObjList = SQL.List_Access_Predeterminado(vp_S_Nit_Bussines_Visit)
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
 
 
     ''' <summary>
@@ -422,8 +415,6 @@ Public Class IngresoAjax
 
         Return ObjList
     End Function
-
-
 
 
 #End Region
