@@ -40,8 +40,10 @@ Public Class IngresoAjax
                 Case "Lista_Accesos_Predeterminados"
                     List_Access_Predeterminado()
 
+                Case "Empleados_Encargados"
+                    List_Search_People_Bussiness()
 
-                
+
                 Case "MATRIX_AREA"
                     Cargar_MatrixArea()
 
@@ -363,12 +365,30 @@ Public Class IngresoAjax
         Dim SQL As New C_AccesoPreSQLClass
         Dim ObjList As New List(Of C_AccesoPreClass)
 
-        Dim vp_S_Nit_Bussines_Visit As String = Request.Form("NIT")
+        Dim vl_S_Nit_Bussines_Visit As String = Request.Form("NIT")
 
-        ObjList = SQL.List_Access_Predeterminado(vp_S_Nit_Bussines_Visit)
+        ObjList = SQL.List_Access_Predeterminado(vl_S_Nit_Bussines_Visit)
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
+
+    ''' <summary>
+    ''' carga la lista de accesos predeterminados
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub List_Search_People_Bussiness()
+
+        Dim SQL As New ClienteSQLClass
+        Dim ObjList As New List(Of ClienteClass)
+
+        Dim vl_S_Nit_Bussines_Visit As String = Request.Form("NIT")
+        Dim vl_S_Search_Argument As String = Request.Form("Argumento")
+
+        ObjList = SQL.SearchPeople_Bussines(vl_S_Nit_Bussines_Visit, vl_S_Search_Argument)
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
+
 
 
     ''' <summary>

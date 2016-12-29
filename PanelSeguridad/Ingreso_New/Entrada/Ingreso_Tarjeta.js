@@ -167,7 +167,25 @@ function ValidaCamposIngreso() {
     return validar;
 }
 
+//valida los campos de busqueda personas
+function ValidaSearch_People() {
+    var valida = 0;
+    var Campo_P = $("#Txt_Nombre").val();
 
+    if (Campo_P != "") {
+        if (Campo_P.length < 3) {
+            valida = 1;
+            Process_Manual_Ingreso = 1;
+            Mensaje_General("Minimo de letras", "El minimode letras debe se de (3) para la busqueda del " + Tipo_Busqueda, "W");
+        }
+    }
+    else {
+        valida = 1;
+        Process_Manual_Ingreso = 1;
+        Mensaje_General("Minimo de letras", "El minimode letras debe se de (3) para la busqueda del " + Tipo_Busqueda, "W");
+    }
+    return valida;
+}
 
 
 //muestra la hora en tiempo real

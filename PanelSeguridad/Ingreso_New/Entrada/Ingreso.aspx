@@ -177,12 +177,17 @@
                                                 src="../../images/error.png" />
                                             <span class="SpamEG"></span></span>
                                     </td>
-                                    <td class="Label_Bold" style="width: 3%">
-                                        <input id="BtnConsult_encargado" class="BWeb" type="button" value="Consultar Encargado" style="width: 180px;" onclick="" />
+                                </tr>
+                                <tr>
+                                    <td class="Label_Bold">
+                                        <input id="BtnConsult_encargado" class="BWeb" type="button" value="Consultar Encargado" style="width: 180px;" onclick="BtnConsulta_Persona('Encargado')" />
                                     </td>
-                                    <td style="width: 25%">
-                                        <select id="Select_Persona_Enc" class="C_Chosen" style="width: 95%">
-                                        </select>
+                                    <td>
+                                        <%--   <select id="Select_Persona_Enc" class="C_Chosen" style="width: 95%">
+                                        </select>--%>
+                                        <span class="cssToolTip_Form">
+                                            <input type="text" id="Txt_Persona_Enc" maxlength="100" style="width: 100%;" readonly="readonly" />
+                                            <span class="Spam_AST"></span></span>
                                     </td>
                                     <td style="width: 5%; padding-bottom: 22px;">
                                         <span class="cssToolTip_L">
@@ -297,6 +302,24 @@
                 </td>
             </tr>
         </table>
+    </div>
+    <div id="Dialog_Search_Persona">
+        <table style="width: 100%;">
+            <tr>
+                <td  class="Label_Bold">Ingrese Nombre
+                </td>
+                <td>
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="Txt_Nombre" maxlength="50" style="width: 280px;" />
+                        <span class="Spam_AST"></span></span>
+                </td>
+                <td>
+                    <input id="Btn_Search_People" type="button" value="Buscar" onclick="Btn_Search_People();" />
+                </td>
+            </tr>
+        </table>
+        <div id="Container_People_Bussiness">
+        </div>
     </div>
     <div id="Dialog_Extencion">
         <div id="container_TGrid_New"></div>

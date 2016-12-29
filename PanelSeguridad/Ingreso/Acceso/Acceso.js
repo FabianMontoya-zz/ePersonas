@@ -51,6 +51,8 @@ $(document).ready(function () {
     transacionAjax_Documento('Documento');
     transaccionAjax_MDatosUsuario('MATRIX_PERSONA_INGRESA');
 
+    VentanasEmergentes();
+
     $("#ESelect").css("display", "none");
     $("#Img1").css("display", "none");
     $("#Img2").css("display", "none");
@@ -72,7 +74,14 @@ $(document).ready(function () {
     $("#Inf_Ingreso").css("display", "none");
 
     $("#Div_D").css("display", "none");
+    
+    MostrarHora();
+    Capture_Tarjeta_ID();
+    $("#TxtIDTarjeta").focus();
+});
 
+
+function VentanasEmergentes(){
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
         autoOpen: false,
@@ -109,11 +118,8 @@ $(document).ready(function () {
             background: "black"
         }
     });
-    
-    MostrarHora();
-    Capture_Tarjeta_ID();
-    $("#TxtIDTarjeta").focus();
-});
+
+}
 
 
 

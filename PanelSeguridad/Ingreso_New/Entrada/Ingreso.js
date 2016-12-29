@@ -8,11 +8,13 @@ var Array_Doc_Empresa = [];
 var Array_Valida_Ingreso = [];
 var List_PAcceso_Area = [];
 var List_Acceso_Predeterminado = [];
+var List_Encargado = [];
 
 var Tabla_Persona = 0;
 var Tabla_Empresa = 0;
 var GrpDoc_Persona;
 var Nit_ID_Proccess;
+var Tipo_Busqueda;
 
 /*--------------- region de variables globales --------------------*/
 
@@ -54,6 +56,7 @@ $(document).ready(function () {
     Load_Charge_Sasif();
     transacionAjax_Documento('Documento');
     //User_Porteria = ConsultaParametrosURL();
+    VentanasEmergentes();
 
     $("#ESelect").css("display", "none");
     $("#Img1").css("display", "none");
@@ -74,13 +77,30 @@ $(document).ready(function () {
 
     $("#Inf_persona").css("display", "none");
     $("#Datos_persona").css("display", "none");
-    
+
     $("#Inf_Ingreso").css("display", "none");
 
     $("#Div_D").css("display", "none");
-     $("#TI_2").css("display", "none");
+    $("#TI_2").css("display", "none");
     $("#TI_3").css("display", "none");
 
+    MostrarHora();
+    Capture_Tarjeta_ID();
+    $("#TxtIDTarjeta").focus();
+
+
+    $(function () { //Función del acordeon
+        $("#Acordeon_Ingreso").accordion({
+            heightStyle: "content",
+            collapsible: true
+        });
+    });
+
+
+});
+
+
+function VentanasEmergentes() {
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
         autoOpen: false,
@@ -90,7 +110,7 @@ $(document).ready(function () {
 
     $("#dialog_eliminar").dialog({
         autoOpen: false,
-        dialogClass: "Dialog_Sasif_Web",
+        dialogClass: "Dialog_Sasif",
         modal: true
     });
 
@@ -100,6 +120,18 @@ $(document).ready(function () {
         modal: true,
         width: 1000,
         height: 520,
+        overlay: {
+            opacity: 0.5,
+            background: "black"
+        }
+    });
+
+    $("#Dialog_Search_Persona").dialog({
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true,
+        width: 700,
+        height: 300,
         overlay: {
             opacity: 0.5,
             background: "black"
@@ -117,21 +149,7 @@ $(document).ready(function () {
             background: "black"
         }
     });
-
-    MostrarHora();
-    Capture_Tarjeta_ID();
-    $("#TxtIDTarjeta").focus();
-
-
-    $(function () { //Función del acordeon
-        $("#Acordeon_Ingreso").accordion({
-            heightStyle: "content",
-            collapsible: true
-        });
-    });
-
-
-});
+}
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                 REGION BOTONES                                                                                                                ----*/
@@ -156,7 +174,33 @@ function BtnConsulta() {
     }
 }
 
+//abre dialog para busqueda de la persona
+function BtnConsulta_Persona(Type) {
 
+    $("#Dialog_Search_Persona").dialog("open");
+    switch (Type) {
+        case "Encargado":
+            $("#Dialog_Search_Persona").dialog("option", "title", "Buscar Encargado");
+            Tipo_Busqueda = Type;
+            break;
+
+        case "Empleado":
+            $("#Dialog_Search_Persona").dialog("option", "title", "Buscar Empleado");
+            Tipo_Busqueda = Type;
+            break;
+    }
+}
+
+//busqueda de la persona
+function Btn_Search_People() {
+
+    var ValidaCampo_People = ValidaSearch_People();
+
+    if (ValidaCampo_People == 0) {
+        transaccionAjax_Search_Encargado("Empleados_Encargados");
+    }
+
+}
 
 //evento del boton salir
 function x() {
@@ -217,7 +261,7 @@ function Datos_principales() {
 
     $("#Datos_persona").css("display", "inline-table");
     $("#Inf_persona").css("display", "inline-table");
-    
+
 }
 
 //buscar Foto de la persona
@@ -561,9 +605,37 @@ function validaEntradaSalida(A_FIV, A_FFV) {
     return Estado;
 }
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                     PROCESO DE CARGUE GRID PERSONAL ENCARGADO                                                                                                         ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
+//contruye vista de Personal encargado
+function Tabla_Encargados() {
 
+    var html_En;
 
+    html_En = "<table id='TEnt' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th style='width: 2%;'>Selección</th><th>Documento</th><th>Persona Encargada</th></tr></thead><tbody>";
+    for (item in List_Encargado) {
+        var Index_People = parseInt(List_Encargado[item].Index) - 1;
+        html_En += "<tr id= 'TEnt_" + Index_People + "'><td><input type='radio' name='Asig' id='Check_" + Index_People + "' value='TR_" + Index_People + "'  onclick=\"Selecciona_Encargado('" + Index_People + "')\" /></td><td>" + List_Encargado[item].Document_ID + "</td><td>" + List_Encargado[item].Nombre + "</td></tr>";
+    }
+
+    html_En += "</tbody></table>";
+    $("#Container_People_Bussiness").html("");
+    $("#Container_People_Bussiness").html(html_En);
+
+    $("#TEnt").dataTable({
+        "bJQueryUI": true, "iDisplayLength": 1000,
+        "bDestroy": true
+    });
+
+}
+
+//captura y asigna la persona encargada
+function Selecciona_Encargado(Index_People) {
+    $("#Txt_Persona_Enc").val(List_Encargado[Index_People].Document_ID + " - " + List_Encargado[Index_People].Nombre);
+    $("#Dialog_Search_Persona").dialog("close");
+}
 
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/

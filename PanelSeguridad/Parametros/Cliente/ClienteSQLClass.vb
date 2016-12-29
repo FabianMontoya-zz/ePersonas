@@ -903,6 +903,21 @@ Public Class ClienteSQLClass
 
                 End While
 
+            Case "Busqueda_Persona"
+                While ReadConsulta.Read
+
+                    Dim objCliente As New ClienteClass
+
+                    objCliente.TypeDocument_ID = ReadConsulta.GetValue(0)
+                    objCliente.Document_ID = ReadConsulta.GetValue(1)
+                    objCliente.Nombre = ReadConsulta.GetValue(2)
+                    objCliente.Index = ReadConsulta.GetValue(3)
+
+                    'agregamos a la lista
+                    ObjListCliente.Add(objCliente)
+
+                End While
+
         End Select
 
         'cerramos conexiones
@@ -1480,7 +1495,62 @@ Public Class ClienteSQLClass
 
         Return ObjList
     End Function
-  
+
+    ''' <summary>
+    ''' trae nombre, tipo documento y documento de la persona a buscar por empresa 
+    ''' </summary>
+    ''' <param name="vp_S_Nit_Bussines_Visit"></param>
+    ''' <param name="vp_S_Search_Argument"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function SearchPeople_Bussines(ByVal vp_S_Nit_Bussines_Visit As String, ByVal vp_S_Search_Argument As String)
+
+        Dim conex As New Conector
+        Dim ObjList As New List(Of ClienteClass)
+        Dim Conexion As String = conex.typeConexion("2")
+        Dim StrQuery As String
+        Dim BD_Admin As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDAdmin").ToString
+
+        Dim sql_tabla As New StringBuilder
+
+        Dim sql_consult As New StringBuilder
+        Dim sql_where As New StringBuilder
+
+        sql_tabla.Append(" DROP TABLE TEMP_CLIENTE " & _
+                                          "  " & _
+                                          " CREATE TABLE TEMP_CLIENTE (NOMBRE nvarchar(200), " & _
+                                          "                                                     DOCUMENT nvarchar(20), " & _
+                                          "                                                     TYPEDOCUMENT nvarchar(2)) " & _
+                                          "  " & _
+                                          " INSERT INTO TEMP_CLIENTE " & _
+                                          " SELECT  CLI_Nombre + ' ' + " & _
+                                          "               CASE  WHEN  CLI_Nombre_2  IS NULL THEN ''  ELSE CLI_Nombre_2 END  + ' ' + " & _
+                                          "               CASE  WHEN  CLI_Apellido_1  IS NULL THEN ''  ELSE CLI_Apellido_1 END  + ' ' + " & _
+                                          "               CASE  WHEN  CLI_Apellido_2  IS NULL THEN ''  ELSE CLI_Apellido_2 END AS NOMBRE, " & _
+                                          "               CLI_Document_ID AS DOCUMENT, " & _
+                                          "               CLI_TypeDocument_ID AS TYPEDOCUMENT " & _
+                                          " FROM CLIENTE " & _
+                                          " FROM CLIENTE " & _
+                                          " WHERE CLI_Document_ID IN(SELECT  CLI_Document_ID " & _
+                                          "                                                      FROM  CLIENTE C1 WHERE C1.CLI_OP_Empleado='S')" & _
+                                          "                                                 AND CLI_Nit_ID='" & vp_S_Nit_Bussines_Visit & "'")
+
+        StrQuery = sql_tabla.ToString
+        conex.StrInsert_and_Update_All(StrQuery, "2")
+
+        StrQuery = " "
+
+        sql_consult.Append(" SELECT TYPEDOCUMENT, DOCUMENT, NOMBRE, " & _
+                                             " ROW_NUMBER() OVER(ORDER BY DOCUMENT ASC) AS Index_Cliente FROM TEMP_CLIENTE " & _
+                                             " WHERE NOMBRE LIKE '%" & vp_S_Search_Argument & "%'")
+    
+        StrQuery = sql_consult.ToString
+
+        ObjList = list(StrQuery, Conexion, "Busqueda_Persona")
+        Return ObjList
+    End Function
+
+
 #End Region
 
 End Class
