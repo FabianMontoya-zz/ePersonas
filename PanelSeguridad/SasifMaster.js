@@ -43,11 +43,11 @@ $(document).ready(function () {
     });
 
     $('.Letter').keyup(function () {
-        this.value = (this.value + '').replace(/[^a-zA-Z\s]+/g, '');
+        this.value = (this.value + '').replace(/[^a-zA-Z\s\ñ\Ñ\ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç]+/g, '');
     });
 
     $('.Numeric_letter').keyup(function () {
-        this.value = (this.value + '').replace(/[^0-9a-zA-Z]/g, '');
+        this.value = (this.value + '').replace(/[^0-9a-zA-Z\s\ñ\Ñ\ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç]/g, '');
     });
 
     $('.Hours').focus(function () {
