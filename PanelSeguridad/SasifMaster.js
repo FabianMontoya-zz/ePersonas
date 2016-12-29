@@ -46,8 +46,12 @@ $(document).ready(function () {
         this.value = (this.value + '').replace(/[^a-zA-Z\s\ñ\Ñ\ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç]+/g, '');
     });
 
-    $('.Numeric_letter').keyup(function () {
+    $('.Numeric_letter_Especial').keyup(function () {
         this.value = (this.value + '').replace(/[^0-9a-zA-Z\ñ\Ñ\ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç]/g, '');
+    });
+
+    $('.Numeric_letter').keyup(function () {
+        this.value = (this.value + '').replace(/[^0-9a-zA-Z]/g, '');
     });
 
     $('.Hours').focus(function () {
