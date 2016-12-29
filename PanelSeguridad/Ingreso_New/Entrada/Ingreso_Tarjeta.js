@@ -102,14 +102,10 @@ function Valida_VigenciaTarjeta() {
                 Mensaje_General("Tarjeta Vencida!", "La Tarjeta  de " + Array_People[0].Nombre + " está vencida fecha de vencimiento ( " + FechaVigencia + ")", "W");
             else {
                 valida_GrpDoc();
-                //Tabla_Docs(Nit_ID_Proccess, TDoc_VT, Doc_VT, GrpDoc, "Empleado");
-                //SearchEmpresa();
             }
             break;
         case "N":
             valida_GrpDoc();
-            //   Tabla_Docs(Nit_ID_Proccess, TDoc_VT, Doc_VT, GrpDoc, "Empleado");
-            //SearchEmpresa();
             break;
     }
 
@@ -140,6 +136,35 @@ function ValidaAccesoPrincipal() {
         }
     }
     return contador_semaforo;
+}
+
+//valida los campos de acceso asignado
+function ValidaCamposIngreso() {
+
+    var validar = 0;
+    var Campo_1 = $("#Select_PAcceso").val();
+    var Campo_2 = $("#Select_AreaAcceso").val();
+    var Campo_3 = $("#Select_Persona_Enc").val();
+    var Campo_4 = $("#TxtHora").val();
+    var Campo_5 = $("#TxtMinutos").val();
+
+    if (Campo_5 == "" || Campo_4 == "" || Campo_3 == "-1" || Campo_2 == "-1" || Campo_1 == "-1") {
+        validar = 1;
+        if (Campo_1 == "-1") { $("#Img6").css("display", "inline-table"); } else { $("#Img6").css("display", "none"); }
+        if (Campo_2 == "-1") { $("#Img7").css("display", "inline-table"); } else { $("#Img7").css("display", "none"); }
+        if (Campo_3 == "-1") { $("#Img8").css("display", "inline-table"); } else { $("#Img8").css("display", "none"); }
+        if (Campo_4 == "") { $("#Img3").css("display", "inline-table"); } else { $("#Img3").css("display", "none"); }
+        if (Campo_5 == "") { $("#Img5").css("display", "inline-table"); } else { $("#Img5").css("display", "none"); }
+    }
+    else {
+        $("#Img6").css("display", "none");
+        $("#Img7").css("display", "none");
+        $("#Img8").css("display", "none");
+        $("#Img3").css("display", "none");
+        $("#Img5").css("display", "none");
+    }
+
+    return validar;
 }
 
 
@@ -181,6 +206,6 @@ function MostrarHora() {
 
     Hours_Live = hours;
     Minutes_Live = minutes;
-   
+
     setTimeout("MostrarHora()", 1000);
 }

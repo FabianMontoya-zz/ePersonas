@@ -73,11 +73,12 @@ $(document).ready(function () {
     $("#Fail").css("display", "none");
 
     $("#Inf_persona").css("display", "none");
+    $("#Datos_persona").css("display", "none");
+    
     $("#Inf_Ingreso").css("display", "none");
 
     $("#Div_D").css("display", "none");
-    $("#TI_1").css("display", "none");
-    $("#TI_2").css("display", "none");
+     $("#TI_2").css("display", "none");
     $("#TI_3").css("display", "none");
 
     //funcion para las ventanas emergentes
@@ -214,9 +215,9 @@ function Datos_principales() {
     $("#L_Area").html(Array_People[0].DescripArea);
     $("#L_Cargo").html(Array_People[0].DescripCargo);
 
+    $("#Datos_persona").css("display", "inline-table");
     $("#Inf_persona").css("display", "inline-table");
-    $("#TI_1").css("display", "inline-table");
-
+    
 }
 
 //buscar Foto de la persona
@@ -303,7 +304,7 @@ function Grid_Doc_People_Business(Matrix, Val_GrpDoc, Type) {
             for (itemArray in Matrix) {
                 if (Matrix[itemArray].GrpDocumentos_ID == Val_GrpDoc) {
 
-                    var Existe_Doc = Verifica_Doc(Array_Doc_Empresa,Matrix[itemArray].Nit_ID, Matrix[itemArray].Document_ID, Matrix[itemArray].Documento_ID);
+                    var Existe_Doc = Verifica_Doc(Array_Doc_Empresa, Matrix[itemArray].Nit_ID, Matrix[itemArray].Document_ID, Matrix[itemArray].Documento_ID);
 
                     switch (Existe_Doc) {
                         case "NO":
@@ -427,6 +428,9 @@ function Verifica_Doc(Matrix, Nit, PDoc, Doc_ID) {
 
 //dibuja las tablas documentos Persona - Empresa
 function Paint_Grid_Docs() {
+
+    $("#Documentos").css("height", "200px");
+    $("#AccesoPredert").css("height", "250px");
     if (Tabla_Persona == 1 && Tabla_Empresa == 1) {
         Grid_Doc_People_Business(Array_InfDoc_Persona, GrpDoc_Persona, 'Empleado');
         Grid_Doc_People_Business(Array_InfDoc_Empresa, Array_InfDoc_Empresa[0].GrpDocumentos_ID, "Empresa");
@@ -441,10 +445,10 @@ function Paint_Grid_Docs() {
                 transaccionAjax_Door_Access("Lista_Puerta_Acceso");
                 transaccionAjax_Door_Access_Area('Lista_Puerta_Acceso_Area');
                 transaccionAjax_Access_Predeterminado("Lista_Accesos_Predeterminados");
-                
+
                 CargaComboAreas();
-                //Tabla_AccesosPredeterminados();
                 break;
+
             default:
                 $("#Sucess").css("display", "none");
                 $("#Fail").css("display", "inline-table");
@@ -472,8 +476,7 @@ function Tabla_AccesosPredeterminados() {
 
     html_AP = "<table id='TAP' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th class='T_head' colspan='10' style='margin-top: 5px;' >AccesosPredetermminados</th></tr><tr><th style='width: 2%;'>Selección</th><th></th><th>Acceso</th><th>Area</th><th>Persona Encargada</th><th style='width: 10%;'>Fecha inicial</th><th style='width: 10%;'>Fecha final</th><th style='width: 12%;'>Hora Entrada</th><th style='width: 12%;'>Hora Salida</th><th>Horario de ingreso</th></tr></thead><tbody>";
     for (item in List_Acceso_Predeterminado) {
-        if (List_Acceso_Predeterminado[item].Document_ID == Doc_VT &&
-           List_Acceso_Predeterminado[item].Nit_ID == Nit_ID_Proccess &&
+        if (List_Acceso_Predeterminado[item].Document_ID == Array_People[0].Document_ID &&
             List_Acceso_Predeterminado[item].Estado == "1") {
             if (List_Acceso_Predeterminado[item].ControlVigencia == "N")
                 html_AP += "<tr id= 'TAP_" + List_Acceso_Predeterminado[item].Nit_ID + "'><td><input type='radio' name='Asig' id='Check_" + List_Acceso_Predeterminado[item].Index + "' value='TR" + List_Acceso_Predeterminado[item].Index + "' onclick=\"Mostrar_AccesoPredeterminado('" + List_Acceso_Predeterminado[item].Index + "')\"/></td><td><img alt='No' title='' style='height: 21px; width: 21px;' src='../../images/C_GREEN.png' /></td><td>" + List_Acceso_Predeterminado[item].PuertaAcceso_ID + " - " + List_Acceso_Predeterminado[item].DescripPuertaAcceso + "</td><td>" + List_Acceso_Predeterminado[item].Area_ID + " - " + List_Acceso_Predeterminado[item].DescripAreaAcceso + "</td><td>" + List_Acceso_Predeterminado[item].Document_ID_Per_Encargada + " - " + List_Acceso_Predeterminado[item].DescripPersona_Enc + "</td><td>" + List_Acceso_Predeterminado[item].FechaInicio_Vigencia + "</td><td>" + List_Acceso_Predeterminado[item].FechaFin_Vigencia + "</td><td>" + List_Acceso_Predeterminado[item].HoraInicio + "</td><td>" + List_Acceso_Predeterminado[item].HoraFin + "</td><td>" + List_Acceso_Predeterminado[item].DescripTipoIngreso + "</td></tr>";
@@ -615,6 +618,8 @@ function Clear() {
     $("#TxtIDTarjeta").removeAttr("disabled");
     $("#Select_Documento").removeAttr("disabled");
     $("#TxtDoc").removeAttr("disabled");
+
+    $("#Datos_persona").css("display", "None");
 
     $("#Inf_persona").css("display", "None");
     $("#Inf_Ingreso").css("display", "none");

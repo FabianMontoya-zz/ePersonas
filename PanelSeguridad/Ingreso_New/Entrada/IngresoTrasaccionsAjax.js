@@ -86,30 +86,6 @@ function transaccionAjax_Door_Access_Area(State) {
     });
 }
 
-/*-------------------- carga ---------------------------*/
-//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transaccionAjax_Access_Predeterminado(State) {
-    $.ajax({
-        url: "IngresoAjax.aspx",
-        type: "POST",
-        //crear json
-        data: {
-            "action": State,
-            "NIT": Array_G_Usuario[0].Nit_ID
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            if (result == "") {
-                List_Acceso_Predeterminado = [];
-            }
-            else {
-                List_Acceso_Predeterminado = JSON.parse(result);
-            }
-        },
-        error: function () {
-        }
-    });
-}
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                          CONSULTAS EN PROCESO                                                                                                                ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -353,3 +329,30 @@ function transacionAjax_Bring_DocEmpresa(State, NIT) {
 }
 
 
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_Access_Predeterminado(State) {
+    $.ajax({
+        url: "IngresoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "NIT": Array_G_Usuario[0].Nit_ID
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                List_Acceso_Predeterminado = [];
+            }
+            else {
+                List_Acceso_Predeterminado = JSON.parse(result);
+            }
+        },
+        error: function () {
+        },
+     }).done(function () {
+         if (Tarjeta_Proccess == 1)
+            Tabla_AccesosPredeterminados();
+    });
+}
