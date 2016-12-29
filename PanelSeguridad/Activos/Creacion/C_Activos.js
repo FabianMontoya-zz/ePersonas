@@ -99,7 +99,6 @@ $(document).ready(function () {
     Calcula_Valor_IVA("Txt_ValFactura", "Text_Val_Sin_IVA", "V_Val_IVA");
     Cargue_Depent_Modelo();
 
-    Compara_Valor_Compra("TxtValor_Bien", "Val", "TxtValor_Compra", "Val", "TxtValor_Compra", "Compra", "Bien", "Blur");
     Compara_Valor_Compra("Txt_ValFactura", "Val", "Text_Val_Sin_IVA", "Val", "Text_Val_Sin_IVA", "sin IVA", " Total", "Blur");
 });
 

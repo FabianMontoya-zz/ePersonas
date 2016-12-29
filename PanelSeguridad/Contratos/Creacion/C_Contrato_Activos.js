@@ -121,9 +121,8 @@ $(document).ready(function () {
     $("#Select_Sucursal").prop('disabled', true);
     $("#Select_Moneda").prop('disabled', true);
     Cargue_Depent_Modelo();
-    Compara_Valor_Compra("TxtValor_Bien", "Val", "TxtValor_Compra", "Val", "TxtValor_Compra", "Compra", "Bien", "Blur");
-    Compara_Valor_Compra("Txt_ValFactura", "Val", "Text_Val_Sin_IVA", "Val", "Text_Val_Sin_IVA", "sin IVA", " Total", "Blur");
 
+    Compara_Valor_Compra("Txt_ValFactura", "Val", "Text_Val_Sin_IVA", "Val", "Text_Val_Sin_IVA", "sin IVA", " Total", "Blur");
 });
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
