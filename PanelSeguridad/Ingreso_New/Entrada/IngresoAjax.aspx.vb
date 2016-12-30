@@ -12,6 +12,8 @@ Public Class IngresoAjax
 
             Select Case vl_S_option_login
 
+                Case "Documento"
+                    CargarDocumento()
 
                 Case "Search_People_Access"
                     Search_People_Access()
@@ -43,27 +45,14 @@ Public Class IngresoAjax
                 Case "Empleados_Encargados"
                     List_Search_People_Bussiness()
 
-
-                Case "MATRIX_AREA"
-                    Cargar_MatrixArea()
-
-                Case "MATRIX_PERSONA"
-                    CargarMPersonaDep()
-
-                Case "MATRIX_PERSONA_INGRESA"
-                    CargaDatosEmpresaEmpleado()
-
-                Case "MATRIX_EMPLEADOS"
-                    CargaEmpleados()
+                Case "Buscar_extencion"
+                    List_Empleados()
 
                 Case "Save_Log_Ingreso"
                     Save_Log_Ingreso()
 
-                Case "Cliente"
-                    CargarCliente()
-
-                Case "Documento"
-                    CargarDocumento()
+                Case "Revisa_Ingreso"
+                    People_Ingress()
 
             End Select
 
@@ -102,93 +91,6 @@ Public Class IngresoAjax
 #End Region
 
 #Region "DROP LIST"
-
-    ''' <summary>
-    ''' funcion que carga el objeto DDL consulta
-    ''' </summary>
-    ''' <remarks></remarks>
-    Protected Sub CargarM_Personas()
-
-        Dim SQL As New ClienteSQLClass
-        Dim ObjList As New List(Of ClienteClass)
-
-        ObjList = SQL.Matrix_DatosPagAcceso()
-        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
-
-    End Sub
-
-    ''' <summary>
-    ''' funcion que carga  Matrix PERSONAS 
-    ''' </summary>
-    ''' <remarks></remarks>
-    Protected Sub CargarMPersonaDep()
-
-        Dim SQL As New ClienteSQLClass
-        Dim ObjList As New List(Of ClienteClass)
-
-        ObjList = SQL.Matrix_PersonasDep()
-        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
-
-    End Sub
-
-    ''' <summary>
-    ''' funcion que carga el objeto DDL consulta
-    ''' </summary>
-    ''' <remarks></remarks>
-    Protected Sub Cargar_MatrixArea()
-
-        Dim SQL As New AreaSQLClass
-        Dim ObjList As New List(Of AreaClass)
-
-        ObjList = SQL.Read_Matrix_Area()
-        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
-
-    End Sub
-
-    ''' <summary>
-    ''' cara la matriz de documento para trabajo
-    ''' </summary>
-    ''' <remarks></remarks>
-    Protected Sub CargaDatosEmpresaEmpleado()
-
-        Dim SQL As New ClienteSQLClass
-        Dim ObjList As New List(Of ClienteClass)
-        Dim vl_S_User As String = Request.Form("User_Porteria")
-
-        ObjList = SQL.InformacionUsuario(UCase(vl_S_User))
-        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
-
-    End Sub
-
-    ''' <summary>
-    ''' carga la matriz de datos de los empleados
-    ''' </summary>
-    ''' <remarks></remarks>
-    Protected Sub CargaEmpleados()
-
-        Dim SQL As New ClienteSQLClass
-        Dim ObjList As New List(Of ClienteClass)
-        Dim vl_S_Nit As String = Request.Form("Nit")
-
-        ObjList = SQL.Matrix_DatosEmpleados(vl_S_Nit)
-        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
-
-    End Sub
-
-    ''' <summary>
-    ''' funcion que carga el objeto DDL consulta
-    ''' </summary>
-    ''' <remarks></remarks>
-    Protected Sub CargarCliente()
-
-        Dim SQL As New ClienteSQLClass
-        Dim ObjListDroplist As New List(Of Droplist_Class)
-        Dim vl_S_Tabla As String = Request.Form("tabla")
-
-        ObjListDroplist = SQL.Charge_DropListCliente(vl_S_Tabla)
-        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
-
-    End Sub
 
     ''' <summary>
     ''' funcion que carga el objeto DDL consulta
@@ -389,7 +291,24 @@ Public Class IngresoAjax
 
     End Sub
 
+    ''' <summary>
+    ''' carga la matriz de datos de los empleados
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub List_Empleados()
 
+        Dim SQL As New ClienteSQLClass
+        Dim ObjList As New List(Of ClienteClass)
+        Dim Obj As New ClienteClass
+
+        Obj.Nit_ID = Request.Form("NIT")
+        Obj.TypeDocument_ID = Request.Form("TDoc")
+        Obj.Document_ID = Request.Form("Doc")
+
+        ObjList = SQL.List_ExtencionesEmpleados(Obj)
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
 
     ''' <summary>
     ''' crea lista clase de control de acesso
@@ -436,6 +355,24 @@ Public Class IngresoAjax
         Return ObjList
     End Function
 
+    ''' <summary>
+    ''' validamos si la persona ya esta en la planta
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub People_Ingress()
+
+        Dim SQL As New ControlAccesoSQLClass
+        Dim Obj As New ControlAccesoClass
+
+        Obj.Nit_ID = Request.Form("NIT")
+        Obj.TypeDocument_ID = Request.Form("TD")
+        Obj.Document_ID = Request.Form("D")
+
+        Dim Ingreso As String = SQL.Consulta_Ingreso(Obj)
+
+        Response.Write(Ingreso)
+
+    End Sub
 
 #End Region
 

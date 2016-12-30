@@ -2,6 +2,17 @@
 /*                                                               ADMININSTRACION PARAMETRIZABLE                                                               */
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
+/*CONTROL IMAGEN DIRECCION*/
+#logoExt:hover .Ext
+{
+    content: url("../../images/agenda_gray.png");
+}
+
+.Ext
+{
+    content: url("../../images/agenda.png");
+}
+
 /*----------------------- TITULO ---------------------------*/
 /*personalizacion de la barra de titulo*/
 #Container_title_Form

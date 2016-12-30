@@ -15,6 +15,7 @@ var Tabla_Empresa = 0;
 var GrpDoc_Persona;
 var Nit_ID_Proccess;
 var Tipo_Busqueda;
+var En_Planta=0;
 
 /*--------------- region de variables globales --------------------*/
 
@@ -42,7 +43,6 @@ var EstadoVerif;
 var Est_Verifica;
 var Est_Vigencia;
 var Mensaje_Semaforo = "";
-var User_Porteria;
 
 var editNit_ID;
 var index_ID;
@@ -55,7 +55,7 @@ var editDocID;
 $(document).ready(function () {
     Load_Charge_Sasif();
     transacionAjax_Documento('Documento');
-    //User_Porteria = ConsultaParametrosURL();
+
     VentanasEmergentes();
 
     $("#ESelect").css("display", "none");
@@ -143,7 +143,7 @@ function VentanasEmergentes() {
         dialogClass: "Dialog_Sasif",
         modal: true,
         width: 1100,
-        height: 400,
+        height: 220,
         overlay: {
             opacity: 0.5,
             background: "black"
@@ -202,6 +202,18 @@ function Btn_Search_People() {
 
 }
 
+//ingreso de acceso
+function BtnAgregarAcceso() {
+
+    var validate = ValidaCamposIngreso();
+
+    if (validate == 0) {
+        CalculaHoraEstimada();
+        $("#Inf_Ingreso").css("display", "inline-table");
+
+    }
+}
+
 //evento del boton salir
 function x() {
     $("#dialog").dialog("close");
@@ -216,20 +228,10 @@ function btnSalir() {
     window.location = "../../Menu/menu.aspx?User=" + User + "&L_L=" + Link;
 }
 
-//ingreso de acceso
-function BtnAgregarAcceso() {
-
-    var validate = ValidaCamposIngreso();
-
-    if (validate == 0) {
-        CalculaHoraEstimada();
-    }
-
-}
-
 //confirmacion de registro
 function Registrar_Ingreso_Log() {
     $("#dialog_eliminar").dialog("open");
+    $("#dialog_eliminar").dialog("option", "title", "Confirmacion Ingreso ");
     $("#Mensaje_confirma").html("¿Esta seguro?, de la configuración de ingreso de la persona " + $("#L_Nombre").html());
 }
 
@@ -475,6 +477,8 @@ function Paint_Grid_Docs() {
 
     $("#Documentos").css("height", "200px");
     $("#AccesoPredert").css("height", "250px");
+    $("#Ingreso").css("height", "250px");
+
     if (Tabla_Persona == 1 && Tabla_Empresa == 1) {
         Grid_Doc_People_Business(Array_InfDoc_Persona, GrpDoc_Persona, 'Empleado');
         Grid_Doc_People_Business(Array_InfDoc_Empresa, Array_InfDoc_Empresa[0].GrpDocumentos_ID, "Empresa");
@@ -633,10 +637,62 @@ function Tabla_Encargados() {
 
 //captura y asigna la persona encargada
 function Selecciona_Encargado(Index_People) {
-    $("#Txt_Persona_Enc").val(List_Encargado[Index_People].Document_ID + " - " + List_Encargado[Index_People].Nombre);
+
+    if (Tipo_Busqueda == "Encargado")
+        $("#Txt_Persona_Enc").val(List_Encargado[Index_People].TypeDocument_ID + " - " + List_Encargado[Index_People].Document_ID + " - " + List_Encargado[Index_People].Nombre);
+    else
+        transacionAjax_Search_Address("Buscar_extencion", List_Encargado[Index_People].TypeDocument_ID, List_Encargado[Index_People].Document_ID);
+
     $("#Dialog_Search_Persona").dialog("close");
+
 }
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                              GRID EXTENCIONES                                                                                                                        ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+// crea la tabla en el cliente
+function Table_Extenciones() {
+    var html;
+    var StrTelefono_1 = "";
+    var StrTelefono_2 = "";
+    var StrTelefono_3 = "";
+    var StrTelefono_4 = "";
+    var Name_Emp;
+
+    html = "<table id='TGridExtencion' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th style='width: 35%'>Nombre</th><th style='width: 15%'>Telefono 1</th><th style='width: 15%'>Telefono 2</th><th style='width: 15%'>Telefono 3</th><th style='width: 15%'>Telefono 4</th><th style='width: 15%'>Correo 1</th><th style='width: 15%'>Correo 2</th></tr></thead><tbody>";
+    for (itemArray in List_Extencion) {
+        if (List_Extencion[itemArray].Nit_ID != 0) {
+            if (List_Extencion[itemArray].Tipo_1 != "F") {
+                StrTelefono_1 = "DesActualizado";
+                StrTelefono_2 = "DesActualizado";
+                StrTelefono_3 = "DesActualizado";
+                StrTelefono_4 = "DesActualizado";
+            }
+            else {
+                StrTelefono_1 = Convert_Valores_0(List_Extencion[itemArray].Telefono_1);
+                StrTelefono_2 = Convert_Valores_0(List_Extencion[itemArray].Telefono_2);
+                StrTelefono_3 = Convert_Valores_0(List_Extencion[itemArray].Telefono_3);
+                StrTelefono_4 = Convert_Valores_0(List_Extencion[itemArray].Telefono_4);
+            }
+            Name_Emp = List_Extencion[itemArray].Nombre;
+            html += "<tr id= 'TExtencion_" + List_Extencion[itemArray].Nit_ID + "'><td>" + Name_Emp + "</td><td>" + StrTelefono_1 + "</td><td>" + StrTelefono_2 + "</td><td>" + StrTelefono_3 + "</td><td>" + StrTelefono_4 + "</td><td>" + List_Extencion[itemArray].Correo_1 + "</td><td>" + List_Extencion[itemArray].Correo_2 + "</td></tr>";
+        }
+    }
+
+    html += "</tbody></table>";
+    $("#container_TGrid_New").html("");
+    $("#container_TGrid_New").html(html);
+
+    $("#TGridExtencion").dataTable({
+        "bJQueryUI": true, "iDisplayLength": 1000,
+        "bDestroy": true
+    });
+
+    $("#Dialog_Extencion").dialog("open");
+    $("#Dialog_Extencion").dialog("option", "title", "Extencion de " + Name_Emp);
+
+}
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                              MENSAJES, VISUALIZACION Y LIMPIEZA                                                                                                ----*/
@@ -680,7 +736,6 @@ function ConstruyeMensaje(Doc, Existe, Verificado, Vigencia) {
     $("#Spam_Mensaje").html(Mensaje_Semaforo);
 }
 
-
 //limpiar pagina para nueva consulta
 function Clear() {
     $("#Select_Documento").val("-1");
@@ -718,7 +773,7 @@ function Clear() {
 function Clear_Ingreso() {
     $("#Select_PAcceso").val("-1");
     $("#Select_AreaAcceso").val("-1");
-    $("#Select_Persona_Enc").val("-1");
+    $("#Txt_Persona_Enc").val("");
 
     $("#TxtHora").val("");
     $("#TxtMinutos").val("");
@@ -727,49 +782,4 @@ function Clear_Ingreso() {
 
     $('.C_Chosen').trigger('chosen:updated');
 }
-
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*----                                                                                              GRID EXTENCIONES                                                                                                                        ----*/
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
-// crea la tabla en el cliente
-function Table_Extenciones() {
-
-    var html;
-    var StrTelefono_1 = "";
-    var StrTelefono_2 = "";
-    var StrTelefono_3 = "";
-    var StrTelefono_4 = "";
-
-    html = "<table id='TGridExtencion' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th style='width: 25%'>Nombre</th><th style='width: 15%'>Telefono 1</th><th style='width: 15%'>Telefono 2</th><th style='width: 15%'>Telefono 3</th><th style='width: 15%'>Telefono 4</th><th>Correo 1</th><th>Correo 2</th></tr></thead><tbody>";
-    for (itemArray in Matrix_Empleados) {
-        if (Matrix_Empleados[itemArray].Nit_ID != 0) {
-            if (Matrix_Empleados[itemArray].Tipo_1 != "F") {
-                StrTelefono_1 = "DesActualizado";
-                StrTelefono_2 = "DesActualizado";
-                StrTelefono_3 = "DesActualizado";
-                StrTelefono_4 = "DesActualizado";
-            }
-            else {
-                StrTelefono_1 = Convert_Valores_0(Matrix_Empleados[itemArray].Telefono_1);
-                StrTelefono_2 = Convert_Valores_0(Matrix_Empleados[itemArray].Telefono_2);
-                StrTelefono_3 = Convert_Valores_0(Matrix_Empleados[itemArray].Telefono_3);
-                StrTelefono_4 = Convert_Valores_0(Matrix_Empleados[itemArray].Telefono_4);
-            }
-            html += "<tr id= 'TExtencion_" + Matrix_Empleados[itemArray].Nit_ID + "'><td>" + Matrix_Empleados[itemArray].Nombre + "</td><td>" + StrTelefono_1 + "</td><td>" + StrTelefono_2 + "</td><td>" + StrTelefono_3 + "</td><td>" + StrTelefono_4 + "</td><td>" + Matrix_Empleados[itemArray].Correo_1 + "</td><td>" + Matrix_Empleados[itemArray].Correo_2 + "</td></tr>";
-        }
-    }
-
-    html += "</tbody></table>";
-    $("#container_TGrid_New").html("");
-    $("#container_TGrid_New").html(html);
-
-
-    $("#TGridExtencion").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
-
-}
-
 

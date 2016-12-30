@@ -120,8 +120,10 @@ function transacionAjax_ShearchPeopleAccess(State, TD, D, NIT, Tarjeta_ID) {
                         break;
 
                     case 1:
-                        if (Tarjeta_Proccess == 1)
+
+                        if (Tarjeta_Proccess == 1) {
                             transacionAjax_Search_Foto("Buscar_Foto", Array_People[0].TypeDocument_ID, Array_People[0].Document_ID);
+                        }
                         else
                             transacionAjax_Search_Foto("Buscar_Foto", TD, D);
                         break;
@@ -159,8 +161,35 @@ function transacionAjax_Search_Foto(State, TD, D) {
             else {
                 Array_Foto = JSON.parse(result);
                 SearchFoto();
-                Valida_Access_Minimo();
+                transacionAjax_Consult_Ingress("Revisa_Ingreso", Array_People[0].TypeDocument_ID, Array_People[0].Document_ID, Array_People[0].Nit_ID);
+
             }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_Consult_Ingress(State, TD, D, NIT) {
+    $.ajax({
+        url: "IngresoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "TD": TD,
+            "D": D,
+            "NIT": NIT
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            En_Planta = result;
+            if (En_Planta != 0)
+                Mensaje_General("Esta en planta", "La persona se encuentra registrada en el ingreso", "W");
+            else
+                Valida_Access_Minimo();
         },
         error: function () {
 
@@ -377,3 +406,70 @@ function transaccionAjax_Search_Encargado(State) {
         Tabla_Encargados();
     });
 }
+
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_Search_Address(State, TD, D) {
+    $.ajax({
+        url: "IngresoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "NIT": Array_G_Usuario[0].Nit_ID,
+            "TDoc": TD,
+            "Doc": D
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                List_Extencion = [];
+            }
+            else {
+                List_Extencion = JSON.parse(result);
+            }
+        },
+        error: function () {
+        },
+    }).done(function () {
+        Table_Extenciones();
+    });
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                         INGRESO DE LA PERSONA                                                                                                             ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------ crear ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax
+function transacionAjax_LogAcceso_create(State) {
+
+    //recorer array para el ingreso de los ingresos realizados
+    ListIngresoLog = JSON.stringify(Array_IngresoLog);
+
+    $.ajax({
+        url: "IngresoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "ListIngresoLog": ListIngresoLog
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            switch (result) {
+
+                case "Error":
+                    Mensaje_General("Disculpenos :(", "falla en el registro ,no puede ingresar", "E");
+                    break;
+
+                case "Exito":
+                    Mensaje_General("Exito", "se ha registrado el ingreso,la persona puede ingresar", "S");
+                    $("#dialog_eliminar").dialog("close");
+                    Clear();
+                    break;
+            }
+        },
+        error: function () {
+        }
+    });
+}
+

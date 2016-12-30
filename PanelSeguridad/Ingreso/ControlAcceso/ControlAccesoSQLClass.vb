@@ -75,4 +75,31 @@ Public Class ControlAccesoSQLClass
 
 #End Region
 
+#Region "OTRAS CONSULTAS"
+
+    ''' <summary>
+    ''' averigua si esta repetido
+    ''' </summary>
+    ''' <param name="vp_O_Obj"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Consulta_Ingreso(ByVal vp_O_Obj As ControlAccesoClass)
+
+        Dim conex As New Conector
+        Dim sql As New StringBuilder
+
+        sql.AppendLine(" SELECT  COUNT(1) AS INGRESO FROM LOG_CONTROL_ACCESO " & _
+                                         " WHERE LCA_Nit_ID = '" & vp_O_Obj.Nit_ID & "'" & _
+                                         " AND LCA_TypeDocument_ID = '" & vp_O_Obj.TypeDocument_ID & "'" & _
+                                         " AND LCA_Document_ID = '" & vp_O_Obj.Document_ID & "'" & _
+                                         " AND LCA_Fecha_RealSalida = ''")
+
+        Dim StrQuery As String = sql.ToString
+        Dim Result As String = conex.IDis(StrQuery, "1")
+
+        Return Result
+
+    End Function
+
+#End Region
 End Class

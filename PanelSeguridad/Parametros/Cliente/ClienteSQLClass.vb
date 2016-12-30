@@ -1550,6 +1550,40 @@ Public Class ClienteSQLClass
         Return ObjList
     End Function
 
+    ''' <summary>
+    ''' consulta los telefonos aliados a un empleado
+    ''' </summary>
+    ''' <param name="vp_Obj_persona"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function List_ExtencionesEmpleados(ByVal vp_Obj_persona As ClienteClass)
+
+        Dim ObjList As New List(Of ClienteClass)
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("2")
+        Dim BD_Admin As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDAdmin").ToString
+
+        Dim sql As New StringBuilder
+
+        sql.Append(" SELECT    D_Nit_ID, D_Name, " & _
+                                "                   D_Tipo_1, " & _
+                                "                   D_Telefono_1, " & _
+                                "                   D_Telefono_2, " & _
+                                "                   D_Telefono_3, " & _
+                                "                   D_Telefono_4, " & _
+                                "                   D_Correo_1, " & _
+                                "                   D_Correo_2 " & _
+                                "  FROM DIRECCIONES D   " & _
+                                "   WHERE  D_Nit_ID = '" & vp_Obj_persona.Nit_ID & "' " & _
+                                "   AND D_TypeDocument_ID = '" & vp_Obj_persona.TypeDocument_ID & "' " & _
+                                "   AND D_Document_ID = '" & vp_Obj_persona.Document_ID & "'")
+        Dim StrQuery As String = sql.ToString
+
+        ObjList = list(StrQuery, Conexion, "Matrix_PersonasEmpleados")
+
+        Return ObjList
+
+    End Function
 
 #End Region
 

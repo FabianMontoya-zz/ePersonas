@@ -46,10 +46,11 @@
         <div id="Marco_trabajo_Contrato">
             <table width="100%">
                 <tr>
-                    <td id="User" colspan="3" style="width: 70%; text-align: center;">
-                        <span id="liveclock" style="/*position: absolute; */ left: 0; top: 0;"></span>
+                    <td class="Label_Bold" style="width: 80%; text-align: end; color: #b70d0d;">Hora <span id="liveclock" style="left: 0; top: 0;"></span>
                     </td>
-                    <td style="width: 70%; text-align: center;"></td>
+                 <td id="logoExt" rowspan="2" style="width: 10%; text-align: end;">
+                        <img id="Agenda" class="Ext" src="" alt="Extenciones" style="height: 50px; width: 50px;" onclick="BtnConsulta_Persona('Empleado')" />
+                    </td>
                 </tr>
             </table>
             <table id="Tabla_Captura" style="width: 100%; text-align: left;">
@@ -242,14 +243,14 @@
                                 </tr>
                             </table>
                         </div>
-                    </div>
-                </div>
-                <div id="Inf_Ingreso" style="margin-top: 10px; width: 100%;">
-                    <div id="Cointainer_ingreso" style="margin-bottom: 10px;">
-                    </div>
-                    <div id="Control_Ingreso" style="margin-top: 10px; width: 100%; margin-bottom: 10px; text-align: center">
-                        <input id="BtnRegistroIngreso" class="BWeb" type="button" value="Registrar Ingreso" style="width: 40%;"
-                            onclick="Registrar_Ingreso_Log()" />
+                        <div id="Inf_Ingreso" style="margin-top: 10px; width: 100%;">
+                            <div id="Cointainer_ingreso" style="margin-bottom: 10px;">
+                            </div>
+                            <div id="Control_Ingreso" style="margin-top: 10px; width: 100%; margin-bottom: 10px; text-align: center">
+                                <input id="BtnRegistroIngreso" class="BWeb" type="button" value="Registrar Ingreso" style="width: 40%;"
+                                    onclick="Registrar_Ingreso_Log()" />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -279,8 +280,7 @@
         <table style="width: 100%; text-align: center;">
             <tr>
                 <td>
-                    <p class="Label_Bold" id="P1">
-                        Desea eliminar el siguiente registro?
+                    <p class="Label_Bold" id="Mensaje_confirma">
                     </p>
                 </td>
                 <td>
@@ -289,7 +289,7 @@
             </tr>
             <tr>
                 <td colspan="2" align="center">
-                    <input id="BtnElimin" type="button" value="Confirmar" onclick="BtnElimina();" />
+                    <input id="BtnElimin" class="BWeb" type="button" value="Confirmar" onclick="BtnConfirmaIngreso();" />
                 </td>
             </tr>
         </table>
@@ -306,7 +306,7 @@
     <div id="Dialog_Search_Persona">
         <table style="width: 100%;">
             <tr>
-                <td  class="Label_Bold">Ingrese Nombre
+                <td class="Label_Bold">Ingrese Nombre
                 </td>
                 <td>
                     <span class="cssToolTip_Form">
