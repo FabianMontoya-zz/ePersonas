@@ -220,7 +220,7 @@ function transacionAjax_Shearch_DocPersona(State, TD, D, NIT) {
                 Array_InfDoc_Persona = JSON.parse(result);
                 switch (Array_InfDoc_Persona.length) {
                     case 0:
-                        Mensaje_General("No existe", "la persona No tiene Documentos Fisicos", "W");
+                        //Mensaje_General("No existe", "la persona No tiene Documentos Fisicos", "W");
                         break;
                     default:
                         Tabla_Persona = 1;
@@ -259,7 +259,7 @@ function transacionAjax_Shearch_DocEmpresa(State, NIT) {
                 Array_InfDoc_Empresa = JSON.parse(result);
                 switch (Array_InfDoc_Empresa.length) {
                     case 0:
-                        Mensaje_General("No existe", "la Empresa No tiene Documentos Fisicos", "W");
+                        //Mensaje_General("No existe", "la Empresa No tiene Documentos Fisicos", "W");
                         break;
                     default:
                         Tabla_Empresa = 1;
@@ -299,7 +299,7 @@ function transacionAjax_Bring_DocPersona(State, TD, D, NIT) {
                 Array_Doc_Persona = JSON.parse(result);
                 switch (Array_Doc_Persona.length) {
                     case 0:
-                        Mensaje_General("No existe", "la persona No tiene Documentos Fisicos", "W");
+                        //Mensaje_General("No existe", "la persona No tiene Documentos Fisicos", "W");
                         break;
                     default:
                         break;
@@ -334,7 +334,7 @@ function transacionAjax_Bring_DocEmpresa(State, NIT) {
                 Array_Doc_Empresa = JSON.parse(result);
                 switch (Array_Doc_Empresa.length) {
                     case 0:
-                        Mensaje_General("No existe", "la Empresa No tiene Documentos Fisicos", "W");
+                       // Mensaje_General("No existe", "la Empresa No tiene Documentos Fisicos", "W");
                         break;
                     default:
                         break;

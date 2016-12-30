@@ -31,6 +31,7 @@
     Private _DescripPuertaAcceso As String
     Private _DescripAreaAcceso As String
     Private _DescripPersona_Enc As String
+
 #End Region
 
 #Region "propiedades"

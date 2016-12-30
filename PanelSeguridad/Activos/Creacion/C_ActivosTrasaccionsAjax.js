@@ -494,7 +494,7 @@ function transacionAjax_C_Activos_create(State) {
                 switch (result) {
 
                     case "Error":
-                        Mensaje_General("Disculpenos :(", "No se realizo el ingreso del Activo", "E");
+                        Mensaje_General("Disculpenos :(", "No se realizo el Salida del Activo", "E");
                         break;
 
                     case "Existe":
@@ -572,7 +572,7 @@ function transacionAjax_C_Vehiculos_create(State) {
                 switch (result) {
 
                     case "Error":
-                        Mensaje_General("Disculpenos :(", "No se realizo el ingreso del Activo", "E");
+                        Mensaje_General("Disculpenos :(", "No se realizo el Salida del Activo", "E");
                         break;
 
                     case "Existe":
@@ -614,7 +614,7 @@ function transacionAjax_C_Facturas_create(State) {
             switch (result) {
 
                 case "Error_Factura":
-                    Mensaje_General("Disculpenos :(", "No se realizo el ingreso de la factura", "E");
+                    Mensaje_General("Disculpenos :(", "No se realizo el Salida de la factura", "E");
                     break;
 
                 case "Exito":

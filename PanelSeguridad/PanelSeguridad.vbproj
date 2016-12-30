@@ -397,6 +397,11 @@
     <Content Include="Ingreso_New\Entrada\IngresoTrasaccionsAjax.js" />
     <Content Include="Ingreso_New\Entrada\Ingreso_Tarjeta.js" />
     <Content Include="Ingreso_New\menu.js" />
+    <Content Include="Ingreso_New\Salida\Salida.aspx" />
+    <Content Include="Ingreso_New\Salida\Salida.js" />
+    <Content Include="Ingreso_New\Salida\SalidaAjax.aspx" />
+    <Content Include="Ingreso_New\Salida\SalidaTrasaccionsAjax.js" />
+    <Content Include="Ingreso_New\Salida\Salida_Tarjeta.js" />
     <Content Include="Ingreso_New\SasifMaster_Cosult.js" />
     <Content Include="login\CambioPassword.aspx" />
     <Content Include="login\CambioPassword.js" />
@@ -987,8 +992,8 @@
     </Compile>
     <Compile Include="Ingreso\Acceso\AccesoClass.vb" />
     <Compile Include="Ingreso\Acceso\AccesoSQLClass.vb" />
-    <Compile Include="Ingreso\ControlAcceso\ControlAccesoClass.vb" />
-    <Compile Include="Ingreso\ControlAcceso\ControlAccesoSQLClass.vb" />
+    <Compile Include="Ingreso_New\ControlAcceso\ControlAccesoClass.vb" />
+    <Compile Include="Ingreso_New\ControlAcceso\ControlAccesoSQLClass.vb" />
     <Compile Include="Ingreso_New\Entrada\Ingreso.aspx.designer.vb">
       <DependentUpon>Ingreso.aspx</DependentUpon>
     </Compile>
@@ -1005,6 +1010,20 @@
     </Compile>
     <Compile Include="Ingreso_New\Entrada\IngresoClass.vb" />
     <Compile Include="Ingreso_New\Entrada\IngresoSQLClass.vb" />
+    <Compile Include="Ingreso_New\Salida\Salida.aspx.designer.vb">
+      <DependentUpon>Salida.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ingreso_New\Salida\Salida.aspx.vb">
+      <DependentUpon>Salida.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ingreso_New\Salida\SalidaAjax.aspx.designer.vb">
+      <DependentUpon>SalidaAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ingreso_New\Salida\SalidaAjax.aspx.vb">
+      <DependentUpon>SalidaAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="login\CambioPassword.aspx.designer.vb">
       <DependentUpon>CambioPassword.aspx</DependentUpon>
     </Compile>

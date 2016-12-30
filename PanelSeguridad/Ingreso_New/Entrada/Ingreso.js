@@ -15,27 +15,9 @@ var Tabla_Empresa = 0;
 var GrpDoc_Persona;
 var Nit_ID_Proccess;
 var Tipo_Busqueda;
-var En_Planta=0;
+var En_Planta = 0;
 
 /*--------------- region de variables globales --------------------*/
-
-
-
-var Matrix_Persona = [];
-
-var Matrix_AccesoPredeterminados = [];
-var Matrix_PAcceso = [];
-var Matrix_Area = [];
-var Matrix_PAcceso_Area = [];
-var Matrix_Datos_Empresa = [];
-var Matrix_Empleados = [];
-
-var ArrayAcceso = [];
-var ArrayCombo = [];
-var ArrayAccesoDep = [];
-var ArraySeguridad = [];
-var ArrayTdoc = [];
-
 var Fecha_Vencimiento;
 var RutaDocumento;
 var Imagen_Vencimiento;
@@ -48,7 +30,6 @@ var editNit_ID;
 var index_ID;
 var editID;
 var editDocID;
-
 /*--------------- region de variables globales --------------------*/
 
 //Evento load JS
@@ -57,49 +38,17 @@ $(document).ready(function () {
     transacionAjax_Documento('Documento');
 
     VentanasEmergentes();
+    ComplementosJquery();
+    InicializaPagina();
 
-    $("#ESelect").css("display", "none");
-    $("#Img1").css("display", "none");
-    $("#Img2").css("display", "none");
-    $("#Img3").css("display", "none");
-    $("#Img5").css("display", "none");
-    $("#Img6").css("display", "none");
-    $("#Img7").css("display", "none");
-    $("#Img8").css("display", "none");
-    $("#Control_Ingreso").css("display", "none");
-
-    $("#DE").css("display", "none");
-    $("#SE").css("display", "none");
-    $("#WA").css("display", "none");
-
-    $("#Sucess").css("display", "none");
-    $("#Fail").css("display", "none");
-
-    $("#Inf_persona").css("display", "none");
-    $("#Datos_persona").css("display", "none");
-
-    $("#Inf_Ingreso").css("display", "none");
-
-    $("#Div_D").css("display", "none");
-    $("#TI_2").css("display", "none");
-    $("#TI_3").css("display", "none");
-
-    MostrarHora();
+     MostrarHora();
     Capture_Tarjeta_ID();
-    $("#TxtIDTarjeta").focus();
-
-
-    $(function () { //Función del acordeon
-        $("#Acordeon_Ingreso").accordion({
-            heightStyle: "content",
-            collapsible: true
-        });
-    });
-
-
 });
 
-
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                 REGION INICIO DE COMPONENTES                                                                                                    ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//instancia dialogos jquey
 function VentanasEmergentes() {
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
@@ -149,6 +98,48 @@ function VentanasEmergentes() {
             background: "black"
         }
     });
+}
+
+//instancia  componentes anexos a jquery
+function ComplementosJquery() {
+    $(function () { //Función del acordeon
+        $("#Acordeon_Ingreso").accordion({
+            heightStyle: "content",
+            collapsible: true
+        });
+    });
+}
+
+//ininiciliza campos del load
+function InicializaPagina() {
+
+    $("#ESelect").css("display", "none");
+    $("#Img1").css("display", "none");
+    $("#Img2").css("display", "none");
+    $("#Img3").css("display", "none");
+    $("#Img5").css("display", "none");
+    $("#Img6").css("display", "none");
+    $("#Img7").css("display", "none");
+    $("#Img8").css("display", "none");
+    $("#Control_Ingreso").css("display", "none");
+
+    $("#DE").css("display", "none");
+    $("#SE").css("display", "none");
+    $("#WA").css("display", "none");
+
+    $("#Sucess").css("display", "none");
+    $("#Fail").css("display", "none");
+
+    $("#Inf_persona").css("display", "none");
+    $("#Datos_persona").css("display", "none");
+
+    $("#Inf_Ingreso").css("display", "none");
+
+    $("#Div_D").css("display", "none");
+    $("#TI_2").css("display", "none");
+    $("#TI_3").css("display", "none");
+
+    $("#TxtIDTarjeta").focus();
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -240,6 +231,7 @@ function BtnConfirmaIngreso() {
     transacionAjax_LogAcceso_create("Save_Log_Ingreso");
 }
 
+//muestra las extenciones de la persona
 function VerExtenciones() {
     $("#Dialog_Extencion").dialog("open");
     Table_Extenciones();
@@ -253,7 +245,7 @@ function VerExtenciones() {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //muestra los datos iniciales de la persona a ingresar
 function Datos_principales() {
-
+    
     Nit_ID_Proccess = Array_People[0].Nit_ID;
     GrpDoc_Persona = Array_People[0].GrpDocumentos;
     $("#L_Nombre").html(Array_People[0].Nombre);
@@ -264,6 +256,15 @@ function Datos_principales() {
     $("#Datos_persona").css("display", "inline-table");
     $("#Inf_persona").css("display", "inline-table");
 
+    if (Tarjeta_Proccess == 1) {
+        $("#TxtDoc").val(Array_People[0].Document_ID);
+        $("#Select_Documento").val(Array_People[0].TypeDocument_ID);
+        TDoc_VT = Array_People[0].TypeDocument_ID;
+        Doc_VT = Array_People[0].Document_ID;
+
+        $("#TxtDoc").attr("disabled", "disabled");
+        $("#Select_Documento").attr("disabled", "disabled");
+    }
 }
 
 //buscar Foto de la persona
@@ -503,14 +504,6 @@ function Paint_Grid_Docs() {
                 break;
         }
     }
-}
-
-//carga combo dependiente de pertas de acceso
-function CargaComboAreas() {
-    $("#Select_PAcceso").change(function () {
-        var index_ID = $(this).val();
-        Charge_Combos_Depend_Nit(List_PAcceso_Area, "Select_AreaAcceso", index_ID, "");
-    });
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/

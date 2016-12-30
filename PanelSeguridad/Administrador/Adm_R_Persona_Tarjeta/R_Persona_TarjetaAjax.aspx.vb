@@ -47,7 +47,7 @@ Public Class R_Persona_TarjetaAjax
     End Sub
 
 #Region "CRUD"
-    Function ReadTarjeta()
+    Protected Sub ReadTarjeta()
 
         Dim ObjList_Tarjeta As New List(Of InvPuertaClass)
         Dim SQL As New InvPuertaSQLClass
@@ -57,7 +57,7 @@ Public Class R_Persona_TarjetaAjax
         ObjList_Tarjeta = SQL.Read_All_Tarjetas(Nit_ID)
         Response.Write(JsonConvert.SerializeObject(ObjList_Tarjeta.ToArray()))
 
-    End Function
+    End Sub
 
     ''' <summary>
     ''' funcion que inserta en la tabla R_Persona_Tarjeta (INSERT)

@@ -1,10 +1,10 @@
 ﻿/*--------------- region de variables globales --------------------*/
-var Array_IngresoLog = [];
-var ListIngresoLog = [];
+var Array_SalidaLog = [];
+var ListSalidaLog = [];
 
 var Tarjeta_Proccess = 0;
-var Process_Manual_Ingreso = 0;
-var Cant_Ingreso = 0;
+var Process_Manual_Salida = 0;
+var Cant_Salida = 0;
 /*--------------- region de variables globales --------------------*/
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -67,7 +67,7 @@ function Valida_Access_Minimo() {
             Validaciones_Tarjeta();
         }
         else {
-            Mensaje_General("Tiene Tarjeta", "la persona tiene la tarjeta N° (" + Array_People[0].Tarjeta_ID + ") para el ingreso", "W");
+            Mensaje_General("Tiene Tarjeta", "la persona tiene la tarjeta N° (" + Array_People[0].Tarjeta_ID + ") para el Salida", "W");
             Clear();
         }
     }
@@ -105,103 +105,25 @@ function Valida_VigenciaTarjeta() {
             if (comparacion == "Mayor")
                 Mensaje_General("Tarjeta Vencida!", "La Tarjeta  de " + Array_People[0].Nombre + " está vencida fecha de vencimiento ( " + FechaVigencia + ")", "W");
             else {
-                valida_GrpDoc();
+                Consulta_log_Registros();
             }
             break;
         case "N":
-            valida_GrpDoc();
+            Consulta_log_Registros();
             break;
     }
 
 }
 
 //valida si tiene rupo de documento
-function valida_GrpDoc() {
-    if (GrpDoc_Persona != 0) {
-        transacionAjax_Shearch_DocPersona('Buscar_Doc_Persona', Array_People[0].TypeDocument_ID, Array_People[0].Document_ID, Array_People[0].Nit_ID);
-        transacionAjax_Shearch_DocEmpresa('Buscar_Doc_Empresa', Array_People[0].Nit_ID);
-        transacionAjax_Bring_DocPersona('Traer_Doc_Persona', Array_People[0].TypeDocument_ID, Array_People[0].Document_ID, Array_People[0].Nit_ID);
-        transacionAjax_Bring_DocEmpresa('Traer_Doc_Empresa', Array_People[0].Nit_ID);
-    }
-    else
-        Mensaje_General("Proceso Imcompleto", "La persona no tiene (Grupo de Documentos) asignados, comuniquese con el administrador del sistema!", "E");
-
-
+function Consulta_log_Registros() {
+    transacionAjax_Consult_Registros_Ingreso("Traer_LogIngreso", Array_People[0].TypeDocument_ID, Array_People[0].Document_ID, Array_People[0].Nit_ID)
 }
 
-//revisamos ingreso segun documentos solicitados
-function ValidaAccesoPrincipal() {
-    var contador_semaforo = 0;
-
-    for (item in Array_Valida_Ingreso) {
-        contador_semaforo = contador_semaforo + parseInt(Array_Valida_Ingreso[item].Estado_Doc);
-        if (Array_Valida_Ingreso[item].Estado_Doc >= 1) {
-            ConstruyeMensaje(Array_Valida_Ingreso[item].Document, Array_Valida_Ingreso[item].Existe, Array_Valida_Ingreso[item].Verificado, Array_Valida_Ingreso[item].Vigencia);
-        }
-    }
-    return contador_semaforo;
-}
-
-//valida los campos de acceso asignado
-function ValidaCamposIngreso() {
-
-    var validar = 0;
-    var Campo_1 = $("#Select_PAcceso").val();
-    var Campo_2 = $("#Select_AreaAcceso").val();
-    var Campo_3 = $("#Txt_Persona_Enc").val();
-    var Campo_4 = $("#TxtHora").val();
-    var Campo_5 = $("#TxtMinutos").val();
-
-    if (Campo_5 == "" || Campo_4 == "" || Campo_3 == "" || Campo_2 == "-1" || Campo_1 == "-1") {
-        validar = 1;
-        if (Campo_1 == "-1") { $("#Img6").css("display", "inline-table"); } else { $("#Img6").css("display", "none"); }
-        if (Campo_2 == "-1") { $("#Img7").css("display", "inline-table"); } else { $("#Img7").css("display", "none"); }
-        if (Campo_3 == "") { $("#Img8").css("display", "inline-table"); } else { $("#Img8").css("display", "none"); }
-        if (Campo_4 == "") { $("#Img3").css("display", "inline-table"); } else { $("#Img3").css("display", "none"); }
-        if (Campo_5 == "") { $("#Img5").css("display", "inline-table"); } else { $("#Img5").css("display", "none"); }
-    }
-    else {
-        $("#Img6").css("display", "none");
-        $("#Img7").css("display", "none");
-        $("#Img8").css("display", "none");
-        $("#Img3").css("display", "none");
-        $("#Img5").css("display", "none");
-    }
-
-    return validar;
-}
-
-//valida los campos de busqueda personas
-function ValidaSearch_People() {
-    var valida = 0;
-    var Campo_P = $("#Txt_Nombre").val();
-
-    if (Campo_P != "") {
-        if (Campo_P.length < 3) {
-            valida = 1;
-            Process_Manual_Ingreso = 1;
-            Mensaje_General("Minimo de letras", "El minimode letras debe se de (3) para la busqueda del " + Tipo_Busqueda, "W");
-        }
-    }
-    else {
-        valida = 1;
-        Process_Manual_Ingreso = 1;
-        Mensaje_General("Minimo de letras", "El minimode letras debe se de (3) para la busqueda del " + Tipo_Busqueda, "W");
-    }
-    return valida;
-}
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                           FUNCION   COMPLEMENTARIAS                                                                                                ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-//carga combo dependiente de acceso
-function CargaComboAreas() {
-    $("#Select_PAcceso").change(function () {
-        var index_ID = $(this).val();
-        Charge_Combos_Depend_Nit(List_PAcceso_Area, "Select_AreaAcceso", index_ID, "");
-    });
-}
-
 //muestra la hora en tiempo real
 function MostrarHora() {
     if (!document.layers && !document.all && !document.getElementById)
@@ -268,21 +190,21 @@ function CalculaHoraEstimada() {
         Hora_Estimado = parseInt(Hours_Live) + parseInt(HV_P);
     }
 
-    $("#HA_Ingreso").html(Fecha_actual + " || " + Hours_Live + " : " + Minutes_Live);
+    $("#HA_Salida").html(Fecha_actual + " || " + Hours_Live + " : " + Minutes_Live);
     $("#HE_Salida").html(Fecha_actual + " || " + Hora_Estimado + " : " + Minuto_Estimado);
 
-    CreateJSON_IngresoLog();
+    CreateJSON_SalidaLog();
 }
 
-//crea array de ingresos
-function CreateJSON_IngresoLog() {
+//crea array de Salidas
+function CreateJSON_SalidaLog() {
 
-    var Dato_Ingreso = $("#HA_Ingreso").html();
+    var Dato_Salida = $("#HA_Salida").html();
     var Dato_PlanSalida = $("#HE_Salida").html();
     var Dato_PA = $("#Select_PAcceso option:selected").html();
     var Dato_A = $("#Select_AreaAcceso option:selected").html();
 
-    var A_Ingreso = Dato_Ingreso.split("||");
+    var A_Salida = Dato_Salida.split("||");
     var A_PlanSalida = Dato_PlanSalida.split("||");
     var A_PA = Dato_PA.split("-");
 
@@ -294,8 +216,8 @@ function CreateJSON_IngresoLog() {
         D_Area = A_A[1];
     }
 
-    var FIng = A_Ingreso[0].trim();
-    var HIng = A_Ingreso[1].trim();
+    var FIng = A_Salida[0].trim();
+    var HIng = A_Salida[1].trim();
 
     var FPSal = A_PlanSalida[0].trim();
     var HPSal = A_PlanSalida[1].trim();
@@ -304,9 +226,9 @@ function CreateJSON_IngresoLog() {
     var SplitP_Enc = Str_P_Enc.split(" - ");
     var T_Doc_P_Enc = SplitP_Enc[0];
     var Doc_P_Enc = SplitP_Enc[1];
-   
-    var JSON_IngresoLog = {
-        "Index": Cant_Ingreso,
+
+    var JSON_SalidaLog = {
+        "Index": Cant_Salida,
         "Nit_ID": Nit_ID_Proccess,
         "TypeDocument_ID": $("#Select_Documento").val(),
         "Document_ID": $("#TxtDoc").val(),
@@ -326,9 +248,9 @@ function CreateJSON_IngresoLog() {
         "Estado": 1,
         "IngAutomatico_Porteria": 2,
         "TipoPersona": "",
-        "Num_UnicoVisita": Cant_Ingreso,
-        "Usuario_Ingreso": User.toUpperCase(),
-        "FechaIngreso": $("#HA_Ingreso").html().replace("||", ""),
+        "Num_UnicoVisita": Cant_Salida,
+        "Usuario_Salida": User.toUpperCase(),
+        "FechaSalida": $("#HA_Salida").html().replace("||", ""),
         "Usuario_Salida": "",
         "FechaSalida": "",
         "DescripPuertaAcceso": A_PA[1],
@@ -336,40 +258,30 @@ function CreateJSON_IngresoLog() {
         "DescripPersona_Enc": $("#Txt_Persona_Enc").val()
     }
 
-    Array_IngresoLog.push(JSON_IngresoLog);
-    Cant_Ingreso = Cant_Ingreso + 1;
-    Tabla_Ingreso();
+    Array_SalidaLog.push(JSON_SalidaLog);
+    Cant_Salida = Cant_Salida + 1;
+    Tabla_Salida();
 }
 
-//crea el grid de ingreso
-function Tabla_Ingreso() {
-    var html = "<table id='TIng' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th class='T_head' colspan='7' style='margin-top: 5px;' >Registro de Ingresos</th></tr><tr><th style='width: 2%;'>Eliminar</th><th>Puerta</th><th>Area</th><th>Persona Encargada</th><th>Tiempo Visita</th><th>Fecha/Hora Ingreso</th><th>Fecha/Hora Estimada Salida</th></tr></thead><tbody>";
+//crea el grid de Salida
+function Tabla_Salida() {
+    var html = "<table id='TIng' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th class='T_head' colspan='7' style='margin-top: 5px;' >Registro de Salidas</th></tr><tr><th>Puerta</th><th>Area</th><th>Persona Encargada</th><th>Tiempo Visita</th><th>Fecha/Hora Salida</th><th>Fecha/Hora Estimada Salida</th></tr></thead><tbody>";
 
-    for (item in Array_IngresoLog) {
-        html += "<tr id= 'TIng_" + Array_IngresoLog[item].Index + "'><td><input type='radio' name='Asig' id='Check_" + Array_IngresoLog[item].Index + "' value='TR" + Array_IngresoLog[item].Index + "' onclick=\"EliminarIngreso('" + Array_IngresoLog[item].Index + "')\"/></td><td>" + Array_IngresoLog[item].PuertaAcceso_ID + " - " + Array_IngresoLog[item].DescripPuertaAcceso + "</td><td>" + Array_IngresoLog[item].Area_ID + " - " + Array_IngresoLog[item].DescripAreaAcceso + "</td><td>" +  Array_IngresoLog[item].DescripPersona_Enc + "</td><td>" + Array_IngresoLog[item].Tiempo_PlanVisita + "</td><td>" + Array_IngresoLog[item].FechaIngreso + "</td><td>" + Array_IngresoLog[item].Fecha_PlanSalida + "  " + Array_IngresoLog[item].Hora_PlanSalida + "</td></tr>";
+    for (item in Array_SalidaLog) {
+        html += "<tr id= 'TIng_" + item + "'><td>" + Array_SalidaLog[item].PuertaAcceso_ID + " - " + Array_SalidaLog[item].DescripPuertaAcceso + "</td><td>" + Array_SalidaLog[item].Area_ID + " - " + Array_SalidaLog[item].DescripAreaAcceso + "</td><td>" + Array_SalidaLog[item].DescripPersona_Enc + "</td><td>" + Array_SalidaLog[item].Tiempo_PlanVisita + "</td><td>" + Array_SalidaLog[item].FechaSalida + "</td><td>" + Array_SalidaLog[item].Fecha_PlanSalida + "  " + Array_SalidaLog[item].Hora_PlanSalida + "</td></tr>";
     }
 
     html += "</tbody></table>";
-    $("#Cointainer_ingreso").html("");
-    $("#Cointainer_ingreso").html(html);
+    $("#Cointainer_Salida").html("");
+    $("#Cointainer_Salida").html(html);
 
     $("#TIng").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,
         "bDestroy": true
     });
-    Clear_Ingreso();
-    $("#Control_Ingreso").css("display", "inline-table");
+    Clear_Salida();
+    $("#Control_Salida").css("display", "inline-table");
 
 }
 
-//eliminar ingreso de l array
-function EliminarIngreso(index) {
-    //borramos el Registro deseado
-    for (item in Array_IngresoLog) {
-        if (Array_IngresoLog[item].Index == index) {
-            Array_IngresoLog.splice(item, 1);
-        }
-    }
-    Tabla_Ingreso();
-}
 
