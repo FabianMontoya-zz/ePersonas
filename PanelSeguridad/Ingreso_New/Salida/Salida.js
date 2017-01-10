@@ -320,6 +320,8 @@ function Clear() {
     $("#Inf_persona").css("display", "None");
     $("#Inf_Salida").css("display", "none");
     $("#Control_Salida").css("display", "none");
+    $("#Reg_Ingreso").css("display", "none");
+    
     $("#L_Nombre").html("");
     $("#L_Empresa").html("");
     $("#L_Area").html("");
@@ -334,7 +336,12 @@ function Clear() {
 
     $("#Btnguardar").attr("value", "Consultar");
     $('.C_Chosen').trigger('chosen:updated');
+
+    Array_SalidaLog = [];
+    Tabla_Salida();
     $("#TxtIDTarjeta").focus();
+
+
 
 }
 

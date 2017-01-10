@@ -27,8 +27,6 @@ Public Class SalidaAjax
                 Case "Update_Log_Salida"
                     Update_Log_Salida()
 
-
-
             End Select
 
         End If
@@ -142,7 +140,6 @@ Public Class SalidaAjax
 
     End Sub
 
-  
 #End Region
 
 End Class
