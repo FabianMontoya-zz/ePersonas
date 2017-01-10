@@ -199,6 +199,9 @@ function BtnAgregarAcceso() {
     var validate = ValidaCamposIngreso();
 
     if (validate == 0) {
+        $("#Select_AreaAcceso").prop('disabled', false).trigger("chosen:updated");
+        $("#Select_PAcceso").prop('disabled', false).trigger("chosen:updated");
+        $("#BtnConsult_encargado").prop('disabled', false);
         CalculaHoraEstimada();
         $("#Inf_Ingreso").css("display", "inline-table");
 
@@ -605,7 +608,6 @@ function validaEntradaSalida(A_FIV, A_FFV) {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                     PROCESO DE CARGUE GRID PERSONAL ENCARGADO                                                                                                         ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
 //contruye vista de Personal encargado
 function Tabla_Encargados() {
 
@@ -643,7 +645,6 @@ function Selecciona_Encargado(Index_People) {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                              GRID EXTENCIONES                                                                                                                        ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
 // crea la tabla en el cliente
 function Table_Extenciones() {
     var html;

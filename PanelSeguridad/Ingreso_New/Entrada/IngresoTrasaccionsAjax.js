@@ -31,8 +31,7 @@ function transacionAjax_Documento(State) {
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transaccionAjax_Door_Access(State) {
-    var List_Puerta_Acceso = [];
-
+   
     $.ajax({
         url: "IngresoAjax.aspx",
         type: "POST",

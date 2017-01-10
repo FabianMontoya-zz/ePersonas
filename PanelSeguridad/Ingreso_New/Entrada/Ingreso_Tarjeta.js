@@ -1,6 +1,7 @@
 ﻿/*--------------- region de variables globales --------------------*/
 var Array_IngresoLog = [];
 var ListIngresoLog = [];
+var List_Puerta_Acceso = [];
 
 var Tarjeta_Proccess = 0;
 var Process_Manual_Ingreso = 0;
@@ -304,13 +305,13 @@ function CreateJSON_IngresoLog() {
     var SplitP_Enc = Str_P_Enc.split(" - ");
     var T_Doc_P_Enc = SplitP_Enc[0];
     var Doc_P_Enc = SplitP_Enc[1];
-   
+
     var JSON_IngresoLog = {
         "Index": Cant_Ingreso,
         "Nit_ID": Nit_ID_Proccess,
         "TypeDocument_ID": $("#Select_Documento").val(),
         "Document_ID": $("#TxtDoc").val(),
-        "Tarjeta_ID": $("#Tarjeta_ID").val(),
+        "Tarjeta_ID": $("#TxtIDTarjeta").val(),
         "Nit_ID_EmpVisita": Nit_ID_Proccess,
         "PuertaAcceso_ID": $("#Select_PAcceso").val(),
         "Area_ID": $("#Select_AreaAcceso").val(),
@@ -346,7 +347,7 @@ function Tabla_Ingreso() {
     var html = "<table id='TIng' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th class='T_head' colspan='7' style='margin-top: 5px;' >Registro de Ingresos</th></tr><tr><th style='width: 2%;'>Eliminar</th><th>Puerta</th><th>Area</th><th>Persona Encargada</th><th>Tiempo Visita</th><th>Fecha/Hora Ingreso</th><th>Fecha/Hora Estimada Salida</th></tr></thead><tbody>";
 
     for (item in Array_IngresoLog) {
-        html += "<tr id= 'TIng_" + Array_IngresoLog[item].Index + "'><td><input type='radio' name='Asig' id='Check_" + Array_IngresoLog[item].Index + "' value='TR" + Array_IngresoLog[item].Index + "' onclick=\"EliminarIngreso('" + Array_IngresoLog[item].Index + "')\"/></td><td>" + Array_IngresoLog[item].PuertaAcceso_ID + " - " + Array_IngresoLog[item].DescripPuertaAcceso + "</td><td>" + Array_IngresoLog[item].Area_ID + " - " + Array_IngresoLog[item].DescripAreaAcceso + "</td><td>" +  Array_IngresoLog[item].DescripPersona_Enc + "</td><td>" + Array_IngresoLog[item].Tiempo_PlanVisita + "</td><td>" + Array_IngresoLog[item].FechaIngreso + "</td><td>" + Array_IngresoLog[item].Fecha_PlanSalida + "  " + Array_IngresoLog[item].Hora_PlanSalida + "</td></tr>";
+        html += "<tr id= 'TIng_" + Array_IngresoLog[item].Index + "'><td><input type='radio' name='Asig' id='Check_" + Array_IngresoLog[item].Index + "' value='TR" + Array_IngresoLog[item].Index + "' onclick=\"EliminarIngreso('" + Array_IngresoLog[item].Index + "')\"/></td><td>" + Array_IngresoLog[item].PuertaAcceso_ID + " - " + Array_IngresoLog[item].DescripPuertaAcceso + "</td><td>" + Array_IngresoLog[item].Area_ID + " - " + Array_IngresoLog[item].DescripAreaAcceso + "</td><td>" + Array_IngresoLog[item].DescripPersona_Enc + "</td><td>" + Array_IngresoLog[item].Tiempo_PlanVisita + "</td><td>" + Array_IngresoLog[item].FechaIngreso + "</td><td>" + Array_IngresoLog[item].Fecha_PlanSalida + "  " + Array_IngresoLog[item].Hora_PlanSalida + "</td></tr>";
     }
 
     html += "</tbody></table>";
@@ -372,4 +373,44 @@ function EliminarIngreso(index) {
     }
     Tabla_Ingreso();
 }
+
+//valida si se puede ingresar a la tabla de ingresos
+function Mostrar_AccesoPredeterminado(Index_AP) {
+
+    Index_AP = Index_AP - 1;
+    var Flag_ingreso;
+    var A_FIV = [];
+    var A_FFV = [];
+
+    var Index_E = parseInt(Index_AP) + 1;
+
+    var TVigen = List_Acceso_Predeterminado[Index_AP].ControlVigencia;
+    A_FIV[0] = [$("#TxtHoraIni_" + Index_E).val(), $("#TxtMinutosIni_" + Index_E).val()];
+    A_FFV[0] = [$("#TxtHoraSal_" + Index_E).val(), $("#TxtMinutosSal_" + Index_E).val()];
+
+    if (TVigen == "N")
+        Flag_Ingreso = "VERDE";
+    else
+        Flag_Ingreso = validaEntradaSalida(A_FIV, A_FFV);
+
+    switch (Flag_Ingreso) {
+        case "ROJO":
+            Process_Manual_Ingreso = 1;
+            Mensaje_General("Ha expirado a Vigencia", "El tiempo Esta vencido para el ingreso, puede editar la horas de entrada si lo desea", "W");
+            break;
+
+        case "VERDE":
+            $("#Txt_Persona_Enc").val(List_Acceso_Predeterminado[Index_AP].TypeDocument_ID_Per_Encargada + " - " + List_Acceso_Predeterminado[Index_AP].Document_ID_Per_Encargada + " - " + List_Acceso_Predeterminado[Index_AP].DescripPersona_Enc);
+            Charge_Combos_Depend_Nit(List_Puerta_Acceso, "Select_PAcceso", Nit_ID_Proccess, List_Acceso_Predeterminado[Index_AP].PuertaAcceso_ID);
+            transaccionAjax_Door_Access_Area('Lista_Puerta_Acceso_Area');
+            setTimeout("Charge_Combos_Depend_Nit(List_PAcceso_Area, 'Select_AreaAcceso', List_Acceso_Predeterminado[" + Index_AP + "].PuertaAcceso_ID, List_Acceso_Predeterminado[" + Index_AP + "].Area_ID);", 400);
+            $("#Select_AreaAcceso").prop('disabled', true).trigger("chosen:updated");
+            $("#Select_PAcceso").prop('disabled', true).trigger("chosen:updated");
+            $("#BtnConsult_encargado").prop('disabled', true);
+            $("#Acordeon_Ingreso").accordion("option", "active", 2);
+            break;
+    }
+
+}
+
 

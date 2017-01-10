@@ -170,8 +170,8 @@ function btnSalir() {
 }
 
 //Salida de registro
-function BtnConfirmaSalida() {
-    transacionAjax_LogAcceso_create("Save_Log_Salida");
+function Registrar_Salida_Log() {
+    transacionAjax_LogAcceso_Update("Update_Log_Salida");
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/

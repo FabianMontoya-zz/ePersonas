@@ -162,7 +162,7 @@ function transacionAjax_Consult_Registros_Ingreso(State, TD, D, NIT) {
             }
             else {
                 Array_SalidaLog = JSON.parse(result);
-             }
+            }
         },
         error: function () {
 
@@ -173,34 +173,33 @@ function transacionAjax_Consult_Registros_Ingreso(State, TD, D, NIT) {
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*----                                                                         INGRESO DE LA PERSONA                                                                                                             ----*/
+/*----                                                                         SALIDA DE LA PERSONA                                                                                                             ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*------------------------------ crear ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
-function transacionAjax_LogAcceso_create(State) {
-
-    //recorer array para el ingreso de los ingresos realizados
-    ListIngresoLog = JSON.stringify(Array_IngresoLog);
+function transacionAjax_LogAcceso_Update(State) {
 
     $.ajax({
-        url: "IngresoAjax.aspx",
+        url: "SalidaAjax.aspx",
         type: "POST",
         //crear json
         data: {
             "action": State,
-            "ListIngresoLog": ListIngresoLog
+            "Nit": Nit_ID_Proccess,
+            "TDoc": $("#Select_Documento").val(),
+            "Doc": $("#TxtDoc").val(),
+             "user": User.toUpperCase()
         },
         //Transaccion Ajax en proceso
         success: function (result) {
             switch (result) {
 
                 case "Error":
-                    Mensaje_General("Disculpenos :(", "falla en el registro ,no puede ingresar", "E");
+                    Mensaje_General("Disculpenos :(", "falla en el registro ,no puede registrar la Salida", "E");
                     break;
 
                 case "Exito":
-                    Mensaje_General("Exito", "se ha registrado el ingreso,la persona puede ingresar", "S");
-                    $("#dialog_eliminar").dialog("close");
+                    Mensaje_General("Exito", "se ha registrado la salida", "S");
                     Clear();
                     break;
             }

@@ -73,6 +73,36 @@ Public Class ControlAccesoSQLClass
         Return Result
     End Function
 
+
+    ''' <summary>
+    ''' funcion que crea el query para la modificacion del Cliente (UPDATE)
+    ''' </summary>
+    ''' <param name="vp_O_Obj"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function UpdateControlAcceso(ByVal vp_O_Obj As ControlAccesoClass)
+
+        Dim conex As New Conector
+        Dim Result As String
+        ' definiendo los objetos
+        Dim sql As New StringBuilder
+        Dim StrQuery As String = ""
+        sql.AppendLine(" UPDATE LOG_CONTROL_ACCESO SET " & _
+                          " LCA_Usuario_Salida ='" & vp_O_Obj.Usuario_Salida & "', " & _
+                          " LCA_FechaSalida ='" & vp_O_Obj.Fecha_RealSalida & "' " & _
+                          " WHERE LCA_Nit_ID = '" & vp_O_Obj.Nit_ID & "'" & _
+                          " AND LCA_TypeDocument_ID = '" & vp_O_Obj.TypeDocument_ID & "'" & _
+                          " AND LCA_Document_ID = '" & vp_O_Obj.Document_ID & "'" & _
+                          " AND LCA_FechaSalida IS NULL")
+        StrQuery = sql.ToString
+
+        Result = conex.StrInsert_and_Update_All(StrQuery, "1")
+
+        Return Result
+
+    End Function
+
+
 #End Region
 
 
@@ -96,7 +126,7 @@ Public Class ControlAccesoSQLClass
         objcmd = objConexBD.CreateCommand
 
         Dim ObjList As New List(Of ControlAccesoClass)
-        
+
         'abrimos conexion
         objConexBD.Open()
         'cargamos consulta
@@ -105,7 +135,7 @@ Public Class ControlAccesoSQLClass
         ReadConsulta = objcmd.ExecuteReader()
 
         Select Case vp_S_TypeList
-           
+
             Case "Matrix"
                 While ReadConsulta.Read
 
@@ -119,7 +149,7 @@ Public Class ControlAccesoSQLClass
                     obj.HoraEntrada = ReadConsulta.GetValue(5)
                     If Not (IsDBNull(ReadConsulta.GetValue(6))) Then obj.DescripAreaAcceso = ReadConsulta.GetValue(6) Else obj.DescripAreaAcceso = ""
                     If Not (IsDBNull(ReadConsulta.GetValue(7))) Then obj.DescripPersona_Enc = ReadConsulta.GetValue(7) Else obj.DescripPersona_Enc = ""
-         
+
                     'agregamos a la lista
                     ObjList.Add(obj)
 
@@ -132,7 +162,7 @@ Public Class ControlAccesoSQLClass
         objConexBD.Close()
         'retornamos la consulta
         Return ObjList
-    
+
     End Function
 
 #End Region
@@ -174,8 +204,8 @@ Public Class ControlAccesoSQLClass
                               " WHERE LCA_Nit_ID = '" & vp_O_Obj.Nit_ID & "'" & _
                               "     AND LCA_TypeDocument_ID = '" & vp_O_Obj.TypeDocument_ID & "'" & _
                               "     AND LCA_Document_ID = '" & vp_O_Obj.Document_ID & "'" & _
-                              "     AND LCA_Fecha_RealSalida = '' ")
-                   
+                              "     AND LCA_FechaSalida IS NULL ")
+
         Dim StrQuery As String = sql.ToString
 
         ObjList = list(StrQuery, Conexion, "Matrix")
@@ -199,7 +229,7 @@ Public Class ControlAccesoSQLClass
                                          " WHERE LCA_Nit_ID = '" & vp_O_Obj.Nit_ID & "'" & _
                                          " AND LCA_TypeDocument_ID = '" & vp_O_Obj.TypeDocument_ID & "'" & _
                                          " AND LCA_Document_ID = '" & vp_O_Obj.Document_ID & "'" & _
-                                         " AND LCA_Fecha_RealSalida = ''")
+                                         " AND LCA_FechaSalida IS NULL")
 
         Dim StrQuery As String = sql.ToString
         Dim Result As String = conex.IDis(StrQuery, "1")
