@@ -6,67 +6,7 @@ PanelSeguridad
 </name>
 </assembly>
 <members>
-<member name="M:PanelSeguridad.ControlAccesoSQLClass.InsertControlAcceso(PanelSeguridad.ControlAccesoClass)">
-	<summary>
- funcion que crea el query para la insercion de nuevo Control de acceso (INSERT)
- </summary>
-	<param name="vp_Obj"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.ControlAccesoSQLClass.list(System.String,System.String,System.String)">
-	<summary>
- funcion que trae el listado de Cliente para armar la tabla
- </summary>
-	<param name="vp_S_StrQuery"></param>
-	<param name="vg_S_StrConexion"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.ControlAccesoSQLClass.List_Registros_Ingreso(PanelSeguridad.ControlAccesoClass)">
-	<summary>
- trae los registros asociados al usuario
- </summary>
-	<param name="vp_O_Obj"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.ControlAccesoSQLClass.Consulta_Ingreso(PanelSeguridad.ControlAccesoClass)">
-	<summary>
- averigua si esta repetido
- </summary>
-	<param name="vp_O_Obj"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.SalidaAjax.Save_Log_Salida">
-	<summary>
- funcion que inserta en la tabla Acceso (INSERT)
- </summary>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.SalidaAjax.CargarDocumento">
-	<summary>
- funcion que carga el objeto DDL consulta
- </summary>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.SalidaAjax.Search_People_Access">
-	<summary>
- consulta si existe la persona digitada 
- </summary>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.SalidaAjax.Search_Document_Foto">
-	<summary>
- trae la foto del personaje a consultar
- </summary>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.SalidaAjax.Create_List_ControlAcceso">
-	<summary>
- crea lista clase de control de acesso
- </summary>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.SalidaAjax.People_Ingress">
-	<summary>
- validamos si la persona ya esta en la planta
- </summary>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.C_ActivosAjax.InsertC_Activos">
+<member name="M:PanelSeguridad.C_ActivosAjax.InsertC_Activos">
 	<summary>
  funcion que inserta en la tabla C_Activos (INSERT)
  </summary>
@@ -2062,6 +2002,31 @@ To modify move field declaration from designer file to code-behind file.
  </summary>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.SalidaAjax.Update_Log_Salida">
+	<summary>
+ funcion que ACTUALIZA en la tabla Acceso (UPDATE)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.SalidaAjax.CargarDocumento">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.SalidaAjax.Search_People_Access">
+	<summary>
+ consulta si existe la persona digitada 
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.SalidaAjax.Search_Document_Foto">
+	<summary>
+ trae la foto del personaje a consultar
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.SalidaAjax.List_Registro_Ingreso">
+	<summary>
+ TRAE TODOS LOS REGISTROS DE INGRESO DE LA PERSONA CONSULTADA
+ </summary>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.LoginAjax.ingresar">
 	<summary>
  'funcion que valida contra la BD si el usuario y contraseña son correctos
@@ -3919,6 +3884,42 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
 	<summary>
  carga matrix relacion de activos sub tipos de activos
  </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.ControlAccesoSQLClass.InsertControlAcceso(PanelSeguridad.ControlAccesoClass)">
+	<summary>
+ funcion que crea el query para la insercion de nuevo Control de acceso (INSERT)
+ </summary>
+	<param name="vp_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.ControlAccesoSQLClass.UpdateControlAcceso(PanelSeguridad.ControlAccesoClass)">
+	<summary>
+ funcion que crea el query para la modificacion del Cliente (UPDATE)
+ </summary>
+	<param name="vp_O_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.ControlAccesoSQLClass.list(System.String,System.String,System.String)">
+	<summary>
+ funcion que trae el listado de Cliente para armar la tabla
+ </summary>
+	<param name="vp_S_StrQuery"></param>
+	<param name="vg_S_StrConexion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.ControlAccesoSQLClass.List_Registros_Ingreso(PanelSeguridad.ControlAccesoClass)">
+	<summary>
+ trae los registros asociados al usuario
+ </summary>
+	<param name="vp_O_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.ControlAccesoSQLClass.Consulta_Ingreso(PanelSeguridad.ControlAccesoClass)">
+	<summary>
+ averigua si esta repetido
+ </summary>
+	<param name="vp_O_Obj"></param>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.DocumentosSQLClass.Read_All(System.String,System.String,System.String)">
