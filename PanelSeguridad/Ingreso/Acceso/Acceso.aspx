@@ -11,15 +11,15 @@
     <link href="../../css/css_login.css" rel="stylesheet" type="text/css" />
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
     <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />
-    <link href="../../css/custom/charge.css" rel="stylesheet" type="text/css" />
     <link href="../../css/Chosen/chosen.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/jquery.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Chosen/chosen.jquery.js" type="text/javascript"></script>
     <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" />
     <link href="../../css/css_WebAcceso.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
-    <style type="text/css">
+<style type="text/css">
         html, body
         {
             overflow: hidden;
@@ -28,6 +28,14 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
     <div id="Container_title_Form">
+    </div>
+    <div id="Dialog_Control" style="width: 100%; text-align: center;">
+        <div class="cssload-container" style="margin-top: 25%;">
+            <div class="cssload-whirlpool"></div>
+            <div>
+                <img id="Sasif" class="Logo_3" src="../../images/SASIF_NEW_WHITE.png" alt="SASIF S.A.S." />
+            </div>
+        </div>
     </div>
     <div id="Marco_Web">
         <div id="Marco_trabajo_Web">
@@ -116,7 +124,7 @@
                                 <select id="Select_PAcceso" class="C_Chosen" style="width: 95%">
                                 </select>
                             </td>
-                            <td style="width: 5%">
+                            <td style="width: 5%; padding-bottom: 22px;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img6"
                                         src="../../images/error.png" />
@@ -128,7 +136,7 @@
                                 <select id="Select_AreaAcceso" class="C_Chosen" style="width: 95%">
                                 </select>
                             </td>
-                            <td style="width: 5%">
+                            <td style="width: 5%; padding-bottom: 22px;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img7"
                                         src="../../images/error.png" />
@@ -140,8 +148,8 @@
                                 <select id="Select_Persona_Enc" class="C_Chosen" style="width: 95%">
                                 </select>
                             </td>
-                            <td style="width: 5%">
-                                <span class="cssToolTip">
+                            <td style="width: 5%; padding-bottom: 22px;">
+                                <span class="cssToolTip_L">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img8"
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
@@ -154,8 +162,8 @@
                             </td>
                             <td class="Title_Bold" colspan="4">Fecha / Hora
                             </td>
-                            <td class="Title_Bold" rowspan="2" style="width:10%">
-                                  <input id="Button1" class="BWeb" type="button" value="Ingresar" onclick="BtnAgregarAcceso();" />
+                            <td class="Title_Bold" rowspan="2" style="width: 10%">
+                                <input id="BtnIngresar" class="BWeb" type="button" value="Ingresar" onclick="BtnAgregarAcceso();" />
                             </td>
                         </tr>
                         <tr>
@@ -166,7 +174,7 @@
                                     <input type="number" id="TxtHora" class="Numeric" maxlength="2" min="0" max="24" style="width: 40px;" oninput="maxLengthTypeNumber(this)" />
                                     <span class="Spam_AN"></span></span>
                             </td>
-                            <td style="width: 5%;">
+                            <td style="width: 5%; padding-bottom: 22px;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img3"
                                         src="../../images/error.png" />
@@ -179,7 +187,7 @@
                                     <input type="number" id="TxtMinutos" class="Numeric" maxlength="2" style="width: 40px;" min="0" max="59" oninput="maxLengthTypeNumber(this)" />
                                     <span class="Spam_AN"></span></span>
                             </td>
-                            <td style="width: 5%;">
+                            <td style="width: 5%; padding-bottom: 22px;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img5"
                                         src="../../images/error.png" />
@@ -187,7 +195,7 @@
                             </td>
                             <td class="Label_Bold" style="width: 5%">Ingreso
                             </td>
-                            <td  id="HA_Ingreso" style="width: 20%;" ></td>
+                            <td id="HA_Ingreso" style="width: 20%;"></td>
                             <td class="Label_Bold" style="width: 7%;">Estimado Salida</td>
                             <td id="HE_Salida" style="width: 20%;"></td>
                         </tr>
@@ -196,8 +204,13 @@
 
             </div>
             <div id="Inf_Ingreso" style="margin-top: 10px; width: 100%;">
-                <div id="Cointainer_ingreso">
+                <div id="Cointainer_ingreso" style="margin-bottom: 10px;">
                 </div>
+                <div id="Control_Ingreso" style="margin-top: 10px; width: 100%; margin-bottom: 10px; text-align: center">
+                    <input id="BtnRegistroIngreso" class="BWeb" type="button" value="Registrar Ingreso" style="width: 40%;"
+                        onclick="Registrar_Ingreso_Log()" />
+                </div>
+
                 <div id="Container_Acceso">
                 </div>
             </div>
@@ -219,7 +232,7 @@
                 <td>
                     <img alt="error" id="DE" src="../../images/error_2.png" />
                     <img alt="success" id="SE" src="../../images/success.png" />
-                    <img alt="Warning" id="WE" src="../../images/alert.png" />
+                    <img alt="Warning" id="WA" src="../../images/alert.png" />
                 </td>
             </tr>
             <tr>
@@ -234,8 +247,7 @@
         <table style="width: 100%; text-align: center;">
             <tr>
                 <td>
-                    <p class="Label_Bold" id="P1">
-                        Desea eliminar el siguiente registro?
+                    <p class="Label_Bold" id="Mensaje_confirma">
                     </p>
                 </td>
                 <td>
@@ -244,7 +256,7 @@
             </tr>
             <tr>
                 <td colspan="2" align="center">
-                    <input id="BtnElimin" type="button" value="Confirmar" onclick="BtnElimina();" />
+                    <input id="BtnElimin" class="BWeb" type="button" value="Confirmar" onclick="BtnConfirmaIngreso();" />
                 </td>
             </tr>
         </table>
@@ -258,4 +270,8 @@
             </tr>
         </table>
     </div>
+    <div id="Dialog_Extencion">
+        <div id="container_TGrid_New"></div>
+    </div>
+
 </asp:Content>

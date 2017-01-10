@@ -6,7 +6,7 @@ function transacionAjax_CargaBusqueda(State) {
         type: "POST",
         //crear json
         data: { "action": State,
-            "tabla": 'R_GRPDOC_DOCUMENTOS'
+            "tabla": 'R_PACCESO_AREA'
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -164,7 +164,7 @@ function transacionAjax_R_PuertaAcc_Area_create(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "block");
                     $("#SE").css("display", "none");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     break;
 
                 case "Existe":
@@ -182,7 +182,7 @@ function transacionAjax_R_PuertaAcc_Area_create(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "none");
                     $("#SE").css("display", "block");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     Clear();
                     break;
             }
@@ -218,7 +218,7 @@ function transacionAjax_R_PuertaAcc_Area_delete(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "block");
                     $("#SE").css("display", "none");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     $("#dialog_eliminar").dialog("close");
                     break;
 
@@ -239,7 +239,7 @@ function transacionAjax_R_PuertaAcc_Area_delete(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "none");
                     $("#SE").css("display", "block");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     $("#dialog_eliminar").dialog("close");
                     transacionAjax_R_PuertaAcc_Area("consulta", "N", "ALL");
                     Clear();

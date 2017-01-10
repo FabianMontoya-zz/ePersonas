@@ -173,6 +173,11 @@ Public Class ClienteAjax
             objCliente.Other_1 = Request.Form("Other_1")
             objCliente.Other_2 = Request.Form("Other_2")
 
+            objCliente.OP_Visitante = Request.Form("OP_Visitante")
+            objCliente.OP_Representante = Request.Form("OP_Representante")
+            objCliente.OP_Socio = Request.Form("OP_socio")
+            objCliente.Por_Participacion = Request.Form("Por_Participacion")
+
             objCliente.Nombre_2 = Request.Form("Nombre_2")
             objCliente.Apellido_1 = Request.Form("Ape_1")
             objCliente.Apellido_2 = Request.Form("Ape_2")
@@ -188,6 +193,9 @@ Public Class ClienteAjax
             objCliente.TypeDocument_ID_Jefe = Request.Form("TDocJefe")
             objCliente.Document_ID_Jefe = Request.Form("DocJefe")
             objCliente.Politica_ID = Request.Form("Politica")
+
+            objCliente.Sex = Request.Form("Sexo")
+            objCliente.FechaNacimiento = Request.Form("FechaNacimiento")
 
             objCliente.GrpDocumentos = Request.Form("GrpDocumento")
 
@@ -239,11 +247,18 @@ Public Class ClienteAjax
         objCliente.Other_1 = Request.Form("Other_1")
         objCliente.Other_2 = Request.Form("Other_2")
 
+        objCliente.OP_Visitante = Request.Form("OP_Visitante")
+        objCliente.OP_Representante = Request.Form("OP_Representante")
+        objCliente.OP_Socio = Request.Form("OP_socio")
+        objCliente.Por_Participacion = Request.Form("Por_Participacion")
+
         objCliente.Nombre_2 = Request.Form("Nombre_2")
         objCliente.Apellido_1 = Request.Form("Ape_1")
         objCliente.Apellido_2 = Request.Form("Ape_2")
         objCliente.Cod_Bank = Request.Form("CodBank")
         objCliente.DocCiudad = Request.Form("CiuDoc")
+        objCliente.Sex = Request.Form("Sexo")
+        objCliente.FechaNacimiento = Request.Form("FechaNacimiento")
 
         objCliente.TipoPersona = Request.Form("TipoPersona")
         objCliente.Regimen = Request.Form("Regimen")
@@ -530,7 +545,7 @@ Public Class ClienteAjax
     Protected Sub Carga_Matriz_PaisCiudad()
 
         Dim SQLC As New CiudadesSQLClass
-     
+
         Dim ObjList_MatrixCiudad As New List(Of CiudadesClass)
         ObjList_MatrixCiudad = SQLC.Read_Matrix_Ciudad()
 
@@ -736,6 +751,8 @@ Public Class ClienteAjax
             Obj.Pais_ID = Item.Pais_ID
             Obj.Ciudad_ID = Item.Ciudad_ID
 
+            Obj.Tipo_1 = Item.Tipo_1
+           
             If Convert.ToString(Item.Telefono_1) = "" Then
                 Obj.Telefono_1 = 0
             Else

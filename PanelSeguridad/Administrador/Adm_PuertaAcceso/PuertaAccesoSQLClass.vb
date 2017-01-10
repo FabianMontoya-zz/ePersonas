@@ -407,6 +407,30 @@ Public Class PuertaAccesoSQLClass
 
     End Function
 
+    ''' <summary>
+    ''' lee la matriz de puertas de acceso
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function List_PuertaAcceso(ByVal vp_S_Nit_ID As String)
+
+        Dim ObjList As New List(Of PuertaAccesoClass)
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("1")
+
+        Dim sql As New StringBuilder
+
+        sql.Append(" SELECT PA_PuertaAcceso_ID AS ID,CAST(PA_PuertaAcceso_ID AS NVARCHAR(5)) + ' - ' + PA_Descripcion AS DESCRIPCION, PA_Nit_ID FROM PUERTAS_ACCESO " & _
+                               "  WHERE PA_Nit_ID ='" & vp_S_Nit_ID & "'" & _
+                              " ORDER BY PA_PuertaAcceso_ID ASC ")
+        Dim StrQuery As String = sql.ToString
+
+        ObjList = listPuertaAcceso(StrQuery, Conexion, "Matrix")
+
+        Return ObjList
+
+    End Function
+
 #End Region
 
 End Class

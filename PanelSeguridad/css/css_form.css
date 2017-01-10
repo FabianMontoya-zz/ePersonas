@@ -2,6 +2,17 @@
 /*                                                               ADMININSTRACION PARAMETRIZABLE                                                               */
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
+/*CONTROL IMAGEN DIRECCION*/
+#logoExt:hover .Ext
+{
+    content: url("../../images/agenda_gray.png");
+}
+
+.Ext
+{
+    content: url("../../images/agenda.png");
+}
+
 /*----------------------- TITULO ---------------------------*/
 /*personalizacion de la barra de titulo*/
 #Container_title_Form
@@ -34,6 +45,20 @@
     vertical-align: text-top;
     padding-left: 30px;
 }
+
+.T_head
+{
+    border-radius: 5px 5px 0 0;
+    background: -webkit-linear-gradient(#b70d0d, #631111); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#b70d0d, #631111); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#b70d0d, #631111); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#b70d0d, #631111); /* Standard syntax (must be last)*/
+    font: 14px/20px CenturyGothic,sans-serif;
+    font-weight: bold;
+    color: #ffffff;
+    border-color: White;
+}
+
 
 /*----------------------- TITULO ---------------------------*/
 /*personalizacion marco del formulario*/
@@ -227,7 +252,18 @@
     text-align: center;
 }
 
-#Container_Consulta
+#container_TGrid_New
+{
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    border: solid 1px #CACACA;
+    font: 12px/20px CenturyGothic,sans-serif;
+    text-align: center;
+}
+
+
+#Container_Consulta, #Container_Facturas
 {
     width: 100%;
     overflow: auto;
@@ -306,12 +342,41 @@
     font-weight: bold;
 }
 
-#Relacion, #Complementos, #Complementos_Read, #Vencimiento, #Complementos_Read_Cliente, #Anexos
+#Relacion, #Complementos, #Complementos_Read, #Vencimiento, #Complementos_Read_Cliente, #Anexos, #Blo_Inmuebles, #Blo_Fasecolda
 {
-    margin-top: 15px;
+    margin-top: 1%;
+    margin-bottom: 1%;
     width: 100%;
     padding: 20px 26px;
-    border-radius: 20px;
+    border-radius: 10px;
+    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+    border: solid 1px #921919;
+}
+
+#Bloque_datosIngreso, #T_Datos_Identificacion_blin, #Bloque_datos_activos, #Bloque_Datos_Factura
+{
+    margin-top: 1%;
+    margin-bottom: 1%;
+    width: 95%;
+    padding: 20px 26px;
+    border-radius: 10px;
+    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+    border: solid 1px #921919;
+}
+
+#Bloque_datos_Terceros1, #Bloque_datos_Terceros2
+{
+    margin-top: 1%;
+    margin-bottom: 1%;
+    width: 95%;
+    padding: 20px 15px;
+    border-radius: 10px;
     background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
@@ -389,8 +454,6 @@
 #T_Valores, #T_Saldos
 {
     width: 100%;
-    border-top: solid gray;
-    margin-top: 19px;
 }
 
 #Marco_Contrato
@@ -404,7 +467,7 @@
     background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
     border: solid 1px #921919;
     width: 90%;
-    height: 470px;
+    margin-left: 25px;
 }
 
 #Marco_trabajo_Contrato
@@ -418,23 +481,22 @@
     background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
     border: solid 1px #921919;
     width: 95%;
-    height: 410px;
     overflow: auto;
 }
 
 #Container_Complementos
 {
-    height: 170px;
-    width: 200px;
+    height: 45%;
+    width: 20%;
     position: absolute;
-    padding-top: 40px;
+    padding-top: 4%;
     border-radius: 10px;
     background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
     background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
     border: solid 1px #921919;
-    z-index: 20;
+    z-index: 40;
     margin-left: 5px;
     margin-top: 10px;
 }
@@ -518,19 +580,26 @@
 
 #Foto_Persona
 {
-    width: 100px;
+    width: 86%;
     height: 120px;
     position: absolute;
-    z-index: 50;
-    margin-left: 755px;
+    z-index: 0;
+    text-align: right;
     margin-top: 10px;
 }
 
 #Footer_Det
 {
     position: absolute;
-    margin-top: 50px;
+    margin-top: 55px;
     border: solid 1px;
     border-radius: 3px;
     border-style: outset;
+}
+
+.Sigla
+{
+    text-align: left;
+    font-size: 10px;
+    font-weight: bold;
 }

@@ -73,10 +73,18 @@ Public Class ClienteSQLClass
                         "       CLI_3.CLI_Nombre + ' ' + CLI_3.CLI_Nombre_2 + ' ' + CLI_3.CLI_Apellido_1 + ' ' + CLI_3.CLI_Apellido_2, " & _
                         "      	GD.GD_Descripcion, " & _
                         "      	CLI.CLI_N_Consecutivo, " & _
-                        "      	ROW_NUMBER() OVER(ORDER BY CLI.CLI_Nit_ID DESC) AS Index_Cliente  " & _
+                        "      	ROW_NUMBER() OVER(ORDER BY CLI.CLI_Nit_ID DESC) AS Index_Cliente,  " & _
+                        "      	CLI.CLI_Sex, " & _
+                        "      	CLI.CLI_FechaNacimiento, " & _
+                        "       SEX.DDLL_Descripcion AS DescripSex, " & _
+                         "      CLI.CLI_OP_Visitante, " & _
+                        "       CLI.CLI_OP_Representante, " & _
+                        "       CLI.CLI_OP_socio, " & _
+                        "       CLI.CLI_Por_Participacion " & _
                         " FROM CLIENTE CLI " & _
                         " INNER JOIN PAISES P ON P.P_Cod = CLI.CLI_Pais_ID " & _
                         " INNER JOIN CIUDADES C ON C.C_Ciudad_ID = CLI.CLI_Ciudad_ID " & _
+                        " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO SEX ON SEX.DDL_ID = CLI.CLI_Sex AND SEX.DDL_Tabla = 'SEXO' " & _
                         " LEFT JOIN " & BD_Admin & ".dbo.TC_TIPO_DOCUMENTO TD ON TD.TD_ID_TDoc = CLI.CLI_TypeDocument_ID " & _
                         " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D1 ON D1.DDL_ID = CLI.CLI_TipoPersona AND D1.DDL_Tabla = 'TIPO_PERSONA' " & _
                         " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D2 ON D2.DDL_ID = CLI.CLI_Regimen AND D2.DDL_Tabla = 'REGIMEN' " & _
@@ -137,10 +145,18 @@ Public Class ClienteSQLClass
                         "       CLI_3.CLI_Nombre + ' ' + CLI_3.CLI_Nombre_2 + ' ' + CLI_3.CLI_Apellido_1 + ' ' + CLI_3.CLI_Apellido_2, " & _
                         "      	GD.GD_Descripcion, " & _
                         "      	CLI.CLI_N_Consecutivo, " & _
-                        "      	ROW_NUMBER() OVER(ORDER BY CLI.CLI_Nit_ID DESC) AS Index_Cliente  " & _
+                        "      	ROW_NUMBER() OVER(ORDER BY CLI.CLI_Nit_ID DESC) AS Index_Cliente,  " & _
+                        "      	CLI.CLI_Sex, " & _
+                        "      	CLI.CLI_FechaNacimiento, " & _
+                        "       SEX.DDLL_Descripcion AS DescripSex, " & _
+                        "       CLI.CLI_OP_Visitante, " & _
+                        "       CLI.CLI_OP_Representante, " & _
+                        "       CLI.CLI_OP_socio, " & _
+                        "       CLI.CLI_Por_Participacion " & _
                         " FROM CLIENTE CLI " & _
                         " INNER JOIN PAISES P ON P.P_Cod = CLI.CLI_Pais_ID " & _
                         " INNER JOIN CIUDADES C ON C.C_Ciudad_ID = CLI.CLI_Ciudad_ID " & _
+                        " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO SEX ON SEX.DDL_ID = CLI.CLI_Sex AND SEX.DDL_Tabla = 'SEXO' " & _
                         " LEFT JOIN " & BD_Admin & ".dbo.TC_TIPO_DOCUMENTO TD ON TD.TD_ID_TDoc = CLI.CLI_TypeDocument_ID " & _
                         " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D1 ON D1.DDL_ID = CLI.CLI_TipoPersona AND D1.DDL_Tabla = 'TIPO_PERSONA' " & _
                         " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D2 ON D2.DDL_ID = CLI.CLI_Regimen AND D2.DDL_Tabla = 'REGIMEN' " & _
@@ -199,10 +215,18 @@ Public Class ClienteSQLClass
                         "       CLI_3.CLI_Nombre + ' ' + CLI_3.CLI_Nombre_2 + ' ' + CLI_3.CLI_Apellido_1 + ' ' + CLI_3.CLI_Apellido_2, " & _
                         "      	GD.GD_Descripcion, " & _
                         "      	CLI.CLI_N_Consecutivo, " & _
-                        "      	ROW_NUMBER() OVER(ORDER BY CLI.CLI_Nit_ID DESC) AS Index_Cliente  " & _
+                        "      	ROW_NUMBER() OVER(ORDER BY CLI.CLI_Nit_ID DESC) AS Index_Cliente,  " & _
+                        "      	CLI.CLI_Sex, " & _
+                        "      	CLI.CLI_FechaNacimiento, " & _
+                        "       SEX.DDLL_Descripcion AS DescripSex, " & _
+                        "       CLI.CLI_OP_Visitante, " & _
+                        "       CLI.CLI_OP_Representante, " & _
+                        "       CLI.CLI_OP_socio, " & _
+                        "       CLI.CLI_Por_Participacion " & _
                         " FROM CLIENTE CLI " & _
                         " INNER JOIN PAISES P ON P.P_Cod = CLI.CLI_Pais_ID " & _
                         " INNER JOIN CIUDADES C ON C.C_Ciudad_ID = CLI.CLI_Ciudad_ID " & _
+                        " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO SEX ON SEX.DDL_ID = CLI.CLI_Sex AND SEX.DDL_Tabla = 'SEXO' " & _
                         " LEFT JOIN " & BD_Admin & ".dbo.TC_TIPO_DOCUMENTO TD ON TD.TD_ID_TDoc = CLI.CLI_TypeDocument_ID " & _
                         " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D1 ON D1.DDL_ID = CLI.CLI_TipoPersona AND D1.DDL_Tabla = 'TIPO_PERSONA' " & _
                         " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D2 ON D2.DDL_ID = CLI.CLI_Regimen AND D2.DDL_Tabla = 'REGIMEN' " & _
@@ -274,6 +298,12 @@ Public Class ClienteSQLClass
             " CLI_Politica_ID, " & _
             " CLI_GrpDocumentos, " & _
             " CLI_N_Consecutivo, " & _
+            " CLI_FechaNacimiento, " & _
+            " CLI_Sex, " & _
+            " CLI_OP_Visitante, " & _
+            " CLI_OP_Representante, " & _
+            " CLI_OP_socio, " & _
+            " CLI_Por_Participacion, " & _
             " CLI_Usuario_Creacion, " & _
             " CLI_FechaCreacion, " & _
             " CLI_Usuario_Actualizacion, " & _
@@ -311,6 +341,12 @@ Public Class ClienteSQLClass
         sql.AppendLine("'" & vp_O_Obj.Politica_ID & "',")
         sql.AppendLine("'" & vp_O_Obj.GrpDocumentos & "',")
         sql.AppendLine("'" & Consecutivo & "',")
+        sql.AppendLine("'" & vp_O_Obj.FechaNacimiento & "',")
+        sql.AppendLine("'" & vp_O_Obj.Sex & "',")
+        sql.AppendLine("'" & vp_O_Obj.OP_Visitante & "',")
+        sql.AppendLine("'" & vp_O_Obj.OP_Representante & "',")
+        sql.AppendLine("'" & vp_O_Obj.OP_Socio & "',")
+        sql.AppendLine("'" & vp_O_Obj.Por_Participacion & "',")
         sql.AppendLine("'" & vp_O_Obj.UsuarioCreacion & "',")
         sql.AppendLine("'" & vp_O_Obj.FechaCreacion & "',")
         sql.AppendLine("'" & vp_O_Obj.UsuarioActualizacion & "',")
@@ -364,6 +400,12 @@ Public Class ClienteSQLClass
                           " CLI_Document_ID_Jefe ='" & vp_O_Obj.Document_ID_Jefe & "', " & _
                           " CLI_Politica_ID ='" & vp_O_Obj.Politica_ID & "', " & _
                           " CLI_GrpDocumentos ='" & vp_O_Obj.GrpDocumentos & "', " & _
+                          " CLI_Sex ='" & vp_O_Obj.Sex & "', " & _
+                          " CLI_FechaNacimiento ='" & vp_O_Obj.FechaNacimiento & "', " & _
+                          " CLI_OP_Visitante ='" & vp_O_Obj.OP_Visitante & "', " & _
+                          " CLI_OP_Representante ='" & vp_O_Obj.OP_Representante & "', " & _
+                          " CLI_OP_socio ='" & vp_O_Obj.OP_Socio & "', " & _
+                          " CLI_Por_Participacion ='" & vp_O_Obj.Por_Participacion & "', " & _
                           " CLI_Usuario_Actualizacion ='" & vp_O_Obj.UsuarioActualizacion & "', " & _
                           " CLI_FechaActualizacion ='" & vp_O_Obj.FechaActualizacion & "'" & _
                        " WHERE CLI_Nit_ID = '" & vp_O_Obj.Nit_ID & "'" & _
@@ -680,6 +722,15 @@ Public Class ClienteSQLClass
                     objCliente.Consecutivo = ReadConsulta.GetValue(46)
                     objCliente.Index = ReadConsulta.GetValue(47)
 
+                    If Not (IsDBNull(ReadConsulta.GetValue(48))) Then objCliente.Sex = ReadConsulta.GetValue(48) Else objCliente.Sex = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(49))) Then objCliente.FechaNacimiento = ReadConsulta.GetValue(49) Else objCliente.FechaNacimiento = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(50))) Then objCliente.DescripSexo = ReadConsulta.GetValue(50) Else objCliente.DescripSexo = ""
+
+                    objCliente.OP_Visitante = ReadConsulta.GetValue(51)
+                    objCliente.OP_Representante = ReadConsulta.GetValue(52)
+                    objCliente.OP_Socio = ReadConsulta.GetValue(53)
+                    If Not (IsDBNull(ReadConsulta.GetValue(54))) Then objCliente.Por_Participacion = ReadConsulta.GetValue(54) Else objCliente.Por_Participacion = 0
+
                     'agregamos a la lista
                     ObjListCliente.Add(objCliente)
 
@@ -723,6 +774,15 @@ Public Class ClienteSQLClass
                     objCliente.TypeDocument_ID = ReadConsulta.GetValue(1)
                     objCliente.Nombre = ReadConsulta.GetValue(2)
                     objCliente.Nit_ID = ReadConsulta.GetValue(3)
+                    objCliente.OP_Cliente = ReadConsulta.GetValue(4)
+                    objCliente.OP_Avaluador = ReadConsulta.GetValue(5)
+                    objCliente.OP_Transito = ReadConsulta.GetValue(6)
+                    objCliente.OP_Hacienda = ReadConsulta.GetValue(7)
+                    objCliente.OP_Empresa = ReadConsulta.GetValue(8)
+                    objCliente.OP_Empleado = ReadConsulta.GetValue(9)
+                    objCliente.OP_Asesor = ReadConsulta.GetValue(10)
+                    objCliente.Other_1 = ReadConsulta.GetValue(11)
+                    objCliente.Other_2 = ReadConsulta.GetValue(12)
 
                     'agregamos a la lista
                     ObjListCliente.Add(objCliente)
@@ -772,6 +832,26 @@ Public Class ClienteSQLClass
 
                 End While
 
+            Case "Matrix_PersonasEmpleados"
+                While ReadConsulta.Read
+
+                    Dim objCliente As New ClienteClass
+                    'cargamos datos sobre el objeto de login
+                    objCliente.Nit_ID = ReadConsulta.GetValue(0)
+                    objCliente.Nombre = ReadConsulta.GetValue(1)
+                    If Not (IsDBNull(ReadConsulta.GetValue(2))) Then objCliente.Tipo_1 = ReadConsulta.GetValue(2) Else objCliente.Tipo_1 = ""
+                    objCliente.Telefono_1 = ReadConsulta.GetValue(3)
+                    objCliente.Telefono_2 = ReadConsulta.GetValue(4)
+                    objCliente.Telefono_3 = ReadConsulta.GetValue(5)
+                    objCliente.Telefono_4 = ReadConsulta.GetValue(6)
+                    objCliente.Correo_1 = ReadConsulta.GetValue(7)
+                    objCliente.Correo_2 = ReadConsulta.GetValue(8)
+
+                    'agregamos a la lista
+                    ObjListCliente.Add(objCliente)
+
+                End While
+
             Case "Matrix_Personas_Documentos"
                 While ReadConsulta.Read
                     Dim obj As New DocumentosClass
@@ -786,6 +866,55 @@ Public Class ClienteSQLClass
 
                     'agregamos a la lista
                     ObjListDoc.Add(obj)
+
+                End While
+
+            Case "Matrix_Personas_Direcciones"
+                While ReadConsulta.Read
+
+                    Dim objCliente As New ClienteClass
+
+                    objCliente.Nit_ID = ReadConsulta.GetValue(0)
+                    objCliente.TypeDocument_ID = ReadConsulta.GetValue(1)
+                    objCliente.Document_ID = ReadConsulta.GetValue(2)
+                    objCliente.Digito_Verificacion = ReadConsulta.GetValue(3)
+
+                    If Not (IsDBNull(ReadConsulta.GetValue(4))) Then objCliente.Nombre = ReadConsulta.GetValue(4) Else objCliente.Nombre = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(5))) Then objCliente.Nombre_2 = ReadConsulta.GetValue(5) Else objCliente.Nombre_2 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(6))) Then objCliente.Apellido_1 = ReadConsulta.GetValue(6) Else objCliente.Apellido_1 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(7))) Then objCliente.Apellido_2 = ReadConsulta.GetValue(7) Else objCliente.Apellido_2 = ""
+
+                    If Not (IsDBNull(ReadConsulta.GetValue(8))) Then objCliente.Ciudad_ID = ReadConsulta.GetValue(8) Else objCliente.Ciudad_ID = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(9))) Then objCliente.PaginaWeb = ReadConsulta.GetValue(9) Else objCliente.PaginaWeb = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(10))) Then objCliente.Direccion = ReadConsulta.GetValue(10) Else objCliente.Direccion = ""
+
+                    If Not (IsDBNull(ReadConsulta.GetValue(11))) Then objCliente.Telefono_1 = ReadConsulta.GetValue(11) Else objCliente.Telefono_1 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(12))) Then objCliente.Telefono_2 = ReadConsulta.GetValue(12) Else objCliente.Telefono_2 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(13))) Then objCliente.Telefono_3 = ReadConsulta.GetValue(13) Else objCliente.Telefono_3 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(14))) Then objCliente.Telefono_4 = ReadConsulta.GetValue(14) Else objCliente.Telefono_4 = ""
+
+                    If Not (IsDBNull(ReadConsulta.GetValue(15))) Then objCliente.Correo_1 = ReadConsulta.GetValue(15) Else objCliente.Correo_1 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(16))) Then objCliente.Correo_2 = ReadConsulta.GetValue(16) Else objCliente.Correo_2 = ""
+
+                    objCliente.Index_Direccion = ReadConsulta.GetValue(17)
+
+                    'agregamos a la lista
+                    ObjListCliente.Add(objCliente)
+
+                End While
+
+            Case "Busqueda_Persona"
+                While ReadConsulta.Read
+
+                    Dim objCliente As New ClienteClass
+
+                    objCliente.TypeDocument_ID = ReadConsulta.GetValue(0)
+                    objCliente.Document_ID = ReadConsulta.GetValue(1)
+                    objCliente.Nombre = ReadConsulta.GetValue(2)
+                    objCliente.Index = ReadConsulta.GetValue(3)
+
+                    'agregamos a la lista
+                    ObjListCliente.Add(objCliente)
 
                 End While
 
@@ -995,14 +1124,23 @@ Public Class ClienteSQLClass
         Dim sql As New StringBuilder
 
         sql.Append("  SELECT CLI_Document_ID,  " & _
-                                "  CLI_TypeDocument_ID, " & _
-                                "  CAST(CLI_Document_ID AS NVARCHAR(20)) + '  -  ' +  " & _
-                                "  CAST(CLI_TypeDocument_ID AS NVARCHAR(2)) + '  -  ' + " & _
-                                "  CLI_Nombre + ' ' +  " & _
-                                "  CASE  WHEN  CLI_Nombre_2  IS NULL THEN ''  ELSE CLI_Nombre_2 END  + ' ' + " & _
-                                "  CASE  WHEN  CLI_Apellido_1  IS NULL THEN ''  ELSE CLI_Apellido_1 END  + ' ' + " & _
-                                "  CASE  WHEN  CLI_Apellido_2  IS NULL THEN ''  ELSE CLI_Apellido_2 END AS DESCRIPCION, " & _
-                                "  CLI_Nit_ID  " & _
+                                "             CLI_TypeDocument_ID, " & _
+                                "             CAST(CLI_Document_ID AS NVARCHAR(20)) + '  -  ' +  " & _
+                                "             CAST(CLI_TypeDocument_ID AS NVARCHAR(2)) + '  -  ' + " & _
+                                "             CLI_Nombre + ' ' +  " & _
+                                "             CASE  WHEN  CLI_Nombre_2  IS NULL THEN ''  ELSE CLI_Nombre_2 END  + ' ' + " & _
+                                "             CASE  WHEN  CLI_Apellido_1  IS NULL THEN ''  ELSE CLI_Apellido_1 END  + ' ' + " & _
+                                "             CASE  WHEN  CLI_Apellido_2  IS NULL THEN ''  ELSE CLI_Apellido_2 END AS DESCRIPCION, " & _
+                                "             CLI_Nit_ID,  " & _
+                                "             CLI_OP_Cliente,  " & _
+                                "             CLI_OP_Avaluador,  " & _
+                                "             CLI_OP_Transito,  " & _
+                                "             CLI_OP_Hacienda,  " & _
+                                "             CLI_OP_Empresa,  " & _
+                                "             CLI_OP_Empleado,  " & _
+                                "             CLI_OP_Asesor,  " & _
+                                "             CLI_Other_1,  " & _
+                                "             CLI_Other_2  " & _
                                 "  FROM CLIENTE  ")
         Dim StrQuery As String = sql.ToString
 
@@ -1089,6 +1227,44 @@ Public Class ClienteSQLClass
     End Function
 
     ''' <summary>
+    ''' lee matrix para pagina de acceso
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Matrix_DatosEmpleados(ByVal vp_S_NitEmpresa As String)
+
+        Dim ObjList As New List(Of ClienteClass)
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("2")
+        Dim BD_Admin As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDAdmin").ToString
+
+        Dim sql As New StringBuilder
+
+        sql.Append(" SELECT    CLI_Nit_ID, " & _
+                                "                   CLI_Nombre + ' ' + " & _
+                                "                   CASE  WHEN  CLI_Nombre_2  IS NULL THEN ''  ELSE CLI_Nombre_2 END  + ' ' +  " & _
+                                "   				CASE  WHEN  CLI_Apellido_1  IS NULL THEN ''  ELSE CLI_Apellido_1 END  + ' ' +  " & _
+                                "   				CASE  WHEN  CLI_Apellido_2  IS NULL THEN ''  ELSE CLI_Apellido_2 END AS DESCRIPCION, " & _
+                                "                   D_Tipo_1, " & _
+                                "                   D_Telefono_1, " & _
+                                "                   D_Telefono_2, " & _
+                                "                   D_Telefono_3, " & _
+                                "                   D_Telefono_4, " & _
+                                "                   D_Correo_1, " & _
+                                "                   D_Correo_2 " & _
+                                " FROM CLIENTE C   " & _
+                                "   INNER JOIN DIRECCIONES D ON D.D_Nit_ID = C.CLI_Nit_ID AND D.D_Document_ID = C.CLI_Document_ID   " & _
+                                "   WHERE C.CLI_OP_Empleado='S'  AND  " & _
+                                "   CLI_Nit_ID = '" & vp_S_NitEmpresa & "'")
+        Dim StrQuery As String = sql.ToString
+
+        ObjList = list(StrQuery, Conexion, "Matrix_PersonasEmpleados")
+
+        Return ObjList
+
+    End Function
+
+    ''' <summary>
     ''' lee matrix para documentos personas empresas
     ''' </summary>
     ''' <returns></returns>
@@ -1099,6 +1275,8 @@ Public Class ClienteSQLClass
         Dim conex As New Conector
         Dim Conexion As String = conex.typeConexion("2")
 
+        Dim BD_Doc As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDDocument").ToString
+
         Dim sql As New StringBuilder
 
         sql.Append("SELECT  CLI_Nit_ID,  " & _
@@ -1108,9 +1286,9 @@ Public Class ClienteSQLClass
                               "                  RGRD.RGD_Documentos_ID, " & _
                               "                  D.DOC_Descripcion " & _
                               "  FROM CLIENTE C " & _
-                              "     LEFT JOIN DOCUMENTOS_D.dbo.GRUPO_DOCUMENTO GD ON GD.GD_Grp_Documento_ID = C.CLI_GrpDocumentos AND GD.GD_Nit_ID = C.CLI_Nit_ID " & _
-                              "     LEFT JOIN DOCUMENTOS_D.dbo.R_GRPDOC_DOCUMENTOS  RGRD ON RGRD.RGD_Grp_Documento_ID = GD.GD_Grp_Documento_ID " & _
-                              "     LEFT JOIN  DOCUMENTOS_D.dbo.DOCUMENTOS D ON D.DOC_Documentos_ID= RGRD.RGD_Documentos_ID " & _
+                              "     LEFT JOIN " & BD_Doc & ".dbo.GRUPO_DOCUMENTO GD ON GD.GD_Grp_Documento_ID = C.CLI_GrpDocumentos AND GD.GD_Nit_ID = C.CLI_Nit_ID " & _
+                              "     LEFT JOIN " & BD_Doc & ".dbo.R_GRPDOC_DOCUMENTOS  RGRD ON RGRD.RGD_Grp_Documento_ID = GD.GD_Grp_Documento_ID " & _
+                              "     LEFT JOIN  " & BD_Doc & ".dbo.DOCUMENTOS D ON D.DOC_Documentos_ID= RGRD.RGD_Documentos_ID " & _
                               "  ORDER BY CLI_Nit_ID ASC")
 
         Dim StrQuery As String = sql.ToString
@@ -1118,6 +1296,293 @@ Public Class ClienteSQLClass
         ObjList = list(StrQuery, Conexion, "Matrix_Personas_Documentos")
 
         Return ObjList
+    End Function
+
+    ''' <summary>
+    ''' lee matrix para Direccion de las personas
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Matrix_Personas_Direcciones(ByVal vp_S_TDoc, ByVal vp_S_Doc, ByVal vp_S_NIT)
+
+        Dim ObjList As New List(Of ClienteClass)
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("2")
+
+        Dim sql As New StringBuilder
+
+        sql.Append("SELECT  c.CLI_Nit_ID, " & _
+                        " c.CLI_TypeDocument_ID, " & _
+                        " c.CLI_Document_ID, " & _
+                        " c.CLI_Digito_Verificacion, " & _
+                        " c.CLI_Nombre, " & _
+                        " c.CLI_Nombre_2, " & _
+                        " c.CLI_Apellido_1, " & _
+                        " c.CLI_Apellido_2, " & _
+                        " c.CLI_Ciudad_ID, " & _
+                        " d.D_PaginaWeb, " & _
+                        " d.D_Direccion, " & _
+                        " d.D_Telefono_1, " & _
+                        " d.D_Telefono_2, " & _
+                        " d.D_Telefono_3, " & _
+                        " d.D_Telefono_4, " & _
+                        " d.D_Correo_1, " & _
+                        " d.D_Correo_2, " & _
+                        " ROW_NUMBER() OVER(ORDER BY c.CLI_Nit_ID ASC) AS Index_Direcciones " & _
+                        "  FROM CLIENTE c " & _
+                        "  LEFT JOIN DIRECCIONES d " & _
+                        "  ON d.D_Document_ID = c.CLI_Document_ID " & _
+                        " WHERE CLI_TypeDocument_ID ='" & vp_S_TDoc & "'" & _
+                        " AND CLI_Document_ID = '" & vp_S_Doc & "'" & _
+                        " AND c.CLI_Nit_ID = '" & vp_S_NIT & "'" & _
+                        "  ORDER BY c.CLI_Nit_ID, c.CLI_Document_ID ASC")
+
+        Dim StrQuery As String = sql.ToString
+
+        ObjList = list(StrQuery, Conexion, "Matrix_Personas_Direcciones")
+
+        Return ObjList
+    End Function
+
+    ''' <summary>
+    ''' trae el nombre del cliente segun el filtro por tipo de documento, documento y nit empresa
+    ''' </summary>
+    ''' <param name="vp_S_Nit_ID"></param>
+    ''' <param name="vp_S_TDoc"></param>
+    ''' <param name="vp_S_Doc"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function SearchPeople_Exists(ByVal vp_S_Nit_ID As String, ByVal vp_S_TDoc As String, ByVal vp_S_Doc As String)
+
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("2")
+        Dim StrQuery As String
+
+        Dim sql_body As New StringBuilder
+        Dim sql_Filter As New StringBuilder
+
+        sql_body.Append(" SELECT CLI_Nombre + ' ' + " & _
+                                          "             CASE  WHEN  CLI_Nombre_2  IS NULL THEN ''  ELSE CLI_Nombre_2 END  + ' ' + " & _
+                                          "             CASE  WHEN  CLI_Apellido_1  IS NULL THEN ''  ELSE CLI_Apellido_1 END  + ' ' + " & _
+                                          "             CASE  WHEN  CLI_Apellido_2  IS NULL THEN ''  ELSE CLI_Apellido_2 END AS DESCRIPCION" & _
+                                          " FROM CLIENTE " & _
+                                          " WHERE CLI_TypeDocument_ID ='" & vp_S_TDoc & "'" & _
+                                          " AND CLI_Document_ID = '" & vp_S_Doc & "'")
+
+        If vp_S_Nit_ID <> "" Then
+            sql_Filter.Append(" AND CLI_Nit_ID  = '" & vp_S_Nit_ID & "'")
+            StrQuery = sql_body.ToString & sql_Filter.ToString
+        Else
+            StrQuery = sql_body.ToString
+        End If
+
+        Dim People As String = conex.Shearch_Date_String(StrQuery, "2")
+
+        Select Case People
+            Case ""
+                People = "NO"
+                Return People
+
+            Case Else
+                Return People
+        End Select
+
+    End Function
+
+    ''' <summary>
+    ''' trae datos basicos segun la persona consultada
+    ''' </summary>
+    ''' <param name="vp_Obj_persona"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function SearchPeople_Access(ByVal vp_Obj_persona As ClienteClass)
+
+        Dim conex As New Conector
+        Dim ObjList As New List(Of ClienteClass)
+        Dim Conexion As String = conex.typeConexion("2")
+        Dim StrQuery As String
+        Dim BD_Admin As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDAdmin").ToString
+
+        Dim sql_body As New StringBuilder
+        Dim sql_where As New StringBuilder
+
+        sql_body.Append("  SELECT C.CLI_Nombre +' '+ C.CLI_Nombre_2 +' '+ C.CLI_Apellido_1 +' '+ C.CLI_Apellido_2 AS NOMBRE,  " & _
+                               "                  C.CLI_Area_ID, " & _
+                               "                  C.CLI_Cargo_ID, " & _
+                               "                  C.CLI_Nit_ID, " & _
+                               "                  A.A_Descripcion, " & _
+                               "                  CAR.C_Descripcion, " & _
+                               "                  C2.CLI_Nombre +' '+ C2.CLI_Nombre_2 +' '+ C2.CLI_Apellido_1 +' '+ C2.CLI_Apellido_2 AS EMPRESA, " & _
+                               "                  C.CLI_TypeDocument_ID, " & _
+                               "                  C.CLI_Document_ID, " & _
+                               "                  C.CLI_GrpDocumentos, " & _
+                               "                  IT.IT_Tarjeta_ID, " & _
+                               "                  IT.IT_Estado, " & _
+                               "                  IT.IT_ChequeaVigencias, " & _
+                               "                  IT.IT_Fecha_Fin_Vigencia, " & _
+                               "                  IT.IT_MotivoBloqueo, " & _
+                               "                  DDL.DDLL_Descripcion " & _
+                               "  FROM CLIENTE C " & _
+                               "  LEFT JOIN AREA A  ON A.A_Area_ID = C.CLI_Area_ID " & _
+                               "  LEFT JOIN CARGO CAR ON CAR.C_Cargo_ID = C.CLI_Cargo_ID " & _
+                               "  LEFT JOIN  " & BD_Admin & ".dbo.INVENTARIO_TARJETAS IT ON IT.IT_TypeDocument_Asigna = C.CLI_TypeDocument_ID AND IT.IT_Document_ID_Asigna =C.CLI_Document_ID " & _
+                               "  LEFT JOIN  " & BD_Admin & ".dbo.TC_DDL_TIPO DDL ON DDL.DDL_ID = IT.IT_MotivoBloqueo AND DDL.DDL_Tabla = 'BLOQUEO'  " & _
+                               "  LEFT JOIN CLIENTE C2 ON C2.CLI_Document_ID = " & _
+                               "                      CASE	 SUBSTRING(C.CLI_Nit_ID,0,LEN(C.CLI_Nit_ID)) " & _
+                               "                                     WHEN '' THEN 0 " & _
+                               "                                     ELSE SUBSTRING(C.CLI_Nit_ID,0,LEN(C.CLI_Nit_ID)) " & _
+                               "                      END  ")
+                           
+        If vp_Obj_persona.Tarjeta_ID <> 0 Then
+            sql_where.Append(" WHERE IT.IT_Tarjeta_ID ='" & vp_Obj_persona.Tarjeta_ID & "'")
+
+        Else
+            sql_where.Append(" WHERE C.CLI_TypeDocument_ID ='" & vp_Obj_persona.TypeDocument_ID & "'" & _
+                              " AND C.CLI_Document_ID = '" & vp_Obj_persona.Document_ID & "'")
+        End If
+        StrQuery = sql_body.ToString & sql_where.ToString
+
+        ObjList = list(StrQuery, Conexion, "Matrix_Pag_Acceso")
+        Return ObjList
+    End Function
+
+    ''' <summary>
+    ''' trae documentos segun la seleccion de persona o empresa
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function List_Personas_Documentos(ByVal vp_Obj_persona As ClienteClass)
+
+        Dim ObjList As New List(Of DocumentosClass)
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("2")
+
+        Dim BD_Doc As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDDocument").ToString
+
+        Dim sql_estruc As New StringBuilder
+        Dim sql_order As New StringBuilder
+        Dim sql_where As New StringBuilder
+
+        sql_estruc.Append("SELECT  CLI_Nit_ID,  " & _
+                              "                  CLI_TypeDocument_ID, " & _
+                              "                  CLI_Document_ID, " & _
+                              "                  CLI_GrpDocumentos, " & _
+                              "                  RGRD.RGD_Documentos_ID, " & _
+                              "                  D.DOC_Descripcion " & _
+                              "  FROM CLIENTE C " & _
+                              "     LEFT JOIN " & BD_Doc & ".dbo.GRUPO_DOCUMENTO GD ON GD.GD_Grp_Documento_ID = C.CLI_GrpDocumentos AND GD.GD_Nit_ID = C.CLI_Nit_ID " & _
+                              "     LEFT JOIN " & BD_Doc & ".dbo.R_GRPDOC_DOCUMENTOS  RGRD ON RGRD.RGD_Grp_Documento_ID = GD.GD_Grp_Documento_ID " & _
+                              "     LEFT JOIN  " & BD_Doc & ".dbo.DOCUMENTOS D ON D.DOC_Documentos_ID= RGRD.RGD_Documentos_ID ")
+
+        If vp_Obj_persona.TipoSQL = "Persona" Then
+            sql_where.Append(" WHERE  " & _
+                                                " C.CLI_TypeDocument_ID = '" & vp_Obj_persona.TypeDocument_ID & "' AND " & _
+                                                " C.CLI_Document_ID = '" & vp_Obj_persona.Document_ID & "' AND " & _
+                                                " C.CLI_Nit_ID = '" & vp_Obj_persona.Nit_ID & "'")
+
+        Else
+            sql_where.Append(" WHERE  " & _
+                                                        " C.CLI_Document_ID = CASE SUBSTRING('" & vp_Obj_persona.Nit_ID & "',0,LEN('" & vp_Obj_persona.Nit_ID & "')) " & _
+                                                        "                                                 WHEN '' THEN 0 " & _
+                                                        "                                                 ELSE SUBSTRING('" & vp_Obj_persona.Nit_ID & "',0,LEN('" & vp_Obj_persona.Nit_ID & "')) " & _
+                                                        "                                                 END ")
+        End If
+
+        sql_order.Append(" ORDER BY C.CLI_Nit_ID ASC")
+        Dim StrQuery As String = sql_estruc.ToString & sql_where.ToString & sql_order.ToString
+
+        ObjList = list(StrQuery, Conexion, "Matrix_Personas_Documentos")
+
+        Return ObjList
+    End Function
+
+    ''' <summary>
+    ''' trae nombre, tipo documento y documento de la persona a buscar por empresa 
+    ''' </summary>
+    ''' <param name="vp_S_Nit_Bussines_Visit"></param>
+    ''' <param name="vp_S_Search_Argument"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function SearchPeople_Bussines(ByVal vp_S_Nit_Bussines_Visit As String, ByVal vp_S_Search_Argument As String)
+
+        Dim conex As New Conector
+        Dim ObjList As New List(Of ClienteClass)
+        Dim Conexion As String = conex.typeConexion("2")
+        Dim StrQuery As String
+        Dim BD_Admin As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDAdmin").ToString
+
+        Dim sql_tabla As New StringBuilder
+
+        Dim sql_consult As New StringBuilder
+        Dim sql_where As New StringBuilder
+
+        sql_tabla.Append(" DROP TABLE TEMP_CLIENTE " & _
+                                          "  " & _
+                                          " CREATE TABLE TEMP_CLIENTE (NOMBRE nvarchar(200), " & _
+                                          "                                                     DOCUMENT nvarchar(20), " & _
+                                          "                                                     TYPEDOCUMENT nvarchar(2)) " & _
+                                          "  " & _
+                                          " INSERT INTO TEMP_CLIENTE " & _
+                                          " SELECT  CLI_Nombre + ' ' + " & _
+                                          "               CASE  WHEN  CLI_Nombre_2  IS NULL THEN ''  ELSE CLI_Nombre_2 END  + ' ' + " & _
+                                          "               CASE  WHEN  CLI_Apellido_1  IS NULL THEN ''  ELSE CLI_Apellido_1 END  + ' ' + " & _
+                                          "               CASE  WHEN  CLI_Apellido_2  IS NULL THEN ''  ELSE CLI_Apellido_2 END AS NOMBRE, " & _
+                                          "               CLI_Document_ID AS DOCUMENT, " & _
+                                          "               CLI_TypeDocument_ID AS TYPEDOCUMENT " & _
+                                          " FROM CLIENTE " & _
+                                          " FROM CLIENTE " & _
+                                          " WHERE CLI_Document_ID IN(SELECT  CLI_Document_ID " & _
+                                          "                                                      FROM  CLIENTE C1 WHERE C1.CLI_OP_Empleado='S')" & _
+                                          "                                                 AND CLI_Nit_ID='" & vp_S_Nit_Bussines_Visit & "'")
+
+        StrQuery = sql_tabla.ToString
+        conex.StrInsert_and_Update_All(StrQuery, "2")
+
+        StrQuery = " "
+
+        sql_consult.Append(" SELECT TYPEDOCUMENT, DOCUMENT, NOMBRE, " & _
+                                             " ROW_NUMBER() OVER(ORDER BY DOCUMENT ASC) AS Index_Cliente FROM TEMP_CLIENTE " & _
+                                             " WHERE NOMBRE LIKE '%" & vp_S_Search_Argument & "%'")
+    
+        StrQuery = sql_consult.ToString
+
+        ObjList = list(StrQuery, Conexion, "Busqueda_Persona")
+        Return ObjList
+    End Function
+
+    ''' <summary>
+    ''' consulta los telefonos aliados a un empleado
+    ''' </summary>
+    ''' <param name="vp_Obj_persona"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function List_ExtencionesEmpleados(ByVal vp_Obj_persona As ClienteClass)
+
+        Dim ObjList As New List(Of ClienteClass)
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("2")
+        Dim BD_Admin As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDAdmin").ToString
+
+        Dim sql As New StringBuilder
+
+        sql.Append(" SELECT    D_Nit_ID, D_Name, " & _
+                                "                   D_Tipo_1, " & _
+                                "                   D_Telefono_1, " & _
+                                "                   D_Telefono_2, " & _
+                                "                   D_Telefono_3, " & _
+                                "                   D_Telefono_4, " & _
+                                "                   D_Correo_1, " & _
+                                "                   D_Correo_2 " & _
+                                "  FROM DIRECCIONES D   " & _
+                                "   WHERE  D_Nit_ID = '" & vp_Obj_persona.Nit_ID & "' " & _
+                                "   AND D_TypeDocument_ID = '" & vp_Obj_persona.TypeDocument_ID & "' " & _
+                                "   AND D_Document_ID = '" & vp_Obj_persona.Document_ID & "'")
+        Dim StrQuery As String = sql.ToString
+
+        ObjList = list(StrQuery, Conexion, "Matrix_PersonasEmpleados")
+
+        Return ObjList
+
     End Function
 
 #End Region

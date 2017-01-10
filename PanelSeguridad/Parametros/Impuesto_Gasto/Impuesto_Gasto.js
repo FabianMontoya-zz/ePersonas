@@ -13,7 +13,7 @@ $(document).ready(function () {
     $("#Img1").css("display", "none");
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
-    $("#WE").css("display", "none");
+    $("#WA").css("display", "none");
 
 
     $("#TablaDatos").css("display", "none");

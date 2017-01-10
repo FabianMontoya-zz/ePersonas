@@ -19,24 +19,12 @@
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Dialog/datepicker.js" type="text/javascript"></script>
     <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
-    <style type="text/css">
-       .ui-widget
-        {
-            background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
-            background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
-            background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
-            background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
-            border: solid 1px #921919;
-            border-radius: 5px;
-        }
-    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
     <div id="Container_title_Form">
         <table id="Tabla_Title_form">
             <tr>
-                <td id="Title_form">
-                </td>
+                <td id="Title_form"></td>
                 <td id="image_exit">
                     <span class="cssToolTip_Form_L">
                         <input id="BtnExit" type="button" value="X" onclick="btnSalir();" /><span class="Spam_AEXIT_MOD"></span></span>
@@ -50,24 +38,20 @@
                 <div id="TablaDatos_D">
                     <table id="Tabla_4" style="width: 700px; text-align: left;">
                         <tr>
-                            <td style="width: 105px;" class="Label_Bold">
-                                ID Tarjeta
+                            <td style="width: 105px;" class="Label_Bold">ID Tarjeta
                             </td>
                             <td>
                                 <span class="cssToolTip_Form">
-                                    <input type="text" id="TxtIDTarjeta" maxlength="10" class="Numeric" style="width: 165px;
-                                        height: 25px; font: 20px/20px CenturyGothic,sans-serif; text-align: center;" />
+                                    <input type="text" id="TxtIDTarjeta" maxlength="10" class="Numeric" style="width: 165px; height: 25px; font: 20px/20px CenturyGothic,sans-serif; text-align: center;" />
                                     <span class="SpamALEC"></span></span>
                             </td>
-                            <td style="padding-bottom: 25px; width: 250px;">
-                            </td>
+                            <td style="padding-bottom: 25px; width: 250px;"></td>
                         </tr>
                     </table>
                     <div id="Complementos_c">
                         <table id="Tabla_1" style="width: 700px; text-align: left;">
                             <tr>
-                                <td style="width: 105px;" class="Label_Bold">
-                                    Multi - Empresa
+                                <td style="width: 105px;" class="Label_Bold">Multi - Empresa
                                 </td>
                                 <td>
                                     <select id="Select_EmpresaNit" class="C_Chosen">
@@ -83,8 +67,7 @@
                         </table>
                         <table id="Tabla_2" style="width: 700px; text-align: left;">
                             <tr id="TR_Vigencia">
-                                <td style="width: 88px;" class="Label_Bold">
-                                    Vigencia
+                                <td style="width: 88px;" class="Label_Bold">Vigencia
                                 </td>
                                 <td style="width: 80px;">
                                     <select id="Select_CheckVigencia" class="C_Chosen" style="width: 80px;">
@@ -92,14 +75,12 @@
                                         <option value="S">Si</option>
                                     </select>
                                 </td>
-                                <td style="padding-bottom: 25px; width: 400px;">
-                                </td>
+                                <td style="padding-bottom: 25px; width: 400px;"></td>
                             </tr>
                         </table>
                         <table id="Tabla_3" style="width: 700px; text-align: left;">
                             <tr id="TR_Fechas">
-                                <td style="width: 105px;" class="Label_Bold">
-                                    Fecha Inicial
+                                <td style="width: 105px;" class="Label_Bold">Fecha Inicial
                                 </td>
                                 <td style="width: 100px;">
                                     <span class="cssToolTip_Form">
@@ -112,8 +93,7 @@
                                             src="../../images/error.png" />
                                         <span class="SpamEG"></span></span>
                                 </td>
-                                <td style="width: 100px;" class="Label_Bold">
-                                    Fecha Final
+                                <td style="width: 100px;" class="Label_Bold">Fecha Final
                                 </td>
                                 <td style="width: 100px;">
                                     <span class="cssToolTip_Form">
@@ -156,7 +136,7 @@
                 <td>
                     <img alt="error" id="DE" src="../../images/error_2.png" />
                     <img alt="success" id="SE" src="../../images/success.png" />
-                    <img alt="Warning" id="WE" src="../../images/alert.png" />
+                    <img alt="Warning" id="WA" src="../../images/alert.png" />
                 </td>
             </tr>
             <tr>

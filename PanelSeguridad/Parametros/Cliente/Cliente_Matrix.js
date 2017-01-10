@@ -18,6 +18,9 @@ function M_Regimen() {
     ArrayRegimen.push(Json_Regimen);
 }
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                     PROCESO DE CARGUE PAIS CIUDAD                                                                                                                                       ----*/
+/*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //crea la matrix de pais
 function F_Matrix_pais() {
 
@@ -53,9 +56,24 @@ function F_Matrix_pais() {
         }
         II = II + 1;
     }
-    V2();
+    CargaPais();
 }
 
+//revicion y carge de combos paises
+function CargaPais() {
+    for (e = 0; e < A.length; e++) {
+        i = 0;
+        for (i = 0; i < A_0.length; i++) {
+            if (A[e] - 1 == A_0[i]) {
+                var Val_F = A_0[i + 1] + e;
+                Matrix_Pais[P[e]].IndexFinal = Val_F;
+            }
+        }
+    }
+
+    charge_CatalogList(Matrix_Pais, "Select_Pais", 1);
+    charge_CatalogList(Matrix_Pais, "Select_Pais_D", 1);
+}
 
 //carga el combo de Ciudades
 function Change_Select_pais() {
@@ -172,9 +190,6 @@ function Change_Select_TPersona(index, Regimen) {
         $('.C_Chosen').trigger('chosen:updated');
     }
 }
-
-
-
 
 //carga el combo de Area dependiente
 function Change_Select_Nit() {

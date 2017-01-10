@@ -22,11 +22,9 @@ $(document).ready(function () {
     transaccionAjax_MTarjeta('MATRIX_TARJETA');
     transaccionAjax_MRTP('MATRIX_RTP');
     transacionAjax_EmpresaNit('Cliente');
-    transacionAjax_Des_Bloqueo("C_Des_Bloqueo");
 
     Change_Select_Nit();
-    Change_Select_Tarjeta();
-
+    
     $("#ESelect").css("display", "none");
     $("#Img1").css("display", "none");
     $("#Img2").css("display", "none");
@@ -34,7 +32,7 @@ $(document).ready(function () {
     $("#Img5").css("display", "none");
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
-    $("#WE").css("display", "none");
+    $("#WA").css("display", "none");
     $("#DIV_Des_Bloqueo").css("display", "none");
 
 
@@ -53,122 +51,9 @@ $(document).ready(function () {
 
 });
 
-//carga el combo de Area dependiente
-function Change_Select_Nit() {
-    $("#Select_EmpresaNit").change(function () {
-        var index_ID = $(this).val();
-         Charge_Combos_Depend_Nit(Matrix_Tarjeta, "Select_Tarjeta_DBlo", index_ID, "");
-        $("#Img5").css("display", "none");
-        $("#DIV_Des_Bloqueo").css("display", "none");
-    });
-    Change_Select_Persona();
-}
-
-var Container_Tarjeta;
-
-//valida los cambios del combo  de tarjeta y carga
-function Change_Select_Persona() {
-
-    $("#Select_Persona").change(function () {
-        Container_Tarjeta = "N";
-        var index_ID = $(this).val();
-
-        for (item in Matrix_RTP) {
-            if (Matrix_RTP[item].Document_ID == index_ID) {
-                $("#Select_Tarjeta_Blo").val(Matrix_RTP[item].Tarjeta_ID);
-                Container_Tarjeta = "S";
-               
-                break;
-            }
-        }
-        ValidarAsignacion(Container_Tarjeta);
-    });
-}
-
-//valida los cambios del combo de Persona y carga
-function Change_Select_Tarjeta() {
-    $("#Select_Tarjeta_Blo").change(function () {
-        Container_Tarjeta = "S";
-
-        var index_ID = $(this).val();
-        for (item in Matrix_RTP) {
-            if (Matrix_RTP[item].Tarjeta_ID == index_ID) {
-                $("#Select_Persona").val(Matrix_RTP[item].Document_ID);
-                $('.C_Chosen').trigger('chosen:updated');
-                break;
-            }
-        }
-        ValidarAsignacion(Container_Tarjeta);
-    });
-}
-
-
-
-//valida si tiene tarjeta asignada
-function ValidarAsignacion(Container_Tarjeta) {
-
-    switch (Container_Tarjeta) {
-        case "N":
-            $("#Select_Tarjeta_Blo").val("-1");
-            $("#Select_Tarjeta_Blo").attr("disabled", "disabled");
-            $('.C_Chosen').trigger('chosen:updated');
-
-            $("#dialog").dialog("option", "title", "No tiene Tarjeta!");
-            $("#Mensaje_alert").text("La persona seleccionada no tiene tarjeta asignada!");
-            $("#dialog").dialog("open");
-            $("#DE").css("display", "None");
-            $("#SE").css("display", "none");
-            $("#WE").css("display", "block");
-            $("#DIV_Des_Bloqueo").css("display", "none");
-            break;
-
-        case "S":
-            $("#Select_Tarjeta_Blo").removeAttr("disabled");
-            $("#DIV_Des_Bloqueo").css("display", "inline-table");
-            $('.C_Chosen').trigger('chosen:updated');
-            ValidarDes_BloqueoTarjeta();
-            break;
-    }
-
-}
-
-//valida si la persona ya tiene tarjeta Bloqueada
-function ValidarDes_BloqueoTarjeta() {
-
-    var validaDoc = $("#Select_Persona").val();
-    for (item in Matrix_Tarjeta) {
-        if (Matrix_Tarjeta[item].Document_ID_Asigna == validaDoc) {
-            var Estado_Tarjeta = Matrix_Tarjeta[item].Estado;
-
-                  
-            switch (Estado_Tarjeta) {
-                case "3":
-                    $("#dialog").dialog("option", "title", "Ya tiene Tarjeta!");
-                     $("#Mensaje_alert").text("La persona seleccionada ya tiene la tarjeta bloqueada!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "None");
-                    $("#SE").css("display", "none");
-                    $("#WE").css("display", "block");
-                    $("#DIV_Des_Bloqueo").css("display", "none");
-                    break;
-
-                case "4":
-                    $("#dialog").dialog("option", "title", "Ya tiene Tarjeta!");
-                    $("#Mensaje_alert").text("La persona seleccionada ya tiene la tarjeta Anulada!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "None");
-                    $("#SE").css("display", "none");
-                    $("#WE").css("display", "block");
-                    $("#DIV_Des_Bloqueo").css("display", "none");
-                    break;
-            }
-        }
-    }
-
-}
-
-
-
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                 REGION BOTONES                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //salida del formulario
 function btnSalir() {
     window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
@@ -182,22 +67,64 @@ function BtnCrear() {
 
     if (validate == 0) {
         if ($("#Btnguardar").val() == "Guardar") {
-            transacionAjax_UpdateDes_Bloqueo("UpdateDes_Bloqueo");
+            transacionAjax_UpdateDes_Bloqueo("Update_DesBloqueo");
         }
     }
+}
+
+//evento del boton salir
+function x() {
+    $("#dialog").dialog("close");
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                           REGION DE VALIDACIONES                                                                                                       ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//valida si la persona ya tiene tarjeta Bloqueada
+function ValidarDes_BloqueoTarjeta(validaDoc) {
+
+    for (item in Matrix_Tarjeta) {
+
+        if (Matrix_Tarjeta[item].Document_ID_Entrega == validaDoc) {
+
+            $("#V_Persona").html(Matrix_Tarjeta[item].Document_ID_Entrega + " - " + Matrix_Tarjeta[item].DescripPersonaEntrega);
+            $("#V_MBloqueo").html(Matrix_Tarjeta[item].MotivoBloqueo + " - " + Matrix_Tarjeta[item].DescripBloqueo);
+            $("#V_ObsBloqueo").html(Matrix_Tarjeta[item].Observaciones);
+
+            var Estado_Bloqueo = Matrix_Tarjeta[item].MotivoBloqueo;
+
+            switch (Estado_Bloqueo) {
+                case "1":
+                    $("#DIV_Des_Bloqueo").css("display", "inline-table");
+                    break;
+
+                case "2":
+                    Mensaje_General("No puede Des - Bloquear!", "La Tarjeta  No se puede Des - bloquear porque Ya que esta (Dañada)", "W");
+                    break;
+
+                case "3":
+                    Mensaje_General("No puede Des - Bloquear!", "La Tarjeta  No se puede Des - bloquear porque Ya que esta (Deteriorada)", "W");
+                    break;
+
+                case "4":
+                    $("#DIV_Des_Bloqueo").css("display", "inline-table");
+                    break;
+
+            }
+        }
+    }
+
 }
 
 //validamos campos para la creacion del link
 function validarCamposCrear() {
 
     var Campo_1 = $("#Select_EmpresaNit").val();
-    var Campo_2 = $("#Select_Persona").val();
-    var Campo_3 = $("#Select_Des_Bloqueo").val();
-    var Campo_4 = $("#Select_Tarjeta_Blo").val();
+    var Campo_2 = $("#Select_Tarjeta_DBlo").val();
 
     var validar = 0;
 
-    if (Campo_4 == "-1" || Campo_3 == "-1" || Campo_2 == "-1" || Campo_1 == "-1") {
+    if (Campo_2 == "-1" || Campo_1 == "-1") {
         validar = 1;
 
         if (Campo_1 == "-1")
@@ -209,39 +136,52 @@ function validarCamposCrear() {
             $("#Img2").css("display", "inline-table");
         else
             $("#Img2").css("display", "none");
-
-        if (Campo_3 == "-1")
-            $("#Img3").css("display", "inline-table");
-        else
-            $("#Img3").css("display", "none");
-
-        if (Campo_4 == "-1")
-            $("#Img5").css("display", "inline-table");
-        else
-            $("#Img5").css("display", "none");
-
     }
     else {
         $("#Img1").css("display", "none");
         $("#Img2").css("display", "none");
-        $("#Img3").css("display", "none");
-        $("#Img5").css("display", "none");
     }
     return validar;
 }
 
-//evento del boton salir
-function x() {
-    $("#dialog").dialog("close");
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                              PROCESO DE CARGUE                                                                                                                             ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//carga el combo de Area dependiente
+function Change_Select_Nit() {
+    $("#Select_EmpresaNit").change(function () {
+        var index_ID = $(this).val();
+        Charge_Combos_Depend_Nit(Matrix_Tarjeta, "Select_Tarjeta_DBlo", index_ID, "");
+    });
+    Change_Select_Tarjeta();
 }
 
+//valida los cambios del combo de Persona y carga
+function Change_Select_Tarjeta() {
+    $("#Select_Tarjeta_DBlo").change(function () {
+
+        var index_ID = $(this).val();
+        for (item in Matrix_RTP) {
+            if (Matrix_RTP[item].Tarjeta_ID == index_ID) {
+
+                ValidarDes_BloqueoTarjeta(Matrix_RTP[item].Document_ID);
+                break;
+            }
+        }
+    });
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                              MENSAJES, VISUALIZACION Y LIMPIEZA                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //limpiar campos
 function Clear() {
     $("#Select_EmpresaNit").val("-1");
-    $("#Select_Persona").val("-1");
-    $("#Select_Tarjeta_Blo").val("-1");
-    $("#Select_Des_Bloqueo").val("-1");
+    $("#Select_Tarjeta_DBlo").val("-1");
     $("#TxtA_Observacion").val("");
+    $("#V_Persona").html("");
+    $("#V_MBloqueo").html("");
+    $("#V_ObsBloqueo").html("");
 
     $("#DIV_Des_Bloqueo").css("display", "none");
     $('.C_Chosen').trigger('chosen:updated');

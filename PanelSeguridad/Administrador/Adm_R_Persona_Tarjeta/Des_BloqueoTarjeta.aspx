@@ -60,7 +60,7 @@
                         </td>
                         <td style="padding-bottom: 25px; width: 70%;">
                             <span class="cssToolTip_L">
-                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img5"
+                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img2"
                                     src="../../images/error.png" />
                                 <span class="SpamEG"></span></span>
                         </td>
@@ -70,44 +70,38 @@
                     <tr>
                         <td style="width: 5%;" class="Label_Bold">Persona
                         </td>
-                        <td id="V_Persona"></td>
+                        <td id="V_Persona" style="width: 50%;"></td>
+                        <td class="Label_Bold" style="width: 12%;">Motivo Bloqueo
+                        </td>
+                        <td id="V_MBloqueo"></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100%;" colspan="4" class="Label_Bold">Observación Motivo Del Bloqueo
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="V_ObsBloqueo" colspan="4" style="width: 100%;"></td>
                     </tr>
                 </table>
-                <div id="DIV_Des_Bloqueo">
-                    <table id="Tabla_4" style="width: 700px; text-align: left;">
+                <div id="DIV_Des_Bloqueo" style="width: 100%; margin-top: 2%;">
+                    <table id="Tabla_4" style="width: 100%; text-align: left;">
                         <tr>
-                            <td style="width: 150px;" class="Label_Bold">Motivo Des_Bloqueo
+                            <td style="width: 25%;" class="Label_Bold">Observaciones para DesBloquear la Tarjeta
                             </td>
-                            <td>
-                                <select id="Select_Des_Bloqueo" class="C_Chosen">
-                                </select>
-                            </td>
-                            <td style="padding-bottom: 25px; width: 300px;">
-                                <span class="cssToolTip_L">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img3"
-                                        src="../../images/error.png" />
-                                    <span class="SpamEG"></span></span>
-                            </td>
-                        </tr>
-                    </table>
-                    <table id="Tabla_5" style="width: 100%; text-align: left;">
-                        <tr>
-                            <td style="width: 140px;" class="Label_Bold">Observaciones
-                            </td>
-                            <td style="width: 200px;">
+                            <td style="width: 70%;">
                                 <span class="cssToolTip_Form">
-                                    <textarea id="TxtA_Observacion" rows="1" cols="70"> </textarea>
+                                    <textarea id="TxtA_Observacion" rows="1" cols="120"> </textarea>
                                     <span class="Spam_ACI"></span></span>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4" align="center">
+                            <td colspan="" align="center">
                                 <p>
                                 </p>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="6" align="center">
+                            <td colspan="10" align="center">
                                 <input id="Btnguardar" type="button" value="Guardar" onclick="BtnCrear();" />
                             </td>
                         </tr>
@@ -126,7 +120,7 @@
                 <td>
                     <img alt="error" id="DE" src="../../images/error_2.png" />
                     <img alt="success" id="SE" src="../../images/success.png" />
-                    <img alt="Warning" id="WE" src="../../images/alert.png" />
+                    <img alt="Warning" id="WA" src="../../images/alert.png" />
                 </td>
             </tr>
             <tr>

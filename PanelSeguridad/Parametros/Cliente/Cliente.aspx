@@ -16,7 +16,7 @@
     <link href="../../css/css_login.css" rel="stylesheet" type="text/css" />
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
     <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />
-    <link href="../../css/custom/charge.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" />
     <link href="../../css/Chosen/chosen.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/jquery.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Chosen/chosen.jquery.js" type="text/javascript"></script>
@@ -48,13 +48,13 @@
         <div id="Marco_trabajo_Form">
             <div id="Admin_Anexos">
                 <span id="T_option" class="T_options Label_Bold">Información Persona</span><a href="javascript:Complemento();">
-                    <img alt="logo" title="" style="height: 38px; width: 38px; position: absolute; padding-left: 10px; padding-top: 15px; z-index: 30;"
+                    <img alt="logo" title="" style="height: 38px; width: 38px; position: absolute; padding-left: 10px; padding-top: 15px; z-index: 90;"
                         id="Imglogo" src="../../images/logo.png" />
                 </a>
                 <div id="Container_Complementos">
                     <div id="DivA" class="Option_Cliente" onclick="javascript:BlockAnexos('Direcciones');">
                         <div class="C_Image">
-                            <img  alt="Direc" class="ImaAddress" id="Direccion" src="../../images/adress_book.png" height="35px"
+                            <img alt="Direc" class="ImaAddress" id="Direccion" src="../../images/adress_book.png" height="35px"
                                 width="35px" style="margin-top: 7px;" />
                         </div>
                         <div class="Spam_CT1 C_Text Label_Bold">
@@ -62,7 +62,7 @@
                     </div>
                     <div id="DivB" class="Option_Cliente" onclick="javascript:BlockAnexos('Banco');">
                         <div class="C_Image">
-                            <img alt="Bank"  class="ImaBank" id="Bancos" src="../../images/bank.png" height="40px" width="40px"
+                            <img alt="Bank" class="ImaBank" id="Bancos" src="../../images/bank.png" height="40px" width="40px"
                                 style="margin-top: 3px;" />
                         </div>
                         <div class="Spam_CT2 C_Text Label_Bold">
@@ -70,7 +70,7 @@
                     </div>
                     <div id="DivD" class="Option_Cliente" onclick="javascript:BlockAnexos('Documento');">
                         <div class="C_Image">
-                            <img alt="Bank"  class="ImaDoc" id="Documentos" src="../../images/documentos.png" height="35px" width="35px"
+                            <img alt="Bank" class="ImaDoc" id="Documentos" src="../../images/documentos.png" height="35px" width="35px"
                                 style="margin-top: 7px;" />
                         </div>
                         <div class="Spam_CT4 C_Text Label_Bold">
@@ -79,7 +79,7 @@
                 </div>
             </div>
             <div id="Foto_Persona">
-                <img alt="foto" title="" style="height: 120px; width: 100px; position: absolute;"
+                <img alt="foto" title="" style="height: 120px; width: 100px; position: absolute; border-radius: 4px; border-color: #921919; border-width: 2px; border-style: outset;"
                     id="Imgfoto" src="../../images/avatar.png" />
             </div>
             <div id="Container_controls">
@@ -94,7 +94,7 @@
                                 <input id="TxtRead" type="text" />
                                 <span class="Spam_AST"></span></span>
                         </td>
-                        <td  align="center" id="TD3">
+                        <td align="center" id="TD3">
                             <input id="BtnRead" type="button" value="Buscar" onclick="BtnConsulta();" />
                         </td>
                     </tr>
@@ -110,15 +110,15 @@
                     </tr>
                 </table>
                 <div id="TablaDatos_D">
-                    <table id="Tabla_1" style="width: 700px; text-align: left;">
+                    <table id="Tabla_1" style="width: 100%; text-align: left; margin-top: 5%">
                         <tr>
-                            <td style="width: 120px;" class="Label_Bold">Multi - Empresa
+                            <td style="width: 15%;" class="Label_Bold">Multi - Empresa
                             </td>
                             <td>
                                 <select id="Select_EmpresaNit" class="C_Chosen">
                                 </select>
                             </td>
-                            <td style="padding-bottom: 25px; width: 180px;">
+                            <td style="padding-bottom: 25px; width: 50%;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgMul"
                                         src="../../images/error.png" />
@@ -126,15 +126,15 @@
                             </td>
                         </tr>
                     </table>
-                    <table id="Tabla_2" style="width: 700px; text-align: left;">
+                    <table id="Tabla_2" style="width: 100%; text-align: left;">
                         <tr>
-                            <td style="width: 120px;" class="Label_Bold">Tipo identificación
+                            <td style="width: 15%;" class="Label_Bold">Tipo identificación
                             </td>
                             <td>
                                 <select id="Select_Documento" class="C_Chosen">
                                 </select>
                             </td>
-                            <td style="padding-bottom: 25px; width: 350px;">
+                            <td style="padding-bottom: 25px; width: 50%;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img2"
                                         src="../../images/error.png" />
@@ -142,15 +142,15 @@
                             </td>
                         </tr>
                     </table>
-                    <table id="Tabla_3" style="width: 700px; text-align: left;">
+                    <table id="Tabla_3" style="width: 100%; text-align: left;">
                         <tr>
-                            <td class="Label_Bold" style="width: 120px;">Pais
+                            <td class="Label_Bold" style="width: 15%;">Pais
                             </td>
                             <td>
                                 <select id="Select_Pais" class="C_Chosen">
                                 </select>
                             </td>
-                            <td style="padding-bottom: 25px;">
+                            <td style="padding-bottom: 25px; width: 30%;">
                                 <span class="cssToolTip_L">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgPais"
                                         src="../../images/error.png" />
@@ -172,71 +172,30 @@
                             </td>
                         </tr>
                     </table>
-                    <table id="Tabla_4" style="width: 700px; text-align: left;">
+                    <table id="Tabla_6" style="width: 100%; text-align: left;">
                         <tr>
-                            <td style="width: 120px;" class="Label_Bold">Identificación
+                            <td style="width: 13.5%;" class="Label_Bold">Tipo Persona
                             </td>
-                            <td style="width: 110px;">
-                                <span class="cssToolTip_Form">
-                                    <input type="text" id="Txt_Ident" maxlength="12" style="width: 110px;" class="Numeric" />
-                                    <span class="Spam_A_NIT"></span></span>
-                            </td>
-                            <td style="padding-bottom: 25px; width: 40px;">
-                                <span class="cssToolTip">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img3"
-                                        src="../../images/error.png" />
-                                    <span class="SpamEG"></span></span>
-                            </td>
-                            <td class="Label_Bold" style="width: 50px;">Digito
-                            </td>
-                            <td>
-                                <span class="cssToolTip_Form">
-                                    <input type="text" id="TxtVerif" style="width: 20px;" maxlength="2" class="Numeric"
-                                        readonly="readonly" />
-                                    <span class="Spam_A_CC"></span></span>
-                            </td>
-                            <td class="Label_Bold Desvanecer" style="width: 40px;">de
-                            </td>
-                            <td class="Desvanecer" style="width: 200px;">
-                                <select id="Select_Ciudad_Doc" class="C_Chosen">
-                                </select>
-                            </td>
-                            <td style="padding-bottom: 25px; width: 40px;">
-                                <span class="cssToolTip_L">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgC_Doc"
-                                        src="../../images/error.png" />
-                                    <span class="SpamEG"></span></span>
-                            </td>
-                        </tr>
-                    </table>
-                    <table id="Tabla_6" style="width: 700px; text-align: left;">
-                        <tr>
-                            <td style="width: 120px;" class="Label_Bold">Tipo Persona
-                            </td>
-                            <td align="center">
+                            <td align="center" style="width: 15%;">
                                 <select id="Select_TPersona" class="C_Chosen">
                                     <option value="-1">Seleccione...</option>
                                     <option value="1">Persona Natural</option>
                                     <option value="2">Persona Juridica</option>
                                 </select>
                             </td>
-                            <td style="padding-bottom: 25px; width: 400px;">
+                            <td style="padding-bottom: 25px; width: 5%;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img9"
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
-                        </tr>
-                    </table>
-                    <table id="Tabla_7" style="width: 700px; text-align: left;">
-                        <tr>
-                            <td style="width: 120px;" class="Label_Bold">Regimen
+                            <td style="width: 5%;" class="Label_Bold">Regimen
                             </td>
-                            <td align="center">
+                            <td align="center" style="width: 25%;">
                                 <select id="Select_Regimen" class="C_Chosen">
                                 </select>
                             </td>
-                            <td style="padding-bottom: 25px; width: 300px;">
+                            <td style="padding-bottom: 25px; width: 25%;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img10"
                                         src="../../images/error.png" />
@@ -244,16 +203,53 @@
                             </td>
                         </tr>
                     </table>
-                    <table id="Table_5" style="width: 700px; text-align: left;">
-                        <tr id="TR_Nit">
-                            <td id="TD4" class="Label_Bold " style="width: 120px;">Nombre
+                    <table id="Tabla_4" style="width: 100%; text-align: left;">
+                        <tr>
+                            <td id="TD_1" style="width: 13.5%;" class="Label_Bold">Identificación
                             </td>
-                            <td class="TD_2" style="width: 150px;">
+                            <td id="TD_2" style="width: 10%;">
+                                <span class="cssToolTip_Form">
+                                    <input type="text" id="Txt_Ident" maxlength="12" style="width: 110px;" class="Numeric" />
+                                    <span class="Spam_A_NIT"></span></span>
+                            </td>
+                            <td id="TD_3" style="padding-bottom: 25px; width: 3%;">
+                                <span class="cssToolTip">
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img3"
+                                        src="../../images/error.png" />
+                                    <span class="SpamEG"></span></span>
+                            </td>
+                            <td id="TD_4" class="Label_Bold" style="width: 3%;">Digito
+                            </td>
+                            <td id="TD_5" style="width: 5%;">
+                                <span class="cssToolTip_Form">
+                                    <input type="text" id="TxtVerif" style="width: 50%;" maxlength="2" class="Numeric"
+                                        readonly="readonly" />
+                                    <span class="Spam_A_CC"></span></span>
+                            </td>
+                            <td id="TD_6" class="Label_Bold Desvanecer" style="width: 2%;">de
+                            </td>
+                            <td id="TD_7" class="Desvanecer" style="width: 35%;">
+                                <select id="Select_Ciudad_Doc" class="C_Chosen" style="width: 80%;">
+                                </select>
+                            </td>
+                            <td id="TD_8" style="padding-bottom: 25px; width: 15%;">
+                                <span class="cssToolTip_L">
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgC_Doc"
+                                        src="../../images/error.png" />
+                                    <span class="SpamEG"></span></span>
+                            </td>
+                        </tr>
+                    </table>
+                    <table id="Table_5" style="width: 100%; text-align: left; margin-top: 1%;">
+                        <tr id="TR_Nit">
+                            <td id="TD4" class="Label_Bold " style="width: 17.7%;">Nombre
+                            </td>
+                            <td class="TD_2" style="width: 40%;">
                                 <span class="cssToolTip_Form">
                                     <input type="text" id="TxtNombreNit" maxlength="50" style="width: 350px;" />
                                     <span class="Spam_AST"></span></span>
                             </td>
-                            <td style="width: 35px; padding-bottom: 25px;">
+                            <td style="width: 5%; padding-bottom: 25px;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img11"
                                         src="../../images/error.png" />
@@ -264,80 +260,116 @@
                             <td style="padding-bottom: 25px;"></td>
                         </tr>
                         <tr class="Desvanecer TR_1">
-                            <td id="TD_Nombre" class="Label_Bold TD_1" style="width: 120px;">Primer Nombre
+                            <td class="Label_Bold TD_1" style="width: 15%;">Primer Nombre
                             </td>
-                            <td class="TD_2" style="width: 150px;">
+                            <td class="TD_2" style="width: 15%;">
                                 <span class="cssToolTip_Form">
-                                    <input type="text" id="TxtNombre" maxlength="50" style="width: 150px;" />
+                                    <input type="text" id="TxtNombre" maxlength="50" style="width: 200px;" />
                                     <span class="Spam_AST"></span></span>
                             </td>
-                            <td style="width: 35px; padding-bottom: 25px;">
+                            <td style="width: 3%; padding-bottom: 25px;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img5"
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
-                            <td class="Label_Bold " style="width: 120px;">Segundo Nombre
+                            <td class="Label_Bold " style="width: 11%;">Segundo Nombre
                             </td>
                             <td>
                                 <span class="cssToolTip_Form_L">
-                                    <input type="text" id="TxtNombre_2" maxlength="50" style="width: 150px;" />
+                                    <input type="text" id="TxtNombre_2" maxlength="50" style="width: 200px;" />
                                     <span class="Spam_AST"></span></span>
                             </td>
-                            <td style="padding-bottom: 25px;"></td>
+                            <td style="width: 22%; padding-bottom: 25px;"></td>
                         </tr>
                         <tr class="Desvanecer TR_1">
-                            <td class="Label_Bold" style="width: 120px;">Primer Apellido
+                            <td class="Label_Bold" style="width: 15%;">Primer Apellido
                             </td>
-                            <td class="T120px">
+                            <td style="width: 15%;">
                                 <span class="cssToolTip_Form">
-                                    <input type="text" id="Txt_Ape_1" maxlength="50" style="width: 150px;" />
+                                    <input type="text" id="Txt_Ape_1" maxlength="50" style="width: 200px;" />
                                     <span class="Spam_AST"></span></span>
                             </td>
-                            <td style="width: 35px; padding-bottom: 25px;"></td>
-                            <td class="Label_Bold T120px" style="width: 120px;">Segundo Apellido
+                            <td style="width: 3%; padding-bottom: 25px;"></td>
+                            <td class="Label_Bold " style="width: 11%;">Segundo Apellido
                             </td>
-                            <td class="T120px">
+                            <td>
                                 <span class="cssToolTip_Form_L">
-                                    <input type="text" id="Txt_Ape_2" maxlength="50" style="width: 150px;" />
+                                    <input type="text" id="Txt_Ape_2" maxlength="50" style="width: 200px;" />
                                     <span class="Spam_AST"></span></span>
                             </td>
-                            <td style="padding-bottom: 25px;"></td>
+                            <td style="width: 22%; padding-bottom: 25px;">
+                                <span class="cssToolTip">
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img19"
+                                        src="../../images/error.png" />
+                                    <span class="SpamEG"></span></span>
+                            </td>
+                        </tr>
+                        <tr class="Desvanecer TR_1">
+                            <td class="Label_Bold" style="width: 15%">Fecha De Nacimiento
+                            </td>
+                            <td style="width: 15%">
+                                <span class="cssToolTip_Form_L">
+                                    <input type="text" id="Text_fechaNacimiento" maxlength="12" style="width: 150px;" />
+                                    <span class="Spam_AST"></span></span>
+                            </td>
+                            <td style="width: 3%; padding-bottom: 25px;">
+                                <span class="cssToolTip">
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img20"
+                                        src="../../images/error.png" />
+                                    <span class="SpamEG"></span></span>
+                            </td>
+                            <td class="Label_Bold" style="width: 11%">Sexo
+                            </td>
+                            <td>
+                                <select id="Select_Sex" class="C_Chosen">
+                                    <option value="-1">Seleccione...</option>
+                                    <option value="M">Masculino</option>
+                                    <option value="F">Femenino</option>
+                                    <option value="O">Otros</option>
+                                </select>
+                            </td>
+                            <td style="width: 22%; padding-bottom: 25px;">
+                                <span class="cssToolTip">
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img21"
+                                        src="../../images/error.png" />
+                                    <span class="SpamEG"></span></span>
+                            </td>
                         </tr>
                     </table>
-                    <table id="Tabla_8" style="width: 700px; text-align: left;">
+                    <table id="Tabla_8" style="width: 100%; text-align: left;">
                         <tr>
-                            <td style="width: 120px;" class="Label_Bold">Acceso al Sistema
+                            <td style="width: 15%" class="Label_Bold">Acceso al Sistema
                             </td>
-                            <td style="width: 70px;">
+                            <td style="width: 15%">
                                 <select id="Select_Acceso" class="C_Chosen" style="width: 70px;">
                                     <option value="N">No</option>
                                     <option value="S">Si</option>
                                 </select>
                             </td>
-                            <td style="width: 122px;"></td>
-                            <td style="width: 150px;" class="Label_Bold">Grupo de Documentos
+                            <td style="width: 3%;"></td>
+                            <td style="width: 12%;" class="Label_Bold">Grupo Documentos
                             </td>
                             <td>
                                 <select id="Select_GrpDocument" class="C_Chosen">
                                 </select>
                             </td>
-                            <td style="width: 50px;"></td>
+                            <td style="width: 20%;"></td>
                         </tr>
                     </table>
-                    <table id="Tabla_9" style="width: 700px; text-align: left;">
+                    <table id="Tabla_9" style="width: 40%; text-align: center; margin-top: 2%; margin-left: 25%; border: solid 1px #921919; border-radius: 10px; padding-bottom: 1%; padding-top: 1%;">
                         <tr>
-                            <td style="width: 120px;" class="Label_Bold">Tipo de Relación
+                            <td style="width: 50%;" class="Label_Bold">Tipo de Relación
                             </td>
-                            <td style="width: 195px;">
+                            <td style="width: 50%;">
                                 <span class="cssToolTip_Form_L"><a href="javascript:BtnRelacion();">
                                     <img alt="error" title="" style="padding-left: 1em; height: 50px; width: 50px;" id="Imgrelations"
-                                        src="../../images/relations.png" /></a> <span class="Spam_ARel"></span></span>
+                                        src="../../images/Relations.gif" /></a> <span class="Spam_ARel"></span></span>
                             </td>
                         </tr>
                     </table>
                 </div>
-                <div id="TablaDatos_D_Vista">
+                <div id="TablaDatos_D_Vista" style="padding-top: 5%; padding-left: 10%;">
                     <table id="Table2" style="width: 700px; text-align: left;">
                         <tr>
                             <td style="width: 120px;" class="Label_Bold">Multi - Empresa
@@ -429,6 +461,16 @@
                             <td id="Con_Ape_2" class="T120px"></td>
                             <td style="padding-bottom: 25px;"></td>
                         </tr>
+                        <tr>
+                            <td class="Label_Bold" style="width: 15%">Fecha De Nacimiento
+                            </td>
+                            <td style="width: 15%" id="Con_fechaNacimiento"></td>
+                            <td style="width: 3%; padding-bottom: 25px;"></td>
+                            <td class="Label_Bold" style="width: 11%">Sexo
+                            </td>
+                            <td id="Con_Sex"></td>
+                            <td style="width: 22%; padding-bottom: 25px;"></td>
+                        </tr>
                     </table>
                     <table id="Table9" style="width: 700px; text-align: left;">
                         <tr>
@@ -482,6 +524,14 @@
                             </td>
                             <td id="Con_Politica"></td>
                             <td style="padding-bottom: 25px; width: 200px;"></td>
+                        </tr>
+                    </table>
+                    <table id="C_Socio_Vista" style="width: 100%">
+                        <tr>
+                            <td class="Label_Bold " style="width: 100px;">% Participación
+                            </td>
+                            <td id="Con_Por_Participacion"></td>
+                            <td style="padding-bottom: 25px; width: 700px;"></td>
                         </tr>
                     </table>
                     <table id="Table10" style="width: 700px; text-align: left;">
@@ -570,6 +620,23 @@
                                     <td style="padding-bottom: 25px; width: 200px;"></td>
                                 </tr>
                             </table>
+                            <table id="C_Socio" style="width: 100%">
+                                <tr>
+                                    <td class="Label_Bold " style="width: 100px;">% Participación
+                                    </td>
+                                    <td>
+                                        <span class="cssToolTip_Form">
+                                            <input type="text" id="TxtPor_Participacion" style="width: 50px;" maxlength="3" class="Numeric" />
+                                            <span class="Spam_AN"></span></span>
+                                    </td>
+                                    <td style="padding-bottom: 25px; width: 700px;">
+                                        <span class="cssToolTip">
+                                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img24"
+                                                src="../../images/error.png" />
+                                            <span class="SpamEG"></span></span>
+                                    </td>
+                                </tr>
+                            </table>
                         </td>
                     </tr>
                 </table>
@@ -594,7 +661,7 @@
                 <td>
                     <img alt="error" id="DE" src="../../images/error_2.png" />
                     <img alt="success" id="SE" src="../../images/success.png" />
-                    <img alt="Warning" id="WE" src="../../images/alert.png" />
+                    <img alt="Warning" id="WA" src="../../images/alert.png" />
                 </td>
             </tr>
             <tr>
@@ -624,54 +691,89 @@
         </table>
     </div>
     <div id="Dialog_Relation" title="Relaciones de la Persona">
-        <table style="width: 100%; text-align: center; margin-top: 20px;">
+        <table style="width: 100%; text-align: left; margin-top: 20px;">
             <tr>
-                <td class="Label_Bold">Cliente
-                </td>
                 <td>
                     <input type="checkbox" id="Check_Cliente" value="CL" />
                 </td>
-                <td class="Label_Bold">Avaluador
-                </td>
-                <td>
-                    <input type="checkbox" id="Check_Avaluador" value="AV" />
-                </td>
-                <td class="Label_Bold">Org. transito
-                </td>
-                <td>
-                    <input type="checkbox" id="Check_Transito" value="TR" />
-                </td>
-                <td class="Label_Bold">Hacienda
-                </td>
-                <td>
-                    <input type="checkbox" id="Check_Hacienda" value="HA" />
-                </td>
-                <td class="Label_Bold">Multi-Empresa
-                </td>
-                <td>
-                    <input type="checkbox" id="Check_MultiEmpresa" value="ME" />
+                <td class="Label_Bold">Cliente
                 </td>
             </tr>
             <tr>
-                <td class="Label_Bold">Empleado
+                <td>
+                    <input type="checkbox" id="Check_Avaluador" value="AV" />
                 </td>
+                <td class="Label_Bold">Avaluador / Perito
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" id="Check_Transito" value="TR" />
+                </td>
+                <td class="Label_Bold">Organismos de Transito
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" id="Check_Hacienda" value="HA" />
+                </td>
+                <td class="Label_Bold">Hacienda / Notaria / Entes Gubernamentales / Registro
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" id="Check_MultiEmpresa" value="ME" />
+                </td>
+                <td class="Label_Bold">Multi - Empresa
+                </td>
+            </tr>
+            <tr>
                 <td>
                     <input type="checkbox" id="Check_Empleado" value="EM" />
                 </td>
-                <td class="Label_Bold">Asesor
+                <td class="Label_Bold">Empleado
                 </td>
+            </tr>
+            <tr>
                 <td>
                     <input type="checkbox" id="Check_Asesor" value="AS" />
                 </td>
-                <td class="Label_Bold">Proveedor
+                <td class="Label_Bold">Asesor
                 </td>
+            </tr>
+            <tr>
                 <td>
                     <input type="checkbox" id="Check_Proveedor" value="PR" />
                 </td>
-                <td class="Label_Bold">Ent. Bancaria
+                <td class="Label_Bold">Proveedor
                 </td>
+            </tr>
+            <tr>
                 <td>
-                    <input type="checkbox" id="Check_EntBancaria" value="EB">
+                    <input type="checkbox" id="Check_EntBancaria" value="EB" />
+                </td>
+                <td class="Label_Bold">Entidades Financieras / Aseguradoras / Fondos de Pensiones
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" id="Check_Visitante" value="EB" />
+                </td>
+                <td class="Label_Bold">Visitante
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" id="Check_RepLegal" value="EB" />
+                </td>
+                <td class="Label_Bold">Representante Legal 
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" id="Check_Socio" value="EB" />
+                </td>
+                <td class="Label_Bold">Socio
                 </td>
             </tr>
         </table>
@@ -869,12 +971,29 @@
                     </td>
                 </tr>
             </table>
+            <table id="Tabla_tipo" style="width: 100%; text-align: left; margin-top: 2%;">
+                <tr>
+                    <td style="width: 14%;" class="Label_Bold">Tipo Dirección
+                    </td>
+                    <td>
+                        <select id="Select_TypeTel_1" class="C_Chosen" style="width: 80px;">
+                            <option value="-1">Seleccione...</option>
+                            <option value="C">Casa</option>
+                            <option value="F">Oficina</option>
+                            <option value="O">Otro</option>
+                        </select>
+                    </td>
+                    <td style="width: 40%;"></td>
+                </tr>
+            </table>
             <table id="Tabla_Direccion">
                 <tr>
                     <td class="Label_Bold" style="width: 100px;">Dirección
                     </td>
                     <td>
-                        <input type="text" id="TxtDireccion" style="width: 200px;" maxlength="50" readonly="readonly" />
+                        <span class="cssToolTip_Form">
+                            <input type="text" id="TxtDireccion" style="width: 200px;" maxlength="50" readonly="readonly" />
+                            <span class="Spam_A_Addres"></span></span>
                     </td>
                     <td style="width: 40px; padding-bottom: 25px;">
                         <span class="cssToolTip">
@@ -921,26 +1040,17 @@
                     </td>
                 </tr>
             </table>
-            <table id="Tabla_Telefono">
-                <tr align="center">
-                    <td class="Label_Bold" style="width: 120px;"></td>
-                    <td class="Label_Bold">Ind.
-                    </td>
-                    <td class="Label_Bold">Tel. ó Cel
-                    </td>
-                    <td class="Label_Bold">Ext.
-                    </td>
-                    <td class="Label_Bold" style="width: 120px;"></td>
-                    <td class="Label_Bold">Ind.
-                    </td>
-                    <td class="Label_Bold">Tel. ó Cel
-                    </td>
-                    <td class="Label_Bold">Ext.
-                    </td>
+            <table id="Tabla_Telefono" style="width: 100%; padding-left: 50px;">
+                <tr align="left">
+                    <td class="Label_Bold" style="width: 70px;"></td>
+                    <td class="Label_Bold" style="width: 20px;">Ind.</td>
+                    <td class="Label_Bold" style="width: 50px;">Tel. ó Cel</td>
+                    <td class="Label_Bold" style="width: 0px;">Ext.</td>
                 </tr>
                 <tr>
-                    <td class="Label_Bold" style="width: 120px;">Telefono 1
+                    <td class="Label_Bold" style="width: 50px;">Telefono 1
                     </td>
+
                     <td>
                         <span class="cssToolTip_Form">
                             <input type="text" id="TxtInd1" maxlength="5" class="Numeric" style="width: 50px;" />
@@ -956,8 +1066,11 @@
                             <input type="text" id="TxtExt1" maxlength="5" class="Numeric" style="width: 50px;" />
                             <span class="Spam_AN"></span></span>
                     </td>
-                    <td class="Label_Bold" style="width: 120px;">Telefono 2
+                </tr>
+                <tr>
+                    <td class="Label_Bold" style="width: 50px;">Telefono 2
                     </td>
+
                     <td>
                         <span class="cssToolTip_Form">
                             <input type="text" id="TxtInd2" maxlength="5" class="Numeric" style="width: 50px;" />
@@ -992,8 +1105,11 @@
                             <input type="text" id="TxtExt3" maxlength="5" class="Numeric" style="width: 50px;" />
                             <span class="Spam_AN"></span></span>
                     </td>
+                </tr>
+                <tr>
                     <td class="Label_Bold">Telefono 4
                     </td>
+
                     <td>
                         <span class="cssToolTip_Form">
                             <input type="text" id="TxtInd4" maxlength="5" class="Numeric" style="width: 50px;" />
@@ -1022,17 +1138,19 @@
                 <td>
                     <select id="Select_Type_Adress" class="Select_medium">
                         <option value="">Nomenclatura</option>
-                        <option value="Cl">Calle</option>
+                        <option value="Cll">Calle</option>
                         <option value="Cra">Carrera</option>
                         <option value="Cir">Circular</option>
-                        <option value="Dia">Diagonal</option>
-                        <option value="Tra">Transversal</option>
+                        <option value="Diag">Diagonal</option>
+                        <option value="Trans">Transversal</option>
                         <option value="Av">Avenida</option>
-                        <option value="Kl">Kilometro</option>
+                        <option value="Km">Kilometro</option>
                     </select>
                 </td>
                 <td>
-                    <input type="text" id="Txt_N1" maxlength="4" class="Numeric" style="width: 40px" />
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="Txt_N1" maxlength="4" class="Numeric" style="width: 40px" />
+                        <span class="Spam_AN"></span></span>
                 </td>
                 <td>
                     <input type="text" id="Txt_Special" maxlength="200" class="" style="width: 400px" />
@@ -1056,7 +1174,7 @@
                         <option value="P">P</option>
                         <option value="Q">Q</option>
                         <option value="R">R</option>
-                        <option value="S">D</option>
+                        <option value="S">S</option>
                         <option value="T">T</option>
                         <option value="U">U</option>
                         <option value="V">V</option>
@@ -1067,7 +1185,9 @@
                     </select>
                 </td>
                 <td>
-                    <input type="text" id="Txt_N2" maxlength="4" class="Numeric" style="width: 40px" />
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="Txt_N2" maxlength="4" class="Numeric" style="width: 40px" />
+                        <span class="Spam_AN"></span></span>
                 </td>
                 <td>
                     <select id="Select_Letter_2" class="Select_tiny">
@@ -1090,7 +1210,7 @@
                         <option value="P">P</option>
                         <option value="Q">Q</option>
                         <option value="R">R</option>
-                        <option value="S">D</option>
+                        <option value="S">S</option>
                         <option value="T">T</option>
                         <option value="U">U</option>
                         <option value="V">V</option>
@@ -1101,7 +1221,9 @@
                     </select>
                 </td>
                 <td>
-                    <input type="text" id="Txt_N3" maxlength="4" class="Numeric" style="width: 40px" />
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="Txt_N3" maxlength="4" class="Numeric" style="width: 40px" />
+                        <span class="Spam_AN"></span></span>
                 </td>
                 <td>
                     <select id="Select_Orientacion" class="Select_medium">
@@ -1120,11 +1242,13 @@
                         <option value="Lote">Lote</option>
                         <option value="Local">Local</option>
                         <option value="Bodega">Bodega</option>
-                        <option value="Stan">Stand</option>
+                        <option value="Stand">Stand</option>
                     </select>
                 </td>
                 <td>
-                    <input type="text" id="Txt_N4" maxlength="4" class="Numeric" style="width: 40px" />
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="Txt_N4" maxlength="4" class="Numeric" style="width: 40px" />
+                        <span class="Spam_AN"></span></span>
                 </td>
                 <td>
                     <select id="Select_Type_Cons2" class="Select_medium">
@@ -1137,10 +1261,14 @@
                     </select>
                 </td>
                 <td>
-                    <input type="text" id="Txt_N5" maxlength="4" class="Numeric" style="width: 40px" />
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="Txt_N5" maxlength="4" class="Numeric" style="width: 40px" />
+                        <span class="Spam_AN"></span></span>
                 </td>
                 <td>
-                    <input type="text" id="Txt_Texto" maxlength="120" class="Letter" style="width: 200px" />
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="Txt_Texto" maxlength="40" class="Letter" style="width: 200px" />
+                        <span class="Spam_AWords"></span></span>
                 </td>
             </tr>
             <tr>
@@ -1493,22 +1621,17 @@
             </tr>
         </table>
     </div>
-    <div id="Dialog_Charge" style="width: 100%; text-align: center;">
-        <div class="cssload-circle">
-            <div class="cssload-up">
-                <div class="cssload-innera">
-                </div>
-            </div>
-            <div class="cssload-down">
-                <div class="cssload-innerb">
-                </div>
+    <div id="Dialog_Control" style="width: 100%; text-align: center;">
+        <div class="cssload-container" style="margin-top: 25%">
+            <div class="cssload-whirlpool"></div>
+            <div>
+                <img id="Sasif" class="Logo_3" src="../../images/SASIF_NEW_WHITE.png" alt="SASIF S.A.S." />
             </div>
         </div>
-        <h5>Procesando información espere un momento...</h5>
-    </div>
+     </div>
     <div id="Dialog_Ver_Anexos">
         <div id="container_TDoc_Anexos" style="margin-top: 10px; margin-bottom: 10px;">
         </div>
     </div>
-    <div id="Dialog_Valida_Document">
+    <div id="Dialog_Valida_Document"></div>
 </asp:Content>

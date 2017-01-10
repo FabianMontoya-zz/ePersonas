@@ -7,7 +7,7 @@ var Matrix_Jefe = [];
 var Matrix_GrpDocumentos = [];
 var Matrix_DocWork = [];
 
-var ArrayRegimen= [];
+var ArrayRegimen = [];
 
 var ArrayCliente = [];
 var ArrayCombo = [];
@@ -28,12 +28,10 @@ var NitAlter = "";
 var ValidatorCampos = 1;
 var OpcComplementos = 0;
 var OpcWordComplementos;
-
 /*--------------- region de variables globales --------------------*/
 
 //Evento load JS
 $(document).ready(function () {
-
     transaccionAjax_MDocWork('MATIRXDOC_WORK');
     transaccionAjax_MPaises_Ciudades('MATRIX_PAIS_CIUDAD');
     transaccionAjax_MArea('MATRIX_AREA');
@@ -41,6 +39,7 @@ $(document).ready(function () {
     transaccionAjax_MJefe('MATRIX_JEFE');
     transaccionAjax_MGrpDoc('MATRIX_GRP');
 
+    CargaMonth("Select_Mont", "");
     M_Regimen();
 
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
@@ -77,12 +76,17 @@ $(document).ready(function () {
     $("#Img14").css("display", "none");
     $("#Img15").css("display", "none");
     $("#Img16").css("display", "none");
+    $("#Img19").css("display", "none");
+    $("#Img20").css("display", "none");
+    $("#Img21").css("display", "none");
+    $("#Img24").css("display", "none");
+
     $("#Img22").css("display", "none");
     $("#Img23").css("display", "none");
 
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
-    $("#WE").css("display", "none");
+    $("#WA").css("display", "none");
 
     $("#TablaDatos_D").css("display", "none");
     $("#TablaDatos_D_Vista").css("display", "none");
@@ -92,6 +96,8 @@ $(document).ready(function () {
     $("#Container_Complementos").css("display", "none");
     $("#C_Empleado").css("display", "none");
     $("#C_Banco").css("display", "none");
+    $("#C_Socio").css("display", "none");
+
     $("#C_Banco_Vista").css("display", "none");
     $("#C_Empleado_Vista").css("display", "none");
     $("#C_MultiEmpresa").css("display", "none");
@@ -102,7 +108,7 @@ $(document).ready(function () {
 
     $("#Anexos").css("display", "none");
     $("#TR_Nit").css("display", "none");
-  
+
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
         autoOpen: false,
@@ -110,30 +116,12 @@ $(document).ready(function () {
         modal: true
     });
 
-    $("#Dialog_Charge").dialog({
-        autoOpen: false,
-        dialogClass: "Dialog_Sasif",
-        modal: true,
-        width: 400,
-        height: 400,
-        overlay: {
-            opacity: 0.5,
-            background: "black"
-        },
-        show: {
-            effect: 'fade',
-            duration: 1000
-        },
-        hide: {
-            effect: 'fade',
-            duration: 1000
-        }
-    });
 
     $("#dialog_eliminar").dialog({
         autoOpen: false,
         dialogClass: "Dialog_Sasif",
-        modal: true
+        modal: true,
+        open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show(); }
     });
 
     $("#Dialog_Direcciones").dialog({
@@ -145,7 +133,8 @@ $(document).ready(function () {
         overlay: {
             opacity: 0.5,
             background: "black"
-        }
+        },
+        open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show(); }
     });
 
     $("#Dialog_Ver_Anexos").dialog({
@@ -157,7 +146,8 @@ $(document).ready(function () {
         overlay: {
             opacity: 0.5,
             background: "black"
-        }
+        },
+        open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show(); }
     });
 
     $("#Dialog_EntidadFinanciera").dialog({
@@ -169,7 +159,8 @@ $(document).ready(function () {
         overlay: {
             opacity: 0.5,
             background: "black"
-        }
+        },
+        open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show(); }
     });
 
     $("#Dialog_Documentos").dialog({
@@ -181,7 +172,8 @@ $(document).ready(function () {
         overlay: {
             opacity: 0.5,
             background: "black"
-        }
+        },
+        open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show(); }
     });
 
     $("#Dialog_Doc_Autorizados").dialog({
@@ -193,7 +185,8 @@ $(document).ready(function () {
         overlay: {
             opacity: 0.5,
             background: "black"
-        }
+        },
+        open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show(); }
     });
 
     $("#Dialog_C_R_U_D").dialog({
@@ -201,11 +194,12 @@ $(document).ready(function () {
         dialogClass: "Dialog_Sasif",
         modal: true,
         width: 850,
-        height: 550,
+        height: 620,
         overlay: {
             opacity: 0.5,
             background: "black"
-        }
+        },
+        open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show(); }
     });
 
     $("#Dialog_C_R_U_D_Bank").dialog({
@@ -217,7 +211,8 @@ $(document).ready(function () {
         overlay: {
             opacity: 0.5,
             background: "black"
-        }
+        },
+        open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show(); }
     });
 
     $("#Dialog_Detalle_Document").dialog({
@@ -229,7 +224,8 @@ $(document).ready(function () {
         overlay: {
             opacity: 0.5,
             background: "black"
-        }
+        },
+        open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show(); }
     });
 
     $("#Dialog_Delete_Adress").dialog({
@@ -241,7 +237,8 @@ $(document).ready(function () {
         overlay: {
             opacity: 0.5,
             background: "black"
-        }
+        },
+        open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show(); }
     });
 
     $("#Dialog_Delete_Bank").dialog({
@@ -253,7 +250,8 @@ $(document).ready(function () {
         overlay: {
             opacity: 0.5,
             background: "black"
-        }
+        },
+        open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show(); }
     });
 
     $("#Dialog_Format_Adress").dialog({
@@ -265,19 +263,21 @@ $(document).ready(function () {
         overlay: {
             opacity: 0.5,
             background: "black"
-        }
+        },
+        open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show(); }
     });
 
     $("#Dialog_Relation").dialog({
         autoOpen: false,
         dialogClass: "Dialog_Sasif",
         modal: true,
-        width: 600,
-        height: 150,
+        width: 450,
+        height: 410,
         overlay: {
             opacity: 0.5,
             background: "black"
-        }
+        },
+        open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show(); }
     });
 
     $("#Dialog_Visor").dialog({
@@ -289,15 +289,18 @@ $(document).ready(function () {
         overlay: {
             opacity: 0.5,
             background: "black"
-        }
+        },
+        open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show(); }
     });
 
-    Format_Adress();
+    Format_Adress("TxtDireccion");
     Change_Select_pais();
     Change_Select_TPersona("", "");
     ValideAnexos();
     Change_Select_TDoc();
     Change_Select_Nit();
+    ValidaFechaDigitada("Text_fechaNacimiento");
+    ValidaPorcentaje("TxtPor_Participacion", 100);
 
 });
 
@@ -310,19 +313,37 @@ function Change_Select_TDoc() {
 
             ResetError();
             $("#TR_Nit").css("display", "none");
-            $(".Desvanecer").css("display", "inline-block");
-            $(".TR_1").css("width", "150%");
+            $(".Desvanecer").css("display", "inline-table");
+            $(".TR_1").css("width", "100%");
             ValidatorCampos = 1;
+
+            $("#TD_1").css("width", "15.2%");
+            $("#TD_3").css("width", "3%");
+            $("#TD_4").css("width", "3%");
+            $("#TD_5").css("width", "5%");
+            $("#TD_6").css("width", "2%");
+            $("#TD_7").css("width", "35%");
+            $("#TD_8").css("width", "15%");
+            $("#Select_Ciudad_Doc").css("width", "80%");
+
         }
         else {
+            $("#TD_1").css("width", "13%");
+            $("#TD_3").css("width", "1%");
+            $("#TD_4").css("width", "5%");
+            $("#TD_5").css("width", "5%");
+            $("#TD_6").css("width", "50%");
+            $("#TD_7").css("width", "50%");
+            $("#TD_8").css("width", "50%");
 
             ResetError();
-            $("#TR_Nit").css("display", "inline-block");
+            $("#TR_Nit").css("display", "inline-table");
             $(".Desvanecer").css("display", "none");
             ValidatorCampos = 2;
         }
     });
 }
+
 
 //muestra las relacion del cliente
 function BtnRelacion() {
@@ -342,6 +363,7 @@ function HabilitarPanel(opcion) {
 
         case "crear":
             ResetError();
+            CargaYear("Select_Year", 80, 17, "");
             $("#TablaDatos_D").css("display", "inline-table");
             $("#TablaDatos_D_Vista").css("display", "none");
             $("#Admin_Anexos").css("display", "none");
@@ -358,7 +380,7 @@ function HabilitarPanel(opcion) {
 
             $("#BtnLimpiar").css("display", "inline-table");
             $("#Btnguardar").css("display", "inline-table");
-    
+
             $("#Txt_Nit").removeAttr("disabled");
             $("#Txt_Ident").removeAttr("disabled");
             $("#Btnguardar").attr("value", "Guardar");
@@ -378,7 +400,7 @@ function HabilitarPanel(opcion) {
             $("#Controls").css("display", "none");
             $("#Anexos").css("display", "none");
             $("#BtnLimpiar").css("display", "none");
-        
+
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TCliente").html("");
             estado = opcion;
@@ -397,7 +419,7 @@ function HabilitarPanel(opcion) {
             $("#C_Banco").css("display", "none");
             $("#C_Empleado").css("display", "none");
             $("#BtnLimpiar").css("display", "none");
-        
+
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TCliente").html("");
             estado = opcion;
@@ -414,7 +436,7 @@ function HabilitarPanel(opcion) {
             $("#Controls").css("display", "none");
             $("#Anexos").css("display", "none");
             $("#BtnLimpiar").css("display", "none");
-        
+
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TCliente").html("");
             estado = opcion;
@@ -484,46 +506,60 @@ function Table_Cliente() {
 
     var html_Cliente;
     var StrCiudad;
+    var StrPorcentaje = "";
     var ArraySplit;
 
     switch (estado) {
 
         case "buscar":
-            html_Cliente = "<table id='TCliente' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th colspan='11' class='Grid_Head' >Datos Generales</th><th colspan='11' class='Grid_Head' >Relacion</th></tr><tr><th>Ver</th><th>Nit Empresa</th><th>Tipo de Documento</th><th>N° Documento</th><th>Digito De Verificación</th><th>Nombre Empresa</th><th>Tipo Persona</th><th>Regimen</th><th>Pais</th><th>Ciudad</th><th>Cliente</th><th>Avaluador</th><th>Organismo de Transito</th><th>Hacienda</th><th>Nit Multi-Empresa</th><th>Empleado</th><th>Asesor</th><th>Proveedor</th><th>Ent. Bancaria</th></tr></thead><tbody>";
+            StrPorcentaje = "";
+            html_Cliente = "<table id='TCliente' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th colspan='11' class='Grid_Head' >Datos Generales</th><th colspan='11' class='Grid_Head' >Relacion</th></tr><tr><th>Ver</th><th>Nit Empresa</th><th>Tipo de Documento</th><th>N° Documento</th><th>Digito De Verificación</th><th>Nombre Empresa</th><th>Tipo Persona</th><th>Regimen</th><th>Pais</th><th>Ciudad</th><th>Cliente</th><th>Avaluador</th><th>Organismo de Transito</th><th>Hacienda</th><th>Nit Multi-Empresa</th><th>Empleado</th><th>Asesor</th><th>Proveedor</th><th>Ent. Bancaria</th><th>Visitante</th><th>Representante Legal</th><th>Socio</th><th>% Participación</th></tr></thead><tbody>";
             for (itemArray in ArrayCliente) {
                 if (ArrayCliente[itemArray].Cliente_ID != 0) {
 
-                    StrCiudad = ArrayCliente[itemArray].DescripCiudad
+                    StrCiudad = ArrayCliente[itemArray].DescripCiudad;
                     ArraySplit = StrCiudad.split("_");
 
-                    html_Cliente += "<tr><td><select id='Select_" + ArrayCliente[itemArray].Cliente_ID + "' class='Opciones' onchange=\"Select_Option_Cliente(this,'" + ArrayCliente[itemArray].Index + "','');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option></select></td><td>" + ArrayCliente[itemArray].Nit_ID + "</td><td>" + ArrayCliente[itemArray].DescripTypeDocument + "</td><td>" + ArrayCliente[itemArray].Document_ID + "</td><td>" + ArrayCliente[itemArray].Digito_Verificacion + "</td><td>" + ArrayCliente[itemArray].Nombre + " " + ArrayCliente[itemArray].Nombre_2 + " " + ArrayCliente[itemArray].Apellido_1 + " " + ArrayCliente[itemArray].Apellido_2 + "</td><td>" + ArrayCliente[itemArray].DescripTipoPersona + "</td><td>" + ArrayCliente[itemArray].DescripRegimen + "</td><td>" + ArrayCliente[itemArray].DescripPais + "</td><td>" + ArrayCliente[itemArray].DescripCiudad + "</td><td>" + ArrayCliente[itemArray].OP_Cliente + "</td><td>" + ArrayCliente[itemArray].OP_Avaluador + "</td><td>" + ArrayCliente[itemArray].OP_Transito + "</td><td>" + ArrayCliente[itemArray].OP_Hacienda + "</td><td>" + ArrayCliente[itemArray].OP_Empresa + "</td><td>" + ArrayCliente[itemArray].OP_Empleado + "</td><td>" + ArrayCliente[itemArray].OP_Asesor + "</td><td>" + ArrayCliente[itemArray].Other_1 + "</td><td>" + ArrayCliente[itemArray].Other_2 + "</td></tr>";
+                    if (ArrayCliente[itemArray].Por_Participacion != 0)
+                        StrPorcentaje = ArrayCliente[itemArray].Por_Participacion + " %";
+
+                    html_Cliente += "<tr><td><select id='Select_" + ArrayCliente[itemArray].Cliente_ID + "' class='Opciones' onchange=\"Select_Option_Cliente(this,'" + ArrayCliente[itemArray].Index + "','');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option></select></td><td>" + ArrayCliente[itemArray].Nit_ID + "</td><td>" + ArrayCliente[itemArray].DescripTypeDocument + "</td><td>" + ArrayCliente[itemArray].Document_ID + "</td><td>" + ArrayCliente[itemArray].Digito_Verificacion + "</td><td>" + ArrayCliente[itemArray].Nombre + " " + ArrayCliente[itemArray].Nombre_2 + " " + ArrayCliente[itemArray].Apellido_1 + " " + ArrayCliente[itemArray].Apellido_2 + "</td><td>" + ArrayCliente[itemArray].DescripTipoPersona + "</td><td>" + ArrayCliente[itemArray].DescripRegimen + "</td><td>" + ArrayCliente[itemArray].DescripPais + "</td><td>" + ArrayCliente[itemArray].DescripCiudad + "</td><td>" + ArrayCliente[itemArray].OP_Cliente + "</td><td>" + ArrayCliente[itemArray].OP_Avaluador + "</td><td>" + ArrayCliente[itemArray].OP_Transito + "</td><td>" + ArrayCliente[itemArray].OP_Hacienda + "</td><td>" + ArrayCliente[itemArray].OP_Empresa + "</td><td>" + ArrayCliente[itemArray].OP_Empleado + "</td><td>" + ArrayCliente[itemArray].OP_Asesor + "</td><td>" + ArrayCliente[itemArray].Other_1 + "</td><td>" + ArrayCliente[itemArray].Other_2 + "</td><td>" + ArrayCliente[itemArray].OP_Visitante + "</td><td>" + ArrayCliente[itemArray].OP_Representante + "</td><td>" + ArrayCliente[itemArray].OP_Socio + "</td><td>" + StrPorcentaje + "</td></tr>";
 
                 }
             }
             break;
 
         case "modificar":
-            html_Cliente = "<table id='TCliente' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th colspan='10' class='Grid_Head' >Datos Generales</th><th colspan='11' class='Grid_Head' >Relacion</th></tr><tr><th>Opcion</th><th>Nit Empresa</th><th>Tipo de Documento</th><th>N° Documento</th><th>Digito De Verificación</th><th>Nombre Empresa</th><th>Tipo Persona</th><th>Regimen</th><th>Pais</th><th>Ciudad</th><th>Cliente</th><th>Avaluador</th><th>Organismo de Transito</th><th>Hacienda</th><th>Nit Multi-Empresa</th><th>Empleado</th><th>Asesor</th><th>Proveedor</th><th>Ent. Bancaria</th></tr></thead><tbody>";
+            StrPorcentaje = "";
+            html_Cliente = "<table id='TCliente' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th colspan='10' class='Grid_Head' >Datos Generales</th><th colspan='11' class='Grid_Head' >Relacion</th></tr><tr><th>Opcion</th><th>Nit Empresa</th><th>Tipo de Documento</th><th>N° Documento</th><th>Digito De Verificación</th><th>Nombre Empresa</th><th>Tipo Persona</th><th>Regimen</th><th>Pais</th><th>Ciudad</th><th>Cliente</th><th>Avaluador</th><th>Organismo de Transito</th><th>Hacienda</th><th>Nit Multi-Empresa</th><th>Empleado</th><th>Asesor</th><th>Proveedor</th><th>Ent. Bancaria</th><th>Visitante</th><th>Representante Legal</th><th>Socio</th><th>% Participación</th></tr></thead><tbody>";
             for (itemArray in ArrayCliente) {
                 if (ArrayCliente[itemArray].Document_ID != 0) {
 
-                    StrCiudad = ArrayCliente[itemArray].DescripCiudad
+                    StrCiudad = ArrayCliente[itemArray].DescripCiudad;
                     ArraySplit = StrCiudad.split("_");
 
-                    html_Cliente += "<tr><td><select id='Select_" + ArrayCliente[itemArray].Cliente_ID + "' class='Opciones' onchange=\"Select_Option_Cliente(this,'" + ArrayCliente[itemArray].Index + "','U');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='M'>Editar</option></select></td><td>" + ArrayCliente[itemArray].Nit_ID + "</td><td>" + ArrayCliente[itemArray].DescripTypeDocument + "</td><td>" + ArrayCliente[itemArray].Document_ID + "</td><td>" + ArrayCliente[itemArray].Digito_Verificacion + "</td><td>" + ArrayCliente[itemArray].Nombre + " " + ArrayCliente[itemArray].Nombre_2 + " " + ArrayCliente[itemArray].Apellido_1 + " " + ArrayCliente[itemArray].Apellido_2 + "</td><td>" + ArrayCliente[itemArray].DescripTipoPersona + "</td><td>" + ArrayCliente[itemArray].DescripRegimen + "</td><td>" + ArrayCliente[itemArray].DescripPais + "</td><td>" + ArrayCliente[itemArray].DescripCiudad + "</td><td>" + ArrayCliente[itemArray].OP_Cliente + "</td><td>" + ArrayCliente[itemArray].OP_Avaluador + "</td><td>" + ArrayCliente[itemArray].OP_Transito + "</td><td>" + ArrayCliente[itemArray].OP_Hacienda + "</td><td>" + ArrayCliente[itemArray].OP_Empresa + "</td><td>" + ArrayCliente[itemArray].OP_Empleado + "</td><td>" + ArrayCliente[itemArray].OP_Asesor + "</td><td>" + ArrayCliente[itemArray].Other_1 + "</td><td>" + ArrayCliente[itemArray].Other_2 + "</td></tr>";
+                    if (ArrayCliente[itemArray].Por_Participacion != 0)
+                        StrPorcentaje = ArrayCliente[itemArray].Por_Participacion + " %";
+
+                    console.log(StrPorcentaje);
+                    html_Cliente += "<tr><td><select id='Select_" + ArrayCliente[itemArray].Cliente_ID + "' class='Opciones' onchange=\"Select_Option_Cliente(this,'" + ArrayCliente[itemArray].Index + "','U');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='M'>Editar</option></select></td><td>" + ArrayCliente[itemArray].Nit_ID + "</td><td>" + ArrayCliente[itemArray].DescripTypeDocument + "</td><td>" + ArrayCliente[itemArray].Document_ID + "</td><td>" + ArrayCliente[itemArray].Digito_Verificacion + "</td><td>" + ArrayCliente[itemArray].Nombre + " " + ArrayCliente[itemArray].Nombre_2 + " " + ArrayCliente[itemArray].Apellido_1 + " " + ArrayCliente[itemArray].Apellido_2 + "</td><td>" + ArrayCliente[itemArray].DescripTipoPersona + "</td><td>" + ArrayCliente[itemArray].DescripRegimen + "</td><td>" + ArrayCliente[itemArray].DescripPais + "</td><td>" + ArrayCliente[itemArray].DescripCiudad + "</td><td>" + ArrayCliente[itemArray].OP_Cliente + "</td><td>" + ArrayCliente[itemArray].OP_Avaluador + "</td><td>" + ArrayCliente[itemArray].OP_Transito + "</td><td>" + ArrayCliente[itemArray].OP_Hacienda + "</td><td>" + ArrayCliente[itemArray].OP_Empresa + "</td><td>" + ArrayCliente[itemArray].OP_Empleado + "</td><td>" + ArrayCliente[itemArray].OP_Asesor + "</td><td>" + ArrayCliente[itemArray].Other_1 + "</td><td>" + ArrayCliente[itemArray].Other_2 + "</td><td>" + ArrayCliente[itemArray].OP_Visitante + "</td><td>" + ArrayCliente[itemArray].OP_Representante + "</td><td>" + ArrayCliente[itemArray].OP_Socio + "</td><td>" + StrPorcentaje + "</td></tr>";
                 }
             }
             break;
 
         case "eliminar":
-            html_Cliente = "<table id='TCliente' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th colspan='10' class='Grid_Head' >Datos Generales</th><th colspan='11' class='Grid_Head' >Relacion</th></tr><tr><th>Opcion</th><th>Nit Empresa</th><th>Tipo de Documento</th><th>N° Documento</th><th>Digito De Verificación</th><th>Nombre Empresa</th><th>Tipo Persona</th><th>Regimen</th><th>Pais</th><th>Ciudad</th><th>Cliente</th><th>Avaluador</th><th>Organismo de Transito</th><th>Hacienda</th><th>Nit Multi-Empresa</th><th>Empleado</th><th>Asesor</th><th>Proveedor</th><th>Ent. Bancaria</th></tr></thead><tbody>";
+            StrPorcentaje = "";
+            html_Cliente = "<table id='TCliente' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th colspan='10' class='Grid_Head' >Datos Generales</th><th colspan='11' class='Grid_Head' >Relacion</th></tr><tr><th>Opcion</th><th>Nit Empresa</th><th>Tipo de Documento</th><th>N° Documento</th><th>Digito De Verificación</th><th>Nombre Empresa</th><th>Tipo Persona</th><th>Regimen</th><th>Pais</th><th>Ciudad</th><th>Cliente</th><th>Avaluador</th><th>Organismo de Transito</th><th>Hacienda</th><th>Nit Multi-Empresa</th><th>Empleado</th><th>Asesor</th><th>Proveedor</th><th>Ent. Bancaria</th><th>Visitante</th><th>Representante Legal</th><th>Socio</th><th>% Participación</th></tr></thead><tbody>";
             for (itemArray in ArrayCliente) {
                 if (ArrayCliente[itemArray].Cliente_ID != 0) {
 
-                    StrCiudad = ArrayCliente[itemArray].DescripCiudad
+                    StrCiudad = ArrayCliente[itemArray].DescripCiudad;
                     ArraySplit = StrCiudad.split("_");
 
-                    html_Cliente += "<tr><td><select id='Select_" + ArrayCliente[itemArray].Cliente_ID + "' class='Opciones' onchange=\"Select_Option_Cliente(this,'" + ArrayCliente[itemArray].Index + "');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='E'>Eliminar</option></select></td><td>" + ArrayCliente[itemArray].Nit_ID + "</td><td>" + ArrayCliente[itemArray].DescripTypeDocument + "</td><td>" + ArrayCliente[itemArray].Document_ID + "</td><td>" + ArrayCliente[itemArray].Digito_Verificacion + "</td><td>" + ArrayCliente[itemArray].Nombre + " " + ArrayCliente[itemArray].Nombre_2 + " " + ArrayCliente[itemArray].Apellido_1 + " " + ArrayCliente[itemArray].Apellido_2 + "</td><td>" + ArrayCliente[itemArray].DescripTipoPersona + "</td><td>" + ArrayCliente[itemArray].DescripRegimen + "</td><td>" + ArrayCliente[itemArray].DescripPais + "</td><td>" + ArrayCliente[itemArray].DescripCiudad + "</td><td>" + ArrayCliente[itemArray].OP_Cliente + "</td><td>" + ArrayCliente[itemArray].OP_Avaluador + "</td><td>" + ArrayCliente[itemArray].OP_Transito + "</td><td>" + ArrayCliente[itemArray].OP_Hacienda + "</td><td>" + ArrayCliente[itemArray].OP_Empresa + "</td><td>" + ArrayCliente[itemArray].OP_Empleado + "</td><td>" + ArrayCliente[itemArray].OP_Asesor + "</td><td>" + ArrayCliente[itemArray].Other_1 + "</td><td>" + ArrayCliente[itemArray].Other_2 + "</td></tr>";
+                    if (ArrayCliente[itemArray].Por_Participacion != 0)
+                        StrPorcentaje = ArrayCliente[itemArray].Por_Participacion + " %";
+
+                    html_Cliente += "<tr><td><select id='Select_" + ArrayCliente[itemArray].Cliente_ID + "' class='Opciones' onchange=\"Select_Option_Cliente(this,'" + ArrayCliente[itemArray].Index + "');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='E'>Eliminar</option></select></td><td>" + ArrayCliente[itemArray].Nit_ID + "</td><td>" + ArrayCliente[itemArray].DescripTypeDocument + "</td><td>" + ArrayCliente[itemArray].Document_ID + "</td><td>" + ArrayCliente[itemArray].Digito_Verificacion + "</td><td>" + ArrayCliente[itemArray].Nombre + " " + ArrayCliente[itemArray].Nombre_2 + " " + ArrayCliente[itemArray].Apellido_1 + " " + ArrayCliente[itemArray].Apellido_2 + "</td><td>" + ArrayCliente[itemArray].DescripTipoPersona + "</td><td>" + ArrayCliente[itemArray].DescripRegimen + "</td><td>" + ArrayCliente[itemArray].DescripPais + "</td><td>" + ArrayCliente[itemArray].DescripCiudad + "</td><td>" + ArrayCliente[itemArray].OP_Cliente + "</td><td>" + ArrayCliente[itemArray].OP_Avaluador + "</td><td>" + ArrayCliente[itemArray].OP_Transito + "</td><td>" + ArrayCliente[itemArray].OP_Hacienda + "</td><td>" + ArrayCliente[itemArray].OP_Empresa + "</td><td>" + ArrayCliente[itemArray].OP_Empleado + "</td><td>" + ArrayCliente[itemArray].OP_Asesor + "</td><td>" + ArrayCliente[itemArray].Other_1 + "</td><td>" + ArrayCliente[itemArray].Other_2 + "</td><td>" + ArrayCliente[itemArray].OP_Visitante + "</td><td>" + ArrayCliente[itemArray].OP_Representante + "</td><td>" + ArrayCliente[itemArray].OP_Socio + "</td><td>" + StrPorcentaje + "</td></tr>";
 
                 }
             }
@@ -616,6 +652,10 @@ function Editar(Index_Cliente, Type) {
     $("#Select_TPersona").val(ArrayCliente[Index_Cliente].TipoPersona);
     $("#Select_Acceso").val(ArrayCliente[Index_Cliente].AccesoSistema);
 
+    $("#Text_fechaNacimiento").val(ArrayCliente[Index_Cliente].FechaNacimiento);
+    $("#Select_Sex").val(ArrayCliente[Index_Cliente].Sex);
+    $("#Text_fechaNacimiento").css("color", "#000000")
+
     StrPolitica = ArrayCliente[Index_Cliente].Politica_ID;
 
     if (StrPolitica == 0)
@@ -644,6 +684,7 @@ function Editar(Index_Cliente, Type) {
     $("#Txt_Ape_1").val(ArrayCliente[Index_Cliente].Apellido_1);
     $("#Txt_Ape_2").val(ArrayCliente[Index_Cliente].Apellido_2);
     $("#Txt_CodBank").val(ArrayCliente[Index_Cliente].Cod_Bank);
+    $("#TxtPor_Participacion").val(ArrayCliente[Index_Cliente].Por_Participacion);
 
     $("#Select_EmpresaNit").attr("disabled", "disabled");
     $("#Select_Documento").attr("disabled", "disabled");
@@ -690,10 +731,15 @@ function ConsultaPersona(Index_Cliente) {
     $("#Con_Pais").html(ArrayCliente[Index_Cliente].DescripPais);
     $("#Con_Acceso").html(ArrayCliente[Index_Cliente].AccesoSistema);
 
+    $("#Con_Sex").html(ArrayCliente[Index_Cliente].DescripSexo);
+    $("#Con_fechaNacimiento").html(ArrayCliente[Index_Cliente].FechaNacimiento);
+
     $("#Con_Ident").html(ArrayCliente[Index_Cliente].Document_ID);
     $("#ConVerif").html(ArrayCliente[Index_Cliente].Digito_Verificacion);
     $("#Con_Consecutivo").html(ArrayCliente[Index_Cliente].Consecutivo);
-    
+
+    $("#Con_Por_Participacion").html(ArrayCliente[Index_Cliente].Por_Participacion);
+
     if (ArrayCliente[Index_Cliente].TypeDocument_ID == "2") {
         $("#ConNombreNit").html(ArrayCliente[Index_Cliente].Nombre);
         $("#TR_Nit_C").css("display", "inline-block");
@@ -710,7 +756,7 @@ function ConsultaPersona(Index_Cliente) {
         $("#C_MultiEmpresa").css("display", "inline-block");
     else
         $("#C_MultiEmpresa").css("display", "none");
-   
+
     $("#ConNombre_2").html(ArrayCliente[Index_Cliente].Nombre_2);
     $("#Con_Ape_1").html(ArrayCliente[Index_Cliente].Apellido_1);
     $("#Con_Ape_2").html(ArrayCliente[Index_Cliente].Apellido_2);
@@ -760,6 +806,16 @@ function Carga_Relaciones(Index_Cliente, Type) {
     else
         $("#Check_Proveedor").prop("checked", false);
 
+    if (ArrayCliente[Index_Cliente].OP_Representante == "S")
+        $("#Check_RepLegal").prop("checked", true);
+    else
+        $("#Check_RepLegal").prop("checked", false);
+
+    if (ArrayCliente[Index_Cliente].OP_Visitante == "S")
+        $("#Check_Visitante").prop("checked", true);
+    else
+        $("#Check_Visitante").prop("checked", false);
+
     if (ArrayCliente[Index_Cliente].Other_2 == "S") {
         $("#Check_EntBancaria").prop("checked", true);
         $("#C_Banco").css("display", "inline-table");
@@ -793,6 +849,24 @@ function Carga_Relaciones(Index_Cliente, Type) {
         $("#Check_Empleado").prop("checked", false);
         $("#C_Empleado").css("display", "none");
         $("#C_Empleado_Vista").css("display", "none");
+    }
+
+    if (ArrayCliente[Index_Cliente].OP_Socio == "S") {
+        $("#Check_Socio").prop("checked", true);
+        $("#C_Socio").css("display", "inline-table");
+        $("#C_Socio_Vista").css("display", "inline-table");
+
+        if (Type == "V")
+            $("#Anexos").css("display", "none");
+        else
+            $("#Anexos").css("display", "inline-table");
+
+
+    }
+    else {
+        $("#Check_Socio").prop("checked", false);
+        $("#C_Socio").css("display", "none");
+        $("#C_Socio_Vista").css("display", "none");
     }
 
 }
@@ -838,6 +912,7 @@ function Clear() {
     $("#Txt_Ape_1").val("");
     $("#Txt_Ape_2").val("");
     $("#Txt_CodBank").val("");
+    $("#TxtPor_Participacion").val("");
 
     $("#TxtRead").val("");
     $("#DDLColumns").val("-1");
@@ -853,11 +928,15 @@ function Clear() {
     $("#Check_Proveedor").prop("checked", false);
     $("#Check_EntBancaria").prop("checked", false);
 
+    $("#Check_Visitante").prop("checked", false);
+    $("#Check_RepLegal").prop("checked", false);
+    $("#Check_Socio").prop("checked", false);
+
     $("#Select_TPersona").val("-1");
     $("#Select_Regimen").val("-1");
     $("#Select_Acceso").val("N");
     $("#Select_GrpDocument").val("-1");
-    
+
     $('.C_Chosen').trigger('chosen:updated');
 
 }
@@ -911,6 +990,11 @@ function Disabled_Client() {
     $("#Check_Proveedor").attr("disabled", "disabled");
     $("#Check_EntBancaria").attr("disabled", "disabled");
 
+    $("#TxtPor_Participacion").attr("disabled", "disabled");
+    $("#Check_Visitante").attr("disabled", "disabled");
+    $("#Check_RepLegal").attr("disabled", "disabled");
+    $("#Check_Socio").attr("disabled", "disabled");
+
     $("#Select_Acceso").attr("disabled", "disabled");
     $("#Select_GrpDocument").attr("disabled", "disabled");
 
@@ -952,6 +1036,12 @@ function Enabled_Client() {
     $("#Check_Asesor").removeAttr("disabled");
     $("#Check_Proveedor").removeAttr("disabled");
     $("#Check_EntBancaria").removeAttr("disabled");
+
+    $("#TxtPor_Participacion").removeAttr("disabled");
+    $("#Check_Visitante").removeAttr("disabled");
+    $("#Check_RepLegal").removeAttr("disabled");
+    $("#Check_Socio").removeAttr("disabled");
+
 
     $("#Select_Acceso").removeAttr("disabled");
     $("#Select_GrpDocument").removeAttr("disabled");
@@ -1012,21 +1102,6 @@ function BlockAnexos(Modulo) {
 
 }
 
-//revicion y carge de combos paises
-function V2() {
-    for (e = 0; e < A.length; e++) {
-        i = 0;
-        for (i = 0; i < A_0.length; i++) {
-            if (A[e] - 1 == A_0[i]) {
-                var Val_F = A_0[i + 1] + e;
-                Matrix_Pais[P[e]].IndexFinal = Val_F;
-            }
-        }
-    }
-
-    charge_CatalogList(Matrix_Pais, "Select_Pais", 1);
-    charge_CatalogList(Matrix_Pais, "Select_Pais_D", 1);
-}
 
 //limpia los campos
 function BtnLimpia() {

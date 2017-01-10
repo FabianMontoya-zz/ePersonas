@@ -6,7 +6,92 @@ PanelSeguridad
 </name>
 </assembly>
 <members>
-<member name="M:PanelSeguridad.R_PuertaAcc_AreaAjax.Consulta_R_PuertaAcc_Area">
+<member name="M:PanelSeguridad.C_ActivosAjax.InsertC_Activos">
+	<summary>
+ funcion que inserta en la tabla C_Activos (INSERT)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosAjax.Insert_Vehiculo">
+	<summary>
+ funcion que inserta en la tabla vehiculo (INSERT)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosAjax.CargarTipo">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosAjax.Matrix_RTSTA">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosAjax.Carga_Matriz_PaisCiudad">
+	<summary>
+ funcion que carga La matrix
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosAjax.Carga_MPersonas">
+	<summary>
+ funcion que carga La matrix
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosAjax.CargarColor">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosAjax.Carga_MSucursal">
+	<summary>
+ funcion que carga La matrix
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosAjax.Carga_MMoneda">
+	<summary>
+ funcion que carga La matrix
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosAjax.Carga_ListMarca_Fasecolda">
+	<summary>
+ funcion que carga matrix de marca clases fasecolda
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosAjax.Carga_Lista_Clase_Fasecolda">
+	<summary>
+ funcion que carga La lista de clases SEGUN LA MARCA ESCOGIDA
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosAjax.Carga_M_Fasecolda_Flitrada">
+	<summary>
+ funcion que carga LISTA de lineas marca clases fasecolda
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosAjax.Carga_M_Fasecolda_Flitrada_ID">
+	<summary>
+ funcion que carga LISTA de lineas marca clases fasecolda
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosAjax.CargarDocumento">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosAjax.CargarCliente">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosAjax.Search_People">
+	<summary>
+ consulta si existe la persona digitada 
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosAjax.ConsultFactura">
+	<summary>
+ funcion que carga consulta el activo
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.R_PuertaAcc_AreaAjax.Consulta_R_PuertaAcc_Area">
 	<summary>
  traemos todos los datos para tabla R_PuertaAcc_Area (READ)
  </summary>
@@ -51,6 +136,13 @@ PanelSeguridad
 </member><member name="M:PanelSeguridad.Conector.IDis(System.String,System.String)">
 	<summary>
  funcion generica para consultas de un solo resultado tipo integer
+ </summary>
+	<param name="vp_S_StrQuery"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.Conector.Shearch_Date_String(System.String,System.String)">
+	<summary>
+ funcion generica para consultas de un solo resultado tipo sTRING
  </summary>
 	<param name="vp_S_StrQuery"></param>
 	<returns></returns>
@@ -263,7 +355,7 @@ PanelSeguridad
 	<param name="vp_S_Table"></param>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.FasecoldaSQLClass.listFasecolda(System.String,System.String)">
+</member><member name="M:PanelSeguridad.FasecoldaSQLClass.listFasecolda(System.String,System.String,System.String)">
 	<summary>
  funcion que trae el listado de Fasecolda para armar la tabla
  </summary>
@@ -278,19 +370,27 @@ PanelSeguridad
 	<param name="vp_O_Obj"></param>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.AccesoAjax.Consulta_Acceso">
+</member><member name="M:PanelSeguridad.FasecoldaSQLClass.List_Marca_Fasecolda">
 	<summary>
- traemos todos los datos para tabla Acceso (READ)
+ trae la LISTA marcas clases fasecolda
  </summary>
+	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.AccesoAjax.InsertAcceso">
+</member><member name="M:PanelSeguridad.FasecoldaSQLClass.List_Clases_Fasecolda(PanelSeguridad.FasecoldaClass)">
+	<summary>
+ lee la lista de clases de facecolda SEGUN LA MARCA SELECCIONADA
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.FasecoldaSQLClass.Matrix_Fasecolda_Filtrada(PanelSeguridad.FasecoldaClass)">
+	<summary>
+ trae la matrix fasecolda con valores
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AccesoAjax.Save_Log_Ingreso">
 	<summary>
  funcion que inserta en la tabla Acceso (INSERT)
- </summary>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.AccesoAjax.EraseAcceso">
-	<summary>
- funcion que elimina en la tabla Acceso (DELETE)
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.AccesoAjax.CargarM_Personas">
@@ -333,9 +433,14 @@ PanelSeguridad
  funcion que carga el objeto DDL consulta
  </summary>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.AccesoAjax.CargarDroplist">
+</member><member name="M:PanelSeguridad.AccesoAjax.CargaDatosEmpresaEmpleado">
 	<summary>
- funcion que carga el objeto DDL Links
+ cara la matriz de documento para trabajo
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AccesoAjax.CargaEmpleados">
+	<summary>
+ carga la matriz de datos de los empleados
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.AccesoAjax.CargarCliente">
@@ -348,6 +453,26 @@ PanelSeguridad
  funcion que carga el objeto DDL consulta
  </summary>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AccesoAjax.Create_List_ControlAcceso">
+	<summary>
+ crea lista clase de control de acesso
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.FinanciacionSQLClass.listFinanciacion(System.String,System.String,System.String)">
+	<summary>
+ funcion que trae el listado de Financiacion para armar la tabla
+ </summary>
+	<param name="vp_S_StrQuery"></param>
+	<param name="vg_S_StrConexion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.FinanciacionSQLClass.Matrix_Financiacion">
+	<summary>
+ Carga matrix de Financiacions
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.C_ContratoSQLClass.InsertC_Contrato(PanelSeguridad.C_ContratoClass)">
 	<summary>
  funcion que crea el query para la insercion de nuevo C_Contrato (INSERT)
@@ -355,38 +480,9 @@ PanelSeguridad
 	<param name="vp_Obj"></param>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.C_ContratoSQLClass.Charge_DropListMoneda(System.String)">
-	<summary>
- crea la consulta para cargar el combo
- </summary>
-	<param name="vp_S_ID"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.C_ContratoSQLClass.Charge_DropListEstado_Contrato(System.String)">
-	<summary>
- crea la consulta para cargar el combo
- </summary>
-	<param name="vp_S_ID"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.C_ContratoSQLClass.Charge_DropListHijo_Cliente(System.String)">
-	<summary>
- crea la consulta para cargar el combo
- </summary>
-	<param name="vp_S_ID"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.C_ContratoSQLClass.listC_Contrato(System.String,System.String,System.String)">
-	<summary>
- funcion que trae el listado de C_Contrato para armar la tabla
- </summary>
-	<param name="vp_S_StrQuery"></param>
-	<param name="vg_S_StrConexion"></param>
-	<returns></returns>
-	<remarks></remarks>
 </member><member name="M:PanelSeguridad.C_ContratoSQLClass.Consulta_Repetido(PanelSeguridad.C_ContratoClass)">
 	<summary>
- funcion que valida si esta repetido el registro a ingresar
+ averigua si esta repetido
  </summary>
 	<param name="vp_O_Obj"></param>
 	<returns></returns>
@@ -439,6 +535,82 @@ PanelSeguridad
 </member><member name="M:PanelSeguridad.ConsecutivosAjax.CargarCliente">
 	<summary>
  funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.IngresoAjax.Save_Log_Ingreso">
+	<summary>
+ funcion que inserta en la tabla Acceso (INSERT)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.IngresoAjax.CargarDocumento">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.IngresoAjax.Search_People_Access">
+	<summary>
+ consulta si existe la persona digitada 
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.IngresoAjax.Search_Document_Foto">
+	<summary>
+ trae la foto del personaje a consultar
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.IngresoAjax.List_Personas_Doc">
+	<summary>
+ cara la matriz de documento para trabajo
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.IngresoAjax.List_Empresa_Doc">
+	<summary>
+ cara la matriz de documento para trabajo
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.IngresoAjax.List_Doc_Persona">
+	<summary>
+ carga la lista de documentos de la persona
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.IngresoAjax.List_Doc_Empresa">
+	<summary>
+ carga la lista de documentos de la empresa
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.IngresoAjax.List_Puerta_Acceso">
+	<summary>
+ trea la lista puertas de acceso area 
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.IngresoAjax.List_PuertaAccesos_Area">
+	<summary>
+ trea la lista puertas de acceso area 
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.IngresoAjax.List_Access_Predeterminado">
+	<summary>
+ carga la lista de accesos predeterminados
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.IngresoAjax.List_Search_People_Bussiness">
+	<summary>
+ carga la lista de accesos predeterminados
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.IngresoAjax.List_Empleados">
+	<summary>
+ carga la matriz de datos de los empleados
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.IngresoAjax.Create_List_ControlAcceso">
+	<summary>
+ crea lista clase de control de acesso
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.IngresoAjax.People_Ingress">
+	<summary>
+ validamos si la persona ya esta en la planta
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.TipoActivoAjax.Consulta_Activo">
@@ -534,6 +706,13 @@ PanelSeguridad
 	<summary>
  consulta que trae todos los datos de accesos predeterminados
  </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_AccesoPreSQLClass.List_Access_Predeterminado(System.String)">
+	<summary>
+  consulta que trae todos los datos de accesos predeterminados
+ </summary>
+	<param name="vp_S_Nit_Bussines_Visit"></param>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.Adm_UsuarioSQLClass.Read_AllUser(System.String,System.String,System.String)">
@@ -662,6 +841,20 @@ PanelSeguridad
  funcion que valida si el id esta en la BD
  </summary>
 	<param name="vp_S_ID"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.VehiculosSQLClass.InsertVehiculos(PanelSeguridad.VehiculosClass)">
+	<summary>
+ funcion que crea el query para la insercion de nuevo C_Activos (INSERT)
+ </summary>
+	<param name="vp_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.VehiculosSQLClass.Consulta_Repetido(PanelSeguridad.VehiculosClass)">
+	<summary>
+ funcion que valida si esta repetido el registro a ingresar
+ </summary>
+	<param name="vp_O_Obj"></param>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.Adm_LinksAjax.Consulta_Links">
@@ -868,6 +1061,12 @@ PanelSeguridad
 	<param name="vp_S_ID"></param>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.ColoresSQLClass.List_Colors">
+	<summary>
+ Carga lista de colores
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.DocumentosClass.UpLoad_Document(System.Web.HttpFileCollection,System.String,System.String)">
 	<summary>
  subir documentos al servidor
@@ -1042,7 +1241,7 @@ PanelSeguridad
 	<param name="vp_S_ID"></param>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.ProductosSQLClass.listProductos(System.String,System.String)">
+</member><member name="M:PanelSeguridad.ProductosSQLClass.listProductos(System.String,System.String,System.String)">
 	<summary>
  funcion que trae el listado de Productos para armar la tabla
  </summary>
@@ -1057,11 +1256,38 @@ PanelSeguridad
 	<param name="vp_O_Obj"></param>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.ProductosSQLClass.Matrix_Productos">
+	<summary>
+ lee la matriz de Productos
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.TasasSQLClass.listTasas(System.String,System.String,System.String)">
+	<summary>
+ funcion que trae el listado de Tasas para armar la tabla
+ </summary>
+	<param name="vp_S_StrQuery"></param>
+	<param name="vg_S_StrConexion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.TasasSQLClass.Matrix_Tasas">
+	<summary>
+ Carga matrix de todas las Tasas junto con sus Detalles
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.R_Persona_TarjetaSQLClass.InsertR_Persona_Tarjeta(PanelSeguridad.R_Persona_TarjetaClass)">
 	<summary>
  funcion que crea el query para la insercion de nuevo R_Persona_Tarjeta (INSERT)
  </summary>
 	<param name="vp_Obj_R_Persona_Tarjeta"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.R_Persona_TarjetaSQLClass.DeleteRTP_Desbloqueo(System.String)">
+	<summary>
+ proceso que elimina la relacion de persona tarje por desbloqueo para asignarla nuevamentae 
+ </summary>
+	<param name="vp_s_Tarjeta_ID"></param>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.R_Persona_TarjetaSQLClass.Charge_DropListR_Persona_TarjetaDepend(System.String)">
@@ -1582,6 +1808,12 @@ To modify move field declaration from designer file to code-behind file.
  </summary>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.PuertaAccesoSQLClass.List_PuertaAcceso(System.String)">
+	<summary>
+ lee la matriz de puertas de acceso
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.Adm_UsuarioAjax.Consulta_User">
 	<summary>
  traemos todos los datos para tabla Usuarios (READ)
@@ -1769,6 +2001,31 @@ To modify move field declaration from designer file to code-behind file.
  creala consulta para la tabla RutaDocumentos parametrizada (READ)
  </summary>
 	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.SalidaAjax.Update_Log_Salida">
+	<summary>
+ funcion que ACTUALIZA en la tabla Acceso (UPDATE)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.SalidaAjax.CargarDocumento">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.SalidaAjax.Search_People_Access">
+	<summary>
+ consulta si existe la persona digitada 
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.SalidaAjax.Search_Document_Foto">
+	<summary>
+ trae la foto del personaje a consultar
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.SalidaAjax.List_Registro_Ingreso">
+	<summary>
+ TRAE TODOS LOS REGISTROS DE INGRESO DE LA PERSONA CONSULTADA
+ </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.LoginAjax.ingresar">
 	<summary>
@@ -2185,14 +2442,34 @@ To modify move field declaration from designer file to code-behind file.
  funcion que inserta en la tabla C_Contrato (INSERT)
  </summary>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.C_ContratoAjax.CargarMoneda">
+</member><member name="M:PanelSeguridad.C_ContratoAjax.InsertC_Terceros">
+	<summary>
+ funcion que inserta en la tabla Relacion_Actores (INSERT)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_MSucursal">
+	<summary>
+ funcion que carga La matrix Sucursal
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_MMoneda">
+	<summary>
+ funcion que carga La matrix Moneda
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.CargarDocumento">
 	<summary>
  funcion que carga el objeto DDL consulta
  </summary>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.C_ContratoAjax.Cargar_EstadoContrato">
+</member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_MProductos">
 	<summary>
- funcion que carga el objeto DDL consulta
+ funcion que carga La matrix Productos
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_MFinanciacion">
+	<summary>
+ funcion que carga La matrix Financiacion
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.C_ContratoAjax.CargarCliente">
@@ -2200,9 +2477,107 @@ To modify move field declaration from designer file to code-behind file.
  funcion que carga el objeto DDL consulta
  </summary>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.C_ContratoAjax.Cargar_HijoCliente">
+</member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_MCiclo">
+	<summary>
+ funcion que carga La matrix Ciclo
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_MDirecciones">
+	<summary>
+ funcion que carga La matrix Direcciones
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_MTasas">
+	<summary>
+ funcion que carga La matrix Tasas
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.Search_People">
+	<summary>
+ consulta si existe la persona digitada 
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.Create_List_terceros">
+	<summary>
+ Hace conversión de List de Terceros a una lista que se pueda insertar en BD
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.InsertC_Activos">
+	<summary>
+ Insert de Activos
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.InsertC_Vehiculos">
+	<summary>
+ Insert de Vehículos
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.CargarTipo">
 	<summary>
  funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.Matrix_RTSTA">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_Matriz_PaisCiudad">
+	<summary>
+ funcion que carga La matrix
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_MPersonas">
+	<summary>
+ funcion que carga La matrix
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.CargarColor">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_ListMarca_Fasecolda">
+	<summary>
+ funcion que carga matrix de marca clases fasecolda
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_Lista_Clase_Fasecolda">
+	<summary>
+ funcion que carga La lista de clases SEGUN LA MARCA ESCOGIDA
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_M_Fasecolda_Flitrada">
+	<summary>
+ funcion que carga LISTA de lineas marca clases fasecolda
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.Carga_M_Fasecolda_Flitrada_ID">
+	<summary>
+ funcion que carga LISTA de lineas marca clases fasecolda
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.ConsultActivo">
+	<summary>
+ funcion que carga consulta el activo
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.Create_List_Activos">
+	<summary>
+ Hace conversión de List de Activos a una lista que se pueda insertar en BD
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.Create_List_Vehiculos">
+	<summary>
+ Hace conversión de List de Vehiculos a una lista que se pueda insertar en BD
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ContratoAjax.ConsultFactura">
+	<summary>
+ funcion que carga consulta el activo
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.DocumentoSQLClass.Read_AllDocumento(System.String,System.String,System.String)">
@@ -2463,10 +2838,59 @@ To modify move field declaration from designer file to code-behind file.
  </summary>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.ClienteSQLClass.Matrix_DatosEmpleados(System.String)">
+	<summary>
+ lee matrix para pagina de acceso
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.ClienteSQLClass.Matrix_Personas_Documentos">
 	<summary>
  lee matrix para documentos personas empresas
  </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.ClienteSQLClass.Matrix_Personas_Direcciones(System.Object,System.Object,System.Object)">
+	<summary>
+ lee matrix para Direccion de las personas
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.ClienteSQLClass.SearchPeople_Exists(System.String,System.String,System.String)">
+	<summary>
+ trae el nombre del cliente segun el filtro por tipo de documento, documento y nit empresa
+ </summary>
+	<param name="vp_S_Nit_ID"></param>
+	<param name="vp_S_TDoc"></param>
+	<param name="vp_S_Doc"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.ClienteSQLClass.SearchPeople_Access(PanelSeguridad.ClienteClass)">
+	<summary>
+ trae datos basicos segun la persona consultada
+ </summary>
+	<param name="vp_Obj_persona"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.ClienteSQLClass.List_Personas_Documentos(PanelSeguridad.ClienteClass)">
+	<summary>
+ trae documentos segun la seleccion de persona o empresa
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.ClienteSQLClass.SearchPeople_Bussines(System.String,System.String)">
+	<summary>
+ trae nombre, tipo documento y documento de la persona a buscar por empresa 
+ </summary>
+	<param name="vp_S_Nit_Bussines_Visit"></param>
+	<param name="vp_S_Search_Argument"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.ClienteSQLClass.List_ExtencionesEmpleados(PanelSeguridad.ClienteClass)">
+	<summary>
+ consulta los telefonos aliados a un empleado
+ </summary>
+	<param name="vp_Obj_persona"></param>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.Impuesto_GastoSQLClass.Read_AllImpuesto_Gasto(System.String,System.String,System.String)">
@@ -2982,6 +3406,12 @@ To modify move field declaration from designer file to code-behind file.
  </summary>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CalendarioSQLClass.Read_Matrix_Calendarios_Genericos">
+	<summary>
+ Traemos los Calendarios para Empresa Genérica
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.CargoAjax.Consulta_Cargo">
 	<summary>
  traemos todos los datos para tabla Cargo (READ)
@@ -3435,7 +3865,7 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
 	<param name="vp_S_Table"></param>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.Relation_Tipo_Subtipo_ActivoSQLClass.listTP_Activo(System.String,System.String)">
+</member><member name="M:PanelSeguridad.Relation_Tipo_Subtipo_ActivoSQLClass.listTP_Activo(System.String,System.String,System.String)">
 	<summary>
  funcion que trae el listado de TP_Activo para armar la tabla
  </summary>
@@ -3446,6 +3876,48 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
 </member><member name="M:PanelSeguridad.Relation_Tipo_Subtipo_ActivoSQLClass.Consulta_Repetido(PanelSeguridad.Relation_Tipo_Subtipo_ActivoClass)">
 	<summary>
  funcion que valida si esta repetido el registro a ingresar
+ </summary>
+	<param name="vp_O_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.Relation_Tipo_Subtipo_ActivoSQLClass.Matrix_RTSTA">
+	<summary>
+ carga matrix relacion de activos sub tipos de activos
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.ControlAccesoSQLClass.InsertControlAcceso(PanelSeguridad.ControlAccesoClass)">
+	<summary>
+ funcion que crea el query para la insercion de nuevo Control de acceso (INSERT)
+ </summary>
+	<param name="vp_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.ControlAccesoSQLClass.UpdateControlAcceso(PanelSeguridad.ControlAccesoClass)">
+	<summary>
+ funcion que crea el query para la modificacion del Cliente (UPDATE)
+ </summary>
+	<param name="vp_O_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.ControlAccesoSQLClass.list(System.String,System.String,System.String)">
+	<summary>
+ funcion que trae el listado de Cliente para armar la tabla
+ </summary>
+	<param name="vp_S_StrQuery"></param>
+	<param name="vg_S_StrConexion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.ControlAccesoSQLClass.List_Registros_Ingreso(PanelSeguridad.ControlAccesoClass)">
+	<summary>
+ trae los registros asociados al usuario
+ </summary>
+	<param name="vp_O_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.ControlAccesoSQLClass.Consulta_Ingreso(PanelSeguridad.ControlAccesoClass)">
+	<summary>
+ averigua si esta repetido
  </summary>
 	<param name="vp_O_Obj"></param>
 	<returns></returns>
@@ -3482,6 +3954,18 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
  </summary>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.DocumentosSQLClass.SearchDocument_People(PanelSeguridad.ClienteClass)">
+	<summary>
+ carga documentos de la persona seleccionada
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.DocumentosSQLClass.List_Document_Work(PanelSeguridad.ClienteClass)">
+	<summary>
+ carga lista de documentos de la persona o empresa solicitada
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.InvPuertaSQLClass.Read_All_Tarjetas(System.String)">
 	<summary>
  creala consulta para la tabla InvPuerta parametrizada (READ)
@@ -3512,6 +3996,13 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
 </member><member name="M:PanelSeguridad.InvPuertaSQLClass.UpdateBloqueoTarjeta(PanelSeguridad.InvPuertaClass)">
 	<summary>
  actualizacion por bloqueo de tarjeta a una persona
+ </summary>
+	<param name="vp_Obj_InvPuerta"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.InvPuertaSQLClass.UpdateDesBloqueoTarjeta(PanelSeguridad.InvPuertaClass)">
+	<summary>
+ actualizacion por Desbloqueo de tarjeta por recuperacion
  </summary>
 	<param name="vp_Obj_InvPuerta"></param>
 	<returns></returns>
@@ -3561,6 +4052,11 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.R_Persona_TarjetaAjax.UpdateInvTarjeta_Bloqueo">
+	<summary>
+ funcion que Actualiza en la tabla Inventario Tarjeta bloqueo(UPDATE)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.R_Persona_TarjetaAjax.UpdateInvTarjeta_DesBloqueo">
 	<summary>
  funcion que Actualiza en la tabla Inventario Tarjeta bloqueo(UPDATE)
  </summary>
@@ -3638,11 +4134,6 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
 </member><member name="M:PanelSeguridad.Crud_DocAjax.CargarMSecuencia">
 	<summary>
  funcion que carga  Matrix secuencia 
- </summary>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.Crud_DocAjax.CargarMContrato">
-	<summary>
- funcion que carga  Matrix contrato
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.Crud_DocAjax.CargarMDocumento">
@@ -3745,6 +4236,28 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
 	<summary>
  lee la matriz de Areas
  </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.Relacion_ActoresSQLClass.InsertActores(PanelSeguridad.Relacion_ActoresClass)">
+	<summary>
+ funcion que crea el query para la insercion de nuevo Cargo (INSERT)
+ </summary>
+	<param name="vp_Obj_Relacion_Actores"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.Relacion_ActoresSQLClass.listRelacion_Actores(System.String,System.String,System.String)">
+	<summary>
+ funcion que trae el listado de Relacion_Actores para armar la tabla
+ </summary>
+	<param name="vp_S_StrQuery"></param>
+	<param name="vg_S_StrConexion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.Relacion_ActoresSQLClass.Consulta_Repetido(PanelSeguridad.Relacion_ActoresClass)">
+	<summary>
+ Averigua si el nuevo registro está repetido o no
+ </summary>
+	<param name="vp_O_Obj"></param>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.SubTipoProduct_LeasingAjax.Consulta_TP_Leasing">
@@ -3883,6 +4396,20 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
  funcion que carga el objeto DDL consulta
  </summary>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CicloSQLClass.listCiclo(System.String,System.String,System.String)">
+	<summary>
+ funcion que trae el listado de Ciclo para armar la tabla
+ </summary>
+	<param name="vp_S_StrQuery"></param>
+	<param name="vg_S_StrConexion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CicloSQLClass.Matrix_Ciclo">
+	<summary>
+ Carga matrix de Ciclos
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.MonedaCodSQLClass.Read_AllMonedaCod(System.String,System.String,System.String)">
 	<summary>
  creala consulta para la tabla MonedaCod parametrizada (READ)
@@ -3920,12 +4447,18 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
 	<param name="vp_S_Table"></param>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.MonedaCodSQLClass.listMonedaCod(System.String,System.String)">
+</member><member name="M:PanelSeguridad.MonedaCodSQLClass.listMonedaCod(System.String,System.String,System.String)">
 	<summary>
  funcion que trae el listado de MonedaCod para armar la tabla
  </summary>
 	<param name="vp_S_StrQuery"></param>
 	<param name="vg_S_StrConexion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.MonedaCodSQLClass.Matrix_Moneda">
+	<summary>
+ lee la matriz de Grupo documentos
+ </summary>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.SubTipoProduct_LeasingSQLClass.Read_AllTP_Leasing(System.String,System.String,System.String)">
@@ -3971,6 +4504,20 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
  </summary>
 	<param name="vp_S_StrQuery"></param>
 	<param name="vg_S_StrConexion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.SucursalSQLClass.list(System.String,System.String,System.String)">
+	<summary>
+ funcion que trae el listado de Sucursal para armar la tabla
+ </summary>
+	<param name="vp_S_StrQuery"></param>
+	<param name="vg_S_StrConexion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.SucursalSQLClass.Matrix_Sucursal">
+	<summary>
+ lee la matriz de Sucursales
+ </summary>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.TipoActivoSQLClass.Read_AllActivo(System.String,System.String,System.String)">
@@ -4449,6 +4996,11 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
  funcion que carga el objeto DDL consulta
  </summary>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.PaisesAjax.CargarCalendarios">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.PaisesAjax.Consulta_Repetido(System.String)">
 	<summary>
  funcion que valida si el id esta en la BD
@@ -4495,6 +5047,28 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
 	<summary>
  funcion que carga el objeto DDL consulta
  </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosSQLClass.InsertC_Activos(PanelSeguridad.C_ActivosClass)">
+	<summary>
+ funcion que crea el query para la insercion de nuevo C_Activos (INSERT)
+ </summary>
+	<param name="vp_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosSQLClass.listC_Activos(System.String,System.String,System.String)">
+	<summary>
+ funcion que trae el listado de C_Activos para armar la tabla
+ </summary>
+	<param name="vp_S_StrQuery"></param>
+	<param name="vg_S_StrConexion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.C_ActivosSQLClass.Consulta_Repetido(PanelSeguridad.C_ActivosClass)">
+	<summary>
+ funcion que valida si esta repetido el registro a ingresar
+ </summary>
+	<param name="vp_O_Obj"></param>
+	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.Adm_OpcRolSQLClass.Read_AllOpcRol(System.String,System.String,System.String)">
 	<summary>
@@ -4617,10 +5191,103 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
  </summary>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.R_PuertaAcc_AreaSQLClass.List_R_PuertaAcceso_Area(System.String)">
+	<summary>
+ consulta listas de puertas de acceso segun nit
+ </summary>
+	<param name="vp_S_Nit_ID"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.FacturaSQLClass.InsertC_Factura(PanelSeguridad.FacturaClass)">
+	<summary>
+ funcion que crea el query para la insercion de nuevo FACT_ORD_COMPRA (INSERT)
+ </summary>
+	<param name="vp_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.FacturaSQLClass.Consulta_Repetido(PanelSeguridad.FacturaClass)">
+	<summary>
+ funcion que valida si esta repetido el registro a ingresar
+ </summary>
+	<param name="vp_O_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.FacturaSQLClass.Create_List_Factura(System.String)">
+	<summary>
+ CREACION DE LISTA DE STRING A OBJ FACTURA PARA INSERCION EN ITERACION
+ </summary>
+	<param name="vp_S_listFactura"></param>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.menuAjax.Consulta_menu">
 	<summary>
  traemos todos los datos para construir el menu
  </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.IngresoSQLClass.Read_AllAcceso(System.String,System.String,System.String)">
+	<summary>
+ creala consulta para la tabla Acceso parametrizada (READ)
+ </summary>
+	<param name="vp_S_Filtro"></param>
+	<param name="vp_S_Opcion"></param>
+	<param name="vp_S_Contenido"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.IngresoSQLClass.InsertAcceso(PanelSeguridad.AccesoClass)">
+	<summary>
+ funcion que crea el query para la insercion de nuevo Acceso (INSERT)
+ </summary>
+	<param name="vp_Obj_Acceso"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.IngresoSQLClass.EraseAcceso(PanelSeguridad.AccesoClass)">
+	<summary>
+ funcion que crea el query para la eliminacion del Acceso (DELETE)
+ </summary>
+	<param name="vp_Obj_Acceso"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.IngresoSQLClass.ReadCharge_DropList(System.String)">
+	<summary>
+ crea la consulta para cargar el combo
+ </summary>
+	<param name="vp_S_Table"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.IngresoSQLClass.Charge_DropListAccesoDepend(System.String)">
+	<summary>
+ crea la consulta para cargar el combo
+ </summary>
+	<param name="vp_S_NitEmpresa"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.IngresoSQLClass.Charge_DropListSeguridad(System.String)">
+	<summary>
+ crea la consulta para cargar el combo
+ </summary>
+	<param name="vp_S_Table"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.IngresoSQLClass.listAcceso(System.String,System.String,System.String)">
+	<summary>
+ funcion que trae el listado de Acceso para armar la tabla
+ </summary>
+	<param name="vp_S_StrQuery"></param>
+	<param name="vg_S_StrConexion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.IngresoSQLClass.Consulta_Repetido(PanelSeguridad.AccesoClass)">
+	<summary>
+ averigua si esta repetido
+ </summary>
+	<param name="vp_O_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.IngresoSQLClass.Matrix_R_PuertaAcceso_Area">
+	<summary>
+ lee la matriz de puertas de acceso
+ </summary>
+	<returns></returns>
 	<remarks></remarks>
 </member><member name="P:PanelSeguridad.My.Resources.Resources.ResourceManager">
 	<summary>

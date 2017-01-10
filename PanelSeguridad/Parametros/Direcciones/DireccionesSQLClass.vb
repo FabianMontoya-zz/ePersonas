@@ -40,7 +40,8 @@ Public Class DireccionesSQLClass
                    "       D_Pais_ID,  " & _
                    "       D_Ciudad_ID,  " & _
                    "       P_Name, " & _
-                   "       C_Descripcion  " & _
+                   "       D_Tipo_1, " & _
+                  "       C_Descripcion  " & _
                    " FROM DIRECCIONES D " & _
                    " INNER JOIN PAISES P ON P.P_Cod = D.D_Pais_ID " & _
                    " INNER JOIN CIUDADES C ON C.C_Ciudad_ID = D.D_Ciudad_ID " & _
@@ -88,6 +89,7 @@ Public Class DireccionesSQLClass
             " D_Correo_2, " & _
             " D_Pais_ID, " & _
             " D_Ciudad_ID, " & _
+            " D_Tipo_1, " & _
             " D_FechaActualizacion, " & _
             " D_Usuario " & _
              ")")
@@ -107,6 +109,7 @@ Public Class DireccionesSQLClass
         sql.AppendLine("'" & vp_O_Obj.Correo_2 & "',")
         sql.AppendLine("'" & vp_O_Obj.Pais_ID & "',")
         sql.AppendLine("'" & vp_O_Obj.Ciudad_ID & "',")
+        sql.AppendLine("'" & vp_O_Obj.Tipo_1 & "',")
         sql.AppendLine("'" & vp_O_Obj.FechaActualizacion & "',")
         sql.AppendLine("'" & vp_O_Obj.Usuario & "' ) ")
 
@@ -201,7 +204,10 @@ Public Class DireccionesSQLClass
             objDirecciones.Pais_ID = ReadConsulta.GetValue(15)
             objDirecciones.Ciudad_ID = ReadConsulta.GetValue(16)
             objDirecciones.DescripPais = ReadConsulta.GetValue(17)
-            objDirecciones.DescripCiudad = ReadConsulta.GetValue(18)
+
+            If Not (IsDBNull(ReadConsulta.GetValue(18))) Then objDirecciones.Tipo_1 = ReadConsulta.GetValue(18) Else objDirecciones.Tipo_1 = ""
+        
+            objDirecciones.DescripCiudad = ReadConsulta.GetValue(19)
 
             'agregamos a la lista
             ObjList.Add(objDirecciones)

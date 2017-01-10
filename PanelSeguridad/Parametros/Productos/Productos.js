@@ -10,9 +10,7 @@ var ArrayEmpresaNit = [];
 
 var ProductoID;
 var edit_TipoP_ID;
-var edit_TipoA_ID;
 var edit_SubTipoP_ID;
-var edit_SubTipoA_ID;
 var edit_Crea_ID;
 var edit_Mod_ID;
 var edit_Ret_ID;
@@ -23,7 +21,6 @@ var edit_Ret_ID;
 $(document).ready(function () {
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_Tipo_P('Tipo_Pro');
-    transacionAjax_Tipo_A('Tipo_Act');
     transacionAjax_Transaccion('Transaccion');
     transacionAjax_EmpresaNit('Cliente')
 
@@ -34,7 +31,7 @@ $(document).ready(function () {
     $("#Img1").css("display", "none");
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
-    $("#WE").css("display", "none");
+    $("#WA").css("display", "none");
 
 
     $("#TablaConsulta").css("display", "none");
@@ -66,7 +63,6 @@ $(document).ready(function () {
     });
 
     Change_Select_Product();
-    Change_Select_Active();
 
 });
 
@@ -86,7 +82,7 @@ function HabilitarPanel(opcion) {
             $("#TablaConsulta").css("display", "none");
             $("#Txt_ID").removeAttr("disabled");
             $("#Select_EmpresaNit").removeAttr("disabled");
-            
+
             $("#Btnguardar").attr("value", "Guardar");
             Enabled_Controls();
             ResetError();
@@ -173,12 +169,11 @@ function BtnElimina() {
 function validarCamposCrear() {
 
     var Campo_1 = $("#Select_Tipo_P").val();
-    var Campo_2 = $("#Select_Tipo_A").val();
     var Campo_3 = $("#Select_EmpresaNit").val();
 
     var validar = 0;
 
-    if (Campo_3 == "-1" || Campo_2 == "-1" || Campo_1 == "-1") {
+    if (Campo_3 == "-1" || Campo_1 == "-1") {
         validar = 1;
         if (Campo_1 == "-1") {
             $("#ImgID").css("display", "inline-table");
@@ -186,12 +181,7 @@ function validarCamposCrear() {
         else {
             $("#ImgID").css("display", "none");
         }
-        if (Campo_2 == "-1") {
-            $("#Img1").css("display", "inline-table");
-        }
-        else {
-            $("#Img1").css("display", "none");
-        }
+
         if (Campo_3 == "-1") {
             $("#Img3").css("display", "inline-table");
         }
@@ -224,47 +214,46 @@ function ValidarDroplist() {
 
 // crea la tabla en el cliente
 function Table_Productos() {
-
+    var html_Productos;
     switch (estado) {
 
         case "buscar":
-            Tabla_consulta();
+            html_Productos = "<table id='TProductos' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Ver</th><th>Nit Empresa</th><th>Codigo</th><th>Descripción</th></tr></thead><tbody>";
+            for (itemArray in ArrayProductos) {
+                if (ArrayProductos[itemArray].Producto_ID != 0) {
+                    html_Productos += "<tr id= 'TProductos_" + ArrayProductos[itemArray].Producto_ID + "'><td><input type ='radio' class= 'Ver' name='ver' onclick=\"Ver('" + ArrayProductos[itemArray].Producto_ID + "','" + ArrayProductos[itemArray].Nit_ID + "')\"></input></td><td>" + ArrayProductos[itemArray].Nit_ID + "</td><td>" + ArrayProductos[itemArray].Producto_ID + "</td><td>" + ArrayProductos[itemArray].Descripcion + "</td></tr>";
+                }
+            }
             break;
 
         case "modificar":
-            Tabla_modificar();
+            html_Productos = "<table id='TProductos' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Ver</th><th>Editar</th><th>Nit Empresa</th><th>Codigo</th><th>Descripción</th></tr></thead><tbody>";
+            for (itemArray in ArrayProductos) {
+                if (ArrayProductos[itemArray].Producto_ID != 0) {
+                    html_Productos += "<tr id= 'TProductos_" + ArrayProductos[itemArray].Producto_ID + "'><td><input type ='radio' class= 'Ver' name='ver' onclick=\"Ver('" + ArrayProductos[itemArray].Producto_ID + "','" + ArrayProductos[itemArray].Nit_ID + "')\"></input></td><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Editar('" + ArrayProductos[itemArray].Producto_ID + "','" + ArrayProductos[itemArray].Nit_ID + "')\"></input></td><td>" + ArrayProductos[itemArray].Nit_ID + "</td><td>" + ArrayProductos[itemArray].Producto_ID + "</td><td>" + ArrayProductos[itemArray].Descripcion + "</td></tr>";
+                }
+            }
             break;
 
         case "eliminar":
-            Tabla_eliminar();
+            html_Productos = "<table id='TProductos' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Ver</th><th>Eliminar</th><th>Nit Empresa</th><th>Codigo</th><th>Descripción</th></tr></thead><tbody>";
+            for (itemArray in ArrayProductos) {
+                if (ArrayProductos[itemArray].Producto_ID != 0) {
+                    html_Productos += "<tr id= 'TProductos_" + ArrayProductos[itemArray].Producto_ID + "'><td><input type ='radio' class= 'Ver' name='ver' onclick=\"Ver('" + ArrayProductos[itemArray].Producto_ID + "','" + ArrayProductos[itemArray].Nit_ID + "')\"></input></td><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar('" + ArrayProductos[itemArray].Producto_ID + "','" + ArrayProductos[itemArray].Nit_ID + "')\"></input></td><td>" + ArrayProductos[itemArray].Nit_ID + "</td><td>" + ArrayProductos[itemArray].Producto_ID + "</td><td>" + ArrayProductos[itemArray].Descripcion + "</td></tr>";
+                }
+            }
             break;
-    }
-
-}
-
-//grid con el boton eliminar
-function Tabla_modificar() {
-    var html_Productos = "<table id='TProductos' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Ver</th><th>Editar</th><th>Nit Empresa</th><th>Codigo</th><th>Descripción</th></tr></thead><tbody>";
-    for (itemArray in ArrayProductos) {
-        if (ArrayProductos[itemArray].Producto_ID != 0) {
-            html_Productos += "<tr id= 'TProductos_" + ArrayProductos[itemArray].Producto_ID + "'><td><input type ='radio' class= 'Ver' name='ver' onclick=\"Ver('" + ArrayProductos[itemArray].Producto_ID + "','" + ArrayProductos[itemArray].Nit_ID + "')\"></input></td><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Editar('" + ArrayProductos[itemArray].Producto_ID + "','" + ArrayProductos[itemArray].Nit_ID + "')\"></input></td><td>" + ArrayProductos[itemArray].Nit_ID + "</td><td>" + ArrayProductos[itemArray].Producto_ID + "</td><td>" + ArrayProductos[itemArray].Descripcion + "</td></tr>";
-        }
     }
     html_Productos += "</tbody></table>";
     $("#container_TProductos").html("");
     $("#container_TProductos").html(html_Productos);
-
-    $(".Eliminar").click(function () {
-    });
-
-    $(".Ver").click(function () {
-    });
 
     $("#TProductos").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,
         "bDestroy": true
     });
 }
+
 
 //muestra el registro a eliminar
 function Editar(index_Tipo_ID, index_Nit) {
@@ -280,9 +269,7 @@ function Editar(index_Tipo_ID, index_Nit) {
 
             ProductoID = ArrayProductos[itemArray].Producto_ID;
             edit_TipoP_ID = ArrayProductos[itemArray].TP_ID;
-            edit_TipoA_ID = ArrayProductos[itemArray].TA_ID;
             edit_SubTipoP_ID = ArrayProductos[itemArray].STP_ID;
-            edit_SubTipoA_ID = ArrayProductos[itemArray].STA_ID;
             edit_Crea_ID = ArrayProductos[itemArray].Tran_ID_1;
             edit_Mod_ID = ArrayProductos[itemArray].Tran_ID_2;
             edit_Ret_ID = ArrayProductos[itemArray].Tran_ID_3;
@@ -320,21 +307,6 @@ function Editar(index_Tipo_ID, index_Nit) {
                 $("#Select_SubTipo_P").val("-1");
             }
 
-
-            if (edit_TipoA_ID == 0)
-                $("#Select_Tipo_A").val("-1");
-            else
-                $("#Select_Tipo_A").val(edit_TipoA_ID);
-
-            $("#Select_Tipo_A").trigger("change");
-
-            if (edit_SubTipoA_ID != 0) {
-                $("#Select_SubTipo_A").val(edit_SubTipoA_ID);
-                setTimeout("refresh_STA(" + edit_SubTipoA_ID + ");", 700);
-            }
-            else {
-                $("#Select_SubTipo_A").val("-1");
-            }
 
 
             $("#Txt_ID").val(ArrayProductos[itemArray].Producto_ID);
@@ -416,36 +388,6 @@ function refresh_STP(index) {
     $('.C_Chosen').trigger('chosen:updated');
 }
 
-//funcion de carga Subtipo de activo para edicion
-function refresh_STA(index) {
-    $('#Select_SubTipo_A').val(index);
-    $('.C_Chosen').trigger('chosen:updated');
-}
-
-//grid con el boton eliminar
-function Tabla_eliminar() {
-    var html_Productos = "<table id='TProductos' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Ver</th><th>Eliminar</th><th>Nit Empresa</th><th>Codigo</th><th>Descripción</th></tr></thead><tbody>";
-    for (itemArray in ArrayProductos) {
-        if (ArrayProductos[itemArray].Producto_ID != 0) {
-            html_Productos += "<tr id= 'TProductos_" + ArrayProductos[itemArray].Producto_ID + "'><td><input type ='radio' class= 'Ver' name='ver' onclick=\"Ver('" + ArrayProductos[itemArray].Producto_ID + "','" + ArrayProductos[itemArray].Nit_ID + "')\"></input></td><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar('" + ArrayProductos[itemArray].Producto_ID + "','" + ArrayProductos[itemArray].Nit_ID + "')\"></input></td><td>" + ArrayProductos[itemArray].Nit_ID + "</td><td>" + ArrayProductos[itemArray].Producto_ID + "</td><td>" + ArrayProductos[itemArray].Descripcion + "</td></tr>";
-        }
-    }
-    html_Productos += "</tbody></table>";
-    $("#container_TProductos").html("");
-    $("#container_TProductos").html(html_Productos);
-
-    $(".Eliminar").click(function () {
-    });
-
-    $(".Ver").click(function () {
-    });
-
-    $("#TProductos").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
-}
-
 //muestra el registro a eliminar
 function Eliminar(index_Tipo_ID, index_Nit) {
 
@@ -459,28 +401,6 @@ function Eliminar(index_Tipo_ID, index_Nit) {
 
 }
 
-
-//grid sin botones para ver resultado
-function Tabla_consulta() {
-    var html_Productos = "<table id='TProductos' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Ver</th><th>Nit Empresa</th><th>Codigo</th><th>Descripción</th></tr></thead><tbody>";
-    for (itemArray in ArrayProductos) {
-        if (ArrayProductos[itemArray].Producto_ID != 0) {
-            html_Productos += "<tr id= 'TProductos_" + ArrayProductos[itemArray].Producto_ID + "'><td><input type ='radio' class= 'Ver' name='ver' onclick=\"Ver('" + ArrayProductos[itemArray].Producto_ID + "','" + ArrayProductos[itemArray].Nit_ID + "')\"></input></td><td>" + ArrayProductos[itemArray].Nit_ID + "</td><td>" + ArrayProductos[itemArray].Producto_ID + "</td><td>" + ArrayProductos[itemArray].Descripcion + "</td></tr>";
-        }
-    }
-    html_Productos += "</tbody></table>";
-    $("#container_TProductos").html("");
-    $("#container_TProductos").html(html_Productos);
-
-    $(".Ver").click(function () {
-    });
-
-    $("#TProductos").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
-}
-
 //evento del boton salir
 function x() {
     $("#dialog").dialog("close");
@@ -491,9 +411,7 @@ function Clear() {
 
     $("#Txt_ID").val("");
     $("#Select_Tipo_P").val("-1");
-    $("#Select_Tipo_A").val("-1");
     $("#Select_SubTipo_P").val("-1");
-    $("#Select_SubTipo_A").val("-1");
     $("#Select_Crea").val("-1");
     $("#Select_Mod").val("-1");
     $("#Select_Ret").val("-1");
@@ -501,9 +419,7 @@ function Clear() {
     $("#TxtDescripcion").val("");
 
     $('#Select_Tipo_P').siblings('.ui-combobox').find('.ui-autocomplete-input').val('Seleccione...');
-    $('#Select_Tipo_A').siblings('.ui-combobox').find('.ui-autocomplete-input').val('Seleccione...');
     $('#Select_SubTipo_P').siblings('.ui-combobox').find('.ui-autocomplete-input').val('Seleccione...');
-    $('#Select_SubTipo_A').siblings('.ui-combobox').find('.ui-autocomplete-input').val('Seleccione...');
     $("#Select_Crea").siblings('.ui-combobox').find('.ui-autocomplete-input').val('Seleccione...');
     $("#Select_Mod").siblings('.ui-combobox').find('.ui-autocomplete-input').val('Seleccione...');
     $("#Select_Ret").siblings('.ui-combobox').find('.ui-autocomplete-input').val('Seleccione...');
@@ -572,9 +488,7 @@ function Disabled_Controls() {
 
     $("#Txt_ID").attr("disabled", "disabled");
     $("#Select_Tipo_P").attr("disabled", "disabled");
-    $("#Select_Tipo_A").attr("disabled", "disabled");
     $("#Select_SubTipo_P").attr("disabled", "disabled");
-    $("#Select_SubTipo_A").attr("disabled", "disabled");
     $("#Select_Crea").attr("disabled", "disabled");
     $("#Select_Mod").attr("disabled", "disabled");
     $("#Select_Ret").attr("disabled", "disabled");
@@ -583,12 +497,8 @@ function Disabled_Controls() {
 
     $("#Select_Tipo_P").parent().find("input.ui-autocomplete-input").autocomplete("option", "disabled", true).prop("disabled", true);
     $("#Select_Tipo_P").parent().find("a.ui-button").button("disable");
-    $("#Select_Tipo_A").parent().find("input.ui-autocomplete-input").autocomplete("option", "disabled", true).prop("disabled", true);
-    $("#Select_Tipo_A").parent().find("a.ui-button").button("disable");
     $("#Select_SubTipo_P").parent().find("input.ui-autocomplete-input").autocomplete("option", "disabled", true).prop("disabled", true);
     $("#Select_SubTipo_P").parent().find("a.ui-button").button("disable");
-    $("#Select_SubTipo_A").parent().find("input.ui-autocomplete-input").autocomplete("option", "disabled", true).prop("disabled", true);
-    $("#Select_SubTipo_A").parent().find("a.ui-button").button("disable");
     $("#Select_Crea").parent().find("input.ui-autocomplete-input").autocomplete("option", "disabled", true).prop("disabled", true);
     $("#Select_Crea").parent().find("a.ui-button").button("disable");
     $("#Select_Mod").parent().find("input.ui-autocomplete-input").autocomplete("option", "disabled", true).prop("disabled", true);
@@ -664,9 +574,7 @@ function Enabled_Controls() {
 
     $("#Txt_ID").removeAttr("disabled");
     $("#Select_Tipo_P").removeAttr("disabled");
-    $("#Select_Tipo_A").removeAttr("disabled");
     $("#Select_SubTipo_P").removeAttr("disabled");
-    $("#Select_SubTipo_A").removeAttr("disabled");
     $("#Select_Crea").removeAttr("disabled");
     $("#Select_Mod").removeAttr("disabled");
     $("#Select_Ret").removeAttr("disabled");
@@ -675,12 +583,8 @@ function Enabled_Controls() {
 
     $("#Select_Tipo_P").parent().find("input.ui-autocomplete-input").autocomplete("option", "disabled", false).prop("disabled", false);
     $("#Select_Tipo_P").parent().find("a.ui-button").button("enable");
-    $("#Select_Tipo_A").parent().find("input.ui-autocomplete-input").autocomplete("option", "disabled", false).prop("disabled", false);
-    $("#Select_Tipo_A").parent().find("a.ui-button").button("enable");
     $("#Select_SubTipo_P").parent().find("input.ui-autocomplete-input").autocomplete("option", "disabled", false).prop("disabled", false);
     $("#Select_SubTipo_P").parent().find("a.ui-button").button("enable");
-    $("#Select_SubTipo_A").parent().find("input.ui-autocomplete-input").autocomplete("option", "disabled", false).prop("disabled", false);
-    $("#Select_SubTipo_A").parent().find("a.ui-button").button("enable");
     $("#Select_Crea").parent().find("input.ui-autocomplete-input").autocomplete("option", "disabled", false).prop("disabled", false);
     $("#Select_Crea").parent().find("a.ui-button").button("enable");
     $("#Select_Mod").parent().find("input.ui-autocomplete-input").autocomplete("option", "disabled", false).prop("disabled", false);
@@ -758,13 +662,6 @@ function Change_Select_Product() {
     });
 }
 
-function Change_Select_Active() {
-    $("#Select_Tipo_A").change(function () {
-        var TD_ID = this.value;
-        transacionAjax_SubTipo_A('SubTipo_Act', TD_ID);
-        $('#Select_SubTipo_A').siblings('.ui-combobox').find('.ui-autocomplete-input').val('Seleccione...');
-    });
-}
 
 //muestra el registro a eliminar
 function Ver(index_Tipo_ID, index_Nit) {
@@ -776,130 +673,113 @@ function Ver(index_Tipo_ID, index_Nit) {
 
             ProductoID = ArrayProductos[itemArray].Producto_ID;
             edit_TipoP_ID = ArrayProductos[itemArray].TP_ID;
-            edit_TipoA_ID = ArrayProductos[itemArray].TA_ID;
             edit_SubTipoP_ID = ArrayProductos[itemArray].STP_ID;
-            edit_SubTipoA_ID = ArrayProductos[itemArray].STA_ID;
             edit_Crea_ID = ArrayProductos[itemArray].Tran_ID_1;
             edit_Mod_ID = ArrayProductos[itemArray].Tran_ID_2;
             edit_Ret_ID = ArrayProductos[itemArray].Tran_ID_3;
+
+            $('#Select_Crea').val(edit_Crea_ID);
+            $('#Select_Mod').val(edit_Mod_ID);
+            $('#Select_Ret').val(edit_Ret_ID);
+
 
             for (item in ArrayTransaccion) {
                 if (ArrayTransaccion[item].ID == edit_Crea_ID) {
                     $('#Select_Crea').siblings('.ui-combobox').find('.ui-autocomplete-input').val(ArrayTransaccion[item].descripcion);
                 }
                 if (ArrayTransaccion[item].ID == edit_Mod_ID) {
-                    $('#Select_Mod').siblings('.ui-combobox').find('.ui-autocomplete-input').val(ArrayTransaccion[item].descripcion);
+                    $('#').siblings('.ui-combobox').find('.ui-autocomplete-input').val(ArrayTransaccion[item].descripcion);
+
+                    if (ArrayTransaccion[item].ID == edit_Ret_ID) {
+                        $('#').siblings('.ui-combobox').find('.ui-autocomplete-input').val(ArrayTransaccion[item].descripcion);
+                    }
                 }
-                if (ArrayTransaccion[item].ID == edit_Ret_ID) {
-                    $('#Select_Ret').siblings('.ui-combobox').find('.ui-autocomplete-input').val(ArrayTransaccion[item].descripcion);
+
+                $("#Select_Tipo_P").val(ArrayProductos[itemArray].TP_ID);
+
+                if (edit_SubTipoP_ID != 0) {
+                    $("#Select_SubTipo_P").val(ArrayProductos[itemArray].STP_ID);
+                    setTimeout("refresh_STP();", 500);
                 }
+
+                $("#Select_EmpresaNit").val(ArrayProductos[itemArray].Nit_ID);
+
+
+
+
+                $("#Txt_ID").val(ArrayProductos[itemArray].Producto_ID);
+                $("#TxtDescripcion").val(ArrayProductos[itemArray].Descripcion);
+
+                $("#TxtCuenta_1").val(ArrayProductos[itemArray].Cuenta_1);
+                $("#TxtCuenta_2").val(ArrayProductos[itemArray].Cuenta_2);
+                $("#TxtCuenta_3").val(ArrayProductos[itemArray].Cuenta_3);
+                $("#TxtCuenta_4").val(ArrayProductos[itemArray].Cuenta_4);
+                $("#TxtCuenta_5").val(ArrayProductos[itemArray].Cuenta_5);
+                $("#TxtCuenta_6").val(ArrayProductos[itemArray].Cuenta_6);
+                $("#TxtCuenta_7").val(ArrayProductos[itemArray].Cuenta_7);
+                $("#TxtCuenta_8").val(ArrayProductos[itemArray].Cuenta_8);
+                $("#TxtCuenta_9").val(ArrayProductos[itemArray].Cuenta_9);
+                $("#TxtCuenta_10").val(ArrayProductos[itemArray].Cuenta_10);
+
+                $("#TxtCuenta_11").val(ArrayProductos[itemArray].Cuenta_11);
+                $("#TxtCuenta_12").val(ArrayProductos[itemArray].Cuenta_12);
+                $("#TxtCuenta_13").val(ArrayProductos[itemArray].Cuenta_13);
+                $("#TxtCuenta_14").val(ArrayProductos[itemArray].Cuenta_14);
+                $("#TxtCuenta_15").val(ArrayProductos[itemArray].Cuenta_15);
+                $("#TxtCuenta_16").val(ArrayProductos[itemArray].Cuenta_16);
+                $("#TxtCuenta_17").val(ArrayProductos[itemArray].Cuenta_17);
+                $("#TxtCuenta_18").val(ArrayProductos[itemArray].Cuenta_18);
+                $("#TxtCuenta_19").val(ArrayProductos[itemArray].Cuenta_19);
+                $("#TxtCuenta_20").val(ArrayProductos[itemArray].Cuenta_20);
+                $("#TxtCuenta_21").val(ArrayProductos[itemArray].Cuenta_21);
+                $("#TxtCuenta_22").val(ArrayProductos[itemArray].Cuenta_22);
+                $("#TxtCuenta_23").val(ArrayProductos[itemArray].Cuenta_23);
+                $("#TxtCuenta_24").val(ArrayProductos[itemArray].Cuenta_24);
+                $("#TxtCuenta_25").val(ArrayProductos[itemArray].Cuenta_25);
+                $("#TxtCuenta_26").val(ArrayProductos[itemArray].Cuenta_26);
+                $("#TxtCuenta_27").val(ArrayProductos[itemArray].Cuenta_27);
+                $("#TxtCuenta_28").val(ArrayProductos[itemArray].Cuenta_28);
+                $("#TxtCuenta_29").val(ArrayProductos[itemArray].Cuenta_29);
+                $("#TxtCuenta_30").val(ArrayProductos[itemArray].Cuenta_30);
+                $("#TxtCuenta_31").val(ArrayProductos[itemArray].Cuenta_31);
+                $("#TxtCuenta_32").val(ArrayProductos[itemArray].Cuenta_32);
+                $("#TxtCuenta_33").val(ArrayProductos[itemArray].Cuenta_33);
+                $("#TxtCuenta_34").val(ArrayProductos[itemArray].Cuenta_34);
+                $("#TxtCuenta_35").val(ArrayProductos[itemArray].Cuenta_35);
+                $("#TxtCuenta_36").val(ArrayProductos[itemArray].Cuenta_36);
+                $("#TxtCuenta_37").val(ArrayProductos[itemArray].Cuenta_37);
+                $("#TxtCuenta_38").val(ArrayProductos[itemArray].Cuenta_38);
+                $("#TxtCuenta_39").val(ArrayProductos[itemArray].Cuenta_39);
+                $("#TxtCuenta_40").val(ArrayProductos[itemArray].Cuenta_40);
+                $("#TxtCuenta_41").val(ArrayProductos[itemArray].Cuenta_41);
+                $("#TxtCuenta_42").val(ArrayProductos[itemArray].Cuenta_42);
+                $("#TxtCuenta_43").val(ArrayProductos[itemArray].Cuenta_43);
+                $("#TxtCuenta_44").val(ArrayProductos[itemArray].Cuenta_44);
+                $("#TxtCuenta_45").val(ArrayProductos[itemArray].Cuenta_45);
+                $("#TxtCuenta_46").val(ArrayProductos[itemArray].Cuenta_46);
+                $("#TxtCuenta_47").val(ArrayProductos[itemArray].Cuenta_47);
+                $("#TxtCuenta_48").val(ArrayProductos[itemArray].Cuenta_48);
+                $("#TxtCuenta_49").val(ArrayProductos[itemArray].Cuenta_49);
+                $("#TxtCuenta_50").val(ArrayProductos[itemArray].Cuenta_50);
+
+                $('#Select_Caus_Int_Cte').val(ArrayProductos[itemArray].Causacion_Interes);
+                $('#Select_Caus_Mora').val(ArrayProductos[itemArray].Causacion_Mora);
+                $('#Select_Base_Mora').val(ArrayProductos[itemArray].Base_Mora);
+                $('#Select_Capitalizacion').val(ArrayProductos[itemArray].Capitalizacion);
+                $('#Select_Control_Activos').val(ArrayProductos[itemArray].Control_Activo);
+
+                $("#Dialog_Productos").dialog("option", "title", "Ver Producto");
+                $("#Dialog_Productos").dialog("open");
+
+                $("#Btnguardar").attr("value", "Actualizar");
+
+
+                $('.C_Chosen').trigger('chosen:updated');
+                Disabled_Controls();
             }
-
-            $("#Select_Tipo_P").val(ArrayProductos[itemArray].TP_ID);
-
-            for (item in ArrayTipo_P) {
-                if (ArrayTipo_P[item].ID == edit_TipoP_ID) {
-                    $('#Select_Tipo_P').siblings('.ui-combobox').find('.ui-autocomplete-input').val(ArrayTipo_P[item].descripcion);
-                }
-            }
-
-            $("#Select_Tipo_P").trigger("change");
-
-            $("#Select_Tipo_A").val(ArrayProductos[itemArray].TA_ID);
-
-            for (item in ArrayTipo_A) {
-                if (ArrayTipo_A[item].ID == edit_TipoA_ID) {
-                    $('#Select_Tipo_A').siblings('.ui-combobox').find('.ui-autocomplete-input').val(ArrayTipo_A[item].descripcion);
-                }
-            }
-
-            $("#Select_Tipo_A").trigger("change");
-
-            if (edit_SubTipoP_ID != 0) {
-                $("#Select_SubTipo_P").val(ArrayProductos[itemArray].STP_ID);
-                setTimeout("refresh_STP();", 500);
-            }
-
-            if (edit_SubTipoA_ID != 0) {
-                $("#Select_SubTipo_A").val(ArrayProductos[itemArray].STA_ID);
-                setTimeout("refresh_STA();", 500);
-            }
-
-            for (item in ArrayEmpresaNit) {
-                if (ArrayEmpresaNit[item].ID == ArrayProductos[itemArray].Nit_ID) {
-                    $('#Select_EmpresaNit').siblings('.ui-combobox').find('.ui-autocomplete-input').val(ArrayEmpresaNit[item].descripcion);
-                }
-            }
-
-            $("#Select_EmpresaNit").val(ArrayProductos[itemArray].Nit_ID);
-            $("#Select_SubTipo_P").val(ArrayProductos[itemArray].STP_ID);
-            $("#Select_SubTipo_A").val(ArrayProductos[itemArray].STA_ID);
-            $("#Select_Crea").val(ArrayProductos[itemArray].Tran_ID_1);
-            $("#Select_Mod").val(ArrayProductos[itemArray].Tran_ID_2);
-            $("#Select_Ret").val(ArrayProductos[itemArray].Tran_ID_3);
-
-            $("#Txt_ID").val(ArrayProductos[itemArray].Producto_ID);
-            $("#TxtDescripcion").val(ArrayProductos[itemArray].Descripcion);
-
-            $("#TxtCuenta_1").val(ArrayProductos[itemArray].Cuenta_1);
-            $("#TxtCuenta_2").val(ArrayProductos[itemArray].Cuenta_2);
-            $("#TxtCuenta_3").val(ArrayProductos[itemArray].Cuenta_3);
-            $("#TxtCuenta_4").val(ArrayProductos[itemArray].Cuenta_4);
-            $("#TxtCuenta_5").val(ArrayProductos[itemArray].Cuenta_5);
-            $("#TxtCuenta_6").val(ArrayProductos[itemArray].Cuenta_6);
-            $("#TxtCuenta_7").val(ArrayProductos[itemArray].Cuenta_7);
-            $("#TxtCuenta_8").val(ArrayProductos[itemArray].Cuenta_8);
-            $("#TxtCuenta_9").val(ArrayProductos[itemArray].Cuenta_9);
-            $("#TxtCuenta_10").val(ArrayProductos[itemArray].Cuenta_10);
-
-            $("#TxtCuenta_11").val(ArrayProductos[itemArray].Cuenta_11);
-            $("#TxtCuenta_12").val(ArrayProductos[itemArray].Cuenta_12);
-            $("#TxtCuenta_13").val(ArrayProductos[itemArray].Cuenta_13);
-            $("#TxtCuenta_14").val(ArrayProductos[itemArray].Cuenta_14);
-            $("#TxtCuenta_15").val(ArrayProductos[itemArray].Cuenta_15);
-            $("#TxtCuenta_16").val(ArrayProductos[itemArray].Cuenta_16);
-            $("#TxtCuenta_17").val(ArrayProductos[itemArray].Cuenta_17);
-            $("#TxtCuenta_18").val(ArrayProductos[itemArray].Cuenta_18);
-            $("#TxtCuenta_19").val(ArrayProductos[itemArray].Cuenta_19);
-            $("#TxtCuenta_20").val(ArrayProductos[itemArray].Cuenta_20);
-            $("#TxtCuenta_21").val(ArrayProductos[itemArray].Cuenta_21);
-            $("#TxtCuenta_22").val(ArrayProductos[itemArray].Cuenta_22);
-            $("#TxtCuenta_23").val(ArrayProductos[itemArray].Cuenta_23);
-            $("#TxtCuenta_24").val(ArrayProductos[itemArray].Cuenta_24);
-            $("#TxtCuenta_25").val(ArrayProductos[itemArray].Cuenta_25);
-            $("#TxtCuenta_26").val(ArrayProductos[itemArray].Cuenta_26);
-            $("#TxtCuenta_27").val(ArrayProductos[itemArray].Cuenta_27);
-            $("#TxtCuenta_28").val(ArrayProductos[itemArray].Cuenta_28);
-            $("#TxtCuenta_29").val(ArrayProductos[itemArray].Cuenta_29);
-            $("#TxtCuenta_30").val(ArrayProductos[itemArray].Cuenta_30);
-            $("#TxtCuenta_31").val(ArrayProductos[itemArray].Cuenta_31);
-            $("#TxtCuenta_32").val(ArrayProductos[itemArray].Cuenta_32);
-            $("#TxtCuenta_33").val(ArrayProductos[itemArray].Cuenta_33);
-            $("#TxtCuenta_34").val(ArrayProductos[itemArray].Cuenta_34);
-            $("#TxtCuenta_35").val(ArrayProductos[itemArray].Cuenta_35);
-            $("#TxtCuenta_36").val(ArrayProductos[itemArray].Cuenta_36);
-            $("#TxtCuenta_37").val(ArrayProductos[itemArray].Cuenta_37);
-            $("#TxtCuenta_38").val(ArrayProductos[itemArray].Cuenta_38);
-            $("#TxtCuenta_39").val(ArrayProductos[itemArray].Cuenta_39);
-            $("#TxtCuenta_40").val(ArrayProductos[itemArray].Cuenta_40);
-            $("#TxtCuenta_41").val(ArrayProductos[itemArray].Cuenta_41);
-            $("#TxtCuenta_42").val(ArrayProductos[itemArray].Cuenta_42);
-            $("#TxtCuenta_43").val(ArrayProductos[itemArray].Cuenta_43);
-            $("#TxtCuenta_44").val(ArrayProductos[itemArray].Cuenta_44);
-            $("#TxtCuenta_45").val(ArrayProductos[itemArray].Cuenta_45);
-            $("#TxtCuenta_46").val(ArrayProductos[itemArray].Cuenta_46);
-            $("#TxtCuenta_47").val(ArrayProductos[itemArray].Cuenta_47);
-            $("#TxtCuenta_48").val(ArrayProductos[itemArray].Cuenta_48);
-            $("#TxtCuenta_49").val(ArrayProductos[itemArray].Cuenta_49);
-            $("#TxtCuenta_50").val(ArrayProductos[itemArray].Cuenta_50);
-
-            $("#Dialog_Productos").dialog("option", "title", "Ver Producto");
-            $("#Dialog_Productos").dialog("open");
-
-            Disabled_Controls();
         }
-    }
 
+    }
 }
 
 

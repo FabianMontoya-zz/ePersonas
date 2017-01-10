@@ -15,6 +15,7 @@ function transaccionAjax_MPersonas(State) {
                 Matrix_Persona = [];
             }
             else {
+              //  OpenControl();
                 Matrix_Persona = JSON.parse(result);
             }
         },
@@ -24,30 +25,6 @@ function transaccionAjax_MPersonas(State) {
     });
 }
 
-/*-------------------- carga ---------------------------*/
-//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transaccionAjax_MPersona(State) {
-    $.ajax({
-        url: "AccesoAjax.aspx",
-        type: "POST",
-        //crear json
-        data: {
-            "action": State,
-            "tabla": 'RUTA'
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            if (result == "") {
-                Matrix_Persona = [];
-            }
-            else {
-                Matrix_Persona = JSON.parse(result);
-            }
-        },
-        error: function () {
-        }
-    });
-}
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
@@ -71,6 +48,32 @@ function transaccionAjax_MDocWork(State) {
         },
         error: function () {
 
+        }
+    });
+}
+
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_MPersona(State) {
+    $.ajax({
+        url: "AccesoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'RUTA'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_Persona = [];
+            }
+            else {
+                Matrix_Persona = JSON.parse(result);
+            }
+        },
+        error: function () {
         }
     });
 }
@@ -126,7 +129,6 @@ function transaccionAjax_MAccesoPrede(State) {
         }
     });
 }
-
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
@@ -205,6 +207,56 @@ function transaccionAjax_MPAcceso_Area(State) {
     });
 }
 
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_MDatosUsuario(State) {
+    $.ajax({
+        url: "AccesoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "User_Porteria": User_Porteria
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "")
+                Matrix_Datos_Empresa = [];
+            else {
+               Matrix_Datos_Empresa = JSON.parse(result);
+                transaccionAjax_MEmpleados("MATRIX_EMPLEADOS", Matrix_Datos_Empresa[0].Nit_ID);
+            }
+        },
+        error: function () {
+        }
+    });
+}
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_MEmpleados(State, Nit_Empresa) {
+    $.ajax({
+        url: "AccesoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "Nit": Nit_Empresa
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_Empleados = [];
+            }
+            else {
+                Matrix_Empleados = JSON.parse(result);
+            }
+        },
+        error: function () {
+        }
+    });
+}
+
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
@@ -260,105 +312,12 @@ function transacionAjax_EmpresaNit(State) {
     });
 }
 
-/*------------------------------ consulta ---------------------------*/
-//hacemos la transaccion al code behind por medio de Ajax
-function transacionAjax_Acceso(State, filtro, opcion) {
-    var contenido;
-
-    if ($("#TxtRead").val() == "") {
-        contenido = "ALL";
-    }
-    else {
-        contenido = $("#TxtRead").val();
-    }
-
-    $.ajax({
-        url: "AccesoAjax.aspx",
-        type: "POST",
-        //crear json
-        data: {
-            "action": State,
-            "filtro": filtro,
-            "opcion": opcion,
-            "contenido": contenido
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            if (result == "") {
-                ArrayAcceso = [];
-            }
-            else {
-                ArrayAcceso = JSON.parse(result);
-                Table_Acceso();
-            }
-        },
-        error: function () {
-
-        }
-    });
-}
-
 /*------------------------------ crear ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
-function transacionAjax_Acceso_create(State) {
+function transacionAjax_LogAcceso_create(State) {
 
-    var ID;
-    var Nit_ID;
-
-    $.ajax({
-        url: "AccesoAjax.aspx",
-        type: "POST",
-        //crear json
-        data: {
-            "action": State,
-            "Nit_ID": $("#Select_EmpresaNit").val(),
-            "PAcceso": $("#Select_PAcceso").val(),
-            "Area": $("#Select_Area").val(),
-            "user": User.toUpperCase()
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            switch (result) {
-
-                case "Error":
-                    $("#dialog").dialog("option", "title", "Disculpenos :(");
-                    $("#Mensaje_alert").text("No se realizo el ingreso del Acceso!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "block");
-                    $("#SE").css("display", "none");
-                    $("#WE").css("display", "none");
-                    break;
-
-                case "Existe":
-                    $("#dialog").dialog("option", "title", "Ya Existe");
-                    $("#Mensaje_alert").text("El codigo ingresado ya existe en la base de datos!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "None");
-                    $("#SE").css("display", "none");
-                    $("#WE").css("display", "block");
-                    break;
-
-                case "Exito":
-                    $("#dialog").dialog("option", "title", "Exito");
-                    $("#Mensaje_alert").text("El Acceso fue creado exitosamente! ");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "none");
-                    $("#SE").css("display", "block");
-                    $("#WE").css("display", "none");
-                    Clear();
-                    break;
-            }
-
-        },
-        error: function () {
-
-        }
-    });
-}
-
-/*------------------------------ eliminar ---------------------------*/
-//hacemos la transaccion al code behind por medio de Ajax
-function transacionAjax_Acceso_delete(State) {
+    //recorer array para el ingreso de los ingresos realizados
+    ListIngresoLog = JSON.stringify(Array_IngresoLog);
 
     $.ajax({
         url: "AccesoAjax.aspx",
@@ -366,53 +325,25 @@ function transacionAjax_Acceso_delete(State) {
         //crear json
         data: {
             "action": State,
-            "Nit_ID": editNit_ID,
-            "PAcceso": editID,
-            "Area": editDocID,
-            "user": User
+            "ListIngresoLog": ListIngresoLog
         },
         //Transaccion Ajax en proceso
         success: function (result) {
             switch (result) {
 
                 case "Error":
-                    $("#dialog").dialog("option", "title", "Disculpenos :(");
-                    $("#Mensaje_alert").text("No se elimino el Acceso!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "block");
-                    $("#SE").css("display", "none");
-                    $("#WE").css("display", "none");
-                    $("#dialog_eliminar").dialog("close");
-                    break;
-
-                case "Exist_O":
-                    $("#dialog").dialog("option", "title", "Integridad referencial");
-                    $("#Mensaje_alert").text("No se elimino el Acceso, para eliminarlo debe eliminar primero el registro en la tabla Empleado");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "none");
-                    $("#SE").css("display", "none");
-                    $("#WE").css("display", "block");
-                    $("#dialog_eliminar").dialog("close");
+                    Mensaje_General("Disculpenos :(", "falla en el registro ,no puede ingresar", "E");
                     break;
 
                 case "Exito":
+                    Mensaje_General("Exito", "se ha registrado el ingreso,la persona puede ingresar", "S");
                     $("#dialog_eliminar").dialog("close");
-                    $("#dialog").dialog("option", "title", "Exito");
-                    $("#Mensaje_alert").text("El Acceso fue eliminado exitosamente! ");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "none");
-                    $("#SE").css("display", "block");
-                    $("#WE").css("display", "none");
-                    $("#dialog_eliminar").dialog("close");
-                    transacionAjax_Acceso("consulta", "N", "ALL");
                     Clear();
                     break;
             }
-
         },
         error: function () {
-
         }
     });
-
 }
+

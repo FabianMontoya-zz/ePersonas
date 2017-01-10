@@ -57,7 +57,7 @@ $(document).ready(function () {
     $("#Img13").css("display", "none");
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
-    $("#WE").css("display", "none");
+    $("#WA").css("display", "none");
     $("#T_Vigencia_Ing").css("display", "none");
 
     $("#TablaDatos_D").css("display", "none");
@@ -308,7 +308,6 @@ function Ver(Index_Cliente) {
 // muestra el registro a editar
 function Editar(Index, Type) {
 
-    console.log(Index);
     $("#Dialog_Create").dialog("open");
      $("#TablaConsulta").css("display", "none");
 

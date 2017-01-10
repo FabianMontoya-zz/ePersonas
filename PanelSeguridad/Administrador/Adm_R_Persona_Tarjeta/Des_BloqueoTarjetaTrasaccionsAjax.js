@@ -6,7 +6,8 @@ function transaccionAjax_MTarjeta(State) {
         url: "R_Persona_TarjetaAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'RUTA'
         },
         //Transaccion Ajax en proceso
@@ -31,7 +32,8 @@ function transaccionAjax_MPersona(State) {
         url: "R_Persona_TarjetaAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'RUTA'
         },
         //Transaccion Ajax en proceso
@@ -55,7 +57,8 @@ function transaccionAjax_MRTP(State) {
         url: "R_Persona_TarjetaAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'RUTA'
         },
         //Transaccion Ajax en proceso
@@ -80,7 +83,8 @@ function transacionAjax_EmpresaNit(State) {
         url: "R_Persona_TarjetaAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'CLIENTE'
         },
         //Transaccion Ajax en proceso
@@ -106,7 +110,8 @@ function transacionAjax_Des_Bloqueo(State) {
         url: "R_Persona_TarjetaAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'Des_Bloqueo'
         },
         //Transaccion Ajax en proceso
@@ -128,18 +133,16 @@ function transacionAjax_Des_Bloqueo(State) {
 /*------------------------------ crear ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax_UpdateDes_Bloqueo(State) {
-    var StrPersona = $("#Select_Persona option:selected").html();
-    var SPersona = StrPersona.split("  -  ");
 
-    undefined
     $.ajax({
         url: "R_Persona_TarjetaAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
-            "Tarjeta": $("#Select_Tarjeta_Blo").val(),
-            "Estado": "3",
-            "Des_Bloqueo": $("#Select_Des_Bloqueo").val(),
+        data: {
+            "action": State,
+            "Tarjeta": $("#Select_Tarjeta_DBlo").val(),
+            "Estado": "0",
+            "Bloqueo": "0",
             "Observaciones": $("#TxtA_Observacion").val(),
             "user": User.toUpperCase()
         },
@@ -148,30 +151,17 @@ function transacionAjax_UpdateDes_Bloqueo(State) {
             switch (result) {
 
                 case "Error":
-                    $("#dialog").dialog("option", "title", "Disculpenos :(");
-                    $("#Mensaje_alert").text("No se realizo el Des_Bloqueo de la tarjeta!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "block");
-                    $("#SE").css("display", "none");
-                    $("#WE").css("display", "none");
-                    break;
-
-                case "Existe":
-                    $("#dialog").dialog("option", "title", "Ya Existe");
-                    $("#Mensaje_alert").text("El codigo ingresado ya existe en la base de datos!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "None");
-                    $("#SE").css("display", "none");
-                    $("#WE").css("display", "block");
+                    Mensaje_General("Disculpenos :(", "No se realizo el Des_Bloqueo de la tarjeta!", "E");
                     break;
 
                 case "Exito":
-                    $("#dialog").dialog("option", "title", "Exito");
-                    $("#Mensaje_alert").text("El Des_Bloqueo de la tarjeta fue generada exitosamente! ");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "none");
-                    $("#SE").css("display", "block");
-                    $("#WE").css("display", "none");
+                    Mensaje_General("Exito", "El Des_Bloqueo de la tarjeta fue generada exitosamente!, se ha pasado a estado en (custodia) para volver a signar a cualquier persona de la Organización", "S");
+                    transaccionAjax_MTarjeta('MATRIX_TARJETA');
+                    Clear();
+                    break;
+
+                case "NO_USER":
+                    Mensaje_General("Usuario No Existe!", "El Des_Bloqueo de la tarjeta No se Realizo!, El usuario de Logeo no Existe como persona en la Base de Datos!", "W");
                     transaccionAjax_MTarjeta('MATRIX_TARJETA');
                     Clear();
                     break;

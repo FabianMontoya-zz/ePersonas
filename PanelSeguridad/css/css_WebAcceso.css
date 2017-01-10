@@ -19,7 +19,7 @@
     border-color: #420101;
     border-width: 2px;
     border-style: outset;
-    height: 640px;
+    height: 525px;
     overflow: auto;
 }
 
@@ -361,3 +361,13 @@ table.dataTable tr.even td.sorting_3
     font: 12px/20px CenturyGothic,sans-serif;
     text-align: center;
 }
+
+
+.Dialog_Control_Sasif
+{
+    background: rgba(20,20,20,0.9);
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    border-radius: 5px;
+}
+

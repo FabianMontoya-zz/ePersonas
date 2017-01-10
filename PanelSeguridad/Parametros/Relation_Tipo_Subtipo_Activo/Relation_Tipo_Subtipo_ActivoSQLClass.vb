@@ -43,7 +43,7 @@ Public Class Relation_Tipo_Subtipo_ActivoSQLClass
 
         StrQuery = sql.ToString
 
-        ObjListTP_Activo = listTP_Activo(StrQuery, Conexion)
+        ObjListTP_Activo = listTP_Activo(StrQuery, Conexion, "List")
 
         Return ObjListTP_Activo
 
@@ -198,7 +198,7 @@ Public Class Relation_Tipo_Subtipo_ActivoSQLClass
     ''' <param name="vg_S_StrConexion"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function listTP_Activo(ByVal vp_S_StrQuery As String, ByVal vg_S_StrConexion As String)
+    Public Function listTP_Activo(ByVal vp_S_StrQuery As String, ByVal vg_S_StrConexion As String, ByVal vp_S_Type As String)
 
         'inicializamos conexiones a la BD
         Dim objcmd As OleDbCommand = Nothing
@@ -217,23 +217,40 @@ Public Class Relation_Tipo_Subtipo_ActivoSQLClass
         'ejecutamos consulta
         ReadConsulta = objcmd.ExecuteReader()
 
-        'recorremos la consulta por la cantidad de datos en la BD
-        While ReadConsulta.Read
+          Select vp_S_Type
+            Case "List"
+                'recorremos la consulta por la cantidad de datos en la BD
+                While ReadConsulta.Read
 
-            Dim objTP_Activo As New Relation_Tipo_Subtipo_ActivoClass
-            'cargamos datos sobre el objeto de login
-            objTP_Activo.Tipo_ID = ReadConsulta.GetValue(0)
-            objTP_Activo.SubTipo_ID = ReadConsulta.GetValue(1)
-            objTP_Activo.FechaActualizacion = ReadConsulta.GetValue(2)
-            objTP_Activo.Usuario = ReadConsulta.GetValue(3)
+                    Dim objTP_Activo As New Relation_Tipo_Subtipo_ActivoClass
+                    'cargamos datos sobre el objeto de login
+                    objTP_Activo.Tipo_ID = ReadConsulta.GetValue(0)
+                    objTP_Activo.SubTipo_ID = ReadConsulta.GetValue(1)
+                    objTP_Activo.FechaActualizacion = ReadConsulta.GetValue(2)
+                    objTP_Activo.Usuario = ReadConsulta.GetValue(3)
 
-            objTP_Activo.DescripTipo = ReadConsulta.GetValue(4)
-            objTP_Activo.DescripSubTipo = ReadConsulta.GetValue(5)
+                    objTP_Activo.DescripTipo = ReadConsulta.GetValue(4)
+                    objTP_Activo.DescripSubTipo = ReadConsulta.GetValue(5)
 
-            'agregamos a la lista
-            ObjListTP_Activo.Add(objTP_Activo)
+                    'agregamos a la lista
+                    ObjListTP_Activo.Add(objTP_Activo)
+                End While
 
-        End While
+            Case "Matrix"
+                'recorremos la consulta por la cantidad de datos en la BD
+                While ReadConsulta.Read
+
+                    Dim objTP_Activo As New Relation_Tipo_Subtipo_ActivoClass
+                    'cargamos datos sobre el objeto de login
+                    objTP_Activo.Tipo_ID = ReadConsulta.GetValue(0)
+                    objTP_Activo.SubTipo_ID = ReadConsulta.GetValue(1)
+                    objTP_Activo.DescripSubTipo = ReadConsulta.GetValue(2)
+
+                    'agregamos a la lista
+                    ObjListTP_Activo.Add(objTP_Activo)
+                End While
+
+        End Select
 
         'cerramos conexiones
         ReadConsulta.Close()
@@ -271,6 +288,35 @@ Public Class Relation_Tipo_Subtipo_ActivoSQLClass
         Result = conex.IDis(StrQuery, "2")
 
         Return Result
+    End Function
+
+    ''' <summary>
+    ''' carga matrix relacion de activos sub tipos de activos
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Matrix_RTSTA()
+
+        Dim ObjListTP_Activo As New List(Of Relation_Tipo_Subtipo_ActivoClass)
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("2")
+        Dim StrQuery As String = ""
+        Dim Result As String = ""
+
+        Dim sql As New StringBuilder
+
+        sql.AppendLine(" SELECT RTS_Tipo_ID, " & _
+                                      "             RTS_Subtipo_ID, " & _
+                                      "             STA.STA_Descripcion " & _
+                                      " FROM R_TIPO_SUBTIPO_ACTIVO RTSA " & _
+                                      "  INNER JOIN  SUB_TIPOACTIVO  STA ON STA.STA_ID = RTSA.RTS_Subtipo_ID ")
+
+        StrQuery = sql.ToString
+
+        ObjListTP_Activo = listTP_Activo(StrQuery, Conexion, "Matrix")
+
+        Return ObjListTP_Activo
+
     End Function
 #End Region
 End Class

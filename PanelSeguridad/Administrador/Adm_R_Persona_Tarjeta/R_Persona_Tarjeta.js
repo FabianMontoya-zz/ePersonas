@@ -14,6 +14,8 @@ var editDocID;
 
 //Evento load JS
 $(document).ready(function () {
+    $("#TablaDatos_D").css("padding-bottom", "20%");
+
     transaccionAjax_MPersona('MATRIX_PERSONA');
     transaccionAjax_MTarjeta('MATRIX_TARJETA');
     Change_Select_Nit();
@@ -27,7 +29,7 @@ $(document).ready(function () {
     $("#Img5").css("display", "none");
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
-    $("#WE").css("display", "none");
+    $("#WA").css("display", "none");
 
 
     //funcion para las ventanas emergentes

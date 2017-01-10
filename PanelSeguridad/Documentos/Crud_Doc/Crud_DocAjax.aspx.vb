@@ -55,9 +55,6 @@ Public Class Crud_DocAjax
                 Case "MATRIX_CLIENTE_DEP"
                     CargarMPersonaDep()
 
-                Case "MATRIX_CONTRATO"
-                    CargarMContrato()
-
                 Case "MATRIX_SECUENCIA"
                     CargarMSecuencia()
 
@@ -366,21 +363,6 @@ Public Class Crud_DocAjax
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
-
-    ''' <summary>
-    ''' funcion que carga  Matrix contrato
-    ''' </summary>
-    ''' <remarks></remarks>
-    Protected Sub CargarMContrato()
-
-        Dim SQL As New C_ContratoSQLClass
-        Dim ObjList As New List(Of C_ContratoClass)
-
-        ObjList = SQL.Matrix_Contratos()
-        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
-
-    End Sub
-
     ''' <summary>
     ''' funcion que carga  Matrix contrato
     ''' </summary>

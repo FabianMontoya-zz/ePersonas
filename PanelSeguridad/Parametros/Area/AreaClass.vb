@@ -17,7 +17,7 @@
     Private _DescripEmpresa As String
 #End Region
 
-#Region "proiedades"
+#Region "propiedades"
     Public Property Nit_ID() As String
         Get
             Return Me._Nit_ID

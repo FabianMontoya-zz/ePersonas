@@ -7,12 +7,15 @@ var Matrix_AccesoPredeterminados = [];
 var Matrix_PAcceso = [];
 var Matrix_Area = [];
 var Matrix_PAcceso_Area = [];
+var Matrix_Datos_Empresa = [];
+var Matrix_Empleados = [];
 
 var ArrayAcceso = [];
 var ArrayCombo = [];
 var ArrayAccesoDep = [];
 var ArraySeguridad = [];
 var ArrayTdoc = [];
+
 
 var Nit_ID_Proccess;
 var Fecha_Vencimiento;
@@ -22,6 +25,7 @@ var EstadoVerif;
 var Est_Verifica;
 var Est_Vigencia;
 var Mensaje_Semaforo = "";
+var User_Porteria;
 
 var editNit_ID;
 var index_ID;
@@ -31,8 +35,9 @@ var editDocID;
 
 //Evento load JS
 $(document).ready(function () {
-
-    ConsultaParametrosURL();
+    Load_Charge_Sasif();
+      
+    User_Porteria = ConsultaParametrosURL();
     transaccionAjax_MPersonas('MATRIX_PERSONAS');
     transaccionAjax_MDocWork('MATIRXDOC_WORK');
     transaccionAjax_MPersona_Doc('MATRIX_PERSONAS_DOC');
@@ -43,8 +48,10 @@ $(document).ready(function () {
     transaccionAjax_MArea('MATRIX_AREA');
     transaccionAjax_MPAcceso_Area('MATRIX_PACCESO_AREA');
 
-    //transacionAjax_EmpresaNit('Cliente');
     transacionAjax_Documento('Documento');
+    transaccionAjax_MDatosUsuario('MATRIX_PERSONA_INGRESA');
+
+    VentanasEmergentes();
 
     $("#ESelect").css("display", "none");
     $("#Img1").css("display", "none");
@@ -54,10 +61,11 @@ $(document).ready(function () {
     $("#Img6").css("display", "none");
     $("#Img7").css("display", "none");
     $("#Img8").css("display", "none");
+    $("#Control_Ingreso").css("display", "none");
 
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
-    $("#WE").css("display", "none");
+    $("#WA").css("display", "none");
 
     $("#Sucess").css("display", "none");
     $("#Fail").css("display", "none");
@@ -66,7 +74,14 @@ $(document).ready(function () {
     $("#Inf_Ingreso").css("display", "none");
 
     $("#Div_D").css("display", "none");
+    
+    MostrarHora();
+    Capture_Tarjeta_ID();
+    $("#TxtIDTarjeta").focus();
+});
 
+
+function VentanasEmergentes(){
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
         autoOpen: false,
@@ -91,10 +106,23 @@ $(document).ready(function () {
             background: "black"
         }
     });
-    MostrarHora();
-    Capture_Tarjeta_ID();
-    $("#TxtIDTarjeta").focus();
-});
+
+    $("#Dialog_Extencion").dialog({
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif_Web",
+        modal: true,
+        width: 1100,
+        height: 400,
+        overlay: {
+            opacity: 0.5,
+            background: "black"
+        }
+    });
+
+}
+
+
+
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                 REGION BOTONES                                                                                                                ----*/
@@ -129,7 +157,10 @@ function BtnConsulta() {
 //evento del boton salir
 function x() {
     $("#dialog").dialog("close");
-    Clear();
+    if (Process_Manual_Ingreso == 0)
+        Clear();
+    else
+        Process_Manual_Ingreso = 0;
 }
 
 //salida del formulario
@@ -137,10 +168,35 @@ function btnSalir() {
     window.location = "../../Menu/menu.aspx?User=" + User + "&L_L=" + Link;
 }
 
+//ingreso de acceso
+function BtnAgregarAcceso() {
+
+    var validate = ValidaCamposIngreso();
+
+    if (validate == 0) {
+        CalculaHoraEstimada();
+    }
+
+}
+
+//confirmacion de registro
+function Registrar_Ingreso_Log() {
+    $("#dialog_eliminar").dialog("open");
+    $("#Mensaje_confirma").html("¿Esta seguro?, de la configuración de ingreso de la persona " + $("#L_Nombre").html());
+}
+
+//ingreso de registro
+function BtnConfirmaIngreso() {
+    transacionAjax_LogAcceso_create("Save_Log_Ingreso");
+}
+
+function VerExtenciones() {
+    $("#Dialog_Extencion").dialog("open");
+    Table_Extenciones();
+}
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                           REGION DE VALIDACIONES                                                                                                   ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
 // validamos campos de captura
 function Campos() {
 
@@ -261,6 +317,7 @@ function SearchPersona() {
     var Doc = $("#TxtDoc").val();
     var GrpDoc;
     var Exist = 0;
+
     for (item in Matrix_Persona) {
         if (TDoc == Matrix_Persona[item].TypeDocument_ID &&
              Doc == Matrix_Persona[item].Document_ID) {
@@ -274,14 +331,22 @@ function SearchPersona() {
             $("#L_Area").html(Matrix_Persona[item].DescripArea);
             $("#L_Cargo").html(Matrix_Persona[item].DescripCargo);
 
-            HabilitaCombosIngreso();
 
-            TDoc_VT = TDoc;
-            Doc_VT = Doc;
+            switch (GrpDoc) {
+                case 0:
+                    Mensaje_General("Proceso Imcompleto", "La persona no tiene (Grupo de Documentos) asignados, comuniquese con el administrador del sistema!", "E");
+                    break;
+                default:
+                    HabilitaCombosIngreso();
 
-            VerificacionTarjeta(Matrix_Persona[item].Nombre, Matrix_Persona[item].EstadoTarjeta, Matrix_Persona[item].CheckVigencia_Tarjeta, Matrix_Persona[item].FechaVencimientoTarjeta, Matrix_Persona[item].DescripMotivoBloqueo, "D");
-            SearchFoto(TDoc, Doc);
-            Tabla_Docs(Nit_ID_Proccess, TDoc, Doc, GrpDoc, "Empleado");
+                    TDoc_VT = TDoc;
+                    Doc_VT = Doc;
+
+                    VerificacionTarjeta(Matrix_Persona[item].Nombre, Matrix_Persona[item].EstadoTarjeta, Matrix_Persona[item].CheckVigencia_Tarjeta, Matrix_Persona[item].FechaVencimientoTarjeta, Matrix_Persona[item].DescripMotivoBloqueo, "D");
+                    SearchFoto(TDoc, Doc);
+                    Tabla_Docs(Nit_ID_Proccess, TDoc, Doc, GrpDoc, "Empleado");
+                    break;
+            }
             break;
         }
     }
@@ -302,7 +367,14 @@ function SearchEmpresa() {
             GrpDoc = Matrix_Persona[item].GrpDocumentos;
             TDoc = Matrix_Persona[item].TypeDocument_ID;
 
-            Tabla_Docs(Nit_ID_Proccess, TDoc, Nit_Emp, GrpDoc, "Empresa");
+            switch (GrpDoc) {
+                case 0:
+                    Mensaje_General("Proceso Imcompleto", "La Empresa de la persona no tiene (Grupo de Documentos) asignados, comuniquese con el administrador del sistema!", "E");
+                    break;
+                default:
+                    Tabla_Docs(Nit_ID_Proccess, TDoc, Nit_Emp, GrpDoc, "Empresa");
+                    break;
+            }
             break;
         }
     }
@@ -529,7 +601,7 @@ function Clear() {
 
     $("#Inf_persona").css("display", "None");
     $("#Inf_Ingreso").css("display", "none");
-
+    $("#Control_Ingreso").css("display", "none");
     $("#L_Nombre").html("");
     $("#L_Empresa").html("");
     $("#L_Area").html("");
@@ -547,5 +619,64 @@ function Clear() {
     $("#TxtIDTarjeta").focus();
 
 }
+
+//limpiar pagina para nueva consulta
+function Clear_Ingreso() {
+    $("#Select_PAcceso").val("-1");
+    $("#Select_AreaAcceso").val("-1");
+    $("#Select_Persona_Enc").val("-1");
+
+    $("#TxtHora").val("");
+    $("#TxtMinutos").val("");
+    $("#HA_Ingreso").html("");
+    $("#HE_Salida").html("");
+
+    $('.C_Chosen').trigger('chosen:updated');
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                              GRID EXTENCIONES                                                                                                                        ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+// crea la tabla en el cliente
+function Table_Extenciones() {
+
+    var html;
+    var StrTelefono_1 = "";
+    var StrTelefono_2 = "";
+    var StrTelefono_3 = "";
+    var StrTelefono_4 = "";
+
+    html = "<table id='TGridExtencion' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th style='width: 25%'>Nombre</th><th style='width: 15%'>Telefono 1</th><th style='width: 15%'>Telefono 2</th><th style='width: 15%'>Telefono 3</th><th style='width: 15%'>Telefono 4</th><th>Correo 1</th><th>Correo 2</th></tr></thead><tbody>";
+    for (itemArray in Matrix_Empleados) {
+        if (Matrix_Empleados[itemArray].Nit_ID != 0) {
+            if (Matrix_Empleados[itemArray].Tipo_1 != "F") {
+                StrTelefono_1 = "DesActualizado";
+                StrTelefono_2 = "DesActualizado";
+                StrTelefono_3 = "DesActualizado";
+                StrTelefono_4 = "DesActualizado";
+            }
+            else {
+                StrTelefono_1 = Convert_Valores_0(Matrix_Empleados[itemArray].Telefono_1);
+                StrTelefono_2 = Convert_Valores_0(Matrix_Empleados[itemArray].Telefono_2);
+                StrTelefono_3 = Convert_Valores_0(Matrix_Empleados[itemArray].Telefono_3);
+                StrTelefono_4 = Convert_Valores_0(Matrix_Empleados[itemArray].Telefono_4);
+            }
+            html += "<tr id= 'TExtencion_" + Matrix_Empleados[itemArray].Nit_ID + "'><td>" + Matrix_Empleados[itemArray].Nombre + "</td><td>" + StrTelefono_1 + "</td><td>" + StrTelefono_2 + "</td><td>" + StrTelefono_3 + "</td><td>" + StrTelefono_4 + "</td><td>" + Matrix_Empleados[itemArray].Correo_1 + "</td><td>" + Matrix_Empleados[itemArray].Correo_2 + "</td></tr>";
+        }
+    }
+
+    html += "</tbody></table>";
+    $("#container_TGrid_New").html("");
+    $("#container_TGrid_New").html(html);
+
+  
+    $("#TGridExtencion").dataTable({
+        "bJQueryUI": true, "iDisplayLength": 1000,
+        "bDestroy": true
+    });
+
+}
+
 
 

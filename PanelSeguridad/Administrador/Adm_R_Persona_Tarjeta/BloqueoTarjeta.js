@@ -16,6 +16,8 @@ var editDocID;
 
 //Evento load JS
 $(document).ready(function () {
+    $("#TablaDatos_D").css("padding-bottom", "20%");
+
     transaccionAjax_MPersona('MATRIX_PERSONA');
     transaccionAjax_MTarjeta('MATRIX_TARJETA');
     transaccionAjax_MRTP('MATRIX_RTP');
@@ -32,7 +34,7 @@ $(document).ready(function () {
     $("#Img5").css("display", "none");
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
-    $("#WE").css("display", "none");
+    $("#WA").css("display", "none");
     $("#DIV_Bloqueo").css("display", "none");
 
 

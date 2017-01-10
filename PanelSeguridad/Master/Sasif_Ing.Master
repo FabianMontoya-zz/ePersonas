@@ -5,11 +5,12 @@
 <head runat="server">
     <title></title>
     <link href="../css/css_master_Ing.css" rel="stylesheet" type="text/css" />
+    
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 
 </head>
-<body>
+<body >
     <form id="form1" runat="server">
         <div id="page" class="page">
             <div id="Header" class="header">
@@ -20,7 +21,8 @@
                                 <img id="logo_2" src="" alt="SASIF S.A.S." style="height: 85px; width: 70px;" />
                             </td>
                             <td id="Hours" colspan="3" style="width: 70%; text-align: center;"></td>
-                            <td id="logoExt" rowspan="2" style="width: 15%; text-align: center;">&nbsp;<img alt="" src="" />
+                            <td id="logoExt" rowspan="2" style="width: 15%; text-align: center;">
+                                <img id="Agenda" class="Ext" src="" alt="Extenciones" style="height: 60px; width: 60px;" onclick="VerExtenciones()" />
                             </td>
                         </tr>
                         <tr>

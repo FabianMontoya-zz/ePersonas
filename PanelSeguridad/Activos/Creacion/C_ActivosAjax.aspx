@@ -1,0 +1,1 @@
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="C_ActivosAjax.aspx.vb" Inherits="PanelSeguridad.C_ActivosAjax" %>

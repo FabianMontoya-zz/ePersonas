@@ -79,7 +79,7 @@
                 <td>
                     <img alt="error" id="DE" src="../../images/error_2.png" />
                     <img alt="success" id="SE" src="../../images/success.png" />
-                    <img alt="Warning" id="WE" src="../../images/alert.png" />
+                    <img alt="Warning" id="WA" src="../../images/alert.png" />
                 </td>
             </tr>
             <tr>
@@ -94,7 +94,7 @@
             <tr>
                 <td>
                     <p class="Label_Bold" id="P1">
-                        Desea eliminar el siguiente registro?
+                        ¿Desea eliminar el siguiente registro?
                     </p>
                 </td>
                 <td>
@@ -180,25 +180,74 @@
                     </td>
                     <td style="padding-bottom: 25px; width: 500px"></td>
                 </tr>
+            </table>
+            <!-- --->
+            <table id="Table4" style="width: 100%; margin-left: 100px;">
                 <tr>
-                    <td class="Label_Bold">Tipo de Activo
+                    <td class="Label_Bold" style="width: 150px;">Causación de Interés Corriente
                     </td>
                     <td>
-                        <select id="Select_Tipo_A" class="C_Chosen" style="width: 200px;">
+                        <select id="Select_Caus_Int_Cte" class="C_Chosen" style="width: 250px;">
+                            <option value="-1">Seleccione...</option>
+                            <option value="N">N - Nominal</option>
+                            <option value="E">E - Efectiva</option>
+                        </select>
+                    </td>
+                    <td style="padding-bottom: 25px;">
+                       </td>
+                </tr>
+                <tr>
+                    <td class="Label_Bold">Causación Mora
+                    </td>
+                    <td>
+                        <select id="Select_Caus_Mora" class="C_Chosen" style="width: 200px;">
+                            <option value="-1">Seleccione...</option>
+                            <option value="N">N - Nominal</option>
+                            <option value="E">E - Efectiva</option>
                         </select>
                     </td>
                     <td style="padding-bottom: 25px; width: 500px"></td>
                 </tr>
                 <tr>
-                    <td class="Label_Bold">Sub-Tipo de Activo
+                    <td class="Label_Bold">Base de Mora
                     </td>
                     <td>
-                        <select id="Select_SubTipo_A" class="C_Chosen" style="width: 450px;">
+                        <select id="Select_Base_Mora" class="C_Chosen" style="width: 200px;">
+                            <option value="-1">Seleccione...</option>
+                            <option value="1">1 - Capital</option>
+                            <option value="2">2 - Interés</option>
+                            <option value="3">3 - Capital + Interés</option>
+                            <option value="4">4 - Capital + Interés + Otros Conceptos</option>
                         </select>
                     </td>
-                    <td style="padding-bottom: 25px;"></td>
+                    <td style="padding-bottom: 25px; width: 500px"></td>
+                </tr>
+                <tr>
+                    <td class="Label_Bold">¿Capitaliza?
+                    </td>
+                    <td>
+                        <select id="Select_Capitalizacion" class="C_Chosen" style="width: 200px;">
+                            <option value="-1">Seleccione...</option>
+                            <option value="S">S - Si</option>
+                            <option value="N">N - No</option>
+                        </select>
+                    </td>
+                    <td style="padding-bottom: 25px; width: 500px"></td>
+                </tr>
+                <tr>
+                    <td class="Label_Bold">¿Control de Activos?
+                    </td>
+                    <td>
+                        <select id="Select_Control_Activos" class="C_Chosen" style="width: 200px;">
+                            <option value="-1">Seleccione...</option>
+                            <option value="S">S - Si</option>
+                            <option value="N">N - No</option>
+                        </select>
+                    </td>
+                    <td style="padding-bottom: 25px; width: 500px"></td>
                 </tr>
             </table>
+
         </div>
         <table id="Blo_Transacciones">
             <tr>

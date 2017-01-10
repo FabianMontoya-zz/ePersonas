@@ -48,6 +48,29 @@ Public Class R_Persona_TarjetaSQLClass
 
     End Function
 
+    ''' <summary>
+    ''' proceso que elimina la relacion de persona tarje por desbloqueo para asignarla nuevamentae 
+    ''' </summary>
+    ''' <param name="vp_s_Tarjeta_ID"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function DeleteRTP_Desbloqueo(ByVal vp_s_Tarjeta_ID As String)
+
+        Dim conex As New Conector
+
+        ' definiendo los objetos
+        Dim sql As New StringBuilder
+        Dim StrQueryID As String = ""
+        Dim StrQuery As String = ""
+
+        sql.AppendLine("DELETE R_TARJETA_PERSONA  WHERE RTP_Tarjeta_ID ='" & vp_s_Tarjeta_ID & "'")
+        StrQuery = sql.ToString
+
+        Dim Result As String = conex.StrInsert_and_Update_All(StrQuery, "1")
+        Return Result
+
+    End Function
+
 #End Region
 
 #Region "CONSULTAS DROP LIST"

@@ -1,5 +1,6 @@
 ﻿var Empleado_true = 0;
 var Banco_true = 0;
+var Socio_true = 0;
 
 var Campo_1;
 var Campo_2;
@@ -28,43 +29,43 @@ var Nombre_Persona;
 function ValideAnexos() {
 
     $('#Check_Cliente').change(function () {
-        if (Banco_true == 0 && Empleado_true == 0) {
+        if (Banco_true == 0 && Empleado_true == 0 && Socio_true == 0) {
             $("#Anexos").css("display", "none");
         }
     });
 
     $('#Check_Avaluador').change(function () {
-        if (Banco_true == 0 && Empleado_true == 0) {
+        if (Banco_true == 0 && Empleado_true == 0 && Socio_true == 0) {
             $("#Anexos").css("display", "none");
         }
     });
 
     $('#Check_Transito').change(function () {
-        if (Banco_true == 0 && Empleado_true == 0) {
+        if (Banco_true == 0 && Empleado_true == 0 && Socio_true == 0) {
             $("#Anexos").css("display", "none");
         }
     });
 
     $('#Check_Hacienda').change(function () {
-        if (Banco_true == 0 && Empleado_true == 0) {
+        if (Banco_true == 0 && Empleado_true == 0 && Socio_true == 0) {
             $("#Anexos").css("display", "none");
         }
     });
 
     $('#Check_MultiEmpresa').change(function () {
-        if (Banco_true == 0 && Empleado_true == 0) {
+        if (Banco_true == 0 && Empleado_true == 0 && Socio_true == 0) {
             $("#Anexos").css("display", "none");
         }
     });
 
     $('#Check_Asesor').change(function () {
-        if (Banco_true == 0 && Empleado_true == 0) {
+        if (Banco_true == 0 && Empleado_true == 0 && Socio_true == 0) {
             $("#Anexos").css("display", "none");
         }
     });
 
     $('#Check_Proveedor').click(function () {
-        if (Banco_true == 0 && Empleado_true == 0) {
+        if (Banco_true == 0 && Empleado_true == 0 && Socio_true == 0) {
             $("#Anexos").css("display", "none");
         }
     });
@@ -81,7 +82,7 @@ function ValideAnexos() {
             Empleado_true = 0;
         }
 
-        if (Banco_true == 0 && Empleado_true == 0) {
+        if (Banco_true == 0 && Empleado_true == 0 && Socio_true == 0) {
             $("#Anexos").css("display", "none");
         }
 
@@ -98,9 +99,28 @@ function ValideAnexos() {
             Banco_true = 0;
         }
 
-        if (Banco_true == 0 && Empleado_true == 0) {
+        if (Banco_true == 0 && Empleado_true == 0 && Socio_true == 0) {
             $("#Anexos").css("display", "none");
         }
+    });
+
+    $('#Check_Socio').change(function () {
+
+        if ($(this).is(':checked')) {
+            $("#Anexos").css("display", "inline-table");
+            $("#C_Socio").css("display", "inline-table");
+
+            Socio_true = 1;
+        }
+        else {
+            $("#C_Socio").css("display", "none");
+            Socio_true = 0;
+        }
+
+        if (Banco_true == 0 && Empleado_true == 0 && Socio_true == 0) {
+            $("#Anexos").css("display", "none");
+        }
+
     });
 }
 
@@ -109,9 +129,10 @@ function validarCamposCrear() {
 
     var validar;
     var T_Persona = ValidatorCampos;
+    var validar_banco = 0;
+    var validar_Empleado = 0;
 
     if (T_Persona == 1) {
-
         Campo_1 = $("#Select_EmpresaNit").val();
         Campo_2 = $("#Select_Pais").val();
         Campo_3 = $("#Select_Ciudad").val();
@@ -121,11 +142,12 @@ function validarCamposCrear() {
         Campo_7 = $("#Select_Ciudad_Doc").val();
         Campo_8 = $("#Select_TPersona").val();
         Campo_9 = $("#Select_Regimen").val();
+        Campo_10 = $("#Text_fechaNacimiento").val();
+        Campo_11 = $("#Select_Sex").val();
 
         CamposPN = valida_PN();
     }
     else {
-
         Campo_1 = $("#Select_EmpresaNit").val();
         Campo_2 = $("#Select_Pais").val();
         Campo_3 = $("#Select_Ciudad").val();
@@ -138,8 +160,6 @@ function validarCamposCrear() {
         CamposPJ = valida_PJ();
     }
 
-    var validar_banco = 0;
-    var validar_Empleado = 0;
 
     if (CamposPJ == 0 && CamposPN == 0) {
 
@@ -169,7 +189,6 @@ function validarCamposCrear() {
         else
             validar = 1;
     }
-
     return validar;
 }
 
@@ -177,7 +196,7 @@ function validarCamposCrear() {
 function valida_PN() {
 
     var validar = 0;
-    if (Campo_9 == "-1" || Campo_8 == "-1" || Campo_7 == "-1" || Campo_6 == "" || Campo_5 == "" || Campo_4 == "-1" || Campo_3 == "-1" || Campo_2 == "-1" || Campo_1 == "-1") {
+    if (Campo_11 == "-1" || Campo_10 == "YYYY-MM-DD" || Campo_10 == "" || Campo_9 == "-1" || Campo_8 == "-1" || Campo_7 == "-1" || Campo_6 == "" || Campo_5 == "" || Campo_4 == "-1" || Campo_3 == "-1" || Campo_2 == "-1" || Campo_1 == "-1") {
         validar = 1;
         if (Campo_1 == "-1")
             $("#ImgMul").css("display", "inline-table");
@@ -223,6 +242,16 @@ function valida_PN() {
             $("#Img10").css("display", "inline-table");
         else
             $("#Img10").css("display", "none");
+
+        if (Campo_10 == "" || Campo_10 == "YYYY-MM-DD")
+            $("#Img20").css("display", "inline-table");
+        else
+            $("#Img20").css("display", "none");
+
+        if (Campo_11 == "-1")
+            $("#Img21").css("display", "inline-table");
+        else
+            $("#Img21").css("display", "none");
     }
     else {
         $("#ImgC_Doc").css("display", "none");
@@ -234,6 +263,8 @@ function valida_PN() {
         $("#Img5").css("display", "none");
         $("#Img9").css("display", "none");
         $("#Img10").css("display", "none");
+        $("#Img20").css("display", "none");
+        $("#Img21").css("display", "none");
     }
 
     return validar;
@@ -321,7 +352,6 @@ function valida_Banco() {
 
     return validar;
 }
-
 
 //validacion campos adicionales para empleados
 function valida_Empleados() {

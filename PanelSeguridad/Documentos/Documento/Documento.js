@@ -32,7 +32,7 @@ $(document).ready(function () {
 
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
-    $("#WE").css("display", "none");
+    $("#WA").css("display", "none");
 
     $("#TablaDatos_D").css("display", "none");
     $("#TablaDatos_D_Vista").css("display", "none");

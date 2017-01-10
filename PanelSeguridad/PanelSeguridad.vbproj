@@ -155,6 +155,15 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Activos\Creacion\C_Activos_Complementos.js" />
+    <Content Include="Activos\Creacion\C_Activos.aspx" />
+    <Content Include="Activos\Creacion\C_Activos.js" />
+    <Content Include="Activos\Creacion\C_ActivosAjax.aspx" />
+    <Content Include="Activos\Creacion\C_ActivosTrasaccionsAjax.js" />
+    <Content Include="Activos\Creacion\C_Activos_Facturas.js" />
+    <Content Include="Activos\Creacion\C_Activos_Validacion.js" />
+    <Content Include="Activos\menu.js" />
+    <Content Include="Activos\SasifMaster_Cosult.js" />
     <Content Include="Administrador\Adm_C_AccesoPrede\C_AccesoPre.aspx" />
     <Content Include="Administrador\Adm_C_AccesoPrede\C_AccesoPre.js" />
     <Content Include="Administrador\Adm_C_AccesoPrede\C_AccesoPreAjax.aspx" />
@@ -214,6 +223,11 @@
     <Content Include="Contratos\Creacion\C_Contrato.js" />
     <Content Include="Contratos\Creacion\C_ContratoAjax.aspx" />
     <Content Include="Contratos\Creacion\C_ContratoTrasaccionsAjax.js" />
+    <Content Include="Contratos\Creacion\C_Contrato_Activos.js" />
+    <Content Include="Contratos\Creacion\C_Contrato_Activos_Complementos.js" />
+    <Content Include="Contratos\Creacion\C_Contrato_Activos_Validacion.js" />
+    <Content Include="Contratos\Creacion\C_Contrato_Facturas.js" />
+    <Content Include="Contratos\Creacion\C_Contrato_JSON.js" />
     <Content Include="Contratos\menu.js" />
     <Content Include="Contratos\SasifMaster_Cosult.js" />
     <Content Include="css\Chosen\chosen-sprite%402x.png" />
@@ -231,6 +245,7 @@
     <Content Include="css\css_menu.css" />
     <Content Include="css\css_WebAcceso.css" />
     <Content Include="css\custom\charge.css" />
+    <Content Include="css\custom\Control_Sasif.css" />
     <Content Include="css\datatables\images\back_disabled.png" />
     <Content Include="css\datatables\images\back_enabled.png" />
     <Content Include="css\datatables\images\back_enabled_hover.png" />
@@ -316,10 +331,14 @@
     <Content Include="Documentos\RutaDocumentos\RutaDocumentosAjax.aspx" />
     <Content Include="Documentos\RutaDocumentos\RutaDocumentosTrasaccionsAjax.js" />
     <Content Include="Documentos\SasifMaster_Cosult.js" />
+    <Content Include="Factura\menu.js" />
+    <Content Include="Factura\SasifMaster_Cosult.js" />
     <Content Include="Global.asax" />
     <Content Include="Images\add.png" />
     <Content Include="Images\adress_book.png" />
     <Content Include="Images\adress_book_w.png" />
+    <Content Include="Images\agenda.png" />
+    <Content Include="Images\agenda_white.png" />
     <Content Include="Images\alert.png" />
     <Content Include="Images\avatar.png" />
     <Content Include="Images\bank.png" />
@@ -327,25 +346,29 @@
     <Content Include="Images\C_GREEN.png" />
     <Content Include="Images\C_RED.png" />
     <Content Include="Images\C_YELLOW.png" />
-    <Content Include="Images\Descarga.png" />
-    <Content Include="Images\DocAuto.png" />
     <Content Include="Images\documentos.png" />
     <Content Include="Images\documentos_w.png" />
     <Content Include="Images\error.png" />
     <Content Include="Images\error_2.png" />
     <Content Include="Images\exit.png" />
-    <Content Include="Images\file.jpg" />
-    <Content Include="Images\logo-actual.png" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\logo_2.png" />
     <Content Include="Images\LOOK_BLACK.png" />
     <Content Include="Images\LOOK_WHITE.png" />
+    <Content Include="Images\old\add.png" />
     <Content Include="Images\old\adress_book.png" />
+    <Content Include="Images\old\alert.png" />
     <Content Include="Images\old\bank.png" />
     <Content Include="Images\old\cabeza2.jpg" />
+    <Content Include="Images\old\Descarga.png" />
+    <Content Include="Images\old\DocAuto.png" />
     <Content Include="Images\old\documentos.png" />
+    <Content Include="Images\old\error.png" />
+    <Content Include="Images\old\error_2.png" />
+    <Content Include="Images\old\file.jpg" />
     <Content Include="Images\old\fondo1.jpg" />
     <Content Include="Images\old\fondo11.jpg" />
+    <Content Include="Images\old\logo-actual.png" />
     <Content Include="Images\old\logo_old.png" />
     <Content Include="Images\old\menu1.jpg" />
     <Content Include="Images\old\menu2.jpg" />
@@ -353,13 +376,14 @@
     <Content Include="Images\old\menu4.jpg" />
     <Content Include="Images\old\relations.png" />
     <Content Include="Images\old\sasif1.gif" />
+    <Content Include="Images\old\search.png" />
+    <Content Include="Images\old\success.png" />
+    <Content Include="Images\old\user.png" />
+    <Content Include="Images\old\validation.png" />
     <Content Include="Images\relations.png" />
     <Content Include="Images\SASIF_NEW.png" />
     <Content Include="Images\SASIF_NEW_WHITE.png" />
-    <Content Include="Images\search.png" />
     <Content Include="Images\success.png" />
-    <Content Include="Images\user.png" />
-    <Content Include="Images\validation.png" />
     <Content Include="Ingreso\Acceso\Acceso.aspx" />
     <Content Include="Ingreso\Acceso\Acceso.js" />
     <Content Include="Ingreso\Acceso\AccesoAjax.aspx" />
@@ -367,6 +391,18 @@
     <Content Include="Ingreso\Acceso\Acceso_Tarjeta.js" />
     <Content Include="Ingreso\menu.js" />
     <Content Include="Ingreso\SasifMaster_Cosult.js" />
+    <Content Include="Ingreso_New\Entrada\Ingreso.aspx" />
+    <Content Include="Ingreso_New\Entrada\Ingreso.js" />
+    <Content Include="Ingreso_New\Entrada\IngresoAjax.aspx" />
+    <Content Include="Ingreso_New\Entrada\IngresoTrasaccionsAjax.js" />
+    <Content Include="Ingreso_New\Entrada\Ingreso_Tarjeta.js" />
+    <Content Include="Ingreso_New\menu.js" />
+    <Content Include="Ingreso_New\Salida\Salida.aspx" />
+    <Content Include="Ingreso_New\Salida\Salida.js" />
+    <Content Include="Ingreso_New\Salida\SalidaAjax.aspx" />
+    <Content Include="Ingreso_New\Salida\SalidaTrasaccionsAjax.js" />
+    <Content Include="Ingreso_New\Salida\Salida_Tarjeta.js" />
+    <Content Include="Ingreso_New\SasifMaster_Cosult.js" />
     <Content Include="login\CambioPassword.aspx" />
     <Content Include="login\CambioPassword.js" />
     <Content Include="login\CambioPasswordAjax.aspx" />
@@ -513,6 +549,9 @@
     <Content Include="Scripts\Dialog\jquery-ui.js" />
     <Content Include="Scripts\Dialog\timepicker.js" />
     <Content Include="Sasif.Master" />
+    <Content Include="Activos\Sasif_menu.Master" />
+    <Content Include="Factura\Sasif_menu.Master" />
+    <Content Include="Ingreso_New\Sasif_menu.Master" />
     <None Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
@@ -571,6 +610,24 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activos\Creacion\C_Activos.aspx.designer.vb">
+      <DependentUpon>C_Activos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Activos\Creacion\C_Activos.aspx.vb">
+      <DependentUpon>C_Activos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Activos\Creacion\C_ActivosAjax.aspx.designer.vb">
+      <DependentUpon>C_ActivosAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Activos\Creacion\C_ActivosAjax.aspx.vb">
+      <DependentUpon>C_ActivosAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Activos\Creacion\C_ActivosClass.vb" />
+    <Compile Include="Activos\Creacion\C_ActivosSQLClass.vb" />
+    <Compile Include="Activos\Vehiculos\VehiculosClass.vb" />
+    <Compile Include="Activos\Vehiculos\VehiculosSQLClass.vb" />
     <Compile Include="Administrador\Adm_C_AccesoPrede\C_AccesoPre.aspx.designer.vb">
       <DependentUpon>C_AccesoPre.aspx</DependentUpon>
     </Compile>
@@ -914,6 +971,8 @@
     <Compile Include="Documentos\RutaDocumentos\RutaDocumentosClass.vb" />
     <Compile Include="Documentos\RutaDocumentos\RutaDocumentosSQLClass.vb" />
     <Compile Include="encriptracion\EncriptarClass.vb" />
+    <Compile Include="Factura\Creacion\FacturaClass.vb" />
+    <Compile Include="Factura\Creacion\FacturaSQLClass.vb" />
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -933,6 +992,38 @@
     </Compile>
     <Compile Include="Ingreso\Acceso\AccesoClass.vb" />
     <Compile Include="Ingreso\Acceso\AccesoSQLClass.vb" />
+    <Compile Include="Ingreso_New\ControlAcceso\ControlAccesoClass.vb" />
+    <Compile Include="Ingreso_New\ControlAcceso\ControlAccesoSQLClass.vb" />
+    <Compile Include="Ingreso_New\Entrada\Ingreso.aspx.designer.vb">
+      <DependentUpon>Ingreso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ingreso_New\Entrada\Ingreso.aspx.vb">
+      <DependentUpon>Ingreso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ingreso_New\Entrada\IngresoAjax.aspx.designer.vb">
+      <DependentUpon>IngresoAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ingreso_New\Entrada\IngresoAjax.aspx.vb">
+      <DependentUpon>IngresoAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ingreso_New\Entrada\IngresoClass.vb" />
+    <Compile Include="Ingreso_New\Entrada\IngresoSQLClass.vb" />
+    <Compile Include="Ingreso_New\Salida\Salida.aspx.designer.vb">
+      <DependentUpon>Salida.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ingreso_New\Salida\Salida.aspx.vb">
+      <DependentUpon>Salida.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ingreso_New\Salida\SalidaAjax.aspx.designer.vb">
+      <DependentUpon>SalidaAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ingreso_New\Salida\SalidaAjax.aspx.vb">
+      <DependentUpon>SalidaAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="login\CambioPassword.aspx.designer.vb">
       <DependentUpon>CambioPassword.aspx</DependentUpon>
     </Compile>
@@ -1075,6 +1166,8 @@
     </Compile>
     <Compile Include="Parametros\Cargo\CargoClass.vb" />
     <Compile Include="Parametros\Cargo\CargoSQLClass.vb" />
+    <Compile Include="Parametros\Ciclo\CicloClass.vb" />
+    <Compile Include="Parametros\Ciclo\CicloSQLClass.vb" />
     <Compile Include="Parametros\Ciudades\Ciudades.aspx.designer.vb">
       <DependentUpon>Ciudades.aspx</DependentUpon>
     </Compile>
@@ -1107,6 +1200,10 @@
     </Compile>
     <Compile Include="Parametros\Cliente\ClienteClass.vb" />
     <Compile Include="Parametros\Cliente\ClienteSQLClass.vb" />
+    <Compile Include="Parametros\Colores\ColoresClass.vb" />
+    <Compile Include="Parametros\Colores\ColoresSQLClass.vb" />
+    <Compile Include="Parametros\Financiacion\FinanciacionClass.vb" />
+    <Compile Include="Parametros\Financiacion\FinanciacionSQLClass.vb" />
     <Compile Include="Parametros\Direcciones\DireccionesClass.vb" />
     <Compile Include="Parametros\Direcciones\DireccionesSQLClass.vb" />
     <Compile Include="Parametros\Documentos\DocumentosClass.vb" />
@@ -1273,6 +1370,8 @@
     <Compile Include="Parametros\Productos\ProductosSQLClass.vb" />
     <Compile Include="Parametros\Relaciones_Financieras\Relaciones_FinancierasClass.vb" />
     <Compile Include="Parametros\Relaciones_Financieras\Relaciones_FinancierasSQLClass.vb" />
+    <Compile Include="Parametros\Relacion_Actores\Relacion_ActoresClass.vb" />
+    <Compile Include="Parametros\Relacion_Actores\Relacion_ActoresSQLClass.vb" />
     <Compile Include="Parametros\Relation_Tipo_Subtipo_Activo\Relation_Tipo_Subtipo_Activo.aspx.designer.vb">
       <DependentUpon>Relation_Tipo_Subtipo_Activo.aspx</DependentUpon>
     </Compile>
@@ -1337,6 +1436,10 @@
     </Compile>
     <Compile Include="Parametros\SubTipoProduct_Leasing\SubTipoProduct_LeasingClass.vb" />
     <Compile Include="Parametros\SubTipoProduct_Leasing\SubTipoProduct_LeasingSQLClass.vb" />
+    <Compile Include="Parametros\Sucursal\SucursalClass.vb" />
+    <Compile Include="Parametros\Sucursal\SucursalSQLClass.vb" />
+    <Compile Include="Parametros\Tasas\TasasClass.vb" />
+    <Compile Include="Parametros\Tasas\TasasSQLClass.vb" />
     <Compile Include="Parametros\TipoActivo\TipoActivo.aspx.designer.vb">
       <DependentUpon>TipoActivo.aspx</DependentUpon>
     </Compile>

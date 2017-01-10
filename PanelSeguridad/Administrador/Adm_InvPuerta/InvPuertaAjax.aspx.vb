@@ -72,6 +72,7 @@ Public Class InvPuertaAjax
                     objInvPuerta.Nit_ID_Custodia = item_list.Nit_ID
                     objInvPuerta.TypeDocument_ID_Custodia = item_list.TypeDocument_ID
                     objInvPuerta.Document_ID_Custodia = item_list.Document_ID
+                    objInvPuerta.FechaCustodia = Date.Now
                 Next
 
                 If user_log = 1 Then
@@ -82,7 +83,6 @@ Public Class InvPuertaAjax
                 End If
               
         End Select
-
         Response.Write(result)
 
     End Sub

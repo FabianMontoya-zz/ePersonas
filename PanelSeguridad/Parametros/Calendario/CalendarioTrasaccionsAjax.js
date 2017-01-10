@@ -125,7 +125,11 @@ function transacionAjax_Calendario_create(State) {
             switch (result) {
 
                 case "Error":
-                    Mensaje_General("Disculpenos :(", "No se realizo el ingreso del Calendario!", "E");
+                    if (estado == "modificar") {
+                        Mensaje_General("Disculpenos :(", "No se realizo la modificación del Calendario!", "E");
+                    } else {
+                        Mensaje_General("Disculpenos :(", "No se realizo el ingreso del Calendario!", "E");
+                    }
                     break;
 
                 case "Existe":

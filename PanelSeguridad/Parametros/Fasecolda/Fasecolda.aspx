@@ -10,7 +10,6 @@
     <link href="../../css/css_login.css" rel="stylesheet" type="text/css" />
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
     <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />
-    <link href="../../css/custom/charge.css" rel="stylesheet" type="text/css" />
     <link href="../../css/Chosen/chosen.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/jquery.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Chosen/chosen.jquery.js" type="text/javascript"></script>
@@ -18,9 +17,18 @@
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
     <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
     <div id="Container_title_Form">
+        <div id="Dialog_Control" style="width: 100%; text-align: center;">
+            <div class="cssload-container" style="margin-top: 25%;">
+                <div class="cssload-whirlpool"></div>
+                <div>
+                    <img id="Sasif" class="Logo_3" src="../../images/SASIF_NEW_WHITE.png" alt="SASIF S.A.S." />
+                </div>
+            </div>
+        </div>
         <table id="Tabla_Title_form">
             <tr>
                 <td id="Title_form"></td>
@@ -79,7 +87,7 @@
                 <td>
                     <img alt="error" id="DE" src="../../images/error_2.png" />
                     <img alt="success" id="SE" src="../../images/success.png" />
-                    <img alt="Warning" id="WE" src="../../images/alert.png" />
+                    <img alt="Warning" id="WA" src="../../images/alert.png" />
                 </td>
             </tr>
             <tr>
@@ -414,18 +422,5 @@
         <div style="width: 100%; text-align: center; margin-top: 25px;">
             <input id="Btnguardar" type="button" value="Guardar" onclick="BtnCrear();" />
         </div>
-    </div>
-    <div id="Dialog_Charge">
-        <div class="cssload-circle">
-            <div class="cssload-up">
-                <div class="cssload-innera">
-                </div>
-            </div>
-            <div class="cssload-down">
-                <div class="cssload-innerb">
-                </div>
-            </div>
-        </div>
-        <h5 style="text-align: center;">Generando información espere un momento...</h5>
     </div>
 </asp:Content>

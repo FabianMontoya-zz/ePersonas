@@ -137,7 +137,11 @@ option
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 .ui-accordion .ui-accordion-content
 {
-    background: silver;
+    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+    border: solid 1px #921919;
     padding: 10px 16px;
     border-radius: 0px 0px 7px 7px;
     border-color: gray;
@@ -153,24 +157,40 @@ option
     border-color: #79b7e7;
     border-width: 1px;
     font: 14px/20px CenturyGothic,sans-serif;
-    color: #2E6E9E;
+    color: #FFFFFF;
     font-weight: bold;
     border-style: outset;
 }
 
 .ui-accordion .ui-accordion-header-active
 {
-    color: #00163E;
+    border: solid 1px #6d0101;
+    background: -webkit-linear-gradient(#ccc, #e4e4e4); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#ccc, #e4e4e4); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#ccc, #e4e4e4); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#ccc, #e4e4e4); /* Standard syntax (must be last)*/
+    font: 14px/20px CenturyGothic,sans-serif;
+    color: #6d0101;
+    font-weight: bold;
+    transition: all 0.8s ease;
 }
 
 .ui-accordion .ui-accordion-header:hover
 {
     border: 1px solid #c5dbec;
-    background: -webkit-linear-gradient(#b70d0d, #631111); /*For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#b70d0d, #631111); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#b70d0d, #631111); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#b70d0d, #631111); /* Standard syntax (must be last)*/
     border-radius: 7px;
+    font-weight: bold;
+    transition: all 0.8s ease;
+}
+
+.ui-accordion .ui-widget
+{
+    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+    border: solid 1px #921919;
+    border-radius: 5px;
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -190,7 +210,6 @@ option
     border-color: White;
 }
 
-
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default
 {
     border: 1px solid #c5dbec;
@@ -203,7 +222,6 @@ option
     color: #ffffff;
     border-color: White;
 }
-
 
 .ui-tabs .ui-tabs-nav li.ui-tabs-active
 {
@@ -229,15 +247,23 @@ option
 /*                                                               DIALOG JQUERY                                                                                  */
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-
-.Dialog_personal
+.Dialog_Control_Sasif
 {
-    background-color: #d8d8d8;
-    border-radius: 10px;
-    border-color: #420101;
-    border-width: 2px;
-    border-style: outset;
+    background: rgba(20,20,20,0.9);
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    border-radius: 5px;
 }
+
+ .ui-datepicker
+        {
+            background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+            background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+            background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+            background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+            border: solid 1px #921919;
+            border-radius: 5px;
+        }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*                                                               TOOL TIP                                                                                     */
@@ -248,7 +274,6 @@ option
     position: relative; /* Esta clase tiene que tener posicion relativa */
     color: #D8D104; /* Color del texto */
 }
-
     /* El tooltip */
     .cssToolTip span
     {
@@ -396,6 +421,39 @@ option
 
     /* El tooltip cuando se muestra */
     .cssToolTip_Form_L:hover span
+    {
+        display: inline; /* Para mostrarlo simplemente usamos display block por ejemplo */
+    }
+
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* Clase que tendra el tooltip */
+.cssToolTip_Form_T
+{
+    position: relative; /* Esta clase tiene que tener posicion relativa */
+    color: #ffffff; /* Color del texto */
+}
+
+    /* El tooltip */
+    .cssToolTip_Form_T span
+    {
+        background: rgba(20,20,20,0.7);
+        border: 2px solid #ffffff;
+        border-radius: 5px;
+        box-shadow: 5px 5px 5px #333;
+        color: #ffffff;
+        display: none; /* El tooltip por defecto estara oculto */
+        font-size: 0.8em;
+        padding: 10px 10px 10px 10px;
+        max-width: 6000px;
+        position: absolute; /* El tooltip se posiciona de forma absoluta para no modificar el aspezto del resto de la pagina */
+        bottom: 1px; /* Posicion apartir de la parte superior del primer elemento padre con posicion relativa */
+        left: 150px; /* Posicion apartir de la parte izquierda del primer elemento padre con posicion relativa */
+        z-index: 1000; /* Poner un z-index alto para que aparezca por encima del resto de elementos */
+    }
+
+    /* El tooltip cuando se muestra */
+    .cssToolTip_Form_T:hover span
     {
         display: inline; /* Para mostrarlo simplemente usamos display block por ejemplo */
     }

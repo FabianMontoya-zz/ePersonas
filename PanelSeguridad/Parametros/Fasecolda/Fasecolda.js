@@ -8,10 +8,8 @@ var Edit_ID;
 
 //Evento load JS
 $(document).ready(function () {
+    Load_Charge_Sasif();
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
-    carga_eventos("Dialog_Charge");
-
-
     $("#ESelect").css("display", "none");
     $("#ImgID").css("display", "none");
     $("#Img3").css("display", "none");
@@ -19,7 +17,7 @@ $(document).ready(function () {
     $("#Img1").css("display", "none");
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
-    $("#WE").css("display", "none");
+    $("#WA").css("display", "none");
 
     $("#TablaConsulta").css("display", "none");
 
@@ -151,6 +149,7 @@ function BtnConsulta() {
     var filtro;
     var ValidateSelect = ValidarDroplist();
     var opcion;
+    OpenControl();
 
     if (ValidateSelect == 1) {
         filtro = "N";
