@@ -338,7 +338,7 @@
     <Content Include="Images\adress_book.png" />
     <Content Include="Images\adress_book_w.png" />
     <Content Include="Images\agenda.png" />
-    <Content Include="Images\agenda_white.png" />
+    <Content Include="Images\agenda_gray.png" />
     <Content Include="Images\alert.png" />
     <Content Include="Images\avatar.png" />
     <Content Include="Images\bank.png" />
@@ -380,6 +380,7 @@
     <Content Include="Images\old\success.png" />
     <Content Include="Images\old\user.png" />
     <Content Include="Images\old\validation.png" />
+    <Content Include="Images\Relations.gif" />
     <Content Include="Images\relations.png" />
     <Content Include="Images\SASIF_NEW.png" />
     <Content Include="Images\SASIF_NEW_WHITE.png" />
