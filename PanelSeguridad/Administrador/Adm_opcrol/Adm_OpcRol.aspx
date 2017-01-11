@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Administrador/Sasif_menu.Master"
+﻿<%@ Page Title="Admon Opcion perfil - SASIF Personas" Language="vb" AutoEventWireup="false" MasterPageFile="~/Administrador/Sasif_menu.Master"
     CodeBehind="Adm_OpcRol.aspx.vb" Inherits="PanelSeguridad.Adm_OpcRol" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -17,8 +17,19 @@
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
     <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
+
+    <div id="Dialog_Control" style="width: 100%; text-align: center;">
+        <div class="cssload-container" style="margin-top: 25%;">
+            <div class="cssload-whirlpool"></div>
+            <div>
+                <img id="Sasif" class="Logo_3" src="../../images/SASIF_NEW_WHITE.png" alt="SASIF S.A.S." />
+            </div>
+        </div>
+    </div>
+
     <div id="Container_title_Form">
         <table id="Tabla_Title_form">
             <tr>
@@ -65,15 +76,32 @@
                     </tr>
                 </table>
                 <div id="TablaDatos_D">
-                    <table id="Tabla_1" style="width: 700px; margin-left: 100px;">
+
+                <table id="T_NIT" style="width: 90%; margin-left: 8%;">
                         <tr>
-                            <td class="Label_Bold" style="width: 150px;">Padre
-                            </td>
-                            <td>
-                                <select id="DDL_ID" class="C_Chosen">
+                            <td id="TD_ID" style="width: 14%;" class="Label_Bold">NIT Empresa</td>
+                            <td id="TD1" style="width: 40%;">
+                                <select style="width: 100%;" id="Select_EmpresaNit" class="C_Chosen">
                                 </select>
                             </td>
-                            <td style="padding-bottom: 25px; width: 300px;">
+                            <td style="width: 60%; padding-bottom: 25px;">
+                                <span class="cssToolTip">
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgNIT"
+                                        src="../../images/error.png" />
+                                    <span class="SpamEG"></span></span>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table id="Tabla_1" style="width: 90%; margin-left: 8%;">
+                        <tr>
+                            <td class="Label_Bold" style="width: 14%;">Padre
+                            </td>
+                            <td style="width: 40%;">
+                                <select style="width: 100%;" id="DDL_ID" class="C_Chosen">
+                                </select>
+                            </td>
+                            <td style="padding-bottom: 25px; width: 60%;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgID"
                                         src="../../images/error.png" />
@@ -81,14 +109,14 @@
                             </td>
                         </tr>
                     </table>
-                    <table id="Tabla_2" style="width: 700px; margin-left: 100px;">
+                    <table id="Tabla_2" style="width: 90%; margin-left: 8%;">
                         <tr>
-                            <td class="Label_Bold" style="width: 150px;">Consecutivo
+                            <td class="Label_Bold" style="width: 14%;">Consecutivo
                             </td>
-                            <td id="TD_Tconsecutivo" style="width: 100px;">
+                            <td id="TD_Tconsecutivo" style="width: 15%;">
                                 <span class="cssToolTip_Form">
                                     <input type="text" id="TxtConsecutivo" maxlength="18" title="Consecutivo" class="Numeric"
-                                        style="width: 70px;" />
+                                        style="width: 100%;" />
                                     <span class="Spam_AN"></span></span>
                             </td>
                             <td style="padding-bottom: 25px;">
@@ -99,15 +127,15 @@
                             </td>
                         </tr>
                     </table>
-                    <table id="Tabla_3" style="width: 700px; margin-left: 100px;">
+                    <table id="Tabla_3" style="width: 90%; margin-left: 8%;">
                         <tr>
-                            <td class="Label_Bold" style="width: 150px;">SubRol o Rol
+                            <td class="Label_Bold" style="width: 14%;">SubRol o Rol
                             </td>
-                            <td>
+                            <td style="width: 40%;">
                                 <select id="DDLSubRol_Rol" class="C_Chosen">
                                 </select>
                             </td>
-                            <td style="padding-bottom: 25px; width: 300px;">
+                            <td style="padding-bottom: 25px; width: 60%;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img3"
                                         src="../../images/error.png" />
@@ -115,18 +143,18 @@
                             </td>
                         </tr>
                     </table>
-                    <table id="Tabla_4" style="width: 700px; margin-left: 100px;">
+                    <table id="Tabla_4" style="width: 90%; margin-left: 8%;">
                         <tr>
-                            <td class="Label_Bold" style="width: 150px;">Tipo (Carpeta o Link)
+                            <td class="Label_Bold" style="width: 14%;">Tipo (Carpeta o Link)
                             </td>
-                            <td id="TD_Ttipo">
+                            <td id="TD_Ttipo" style="width: 40%;">
                                 <select id="DDLTipo" class="C_Chosen">
                                     <option value="-1">Seleccione...</option>
-                                    <option value="1">Carpeta</option>
-                                    <option value="2">Link</option>
+                                    <option value="1"> 1 - Carpeta</option>
+                                    <option value="2"> 2 - Link</option>
                                 </select>
                             </td>
-                            <td style="padding-bottom: 25px; width: 400px;">
+                            <td style="padding-bottom: 25px; width: 60%;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img2"
                                         src="../../images/error.png" />
@@ -134,15 +162,15 @@
                             </td>
                         </tr>
                     </table>
-                    <table id="Tabla_5" style="width: 700px; margin-left: 100px;">
+                    <table id="Tabla_5" style="width: 90%; margin-left: 8%;">
                         <tr>
-                            <td class="Label_Bold" style="width: 150px;">Links disponibles
+                            <td class="Label_Bold" style="width: 14%;">Links disponibles
                             </td>
-                            <td>
+                            <td style="width: 40%;">
                                 <select id="DDLLink_ID" class="C_Chosen">
                                 </select>
                             </td>
-                            <td style="padding-bottom: 25px; width: 300px;">
+                            <td style="padding-bottom: 25px; width: 60%;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img5"
                                         src="../../images/error.png" />
@@ -150,7 +178,7 @@
                             </td>
                         </tr>
                     </table>
-                    <table id="Tabla_6" style="width: 100%;">
+                    <table id="Tabla_6" style="width: 90%;">
                         <tr>
                             <td align="center">&nbsp;
                             </td>
@@ -175,6 +203,7 @@
                 <td>
                     <img alt="error" id="DE" src="../../images/error_2.png" />
                     <img alt="success" id="SE" src="../../images/success.png" />
+                    <img alt="Warning" id="WA" src="../../images/alert.png" />
                 </td>
             </tr>
             <tr>
@@ -189,7 +218,7 @@
             <tr>
                 <td>
                     <p class="Label_Bold" id="P1">
-                        Desea eliminar el siguiente registro?
+                        Pulse Confirmar para eliminar el Registro seleccionado.
                     </p>
                 </td>
                 <td>
@@ -203,5 +232,5 @@
             </tr>
         </table>
     </div>
-  
+
 </asp:Content>

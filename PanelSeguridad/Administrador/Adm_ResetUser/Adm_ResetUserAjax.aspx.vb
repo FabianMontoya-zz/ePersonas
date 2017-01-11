@@ -1,4 +1,6 @@
-﻿Public Class Adm_ResetUserAjax
+﻿Imports Newtonsoft.Json
+
+Public Class Adm_ResetUserAjax
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -11,6 +13,9 @@
 
                 Case "reset"
                     ResetUser()
+
+                Case "Cliente"
+                    CargarCliente()
 
             End Select
 
@@ -25,11 +30,12 @@
         Dim SQL_Reset As New LoginSQLClass
         Dim vl_s_IDxiste, result As String
 
+        objReset.Nit_ID = Request.Form("NIT")
         objReset.Name = Request.Form("ID")
         objReset.Estado = Request.Form("estado")
 
         'validamos si la llave existe
-        vl_s_IDxiste = Consulta_Existe(UCase(objReset.Name))
+        vl_s_IDxiste = SQL_Reset.ConsultarExiste(objReset)
 
         If vl_s_IDxiste = 1 Then
 
@@ -44,23 +50,26 @@
 
     End Sub
 
-#Region "FUNCIONES"
+#Region "DROP LIST"
 
     ''' <summary>
-    ''' funcion que valida si el id esta en la BD
+    ''' funcion que carga el objeto DDL consulta
     ''' </summary>
-    ''' <param name="vp_S_exist"></param>
-    ''' <returns></returns>
     ''' <remarks></remarks>
-    Protected Function Consulta_Existe(ByVal vp_S_exist As String)
+    Protected Sub CargarCliente()
 
-        Dim SQL_General As New GeneralSQLClass
-        Dim result As String
+        Dim SQL As New ClienteSQLClass
+        Dim ObjListDroplist As New List(Of Droplist_Class)
+        Dim vl_S_Tabla As String = Request.Form("tabla")
 
-        result = SQL_General.ReadExist("USUARIOS", vp_S_exist, "U_Usuario_ID", "", "1")
-        Return result
+        ObjListDroplist = SQL.Charge_DropListCliente(vl_S_Tabla)
+        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
 
-    End Function
+    End Sub
+
+#End Region
+
+#Region "FUNCIONES"
 
 #End Region
 

@@ -1,14 +1,16 @@
 ﻿/*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_CargaBusqueda(State) {
+    OpenControl();
     $.ajax({
         url: "Adm_RolesAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'ROLES'
         },
-       //Transaccion Ajax en proceso
+        //Transaccion Ajax en proceso
         success: function (result) {
             if (result == "") {
                 ArrayCombo = [];
@@ -16,6 +18,33 @@ function transacionAjax_CargaBusqueda(State) {
             else {
                 ArrayCombo = JSON.parse(result);
                 charge_CatalogList(ArrayCombo, "DDLColumns", 1);
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+/*-------------------- Carga combo NIT ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_EmpresaNit(State) {
+    $.ajax({
+        url: "Adm_RolesAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'CLIENTE'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                ArrayEmpresaNit = [];
+            }
+            else {
+                ArrayEmpresaNit = JSON.parse(result);
+                charge_CatalogList(ArrayEmpresaNit, "Select_EmpresaNit", "Generico");
             }
         },
         error: function () {
@@ -40,7 +69,8 @@ function transacionAjax_Rol(State, filtro, opcion) {
         url: "Adm_RolesAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "filtro": filtro,
             "opcion": opcion,
             "contenido": contenido
@@ -67,58 +97,50 @@ function transacionAjax_Rol_create(State) {
 
     var ID;
     var param;
+    var NIT;
 
     if (State == "modificar") {
         ID = editID;
+        NIT = editNIT;
     } else {
         ID = $("#Txt_ID").val();
+        NIT = $("#Select_EmpresaNit").val();
     }
 
-    
+
     $.ajax({
         url: "Adm_RolesAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
+            "NIT": NIT,
             "ID": ID,
             "descripcion": $("#TxtDescription").val(),
-            "sigla": $("#TxtSigla").val()
+            "sigla": $("#TxtSigla").val(),
+            "user": User.toUpperCase()
         },
         //mostrar resultados de la creacion del rol
         success: function (result) {
             switch (result) {
 
                 case "Error":
-                    $("#dialog").dialog("option", "title", "Disculpenos :(");
-                    $("#Mensaje_alert").text("No se realizo El ingreso del perfil!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "block");
-                    $("#SE").css("display", "none");
+                    Mensaje_General("Disculpenos :(", "Ocurrió un error y no se realizó el Ingreso del Nuevo Perfil.", "W");
                     break;
 
                 case "Existe":
-                    $("#dialog").dialog("option", "title", "Ya Existe");
-                    $("#Mensaje_alert").text("El codigo ingresado ya existe en la base de datos!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "block");
-                    $("#SE").css("display", "none");
+                    Mensaje_General("Perfil Existente", "El perfil que desea ingresar ya existe en el sistema, favor revisar.", "E");
+                    $("#ImgNIT").css("display", "inline-table");
+                    $("#ImgID").css("display", "inline-table");
                     break;
 
                 case "Exito":
                     if (estado == "modificar") {
-                        $("#dialog").dialog("option", "title", "Exito");
-                        $("#Mensaje_alert").text("El perfil fue modificado exitosamente! ");
-                        $("#dialog").dialog("open");
-                        $("#DE").css("display", "none");
-                        $("#SE").css("display", "block");
-                        Clear();
+                        Mensaje_General("¡Exito!", "El perfil " + ID + " se ha modificado exitosamente.", "S");
+                        HabilitarPanel('modificar');
                     }
                     else {
-                        $("#dialog").dialog("option", "title", "Exito");
-                        $("#Mensaje_alert").text("El perfil fue creado exitosamente! ");
-                        $("#dialog").dialog("open");
-                        $("#DE").css("display", "none");
-                        $("#SE").css("display", "block");
+                        Mensaje_General("¡Exito!", "El perfil " + ID + " se ha registrado exitosamente en el sistema.", "S");
                         Clear();
                     }
                     break;
@@ -134,29 +156,27 @@ function transacionAjax_Rol_create(State) {
 /*------------------------------ eliminar ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax_Rol_delete(State) {
+    ID = editID;
+    NIT = editNIT;
 
     $.ajax({
         url: "Adm_RolesAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
-            "ID": editID
+        data: {
+            "action": State,
+            "NIT": NIT,
+            "ID": ID,
+            "user": User.toUpperCase()
         },
-       //Transaccion Ajax en proceso
+        //Transaccion Ajax en proceso
         success: function (result) {
             if (result == "Error") {
-                $("#dialog").dialog("option", "title", "Disculpenos :(");
-                $("#Mensaje_alert").text("No se realizo la eliminación del perfil!");
-                $("#dialog").dialog("open");
-                $("#DE").css("display", "block");
+                Mensaje_General("Disculpenos :(", "Ocurrió un error y no se actualizó el estado del Perfil.", "W");
             }
             else {
-                $("#dialog_eliminar").dialog("close");
-                $("#dialog").dialog("option", "title", "Exito");
-                $("#Mensaje_alert").text("El perfil fue eliminado exitosamente! ");
-                $("#dialog").dialog("open");
-                $("#DS").css("display", "block");
-                Clear();
+                Mensaje_General("¡Exito!", "El Estado del perfil " + ID + " se ha actualizado correctamente.", "S");
+                HabilitarPanel('eliminar');
             }
         },
         error: function () {

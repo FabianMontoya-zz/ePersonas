@@ -1,18 +1,17 @@
-﻿Public Class Adm_RolesClass
-
+﻿Public Class Adm_Grupo_DocumentosClass
 #Region "campos"
 
     Private _Index As Integer
     Private _Nit_ID As String
-    Private _Rol_ID As String
+    Private _Grp_Documento_ID As Integer
     Private _Descripcion As String
-    Private _Sigla As String
-    Private _Estado As String
+    Private _TipoGrupo As String
 
     Private _UsuarioCreacion As String
     Private _FechaCreacion As String
     Private _UsuarioActualizacion As String
     Private _FechaActualizacion As String
+
 #End Region
 
 #Region "propiedades"
@@ -32,12 +31,12 @@
             Me._Nit_ID = value
         End Set
     End Property
-    Public Property Rol_ID() As String
+    Public Property Grp_Documento_ID() As Integer
         Get
-            Return Me._Rol_ID
+            Return Me._Grp_Documento_ID
         End Get
-        Set(ByVal value As String)
-            Me._Rol_ID = value
+        Set(ByVal value As Integer)
+            Me._Grp_Documento_ID = value
         End Set
     End Property
     Public Property Descripcion() As String
@@ -48,20 +47,12 @@
             Me._Descripcion = value
         End Set
     End Property
-    Public Property Sigla() As String
+    Public Property TipoGrupo() As String
         Get
-            Return Me._Sigla
+            Return Me._TipoGrupo
         End Get
         Set(ByVal value As String)
-            Me._Sigla = value
-        End Set
-    End Property
-    Public Property Estado() As String
-        Get
-            Return Me._Estado
-        End Get
-        Set(ByVal value As String)
-            Me._Estado = value
+            Me._TipoGrupo = value
         End Set
     End Property
     '------
@@ -98,5 +89,4 @@
         End Set
     End Property
 #End Region
-
 End Class

@@ -16,6 +16,7 @@
     <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
     <div id="Container_title_Form">
@@ -30,39 +31,56 @@
         </table>
     </div>
     <div id="marco_RC">
+
         <table id="TablaContraseña">
             <tr>
-                <td class="Label_Bold">Digite Usuario
-                </td>
+                <td id="TD_ID" style="width: 100%;" class="Label_Bold" colspan="2">NIT Empresa</td>
             </tr>
             <tr>
-                <td>
-                    <span class="cssToolTip_Form">
-                        <input type="text" id="Txt_ID" maxlength="10" />
-                        <span class="Spam_AST"></span></span>
+                <td id="TD_TID" style="width: 40%;">
+                    <select style="width: 100%;" id="Select_EmpresaNit" class="C_Chosen">
+                    </select>
                 </td>
-                <td style="padding-bottom: 25px; width: 50px;">
+                <td style="width: 2%; padding-bottom: 25px;">
                     <span class="cssToolTip">
-                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgID"
+                        <img alt="error" title="" style="padding-left: 0.5em; height: 21px; width: 21px;" id="ImgNIT"
                             src="../../images/error.png" />
                         <span class="SpamEG"></span></span>
                 </td>
             </tr>
             <tr>
-                <td class="Label_Bold">Estado
+                <td style="width: 100%;" class="Label_Bold" colspan="2">Digite Usuario
                 </td>
             </tr>
             <tr>
-                <td>
+                <td style="width: 40%">
+                    <span class="cssToolTip_Form">
+                        <input style="width: 100%; padding-left: 1px;" type="text" id="Txt_ID" maxlength="10" />
+                        <span class="Spam_AST"></span></span>
+                </td>
+                <td style="padding-bottom: 25px; width: 2%">
+                    <span class="cssToolTip">
+                        <img alt="error" title="" style="padding-left: 0.5em; height: 21px; width: 21px;" id="ImgID"
+                            src="../../images/error.png" />
+                        <span class="SpamEG"></span></span>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 100%;" class="Label_Bold" colspan="2">Estado
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 40%">
                     <select id="DDLTipo" class="C_Chosen">
                         <option value="-1">Seleccione...</option>
-                        <option value="1">Habilitado</option>
-                        <option value="2">Deshabilitado</option>
+                        <option value="0">Activo</option>
+                        <option value="1">Inactivo / Deshabilitado</option>
+                        <option value="2">Eliminado</option>
                     </select>
                 </td>
-                <td style="padding-bottom: 25px; width: 65px;">
+                <td style="padding-bottom: 25px; width: 2%;">
                     <span class="cssToolTip">
-                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img2"
+                        <img alt="error" title="" style="padding-left: 0.5em; height: 21px; width: 21px;" id="ImgEstado"
                             src="../../images/error.png" />
                         <span class="SpamEG"></span></span>
                 </td>
@@ -72,29 +90,40 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="4" align="center" id="TD_Button">
+                <td colspan="2" align="center" id="TD_Button">
                     <input id="Btnguardar" type="button" value="Guardar" onclick="BtnCrear();" />
                 </td>
             </tr>
         </table>
     </div>
+
     <div id="dialog" title="Basic dialog">
-        <table>
+        <table style="width: 100%; text-align: center;">
             <tr>
-                <td>
+                <td class="Label_Bold">
                     <p id="Mensaje_alert">
                     </p>
                 </td>
                 <td>
                     <img alt="error" id="DE" src="../../images/error_2.png" />
                     <img alt="success" id="SE" src="../../images/success.png" />
+                    <img alt="Warning" id="WA" src="../../images/alert.png" />
                 </td>
             </tr>
             <tr>
-                <td align="center">
-                    <input id="BtnExitD" type="button" value="Salir" style="width: 40%;" onclick="x();" />
+                <td colspan="2" align="center">
+                    <input id="BtnExitD" type="button" value="Salir" style="width: 40%;" onclick="javascript: x();" />
                 </td>
             </tr>
         </table>
+    </div>
+
+    <div id="Dialog_Control" style="width: 100%; text-align: center;">
+        <div class="cssload-container" style="margin-top: 25%;">
+            <div class="cssload-whirlpool"></div>
+            <div>
+                <img id="Sasif" class="Logo_3" src="../../images/SASIF_NEW_WHITE.png" alt="SASIF S.A.S." />
+            </div>
+        </div>
     </div>
 </asp:Content>

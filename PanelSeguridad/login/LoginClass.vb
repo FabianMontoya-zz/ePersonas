@@ -2,12 +2,21 @@
 Public Class LoginClass
 
 #Region "campos"
+    Private _Nit_ID As String
     Private _Name As String
     Private _Password As String
     Private _Estado As String
 #End Region
 
 #Region "propiedades"
+    Public Property Nit_ID() As String
+        Get
+            Return Me._Nit_ID
+        End Get
+        Set(ByVal value As String)
+            Me._Nit_ID = value
+        End Set
+    End Property
     Public Property Name() As String
         Get
             Return Me._Name

@@ -43,8 +43,10 @@ Public Class LoginSQLClass
         Dim sql As New StringBuilder
         sql.Append(" UPDATE Usuarios SET " & _
                    " U_password = '" & pl_obj_User.Password & "'," & _
-                   " U_Estado = '" & pl_obj_User.Estado & "' " & _
-                   " WHERE  U_Usuario_ID = '" & UCase(pl_obj_User.Name) & "'")
+                   " U_Estado = '" & pl_obj_User.Estado & "', " & _
+                   " U_Intentos_Fallidos = '0' " & _
+                   " WHERE  U_Nit_ID = '" & pl_obj_User.Nit_ID & "'" & _
+                   " AND  U_Usuario_ID = '" & UCase(pl_obj_User.Name) & "'")
 
         StrQuery = sql.ToString
 
@@ -69,12 +71,40 @@ Public Class LoginSQLClass
         Dim Conexion As String = conex.typeConexion("1")
 
         Dim sql As New StringBuilder
-        sql.Append("SELECT U_Usuario_ID, U_password, U_Estado FROM USUARIOS")
+        sql.Append("SELECT U_Usuario_ID, U_password, U_Estado FROM USUARIOS") '[ARREGLAR PUES NO SE PUEDE CONSULTAR TODOS LOS USUARIOS Y LUEGO REVISAR]
+        'sql.Append("SELECT U_Nit_ID, U_Usuario_ID, U_password, U_Estado FROM USUARIOS")
         StrQuery = sql.ToString
 
         ObjListLogin = ListLogin(StrQuery, Conexion)
 
         Return ObjListLogin
+
+    End Function
+
+    ''' <summary>
+    ''' funcion query para la consulta tabla Usuarios para ingreso a la aplicacion
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function ConsultarExiste(ByVal vp_S_StrQuery As LoginClass)
+
+        Dim StrQuery As String = ""
+        Dim Result As String = ""
+        Dim conex As New Conector
+
+        Dim Conexion As String = conex.typeConexion("1")
+
+        Dim sql As New StringBuilder
+        sql.AppendLine("SELECT COUNT(1) FROM USUARIOS " & _
+                       " WHERE U_Nit_ID = '" & vp_S_StrQuery.Nit_ID & "' " & _
+                       " AND U_Usuario_ID = '" & vp_S_StrQuery.Name & "'")
+        StrQuery = sql.ToString
+
+        StrQuery = sql.ToString
+
+        Result = conex.IDis(StrQuery, "1")
+
+        Return Result
 
     End Function
 

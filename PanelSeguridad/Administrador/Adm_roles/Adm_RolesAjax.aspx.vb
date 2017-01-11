@@ -14,6 +14,9 @@ Public Class Adm_RolesAjax
                 Case "cargar_droplist_busqueda"
                     CargarDroplist()
 
+                Case "Cliente"
+                    CargarCliente()
+
                 Case "consulta"
                     Consulta_Roles()
 
@@ -59,21 +62,26 @@ Public Class Adm_RolesAjax
 
         Dim objRol As New Adm_RolesClass
         Dim SQL_Rol As New Adm_RolesSQLClass
-        
+
 
         Dim ObjListRol As New List(Of Adm_RolesClass)
         Dim result As String
         Dim vl_s_IDxiste As String
 
         objRol.Rol_ID = Request.Form("ID")
+        objRol.Nit_ID = Request.Form("NIT")
 
         'validamos si la llave existe
-        vl_s_IDxiste = Consulta_Repetido(objRol.Rol_ID)
+        vl_s_IDxiste = SQL_Rol.Consulta_Repetido(objRol)
 
         If vl_s_IDxiste = 0 Then
 
             objRol.Descripcion = Request.Form("descripcion")
             objRol.Sigla = Request.Form("sigla")
+            objRol.UsuarioCreacion = Request.Form("user")
+            objRol.FechaCreacion = Date.Now
+            objRol.UsuarioActualizacion = Request.Form("user")
+            objRol.FechaActualizacion = Date.Now
 
             ObjListRol.Add(objRol)
 
@@ -116,6 +124,9 @@ Public Class Adm_RolesAjax
         Dim result As String
 
         objRol.Rol_ID = Request.Form("ID")
+        objRol.Nit_ID = Request.Form("NIT")
+        objRol.UsuarioActualizacion = Request.Form("user")
+        objRol.FechaActualizacion = Date.Now
 
         ObjListRol.Add(objRol)
 
@@ -134,9 +145,12 @@ Public Class Adm_RolesAjax
         Dim ObjListRol As New List(Of Adm_RolesClass)
         Dim result As String
 
+        objRol.Nit_ID = Request.Form("NIT")
         objRol.Rol_ID = Request.Form("ID")
         objRol.Descripcion = Request.Form("descripcion")
         objRol.Sigla = Request.Form("sigla")
+        objRol.UsuarioActualizacion = Request.Form("user")
+        objRol.FechaActualizacion = Date.Now
 
         ObjListRol.Add(objRol)
 
@@ -166,25 +180,25 @@ Public Class Adm_RolesAjax
 
     End Sub
 
+    ''' <summary>
+    ''' funcion que carga el objeto DDL consulta
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarCliente()
+
+        Dim SQL As New ClienteSQLClass
+        Dim ObjListDroplist As New List(Of Droplist_Class)
+        Dim vl_S_Tabla As String = Request.Form("tabla")
+
+        ObjListDroplist = SQL.Charge_DropListCliente(vl_S_Tabla)
+        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
+
+    End Sub
+
 #End Region
 
 #Region "FUNCIONES"
 
-    ''' <summary>
-    ''' funcion que valida si el id esta en la BD
-    ''' </summary>
-    ''' <param name="vp_S_ID"></param>
-    ''' <returns></returns>
-    ''' <remarks></remarks>
-    Protected Function Consulta_Repetido(ByVal vp_S_ID As String)
-
-        Dim SQL_General As New GeneralSQLClass
-        Dim result As String
-
-        result = SQL_General.ReadExist("ROLES", vp_S_ID, "R_Rol_ID", "", "1")
-        Return result
-
-    End Function
 
 #End Region
 

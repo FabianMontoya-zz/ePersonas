@@ -26,6 +26,7 @@
         Dim vl_B_passwordCorrecto As Boolean
         Dim vl_B_cambioPassword As Boolean
         Dim vl_B_Estado As Boolean
+        Dim vl_B_ELiminado As Boolean
         Dim vl_I_resultado As Integer
 
         Dim Encrip As New EncriptarClass
@@ -52,8 +53,12 @@
                     Exit For
                 End If
                 'verificamos el estado del usuario
-                If row.Estado = "2" Then
+                If row.Estado = "1" Then
                     vl_B_Estado = True
+                    Exit For
+                End If
+                If row.Estado = "2" Then
+                    vl_B_ELiminado = True
                     Exit For
                 End If
                 'verificamos que el password sea correcto
@@ -79,6 +84,10 @@
             End If
             If vl_B_Estado = True Then
                 vl_I_resultado = 4 'usuario deshabilitado
+                GoTo salto
+            End If
+            If vl_B_ELiminado = True Then
+                vl_I_resultado = 5 'usuario eliminado
                 GoTo salto
             End If
             If vl_B_passwordCorrecto = False Then

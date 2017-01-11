@@ -5,7 +5,6 @@
     <script src="../Scripts/jquery-1.4.1.js" type="text/javascript"></script>
     <script src="Login.js" type="text/javascript"></script>
     <script src="../SasifMaster.js" type="text/javascript"></script>
-    <link href="../css/css_login.css" rel="stylesheet" type="text/css" />
     <link href="../css/Dialog/jquery-ui.css" rel="stylesheet" type="text/css" />
     <script src="../SasifMaster_Cosult.js" type="text/javascript"></script>
     <link href="../../css/Chosen/chosen.css" rel="stylesheet" type="text/css" />
@@ -13,6 +12,7 @@
     <script src="../../Scripts/Chosen/chosen.jquery.js" type="text/javascript"></script>
     <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
+    <link href="../css/css_login.css" rel="stylesheet" type="text/css" />
     <link href="../css/css_controles.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
         html, body
@@ -72,19 +72,21 @@
         </table>
     </div>
     <div id="dialog" title="Basic dialog">
-        <table>
+        <table style="width: 100%; text-align: center;">
             <tr>
-                <td>
+                <td class="Label_Bold">
                     <p id="Mensaje_alert">
                     </p>
                 </td>
                 <td>
-                    <img alt="error" id="DE" src="../images/alert.png" />
+                    <img alt="error" id="DE" src="../../images/error_2.png" />
+                    <img alt="success" id="SE" src="../../images/success.png" />
+                    <img alt="Warning" id="WA" src="../../images/alert.png" />
                 </td>
             </tr>
             <tr>
-                <td align="center">
-                    <input id="BtnExitD" type="button" value="Salir" style="width: 40%;" onclick="x();" />
+                <td colspan="2" align="center">
+                    <input id="BtnExitD" type="button" value="Salir" style="width: 40%;" onclick="javascript: x();" />
                 </td>
             </tr>
         </table>

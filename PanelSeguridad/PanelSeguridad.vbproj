@@ -346,8 +346,12 @@
     <Content Include="Images\C_GREEN.png" />
     <Content Include="Images\C_RED.png" />
     <Content Include="Images\C_YELLOW.png" />
+    <Content Include="Images\Delete.png" />
+    <Content Include="Images\DeleteOver.png" />
     <Content Include="Images\documentos.png" />
     <Content Include="Images\documentos_w.png" />
+    <Content Include="Images\Editar1.png" />
+    <Content Include="Images\EditarOver.png" />
     <Content Include="Images\error.png" />
     <Content Include="Images\error_2.png" />
     <Content Include="Images\exit.png" />
@@ -645,6 +649,10 @@
     </Compile>
     <Compile Include="Administrador\Adm_C_AccesoPrede\C_AccesoPreClass.vb" />
     <Compile Include="Administrador\Adm_C_AccesoPrede\C_AccesoPreSQLClass.vb" />
+    <Compile Include="Administrador\Adm_Grupo_Documentos\Adm_Grupo_DocumentosClass.vb" />
+    <Compile Include="Administrador\Adm_Grupo_Documentos\Adm_Grupo_DocumentosSQLClass.vb" />
+    <Compile Include="Administrador\Adm_Grupo_Reportes\Adm_Grupo_ReportesClass.vb" />
+    <Compile Include="Administrador\Adm_Grupo_Reportes\Adm_Grupo_ReportesSQLClass.vb" />
     <Compile Include="Administrador\Adm_InvPuerta\InvPuerta.aspx.designer.vb">
       <DependentUpon>InvPuerta.aspx</DependentUpon>
     </Compile>
@@ -693,6 +701,8 @@
     </Compile>
     <Compile Include="Administrador\Adm_opcrol\Adm_OpcRolClass.vb" />
     <Compile Include="Administrador\Adm_opcrol\Adm_OpcRolSQLClass.vb" />
+    <Compile Include="Administrador\Adm_Politicas_Seguridad\Adm_Politicas_SeguridadClass.vb" />
+    <Compile Include="Administrador\Adm_Politicas_Seguridad\Adm_Politicas_SeguridadSQLClass.vb" />
     <Compile Include="Administrador\Adm_PuertaAcceso\PuertaAcceso.aspx.designer.vb">
       <DependentUpon>PuertaAcceso.aspx</DependentUpon>
     </Compile>

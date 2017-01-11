@@ -124,37 +124,13 @@ Public Class Adm_OpcRolSQLClass
         Dim sql As New StringBuilder
 
         sql.Append(" SELECT T_IndexColumna As ID, T_Traductor As descripcion FROM TC_TABLAS " & _
-                   " WHERE T_Tabla = '" & vp_S_Table & "' AND T_Param = '1' ")
+                   " WHERE T_Tabla = '" & vp_S_Table & "' AND T_Param = '1' ORDER BY T_Traductor ASC")
         StrQuery = sql.ToString
 
         ObjListDroplist = SQLGeneral.listdrop(StrQuery, Conexion)
 
         Return ObjListDroplist
 
-
-    End Function
-
-    ''' <summary>
-    ''' funcion que consulta el rol para el id de la tabla
-    ''' </summary>
-    ''' <returns></returns>
-    ''' <remarks></remarks>
-    Public Function ReadCharge_DL_Rol()
-
-        Dim ObjListDroplist As New List(Of Droplist_Class)
-        Dim StrQuery As String = ""
-        Dim conex As New Conector
-        Dim Conexion As String = conex.typeConexion("1")
-        Dim SQLGeneral As New GeneralSQLClass
-
-        Dim sql As New StringBuilder
-
-        sql.Append(" SELECT R_Rol_ID AS ID, R_Descripcion AS descripcion FROM ROLES ")
-        StrQuery = sql.ToString
-
-        ObjListDroplist = SQLGeneral.listdrop(StrQuery, Conexion)
-
-        Return ObjListDroplist
 
     End Function
 

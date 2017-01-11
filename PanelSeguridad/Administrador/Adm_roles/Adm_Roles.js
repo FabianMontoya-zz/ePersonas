@@ -1,26 +1,45 @@
 ﻿/*--------------- region de variables globales --------------------*/
 var ArrayRoles = [];
+var ArrayEmpresaNit = [];
 var ArrayCombo = [];
 var estado;
 var editID;
+var editNIT;
 /*--------------- region de variables globales --------------------*/
 
 //Evento load JS
 $(document).ready(function () {
+
+    $("#Marco_trabajo_Form").css("height", "490px");
+    $("#container_Trol").css("height", "380px");
+
+    /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
+    Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
+    Ocultar_Errores();
+    Ocultar_Tablas();
+    /*==================FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN==============*/
+
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
+    transacionAjax_EmpresaNit('Cliente'); //Carga Droplist de Empresa NIT
+
+    Change_Select_Nit();
+
+});
+
+//Función que oculta todas las IMG de los errores en pantalla
+function Ocultar_Errores() {
+    ResetError();
     $("#ESelect").css("display", "none");
-    $("#Img1").css("display", "none");
-    $("#Img2").css("display", "none");
     $("#DE").css("display", "none");
     $("#DS").css("display", "none");
-    $("#ImgID").css("display", "none");
+    /*Se ocultan en la SASIF Master*/
+}
 
+//funcion para las ventanas emergentes
+function Ventanas_Emergentes() {
 
-    $("#TablaDatos").css("display", "none");
-    $("#TablaConsulta").css("display", "none");
+    Load_Charge_Sasif(); //Carga de "SasifMaster.js" el Control de Carga
 
-
-    //funcion para las ventanas emergentes
     $("#dialog").dialog({
         autoOpen: false,
         dialogClass: "Dialog_Sasif",
@@ -32,9 +51,13 @@ $(document).ready(function () {
         dialogClass: "Dialog_Sasif",
         modal: true
     });
+}
 
-
-});
+//Función que oculta las tablas
+function Ocultar_Tablas() {
+    $("#TablaDatos").css("display", "none");
+    $("#TablaConsulta").css("display", "none");
+}
 
 //salida del formulario
 function btnSalir() {
@@ -91,6 +114,8 @@ function BtnConsulta() {
     var ValidateSelect = ValidarDroplist();
     var opcion;
 
+    OpenControl(); //Abrimos el load de espera con el logo
+
     if (ValidateSelect == 1) {
         filtro = "N";
         opcion = "ALL";
@@ -122,32 +147,42 @@ function BtnCrear() {
 
 //elimina de la BD
 function BtnElimina() {
+    $("#dialog_eliminar").dialog("close");
     transacionAjax_Rol_delete("elimina");
 }
 
 //validamos campos para la creacion del rol
 function validarCamposCrear() {
 
+    var NIT = $("#Select_EmpresaNit").val(); //ImgNIT
     var valID = $("#Txt_ID").val();
     var sigla = $("#TxtSigla").val();
     var descrip = $("#TxtDescription").val();
     var validar = 0;
 
-    if (sigla == "" || descrip == "" || valID == "") {
+    if (NIT == "-1" || NIT == null || sigla == "" || descrip == "" || valID == "") {
         validar = 1;
+        /* -- Muestra de errores según dato faltante -- */
+        if (NIT == "-1" || NIT == null) {
+            $("#ImgNIT").css("display", "inline-table");
+        } else {
+            $("#ImgNIT").css("display", "none");
+        }
+        //
         if (valID == "") {
             $("#ImgID").css("display", "inline-table");
         }
         else {
             $("#ImgID").css("display", "none");
         }
-
+        //
         if (sigla == "") {
             $("#Img2").css("display", "inline-table");
         }
         else {
             $("#Img2").css("display", "none");
         }
+        //
         if (descrip == "") {
             $("#Img1").css("display", "inline-table");
         }
@@ -158,9 +193,7 @@ function validarCamposCrear() {
 
     }
     else {
-        $("#Img1").css("display", "none");
-        $("#Img2").css("display", "none");
-        $("#ImgID").css("display", "none");
+        ResetError();
     }
     return validar;
 }
@@ -201,10 +234,11 @@ function Table_rol() {
 
 //grid con el boton eliminar
 function Tabla_eliminar() {
-    var html_TRol = "<table id='TRol' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Codigo</th><th>Descripción</th><th>Sigla</th><th>Estado</th></tr></thead><tbody>";
+    var html_TRol = "<table id='TRol' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>NIT Empresa</th><th>Código</th><th>Descripción</th><th>Sigla</th><th>Estado</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
     for (itemArray in ArrayRoles) {
-
-        html_TRol += "<tr id= 'TRol_" + ArrayRoles[itemArray].Rol_ID + "'><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar('" + ArrayRoles[itemArray].Rol_ID + "')\"></input></td><td>" + ArrayRoles[itemArray].Rol_ID + "</td><td>" + ArrayRoles[itemArray].Descripcion + "</td><td>" + ArrayRoles[itemArray].Sigla + "</td><td> " + ArrayRoles[itemArray].Estado + " </td></tr>";
+        if (ArrayRoles[itemArray].Estado != 2) {
+            html_TRol += "<tr id= 'TRol_" + ArrayRoles[itemArray].Index + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArrayRoles[itemArray].Index + "')\"></img><span>Eliminar Perfil</span></span></td><td>" + ArrayRoles[itemArray].Nit_ID + "</td><td>" + ArrayRoles[itemArray].Rol_ID + "</td><td style='white-space: nowrap;'>" + ArrayRoles[itemArray].Descripcion + "</td><td>" + ArrayRoles[itemArray].Sigla + "</td><td> " + ArrayRoles[itemArray].Estado + " </td><td style='white-space: nowrap;'> " + ArrayRoles[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArrayRoles[itemArray].FechaCreacion + " </td><td style='white-space: nowrap;'> " + ArrayRoles[itemArray].UsuarioActualizacion + " </td><td  style='white-space: nowrap;'> " + ArrayRoles[itemArray].FechaActualizacion + " </td></tr>";
+        }
     }
     html_TRol += "</tbody></table>";
     $("#container_Trol").html("");
@@ -214,19 +248,19 @@ function Tabla_eliminar() {
     });
 
     $("#TRol").dataTable({
-       "bJQueryUI": true, "iDisplayLength": 1000,
+        "bJQueryUI": true, "iDisplayLength": 1000,
         "bDestroy": true
     });
 }
-
 
 //muestra el registro a eliminar
 function Eliminar(index_rol) {
 
     for (itemArray in ArrayRoles) {
-        if (index_rol == ArrayRoles[itemArray].Rol_ID) {
+        if (index_rol == ArrayRoles[itemArray].Index) {
             editID = ArrayRoles[itemArray].Rol_ID;
-            $("#dialog_eliminar").dialog("option", "title", "Eliminar?");
+            editNIT = ArrayRoles[itemArray].Nit_ID;
+            $("#dialog_eliminar").dialog("option", "title", "¿Cambiar Estado a Perfil?");
             $("#dialog_eliminar").dialog("open");
         }
     }
@@ -235,9 +269,9 @@ function Eliminar(index_rol) {
 
 //grid con el boton editar
 function Tabla_modificar() {
-    var html_TRol = "<table id='TRol' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Codigo</th><th>Descripción</th><th>Sigla</th><th>Estado</th></tr></thead><tbody>";
+    var html_TRol = "<table id='TRol' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>NIT Empresa</th><th>Código</th><th>Descripción</th><th>Sigla</th><th>Estado</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
     for (itemArray in ArrayRoles) {
-        html_TRol += "<tr id= 'TRol_" + ArrayRoles[itemArray].Rol_ID + "'><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Editar('" + ArrayRoles[itemArray].Rol_ID + "')\"></input></td><td>" + ArrayRoles[itemArray].Rol_ID + "</td><td>" + ArrayRoles[itemArray].Descripcion + "</td><td>" + ArrayRoles[itemArray].Sigla + "</td><td> " + ArrayRoles[itemArray].Estado + " </td></tr>";
+        html_TRol += "<tr id= 'TRol_" + ArrayRoles[itemArray].Index + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + ArrayRoles[itemArray].Index + "')\"></img><span>Editar Perfil</span></span></td><td>" + ArrayRoles[itemArray].Nit_ID + "</td><td>" + ArrayRoles[itemArray].Rol_ID + "</td><td style='white-space: nowrap;'>" + ArrayRoles[itemArray].Descripcion + "</td><td>" + ArrayRoles[itemArray].Sigla + "</td><td> " + ArrayRoles[itemArray].Estado + " </td><td style='white-space: nowrap;'> " + ArrayRoles[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArrayRoles[itemArray].FechaCreacion + " </td><td style='white-space: nowrap;'> " + ArrayRoles[itemArray].UsuarioActualizacion + " </td><td  style='white-space: nowrap;'> " + ArrayRoles[itemArray].FechaActualizacion + " </td></tr>";
     }
     html_TRol += "</tbody></table>";
     $("#container_Trol").html("");
@@ -245,9 +279,9 @@ function Tabla_modificar() {
 
     $(".Editar").click(function () {
     });
-    
+
     $("#TRol").dataTable({
-       "bJQueryUI": true, "iDisplayLength": 1000,
+        "bJQueryUI": true, "iDisplayLength": 1000,
         "bDestroy": true
     });
 }
@@ -259,12 +293,15 @@ function Editar(index_rol) {
     $("#TablaConsulta").css("display", "none");
 
     for (itemArray in ArrayRoles) {
-        if (index_rol == ArrayRoles[itemArray].Rol_ID) {
+        if (index_rol == ArrayRoles[itemArray].Index) {
+            $("#Select_EmpresaNit").val(ArrayRoles[itemArray].Nit_ID).trigger("chosen:updated");
+            editNIT = ArrayRoles[itemArray].Nit_ID;
+            $("#Select_EmpresaNit").prop('disabled', true).trigger("chosen:updated");
             $("#Txt_ID").val(ArrayRoles[itemArray].Rol_ID);
             $("#Txt_ID").attr("disabled", "disabled");
+            editID = ArrayRoles[itemArray].Rol_ID;
             $("#TxtDescription").val(ArrayRoles[itemArray].Descripcion);
             $("#TxtSigla").val(ArrayRoles[itemArray].Sigla);
-            editID = ArrayRoles[itemArray].Rol_ID;
             $("#Btnguardar").attr("value", "Actualizar");
         }
     }
@@ -272,16 +309,16 @@ function Editar(index_rol) {
 
 //grid sin botones para ver resultado
 function Tabla_consulta() {
-    var html_TRol = "<table id='TRol' border='1'  cellpadding='1' cellspacing='1' style='width: 100%'><thead><tr><th>Codigo</th><th>Descripción</th><th>Sigla</th><th>Estado</th></tr></thead><tbody>";
+    var html_TRol = "<table id='TRol' border='1'  cellpadding='1' cellspacing='1' style='width: 100%'><thead><tr><th>NIT Empresa</th><th>Código</th><th>Descripción</th><th>Sigla</th><th>Estado</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
     for (itemArray in ArrayRoles) {
-        html_TRol += "<tr id= 'TRol_" + ArrayRoles[itemArray].Rol_ID + "'><td>" + ArrayRoles[itemArray].Rol_ID + "</td><td>" + ArrayRoles[itemArray].Descripcion + "</td><td>" + ArrayRoles[itemArray].Sigla + "</td><td> " + ArrayRoles[itemArray].Estado + " </td></tr>";
+        html_TRol += "<tr id= 'TRol_" + ArrayRoles[itemArray].Index + "'><td>" + ArrayRoles[itemArray].Nit_ID + "</td><td>" + ArrayRoles[itemArray].Rol_ID + "</td><td>" + ArrayRoles[itemArray].Descripcion + "</td><td>" + ArrayRoles[itemArray].Sigla + "</td><td> " + ArrayRoles[itemArray].Estado + " </td><td style='white-space: nowrap;'> " + ArrayRoles[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArrayRoles[itemArray].FechaCreacion + " </td><td style='white-space: nowrap;'> " + ArrayRoles[itemArray].UsuarioActualizacion + " </td><td  style='white-space: nowrap;'> " + ArrayRoles[itemArray].FechaActualizacion + " </td></tr>";
     }
     html_TRol += "</tbody></table>";
     $("#container_Trol").html("");
     $("#container_Trol").html(html_TRol);
 
     $("#TRol").dataTable({
-       "bJQueryUI": true, "iDisplayLength": 1000,
+        "bJQueryUI": true, "iDisplayLength": 1000,
         "bDestroy": true
     });
 }
@@ -293,9 +330,27 @@ function x() {
 
 //limpiar campos
 function Clear() {
+    Ocultar_Errores();
+    $("#Select_EmpresaNit").prop('disabled', false); //No se agrega el trigger porque se hace al seleccionar el val
+    $("#Select_EmpresaNit").val("-1").trigger("chosen:updated");
     $("#Txt_ID").val("");
     $("#TxtDescription").val("");
     $("#TxtSigla").val("");
     $("#TxtRead").val("");
     $("#DDLColumns").val("-1");
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                     PROCESOS DE CHANGES EN CONTROLES                                                                                                                                        ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+function Change_Select_Nit() {
+    $("#Select_EmpresaNit").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_EmpresaNit").val() == "-1") {
+            $("#ImgNIT").css("display", "inline-table");
+        } else {
+            $("#ImgNIT").css("display", "none");
+        }
+    });
 }

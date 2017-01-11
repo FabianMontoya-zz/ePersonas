@@ -14,6 +14,9 @@ Public Class Adm_OpcRolAjax
                 Case "cargar_droplist_busqueda"
                     CargarDroplist()
 
+                Case "Cliente"
+                    CargarCliente()
+
                 Case "cargar_Sub_Rol"
                     Cargar_Sub_Rol()
 
@@ -28,7 +31,6 @@ Public Class Adm_OpcRolAjax
 
                 Case "crear"
                     InsertOpcRol()
-
 
                 Case "elimina"
                     EraseOpcRol()
@@ -69,6 +71,7 @@ Public Class Adm_OpcRolAjax
         Dim result As String
         Dim vl_s_IDxiste As String
 
+        objOpcRol.Nit_ID = Request.Form("NIT")
         objOpcRol.OPRol_ID = Request.Form("ID")
         objOpcRol.Consecutivo = Request.Form("consecutivo")
 
@@ -134,6 +137,21 @@ Public Class Adm_OpcRolAjax
     End Sub
 
     ''' <summary>
+    ''' funcion que carga el objeto DDL consulta
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarCliente()
+
+        Dim SQL As New ClienteSQLClass
+        Dim ObjListDroplist As New List(Of Droplist_Class)
+        Dim vl_S_Tabla As String = Request.Form("tabla")
+
+        ObjListDroplist = SQL.Charge_DropListCliente(vl_S_Tabla)
+        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
+
+    End Sub
+
+    ''' <summary>
     ''' funcion que carga el objeto DDL subtipo
     ''' </summary>
     ''' <remarks></remarks>
@@ -153,10 +171,10 @@ Public Class Adm_OpcRolAjax
     ''' <remarks></remarks>
     Protected Sub Carga_Rol()
 
-        Dim SQL_OpcRol As New Adm_OpcRolSQLClass
-        Dim ObjListDroplist As New List(Of Droplist_Class)
+        Dim SQL_Roles As New Adm_RolesSQLClass
+        Dim ObjListDroplist As New List(Of Adm_RolesClass)
 
-        ObjListDroplist = SQL_OpcRol.ReadCharge_DL_Rol()
+        ObjListDroplist = SQL_Roles.MatrixAll_Roles()
         Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
 
     End Sub

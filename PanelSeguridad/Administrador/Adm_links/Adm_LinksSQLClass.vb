@@ -160,7 +160,7 @@ Public Class Adm_LinksSQLClass
         Dim sql As New StringBuilder
 
         sql.Append(" SELECT T_IndexColumna As ID, T_Traductor As descripcion FROM TC_TABLAS " & _
-                   " WHERE T_Tabla = '" & vp_S_Table & "' AND T_Param = '1' ")
+                   " WHERE T_Tabla = '" & vp_S_Table & "' AND T_Param = '1' ORDER BY T_Traductor ASC")
         StrQuery = sql.ToString
 
         ObjListDroplist = SQLGeneral.listdrop(StrQuery, Conexion)

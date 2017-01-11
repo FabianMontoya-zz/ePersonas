@@ -172,6 +172,31 @@ function ResetError() {
     $("#Img10").css("display", "none");
     $("#Img11").css("display", "none");
     $("#Img12").css("display", "none");
+
+    /*Errores Administración Adm_Usuario*/
+    $("#ImgNIT").css("display", "none");
+    $("#ImgID").css("display", "none");
+    $("#ImgName").css("display", "none");
+    $("#Img_TypeDoc").css("display", "none");
+    $("#ImgDoc").css("display", "none");
+
+    $("#ImgRol").css("display", "none");
+    $("#ImgAccessInfo").css("display", "none");
+    $("#ImgPolSeguGrupo").css("display", "none");
+    $("#ImgPolSecurity").css("display", "none");
+    $("#ImgAccesInfoDocument").css("display", "none");
+
+    $("#ImgAccessDocuments").css("display", "none");
+    $("#ImgGroupDocuments").css("display", "none");
+    $("#ImgAccessInfoReports").css("display", "none");
+    $("#ImgAccessReports").css("display", "none");
+    $("#ImgGroupReport").css("display", "none");
+
+    $("#ImgToken").css("display", "none");
+    $("#ImgTypeAccess").css("display", "none");
+    $("#ImgEstadoUser").css("display", "none");
+    
+    /*===FIN ERRORES ADMINSITRACIÓN Adm_Usuario ===*/
 }
 
 //funcion para control de carga
@@ -198,7 +223,7 @@ function Load_Charge_Sasif() {
             effect: 'fade',
             duration: 200
         }
-    });
+});
 
 }
 
@@ -618,7 +643,8 @@ function charge_CatalogList(objCatalog, nameList, selector) {
 
     //recorremos para llenar el combo de
     for (itemArray in objCatalog) {
-        objList[0].options[itemArray] = new Option(objCatalog[itemArray].descripcion, objCatalog[itemArray].ID);
+        objList[0].options[itemArray] = new Option(objCatalog[itemArray].descripcion, objCatalog[itemArray].ID); /*Muestra el Combo solo con [Descripción]*/
+        //objList[0].options[itemArray] = new Option(objCatalog[itemArray].ID + " - " + objCatalog[itemArray].descripcion, objCatalog[itemArray].ID); /*Muestra el Combo en orden [ID - Descripción]*/
     };
 
     //validamos si el combo lleva seleccione y posicionamos en el
@@ -629,8 +655,8 @@ function charge_CatalogList(objCatalog, nameList, selector) {
             break;
 
         case "Generico":
-            $("#" + nameList).append("<option value='-1'>Seleccione...</option>");
-            $("#" + nameList).append("<option value='0'>Genérico</option>");
+            $("#" + nameList).append("<option value='0'> 0 - Genérico</option>");
+            $("#" + nameList).append("<option value='-1'>Seleccione...</option>");            
             $("#" + nameList + " option[value= '-1'] ").attr("selected", true);
             break;
     }
@@ -1240,6 +1266,158 @@ function CargaMonedas(Matrix, Selector, Index_Edit) {
         case "Select_moneda": //Moneda de Paises
             for (Item in Matrix) {
                 $("#" + Selector).append("<option value='" + Matrix[Item].MonedaCod_ID + "'>" + Matrix[Item].MonedaCod_ID + " - " + Matrix[Item].Descripcion + "</option>");
+            }
+            break;
+    }
+
+    $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
+
+    switch (Index_Edit) {
+        case "":
+            $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
+            break;
+
+        case "0":
+            $("#" + Selector + " option[value= '0'] ").attr("selected", true);
+            break;
+
+        default:
+            $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
+            break;
+    }
+
+    $("#" + Selector).trigger("liszt:updated");
+    $('.C_Chosen').trigger('chosen:updated');
+}
+
+//Carga las Políticas de Seguridad
+function CargaPoliticasSeguridad(Matrix, Selector, Index_Edit) {
+
+    $('#' + Selector).empty();
+    var objList = $("[id$='" + Selector + "']");
+
+    switch (Selector) {
+
+        case "Select_PoliticaSeguridad_U": //Combo Políticas en Adm_Usuario
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Index + " - " + Matrix[Item].Descripcion + "</option>");
+            }
+            break;
+    }
+
+    $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
+
+    switch (Index_Edit) {
+        case "":
+            $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
+            break;
+
+        case "0":
+            $("#" + Selector + " option[value= '0'] ").attr("selected", true);
+            break;
+
+        default:
+            $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
+            break;
+    }
+
+    $("#" + Selector).trigger("liszt:updated");
+    $('.C_Chosen').trigger('chosen:updated');
+}
+
+//Carga los Grupos de Reportes
+function CargaGrupoReportes(Matrix, Selector, Index_Edit) {
+
+    $('#' + Selector).empty();
+    var objList = $("[id$='" + Selector + "']");
+
+    switch (Selector) {
+
+        case "Select_GroupReports": //Combo Grupo Reportes en Adm_Usuario
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Nit_ID + " - " + Matrix[Item].Grupo_ID + " - " + Matrix[Item].Descripcion + "</option>");
+            }
+            break;
+    }
+
+    $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
+
+    switch (Index_Edit) {
+        case "":
+            $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
+            break;
+
+        case "0":
+            $("#" + Selector + " option[value= '0'] ").attr("selected", true);
+            break;
+
+        default:
+            $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
+            break;
+    }
+
+    $("#" + Selector).trigger("liszt:updated");
+    $('.C_Chosen').trigger('chosen:updated');
+}
+
+//Carga los Grupos de Documentos
+function CargaGrupoDocumentos(Matrix, Selector, Index_Edit) {
+
+    $('#' + Selector).empty();
+    var objList = $("[id$='" + Selector + "']");
+
+    switch (Selector) {
+
+        case "Select_Grupo_Documentos_U": //Combo Grupo Documentos en Adm_Usuario
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Nit_ID + " - " + Matrix[Item].Grp_Documento_ID + " - " + Matrix[Item].Descripcion + "</option>");
+            }
+            break;
+    }
+
+    $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
+
+    switch (Index_Edit) {
+        case "":
+            $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
+            break;
+
+        case "0":
+            $("#" + Selector + " option[value= '0'] ").attr("selected", true);
+            break;
+
+        default:
+            $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
+            break;
+    }
+
+    $("#" + Selector).trigger("liszt:updated");
+    $('.C_Chosen').trigger('chosen:updated');
+}
+
+//Carga los Grupos de Reportes
+function CargaRoles(Matrix, Selector, Index_Edit) {
+
+    $('#' + Selector).empty();
+    var objList = $("[id$='" + Selector + "']");
+
+    switch (Selector) {
+
+        case "DDLRol": //Combo Roles en Adm_Usuario
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Nit_ID + " - " + Matrix[Item].Rol_ID + " - " + Matrix[Item].Descripcion + "</option>");
+            }
+            break;
+
+        case "DDL_ID": //Combo Padre en Adm_OpcRol
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Nit_ID + " - " + Matrix[Item].Rol_ID + " - " + Matrix[Item].Descripcion + "</option>");
+            }
+            break;
+
+        case "DDLSubRol_Rol": //Combo SubRol o Rol en Adm_OpcRol
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Nit_ID + " - " + Matrix[Item].Rol_ID + " - " + Matrix[Item].Descripcion + "</option>");
             }
             break;
     }

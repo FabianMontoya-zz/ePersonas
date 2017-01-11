@@ -14,6 +14,39 @@ h1, h2, h3, h4, table, tr, td
     color: #b70d0d;
 }
 
+.Title_Bold
+{
+    font: 20px/28px CenturyGothic,sans-serif;
+    font-weight: bold;
+    color: #2C2C2C;
+}
+
+.Label_Bold
+{
+    font: 12px/20px CenturyGothic,sans-serif;
+    font-weight: bold;
+}
+
+
+.topform
+{
+    border: gray solid 2px;
+    border-style: outset;
+    border-radius: 3px;
+    width: 150px;
+
+}
+
+.Dialog_Sasif
+{
+    border-radius: 10px;
+    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+    border: solid 1px #921919;
+}
+
 /*----------------------- FORMULARIO LOGIN ---------------------------*/
 /*ajuste de tamaño en los td*/
 
@@ -59,7 +92,6 @@ h1, h2, h3, h4, table, tr, td
     border: none;
     width: 80%;
 }
-
 
 /*----------------------------------------------------------------------------*/
 /*----------------------- PAG CAMBIO DE CONTRASEÑA ---------------------------*/

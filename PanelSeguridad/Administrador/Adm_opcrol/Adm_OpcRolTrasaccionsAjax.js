@@ -1,6 +1,7 @@
 ﻿/*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_CargaBusqueda(State) {
+    OpenControl();
     $.ajax({
         url: "Adm_OpcRolAjax.aspx",
         type: "POST",
@@ -24,6 +25,32 @@ function transacionAjax_CargaBusqueda(State) {
     });
 }
 
+/*-------------------- Carga combo NIT ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_EmpresaNit(State) {
+    $.ajax({
+        url: "Adm_OpcRolAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'CLIENTE'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                ArrayEmpresaNit = [];
+            }
+            else {
+                ArrayEmpresaNit = JSON.parse(result);
+                charge_CatalogList(ArrayEmpresaNit, "Select_EmpresaNit", "Generico");
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
 
 /*-------------------- carga subrol---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
@@ -42,8 +69,8 @@ function transacionAjax_CargaRol(State) {
             }
             else {
                 ArrayComboSubRol = JSON.parse(result);
-                charge_CatalogList(ArrayComboSubRol, "DDLSubRol_Rol", 1);
-                charge_CatalogList(ArrayComboSubRol, "DDL_ID", 1);
+                CargaRoles(ArrayComboSubRol, "DDLSubRol_Rol", "");
+                CargaRoles(ArrayComboSubRol, "DDL_ID", "");
             }
         },
         error: function () {
@@ -51,9 +78,6 @@ function transacionAjax_CargaRol(State) {
         }
     });
 }
-
-
-
 
 /*-------------------- carga subrol---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
@@ -129,11 +153,8 @@ function transacionAjax_opcRol_create(State) {
     var ID;
     var param;
 
-    if (State == "modificar") {
-        ID = editID;
-    } else {
-        ID = $("#DDL_ID").val();
-    }
+   ID = $("#DDL_ID").val();
+   
 
 
     $.ajax({
@@ -142,6 +163,7 @@ function transacionAjax_opcRol_create(State) {
         //crear json
         data: { "action": State,
             "ID": ID,
+            "NIT": $("#Select_EmpresaNit").val(),
             "consecutivo": $("#TxtConsecutivo").val(),
             "tipo": $("#DDLTipo").val(),
             "subrol_rol": $("#DDLSubRol_Rol").val(),

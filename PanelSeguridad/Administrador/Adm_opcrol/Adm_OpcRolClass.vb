@@ -1,6 +1,8 @@
 ﻿Public Class Adm_OpcRolClass
 
 #Region "campos"
+    Private _Index As Long
+    Private _Nit_ID As String
     Private _OPRol_ID As String
     Private _Consecutivo As Integer
     Private _Tipo As String
@@ -9,6 +11,22 @@
 #End Region
 
 #Region "propiedades"
+    Public Property Index() As Long
+        Get
+            Return Me._Index
+        End Get
+        Set(ByVal value As Long)
+            Me._Index = value
+        End Set
+    End Property
+    Public Property Nit_ID() As String
+        Get
+            Return Me._Nit_ID
+        End Get
+        Set(ByVal value As String)
+            Me._Nit_ID = value
+        End Set
+    End Property
     Public Property OPRol_ID() As String
         Get
             Return Me._OPRol_ID

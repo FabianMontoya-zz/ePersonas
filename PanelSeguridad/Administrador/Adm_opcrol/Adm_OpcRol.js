@@ -1,10 +1,12 @@
 ﻿/*--------------- region de variables globales --------------------*/
 var ArrayOpcRol = [];
+var ArrayEmpresaNit = [];
 var ArrayCombo = [];
 var ArrayComboSubRol = [];
 var ArrayComboLinks = [];
 var estado;
 var editID;
+var editNIT;
 var EditLink;
 var DeleteConsecutivo;
 /*--------------- region de variables globales --------------------*/
@@ -12,23 +14,27 @@ var DeleteConsecutivo;
 //Evento load JS
 $(document).ready(function () {
 
-     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
+    $("#Marco_trabajo_Form").css("height", "490px");
+    $("#container_TopcRol").css("height", "380px");
+
+    /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
+    Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
+    Ocultar_Errores();
+    Ocultar_Tablas();
+    /*================== FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN ==============*/
+
+    transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
+    transacionAjax_EmpresaNit('Cliente'); //Carga Droplist de Empresa NIT
     transacionAjax_CargaRol('Carga_Rol');
-    Ctipo();
+    Change_DDLTipo();
+    
+});
 
-    $("#ESelect").css("display", "none");
-    $("#ImgID").css("display", "none");
-    $("#Img1").css("display", "none");
-    $("#Img2").css("display", "none");
-    $("#Img3").css("display", "none");
-    $("#Img5").css("display", "none");
-    $("#DE").css("display", "none");
-    $("#SE").css("display", "none");
+//funcion para las ventanas emergentes
+function Ventanas_Emergentes() {
 
-    $("#TablaDatos_D").css("display", "none");
-    $("#TablaConsulta").css("display", "none");
+    Load_Charge_Sasif(); //Carga de "SasifMaster.js" el Control de Carga
 
-    //funcion para las ventanas emergentes
     $("#dialog").dialog({
         autoOpen: false,
         dialogClass: "Dialog_Sasif",
@@ -41,32 +47,34 @@ $(document).ready(function () {
         modal: true
     });
 
- 
-});
+}
 
-//funcion que dispara elcombo del tipo
-function Ctipo() {
+//Función que oculta todas las IMG de los errores en pantalla
+function Ocultar_Errores() {
+    ResetError();
+    $("#ESelect").css("display", "none");
+    $("#DE").css("display", "none");
+    $("#DS").css("display", "none");
+    /*Los demás se ocultan en la SASIF Master*/
+}
 
-    $("#DDLTipo").change(function () {
-        loadChildrenlinks($(this));
-    });
+//Función que oculta las tablas
+function Ocultar_Tablas() {
+    $("#TablaDatos_D").css("display", "none");
+    $("#TablaConsulta").css("display", "none");
 }
 
 //fucion que carga desde ddl tipo que tipo es(carpeta o link)
 function loadChildrenlinks(obj) {
-
     var tipo_link = $(obj).val();
     $("#DDLLink_ID").empty();
     transacionAjax_CargaLinks('cargar_Links', tipo_link);
-
 }
-
 
 //salida del formulario
 function btnSalir() {
     window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
 }
-
 
 //habilita el panel de crear o consulta
 function HabilitarPanel(opcion) {
@@ -91,8 +99,7 @@ function HabilitarPanel(opcion) {
             estado = opcion;
             Clear();
             break;
-
-       
+                   
         case "eliminar":
             $("#TablaDatos_D").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
@@ -148,6 +155,7 @@ function BtnElimina() {
 //validamos campos para la creacion del link
 function validarCamposCrear() {
 
+    var NIT = $("#Select_EmpresaNit").val(); //ImgNIT
     var valID = $("#DDL_ID").val();
     var consecutivo = $("#TxtConsecutivo").val();
     var tipo = $("#DDLTipo").val();
@@ -156,32 +164,44 @@ function validarCamposCrear() {
 
     var validar = 0;
 
-    if (tipo == "-1" || sub_rol == "-1" || link == "-1" || consecutivo == "" || valID == "-1") {
+    if (NIT == "-1" || NIT == null || tipo == "-1" || tipo == null || sub_rol == "-1" || sub_rol == null || link == "-1" || link == null ||
+        consecutivo == "" || valID == "-1" || valID == null) {
         validar = 1;
-        if (valID == "-1") {
+        /* -- Muestra de errores según dato faltante -- */
+        if (NIT == "-1" || NIT == null) {
+            $("#ImgNIT").css("display", "inline-table");
+        } else {
+            $("#ImgNIT").css("display", "none");
+        }
+        //
+        if (valID == "-1" || valID == null) {
             $("#ImgID").css("display", "inline-table");
         }
         else {
             $("#ImgID").css("display", "none");
         }
-        if (tipo == "-1") {
+        //
+        if (tipo == "-1" || tipo == null) {
             $("#Img2").css("display", "inline-table");
         }
         else {
             $("#Img2").css("display", "none");
         }
-        if (sub_rol == "-1") {
+        //
+        if (sub_rol == "-1" || sub_rol == null) {
             $("#Img3").css("display", "inline-table");
         }
         else {
             $("#Img3").css("display", "none");
         }
-        if (link == "-1") {
+        //
+        if (link == "-1" || link == null) {
             $("#Img5").css("display", "inline-table");
         }
         else {
             $("#Img5").css("display", "none");
         }
+        //
         if (consecutivo == "") {
             $("#Img1").css("display", "inline-table");
         }
@@ -190,11 +210,7 @@ function validarCamposCrear() {
         }
     }
     else {
-        $("#Img1").css("display", "none");
-        $("#Img2").css("display", "none");
-        $("#ImgID").css("display", "none");
-        $("#Img3").css("display", "none");
-        $("#Img5").css("display", "none");
+        Ocultar_Errores();
     }
     return validar;
 }
@@ -213,7 +229,6 @@ function ValidarDroplist() {
     return flag;
 }
 
-
 // crea la tabla en el cliente
 function Table_opcRol() {
 
@@ -230,7 +245,6 @@ function Table_opcRol() {
     }
 
 }
-
 
 //grid con el boton eliminar
 function Tabla_eliminar() {
@@ -291,6 +305,9 @@ function x() {
 
 //limpiar campos
 function Clear() {
+    Ocultar_Errores();
+    $("#Select_EmpresaNit").prop('disabled', false); //No se agrega el trigger porque se hace al seleccionar el val
+    $("#Select_EmpresaNit").val("-1").trigger("chosen:updated");
     $("#DDL_ID").val("-1");
     $("#TxtConsecutivo").val("");
     $("#DDLTipo").val("-1");
@@ -301,4 +318,32 @@ function Clear() {
 
     $('.C_Chosen').trigger('chosen:updated');
 
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                     PROCESOS DE CHANGES EN CONTROLES                                                                                                                                        ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+function Change_Select_Nit() {
+    $("#Select_EmpresaNit").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_EmpresaNit").val() == "-1") {
+            $("#ImgNIT").css("display", "inline-table");
+        } else {
+            $("#ImgNIT").css("display", "none");
+        }
+    });
+}
+
+//funcion que dispara elcombo del tipo
+function Change_DDLTipo() {
+    $("#DDLTipo").change(function () {
+        var Seleccion = $("#DDLTipo").val();
+        if (Seleccion != "-1") {
+            OpenControl();
+            loadChildrenlinks($(this));
+        } else {
+            $("#DDLLink_ID").empty().trigger("chosen:updated");            
+        }
+    });
 }
