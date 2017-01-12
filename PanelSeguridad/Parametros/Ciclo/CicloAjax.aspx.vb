@@ -18,16 +18,16 @@ Public Class CicloAjax
                     CargarCliente()
 
                 Case "consulta"
-                    'Consulta_Sucursal()
+                    Consulta_Ciclo()
 
                 Case "crear"
-                    'InsertSucursal()
+                    InsertCiclo()
 
                 Case "modificar"
-                    'UpdateLSucursal()
+                    UpdateLCiclo()
 
                 Case "elimina"
-                    'DeleteSucursal()
+                    DeleteCiclo()
             End Select
 
         End If
@@ -49,16 +49,16 @@ Public Class CicloAjax
         Dim vl_S_opcion As String = Request.Form("opcion")
         Dim vl_S_contenido As String = Request.Form("contenido")
 
-        ObjList = SQL_Ciclo.Read_AllSucursal(vl_S_filtro, vl_S_opcion, vl_S_contenido)
+        ObjList = SQL_Ciclo.Read_AllCiclo(vl_S_filtro, vl_S_opcion, vl_S_contenido)
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
 
     ''' <summary>
-    ''' funcion que inserta en la tabla Sucursal (INSERT)
+    ''' funcion que inserta en la tabla Ciclo (INSERT)
     ''' </summary>
     ''' <remarks></remarks>
-    Protected Sub InsertSucursal()
+    Protected Sub InsertCiclo()
 
         Dim obj As New CicloClass
         Dim SQL_Ciclo As New CicloSQLClass
@@ -75,6 +75,8 @@ Public Class CicloAjax
         If vl_s_IDxiste = 0 Then
 
             obj.Descripcion = Request.Form("descripcion")
+            obj.Fecha_Corte = Request.Form("fechaCorte")
+            obj.Fecha_Pago = Request.Form("fechaPago")
             obj.UsuarioCreacion = Request.Form("user")
             obj.FechaCreacion = Date.Now
             obj.UsuarioActualizacion = Request.Form("user")
@@ -82,7 +84,8 @@ Public Class CicloAjax
 
             ObjList.Add(obj)
 
-            result = SQL_Ciclo.InsertSucursal(obj)
+            result = SQL_Ciclo.InsertCiclo(obj)
+            result = SQL_Ciclo.InsertCicloDetalle(obj)
 
         Else
             result = "Existe"
@@ -96,21 +99,20 @@ Public Class CicloAjax
     ''' funcion que cambia el estado a inhabilitado en la tabla ROLES (DELETE)
     ''' </summary>
     ''' <remarks></remarks>
-    Protected Sub DeleteSucursal()
+    Protected Sub DeleteCiclo()
 
-        Dim obj As New SucursalClass
-        Dim SQL_Sucursal As New SucursalSQLClass
-        Dim ObjList As New List(Of SucursalClass)
+        Dim obj As New CicloClass
+        Dim SQL_Ciclo As New CicloSQLClass
+        Dim ObjList As New List(Of CicloClass)
         Dim result As String
 
-        obj.Sucursal_ID = Request.Form("ID")
-        obj.Nit_ID = Request.Form("NIT")
+        obj.ID_Ciclo = Request.Form("ID")
         obj.UsuarioActualizacion = Request.Form("user")
         obj.FechaActualizacion = Date.Now
 
         ObjList.Add(obj)
 
-        result = SQL_Sucursal.DeleteSucursal(obj)
+        result = SQL_Ciclo.DeleteCiclo(obj)
         Response.Write(result)
     End Sub
 
@@ -118,22 +120,21 @@ Public Class CicloAjax
     ''' funcion que actualiza en la tabla ROLES (UPDATE)
     ''' </summary>
     ''' <remarks></remarks>
-    Protected Sub UpdateLSucursal()
+    Protected Sub UpdateLCiclo()
 
-        Dim obj_sucursal As New SucursalClass
-        Dim SQL_Sucursal As New SucursalSQLClass
-        Dim ObjList As New List(Of SucursalClass)
+        Dim obj_Ciclo As New CicloClass
+        Dim SQL_Ciclo As New CicloSQLClass
+        Dim ObjList As New List(Of CicloClass)
         Dim result As String
 
-        obj_sucursal.Nit_ID = Request.Form("NIT")
-        obj_sucursal.Sucursal_ID = Request.Form("ID")
-        obj_sucursal.Descripcion = Request.Form("descripcion")
-        obj_sucursal.UsuarioActualizacion = Request.Form("user")
-        obj_sucursal.FechaActualizacion = Date.Now
+        obj_Ciclo.ID_Ciclo = Request.Form("ID")
+        obj_Ciclo.Descripcion = Request.Form("descripcion")
+        obj_Ciclo.UsuarioActualizacion = Request.Form("user")
+        obj_Ciclo.FechaActualizacion = Date.Now
 
-        ObjList.Add(obj_sucursal)
+        ObjList.Add(obj_Ciclo)
 
-        result = SQL_Sucursal.UpdateSucursal(obj_sucursal)
+        result = SQL_Ciclo.UpdateCiclo(obj_Ciclo)
 
         Response.Write(result)
 

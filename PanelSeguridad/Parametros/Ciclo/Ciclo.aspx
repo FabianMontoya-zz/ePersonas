@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Parametros/Sasif_menu.Master" CodeBehind="Ciclo.aspx.vb" Inherits="PanelSeguridad.Ciclo" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script src="../../Scripts/jquery-1.4.1.js" type="text/javascript"></script>
     <script src="../../SasifMaster.js" type="text/javascript"></script>
@@ -15,6 +16,7 @@
     <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="../../Scripts/Dialog/datepicker.js" type="text/javascript"></script>
     <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
@@ -69,7 +71,7 @@
 
                     <table id="T_Identificacion_ROL" style="width: 80%; margin-left: 8%;">
                         <tr>
-                            <td class="Label_Bold" style="width: 1.4%;">Ciclo
+                            <td class="Label_Bold" style="width: 1.8%;">Código Ciclo
                             </td>
                             <td id="TD_TID" style="width: 10%;">
                                 <span class="cssToolTip_Form">
@@ -101,8 +103,39 @@
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
-                            <td></td>
-                            <td></td>
+
+                        </tr>
+                        <tr>
+                            <td class="Label_Bold" style="width: 10.5%;">Fecha Corte
+                            </td>
+                            <td style="width: 39%;">
+                                <span class="cssToolTip_Form">
+                                    <input type="text" id="TxtFechaCorte" maxlength="50" style="width: 30%;" readonly="readonly" />
+                                    <span class="Spam_AF"></span></span>
+                            </td>
+                            <td style="width: 60%; padding-bottom: 25px;">
+                                <span class="cssToolTip">
+                                    <img alt="error" title="" style="padding-left: 1.8em; height: 21px; width: 21px;" id="Img2"
+                                        src="../../images/error.png" />
+                                    <span class="SpamEG"></span></span>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td class="Label_Bold" style="width: 10.5%;">Fecha Pago
+                            </td>
+                            <td style="width: 39%;">
+                                <span class="cssToolTip_Form">
+                                    <input type="text" id="TextFechaPago" maxlength="50" style="width: 30%;" readonly="readonly" />
+                                    <span class="Spam_AF"></span></span>
+                            </td>
+                            <td style="width: 60%; padding-bottom: 25px;">
+                                <span class="cssToolTip">
+                                    <img alt="error" title="" style="padding-left: 1.8em; height: 21px; width: 21px;" id="Img3"
+                                        src="../../images/error.png" />
+                                    <span class="SpamEG"></span></span>
+                            </td>
+
                         </tr>
                         <tr>
                             <td colspan="4" align="center">&nbsp;

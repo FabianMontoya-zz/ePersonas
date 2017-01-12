@@ -1,14 +1,14 @@
 ﻿/*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_CargaBusqueda(vp_State) {
-    //OpenContSucursal();
+    //OpenContCiclo();
     $.ajax({
         url: "CicloAjax.aspx",
         type: "POST",
         //crear json
         data: {
             "action": vp_State,
-            "tabla": 'SUCURSAL'
+            "tabla": 'CICLO'
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -35,7 +35,7 @@ function transacionAjax_EmpresaNit(vp_State) {
         //crear json
         data: {
             "action": vp_State,
-            "tabla": 'SUCURSAL'
+            "tabla": 'CICLO'
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -55,7 +55,7 @@ function transacionAjax_EmpresaNit(vp_State) {
 
 /*------------------------------ consulta ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
-function transacionAjax_Sucursal(vp_State, filtro, opcion) {
+function transacionAjax_Ciclo(vp_State, filtro, opcion) {
     var contenido;
 
     if ($("#TxtRead").val() == "") {
@@ -75,14 +75,14 @@ function transacionAjax_Sucursal(vp_State, filtro, opcion) {
             "opcion": opcion,
             "contenido": contenido
         },
-        //mostrar resultados de la creacion del Sucursal
+        //mostrar resultados de la creacion del Ciclo
         success: function (result) {
             if (result == "") {
-                ArraySucursales = [];
+                ArrayCiclo = [];
             }
             else {
-                ArraySucursales = JSON.parse(result);
-                Table_Sucursal();
+                ArrayCiclo = JSON.parse(result);
+                Table_Ciclo();
             }
         },
         error: function () {
@@ -93,20 +93,16 @@ function transacionAjax_Sucursal(vp_State, filtro, opcion) {
 
 /*------------------------------ crear ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
-function transacionAjax_Sucursal_create(vp_State) {
+function transacionAjax_Ciclo_create(vp_State) {
 
     var vl_ID;
-    var vl_NIT;
     var vl_Descrip;
 
     if (vp_State == "modificar") {
         vl_ID = editID;
-        vl_NIT = editNIT;
     } else {
         vl_ID = $("#Txt_ID").val();
-        vl_NIT = $("#Select_EmpresaNit").val();
     }
-
 
     $.ajax({
         url: "CicloAjax.aspx",
@@ -114,33 +110,32 @@ function transacionAjax_Sucursal_create(vp_State) {
         //crear json
         data: {
             "action": vp_State,
-            "NIT": vl_NIT,
             "ID": vl_ID,
             "descripcion": $("#TxtDescription").val(),
             "sigla": $("#TxtSigla").val(),
             "user": User.toUpperCase()
         },
-        //mostrar resultados de la creacion del Sucursal
+        //mostrar resultados de la creacion del Ciclo
         success: function (result) {
             switch (result) {
 
                 case "Error":
-                    Mensaje_General("Disculpenos :(", "Ocurrió un error y no se realizó el Ingreso de la Nueva Sucursal.", "W");
+                    Mensaje_General("Disculpenos :(", "Ocurrió un error y no se realizó el Ingreso de la Nueva Ciclo.", "W");
                     break;
 
                 case "Existe":
-                    Mensaje_General("Sucursal Existente", "La Sucursal que desea ingresar ya existe en el sistema, favor revisar.", "E");
+                    Mensaje_General("Ciclo Existente", "La Ciclo que desea ingresar ya existe en el sistema, favor revisar.", "E");
                     $("#ImgNIT").css("display", "inline-table");
                     $("#ImgID").css("display", "inline-table");
                     break;
 
                 case "Exito":
                     if (estado == "modificar") {
-                        Mensaje_General("¡Exito!", "La Sucursal " + vl_ID + " se ha modificado exitosamente.", "S");
+                        Mensaje_General("¡Exito!", "La Ciclo " + vl_ID + " se ha modificado exitosamente.", "S");
                         HabilitarPanel('modificar');
                     }
                     else {
-                        Mensaje_General("¡Exito!", "La Sucursal " + vl_ID + " se ha registrado exitosamente en el sistema.", "S");
+                        Mensaje_General("¡Exito!", "La Ciclo " + vl_ID + " se ha registrado exitosamente en el sistema.", "S");
                         Clear();
                     }
                     break;
@@ -155,7 +150,7 @@ function transacionAjax_Sucursal_create(vp_State) {
 
 /*------------------------------ eliminar ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
-function transacionAjax_Sucursal_delete(vp_State) {
+function transacionAjax_Ciclo_delete(vp_State) {
     vl_ID = editID;
     vl_NIT = editNIT;
 
@@ -172,10 +167,10 @@ function transacionAjax_Sucursal_delete(vp_State) {
         //Transaccion Ajax en proceso
         success: function (result) {
             if (result == "Error") {
-                Mensaje_General("Disculpenos :(", "Ocurrió un error y no se actualizó el estado de la Sucursal.", "W");
+                Mensaje_General("Disculpenos :(", "Ocurrió un error y no se actualizó el estado de la Ciclo.", "W");
             }
             else {
-                Mensaje_General("¡Exito!", "El Estado de la Sucursal " + vl_ID + " se ha actualizado correctamente.", "S");
+                Mensaje_General("¡Exito!", "El Estado de la Ciclo " + vl_ID + " se ha actualizado correctamente.", "S");
                 HabilitarPanel('eliminar');
             }
         },

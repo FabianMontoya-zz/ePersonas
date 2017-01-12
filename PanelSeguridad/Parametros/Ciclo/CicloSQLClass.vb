@@ -13,7 +13,7 @@ Public Class CicloSQLClass
     ''' <param name="vp_S_Contenido"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Read_AllSucursal(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String)
+    Public Function Read_AllCiclo(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String)
 
         Dim ObjList As New List(Of CicloClass)
         Dim StrQuery As String = ""
@@ -27,27 +27,27 @@ Public Class CicloSQLClass
             sql.Append("SELECT CIC_ID_Ciclo, CIC_Descripcion, " & _
                        "CIC_Usuario_Creacion, CIC_FechaCreacion, CIC_Usuario_Actualizacion, CIC_FechaActualizacion, " & _
                        "ROW_NUMBER() OVER(ORDER BY CIC_ID_Ciclo ASC) AS Index_Ciclo " & _
-                       "FROM SUCURSAL ORDER BY CIC_ID_Ciclo ASC")
+                       "FROM CICLO ORDER BY CIC_ID_Ciclo ASC")
         Else
 
             If vp_S_Contenido = "ALL" Then
-                sql.Append("SELECT SUC_Nit_ID, SUC_Surcursal_ID, SUC_Descripcion, " & _
-                       "SUC_Usuario_Creacion, SUC_FechaCreacion, SUC_Usuario_Actualizacion, SUC_FechaActualizacion, " & _
-                       "ROW_NUMBER() OVER(ORDER BY SUC_Nit_ID, SUC_Surcursal_ID ASC) AS Index_Sucursal " & _
-                       "FROM SUCURSAL ORDER BY SUC_Nit_ID, SUC_Surcursal_ID ASC")
+                sql.Append("SELECT CIC_ID_Ciclo, CIC_Descripcion, " & _
+                       "CIC_Usuario_Creacion, CIC_FechaCreacion, CIC_Usuario_Actualizacion, CIC_FechaActualizacion, " & _
+                       "ROW_NUMBER() OVER(ORDER BY CIC_ID_Ciclo ASC) AS Index_Ciclo " & _
+                       "FROM CICLO ORDER BY CIC_ID_Ciclo ASC")
             Else
-                sql.Append("SELECT SUC_Nit_ID, SUC_Surcursal_ID, SUC_Descripcion, " & _
-                       "SUC_Usuario_Creacion, SUC_FechaCreacion, SUC_Usuario_Actualizacion, SUC_FechaActualizacion, " & _
-                       "ROW_NUMBER() OVER(ORDER BY SUC_Nit_ID, SUC_Surcursal_ID ASC) AS Index_Sucursal " & _
-                       "FROM SUCURSAL " & _
+                sql.Append("SELECT CIC_ID_Ciclo, CIC_Descripcion, " & _
+                       "CIC_Usuario_Creacion, CIC_FechaCreacion, CIC_Usuario_Actualizacion, CIC_FechaActualizacion, " & _
+                       "ROW_NUMBER() OVER(ORDER BY CIC_ID_Ciclo ASC) AS Index_Ciclo " & _
+                       "FROM CICLO " & _
                        "WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'" & _
-                       " ORDER BY SUC_Nit_ID, SUC_Surcursal_ID ASC")
+                       " ORDER BY CIC_ID_Ciclo ASC")
             End If
         End If
 
         StrQuery = sql.ToString
 
-        ObjList = listCiclo(StrQuery, Conexion, "List")
+        ObjList = list(StrQuery, Conexion, "List")
 
         Return ObjList
 
@@ -59,7 +59,7 @@ Public Class CicloSQLClass
     ''' <param name="vp_Obj"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function DeleteSucursal(ByVal vp_Obj As SucursalClass)
+    Public Function DeleteCiclo(ByVal vp_Obj As CicloClass)
         Dim conex As New Conector
         Dim Result As String
         ' definiendo los objetos
@@ -67,8 +67,8 @@ Public Class CicloSQLClass
 
         Dim StrQuery As String = ""
 
-        sql.AppendLine("DELETE SUCURSAL " & _
-                       " WHERE SUC_Nit_ID = '" & vp_Obj.Nit_ID & "' AND SUC_Surcursal_ID = '" & vp_Obj.Sucursal_ID & "'")
+        sql.AppendLine("DELETE CICLO " & _
+                       " WHERE CIC_ID_Ciclo = '" & vp_Obj.ID_Ciclo & "'")
 
         StrQuery = sql.ToString
 
@@ -84,7 +84,7 @@ Public Class CicloSQLClass
     ''' <param name="vp_Obj"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function UpdateSucursal(ByVal vp_Obj As SucursalClass)
+    Public Function UpdateCiclo(ByVal vp_Obj As CicloClass)
 
         Dim conex As New Conector
         Dim Result As String
@@ -92,11 +92,11 @@ Public Class CicloSQLClass
         Dim sql As New StringBuilder
         Dim StrQueryID As String = ""
         Dim StrQuery As String = ""
-        sql.AppendLine("UPDATE SUCURSAL SET " & _
-                       " SUC_Descripcion ='" & vp_Obj.Descripcion & "', " & _
-                       " SUC_Usuario_Actualizacion ='" & vp_Obj.UsuarioActualizacion & "', " & _
-                       " SUC_FechaActualizacion ='" & vp_Obj.FechaActualizacion & "' " & _
-                       " WHERE SUC_Nit_ID = '" & vp_Obj.Nit_ID & "' AND SUC_Surcursal_ID = '" & vp_Obj.Sucursal_ID & "'")
+        sql.AppendLine("UPDATE CICLO SET " & _
+                       " CIC_Descripcion ='" & vp_Obj.Descripcion & "', " & _
+                       " CIC_Usuario_Actualizacion ='" & vp_Obj.UsuarioActualizacion & "', " & _
+                       " CIC_FechaActualizacion ='" & vp_Obj.FechaActualizacion & "' " & _
+                       " WHERE CIC_ID_Ciclo = '" & vp_Obj.ID_Ciclo & "'")
 
         StrQuery = sql.ToString
 
@@ -112,7 +112,7 @@ Public Class CicloSQLClass
     ''' <param name="vp_Obj"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function InsertSucursal(ByVal vp_Obj As CicloClass)
+    Public Function InsertCiclo(ByVal vp_Obj As CicloClass)
 
         Dim conex As New Conector
         Dim Result As String
@@ -145,6 +145,39 @@ Public Class CicloSQLClass
 
     End Function
 
+    ''' <summary>
+    ''' funcion que crea el query para la insercion de nuevo CicloDetalle (INSERT)
+    ''' </summary>
+    ''' <param name="vp_Obj"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function InsertCicloDetalle(ByVal vp_Obj As CicloClass)
+
+        Dim conex As New Conector
+        Dim Result As String
+        ' definiendo los objetos
+        Dim sql As New StringBuilder
+        Dim StrQueryID As String = ""
+        Dim StrQuery As String = ""
+
+        sql.AppendLine("INSERT DETALLES_CICLO (" & _
+                       "DCI_ID_Ciclo," & _
+                       "DCI_Fecha_Corte," & _
+                       "DCI_Fecha_Pago" & _
+                       ")")
+        sql.AppendLine("VALUES (")
+        sql.AppendLine("'" & vp_Obj.ID_Ciclo & "',")
+        sql.AppendLine("'" & vp_Obj.Fecha_Corte & "', ")
+        sql.AppendLine("'" & vp_Obj.Fecha_Pago & "' ) ")
+
+        StrQuery = sql.ToString
+
+        Result = conex.StrInsert_and_Update_All(StrQuery, "2")
+
+        Return Result
+
+    End Function
+
 #End Region
 
 #Region "CARGAR LISTAS"
@@ -156,7 +189,7 @@ Public Class CicloSQLClass
     ''' <param name="vg_S_StrConexion"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function listCiclo(ByVal vp_S_StrQuery As String, ByVal vg_S_StrConexion As String, ByVal vp_S_Type As String)
+    Public Function list(ByVal vp_S_StrQuery As String, ByVal vg_S_StrConexion As String, ByVal vp_S_Type As String)
 
         'inicializamos conexiones a la BD
         Dim objcmd As OleDbCommand = Nothing
@@ -177,6 +210,20 @@ Public Class CicloSQLClass
 
         Select Case vp_S_Type
             Case "List"
+                'recorremos la consulta por la cantidad de datos en la BD
+                While ReadConsulta.Read
+                    Dim objCiclo As New CicloClass
+                    'cargamos datos sobre el objeto de login
+                    objCiclo.ID_Ciclo = ReadConsulta.GetValue(0)
+                    objCiclo.Descripcion = ReadConsulta.GetValue(1)
+                    objCiclo.UsuarioCreacion = ReadConsulta.GetValue(2)
+                    objCiclo.FechaCreacion = ReadConsulta.GetValue(3)
+                    objCiclo.UsuarioActualizacion = ReadConsulta.GetValue(4)
+                    objCiclo.FechaActualizacion = ReadConsulta.GetValue(5)
+                    objCiclo.Index = ReadConsulta.GetValue(6)
+                    'agregamos a la lista
+                    ObjListCiclo.Add(objCiclo)
+                End While
 
             Case "Matrix"
                 'recorremos la consulta por la cantidad de datos en la BD
@@ -256,7 +303,7 @@ Public Class CicloSQLClass
 
         StrQuery = sql.ToString
 
-        ObjListCiclo = listCiclo(StrQuery, Conexion, "Matrix")
+        ObjListCiclo = list(StrQuery, Conexion, "Matrix")
 
         Return ObjListCiclo
 
