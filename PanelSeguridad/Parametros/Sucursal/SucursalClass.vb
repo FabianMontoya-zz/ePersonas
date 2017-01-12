@@ -1,9 +1,10 @@
 ﻿Public Class SucursalClass
 #Region "campos"
+    Private _Index As Long
     Private _Nit_ID As String
     Private _Sucursal_ID As Integer
     Private _Descripcion As String
-  
+
     Private _UsuarioCreacion As String
     Private _FechaCreacion As String
     Private _UsuarioActualizacion As String
@@ -13,6 +14,14 @@
 #End Region
 
 #Region "proiedades"
+    Public Property Index() As Long
+        Get
+            Return Me._Index
+        End Get
+        Set(ByVal value As Long)
+            Me._Index = value
+        End Set
+    End Property
     Public Property Nit_ID() As String
         Get
             Return Me._Nit_ID
