@@ -11,7 +11,7 @@ var editNIT;
 $(document).ready(function () {
 
     $("#Marco_trabajo_Form").css("height", "490px");
-    $("#container_TCiclo").css("height", "380px");
+    $("#container_TSucursal").css("height", "380px");
 
     /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
     Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
