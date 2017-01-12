@@ -35,7 +35,7 @@ function transacionAjax_EmpresaNit(vp_State) {
         //crear json
         data: {
             "action": vp_State,
-            "tabla": 'CLIENTE'
+            "tabla": 'SUCURSAL'
         },
         //Transaccion Ajax en proceso
         success: function (result) {

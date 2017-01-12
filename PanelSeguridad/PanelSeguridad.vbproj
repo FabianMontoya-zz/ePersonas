@@ -457,6 +457,10 @@
     <Content Include="Parametros\Cargo\Cargo.js" />
     <Content Include="Parametros\Cargo\CargoAjax.aspx" />
     <Content Include="Parametros\Cargo\CargoTrasaccionsAjax.js" />
+    <Content Include="Parametros\Ciclo\Ciclo.aspx" />
+    <Content Include="Parametros\Ciclo\Ciclo.js" />
+    <Content Include="Parametros\Ciclo\CicloAjax.aspx" />
+    <Content Include="Parametros\Ciclo\CicloTrasaccionsAjax.js" />
     <Content Include="Parametros\Ciudades\Ciudades.aspx" />
     <Content Include="Parametros\Ciudades\Ciudades.js" />
     <Content Include="Parametros\Ciudades\CiudadesAjax.aspx" />
@@ -1181,6 +1185,20 @@
     </Compile>
     <Compile Include="Parametros\Cargo\CargoClass.vb" />
     <Compile Include="Parametros\Cargo\CargoSQLClass.vb" />
+    <Compile Include="Parametros\Ciclo\Ciclo.aspx.designer.vb">
+      <DependentUpon>Ciclo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Ciclo\Ciclo.aspx.vb">
+      <DependentUpon>Ciclo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Ciclo\CicloAjax.aspx.designer.vb">
+      <DependentUpon>CicloAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Ciclo\CicloAjax.aspx.vb">
+      <DependentUpon>CicloAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Parametros\Ciclo\CicloClass.vb" />
     <Compile Include="Parametros\Ciclo\CicloSQLClass.vb" />
     <Compile Include="Parametros\Ciudades\Ciudades.aspx.designer.vb">

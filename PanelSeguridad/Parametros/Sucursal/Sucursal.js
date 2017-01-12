@@ -20,7 +20,6 @@ $(document).ready(function () {
     /*==================FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN==============*/
 
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
-    transacionAjax_EmpresaNit('Cliente'); //Carga Droplist de Empresa NIT
 
     Change_Select_Nit();
 
