@@ -42,12 +42,12 @@ function teclaEnter() {
 
 
 //hacemos la transaccion al code behind por medio de Ajax 
-function transacionAjax(State) {
+function transacionAjax(vp_State) {
     $.ajax({
         url: "LoginAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: { "action": vp_State,
             "user": $("#TxtUser").val(),
             "password": $("#TxtPassword").val()
         },
