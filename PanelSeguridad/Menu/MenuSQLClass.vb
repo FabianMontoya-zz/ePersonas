@@ -115,21 +115,21 @@ Public Class MenuSQLClass
 
             Dim objMenu As New MenuClass
             'cargamos datos sobre el objeto de login
-            If Not (IsDBNull(ReadConsulta.GetValue(0))) Then objMenu.Nombre = ReadConsulta.GetString(0) Else objMenu.Nombre = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(1))) Then objMenu.EstadoUsuario = ReadConsulta.GetString(1) Else objMenu.EstadoUsuario = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(2))) Then objMenu.IDRol = ReadConsulta.GetString(2) Else objMenu.IDRol = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(3))) Then objMenu.DescripcionRol = ReadConsulta.GetString(3) Else objMenu.DescripcionRol = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(4))) Then objMenu.Sigla = ReadConsulta.GetString(4) Else objMenu.Sigla = ""
-            objMenu.IDOpcionRol = ReadConsulta.GetString(5)
+            If Not (IsDBNull(ReadConsulta.GetValue(0))) Then objMenu.Nombre = ReadConsulta.GetValue(0) Else objMenu.Nombre = ""
+            If Not (IsDBNull(ReadConsulta.GetValue(1))) Then objMenu.EstadoUsuario = ReadConsulta.GetValue(1) Else objMenu.EstadoUsuario = ""
+            If Not (IsDBNull(ReadConsulta.GetValue(2))) Then objMenu.IDRol = ReadConsulta.GetValue(2) Else objMenu.IDRol = ""
+            If Not (IsDBNull(ReadConsulta.GetValue(3))) Then objMenu.DescripcionRol = ReadConsulta.GetValue(3) Else objMenu.DescripcionRol = ""
+            If Not (IsDBNull(ReadConsulta.GetValue(4))) Then objMenu.Sigla = ReadConsulta.GetValue(4) Else objMenu.Sigla = ""
+            objMenu.IDOpcionRol = ReadConsulta.GetValue(5)
             objMenu.Consecutivo = ReadConsulta.GetValue(6)
-            objMenu.Tipo = ReadConsulta.GetString(7)
-            objMenu.Sub_Rol = ReadConsulta.GetString(8)
-            objMenu.IDlink = ReadConsulta.GetString(9)
-            objMenu.DescripcionLink = ReadConsulta.GetString(10)
+            objMenu.Tipo = ReadConsulta.GetValue(7)
+            objMenu.Sub_Rol = ReadConsulta.GetValue(8)
+            objMenu.IDlink = ReadConsulta.GetValue(9)
+            objMenu.DescripcionLink = ReadConsulta.GetValue(10)
             objMenu.Parametro_1 = ReadConsulta.GetValue(11)
             objMenu.Parametro_2 = ReadConsulta.GetValue(12)
-            objMenu.Ruta = ReadConsulta.GetString(13)
-            If Not (IsDBNull(ReadConsulta.GetValue(14))) Then objMenu.Usuario = ReadConsulta.GetString(14) Else objMenu.Usuario = ""
+            objMenu.Ruta = ReadConsulta.GetValue(13)
+            If Not (IsDBNull(ReadConsulta.GetValue(14))) Then objMenu.Usuario = ReadConsulta.GetValue(14) Else objMenu.Usuario = ""
 
             'agregamos a la lista
             ObjListMenu.Add(objMenu)

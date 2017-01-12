@@ -8,7 +8,7 @@ var estado;
 var editID;
 var editNIT;
 var EditLink;
-var DeleteConsecutivo;
+var editConsecutivo;
 /*--------------- region de variables globales --------------------*/
 
 //Evento load JS
@@ -24,10 +24,9 @@ $(document).ready(function () {
     /*================== FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN ==============*/
 
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
-    transacionAjax_EmpresaNit('Cliente'); //Carga Droplist de Empresa NIT
-    transacionAjax_CargaRol('Carga_Rol');
+    transacionAjax_EmpresaNit('Cliente'); //Carga Droplist de Empresa NIT    
     Change_DDLTipo();
-    
+    Change_Select_Nit();
 });
 
 //funcion para las ventanas emergentes
@@ -87,9 +86,9 @@ function HabilitarPanel(opcion) {
             $("#DDL_ID").removeAttr("disabled");
             $("#TxtConsecutivo").removeAttr("disabled");
             $("#Btnguardar").attr("value", "Guardar");
+            estado = opcion;
             ResetError();
             Clear();
-            estado = opcion;
             break;
 
         case "buscar":
@@ -97,6 +96,7 @@ function HabilitarPanel(opcion) {
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TopcRol").html("");
             estado = opcion;
+            ResetError();
             Clear();
             break;
                    
@@ -105,6 +105,7 @@ function HabilitarPanel(opcion) {
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TopcRol").html("");
             estado = opcion;
+            ResetError();
             Clear();
             break;
 
@@ -117,6 +118,8 @@ function BtnConsulta() {
     var filtro;
     var ValidateSelect = ValidarDroplist();
     var opcion;
+
+    OpenControl();
 
     if (ValidateSelect == 1) {
         filtro = "N";
@@ -248,10 +251,10 @@ function Table_opcRol() {
 
 //grid con el boton eliminar
 function Tabla_eliminar() {
-    var html_Topcrol = "<table id='TOpcRol' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Codigo</th><th>Consecutivo</th><th>Tipo</th><th>Sub-Rol o Rol</th><th>llave tabla Links</th></tr></thead><tbody>";
+    var html_Topcrol = "<table id='TOpcRol' border='1' cellpadding='1' cellspacing='1' style='width: 100%'><thead><tr><th>Eliminar</th><th>NIT Empresa</th><th>Código</th><th>Consecutivo</th><th>Tipo</th><th style='white-space: nowrap;'>Sub-Rol/Rol</th><th>Llave Tabla Links</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
     for (itemArray in ArrayOpcRol) {
 
-        html_Topcrol += "<tr id= 'TOpcRol_" + ArrayOpcRol[itemArray].OPRol_ID + "'><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar('" + ArrayOpcRol[itemArray].OPRol_ID + "','" + ArrayOpcRol[itemArray].Consecutivo + "')\"></input></td><td>" + ArrayOpcRol[itemArray].OPRol_ID + "</td><td>" + ArrayOpcRol[itemArray].Consecutivo + "</td><td>" + ArrayOpcRol[itemArray].Tipo + "</td><td>" + ArrayOpcRol[itemArray].Subrol_rol + "</td><td> " + ArrayOpcRol[itemArray].Link_ID + " </td></tr>";
+        html_Topcrol += "<tr id= 'TOpcRol_" + ArrayOpcRol[itemArray].Index + "'><td style='white-space: nowrap;'><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArrayOpcRol[itemArray].Index + "')\"></img><span>Eliminar Opción Perfil</span></span></td><td>" + ArrayOpcRol[itemArray].Nit_ID + "</td><td>" + ArrayOpcRol[itemArray].OPRol_ID + "</td><td>" + ArrayOpcRol[itemArray].Consecutivo + "</td><td>" + ArrayOpcRol[itemArray].Tipo + "</td><td>" + ArrayOpcRol[itemArray].Subrol_rol + "</td><td> " + ArrayOpcRol[itemArray].Link_ID + " </td><td style='white-space: nowrap;'> " + ArrayOpcRol[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArrayOpcRol[itemArray].FechaCreacion + " </td><td style='white-space: nowrap;'> " + ArrayOpcRol[itemArray].UsuarioActualizacion + " </td><td  style='white-space: nowrap;'> " + ArrayOpcRol[itemArray].FechaActualizacion + " </td></tr>";
     }
     html_Topcrol += "</tbody></table>";
     $("#container_TopcRol").html("");
@@ -267,14 +270,14 @@ function Tabla_eliminar() {
 }
 
 //muestra el registro a eliminar
-function Eliminar(index_opcrol, index_consecutivo) {
-
+function Eliminar(index_consecutivo) {
 
     for (itemArray in ArrayOpcRol) {
-        if (index_opcrol == ArrayOpcRol[itemArray].OPRol_ID && index_consecutivo == ArrayOpcRol[itemArray].Consecutivo) {
+        if (ArrayOpcRol[itemArray].Index == index_consecutivo) {
+            editNIT = ArrayOpcRol[itemArray].Nit_ID;
             editID = ArrayOpcRol[itemArray].OPRol_ID;
-            DeleteConsecutivo = ArrayOpcRol[itemArray].Consecutivo
-            $("#dialog_eliminar").dialog("option", "title", "Eliminar?");
+            editConsecutivo = ArrayOpcRol[itemArray].Consecutivo;
+            $("#dialog_eliminar").dialog("option", "title", "¿Desea Eliminar?");
             $("#dialog_eliminar").dialog("open");
         }
     }
@@ -283,9 +286,9 @@ function Eliminar(index_opcrol, index_consecutivo) {
 
 //grid sin botones para ver resultado
 function Tabla_consulta() {
-    var html_Topcrol = "<table id='TOpcRol' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Codigo</th><th>Consecutivo</th><th>Tipo</th><th>Sub-Rol o Rol</th><th>llave tabla Links</th></tr></thead><tbody>";
+    var html_Topcrol = "<table id='TOpcRol' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>NIT Empresa</th><th>Código</th><th>Consecutivo</th><th>Tipo</th><th style='white-space: nowrap;'>Sub-Rol/Rol</th><th>Llave Tabla Links</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
     for (itemArray in ArrayOpcRol) {
-        html_Topcrol += "<tr id= 'TOpcRol_" + ArrayOpcRol[itemArray].OPRol_ID + "'><td>" + ArrayOpcRol[itemArray].OPRol_ID + "</td><td>" + ArrayOpcRol[itemArray].Consecutivo + "</td><td>" + ArrayOpcRol[itemArray].Tipo + "</td><td>" + ArrayOpcRol[itemArray].Subrol_rol + "</td><td> " + ArrayOpcRol[itemArray].Link_ID + " </td></tr>";
+        html_Topcrol += "<tr id= 'TOpcRol_" + ArrayOpcRol[itemArray].Index + "'><td>" + ArrayOpcRol[itemArray].Nit_ID + "</td><td>" + ArrayOpcRol[itemArray].OPRol_ID + "</td><td>" + ArrayOpcRol[itemArray].Consecutivo + "</td><td style='white-space: nowrap;'>" + ArrayOpcRol[itemArray].Tipo + "</td><td>" + ArrayOpcRol[itemArray].Subrol_rol + "</td><td> " + ArrayOpcRol[itemArray].Link_ID + " </td><td style='white-space: nowrap;'> " + ArrayOpcRol[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArrayOpcRol[itemArray].FechaCreacion + " </td><td style='white-space: nowrap;'> " + ArrayOpcRol[itemArray].UsuarioActualizacion + " </td><td  style='white-space: nowrap;'> " + ArrayOpcRol[itemArray].FechaActualizacion + " </td></tr>";
     }
     html_Topcrol += "</tbody></table>";
     $("#container_TopcRol").html("");
@@ -309,10 +312,13 @@ function Clear() {
     $("#Select_EmpresaNit").prop('disabled', false); //No se agrega el trigger porque se hace al seleccionar el val
     $("#Select_EmpresaNit").val("-1").trigger("chosen:updated");
     $("#DDL_ID").val("-1");
+    $("#DDL_ID").empty().trigger("chosen:updated");
     $("#TxtConsecutivo").val("");
     $("#DDLTipo").val("-1");
     $("#DDLSubRol_Rol").val("-1");
+    $("#DDLSubRol_Rol").empty().trigger("chosen:updated");
     $("#DDLLink_ID").val("-1");
+    $("#DDLLink_ID").empty().trigger("chosen:updated");
     $("#TxtRead").val("");
     $("#DDLColumns").val("-1");
 
@@ -330,8 +336,14 @@ function Change_Select_Nit() {
         if ($("#Select_EmpresaNit").val() == "-1") {
             $("#ImgNIT").css("display", "inline-table");
         } else {
+            OpenControl();
             $("#ImgNIT").css("display", "none");
+            $("#Select_EmpresaNit").prop('disabled', true).trigger("chosen:updated");
+            index_NIT_ID = this.value;
+            transacionAjax_CargaRol('Carga_Rol', index_NIT_ID);
         }
+
+        
     });
 }
 
@@ -341,9 +353,11 @@ function Change_DDLTipo() {
         var Seleccion = $("#DDLTipo").val();
         if (Seleccion != "-1") {
             OpenControl();
+            ArrayComboLinks = [];
             loadChildrenlinks($(this));
         } else {
-            $("#DDLLink_ID").empty().trigger("chosen:updated");            
+            $("#DDLLink_ID").empty().trigger("chosen:updated");
+            ArrayComboLinks = [];
         }
     });
 }

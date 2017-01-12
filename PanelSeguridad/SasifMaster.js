@@ -1395,7 +1395,7 @@ function CargaGrupoDocumentos(Matrix, Selector, Index_Edit) {
     $('.C_Chosen').trigger('chosen:updated');
 }
 
-//Carga los Grupos de Reportes
+//Carga los Roles
 function CargaRoles(Matrix, Selector, Index_Edit) {
 
     $('#' + Selector).empty();
@@ -1411,13 +1411,48 @@ function CargaRoles(Matrix, Selector, Index_Edit) {
 
         case "DDL_ID": //Combo Padre en Adm_OpcRol
             for (Item in Matrix) {
-                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Nit_ID + " - " + Matrix[Item].Rol_ID + " - " + Matrix[Item].Descripcion + "</option>");
+                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Rol_ID + " - " + Matrix[Item].Descripcion + "</option>");
             }
             break;
 
         case "DDLSubRol_Rol": //Combo SubRol o Rol en Adm_OpcRol
             for (Item in Matrix) {
-                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Nit_ID + " - " + Matrix[Item].Rol_ID + " - " + Matrix[Item].Descripcion + "</option>");
+                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Rol_ID + " - " + Matrix[Item].Descripcion + "</option>");
+            }
+            break;
+    }
+
+    $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
+
+    switch (Index_Edit) {
+        case "":
+            $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
+            break;
+
+        case "0":
+            $("#" + Selector + " option[value= '0'] ").attr("selected", true);
+            break;
+
+        default:
+            $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
+            break;
+    }
+
+    $("#" + Selector).trigger("liszt:updated");
+    $('.C_Chosen').trigger('chosen:updated');
+}
+
+//Carga los Links
+function CargaLinks(Matrix, Selector, Index_Edit) {
+
+    $('#' + Selector).empty();
+    var objList = $("[id$='" + Selector + "']");
+
+    switch (Selector) {
+
+        case "DDLLink_ID": //Combo Links en Adm_OpcRol
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].ID + "'> " + Matrix[Item].ID + " - " + Matrix[Item].descripcion + "</option>");
             }
             break;
     }

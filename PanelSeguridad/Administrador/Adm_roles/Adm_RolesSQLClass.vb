@@ -328,7 +328,7 @@ Public Class Adm_RolesSQLClass
     End Function
 
     ''' <summary>
-    ''' Carga matrix de Roles por NIT de empresa
+    ''' Carga matrix de Roles por empresa [NIT y Genericos]
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
@@ -346,7 +346,7 @@ Public Class Adm_RolesSQLClass
                                " R_Sigla, " & _
                                " R_Estado, " & _
                                " ROW_NUMBER() OVER(ORDER BY R_Nit_ID, R_Rol_ID ASC) AS Index_Roles " & _
-                               " FROM ROLES WHERE R_Nit_ID = '" & Nit_ID & "' " & _
+                               " FROM ROLES WHERE R_Nit_ID = '" & Nit_ID & "' OR R_Nit_ID = '0' " & _
                                " ORDER BY R_Nit_ID, R_Rol_ID ASC") 'Trae los roles
 
         StrQuery = sql.ToString

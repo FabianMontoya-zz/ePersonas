@@ -6,91 +6,7 @@ PanelSeguridad
 </name>
 </assembly>
 <members>
-<member name="M:PanelSeguridad.Adm_Politicas_SeguridadSQLClass.InsertAdm_Politicas_Seguridad(PanelSeguridad.Adm_Politicas_SeguridadClass)">
-	<summary>
- funcion que crea el query para la insercion de nueva Política de Seguridad (INSERT [**Completar**])
- </summary>
-	<param name="vp_Obj"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.Adm_Politicas_SeguridadSQLClass.listPoliticasSeguridad(System.String,System.String,System.String)">
-	<summary>
- funcion que trae el listado de Politicas de Seguridad para armar la tabla
- </summary>
-	<param name="vp_S_StrQuery"></param>
-	<param name="vg_S_StrConexion"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.Adm_Politicas_SeguridadSQLClass.Consulta_Repetido(PanelSeguridad.Adm_Politicas_SeguridadClass)">
-	<summary>
- Averigua si esta repetido
- </summary>
-	<param name="vp_O_Obj"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.Adm_Politicas_SeguridadSQLClass.MatrixAll_PoliticasSeguridad(System.String)">
-	<summary>
- Carga matrix de Politicas de Seguridad
- </summary>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.Adm_Grupo_ReportesSQLClass.InsertAdm_Grupo_Reportes(PanelSeguridad.Adm_Grupo_ReportesClass)">
-	<summary>
- funcion que crea el query para la insercion de nuevo GRUPO_REPORTES (INSERT [**Completar**])
- </summary>
-	<param name="vp_Obj"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.Adm_Grupo_ReportesSQLClass.listGrupoReportes(System.String,System.String,System.String)">
-	<summary>
- funcion que trae el listado de Grupo de Reportes para armar la tabla
- </summary>
-	<param name="vp_S_StrQuery"></param>
-	<param name="vg_S_StrConexion"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.Adm_Grupo_ReportesSQLClass.Consulta_Repetido(PanelSeguridad.Adm_Grupo_ReportesClass)">
-	<summary>
- Averigua si esta repetido
- </summary>
-	<param name="vp_O_Obj"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.Adm_Grupo_ReportesSQLClass.MatrixAll_GrupoReportes(System.String)">
-	<summary>
- Carga matrix de Grupo de Reportes Genéricas y De la empresa
- </summary>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.Adm_Grupo_DocumentosSQLClass.InsertAdm_Grupo_Documentos(PanelSeguridad.Adm_Grupo_DocumentosClass)">
-	<summary>
- funcion que crea el query para la inserción de nuevo GRUPO_DOCUMENTO (INSERT [**Completar**])
- </summary>
-	<param name="vp_Obj"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.Adm_Grupo_DocumentosSQLClass.listGrupoDocumentos(System.String,System.String,System.String)">
-	<summary>
- funcion que trae el listado de Grupo de Documentos para armar la tabla
- </summary>
-	<param name="vp_S_StrQuery"></param>
-	<param name="vg_S_StrConexion"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.Adm_Grupo_DocumentosSQLClass.Consulta_Repetido(PanelSeguridad.Adm_Grupo_DocumentosClass)">
-	<summary>
- Averigua si esta repetido
- </summary>
-	<param name="vp_O_Obj"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.Adm_Grupo_DocumentosSQLClass.MatrixAll_GrupoDocumentos(System.String)">
-	<summary>
- Carga matrix de Grupo de Documentos Genéricas y De la empresa
- </summary>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.Adm_OpcRolAjax.Consulta_OpcRol">
+<member name="M:PanelSeguridad.Adm_OpcRolAjax.Consulta_OpcRol">
 	<summary>
  traemos todos los datos para tabla opcion roles (READ)
  </summary>
@@ -100,7 +16,7 @@ PanelSeguridad
  funcion que inserta en la tabla opcion roles (INSERT)
  </summary>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.Adm_OpcRolAjax.EraseOpcRol">
+</member><member name="M:PanelSeguridad.Adm_OpcRolAjax.DeleteOpcRol">
 	<summary>
  funcion que elimina en la tabla opcion roles (DELETE)
  </summary>
@@ -179,12 +95,19 @@ PanelSeguridad
  </summary>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.Adm_OpcRolSQLClass.listOpcRol(System.String,System.String)">
+</member><member name="M:PanelSeguridad.Adm_OpcRolSQLClass.listOpcRol(System.String,System.String,System.String)">
 	<summary>
  funcion que trae el listado de opcion roles para armar la tabla
  </summary>
 	<param name="vp_S_StrQuery"></param>
 	<param name="vg_S_StrConexion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.Adm_OpcRolSQLClass.Consulta_Repetido(PanelSeguridad.Adm_OpcRolClass)">
+	<summary>
+ Averigua si esta repetido
+ </summary>
+	<param name="vp_O_Obj"></param>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.Adm_RolesAjax.Consulta_Roles">
@@ -644,6 +567,34 @@ PanelSeguridad
 	<summary>
  funcion que carga el objeto DDL consulta
  </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.Adm_Politicas_SeguridadSQLClass.InsertAdm_Politicas_Seguridad(PanelSeguridad.Adm_Politicas_SeguridadClass)">
+	<summary>
+ funcion que crea el query para la insercion de nueva Política de Seguridad (INSERT [**Completar**])
+ </summary>
+	<param name="vp_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.Adm_Politicas_SeguridadSQLClass.listPoliticasSeguridad(System.String,System.String,System.String)">
+	<summary>
+ funcion que trae el listado de Politicas de Seguridad para armar la tabla
+ </summary>
+	<param name="vp_S_StrQuery"></param>
+	<param name="vg_S_StrConexion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.Adm_Politicas_SeguridadSQLClass.Consulta_Repetido(PanelSeguridad.Adm_Politicas_SeguridadClass)">
+	<summary>
+ Averigua si esta repetido
+ </summary>
+	<param name="vp_O_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.Adm_Politicas_SeguridadSQLClass.MatrixAll_PoliticasSeguridad(System.String)">
+	<summary>
+ Carga matrix de Politicas de Seguridad
+ </summary>
+	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.Adm_ResetUserAjax.CargarCliente">
 	<summary>
@@ -2156,6 +2107,34 @@ To modify move field declaration from designer file to code-behind file.
 	<param name="vp_S_ID"></param>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.Adm_Grupo_ReportesSQLClass.InsertAdm_Grupo_Reportes(PanelSeguridad.Adm_Grupo_ReportesClass)">
+	<summary>
+ funcion que crea el query para la insercion de nuevo GRUPO_REPORTES (INSERT [**Completar**])
+ </summary>
+	<param name="vp_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.Adm_Grupo_ReportesSQLClass.listGrupoReportes(System.String,System.String,System.String)">
+	<summary>
+ funcion que trae el listado de Grupo de Reportes para armar la tabla
+ </summary>
+	<param name="vp_S_StrQuery"></param>
+	<param name="vg_S_StrConexion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.Adm_Grupo_ReportesSQLClass.Consulta_Repetido(PanelSeguridad.Adm_Grupo_ReportesClass)">
+	<summary>
+ Averigua si esta repetido
+ </summary>
+	<param name="vp_O_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.Adm_Grupo_ReportesSQLClass.MatrixAll_GrupoReportes(System.String)">
+	<summary>
+ Carga matrix de Grupo de Reportes Genéricas y De la empresa
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.Adm_LinksAjax.Consulta_Links">
 	<summary>
  traemos todos los datos para tabla links (READ)
@@ -2248,7 +2227,7 @@ To modify move field declaration from designer file to code-behind file.
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.Adm_RolesSQLClass.Matrix_Roles_NIT(System.String)">
 	<summary>
- Carga matrix de Roles por NIT de empresa
+ Carga matrix de Roles por empresa [NIT y Genericos]
  </summary>
 	<returns></returns>
 	<remarks></remarks>
@@ -4741,6 +4720,34 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
  averigua si esta repetido
  </summary>
 	<param name="vp_O_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.Adm_Grupo_DocumentosSQLClass.InsertAdm_Grupo_Documentos(PanelSeguridad.Adm_Grupo_DocumentosClass)">
+	<summary>
+ funcion que crea el query para la inserción de nuevo GRUPO_DOCUMENTO (INSERT [**Completar**])
+ </summary>
+	<param name="vp_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.Adm_Grupo_DocumentosSQLClass.listGrupoDocumentos(System.String,System.String,System.String)">
+	<summary>
+ funcion que trae el listado de Grupo de Documentos para armar la tabla
+ </summary>
+	<param name="vp_S_StrQuery"></param>
+	<param name="vg_S_StrConexion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.Adm_Grupo_DocumentosSQLClass.Consulta_Repetido(PanelSeguridad.Adm_Grupo_DocumentosClass)">
+	<summary>
+ Averigua si esta repetido
+ </summary>
+	<param name="vp_O_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.Adm_Grupo_DocumentosSQLClass.MatrixAll_GrupoDocumentos(System.String)">
+	<summary>
+ Carga matrix de Grupo de Documentos Genéricas y De la empresa
+ </summary>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.DocumentoAjax.Consulta_Documento">

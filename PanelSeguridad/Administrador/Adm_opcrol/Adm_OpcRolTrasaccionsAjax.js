@@ -54,12 +54,14 @@ function transacionAjax_EmpresaNit(State) {
 
 /*-------------------- carga subrol---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_CargaRol(State) {
+function transacionAjax_CargaRol(vp_State, vp_Nit_ID) {
     $.ajax({
         url: "Adm_OpcRolAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State
+        data: {
+            "action": vp_State,
+            "NIT": vp_Nit_ID
 
         },
         //Transaccion Ajax en proceso
@@ -98,7 +100,7 @@ function transacionAjax_CargaLinks(State, tipo_link) {
             }
             else {
                 ArrayComboLinks = JSON.parse(result);
-                charge_CatalogList(ArrayComboLinks, "DDLLink_ID", 1);
+                CargaLinks(ArrayComboLinks, "DDLLink_ID", "");
             }
         },
         error: function () {
@@ -151,9 +153,27 @@ function transacionAjax_opcRol(State, filtro, opcion) {
 function transacionAjax_opcRol_create(State) {
 
     var ID;
+    var ID_SubRol_Rol;
+    var Index_Padre;
+    var Index_SubRol_Rol;
     var param;
 
-   ID = $("#DDL_ID").val();
+    Index_Padre = $("#DDL_ID").val();
+    Index_SubRol_Rol = $("#DDLSubRol_Rol").val();
+
+    for (Item in ArrayComboSubRol) {
+        if (ArrayComboSubRol[Item].Index == Index_Padre) {
+            ID = ArrayComboSubRol[Item].Rol_ID;
+            break;
+        }
+    }
+
+    for (Item in ArrayComboSubRol) {
+        if (ArrayComboSubRol[Item].Index == Index_SubRol_Rol) {
+            ID_SubRol_Rol = ArrayComboSubRol[Item].Rol_ID;
+            break;
+        }
+    }
    
 
 
@@ -166,45 +186,33 @@ function transacionAjax_opcRol_create(State) {
             "NIT": $("#Select_EmpresaNit").val(),
             "consecutivo": $("#TxtConsecutivo").val(),
             "tipo": $("#DDLTipo").val(),
-            "subrol_rol": $("#DDLSubRol_Rol").val(),
-            "link_ID": $("#DDLLink_ID").val()
+            "subrol_rol": ID_SubRol_Rol,
+            "link_ID": $("#DDLLink_ID").val(),
+            "user": User.toUpperCase()
         },
         //Transaccion Ajax en proceso
         success: function (result) {
             switch (result) {
 
                 case "Error":
-                    $("#dialog").dialog("option", "title", "Disculpenos :(");
-                    $("#Mensaje_alert").text("No se realizo El ingreso de la opcion perfil!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "block");
-                    $("#SE").css("display", "none");
+                    Mensaje_General("Disculpenos :(", "Ocurrió un error y no se realizó el Ingreso de la Opción Perfil.", "W");
                     break;
 
                 case "Existe":
-                    $("#dialog").dialog("option", "title", "Ya Existe");
-                    $("#Mensaje_alert").text("El codigo ingresado ya existe en la base de datos!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "block");
-                    $("#SE").css("display", "none");
+                    Mensaje_General("¡Opción Perfil Existente!", "La Opción Perfil que desea ingresar ya existe en el sistema, favor revisar.", "E");
+                    $("#ImgNIT").css("display", "inline-table");
+                    $("#ImgID").css("display", "inline-table");
+                    $("#Img1").css("display", "inline-table");
                     break;
 
                 case "Exito":
                     if (estado == "modificar") {
-                        $("#dialog").dialog("option", "title", "Exito");
-                        $("#Mensaje_alert").text("La opcion perfil fue modificada exitosamente! ");
-                        $("#dialog").dialog("open");
-                        $("#DE").css("display", "none");
-                        $("#SE").css("display", "block");
-                        Clear();
+                        Mensaje_General("¡Exito!", "La Opción Perfil se ha modificado exitosamente.", "S");
+                        //HabilitarPanel('modificar');
                     }
                     else {
-                        $("#dialog").dialog("option", "title", "Exito");
-                        $("#Mensaje_alert").text("La opcion perfil fue creada exitosamente! ");
-                        $("#dialog").dialog("open");
-                        $("#DE").css("display", "none");
-                        $("#SE").css("display", "block");
-                        Clear();
+                        Mensaje_General("¡Exito!", "La Opción Perfil se ha registrado exitosamente en el sistema.", "S");
+                        HabilitarPanel('crear');
                     }
                     break;
             }
@@ -220,29 +228,32 @@ function transacionAjax_opcRol_create(State) {
 //hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax_opcRol_delete(State) {
 
+    var NIT;
+    var ID;
+    var Consecutive;
+
+    NIT = editNIT;
+    ID = editID;
+    Consecutive = editConsecutivo
+
     $.ajax({
         url: "Adm_OpcRolAjax.aspx",
         type: "POST",
         //crear json
         data: { "action": State,
-            "ID": editID,
-            "DeleteConsecutivo": DeleteConsecutivo
+            "ID": ID,
+            "NIT": NIT,
+            "Consecutivo": Consecutive
         },
         //Transaccion Ajax en proceso
         success: function (result) {
             if (result == "Error") {
-                $("#dialog").dialog("option", "title", "Disculpenos :(");
-                $("#Mensaje_alert").text("No se realizo la eliminación de la opcion perfil!");
-                $("#dialog").dialog("open");
-                $("#DE").css("display", "block");
+                Mensaje_General("Disculpenos :(", "Ocurrió un error y no se eliminó la Opción Perfil.", "W");
             }
             else {
+                Mensaje_General("¡Exito!", "La Opción Perfil se ha eliminado correctamente.", "S");
                 $("#dialog_eliminar").dialog("close");
-                $("#dialog").dialog("option", "title", "Exito");
-                $("#Mensaje_alert").text("la opcion perfil fue eliminada exitosamente! ");
-                $("#dialog").dialog("open");
-                $("#SE").css("display", "block");
-                Clear();
+                HabilitarPanel('eliminar');
             }
         },
         error: function () {

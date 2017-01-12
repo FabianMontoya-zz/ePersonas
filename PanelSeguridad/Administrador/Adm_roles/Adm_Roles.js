@@ -74,9 +74,9 @@ function HabilitarPanel(opcion) {
             $("#TablaConsulta").css("display", "none");
             $("#Txt_ID").removeAttr("disabled");
             $("#Btnguardar").attr("value", "Guardar");
+            estado = opcion;
             ResetError();
             Clear();
-            estado = opcion;
             break;
 
         case "buscar":

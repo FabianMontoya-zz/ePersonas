@@ -33,7 +33,7 @@ Public Class Adm_OpcRolAjax
                     InsertOpcRol()
 
                 Case "elimina"
-                    EraseOpcRol()
+                    DeleteOpcRol()
             End Select
 
         End If
@@ -76,13 +76,17 @@ Public Class Adm_OpcRolAjax
         objOpcRol.Consecutivo = Request.Form("consecutivo")
 
         'validamos si la llave existe
-        vl_s_IDxiste = Consulta_Repetido(objOpcRol.OPRol_ID, objOpcRol.Consecutivo)
+        vl_s_IDxiste = SQL_OpcRol.Consulta_Repetido(objOpcRol)
 
         If vl_s_IDxiste = 0 Then
 
             objOpcRol.Tipo = Request.Form("tipo")
             objOpcRol.Subrol_rol = Request.Form("subrol_rol")
             objOpcRol.Link_ID = Request.Form("link_ID")
+            objOpcRol.UsuarioCreacion = Request.Form("user")
+            objOpcRol.FechaCreacion = Date.Now
+            objOpcRol.UsuarioActualizacion = Request.Form("user")
+            objOpcRol.FechaActualizacion = Date.Now
 
             ObjListOpcRol.Add(objOpcRol)
 
@@ -100,15 +104,16 @@ Public Class Adm_OpcRolAjax
     ''' funcion que elimina en la tabla opcion roles (DELETE)
     ''' </summary>
     ''' <remarks></remarks>
-    Protected Sub EraseOpcRol()
+    Protected Sub DeleteOpcRol()
 
         Dim objOpcRol As New Adm_OpcRolClass
         Dim SQL_OpcRol As New Adm_OpcRolSQLClass
         Dim ObjListOpcRol As New List(Of Adm_OpcRolClass)
         Dim result As String
 
+        objOpcRol.Nit_ID = Request.Form("NIT")
         objOpcRol.OPRol_ID = Request.Form("ID")
-        objOpcRol.Consecutivo = Request.Form("DeleteConsecutivo")
+        objOpcRol.Consecutivo = Request.Form("Consecutivo")
 
         ObjListOpcRol.Add(objOpcRol)
 
@@ -174,7 +179,9 @@ Public Class Adm_OpcRolAjax
         Dim SQL_Roles As New Adm_RolesSQLClass
         Dim ObjListDroplist As New List(Of Adm_RolesClass)
 
-        ObjListDroplist = SQL_Roles.MatrixAll_Roles()
+        Dim vl_Nit_ID = Request.Form("NIT")
+
+        ObjListDroplist = SQL_Roles.Matrix_Roles_NIT(vl_Nit_ID)
         Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
 
     End Sub
