@@ -529,6 +529,10 @@
     <Content Include="Parametros\SubTipoProduct_Leasing\SubTipoProduct_Leasing.js" />
     <Content Include="Parametros\SubTipoProduct_Leasing\SubTipoProduct_LeasingAjax.aspx" />
     <Content Include="Parametros\SubTipoProduct_Leasing\SubTipoProduct_LeasingTrasaccionsAjax.js" />
+    <Content Include="Parametros\Sucursal\Sucursal.aspx" />
+    <Content Include="Parametros\Sucursal\Sucursal.js" />
+    <Content Include="Parametros\Sucursal\SucursalAjax.aspx" />
+    <Content Include="Parametros\Sucursal\SucursalTrasaccionsAjax.js" />
     <Content Include="Parametros\TipoActivo\TipoActivo.aspx" />
     <Content Include="Parametros\TipoActivo\TipoActivo.js" />
     <Content Include="Parametros\TipoActivo\TipoActivoAjax.aspx" />
@@ -1447,6 +1451,20 @@
     </Compile>
     <Compile Include="Parametros\SubTipoProduct_Leasing\SubTipoProduct_LeasingClass.vb" />
     <Compile Include="Parametros\SubTipoProduct_Leasing\SubTipoProduct_LeasingSQLClass.vb" />
+    <Compile Include="Parametros\Sucursal\Sucursal.aspx.designer.vb">
+      <DependentUpon>Sucursal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Sucursal\Sucursal.aspx.vb">
+      <DependentUpon>Sucursal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Sucursal\SucursalAjax.aspx.designer.vb">
+      <DependentUpon>SucursalAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Sucursal\SucursalAjax.aspx.vb">
+      <DependentUpon>SucursalAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Parametros\Sucursal\SucursalClass.vb" />
     <Compile Include="Parametros\Sucursal\SucursalSQLClass.vb" />
     <Compile Include="Parametros\Tasas\TasasClass.vb" />

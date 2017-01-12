@@ -6,7 +6,37 @@ PanelSeguridad
 </name>
 </assembly>
 <members>
-<member name="M:PanelSeguridad.Adm_OpcRolAjax.Consulta_OpcRol">
+<member name="M:PanelSeguridad.SucursalAjax.Consulta_Sucursal">
+	<summary>
+ traemos todos los datos para tabla ROLES (READ)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.SucursalAjax.InsertSucursal">
+	<summary>
+ funcion que inserta en la tabla Sucursal (INSERT)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.SucursalAjax.DeleteSucursal">
+	<summary>
+ funcion que cambia el estado a inhabilitado en la tabla ROLES (DELETE)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.SucursalAjax.UpdateLSucursal">
+	<summary>
+ funcion que actualiza en la tabla ROLES (UPDATE)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.SucursalAjax.CargarDroplist">
+	<summary>
+ funcion que carga el objeto DDL Links
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.SucursalAjax.CargarCliente">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.Adm_OpcRolAjax.Consulta_OpcRol">
 	<summary>
  traemos todos los datos para tabla opcion roles (READ)
  </summary>
@@ -2061,12 +2091,49 @@ To modify move field declaration from designer file to code-behind file.
 	<param name="vg_S_StrConexion"></param>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.SucursalSQLClass.Read_AllSucursal(System.String,System.String,System.String)">
+	<summary>
+ creala consulta para la tabla roles parametrizada (READ)
+ </summary>
+	<param name="vp_S_Filtro"></param>
+	<param name="vp_S_Opcion"></param>
+	<param name="vp_S_Contenido"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.SucursalSQLClass.DeleteSucursal(PanelSeguridad.SucursalClass)">
+	<summary>
+ funcion que crea el query para el estado del rol (DELETE)
+ </summary>
+	<param name="vp_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.SucursalSQLClass.UpdateSucursal(PanelSeguridad.SucursalClass)">
+	<summary>
+ funcion que crea el query para la modificacion del rol (UPDATE)
+ </summary>
+	<param name="vp_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.SucursalSQLClass.InsertSucursal(PanelSeguridad.SucursalClass)">
+	<summary>
+ funcion que crea el query para la insercion de nuevo rol (INSERT)
+ </summary>
+	<param name="vp_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.SucursalSQLClass.list(System.String,System.String,System.String)">
 	<summary>
  funcion que trae el listado de Sucursal para armar la tabla
  </summary>
 	<param name="vp_S_StrQuery"></param>
 	<param name="vg_S_StrConexion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.SucursalSQLClass.Consulta_Repetido(PanelSeguridad.SucursalClass)">
+	<summary>
+ averigua si esta repetido
+ </summary>
+	<param name="vp_O_Obj"></param>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.SucursalSQLClass.Matrix_Sucursal">

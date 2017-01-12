@@ -26,51 +26,64 @@
         <h2 id="titulo_login">CUENTA DE USUARIOS</h2>
     </div>
     <div id="marco">
-        <table id="TablaRegistro">
-            <tr>
-                <td id="Lbluser" class="Label_bold">Nombre de Usuario
-                </td>
-            </tr>
-            <tr>
-                <td id="TdUser">
-                    <span class="cssToolTip_Form">
-                        <input type="text" id="TxtUser" />
-                        <span class="Spam_U"></span></span><span class="cssToolTip">
-                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="EUser"
-                                src="../images/error.png" />
-                            <span id="S_User"></span></span>
-                </td>
-            </tr>
-            <tr>
-                <td id="TdHelpUser"></td>
-            </tr>
-            <tr>
-                <td id="LblPassword" class="Label_bold">Contraseña
-                </td>
-            </tr>
-            <tr>
-                <td id="TdPassword">
-                    <span class="cssToolTip_Form">
-                        <input id="TxtPassword" type="password" />
-                        <span class="Spam_C"></span></span><span class="cssToolTip">
-                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="EPassword"
-                                src="../images/error.png" />
-                            <span id="S_Pass"></span></span>
-                </td>
-            </tr>
-            <tr>
-                <td id="TdHelpPassword"></td>
-            </tr>
-            <tr>
-                <td></td>
-            </tr>
-            <tr>
-                <td id="TdControl" style="text-align: center;">
-                    <input id="BtnIngresar" type="button" value="Entrar" style="width: 40%;" />
-                </td>
-            </tr>
-        </table>
+        <div id="TablaRegistro">
+            <table id="User_Name2">
+
+                <tr>
+                    <td id="Lbluser" class="Label_bold">Nombre de Usuario
+                    </td>
+                </tr>
+                <tr>
+                    <td id="TdUser">
+                        <span class="cssToolTip_Form">
+                            <input type="text" id="TxtUser" />
+                            <span class="Spam_U"></span></span><span class="cssToolTip">
+                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="EUser"
+                                    src="../images/error.png" />
+                                <span id="S_User"></span></span>
+                    </td>
+                </tr>
+
+            </table>
+            <table id="Table2">
+                <tr>
+                    <td id="TdHelpUser"></td>
+                </tr>
+                <tr>
+                    <td id="LblPassword" class="Label_bold">Contraseña
+                    </td>
+                </tr>
+                <tr>
+                    <td id="TdPassword">
+                        <span class="cssToolTip_Form">
+                            <input id="TxtPassword" type="password" />
+                            <span class="Spam_C"></span></span><span class="cssToolTip">
+                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="EPassword"
+                                    src="../images/error.png" />
+                                <span id="S_Pass"></span></span>
+                    </td>
+                </tr>
+            </table>
+            <table id="Table3">
+                <tr>
+                    <td id="TdHelpPassword"></td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                </tr>
+
+            </table>
+            <table id="T_BTNGuardar" style="width: 100%;">
+                <tr>
+                    <td id="TdControl" style="text-align: center;">
+                        <input id="BtnIngresar" type="button" value="Entrar"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
+
     <div id="dialog" title="Basic dialog">
         <table style="width: 100%; text-align: center;">
             <tr>
