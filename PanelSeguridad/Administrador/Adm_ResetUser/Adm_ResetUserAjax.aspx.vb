@@ -31,7 +31,7 @@ Public Class Adm_ResetUserAjax
         Dim vl_s_IDxiste, result As String
 
         objReset.Nit_ID = Request.Form("NIT")
-        objReset.Name = Request.Form("ID")
+        objReset.Usuario_ID = Request.Form("ID")
         objReset.Estado = Request.Form("estado")
 
         'validamos si la llave existe
@@ -39,7 +39,7 @@ Public Class Adm_ResetUserAjax
 
         If vl_s_IDxiste = 1 Then
 
-            objReset.Password = Encriptar.Encriptacion_MD5(UCase(objReset.Name))
+            objReset.Password = Encriptar.Encriptacion_MD5(UCase(objReset.Usuario_ID))
             ObjListReset.Add(objReset)
             result = SQL_Reset.Update_PasswordADM(objReset)
             Response.Write(result)

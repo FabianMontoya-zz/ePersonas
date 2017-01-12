@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Sasif.Master"
+﻿<%@ Page Title="Login - SASIF Personas" Language="vb" AutoEventWireup="false" MasterPageFile="~/Sasif.Master"
     CodeBehind="Login.aspx.vb" Inherits="PanelSeguridad.Login" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -27,25 +27,40 @@
     </div>
     <div id="marco">
         <div id="TablaRegistro">
-            <table id="User_Name2">
-
+            
+            <table id="User_Name2" style="width: 100%;">
+            <tr>
+                <td id="TD_Nit_ID" class="Label_bold">NIT Empresa</td>
+            </tr>
+            <tr>
+                <td style="width: 40%;  padding-left: 30px;">
+                    <select style="width: 100%;" id="Select_EmpresaNit" class="C_Chosen">
+                    </select>
+                </td>
+                <td style="width: 2%; padding-bottom: 25px;">
+                    <span class="cssToolTip">
+                        <img alt="error" title="" style="padding-left: 0.5em; height: 21px; width: 21px;" id="ImgNIT"
+                            src="../../images/error.png" />
+                        <span id="S_NIT"></span></span>
+                        
+                </td>
+            </tr>
                 <tr>
                     <td id="Lbluser" class="Label_bold">Nombre de Usuario
                     </td>
                 </tr>
                 <tr>
-                    <td id="TdUser">
-                        <span class="cssToolTip_Form">
-                            <input type="text" id="TxtUser" />
-                            <span class="Spam_U"></span></span><span class="cssToolTip">
-                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="EUser"
-                                    src="../images/error.png" />
-                                <span id="S_User"></span></span>
-                    </td>
-                </tr>
-
-            </table>
-            <table id="Table2">
+                <td style="width: 40%; padding-left: 30px;">                   
+                        <input style="width: 96%;" type="text" id="TxtUser" maxlength="10" />                        
+                </td>
+                <td style="padding-bottom: 25px; width: 2%">
+                    <span class="cssToolTip">
+                        <img alt="error" title="" style="padding-left: 0.5em; height: 21px; width: 21px;" id="EUser"
+                            src="../../images/error.png" />
+                        <span id="S_User"></span></span>
+                </td>
+                   
+                </tr>            
                 <tr>
                     <td id="TdHelpUser"></td>
                 </tr>
@@ -54,14 +69,16 @@
                     </td>
                 </tr>
                 <tr>
-                    <td id="TdPassword">
-                        <span class="cssToolTip_Form">
-                            <input id="TxtPassword" type="password" />
-                            <span class="Spam_C"></span></span><span class="cssToolTip">
-                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="EPassword"
-                                    src="../images/error.png" />
-                                <span id="S_Pass"></span></span>
-                    </td>
+                <td style="width: 40%; padding-left: 30px;">                   
+                        <input style="width: 96%;" type="password" id="TxtPassword" maxlength="20" />                        
+                </td>
+                <td style="padding-bottom: 25px; width: 2%">
+                    <span class="cssToolTip">
+                        <img alt="error" title="" style="padding-left: 0.5em; height: 21px; width: 21px;" id="EPassword"
+                            src="../../images/error.png" />
+                        <span id="S_Pass"></span></span>
+                </td>
+                    
                 </tr>
             </table>
             <table id="Table3">
@@ -77,7 +94,7 @@
             <table id="T_BTNGuardar" style="width: 100%;">
                 <tr>
                     <td id="TdControl" style="text-align: center;">
-                        <input id="BtnIngresar" type="button" value="Entrar"/>
+                        <input id="BtnIngresar" type="button" value="Entrar" onclick="BtnEntrar();" />
                     </td>
                 </tr>
             </table>

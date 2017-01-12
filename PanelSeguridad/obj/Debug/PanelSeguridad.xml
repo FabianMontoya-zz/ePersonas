@@ -6,37 +6,7 @@ PanelSeguridad
 </name>
 </assembly>
 <members>
-<member name="M:PanelSeguridad.SucursalAjax.Consulta_Sucursal">
-	<summary>
- traemos todos los datos para tabla ROLES (READ)
- </summary>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.SucursalAjax.InsertSucursal">
-	<summary>
- funcion que inserta en la tabla Sucursal (INSERT)
- </summary>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.SucursalAjax.DeleteSucursal">
-	<summary>
- funcion que cambia el estado a inhabilitado en la tabla ROLES (DELETE)
- </summary>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.SucursalAjax.UpdateLSucursal">
-	<summary>
- funcion que actualiza en la tabla ROLES (UPDATE)
- </summary>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.SucursalAjax.CargarDroplist">
-	<summary>
- funcion que carga el objeto DDL Links
- </summary>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.SucursalAjax.CargarCliente">
-	<summary>
- funcion que carga el objeto DDL consulta
- </summary>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.Adm_OpcRolAjax.Consulta_OpcRol">
+<member name="M:PanelSeguridad.Adm_OpcRolAjax.Consulta_OpcRol">
 	<summary>
  traemos todos los datos para tabla opcion roles (READ)
  </summary>
@@ -1751,6 +1721,36 @@ To modify move field declaration from designer file to code-behind file.
  </summary>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.SucursalAjax.Consulta_Sucursal">
+	<summary>
+ traemos todos los datos para tabla ROLES (READ)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.SucursalAjax.InsertSucursal">
+	<summary>
+ funcion que inserta en la tabla Sucursal (INSERT)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.SucursalAjax.DeleteSucursal">
+	<summary>
+ funcion que cambia el estado a inhabilitado en la tabla ROLES (DELETE)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.SucursalAjax.UpdateLSucursal">
+	<summary>
+ funcion que actualiza en la tabla ROLES (UPDATE)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.SucursalAjax.CargarDroplist">
+	<summary>
+ funcion que carga el objeto DDL Links
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.SucursalAjax.CargarCliente">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.TransaccionesAjax.Consulta_Transacciones">
 	<summary>
  traemos todos los datos para tabla Transacciones (READ)
@@ -1991,8 +1991,22 @@ To modify move field declaration from designer file to code-behind file.
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.LoginAjax.ingresar">
 	<summary>
- 'funcion que valida contra la BD si el usuario y contraseña son correctos
+ 'funcion que valida Si el usuario existe o si es para cambio de Contraseña, Si no, lo envia a validar User y Password
  </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.LoginAjax.CargarCliente">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.LoginAjax.VerificarDatosLogin(System.String,System.String,System.String)">
+	<summary>
+ Función que valida si el usuario y contraseña Existe
+ </summary>
+	<param name="vp_S_NIT_ID"></param>
+	<param name="vp_S_User_ID"></param>
+	<param name="vp_S_Password"></param>
+	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.FasecoldaAjax.Consulta_Fasecolda">
 	<summary>
@@ -3756,12 +3770,49 @@ Control main.
 Campo generado automáticamente.
 Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
 </remarks>
+</member><member name="M:PanelSeguridad.CicloSQLClass.Read_AllSucursal(System.String,System.String,System.String)">
+	<summary>
+ creala consulta para la tabla roles parametrizada (READ)
+ </summary>
+	<param name="vp_S_Filtro"></param>
+	<param name="vp_S_Opcion"></param>
+	<param name="vp_S_Contenido"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CicloSQLClass.DeleteSucursal(PanelSeguridad.SucursalClass)">
+	<summary>
+ funcion que crea el query para el estado del rol (DELETE)
+ </summary>
+	<param name="vp_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CicloSQLClass.UpdateSucursal(PanelSeguridad.SucursalClass)">
+	<summary>
+ funcion que crea el query para la modificacion del rol (UPDATE)
+ </summary>
+	<param name="vp_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CicloSQLClass.InsertSucursal(PanelSeguridad.CicloClass)">
+	<summary>
+ funcion que crea el query para la insercion de nuevo rol (INSERT)
+ </summary>
+	<param name="vp_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.CicloSQLClass.listCiclo(System.String,System.String,System.String)">
 	<summary>
  funcion que trae el listado de Ciclo para armar la tabla
  </summary>
 	<param name="vp_S_StrQuery"></param>
 	<param name="vg_S_StrConexion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CicloSQLClass.Consulta_Repetido(PanelSeguridad.CicloClass)">
+	<summary>
+ averigua si esta repetido
+ </summary>
+	<param name="vp_O_Obj"></param>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.CicloSQLClass.Matrix_Ciclo">
@@ -4872,7 +4923,7 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
 	<param name="pl_obj_User"></param>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.LoginSQLClass.Read_AllUserLogin">
+</member><member name="M:PanelSeguridad.LoginSQLClass.Verify_User(System.String,System.String)">
 	<summary>
  funcion query para la consulta tabla Usuarios para ingreso a la aplicacion
  </summary>
@@ -4884,12 +4935,42 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
  </summary>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.LoginSQLClass.ListLogin(System.String,System.String)">
+</member><member name="M:PanelSeguridad.LoginSQLClass.ListLogin(System.String,System.String,System.String)">
 	<summary>
  trae el listado solicitado por login
  </summary>
 	<param name="vp_S_StrQuery"></param>
 	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CicloAjax.Consulta_Ciclo">
+	<summary>
+ traemos todos los datos para tabla ROLES (READ)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CicloAjax.InsertSucursal">
+	<summary>
+ funcion que inserta en la tabla Sucursal (INSERT)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CicloAjax.DeleteSucursal">
+	<summary>
+ funcion que cambia el estado a inhabilitado en la tabla ROLES (DELETE)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CicloAjax.UpdateLSucursal">
+	<summary>
+ funcion que actualiza en la tabla ROLES (UPDATE)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CicloAjax.CargarDroplist">
+	<summary>
+ funcion que carga el objeto DDL Links
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CicloAjax.CargarCliente">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.DocumentosSQLClass.Read_All(System.String,System.String,System.String)">
 	<summary>

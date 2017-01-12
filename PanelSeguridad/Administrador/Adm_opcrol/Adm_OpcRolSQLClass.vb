@@ -299,7 +299,7 @@ Public Class Adm_OpcRolSQLClass
 
         Dim sql As New StringBuilder
 
-        sql.AppendLine(" SELECT COUNT(1) FROM dbo.OPTION_ROL " & _
+        sql.AppendLine(" SELECT COUNT(1) FROM OPTION_ROL " & _
                        " WHERE OR_Nit_ID = '" & vp_O_Obj.Nit_ID & "'" & _
                        " AND OR_OPRol_ID = '" & vp_O_Obj.OPRol_ID & "'" & _
                        " AND OR_Consecutivo = '" & vp_O_Obj.Consecutivo & "'")

@@ -46,7 +46,7 @@ Public Class LoginSQLClass
                    " U_Estado = '" & pl_obj_User.Estado & "', " & _
                    " U_Intentos_Fallidos = '0' " & _
                    " WHERE  U_Nit_ID = '" & pl_obj_User.Nit_ID & "'" & _
-                   " AND  U_Usuario_ID = '" & UCase(pl_obj_User.Name) & "'")
+                   " AND  U_Usuario_ID = '" & UCase(pl_obj_User.Usuario_ID) & "'")
 
         StrQuery = sql.ToString
 
@@ -61,7 +61,7 @@ Public Class LoginSQLClass
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Read_AllUserLogin()
+    Public Function Verify_User(ByVal vp_S_NitID As String, ByVal vp_S_UserID As String)
 
         Dim objUser As New LoginClass
         Dim ObjListLogin As New List(Of LoginClass)
@@ -71,11 +71,11 @@ Public Class LoginSQLClass
         Dim Conexion As String = conex.typeConexion("1")
 
         Dim sql As New StringBuilder
-        sql.Append("SELECT U_Usuario_ID, U_password, U_Estado FROM USUARIOS") '[ARREGLAR PUES NO SE PUEDE CONSULTAR TODOS LOS USUARIOS Y LUEGO REVISAR]
-        'sql.Append("SELECT U_Nit_ID, U_Usuario_ID, U_password, U_Estado FROM USUARIOS")
+        sql.Append("SELECT U_Estado, U_password FROM USUARIOS " & _
+                   "WHERE U_Nit_ID = '" & vp_S_NitID & "' AND U_Usuario_ID = '" & vp_S_UserID & "'")
         StrQuery = sql.ToString
 
-        ObjListLogin = ListLogin(StrQuery, Conexion)
+        ObjListLogin = ListLogin(StrQuery, Conexion, "Verificar")
 
         Return ObjListLogin
 
@@ -97,7 +97,7 @@ Public Class LoginSQLClass
         Dim sql As New StringBuilder
         sql.AppendLine("SELECT COUNT(1) FROM USUARIOS " & _
                        " WHERE U_Nit_ID = '" & vp_S_StrQuery.Nit_ID & "' " & _
-                       " AND U_Usuario_ID = '" & vp_S_StrQuery.Name & "'")
+                       " AND U_Usuario_ID = '" & vp_S_StrQuery.Usuario_ID & "'")
         StrQuery = sql.ToString
 
         StrQuery = sql.ToString
@@ -114,7 +114,7 @@ Public Class LoginSQLClass
     ''' <param name="vp_S_StrQuery"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function ListLogin(ByVal vp_S_StrQuery As String, ByVal vg_S_StrConexion As String)
+    Public Function ListLogin(ByVal vp_S_StrQuery As String, ByVal vg_S_StrConexion As String, ByVal vp_S_Type As String)
 
         'inicializamos conexiones a la BD
         Dim objcmd As OleDbCommand = Nothing
@@ -133,17 +133,23 @@ Public Class LoginSQLClass
         'ejecutamos consulta
         ReadConsulta = objcmd.ExecuteReader()
         'recorremos la consulta por la cantidad de datos en la BD
-        While ReadConsulta.Read
 
-            Dim objUser As New LoginClass
-            'cargamos datos sobre el objeto de login
-            objUser.Name = ReadConsulta.GetString(0)
-            objUser.Password = ReadConsulta.GetString(1)
-            objUser.Estado = ReadConsulta.GetString(2)
-            'agregamos a la lista
-            ObjListLogin.Add(objUser)
+         Select vp_S_Type
 
-        End While
+            Case "Verificar"
+
+                While ReadConsulta.Read
+
+                    Dim objUser As New LoginClass
+                    'cargamos datos sobre el objeto de login
+                    objUser.Estado = ReadConsulta.GetString(0)
+                    objUser.Password = ReadConsulta.GetString(1)
+                    'agregamos a la lista
+                    ObjListLogin.Add(objUser)
+
+                End While
+
+        End Select
         'cerramos conexiones
         ReadConsulta.Close()
         objConexBD.Close()

@@ -80,9 +80,9 @@
 
                 <div id="TablaDatos" style="width: 1080px;">
 
-                    <table id="T_NIT" style="width: 100%;margin-left: 8%;" >
+                    <table id="T_NIT" style="width: 80%;margin-left: 15%;" >
                         <tr>
-                            <td id="TD_ID" style="width: 10.5%;" class="Label_Bold">NIT Empresa</td>
+                            <td  style="width: 10.5%;" class="Label_Bold">NIT Empresa</td>
                             <td id="TD1" style="width: 40%;">
                                 <select style="width: 100%;" id="Select_EmpresaNit" class="C_Chosen">
                                 </select>
@@ -95,7 +95,7 @@
                             </td>
                         </tr>
                     </table>
-                    <table id="T_Identificacion_ROL" style="width: 100%;margin-left: 8%;">
+                    <table id="T_Identificacion_ROL" style="width: 80%;margin-left: 15%;">
                         <tr>
                             <td class="Label_Bold" style="width: 10%;">Código
                             </td>
@@ -127,7 +127,7 @@
                         </tr>
                     </table>
 
-                    <table id="T_Descripcion" style="width: 100%; margin-left: 8%;">
+                    <table id="T_Descripcion" style="width: 80%;margin-left: 15%;">
                         <tr>
                             <td class="Label_Bold" style="width: 10.8%;" >Descripción
                             </td>

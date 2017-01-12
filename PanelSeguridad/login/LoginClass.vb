@@ -3,7 +3,7 @@ Public Class LoginClass
 
 #Region "campos"
     Private _Nit_ID As String
-    Private _Name As String
+    Private _Usuario_ID As String
     Private _Password As String
     Private _Estado As String
 #End Region
@@ -17,12 +17,12 @@ Public Class LoginClass
             Me._Nit_ID = value
         End Set
     End Property
-    Public Property Name() As String
+    Public Property Usuario_ID() As String
         Get
-            Return Me._Name
+            Return Me._Usuario_ID
         End Get
         Set(ByVal value As String)
-            Me._Name = value
+            Me._Usuario_ID = value
         End Set
     End Property
     Public Property Password() As String
