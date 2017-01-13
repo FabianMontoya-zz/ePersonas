@@ -4,6 +4,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script src="../Scripts/jquery-1.4.1.js" type="text/javascript"></script>
     <script src="Login.js" type="text/javascript"></script>
+    <script src="LoginTransaccionsAjax.js" type="text/javascript"></script>
     <script src="../SasifMaster.js" type="text/javascript"></script>
     <link href="../css/Dialog/jquery-ui.css" rel="stylesheet" type="text/css" />
     <script src="../SasifMaster_Cosult.js" type="text/javascript"></script>

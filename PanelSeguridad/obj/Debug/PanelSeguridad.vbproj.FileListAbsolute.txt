@@ -123,8 +123,6 @@ D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.vbp
 D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.dll
 D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.xml
 D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.pdb
-D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.Resources.resources
-D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.vbproj.GenerateResource.Cache
 D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\PanelSeguridad.dll
 D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\PanelSeguridad.pdb
 D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\PanelSeguridad.xml
@@ -161,6 +159,9 @@ D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\es\System.Web.Optimiz
 D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\es\System.Web.Providers.resources.dll
 D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\es\Microsoft.AspNet.Membership.OpenAuth.resources.dll
 D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\es\Microsoft.AspNet.FriendlyUrls.resources.dll
+D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.vbprojResolveAssemblyReference.cache
+D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.Resources.resources
+D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.vbproj.GenerateResource.Cache
 D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.dll
 D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.xml
 D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.pdb

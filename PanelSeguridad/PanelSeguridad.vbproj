@@ -414,6 +414,7 @@
     <Content Include="login\Login.aspx" />
     <Content Include="login\Login.js" />
     <Content Include="login\LoginAjax.aspx" />
+    <Content Include="login\LoginTransaccionsAjax.js" />
     <Content Include="Master\Sasif_Ing.js" />
     <Content Include="McCain\Image\activo.png" />
     <Content Include="McCain\Image\alert.png" />

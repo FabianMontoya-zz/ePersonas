@@ -1991,7 +1991,12 @@ To modify move field declaration from designer file to code-behind file.
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.LoginAjax.ingresar">
 	<summary>
- 'funcion que valida Si el usuario existe o si es para cambio de Contraseña, Si no, lo envia a validar User y Password
+ Función que valida Si el usuario existe o si es para cambio de Contraseña, Si no, lo envia a validar User y Password
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.LoginAjax.AllInformationUser">
+	<summary>
+ Función que hace la consulta de todos los parametros asociados al usuario
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.LoginAjax.CargarCliente">
@@ -3770,7 +3775,7 @@ Control main.
 Campo generado automáticamente.
 Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
 </remarks>
-</member><member name="M:PanelSeguridad.CicloSQLClass.Read_AllSucursal(System.String,System.String,System.String)">
+</member><member name="M:PanelSeguridad.CicloSQLClass.Read_AllCiclo(System.String,System.String,System.String)">
 	<summary>
  creala consulta para la tabla roles parametrizada (READ)
  </summary>
@@ -3779,28 +3784,35 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
 	<param name="vp_S_Contenido"></param>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CicloSQLClass.DeleteSucursal(PanelSeguridad.SucursalClass)">
+</member><member name="M:PanelSeguridad.CicloSQLClass.DeleteCiclo(PanelSeguridad.CicloClass)">
 	<summary>
  funcion que crea el query para el estado del rol (DELETE)
  </summary>
 	<param name="vp_Obj"></param>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CicloSQLClass.UpdateSucursal(PanelSeguridad.SucursalClass)">
+</member><member name="M:PanelSeguridad.CicloSQLClass.UpdateCiclo(PanelSeguridad.CicloClass)">
 	<summary>
  funcion que crea el query para la modificacion del rol (UPDATE)
  </summary>
 	<param name="vp_Obj"></param>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CicloSQLClass.InsertSucursal(PanelSeguridad.CicloClass)">
+</member><member name="M:PanelSeguridad.CicloSQLClass.InsertCiclo(PanelSeguridad.CicloClass)">
 	<summary>
  funcion que crea el query para la insercion de nuevo rol (INSERT)
  </summary>
 	<param name="vp_Obj"></param>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CicloSQLClass.listCiclo(System.String,System.String,System.String)">
+</member><member name="M:PanelSeguridad.CicloSQLClass.InsertCicloDetalle(PanelSeguridad.CicloClass)">
+	<summary>
+ funcion que crea el query para la insercion de nuevo CicloDetalle (INSERT)
+ </summary>
+	<param name="vp_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CicloSQLClass.list(System.String,System.String,System.String)">
 	<summary>
  funcion que trae el listado de Ciclo para armar la tabla
  </summary>
@@ -4925,14 +4937,17 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.LoginSQLClass.Verify_User(System.String,System.String)">
 	<summary>
- funcion query para la consulta tabla Usuarios para ingreso a la aplicacion
+ Función que trae el estado y contraseña del usuario para hacer la validación en Login
  </summary>
+	<param name="vp_S_NitID"></param>
+	<param name="vp_S_UserID"></param>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.LoginSQLClass.ConsultarExiste(PanelSeguridad.LoginClass)">
 	<summary>
- funcion query para la consulta tabla Usuarios para ingreso a la aplicacion
+ Función encargada de buscar si existe un usuario con los datos registrado
  </summary>
+	<param name="vp_S_StrQuery"></param>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.LoginSQLClass.ListLogin(System.String,System.String,System.String)">
@@ -4942,22 +4957,29 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
 	<param name="vp_S_StrQuery"></param>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.LoginSQLClass.InformacionUser(PanelSeguridad.LoginClass)">
+	<summary>
+ Función que se encarga de consultar todos los parametros asignados a un usuario
+ </summary>
+	<param name="vp_S_User"></param>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.CicloAjax.Consulta_Ciclo">
 	<summary>
  traemos todos los datos para tabla ROLES (READ)
  </summary>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CicloAjax.InsertSucursal">
+</member><member name="M:PanelSeguridad.CicloAjax.InsertCiclo">
 	<summary>
- funcion que inserta en la tabla Sucursal (INSERT)
+ funcion que inserta en la tabla Ciclo (INSERT)
  </summary>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CicloAjax.DeleteSucursal">
+</member><member name="M:PanelSeguridad.CicloAjax.DeleteCiclo">
 	<summary>
  funcion que cambia el estado a inhabilitado en la tabla ROLES (DELETE)
  </summary>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CicloAjax.UpdateLSucursal">
+</member><member name="M:PanelSeguridad.CicloAjax.UpdateLCiclo">
 	<summary>
  funcion que actualiza en la tabla ROLES (UPDATE)
  </summary>
