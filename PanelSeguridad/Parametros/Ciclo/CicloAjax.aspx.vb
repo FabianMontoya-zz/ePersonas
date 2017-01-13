@@ -85,8 +85,12 @@ Public Class CicloAjax
             ObjList.Add(obj)
 
             result = SQL_Ciclo.InsertCiclo(obj)
-            result = SQL_Ciclo.InsertCicloDetalle(obj)
-
+            If result = "Exito" Then
+                result = SQL_Ciclo.InsertCicloDetalle(obj)
+            Else
+                result = "Error"
+            End If
+           
         Else
             result = "Existe"
         End If
@@ -112,7 +116,13 @@ Public Class CicloAjax
 
         ObjList.Add(obj)
 
-        result = SQL_Ciclo.DeleteCiclo(obj)
+        result = SQL_Ciclo.DeleteCicloDetalle(obj)
+        If result = "Exito" Then
+            result = SQL_Ciclo.DeleteCiclo(obj)
+        Else
+            result = "Error"
+        End If
+
         Response.Write(result)
     End Sub
 
@@ -129,12 +139,19 @@ Public Class CicloAjax
 
         obj_Ciclo.ID_Ciclo = Request.Form("ID")
         obj_Ciclo.Descripcion = Request.Form("descripcion")
+        obj_Ciclo.Fecha_Corte = Request.Form("fechaCorte")
+        obj_Ciclo.Fecha_Pago = Request.Form("fechaPago")
         obj_Ciclo.UsuarioActualizacion = Request.Form("user")
         obj_Ciclo.FechaActualizacion = Date.Now
 
         ObjList.Add(obj_Ciclo)
 
         result = SQL_Ciclo.UpdateCiclo(obj_Ciclo)
+        If result = "Exito" Then
+            result = SQL_Ciclo.UpdateCicloDetalle(obj_Ciclo)
+        Else
+            result = "Error"
+        End If
 
         Response.Write(result)
 

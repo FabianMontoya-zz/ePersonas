@@ -263,7 +263,7 @@
 }
 
 
-#Container_Consulta, #Container_Facturas
+#Container_Consulta, #Container_Facturas, #container_TCiclo, #container_TSucursal
 {
     width: 100%;
     overflow: auto;

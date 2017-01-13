@@ -3770,37 +3770,58 @@ Control main.
 Campo generado automáticamente.
 Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
 </remarks>
-</member><member name="M:PanelSeguridad.CicloSQLClass.Read_AllSucursal(System.String,System.String,System.String)">
+</member><member name="M:PanelSeguridad.CicloSQLClass.Read_AllCiclo(System.String,System.String,System.String)">
 	<summary>
- creala consulta para la tabla roles parametrizada (READ)
+ creala consulta para la tabla Cicloes parametrizada (READ)
  </summary>
 	<param name="vp_S_Filtro"></param>
 	<param name="vp_S_Opcion"></param>
 	<param name="vp_S_Contenido"></param>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CicloSQLClass.DeleteSucursal(PanelSeguridad.SucursalClass)">
+</member><member name="M:PanelSeguridad.CicloSQLClass.DeleteCiclo(PanelSeguridad.CicloClass)">
 	<summary>
- funcion que crea el query para el estado del rol (DELETE)
+ funcion que crea el query para el estado del Ciclo (DELETE)
  </summary>
 	<param name="vp_Obj"></param>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CicloSQLClass.UpdateSucursal(PanelSeguridad.SucursalClass)">
+</member><member name="M:PanelSeguridad.CicloSQLClass.DeleteCicloDetalle(PanelSeguridad.CicloClass)">
 	<summary>
- funcion que crea el query para la modificacion del rol (UPDATE)
+ funcion que crea el query para el estado del Ciclo Detalle (DELETE)
  </summary>
 	<param name="vp_Obj"></param>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CicloSQLClass.InsertSucursal(PanelSeguridad.CicloClass)">
+</member><member name="M:PanelSeguridad.CicloSQLClass.UpdateCiclo(PanelSeguridad.CicloClass)">
 	<summary>
- funcion que crea el query para la insercion de nuevo rol (INSERT)
+ funcion que crea el query para la modificacion del Ciclo (UPDATE)
  </summary>
 	<param name="vp_Obj"></param>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CicloSQLClass.listCiclo(System.String,System.String,System.String)">
+</member><member name="M:PanelSeguridad.CicloSQLClass.UpdateCicloDetalle(PanelSeguridad.CicloClass)">
+	<summary>
+ funcion que crea el query para la modificacion del Ciclo Detalle (UPDATE)
+ </summary>
+	<param name="vp_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CicloSQLClass.InsertCiclo(PanelSeguridad.CicloClass)">
+	<summary>
+ funcion que crea el query para la insercion de nuevo Ciclo (INSERT)
+ </summary>
+	<param name="vp_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CicloSQLClass.InsertCicloDetalle(PanelSeguridad.CicloClass)">
+	<summary>
+ funcion que crea el query para la insercion de nuevo CicloDetalle (INSERT)
+ </summary>
+	<param name="vp_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CicloSQLClass.list(System.String,System.String,System.String)">
 	<summary>
  funcion que trae el listado de Ciclo para armar la tabla
  </summary>
@@ -4947,17 +4968,17 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
  traemos todos los datos para tabla ROLES (READ)
  </summary>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CicloAjax.InsertSucursal">
+</member><member name="M:PanelSeguridad.CicloAjax.InsertCiclo">
 	<summary>
- funcion que inserta en la tabla Sucursal (INSERT)
+ funcion que inserta en la tabla Ciclo (INSERT)
  </summary>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CicloAjax.DeleteSucursal">
+</member><member name="M:PanelSeguridad.CicloAjax.DeleteCiclo">
 	<summary>
  funcion que cambia el estado a inhabilitado en la tabla ROLES (DELETE)
  </summary>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CicloAjax.UpdateLSucursal">
+</member><member name="M:PanelSeguridad.CicloAjax.UpdateLCiclo">
 	<summary>
  funcion que actualiza en la tabla ROLES (UPDATE)
  </summary>

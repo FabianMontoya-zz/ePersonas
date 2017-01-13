@@ -26,33 +26,6 @@ function transacionAjax_CargaBusqueda(vp_State) {
     });
 }
 
-/*-------------------- Carga combo NIT ---------------------------*/
-//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_EmpresaNit(vp_State) {
-    $.ajax({
-        url: "CicloAjax.aspx",
-        type: "POST",
-        //crear json
-        data: {
-            "action": vp_State,
-            "tabla": 'CICLO'
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            if (result == "") {
-                ArrayEmpresaNit = [];
-            }
-            else {
-                ArrayEmpresaNit = JSON.parse(result);
-                charge_CatalogList(ArrayEmpresaNit, "Select_EmpresaNit", "Generico");
-            }
-        },
-        error: function () {
-
-        }
-    });
-}
-
 /*------------------------------ consulta ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax_Ciclo(vp_State, filtro, opcion) {
@@ -113,29 +86,31 @@ function transacionAjax_Ciclo_create(vp_State) {
             "ID": vl_ID,
             "descripcion": $("#TxtDescription").val(),
             "sigla": $("#TxtSigla").val(),
-            "user": User.toUpperCase()
+            "user": User.toUpperCase(),
+            "fechaCorte": $("#TxtFechaCorte").val(),
+            "fechaPago": $("#TextFechaPago").val()
         },
         //mostrar resultados de la creacion del Ciclo
         success: function (result) {
             switch (result) {
 
                 case "Error":
-                    Mensaje_General("Disculpenos :(", "Ocurrió un error y no se realizó el Ingreso de la Nueva Ciclo.", "W");
+                    Mensaje_General("Disculpenos :(", "Ocurrió un error y no se realizó el Ingreso del Nuevo Ciclo.", "W");
                     break;
 
                 case "Existe":
-                    Mensaje_General("Ciclo Existente", "La Ciclo que desea ingresar ya existe en el sistema, favor revisar.", "E");
+                    Mensaje_General("Ciclo Existente", "El Ciclo que desea ingresar ya existe en el sistema, favor revisar.", "E");
                     $("#ImgNIT").css("display", "inline-table");
                     $("#ImgID").css("display", "inline-table");
                     break;
 
                 case "Exito":
                     if (estado == "modificar") {
-                        Mensaje_General("¡Exito!", "La Ciclo " + vl_ID + " se ha modificado exitosamente.", "S");
+                        Mensaje_General("¡Exito!", "El Ciclo " + vl_ID + " se ha modificado exitosamente.", "S");
                         HabilitarPanel('modificar');
                     }
                     else {
-                        Mensaje_General("¡Exito!", "La Ciclo " + vl_ID + " se ha registrado exitosamente en el sistema.", "S");
+                        Mensaje_General("¡Exito!", "El Ciclo " + vl_ID + " se ha registrado exitosamente en el sistema.", "S");
                         Clear();
                     }
                     break;
@@ -152,7 +127,6 @@ function transacionAjax_Ciclo_create(vp_State) {
 //hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax_Ciclo_delete(vp_State) {
     vl_ID = editID;
-    vl_NIT = editNIT;
 
     $.ajax({
         url: "CicloAjax.aspx",
@@ -160,7 +134,6 @@ function transacionAjax_Ciclo_delete(vp_State) {
         //crear json
         data: {
             "action": vp_State,
-            "NIT": vl_NIT,
             "ID": vl_ID,
             "user": User.toUpperCase()
         },

@@ -6,7 +6,7 @@ Public Class CicloSQLClass
 #Region "CRUD"
 
     ''' <summary>
-    ''' creala consulta para la tabla roles parametrizada (READ)
+    ''' creala consulta para la tabla Cicloes parametrizada (READ)
     ''' </summary>
     ''' <param name="vp_S_Filtro"></param>
     ''' <param name="vp_S_Opcion"></param>
@@ -24,24 +24,47 @@ Public Class CicloSQLClass
         Dim sql As New StringBuilder
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
-            sql.Append("SELECT CIC_ID_Ciclo, CIC_Descripcion, " & _
-                       "CIC_Usuario_Creacion, CIC_FechaCreacion, CIC_Usuario_Actualizacion, CIC_FechaActualizacion, " & _
-                       "ROW_NUMBER() OVER(ORDER BY CIC_ID_Ciclo ASC) AS Index_Ciclo " & _
-                       "FROM CICLO ORDER BY CIC_ID_Ciclo ASC")
+            sql.Append("SELECT C.CIC_ID_Ciclo, " & _
+                        "C.CIC_Descripcion, " & _
+                        "C.CIC_Usuario_Creacion, " & _
+                        "C.CIC_FechaCreacion, " & _
+                        "C.CIC_Usuario_Actualizacion, " & _
+                        "C.CIC_FechaActualizacion, " & _
+                        "ROW_NUMBER() OVER(ORDER BY C.CIC_ID_Ciclo ASC) AS Index_Ciclo, " & _
+                        "DC.DCI_Fecha_Corte, " & _
+                        "DC.DCI_Fecha_Pago " & _
+                        "FROM CICLO C " & _
+                        "INNER JOIN DETALLES_CICLO DC ON DC.DCI_ID_Ciclo = C.CIC_ID_Ciclo  " & _
+                        "ORDER BY C.CIC_ID_Ciclo ASC")
         Else
 
             If vp_S_Contenido = "ALL" Then
-                sql.Append("SELECT CIC_ID_Ciclo, CIC_Descripcion, " & _
-                       "CIC_Usuario_Creacion, CIC_FechaCreacion, CIC_Usuario_Actualizacion, CIC_FechaActualizacion, " & _
-                       "ROW_NUMBER() OVER(ORDER BY CIC_ID_Ciclo ASC) AS Index_Ciclo " & _
-                       "FROM CICLO ORDER BY CIC_ID_Ciclo ASC")
+                sql.Append("SELECT C.CIC_ID_Ciclo, " & _
+                        "C.CIC_Descripcion, " & _
+                        "C.CIC_Usuario_Creacion, " & _
+                        "C.CIC_FechaCreacion, " & _
+                        "C.CIC_Usuario_Actualizacion, " & _
+                        "C.CIC_FechaActualizacion, " & _
+                        "ROW_NUMBER() OVER(ORDER BY C.CIC_ID_Ciclo ASC) AS Index_Ciclo, " & _
+                        "DC.DCI_Fecha_Corte, " & _
+                        "DC.DCI_Fecha_Pago " & _
+                        "FROM CICLO C " & _
+                        "INNER JOIN DETALLES_CICLO DC ON DC.DCI_ID_Ciclo = C.CIC_ID_Ciclo  " & _
+                        "ORDER BY C.CIC_ID_Ciclo ASC")
             Else
-                sql.Append("SELECT CIC_ID_Ciclo, CIC_Descripcion, " & _
-                       "CIC_Usuario_Creacion, CIC_FechaCreacion, CIC_Usuario_Actualizacion, CIC_FechaActualizacion, " & _
-                       "ROW_NUMBER() OVER(ORDER BY CIC_ID_Ciclo ASC) AS Index_Ciclo " & _
-                       "FROM CICLO " & _
-                       "WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'" & _
-                       " ORDER BY CIC_ID_Ciclo ASC")
+                sql.Append("SELECT C.CIC_ID_Ciclo, " & _
+                        "C.CIC_Descripcion, " & _
+                        "C.CIC_Usuario_Creacion, " & _
+                        "C.CIC_FechaCreacion, " & _
+                        "C.CIC_Usuario_Actualizacion, " & _
+                        "C.CIC_FechaActualizacion, " & _
+                        "ROW_NUMBER() OVER(ORDER BY C.CIC_ID_Ciclo ASC) AS Index_Ciclo, " & _
+                        "DC.DCI_Fecha_Corte, " & _
+                        "DC.DCI_Fecha_Pago " & _
+                        "FROM CICLO C " & _
+                        "INNER JOIN DETALLES_CICLO DC ON DC.DCI_ID_Ciclo = C.CIC_ID_Ciclo  " & _
+                        "WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%' " & _
+                        "ORDER BY C.CIC_ID_Ciclo ASC")
             End If
         End If
 
@@ -54,7 +77,7 @@ Public Class CicloSQLClass
     End Function
 
     ''' <summary>
-    ''' funcion que crea el query para el estado del rol (DELETE)
+    ''' funcion que crea el query para el estado del Ciclo (DELETE)
     ''' </summary>
     ''' <param name="vp_Obj"></param>
     ''' <returns></returns>
@@ -79,7 +102,32 @@ Public Class CicloSQLClass
     End Function
 
     ''' <summary>
-    ''' funcion que crea el query para la modificacion del rol (UPDATE)
+    ''' funcion que crea el query para el estado del Ciclo Detalle (DELETE)
+    ''' </summary>
+    ''' <param name="vp_Obj"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function DeleteCicloDetalle(ByVal vp_Obj As CicloClass)
+        Dim conex As New Conector
+        Dim Result As String
+        ' definiendo los objetos
+        Dim sql As New StringBuilder
+
+        Dim StrQuery As String = ""
+
+        sql.AppendLine("DELETE DETALLES_CICLO " & _
+                       " WHERE DCI_ID_Ciclo = '" & vp_Obj.ID_Ciclo & "'")
+
+        StrQuery = sql.ToString
+
+        Result = conex.StrInsert_and_Update_All(StrQuery, "2")
+
+        Return Result
+
+    End Function
+
+    ''' <summary>
+    ''' funcion que crea el query para la modificacion del Ciclo (UPDATE)
     ''' </summary>
     ''' <param name="vp_Obj"></param>
     ''' <returns></returns>
@@ -107,7 +155,33 @@ Public Class CicloSQLClass
     End Function
 
     ''' <summary>
-    ''' funcion que crea el query para la insercion de nuevo rol (INSERT)
+    ''' funcion que crea el query para la modificacion del Ciclo Detalle (UPDATE)
+    ''' </summary>
+    ''' <param name="vp_Obj"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function UpdateCicloDetalle(ByVal vp_Obj As CicloClass)
+
+        Dim conex As New Conector
+        Dim Result As String
+        ' definiendo los objetos
+        Dim sql As New StringBuilder
+        Dim StrQueryID As String = ""
+        Dim StrQuery As String = ""
+        sql.AppendLine("UPDATE DETALLES_CICLO SET " & _
+                       " DCI_Fecha_Pago ='" & vp_Obj.Fecha_Pago & "' " & _
+                       " WHERE DCI_ID_Ciclo = '" & vp_Obj.ID_Ciclo & "' AND DCI_Fecha_Corte = '" & vp_Obj.Fecha_Corte & "'")
+
+        StrQuery = sql.ToString
+
+        Result = conex.StrInsert_and_Update_All(StrQuery, "2")
+
+        Return Result
+
+    End Function
+
+    ''' <summary>
+    ''' funcion que crea el query para la insercion de nuevo Ciclo (INSERT)
     ''' </summary>
     ''' <param name="vp_Obj"></param>
     ''' <returns></returns>
@@ -221,6 +295,8 @@ Public Class CicloSQLClass
                     objCiclo.UsuarioActualizacion = ReadConsulta.GetValue(4)
                     objCiclo.FechaActualizacion = ReadConsulta.GetValue(5)
                     objCiclo.Index = ReadConsulta.GetValue(6)
+                    objCiclo.Fecha_Corte = ReadConsulta.GetValue(7)
+                    If Not (IsDBNull(ReadConsulta.GetValue(8))) Then objCiclo.Fecha_Pago = ReadConsulta.GetValue(8) Else objCiclo.Fecha_Pago = ""
                     'agregamos a la lista
                     ObjListCiclo.Add(objCiclo)
                 End While
