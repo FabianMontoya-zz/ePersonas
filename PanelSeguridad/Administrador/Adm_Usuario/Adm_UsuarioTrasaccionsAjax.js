@@ -277,7 +277,7 @@ function transacionAjax_Create_User(State) {
     } else {
         ID = $("#Txt_ID").val();
         NIT = $("#Select_EmpresaNit").val();
-        estado = $("#Select_EstadoUser").val();
+        estado = 0;
         intentos = 0;
     }
 
