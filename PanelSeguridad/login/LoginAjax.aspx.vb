@@ -17,13 +17,16 @@ Public Class LoginAjax
                 Case "Cliente"
                     CargarCliente()
 
+                Case "Loggear"
+                    AllInformationUser()
+
             End Select
 
         End If
     End Sub
 
     ''' <summary>
-    ''' 'funcion que valida Si el usuario existe o si es para cambio de Contraseña, Si no, lo envia a validar User y Password
+    ''' Función que valida Si el usuario existe o si es para cambio de Contraseña, Si no, lo envia a validar User y Password
     ''' </summary>
     ''' <remarks></remarks>
     Protected Sub ingresar()
@@ -48,6 +51,26 @@ Public Class LoginAjax
         End If
 
         Response.Write(vl_I_Resultado)
+
+    End Sub
+
+    ''' <summary>
+    ''' Función que hace la consulta de todos los parametros asociados al usuario
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub AllInformationUser()
+
+        Dim LoginClass As New LoginClass
+        Dim ObjListInfoUser As New List(Of LoginClass)
+        Dim SQL_Login As New LoginSQLClass
+
+
+        LoginClass.Usuario_ID = Request.Form("Usuario")
+        LoginClass.Nit_ID = Request.Form("NIT")
+
+        ObjListInfoUser = SQL_Login.InformacionUser(LoginClass)
+
+        Response.Write(JsonConvert.SerializeObject(ObjListInfoUser.ToArray()))
 
     End Sub
 
@@ -122,6 +145,7 @@ Public Class LoginAjax
 
         Return vl_I_Resultado
     End Function
+
 #End Region
 
 End Class
