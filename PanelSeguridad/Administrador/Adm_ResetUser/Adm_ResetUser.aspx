@@ -73,9 +73,9 @@
                 <td style="width: 40%">
                     <select id="DDLTipo" class="C_Chosen">
                         <option value="-1">Seleccione...</option>
-                        <option value="0">Activo</option>
-                        <option value="1">Inactivo / Deshabilitado</option>
-                        <option value="2">Eliminado</option>
+                        <option value="0">0 - Activo</option>
+                        <option value="1">1 - Inactivo / Deshabilitado</option>
+                        <option value="2">2 - Eliminado</option>
                     </select>
                 </td>
                 <td style="padding-bottom: 25px; width: 2%;">
