@@ -195,7 +195,7 @@ function ResetError() {
     $("#ImgToken").css("display", "none");
     $("#ImgTypeAccess").css("display", "none");
     $("#ImgEstadoUser").css("display", "none");
-    
+
     /*===FIN ERRORES ADMINSITRACIÓN Adm_Usuario ===*/
 }
 
@@ -223,7 +223,7 @@ function Load_Charge_Sasif() {
             effect: 'fade',
             duration: 200
         }
-});
+    });
 
 }
 
@@ -246,6 +246,23 @@ function CloseControl() {
     $("#Dialog_Control").dialog("close");
 }
 
+
+function Redireciona_Post(vp_url, vp_data) {
+    var vl_form = document.createElement('form');
+    vl_form.method = 'post';
+    vl_form.action = vp_url;
+
+    for (var name in vp_data) {
+        var vl_input = document.createElement('input');
+        vl_input.type = 'hidden';
+        vl_input.name = name;
+        vl_input.value = vp_data[name];
+        vl_form.appendChild(vl_input);
+    }
+    vl_form.submit();
+}
+
+// redirectPost('http://www.example.com', { text: 'text\n\ntext' });
 
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -656,7 +673,7 @@ function charge_CatalogList(objCatalog, nameList, selector) {
 
         case "Generico":
             $("#" + nameList).append("<option value='0'> 0 - Genérico</option>");
-            $("#" + nameList).append("<option value='-1'>Seleccione...</option>");            
+            $("#" + nameList).append("<option value='-1'>Seleccione...</option>");
             $("#" + nameList + " option[value= '-1'] ").attr("selected", true);
             break;
     }
