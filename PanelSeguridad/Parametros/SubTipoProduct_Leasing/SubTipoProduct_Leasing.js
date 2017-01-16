@@ -7,7 +7,22 @@ var editID;
 
 //Evento load JS
 $(document).ready(function () {
+    
+    $("#Marco_trabajo_Form").css("height", "490px");
+    $("#container_TSTP_Leasing").css("height", "380px");
+
+    /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
+    Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
+    Ocultar_Errores();
+    Ocultar_Tablas();
+
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
+
+});
+
+//Función que oculta todas las IMG de los errores en pantalla
+function Ocultar_Errores() {
+    ResetError();
     $("#ESelect").css("display", "none");
     $("#ImgID").css("display", "none");
     $("#Img2").css("display", "none");
@@ -15,10 +30,12 @@ $(document).ready(function () {
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
     $("#WA").css("display", "none");
+}
 
+//funcion para las ventanas emergentes
+function Ventanas_Emergentes() {
 
-    $("#TablaDatos").css("display", "none");
-    $("#TablaConsulta").css("display", "none");
+    Load_Charge_Sasif(); //Carga de "SasifMaster.js" el Control de Carga
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
@@ -32,8 +49,13 @@ $(document).ready(function () {
         dialogClass: "Dialog_Sasif",
         modal: true
     });
+}
 
-});
+//Función que oculta las tablas
+function Ocultar_Tablas() {
+    $("#TablaDatos").css("display", "none");
+    $("#TablaConsulta").css("display", "none");
+}
 
 //salida del formulario
 function btnSalir() {
@@ -90,6 +112,8 @@ function BtnConsulta() {
     var ValidateSelect = ValidarDroplist();
     var opcion;
 
+    OpenControl(); //Abrimos el load de espera con el logo
+
     if (ValidateSelect == 1) {
         filtro = "N";
         opcion = "ALL";
@@ -121,6 +145,7 @@ function BtnCrear() {
 
 //elimina de la BD
 function BtnElimina() {
+    OpenControl(); //Abrimos el load de espera con el logo
     transacionAjax_TP_Leasing_delete("elimina");
 }
 
@@ -289,5 +314,5 @@ function Clear() {
     $("#Txt_ID").val("");
     $("#TxtDescripcion").val("");
     $("#TxtRead").val("");
-    $("#DDLColumns").val("-1");
+    $("#DDLColumns").val("-1").trigger("chosen:updated");
 }
