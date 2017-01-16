@@ -1,6 +1,8 @@
 ﻿/*--------------- region de variables globales --------------------*/
 var User;
 var Link;
+var Encrip;
+
 var NameTemporal;
 var Doc_name;
 var Matrix_Mes = [];
@@ -60,7 +62,6 @@ $(document).ready(function () {
         this.value = "";
     });
 
-
     nobackbutton();
 
     console.log("All is ready, enjoy!");
@@ -76,12 +77,15 @@ function ConsultaParametrosURL() {
     //capturamos la url
     var URLPage = window.location.search.substring(1);
     var URLVariables = URLPage.split('&');
-    
-    if (URLVariables.length <= 1)
+
+    if (URLVariables.length <= 2) {
         User = URLVariables[0].replace("User=", "");
+        Encrip = URLVariables[1].replace("Key=", "");
+    }
     else {
         User = URLVariables[0].replace("User=", "");
-        Link = URLVariables[1].replace("L_L=", "");
+        Encrip = URLVariables[1].replace("Key=", "");
+        Link = URLVariables[2].replace("L_L=", "");
     }
 
     $("#User").html(User.toUpperCase());
