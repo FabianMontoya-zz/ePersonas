@@ -20,6 +20,10 @@ Public Class LoginAjax
                 Case "Loggear"
                     AllInformationUser()
 
+                Case "Encriptar_dato"
+                    Encripta_ingreso()
+
+
             End Select
 
         End If
@@ -73,6 +77,18 @@ Public Class LoginAjax
         Response.Write(JsonConvert.SerializeObject(ObjListInfoUser.ToArray()))
 
     End Sub
+
+
+    Protected Sub Encripta_ingreso()
+
+        Dim EncripClass As New EncriptarClass
+        Dim vl_S_dato As String = Request.Form("StrDato")
+
+        Dim vl_S_encriptado = EncripClass.encriptaDato(vl_S_dato)
+        Response.Write(vl_S_encriptado)
+
+    End Sub
+
 
 #Region "DROP LIST"
 
@@ -145,6 +161,7 @@ Public Class LoginAjax
 
         Return vl_I_Resultado
     End Function
+
 
 #End Region
 

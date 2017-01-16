@@ -76,14 +76,16 @@ function ConsultaParametrosURL() {
     //capturamos la url
     var URLPage = window.location.search.substring(1);
     var URLVariables = URLPage.split('&');
-
-
+    
     if (URLVariables.length <= 1)
         User = URLVariables[0].replace("User=", "");
     else {
         User = URLVariables[0].replace("User=", "");
         Link = URLVariables[1].replace("L_L=", "");
     }
+
+    $("#User").html(User.toUpperCase());
+
     nobackbutton();
     return User;
 }

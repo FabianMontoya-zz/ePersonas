@@ -115,7 +115,8 @@ function transacionAjax_AllInfoUser(vp_State, vp_Nit_ID, vp_User_ID) {
         },
         success: function (result) {
             result = JSON.parse(result);
-            window.location = "../Menu/menu.aspx?User=" + vl_Dat_Url;
+            transacionAjax_Encriptar("Encriptar_dato", vl_Dat_Url);
+
         },
         error: function () {
 
@@ -126,17 +127,18 @@ function transacionAjax_AllInfoUser(vp_State, vp_Nit_ID, vp_User_ID) {
     });
 }
 
-function transacionAjax_Encriptar(vp_State, vl_Dat_Url) {
+
+function transacionAjax_Encriptar(vp_State, vp_Dato) {
     $.ajax({
         url: "LoginAjax.aspx",
         type: "POST",
         //crear json
         data: {
             "action": vp_State,
-            "StrDato": vl_Dat_Url
+            "StrDato": vp_Dato
         },
         success: function (result) {
-            alert();
+            window.location = "../Menu/menu.aspx?User=" + vp_Dato + "?Enc=" + result;
         },
         error: function () {
 
