@@ -3,6 +3,11 @@ Imports System.Security.Cryptography
 Imports System.IO
 
 Public Class EncriptarClass
+#Region "Variables Globales"
+    Private vg_b_mbytKey(7) As Byte
+    Private vg_b_mbytIV(7) As Byte
+#End Region
+
     ''' <summary>
     ''' funcion para encriptacion del password diseñada por
     ''' German Alejandro Rodriguez
@@ -24,6 +29,7 @@ Public Class EncriptarClass
         Return vl_S_passEncrip
 
     End Function
+
     ''' <summary>
     ''' funcion para encriptacion del password MD5
     ''' </summary>
@@ -46,24 +52,28 @@ Public Class EncriptarClass
     End Function
 
 #Region "Enciptación de URL"
-    Private mbytKey(7) As Byte
-    Private mbytIV(7) As Byte
 
-    Private Function convierteLlave(ByVal strLlave As String) As Boolean
+    ''' <summary>
+    ''' convierte valor llave
+    ''' </summary>
+    ''' <param name="vp_s_Llave"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Private Function convierteLlave(ByVal vp_s_Llave As String) As Boolean
         Try
-            Dim bp(strLlave.Length - 1) As Byte
+            Dim bp(vp_s_Llave.Length - 1) As Byte
             Dim aEnc As ASCIIEncoding = New ASCIIEncoding()
-            aEnc.GetBytes(strLlave, 0, strLlave.Length, bp, 0)
+            aEnc.GetBytes(vp_s_Llave, 0, vp_s_Llave.Length, bp, 0)
 
             Dim sha As SHA1CryptoServiceProvider = New SHA1CryptoServiceProvider()
             Dim bpHash() As Byte = sha.ComputeHash(bp)
 
             Dim i As Integer
             For i = 0 To 7
-                mbytKey(i) = bpHash(i)
+                vg_b_mbytKey(i) = bpHash(i)
             Next i
             For i = 8 To 15
-                mbytIV(i - 8) = bpHash(i)
+                vg_b_mbytIV(i - 8) = bpHash(i)
             Next
 
             Return True
@@ -73,28 +83,34 @@ Public Class EncriptarClass
         End Try
     End Function
 
-    Public Function encriptaDato(ByVal strDato As String) As String
-        Dim strResultado As String
+    ''' <summary>
+    ''' encriptar el dato
+    ''' </summary>
+    ''' <param name="vp_s_Dato"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function encriptaDato(ByVal vp_s_Dato As String) As String
+        Dim vl_s_Resultado As String
 
-        If strDato.Length > 92160 Then
-            strResultado = "Error. Data String too large. Keep within 90Kb."
-            Return strResultado
+        If vp_s_Dato.Length > 92160 Then
+            vl_s_Resultado = "Error. Data String too large. Keep within 90Kb."
+            Return vl_s_Resultado
         End If
 
         If Not (convierteLlave("FabianM")) Then
-            strResultado = "Error. Fail to generate key for encryption"
-            Return strResultado
+            vl_s_Resultado = "Error. Fail to generate key for encryption"
+            Return vl_s_Resultado
         End If
 
-        strDato = String.Format("{0,5:00000}" & strDato, strDato.Length)
+        vp_s_Dato = String.Format("{0,5:00000}" & vp_s_Dato, vp_s_Dato.Length)
 
-        Dim rbData(strDato.Length - 1) As Byte
+        Dim rbData(vp_s_Dato.Length - 1) As Byte
         Dim aEnc As New ASCIIEncoding()
-        aEnc.GetBytes(strDato, 0, strDato.Length, rbData, 0)
+        aEnc.GetBytes(vp_s_Dato, 0, vp_s_Dato.Length, rbData, 0)
 
         Dim descsp As DESCryptoServiceProvider = New DESCryptoServiceProvider()
 
-        Dim desEncrypt As ICryptoTransform = descsp.CreateEncryptor(mbytKey, mbytIV)
+        Dim desEncrypt As ICryptoTransform = descsp.CreateEncryptor(vg_b_mbytKey, vg_b_mbytIV)
 
         Dim mStream As New MemoryStream(rbData)
         Dim cs As New CryptoStream(mStream, desEncrypt, CryptoStreamMode.Read)
@@ -110,41 +126,47 @@ Public Class EncriptarClass
         Loop While (bytesRead > 0)
 
         If mOut.Length = 0 Then
-            strResultado = ""
+            vl_s_Resultado = ""
         Else
-            strResultado = Convert.ToBase64String(mOut.GetBuffer(), 0, CInt(mOut.Length))
+            vl_s_Resultado = Convert.ToBase64String(mOut.GetBuffer(), 0, CInt(mOut.Length))
         End If
-        Return strResultado
+        Return vl_s_Resultado
 
     End Function
 
-    Public Function desencriptaDato(ByVal strDato As String) As String
+    ''' <summary>
+    ''' desemcripta el dato
+    ''' </summary>
+    ''' <param name="vp_s_Dato"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function desencriptaDato(ByVal vp_s_Dato As String) As String
 
-        Dim strResultado As String
+        Dim vl_s_Resultado As String
 
         If Not (convierteLlave("FabianM")) Then
-            strResultado = "Error. Fail to generate key for decryption"
-            Return strResultado
+            vl_s_Resultado = "Error. Fail to generate key for decryption"
+            Return vl_s_Resultado
         End If
 
         Dim nReturn As Integer = 0
         Dim descsp As New DESCryptoServiceProvider()
-        Dim desDecrypt As ICryptoTransform = descsp.CreateDecryptor(mbytKey, mbytIV)
+        Dim desDecrypt As ICryptoTransform = descsp.CreateDecryptor(vg_b_mbytKey, vg_b_mbytIV)
 
         Dim mOut As New MemoryStream()
         Dim cs As New CryptoStream(mOut, desDecrypt, CryptoStreamMode.Write)
 
-        Dim bPlain(strDato.Length - 1) As Byte
+        Dim bPlain(vp_s_Dato.Length - 1) As Byte
         Try
-            bPlain = Convert.FromBase64CharArray(strDato.ToCharArray(), 0, strDato.Length)
+            bPlain = Convert.FromBase64CharArray(vp_s_Dato.ToCharArray(), 0, vp_s_Dato.Length)
         Catch e As Exception
-            strResultado = "Error. Input Data is not base64 encoded."
-            Return strResultado
+            vl_s_Resultado = "Error. Input Data is not base64 encoded."
+            Return vl_s_Resultado
         End Try
 
         Dim lRead As Long = 0
         Dim lReadNow As Long = 0
-        Dim lTotal As Long = strDato.Length
+        Dim lTotal As Long = vp_s_Dato.Length
 
         Try
             Do While (lTotal >= lRead)
@@ -154,19 +176,19 @@ Public Class EncriptarClass
             Loop
 
             Dim aEnc As New ASCIIEncoding()
-            strResultado = aEnc.GetString(mOut.GetBuffer(), 0, CInt(mOut.Length))
+            vl_s_Resultado = aEnc.GetString(mOut.GetBuffer(), 0, CInt(mOut.Length))
 
-            Dim strLen As String = strResultado.Substring(0, 5)
+            Dim strLen As String = vl_s_Resultado.Substring(0, 5)
             Dim nLen As Integer = CInt(strLen)
-            strResultado = strResultado.Substring(5, nLen)
+            vl_s_Resultado = vl_s_Resultado.Substring(5, nLen)
             nReturn = CInt(mOut.Length)
 
-            Return strResultado
+            Return vl_s_Resultado
 
         Catch e As Exception
-            strResultado = "Error. Decryption Failed. Possibly due to incorrect Key or corrupted data"
+            vl_s_Resultado = "Error. Decryption Failed. Possibly due to incorrect Key or corrupted data"
         End Try
-        Return strResultado
+        Return vl_s_Resultado
     End Function
 #End Region
 
