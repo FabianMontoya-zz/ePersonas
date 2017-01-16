@@ -102,7 +102,8 @@ function transacionAjax(vp_State) {
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_AllInfoUser(vp_State, vp_Nit_ID, vp_User_ID) {
 
-    var vl_Dat_Url = $("#TxtUser").val() + "_" + $("#Select_EmpresaNit").val();
+    var vl_Dat_Url = $("#TxtUser").val();// + "_" + $("#Select_EmpresaNit").val();
+
     $.ajax({
         url: "LoginAjax.aspx",
         type: "POST",
@@ -125,3 +126,23 @@ function transacionAjax_AllInfoUser(vp_State, vp_Nit_ID, vp_User_ID) {
     });
 }
 
+function transacionAjax_Encriptar(vp_State, vl_Dat_Url) {
+    $.ajax({
+        url: "LoginAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": vp_State,
+            "StrDato": vl_Dat_Url
+        },
+        success: function (result) {
+            alert();
+        },
+        error: function () {
+
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
+
+    });
+}
