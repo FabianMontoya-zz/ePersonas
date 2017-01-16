@@ -15,6 +15,7 @@
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <link href="../css/css_login.css" rel="stylesheet" type="text/css" />
     <link href="../css/css_controles.css" rel="stylesheet" type="text/css" />
+    <meta http-equiv="Pragma" content="no-cache" />
     <style type="text/css">
         html, body
         {
@@ -28,40 +29,40 @@
     </div>
     <div id="marco">
         <div id="TablaRegistro">
-            
+
             <table id="User_Name2" style="width: 100%;">
-            <tr>
-                <td id="TD_Nit_ID" class="Label_bold">NIT Empresa</td>
-            </tr>
-            <tr>
-                <td style="width: 40%;  padding-left: 30px;">
-                    <select style="width: 100%;" id="Select_EmpresaNit" class="C_Chosen">
-                    </select>
-                </td>
-                <td style="width: 2%; padding-bottom: 25px;">
-                    <span class="cssToolTip">
-                        <img alt="error" title="" style="padding-left: 0.5em; height: 21px; width: 21px;" id="ImgNIT"
-                            src="../../images/error.png" />
-                        <span id="S_NIT"></span></span>
-                        
-                </td>
-            </tr>
+                <tr>
+                    <td id="TD_Nit_ID" class="Label_bold">NIT Empresa</td>
+                </tr>
+                <tr>
+                    <td style="width: 40%; padding-left: 30px;">
+                        <select style="width: 100%;" id="Select_EmpresaNit" class="C_Chosen">
+                        </select>
+                    </td>
+                    <td style="width: 2%; padding-bottom: 25px;">
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 0.5em; height: 21px; width: 21px;" id="ImgNIT"
+                                src="../../images/error.png" />
+                            <span id="S_NIT"></span></span>
+
+                    </td>
+                </tr>
                 <tr>
                     <td id="Lbluser" class="Label_bold">Nombre de Usuario
                     </td>
                 </tr>
                 <tr>
-                <td style="width: 40%; padding-left: 30px;">                   
-                        <input style="width: 96%;" type="text" id="TxtUser" maxlength="10" />                        
-                </td>
-                <td style="padding-bottom: 25px; width: 2%">
-                    <span class="cssToolTip">
-                        <img alt="error" title="" style="padding-left: 0.5em; height: 21px; width: 21px;" id="EUser"
-                            src="../../images/error.png" />
-                        <span id="S_User"></span></span>
-                </td>
-                   
-                </tr>            
+                    <td style="width: 40%; padding-left: 30px;">
+                        <input style="width: 96%;" type="text" id="TxtUser" maxlength="10" />
+                    </td>
+                    <td style="padding-bottom: 25px; width: 2%">
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 0.5em; height: 21px; width: 21px;" id="EUser"
+                                src="../../images/error.png" />
+                            <span id="S_User"></span></span>
+                    </td>
+
+                </tr>
                 <tr>
                     <td id="TdHelpUser"></td>
                 </tr>
@@ -70,16 +71,16 @@
                     </td>
                 </tr>
                 <tr>
-                <td style="width: 40%; padding-left: 30px;">                   
-                        <input style="width: 96%;" type="password" id="TxtPassword" maxlength="20" />                        
-                </td>
-                <td style="padding-bottom: 25px; width: 2%">
-                    <span class="cssToolTip">
-                        <img alt="error" title="" style="padding-left: 0.5em; height: 21px; width: 21px;" id="EPassword"
-                            src="../../images/error.png" />
-                        <span id="S_Pass"></span></span>
-                </td>
-                    
+                    <td style="width: 40%; padding-left: 30px;">
+                        <input style="width: 96%;" type="password" id="TxtPassword" maxlength="20" />
+                    </td>
+                    <td style="padding-bottom: 25px; width: 2%">
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 0.5em; height: 21px; width: 21px;" id="EPassword"
+                                src="../../images/error.png" />
+                            <span id="S_Pass"></span></span>
+                    </td>
+
                 </tr>
             </table>
             <table id="Table3">

@@ -30,6 +30,8 @@ $(document).ready(function () {
     //traemos los datos
     transacionAjax("consulta");
 
+    
+
 });
 
 //hacemos la transaccion al code behind por medio de Ajax
@@ -50,6 +52,7 @@ function transacionAjax(State) {
                 ArrayMenu = JSON.parse(result);
                 arbol();
             }
+            nobackbutton();
         },
         error: function () {
             $("#dialog").dialog("option", "title", "Disculpenos :(");

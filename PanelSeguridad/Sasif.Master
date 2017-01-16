@@ -5,7 +5,7 @@
 <head runat="server">
     <title></title>
     <link href="css/css_master.css" rel="stylesheet" type="text/css" />
-   <script src="<% = ResolveClientUrl("~/Scripts/Refresh.js")%>" type="text/javascript"></script>
+    <script src="<% = ResolveClientUrl("~/Scripts/Refresh.js")%>" type="text/javascript"></script>
     <style type="text/css">
         html, body
         {
@@ -23,7 +23,7 @@
                     <table width="100%">
                         <tr>
                             <td id="LogoInt" rowspan="3" style="width: 15%; text-align: center;">
-                                <img id="logo_2" src="" alt="SASIF S.A.S." style="height: 85px; width: 70px; padding-top: 25px"  />
+                                <img id="logo_2" src="" alt="SASIF S.A.S." style="height: 85px; width: 70px; padding-top: 25px" />
                             </td>
                             <td id="Hours" colspan="3" style="width: 70%; text-align: center;"></td>
                             <td id="logoExt" rowspan="3" style="width: 15%; text-align: center;">&nbsp;<img alt="" src="" />

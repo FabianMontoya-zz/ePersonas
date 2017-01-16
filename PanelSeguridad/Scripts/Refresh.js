@@ -5,6 +5,7 @@
  *	www.frebsite.nl
  *
  *	Dual licensed under the MIT and GPL licenses.
+
  */
 
 (function () {
