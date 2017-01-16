@@ -60,7 +60,7 @@ $(document).ready(function () {
     CargarAcordeons();
     AgregarTablas();
     /*=====================================*/
-
+    
     $("#Marco_trabajo_Contrato").css("height", "440px");
     $("#Marco_trabajo_Contrato").css("width", "95%");
 
@@ -97,7 +97,6 @@ $(document).ready(function () {
     ReCalcularTasas("TXT_Puntos_Adicionales");
     Date_Document();
     Date_Document2();
-
 });
 
 //Ocultamos las imagenes de error al iniciar la pantalla

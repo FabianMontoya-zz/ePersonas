@@ -59,6 +59,8 @@ $(document).ready(function () {
     });
 
 
+    nobackbutton();
+
 });
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -197,6 +199,13 @@ function ResetError() {
     $("#ImgEstadoUser").css("display", "none");
 
     /*===FIN ERRORES ADMINSITRACIÓN Adm_Usuario ===*/
+}
+
+//Función que bloquea el retorno entre páginas
+function nobackbutton() {
+    window.location.hash = "no-back-button";
+    window.location.hash = "Again-No-back-button" //chrome    
+    window.onhashchange = function () { window.location.hash = "no-back-button"; }
 }
 
 //funcion para control de carga
