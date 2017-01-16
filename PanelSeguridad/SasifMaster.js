@@ -84,7 +84,7 @@ function ConsultaParametrosURL() {
         User = URLVariables[0].replace("User=", "");
         Link = URLVariables[1].replace("L_L=", "");
     }
-
+    nobackbutton();
     return User;
 }
 
@@ -314,7 +314,7 @@ function nobackbutton() {
 
     //funcion para control de carga
     function Load_Charge_Sasif() {
-
+       
         var w = $(window).width();
         var h = $(window).height();
 
@@ -337,7 +337,7 @@ function nobackbutton() {
                 duration: 200
             }
         });
-
+        nobackbutton();
     }
 
     //Abre control de carga
@@ -349,9 +349,10 @@ function nobackbutton() {
                  .ajaxStop(function () {
                      CloseControl();
                  });
-
+        
         $("#Dialog_Control").dialog("open");
         $("#Dialog_Control").dialog("option", "title", "");
+        nobackbutton();
     }
 
     //Cierra el Control de Carga

@@ -121,6 +121,8 @@ function transacionAjax(State) {
         },
        //Transaccion Ajax en proceso
         success: function (result) {
+
+            nobackbutton();
             if (result == "Exito") {
 
                 $("#dialog").dialog("option", "title", "Exito");

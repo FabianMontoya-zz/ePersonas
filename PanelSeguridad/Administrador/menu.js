@@ -60,7 +60,7 @@ function transacionAjax_menu(State) {
             }
             else {
                 ArrayMenu = JSON.parse(result);
-
+                nobackbutton();
                 for (ItemArray in ArrayMenu) {
                     if (Link == ArrayMenu[ItemArray].IDlink) {
                         $("#Title_form").html(ArrayMenu[ItemArray].DescripcionLink);
