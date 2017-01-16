@@ -102,7 +102,7 @@ function transacionAjax(vp_State) {
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_AllInfoUser(vp_State, vp_Nit_ID, vp_User_ID) {
 
-    var vl_Dat_Url = $("#TxtUser").val();// + "_" + $("#Select_EmpresaNit").val();
+    var vl_Dat_Url = $("#Select_EmpresaNit").val();
 
     $.ajax({
         url: "LoginAjax.aspx",
@@ -115,7 +115,8 @@ function transacionAjax_AllInfoUser(vp_State, vp_Nit_ID, vp_User_ID) {
         },
         success: function (result) {
             result = JSON.parse(result);
-            window.location = "../Menu/menu.aspx?User=" + vl_Dat_Url;
+            transacionAjax_Encriptar("Encriptar_dato", vl_Dat_Url, vp_User_ID);
+
         },
         error: function () {
 
@@ -126,17 +127,19 @@ function transacionAjax_AllInfoUser(vp_State, vp_Nit_ID, vp_User_ID) {
     });
 }
 
-function transacionAjax_Encriptar(vp_State, vl_Dat_Url) {
+/*-------------------- Hace JSON con Todos los datos del User y da acceso al sistema ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_Encriptar(vp_State, vp_Dato, vp_User_ID) {
     $.ajax({
         url: "LoginAjax.aspx",
         type: "POST",
         //crear json
         data: {
             "action": vp_State,
-            "StrDato": vl_Dat_Url
+            "StrDato": vp_Dato
         },
         success: function (result) {
-            alert();
+            window.location = "../Menu/menu.aspx?User=" + vp_User_ID + "&Key=" + result;
         },
         error: function () {
 

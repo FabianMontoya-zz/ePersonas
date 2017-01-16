@@ -17,9 +17,22 @@
     <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
-    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" /> <meta http-equiv="Pragma" content="no-cache"/> <meta http-equiv="Expires" content="-1"/>
+    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="-1" />
+    <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
+
+    <div id="Dialog_Control" style="width: 100%; text-align: center;">
+        <div class="cssload-container" style="margin-top: 25%;">
+            <div class="cssload-whirlpool"></div>
+            <div>
+                <img id="Sasif" class="Logo_3" src="../../images/SASIF_NEW_WHITE.png" alt="SASIF S.A.S." />
+            </div>
+        </div>
+    </div>
+
     <div id="Container_title_Form">
         <table id="Tabla_Title_form">
             <tr>
@@ -68,7 +81,7 @@
                 </table>
                 <table id="TablaDatos">
                     <tr>
-                        <td class="Label_Bold" style="width: 100px;">Codigo
+                        <td class="Label_Bold" style="width: 100px;">Código
                         </td>
                         <td style="width: 100px;">
                             <span class="cssToolTip_Form">
@@ -96,7 +109,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="Label_Bold">Parametro 1
+                        <td class="Label_Bold">Parámetro 1
                         </td>
                         <td>
                             <span class="cssToolTip_Form">
@@ -104,7 +117,7 @@
                                 <span class="Spam_AST"></span></span>
                         </td>
                         <td></td>
-                        <td class="Label_Bold">Parametro 2
+                        <td class="Label_Bold">Parámetro 2
                         </td>
                         <td>
                             <span class="cssToolTip_Form">
@@ -114,7 +127,7 @@
                         <td></td>
                     </tr>
                     <tr>
-                        <td class="Label_Bold">Ruta de la pagina
+                        <td class="Label_Bold">Ruta de la página
                         </td>
                         <td colspan="4">
                             <span class="cssToolTip_Form">
@@ -151,6 +164,7 @@
                 <td>
                     <img alt="error" id="DE" src="../../images/error_2.png" />
                     <img alt="success" id="SE" src="../../images/success.png" />
+                    <img alt="Warning" id="WA" src="../../images/alert.png" />
                 </td>
             </tr>
             <tr>
@@ -164,17 +178,17 @@
         <table style="width: 100%; text-align: center;">
             <tr>
                 <td>
-                    <p class="Label_Bold" id="P1">
-                        Desea eliminar el siguiente registro?
+                    <p class="Label_Bold" id="P2">
+                        Pulse Confirmar para cambiar el Estado al registro seleccionado.
                     </p>
                 </td>
                 <td>
-                    <img alt="Warning" id="Img4" src="../../images/alert.png" />
+                    <img alt="Warning_2" id="ImgDelete" src="../../images/alert.png" />
                 </td>
             </tr>
             <tr>
                 <td colspan="2" align="center">
-                    <input id="BtnElimin" type="button" value="Confirmar" onclick="BtnElimina();" />
+                    <input id="Button1" type="button" value="Confirmar" onclick="BtnElimina();" />
                 </td>
             </tr>
         </table>

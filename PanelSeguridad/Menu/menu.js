@@ -2,7 +2,6 @@
 var ArrayMenu = [];
 var HtmlTree;
 var HtmlTree_Interno = "";
-var User;
 var Json_Arbol_carpetas;
 var Estructura = [];
 var Link;
@@ -11,26 +10,10 @@ var Link;
 //evento load del menu
 $(document).ready(function () {
 
-    //capturamos la url
-    var URLPage = window.location.search.substring(1);
-    var URLVariables = URLPage.split('&');
-
-    if (URLVariables.length <= 1) {
-        User = URLVariables[0].replace("User=", "");
-    }
-    else {
-        User = URLVariables[0].replace("User=", "");
-        Link = URLVariables[1].replace("L_L=", "");
-    }
-
-    $("#User").html(User.toUpperCase());
-
-
+    ConsultaParametrosURL();
 
     //traemos los datos
     transacionAjax("consulta");
-
-    
 
 });
 

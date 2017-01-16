@@ -7,20 +7,36 @@ var editID;
 
 //Evento load JS
 $(document).ready(function () {
-    transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
+
+    $("#Marco_trabajo_Form").css("height", "490px");
+    $("#container_Tlink").css("height", "380px");
+
+    /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
+    Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
+    Ocultar_Errores();
+    Ocultar_Tablas();
+    /*==================FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN==============*/
+
+    transacionAjax_CargaBusqueda('cargar_droplist_busqueda'); 
+    
+});
+
+//Función que oculta todas las IMG de los errores en pantalla
+function Ocultar_Errores() {
+    ResetError();
     $("#ESelect").css("display", "none");
     $("#Img1").css("display", "none");
     $("#Img2").css("display", "none");
     $("#DE").css("display", "none");
     $("#DS").css("display", "none");
     $("#ImgID").css("display", "none");
+}
 
+//funcion para las ventanas emergentes
+function Ventanas_Emergentes() {
 
-    $("#TablaDatos").css("display", "none");
-    $("#TablaConsulta").css("display", "none");
+    Load_Charge_Sasif(); //Carga de "SasifMaster.js" el Control de Carga
 
-
-    //funcion para las ventanas emergentes
     $("#dialog").dialog({
         autoOpen: false,
         dialogClass: "Dialog_Sasif",
@@ -32,8 +48,13 @@ $(document).ready(function () {
         dialogClass: "Dialog_Sasif",
         modal: true
     });
+}
 
-});
+//Función que oculta las tablas
+function Ocultar_Tablas() {
+    $("#TablaDatos").css("display", "none");
+    $("#TablaConsulta").css("display", "none");
+}
 
 //salida del formulario
 function btnSalir() {
@@ -90,6 +111,8 @@ function BtnConsulta() {
     var filtro;
     var ValidateSelect = ValidarDroplist();
     var opcion;
+
+    OpenControl(); //Abrimos el load de espera con el logo
 
     if (ValidateSelect == 1) {
         filtro = "N";
@@ -203,10 +226,10 @@ function Table_links() {
 
 //grid con el boton eliminar
 function Tabla_eliminar() {
-    var html_Tlink = "<table id='TLink' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Codigo</th><th>Descripción</th><th>Parametro 1</th><th>Parametro 2</th><th>Link</th><th>Estado</th></tr></thead><tbody>";
+    var html_Tlink = "<table id='TLink' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Código</th><th>Descripción</th><th>Parámetro 1</th><th>Parámetro 2</th><th>Link</th><th>Estado</th></tr></thead><tbody>";
     for (itemArray in ArrayLinks) {
 
-        html_Tlink += "<tr id= 'TLink_" + ArrayLinks[itemArray].Link_ID + "'><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar('" + ArrayLinks[itemArray].Link_ID + "')\"></input></td><td>" + ArrayLinks[itemArray].Link_ID + "</td><td>" + ArrayLinks[itemArray].Descripcion + "</td><td>" + ArrayLinks[itemArray].Param1 + "</td><td>" + ArrayLinks[itemArray].Param2 + "</td><td> " + ArrayLinks[itemArray].LinkPag + " </td><td> " + ArrayLinks[itemArray].Estado + " </td></tr>";
+        html_Tlink += "<tr id= 'TLink_" + ArrayLinks[itemArray].Link_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArrayLinks[itemArray].Link_ID + "')\"></img><span>Eliminar Página</span></span></td><td>" + ArrayLinks[itemArray].Link_ID + "</td><td style='white-space: nowrap;'>" + ArrayLinks[itemArray].Descripcion + "</td><td>" + ArrayLinks[itemArray].Param1 + "</td><td>" + ArrayLinks[itemArray].Param2 + "</td><td style='white-space: nowrap;'> " + ArrayLinks[itemArray].LinkPag + " </td><td> " + ArrayLinks[itemArray].Estado + " </td></tr>";
     }
     html_Tlink += "</tbody></table>";
     $("#container_Tlink").html("");
@@ -228,7 +251,7 @@ function Eliminar(index_link) {
     for (itemArray in ArrayLinks) {
         if (index_link == ArrayLinks[itemArray].Link_ID) {
             editID = ArrayLinks[itemArray].Link_ID;
-            $("#dialog_eliminar").dialog("option", "title", "Eliminar?");
+            $("#dialog_eliminar").dialog("option", "title", "¿Cambiar Estado a Página?");
             $("#dialog_eliminar").dialog("open");
         }
     }
@@ -237,9 +260,9 @@ function Eliminar(index_link) {
 
 //grid con el boton editar
 function Tabla_modificar() {
-    var html_Tlink = "<table id='TLink' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Codigo</th><th>Descripción</th><th>Parametro 1</th><th>Parametro 2</th><th>Link</th><th>Estado</th></tr></thead><tbody>";
+    var html_Tlink = "<table id='TLink' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Código</th><th>Descripción</th><th>Parámetro 1</th><th>Parámetro 2</th><th>Link</th><th>Estado</th></tr></thead><tbody>";
     for (itemArray in ArrayLinks) {
-        html_Tlink += "<tr id= 'TLink_" + ArrayLinks[itemArray].Link_ID + "'><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Editar('" + ArrayLinks[itemArray].Link_ID + "')\"></input></td><td>" + ArrayLinks[itemArray].Link_ID + "</td><td>" + ArrayLinks[itemArray].Descripcion + "</td><td>" + ArrayLinks[itemArray].Param1 + "</td><td>" + ArrayLinks[itemArray].Param2 + "</td><td> " + ArrayLinks[itemArray].LinkPag + " </td><td> " + ArrayLinks[itemArray].Estado + " </td></tr>";
+        html_Tlink += "<tr id= 'TLink_" + ArrayLinks[itemArray].Link_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + ArrayLinks[itemArray].Link_ID + "')\"></img><span>Editar Página</span></span></td><td>" + ArrayLinks[itemArray].Link_ID + "</td><td style='white-space: nowrap;'>" + ArrayLinks[itemArray].Descripcion + "</td><td>" + ArrayLinks[itemArray].Param1 + "</td><td>" + ArrayLinks[itemArray].Param2 + "</td><td style='white-space: nowrap;'> " + ArrayLinks[itemArray].LinkPag + " </td><td> " + ArrayLinks[itemArray].Estado + " </td></tr>";
     }
     html_Tlink += "</tbody></table>";
     $("#container_Tlink").html("");
@@ -276,9 +299,9 @@ function Editar(index_link) {
 
 //grid sin botones para ver resultado
 function Tabla_consulta() {
-    var html_Tlink = "<table id='TLink' border='1'  cellpadding='1' cellspacing='1' style='width: 100%'><thead><tr><th>Codigo</th><th>Descripción</th><th>Parametro 1</th><th>Parametro 2</th><th>Link</th><th>Estado</th></tr></thead><tbody>";
+    var html_Tlink = "<table id='TLink' border='1'  cellpadding='1' cellspacing='1' style='width: 100%'><thead><tr><th>Código</th><th>Descripción</th><th>Parámetro 1</th><th>Parámetro 2</th><th>Link</th><th>Estado</th></tr></thead><tbody>";
     for (itemArray in ArrayLinks) {
-        html_Tlink += "<tr id= 'TLink_" + ArrayLinks[itemArray].Link_ID + "'><td>" + ArrayLinks[itemArray].Link_ID + "</td><td>" + ArrayLinks[itemArray].Descripcion + "</td><td>" + ArrayLinks[itemArray].Param1 + "</td><td>" + ArrayLinks[itemArray].Param2 + "</td><td> " + ArrayLinks[itemArray].LinkPag + " </td><td> " + ArrayLinks[itemArray].Estado + " </td></tr>";
+        html_Tlink += "<tr id= 'TLink_" + ArrayLinks[itemArray].Link_ID + "'><td>" + ArrayLinks[itemArray].Link_ID + "</td><td style='white-space: nowrap;'>" + ArrayLinks[itemArray].Descripcion + "</td><td>" + ArrayLinks[itemArray].Param1 + "</td><td>" + ArrayLinks[itemArray].Param2 + "</td><td style='white-space: nowrap;'> " + ArrayLinks[itemArray].LinkPag + " </td><td> " + ArrayLinks[itemArray].Estado + " </td></tr>";
     }
     html_Tlink += "</tbody></table>";
     $("#container_Tlink").html("");
@@ -304,5 +327,5 @@ function Clear() {
     $("#TxtParam2").val("");
     $("#TxtRuta").val("");
     $("#TxtRead").val("");
-    $("#DDLColumns").val("-1");
+    $("#DDLColumns").val("-1").trigger("chosen:updated");
 }
