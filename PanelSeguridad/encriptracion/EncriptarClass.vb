@@ -45,6 +45,7 @@ Public Class EncriptarClass
 
     End Function
 
+#Region "Enciptación de URL"
     Private mbytKey(7) As Byte
     Private mbytIV(7) As Byte
 
@@ -167,9 +168,6 @@ Public Class EncriptarClass
         End Try
         Return strResultado
     End Function
-
-
-
-
+#End Region
 
 End Class
