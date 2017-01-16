@@ -21,6 +21,7 @@ function transacionAjax_EmpresaNit(State) {
                 ArrayEmpresaNit = JSON.parse(result);
                 charge_CatalogList(ArrayEmpresaNit, "Select_EmpresaNit", 1);
             }
+            nobackbutton();
         },
         error: function () {
 

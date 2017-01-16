@@ -6,6 +6,8 @@ var Doc_name;
 var Matrix_Mes = [];
 var Array_G_Usuario = [];
 
+var Mensaje_NO_Permitido = "";
+
 var Control_Work;
 var Suma_Valor_Inicial = 0;
 
@@ -60,6 +62,8 @@ $(document).ready(function () {
 
 
     nobackbutton();
+
+    console.log("All is ready, enjoy!");
 
 });
 
@@ -203,250 +207,357 @@ function ResetError() {
 
 //Función que bloquea el retorno entre páginas
 function nobackbutton() {
+
     window.location.hash = "no-back-button";
     window.location.hash = "Again-No-back-button" //chrome    
     window.onhashchange = function () { window.location.hash = "no-back-button"; }
-}
 
-//funcion para control de carga
-function Load_Charge_Sasif() {
+    document.onkeydown = mykeyhandler;
 
-    var w = $(window).width();
-    var h = $(window).height();
+    function mykeyhandler(event) {
 
-    $("#Dialog_Control").dialog({
-        autoOpen: false,
-        dialogClass: "Dialog_Control_Sasif",
-        modal: true,
-        width: w,
-        height: h,
-        overlay: {
-            opacity: 0.5,
-            background: "black"
-        },
-        show: {
-            effect: 'fade',
-            duration: 1000
-        },
-        hide: {
-            effect: 'fade',
-            duration: 200
+        //keyCode 116 = F5 
+        //keyCode 122 = F11
+        //keyCode 8 = Backspace
+        //keyCode 37 = LEFT ROW
+        //keyCode 78 = N
+        //keyCode 39 = RIGHT ROW
+        //keyCode 67 = C
+        //keyCode 86 = V
+        //keyCode 85 = U 
+        //keyCode 45 = Insert
+
+        event = event || window.event;
+        var tgt = event.target || event.srcElement;
+        if ((event.altKey && event.keyCode == 37) || (event.altKey && event.keyCode == 39) ||
+        (event.ctrlKey && event.keyCode == 78) || (event.ctrlKey && event.keyCode == 67) ||
+        (event.ctrlKey && event.keyCode == 86) || (event.ctrlKey && event.keyCode == 85) ||
+        (event.ctrlKey && event.keyCode == 45) || (event.shiftKey && event.keyCode == 45)) {
+            event.cancelBubble = true;
+            event.returnValue = false;
+            alert("Función no permitida");
+            return false;
         }
-    });
 
-}
+        if (event.keyCode == 18 && tgt.type != "text" && tgt.type != "password" && tgt.type != "textarea") {
+            return false;
+        }
 
-//Abre control de carga
-function OpenControl() {
-    $('#Dialog_Control').hide()
-             .ajaxStart(function () {
-                 $(this).show();
-             })
-             .ajaxStop(function () {
-                 CloseControl();
-             });
+        if (event.keyCode == 8 && tgt.type != "text" && tgt.type != "password" && tgt.type != "textarea") {
+            return false;
+        }
 
-    $("#Dialog_Control").dialog("open");
-    $("#Dialog_Control").dialog("option", "title", "");
-}
-
-//Cierra el Control de Carga
-function CloseControl() {
-    $("#Dialog_Control").dialog("close");
-}
-
-
-function Redireciona_Post(vp_url, vp_data) {
-    var vl_form = document.createElement('form');
-    vl_form.method = 'post';
-    vl_form.action = vp_url;
-
-    for (var name in vp_data) {
-        var vl_input = document.createElement('input');
-        vl_input.type = 'hidden';
-        vl_input.name = name;
-        vl_input.value = vp_data[name];
-        vl_form.appendChild(vl_input);
-    }
-    vl_form.submit();
-}
-
-// redirectPost('http://www.example.com', { text: 'text\n\ntext' });
-
-
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*----                                                                                             VALIDACIONES FECHAS Y HORAS                                                                                                            ----*/
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-//funcion para capturar la fecha
-function fecha() {
-
-    var d = new Date();
-    var month = d.getMonth() + 1;
-    var day = d.getDate();
-
-    var output = d.getFullYear() + '-' +
-    (('' + month).length < 2 ? '0' : '') + month + '-' +
-    (('' + day).length < 2 ? '0' : '') + day;
-    $("#Hours").html(output);
-
-}
-
-//Valida que la fecha inicial y final sean coherentes
-function validate_fechaMayorQue(fechaInicial, fechaFinal, Type) {
-
-    var Resultado;
-    var valuesStart;
-    var valuesEnd;
-    var dateStart;
-    var dateEnd;
-
-    switch (Type) {
-
-        case "SystemCompare":
-            var SysFecha = new Date();
-            var Fecha_System = SysFecha.getDate() + "-" + (SysFecha.getMonth() + 1) + "-" + SysFecha.getFullYear();
-            valuesStart = fechaInicial.split("-");
-            valuesEnd = Fecha_System.split("-");
-
-            dateStart = new Date(valuesStart[0], (valuesStart[1] - 1), valuesStart[2]);
-            dateEnd = new Date(valuesEnd[2], (valuesEnd[1] - 1), valuesEnd[0]);
-
-            if (dateStart >= dateEnd)
-                Resultado = "Menor";
-            else
-                Resultado = "Mayor";
-            break;
-
-        case "DefaultCompare":
-            valuesStart = fechaInicial.split("-");
-            valuesEnd = fechaFinal.split("-");
-
-            // Verificamos que la fecha no sea posterior a la actual
-            dateStart = new Date(valuesStart[0], (valuesStart[1] - 1), valuesStart[2]);
-            dateEnd = new Date(valuesEnd[0], (valuesEnd[1] - 1), valuesEnd[2]);
-            if (dateStart >= dateEnd)
-                Resultado = "Menor";
-            else
-                Resultado = "Mayor";
-            break;
-
-    }
-    return Resultado;
-}
-
-//valida las hora inicial y final que sean coherentes
-function Validahora(V_HoraInicial, V_HoraFinal) {
-
-    var A_V_HoraInicial = V_HoraInicial.split(":");
-    var A_V_HoraFinal = V_HoraFinal.split(":");
-    var Valida = 0;
-
-    if (parseInt(A_V_HoraInicial[0]) > parseInt(A_V_HoraFinal[0])) {
-        Valida = 1;
-    }
-
-    if (parseInt(A_V_HoraInicial[0]) == parseInt(A_V_HoraFinal[0])) {
-        if (parseInt(A_V_HoraInicial[1]) > parseInt(A_V_HoraFinal[1])) {
-            Valida = 1;
+        if ((event.keyCode == 116) || (event.keyCode == 122)) {
+            if (navigator.appName == "Microsoft Internet Explorer") {
+                window.event.keyCode = 0;
+            }
+            return false;
         }
     }
 
-    if (V_HoraInicial == "")
-        Valida = 2;
+    function mouseDown(e) {
+        var ctrlPressed = 0;
+        var altPressed = 0;
+        var shiftPressed = 0;
+        if (parseInt(navigator.appVersion) > 3) {
+            if (navigator.appName == "Netscape") {
+                var mString = (e.modifiers + 32).toString(2).substring(3, 6);
+                shiftPressed = (mString.charAt(0) == "1");
+                ctrlPressed = (mString.charAt(1) == "1");
+                altPressed = (mString.charAt(2) == "1");
+                self.status = "modifiers=" + e.modifiers + " (" + mString + ")"
+            }
+            else {
+                shiftPressed = event.shiftKey;
+                altPressed = event.altKey;
+                ctrlPressed = event.ctrlKey;
+            }
+            if (shiftPressed || altPressed || ctrlPressed)
+                alert("Función no permitida");
+        }
+        return true;
+    }
 
-    if (V_HoraFinal == "")
-        Valida = 2;
+    if (parseInt(navigator.appVersion) > 3) {
+        document.onmousedown = mouseDown;
+        if (navigator.appName == "Netscape")
+            document.captureEvents(Event.MOUSEDOWN);
+    }
 
-    return Valida;
-}
+    var message = "";
 
-//VALIDAR FORMATO DE LA FECHA PARA LOS GRID
-function valFecha(str) {
-    var Result;
+    function clickIE() {
+        if (document.all) {
+            (message);
+            return false;
+        }
+    }
 
-    if (str == '1900-01-01')
-        Result = "";
-    else
-        Result = str;
-    return Result;
-}
-
-// Función que suma o resta días a la fecha indicada
-sumaFecha = function (d, fecha) {
-    var Fecha = new Date();
-    var sFecha = fecha || (Fecha.getDate() + "/" + (Fecha.getMonth() + 1) + "/" + Fecha.getFullYear());
-    var sep = sFecha.indexOf('/') != -1 ? '/' : '-';
-    var aFecha = sFecha.split(sep);
-    var fecha = aFecha[2] + '/' + aFecha[1] + '/' + aFecha[0];
-    fecha = new Date(fecha);
-    fecha.setDate(fecha.getDate() + parseInt(d));
-    var anno = fecha.getFullYear();
-    var mes = fecha.getMonth() + 1;
-    var dia = fecha.getDate();
-    mes = (mes < 10) ? ("0" + mes) : mes;
-    dia = (dia < 10) ? ("0" + dia) : dia;
-    var fechaFinal = dia + sep + mes + sep + anno;
-    return (fechaFinal);
-}
-
-//validamos año bisiesto
-function Valida_Bisiesto(Year) {
-
-    var valida = "N";
-
-    var R_4 = parseInt(Year) % 4;
-    var R_100 = parseInt(Year) % 100;
-    var M_100 = R_100 % 4;
-
-    var R_400 = parseInt(Year) % 400;
-    var M_400 = R_400 % 4;
-
-    if (R_4 == 0) {
-        if (M_100 == 0) {
-            if (M_400 == 0) {
-                valida = "Y";
+    function clickNS(e) {
+        if (document.layers || (document.getElementById && !document.all)) {
+            if (e.which == 2 || e.which == 3) {
+                (message); return false;
             }
         }
     }
-    return valida;
+
+    if (document.layers) {
+        document.captureEvents(Event.MOUSEDOWN);
+        document.onmousedown = clickNS;
+    } else {
+        document.onmouseup = clickNS; document.oncontextmenu = clickIE;
+
+    }
+    
+    document.oncontextmenu = new Function("return false");
 }
 
-//validar fecha  digitada
-function ValidaFechaDigitada(ObjText) {
-    //colocamos mascara
-    $("#" + ObjText).val("YYYY-MM-DD");
-    $("#" + ObjText).css("color", "#921919")
-    //limpiamos mascara
-    $("#" + ObjText).focus(function () {
-        $("#" + ObjText).val("");
-        $("#" + ObjText).css("color", "#000000")
-    });
+    //funcion para control de carga
+    function Load_Charge_Sasif() {
 
-    $("#" + ObjText).blur(function () {
-        var Strfecha = $("#" + ObjText).val();
-        var PrimerGuion = Strfecha.charAt(4);
-        var SegundoGuion = Strfecha.charAt(7);
+        var w = $(window).width();
+        var h = $(window).height();
 
-        var SysFecha = new Date();
-        var Year_System = parseInt(SysFecha.getFullYear()) - 17;
+        $("#Dialog_Control").dialog({
+            autoOpen: false,
+            dialogClass: "Dialog_Control_Sasif",
+            modal: true,
+            width: w,
+            height: h,
+            overlay: {
+                opacity: 0.5,
+                background: "black"
+            },
+            show: {
+                effect: 'fade',
+                duration: 1000
+            },
+            hide: {
+                effect: 'fade',
+                duration: 200
+            }
+        });
 
-        if (SegundoGuion == "-" && PrimerGuion == "-") {
-            var A_FN = Strfecha.split("-");
-            //validar año
-            if ((parseInt(A_FN[0]) > 1900)) {
-                if ((parseInt(A_FN[0]) < Year_System)) {
-                    //validar mes
-                    if ((parseInt(A_FN[1]) > 0)) {
-                        if ((parseInt(A_FN[1]) < 13)) {
-                            //primero validamos bisiesto
-                            var bisiesto = Valida_Bisiesto(A_FN[0]);
-                            var busca_Mes = parseInt(A_FN[1]) - 1;
-                            var Diafinal = Matrix_Mes[busca_Mes][2];
-                            if ((bisiesto == "Y") && (parseInt(A_FN[1]) == 2)) { Diafinal = 29; }
-                            //validar mes dia
-                            if ((parseInt(A_FN[2]) > 0)) {
-                                if ((parseInt(A_FN[2]) < Diafinal)) {
+    }
 
+    //Abre control de carga
+    function OpenControl() {
+        $('#Dialog_Control').hide()
+                 .ajaxStart(function () {
+                     $(this).show();
+                 })
+                 .ajaxStop(function () {
+                     CloseControl();
+                 });
+
+        $("#Dialog_Control").dialog("open");
+        $("#Dialog_Control").dialog("option", "title", "");
+    }
+
+    //Cierra el Control de Carga
+    function CloseControl() {
+        $("#Dialog_Control").dialog("close");
+        nobackbutton();
+    }
+
+
+    function Redireciona_Post(vp_url, vp_data) {
+        var vl_form = document.createElement('form');
+        vl_form.method = 'post';
+        vl_form.action = vp_url;
+
+        for (var name in vp_data) {
+            var vl_input = document.createElement('input');
+            vl_input.type = 'hidden';
+            vl_input.name = name;
+            vl_input.value = vp_data[name];
+            vl_form.appendChild(vl_input);
+        }
+        vl_form.submit();
+    }
+
+    // redirectPost('http://www.example.com', { text: 'text\n\ntext' });
+
+
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    /*----                                                                                             VALIDACIONES FECHAS Y HORAS                                                                                                            ----*/
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    //funcion para capturar la fecha
+    function fecha() {
+
+        var d = new Date();
+        var month = d.getMonth() + 1;
+        var day = d.getDate();
+
+        var output = d.getFullYear() + '-' +
+        (('' + month).length < 2 ? '0' : '') + month + '-' +
+        (('' + day).length < 2 ? '0' : '') + day;
+        $("#Hours").html(output);
+
+    }
+
+    //Valida que la fecha inicial y final sean coherentes
+    function validate_fechaMayorQue(fechaInicial, fechaFinal, Type) {
+
+        var Resultado;
+        var valuesStart;
+        var valuesEnd;
+        var dateStart;
+        var dateEnd;
+
+        switch (Type) {
+
+            case "SystemCompare":
+                var SysFecha = new Date();
+                var Fecha_System = SysFecha.getDate() + "-" + (SysFecha.getMonth() + 1) + "-" + SysFecha.getFullYear();
+                valuesStart = fechaInicial.split("-");
+                valuesEnd = Fecha_System.split("-");
+
+                dateStart = new Date(valuesStart[0], (valuesStart[1] - 1), valuesStart[2]);
+                dateEnd = new Date(valuesEnd[2], (valuesEnd[1] - 1), valuesEnd[0]);
+
+                if (dateStart >= dateEnd)
+                    Resultado = "Menor";
+                else
+                    Resultado = "Mayor";
+                break;
+
+            case "DefaultCompare":
+                valuesStart = fechaInicial.split("-");
+                valuesEnd = fechaFinal.split("-");
+
+                // Verificamos que la fecha no sea posterior a la actual
+                dateStart = new Date(valuesStart[0], (valuesStart[1] - 1), valuesStart[2]);
+                dateEnd = new Date(valuesEnd[0], (valuesEnd[1] - 1), valuesEnd[2]);
+                if (dateStart >= dateEnd)
+                    Resultado = "Menor";
+                else
+                    Resultado = "Mayor";
+                break;
+
+        }
+        return Resultado;
+    }
+
+    //valida las hora inicial y final que sean coherentes
+    function Validahora(V_HoraInicial, V_HoraFinal) {
+
+        var A_V_HoraInicial = V_HoraInicial.split(":");
+        var A_V_HoraFinal = V_HoraFinal.split(":");
+        var Valida = 0;
+
+        if (parseInt(A_V_HoraInicial[0]) > parseInt(A_V_HoraFinal[0])) {
+            Valida = 1;
+        }
+
+        if (parseInt(A_V_HoraInicial[0]) == parseInt(A_V_HoraFinal[0])) {
+            if (parseInt(A_V_HoraInicial[1]) > parseInt(A_V_HoraFinal[1])) {
+                Valida = 1;
+            }
+        }
+
+        if (V_HoraInicial == "")
+            Valida = 2;
+
+        if (V_HoraFinal == "")
+            Valida = 2;
+
+        return Valida;
+    }
+
+    //VALIDAR FORMATO DE LA FECHA PARA LOS GRID
+    function valFecha(str) {
+        var Result;
+
+        if (str == '1900-01-01')
+            Result = "";
+        else
+            Result = str;
+        return Result;
+    }
+
+    // Función que suma o resta días a la fecha indicada
+    sumaFecha = function (d, fecha) {
+        var Fecha = new Date();
+        var sFecha = fecha || (Fecha.getDate() + "/" + (Fecha.getMonth() + 1) + "/" + Fecha.getFullYear());
+        var sep = sFecha.indexOf('/') != -1 ? '/' : '-';
+        var aFecha = sFecha.split(sep);
+        var fecha = aFecha[2] + '/' + aFecha[1] + '/' + aFecha[0];
+        fecha = new Date(fecha);
+        fecha.setDate(fecha.getDate() + parseInt(d));
+        var anno = fecha.getFullYear();
+        var mes = fecha.getMonth() + 1;
+        var dia = fecha.getDate();
+        mes = (mes < 10) ? ("0" + mes) : mes;
+        dia = (dia < 10) ? ("0" + dia) : dia;
+        var fechaFinal = dia + sep + mes + sep + anno;
+        return (fechaFinal);
+    }
+
+    //validamos año bisiesto
+    function Valida_Bisiesto(Year) {
+
+        var valida = "N";
+
+        var R_4 = parseInt(Year) % 4;
+        var R_100 = parseInt(Year) % 100;
+        var M_100 = R_100 % 4;
+
+        var R_400 = parseInt(Year) % 400;
+        var M_400 = R_400 % 4;
+
+        if (R_4 == 0) {
+            if (M_100 == 0) {
+                if (M_400 == 0) {
+                    valida = "Y";
+                }
+            }
+        }
+        return valida;
+    }
+
+    //validar fecha  digitada
+    function ValidaFechaDigitada(ObjText) {
+        //colocamos mascara
+        $("#" + ObjText).val("YYYY-MM-DD");
+        $("#" + ObjText).css("color", "#921919")
+        //limpiamos mascara
+        $("#" + ObjText).focus(function () {
+            $("#" + ObjText).val("");
+            $("#" + ObjText).css("color", "#000000")
+        });
+
+        $("#" + ObjText).blur(function () {
+            var Strfecha = $("#" + ObjText).val();
+            var PrimerGuion = Strfecha.charAt(4);
+            var SegundoGuion = Strfecha.charAt(7);
+
+            var SysFecha = new Date();
+            var Year_System = parseInt(SysFecha.getFullYear()) - 17;
+
+            if (SegundoGuion == "-" && PrimerGuion == "-") {
+                var A_FN = Strfecha.split("-");
+                //validar año
+                if ((parseInt(A_FN[0]) > 1900)) {
+                    if ((parseInt(A_FN[0]) < Year_System)) {
+                        //validar mes
+                        if ((parseInt(A_FN[1]) > 0)) {
+                            if ((parseInt(A_FN[1]) < 13)) {
+                                //primero validamos bisiesto
+                                var bisiesto = Valida_Bisiesto(A_FN[0]);
+                                var busca_Mes = parseInt(A_FN[1]) - 1;
+                                var Diafinal = Matrix_Mes[busca_Mes][2];
+                                if ((bisiesto == "Y") && (parseInt(A_FN[1]) == 2)) { Diafinal = 29; }
+                                //validar mes dia
+                                if ((parseInt(A_FN[2]) > 0)) {
+                                    if ((parseInt(A_FN[2]) < Diafinal)) {
+
+                                    }
+                                    else {
+                                        Mensaje_General("¡Formato incorrecto!", "El Dia debe ser entre 1 y " + Diafinal, "W");
+                                        $("#" + ObjText).val("YYYY-MM-DD");
+                                        $("#" + ObjText).css("color", "#921919")
+                                    }
                                 }
                                 else {
                                     Mensaje_General("¡Formato incorrecto!", "El Dia debe ser entre 1 y " + Diafinal, "W");
@@ -455,7 +566,7 @@ function ValidaFechaDigitada(ObjText) {
                                 }
                             }
                             else {
-                                Mensaje_General("¡Formato incorrecto!", "El Dia debe ser entre 1 y " + Diafinal, "W");
+                                Mensaje_General("¡Formato incorrecto!", "El Mes debe ser entre 1 y 12 ", "W");
                                 $("#" + ObjText).val("YYYY-MM-DD");
                                 $("#" + ObjText).css("color", "#921919")
                             }
@@ -467,7 +578,7 @@ function ValidaFechaDigitada(ObjText) {
                         }
                     }
                     else {
-                        Mensaje_General("¡Formato incorrecto!", "El Mes debe ser entre 1 y 12 ", "W");
+                        Mensaje_General("Formato incorrecto!", "El año debe ser entre 1900 y " + Year_System, "W");
                         $("#" + ObjText).val("YYYY-MM-DD");
                         $("#" + ObjText).css("color", "#921919")
                     }
@@ -479,759 +590,640 @@ function ValidaFechaDigitada(ObjText) {
                 }
             }
             else {
-                Mensaje_General("Formato incorrecto!", "El año debe ser entre 1900 y " + Year_System, "W");
+                Mensaje_General("Formato incorrecto!", "La fecha debe ser YYYY/MM/DD ", "W");
                 $("#" + ObjText).val("YYYY-MM-DD");
                 $("#" + ObjText).css("color", "#921919")
             }
-        }
-        else {
-            Mensaje_General("Formato incorrecto!", "La fecha debe ser YYYY/MM/DD ", "W");
-            $("#" + ObjText).val("YYYY-MM-DD");
-            $("#" + ObjText).css("color", "#921919")
-        }
-    });
-}
-
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*----                                                                                             VALIDACIONES DE CAMPOS Y NUMERICOS                                                                                         ----*/
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-//formato de miles en tiempo real
-function dinner_format(input) {
-    var valida = 0;
-    var num = input.value.replace(/\./g, "");
-    if (!isNaN(num)) {
-        num = num.toString().split("").reverse().join("").replace(/(?=\d*\.?)(\d{3})/g, "$1.");
-        num = num.split("").reverse().join("").replace(/^[\.]/, "");
-        input.value = num;
-    }
-    else {
-        valida = 1;
-        input.value = input.value.replace(/[^\d\.]*/g, "");
-    }
-    return valida;
-}
-
-//funcion para añadir formato miles a los numeros en la vista
-function dinner_format_grid(str, type) {
-
-    var output = "";
-
-    if (str != 0) {
-        var amount = new String(str);
-        amount = amount.split("").reverse();
-
-        for (var i = 0; i <= amount.length - 1; i++) {
-            output = amount[i] + output;
-            if ((i + 1) % 3 == 0 && (amount.length - 1) !== i) output = '.' + output;
-        }
-
-        if (type == "1")
-            output = "$ " + output;
+        });
     }
 
-    return output;
-}
-
-//funcion que calcula el digito de verificacion
-function DigitoVerificacion(StrValor) {
-
-    if (StrValor != "") {
-
-        var Vector = [];
-        var DigitoVerificado = 0;
-        var Temp = 0;
-        var Length_Document = StrValor.length;
-
-        Vector[1] = 3;
-        Vector[2] = 7;
-        Vector[3] = 13;
-        Vector[4] = 17;
-        Vector[5] = 19;
-        Vector[6] = 23;
-        Vector[7] = 29;
-        Vector[8] = 37;
-        Vector[9] = 41;
-        Vector[10] = 43;
-        Vector[11] = 47;
-        Vector[12] = 53;
-        Vector[13] = 59;
-        Vector[14] = 67;
-        Vector[15] = 71;
-
-        for (var contador = 0; contador < Length_Document; contador++) {
-            Temp = (StrValor.substr(contador, 1));
-            DigitoVerificado += (Temp * Vector[Length_Document - contador]);
-        }
-
-        Temp = DigitoVerificado % 11;
-
-        return (Temp > 1) ? 11 - Temp : Temp;
-    }
-}
-
-//validar E-Mail
-function ValidarEmail(email) {
-    var validate = 0;
-    var expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-
-    if (!expr.test(email))
-        validate = 1;
-
-    return validate;
-}
-
-//funcion de formateo para la insercion en la Base de Datos
-function F_NumericBD(Index) {
-
-    var Output = 0;
-
-    if (Index != "") {
-        Output = Index.replace(/\./g, "");
-    }
-
-    return Output;
-}
-
-//convierte numero para ingresar el decimal exacto en la BD
-function Convert_Decimal(index) {
-
-    var Output = 0;
-    if (index != "") {
-        Output = index.replace(".", ",");
-    }
-    return Output;
-}
-
-//validar la longitud del campo number
-function maxLengthTypeNumber(object) {
-    if (object.value.length > object.maxLength)
-        object.value = object.value.slice(0, object.maxLength)
-}
-
-//validar la longitud de 4 decimales
-function Restric_long_decimal(object) {
-
-    $("#" + object).blur(function () {
-
-        var ValStr = $('#' + object).val();
-        var A_Decimal = ValStr.split(".");
-
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    /*----                                                                                             VALIDACIONES DE CAMPOS Y NUMERICOS                                                                                         ----*/
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    //formato de miles en tiempo real
+    function dinner_format(input) {
         var valida = 0;
-
-        if (A_Decimal.length == 1)
-            valida = 1;
+        var num = input.value.replace(/\./g, "");
+        if (!isNaN(num)) {
+            num = num.toString().split("").reverse().join("").replace(/(?=\d*\.?)(\d{3})/g, "$1.");
+            num = num.split("").reverse().join("").replace(/^[\.]/, "");
+            input.value = num;
+        }
         else {
-            if (A_Decimal.length == 2) {
-                if (A_Decimal[1].length == 4)
-                    valida = 0;
-                else
-                    valida = 1;
-            }
+            valida = 1;
+            input.value = input.value.replace(/[^\d\.]*/g, "");
         }
-        //validamos formato y mensaje
-        if (valida == 1) {
-            Mensaje_General("¡Formato Incorrecto!", "El campo debe diligenciarse con el formato xx.xxxx, por ejemplo: 12.3456", "E");
-            $("#" + object).val("");
-        }
-    });
-}
-
-//validacion de campo porcentajes
-function ValidaPorcentaje(Objeto, Limite) {
-    $("#" + Objeto).blur(function () {
-
-        var P_Numero = $("#" + Objeto).val();
-
-        if (parseInt(P_Numero) > parseInt(Limite)) {
-            Mensaje_General("Porcentaje Invalido!", "El porcentaje no debe se mayor a " + Limite, "W");
-            $("#" + Objeto).val("");
-            $("#" + Objeto).focus();
-        }
-    });
-}
-
-//validacion de 0 en los grid o vista
-function Convert_Valores_0(index) {
-    var Output = "";
-
-    if (index != 0)
-        Output = index;
-    return Output;
-}
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*----                                                                                             FUNCIONES PARA CARGA DE DROP LIST                                                                                               ----*/
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-//cargar combos
-function charge_CatalogList(objCatalog, nameList, selector) {
-
-    $("#" + nameList).empty();
-    var objList = $('[id$=' + nameList + ']');
-
-    //recorremos para llenar el combo de
-    for (itemArray in objCatalog) {
-        objList[0].options[itemArray] = new Option(objCatalog[itemArray].descripcion, objCatalog[itemArray].ID); /*Muestra el Combo solo con [Descripción]*/
-        //objList[0].options[itemArray] = new Option(objCatalog[itemArray].ID + " - " + objCatalog[itemArray].descripcion, objCatalog[itemArray].ID); /*Muestra el Combo en orden [ID - Descripción]*/
-    };
-
-    //validamos si el combo lleva seleccione y posicionamos en el
-    switch (selector) {
-        case 1:
-            $("#" + nameList).append("<option value='-1'>Seleccione...</option>");
-            $("#" + nameList + " option[value= '-1'] ").attr("selected", true);
-            break;
-
-        case "Generico":
-            $("#" + nameList).append("<option value='0'> 0 - Genérico</option>");
-            $("#" + nameList).append("<option value='-1'>Seleccione...</option>");
-            $("#" + nameList + " option[value= '-1'] ").attr("selected", true);
-            break;
+        return valida;
     }
 
-    $("#" + nameList).trigger("liszt:updated");
-    $('.C_Chosen').trigger('chosen:updated');
-}
+    //funcion para añadir formato miles a los numeros en la vista
+    function dinner_format_grid(str, type) {
 
-//carga los combps dependiendo del nit
-function Charge_Combos_Depend_Verificacion(Matrix, Selector, P_1, P_2, Index_Edit) {
+        var output = "";
 
-    $('#' + Selector).empty();
-    var objList = $("[id$='" + Selector + "']");
+        if (str != 0) {
+            var amount = new String(str);
+            amount = amount.split("").reverse();
 
-    switch (Selector) {
-        case "Select_Doc_Verif":
-            for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID == P_1 && Matrix[Item].Doc_ID == P_2) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Doc_ID_Verif + "'>" + Matrix[Item].Doc_ID_Verif + " - " + Matrix[Item].DescripDoc_Verif + "</option>");
-                }
+            for (var i = 0; i <= amount.length - 1; i++) {
+                output = amount[i] + output;
+                if ((i + 1) % 3 == 0 && (amount.length - 1) !== i) output = '.' + output;
             }
-            break;
 
-        case "Select_LineaF":
-            for (Item in Matrix) {
-                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'>" + Matrix[Item].Linea + " C.C. " + Matrix[Item].Cilindraje + "</option>");
-            }
-            break;
+            if (type == "1")
+                output = "$ " + output;
+        }
+
+        return output;
     }
 
-    $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
+    //funcion que calcula el digito de verificacion
+    function DigitoVerificacion(StrValor) {
 
-    if (Index_Edit == "")
-        $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
-    else
-        $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
+        if (StrValor != "") {
 
-    $("#" + Selector).trigger("liszt:updated");
-    $('.C_Chosen').trigger('chosen:updated');
+            var Vector = [];
+            var DigitoVerificado = 0;
+            var Temp = 0;
+            var Length_Document = StrValor.length;
 
-}
+            Vector[1] = 3;
+            Vector[2] = 7;
+            Vector[3] = 13;
+            Vector[4] = 17;
+            Vector[5] = 19;
+            Vector[6] = 23;
+            Vector[7] = 29;
+            Vector[8] = 37;
+            Vector[9] = 41;
+            Vector[10] = 43;
+            Vector[11] = 47;
+            Vector[12] = 53;
+            Vector[13] = 59;
+            Vector[14] = 67;
+            Vector[15] = 71;
 
-//carga los combps dependiendo del nit
-function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
-
-    $('#' + Selector).empty();
-    var objList = $("[id$='" + Selector + "']");
-
-    switch (Selector) {
-        case "Select_Area":
-            for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID == Nit) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Area_ID + "'>" + Matrix[Item].Descripcion + "</option>");
-                }
+            for (var contador = 0; contador < Length_Document; contador++) {
+                Temp = (StrValor.substr(contador, 1));
+                DigitoVerificado += (Temp * Vector[Length_Document - contador]);
             }
-            break;
 
-        case "Select_Cargo":
-            for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID == Nit) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Cargo_ID + "'>" + Matrix[Item].Descripcion + "</option>");
-                }
-            }
-            break;
+            Temp = DigitoVerificado % 11;
 
-        case "Select_Jefe":
-            for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID == Nit) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Document_ID + "'>" + Matrix[Item].Nombre + "</option>");
-                }
-            }
-            break;
-
-        case "Select_GrpDocument":
-            for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID == Nit) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Document_ID + "'>" + Matrix[Item].namefile + "</option>");
-                }
-            }
-            break;
-
-        case "Select_RutaDocumento":
-            for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID == Nit) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].RutaDocumentos_ID + "'>" + Matrix[Item].Ruta + "</option>");
-                }
-            }
-            break;
-
-        case "Select_RutaPlantilla":
-            for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID == Nit) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].RutaDocumentos_ID + "'>" + Matrix[Item].Ruta + "</option>");
-                }
-            }
-            break;
-
-        case "Select_GrpDocumento":
-            for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID == Nit) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].GrpDocumentos_ID + "'>" + Matrix[Item].Descripcion + "</option>");
-                }
-            }
-            break;
-
-        case "Select_Documento":
-            for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID == Nit || Matrix[Item].Nit_ID == "0") {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Documento_ID + "'>" + Matrix[Item].Descripcion + "</option>");
-                }
-            }
-            break;
-
-        case "Select_Documento_V":
-            for (Item in Matrix) {
-                if ((Matrix[Item].Nit_ID == Nit || Matrix[Item].Nit_ID == "0") && (Matrix[Item].RequiereVerificacion == "S")) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Documento_ID + "'>" + Matrix[Item].Descripcion + "</option>");
-                }
-            }
-            break;
-
-        case "Select_Persona":
-            for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID == Nit) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Document_ID + "'>" + Matrix[Item].Nombre + "</option>");
-                }
-            }
-            break;
-        case "Select_Persona_C":
-            for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID == Nit) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Document_ID + "'>" + Matrix[Item].Nombre + "</option>");
-                }
-            }
-            break;
-
-        case "Select_Persona_A":
-            for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID == Nit) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Document_ID + "'>" + Matrix[Item].Nombre + "</option>");
-                }
-            }
-            break;
-
-        case "Select_Persona_Enc":
-            $('#' + Selector).append("<option value='0'>Todos</option>");
-            for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID == Nit) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Document_ID + "'>" + Matrix[Item].Nombre + "</option>");
-                }
-            }
-            break;
-
-        case "Select_Contrato":
-            for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID == Nit) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Contrato_ID + "'>" + Matrix[Item].Descripcion + "</option>");
-                }
-            }
-            break;
-
-        case "Select_Secuencia":
-            for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID == Nit) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Documento_ID + "'>" + Matrix[Item].Descripcion + "</option>");
-                }
-            }
-            break;
-
-        case "Select_PAcceso":
-            for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID == Nit) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].PuertaAcceso_ID + "'>" + Matrix[Item].Descripcion + "</option>");
-                }
-            }
-            break;
-
-        case "Select_Tarjeta":
-            for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID_Custodia == Nit && Matrix[Item].Document_ID_Asigna == 0) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Tarjeta_ID + "'>" + Matrix[Item].Tarjeta_ID + "</option>");
-                }
-            }
-            break;
-
-        case "Select_Tarjeta_Ent":
-            for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID_Asigna == Nit && Matrix[Item].Document_ID_Entrega == 0) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Tarjeta_ID + "'>" + Matrix[Item].Tarjeta_ID + "</option>");
-                }
-            }
-            break;
-
-        case "Select_Tarjeta_AccPre":
-            for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID_Asigna == Nit && Matrix[Item].Document_ID_Entrega != 0) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Tarjeta_ID + "'>" + Matrix[Item].Tarjeta_ID + "</option>");
-                }
-            }
-            break;
-
-        case "Select_Tarjeta_Blo":
-            for (Item in Matrix) {
-                if ((Matrix[Item].Nit_ID_Asigna == Nit) && (Matrix[Item].Estado != 3 || Matrix[Item].Estado != 4)) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Tarjeta_ID + "'>" + Matrix[Item].Tarjeta_ID + "</option>");
-                }
-            }
-            break;
-
-        case "Select_Tarjeta_DBlo":
-            for (Item in Matrix) {
-                if ((Matrix[Item].Nit_ID_Asigna == Nit) && (Matrix[Item].Estado == 3 || Matrix[Item].Estado == 4)) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Tarjeta_ID + "'>" + Matrix[Item].Tarjeta_ID + "</option>");
-                }
-            }
-            break;
-
-        case "Select_Documento_1":
-            for (Item in Matrix) {
-                if ((Matrix[Item].Nit_ID == Nit) && (Matrix[Item].RequiereVerificacion == "S")) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Documento_ID + "'>" + Matrix[Item].Descripcion + "</option>");
-                }
-            }
-            break;
-
-        case "Select_Documento_2":
-            for (Item in Matrix) {
-                if ((Matrix[Item].Nit_ID == Nit) && (Matrix[Item].RequiereVerificacion == "N")) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Documento_ID + "'>" + Matrix[Item].Descripcion + "</option>");
-                }
-            }
-            break;
-
-        case "Select_AreaAcceso":
-            $('#' + Selector).append("<option value='0'>Todos</option>");
-            for (Item in Matrix) {
-                if (Matrix[Item].PuertaAcceso_ID == Nit) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Area_ID + "'>" + Matrix[Item].Area_ID + " - " + Matrix[Item].DescripArea + "</option>");
-                }
-            }
-            break;
-
-        case "Select_SubTipo":
-            for (Item in Matrix) {
-                if (Matrix[Item].Tipo_ID == Nit) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].SubTipo_ID + "'>" + Matrix[Item].SubTipo_ID + " - " + Matrix[Item].DescripSubTipo + "</option>");
-                }
-            }
-            break;
-
-        case "Select_Sucursal":
-            for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID == Nit) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Sucursal_ID + "'>" + Matrix[Item].Descripcion + "</option>");
-                }
-            }
-            break;
-
-        case "Select_Sucursal_C":
-            for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID == Nit) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Sucursal_ID + "'>" + Matrix[Item].Descripcion + "</option>");
-                }
-            }
-            break;
-
-        case "Select_Moneda":
-            for (Item in Matrix) {
-                $("#" + Selector).append("<option value='" + Matrix[Item].MonedaCod_ID + "'>" + Matrix[Item].MonedaCod_ID + " - " + Matrix[Item].Descripcion + "</option>");
-            }
-            break;
-
-        case "Select_Moneda_F":
-            for (Item in Matrix) {
-                $("#" + Selector).append("<option value='" + Matrix[Item].MonedaCod_ID + "'>" + Matrix[Item].MonedaCod_ID + " - " + Matrix[Item].Descripcion + "</option>");
-            }
-            break;
-
-        case "Select_Moneda_C":
-            for (Item in Matrix) {
-                $("#" + Selector).append("<option value='" + Matrix[Item].MonedaCod_ID + "'>" + Matrix[Item].MonedaCod_ID + " - " + Matrix[Item].Descripcion + "</option>");
-            }
-            break;
-
-        case "Select_Producto":
-            for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID == Nit) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Producto_ID + "'>" + Matrix[Item].Producto_ID + " - " + Matrix[Item].Descripcion + "</option>");
-                }
-            }
-            break;
-
-        case "Select_Condicion_Financiacion":
-            for (Item in Matrix) {
-                if ((Matrix[Item].Nit_ID == Nit) || (Matrix[Item].Nit_ID == 0)) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'>" + Matrix[Item].Financiacion_ID + " - " + Matrix[Item].Descripcion + "</option>");
-                }
-            }
-            break;
-
-        case "Select_Ciclo":
-            for (Item in Matrix) {
-                $("#" + Selector).append("<option value='" + Matrix[Item].ID_Ciclo + "'> " + Matrix[Item].ID_Ciclo + " - " + Matrix[Item].Descripcion + "</option>");
-            }
-            break;
-
-        case "Select_Ciclo_2":
-            for (Item in Matrix) {
-                $("#" + Selector).append("<option value='" + Matrix[Item].ID_Ciclo + "'> " + Matrix[Item].ID_Ciclo + " - " + Matrix[Item].Descripcion + "</option>");
-            }
-            break;
-
-        case "Select_ClaseF":
-            for (Item in Matrix) {
-                $("#" + Selector).append("<option value='" + Matrix[Item].Clase + "'> " + Matrix[Item].Linea + "</option>");
-            }
-            break;
-
-        case "Select_MarcaF":
-            for (Item in Matrix) {
-                if (Matrix[Item].Clase == Nit)
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Marca + "'> " + Matrix[Item].Marca + "</option>");
-            }
-            break;
+            return (Temp > 1) ? 11 - Temp : Temp;
+        }
     }
 
-    $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
+    //validar E-Mail
+    function ValidarEmail(email) {
+        var validate = 0;
+        var expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
-    switch (Index_Edit) {
-        case "":
+        if (!expr.test(email))
+            validate = 1;
+
+        return validate;
+    }
+
+    //funcion de formateo para la insercion en la Base de Datos
+    function F_NumericBD(Index) {
+
+        var Output = 0;
+
+        if (Index != "") {
+            Output = Index.replace(/\./g, "");
+        }
+
+        return Output;
+    }
+
+    //convierte numero para ingresar el decimal exacto en la BD
+    function Convert_Decimal(index) {
+
+        var Output = 0;
+        if (index != "") {
+            Output = index.replace(".", ",");
+        }
+        return Output;
+    }
+
+    //validar la longitud del campo number
+    function maxLengthTypeNumber(object) {
+        if (object.value.length > object.maxLength)
+            object.value = object.value.slice(0, object.maxLength)
+    }
+
+    //validar la longitud de 4 decimales
+    function Restric_long_decimal(object) {
+
+        $("#" + object).blur(function () {
+
+            var ValStr = $('#' + object).val();
+            var A_Decimal = ValStr.split(".");
+
+            var valida = 0;
+
+            if (A_Decimal.length == 1)
+                valida = 1;
+            else {
+                if (A_Decimal.length == 2) {
+                    if (A_Decimal[1].length == 4)
+                        valida = 0;
+                    else
+                        valida = 1;
+                }
+            }
+            //validamos formato y mensaje
+            if (valida == 1) {
+                Mensaje_General("¡Formato Incorrecto!", "El campo debe diligenciarse con el formato xx.xxxx, por ejemplo: 12.3456", "E");
+                $("#" + object).val("");
+            }
+        });
+    }
+
+    //validacion de campo porcentajes
+    function ValidaPorcentaje(Objeto, Limite) {
+        $("#" + Objeto).blur(function () {
+
+            var P_Numero = $("#" + Objeto).val();
+
+            if (parseInt(P_Numero) > parseInt(Limite)) {
+                Mensaje_General("Porcentaje Invalido!", "El porcentaje no debe se mayor a " + Limite, "W");
+                $("#" + Objeto).val("");
+                $("#" + Objeto).focus();
+            }
+        });
+    }
+
+    //validacion de 0 en los grid o vista
+    function Convert_Valores_0(index) {
+        var Output = "";
+
+        if (index != 0)
+            Output = index;
+        return Output;
+    }
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    /*----                                                                                             FUNCIONES PARA CARGA DE DROP LIST                                                                                               ----*/
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    //cargar combos
+    function charge_CatalogList(objCatalog, nameList, selector) {
+
+        $("#" + nameList).empty();
+        var objList = $('[id$=' + nameList + ']');
+
+        //recorremos para llenar el combo de
+        for (itemArray in objCatalog) {
+            objList[0].options[itemArray] = new Option(objCatalog[itemArray].descripcion, objCatalog[itemArray].ID); /*Muestra el Combo solo con [Descripción]*/
+            //objList[0].options[itemArray] = new Option(objCatalog[itemArray].ID + " - " + objCatalog[itemArray].descripcion, objCatalog[itemArray].ID); /*Muestra el Combo en orden [ID - Descripción]*/
+        };
+
+        //validamos si el combo lleva seleccione y posicionamos en el
+        switch (selector) {
+            case 1:
+                $("#" + nameList).append("<option value='-1'>Seleccione...</option>");
+                $("#" + nameList + " option[value= '-1'] ").attr("selected", true);
+                break;
+
+            case "Generico":
+                $("#" + nameList).append("<option value='0'> 0 - Genérico</option>");
+                $("#" + nameList).append("<option value='-1'>Seleccione...</option>");
+                $("#" + nameList + " option[value= '-1'] ").attr("selected", true);
+                break;
+        }
+
+        $("#" + nameList).trigger("liszt:updated");
+        $('.C_Chosen').trigger('chosen:updated');
+    }
+
+    //carga los combps dependiendo del nit
+    function Charge_Combos_Depend_Verificacion(Matrix, Selector, P_1, P_2, Index_Edit) {
+
+        $('#' + Selector).empty();
+        var objList = $("[id$='" + Selector + "']");
+
+        switch (Selector) {
+            case "Select_Doc_Verif":
+                for (Item in Matrix) {
+                    if (Matrix[Item].Nit_ID == P_1 && Matrix[Item].Doc_ID == P_2) {
+                        $("#" + Selector).append("<option value='" + Matrix[Item].Doc_ID_Verif + "'>" + Matrix[Item].Doc_ID_Verif + " - " + Matrix[Item].DescripDoc_Verif + "</option>");
+                    }
+                }
+                break;
+
+            case "Select_LineaF":
+                for (Item in Matrix) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'>" + Matrix[Item].Linea + " C.C. " + Matrix[Item].Cilindraje + "</option>");
+                }
+                break;
+        }
+
+        $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
+
+        if (Index_Edit == "")
             $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
-            break;
-
-        case "0":
-            $("#" + Selector + " option[value= '0'] ").attr("selected", true);
-            break;
-
-        default:
+        else
             $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
-            break;
+
+        $("#" + Selector).trigger("liszt:updated");
+        $('.C_Chosen').trigger('chosen:updated');
+
     }
 
-    $("#" + Selector).trigger("liszt:updated");
-    $('.C_Chosen').trigger('chosen:updated');
+    //carga los combps dependiendo del nit
+    function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
 
-}
+        $('#' + Selector).empty();
+        var objList = $("[id$='" + Selector + "']");
 
-//carga los combo persona segun opcion de la persona
-function Charge_Combo_Persona(Matrix, Selector, Nit, Index_Edit) {
-
-    $('#' + Selector).empty();
-    var objList = $("[id$='" + Selector + "']");
-
-    switch (Selector) {
-
-        case "Select_Persona_R"://entidad registro
-            for (Item in Matrix) {
-                if (Matrix[Item].OP_Hacienda == "S" || Matrix[Item].OP_Transito == "S") {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Document_ID + "'>" + Matrix[Item].Nombre + "</option>");
+        switch (Selector) {
+            case "Select_Area":
+                for (Item in Matrix) {
+                    if (Matrix[Item].Nit_ID == Nit) {
+                        $("#" + Selector).append("<option value='" + Matrix[Item].Area_ID + "'>" + Matrix[Item].Descripcion + "</option>");
+                    }
                 }
-            }
-            break;
+                break;
 
-        case "Select_Notaria_R"://Notaria registro
-            for (Item in Matrix) {
-                if (Matrix[Item].OP_Hacienda == "S") {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Document_ID + "'>" + Matrix[Item].Nombre + "</option>");
+            case "Select_Cargo":
+                for (Item in Matrix) {
+                    if (Matrix[Item].Nit_ID == Nit) {
+                        $("#" + Selector).append("<option value='" + Matrix[Item].Cargo_ID + "'>" + Matrix[Item].Descripcion + "</option>");
+                    }
                 }
-            }
-            break;
+                break;
 
-
-        case "Select_Persona_C"://persona registro por NIT ID
-            for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID == Nit) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Document_ID + "'>" + Matrix[Item].Nombre + "</option>");
+            case "Select_Jefe":
+                for (Item in Matrix) {
+                    if (Matrix[Item].Nit_ID == Nit) {
+                        $("#" + Selector).append("<option value='" + Matrix[Item].Document_ID + "'>" + Matrix[Item].Nombre + "</option>");
+                    }
                 }
-            }
-            break;
+                break;
 
-        case "Select_Direccion"://Direcciones por persona
-            for (Item in Matrix) {
-                $("#" + Selector).append("<option value='" + Matrix[Item].Index_Direccion + "'>" + Matrix[Item].Direccion + "</option>");
-            }
-            break;
-    }
+            case "Select_GrpDocument":
+                for (Item in Matrix) {
+                    if (Matrix[Item].Nit_ID == Nit) {
+                        $("#" + Selector).append("<option value='" + Matrix[Item].Document_ID + "'>" + Matrix[Item].namefile + "</option>");
+                    }
+                }
+                break;
 
-    $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
+            case "Select_RutaDocumento":
+                for (Item in Matrix) {
+                    if (Matrix[Item].Nit_ID == Nit) {
+                        $("#" + Selector).append("<option value='" + Matrix[Item].RutaDocumentos_ID + "'>" + Matrix[Item].Ruta + "</option>");
+                    }
+                }
+                break;
 
-    switch (Index_Edit) {
-        case "":
-            $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
-            break;
+            case "Select_RutaPlantilla":
+                for (Item in Matrix) {
+                    if (Matrix[Item].Nit_ID == Nit) {
+                        $("#" + Selector).append("<option value='" + Matrix[Item].RutaDocumentos_ID + "'>" + Matrix[Item].Ruta + "</option>");
+                    }
+                }
+                break;
 
-        case "0":
-            $("#" + Selector + " option[value= '0'] ").attr("selected", true);
-            break;
+            case "Select_GrpDocumento":
+                for (Item in Matrix) {
+                    if (Matrix[Item].Nit_ID == Nit) {
+                        $("#" + Selector).append("<option value='" + Matrix[Item].GrpDocumentos_ID + "'>" + Matrix[Item].Descripcion + "</option>");
+                    }
+                }
+                break;
 
-        default:
-            $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
-            break;
-    }
+            case "Select_Documento":
+                for (Item in Matrix) {
+                    if (Matrix[Item].Nit_ID == Nit || Matrix[Item].Nit_ID == "0") {
+                        $("#" + Selector).append("<option value='" + Matrix[Item].Documento_ID + "'>" + Matrix[Item].Descripcion + "</option>");
+                    }
+                }
+                break;
 
-    $("#" + Selector).trigger("liszt:updated");
-    $('.C_Chosen').trigger('chosen:updated');
+            case "Select_Documento_V":
+                for (Item in Matrix) {
+                    if ((Matrix[Item].Nit_ID == Nit || Matrix[Item].Nit_ID == "0") && (Matrix[Item].RequiereVerificacion == "S")) {
+                        $("#" + Selector).append("<option value='" + Matrix[Item].Documento_ID + "'>" + Matrix[Item].Descripcion + "</option>");
+                    }
+                }
+                break;
 
-}
+            case "Select_Persona":
+                for (Item in Matrix) {
+                    if (Matrix[Item].Nit_ID == Nit) {
+                        $("#" + Selector).append("<option value='" + Matrix[Item].Document_ID + "'>" + Matrix[Item].Nombre + "</option>");
+                    }
+                }
+                break;
+            case "Select_Persona_C":
+                for (Item in Matrix) {
+                    if (Matrix[Item].Nit_ID == Nit) {
+                        $("#" + Selector).append("<option value='" + Matrix[Item].Document_ID + "'>" + Matrix[Item].Nombre + "</option>");
+                    }
+                }
+                break;
 
-//carga combo de años
-function CargaYear(Select_Control, Rango, Option_Year, Index_Edit, Value_Option) {
+            case "Select_Persona_A":
+                for (Item in Matrix) {
+                    if (Matrix[Item].Nit_ID == Nit) {
+                        $("#" + Selector).append("<option value='" + Matrix[Item].Document_ID + "'>" + Matrix[Item].Nombre + "</option>");
+                    }
+                }
+                break;
 
-    var ActualYear = $("#Hours").html();
-    var A_Date = ActualYear.split("-");
-    var Ciclo = 0;
+            case "Select_Persona_Enc":
+                $('#' + Selector).append("<option value='0'>Todos</option>");
+                for (Item in Matrix) {
+                    if (Matrix[Item].Nit_ID == Nit) {
+                        $("#" + Selector).append("<option value='" + Matrix[Item].Document_ID + "'>" + Matrix[Item].Nombre + "</option>");
+                    }
+                }
+                break;
 
-    var Year_F = parseInt(A_Date[0]) - parseInt(Option_Year);
-    var Year_I = parseInt(Year_F) - parseInt(Rango);
+            case "Select_Contrato":
+                for (Item in Matrix) {
+                    if (Matrix[Item].Nit_ID == Nit) {
+                        $("#" + Selector).append("<option value='" + Matrix[Item].Contrato_ID + "'>" + Matrix[Item].Descripcion + "</option>");
+                    }
+                }
+                break;
 
-    $('#' + Select_Control).empty();
-    var objList = $("[id$='" + Select_Control + "']");
-    $('#' + Select_Control).append("<option value='-1'>Año...</option>");
+            case "Select_Secuencia":
+                for (Item in Matrix) {
+                    if (Matrix[Item].Nit_ID == Nit) {
+                        $("#" + Selector).append("<option value='" + Matrix[Item].Documento_ID + "'>" + Matrix[Item].Descripcion + "</option>");
+                    }
+                }
+                break;
 
-    switch (Value_Option) {
-        case "":
-            for (Ciclo; Ciclo <= Rango; Ciclo++) {
-                $("#" + Select_Control).append("<option value='" + Year_I + "'>" + Year_I + "</option>");
-                Year_I = Year_I + 1;
-            }
-            break;
-        default:
-            for (Ciclo; Ciclo <= Rango; Ciclo++) {
-                var Index_option = parseInt(Ciclo) + 1;
-                $("#" + Select_Control).append("<option value='" + Value_Option + Index_option + "'>" + Year_I + "</option>");
-                Year_I = Year_I + 1;
-            }
-            break;
-    }
+            case "Select_PAcceso":
+                for (Item in Matrix) {
+                    if (Matrix[Item].Nit_ID == Nit) {
+                        $("#" + Selector).append("<option value='" + Matrix[Item].PuertaAcceso_ID + "'>" + Matrix[Item].Descripcion + "</option>");
+                    }
+                }
+                break;
 
-    if (Index_Edit == "")
-        $("#" + Select_Control + " option[value= '-1'] ").attr("selected", true);
-    else
-        $("#" + Select_Control + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
+            case "Select_Tarjeta":
+                for (Item in Matrix) {
+                    if (Matrix[Item].Nit_ID_Custodia == Nit && Matrix[Item].Document_ID_Asigna == 0) {
+                        $("#" + Selector).append("<option value='" + Matrix[Item].Tarjeta_ID + "'>" + Matrix[Item].Tarjeta_ID + "</option>");
+                    }
+                }
+                break;
 
-    $("#" + Select_Control).trigger("liszt:updated");
-    $('.C_Chosen').trigger('chosen:updated');
+            case "Select_Tarjeta_Ent":
+                for (Item in Matrix) {
+                    if (Matrix[Item].Nit_ID_Asigna == Nit && Matrix[Item].Document_ID_Entrega == 0) {
+                        $("#" + Selector).append("<option value='" + Matrix[Item].Tarjeta_ID + "'>" + Matrix[Item].Tarjeta_ID + "</option>");
+                    }
+                }
+                break;
 
-}
+            case "Select_Tarjeta_AccPre":
+                for (Item in Matrix) {
+                    if (Matrix[Item].Nit_ID_Asigna == Nit && Matrix[Item].Document_ID_Entrega != 0) {
+                        $("#" + Selector).append("<option value='" + Matrix[Item].Tarjeta_ID + "'>" + Matrix[Item].Tarjeta_ID + "</option>");
+                    }
+                }
+                break;
 
-//carga combo de años parametrizado
-function CargaYear_Parametrizado(Select_Control, Rango_Inicio, Rango_Final, Option_Year, Index_Edit, Value_Option) {
+            case "Select_Tarjeta_Blo":
+                for (Item in Matrix) {
+                    if ((Matrix[Item].Nit_ID_Asigna == Nit) && (Matrix[Item].Estado != 3 || Matrix[Item].Estado != 4)) {
+                        $("#" + Selector).append("<option value='" + Matrix[Item].Tarjeta_ID + "'>" + Matrix[Item].Tarjeta_ID + "</option>");
+                    }
+                }
+                break;
 
-    var ActualYear = $("#Hours").html();
-    var A_Date = ActualYear.split("-");
-    var Ciclo = parseInt(Rango_Inicio) - 1;
-    Rango_Final = parseInt(Rango_Final) - 1;
+            case "Select_Tarjeta_DBlo":
+                for (Item in Matrix) {
+                    if ((Matrix[Item].Nit_ID_Asigna == Nit) && (Matrix[Item].Estado == 3 || Matrix[Item].Estado == 4)) {
+                        $("#" + Selector).append("<option value='" + Matrix[Item].Tarjeta_ID + "'>" + Matrix[Item].Tarjeta_ID + "</option>");
+                    }
+                }
+                break;
 
-    var Year_F = parseInt(A_Date[0]) - parseInt(Option_Year);
-    var Year_I = parseInt(Option_Year) - (parseInt(Rango_Final) - (parseInt(Rango_Inicio) - 1));
+            case "Select_Documento_1":
+                for (Item in Matrix) {
+                    if ((Matrix[Item].Nit_ID == Nit) && (Matrix[Item].RequiereVerificacion == "S")) {
+                        $("#" + Selector).append("<option value='" + Matrix[Item].Documento_ID + "'>" + Matrix[Item].Descripcion + "</option>");
+                    }
+                }
+                break;
 
-    $('#' + Select_Control).empty();
-    var objList = $("[id$='" + Select_Control + "']");
-    $('#' + Select_Control).append("<option value='-1'>Año...</option>");
+            case "Select_Documento_2":
+                for (Item in Matrix) {
+                    if ((Matrix[Item].Nit_ID == Nit) && (Matrix[Item].RequiereVerificacion == "N")) {
+                        $("#" + Selector).append("<option value='" + Matrix[Item].Documento_ID + "'>" + Matrix[Item].Descripcion + "</option>");
+                    }
+                }
+                break;
 
-    switch (Value_Option) {
-        case "":
-            for (Ciclo; Ciclo <= Rango_Final; Ciclo++) {
-                $("#" + Select_Control).append("<option value='" + Year_I + "'>" + Year_I + "</option>");
-                Year_I = Year_I + 1;
-            }
-            break;
-        default:
-            for (Ciclo; Ciclo <= Rango_Final; Ciclo++) {
-                var Index_option = parseInt(Ciclo) + 1;
-                $("#" + Select_Control).append("<option value='" + Value_Option + Index_option + "'>" + Year_I + "</option>");
-                Year_I = Year_I + 1;
-            }
-            break;
-    }
+            case "Select_AreaAcceso":
+                $('#' + Selector).append("<option value='0'>Todos</option>");
+                for (Item in Matrix) {
+                    if (Matrix[Item].PuertaAcceso_ID == Nit) {
+                        $("#" + Selector).append("<option value='" + Matrix[Item].Area_ID + "'>" + Matrix[Item].Area_ID + " - " + Matrix[Item].DescripArea + "</option>");
+                    }
+                }
+                break;
 
-    if (Index_Edit == "")
-        $("#" + Select_Control + " option[value= '-1'] ").attr("selected", true);
-    else
-        $("#" + Select_Control + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
+            case "Select_SubTipo":
+                for (Item in Matrix) {
+                    if (Matrix[Item].Tipo_ID == Nit) {
+                        $("#" + Selector).append("<option value='" + Matrix[Item].SubTipo_ID + "'>" + Matrix[Item].SubTipo_ID + " - " + Matrix[Item].DescripSubTipo + "</option>");
+                    }
+                }
+                break;
 
-    $("#" + Select_Control).trigger("liszt:updated");
-    $('.C_Chosen').trigger('chosen:updated');
+            case "Select_Sucursal":
+                for (Item in Matrix) {
+                    if (Matrix[Item].Nit_ID == Nit) {
+                        $("#" + Selector).append("<option value='" + Matrix[Item].Sucursal_ID + "'>" + Matrix[Item].Descripcion + "</option>");
+                    }
+                }
+                break;
 
-}
+            case "Select_Sucursal_C":
+                for (Item in Matrix) {
+                    if (Matrix[Item].Nit_ID == Nit) {
+                        $("#" + Selector).append("<option value='" + Matrix[Item].Sucursal_ID + "'>" + Matrix[Item].Descripcion + "</option>");
+                    }
+                }
+                break;
 
-//cargar combo de meses
-function CargaMonth(Select_Control, Index_Edit) {
+            case "Select_Moneda":
+                for (Item in Matrix) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].MonedaCod_ID + "'>" + Matrix[Item].MonedaCod_ID + " - " + Matrix[Item].Descripcion + "</option>");
+                }
+                break;
 
-    $('#' + Select_Control).empty();
-    var objList = $("[id$='" + Select_Control + "']");
-    $('#' + Select_Control).append("<option value='-1'>Mes...</option>");
+            case "Select_Moneda_F":
+                for (Item in Matrix) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].MonedaCod_ID + "'>" + Matrix[Item].MonedaCod_ID + " - " + Matrix[Item].Descripcion + "</option>");
+                }
+                break;
 
-    for (itemArray in Matrix_Mes) {
-        $("#" + Select_Control).append("<option value='" + Matrix_Mes[itemArray][0] + "'>" + Matrix_Mes[itemArray][1] + "</option>");
-    }
+            case "Select_Moneda_C":
+                for (Item in Matrix) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].MonedaCod_ID + "'>" + Matrix[Item].MonedaCod_ID + " - " + Matrix[Item].Descripcion + "</option>");
+                }
+                break;
 
-    if (Index_Edit == "")
-        $("#" + Select_Control + " option[value= '-1'] ").attr("selected", true);
-    else
-        $("#" + Select_Control + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
+            case "Select_Producto":
+                for (Item in Matrix) {
+                    if (Matrix[Item].Nit_ID == Nit) {
+                        $("#" + Selector).append("<option value='" + Matrix[Item].Producto_ID + "'>" + Matrix[Item].Producto_ID + " - " + Matrix[Item].Descripcion + "</option>");
+                    }
+                }
+                break;
 
-    $("#" + Select_Control).trigger("liszt:updated");
-    $('.C_Chosen').trigger('chosen:updated');
+            case "Select_Condicion_Financiacion":
+                for (Item in Matrix) {
+                    if ((Matrix[Item].Nit_ID == Nit) || (Matrix[Item].Nit_ID == 0)) {
+                        $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'>" + Matrix[Item].Financiacion_ID + " - " + Matrix[Item].Descripcion + "</option>");
+                    }
+                }
+                break;
 
-}
+            case "Select_Ciclo":
+                for (Item in Matrix) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].ID_Ciclo + "'> " + Matrix[Item].ID_Ciclo + " - " + Matrix[Item].Descripcion + "</option>");
+                }
+                break;
 
-//carga el como dia
-function CargaDay(Select_C_Year, Select_C_Month, Select_Control, Index_Edit) {
+            case "Select_Ciclo_2":
+                for (Item in Matrix) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].ID_Ciclo + "'> " + Matrix[Item].ID_Ciclo + " - " + Matrix[Item].Descripcion + "</option>");
+                }
+                break;
 
-    var Select_Y = $("#" + Select_C_Year).val();
-    var Select_M = $("#" + Select_C_Month).val();
-    var N_Day_M = 0;
+            case "Select_ClaseF":
+                for (Item in Matrix) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Clase + "'> " + Matrix[Item].Linea + "</option>");
+                }
+                break;
 
-    if (Select_Y == "-1" || Select_M == "-1") {
-
-        if (Select_Y == "-1") {
-            Mensaje_General("No Hay Año", "Debe seleccionar El año!", "W");
+            case "Select_MarcaF":
+                for (Item in Matrix) {
+                    if (Matrix[Item].Clase == Nit)
+                        $("#" + Selector).append("<option value='" + Matrix[Item].Marca + "'> " + Matrix[Item].Marca + "</option>");
+                }
+                break;
         }
-        if (Select_M == "-1") {
-            Mensaje_General("No Hay Mes", "Debe seleccionar El Mes!", "W");
+
+        $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
+
+        switch (Index_Edit) {
+            case "":
+                $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
+                break;
+
+            case "0":
+                $("#" + Selector + " option[value= '0'] ").attr("selected", true);
+                break;
+
+            default:
+                $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
+                break;
         }
+
+        $("#" + Selector).trigger("liszt:updated");
+        $('.C_Chosen').trigger('chosen:updated');
+
     }
-    else {
 
-        var YearBis = Valida_Bisiesto(Select_Y);
-        var Ciclo = 1;
+    //carga los combo persona segun opcion de la persona
+    function Charge_Combo_Persona(Matrix, Selector, Nit, Index_Edit) {
 
-        for (itemArray in Matrix_Mes) {
-            if (Matrix_Mes[itemArray][0] == Select_M) {
+        $('#' + Selector).empty();
+        var objList = $("[id$='" + Selector + "']");
 
-                if (YearBis == "Y" && Select_M == "2")
-                    N_Day_M = 29;
-                else
-                    N_Day_M = Matrix_Mes[itemArray][2];
-            }
+        switch (Selector) {
+
+            case "Select_Persona_R"://entidad registro
+                for (Item in Matrix) {
+                    if (Matrix[Item].OP_Hacienda == "S" || Matrix[Item].OP_Transito == "S") {
+                        $("#" + Selector).append("<option value='" + Matrix[Item].Document_ID + "'>" + Matrix[Item].Nombre + "</option>");
+                    }
+                }
+                break;
+
+            case "Select_Notaria_R"://Notaria registro
+                for (Item in Matrix) {
+                    if (Matrix[Item].OP_Hacienda == "S") {
+                        $("#" + Selector).append("<option value='" + Matrix[Item].Document_ID + "'>" + Matrix[Item].Nombre + "</option>");
+                    }
+                }
+                break;
+
+
+            case "Select_Persona_C"://persona registro por NIT ID
+                for (Item in Matrix) {
+                    if (Matrix[Item].Nit_ID == Nit) {
+                        $("#" + Selector).append("<option value='" + Matrix[Item].Document_ID + "'>" + Matrix[Item].Nombre + "</option>");
+                    }
+                }
+                break;
+
+            case "Select_Direccion"://Direcciones por persona
+                for (Item in Matrix) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Index_Direccion + "'>" + Matrix[Item].Direccion + "</option>");
+                }
+                break;
         }
 
-        var objList = $("[id$='" + Select_Control + "']");
+        $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
+
+        switch (Index_Edit) {
+            case "":
+                $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
+                break;
+
+            case "0":
+                $("#" + Selector + " option[value= '0'] ").attr("selected", true);
+                break;
+
+            default:
+                $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
+                break;
+        }
+
+        $("#" + Selector).trigger("liszt:updated");
+        $('.C_Chosen').trigger('chosen:updated');
+
+    }
+
+    //carga combo de años
+    function CargaYear(Select_Control, Rango, Option_Year, Index_Edit, Value_Option) {
+
+        var ActualYear = $("#Hours").html();
+        var A_Date = ActualYear.split("-");
+        var Ciclo = 0;
+
+        var Year_F = parseInt(A_Date[0]) - parseInt(Option_Year);
+        var Year_I = parseInt(Year_F) - parseInt(Rango);
 
         $('#' + Select_Control).empty();
         var objList = $("[id$='" + Select_Control + "']");
-        $('#' + Select_Control).append("<option value='-1'>Dia...</option>");
+        $('#' + Select_Control).append("<option value='-1'>Año...</option>");
 
-        for (Ciclo; Ciclo <= N_Day_M; Ciclo++) {
-            $("#" + Select_Control).append("<option value='" + Ciclo + "'>" + Ciclo + "</option>");
+        switch (Value_Option) {
+            case "":
+                for (Ciclo; Ciclo <= Rango; Ciclo++) {
+                    $("#" + Select_Control).append("<option value='" + Year_I + "'>" + Year_I + "</option>");
+                    Year_I = Year_I + 1;
+                }
+                break;
+            default:
+                for (Ciclo; Ciclo <= Rango; Ciclo++) {
+                    var Index_option = parseInt(Ciclo) + 1;
+                    $("#" + Select_Control).append("<option value='" + Value_Option + Index_option + "'>" + Year_I + "</option>");
+                    Year_I = Year_I + 1;
+                }
+                break;
         }
 
         if (Index_Edit == "")
@@ -1244,788 +1236,922 @@ function CargaDay(Select_C_Year, Select_C_Month, Select_Control, Index_Edit) {
 
     }
 
-}
-
-//Carga los calendarios
-function CargaCalendarios(Matrix, Selector, Index_Edit) {
-
-    $('#' + Selector).empty();
-    var objList = $("[id$='" + Selector + "']");
-
-    switch (Selector) {
-
-        case "Select_Calendario": //Calendario de Paises
-            for (Item in Matrix) {
-                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Index + " - " + Matrix[Item].Descripcion + "</option>");
-            }
-            break;
-    }
-
-    $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
-
-    switch (Index_Edit) {
-        case "":
-            $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
-            break;
-
-        case "0":
-            $("#" + Selector + " option[value= '0'] ").attr("selected", true);
-            break;
-
-        default:
-            $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
-            break;
-    }
-
-    $("#" + Selector).trigger("liszt:updated");
-    $('.C_Chosen').trigger('chosen:updated');
-}
-
-//Carga las Monedas
-function CargaMonedas(Matrix, Selector, Index_Edit) {
-
-    $('#' + Selector).empty();
-    var objList = $("[id$='" + Selector + "']");
-
-    switch (Selector) {
-
-        case "Select_moneda": //Moneda de Paises
-            for (Item in Matrix) {
-                $("#" + Selector).append("<option value='" + Matrix[Item].MonedaCod_ID + "'>" + Matrix[Item].MonedaCod_ID + " - " + Matrix[Item].Descripcion + "</option>");
-            }
-            break;
-    }
-
-    $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
-
-    switch (Index_Edit) {
-        case "":
-            $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
-            break;
-
-        case "0":
-            $("#" + Selector + " option[value= '0'] ").attr("selected", true);
-            break;
-
-        default:
-            $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
-            break;
-    }
-
-    $("#" + Selector).trigger("liszt:updated");
-    $('.C_Chosen').trigger('chosen:updated');
-}
-
-//Carga las Políticas de Seguridad
-function CargaPoliticasSeguridad(Matrix, Selector, Index_Edit) {
-
-    $('#' + Selector).empty();
-    var objList = $("[id$='" + Selector + "']");
-
-    switch (Selector) {
-
-        case "Select_PoliticaSeguridad_U": //Combo Políticas en Adm_Usuario
-            for (Item in Matrix) {
-                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Index + " - " + Matrix[Item].Descripcion + "</option>");
-            }
-            break;
-    }
-
-    $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
-
-    switch (Index_Edit) {
-        case "":
-            $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
-            break;
-
-        case "0":
-            $("#" + Selector + " option[value= '0'] ").attr("selected", true);
-            break;
-
-        default:
-            $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
-            break;
-    }
-
-    $("#" + Selector).trigger("liszt:updated");
-    $('.C_Chosen').trigger('chosen:updated');
-}
-
-//Carga los Grupos de Reportes
-function CargaGrupoReportes(Matrix, Selector, Index_Edit) {
-
-    $('#' + Selector).empty();
-    var objList = $("[id$='" + Selector + "']");
-
-    switch (Selector) {
-
-        case "Select_GroupReports": //Combo Grupo Reportes en Adm_Usuario
-            for (Item in Matrix) {
-                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Nit_ID + " - " + Matrix[Item].Grupo_ID + " - " + Matrix[Item].Descripcion + "</option>");
-            }
-            break;
-    }
-
-    $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
-
-    switch (Index_Edit) {
-        case "":
-            $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
-            break;
-
-        case "0":
-            $("#" + Selector + " option[value= '0'] ").attr("selected", true);
-            break;
-
-        default:
-            $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
-            break;
-    }
-
-    $("#" + Selector).trigger("liszt:updated");
-    $('.C_Chosen').trigger('chosen:updated');
-}
-
-//Carga los Grupos de Documentos
-function CargaGrupoDocumentos(Matrix, Selector, Index_Edit) {
-
-    $('#' + Selector).empty();
-    var objList = $("[id$='" + Selector + "']");
-
-    switch (Selector) {
-
-        case "Select_Grupo_Documentos_U": //Combo Grupo Documentos en Adm_Usuario
-            for (Item in Matrix) {
-                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Nit_ID + " - " + Matrix[Item].Grp_Documento_ID + " - " + Matrix[Item].Descripcion + "</option>");
-            }
-            break;
-    }
-
-    $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
-
-    switch (Index_Edit) {
-        case "":
-            $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
-            break;
-
-        case "0":
-            $("#" + Selector + " option[value= '0'] ").attr("selected", true);
-            break;
-
-        default:
-            $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
-            break;
-    }
-
-    $("#" + Selector).trigger("liszt:updated");
-    $('.C_Chosen').trigger('chosen:updated');
-}
-
-//Carga los Roles
-function CargaRoles(Matrix, Selector, Index_Edit) {
-
-    $('#' + Selector).empty();
-    var objList = $("[id$='" + Selector + "']");
-
-    switch (Selector) {
-
-        case "DDLRol": //Combo Roles en Adm_Usuario
-            for (Item in Matrix) {
-                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Nit_ID + " - " + Matrix[Item].Rol_ID + " - " + Matrix[Item].Descripcion + "</option>");
-            }
-            break;
-
-        case "DDL_ID": //Combo Padre en Adm_OpcRol
-            for (Item in Matrix) {
-                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Nit_ID + " - " + Matrix[Item].Rol_ID + " - " + Matrix[Item].Descripcion + "</option>");
-            }
-            break;
-
-        case "DDLSubRol_Rol": //Combo SubRol o Rol en Adm_OpcRol
-            for (Item in Matrix) {
-                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Nit_ID + " - " + Matrix[Item].Rol_ID + " - " + Matrix[Item].Descripcion + "</option>");
-            }
-            break;
-    }
-
-    $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
-
-    switch (Index_Edit) {
-        case "":
-            $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
-            break;
-
-        case "0":
-            $("#" + Selector + " option[value= '0'] ").attr("selected", true);
-            break;
-
-        default:
-            $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
-            break;
-    }
-
-    $("#" + Selector).trigger("liszt:updated");
-    $('.C_Chosen').trigger('chosen:updated');
-}
-
-//Carga los Links
-function CargaLinks(Matrix, Selector, Index_Edit) {
-
-    $('#' + Selector).empty();
-    var objList = $("[id$='" + Selector + "']");
-
-    switch (Selector) {
-
-        case "DDLLink_ID": //Combo Links en Adm_OpcRol
-            for (Item in Matrix) {
-                $("#" + Selector).append("<option value='" + Matrix[Item].ID + "'> " + Matrix[Item].ID + " - " + Matrix[Item].descripcion + "</option>");
-            }
-            break;
-    }
-
-    $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
-
-    switch (Index_Edit) {
-        case "":
-            $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
-            break;
-
-        case "0":
-            $("#" + Selector + " option[value= '0'] ").attr("selected", true);
-            break;
-
-        default:
-            $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
-            break;
-    }
-
-    $("#" + Selector).trigger("liszt:updated");
-    $('.C_Chosen').trigger('chosen:updated');
-}
-
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*----                                                                         FUNCIONES PARA CARGA DE DOCUMENTOS AL SERVIDOR                                                                                  ----*/
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-//costruimos el nombre del documento temporal
-function ContruyeName_Temp(StrDocument, StrConsecutivo_Empresa, StrConsecutivo) {
-
-    var Fecha = new Date();
-
-    var month = Fecha.getMonth() + 1;
-    var day = Fecha.getDate();
-    var year = Fecha.getFullYear();
-    var hour = Fecha.getHours();
-    var minuto = Fecha.getMinutes();
-    var segundo = Fecha.getSeconds();
-
-    var Output_Date = year +
-    (('' + month).length < 2 ? '0' : '') + month +
-    (('' + day).length < 2 ? '0' : '') + day + "_" +
-    (('' + hour).length < 2 ? '0' : '') + hour +
-    (('' + minuto).length < 2 ? '0' : '') + minuto +
-    (('' + segundo).length < 2 ? '0' : '') + segundo;
-
-    var StrDoc_Name_Temp = "S_" + StrConsecutivo_Empresa + "_" +
-             StrDocument + "_" + User.toUpperCase() + "_" +
-           Output_Date + "." + StrConsecutivo;
-
-    NameTemporal = StrDoc_Name_Temp
-}
-
-//carga de documentos global
-function UpLoad_Document(NameAjax, NameFile_ID, Form) {
-
-    //validamos si seleccionaron un archivo
-    if ($("#" + NameFile_ID).val() != "") {
-
-        //Añadimos la imagen de carga en el contenedor
-        $('#ctl00_cphPrincipal_gif_charge_Container').css("display", "block");
-
-        //capturamos los datos del input file
-        var file = $("#" + NameFile_ID);
-        var dataFile = $("#" + NameFile_ID)[0].files[0];
-
-        //inicializamos el fordata para transferencia de archivos
-        var data = new FormData();
-        //asinamos el datafile a la variable archivo 
-        data.append('archivo', dataFile);
-        data.append('RutaTemporal', RutaTemporal);
-        data.append('NameTemporal', NameTemporal);
-
-        //data.ajaxStart(inicioEnvio);
-        //transacion ajax
-        $.ajax({
-            url: NameAjax + "Ajax.aspx",
-            type: "POST",
-            contentType: false,
-            data: data,
-            processData: false,
-            success: function (result) {
-
-                var filename = result;
-                switch (filename) {
-                    case "NO_FORMAT":
-                        $("#dialog").dialog("option", "title", "Formato Incorrecto!");
-                        $("#Mensaje_alert").text("El documento no se puede generar, el formato es diferente a la parametrización asignada! ");
-                        $("#dialog").dialog("open");
-                        $("#DE").css("display", "none");
-                        $("#SE").css("display", "none");
-                        $("#WE").css("display", "block");
-                        break;
-
-                    default:
-                        //creamos variables
-                        filename = $.trim(filename)
-                        filename = filename.replace(/\s/g, '_');
-                        Doc_name = filename;
-                        var objectfile = data;
-                        var description = "xxxxx";
-
-                        $("#" + NameFile_ID).val("");
-
-                        switch (Form) {
-                            case "1":
-                                VerDocumento();
-                                break;
-
-                            case "2":
-                                VerDocumento_Validacion();
-                                break;
-                            default:
-                                VerDocumento();
-                        }
-                        break;
+    //carga combo de años parametrizado
+    function CargaYear_Parametrizado(Select_Control, Rango_Inicio, Rango_Final, Option_Year, Index_Edit, Value_Option) {
+
+        var ActualYear = $("#Hours").html();
+        var A_Date = ActualYear.split("-");
+        var Ciclo = parseInt(Rango_Inicio) - 1;
+        Rango_Final = parseInt(Rango_Final) - 1;
+
+        var Year_F = parseInt(A_Date[0]) - parseInt(Option_Year);
+        var Year_I = parseInt(Option_Year) - (parseInt(Rango_Final) - (parseInt(Rango_Inicio) - 1));
+
+        $('#' + Select_Control).empty();
+        var objList = $("[id$='" + Select_Control + "']");
+        $('#' + Select_Control).append("<option value='-1'>Año...</option>");
+
+        switch (Value_Option) {
+            case "":
+                for (Ciclo; Ciclo <= Rango_Final; Ciclo++) {
+                    $("#" + Select_Control).append("<option value='" + Year_I + "'>" + Year_I + "</option>");
+                    Year_I = Year_I + 1;
                 }
-
-            },
-            error: function (error) {
-                alert("Ocurrió un error inesperado, por favor intente de nuevo mas tarde: " + error);
-            }
-        });
-    }
-    else {
-
-    }
-
-}
-
-//muestra el documento cargado inicialmente
-function VerDocumento() {
-    $("#IF_Visor").css("display", "inline-table");
-    $("#IF_Visor").attr("width", "100%");
-    $("#IF_Visor").attr("height", "100%");
-    $("#IF_Visor").attr("src", "../../Repository_Document/TEMP/" + Doc_name);
-}
-
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*----                                                                                                                     PROCESO DE FORMATEO DE DIRECCIONES                                                                   ----*/
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-//habilita la ventana emergente de direciones
-function Format_Adress(ObjText) {
-    $("#" + ObjText).click(function () {
-        Control_Work = ObjText;
-        if ($("#" + ObjText).val == "") {
-        } else {
-            Clear_Adress();
-            $("#Txt_End_Adress").val($("#" + ObjText).val());
+                break;
+            default:
+                for (Ciclo; Ciclo <= Rango_Final; Ciclo++) {
+                    var Index_option = parseInt(Ciclo) + 1;
+                    $("#" + Select_Control).append("<option value='" + Value_Option + Index_option + "'>" + Year_I + "</option>");
+                    Year_I = Year_I + 1;
+                }
+                break;
         }
 
-        $("#Txt_Special").css("display", "none");
-        $("#Dialog_Format_Adress").dialog("open");
-        $("#Dialog_Format_Adress").dialog("option", "title", "Ingrese Dirección ");
+        if (Index_Edit == "")
+            $("#" + Select_Control + " option[value= '-1'] ").attr("selected", true);
+        else
+            $("#" + Select_Control + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
 
-        lego_Adress();
-    });
-}
+        $("#" + Select_Control).trigger("liszt:updated");
+        $('.C_Chosen').trigger('chosen:updated');
 
-//construye el string de la direccion
-function lego_Adress() {
+    }
 
-    var Str_Adress = "";
+    //cargar combo de meses
+    function CargaMonth(Select_Control, Index_Edit) {
 
-    $("#Select_Type_Adress").change(function () {
-        ArrayStrAdress[0] = $("#Select_Type_Adress").val();
-        if (ArrayStrAdress[0] == "Kl") {
-            $("#Txt_Special").css("display", "block");
+        $('#' + Select_Control).empty();
+        var objList = $("[id$='" + Select_Control + "']");
+        $('#' + Select_Control).append("<option value='-1'>Mes...</option>");
 
-            $("#Select_Letter_1").css("display", "none");
-            $("#Txt_N2").css("display", "none");
-            $("#Select_Letter_2").css("display", "none");
-            $("#Txt_N3").css("display", "none");
-            $("#Select_Orientacion").css("display", "none");
-            $("#Select_Type_Cons").css("display", "none");
-            $("#Txt_N4").css("display", "none");
-            $("#Select_Type_Cons2").css("display", "none");
-            $("#Txt_N5").css("display", "none");
-            $("#Txt_Texto").css("display", "none");
+        for (itemArray in Matrix_Mes) {
+            $("#" + Select_Control).append("<option value='" + Matrix_Mes[itemArray][0] + "'>" + Matrix_Mes[itemArray][1] + "</option>");
+        }
 
+        if (Index_Edit == "")
+            $("#" + Select_Control + " option[value= '-1'] ").attr("selected", true);
+        else
+            $("#" + Select_Control + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
+
+        $("#" + Select_Control).trigger("liszt:updated");
+        $('.C_Chosen').trigger('chosen:updated');
+
+    }
+
+    //carga el como dia
+    function CargaDay(Select_C_Year, Select_C_Month, Select_Control, Index_Edit) {
+
+        var Select_Y = $("#" + Select_C_Year).val();
+        var Select_M = $("#" + Select_C_Month).val();
+        var N_Day_M = 0;
+
+        if (Select_Y == "-1" || Select_M == "-1") {
+
+            if (Select_Y == "-1") {
+                Mensaje_General("No Hay Año", "Debe seleccionar El año!", "W");
+            }
+            if (Select_M == "-1") {
+                Mensaje_General("No Hay Mes", "Debe seleccionar El Mes!", "W");
+            }
         }
         else {
-            $("#Txt_Special").css("display", "none");
 
-            $("#Select_Letter_1").css("display", "block");
-            $("#Txt_N2").css("display", "block");
-            $("#Select_Letter_2").css("display", "block");
-            $("#Txt_N3").css("display", "block");
-            $("#Select_Orientacion").css("display", "block");
-            $("#Select_Type_Cons").css("display", "block");
-            $("#Txt_N4").css("display", "block");
-            $("#Select_Type_Cons2").css("display", "block");
-            $("#Txt_N5").css("display", "block");
-            $("#Txt_Texto").css("display", "block");
+            var YearBis = Valida_Bisiesto(Select_Y);
+            var Ciclo = 1;
+
+            for (itemArray in Matrix_Mes) {
+                if (Matrix_Mes[itemArray][0] == Select_M) {
+
+                    if (YearBis == "Y" && Select_M == "2")
+                        N_Day_M = 29;
+                    else
+                        N_Day_M = Matrix_Mes[itemArray][2];
+                }
+            }
+
+            var objList = $("[id$='" + Select_Control + "']");
+
+            $('#' + Select_Control).empty();
+            var objList = $("[id$='" + Select_Control + "']");
+            $('#' + Select_Control).append("<option value='-1'>Dia...</option>");
+
+            for (Ciclo; Ciclo <= N_Day_M; Ciclo++) {
+                $("#" + Select_Control).append("<option value='" + Ciclo + "'>" + Ciclo + "</option>");
+            }
+
+            if (Index_Edit == "")
+                $("#" + Select_Control + " option[value= '-1'] ").attr("selected", true);
+            else
+                $("#" + Select_Control + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
+
+            $("#" + Select_Control).trigger("liszt:updated");
+            $('.C_Chosen').trigger('chosen:updated');
 
         }
-        StrLego();
-    });
 
-    $("#Txt_N1").change(function () {
-        ArrayStrAdress[1] = " " + $("#Txt_N1").val();
-        StrLego();
-    });
+    }
 
-    $("#Select_Letter_1").change(function () {
-        ArrayStrAdress[2] = $("#Select_Letter_1").val();
-        StrLego();
-    });
+    //Carga los calendarios
+    function CargaCalendarios(Matrix, Selector, Index_Edit) {
 
-    $("#Txt_Special").change(function () {
-        ArrayStrAdress[2] = " " + $("#Txt_Special").val().toUpperCase();
-        StrLego();
-    });
+        $('#' + Selector).empty();
+        var objList = $("[id$='" + Selector + "']");
 
-    $("#Txt_N2").change(function () {
-        ArrayStrAdress[3] = " N° " + $("#Txt_N2").val();
-        StrLego();
-    });
+        switch (Selector) {
 
-    $("#Select_Letter_2").change(function () {
-        ArrayStrAdress[4] = $("#Select_Letter_2").val();
-        StrLego();
-    });
+            case "Select_Calendario": //Calendario de Paises
+                for (Item in Matrix) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Index + " - " + Matrix[Item].Descripcion + "</option>");
+                }
+                break;
+        }
 
-    $("#Txt_N3").change(function () {
-        ArrayStrAdress[5] = " - " + $("#Txt_N3").val();
-        StrLego();
-    });
+        $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
 
-    $("#Select_Orientacion").change(function () {
-        ArrayStrAdress[6] = " " + $("#Select_Orientacion").val();
-        StrLego();
-    });
+        switch (Index_Edit) {
+            case "":
+                $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
+                break;
 
-    $("#Select_Type_Cons").change(function () {
-        ArrayStrAdress[7] = " " + $("#Select_Type_Cons").val();
-        StrLego();
-    });
+            case "0":
+                $("#" + Selector + " option[value= '0'] ").attr("selected", true);
+                break;
 
-    $("#Txt_N4").change(function () {
-        ArrayStrAdress[8] = " " + $("#Txt_N4").val();
-        StrLego();
-    });
+            default:
+                $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
+                break;
+        }
 
-    $("#Select_Type_Cons2").change(function () {
-        ArrayStrAdress[9] = " " + $("#Select_Type_Cons2").val();
-        StrLego();
-    });
+        $("#" + Selector).trigger("liszt:updated");
+        $('.C_Chosen').trigger('chosen:updated');
+    }
 
-    $("#Txt_N5").change(function () {
-        ArrayStrAdress[10] = " " + $("#Txt_N5").val();
-        StrLego();
-    });
+    //Carga las Monedas
+    function CargaMonedas(Matrix, Selector, Index_Edit) {
 
-    $("#Txt_Texto").change(function () {
-        ArrayStrAdress[11] = " " + $("#Txt_Texto").val().toUpperCase();
-        StrLego();
-    });
-}
+        $('#' + Selector).empty();
+        var objList = $("[id$='" + Selector + "']");
 
-//recorre el vector para construir la direccion
-function StrLego() {
+        switch (Selector) {
 
-    var Str_Adress = "";
+            case "Select_moneda": //Moneda de Paises
+                for (Item in Matrix) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].MonedaCod_ID + "'>" + Matrix[Item].MonedaCod_ID + " - " + Matrix[Item].Descripcion + "</option>");
+                }
+                break;
+        }
 
-    for (item in ArrayStrAdress) {
+        $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
 
-        if (ArrayStrAdress[item] != "") {
-            Str_Adress = Str_Adress + ArrayStrAdress[item];
-            $("#Txt_End_Adress").val(Str_Adress);
+        switch (Index_Edit) {
+            case "":
+                $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
+                break;
+
+            case "0":
+                $("#" + Selector + " option[value= '0'] ").attr("selected", true);
+                break;
+
+            default:
+                $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
+                break;
+        }
+
+        $("#" + Selector).trigger("liszt:updated");
+        $('.C_Chosen').trigger('chosen:updated');
+    }
+
+    //Carga las Políticas de Seguridad
+    function CargaPoliticasSeguridad(Matrix, Selector, Index_Edit) {
+
+        $('#' + Selector).empty();
+        var objList = $("[id$='" + Selector + "']");
+
+        switch (Selector) {
+
+            case "Select_PoliticaSeguridad_U": //Combo Políticas en Adm_Usuario
+                for (Item in Matrix) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Index + " - " + Matrix[Item].Descripcion + "</option>");
+                }
+                break;
+        }
+
+        $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
+
+        switch (Index_Edit) {
+            case "":
+                $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
+                break;
+
+            case "0":
+                $("#" + Selector + " option[value= '0'] ").attr("selected", true);
+                break;
+
+            default:
+                $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
+                break;
+        }
+
+        $("#" + Selector).trigger("liszt:updated");
+        $('.C_Chosen').trigger('chosen:updated');
+    }
+
+    //Carga los Grupos de Reportes
+    function CargaGrupoReportes(Matrix, Selector, Index_Edit) {
+
+        $('#' + Selector).empty();
+        var objList = $("[id$='" + Selector + "']");
+
+        switch (Selector) {
+
+            case "Select_GroupReports": //Combo Grupo Reportes en Adm_Usuario
+                for (Item in Matrix) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Nit_ID + " - " + Matrix[Item].Grupo_ID + " - " + Matrix[Item].Descripcion + "</option>");
+                }
+                break;
+        }
+
+        $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
+
+        switch (Index_Edit) {
+            case "":
+                $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
+                break;
+
+            case "0":
+                $("#" + Selector + " option[value= '0'] ").attr("selected", true);
+                break;
+
+            default:
+                $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
+                break;
+        }
+
+        $("#" + Selector).trigger("liszt:updated");
+        $('.C_Chosen').trigger('chosen:updated');
+    }
+
+    //Carga los Grupos de Documentos
+    function CargaGrupoDocumentos(Matrix, Selector, Index_Edit) {
+
+        $('#' + Selector).empty();
+        var objList = $("[id$='" + Selector + "']");
+
+        switch (Selector) {
+
+            case "Select_Grupo_Documentos_U": //Combo Grupo Documentos en Adm_Usuario
+                for (Item in Matrix) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Nit_ID + " - " + Matrix[Item].Grp_Documento_ID + " - " + Matrix[Item].Descripcion + "</option>");
+                }
+                break;
+        }
+
+        $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
+
+        switch (Index_Edit) {
+            case "":
+                $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
+                break;
+
+            case "0":
+                $("#" + Selector + " option[value= '0'] ").attr("selected", true);
+                break;
+
+            default:
+                $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
+                break;
+        }
+
+        $("#" + Selector).trigger("liszt:updated");
+        $('.C_Chosen').trigger('chosen:updated');
+    }
+
+    //Carga los Roles
+    function CargaRoles(Matrix, Selector, Index_Edit) {
+
+        $('#' + Selector).empty();
+        var objList = $("[id$='" + Selector + "']");
+
+        switch (Selector) {
+
+            case "DDLRol": //Combo Roles en Adm_Usuario
+                for (Item in Matrix) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Nit_ID + " - " + Matrix[Item].Rol_ID + " - " + Matrix[Item].Descripcion + "</option>");
+                }
+                break;
+
+            case "DDL_ID": //Combo Padre en Adm_OpcRol
+                for (Item in Matrix) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Nit_ID + " - " + Matrix[Item].Rol_ID + " - " + Matrix[Item].Descripcion + "</option>");
+                }
+                break;
+
+            case "DDLSubRol_Rol": //Combo SubRol o Rol en Adm_OpcRol
+                for (Item in Matrix) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Nit_ID + " - " + Matrix[Item].Rol_ID + " - " + Matrix[Item].Descripcion + "</option>");
+                }
+                break;
+        }
+
+        $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
+
+        switch (Index_Edit) {
+            case "":
+                $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
+                break;
+
+            case "0":
+                $("#" + Selector + " option[value= '0'] ").attr("selected", true);
+                break;
+
+            default:
+                $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
+                break;
+        }
+
+        $("#" + Selector).trigger("liszt:updated");
+        $('.C_Chosen').trigger('chosen:updated');
+    }
+
+    //Carga los Links
+    function CargaLinks(Matrix, Selector, Index_Edit) {
+
+        $('#' + Selector).empty();
+        var objList = $("[id$='" + Selector + "']");
+
+        switch (Selector) {
+
+            case "DDLLink_ID": //Combo Links en Adm_OpcRol
+                for (Item in Matrix) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].ID + "'> " + Matrix[Item].ID + " - " + Matrix[Item].descripcion + "</option>");
+                }
+                break;
+        }
+
+        $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
+
+        switch (Index_Edit) {
+            case "":
+                $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
+                break;
+
+            case "0":
+                $("#" + Selector + " option[value= '0'] ").attr("selected", true);
+                break;
+
+            default:
+                $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
+                break;
+        }
+
+        $("#" + Selector).trigger("liszt:updated");
+        $('.C_Chosen').trigger('chosen:updated');
+    }
+
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    /*----                                                                         FUNCIONES PARA CARGA DE DOCUMENTOS AL SERVIDOR                                                                                  ----*/
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    //costruimos el nombre del documento temporal
+    function ContruyeName_Temp(StrDocument, StrConsecutivo_Empresa, StrConsecutivo) {
+
+        var Fecha = new Date();
+
+        var month = Fecha.getMonth() + 1;
+        var day = Fecha.getDate();
+        var year = Fecha.getFullYear();
+        var hour = Fecha.getHours();
+        var minuto = Fecha.getMinutes();
+        var segundo = Fecha.getSeconds();
+
+        var Output_Date = year +
+        (('' + month).length < 2 ? '0' : '') + month +
+        (('' + day).length < 2 ? '0' : '') + day + "_" +
+        (('' + hour).length < 2 ? '0' : '') + hour +
+        (('' + minuto).length < 2 ? '0' : '') + minuto +
+        (('' + segundo).length < 2 ? '0' : '') + segundo;
+
+        var StrDoc_Name_Temp = "S_" + StrConsecutivo_Empresa + "_" +
+                 StrDocument + "_" + User.toUpperCase() + "_" +
+               Output_Date + "." + StrConsecutivo;
+
+        NameTemporal = StrDoc_Name_Temp
+    }
+
+    //carga de documentos global
+    function UpLoad_Document(NameAjax, NameFile_ID, Form) {
+
+        //validamos si seleccionaron un archivo
+        if ($("#" + NameFile_ID).val() != "") {
+
+            //Añadimos la imagen de carga en el contenedor
+            $('#ctl00_cphPrincipal_gif_charge_Container').css("display", "block");
+
+            //capturamos los datos del input file
+            var file = $("#" + NameFile_ID);
+            var dataFile = $("#" + NameFile_ID)[0].files[0];
+
+            //inicializamos el fordata para transferencia de archivos
+            var data = new FormData();
+            //asinamos el datafile a la variable archivo 
+            data.append('archivo', dataFile);
+            data.append('RutaTemporal', RutaTemporal);
+            data.append('NameTemporal', NameTemporal);
+
+            //data.ajaxStart(inicioEnvio);
+            //transacion ajax
+            $.ajax({
+                url: NameAjax + "Ajax.aspx",
+                type: "POST",
+                contentType: false,
+                data: data,
+                processData: false,
+                success: function (result) {
+
+                    var filename = result;
+                    switch (filename) {
+                        case "NO_FORMAT":
+                            $("#dialog").dialog("option", "title", "Formato Incorrecto!");
+                            $("#Mensaje_alert").text("El documento no se puede generar, el formato es diferente a la parametrización asignada! ");
+                            $("#dialog").dialog("open");
+                            $("#DE").css("display", "none");
+                            $("#SE").css("display", "none");
+                            $("#WE").css("display", "block");
+                            break;
+
+                        default:
+                            //creamos variables
+                            filename = $.trim(filename)
+                            filename = filename.replace(/\s/g, '_');
+                            Doc_name = filename;
+                            var objectfile = data;
+                            var description = "xxxxx";
+
+                            $("#" + NameFile_ID).val("");
+
+                            switch (Form) {
+                                case "1":
+                                    VerDocumento();
+                                    break;
+
+                                case "2":
+                                    VerDocumento_Validacion();
+                                    break;
+                                default:
+                                    VerDocumento();
+                            }
+                            break;
+                    }
+
+                },
+                error: function (error) {
+                    alert("Ocurrió un error inesperado, por favor intente de nuevo mas tarde: " + error);
+                }
+            });
+        }
+        else {
+
+        }
+
+    }
+
+    //muestra el documento cargado inicialmente
+    function VerDocumento() {
+        $("#IF_Visor").css("display", "inline-table");
+        $("#IF_Visor").attr("width", "100%");
+        $("#IF_Visor").attr("height", "100%");
+        $("#IF_Visor").attr("src", "../../Repository_Document/TEMP/" + Doc_name);
+    }
+
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    /*----                                                                                                                     PROCESO DE FORMATEO DE DIRECCIONES                                                                   ----*/
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    //habilita la ventana emergente de direciones
+    function Format_Adress(ObjText) {
+        $("#" + ObjText).click(function () {
+            Control_Work = ObjText;
+            if ($("#" + ObjText).val == "") {
+            } else {
+                Clear_Adress();
+                $("#Txt_End_Adress").val($("#" + ObjText).val());
+            }
+
+            $("#Txt_Special").css("display", "none");
+            $("#Dialog_Format_Adress").dialog("open");
+            $("#Dialog_Format_Adress").dialog("option", "title", "Ingrese Dirección ");
+
+            lego_Adress();
+        });
+    }
+
+    //construye el string de la direccion
+    function lego_Adress() {
+
+        var Str_Adress = "";
+
+        $("#Select_Type_Adress").change(function () {
+            ArrayStrAdress[0] = $("#Select_Type_Adress").val();
+            if (ArrayStrAdress[0] == "Kl") {
+                $("#Txt_Special").css("display", "block");
+
+                $("#Select_Letter_1").css("display", "none");
+                $("#Txt_N2").css("display", "none");
+                $("#Select_Letter_2").css("display", "none");
+                $("#Txt_N3").css("display", "none");
+                $("#Select_Orientacion").css("display", "none");
+                $("#Select_Type_Cons").css("display", "none");
+                $("#Txt_N4").css("display", "none");
+                $("#Select_Type_Cons2").css("display", "none");
+                $("#Txt_N5").css("display", "none");
+                $("#Txt_Texto").css("display", "none");
+
+            }
+            else {
+                $("#Txt_Special").css("display", "none");
+
+                $("#Select_Letter_1").css("display", "block");
+                $("#Txt_N2").css("display", "block");
+                $("#Select_Letter_2").css("display", "block");
+                $("#Txt_N3").css("display", "block");
+                $("#Select_Orientacion").css("display", "block");
+                $("#Select_Type_Cons").css("display", "block");
+                $("#Txt_N4").css("display", "block");
+                $("#Select_Type_Cons2").css("display", "block");
+                $("#Txt_N5").css("display", "block");
+                $("#Txt_Texto").css("display", "block");
+
+            }
+            StrLego();
+        });
+
+        $("#Txt_N1").change(function () {
+            ArrayStrAdress[1] = " " + $("#Txt_N1").val();
+            StrLego();
+        });
+
+        $("#Select_Letter_1").change(function () {
+            ArrayStrAdress[2] = $("#Select_Letter_1").val();
+            StrLego();
+        });
+
+        $("#Txt_Special").change(function () {
+            ArrayStrAdress[2] = " " + $("#Txt_Special").val().toUpperCase();
+            StrLego();
+        });
+
+        $("#Txt_N2").change(function () {
+            ArrayStrAdress[3] = " N° " + $("#Txt_N2").val();
+            StrLego();
+        });
+
+        $("#Select_Letter_2").change(function () {
+            ArrayStrAdress[4] = $("#Select_Letter_2").val();
+            StrLego();
+        });
+
+        $("#Txt_N3").change(function () {
+            ArrayStrAdress[5] = " - " + $("#Txt_N3").val();
+            StrLego();
+        });
+
+        $("#Select_Orientacion").change(function () {
+            ArrayStrAdress[6] = " " + $("#Select_Orientacion").val();
+            StrLego();
+        });
+
+        $("#Select_Type_Cons").change(function () {
+            ArrayStrAdress[7] = " " + $("#Select_Type_Cons").val();
+            StrLego();
+        });
+
+        $("#Txt_N4").change(function () {
+            ArrayStrAdress[8] = " " + $("#Txt_N4").val();
+            StrLego();
+        });
+
+        $("#Select_Type_Cons2").change(function () {
+            ArrayStrAdress[9] = " " + $("#Select_Type_Cons2").val();
+            StrLego();
+        });
+
+        $("#Txt_N5").change(function () {
+            ArrayStrAdress[10] = " " + $("#Txt_N5").val();
+            StrLego();
+        });
+
+        $("#Txt_Texto").change(function () {
+            ArrayStrAdress[11] = " " + $("#Txt_Texto").val().toUpperCase();
+            StrLego();
+        });
+    }
+
+    //recorre el vector para construir la direccion
+    function StrLego() {
+
+        var Str_Adress = "";
+
+        for (item in ArrayStrAdress) {
+
+            if (ArrayStrAdress[item] != "") {
+                Str_Adress = Str_Adress + ArrayStrAdress[item];
+                $("#Txt_End_Adress").val(Str_Adress);
+            }
         }
     }
-}
 
-//llena el campo de direccion con el string armado
-function Add_Adress() {
+    //llena el campo de direccion con el string armado
+    function Add_Adress() {
 
-    if ($("#Txt_End_Adress").val() != "")
-        $("#" + Control_Work).val($("#Txt_End_Adress").val());
+        if ($("#Txt_End_Adress").val() != "")
+            $("#" + Control_Work).val($("#Txt_End_Adress").val());
 
-    $("#Dialog_Format_Adress").dialog("close");
-}
+        $("#Dialog_Format_Adress").dialog("close");
+    }
 
-//limpia los campos de direccion
-function Clear_Adress() {
+    //limpia los campos de direccion
+    function Clear_Adress() {
 
-    ArrayStrAdress = [];
-    $("#Select_Type_Adress").val("");
-    $("#Select_Letter_1").val("");
-    $("#Txt_N1").val("");
-    $("#Txt_Special").val("");
-    $("#Txt_N2").val("");
-    $("#Select_Letter_2").val("");
-    $("#Txt_N3").val("");
-    $("#Select_Orientacion").val("");
-    $("#Select_Type_Cons").val("");
-    $("#Txt_N4").val("");
-    $("#Select_Type_Cons2").val("");
-    $("#Txt_N5").val("");
-    $("#Txt_Texto").val("");
+        ArrayStrAdress = [];
+        $("#Select_Type_Adress").val("");
+        $("#Select_Letter_1").val("");
+        $("#Txt_N1").val("");
+        $("#Txt_Special").val("");
+        $("#Txt_N2").val("");
+        $("#Select_Letter_2").val("");
+        $("#Txt_N3").val("");
+        $("#Select_Orientacion").val("");
+        $("#Select_Type_Cons").val("");
+        $("#Txt_N4").val("");
+        $("#Select_Type_Cons2").val("");
+        $("#Txt_N5").val("");
+        $("#Txt_Texto").val("");
 
-    $("#Txt_End_Adress").val("");
-}
+        $("#Txt_End_Adress").val("");
+    }
 
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*----                                                                            FUNCIONES CÁLCULO DE TASAS Y CONVERTIDORES A DÍAS                                                                     ----*/
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    /*----                                                                            FUNCIONES CÁLCULO DE TASAS Y CONVERTIDORES A DÍAS                                                                     ----*/
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-/*Función que hace el cálculo de la Tasa Efectiva en base a una Tasa Nominal*/
-function TasaEfectiva(base, unidad_tiempo, numero, tipo, nominal) {
-    /*
-        Base = 1 - 360 || 2 - 365
-        Unidad Tiempo: A - Años || D - Días || M - Meses || S - Semestre || T - Trimestre
-        Número: Es la cantidad expresado en la unidad de tiempo
-        Tipo: A - Anticipado || V - Vencido
-    */
-    var Base;
-    var dias;
-    var Periodo;
-    var TE;
-    var TN;
-    var part1;
-    var part2;
+    /*Función que hace el cálculo de la Tasa Efectiva en base a una Tasa Nominal*/
+    function TasaEfectiva(base, unidad_tiempo, numero, tipo, nominal) {
+        /*
+            Base = 1 - 360 || 2 - 365
+            Unidad Tiempo: A - Años || D - Días || M - Meses || S - Semestre || T - Trimestre
+            Número: Es la cantidad expresado en la unidad de tiempo
+            Tipo: A - Anticipado || V - Vencido
+        */
+        var Base;
+        var dias;
+        var Periodo;
+        var TE;
+        var TN;
+        var part1;
+        var part2;
 
-    TE = 0;
-    TN = nominal;
-    Base = base;
+        TE = 0;
+        TN = nominal;
+        Base = base;
 
-    if (Base == 360 || Base == 365) {
+        if (Base == 360 || Base == 365) {
 
-        if (unidad_tiempo == "D") {
-            dias = numero;
-        } else if (unidad_tiempo == "M") {
-            dias = mesesDias(numero, Base);
-        } else if (unidad_tiempo == "T") {
-            dias = trimestresDias(numero);
-        } else if (unidad_tiempo == "S") {
-            dias = semestresDias(numero);
-        } else if (unidad_tiempo == "A") {
-            dias = añosDias(numero, Base);
+            if (unidad_tiempo == "D") {
+                dias = numero;
+            } else if (unidad_tiempo == "M") {
+                dias = mesesDias(numero, Base);
+            } else if (unidad_tiempo == "T") {
+                dias = trimestresDias(numero);
+            } else if (unidad_tiempo == "S") {
+                dias = semestresDias(numero);
+            } else if (unidad_tiempo == "A") {
+                dias = añosDias(numero, Base);
+            } else {
+                Mensaje_General("¡Unidad de Tiempo inexistente!", "La Unidad de Tiempo utilizada no es valida, recuerde que solo se permiten cálculos para unidades en Días (D), Meses (M), Trimestres (T), Semestres (S) y Años (A).", "E");
+                TE = 0;
+            }
+
+            Periodo = Base / dias;
+
+            switch (tipo) {
+                case "A":
+                    Mensaje_General("¡Tipo No disponible! - Tasa Efectiva", "Aún no está disponible el cálculo sobre tipo (A) Anticipado.", "W");
+                    TE = 0;
+                    break;
+                case "V":
+                    part1 = (1 + (TN / Periodo));
+                    part2 = Math.pow(part1, Periodo);
+                    TE = part2 - 1;
+                    break;
+                default:
+                    Mensaje_General("¡Tipo inexistente! - Tasa Efectiva", "El tipo utilizado no es valido para hacer el cálculo de su Tasa Efectiva, recuerde que solo se permite 'A' para anticipado y 'V' para vencido.", "E");
+                    TE = 0;
+                    break;
+            }
+
         } else {
-            Mensaje_General("¡Unidad de Tiempo inexistente!", "La Unidad de Tiempo utilizada no es valida, recuerde que solo se permiten cálculos para unidades en Días (D), Meses (M), Trimestres (T), Semestres (S) y Años (A).", "E");
+            Mensaje_General("¡Base inexistente! - Tasa Efectiva", "La base utilizada para calcular su Tasa Efectiva no es valida, recuerde que solo se permiten cálculos base 360 o 365.", "E");
             TE = 0;
         }
-
-        Periodo = Base / dias;
-
-        switch (tipo) {
-            case "A":
-                Mensaje_General("¡Tipo No disponible! - Tasa Efectiva", "Aún no está disponible el cálculo sobre tipo (A) Anticipado.", "W");
-                TE = 0;
-                break;
-            case "V":
-                part1 = (1 + (TN / Periodo));
-                part2 = Math.pow(part1, Periodo);
-                TE = part2 - 1;
-                break;
-            default:
-                Mensaje_General("¡Tipo inexistente! - Tasa Efectiva", "El tipo utilizado no es valido para hacer el cálculo de su Tasa Efectiva, recuerde que solo se permite 'A' para anticipado y 'V' para vencido.", "E");
-                TE = 0;
-                break;
-        }
-
-    } else {
-        Mensaje_General("¡Base inexistente! - Tasa Efectiva", "La base utilizada para calcular su Tasa Efectiva no es valida, recuerde que solo se permiten cálculos base 360 o 365.", "E");
-        TE = 0;
+        return TE;
     }
-    return TE;
-}
 
-/*Función que hace el cálculo de la Tasa Nominal en base a una Tasa Efectiva*/
-function TasaNominal(base, unidad_tiempo, numero, tipo, efectiva) {
-    /*
-        Base = 1 - 360 || 2 - 365
-        Unidad Tiempo: A - Años || D - Días || M - Meses || S - Semestre || T - Trimestre
-        Número: Es la cantidad expresado en la unidad de tiempo EJ: 3 Meses, 2 Semestres, 1 año... etc.
-        Tipo: A - Anticipado || V - Vencido
-    */
-    var Base;
-    var dias;
-    var Periodo;
-    var TE;
-    var TN;
-    var exponencial;
-    var part1;
-    var part2;
-    var part3;
+    /*Función que hace el cálculo de la Tasa Nominal en base a una Tasa Efectiva*/
+    function TasaNominal(base, unidad_tiempo, numero, tipo, efectiva) {
+        /*
+            Base = 1 - 360 || 2 - 365
+            Unidad Tiempo: A - Años || D - Días || M - Meses || S - Semestre || T - Trimestre
+            Número: Es la cantidad expresado en la unidad de tiempo EJ: 3 Meses, 2 Semestres, 1 año... etc.
+            Tipo: A - Anticipado || V - Vencido
+        */
+        var Base;
+        var dias;
+        var Periodo;
+        var TE;
+        var TN;
+        var exponencial;
+        var part1;
+        var part2;
+        var part3;
 
-    TN = 0;
-    TE = efectiva;
-    Base = base;
+        TN = 0;
+        TE = efectiva;
+        Base = base;
 
-    if (Base == 360 || Base == 365) {
+        if (Base == 360 || Base == 365) {
 
-        if (unidad_tiempo == "D") {
-            dias = numero;
-        } else if (unidad_tiempo == "M") {
-            dias = mesesDias(numero, Base);
-        } else if (unidad_tiempo == "T") {
-            dias = trimestresDias(numero);
-        } else if (unidad_tiempo == "S") {
-            dias = semestresDias(numero);
-        } else if (unidad_tiempo == "A") {
-            dias = añosDias(numero, Base);
+            if (unidad_tiempo == "D") {
+                dias = numero;
+            } else if (unidad_tiempo == "M") {
+                dias = mesesDias(numero, Base);
+            } else if (unidad_tiempo == "T") {
+                dias = trimestresDias(numero);
+            } else if (unidad_tiempo == "S") {
+                dias = semestresDias(numero);
+            } else if (unidad_tiempo == "A") {
+                dias = añosDias(numero, Base);
+            } else {
+                Mensaje_General("¡Unidad de Tiempo inexistente!", "La Unidad de Tiempo utilizada no es valida, recuerde que solo se permiten cálculos para unidades en Días (D), Meses (M), Trimestres (T), Seme\nstres (S) y Años (A).", "E");
+                TN = 0;
+            }
+
+            Periodo = Base / dias;
+
+            switch (tipo) {
+                case "A":
+                    Mensaje_General("¡Tipo no disponible! - Tasa Nominal", "Aún no está disponible el cálculo sobre tipo (A) Anticipado.", "W");
+                    TN = 0;
+                    break;
+                case "V":
+                    part1 = (1 + TE);
+                    exponencial = dias / base;
+                    part2 = Math.pow(part1, exponencial);
+                    part3 = part2 - 1;
+                    TN = part3 * Periodo;
+                    break;
+                default:
+                    Mensaje_General("¡Tipo inexistente! - Tasa Nominal", "El tipo utilizado no es valido para hacer el cálculo de su Tasa Nominal, recuerde que solo se permite 'A' para anticipado y 'V' para vencido.", "E");
+                    TN = 0;
+                    break;
+            }
+
         } else {
-            Mensaje_General("¡Unidad de Tiempo inexistente!", "La Unidad de Tiempo utilizada no es valida, recuerde que solo se permiten cálculos para unidades en Días (D), Meses (M), Trimestres (T), Seme\nstres (S) y Años (A).", "E");
+            Mensaje_General("¡Base inexistente! - Tasa Nominal", "La base utilizada para calcular su Tasa Nominal no es valida, recuerde que solo se permiten cálculos base 360 o 365.", "E");
             TN = 0;
         }
+        return TN;
+    }
 
-        Periodo = Base / dias;
-
-        switch (tipo) {
-            case "A":
-                Mensaje_General("¡Tipo no disponible! - Tasa Nominal", "Aún no está disponible el cálculo sobre tipo (A) Anticipado.", "W");
-                TN = 0;
+    /*Función que hace la conversión de Meses a días en base 360 y 365*/
+    function mesesDias(meses, base) {
+        var dias;
+        switch (base) {
+            case 360:
+                dias = meses * 30;
                 break;
-            case "V":
-                part1 = (1 + TE);
-                exponencial = dias / base;
-                part2 = Math.pow(part1, exponencial);
-                part3 = part2 - 1;
-                TN = part3 * Periodo;
+            case 365:
+                Mensaje_General("¡Base no disponible! - Convert Months to Days", "La base 365 no está disponible para utilziarse en este momento.", "W");
                 break;
             default:
-                Mensaje_General("¡Tipo inexistente! - Tasa Nominal", "El tipo utilizado no es valido para hacer el cálculo de su Tasa Nominal, recuerde que solo se permite 'A' para anticipado y 'V' para vencido.", "E");
-                TN = 0;
+                Mensaje_General("¡Base inexistente! - Convert Months to Days", "La base utilizada para convertir los meses a días no es valida, recuerde que solo se hacen conversiones en base 360 o 365.", "E");
+                dias = 0;
                 break;
         }
-
-    } else {
-        Mensaje_General("¡Base inexistente! - Tasa Nominal", "La base utilizada para calcular su Tasa Nominal no es valida, recuerde que solo se permiten cálculos base 360 o 365.", "E");
-        TN = 0;
+        return dias;
     }
-    return TN;
-}
 
-/*Función que hace la conversión de Meses a días en base 360 y 365*/
-function mesesDias(meses, base) {
-    var dias;
-    switch (base) {
-        case 360:
-            dias = meses * 30;
-            break;
-        case 365:
-            Mensaje_General("¡Base no disponible! - Convert Months to Days", "La base 365 no está disponible para utilziarse en este momento.", "W");
-            break;
-        default:
-            Mensaje_General("¡Base inexistente! - Convert Months to Days", "La base utilizada para convertir los meses a días no es valida, recuerde que solo se hacen conversiones en base 360 o 365.", "E");
-            dias = 0;
-            break;
+    /*Función que hace la conversión de Trimestres a días en base 360*/
+    function trimestresDias(trimestres) {
+        var dias;
+        dias = trimestres * 90;
+        return dias;
     }
-    return dias;
-}
 
-/*Función que hace la conversión de Trimestres a días en base 360*/
-function trimestresDias(trimestres) {
-    var dias;
-    dias = trimestres * 90;
-    return dias;
-}
-
-/*Función que hace la conversión de Semestres a días en base 360*/
-function semestresDias(semestres) {
-    var dias;
-    dias = semestres * 180;
-    return dias;
-}
-
-/*Función que hace la conversión de Años a días en base 360 y 365*/
-function añosDias(años, base) {
-    var dias;
-    switch (base) {
-        case 360:
-            dias = años * 360;
-            break;
-        case 365:
-            dias = años * 365;
-            break;
-        default:
-            Mensaje_General("¡Base inexistente! - Convert Years to Days", "La base utilizada para convertir los años a días no es valida, recuerde que solo se hacen conversiones en base 360 o 365.", "E");
-            dias = 0;
-            break;
+    /*Función que hace la conversión de Semestres a días en base 360*/
+    function semestresDias(semestres) {
+        var dias;
+        dias = semestres * 180;
+        return dias;
     }
-    return dias;
-}
 
-//calcula valor del IVA
-function Calcula_Valor_IVA(Obj_Cap_1, Obj_Cap_2, ObjResutado) {
-    $("#" + Obj_Cap_2).blur(function () {
+    /*Función que hace la conversión de Años a días en base 360 y 365*/
+    function añosDias(años, base) {
+        var dias;
+        switch (base) {
+            case 360:
+                dias = años * 360;
+                break;
+            case 365:
+                dias = años * 365;
+                break;
+            default:
+                Mensaje_General("¡Base inexistente! - Convert Years to Days", "La base utilizada para convertir los años a días no es valida, recuerde que solo se hacen conversiones en base 360 o 365.", "E");
+                dias = 0;
+                break;
+        }
+        return dias;
+    }
 
-        var Val_C_IVA = $("#" + Obj_Cap_1).val();
-        var Val_S_IVA = $("#" + Obj_Cap_2).val();
+    //calcula valor del IVA
+    function Calcula_Valor_IVA(Obj_Cap_1, Obj_Cap_2, ObjResutado) {
+        $("#" + Obj_Cap_2).blur(function () {
 
-        Val_C_IVA = F_NumericBD(Val_C_IVA);
-        Val_S_IVA = F_NumericBD(Val_S_IVA);
+            var Val_C_IVA = $("#" + Obj_Cap_1).val();
+            var Val_S_IVA = $("#" + Obj_Cap_2).val();
 
-        var operacion = parseInt(Val_C_IVA) - parseInt(Val_S_IVA);
-        $("#" + ObjResutado).html(dinner_format_grid(operacion));
-    });
+            Val_C_IVA = F_NumericBD(Val_C_IVA);
+            Val_S_IVA = F_NumericBD(Val_S_IVA);
 
-    $("#" + Obj_Cap_1).blur(function () {
+            var operacion = parseInt(Val_C_IVA) - parseInt(Val_S_IVA);
+            $("#" + ObjResutado).html(dinner_format_grid(operacion));
+        });
 
-        var Val_C_IVA = $("#" + Obj_Cap_1).val();
-        var Val_S_IVA = $("#" + Obj_Cap_2).val();
+        $("#" + Obj_Cap_1).blur(function () {
 
-        Val_C_IVA = F_NumericBD(Val_C_IVA);
-        Val_S_IVA = F_NumericBD(Val_S_IVA);
+            var Val_C_IVA = $("#" + Obj_Cap_1).val();
+            var Val_S_IVA = $("#" + Obj_Cap_2).val();
 
-        var operacion = parseInt(Val_C_IVA) - parseInt(Val_S_IVA);
-        $("#" + ObjResutado).html(dinner_format_grid(operacion));
-    });
+            Val_C_IVA = F_NumericBD(Val_C_IVA);
+            Val_S_IVA = F_NumericBD(Val_S_IVA);
 
-}
+            var operacion = parseInt(Val_C_IVA) - parseInt(Val_S_IVA);
+            $("#" + ObjResutado).html(dinner_format_grid(operacion));
+        });
 
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*----                                                                            FUNCIONES CÁLCULO DE SUMA Y RESTA EN GRID                                                                                                              ----*/
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-//operacion de suma en totalidad de grid
-function SumarValores_Grid(V1, VT, Obj_Vista) {
+    }
 
-    if (VT == 0)
-        VT = V1;
-    else
-        VT = parseInt(VT) + parseInt(V1);
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    /*----                                                                            FUNCIONES CÁLCULO DE SUMA Y RESTA EN GRID                                                                                                              ----*/
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    //operacion de suma en totalidad de grid
+    function SumarValores_Grid(V1, VT, Obj_Vista) {
 
-    Suma_Valor_Inicial = VT;
-    $("#" + Obj_Vista).html(dinner_format_grid(Suma_Valor_Inicial, ""));
-}
+        if (VT == 0)
+            VT = V1;
+        else
+            VT = parseInt(VT) + parseInt(V1);
 
-//operacion de resta en totalidad de grid
-function RestarValores_Grid(VT, V_Ope, Obj_Vista) {
+        Suma_Valor_Inicial = VT;
+        $("#" + Obj_Vista).html(dinner_format_grid(Suma_Valor_Inicial, ""));
+    }
 
-    VT = parseInt(VT) - parseInt(V_Ope);
+    //operacion de resta en totalidad de grid
+    function RestarValores_Grid(VT, V_Ope, Obj_Vista) {
 
-    Suma_Valor_Inicial = VT;
-    $("#" + Obj_Vista).html(dinner_format_grid(Suma_Valor_Inicial, ""));
-}
+        VT = parseInt(VT) - parseInt(V_Ope);
 
-//compara valores que no se pasen de lar inicial
-function Compara_Valor_Compra(str_v1, Obj1, str_v2, Obj2, objeto, Str_1, Str_Op, Tipo_Opc) {
-    var v1;
-    var v2;
-    var validar = 0;
+        Suma_Valor_Inicial = VT;
+        $("#" + Obj_Vista).html(dinner_format_grid(Suma_Valor_Inicial, ""));
+    }
 
-    if (Tipo_Opc == "Blur") {
-        $("#" + objeto).blur(function () {
+    //compara valores que no se pasen de lar inicial
+    function Compara_Valor_Compra(str_v1, Obj1, str_v2, Obj2, objeto, Str_1, Str_Op, Tipo_Opc) {
+        var v1;
+        var v2;
+        var validar = 0;
 
+        if (Tipo_Opc == "Blur") {
+            $("#" + objeto).blur(function () {
+
+                if (Obj1 == "Val")
+                    v1 = F_NumericBD($("#" + str_v1).val());
+                else
+                    v1 = F_NumericBD($("#" + str_v1).html());
+
+                if (Obj2 == "Val")
+                    v2 = F_NumericBD($("#" + str_v2).val());
+                else
+                    v2 = F_NumericBD($("#" + str_v2).html());
+
+                if (parseInt(v1) < parseInt(v2)) {
+                    if (Obj2 == "Val")
+                        $("#" + str_v2).val("");
+                    else
+                        $("#" + str_v2).html("");
+
+                    Mensaje_General("¡Valor Incoherente !", "El valor " + Str_1 + " NO puede ser mayor al Valor " + Str_Op, "W");
+                }
+            });
+        }
+        else {
             if (Obj1 == "Val")
                 v1 = F_NumericBD($("#" + str_v1).val());
             else
@@ -2037,57 +2163,36 @@ function Compara_Valor_Compra(str_v1, Obj1, str_v2, Obj2, objeto, Str_1, Str_Op,
                 v2 = F_NumericBD($("#" + str_v2).html());
 
             if (parseInt(v1) < parseInt(v2)) {
-                if (Obj2 == "Val")
-                    $("#" + str_v2).val("");
-                else
-                    $("#" + str_v2).html("");
-
+                validar = 1;
                 Mensaje_General("¡Valor Incoherente !", "El valor " + Str_1 + " NO puede ser mayor al Valor " + Str_Op, "W");
             }
-        });
-    }
-    else {
-        if (Obj1 == "Val")
-            v1 = F_NumericBD($("#" + str_v1).val());
-        else
-            v1 = F_NumericBD($("#" + str_v1).html());
-
-        if (Obj2 == "Val")
-            v2 = F_NumericBD($("#" + str_v2).val());
-        else
-            v2 = F_NumericBD($("#" + str_v2).html());
-
-        if (parseInt(v1) < parseInt(v2)) {
-            validar = 1;
-            Mensaje_General("¡Valor Incoherente !", "El valor " + Str_1 + " NO puede ser mayor al Valor " + Str_Op, "W");
         }
+
+        return validar;
     }
 
-    return validar;
-}
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    /*----                                                                            funcion json para usurio quemado                                                                                                              ----*/
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    function JSON_User() {
 
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*----                                                                            funcion json para usurio quemado                                                                                                              ----*/
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-function JSON_User() {
+        var JSON_Usuario = {
+            "Nit_ID": "9001548739",
+            "Usuario_ID": "SASGARR",
+            "Type_Document": "1",
+            "Documento": "79884249",
+            "Nombre": "German Alejandro Rodriguez Rodriguez",
+            "Rol_ID": "ADMIN",
+            "Acceso_Informacion": "",
+            "Nivel_Politica_Seguridad_Grupo": "",
+            "Politica_Seguridad": "",
+            "Acceso_Documentos": "",
+            "Grupo_Documentos": "",
+            "Acceso_Informacion_Documentos": "",
+            "Acceso_Reportes": "",
+            "Grupo_Reportes": "",
+            "Acceso_Informacion_Reportes": ""
+        }
+        Array_G_Usuario.push(JSON_Usuario);
 
-    var JSON_Usuario = {
-        "Nit_ID": "9001548739",
-        "Usuario_ID": "SASGARR",
-        "Type_Document": "1",
-        "Documento": "79884249",
-        "Nombre": "German Alejandro Rodriguez Rodriguez",
-        "Rol_ID": "ADMIN",
-        "Acceso_Informacion": "",
-        "Nivel_Politica_Seguridad_Grupo": "",
-        "Politica_Seguridad": "",
-        "Acceso_Documentos": "",
-        "Grupo_Documentos": "",
-        "Acceso_Informacion_Documentos": "",
-        "Acceso_Reportes": "",
-        "Grupo_Reportes": "",
-        "Acceso_Informacion_Reportes": ""
     }
-    Array_G_Usuario.push(JSON_Usuario);
-
-}

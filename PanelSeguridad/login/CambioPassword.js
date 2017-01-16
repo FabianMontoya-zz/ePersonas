@@ -46,7 +46,7 @@ $(document).ready(function () {
 
     /*MostarContraseña();*/
     /*ValidarCamposIguales();*/
-
+    nobackbutton();
 });
 
 function RevisarContraseña() {
@@ -149,68 +149,4 @@ function transacionAjax(State) {
         }
     });
 }
-
-//funcion para ver los campos password
-//function MostarContraseña() {
-//    $('#show').click(function () {
-//        if ($('#show').is(':checked')) {
-//            $('#txtConfirmPassword').attr("type", "text");
-//            $('#TxtPassword').attr("type", "text");
-//        }
-//        else {
-//            $('#txtConfirmPassword').attr("type", "password");
-//            $('#TxtPassword').attr("type", "password");
-//        }
-//    });
-//}
-
-//funcion que valida si los campos de la contraseña son igules soi no bloquea boton cambiar
-//function ValidarCamposIguales() {
-
-//    $('#TxtPassword').keyup(function () {
-//        $("#TdHelpPassword").html("");
-//    });
-
-//    $('#txtConfirmPassword').keyup(function () {
-//        var campo_1 = $('#TxtPassword').val();
-//        var campo_2 = $('#txtConfirmPassword').val();
-//        $("#TdHelpConfirmPassword").html("");
-//        //validar si el primer campo esta diligenciado
-//        if (campo_1 == "") {
-//            $("#TxtPassword").focus();
-//            $('#TxtPassword').val("");
-//            $('#txtConfirmPassword').val("");
-//            $("#dialog").dialog("option", "title", "Advertencia!");
-//            $("#Mensaje_alert").html("debe diligenciar primero el campo (Digite Contraseña)");
-//            $("#dialog").dialog("open");
-//        }
-//        else {
-//            //validamos si los campos son iguales
-//            if (campo_1 == campo_2) {
-//                $("#S1").css("display", "-webkit-inline-box");
-//                $("#S2").css("display", "-webkit-inline-box");
-//                $("#E1").css("display", "none");
-//                $("#E2").css("display", "none");
-//                $('#TxtPassword').css("border", "solid");
-//                $('#txtConfirmPassword').css("border", "solid");
-//                $('#TxtPassword').css("border-color", "chartreuse");
-//                $('#txtConfirmPassword').css("border-color", "chartreuse");
-//                $('#BtnCambiar').removeAttr('disabled');
-//            }
-//            else {
-//                $("#E1").css("display", "-webkit-inline-box");
-//                $("#E2").css("display", "-webkit-inline-box");
-//                $("#S1").css("display", "none");
-//                $("#S2").css("display", "none");
-//                $('#TxtPassword').css("border", "solid");
-//                $('#txtConfirmPassword').css("border", "solid");
-//                $('#TxtPassword').css("border-color", "darkred");
-//                $('#txtConfirmPassword').css("border-color", "darkred");
-//                $('#BtnCambiar').attr('disabled', 'disabled');
-//            }
-//        }
-
-//    });
-
-//}
 

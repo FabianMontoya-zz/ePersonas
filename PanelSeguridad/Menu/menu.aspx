@@ -6,10 +6,11 @@
     <script src="../SasifMaster.js" type="text/javascript"></script>
     <script src="SasifMaster_Cosult.js" type="text/javascript"></script>
     <link href="../css/css_master.css" rel="stylesheet" type="text/css" />
-    <link href="../css/css_controles.css" rel="stylesheet" type="text/css" />
+    <link href="../css/css_controles.css" rel="stylesheet" type="text/css" /><meta http-equiv="Pragma" content="no-cache"/>
     <link href="../css/css_login.css" rel="stylesheet" type="text/css" />
     <script src="../Scripts/jquery.min.js" type="text/javascript"></script>
     <script src="../Scripts/Chosen/chosen.jquery.js" type="text/javascript"></script>
+    <meta http-equiv="Pragma" content="no-cache"/>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
 </asp:Content>
