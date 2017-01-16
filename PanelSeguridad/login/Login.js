@@ -15,7 +15,10 @@ $(document).ready(function () {
 
 });
 
-//funcion para las ventanas emergentes
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                 REGION INICIO DE COMPONENTES                                                                                                    ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//instancia dialogos jquey
 function Ventanas_Emergentes() {
     $("#dialog").dialog({
         dialogClass: "Dialog_Sasif",
@@ -24,13 +27,63 @@ function Ventanas_Emergentes() {
     });
 }
 
-//Función que oculta las Imagenes de los errores
-function Ocultar_Errores() {
-    $("#EPassword").css("display", "none");
-    $("#EUser").css("display", "none");
-    $("#ImgNIT").css("display", "none");
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                 REGION BOTONES                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//Función que ejecuta el evento Clic del Botón Entrar
+function BtnEntrar() {
+    var flag_campos = ValidarCampos();
+    if (flag_campos === 0) {
+        //llamamos la funcion de transaccion
+        transacionAjax("Ingresar");
+    }
 }
 
+//evento de la tecla enter
+function teclaEnter() {
+    $(document).keydown(function (ev) {
+
+        if (ev.keyCode == 13) {
+            var flag_campos = ValidarCampos();
+            if (flag_campos === 0) {
+                //llamamos la funcion de transaccion
+                transacionAjax("Ingresar");
+            }
+        }
+    });
+}
+
+//evento del boton salir
+function x() {
+    $("#dialog").dialog("close");
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                     PROCESOS DE CHANGES EN CONTROLES                                                                                                                                        ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//cambio de nit
+function Change_Select_Nit() {
+    $("#Select_EmpresaNit").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_EmpresaNit").val() == "-1") {
+            $("#ImgNIT").css("display", "inline-table");
+            $("#S_NIT").html(ArrayMensajes[0].Mensajes_ID + ": " + ArrayMensajes[0].Descripcion);
+            $("#TxtUser").prop('disabled', true);
+            $("#TxtPassword").prop('disabled', true);
+        } else {
+            Ocultar_Errores();
+            $("#TxtUser").prop('disabled', false);
+            $("#TxtPassword").prop('disabled', false);
+        }
+
+        $("#TxtUser").val("");
+        $("#TxtPassword").val("");
+    });
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                           REGION DE VALIDACIONES                                                                                                   ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //validamos los campos de captura
 function ValidarCampos() {
     var user = $("#TxtUser").val();
@@ -71,54 +124,12 @@ function ValidarCampos() {
     return flag_valida;
 }
 
-//evento del boton salir
-function x() {
-    $("#dialog").dialog("close");
-}
-
-//Función que ejecuta el evento Clic del Botón Entrar
-function BtnEntrar() {
-    var flag_campos = ValidarCampos();
-    if (flag_campos === 0) {
-        //llamamos la funcion de transaccion
-        transacionAjax("Ingresar");
-    }
-}
-
-//evento de la tecla enter
-function teclaEnter() {
-    $(document).keydown(function (ev) {
-
-        if (ev.keyCode == 13) {
-            var flag_campos = ValidarCampos();
-            if (flag_campos === 0) {
-                //llamamos la funcion de transaccion
-                transacionAjax("Ingresar");
-            }
-        }
-    });
-}
-
-
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*----                                                                                                                     PROCESOS DE CHANGES EN CONTROLES                                                                                                                                        ----*/
+/*----                                                                                              MENSAJES, VISUALIZACION Y LIMPIEZA                                                                                                ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
-function Change_Select_Nit() {
-    $("#Select_EmpresaNit").change(function () {
-        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
-        if ($("#Select_EmpresaNit").val() == "-1") {
-            $("#ImgNIT").css("display", "inline-table");
-            $("#S_NIT").html(ArrayMensajes[0].Mensajes_ID + ": " + ArrayMensajes[0].Descripcion);
-            $("#TxtUser").prop('disabled', true);
-            $("#TxtPassword").prop('disabled', true);
-        } else {
-            Ocultar_Errores();
-            $("#TxtUser").prop('disabled', false);
-            $("#TxtPassword").prop('disabled', false);
-        }
-
-        $("#TxtUser").val("");
-        $("#TxtPassword").val("");
-    });
+//Función que oculta las Imagenes de los errores
+function Ocultar_Errores() {
+    $("#EPassword").css("display", "none");
+    $("#EUser").css("display", "none");
+    $("#ImgNIT").css("display", "none");
 }

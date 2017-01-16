@@ -1,4 +1,36 @@
-﻿/*-------------------- Validación Usuario ---------------------------*/
+﻿/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                          LISTAS DE CARGA                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------- Carga combo NIT ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_EmpresaNit(State) {
+    $.ajax({
+        url: "LoginAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'CLIENTE'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                ArrayEmpresaNit = [];
+            }
+            else {
+                ArrayEmpresaNit = JSON.parse(result);
+                charge_CatalogList(ArrayEmpresaNit, "Select_EmpresaNit", 1);
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                          CONSULTAS EN PROCESO                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------- Validación Usuario ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax 
 function transacionAjax(vp_State) {
     $.ajax({
@@ -59,7 +91,6 @@ function transacionAjax(vp_State) {
         error: function () {
             Mensaje_General("¡Disculpenos!", "Se generó un error al realizar la transacción y no se completó la tarea.", "E");
         },
-
         async: false, // La petición es síncrona
         cache: false // No queremos usar la caché del navegador
     });
@@ -69,7 +100,8 @@ function transacionAjax(vp_State) {
 /*-------------------- Hace JSON con Todos los datos del User y da acceso al sistema ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_AllInfoUser(vp_State, vp_Nit_ID, vp_User_ID) {
-    
+
+    var vl_Dat_Url = $("#TxtUser").val() + "_" + $("#Select_EmpresaNit").val();
     $.ajax({
         url: "LoginAjax.aspx",
         type: "POST",
@@ -81,41 +113,14 @@ function transacionAjax_AllInfoUser(vp_State, vp_Nit_ID, vp_User_ID) {
         },
         success: function (result) {
             result = JSON.parse(result);
-            window.location = "../Menu/menu.aspx?User=" + $("#TxtUser").val();
+            window.location = "../Menu/menu.aspx?User=" + vl_Dat_Url;
         },
         error: function () {
 
         },
         async: false, // La petición es síncrona
         cache: false // No queremos usar la caché del navegador
-        
+
     });
 }
 
-
-/*-------------------- Carga combo NIT ---------------------------*/
-//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_EmpresaNit(State) {
-    $.ajax({
-        url: "LoginAjax.aspx",
-        type: "POST",
-        //crear json
-        data: {
-            "action": State,
-            "tabla": 'CLIENTE'
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            if (result == "") {
-                ArrayEmpresaNit = [];
-            }
-            else {
-                ArrayEmpresaNit = JSON.parse(result);
-                charge_CatalogList(ArrayEmpresaNit, "Select_EmpresaNit", 1);
-            }
-        },
-        error: function () {
-
-        }
-    });
-}
