@@ -147,6 +147,8 @@ function BtnCrear() {
 function BtnElimina() {
     OpenControl(); //Abrimos el load de espera con el logo
     transacionAjax_TP_Leasing_delete("elimina");
+    opcion = "ALL";
+    BtnConsulta();
 }
 
 
@@ -219,7 +221,7 @@ function Tabla_eliminar() {
     var html_TP_Leasing = "<table id='TTP_Leasing' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Codigo</th><th>Descripción</th></tr></thead><tbody>";
     for (itemArray in ArrayTP_Leasing) {
         if (ArrayTP_Leasing[itemArray].STP_Leasing_ID != 0) {
-            html_TP_Leasing += "<tr id= 'TTP_Leasing_" + ArrayTP_Leasing[itemArray].STP_Leasing_ID + "'><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar('" + ArrayTP_Leasing[itemArray].STP_Leasing_ID + "')\"></input></td><td>" + ArrayTP_Leasing[itemArray].STP_Leasing_ID + "</td><td>" + ArrayTP_Leasing[itemArray].Descripcion + "</td></tr>";
+            html_TP_Leasing += "<tr id= 'TTP_Leasing_" + ArrayTP_Leasing[itemArray].STP_Leasing_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArrayTP_Leasing[itemArray].STP_Leasing_ID + "')\"></img><span>Eliminar Tipo Producto</span></span></td><td>" + ArrayTP_Leasing[itemArray].STP_Leasing_ID + "</td><td>" + ArrayTP_Leasing[itemArray].Descripcion + "</td></tr>";
         }
     }
     html_TP_Leasing += "</tbody></table>";
@@ -253,7 +255,7 @@ function Tabla_modificar() {
     var html_TP_Leasing = "<table id='TTP_Leasing' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Codigo</th><th>Descripción</th></tr></thead><tbody>";
     for (itemArray in ArrayTP_Leasing) {
         if (ArrayTP_Leasing[itemArray].STP_Leasing_ID != 0) {
-            html_TP_Leasing += "<tr id= 'TTP_Leasing_" + ArrayTP_Leasing[itemArray].STP_Leasing_ID + "'><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Editar('" + ArrayTP_Leasing[itemArray].STP_Leasing_ID + "')\"></input></td><td>" + ArrayTP_Leasing[itemArray].STP_Leasing_ID + "</td><td>" + ArrayTP_Leasing[itemArray].Descripcion + "</td></tr>";
+            html_TP_Leasing += "<tr id= 'TTP_Leasing_" + ArrayTP_Leasing[itemArray].STP_Leasing_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + ArrayTP_Leasing[itemArray].STP_Leasing_ID + "')\"></img><span>Editar Perfil</span></span></td><td>" + ArrayTP_Leasing[itemArray].STP_Leasing_ID + "</td><td>" + ArrayTP_Leasing[itemArray].Descripcion + "</td></tr>";
         }
     }
     html_TP_Leasing += "</tbody></table>";

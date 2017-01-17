@@ -132,7 +132,7 @@ function HabilitarPanel(opcion) {
         case "modificar":
             $("#Dialog_Productos").dialog("close");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TPorcen_Descuentos").html("");
+            $("#container_TProductos").html("");
             estado = opcion;
             Enabled_Controls();
             ResetError();
@@ -258,19 +258,19 @@ function Table_Productos() {
             break;
 
         case "modificar":
-            html_Productos = "<table id='TProductos' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Ver</th><th>Editar</th><th>Nit Empresa</th><th>Codigo</th><th>Descripción</th></tr></thead><tbody>";
+            html_Productos = "<table id='TProductos' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Nit Empresa</th><th>Codigo</th><th>Descripción</th></tr></thead><tbody>";
             for (itemArray in ArrayProductos) {
                 if (ArrayProductos[itemArray].Producto_ID != 0) {
-                    html_Productos += "<tr id= 'TProductos_" + ArrayProductos[itemArray].Producto_ID + "'><td><input type ='radio' class= 'Ver' name='ver' onclick=\"Ver('" + ArrayProductos[itemArray].Producto_ID + "','" + ArrayProductos[itemArray].Nit_ID + "')\"></input></td><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Editar('" + ArrayProductos[itemArray].Producto_ID + "','" + ArrayProductos[itemArray].Nit_ID + "')\"></input></td><td>" + ArrayProductos[itemArray].Nit_ID + "</td><td>" + ArrayProductos[itemArray].Producto_ID + "</td><td>" + ArrayProductos[itemArray].Descripcion + "</td></tr>";
+                    html_Productos += "<tr id= 'TProductos_" + ArrayProductos[itemArray].Producto_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + ArrayProductos[itemArray].Producto_ID + "','" + ArrayProductos[itemArray].Nit_ID + "')\"></img><span>Editar Producto</span></span></td><td>" + ArrayProductos[itemArray].Nit_ID + "</td><td>" + ArrayProductos[itemArray].Producto_ID + "</td><td>" + ArrayProductos[itemArray].Descripcion + "</td></tr>";
                 }
             }
             break;
 
         case "eliminar":
-            html_Productos = "<table id='TProductos' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Ver</th><th>Eliminar</th><th>Nit Empresa</th><th>Codigo</th><th>Descripción</th></tr></thead><tbody>";
+            html_Productos = "<table id='TProductos' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Nit Empresa</th><th>Codigo</th><th>Descripción</th></tr></thead><tbody>";
             for (itemArray in ArrayProductos) {
                 if (ArrayProductos[itemArray].Producto_ID != 0) {
-                    html_Productos += "<tr id= 'TProductos_" + ArrayProductos[itemArray].Producto_ID + "'><td><input type ='radio' class= 'Ver' name='ver' onclick=\"Ver('" + ArrayProductos[itemArray].Producto_ID + "','" + ArrayProductos[itemArray].Nit_ID + "')\"></input></td><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar('" + ArrayProductos[itemArray].Producto_ID + "','" + ArrayProductos[itemArray].Nit_ID + "')\"></input></td><td>" + ArrayProductos[itemArray].Nit_ID + "</td><td>" + ArrayProductos[itemArray].Producto_ID + "</td><td>" + ArrayProductos[itemArray].Descripcion + "</td></tr>";
+                    html_Productos += "<tr id= 'TProductos_" + ArrayProductos[itemArray].Producto_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArrayProductos[itemArray].Producto_ID + "','" + ArrayProductos[itemArray].Nit_ID + "')\"></img><span>Eliminar Producto</span></span></td><td>" + ArrayProductos[itemArray].Nit_ID + "</td><td>" + ArrayProductos[itemArray].Producto_ID + "</td><td>" + ArrayProductos[itemArray].Descripcion + "</td></tr>";
                 }
             }
             break;
