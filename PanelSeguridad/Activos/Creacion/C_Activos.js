@@ -86,13 +86,14 @@ $(document).ready(function () {
     Change_Select_Clase();
 
     Change_Select_Nit();
-    Change_Select_TA();
+    Change_Select_TA(); 
     Change_Select_pais();
     Change_Select_Moneda();
     Change_Select_blindaje();
     Change_Select_Modelo();
     Change_Select_Linea();
     Change_Seguro();
+    Change_Compara_Fecha();
 
     Format_Adress("Txt_Adress_U");
     Date_Document();
@@ -288,6 +289,7 @@ function Picker_Fechas() {
     $("#TxtFecha_Recibo").datepicker({ dateFormat: 'yy-mm-dd', dialogClass: "Dialog_Sasif" });
     $("#TxtFecha_Retiro").datepicker({ dateFormat: 'yy-mm-dd' });
     $("#Txt_Fecha_fact").datepicker({ dateFormat: 'yy-mm-dd' });
+    
 }
 
 //valida campo y consulta datos de persona

@@ -171,11 +171,11 @@
                             <tr>
                                 <td class="Label_Bold" style="width: 6%;">Documento
                                 </td>
-                                <td style="width: 25%;">
+                                <td style="width: 30%;">
                                     <select id="Select_Documento" class="C_Chosen">
                                     </select>
                                 </td>
-                                <td style="padding-bottom: 25px; width: 7.5%;">
+                                <td style="padding-bottom: 25px; width: 2.5%;">
                                     <span class="cssToolTip">
                                         <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img_TD"
                                             src="../../images/error.png" />
@@ -329,9 +329,9 @@
                                             src="../../images/error.png" />
                                         <span class="SpamEG"></span></span>
                                 </td>
-                                <td class="Label_Bold" style="width: 10%; text-align: right">Ciudad
+                                <td class="Label_Bold" style="width: 5%; text-align: left">Ciudad
                                 </td>
-                                <td style="width: 20%;">
+                                <td style="width: 40%;">
                                     <select id="Select_Ciudad_U" class="C_Chosen">
                                     </select>
                                 </td>
@@ -486,7 +486,7 @@
                                     </table>
                                     <table id="T_Datos_Fasecolda_4" style="width: 100%;">
                                         <tr>
-                                            <td class="Label_Bold" style="width: 7.3%;">Modelo
+                                            <td class="Label_Bold" style="width: 7.2%;">Modelo
                                             </td>
                                             <td style="width: 7%;">
                                                 <select id="Select_modelo" class="C_Chosen">
@@ -785,23 +785,23 @@
                     <div id="RegistroActivo" style="height: 240px">
                         <table id="Tabla_Registro" style="width: 100%;">
                             <tr>
-                                <td class="Label_Bold" style="width: 7.7%;">Pais
+                                <td class="Label_Bold" style="width: 2%;">Pais
                                 </td>
-                                <td style="width: 20%;">
+                                <td style="width: 35%;">
                                     <select id="Select_Pais_R" class="C_Chosen">
                                     </select>
                                 </td>
-                                <td style="width: 6%; padding-bottom: 25px; text-align: right;"></td>
-                                <td class="Label_Bold" style="width: 10%;">Ciudad
+                                <td style="width: 5%; padding-bottom: 25px; text-align: right;"></td>
+                                <td class="Label_Bold" style="width: 2%;">Ciudad
                                 </td>
-                                <td style="width: 20%;">
+                                <td style="width: 25%;">
                                     <select id="Select_Ciudad_R" class="C_Chosen">
                                     </select>
                                 </td>
-                                <td style="width: 10%; padding-bottom: 25px;"></td>
+                                <td style="width: 5%; padding-bottom: 25px;"></td>
                             </tr>
                             <tr>
-                                <td class="Label_Bold" style="width: 7.7%;">Entidad
+                                <td class="Label_Bold" style="width: 2%;">Entidad
                                 </td>
                                 <td style="width: 20%;" colspan="3">
                                     <select id="Select_Persona_R" class="C_Chosen">

@@ -198,7 +198,7 @@ function Change_Select_Linea() {
 //construye y llama la funcion de cargar el drop list modelo
 function Crear_Rango_modelo(Matrix, Index_ID, Proccess) {
     $("#Cambio_modelo").css("width", "33%");
-    
+
     if (Proccess == "Matrix")
         Index_ID = Index_ID - 1;
     else
@@ -239,6 +239,53 @@ function Change_Select_Modelo() {
     $("#Select_modelo").change(function () {
         Index_Modelo = this.value;
     });
+}
+
+//coloca la sigla de la moneda
+function Change_Compara_Fecha() {
+
+    $("#TxtFecha_Recibo").blur(function () {
+
+        if ($("#TxtFecha_Retiro").val() != "") {
+            var VF = validate_fechaMayorQue($("#TxtFecha_Recibo").val(), $("#TxtFecha_Retiro").val(), "DefaultCompare");
+
+            switch (VF) {
+                case "Menor":
+                    Mensaje_General("Advertencia!", "La fecha contable de retiro es Menor que la fecha contable de recibo!", "W");
+                    LimpiarFechas();
+                    break;
+                case "Mayor":
+                    valida = 0;
+                    break;
+            }
+        }
+    });
+
+    $("#TxtFecha_Retiro").blur(function () {
+        if ($("#TxtFecha_Retiro").val() == "" && $("#TxtFecha_Retiro").val() == "") {
+            Mensaje_General("Advertencia!", "fecha contable de recibo NO a sido Asignada!", "W");
+        } else {
+            var VF = validate_fechaMayorQue($("#TxtFecha_Recibo").val(), $("#TxtFecha_Retiro").val(), "DefaultCompare");
+
+            switch (VF) {
+                case "Menor":
+                    Mensaje_General("Advertencia!", "La fecha contable de retiro es Menor que la fecha contable de recibo!", "W");
+                    LimpiarFechas();
+                    break;
+                case "Mayor":
+                    valida = 0;
+                    break;
+            }
+        }
+    });
+
+
+}
+
+//limpia campos de fecha
+function LimpiarFechas() {
+    $("#TxtFecha_Recibo").val("");
+    $("#TxtFecha_Retiro").val("");
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
