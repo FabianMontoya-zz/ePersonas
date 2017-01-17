@@ -8,7 +8,7 @@ Public Class MenuSQLClass
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Read_AllOptionsMenu(ByVal vp_S_User As String)
+    Public Function Read_AllOptionsMenu(ByVal vp_S_User As String, ByVal vp_S_Nit As String)
 
         Dim ObjListMenu As New List(Of MenuClass)
         Dim StrQuery As String = ""
@@ -20,7 +20,10 @@ Public Class MenuSQLClass
 
         Dim sql As New StringBuilder
 
-        sql.Append("SELECT U_Rol_ID FROM USUARIOS WHERE U_Usuario_ID = '" & vp_S_User & "'")
+        sql.Append(" SELECT U_Rol_ID FROM USUARIOS " & _
+                              " WHERE U_Usuario_ID = '" & vp_S_User & "'" & _
+                              " AND U_Nit_ID = '" & vp_S_Nit & "'")
+
         StrQuery = sql.ToString
         rol = conex.IDis(StrQuery, "1")
 
@@ -28,7 +31,7 @@ Public Class MenuSQLClass
         sql = New StringBuilder
 
         If rol = "ADMIN" Then
-            sql.Append(" EXEC MENU_ADMIN_TEMPORAL '" & vp_S_User & "'")
+            sql.Append(" EXEC MENU_ADMIN_TEMPORAL '" & vp_S_User & "','" & vp_S_Nit & "'")
             StrQuery = sql.ToString
             conex.StrInsert_and_Update_All(StrQuery, "1")
 
@@ -49,9 +52,10 @@ Public Class MenuSQLClass
                         "       Parametro_1," & _
                         "       Parametro_2," & _
                         "       Ruta ," & _
-                        "       Usuario " & _
+                        "       Usuario, " & _
+                        "       NIT " & _
                         " FROM T_TEMPORAL " & _
-                        " ORDER BY Tipo, IDOpcionRol asc, Consecutivo")
+                        " ORDER BY Tipo, IDOpcionRol asc, CAST(Consecutivo AS INT )")
         Else
             sql.Append(" EXEC MENU_TEMPORAL '" & rol & "'")
             StrQuery = sql.ToString
@@ -74,8 +78,9 @@ Public Class MenuSQLClass
                         "       Parametro_1," & _
                         "       Parametro_2," & _
                         "       Ruta ," & _
-                        "       Usuario " & _
-                        " FROM T_TEMPORAL " & _
+                         "       Usuario, " & _
+                        "       NIT " & _
+                       " FROM T_TEMPORAL " & _
                         " ORDER BY Tipo, IDOpcionRol asc, Consecutivo")
         End If
 

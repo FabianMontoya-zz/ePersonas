@@ -4,18 +4,17 @@ var HtmlTree;
 var HtmlTree_Interno = "";
 var Json_Arbol_carpetas;
 var Estructura = [];
-var Link;
 /*--------------- region de variables globales --------------------*/
 
 //evento load del menu
 $(document).ready(function () {
 
     ConsultaParametrosURL();
-
     //traemos los datos
     transacionAjax("consulta");
 
 });
+
 
 //hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax(State) {
@@ -24,7 +23,8 @@ function transacionAjax(State) {
         type: "POST",
         //crear json
         data: { "action": State,
-            "user": $("#User").html()
+            "user": $("#User").html(),
+            "Encrip": Encrip
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -45,6 +45,36 @@ function transacionAjax(State) {
         }
     });
 }
+
+//*-------------------- Hace JSON con Todos los datos del User y da acceso al sistema ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_AllInfoUser(vp_State, vp_Nit_ID, vp_User_ID) {
+
+    var vl_Dat_Url = $("#Select_EmpresaNit").val();
+
+    $.ajax({
+        url: "LoginAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": vp_State,
+            "NIT": vp_Nit_ID,
+            "Usuario": vp_User_ID
+        },
+        success: function (result) {
+            result = JSON.parse(result);
+            transacionAjax_Encriptar("Encriptar_dato", vl_Dat_Url, vp_User_ID);
+
+        },
+        error: function () {
+
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
+
+    });
+}
+
 
 
 //hace el menu dinamico desde la consulta de la BD
