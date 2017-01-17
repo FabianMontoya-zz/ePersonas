@@ -50,7 +50,7 @@ $(document).ready(function () {
     Change_Select_GroupReports();
     Change_Select_TypeAccess();
     Change_Select_EstadoUser();
-    /*==========================FIN CHANGE SELECT'S====================*/
+    /*==========================FIN CHANGE SELECT'S====================*/    
 });
 
 //Función para ocultar las IMG de los errores
@@ -105,6 +105,12 @@ function HabilitarPanel(opcion) {
             $("#Btnguardar").attr("value", "Guardar");
             estado = opcion;
             Clear();
+            var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+            
+            if (OnlyEmpresa == true) {
+                TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+            }
+
             break;
 
         case "buscar":

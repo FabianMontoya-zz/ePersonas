@@ -2181,6 +2181,18 @@ function Compara_Valor_Compra(str_v1, Obj1, str_v2, Obj2, objeto, Str_1, Str_Op,
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                            funcion json para usurio quemado                                                                                                              ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+function VerificarNIT(Selector) {
+    var NIT = false; 
+    if (Array_G_Usuario[0].Acceso_Informacion != "0") {    
+        $("#" + Selector + "").prop('disabled', true); //No se agrega el trigger porque se hace al seleccionar el val
+        $("#" + Selector + "").val("" + Array_G_Usuario[0].Nit_ID + "").trigger("chosen:updated");
+        NIT = true;
+    }
+    return NIT;
+}
+
+
 function JSON_User() {
 
     var JSON_Usuario = {
@@ -2190,15 +2202,15 @@ function JSON_User() {
         "Documento": "79884249",
         "Nombre": "German Alejandro Rodriguez Rodriguez",
         "Rol_ID": "ADMIN",
-        "Acceso_Informacion": "",
-        "Nivel_Politica_Seguridad_Grupo": "",
-        "Politica_Seguridad": "",
-        "Acceso_Documentos": "",
+        "Acceso_Informacion": "1",
+        "Nivel_Politica_Seguridad_Grupo": "0",
+        "Politica_Seguridad": "1",
+        "Acceso_Documentos": "0",
         "Grupo_Documentos": "",
-        "Acceso_Informacion_Documentos": "",
-        "Acceso_Reportes": "",
+        "Acceso_Informacion_Documentos": "0",
+        "Acceso_Reportes": "0",
         "Grupo_Reportes": "",
-        "Acceso_Informacion_Reportes": ""
+        "Acceso_Informacion_Reportes": "0"
     }
     Array_G_Usuario.push(JSON_Usuario);
 

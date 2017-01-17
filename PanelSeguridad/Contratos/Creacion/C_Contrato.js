@@ -54,16 +54,16 @@ var ContTerceros = 0;
 $(document).ready(function () {
     /*Funciones para configuración inicial de campos en vista*/
     VentanasEmergentes();
-
     Ocultar_IMGS_Errores();
     Picker_Fechas();
     CargarAcordeons();
     AgregarTablas();
-    /*=====================================*/
-    
+    /*================== END =========================*/
+
     $("#Marco_trabajo_Contrato").css("height", "440px");
     $("#Marco_trabajo_Contrato").css("width", "95%");
 
+    /*Llamado de transacciones AJAX iniciales*/
     transacionAjax_EmpresaNit('Cliente');
     transacionAjax_Documento('Documento');
     transacionAjax_MMoneda('MATRIX_MONEDA');
@@ -72,10 +72,14 @@ $(document).ready(function () {
     transacionAjax_Productos('MATRIX_PRODUCTOS');
     transacionAjax_Financiacion('MATRIX_FINANCIACION');
     transaccionAjax_MTasas('MATRIX_TASAS');
+    /*=============== END ====================*/
 
+    var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
 
+    if (OnlyEmpresa == true) {
+        TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+    }
 
-    $("#Select_Base_Calculo").prop('disabled', true); //Desactivamos el Chosen
 
     /*Carga de todas las funciones para detectar el Change en los Combos y formatos en los TXT*/
     Change_Select_Nit();
@@ -91,12 +95,14 @@ $(document).ready(function () {
     Change_Select_Signo_Puntos();
 
     Change_Select_Base_Calculo();
+    /*================ END ==================*/
 
     Format_Adress("Txt_Adress_C");
     Restric_long_decimal("TXT_Puntos_Adicionales");
     ReCalcularTasas("TXT_Puntos_Adicionales");
     Date_Document();
     Date_Document2();
+    $("#Select_Base_Calculo").prop('disabled', true); //Desactivamos el Chosen
 });
 
 //Ocultamos las imagenes de error al iniciar la pantalla
@@ -427,16 +433,8 @@ function Change_Select_Nit() {
             $("#Img1").css("display", "none");
             $("#Select_EmpresaNit").prop('disabled', true); //Desactivamos el Chosen
         }
-        index_NIT_ID = this.value;
-        Charge_Combos_Depend_Nit(Matrix_Sucursal, "Select_Sucursal_C", index_NIT_ID, "");
-        Charge_Combos_Depend_Nit(Matrix_Productos, "Select_Producto", index_NIT_ID, "");
-        Charge_Combos_Depend_Nit(Matrix_Financiacion, "Select_Condicion_Financiacion", index_NIT_ID, "");
-
-        /*Para Activos*/
-
-        Charge_Combos_Depend_Nit(Matrix_Sucursal, "Select_Sucursal", index_NIT_ID, "");
-        Charge_Combos_Depend_Nit(Matrix_Personas, "Select_Persona_A", index_NIT_ID, "");
-        /*============*/
+        index = this.value;
+        TransaccionesSegunNIT(index);
 
         /*Escritura de L_Mora_ID y L_Mora_Magnitud*/
         TasaMora();
@@ -445,6 +443,22 @@ function Change_Select_Nit() {
         TasaUsura();
     });
 }
+
+function TransaccionesSegunNIT(index_NIT_ID) {
+    if (index_NIT_ID != "-1") {
+        Charge_Combos_Depend_Nit(Matrix_Sucursal, "Select_Sucursal_C", index_NIT_ID, "");
+        Charge_Combos_Depend_Nit(Matrix_Productos, "Select_Producto", index_NIT_ID, "");
+        Charge_Combos_Depend_Nit(Matrix_Financiacion, "Select_Condicion_Financiacion", index_NIT_ID, "");
+
+        /*Para Activos*/
+        Charge_Combos_Depend_Nit(Matrix_Sucursal, "Select_Sucursal", index_NIT_ID, "");
+        Charge_Combos_Depend_Nit(Matrix_Personas, "Select_Persona_A", index_NIT_ID, "");
+        /*============*/
+    }
+}
+
+
+
 
 function Change_Select_Sucursal() {
     $("#Select_Sucursal_C").change(function () {
@@ -1081,7 +1095,7 @@ function Add_Terceros(index) {
 
     $("#Dialog_Terceros").dialog("open");
     $("#Dialog_Terceros").dialog("option", "title", "Agregar Persona");
-    
+
     ClearTerceros();
     Table_Terceros();
 }
