@@ -262,7 +262,7 @@ function Change_Compara_Fecha() {
     });
 
     $("#TxtFecha_Retiro").blur(function () {
-        if ($("#TxtFecha_Retiro").val() == "" && $("#TxtFecha_Retiro").val() == "") {
+        if ($("#TxtFecha_Recibo").val() == "" && $("#TxtFecha_Retiro").val() == "") {
             Mensaje_General("Advertencia!", "fecha contable de recibo NO a sido Asignada!", "W");
         } else {
             var VF = validate_fechaMayorQue($("#TxtFecha_Recibo").val(), $("#TxtFecha_Retiro").val(), "DefaultCompare");
