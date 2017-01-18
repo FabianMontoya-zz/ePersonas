@@ -52,9 +52,12 @@ Public Class menuAjax
         Dim ObjListInfoUser As New List(Of LoginClass)
         Dim SQL_Login As New LoginSQLClass
 
+        Dim Encrip As New EncriptarClass
+
 
         LoginClass.Usuario_ID = Request.Form("Usuario")
-        LoginClass.Nit_ID = Request.Form("NIT")
+        LoginClass.Password = Request.Form("NIT")
+        LoginClass.Nit_ID = Encrip.desencriptaDato(LoginClass.Password)
 
         ObjListInfoUser = SQL_Login.InformacionUser(LoginClass)
 

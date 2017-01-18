@@ -10,12 +10,31 @@ var Json_Arbol_carpetas;
 
 //evento load del menu
 $(document).ready(function () {
-
+    VentanasEmergentes();
     ConsultaParametrosURL();
     //traemos los datos
     transacionAjax("consulta");
-
 });
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                 REGION INICIO DE COMPONENTES                                                                                                    ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//instancia dialogos jquey
+function VentanasEmergentes() {
+    $("#Dialog_Warning").dialog({
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        show: {
+            effect: 'fade',
+            duration: 600
+        },
+        hide: {
+            effect: 'fade',
+            duration: 600
+        },
+        modal: true
+    });
+}
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                              PROCESO DE CONTRUCCION MENU ARBOL                                                                             ----*/
@@ -93,7 +112,10 @@ function arbol() {
         }
     }
 
-    $('.Pagina').unbind('click');
+    $('.Pagina').bind('click', function (e) {
+        e.preventDefault();
+    })
+
     setTimeout("Ruta_Menu()", 400);
 }
 
@@ -127,7 +149,20 @@ function Ruta_Menu() {
     for (index = L_Ruta - 1; index >= 0; index--) {
         $("#C_" + ArrayRuta[index]).prop("checked", true);
     }
+    Advertencia();
+}
 
+//Informa el bloque del menu
+function Advertencia() {
+
+    $("#Tree_Menu").mouseenter(function () {
+        $("#Dialog_Warning").dialog("open");
+        $("#Mensaje_Warning").html("No puede cambiar de pagina hasta no cerrar (" + $("#Title_form").html() + ")");
+    });
+
+    $("#Tree_Menu").mouseout(function () {
+        $("#Dialog_Warning").dialog("close");
+    });
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -136,8 +171,9 @@ function Ruta_Menu() {
 
 //hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax(State) {
+
     $.ajax({
-        url: "menuAjax.aspx",
+        url: "/Menu/menuAjax.aspx",
         type: "POST",
         //crear json
         data: {
@@ -152,6 +188,11 @@ function transacionAjax(State) {
             }
             else {
                 ArrayMenu = JSON.parse(result);
+                for (ItemArray in ArrayMenu) {
+                    if (Link == ArrayMenu[ItemArray].IDlink) {
+                        $("#Title_form").html(ArrayMenu[ItemArray].DescripcionLink);
+                    }
+                }
                 arbol();
             }
             No_Back_Button();
@@ -171,7 +212,7 @@ function transacionAjax(State) {
 function transacionAjax_InfoUser(vp_State, vp_Nit_ID, vp_User_ID) {
 
     $.ajax({
-        url: "menuAjax.aspx",
+        url: "/Menu/menuAjax.aspx",
         type: "POST",
         //crear json
         data: {

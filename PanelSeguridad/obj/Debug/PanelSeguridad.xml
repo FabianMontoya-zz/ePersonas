@@ -2133,7 +2133,7 @@ To modify move field declaration from designer file to code-behind file.
 	<param name="vp_S_User"></param>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.MenuSQLClass.Read_AllOptionsMenu(System.String)">
+</member><member name="M:PanelSeguridad.MenuSQLClass.Read_AllOptionsMenu(System.String,System.String,System.String)">
 	<summary>
  crea la consulta para el menu
  </summary>
@@ -5557,6 +5557,11 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
 </member><member name="M:PanelSeguridad.menuAjax.Consulta_menu">
 	<summary>
  traemos todos los datos para construir el menu
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.menuAjax.InformationUser">
+	<summary>
+ Función que hace la consulta de todos los parametros asociados al usuario
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.IngresoSQLClass.Read_AllAcceso(System.String,System.String,System.String)">

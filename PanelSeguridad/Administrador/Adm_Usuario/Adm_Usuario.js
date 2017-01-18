@@ -90,7 +90,7 @@ function Ocultar_Tablas() {
 
 //salida del formulario
 function btnSalir() {
-    window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
+    window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&Key=" + ArrayMenu[0].Nit + "&LINK=" + Link;
 }
 
 //habilita el panel de crear o consulta
@@ -105,7 +105,7 @@ function HabilitarPanel(opcion) {
             $("#Btnguardar").attr("value", "Guardar");
             estado = opcion;
             Clear();
-            var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+            //var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
             
             if (OnlyEmpresa == true) {
                 TransaccionesSegunNIT($("#Select_EmpresaNit").val());

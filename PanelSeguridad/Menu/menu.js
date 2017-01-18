@@ -105,7 +105,7 @@ function arbol() {
                     HtmlTree_Interno = "";
                 }
                 
-                HtmlTree_Interno += "<li class='file'><span class='cssToolTip_ver'><a class='Pagina' href='" + ArrayMenu[itemArray].Ruta + User + "&Key=" + ArrayMenu[itemArray].Nit; + "&LINK=" + ArrayMenu[itemArray].IDlink + "'>" + ArrayMenu[itemArray].DescripcionLink + "</a><span>" + ArrayMenu[itemArray].DescripcionLink + "</span></span></li>";
+                HtmlTree_Interno += "<li class='file'><span class='cssToolTip_ver'><a class='Pagina' href='" + ArrayMenu[itemArray].Ruta + User + "&Key=" + ArrayMenu[itemArray].Nit + "&LINK=" + ArrayMenu[itemArray].IDlink + "'>" + ArrayMenu[itemArray].DescripcionLink + "</a><span>" + ArrayMenu[itemArray].DescripcionLink + "</span></span></li>";
                 cont = cont + 1;
                 //pintar links
                 $("#Container_" + ArrayMenu[itemArray].Sub_Rol).html(HtmlTree_Interno);

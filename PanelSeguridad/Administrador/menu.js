@@ -171,10 +171,9 @@ function Advertencia() {
 
 //hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax(State) {
-    Encrip = 0;
 
     $.ajax({
-        url: "menuAjax.aspx",
+        url: "/Menu/menuAjax.aspx",
         type: "POST",
         //crear json
         data: {
@@ -189,6 +188,11 @@ function transacionAjax(State) {
             }
             else {
                 ArrayMenu = JSON.parse(result);
+                for (ItemArray in ArrayMenu) {
+                    if (Link == ArrayMenu[ItemArray].IDlink) {
+                        $("#Title_form").html(ArrayMenu[ItemArray].DescripcionLink);
+                    }
+                }
                 arbol();
             }
             No_Back_Button();
@@ -208,7 +212,7 @@ function transacionAjax(State) {
 function transacionAjax_InfoUser(vp_State, vp_Nit_ID, vp_User_ID) {
 
     $.ajax({
-        url: "menuAjax.aspx",
+        url: "/Menu/menuAjax.aspx",
         type: "POST",
         //crear json
         data: {

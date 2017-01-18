@@ -75,7 +75,6 @@ $(document).ready(function () {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //capturar el link y usuario para el proceso
 function ConsultaParametrosURL() {
-    console.log(URLVariables);
     if (URLVariables.length <= 2) {
         User = URLVariables[0].replace("User=", "");
         Encrip = URLVariables[1].replace("Key=", "");
@@ -83,7 +82,7 @@ function ConsultaParametrosURL() {
     else {
         User = URLVariables[0].replace("User=", "");
         Encrip = URLVariables[1].replace("Key=", "");
-        Link = URLVariables[2].replace("L_L=", "");
+        Link = URLVariables[2].replace("LINK=", "");
     }
 
     $("#User").html(User.toUpperCase());

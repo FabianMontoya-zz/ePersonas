@@ -141,7 +141,7 @@ function Change_Select_Tarjeta() {
 
 //salida del formulario
 function btnSalir() {
-    window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
+    window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&Key=" + ArrayMenu[0].Nit + "&LINK=" + Link;
 }
 
 //crear link en la BD
