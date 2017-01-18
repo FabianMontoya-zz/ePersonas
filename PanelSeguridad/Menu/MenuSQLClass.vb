@@ -8,7 +8,7 @@ Public Class MenuSQLClass
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Read_AllOptionsMenu(ByVal vp_S_User As String, ByVal vp_S_Nit As String)
+    Public Function Read_AllOptionsMenu(ByVal vp_S_User As String, ByVal vp_S_Nit As String, ByVal vp_S_Encriptado As String)
 
         Dim ObjListMenu As New List(Of MenuClass)
         Dim StrQuery As String = ""
@@ -31,7 +31,7 @@ Public Class MenuSQLClass
         sql = New StringBuilder
 
         If rol = "ADMIN" Then
-            sql.Append(" EXEC MENU_ADMIN_TEMPORAL '" & vp_S_User & "','" & vp_S_Nit & "'")
+            sql.Append(" EXEC MENU_ADMIN_TEMPORAL '" & vp_S_User & "','" & vp_S_Nit & "','" & vp_S_Encriptado & "'")
             StrQuery = sql.ToString
             conex.StrInsert_and_Update_All(StrQuery, "1")
 
@@ -135,6 +135,7 @@ Public Class MenuSQLClass
             objMenu.Parametro_2 = ReadConsulta.GetValue(12)
             objMenu.Ruta = ReadConsulta.GetValue(13)
             If Not (IsDBNull(ReadConsulta.GetValue(14))) Then objMenu.Usuario = ReadConsulta.GetValue(14) Else objMenu.Usuario = ""
+            If Not (IsDBNull(ReadConsulta.GetValue(15))) Then objMenu.Nit = ReadConsulta.GetValue(15) Else objMenu.Nit = ""
 
             'agregamos a la lista
             ObjListMenu.Add(objMenu)

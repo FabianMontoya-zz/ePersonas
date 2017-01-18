@@ -21,7 +21,7 @@ $(document).ready(function () {
 
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_EmpresaNit('Cliente'); //Carga Droplist de Empresa NIT
-    nobackbutton();
+    No_Back_Button();
     Change_Select_Nit();
 
 });

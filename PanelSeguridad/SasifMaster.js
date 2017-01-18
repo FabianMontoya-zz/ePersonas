@@ -1,4 +1,8 @@
 ﻿/*--------------- region de variables globales --------------------*/
+//capturamos la url
+var URLPage = window.location.search.substring(1);
+var URLVariables = URLPage.split('&');
+
 var User;
 var Link;
 var Encrip;
@@ -6,7 +10,6 @@ var Encrip;
 var NameTemporal;
 var Doc_name;
 var Matrix_Mes = [];
-var Array_G_Usuario = [];
 
 var Mensaje_NO_Permitido = "";
 
@@ -30,7 +33,6 @@ Matrix_Mes[11] = [12, "Diciembre", 31];
 
 $(document).ready(function () {
     fecha();
-    JSON_User();
 
     $(".C_Chosen").chosen({
         width: "100%",
@@ -62,7 +64,7 @@ $(document).ready(function () {
         this.value = "";
     });
 
-    nobackbutton();
+    No_Back_Button();
 
     console.log("All is ready, enjoy!");
 
@@ -73,11 +75,7 @@ $(document).ready(function () {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //capturar el link y usuario para el proceso
 function ConsultaParametrosURL() {
-
-    //capturamos la url
-    var URLPage = window.location.search.substring(1);
-    var URLVariables = URLPage.split('&');
-
+    console.log(URLVariables);
     if (URLVariables.length <= 2) {
         User = URLVariables[0].replace("User=", "");
         Encrip = URLVariables[1].replace("Key=", "");
@@ -90,7 +88,7 @@ function ConsultaParametrosURL() {
 
     $("#User").html(User.toUpperCase());
 
-    nobackbutton();
+    No_Back_Button();
     return User;
 }
 
@@ -212,7 +210,7 @@ function ResetError() {
 }
 
 //Función que bloquea el retorno entre páginas
-function nobackbutton() {
+function No_Back_Button() {
 
     window.location.hash = "no-back-button";
     window.location.hash = "Again-No-back-button" //chrome    
@@ -343,7 +341,7 @@ function Load_Charge_Sasif() {
             duration: 200
         }
     });
-    nobackbutton();
+    No_Back_Button();
 }
 
 //Abre control de carga
@@ -358,13 +356,13 @@ function OpenControl() {
 
     $("#Dialog_Control").dialog("open");
     $("#Dialog_Control").dialog("option", "title", "");
-    nobackbutton();
+    No_Back_Button();
 }
 
 //Cierra el Control de Carga
 function CloseControl() {
     $("#Dialog_Control").dialog("close");
-    nobackbutton();
+    No_Back_Button();
 }
 
 
@@ -2183,35 +2181,11 @@ function Compara_Valor_Compra(str_v1, Obj1, str_v2, Obj2, objeto, Str_1, Str_Op,
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 function VerificarNIT(Selector) {
-    var NIT = false; 
-    if (Array_G_Usuario[0].Acceso_Informacion != "0") {    
+    var NIT = false;
+    if (Array_G_Usuario[0].Acceso_Informacion != "0") {
         $("#" + Selector + "").prop('disabled', true); //No se agrega el trigger porque se hace al seleccionar el val
         $("#" + Selector + "").val("" + Array_G_Usuario[0].Nit_ID + "").trigger("chosen:updated");
         NIT = true;
     }
     return NIT;
-}
-
-
-function JSON_User() {
-
-    var JSON_Usuario = {
-        "Nit_ID": "9001548739",
-        "Usuario_ID": "SASGARR",
-        "Type_Document": "1",
-        "Documento": "79884249",
-        "Nombre": "German Alejandro Rodriguez Rodriguez",
-        "Rol_ID": "ADMIN",
-        "Acceso_Informacion": "1",
-        "Nivel_Politica_Seguridad_Grupo": "0",
-        "Politica_Seguridad": "1",
-        "Acceso_Documentos": "0",
-        "Grupo_Documentos": "",
-        "Acceso_Informacion_Documentos": "0",
-        "Acceso_Reportes": "0",
-        "Grupo_Reportes": "",
-        "Acceso_Informacion_Reportes": "0"
-    }
-    Array_G_Usuario.push(JSON_Usuario);
-
 }

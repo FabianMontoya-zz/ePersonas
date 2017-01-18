@@ -16,6 +16,7 @@
     Private _Parametro_1 As String
     Private _Parametro_2 As String
     Private _Ruta As String
+    Private _Nit As String
 #End Region
 
 #Region "propiedades"
@@ -137,6 +138,14 @@
         End Get
         Set(ByVal value As String)
             Me._Ruta = value
+        End Set
+    End Property
+    Public Property Nit() As String
+        Get
+            Return Me._Nit
+        End Get
+        Set(ByVal value As String)
+            Me._Nit = value
         End Set
     End Property
 #End Region

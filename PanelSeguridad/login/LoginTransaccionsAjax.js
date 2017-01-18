@@ -21,7 +21,7 @@ function transacionAjax_EmpresaNit(State) {
                 ArrayEmpresaNit = JSON.parse(result);
                 charge_CatalogList(ArrayEmpresaNit, "Select_EmpresaNit", 1);
             }
-            nobackbutton();
+            No_Back_Button();
         },
         error: function () {
 
@@ -51,8 +51,7 @@ function transacionAjax(vp_State) {
 
                 case 0: //ingresa
                     transacionAjax_AllInfoUser("Loggear", $("#Select_EmpresaNit").val(), $("#TxtUser").val().toUpperCase());
-                    //window.location = "../Menu/menu.aspx?User=" + $("#TxtUser").val();
-                    break;
+                     break;
                 case 1: //contraseña incorrecta
                     $("#EPassword").css("display", "inline-table");
                     $("#S_Pass").html(ArrayMensajes[4].Mensajes_ID + ": " + ArrayMensajes[4].Descripcion);

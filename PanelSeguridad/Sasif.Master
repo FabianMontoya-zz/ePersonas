@@ -15,7 +15,7 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body onload="nobackbutton();">
+<body onload="No_Back_Button();">
     <form id="form1" runat="server">
         <div id="page" class="page">
             <div id="Header" class="header">
