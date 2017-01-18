@@ -27,6 +27,14 @@ var Container_Tarjeta;
 //Evento load JS
 $(document).ready(function () {
 
+    $("#Marco_trabajo_Form").css("height", "490px");
+    $("#container_TProductos").css("height", "380px");
+
+    /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
+    Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
+    Ocultar_Errores();
+    Ocultar_Tablas();
+
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transaccionAjax_MPersona('MATRIX_PERSONA');
     transaccionAjax_MTarjeta('MATRIX_TARJETA');
@@ -41,6 +49,20 @@ $(document).ready(function () {
     Change_Select_Persona();
     Change_Select_Tarjeta();
     Change_Select_Vigencia();
+
+
+
+    $(function () {
+        $("#TxtFinicial").datepicker({ dateFormat: 'yy-mm-dd' });
+        $("#txt_HIVigencia").timepicker();
+        $("#TxtFfinal").datepicker({ dateFormat: 'yy-mm-dd' });
+        $("#txt_HFVigencia").timepicker();
+    });
+});
+
+//Función que oculta todas las IMG de los errores en pantalla
+function Ocultar_Errores() {
+    ResetError();
 
     $("#ESelect").css("display", "none");
     $("#Img1").css("display", "none");
@@ -60,8 +82,12 @@ $(document).ready(function () {
     $("#WA").css("display", "none");
     $("#T_Vigencia_Ing").css("display", "none");
 
-    $("#TablaDatos_D").css("display", "none");
-    $("#TablaConsulta").css("display", "none");
+}
+
+//funcion para las ventanas emergentes
+function Ventanas_Emergentes() {
+
+    Load_Charge_Sasif(); //Carga de "SasifMaster.js" el Control de Carga
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
@@ -87,14 +113,13 @@ $(document).ready(function () {
             background: "black"
         }
     });
+}
 
-    $(function () {
-        $("#TxtFinicial").datepicker({ dateFormat: 'yy-mm-dd' });
-        $("#txt_HIVigencia").timepicker();
-        $("#TxtFfinal").datepicker({ dateFormat: 'yy-mm-dd' });
-        $("#txt_HFVigencia").timepicker();
-    });
-});
+//Función que oculta las tablas
+function Ocultar_Tablas() {
+    $("#TablaDatos_D").css("display", "none");
+    $("#TablaConsulta").css("display", "none");
+}
 
 //salida del formulario
 function btnSalir() {

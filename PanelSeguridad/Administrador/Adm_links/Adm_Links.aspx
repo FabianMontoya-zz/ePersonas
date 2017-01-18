@@ -55,16 +55,16 @@
             <div id="Container_controls">
                 <table id="TablaConsulta">
                     <tr>
-                        <td>
+                        <td style="width: 25%;">
                             <select id="DDLColumns" class="C_Chosen">
                             </select>
                         </td>
-                        <td>
+                        <td style="width: 65%;">
                             <span class="cssToolTip_Form">
-                                <input id="TxtRead" type="text" />
+                                <input id="TxtRead" type="text" style="width: 60%; margin-left: 10%;" />
                                 <span class="Spam_AST"></span></span>
                         </td>
-                        <td colspan="4" align="center" id="TD3">
+                        <td colspan="4" align="center" style="width: 20%;">
                             <input id="BtnRead" type="button" value="Buscar" onclick="BtnConsulta();" />
                         </td>
                     </tr>

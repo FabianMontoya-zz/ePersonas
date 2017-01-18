@@ -262,6 +262,9 @@
     text-align: center;
 }
 
+#Container_controls {
+ width: 100%;
+}
 
 #Container_Consulta, #Container_Facturas, #container_TCiclo, #container_TSucursal
 {

@@ -215,37 +215,37 @@ function ValidarDroplist() {
 // crea la tabla en el cliente
 function Table_rol() {
 
+    var html_TRol;
+
     switch (estado) {
 
         case "buscar":
-            Tabla_consulta();
+            html_TRol = "<table id='TRol' border='1'  cellpadding='1' cellspacing='1' style='width: 100%'><thead><tr><th>NIT Empresa</th><th>Código</th><th>Descripción</th><th>Sigla</th><th>Estado</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
+            for (itemArray in ArrayRoles) {
+                html_TRol += "<tr id= 'TRol_" + ArrayRoles[itemArray].Index + "'><td>" + ArrayRoles[itemArray].Nit_ID + "</td><td>" + ArrayRoles[itemArray].Rol_ID + "</td><td>" + ArrayRoles[itemArray].Descripcion + "</td><td>" + ArrayRoles[itemArray].Sigla + "</td><td> " + ArrayRoles[itemArray].Estado + " </td><td style='white-space: nowrap;'> " + ArrayRoles[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArrayRoles[itemArray].FechaCreacion + " </td><td style='white-space: nowrap;'> " + ArrayRoles[itemArray].UsuarioActualizacion + " </td><td  style='white-space: nowrap;'> " + ArrayRoles[itemArray].FechaActualizacion + " </td></tr>";
+            }
             break;
 
         case "modificar":
-            Tabla_modificar();
+            html_TRol = "<table id='TRol' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>NIT Empresa</th><th>Código</th><th>Descripción</th><th>Sigla</th><th>Estado</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
+            for (itemArray in ArrayRoles) {
+                html_TRol += "<tr id= 'TRol_" + ArrayRoles[itemArray].Index + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + ArrayRoles[itemArray].Index + "')\"></img><span>Editar Perfil</span></span></td><td>" + ArrayRoles[itemArray].Nit_ID + "</td><td>" + ArrayRoles[itemArray].Rol_ID + "</td><td style='white-space: nowrap;'>" + ArrayRoles[itemArray].Descripcion + "</td><td>" + ArrayRoles[itemArray].Sigla + "</td><td> " + ArrayRoles[itemArray].Estado + " </td><td style='white-space: nowrap;'> " + ArrayRoles[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArrayRoles[itemArray].FechaCreacion + " </td><td style='white-space: nowrap;'> " + ArrayRoles[itemArray].UsuarioActualizacion + " </td><td  style='white-space: nowrap;'> " + ArrayRoles[itemArray].FechaActualizacion + " </td></tr>";
+            }
             break;
 
         case "eliminar":
-            Tabla_eliminar();
+            html_TRol = "<table id='TRol' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>NIT Empresa</th><th>Código</th><th>Descripción</th><th>Sigla</th><th>Estado</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
+            for (itemArray in ArrayRoles) {
+                if (ArrayRoles[itemArray].Estado != 2) {
+                    html_TRol += "<tr id= 'TRol_" + ArrayRoles[itemArray].Index + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArrayRoles[itemArray].Index + "')\"></img><span>Eliminar Perfil</span></span></td><td>" + ArrayRoles[itemArray].Nit_ID + "</td><td>" + ArrayRoles[itemArray].Rol_ID + "</td><td style='white-space: nowrap;'>" + ArrayRoles[itemArray].Descripcion + "</td><td>" + ArrayRoles[itemArray].Sigla + "</td><td> " + ArrayRoles[itemArray].Estado + " </td><td style='white-space: nowrap;'> " + ArrayRoles[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArrayRoles[itemArray].FechaCreacion + " </td><td style='white-space: nowrap;'> " + ArrayRoles[itemArray].UsuarioActualizacion + " </td><td  style='white-space: nowrap;'> " + ArrayRoles[itemArray].FechaActualizacion + " </td></tr>";
+                }
+            }
             break;
     }
 
-}
-
-//grid con el boton eliminar
-function Tabla_eliminar() {
-    var html_TRol = "<table id='TRol' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>NIT Empresa</th><th>Código</th><th>Descripción</th><th>Sigla</th><th>Estado</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
-    for (itemArray in ArrayRoles) {
-        if (ArrayRoles[itemArray].Estado != 2) {
-            html_TRol += "<tr id= 'TRol_" + ArrayRoles[itemArray].Index + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArrayRoles[itemArray].Index + "')\"></img><span>Eliminar Perfil</span></span></td><td>" + ArrayRoles[itemArray].Nit_ID + "</td><td>" + ArrayRoles[itemArray].Rol_ID + "</td><td style='white-space: nowrap;'>" + ArrayRoles[itemArray].Descripcion + "</td><td>" + ArrayRoles[itemArray].Sigla + "</td><td> " + ArrayRoles[itemArray].Estado + " </td><td style='white-space: nowrap;'> " + ArrayRoles[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArrayRoles[itemArray].FechaCreacion + " </td><td style='white-space: nowrap;'> " + ArrayRoles[itemArray].UsuarioActualizacion + " </td><td  style='white-space: nowrap;'> " + ArrayRoles[itemArray].FechaActualizacion + " </td></tr>";
-        }
-    }
     html_TRol += "</tbody></table>";
     $("#container_Trol").html("");
     $("#container_Trol").html(html_TRol);
-
-    $(".Eliminar").click(function () {
-    });
 
     $("#TRol").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,
@@ -267,25 +267,6 @@ function Eliminar(index_rol) {
 
 }
 
-//grid con el boton editar
-function Tabla_modificar() {
-    var html_TRol = "<table id='TRol' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>NIT Empresa</th><th>Código</th><th>Descripción</th><th>Sigla</th><th>Estado</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
-    for (itemArray in ArrayRoles) {
-        html_TRol += "<tr id= 'TRol_" + ArrayRoles[itemArray].Index + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + ArrayRoles[itemArray].Index + "')\"></img><span>Editar Perfil</span></span></td><td>" + ArrayRoles[itemArray].Nit_ID + "</td><td>" + ArrayRoles[itemArray].Rol_ID + "</td><td style='white-space: nowrap;'>" + ArrayRoles[itemArray].Descripcion + "</td><td>" + ArrayRoles[itemArray].Sigla + "</td><td> " + ArrayRoles[itemArray].Estado + " </td><td style='white-space: nowrap;'> " + ArrayRoles[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArrayRoles[itemArray].FechaCreacion + " </td><td style='white-space: nowrap;'> " + ArrayRoles[itemArray].UsuarioActualizacion + " </td><td  style='white-space: nowrap;'> " + ArrayRoles[itemArray].FechaActualizacion + " </td></tr>";
-    }
-    html_TRol += "</tbody></table>";
-    $("#container_Trol").html("");
-    $("#container_Trol").html(html_TRol);
-
-    $(".Editar").click(function () {
-    });
-
-    $("#TRol").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
-}
-
 // muestra el registro a editar
 function Editar(index_rol) {
 
@@ -305,22 +286,6 @@ function Editar(index_rol) {
             $("#Btnguardar").attr("value", "Actualizar");
         }
     }
-}
-
-//grid sin botones para ver resultado
-function Tabla_consulta() {
-    var html_TRol = "<table id='TRol' border='1'  cellpadding='1' cellspacing='1' style='width: 100%'><thead><tr><th>NIT Empresa</th><th>Código</th><th>Descripción</th><th>Sigla</th><th>Estado</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
-    for (itemArray in ArrayRoles) {
-        html_TRol += "<tr id= 'TRol_" + ArrayRoles[itemArray].Index + "'><td>" + ArrayRoles[itemArray].Nit_ID + "</td><td>" + ArrayRoles[itemArray].Rol_ID + "</td><td>" + ArrayRoles[itemArray].Descripcion + "</td><td>" + ArrayRoles[itemArray].Sigla + "</td><td> " + ArrayRoles[itemArray].Estado + " </td><td style='white-space: nowrap;'> " + ArrayRoles[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArrayRoles[itemArray].FechaCreacion + " </td><td style='white-space: nowrap;'> " + ArrayRoles[itemArray].UsuarioActualizacion + " </td><td  style='white-space: nowrap;'> " + ArrayRoles[itemArray].FechaActualizacion + " </td></tr>";
-    }
-    html_TRol += "</tbody></table>";
-    $("#container_Trol").html("");
-    $("#container_Trol").html(html_TRol);
-
-    $("#TRol").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
 }
 
 //evento del boton salir

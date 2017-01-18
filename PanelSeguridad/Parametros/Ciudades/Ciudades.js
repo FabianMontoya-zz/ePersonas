@@ -188,43 +188,47 @@ function ValidarDroplist() {
 // crea la tabla en el cliente
 function Table_Ciudades() {
 
+    var html_Ciudades
     switch (estado) {
 
         case "buscar":
-            Tabla_consulta();
+            html_Ciudades = "<table id='TCiudades' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Pais</th><th>Codigo</th><th>Ciudad</th></tr></thead><tbody>";
+            for (itemArray in ArrayCiudades) {
+                if (ArrayCiudades[itemArray].Ciudades_ID != 0) {
+                    html_Ciudades += "<tr id= 'TCiudades_" + ArrayCiudades[itemArray].Ciudades_ID + "'><td>" + ArrayCiudades[itemArray].Pais_ID + " - " + ArrayCiudades[itemArray].DescripPais + "</td><td>" + ArrayCiudades[itemArray].Ciudades_ID + "</td><td>" + ArrayCiudades[itemArray].Descripcion + "</td></tr>";
+                }
+            }
             break;
 
         case "modificar":
-            Tabla_modificar();
+            html_Ciudades = "<table id='TCiudades' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Pais</th><th>Codigo</th><th>Ciudad</th></tr></thead><tbody>";
+            for (itemArray in ArrayCiudades) {
+                if (ArrayCiudades[itemArray].Ciudades_ID != 0) {
+                    html_Ciudades += "<tr id= 'TCiudades_" + ArrayCiudades[itemArray].Ciudades_ID + "'><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Editar('" + ArrayCiudades[itemArray].Pais_ID + "','" + ArrayCiudades[itemArray].Ciudades_ID + "')\"></input></td><td>" + ArrayCiudades[itemArray].Pais_ID + " - " + ArrayCiudades[itemArray].DescripPais + "</td><td>" + ArrayCiudades[itemArray].Ciudades_ID + "</td><td>" + ArrayCiudades[itemArray].Descripcion + "</td></tr>";
+                }
+            }
             break;
 
         case "eliminar":
-            Tabla_eliminar();
+            html_Ciudades = "<table id='TCiudades' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Pais</th><th>Codigo</th><th>Ciudad</th></tr></thead><tbody>";
+            for (itemArray in ArrayCiudades) {
+                if (ArrayCiudades[itemArray].Ciudades_ID != 0) {
+                    html_Ciudades += "<tr id= 'TCiudades_" + ArrayCiudades[itemArray].Ciudades_ID + "'><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar('" + ArrayCiudades[itemArray].Pais_ID + "','" + ArrayCiudades[itemArray].Ciudades_ID + "')\"></input></td><td>" + ArrayCiudades[itemArray].Pais_ID + " - " + ArrayCiudades[itemArray].DescripPais + "</td><td>" + ArrayCiudades[itemArray].Ciudades_ID + "</td><td>" + ArrayCiudades[itemArray].Descripcion + "</td></tr>";
+                }
+            }
             break;
     }
 
-}
-
-//grid con el boton eliminar
-function Tabla_eliminar() {
-    var html_Ciudades = "<table id='TCiudades' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Pais</th><th>Codigo</th><th>Ciudad</th></tr></thead><tbody>";
-    for (itemArray in ArrayCiudades) {
-        if (ArrayCiudades[itemArray].Ciudades_ID != 0) {
-            html_Ciudades += "<tr id= 'TCiudades_" + ArrayCiudades[itemArray].Ciudades_ID + "'><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar('" + ArrayCiudades[itemArray].Pais_ID + "','" + ArrayCiudades[itemArray].Ciudades_ID + "')\"></input></td><td>" + ArrayCiudades[itemArray].Pais_ID + " - " + ArrayCiudades[itemArray].DescripPais + "</td><td>" + ArrayCiudades[itemArray].Ciudades_ID + "</td><td>" + ArrayCiudades[itemArray].Descripcion + "</td></tr>";
-        }
-    }
     html_Ciudades += "</tbody></table>";
     $("#container_TCiudades").html("");
     $("#container_TCiudades").html(html_Ciudades);
-
-    $(".Eliminar").click(function () {
-    });
 
     $("#TCiudades").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,
         "bDestroy": true
     });
 }
+
 
 //muestra el registro a eliminar
 function Eliminar(index_Pais, index_Ciudades) {
@@ -241,26 +245,6 @@ function Eliminar(index_Pais, index_Ciudades) {
 
 }
 
-//grid con el boton editar
-function Tabla_modificar() {
-    var html_Ciudades = "<table id='TCiudades' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Pais</th><th>Codigo</th><th>Ciudad</th></tr></thead><tbody>";
-    for (itemArray in ArrayCiudades) {
-        if (ArrayCiudades[itemArray].Ciudades_ID != 0) {
-            html_Ciudades += "<tr id= 'TCiudades_" + ArrayCiudades[itemArray].Ciudades_ID + "'><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Editar('" + ArrayCiudades[itemArray].Pais_ID + "','" + ArrayCiudades[itemArray].Ciudades_ID + "')\"></input></td><td>" + ArrayCiudades[itemArray].Pais_ID + " - " + ArrayCiudades[itemArray].DescripPais + "</td><td>" + ArrayCiudades[itemArray].Ciudades_ID + "</td><td>" + ArrayCiudades[itemArray].Descripcion + "</td></tr>";
-        }
-    }
-    html_Ciudades += "</tbody></table>";
-    $("#container_TCiudades").html("");
-    $("#container_TCiudades").html(html_Ciudades);
-
-    $(".Editar").click(function () {
-    });
-
-    $("#TCiudades").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
-}
 
 // muestra el registro a editar
 function Editar(index_Pais, index_Ciudades) {
@@ -285,23 +269,6 @@ function Editar(index_Pais, index_Ciudades) {
     }
 }
 
-//grid sin botones para ver resultado
-function Tabla_consulta() {
-    var html_Ciudades = "<table id='TCiudades' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Pais</th><th>Codigo</th><th>Ciudad</th></tr></thead><tbody>";
-    for (itemArray in ArrayCiudades) {
-        if (ArrayCiudades[itemArray].Ciudades_ID != 0) {
-            html_Ciudades += "<tr id= 'TCiudades_" + ArrayCiudades[itemArray].Ciudades_ID + "'><td>" + ArrayCiudades[itemArray].Pais_ID + " - " + ArrayCiudades[itemArray].DescripPais + "</td><td>" + ArrayCiudades[itemArray].Ciudades_ID + "</td><td>" + ArrayCiudades[itemArray].Descripcion + "</td></tr>";
-        }
-    }
-    html_Ciudades += "</tbody></table>";
-    $("#container_TCiudades").html("");
-    $("#container_TCiudades").html(html_Ciudades);
-
-    $("#TCiudades").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
-}
 
 //evento del boton salir
 function x() {

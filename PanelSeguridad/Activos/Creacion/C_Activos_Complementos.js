@@ -244,6 +244,25 @@ function Change_Select_Modelo() {
 //coloca la sigla de la moneda
 function Change_Compara_Fecha() {
 
+    $("#TxtFecha_Retiro").blur(function () {
+        if ($("#TxtFecha_Recibo").val() == "" && $("#TxtFecha_Retiro").val() == "") {
+            Mensaje_General("Advertencia!", "fecha contable de recibo NO a sido Asignada!", "W");
+        }
+        if ($("#TxtFecha_Recibo").val() != "") {
+            var VF = validate_fechaMayorQue($("#TxtFecha_Recibo").val(), $("#TxtFecha_Retiro").val(), "DefaultCompare");
+
+            switch (VF) {
+                case "Menor":
+                    Mensaje_General("Advertencia!", "La fecha contable de retiro es Menor que la fecha contable de recibo!", "W");
+                    LimpiarFechas();
+                    break;
+                case "Mayor":
+                    valida = 0;
+                    break;
+            }
+        }
+    });
+
     $("#TxtFecha_Recibo").blur(function () {
 
         if ($("#TxtFecha_Retiro").val() != "") {
@@ -261,23 +280,7 @@ function Change_Compara_Fecha() {
         }
     });
 
-    $("#TxtFecha_Retiro").blur(function () {
-        if ($("#TxtFecha_Recibo").val() == "" && $("#TxtFecha_Retiro").val() == "") {
-            Mensaje_General("Advertencia!", "fecha contable de recibo NO a sido Asignada!", "W");
-        } else {
-            var VF = validate_fechaMayorQue($("#TxtFecha_Recibo").val(), $("#TxtFecha_Retiro").val(), "DefaultCompare");
-
-            switch (VF) {
-                case "Menor":
-                    Mensaje_General("Advertencia!", "La fecha contable de retiro es Menor que la fecha contable de recibo!", "W");
-                    LimpiarFechas();
-                    break;
-                case "Mayor":
-                    valida = 0;
-                    break;
-            }
-        }
-    });
+    
 
 
 }

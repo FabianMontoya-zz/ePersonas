@@ -17,8 +17,8 @@ $(document).ready(function () {
     Ocultar_Tablas();
     /*==================FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN==============*/
 
-    transacionAjax_CargaBusqueda('cargar_droplist_busqueda'); 
-    
+    transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
+
 });
 
 //Función que oculta todas las IMG de los errores en pantalla
@@ -207,46 +207,51 @@ function ValidarDroplist() {
 // crea la tabla en el cliente
 function Table_links() {
 
+    var html_Tlink;
+
     switch (estado) {
 
         case "buscar":
-            Tabla_consulta();
+            var html_Tlink = "<table id='TLink' border='1'  cellpadding='1' cellspacing='1' style='width: 100%'><thead><tr><th>Código</th><th>Descripción</th><th>Parámetro 1</th><th>Parámetro 2</th><th>Link</th><th>Estado</th></tr></thead><tbody>";
+            for (itemArray in ArrayLinks) {
+                if (ArrayLinks[itemArray].Link_ID != 0) {
+                    html_Tlink += "<tr id= 'TLink_" + ArrayLinks[itemArray].Link_ID + "'><td>" + ArrayLinks[itemArray].Link_ID + "</td><td style='white-space: nowrap;'>" + ArrayLinks[itemArray].Descripcion + "</td><td>" + ArrayLinks[itemArray].Param1 + "</td><td>" + ArrayLinks[itemArray].Param2 + "</td><td style='white-space: nowrap;'> " + ArrayLinks[itemArray].LinkPag + " </td><td> " + ArrayLinks[itemArray].Estado + " </td></tr>";
+                }
+            }
             break;
 
         case "modificar":
-            Tabla_modificar();
+            html_Tlink = "<table id='TLink' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Código</th><th>Descripción</th><th>Parámetro 1</th><th>Parámetro 2</th><th>Link</th><th>Estado</th></tr></thead><tbody>";
+            for (itemArray in ArrayLinks) {
+                if (ArrayLinks[itemArray].Link_ID != 0) {
+                    html_Tlink += "<tr id= 'TLink_" + ArrayLinks[itemArray].Link_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + ArrayLinks[itemArray].Link_ID + "')\"></img><span>Editar Página</span></span></td><td>" + ArrayLinks[itemArray].Link_ID + "</td><td style='white-space: nowrap;'>" + ArrayLinks[itemArray].Descripcion + "</td><td>" + ArrayLinks[itemArray].Param1 + "</td><td>" + ArrayLinks[itemArray].Param2 + "</td><td style='white-space: nowrap;'> " + ArrayLinks[itemArray].LinkPag + " </td><td> " + ArrayLinks[itemArray].Estado + " </td></tr>";
+                }
+            }
             break;
 
         case "eliminar":
-            Tabla_eliminar();
+            html_Tlink = "<table id='TLink' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Código</th><th>Descripción</th><th>Parámetro 1</th><th>Parámetro 2</th><th>Link</th><th>Estado</th></tr></thead><tbody>";
+            for (itemArray in ArrayLinks) {
+                if (ArrayLinks[itemArray].Link_ID != 0) {
+                    html_Tlink += "<tr id= 'TLink_" + ArrayLinks[itemArray].Link_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArrayLinks[itemArray].Link_ID + "')\"></img><span>Eliminar Página</span></span></td><td>" + ArrayLinks[itemArray].Link_ID + "</td><td style='white-space: nowrap;'>" + ArrayLinks[itemArray].Descripcion + "</td><td>" + ArrayLinks[itemArray].Param1 + "</td><td>" + ArrayLinks[itemArray].Param2 + "</td><td style='white-space: nowrap;'> " + ArrayLinks[itemArray].LinkPag + " </td><td> " + ArrayLinks[itemArray].Estado + " </td></tr>";
+                }
+            }
             break;
     }
 
-}
-
-//grid con el boton eliminar
-function Tabla_eliminar() {
-    var html_Tlink = "<table id='TLink' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Código</th><th>Descripción</th><th>Parámetro 1</th><th>Parámetro 2</th><th>Link</th><th>Estado</th></tr></thead><tbody>";
-    for (itemArray in ArrayLinks) {
-
-        html_Tlink += "<tr id= 'TLink_" + ArrayLinks[itemArray].Link_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArrayLinks[itemArray].Link_ID + "')\"></img><span>Eliminar Página</span></span></td><td>" + ArrayLinks[itemArray].Link_ID + "</td><td style='white-space: nowrap;'>" + ArrayLinks[itemArray].Descripcion + "</td><td>" + ArrayLinks[itemArray].Param1 + "</td><td>" + ArrayLinks[itemArray].Param2 + "</td><td style='white-space: nowrap;'> " + ArrayLinks[itemArray].LinkPag + " </td><td> " + ArrayLinks[itemArray].Estado + " </td></tr>";
-    }
     html_Tlink += "</tbody></table>";
     $("#container_Tlink").html("");
     $("#container_Tlink").html(html_Tlink);
 
-    $(".Eliminar").click(function () {
-    });
-
     $("#TLink").dataTable({
-       "bJQueryUI": true, "iDisplayLength": 1000,
+        "bJQueryUI": true, "iDisplayLength": 1000,
         "bDestroy": true
     });
+
 }
 
 //muestra el registro a eliminar
 function Eliminar(index_link) {
-
 
     for (itemArray in ArrayLinks) {
         if (index_link == ArrayLinks[itemArray].Link_ID) {
@@ -256,25 +261,6 @@ function Eliminar(index_link) {
         }
     }
 
-}
-
-//grid con el boton editar
-function Tabla_modificar() {
-    var html_Tlink = "<table id='TLink' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Código</th><th>Descripción</th><th>Parámetro 1</th><th>Parámetro 2</th><th>Link</th><th>Estado</th></tr></thead><tbody>";
-    for (itemArray in ArrayLinks) {
-        html_Tlink += "<tr id= 'TLink_" + ArrayLinks[itemArray].Link_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + ArrayLinks[itemArray].Link_ID + "')\"></img><span>Editar Página</span></span></td><td>" + ArrayLinks[itemArray].Link_ID + "</td><td style='white-space: nowrap;'>" + ArrayLinks[itemArray].Descripcion + "</td><td>" + ArrayLinks[itemArray].Param1 + "</td><td>" + ArrayLinks[itemArray].Param2 + "</td><td style='white-space: nowrap;'> " + ArrayLinks[itemArray].LinkPag + " </td><td> " + ArrayLinks[itemArray].Estado + " </td></tr>";
-    }
-    html_Tlink += "</tbody></table>";
-    $("#container_Tlink").html("");
-    $("#container_Tlink").html(html_Tlink);
-
-    $(".Editar").click(function () {
-    });
-
-    $("#TLink").dataTable({
-       "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
 }
 
 // muestra el registro a editar
@@ -295,23 +281,6 @@ function Editar(index_link) {
             $("#Btnguardar").attr("value", "Actualizar");
         }
     }
-}
-
-//grid sin botones para ver resultado
-function Tabla_consulta() {
-    var html_Tlink = "<table id='TLink' border='1'  cellpadding='1' cellspacing='1' style='width: 100%'><thead><tr><th>Código</th><th>Descripción</th><th>Parámetro 1</th><th>Parámetro 2</th><th>Link</th><th>Estado</th></tr></thead><tbody>";
-    for (itemArray in ArrayLinks) {
-        html_Tlink += "<tr id= 'TLink_" + ArrayLinks[itemArray].Link_ID + "'><td>" + ArrayLinks[itemArray].Link_ID + "</td><td style='white-space: nowrap;'>" + ArrayLinks[itemArray].Descripcion + "</td><td>" + ArrayLinks[itemArray].Param1 + "</td><td>" + ArrayLinks[itemArray].Param2 + "</td><td style='white-space: nowrap;'> " + ArrayLinks[itemArray].LinkPag + " </td><td> " + ArrayLinks[itemArray].Estado + " </td></tr>";
-    }
-    html_Tlink += "</tbody></table>";
-    $("#container_Tlink").html("");
-    $("#container_Tlink").html(html_Tlink);
-    
-    $("#TLink").dataTable({
-       "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
-
 }
 
 //evento del boton salir
