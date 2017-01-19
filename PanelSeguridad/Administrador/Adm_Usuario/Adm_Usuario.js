@@ -105,7 +105,7 @@ function HabilitarPanel(opcion) {
             $("#Btnguardar").attr("value", "Guardar");
             estado = opcion;
             Clear();
-            //var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+            var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
             
             if (OnlyEmpresa == true) {
                 TransaccionesSegunNIT($("#Select_EmpresaNit").val());
@@ -686,7 +686,6 @@ function Change_Select_Nit() {
 }
 
 function TransaccionesSegunNIT(index_NIT_ID) {
-
     if (index_NIT_ID != "-1") {
         OpenControl();
         transacionAjax_PoliticasSeguridad('PoliticasSeguridad', index_NIT_ID); //Carga las politicas de seguridad

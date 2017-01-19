@@ -226,6 +226,8 @@ function No_Back_Button() {
         //keyCode 78 = N
         //keyCode 39 = RIGHT ROW
         //keyCode 67 = C
+        //keyCode 82 = R
+        //keyCode 83 = S
         //keyCode 86 = V
         //keyCode 85 = U 
         //keyCode 45 = Insert
@@ -233,8 +235,8 @@ function No_Back_Button() {
         event = event || window.event;
         var tgt = event.target || event.srcElement;
         if ((event.altKey && event.keyCode == 37) || (event.altKey && event.keyCode == 39) ||
-        (event.ctrlKey && event.keyCode == 78) || (event.ctrlKey && event.keyCode == 67) ||
-        (event.ctrlKey && event.keyCode == 86) || (event.ctrlKey && event.keyCode == 85) ||
+        (event.ctrlKey && event.keyCode == 78) || (event.ctrlKey && event.keyCode == 82) ||
+        (event.ctrlKey && event.keyCode == 83) || (event.ctrlKey && event.keyCode == 85) ||
         (event.ctrlKey && event.keyCode == 45) || (event.shiftKey && event.keyCode == 45)) {
             event.cancelBubble = true;
             event.returnValue = false;

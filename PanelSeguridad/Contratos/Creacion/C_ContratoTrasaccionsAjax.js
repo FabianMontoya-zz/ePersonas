@@ -51,7 +51,9 @@ function transaccionAjax_MSucursal(State) {
         },
         error: function () {
 
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     });
 }
 
@@ -80,7 +82,9 @@ function transacionAjax_MMoneda(State) {
         },
         error: function () {
 
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     });
 }
 
@@ -110,7 +114,9 @@ function transacionAjax_Documento(State) {
         },
         error: function () {
 
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     });
 }
 
@@ -185,7 +191,9 @@ function transacionAjax_Productos(State) {
         },
         error: function () {
 
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     });
 }
 
@@ -211,7 +219,9 @@ function transacionAjax_Financiacion(State) {
         },
         error: function () {
 
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     });
 }
 
@@ -240,7 +250,9 @@ function transaccionAjax_MCiclo(State) {
         },
         error: function () {
 
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     });
 }
 
@@ -270,7 +282,9 @@ function transaccionAjax_MDirecciones(State, TD, D, NIT) {
         },
         error: function () {
 
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     });
 }
 
@@ -296,7 +310,9 @@ function transaccionAjax_MTasas(State) {
         },
         error: function () {
 
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     });
 }
 
@@ -387,7 +403,9 @@ function transacionAjax_C_Contrato_create(State) {
         },
         error: function () {
 
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     }).done(function () {
         switch (caso) {
             case "A":
@@ -440,7 +458,9 @@ function transacionAjax_C_Terceros_create(State) {
         },
         error: function () {
 
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     });
 
 }
@@ -487,7 +507,9 @@ function transacionAjax_C_Activos_create(State) {
         },
         error: function () {
 
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     });
 
 }
@@ -530,7 +552,9 @@ function transacionAjax_C_Activos_Vehiculos_Create(State) {
         },
         error: function () {
 
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     });
 
 }
@@ -568,7 +592,9 @@ function transacionAjax_C_Facturas_create(State) {
             },
             error: function () {
 
-            }
+            },
+            async: false, // La petición es síncrona
+            cache: false // No queremos usar la caché del navegador
         });
     }
 }
@@ -599,7 +625,9 @@ function transaccionAjax_MPersonas(State) {
         },
         error: function () {
 
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     });
 }
 
@@ -624,7 +652,9 @@ function transaccionAjax_MRTSTA(State) {
         },
         error: function () {
 
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     });
 }
 
@@ -650,7 +680,9 @@ function transaccionAjax_MPaises_Ciudades(State) {
         },
         error: function () {
 
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     });
 }
 
@@ -677,7 +709,9 @@ function transacionAjax_Marca_F(State) {
         },
         error: function () {
 
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     });
 }
 
@@ -705,7 +739,9 @@ function transacionAjax_Clase_F(State, Index) {
         },
         error: function () {
 
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     });
 }
 
@@ -735,7 +771,9 @@ function transacionAjax_Linea_F(State, Marca, Index, Proccess) {
             }
         },
         error: function () {
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     });
 }
 
@@ -770,7 +808,9 @@ function transacionAjax_Linea_F_ID(State, Index) {
         },
         error: function () {
 
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     });
 }
 
@@ -797,7 +837,9 @@ function transacionAjax_Colores(State) {
         },
         error: function () {
 
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     });
 }
 
@@ -824,7 +866,9 @@ function transacionAjax_Tipo(State) {
         },
         error: function () {
 
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     });
 }
 
@@ -905,7 +949,9 @@ function transacionAjax_Consult_Activos_existe(State, index_NIT_ID, Ref_1, Ref_2
         },
         error: function () {
 
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     });
 }
 
@@ -935,6 +981,8 @@ function transacionAjax_Consult_Factura_Existe(State, tabla, index_NIT_ID, Ref_1
         },
         error: function () {
 
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     });
 }
