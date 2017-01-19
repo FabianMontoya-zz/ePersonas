@@ -536,7 +536,7 @@ function ValidaFechaDigitada(ObjText) {
         var SegundoGuion = Strfecha.charAt(7);
 
         var SysFecha = new Date();
-        var Year_System = parseInt(SysFecha.getFullYear()) - 17;
+        var Year_System = parseInt(SysFecha.getFullYear()) - 0;
 
         if (SegundoGuion == "-" && PrimerGuion == "-") {
             var A_FN = Strfecha.split("-");
@@ -593,7 +593,7 @@ function ValidaFechaDigitada(ObjText) {
             }
         }
         else {
-            Mensaje_General("Formato incorrecto!", "La fecha debe ser YYYY/MM/DD ", "W");
+            Mensaje_General("Formato incorrecto!", "La fecha debe ser YYYY-MM-DD ", "W");
             $("#" + ObjText).val("YYYY-MM-DD");
             $("#" + ObjText).css("color", "#921919")
         }
