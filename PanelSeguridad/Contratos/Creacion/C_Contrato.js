@@ -52,6 +52,9 @@ var ContTerceros = 0;
 
 //Evento load JS
 $(document).ready(function () {
+    $("#Marco_trabajo_Contrato").css("height", "440px");
+    $("#Marco_trabajo_Contrato").css("width", "95%");
+
     /*Funciones para configuración inicial de campos en vista*/
     VentanasEmergentes();
     Ocultar_IMGS_Errores();
@@ -59,10 +62,7 @@ $(document).ready(function () {
     CargarAcordeons();
     AgregarTablas();
     /*================== END =========================*/
-
-    $("#Marco_trabajo_Contrato").css("height", "440px");
-    $("#Marco_trabajo_Contrato").css("width", "95%");
-
+      
     /*Llamado de transacciones AJAX iniciales*/
     transacionAjax_EmpresaNit('Cliente');
     transacionAjax_Documento('Documento');
@@ -434,13 +434,7 @@ function Change_Select_Nit() {
             $("#Select_EmpresaNit").prop('disabled', true); //Desactivamos el Chosen
         }
         index = this.value;
-        TransaccionesSegunNIT(index);
-
-        /*Escritura de L_Mora_ID y L_Mora_Magnitud*/
-        TasaMora();
-
-        /*Escritura de L_Usura_ID y L_Usura_Magnitud*/
-        TasaUsura();
+        TransaccionesSegunNIT(index);        
     });
 }
 
@@ -453,7 +447,7 @@ function TransaccionesSegunNIT(index_NIT_ID) {
         /*Para Activos*/
         Charge_Combos_Depend_Nit(Matrix_Sucursal, "Select_Sucursal", index_NIT_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Personas, "Select_Persona_A", index_NIT_ID, "");
-        /*============*/
+        /*============*/        
     }
 }
 
@@ -722,7 +716,11 @@ function Change_Select_Condicion_Financiacion() {
         /*Escritura L_Periodo*/
         $("#L_Periodo").html(Periodo_Tasa(indexTasa)); /*Mandamos el indice de la matriz de tasas y traemos el Periodo armado*/
 
+        /*Escritura de L_Mora_ID y L_Mora_Magnitud*/
+        TasaMora();
 
+        /*Escritura de L_Usura_ID y L_Usura_Magnitud*/
+        TasaUsura();
 
     });
 }

@@ -424,7 +424,7 @@
                                             <!--<td style="width: 25%;" rowspan="2"></td> -->
                                         </tr>
                                         <tr>
-                                            <td class="Label_Bold" id="L_Mora_Magnitud" style="width: 40%;">asd</td>
+                                            <td class="Label_Bold" id="L_Mora_Magnitud" style="width: 40%;"></td>
                                         </tr>
                                     </table>
                                 </center>
@@ -438,7 +438,7 @@
                                             <!--<td style="width: 35%;" rowspan="2"></td> -->
                                         </tr>
                                         <tr>
-                                            <td class="Label_Bold" id="L_Usura_Magnitud" style="width: 40%;">asd</td>
+                                            <td class="Label_Bold" id="L_Usura_Magnitud" style="width: 40%;"></td>
                                         </tr>
                                     </table>
                                 </center>
