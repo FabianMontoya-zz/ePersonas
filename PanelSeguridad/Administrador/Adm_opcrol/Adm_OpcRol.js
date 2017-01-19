@@ -24,8 +24,11 @@ $(document).ready(function () {
     /*================== FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN ==============*/
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_EmpresaNit('Cliente'); //Carga Droplist de Empresa NIT    
+
     Change_DDLTipo();
     Change_Select_Nit();
+
+    
 });
 
 //funcion para las ventanas emergentes
@@ -88,6 +91,13 @@ function HabilitarPanel(opcion) {
             estado = opcion;
             ResetError();
             Clear();
+
+            var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+            if (OnlyEmpresa == true) {
+                TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+            }
+
             break;
 
         case "buscar":
@@ -317,12 +327,16 @@ function Change_Select_Nit() {
             OpenControl();
             $("#ImgNIT").css("display", "none");
             $("#Select_EmpresaNit").prop('disabled', true).trigger("chosen:updated");
-            index_NIT_ID = this.value;
-            transacionAjax_CargaRol('Carga_Rol', index_NIT_ID);
         }
-
-        
+        index_NIT_ID = this.value;
+        TransaccionesSegunNIT(index_NIT_ID);
     });
+}
+
+function TransaccionesSegunNIT(index_NIT_ID) {
+    if (index_NIT_ID != "-1") {
+        transacionAjax_CargaRol('Carga_Rol', index_NIT_ID);
+    }
 }
 
 //funcion que dispara elcombo del tipo

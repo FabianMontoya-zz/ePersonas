@@ -7,6 +7,8 @@ $(document).ready(function () {
 
     transacionAjax_EmpresaNit('Cliente'); //Carga Droplist de Empresa NIT
 
+    VerificarNIT("Select_EmpresaNit");
+
     $("#ImgID").css("display", "none");
     $("#ImgEstado").css("display", "none");
 
@@ -151,6 +153,9 @@ function transacionAjax_EmpresaNit(State) {
         },
         error: function () {
 
-        }
+        },
+        //Jhon
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador 
     });
 }
