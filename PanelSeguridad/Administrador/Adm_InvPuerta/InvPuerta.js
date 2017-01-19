@@ -18,6 +18,7 @@ var Nit_Proccess = "";
 $(document).ready(function () {
 
     transacionAjax_EmpresaNit('Cliente');
+    
 
     $("#ESelect").css("display", "none");
     $("#Img1").css("display", "none");
@@ -42,15 +43,27 @@ $(document).ready(function () {
         dialogClass: "Dialog_Sasif",
         modal: true
     });
-
-    $(function () {
-        $("#TxtFechaInicial").datepicker({ dateFormat: 'yy-mm-dd' });
-        $("#TxtFechaFinal").datepicker({ dateFormat: 'yy-mm-dd' });
-    });
+    
+    
+    //$(function () {
+    //    $("#TxtFechaInicial").datepicker({ dateFormat: 'yy-mm-dd' });
+    //    $("#TxtFechaFinal").datepicker({ dateFormat: 'yy-mm-dd' });
+    //});
+    
+    Picker_Fechas();
     Capture_Tarjeta_ID();
     Change_Select_Vigencia();
+    Change_Compara_Fecha("TxtFechaInicial", "TxtFechaFinal");
     $("#TxtIDTarjeta").focus();
 });
+
+//Función de control del picker de las fechas
+function Picker_Fechas() {
+    $("#TxtFechaInicial").datepicker({ dateFormat: 'yy-mm-dd', changeYear: true, changeMonth: true });
+    $("#TxtFechaFinal").datepicker({ dateFormat: 'yy-mm-dd', changeYear: true, changeMonth: true });
+    $("#TxtFechaFinal").datepicker("option", "disabled", true);
+
+}
 
 //captura tarjeta y mustra complementos a llenar
 function Capture_Tarjeta_ID() {

@@ -93,7 +93,7 @@ $(document).ready(function () {
     Change_Select_Modelo();
     Change_Select_Linea();
     Change_Seguro();
-    Change_Compara_Fecha();
+    Change_Compara_Fecha("TxtFecha_Recibo", "TxtFecha_Retiro");
 
     Format_Adress("Txt_Adress_U");
     Date_Document();
@@ -286,10 +286,11 @@ function DiseñaObjetos() {
 
 //Función de control del picker de las fechas
 function Picker_Fechas() {
-    $("#TxtFecha_Recibo").datepicker({ dateFormat: 'yy-mm-dd', dialogClass: "Dialog_Sasif" });
-    $("#TxtFecha_Retiro").datepicker({ dateFormat: 'yy-mm-dd' });
-    $("#Txt_Fecha_fact").datepicker({ dateFormat: 'yy-mm-dd' });
-    
+    $("#TxtFecha_Recibo").datepicker({ dateFormat: 'yy-mm-dd', changeYear: true, changeMonth: true});
+    $("#TxtFecha_Retiro").datepicker({ dateFormat: 'yy-mm-dd', changeYear: true, changeMonth: true });
+    $("#TxtFecha_Retiro").datepicker("option", "disabled", true);
+    $("#Txt_Fecha_fact").datepicker({ dateFormat: 'yy-mm-dd', changeYear: true, changeMonth: true });
+
 }
 
 //valida campo y consulta datos de persona

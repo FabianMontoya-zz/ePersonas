@@ -364,7 +364,6 @@ function CloseControl() {
     No_Back_Button();
 }
 
-
 function Redireciona_Post(vp_url, vp_data) {
     var vl_form = document.createElement('form');
     vl_form.method = 'post';
@@ -599,6 +598,22 @@ function ValidaFechaDigitada(ObjText) {
             $("#" + ObjText).css("color", "#921919")
         }
     });
+}
+
+//Función que agrega el rango a solo fechas a futuro de la fecha seleccionada en un picker anterior
+function Change_Compara_Fecha(Selector1, Selector2) {
+    //Crea Jhon
+    //Selector1 es el picker padre (Que envia el rango)
+    //Selector2 es el picker que hereda el rango y se bloquea
+
+    $("#" + Selector1 + "").change(function () {
+        $("#" + Selector2 + "").val("");
+        var rango = $("#" + Selector1 + "").val();
+
+        $("#" + Selector2 + "").datepicker("option", "disabled", false);
+        $("#" + Selector2 + "").datepicker("option", "minDate", rango);
+    });
+
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
