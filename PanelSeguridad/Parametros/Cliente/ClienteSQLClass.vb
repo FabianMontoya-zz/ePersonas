@@ -1423,8 +1423,8 @@ Public Class ClienteSQLClass
                                "                  IT.IT_MotivoBloqueo, " & _
                                "                  DDL.DDLL_Descripcion " & _
                                "  FROM CLIENTE C " & _
-                               "  LEFT JOIN AREA A  ON A.A_Area_ID = C.CLI_Area_ID " & _
-                               "  LEFT JOIN CARGO CAR ON CAR.C_Cargo_ID = C.CLI_Cargo_ID " & _
+                               "  LEFT JOIN AREA A  ON A.A_Area_ID = C.CLI_Area_ID AND A.A_Nit_ID = C.CLI_Nit_ID " & _
+                               "  LEFT JOIN CARGO CAR ON CAR.C_Cargo_ID = C.CLI_Cargo_ID AND CAR.C_Nit_ID = C.CLI_Nit_ID " & _
                                "  LEFT JOIN  " & BD_Admin & ".dbo.INVENTARIO_TARJETAS IT ON IT.IT_TypeDocument_Asigna = C.CLI_TypeDocument_ID AND IT.IT_Document_ID_Asigna =C.CLI_Document_ID " & _
                                "  LEFT JOIN  " & BD_Admin & ".dbo.TC_DDL_TIPO DDL ON DDL.DDL_ID = IT.IT_MotivoBloqueo AND DDL.DDL_Tabla = 'BLOQUEO'  " & _
                                "  LEFT JOIN CLIENTE C2 ON C2.CLI_Document_ID = " & _
