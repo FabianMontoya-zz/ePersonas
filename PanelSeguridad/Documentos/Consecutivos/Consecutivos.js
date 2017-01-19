@@ -64,6 +64,7 @@ function HabilitarPanel(opcion) {
             ResetError();
             Clear();
             estado = opcion;
+            VerificarNIT("Select_EmpresaNit");
             break;
 
         case "buscar":

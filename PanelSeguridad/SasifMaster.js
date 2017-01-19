@@ -619,7 +619,7 @@ function Change_Compara_Fecha(Selector1, Selector2) {
 }
 
 //Función que agrega el rango a solo fechas a pasado de la fecha seleccionada en un picker anterior
-function Change_Compara_Fecha(Selector1, Selector2) {
+function Change_Compara_Fecha_Menor(Selector1, Selector2) {
     //Crea Jhon
     //Selector1 es el picker padre (Que envia el rango)
     //Selector2 es el picker que hereda el rango y se bloquea

@@ -17,7 +17,9 @@
     <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
-    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" /> <meta http-equiv="Pragma" content="no-cache"/> <meta http-equiv="Expires" content="-1"/>
+    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="-1" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
     <div id="Container_title_Form">
@@ -67,11 +69,11 @@
                     </tr>
                 </table>
                 <div id="TablaDatos_D">
-                    <table id="Tabla_1" style="width: 700px; text-align: left;">
+                    <table id="Tabla_1" style="width: 500px; text-align: left;">
                         <tr>
-                            <td style="width: 150px;" class="Label_Bold">Multi - Empresa
+                            <td style="width: 600px;" class="Label_Bold">NIT Empresa
                             </td>
-                            <td>
+                            <td style="width: 70%; text-align: left;">
                                 <select id="Select_EmpresaNit" class="C_Chosen">
                                 </select>
                             </td>

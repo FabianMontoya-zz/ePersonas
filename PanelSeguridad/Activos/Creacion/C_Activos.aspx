@@ -21,7 +21,9 @@
     <script src="../../Scripts/Dialog/datepicker.js" type="text/javascript"></script>
     <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
     <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" type="text/css" />
-    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" /> <meta http-equiv="Pragma" content="no-cache"/> <meta http-equiv="Expires" content="-1"/>
+    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="-1" />
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
@@ -251,23 +253,23 @@
                             </tr>
                         </table>
                         <table id="Tabla_Valor_Compra" style="width: 100%;">
-                            <tr>
-                                <td class="Label_Bold" style="width: 2.7%;">Valor Compra
+                            <tr style="width: 100%;">
+                                <td class="Label_Bold" style="width: 10.9%;">Valor Compra
                                 </td>
-                                <td id="V_Sigla_3" style="width: 0.7%" class="Sigla"></td>
-                                <td style="width: 9.5%;">
+                                <td id="V_Sigla_3" style="width: 3.5%" class="Sigla"></td>
+                                <td style="width: 40%">
                                     <span class="cssToolTip_Form_T">
                                         <input type="text" id="TxtValor_Compra" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
                                         <span class="Spam_AVal"></span></span>
                                 </td>
-                                <td class="Label_Bold" style="width: 3.4%;">Compra Bien</td>
-                                <td style="width: 5%">
-                                    <select id="Select_CompraBien" class="C_Chosen" style="width: 80px;">
+                                <td class="Label_Bold" style="width: 13%;">Compra Bien</td>
+                                <td style="width: 10%">
+                                    <select id="Select_CompraBien" class="C_Chosen" style="width: 100px;">
                                         <option value="0">No Aplica</option>
                                         <option value="1">Nuevo</option>
                                         <option value="2">Usado</option>
                                     </select></td>
-                                <td class="Label_Bold" style="width: 3.7%;"></td>
+                                <td class="Label_Bold" style="width: 35%;"></td>
                             </tr>
                         </table>
                         <table id="T_Datos_Final" style="width: 100%;">
