@@ -96,11 +96,6 @@ $(document).ready(function () {
 
 });
 
-//salida del formulario
-function btnSalir() {
-    window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&Key=" + ArrayMenu[0].Nit + "&LINK=" + Link;
-}
-
 //carga los combos dependientes
 function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {

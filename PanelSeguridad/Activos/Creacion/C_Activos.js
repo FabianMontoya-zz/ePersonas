@@ -132,11 +132,6 @@ function BtnCrear() {
     }
 }
 
-//salida del formulario
-function btnSalir() {
-    window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&Key=" + ArrayMenu[0].Nit + "&LINK=" + Link;
-}
-
 //evento del boton salir
 function x() {
     $("#dialog").dialog("close");

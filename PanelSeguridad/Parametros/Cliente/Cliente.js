@@ -350,12 +350,6 @@ function BtnRelacion() {
     $("#Dialog_Relation").dialog("open");
 }
 
-//salida del formulario
-function btnSalir() {
-    transacionAjax_EraseDocument('EraseDocument');
-    window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&Key=" + ArrayMenu[0].Nit + "&LINK=" + Link;
-}
-
 //habilita el panel de crear o consulta
 function HabilitarPanel(opcion) {
 

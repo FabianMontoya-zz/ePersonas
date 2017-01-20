@@ -163,10 +163,6 @@ function x() {
         Process_Manual_Ingreso = 0;
 }
 
-//salida del formulario
-function btnSalir() {
-    window.location = "../../Menu/menu.aspx?User=" + User + "&L_L=" + Link;
-}
 
 //ingreso de acceso
 function BtnAgregarAcceso() {

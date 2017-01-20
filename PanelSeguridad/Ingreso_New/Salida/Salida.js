@@ -164,10 +164,6 @@ function x() {
         Process_Manual_Salida = 0;
 }
 
-//salida del formulario
-function btnSalir() {
-    window.location = "../../Menu/menu.aspx?User=" + User + "&L_L=" + Link;
-}
 
 //Salida de registro
 function Registrar_Salida_Log() {

@@ -232,11 +232,6 @@ function Picker_Fechas() {
     //$("#TXT_Fecha_Prox_Factura").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 });
 }
 
-//salida del formulario
-function btnSalir() {
-    window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&Key=" + ArrayMenu[0].Nit + "&LINK=" + Link;
-}
-
 //Captura el evento de cambio y vuelve a calcular las nuevas TE y TN
 function ReCalcularTasas(object) {
     $("#" + object).blur(function () {
