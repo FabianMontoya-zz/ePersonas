@@ -1530,7 +1530,6 @@ Public Class ClienteSQLClass
                                           "               CLI_Document_ID AS DOCUMENT, " & _
                                           "               CLI_TypeDocument_ID AS TYPEDOCUMENT " & _
                                           " FROM CLIENTE " & _
-                                          " FROM CLIENTE " & _
                                           " WHERE CLI_Document_ID IN(SELECT  CLI_Document_ID " & _
                                           "                                                      FROM  CLIENTE C1 WHERE C1.CLI_OP_Empleado='S')" & _
                                           "                                                 AND CLI_Nit_ID='" & vp_S_Nit_Bussines_Visit & "'")
