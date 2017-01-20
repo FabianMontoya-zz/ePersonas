@@ -12,8 +12,25 @@ var editID;
 
 //Evento load JS
 $(document).ready(function () {
+
+    //Jhon
+    $("#Marco_trabajo_Form").css("height", "490px");
+    $("#container_TRutaDocumentos").css("height", "380px");
+
+    /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
+    Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
+    Ocultar_Errores();
+    Ocultar_Tablas();
+
+    /*================== FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN ==============*/
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_EmpresaNit('Cliente');
+
+});
+
+//Función que oculta todas las IMG de los errores en pantalla
+function Ocultar_Errores() {
+    ResetError();
 
     $("#ESelect").css("display", "none");
     $("#Img1").css("display", "none");
@@ -24,9 +41,15 @@ $(document).ready(function () {
     $("#SE").css("display", "none");
     $("#WA").css("display", "none");
 
-    $("#TablaDatos_D").css("display", "none");
+
     $("#TablaConsulta").css("display", "none");
 
+}
+
+//funcion para las ventanas emergentes
+function Ventanas_Emergentes() {
+
+    Load_Charge_Sasif(); //Carga de "SasifMaster.js" el Control de Carga
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
         autoOpen: false,
@@ -39,8 +62,13 @@ $(document).ready(function () {
         dialogClass: "Dialog_Sasif",
         modal: true
     });
+}
 
-});
+//Función que oculta las tablas
+function Ocultar_Tablas() {
+    $("#TablaDatos_D").css("display", "none");
+    $("#TablaConsulta").css("display", "none");
+}
 
 //habilita el panel de crear o consulta
 function HabilitarPanel(opcion) {
@@ -57,6 +85,7 @@ function HabilitarPanel(opcion) {
             ResetError();
             Clear();
             estado = opcion;
+            VerificarNIT("Select_EmpresaNit");
             break;
 
         case "buscar":
@@ -94,6 +123,8 @@ function BtnConsulta() {
     var ValidateSelect = ValidarDroplist();
     var opcion;
 
+    OpenControl(); //Abrimos el load de espera con el logo
+
     if (ValidateSelect == 1) {
         filtro = "N";
         opcion = "ALL";
@@ -125,6 +156,7 @@ function BtnCrear() {
 
 //elimina de la BD
 function BtnElimina() {
+    OpenControl(); //Abrimos el load de espera con el logo
     transacionAjax_RutaDocumentos_delete("elimina");
 }
 
@@ -204,7 +236,7 @@ function Table_RutaDocumentos() {
             for (itemArray in ArrayRutaDocumentos) {
                 if (ArrayRutaDocumentos[itemArray].RutaDocumentos_ID != 0) {
                     Index_Pos = parseInt(ArrayRutaDocumentos[itemArray].Index) - 1;
-                    html_RutaDocumentos += "<tr id= 'TRutaDocumentos_" + ArrayRutaDocumentos[itemArray].RutaDocumentos_ID + "'><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Editar('" + Index_Pos + "')\"></input></td><td>" + ArrayRutaDocumentos[itemArray].Nit_ID + " - " + ArrayRutaDocumentos[itemArray].DescripEmpresa + "</td><td>" + ArrayRutaDocumentos[itemArray].RutaDocumentos_ID + "</td><td>" + ArrayRutaDocumentos[itemArray].Ruta + "</td><td>" + ArrayRutaDocumentos[itemArray].UsuarioCreacion + "</td><td>" + ArrayRutaDocumentos[itemArray].FechaCreacion + "</td><td>" + ArrayRutaDocumentos[itemArray].UsuarioActualizacion + "</td><td>" + ArrayRutaDocumentos[itemArray].FechaActualizacion + "</td></tr>";
+                    html_RutaDocumentos += "<tr id= 'TRutaDocumentos_" + ArrayRutaDocumentos[itemArray].RutaDocumentos_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + Index_Pos + "')\"></img><span>Editar Ruta Documento</span></span></td><td>" + ArrayRutaDocumentos[itemArray].Nit_ID + " - " + ArrayRutaDocumentos[itemArray].DescripEmpresa + "</td><td>" + ArrayRutaDocumentos[itemArray].RutaDocumentos_ID + "</td><td>" + ArrayRutaDocumentos[itemArray].Ruta + "</td><td>" + ArrayRutaDocumentos[itemArray].UsuarioCreacion + "</td><td>" + ArrayRutaDocumentos[itemArray].FechaCreacion + "</td><td>" + ArrayRutaDocumentos[itemArray].UsuarioActualizacion + "</td><td>" + ArrayRutaDocumentos[itemArray].FechaActualizacion + "</td></tr>";
                 }
             }
             break;
@@ -214,7 +246,7 @@ function Table_RutaDocumentos() {
             for (itemArray in ArrayRutaDocumentos) {
                 if (ArrayRutaDocumentos[itemArray].RutaDocumentos_ID != 0) {
                     Index_Pos = parseInt(ArrayRutaDocumentos[itemArray].Index) - 1;
-                    html_RutaDocumentos += "<tr id= 'TRutaDocumentos_" + ArrayRutaDocumentos[itemArray].RutaDocumentos_ID + "'><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar('" + Index_Pos + "')\"></input></td><td>" + ArrayRutaDocumentos[itemArray].Nit_ID + " - " + ArrayRutaDocumentos[itemArray].DescripEmpresa + "</td><td>" + ArrayRutaDocumentos[itemArray].RutaDocumentos_ID + "</td><td>" + ArrayRutaDocumentos[itemArray].Ruta + "</td><td>" + ArrayRutaDocumentos[itemArray].UsuarioCreacion + "</td><td>" + ArrayRutaDocumentos[itemArray].FechaCreacion + "</td><td>" + ArrayRutaDocumentos[itemArray].UsuarioActualizacion + "</td><td>" + ArrayRutaDocumentos[itemArray].FechaActualizacion + "</td></tr>";
+                    html_RutaDocumentos += "<tr id= 'TRutaDocumentos_" + ArrayRutaDocumentos[itemArray].RutaDocumentos_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + Index_Pos + "')\"></img><span>Eliminar Ruta Documento</span></td><td>" + ArrayRutaDocumentos[itemArray].Nit_ID + " - " + ArrayRutaDocumentos[itemArray].DescripEmpresa + "</td><td>" + ArrayRutaDocumentos[itemArray].RutaDocumentos_ID + "</td><td>" + ArrayRutaDocumentos[itemArray].Ruta + "</td><td>" + ArrayRutaDocumentos[itemArray].UsuarioCreacion + "</td><td>" + ArrayRutaDocumentos[itemArray].FechaCreacion + "</td><td>" + ArrayRutaDocumentos[itemArray].UsuarioActualizacion + "</td><td>" + ArrayRutaDocumentos[itemArray].FechaActualizacion + "</td></tr>";
                 }
             }
             break;

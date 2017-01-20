@@ -8,6 +8,8 @@ var Edit_ID;
 
 //Evento load JS
 $(document).ready(function () {
+    $("#Marco_trabajo_Form").css("height", "490px");
+    $("#container_TFasecolda").css("height", "380px");
     Load_Charge_Sasif();
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     $("#ESelect").css("display", "none");

@@ -18,8 +18,17 @@
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
     <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" /> <meta http-equiv="Pragma" content="no-cache"/> <meta http-equiv="Expires" content="-1"/>
+    <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" type="text/css" /> 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
+    <div id="Dialog_Control" style="width: 100%; text-align: center;">
+        <div class="cssload-container" style="margin-top: 25%;">
+            <div class="cssload-whirlpool"></div>
+            <div>
+                <img id="Sasif" class="Logo_3" src="../../images/SASIF_NEW_WHITE.png" alt="SASIF S.A.S." />
+            </div>
+        </div>
+    </div>
     <div id="Container_title_Form">
         <table id="Tabla_Title_form">
             <tr>
@@ -69,7 +78,7 @@
                 <div id="TablaDatos_D">
                     <table id="Tabla_1" style="width: 700px; text-align: left;">
                         <tr>
-                            <td style="width: 150px;" class="Label_Bold">Multi - Empresa
+                            <td style="width: 150px;" class="Label_Bold">NIT Empresa
                             </td>
                             <td>
                                 <select id="Select_EmpresaNit" class="C_Chosen">
@@ -83,7 +92,7 @@
                             </td>
                         </tr>
                     </table>
-                    <table id="Tabla_2" style="width: 700px; text-align: left;">
+                    <table id="Tabla_2" style="width: 1000px; text-align: left;">
                         <tr>
                             <td style="width: 150px;" class="Label_Bold">Codigo
                             </td>
@@ -92,7 +101,7 @@
                                     <input type="text" id="Txt_ID" maxlength="5" class="Numeric" style="width: 70px;" />
                                     <span class="Spam_AN"></span></span>
                             </td>
-                            <td style="padding-bottom: 25px; width: 80px;">
+                            <td style="padding-bottom: 25px; width: 250px;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img2"
                                         src="../../images/error.png" />

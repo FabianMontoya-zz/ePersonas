@@ -1,11 +1,13 @@
 ﻿/*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_CargaBusqueda(State) {
+    OpenControl();
     $.ajax({
         url: "RutaDocumentosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'RUTA'
         },
         //Transaccion Ajax en proceso
@@ -31,7 +33,8 @@ function transacionAjax_EmpresaNit(State) {
         url: "RutaDocumentosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'CLIENTE'
         },
         //Transaccion Ajax en proceso
@@ -46,7 +49,10 @@ function transacionAjax_EmpresaNit(State) {
         },
         error: function () {
 
-        }
+        },
+        //Jhon
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     });
 }
 
@@ -69,7 +75,8 @@ function transacionAjax_RutaDocumentos(State, filtro, opcion) {
         url: "RutaDocumentosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "filtro": filtro,
             "opcion": opcion,
             "contenido": contenido
@@ -99,7 +106,7 @@ function transacionAjax_RutaDocumentos_create(State) {
     var RutaDocumentos = 0;
     var Politica = 0;
 
-     
+
     if (State == "modificar") {
         Nit_ID = editNit_ID;
         ID = editID;
@@ -113,7 +120,8 @@ function transacionAjax_RutaDocumentos_create(State) {
         url: "RutaDocumentosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Nit_ID": Nit_ID,
             "ID": ID,
             "descripcion": $("#TxtDescription").val(),
@@ -178,7 +186,8 @@ function transacionAjax_RutaDocumentos_delete(State) {
         url: "RutaDocumentosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Nit_ID": editNit_ID,
             "ID": editID,
             "user": User

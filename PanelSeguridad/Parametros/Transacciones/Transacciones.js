@@ -10,8 +10,24 @@ var editNit_ID;
 
 //Evento load JS
 $(document).ready(function () {
+    //Jhon
+    $("#Marco_trabajo_Form").css("height", "490px");
+    $("#container_TPuertaAcceso").css("height", "380px");
+
+    /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
+    Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
+    Ocultar_Errores();
+    Ocultar_Tablas();
+
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_EmpresaNit('Cliente')
+
+});
+
+//Función que oculta todas las IMG de los errores en pantalla
+function Ocultar_Errores() {
+    ResetError();
+
     $("#ESelect").css("display", "none");
     $("#ImgID").css("display", "none");
     $("#Img2").css("display", "none");
@@ -20,8 +36,14 @@ $(document).ready(function () {
     $("#SE").css("display", "none");
     $("#WA").css("display", "none");
 
-    $("#TablaDatos_D").css("display", "none");
     $("#TablaConsulta").css("display", "none");
+
+}
+
+//funcion para las ventanas emergentes
+function Ventanas_Emergentes() {
+
+    Load_Charge_Sasif(); //Carga de "SasifMaster.js" el Control de Carga
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
@@ -36,9 +58,13 @@ $(document).ready(function () {
         modal: true
     });
 
+}
 
-});
-
+//Función que oculta las tablas
+function Ocultar_Tablas() {
+    $("#TablaDatos_D").css("display", "none");
+    $("#TablaConsulta").css("display", "none");
+}
 
 //habilita el panel de crear o consulta
 function HabilitarPanel(opcion) {
@@ -56,6 +82,9 @@ function HabilitarPanel(opcion) {
 
             $("#Select_EmpresaNit").removeAttr("disabled");
             $('.C_Chosen').trigger('chosen:updated');
+
+            VerificarNIT("Select_EmpresaNit");
+
             break;
 
         case "buscar":
@@ -93,6 +122,8 @@ function BtnConsulta() {
     var ValidateSelect = ValidarDroplist();
     var opcion;
 
+    OpenControl(); //Abrimos el load de espera con el logo
+
     if (ValidateSelect == 1) {
         filtro = "N";
         opcion = "ALL";
@@ -124,6 +155,7 @@ function BtnCrear() {
 
 //elimina de la BD
 function BtnElimina() {
+    OpenControl(); //Abrimos el load de espera con el logo
     transacionAjax_Transacciones_delete("elimina");
 }
 
@@ -187,34 +219,37 @@ function Table_Transacciones() {
     switch (estado) {
 
         case "buscar":
-            Tabla_consulta();
+            //Jhon
+            var html_Transacciones = "<table id='TTransacciones' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Nit Empresa</th><th>Codigo</th><th>Descripción</th></tr></thead><tbody>";
+            for (itemArray in ArrayTransacciones) {
+                if (ArrayTransacciones[itemArray].Transacciones_ID != 0) {
+                    html_Transacciones += "<tr id= 'TTransacciones_" + ArrayTransacciones[itemArray].Transacciones_ID + "'><td>" + ArrayTransacciones[itemArray].Nit_ID + "</td><td>" + ArrayTransacciones[itemArray].Transacciones_ID + "</td><td>" + ArrayTransacciones[itemArray].Descripcion + "</td></tr>";
+                }
+            }
             break;
 
         case "modificar":
-            Tabla_modificar();
+            var html_Transacciones = "<table id='TTransacciones' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Nit Empresa</th><th>Codigo</th><th>Descripción</th></tr></thead><tbody>";
+            for (itemArray in ArrayTransacciones) {
+                if (ArrayTransacciones[itemArray].Transacciones_ID != 0) {
+                    html_Transacciones += "<tr id= 'TTransacciones_" + ArrayTransacciones[itemArray].Transacciones_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + ArrayTransacciones[itemArray].Nit_ID + "','" + ArrayTransacciones[itemArray].Transacciones_ID + "')\"></img><span>Editar Puerta Acceso</span></span></td><td>" + ArrayTransacciones[itemArray].Nit_ID + "</td><td>" + ArrayTransacciones[itemArray].Transacciones_ID + "</td><td>" + ArrayTransacciones[itemArray].Descripcion + "</td></tr>";
+                }
+            }
             break;
 
         case "eliminar":
-            Tabla_eliminar();
+            var html_Transacciones = "<table id='TTransacciones' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Nit Empresa</th><th>Codigo</th><th>Descripción</th></tr></thead><tbody>";
+            for (itemArray in ArrayTransacciones) {
+                if (ArrayTransacciones[itemArray].Transacciones_ID != 0) {
+                    html_Transacciones += "<tr id= 'TTransacciones_" + ArrayTransacciones[itemArray].Transacciones_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArrayTransacciones[itemArray].Nit_ID + "','" + ArrayTransacciones[itemArray].Transacciones_ID + "')\"></img><span>Eliminar Puerta Acceso</span></span></td><td>" + ArrayTransacciones[itemArray].Nit_ID + "</td><td>" + ArrayTransacciones[itemArray].Transacciones_ID + "</td><td>" + ArrayTransacciones[itemArray].Descripcion + "</td></tr>";
+                }
+            }
             break;
     }
 
-}
-
-//grid con el boton eliminar
-function Tabla_eliminar() {
-    var html_Transacciones = "<table id='TTransacciones' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Nit Empresa</th><th>Codigo</th><th>Descripción</th></tr></thead><tbody>";
-    for (itemArray in ArrayTransacciones) {
-        if (ArrayTransacciones[itemArray].Transacciones_ID != 0) {
-            html_Transacciones += "<tr id= 'TTransacciones_" + ArrayTransacciones[itemArray].Transacciones_ID + "'><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar('" + ArrayTransacciones[itemArray].Nit_ID + "','" + ArrayTransacciones[itemArray].Transacciones_ID + "')\"></input></td><td>" + ArrayTransacciones[itemArray].Nit_ID + "</td><td>" + ArrayTransacciones[itemArray].Transacciones_ID + "</td><td>" + ArrayTransacciones[itemArray].Descripcion + "</td></tr>";
-        }
-    }
     html_Transacciones += "</tbody></table>";
     $("#container_TTransacciones").html("");
     $("#container_TTransacciones").html(html_Transacciones);
-
-    $(".Eliminar").click(function () {
-    });
 
     $("#TTransacciones").dataTable({
         "bJQueryUI": true,
@@ -222,6 +257,7 @@ function Tabla_eliminar() {
         "bDestroy": true
     });
 }
+
 
 //muestra el registro a eliminar
 function Eliminar(index_Nit, index_Transacciones) {
@@ -236,27 +272,6 @@ function Eliminar(index_Nit, index_Transacciones) {
         }
     }
 
-}
-
-//grid con el boton editar
-function Tabla_modificar() {
-    var html_Transacciones = "<table id='TTransacciones' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Nit Empresa</th><th>Codigo</th><th>Descripción</th></tr></thead><tbody>";
-    for (itemArray in ArrayTransacciones) {
-        if (ArrayTransacciones[itemArray].Transacciones_ID != 0) {
-            html_Transacciones += "<tr id= 'TTransacciones_" + ArrayTransacciones[itemArray].Transacciones_ID + "'><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Editar('" + ArrayTransacciones[itemArray].Nit_ID + "','" + ArrayTransacciones[itemArray].Transacciones_ID + "')\"></input></td><td>" + ArrayTransacciones[itemArray].Nit_ID + "</td><td>" + ArrayTransacciones[itemArray].Transacciones_ID + "</td><td>" + ArrayTransacciones[itemArray].Descripcion + "</td></tr>";
-        }
-    }
-    html_Transacciones += "</tbody></table>";
-    $("#container_TTransacciones").html("");
-    $("#container_TTransacciones").html(html_Transacciones);
-
-    $(".Editar").click(function () {
-    });
-
-    $("#TTransacciones").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
 }
 
 // muestra el registro a editar
@@ -285,25 +300,6 @@ function Editar(index_Nit, index_Transacciones) {
     }
 }
 
-//grid sin botones para ver resultado
-function Tabla_consulta() {
-    var html_Transacciones = "<table id='TTransacciones' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Nit Empresa</th><th>Codigo</th><th>Descripción</th></tr></thead><tbody>";
-    for (itemArray in ArrayTransacciones) {
-        if (ArrayTransacciones[itemArray].Transacciones_ID != 0) {
-            html_Transacciones += "<tr id= 'TTransacciones_" + ArrayTransacciones[itemArray].Transacciones_ID + "'><td>" + ArrayTransacciones[itemArray].Nit_ID + "</td><td>" + ArrayTransacciones[itemArray].Transacciones_ID + "</td><td>" + ArrayTransacciones[itemArray].Descripcion + "</td></tr>";
-        }
-    }
-    html_Transacciones += "</tbody></table>";
-    $("#container_TTransacciones").html("");
-    $("#container_TTransacciones").html(html_Transacciones);
-
-    $("#TTransacciones").dataTable({
-        "bJQueryUI": true,
-        "iDisplayLength": 1000,
-        "bDestroy": true
-    });
-}
-
 //evento del boton salir
 function x() {
     $("#dialog").dialog("close");
@@ -315,7 +311,7 @@ function Clear() {
     $("#Txt_ID").val("");
     $("#TxtDescripcion").val("");
     $("#TxtRead").val("");
-    $("#DDLColumns").val("-1");
+    $("#DDLColumns").val("-1").trigger("chosen:updated");
     $('.C_Chosen').trigger('chosen:updated');
 
 }
