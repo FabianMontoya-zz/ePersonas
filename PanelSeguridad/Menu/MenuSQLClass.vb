@@ -55,7 +55,7 @@ Public Class MenuSQLClass
                         "       Usuario, " & _
                         "       NIT " & _
                         " FROM T_TEMPORAL " & _
-                        " ORDER BY Tipo, IDOpcionRol asc, CAST(Consecutivo AS INT )")
+                        " ORDER BY Tipo, IDOpcionRol asc, CAST(Consecutivo AS BIGINT )")
         Else
             sql.Append(" EXEC MENU_TEMPORAL '" & rol & "'")
             StrQuery = sql.ToString

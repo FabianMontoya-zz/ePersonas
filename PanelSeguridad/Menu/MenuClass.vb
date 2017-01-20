@@ -8,7 +8,7 @@
     Private _DescripcionRol As String
     Private _Sigla As String
     Private _IDOpcionRol As String
-    Private _Consecutivo As Integer
+    Private _Consecutivo As String
     Private _Tipo As String
     Private _Sub_Rol As String
     Private _IDlink As String
@@ -76,11 +76,11 @@
             Me._IDOpcionRol = value
         End Set
     End Property
-    Public Property Consecutivo() As Integer
+    Public Property Consecutivo() As String
         Get
             Return Me._Consecutivo
         End Get
-        Set(ByVal value As Integer)
+        Set(ByVal value As String)
             Me._Consecutivo = value
         End Set
     End Property
