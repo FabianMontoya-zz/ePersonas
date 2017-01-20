@@ -142,7 +142,7 @@ Public Class IngresoAjax
         Dim Obj As New ClienteClass
         Dim ObjList As New List(Of DocumentosClass)
 
-       Obj.TypeDocument_ID = Request.Form("TD")
+        Obj.TypeDocument_ID = Request.Form("TD")
         Obj.Document_ID = Request.Form("D")
 
         ObjList = SQL.SearchDocument_People(Obj)
@@ -181,7 +181,7 @@ Public Class IngresoAjax
         Dim ObjList As New List(Of DocumentosClass)
 
         Obj.Nit_ID = Request.Form("NIT")
-         Obj.TipoSQL = Request.Form("TipoSQL")
+        Obj.TipoSQL = Request.Form("TipoSQL")
 
         ObjList = SQL.List_Personas_Documentos(Obj)
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
