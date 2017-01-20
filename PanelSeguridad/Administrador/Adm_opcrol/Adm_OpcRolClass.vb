@@ -5,7 +5,7 @@
     Private _Nit_ID As String
     Private _OPRol_Nit_ID As String
     Private _OPRol_ID As String
-    Private _Consecutivo As Long
+    Private _Consecutivo As String
     Private _Tipo As String
     Private _Subrol_rol_Nit_ID As String
     Private _Subrol_rol As String
@@ -50,11 +50,11 @@
             Me._OPRol_ID = value
         End Set
     End Property
-    Public Property Consecutivo() As Long
+    Public Property Consecutivo() As String
         Get
             Return Me._Consecutivo
         End Get
-        Set(ByVal value As Long)
+        Set(ByVal value As String)
             Me._Consecutivo = value
         End Set
     End Property
