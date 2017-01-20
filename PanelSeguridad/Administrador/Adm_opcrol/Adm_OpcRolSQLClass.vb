@@ -24,7 +24,7 @@ Public Class Adm_OpcRolSQLClass
         Dim sql As New StringBuilder
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
-            sql.Append("SELECT OR_Nit_ID , OR_OPRol_ID, OR_Consecutivo, OR_Tipo, [OR_Subrol/rol], OR_Link_ID, " & _
+            sql.Append("SELECT OR_Nit_ID, OR_OPRol_Nit_ID, OR_OPRol_ID, OR_Consecutivo, OR_Tipo, [OR_Subrol/rol_Nit_ID], [OR_Subrol/rol], OR_Link_ID, " & _
                        "OR_Usuario_Creacion, OR_FechaCreacion, OR_Usuario_Actualizacion, OR_FechaActualizacion, " & _
                        "ROW_NUMBER() OVER(ORDER BY OR_Nit_ID, OR_OPRol_ID, OR_Consecutivo ASC) AS Index_OptionRoles " & _
                        "FROM OPTION_ROL " & _
@@ -32,13 +32,13 @@ Public Class Adm_OpcRolSQLClass
         Else
 
             If vp_S_Contenido = "ALL" Then
-                sql.Append("SELECT OR_Nit_ID , OR_OPRol_ID, OR_Consecutivo, OR_Tipo, [OR_Subrol/rol], OR_Link_ID, " & _
+                sql.Append("SELECT OR_Nit_ID, OR_OPRol_Nit_ID, OR_OPRol_ID, OR_Consecutivo, OR_Tipo, [OR_Subrol/rol_Nit_ID], [OR_Subrol/rol], OR_Link_ID, " & _
                        "OR_Usuario_Creacion, OR_FechaCreacion, OR_Usuario_Actualizacion, OR_FechaActualizacion, " & _
                        "ROW_NUMBER() OVER(ORDER BY OR_Nit_ID, OR_OPRol_ID, OR_Consecutivo ASC) AS Index_OptionRoles " & _
                        "FROM OPTION_ROL " & _
                        "ORDER BY OR_Nit_ID, OR_OPRol_ID, OR_Consecutivo ASC")
             Else
-                sql.Append("SELECT OR_Nit_ID , OR_OPRol_ID, OR_Consecutivo, OR_Tipo, [OR_Subrol/rol], OR_Link_ID, " & _
+                sql.Append("SELECT OR_Nit_ID, OR_OPRol_Nit_ID, OR_OPRol_ID, OR_Consecutivo, OR_Tipo, [OR_Subrol/rol_Nit_ID], [OR_Subrol/rol], OR_Link_ID, " & _
                        "OR_Usuario_Creacion, OR_FechaCreacion, OR_Usuario_Actualizacion, OR_FechaActualizacion, " & _
                        "ROW_NUMBER() OVER(ORDER BY OR_Nit_ID, OR_OPRol_ID, OR_Consecutivo ASC) AS Index_OptionRoles " & _
                        "FROM OPTION_ROL " & _
@@ -71,9 +71,11 @@ Public Class Adm_OpcRolSQLClass
 
         sql.AppendLine("INSERT OPTION_ROL (" & _
             "OR_Nit_ID," & _
+            "OR_OPRol_Nit_ID," & _
             "OR_OPRol_ID," & _
             "OR_Consecutivo," & _
             "OR_Tipo," & _
+            "[OR_Subrol/rol_Nit_ID]," & _
             "[OR_Subrol/rol]," & _
             "OR_Link_ID, " & _
             "OR_Usuario_Creacion, " & _
@@ -83,9 +85,11 @@ Public Class Adm_OpcRolSQLClass
             ")")
         sql.AppendLine("VALUES (")
         sql.AppendLine("'" & vp_Obj_OpcRol.Nit_ID & "',")
+        sql.AppendLine("'" & vp_Obj_OpcRol.OPRol_Nit_ID & "',")
         sql.AppendLine("'" & vp_Obj_OpcRol.OPRol_ID & "',")
         sql.AppendLine("'" & vp_Obj_OpcRol.Consecutivo & "',")
         sql.AppendLine("'" & vp_Obj_OpcRol.Tipo & "',")
+        sql.AppendLine("'" & vp_Obj_OpcRol.Subrol_rol_Nit_ID & "',")
         sql.AppendLine("'" & vp_Obj_OpcRol.Subrol_rol & "',")
         sql.AppendLine("'" & vp_Obj_OpcRol.Link_ID & "',")
         sql.AppendLine("'" & vp_Obj_OpcRol.UsuarioCreacion & "',")
@@ -116,7 +120,7 @@ Public Class Adm_OpcRolSQLClass
         Dim StrQuery As String
         Dim SQL_general As New GeneralSQLClass
 
-        sql.AppendLine("DELETE OPTION_ROL WHERE OR_Nit_ID = '" & vp_Obj_OpcRol.Nit_ID & "' AND OR_OPRol_ID = '" & vp_Obj_OpcRol.OPRol_ID & "' AND OR_Consecutivo = '" & vp_Obj_OpcRol.Consecutivo & "'")
+        sql.AppendLine("DELETE OPTION_ROL WHERE OR_Nit_ID = '" & vp_Obj_OpcRol.Nit_ID & "' AND OR_OPRol_Nit_ID = '" & vp_Obj_OpcRol.OPRol_Nit_ID & "' AND OR_OPRol_ID = '" & vp_Obj_OpcRol.OPRol_ID & "' AND OR_Consecutivo = '" & vp_Obj_OpcRol.Consecutivo & "'")
         StrQuery = sql.ToString
         Result = conex.StrInsert_and_Update_All(StrQuery, "1")
 
@@ -253,18 +257,20 @@ Public Class Adm_OpcRolSQLClass
                     Dim objOpcRol As New Adm_OpcRolClass
                     'cargamos datos sobre el objeto de login
                     objOpcRol.Nit_ID = ReadConsulta.GetValue(0)
-                    objOpcRol.OPRol_ID = ReadConsulta.GetValue(1)
-                    objOpcRol.Consecutivo = ReadConsulta.GetValue(2)
-                    objOpcRol.Tipo = ReadConsulta.GetValue(3)
-                    objOpcRol.Subrol_rol = ReadConsulta.GetValue(4)
-                    objOpcRol.Link_ID = ReadConsulta.GetValue(5)
+                    objOpcRol.OPRol_Nit_ID = ReadConsulta.GetValue(1)
+                    objOpcRol.OPRol_ID = ReadConsulta.GetValue(2)
+                    objOpcRol.Consecutivo = ReadConsulta.GetValue(3)
+                    objOpcRol.Tipo = ReadConsulta.GetValue(4)
+                    objOpcRol.Subrol_rol_Nit_ID = ReadConsulta.GetValue(5)
+                    objOpcRol.Subrol_rol = ReadConsulta.GetValue(6)
+                    objOpcRol.Link_ID = ReadConsulta.GetValue(7)
 
-                    objOpcRol.UsuarioCreacion = ReadConsulta.GetValue(6)
-                    objOpcRol.FechaCreacion = ReadConsulta.GetValue(7)
-                    objOpcRol.UsuarioActualizacion = ReadConsulta.GetValue(8)
-                    objOpcRol.FechaActualizacion = ReadConsulta.GetValue(9)
+                    objOpcRol.UsuarioCreacion = ReadConsulta.GetValue(8)
+                    objOpcRol.FechaCreacion = ReadConsulta.GetValue(9)
+                    objOpcRol.UsuarioActualizacion = ReadConsulta.GetValue(10)
+                    objOpcRol.FechaActualizacion = ReadConsulta.GetValue(11)
 
-                    objOpcRol.Index = ReadConsulta.GetValue(10)
+                    objOpcRol.Index = ReadConsulta.GetValue(12)
 
                     'agregamos a la lista
                     ObjListOpcRol.Add(objOpcRol)
@@ -301,6 +307,7 @@ Public Class Adm_OpcRolSQLClass
 
         sql.AppendLine(" SELECT COUNT(1) FROM OPTION_ROL " & _
                        " WHERE OR_Nit_ID = '" & vp_O_Obj.Nit_ID & "'" & _
+                       " AND OR_OPRol_Nit_ID = '" & vp_O_Obj.OPRol_Nit_ID & "'" & _
                        " AND OR_OPRol_ID = '" & vp_O_Obj.OPRol_ID & "'" & _
                        " AND OR_Consecutivo = '" & vp_O_Obj.Consecutivo & "'")
 

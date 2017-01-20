@@ -155,7 +155,9 @@ function transacionAjax_opcRol(State, filtro, opcion) {
 function transacionAjax_opcRol_create(State) {
 
     var ID;
+    var Nit_ID;
     var ID_SubRol_Rol;
+    var Nit_ID_SubRol_Rol;
     var Index_Padre;
     var Index_SubRol_Rol;
     var param;
@@ -166,6 +168,7 @@ function transacionAjax_opcRol_create(State) {
     for (Item in ArrayComboSubRol) {
         if (ArrayComboSubRol[Item].Index == Index_Padre) {
             ID = ArrayComboSubRol[Item].Rol_ID;
+            Nit_ID = ArrayComboSubRol[Item].Nit_ID;
             break;
         }
     }
@@ -173,6 +176,7 @@ function transacionAjax_opcRol_create(State) {
     for (Item in ArrayComboSubRol) {
         if (ArrayComboSubRol[Item].Index == Index_SubRol_Rol) {
             ID_SubRol_Rol = ArrayComboSubRol[Item].Rol_ID;
+            Nit_ID_SubRol_Rol = ArrayComboSubRol[Item].Nit_ID;
             break;
         }
     }
@@ -185,9 +189,11 @@ function transacionAjax_opcRol_create(State) {
         //crear json
         data: { "action": State,
             "ID": ID,
+            "ID_Nit_ID": Nit_ID,
             "NIT": $("#Select_EmpresaNit").val(),
             "consecutivo": $("#TxtConsecutivo").val(),
             "tipo": $("#DDLTipo").val(),
+            "Nit_ID_subrol_rol": Nit_ID_SubRol_Rol,
             "subrol_rol": ID_SubRol_Rol,
             "link_ID": $("#DDLLink_ID").val(),
             "user": User.toUpperCase()
@@ -231,10 +237,12 @@ function transacionAjax_opcRol_create(State) {
 function transacionAjax_opcRol_delete(State) {
 
     var NIT;
+    var ID_Nit_ID;
     var ID;
     var Consecutive;
 
     NIT = editNIT;
+    ID_Nit_ID = editID_Nit_ID;
     ID = editID;
     Consecutive = editConsecutivo
 
@@ -244,6 +252,7 @@ function transacionAjax_opcRol_delete(State) {
         //crear json
         data: { "action": State,
             "ID": ID,
+            "ID_Nit_ID": ID_Nit_ID,
             "NIT": NIT,
             "Consecutivo": Consecutive
         },

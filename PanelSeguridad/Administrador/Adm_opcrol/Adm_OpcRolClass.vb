@@ -3,9 +3,11 @@
 #Region "campos"
     Private _Index As Long
     Private _Nit_ID As String
+    Private _OPRol_Nit_ID As String
     Private _OPRol_ID As String
-    Private _Consecutivo As Integer
+    Private _Consecutivo As Long
     Private _Tipo As String
+    Private _Subrol_rol_Nit_ID As String
     Private _Subrol_rol As String
     Private _Link_ID As String
 
@@ -32,6 +34,14 @@
             Me._Nit_ID = value
         End Set
     End Property
+    Public Property OPRol_Nit_ID() As String
+        Get
+            Return Me._OPRol_Nit_ID
+        End Get
+        Set(ByVal value As String)
+            Me._OPRol_Nit_ID = value
+        End Set
+    End Property
     Public Property OPRol_ID() As String
         Get
             Return Me._OPRol_ID
@@ -40,11 +50,11 @@
             Me._OPRol_ID = value
         End Set
     End Property
-    Public Property Consecutivo() As Integer
+    Public Property Consecutivo() As Long
         Get
             Return Me._Consecutivo
         End Get
-        Set(ByVal value As Integer)
+        Set(ByVal value As Long)
             Me._Consecutivo = value
         End Set
     End Property
@@ -54,6 +64,14 @@
         End Get
         Set(ByVal value As String)
             Me._Tipo = value
+        End Set
+    End Property
+    Public Property Subrol_rol_Nit_ID() As String
+        Get
+            Return Me._Subrol_rol_Nit_ID
+        End Get
+        Set(ByVal value As String)
+            Me._Subrol_rol_Nit_ID = value
         End Set
     End Property
     Public Property Subrol_rol() As String

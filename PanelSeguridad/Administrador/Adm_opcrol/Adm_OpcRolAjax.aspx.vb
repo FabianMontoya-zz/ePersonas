@@ -72,6 +72,7 @@ Public Class Adm_OpcRolAjax
         Dim vl_s_IDxiste As String
 
         objOpcRol.Nit_ID = Request.Form("NIT")
+        objOpcRol.OPRol_Nit_ID = Request.Form("ID_Nit_ID")
         objOpcRol.OPRol_ID = Request.Form("ID")
         objOpcRol.Consecutivo = Request.Form("consecutivo")
 
@@ -81,6 +82,7 @@ Public Class Adm_OpcRolAjax
         If vl_s_IDxiste = 0 Then
 
             objOpcRol.Tipo = Request.Form("tipo")
+            objOpcRol.Subrol_rol_Nit_ID = Request.Form("Nit_ID_subrol_rol")
             objOpcRol.Subrol_rol = Request.Form("subrol_rol")
             objOpcRol.Link_ID = Request.Form("link_ID")
             objOpcRol.UsuarioCreacion = Request.Form("user")
@@ -112,6 +114,7 @@ Public Class Adm_OpcRolAjax
         Dim result As String
 
         objOpcRol.Nit_ID = Request.Form("NIT")
+        objOpcRol.OPRol_Nit_ID = Request.Form("ID_Nit_ID")
         objOpcRol.OPRol_ID = Request.Form("ID")
         objOpcRol.Consecutivo = Request.Form("Consecutivo")
 
