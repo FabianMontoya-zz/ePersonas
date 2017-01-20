@@ -28,7 +28,7 @@ var Container_Tarjeta;
 $(document).ready(function () {
 
     $("#Marco_trabajo_Form").css("height", "490px");
-    $("#container_TProductos").css("height", "380px");
+    $("#container_TGrid").css("height", "380px");
 
     /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
     Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
@@ -128,6 +128,7 @@ function btnSalir() {
 
 //elimina de la BD
 function BtnElimina() {
+    OpenControl(); //Abrimos el load de espera con el logo
     transacionAjax_Delete_AccesoPredet("elimina");
 }
 
@@ -150,6 +151,12 @@ function HabilitarPanel(opcion) {
             EnableControls();
             Clear();
             estado = opcion;
+            
+            var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+            if (OnlyEmpresa == true) {
+                TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+            }
             break;
 
         case "buscar":
@@ -189,6 +196,8 @@ function BtnConsulta() {
     var filtro;
     var ValidateSelect = ValidarDroplist();
     var opcion;
+
+    OpenControl(); //Abrimos el load de espera con el logo
 
     if (ValidateSelect == 1) {
         filtro = "N";
@@ -416,6 +425,7 @@ function Clear() {
     $("#TxtFfinal").val("");
     $("#txt_HFVigencia").val("");
     $("#T_Vigencia_Ing").css("display", "none");
+    $("#DDLColumns").val("-1").trigger("chosen:updated");
 
     $('.C_Chosen').trigger('chosen:updated');
 }
