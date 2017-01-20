@@ -20,6 +20,7 @@ $(document).ready(function () {
     /*==================FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN==============*/
 
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
+    transacionAjax_EmpresaNit('Cliente');
 
     Change_Select_Nit();
 
@@ -72,6 +73,7 @@ function HabilitarPanel(opcion) {
             ResetError();
             Clear();
             estado = opcion;
+            VerificarNIT("Select_EmpresaNit");
             break;
 
         case "buscar":

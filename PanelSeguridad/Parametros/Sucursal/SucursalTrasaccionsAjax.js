@@ -49,7 +49,10 @@ function transacionAjax_EmpresaNit(vp_State) {
         },
         error: function () {
 
-        }
+        },
+        //Jhon
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador 
     });
 }
 
