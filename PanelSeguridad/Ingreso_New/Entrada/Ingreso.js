@@ -606,7 +606,6 @@ function validaEntradaSalida(A_FIV, A_FFV) {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //contruye vista de Personal encargado
 function Tabla_Encargados() {
-
     var html_En;
 
     html_En = "<table id='TEnt' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th style='width: 2%;'>Selección</th><th>Documento</th><th>Persona Encargada</th></tr></thead><tbody>";
@@ -629,6 +628,7 @@ function Tabla_Encargados() {
 //captura y asigna la persona encargada
 function Selecciona_Encargado(Index_People) {
 
+    Clear_Search();
     if (Tipo_Busqueda == "Encargado")
         $("#Txt_Persona_Enc").val(List_Encargado[Index_People].TypeDocument_ID + " - " + List_Encargado[Index_People].Document_ID + " - " + List_Encargado[Index_People].Nombre);
     else
@@ -747,7 +747,7 @@ function Clear() {
     $("#L_Cargo").html("");
 
     $("#container_T_DP").html("");
-    $("#container_T_DE").html("");
+    $("#container_T_DE").html("");("");
     $("#Container_Acceso").html("");
 
     $("#Sucess").css("display", "none");
@@ -773,3 +773,8 @@ function Clear_Ingreso() {
     $('.C_Chosen').trigger('chosen:updated');
 }
 
+//limpiar busqueda de personas
+function Clear_Search() {
+    $("#Txt_Nombre").val("");
+    $("#Container_People_Bussiness").html("");
+}

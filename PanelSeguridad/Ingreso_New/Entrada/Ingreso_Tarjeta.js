@@ -181,7 +181,7 @@ function ValidaSearch_People() {
         if (Campo_P.length < 3) {
             valida = 1;
             Process_Manual_Ingreso = 1;
-            Mensaje_General("Minimo de letras", "El minimode letras debe se de (3) para la busqueda del " + Tipo_Busqueda, "W");
+            Mensaje_General("Minimo de letras", "El minimo de letras debe se de (3) para la busqueda del " + Tipo_Busqueda, "W");
         }
     }
     else {

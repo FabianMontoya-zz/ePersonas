@@ -202,7 +202,7 @@
                                 <tr>
                                     <td class="Title_Bold" colspan="6">Tiempo de la Visita
                                     </td>
-                                    <td class="Title_Bold" colspan="4">Fecha / Hora
+                                    <td class="Title_Bold" colspan="4">
                                     </td>
                                     <td class="Title_Bold" rowspan="2" style="width: 10%">
                                         <input id="BtnIngresar" class="BWeb" type="button" value="Ingresar" onclick="BtnAgregarAcceso();" />
@@ -235,10 +235,10 @@
                                                 src="../../images/error.png" />
                                             <span class="SpamEG"></span></span>
                                     </td>
-                                    <td class="Label_Bold" style="width: 5%">Ingreso
+                                    <td class="Label_Bold" style="width: 5%">
                                     </td>
                                     <td id="HA_Ingreso" style="width: 20%;"></td>
-                                    <td class="Label_Bold" style="width: 7%;">Estimado Salida</td>
+                                    <td class="Label_Bold" style="width: 7%;"></td>
                                     <td id="HE_Salida" style="width: 20%;"></td>
                                 </tr>
                             </table>
