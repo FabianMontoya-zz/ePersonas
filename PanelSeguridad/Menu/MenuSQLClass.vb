@@ -16,7 +16,7 @@ Public Class MenuSQLClass
 
         Dim conex As New Conector
         Dim CONEXION As String = conex.typeConexion("1")
-        Dim rol As String
+        Dim vl_S_Rol As String
 
         Dim sql As New StringBuilder
 
@@ -25,13 +25,12 @@ Public Class MenuSQLClass
                               " AND U_Nit_ID = '" & vp_S_Nit & "'")
 
         StrQuery = sql.ToString
-        rol = conex.IDis(StrQuery, "1")
+        vl_S_Rol = conex.IDis(StrQuery, "1")
 
         StrQuery = ""
         sql = New StringBuilder
 
-        If rol = "ADMIN" Then
-            sql.Append(" EXEC MENU_ADMIN_TEMPORAL '" & vp_S_User & "','" & vp_S_Nit & "','" & vp_S_Encriptado & "'")
+             sql.Append(" EXEC MENU_ADMIN_TEMPORAL '" & vp_S_User & "','" & vp_S_Nit & "','" & vp_S_Encriptado & "','" & vl_S_Rol & "'")
             StrQuery = sql.ToString
             conex.StrInsert_and_Update_All(StrQuery, "1")
 
@@ -56,34 +55,7 @@ Public Class MenuSQLClass
                         "       NIT " & _
                         " FROM T_TEMPORAL " & _
                         " ORDER BY Tipo, IDOpcionRol asc, CAST(Consecutivo AS BIGINT )")
-        Else
-            sql.Append(" EXEC MENU_TEMPORAL '" & rol & "'")
-            StrQuery = sql.ToString
-            conex.StrInsert_and_Update_All(StrQuery, "1")
-
-            StrQuery = ""
-            sql = New StringBuilder
-
-            sql.Append("  SELECT Nombre," & _
-                        "       EstadoUsuario," & _
-                        "       IDRol," & _
-                        "       DescripcionRol," & _
-                        "       Sigla," & _
-                        "       IDOpcionRol," & _
-                        "       Consecutivo," & _
-                        "       Tipo," & _
-                        "       Sub_Rol," & _
-                        "       IDlink," & _
-                        "       DescripcionLink," & _
-                        "       Parametro_1," & _
-                        "       Parametro_2," & _
-                        "       Ruta ," & _
-                         "       Usuario, " & _
-                        "       NIT " & _
-                       " FROM T_TEMPORAL " & _
-                        " ORDER BY Tipo, IDOpcionRol asc, Consecutivo")
-        End If
-
+      
         StrQuery = sql.ToString
 
         ObjListMenu = listMenu(StrQuery, CONEXION)
