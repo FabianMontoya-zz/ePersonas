@@ -84,6 +84,9 @@ function VentanasEmergentes() {
         overlay: {
             opacity: 0.5,
             background: "black"
+        },
+        close: function (event, ui) {
+            Clear_Search();
         }
     });
 
