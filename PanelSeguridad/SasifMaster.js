@@ -88,7 +88,7 @@ function clearConsole() {
 
 //salida del formulario
 function btnSalir() {
-    
+
     switch (Link) {
         case "O_CLIENTE": //cliente
             transacionAjax_EraseDocument('EraseDocument');
@@ -261,6 +261,7 @@ function No_Back_Button() {
         //keyCode 83 = S
         //keyCode 86 = V
         //keyCode 85 = U 
+        //keyCode 87 = W 
         //keyCode 45 = Insert
 
         event = event || window.event;
@@ -268,10 +269,11 @@ function No_Back_Button() {
         if ((event.altKey && event.keyCode == 37) || (event.altKey && event.keyCode == 39) ||
         (event.ctrlKey && event.keyCode == 78) || (event.ctrlKey && event.keyCode == 82) ||
         (event.ctrlKey && event.keyCode == 83) || (event.ctrlKey && event.keyCode == 85) ||
-        (event.ctrlKey && event.keyCode == 45) || (event.shiftKey && event.keyCode == 45)) {
+        (event.ctrlKey && event.keyCode == 45) || (event.shiftKey && event.keyCode == 45) ||
+        (event.ctrlKey && event.keyCode == 87)) {
             event.cancelBubble = true;
             event.returnValue = false;
-            alert("Función no permitida");
+            alert("¡Función no permitida!");
             return false;
         }
 
@@ -396,24 +398,6 @@ function CloseControl() {
     $("#Dialog_Control").dialog("close");
     No_Back_Button();
 }
-
-function Redireciona_Post(vp_url, vp_data) {
-    var vl_form = document.createElement('form');
-    vl_form.method = 'post';
-    vl_form.action = vp_url;
-
-    for (var name in vp_data) {
-        var vl_input = document.createElement('input');
-        vl_input.type = 'hidden';
-        vl_input.name = name;
-        vl_input.value = vp_data[name];
-        vl_form.appendChild(vl_input);
-    }
-    vl_form.submit();
-}
-
-// redirectPost('http://www.example.com', { text: 'text\n\ntext' });
-
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                             VALIDACIONES FECHAS Y HORAS                                                                                                            ----*/

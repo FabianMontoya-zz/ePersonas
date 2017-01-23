@@ -31,6 +31,7 @@ function transacionAjax_EmpresaNit(State) {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                          CONSULTAS EN PROCESO                                                                                                                ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
 /*-------------------- Validación Usuario ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax 
 function transacionAjax(vp_State) {
@@ -50,15 +51,19 @@ function transacionAjax(vp_State) {
             switch (result) {
 
                 case 0: //ingresa
+                    Ocultar_Errores();
                     transacionAjax_AllInfoUser("Loggear", $("#Select_EmpresaNit").val(), $("#TxtUser").val().toUpperCase());
                      break;
                 case 1: //contraseña incorrecta
+                    $("#EUser").css("display", "none");
+                    $("#ImgNIT").css("display", "none");
                     $("#EPassword").css("display", "inline-table");
                     $("#S_Pass").html(ArrayMensajes[4].Mensajes_ID + ": " + ArrayMensajes[4].Descripcion);
                     $("#TxtPassword").focus();
                     $("#TxtPassword").select();
                     break;
                 case 2: //no existe usuario
+                    $("#EPassword").css("display", "none");
                     $("#EUser").css("display", "inline-table");
                     $("#ImgNIT").css("display", "inline-table");
                     $("#S_User").html(ArrayMensajes[6].Mensajes_ID + ": " + ArrayMensajes[6].Descripcion);
@@ -72,14 +77,14 @@ function transacionAjax(vp_State) {
                     window.location = "../login/CambioPassword.aspx?User=" + $("#TxtUser").val();
                     break
                 case 4: //usuario deshabilitado
-
+                    Ocultar_Errores();
                     $("#TxtPassword").val("");
                     $("#TxtUser").focus();
                     $("#TxtUser").select();
                     Mensaje_General("¡Usuario Desactivado!", ArrayMensajes[8].Mensajes_ID + ": " + ArrayMensajes[8].Descripcion, "W");
                     break;
                 case 5: //usuario eliminado
-
+                    Ocultar_Errores();
                     $("#TxtPassword").val("");
                     $("#TxtUser").focus();
                     $("#TxtUser").select();
