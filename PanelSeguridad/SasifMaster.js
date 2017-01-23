@@ -67,7 +67,7 @@ $(document).ready(function () {
     });
 
     No_Back_Button();
-    console.log("%cAll is ready, enjoy!", "color: green; font-size: x-large");
+    console.log("%cAll is ready, enjoy!", "color: #b70d0d; font-size: x-large");
 });
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
