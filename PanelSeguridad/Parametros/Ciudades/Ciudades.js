@@ -10,20 +10,24 @@ var editPais_ID;
 
 //Evento load JS
 $(document).ready(function () {
+
+    $("#Marco_trabajo_Form").css("height", "490px");
+    $("#container_TCiudades").css("height", "380px");
+
+    /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
+    Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
+    Ocultar_Errores();
+    Ocultar_Tablas();
+    /*================== FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN ==============*/
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_Pais('Pais');
 
-    $("#ESelect").css("display", "none");
-    $("#Img1").css("display", "none");
-    $("#Img2").css("display", "none");
-    $("#Img3").css("display", "none");
-    $("#DE").css("display", "none");
-    $("#SE").css("display", "none");
-    $("#WA").css("display", "none");
+});
 
+//funcion para las ventanas emergentes
+function Ventanas_Emergentes() {
 
-    $("#TablaDatos_D").css("display", "none");
-    $("#TablaConsulta").css("display", "none");
+    Load_Charge_Sasif(); //Carga de "SasifMaster.js" el Control de Carga
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
@@ -38,7 +42,26 @@ $(document).ready(function () {
         autoOpen: false
     });
 
-});
+}
+
+//Función que oculta todas las IMG de los errores en pantalla
+function Ocultar_Errores() {
+    ResetError();
+    $("#ESelect").css("display", "none");
+    $("#Img1").css("display", "none");
+    $("#Img2").css("display", "none");
+    $("#Img3").css("display", "none");
+    $("#DE").css("display", "none");
+    $("#SE").css("display", "none");
+    $("#WA").css("display", "none");
+    /*Los demás se ocultan en la SASIF Master*/
+}
+
+//Función que oculta las tablas
+function Ocultar_Tablas() {
+    $("#TablaDatos_D").css("display", "none");
+    $("#TablaConsulta").css("display", "none");
+}
 
 
 //habilita el panel de crear o consulta
@@ -93,6 +116,8 @@ function BtnConsulta() {
     var ValidateSelect = ValidarDroplist();
     var opcion;
 
+    OpenControl();
+
     if (ValidateSelect == 1) {
         filtro = "N";
         opcion = "ALL";
@@ -124,6 +149,7 @@ function BtnCrear() {
 
 //elimina de la BD
 function BtnElimina() {
+    OpenControl();
     transacionAjax_Ciudades_delete("elimina");
 }
 
@@ -200,7 +226,7 @@ function Table_Ciudades() {
             html_Ciudades = "<table id='TCiudades' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Pais</th><th>Codigo</th><th>Ciudad</th></tr></thead><tbody>";
             for (itemArray in ArrayCiudades) {
                 if (ArrayCiudades[itemArray].Ciudades_ID != 0) {
-                    html_Ciudades += "<tr id= 'TCiudades_" + ArrayCiudades[itemArray].Ciudades_ID + "'><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Editar('" + ArrayCiudades[itemArray].Pais_ID + "','" + ArrayCiudades[itemArray].Ciudades_ID + "')\"></input></td><td>" + ArrayCiudades[itemArray].Pais_ID + " - " + ArrayCiudades[itemArray].DescripPais + "</td><td>" + ArrayCiudades[itemArray].Ciudades_ID + "</td><td>" + ArrayCiudades[itemArray].Descripcion + "</td></tr>";
+                    html_Ciudades += "<tr id= 'TCiudades_" + ArrayCiudades[itemArray].Ciudades_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + ArrayCiudades[itemArray].Pais_ID + "','" + ArrayCiudades[itemArray].Ciudades_ID + "')\"></img><span>Editar Ciudades</span></span></td><td>" + ArrayCiudades[itemArray].Pais_ID + " - " + ArrayCiudades[itemArray].DescripPais + "</td><td>" + ArrayCiudades[itemArray].Ciudades_ID + "</td><td>" + ArrayCiudades[itemArray].Descripcion + "</td></tr>";
                 }
             }
             break;
@@ -209,7 +235,7 @@ function Table_Ciudades() {
             html_Ciudades = "<table id='TCiudades' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Pais</th><th>Codigo</th><th>Ciudad</th></tr></thead><tbody>";
             for (itemArray in ArrayCiudades) {
                 if (ArrayCiudades[itemArray].Ciudades_ID != 0) {
-                    html_Ciudades += "<tr id= 'TCiudades_" + ArrayCiudades[itemArray].Ciudades_ID + "'><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar('" + ArrayCiudades[itemArray].Pais_ID + "','" + ArrayCiudades[itemArray].Ciudades_ID + "')\"></input></td><td>" + ArrayCiudades[itemArray].Pais_ID + " - " + ArrayCiudades[itemArray].DescripPais + "</td><td>" + ArrayCiudades[itemArray].Ciudades_ID + "</td><td>" + ArrayCiudades[itemArray].Descripcion + "</td></tr>";
+                    html_Ciudades += "<tr id= 'TCiudades_" + ArrayCiudades[itemArray].Ciudades_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArrayCiudades[itemArray].Pais_ID + "','" + ArrayCiudades[itemArray].Ciudades_ID + "')\"></img><span>Eliminar Ciudades</span></span></td><td>" + ArrayCiudades[itemArray].Pais_ID + " - " + ArrayCiudades[itemArray].DescripPais + "</td><td>" + ArrayCiudades[itemArray].Ciudades_ID + "</td><td>" + ArrayCiudades[itemArray].Descripcion + "</td></tr>";
                 }
             }
             break;

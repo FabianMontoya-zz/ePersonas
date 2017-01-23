@@ -19,9 +19,20 @@
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Dialog/datepicker.js" type="text/javascript"></script>
     <script src="../../Scripts/Dialog/timepicker.js" type="text/javascript"></script>
-    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" /> <meta http-equiv="Pragma" content="no-cache"/> <meta http-equiv="Expires" content="-1"/>
+    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="-1" />
+    <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
+    <div id="Dialog_Control" style="width: 100%; text-align: center;">
+        <div class="cssload-container" style="margin-top: 25%;">
+            <div class="cssload-whirlpool"></div>
+            <div>
+                <img id="Sasif" class="Logo_3" src="../../images/SASIF_NEW_WHITE.png" alt="SASIF S.A.S." />
+            </div>
+        </div>
+    </div>
     <div id="Container_title_Form">
         <table id="Tabla_Title_form">
             <tr>
@@ -44,16 +55,16 @@
             <div id="Container_controls">
                 <table id="TablaConsulta">
                     <tr>
-                        <td id="TD1">
+                        <td id="TD1" style="width: 25%;">
                             <select id="DDLColumns" class="C_Chosen">
                             </select>
                         </td>
-                        <td id="TD2">
+                        <td id="TD2" style="width: 65%;">
                             <span class="cssToolTip_Form">
-                                <input id="TxtRead" type="text" />
+                                <input id="TxtRead" type="text" style="width: 60%; margin-left: 10%;" />
                                 <span class="Spam_AST"></span></span>
                         </td>
-                        <td colspan="4" align="center" id="TD3">
+                        <td colspan="4" align="center" id="TD3" style="width: 20%;">
                             <input id="BtnRead" type="button" value="Buscar" onclick="BtnConsulta();" />
                         </td>
                     </tr>
@@ -78,13 +89,13 @@
                                     <input type="text" id="Txt_Codigo" maxlength="6" class="Numeric" />
                                     <span class="Spam_AN"></span></span>
                             </td>
-                            <td style="padding-bottom: 22px; width: 50px;">
+                            <td style="padding-bottom: 22px; width: 176px;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgID"
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
-                            <td class="Label_Bold" style="width: 90px;">Nombre
+                            <td class="Label_Bold" style="width: 107px;">Nombre
                             </td>
                             <td style="width: 100px;">
                                 <span class="cssToolTip_Form">
@@ -101,13 +112,13 @@
                     </table>
                     <table id="T_Moneda_Swift_Calendario" style="margin-left: 80px;">
                         <tr>
-                            <td style="width: 90px;" class="Label_Bold">Moneda
+                            <td style="width: 88px;" class="Label_Bold">Moneda
                             </td>
-                            <td style="width: 200px;">
+                            <td style="width: 100px;">
                                 <select id="Select_moneda" class="C_Chosen">
                                 </select>
                             </td>
-                            <td style="padding-bottom: 22px; width: 50px;">
+                            <td style="padding-bottom: 22px;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgMon"
                                         src="../../images/error.png" />
@@ -115,16 +126,16 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="width: 90px;" class="Label_Bold">SWIFT
+                            <td class="Label_Bold">SWIFT
                             </td>
                             <td style="width: 100px;">
                                 <span class="cssToolTip_Form">
-                                    <input type="text" id="TxtSWIFT" maxlength="20" />
+                                    <input type="text" id="TxtSWIFT" maxlength="20" style="width: 300px;" />
                                     <span class="Spam_AST"></span></span>
                             </td>
-                            <td style="width: 100px;" class="Label_Bold">Calendario
+                            <td style="width: 150px; text-align: center;" class="Label_Bold">Calendario
                             </td>
-                            <td style="width: 250px;">
+                            <td style="width: 200px;">
                                 <select id="Select_Calendario" class="C_Chosen">
                                 </select>
                             </td>
