@@ -285,7 +285,9 @@ function No_Back_Button() {
             return false;
         }
 
-        if ((event.keyCode == 116) || (event.keyCode == 122)) {
+        if ((event.keyCode == 116) ||
+            //(event.keyCode == 123) || //Línea F12
+            (event.keyCode == 122)) {
             if (navigator.appName == "Microsoft Internet Explorer") {
                 window.event.keyCode = 0;
             }
