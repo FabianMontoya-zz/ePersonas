@@ -32,6 +32,8 @@ Matrix_Mes[11] = [12, "Diciembre", 31];
 /*--------------- region de variables globales --------------------*/
 
 $(document).ready(function () {
+    clearConsole();
+
     fecha();
 
     $(".C_Chosen").chosen({
@@ -65,14 +67,23 @@ $(document).ready(function () {
     });
 
     No_Back_Button();
-
-    console.log("All is ready, enjoy!");
-
+    console.log("%cAll is ready, enjoy!", "color: green; font-size: x-large");
 });
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                 BOTONES GLOBALES                                                                                                            ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+function clearConsole() {
+    if (typeof console._commandLineAPI !== 'undefined') {
+        console.API = console._commandLineAPI;
+    } else if (typeof console._inspectorCommandLineAPI !== 'undefined') {
+        console.API = console._inspectorCommandLineAPI;
+    } else if (typeof console.clear !== 'undefined') {
+        console.API = console;
+    }
+    console.API.clear();
+}
 
 //salida del formulario
 function btnSalir() {
