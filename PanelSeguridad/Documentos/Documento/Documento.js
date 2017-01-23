@@ -13,12 +13,28 @@ var editID;
 
 //Evento load JS
 $(document).ready(function () {
+
+    //Jhon
+    $("#Marco_trabajo_Form").css("height", "490px");
+    $("#container_TDocumento").css("height", "380px");
+
+    /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
+    Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
+    Ocultar_Errores();
+    Ocultar_Tablas();
+
     transaccionAjax_MRuta('MATRIX_RUTA');
 
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_EmpresaNit('Cliente');
     transacionAjax_Formato('Formato');
     Change_Select_Nit();
+    
+});
+
+//Función que oculta todas las IMG de los errores en pantalla
+function Ocultar_Errores() {
+    ResetError();
 
     $("#ESelect").css("display", "none");
     $("#Img1").css("display", "none");
@@ -34,10 +50,14 @@ $(document).ready(function () {
     $("#SE").css("display", "none");
     $("#WA").css("display", "none");
 
-    $("#TablaDatos_D").css("display", "none");
-    $("#TablaDatos_D_Vista").css("display", "none");
     $("#TablaConsulta").css("display", "none");
 
+}
+
+//funcion para las ventanas emergentes
+function Ventanas_Emergentes() {
+
+    Load_Charge_Sasif(); //Carga de "SasifMaster.js" el Control de Carga
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
         autoOpen: false,
@@ -51,7 +71,14 @@ $(document).ready(function () {
         modal: true
     });
 
-});
+}
+
+//Función que oculta las tablas
+function Ocultar_Tablas() {
+    $("#TablaDatos_D").css("display", "none");
+    $("#TablaDatos_D_Vista").css("display", "none");
+    $("#TablaConsulta").css("display", "none");
+}
 
 //habilita el panel de crear o consulta
 function HabilitarPanel(opcion) {
@@ -69,6 +96,13 @@ function HabilitarPanel(opcion) {
             ResetError();
             Clear();
             estado = opcion;
+
+            var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+            if (OnlyEmpresa == true) {
+                TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+            }
+
             break;
 
         case "buscar":
@@ -106,9 +140,15 @@ function HabilitarPanel(opcion) {
 function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {
         var index_ID = $(this).val();
+        TransaccionesSegunNIT(index_ID);
+    });
+}
+
+function TransaccionesSegunNIT(index_NIT_ID) {
+    if (index_NIT_ID != "-1") {
         Charge_Combos_Depend_Nit(Matrix_Ruta, "Select_RutaDocumento", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Ruta, "Select_RutaPlantilla", index_ID, "");
-    });
+    }
 }
 
 //consulta del del crud(READ)
@@ -117,6 +157,8 @@ function BtnConsulta() {
     var filtro;
     var ValidateSelect = ValidarDroplist();
     var opcion;
+
+    OpenControl();
 
     if (ValidateSelect == 1) {
         filtro = "N";
@@ -149,6 +191,7 @@ function BtnCrear() {
 
 //elimina de la BD
 function BtnElimina() {
+    OpenControl();
     transacionAjax_Documento_delete("elimina");
 }
 
@@ -424,7 +467,7 @@ function Clear() {
     $("#Select_Foto").val("N");
 
     $("#TxtRead").val("");
-    $("#DDLColumns").val("-1");
+    $("#DDLColumns").val("-1").trigger('chosen:updated');;
 
     $('.C_Chosen').trigger('chosen:updated');
 
