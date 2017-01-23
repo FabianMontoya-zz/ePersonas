@@ -74,6 +74,7 @@ $(document).ready(function () {
 /*----                                                                                                                 BOTONES GLOBALES                                                                                                            ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
+//Función que borra el log generado en la consola según el navegador
 function clearConsole() {
     if (typeof console._commandLineAPI !== 'undefined') {
         console.API = console._commandLineAPI;
