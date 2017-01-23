@@ -252,11 +252,13 @@ function No_Back_Button() {
 
         //keyCode 116 = F5 
         //keyCode 122 = F11
+        //keyCode 16 = Shift
         //keyCode 8 = Backspace
         //keyCode 37 = LEFT ROW
         //keyCode 78 = N
         //keyCode 39 = RIGHT ROW
         //keyCode 67 = C
+        //keyCode 73 = I
         //keyCode 82 = R
         //keyCode 83 = S
         //keyCode 86 = V
@@ -270,7 +272,7 @@ function No_Back_Button() {
         (event.ctrlKey && event.keyCode == 78) || (event.ctrlKey && event.keyCode == 82) ||
         (event.ctrlKey && event.keyCode == 83) || (event.ctrlKey && event.keyCode == 85) ||
         (event.ctrlKey && event.keyCode == 45) || (event.shiftKey && event.keyCode == 45) ||
-        (event.ctrlKey && event.keyCode == 87)) {
+        (event.ctrlKey && event.keyCode == 87) || (event.ctrlKey && event.shiftKey && event.keyCode == 73)) {
             event.cancelBubble = true;
             event.returnValue = false;
             alert("¡Función no permitida!");
