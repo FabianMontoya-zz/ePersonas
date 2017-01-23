@@ -7,7 +7,23 @@ var editID;
 
 //Evento load JS
 $(document).ready(function () {
+
+    $("#Marco_trabajo_Form").css("height", "490px");
+    $("#container_TMensajes").css("height", "380px");
+
+    /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
+    Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
+    Ocultar_Errores();
+    Ocultar_Tablas();
+    /*==================FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN==============*/
+
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
+      
+});
+
+//Función que oculta todas las IMG de los errores en pantalla
+function Ocultar_Errores() {
+    ResetError();
     $("#ESelect").css("display", "none");
     $("#ImgID").css("display", "none");
     $("#Img2").css("display", "none");
@@ -15,10 +31,12 @@ $(document).ready(function () {
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
     $("#WA").css("display", "none");
+}
 
+//funcion para las ventanas emergentes
+function Ventanas_Emergentes() {
 
-    $("#TablaDatos").css("display", "none");
-    $("#TablaConsulta").css("display", "none");
+    Load_Charge_Sasif(); //Carga de "SasifMaster.js" el Control de Carga
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
@@ -32,8 +50,13 @@ $(document).ready(function () {
         modal: true,
         autoOpen: false
     });
-       
-});
+}
+
+//Función que oculta las tablas
+function Ocultar_Tablas() {
+    $("#TablaDatos").css("display", "none");
+    $("#TablaConsulta").css("display", "none");
+}
 
 
 //habilita el panel de crear o consulta
@@ -86,6 +109,8 @@ function BtnConsulta() {
     var ValidateSelect = ValidarDroplist();
     var opcion;
 
+    OpenControl(); //Abrimos el load de espera con el logo
+
     if (ValidateSelect == 1) {
         filtro = "N";
         opcion = "ALL";
@@ -117,6 +142,7 @@ function BtnCrear() {
 
 //elimina de la BD
 function BtnElimina() {
+    OpenControl(); //Abrimos el load de espera con el logo
     transacionAjax_Mensajes_delete("elimina");
 }
 
@@ -176,40 +202,44 @@ function ValidarDroplist() {
 // crea la tabla en el cliente
 function Table_Mensajes() {
 
+    var html_Mensajes;
+
     switch (estado) {
 
         case "buscar":
-            Tabla_consulta();
+            html_Mensajes = "<table id='TMensajes' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Codigo</th><th>Nombre</th><th>Descripción</th></tr></thead><tbody>";
+            for (itemArray in ArrayMensajes) {
+                if (ArrayMensajes[itemArray].Mensajes_ID != 0) {
+                    html_Mensajes += "<tr id= 'TMensajes_" + ArrayMensajes[itemArray].Mensajes_ID + "'><td>" + ArrayMensajes[itemArray].Mensajes_ID + "</td><td>" + ArrayMensajes[itemArray].Nombre + "</td><td>" + ArrayMensajes[itemArray].Descripcion + "</td></tr>";
+                }
+            }
             break;
 
         case "modificar":
-            Tabla_modificar();
+            html_Mensajes = "<table id='TMensajes' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Codigo</th><th>Nombre</th><th>Descripción</th></tr></thead><tbody>";
+            for (itemArray in ArrayMensajes) {
+                if (ArrayMensajes[itemArray].Mensajes_ID != 0) {
+                    html_Mensajes += "<tr id= 'TMensajes_" + ArrayMensajes[itemArray].Mensajes_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + ArrayMensajes[itemArray].Mensajes_ID + "')\"></img><span>Editar Mensaje</span></span></td><td>" + ArrayMensajes[itemArray].Mensajes_ID + "</td><td>" + ArrayMensajes[itemArray].Nombre + "</td><td>" + ArrayMensajes[itemArray].Descripcion + "</td></tr>";
+                }
+            }
             break;
 
         case "eliminar":
-            Tabla_eliminar();
+            html_Mensajes = "<table id='TMensajes' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Codigo</th><th>Nombre</th><th>Descripción</th></tr></thead><tbody>";
+            for (itemArray in ArrayMensajes) {
+                if (ArrayMensajes[itemArray].Mensajes_ID != 0) {
+                    html_Mensajes += "<tr id= 'TMensajes_" + ArrayMensajes[itemArray].Mensajes_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArrayMensajes[itemArray].Mensajes_ID + "')\"></img><span>Eliminar Mensaje</span></span></td><td>" + ArrayMensajes[itemArray].Mensajes_ID + "</td><td>" + ArrayMensajes[itemArray].Nombre + "</td><td>" + ArrayMensajes[itemArray].Descripcion + "</td></tr>";
+                }
+            }
             break;
     }
 
-}
-
-//grid con el boton eliminar
-function Tabla_eliminar() {
-    var html_Mensajes = "<table id='TMensajes' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Codigo</th><th>Nombre</th><th>Descripción</th></tr></thead><tbody>";
-    for (itemArray in ArrayMensajes) {
-        if (ArrayMensajes[itemArray].Mensajes_ID != 0) {
-            html_Mensajes += "<tr id= 'TMensajes_" + ArrayMensajes[itemArray].Mensajes_ID + "'><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar('" + ArrayMensajes[itemArray].Mensajes_ID + "')\"></input></td><td>" + ArrayMensajes[itemArray].Mensajes_ID + "</td><td>" + ArrayMensajes[itemArray].Nombre + "</td><td>" + ArrayMensajes[itemArray].Descripcion + "</td></tr>";
-        }
-    }
     html_Mensajes += "</tbody></table>";
     $("#container_TMensajes").html("");
     $("#container_TMensajes").html(html_Mensajes);
 
-    $(".Eliminar").click(function () {
-    });
-
     $("#TMensajes").dataTable({
-       "bJQueryUI": true, "iDisplayLength": 1000,
+        "bJQueryUI": true, "iDisplayLength": 1000,
         "bDestroy": true
     });
 }
@@ -225,27 +255,6 @@ function Eliminar(index_Mensajes) {
         }
     }
 
-}
-
-//grid con el boton editar
-function Tabla_modificar() {
-    var html_Mensajes = "<table id='TMensajes' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Codigo</th><th>Nombre</th><th>Descripción</th></tr></thead><tbody>";
-    for (itemArray in ArrayMensajes) {
-        if (ArrayMensajes[itemArray].Mensajes_ID != 0) {
-            html_Mensajes += "<tr id= 'TMensajes_" + ArrayMensajes[itemArray].Mensajes_ID + "'><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Editar('" + ArrayMensajes[itemArray].Mensajes_ID + "')\"></input></td><td>" + ArrayMensajes[itemArray].Mensajes_ID + "</td><td>" + ArrayMensajes[itemArray].Nombre + "</td><td>" + ArrayMensajes[itemArray].Descripcion + "</td></tr>";
-        }
-    }
-    html_Mensajes += "</tbody></table>";
-    $("#container_TMensajes").html("");
-    $("#container_TMensajes").html(html_Mensajes);
-
-    $(".Editar").click(function () {
-    });
-
-    $("#TMensajes").dataTable({
-       "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
 }
 
 // muestra el registro a editar
@@ -264,24 +273,6 @@ function Editar(index_Mensajes) {
             $("#Btnguardar").attr("value", "Actualizar");
         }
     }
-}
-
-//grid sin botones para ver resultado
-function Tabla_consulta() {
-    var html_Mensajes = "<table id='TMensajes' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Codigo</th><th>Nombre</th><th>Descripción</th></tr></thead><tbody>";
-    for (itemArray in ArrayMensajes) {
-        if (ArrayMensajes[itemArray].Mensajes_ID != 0) {
-            html_Mensajes += "<tr id= 'TMensajes_" + ArrayMensajes[itemArray].Mensajes_ID + "'><td>" + ArrayMensajes[itemArray].Mensajes_ID + "</td><td>" + ArrayMensajes[itemArray].Nombre + "</td><td>" + ArrayMensajes[itemArray].Descripcion + "</td></tr>";
-        }
-    }
-    html_Mensajes += "</tbody></table>";
-    $("#container_TMensajes").html("");
-    $("#container_TMensajes").html(html_Mensajes);
-
-    $("#TMensajes").dataTable({
-       "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
 }
 
 //evento del boton salir

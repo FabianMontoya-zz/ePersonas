@@ -9,20 +9,29 @@ var editID;
 
 //Evento load JS
 $(document).ready(function () {
+
+    $("#Marco_trabajo_Form").css("height", "490px");
+    $("#container_TMonedaCot").css("height", "380px");
+
+    /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
+    Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
+    Ocultar_Errores();
+    Ocultar_Tablas();
+    /*================== FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN ==============*/
+
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_Moneda('Moneda');
 
-    $("#ESelect").css("display", "none");
-    $("#ImgID").css("display", "none");
-    $("#Img2").css("display", "none");
-    $("#Img1").css("display", "none");
-    $("#DE").css("display", "none");
-    $("#SE").css("display", "none");
-    $("#WA").css("display", "none");
+    $(function () {
+        $("#Txt_Fecha").datepicker({ dateFormat: 'yy-mm-dd' });
+    });
 
+});
 
-    $("#TablaDatos_D").css("display", "none");
-    $("#TablaConsulta").css("display", "none");
+//funcion para las ventanas emergentes
+function Ventanas_Emergentes() {
+
+    Load_Charge_Sasif(); //Carga de "SasifMaster.js" el Control de Carga
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
@@ -37,11 +46,27 @@ $(document).ready(function () {
         modal: true
     });
 
-    $(function () {
-        $("#Txt_Fecha").datepicker({ dateFormat: 'yy-mm-dd' });
-    });
+}
 
-});
+//Función que oculta todas las IMG de los errores en pantalla
+function Ocultar_Errores() {
+    ResetError();
+    $("#ESelect").css("display", "none");
+    $("#ImgID").css("display", "none");
+    $("#Img2").css("display", "none");
+    $("#Img1").css("display", "none");
+    $("#DE").css("display", "none");
+    $("#SE").css("display", "none");
+    $("#WA").css("display", "none");
+
+    /*Los demás se ocultan en la SASIF Master*/
+}
+
+//Función que oculta las tablas
+function Ocultar_Tablas() {
+    $("#TablaDatos_D").css("display", "none");
+    $("#TablaConsulta").css("display", "none");
+}
 
 
 //habilita el panel de crear o consulta
@@ -94,6 +119,8 @@ function BtnConsulta() {
     var ValidateSelect = ValidarDroplist();
     var opcion;
 
+    OpenControl(); //Abrimos el load de espera con el logo
+
     if (ValidateSelect == 1) {
         filtro = "N";
         opcion = "ALL";
@@ -125,6 +152,7 @@ function BtnCrear() {
 
 //elimina de la BD
 function BtnElimina() {
+    OpenControl(); //Abrimos el load de espera con el logo
     transacionAjax_MonedaCot_delete("elimina");
 }
 
@@ -184,37 +212,41 @@ function ValidarDroplist() {
 // crea la tabla en el cliente
 function Table_MonedaCot() {
 
+    var html_MonedaCot;
+
     switch (estado) {
 
         case "buscar":
-            Tabla_consulta();
+            html_MonedaCot = "<table id='TMonedaCot' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Codigo</th><th>Fecha</th><th>Valor</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
+            for (itemArray in ArrayMonedaCot) {
+                if (ArrayMonedaCot[itemArray].MonedaCot_ID != 0) {
+                    html_MonedaCot += "<tr id= 'TMonedaCot_" + ArrayMonedaCot[itemArray].MonedaCot_ID + "'><td>" + ArrayMonedaCot[itemArray].MonedaCot_ID + " - " + ArrayMonedaCot[itemArray].DescripMoneda + "</td><td>" + valFecha(ArrayMonedaCot[itemArray].Fecha) + "</td><td>" + ArrayMonedaCot[itemArray].ValorCotizacion + "</td><td>" + ArrayMonedaCot[itemArray].UsuarioCreacion + "</td><td>" + ArrayMonedaCot[itemArray].FechaCreacion + "</td><td>" + ArrayMonedaCot[itemArray].UsuarioActualizacion + "</td><td>" + ArrayMonedaCot[itemArray].FechaActualizacion + "</td></tr>";
+                }
+            }
             break;
 
         case "modificar":
-            Tabla_modificar();
+            html_MonedaCot = "<table id='TMonedaCot' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Codigo</th><th>Fecha</th><th>Valor</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
+            for (itemArray in ArrayMonedaCot) {
+                if (ArrayMonedaCot[itemArray].MonedaCot_ID != 0) {
+                    html_MonedaCot += "<tr id= 'TMonedaCot_" + ArrayMonedaCot[itemArray].MonedaCot_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + ArrayMonedaCot[itemArray].MonedaCot_ID + "')\"></img><span>Editar Cotización Moneda</span></span></td><td>" + ArrayMonedaCot[itemArray].MonedaCot_ID + " - " + ArrayMonedaCot[itemArray].DescripMoneda + "</td><td>" + valFecha(ArrayMonedaCot[itemArray].Fecha) + "</td><td>" + ArrayMonedaCot[itemArray].ValorCotizacion + "</td><td>" + ArrayMonedaCot[itemArray].UsuarioCreacion + "</td><td>" + ArrayMonedaCot[itemArray].FechaCreacion + "</td><td>" + ArrayMonedaCot[itemArray].UsuarioActualizacion + "</td><td>" + ArrayMonedaCot[itemArray].FechaActualizacion + "</td></tr>";
+                }
+            }
             break;
 
         case "eliminar":
-            Tabla_eliminar();
+            html_MonedaCot = "<table id='TMonedaCot' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Codigo</th><th>Fecha</th><th>Valor</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
+            for (itemArray in ArrayMonedaCot) {
+                if (ArrayMonedaCot[itemArray].MonedaCot_ID != 0) {
+                    html_MonedaCot += "<tr id= 'TMonedaCot_" + ArrayMonedaCot[itemArray].MonedaCot_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArrayMonedaCot[itemArray].MonedaCot_ID + "')\"></img><span>Eliminar Cotización Moneda</span></span></td><td>" + ArrayMonedaCot[itemArray].MonedaCot_ID + " - " + ArrayMonedaCot[itemArray].DescripMoneda + "</td><td>" + valFecha(ArrayMonedaCot[itemArray].Fecha) + "</td><td>" + ArrayMonedaCot[itemArray].ValorCotizacion + "</td><td>" + ArrayMonedaCot[itemArray].UsuarioCreacion + "</td><td>" + ArrayMonedaCot[itemArray].FechaCreacion + "</td><td>" + ArrayMonedaCot[itemArray].UsuarioActualizacion + "</td><td>" + ArrayMonedaCot[itemArray].FechaActualizacion + "</td></tr>";
+                }
+            }
             break;
     }
 
-}
-
-//grid con el boton eliminar
-function Tabla_eliminar() {
-    var html_MonedaCot = "<table id='TMonedaCot' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Codigo</th><th>Fecha</th><th>Valor</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
-    for (itemArray in ArrayMonedaCot) {
-        if (ArrayMonedaCot[itemArray].MonedaCot_ID != 0) {
-            html_MonedaCot += "<tr id= 'TMonedaCot_" + ArrayMonedaCot[itemArray].MonedaCot_ID + "'><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar('" + ArrayMonedaCot[itemArray].MonedaCot_ID + "')\"></input></td><td>" + ArrayMonedaCot[itemArray].MonedaCot_ID + " - " + ArrayMonedaCot[itemArray].DescripMoneda + "</td><td>" + valFecha(ArrayMonedaCot[itemArray].Fecha) + "</td><td>" + ArrayMonedaCot[itemArray].ValorCotizacion+ "</td><td>" + ArrayMonedaCot[itemArray].UsuarioCreacion + "</td><td>" + ArrayMonedaCot[itemArray].FechaCreacion + "</td><td>" + ArrayMonedaCot[itemArray].UsuarioActualizacion + "</td><td>" + ArrayMonedaCot[itemArray].FechaActualizacion + "</td></tr>";
-        }
-    }
     html_MonedaCot += "</tbody></table>";
     $("#container_TMonedaCot").html("");
     $("#container_TMonedaCot").html(html_MonedaCot);
-
-    $(".Eliminar").click(function () {
-    });
 
     $("#TMonedaCot").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,
@@ -233,27 +265,6 @@ function Eliminar(index_MonedaCot) {
         }
     }
 
-}
-
-//grid con el boton editar
-function Tabla_modificar() {
-    var html_MonedaCot = "<table id='TMonedaCot' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Codigo</th><th>Fecha</th><th>Valor</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
-    for (itemArray in ArrayMonedaCot) {
-        if (ArrayMonedaCot[itemArray].MonedaCot_ID != 0) {
-            html_MonedaCot += "<tr id= 'TMonedaCot_" + ArrayMonedaCot[itemArray].MonedaCot_ID + "'><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Editar('" + ArrayMonedaCot[itemArray].MonedaCot_ID + "')\"></input></td><td>" + ArrayMonedaCot[itemArray].MonedaCot_ID + " - " + ArrayMonedaCot[itemArray].DescripMoneda + "</td><td>" + valFecha(ArrayMonedaCot[itemArray].Fecha) + "</td><td>" + ArrayMonedaCot[itemArray].ValorCotizacion+ "</td><td>" + ArrayMonedaCot[itemArray].UsuarioCreacion + "</td><td>" + ArrayMonedaCot[itemArray].FechaCreacion + "</td><td>" + ArrayMonedaCot[itemArray].UsuarioActualizacion + "</td><td>" + ArrayMonedaCot[itemArray].FechaActualizacion + "</td></tr>";
-        }
-    }
-    html_MonedaCot += "</tbody></table>";
-    $("#container_TMonedaCot").html("");
-    $("#container_TMonedaCot").html(html_MonedaCot);
-
-    $(".Editar").click(function () {
-    });
-
-    $("#TMonedaCot").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
 }
 
 // muestra el registro a editar
@@ -275,24 +286,6 @@ function Editar(index_MonedaCot) {
 
         }
     }
-}
-
-//grid sin botones para ver resultado
-function Tabla_consulta() {
-    var html_MonedaCot = "<table id='TMonedaCot' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Codigo</th><th>Fecha</th><th>Valor</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
-    for (itemArray in ArrayMonedaCot) {
-        if (ArrayMonedaCot[itemArray].MonedaCot_ID != 0) {
-            html_MonedaCot += "<tr id= 'TMonedaCot_" + ArrayMonedaCot[itemArray].MonedaCot_ID + "'><td>" + ArrayMonedaCot[itemArray].MonedaCot_ID + " - " + ArrayMonedaCot[itemArray].DescripMoneda + "</td><td>" + valFecha(ArrayMonedaCot[itemArray].Fecha) + "</td><td>" + ArrayMonedaCot[itemArray].ValorCotizacion+ "</td><td>" + ArrayMonedaCot[itemArray].UsuarioCreacion + "</td><td>" + ArrayMonedaCot[itemArray].FechaCreacion + "</td><td>" + ArrayMonedaCot[itemArray].UsuarioActualizacion + "</td><td>" + ArrayMonedaCot[itemArray].FechaActualizacion + "</td></tr>";
-        }
-    }
-    html_MonedaCot += "</tbody></table>";
-    $("#container_TMonedaCot").html("");
-    $("#container_TMonedaCot").html(html_MonedaCot);
-
-    $("#TMonedaCot").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
 }
 
 //evento del boton salir

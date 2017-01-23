@@ -18,7 +18,7 @@ $(document).ready(function () {
     Ocultar_Tablas();
     /*================== FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN ==============*/
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
-    
+
 });
 
 //Función que oculta todas las IMG de los errores en pantalla
@@ -40,6 +40,8 @@ function Ocultar_Errores() {
 
 //funcion para las ventanas emergentes
 function Ventanas_Emergentes() {
+
+    Load_Charge_Sasif(); //Carga de "SasifMaster.js" el Control de Carga
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
@@ -219,10 +221,17 @@ function ValidarDroplist() {
 // crea la tabla en el cliente
 function Table_Festivo() {
 
+    var html_TFestivo
+
     switch (estado) {
 
         case "buscar":
-            Tabla_consulta();
+            html_TFestivo = "<table id='TFestivo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Año</th><th>Mes/Dia</th></tr></thead><tbody>";
+            for (itemArray in ArrayFestivo) {
+                if (ArrayFestivo[itemArray].Año != 0) {
+                    html_TFestivo += "<tr id= 'TFestivo_" + ArrayFestivo[itemArray].Year + "'><td>" + ArrayFestivo[itemArray].Year + "</td><td>" + ArrayFestivo[itemArray].StrMes + " / " + ArrayFestivo[itemArray].StrDia + "</td></tr>";
+                }
+            }
             break;
 
         case "modificar":
@@ -230,26 +239,17 @@ function Table_Festivo() {
             break;
 
         case "eliminar":
-            Tabla_eliminar();
+            html_TFestivo = "<table id='TFestivo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Año</th><th>Mes/Dia</th></tr></thead><tbody>";
+            for (itemArray in ArrayFestivo) {
+                if (ArrayFestivo[itemArray].Year != 0) {
+                    html_TFestivo += "<tr id= 'TFestivo_" + ArrayFestivo[itemArray].Year + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArrayFestivo[itemArray].Year + "','" + ArrayFestivo[itemArray].Mes_Dia + "')\"></img><span>Eliminar Festivos</span></span></td><td>" + ArrayFestivo[itemArray].Year + "</td><td>" + ArrayFestivo[itemArray].StrMes + " / " + ArrayFestivo[itemArray].StrDia + "</td></tr>";
+                }
+            }
             break;
-    }
-
-}
-
-//grid con el boton eliminar
-function Tabla_eliminar() {
-    var html_TFestivo = "<table id='TFestivo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Año</th><th>Mes/Dia</th></tr></thead><tbody>";
-    for (itemArray in ArrayFestivo) {
-        if (ArrayFestivo[itemArray].Year != 0) {
-            html_TFestivo += "<tr id= 'TFestivo_" + ArrayFestivo[itemArray].Year + "'><td><span class='cssToolTip_ver'><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar('" + ArrayFestivo[itemArray].Year + "','" + ArrayFestivo[itemArray].Mes_Dia + "')\"></input><span>Al presionar eliminara el registro</span></span></td><td>" + ArrayFestivo[itemArray].Year + "</td><td>" + ArrayFestivo[itemArray].StrMes + " / " + ArrayFestivo[itemArray].StrDia + "</td></tr>";
-        }
     }
     html_TFestivo += "</tbody></table>";
     $("#container_TFestivo").html("");
     $("#container_TFestivo").html(html_TFestivo);
-
-    $(".Eliminar").click(function () {
-    });
 
     $("#TFestivo").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,
@@ -274,12 +274,7 @@ function Eliminar(index_Festivo, index_dia) {
 
 //grid sin botones para ver resultado
 function Tabla_consulta() {
-    var html_TFestivo = "<table id='TFestivo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Año</th><th>Mes/Dia</th></tr></thead><tbody>";
-    for (itemArray in ArrayFestivo) {
-        if (ArrayFestivo[itemArray].Año != 0) {
-            html_TFestivo += "<tr id= 'TFestivo_" + ArrayFestivo[itemArray].Year + "'><td>" + ArrayFestivo[itemArray].Year + "</td><td>" + ArrayFestivo[itemArray].StrMes + " / " + ArrayFestivo[itemArray].StrDia + "</td></tr>";
-        }
-    }
+    
     html_TFestivo += "</tbody></table>";
     $("#container_TFestivo").html("");
     $("#container_TFestivo").html(html_TFestivo);
