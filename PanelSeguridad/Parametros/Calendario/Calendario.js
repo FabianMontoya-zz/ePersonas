@@ -91,6 +91,8 @@ function BtnConsulta() {
     var ValidateSelect = ValidarDroplist();
     var opcion;
 
+    OpenControl();
+
     if (ValidateSelect == 1) {
         filtro = "N";
         opcion = "ALL";
@@ -122,6 +124,7 @@ function BtnCrear() {
 
 //elimina de la BD
 function BtnElimina() {
+    OpenControl();
     transacionAjax_Calendario_delete("elimina");
 }
 
@@ -172,6 +175,7 @@ function HabilitarPanel(opcion) {
             Clear();
             estado = opcion;
             $("#Dialog_Calendar").dialog("open");
+            VerificarNIT("Select_EmpresaNit");
             break;
 
         case "buscar":

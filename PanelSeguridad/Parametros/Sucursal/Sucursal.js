@@ -11,7 +11,7 @@ var editNIT;
 $(document).ready(function () {
 
     $("#Marco_trabajo_Form").css("height", "490px");
-    $("#container_TCiclo").css("height", "380px");
+    $("#container_TSucursal").css("height", "380px");
 
     /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
     Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
@@ -111,7 +111,7 @@ function BtnConsulta() {
     var ValidateSelect = ValidarDroplist();
     var opcion;
 
-    //OpenContSucursal(); //Abrimos el load de espera con el logo
+    OpenControl(); //Abrimos el load de espera con el logo
 
     if (ValidateSelect == 1) {
         filtro = "N";
@@ -144,6 +144,7 @@ function BtnCrear() {
 
 //elimina de la BD
 function BtnElimina() {
+    OpenControl(); //Abrimos el load de espera con el logo
     $("#dialog_eliminar").dialog("close");
     transacionAjax_Sucursal_delete("elimina");
 }
@@ -204,37 +205,36 @@ function ValidarDroplist() {
 // crea la tabla en el cliente
 function Table_Sucursal() {
 
+    var html_TSucursal;
+
     switch (estado) {
 
         case "buscar":
-            Tabla_consulta();
+            html_TSucursal = "<table id='TSucursal' border='1'  cellpadding='1' cellspacing='1' style='width: 100%'><thead><tr><th>NIT Empresa</th><th>Código</th><th>Descripción</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
+            for (itemArray in ArraySucursales) {
+                html_TSucursal += "<tr id= 'TSucursal_" + ArraySucursales[itemArray].Index + "'><td>" + ArraySucursales[itemArray].Nit_ID + "</td><td>" + ArraySucursales[itemArray].Sucursal_ID + "</td><td>" + ArraySucursales[itemArray].Descripcion + "</td><td style='white-space: nowrap;'> " + ArraySucursales[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArraySucursales[itemArray].FechaCreacion + " </td><td style='white-space: nowrap;'> " + ArraySucursales[itemArray].UsuarioActualizacion + " </td><td  style='white-space: nowrap;'> " + ArraySucursales[itemArray].FechaActualizacion + " </td></tr>";
+            }
             break;
 
         case "modificar":
-            Tabla_modificar();
+            html_TSucursal = "<table id='TSucursal' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>NIT Empresa</th><th>Código</th><th>Descripción</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
+            for (itemArray in ArraySucursales) {
+                html_TSucursal += "<tr id= 'TSucursal_" + ArraySucursales[itemArray].Index + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + ArraySucursales[itemArray].Index + "')\"></img><span>Editar Sucursal</span></span></td><td>" + ArraySucursales[itemArray].Nit_ID + "</td><td>" + ArraySucursales[itemArray].Sucursal_ID + "</td><td style='white-space: nowrap;'>" + ArraySucursales[itemArray].Descripcion + "</td><td style='white-space: nowrap;'> " + ArraySucursales[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArraySucursales[itemArray].FechaCreacion + " </td><td style='white-space: nowrap;'> " + ArraySucursales[itemArray].UsuarioActualizacion + " </td><td  style='white-space: nowrap;'> " + ArraySucursales[itemArray].FechaActualizacion + " </td></tr>";
+            }
             break;
 
         case "eliminar":
-            Tabla_eliminar();
+            html_TSucursal = "<table id='TSucursal' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>NIT Empresa</th><th>Código</th><th>Descripción</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
+            for (itemArray in ArraySucursales) {
+                if (ArraySucursales[itemArray].Estado != 2) {
+                    html_TSucursal += "<tr id= 'TSucursal_" + ArraySucursales[itemArray].Index + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArraySucursales[itemArray].Index + "')\"></img><span>Eliminar Sucursal</span></span></td><td>" + ArraySucursales[itemArray].Nit_ID + "</td><td>" + ArraySucursales[itemArray].Sucursal_ID + "</td><td style='white-space: nowrap;'>" + ArraySucursales[itemArray].Descripcion + "</td><td style='white-space: nowrap;'> " + ArraySucursales[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArraySucursales[itemArray].FechaCreacion + " </td><td style='white-space: nowrap;'> " + ArraySucursales[itemArray].UsuarioActualizacion + " </td><td  style='white-space: nowrap;'> " + ArraySucursales[itemArray].FechaActualizacion + " </td></tr>";
+                }
+            }
             break;
-    }
-
-}
-
-//grid con el boton eliminar
-function Tabla_eliminar() {
-    var html_TSucursal = "<table id='TSucursal' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>NIT Empresa</th><th>Código</th><th>Descripción</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
-    for (itemArray in ArraySucursales) {
-        if (ArraySucursales[itemArray].Estado != 2) {
-            html_TSucursal += "<tr id= 'TSucursal_" + ArraySucursales[itemArray].Index + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArraySucursales[itemArray].Index + "')\"></img><span>Eliminar Perfil</span></span></td><td>" + ArraySucursales[itemArray].Nit_ID + "</td><td>" + ArraySucursales[itemArray].Sucursal_ID + "</td><td style='white-space: nowrap;'>" + ArraySucursales[itemArray].Descripcion + "</td><td style='white-space: nowrap;'> " + ArraySucursales[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArraySucursales[itemArray].FechaCreacion + " </td><td style='white-space: nowrap;'> " + ArraySucursales[itemArray].UsuarioActualizacion + " </td><td  style='white-space: nowrap;'> " + ArraySucursales[itemArray].FechaActualizacion + " </td></tr>";
-        }
     }
     html_TSucursal += "</tbody></table>";
     $("#container_TSucursal").html("");
     $("#container_TSucursal").html(html_TSucursal);
-
-    $(".Eliminar").click(function () {
-    });
 
     $("#TSucursal").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,
@@ -254,25 +254,6 @@ function Eliminar(index_Sucursal) {
         }
     }
 
-}
-
-//grid con el boton editar
-function Tabla_modificar() {
-    var html_TSucursal = "<table id='TSucursal' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>NIT Empresa</th><th>Código</th><th>Descripción</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
-    for (itemArray in ArraySucursales) {
-        html_TSucursal += "<tr id= 'TSucursal_" + ArraySucursales[itemArray].Index + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + ArraySucursales[itemArray].Index + "')\"></img><span>Editar Perfil</span></span></td><td>" + ArraySucursales[itemArray].Nit_ID + "</td><td>" + ArraySucursales[itemArray].Sucursal_ID + "</td><td style='white-space: nowrap;'>" + ArraySucursales[itemArray].Descripcion + "</td><td style='white-space: nowrap;'> " + ArraySucursales[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArraySucursales[itemArray].FechaCreacion + " </td><td style='white-space: nowrap;'> " + ArraySucursales[itemArray].UsuarioActualizacion + " </td><td  style='white-space: nowrap;'> " + ArraySucursales[itemArray].FechaActualizacion + " </td></tr>";
-    }
-    html_TSucursal += "</tbody></table>";
-    $("#container_TSucursal").html("");
-    $("#container_TSucursal").html(html_TSucursal);
-
-    $(".Editar").click(function () {
-    });
-
-    $("#TSucursal").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
 }
 
 // muestra el registro a editar
@@ -296,22 +277,6 @@ function Editar(index_Sucursal) {
     }
 }
 
-//grid sin botones para ver resultado
-function Tabla_consulta() {
-    var html_TSucursal = "<table id='TSucursal' border='1'  cellpadding='1' cellspacing='1' style='width: 100%'><thead><tr><th>NIT Empresa</th><th>Código</th><th>Descripción</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
-    for (itemArray in ArraySucursales) {
-        html_TSucursal += "<tr id= 'TSucursal_" + ArraySucursales[itemArray].Index + "'><td>" + ArraySucursales[itemArray].Nit_ID + "</td><td>" + ArraySucursales[itemArray].Sucursal_ID + "</td><td>" + ArraySucursales[itemArray].Descripcion + "</td><td style='white-space: nowrap;'> " + ArraySucursales[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArraySucursales[itemArray].FechaCreacion + " </td><td style='white-space: nowrap;'> " + ArraySucursales[itemArray].UsuarioActualizacion + " </td><td  style='white-space: nowrap;'> " + ArraySucursales[itemArray].FechaActualizacion + " </td></tr>";
-    }
-    html_TSucursal += "</tbody></table>";
-    $("#container_TSucursal").html("");
-    $("#container_TSucursal").html(html_TSucursal);
-
-    $("#TSucursal").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
-}
-
 //evento del boton salir
 function x() {
     $("#dialog").dialog("close");
@@ -326,7 +291,7 @@ function Clear() {
     $("#TxtDescription").val("");
     $("#TxtSigla").val("");
     $("#TxtRead").val("");
-    $("#DDLColumns").val("-1");
+    $("#DDLColumns").val("-1").trigger("chosen:updated");
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/

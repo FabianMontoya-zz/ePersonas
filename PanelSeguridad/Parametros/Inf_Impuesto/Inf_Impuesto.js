@@ -28,6 +28,10 @@ var D_String_Contacto;
 
 //Evento load JS
 $(document).ready(function () {
+
+    $("#Marco_trabajo_Form").css("height", "490px");
+    $("#container_TInf_Impuesto").css("height", "380px");
+
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_Pais('Pais');
     transacionAjax_Impuesto('Impuesto');
@@ -152,10 +156,16 @@ function Change_Select_Nit() {
 
         var TD_ID = this.value;
         $('#Select_Cliente_H').empty();
-        transacionAjax_Cliente_H('Cliente_H', TD_ID);
-
+        TransaccionesSegunNIT(TD_ID);
     });
 
+}
+
+function TransaccionesSegunNIT(index_NIT_ID) {
+    if (index_NIT_ID != "-1") {
+       
+        transacionAjax_Cliente_H('Cliente_H', index_NIT_ID);
+    }
 }
 
 //carga las vistas del hijo cliente
@@ -195,6 +205,13 @@ function HabilitarPanel(opcion) {
                     $("#Td_P_Descrip").html(SplitPais[1]);
 
                 }
+            }
+            console.log("aa");
+            var OnlyEmpresa = VerificarNIT("Select_Cliente");
+
+            if (OnlyEmpresa == true) {
+                TransaccionesSegunNIT($("#Select_Cliente").val());
+                console.log("aa..");
             }
 
             break;
@@ -236,6 +253,8 @@ function BtnConsulta() {
     var ValidateSelect = ValidarDroplist();
     var opcion;
 
+    OpenControl(); //Abrimos el load de espera con el logo
+
     if (ValidateSelect == 1) {
         filtro = "N";
         opcion = "ALL";
@@ -264,6 +283,7 @@ function BtnCrear() {
 
 //elimina de la BD
 function BtnElimina() {
+    OpenControl(); //Abrimos el load de espera con el logo
     transacionAjax_Inf_Impuesto_delete("elimina");
 }
 

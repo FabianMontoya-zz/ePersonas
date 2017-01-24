@@ -195,37 +195,41 @@ function ValidarDroplist() {
 // crea la tabla en el cliente
 function Table_TP_Leasing() {
 
+    var html_TP_Leasing;
+
     switch (estado) {
 
         case "buscar":
-            Tabla_consulta();
+            html_TP_Leasing = "<table id='TTP_Leasing' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Codigo</th><th>Descripción</th></tr></thead><tbody>";
+            for (itemArray in ArrayTP_Leasing) {
+                if (ArrayTP_Leasing[itemArray].STP_Leasing_ID != 0) {
+                    html_TP_Leasing += "<tr id= 'TTP_Leasing_" + ArrayTP_Leasing[itemArray].STP_Leasing_ID + "'><td>" + ArrayTP_Leasing[itemArray].STP_Leasing_ID + "</td><td>" + ArrayTP_Leasing[itemArray].Descripcion + "</td></tr>";
+                }
+            }
             break;
 
         case "modificar":
-            Tabla_modificar();
+            html_TP_Leasing = "<table id='TTP_Leasing' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Codigo</th><th>Descripción</th></tr></thead><tbody>";
+            for (itemArray in ArrayTP_Leasing) {
+                if (ArrayTP_Leasing[itemArray].STP_Leasing_ID != 0) {
+                    html_TP_Leasing += "<tr id= 'TTP_Leasing_" + ArrayTP_Leasing[itemArray].STP_Leasing_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + ArrayTP_Leasing[itemArray].STP_Leasing_ID + "')\"></img><span>Editar Sub Tipo Producto</span></span></td><td>" + ArrayTP_Leasing[itemArray].STP_Leasing_ID + "</td><td>" + ArrayTP_Leasing[itemArray].Descripcion + "</td></tr>";
+                }
+            }
             break;
 
         case "eliminar":
-            Tabla_eliminar();
+            html_TP_Leasing = "<table id='TTP_Leasing' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Codigo</th><th>Descripción</th></tr></thead><tbody>";
+            for (itemArray in ArrayTP_Leasing) {
+                if (ArrayTP_Leasing[itemArray].STP_Leasing_ID != 0) {
+                    html_TP_Leasing += "<tr id= 'TTP_Leasing_" + ArrayTP_Leasing[itemArray].STP_Leasing_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArrayTP_Leasing[itemArray].STP_Leasing_ID + "')\"></img><span>Eliminar Sub Tipo Producto</span></span></td><td>" + ArrayTP_Leasing[itemArray].STP_Leasing_ID + "</td><td>" + ArrayTP_Leasing[itemArray].Descripcion + "</td></tr>";
+                }
+            }
             break;
     }
 
-}
-
-//grid con el boton eliminar
-function Tabla_eliminar() {
-    var html_TP_Leasing = "<table id='TTP_Leasing' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Codigo</th><th>Descripción</th></tr></thead><tbody>";
-    for (itemArray in ArrayTP_Leasing) {
-        if (ArrayTP_Leasing[itemArray].STP_Leasing_ID != 0) {
-            html_TP_Leasing += "<tr id= 'TTP_Leasing_" + ArrayTP_Leasing[itemArray].STP_Leasing_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArrayTP_Leasing[itemArray].STP_Leasing_ID + "')\"></img><span>Eliminar Tipo Producto</span></span></td><td>" + ArrayTP_Leasing[itemArray].STP_Leasing_ID + "</td><td>" + ArrayTP_Leasing[itemArray].Descripcion + "</td></tr>";
-        }
-    }
     html_TP_Leasing += "</tbody></table>";
     $("#container_TSTP_Leasing").html("");
     $("#container_TSTP_Leasing").html(html_TP_Leasing);
-
-    $(".Eliminar").click(function () {
-    });
 
     $("#TTP_Leasing").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,
@@ -244,27 +248,6 @@ function Eliminar(index_TP_Leasing) {
         }
     }
 
-}
-
-//grid con el boton editar
-function Tabla_modificar() {
-    var html_TP_Leasing = "<table id='TTP_Leasing' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Codigo</th><th>Descripción</th></tr></thead><tbody>";
-    for (itemArray in ArrayTP_Leasing) {
-        if (ArrayTP_Leasing[itemArray].STP_Leasing_ID != 0) {
-            html_TP_Leasing += "<tr id= 'TTP_Leasing_" + ArrayTP_Leasing[itemArray].STP_Leasing_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + ArrayTP_Leasing[itemArray].STP_Leasing_ID + "')\"></img><span>Editar Perfil</span></span></td><td>" + ArrayTP_Leasing[itemArray].STP_Leasing_ID + "</td><td>" + ArrayTP_Leasing[itemArray].Descripcion + "</td></tr>";
-        }
-    }
-    html_TP_Leasing += "</tbody></table>";
-    $("#container_TSTP_Leasing").html("");
-    $("#container_TSTP_Leasing").html(html_TP_Leasing);
-
-    $(".Editar").click(function () {
-    });
-
-    $("#TTP_Leasing").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
 }
 
 // muestra el registro a editar
@@ -286,12 +269,7 @@ function Editar(index_TP_Leasing) {
 
 //grid sin botones para ver resultado
 function Tabla_consulta() {
-    var html_TP_Leasing = "<table id='TTP_Leasing' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Codigo</th><th>Descripción</th></tr></thead><tbody>";
-    for (itemArray in ArrayTP_Leasing) {
-        if (ArrayTP_Leasing[itemArray].STP_Leasing_ID != 0) {
-            html_TP_Leasing += "<tr id= 'TTP_Leasing_" + ArrayTP_Leasing[itemArray].STP_Leasing_ID + "'><td>" + ArrayTP_Leasing[itemArray].STP_Leasing_ID + "</td><td>" + ArrayTP_Leasing[itemArray].Descripcion + "</td></tr>";
-        }
-    }
+    
     html_TP_Leasing += "</tbody></table>";
     $("#container_TSTP_Leasing").html("");
     $("#container_TSTP_Leasing").html(html_TP_Leasing);

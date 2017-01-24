@@ -196,37 +196,41 @@ function ValidarDroplist() {
 // crea la tabla en el cliente
 function Table_Activo() {
 
+    var html_Activo;
+
     switch (estado) {
 
         case "buscar":
-            Tabla_consulta();
+            html_Activo = "<table id='TActivo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Codigo</th><th>Descripción</th></tr></thead><tbody>";
+            for (itemArray in ArrayActivo) {
+                if (ArrayActivo[itemArray].STActivo_ID != 0) {
+                    html_Activo += "<tr id= 'TActivo_" + ArrayActivo[itemArray].STActivo_ID + "'><td>" + ArrayActivo[itemArray].STActivo_ID + "</td><td>" + ArrayActivo[itemArray].Descripcion + "</td></tr>";
+                }
+            }
             break;
 
         case "modificar":
-            Tabla_modificar();
+            html_Activo = "<table id='TActivo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Codigo</th><th>Descripción</th></tr></thead><tbody>";
+            for (itemArray in ArrayActivo) {
+                if (ArrayActivo[itemArray].STActivo_ID != 0) {
+                    html_Activo += "<tr id= 'TActivo_" + ArrayActivo[itemArray].STActivo_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + ArrayActivo[itemArray].STActivo_ID + "')\"></img><span>Editar Sub Tipo activos</span></span></td><td>" + ArrayActivo[itemArray].STActivo_ID + "</td><td>" + ArrayActivo[itemArray].Descripcion + "</td></tr>";
+                }
+            }
             break;
 
         case "eliminar":
-            Tabla_eliminar();
+            html_Activo = "<table id='TActivo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Codigo</th><th>Descripción</th></tr></thead><tbody>";
+            for (itemArray in ArrayActivo) {
+                if (ArrayActivo[itemArray].STActivo_ID != 0) {
+                    html_Activo += "<tr id= 'TActivo_" + ArrayActivo[itemArray].STActivo_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArrayActivo[itemArray].STActivo_ID + "')\"></img><span>Eliminar Sub Tipo activos</span></span></td><td>" + ArrayActivo[itemArray].STActivo_ID + "</td><td>" + ArrayActivo[itemArray].Descripcion + "</td></tr>";
+                }
+            }
             break;
     }
 
-}
-
-//grid con el boton eliminar
-function Tabla_eliminar() {
-    var html_Activo = "<table id='TActivo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Codigo</th><th>Descripción</th></tr></thead><tbody>";
-    for (itemArray in ArrayActivo) {
-        if (ArrayActivo[itemArray].STActivo_ID != 0) {
-            html_Activo += "<tr id= 'TActivo_" + ArrayActivo[itemArray].STActivo_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArrayActivo[itemArray].STActivo_ID + "')\"></img><span>Eliminar Sub Tipo activos</span></span></td><td>" + ArrayActivo[itemArray].STActivo_ID + "</td><td>" + ArrayActivo[itemArray].Descripcion + "</td></tr>";
-        }
-    }
     html_Activo += "</tbody></table>";
     $("#container_TSActivo").html("");
     $("#container_TSActivo").html(html_Activo);
-
-    $(".Eliminar").click(function () {
-    });
 
     $("#TActivo").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,
@@ -247,27 +251,6 @@ function Eliminar(index_Activo) {
 
 }
 
-//grid con el boton editar
-function Tabla_modificar() {
-    var html_Activo = "<table id='TActivo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Codigo</th><th>Descripción</th></tr></thead><tbody>";
-    for (itemArray in ArrayActivo) {
-        if (ArrayActivo[itemArray].STActivo_ID != 0) {
-            html_Activo += "<tr id= 'TActivo_" + ArrayActivo[itemArray].STActivo_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + ArrayActivo[itemArray].STActivo_ID + "')\"></img><span>Editar Sub Tipo activos</span></span></td><td>" + ArrayActivo[itemArray].STActivo_ID + "</td><td>" + ArrayActivo[itemArray].Descripcion + "</td></tr>";
-        }
-    }
-    html_Activo += "</tbody></table>";
-    $("#container_TSActivo").html("");
-    $("#container_TSActivo").html(html_Activo);
-
-    $(".Editar").click(function () {
-    });
-
-    $("#TActivo").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
-}
-
 // muestra el registro a editar
 function Editar(index_Activo) {
 
@@ -283,24 +266,6 @@ function Editar(index_Activo) {
             $("#Btnguardar").attr("value", "Actualizar");
         }
     }
-}
-
-//grid sin botones para ver resultado
-function Tabla_consulta() {
-    var html_Activo = "<table id='TActivo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Codigo</th><th>Descripción</th></tr></thead><tbody>";
-    for (itemArray in ArrayActivo) {
-        if (ArrayActivo[itemArray].STActivo_ID != 0) {
-            html_Activo += "<tr id= 'TActivo_" + ArrayActivo[itemArray].STActivo_ID + "'><td>" + ArrayActivo[itemArray].STActivo_ID + "</td><td>" + ArrayActivo[itemArray].Descripcion + "</td></tr>";
-        }
-    }
-    html_Activo += "</tbody></table>";
-    $("#container_TSActivo").html("");
-    $("#container_TSActivo").html(html_Activo);
-
-    $("#TActivo").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
 }
 
 //evento del boton salir

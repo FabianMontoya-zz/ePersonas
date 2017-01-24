@@ -22,6 +22,7 @@ $(document).ready(function () {
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
 
     Change_Select_Nit();
+    //Change_Compara_Fecha("TxtFecha_Recibo", "TxtFecha_Retiro");
 
 });
 
@@ -114,7 +115,7 @@ function BtnConsulta() {
     var ValidateSelect = ValidarDroplist();
     var opcion;
 
-    //OpenContCiclo(); //Abrimos el load de espera con el logo
+    OpenControl(); //Abrimos el load de espera con el logo
 
     if (ValidateSelect == 1) {
         filtro = "N";
@@ -147,6 +148,7 @@ function BtnCrear() {
 
 //elimina de la BD
 function BtnElimina() {
+    OpenControl(); //Abrimos el load de espera con el logo
     $("#dialog_eliminar").dialog("close");
     transacionAjax_Ciclo_delete("elimina");
 }
@@ -216,37 +218,37 @@ function ValidarDroplist() {
 // crea la tabla en el cliente
 function Table_Ciclo() {
 
+    var html_TCiclo;
+
     switch (estado) {
 
         case "buscar":
-            Tabla_consulta();
+            html_TCiclo = "<table id='TCiclo' border='1'  cellpadding='1' cellspacing='1' style='width: 100%'><thead><tr><th>Código</th><th>Descripción</th><th>Fecha de Corte</th><th>Fecha de Pago</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
+            for (itemArray in ArrayCiclo) {
+                html_TCiclo += "<tr id= 'TCiclo_" + ArrayCiclo[itemArray].Index + "'><td>" + ArrayCiclo[itemArray].ID_Ciclo + "</td><td>" + ArrayCiclo[itemArray].Descripcion + "</td><td>" + ArrayCiclo[itemArray].Fecha_Corte + "</td><td>" + ArrayCiclo[itemArray].Fecha_Pago + "</td><td style='white-space: nowrap;'> " + ArrayCiclo[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArrayCiclo[itemArray].FechaCreacion + " </td><td style='white-space: nowrap;'> " + ArrayCiclo[itemArray].UsuarioActualizacion + " </td><td  style='white-space: nowrap;'> " + ArrayCiclo[itemArray].FechaActualizacion + " </td></tr>";
+            }
             break;
 
         case "modificar":
-            Tabla_modificar();
+            html_TCiclo = "<table id='TCiclo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Código</th><th>Descripción</th><th>Fecha de Corte</th><th>Fecha de Pago</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
+            for (itemArray in ArrayCiclo) {
+                html_TCiclo += "<tr id= 'TCiclo_" + ArrayCiclo[itemArray].Index + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + ArrayCiclo[itemArray].Index + "')\"></img><span>Editar Ciclo</span></span></td><td>" + ArrayCiclo[itemArray].ID_Ciclo + "</td><td style='white-space: nowrap;'>" + ArrayCiclo[itemArray].Descripcion + "</td><td style='white-space: nowrap;'>" + ArrayCiclo[itemArray].Fecha_Corte + "</td><td style='white-space: nowrap;'>" + ArrayCiclo[itemArray].Fecha_Pago + "</td><td style='white-space: nowrap;'> " + ArrayCiclo[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArrayCiclo[itemArray].FechaCreacion + " </td><td style='white-space: nowrap;'> " + ArrayCiclo[itemArray].UsuarioActualizacion + " </td><td  style='white-space: nowrap;'> " + ArrayCiclo[itemArray].FechaActualizacion + " </td></tr>";
+            }
             break;
 
         case "eliminar":
-            Tabla_eliminar();
+            html_TCiclo = "<table id='TCiclo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Código</th><th>Descripción</th><th>Fecha de Corte</th><th>Fecha de Pago</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
+            for (itemArray in ArrayCiclo) {
+                if (ArrayCiclo[itemArray].Estado != 2) {
+                    html_TCiclo += "<tr id= 'TCiclo_" + ArrayCiclo[itemArray].Index + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArrayCiclo[itemArray].Index + "')\"></img><span>Eliminar Ciclo</span></span></td><td>" + ArrayCiclo[itemArray].ID_Ciclo + "</td><td style='white-space: nowrap;'>" + ArrayCiclo[itemArray].Descripcion + "</td><td style='white-space: nowrap;'>" + ArrayCiclo[itemArray].Fecha_Corte + "</td><td style='white-space: nowrap;'>" + ArrayCiclo[itemArray].Fecha_Pago + "</td><td style='white-space: nowrap;'> " + ArrayCiclo[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArrayCiclo[itemArray].FechaCreacion + " </td><td style='white-space: nowrap;'> " + ArrayCiclo[itemArray].UsuarioActualizacion + " </td><td  style='white-space: nowrap;'> " + ArrayCiclo[itemArray].FechaActualizacion + " </td></tr>";
+                }
+            }
             break;
     }
 
-}
-
-//grid con el boton eliminar
-function Tabla_eliminar() {
-    var html_TCiclo = "<table id='TCiclo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Código</th><th>Descripción</th><th>Fecha de Corte</th><th>Fecha de Pago</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
-    for (itemArray in ArrayCiclo) {
-        if (ArrayCiclo[itemArray].Estado != 2) {
-            html_TCiclo += "<tr id= 'TCiclo_" + ArrayCiclo[itemArray].Index + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArrayCiclo[itemArray].Index + "')\"></img><span>Eliminar Perfil</span></span></td><td>" + ArrayCiclo[itemArray].ID_Ciclo + "</td><td style='white-space: nowrap;'>" + ArrayCiclo[itemArray].Descripcion + "</td><td style='white-space: nowrap;'>" + ArrayCiclo[itemArray].Fecha_Corte + "</td><td style='white-space: nowrap;'>" + ArrayCiclo[itemArray].Fecha_Pago + "</td><td style='white-space: nowrap;'> " + ArrayCiclo[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArrayCiclo[itemArray].FechaCreacion + " </td><td style='white-space: nowrap;'> " + ArrayCiclo[itemArray].UsuarioActualizacion + " </td><td  style='white-space: nowrap;'> " + ArrayCiclo[itemArray].FechaActualizacion + " </td></tr>";
-        }
-    }
     html_TCiclo += "</tbody></table>";
     $("#container_TCiclo").html("");
     $("#container_TCiclo").html(html_TCiclo);
-
-    $(".Eliminar").click(function () {
-    });
 
     $("#TCiclo").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,
@@ -265,25 +267,6 @@ function Eliminar(index_Ciclo) {
         }
     }
 
-}
-
-//grid con el boton editar
-function Tabla_modificar() {
-    var html_TCiclo = "<table id='TCiclo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Código</th><th>Descripción</th><th>Fecha de Corte</th><th>Fecha de Pago</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
-    for (itemArray in ArrayCiclo) {
-        html_TCiclo += "<tr id= 'TCiclo_" + ArrayCiclo[itemArray].Index + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + ArrayCiclo[itemArray].Index + "')\"></img><span>Editar Perfil</span></span></td><td>" + ArrayCiclo[itemArray].ID_Ciclo + "</td><td style='white-space: nowrap;'>" + ArrayCiclo[itemArray].Descripcion + "</td><td style='white-space: nowrap;'>" + ArrayCiclo[itemArray].Fecha_Corte + "</td><td style='white-space: nowrap;'>" + ArrayCiclo[itemArray].Fecha_Pago + "</td><td style='white-space: nowrap;'> " + ArrayCiclo[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArrayCiclo[itemArray].FechaCreacion + " </td><td style='white-space: nowrap;'> " + ArrayCiclo[itemArray].UsuarioActualizacion + " </td><td  style='white-space: nowrap;'> " + ArrayCiclo[itemArray].FechaActualizacion + " </td></tr>";
-    }
-    html_TCiclo += "</tbody></table>";
-    $("#container_TCiclo").html("");
-    $("#container_TCiclo").html(html_TCiclo);
-
-    $(".Editar").click(function () {
-    });
-
-    $("#TCiclo").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
 }
 
 // muestra el registro a editar
@@ -306,23 +289,6 @@ function Editar(index_Ciclo) {
         }
     }
 }
-
-//grid sin botones para ver resultado
-function Tabla_consulta() {
-    var html_TCiclo = "<table id='TCiclo' border='1'  cellpadding='1' cellspacing='1' style='width: 100%'><thead><tr><th>Código</th><th>Descripción</th><th>Fecha de Corte</th><th>Fecha de Pago</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
-    for (itemArray in ArrayCiclo) {
-        html_TCiclo += "<tr id= 'TCiclo_" + ArrayCiclo[itemArray].Index + "'><td>" + ArrayCiclo[itemArray].ID_Ciclo + "</td><td>" + ArrayCiclo[itemArray].Descripcion + "</td><td>" + ArrayCiclo[itemArray].Fecha_Corte + "</td><td>" + ArrayCiclo[itemArray].Fecha_Pago + "</td><td style='white-space: nowrap;'> " + ArrayCiclo[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArrayCiclo[itemArray].FechaCreacion + " </td><td style='white-space: nowrap;'> " + ArrayCiclo[itemArray].UsuarioActualizacion + " </td><td  style='white-space: nowrap;'> " + ArrayCiclo[itemArray].FechaActualizacion + " </td></tr>";
-    }
-    html_TCiclo += "</tbody></table>";
-    $("#container_TCiclo").html("");
-    $("#container_TCiclo").html(html_TCiclo);
-
-    $("#TCiclo").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
-}
-
 //evento del boton salir
 function x() {
     $("#dialog").dialog("close");

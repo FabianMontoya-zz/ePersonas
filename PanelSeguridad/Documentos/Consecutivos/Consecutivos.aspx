@@ -96,7 +96,7 @@
                             </td>
                         </tr>
                     </table>
-                    <table id="Tabla_2" style="width: 700px; text-align: left;">
+                    <table id="Tabla_2" style="width: 950px; text-align: left;">
                         <tr>
                             <td style="width: 150px;" class="Label_Bold">Codigo
                             </td>
@@ -105,7 +105,7 @@
                                     <input type="text" id="Txt_ID" maxlength="5" class="Numeric" style="width: 70px;" />
                                     <span class="Spam_AN"></span></span>
                             </td>
-                            <td style="padding-bottom: 25px; width: 80px;">
+                            <td style="padding-bottom: 25px; width: 500px;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img2"
                                         src="../../images/error.png" />
@@ -113,7 +113,7 @@
                             </td>
                             <td class="Label_Bold" style="width: 80px;">Descripción
                             </td>
-                            <td style="width: 300px;">
+                            <td style="width: 100px;">
                                 <span class="cssToolTip_Form">
                                     <input type="text" id="TxtDescription" maxlength="50" style="width: 300px;" />
                                     <span class="Spam_AST"></span></span>

@@ -12,7 +12,7 @@ var editNit_ID;
 $(document).ready(function () {
     //Jhon
     $("#Marco_trabajo_Form").css("height", "490px");
-    $("#container_TPuertaAcceso").css("height", "380px");
+    $("#container_TTransacciones").css("height", "380px");
 
     /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
     Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
@@ -232,7 +232,7 @@ function Table_Transacciones() {
             var html_Transacciones = "<table id='TTransacciones' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Nit Empresa</th><th>Codigo</th><th>Descripción</th></tr></thead><tbody>";
             for (itemArray in ArrayTransacciones) {
                 if (ArrayTransacciones[itemArray].Transacciones_ID != 0) {
-                    html_Transacciones += "<tr id= 'TTransacciones_" + ArrayTransacciones[itemArray].Transacciones_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + ArrayTransacciones[itemArray].Nit_ID + "','" + ArrayTransacciones[itemArray].Transacciones_ID + "')\"></img><span>Editar Puerta Acceso</span></span></td><td>" + ArrayTransacciones[itemArray].Nit_ID + "</td><td>" + ArrayTransacciones[itemArray].Transacciones_ID + "</td><td>" + ArrayTransacciones[itemArray].Descripcion + "</td></tr>";
+                    html_Transacciones += "<tr id= 'TTransacciones_" + ArrayTransacciones[itemArray].Transacciones_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + ArrayTransacciones[itemArray].Nit_ID + "','" + ArrayTransacciones[itemArray].Transacciones_ID + "')\"></img><span>Editar Transacción</span></span></td><td>" + ArrayTransacciones[itemArray].Nit_ID + "</td><td>" + ArrayTransacciones[itemArray].Transacciones_ID + "</td><td>" + ArrayTransacciones[itemArray].Descripcion + "</td></tr>";
                 }
             }
             break;
@@ -241,7 +241,7 @@ function Table_Transacciones() {
             var html_Transacciones = "<table id='TTransacciones' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Nit Empresa</th><th>Codigo</th><th>Descripción</th></tr></thead><tbody>";
             for (itemArray in ArrayTransacciones) {
                 if (ArrayTransacciones[itemArray].Transacciones_ID != 0) {
-                    html_Transacciones += "<tr id= 'TTransacciones_" + ArrayTransacciones[itemArray].Transacciones_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArrayTransacciones[itemArray].Nit_ID + "','" + ArrayTransacciones[itemArray].Transacciones_ID + "')\"></img><span>Eliminar Puerta Acceso</span></span></td><td>" + ArrayTransacciones[itemArray].Nit_ID + "</td><td>" + ArrayTransacciones[itemArray].Transacciones_ID + "</td><td>" + ArrayTransacciones[itemArray].Descripcion + "</td></tr>";
+                    html_Transacciones += "<tr id= 'TTransacciones_" + ArrayTransacciones[itemArray].Transacciones_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArrayTransacciones[itemArray].Nit_ID + "','" + ArrayTransacciones[itemArray].Transacciones_ID + "')\"></img><span>Eliminar Transacción</span></span></td><td>" + ArrayTransacciones[itemArray].Nit_ID + "</td><td>" + ArrayTransacciones[itemArray].Transacciones_ID + "</td><td>" + ArrayTransacciones[itemArray].Descripcion + "</td></tr>";
                 }
             }
             break;
