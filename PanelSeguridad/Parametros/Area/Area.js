@@ -12,20 +12,27 @@ var editID;
 
 //Evento load JS
 $(document).ready(function () {
+
+    $("#Marco_trabajo_Form").css("height", "490px");
+    $("#container_TArea").css("height", "380px");
+
+    /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
+    Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
+    Ocultar_Errores();
+    Ocultar_Tablas();
+    /*================== FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN ==============*/
+
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_EmpresaNit('Cliente');
     transacionAjax_Seguridad('Seguridad');
 
-    $("#ESelect").css("display", "none");
-    $("#Img1").css("display", "none");
-    $("#Img2").css("display", "none");
-    $("#Img3").css("display", "none");
-    $("#DE").css("display", "none");
-    $("#SE").css("display", "none");
-    $("#WA").css("display", "none");
+    Change_Select_Nit();
+});
 
-    $("#TablaDatos_D").css("display", "none");
-    $("#TablaConsulta").css("display", "none");
+//funcion para las ventanas emergentes
+function Ventanas_Emergentes() {
+
+    Load_Charge_Sasif(); //Carga de "SasifMaster.js" el Control de Carga
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
@@ -40,18 +47,43 @@ $(document).ready(function () {
         modal: true
     });
 
-    Change_Select_Nit();
-});
+}
+
+//Función que oculta todas las IMG de los errores en pantalla
+function Ocultar_Errores() {
+    ResetError();
+    $("#ESelect").css("display", "none");
+    $("#Img1").css("display", "none");
+    $("#Img2").css("display", "none");
+    $("#Img3").css("display", "none");
+    $("#DE").css("display", "none");
+    $("#SE").css("display", "none");
+    $("#WA").css("display", "none");
+    /*Los demás se ocultan en la SASIF Master*/
+}
+
+//Función que oculta las tablas
+function Ocultar_Tablas() {
+    $("#TablaDatos_D").css("display", "none");
+    $("#TablaConsulta").css("display", "none");
+}
 
 
 //carga el combo de Area dependiente
 function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {
         index_ID = $(this).val();
-        $('#Select_AreaDepent').empty();
-        transacionAjax_AreaDepend('Area_Dep', index_ID);
+        TransaccionesSegunNIT(index_ID);
     });
 }
+
+function TransaccionesSegunNIT(index_ID) {
+    if (index_ID != "-1") {
+        $('#Select_AreaDepent').empty();
+        transacionAjax_AreaDepend('Area_Dep', index_ID);
+    }
+}
+
 
 //habilita el panel de crear o consulta
 function HabilitarPanel(opcion) {
@@ -68,6 +100,13 @@ function HabilitarPanel(opcion) {
             ResetError();
             Clear();
             estado = opcion;
+
+            var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+            if (OnlyEmpresa == true) {
+                TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+            }
+
             break;
 
         case "buscar":
@@ -105,6 +144,8 @@ function BtnConsulta() {
     var ValidateSelect = ValidarDroplist();
     var opcion;
 
+    OpenControl(); //Abrimos el load de espera con el logo
+
     if (ValidateSelect == 1) {
         filtro = "N";
         opcion = "ALL";
@@ -136,6 +177,7 @@ function BtnCrear() {
 
 //elimina de la BD
 function BtnElimina() {
+    OpenControl(); //Abrimos el load de espera con el logo
     transacionAjax_Area_delete("elimina");
 }
 
@@ -201,41 +243,58 @@ function Table_Area() {
     switch (estado) {
 
         case "buscar":
-            Tabla_consulta();
+            var html_Area = "<table id='TArea' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Empresa</th><th>Codigo</th><th>Descripción</th><th>Area Que Depende</th><th>Politica de Seguridad</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
+            for (itemArray in ArrayArea) {
+
+                if (ArrayArea[itemArray].Area_ID != 0) {
+                    var dependencia;
+
+                    if (ArrayArea[itemArray].AreaDependencia == 0)
+                        dependencia = "";
+                    else
+                        dependencia = ArrayArea[itemArray].DescripAreaDepen;
+
+                    html_Area += "<tr id= 'TArea_" + ArrayArea[itemArray].Area_ID + "'><td>" + ArrayArea[itemArray].Nit_ID + " - " + ArrayArea[itemArray].DescripEmpresa + "</td><td>" + ArrayArea[itemArray].Area_ID + "</td><td>" + ArrayArea[itemArray].Descripcion + "</td><td>" + dependencia + "</td><td>" + ArrayArea[itemArray].DescripPolitica + "</td><td>" + ArrayArea[itemArray].UsuarioCreacion + "</td><td>" + ArrayArea[itemArray].FechaCreacion + "</td><td>" + ArrayArea[itemArray].UsuarioActualizacion + "</td><td>" + ArrayArea[itemArray].FechaActualizacion + "</td></tr>";
+                }
+            }
             break;
 
         case "modificar":
-            Tabla_modificar();
+            var html_Area = "<table id='TArea' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Empresa</th><th>Codigo</th><th>Descripción</th><th>Area Que Depende</th><th>Politica de Seguridad</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
+            for (itemArray in ArrayArea) {
+                if (ArrayArea[itemArray].Area_ID != 0) {
+                    var dependencia;
+
+                    if (ArrayArea[itemArray].AreaDependencia == 0)
+                        dependencia = "";
+                    else
+                        dependencia = ArrayArea[itemArray].DescripAreaDepen;
+
+                    html_Area += "<tr id= 'TArea_" + ArrayArea[itemArray].Area_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + ArrayArea[itemArray].Nit_ID + "','" + ArrayArea[itemArray].Area_ID + "')\"></img><span>Editar Area</span></span></td><td>" + ArrayArea[itemArray].Nit_ID + " - " + ArrayArea[itemArray].DescripEmpresa + "</td><td>" + ArrayArea[itemArray].Area_ID + "</td><td>" + ArrayArea[itemArray].Descripcion + "</td><td>" + dependencia + "</td><td>" + ArrayArea[itemArray].DescripPolitica + "</td><td>" + ArrayArea[itemArray].UsuarioCreacion + "</td><td>" + ArrayArea[itemArray].FechaCreacion + "</td><td>" + ArrayArea[itemArray].UsuarioActualizacion + "</td><td>" + ArrayArea[itemArray].FechaActualizacion + "</td></tr>";
+                }
+            }
             break;
 
         case "eliminar":
-            Tabla_eliminar();
+            var html_Area = "<table id='TArea' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Empresa</th><th>Codigo</th><th>Descripción</th><th>Area Que Depende</th><th>Politica de Seguridad</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
+            for (itemArray in ArrayArea) {
+                if (ArrayArea[itemArray].Area_ID != 0) {
+                    var dependencia;
+
+                    if (ArrayArea[itemArray].AreaDependencia == 0)
+                        dependencia = "";
+                    else
+                        dependencia = ArrayArea[itemArray].DescripAreaDepen;
+
+                    html_Area += "<tr id= 'TArea_" + ArrayArea[itemArray].Area_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArrayArea[itemArray].Nit_ID + "','" + ArrayArea[itemArray].Area_ID + "')\"></img><span>Eliminar Area</span></td><td>" + ArrayArea[itemArray].Nit_ID + " - " + ArrayArea[itemArray].DescripEmpresa + "</td><td>" + ArrayArea[itemArray].Area_ID + "</td><td>" + ArrayArea[itemArray].Descripcion + "</td><td>" + dependencia + "</td><td>" + ArrayArea[itemArray].DescripPolitica + "</td><td>" + ArrayArea[itemArray].UsuarioCreacion + "</td><td>" + ArrayArea[itemArray].FechaCreacion + "</td><td>" + ArrayArea[itemArray].UsuarioActualizacion + "</td><td>" + ArrayArea[itemArray].FechaActualizacion + "</td></tr>";
+                }
+            }
             break;
     }
 
-}
-
-//grid con el boton eliminar
-function Tabla_eliminar() {
-    var html_Area = "<table id='TArea' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Empresa</th><th>Codigo</th><th>Descripción</th><th>Area Que Depende</th><th>Politica de Seguridad</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
-    for (itemArray in ArrayArea) {
-        if (ArrayArea[itemArray].Area_ID != 0) {
-            var dependencia;
-
-            if (ArrayArea[itemArray].AreaDependencia == 0)
-                dependencia = "";
-            else
-                dependencia = ArrayArea[itemArray].DescripAreaDepen;
-
-            html_Area += "<tr id= 'TArea_" + ArrayArea[itemArray].Area_ID + "'><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar('" + ArrayArea[itemArray].Nit_ID + "','" + ArrayArea[itemArray].Area_ID + "')\"></input></td><td>" + ArrayArea[itemArray].Nit_ID + " - " + ArrayArea[itemArray].DescripEmpresa + "</td><td>" + ArrayArea[itemArray].Area_ID + "</td><td>" + ArrayArea[itemArray].Descripcion + "</td><td>" + dependencia + "</td><td>" + ArrayArea[itemArray].DescripPolitica + "</td><td>" + ArrayArea[itemArray].UsuarioCreacion + "</td><td>" + ArrayArea[itemArray].FechaCreacion + "</td><td>" + ArrayArea[itemArray].UsuarioActualizacion + "</td><td>" + ArrayArea[itemArray].FechaActualizacion + "</td></tr>";
-        }
-    }
     html_Area += "</tbody></table>";
     $("#container_TArea").html("");
     $("#container_TArea").html(html_Area);
-
-    $(".Eliminar").click(function () {
-    });
 
     $("#TArea").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,
@@ -254,34 +313,6 @@ function Eliminar(index_Nit, index_Area) {
         }
     }
 
-}
-
-//grid con el boton editar
-function Tabla_modificar() {
-    var html_Area = "<table id='TArea' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Empresa</th><th>Codigo</th><th>Descripción</th><th>Area Que Depende</th><th>Politica de Seguridad</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
-    for (itemArray in ArrayArea) {
-        if (ArrayArea[itemArray].Area_ID != 0) {
-            var dependencia;
-
-            if (ArrayArea[itemArray].AreaDependencia == 0)
-                dependencia = "";
-            else
-                dependencia = ArrayArea[itemArray].DescripAreaDepen;
-
-            html_Area += "<tr id= 'TArea_" + ArrayArea[itemArray].Area_ID + "'><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Editar('" + ArrayArea[itemArray].Nit_ID + "','" + ArrayArea[itemArray].Area_ID + "')\"></input></td><td>" + ArrayArea[itemArray].Nit_ID + " - " + ArrayArea[itemArray].DescripEmpresa + "</td><td>" + ArrayArea[itemArray].Area_ID + "</td><td>" + ArrayArea[itemArray].Descripcion + "</td><td>" + dependencia + "</td><td>" + ArrayArea[itemArray].DescripPolitica + "</td><td>" + ArrayArea[itemArray].UsuarioCreacion + "</td><td>" + ArrayArea[itemArray].FechaCreacion + "</td><td>" + ArrayArea[itemArray].UsuarioActualizacion + "</td><td>" + ArrayArea[itemArray].FechaActualizacion + "</td></tr>";
-        }
-    }
-    html_Area += "</tbody></table>";
-    $("#container_TArea").html("");
-    $("#container_TArea").html(html_Area);
-
-    $(".Editar").click(function () {
-    });
-
-    $("#TArea").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
 }
 
 // muestra el registro a editar
@@ -328,32 +359,6 @@ function Editar(index_Nit, index_Area) {
 function ChargeDependencia(index) {
     $('#Select_AreaDepent').val(index);
     $('.C_Chosen').trigger('chosen:updated');
-}
-
-//grid sin botones para ver resultado
-function Tabla_consulta() {
-    var html_Area = "<table id='TArea' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Empresa</th><th>Codigo</th><th>Descripción</th><th>Area Que Depende</th><th>Politica de Seguridad</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
-    for (itemArray in ArrayArea) {
-
-        if (ArrayArea[itemArray].Area_ID != 0) {
-            var dependencia;
-
-            if (ArrayArea[itemArray].AreaDependencia == 0)
-                dependencia = "";
-            else
-                dependencia = ArrayArea[itemArray].DescripAreaDepen;
-
-            html_Area += "<tr id= 'TArea_" + ArrayArea[itemArray].Area_ID + "'><td>" + ArrayArea[itemArray].Nit_ID + " - " + ArrayArea[itemArray].DescripEmpresa + "</td><td>" + ArrayArea[itemArray].Area_ID + "</td><td>" + ArrayArea[itemArray].Descripcion + "</td><td>" + dependencia + "</td><td>" + ArrayArea[itemArray].DescripPolitica + "</td><td>" + ArrayArea[itemArray].UsuarioCreacion + "</td><td>" + ArrayArea[itemArray].FechaCreacion + "</td><td>" + ArrayArea[itemArray].UsuarioActualizacion + "</td><td>" + ArrayArea[itemArray].FechaActualizacion + "</td></tr>";
-        }
-    }
-    html_Area += "</tbody></table>";
-    $("#container_TArea").html("");
-    $("#container_TArea").html(html_Area);
-
-    $("#TArea").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
 }
 
 //evento del boton salir

@@ -20,7 +20,7 @@ Partial Public Class Sasif
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents head As Global.System.Web.UI.WebControls.ContentPlaceHolder
+    'Protected WithEvents head As Global.System.Web.UI.WebControls.ContentPlaceHolder
 
     '''<summary>
     '''Control form1.
@@ -29,7 +29,7 @@ Partial Public Class Sasif
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
+    'Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
 
     '''<summary>
     '''Control main.
@@ -38,5 +38,5 @@ Partial Public Class Sasif
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents main As Global.System.Web.UI.WebControls.ContentPlaceHolder
+    'Protected WithEvents main As Global.System.Web.UI.WebControls.ContentPlaceHolder
 End Class

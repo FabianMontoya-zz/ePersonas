@@ -79,7 +79,7 @@ function Capture_Tarjeta_ID() {
             $("#Complementos_c").css("display", "none");
         }
     });
-
+    
 }
 
 //verifica si vienen parametros por la ruta 
@@ -99,6 +99,7 @@ function ValidaParametros() {
 var TypeValida;
 //muestra el tipo de vista para el carge de niventario
 function ModalidadVista() {
+    
     switch (Nit_Proccess.length) {
         case 0:
             $("#Select_EmpresaNit").removeAttr("disabled");
@@ -110,6 +111,7 @@ function ModalidadVista() {
             $("#Select_EmpresaNit").attr("disabled", "disabled");
             break;
     }
+    
     $('.C_Chosen').trigger('chosen:updated');
 
     switch (Vigencia) {

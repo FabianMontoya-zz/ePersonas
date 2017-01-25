@@ -37,6 +37,12 @@ var StrConsecutivo;
 //Evento load JS
 $(document).ready(function () {
 
+    /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
+    Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
+    Ocultar_Errores();
+    Ocultar_Tablas();
+    /*==================FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN==============*/
+
     transaccionAjax_RutasOperacion('RUTAS_OPERACION');
     transaccionAjax_MClienteDep('MATRIX_CLIENTE_DEP');
     transaccionAjax_MContrato('MATRIX_CONTRATO');
@@ -48,6 +54,22 @@ $(document).ready(function () {
     Change_Select_Nit();
     CalFechaVencimiento();
 
+    var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+    if (OnlyEmpresa == true) {
+        console.log("A");
+        TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+    }
+
+    $(function () {
+        $("#TxtFinicial").datepicker({ dateFormat: 'yy-mm-dd' });
+    });
+
+});
+
+//Función que oculta todas las IMG de los errores en pantalla
+function Ocultar_Errores() {
+    ResetError();
     $("#ESelect").css("display", "none");
     $("#Img1").css("display", "none");
     $("#Img2").css("display", "none");
@@ -64,6 +86,12 @@ $(document).ready(function () {
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
     $("#WA").css("display", "none");
+}
+
+//funcion para las ventanas emergentes
+function Ventanas_Emergentes() {
+
+    Load_Charge_Sasif(); //Carga de "SasifMaster.js" el Control de Carga
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
@@ -89,23 +117,34 @@ $(document).ready(function () {
             background: "black"
         }
     });
+}
 
-    $(function () {
-        $("#TxtFinicial").datepicker({ dateFormat: 'yy-mm-dd' });
-    });
-
-});
+//Función que oculta las tablas
+function Ocultar_Tablas() {
+    $("#TablaDatos").css("display", "none");
+    $("#TablaConsulta").css("display", "none");
+}
 
 //carga los combos dependientes
 function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {
         var index_ID = $(this).val();
         Nit_ID_proccess = $(this).val();
+        TransaccionesSegunNIT(Nit_ID_proccess);
+    });
+}
+
+function TransaccionesSegunNIT(index_ID) {
+    if (index_ID != "-1") {
+        console.log("B");
+        console.log(index_ID);
         Charge_Combos_Depend_Nit(Matrix_ClienteDep, "Select_Persona", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Secuencia, "Select_Secuencia", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Contrato, "Select_Contrato", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Documento, "Select_Documento", index_ID, "");
-    });
+        console.log(Matrix_ClienteDep);
+        console.log(index_ID);
+    }
 }
 
 //calcula los dias de vencimiento

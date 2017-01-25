@@ -25,7 +25,7 @@ Public Class HuellasAjax
 
 
     Protected Sub Capturar()
-        Dim CapturaHuellas As New HuellasCapturaClass
+        'Dim CapturaHuellas As New HuellasCapturaClass
 
     End Sub
 

@@ -15,12 +15,12 @@ var editDocID;
 //Evento load JS
 $(document).ready(function () {
     $("#TablaDatos_D").css("padding-bottom", "20%");
-
+transacionAjax_EmpresaNit('Cliente');
     transaccionAjax_MPersona('MATRIX_PERSONA');
     transaccionAjax_MTarjeta('MATRIX_TARJETA');
     Change_Select_Nit();
     Change_Persona();
-    transacionAjax_EmpresaNit('Cliente');
+    
 
     $("#ESelect").css("display", "none");
     $("#Img1").css("display", "none");

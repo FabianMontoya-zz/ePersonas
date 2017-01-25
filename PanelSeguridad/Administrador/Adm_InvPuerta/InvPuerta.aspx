@@ -51,7 +51,7 @@
                     <div id="Complementos_c">
                         <table id="Tabla_1" style="width: 700px; text-align: left;">
                             <tr>
-                                <td style="width: 105px;" class="Label_Bold">Multi - Empresa
+                                <td style="width: 105px;" class="Label_Bold">NIT Empresa
                                 </td>
                                 <td>
                                     <select id="Select_EmpresaNit" class="C_Chosen">
@@ -67,7 +67,7 @@
                         </table>
                         <table id="Tabla_2" style="width: 700px; text-align: left;">
                             <tr id="TR_Vigencia">
-                                <td style="width: 88px;" class="Label_Bold">Vigencia
+                                <td style="width: 103px;" class="Label_Bold">Vigencia
                                 </td>
                                 <td style="width: 80px;">
                                     <select id="Select_CheckVigencia" class="C_Chosen" style="width: 80px;">
