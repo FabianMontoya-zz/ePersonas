@@ -16,7 +16,7 @@
     <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
-    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" /> <meta http-equiv="pragma" content="no-cache"/> <meta http-equiv="expires" content="0"/>
+    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
     <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
@@ -57,7 +57,7 @@
                         </td>
                         <td style="width: 65%;">
                             <span class="cssToolTip_Form">
-                                <input id="TxtRead" type="text" style="width: 60%; margin-left: 10%;"/>
+                                <input id="TxtRead" type="text" style="width: 60%; margin-left: 10%;" />
                                 <span class="Spam_AST"></span></span>
                         </td>
                         <td colspan="4" align="center" id="TD3" style="width: 20%;">
@@ -77,7 +77,7 @@
                 </table>
                 <div id="TablaDatos_D">
 
-                <table id="T_NIT" style="width: 90%; margin-left: 8%;">
+                    <table id="T_NIT" style="width: 90%; margin-left: 8%;">
                         <tr>
                             <td id="TD_ID" style="width: 14%;" class="Label_Bold">NIT Empresa</td>
                             <td id="TD1" style="width: 40%;">
@@ -150,8 +150,8 @@
                             <td id="TD_Ttipo" style="width: 40%;">
                                 <select id="DDLTipo" class="C_Chosen">
                                     <option value="-1">Seleccione...</option>
-                                    <option value="1"> 1 - Carpeta</option>
-                                    <option value="2"> 2 - Link</option>
+                                    <option value="1">1 - Carpeta</option>
+                                    <option value="2">2 - Link</option>
                                 </select>
                             </td>
                             <td style="padding-bottom: 25px; width: 60%;">

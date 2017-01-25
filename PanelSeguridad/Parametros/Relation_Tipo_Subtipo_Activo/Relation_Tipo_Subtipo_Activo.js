@@ -12,10 +12,25 @@ var edit_SubTipoID;
 
 //Evento load JS
 $(document).ready(function () {
+
+    $("#Marco_trabajo_Form").css("height", "490px");
+    $("#container_TTP_Activo").css("height", "380px");
+
+    /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
+    Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
+    Ocultar_Errores();
+    Ocultar_Tablas();
+    /*==================FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN==============*/
+
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_Tipo('Tipo');
     transacionAjax_SubTipo('SubTipo');
 
+});
+
+//Función que oculta todas las IMG de los errores en pantalla
+function Ocultar_Errores() {
+    ResetError();
     $("#ESelect").css("display", "none");
     $("#ImgID").css("display", "none");
     $("#Img2").css("display", "none");
@@ -23,9 +38,12 @@ $(document).ready(function () {
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
     $("#WA").css("display", "none");
-    
-    $("#TablaDatos").css("display", "none");
-    $("#TablaConsulta").css("display", "none");
+}
+
+//funcion para las ventanas emergentes
+function Ventanas_Emergentes() {
+
+    Load_Charge_Sasif(); //Carga de "SasifMaster.js" el Control de Carga
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
@@ -39,8 +57,13 @@ $(document).ready(function () {
         dialogClass: "Dialog_Sasif",
         modal: true
     });
+}
 
-});
+//Función que oculta las tablas
+function Ocultar_Tablas() {
+    $("#TablaDatos").css("display", "none");
+    $("#TablaConsulta").css("display", "none");
+}
 
 //habilita el panel de crear o consulta
 function HabilitarPanel(opcion) {
@@ -83,6 +106,8 @@ function BtnConsulta() {
     var ValidateSelect = ValidarDroplist();
     var opcion;
 
+    OpenControl(); //Abrimos el load de espera con el logo
+
     if (ValidateSelect == 1) {
         filtro = "N";
         opcion = "ALL";
@@ -114,6 +139,7 @@ function BtnCrear() {
 
 //elimina de la BD
 function BtnElimina() {
+    OpenControl(); //Abrimos el load de espera con el logo
     transacionAjax_TP_Activo_delete("elimina");
 }
 
@@ -165,33 +191,32 @@ function ValidarDroplist() {
 // crea la tabla en el cliente
 function Table_TP_Activo() {
 
+    var html_TP_Activo;
+
     switch (estado) {
 
         case "buscar":
-            Tabla_consulta();
+            html_TP_Activo = "<table id='TTP_Activo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Tipo de Producto</th><th>Sub tipo De producto</th></tr></thead><tbody>";
+            for (itemArray in ArrayTP_Activo) {
+                if (ArrayTP_Activo[itemArray].Tipo_ID != 0) {
+                    html_TP_Activo += "<tr id= 'TTP_Activo_" + ArrayTP_Activo[itemArray].Tipo_ID + "'><td>" + ArrayTP_Activo[itemArray].Tipo_ID + " - " + ArrayTP_Activo[itemArray].DescripTipo + "</td><td>" + ArrayTP_Activo[itemArray].SubTipo_ID + " - " + ArrayTP_Activo[itemArray].DescripSubTipo + "</td></tr>";
+                }
+            }
             break;
 
         case "eliminar":
-            Tabla_eliminar();
+            html_TP_Activo = "<table id='TTP_Activo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Tipo de Producto</th><th>Sub tipo De producto</th></tr></thead><tbody>";
+            for (itemArray in ArrayTP_Activo) {
+                if (ArrayTP_Activo[itemArray].Tipo_ID != 0) {
+                    html_TP_Activo += "<tr id= 'TTP_Activo_" + ArrayTP_Activo[itemArray].Tipo_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArrayTP_Activo[itemArray].Tipo_ID + "','" + ArrayTP_Activo[itemArray].SubTipo_ID + "')\"></img><span>Eliminar Relación T/S Activos</span></span></td><td>" + ArrayTP_Activo[itemArray].Tipo_ID + " - " + ArrayTP_Activo[itemArray].DescripTipo + "</td><td>" + ArrayTP_Activo[itemArray].SubTipo_ID + " - " + ArrayTP_Activo[itemArray].DescripSubTipo + "</td></tr>";
+                }
+            }
             break;
     }
 
-}
-
-//grid con el boton eliminar
-function Tabla_eliminar() {
-    var html_TP_Activo = "<table id='TTP_Activo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Tipo de Producto</th><th>Sub tipo De producto</th></tr></thead><tbody>";
-    for (itemArray in ArrayTP_Activo) {
-        if (ArrayTP_Activo[itemArray].Tipo_ID != 0) {
-            html_TP_Activo += "<tr id= 'TTP_Activo_" + ArrayTP_Activo[itemArray].Tipo_ID + "'><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar('" + ArrayTP_Activo[itemArray].Tipo_ID + "','" + ArrayTP_Activo[itemArray].SubTipo_ID + "')\"></input></td><td>" + ArrayTP_Activo[itemArray].Tipo_ID + " - " + ArrayTP_Activo[itemArray].DescripTipo + "</td><td>" + ArrayTP_Activo[itemArray].SubTipo_ID + " - " + ArrayTP_Activo[itemArray].DescripSubTipo + "</td></tr>";
-        }
-    }
     html_TP_Activo += "</tbody></table>";
     $("#container_TTP_Activo").html("");
     $("#container_TTP_Activo").html(html_TP_Activo);
-
-    $(".Eliminar").click(function () {
-    });
 
     $("#TTP_Activo").dataTable({
         "bJQueryUI": true,
@@ -213,26 +238,6 @@ function Eliminar(index_Tipo_ID, index_SubTipo_ID) {
         }
     }
 
-}
-
-
-//grid sin botones para ver resultado
-function Tabla_consulta() {
-    var html_TP_Activo = "<table id='TTP_Activo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Tipo de Producto</th><th>Sub tipo De producto</th></tr></thead><tbody>";
-    for (itemArray in ArrayTP_Activo) {
-        if (ArrayTP_Activo[itemArray].Tipo_ID != 0) {
-            html_TP_Activo += "<tr id= 'TTP_Activo_" + ArrayTP_Activo[itemArray].Tipo_ID + "'><td>" + ArrayTP_Activo[itemArray].Tipo_ID + " - " + ArrayTP_Activo[itemArray].DescripTipo + "</td><td>" + ArrayTP_Activo[itemArray].SubTipo_ID + " - " + ArrayTP_Activo[itemArray].DescripSubTipo + "</td></tr>";
-        }
-    }
-    html_TP_Activo += "</tbody></table>";
-    $("#container_TTP_Activo").html("");
-    $("#container_TTP_Activo").html(html_TP_Activo);
-
-    $("#TTP_Activo").dataTable({
-        "bJQueryUI": true,
-        "iDisplayLength": 1000,
-        "bDestroy": true
-    });
 }
 
 //evento del boton salir

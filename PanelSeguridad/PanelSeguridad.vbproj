@@ -1034,7 +1034,7 @@
     </Compile>
     <Compile Include="Huellas\Creacion\CapturaHuella.aspx.vb">
       <DependentUpon>CapturaHuella.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Huellas\Creacion\Huellas.aspx.designer.vb">
       <DependentUpon>Huellas.aspx</DependentUpon>

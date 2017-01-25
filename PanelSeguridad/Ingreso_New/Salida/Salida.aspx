@@ -20,7 +20,7 @@
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Dialog/datepicker.js" type="text/javascript"></script>
     <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" type="text/css" />
-    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" /> <meta http-equiv="pragma" content="no-cache"/> <meta http-equiv="expires" content="0"/>
+    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
     <div id="Container_title_Form">
@@ -180,4 +180,4 @@
             </tr>
         </table>
     </div>
-  </asp:Content>
+</asp:Content>

@@ -113,6 +113,7 @@ function HabilitarPanel(opcion) {
             estado = opcion;
             $('.C_Chosen').trigger('chosen:updated');
 
+            VerificarNIT("Select_EmpresaNit");
             break;
 
         case "buscar":

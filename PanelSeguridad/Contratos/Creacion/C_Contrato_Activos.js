@@ -112,6 +112,8 @@ $(document).ready(function () {
     Change_Select_Modelo();
     Change_Select_Linea();
     Change_Seguro();
+    Change_Facecolda_ID();
+
 
     Picker_Fechas_A();
 
@@ -322,6 +324,7 @@ function Search_Fasecolda(Type, Cod_id, Modelo) {
                 EncuentraDato = 0;
                 $("#Select_MarcaF").val(Matrix_Linea_F_ID[itemArray].Marca);
                 Index_Year = parseInt(Matrix_Linea_F_ID[itemArray].Index) - 1;
+                OpenControl();
                 transacionAjax_Clase_F("LIST_CLASE_F", Matrix_Linea_F_ID[itemArray].Marca);
                 transacionAjax_Linea_F("MATRIX_LINEA_F", Matrix_Linea_F_ID[itemArray].Marca, Matrix_Linea_F_ID[itemArray].Clase, "ID");
 
@@ -358,7 +361,7 @@ function MostrarValor_Cilindraje_Fasecolda(Matrix, Str_val, Proccess) {
 
 //muesta los valores de los combos
 function CargarValoresCombos() {
-    $("#Select_ClaseF").val(Con_Clase).attr('selected', true).trigger('chosen:updated');
+    $("#Select_ClaseF").find('option:contains("' + Con_Clase + '")').attr('selected', true).trigger('chosen:updated');
     $('#Select_LineaF').find('option:contains("' + Con_Linea + '")').attr('selected', true).trigger('chosen:updated');
 }
 
