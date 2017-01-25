@@ -25,6 +25,7 @@
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.fileupload.js" type="text/javascript"></script>
     <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" /> <meta http-equiv="Pragma" content="no-cache"/> <meta http-equiv="Expires" content="-1"/>
+    <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
     <div id="Container_title_Form">
@@ -85,16 +86,16 @@
             <div id="Container_controls">
                 <table id="TablaConsulta">
                     <tr>
-                        <td>
+                        <td style="width: 25%;">
                             <select id="DDLColumns" class="C_Chosen">
                             </select>
                         </td>
-                        <td>
+                        <td style="width: 65%;">
                             <span class="cssToolTip_Form">
-                                <input id="TxtRead" type="text" />
+                                <input id="TxtRead" type="text" style="width: 60%; margin-left: 10%;"/>
                                 <span class="Spam_AST"></span></span>
                         </td>
-                        <td align="center" id="TD3">
+                        <td align="center" id="TD3" style="width: 20%;">
                             <input id="BtnRead" type="button" value="Buscar" onclick="BtnConsulta();" />
                         </td>
                     </tr>
@@ -112,7 +113,7 @@
                 <div id="TablaDatos_D">
                     <table id="Tabla_1" style="width: 100%; text-align: left; margin-top: 5%">
                         <tr>
-                            <td style="width: 15%;" class="Label_Bold">Multi - Empresa
+                            <td style="width: 15%;" class="Label_Bold">NIT Empresa
                             </td>
                             <td>
                                 <select id="Select_EmpresaNit" class="C_Chosen">

@@ -32,6 +32,10 @@ var OpcWordComplementos;
 
 //Evento load JS
 $(document).ready(function () {
+
+    $("#Marco_trabajo_Form").css("height", "490px");
+    $("#container_TCliente").css("height", "380px");
+
     transaccionAjax_MDocWork('MATIRXDOC_WORK');
     transaccionAjax_MPaises_Ciudades('MATRIX_PAIS_CIUDAD');
     transaccionAjax_MArea('MATRIX_AREA');
@@ -383,6 +387,12 @@ function HabilitarPanel(opcion) {
             Enabled_Client();
             Clear();
             estado = opcion;
+
+            var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+            if (OnlyEmpresa == true) {
+                TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+            }
             break;
 
         case "buscar":
@@ -447,6 +457,8 @@ function BtnConsulta() {
     var ValidateSelect = ValidarDroplist();
     var opcion;
 
+    //OpenControl(); //Abrimos el load de espera con el logo
+
     if (ValidateSelect == 1) {
         filtro = "N";
         opcion = "ALL";
@@ -478,6 +490,7 @@ function BtnCrear() {
 
 //elimina de la BD
 function BtnElimina() {
+    //OpenControl(); //Abrimos el load de espera con el logo
     transacionAjax_Cliente_delete("elimina");
 }
 

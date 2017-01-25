@@ -195,9 +195,15 @@ function Change_Select_TPersona(index, Regimen) {
 function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {
         var index_ID = $(this).val();
+        TransaccionesSegunNIT(index_ID);
+    });
+}
+
+function TransaccionesSegunNIT(index_ID) {
+    if (index_ID != "-1") {
         Charge_Combos_Depend_Nit(Matrix_Area, "Select_Area", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Cargo, "Select_Cargo", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Jefe, "Select_Jefe", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_GrpDocumentos, "Select_GrpDocument", index_ID, "");
-    });
+    }
 }
