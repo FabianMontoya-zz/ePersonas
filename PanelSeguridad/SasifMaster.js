@@ -32,7 +32,7 @@ Matrix_Mes[11] = [12, "Diciembre", 31];
 /*--------------- region de variables globales --------------------*/
 
 $(document).ready(function () {
-    clearConsole();
+    //clearConsole();
 
     fecha();
 
@@ -288,7 +288,7 @@ function No_Back_Button() {
         }
 
         if ((event.keyCode == 116) ||
-            //(event.keyCode == 123) || //Línea F12
+            (event.keyCode == 123) || //Línea F12
             (event.keyCode == 122)) {
             if (navigator.appName == "Microsoft Internet Explorer") {
                 window.event.keyCode = 0;

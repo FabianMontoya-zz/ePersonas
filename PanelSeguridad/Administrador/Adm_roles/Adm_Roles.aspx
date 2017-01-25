@@ -17,11 +17,11 @@
     <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
-    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" /> <meta http-equiv="Pragma" content="no-cache"/> <meta http-equiv="Expires" content="-1"/>
+    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
     <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
-    
+
     <div id="Dialog_Control" style="width: 100%; text-align: center;">
         <div class="cssload-container" style="margin-top: 25%;">
             <div class="cssload-whirlpool"></div>
@@ -30,7 +30,7 @@
             </div>
         </div>
     </div>
-    
+
     <div id="Container_title_Form">
         <table id="Tabla_Title_form">
             <tr>
@@ -54,12 +54,12 @@
                 <table id="TablaConsulta">
                     <tr>
                         <td style="width: 25%;">
-                            <select id="DDLColumns" class="C_Chosen" >
+                            <select id="DDLColumns" class="C_Chosen">
                             </select>
                         </td>
                         <td style="width: 65%;">
                             <span class="cssToolTip_Form">
-                                <input id="TxtRead" type="text" style="width: 60%; margin-left: 10%;"/>
+                                <input id="TxtRead" type="text" style="width: 60%; margin-left: 10%;" />
                                 <span class="Spam_AST"></span></span>
                         </td>
                         <td colspan="4" align="center" id="TD3" style="width: 20%;">
@@ -80,9 +80,9 @@
 
                 <div id="TablaDatos" style="width: 1080px;">
 
-                    <table id="T_NIT" style="width: 80%;margin-left: 15%;" >
+                    <table id="T_NIT" style="width: 80%; margin-left: 15%;">
                         <tr>
-                            <td  style="width: 10.5%;" class="Label_Bold">NIT Empresa</td>
+                            <td style="width: 10.5%;" class="Label_Bold">NIT Empresa</td>
                             <td id="TD1" style="width: 40%;">
                                 <select style="width: 100%;" id="Select_EmpresaNit" class="C_Chosen">
                                 </select>
@@ -95,7 +95,7 @@
                             </td>
                         </tr>
                     </table>
-                    <table id="T_Identificacion_ROL" style="width: 80%;margin-left: 15%;">
+                    <table id="T_Identificacion_ROL" style="width: 80%; margin-left: 15%;">
                         <tr>
                             <td class="Label_Bold" style="width: 10%;">Código
                             </td>
@@ -114,7 +114,7 @@
                             </td>
                             <td style="width: 10%;">
                                 <span class="cssToolTip_Form">
-                                    <input type="text" id="TxtSigla" title="Sigla" maxlength="5" style="width: 100%;"/>
+                                    <input type="text" id="TxtSigla" title="Sigla" maxlength="5" style="width: 100%;" />
                                     <span class="Spam_AST"></span></span>
                             </td>
                             <td style="padding-bottom: 25px; width: 47%;">
@@ -127,9 +127,9 @@
                         </tr>
                     </table>
 
-                    <table id="T_Descripcion" style="width: 80%;margin-left: 15%;">
+                    <table id="T_Descripcion" style="width: 80%; margin-left: 15%;">
                         <tr>
-                            <td class="Label_Bold" style="width: 10.8%;" >Descripción
+                            <td class="Label_Bold" style="width: 10.8%;">Descripción
                             </td>
                             <td style="width: 39%;">
                                 <span class="cssToolTip_Form">

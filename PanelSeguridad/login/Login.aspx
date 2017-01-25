@@ -15,7 +15,7 @@
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <link href="../css/css_login.css" rel="stylesheet" type="text/css" />
     <link href="../css/css_controles.css" rel="stylesheet" type="text/css" />
-    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="pragma" content="no-cache" />
     <style type="text/css">
         html, body
         {

@@ -17,8 +17,8 @@
     <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
-    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" /> <meta http-equiv="Pragma" content="no-cache"/> <meta http-equiv="Expires" content="-1"/>
-    <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" type="text/css" /> 
+    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
     <div id="Dialog_Control" style="width: 100%; text-align: center;">
@@ -57,7 +57,7 @@
                         </td>
                         <td id="TD2" style="width: 65%;">
                             <span class="cssToolTip_Form">
-                                <input id="TxtRead" type="text" style="width: 60%; margin-left: 10%;"/>
+                                <input id="TxtRead" type="text" style="width: 60%; margin-left: 10%;" />
                                 <span class="Spam_AST"></span></span>
                         </td>
                         <td colspan="4" align="center" id="TD3" style="width: 20%;">

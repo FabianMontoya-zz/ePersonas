@@ -20,7 +20,7 @@
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Dialog/datepicker.js" type="text/javascript"></script>
     <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" type="text/css" />
-    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" /> <meta http-equiv="Pragma" content="no-cache"/> <meta http-equiv="Expires" content="-1"/>
+    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
     <div id="Container_title_Form">
@@ -48,7 +48,7 @@
                 <tr>
                     <td class="Label_Bold" style="width: 80%; text-align: end; color: #b70d0d;">Hora <span id="liveclock" style="left: 0; top: 0;"></span>
                     </td>
-                 <td id="logoExt" rowspan="2" style="width: 10%; text-align: end;">
+                    <td id="logoExt" rowspan="2" style="width: 10%; text-align: end;">
                         <img id="Agenda" class="Ext" src="" alt="Extenciones" style="height: 50px; width: 50px;" onclick="BtnConsulta_Persona('Empleado')" />
                     </td>
                 </tr>
@@ -202,8 +202,7 @@
                                 <tr>
                                     <td class="Title_Bold" colspan="6">Tiempo de la Visita
                                     </td>
-                                    <td class="Title_Bold" colspan="4">
-                                    </td>
+                                    <td class="Title_Bold" colspan="4"></td>
                                     <td class="Title_Bold" rowspan="2" style="width: 10%">
                                         <input id="BtnIngresar" class="BWeb" type="button" value="Ingresar" onclick="BtnAgregarAcceso();" />
                                     </td>
@@ -235,8 +234,7 @@
                                                 src="../../images/error.png" />
                                             <span class="SpamEG"></span></span>
                                     </td>
-                                    <td class="Label_Bold" style="width: 5%">
-                                    </td>
+                                    <td class="Label_Bold" style="width: 5%"></td>
                                     <td id="HA_Ingreso" style="width: 20%;"></td>
                                     <td class="Label_Bold" style="width: 7%;"></td>
                                     <td id="HE_Salida" style="width: 20%;"></td>

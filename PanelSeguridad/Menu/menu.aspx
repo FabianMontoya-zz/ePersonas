@@ -10,7 +10,6 @@
     <link href="../css/css_login.css" rel="stylesheet" type="text/css" />
     <script src="../Scripts/jquery.min.js" type="text/javascript"></script>
     <script src="../Scripts/Chosen/chosen.jquery.js" type="text/javascript"></script>
-    <meta http-equiv="Pragma" content="no-cache"/>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
 </asp:Content>

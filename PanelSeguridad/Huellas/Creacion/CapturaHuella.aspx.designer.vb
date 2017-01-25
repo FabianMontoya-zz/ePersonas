@@ -11,5 +11,5 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class R_Persona_Tarjeta
+Partial Public Class CapturaHuella
 End Class
