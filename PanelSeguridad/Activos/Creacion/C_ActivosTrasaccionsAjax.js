@@ -324,12 +324,13 @@ function transacionAjax_Linea_F(State, Marca, Index, Proccess) {
             else {
                 Matrix_Linea_F = JSON.parse(result);
                 Charge_Combos_Depend_Verificacion(Matrix_Linea_F, "Select_LineaF", "", "", "");
-                if (Proccess == "ID") {
-                    setTimeout("CargarValoresCombos();", 400);
-                }
             }
         },
         error: function () {
+        }
+      }).done(function () {
+        if (Proccess == "ID") {
+           CargarValoresCombos();
         }
     });
 }
