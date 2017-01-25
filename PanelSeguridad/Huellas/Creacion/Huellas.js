@@ -5,6 +5,8 @@ var ArrayCombo = [];
 var estado;
 var editID;
 var editNIT;
+
+var mensaje;
 /*--------------- region de variables globales --------------------*/
 
 //Evento load JS
@@ -18,9 +20,7 @@ $(document).ready(function () {
     Ocultar_Errores();
     Ocultar_Tablas();
     /*==================FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN==============*/
-
-    transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
-
+    
     Change_Select_Nit();
 
 });
@@ -58,91 +58,11 @@ function Ocultar_Tablas() {
     $("#TablaConsulta").css("display", "none");
 }
 
-//habilita el panel de crear o consulta
-function HabilitarPanel(opcion) {
-
-    switch (opcion) {
-
-        case "crear":
-            $("#TablaDatos").css("display", "inline-table");
-            $("#TablaConsulta").css("display", "none");
-            $("#Txt_ID").removeAttr("disabled");
-            $("#Btnguardar").attr("value", "Guardar");
-            ResetError();
-            Clear();
-            estado = opcion;
-            break;
-
-        case "buscar":
-            $("#TablaDatos").css("display", "none");
-            $("#TablaConsulta").css("display", "inline-table");
-            $("#container_THuellas").html("");
-            estado = opcion;
-            Clear();
-            break;
-
-        case "modificar":
-            $("#TablaDatos").css("display", "none");
-            $("#TablaConsulta").css("display", "inline-table");
-            $("#container_THuellas").html("");
-            estado = opcion;
-            ResetError();
-            Clear();
-            break;
-
-        case "eliminar":
-            $("#TablaDatos").css("display", "none");
-            $("#TablaConsulta").css("display", "inline-table");
-            $("#container_THuellas").html("");
-            estado = opcion;
-            Clear();
-            break;
-
-    }
-}
-
-//consulta del del crud(READ)
-function BtnConsulta() {
-
-    var filtro;
-    var ValidateSelect = ValidarDroplist();
-    var opcion;
-
-    //OpenContHuellas(); //Abrimos el load de espera con el logo
-
-    if (ValidateSelect == 1) {
-        filtro = "N";
-        opcion = "ALL";
-        transacionAjax_Huellas("consulta", filtro, opcion);
-    }
-    else {
-        filtro = "S";
-        opcion = $("#DDLColumns").val();
-        transacionAjax_Huellas("consulta", filtro, opcion);
-    }
-
-}
-
-//crear link en la BD
-function BtnCrear() {
-
-    var validate;
-    validate = validarCamposCrear();
-
-    if (validate == 0) {
-        if ($("#Btnguardar").val() == "Guardar") {
-            transacionAjax_Huellas_create("crear");
-        }
-        else {
-            transacionAjax_Huellas_create("modificar");
-        }
-    }
-}
-
-//elimina de la BD
-function BtnElimina() {
-    $("#dialog_eliminar").dialog("close");
-    transacionAjax_Huellas_delete("elimina");
+function btnOk() {
+    console.log("Entró BTN");
+    transacionAjax_Ok("Ok");
+    
+    $("#H_Estado").val(mensaje);
 }
 
 //validamos campos para la creacion del Huellas
@@ -182,131 +102,6 @@ function validarCamposCrear() {
         ResetError();
     }
     return validar;
-}
-
-//validamos si han escogido una columna
-function ValidarDroplist() {
-    var flag;
-    var contenido = $("#DDLColumns").val();
-
-    if (contenido == '-1') {
-        flag = 1;
-    }
-    else {
-        flag = 0;
-    }
-    return flag;
-}
-
-// crea la tabla en el cliente
-function Table_Huellas() {
-
-    switch (estado) {
-
-        case "buscar":
-            Tabla_consulta();
-            break;
-
-        case "modificar":
-            Tabla_modificar();
-            break;
-
-        case "eliminar":
-            Tabla_eliminar();
-            break;
-    }
-
-}
-
-//grid con el boton eliminar
-function Tabla_eliminar() {
-    var html_THuellas = "<table id='THuellas' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>NIT Empresa</th><th>Código</th><th>Descripción</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
-    for (itemArray in ArrayHuellases) {
-        if (ArrayHuellases[itemArray].Estado != 2) {
-            html_THuellas += "<tr id= 'THuellas_" + ArrayHuellases[itemArray].Index + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArrayHuellases[itemArray].Index + "')\"></img><span>Eliminar Perfil</span></span></td><td>" + ArrayHuellases[itemArray].Nit_ID + "</td><td>" + ArrayHuellases[itemArray].Huellas_ID + "</td><td style='white-space: nowrap;'>" + ArrayHuellases[itemArray].Descripcion + "</td><td style='white-space: nowrap;'> " + ArrayHuellases[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArrayHuellases[itemArray].FechaCreacion + " </td><td style='white-space: nowrap;'> " + ArrayHuellases[itemArray].UsuarioActualizacion + " </td><td  style='white-space: nowrap;'> " + ArrayHuellases[itemArray].FechaActualizacion + " </td></tr>";
-        }
-    }
-    html_THuellas += "</tbody></table>";
-    $("#container_THuellas").html("");
-    $("#container_THuellas").html(html_THuellas);
-
-    $(".Eliminar").click(function () {
-    });
-
-    $("#THuellas").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
-}
-
-//muestra el registro a eliminar
-function Eliminar(index_Huellas) {
-
-    for (itemArray in ArrayHuellases) {
-        if (index_Huellas == ArrayHuellases[itemArray].Index) {
-            editID = ArrayHuellases[itemArray].Huellas_ID;
-            editNIT = ArrayHuellases[itemArray].Nit_ID;
-            $("#dialog_eliminar").dialog("option", "title", "¿Cambiar Estado a Perfil?");
-            $("#dialog_eliminar").dialog("open");
-        }
-    }
-
-}
-
-//grid con el boton editar
-function Tabla_modificar() {
-    var html_THuellas = "<table id='THuellas' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>NIT Empresa</th><th>Código</th><th>Descripción</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
-    for (itemArray in ArrayHuellases) {
-        html_THuellas += "<tr id= 'THuellas_" + ArrayHuellases[itemArray].Index + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + ArrayHuellases[itemArray].Index + "')\"></img><span>Editar Perfil</span></span></td><td>" + ArrayHuellases[itemArray].Nit_ID + "</td><td>" + ArrayHuellases[itemArray].Huellas_ID + "</td><td style='white-space: nowrap;'>" + ArrayHuellases[itemArray].Descripcion + "</td><td style='white-space: nowrap;'> " + ArrayHuellases[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArrayHuellases[itemArray].FechaCreacion + " </td><td style='white-space: nowrap;'> " + ArrayHuellases[itemArray].UsuarioActualizacion + " </td><td  style='white-space: nowrap;'> " + ArrayHuellases[itemArray].FechaActualizacion + " </td></tr>";
-    }
-    html_THuellas += "</tbody></table>";
-    $("#container_THuellas").html("");
-    $("#container_THuellas").html(html_THuellas);
-
-    $(".Editar").click(function () {
-    });
-
-    $("#THuellas").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
-}
-
-// muestra el registro a editar
-function Editar(index_Huellas) {
-
-    $("#TablaDatos").css("display", "inline-table");
-    $("#TablaConsulta").css("display", "none");
-
-    for (itemArray in ArrayHuellases) {
-        if (index_Huellas == ArrayHuellases[itemArray].Index) {
-            $("#Select_EmpresaNit").val(ArrayHuellases[itemArray].Nit_ID).trigger("chosen:updated");
-            editNIT = ArrayHuellases[itemArray].Nit_ID;
-            $("#Select_EmpresaNit").prop('disabled', true).trigger("chosen:updated");
-            $("#Txt_ID").val(ArrayHuellases[itemArray].Huellas_ID);
-            $("#Txt_ID").attr("disabled", "disabled");
-            editID = ArrayHuellases[itemArray].Huellas_ID;
-            $("#TxtDescription").val(ArrayHuellases[itemArray].Descripcion);
-            $("#TxtSigla").val(ArrayHuellases[itemArray].Sigla);
-            $("#Btnguardar").attr("value", "Actualizar");
-        }
-    }
-}
-
-//grid sin botones para ver resultado
-function Tabla_consulta() {
-    var html_THuellas = "<table id='THuellas' border='1'  cellpadding='1' cellspacing='1' style='width: 100%'><thead><tr><th>NIT Empresa</th><th>Código</th><th>Descripción</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
-    for (itemArray in ArrayHuellases) {
-        html_THuellas += "<tr id= 'THuellas_" + ArrayHuellases[itemArray].Index + "'><td>" + ArrayHuellases[itemArray].Nit_ID + "</td><td>" + ArrayHuellases[itemArray].Huellas_ID + "</td><td>" + ArrayHuellases[itemArray].Descripcion + "</td><td style='white-space: nowrap;'> " + ArrayHuellases[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArrayHuellases[itemArray].FechaCreacion + " </td><td style='white-space: nowrap;'> " + ArrayHuellases[itemArray].UsuarioActualizacion + " </td><td  style='white-space: nowrap;'> " + ArrayHuellases[itemArray].FechaActualizacion + " </td></tr>";
-    }
-    html_THuellas += "</tbody></table>";
-    $("#container_THuellas").html("");
-    $("#container_THuellas").html(html_THuellas);
-
-    $("#THuellas").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
 }
 
 //evento del boton salir

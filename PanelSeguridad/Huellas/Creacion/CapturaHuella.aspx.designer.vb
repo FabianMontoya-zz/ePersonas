@@ -11,5 +11,5 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Documento
+Partial Public Class CapturaHuella
 End Class
