@@ -471,4 +471,10 @@ function Clear() {
 
     $('.C_Chosen').trigger('chosen:updated');
 
+    var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+    if (OnlyEmpresa == true) {
+        TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+    }
+
 }

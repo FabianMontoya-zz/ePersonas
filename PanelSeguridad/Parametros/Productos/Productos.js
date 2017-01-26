@@ -508,6 +508,7 @@ function Clear() {
 
     $("#TxtRead").val("");
     $("#DDLColumns").val("-1").trigger("chosen:updated");
+    VerificarNIT("Select_EmpresaNit");
 }
 
 //limpiar campos

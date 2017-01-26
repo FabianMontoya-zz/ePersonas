@@ -75,7 +75,9 @@ function transacionAjax_Ciudad(State, Index) {
         },
         error: function () {
 
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     });
 }
 

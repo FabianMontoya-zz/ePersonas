@@ -218,7 +218,7 @@ Public Class Inf_ImpuestoAjax
     ''' <remarks></remarks>
     Protected Sub CargarCliente()
 
-        Dim SQL As New Inf_ImpuestoSQLClass
+        Dim SQL As New ClienteSQLClass
         Dim ObjListDroplist As New List(Of Droplist_Class)
         Dim vl_S_Tabla As String = Request.Form("tabla")
 

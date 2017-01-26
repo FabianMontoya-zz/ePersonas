@@ -626,6 +626,11 @@ function Clear() {
     $("#DDLColumns").val("-1");
 
     $('.C_Chosen').trigger('chosen:updated');
+    var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+    if (OnlyEmpresa == true) {
+        TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+    }
 }
 
 //Función que valida que tipo de acceso a información se requiere y muestra o no los combos de Grupo Documentos - Reportes

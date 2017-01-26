@@ -169,15 +169,27 @@ $(document).ready(function () {
         $("#TxtFVerificacion").datepicker({ dateFormat: 'yy-mm-dd' });
     });
 
+    //var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+    //if (OnlyEmpresa == true) {
+    //    TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+    //}
+
 });
 
 //carga los combos dependientes
 function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {
-        var index_ID = $(this).val();
+        var index_ID = this.value;
         Nit_ID_proccess = $(this).val();
-        Charge_Combos_Depend_Nit(Matrix_Documento, "Select_Documento_V", index_ID, "");
+        TransaccionesSegunNIT(index_ID);
     });
+}
+
+function TransaccionesSegunNIT(index_NIT_ID) {
+    if (index_NIT_ID != "-1") {
+        Charge_Combos_Depend_Nit(Matrix_Documento, "Select_Documento_V", index_NIT_ID, "");
+    }
 }
 
 //dispara la consulta a la matriz

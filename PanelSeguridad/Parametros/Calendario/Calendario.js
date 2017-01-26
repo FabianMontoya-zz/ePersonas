@@ -91,7 +91,7 @@ function BtnConsulta() {
     var ValidateSelect = ValidarDroplist();
     var opcion;
 
-    OpenControl();
+    //OpenControl();
 
     if (ValidateSelect == 1) {
         filtro = "N";
@@ -124,7 +124,7 @@ function BtnCrear() {
 
 //elimina de la BD
 function BtnElimina() {
-    OpenControl();
+    //OpenControl();
     transacionAjax_Calendario_delete("elimina");
 }
 
@@ -680,5 +680,5 @@ function Clear() {
     $("#DDLColumns").val("-1");
 
     $('.C_Chosen').trigger('chosen:updated');
-
+    VerificarNIT("Select_EmpresaNit");
 }

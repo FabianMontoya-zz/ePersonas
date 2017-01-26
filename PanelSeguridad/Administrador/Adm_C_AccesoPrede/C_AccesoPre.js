@@ -147,11 +147,11 @@ function HabilitarPanel(opcion) {
             Clear();
             estado = opcion;
             
-            var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+            //var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
 
-            if (OnlyEmpresa == true) {
-                TransaccionesSegunNIT($("#Select_EmpresaNit").val());
-            }
+            //if (OnlyEmpresa == true) {
+            //    TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+            //}
             break;
 
         case "buscar":

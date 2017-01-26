@@ -206,12 +206,10 @@ function HabilitarPanel(opcion) {
 
                 }
             }
-            console.log("aa");
             var OnlyEmpresa = VerificarNIT("Select_Cliente");
 
             if (OnlyEmpresa == true) {
                 TransaccionesSegunNIT($("#Select_Cliente").val());
-                console.log("aa..");
             }
 
             break;
@@ -465,6 +463,12 @@ function Clear() {
     $("#Select_Cliente_H").trigger("liszt:updated");
 
     $('.C_Chosen').trigger('chosen:updated');
+    var OnlyEmpresa = VerificarNIT("Select_Cliente");
+
+    if (OnlyEmpresa == true) {
+        TransaccionesSegunNIT($("#Select_Cliente").val());
+    }
+
 
 }
 

@@ -273,7 +273,7 @@
                 <div id="TablaDatos_D_Vista">
                     <table id="Table1" style="width: 700px; text-align: left;">
                         <tr>
-                            <td style="width: 150px;" class="Label_Bold">Multi - Empresa
+                            <td style="width: 150px;" class="Label_Bold">NIT Empresa
                             </td>
                             <td id="Con_EmpresaNit"></td>
                             <td style="padding-bottom: 25px; width: 250px;"></td>

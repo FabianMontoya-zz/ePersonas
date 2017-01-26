@@ -3,11 +3,11 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script src="../../Scripts/jquery-1.4.1.js" type="text/javascript"></script>
-    <script src="../../SasifMaster.js" type="text/javascript"></script>
-    <script src="../SasifMaster_Cosult.js" type="text/javascript"></script>
     <script src="Calendario.js" type="text/javascript"></script>
     <script src="CalendarioProgresivo.js" type="text/javascript"></script>
     <script src="CalendarioTrasaccionsAjax.js" type="text/javascript"></script>
+    <script src="../../SasifMaster.js" type="text/javascript"></script>
+    <script src="../SasifMaster_Cosult.js" type="text/javascript"></script>
     <link href="../../css/css_login.css" rel="stylesheet" type="text/css" />
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
     <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />
@@ -20,6 +20,7 @@
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Dialog/datepicker.js" type="text/javascript"></script>
     <script src="../../Scripts/Dialog/timepicker.js" type="text/javascript"></script>
+    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
     

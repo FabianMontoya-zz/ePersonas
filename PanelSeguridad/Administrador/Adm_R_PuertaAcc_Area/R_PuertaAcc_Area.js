@@ -106,7 +106,13 @@ function HabilitarPanel(opcion) {
             ResetError();
             Clear();
             estado = opcion;
-            VerificarNIT("Select_EmpresaNit");
+
+            var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+            if (OnlyEmpresa == true) {
+                TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+            }
+
 
             break;
 
@@ -295,5 +301,11 @@ function Clear() {
     $("#DDLColumns").val("-1").trigger("chosen:updated");
 
     $('.C_Chosen').trigger('chosen:updated');
+
+    var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+    if (OnlyEmpresa == true) {
+        TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+    }
 
 }

@@ -326,5 +326,5 @@ function Clear() {
     $("#DDLColumns").val("-1");
 
     $('.C_Chosen').trigger('chosen:updated');
-
+    VerificarNIT("Select_EmpresaNit");
 }

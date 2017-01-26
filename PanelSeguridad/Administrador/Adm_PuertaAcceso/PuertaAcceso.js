@@ -311,5 +311,5 @@ function Clear() {
     $("#DDLColumns").val("-1").trigger("chosen:updated");
 
     $('.C_Chosen').trigger('chosen:updated');
-
+    VerificarNIT("Select_EmpresaNit");
 }
