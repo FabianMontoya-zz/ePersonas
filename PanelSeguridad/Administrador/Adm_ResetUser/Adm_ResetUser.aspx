@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Administrador/Sasif_menu.Master"
+﻿<%@ Page Title="Reseteo Contraseña - SASIF Personas" Language="vb" AutoEventWireup="false" MasterPageFile="~/Administrador/Sasif_menu.Master"
     CodeBehind="Adm_ResetUser.aspx.vb" Inherits="PanelSeguridad.Adm_ResetUser" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">

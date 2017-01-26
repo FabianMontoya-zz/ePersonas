@@ -52,6 +52,15 @@ function BtnCrear() {
 
 }
 
+//Función que limpia todos los campos
+function Clear() {
+    Ocultar_Errores();
+    $("#Select_EmpresaNit").val("-1").trigger("chosen:updated");
+    $("#Txt_ID").val("");
+    $("#DDLTipo").val("-1").trigger("chosen:updated");
+    VerificarNIT("Select_EmpresaNit");
+}
+
 //validamos campos para la creacion del link
 function validarCamposCrear() {
 
@@ -110,6 +119,7 @@ function transacionAjax_Reset(State) {
                 $("#ImgID").css("display", "inline-table");
             }
             else {
+                Clear();
                 Mensaje_General("Reset Exitoso", "Se ha reseteado la contraseña correctamente. Recuerde que la nueva contraseña es el mismo nombre de usuario.", "S");
             }
         },
