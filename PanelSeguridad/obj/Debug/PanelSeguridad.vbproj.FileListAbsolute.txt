@@ -201,6 +201,7 @@ D:\INTEGRACION GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\es\System.Web.Optimizati
 D:\INTEGRACION GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\es\System.Web.Providers.resources.dll
 D:\INTEGRACION GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\es\Microsoft.AspNet.Membership.OpenAuth.resources.dll
 D:\INTEGRACION GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\es\Microsoft.AspNet.FriendlyUrls.resources.dll
+D:\INTEGRACION GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.vbprojResolveAssemblyReference.cache
 D:\INTEGRACION GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.Resources.resources
 D:\INTEGRACION GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.vbproj.GenerateResource.Cache
 D:\INTEGRACION GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.dll
