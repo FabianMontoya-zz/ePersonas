@@ -184,6 +184,7 @@ function Change_Seguro() {
 //carga marca linea segun la marca escogida 
 function Change_Select_Marca() {
     $("#Select_MarcaF").change(function () {
+        $("#TxtFasecolda_ID").attr("disabled", "disabled");
         var index_ID = this.value;
 
         switch (index_ID) {

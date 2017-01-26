@@ -148,6 +148,7 @@ function BtnBuscarFacecolda() {
         Clear_Ima_F();
         Enable_Consult_Fasecolda();
         Clear_Consulta_Fasecolda();
+        $("#Bloque_datosIngreso").css("display", "none");
     }
     else {
         var validar = ValidaCamposConsultaFasecolda();
