@@ -359,13 +359,6 @@
     <Content Include="Factura\menu.js" />
     <Content Include="Factura\SasifMaster_Cosult.js" />
     <Content Include="Global.asax" />
-    <Content Include="Huellas\Creacion\CapturaHuella.aspx" />
-    <Content Include="Huellas\Creacion\Huellas.aspx" />
-    <Content Include="Huellas\Creacion\Huellas.js" />
-    <Content Include="Huellas\Creacion\HuellasAjax.aspx" />
-    <Content Include="Huellas\Creacion\HuellasTrasaccionsAjax.js" />
-    <Content Include="Huellas\menu.js" />
-    <Content Include="Huellas\SasifMaster_Cosult.js" />
     <Content Include="Images\add.png" />
     <Content Include="Images\adress_book.png" />
     <Content Include="Images\adress_book_w.png" />
@@ -598,7 +591,6 @@
     <Content Include="Activos\Sasif_menu.Master" />
     <Content Include="Factura\Sasif_menu.Master" />
     <Content Include="Ingreso_New\Sasif_menu.Master" />
-    <Content Include="Huellas\Sasif_menu.Master" />
     <None Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
@@ -1029,30 +1021,6 @@
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Huellas\Creacion\CapturaHuella.aspx.designer.vb">
-      <DependentUpon>CapturaHuella.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Huellas\Creacion\CapturaHuella.aspx.vb">
-      <DependentUpon>CapturaHuella.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Huellas\Creacion\Huellas.aspx.designer.vb">
-      <DependentUpon>Huellas.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Huellas\Creacion\Huellas.aspx.vb">
-      <DependentUpon>Huellas.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Huellas\Creacion\HuellasAjax.aspx.designer.vb">
-      <DependentUpon>HuellasAjax.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Huellas\Creacion\HuellasAjax.aspx.vb">
-      <DependentUpon>HuellasAjax.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Huellas\Creacion\HuellasCapturaClass.vb" />
-    <Compile Include="Huellas\Creacion\HuellasClass.vb" />
-    <Compile Include="Huellas\Creacion\HuellasSQLClass.vb" />
     <Compile Include="Ingreso\Acceso\Acceso.aspx.designer.vb">
       <DependentUpon>Acceso.aspx</DependentUpon>
     </Compile>
