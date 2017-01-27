@@ -22,8 +22,9 @@ $(document).ready(function () {
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_EmpresaNit('Cliente'); //Carga Droplist de Empresa NIT
     No_Back_Button();
-    Change_Select_Nit();
 
+    Change_Select_Nit();
+  
 });
 
 //Función que oculta todas las IMG de los errores en pantalla
@@ -73,9 +74,7 @@ function HabilitarPanel(opcion) {
             estado = opcion;
             ResetError();
             Clear();
-
             VerificarNIT("Select_EmpresaNit");
-
             break;
 
         case "buscar":
