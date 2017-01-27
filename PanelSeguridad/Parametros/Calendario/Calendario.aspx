@@ -18,11 +18,14 @@
     <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
+    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/Dialog/datepicker.js" type="text/javascript"></script>
     <script src="../../Scripts/Dialog/timepicker.js" type="text/javascript"></script>
-    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
+    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
+
     
     <div id="Dialog_Control" style="width: 100%; text-align: center;">
         <div class="cssload-container" style="margin-top: 25%;">
@@ -32,6 +35,7 @@
             </div>
         </div>
     </div>
+
 
     <div id="Container_title_Form">
         <table id="Tabla_Title_form">

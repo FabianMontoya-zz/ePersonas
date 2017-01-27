@@ -318,7 +318,8 @@ Public Class CalendarioSQLClass
                     objCalendario.UsuarioActualizacion = ReadConsulta.GetValue(6)
                     objCalendario.FechaActualizacion = ReadConsulta.GetValue(7)
 
-                    objCalendario.DescripEmpresa = ReadConsulta.GetValue(8)
+                    'objCalendario.DescripEmpresa = ReadConsulta.GetValue(8)
+                    If Not (IsDBNull(ReadConsulta.GetValue(8))) Then objCalendario.DescripEmpresa = ReadConsulta.GetValue(8) Else objCalendario.DescripEmpresa = ""
                     objCalendario.DescripTipoCalendario = ReadConsulta.GetValue(9)
                     objCalendario.Index = ReadConsulta.GetValue(10)
 
