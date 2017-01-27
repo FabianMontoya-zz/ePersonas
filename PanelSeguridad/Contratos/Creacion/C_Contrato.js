@@ -224,12 +224,6 @@ function Picker_Fechas() {
     $("#TXT_Fecha_Apertura").datepicker({ dateFormat: 'yy-mm-dd', changeYear: true, changeMonth: true }); //Inicializa Datapicker
     $("#TXT_Fecha_Apertura").datepicker("option", "yearRange", "-99:+0"); //Rango años hacia atras (-99)
     $("#TXT_Fecha_Apertura").datepicker("option", "maxDate", "+0m +0d"); //Rango días (Llega hasta el actual y bloquea los futuros)
-    //$("#TXT_Fecha_Activacion").datepicker({ dateFormat: 'yy-mm-dd'});
-    //$("#TXT_Fecha_Finalizacion").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 }); //Bloquea las fechas pasadas, solo fechas futuras
-    //$("#TXT_Fecha_Cancelacion").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 });
-    //$("#TXT_Fecha_Ult_Causacion").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 });
-    //$("#TXT_Fecha_Ult_Factura").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 });
-    //$("#TXT_Fecha_Prox_Factura").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 });
 }
 
 //Captura el evento de cambio y vuelve a calcular las nuevas TE y TN
@@ -445,9 +439,6 @@ function TransaccionesSegunNIT(index_NIT_ID) {
         /*============*/        
     }
 }
-
-
-
 
 function Change_Select_Sucursal() {
     $("#Select_Sucursal_C").change(function () {
@@ -1071,6 +1062,15 @@ function Clear() {
     Persona1 = false;
     Persona2 = false;
     ArrayTodasFacturas = [];
+
+
+    var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+    if (OnlyEmpresa == true) {
+        TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+    }
+
+
 }
 
 function Add_Activos(index) {

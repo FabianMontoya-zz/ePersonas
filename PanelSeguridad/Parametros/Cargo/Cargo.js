@@ -179,6 +179,9 @@ function BtnCrear() {
 function BtnElimina() {
     OpenControl(); //Abrimos el load de espera con el logo
     transacionAjax_Cargo_delete("elimina");
+    filtro = "N";
+    opcion = "ALL";
+    transacionAjax_Cargo("consulta", filtro, opcion);
 }
 
 
@@ -317,6 +320,7 @@ function Eliminar(index_Nit, index_Cargo) {
     for (itemArray in ArrayCargo) {
         if (index_Nit == ArrayCargo[itemArray].Nit_ID && index_Cargo == ArrayCargo[itemArray].Cargo_ID) {
             editID = ArrayCargo[itemArray].Cargo_ID;
+            editNit_ID = ArrayCargo[itemArray].Nit_ID;
             $("#dialog_eliminar").dialog("option", "title", "Eliminar?");
             $("#dialog_eliminar").dialog("open");
         }
@@ -386,8 +390,14 @@ function Clear() {
     $("#Select_Politica").val("-1");
 
     $("#TxtRead").val("");
-    $("#DDLColumns").val("-1");
+    $("#DDLColumns").val("-1").trigger('chosen:updated');
 
     $('.C_Chosen').trigger('chosen:updated');
+
+    var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+    if (OnlyEmpresa == true) {
+        TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+    }
 
 }
