@@ -13,7 +13,7 @@ Public Class CalendarioSQLClass
     ''' <param name="vp_S_Contenido"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Read_AllCalendario(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String)
+    Public Function Read_AllCalendario(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String, ByVal vp_S_Nit_User As String)
 
         Dim ObjListCalendario As New List(Of CalendarioClass)
         Dim StrQuery As String = ""
@@ -23,6 +23,7 @@ Public Class CalendarioSQLClass
         Dim BD_Admin As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDAdmin").ToString
 
         Dim sql As New StringBuilder
+        Dim vl_sql_filtro As New StringBuilder
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
             sql.Append(" SELECT CA_Nit_ID, " & _
@@ -86,6 +87,17 @@ Public Class CalendarioSQLClass
                       "WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
             End If
         End If
+
+        If vp_S_Nit_User <> "N" Then
+            If vp_S_Contenido = "ALL" Then
+                vl_sql_filtro.Append("WHERE  CA_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY CA_Nit_ID, CA_Calendario_ID ASC")
+            Else
+                vl_sql_filtro.Append("AND  CA_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY CA_Nit_ID, CA_Calendario_ID ASC")
+            End If
+        Else
+            vl_sql_filtro.Append(" ORDER BY CA_Nit_ID, R_Rol_ID ASC")
+        End If
+
 
         StrQuery = sql.ToString
 

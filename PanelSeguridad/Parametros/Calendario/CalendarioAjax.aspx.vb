@@ -48,8 +48,9 @@ Public Class CalendarioAjax
         Dim vl_S_filtro As String = Request.Form("filtro")
         Dim vl_S_opcion As String = Request.Form("opcion")
         Dim vl_S_contenido As String = Request.Form("contenido")
+        Dim vl_S_Nit_User As String = Request.Form("Nit_User")
 
-        ObjListCalendario = SQL_Calendario.Read_AllCalendario(vl_S_filtro, vl_S_opcion, vl_S_contenido)
+        ObjListCalendario = SQL_Calendario.Read_AllCalendario(vl_S_filtro, vl_S_opcion, vl_S_contenido, vl_S_Nit_User)
 
         If ObjListCalendario Is Nothing Then
 

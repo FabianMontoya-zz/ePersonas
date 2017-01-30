@@ -13,7 +13,7 @@ Public Class AreaSQLClass
     ''' <param name="vp_S_Contenido"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Read_AllArea(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String)
+    Public Function Read_AllArea(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String, ByVal vp_S_Nit_User As String)
 
         Dim ObjListArea As New List(Of AreaClass)
         Dim StrQuery As String = ""
@@ -35,6 +35,7 @@ Public Class AreaSQLClass
         conex.StrInsert_and_Update_All(StrQuery, "2")
 
         sql = New StringBuilder()
+        Dim vl_sql_filtro As New StringBuilder
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
             sql.Append(" SELECT Nit_ID, " & _
@@ -82,6 +83,16 @@ Public Class AreaSQLClass
                        " FROM T_AREA_CARGO " & _
                       "WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
             End If
+        End If
+
+        If vp_S_Nit_User <> "N" Then
+            If vp_S_Contenido = "ALL" Then
+                vl_sql_filtro.Append("WHERE  Nit_ID ='" & vp_S_Nit_User & "' ORDER BY Nit_ID, AREA_CARGO_ID ASC")
+            Else
+                vl_sql_filtro.Append("AND  Nit_ID ='" & vp_S_Nit_User & "' ORDER BY Nit_ID, AREA_CARGO_ID ASC")
+            End If
+        Else
+            vl_sql_filtro.Append(" ORDER BY Nit_ID, AREA_CARGO_ID ASC")
         End If
 
         StrQuery = sql.ToString
