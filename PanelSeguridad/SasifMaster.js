@@ -6,7 +6,7 @@ var URLVariables = URLPage.split('&');
 var User;
 var Link;
 var Encrip;
-
+var g_NitEmpresa_User;
 var NameTemporal;
 var Doc_name;
 var Matrix_Mes = [];
@@ -2228,15 +2228,25 @@ function Compara_Valor_Compra(str_v1, Obj1, str_v2, Obj2, objeto, Str_1, Str_Op,
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*----                                                                            funcion json para usurio quemado                                                                                                              ----*/
+/*----                                                                            PROCESO DE VERIFICACION DE NIT USUARIO                                                                                                          ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
-function VerificarNIT(Selector) {
-    var NIT = false;
+//verifica el usurio si tiene acceso a toda la informacion o no y bloquea accesos
+function VerificarNIT(vp_Selector) {
+    var l_NIT = false;
     if (Array_G_Usuario[0].Acceso_Informacion != "0") {
-        $("#" + Selector + "").prop('disabled', true); //No se agrega el trigger porque se hace al seleccionar el val
-        $("#" + Selector + "").val("" + Array_G_Usuario[0].Nit_ID + "").trigger("chosen:updated");
-        NIT = true;
+        $("#" + vp_Selector + "").prop('disabled', true); //No se agrega el trigger porque se hace al seleccionar el val
+        $("#" + vp_Selector + "").val("" + Array_G_Usuario[0].Nit_ID + "").trigger("chosen:updated");
+        l_NIT = true;
     }
-    return NIT;
+    return l_NIT;
+}
+
+
+function Capture_Nit_User() {
+    if (Array_G_Usuario[0].Acceso_Informacion != "0") {
+        g_NitEmpresa_User = Array_G_Usuario[0].Nit_ID;
+    }
+    else {
+        g_NitEmpresa_User = "N";
+    }
 }

@@ -13,7 +13,7 @@ Public Class Adm_RolesSQLClass
     ''' <param name="vp_S_Contenido"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Read_AllRoles(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String)
+    Public Function Read_AllRoles(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String, ByVal vp_S_Nit_User As String)
 
         Dim ObjListRoles As New List(Of Adm_RolesClass)
         Dim StrQuery As String = ""
@@ -22,30 +22,41 @@ Public Class Adm_RolesSQLClass
         Dim Conexion As String = conex.typeConexion("1")
 
         Dim sql As New StringBuilder
+        Dim vl_sql_filtro As New StringBuilder
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
             sql.Append("SELECT R_Nit_ID, R_Rol_ID, R_Descripcion, R_Sigla, R_Estado, " & _
                        "R_Usuario_Creacion, R_FechaCreacion, R_Usuario_Actualizacion, R_FechaActualizacion, " & _
                        "ROW_NUMBER() OVER(ORDER BY R_Nit_ID, R_Rol_ID ASC) AS Index_Roles " & _
-                       "FROM ROLES ORDER BY R_Nit_ID, R_Rol_ID ASC")
+                       "FROM ROLES ")
         Else
 
             If vp_S_Contenido = "ALL" Then
                 sql.Append("SELECT R_Nit_ID, R_Rol_ID, R_Descripcion, R_Sigla, R_Estado, " & _
                        "R_Usuario_Creacion, R_FechaCreacion, R_Usuario_Actualizacion, R_FechaActualizacion, " & _
                        "ROW_NUMBER() OVER(ORDER BY R_Nit_ID, R_Rol_ID ASC) AS Index_Roles " & _
-                       "FROM ROLES ORDER BY R_Nit_ID, R_Rol_ID ASC")
+                       "FROM ROLES ")
             Else
                 sql.Append("SELECT R_Nit_ID, R_Rol_ID, R_Descripcion, R_Sigla, R_Estado, " & _
                        "R_Usuario_Creacion, R_FechaCreacion, R_Usuario_Actualizacion, R_FechaActualizacion, " & _
                        "ROW_NUMBER() OVER(ORDER BY R_Nit_ID, R_Rol_ID ASC) AS Index_Roles " & _
                        "FROM ROLES " & _
-                       "WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%' ORDER BY R_Nit_ID, R_Rol_ID ASC ")
+                       "WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%' ")
             End If
         End If
 
-        StrQuery = sql.ToString
+        If vp_S_Nit_User <> "N" Then
+            If vp_S_Contenido = "ALL" Then
+                vl_sql_filtro.Append("WHERE  R_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY R_Nit_ID, R_Rol_ID ASC")
+            Else
+                vl_sql_filtro.Append("AND  R_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY R_Nit_ID, R_Rol_ID ASC")
+            End If
+        Else
+            vl_sql_filtro.Append(" ORDER BY R_Nit_ID, R_Rol_ID ASC")
+        End If
 
+
+        StrQuery = sql.ToString & vl_sql_filtro.ToString
         ObjListRoles = listrol(StrQuery, Conexion, "Read")
 
         Return ObjListRoles

@@ -233,7 +233,8 @@ function transacionAjax_InfoUser(vp_State, vp_Nit_ID, vp_User_ID) {
         },
         async: false, // La petición es síncrona
         cache: false // No queremos usar la caché del navegador
-
+    }).done(function () {
+        Capture_Nit_User();
     });
 }
 
