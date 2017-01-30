@@ -13,7 +13,7 @@ Public Class DocumentoSQLClass
     ''' <param name="vp_S_Contenido"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Read_AllDocumento(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String)
+    Public Function Read_AllDocumento(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String, ByVal vp_S_Nit_User As String)
 
         Dim ObjListDocumento As New List(Of DocumentoClass)
         Dim StrQuery As String = ""
@@ -24,6 +24,7 @@ Public Class DocumentoSQLClass
         Dim BD_Param As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDParam").ToString
 
         Dim sql As New StringBuilder
+        Dim vl_sql_filtro As New StringBuilder
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
             sql.Append(" SELECT DOC_Nit_ID, " & _
@@ -140,8 +141,17 @@ Public Class DocumentoSQLClass
             End If
         End If
 
-        StrQuery = sql.ToString
+        If vp_S_Nit_User <> "N" Then
+            If vp_S_Contenido = "ALL" Then
+                vl_sql_filtro.Append("WHERE  DOC_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY DOC_Nit_ID, DOC_Documentos_ID ASC")
+            Else
+                vl_sql_filtro.Append("AND  DOC_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY DOC_Nit_ID, DOC_Documentos_ID ASC")
+            End If
+        Else
+            vl_sql_filtro.Append(" ORDER BY DOC_Nit_ID, DOC_Documentos_ID ASC")
+        End If
 
+        StrQuery = sql.ToString & vl_sql_filtro.ToString
         ObjListDocumento = listDocumento(StrQuery, Conexion, "List")
 
         Return ObjListDocumento
@@ -602,7 +612,7 @@ Public Class DocumentoSQLClass
         Dim sql As New StringBuilder
 
         sql.AppendLine(" SELECT TR_Ruta_Temporal,  TR_Ruta_Relativa,TR_Ruta_Visualizacion FROM RUTAS_OPERACION ")
-        StrQuery = Sql.ToString
+        StrQuery = sql.ToString
 
         ObjList = listDocumento(StrQuery, Conexion, "RutasOpe")
 

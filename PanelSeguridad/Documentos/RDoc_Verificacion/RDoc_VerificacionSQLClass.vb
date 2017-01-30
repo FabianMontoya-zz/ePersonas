@@ -93,16 +93,15 @@ Public Class RDoc_VerificacionSQLClass
 
         If vp_S_Nit_User <> "N" Then
             If vp_S_Contenido = "ALL" Then
-                vl_sql_filtro.Append("WHERE  RDV_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY RDV_Nit_ID, RDV_Documentos_ID, RDV_Documentos_ID_Verif ASC")
+                vl_sql_filtro.Append(" WHERE  RDV_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY RDV_Nit_ID, RDV_Documentos_ID, RDV_Documentos_ID_Verif ASC")
             Else
-                vl_sql_filtro.Append("AND  RDV_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY RDV_Nit_ID, RDV_Documentos_ID, RDV_Documentos_ID_Verif ASC")
+                vl_sql_filtro.Append(" AND  RDV_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY RDV_Nit_ID, RDV_Documentos_ID, RDV_Documentos_ID_Verif ASC")
             End If
         Else
             vl_sql_filtro.Append(" ORDER BY RDV_Nit_ID, RDV_Documentos_ID, RDV_Documentos_ID_Verif ASC")
         End If
 
-        StrQuery = sql.ToString
-
+        StrQuery = sql.ToString & vl_sql_filtro.ToString
         ObjListRDoc_Verificacion = listRDoc_Verificacion(StrQuery, Conexion, "List")
 
         Return ObjListRDoc_Verificacion

@@ -13,7 +13,7 @@ Public Class C_AccesoPreSQLClass
     ''' <param name="vp_S_Contenido"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Read_AllC_AccesoPre(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String)
+    Public Function Read_AllC_AccesoPre(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String, ByVal vp_S_Nit_User As String)
 
         Dim ObjListR_PuertaAcc_Area As New List(Of C_AccesoPreClass)
         Dim StrQuery As String = ""
@@ -23,7 +23,7 @@ Public Class C_AccesoPreSQLClass
         Dim BD_Param As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDParam").ToString
 
         Dim sql As New StringBuilder
-
+        Dim vl_sql_filtro As New StringBuilder
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
             sql.Append(" SELECT  RPAP_Nit_ID, " & _
@@ -71,8 +71,7 @@ Public Class C_AccesoPreSQLClass
                                     " CASE	 SUBSTRING(RPAP.RPAP_Nit_ID_EmpVisita,0,LEN(RPAP.RPAP_Nit_ID_EmpVisita)) " & _
                                     "   WHEN '' THEN 0 " & _
                                     "   ELSE SUBSTRING(RPAP.RPAP_Nit_ID_EmpVisita,0,LEN(RPAP.RPAP_Nit_ID_EmpVisita))  " & _
-                                    " END  AND C3.CLI_Nit_ID  = RPAP.RPAP_Nit_ID_EmpVisita " & _
-                                    " WHERE RPAP_Estado = '1'")
+                                    " END  AND C3.CLI_Nit_ID  = RPAP.RPAP_Nit_ID_EmpVisita " )
         Else
 
             If vp_S_Contenido = "ALL" Then
@@ -121,8 +120,7 @@ Public Class C_AccesoPreSQLClass
                                     " CASE	 SUBSTRING(RPAP.RPAP_Nit_ID_EmpVisita,0,LEN(RPAP.RPAP_Nit_ID_EmpVisita)) " & _
                                     "   WHEN '' THEN 0 " & _
                                     "   ELSE SUBSTRING(RPAP.RPAP_Nit_ID_EmpVisita,0,LEN(RPAP.RPAP_Nit_ID_EmpVisita))  " & _
-                                    " END  AND C3.CLI_Nit_ID  = RPAP.RPAP_Nit_ID_EmpVisita " & _
-                                    " WHERE RPAP_Estado = '1'")
+                                    " END  AND C3.CLI_Nit_ID  = RPAP.RPAP_Nit_ID_EmpVisita " )
             Else
                 sql.Append(" SELECT  RPAP_Nit_ID, " & _
                                     " 			   RPAP_TypeDocument_ID, " & _
@@ -170,12 +168,21 @@ Public Class C_AccesoPreSQLClass
                                     "   WHEN '' THEN 0 " & _
                                     "   ELSE SUBSTRING(RPAP.RPAP_Nit_ID_EmpVisita,0,LEN(RPAP.RPAP_Nit_ID_EmpVisita))  " & _
                                     " END  AND C3.CLI_Nit_ID  = RPAP.RPAP_Nit_ID_EmpVisita " & _
-                                    " WHERE RPAP_Estado = '1'" & _
                                     " AND " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
             End If
         End If
 
-        StrQuery = sql.ToString
+        If vp_S_Nit_User <> "N" Then
+            If vp_S_Contenido = "ALL" Then
+                vl_sql_filtro.Append(" WHERE RPAP_Estado = '1' AND  RPAP_Nit_ID_EmpVisita ='" & vp_S_Nit_User & "' ORDER BY RPAP_Nit_ID, RPAP_Tarjeta_ID ASC")
+            Else
+                vl_sql_filtro.Append(" RPAP_Estado = '1' AND  RPAP_Nit_ID_EmpVisita ='" & vp_S_Nit_User & "' ORDER BY RPAP_Nit_ID, RPAP_Tarjeta_ID ASC")
+            End If
+        Else
+            vl_sql_filtro.Append("WHERE RPAP_Estado = '1'  ORDER BY RPAP_Nit_ID, RPAP_Tarjeta_ID ASC")
+        End If
+
+        StrQuery = sql.ToString & vl_sql_filtro.ToString
 
         ObjListR_PuertaAcc_Area = listC_AccesoPre(StrQuery, Conexion, "List")
 
