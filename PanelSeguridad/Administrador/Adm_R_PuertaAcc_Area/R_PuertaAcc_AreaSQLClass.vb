@@ -13,7 +13,7 @@ Public Class R_PuertaAcc_AreaSQLClass
     ''' <param name="vp_S_Contenido"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Read_AllR_PuertaAcc_Area(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String)
+    Public Function Read_AllR_PuertaAcc_Area(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String, ByVal vp_S_Nit_User As String)
 
         Dim ObjListR_PuertaAcc_Area As New List(Of R_PuertaAcc_AreaClass)
         Dim StrQuery As String = ""
@@ -23,7 +23,7 @@ Public Class R_PuertaAcc_AreaSQLClass
         Dim BD_Param As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDParam").ToString
 
         Dim sql As New StringBuilder
-
+        Dim vl_sql_filtro As New StringBuilder
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
             sql.Append(" SELECT  RPA_Nit_ID, " & _
@@ -91,8 +91,17 @@ Public Class R_PuertaAcc_AreaSQLClass
             End If
         End If
 
-        StrQuery = sql.ToString
+        If vp_S_Nit_User <> "N" Then
+            If vp_S_Contenido = "ALL" Then
+                vl_sql_filtro.Append("WHERE  RPA_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY RPA_Nit_ID, RPA_PuertaAcceso_ID, RPA_Area_ID ASC")
+            Else
+                vl_sql_filtro.Append("AND  RPA_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY RPA_Nit_ID, RPA_PuertaAcceso_ID, RPA_Area_ID ASC")
+            End If
+        Else
+            vl_sql_filtro.Append(" ORDER BY RPA_Nit_ID, RPA_PuertaAcceso_ID, RPA_Area_ID ASC")
+        End If
 
+        StrQuery = sql.ToString & vl_sql_filtro.ToString
         ObjListR_PuertaAcc_Area = listR_PuertaAcc_Area(StrQuery, Conexion, "List")
 
         Return ObjListR_PuertaAcc_Area

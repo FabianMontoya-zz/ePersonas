@@ -13,7 +13,7 @@ Public Class SucursalSQLClass
     ''' <param name="vp_S_Contenido"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Read_AllSucursal(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String)
+    Public Function Read_AllSucursal(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String, ByVal vp_S_Nit_User As String)
 
         Dim ObjList As New List(Of SucursalClass)
         Dim StrQuery As String = ""
@@ -22,30 +22,40 @@ Public Class SucursalSQLClass
         Dim Conexion As String = conex.typeConexion("2")
 
         Dim sql As New StringBuilder
+        Dim vl_sql_filtro As New StringBuilder
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
             sql.Append("SELECT SUC_Nit_ID, SUC_Surcursal_ID, SUC_Descripcion, " & _
                        "SUC_Usuario_Creacion, SUC_FechaCreacion, SUC_Usuario_Actualizacion, SUC_FechaActualizacion, " & _
                        "ROW_NUMBER() OVER(ORDER BY SUC_Nit_ID, SUC_Surcursal_ID ASC) AS Index_Sucursal " & _
-                       "FROM SUCURSAL ORDER BY SUC_Nit_ID, SUC_Surcursal_ID ASC")
+                       "FROM SUCURSAL ")
         Else
 
             If vp_S_Contenido = "ALL" Then
                 sql.Append("SELECT SUC_Nit_ID, SUC_Surcursal_ID, SUC_Descripcion, " & _
                        "SUC_Usuario_Creacion, SUC_FechaCreacion, SUC_Usuario_Actualizacion, SUC_FechaActualizacion, " & _
                        "ROW_NUMBER() OVER(ORDER BY SUC_Nit_ID, SUC_Surcursal_ID ASC) AS Index_Sucursal " & _
-                       "FROM SUCURSAL ORDER BY SUC_Nit_ID, SUC_Surcursal_ID ASC")
+                       "FROM SUCURSAL ")
             Else
                 sql.Append("SELECT SUC_Nit_ID, SUC_Surcursal_ID, SUC_Descripcion, " & _
                        "SUC_Usuario_Creacion, SUC_FechaCreacion, SUC_Usuario_Actualizacion, SUC_FechaActualizacion, " & _
                        "ROW_NUMBER() OVER(ORDER BY SUC_Nit_ID, SUC_Surcursal_ID ASC) AS Index_Sucursal " & _
                        "FROM SUCURSAL " & _
-                       "WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'" & _
-                       " ORDER BY SUC_Nit_ID, SUC_Surcursal_ID ASC")
+                       "WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
             End If
         End If
 
-        StrQuery = sql.ToString
+        If vp_S_Nit_User <> "N" Then
+            If vp_S_Contenido = "ALL" Then
+                vl_sql_filtro.Append("WHERE  SUC_Nit_ID ='" & vp_S_Nit_User & "'  ORDER BY SUC_Nit_ID, SUC_Surcursal_ID ASC")
+            Else
+                vl_sql_filtro.Append("AND  SUC_Nit_ID ='" & vp_S_Nit_User & "'  ORDER BY SUC_Nit_ID, SUC_Surcursal_ID ASC")
+            End If
+        Else
+            vl_sql_filtro.Append("  ORDER BY SUC_Nit_ID, SUC_Surcursal_ID ASC")
+        End If
+
+        StrQuery = sql.ToString & vl_sql_filtro.ToString
 
         ObjList = list(StrQuery, Conexion, "List")
 

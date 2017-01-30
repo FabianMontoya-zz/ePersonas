@@ -64,8 +64,9 @@ Public Class Inf_ImpuestoAjax
         Dim vl_S_filtro As String = Request.Form("filtro")
         Dim vl_S_opcion As String = Request.Form("opcion")
         Dim vl_S_contenido As String = Request.Form("contenido")
+        Dim vl_S_Nit_User As String = Request.Form("Nit_User")
 
-        ObjListInf_Impuesto = SQL_Inf_Impuesto.Read_All(vl_S_filtro, vl_S_opcion, vl_S_contenido)
+        ObjListInf_Impuesto = SQL_Inf_Impuesto.Read_All(vl_S_filtro, vl_S_opcion, vl_S_contenido, vl_S_Nit_User)
 
         If ObjListInf_Impuesto Is Nothing Then
 

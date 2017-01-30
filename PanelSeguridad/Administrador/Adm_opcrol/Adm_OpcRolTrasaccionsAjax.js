@@ -132,7 +132,8 @@ function transacionAjax_opcRol(State, filtro, opcion) {
         data: { "action": State,
             "filtro": filtro,
             "opcion": opcion,
-            "contenido": contenido
+            "contenido": contenido,
+            "Nit_User": g_NitEmpresa_User
         },
         //mostrar resultados de la creacion de la opcion rol
         success: function (result) {

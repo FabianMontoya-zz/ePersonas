@@ -13,7 +13,7 @@ Public Class Adm_OpcRolSQLClass
     ''' <param name="vp_S_Contenido"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Read_AllOpcRol(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String)
+    Public Function Read_AllOpcRol(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String, ByVal vp_S_Nit_User As String)
 
         Dim ObjListOpcRol As New List(Of Adm_OpcRolClass)
         Dim StrQuery As String = ""
@@ -22,31 +22,41 @@ Public Class Adm_OpcRolSQLClass
 
 
         Dim sql As New StringBuilder
+        Dim vl_sql_filtro As New StringBuilder
+
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
             sql.Append("SELECT OR_Nit_ID, OR_OPRol_Nit_ID, OR_OPRol_ID, OR_Consecutivo, OR_Tipo, [OR_Subrol/rol_Nit_ID], [OR_Subrol/rol], OR_Link_ID, " & _
                        "OR_Usuario_Creacion, OR_FechaCreacion, OR_Usuario_Actualizacion, OR_FechaActualizacion, " & _
                        "ROW_NUMBER() OVER(ORDER BY OR_Nit_ID, OR_OPRol_ID, OR_Consecutivo ASC) AS Index_OptionRoles " & _
-                       "FROM OPTION_ROL " & _
-                       "ORDER BY OR_Nit_ID, OR_OPRol_ID, OR_Consecutivo ASC")
+                       "FROM OPTION_ROL ")
         Else
 
             If vp_S_Contenido = "ALL" Then
                 sql.Append("SELECT OR_Nit_ID, OR_OPRol_Nit_ID, OR_OPRol_ID, OR_Consecutivo, OR_Tipo, [OR_Subrol/rol_Nit_ID], [OR_Subrol/rol], OR_Link_ID, " & _
                        "OR_Usuario_Creacion, OR_FechaCreacion, OR_Usuario_Actualizacion, OR_FechaActualizacion, " & _
                        "ROW_NUMBER() OVER(ORDER BY OR_Nit_ID, OR_OPRol_ID, OR_Consecutivo ASC) AS Index_OptionRoles " & _
-                       "FROM OPTION_ROL " & _
-                       "ORDER BY OR_Nit_ID, OR_OPRol_ID, OR_Consecutivo ASC")
+                       "FROM OPTION_ROL ")
             Else
                 sql.Append("SELECT OR_Nit_ID, OR_OPRol_Nit_ID, OR_OPRol_ID, OR_Consecutivo, OR_Tipo, [OR_Subrol/rol_Nit_ID], [OR_Subrol/rol], OR_Link_ID, " & _
                        "OR_Usuario_Creacion, OR_FechaCreacion, OR_Usuario_Actualizacion, OR_FechaActualizacion, " & _
                        "ROW_NUMBER() OVER(ORDER BY OR_Nit_ID, OR_OPRol_ID, OR_Consecutivo ASC) AS Index_OptionRoles " & _
                        "FROM OPTION_ROL " & _
-                      "WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%' ORDER BY OR_Nit_ID, OR_OPRol_ID, OR_Consecutivo ASC")
+                      "WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%' ")
             End If
         End If
 
-        StrQuery = sql.ToString
+        If vp_S_Nit_User <> "N" Then
+            If vp_S_Contenido = "ALL" Then
+                vl_sql_filtro.Append("WHERE  OR_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY OR_Nit_ID, OR_OPRol_ID, OR_Consecutivo ASC")
+            Else
+                vl_sql_filtro.Append("AND  OR_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY OR_Nit_ID, OR_OPRol_ID, OR_Consecutivo ASC")
+            End If
+        Else
+            vl_sql_filtro.Append(" ORDER BY OR_Nit_ID, OR_OPRol_ID, OR_Consecutivo ASC")
+        End If
+
+        StrQuery = sql.ToString & vl_sql_filtro.ToString
 
         ObjListOpcRol = listOpcRol(StrQuery, Conexion, "Read")
 

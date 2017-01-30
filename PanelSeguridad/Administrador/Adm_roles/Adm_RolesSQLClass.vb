@@ -55,7 +55,6 @@ Public Class Adm_RolesSQLClass
             vl_sql_filtro.Append(" ORDER BY R_Nit_ID, R_Rol_ID ASC")
         End If
 
-
         StrQuery = sql.ToString & vl_sql_filtro.ToString
         ObjListRoles = listrol(StrQuery, Conexion, "Read")
 
