@@ -99,7 +99,7 @@ Public Class CalendarioSQLClass
         End If
 
 
-        StrQuery = sql.ToString
+        StrQuery = sql.ToString & vl_sql_filtro.ToString
 
         ObjListCalendario = listCalendario(StrQuery, Conexion, "List")
 
