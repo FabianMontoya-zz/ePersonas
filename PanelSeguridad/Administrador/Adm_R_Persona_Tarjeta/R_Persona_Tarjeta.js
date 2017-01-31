@@ -10,27 +10,29 @@ var editNit_ID;
 var index_ID;
 var editID;
 var editDocID;
+var Persona_Tiene = 0;
 /*--------------- region de variables globales --------------------*/
 
 //Evento load JS
 $(document).ready(function () {
-    $("#TablaDatos_D").css("padding-bottom", "20%");
-transacionAjax_EmpresaNit('Cliente');
+    /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
+    Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
+    Ocultar_Errores();
+    Ocultar_Tablas();
+    /*================== FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN ==============*/
+    transacionAjax_EmpresaNit('Cliente');
     transaccionAjax_MPersona('MATRIX_PERSONA');
     transaccionAjax_MTarjeta('MATRIX_TARJETA');
+
     Change_Select_Nit();
     Change_Persona();
-    
 
-    $("#ESelect").css("display", "none");
-    $("#Img1").css("display", "none");
-    $("#Img2").css("display", "none");
-    $("#Img3").css("display", "none");
-    $("#Img5").css("display", "none");
-    $("#DE").css("display", "none");
-    $("#SE").css("display", "none");
-    $("#WA").css("display", "none");
+});
 
+//funcion para las ventanas emergentes
+function Ventanas_Emergentes() {
+
+    Load_Charge_Sasif(); //Carga de "SasifMaster.js" el Control de Carga
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
@@ -45,13 +47,34 @@ transacionAjax_EmpresaNit('Cliente');
         modal: true
     });
 
-});
+}
+
+//Función que oculta todas las IMG de los errores en pantalla
+function Ocultar_Errores() {
+    ResetError();
+    $("#ESelect").css("display", "none");
+    $("#Img1").css("display", "none");
+    $("#Img2").css("display", "none");
+    $("#Img3").css("display", "none");
+    $("#Img5").css("display", "none");
+    $("#DE").css("display", "none");
+    $("#SE").css("display", "none");
+    $("#WA").css("display", "none");
+    /*Los demás se ocultan en la SASIF Master*/
+}
+
+//Función que oculta las tablas
+function Ocultar_Tablas() {
+    $("#TablaDatos_D").css("padding-bottom", "20%");
+    $("#TablaConsulta").css("display", "none");
+}
+
 
 //carga el combo de nit dependiente
 function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {
-        var index_ID = $(this).val();
-        Charge_Combos_Depend_Nit(Matrix_Persona, "Select_Persona", index_ID, "");
+        index_ID = $(this).val();
+        TransaccionesSegunNIT(index_ID);
     });
 
     $("#Select_EmpresaNit_2").change(function () {
@@ -59,7 +82,13 @@ function Change_Select_Nit() {
         Charge_Combos_Depend_Nit(Matrix_Tarjeta, "Select_Tarjeta", index_ID, "");
     });
 }
-var Persona_Tiene = 0;
+
+//Carga los combos que estan relacionados a Select_Nit
+function TransaccionesSegunNIT(index_ID) {
+    if (index_ID != "-1") {
+        Charge_Combos_Depend_Nit(Matrix_Persona, "Select_Persona", index_ID, "");
+    }
+}
 
 //validar asignacion de tarjeta
 function Change_Persona() {
@@ -86,7 +115,7 @@ function Valida_PersonaAsignacion() {
         $("#Select_EmpresaNit_2").attr("disabled", "disabled");
         $("#Select_EmpresaNit_2").val("-1");
         $("#Select_Tarjeta").val("-1");
-    
+
         $("#Select_Tarjeta").attr("disabled", "disabled");
         $("#dialog").dialog("option", "title", "Ya Existe");
         $("#Mensaje_alert").text("La persona ya tiene una Tarjeta Asignada!");
@@ -169,4 +198,9 @@ function Clear() {
 
     $('.C_Chosen').trigger('chosen:updated');
 
+    var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+    if (OnlyEmpresa == true) {
+        TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+    }
 }

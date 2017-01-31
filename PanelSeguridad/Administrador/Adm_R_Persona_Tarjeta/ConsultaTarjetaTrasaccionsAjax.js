@@ -21,6 +21,14 @@ function transacionAjax_EmpresaNit(State) {
         },
         error: function () {
 
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
+    }).done(function () {
+        var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+        if (OnlyEmpresa == true) {
+            TransaccionesSegunNIT($("#Select_EmpresaNit").val());
         }
     });
 }
@@ -36,7 +44,8 @@ function transacionAjax_Consulta(State, index) {
         data: {
             "action": State,
             "Nit": index,
-            "tabla": 'Consulta'
+            "tabla": 'Consulta',
+            "Nit_User": g_NitEmpresa_User
         },
         //Transaccion Ajax en proceso
         success: function (result) {

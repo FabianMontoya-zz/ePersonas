@@ -22,6 +22,12 @@ function transaccionAjax_MTarjeta(State) {
         error: function () {
 
         }
+    }).done(function () {
+        var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+        if (OnlyEmpresa == true) {
+            TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+        }
     });
 }
 
@@ -99,7 +105,9 @@ function transacionAjax_EmpresaNit(State) {
         },
         error: function () {
 
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     });
 }
 
