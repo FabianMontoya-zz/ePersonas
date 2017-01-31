@@ -5,8 +5,8 @@ function Change_Select_Nit() {
         console.log("aa");
         var index_ID = $(this).val();
         $("#Img5").css("display", "none");
-        Charge_Combos_Depend_Nit(Matrix_Persona, "Select_Persona", index_NIT_ID, "");
-        Charge_Combos_Depend_Nit(Matrix_Tarjeta, "Select_Tarjeta_AccPre", index_NIT_ID, "");
+        Charge_Combos_Depend_Nit(Matrix_Persona, "Select_Persona", index_ID, "");
+        Charge_Combos_Depend_Nit(Matrix_Tarjeta, "Select_Tarjeta_AccPre", index_ID, "");
     });
 
     $("#Select_EmpresaNit_Ing").change(function () {
