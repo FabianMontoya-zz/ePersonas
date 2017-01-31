@@ -91,10 +91,10 @@ function btnSalir() {
 
     switch (Link) {
         case "O_CLIENTE": //cliente
-            transacionAjax_EraseDocument('EraseDocument');
+            //transacionAjax_EraseDocument('EraseDocument');
             break;
         case "P_AUTODOC": //autorizacion documentos
-            transacionAjax_EraseDocument('EraseDocument');
+            //transacionAjax_EraseDocument('EraseDocument');
             break;
     }
 
@@ -241,7 +241,6 @@ function ResetError() {
 
 //Función que bloquea el retorno entre páginas
 function No_Back_Button() {
-
     window.location.hash = "no-back-button";
     window.location.hash = "Again-No-back-button" //chrome    
     window.onhashchange = function () { window.location.hash = "no-back-button"; }
