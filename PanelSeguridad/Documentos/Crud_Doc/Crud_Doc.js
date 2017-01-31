@@ -27,7 +27,6 @@ var IndicativoFoto;
 var CheckVigencias;
 var DescripFormato;
 
-
 var StrTFormato;
 var StrTNit_MultiEmpresa;
 var StrConsecutivo;
@@ -57,16 +56,6 @@ $(document).ready(function () {
     $(function () {
         $("#TxtFinicial").datepicker({ dateFormat: 'yy-mm-dd' });
     });
-
-
-    var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
-
-    if (OnlyEmpresa == true) {
-        console.log("A");
-        console.log(Matrix_ClienteDep);
-        TransaccionesSegunNIT($("#Select_EmpresaNit").val());
-    }
-
 
 });
 
@@ -131,23 +120,18 @@ function Ocultar_Tablas() {
 //carga los combos dependientes
 function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {
-        var index_ID = $(this).val();
         Nit_ID_proccess = $(this).val();
-        TransaccionesSegunNIT(index_ID);
+        TransaccionesSegunNIT(Nit_ID_proccess);
     });
 }
 
+//cargar los items relacionados a select_nit
 function TransaccionesSegunNIT(index_ID) {
     if (index_ID != "-1") {
-        console.log("B");
-        console.log(index_ID);
-        console.log(Matrix_ClienteDep);
         Charge_Combos_Depend_Nit(Matrix_ClienteDep, "Select_Persona", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Secuencia, "Select_Secuencia", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Contrato, "Select_Contrato", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Documento, "Select_Documento", index_ID, "");
-        console.log(Matrix_ClienteDep);
-        console.log(index_ID);
     }
 }
 

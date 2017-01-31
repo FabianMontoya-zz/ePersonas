@@ -5,7 +5,8 @@ function transaccionAjax_RutasOperacion(State) {
         url: "AutorizacionDocumentosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'RUTA'
         },
         //Transaccion Ajax en proceso
@@ -32,7 +33,8 @@ function transaccionAjax_MDocumento(State) {
         url: "AutorizacionDocumentosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'RUTA'
         },
         //Transaccion Ajax en proceso
@@ -46,6 +48,14 @@ function transaccionAjax_MDocumento(State) {
         },
         error: function () {
 
+        },
+    }).done(function () {
+
+        var vl_OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+        if (vl_OnlyEmpresa == true) {
+            var vl_nit_emp = $("#Select_EmpresaNit").val();
+            TransaccionesSegunNIT(vl_nit_emp);
         }
     });
 }
@@ -58,7 +68,8 @@ function transaccionAjax_MRDocVerif(State) {
         url: "AutorizacionDocumentosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'RUTA'
         },
         //Transaccion Ajax en proceso
@@ -79,11 +90,13 @@ function transaccionAjax_MRDocVerif(State) {
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transaccionAjax_MDocWork(State) {
+    OpenControl();
     $.ajax({
         url: "AutorizacionDocumentosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'RUTA'
         },
         //Transaccion Ajax en proceso
@@ -109,7 +122,8 @@ function transaccionAjax_MVerificacion(State) {
         url: "AutorizacionDocumentosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'RUTA'
         },
         //Transaccion Ajax en proceso
@@ -136,7 +150,8 @@ function transacionAjax_EmpresaNit(State) {
         url: "AutorizacionDocumentosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'CLIENTE'
         },
         //Transaccion Ajax en proceso
@@ -175,7 +190,8 @@ function transacionAjax_AutorizacionDocumentos(State, filtro, opcion) {
         url: "AutorizacionDocumentosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "filtro": filtro,
             "opcion": opcion,
             "contenido": contenido
@@ -204,7 +220,8 @@ function transaccionAjax_MConsecutivo(State) {
         url: "AutorizacionDocumentosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'RUTA'
         },
         //Transaccion Ajax en proceso
@@ -242,7 +259,8 @@ function transaccionAjax_Update_Verificacion(State) {
         url: "AutorizacionDocumentosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Nit_ID": Nit,
             "Documento": $("#Vis_Documento_3").val(),
             "NameDocumento": Doc_name_save,
@@ -299,7 +317,8 @@ function transacionAjax_UpdateConsecutivo(State, Consecutivo) {
         url: "AutorizacionDocumentosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Consecutivo": Consecutivo,
             "Nit_ID": Nit_ID_proccess
         },
@@ -326,7 +345,8 @@ function transacionAjax_ListDocument_Anexos(State) {
         url: "AutorizacionDocumentosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "listDocAnexos": listDocAnexos
         },
         //Transaccion Ajax en proceso
@@ -372,7 +392,8 @@ function transacionAjax_DeleteDocument(State, Ruta, nombre) {
         url: "AutorizacionDocumentosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Ruta": Ruta,
             "Doc_name": nombre
         },

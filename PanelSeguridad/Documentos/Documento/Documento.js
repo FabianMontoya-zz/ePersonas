@@ -144,8 +144,9 @@ function Change_Select_Nit() {
     });
 }
 
-function TransaccionesSegunNIT(index_NIT_ID) {
-    if (index_NIT_ID != "-1") {
+//carga combo relacionados al nit
+function TransaccionesSegunNIT(index_ID) {
+     if (index_ID != "-1") {
         Charge_Combos_Depend_Nit(Matrix_Ruta, "Select_RutaDocumento", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Ruta, "Select_RutaPlantilla", index_ID, "");
     }
@@ -194,7 +195,6 @@ function BtnElimina() {
     OpenControl();
     transacionAjax_Documento_delete("elimina");
 }
-
 
 //validamos campos para la creacion del link
 function validarCamposCrear() {
