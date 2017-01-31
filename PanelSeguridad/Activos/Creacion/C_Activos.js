@@ -49,6 +49,7 @@ $(document).ready(function () {
     transacionAjax_Colores("Colores");
     transacionAjax_Tipo('Tipo');
 
+    
     //CAMPOS GENERALES
     Clear_Ima_G();
     //CAMPOS LLAVES

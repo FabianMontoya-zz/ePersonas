@@ -427,6 +427,7 @@ function Change_Select_Nit() {
     });
 }
 
+//Carga los combos relacionados a Select_Nit
 function TransaccionesSegunNIT(index_NIT_ID) {
     if (index_NIT_ID != "-1") {
         Charge_Combos_Depend_Nit(Matrix_Sucursal, "Select_Sucursal_C", index_NIT_ID, "");

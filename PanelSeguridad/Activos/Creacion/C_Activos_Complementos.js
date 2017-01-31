@@ -27,10 +27,16 @@ function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {
         $("#Select_EmpresaNit").attr("disabled", "disabled");
         Nit_Proccess = this.value;
+        TransaccionesSegunNIT(Nit_Proccess);
+    });
+}
 
+//Carga los combos relacionados a Select_Nit
+function TransaccionesSegunNIT(Nit_Proccess) {
+    if (Nit_Proccess != "-1") {
         Charge_Combos_Depend_Nit(Matrix_Sucursal, "Select_Sucursal", Nit_Proccess, "");
         Charge_Combos_Depend_Nit(Matrix_Personas, "Select_Persona_A", Nit_Proccess, "");
-    });
+    }
 }
 
 //MUESTRA LOS CAMPOS DE BLINDAJE

@@ -248,6 +248,12 @@ function transacionAjax_Tipo(State) {
         error: function () {
 
         }
+    }).done(function (){
+        var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+        if (OnlyEmpresa == true) {
+            TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+        }
     });
 }
 
