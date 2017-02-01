@@ -41,15 +41,21 @@ $(document).ready(function () {
     Ocultar_Errores();
     Ocultar_Tablas();
     /*==================FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN==============*/
-
+    transacionAjax_EmpresaNit('Cliente');
+    transaccionAjax_MDocumento('MATRIX_DOCUMENTO');
     transaccionAjax_RutasOperacion('RUTAS_OPERACION');
-    transaccionAjax_MClienteDep('MATRIX_CLIENTE_DEP');
     transaccionAjax_MContrato('MATRIX_CONTRATO');
     transaccionAjax_MSecuencia('MATRIX_SECUENCIA');
-    transaccionAjax_MDocumento('MATRIX_DOCUMENTO');
-
-    transacionAjax_EmpresaNit('Cliente');
+    transaccionAjax_MClienteDep('MATRIX_CLIENTE_DEP');
     transacionAjax_Formato('Formato');
+
+    var vl_OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+    if (vl_OnlyEmpresa == true) {
+        var vl_nit_emp = $("#Select_EmpresaNit").val();
+        TransaccionesSegunNIT(vl_nit_emp);
+    }
+       
     Change_Select_Nit();
     CalFechaVencimiento();
 

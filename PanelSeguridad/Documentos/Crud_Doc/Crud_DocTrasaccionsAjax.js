@@ -21,6 +21,7 @@ function transaccionAjax_MClienteDep(State) {
         error: function () {
 
         }
+       
     });
 }
 
@@ -101,14 +102,6 @@ function transaccionAjax_MDocumento(State) {
         },
         error: function () {
 
-        },
-    }).done(function () {
-
-        var vl_OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
-
-        if (vl_OnlyEmpresa == true) {
-            var vl_nit_emp = $("#Select_EmpresaNit").val();
-            TransaccionesSegunNIT(vl_nit_emp);
         }
     });
 }
