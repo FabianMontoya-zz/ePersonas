@@ -43,6 +43,7 @@
 
                 </tr>
             </table>
+
             <textarea id="H_Estado" cols="20" rows="10" name="Texto"></textarea>
         </div>
         <div id="Div_BTN_Guardar" style="width: 100%; text-align: center; margin-top: 11px;">

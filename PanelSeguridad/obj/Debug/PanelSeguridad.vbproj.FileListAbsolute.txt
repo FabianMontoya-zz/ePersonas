@@ -123,7 +123,6 @@ D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\es\Microsoft.AspNet.F
 D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.dll
 D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.xml
 D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.pdb
-D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.vbprojResolveAssemblyReference.cache
 D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\PanelSeguridad.dll
 D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\PanelSeguridad.pdb
 D:\VERCIONADOR_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\PanelSeguridad.xml

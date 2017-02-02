@@ -2,7 +2,7 @@
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_Ok(vp_State) {
     //OpenContHuellas();
-    console.log("Entró AJAX");
+    console.log("Entró AJAX || State: "+vp_State);
     $.ajax({
         url: "HuellasAjax.aspx",
         type: "POST",
