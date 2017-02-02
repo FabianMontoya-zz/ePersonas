@@ -165,7 +165,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>11/11/2016 11:04:48</publishTime>
     </File>
     <File Include="bin/PanelSeguridad.pdb">
-      <publishTime>11/02/2016 11:54:00</publishTime>
+      <publishTime>02/11/2016 11:54:00</publishTime>
     </File>
     <File Include="bin/PanelSeguridad.xml">
       <publishTime>11/11/2016 11:04:48</publishTime>
@@ -504,10 +504,10 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>11/11/2016 09:55:24</publishTime>
     </File>
     <File Include="images/actualizar.gif">
-      <publishTime>09/20/2016 09:19:24</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="images/add.gif">
-      <publishTime>09/20/2016 09:19:24</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="images/add.png">
       <publishTime>11/11/2016 09:55:24</publishTime>
@@ -519,43 +519,43 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>11/11/2016 09:55:24</publishTime>
     </File>
     <File Include="images/archivo.gif">
-      <publishTime>09/20/2016 09:19:24</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="images/autorizar.gif">
-      <publishTime>09/20/2016 09:19:24</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="images/avatar.png">
       <publishTime>11/11/2016 09:55:24</publishTime>
     </File>
     <File Include="images/ayuda.gif">
-      <publishTime>09/20/2016 09:19:24</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="images/bank.png">
       <publishTime>11/11/2016 09:55:24</publishTime>
     </File>
     <File Include="images/barra_de_progreso.gif">
-      <publishTime>09/20/2016 09:19:24</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="images/cabeza2.jpg">
       <publishTime>11/11/2016 09:55:24</publishTime>
     </File>
     <File Include="images/carga.gif">
-      <publishTime>09/20/2016 09:19:24</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="images/componentes.gif">
-      <publishTime>09/20/2016 09:19:24</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="images/consulta.gif">
-      <publishTime>09/20/2016 09:19:24</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="images/correo.gif">
-      <publishTime>09/20/2016 09:19:24</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="images/crear.gif">
-      <publishTime>09/20/2016 09:19:24</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="images/cronograma.gif">
-      <publishTime>09/20/2016 09:19:24</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="images/C_GREEN.png">
       <publishTime>11/11/2016 09:55:32</publishTime>
@@ -567,7 +567,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>11/11/2016 09:55:32</publishTime>
     </File>
     <File Include="images/del.gif">
-      <publishTime>09/20/2016 09:19:24</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="images/Descarga.png">
       <publishTime>11/11/2016 09:55:24</publishTime>
@@ -576,16 +576,16 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>11/11/2016 09:55:24</publishTime>
     </File>
     <File Include="images/document.gif">
-      <publishTime>09/20/2016 09:19:24</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="images/Documentos.gif">
-      <publishTime>09/20/2016 09:19:24</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="images/documentos.png">
       <publishTime>11/11/2016 09:55:24</publishTime>
     </File>
     <File Include="images/eliminar.gif">
-      <publishTime>09/20/2016 09:19:24</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="images/error.png">
       <publishTime>11/11/2016 09:55:24</publishTime>
@@ -600,10 +600,10 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>11/11/2016 09:55:24</publishTime>
     </File>
     <File Include="images/folder_collapsed.gif">
-      <publishTime>09/20/2016 09:19:24</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="images/folder_extended.gif">
-      <publishTime>09/20/2016 09:19:24</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="images/fondo1.jpg">
       <publishTime>11/11/2016 09:55:24</publishTime>
@@ -612,7 +612,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>11/11/2016 09:55:24</publishTime>
     </File>
     <File Include="images/informa.gif">
-      <publishTime>09/20/2016 09:19:24</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="images/logo-actual.png">
       <publishTime>11/11/2016 09:55:24</publishTime>
@@ -627,10 +627,10 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>11/11/2016 09:55:32</publishTime>
     </File>
     <File Include="images/mapa.gif">
-      <publishTime>09/20/2016 09:19:24</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="images/mensajes.gif">
-      <publishTime>09/20/2016 09:19:24</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="images/menu1.jpg">
       <publishTime>11/11/2016 09:55:24</publishTime>
@@ -645,16 +645,16 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>11/11/2016 09:55:24</publishTime>
     </File>
     <File Include="images/people_online.png">
-      <publishTime>09/20/2016 09:19:24</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="images/presupuesto.gif">
-      <publishTime>09/20/2016 09:19:24</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="images/relations.png">
       <publishTime>11/11/2016 09:55:24</publishTime>
     </File>
     <File Include="images/salir.gif">
-      <publishTime>09/20/2016 09:19:24</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="images/sasif1.gif">
       <publishTime>11/11/2016 09:55:24</publishTime>
@@ -666,22 +666,22 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>11/11/2016 09:55:24</publishTime>
     </File>
     <File Include="images/semam.gif">
-      <publishTime>09/20/2016 09:19:24</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="images/semro.gif">
-      <publishTime>09/20/2016 09:19:24</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="images/semve.gif">
-      <publishTime>09/20/2016 09:19:24</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="images/success.png">
       <publishTime>11/11/2016 09:55:24</publishTime>
     </File>
     <File Include="images/tabla.gif">
-      <publishTime>09/20/2016 09:19:24</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="images/unidad.gif">
-      <publishTime>09/20/2016 09:19:24</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="images/user.png">
       <publishTime>11/11/2016 09:55:24</publishTime>
