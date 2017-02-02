@@ -48,14 +48,7 @@ $(document).ready(function () {
     transaccionAjax_MSecuencia('MATRIX_SECUENCIA');
     transaccionAjax_MClienteDep('MATRIX_CLIENTE_DEP');
     transacionAjax_Formato('Formato');
-
-    var vl_OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
-
-    if (vl_OnlyEmpresa == true) {
-        var vl_nit_emp = $("#Select_EmpresaNit").val();
-        TransaccionesSegunNIT(vl_nit_emp);
-    }
-       
+           
     Change_Select_Nit();
     CalFechaVencimiento();
 
