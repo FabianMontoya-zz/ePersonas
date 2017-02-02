@@ -284,4 +284,16 @@ function Tabla_Salida() {
 
 }
 
+//valida si tiene rupo de documento
+function valida_GrpDoc() {
+    if (GrpDoc_Persona != 0) {
+        console.log("Sin tarjeta");
+        Consulta_log_Registros();
+    }
+    else
+        Mensaje_General("Proceso Imcompleto", "La persona no tiene (Grupo de Documentos) asignados, comuniquese con el administrador del sistema!", "E");
+
+
+}
+
 
