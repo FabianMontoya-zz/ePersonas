@@ -25,10 +25,10 @@ Public Class DocumentosSQLClass
 
         Dim sql As New StringBuilder
 
-        sql.Append(" SELECT CD_Nit_ID," & _
-                   "       CD_TypeDocument_ID, " & _
-                   "       CD_Document_ID, " & _
-                   "       CD_Secuencia_ID, " & _
+        sql.Append(" SELECT A_Nit_ID," & _
+                   "       A_TypeDocument_ID, " & _
+                   "       A_Document_ID, " & _
+                   "       A_Secuencia_ID, " & _
                    "       DE_Documento_ID, " & _
                    "       DE_RutaDocumento, " & _
                    "       DE_Formato, " & _
@@ -39,13 +39,13 @@ Public Class DocumentosSQLClass
                    "       DE_FechaActualizacion, " & _
                    "       D.DOC_Descripcion, " & _
                    "       D1.DDLL_Descripcion  " & _
-                   " FROM DOCUMENTOS_CLIENTE DC" & _
-                   " INNER JOIN " & BD_Documentos & ".dbo.DOCUMENTOS_EXISTENTES DE ON DE.DE_Secuencia_ID = DC.CD_Secuencia_ID " & _
+                   " FROM " & BD_Documentos & ".dbo.ASOCIACION_DOCUMENTOS A" & _
+                   " INNER JOIN " & BD_Documentos & ".dbo.DOCUMENTOS_EXISTENTES DE ON DE.DE_Secuencia_ID = A.A_Secuencia_ID " & _
                    " INNER JOIN " & BD_Documentos & ".dbo.DOCUMENTOS D ON D.DOC_Documentos_ID =DE.DE_Documento_ID " & _
                    " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D1 ON D1.DDL_ID = DE.DE_Formato AND D1.DDL_Tabla = 'DOCUMENTOS' " & _
-                  " WHERE CD_Nit_ID = '" & vp_S_Nit & "' " & _
-                   " AND CD_TypeDocument_ID = '" & vp_S_TypeDoc & "' " & _
-                   " AND CD_Document_ID = '" & vp_S_Doc & "' ")
+                  " WHERE A_Nit_ID = '" & vp_S_Nit & "' " & _
+                   " AND A_TypeDocument_ID = '" & vp_S_TypeDoc & "' " & _
+                   " AND A_Document_ID = '" & vp_S_Doc & "' ")
 
         StrQuery = sql.ToString
 

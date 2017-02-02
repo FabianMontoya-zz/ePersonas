@@ -275,8 +275,15 @@ Public Class ClienteSQLClass
         Dim sql As New StringBuilder
         Dim StrQueryID As String = ""
         Dim StrQuery As String = ""
+        Dim vl_S_nit_proccess As String
 
         Dim Consecutivo As String = UpdateConsecutivoGenerico(vp_O_Obj.OP_Empresa)
+
+        If vp_O_Obj.OP_Cliente = "S" Then
+            vl_S_nit_proccess = vp_O_Obj.Document_ID & vp_O_Obj.Digito_Verificacion
+        Else
+            vl_S_nit_proccess = vp_O_Obj.Nit_ID
+        End If
 
         sql.AppendLine("INSERT CLIENTE (" & _
             " CLI_Nit_ID, " & _
@@ -322,7 +329,7 @@ Public Class ClienteSQLClass
             " CLI_FechaActualizacion " & _
              ")")
         sql.AppendLine("VALUES (")
-        sql.AppendLine("'" & vp_O_Obj.Nit_ID & "',")
+        sql.AppendLine("'" & vl_S_nit_proccess & "',")
         sql.AppendLine("'" & vp_O_Obj.TypeDocument_ID & "',")
         sql.AppendLine("'" & vp_O_Obj.Document_ID & "',")
         sql.AppendLine("'" & vp_O_Obj.Digito_Verificacion & "',")
