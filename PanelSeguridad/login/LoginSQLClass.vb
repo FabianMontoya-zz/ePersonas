@@ -9,7 +9,7 @@ Public Class LoginSQLClass
     ''' <param name="pl_S_Password"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Update_ChagePassword(ByVal pl_S_User As String, ByVal pl_S_Password As String)
+    Public Function Update_ChagePassword(ByVal pl_S_Nit_ID As String, ByVal pl_S_User As String, ByVal pl_S_Password As String)
 
         Dim vl_S_processUpdate As String
         Dim StrQuery As String = ""
@@ -17,8 +17,9 @@ Public Class LoginSQLClass
 
         Dim sql As New StringBuilder
         sql.Append(" UPDATE Usuarios SET " & _
-                   " U_password = '" & pl_S_Password & _
-                   "' WHERE  U_Usuario_ID = '" & UCase(pl_S_User) & "'")
+                   " U_password = '" & pl_S_Password & "'" & _
+                   " WHERE  U_Nit_ID = '" & pl_S_Nit_ID & "'" & _
+                   " AND  U_Usuario_ID = '" & UCase(pl_S_User) & "'")
 
         StrQuery = sql.ToString
 

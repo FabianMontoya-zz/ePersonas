@@ -52,7 +52,7 @@ function transacionAjax(vp_State) {
 
                 case 0: //ingresa
                     Ocultar_Errores();
-                    transacionAjax_AllInfoUser("Loggear", $("#Select_EmpresaNit").val(), $("#TxtUser").val().toUpperCase());
+                    transacionAjax_AllInfoUser("Loggear", $("#Select_EmpresaNit").val(), $("#TxtUser").val().toUpperCase(), "LG");
                      break;
                 case 1: //contraseña incorrecta
                     $("#EUser").css("display", "none");
@@ -74,7 +74,7 @@ function transacionAjax(vp_State) {
                     $("#TxtUser").select();
                     break;
                 case 3: // cambio de contraseña
-                    window.location = "../login/CambioPassword.aspx?User=" + $("#TxtUser").val();
+                    transacionAjax_AllInfoUser("Loggear", $("#Select_EmpresaNit").val(), $("#TxtUser").val().toUpperCase(), "CP");
                     break
                 case 4: //usuario deshabilitado
                     Ocultar_Errores();
@@ -104,7 +104,7 @@ function transacionAjax(vp_State) {
 
 /*-------------------- Hace JSON con Todos los datos del User y da acceso al sistema ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_AllInfoUser(vp_State, vp_Nit_ID, vp_User_ID) {
+function transacionAjax_AllInfoUser(vp_State, vp_Nit_ID, vp_User_ID, vp_Action) {
 
     var vl_Dat_Url = $("#Select_EmpresaNit").val();
 
@@ -119,7 +119,7 @@ function transacionAjax_AllInfoUser(vp_State, vp_Nit_ID, vp_User_ID) {
         },
         success: function (result) {
             result = JSON.parse(result);
-            transacionAjax_Encriptar("Encriptar_dato", vl_Dat_Url, vp_User_ID);
+            transacionAjax_Encriptar("Encriptar_dato", vl_Dat_Url, vp_User_ID, vp_Action);
 
         },
         error: function () {
@@ -133,7 +133,7 @@ function transacionAjax_AllInfoUser(vp_State, vp_Nit_ID, vp_User_ID) {
 
 /*-------------------- Hace JSON con Todos los datos del User y da acceso al sistema ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_Encriptar(vp_State, vp_Dato, vp_User_ID) {
+function transacionAjax_Encriptar(vp_State, vp_Dato, vp_User_ID, vp_Action) {
     $.ajax({
         url: "LoginAjax.aspx",
         type: "POST",
@@ -143,7 +143,15 @@ function transacionAjax_Encriptar(vp_State, vp_Dato, vp_User_ID) {
             "StrDato": vp_Dato
         },
         success: function (result) {
-            window.location = "../Menu/menu.aspx?User=" + vp_User_ID + "&Key=" + result;
+            switch(vp_Action){
+
+                case "LG": /*Login*/
+                    window.location = "../Menu/menu.aspx?User=" + vp_User_ID + "&Key=" + result;
+                    break;
+                case "CP": /*Change Password*/
+                    window.location = "../login/CambioPassword.aspx?User=" + vp_User_ID + "&Key=" + result;
+                    break;
+            }
         },
         error: function () {
 

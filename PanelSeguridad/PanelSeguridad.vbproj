@@ -421,13 +421,6 @@
     <Content Include="Images\SASIF_NEW.png" />
     <Content Include="Images\SASIF_NEW_WHITE.png" />
     <Content Include="Images\success.png" />
-    <Content Include="Ingreso\Acceso\Acceso.aspx" />
-    <Content Include="Ingreso\Acceso\Acceso.js" />
-    <Content Include="Ingreso\Acceso\AccesoAjax.aspx" />
-    <Content Include="Ingreso\Acceso\AccesoTrasaccionsAjax.js" />
-    <Content Include="Ingreso\Acceso\Acceso_Tarjeta.js" />
-    <Content Include="Ingreso\menu.js" />
-    <Content Include="Ingreso\SasifMaster_Cosult.js" />
     <Content Include="Ingreso_New\Entrada\Ingreso.aspx" />
     <Content Include="Ingreso_New\Entrada\Ingreso.js" />
     <Content Include="Ingreso_New\Entrada\IngresoAjax.aspx" />
@@ -637,7 +630,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\Thumbs.db" />
-    <Content Include="Ingreso\Sasif_menu.Master" />
     <Content Include="Master\Sasif_Ing.Master" />
     <Content Include="McCain\Image\Cedula.pdf" />
     <Content Include="McCain\Image\PasadoJudicial.pdf" />
@@ -1055,22 +1047,6 @@
     <Compile Include="Huellas\Creacion\HuellasCapturaClass.vb" />
     <Compile Include="Huellas\Creacion\HuellasClass.vb" />
     <Compile Include="Huellas\Creacion\HuellasSQLClass.vb" />
-    <Compile Include="Ingreso\Acceso\Acceso.aspx.designer.vb">
-      <DependentUpon>Acceso.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Ingreso\Acceso\Acceso.aspx.vb">
-      <DependentUpon>Acceso.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Ingreso\Acceso\AccesoAjax.aspx.designer.vb">
-      <DependentUpon>AccesoAjax.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Ingreso\Acceso\AccesoAjax.aspx.vb">
-      <DependentUpon>AccesoAjax.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Ingreso\Acceso\AccesoClass.vb" />
-    <Compile Include="Ingreso\Acceso\AccesoSQLClass.vb" />
     <Compile Include="Ingreso_New\ControlAcceso\ControlAccesoClass.vb" />
     <Compile Include="Ingreso_New\ControlAcceso\ControlAccesoSQLClass.vb" />
     <Compile Include="Ingreso_New\Entrada\Ingreso.aspx.designer.vb">

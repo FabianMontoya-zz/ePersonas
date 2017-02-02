@@ -1,11 +1,15 @@
-﻿//evento load del Cambio de password
+﻿var Array_G_Usuario = [];
+var User_ID = "";
+var Nit_ID = "";
+//evento load del Cambio de password
 $(document).ready(function () {
     //capturamos la url
-    var URLPage = window.location.search.substring(1);
-    var URLVariables = URLPage.split('&');
-    var User = URLVariables[0].replace("User=", "");
-    $("#TdUser").html(User.toUpperCase());
-    $("#User").html(User.toUpperCase());
+    ConsultaParametrosURL();
+    transacionAjax_InfoUser("Information");
+    User_ID = Array_G_Usuario[0].Usuario_ID;
+    Nit_ID = Array_G_Usuario[0].Nit_ID;
+    $("#TdUser").html(User_ID);
+    $("#User").html(User_ID);
 
     //evento del boton ingresar
     $("#BtnCambiar").click(function () {
@@ -116,7 +120,8 @@ function transacionAjax(State) {
         type: "POST",
         //crear json
         data: { "action": State,
-            "user": $("#TdUser").html(),
+            "user": User_ID,
+            "Nit_ID": Nit_ID,
             "password": $("#TxtPassword").val()
         },
        //Transaccion Ajax en proceso
@@ -151,4 +156,37 @@ function transacionAjax(State) {
         }
     });
 }
+
+//*-------------------- Hace JSON con Todos los datos del User y da acceso al sistema ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_InfoUser(vp_State) {
+
+    $.ajax({
+        url: "CambioPasswordAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": vp_State,
+            "NITEncrip": Encrip,
+            "Usuario": User
+        },
+        success: function (result) {
+            if (result == "") {
+                Array_G_Usuario = [];
+            }
+            else {
+                Array_G_Usuario = JSON.parse(result);
+            }
+        },
+        error: function () {
+            Mensaje_General("¡Disculpenos!", "Se generó un error al realizar la transacción y no se completó la tarea.", "E");
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
+    }).done(function () {
+        Capture_Nit_User();
+    });
+}
+
+
 
