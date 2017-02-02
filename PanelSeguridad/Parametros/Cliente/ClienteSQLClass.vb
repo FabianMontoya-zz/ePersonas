@@ -75,7 +75,7 @@ Public Class ClienteSQLClass
                         "       CLI_3.CLI_Nombre + ' ' + CLI_3.CLI_Nombre_2 + ' ' + CLI_3.CLI_Apellido_1 + ' ' + CLI_3.CLI_Apellido_2, " & _
                         "      	GD.GD_Descripcion, " & _
                         "      	CLI.CLI_N_Consecutivo, " & _
-                        "      	ROW_NUMBER() OVER(ORDER BY CLI.CLI_Nit_ID DESC) AS Index_Cliente,  " & _
+                        "      	ROW_NUMBER() OVER(ORDER BY CLI.CLI_Nit_ID ASC) AS Index_Cliente,  " & _
                         "      	CLI.CLI_Sex, " & _
                         "      	CLI.CLI_FechaNacimiento, " & _
                         "       SEX.DDLL_Descripcion AS DescripSex, " & _
@@ -147,7 +147,7 @@ Public Class ClienteSQLClass
                         "       CLI_3.CLI_Nombre + ' ' + CLI_3.CLI_Nombre_2 + ' ' + CLI_3.CLI_Apellido_1 + ' ' + CLI_3.CLI_Apellido_2, " & _
                         "      	GD.GD_Descripcion, " & _
                         "      	CLI.CLI_N_Consecutivo, " & _
-                        "      	ROW_NUMBER() OVER(ORDER BY CLI.CLI_Nit_ID DESC) AS Index_Cliente,  " & _
+                        "      	ROW_NUMBER() OVER(ORDER BY CLI.CLI_Nit_ID ASC) AS Index_Cliente,  " & _
                         "      	CLI.CLI_Sex, " & _
                         "      	CLI.CLI_FechaNacimiento, " & _
                         "       SEX.DDLL_Descripcion AS DescripSex, " & _
@@ -217,7 +217,7 @@ Public Class ClienteSQLClass
                         "       CLI_3.CLI_Nombre + ' ' + CLI_3.CLI_Nombre_2 + ' ' + CLI_3.CLI_Apellido_1 + ' ' + CLI_3.CLI_Apellido_2, " & _
                         "      	GD.GD_Descripcion, " & _
                         "      	CLI.CLI_N_Consecutivo, " & _
-                        "      	ROW_NUMBER() OVER(ORDER BY CLI.CLI_Nit_ID DESC) AS Index_Cliente,  " & _
+                        "      	ROW_NUMBER() OVER(ORDER BY CLI.CLI_Nit_ID ASC) AS Index_Cliente,  " & _
                         "      	CLI.CLI_Sex, " & _
                         "      	CLI.CLI_FechaNacimiento, " & _
                         "       SEX.DDLL_Descripcion AS DescripSex, " & _
