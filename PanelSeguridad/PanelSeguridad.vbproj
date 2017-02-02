@@ -359,13 +359,6 @@
     <Content Include="Factura\menu.js" />
     <Content Include="Factura\SasifMaster_Cosult.js" />
     <Content Include="Global.asax" />
-    <Content Include="Huellas\Creacion\CapturaHuella.aspx" />
-    <Content Include="Huellas\Creacion\Huellas.aspx" />
-    <Content Include="Huellas\Creacion\Huellas.js" />
-    <Content Include="Huellas\Creacion\HuellasAjax.aspx" />
-    <Content Include="Huellas\Creacion\HuellasTrasaccionsAjax.js" />
-    <Content Include="Huellas\menu.js" />
-    <Content Include="Huellas\SasifMaster_Cosult.js" />
     <Content Include="Images\add.png" />
     <Content Include="Images\adress_book.png" />
     <Content Include="Images\adress_book_w.png" />
@@ -496,7 +489,6 @@
     <Content Include="Parametros\Cliente\ClienteAjax.aspx" />
     <Content Include="Parametros\Cliente\ClienteTrasaccionsAjax.js" />
     <Content Include="Parametros\Cliente\Cliente_Direccion.js" />
-    <Content Include="Parametros\Cliente\Cliente_DocAutorizado.js" />
     <Content Include="Parametros\Cliente\Cliente_Documento.js" />
     <Content Include="Parametros\Cliente\Cliente_EntFinan.js" />
     <Content Include="Parametros\Cliente\Cliente_Matrix.js" />
@@ -591,7 +583,6 @@
     <Content Include="Activos\Sasif_menu.Master" />
     <Content Include="Factura\Sasif_menu.Master" />
     <Content Include="Ingreso_New\Sasif_menu.Master" />
-    <Content Include="Huellas\Sasif_menu.Master" />
     <None Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
@@ -1023,6 +1014,7 @@
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+
     <Compile Include="Huellas\Creacion\CapturaHuella.aspx.designer.vb">
       <DependentUpon>CapturaHuella.aspx</DependentUpon>
     </Compile>
