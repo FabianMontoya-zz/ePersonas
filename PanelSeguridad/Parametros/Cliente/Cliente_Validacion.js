@@ -391,3 +391,17 @@ function String_Nombre() {
         Nombre_Persona = $("#TxtNombre").val() + " " + $("#TxtNombre_2").val() + " " + $("#Txt_Ape_1").val() + " " + $("#Txt_Ape_2").val();
     }
 }
+
+//validamos si han escogido una columna
+function ValidarDroplist() {
+    var flag;
+    var contenido = $("#DDLColumns").val();
+
+    if (contenido == '-1') {
+        flag = 1;
+    }
+    else {
+        flag = 0;
+    }
+    return flag;
+}

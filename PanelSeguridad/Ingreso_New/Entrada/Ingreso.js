@@ -220,7 +220,6 @@ function x() {
         Process_Manual_Ingreso = 0;
 }
 
-
 //confirmacion de registro
 function Registrar_Ingreso_Log() {
     $("#dialog_eliminar").dialog("open");

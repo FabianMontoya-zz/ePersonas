@@ -56,8 +56,6 @@ function transacionAjax_EmpresaNit(State) {
     });
 }
 
-
-
 /*------------------------------ consulta ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax_GrpDocumentos(State, filtro, opcion) {
@@ -79,7 +77,8 @@ function transacionAjax_GrpDocumentos(State, filtro, opcion) {
             "action": State,
             "filtro": filtro,
             "opcion": opcion,
-            "contenido": contenido
+            "contenido": contenido,
+            "Nit_User": g_NitEmpresa_User
         },
         //Transaccion Ajax en proceso
         success: function (result) {

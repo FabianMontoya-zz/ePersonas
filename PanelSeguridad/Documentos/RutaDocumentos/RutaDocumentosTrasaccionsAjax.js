@@ -79,7 +79,8 @@ function transacionAjax_RutaDocumentos(State, filtro, opcion) {
             "action": State,
             "filtro": filtro,
             "opcion": opcion,
-            "contenido": contenido
+            "contenido": contenido,
+            "Nit_User": g_NitEmpresa_User
         },
         //Transaccion Ajax en proceso
         success: function (result) {

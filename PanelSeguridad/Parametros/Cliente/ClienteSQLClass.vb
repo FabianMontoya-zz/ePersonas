@@ -13,7 +13,7 @@ Public Class ClienteSQLClass
     ''' <param name="vp_S_Contenido"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Read_All(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String)
+    Public Function Read_All(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String, ByVal vp_S_Nit_User As String)
 
         Dim ObjListCliente As New List(Of ClienteClass)
         Dim StrQuery As String = ""
@@ -24,6 +24,8 @@ Public Class ClienteSQLClass
         Dim BD_Documentos As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDDocument").ToString
 
         Dim sql As New StringBuilder
+        Dim vl_sql_filtro As New StringBuilder
+
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
             sql.Append(" SELECT CLI.CLI_Nit_ID, " & _
@@ -241,7 +243,17 @@ Public Class ClienteSQLClass
             End If
         End If
 
-        StrQuery = sql.ToString
+        If vp_S_Nit_User <> "N" Then
+            If vp_S_Contenido = "ALL" Then
+                vl_sql_filtro.Append(" WHERE   CLI.CLI_Nit_ID='" & vp_S_Nit_User & "' ORDER BY  CLI.CLI_Nit_ID, CLI.CLI_Document_ID ASC")
+            Else
+                vl_sql_filtro.Append(" AND   CLI.CLI_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY  CLI.CLI_Nit_ID, CLI.CLI_Document_ID ASC")
+            End If
+        Else
+            vl_sql_filtro.Append(" ORDER BY  CLI.CLI_Nit_ID, CLI.CLI_Document_ID ASC")
+        End If
+
+        StrQuery = sql.ToString & vl_sql_filtro.ToString
 
         ObjListCliente = list(StrQuery, Conexion, "List")
 
@@ -1432,7 +1444,7 @@ Public Class ClienteSQLClass
                                "                                     WHEN '' THEN 0 " & _
                                "                                     ELSE SUBSTRING(C.CLI_Nit_ID,0,LEN(C.CLI_Nit_ID)) " & _
                                "                      END  ")
-                           
+
         If vp_Obj_persona.Tarjeta_ID <> 0 Then
             sql_where.Append(" WHERE IT.IT_Tarjeta_ID ='" & vp_Obj_persona.Tarjeta_ID & "'")
 
@@ -1542,7 +1554,7 @@ Public Class ClienteSQLClass
         sql_consult.Append(" SELECT TYPEDOCUMENT, DOCUMENT, NOMBRE, " & _
                                              " ROW_NUMBER() OVER(ORDER BY DOCUMENT ASC) AS Index_Cliente FROM TEMP_CLIENTE " & _
                                              " WHERE NOMBRE LIKE '%" & vp_S_Search_Argument & "%'")
-    
+
         StrQuery = sql_consult.ToString
 
         ObjList = list(StrQuery, Conexion, "Busqueda_Persona")

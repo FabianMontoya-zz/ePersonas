@@ -13,7 +13,7 @@ Public Class ProductosSQLClass
     ''' <param name="vp_S_Contenido"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Read_AllProductos(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String)
+    Public Function Read_AllProductos(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String, ByVal vp_S_Nit_User As String)
 
         Dim ObjListProductos As New List(Of ProductosClass)
         Dim StrQuery As String = ""
@@ -21,6 +21,7 @@ Public Class ProductosSQLClass
         Dim Conexion As String = conex.typeConexion("2")
 
         Dim sql As New StringBuilder
+        Dim vl_sql_filtro As New StringBuilder
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
             sql.Append(" SELECT PRO_producto_ID," & _
@@ -229,8 +230,17 @@ Public Class ProductosSQLClass
             End If
         End If
 
-        StrQuery = sql.ToString
+        If vp_S_Nit_User <> "N" Then
+            If vp_S_Contenido = "ALL" Then
+                vl_sql_filtro.Append(" WHERE  PRO_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY PRO_Nit_ID, PRO_producto_ID ASC")
+            Else
+                vl_sql_filtro.Append(" AND  PRO_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY PRO_Nit_ID, PRO_producto_ID ASC")
+            End If
+        Else
+            vl_sql_filtro.Append(" ORDER BY PRO_Nit_ID, PRO_producto_ID ASC")
+        End If
 
+        StrQuery = sql.ToString & vl_sql_filtro.ToString
         ObjListProductos = listProductos(StrQuery, Conexion, "List")
 
         Return ObjListProductos

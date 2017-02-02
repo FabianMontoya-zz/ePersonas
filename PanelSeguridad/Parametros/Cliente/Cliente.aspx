@@ -12,11 +12,9 @@
     <script src="Cliente_EntFinan.js" type="text/javascript"></script>
     <script src="Cliente_Documento.js" type="text/javascript"></script>
     <script src="Cliente_Matrix.js" type="text/javascript"></script>
-    <script src="Cliente_DocAutorizado.js" type="text/javascript"></script>
     <link href="../../css/css_login.css" rel="stylesheet" type="text/css" />
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
     <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />
-    <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" />
     <link href="../../css/Chosen/chosen.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/jquery.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Chosen/chosen.jquery.js" type="text/javascript"></script>
@@ -24,11 +22,20 @@
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.fileupload.js" type="text/javascript"></script>
-    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" /> 
+    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
     <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" type="text/css" />
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
-    <div id="Container_title_Form">
+    <div id="Dialog_Control" style="width: 100%; text-align: center;">
+        <div class="cssload-container" style="margin-top: 25%">
+            <div class="cssload-whirlpool"></div>
+            <div>
+                <img id="Sasif" class="Logo_3" src="../../images/SASIF_NEW_WHITE.png" alt="SASIF S.A.S." />
+            </div>
+        </div>
+    </div>
+<div id="Container_title_Form">
         <table id="Tabla_Title_form">
             <tr>
                 <td id="Title_form"></td>
@@ -92,7 +99,7 @@
                         </td>
                         <td style="width: 65%;">
                             <span class="cssToolTip_Form">
-                                <input id="TxtRead" type="text" style="width: 60%; margin-left: 10%;"/>
+                                <input id="TxtRead" type="text" style="width: 60%; margin-left: 10%;" />
                                 <span class="Spam_AST"></span></span>
                         </td>
                         <td align="center" id="TD3" style="width: 20%;">
@@ -1579,41 +1586,7 @@
             <input id="BtnSave_Document" type="button" value="Guardar" onclick="BtnSave_Document_Client()" />
         </div>
     </div>
-    <div id="Dialog_Doc_Autorizados">
-        <div id="Div1" style="width: 100%; text-align: center; font: 12px/20px CenturyGothic,sans-serif;">
-            <table style="width: 100%">
-                <tr>
-                    <td class="Label_Bold">Nit Empresa
-                    </td>
-                    <td>
-                        <span class="cssToolTip_Form">
-                            <input type="text" id="Txt_Nit_Doc_A" maxlength="20" readonly="readonly" style="width: 100px;" />
-                            <span class="Spam_ACI"></span></span>
-                    </td>
-                    <td class="Label_Bold">Tipo identificación
-                    </td>
-                    <td>
-                        <span class="cssToolTip_Form">
-                            <input type="text" id="Txt_TypeIden_Doc_A" maxlength="20" readonly="readonly" />
-                            <span class="Spam_ACI"></span></span>
-                    </td>
-                    <td class="Label_Bold">Identificación
-                    </td>
-                    <td>
-                        <span class="cssToolTip_Form">
-                            <input type="text" id="Txt_Ident_Doc_A" maxlength="20" readonly="readonly" style="width: 100px;" />
-                            <span class="Spam_ACI"></span></span>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div id="container_DocAuto">
-        </div>
-        <div id="Div7" style="width: 100%; text-align: center; margin-top: 25px; font: 12px/20px CenturyGothic,sans-serif;">
-            <input id="BtnSave_Document_A" type="button" value="Guardar" onclick="BtnSave_Document_A_Client()" />
-        </div>
-    </div>
-    <div id="Dialog_Visor">
+     <div id="Dialog_Visor">
         <table style="width: 100%; height: 100%;">
             <tr>
                 <td>
@@ -1622,14 +1595,6 @@
             </tr>
         </table>
     </div>
-    <div id="Dialog_Control" style="width: 100%; text-align: center;">
-        <div class="cssload-container" style="margin-top: 25%">
-            <div class="cssload-whirlpool"></div>
-            <div>
-                <img id="Sasif" class="Logo_3" src="../../images/SASIF_NEW_WHITE.png" alt="SASIF S.A.S." />
-            </div>
-        </div>
-     </div>
     <div id="Dialog_Ver_Anexos">
         <div id="container_TDoc_Anexos" style="margin-top: 10px; margin-bottom: 10px;">
         </div>

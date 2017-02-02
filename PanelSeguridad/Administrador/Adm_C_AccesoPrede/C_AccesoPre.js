@@ -147,11 +147,11 @@ function HabilitarPanel(opcion) {
             Clear();
             estado = opcion;
             
-            //var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+            var OnlyEmpresa = VerificarNIT("Select_EmpresaNit_Ing");
 
-            //if (OnlyEmpresa == true) {
-            //    TransaccionesSegunNIT($("#Select_EmpresaNit").val());
-            //}
+            if (OnlyEmpresa == true) {
+                TransaccionesSegunNIT($("#Select_EmpresaNit_Ing").val());
+            }
             break;
 
         case "buscar":
@@ -423,6 +423,12 @@ function Clear() {
     $("#DDLColumns").val("-1").trigger("chosen:updated");
 
     $('.C_Chosen').trigger('chosen:updated');
+
+    var OnlyEmpresa = VerificarNIT("Select_EmpresaNit_Ing");
+
+    if (OnlyEmpresa == true) {
+        TransaccionesSegunNIT($("#Select_EmpresaNit_Ing").val());
+    }
 }
 
 //bloquear controles

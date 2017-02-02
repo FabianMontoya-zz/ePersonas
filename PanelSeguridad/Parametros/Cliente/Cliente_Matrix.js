@@ -199,6 +199,7 @@ function Change_Select_Nit() {
     });
 }
 
+//Carga los combos de los registros relacionados con Select_Nit
 function TransaccionesSegunNIT(index_ID) {
     if (index_ID != "-1") {
         Charge_Combos_Depend_Nit(Matrix_Area, "Select_Area", index_ID, "");
@@ -206,4 +207,44 @@ function TransaccionesSegunNIT(index_ID) {
         Charge_Combos_Depend_Nit(Matrix_Jefe, "Select_Jefe", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_GrpDocumentos, "Select_GrpDocument", index_ID, "");
     }
+}
+
+//revisa el tipo de documento
+function Change_Select_TDoc() {
+    $("#Select_Documento").change(function () {
+        var index = $(this).val();
+
+        if (index != 2) {
+
+            ResetError();
+            $("#TR_Nit").css("display", "none");
+            $(".Desvanecer").css("display", "inline-table");
+            $(".TR_1").css("width", "100%");
+            ValidatorCampos = 1;
+
+            $("#TD_1").css("width", "15.2%");
+            $("#TD_3").css("width", "3%");
+            $("#TD_4").css("width", "3%");
+            $("#TD_5").css("width", "5%");
+            $("#TD_6").css("width", "2%");
+            $("#TD_7").css("width", "35%");
+            $("#TD_8").css("width", "15%");
+            $("#Select_Ciudad_Doc").css("width", "80%");
+
+        }
+        else {
+            $("#TD_1").css("width", "13%");
+            $("#TD_3").css("width", "1%");
+            $("#TD_4").css("width", "5%");
+            $("#TD_5").css("width", "5%");
+            $("#TD_6").css("width", "50%");
+            $("#TD_7").css("width", "50%");
+            $("#TD_8").css("width", "50%");
+
+            ResetError();
+            $("#TR_Nit").css("display", "inline-table");
+            $(".Desvanecer").css("display", "none");
+            ValidatorCampos = 2;
+        }
+    });
 }

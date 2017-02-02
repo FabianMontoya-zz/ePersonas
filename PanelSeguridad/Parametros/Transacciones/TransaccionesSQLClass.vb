@@ -14,7 +14,7 @@ Public Class TransaccionesSQLClass
     ''' <param name="vp_S_Contenido"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Read_AllTransacciones(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String)
+    Public Function Read_AllTransacciones(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String, ByVal vp_S_Nit_User As String)
 
         Dim ObjListTransacciones As New List(Of TransaccionesClass)
         Dim StrQuery As String = ""
@@ -22,20 +22,31 @@ Public Class TransaccionesSQLClass
         Dim Conexion As String = conex.typeConexion("2")
 
         Dim sql As New StringBuilder
+        Dim vl_sql_filtro As New StringBuilder
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
-            sql.Append("SELECT T_Nit_ID,T_ID,T_Descripcion,T_FechaActualizacion,T_Usuario FROM Transacciones")
+            sql.Append("SELECT T_Nit_ID,T_ID,T_Descripcion,T_FechaActualizacion,T_Usuario FROM Transacciones ")
         Else
 
             If vp_S_Contenido = "ALL" Then
-                sql.Append("SELECT T_Nit_ID,T_ID,T_Descripcion,T_FechaActualizacion,T_Usuario FROM Transacciones")
+                sql.Append("SELECT T_Nit_ID,T_ID,T_Descripcion,T_FechaActualizacion,T_Usuario FROM Transacciones ")
             Else
                 sql.Append("SELECT T_Nit_ID,T_ID,T_Descripcion,T_FechaActualizacion,T_Usuario FROM Transacciones " & _
                       "WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
             End If
         End If
 
-        StrQuery = sql.ToString
+        If vp_S_Nit_User <> "N" Then
+            If vp_S_Contenido = "ALL" Then
+                vl_sql_filtro.Append("WHERE  T_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY T_Nit_ID, T_ID ASC")
+            Else
+                vl_sql_filtro.Append("AND  T_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY T_Nit_ID, T_ID ASC")
+            End If
+        Else
+            vl_sql_filtro.Append(" ORDER BY T_Nit_ID, T_ID ASC")
+        End If
+
+        StrQuery = sql.ToString & vl_sql_filtro.ToString
 
         ObjListTransacciones = listTransacciones(StrQuery, Conexion)
 

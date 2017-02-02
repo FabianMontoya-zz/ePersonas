@@ -67,8 +67,9 @@ Public Class C_AccesoPreAjax
         Dim vl_S_filtro As String = Request.Form("filtro")
         Dim vl_S_opcion As String = Request.Form("opcion")
         Dim vl_S_contenido As String = Request.Form("contenido")
+        Dim vl_S_Nit_User As String = Request.Form("Nit_User")
 
-        ObjList = SQL.Read_AllC_AccesoPre(vl_S_filtro, vl_S_opcion, vl_S_contenido)
+        ObjList = SQL.Read_AllC_AccesoPre(vl_S_filtro, vl_S_opcion, vl_S_contenido, vl_S_Nit_User)
 
         If ObjList Is Nothing Then
 

@@ -13,7 +13,7 @@ Public Class Adm_UsuarioSQLClass
     ''' <param name="vp_S_Contenido"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Read_AllUser(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String)
+    Public Function Read_AllUser(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String, ByVal vp_S_Nit_User As String)
 
         Dim ObjListUser As New List(Of Adm_UsuarioClass)
         Dim StrQuery As String = ""
@@ -22,6 +22,7 @@ Public Class Adm_UsuarioSQLClass
         Dim Conexion As String = conex.typeConexion("1")
 
         Dim sql As New StringBuilder
+        Dim vl_sql_filtro As New StringBuilder
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
             sql.Append(" SELECT  U_Nit_ID,  " & _
@@ -53,8 +54,7 @@ Public Class Adm_UsuarioSQLClass
                                " U_Usuario_Actualizacion, " & _
                                " U_FechaActualizacion, " & _
                                " ROW_NUMBER() OVER(ORDER BY U_Nit_ID, U_Usuario_ID ASC) AS Index_Usuarios " & _
-                               " FROM USUARIOS " & _
-                               " ORDER BY U_Nit_ID, U_Usuario_ID ASC")
+                               " FROM USUARIOS " )
         Else
 
             If vp_S_Contenido = "ALL" Then
@@ -87,8 +87,7 @@ Public Class Adm_UsuarioSQLClass
                                " U_Usuario_Actualizacion, " & _
                                " U_FechaActualizacion, " & _
                                " ROW_NUMBER() OVER(ORDER BY U_Nit_ID, U_Usuario_ID ASC) AS Index_Usuarios " & _
-                               " FROM USUARIOS " & _
-                               " ORDER BY U_Nit_ID, U_Usuario_ID ASC")
+                               " FROM USUARIOS ")
             Else
                 sql.Append(" SELECT  U_Nit_ID,  " & _
                                " U_Usuario_ID, " & _
@@ -120,12 +119,21 @@ Public Class Adm_UsuarioSQLClass
                                " U_FechaActualizacion, " & _
                                " ROW_NUMBER() OVER(ORDER BY U_Nit_ID, U_Usuario_ID ASC) AS Index_Usuarios " & _
                                " FROM USUARIOS " & _
-                      " WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%' ORDER BY U_Nit_ID, U_Usuario_ID ASC")
+                      " WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%' ")
             End If
         End If
 
-        StrQuery = sql.ToString
+        If vp_S_Nit_User <> "N" Then
+            If vp_S_Contenido = "ALL" Then
+                vl_sql_filtro.Append("WHERE  U_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY U_Nit_ID, U_Usuario_ID ASC ")
+            Else
+                vl_sql_filtro.Append("AND  U_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY U_Nit_ID, U_Usuario_ID ASC ")
+            End If
+        Else
+            vl_sql_filtro.Append(" ORDER BY U_Nit_ID, U_Usuario_ID ASC ")
+        End If
 
+        StrQuery = sql.ToString & vl_sql_filtro.ToString
         ObjListUser = ListUser(StrQuery, Conexion, "MatrixAll")
 
         Return ObjListUser

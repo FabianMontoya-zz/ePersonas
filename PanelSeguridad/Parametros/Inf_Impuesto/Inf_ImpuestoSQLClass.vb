@@ -13,7 +13,7 @@ Public Class Inf_ImpuestoSQLClass
     ''' <param name="vp_S_Contenido"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Read_All(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String)
+    Public Function Read_All(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String, ByVal vp_S_Nit_User As String)
 
         Dim ObjListInf_Impuesto As New List(Of Inf_ImpuestoClass)
         Dim StrQuery As String = ""
@@ -21,6 +21,7 @@ Public Class Inf_ImpuestoSQLClass
         Dim Conexion As String = conex.typeConexion("2")
 
         Dim sql As New StringBuilder
+        Dim vl_sql_filtro As New StringBuilder
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
             sql.Append(" SELECT IIMP_Cod_ID, " & _
@@ -88,7 +89,17 @@ Public Class Inf_ImpuestoSQLClass
             End If
         End If
 
-        StrQuery = sql.ToString
+        If vp_S_Nit_User <> "N" Then
+            If vp_S_Contenido = "ALL" Then
+                vl_sql_filtro.Append("WHERE  IIMP_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY IIMP_Nit_ID, IIMP_Cod_ID ASC")
+            Else
+                vl_sql_filtro.Append("AND  IIMP_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY IIMP_Nit_ID, IIMP_Cod_ID ASC")
+            End If
+        Else
+            vl_sql_filtro.Append(" ORDER BY IIMP_Nit_ID, IIMP_Cod_ID ASC")
+        End If
+
+        StrQuery = sql.ToString & vl_sql_filtro.ToString
 
         ObjListInf_Impuesto = list(StrQuery, Conexion)
 

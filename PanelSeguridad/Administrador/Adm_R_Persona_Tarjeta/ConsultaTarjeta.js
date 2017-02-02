@@ -10,9 +10,21 @@ var editDocID;
 //Evento load JS
 $(document).ready(function () {
 
-    $("#TablaDatos_D").css("padding-bottom", "35%");
+    /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
+    Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
+    Ocultar_Tablas();
+    /*================== FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN ==============*/
+
     transacionAjax_EmpresaNit('Cliente');
     Change_Select_Nit();
+    
+
+});
+
+//funcion para las ventanas emergentes
+function Ventanas_Emergentes() {
+
+    Load_Charge_Sasif(); //Carga de "SasifMaster.js" el Control de Carga
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
@@ -38,7 +50,15 @@ $(document).ready(function () {
             background: "black"
         }
     });
-});
+
+}
+
+//Función que oculta las tablas
+function Ocultar_Tablas() {
+    $("#TablaDatos_D").css("padding-bottom", "35%");
+    $("#TablaConsulta").css("display", "none");
+}
+
 
 //evento del boton salir
 function x() {
@@ -49,14 +69,18 @@ function x() {
 function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {
         var index_ID = $(this).val();
-
-        if (index_ID == "-1")
-            index_ID = "ALL";
-
-        transacionAjax_Consulta("Read_Tarjeta", index_ID);
+        TransaccionesSegunNIT(index_ID);
     });
 }
 
+//Carga los combos que estan relacionados a Select_Nit
+function TransaccionesSegunNIT(index_ID) {
+    if (index_ID != "-1") {
+        if (index_ID == "-1")
+            index_ID = "ALL";
+        transacionAjax_Consulta("Read_Tarjeta", index_ID);
+    }
+}
 
 // crea la tabla en el cliente
 function Table_Tarjetas() {

@@ -16,22 +16,49 @@ var editID;
 
 //Evento load JS
 $(document).ready(function () {
+
+
+    $("#Marco_trabajo_Form").css("height", "490px");
+    $("#container_TGrid").css("height", "380px");
+
+    /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
+    Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
+    Ocultar_Errores();
+    Ocultar_Tablas();
+    /*================== FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN ==============*/
+
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_EmpresaNit('Cliente');
 
-    $("#ESelect").css("display", "none");
-    $("#Img1").css("display", "none");
-    $("#Img2").css("display", "none");
-    $("#Img3").css("display", "none");
-    $("#Img5").css("display", "none");
-    $("#Img6").css("display", "none");
-    $("#Img7").css("display", "none");
-    $("#DE").css("display", "none");
-    $("#SE").css("display", "none");
-    $("#WA").css("display", "none");
+    $(function () {
+        $("#TxtF_Start").datepicker({ dateFormat: 'yy-mm-dd' });
+        $("#TxtF_End").datepicker({ dateFormat: 'yy-mm-dd' });
+        $("#TxtIniLun").timepicker();
+        $("#TxtFinLun").timepicker();
+        $("#TxtIniMar").timepicker();
+        $("#TxtFinMar").timepicker();
+        $("#TxtIniMie").timepicker();
+        $("#TxtFinMie").timepicker();
+        $("#TxtIniJue").timepicker();
+        $("#TxtFinJue").timepicker();
+        $("#TxtIniVie").timepicker();
+        $("#TxtFinVie").timepicker();
+        $("#TxtIniSab").timepicker();
+        $("#TxtFinSab").timepicker();
+        $("#TxtIniDom").timepicker();
+        $("#TxtFinDom").timepicker();
+        $("#TxtIniF").timepicker();
+        $("#TxtFinF").timepicker();
+    });
+    Change_Tipo_Calendario();
+});
 
-    $("#TablaConsulta").css("display", "none");
-    $("#Tabla_10").css("display", "none");
+
+//funcion para las ventanas emergentes
+function Ventanas_Emergentes() {
+
+    Load_Charge_Sasif(); //Carga de "SasifMaster.js" el Control de Carga
+
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
@@ -58,28 +85,30 @@ $(document).ready(function () {
         }
     });
 
-    $(function () {
-        $("#TxtF_Start").datepicker({ dateFormat: 'yy-mm-dd' });
-        $("#TxtF_End").datepicker({ dateFormat: 'yy-mm-dd' });
-        $("#TxtIniLun").timepicker();
-        $("#TxtFinLun").timepicker();
-        $("#TxtIniMar").timepicker();
-        $("#TxtFinMar").timepicker();
-        $("#TxtIniMie").timepicker();
-        $("#TxtFinMie").timepicker();
-        $("#TxtIniJue").timepicker();
-        $("#TxtFinJue").timepicker();
-        $("#TxtIniVie").timepicker();
-        $("#TxtFinVie").timepicker();
-        $("#TxtIniSab").timepicker();
-        $("#TxtFinSab").timepicker();
-        $("#TxtIniDom").timepicker();
-        $("#TxtFinDom").timepicker();
-        $("#TxtIniF").timepicker();
-        $("#TxtFinF").timepicker();
-    });
-    Change_Tipo_Calendario();
-});
+}
+
+//Función que oculta todas las IMG de los errores en pantalla
+function Ocultar_Errores() {
+    ResetError();
+    $("#ESelect").css("display", "none");
+    $("#Img1").css("display", "none");
+    $("#Img2").css("display", "none");
+    $("#Img3").css("display", "none");
+    $("#Img5").css("display", "none");
+    $("#Img6").css("display", "none");
+    $("#Img7").css("display", "none");
+    $("#DE").css("display", "none");
+    $("#SE").css("display", "none");
+    $("#WA").css("display", "none");
+    /*Los demás se ocultan en la SASIF Master*/
+}
+
+//Función que oculta las tablas
+function Ocultar_Tablas() {
+    $("#TablaConsulta").css("display", "none");
+    $("#Tabla_10").css("display", "none");
+}
+
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                 REGION BOTONES                                                                                                                ----*/
@@ -91,7 +120,7 @@ function BtnConsulta() {
     var ValidateSelect = ValidarDroplist();
     var opcion;
 
-    //OpenControl();
+    OpenControl();
 
     if (ValidateSelect == 1) {
         filtro = "N";
@@ -124,7 +153,7 @@ function BtnCrear() {
 
 //elimina de la BD
 function BtnElimina() {
-    //OpenControl();
+    OpenControl();
     transacionAjax_Calendario_delete("elimina");
 }
 
@@ -587,7 +616,7 @@ function Table_Calendario() {
             html_Calendario = "<table id='TCalendario' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Empresa</th><th>Codigo</th><th>Descripción</th><th>Tipo Calendario</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
             for (itemArray in ArrayCalendario) {
                 if (ArrayCalendario[itemArray].Calendario_ID != 0) {
-                    html_Calendario += "<tr id= 'TCalendario_" + ArrayCalendario[itemArray].Calendario_ID + "'><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Editar('" + ArrayCalendario[itemArray].Nit_ID + "','" + ArrayCalendario[itemArray].Calendario_ID + "')\"></input></td><td>" + ArrayCalendario[itemArray].Nit_ID + " - " + ArrayCalendario[itemArray].DescripEmpresa + "</td><td>" + ArrayCalendario[itemArray].Calendario_ID + "</td><td>" + ArrayCalendario[itemArray].Descripcion + "</td><td>" + ArrayCalendario[itemArray].TipoCalendario + " - " + ArrayCalendario[itemArray].DescripTipoCalendario + "</td><td>" + ArrayCalendario[itemArray].UsuarioCreacion + "</td><td>" + ArrayCalendario[itemArray].FechaCreacion + "</td><td>" + ArrayCalendario[itemArray].UsuarioActualizacion + "</td><td>" + ArrayCalendario[itemArray].FechaActualizacion + "</td></tr>";
+                    html_Calendario += "<tr id= 'TCalendario_" + ArrayCalendario[itemArray].Calendario_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + ArrayCalendario[itemArray].Nit_ID + "','" + ArrayCalendario[itemArray].Calendario_ID + "')\"></img><span>Editar Calendario</span></span></td><td>" + ArrayCalendario[itemArray].Nit_ID + " - " + ArrayCalendario[itemArray].DescripEmpresa + "</td><td>" + ArrayCalendario[itemArray].Calendario_ID + "</td><td>" + ArrayCalendario[itemArray].Descripcion + "</td><td>" + ArrayCalendario[itemArray].TipoCalendario + " - " + ArrayCalendario[itemArray].DescripTipoCalendario + "</td><td>" + ArrayCalendario[itemArray].UsuarioCreacion + "</td><td>" + ArrayCalendario[itemArray].FechaCreacion + "</td><td>" + ArrayCalendario[itemArray].UsuarioActualizacion + "</td><td>" + ArrayCalendario[itemArray].FechaActualizacion + "</td></tr>";
                 }
             }
             break;
@@ -596,7 +625,7 @@ function Table_Calendario() {
             html_Calendario = "<table id='TCalendario' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Empresa</th><th>Codigo</th><th>Descripción</th><th>Tipo Calendario</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
             for (itemArray in ArrayCalendario) {
                 if (ArrayCalendario[itemArray].Calendario_ID != 0) {
-                    html_Calendario += "<tr id= 'TCalendario_" + ArrayCalendario[itemArray].Calendario_ID + "'><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar('" + ArrayCalendario[itemArray].Nit_ID + "','" + ArrayCalendario[itemArray].Calendario_ID + "')\"></input></td><td>" + ArrayCalendario[itemArray].Nit_ID + " - " + ArrayCalendario[itemArray].DescripEmpresa + "</td><td>" + ArrayCalendario[itemArray].Calendario_ID + "</td><td>" + ArrayCalendario[itemArray].Descripcion + "</td><td>" + ArrayCalendario[itemArray].TipoCalendario + " - " + ArrayCalendario[itemArray].DescripTipoCalendario + "</td><td>" + ArrayCalendario[itemArray].UsuarioCreacion + "</td><td>" + ArrayCalendario[itemArray].FechaCreacion + "</td><td>" + ArrayCalendario[itemArray].UsuarioActualizacion + "</td><td>" + ArrayCalendario[itemArray].FechaActualizacion + "</td></tr>";
+                    html_Calendario += "<tr id= 'TCalendario_" + ArrayCalendario[itemArray].Calendario_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArrayCalendario[itemArray].Nit_ID + "','" + ArrayCalendario[itemArray].Calendario_ID + "')\"></img><span>Eliminar Calendario</span></span></td><td>" + ArrayCalendario[itemArray].Nit_ID + " - " + ArrayCalendario[itemArray].DescripEmpresa + "</td><td>" + ArrayCalendario[itemArray].Calendario_ID + "</td><td>" + ArrayCalendario[itemArray].Descripcion + "</td><td>" + ArrayCalendario[itemArray].TipoCalendario + " - " + ArrayCalendario[itemArray].DescripTipoCalendario + "</td><td>" + ArrayCalendario[itemArray].UsuarioCreacion + "</td><td>" + ArrayCalendario[itemArray].FechaCreacion + "</td><td>" + ArrayCalendario[itemArray].UsuarioActualizacion + "</td><td>" + ArrayCalendario[itemArray].FechaActualizacion + "</td></tr>";
                 }
             }
             break;

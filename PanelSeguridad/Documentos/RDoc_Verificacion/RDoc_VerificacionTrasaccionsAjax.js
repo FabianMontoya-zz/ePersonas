@@ -123,7 +123,8 @@ function transacionAjax_RDoc_Verificacion(State, filtro, opcion) {
         data: { "action": State,
             "filtro": filtro,
             "opcion": opcion,
-            "contenido": contenido
+            "contenido": contenido,
+            "Nit_User": g_NitEmpresa_User
         },
         //Transaccion Ajax en proceso
         success: function (result) {

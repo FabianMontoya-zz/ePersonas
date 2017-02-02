@@ -14,7 +14,12 @@ var editDocID;
 
 //Evento load JS
 $(document).ready(function () {
-    $("#TablaDatos_D").css("padding-bottom", "20%");
+    
+    /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
+    Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
+    Ocultar_Errores();
+    Ocultar_Tablas();
+    /*================== FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN ==============*/
 
     transaccionAjax_MPersona('MATRIX_PERSONA');
     transaccionAjax_MTarjeta('MATRIX_TARJETA');
@@ -24,14 +29,12 @@ $(document).ready(function () {
     Change_Select_Nit();
     Change_Select_Tarjeta();
 
-    $("#ESelect").css("display", "none");
-    $("#Img1").css("display", "none");
-    $("#Img2").css("display", "none");
-    $("#Img3").css("display", "none");
-    $("#Img5").css("display", "none");
-    $("#DE").css("display", "none");
-    $("#SE").css("display", "none");
-    $("#WA").css("display", "none");
+});
+
+//funcion para las ventanas emergentes
+function Ventanas_Emergentes() {
+
+    Load_Charge_Sasif(); //Carga de "SasifMaster.js" el Control de Carga
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
@@ -46,18 +49,44 @@ $(document).ready(function () {
         modal: true
     });
 
-});
+}
+
+//Función que oculta todas las IMG de los errores en pantalla
+function Ocultar_Errores() {
+    ResetError();
+    $("#ESelect").css("display", "none");
+    $("#Img1").css("display", "none");
+    $("#Img2").css("display", "none");
+    $("#Img3").css("display", "none");
+    $("#Img5").css("display", "none");
+    $("#DE").css("display", "none");
+    $("#SE").css("display", "none");
+    $("#WA").css("display", "none");
+    /*Los demás se ocultan en la SASIF Master*/
+}
+
+//Función que oculta las tablas
+function Ocultar_Tablas() {
+    $("#TablaDatos_D").css("padding-bottom", "20%");
+    $("#TablaConsulta").css("display", "none");
+}
 
 //carga el combo de Area dependiente
 function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {
         var index_ID = $(this).val();
+        TransaccionesSegunNIT(index_ID);
+    });
+    Change_Select_Persona();
+}
+
+//Carga los combos que estan relacionados a Select_Nit
+function TransaccionesSegunNIT(index_ID) {
+    if (index_ID != "-1") {
         Charge_Combos_Depend_Nit(Matrix_Persona, "Select_Persona", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Tarjeta, "Select_Tarjeta_Ent", index_ID, "");
         $("#Img5").css("display", "none");
-
-    });
-    Change_Select_Persona();
+    }
 }
 
 var Container_Tarjeta;
@@ -200,5 +229,9 @@ function Clear() {
     $("#Select_Tarjeta_Ent").val("-1");
 
     $('.C_Chosen').trigger('chosen:updated');
+    var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
 
+    if (OnlyEmpresa == true) {
+        TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+    }
 }

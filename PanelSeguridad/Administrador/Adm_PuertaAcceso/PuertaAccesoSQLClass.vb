@@ -13,7 +13,7 @@ Public Class PuertaAccesoSQLClass
     ''' <param name="vp_S_Contenido"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Read_AllPuertaAcceso(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String)
+    Public Function Read_AllPuertaAcceso(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String, ByVal vp_S_Nit_User As String)
 
         Dim ObjListPuertaAcceso As New List(Of PuertaAccesoClass)
         Dim StrQuery As String = ""
@@ -23,7 +23,7 @@ Public Class PuertaAccesoSQLClass
         Dim BD_Param As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDParam").ToString
 
         Dim sql As New StringBuilder
-
+        Dim vl_sql_filtro As New StringBuilder
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
             sql.Append(" SELECT PA_Nit_ID, " & _
@@ -85,7 +85,17 @@ Public Class PuertaAccesoSQLClass
             End If
         End If
 
-        StrQuery = sql.ToString
+        If vp_S_Nit_User <> "N" Then
+            If vp_S_Contenido = "ALL" Then
+                vl_sql_filtro.Append("WHERE  PA_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY PA_Nit_ID, PA_PuertaAcceso_ID ASC")
+            Else
+                vl_sql_filtro.Append("AND  PA_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY PA_Nit_ID, PA_PuertaAcceso_ID ASC")
+            End If
+        Else
+            vl_sql_filtro.Append(" ORDER BY PA_Nit_ID, PA_PuertaAcceso_ID ASC")
+        End If
+
+        StrQuery = sql.ToString & vl_sql_filtro.ToString
 
         ObjListPuertaAcceso = listPuertaAcceso(StrQuery, Conexion, "List")
 

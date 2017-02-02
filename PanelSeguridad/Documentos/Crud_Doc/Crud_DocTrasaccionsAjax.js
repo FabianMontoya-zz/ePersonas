@@ -5,7 +5,8 @@ function transaccionAjax_MClienteDep(State) {
         url: "Crud_DocAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'RUTA'
         },
         //Transaccion Ajax en proceso
@@ -19,6 +20,13 @@ function transaccionAjax_MClienteDep(State) {
         },
         error: function () {
 
+        },
+    }).done(function () {
+        var vl_OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+        if (vl_OnlyEmpresa == true) {
+            var vl_nit_emp = $("#Select_EmpresaNit").val();
+            TransaccionesSegunNIT(vl_nit_emp);
         }
     });
 }
@@ -30,7 +38,8 @@ function transaccionAjax_RutasOperacion(State) {
         url: "Crud_DocAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'RUTA'
         },
         //Transaccion Ajax en proceso
@@ -57,7 +66,8 @@ function transaccionAjax_MSecuencia(State) {
         url: "Crud_DocAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'RUTA'
         },
         //Transaccion Ajax en proceso
@@ -78,11 +88,13 @@ function transaccionAjax_MSecuencia(State) {
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transaccionAjax_MDocumento(State) {
+    OpenControl();
     $.ajax({
         url: "Crud_DocAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'RUTA'
         },
         //Transaccion Ajax en proceso
@@ -107,7 +119,8 @@ function transaccionAjax_MContrato(State) {
         url: "Crud_DocAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'RUTA'
         },
         //Transaccion Ajax en proceso
@@ -125,7 +138,6 @@ function transaccionAjax_MContrato(State) {
     });
 }
 
-
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_EmpresaNit(State) {
@@ -133,7 +145,8 @@ function transacionAjax_EmpresaNit(State) {
         url: "Crud_DocAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'CLIENTE'
         },
         //Transaccion Ajax en proceso
@@ -161,7 +174,8 @@ function transacionAjax_Formato(State) {
         url: "Crud_DocAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'CLIENTE'
         },
         //Transaccion Ajax en proceso
@@ -188,7 +202,8 @@ function transaccionAjax_MConsecutivo(State) {
         url: "Crud_DocAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'RUTA'
         },
         //Transaccion Ajax en proceso
@@ -228,7 +243,6 @@ function transaccionAjax_MConsecutivo(State) {
     });
 }
 
-
 /*PASO 1*/
 /*------------------------------ crear documento ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
@@ -243,7 +257,8 @@ function transacionAjax_CopyDocument(State) {
         url: "Crud_DocAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "RutaDestino": RutaDestino,
             "RutaTemporal": RutaTemporal,
             "Doc_name": Doc_name,
@@ -277,7 +292,8 @@ function transacionAjax_UpdateConsecutivo(State, Consecutivo) {
         url: "Crud_DocAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Consecutivo": Consecutivo,
             "Nit_ID": Nit_ID_proccess
         },
@@ -313,7 +329,8 @@ function transacionAjax_DocumentosExitentes(State) {
         url: "Crud_DocAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Nit_ID": Nit_ID_proccess,
             "Secuencia": ConsecutivoOrigen,
             "Documento_ID": $("#Select_Documento").val(),
@@ -383,7 +400,8 @@ function transacionAjax_AsociacionDocumentos(State) {
         url: "Crud_DocAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Nit_ID": Nit_ID_proccess,
             "TDoc": Tdoc,
             "Doc": Doc,

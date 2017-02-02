@@ -10,7 +10,7 @@ Public Class InvPuertaSQLClass
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Read_All_Tarjetas(ByVal vp_S_Nit As String)
+    Public Function Read_All_Tarjetas(ByVal vp_S_Nit As String, ByVal vp_S_Nit_User As String)
 
         Dim ObjListCliente As New List(Of InvPuertaClass)
         Dim StrQuery As String = ""
@@ -20,6 +20,7 @@ Public Class InvPuertaSQLClass
         Dim BD_Param As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDParam").ToString
 
         Dim sql As New StringBuilder
+        Dim vl_sql_filtro As New StringBuilder
 
         If vp_S_Nit = "ALL" Then
 
@@ -77,7 +78,7 @@ Public Class InvPuertaSQLClass
                                   "                                                                                  WHEN '' THEN 0  " & _
                                   "                                                                                  ELSE SUBSTRING((IT.IT_Nit_ID_Entrega),0,LEN(IT.IT_Nit_ID_Entrega)) " & _
                                   "                                                                     END " & _
-                                  " ORDER BY IT.IT_Tarjeta_ID ASC ")
+                                  " ")
 
         Else
 
@@ -136,10 +137,20 @@ Public Class InvPuertaSQLClass
                               "                                                                                  ELSE SUBSTRING((IT.IT_Nit_ID_Entrega),0,LEN(IT.IT_Nit_ID_Entrega)) " & _
                               "                                                                     END " & _
                               "  WHERE IT_Nit_ID = '" & vp_S_Nit & "' " & _
-                              " ORDER BY IT.IT_Tarjeta_ID ASC ")
+                              "  ")
         End If
 
-        StrQuery = sql.ToString
+        If vp_S_Nit_User <> "N" Then
+            If vp_S_Nit = "ALL" Then
+                vl_sql_filtro.Append(" WHERE  IT_Nit_ID ='" & vp_S_Nit & "' ORDER BY IT_Nit_ID, IT_Tarjeta_ID ASC")
+            Else
+                vl_sql_filtro.Append(" ORDER BY IT_Nit_ID, IT_Tarjeta_ID ASC")
+            End If
+        Else
+            vl_sql_filtro.Append(" ORDER BY IT_Nit_ID, IT_Tarjeta_ID ASC")
+        End If
+
+        StrQuery = sql.ToString & vl_sql_filtro.ToString
         ObjListCliente = listInvPuerta(StrQuery, Conexion, "List")
 
         Return ObjListCliente

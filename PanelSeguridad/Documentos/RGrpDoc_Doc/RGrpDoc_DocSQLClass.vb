@@ -13,7 +13,7 @@ Public Class RGrpDoc_DocSQLClass
     ''' <param name="vp_S_Contenido"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Read_AllRGrpDoc_Doc(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String)
+    Public Function Read_AllRGrpDoc_Doc(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String, ByVal vp_S_Nit_User As String)
 
         Dim ObjListRGrpDoc_Doc As New List(Of RGrpDoc_DocClass)
         Dim StrQuery As String = ""
@@ -23,7 +23,7 @@ Public Class RGrpDoc_DocSQLClass
         Dim BD_Param As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDParam").ToString
 
         Dim sql As New StringBuilder
-
+        Dim vl_sql_filtro As New StringBuilder
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
             sql.Append(" SELECT  RGD_Nit_ID, " & _
@@ -91,7 +91,17 @@ Public Class RGrpDoc_DocSQLClass
             End If
         End If
 
-        StrQuery = sql.ToString
+        If vp_S_Nit_User <> "N" Then
+            If vp_S_Contenido = "ALL" Then
+                vl_sql_filtro.Append(" WHERE  RGD_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY RGD_Nit_ID, RGD_Grp_Documento_ID, RGD_Documentos_ID ASC")
+            Else
+                vl_sql_filtro.Append(" AND  RGD_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY RGD_Nit_ID, RGD_Grp_Documento_ID, RGD_Documentos_ID ASC")
+            End If
+        Else
+            vl_sql_filtro.Append(" ORDER BY RGD_Nit_ID, RGD_Grp_Documento_ID, RGD_Documentos_ID ASC")
+        End If
+
+        StrQuery = sql.ToString & vl_sql_filtro.ToString
 
         ObjListRGrpDoc_Doc = listRGrpDoc_Doc(StrQuery, Conexion, "List")
 

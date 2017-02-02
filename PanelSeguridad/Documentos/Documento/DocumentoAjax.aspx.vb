@@ -54,8 +54,9 @@ Public Class DocumentoAjax
         Dim vl_S_filtro As String = Request.Form("filtro")
         Dim vl_S_opcion As String = Request.Form("opcion")
         Dim vl_S_contenido As String = Request.Form("contenido")
+        Dim vl_S_Nit_User As String = Request.Form("Nit_User")
 
-        ObjListDocumento = SQL_Documento.Read_AllDocumento(vl_S_filtro, vl_S_opcion, vl_S_contenido)
+        ObjListDocumento = SQL_Documento.Read_AllDocumento(vl_S_filtro, vl_S_opcion, vl_S_contenido, vl_S_Nit_User)
 
         If ObjListDocumento Is Nothing Then
 

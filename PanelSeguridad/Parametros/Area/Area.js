@@ -179,6 +179,9 @@ function BtnCrear() {
 function BtnElimina() {
     OpenControl(); //Abrimos el load de espera con el logo
     transacionAjax_Area_delete("elimina");
+    filtro = "N";
+    opcion = "ALL";
+    transacionAjax_Area("consulta", filtro, opcion);
 }
 
 
@@ -308,6 +311,7 @@ function Eliminar(index_Nit, index_Area) {
     for (itemArray in ArrayArea) {
         if (index_Nit == ArrayArea[itemArray].Nit_ID && index_Area == ArrayArea[itemArray].Area_ID) {
             editID = ArrayArea[itemArray].Area_ID;
+            editNit_ID = ArrayArea[itemArray].Nit_ID;
             $("#dialog_eliminar").dialog("option", "title", "Eliminar?");
             $("#dialog_eliminar").dialog("open");
         }
@@ -378,5 +382,11 @@ function Clear() {
     $("#DDLColumns").val("-1");
 
     $('.C_Chosen').trigger('chosen:updated');
+
+    var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+    if (OnlyEmpresa == true) {
+        TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+    }
 
 }
