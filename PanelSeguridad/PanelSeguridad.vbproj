@@ -244,6 +244,9 @@
     <Content Include="Administrador\menu.js" />
     <Content Include="Administrador\SasifMaster_Cosult.js" />
     <Content Include="AdmonActivos.Publish.xml" />
+    <Content Include="Agendamiento\menu.js" />
+    <Content Include="Agendamiento\SasifMaster_Cosult.js" />
+    <Content Include="Agendamiento\TipoServicio\TipoServicioAjax.aspx" />
     <Content Include="Contratos\Creacion\C_Contrato.aspx" />
     <Content Include="Contratos\Creacion\C_Contrato.js" />
     <Content Include="Contratos\Creacion\C_ContratoAjax.aspx" />
@@ -434,27 +437,6 @@
     <Content Include="login\LoginAjax.aspx" />
     <Content Include="login\LoginTransaccionsAjax.js" />
     <Content Include="Master\Sasif_Ing.js" />
-    <Content Include="McCain\Image\activo.png" />
-    <Content Include="McCain\Image\alert.png" />
-    <Content Include="McCain\Image\cabeza2.jpg" />
-    <Content Include="McCain\Image\error.png" />
-    <Content Include="McCain\Image\inactivo.png" />
-    <Content Include="McCain\Image\McCain.png" />
-    <Content Include="McCain\Image\MEN.jpg" />
-    <Content Include="McCain\Image\menu3.jpg" />
-    <Content Include="McCain\Image\sasif1.gif" />
-    <Content Include="McCain\Image\ver.png" />
-    <Content Include="McCain\Image\WOMEN.jpg" />
-    <Content Include="McCain\MCcain.html" />
-    <Content Include="McCain\Script\jquery-1.4.1.js" />
-    <Content Include="McCain\Script\jquery-ui-1.10.4.custom.js" />
-    <Content Include="McCain\Script\jquery.dataTables.min.js" />
-    <Content Include="McCain\Script\jquery.min.js" />
-    <Content Include="McCain\Script\McCain.js" />
-    <Content Include="McCain\Script\SasifMaster.js" />
-    <Content Include="McCain\Style\css_controles.css" />
-    <Content Include="McCain\Style\css_master.css" />
-    <Content Include="McCain\Style\jquery-ui-1.10.4.custom.css" />
     <Content Include="Menu\menu.aspx" />
     <Content Include="Menu\menu.js" />
     <Content Include="Menu\menuAjax.aspx" />
@@ -583,6 +565,7 @@
     <Content Include="Activos\Sasif_menu.Master" />
     <Content Include="Factura\Sasif_menu.Master" />
     <Content Include="Ingreso_New\Sasif_menu.Master" />
+    <Content Include="Agendamiento\Sasif_menu.Master" />
     <None Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
@@ -622,9 +605,6 @@
   <ItemGroup>
     <Content Include="Images\Thumbs.db" />
     <Content Include="Master\Sasif_Ing.Master" />
-    <Content Include="McCain\Image\Cedula.pdf" />
-    <Content Include="McCain\Image\PasadoJudicial.pdf" />
-    <Content Include="McCain\Image\Thumbs.db" />
     <Content Include="Menu\Sasif_menu.Master" />
     <Content Include="Parametros\Sasif_menu.Master" />
     <Content Include="Administrador\Sasif_menu.Master" />
@@ -852,6 +832,15 @@
     </Compile>
     <Compile Include="Administrador\Adm_Usuario\Adm_UsuarioClass.vb" />
     <Compile Include="Administrador\Adm_Usuario\Adm_UsuarioSQLClass.vb" />
+    <Compile Include="Agendamiento\TipoServicio\TipoServicioAjax.aspx.designer.vb">
+      <DependentUpon>TipoServicioAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Agendamiento\TipoServicio\TipoServicioAjax.aspx.vb">
+      <DependentUpon>TipoServicioAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Agendamiento\TipoServicio\TipoServicioClass.vb" />
+    <Compile Include="Agendamiento\TipoServicio\TipoServicioSQLClass.vb" />
     <Compile Include="conexion_BD\Conector.vb" />
     <Compile Include="Contratos\Creacion\C_Contrato.aspx.designer.vb">
       <DependentUpon>C_Contrato.aspx</DependentUpon>
@@ -1014,31 +1003,6 @@
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-
-    <Compile Include="Huellas\Creacion\CapturaHuella.aspx.designer.vb">
-      <DependentUpon>CapturaHuella.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Huellas\Creacion\CapturaHuella.aspx.vb">
-      <DependentUpon>CapturaHuella.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Huellas\Creacion\Huellas.aspx.designer.vb">
-      <DependentUpon>Huellas.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Huellas\Creacion\Huellas.aspx.vb">
-      <DependentUpon>Huellas.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Huellas\Creacion\HuellasAjax.aspx.designer.vb">
-      <DependentUpon>HuellasAjax.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Huellas\Creacion\HuellasAjax.aspx.vb">
-      <DependentUpon>HuellasAjax.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Huellas\Creacion\HuellasCapturaClass.vb" />
-    <Compile Include="Huellas\Creacion\HuellasClass.vb" />
-    <Compile Include="Huellas\Creacion\HuellasSQLClass.vb" />
     <Compile Include="Ingreso_New\ControlAcceso\ControlAccesoClass.vb" />
     <Compile Include="Ingreso_New\ControlAcceso\ControlAccesoSQLClass.vb" />
     <Compile Include="Ingreso_New\Entrada\Ingreso.aspx.designer.vb">
