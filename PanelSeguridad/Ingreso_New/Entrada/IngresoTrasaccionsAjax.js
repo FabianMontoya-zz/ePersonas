@@ -38,7 +38,7 @@ function transaccionAjax_Door_Access(State) {
         //crear json
         data: {
             "action": State,
-            "NIT": Nit_ID_Proccess
+            "NIT": Array_G_Usuario[0].Nit_ID
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -65,7 +65,7 @@ function transaccionAjax_Door_Access_Area(State) {
         //crear json
         data: {
             "action": State,
-            "NIT": Nit_ID_Proccess
+            "NIT": Array_G_Usuario[0].Nit_ID
         },
         //Transaccion Ajax en proceso
         success: function (result) {
