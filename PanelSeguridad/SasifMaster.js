@@ -32,7 +32,8 @@ Matrix_Mes[11] = [12, "Diciembre", 31];
 /*--------------- region de variables globales --------------------*/
 
 $(document).ready(function () {
-    //clearConsole();
+    location.reload(true); //Recargamos la página obligando a cargar de nuevo el cache de la página
+    clearConsole();
 
     fecha();
 
