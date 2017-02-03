@@ -93,9 +93,9 @@ Public Class ClienteSQLClass
                         " LEFT JOIN AREA A ON A.A_Area_ID = CLI.CLI_Area_ID AND  A.A_Nit_ID = CLI.CLI_Nit_ID" & _
                         " LEFT JOIN CARGO CA ON CA.C_Cargo_ID = CLI.CLI_Cargo_ID AND CA.C_Nit_ID = CLI.CLI_Nit_ID" & _
                         " LEFT JOIN " & BD_Admin & ".dbo.POLITICA_SEGURIDAD PO ON PO.PS_Politica_ID = CLI.CLI_Politica_ID AND PO.PS_Nit_ID = CLI.CLI_Nit_ID " & _
-                        " INNER JOIN CLIENTE CLI_2 ON CLI_2.CLI_Document_ID = SUBSTRING(CLI.CLI_Nit_ID,0,LEN(CLI.CLI_Nit_ID)) " & _
+                        " INNER JOIN CLIENTE CLI_2 ON CLI_2.CLI_Document_ID = SUBSTRING(CLI.CLI_Nit_ID,0,LEN(CLI.CLI_Nit_ID)) AND CLI_2.CLI_Nit_ID = CLI.CLI_Nit_ID " & _
                         " LEFT JOIN CIUDADES C2 ON C2.C_Ciudad_ID = CLI.CLI_DocCiudad  " & _
-                        " LEFT JOIN CLIENTE CLI_3 ON CLI_3.CLI_Document_ID = CLI.CLI_Document_ID_Jefe " & _
+                        " LEFT JOIN CLIENTE CLI_3 ON CLI_3.CLI_Document_ID = CLI.CLI_Document_ID_Jefe AND CLI_3.CLI_Nit_ID = CLI.CLI_Nit_ID " & _
                         " LEFT JOIN " & BD_Documentos & ".dbo.GRUPO_DOCUMENTO GD ON GD.GD_Grp_Documento_ID = CLI.CLI_GrpDocumentos AND GD.GD_Nit_ID = CLI.CLI_Nit_ID ")
         Else
 
@@ -165,9 +165,9 @@ Public Class ClienteSQLClass
                         " LEFT JOIN AREA A ON A.A_Area_ID = CLI.CLI_Area_ID AND  A.A_Nit_ID = CLI.CLI_Nit_ID" & _
                         " LEFT JOIN CARGO CA ON CA.C_Cargo_ID = CLI.CLI_Cargo_ID AND CA.C_Nit_ID = CLI.CLI_Nit_ID" & _
                         " LEFT JOIN " & BD_Admin & ".dbo.POLITICA_SEGURIDAD PO ON PO.PS_Politica_ID = CLI.CLI_Politica_ID AND PO.PS_Nit_ID = CLI.CLI_Nit_ID " & _
-                        " INNER JOIN CLIENTE CLI_2 ON CLI_2.CLI_Document_ID = SUBSTRING(CLI.CLI_Nit_ID,0,LEN(CLI.CLI_Nit_ID)) " & _
+                        " INNER JOIN CLIENTE CLI_2 ON CLI_2.CLI_Document_ID = SUBSTRING(CLI.CLI_Nit_ID,0,LEN(CLI.CLI_Nit_ID)) AND CLI_2.CLI_Nit_ID = CLI.CLI_Nit_ID  " & _
                         " LEFT JOIN CIUDADES C2 ON C2.C_Ciudad_ID = CLI.CLI_DocCiudad  " & _
-                        " LEFT JOIN CLIENTE CLI_3 ON CLI_3.CLI_Document_ID = CLI.CLI_Document_ID_Jefe " & _
+                        " LEFT JOIN CLIENTE CLI_3 ON CLI_3.CLI_Document_ID = CLI.CLI_Document_ID_Jefe AND CLI_3.CLI_Nit_ID = CLI.CLI_Nit_ID " & _
                         " LEFT JOIN " & BD_Documentos & ".dbo.GRUPO_DOCUMENTO GD ON GD.GD_Grp_Documento_ID = CLI.CLI_GrpDocumentos  AND GD.GD_Nit_ID = CLI.CLI_Nit_ID ")
             Else
                 sql.Append(" SELECT CLI.CLI_Nit_ID, " & _
@@ -235,9 +235,9 @@ Public Class ClienteSQLClass
                         " LEFT JOIN AREA A ON A.A_Area_ID = CLI.CLI_Area_ID AND  A.A_Nit_ID = CLI.CLI_Nit_ID" & _
                         " LEFT JOIN CARGO CA ON CA.C_Cargo_ID = CLI.CLI_Cargo_ID AND CA.C_Nit_ID = CLI.CLI_Nit_ID" & _
                         " LEFT JOIN " & BD_Admin & ".dbo.POLITICA_SEGURIDAD PO ON PO.PS_Politica_ID = CLI.CLI_Politica_ID AND PO.PS_Nit_ID = CLI.CLI_Nit_ID" & _
-                        " LEFT JOIN CLIENTE CLI_2 ON CLI_2.CLI_Document_ID = SUBSTRING(CLI.CLI_Nit_ID,0,LEN(CLI.CLI_Nit_ID)) " & _
+                        " LEFT JOIN CLIENTE CLI_2 ON CLI_2.CLI_Document_ID = SUBSTRING(CLI.CLI_Nit_ID,0,LEN(CLI.CLI_Nit_ID)) AND CLI_2.CLI_Nit_ID = CLI.CLI_Nit_ID " & _
                         " LEFT JOIN CIUDADES C2 ON C2.C_Ciudad_ID = CLI.CLI_DocCiudad  " & _
-                        " LEFT JOIN CLIENTE CLI_3 ON CLI_3.CLI_Document_ID = CLI.CLI_Document_ID_Jefe " & _
+                        " LEFT JOIN CLIENTE CLI_3 ON CLI_3.CLI_Document_ID = CLI.CLI_Document_ID_Jefe AND CLI_3.CLI_Nit_ID = CLI.CLI_Nit_ID " & _
                         " LEFT JOIN " & BD_Documentos & ".dbo.GRUPO_DOCUMENTO GD ON GD.GD_Grp_Documento_ID = CLI.CLI_GrpDocumentos AND GD.GD_Nit_ID = CLI.CLI_Nit_ID " & _
                         " WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
             End If

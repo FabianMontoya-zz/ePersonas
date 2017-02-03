@@ -29,6 +29,8 @@ Matrix_Mes[9] = [10, "Octubre", 31];
 Matrix_Mes[10] = [11, "Noviembre", 30];
 Matrix_Mes[11] = [12, "Diciembre", 31];
 
+
+
 /*--------------- region de variables globales --------------------*/
 
 $(document).ready(function () {
@@ -66,12 +68,46 @@ $(document).ready(function () {
         this.value = "";
     });
 
-    console.log("%cAll is ready, enjoy!", "color: #b70d0d; font-size: x-large");
+    ready();
+    /*Función que recarga la página y exige que se traigan los nuevos cambios desde el servidor*/
+    let isRedirected = sessionStorage.getItem('isRedirected');
+    if (!isRedirected) {
+        sessionStorage.setItem('isRedirected', true);
+        window.location.reload(true);
+    }
+    /**/
 });
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                 BOTONES GLOBALES                                                                                                            ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+function ready() {
+    var Digital = new Date();
+
+    var Day = Digital.getDate();
+    var Month = Digital.getMonth();
+    var Year = Digital.getFullYear();
+
+    if (Day <= 9) {
+        Day = "0" + Day;
+    }
+
+    var hours = Digital.getHours();
+    var minutes = Digital.getMinutes();
+    var seconds = Digital.getSeconds();
+
+
+    if (hours <= 9)
+        hours = "0" + hours;
+    if (minutes <= 9)
+        minutes = "0" + minutes;
+    if (seconds <= 9)
+        seconds = "0" + seconds;
+    setTimeout(console.log.bind(console, "%cAll is ready, enjoy!", "color: #b70d0d; font-size: x-large")); //No muestra la ruta donde se genera el console
+    setTimeout(console.log.bind(console, "" + Day + "/" + Matrix_Mes[Month][1] + "/" + Year + " " + hours + ":" + minutes + ":" + seconds + "")); //No muestra la ruta donde se genera el console
+
+}
 
 //Función que borra el log generado en la consola según el navegador
 function clearConsole() {
@@ -82,7 +118,9 @@ function clearConsole() {
     } else if (typeof console.clear !== 'undefined') {
         console.API = console;
     }
-    console.API.clear();
+    if (console.API) {
+        setTimeout(console.API.clear.bind(console)); //No muestra la ruta donde se genera el console
+    }
 }
 
 //salida del formulario
@@ -239,7 +277,6 @@ function ResetError() {
 
 //Función que bloquea el retorno entre páginas
 function No_Back_Button() {
-    location.reload(true);
     window.location.hash = "no-back-button";
     window.location.hash = "Again-No-back-button" //chrome    
     window.onhashchange = function () { window.location.hash = "no-back-button"; }
