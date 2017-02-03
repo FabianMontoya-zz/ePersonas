@@ -92,7 +92,7 @@ Public Class ClienteSQLClass
                         " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D2 ON D2.DDL_ID = CLI.CLI_Regimen AND D2.DDL_Tabla = 'REGIMEN' " & _
                         " LEFT JOIN AREA A ON A.A_Area_ID = CLI.CLI_Area_ID AND  A.A_Nit_ID = CLI.CLI_Nit_ID" & _
                         " LEFT JOIN CARGO CA ON CA.C_Cargo_ID = CLI.CLI_Cargo_ID AND CA.C_Nit_ID = CLI.CLI_Nit_ID" & _
-                        " LEFT JOIN " & BD_Admin & ".dbo.POLITICA_SEGURIDAD PO ON PO.PS_Politica_ID = CLI.CLI_Politica_ID " & _
+                        " LEFT JOIN " & BD_Admin & ".dbo.POLITICA_SEGURIDAD PO ON PO.PS_Politica_ID = CLI.CLI_Politica_ID AND PO.PS_Nit_ID = CLI.CLI_Nit_ID " & _
                         " INNER JOIN CLIENTE CLI_2 ON CLI_2.CLI_Document_ID = SUBSTRING(CLI.CLI_Nit_ID,0,LEN(CLI.CLI_Nit_ID)) " & _
                         " LEFT JOIN CIUDADES C2 ON C2.C_Ciudad_ID = CLI.CLI_DocCiudad  " & _
                         " LEFT JOIN CLIENTE CLI_3 ON CLI_3.CLI_Document_ID = CLI.CLI_Document_ID_Jefe " & _
@@ -164,7 +164,7 @@ Public Class ClienteSQLClass
                         " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D2 ON D2.DDL_ID = CLI.CLI_Regimen AND D2.DDL_Tabla = 'REGIMEN' " & _
                         " LEFT JOIN AREA A ON A.A_Area_ID = CLI.CLI_Area_ID AND  A.A_Nit_ID = CLI.CLI_Nit_ID" & _
                         " LEFT JOIN CARGO CA ON CA.C_Cargo_ID = CLI.CLI_Cargo_ID AND CA.C_Nit_ID = CLI.CLI_Nit_ID" & _
-                        " LEFT JOIN " & BD_Admin & ".dbo.POLITICA_SEGURIDAD PO ON PO.PS_Politica_ID = CLI.CLI_Politica_ID " & _
+                        " LEFT JOIN " & BD_Admin & ".dbo.POLITICA_SEGURIDAD PO ON PO.PS_Politica_ID = CLI.CLI_Politica_ID AND PO.PS_Nit_ID = CLI.CLI_Nit_ID " & _
                         " INNER JOIN CLIENTE CLI_2 ON CLI_2.CLI_Document_ID = SUBSTRING(CLI.CLI_Nit_ID,0,LEN(CLI.CLI_Nit_ID)) " & _
                         " LEFT JOIN CIUDADES C2 ON C2.C_Ciudad_ID = CLI.CLI_DocCiudad  " & _
                         " LEFT JOIN CLIENTE CLI_3 ON CLI_3.CLI_Document_ID = CLI.CLI_Document_ID_Jefe " & _
@@ -234,7 +234,7 @@ Public Class ClienteSQLClass
                         " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D2 ON D2.DDL_ID = CLI.CLI_Regimen AND D2.DDL_Tabla = 'REGIMEN' " & _
                         " LEFT JOIN AREA A ON A.A_Area_ID = CLI.CLI_Area_ID AND  A.A_Nit_ID = CLI.CLI_Nit_ID" & _
                         " LEFT JOIN CARGO CA ON CA.C_Cargo_ID = CLI.CLI_Cargo_ID AND CA.C_Nit_ID = CLI.CLI_Nit_ID" & _
-                        " LEFT JOIN " & BD_Admin & ".dbo.POLITICA_SEGURIDAD PO ON PO.PS_Politica_ID = CLI.CLI_Politica_ID " & _
+                        " LEFT JOIN " & BD_Admin & ".dbo.POLITICA_SEGURIDAD PO ON PO.PS_Politica_ID = CLI.CLI_Politica_ID AND PO.PS_Nit_ID = CLI.CLI_Nit_ID" & _
                         " LEFT JOIN CLIENTE CLI_2 ON CLI_2.CLI_Document_ID = SUBSTRING(CLI.CLI_Nit_ID,0,LEN(CLI.CLI_Nit_ID)) " & _
                         " LEFT JOIN CIUDADES C2 ON C2.C_Ciudad_ID = CLI.CLI_DocCiudad  " & _
                         " LEFT JOIN CLIENTE CLI_3 ON CLI_3.CLI_Document_ID = CLI.CLI_Document_ID_Jefe " & _
@@ -245,12 +245,12 @@ Public Class ClienteSQLClass
 
         If vp_S_Nit_User <> "N" Then
             If vp_S_Contenido = "ALL" Then
-                vl_sql_filtro.Append(" WHERE   CLI.CLI_Nit_ID='" & vp_S_Nit_User & "' ORDER BY  CLI.CLI_Nit_ID, CLI.CLI_Document_ID ASC")
+                vl_sql_filtro.Append(" WHERE   CLI.CLI_Nit_ID='" & vp_S_Nit_User & "' ")
             Else
-                vl_sql_filtro.Append(" AND   CLI.CLI_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY  CLI.CLI_Nit_ID, CLI.CLI_Document_ID ASC")
+                vl_sql_filtro.Append(" AND   CLI.CLI_Nit_ID ='" & vp_S_Nit_User & "' ")
             End If
         Else
-            vl_sql_filtro.Append(" ORDER BY  CLI.CLI_Nit_ID, CLI.CLI_Document_ID ASC")
+            vl_sql_filtro.Append(" ")
         End If
 
         StrQuery = sql.ToString & vl_sql_filtro.ToString
