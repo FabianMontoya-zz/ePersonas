@@ -50,7 +50,6 @@ $(document).ready(function () {
 
     /*MostarContraseña();*/
     /*ValidarCamposIguales();*/
-    No_Back_Button();
 });
 
 function RevisarContraseña() {
@@ -127,7 +126,6 @@ function transacionAjax(State) {
        //Transaccion Ajax en proceso
         success: function (result) {
 
-            No_Back_Button();
             if (result == "Exito") {
 
                 $("#dialog").dialog("option", "title", "Exito");

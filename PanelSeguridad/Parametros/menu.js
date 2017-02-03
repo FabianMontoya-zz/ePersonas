@@ -195,7 +195,6 @@ function transacionAjax(State) {
                 }
                 arbol();
             }
-            No_Back_Button();
         },
         error: function () {
             Mensaje_General("¡Disculpenos!", "Se generó un error al realizar la transacción y no se completó la tarea.", "E");

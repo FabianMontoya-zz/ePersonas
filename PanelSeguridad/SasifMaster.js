@@ -32,7 +32,6 @@ Matrix_Mes[11] = [12, "Diciembre", 31];
 /*--------------- region de variables globales --------------------*/
 
 $(document).ready(function () {
-    location.reload(true); //Recargamos la página obligando a cargar de nuevo el cache de la página
     clearConsole();
 
     fecha();
@@ -67,7 +66,6 @@ $(document).ready(function () {
         this.value = "";
     });
 
-    No_Back_Button();
     console.log("%cAll is ready, enjoy!", "color: #b70d0d; font-size: x-large");
 });
 
@@ -119,7 +117,6 @@ function ConsultaParametrosURL() {
 
     $("#User").html(User.toUpperCase());
 
-    No_Back_Button();
     return User;
 }
 
@@ -242,6 +239,7 @@ function ResetError() {
 
 //Función que bloquea el retorno entre páginas
 function No_Back_Button() {
+    location.reload(true);
     window.location.hash = "no-back-button";
     window.location.hash = "Again-No-back-button" //chrome    
     window.onhashchange = function () { window.location.hash = "no-back-button"; }
@@ -379,7 +377,6 @@ function Load_Charge_Sasif() {
             duration: 200
         }
     });
-    No_Back_Button();
 }
 
 //Abre control de carga
@@ -394,13 +391,11 @@ function OpenControl() {
 
     $("#Dialog_Control").dialog("open");
     $("#Dialog_Control").dialog("option", "title", "");
-    No_Back_Button();
 }
 
 //Cierra el Control de Carga
 function CloseControl() {
     $("#Dialog_Control").dialog("close");
-    No_Back_Button();
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/

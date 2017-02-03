@@ -19,7 +19,6 @@ var IntentosFallidos = 0;
 
 //Evento load JS
 $(document).ready(function () {
-
     $("#Marco_trabajo_Form").css("height", "490px");
     $("#container_TUser").css("height", "380px");
 
