@@ -15,7 +15,7 @@ Public Class TipoServicioSQLClass
     ''' <remarks></remarks>
     Public Function Read_AllTipoServicio(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String, ByVal vp_S_Nit_User As String)
 
-        Dim ObjListArea As New List(Of AreaClass)
+        Dim ObjListTipoServicio As New List(Of TipoServicioClass)
         Dim StrQuery As String = ""
         Dim conex As New Conector
         Dim Conexion As String = conex.typeConexion("2")
@@ -46,7 +46,7 @@ Public Class TipoServicioSQLClass
                           "TCS_Usuario_Creacion, " & _
                           "TCS_FechaCreacion, " & _
                           "TCS_Usuario_Actualizacion, " & _
-                          "TCS_FechaActualizacion, " & _
+                          "TCS_FechaActualizacion " & _
                       " FROM TIPO_SERVICIOS ")
         Else
 
@@ -71,7 +71,7 @@ Public Class TipoServicioSQLClass
                           "TCS_Usuario_Creacion, " & _
                           "TCS_FechaCreacion, " & _
                           "TCS_Usuario_Actualizacion, " & _
-                          "TCS_FechaActualizacion, " & _
+                          "TCS_FechaActualizacion " & _
                       " FROM TIPO_SERVICIOS ")
             Else
                 sql.Append(" SELECT TCS_Nit_ID, " & _
@@ -94,7 +94,7 @@ Public Class TipoServicioSQLClass
                           "TCS_Usuario_Creacion, " & _
                           "TCS_FechaCreacion, " & _
                           "TCS_Usuario_Actualizacion, " & _
-                          "TCS_FechaActualizacion, " & _
+                          "TCS_FechaActualizacion " & _
                       " FROM TIPO_SERVICIOS " & _
                       "WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
             End If
@@ -112,9 +112,9 @@ Public Class TipoServicioSQLClass
 
         StrQuery = sql.ToString & vl_sql_filtro.ToString
 
-        ObjListArea = listArea(StrQuery, Conexion, "List")
+        ObjListTipoServicio = listTipoServicio(StrQuery, Conexion, "List")
 
-        Return ObjListArea
+        Return ObjListTipoServicio
 
     End Function
 
@@ -337,13 +337,13 @@ Public Class TipoServicioSQLClass
 #Region "CARGAR LISTAS"
 
     ''' <summary>
-    ''' funcion que trae el listado de Area para armar la tabla
+    ''' funcion que trae el listado de TipoServicio para armar la tabla
     ''' </summary>
     ''' <param name="vp_S_StrQuery"></param>
     ''' <param name="vg_S_StrConexion"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function listArea(ByVal vp_S_StrQuery As String, ByVal vg_S_StrConexion As String, ByVal vp_S_TypeList As String)
+    Public Function listTipoServicio(ByVal vp_S_StrQuery As String, ByVal vg_S_StrConexion As String, ByVal vp_S_TypeList As String)
 
         'inicializamos conexiones a la BD
         Dim objcmd As OleDbCommand = Nothing
@@ -440,7 +440,7 @@ Public Class TipoServicioSQLClass
     ''' <param name="vp_O_Obj"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Consulta_Repetido(ByVal vp_O_Obj As AreaClass)
+    Public Function Consulta_Repetido(ByVal vp_O_Obj As TipoServicioClass)
 
         Dim StrQuery As String = ""
         Dim Result As String = ""
@@ -450,7 +450,7 @@ Public Class TipoServicioSQLClass
 
         sql.AppendLine(" SELECT COUNT(1) FROM TIPO_SERVICIOS " & _
                        " WHERE TCS_Nit_ID = '" & vp_O_Obj.Nit_ID & "'" & _
-                       " AND TCS_Codigo_ID = '" & vp_O_Obj.Area_ID & "'")
+                       " AND TCS_Codigo_ID = '" & vp_O_Obj.Codigo_ID & "'")
 
         StrQuery = sql.ToString
 
@@ -460,13 +460,13 @@ Public Class TipoServicioSQLClass
     End Function
 
     ''' <summary>
-    ''' lee la matriz de Areas
+    ''' lee la matriz de TipoServicios
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Read_Matrix_Area()
+    Public Function Read_Matrix_TipoServicio()
 
-        Dim ObjList As New List(Of AreaClass)
+        Dim ObjList As New List(Of TipoServicioClass)
         Dim conex As New Conector
         Dim Conexion As String = conex.typeConexion("2")
 
@@ -476,7 +476,7 @@ Public Class TipoServicioSQLClass
                    " ORDER BY TCS_Codigo_ID ASC ")
         Dim StrQuery As String = sql.ToString
 
-        ObjList = listArea(StrQuery, Conexion, "Matrix")
+        ObjList = listTipoServicio(StrQuery, Conexion, "Matrix")
 
         Return ObjList
 
