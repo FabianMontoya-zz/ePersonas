@@ -84,8 +84,8 @@ function Change_Select_Nit() {
     });
 }
 
-function TransaccionesSegunNIT(index_NIT_ID) {
-    if (index_NIT_ID != "-1") {
+function TransaccionesSegunNIT(index_ID) {
+    if (index_ID != "-1") {
         Charge_Combos_Depend_Nit(Matrix_PAcceso, "Select_PAcceso", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Area, "Select_Area", index_ID, "");
     }
