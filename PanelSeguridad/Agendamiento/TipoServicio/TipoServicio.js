@@ -28,6 +28,7 @@ $(document).ready(function () {
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_EmpresaNit('Cliente');
     transacionAjax_MMoneda('Moneda');
+    
 
     //$(function () {
     //    $("#TxtF_Start").datepicker({ dateFormat: 'yy-mm-dd' });
@@ -50,6 +51,7 @@ $(document).ready(function () {
     //    $("#TxtFinF").timepicker();
     //});
     Change_Select_Nit();
+    Change_Select_Moneda();
 });
 
 
@@ -125,6 +127,18 @@ function TransaccionesSegunNIT(index_ID) {
     }
 }
 
+//coloca la sigla de la moneda
+function Change_Select_Moneda() {
+    $("#Select_Moneda_Cod").change(function () {
+        var index_ID = this.value;
+        for (item in Matrix_Moneda) {
+            if (Matrix_Moneda[item].MonedaCod_ID == index_ID) {
+                $("#V_Sigla_1").html(Matrix_Moneda[item].Sigla);
+                $("#V_Sigla_2").html(Matrix_Moneda[item].Sigla);
+            }
+        }
+    });
+}
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                 REGION BOTONES                                                                                                                ----*/

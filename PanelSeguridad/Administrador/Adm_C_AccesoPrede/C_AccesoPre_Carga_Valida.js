@@ -13,7 +13,9 @@ function Change_Select_Nit() {
         console.log("aa1");
         var index_ID = $(this).val();
         TransaccionesSegunNIT(index_ID);
+        
     });
+    transaccionAjax_MPersona('MATRIX_PERSONA');
 }
 
 //Valida la informacio a la que puede acceder segun el usuario

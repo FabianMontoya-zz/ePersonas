@@ -238,8 +238,11 @@ Public Class C_AccesoPreAjax
 
         Dim SQL As New ClienteSQLClass
         Dim ObjList As New List(Of ClienteClass)
+        Dim obj As New ClienteClass
+        obj.Nit_ID = Request.Form("Nit")
+        obj.TipoSQL = "AccesoPre"
 
-        ObjList = SQL.Matrix_PersonasDep()
+        ObjList = SQL.Matrix_PersonaDep(obj)
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub

@@ -36,7 +36,7 @@ $(document).ready(function () {
     Ocultar_Tablas();
 
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
-    transaccionAjax_MPersona('MATRIX_PERSONA');
+    
     transaccionAjax_MTarjeta('MATRIX_TARJETA');
     transaccionAjax_MRTP('MATRIX_RTP');
     transaccionAjax_MPAccesos('MATRIX_PACCESOS');

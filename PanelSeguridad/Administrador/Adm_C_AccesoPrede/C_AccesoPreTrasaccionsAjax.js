@@ -58,7 +58,8 @@ function transaccionAjax_MPersona(State) {
         type: "POST",
         //crear json
         data: { "action": State,
-            "tabla": 'RUTA'
+            "tabla": 'RUTA',
+            "Nit": $("#Select_EmpresaNit_Ing").val()
         },
         //Transaccion Ajax en proceso
         success: function (result) {
