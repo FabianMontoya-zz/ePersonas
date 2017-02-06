@@ -573,13 +573,13 @@ Public Class InvPuertaSQLClass
                                   "  LEFT JOIN TC_DDL_TIPO BT ON BT.DDL_ID =IT.IT_MotivoBloqueo AND BT.DDL_Tabla = 'BLOQUEO' " & _
                                   " LEFT JOIN PARAMETRIZACION_D.dbo.CLIENTE PE ON PE.CLI_Nit_ID = IT.IT_Nit_ID_Entrega AND PE.CLI_TypeDocument_ID =IT.IT_TypeDocument_Entrega AND PE.CLI_Document_ID = IT.IT_Document_ID_Entrega ")
 
-        '' Terminar
         Select Case vp_Obj_Cliente.TipoSQL
-            Case ""
-                vl_sql_filtro.Append("WHERE CLI_Nit_ID = '" & vp_Obj_Cliente.Nit_ID & "' ORDER BY CLI_Nit_ID, CLI_TypeDocument_ID, CLI_Document_ID ASC; ")
+            Case "TarjetaAcceso"
+                vl_sql_filtro.Append(" WHERE IT_Nit_ID = '" & vp_Obj_Cliente.Nit_ID & "' ORDER BY IT_Tarjeta_ID, IT_Nit_ID_Custodia, IT_Document_ID_Asigna, IT_Nit_ID_Asigna ASC; ")
         End Select
 
-        ObjListCrud_Doc = listInvPuerta(StrQuery, Conexion, "Matrix_Asigna")
+        Dim vl_S_SQLString As String = sql.ToString & vl_sql_filtro.ToString
+        ObjListCrud_Doc = listInvPuerta(vl_S_SQLString, Conexion, "Matrix_Asigna")
 
         Return ObjListCrud_Doc
 
