@@ -104,9 +104,11 @@ function ready() {
         minutes = "0" + minutes;
     if (seconds <= 9)
         seconds = "0" + seconds;
-    setTimeout(console.log.bind(console, "%cAll is ready, enjoy!", "color: #b70d0d; font-size: x-large")); //No muestra la ruta donde se genera el console
-    setTimeout(console.log.bind(console, "" + Day + "/" + Matrix_Mes[Month][1] + "/" + Year + " " + hours + ":" + minutes + ":" + seconds + "")); //No muestra la ruta donde se genera el console
 
+    setTimeout(console.log.bind(console, "" + Day + "/" + Matrix_Mes[Month][1] + "/" + Year + " " + hours + ":" + minutes + ":" + seconds + "")); //No muestra la ruta donde se genera el console
+    setTimeout(console.log.bind(console, "%cAll is ready, enjoy!", "color: #b70d0d; font-size: x-large")); //No muestra la ruta donde se genera el console
+    setTimeout(console.log.bind(console, "%cDesarrollado por SASIF® "+ Year + "", "color: #b70d0d; font-size: large"));
+    
 }
 
 //Función que borra el log generado en la consola según el navegador
