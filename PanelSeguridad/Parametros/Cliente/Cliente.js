@@ -37,7 +37,6 @@ $(document).ready(function () {
     $("#Marco_trabajo_Form").css("height", "490px");
     $("#container_TCliente").css("height", "380px");
 
-    transaccionAjax_MDocWork('MATIRXDOC_WORK');
     transaccionAjax_MPaises_Ciudades('MATRIX_PAIS_CIUDAD');
     transaccionAjax_MArea('MATRIX_AREA');
     transaccionAjax_MCargo('MATRIX_CARGO');

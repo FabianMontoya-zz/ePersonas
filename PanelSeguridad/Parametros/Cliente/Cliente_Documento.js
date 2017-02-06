@@ -17,7 +17,7 @@ function Documentos(Option_Document) {
         $("#BtnSave_Document").css("display", "none");
     else
         $("#BtnSave_Document").css("display", "inline-table");
-        
+
     switch (Option_Document) {
         case "V":
             $("#Txt_Nit_Doc").val(D_Nit);
@@ -27,7 +27,8 @@ function Documentos(Option_Document) {
             $("#Txt_TypeIden_Doc_2").val(D_String_TDocumento);
             $("#Txt_Ident_Doc_2").val(D_Documento);
 
-            transacionAjax_allDocument('R_ead_Document', D_Nit, D_TDocumento, D_Documento, Option_Document);
+              transaccionAjax_MDocWork('MATIRXDOC_WORK', D_Nit, D_TDocumento, D_Documento);
+              transacionAjax_allDocument('R_ead_Document', D_Nit, D_TDocumento, D_Documento, Option_Document);
 
             break;
 
@@ -47,6 +48,7 @@ function Documentos(Option_Document) {
             $("#Txt_TypeIden_Doc_2").val($("#Select_Documento option:selected").text());
             $("#Txt_Ident_Doc_2").val($("#Txt_Ident").val() + "-" + $("#TxtVerif").val());
 
+            transaccionAjax_MDocWork('MATIRXDOC_WORK', $("#Select_EmpresaNit").val(), $("#Select_Documento").val(), $("#Txt_Ident").val());
             transacionAjax_allDocument('R_ead_Document', $("#Select_EmpresaNit").val(), $("#Select_Documento").val(), $("#Txt_Ident").val(), Option_Document);
             break;
     }
