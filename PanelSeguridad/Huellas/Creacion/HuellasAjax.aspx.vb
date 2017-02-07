@@ -80,10 +80,24 @@ Public Class HuellasAjax
     ''' <remarks></remarks>
     Protected Sub Cargar()
 
+        Response.Write("<script>alert('HOLA');</script>")
         ' System.Diagnostics.Process.Start("C:\Users\DESARROLLO 02\Desktop\EnrollermentApp.exe")
         System.Diagnostics.Process.Start("Notepad.exe")
 
     End Sub
+
+    Public Function javaMsg(ByVal message As String) As String
+
+        Dim sb As New System.Text.StringBuilder()
+
+        sb.Append("<script type='text/javascript'>")
+        sb.Append("alert('")
+        sb.Append(message)
+        sb.Append("');</script>")
+
+        Return sb.ToString()
+
+    End Function
 
 #Region "SOCKET RECIBE"
 

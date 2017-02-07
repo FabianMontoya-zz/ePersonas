@@ -205,3 +205,4 @@ D:\INTEGRACION GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.vbp
 D:\INTEGRACION GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.dll
 D:\INTEGRACION GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.xml
 D:\INTEGRACION GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.pdb
+D:\INTEGRACION GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.vbprojResolveAssemblyReference.cache
