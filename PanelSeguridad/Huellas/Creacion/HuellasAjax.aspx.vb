@@ -80,8 +80,37 @@ Public Class HuellasAjax
     ''' <remarks></remarks>
     Protected Sub Cargar()
 
-        System.Diagnostics.Process.Start("C:\Users\DESARROLLO 02\Desktop\EnrollermentApp.exe")
-        System.Diagnostics.Process.Start("Notepad.exe")
+        'System.Diagnostics.Process.Start("C:\Users\DESARROLLO 02\Desktop\EnrollermentApp.exe")
+        'System.Diagnostics.Process.Start("Notepad.exe")
+
+        Try
+            'creamos el objeto que controlará el proceso que vamos a lanzar 
+            Dim psi As ProcessStartInfo = New ProcessStartInfo()
+            'le decimos que se muestre y que no se quede en 2º plano 
+            psi.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal
+            'nombre del ejecutable 
+            psi.FileName = "Notepad.exe"
+            psi.RedirectStandardOutput = True
+            psi.UseShellExecute = False
+
+            psi.WorkingDirectory = "C:\Windows\system32"
+            'argumentos de la línea de comandos, si los necesita 
+            'psi.Arguments = "x.x.x.x"
+
+            'obtenemos una referencia al nuevo proceso 
+            Dim p = System.Diagnostics.Process.Start(psi)
+
+            Dim salida As String = p.StandardOutput.ReadToEnd()
+            Response.Write(Salida.Replace("\n", "<br>"))
+
+            'y podemos esperar a que finalice su ejecución 
+            p.WaitForExit()
+
+            'Response.AddHeader("Refresh", "2"); 
+
+        Catch ex As Exception
+
+        End Try
 
     End Sub
 
@@ -150,5 +179,6 @@ Public Class HuellasAjax
 
     End Sub
 #End Region
+
 
 End Class
