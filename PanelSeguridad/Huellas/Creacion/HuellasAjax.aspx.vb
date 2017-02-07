@@ -81,6 +81,7 @@ Public Class HuellasAjax
     Protected Sub Cargar()
 
         System.Diagnostics.Process.Start("C:\Users\DESARROLLO 02\Desktop\EnrollermentApp.exe")
+        System.Diagnostics.Process.Start("Notepad.exe")
 
     End Sub
 
