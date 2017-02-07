@@ -112,7 +112,21 @@ Public Class HuellasAjax
 
         End Try
 
+
     End Sub
+
+    Public Function javaMsg(ByVal message As String) As String
+
+        Dim sb As New System.Text.StringBuilder()
+
+        sb.Append("<script type='text/javascript'>")
+        sb.Append("alert('")
+        sb.Append(message)
+        sb.Append("');</script>")
+
+        Return sb.ToString()
+
+    End Function
 
 #Region "SOCKET RECIBE"
 
