@@ -1,18 +1,20 @@
 ﻿//carga el combo de Area dependiente
 function Change_Select_Nit() {
-    console.log("1");
+    
     $("#Select_EmpresaNit").change(function () {
-        console.log("aa");
         var index_ID = $(this).val();
         $("#Img5").css("display", "none");
         transaccionAjax_MPersona('MATRIX_PERSONA');
         transaccionAjax_MTarjeta('MATRIX_TARJETA');
+        transaccionAjax_MRTP('MATRIX_RTP');
+        Charge_Combos_Depend_Nit(Matrix_Persona, "Select_Persona_Enc", index_ID, "");
     });
 
     $("#Select_EmpresaNit_Ing").change(function () {
-        console.log("aa1");
         var index_ID = $(this).val();
         TransaccionesSegunNIT(index_ID);
+        transaccionAjax_MPAccesos('MATRIX_PACCESOS');
+        transaccionAjax_MPAcceso_Area('MATRIX_PACCESO_AREA');
     });
     
 }
@@ -20,6 +22,8 @@ function Change_Select_Nit() {
 //Valida la informacio a la que puede acceder segun el usuario
 function TransaccionesSegunNIT(index_ID) {
     if (index_ID != "-1") {
+        transaccionAjax_MPAccesos('MATRIX_PACCESOS');
+        transaccionAjax_MPAcceso_Area('MATRIX_PACCESO_AREA');
         Charge_Combos_Depend_Nit(Matrix_PAccesos, "Select_PAcceso", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Persona, "Select_Persona_Enc", index_ID, "");
         Change_Select_RPAA();

@@ -395,6 +395,37 @@ Public Class R_PuertaAcc_AreaSQLClass
     End Function
 
     ''' <summary>
+    ''' lee la matriz de puertas de acceso
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Matrix_R_PuertaAcceso_Area(ByVal vp_Obj_Cliente As ClienteClass)
+
+        Dim ObjList As New List(Of R_PuertaAcc_AreaClass)
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("1")
+        Dim BD_Param As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDParam").ToString
+
+        Dim sql As New StringBuilder
+        Dim vl_sql_filtro As New StringBuilder
+
+        sql.Append(" SELECT RPA_Nit_ID, RPA_PuertaAcceso_ID, RPA_Area_ID, A.A_Descripcion  FROM R_PACCESO_AREA RPA " & _
+                                 " INNER JOIN " & BD_Param & ".dbo.AREA A ON A.A_Area_ID = RPA.RPA_Area_ID 	AND RPA.RPA_Nit_ID = A.A_Nit_ID ")
+
+        Select Case vp_Obj_Cliente.TipoSQL
+            Case "MPAcceso_Area"
+                vl_sql_filtro.Append(" WHERE RPA_Nit_ID = '" & vp_Obj_Cliente.Nit_ID & "' ORDER BY RPA_PuertaAcceso_ID ASC ")
+        End Select
+
+        Dim vl_S_SQLString As String = sql.ToString & vl_sql_filtro.ToString
+
+        ObjList = listR_PuertaAcc_Area(vl_S_SQLString, Conexion, "Matrix")
+
+        Return ObjList
+
+    End Function
+
+    ''' <summary>
     ''' consulta listas de puertas de acceso segun nit
     ''' </summary>
     ''' <param name="vp_S_Nit_ID"></param>

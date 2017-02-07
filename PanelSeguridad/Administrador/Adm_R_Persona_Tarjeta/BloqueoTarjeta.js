@@ -24,12 +24,9 @@ $(document).ready(function () {
     Ocultar_Tablas();
     /*================== FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN ==============*/
 
-    transaccionAjax_MPersona('MATRIX_PERSONA');
-    transaccionAjax_MTarjeta('MATRIX_TARJETA');
-    transaccionAjax_MRTP('MATRIX_RTP');
     transacionAjax_EmpresaNit('Cliente');
     transacionAjax_Bloqueo("C_Bloqueo");
-
+    
     Change_Select_Nit();
     Change_Select_Tarjeta();
 
@@ -85,8 +82,12 @@ function Change_Select_Nit() {
     Change_Select_Persona();
 }
 
+//Valida la informacio a la que puede acceder segun el usuario
 function TransaccionesSegunNIT(index_ID) {
     if (index_ID != "-1") {
+        transaccionAjax_MPersona('MATRIX_PERSONA');
+        transaccionAjax_MTarjeta('MATRIX_TARJETA');
+        transaccionAjax_MRTP('MATRIX_RTP');
         Charge_Combos_Depend_Nit(Matrix_Persona, "Select_Persona", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Tarjeta, "Select_Tarjeta_Blo", index_ID, "");
         $("#Img5").css("display", "none");

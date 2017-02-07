@@ -151,6 +151,7 @@ Public Class R_Persona_TarjetaSQLClass
                     ObjListR_Persona_Tarjeta.Add(objR_Persona_Tarjeta)
                 End While
 
+            
 
         End Select
 
@@ -212,6 +213,35 @@ Public Class R_Persona_TarjetaSQLClass
         StrQuery = sql.ToString
 
         ObjListCrud_Doc = listR_Persona_Tarjeta(StrQuery, Conexion, "Matrix_RTP")
+
+        Return ObjListCrud_Doc
+
+    End Function
+
+    ''' <summary>
+    ''' consulta que trae los datos de asignar tarjeta
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Matrix_RTP(ByVal vp_Obj_Cliente As ClienteClass)
+
+        Dim ObjListCrud_Doc As New List(Of R_Persona_TarjetaClass)
+        Dim StrQuery As String = ""
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("1")
+
+        Dim sql As New StringBuilder
+        Dim vl_sql_filtro As New StringBuilder
+
+        sql.AppendLine(" SELECT  RTP_Nit_ID, RTP_TypeDocument_ID, RTP_Document_ID, RTP_Tarjeta_ID  FROM  R_TARJETA_PERSONA")
+
+        Select Case vp_Obj_Cliente.TipoSQL
+            Case "RtpAcceso"
+                vl_sql_filtro.Append(" WHERE RTP_Nit_ID = '" & vp_Obj_Cliente.Nit_ID & "' ORDER BY RTP_Nit_ID, RTP_TypeDocument_ID, RTP_Document_ID, RTP_Tarjeta_ID ASC; ")
+        End Select
+
+        Dim vl_S_SQLString As String = sql.ToString & vl_sql_filtro.ToString
+        ObjListCrud_Doc = listR_Persona_Tarjeta(vl_S_SQLString, Conexion, "Matrix_RTP")
 
         Return ObjListCrud_Doc
 

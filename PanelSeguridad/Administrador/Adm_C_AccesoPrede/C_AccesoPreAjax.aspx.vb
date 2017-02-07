@@ -270,10 +270,14 @@ Public Class C_AccesoPreAjax
     ''' <remarks></remarks>
     Protected Sub CargarMRTP()
 
-        Dim SQL As New C_AccesoPreSQLClass
-        Dim ObjList As New List(Of C_AccesoPreClass)
+        Dim SQL As New R_Persona_TarjetaSQLClass
 
-        ObjList = SQL.Matrix_RTP()
+        Dim ObjList As New List(Of R_Persona_TarjetaClass)
+        Dim obj As New ClienteClass
+        obj.Nit_ID = Request.Form("Nit")
+        obj.TipoSQL = "RtpAcceso"
+
+        ObjList = SQL.Matrix_RTP(obj)
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
@@ -286,8 +290,11 @@ Public Class C_AccesoPreAjax
 
         Dim SQL As New PuertaAccesoSQLClass
         Dim ObjList As New List(Of PuertaAccesoClass)
+        Dim obj As New ClienteClass
+        obj.Nit_ID = Request.Form("Nit")
+        obj.TipoSQL = "MPAcceso"
 
-        ObjList = SQL.Matrix_PuertaAcceso()
+        ObjList = SQL.Matrix_PuertaAcceso(obj)
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
@@ -300,8 +307,11 @@ Public Class C_AccesoPreAjax
 
         Dim SQL As New R_PuertaAcc_AreaSQLClass
         Dim ObjList As New List(Of R_PuertaAcc_AreaClass)
+        Dim obj As New ClienteClass
+        obj.Nit_ID = Request.Form("Nit")
+        obj.TipoSQL = "MPAcceso_Area"
 
-        ObjList = SQL.Matrix_R_PuertaAcceso_Area()
+        ObjList = SQL.Matrix_R_PuertaAcceso_Area(obj)
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub

@@ -435,19 +435,7 @@ Public Class C_AccesoPreSQLClass
                     ObjListC_AccesoPre.Add(objC_AccesoPre)
                 End While
 
-            Case "Matrix_RTP"
-                While ReadConsulta.Read
-
-                    Dim objC_AccesoPre As New C_AccesoPreClass
-                    'cargamos datos sobre el objeto de login
-                    objC_AccesoPre.Nit_ID = ReadConsulta.GetValue(0)
-                    objC_AccesoPre.TypeDocument_ID = ReadConsulta.GetValue(1)
-                    objC_AccesoPre.Document_ID = ReadConsulta.GetValue(2)
-                    objC_AccesoPre.Tarjeta_ID = ReadConsulta.GetValue(3)
-
-                    'agregamos a la lista
-                    ObjListC_AccesoPre.Add(objC_AccesoPre)
-                End While
+           
 
 
         End Select
@@ -494,30 +482,6 @@ Public Class C_AccesoPreSQLClass
 
         Return Result
     End Function
-
-    ''' <summary>
-    ''' consulta que trae los datos de asignar tarjeta
-    ''' </summary>
-    ''' <returns></returns>
-    ''' <remarks></remarks>
-    Public Function Matrix_RTP()
-
-        Dim ObjListCrud_Doc As New List(Of C_AccesoPreClass)
-        Dim StrQuery As String = ""
-        Dim conex As New Conector
-        Dim Conexion As String = conex.typeConexion("1")
-
-        Dim sql As New StringBuilder
-
-        sql.AppendLine(" SELECT  RTP_Nit_ID, RTP_TypeDocument_ID, RTP_Document_ID, RTP_Tarjeta_ID  FROM  R_TARJETA_PERSONA")
-        StrQuery = sql.ToString
-
-        ObjListCrud_Doc = listC_AccesoPre(StrQuery, Conexion, "Matrix_RTP")
-
-        Return ObjListCrud_Doc
-
-    End Function
-
     ''' <summary>
     ''' consulta que trae todos los datos de accesos predeterminados
     ''' </summary>

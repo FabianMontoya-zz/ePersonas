@@ -8,7 +8,8 @@ function transaccionAjax_MTarjeta(State) {
         //crear json
         data: {
             "action": State,
-            "tabla": 'RUTA'
+            "tabla": 'RUTA',
+            "Nit": $("#Select_EmpresaNit").val()
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -21,8 +22,13 @@ function transaccionAjax_MTarjeta(State) {
         },
         error: function () {
 
-        }
+        },
+        async: false,
+        cache: false
     }).done(function () {
+        
+        Charge_Combos_Depend_Nit(Matrix_Tarjeta, "Select_Tarjeta_AccPre", $("#Select_EmpresaNit").val(), "");
+
         var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
 
         if (OnlyEmpresa == true) {
@@ -40,7 +46,8 @@ function transaccionAjax_MPersona(State) {
         //crear json
         data: {
             "action": State,
-            "tabla": 'RUTA'
+            "tabla": 'RUTA',
+            "Nit": $("#Select_EmpresaNit").val()
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -52,7 +59,11 @@ function transaccionAjax_MPersona(State) {
             }
         },
         error: function () {
-        }
+        },
+        async: false,
+        cache: false
+    }).done(function () {
+        //Charge_Combos_Depend_Nit(Matrix_Persona, "Select_Persona", $("#Select_EmpresaNit").val(), "");
     });
 }
 
@@ -65,7 +76,8 @@ function transaccionAjax_MRTP(State) {
         //crear json
         data: {
             "action": State,
-            "tabla": 'RUTA'
+            "tabla": 'RUTA',
+            "Nit": $("#Select_EmpresaNit").val()
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -108,6 +120,8 @@ function transacionAjax_EmpresaNit(State) {
         },
         async: false, // La petición es síncrona
         cache: false // No queremos usar la caché del navegador
+    }).done(function () {
+        
     });
 }
 

@@ -36,12 +36,6 @@ $(document).ready(function () {
     Ocultar_Tablas();
 
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
-    
-    
-    transaccionAjax_MRTP('MATRIX_RTP');
-    transaccionAjax_MPAccesos('MATRIX_PACCESOS');
-    transaccionAjax_MPAcceso_Area('MATRIX_PACCESO_AREA');
-
     transacionAjax_EmpresaNit('Cliente');
     transacionAjax_Tipo_Ingreso('Tipo_Ing');
 

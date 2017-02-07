@@ -93,7 +93,8 @@ function transaccionAjax_MPAccesos(State) {
         //crear json
         data: {
             "action": State,
-            "tabla": 'RUTA'
+            "tabla": 'RUTA',
+            "Nit": $("#Select_EmpresaNit_Ing").val()
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -105,7 +106,11 @@ function transaccionAjax_MPAccesos(State) {
             }
         },
         error: function () {
-        }
+        },
+        async: false,
+        cache: false
+    }).done(function () {
+        Charge_Combos_Depend_Nit(Matrix_PAccesos, "Select_PAcceso", $("#Select_EmpresaNit_Ing").val(), "");
     });
 }
 
@@ -118,7 +123,8 @@ function transaccionAjax_MPAcceso_Area(State) {
         //crear json
         data: {
             "action": State,
-            "tabla": 'RUTA'
+            "tabla": 'RUTA',
+            "Nit": $("#Select_EmpresaNit_Ing").val()
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -143,7 +149,8 @@ function transaccionAjax_MRTP(State) {
         //crear json
         data: {
             "action": State,
-            "tabla": 'RUTA'
+            "tabla": 'RUTA',
+            "Nit": $("#Select_EmpresaNit").val()
         },
         //Transaccion Ajax en proceso
         success: function (result) {
