@@ -69,13 +69,7 @@ $(document).ready(function () {
     });
 
     ready();
-    /*Función que recarga la página y exige que se traigan los nuevos cambios desde el servidor*/
-    let isRedirected = sessionStorage.getItem('isRedirected');
-    if (!isRedirected) {
-        sessionStorage.setItem('isRedirected', true);
-        window.location.reload(true);
-    }
-    /**/
+    
 });
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -98,16 +92,24 @@ function ready() {
     var seconds = Digital.getSeconds();
 
 
-    if (hours <= 9)
-        hours = "0" + hours;
-    if (minutes <= 9)
-        minutes = "0" + minutes;
-    if (seconds <= 9)
-        seconds = "0" + seconds;
+    if (hours <= 9){
+        hours = "0" + hours;}
+    if (minutes <= 9){
+        minutes = "0" + minutes;}
+    if (seconds <= 9){
+        seconds = "0" + seconds;}
 
     setTimeout(console.log.bind(console, "" + Day + "/" + Matrix_Mes[Month][1] + "/" + Year + " " + hours + ":" + minutes + ":" + seconds + "")); //No muestra la ruta donde se genera el console
     setTimeout(console.log.bind(console, "%cAll is ready, enjoy!", "color: #b70d0d; font-size: x-large")); //No muestra la ruta donde se genera el console
-    setTimeout(console.log.bind(console, "%cDesarrollado por SASIF® "+ Year + "", "color: #b70d0d; font-size: large"));
+    setTimeout(console.log.bind(console, "%cDesarrollado por SASIF® 2016. Todos los derechos reservados. \n©SASIF "+ Year + "", "color: #b70d0d; font-size: x"));
+
+    /*Función que recarga la página y exige que se traigan los nuevos cambios desde el servidor*/
+    let isRedirected = sessionStorage.getItem('isRedirected');
+    if (!isRedirected) {
+        sessionStorage.setItem('isRedirected', true);
+        location.reload(true);
+    }
+    /**/
     
 }
 
