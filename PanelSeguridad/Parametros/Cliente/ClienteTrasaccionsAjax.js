@@ -1,12 +1,13 @@
 ﻿/*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_CargaBusqueda(State) {
-    OpenControl(); 
+    OpenControl();
     $.ajax({
         url: "ClienteAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'Cliente'
         },
         //Transaccion Ajax en proceso
@@ -27,13 +28,17 @@ function transacionAjax_CargaBusqueda(State) {
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transaccionAjax_MDocWork(State) {
+function transaccionAjax_MDocWork(State, Nit, TD, D) {
     $.ajax({
         url: "ClienteAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
-            "tabla": 'RUTA'
+        data: {
+            "action": State,
+            "tabla": 'RUTA',
+            "Nit": Nit,
+            "TDoc": TD,
+            "Doc": D
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -42,7 +47,7 @@ function transaccionAjax_MDocWork(State) {
             }
             else {
                 Matrix_DocWork = JSON.parse(result);
-                   }
+            }
         },
         error: function () {
 
@@ -57,7 +62,8 @@ function transacionAjax_EmpresaNit(State) {
         url: "ClienteAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'CLIENTE'
         },
         //Transaccion Ajax en proceso
@@ -83,7 +89,8 @@ function transacionAjax_EntFinan(State) {
         url: "ClienteAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'CLIENTE'
         },
         //Transaccion Ajax en proceso
@@ -109,7 +116,8 @@ function transacionAjax_TCuenta(State) {
         url: "ClienteAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'CLIENTE'
         },
         //Transaccion Ajax en proceso
@@ -135,7 +143,8 @@ function transaccionAjax_MPaises_Ciudades(State) {
         url: "ClienteAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'CIUDADES'
         },
         //Transaccion Ajax en proceso
@@ -162,7 +171,8 @@ function transaccionAjax_MArea(State) {
         url: "ClienteAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'AREA'
         },
         //Transaccion Ajax en proceso
@@ -188,7 +198,8 @@ function transaccionAjax_MCargo(State) {
         url: "ClienteAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'AREA'
         },
         //Transaccion Ajax en proceso
@@ -214,7 +225,8 @@ function transaccionAjax_MJefe(State) {
         url: "ClienteAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'AREA'
         },
         //Transaccion Ajax en proceso
@@ -240,7 +252,8 @@ function transaccionAjax_MGrpDoc(State) {
         url: "ClienteAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'AREA'
         },
         //Transaccion Ajax en proceso
@@ -265,7 +278,8 @@ function transacionAjax_Ciudad_D(State, Index) {
         url: "ClienteAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Index": Index,
             "tabla": 'CIUDADES'
         },
@@ -292,7 +306,8 @@ function transacionAjax_Documento(State) {
         url: "ClienteAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'IMPUESTO_GASTO'
         },
         //Transaccion Ajax en proceso
@@ -318,7 +333,8 @@ function transacionAjax_Seguridad(State) {
         url: "ClienteAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'SEGURIDAD'
         },
         //Transaccion Ajax en proceso
@@ -354,7 +370,8 @@ function transacionAjax_Cliente(State, filtro, opcion) {
         url: "ClienteAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "filtro": filtro,
             "opcion": opcion,
             "contenido": contenido,
@@ -410,7 +427,7 @@ function transacionAjax_Cliente_create(State) {
 
     var Sex = "";
 
-    
+
     if ($("#Select_Sex").val() != "-1")
         Sex = $("#Select_Sex").val();
 
@@ -530,7 +547,8 @@ function transacionAjax_Cliente_create(State) {
         url: "ClienteAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Nit_ID": ID_N,
             "TypeDocument_ID": ID_TD,
             "Document_ID": ID_D,
@@ -632,7 +650,8 @@ function transacionAjax_Cliente_delete(State) {
         url: "ClienteAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Nit_ID": editNit_ID,
             "TypeDocument_ID": editType_Document_ID,
             "Document_ID": editDocument_ID,
@@ -700,7 +719,8 @@ function transacionAjax_allAdress(State, Nit, TypeDoc, Doc, Opc_Link) {
         url: "ClienteAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Nit": Nit,
             "TypeDoc": TypeDoc,
             "Doc": Doc
@@ -731,7 +751,8 @@ function transacionAjax_Adress_create(State, Nit, TypeDoc, Doc) {
         url: "ClienteAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Nit": Nit,
             "TypeDoc": TypeDoc,
             "Doc": Doc,
@@ -785,7 +806,8 @@ function transacionAjax_allBank(State, Nit, TypeDoc, Doc, Opc_Link) {
         url: "ClienteAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Nit": Nit,
             "TypeDoc": TypeDoc,
             "Doc": Doc
@@ -816,7 +838,8 @@ function transacionAjax_Bank_create(State, Nit, TypeDoc, Doc) {
         url: "ClienteAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Nit": Nit,
             "TypeDoc": TypeDoc,
             "Doc": Doc,
@@ -870,7 +893,8 @@ function transacionAjax_allDocument(State, Nit, TypeDoc, Doc, Opc_Link) {
         url: "ClienteAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Nit": Nit,
             "TypeDoc": TypeDoc,
             "Doc": Doc
@@ -882,12 +906,15 @@ function transacionAjax_allDocument(State, Nit, TypeDoc, Doc, Opc_Link) {
             }
             else {
                 ArrayDocument = JSON.parse(result);
-                Tabla_General_Document(Opc_Link);
             }
         },
         error: function () {
 
-        }
+        },
+        async: false,
+        cache: false
+    }).done(function () {
+        Tabla_General_Document(Opc_Link);
     });
 }
 
@@ -903,7 +930,8 @@ function transacionAjax_Foto(State, Nit, TypeDoc, Doc, Index_Cliente, Type, Pais
         url: "ClienteAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Nit": Nit,
             "TypeDoc": TypeDoc,
             "Doc": Doc
@@ -938,7 +966,8 @@ function transacionAjax_Document_create(State, Nit, TypeDoc, Doc) {
         url: "ClienteAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Nit": Nit,
             "TypeDoc": TypeDoc,
             "Doc": Doc,
@@ -992,7 +1021,8 @@ function transacionAjax_AllDocAtorizados(State, Nit, TypeDoc, Doc, Opc_Link) {
         url: "ClienteAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Nit": Nit,
             "TypeDoc": TypeDoc,
             "Doc": Doc

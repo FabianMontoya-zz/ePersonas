@@ -93,7 +93,7 @@ Public Class DocumentosSQLClass
 
                     Dim obj As New DocumentosClass
                     'cargamos datos sobre el objeto de login
-              
+
                 End While
 
             Case "F"
@@ -102,7 +102,7 @@ Public Class DocumentosSQLClass
 
                     Dim obj As New DocumentosClass
                     'cargamos datos sobre el objeto de login
-                  
+
                     obj.RutaDocumento = ReadConsulta.GetValue(0)
                     obj.Formato = ReadConsulta.GetValue(1)
                     obj.Nombre_Save = ReadConsulta.GetValue(2)
@@ -312,6 +312,8 @@ Public Class DocumentosSQLClass
 
         Dim ObjList As New List(Of DocumentosClass)
         Dim sql As New StringBuilder()
+        Dim vl_sql_filtro As New StringBuilder
+
         Dim conex As New Conector
         Dim Conexion As String = conex.typeConexion("3")
         Dim StrQuery As String = ""
@@ -370,12 +372,21 @@ Public Class DocumentosSQLClass
                                 " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D3 ON D3.DDL_ID = D.DOC_TipoVersion AND D3.DDL_Tabla = 'TIPO_VERSION' " & _
                                 " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D4 ON D4.DDL_ID = DE.DE_Verificado AND D4.DDL_Tabla = 'VERIFICACION' " & _
                                 " LEFT JOIN RUTAS_OPERACION R ON R.TR_Ruta_Temporal <> DE.DE_RutaDocumento " & _
-                                " LEFT JOIN " & BD_Param & ".dbo.CLIENTE C ON C.CLI_Document_ID = AD.A_Document_ID AND DE.DE_Nit_ID = C.CLI_Nit_ID " & _
-                                " WHERE C.CLI_TypeDocument_ID ='" & vp_Obj_persona.TypeDocument_ID & "'" & _
-                                " AND C.CLI_Document_ID = '" & vp_Obj_persona.Document_ID & "' AND DE.DE_IndicativoFoto = 'S'  " & _
-                                 " ORDER BY DE_Secuencia_ID ASC  ")
+                                " LEFT JOIN " & BD_Param & ".dbo.CLIENTE C ON C.CLI_Document_ID = AD.A_Document_ID AND DE.DE_Nit_ID = C.CLI_Nit_ID ")
 
-        StrQuery = sql.ToString
+        Select Case vp_Obj_persona.TipoSQL
+            Case "Cliente"
+                vl_sql_filtro.Append(" WHERE C.CLI_Nit_ID ='" & vp_Obj_persona.Nit_ID & "'" & _
+                                                     " AND C.CLI_TypeDocument_ID ='" & vp_Obj_persona.TypeDocument_ID & "'" & _
+                                                     " AND C.CLI_Document_ID = '" & vp_Obj_persona.Document_ID & "'" & _
+                                                     " ORDER BY DE_Secuencia_ID ASC  ")
+            Case "Pagina"
+                vl_sql_filtro.Append(" WHERE C.CLI_TypeDocument_ID ='" & vp_Obj_persona.TypeDocument_ID & "'" & _
+                                                     " AND C.CLI_Document_ID = '" & vp_Obj_persona.Document_ID & "' AND DE.DE_IndicativoFoto = 'S'  " & _
+                                                     " ORDER BY DE_Secuencia_ID ASC  ")
+        End Select
+
+        StrQuery = sql.ToString & vl_sql_filtro.ToString
 
         ObjList = list(StrQuery, Conexion, "MatrixDocWork")
 

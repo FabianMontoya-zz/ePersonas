@@ -144,6 +144,7 @@ Public Class IngresoAjax
 
         Obj.TypeDocument_ID = Request.Form("TD")
         Obj.Document_ID = Request.Form("D")
+        Obj.TipoSQL = "Pagina"
 
         ObjList = SQL.SearchDocument_People(Obj)
 

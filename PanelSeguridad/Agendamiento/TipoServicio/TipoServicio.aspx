@@ -203,7 +203,7 @@
                             </td>
                         </tr>
                     </table>
-                    <table id="Table_5" style="width: 700px; text-align: left;">
+                    <table id="Table_Moneda" style="width: 700px; text-align: left;">
                         <tr>
                             <td style="width: 150px;" class="Label_Bold">Moneda
                             </td>
@@ -219,283 +219,49 @@
                             </td>
                         </tr>
                     </table>
-                    <!--<table id="TablaHoras">
-                        <thead>
-                            <tr style="text-align: center;">
-                                <th align="center" colspan="2">Lunes
-                                </th>
-                                <th align="center" colspan="2">Martes
-                                </th>
-                                <th align="center" colspan="2">Miercoles
-                                </th>
-                                <th align="center" colspan="2">Jueves
-                                </th>
-                                <th align="center" colspan="2">Viernes
-                                </th>
-                                <th align="center" colspan="2">Sabado
-                                </th>
-                                <th align="center" colspan="2">Domingo
-                                </th>
-                                <th align="center" colspan="2">Festivo
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr style="text-align: center;">
-                                <td align="center" colspan="2">
-                                    <font face="CenturyGothic" size="2 " color="black">
-                                        <select id="Select_StateLun" class="C_Chosen">
-                                            <option value="L">Laboral</option>
-                                            <option value="F">Festivo</option>
-                                        </select>
-                                    </font>
-                                </td>
-                                <td align="center" colspan="2">
-                                    <font face="CenturyGothic" size="2 " color="black">
-                                        <select id="Select_StateMar" class="C_Chosen">
-                                            <option value="L">Laboral</option>
-                                            <option value="F">Festivo</option>
-                                        </select>
-                                    </font>
-                                </td>
-                                <td align="center" colspan="2">
-                                    <font face="CenturyGothic" size="2 " color="black">
-                                        <select id="Select_StateMie" class="C_Chosen">
-                                            <option value="L">Laboral</option>
-                                            <option value="F">Festivo</option>
-                                        </select>
-                                    </font>
-                                </td>
-                                <td align="center" colspan="2">
-                                    <font face="CenturyGothic" size="2 " color="black">
-                                        <select id="Select_StateJue" class="C_Chosen">
-                                            <option value="L">Laboral</option>
-                                            <option value="F">Festivo</option>
-                                        </select>
-                                    </font>
-                                </td>
-                                <td align="center" colspan="2">
-                                    <font face="CenturyGothic" size="2 " color="black">
-                                        <select id="Select_StateVie" class="C_Chosen">
-                                            <option value="L">Laboral</option>
-                                            <option value="F">Festivo</option>
-                                        </select>
-                                    </font>
-                                </td>
-                                <td align="center" colspan="2">
-                                    <font face="CenturyGothic" size="2 " color="black">
-                                        <select id="Select_StateSab" class="C_Chosen">
-                                            <option value="L">Laboral</option>
-                                            <option value="F">Festivo</option>
-                                        </select>
-                                    </font>
-                                </td>
-                                <td align="center" colspan="2">
-                                    <font face="CenturyGothic" size="2 " color="black">
-                                        <select id="Select_StateDom" class="C_Chosen">
-                                            <option value="L">Laboral</option>
-                                            <option value="F">Festivo</option>
-                                        </select>
-                                    </font>
-                                </td>
-                                <td align="center" colspan="2">
-                                    <font face="CenturyGothic" size="2 " color="black">
-                                        <select id="Select_Festivo" class="C_Chosen">
-                                            <option value="L">Laboral</option>
-                                            <option value="F">Festivo</option>
-                                        </select>
-                                    </font>
-                                </td>
-                            </tr>
-                            <tr style="text-align: center;">
-                                <td align="center" colspan="2">
-                                    <font face="CenturyGothic" size="2 " color="black"><b>Hora</b>
-                                    </font>
-                                </td>
-                                <td align="center" colspan="2">
-                                    <font face="CenturyGothic" size="2 " color="black"><b>Hora</b>
-                                    </font>
-                                </td>
-                                <td align="center" colspan="2">
-                                    <font face="CenturyGothic" size="2 " color="black"><b>Hora</b>
-                                    </font>
-                                </td>
-                                <td align="center" colspan="2">
-                                    <font face="CenturyGothic" size="2 " color="black"><b>Hora</b>
-                                    </font>
-                                </td>
-                                <td align="center" colspan="2">
-                                    <font face="CenturyGothic" size="2 " color="black"><b>Hora</b>
-                                    </font>
-                                </td>
-                                <td align="center" colspan="2">
-                                    <font face="CenturyGothic" size="2 " color="black"><b>Hora</b>
-                                    </font>
-                                </td>
-                                <td align="center" colspan="2">
-                                    <font face="CenturyGothic" size="2 " color="black"><b>Hora</b>
-                                    </font>
-                                </td>
-                                <td align="center" colspan="2">
-                                    <font face="CenturyGothic" size="2 " color="black"><b>Hora</b>
-                                    </font>
-                                </td>
-                            </tr>
-                            <tr style="text-align: center;">
-                                <td>
-                                    <font face="CenturyGothic" size="2 " color="black"><b>Inicial</b> </font>
-                                </td>
-                                <td>
-                                    <font face="CenturyGothic" size="2 " color="black"><b>Final</b> </font>
-                                </td>
-                                <td>
-                                    <font face="CenturyGothic" size="2 " color="black"><b>Inicial</b> </font>
-                                </td>
-                                <td>
-                                    <font face="CenturyGothic" size="2 " color="black"><b>Final</b> </font>
-                                </td>
-                                <td>
-                                    <font face="CenturyGothic" size="2 " color="black"><b>Inicial</b> </font>
-                                </td>
-                                <td>
-                                    <font face="CenturyGothic" size="2 " color="black"><b>Final</b> </font>
-                                </td>
-                                <td>
-                                    <font face="CenturyGothic" size="2 " color="black"><b>Inicial</b> </font>
-                                </td>
-                                <td>
-                                    <font face="CenturyGothic" size="2 " color="black"><b>Final</b> </font>
-                                </td>
-                                <td>
-                                    <font face="CenturyGothic" size="2 " color="black"><b>Inicial</b> </font>
-                                </td>
-                                <td>
-                                    <font face="CenturyGothic" size="2 " color="black"><b>Final</b> </font>
-                                </td>
-                                <td>
-                                    <font face="CenturyGothic" size="2 " color="black"><b>Inicial</b> </font>
-                                </td>
-                                <td>
-                                    <font face="CenturyGothic" size="2 " color="black"><b>Final</b> </font>
-                                </td>
-                                <td>
-                                    <font face="CenturyGothic" size="2 " color="black"><b>Inicial</b> </font>
-                                </td>
-                                <td>
-                                    <font face="CenturyGothic" size="2 " color="black"><b>Final</b> </font>
-                                </td>
-                                <td>
-                                    <font face="CenturyGothic" size="2 " color="black"><b>Inicial</b> </font>
-                                </td>
-                                <td>
-                                    <font face="CenturyGothic" size="2 " color="black"><b>Final</b> </font>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <span class="cssToolTip_Form">
-                                        <input id="TxtIniLun" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
-                                            class="Spam_AH"></span></span>
-                                </td>
-                                <td>
-                                    <span class="cssToolTip_Form">
-                                        <input id="TxtFinLun" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
-                                            class="Spam_AH"></span></span>
-                                </td>
-                                <td>
-                                    <span class="cssToolTip_Form">
-                                        <input id="TxtIniMar" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
-                                            class="Spam_AH"></span></span>
-                                </td>
-                                <td>
-                                    <span class="cssToolTip_Form">
-                                        <input id="TxtFinMar" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
-                                            class="Spam_AH"></span></span>
-                                </td>
-                                <td>
-                                    <span class="cssToolTip_Form">
-                                        <input id="TxtIniMie" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
-                                            class="Spam_AH"></span></span>
-                                </td>
-                                <td>
-                                    <span class="cssToolTip_Form">
-                                        <input id="TxtFinMie" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
-                                            class="Spam_AH"></span></span>
-                                </td>
-                                <td>
-                                    <span class="cssToolTip_Form">
-                                        <input id="TxtIniJue" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
-                                            class="Spam_AH"></span></span>
-                                </td>
-                                <td>
-                                    <span class="cssToolTip_Form">
-                                        <input id="TxtFinJue" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
-                                            class="Spam_AH"></span></span>
-                                </td>
-                                <td>
-                                    <span class="cssToolTip_Form">
-                                        <input id="TxtIniVie" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
-                                            class="Spam_AH"></span></span>
-                                </td>
-                                <td>
-                                    <span class="cssToolTip_Form">
-                                        <input id="TxtFinVie" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
-                                            class="Spam_AH"></span></span>
-                                </td>
-                                <td>
-                                    <span class="cssToolTip_Form">
-                                        <input id="TxtIniSab" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
-                                            class="Spam_AH"></span></span>
-                                </td>
-                                <td>
-                                    <span class="cssToolTip_Form">
-                                        <input id="TxtFinSab" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
-                                            class="Spam_AH"></span></span>
-                                </td>
-                                <td>
-                                    <span class="cssToolTip_Form">
-                                        <input id="TxtIniDom" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
-                                            class="Spam_AH"></span></span>
-                                </td>
-                                <td>
-                                    <span class="cssToolTip_Form">
-                                        <input id="TxtFinDom" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
-                                            class="Spam_AH"></span></span>
-                                </td>
-                                <td>
-                                    <span class="cssToolTip_Form">
-                                        <input id="TxtIniF" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
-                                            class="Spam_AH"></span></span>
-                                </td>
-                                <td>
-                                    <span class="cssToolTip_Form">
-                                        <input id="TxtFinF" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
-                                            class="Spam_AH"></span></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="Label_Bold">
-                                    <p>
-                                    </p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="20" align="center">
-                                    <input id="BtnAgregar" type="button" value="Agregar" onclick="BtnAgregaServicio();" />
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>-->
-
-                    <div id="container_TGrid_2">
-                    </div>
-                    <table style="width: 100%;">
+                    <table id="Tabla_Valor" style="width: 100%;">
                         <tr>
-                            <td style="width: 150px;" class="Label_Bold">
-                                <p>
-                                </p>
+                            <td class="Label_Bold" style="width: 3.4%;">Costo del servicio
+                            </td>
+                            <td id="V_Sigla_1" style="width: 0.7%" class="Sigla"></td>
+                            <td style="width: 9.8%;">
+                                <span class="cssToolTip_Form">
+                                    <input type="text" id="TxtCosto" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
+                                    <span class="Spam_AVal"></span></span>
                             </td>
                         </tr>
+                        <tr>
+                            <td class="Label_Bold" style="width: 3.4%;">Valor del servicio 
+                            </td>
+                            <td id="V_Sigla_2" style="width: 0.7%" class="Sigla"></td>
+                            <td style="width: 9.8%">
+                                <span class="cssToolTip_Form_T">
+                                    <input type="text" id="TxtValor" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
+                                    <span class="Spam_AVal"></span></span>
+                            </td>
+                            <td class="Label_Bold" style="width: 3%;"></td>
+                            <td class="Label_Bold" style="width: 1%;"></td>
+                            <td style="width: 8.9%"></td>
+                        </tr>
+                    </table>
+                    <table id="Table1" style="width: 100%;">
+                        <tr>
+                            <td class="Label_Bold">Descripción
+                            </td>
+                            <td colspan="4">
+                                <span class="cssToolTip_Form">
+                                    <textarea id="TxtArea_Descripcion" rows="3" cols="89"></textarea>
+                                    <span class="Spam_AST">3: Digite Información</span></span>
+                            </td>
+                            <td style="width: 40px; padding-bottom: 25px;">
+                                <span class="cssToolTip_L">
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px; display: none;" id="Img8" src="../../images/error.png"/>
+                                    <span class="SpamEG">1: Campo Obligatorio!</span></span>
+                            </td>
+                        </tr>
+                    </table>
+                    <table style="width: 100%;">
+
                         <tr>
                             <td colspan="4" align="center">
                                 <input id="Btnguardar" type="button" value="Guardar" onclick="BtnCrear();" />

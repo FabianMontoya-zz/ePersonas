@@ -6,7 +6,8 @@ function transacionAjax_CargaBusqueda(State) {
         url: "C_AccesoPreAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'R_PERSONAS_ACCESOS_PREDETER'
         },
         //Transaccion Ajax en proceso
@@ -32,8 +33,10 @@ function transaccionAjax_MTarjeta(State) {
         url: "C_AccesoPreAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
-            "tabla": 'RUTA'
+        data: {
+            "action": State,
+            "tabla": 'RUTA',
+            "Nit": $("#Select_EmpresaNit").val()
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -45,8 +48,11 @@ function transaccionAjax_MTarjeta(State) {
             }
         },
         error: function () {
-
-        }
+        },
+        async: false,
+        cache: false
+    }).done(function () {
+        Charge_Combos_Depend_Nit(Matrix_Tarjeta, "Select_Tarjeta_AccPre", $("#Select_EmpresaNit").val(), "");
     });
 }
 
@@ -57,8 +63,10 @@ function transaccionAjax_MPersona(State) {
         url: "C_AccesoPreAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
-            "tabla": 'RUTA'
+        data: {
+            "action": State,
+            "tabla": 'RUTA',
+            "Nit": $("#Select_EmpresaNit").val()
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -69,8 +77,10 @@ function transaccionAjax_MPersona(State) {
                 Matrix_Persona = JSON.parse(result);
             }
         },
-        error: function () {
-        }
+        async: false,
+        cache: false
+    }).done(function () {
+        Charge_Combos_Depend_Nit(Matrix_Persona, "Select_Persona", $("#Select_EmpresaNit").val(), "");
     });
 }
 
@@ -81,7 +91,8 @@ function transaccionAjax_MPAccesos(State) {
         url: "C_AccesoPreAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'RUTA'
         },
         //Transaccion Ajax en proceso
@@ -105,7 +116,8 @@ function transaccionAjax_MPAcceso_Area(State) {
         url: "C_AccesoPreAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'RUTA'
         },
         //Transaccion Ajax en proceso
@@ -129,7 +141,8 @@ function transaccionAjax_MRTP(State) {
         url: "C_AccesoPreAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'RUTA'
         },
         //Transaccion Ajax en proceso
@@ -154,7 +167,8 @@ function transacionAjax_EmpresaNit(State) {
         url: "C_AccesoPreAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'CLIENTE'
         },
         //Transaccion Ajax en proceso
@@ -185,7 +199,8 @@ function transacionAjax_Tipo_Ingreso(State) {
         url: "C_AccesoPreAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'CLIENTE'
         },
         //Transaccion Ajax en proceso
@@ -221,7 +236,8 @@ function transacionAjax_AccesoPredet(State, filtro, opcion) {
         url: "C_AccesoPreAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "filtro": filtro,
             "opcion": opcion,
             "contenido": contenido,
@@ -286,7 +302,8 @@ function transacionAjax_Insert_AccesoPredet(State) {
         url: "C_AccesoPreAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Nit_ID": Nit_ID,
             "TDoc": SPersona[1],
             "Doc": SPersona[0],
@@ -366,7 +383,8 @@ function transacionAjax_Delete_AccesoPredet(State) {
         url: "C_AccesoPreAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Nit_ID": editNit_ID,
             "TDoc": editTDoc,
             "Doc": editDoc,

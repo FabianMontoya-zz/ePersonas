@@ -1169,6 +1169,52 @@ Public Class ClienteSQLClass
 
     End Function
 
+
+    ''' <summary>
+    ''' lee la matriz de cliente datos
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Matrix_PersonaDep(ByVal vp_Obj_Cliente As ClienteClass)
+
+        Dim ObjList As New List(Of ClienteClass)
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("2")
+
+        Dim sql As New StringBuilder
+        Dim vl_sql_filtro As New StringBuilder
+
+        sql.Append("  SELECT CLI_Document_ID,  " & _
+                                "             CLI_TypeDocument_ID, " & _
+                                "             CAST(CLI_Document_ID AS NVARCHAR(20)) + '  -  ' +  " & _
+                                "             CAST(CLI_TypeDocument_ID AS NVARCHAR(2)) + '  -  ' + " & _
+                                "             CLI_Nombre + ' ' +  " & _
+                                "             CASE  WHEN  CLI_Nombre_2  IS NULL THEN ''  ELSE CLI_Nombre_2 END  + ' ' + " & _
+                                "             CASE  WHEN  CLI_Apellido_1  IS NULL THEN ''  ELSE CLI_Apellido_1 END  + ' ' + " & _
+                                "             CASE  WHEN  CLI_Apellido_2  IS NULL THEN ''  ELSE CLI_Apellido_2 END AS DESCRIPCION, " & _
+                                "             CLI_Nit_ID,  " & _
+                                "             CLI_OP_Cliente,  " & _
+                                "             CLI_OP_Avaluador,  " & _
+                                "             CLI_OP_Transito,  " & _
+                                "             CLI_OP_Hacienda,  " & _
+                                "             CLI_OP_Empresa,  " & _
+                                "             CLI_OP_Empleado,  " & _
+                                "             CLI_OP_Asesor,  " & _
+                                "             CLI_Other_1,  " & _
+                                "             CLI_Other_2  " & _
+                                "  FROM CLIENTE  ")
+
+        Select Case vp_Obj_Cliente.TipoSQL
+            Case "AccesoPre"
+                vl_sql_filtro.Append("WHERE CLI_Nit_ID = '" & vp_Obj_Cliente.Nit_ID & "' ORDER BY CLI_Nit_ID, CLI_TypeDocument_ID, CLI_Document_ID ASC; ")
+        End Select
+
+        Dim vl_S_SQLString As String = sql.ToString & vl_sql_filtro.ToString
+        ObjList = list(vl_S_SQLString, Conexion, "Matrix_Cliente_Dep")
+
+        Return ObjList
+    End Function
+
     ''' <summary>
     ''' Consuta usuario cliente
     ''' </summary>

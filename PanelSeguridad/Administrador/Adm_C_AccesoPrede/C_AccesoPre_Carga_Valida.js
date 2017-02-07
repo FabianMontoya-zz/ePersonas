@@ -5,8 +5,8 @@ function Change_Select_Nit() {
         console.log("aa");
         var index_ID = $(this).val();
         $("#Img5").css("display", "none");
-        Charge_Combos_Depend_Nit(Matrix_Persona, "Select_Persona", index_ID, "");
-        Charge_Combos_Depend_Nit(Matrix_Tarjeta, "Select_Tarjeta_AccPre", index_ID, "");
+        transaccionAjax_MPersona('MATRIX_PERSONA');
+        transaccionAjax_MTarjeta('MATRIX_TARJETA');
     });
 
     $("#Select_EmpresaNit_Ing").change(function () {
@@ -14,6 +14,7 @@ function Change_Select_Nit() {
         var index_ID = $(this).val();
         TransaccionesSegunNIT(index_ID);
     });
+    
 }
 
 //Valida la informacio a la que puede acceder segun el usuario

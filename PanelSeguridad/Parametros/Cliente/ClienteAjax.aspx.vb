@@ -532,8 +532,14 @@ Public Class ClienteAjax
 
         Dim SQL As New DocumentosSQLClass
         Dim ObjList As New List(Of DocumentosClass)
+        Dim Obj As New ClienteClass
 
-        ObjList = SQL.MatrixDocumentWork()
+        Obj.Nit_ID = Request.Form("NIT")
+        Obj.TypeDocument_ID = Request.Form("TDoc")
+        Obj.Document_ID = Request.Form("Doc")
+        Obj.TipoSQL = "Cliente"
+
+        ObjList = SQL.SearchDocument_People(Obj)
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
