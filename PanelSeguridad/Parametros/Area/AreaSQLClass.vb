@@ -24,13 +24,7 @@ Public Class AreaSQLClass
 
         Dim sql As New StringBuilder
 
-        sql.Append("DROP TABLE T_AREA_CARGO")
-        StrQuery = sql.ToString
-        conex.StrInsert_and_Update_All(StrQuery, "2")
-
-        sql = New StringBuilder()
-
-        sql.Append("EXEC CONSULT_T_AREA_CARGO 'AREA'")
+        sql.Append("EXEC CONSULT_T_AREA_CARGO 'AREA', '" & vp_S_Nit_User & "'")
         StrQuery = sql.ToString
         conex.StrInsert_and_Update_All(StrQuery, "2")
 
@@ -95,7 +89,7 @@ Public Class AreaSQLClass
             vl_sql_filtro.Append(" ORDER BY Nit_ID, AREA_CARGO_ID ASC")
         End If
 
-        StrQuery = sql.ToString
+        StrQuery = sql.ToString & vl_sql_filtro.ToString
 
         ObjListArea = listArea(StrQuery, Conexion, "List")
 
