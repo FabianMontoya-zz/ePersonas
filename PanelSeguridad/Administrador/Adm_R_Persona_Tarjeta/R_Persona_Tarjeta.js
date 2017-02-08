@@ -29,7 +29,7 @@ $(document).ready(function () {
 
 //funcion para las ventanas emergentes
 function Ventanas_Emergentes() {
-    console.log("aa1");
+    
     Load_Charge_Sasif(); //Carga de "SasifMaster.js" el Control de Carga
 
     //funcion para las ventanas emergentes
@@ -78,17 +78,20 @@ function Change_Select_Nit() {
     $("#Select_EmpresaNit_2").change(function () {
         var index_ID = $(this).val();
         console.log("b");
+        transaccionAjax_MTarjeta('MATRIX_TARJETA');
         Charge_Combos_Depend_Nit(Matrix_Tarjeta, "Select_Tarjeta", index_ID, "");
+        
     });
 }
 
 //Carga los combos que estan relacionados a Select_Nit
 function TransaccionesSegunNIT(index_ID) {
     if (index_ID != "-1") {
-        console.log("aa");
+        console.log("aaAA");
         transaccionAjax_MPersona('MATRIX_PERSONA');
         transaccionAjax_MTarjeta('MATRIX_TARJETA');
         Charge_Combos_Depend_Nit(Matrix_Persona, "Select_Persona", index_ID, "");
+        Charge_Combos_Depend_Nit(Matrix_Tarjeta, "Select_Tarjeta", index_ID, "");
     }
 }
 

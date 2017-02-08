@@ -2,6 +2,7 @@
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transaccionAjax_MTarjeta(State) {
+    console.log("TAr");
     $.ajax({
         url: "R_Persona_TarjetaAjax.aspx",
         type: "POST",
@@ -18,14 +19,14 @@ function transaccionAjax_MTarjeta(State) {
             }
             else {
                 Matrix_Tarjeta = JSON.parse(result);
+                
             }
         },
         error: function () {
-        }
+        },
     }).done(function () {
-        console.log("cc1");
+        console.log($("#Select_EmpresaNit").val())
         Charge_Combos_Depend_Nit(Matrix_Tarjeta, "Select_Tarjeta", $("#Select_EmpresaNit").val(), "");
-
     });
 }
 
@@ -52,9 +53,10 @@ function transaccionAjax_MPersona(State) {
             }
         },
         error: function () {
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     }).done(function () {
-        console.log("cc2");
         Charge_Combos_Depend_Nit(Matrix_Persona, "Select_Persona", $("#Select_EmpresaNit").val(), "");
 
     });
@@ -89,7 +91,6 @@ function transacionAjax_EmpresaNit(State) {
         async: false, // La petición es síncrona
         cache: false // No queremos usar la caché del navegador
     }).done(function () {
-        console.log("cc3");
         var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
 
         if (OnlyEmpresa == true) {

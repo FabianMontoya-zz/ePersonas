@@ -67,7 +67,6 @@ function transacionAjax_InvPuerta(State, filtro, opcion) {
 /*------------------------------ crear ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax_InvPuerta_create(State) {
-
     $.ajax({
         url: "InvPuertaAjax.aspx",
         type: "POST",
@@ -78,6 +77,9 @@ function transacionAjax_InvPuerta_create(State) {
             "Vigencia": $("#Select_CheckVigencia").val(),
             "FechaInicial": $("#TxtFechaInicial").val(),
             "FechaFinal": $("#TxtFechaFinal").val(),
+            "Nit_Emp_User": Array_G_Usuario[0].Nit_ID,
+            "TDoc": Array_G_Usuario[0].TypeDocument,
+            "Doc": Array_G_Usuario[0].Documento,
             "user": User.toUpperCase()
         },
         //Transaccion Ajax en proceso
