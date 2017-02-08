@@ -77,6 +77,15 @@ $(document).ready(function () {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 function ready() {
+    /*Función que recarga la página y exige que se traigan los nuevos cambios desde el servidor*/
+    /*Se activa despues de cerrar el navegador y volver a abrir la página*/
+    let isRedirected = sessionStorage.getItem('isRedirected');
+    if (!isRedirected) {
+        sessionStorage.setItem('isRedirected', true);
+        location.reload(true);
+    }
+    /**/
+
     var Digital = new Date();
 
     var Day = Digital.getDate();
@@ -101,15 +110,9 @@ function ready() {
 
     setTimeout(console.log.bind(console, "" + Day + "/" + Matrix_Mes[Month][1] + "/" + Year + " " + hours + ":" + minutes + ":" + seconds + "")); //No muestra la ruta donde se genera el console
     setTimeout(console.log.bind(console, "%cAll is ready, enjoy!", "color: #b70d0d; font-size: x-large")); //No muestra la ruta donde se genera el console
-    setTimeout(console.log.bind(console, "%cDesarrollado por SASIF® 2016. Todos los derechos reservados. \n©SASIF "+ Year + "", "color: #b70d0d; font-size: x"));
+    setTimeout(console.log.bind(console, "%cDesarrollado por SASIF® 2016. Todos los derechos reservados.\nContacto sistemas@sasif.com.co | Bogotá D.C. - Colombia \n© SASIF S.A.S. "+ Year + "", "color: #b70d0d; font-size: x"));
 
-    /*Función que recarga la página y exige que se traigan los nuevos cambios desde el servidor*/
-    let isRedirected = sessionStorage.getItem('isRedirected');
-    if (!isRedirected) {
-        sessionStorage.setItem('isRedirected', true);
-        location.reload(true);
-    }
-    /**/
+    
     
 }
 
@@ -391,6 +394,7 @@ function No_Back_Button() {
     }
 
     document.oncontextmenu = new Function("return false");
+
 }
 
 //funcion para control de carga
