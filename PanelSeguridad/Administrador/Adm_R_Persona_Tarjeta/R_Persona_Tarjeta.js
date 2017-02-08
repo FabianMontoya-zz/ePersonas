@@ -21,8 +21,6 @@ $(document).ready(function () {
     Ocultar_Tablas();
     /*================== FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN ==============*/
     transacionAjax_EmpresaNit('Cliente');
-    transaccionAjax_MPersona('MATRIX_PERSONA');
-    transaccionAjax_MTarjeta('MATRIX_TARJETA');
 
     Change_Select_Nit();
     Change_Persona();
@@ -31,7 +29,7 @@ $(document).ready(function () {
 
 //funcion para las ventanas emergentes
 function Ventanas_Emergentes() {
-
+    console.log("aa1");
     Load_Charge_Sasif(); //Carga de "SasifMaster.js" el Control de Carga
 
     //funcion para las ventanas emergentes
@@ -79,6 +77,7 @@ function Change_Select_Nit() {
 
     $("#Select_EmpresaNit_2").change(function () {
         var index_ID = $(this).val();
+        console.log("b");
         Charge_Combos_Depend_Nit(Matrix_Tarjeta, "Select_Tarjeta", index_ID, "");
     });
 }
@@ -86,6 +85,9 @@ function Change_Select_Nit() {
 //Carga los combos que estan relacionados a Select_Nit
 function TransaccionesSegunNIT(index_ID) {
     if (index_ID != "-1") {
+        console.log("aa");
+        transaccionAjax_MPersona('MATRIX_PERSONA');
+        transaccionAjax_MTarjeta('MATRIX_TARJETA');
         Charge_Combos_Depend_Nit(Matrix_Persona, "Select_Persona", index_ID, "");
     }
 }

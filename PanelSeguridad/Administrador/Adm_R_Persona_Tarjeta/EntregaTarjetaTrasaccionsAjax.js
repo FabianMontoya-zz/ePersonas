@@ -7,7 +7,8 @@ function transaccionAjax_MTarjeta(State) {
         type: "POST",
         //crear json
         data: { "action": State,
-            "tabla": 'RUTA'
+            "tabla": 'RUTA',
+            "Nit": $("#Select_EmpresaNit").val()
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -22,11 +23,8 @@ function transaccionAjax_MTarjeta(State) {
 
         }
     }).done(function () {
-        var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
-
-        if (OnlyEmpresa == true) {
-            TransaccionesSegunNIT($("#Select_EmpresaNit").val());
-        }
+        Charge_Combos_Depend_Nit(Matrix_Tarjeta, "Select_Tarjeta_Ent", $("#Select_EmpresaNit").val(), "");
+        
     });
 }
 
@@ -38,7 +36,8 @@ function transaccionAjax_MPersona(State) {
         type: "POST",
         //crear json
         data: { "action": State,
-            "tabla": 'RUTA'
+            "tabla": 'RUTA',
+            "Nit": $("#Select_EmpresaNit").val()
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -51,6 +50,8 @@ function transaccionAjax_MPersona(State) {
         },
         error: function () {
         }
+    }).done(function () {
+        Charge_Combos_Depend_Nit(Matrix_Persona, "Select_Persona", $("#Select_EmpresaNit").val(), "");
     });
 }
 
@@ -62,7 +63,8 @@ function transaccionAjax_MRTP(State) {
         type: "POST",
         //crear json
         data: { "action": State,
-            "tabla": 'RUTA'
+            "tabla": 'RUTA',
+            "Nit": $("#Select_EmpresaNit").val()
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -104,6 +106,12 @@ function transacionAjax_EmpresaNit(State) {
         },
         async: false, // La petición es síncrona
         cache: false // No queremos usar la caché del navegador
+    }).done(function () {
+        var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+        if (OnlyEmpresa == true) {
+            TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+        }
     });
 }
 

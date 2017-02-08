@@ -6,8 +6,10 @@ function transaccionAjax_MTarjeta(State) {
         url: "R_Persona_TarjetaAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
-            "tabla": 'RUTA'
+        data: {
+            "action": State,
+            "tabla": 'RUTA',
+            "Nit": $("#Select_EmpresaNit").val()
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -20,24 +22,25 @@ function transaccionAjax_MTarjeta(State) {
         },
         error: function () {
         }
-        }).done(function () {
-            var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+    }).done(function () {
+        console.log("cc1");
+        Charge_Combos_Depend_Nit(Matrix_Tarjeta, "Select_Tarjeta", $("#Select_EmpresaNit").val(), "");
 
-            if (OnlyEmpresa == true) {
-                TransaccionesSegunNIT($("#Select_EmpresaNit").val());
-            }
-        });
+    });
 }
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transaccionAjax_MPersona(State) {
+    console.log("cc2");
     $.ajax({
         url: "R_Persona_TarjetaAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
-            "tabla": 'RUTA'
+        data: {
+            "action": State,
+            "tabla": 'RUTA',
+            "Nit": $("#Select_EmpresaNit").val()
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -50,6 +53,10 @@ function transaccionAjax_MPersona(State) {
         },
         error: function () {
         }
+    }).done(function () {
+        console.log("cc2");
+        Charge_Combos_Depend_Nit(Matrix_Persona, "Select_Persona", $("#Select_EmpresaNit").val(), "");
+
     });
 }
 
@@ -60,8 +67,10 @@ function transacionAjax_EmpresaNit(State) {
         url: "R_Persona_TarjetaAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
-            "tabla": 'CLIENTE'
+        data: {
+            "action": State,
+            "tabla": 'CLIENTE',
+            "Nit": $("#Select_EmpresaNit").val()
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -79,6 +88,13 @@ function transacionAjax_EmpresaNit(State) {
         },
         async: false, // La petición es síncrona
         cache: false // No queremos usar la caché del navegador
+    }).done(function () {
+        console.log("cc3");
+        var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+        if (OnlyEmpresa == true) {
+            TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+        }
     });
 }
 
@@ -87,13 +103,14 @@ function transacionAjax_EmpresaNit(State) {
 function transacionAjax_R_Persona_Tarjeta_create(State) {
     var StrPersona = $("#Select_Persona option:selected").html();
     var SPersona = StrPersona.split("  -  ");
-    
+
     undefined
     $.ajax({
         url: "R_Persona_TarjetaAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Nit_ID": $("#Select_EmpresaNit").val(),
             "Nit_ID_Asig": $("#Select_EmpresaNit_2").val(),
             "TDoc": SPersona[1],
@@ -139,6 +156,8 @@ function transacionAjax_R_Persona_Tarjeta_create(State) {
         error: function () {
 
         }
+    }).done(function () {
+        console.log("cc3");
     });
 }
 

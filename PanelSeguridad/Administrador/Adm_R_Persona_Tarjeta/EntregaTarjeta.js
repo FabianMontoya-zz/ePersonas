@@ -21,9 +21,8 @@ $(document).ready(function () {
     Ocultar_Tablas();
     /*================== FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN ==============*/
 
-    transaccionAjax_MPersona('MATRIX_PERSONA');
-    transaccionAjax_MTarjeta('MATRIX_TARJETA');
-    transaccionAjax_MRTP('MATRIX_RTP');
+    
+    
     transacionAjax_EmpresaNit('Cliente');
 
     Change_Select_Nit();
@@ -83,6 +82,9 @@ function Change_Select_Nit() {
 //Carga los combos que estan relacionados a Select_Nit
 function TransaccionesSegunNIT(index_ID) {
     if (index_ID != "-1") {
+        transaccionAjax_MPersona('MATRIX_PERSONA');
+        transaccionAjax_MTarjeta('MATRIX_TARJETA');
+        transaccionAjax_MRTP('MATRIX_RTP');
         Charge_Combos_Depend_Nit(Matrix_Persona, "Select_Persona", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Tarjeta, "Select_Tarjeta_Ent", index_ID, "");
         $("#Img5").css("display", "none");
