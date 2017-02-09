@@ -22,9 +22,7 @@ $(document).ready(function () {
     Ocultar_Tablas();
     /*================== FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN ==============*/
 
-    transaccionAjax_MPersona('MATRIX_PERSONA');
-    transaccionAjax_MTarjeta('MATRIX_TARJETA');
-    transaccionAjax_MRTP('MATRIX_RTP');
+    
     transacionAjax_EmpresaNit('Cliente');
 
     Change_Select_Nit();
@@ -99,9 +97,12 @@ function x() {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //valida si la persona ya tiene tarjeta Bloqueada
 function ValidarDes_BloqueoTarjeta(validaDoc) {
-
+    
     for (item in Matrix_Tarjeta) {
-
+        console.log(Matrix_Tarjeta);
+        console.log(Matrix_Tarjeta[0].Document_ID_Entrega == validaDoc);
+        console.log(Matrix_Tarjeta[0].Document_ID_Entrega);
+        console.log(validaDoc);
         if (Matrix_Tarjeta[item].Document_ID_Entrega == validaDoc) {
 
             $("#V_Persona").html(Matrix_Tarjeta[item].Document_ID_Entrega + " - " + Matrix_Tarjeta[item].DescripPersonaEntrega);
@@ -176,17 +177,18 @@ function Change_Select_Nit() {
 //Carga los combos que estan relacionados a Select_Nit
 function TransaccionesSegunNIT(index_ID) {
     if (index_ID != "-1") {
+        transaccionAjax_MPersona('MATRIX_PERSONA');
+        transaccionAjax_MTarjeta('MATRIX_TARJETA');
+        transaccionAjax_MRTP('MATRIX_RTP');
         Charge_Combos_Depend_Nit(Matrix_Tarjeta, "Select_Tarjeta_DBlo", index_ID, "");
     }
 }
 //valida los cambios del combo de Persona y carga
 function Change_Select_Tarjeta() {
     $("#Select_Tarjeta_DBlo").change(function () {
-
         var index_ID = $(this).val();
         for (item in Matrix_RTP) {
             if (Matrix_RTP[item].Tarjeta_ID == index_ID) {
-
                 ValidarDes_BloqueoTarjeta(Matrix_RTP[item].Document_ID);
                 break;
             }

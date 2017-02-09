@@ -27,13 +27,8 @@ function transaccionAjax_MTarjeta(State) {
         cache: false
     }).done(function () {
         
-        Charge_Combos_Depend_Nit(Matrix_Tarjeta, "Select_Tarjeta_AccPre", $("#Select_EmpresaNit").val(), "");
+        Charge_Combos_Depend_Nit(Matrix_Tarjeta, "Select_Tarjeta_Blo", $("#Select_EmpresaNit").val(), "");
 
-        var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
-
-        if (OnlyEmpresa == true) {
-            TransaccionesSegunNIT($("#Select_EmpresaNit").val());
-        }
     });
 }
 
@@ -63,7 +58,7 @@ function transaccionAjax_MPersona(State) {
         async: false,
         cache: false
     }).done(function () {
-        //Charge_Combos_Depend_Nit(Matrix_Persona, "Select_Persona", $("#Select_EmpresaNit").val(), "");
+        Charge_Combos_Depend_Nit(Matrix_Persona, "Select_Persona", $("#Select_EmpresaNit").val(), "");
     });
 }
 
@@ -118,10 +113,15 @@ function transacionAjax_EmpresaNit(State) {
         error: function () {
 
         },
-        async: false, // La petición es síncrona
-        cache: false // No queremos usar la caché del navegador
+        async: false,
+        cache: false
     }).done(function () {
-        
+
+        var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+        if (OnlyEmpresa == true) {
+            TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+        }
     });
 }
 

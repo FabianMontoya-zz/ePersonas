@@ -2,7 +2,6 @@
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transaccionAjax_MTarjeta(State) {
-    console.log("TAr");
     $.ajax({
         url: "R_Persona_TarjetaAjax.aspx",
         type: "POST",
@@ -25,7 +24,7 @@ function transaccionAjax_MTarjeta(State) {
         error: function () {
         },
     }).done(function () {
-        console.log($("#Select_EmpresaNit").val())
+        console.log("cca");
         Charge_Combos_Depend_Nit(Matrix_Tarjeta, "Select_Tarjeta", $("#Select_EmpresaNit").val(), "");
     });
 }
@@ -33,7 +32,6 @@ function transaccionAjax_MTarjeta(State) {
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transaccionAjax_MPersona(State) {
-    console.log("cc2");
     $.ajax({
         url: "R_Persona_TarjetaAjax.aspx",
         type: "POST",
@@ -158,7 +156,6 @@ function transacionAjax_R_Persona_Tarjeta_create(State) {
 
         }
     }).done(function () {
-        console.log("cc3");
     });
 }
 
