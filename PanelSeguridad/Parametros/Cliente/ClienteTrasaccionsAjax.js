@@ -28,7 +28,7 @@ function transacionAjax_CargaBusqueda(State) {
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transaccionAjax_MDocWork(State, Nit, TD, D) {
+function transaccionAjax_MDocWork(State, vp_Nit, vp_TD, vp_D,vp_Type) {
     $.ajax({
         url: "ClienteAjax.aspx",
         type: "POST",
@@ -36,9 +36,9 @@ function transaccionAjax_MDocWork(State, Nit, TD, D) {
         data: {
             "action": State,
             "tabla": 'RUTA',
-            "Nit": Nit,
-            "TDoc": TD,
-            "Doc": D
+            "Nit": vp_Nit,
+            "TDoc": vp_TD,
+            "Doc": vp_D
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -50,6 +50,18 @@ function transaccionAjax_MDocWork(State, Nit, TD, D) {
             }
         },
         error: function () {
+
+        },
+    }).done(function () {
+        var vl_StrSrc;
+
+        if (vp_Type == "Foto") {
+            if (ArrayFoto.length != 0)
+                vl_StrSrc = Matrix_DocWork[0].RutaRelativaDocumento + ArrayFoto[0].Nombre_Save + '.' + ArrayFoto[0].DescripFormato;
+            else
+                vl_StrSrc = "../../images/avatar.png";
+
+            $("#Imgfoto").attr("src", vl_StrSrc);
 
         }
     });
