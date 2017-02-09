@@ -51,8 +51,7 @@ $(document).ready(function () {
     transacionAjax_EntFinan('Bank');
     transacionAjax_Documento('Documento');
     transacionAjax_TCuenta('TCuenta');
-    transacionAjax_Seguridad('Seguridad');
-
+  
     VentanasEmergentes();
     InicializaPagina();
 });

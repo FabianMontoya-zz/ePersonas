@@ -130,6 +130,10 @@ function Charge_CatalogList_Matriz_Depend(M1, M2, Select_Pais, selector, type, S
 
 }
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                     PROCESO DE CARGUE DE COMBOS                                                                                                                               ----*/
+/*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
 //carga el combo de regimen
 function Change_Select_TPersona(index, Regimen) {
 
@@ -202,6 +206,9 @@ function Change_Select_Nit() {
 //Carga los combos de los registros relacionados con Select_Nit
 function TransaccionesSegunNIT(index_ID) {
     if (index_ID != "-1") {
+
+        transacionAjax_Seguridad('Seguridad', index_ID);
+
         Charge_Combos_Depend_Nit(Matrix_Area, "Select_Area", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Cargo, "Select_Cargo", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Jefe, "Select_Jefe", index_ID, "");

@@ -28,7 +28,7 @@ function transacionAjax_CargaBusqueda(State) {
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transaccionAjax_MDocWork(State, vp_Nit, vp_TD, vp_D,vp_Type) {
+function transaccionAjax_MDocWork(State, vp_Nit, vp_TD, vp_D, vp_Type) {
     $.ajax({
         url: "ClienteAjax.aspx",
         type: "POST",
@@ -340,14 +340,14 @@ function transacionAjax_Documento(State) {
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_Seguridad(State) {
+function transacionAjax_Seguridad(State, vp_Nit) {
     $.ajax({
         url: "ClienteAjax.aspx",
         type: "POST",
         //crear json
         data: {
             "action": State,
-            "tabla": 'SEGURIDAD'
+            "Nit": vp_Nit
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -356,13 +356,16 @@ function transacionAjax_Seguridad(State) {
             }
             else {
                 ArraySeguridad = JSON.parse(result);
-                charge_CatalogList(ArraySeguridad, "Select_Politica", 1);
+
             }
         },
         error: function () {
 
-        }
+        },
+    }).done(function () {
+        charge_CatalogList(ArraySeguridad, "Select_Politica", 1);
     });
+
 }
 
 /*------------------------------ consulta ---------------------------*/
