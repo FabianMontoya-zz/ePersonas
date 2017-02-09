@@ -76,15 +76,8 @@ $(document).ready(function () {
 /*----                                                                                                                 BOTONES GLOBALES                                                                                                            ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
+//Bandera que usamos para indicar por consola que todo se completó correctamente
 function ready() {
-    /*Función que recarga la página y exige que se traigan los nuevos cambios desde el servidor*/
-    /*Se activa despues de cerrar el navegador y volver a abrir la página*/
-    let isRedirected = sessionStorage.getItem('isRedirected');
-    if (!isRedirected) {
-        sessionStorage.setItem('isRedirected', true);
-        location.reload(true);
-    }
-    /**/
 
     var Digital = new Date();
 
@@ -112,8 +105,26 @@ function ready() {
     setTimeout(console.log.bind(console, "%cAll is ready, enjoy!", "color: #b70d0d; font-size: x-large")); //No muestra la ruta donde se genera el console
     setTimeout(console.log.bind(console, "%cDesarrollado por SASIF® 2016. Todos los derechos reservados.\nContacto sistemas@sasif.com.co | Bogotá D.C. - Colombia \n© SASIF S.A.S. "+ Year + "", "color: #b70d0d; font-size: x"));
 
-    
-    
+    Reload();    
+}
+
+/*Función que recarga la página y exige que se traigan los nuevos cambios desde el servidor*/
+/*Funciona solamente cuando se cierra y nuevamente se abre el navegador*/
+function Reload() {
+    /*
+     * Obtenemos la última parte de la URL. Por ejemplo, en una URL como:
+     * https://unadireccion.com/blog
+     * se obtendrá 'blog'
+    */
+    (function () {
+        let page = location.href.substring(location.href.lastIndexOf('/') + 1);
+        let isRedirected = sessionStorage.getItem(page); //Variable por sesión de navegador
+
+        if (!isRedirected) {
+            sessionStorage.setItem(page, true);
+            window.location.reload(true);
+        }
+    })();      
 }
 
 //Función que borra el log generado en la consola según el navegador
@@ -394,7 +405,7 @@ function No_Back_Button() {
     }
 
     document.oncontextmenu = new Function("return false");
-
+    
 }
 
 //funcion para control de carga
