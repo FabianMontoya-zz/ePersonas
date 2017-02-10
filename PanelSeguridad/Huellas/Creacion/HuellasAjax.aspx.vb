@@ -21,9 +21,8 @@ Public Class HuellasAjax
                 Case "Cliente"
                     CargarCliente()
 
-                Case "Ok"
-                    Cargar()
-                    'RecibirTemplate()
+                Case "DescargarEjecutable"
+                    Descargar()
 
             End Select
 
@@ -78,55 +77,19 @@ Public Class HuellasAjax
     ''' función OME
     ''' </summary>
     ''' <remarks></remarks>
-    Protected Sub Cargar()
+    Protected Sub Descargar()
+        Dim objFile As New File_DowloadClass
+        Dim ObjListFile As New List(Of File_DowloadClass)
 
-        System.Diagnostics.Process.Start("C:\Users\DESARROLLO 02\Desktop\EnrollermentApp.exe")
-        'System.Diagnostics.Process.Start("Notepad.exe")
+        objFile.RutaOrigen = Request.Url.Authority & "/Files_Dowload/Script.vbs"
+        objFile.NombreDescarga = Request.Form("user") & "_" & Date.Now.ToString("yyyy/MM/dd") & "_Script.vbs"
 
-        Try
-            'creamos el objeto que controlará el proceso que vamos a lanzar 
-            Dim psi As ProcessStartInfo = New ProcessStartInfo()
-            'le decimos que se muestre y que no se quede en 2º plano 
-            psi.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal
-            'nombre del ejecutable 
-            psi.FileName = "Notepad.exe"
-            psi.RedirectStandardOutput = True
-            psi.UseShellExecute = False
+        ObjListFile.Add(objFile)
 
-            psi.WorkingDirectory = "C:\Windows\system32"
-            'argumentos de la línea de comandos, si los necesita 
-            'psi.Arguments = "x.x.x.x"
-
-            'obtenemos una referencia al nuevo proceso 
-            Dim p = System.Diagnostics.Process.Start(psi)
-
-            Dim salida As String = p.StandardOutput.ReadToEnd()
-            Response.Write(salida.Replace("\n", "<br>"))
-
-            'y podemos esperar a que finalice su ejecución 
-            p.WaitForExit()
-
-            'Response.AddHeader("Refresh", "2"); 
-
-        Catch ex As Exception
-
-        End Try
-
+        Response.Write(JsonConvert.SerializeObject(ObjListFile.ToArray()))
 
     End Sub
 
-    Public Function javaMsg(ByVal message As String) As String
-
-        Dim sb As New System.Text.StringBuilder()
-
-        sb.Append("<script type='text/javascript'>")
-        sb.Append("alert('")
-        sb.Append(message)
-        sb.Append("');</script>")
-
-        Return sb.ToString()
-
-    End Function
 
 #Region "SOCKET RECIBE"
 

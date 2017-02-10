@@ -369,6 +369,7 @@
     <Content Include="Huellas\Creacion\Huellas.js" />
     <Content Include="Huellas\Creacion\HuellasAjax.aspx" />
     <Content Include="Huellas\Creacion\HuellasTrasaccionsAjax.js" />
+    <Content Include="Files_Dowload\Script.vbs" />
     <Content Include="Huellas\menu.js" />
     <Content Include="Huellas\SasifMaster_Cosult.js" />
     <Content Include="Images\add.png" />
@@ -1017,6 +1018,7 @@
     <Compile Include="encriptracion\EncriptarClass.vb" />
     <Compile Include="Factura\Creacion\FacturaClass.vb" />
     <Compile Include="Factura\Creacion\FacturaSQLClass.vb" />
+    <Compile Include="Files_Dowload\File_DowloadClass.vb" />
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

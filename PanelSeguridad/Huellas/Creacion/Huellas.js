@@ -59,8 +59,8 @@ function Ocultar_Tablas() {
 }
 
 function btnOk() {
-    console.log("Entró BTN");
-    transacionAjax_Ok("Ok");
+
+    transacionAjax_Ok("DescargarEjecutable");
     
     $("#H_Estado").val(mensaje);
 }
