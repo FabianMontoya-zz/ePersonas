@@ -24,7 +24,6 @@ function transaccionAjax_MTarjeta(State) {
 
         }
     }).done(function () {
-        console.log("AjAx");
         Charge_Combos_Depend_Nit(Matrix_Tarjeta, "Select_Tarjeta_DBlo", $("#Select_EmpresaNit").val(), "");
     });
 }
@@ -158,7 +157,10 @@ function transacionAjax_UpdateDes_Bloqueo(State) {
             "Estado": "0",
             "Bloqueo": "0",
             "Observaciones": $("#TxtA_Observacion").val(),
-            "user": User.toUpperCase()
+            "user": User.toUpperCase(),
+            "Nit_Emp_User": Array_G_Usuario[0].Nit_ID,
+            "TDoc": Array_G_Usuario[0].TypeDocument,
+            "Doc": Array_G_Usuario[0].Documento
         },
         //Transaccion Ajax en proceso
         success: function (result) {

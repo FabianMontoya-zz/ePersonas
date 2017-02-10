@@ -227,8 +227,8 @@ function x() {
 //limpiar campos
 function Clear() {
     $("#Select_EmpresaNit").val("-1");
-    $("#Select_Persona").val("-1");
-    $("#Select_Tarjeta_Ent").val("-1");
+    $("#Select_Persona").empty().trigger('chosen:updated');
+    $("#Select_Tarjeta_Ent").empty().trigger('chosen:updated');
 
     $('.C_Chosen').trigger('chosen:updated');
     var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");

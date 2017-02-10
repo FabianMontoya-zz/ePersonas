@@ -18,7 +18,6 @@ $(document).ready(function () {
     transacionAjax_EmpresaNit('Cliente');
     Change_Select_Nit();
     
-
 });
 
 //funcion para las ventanas emergentes

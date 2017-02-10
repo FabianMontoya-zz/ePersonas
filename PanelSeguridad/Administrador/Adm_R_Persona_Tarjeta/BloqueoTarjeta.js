@@ -260,8 +260,8 @@ function x() {
 //limpiar campos
 function Clear() {
     $("#Select_EmpresaNit").val("-1");
-    $("#Select_Persona").val("-1");
-    $("#Select_Tarjeta_Blo").val("-1");
+    $("#Select_Persona").val("-1").empty().trigger('chosen:updated');
+    $("#Select_Tarjeta_Blo").val("-1").empty().trigger('chosen:updated');
     $("#Select_Bloqueo").val("-1");
     $("#TxtA_Observacion").val("");
 

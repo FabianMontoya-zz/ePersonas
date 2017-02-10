@@ -22,7 +22,6 @@ $(document).ready(function () {
     Ocultar_Tablas();
     /*================== FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN ==============*/
 
-    
     transacionAjax_EmpresaNit('Cliente');
 
     Change_Select_Nit();
@@ -99,10 +98,6 @@ function x() {
 function ValidarDes_BloqueoTarjeta(validaDoc) {
     
     for (item in Matrix_Tarjeta) {
-        console.log(Matrix_Tarjeta);
-        console.log(Matrix_Tarjeta[0].Document_ID_Entrega == validaDoc);
-        console.log(Matrix_Tarjeta[0].Document_ID_Entrega);
-        console.log(validaDoc);
         if (Matrix_Tarjeta[item].Document_ID_Entrega == validaDoc) {
 
             $("#V_Persona").html(Matrix_Tarjeta[item].Document_ID_Entrega + " - " + Matrix_Tarjeta[item].DescripPersonaEntrega);
@@ -202,7 +197,7 @@ function Change_Select_Tarjeta() {
 //limpiar campos
 function Clear() {
     $("#Select_EmpresaNit").val("-1");
-    $("#Select_Tarjeta_DBlo").val("-1");
+    $("#Select_Tarjeta_DBlo").val("-1").empty().trigger('chosen:updated');
     $("#TxtA_Observacion").val("");
     $("#V_Persona").html("");
     $("#V_MBloqueo").html("");

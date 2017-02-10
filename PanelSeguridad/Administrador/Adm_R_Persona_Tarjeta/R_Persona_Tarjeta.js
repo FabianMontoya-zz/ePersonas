@@ -21,7 +21,6 @@ $(document).ready(function () {
     Ocultar_Tablas();
     /*================== FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN ==============*/
     transacionAjax_EmpresaNit('Cliente');
-    console.log("ddc");
     Change_Select_Nit();
     Change_Persona();
 
@@ -196,9 +195,9 @@ function x() {
 function Clear() {
     $("#Select_EmpresaNit").val("-1");
     $("#Select_EmpresaNit_2").val("-1");
-    $("#Select_Persona").val("-1");
-    $("#Select_Tarjeta").val("-1");
-
+    $("#Select_Persona").empty().trigger('chosen:updated');
+    $("#Select_Tarjeta").empty().trigger('chosen:updated');
+    
     $('.C_Chosen').trigger('chosen:updated');
 
     var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
