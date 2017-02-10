@@ -123,8 +123,6 @@ function BtnConsulta() {
     var ValidateSelect = ValidarDroplist();
     var opcion;
 
-    OpenControl();
-
     if (ValidateSelect == 1) {
         filtro = "N";
         opcion = "ALL";
@@ -156,7 +154,6 @@ function BtnCrear() {
 
 //elimina de la BD
 function BtnElimina() {
-    OpenControl();
     transacionAjax_Paises_delete("elimina");
 }
 
@@ -224,37 +221,41 @@ function ValidarDroplist() {
 // crea la tabla en el cliente
 function Table_Paises() {
 
+    var html_TPaises;
+
     switch (estado) {
 
         case "buscar":
-            Tabla_consulta();
+            html_TPaises = "<table id='TPaises' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Ver</th><th>Codigo</th><th>Nombre</th></tr></thead><tbody>";
+            for (itemArray in ArrayPaises) {
+                if (ArrayPaises[itemArray].Cod != 0) {
+                    html_TPaises += "<tr id= 'TPaises_" + ArrayPaises[itemArray].Cod + "'><td><input type ='radio' class= 'Ver' name='ver' onclick=\"Ver('" + ArrayPaises[itemArray].Cod + "')\"></input></td><td>" + ArrayPaises[itemArray].Cod + "</td><td>" + ArrayPaises[itemArray].Name + "</td></tr>";
+                }
+            }
             break;
 
         case "modificar":
-            Tabla_modificar();
+            html_TPaises = "<table id='TPaises' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Ver</th><th>Editar</th><th>Codigo</th><th>Nombre</th></tr></thead><tbody>";
+            for (itemArray in ArrayPaises) {
+                if (ArrayPaises[itemArray].Cod != 0) {
+                    html_TPaises += "<tr id= 'TPaises_" + ArrayPaises[itemArray].Cod + "'><td><input type ='radio' class= 'Ver' name='ver' onclick=\"Ver('" + ArrayPaises[itemArray].Cod + "')\"></input></td><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Editar('" + ArrayPaises[itemArray].Cod + "')\"></input></td><td>" + ArrayPaises[itemArray].Cod + "</td><td>" + ArrayPaises[itemArray].Name + "</td></tr>";
+                }
+            }
             break;
 
         case "eliminar":
-            Tabla_eliminar();
+            html_TPaises = "<table id='TPaises' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Ver</th><th>Eliminar</th><th>Codigo</th><th>Nombre</th></tr></thead><tbody>";
+            for (itemArray in ArrayPaises) {
+                if (ArrayPaises[itemArray].Cod != 0) {
+                    html_TPaises += "<tr id= 'TPaises_" + ArrayPaises[itemArray].Cod + "'><td><input type ='radio' class= 'Ver' name='ver' onclick=\"Ver('" + ArrayPaises[itemArray].Cod + "')\"></input></td><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar('" + ArrayPaises[itemArray].Cod + "')\"></input></td><td>" + ArrayPaises[itemArray].Cod + "</td><td>" + ArrayPaises[itemArray].Name + "</td></tr>";
+                }
+            }
             break;
     }
 
-}
-
-//grid con el boton eliminar
-function Tabla_eliminar() {
-    var html_TPaises = "<table id='TPaises' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Ver</th><th>Eliminar</th><th>Codigo</th><th>Nombre</th></tr></thead><tbody>";
-    for (itemArray in ArrayPaises) {
-        if (ArrayPaises[itemArray].Cod != 0) {
-            html_TPaises += "<tr id= 'TPaises_" + ArrayPaises[itemArray].Cod + "'><td><input type ='radio' class= 'Ver' name='ver' onclick=\"Ver('" + ArrayPaises[itemArray].Cod + "')\"></input></td><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar('" + ArrayPaises[itemArray].Cod + "')\"></input></td><td>" + ArrayPaises[itemArray].Cod + "</td><td>" + ArrayPaises[itemArray].Name + "</td></tr>";
-        }
-    }
     html_TPaises += "</tbody></table>";
     $("#container_TPaises").html("");
     $("#container_TPaises").html(html_TPaises);
-
-    $(".Eliminar").click(function () {
-    });
 
     $("#TPaises").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,
@@ -274,35 +275,14 @@ function Eliminar(index_Paises) {
 
 }
 
-//grid con el boton editar
-function Tabla_modificar() {
-    var html_TPaises = "<table id='TPaises' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Ver</th><th>Editar</th><th>Codigo</th><th>Nombre</th></tr></thead><tbody>";
-    for (itemArray in ArrayPaises) {
-        if (ArrayPaises[itemArray].Cod != 0) {
-            html_TPaises += "<tr id= 'TPaises_" + ArrayPaises[itemArray].Cod + "'><td><input type ='radio' class= 'Ver' name='ver' onclick=\"Ver('" + ArrayPaises[itemArray].Cod + "')\"></input></td><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Editar('" + ArrayPaises[itemArray].Cod + "')\"></input></td><td>" + ArrayPaises[itemArray].Cod + "</td><td>" + ArrayPaises[itemArray].Name + "</td></tr>";
-        }
-    }
-    html_TPaises += "</tbody></table>";
-    $("#container_TPaises").html("");
-    $("#container_TPaises").html(html_TPaises);
-
-    $(".Editar").click(function () {
-    });
-
-    $("#TPaises").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
-}
-
 // muestra el registro a editar
 function Editar(index_Paises) {
-    Search_Pais(index_Paises);    
+    Search_Pais(index_Paises);
     $("#TablaDatos_D").css("display", "inline-table");
     $("#TablaConsulta").css("display", "none");
 
     $("#Btnguardar").attr("value", "Actualizar");
-    $("#Btnguardar").css("display", "inline-table");  
+    $("#Btnguardar").css("display", "inline-table");
 }
 
 // muestra el registro 
@@ -314,27 +294,9 @@ function Ver(index_Paises) {
     $("#TablaDatos_D").css("display", "inline-table");
     $("#TablaHoras").css("display", "inline-table");
     $("#TablaConsulta").css("display", "none");
-   
+
     $("#Btnguardar").css("display", "none");
-    
-}
 
-//grid sin botones para ver resultado
-function Tabla_consulta() {
-    var html_TPaises = "<table id='TPaises' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Ver</th><th>Codigo</th><th>Nombre</th></tr></thead><tbody>";
-    for (itemArray in ArrayPaises) {
-        if (ArrayPaises[itemArray].Cod != 0) {
-            html_TPaises += "<tr id= 'TPaises_" + ArrayPaises[itemArray].Cod + "'><td><input type ='radio' class= 'Ver' name='ver' onclick=\"Ver('" + ArrayPaises[itemArray].Cod + "')\"></input></td><td>" + ArrayPaises[itemArray].Cod + "</td><td>" + ArrayPaises[itemArray].Name + "</td></tr>";
-        }
-    }
-    html_TPaises += "</tbody></table>";
-    $("#container_TPaises").html("");
-    $("#container_TPaises").html(html_TPaises);
-
-    $("#TPaises").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
 }
 
 //evento del boton salir
@@ -352,20 +314,20 @@ function Clear() {
     $("#TxtSWIFT").val("");
 
     $("#DDLColumns").val("-1");
-    
+
     $('.C_Chosen').trigger('chosen:updated');
 }
 
 // muestra el registro selccionado
 function Search_Pais(index_Paises) {
-    
+
     for (itemArray in ArrayPaises) {
         if (index_Paises == ArrayPaises[itemArray].Cod) {
             $("#Txt_Codigo").val(ArrayPaises[itemArray].Cod);
             $("#Txt_Codigo").attr("disabled", "disabled");
             $("#Txt_Pais").val(ArrayPaises[itemArray].Name);
             editID = ArrayPaises[itemArray].Cod;
-           
+
             if (ArrayPaises[itemArray].Moneda == "") {
                 $("#Select_moneda").val("-1");
             }

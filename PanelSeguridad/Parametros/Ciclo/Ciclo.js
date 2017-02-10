@@ -21,9 +21,6 @@ $(document).ready(function () {
 
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
 
-    Change_Select_Nit();
-    //Change_Compara_Fecha("TxtFecha_Recibo", "TxtFecha_Retiro");
-
 });
 
 //Función que oculta todas las IMG de los errores en pantalla
@@ -115,8 +112,6 @@ function BtnConsulta() {
     var ValidateSelect = ValidarDroplist();
     var opcion;
 
-    OpenControl(); //Abrimos el load de espera con el logo
-
     if (ValidateSelect == 1) {
         filtro = "N";
         opcion = "ALL";
@@ -148,7 +143,6 @@ function BtnCrear() {
 
 //elimina de la BD
 function BtnElimina() {
-    OpenControl(); //Abrimos el load de espera con el logo
     $("#dialog_eliminar").dialog("close");
     transacionAjax_Ciclo_delete("elimina");
 }
@@ -296,7 +290,6 @@ function x() {
 
 //limpiar campos
 function Clear() {
-    Ocultar_Errores();
    
     $("#Txt_ID").val("");
     $("#TxtFechaCorte").prop('disabled', false);
@@ -306,5 +299,6 @@ function Clear() {
     $("#DDLColumns").val("-1");
     $("#TxtFechaCorte").val("");
     $("#TextFechaPago").val("");
+    $('.C_Chosen').trigger('chosen:updated');
 }
 

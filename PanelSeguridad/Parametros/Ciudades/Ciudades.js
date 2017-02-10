@@ -116,8 +116,6 @@ function BtnConsulta() {
     var ValidateSelect = ValidarDroplist();
     var opcion;
 
-    OpenControl();
-
     if (ValidateSelect == 1) {
         filtro = "N";
         opcion = "ALL";
@@ -149,7 +147,6 @@ function BtnCrear() {
 
 //elimina de la BD
 function BtnElimina() {
-    OpenControl();
     transacionAjax_Ciudades_delete("elimina");
 }
 
