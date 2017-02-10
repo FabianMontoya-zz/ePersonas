@@ -24,7 +24,6 @@ $(document).ready(function () {
 
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_EmpresaNit('Cliente');
-    transacionAjax_Seguridad('Seguridad');
 
     Change_Select_Nit();
 });
@@ -81,6 +80,7 @@ function TransaccionesSegunNIT(index_ID) {
     if (index_ID != "-1") {
         $('#Select_AreaDepent').empty();
         transacionAjax_AreaDepend('Area_Dep', index_ID);
+        transacionAjax_Seguridad('Seguridad', index_ID);
     }
 }
 
@@ -330,7 +330,7 @@ function Editar(index_Nit, index_Area) {
 
             editNit_ID = ArrayArea[itemArray].Nit_ID;
             editID = ArrayArea[itemArray].Area_ID;
-            
+
             $("#Select_EmpresaNit").val(ArrayArea[itemArray].Nit_ID);
             $("#Txt_ID").val(ArrayArea[itemArray].Area_ID);
 
@@ -346,11 +346,6 @@ function Editar(index_Nit, index_Area) {
             else
                 setTimeout("ChargeDependencia('" + ArrayArea[itemArray].AreaDependencia + "');", 300);
 
-            if (ArrayArea[itemArray].Politica_ID == 0)
-                $("#Select_Politica").val("-1");
-            else
-                $("#Select_Politica").val(ArrayArea[itemArray].Politica_ID);
-          
             $("#Btnguardar").attr("value", "Actualizar");
 
             $('.C_Chosen').trigger('chosen:updated');
@@ -358,12 +353,25 @@ function Editar(index_Nit, index_Area) {
     }
 }
 
-
 //funcion de carga de la dependecia para edicion
 function ChargeDependencia(index) {
     $('#Select_AreaDepent').val(index);
     $('.C_Chosen').trigger('chosen:updated');
 }
+
+//funcion de carga de la dependecia para edicion
+function ChargeDependencia_Politica(index, item) {
+    $('#Select_AreaDepent').val(index);
+
+    console.log(item);
+    if (ArrayArea[item].Politica_ID == 0)
+        $("#Select_Politica").val("-1");
+    else
+        $("#Select_Politica").val(ArrayArea[item].Politica_ID);
+
+    $('.C_Chosen').trigger('chosen:updated');
+}
+
 
 //evento del boton salir
 function x() {
@@ -377,7 +385,7 @@ function Clear() {
     $("#TxtDescription").val("");
     $("#Select_AreaDepent").val("-1");
     $("#Select_Politica").val("-1");
-     
+
     $("#TxtRead").val("");
     $("#DDLColumns").val("-1");
 

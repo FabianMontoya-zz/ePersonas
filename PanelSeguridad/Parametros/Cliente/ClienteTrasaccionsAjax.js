@@ -356,7 +356,6 @@ function transacionAjax_Seguridad(State, vp_Nit) {
             }
             else {
                 ArraySeguridad = JSON.parse(result);
-
             }
         },
         error: function () {

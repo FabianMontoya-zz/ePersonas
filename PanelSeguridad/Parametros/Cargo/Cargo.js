@@ -24,7 +24,6 @@ $(document).ready(function () {
 
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_EmpresaNit('Cliente');
-    transacionAjax_Seguridad('Seguridad');
 
     Change_Select_Nit();
 });
@@ -81,6 +80,7 @@ function Change_Select_Nit() {
 function TransaccionesSegunNIT(index_ID) {
     if (index_ID != "-1") {
         $('#Select_CargoDepent').empty();
+        transacionAjax_Seguridad('Seguridad', index_ID);
         transacionAjax_CargoDepend('Cargo_Dep', index_ID);
     }
 }
@@ -301,12 +301,6 @@ function Table_Cargo() {
     $("#container_TCargo").html("");
     $("#container_TCargo").html(html_Cargo);
 
-    $(".Eliminar").click(function () {
-    });
-
-    $(".Editar").click(function () {
-    });
-
     $("#TCargo").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,
         "bDestroy": true
@@ -352,15 +346,10 @@ function Editar(index_Nit, index_Cargo) {
             $("#TxtDescription").val(ArrayCargo[itemArray].Descripcion);
 
             if (ArrayCargo[itemArray].CargoDependencia == 0)
-                setTimeout("ChargeDependencia('-1');", 300);
+                setTimeout("ChargeDependencia('-1','" + itemArray + "');", 300);
             else
-                setTimeout("ChargeDependencia('" + ArrayCargo[itemArray].CargoDependencia + "');", 300);
-
-            if (ArrayCargo[itemArray].Politica_ID == 0)
-                $("#Select_Politica").val("-1");
-            else
-                $("#Select_Politica").val(ArrayCargo[itemArray].Politica_ID);
-
+                setTimeout("ChargeDependencia('" + ArrayCargo[itemArray].CargoDependencia + "','" + itemArray + "');", 300);
+                      
             $("#Btnguardar").attr("value", "Actualizar");
 
             $('.C_Chosen').trigger('chosen:updated');
@@ -370,8 +359,15 @@ function Editar(index_Nit, index_Cargo) {
 
 
 //funcion de carga de la dependecia para edicion
-function ChargeDependencia(index) {
+function ChargeDependencia(index, item) {
     $('#Select_CargoDepent').val(index);
+
+    console.log(item);
+    if (ArrayCargo[item].Politica_ID == 0)
+        $("#Select_Politica").val("-1");
+    else
+        $("#Select_Politica").val(ArrayCargo[item].Politica_ID);
+
     $('.C_Chosen').trigger('chosen:updated');
 }
 

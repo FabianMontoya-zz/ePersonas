@@ -1,12 +1,13 @@
 ﻿/*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_CargaBusqueda(State) {
-    OpenControl(); 
+    OpenControl();
     $.ajax({
         url: "AreaAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'AREA'
         },
         //Transaccion Ajax en proceso
@@ -32,7 +33,8 @@ function transacionAjax_EmpresaNit(State) {
         url: "AreaAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'CLIENTE'
         },
         //Transaccion Ajax en proceso
@@ -56,12 +58,13 @@ function transacionAjax_EmpresaNit(State) {
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_AreaDepend(State, Index) {
-    
+
     $.ajax({
         url: "AreaAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Index": Index,
             "tabla": 'AREA'
         },
@@ -81,16 +84,16 @@ function transacionAjax_AreaDepend(State, Index) {
     });
 }
 
-
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_Seguridad(State) {
+function transacionAjax_Seguridad(State, vp_Nit) {
     $.ajax({
         url: "AreaAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
-            "tabla": 'SEGURIDAD'
+        data: {
+            "action": State,
+            "Nit": vp_Nit
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -99,13 +102,15 @@ function transacionAjax_Seguridad(State) {
             }
             else {
                 ArraySeguridad = JSON.parse(result);
-                charge_CatalogList(ArraySeguridad, "Select_Politica", 1);
             }
         },
         error: function () {
 
-        }
+        },
+    }).done(function () {
+        charge_CatalogList(ArraySeguridad, "Select_Politica", 1);
     });
+
 }
 
 /*------------------------------ consulta ---------------------------*/
@@ -125,7 +130,8 @@ function transacionAjax_Area(State, filtro, opcion) {
         url: "AreaAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "filtro": filtro,
             "opcion": opcion,
             "contenido": contenido,
@@ -175,7 +181,8 @@ function transacionAjax_Area_create(State) {
         url: "AreaAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Nit_ID": Nit_ID,
             "ID": ID,
             "descripcion": $("#TxtDescription").val(),
@@ -243,7 +250,8 @@ function transacionAjax_Area_delete(State) {
         url: "AreaAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Nit_ID": editNit_ID,
             "ID": editID,
             "user": User
