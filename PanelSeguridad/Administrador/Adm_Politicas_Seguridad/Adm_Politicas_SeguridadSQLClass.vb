@@ -80,6 +80,33 @@ Public Class Adm_Politicas_SeguridadSQLClass
 
 #Region "CONSULTAS DROP LIST"
 
+    ''' <summary>
+    ''' crea la consulta para cargar el combo
+    ''' </summary>
+    ''' <param name="vp_S_Nit"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Charge_DropListSeguridad(ByVal vp_S_Nit As String)
+
+        Dim ObjListDroplist As New List(Of Droplist_Class)
+        Dim StrQuery As String = ""
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("1")
+
+        Dim SQLGeneral As New GeneralSQLClass
+        Dim sql As New StringBuilder
+
+        sql.Append(" SELECT PS_Politica_ID AS ID,CAST(PS_Politica_ID AS NVARCHAR(5)) + ' - ' + PS_Descripcion AS DESCRIPCION" & _
+                              " FROM POLITICA_SEGURIDAD " & _
+                              " WHERE PS_Nit_ID ='" & vp_S_Nit & "'")
+        StrQuery = sql.ToString
+
+        ObjListDroplist = SQLGeneral.listdrop(StrQuery, Conexion)
+
+        Return ObjListDroplist
+
+    End Function
+
 #End Region
 
 #Region "CARGAR LISTAS"
@@ -214,6 +241,7 @@ Public Class Adm_Politicas_SeguridadSQLClass
         Return ObjListPoliticasSeguridad
 
     End Function
+
 
 #End Region
 

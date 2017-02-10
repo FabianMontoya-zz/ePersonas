@@ -216,11 +216,11 @@ Public Class TipoServicioAjax
     ''' <remarks></remarks>
     Protected Sub CargarSeguridad()
 
-        Dim SQL As New CargoSQLClass
+        Dim SQL As New Adm_Politicas_SeguridadSQLClass
         Dim ObjListDroplist As New List(Of Droplist_Class)
-        Dim vl_S_Tabla As String = Request.Form("tabla")
+        Dim vl_S_Nit As String = Request.Form("Nit")
 
-        ObjListDroplist = SQL.Charge_DropListSeguridad(vl_S_Tabla)
+        ObjListDroplist = SQL.Charge_DropListSeguridad(vl_S_Nit)
         Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
 
     End Sub
