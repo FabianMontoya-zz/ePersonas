@@ -19,7 +19,7 @@ If fso.FileExists(Archivo) Then
 
 	if Acepta = vbYes then
 		Set WshShell = CreateObject("WScript.Shell")
-		Return = WshShell.Run("cmd /c start """" ""C:\Program Files\SASIF FingerPrint\Enroller\EnrollermentApp.exe4""", 0, false)
+		Return = WshShell.Run("cmd /c start """" ""C:\Program Files\SASIF FingerPrint\Enroller\EnrollermentApp.exe""", 0, false)
 	else
 		Msgbox "Se canceló la ejecución automática.", vbOKOnly+64+vbSystemModal, "Ejecución Automática Cancelada"
 	end if
