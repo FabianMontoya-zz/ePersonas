@@ -37,20 +37,39 @@
     <!--Dialog que contiene la pantalla de las colocaciones/Huellas -->
     <div id="Marco_Contrato">
         <div id="Marco_trabajo_Huella">
-            <table id="Prueba">
-                <tr>
-                    <td>Estado: </td>
+            <table id="Table1" style="width: 100%;">
+            <tr>
+                <td class="Label_Bold" style="width: 200px;">
+                    <input id="file1" type="file" name="files[]" />
+                    <a id="A1" style="cursor: pointer" onclick="AddFileInput(F1)" visible="false"></a>
+                </td>
+                <td style="width: 300px;">
+                    <input id="Button1" type="button" value="Adjuntar Documento de Respaldo" name="Add_files"
+                        style="width: 300px;" onclick="UpLoad_Document('AutorizacionDocumentos', 'fileupload', '2'); HabilitarControl();" />
+                </td>
+            </tr>
+        </table>
 
-                </tr>
-            </table>
-
-            <textarea id="H_Estado" cols="20" rows="10" name="Texto"></textarea>
         </div>
         <div id="Div_BTN_Guardar" style="width: 100%; text-align: center; margin-top: 11px;">
             <input id="Btnguardar" type="button" value="Guardar" onclick="btnOk();" />
         </div>
     </div>
 
+    <div id="Dialog_CargarTemplate" title="Basic dialog">
+        <table id="TFile" style="width: 100%;">
+            <tr>
+                <td class="Label_Bold" style="width: 200px;">
+                    <input id="fileupload" type="file" name="files[]" />
+                    <a id="lnkAttch" style="cursor: pointer" onclick="AddFileInput(F1)" visible="false"></a>
+                </td>
+                <td style="width: 300px;">
+                    <input id="Btncharge_file" type="button" value="Adjuntar Documento de Respaldo" name="Add_files"
+                        style="width: 300px;" onclick="UpLoad_Document('AutorizacionDocumentos', 'fileupload', '2'); HabilitarControl();" />
+                </td>
+            </tr>
+        </table>
+    </div>
 
     <div id="dialog" title="Basic dialog">
         <table style="width: 100%; text-align: center;">

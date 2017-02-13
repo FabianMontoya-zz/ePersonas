@@ -3,7 +3,7 @@
     Private _Index As Long
     Private _RutaOrigen As String
     Private _NombreDescarga As String
-  
+    Private _TipoArchivo As String
 #End Region
 
 #Region "propiedades"
@@ -29,6 +29,14 @@
         End Get
         Set(ByVal value As String)
             Me._NombreDescarga = value
+        End Set
+    End Property
+    Public Property TipoArchivo() As String
+        Get
+            Return Me._TipoArchivo
+        End Get
+        Set(ByVal value As String)
+            Me._TipoArchivo = value
         End Set
     End Property
 #End Region

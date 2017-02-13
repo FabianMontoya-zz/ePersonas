@@ -2309,3 +2309,37 @@ function Capture_Nit_User() {
         g_NitEmpresa_User = "N";
     }
 }
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                 PROCESO PARA DESCARGAS AUTOMÁTICAS DE ARCHIVOS                                                                                                            ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*Función que recibe un Array traido desde código VB y lo convierte para descargarlo automáticamente*/
+function DowloadFile(result){
+    var Correcto = false;
+    var ArrayInformationFile = [];
+    ArrayInformationFile = JSON.parse(result);
+    var a = document.createElement('a');
+
+    if (typeof a.download != "undefined") {
+        var URLorigin = "http://" + ArrayInformationFile[0].RutaOrigen
+        var FileDowload = ArrayInformationFile[0].NombreDescarga + "." + ArrayInformationFile[0].TipoArchivo;
+        var save = document.createElement('a');
+        save.href = URLorigin;
+        save.target = '_blank';
+        save.download = FileDowload;
+        var clicEvent = new MouseEvent('click', {
+            'view': window,
+            'bubbles': true,
+            'cancelable': true
+        });
+        save.dispatchEvent(clicEvent);
+        (window.URL || window.webkitURL).revokeObjectURL(save.href);
+        Correcto = true;
+    }
+    else {
+        Mensaje_General("Navegador No Soportado", "El navegador actual no soporta la sentencia usada para la descarga del archivo, por favor reintenta con otro navegador.", "E");
+        Correcto = false;
+    }
+    ArrayInformationFile = [];
+    return Correcto;
+}

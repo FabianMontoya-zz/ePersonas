@@ -82,7 +82,8 @@ Public Class HuellasAjax
         Dim ObjListFile As New List(Of File_DowloadClass)
 
         objFile.RutaOrigen = Request.Url.Authority & "/Files_Dowload/Script.vbs"
-        objFile.NombreDescarga = Request.Form("user") & "_" & Date.Now.ToString("yyyy/MM/dd") & "_Script.vbs"
+        objFile.NombreDescarga = Request.Form("user") & "_" & Date.Now.ToString("yyyy/MM/dd") & "_Script"
+        objFile.TipoArchivo = "vbs"
 
         ObjListFile.Add(objFile)
 
