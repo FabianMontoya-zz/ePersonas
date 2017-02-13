@@ -306,7 +306,6 @@ function Table_Cargo() {
     });
 }
 
-
 //muestra el registro a eliminar
 function Eliminar(index_Nit, index_Cargo) {
 
@@ -320,7 +319,6 @@ function Eliminar(index_Nit, index_Cargo) {
     }
 
 }
-
 
 // muestra el registro a editar
 function Editar(index_Nit, index_Cargo) {

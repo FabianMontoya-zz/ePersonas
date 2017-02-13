@@ -118,7 +118,6 @@ function Charge_CatalogList_Matriz_Depend(M1, M2, Select_Pais, selector, type, S
         $("#" + selector).append("<option value='-1'>Seleccione...</option>");
         $("#" + selector + " option[value= '-1'] ").attr("selected", true);
     }
-    console.log(Select_Ciudad);
 
     if (Select_Ciudad != "") {
         $("#" + selector).append("<option value='-1'>Seleccione...</option>");
@@ -205,14 +204,13 @@ function Change_Select_Nit() {
 
 //Carga los combos de los registros relacionados con Select_Nit
 function TransaccionesSegunNIT(index_ID) {
-    if (index_ID != "-1") {
-
-        transacionAjax_Seguridad('Seguridad', index_ID);
+   if (index_ID != "-1") {
 
         Charge_Combos_Depend_Nit(Matrix_Area, "Select_Area", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Cargo, "Select_Cargo", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Jefe, "Select_Jefe", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_GrpDocumentos, "Select_GrpDocument", index_ID, "");
+        transacionAjax_Seguridad('Seguridad', index_ID);
     }
 }
 

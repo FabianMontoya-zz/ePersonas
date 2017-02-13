@@ -51,7 +51,7 @@ $(document).ready(function () {
     transacionAjax_EntFinan('Bank');
     transacionAjax_Documento('Documento');
     transacionAjax_TCuenta('TCuenta');
-  
+
     VentanasEmergentes();
     InicializaPagina();
 });
@@ -238,7 +238,7 @@ function VentanasEmergentes() {
 //instancia  componentes anexos a jquery
 function InicializaPagina() {
     ResetError();
-   
+
     $("#ESelect").css("display", "none");
     $("#ImgMul").css("display", "none");
     $("#ImgPais").css("display", "none");
@@ -313,7 +313,6 @@ function InicializaPagina() {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                 REGION BOTONES                                                                                                                ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
 //muestra las relacion del cliente
 function BtnRelacion() {
     $("#Dialog_Relation").dialog("open");
@@ -419,7 +418,6 @@ function Table_Cliente() {
                     if (ArrayCliente[itemArray].Por_Participacion != 0)
                         StrPorcentaje = ArrayCliente[itemArray].Por_Participacion + " %";
 
-                    console.log(StrPorcentaje);
                     html_Cliente += "<tr><td><select id='Select_" + ArrayCliente[itemArray].Cliente_ID + "' class='Opciones' onchange=\"Select_Option_Cliente(this,'" + ArrayCliente[itemArray].Index + "','U');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='M'>Editar</option></select></td><td>" + ArrayCliente[itemArray].Nit_ID + "</td><td>" + ArrayCliente[itemArray].DescripTypeDocument + "</td><td>" + ArrayCliente[itemArray].Document_ID + "</td><td>" + ArrayCliente[itemArray].Digito_Verificacion + "</td><td>" + ArrayCliente[itemArray].Nombre + " " + ArrayCliente[itemArray].Nombre_2 + " " + ArrayCliente[itemArray].Apellido_1 + " " + ArrayCliente[itemArray].Apellido_2 + "</td><td>" + ArrayCliente[itemArray].DescripTipoPersona + "</td><td>" + ArrayCliente[itemArray].DescripRegimen + "</td><td>" + ArrayCliente[itemArray].DescripPais + "</td><td>" + ArrayCliente[itemArray].DescripCiudad + "</td><td>" + ArrayCliente[itemArray].OP_Cliente + "</td><td>" + ArrayCliente[itemArray].OP_Avaluador + "</td><td>" + ArrayCliente[itemArray].OP_Transito + "</td><td>" + ArrayCliente[itemArray].OP_Hacienda + "</td><td>" + ArrayCliente[itemArray].OP_Empresa + "</td><td>" + ArrayCliente[itemArray].OP_Empleado + "</td><td>" + ArrayCliente[itemArray].OP_Asesor + "</td><td>" + ArrayCliente[itemArray].Other_1 + "</td><td>" + ArrayCliente[itemArray].Other_2 + "</td><td>" + ArrayCliente[itemArray].OP_Visitante + "</td><td>" + ArrayCliente[itemArray].OP_Representante + "</td><td>" + ArrayCliente[itemArray].OP_Socio + "</td><td>" + StrPorcentaje + "</td></tr>";
                 }
             }
@@ -460,9 +458,7 @@ function Table_Cliente() {
 
 // muestra el registro a ver
 function Ver(Index_Cliente) {
-
     Editar(Index_Cliente, "V");
-
 }
 
 //Edicion de cliente
@@ -475,7 +471,6 @@ function Editar(Index_Cliente, Type) {
     if (Type == 'V') {
         $("#TablaDatos_D_Vista").css("display", "inline-table");
         $("#TablaDatos_D").css("display", "none");
-
     }
     else {
         $("#TablaDatos_D").css("display", "inline-table");
@@ -490,6 +485,8 @@ function Editar(Index_Cliente, Type) {
     OpcWordComplementos = Type;
 
     D_Nit = ArrayCliente[Index_Cliente].Nit_ID;
+    transacionAjax_Seguridad('Seguridad', D_Nit);
+
     D_TDocumento = ArrayCliente[Index_Cliente].TypeDocument_ID;
     D_Documento = ArrayCliente[Index_Cliente].Document_ID;
     editNit_ID = ArrayCliente[Index_Cliente].Nit_ID;
@@ -498,7 +495,7 @@ function Editar(Index_Cliente, Type) {
 
     D_String_Contacto = ArrayCliente[Index_Cliente].Nombre;
     D_String_TDocumento = ArrayCliente[itemArray].DescripTypeDocument;
-
+    
     $("#Select_EmpresaNit").val(ArrayCliente[Index_Cliente].Nit_ID);
     $("#Select_Documento").val(ArrayCliente[Index_Cliente].TypeDocument_ID);
     $("#Select_Pais").val(ArrayCliente[Index_Cliente].Pais_ID);
@@ -509,12 +506,7 @@ function Editar(Index_Cliente, Type) {
     $("#Select_Sex").val(ArrayCliente[Index_Cliente].Sex);
     $("#Text_fechaNacimiento").css("color", "#000000")
 
-    StrPolitica = ArrayCliente[Index_Cliente].Politica_ID;
-
-    if (StrPolitica == 0)
-        $("#Select_Politica").val("-1");
-    else
-        $("#Select_Politica").val(StrPolitica);
+     StrPolitica = ArrayCliente[Index_Cliente].Politica_ID;
 
     $("#Txt_Ident").val(ArrayCliente[Index_Cliente].Document_ID);
     $("#TxtVerif").val(ArrayCliente[Index_Cliente].Digito_Verificacion);
@@ -548,6 +540,12 @@ function Editar(Index_Cliente, Type) {
     $("#Admin_Anexos").css("display", "inline-table");
 
     transacionAjax_Foto('Foto', D_Nit, D_TDocumento, D_Documento, Index_Cliente, Type, ArrayCliente[Index_Cliente].Pais_ID);
+
+    if (StrPolitica == 0) {
+        setTimeout("$('#Select_Politica').val('-1').trigger('chosen:updated');", 400);
+    } else {
+        setTimeout("$('#Select_Politica').val('" + StrPolitica + "').trigger('chosen:updated');", 400);
+    }
 
     if (Type == "V") {
         $("#Btnguardar").css("display", "none");
