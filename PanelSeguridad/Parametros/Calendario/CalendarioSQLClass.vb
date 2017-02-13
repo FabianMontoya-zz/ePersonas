@@ -95,7 +95,7 @@ Public Class CalendarioSQLClass
                 vl_sql_filtro.Append("AND  CA_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY CA_Nit_ID, CA_Calendario_ID ASC")
             End If
         Else
-            vl_sql_filtro.Append(" ORDER BY CA_Nit_ID, R_Rol_ID ASC")
+            vl_sql_filtro.Append(" ORDER BY CA_Nit_ID, CA_Calendario_ID ASC")
         End If
 
 

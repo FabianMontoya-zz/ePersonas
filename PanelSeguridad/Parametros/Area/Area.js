@@ -78,7 +78,6 @@ function Change_Select_Nit() {
 
 function TransaccionesSegunNIT(index_ID) {
     if (index_ID != "-1") {
-        $('#Select_AreaDepent').empty();
         transacionAjax_AreaDepend('Area_Dep', index_ID);
         transacionAjax_Seguridad('Seguridad', index_ID);
     }
@@ -324,6 +323,8 @@ function Editar(index_Nit, index_Area) {
 
     $("#TablaDatos_D").css("display", "inline-table");
     $("#TablaConsulta").css("display", "none");
+    var vl_index_Area;
+    var vl_index_Politica;
 
     for (itemArray in ArrayArea) {
         if (index_Nit == ArrayArea[itemArray].Nit_ID && index_Area == ArrayArea[itemArray].Area_ID) {
@@ -334,43 +335,33 @@ function Editar(index_Nit, index_Area) {
             $("#Select_EmpresaNit").val(ArrayArea[itemArray].Nit_ID);
             $("#Txt_ID").val(ArrayArea[itemArray].Area_ID);
 
-            setTimeout("$('#Select_EmpresaNit').trigger('change');", 200);
+            setTimeout("Change_Select_Nit();", 200);
 
             $("#Select_EmpresaNit").attr("disabled", "disabled");
             $("#Txt_ID").attr("disabled", "disabled");
 
             $("#TxtDescription").val(ArrayArea[itemArray].Descripcion);
 
-            if (ArrayArea[itemArray].AreaDependencia == 0)
-                setTimeout("ChargeDependencia('-1');", 300);
-            else
-                setTimeout("ChargeDependencia('" + ArrayArea[itemArray].AreaDependencia + "');", 300);
+            if (ArrayArea[itemArray].AreaDependencia == 0) {
+                setTimeout("$('#Select_AreaDepent').val('-1').trigger('chosen:updated');", 400);
+            } else {
+                vl_index_Area = ArrayArea[itemArray].AreaDependencia;
+                console.log(vl_index_Area);
+                setTimeout("$('#Select_AreaDepent').val('" + vl_index_Area + "').trigger('chosen:updated');", 400);
+            }
 
+            if (ArrayArea[itemArray].Politica_ID == 0) {
+                setTimeout("$('#Select_Politica').val('-1').trigger('chosen:updated');", 400);
+            } else {
+                vl_index_Politica = ArrayArea[itemArray].Politica_ID;
+                setTimeout("$('#Select_Politica').val('" + vl_index_Politica + "').trigger('chosen:updated');", 400);
+            }
             $("#Btnguardar").attr("value", "Actualizar");
-
             $('.C_Chosen').trigger('chosen:updated');
         }
     }
 }
 
-//funcion de carga de la dependecia para edicion
-function ChargeDependencia(index) {
-    $('#Select_AreaDepent').val(index);
-    $('.C_Chosen').trigger('chosen:updated');
-}
-
-//funcion de carga de la dependecia para edicion
-function ChargeDependencia_Politica(index, item) {
-    $('#Select_AreaDepent').val(index);
-
-    console.log(item);
-    if (ArrayArea[item].Politica_ID == 0)
-        $("#Select_Politica").val("-1");
-    else
-        $("#Select_Politica").val(ArrayArea[item].Politica_ID);
-
-    $('.C_Chosen').trigger('chosen:updated');
-}
 
 
 //evento del boton salir

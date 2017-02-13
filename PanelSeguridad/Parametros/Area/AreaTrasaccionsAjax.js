@@ -75,12 +75,13 @@ function transacionAjax_AreaDepend(State, Index) {
             }
             else {
                 ArrayAreaDep = JSON.parse(result);
-                charge_CatalogList(ArrayAreaDep, "Select_AreaDepent", 1);
-            }
+             }
         },
         error: function () {
 
-        }
+        },
+    }).done(function () {
+        charge_CatalogList(ArrayAreaDep, "Select_AreaDepent", 1);
     });
 }
 

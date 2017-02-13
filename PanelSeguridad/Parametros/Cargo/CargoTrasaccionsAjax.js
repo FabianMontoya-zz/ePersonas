@@ -75,12 +75,13 @@ function transacionAjax_CargoDepend(State, Index) {
             }
             else {
                 ArrayCargoDep = JSON.parse(result);
-                charge_CatalogList(ArrayCargoDep, "Select_CargoDepent", 1);
             }
         },
         error: function () {
 
-        }
+        },
+    }).done(function () {
+        charge_CatalogList(ArrayCargoDep, "Select_CargoDepent", 1);
     });
 }
 
