@@ -246,17 +246,123 @@
                     </table>
                     <table id="Table1" style="width: 100%;">
                         <tr>
-                            <td class="Label_Bold">Descripción
+                            <td class="Label_Bold">Detalle del Servicio
                             </td>
                             <td colspan="4">
                                 <span class="cssToolTip_Form">
-                                    <textarea id="TxtArea_Descripcion" rows="3" cols="89"></textarea>
+                                    <textarea id="Txt_Detalle" rows="3" cols="89"></textarea>
                                     <span class="Spam_AST">3: Digite Información</span></span>
                             </td>
                             <td style="width: 40px; padding-bottom: 25px;">
                                 <span class="cssToolTip_L">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px; display: none;" id="Img8" src="../../images/error.png"/>
                                     <span class="SpamEG">1: Campo Obligatorio!</span></span>
+                            </td>
+                        </tr>
+                    </table>
+                    <table id="Table_Capacidad" style="width: 100%;">
+                        <tr>
+                            <td class="Label_Bold" style="width: 3.4%;">Capacidad
+                            </td>
+                            <td id="Td4" style="width: 0.7%" class="Sigla"></td>
+                            <td style="width: 9.8%;">
+                                <span class="cssToolTip_Form">
+                                    <input type="text" id="Text_Capacidad" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
+                                    <span class="Spam_AVal"></span></span>
+                            </td>
+                        </tr>
+                    </table>
+                    <table id="Table_Bloqueo" style="width: 100%;">
+                        <tr>
+                            <td class="Label_Bold" style="width: 3.4%;">Num. servicios no pagos para bloqueo    
+                            </td>
+                            <td id="Td5" style="width: 0.7%" class="Sigla"></td>
+                            <td style="width: 9.8%;">
+                                <span class="cssToolTip_Form">
+                                    <input type="text" id="Text_Bloqueo" maxlength="5" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
+                                    <span class="Spam_AVal"></span></span>
+                            </td>
+                        </tr>
+                    </table>
+                    <table id="Table_Tipo_Calculo" style="width: 700px; text-align: left;">
+                        <tr>
+                            <td style="width: 153px;" class="Label_Bold">Tipo de cálculo sesión
+                            </td>
+                            <td style="width: 230px;">
+                                <select id="Select_Calculo" style="width: 230px;" class="C_Chosen">
+                                    <option value="-1">Seleccione...</option>
+                                    <option value="F">Fijo</option>
+                                    <option value="A">Solicitud</option>
+                                </select>
+                            </td>
+                            <td style="padding-bottom: 25px; width: 350px;">
+                                <span class="cssToolTip">
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img9"
+                                        src="../../images/error.png" />
+                                    <span class="SpamEG"></span></span>
+                            </td>
+                        </tr>
+                    </table>
+                    <table id="Table_Tiempo_sesión" style="width: 100%;">
+                        <tr>
+                            <td class="Label_Bold" style="width: 150px;">Tiempo de sesión
+                            </td>
+                            <td style="width: 50px;">
+                                <span class="cssToolTip_Form">
+                                    <input type="text" id="Text_Tiempo_sesión" maxlength="50" style="width: 200px;" />
+                                    <span class="Spam_AST"></span></span>
+                            </td>
+                            <td style="padding-bottom: 25px;">
+                                <span class="cssToolTip">
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img10"
+                                        src="../../images/error.png" />
+                                    <span class="SpamEG"></span></span>
+                            </td>
+                        </tr>
+                    </table>
+                    <table id="Table_Tiempo_entre_sesiones  " style="width: 100%;">
+                        <tr>
+                            <td class="Label_Bold" style="width: 150px;">Tiempo entre sesiones
+                            </td>
+                            <td style="width: 50px;">
+                                <span class="cssToolTip_Form">
+                                    <input type="text" id="Text_Tiempo_entre_sesiones" maxlength="50" style="width: 200px;" />
+                                    <span class="Spam_AST"></span></span>
+                            </td>
+                            <td style="padding-bottom: 25px;">
+                                <span class="cssToolTip">
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img11"
+                                        src="../../images/error.png" />
+                                    <span class="SpamEG"></span></span>
+                            </td>
+                        </tr>
+                    </table>
+                    <table id="Table_Agenda_Dias" style="width: 100%;">
+                        <tr>
+                            <td class="Label_Bold" style="width: 3.4%;">Tiempo máximo de agenda en días
+                            </td>
+                            <td id="Td6" style="width: 0.7%" class="Sigla"></td>
+                            <td style="width: 9.8%;">
+                                <span class="cssToolTip_Form">
+                                    <input type="text" id="Text_Agenda_Dias" maxlength="5" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
+                                    <span class="Spam_AVal"></span></span>
+                            </td>
+                        </tr>
+                    </table>
+                    <table id="Table_Imagen" style="width: 100%;">
+                        <tr>
+                            <td class="Label_Bold" style="width: 150px;">Imagen asociada
+                            </td>
+                            <td style="width: 50px;">
+                                <span class="cssToolTip_Form">
+                                    <input type="text" id="Text_Imagen" maxlength="50" style="width: 200px;" />
+                                    <span class="Spam_AST"></span></span>
+                            </td>
+                            <td style="padding-bottom: 25px;">
+                                <span class="cssToolTip">
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img12"
+                                        src="../../images/error.png" />
+                                    <span class="SpamEG"></span></span>
                             </td>
                         </tr>
                     </table>

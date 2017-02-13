@@ -27,8 +27,6 @@ $(document).ready(function () {
 
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_EmpresaNit('Cliente');
-    transacionAjax_MMoneda('Moneda');
-    
 
     //$(function () {
     //    $("#TxtF_Start").datepicker({ dateFormat: 'yy-mm-dd' });
@@ -51,7 +49,7 @@ $(document).ready(function () {
     //    $("#TxtFinF").timepicker();
     //});
     Change_Select_Nit();
-    Change_Select_Moneda();
+    
 });
 
 
@@ -112,18 +110,16 @@ function Ocultar_Tablas() {
 
 //carga el combo de Cargo dependiente
 function Change_Select_Nit() {
-
     $("#Select_EmpresaNit").change(function () {
         index_ID = $(this).val();
         TransaccionesSegunNIT(index_ID);
     });
-
+    Change_Select_Moneda();
 }
 
 function TransaccionesSegunNIT(index_ID) {
     if (index_ID != "-1") {
-    //    $('#Select_Moneda_Cod').empty();
-    //    transacionAjax_MMoneda('Moneda', index_ID);
+        transacionAjax_MMoneda('Moneda');
     }
 }
 
@@ -667,14 +663,8 @@ function Table_Servicio() {
     }
 
     html_Servicio += "</tbody></table>";
-    $("#container_TGrid").html("");
-    $("#container_TGrid").html(html_Servicio);
-
-    $(".Eliminar").click(function () {
-    });
-
-    $(".Editar").click(function () {
-    });
+    $("#container_TServicio").html("");
+    $("#container_TServicio").html(html_Servicio);
 
     $("#TServicio").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,

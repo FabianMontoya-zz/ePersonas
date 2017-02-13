@@ -52,6 +52,8 @@ function transacionAjax_EmpresaNit(State) {
         },
         async: false, // La petición es síncrona
         cache: false // No queremos usar la caché del navegador
+    }).done(function () {
+        
     });
 }
 
@@ -64,7 +66,8 @@ function transacionAjax_MMoneda(State) {
         //crear json
         data: {
             "action": State,
-            "tabla": 'TIPO'
+            "tabla": 'TIPO',
+            "Nit": $("#Select_EmpresaNit").val()
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -78,7 +81,11 @@ function transacionAjax_MMoneda(State) {
         },
         error: function () {
 
-        }
+        },
+        async: false,
+        cache: false
+    }).done(function () {
+        Charge_Combos_Depend_Nit(Matrix_Moneda, "Select_Moneda_Cod", $("#Select_EmpresaNit").val(), "");
     });
 }
 
@@ -149,6 +156,14 @@ function transacionAjax_TipoServicio_create(State) {
             "ID": ID,
             "nombre": $("#TxtNombre").val(),
             "Tipo": $("#Select_TipoServicio").val(),
+            "Refe": $("#Text_Referencia").val(),
+            "Mon": $("#Select_Moneda_Cod").val(),
+            "Cos": $("#TxtCosto").val(),
+            "Val": $("#TxtValor").val(),
+            "Det": $("#Txt_Detalle").val(),
+            "Cap": $("#Text_Capacidad").val(),
+            "Blo": $("#Text_Bloqueo").val(),
+            "Cal": $("#Select_Calculo").val(),
             "user": User.toUpperCase()
         },
         //Transaccion Ajax en proceso

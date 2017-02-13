@@ -92,7 +92,15 @@ Public Class TipoServicioAjax
         If vl_s_IDxiste = 0 Then
 
             objTipoServicio.Nombre = Request.Form("nombre")
-            objTipoServicio.Tipo = Request.Form("TipoServicio")
+            objTipoServicio.Tipo = Request.Form("Tipo")
+            objTipoServicio.Referencia = Request.Form("Refe")
+            objTipoServicio.Cod_Moneda = Request.Form("Mon")
+            objTipoServicio.Costo = Request.Form("Cos")
+            objTipoServicio.valor = Request.Form("Val")
+            objTipoServicio.Detalle = Request.Form("Det")
+            objTipoServicio.Capacidad = Request.Form("Cap")
+            objTipoServicio.N_Pagos_Bloqueos = Request.Form("Blo")
+            objTipoServicio.Tipo_Calculo_Sesion = Request.Form("Cal")
 
             objTipoServicio.UsuarioCreacion = Request.Form("user")
             objTipoServicio.FechaCreacion = Date.Now
