@@ -28,30 +28,19 @@ $(document).ready(function () {
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_EmpresaNit('Cliente');
 
-    //$(function () {
-    //    $("#TxtF_Start").datepicker({ dateFormat: 'yy-mm-dd' });
-    //    $("#TxtF_End").datepicker({ dateFormat: 'yy-mm-dd' });
-    //    $("#TxtIniLun").timepicker();
-    //    $("#TxtFinLun").timepicker();
-    //    $("#TxtIniMar").timepicker();
-    //    $("#TxtFinMar").timepicker();
-    //    $("#TxtIniMie").timepicker();
-    //    $("#TxtFinMie").timepicker();
-    //    $("#TxtIniJue").timepicker();
-    //    $("#TxtFinJue").timepicker();
-    //    $("#TxtIniVie").timepicker();
-    //    $("#TxtFinVie").timepicker();
-    //    $("#TxtIniSab").timepicker();
-    //    $("#TxtFinSab").timepicker();
-    //    $("#TxtIniDom").timepicker();
-    //    $("#TxtFinDom").timepicker();
-    //    $("#TxtIniF").timepicker();
-    //    $("#TxtFinF").timepicker();
-    //});
+    $(function () {
+        $("#Text_Tiempo_Sesion").timepicker();
+        $("#Text_Tiempo_Entre_Sesiones").timepicker();
+        $("#Tiempo_Max_Agenda").timepicker();
+    });
     Change_Select_Nit();
-    
+
 });
 
+//muestra controles de guardado
+function HabilitarControl() {
+    $("#D_Controls").css("display", "inline-table");
+}
 
 //funcion para las ventanas emergentes
 function Ventanas_Emergentes() {
@@ -96,6 +85,8 @@ function Ocultar_Errores() {
     $("#Img5").css("display", "none");
     $("#Img6").css("display", "none");
     $("#Img7").css("display", "none");
+    $("#Img12").css("display", "none");
+    $("#Img13").css("display", "none");
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
     $("#WA").css("display", "none");
@@ -552,22 +543,22 @@ function CargeJson() {
     //    "Servicio_ID": $("#Txt_ID").val(),
     //    "Descripcion": $("#TxtNombre").val(),
     //    "TipoServicio": $("#Select_TipoServicio").val(),
-        //"IniLun": $("#TxtIniLun").val(),
-        //"FinLun": $("#TxtFinLun").val(),
-        //"IniMar": $("#TxtIniMar").val(),
-        //"FinMar": $("#TxtFinMar").val(),
-        //"IniMie": $("#TxtIniMie").val(),
-        //"FinMie": $("#TxtFinMie").val(),
-        //"IniJue": $("#TxtIniJue").val(),
-        //"FinJue": $("#TxtFinJue").val(),
-        //"IniVie": $("#TxtIniVie").val(),
-        //"FinVie": $("#TxtFinVie").val(),
-        //"IniSab": $("#TxtIniSab").val(),
-        //"FinSab": $("#TxtFinSab").val(),
-        //"IniDom": $("#TxtIniDom").val(),
-        //"FinDom": $("#TxtFinDom").val(),
-        //"IniF": $("#TxtIniF").val(),
-        //"FinF": $("#TxtFinF").val()
+    //"IniLun": $("#TxtIniLun").val(),
+    //"FinLun": $("#TxtFinLun").val(),
+    //"IniMar": $("#TxtIniMar").val(),
+    //"FinMar": $("#TxtFinMar").val(),
+    //"IniMie": $("#TxtIniMie").val(),
+    //"FinMie": $("#TxtFinMie").val(),
+    //"IniJue": $("#TxtIniJue").val(),
+    //"FinJue": $("#TxtFinJue").val(),
+    //"IniVie": $("#TxtIniVie").val(),
+    //"FinVie": $("#TxtFinVie").val(),
+    //"IniSab": $("#TxtIniSab").val(),
+    //"FinSab": $("#TxtFinSab").val(),
+    //"IniDom": $("#TxtIniDom").val(),
+    //"FinDom": $("#TxtFinDom").val(),
+    //"IniF": $("#TxtIniF").val(),
+    //"FinF": $("#TxtFinF").val()
     //};
 
     //ArrayTipoServicio.push(JsonServicio);
