@@ -231,15 +231,16 @@ function transaccionAjax_MCargo(State) {
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transaccionAjax_MJefe(State) {
+function transaccionAjax_MJefe(vp_State, vp_Nit, vp_Operate, vp_ValueEdit) {
 
     $.ajax({
         url: "ClienteAjax.aspx",
         type: "POST",
         //crear json
         data: {
-            "action": State,
-            "tabla": 'AREA'
+            "action": vp_State,
+            "tabla": 'AREA',
+            "Nit": vp_Nit
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -252,6 +253,12 @@ function transaccionAjax_MJefe(State) {
         },
         error: function () {
 
+        },
+    }).done(function () {
+        if (vp_Operate == "Crear") {
+            Charge_Combos_Depend_Nit(Matrix_Jefe, "Select_Jefe", vp_Nit, "");
+        } else {
+            Charge_Combos_Depend_Nit(Matrix_Jefe, "Select_Jefe", vp_Nit, vp_ValueEdit);
         }
     });
 }
@@ -340,7 +347,7 @@ function transacionAjax_Documento(State) {
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_Seguridad(State, vp_Nit) {
+function transacionAjax_Seguridad(State, vp_Nit, vp_Operate, vp_ValueEdit) {
     $.ajax({
         url: "ClienteAjax.aspx",
         type: "POST",
@@ -362,7 +369,11 @@ function transacionAjax_Seguridad(State, vp_Nit) {
 
         },
     }).done(function () {
-        charge_CatalogList(ArraySeguridad, "Select_Politica", 1);
+        if (vp_Operate == "Crear") {
+            Charge_Combos_Depend_Nit(ArraySeguridad, "Select_Politica", vp_Nit, "");
+        } else {
+            Charge_Combos_Depend_Nit(ArraySeguridad, "Select_Politica", vp_Nit, vp_ValueEdit);
+        }
     });
 
 }
@@ -455,8 +466,8 @@ function transacionAjax_Cliente_create(State) {
     if ($("#Select_Jefe").val() != "-1") {
         var StrJefe = $("#Select_Jefe option:selected").html();
         var SplitJefe = StrJefe.split(" - ");
-        TDocJefe = SplitJefe[0];
-        DocJefe = SplitJefe[1];
+        TDocJefe = SplitJefe[1];
+        DocJefe = SplitJefe[0];
     }
 
     if ($('#Select_GrpDocument').val() != "-1")

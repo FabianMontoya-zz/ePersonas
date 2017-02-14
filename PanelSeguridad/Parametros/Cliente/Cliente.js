@@ -40,7 +40,6 @@ $(document).ready(function () {
     transaccionAjax_MPaises_Ciudades('MATRIX_PAIS_CIUDAD');
     transaccionAjax_MArea('MATRIX_AREA');
     transaccionAjax_MCargo('MATRIX_CARGO');
-    transaccionAjax_MJefe('MATRIX_JEFE');
     transaccionAjax_MGrpDoc('MATRIX_GRP');
 
     CargaMonth("Select_Mont", "");
@@ -485,8 +484,7 @@ function Editar(Index_Cliente, Type) {
     OpcWordComplementos = Type;
 
     D_Nit = ArrayCliente[Index_Cliente].Nit_ID;
-    transacionAjax_Seguridad('Seguridad', D_Nit);
-
+  
     D_TDocumento = ArrayCliente[Index_Cliente].TypeDocument_ID;
     D_Documento = ArrayCliente[Index_Cliente].Document_ID;
     editNit_ID = ArrayCliente[Index_Cliente].Nit_ID;
@@ -495,7 +493,9 @@ function Editar(Index_Cliente, Type) {
 
     D_String_Contacto = ArrayCliente[Index_Cliente].Nombre;
     D_String_TDocumento = ArrayCliente[itemArray].DescripTypeDocument;
-    
+
+    transacionAjax_Foto('Foto', D_Nit, D_TDocumento, D_Documento, Index_Cliente, Type, ArrayCliente[Index_Cliente].Pais_ID);
+
     $("#Select_EmpresaNit").val(ArrayCliente[Index_Cliente].Nit_ID);
     $("#Select_Documento").val(ArrayCliente[Index_Cliente].TypeDocument_ID);
     $("#Select_Pais").val(ArrayCliente[Index_Cliente].Pais_ID);
@@ -506,7 +506,7 @@ function Editar(Index_Cliente, Type) {
     $("#Select_Sex").val(ArrayCliente[Index_Cliente].Sex);
     $("#Text_fechaNacimiento").css("color", "#000000")
 
-     StrPolitica = ArrayCliente[Index_Cliente].Politica_ID;
+    StrPolitica = ArrayCliente[Index_Cliente].Politica_ID;
 
     $("#Txt_Ident").val(ArrayCliente[Index_Cliente].Document_ID);
     $("#TxtVerif").val(ArrayCliente[Index_Cliente].Digito_Verificacion);
@@ -539,14 +539,6 @@ function Editar(Index_Cliente, Type) {
     $("#Complementos").css("display", "inline-table");
     $("#Admin_Anexos").css("display", "inline-table");
 
-    transacionAjax_Foto('Foto', D_Nit, D_TDocumento, D_Documento, Index_Cliente, Type, ArrayCliente[Index_Cliente].Pais_ID);
-
-    if (StrPolitica == 0) {
-        setTimeout("$('#Select_Politica').val('-1').trigger('chosen:updated');", 400);
-    } else {
-        setTimeout("$('#Select_Politica').val('" + StrPolitica + "').trigger('chosen:updated');", 400);
-    }
-
     if (Type == "V") {
         $("#Btnguardar").css("display", "none");
         $("#BtnLimpiar").css("display", "none");
@@ -564,9 +556,15 @@ function Editar(Index_Cliente, Type) {
 
     Charge_Combos_Depend_Nit(Matrix_Area, "Select_Area", ArrayCliente[Index_Cliente].Nit_ID, ArrayCliente[Index_Cliente].Area_ID);
     Charge_Combos_Depend_Nit(Matrix_Cargo, "Select_Cargo", ArrayCliente[Index_Cliente].Nit_ID, ArrayCliente[Index_Cliente].Cargo_ID);
-    Charge_Combos_Depend_Nit(Matrix_Jefe, "Select_Jefe", ArrayCliente[Index_Cliente].Nit_ID, ArrayCliente[Index_Cliente].Document_ID_Jefe);
     Charge_Combos_Depend_Nit(Matrix_GrpDocumentos, "Select_GrpDocument", ArrayCliente[Index_Cliente].Nit_ID, ArrayCliente[Index_Cliente].GrpDocumentos);
+    transaccionAjax_MJefe('MATRIX_JEFE', D_Nit, "Edit", ArrayCliente[Index_Cliente].Document_ID_Jefe);
+    transacionAjax_Seguridad('Seguridad', D_Nit, "Edit", ArrayCliente[Index_Cliente].Politica_ID);
 
+    if (StrPolitica == 0) {
+        setTimeout("$('#Select_Politica').val('-1').trigger('chosen:updated');", 300);
+    } else {
+        setTimeout("$('#Select_Politica').val('" + StrPolitica + "').trigger('chosen:updated');", 300);
+    }
 }
 
 //muestra el registro a eliminar
@@ -882,11 +880,14 @@ function Clear() {
     $("#Select_Ciudad").val("-1");
     $("#Select_EmpresaNit").val("-1");
     $("#Select_Ciudad_Doc").val("-1");
+    $("#Select_Sex").val("-1");
 
     $("#Txt_Ident").val("");
     $("#TxtVerif").val("");
     $("#TxtNombre").val("");
     $("#TxtNombreNit").val("");
+    $("#Text_fechaNacimiento").val("YYYY-MM-DD");
+    $("#Text_fechaNacimiento").css("color", "#921919")
 
     $("#TxtNombre_2").val("");
     $("#Txt_Ape_1").val("");
@@ -896,8 +897,7 @@ function Clear() {
 
     $("#TxtRead").val("");
     $("#DDLColumns").val("-1");
-
-
+    
     $("#Check_Cliente").prop("checked", false);
     $("#Check_Avaluador").prop("checked", false);
     $("#Check_Transito").prop("checked", false);

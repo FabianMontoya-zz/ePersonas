@@ -549,7 +549,7 @@
                             <td style="width: 195px;">
                                 <span class="cssToolTip_Form_L"><a href="javascript:BtnRelacion();">
                                     <img alt="error" title="" style="padding-left: 1em; height: 50px; width: 50px;" id="Img18"
-                                        src="../../images/relations.png" /></a> <span class="Spam_ARel"></span></span>
+                                        src="../../images/Relations.gif" /></a> <span class="Spam_ARel"></span></span>
                             </td>
                         </tr>
                     </table>

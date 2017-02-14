@@ -944,6 +944,12 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
     var objList = $("[id$='" + Selector + "']");
 
     switch (Selector) {
+
+        case "Select_Politica":
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].ID + "'>" + Matrix[Item].descripcion + "</option>");
+            }
+
         case "Select_Area":
             for (Item in Matrix) {
                 if (Matrix[Item].Nit_ID == Nit) {

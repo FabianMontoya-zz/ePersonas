@@ -204,13 +204,14 @@ function Change_Select_Nit() {
 
 //Carga los combos de los registros relacionados con Select_Nit
 function TransaccionesSegunNIT(index_ID) {
-   if (index_ID != "-1") {
+    if (index_ID != "-1") {
 
         Charge_Combos_Depend_Nit(Matrix_Area, "Select_Area", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Cargo, "Select_Cargo", index_ID, "");
-        Charge_Combos_Depend_Nit(Matrix_Jefe, "Select_Jefe", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_GrpDocumentos, "Select_GrpDocument", index_ID, "");
-        transacionAjax_Seguridad('Seguridad', index_ID);
+        transacionAjax_Seguridad('Seguridad', index_ID, "Crear", "");
+        transaccionAjax_MJefe('MATRIX_JEFE', index_ID, "Crear", "");
+
     }
 }
 

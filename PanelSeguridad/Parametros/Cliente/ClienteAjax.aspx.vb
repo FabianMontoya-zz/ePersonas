@@ -596,12 +596,16 @@ Public Class ClienteAjax
     ''' <remarks></remarks>
     Protected Sub Carga_Matrix_Jefe()
 
-        Dim SQLC As New ClienteSQLClass
+        Dim SQL As New ClienteSQLClass
+        Dim ObjList As New List(Of ClienteClass)
+        Dim obj As New ClienteClass
+        obj.Nit_ID = Request.Form("Nit")
+        obj.TipoSQL = "Jefe"
 
-        Dim ObjList_MatrixJefe As New List(Of ClienteClass)
-        ObjList_MatrixJefe = SQLC.Read_Matrix_Jefe()
+        ObjList = SQL.Matrix_PersonaDep(obj)
+        '       ObjList = SQL.Read_Matrix_Jefe()
 
-        Response.Write(JsonConvert.SerializeObject(ObjList_MatrixJefe.ToArray()))
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
 
