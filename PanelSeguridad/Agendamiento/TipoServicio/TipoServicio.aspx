@@ -81,8 +81,8 @@
                     </tr>
                 </table>
                 <div id="Foto_Persona">
-                    <img alt="foto" title="" style="position: absolute; border-radius: 4px; border-color: #921919; border-width: 2px; border-style: outset;"
-                        id="Imgfoto" src="../../images/avatar.png" />
+                    <img alt="foto" title="" style="height: 120px; width: 120px; position: absolute; border-radius: 4px; border-color: #921919; border-width: 2px; border-style: outset;"
+                        id="Imgfoto" src="../../images/settings.png" />
                 </div>
                 <div id="TablaDatos_D">
 

@@ -101,6 +101,10 @@ Public Class TipoServicioAjax
             objTipoServicio.Capacidad = Request.Form("Cap")
             objTipoServicio.N_Pagos_Bloqueos = Request.Form("Blo")
             objTipoServicio.Tipo_Calculo_Sesion = Request.Form("Cal")
+            objTipoServicio.Tiempo_Sesion = Request.Form("TimSes")
+            objTipoServicio.Tiempo_Entre_Sesion = Request.Form("TiemEn")
+            objTipoServicio.Tiempo_Maximo_Agenda = Request.Form("MaxA")
+            objTipoServicio.Imagen_asociada = "../../images/" & Request.Form("MaxA")
 
             objTipoServicio.UsuarioCreacion = Request.Form("user")
             objTipoServicio.FechaCreacion = Date.Now

@@ -148,7 +148,7 @@ Public Class TipoServicioSQLClass
            "TCS_N_Pagos_Bloqueo, " & _
            "TCS_Tipo_Calculo_Sesion, " & _
            "TCS_Tiempo_Sesion, " & _
-           "TCS_Tiempo_Entre_Servicios, " & _
+           "TCS_Tiempo_Entre_Sesion, " & _
            "TCS_Tiempo_Maximo_Agenda, " & _
            "TCS_Imagen_asociada, " & _
            "TCS_Usuario_Creacion, " & _
@@ -170,7 +170,7 @@ Public Class TipoServicioSQLClass
         sql.AppendLine("'" & vp_Obj.N_Pagos_Bloqueos & "',")
         sql.AppendLine("'" & vp_Obj.Tipo_Calculo_Sesion & "',")
         sql.AppendLine("'" & vp_Obj.Tiempo_Sesion & "',")
-        sql.AppendLine("'" & vp_Obj.Tiempo_Entre_Servicios & "',")
+        sql.AppendLine("'" & vp_Obj.Tiempo_Entre_Sesion & "',")
         sql.AppendLine("'" & vp_Obj.Tiempo_Maximo_Agenda & "',")
         sql.AppendLine("'" & vp_Obj.Imagen_asociada & "',")
         sql.AppendLine("'" & vp_Obj.UsuarioCreacion & "',")
@@ -212,7 +212,7 @@ Public Class TipoServicioSQLClass
                           " TCS_N_Pagos_Bloqueo =" & vp_Obj.N_Pagos_Bloqueos & ", " & _
                           " TCS_Tipo_Calculo_Sesion ='" & vp_Obj.Tipo_Calculo_Sesion & "', " & _
                           " TCS_Tiempo_Sesion ='" & vp_Obj.Tiempo_Sesion & "', " & _
-                          " TCS_Tiempo_Entre_Servicios =" & vp_Obj.Tiempo_Entre_Servicios & ", " & _
+                          " TCS_Tiempo_Entre_Sesion =" & vp_Obj.Tiempo_Entre_Sesion & ", " & _
                           " TCS_Tiempo_Maximo_Agenda ='" & vp_Obj.Tiempo_Maximo_Agenda & "', " & _
                           " TCS_Imagen_asociada ='" & vp_Obj.Imagen_asociada & "', " & _
                           " TCS_Usuario_Actualizacion ='" & vp_Obj.UsuarioActualizacion & "', " & _
@@ -388,7 +388,7 @@ Public Class TipoServicioSQLClass
 
                     If Not (IsDBNull(ReadConsulta.GetValue(13))) Then objTipoServicio.Tiempo_Sesion = ReadConsulta.GetValue(10) Else objTipoServicio.Tiempo_Sesion = ""
 
-                    objTipoServicio.Tiempo_Entre_Servicios = ReadConsulta.GetValue(14)
+                    objTipoServicio.Tiempo_Entre_Sesion = ReadConsulta.GetValue(14)
                     objTipoServicio.Tiempo_Maximo_Agenda = ReadConsulta.GetValue(15)
                     objTipoServicio.Imagen_asociada = ReadConsulta.GetValue(16)
 
