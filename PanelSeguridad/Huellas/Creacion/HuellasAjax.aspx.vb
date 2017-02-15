@@ -2,6 +2,7 @@
 Imports System.Threading
 Imports System.Net.Sockets
 Imports System.Net
+Imports System.IO
 
 
 Public Class HuellasAjax
@@ -81,7 +82,24 @@ Public Class HuellasAjax
         Dim objFile As New File_DowloadClass
         Dim ObjListFile As New List(Of File_DowloadClass)
 
-        objFile.RutaOrigen = Request.Url.Authority & "/Files_Dowload/Script.vbs"
+        Dim sRenglon As String = Nothing
+        Dim strStreamW As Stream = Nothing
+        Dim strStreamWriter As StreamWriter = Nothing
+        Dim ContenidoArchivo As String = Nothing
+
+        'Dim path As String = "" & Request.Url.Authority & "/Files_Dowload/Test_Script.txt"
+        Dim path As String = Server.MapPath("~/Files_Dowload/Test_Script.txt")
+        ' Create or overwrite the file.
+        strStreamW = File.Create(path) ' lo creamos
+
+        strStreamWriter = New StreamWriter(strStreamW, System.Text.Encoding.Default) ' tipo de codificacion para escritura
+
+        'escribimos en el archivo
+
+        strStreamWriter.WriteLine("Primera línea en un archivo .txt desde visual basic.Net" & vbCrLf & "asdasdsada")
+        strStreamWriter.Close() ' cerramos
+
+        objFile.RutaOrigen = Request.Url.Authority & "/Files_Dowload/Script.txt"
         objFile.NombreDescarga = Request.Form("user") & "_" & Date.Now.ToString("yyyy/MM/dd") & "_Script"
         objFile.TipoArchivo = "vbs"
 

@@ -1,4 +1,4 @@
-Set fso = CreateObject("Scripting.FileSystemObject")
+Set fso = CreateObject("Scripting.FileSystemObject") 
 Archivo = "C:\Program Files\SASIF FingerPrint\Enroller\EnrollermentApp.exe"
 If fso.FileExists(Archivo) Then
 	anno = Year(Date)
