@@ -137,8 +137,9 @@ function clearConsole() {
         console.API = console;
     }
     if (console.API) {
-        setTimeout(console.API.clear.bind(console)); //No muestra la ruta donde se genera el console
+        setTimeout(console.API.clear.bind(console)); //No muestra la ruta donde se genera el console        
     }
+    setTimeout(console.clear.bind());
 }
 
 //salida del formulario

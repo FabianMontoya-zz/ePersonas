@@ -1,12 +1,18 @@
 Set fso = CreateObject("Scripting.FileSystemObject")
+Set ws = CreateObject("WScript.Shell")
 Archivo = "C:\Program Files\SASIF FingerPrint\Enroller\EnrollermentApp.exe"
 
 If fso.FileExists(Archivo) Then
-   anno = Year(Date)
-   Usuario = "SASFDM"
-   Fecha_Generada = "15/02/2017 1:09:32 p. m."
-   Titulo = "Autorización de Acceso"
 
+   anno = Year(Date)
+   User = "SASFDM"
+   NIT = "9001548739"
+   TypeDocument = "1"
+   Document = "1032494911"
+   Name_Client = "Fabian Dario Montoya Ballesteros"
+   Fingers = "IndiceIZ,IndiceDER"
+
+   Titulo = "Autorización de Acceso"
    Mensaje = "AUTORIZACIÓN DE ACCESO A ARCHIVOS DEL EQUIPO"+ vbCrLf + vbCrLf 
    Mensaje = Mensaje + "¿Autoriza que este archivo ejecute única y exclusivamente el programa encargado de realizar el proceso de captura de su huella?"+ vbCrLf +  vbCrLf 
    Mensaje = Mensaje + "Luego de responder, este archivo se eliminará automáticamente sin importar la opción elegida."+ vbCrLf + vbCrLf 
@@ -17,6 +23,51 @@ If fso.FileExists(Archivo) Then
    Set WshShell = CreateObject("WScript.Shell")
 
    if Acepta = vbYes then
+		FolderMyDocuments = ws.SpecialFolders("MyDocuments")
+		Folder = "\SASIF FingerPrint\"
+		Directory = FolderMyDocuments + Folder
+		If fso.FolderExists(Directory) Then
+			Directory = Directory + "Enroller\"
+			If fso.FolderExists(Directory) Then
+			   Directory = Directory + "Data\"
+			   If fso.FolderExists(Directory) Then
+			   Else
+			       Set objFolder = fso.CreateFolder(Directory)
+			   End If
+			Else
+			   Set objFolder = fso.CreateFolder(Directory)
+			   Directory = Directory + "Data\"
+			   If fso.FolderExists(Directory) Then
+			   Else
+			       Set objFolder = fso.CreateFolder(Directory)
+			   End If
+			End If
+		Else
+			Set objFolder = fso.CreateFolder(Directory)
+			Directory = Directory + "Enroller\"
+			If fso.FolderExists(Directory) Then
+				Directory = Directory + "Data\"
+			Else
+			   Set objFolder = fso.CreateFolder(Directory)
+			   Directory = Directory + "Data\"
+			   If fso.FolderExists(Directory) Then
+			   Else
+			       Set objFolder = fso.CreateFolder(Directory)
+			   End If
+			End If
+		End If
+
+		DirectoryFile = Directory + "Datafile.fpt"
+		Set File = fso.CreateTextFile(DirectoryFile, True)
+
+		File.WriteLine("" & User)
+		File.WriteLine("" & NIT)
+		File.WriteLine("" & TypeDocument)
+		File.WriteLine("" & Document)
+		File.WriteLine("" & Name_Client)
+		File.WriteLine("" & Fingers)
+		File.Close
+
        Set WshShell = CreateObject("WScript.Shell")
        Return = WshShell.Run("cmd /c start """" ""C:\Program Files\SASIF FingerPrint\Enroller\EnrollermentApp.exe""", 0, false)
    else

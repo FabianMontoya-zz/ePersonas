@@ -56,12 +56,12 @@
                 <tr>
                     <td class="Label_Bold" style="width: 10.5%;">Documento</td>
                     <td style="width: 47%;">
-                        <select style="width: 100%;" id="Select_Documento_C" class="C_Chosen">
+                        <select style="width: 100%;" id="Select_Documento" class="C_Chosen">
                         </select>
                     </td>
                     <td style="width: 60%; padding-bottom: 25px;">
                         <span class="cssToolTip">
-                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img_TD_C"
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img_TD"
                                 src="../../images/error.png" />
                             <span class="SpamEG"></span></span>
                     </td>
@@ -73,12 +73,12 @@
                     </td>
                     <td style="width: 15%;">
                         <span class="cssToolTip_Form">
-                            <input type="text" id="TxtDoc_C" maxlength="18" class="Numeric" style="width: 100%;" />
+                            <input type="text" id="TxtDoc" maxlength="18" class="Numeric" style="width: 100%;" />
                             <span class="Spam_AN"></span></span>
                     </td>
                     <td style="padding-bottom: 25px; width: 15%;">
                         <span class="cssToolTip">
-                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img_D_C"
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img_D"
                                 src="../../images/error.png" />
                             <span class="SpamEG"></span></span>
                     </td>
@@ -88,38 +88,7 @@
                     <td style="padding-bottom: 25px; width: 15%;"></td>
                 </tr>
             </table>
-            <div id="D_DedosManos">
-                <table id="T_Pulgar_D" style="width: 100%;">
-                    <tr>
-                        <td class="Label_Bold" style="width: 10.5%;">Pulgar Derecho:</td>
-                        <td class="Label_Bold" style="width: 47%;">
-                            <input id="file1" type="file" name="files[]" style="width: 100%;" />
-                            <a id="A1" style="cursor: pointer" onclick="AddFileInput(F1)" visible="false"></a>
-                        </td>
-                        <td style="width: 60%; padding-bottom: 25px;">
-                            <span class="cssToolTip">
-                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img_PulIZ"
-                                    src="../../images/error.png" />
-                                <span class="SpamEG"></span></span>
-                        </td>
-                    </tr>
-                </table>
-                <table id="T_Pulgar_D" style="width: 100%;">
-                    <tr>
-                        <td class="Label_Bold" style="width: 10.5%;">Pulgar Derecho:</td>
-                        <td class="Label_Bold" style="width: 47%;">
-                            <input id="file2" type="file" name="files[]" style="width: 100%;" />
-                            <a id="A2" style="cursor: pointer" onclick="AddFileInput(F1)" visible="false"></a>
-                        </td>
-                        <td style="width: 60%; padding-bottom: 25px;">
-                            <span class="cssToolTip">
-                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img2"
-                                    src="../../images/error.png" />
-                                <span class="SpamEG"></span></span>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+
 
         </div>
         <div id="Div_BTN_Guardar" style="width: 100%; text-align: center; margin-top: 11px;">
@@ -130,93 +99,104 @@
 
 
     <div id="Dialog_Dedos" title="Dedos Solicitados">
-        <table style="width: 100%;" border="0">
-            <tr style="width: 100%;">
-                <td class="Label_Bold" colspan="2" align="center">
-                    <h3>Mano Izquierda</h3>
-                </td>
-                <td class="Label_Bold"></td>
-                <td class="Label_Bold" colspan="2" align="center">
-                    <h3>Mano Derecha</h3>
-                </td>
-                <td class="Label_Bold"></td>
-            </tr>
+        <table id="T_Fingers" style="width: 100%;" border="0">
+            <tr>
+                <td align="center">
+                    <table id="T_Checks_Fingers" cellspacing="2" cellpadding="2" style="width: 100%;" border="0">
+                        <tr style="width: 100%;">
 
-            <tr>
-                <td style="width: 5%;">
-                    <input type="checkbox" id="Check_PulgarIZ" value="PulIZ" />
+                            <td class="Label_Bold" colspan="2" align="center">
+                                <h3>Mano Izquierda</h3>
+                            </td>
+                            <td class="Label_Bold"></td>
+                            <td class="Label_Bold" colspan="2" align="center">
+                                <h3>Mano Derecha</h3>
+                            </td>
+                            <td class="Label_Bold"></td>
+                        </tr>
+
+                        <tr>
+                            <td style="width: 5%;">
+                                <input type="checkbox" id="Check_PulgarIZ" value="PulgarIZ" />
+                            </td>
+                            <td class="Label_Bold">Pulgar
+                            </td>
+                            <td class="Label_Bold" style="width: 10%;"></td>
+                            <td style="width: 5%;">
+                                <input type="checkbox" id="Check_PulgarDER" value="PulgarDER" />
+                            </td>
+                            <td class="Label_Bold">Pulgar
+                            </td>
+                            <td class="Label_Bold" style="width: 10%;"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" id="Check_IndiceIZ" value="IndiceIZ" />
+                            </td>
+                            <td class="Label_Bold">Índice
+                            </td>
+                            <td class="Label_Bold"></td>
+                            <td>
+                                <input type="checkbox" id="Check_IndiceDER" value="IndiceDER" />
+                            </td>
+                            <td class="Label_Bold">Índice
+                            </td>
+                            <td class="Label_Bold"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" id="Check_MedioIZ" value="MedioIZ" />
+                            </td>
+                            <td class="Label_Bold">Dedo Medio
+                            </td>
+                            <td class="Label_Bold"></td>
+                            <td>
+                                <input type="checkbox" id="Check_MedioDER" value="MedioDER" />
+                            </td>
+                            <td class="Label_Bold">Dedo Medio
+                            </td>
+                            <td class="Label_Bold"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" id="Check_AnularIZ" value="AnularIZ" />
+                            </td>
+                            <td class="Label_Bold">Anular
+                            </td>
+                            <td class="Label_Bold"></td>
+                            <td>
+                                <input type="checkbox" id="Check_AnularDER" value="AnularDER" />
+                            </td>
+                            <td class="Label_Bold">Anular
+                            </td>
+                            <td class="Label_Bold"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" id="Check_MeniqueIZ" value="MeniqueIZ" />
+                            </td>
+                            <td class="Label_Bold">Meñique
+                            </td>
+                            <td class="Label_Bold"></td>
+                            <td>
+                                <input type="checkbox" id="Check_MeniqueDER" value="MeniqueDER" />
+                            </td>
+                            <td class="Label_Bold">Meñique
+                            </td>
+                            <td class="Label_Bold"></td>
+                        </tr>
+                        <tr>
+                            <td class="Label_Bold" colspan="6" align="center">&nbsp;</td>
+                        </tr>
+
+                    </table>
                 </td>
-                <td class="Label_Bold">Pulgar
+                <td class="Label_Bold" align="center">
+                    <img alt="Nombre Dedos Manos" style="background-image: url(../../images/manos_dedos.png); background-size: 235px 260px;" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" width="235px" height="260px" />
                 </td>
-                <td class="Label_Bold" style="width: 10%;"></td>
-                <td style="width: 5%;">
-                    <input type="checkbox" id="Check_PulgarDER" value="PulDER" />
-                </td>
-                <td class="Label_Bold">Pulgar
-                </td>
-                <td class="Label_Bold" style="width: 10%;"></td>
             </tr>
             <tr>
-                <td>
-                    <input type="checkbox" id="Check_IndiceIZ" value="IndIZ" />
-                </td>
-                <td class="Label_Bold">Índice
-                </td>
-                <td class="Label_Bold"></td>
-                <td>
-                    <input type="checkbox" id="Check_IndiceDER" value="PulDER" />
-                </td>
-                <td class="Label_Bold">Índice
-                </td>
-                <td class="Label_Bold"></td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="checkbox" id="Check_MedioIZ" value="MedIZ" />
-                </td>
-                <td class="Label_Bold">Dedo Medio
-                </td>
-                <td class="Label_Bold"></td>
-                <td>
-                    <input type="checkbox" id="Check_MedioDER" value="MedDER" />
-                </td>
-                <td class="Label_Bold">Dedo Medio
-                </td>
-                <td class="Label_Bold"></td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="checkbox" id="Check_AnularIZ" value="AnuIZ" />
-                </td>
-                <td class="Label_Bold">Anular
-                </td>
-                <td class="Label_Bold"></td>
-                <td>
-                    <input type="checkbox" id="Check_AnularDER" value="AnuDER" />
-                </td>
-                <td class="Label_Bold">Anular
-                </td>
-                <td class="Label_Bold"></td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="checkbox" id="Check_MeniqueIZ" value="MenIZ" />
-                </td>
-                <td class="Label_Bold">Meñique
-                </td>
-                <td class="Label_Bold"></td>
-                <td>
-                    <input type="checkbox" id="Check_MeniqueDER" value="MenDER" />
-                </td>
-                <td class="Label_Bold">Meñique
-                </td>
-                <td class="Label_Bold"></td>
-            </tr>
-            <tr>
-                <td class="Label_Bold" colspan="6" align="center">&nbsp;</td>
-            </tr>
-            <tr>
-                <td colspan="6" align="center">
+                <td colspan="2" align="center">
                     <input id="BTN_Capturar" type="button" value="Capturar" onclick="btnOk();" />
                 </td>
             </tr>
@@ -243,23 +223,5 @@
             </tr>
         </table>
     </div>
-    <div id="dialog_eliminar" title="Basic dialog">
-        <table style="width: 100%; text-align: center;">
-            <tr>
-                <td>
-                    <p class="Label_Bold" id="P1">
-                        Pulse Confirmar para cambiar el Estado al registro seleccionado.
-                    </p>
-                </td>
-                <td>
-                    <img alt="Warning_2" id="ImgDelete" src="../../images/alert.png" />
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center">
-                    <input id="BtnElimin" type="button" value="Confirmar" onclick="BtnElimina();" />
-                </td>
-            </tr>
-        </table>
-    </div>
+
 </asp:Content>

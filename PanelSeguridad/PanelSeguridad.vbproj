@@ -369,7 +369,6 @@
     <Content Include="Huellas\Creacion\Huellas.js" />
     <Content Include="Huellas\Creacion\HuellasAjax.aspx" />
     <Content Include="Huellas\Creacion\HuellasTrasaccionsAjax.js" />
-    <Content Include="Files_Dowload\Script.vbs" />
     <Content Include="Huellas\menu.js" />
     <Content Include="Huellas\SasifMaster_Cosult.js" />
     <Content Include="Images\add.png" />
@@ -397,6 +396,7 @@
     <Content Include="Images\logo_2.png" />
     <Content Include="Images\LOOK_BLACK.png" />
     <Content Include="Images\LOOK_WHITE.png" />
+    <Content Include="Images\manos_dedos.png" />
     <Content Include="Images\old\add.png" />
     <Content Include="Images\old\adress_book.png" />
     <Content Include="Images\old\alert.png" />
