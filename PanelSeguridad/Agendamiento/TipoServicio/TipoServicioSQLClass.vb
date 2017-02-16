@@ -26,77 +26,83 @@ Public Class TipoServicioSQLClass
         Dim vl_sql_filtro As New StringBuilder
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
-            sql.Append(" SELECT TCS_Nit_ID, " & _
-                          "TCS_Codigo_ID, " & _
-                          "TCS_Nombre, " & _
-                          "TCS_Tipo, " & _
-                          "TCS_Referecia, " & _
-                          "TCS_Cod_Moneda, " & _
-                          "TCS_Costo, " & _
-                          "TCS_Valor, " & _
-                          "TCS_Detalle, " & _
-                          "TCS_Calendario_ID, " & _
-                          "TCS_Capacidad, " & _
-                          "TCS_N_Pagos_Bloqueo, " & _
-                          "TCS_Tipo_Calculo_Sesion, " & _
-                          "TCS_Tiempo_Sesion, " & _
-                          "TCS_Tiempo_Entre_Sesion, " & _
-                          "TCS_Tiempo_Maximo_Agenda, " & _
-                          "TCS_Imagen_asociada, " & _
-                          "TCS_Usuario_Creacion, " & _
-                          "TCS_FechaCreacion, " & _
-                          "TCS_Usuario_Actualizacion, " & _
-                          "TCS_FechaActualizacion " & _
-                      " FROM TIPO_SERVICIOS ")
+            sql.Append("  SELECT TCS_Nit_ID, " & _
+                            "TCS_Codigo_ID, " & _
+                            "TCS_Nombre, " & _
+                            "TCS_Tipo, " & _
+                            "TCS_Referecia, " & _
+                            "TCS_Cod_Moneda, " & _
+                            "TCS_Costo, " & _
+                            "TCS_Valor, " & _
+                            "TCS_Detalle, " & _
+                            "TCS_Calendario_ID, " & _
+                            "TCS_Capacidad, " & _
+                            "TCS_N_Pagos_Bloqueo, " & _
+                            "TCS_Tipo_Calculo_Sesion, " & _
+                            "TCS_Tiempo_Sesion, " & _
+                            "TCS_Tiempo_Entre_Sesion, " & _
+                            "TCS_Tiempo_Maximo_Agenda, " & _
+                            "TCS_Imagen_asociada, " & _
+                            "TCS_Usuario_Creacion, " & _
+                            "TCS_FechaCreacion, " & _
+                            "TCS_Usuario_Actualizacion, " & _
+                            "TCS_FechaActualizacion, " & _
+                            "C.CLI_Nombre " & _
+                            "FROM TIPO_SERVICIOS TS  " & _
+                            "LEFT JOIN CLIENTE C ON C.CLI_Nit_ID = TS.TCS_Nit_ID AND C.CLI_Document_ID = SUBSTRING(TS.TCS_Nit_ID,0,LEN(TS.TCS_Nit_ID)) ")
         Else
 
             If vp_S_Contenido = "ALL" Then
-                sql.Append(" SELECT TCS_Nit_ID, " & _
-                          "TCS_Codigo_ID, " & _
-                          "TCS_Nombre, " & _
-                          "TCS_Tipo, " & _
-                          "TCS_Referecia, " & _
-                          "TCS_Cod_Moneda, " & _
-                          "TCS_Costo, " & _
-                          "TCS_Valor, " & _
-                          "TCS_Detalle, " & _
-                          "TCS_Calendario_ID, " & _
-                          "TCS_Capacidad, " & _
-                          "TCS_N_Pagos_Bloqueo, " & _
-                          "TCS_Tipo_Calculo_Sesion, " & _
-                          "TCS_Tiempo_Sesion, " & _
-                          "TCS_Tiempo_Entre_Sesion, " & _
-                          "TCS_Tiempo_Maximo_Agenda, " & _
-                          "TCS_Imagen_asociada, " & _
-                          "TCS_Usuario_Creacion, " & _
-                          "TCS_FechaCreacion, " & _
-                          "TCS_Usuario_Actualizacion, " & _
-                          "TCS_FechaActualizacion " & _
-                      " FROM TIPO_SERVICIOS ")
+                sql.Append("  SELECT TCS_Nit_ID, " & _
+                            "TCS_Codigo_ID, " & _
+                            "TCS_Nombre, " & _
+                            "TCS_Tipo, " & _
+                            "TCS_Referecia, " & _
+                            "TCS_Cod_Moneda, " & _
+                            "TCS_Costo, " & _
+                            "TCS_Valor, " & _
+                            "TCS_Detalle, " & _
+                            "TCS_Calendario_ID, " & _
+                            "TCS_Capacidad, " & _
+                            "TCS_N_Pagos_Bloqueo, " & _
+                            "TCS_Tipo_Calculo_Sesion, " & _
+                            "TCS_Tiempo_Sesion, " & _
+                            "TCS_Tiempo_Entre_Sesion, " & _
+                            "TCS_Tiempo_Maximo_Agenda, " & _
+                            "TCS_Imagen_asociada, " & _
+                            "TCS_Usuario_Creacion, " & _
+                            "TCS_FechaCreacion, " & _
+                            "TCS_Usuario_Actualizacion, " & _
+                            "TCS_FechaActualizacion, " & _
+                            "C.CLI_Nombre " & _
+                            "FROM TIPO_SERVICIOS TS  " & _
+                            "LEFT JOIN CLIENTE C ON C.CLI_Nit_ID = TS.TCS_Nit_ID AND C.CLI_Document_ID = SUBSTRING(TS.TCS_Nit_ID,0,LEN(TS.TCS_Nit_ID)) ")
             Else
-                sql.Append(" SELECT TCS_Nit_ID, " & _
-                          "TCS_Codigo_ID, " & _
-                          "TCS_Nombre, " & _
-                          "TCS_Tipo, " & _
-                          "TCS_Referecia, " & _
-                          "TCS_Cod_Moneda, " & _
-                          "TCS_Costo, " & _
-                          "TCS_Valor, " & _
-                          "TCS_Detalle, " & _
-                          "TCS_Calendario_ID, " & _
-                          "TCS_Capacidad, " & _
-                          "TCS_N_Pagos_Bloqueo, " & _
-                          "TCS_Tipo_Calculo_Sesion, " & _
-                          "TCS_Tiempo_Sesion, " & _
-                          "TCS_Tiempo_Entre_Sesion, " & _
-                          "TCS_Tiempo_Maximo_Agenda, " & _
-                          "TCS_Imagen_asociada, " & _
-                          "TCS_Usuario_Creacion, " & _
-                          "TCS_FechaCreacion, " & _
-                          "TCS_Usuario_Actualizacion, " & _
-                          "TCS_FechaActualizacion " & _
-                      " FROM TIPO_SERVICIOS " & _
-                      "WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
+                sql.Append("  SELECT TCS_Nit_ID, " & _
+                            "TCS_Codigo_ID, " & _
+                            "TCS_Nombre, " & _
+                            "TCS_Tipo, " & _
+                            "TCS_Referecia, " & _
+                            "TCS_Cod_Moneda, " & _
+                            "TCS_Costo, " & _
+                            "TCS_Valor, " & _
+                            "TCS_Detalle, " & _
+                            "TCS_Calendario_ID, " & _
+                            "TCS_Capacidad, " & _
+                            "TCS_N_Pagos_Bloqueo, " & _
+                            "TCS_Tipo_Calculo_Sesion, " & _
+                            "TCS_Tiempo_Sesion, " & _
+                            "TCS_Tiempo_Entre_Sesion, " & _
+                            "TCS_Tiempo_Maximo_Agenda, " & _
+                            "TCS_Imagen_asociada, " & _
+                            "TCS_Usuario_Creacion, " & _
+                            "TCS_FechaCreacion, " & _
+                            "TCS_Usuario_Actualizacion, " & _
+                            "TCS_FechaActualizacion, " & _
+                            "C.CLI_Nombre " & _
+                            "FROM TIPO_SERVICIOS TS  " & _
+                            "LEFT JOIN CLIENTE C ON C.CLI_Nit_ID = TS.TCS_Nit_ID AND C.CLI_Document_ID = SUBSTRING(TS.TCS_Nit_ID,0,LEN(TS.TCS_Nit_ID)) " & _
+                            "WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
             End If
         End If
 
@@ -207,12 +213,12 @@ Public Class TipoServicioSQLClass
                           " TCS_Costo =" & vp_Obj.Costo & ", " & _
                           " TCS_Valor =" & vp_Obj.valor & ", " & _
                           " TCS_Detalle ='" & vp_Obj.Detalle & "', " & _
-                          " TCS_Calendario_ID =" & vp_Obj.Cod_Moneda & ", " & _
+                          " TCS_Calendario_ID =" & vp_Obj.Calendario_ID & ", " & _
                           " TCS_Capacidad =" & vp_Obj.Capacidad & ", " & _
                           " TCS_N_Pagos_Bloqueo =" & vp_Obj.N_Pagos_Bloqueos & ", " & _
                           " TCS_Tipo_Calculo_Sesion ='" & vp_Obj.Tipo_Calculo_Sesion & "', " & _
                           " TCS_Tiempo_Sesion ='" & vp_Obj.Tiempo_Sesion & "', " & _
-                          " TCS_Tiempo_Entre_Sesion =" & vp_Obj.Tiempo_Entre_Sesion & ", " & _
+                          " TCS_Tiempo_Entre_Sesion ='" & vp_Obj.Tiempo_Entre_Sesion & "', " & _
                           " TCS_Tiempo_Maximo_Agenda ='" & vp_Obj.Tiempo_Maximo_Agenda & "', " & _
                           " TCS_Imagen_asociada ='" & vp_Obj.Imagen_asociada & "', " & _
                           " TCS_Usuario_Actualizacion ='" & vp_Obj.UsuarioActualizacion & "', " & _
@@ -392,11 +398,11 @@ Public Class TipoServicioSQLClass
                     objTipoServicio.Tiempo_Maximo_Agenda = ReadConsulta.GetValue(15)
                     objTipoServicio.Imagen_asociada = ReadConsulta.GetValue(16)
 
-                    objTipoServicio.UsuarioCreacion = ReadConsulta.GetValue(19)
-                    objTipoServicio.FechaCreacion = ReadConsulta.GetValue(20)
-                    objTipoServicio.UsuarioActualizacion = ReadConsulta.GetValue(21)
-                    objTipoServicio.FechaActualizacion = ReadConsulta.GetValue(22)
-
+                    objTipoServicio.UsuarioCreacion = ReadConsulta.GetValue(17)
+                    objTipoServicio.FechaCreacion = ReadConsulta.GetValue(18)
+                    objTipoServicio.UsuarioActualizacion = ReadConsulta.GetValue(19)
+                    objTipoServicio.FechaActualizacion = ReadConsulta.GetValue(20)
+                    If Not (IsDBNull(ReadConsulta.GetValue(21))) Then objTipoServicio.DescripEmpresa = ReadConsulta.GetValue(21) Else objTipoServicio.DescripEmpresa = ""
                     'agregamos a la lista
                     ObjList.Add(objTipoServicio)
 

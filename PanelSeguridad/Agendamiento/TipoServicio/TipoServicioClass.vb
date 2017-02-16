@@ -23,15 +23,15 @@
     Private _FechaCreacion As String
     Private _UsuarioActualizacion As String
     Private _FechaActualizacion As String
-
+    Private _DescripEmpresa As String
 #End Region
 
 #Region "propiedades"
-    Public Property Nit_ID() As Long
+    Public Property Nit_ID() As String
         Get
             Return Me._Nit_ID
         End Get
-        Set(ByVal value As Long)
+        Set(ByVal value As String)
             Me._Nit_ID = value
         End Set
     End Property
@@ -196,6 +196,13 @@
             Me._FechaActualizacion = value
         End Set
     End Property
-
+    Public Property DescripEmpresa() As String
+        Get
+            Return Me._DescripEmpresa
+        End Get
+        Set(ByVal value As String)
+            Me._DescripEmpresa = value
+        End Set
+    End Property
 #End Region
 End Class

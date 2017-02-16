@@ -98,13 +98,14 @@ Public Class TipoServicioAjax
             objTipoServicio.Costo = Request.Form("Cos")
             objTipoServicio.valor = Request.Form("Val")
             objTipoServicio.Detalle = Request.Form("Det")
+            objTipoServicio.Calendario_ID = "0"
             objTipoServicio.Capacidad = Request.Form("Cap")
             objTipoServicio.N_Pagos_Bloqueos = Request.Form("Blo")
             objTipoServicio.Tipo_Calculo_Sesion = Request.Form("Cal")
             objTipoServicio.Tiempo_Sesion = Request.Form("TimSes")
             objTipoServicio.Tiempo_Entre_Sesion = Request.Form("TiemEn")
             objTipoServicio.Tiempo_Maximo_Agenda = Request.Form("MaxA")
-            objTipoServicio.Imagen_asociada = "../../images/" & Request.Form("MaxA")
+            objTipoServicio.Imagen_asociada = "../../images/" & Request.Form("Ima")
 
             objTipoServicio.UsuarioCreacion = Request.Form("user")
             objTipoServicio.FechaCreacion = Date.Now
@@ -137,10 +138,22 @@ Public Class TipoServicioAjax
 
         objTipoServicio.Nit_ID = Request.Form("Nit_ID")
         objTipoServicio.Codigo_ID = Request.Form("ID")
-        objTipoServicio.Nombre = Request.Form("nombre")
 
         objTipoServicio.Nombre = Request.Form("nombre")
-        objTipoServicio.Tipo = Request.Form("TipoServicio")
+        objTipoServicio.Tipo = Request.Form("Tipo")
+        objTipoServicio.Referencia = Request.Form("Refe")
+        objTipoServicio.Cod_Moneda = Request.Form("Mon")
+        objTipoServicio.Costo = Request.Form("Cos")
+        objTipoServicio.valor = Request.Form("Val")
+        objTipoServicio.Detalle = Request.Form("Det")
+        objTipoServicio.Calendario_ID = "0"
+        objTipoServicio.Capacidad = Request.Form("Cap")
+        objTipoServicio.N_Pagos_Bloqueos = Request.Form("Blo")
+        objTipoServicio.Tipo_Calculo_Sesion = Request.Form("Cal")
+        objTipoServicio.Tiempo_Sesion = Request.Form("TimSes")
+        objTipoServicio.Tiempo_Entre_Sesion = Request.Form("TiemEn")
+        objTipoServicio.Tiempo_Maximo_Agenda = Request.Form("MaxA")
+        objTipoServicio.Imagen_asociada = "../../images/" & Request.Form("Ima")
 
         objTipoServicio.UsuarioActualizacion = Request.Form("user")
         objTipoServicio.FechaActualizacion = Date.Now

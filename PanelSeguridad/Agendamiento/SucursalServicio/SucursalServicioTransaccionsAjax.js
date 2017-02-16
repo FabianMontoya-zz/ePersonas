@@ -3,12 +3,12 @@
 function transacionAjax_CargaBusqueda(State) {
     OpenControl();
     $.ajax({
-        url: "TipoServicioAjax.aspx",
+        url: "ServicioServicioAjax.aspx",
         type: "POST",
         //crear json
         data: {
             "action": State,
-            "tabla": 'TIPO_SERVICIO'
+            "tabla": 'SUCURSAL_SERVICIO'
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -30,7 +30,7 @@ function transacionAjax_CargaBusqueda(State) {
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_EmpresaNit(State) {
     $.ajax({
-        url: "TipoServicioAjax.aspx",
+        url: "ServicioServicioAjax.aspx",
         type: "POST",
         //crear json
         data: {
@@ -53,7 +53,7 @@ function transacionAjax_EmpresaNit(State) {
         async: false, // La petición es síncrona
         cache: false // No queremos usar la caché del navegador
     }).done(function () {
-        
+
     });
 }
 
@@ -61,7 +61,7 @@ function transacionAjax_EmpresaNit(State) {
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_MMoneda(State) {
     $.ajax({
-        url: "TipoServicioAjax.aspx",
+        url: "ServicioServicioAjax.aspx",
         type: "POST",
         //crear json
         data: {
@@ -91,7 +91,7 @@ function transacionAjax_MMoneda(State) {
 
 /*------------------------------ consulta ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
-function transacionAjax_TipoServicio(State, filtro, opcion) {
+function transacionAjax_SucursalServicio(State, filtro, opcion) {
     var contenido;
 
     if ($("#TxtRead").val() == "") {
@@ -102,7 +102,7 @@ function transacionAjax_TipoServicio(State, filtro, opcion) {
     }
 
     $.ajax({
-        url: "TipoServicioAjax.aspx",
+        url: "ServicioServicioAjax.aspx",
         type: "POST",
         //crear json
         data: {
@@ -115,10 +115,10 @@ function transacionAjax_TipoServicio(State, filtro, opcion) {
         //Transaccion Ajax en proceso
         success: function (result) {
             if (result == "") {
-                ArrayTipoServicio = [];
+                ArraySucursalServicio = [];
             }
             else {
-                ArrayTipoServicio = JSON.parse(result);
+                ArraySucursalServicio = JSON.parse(result);
                 Table_Servicio();
             }
         },
@@ -130,11 +130,11 @@ function transacionAjax_TipoServicio(State, filtro, opcion) {
 
 /*------------------------------ crear ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
-function transacionAjax_TipoServicio_create(State) {
+function transacionAjax_SucursalServicio_create(State) {
 
     var ID;
     var Nit_ID;
-    var TipoServicioDepen = 0;
+    var SucursalServicioDepen = 0;
     var Politica = 0;
 
     if (State == "modificar") {
@@ -147,7 +147,7 @@ function transacionAjax_TipoServicio_create(State) {
     }
 
     $.ajax({
-        url: "TipoServicioAjax.aspx",
+        url: "ServicioServicioAjax.aspx",
         type: "POST",
         //crear json
         data: {
@@ -155,7 +155,7 @@ function transacionAjax_TipoServicio_create(State) {
             "Nit_ID": Nit_ID,
             "ID": ID,
             "nombre": $("#TxtNombre").val(),
-            "Tipo": $("#Select_TipoServicio").val(),
+            "Tipo": $("#Select_SucursalServicio").val(),
             "Refe": $("#Text_Referencia").val(),
             "Mon": $("#Select_Moneda_Cod").val(),
             "Cos": $("#TxtCosto").val(),
@@ -176,9 +176,9 @@ function transacionAjax_TipoServicio_create(State) {
 
                 case "Error":
                     if (estado == "modificar") {
-                        Mensaje_General("Disculpenos :(", "No se realizo la modificación del TipoServicio!", "E");
+                        Mensaje_General("Disculpenos :(", "No se realizo la modificación del SucursalServicio!", "E");
                     } else {
-                        Mensaje_General("Disculpenos :(", "No se realizo el ingreso del TipoServicio!", "E");
+                        Mensaje_General("Disculpenos :(", "No se realizo el ingreso del SucursalServicio!", "E");
                     }
                     break;
 
@@ -188,12 +188,12 @@ function transacionAjax_TipoServicio_create(State) {
 
                 case "Exito":
                     if (estado == "modificar") {
-                        Mensaje_General("Exito", "El TipoServicio fue modificado exitosamente!", "S");
+                        Mensaje_General("Exito", "El SucursalServicio fue modificado exitosamente!", "S");
                         Clear();
                         HabilitarPanel("modificar")
                     }
                     else {
-                        Mensaje_General("Exito", "El TipoServicio fue creado exitosamente!", "S");
+                        Mensaje_General("Exito", "El SucursalServicio fue creado exitosamente!", "S");
                         Clear();
                         HabilitarPanel("modificar")
                     }
@@ -209,10 +209,10 @@ function transacionAjax_TipoServicio_create(State) {
 
 /*------------------------------ eliminar ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
-function transacionAjax_TipoServicio_delete(State) {
+function transacionAjax_SucursalServicio_delete(State) {
 
     $.ajax({
-        url: "TipoServicioAjax.aspx",
+        url: "ServicioServicioAjax.aspx",
         type: "POST",
         //crear json
         data: {
@@ -226,19 +226,19 @@ function transacionAjax_TipoServicio_delete(State) {
             switch (result) {
 
                 case "Error":
-                    Mensaje_General("Disculpenos :(", "No se elimino el TipoServicio!", "E");
+                    Mensaje_General("Disculpenos :(", "No se elimino el SucursalServicio!", "E");
                     $("#dialog_eliminar").dialog("close");
                     break;
 
                 case "Exist_O":
-                    Mensaje_General("Integridad referencial", "No se elimino el TipoServicio, para eliminarlo debe eliminar primero el registro en la tabla Empleado", "W");
+                    Mensaje_General("Integridad referencial", "No se elimino el SucursalServicio, para eliminarlo debe eliminar primero el registro en la tabla Empleado", "W");
                     $("#dialog_eliminar").dialog("close");
                     break;
 
                 case "Exito":
                     $("#dialog_eliminar").dialog("close");
-                    Mensaje_General("Exito", "El TipoServicio fue eliminado exitosamente!", "S");
-                    transacionAjax_TipoServicio("consulta", "N", "ALL");
+                    Mensaje_General("Exito", "El SucursalServicio fue eliminado exitosamente!", "S");
+                    transacionAjax_SucursalServicio("consulta", "N", "ALL");
                     Clear();
                     break;
             }
