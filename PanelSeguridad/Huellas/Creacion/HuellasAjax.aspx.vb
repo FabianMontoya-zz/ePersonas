@@ -88,7 +88,7 @@ Public Class HuellasAjax
         Dim ContenidoArchivo As String = Nothing
 
         'Dim path As String = "" & Request.Url.Authority & "/Files_Dowload/Test_Script.txt"
-        Dim path As String = Server.MapPath("~/Files_Dowload/Test_Script.txt")
+        Dim path As String = Server.MapPath("~/Files_Dowload/Script.txt")
         ' Create or overwrite the file.
         strStreamW = File.Create(path) ' lo creamos
 
@@ -96,7 +96,9 @@ Public Class HuellasAjax
 
         'escribimos en el archivo
 
-        strStreamWriter.WriteLine("Primera línea en un archivo .txt desde visual basic.Net" & vbCrLf & "asdasdsada")
+        Dim Script As String = CrearTXT()
+
+        strStreamWriter.WriteLine(Script)
         strStreamWriter.Close() ' cerramos
 
         objFile.RutaOrigen = Request.Url.Authority & "/Files_Dowload/Script.txt"
@@ -109,71 +111,43 @@ Public Class HuellasAjax
 
     End Sub
 
+#Region "FUNCIONES"
+    Protected Function CrearTXT()
+        Dim v_l_Texto As String = Nothing
 
-#Region "SOCKET RECIBE"
+        v_l_Texto = "Set fso = CreateObject(""Scripting.FileSystemObject"")" & vbCrLf
+        v_l_Texto = v_l_Texto + "Archivo = ""C:\Program Files\SASIF FingerPrint\Enroller\EnrollermentApp.exe""" & vbCrLf & vbCrLf
 
-    'Variables usadas por los sokets
-    Private mscClient As TcpClient = Nothing 'ID del Cliente
-    Private mstrMessage As Byte() = Nothing 'Mensaje recibido
-    Private mstrResponse As String = Nothing 'Mensaje de respuesta
-    Private bytesSent() As Byte = Nothing
+        v_l_Texto = v_l_Texto + "If fso.FileExists(Archivo) Then" & vbCrLf
+        v_l_Texto = v_l_Texto + "   anno = Year(Date)" & vbCrLf
+        v_l_Texto = v_l_Texto + "   Usuario = """ & Request.Form("user") & """" & vbCrLf
+        v_l_Texto = v_l_Texto + "   Fecha_Generada = """ & Date.Now & """" & vbCrLf
+        v_l_Texto = v_l_Texto + "   Titulo = ""Autorización de Acceso""" & vbCrLf & vbCrLf
 
-    ''' <summary>
-    ''' Función que se encarga de la conexión TCP con el socket para recibir la huella enviada desde el servidor
-    ''' </summary>
-    ''' <returns></returns>
-    ''' <remarks></remarks>
-    Public Function RecibirTemplate()
-        Dim flag As String = ""
-        'Se crea una instancia del class TCPListener
-        Dim output As String = ""
-        Dim tcpListener As TcpListener = Nothing
-        'Dim ipAddress As IPAddress = Dns.GetHostEntry("localhost").AddressList(0) 'Si es de una IP especifica que vamos a recibir
-        Dim ipAddress As IPAddress = Net.IPAddress.Any 'Para recibir desde cualquier dirección IP
-        Try
-            ' Set the listener on the local IP address.
-            ' and specify the port.
-            tcpListener = New TcpListener(ipAddress, 971201) 'IP - Puerto
-            tcpListener.Start()
-        Catch e As Exception
-            output = "Error: " + e.ToString()
-        End Try
-        While flag <> "Ok"
-            Dim tcpClient As TcpClient = tcpListener.AcceptTcpClient()
-            ' Read the data stream from the client.
-            Dim bytes(1800) As Byte
-            Dim stream As NetworkStream = tcpClient.GetStream()
-            stream.Read(bytes, 0, bytes.Length)
-            processMsg(tcpClient, stream, bytes)
-            tcpListener.Stop()
-            flag = "Ok"
-        End While
-        Return flag
+        v_l_Texto = v_l_Texto + "   Mensaje = ""AUTORIZACIÓN DE ACCESO A ARCHIVOS DEL EQUIPO""+ vbCrLf + vbCrLf " & vbCrLf
+        v_l_Texto = v_l_Texto + "   Mensaje = Mensaje + ""¿Autoriza que este archivo ejecute única y exclusivamente el programa encargado de realizar el proceso de captura de su huella?""+ vbCrLf +  vbCrLf " & vbCrLf
+        v_l_Texto = v_l_Texto + "   Mensaje = Mensaje + ""Luego de responder, este archivo se eliminará automáticamente sin importar la opción elegida.""+ vbCrLf + vbCrLf " & vbCrLf
+        v_l_Texto = v_l_Texto + "   Mensaje = Mensaje + ""© SASIF S.A.S. "" & anno" & vbCrLf & vbCrLf
+
+        v_l_Texto = v_l_Texto + "   Acepta = Msgbox(Mensaje, vbYesNo+vbQuestion+vbSystemModal, Titulo)" & vbCrLf & vbCrLf
+
+        v_l_Texto = v_l_Texto + "   Set WshShell = CreateObject(""WScript.Shell"")" & vbCrLf & vbCrLf
+
+        v_l_Texto = v_l_Texto + "   if Acepta = vbYes then" & vbCrLf
+        v_l_Texto = v_l_Texto + "       Set WshShell = CreateObject(""WScript.Shell"")" & vbCrLf
+        v_l_Texto = v_l_Texto + "       Return = WshShell.Run(""cmd /c start """""""" """"C:\Program Files\SASIF FingerPrint\Enroller\EnrollermentApp.exe"""""", 0, false)" & vbCrLf
+        v_l_Texto = v_l_Texto + "   else" & vbCrLf
+        v_l_Texto = v_l_Texto + "       Msgbox ""Se canceló la ejecución automática."", vbOKOnly+64+vbSystemModal, ""Ejecución Automática Cancelada""" & vbCrLf
+        v_l_Texto = v_l_Texto + "   end if" & vbCrLf
+        v_l_Texto = v_l_Texto + "   Else" & vbCrLf
+        v_l_Texto = v_l_Texto + "       MsgBox ""Programa no se encuentra en equipo""" & vbCrLf
+        v_l_Texto = v_l_Texto + "   End If" & vbCrLf & vbCrLf
+
+        v_l_Texto = v_l_Texto + "Set PV4 = CreateObject(""Scripting.FileSystemObject"")" & vbCrLf
+        v_l_Texto = v_l_Texto + "PV4.deletefile Wscript.ScriptFullName" & vbCrLf
+
+        Return v_l_Texto
     End Function
-
-    ''' <summary>
-    ''' Procesador del mensaje recibido mediante el socket
-    ''' </summary>
-    ''' <param name="client"></param>
-    ''' <param name="stream"></param>
-    ''' <param name="bytesReceived"></param>
-    ''' <remarks></remarks>
-    Public Sub processMsg(ByVal client As TcpClient, ByVal stream As NetworkStream, ByVal bytesReceived() As Byte)
-        ' Handle the message received and 
-        ' send a response back to the client.
-        Try
-            mstrMessage = (bytesReceived)
-            mscClient = client
-            mstrResponse = "Exito"
-
-        Catch ex As Exception
-            mstrResponse = "Error: " & ex.Message
-            'MsgBox("Error: " & ex.Message)
-        End Try
-        bytesSent = Encoding.ASCII.GetBytes(mstrResponse)
-        stream.Write(bytesSent, 0, bytesSent.Length)
-
-    End Sub
 #End Region
 
 

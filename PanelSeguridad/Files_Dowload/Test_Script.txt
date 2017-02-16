@@ -1,2 +1,0 @@
-Primera línea en un archivo .txt desde visual basic.Net
-asdasdsada
