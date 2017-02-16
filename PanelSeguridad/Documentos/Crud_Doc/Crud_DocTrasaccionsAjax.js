@@ -1,13 +1,13 @@
 ﻿/*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transaccionAjax_MClienteDep(State) {
+function transaccionAjax_MClienteDep(vp_State,vp_Nit) {
     $.ajax({
         url: "Crud_DocAjax.aspx",
         type: "POST",
         //crear json
         data: {
-            "action": State,
-            "tabla": 'RUTA'
+            "action": vp_State,
+            "Nit": vp_Nit
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -22,12 +22,7 @@ function transaccionAjax_MClienteDep(State) {
 
         },
     }).done(function () {
-        var vl_OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
-
-        if (vl_OnlyEmpresa == true) {
-            var vl_nit_emp = $("#Select_EmpresaNit").val();
-            TransaccionesSegunNIT(vl_nit_emp);
-        }
+        Charge_Combos_Depend_Nit(Matrix_ClienteDep, "Select_Persona", vp_Nit, "");
     });
 }
 
@@ -55,6 +50,13 @@ function transaccionAjax_RutasOperacion(State) {
         },
         error: function () {
 
+        },
+    }).done(function () {
+        var vl_OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+        if (vl_OnlyEmpresa == true) {
+            var vl_nit_emp = $("#Select_EmpresaNit").val();
+            TransaccionesSegunNIT(vl_nit_emp);
         }
     });
 }

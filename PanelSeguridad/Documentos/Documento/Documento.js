@@ -159,7 +159,7 @@ function BtnConsulta() {
     var ValidateSelect = ValidarDroplist();
     var opcion;
 
-    OpenControl();
+    //OpenControl();
 
     if (ValidateSelect == 1) {
         filtro = "N";

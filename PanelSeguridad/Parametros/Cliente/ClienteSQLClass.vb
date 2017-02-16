@@ -1211,6 +1211,9 @@ Public Class ClienteSQLClass
             Case "Jefe"
                 vl_sql_filtro.Append("WHERE CLI_Nit_ID = '" & vp_Obj_Cliente.Nit_ID & "' AND CLI_OP_Empleado='S' ORDER BY CLI_Nit_ID, CLI_TypeDocument_ID, CLI_Document_ID ASC; ")
 
+            Case "Documento"
+                vl_sql_filtro.Append("WHERE CLI_Nit_ID = '" & vp_Obj_Cliente.Nit_ID & "' ORDER BY CLI_Nit_ID, CLI_TypeDocument_ID, CLI_Document_ID ASC; ")
+
         End Select
 
         Dim vl_S_SQLString As String = sql.ToString & vl_sql_filtro.ToString
