@@ -246,6 +246,10 @@
     <Content Include="AdmonActivos.Publish.xml" />
     <Content Include="Agendamiento\menu.js" />
     <Content Include="Agendamiento\SasifMaster_Cosult.js" />
+    <Content Include="Agendamiento\SucursalServicio\SucursalServicio.aspx" />
+    <Content Include="Agendamiento\SucursalServicio\SucursalServicio.js" />
+    <Content Include="Agendamiento\SucursalServicio\SucursalServicioAjax.aspx" />
+    <Content Include="Agendamiento\SucursalServicio\SucursalServicioTransaccionsAjax.js" />
     <Content Include="Agendamiento\TipoServicio\TipoServicio.aspx" />
     <Content Include="Agendamiento\TipoServicio\TipoServicio.js" />
     <Content Include="Agendamiento\TipoServicio\TipoServicioTransaccionsAjax.js" />
@@ -387,11 +391,11 @@
     <Content Include="Images\DeleteOver.png" />
     <Content Include="Images\documentos.png" />
     <Content Include="Images\documentos_w.png" />
+    <Content Include="Images\dumbbell.png" />
     <Content Include="Images\Editar1.png" />
     <Content Include="Images\EditarOver.png" />
     <Content Include="Images\error.png" />
     <Content Include="Images\error_2.png" />
-    <Content Include="Images\exit.png" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\logo_2.png" />
     <Content Include="Images\LOOK_BLACK.png" />
@@ -423,9 +427,14 @@
     <Content Include="Images\old\user.png" />
     <Content Include="Images\old\validation.png" />
     <Content Include="Images\Relations.gif" />
-    <Content Include="Images\relations.png" />
+    <Content Include="Images\Relation_Gray.png" />
+    <Content Include="Images\Relation_Red.png" />
     <Content Include="Images\SASIF_NEW.png" />
     <Content Include="Images\SASIF_NEW_WHITE.png" />
+    <Content Include="Images\search.png" />
+    <Content Include="Images\search_black.png" />
+    <Content Include="Images\search_red.png" />
+    <Content Include="Images\settings.png" />
     <Content Include="Images\success.png" />
     <Content Include="Ingreso_New\Entrada\Ingreso.aspx" />
     <Content Include="Ingreso_New\Entrada\Ingreso.js" />
@@ -843,6 +852,22 @@
     </Compile>
     <Compile Include="Administrador\Adm_Usuario\Adm_UsuarioClass.vb" />
     <Compile Include="Administrador\Adm_Usuario\Adm_UsuarioSQLClass.vb" />
+    <Compile Include="Agendamiento\SucursalServicio\SucursalServicio.aspx.designer.vb">
+      <DependentUpon>SucursalServicio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Agendamiento\SucursalServicio\SucursalServicio.aspx.vb">
+      <DependentUpon>SucursalServicio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Agendamiento\SucursalServicio\SucursalServicioAjax.aspx.designer.vb">
+      <DependentUpon>SucursalServicioAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Agendamiento\SucursalServicio\SucursalServicioAjax.aspx.vb">
+      <DependentUpon>SucursalServicioAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Agendamiento\SucursalServicio\SucursalServicioClass.vb" />
+    <Compile Include="Agendamiento\SucursalServicio\SucursalServicioSQLClass.vb" />
     <Compile Include="Agendamiento\TipoServicio\TipoServicio.aspx.designer.vb">
       <DependentUpon>TipoServicio.aspx</DependentUpon>
     </Compile>
