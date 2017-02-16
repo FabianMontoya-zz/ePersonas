@@ -16,7 +16,7 @@ var editID;
 $(document).ready(function () {
 
 
-    $("#Marco_trabajo_Form").css("height", "490px");
+    $("#Marco_trabajo_Form").css("height", "450px");
     $("#container_TServicio").css("height", "380px");
 
     /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/

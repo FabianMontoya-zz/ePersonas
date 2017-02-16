@@ -40,7 +40,7 @@ Public Class TipoServicioSQLClass
                           "TCS_N_Pagos_Bloqueo, " & _
                           "TCS_Tipo_Calculo_Sesion, " & _
                           "TCS_Tiempo_Sesion, " & _
-                          "TCS_Tiempo_Entre_Servicios, " & _
+                          "TCS_Tiempo_Entre_Sesion, " & _
                           "TCS_Tiempo_Maximo_Agenda, " & _
                           "TCS_Imagen_asociada, " & _
                           "TCS_Usuario_Creacion, " & _
@@ -65,7 +65,7 @@ Public Class TipoServicioSQLClass
                           "TCS_N_Pagos_Bloqueo, " & _
                           "TCS_Tipo_Calculo_Sesion, " & _
                           "TCS_Tiempo_Sesion, " & _
-                          "TCS_Tiempo_Entre_Servicios, " & _
+                          "TCS_Tiempo_Entre_Sesion, " & _
                           "TCS_Tiempo_Maximo_Agenda, " & _
                           "TCS_Imagen_asociada, " & _
                           "TCS_Usuario_Creacion, " & _
@@ -88,7 +88,7 @@ Public Class TipoServicioSQLClass
                           "TCS_N_Pagos_Bloqueo, " & _
                           "TCS_Tipo_Calculo_Sesion, " & _
                           "TCS_Tiempo_Sesion, " & _
-                          "TCS_Tiempo_Entre_Servicios, " & _
+                          "TCS_Tiempo_Entre_Sesion, " & _
                           "TCS_Tiempo_Maximo_Agenda, " & _
                           "TCS_Imagen_asociada, " & _
                           "TCS_Usuario_Creacion, " & _

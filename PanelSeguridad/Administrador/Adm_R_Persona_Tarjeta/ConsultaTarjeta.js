@@ -91,7 +91,7 @@ function Table_Tarjetas() {
     for (itemArray in ArrayConsulta) {
         if (ArrayConsulta[itemArray].Tarjeta_ID != 0) {
             Index_Pos = parseInt(ArrayConsulta[itemArray].Index) - 1;
-            html_Consulta += "<tr id= 'TConsulta_" + ArrayConsulta[itemArray].Tarjeta_ID + "'><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Ver('" + Index_Pos + "')\"></input></td><td>" + ArrayConsulta[itemArray].Tarjeta_ID + "</td><td>" + ArrayConsulta[itemArray].Nit_ID_Custodia + " - " + ArrayConsulta[itemArray].DescripEmpresaCustodia + "</td><td>" + ArrayConsulta[itemArray].DescripEstado + "</td><td>" + ArrayConsulta[itemArray].UsuarioCreacion + "</td><td>" + ArrayConsulta[itemArray].FechaCreacion + "</td><td>" + ArrayConsulta[itemArray].UsuarioActualizacion + "</td><td>" + ArrayConsulta[itemArray].FechaActualizacion + "</td></tr>";
+            html_Consulta += "<tr id= 'TConsulta_" + ArrayConsulta[itemArray].Tarjeta_ID + "'><td><img  src='../../images/search_red.png' width='23px' height='23px' class= 'Ver' name='ver' onmouseover=\"this.src='../../images/search_black.png';\" onmouseout=\"this.src='../../images/search_red.png';\" onclick=\"Ver('" + Index_Pos + "')\"></img></td><td>" + ArrayConsulta[itemArray].Tarjeta_ID + "</td><td>" + ArrayConsulta[itemArray].Nit_ID_Custodia + " - " + ArrayConsulta[itemArray].DescripEmpresaCustodia + "</td><td>" + ArrayConsulta[itemArray].DescripEstado + "</td><td>" + ArrayConsulta[itemArray].UsuarioCreacion + "</td><td>" + ArrayConsulta[itemArray].FechaCreacion + "</td><td>" + ArrayConsulta[itemArray].UsuarioActualizacion + "</td><td>" + ArrayConsulta[itemArray].FechaActualizacion + "</td></tr>";
         }
     }
 

@@ -3,10 +3,10 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script src="../../Scripts/jquery-1.4.1.js" type="text/javascript"></script>
-    <script src="TipoServicio.js" type="text/javascript"></script>
-    <script src="TipoServicioTransaccionsAjax.js" type="text/javascript"></script>
     <script src="../../SasifMaster.js" type="text/javascript"></script>
     <script src="../SasifMaster_Cosult.js" type="text/javascript"></script>
+    <script src="TipoServicio.js" type="text/javascript"></script>
+    <script src="TipoServicioTransaccionsAjax.js" type="text/javascript"></script>
     <link href="../../css/css_login.css" rel="stylesheet" type="text/css" />
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
     <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />
