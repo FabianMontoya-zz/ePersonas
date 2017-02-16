@@ -35,7 +35,7 @@
             </div>
         </div>
     </div>
-<div id="Container_title_Form">
+    <div id="Container_title_Form">
         <table id="Tabla_Title_form">
             <tr>
                 <td id="Title_form"></td>
@@ -370,9 +370,11 @@
                             <td style="width: 50%;" class="Label_Bold">Tipo de Relación
                             </td>
                             <td style="width: 50%;">
-                                <span class="cssToolTip_Form_L"><a href="javascript:BtnRelacion();">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 50px; width: 50px;" id="Imgrelations"
-                                        src="../../images/Relations.gif" /></a> <span class="Spam_ARel"></span></span>
+                                <div id="Div_R">
+                                    <span class="cssToolTip_Form_L"><a href="javascript:BtnRelacion();">
+                                        <img class="ImaRelation" alt="error" title="" style="padding-left: 1em; height: 50px; width: 50px;" id="Imgrelations"
+                                            src="../../images/Relation_Red.png" /></a> <span class="Spam_ARel"></span></span>
+                                </div>
                             </td>
                         </tr>
                     </table>
@@ -542,14 +544,16 @@
                             <td style="padding-bottom: 25px; width: 700px;"></td>
                         </tr>
                     </table>
-                    <table id="Table10" style="width: 700px; text-align: left;">
+                    <table id="Table10" style="width: 40%; text-align: center; margin-top: 2%; margin-left: 25%; border: solid 1px #921919; border-radius: 10px; padding-bottom: 1%; padding-top: 1%;">
                         <tr>
-                            <td style="width: 120px;" class="Label_Bold">Tipo de Relación
+                            <td style="width: 50%;" class="Label_Bold">Tipo de Relación
                             </td>
-                            <td style="width: 195px;">
-                                <span class="cssToolTip_Form_L"><a href="javascript:BtnRelacion();">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 50px; width: 50px;" id="Img18"
-                                        src="../../images/Relations.gif" /></a> <span class="Spam_ARel"></span></span>
+                            <td style="width: 50%;">
+                                <div id="Div_RC">
+                                    <span class="cssToolTip_Form_L"><a href="javascript:BtnRelacion();">
+                                        <img class="ImaRelation" alt="error" title="" style="padding-left: 1em; height: 50px; width: 50px;" id="igre"
+                                            src="../../images/Relation_Red.png" /></a> <span class="Spam_ARel"></span></span>
+                                </div>
                             </td>
                         </tr>
                     </table>
@@ -1586,7 +1590,7 @@
             <input id="BtnSave_Document" type="button" value="Guardar" onclick="BtnSave_Document_Client()" />
         </div>
     </div>
-     <div id="Dialog_Visor">
+    <div id="Dialog_Visor">
         <table style="width: 100%; height: 100%;">
             <tr>
                 <td>
