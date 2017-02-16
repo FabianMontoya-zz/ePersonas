@@ -16,7 +16,7 @@ var editID;
 $(document).ready(function () {
 
 
-    $("#Marco_trabajo_Form").css("height", "490px");
+    $("#Marco_trabajo_Form").css("height", "450px");
     $("#container_TServicio").css("height", "380px");
 
     /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
@@ -90,6 +90,7 @@ function Ocultar_Errores() {
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
     $("#WA").css("display", "none");
+    $("#Imgfoto").css("display", "none");
     /*Los demás se ocultan en la SASIF Master*/
 }
 
@@ -217,6 +218,7 @@ function HabilitarPanel(opcion) {
             $("#Txt_ID").removeAttr("disabled");
             $("#Btnguardar").attr("value", "Guardar");
             $('.C_Chosen').trigger('chosen:updated');
+            $("#Imgfoto").css("display", "inline-table");
             ResetError();
             Clear();
             estado = opcion;
@@ -283,6 +285,7 @@ function validarCamposCrear() {
         $("#Img3").css("display", "none");
         $("#Img5").css("display", "none");
     }
+    
     return validar;
 }
 
@@ -598,22 +601,19 @@ function Clear_Agregar() {
     $("#Select_StateDom").val("L");
     $("#Select_Festivo").val("L");*/
 
-    ////$("#TxtIniLun").val("");
-    ////$("#TxtFinLun").val("");
-    ////$("#TxtIniMar").val("");
-    ////$("#TxtFinMar").val("");
-    ////$("#TxtIniMie").val("");
-    ////$("#TxtFinMie").val("");
-    ////$("#TxtIniJue").val("");
-    ////$("#TxtFinJue").val("");
-    ////$("#TxtIniVie").val("");
-    ////$("#TxtFinVie").val("");
-    ////$("#TxtIniSab").val("");
-    ////$("#TxtFinSab").val("");
-    ////$("#TxtIniDom").val("");
-    ////$("#TxtFinDom").val("");
-    ////$("#TxtIniF").val("");
-    ////$("#TxtFinF").val("");
+    $("#TxtNombre").val("");
+    $("#Select_TipoServicio").val("");
+    $("#Text_Referencia").val("");
+    $("#Select_Moneda_Cod").val("");
+    $("#TxtCosto").val("");
+    $("#TxtValor").val("");
+    $("#Txt_Detalle").val("");
+    $("#Text_Capacidad").val("");
+    $("#Text_Bloqueo").val("");
+    $("#Select_Calculo").val("");
+    $("#Text_Tiempo_Sesion").val("");
+    $("#Text_Tiempo_Entre_Sesiones").val("");
+    $("#Tiempo_Max_Agenda").val("");
 
     $('.C_Chosen').trigger('chosen:updated');
 }
@@ -626,7 +626,7 @@ function Table_Servicio() {
     switch (estado) {
 
         case "buscar":
-            html_Servicio = "<table id='TServicio' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Empresa</th><th>Codigo</th><th>Nombre</th><th>Tipo Servicio</th><th>Referencia</th><th>Moneda</th><th>Costo</th><th>Valor</th><th>Detalle</th><th>Calendario</th><th>Capacidad</th><th>Num. Servicios no pago para Bloqueo</th><th>Tipo Calculo Sesion</th><th>Tiempo Sesion</th><th>Tiempo entre Servicios</th><th>Tiempo Maximo Agenda</th><th>Imagen Asociada</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
+            html_Servicio = "<table id='TServicio' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Empresa</th><th>Codigo</th><th>Nombre</th><th>Tipo Servicio</th><th>Referencia</th><th>Moneda</th><th>Costo</th><th>Valor</th><th>Detalle</th><th>Calendario</th><th>Capacidad</th><th>Cant. No pago para Bloqueo</th><th>Tipo Calculo Sesion</th><th>Tiempo Sesion</th><th>Tiempo entre Servicios</th><th>Tiempo Maximo Agenda</th><th>Imagen Asociada</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
             for (itemArray in ArrayTipoServicio) {
                 if (ArrayTipoServicio[itemArray].Codigo_ID != 0) {
                     html_Servicio += "<tr id= 'TServicio_" + ArrayTipoServicio[itemArray].Codigo_ID + "'><td>" + ArrayTipoServicio[itemArray].Nit_ID + " - " + ArrayTipoServicio[itemArray].Nombre + "</td><td>" + ArrayTipoServicio[itemArray].Codigo_ID + "</td><td>" + ArrayTipoServicio[itemArray].nombre + "</td><td>" + ArrayTipoServicio[itemArray].Tipo + "</td><td>" + ArrayTipoServicio[itemArray].Cod_Moneda + "</td><td>" + ArrayTipoServicio[itemArray].Costo + "</td><td>" + ArrayTipoServicio[itemArray].valor + "</td><td>" + ArrayTipoServicio[itemArray].Detalle + "</td><td>" + ArrayTipoServicio[itemArray].Calendario_ID + "</td><td>" + ArrayTipoServicio[itemArray].Capacidad + "</td><td>" + ArrayTipoServicio[itemArray].N_Pagos_Bloqueos + "</td><td>" + ArrayTipoServicio[itemArray].Tipo_Calculo_Sesion + "</td><td>" + ArrayTipoServicio[itemArray].Tiempo_Sesion + "</td><td>" + ArrayTipoServicio[itemArray].Tiempo_Entre_Servicios + "</td><td>" + ArrayTipoServicio[itemArray].Tiempo_Entre_Servicios + "</td><td>" + ArrayTipoServicio[itemArray].Imagen_asociada + "</td><td>" + ArrayTipoServicio[itemArray].UsuarioCreacion + "</td><td>" + ArrayTipoServicio[itemArray].FechaCreacion + "</td><td>" + ArrayTipoServicio[itemArray].UsuarioActualizacion + "</td><td>" + ArrayTipoServicio[itemArray].FechaActualizacion + "</td></tr>";
@@ -635,7 +635,7 @@ function Table_Servicio() {
             break;
 
         case "modificar":
-            html_Servicio = "<table id='TServicio' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Empresa</th><th>Codigo</th><th>Nombre</th><th>Tipo Servicio</th><th>Referencia</th><th>Moneda</th><th>Costo</th><th>Valor</th><th>Detalle</th><th>Calendario</th><th>Capacidad</th><th>Num. Servicios no pago para Bloqueo</th><th>Tipo Calculo Sesion</th><th>Tiempo Sesion</th><th>Tiempo entre Servicios</th><th>Tiempo Maximo Agenda</th><th>Imagen Asociada</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
+            html_Servicio = "<table id='TServicio' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Empresa</th><th>Codigo</th><th>Nombre</th><th>Tipo Servicio</th><th>Referencia</th><th>Moneda</th><th>Costo</th><th>Valor</th><th>Detalle</th><th>Calendario</th><th>Capacidad</th><th>Cant. No pago para Bloqueo</th><th>Tipo Calculo Sesion</th><th>Tiempo Sesion</th><th>Tiempo entre Servicios</th><th>Tiempo Maximo Agenda</th><th>Imagen Asociada</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
             for (itemArray in ArrayTipoServicio) {
                 if (ArrayTipoServicio[itemArray].Codigo_ID != 0) {
                     html_Servicio += "<tr id= 'TServicio_" + ArrayTipoServicio[itemArray].Codigo_ID + "'><td>" + ArrayTipoServicio[itemArray].Nit_ID + " - " + ArrayTipoServicio[itemArray].Nombre + "</td><td>" + ArrayTipoServicio[itemArray].Codigo_ID + "</td><td>" + ArrayTipoServicio[itemArray].nombre + "</td><td>" + ArrayTipoServicio[itemArray].Tipo + "</td><td>" + ArrayTipoServicio[itemArray].Cod_Moneda + "</td><td>" + ArrayTipoServicio[itemArray].Costo + "</td><td>" + ArrayTipoServicio[itemArray].valor + "</td><td>" + ArrayTipoServicio[itemArray].Detalle + "</td><td>" + ArrayTipoServicio[itemArray].Calendario_ID + "</td><td>" + ArrayTipoServicio[itemArray].Capacidad + "</td><td>" + ArrayTipoServicio[itemArray].N_Pagos_Bloqueos + "</td><td>" + ArrayTipoServicio[itemArray].Tipo_Calculo_Sesion + "</td><td>" + ArrayTipoServicio[itemArray].Tiempo_Sesion + "</td><td>" + ArrayTipoServicio[itemArray].Tiempo_Entre_Servicios + "</td><td>" + ArrayTipoServicio[itemArray].Tiempo_Entre_Servicios + "</td><td>" + ArrayTipoServicio[itemArray].Imagen_asociada + "</td><td>" + ArrayTipoServicio[itemArray].UsuarioCreacion + "</td><td>" + ArrayTipoServicio[itemArray].FechaCreacion + "</td><td>" + ArrayTipoServicio[itemArray].UsuarioActualizacion + "</td><td>" + ArrayTipoServicio[itemArray].FechaActualizacion + "</td></tr>";
@@ -644,7 +644,7 @@ function Table_Servicio() {
             break;
 
         case "eliminar":
-            html_Servicio = "<table id='TServicio' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Empresa</th><th>Codigo</th><th>Nombre</th><th>Tipo Servicio</th><th>Referencia</th><th>Moneda</th><th>Costo</th><th>Valor</th><th>Detalle</th><th>Calendario</th><th>Capacidad</th><th>Num. Servicios no pago para Bloqueo</th><th>Tipo Calculo Sesion</th><th>Tiempo Sesion</th><th>Tiempo entre Servicios</th><th>Tiempo Maximo Agenda</th><th>Imagen Asociada</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
+            html_Servicio = "<table id='TServicio' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Empresa</th><th>Codigo</th><th>Nombre</th><th>Tipo Servicio</th><th>Referencia</th><th>Moneda</th><th>Costo</th><th>Valor</th><th>Detalle</th><th>Calendario</th><th>Capacidad</th><th>Cant. No pago para Bloqueo</th><th>Tipo Calculo Sesion</th><th>Tiempo Sesion</th><th>Tiempo entre Servicios</th><th>Tiempo Maximo Agenda</th><th>Imagen Asociada</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
             for (itemArray in ArrayTipoServicio) {
                 if (ArrayTipoServicio[itemArray].Codigo_ID != 0) {
                     html_Servicio += "<tr id= 'TServicio_" + ArrayTipoServicio[itemArray].Codigo_ID + "'><td>" + ArrayTipoServicio[itemArray].Nit_ID + " - " + ArrayTipoServicio[itemArray].Nombre + "</td><td>" + ArrayTipoServicio[itemArray].Codigo_ID + "</td><td>" + ArrayTipoServicio[itemArray].nombre + "</td><td>" + ArrayTipoServicio[itemArray].Tipo + "</td><td>" + ArrayTipoServicio[itemArray].Cod_Moneda + "</td><td>" + ArrayTipoServicio[itemArray].Costo + "</td><td>" + ArrayTipoServicio[itemArray].valor + "</td><td>" + ArrayTipoServicio[itemArray].Detalle + "</td><td>" + ArrayTipoServicio[itemArray].Calendario_ID + "</td><td>" + ArrayTipoServicio[itemArray].Capacidad + "</td><td>" + ArrayTipoServicio[itemArray].N_Pagos_Bloqueos + "</td><td>" + ArrayTipoServicio[itemArray].Tipo_Calculo_Sesion + "</td><td>" + ArrayTipoServicio[itemArray].Tiempo_Sesion + "</td><td>" + ArrayTipoServicio[itemArray].Tiempo_Entre_Servicios + "</td><td>" + ArrayTipoServicio[itemArray].Tiempo_Entre_Servicios + "</td><td>" + ArrayTipoServicio[itemArray].Imagen_asociada + "</td><td>" + ArrayTipoServicio[itemArray].UsuarioCreacion + "</td><td>" + ArrayTipoServicio[itemArray].FechaCreacion + "</td><td>" + ArrayTipoServicio[itemArray].UsuarioActualizacion + "</td><td>" + ArrayTipoServicio[itemArray].FechaActualizacion + "</td></tr>";
@@ -731,4 +731,5 @@ function Clear() {
     if (OnlyEmpresa == true) {
         TransaccionesSegunNIT($("#Select_EmpresaNit").val());
     }
+    Clear_Agregar();
 }

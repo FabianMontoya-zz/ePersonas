@@ -76,129 +76,148 @@
                             <input type="text" id="TxtDoc_C" maxlength="18" class="Numeric" style="width: 100%;" />
                             <span class="Spam_AN"></span></span>
                     </td>
-                    <td style="padding-bottom: 25px; width: 21%;">
+                    <td style="padding-bottom: 25px; width: 15%;">
                         <span class="cssToolTip">
                             <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img_D_C"
                                 src="../../images/error.png" />
                             <span class="SpamEG"></span></span>
                     </td>
-                    <td class="Label_Bold" style="width: 10%;">Persona
+                    <td class="Label_Bold" style="width: 6%;">Persona
                     </td>
-                    <td id="V_Persona" style="width: 35%;" colspan="3"></td>
+                    <td id="V_Persona" style="width: 45%;"></td>
                     <td style="padding-bottom: 25px; width: 15%;"></td>
                 </tr>
             </table>
-            <table id="T_Pulgar_D" style="width: 100%;">
-                <tr>
-                    <td class="Label_Bold" style="width: 100px;">Pulgar Derecho:</td>
-                    <td class="Label_Bold" style="width: 100px;">
-                        <input id="file1" type="file" name="files[]" />
-                        <a id="A1" style="cursor: pointer" onclick="AddFileInput(F1)" visible="false"></a>
-                    </td>
-                    <td style="width: 100px;">
-                        <input id="Button1" type="button" value="Adjuntar Documento de Respaldo" name="Add_files"
-                            style="width: 300px;" onclick="UpLoad_Document('AutorizacionDocumentos', 'fileupload', '2'); HabilitarControl();" />
-                    </td>
-                </tr>
-            </table>
+            <div id="D_DedosManos">
+                <table id="T_Pulgar_D" style="width: 100%;">
+                    <tr>
+                        <td class="Label_Bold" style="width: 10.5%;">Pulgar Derecho:</td>
+                        <td class="Label_Bold" style="width: 47%;">
+                            <input id="file1" type="file" name="files[]" style="width: 100%;" />
+                            <a id="A1" style="cursor: pointer" onclick="AddFileInput(F1)" visible="false"></a>
+                        </td>
+                        <td style="width: 60%; padding-bottom: 25px;">
+                            <span class="cssToolTip">
+                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img_PulIZ"
+                                    src="../../images/error.png" />
+                                <span class="SpamEG"></span></span>
+                        </td>
+                    </tr>
+                </table>
+                <table id="T_Pulgar_D" style="width: 100%;">
+                    <tr>
+                        <td class="Label_Bold" style="width: 10.5%;">Pulgar Derecho:</td>
+                        <td class="Label_Bold" style="width: 47%;">
+                            <input id="file2" type="file" name="files[]" style="width: 100%;" />
+                            <a id="A2" style="cursor: pointer" onclick="AddFileInput(F1)" visible="false"></a>
+                        </td>
+                        <td style="width: 60%; padding-bottom: 25px;">
+                            <span class="cssToolTip">
+                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img2"
+                                    src="../../images/error.png" />
+                                <span class="SpamEG"></span></span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
 
         </div>
         <div id="Div_BTN_Guardar" style="width: 100%; text-align: center; margin-top: 11px;">
-            <input id="Btnguardar" type="button" value="Guardar" onclick="btnOk();" />
+            <input id="Btnguardar" type="button" value="Guardar" onclick="" />
+            <input id="Button2" type="button" value="ASD" onclick="DialogDedos();" />
         </div>
     </div>
 
 
     <div id="Dialog_Dedos" title="Dedos Solicitados">
-        <table style="width: 100%;" border="1">
-             <tr>
-                <td class="Label_Bold">Mano Izquierda
+        <table style="width: 100%;" border="0">
+            <tr style="width: 100%;">
+                <td class="Label_Bold" colspan="2" align="center">
+                    <h3>Mano Izquierda</h3>
                 </td>
-                <td class="Label_Bold">Mano Derecha
+                <td class="Label_Bold"></td>
+                <td class="Label_Bold" colspan="2" align="center">
+                    <h3>Mano Derecha</h3>
                 </td>
+                <td class="Label_Bold"></td>
             </tr>
+
             <tr>
-                <td>
-                    <input type="checkbox" id="Check_PulgarIZ" value="PulI" />
+                <td style="width: 5%;">
+                    <input type="checkbox" id="Check_PulgarIZ" value="PulIZ" />
                 </td>
                 <td class="Label_Bold">Pulgar
                 </td>
+                <td class="Label_Bold" style="width: 10%;"></td>
+                <td style="width: 5%;">
+                    <input type="checkbox" id="Check_PulgarDER" value="PulDER" />
+                </td>
+                <td class="Label_Bold">Pulgar
+                </td>
+                <td class="Label_Bold" style="width: 10%;"></td>
             </tr>
             <tr>
                 <td>
-                    <input type="checkbox" id="Check_IndiceIZ" value="IndZ" />
+                    <input type="checkbox" id="Check_IndiceIZ" value="IndIZ" />
                 </td>
-                <td class="Label_Bold">Indice
+                <td class="Label_Bold">Índice
                 </td>
+                <td class="Label_Bold"></td>
+                <td>
+                    <input type="checkbox" id="Check_IndiceDER" value="PulDER" />
+                </td>
+                <td class="Label_Bold">Índice
+                </td>
+                <td class="Label_Bold"></td>
             </tr>
             <tr>
                 <td>
-                    <input type="checkbox" id="Check_MedioIZ" value="MedI" />
+                    <input type="checkbox" id="Check_MedioIZ" value="MedIZ" />
                 </td>
                 <td class="Label_Bold">Dedo Medio
                 </td>
+                <td class="Label_Bold"></td>
+                <td>
+                    <input type="checkbox" id="Check_MedioDER" value="MedDER" />
+                </td>
+                <td class="Label_Bold">Dedo Medio
+                </td>
+                <td class="Label_Bold"></td>
             </tr>
             <tr>
                 <td>
-                    <input type="checkbox" id="Check_Hacienda" value="AnuI" />
+                    <input type="checkbox" id="Check_AnularIZ" value="AnuIZ" />
                 </td>
                 <td class="Label_Bold">Anular
                 </td>
+                <td class="Label_Bold"></td>
+                <td>
+                    <input type="checkbox" id="Check_AnularDER" value="AnuDER" />
+                </td>
+                <td class="Label_Bold">Anular
+                </td>
+                <td class="Label_Bold"></td>
             </tr>
             <tr>
                 <td>
-                    <input type="checkbox" id="Check_MultiEmpresa" value="MeñI" />
+                    <input type="checkbox" id="Check_MeniqueIZ" value="MenIZ" />
                 </td>
                 <td class="Label_Bold">Meñique
                 </td>
+                <td class="Label_Bold"></td>
+                <td>
+                    <input type="checkbox" id="Check_MeniqueDER" value="MenDER" />
+                </td>
+                <td class="Label_Bold">Meñique
+                </td>
+                <td class="Label_Bold"></td>
             </tr>
             <tr>
-                <td>
-                    <input type="checkbox" id="Check_Empleado" value="EM" />
-                </td>
-                <td class="Label_Bold">Empleado
-                </td>
+                <td class="Label_Bold" colspan="6" align="center">&nbsp;</td>
             </tr>
             <tr>
-                <td>
-                    <input type="checkbox" id="Check_Asesor" value="AS" />
-                </td>
-                <td class="Label_Bold">Asesor
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="checkbox" id="Check_Proveedor" value="PR" />
-                </td>
-                <td class="Label_Bold">Proveedor
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="checkbox" id="Check_EntBancaria" value="EB" />
-                </td>
-                <td class="Label_Bold">Entidades Financieras / Aseguradoras / Fondos de Pensiones
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="checkbox" id="Check_Visitante" value="EB" />
-                </td>
-                <td class="Label_Bold">Visitante
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="checkbox" id="Check_RepLegal" value="EB" />
-                </td>
-                <td class="Label_Bold">Representante Legal 
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="checkbox" id="Check_Socio" value="EB" />
-                </td>
-                <td class="Label_Bold">Socio
+                <td colspan="6" align="center">
+                    <input id="BTN_Capturar" type="button" value="Capturar" onclick="btnOk();" />
                 </td>
             </tr>
         </table>

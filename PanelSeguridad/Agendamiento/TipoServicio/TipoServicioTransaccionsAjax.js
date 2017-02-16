@@ -162,6 +162,7 @@ function transacionAjax_TipoServicio_create(State) {
             "Val": $("#TxtValor").val(),
             "Det": $("#Txt_Detalle").val(),
             "Cap": $("#Text_Capacidad").val(),
+            "Blo": $("#Text_Bloqueo").val(),
             "Cal": $("#Select_Calculo").val(),
             "TimSes": $("#Text_Tiempo_Sesion").val(),
             "TiemEn": $("#Text_Tiempo_Entre_Sesiones").val(),

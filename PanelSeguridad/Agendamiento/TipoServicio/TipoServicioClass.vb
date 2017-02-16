@@ -15,7 +15,7 @@
     Private _N_Pagos_Bloqueos As Integer
     Private _Tipo_Calculo_Sesion As String
     Private _Tiempo_Sesion As String
-    Private _Tiempo_Entre_Servicios As Integer
+    Private _Tiempo_Entre_Sesion As String
     Private _Tiempo_Maximo_Agenda As String
     Private _Imagen_asociada As String
 
@@ -139,12 +139,12 @@
             Me._Tiempo_Sesion = value
         End Set
     End Property
-    Public Property Tiempo_Entre_Servicios() As Integer
+    Public Property Tiempo_Entre_Sesion() As String
         Get
-            Return Me._Tiempo_Entre_Servicios
+            Return Me._Tiempo_Entre_Sesion
         End Get
-        Set(ByVal value As Integer)
-            Me._Tiempo_Entre_Servicios = value
+        Set(ByVal value As String)
+            Me._Tiempo_Entre_Sesion = value
         End Set
     End Property
     Public Property Tiempo_Maximo_Agenda() As String

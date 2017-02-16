@@ -3,10 +3,10 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script src="../../Scripts/jquery-1.4.1.js" type="text/javascript"></script>
-    <script src="TipoServicio.js" type="text/javascript"></script>
-    <script src="TipoServicioTransaccionsAjax.js" type="text/javascript"></script>
     <script src="../../SasifMaster.js" type="text/javascript"></script>
     <script src="../SasifMaster_Cosult.js" type="text/javascript"></script>
+    <script src="TipoServicio.js" type="text/javascript"></script>
+    <script src="TipoServicioTransaccionsAjax.js" type="text/javascript"></script>
     <link href="../../css/css_login.css" rel="stylesheet" type="text/css" />
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
     <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />
@@ -81,8 +81,8 @@
                     </tr>
                 </table>
                 <div id="Foto_Persona">
-                    <img alt="foto" title="" style="position: absolute; border-radius: 4px; border-color: #921919; border-width: 2px; border-style: outset;"
-                        id="Imgfoto" src="../../images/avatar.png" />
+                    <img alt="foto" title="" style="height: 120px; width: 120px; position: absolute; border-radius: 4px; border-color: #921919; border-width: 2px; border-style: outset;"
+                        id="Imgfoto" src="../../images/settings.png" />
                 </div>
                 <div id="TablaDatos_D">
 

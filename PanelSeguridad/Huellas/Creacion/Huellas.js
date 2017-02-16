@@ -50,6 +50,23 @@ function Ventanas_Emergentes() {
         dialogClass: "Dialog_Sasif",
         modal: true
     });
+
+    $("#Dialog_Dedos").dialog({
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true,
+        width: 450,
+        height: 300,
+        overlay: {
+            opacity: 0.5,
+            background: "black"
+        },
+        open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show(); }
+    });
+}
+
+function DialogDedos() {
+    $("#Dialog_Dedos").dialog("open");
 }
 
 //Función que oculta las tablas
