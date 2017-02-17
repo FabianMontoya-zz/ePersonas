@@ -1232,6 +1232,18 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
                     $("#" + Selector).append("<option value='" + Matrix[Item].Marca + "'> " + Matrix[Item].Marca + "</option>");
             }
             break;
+
+        case "Select_Activo":
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].Ref_1 + "_" + Matrix[Item].Ref_2 + "_" + Matrix[Item].Ref_3 + "'> " + Matrix[Item].Ref_1 + " " + Matrix[Item].Ref_2 + " " + Matrix[Item].Ref_3 + " - " + Matrix[Item].Descripcion  + "</option>");
+            }
+            break;
+
+        case "Select_Factura":
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].Ref_1 + "_" + Matrix[Item].Ref_2 + "_" + Matrix[Item].Ref_3 + "_" + Matrix[Item].Fact_Oct_ID + "'> " + Matrix[Item].Ref_1 + " " + Matrix[Item].Ref_2 + " " + Matrix[Item].Ref_3 + " - " + Matrix[Item].Fact_Oct_ID + "</option>");
+            }
+            break;
     }
 
     $('#' + Selector).append("<option value='-1'>Seleccione...</option>");

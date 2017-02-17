@@ -3,6 +3,8 @@ Imports System.Data.OleDb
 
 Public Class C_ContratoSQLClass
 
+#Region "CRUD"
+
     ''' <summary>
     ''' funcion que crea el query para la insercion de nuevo C_Contrato (INSERT)
     ''' </summary>
@@ -74,6 +76,8 @@ Public Class C_ContratoSQLClass
 
     End Function
 
+#End Region
+
 #Region "CONSULTAS DROP LIST"
 
 #End Region
@@ -116,7 +120,7 @@ Public Class C_ContratoSQLClass
                     'cargamos datos sobre el objeto de login
                     obj.Colocacion_ID = ReadConsulta.GetValue(0)
                     obj.Descripcion = ReadConsulta.GetValue(1)
-                   
+
                     'agregamos a la lista
                     ObjList.Add(obj)
                 End While
@@ -179,11 +183,10 @@ Public Class C_ContratoSQLClass
         Dim sql As New StringBuilder
         Dim vl_sql_filtro As New StringBuilder
 
-
         sql.AppendLine(" SELECT CO_Colocacion_ID, CO_Descripcion FROM CONTRATOS ")
 
         Select Case vp_Obj_persona.TipoSQL
-            Case "Contrato"
+            Case "Documento"
                 vl_sql_filtro.Append(" WHERE CO_Nit_ID ='" & vp_Obj_persona.Nit_ID & "'" & _
                                                      " ORDER BY CO_Colocacion_ID ASC  ")
         End Select

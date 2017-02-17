@@ -88,6 +88,11 @@ Public Class Crud_DocAjax
                 Case "MATRIX_CONTRATO"
                     CargarContratos()
 
+                Case "MATRIX_ACTIVO"
+                    CargarActivos()
+
+                Case "MATRIX_FACTURA"
+                    CargarFactura()
 
             End Select
 
@@ -376,9 +381,45 @@ Public Class Crud_DocAjax
 
         Dim obj As New ClienteClass
         obj.Nit_ID = Request.Form("Nit")
-        obj.TipoSQL = "Contrato"
+        obj.TipoSQL = "Documento"
 
         ObjList = SQL.Load_Contratos(obj)
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga  Matrix secuencia 
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarActivos()
+
+        Dim SQL As New C_ActivosSQLClass
+        Dim ObjList As New List(Of C_ActivosClass)
+
+        Dim obj As New ClienteClass
+        obj.Nit_ID = Request.Form("Nit")
+        obj.TipoSQL = "Documento"
+
+        ObjList = SQL.Load_Activos(obj)
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga  Matrix secuencia 
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarFactura()
+
+        Dim SQL As New FacturaSQLClass
+        Dim ObjList As New List(Of FacturaClass)
+
+        Dim obj As New ClienteClass
+        obj.Nit_ID = Request.Form("Nit")
+        obj.TipoSQL = "Documento"
+
+        ObjList = SQL.Load_Factura(obj)
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub

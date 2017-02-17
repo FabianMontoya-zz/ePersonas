@@ -113,6 +113,63 @@ function transaccionAjax_MContrato(vp_State, vp_Nit) {
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_MActivo(vp_State, vp_Nit) {
+    $.ajax({
+        url: "Crud_DocAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": vp_State,
+            "Nit": vp_Nit
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_Activo = [];
+            }
+            else {
+                Matrix_Activo = JSON.parse(result);
+            }
+        },
+        error: function () {
+
+        },
+    }).done(function () {
+        Charge_Combos_Depend_Nit(Matrix_Activo, "Select_Activo", vp_Nit, "");
+    });
+}
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_MFactura(vp_State, vp_Nit) {
+    $.ajax({
+        url: "Crud_DocAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": vp_State,
+            "Nit": vp_Nit
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_Factura = [];
+            }
+            else {
+                Matrix_Factura = JSON.parse(result);
+            }
+        },
+        error: function () {
+
+        },
+    }).done(function () {
+        Charge_Combos_Depend_Nit(Matrix_Factura, "Select_Factura", vp_Nit, "");
+    });
+}
+
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transaccionAjax_RutasOperacion(State) {
     $.ajax({
         url: "Crud_DocAjax.aspx",

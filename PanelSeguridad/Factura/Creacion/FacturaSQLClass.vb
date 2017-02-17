@@ -61,6 +61,63 @@ Public Class FacturaSQLClass
 
 #End Region
 
+
+#Region "CARGAR LISTAS"
+
+    ''' <summary>
+    ''' funcion que trae el listado de C_Activos para armar la tabla
+    ''' </summary>
+    ''' <param name="vp_S_StrQuery"></param>
+    ''' <param name="vg_S_StrConexion"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function list(ByVal vp_S_StrQuery As String, ByVal vg_S_StrConexion As String, ByVal vp_S_Type As String)
+
+        'inicializamos conexiones a la BD
+        Dim objcmd As OleDbCommand = Nothing
+        Dim objConexBD As OleDbConnection = Nothing
+        objConexBD = New OleDbConnection(vg_S_StrConexion)
+        Dim ReadConsulta As OleDbDataReader = Nothing
+
+        objcmd = objConexBD.CreateCommand
+
+        Dim ObjList As New List(Of FacturaClass)
+
+        'abrimos conexion
+        objConexBD.Open()
+        'cargamos consulta
+        objcmd.CommandText = vp_S_StrQuery
+        'ejecutamos consulta
+        ReadConsulta = objcmd.ExecuteReader()
+
+        Select Case vp_S_Type
+            Case "COMBO_LIST"
+                'recorremos la consulta por la cantidad de datos en la BD
+                While ReadConsulta.Read
+
+                    Dim obj As New FacturaClass
+                    'cargamos datos sobre el objeto de login
+                    obj.Fact_Oct_ID = ReadConsulta.GetValue(0)
+                    obj.Ref_1 = ReadConsulta.GetValue(1)
+                    obj.Ref_2 = ReadConsulta.GetValue(2)
+                    obj.Ref_3 = ReadConsulta.GetValue(3)
+
+                    'agregamos a la lista
+                    ObjList.Add(obj)
+                End While
+
+        End Select
+
+        'cerramos conexiones
+        ReadConsulta.Close()
+        objConexBD.Close()
+        'retornamos la consulta
+        Return ObjList
+
+    End Function
+
+#End Region
+
 #Region "OTRAS CONSULTAS"
 
     ''' <summary>
@@ -126,6 +183,39 @@ Public Class FacturaSQLClass
         Next
 
         Return ObjlistTercero
+    End Function
+
+    ''' <summary>
+    ''' CONSULTA QUE TRAE LOS CONTRATOS DE LA EMPRESA SELECCIONADA
+    ''' </summary>
+    ''' <param name="vp_Obj_persona"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Load_Factura(ByVal vp_Obj_persona As ClienteClass)
+
+        Dim ObjList As New List(Of FacturaClass)
+        Dim StrQuery As String = ""
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("2")
+        Dim BD_Admin As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDAdmin").ToString
+        Dim BD_Param As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDParam").ToString
+
+        Dim sql As New StringBuilder
+        Dim vl_sql_filtro As New StringBuilder
+
+        sql.AppendLine(" SELECT F_Fact_Oct_ID, F_Ref_1, F_Ref_2,F_Ref_3 FROM FACT_ORD_COMPRA ")
+
+        Select Case vp_Obj_persona.TipoSQL
+            Case "Documento"
+                vl_sql_filtro.Append(" WHERE F_Nit_ID ='" & vp_Obj_persona.Nit_ID & "'" & _
+                                                     " ORDER BY F_Fact_Oct_ID ASC  ")
+        End Select
+
+        StrQuery = sql.ToString & vl_sql_filtro.ToString
+
+        ObjList = list(StrQuery, Conexion, "COMBO_LIST")
+
+        Return ObjList
     End Function
 
 #End Region

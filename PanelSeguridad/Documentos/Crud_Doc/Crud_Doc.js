@@ -1,6 +1,9 @@
 ﻿/*--------------- region de variables globales --------------------*/
 var Matrix_ClienteDep = [];
 var Matrix_Contrato = [];
+var Matrix_Activo = [];
+var Matrix_Factura = [];
+
 var Matrix_Secuencia = [];
 var Matrix_Documento = [];
 var Matrix_Consecutivo = [];
@@ -128,7 +131,9 @@ function TransaccionesSegunNIT(vp_index_ID) {
         transaccionAjax_MDocumento('MATRIX_DOCUMENTO', vp_index_ID);
         transaccionAjax_MSecuencia('MATRIX_SECUENCIA', vp_index_ID);
         transaccionAjax_MContrato('MATRIX_CONTRATO', vp_index_ID);
-               
+        transaccionAjax_MActivo('MATRIX_ACTIVO', vp_index_ID);
+        transaccionAjax_MFactura('MATRIX_FACTURA', vp_index_ID);
+
     }
 }
 
@@ -359,11 +364,11 @@ function validarCamposCrear() {
     return validar;
 }
 
-
 //evento del boton salir
 function x() {
     $("#dialog").dialog("close");
 }
+
 //muestra controles de guardado
 function HabilitarControl() {
     $("#D_Controls").css("display", "inline-table");

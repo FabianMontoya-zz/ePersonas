@@ -115,7 +115,6 @@
                             </td>
                             <td>
                                 <select id="Select_Activo" class="C_Chosen">
-                                    <option value="-1">Seleccione...</option>
                                 </select>
                             </td>
                             <td style="width: 200px; padding-bottom: 25px;">
@@ -132,7 +131,6 @@
                             </td>
                             <td>
                                 <select id="Select_Factura" class="C_Chosen">
-                                    <option value="-1">Seleccione...</option>
                                 </select>
                             </td>
                             <td style="width: 200px; padding-bottom: 25px;">

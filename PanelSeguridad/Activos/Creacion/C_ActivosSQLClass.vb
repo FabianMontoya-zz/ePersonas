@@ -117,7 +117,7 @@ Public Class C_ActivosSQLClass
     ''' <param name="vg_S_StrConexion"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function listC_Activos(ByVal vp_S_StrQuery As String, ByVal vg_S_StrConexion As String, ByVal vp_S_Type As String)
+    Public Function list(ByVal vp_S_StrQuery As String, ByVal vg_S_StrConexion As String, ByVal vp_S_Type As String)
 
         'inicializamos conexiones a la BD
         Dim objcmd As OleDbCommand = Nothing
@@ -127,7 +127,7 @@ Public Class C_ActivosSQLClass
 
         objcmd = objConexBD.CreateCommand
 
-        Dim ObjListC_Activos As New List(Of C_ActivosClass)
+        Dim ObjList As New List(Of C_ActivosClass)
 
         'abrimos conexion
         objConexBD.Open()
@@ -137,18 +137,28 @@ Public Class C_ActivosSQLClass
         ReadConsulta = objcmd.ExecuteReader()
 
         Select Case vp_S_Type
-            Case "List"
+            Case "COMBO_LIST"
+                'recorremos la consulta por la cantidad de datos en la BD
+                While ReadConsulta.Read
 
+                    Dim obj As New C_ActivosClass
+                    'cargamos datos sobre el objeto de login
+                    obj.Ref_1 = ReadConsulta.GetValue(0)
+                    obj.Ref_2 = ReadConsulta.GetValue(1)
+                    obj.Ref_3 = ReadConsulta.GetValue(2)
+                    obj.Descripcion = ReadConsulta.GetValue(3)
 
+                    'agregamos a la lista
+                    ObjList.Add(obj)
+                End While
 
         End Select
-
 
         'cerramos conexiones
         ReadConsulta.Close()
         objConexBD.Close()
         'retornamos la consulta
-        Return ObjListC_Activos
+        Return ObjList
 
     End Function
 
@@ -181,6 +191,38 @@ Public Class C_ActivosSQLClass
         Result = conex.IDis(StrQuery, "2")
 
         Return Result
+    End Function
+
+    ''' <summary>
+    ''' CONSULTA QUE TRAE LOS CONTRATOS DE LA EMPRESA SELECCIONADA
+    ''' </summary>
+    ''' <param name="vp_Obj_persona"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Load_Activos(ByVal vp_Obj_persona As ClienteClass)
+
+        Dim ObjList As New List(Of C_ActivosClass)
+        Dim StrQuery As String = ""
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("2")
+        Dim BD_Admin As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDAdmin").ToString
+        Dim BD_Param As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDParam").ToString
+
+        Dim sql As New StringBuilder
+        Dim vl_sql_filtro As New StringBuilder
+
+        sql.AppendLine(" SELECT ACT_Ref_1,ACT_Ref_2,ACT_Ref_3, ACT_Descripcion FROM ACTIVOS ")
+
+        Select Case vp_Obj_persona.TipoSQL
+            Case "Documento"
+                vl_sql_filtro.Append(" WHERE ACT_Nit_ID ='" & vp_Obj_persona.Nit_ID & "'" & _
+                                                     " ORDER BY ACT_Nit_ID ASC  ")
+        End Select
+
+        StrQuery = sql.ToString & vl_sql_filtro.ToString
+        ObjList = list(StrQuery, Conexion, "COMBO_LIST")
+
+        Return ObjList
     End Function
 
 #End Region
