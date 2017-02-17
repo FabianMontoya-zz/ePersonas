@@ -110,19 +110,18 @@ Public Class HuellasAjax
         Dim strStreamWriter As StreamWriter = Nothing
         Dim ContenidoArchivo As String = Nothing
 
-        'Dim path As String = "" & Request.Url.Authority & "/Files_Dowload/Test_Script.txt"
         Dim path As String = Server.MapPath("~/Files_Dowload/Script.txt")
-        ' Create or overwrite the file.
-        strStreamW = File.Create(path) ' lo creamos
 
-        strStreamWriter = New StreamWriter(strStreamW, System.Text.Encoding.Default) ' tipo de codificacion para escritura
+        strStreamW = File.Create(path) 'Creamos el archivo de texto .txt
 
-        'escribimos en el archivo
+        strStreamWriter = New StreamWriter(strStreamW, System.Text.Encoding.Default) 'Tipo de codificación para escritura
 
+        'Escribirmos el Script
         Dim Script As String = CrearTXT()
 
+        'Escribimos el script en el .txt
         strStreamWriter.WriteLine(Script)
-        strStreamWriter.Close() ' cerramos
+        strStreamWriter.Close() 'Lo cerramos
 
         objFile.RutaOrigen = Request.Url.Authority & "/Files_Dowload/Script.txt"
         objFile.NombreDescarga = "ExecuteEnroller"
@@ -171,6 +170,8 @@ Public Class HuellasAjax
         v_l_Texto = v_l_Texto + "		Folder = ""\SASIF FingerPrint\""" & vbCrLf
         v_l_Texto = v_l_Texto + "		Directory = FolderMyDocuments + Folder" & vbCrLf
         v_l_Texto = v_l_Texto + "		If fso.FolderExists(Directory) Then" & vbCrLf
+        v_l_Texto = v_l_Texto + "		    fso.DeleteFolder(FolderMyDocuments + ""\SASIF FingerPrint"")" & vbCrLf
+        v_l_Texto = v_l_Texto + "		    Set objFolder = fso.CreateFolder(Directory)" & vbCrLf
         v_l_Texto = v_l_Texto + "			Directory = Directory + ""Enroller\""" & vbCrLf
         v_l_Texto = v_l_Texto + "			If fso.FolderExists(Directory) Then" & vbCrLf
         v_l_Texto = v_l_Texto + "			   Directory = Directory + ""Data\""" & vbCrLf
@@ -201,8 +202,8 @@ Public Class HuellasAjax
         v_l_Texto = v_l_Texto + "			End If" & vbCrLf
         v_l_Texto = v_l_Texto + "		End If" & vbCrLf & vbCrLf
         v_l_Texto = v_l_Texto + "		DirectoryFile = Directory + ""Datafile.fpt""" & vbCrLf
-
         v_l_Texto = v_l_Texto + "		Set File = fso.CreateTextFile(DirectoryFile, True)" & vbCrLf & vbCrLf
+
         v_l_Texto = v_l_Texto + "		File.WriteLine("""" & User)" & vbCrLf
         v_l_Texto = v_l_Texto + "		File.WriteLine("""" & NIT)" & vbCrLf
         v_l_Texto = v_l_Texto + "		File.WriteLine("""" & TypeDocument)" & vbCrLf
