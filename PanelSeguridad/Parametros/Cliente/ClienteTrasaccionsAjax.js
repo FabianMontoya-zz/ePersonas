@@ -958,7 +958,7 @@ function transacionAjax_Foto(State, Nit, TypeDoc, Doc, Index_Cliente, Type, Pais
         data: {
             "action": State,
             "Nit": Nit,
-            "TypeDoc": TypeDoc,
+            "TDoc": TypeDoc,
             "Doc": Doc
         },
         //Transaccion Ajax en proceso
