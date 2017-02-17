@@ -84,6 +84,11 @@ Public Class Crud_DocAjax
 
                 Case "elimina"
                     EraseCrud_Doc()
+
+                Case "MATRIX_CONTRATO"
+                    CargarContratos()
+
+
             End Select
 
         End If
@@ -138,7 +143,7 @@ Public Class Crud_DocAjax
         obj.Nit_ID = Request.Form("Nit_ID")
         obj.Secuencia_ID = Request.Form("Secuencia")
         obj.Documento_ID = Request.Form("Documento_ID")
-         Dim ANombreSave = Split(Request.Form("Nombre_Save"), ".")
+        Dim ANombreSave = Split(Request.Form("Nombre_Save"), ".")
         obj.Nombre_Save = ANombreSave(0)
         obj.RutaDocumento = Request.Form("Ruta")
         obj.Formato = Request.Form("Formato")
@@ -325,6 +330,58 @@ Public Class Crud_DocAjax
 
     End Sub
 
+    ''' <summary>
+    ''' funcion que carga  Matrix contrato
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarMDocumento()
+
+        Dim SQL As New DocumentoSQLClass
+        Dim ObjList As New List(Of DocumentoClass)
+        Dim obj As New ClienteClass
+        obj.Nit_ID = Request.Form("Nit")
+        obj.TipoSQL = "Documento"
+
+        ObjList = SQL.Matrix_Documento_Filtro(obj)
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga  Matrix secuencia 
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarMSecuencia()
+
+        Dim SQL As New DocumentoSQLClass
+        Dim ObjList As New List(Of DocumentoClass)
+
+        Dim obj As New ClienteClass
+        obj.Nit_ID = Request.Form("Nit")
+        obj.TipoSQL = "Documento"
+
+        ObjList = SQL.Matrix_SecuenciaPadre(obj)
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga  Matrix secuencia 
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarContratos()
+
+        Dim SQL As New C_ContratoSQLClass
+        Dim ObjList As New List(Of C_ContratoClass)
+
+        Dim obj As New ClienteClass
+        obj.Nit_ID = Request.Form("Nit")
+        obj.TipoSQL = "Contrato"
+
+        ObjList = SQL.Load_Contratos(obj)
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
 
     ''' <summary>
     ''' funcion que carga  rutas operacion
@@ -349,33 +406,6 @@ Public Class Crud_DocAjax
         Dim ObjList As New List(Of ConsecutivosClass)
 
         ObjList = SQL.MatrixConcecutivo()
-        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
-
-    End Sub
-
-    ''' <summary>
-    ''' funcion que carga  Matrix secuencia 
-    ''' </summary>
-    ''' <remarks></remarks>
-    Protected Sub CargarMSecuencia()
-
-        Dim SQL As New DocumentoSQLClass
-        Dim ObjList As New List(Of DocumentoClass)
-
-        ObjList = SQL.Matrix_SecuenciaPadre()
-        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
-
-    End Sub
-    ''' <summary>
-    ''' funcion que carga  Matrix contrato
-    ''' </summary>
-    ''' <remarks></remarks>
-    Protected Sub CargarMDocumento()
-
-        Dim SQL As New DocumentoSQLClass
-        Dim ObjList As New List(Of DocumentoClass)
-
-        ObjList = SQL.Matrix_Documento()
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub

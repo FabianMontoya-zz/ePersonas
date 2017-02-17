@@ -498,21 +498,24 @@ Public Class ClienteAjax
         Dim SQL As New DocumentosSQLClass
         Dim ObjList As New List(Of DocumentosClass)
 
-        Dim vl_S_Nit As String = Request.Form("Nit")
-        Dim vl_S_TypeDoc As String = Request.Form("TypeDoc")
-        Dim vl_S_Doc As String = Request.Form("Doc")
+        Dim Obj As New ClienteClass
 
-        ObjList = SQL.ExistFoto(vl_S_Nit, vl_S_TypeDoc, vl_S_Doc)
+        Obj.Nit_ID = Request.Form("NIT")
+        Obj.TypeDocument_ID = Request.Form("TDoc")
+        Obj.Document_ID = Request.Form("Doc")
+        Obj.TipoSQL = "Cliente"
+
+        ObjList = SQL.ExistFoto(Obj)
 
         If ObjList Is Nothing Then
 
-            Dim obj As New DocumentosClass
+            Dim objd As New DocumentosClass
             ObjList = New List(Of DocumentosClass)
 
-            obj.Nit_ID = ""
-            obj.FechaActualizacion = ""
+            objd.Nit_ID = ""
+            objd.FechaActualizacion = ""
 
-            ObjList.Add(obj)
+            ObjList.Add(objd)
         End If
 
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))

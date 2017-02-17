@@ -526,7 +526,7 @@ Public Class DocumentoSQLClass
     End Function
 
     ''' <summary>
-    ''' Carga matrix de documentos
+    ''' Carga matrix de documentos eliminar
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
@@ -575,7 +575,60 @@ Public Class DocumentoSQLClass
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Matrix_SecuenciaPadre()
+    Public Function Matrix_Documento_Filtro(ByVal vp_Obj_persona As ClienteClass)
+
+        Dim ObjListDocumento As New List(Of DocumentoClass)
+        Dim StrQuery As String = ""
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("3")
+        Dim BD_Admin As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDAdmin").ToString
+        Dim BD_Param As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDParam").ToString
+
+        Dim sql As New StringBuilder
+        Dim vl_sql_filtro As New StringBuilder
+
+        sql.AppendLine(" SELECT DOC_Documentos_ID AS ID, " & _
+                                         " CAST(DOC_Documentos_ID AS NVARCHAR(10)) + ' - ' + DOC_Descripcion AS Descripcion, " & _
+                                         " DOC_Nit_ID, " & _
+                                         " DOC_ChequeaVigencias, " & _
+                                         " DOC_DiasVigencia, " & _
+                                         " R.R_DESCRIPCION, " & _
+                                         " DOC_RequiereVerificacion, " & _
+                                         " DOC_Formato, " & _
+                                         " DOC_IndicativoFoto, " & _
+                                         " F.DDLL_Descripcion, " & _
+                                         " C.CLI_N_Consecutivo, " & _
+                                         " ROW_NUMBER() OVER(ORDER BY DOC_Documentos_ID ASC) AS Index_Documento " & _
+                                         " FROM DOCUMENTOS D " & _
+                                         " INNER JOIN RUTA R ON R.R_Ruta_ID = D.DOC_Ruta_ID  AND R.R_Nit_ID = D.DOC_Nit_ID " & _
+                                         " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO F ON F.DDL_ID = D.DOC_Formato AND F.DDL_Tabla = 'DOCUMENTOS' " & _
+                                         " LEFT JOIN " & BD_Param & ".dbo.CLIENTE C ON C.CLI_Document_ID  = " & _
+                                          "  CASE	 SUBSTRING(D.DOC_Nit_ID,0,LEN(D.DOC_Nit_ID)) " & _
+                                          "                 WHEN '' THEN 0 " & _
+                                          "                ELSE SUBSTRING(D.DOC_Nit_ID,0,LEN(D.DOC_Nit_ID))   " & _
+                                          " END ")
+
+        Select Case vp_Obj_persona.TipoSQL
+
+            Case "Documento"
+                vl_sql_filtro.Append(" WHERE DOC_Nit_ID ='" & vp_Obj_persona.Nit_ID & "'" & _
+                                                     " ORDER BY DOC_Nit_ID ASC  ")
+        End Select
+
+        StrQuery = sql.ToString & vl_sql_filtro.ToString
+
+        ObjListDocumento = listDocumento(StrQuery, Conexion, "Matrix")
+
+        Return ObjListDocumento
+
+    End Function
+
+    ''' <summary>
+    ''' Carga matrix de documentos
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Matrix_SecuenciaPadre(ByVal vp_Obj_persona As ClienteClass)
 
         Dim ObjListDocumento As New List(Of DocumentoClass)
         Dim StrQuery As String = ""
@@ -583,13 +636,21 @@ Public Class DocumentoSQLClass
         Dim Conexion As String = conex.typeConexion("3")
 
         Dim sql As New StringBuilder
+        Dim vl_sql_filtro As New StringBuilder
 
         sql.AppendLine(" SELECT  D.DE_Secuencia_ID, " & _
                                         " CAST(A.A_TypeDocument_ID AS NVARCHAR(2)) +' - '+ CAST(A.A_Document_ID AS NVARCHAR(20))+' - '+ CAST(D.DE_Secuencia_ID AS NVARCHAR(5)) as descripcion, " & _
                                         " A_Nit_ID " & _
                                         " FROM DOCUMENTOS_EXISTENTES D " & _
                                         " INNER JOIN ASOCIACION_DOCUMENTOS A ON A.A_Secuencia_ID = D.DE_Secuencia_ID ")
-        StrQuery = sql.ToString
+        Select Case vp_Obj_persona.TipoSQL
+
+            Case "Documento"
+                vl_sql_filtro.Append(" WHERE A_Nit_ID ='" & vp_Obj_persona.Nit_ID & "'" & _
+                                                     " ORDER BY A_Nit_ID ASC  ")
+        End Select
+
+        StrQuery = sql.ToString & vl_sql_filtro.ToString
 
         ObjListDocumento = listDocumento(StrQuery, Conexion, "Matrix_Secuencia")
 

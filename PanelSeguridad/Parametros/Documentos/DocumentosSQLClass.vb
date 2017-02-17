@@ -190,12 +190,9 @@ Public Class DocumentosSQLClass
     ''' <summary>
     ''' creala consulta para la tabla documentos para averiguar si tiene foto
     ''' </summary>
-    ''' <param name="vp_S_Nit"></param>
-    ''' <param name="vp_S_TypeDoc"></param>
-    ''' <param name="vp_S_Doc"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function ExistFoto(ByVal vp_S_Nit As String, ByVal vp_S_TypeDoc As String, ByVal vp_S_Doc As String)
+    Public Function ExistFoto(ByVal vp_Obj_persona As ClienteClass)
 
         Dim ObjList As New List(Of DocumentosClass)
         Dim StrQuery As String = ""
@@ -206,6 +203,7 @@ Public Class DocumentosSQLClass
         Dim BD_Admin As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDAdmin").ToString
 
         Dim sql As New StringBuilder
+        Dim vl_sql_filtro As New StringBuilder
 
         sql.Append(" SELECT DE_RutaDocumento," & _
                                    "       DE_Formato, " & _
@@ -213,13 +211,22 @@ Public Class DocumentosSQLClass
                                    "       D1.DDLL_Descripcion   " & _
                                    " FROM DOCUMENTOS_EXISTENTES DE " & _
                                    " INNER JOIN ASOCIACION_DOCUMENTOS AD ON AD.A_Secuencia_ID = DE.DE_Secuencia_ID  AND DE.DE_Nit_ID =AD.A_Nit_ID " & _
-                                   " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D1 ON D1.DDL_ID = DE.DE_Formato AND D1.DDL_Tabla = 'DOCUMENTOS' " & _
-                                  " WHERE A_Nit_ID = '" & vp_S_Nit & "' " & _
-                                   " AND A_TypeDocument_ID = '" & vp_S_TypeDoc & "' " & _
-                                   " AND A_Document_ID = '" & vp_S_Doc & "' AND DE_IndicativoFoto = 'S' ")
+                                   " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D1 ON D1.DDL_ID = DE.DE_Formato AND D1.DDL_Tabla = 'DOCUMENTOS' ")
 
-        StrQuery = sql.ToString
+        Select Case vp_Obj_persona.TipoSQL
+            Case "Cliente"
+                vl_sql_filtro.Append(" WHERE A_Nit_ID = '" & vp_Obj_persona.Nit_ID & "' " & _
+                                                     " AND A_TypeDocument_ID = '" & vp_Obj_persona.TypeDocument_ID & "' " & _
+                                                     " AND A_Document_ID = '" & vp_Obj_persona.Document_ID & "' AND DE_IndicativoFoto = 'S' ")
 
+            Case "TipoServicio"
+                vl_sql_filtro.Append(" WHERE A_Nit_ID = '" & vp_Obj_persona.Nit_ID & "' " & _
+                                                     " AND A_TypeDocument_ID = '" & vp_Obj_persona.TypeDocument_ID & "' " & _
+                                                     " AND A_Document_ID = '" & vp_Obj_persona.Document_ID & "' AND DE_IndicativoFoto = 'S' ")
+
+        End Select
+
+        StrQuery = sql.ToString & vl_sql_filtro.ToString
         ObjList = list(StrQuery, Conexion, "F")
 
         Return ObjList

@@ -1057,9 +1057,7 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
 
         case "Select_Contrato":
             for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID == Nit) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Contrato_ID + "'>" + Matrix[Item].Descripcion + "</option>");
-                }
+                $("#" + Selector).append("<option value='" + Matrix[Item].Colocacion_ID + "'>" +Matrix[Item].Colocacion_ID +" - " + Matrix[Item].Descripcion + "</option>");
             }
             break;
 

@@ -43,10 +43,8 @@ $(document).ready(function () {
     /*==================FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN==============*/
     transacionAjax_EmpresaNit('Cliente');
     transaccionAjax_RutasOperacion('RUTAS_OPERACION');
-    transaccionAjax_MDocumento('MATRIX_DOCUMENTO');
-    transaccionAjax_MContrato('MATRIX_CONTRATO');
-    transaccionAjax_MSecuencia('MATRIX_SECUENCIA');
-      transacionAjax_Formato('Formato');
+
+   transacionAjax_Formato('Formato');
            
     Change_Select_Nit();
     CalFechaVencimiento();
@@ -127,10 +125,10 @@ function Change_Select_Nit() {
 function TransaccionesSegunNIT(vp_index_ID) {
     if (vp_index_ID != "-1") {
         transaccionAjax_MClienteDep('MATRIX_CLIENTE_DEP', vp_index_ID);
-
-         Charge_Combos_Depend_Nit(Matrix_Secuencia, "Select_Secuencia", vp_index_ID, "");
-        Charge_Combos_Depend_Nit(Matrix_Contrato, "Select_Contrato", vp_index_ID, "");
-        Charge_Combos_Depend_Nit(Matrix_Documento, "Select_Documento", vp_index_ID, "");
+        transaccionAjax_MDocumento('MATRIX_DOCUMENTO', vp_index_ID);
+        transaccionAjax_MSecuencia('MATRIX_SECUENCIA', vp_index_ID);
+        transaccionAjax_MContrato('MATRIX_CONTRATO', vp_index_ID);
+               
     }
 }
 
