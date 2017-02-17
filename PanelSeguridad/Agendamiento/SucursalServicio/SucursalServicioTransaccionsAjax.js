@@ -3,7 +3,7 @@
 function transacionAjax_CargaBusqueda(State) {
     OpenControl();
     $.ajax({
-        url: "ServicioServicioAjax.aspx",
+        url: "SucursalServicioAjax.aspx",
         type: "POST",
         //crear json
         data: {
@@ -30,7 +30,7 @@ function transacionAjax_CargaBusqueda(State) {
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_EmpresaNit(State) {
     $.ajax({
-        url: "ServicioServicioAjax.aspx",
+        url: "SucursalServicioAjax.aspx",
         type: "POST",
         //crear json
         data: {
@@ -57,11 +57,41 @@ function transacionAjax_EmpresaNit(State) {
     });
 }
 
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_Calendario(State) {
+    $.ajax({
+        url: "SucursalServicioAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'CALENDARIOS',
+            "Nit": $("#Select_EmpresaNit").val()
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_Calendarios = [];
+            }
+            else {
+                Matrix_Calendarios = JSON.parse(result);
+            }
+        },
+        error: function () {
+
+        },
+        async: false,
+        cache: false
+    }).done(function () {
+        CargaCalendarios(Matrix_Calendarios, "Select_Calendario", "");
+    });
+}
+
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_MMoneda(State) {
     $.ajax({
-        url: "ServicioServicioAjax.aspx",
+        url: "SucursalServicioAjax.aspx",
         type: "POST",
         //crear json
         data: {
@@ -89,6 +119,34 @@ function transacionAjax_MMoneda(State) {
     });
 }
 
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_MSucursal(State) {
+    $.ajax({
+        url: "SucursalServicioAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'CIUDADES',
+            "Nit": $("#Select_EmpresaNit").val()
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_Sucursal = [];
+            }
+            else {
+                Matrix_Sucursal = JSON.parse(result);
+                Charge_Combos_Depend_Nit(Matrix_Sucursal, "Select_Sucursal", $("#Select_EmpresaNit").val(), "");
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
 /*------------------------------ consulta ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax_SucursalServicio(State, filtro, opcion) {
@@ -102,7 +160,7 @@ function transacionAjax_SucursalServicio(State, filtro, opcion) {
     }
 
     $.ajax({
-        url: "ServicioServicioAjax.aspx",
+        url: "SucursalServicioAjax.aspx",
         type: "POST",
         //crear json
         data: {
@@ -147,27 +205,18 @@ function transacionAjax_SucursalServicio_create(State) {
     }
 
     $.ajax({
-        url: "ServicioServicioAjax.aspx",
+        url: "SucursalServicioAjax.aspx",
         type: "POST",
         //crear json
         data: {
             "action": State,
             "Nit_ID": Nit_ID,
             "ID": ID,
-            "nombre": $("#TxtNombre").val(),
-            "Tipo": $("#Select_SucursalServicio").val(),
-            "Refe": $("#Text_Referencia").val(),
+            "Suc": $("#TxtSucursal").val(),
             "Mon": $("#Select_Moneda_Cod").val(),
             "Cos": $("#TxtCosto").val(),
-            "Val": $("#TxtValor").val(),
-            "Det": $("#Txt_Detalle").val(),
             "Cap": $("#Text_Capacidad").val(),
-            "Blo": $("#Text_Bloqueo").val(),
-            "Cal": $("#Select_Calculo").val(),
-            "TimSes": $("#Text_Tiempo_Sesion").val(),
-            "TiemEn": $("#Text_Tiempo_Entre_Sesiones").val(),
-            "MaxA": $("#Tiempo_Max_Agenda").val(),
-            "Ima": $("#Imgfoto").val(),
+            "cal": $("#Select_Calendario").val(),
             "user": User.toUpperCase()
         },
         //Transaccion Ajax en proceso
@@ -212,7 +261,7 @@ function transacionAjax_SucursalServicio_create(State) {
 function transacionAjax_SucursalServicio_delete(State) {
 
     $.ajax({
-        url: "ServicioServicioAjax.aspx",
+        url: "SucursalServicioAjax.aspx",
         type: "POST",
         //crear json
         data: {

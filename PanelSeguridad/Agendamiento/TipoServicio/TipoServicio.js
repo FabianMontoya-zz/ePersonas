@@ -5,6 +5,7 @@ var ArrayTipoServicioDep = [];
 var ArraySeguridad = [];
 var ArrayEmpresaNit = [];
 var Matrix_Moneda = [];
+var Matrix_Calendarios = [];
 
 var estado;
 var editNit_ID;
@@ -61,18 +62,6 @@ function Ventanas_Emergentes() {
         modal: true
     });
 
-    //$("#Dialog_Calendar").dialog({
-    //    autoOpen: false,
-    //    dialogClass: "Dialog_Sasif",
-    //    modal: true,
-    //    width: 1220,
-    //    height: 760,
-    //    overlay: {
-    //        opacity: 0.5,
-    //        background: "black"
-    //    }
-    //});
-
 }
 
 //Función que oculta todas las IMG de los errores en pantalla
@@ -87,6 +76,7 @@ function Ocultar_Errores() {
     $("#Img7").css("display", "none");
     $("#Img12").css("display", "none");
     $("#Img13").css("display", "none");
+    $("#ImgCal").css("display", "none");
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
     $("#WA").css("display", "none");
@@ -112,6 +102,7 @@ function Change_Select_Nit() {
 function TransaccionesSegunNIT(index_ID) {
     if (index_ID != "-1") {
         transacionAjax_MMoneda('Moneda');
+        transacionAjax_Calendario('MatrixCalendarios');
     }
 }
 
@@ -412,9 +403,7 @@ function Editar(index_Nit, index_Servicio) {
     $("#TablaConsulta").css("display", "none");
 
     for (itemArray in ArrayTipoServicio) {
-        console.log("aa");
         if (index_Nit == ArrayTipoServicio[itemArray].Nit_ID && index_Servicio == ArrayTipoServicio[itemArray].Codigo_ID) {
-            console.log("bb");
             editNit_ID = ArrayTipoServicio[itemArray].Nit_ID;
             editID = ArrayTipoServicio[itemArray].Codigo_ID;
 

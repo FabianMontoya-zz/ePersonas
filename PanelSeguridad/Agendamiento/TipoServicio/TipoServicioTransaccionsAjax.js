@@ -53,7 +53,7 @@ function transacionAjax_EmpresaNit(State) {
         async: false, // La petición es síncrona
         cache: false // No queremos usar la caché del navegador
     }).done(function () {
-        
+
     });
 }
 
@@ -76,7 +76,6 @@ function transacionAjax_MMoneda(State) {
             }
             else {
                 Matrix_Moneda = JSON.parse(result);
-                Charge_Combos_Depend_Nit(Matrix_Moneda, "Select_Moneda_Cod", "", "");
             }
         },
         error: function () {
@@ -86,6 +85,36 @@ function transacionAjax_MMoneda(State) {
         cache: false
     }).done(function () {
         Charge_Combos_Depend_Nit(Matrix_Moneda, "Select_Moneda_Cod", $("#Select_EmpresaNit").val(), "");
+    });
+}
+
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_Calendario(State) {
+    $.ajax({
+        url: "TipoServicioAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'CALENDARIOS',
+            "Nit": $("#Select_EmpresaNit").val()
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_Calendarios = [];
+            }
+            else {
+                Matrix_Calendarios = JSON.parse(result);
+            }
+        },
+        error: function () {
+
+        },
+        async: false,
+        cache: false
+    }).done(function () {
+        CargaCalendarios(Matrix_Calendarios, "Select_Calendario", "");
     });
 }
 
@@ -168,6 +197,7 @@ function transacionAjax_TipoServicio_create(State) {
             "TiemEn": $("#Text_Tiempo_Entre_Sesiones").val(),
             "MaxA": $("#Tiempo_Max_Agenda").val(),
             "Ima": $("#Imgfoto").val(),
+            "cal": $("#Select_Calendario").val(),
             "user": User.toUpperCase()
         },
         //Transaccion Ajax en proceso

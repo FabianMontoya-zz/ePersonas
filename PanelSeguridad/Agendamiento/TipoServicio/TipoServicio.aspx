@@ -80,7 +80,7 @@
                         </td>
                     </tr>
                 </table>
-                <div id="Foto_Persona">
+                <div id="Foto_Persona" style ="width: 85%">
                     <img alt="foto" title="" style="height: 120px; width: 120px; position: absolute; border-radius: 4px; border-color: #921919; border-width: 2px; border-style: outset;"
                         id="Imgfoto" src="../../images/settings.png" />
                 </div>
@@ -190,7 +190,7 @@
                             </td>
                             <td style="width: 100px;">
                                 <span class="cssToolTip_Form">
-                                    <input type="text" id="Text_Referencia"  style="width: 70px;" />
+                                    <input type="text" id="Text_Referencia" style="width: 70px;" />
                                     <span class="Spam_AN"></span></span>
                             </td>
                             <td style="padding-bottom: 25px; width: 100px;">
@@ -321,10 +321,22 @@
                         <tr>
                             <td class="Label_Bold" style="width: 14%;">Tiempo máximo de agenda en días
                             </td>
-                            <td>
+                            <td style="width: 38%;">
                                 <span class="cssToolTip_Form">
                                     <input id="Tiempo_Max_Agenda" type="text" class="Hours" readonly="readonly" /><span
                                         class="Spam_AH"></span></span>
+                            </td>
+                            <td style="width: 15%;" class="Label_Bold">Calendario
+                            </td>
+                            <td>
+                                <select id="Select_Calendario" class="C_Chosen">
+                                </select>
+                            </td>
+                            <td style="padding-bottom: 22px; width: 10%;">
+                                <span class="cssToolTip">
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgCal"
+                                        src="../../images/error.png" />
+                                    <span class="SpamEG"></span></span>
                             </td>
                         </tr>
                     </table>
@@ -343,6 +355,8 @@
                                     <span class="SpamEG">1: Campo Obligatorio!</span></span>
                             </td>
                         </tr>
+                    </table>
+                    <table id="T_Calendario" style="margin-left: 80px;">
                     </table>
                     <table style="width: 100%;">
 

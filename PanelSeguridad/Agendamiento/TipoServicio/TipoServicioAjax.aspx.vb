@@ -30,6 +30,9 @@ Public Class TipoServicioAjax
 
                 Case "elimina"
                     EraseTipoServicio()
+
+                Case "MatrixCalendarios"
+                    CargarCalendarios()
             End Select
 
         End If
@@ -98,7 +101,7 @@ Public Class TipoServicioAjax
             objTipoServicio.Costo = Request.Form("Cos")
             objTipoServicio.valor = Request.Form("Val")
             objTipoServicio.Detalle = Request.Form("Det")
-            objTipoServicio.Calendario_ID = "0"
+            objTipoServicio.Calendario_ID = Request.Form("cal")
             objTipoServicio.Capacidad = Request.Form("Cap")
             objTipoServicio.N_Pagos_Bloqueos = Request.Form("Blo")
             objTipoServicio.Tipo_Calculo_Sesion = Request.Form("Cal")
@@ -106,6 +109,7 @@ Public Class TipoServicioAjax
             objTipoServicio.Tiempo_Entre_Sesion = Request.Form("TiemEn")
             objTipoServicio.Tiempo_Maximo_Agenda = Request.Form("MaxA")
             objTipoServicio.Imagen_asociada = "../../images/" & Request.Form("Ima")
+
 
             objTipoServicio.UsuarioCreacion = Request.Form("user")
             objTipoServicio.FechaCreacion = Date.Now
@@ -146,7 +150,7 @@ Public Class TipoServicioAjax
         objTipoServicio.Costo = Request.Form("Cos")
         objTipoServicio.valor = Request.Form("Val")
         objTipoServicio.Detalle = Request.Form("Det")
-        objTipoServicio.Calendario_ID = "0"
+        objTipoServicio.Calendario_ID = Request.Form("cal")
         objTipoServicio.Capacidad = Request.Form("Cap")
         objTipoServicio.N_Pagos_Bloqueos = Request.Form("Blo")
         objTipoServicio.Tipo_Calculo_Sesion = Request.Form("Cal")
@@ -246,6 +250,23 @@ Public Class TipoServicioAjax
         Dim vl_S_Nit As String = Request.Form("Nit")
 
         ObjListDroplist = SQL.Charge_DropListSeguridad(vl_S_Nit)
+        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga el objeto DDL consulta
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarCalendarios()
+
+        Dim SQL As New CalendarioSQLClass
+        Dim ObjListDroplist As New List(Of CalendarioClass)
+        Dim obj As New ClienteClass
+        obj.Nit_ID = Request.Form("Nit")
+        obj.TipoSQL = "Calendar"
+
+        ObjListDroplist = SQL.Read_Matrix_Calendarios(obj)
         Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
 
     End Sub

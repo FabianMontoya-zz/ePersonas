@@ -324,7 +324,7 @@ Public Class SucursalServicioSQLClass
                     objSucursalServicio.FechaCreacion = ReadConsulta.GetValue(8)
                     objSucursalServicio.UsuarioActualizacion = ReadConsulta.GetValue(9)
                     objSucursalServicio.FechaActualizacion = ReadConsulta.GetValue(10)
-                    If Not (IsDBNull(ReadConsulta.GetValue(11))) Then objSucursalServicio.DescripEmpresa = ReadConsulta.GetValue(21) Else objSucursalServicio.DescripEmpresa = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(11))) Then objSucursalServicio.DescripEmpresa = ReadConsulta.GetValue(11) Else objSucursalServicio.DescripEmpresa = ""
                     'agregamos a la lista
                     ObjList.Add(objSucursalServicio)
 

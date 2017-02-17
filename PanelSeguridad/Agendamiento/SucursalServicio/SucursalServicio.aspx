@@ -114,19 +114,18 @@
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
-                            <td class="Label_Bold" style="width: 159px;">Sucursal
-                            </td>
-                            <td style="width: 50px;">
-                                <span class="cssToolTip_Form">
-                                    <input type="text" id="TxtSucursal" maxlength="50" style="width: 200px;" />
-                                    <span class="Spam_AST"></span></span>
-                            </td>
-                            <td style="padding-bottom: 25px;">
-                                <span class="cssToolTip">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img3"
-                                        src="../../images/error.png" />
-                                    <span class="SpamEG"></span></span>
-                            </td>
+                           <td style="width: 7.2%;" class="Label_Bold">Sucursal
+                                </td>
+                                <td style="width: 20%;">
+                                    <select id="Select_Sucursal" class="C_Chosen">
+                                    </select>
+                                </td>
+                                <td style="width: 41%; padding-bottom: 25px;">
+                                    <span class="cssToolTip">
+                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img3"
+                                            src="../../images/error.png" />
+                                        <span class="SpamEG"></span></span>
+                                </td>
                         </tr>
                     </table>
                     <table id="Table_Moneda" style="width: 700px; text-align: left;">
@@ -140,6 +139,18 @@
                             <td style="padding-bottom: 25px; width: 250px;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img7"
+                                        src="../../images/error.png" />
+                                    <span class="SpamEG"></span></span>
+                            </td>
+                            <td style="width: 15%;" class="Label_Bold">Calendario
+                            </td>
+                            <td>
+                                <select id="Select_Calendario" class="C_Chosen">
+                                </select>
+                            </td>
+                            <td style="padding-bottom: 22px; width: 10%;">
+                                <span class="cssToolTip">
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgCal"
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
@@ -188,8 +199,7 @@
             </div>
         </div>
     </div>
-    <div id="Dialog_Calendar">
-    </div>
+    
     <div id="dialog" title="Basic dialog">
         <table style="width: 100%; text-align: center;">
             <tr>
