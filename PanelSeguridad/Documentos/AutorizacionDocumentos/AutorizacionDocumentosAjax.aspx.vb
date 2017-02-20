@@ -268,6 +268,28 @@ Public Class AutorizacionDocumentosAjax
     End Sub
 
     ''' <summary>
+    ''' cara la matriz de  verificacion documento 
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub Cargar_Matrix_R_Doc_Verificacion()
+
+        Dim SQL As New RDoc_VerificacionSQLClass
+        Dim ObjList As New List(Of RDoc_VerificacionClass)
+        Dim obj As New ClienteClass
+
+        obj.Nit_ID = Request.Form("Nit")
+        obj.TipoSQL = "Verificacion"
+
+        ObjList = SQL.Matrix_R_Documento_Verificacion(obj)
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+
+    End Sub
+
+
+
+
+    ''' <summary>
     ''' funcion que carga  rutas operacion
     ''' </summary>
     ''' <remarks></remarks>
@@ -295,22 +317,7 @@ Public Class AutorizacionDocumentosAjax
 
     End Sub
 
-    ''' <summary>
-    ''' cara la matriz de  verificacion documento 
-    ''' </summary>
-    ''' <remarks></remarks>
-    Protected Sub Cargar_Matrix_R_Doc_Verificacion()
-
-        Dim SQL As New RDoc_VerificacionSQLClass
-        Dim ObjList As New List(Of RDoc_VerificacionClass)
-
-        ObjList = SQL.Matrix_R_Documento_Verificacion()
-        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
-
-
-    End Sub
-
-    ''' <summary>
+       ''' <summary>
     ''' cara la matriz de documento para trabajo
     ''' </summary>
     ''' <remarks></remarks>
@@ -337,7 +344,12 @@ Public Class AutorizacionDocumentosAjax
         Dim SQL As New ConsecutivosSQLClass
         Dim ObjList As New List(Of ConsecutivosClass)
 
-        ObjList = SQL.MatrixConcecutivo()
+        Dim Obj As New ClienteClass
+
+        Obj.Nit_ID = Request.Form("NIT")
+        Obj.TipoSQL = "Verificacion"
+
+        ObjList = SQL.MatrixConcecutivo(Obj)
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
