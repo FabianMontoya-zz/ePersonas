@@ -464,6 +464,38 @@ Public Class CalendarioSQLClass
 
     End Function
 
+    ''' <summary>
+    ''' Traemos los Calendarios para Empresa Genérica
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Read_Matrix_Calendarios(ByVal vp_Obj_Cliente As ClienteClass)
+
+        Dim ObjList As New List(Of CalendarioClass)
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("2")
+
+        Dim sql As New StringBuilder
+        Dim vl_sql_filtro As New StringBuilder
+
+        sql.Append(" SELECT c.CA_Calendario_ID, " & _
+                   " c.CA_Descripcion, " & _
+                   " c.CA_TipoCalendario, " & _
+                   " ROW_NUMBER() OVER(ORDER BY c.CA_Nit_ID, c.CA_Calendario_ID ASC) AS Index_Calendario " & _
+                   " FROM CALENDARIOS c ")
+
+        Select Case vp_Obj_Cliente.TipoSQL
+            Case "Calendar"
+                vl_sql_filtro.Append("WHERE c.CA_Nit_ID = '0' OR c.CA_NIT_ID = '" & vp_Obj_Cliente.Nit_ID & "' ORDER BY c.CA_Nit_ID, c.CA_Calendario_ID ASC ")
+        End Select
+
+        Dim vl_S_SQLString As String = sql.ToString & vl_sql_filtro.ToString
+
+        ObjList = listCalendario(vl_S_SQLString, Conexion, "Matrix")
+
+        Return ObjList
+
+    End Function
 #End Region
 
 End Class
