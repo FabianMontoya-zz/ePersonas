@@ -6,6 +6,7 @@ var ArraySeguridad = [];
 var ArrayEmpresaNit = [];
 var Matrix_Moneda = [];
 var Matrix_Calendarios = [];
+var ArrayFormato = [];
 
 var estado;
 var editNit_ID;
@@ -18,7 +19,6 @@ var RutaRelativa;
 //Evento load JS
 $(document).ready(function () {
 
-
     $("#Marco_trabajo_Form").css("height", "490px");
     $("#container_TServicio").css("height", "380px");
 
@@ -28,9 +28,10 @@ $(document).ready(function () {
     Ocultar_Tablas();
     /*================== FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN ==============*/
 
+    transaccionAjax_RutasOperacion('Rutas_Operacion');
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_EmpresaNit('Cliente');
-    transaccionAjax_RutasOperacion('Rutas_Operacion');
+    transacionAjax_Formato('Formato');
 
     $(function () {
         $("#Text_Tiempo_Sesion").timepicker();
@@ -156,6 +157,8 @@ function BtnCrear() {
     if (validate == 0) {
         if ($("#Btnguardar").val() == "Guardar") {
             transacionAjax_TipoServicio_create("crear");
+            StrTFormato = BuscarFormato();
+            ContruyeName_Temp("TEMP", StrConsecutivo, StrTFormato);
         }
         else {
             transacionAjax_TipoServicio_create("modificar");
@@ -173,6 +176,24 @@ function BtnElimina() {
 function x() {
     $("#dialog").dialog("close");
     //MensajeHora = "";
+}
+
+//traer el formado del documento
+function BuscarFormato() {
+
+    var ID_Doc = $("#Select_Documento").val();
+    var StrFormato = "";
+
+    for (item in Matrix_Documento) {
+        if (Matrix_Documento[item].Documento_ID == ID_Doc)
+            StrFormato = Matrix_Documento[item].DescripFormato;
+    }
+    for (item in Matrix_Documento) {
+        if (Matrix_Documento[item].Nit_ID == Nit_ID_proccess)
+            StrConsecutivo = Matrix_Documento[item].Consecutivo;
+    }
+
+    return StrFormato;
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/

@@ -82,10 +82,7 @@
                 </table>
 
                 <div id="TablaDatos_D">
-                    <div id="Foto_Persona" style="width: 85%">
-                        <img alt="foto" title="" style="height: 120px; width: 120px; position: absolute; border-radius: 4px; border-color: #921919; border-width: 2px; border-style: outset;"
-                            id="Imgfoto" src="../../images/settings.png" />
-                    </div>
+
                     <table id="TFile" style="width: 100%;">
                         <tr>
                             <td class="Label_Bold" style="width: 200px;">
@@ -98,6 +95,21 @@
                             </td>
                         </tr>
                     </table>
+                    <table style="width: 10%; height: 50px;">
+                        <tr>
+                            <td>
+                                <iframe id="IF_Visor" src=""></iframe>
+                            </td>
+                        </tr>
+                    </table>
+                    <!--<table>
+                        <tr>
+                            <td id="Foto_Persona" style="width: 85%">
+                                <img alt="foto" title="" style="height: 120px; width: 120px; position: absolute; border-radius: 4px; border-color: #921919; border-width: 2px; border-style: outset;"
+                                    id="Imgfoto" src="../../images/settings.png" />
+                            </td>
+                        </tr>
+                    </table>-->
                     <table id="Tabla_1" style="width: 700px; text-align: left;">
                         <tr>
                             <td style="width: 150px;" class="Label_Bold">NIT Empresa

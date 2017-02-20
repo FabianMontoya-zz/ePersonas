@@ -59,7 +59,11 @@ Public Class TipoServicioAjax
                     CargarCalendarios()
 
                 Case "Rutas_Operacion"
-                    CargarCalendarios()
+                    CargarRutasOp()
+
+                Case "Formato"
+                    CargarFormato()
+
             End Select
 
         End If
@@ -310,6 +314,22 @@ Public Class TipoServicioAjax
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
+
+    ''' <summary>
+    ''' funcion que carga el objeto DDL consulta
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarFormato()
+
+        Dim SQL As New Crud_DocSQLClass
+        Dim ObjListDroplist As New List(Of Droplist_Class)
+        Dim vl_S_Tabla As String = Request.Form("tabla")
+
+        ObjListDroplist = SQL.Charge_DropListFormato(vl_S_Tabla)
+        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
+
+    End Sub
+
 #End Region
 
 #Region "FUNCIONES"

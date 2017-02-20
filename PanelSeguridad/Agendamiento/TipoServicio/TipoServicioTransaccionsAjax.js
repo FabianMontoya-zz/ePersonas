@@ -94,6 +94,33 @@ function transaccionAjax_RutasOperacion(State) {
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_Formato(State) {
+    $.ajax({
+        url: "TipoServicioAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'CLIENTE'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                ArrayFormato = [];
+            }
+            else {
+                ArrayFormato = JSON.parse(result);
+                charge_CatalogList(ArrayFormato, "Select_Formato", 1);
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_MMoneda(State) {
     $.ajax({
         url: "TipoServicioAjax.aspx",
