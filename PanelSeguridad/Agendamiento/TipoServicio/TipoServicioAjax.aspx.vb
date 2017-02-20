@@ -4,7 +4,7 @@ Public Class TipoServicioAjax
     Inherits System.Web.UI.Page
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        Dim Doc As New DocumentosClass
+        Dim Doc As New DocumentoClass
         If Request.Files.Count() > 0 Then
             Dim vl_S_RutaTemporal As String = Request.Form("RutaTemporal")
             Dim vl_S_NombreDoc As String = Request.Form("NameTemporal")
