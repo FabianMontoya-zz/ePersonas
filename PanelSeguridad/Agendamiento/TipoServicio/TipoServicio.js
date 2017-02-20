@@ -11,6 +11,8 @@ var estado;
 var editNit_ID;
 var index_ID;
 var editID;
+var RutaTemporal;
+var RutaRelativa;
 /*--------------- region de variables globales --------------------*/
 
 //Evento load JS
@@ -28,6 +30,7 @@ $(document).ready(function () {
 
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_EmpresaNit('Cliente');
+    transaccionAjax_RutasOperacion('Rutas_Operacion');
 
     $(function () {
         $("#Text_Tiempo_Sesion").timepicker();

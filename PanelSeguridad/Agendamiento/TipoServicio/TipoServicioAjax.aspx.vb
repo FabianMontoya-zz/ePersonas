@@ -4,6 +4,30 @@ Public Class TipoServicioAjax
     Inherits System.Web.UI.Page
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        Dim Doc As New DocumentosClass
+        If Request.Files.Count() > 0 Then
+            Dim vl_S_RutaTemporal As String = Request.Form("RutaTemporal")
+            Dim vl_S_NombreDoc As String = Request.Form("NameTemporal")
+            Dim NameDocument As String = Doc.UpLoad_Document(Request.Files, vl_S_RutaTemporal, vl_S_NombreDoc)
+
+            If NameDocument <> "" Then
+                If NameDocument = "N" Then
+                    Response.Write("NO_FORMAT")
+                Else
+                    Dim AFileDoc = Split(NameDocument, "|")
+                    Dim ADoc = Split(AFileDoc(0), ".")
+                    Dim vl_S_NameFormat As String = ADoc(0).Replace(" ", "")
+                    vl_S_NameFormat = vl_S_NameFormat.Replace("_", "")
+                    Dim NewNameDoc = AFileDoc(1).Replace("TEMP", UCase(vl_S_NameFormat))
+
+                    Doc.Rename_doc(vl_S_RutaTemporal, NewNameDoc, vl_S_NombreDoc)
+                    Response.Write(NewNameDoc)
+                End If
+            End If
+
+            Exit Sub
+        End If
+
         If Request.Form("action") <> Nothing Then
             'aterrizamos las opciones del proceso
             Dim vl_S_option_login As String = Request.Form("action")
@@ -32,6 +56,9 @@ Public Class TipoServicioAjax
                     EraseTipoServicio()
 
                 Case "MatrixCalendarios"
+                    CargarCalendarios()
+
+                Case "Rutas_Operacion"
                     CargarCalendarios()
             End Select
 
@@ -271,6 +298,18 @@ Public Class TipoServicioAjax
 
     End Sub
 
+    ''' <summary>
+    ''' funcion que carga  rutas operacion
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarRutasOp()
+        Dim SQL As New DocumentoSQLClass
+        Dim ObjList As New List(Of DocumentoClass)
+
+        ObjList = SQL.RutasOpe()
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
 #End Region
 
 #Region "FUNCIONES"

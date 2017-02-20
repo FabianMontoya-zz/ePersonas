@@ -101,7 +101,7 @@
                     </table>
                     <table id="Tabla_2" style="width: 1000px; text-align: left;">
                         <tr>
-                            <td style="width: 150px;" class="Label_Bold">Código
+                            <td style="width: 150px;" class="Label_Bold">Código Servicio
                             </td>
                             <td style="width: 150px;">
                                 <span class="cssToolTip_Form">
@@ -114,7 +114,7 @@
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
-                           <td style="width: 7.2%;" class="Label_Bold">Sucursal
+                           <td style="width: 7.2%;" class="Label_Bold">Sucursal Oficina
                                 </td>
                                 <td style="width: 20%;">
                                     <select id="Select_Sucursal" class="C_Chosen">

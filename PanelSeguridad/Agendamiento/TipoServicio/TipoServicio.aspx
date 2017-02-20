@@ -80,12 +80,24 @@
                         </td>
                     </tr>
                 </table>
-                <div id="Foto_Persona" style ="width: 85%">
-                    <img alt="foto" title="" style="height: 120px; width: 120px; position: absolute; border-radius: 4px; border-color: #921919; border-width: 2px; border-style: outset;"
-                        id="Imgfoto" src="../../images/settings.png" />
-                </div>
-                <div id="TablaDatos_D">
 
+                <div id="TablaDatos_D">
+                    <div id="Foto_Persona" style="width: 85%">
+                        <img alt="foto" title="" style="height: 120px; width: 120px; position: absolute; border-radius: 4px; border-color: #921919; border-width: 2px; border-style: outset;"
+                            id="Imgfoto" src="../../images/settings.png" />
+                    </div>
+                    <table id="TFile" style="width: 100%;">
+                        <tr>
+                            <td class="Label_Bold" style="width: 200px;">
+                                <input id="fileupload" type="file" name="files[]" />
+                                <a id="lnkAttch" style="cursor: pointer" onclick="AddFileInput(F1)" visible="false"></a>
+                            </td>
+                            <td style="width: 300px;">
+                                <input id="Btncharge_file" type="button" value="Adjuntar un archivo" name="Add_files"
+                                    style="width: 200px;" onclick="UpLoad_Document('TipoServicio', 'fileupload', '1'); " /><!--HabilitarControl();-->
+                            </td>
+                        </tr>
+                    </table>
                     <table id="Tabla_1" style="width: 700px; text-align: left;">
                         <tr>
                             <td style="width: 150px;" class="Label_Bold">NIT Empresa
@@ -102,40 +114,6 @@
                             </td>
                         </tr>
                     </table>
-                    <!--<table id="Tabla_10" style="width: 500px; text-align: left; position: absolute; margin-left: 600px; margin-bottom: 100px;">
-                <tr>
-                    <td class="Label_Bold">Fecha Inicial
-                    </td>
-                    <td></td>
-                    <td class="Label_Bold">Fecha Final
-                    </td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>
-                        <span class="cssToolTip_Form">
-                            <input type="text" id="TxtF_Start" maxlength="50" style="width: 100px;" />
-                            <span class="Spam_AF"></span></span>
-                    </td>
-                    <td style="padding-bottom: 25px; width: 90px;">
-                        <span class="cssToolTip">
-                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img6"
-                                src="../../images/error.png" />
-                            <span class="SpamEG"></span></span>
-                    </td>
-                    <td style="width: 120px;">
-                        <span class="cssToolTip_Form">
-                            <input type="text" id="TxtF_End" maxlength="50" style="width: 100px;" />
-                            <span class="Spam_AF"></span></span>
-                    </td>
-                    <td style="padding-bottom: 25px; width: 200px;">
-                        <span class="cssToolTip">
-                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img7"
-                                src="../../images/error.png" />
-                            <span class="SpamEG"></span></span>
-                    </td>
-                </tr>
-            </table>-->
                     <table id="Tabla_2" style="width: 1000px; text-align: left;">
                         <tr>
                             <td style="width: 150px;" class="Label_Bold">Codigo
