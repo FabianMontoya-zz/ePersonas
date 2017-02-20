@@ -100,13 +100,13 @@ Public Class DocumentoAjax
             objDocumento.ChequeaVigencias = Request.Form("C_Vigencia")
             objDocumento.DiasVigencia = Request.Form("D_Vigencia")
             objDocumento.TipoContenido = Request.Form("TContenido")
-            objDocumento.Formato_ID = Request.Form("Formato")
+            objDocumento.Formato = Request.Form("Formato")
             objDocumento.TipoVersion = Request.Form("TVersion")
             objDocumento.Ruta_ID = Request.Form("RutaDocumento")
             objDocumento.Ruta_ID_Plantilla = Request.Form("RutaPlantilla")
             objDocumento.NombrePlantilla = Request.Form("NamePlanilla")
             objDocumento.RequiereVerificacion = Request.Form("CheckVerificacion")
-            objDocumento.IndicativoFoto = Request.Form("Foto")
+            objDocumento.Indicativo = Request.Form("Foto")
 
             objDocumento.UsuarioCreacion = Request.Form("user")
             objDocumento.FechaCreacion = Date.Now
@@ -144,13 +144,13 @@ Public Class DocumentoAjax
         objDocumento.ChequeaVigencias = Request.Form("C_Vigencia")
         objDocumento.DiasVigencia = Request.Form("D_Vigencia")
         objDocumento.TipoContenido = Request.Form("TContenido")
-        objDocumento.Formato_ID = Request.Form("Formato")
+        objDocumento.Formato = Request.Form("Formato")
         objDocumento.TipoVersion = Request.Form("TVersion")
         objDocumento.Ruta_ID = Request.Form("RutaDocumento")
         objDocumento.Ruta_ID_Plantilla = Request.Form("RutaPlantilla")
         objDocumento.NombrePlantilla = Request.Form("NamePlanilla")
         objDocumento.RequiereVerificacion = Request.Form("CheckVerificacion")
-        objDocumento.IndicativoFoto = Request.Form("Foto")
+        objDocumento.Indicativo = Request.Form("Foto")
 
         objDocumento.UsuarioActualizacion = Request.Form("user")
         objDocumento.FechaActualizacion = Date.Now

@@ -665,7 +665,7 @@ Public Class ClienteSQLClass
         objcmd = objConexBD.CreateCommand
 
         Dim ObjListCliente As New List(Of ClienteClass)
-        Dim ObjListDoc As New List(Of DocumentosClass)
+        Dim ObjListDoc As New List(Of DocumentoClass)
 
         'abrimos conexion
         objConexBD.Open()
@@ -773,7 +773,7 @@ Public Class ClienteSQLClass
                 'recorremos la consulta por la cantidad de datos en la BD
                 While ReadConsulta.Read
 
-                    Dim obj As New DocumentosClass
+                    Dim obj As New DocumentoClass
                     'cargamos datos sobre el objeto de login
                     obj.Document_ID = ReadConsulta.GetValue(0)
                     obj.namefile = ReadConsulta.GetValue(1)
@@ -873,7 +873,7 @@ Public Class ClienteSQLClass
 
             Case "Matrix_Personas_Documentos"
                 While ReadConsulta.Read
-                    Dim obj As New DocumentosClass
+                    Dim obj As New DocumentoClass
 
                     obj.Nit_ID = ReadConsulta.GetValue(0)
                     obj.TypeDocument_ID = ReadConsulta.GetValue(1)
@@ -1113,7 +1113,7 @@ Public Class ClienteSQLClass
     ''' <remarks></remarks>
     Public Function Read_Matrix_GrpDocumentos()
 
-        Dim ObjList As New List(Of DocumentosClass)
+        Dim ObjList As New List(Of DocumentoClass)
         Dim conex As New Conector
         Dim Conexion As String = conex.typeConexion("3")
 
@@ -1343,7 +1343,7 @@ Public Class ClienteSQLClass
     ''' <remarks></remarks>
     Public Function Matrix_Personas_Documentos()
 
-        Dim ObjList As New List(Of DocumentosClass)
+        Dim ObjList As New List(Of DocumentoClass)
         Dim conex As New Conector
         Dim Conexion As String = conex.typeConexion("2")
 
@@ -1525,7 +1525,7 @@ Public Class ClienteSQLClass
     ''' <remarks></remarks>
     Public Function List_Personas_Documentos(ByVal vp_Obj_persona As ClienteClass)
 
-        Dim ObjList As New List(Of DocumentosClass)
+        Dim ObjList As New List(Of DocumentoClass)
         Dim conex As New Conector
         Dim Conexion As String = conex.typeConexion("2")
 

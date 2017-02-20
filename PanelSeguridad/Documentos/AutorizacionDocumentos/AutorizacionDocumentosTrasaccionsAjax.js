@@ -1,6 +1,90 @@
 ﻿/*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_MDocumento(vp_State, vp_Nit) {
+    $.ajax({
+        url: "AutorizacionDocumentosAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": vp_State,
+            "Nit": vp_Nit
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_Documento = [];
+            }
+            else {
+                Matrix_Documento = JSON.parse(result);
+            }
+        },
+        error: function () {
+
+        },
+    }).done(function () {
+        Charge_Combos_Depend_Nit(Matrix_Documento, "Select_Documento_V", vp_Nit, "");
+    });
+}
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_MDocWork(State, vp_Nit, vp_TD, vp_D, vp_Type) {
+    $.ajax({
+        url: "AutorizacionDocumentosAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'RUTA',
+            "Nit": vp_Nit
+          },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_DocWork = [];
+            }
+            else {
+                Matrix_DocWork = JSON.parse(result);
+            }
+        },
+        error: function () {
+
+        },
+    }).done(function () {
+    });
+}
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+//function transaccionAjax_MDocWork(State) {
+//   $.ajax({
+//        url: "AutorizacionDocumentosAjax.aspx",
+//        type: "POST",
+//        //crear json
+//        data: {
+//            "action": State,
+//            "tabla": 'RUTA'
+//        },
+//        //Transaccion Ajax en proceso
+//        success: function (result) {
+//            if (result == "") {
+//                Matrix_DocWork = [];
+//            }
+//            else {
+//                Matrix_DocWork = JSON.parse(result);
+//            }
+//        },
+//        error: function () {
+
+//        }
+//    });
+//}
+
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transaccionAjax_RutasOperacion(State) {
+    OpenControl();
     $.ajax({
         url: "AutorizacionDocumentosAjax.aspx",
         type: "POST",
@@ -22,32 +106,6 @@ function transaccionAjax_RutasOperacion(State) {
         },
         error: function () {
 
-        }
-    });
-}
-
-/*-------------------- carga ---------------------------*/
-//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transaccionAjax_MDocumento(State) {
-    $.ajax({
-        url: "AutorizacionDocumentosAjax.aspx",
-        type: "POST",
-        //crear json
-        data: {
-            "action": State,
-            "tabla": 'RUTA'
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            if (result == "") {
-                Matrix_Documento = [];
-            }
-            else {
-                Matrix_Documento = JSON.parse(result);
-            }
-        },
-        error: function () {
-
         },
     }).done(function () {
 
@@ -59,6 +117,7 @@ function transaccionAjax_MDocumento(State) {
         }
     });
 }
+
 
 
 /*-------------------- carga ---------------------------*/
@@ -87,32 +146,6 @@ function transaccionAjax_MRDocVerif(State) {
     });
 }
 
-/*-------------------- carga ---------------------------*/
-//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transaccionAjax_MDocWork(State) {
-    OpenControl();
-    $.ajax({
-        url: "AutorizacionDocumentosAjax.aspx",
-        type: "POST",
-        //crear json
-        data: {
-            "action": State,
-            "tabla": 'RUTA'
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            if (result == "") {
-                Matrix_DocWork = [];
-            }
-            else {
-                Matrix_DocWork = JSON.parse(result);
-            }
-        },
-        error: function () {
-
-        }
-    });
-}
 
 
 /*-------------------- carga ---------------------------*/

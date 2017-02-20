@@ -76,15 +76,15 @@ Public Class SasifMasterAjax
     ''' <remarks></remarks>
     Protected Sub EraseDocument()
 
-        Dim Doc As New DocumentosClass
-        Dim ListDocument As New List(Of DocumentosClass)
+        Dim Doc As New DocumentoClass
+        Dim ListDocument As New List(Of DocumentoClass)
         Dim vl_S_ListDocument As String = Request.Form("ListDocument")
 
         ListDocument = Doc.InsertList_Documentos(vl_S_ListDocument)
 
         If ListDocument.Count > 0 Then
 
-            For Each objDocument As DocumentosClass In ListDocument
+            For Each objDocument As DocumentoClass In ListDocument
                 Dim result = Doc.Delete_Document_Folder_View(objDocument.RutaDocumentoVisualizacion, objDocument.Nombre_Save & "." & objDocument.DescripFormato)
             Next
 

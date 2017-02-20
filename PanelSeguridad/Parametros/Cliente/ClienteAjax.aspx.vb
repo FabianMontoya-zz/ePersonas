@@ -10,7 +10,7 @@ Public Class ClienteAjax
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        Dim Doc As New DocumentosClass
+        Dim Doc As New DocumentoClass
         If Request.Files.Count() > 0 Then
             Dim vl_S_NombreDoc As String = Request.Form("NameTemporal")
             Dim Document As String = Doc.UpLoad_Document(Request.Files, "F:\DESARROLLO\CLIENTES SASIF\Desarrollos propios\DOCUMENTOS_PRESENTACION\", vl_S_NombreDoc)
@@ -465,8 +465,8 @@ Public Class ClienteAjax
     ''' <remarks></remarks>
     Protected Sub R_ead_Document()
 
-        Dim SQL As New DocumentosSQLClass
-        Dim ObjList As New List(Of DocumentosClass)
+        Dim SQL As New DocumentoSQLClass
+        Dim ObjList As New List(Of DocumentoClass)
 
         Dim vl_S_Nit As String = Request.Form("Nit")
         Dim vl_S_TypeDoc As String = Request.Form("TypeDoc")
@@ -476,8 +476,8 @@ Public Class ClienteAjax
 
         If ObjList Is Nothing Then
 
-            Dim obj As New DocumentosClass
-            ObjList = New List(Of DocumentosClass)
+            Dim obj As New DocumentoClass
+            ObjList = New List(Of DocumentoClass)
 
             obj.Nit_ID = ""
             obj.FechaActualizacion = ""
@@ -495,8 +495,8 @@ Public Class ClienteAjax
     ''' <remarks></remarks>
     Protected Sub Verifica_Foto()
 
-        Dim SQL As New DocumentosSQLClass
-        Dim ObjList As New List(Of DocumentosClass)
+        Dim SQL As New DocumentoSQLClass
+        Dim ObjList As New List(Of DocumentoClass)
 
         Dim Obj As New ClienteClass
 
@@ -509,8 +509,8 @@ Public Class ClienteAjax
 
         If ObjList Is Nothing Then
 
-            Dim objd As New DocumentosClass
-            ObjList = New List(Of DocumentosClass)
+            Dim objd As New DocumentoClass
+            ObjList = New List(Of DocumentoClass)
 
             objd.Nit_ID = ""
             objd.FechaActualizacion = ""
@@ -532,8 +532,8 @@ Public Class ClienteAjax
     ''' <remarks></remarks>
     Protected Sub Carga_Matrix_DocWork()
 
-        Dim SQL As New DocumentosSQLClass
-        Dim ObjList As New List(Of DocumentosClass)
+        Dim SQL As New DocumentoSQLClass
+        Dim ObjList As New List(Of DocumentoClass)
         Dim Obj As New ClienteClass
 
         Obj.Nit_ID = Request.Form("NIT")
@@ -619,7 +619,7 @@ Public Class ClienteAjax
 
         Dim SQLC As New ClienteSQLClass
 
-        Dim ObjList_MatrixGRP As New List(Of DocumentosClass)
+        Dim ObjList_MatrixGRP As New List(Of DocumentoClass)
         ObjList_MatrixGRP = SQLC.Read_Matrix_GrpDocumentos()
 
         Response.Write(JsonConvert.SerializeObject(ObjList_MatrixGRP.ToArray()))

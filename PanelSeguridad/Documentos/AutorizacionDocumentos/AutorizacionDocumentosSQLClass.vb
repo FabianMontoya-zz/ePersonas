@@ -203,7 +203,7 @@ Public Class AutorizacionDocumentosSQLClass
     ''' <param name="vp_Obj_AutorizacionDocumentos"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function UpdateDocumentos_Existentes(ByVal vp_Obj_AutorizacionDocumentos As DocumentosClass)
+    Public Function UpdateDocumentos_Existentes(ByVal vp_Obj_AutorizacionDocumentos As DocumentoClass)
 
         Dim conex As New Conector
         Dim Result As String

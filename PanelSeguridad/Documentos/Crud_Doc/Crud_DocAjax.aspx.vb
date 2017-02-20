@@ -10,7 +10,7 @@ Public Class Crud_DocAjax
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        Dim Doc As New DocumentosClass
+        Dim Doc As New DocumentoClass
         If Request.Files.Count() > 0 Then
             Dim vl_S_RutaTemporal As String = Request.Form("RutaTemporal")
             Dim vl_S_NombreDoc As String = Request.Form("NameTemporal")
@@ -506,7 +506,7 @@ Public Class Crud_DocAjax
     ''' <remarks></remarks>
     Protected Sub CopiaDoc_Origen()
 
-        Dim Doc As New DocumentosClass
+        Dim Doc As New DocumentoClass
 
         Dim vl_S_RutaDestino As String = Request.Form("RutaDestino")
         Dim vl_S_RutaOrigen As String = Request.Form("RutaTemporal")

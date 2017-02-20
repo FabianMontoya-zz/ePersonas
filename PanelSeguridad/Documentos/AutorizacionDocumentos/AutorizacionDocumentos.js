@@ -48,12 +48,11 @@ var Nivel_Filtro;
 $(document).ready(function () {
     Load_Charge_Sasif();
 
-    transaccionAjax_MDocumento('MATRIX_DOCUMENTO');
     transaccionAjax_RutasOperacion('RUTAS_OPERACION');
     transaccionAjax_MRDocVerif('MATRIX_R_DOC_VERIFICACION');
     transaccionAjax_MConsecutivo('MATRIX_CONSECUTIVOS');
     transaccionAjax_MVerificacion('MATRIX_VERIFICAR');
-    transaccionAjax_MDocWork('MATIRXDOC_WORK');
+
     transacionAjax_EmpresaNit('Cliente');
 
     Change_Select_Nit();
@@ -230,9 +229,9 @@ function VerDocPadre() {
 //carga los combos dependientes
 function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {
-        Nit_ID_proccess = $(this).val();
-        TransaccionesSegunNIT(Nit_ID_proccess);
-    });
+        vl_Nit_ID_proccess = $(this).val();
+        TransaccionesSegunNIT(vl_Nit_ID_proccess);
+     });
 }
 
 //mostramos el fileupload de documentos anexos 
@@ -403,9 +402,14 @@ function SearchPadre(Index_Padre, Nit) {
 }
 
 //cargar los items relacionados a select_nit
-function TransaccionesSegunNIT(index_NIT_ID) {
-    if (index_NIT_ID != "-1") {
-        Charge_Combos_Depend_Nit(Matrix_Documento, "Select_Documento_V", index_NIT_ID, "");
+function TransaccionesSegunNIT(vl_index_NIT_ID) {
+    if (vl_index_NIT_ID != "-1") {
+        transaccionAjax_MDocumento('MATRIX_DOCUMENTO', vl_index_NIT_ID);
+        //ransaccionAjax_MDocWork('MATIRXDOC_WORK');
+
+        transaccionAjax_MDocWork('MATIRXDOC_WORK', vl_index_NIT_ID, "", "", "Doc");
+
+
     }
 }
 
@@ -843,7 +847,7 @@ function Clear() {
 
     $("#IF_Visor").attr("src", "");
     $("#IF_Visor_D").attr("src", "");
-   
+
     $("#Vis_EmpresaNit").val("");
     $("#Vis_Persona").val("");
     $("#Vis_Secuencia").val("");
