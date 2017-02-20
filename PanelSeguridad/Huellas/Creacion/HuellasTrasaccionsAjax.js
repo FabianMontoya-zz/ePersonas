@@ -101,6 +101,15 @@ function transacionAjax_Ok(vp_State) {
         Dedos = Dedos + "," + ArrayDedos[item];
     }
 
+    var Nit_ID;
+
+    for (item in ArrayEmpresaNit) {
+        if (ArrayEmpresaNit[item].ID == $("#Select_EmpresaNit").val()) {
+            Nit_ID = ArrayEmpresaNit[item].descripcion;
+            break;
+        }
+    }
+
     Dedos = Dedos.substr(1);
 
     $.ajax({
@@ -110,11 +119,12 @@ function transacionAjax_Ok(vp_State) {
         data: {
             "action": vp_State,
             "tabla": 'Huellas',
-            "NIT": $("#Select_EmpresaNit").val(),
+            "NIT": Nit_ID,
             "TypeDocument": $("#Select_Documento").val(),
             "Document": $("#TxtDoc").val(),
             "Name_Client": namePersona,
             "Dedos": Dedos,
+            "Name_User": Array_G_Usuario[0].Nombre,
             "user": User.toUpperCase()
         },
         //Transaccion Ajax en proceso

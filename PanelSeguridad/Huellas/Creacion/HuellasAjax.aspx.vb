@@ -141,6 +141,8 @@ Public Class HuellasAjax
     Protected Function CrearTXT()
         Dim v_l_Texto As String = Nothing
 
+        Dim Encriptador As EncriptarClass
+
         v_l_Texto = "Set fso = CreateObject(""Scripting.FileSystemObject"")" & vbCrLf
         v_l_Texto = v_l_Texto + "Set ws = CreateObject(""WScript.Shell"")" & vbCrLf
         v_l_Texto = v_l_Texto + "Archivo = ""C:\Program Files\SASIF FingerPrint\Enroller\EnrollermentApp.exe""" & vbCrLf & vbCrLf
@@ -149,6 +151,7 @@ Public Class HuellasAjax
 
         v_l_Texto = v_l_Texto + "   anno = Year(Date)" & vbCrLf
         v_l_Texto = v_l_Texto + "   User = """ & Request.Form("user") & """" & vbCrLf
+        v_l_Texto = v_l_Texto + "   Name_User = """ & Request.Form("Name_User") & """" & vbCrLf
         v_l_Texto = v_l_Texto + "   NIT = """ & Request.Form("Nit") & """" & vbCrLf
         v_l_Texto = v_l_Texto + "   TypeDocument = """ & Request.Form("TypeDocument") & """" & vbCrLf
         v_l_Texto = v_l_Texto + "   Document = """ & Request.Form("Document") & """" & vbCrLf
@@ -205,6 +208,7 @@ Public Class HuellasAjax
         v_l_Texto = v_l_Texto + "		Set File = fso.CreateTextFile(DirectoryFile, True)" & vbCrLf & vbCrLf
 
         v_l_Texto = v_l_Texto + "		File.WriteLine("""" & User)" & vbCrLf
+        v_l_Texto = v_l_Texto + "		File.WriteLine("""" & Name_User)" & vbCrLf
         v_l_Texto = v_l_Texto + "		File.WriteLine("""" & NIT)" & vbCrLf
         v_l_Texto = v_l_Texto + "		File.WriteLine("""" & TypeDocument)" & vbCrLf
         v_l_Texto = v_l_Texto + "		File.WriteLine("""" & Document)" & vbCrLf
