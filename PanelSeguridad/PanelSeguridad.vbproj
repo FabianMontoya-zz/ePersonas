@@ -1291,8 +1291,6 @@
     <Compile Include="Parametros\Financiacion\FinanciacionSQLClass.vb" />
     <Compile Include="Parametros\Direcciones\DireccionesClass.vb" />
     <Compile Include="Parametros\Direcciones\DireccionesSQLClass.vb" />
-    <Compile Include="Parametros\Documentos\DocumentosClass.vb" />
-    <Compile Include="Parametros\Documentos\DocumentosSQLClass.vb" />
     <Compile Include="Parametros\Fasecolda\Fasecolda.aspx.designer.vb">
       <DependentUpon>Fasecolda.aspx</DependentUpon>
     </Compile>
