@@ -275,31 +275,30 @@ function transaccionAjax_MConsecutivo(State) {
         success: function (result) {
             if (result == "") {
                 Matrix_Consecutivo = [];
-                $("#dialog").dialog("option", "title", "Exito");
-                $("#Mensaje_alert").text("El documento no se puede crear no hay consecutivos! ");
-                $("#dialog").dialog("open");
-                $("#DE").css("display", "none");
-                $("#SE").css("display", "none");
-                $("#WE").css("display", "block");
+                Mensaje_General("Exito", "El documento no se puede crear no hay consecutivos! ", "W");
             }
             else {
                 Matrix_Consecutivo = JSON.parse(result);
-                switch (CheckVigencias) {
+                if (Matrix_Consecutivo.length == 0) {
+                    Mensaje_General("Exito", "El documento no se puede crear no hay consecutivos! ", "W");
+                }
+                else {
+                    switch (CheckVigencias) {
 
-                    case "N":
-                        var ConsecutivoExist = CaptureConsecutivo();
-                        ValideConsecutivo(ConsecutivoExist);
-                        break;
-
-                    case "S":
-                        var validar = ValidarCamposVigencia();
-                        if (validar == 0) {
+                        case "N":
                             var ConsecutivoExist = CaptureConsecutivo();
                             ValideConsecutivo(ConsecutivoExist);
-                        }
-                        break;
-                }
+                            break;
 
+                        case "S":
+                            var validar = ValidarCamposVigencia();
+                            if (validar == 0) {
+                                var ConsecutivoExist = CaptureConsecutivo();
+                                ValideConsecutivo(ConsecutivoExist);
+                            }
+                            break;
+                    }
+                }
             }
         },
         error: function () {

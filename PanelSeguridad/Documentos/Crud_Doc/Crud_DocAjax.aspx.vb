@@ -446,7 +446,11 @@ Public Class Crud_DocAjax
         Dim SQL As New ConsecutivosSQLClass
         Dim ObjList As New List(Of ConsecutivosClass)
 
-        ObjList = SQL.MatrixConcecutivo()
+        Dim Obj As New ClienteClass
+
+        Obj.TipoSQL = "Documento"
+
+        ObjList = SQL.MatrixConcecutivo(Obj)
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub

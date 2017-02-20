@@ -540,7 +540,7 @@ Public Class ConsecutivosSQLClass
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function MatrixConcecutivo()
+    Public Function MatrixConcecutivo(ByVal vp_Obj_Cliente As ClienteClass)
 
         Dim ObjList As New List(Of ConsecutivosClass)
         Dim StrQuery As String = ""
@@ -551,12 +551,22 @@ Public Class ConsecutivosSQLClass
         Dim BD_Admin As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDAdmin").ToString
 
         Dim sql As New StringBuilder
+        Dim vl_sql_filtro As New StringBuilder
 
         sql.Append(" SELECT C_Nit_ID, C_Consecutivo_ID, C_Descripcion, C_Consecutivo  FROM CONSECUTIVOS ")
 
-        StrQuery = sql.ToString
+        Select Case vp_Obj_Cliente.TipoSQL
+            Case "Verificacion"
+                vl_sql_filtro.Append("WHERE C_Nit_ID = '" & vp_Obj_Cliente.Nit_ID & "' ORDER BY C_Nit_ID, C_Consecutivo_ID ASC; ")
 
-        ObjList = list(StrQuery, Conexion, "Matrix")
+            Case "Documento"
+                vl_sql_filtro.Append(" ORDER BY C_Nit_ID, C_Consecutivo_ID ASC; ")
+
+
+        End Select
+
+        Dim vl_S_SQLString As String = sql.ToString & vl_sql_filtro.ToString
+        ObjList = list(vl_S_SQLString, Conexion, "Matrix")
 
         Return ObjList
 

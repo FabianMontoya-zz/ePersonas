@@ -375,7 +375,7 @@ Public Class RDoc_VerificacionSQLClass
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Matrix_R_Documento_Verificacion()
+    Public Function Matrix_R_Documento_Verificacion(ByVal vp_O_Obj As ClienteClass)
 
         Dim ObjList As New List(Of RDoc_VerificacionClass)
         Dim StrQuery As String = ""
@@ -383,13 +383,22 @@ Public Class RDoc_VerificacionSQLClass
         Dim Conexion As String = conex.typeConexion("3")
 
         Dim sql As New StringBuilder
+        Dim vl_sql_filtro As New StringBuilder
 
         sql.AppendLine(" SELECT RDV_Nit_ID, RDV_Documentos_ID, RDV_Documentos_ID_Verif, D_1.DOC_Descripcion, D_2.DOC_Descripcion  FROM R_DOCUMENTO_VERIFICACION  RDV" & _
                                         " INNER JOIN DOCUMENTOS D_1 ON D_1.DOC_Documentos_ID = RDV.RDV_Documentos_ID " & _
                                         " INNER JOIN DOCUMENTOS D_2 ON D_2.DOC_Documentos_ID = RDV.RDV_Documentos_ID_Verif ")
         StrQuery = sql.ToString
 
-        ObjList = listRDoc_Verificacion(StrQuery, Conexion, "Matrix")
+        Select Case vp_O_Obj.TipoSQL
+            Case "Verificacion"
+                vl_sql_filtro.Append("WHERE RDV_Nit_ID = '" & vp_O_Obj.Nit_ID & "' ORDER BY RDV_Nit_ID, RDV_Documentos_ID ASC; ")
+
+        End Select
+
+        Dim vl_S_SQLString As String = sql.ToString & vl_sql_filtro.ToString
+
+        ObjList = listRDoc_Verificacion(vl_S_SQLString, Conexion, "Matrix")
 
         Return ObjList
 

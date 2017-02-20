@@ -49,12 +49,10 @@ $(document).ready(function () {
     Load_Charge_Sasif();
 
     transaccionAjax_RutasOperacion('RUTAS_OPERACION');
-    transaccionAjax_MRDocVerif('MATRIX_R_DOC_VERIFICACION');
-    transaccionAjax_MConsecutivo('MATRIX_CONSECUTIVOS');
-    transaccionAjax_MVerificacion('MATRIX_VERIFICAR');
-
     transacionAjax_EmpresaNit('Cliente');
 
+   transaccionAjax_MVerificacion('MATRIX_VERIFICAR');
+        
     Change_Select_Nit();
     VentanasEmergentes();
     ComplementosJquery();
@@ -405,11 +403,9 @@ function SearchPadre(Index_Padre, Nit) {
 function TransaccionesSegunNIT(vl_index_NIT_ID) {
     if (vl_index_NIT_ID != "-1") {
         transaccionAjax_MDocumento('MATRIX_DOCUMENTO', vl_index_NIT_ID);
-        //ransaccionAjax_MDocWork('MATIRXDOC_WORK');
-
         transaccionAjax_MDocWork('MATIRXDOC_WORK', vl_index_NIT_ID, "", "", "Doc");
-
-
+        transaccionAjax_MRDocVerif('MATRIX_R_DOC_VERIFICACION', vl_index_NIT_ID);
+        transaccionAjax_MConsecutivo('MATRIX_CONSECUTIVOS', vl_index_NIT_ID);
     }
 }
 
