@@ -49,9 +49,8 @@ $(document).ready(function () {
     Load_Charge_Sasif();
 
     transaccionAjax_RutasOperacion('RUTAS_OPERACION');
+    transaccionAjax_MVerificacion('MATRIX_VERIFICAR');
     transacionAjax_EmpresaNit('Cliente');
-
-   transaccionAjax_MVerificacion('MATRIX_VERIFICAR');
         
     Change_Select_Nit();
     VentanasEmergentes();
@@ -374,7 +373,7 @@ function Search_Document_Verificar(Nit, documento_ID) {
         if (Matrix_Documento[itemArray].Documento_ID == documento_ID && Matrix_Documento[itemArray].Nit_ID == Nit) {
             Documento_ID = Matrix_Documento[itemArray].Documento_ID;
             RutaDestino = Matrix_Documento[itemArray].RutaDocumentoDestino;
-            Formato_ID = Matrix_Documento[itemArray].Formato_ID;
+            Formato_ID = Matrix_Documento[itemArray].Formato;
             ContruyeName_Temp("TEMP", Consecutivo_Empresa, Matrix_Documento[itemArray].DescripFormato);
             break;
         }

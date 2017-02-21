@@ -232,13 +232,13 @@ Public Class Crud_DocAjax
             objCrud_Doc.ChequeaVigencias = Request.Form("C_Vigencia")
             objCrud_Doc.DiasVigencia = Request.Form("D_Vigencia")
             objCrud_Doc.TipoContenido = Request.Form("TContenido")
-            objCrud_Doc.Formato_ID = Request.Form("Formato")
+            objCrud_Doc.Formato = Request.Form("Formato")
             objCrud_Doc.TipoVersion = Request.Form("TVersion")
             objCrud_Doc.Ruta_ID = Request.Form("RutaCrud_Doc")
             objCrud_Doc.Ruta_ID_Plantilla = Request.Form("RutaPlantilla")
             objCrud_Doc.NombrePlantilla = Request.Form("NamePlanilla")
             objCrud_Doc.RequiereVerificacion = Request.Form("CheckVerificacion")
-            objCrud_Doc.IndicativoFoto = Request.Form("Foto")
+            objCrud_Doc.Indicativo = Request.Form("Foto")
 
             objCrud_Doc.UsuarioCreacion = Request.Form("user")
             objCrud_Doc.FechaCreacion = Date.Now
@@ -276,13 +276,13 @@ Public Class Crud_DocAjax
         objCrud_Doc.ChequeaVigencias = Request.Form("C_Vigencia")
         objCrud_Doc.DiasVigencia = Request.Form("D_Vigencia")
         objCrud_Doc.TipoContenido = Request.Form("TContenido")
-        objCrud_Doc.Formato_ID = Request.Form("Formato")
+        objCrud_Doc.Formato = Request.Form("Formato")
         objCrud_Doc.TipoVersion = Request.Form("TVersion")
         objCrud_Doc.Ruta_ID = Request.Form("RutaCrud_Doc")
         objCrud_Doc.Ruta_ID_Plantilla = Request.Form("RutaPlantilla")
         objCrud_Doc.NombrePlantilla = Request.Form("NamePlanilla")
         objCrud_Doc.RequiereVerificacion = Request.Form("CheckVerificacion")
-        objCrud_Doc.IndicativoFoto = Request.Form("Foto")
+        objCrud_Doc.Indicativo = Request.Form("Foto")
 
         objCrud_Doc.UsuarioActualizacion = Request.Form("user")
         objCrud_Doc.FechaActualizacion = Date.Now

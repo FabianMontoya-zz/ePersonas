@@ -410,10 +410,10 @@ function Editar(Index_Documento, Type) {
     $("#Select_EmpresaNit").val(ArrayDocumento[Index_Documento].Nit_ID);
     $("#Select_CheckVigencia").val(ArrayDocumento[Index_Documento].ChequeaVigencias);
     $("#Select_TContenido").val(ArrayDocumento[Index_Documento].TipoContenido);
-    $("#Select_Formato").val(ArrayDocumento[Index_Documento].Formato_ID);
+    $("#Select_Formato").val(ArrayDocumento[Index_Documento].Formato);
     $("#Select_TVersion").val(ArrayDocumento[Index_Documento].TipoVersion);
     $("#Select_CheckVerificacion").val(ArrayDocumento[Index_Documento].RequiereVerificacion);
-    $("#Select_Foto").val(ArrayDocumento[Index_Documento].IndicativoFoto);
+    $("#Select_Foto").val(ArrayDocumento[Index_Documento].Indicativo);
 
     $("#Select_EmpresaNit").attr("disabled", "disabled");
     $("#Txt_ID").attr("disabled", "disabled");
@@ -439,7 +439,7 @@ function ConsultaDocumento(Index_Documento) {
     $("#Con_Formato").html(ArrayDocumento[Index_Documento].DescripFormato);
     $("#Con_TVersion").html(ArrayDocumento[Index_Documento].DescripVersion);
     $("#Con_CheckVerificacion").html(ArrayDocumento[Index_Documento].RequiereVerificacion);
-    $("#Con_Foto").html(ArrayDocumento[Index_Documento].IndicativoFoto);
+    $("#Con_Foto").html(ArrayDocumento[Index_Documento].Indicativo);
     $("#Con_RutaDocumento").html(ArrayDocumento[Index_Documento].DescripRuta);
     $("#Con_RutaPlantilla").html(ArrayDocumento[Index_Documento].DescripRutaPlantilla);
 }

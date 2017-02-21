@@ -45,10 +45,9 @@ $(document).ready(function () {
     Ocultar_Tablas();
     /*==================FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN==============*/
     transacionAjax_EmpresaNit('Cliente');
+    transacionAjax_Formato('Formato');
     transaccionAjax_RutasOperacion('RUTAS_OPERACION');
 
-   transacionAjax_Formato('Formato');
-           
     Change_Select_Nit();
     CalFechaVencimiento();
 
@@ -58,6 +57,9 @@ $(document).ready(function () {
 
 });
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                 REGION INICIO DE COMPONENTES                                                                                                    ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //Función que oculta todas las IMG de los errores en pantalla
 function Ocultar_Errores() {
     ResetError();
@@ -116,62 +118,9 @@ function Ocultar_Tablas() {
     $("#TablaConsulta").css("display", "none");
 }
 
-//carga los combos dependientes
-function Change_Select_Nit() {
-    $("#Select_EmpresaNit").change(function () {
-        Nit_ID_proccess = $(this).val();
-        TransaccionesSegunNIT(Nit_ID_proccess);
-    });
-}
-
-//cargar los items relacionados a select_nit
-function TransaccionesSegunNIT(vp_index_ID) {
-    if (vp_index_ID != "-1") {
-        transaccionAjax_MClienteDep('MATRIX_CLIENTE_DEP', vp_index_ID);
-        transaccionAjax_MDocumento('MATRIX_DOCUMENTO', vp_index_ID);
-        transaccionAjax_MSecuencia('MATRIX_SECUENCIA', vp_index_ID);
-        transaccionAjax_MContrato('MATRIX_CONTRATO', vp_index_ID);
-        transaccionAjax_MActivo('MATRIX_ACTIVO', vp_index_ID);
-        transaccionAjax_MFactura('MATRIX_FACTURA', vp_index_ID);
-
-    }
-}
-
-//calcula los dias de vencimiento
-function CalFechaVencimiento() {
-    $("#TxtFinicial").change(function () {
-
-        var Strfecha = $("#TxtFinicial").val();
-        var DiasVigen = $("#txt_DVigencia").val();
-
-        var A_fecha = Strfecha.split("-");
-        var FormatDate = A_fecha[2] + "/" + A_fecha[1] + "/" + A_fecha[0];
-
-        var Resultado = sumaFecha(DiasVigen, FormatDate);
-        var A_Resultado = Resultado.split("/");
-        var FormatSalida = A_Resultado[2] + "-" + A_Resultado[1] + "-" + A_Resultado[0];
-
-        $("#TxtFVencimiento").val(FormatSalida);
-
-    });
-
-    $("#txt_DVigencia").change(function () {
-
-        var Strfecha = $("#TxtFinicial").val();
-        var DiasVigen = $("#txt_DVigencia").val();
-
-        var A_fecha = Strfecha.split("-");
-        var FormatDate = A_fecha[2] + "/" + A_fecha[1] + "/" + A_fecha[0];
-
-        var Resultado = sumaFecha(DiasVigen, FormatDate);
-        var A_Resultado = Resultado.split("/");
-        var FormatSalida = A_Resultado[2] + "-" + A_Resultado[1] + "-" + A_Resultado[0];
-
-        $("#TxtFVencimiento").val(FormatSalida);
-    });
-
-}
-
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                 REGION BOTONES                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //crear link en la BD
 function BtnCrear() {
 
@@ -200,99 +149,37 @@ function BtnIngresar() {
     transaccionAjax_MConsecutivo('MATRIX_CONSECUTIVOS');
 }
 
-//trae el consecutivo y actualiza
-function CaptureConsecutivo() {
-
-    var ConsecutivoExist = 0;
-
-    for (item in Matrix_Consecutivo) {
-        if (Matrix_Consecutivo[item].Nit_ID == Nit_ID_proccess) {
-            ConsecutivoOrigen = Matrix_Consecutivo[item].Consecutivo;
-            ConsecutivoNuevo = parseInt(Matrix_Consecutivo[item].Consecutivo) + 1;
-            ConsecutivoExist = 1;
-        }
-    }
-    return ConsecutivoExist;
-}
-
-//valida los campos obligatorios
-function ValidarCamposVigencia() {
-    var validar = 0;
-    var Campo_1 = $("#TxtFinicial").val();
-    var Campo_2 = $("#txt_DVigencia").val();
-
-    if (Campo_1 == "" || Campo_2 == "") {
-        validar = 1;
-        if (Campo_1 == "")
-            $("#Img9").css("display", "inline-table");
-        else
-            $("#Img9").css("display", "none");
-
-        if (Campo_2 == "")
-            $("#Img10").css("display", "inline-table");
-        else
-            $("#Img10").css("display", "none");
-    }
-    else {
-        $("#Img9").css("display", "none");
-        $("#Img10").css("display", "none");
-    }
-    return validar;
-}
-
-//llena los titulos del visor
-function CargaFrame() {
-    $("#Vis_EmpresaNit").val($("#Select_EmpresaNit option:selected").html());
-    $("#Vis_Documento").val($("#Select_Documento option:selected").html());
-
-    if ($("#Select_Persona option:selected").html() != "Seleccione...")
-        $("#Vis_Persona").val($("#Select_Persona option:selected").html());
-    else
-        $("#Vis_Persona").val("");
-
-    if ($("#Select_Secuencia option:selected").html() != "Seleccione...")
-        $("#Vis_Secuencia").val($("#Select_Secuencia option:selected").html());
-    else
-        $("#Vis_Secuencia").val("");
-
-    if ($("#Select_Contrato option:selected").html() != "Seleccione...")
-        $("#Vis_Contrato").val($("#Select_Contrato option:selected").html());
-    else
-        $("#Vis_Contrato").val("");
-
-    if ($("#Select_Activo option:selected").html() != "Seleccione...")
-        $("#Vis_Activo").val($("#Select_Activo option:selected").html());
-    else
-        $("#Vis_Activo").val("");
-
-    if ($("#Select_Factura option:selected").html() != "Seleccione...")
-        $("#Vis_Factura").val($("#Select_Factura option:selected").html());
-    else
-        $("#Vis_Factura").val("");
-
-    for (item in Matrix_Documento) {
-        if (Matrix_Documento[item].Documento_ID == $("#Select_Documento").val()) {
-            RequiereVerif = Matrix_Documento[item].RequiereVerificacion;
-            Formato_ID = Matrix_Documento[item].Formato_ID;
-            IndicativoFoto = Matrix_Documento[item].IndicativoFoto;
-            RutaDestino = Matrix_Documento[item].RutaDocumentoDestino;
-            CheckVigencias = Matrix_Documento[item].ChequeaVigencias;
-            DescripFormato = Matrix_Documento[item].DescripFormato;
-
-            if (Matrix_Documento[item].ChequeaVigencias == "N")
-                $("#Container_Vigencia").css("display", "none");
-            else {
-                $("#Container_Vigencia").css("display", "inline-table");
-                $("#txt_DVigencia").val(Matrix_Documento[item].DiasVigencia);
-
-            }
-        }
-    }
-
-}
 //elimina de la BD
 function BtnElimina() {
     transacionAjax_Crud_Doc_delete("elimina");
+}
+
+//evento del boton salir
+function x() {
+    $("#dialog").dialog("close");
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                      REGION VALIDACIONES DEL PROCESO                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//carga los combos dependientes
+function Change_Select_Nit() {
+    $("#Select_EmpresaNit").change(function () {
+        Nit_ID_proccess = $(this).val();
+        TransaccionesSegunNIT(Nit_ID_proccess);
+    });
+}
+
+//cargar los items relacionados a select_nit
+function TransaccionesSegunNIT(vp_index_ID) {
+    if (vp_index_ID != "-1") {
+        transaccionAjax_MClienteDep('MATRIX_CLIENTE_DEP', vp_index_ID);
+        transaccionAjax_MDocumento('MATRIX_DOCUMENTO', vp_index_ID);
+        transaccionAjax_MSecuencia('MATRIX_SECUENCIA', vp_index_ID);
+        transaccionAjax_MContrato('MATRIX_CONTRATO', vp_index_ID);
+        transaccionAjax_MActivo('MATRIX_ACTIVO', vp_index_ID);
+        transaccionAjax_MFactura('MATRIX_FACTURA', vp_index_ID);
+    }
 }
 
 //validamos campos para la creacion del link
@@ -364,11 +251,170 @@ function validarCamposCrear() {
     return validar;
 }
 
-//evento del boton salir
-function x() {
-    $("#dialog").dialog("close");
+//valida existencia del consecutivo
+function ValideConsecutivo(vp_ConsecutivoExist) {
+
+    switch (vp_ConsecutivoExist) {
+        case 1:
+            transacionAjax_CopyDocument("Copiar_Doc");
+            break;
+
+        case 0:
+            Mensaje_General("Exito", "El documento no se puede crear no hay consecutivos! ", "W");
+            break;
+    }
 }
 
+//trae el consecutivo y actualiza
+function CaptureConsecutivo() {
+
+    var vl_ConsecutivoExist = 0;
+
+
+    for (item in Matrix_Consecutivo) {
+        if (Matrix_Consecutivo[item].Nit_ID == Nit_ID_proccess) {
+            ConsecutivoOrigen = Matrix_Consecutivo[item].Consecutivo;
+            ConsecutivoNuevo = parseInt(Matrix_Consecutivo[item].Consecutivo) + 1;
+            vl_ConsecutivoExist = 1;
+        }
+    }
+    return vl_ConsecutivoExist;
+}
+
+//calcula los dias de vencimiento
+function CalFechaVencimiento() {
+    $("#TxtFinicial").change(function () {
+
+        var Strfecha = $("#TxtFinicial").val();
+        var DiasVigen = $("#txt_DVigencia").val();
+
+        var A_fecha = Strfecha.split("-");
+        var FormatDate = A_fecha[2] + "/" + A_fecha[1] + "/" + A_fecha[0];
+
+        var Resultado = sumaFecha(DiasVigen, FormatDate);
+        var A_Resultado = Resultado.split("/");
+        var FormatSalida = A_Resultado[2] + "-" + A_Resultado[1] + "-" + A_Resultado[0];
+
+        $("#TxtFVencimiento").val(FormatSalida);
+
+    });
+
+    $("#txt_DVigencia").change(function () {
+
+        var Strfecha = $("#TxtFinicial").val();
+        var DiasVigen = $("#txt_DVigencia").val();
+
+        var A_fecha = Strfecha.split("-");
+        var FormatDate = A_fecha[2] + "/" + A_fecha[1] + "/" + A_fecha[0];
+
+        var Resultado = sumaFecha(DiasVigen, FormatDate);
+        var A_Resultado = Resultado.split("/");
+        var FormatSalida = A_Resultado[2] + "-" + A_Resultado[1] + "-" + A_Resultado[0];
+
+        $("#TxtFVencimiento").val(FormatSalida);
+    });
+
+}
+
+//valida los campos obligatorios
+function ValidarCamposVigencia() {
+    var validar = 0;
+    var Campo_1 = $("#TxtFinicial").val();
+    var Campo_2 = $("#txt_DVigencia").val();
+
+    if (Campo_1 == "" || Campo_2 == "") {
+        validar = 1;
+        if (Campo_1 == "")
+            $("#Img9").css("display", "inline-table");
+        else
+            $("#Img9").css("display", "none");
+
+        if (Campo_2 == "")
+            $("#Img10").css("display", "inline-table");
+        else
+            $("#Img10").css("display", "none");
+    }
+    else {
+        $("#Img9").css("display", "none");
+        $("#Img10").css("display", "none");
+    }
+    return validar;
+}
+
+//llena los titulos del visor
+function CargaFrame() {
+    $("#Vis_EmpresaNit").val($("#Select_EmpresaNit option:selected").html());
+    $("#Vis_Documento").val($("#Select_Documento option:selected").html());
+
+    if ($("#Select_Persona option:selected").html() != "Seleccione...")
+        $("#Vis_Persona").val($("#Select_Persona option:selected").html());
+    else
+        $("#Vis_Persona").val("");
+
+    if ($("#Select_Secuencia option:selected").html() != "Seleccione...")
+        $("#Vis_Secuencia").val($("#Select_Secuencia option:selected").html());
+    else
+        $("#Vis_Secuencia").val("");
+
+    if ($("#Select_Contrato option:selected").html() != "Seleccione...")
+        $("#Vis_Contrato").val($("#Select_Contrato option:selected").html());
+    else
+        $("#Vis_Contrato").val("");
+
+    if ($("#Select_Activo option:selected").html() != "Seleccione...")
+        $("#Vis_Activo").val($("#Select_Activo option:selected").html());
+    else
+        $("#Vis_Activo").val("");
+
+    if ($("#Select_Factura option:selected").html() != "Seleccione...")
+        $("#Vis_Factura").val($("#Select_Factura option:selected").html());
+    else
+        $("#Vis_Factura").val("");
+
+    
+    for (item in Matrix_Documento) {
+        if (Matrix_Documento[item].Documento_ID == $("#Select_Documento").val()) {
+     
+            RequiereVerif = Matrix_Documento[item].RequiereVerificacion;
+            Formato_ID = Matrix_Documento[item].Formato;
+            IndicativoFoto = Matrix_Documento[item].Indicativo;
+            RutaDestino = Matrix_Documento[item].RutaDocumentoDestino;
+            CheckVigencias = Matrix_Documento[item].ChequeaVigencias;
+            DescripFormato = Matrix_Documento[item].DescripFormato;
+
+            if (Matrix_Documento[item].ChequeaVigencias == "N")
+                $("#Container_Vigencia").css("display", "none");
+            else {
+                $("#Container_Vigencia").css("display", "inline-table");
+                $("#txt_DVigencia").val(Matrix_Documento[item].DiasVigencia);
+
+            }
+        }
+    }
+
+}
+
+//traer el formado del documento
+function BuscarFormato() {
+
+    var ID_Doc = $("#Select_Documento").val();
+    var StrFormato = "";
+
+    for (item in Matrix_Documento) {
+        if (Matrix_Documento[item].Documento_ID == ID_Doc)
+            StrFormato = Matrix_Documento[item].DescripFormato;
+    }
+    for (item in Matrix_Documento) {
+        if (Matrix_Documento[item].Nit_ID == Nit_ID_proccess)
+            StrConsecutivo = Matrix_Documento[item].Consecutivo;
+    }
+
+    return StrFormato;
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                      PROCESOS DE VALIDACION DOCUMENTOS                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //muestra controles de guardado
 function HabilitarControl() {
     $("#D_Controls").css("display", "inline-table");
@@ -376,7 +422,16 @@ function HabilitarControl() {
 
 //limpiar campos
 function Clear() {
-    $("#Select_EmpresaNit").val("-1");
+
+    vl_Estado = $('#Select_EmpresaNit').is(':disabled');
+
+    if (vl_Estado = true) {
+        $("#Select_EmpresaNit").val(Nit_ID_proccess).trigger('chosen:updated');
+    }
+    else {
+        $("#Select_EmpresaNit").val("-1");
+    }
+
     $("#Select_Persona").val("-1");
     $("#Select_Secuencia").val("-1");
     $("#Select_Contrato").val("-1");
@@ -399,39 +454,3 @@ function Clear() {
 }
 
 
-//traer el formado del documento
-function BuscarFormato() {
-
-    var ID_Doc = $("#Select_Documento").val();
-    var StrFormato = "";
-
-    for (item in Matrix_Documento) {
-        if (Matrix_Documento[item].Documento_ID == ID_Doc)
-            StrFormato = Matrix_Documento[item].DescripFormato;
-    }
-    for (item in Matrix_Documento) {
-        if (Matrix_Documento[item].Nit_ID == Nit_ID_proccess)
-            StrConsecutivo = Matrix_Documento[item].Consecutivo;
-    }
-
-    return StrFormato;
-}
-
-//valida existencia del consecutivo
-function ValideConsecutivo(ConsecutivoExist) {
-
-    switch (ConsecutivoExist) {
-        case 1:
-            transacionAjax_CopyDocument("Copiar_Doc");
-            break;
-
-        case 0:
-            $("#dialog").dialog("option", "title", "Exito");
-            $("#Mensaje_alert").text("El documento no se puede crear no hay consecutivos! ");
-            $("#dialog").dialog("open");
-            $("#DE").css("display", "none");
-            $("#SE").css("display", "none");
-            $("#WE").css("display", "block");
-            break;
-    }
-}

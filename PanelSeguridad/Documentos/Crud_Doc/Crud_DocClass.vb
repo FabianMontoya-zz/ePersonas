@@ -5,13 +5,13 @@
     Private _Crud_Doc_ID As String
     Private _Descripcion As String
 
-    Private _Formato_ID As Integer
+    Private _Formato As Integer
     Private _Ruta_ID As Integer
     Private _Ruta_ID_Plantilla As Integer
     Private _DiasVigencia As Integer
     Private _TipoContenido As String
     Private _TipoVersion As String
-    Private _IndicativoFoto As String
+    Private _Indicativo As String
     Private _NombrePlantilla As String
     Private _ChequeaVigencias As String
     Private _RequiereVerificacion As String
@@ -65,12 +65,12 @@
         End Set
     End Property
 
-    Public Property Formato_ID() As Integer
+    Public Property Formato() As Integer
         Get
-            Return Me._Formato_ID
+            Return Me._Formato
         End Get
         Set(ByVal value As Integer)
-            Me._Formato_ID = value
+            Me._Formato = value
         End Set
     End Property
     Public Property Ruta_ID() As Integer
@@ -113,12 +113,12 @@
             Me._TipoVersion = value
         End Set
     End Property
-    Public Property IndicativoFoto() As String
+    Public Property Indicativo() As String
         Get
-            Return Me._IndicativoFoto
+            Return Me._Indicativo
         End Get
         Set(ByVal value As String)
-            Me._IndicativoFoto = value
+            Me._Indicativo = value
         End Set
     End Property
     Public Property NombrePlantilla() As String

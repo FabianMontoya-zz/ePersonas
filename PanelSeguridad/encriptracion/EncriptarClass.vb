@@ -33,15 +33,15 @@ Public Class EncriptarClass
     ''' <summary>
     ''' funcion para encriptacion del password MD5
     ''' </summary>
-    ''' <param name="SourceText"></param>
+    ''' <param name="vp_s_SourceText"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Encriptacion_MD5(ByVal SourceText As String) As String
+    Public Function Encriptacion_MD5(ByVal vp_s_SourceText As String) As String
 
         'Create an encoding object to ensure the encoding standard for the source text
         Dim Ue As New UnicodeEncoding()
         'Retrieve a byte array based on the source text
-        Dim ByteSourceText() As Byte = Ue.GetBytes(SourceText)
+        Dim ByteSourceText() As Byte = Ue.GetBytes(vp_s_SourceText)
         'Instantiate an MD5 Provider object
         Dim Md5 As New MD5CryptoServiceProvider()
         'Compute the hash value from the source

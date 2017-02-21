@@ -167,7 +167,6 @@ function transaccionAjax_MFactura(vp_State, vp_Nit) {
     });
 }
 
-
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transaccionAjax_RutasOperacion(State) {
@@ -197,8 +196,8 @@ function transaccionAjax_RutasOperacion(State) {
         var vl_OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
 
         if (vl_OnlyEmpresa == true) {
-            var vl_nit_emp = $("#Select_EmpresaNit").val();
-            TransaccionesSegunNIT(vl_nit_emp);
+            Nit_ID_proccess = $("#Select_EmpresaNit").val();
+            TransaccionesSegunNIT(Nit_ID_proccess);
         }
     });
 }
@@ -283,26 +282,30 @@ function transaccionAjax_MConsecutivo(State) {
                     Mensaje_General("Exito", "El documento no se puede crear no hay consecutivos! ", "W");
                 }
                 else {
-                    switch (CheckVigencias) {
 
-                        case "N":
-                            var ConsecutivoExist = CaptureConsecutivo();
-                            ValideConsecutivo(ConsecutivoExist);
-                            break;
 
-                        case "S":
-                            var validar = ValidarCamposVigencia();
-                            if (validar == 0) {
-                                var ConsecutivoExist = CaptureConsecutivo();
-                                ValideConsecutivo(ConsecutivoExist);
-                            }
-                            break;
-                    }
                 }
             }
         },
         error: function () {
 
+        },
+    }).done(function () {
+        var vl_ConsecutivoExist;
+        switch (CheckVigencias) {
+
+            case "N":
+                vl_ConsecutivoExist = CaptureConsecutivo();
+                ValideConsecutivo(vl_ConsecutivoExist);
+                break;
+
+            case "S":
+                var validar = ValidarCamposVigencia();
+                if (validar == 0) {
+                    vl_ConsecutivoExist = CaptureConsecutivo();
+                    ValideConsecutivo(vl_ConsecutivoExist);
+                }
+                break;
         }
     });
 }

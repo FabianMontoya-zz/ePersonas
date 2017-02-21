@@ -82,13 +82,13 @@ function transaccionAjax_MRDocVerif(vl_State, vp_Nit) {
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transaccionAjax_MConsecutivo(vl_State, vp_Nit) {
+function transaccionAjax_MConsecutivo(vp_State, vp_Nit) {
     $.ajax({
         url: "AutorizacionDocumentosAjax.aspx",
         type: "POST",
         //crear json
         data: {
-            "action": State,
+            "action": vp_State,
             "Nit": vp_Nit
         },
         //Transaccion Ajax en proceso
@@ -111,14 +111,14 @@ function transaccionAjax_MConsecutivo(vl_State, vp_Nit) {
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transaccionAjax_RutasOperacion(State) {
+function transaccionAjax_RutasOperacion(vp_State) {
     OpenControl();
     $.ajax({
         url: "AutorizacionDocumentosAjax.aspx",
         type: "POST",
         //crear json
         data: {
-            "action": State,
+            "action": vp_State,
             "tabla": 'RUTA'
         },
         //Transaccion Ajax en proceso
@@ -138,10 +138,10 @@ function transaccionAjax_RutasOperacion(State) {
     }).done(function () {
 
         var vl_OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
-
+    
         if (vl_OnlyEmpresa == true) {
-            var vl_nit_emp = $("#Select_EmpresaNit").val();
-            TransaccionesSegunNIT(vl_nit_emp);
+            Nit_ID_proccess = $("#Select_EmpresaNit").val();
+            TransaccionesSegunNIT(Nit_ID_proccess);
         }
     });
 }
@@ -173,7 +173,6 @@ function transaccionAjax_MVerificacion(State) {
     });
 }
 
-
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_EmpresaNit(State) {
@@ -202,7 +201,6 @@ function transacionAjax_EmpresaNit(State) {
         cache: false // No queremos usar la caché del navegador
     });
 }
-
 
 /*------------------------------ consulta ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
@@ -242,9 +240,6 @@ function transacionAjax_AutorizacionDocumentos(State, filtro, opcion) {
         }
     });
 }
-
-
-
 
 
 /*------------------------------ crear ---------------------------*/
