@@ -81,35 +81,21 @@
                     </tr>
                 </table>
 
+                <div id="foto_servicio">
+                    <table style="width: 10%;">
+                        <tr>
+                            <td id="Foto_Persona" style="width: 84%; height: 10%;">
+                                <span class="cssToolTip_Form_L">
+                                    <a href="javascript:BtnRelacion();">
+                                        <img alt="foto" title="" style="height: 120px; width: 120px; position: absolute; border-radius: 4px; border-color: #921919; border-width: 2px; border-style: outset;"
+                                            id="IF_Visor" src="../../images/settings.png" />
+                                    </a><span class="Spam_ARel"></span></span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
                 <div id="TablaDatos_D">
 
-                    <table id="TFile" style="width: 100%;">
-                        <tr>
-                            <td class="Label_Bold" style="width: 200px;">
-                                <input id="fileupload" type="file" name="files[]" />
-                                <a id="lnkAttch" style="cursor: pointer" onclick="AddFileInput(F1)" visible="false"></a>
-                            </td>
-                            <td style="width: 300px;">
-                                <input id="Btncharge_file" type="button" value="Adjuntar un archivo" name="Add_files"
-                                    style="width: 200px;" onclick="UpLoad_Document('TipoServicio', 'fileupload', '1'); " /><!--HabilitarControl();-->
-                            </td>
-                        </tr>
-                    </table>
-                    <table style="width: 10%; height: 50px;">
-                        <tr>
-                            <td>
-                                <iframe id="IF_Visor" src=""></iframe>
-                            </td>
-                        </tr>
-                    </table>
-                    <!--<table>
-                        <tr>
-                            <td id="Foto_Persona" style="width: 85%">
-                                <img alt="foto" title="" style="height: 120px; width: 120px; position: absolute; border-radius: 4px; border-color: #921919; border-width: 2px; border-style: outset;"
-                                    id="Imgfoto" src="../../images/settings.png" />
-                            </td>
-                        </tr>
-                    </table>-->
                     <table id="Tabla_1" style="width: 700px; text-align: left;">
                         <tr>
                             <td style="width: 150px;" class="Label_Bold">NIT Empresa
@@ -401,4 +387,21 @@
             </tr>
         </table>
     </div>
+    <div id="Dialog_Imagen" title="Imagen del servicio">
+        <table id="TFile" style="width: 100%;">
+            <tr>
+                <td class="Label_Bold" style="width: 200px;">
+                    <input id="fileupload" type="file" name="files[]" />
+                    <a id="lnkAttch" style="cursor: pointer" onclick="AddFileInput(F1)" visible="false"></a>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 300px;">
+                    <input id="Btncharge_file" type="button" value="Adjuntar un archivo" name="Add_files"
+                        style="width: 200px;" onclick="UpLoad_Document('TipoServicio', 'fileupload', '1'); x();" /><!--HabilitarControl();-->
+                </td>
+            </tr>
+        </table>
+    </div>
+
 </asp:Content>

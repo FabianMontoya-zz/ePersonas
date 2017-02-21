@@ -64,6 +64,12 @@ Public Class TipoServicioAjax
                 Case "Formato"
                     CargarFormato()
 
+                Case "Matrx_Documento"
+                    CargarMDocumento()
+
+                Case "MatrixDoc_Work"
+                    Carga_Matrix_DocWork()
+
             End Select
 
         End If
@@ -181,14 +187,14 @@ Public Class TipoServicioAjax
         objTipoServicio.Costo = Request.Form("Cos")
         objTipoServicio.valor = Request.Form("Val")
         objTipoServicio.Detalle = Request.Form("Det")
-        objTipoServicio.Calendario_ID = Request.Form("cal")
+        objTipoServicio.Calendario_ID = Request.Form("cal1")
         objTipoServicio.Capacidad = Request.Form("Cap")
         objTipoServicio.N_Pagos_Bloqueos = Request.Form("Blo")
         objTipoServicio.Tipo_Calculo_Sesion = Request.Form("Cal")
         objTipoServicio.Tiempo_Sesion = Request.Form("TimSes")
         objTipoServicio.Tiempo_Entre_Sesion = Request.Form("TiemEn")
         objTipoServicio.Tiempo_Maximo_Agenda = Request.Form("MaxA")
-        objTipoServicio.Imagen_asociada = "../../images/" & Request.Form("Ima")
+        objTipoServicio.Imagen_asociada = Request.Form("Ima")
 
         objTipoServicio.UsuarioActualizacion = Request.Form("user")
         objTipoServicio.FechaActualizacion = Date.Now
@@ -327,6 +333,43 @@ Public Class TipoServicioAjax
 
         ObjListDroplist = SQL.Charge_DropListFormato(vl_S_Tabla)
         Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga  Matrix contrato
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarMDocumento()
+
+        Dim SQL As New DocumentoSQLClass
+        Dim ObjList As New List(Of DocumentoClass)
+        Dim obj As New ClienteClass
+        obj.Nit_ID = Request.Form("Nit")
+        obj.TipoSQL = "Documento"
+
+        ObjList = SQL.Matrix_Documento_Filtro(obj)
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' cara la matriz de documento para trabajo
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub Carga_Matrix_DocWork()
+
+        Dim SQL As New DocumentoSQLClass
+        Dim ObjList As New List(Of DocumentoClass)
+        Dim Obj As New ClienteClass
+
+        Obj.Nit_ID = Request.Form("NIT")
+        Obj.TypeDocument_ID = Request.Form("TDoc")
+        Obj.Document_ID = Request.Form("Doc")
+        Obj.TipoSQL = "Cliente"
+
+        ObjList = SQL.SearchDocument_People(Obj)
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
 

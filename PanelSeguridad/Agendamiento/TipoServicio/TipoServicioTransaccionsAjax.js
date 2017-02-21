@@ -86,8 +86,8 @@ function transaccionAjax_RutasOperacion(State) {
         var vl_OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
 
         if (vl_OnlyEmpresa == true) {
-            var vl_nit_emp = $("#Select_EmpresaNit").val();
-            TransaccionesSegunNIT(vl_nit_emp);
+            Nit_ID_proccess = $("#Select_EmpresaNit").val();
+            TransaccionesSegunNIT(Nit_ID_proccess);
         }
     });
 }
@@ -219,6 +219,34 @@ function transacionAjax_TipoServicio(State, filtro, opcion) {
     });
 }
 
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_MDocumento(vp_State, vp_Nit) {
+    OpenControl();
+    $.ajax({
+        url: "TipoServicioAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": vp_State,
+            "Nit": vp_Nit
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_Documento = [];
+            }
+            else {
+                Matrix_Documento = JSON.parse(result);
+            }
+        },
+        error: function () {
+
+        },
+    }).done(function () {
+    });
+}
+
 /*------------------------------ crear ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax_TipoServicio_create(State) {
@@ -258,8 +286,8 @@ function transacionAjax_TipoServicio_create(State) {
             "TimSes": $("#Text_Tiempo_Sesion").val(),
             "TiemEn": $("#Text_Tiempo_Entre_Sesiones").val(),
             "MaxA": $("#Tiempo_Max_Agenda").val(),
-            "Ima": $("#Imgfoto").val(),
-            "cal": $("#Select_Calendario").val(),
+            "Ima": $("#IF_Visor").val(),
+            "cal1": $("#Select_Calendario").val(),
             "user": User.toUpperCase()
         },
         //Transaccion Ajax en proceso
@@ -268,7 +296,7 @@ function transacionAjax_TipoServicio_create(State) {
 
                 case "Error":
                     if (estado == "modificar") {
-                        Mensaje_General("Disculpenos :(", "No se realizo la modificación del TipoServicio!", "E");
+                        Mensaje_General("Disculpenos :(", "No se realizo la modificación del Tipo Servicio!", "E");
                     } else {
                         Mensaje_General("Disculpenos :(", "No se realizo el ingreso del TipoServicio!", "E");
                     }

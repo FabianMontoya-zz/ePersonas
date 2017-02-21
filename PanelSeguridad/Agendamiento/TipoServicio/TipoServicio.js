@@ -6,6 +6,7 @@ var ArraySeguridad = [];
 var ArrayEmpresaNit = [];
 var Matrix_Moneda = [];
 var Matrix_Calendarios = [];
+var Matrix_Documento = [];
 var ArrayFormato = [];
 
 var estado;
@@ -14,6 +15,8 @@ var index_ID;
 var editID;
 var RutaTemporal;
 var RutaRelativa;
+var Nit_ID_proccess;
+var DescripFormato;
 /*--------------- region de variables globales --------------------*/
 
 //Evento load JS
@@ -28,10 +31,10 @@ $(document).ready(function () {
     Ocultar_Tablas();
     /*================== FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN ==============*/
 
-    transaccionAjax_RutasOperacion('Rutas_Operacion');
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_EmpresaNit('Cliente');
     transacionAjax_Formato('Formato');
+    transaccionAjax_RutasOperacion('Rutas_Operacion');
 
     $(function () {
         $("#Text_Tiempo_Sesion").timepicker();
@@ -66,6 +69,11 @@ function Ventanas_Emergentes() {
         modal: true
     });
 
+    $("#Dialog_Imagen").dialog({
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true
+    });
 }
 
 //Función que oculta todas las IMG de los errores en pantalla
@@ -84,7 +92,8 @@ function Ocultar_Errores() {
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
     $("#WA").css("display", "none");
-    $("#Imgfoto").css("display", "none");
+    $("#IF_Visor").css("display", "none");
+    $("#foto_servicio").css("display", "none");
     /*Los demás se ocultan en la SASIF Master*/
 }
 
@@ -97,16 +106,17 @@ function Ocultar_Tablas() {
 //carga el combo de Cargo dependiente
 function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {
-        index_ID = $(this).val();
-        TransaccionesSegunNIT(index_ID);
+        Nit_ID_proccess = $(this).val();
+        TransaccionesSegunNIT(Nit_ID_proccess);
     });
     Change_Select_Moneda();
 }
 
-function TransaccionesSegunNIT(index_ID) {
-    if (index_ID != "-1") {
+function TransaccionesSegunNIT(vp_index_ID) {
+    if (vp_index_ID != "-1") {
         transacionAjax_MMoneda('Moneda');
         transacionAjax_Calendario('MatrixCalendarios');
+        transaccionAjax_MDocumento('Matrx_Documento', vp_index_ID);
     }
 }
 
@@ -156,9 +166,9 @@ function BtnCrear() {
 
     if (validate == 0) {
         if ($("#Btnguardar").val() == "Guardar") {
+            $("#Dialog_Imagen").dialog("open");
             transacionAjax_TipoServicio_create("crear");
-            StrTFormato = BuscarFormato();
-            ContruyeName_Temp("TEMP", StrConsecutivo, StrTFormato);
+            
         }
         else {
             transacionAjax_TipoServicio_create("modificar");
@@ -175,25 +185,31 @@ function BtnElimina() {
 //evento del boton salir
 function x() {
     $("#dialog").dialog("close");
+    $("#Dialog_Imagen").dialog("close");
     //MensajeHora = "";
 }
 
+//muestra dialog de 
+function BtnRelacion() {
+    $("#Dialog_Imagen").dialog("open");
+}
+
 //traer el formado del documento
-function BuscarFormato() {
-
-    var ID_Doc = $("#Select_Documento").val();
-    var StrFormato = "";
-
+function BuscarFormato(vp_Formato) {
+    
+    var vl_ID_Doc = vp_Formato[0];
+    //$("#Select_Documento").val();
+    var vl_StrFormato = "1";
+    
     for (item in Matrix_Documento) {
-        if (Matrix_Documento[item].Documento_ID == ID_Doc)
-            StrFormato = Matrix_Documento[item].DescripFormato;
+        if (Matrix_Documento[item].Documento_ID == vl_ID_Doc.Documento_ID)
+            vl_StrFormato = Matrix_Documento[item].DescripFormato;
     }
     for (item in Matrix_Documento) {
         if (Matrix_Documento[item].Nit_ID == Nit_ID_proccess)
-            StrConsecutivo = Matrix_Documento[item].Consecutivo;
+        StrConsecutivo = Matrix_Documento[item].Consecutivo;
     }
-
-    return StrFormato;
+    return vl_StrFormato;
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -211,7 +227,8 @@ function HabilitarPanel(opcion) {
             $("#Txt_ID").removeAttr("disabled");
             $("#Btnguardar").attr("value", "Guardar");
             $('.C_Chosen').trigger('chosen:updated');
-            $("#Imgfoto").css("display", "inline-table");
+            $("#IF_Visor").css("display", "inline-table");
+            $("#foto_servicio").css("display", "inline-table");
             ResetError();
             Clear();
             estado = opcion;
@@ -222,12 +239,16 @@ function HabilitarPanel(opcion) {
             if (OnlyEmpresa == true) {
                 TransaccionesSegunNIT($("#Select_EmpresaNit").val());
             }
+
+            StrTFormato = BuscarFormato(Matrix_Documento);
+            ContruyeName_Temp("TEMP", StrConsecutivo, StrTFormato);
             break;
 
         case "buscar":
             $("#TablaDatos_D").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TServicio").html("");
+            $("#foto_servicio").css("display", "none");
             estado = opcion;
             Clear();
             break;
@@ -236,16 +257,19 @@ function HabilitarPanel(opcion) {
             $("#TablaDatos_D").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TServicio").html("");
+             $("#IF_Visor").css("display", "inline-table");
+            $("#foto_servicio").css("display", "inline-table");
             estado = opcion;
             ResetError();
             Clear();
-            $("#Imgfoto").css("display", "inline-table");
+           
             break;
 
         case "eliminar":
             $("#TablaDatos_D").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TServicio").html("");
+            $("#foto_servicio").css("display", "none");
             estado = opcion;
             Clear();
             break;
