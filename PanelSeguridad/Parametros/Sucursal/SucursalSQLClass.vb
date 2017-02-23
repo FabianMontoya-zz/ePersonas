@@ -25,19 +25,19 @@ Public Class SucursalSQLClass
         Dim vl_sql_filtro As New StringBuilder
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
-            sql.Append("SELECT SUC_Nit_ID, SUC_Surcursal_ID, SUC_Descripcion, " & _
+            sql.Append("SELECT SUC_Nit_ID, SUC_Surcursal_ID, SUC_Descripcion, SUC_Direccion_ID, SUC_Calendario_ID, " & _
                        "SUC_Usuario_Creacion, SUC_FechaCreacion, SUC_Usuario_Actualizacion, SUC_FechaActualizacion, " & _
                        "ROW_NUMBER() OVER(ORDER BY SUC_Nit_ID, SUC_Surcursal_ID ASC) AS Index_Sucursal " & _
                        "FROM SUCURSAL ")
         Else
 
             If vp_S_Contenido = "ALL" Then
-                sql.Append("SELECT SUC_Nit_ID, SUC_Surcursal_ID, SUC_Descripcion, " & _
+                sql.Append("SELECT SUC_Nit_ID, SUC_Surcursal_ID, SUC_Descripcion, SUC_Direccion_ID, SUC_Calendario_ID, " & _
                        "SUC_Usuario_Creacion, SUC_FechaCreacion, SUC_Usuario_Actualizacion, SUC_FechaActualizacion, " & _
                        "ROW_NUMBER() OVER(ORDER BY SUC_Nit_ID, SUC_Surcursal_ID ASC) AS Index_Sucursal " & _
                        "FROM SUCURSAL ")
             Else
-                sql.Append("SELECT SUC_Nit_ID, SUC_Surcursal_ID, SUC_Descripcion, " & _
+                sql.Append("SELECT SUC_Nit_ID, SUC_Surcursal_ID, SUC_Descripcion, SUC_Direccion_ID, SUC_Calendario_ID, " & _
                        "SUC_Usuario_Creacion, SUC_FechaCreacion, SUC_Usuario_Actualizacion, SUC_FechaActualizacion, " & _
                        "ROW_NUMBER() OVER(ORDER BY SUC_Nit_ID, SUC_Surcursal_ID ASC) AS Index_Sucursal " & _
                        "FROM SUCURSAL " & _
@@ -104,6 +104,8 @@ Public Class SucursalSQLClass
         Dim StrQuery As String = ""
         sql.AppendLine("UPDATE SUCURSAL SET " & _
                        " SUC_Descripcion ='" & vp_Obj.Descripcion & "', " & _
+                       " SUC_Direccion_ID ='" & vp_Obj.Direcccion_ID & "', " & _
+                       " SUC_Calendario_ID ='" & vp_Obj.Calendario_ID & "', " & _
                        " SUC_Usuario_Actualizacion ='" & vp_Obj.UsuarioActualizacion & "', " & _
                        " SUC_FechaActualizacion ='" & vp_Obj.FechaActualizacion & "' " & _
                        " WHERE SUC_Nit_ID = '" & vp_Obj.Nit_ID & "' AND SUC_Surcursal_ID = '" & vp_Obj.Sucursal_ID & "'")
@@ -135,6 +137,8 @@ Public Class SucursalSQLClass
                        "SUC_Nit_ID," & _
                        "SUC_Surcursal_ID," & _
                        "SUC_Descripcion," & _
+                       "SUC_Direccion_ID, " & _
+                       "SUC_Calendario_ID, " & _
                        "SUC_Usuario_Creacion," & _
                        "SUC_FechaCreacion," & _
                        "SUC_Usuario_Actualizacion," & _
@@ -144,6 +148,8 @@ Public Class SucursalSQLClass
         sql.AppendLine("'" & vp_Obj.Nit_ID & "',")
         sql.AppendLine("'" & vp_Obj.Sucursal_ID & "',")
         sql.AppendLine("'" & vp_Obj.Descripcion & "', ")
+        sql.AppendLine("'" & vp_Obj.Direcccion_ID & "', ")
+        sql.AppendLine("'" & vp_Obj.Calendario_ID & "', ")
         sql.AppendLine("'" & vp_Obj.UsuarioCreacion & "', ")
         sql.AppendLine("'" & vp_Obj.FechaCreacion & "', ")
         sql.AppendLine("'" & vp_Obj.UsuarioActualizacion & "', ")
@@ -197,11 +203,13 @@ Public Class SucursalSQLClass
                     obj.Nit_ID = ReadConsulta.GetValue(0)
                     obj.Sucursal_ID = ReadConsulta.GetValue(1)
                     obj.Descripcion = ReadConsulta.GetValue(2)
-                    obj.UsuarioCreacion = ReadConsulta.GetValue(3)
-                    obj.FechaCreacion = ReadConsulta.GetValue(4)
-                    obj.UsuarioActualizacion = ReadConsulta.GetValue(5)
-                    obj.FechaActualizacion = ReadConsulta.GetValue(6)
-                    obj.Index = ReadConsulta.GetValue(7)
+                    obj.Direcccion_ID = ReadConsulta.GetValue(3)
+                    obj.Calendario_ID = ReadConsulta.GetValue(4)
+                    obj.UsuarioCreacion = ReadConsulta.GetValue(5)
+                    obj.FechaCreacion = ReadConsulta.GetValue(6)
+                    obj.UsuarioActualizacion = ReadConsulta.GetValue(7)
+                    obj.FechaActualizacion = ReadConsulta.GetValue(8)
+                    obj.Index = ReadConsulta.GetValue(9)
                     'agregamos a la lista
                     ObjList.Add(obj)
 

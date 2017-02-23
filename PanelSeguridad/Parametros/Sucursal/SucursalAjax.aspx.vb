@@ -31,6 +31,9 @@ Public Class SucursalAjax
 
                 Case "MatrixCalendarios"
                     CargarCalendarios()
+
+                Case "Matrix_Direcciones"
+                    Carga_MDirecciones()
             End Select
 
         End If
@@ -81,6 +84,8 @@ Public Class SucursalAjax
         If vl_s_IDxiste = 0 Then
 
             obj.Descripcion = Request.Form("descripcion")
+            obj.Direcccion_ID = Request.Form("Derec")
+            obj.Calendario_ID = Request.Form("Cale")
             obj.UsuarioCreacion = Request.Form("user")
             obj.FechaCreacion = Date.Now
             obj.UsuarioActualizacion = Request.Form("user")
@@ -133,7 +138,9 @@ Public Class SucursalAjax
 
         obj_Sucursal.Nit_ID = Request.Form("NIT")
         obj_sucursal.Sucursal_ID = Request.Form("ID")
-        obj_Sucursal.Descripcion = Request.Form("descripcion")
+        obj_sucursal.Descripcion = Request.Form("descripcion")
+        obj_sucursal.Direcccion_ID = Request.Form("Derec")
+        obj_sucursal.Calendario_ID = Request.Form("Cale")
         obj_Sucursal.UsuarioActualizacion = Request.Form("user")
         obj_Sucursal.FechaActualizacion = Date.Now
 
@@ -196,6 +203,24 @@ Public Class SucursalAjax
 
         ObjListDroplist = SQL.Read_Matrix_Calendarios(obj)
         Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga La matrix Direcciones
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub Carga_MDirecciones()
+
+        Dim SQL As New ClienteSQLClass
+        Dim obj As New ClienteClass
+        obj.Nit_ID = Request.Form("Nit")
+        obj.TipoSQL = "Sucursal"
+
+        Dim ObjList_Matrix As New List(Of ClienteClass)
+        ObjList_Matrix = SQL.Matrix_Personas_Direcciones_Sucursal(obj)
+
+        Response.Write(JsonConvert.SerializeObject(ObjList_Matrix.ToArray()))
 
     End Sub
 

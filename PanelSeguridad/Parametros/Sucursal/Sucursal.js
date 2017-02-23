@@ -1,10 +1,13 @@
 ﻿/*--------------- region de variables globales --------------------*/
+var Matrix_Direcciones = [];
 var ArraySucursales = [];
 var ArrayEmpresaNit = [];
 var ArrayCombo = [];
 var estado;
 var editID;
 var editNIT;
+var Nit_ID_proccess;
+
 /*--------------- region de variables globales --------------------*/
 
 //Evento load JS
@@ -22,6 +25,7 @@ $(document).ready(function () {
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_EmpresaNit('Cliente');
     transacionAjax_Calendario('MatrixCalendarios');
+    transaccionAjax_MDirecciones("Matrix_Direcciones");
 
     Change_Select_Nit();
 
@@ -33,6 +37,7 @@ function Ocultar_Errores() {
     $("#ESelect").css("display", "none");
     $("#DE").css("display", "none");
     $("#DS").css("display", "none");
+    $("#Img16").css("display", "none");
     $("#ImgCal").css("display", "none");
     /*Se ocultan en la SASIF Master*/
 }
@@ -70,13 +75,21 @@ function HabilitarPanel(opcion) {
         case "crear":
             $("#TablaDatos").css("display", "inline-table");
             $("#TablaConsulta").css("display", "none");
+            $("#Select_EmpresaNit").removeAttr("disabled");
             $("#Txt_ID").removeAttr("disabled");
             $("#Btnguardar").attr("value", "Guardar");
+            $("#Select_Direccion").val("-1").trigger("chosen:updated");
+            $('.C_Chosen').trigger('chosen:updated');
             ResetError();
             Clear();
             estado = opcion;
-            VerificarNIT("Select_EmpresaNit");
             break;
+
+            var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+            if (OnlyEmpresa == true) {
+                TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+            }
 
         case "buscar":
             $("#TablaDatos").css("display", "none");
@@ -113,8 +126,6 @@ function BtnConsulta() {
     var ValidateSelect = ValidarDroplist();
     var opcion;
 
-    OpenControl(); //Abrimos el load de espera con el logo
-
     if (ValidateSelect == 1) {
         filtro = "N";
         opcion = "ALL";
@@ -146,7 +157,6 @@ function BtnCrear() {
 
 //elimina de la BD
 function BtnElimina() {
-    OpenControl(); //Abrimos el load de espera con el logo
     $("#dialog_eliminar").dialog("close");
     transacionAjax_Sucursal_delete("elimina");
 }
@@ -158,8 +168,9 @@ function validarCamposCrear() {
     var valID = $("#Txt_ID").val();
     var descrip = $("#TxtDescription").val();
     var validar = 0;
+    var Campo_dir = $("#Select_Direccion").val(); //Img16
 
-    if (NIT == "-1" || NIT == null || descrip == "" || valID == "") {
+    if (NIT == "-1" || NIT == null || descrip == "" || valID == "" || Campo_dir == "-1") {
         validar = 1;
         /* -- Muestra de errores según dato faltante -- */
         if (NIT == "-1" || NIT == null) {
@@ -181,6 +192,12 @@ function validarCamposCrear() {
         else {
             $("#Img1").css("display", "none");
         }
+        //--dir--
+        if (Campo_dir == "-1" || Campo_dir == "" || Campo_dir == null) {
+            $("#Img16").css("display", "inline-table");
+        } else {
+            $("#Img16").css("display", "none");
+        }
 
 
     }
@@ -188,6 +205,17 @@ function validarCamposCrear() {
         ResetError();
     }
     return validar;
+}
+
+function Change_Select_Direccion() {
+    $("#Select_Direccion").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_Direccion").val() == "-1") {
+            $("#Img16").css("display", "inline-table");
+        } else {
+            $("#Img16").css("display", "none");
+        }
+    });
 }
 
 //validamos si han escogido una columna
@@ -212,24 +240,24 @@ function Table_Sucursal() {
     switch (estado) {
 
         case "buscar":
-            html_TSucursal = "<table id='TSucursal' border='1'  cellpadding='1' cellspacing='1' style='width: 100%'><thead><tr><th>NIT Empresa</th><th>Código</th><th>Descripción</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
+            html_TSucursal = "<table id='TSucursal' border='1'  cellpadding='1' cellspacing='1' style='width: 100%'><thead><tr><th>NIT Empresa</th><th>Código</th><th>Descripción</th><th>Dirección Asociada</th><th>Calendario</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
             for (itemArray in ArraySucursales) {
-                html_TSucursal += "<tr id= 'TSucursal_" + ArraySucursales[itemArray].Index + "'><td>" + ArraySucursales[itemArray].Nit_ID + "</td><td>" + ArraySucursales[itemArray].Sucursal_ID + "</td><td>" + ArraySucursales[itemArray].Descripcion + "</td><td style='white-space: nowrap;'> " + ArraySucursales[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArraySucursales[itemArray].FechaCreacion + " </td><td style='white-space: nowrap;'> " + ArraySucursales[itemArray].UsuarioActualizacion + " </td><td  style='white-space: nowrap;'> " + ArraySucursales[itemArray].FechaActualizacion + " </td></tr>";
+                html_TSucursal += "<tr id= 'TSucursal_" + ArraySucursales[itemArray].Index + "'><td>" + ArraySucursales[itemArray].Nit_ID + "</td><td>" + ArraySucursales[itemArray].Sucursal_ID + "</td><td>" + ArraySucursales[itemArray].Descripcion + "</td><td>" + ArraySucursales[itemArray].Direcccion_ID + "</td><td>" + ArraySucursales[itemArray].Calendario_ID + "</td><td style='white-space: nowrap;'> " + ArraySucursales[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArraySucursales[itemArray].FechaCreacion + " </td><td style='white-space: nowrap;'> " + ArraySucursales[itemArray].UsuarioActualizacion + " </td><td  style='white-space: nowrap;'> " + ArraySucursales[itemArray].FechaActualizacion + " </td></tr>";
             }
             break;
 
         case "modificar":
-            html_TSucursal = "<table id='TSucursal' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>NIT Empresa</th><th>Código</th><th>Descripción</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
+            html_TSucursal = "<table id='TSucursal' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>NIT Empresa</th><th>Código</th><th>Descripción</th><th>Dirección Asociada</th><th>Calendario</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
             for (itemArray in ArraySucursales) {
-                html_TSucursal += "<tr id= 'TSucursal_" + ArraySucursales[itemArray].Index + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + ArraySucursales[itemArray].Index + "')\"></img><span>Editar Sucursal</span></span></td><td>" + ArraySucursales[itemArray].Nit_ID + "</td><td>" + ArraySucursales[itemArray].Sucursal_ID + "</td><td style='white-space: nowrap;'>" + ArraySucursales[itemArray].Descripcion + "</td><td style='white-space: nowrap;'> " + ArraySucursales[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArraySucursales[itemArray].FechaCreacion + " </td><td style='white-space: nowrap;'> " + ArraySucursales[itemArray].UsuarioActualizacion + " </td><td  style='white-space: nowrap;'> " + ArraySucursales[itemArray].FechaActualizacion + " </td></tr>";
+                html_TSucursal += "<tr id= 'TSucursal_" + ArraySucursales[itemArray].Index + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + ArraySucursales[itemArray].Index + "')\"></img><span>Editar Sucursal</span></span></td><td>" + ArraySucursales[itemArray].Nit_ID + "</td><td>" + ArraySucursales[itemArray].Sucursal_ID + "</td><td style='white-space: nowrap;'>" + ArraySucursales[itemArray].Descripcion + "</td><td>" + ArraySucursales[itemArray].Direcccion_ID + "</td><td>" + ArraySucursales[itemArray].Calendario_ID + "</td><td style='white-space: nowrap;'> " + ArraySucursales[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArraySucursales[itemArray].FechaCreacion + " </td><td style='white-space: nowrap;'> " + ArraySucursales[itemArray].UsuarioActualizacion + " </td><td  style='white-space: nowrap;'> " + ArraySucursales[itemArray].FechaActualizacion + " </td></tr>";
             }
             break;
 
         case "eliminar":
-            html_TSucursal = "<table id='TSucursal' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>NIT Empresa</th><th>Código</th><th>Descripción</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
+            html_TSucursal = "<table id='TSucursal' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>NIT Empresa</th><th>Código</th><th>Descripción</th><th>Dirección Asociada</th><th>Calendario</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
             for (itemArray in ArraySucursales) {
                 if (ArraySucursales[itemArray].Estado != 2) {
-                    html_TSucursal += "<tr id= 'TSucursal_" + ArraySucursales[itemArray].Index + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArraySucursales[itemArray].Index + "')\"></img><span>Eliminar Sucursal</span></span></td><td>" + ArraySucursales[itemArray].Nit_ID + "</td><td>" + ArraySucursales[itemArray].Sucursal_ID + "</td><td style='white-space: nowrap;'>" + ArraySucursales[itemArray].Descripcion + "</td><td style='white-space: nowrap;'> " + ArraySucursales[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArraySucursales[itemArray].FechaCreacion + " </td><td style='white-space: nowrap;'> " + ArraySucursales[itemArray].UsuarioActualizacion + " </td><td  style='white-space: nowrap;'> " + ArraySucursales[itemArray].FechaActualizacion + " </td></tr>";
+                    html_TSucursal += "<tr id= 'TSucursal_" + ArraySucursales[itemArray].Index + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArraySucursales[itemArray].Index + "')\"></img><span>Eliminar Sucursal</span></span></td><td>" + ArraySucursales[itemArray].Nit_ID + "</td><td>" + ArraySucursales[itemArray].Sucursal_ID + "</td><td style='white-space: nowrap;'>" + ArraySucursales[itemArray].Descripcion + "</td><td>" + ArraySucursales[itemArray].Direcccion_ID + "</td><td>" + ArraySucursales[itemArray].Calendario_ID + "</td><td style='white-space: nowrap;'> " + ArraySucursales[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArraySucursales[itemArray].FechaCreacion + " </td><td style='white-space: nowrap;'> " + ArraySucursales[itemArray].UsuarioActualizacion + " </td><td  style='white-space: nowrap;'> " + ArraySucursales[itemArray].FechaActualizacion + " </td></tr>";
                 }
             }
             break;
@@ -268,11 +296,18 @@ function Editar(index_Sucursal) {
         if (index_Sucursal == ArraySucursales[itemArray].Index) {
             $("#Select_EmpresaNit").val(ArraySucursales[itemArray].Nit_ID).trigger("chosen:updated");
             editNIT = ArraySucursales[itemArray].Nit_ID;
+            TransaccionesSegunNIT(editNIT);
             $("#Select_EmpresaNit").prop('disabled', true).trigger("chosen:updated");
+
             $("#Txt_ID").val(ArraySucursales[itemArray].Sucursal_ID);
             $("#Txt_ID").attr("disabled", "disabled");
             editID = ArraySucursales[itemArray].Sucursal_ID;
+
             $("#TxtDescription").val(ArraySucursales[itemArray].Descripcion);
+            $("#Select_Calendario").val(ArraySucursales[itemArray].Calendario_ID).trigger("chosen:updated");
+
+             setTimeout("$('#Select_Direccion').val('" + ArraySucursales[itemArray].Direcccion_ID + "').trigger('chosen:updated');", 300);
+
             $("#TxtSigla").val(ArraySucursales[itemArray].Sigla);
             $("#Btnguardar").attr("value", "Actualizar");
         }
@@ -295,6 +330,14 @@ function Clear() {
     $("#TxtRead").val("");
     $("#DDLColumns").val("-1").trigger("chosen:updated");
     VerificarNIT("Select_EmpresaNit");
+    $("#Select_Direccion").val("-1").trigger("chosen:updated");
+    
+    var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+    if (OnlyEmpresa == true) {
+        TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+    }
+
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -303,11 +346,15 @@ function Clear() {
 
 function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {
-        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
-        if ($("#Select_EmpresaNit").val() == "-1") {
-            $("#ImgNIT").css("display", "inline-table");
-        } else {
-            $("#ImgNIT").css("display", "none");
-        }
+        Nit_ID_proccess = $(this).val();
+        TransaccionesSegunNIT(Nit_ID_proccess);
     });
 }
+
+function TransaccionesSegunNIT(vp_index_ID) {
+    if (vp_index_ID != "-1") {
+        transaccionAjax_MDirecciones("Matrix_Direcciones", vp_index_ID);
+      
+    }
+}
+

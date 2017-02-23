@@ -33,7 +33,6 @@ $(document).ready(function () {
     transaccionAjax_MSucursal('MatrixSucursal');
     transacionAjax_MMoneda('Moneda');
     
-
     Change_Select_Nit();
 
 });

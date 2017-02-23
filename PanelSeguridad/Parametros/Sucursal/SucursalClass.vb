@@ -11,6 +11,10 @@
     Private _FechaActualizacion As String
 
     Private _DescripEmpresa As String
+    Private _Direcccion_ID As String
+    Private _Calendario_ID As Integer
+    Private _TypeDocument_ID As Integer
+    Private _Document_ID As Long
 #End Region
 
 #Region "proiedades"
@@ -87,6 +91,40 @@
         End Get
         Set(ByVal value As String)
             Me._DescripEmpresa = value
+        End Set
+    End Property
+
+    Public Property Direcccion_ID() As String
+        Get
+            Return Me._Direcccion_ID
+        End Get
+        Set(ByVal value As String)
+            Me._Direcccion_ID = value
+        End Set
+    End Property
+
+    Public Property Calendario_ID() As Integer
+        Get
+            Return Me._Calendario_ID
+        End Get
+        Set(ByVal value As Integer)
+            Me._Calendario_ID = value
+        End Set
+    End Property
+    Public Property TypeDocument_ID() As Integer
+        Get
+            Return Me._TypeDocument_ID
+        End Get
+        Set(ByVal value As Integer)
+            Me._TypeDocument_ID = value
+        End Set
+    End Property
+    Public Property Document_ID() As Long
+        Get
+            Return Me._Document_ID
+        End Get
+        Set(ByVal value As Long)
+            Me._Document_ID = value
         End Set
     End Property
 #End Region

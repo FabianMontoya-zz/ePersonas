@@ -81,7 +81,7 @@
 
                     <table id="T_NIT" style="width: 80%; margin-left: 8%;">
                         <tr>
-                            <td id="TD_ID" style="width: 10.5%;" class="Label_Bold">NIT Empresa</td>
+                            <td id="TD_ID" style="width: 17.3%;" class="Label_Bold">NIT Empresa</td>
                             <td id="TD1" style="width: 40%;">
                                 <select style="width: 100%;" id="Select_EmpresaNit" class="C_Chosen">
                                 </select>
@@ -96,7 +96,7 @@
                     </table>
                     <table id="T_Identificacion_ROL" style="width: 80%; margin-left: 8%;">
                         <tr>
-                            <td class="Label_Bold" style="width: 1.4%;">Sucursal
+                            <td class="Label_Bold" style="width: 4.1%;">Sucursal
                             </td>
                             <td id="TD_TID" style="width: 10%;">
                                 <span class="cssToolTip_Form">
@@ -115,7 +115,7 @@
 
                     <table id="T_Descripcion" style="width: 80%; margin-left: 8%;">
                         <tr>
-                            <td class="Label_Bold" style="width: 10.5%;">Descripción
+                            <td class="Label_Bold" style="width: 17.5%;">Descripción
                             </td>
                             <td style="width: 39%;">
                                 <span class="cssToolTip_Form">
@@ -128,17 +128,28 @@
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
-                            <td></td>
-                            <td></td>
                         </tr>
+                        
+                    </table>
+                    <table id="T_Direccion" style="width: 90%; margin-left: 8%;">
                         <tr>
-                            <td colspan="4" align="center">&nbsp;
+                            <td style="width: 10.5%;" class="Label_Bold">Dirección Asociada
+                            </td>
+                            <td style="width: 50%;">
+                                <select id="Select_Direccion" class="C_Chosen">
+                                </select>
+                            </td>
+                            <td style="padding-bottom: 15px; width: 7%;">
+                                <span class="cssToolTip_L">
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img16"
+                                        src="../../images/error.png" />
+                                    <span class="SpamEG"></span></span>
                             </td>
                         </tr>
                     </table>
                     <table id="Table_Calendario" style="width: 80%; margin-left: 8%;">
                         <tr>
-                            <td style="width: 15%;" class="Label_Bold">Calendario
+                            <td style="width: 17.4%;" class="Label_Bold">Calendario
                             </td>
                             <td>
                                 <select id="Select_Calendario" class="C_Chosen">

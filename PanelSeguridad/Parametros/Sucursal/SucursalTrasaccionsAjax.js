@@ -22,6 +22,16 @@ function transacionAjax_CargaBusqueda(vp_State) {
         },
         error: function () {
 
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
+    }).done(function () {
+        var vl_OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+        if (vl_OnlyEmpresa == true) {
+            Nit_ID_proccess = $("#Select_EmpresaNit").val();
+            console.log("Salio : " + Nit_ID_proccess);
+            TransaccionesSegunNIT(Nit_ID_proccess);
         }
     });
 }
@@ -95,6 +105,37 @@ function transacionAjax_Sucursal(vp_State, filtro, opcion) {
     });
 }
 
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_MDirecciones(State, vp_Nit) {
+    $.ajax({
+        url: "SucursalAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'Direcciones',
+            "NIT": vp_Nit
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_Direcciones = [];
+            }
+            else {
+                Matrix_Direcciones = JSON.parse(result);
+             }
+        },
+        error: function () {
+
+        },
+        async: false,
+        cache: false
+    }).done(function () {
+        Charge_Combo_Persona(Matrix_Direcciones, "Select_Direccion", "", "");
+    });
+}
+
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_Calendario(State) {
     $.ajax({
@@ -152,6 +193,8 @@ function transacionAjax_Sucursal_create(vp_State) {
             "ID": vl_ID,
             "descripcion": $("#TxtDescription").val(),
             "sigla": $("#TxtSigla").val(),
+            "Derec": $("#Select_Direccion").val(),
+            "Cale": $("#Select_Calendario").val(),
             "user": User.toUpperCase()
         },
         //mostrar resultados de la creacion del Sucursal
