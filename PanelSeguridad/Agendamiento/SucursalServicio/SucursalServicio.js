@@ -11,6 +11,7 @@ var estado;
 var editNit_ID;
 var index_ID;
 var editID;
+var Nit_ID_proccess;
 
 /*--------------- region de variables globales --------------------*/
 
@@ -29,6 +30,9 @@ $(document).ready(function () {
 
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_EmpresaNit('Cliente');
+    transaccionAjax_MSucursal('MatrixSucursal');
+    transacionAjax_MMoneda('Moneda');
+    
 
     Change_Select_Nit();
 
@@ -83,19 +87,29 @@ function Ocultar_Tablas() {
 //carga el combo de Cargo dependiente
 function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {
-        index_ID = $(this).val();
-        
-        TransaccionesSegunNIT(index_ID);
+        Nit_ID_proccess = $(this).val();
+        TransaccionesSegunNIT(Nit_ID_proccess);
     });
     Change_Select_Moneda();
 }
 
-function TransaccionesSegunNIT(index_ID) {
-    if (index_ID != "-1") {
-        transaccionAjax_MSucursal('MatrixSucursal');
-        transacionAjax_MMoneda('Moneda');
+function TransaccionesSegunNIT(vp_index_ID) {
+    if (vp_index_ID != "-1") {
         transacionAjax_Calendario('MatrixCalendarios');
+        Charge_Combos_Depend_Nit(Matrix_Sucursal, "Select_Sucursal", vp_index_ID, "");
     }
+}
+
+function Change_Select_Sucursal() {
+    $("#Select_Sucursal").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_Sucursal").val() == "-1") {
+            $("#Img3").css("display", "inline-table");
+        } else {
+            $("#Img3").css("display", "none");
+            $("#Select_Sucursal").prop('disabled', true);
+        }
+    });
 }
 
 //coloca la sigla de la moneda
@@ -219,7 +233,7 @@ function validarCamposCrear() {
 
     var Campo_1 = $("#Select_EmpresaNit").val();
     var Campo_2 = $("#Txt_ID").val();
-    var Campo_3 = $("#TxtSucursal").val();
+    var Campo_3 = $("#Select_Sucursal").val();
     var Campo_4 = $("#Select_SucursalServicio ").val();
 
     var validar = 0;
@@ -262,28 +276,29 @@ function Table_Servicio() {
     switch (estado) {
 
         case "buscar":
-            html_Servicio = "<table id='TSucursalSer' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Empresa</th><th></th><th>Servicio</th><th>Sucursal</th><th>Moneda</th><th>Costo</th><th>Capacidad</th><th>Calendario</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
+            html_Servicio = "<table id='TSucursalSer' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Empresa</th><th>Servicio</th><th>Sucursal</th><th>Moneda</th><th>Costo</th><th>Capacidad</th><th>Calendario</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
             for (itemArray in ArraySucursalServicio) {
                 if (ArraySucursalServicio[itemArray].Codigo_ID != 0) {
-                    html_Servicio += "<tr id= 'TSucursalSer_" + ArraySucursalServicio[itemArray].Codigo_ID + "'><td>" + ArraySucursalServicio[itemArray].Nit_ID + " - " + ArraySucursalServicio[itemArray].DescripEmpresa + "</td><td>" + ArraySucursalServicio[itemArray].Codigo_ID + "</td><td>" + ArraySucursalServicio[itemArray]._Surcursal_ID + "</td><td>" + ArraySucursalServicio[itemArray].Cod_Moneda + "</td><td>" + ArraySucursalServicio[itemArray].Costo + "</td><td>" + ArraySucursalServicio[itemArray].Capacidad + "</td><td>" + ArraySucursalServicio[itemArray].Calendario_ID + "</td><td>" + ArraySucursalServicio[itemArray].UsuarioCreacion + "</td><td>" + ArraySucursalServicio[itemArray].FechaCreacion + "</td><td>" + ArraySucursalServicio[itemArray].UsuarioActualizacion + "</td><td>" + ArraySucursalServicio[itemArray].FechaActualizacion + "</td></tr>";
+                    html_Servicio += "<tr id= 'TSucursalSer_" + ArraySucursalServicio[itemArray].Codigo_ID + "'><td>" + ArraySucursalServicio[itemArray].Nit_ID + " - " + ArraySucursalServicio[itemArray].DescripEmpresa + "</td><td>" + ArraySucursalServicio[itemArray].Codigo_ID + "</td><td>" + ArraySucursalServicio[itemArray].Surcursal_ID + "</td><td>" + ArraySucursalServicio[itemArray].Cod_Moneda + "</td><td>" + ArraySucursalServicio[itemArray].Costo + "</td><td>" + ArraySucursalServicio[itemArray].Capacidad + "</td><td>" + ArraySucursalServicio[itemArray].Calendario_ID + "</td><td>" + ArraySucursalServicio[itemArray].UsuarioCreacion + "</td><td>" + ArraySucursalServicio[itemArray].FechaCreacion + "</td><td>" + ArraySucursalServicio[itemArray].UsuarioActualizacion + "</td><td>" + ArraySucursalServicio[itemArray].FechaActualizacion + "</td></tr>";
                 }
             }
             break;
 
         case "modificar":
-            html_Servicio = "<table id='TSucursalSer' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Empresa</th><th></th><th>Servicio</th><th>Sucursal</th><th>Moneda</th><th>Costo</th><th>Capacidad</th><th>Calendario</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
+            html_Servicio = "<table id='TSucursalSer' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Empresa</th><th>Servicio</th><th>Sucursal</th><th>Moneda</th><th>Costo</th><th>Capacidad</th><th>Calendario</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
             for (itemArray in ArraySucursalServicio) {
                 if (ArraySucursalServicio[itemArray].Codigo_ID != 0) {
-                    html_Servicio += "<tr id= 'TSucursalSer_" + ArraySucursalServicio[itemArray].Codigo_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + ArraySucursalServicio[itemArray].Nit_ID + "','" + ArraySucursalServicio[itemArray].Codigo_ID + "')\"></img><span>Editar Tipo Sevicio</span></span></td><td>" + ArraySucursalServicio[itemArray].Nit_ID + " - " + ArraySucursalServicio[itemArray].DescripEmpresa + "</td><td>" + ArraySucursalServicio[itemArray].Codigo_ID + "</td><td>" + ArraySucursalServicio[itemArray]._Surcursal_ID + "</td><td>" + ArraySucursalServicio[itemArray].Cod_Moneda + "</td><td>" + ArraySucursalServicio[itemArray].Costo + "</td><td>" + ArraySucursalServicio[itemArray].Capacidad + "</td><td>" + ArraySucursalServicio[itemArray].Calendario_ID + "</td><td>" + ArraySucursalServicio[itemArray].UsuarioCreacion + "</td><td>" + ArraySucursalServicio[itemArray].FechaCreacion + "</td><td>" + ArraySucursalServicio[itemArray].UsuarioActualizacion + "</td><td>" + ArraySucursalServicio[itemArray].FechaActualizacion + "</td></tr>";
+                    html_Servicio += "<tr id= 'TSucursalSer_" + ArraySucursalServicio[itemArray].Codigo_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + ArraySucursalServicio[itemArray].Nit_ID + "','" + ArraySucursalServicio[itemArray].Codigo_ID + "')\"></img><span>Editar Sucursal Sevicio</span></span></td><td>" + ArraySucursalServicio[itemArray].Nit_ID + " - " + ArraySucursalServicio[itemArray].DescripEmpresa + "</td><td>" + ArraySucursalServicio[itemArray].Codigo_ID + "</td><td>" + ArraySucursalServicio[itemArray].Surcursal_ID + "</td><td>" + ArraySucursalServicio[itemArray].Cod_Moneda + "</td><td>" + ArraySucursalServicio[itemArray].Costo + "</td><td>" + ArraySucursalServicio[itemArray].Capacidad + "</td><td>" + ArraySucursalServicio[itemArray].Calendario_ID + "</td><td>" + ArraySucursalServicio[itemArray].UsuarioCreacion + "</td><td>" + ArraySucursalServicio[itemArray].FechaCreacion + "</td><td>" + ArraySucursalServicio[itemArray].UsuarioActualizacion + "</td><td>" + ArraySucursalServicio[itemArray].FechaActualizacion + "</td></tr>";
                 }
             }
             break;
 
         case "eliminar":
-            html_Servicio = "<table id='TSucursalSer' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Empresa</th><th></th><th>Servicio</th><th>Sucursal</th><th>Moneda</th><th>Costo</th><th>Capacidad</th><th>Calendario</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
+            html_Servicio = "<table id='TSucursalSer' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Empresa</th><th>Servicio</th><th>Sucursal</th><th>Moneda</th><th>Costo</th><th>Capacidad</th><th>Calendario</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
             for (itemArray in ArraySucursalServicio) {
                 if (ArraySucursalServicio[itemArray].Codigo_ID != 0) {
-                    html_Servicio += "<tr id= 'TSucursalSer_" + ArraySucursalServicio[itemArray].Codigo_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArraySucursalServicio[itemArray].Nit_ID + "','" + ArraySucursalServicio[itemArray].Codigo_ID + "')\"></img><span>Eliminar Tipo Servicio</span></td><td>" + ArraySucursalServicio[itemArray].Nit_ID + " - " + ArraySucursalServicio[itemArray].DescripEmpresa + "</td><td>" + ArraySucursalServicio[itemArray].Codigo_ID + "</td><td>" + ArraySucursalServicio[itemArray]._Surcursal_ID + "</td><td>" + ArraySucursalServicio[itemArray].Cod_Moneda + "</td><td>" + ArraySucursalServicio[itemArray].Costo + "</td><td>" + ArraySucursalServicio[itemArray].Capacidad + "</td><td>" + ArraySucursalServicio[itemArray].Calendario_ID + "</td><td>" + ArraySucursalServicio[itemArray].UsuarioCreacion + "</td><td>" + ArraySucursalServicio[itemArray].FechaCreacion + "</td><td>" + ArraySucursalServicio[itemArray].UsuarioActualizacion + "</td><td>" + ArraySucursalServicio[itemArray].FechaActualizacion + "</td></tr>";
+                    html_Servicio += "<tr id= 'TSucursalSer_" + ArraySucursalServicio[itemArray].Codigo_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArraySucursalServicio[itemArray].Nit_ID + "','" + ArraySucursalServicio[itemArray].Codigo_ID + "')\"></img><span>Eliminar Sucursal Servicio</span></td><td>" + ArraySucursalServicio[itemArray].Nit_ID + " - " + ArraySucursalServicio[itemArray].DescripEmpresa + "</td><td>" + ArraySucursalServicio[itemArray].Codigo_ID + "</td><td>" + ArraySucursalServicio[itemArray].Surcursal_ID + "</td><td>" + ArraySucursalServicio[itemArray].Cod_Moneda + "</td><td>" + ArraySucursalServicio[itemArray].Costo + "</td><td>" + ArraySucursalServicio[itemArray].Capacidad + "</td><td>" + ArraySucursalServicio[itemArray].Calendario_ID + "</td><td>" + ArraySucursalServicio[itemArray].UsuarioCreacion + "</td><td>" + ArraySucursalServicio[itemArray].FechaCreacion + "</td><td>" + ArraySucursalServicio[itemArray].UsuarioActualizacion + "</td><td>" + ArraySucursalServicio[itemArray].FechaActualizacion + "</td></tr>";
+                    
                 }
             }
             break;
@@ -327,14 +342,15 @@ function Editar(index_Nit, index_Servicio) {
 
             $("#Select_EmpresaNit").val(ArraySucursalServicio[itemArray].Nit_ID);
             $("#Txt_ID").val(ArraySucursalServicio[itemArray].Codigo_ID);
-
+            
             $("#Select_EmpresaNit").attr("disabled", "disabled");
             $("#Txt_ID").attr("disabled", "disabled");
 
-            $("#TxtSucursal").val(ArraySucursalServicio[itemArray].Surcursal_ID);
+            $("#Select_Sucursal").val(ArraySucursalServicio[itemArray].Surcursal_ID);
             $("#Select_Moneda_Cod").val(ArraySucursalServicio[itemArray].Cod_Moneda);
             $("#TxtCosto").val(ArraySucursalServicio[itemArray].Costo);
             $("#Text_Capacidad").val(ArraySucursalServicio[itemArray].Capacidad);
+            $("#Select_Calendario_SS").val(ArraySucursalServicio[itemArray].Calendario_ID);
 
             $("#Btnguardar").attr("value", "Actualizar");
 
@@ -352,11 +368,12 @@ function x() {
 function Clear() {
     $("#Select_EmpresaNit").val("-1");
     $("#Txt_ID").val("");
-    $("#TxtSucursal").val("-1");
-    $("#Select_Calendario").val("-1");
+    $("#Select_Sucursal").val("-1");
+    $("#Select_Calendario_SS").val("-1");
     $("#Select_Moneda_Cod").val("-1");
     $("#TxtCosto").val("");
     $("#Text_Capacidad").val("");
+    $("#Select_Calendario_SS").val("-1");
 
     $("#TxtRead").val("");
     $("#DDLColumns").val("-1");

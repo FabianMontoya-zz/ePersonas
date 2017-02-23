@@ -101,7 +101,7 @@ Public Class SucursarServicioAjax
             objSucursalServicio.Cod_Moneda = Request.Form("Mon")
             objSucursalServicio.Costo = Request.Form("Cos")
             objSucursalServicio.Capacidad = Request.Form("Cap")
-            objSucursalServicio.Calendario_ID = Request.Form("cal")
+            objSucursalServicio.Calendario_ID = Request.Form("calendario")
 
             objSucursalServicio.UsuarioCreacion = Request.Form("user")
             objSucursalServicio.FechaCreacion = Date.Now
@@ -139,7 +139,7 @@ Public Class SucursarServicioAjax
         objSucursalServicio.Cod_Moneda = Request.Form("Mon")
         objSucursalServicio.Costo = Request.Form("Cos")
         objSucursalServicio.Capacidad = Request.Form("Cap")
-        objSucursalServicio.Calendario_ID = Request.Form("cal")
+        objSucursalServicio.Calendario_ID = Request.Form("calendario")
 
         objSucursalServicio.UsuarioActualizacion = Request.Form("user")
         objSucursalServicio.FechaActualizacion = Date.Now
@@ -248,7 +248,7 @@ Public Class SucursarServicioAjax
         obj.Nit_ID = Request.Form("Nit")
         obj.TipoSQL = "Calendar"
 
-        ObjListDroplist = SQL.Read_Matrix_Calendarios(obj)
+        ObjListDroplist = SQL.Read_Matrix_Calendarios_Temp(obj)
         Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
 
     End Sub
@@ -260,8 +260,8 @@ Public Class SucursarServicioAjax
     Protected Sub Carga_MSucursal()
 
         Dim SQL As New SucursalSQLClass
-
         Dim ObjList_Matrix As New List(Of SucursalClass)
+
         ObjList_Matrix = SQL.Matrix_Sucursal()
 
         Response.Write(JsonConvert.SerializeObject(ObjList_Matrix.ToArray()))

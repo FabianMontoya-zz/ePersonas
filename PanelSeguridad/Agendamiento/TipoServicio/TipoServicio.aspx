@@ -305,7 +305,7 @@
                             <td style="width: 15%;" class="Label_Bold">Calendario
                             </td>
                             <td>
-                                <select id="Select_Calendario" class="C_Chosen">
+                                <select id="Select_Calendario_TS" class="C_Chosen">
                                 </select>
                             </td>
                             <td style="padding-bottom: 22px; width: 10%;">

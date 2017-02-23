@@ -28,6 +28,9 @@ Public Class CalendarioAjax
 
                 Case "elimina"
                     EraseCalendario()
+
+                Case "MatrixCalendarios"
+                    CargarCalendarios()
             End Select
 
         End If
@@ -189,6 +192,23 @@ Public Class CalendarioAjax
         Dim vl_S_Tabla As String = Request.Form("tabla")
 
         ObjListDroplist = SQL.Charge_DropListCliente(vl_S_Tabla)
+        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga el objeto DDL consulta
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarCalendarios()
+
+        Dim SQL As New CalendarioSQLClass
+        Dim ObjListDroplist As New List(Of CalendarioClass)
+        Dim obj As New ClienteClass
+        obj.Nit_ID = Request.Form("Nit")
+        obj.TipoSQL = "Calendar"
+
+        ObjListDroplist = SQL.Read_Matrix_Calendarios(obj)
         Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
 
     End Sub

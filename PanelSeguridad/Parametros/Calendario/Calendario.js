@@ -3,6 +3,7 @@ var ArrayCalendario = [];
 var ArrayCombo = [];
 var ArrayCalendarioDep = [];
 var ArraySeguridad = [];
+var Matrix_Calendarios = [];
 
 var MensajeHora = "";
 var V_ONE = 0;
@@ -29,6 +30,7 @@ $(document).ready(function () {
 
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_EmpresaNit('Cliente');
+    transacionAjax_Calendario('MatrixCalendarios');
 
     $(function () {
         $("#TxtF_Start").datepicker({ dateFormat: 'yy-mm-dd' });

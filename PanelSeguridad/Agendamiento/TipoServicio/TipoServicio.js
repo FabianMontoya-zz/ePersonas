@@ -35,6 +35,7 @@ $(document).ready(function () {
     transacionAjax_EmpresaNit('Cliente');
     transacionAjax_Formato('Formato');
     transaccionAjax_RutasOperacion('Rutas_Operacion');
+    
 
     $(function () {
         $("#Text_Tiempo_Sesion").timepicker();
@@ -115,7 +116,7 @@ function Change_Select_Nit() {
 function TransaccionesSegunNIT(vp_index_ID) {
     if (vp_index_ID != "-1") {
         transacionAjax_MMoneda('Moneda');
-        transacionAjax_Calendario('MatrixCalendarios');
+        transacionAjax_Calendario('MatrixCalendarios', vp_index_ID);
         transaccionAjax_MDocumento('Matrx_Documento', vp_index_ID);
     }
 }
@@ -142,8 +143,6 @@ function BtnConsulta() {
     var filtro;
     var ValidateSelect = ValidarDroplist();
     var opcion;
-
-    OpenControl();
 
     if (ValidateSelect == 1) {
         filtro = "N";
@@ -178,7 +177,6 @@ function BtnCrear() {
 
 //elimina de la BD
 function BtnElimina() {
-    OpenControl();
     transacionAjax_TipoServicio_delete("elimina");
 }
 
@@ -254,11 +252,11 @@ function HabilitarPanel(opcion) {
             break;
 
         case "modificar":
+            $("#IF_Visor").css("display", "none");
+            $("#foto_servicio").css("display", "none");
             $("#TablaDatos_D").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TServicio").html("");
-             $("#IF_Visor").css("display", "inline-table");
-            $("#foto_servicio").css("display", "inline-table");
             estado = opcion;
             ResetError();
             Clear();
@@ -380,6 +378,7 @@ function Clear_Agregar() {
     $("#Text_Tiempo_Sesion").val("");
     $("#Text_Tiempo_Entre_Sesiones").val("");
     $("#Tiempo_Max_Agenda").val("");
+    $("#Select_Calendario_TS").val("-1");
 
     $('.C_Chosen').trigger('chosen:updated');
 }
@@ -449,6 +448,8 @@ function Editar(index_Nit, index_Servicio) {
 
     $("#TablaDatos_D").css("display", "inline-table");
     $("#TablaConsulta").css("display", "none");
+    $("#IF_Visor").css("display", "inline-table");
+    $("#foto_servicio").css("display", "inline-table");
 
     for (itemArray in ArrayTipoServicio) {
         if (index_Nit == ArrayTipoServicio[itemArray].Nit_ID && index_Servicio == ArrayTipoServicio[itemArray].Codigo_ID) {
@@ -474,6 +475,7 @@ function Editar(index_Nit, index_Servicio) {
             $("#Text_Tiempo_Entre_Sesiones").val(ArrayTipoServicio[itemArray].Tiempo_Entre_Sesion);
             $("#Tiempo_Max_Agenda").val(ArrayTipoServicio[itemArray].Tiempo_Maximo_Agenda);
             $("#Txt_Detalle").val(ArrayTipoServicio[itemArray].Detalle);
+            $("#Select_Calendario_TS").val(ArrayTipoServicio[itemArray].Calendario_ID),
 
             $("#Btnguardar").attr("value", "Actualizar");
 

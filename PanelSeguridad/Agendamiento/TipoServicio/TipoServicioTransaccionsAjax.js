@@ -22,6 +22,13 @@ function transacionAjax_CargaBusqueda(State) {
         },
         error: function () {
 
+        },
+    }).done(function () {
+        var vl_OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+        if (vl_OnlyEmpresa == true) {
+            Nit_ID_proccess = $("#Select_EmpresaNit").val();
+            TransaccionesSegunNIT(Nit_ID_proccess);
         }
     });
 }
@@ -151,7 +158,7 @@ function transacionAjax_MMoneda(State) {
 }
 
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_Calendario(State) {
+function transacionAjax_Calendario(State, vp_Nit) {
     $.ajax({
         url: "TipoServicioAjax.aspx",
         type: "POST",
@@ -159,7 +166,7 @@ function transacionAjax_Calendario(State) {
         data: {
             "action": State,
             "tabla": 'CALENDARIOS',
-            "Nit": $("#Select_EmpresaNit").val()
+            "Nit": vp_Nit
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -168,6 +175,8 @@ function transacionAjax_Calendario(State) {
             }
             else {
                 Matrix_Calendarios = JSON.parse(result);
+                
+                CargaCalendarios(Matrix_Calendarios, "Select_Calendario_TS", "");
             }
         },
         error: function () {
@@ -176,7 +185,7 @@ function transacionAjax_Calendario(State) {
         async: false,
         cache: false
     }).done(function () {
-        CargaCalendarios(Matrix_Calendarios, "Select_Calendario", "");
+        CargaCalendarios(Matrix_Calendarios, "Select_Calendario_TS", "");
     });
 }
 
@@ -222,7 +231,6 @@ function transacionAjax_TipoServicio(State, filtro, opcion) {
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transaccionAjax_MDocumento(vp_State, vp_Nit) {
-    OpenControl();
     $.ajax({
         url: "TipoServicioAjax.aspx",
         type: "POST",
@@ -255,6 +263,7 @@ function transacionAjax_TipoServicio_create(State) {
     var Nit_ID;
     var TipoServicioDepen = 0;
     var Politica = 0;
+    var calendario_id;
 
     if (State == "modificar") {
         Nit_ID = editNit_ID;
@@ -263,6 +272,12 @@ function transacionAjax_TipoServicio_create(State) {
     else {
         Nit_ID = $("#Select_EmpresaNit").val();
         ID = $("#Txt_ID").val();
+    }
+
+    if ($("#Select_Calendario_TS").val() == null) {
+        calendario_id = 0;
+    } else {
+        calendario_id = $("#Select_Calendario_TS").val();
     }
 
     $.ajax({
@@ -287,11 +302,13 @@ function transacionAjax_TipoServicio_create(State) {
             "TiemEn": $("#Text_Tiempo_Entre_Sesiones").val(),
             "MaxA": $("#Tiempo_Max_Agenda").val(),
             "Ima": $("#IF_Visor").val(),
-            "cal1": $("#Select_Calendario").val(),
+            "calendario": calendario_id,
             "user": User.toUpperCase()
+
         },
         //Transaccion Ajax en proceso
         success: function (result) {
+
             switch (result) {
 
                 case "Error":

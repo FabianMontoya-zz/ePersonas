@@ -21,6 +21,7 @@ $(document).ready(function () {
 
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_EmpresaNit('Cliente');
+    transacionAjax_Calendario('MatrixCalendarios');
 
     Change_Select_Nit();
 
@@ -32,6 +33,7 @@ function Ocultar_Errores() {
     $("#ESelect").css("display", "none");
     $("#DE").css("display", "none");
     $("#DS").css("display", "none");
+    $("#ImgCal").css("display", "none");
     /*Se ocultan en la SASIF Master*/
 }
 

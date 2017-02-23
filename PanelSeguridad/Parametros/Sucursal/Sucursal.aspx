@@ -136,6 +136,22 @@
                             </td>
                         </tr>
                     </table>
+                    <table id="Table_Calendario" style="width: 80%; margin-left: 8%;">
+                        <tr>
+                            <td style="width: 15%;" class="Label_Bold">Calendario
+                            </td>
+                            <td>
+                                <select id="Select_Calendario" class="C_Chosen">
+                                </select>
+                            </td>
+                            <td style="padding-bottom: 22px; width: 10%;">
+                                <span class="cssToolTip">
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgCal"
+                                        src="../../images/error.png" />
+                                    <span class="SpamEG"></span></span>
+                            </td>
+                        </tr>
+                    </table>
                     <table id="T_BTNGuardar" style="width: 100%;">
                         <tr>
                             <td colspan="6" align="center" id="TD_Button">

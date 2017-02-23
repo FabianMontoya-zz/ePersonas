@@ -285,6 +285,34 @@ Public Class SucursalSQLClass
 
     End Function
 
+    ''' <summary>
+    ''' lee la matriz de Sucursales
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Matrix_Sucursal(ByVal vp_Obj_Cliente As ClienteClass)
+
+        Dim ObjList As New List(Of SucursalClass)
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("2")
+
+        Dim sql As New StringBuilder
+        Dim vl_sql_filtro As New StringBuilder
+
+        sql.Append("  SELECT SUC_Nit_ID, SUC_Surcursal_ID,CAST(SUC_Surcursal_ID AS NVARCHAR(5)) + ' - ' + SUC_Descripcion AS DESCRIPCION FROM SUCURSAL")
+
+        Select Case vp_Obj_Cliente.TipoSQL
+            Case "Sucursal"
+                vl_sql_filtro.Append(" WHERE SUC_Nit_ID = '" & vp_Obj_Cliente.Nit_ID & "' ORDER BY SUC_Nit_ID, SUC_Surcursal_ID ASC ")
+        End Select
+
+        Dim vl_S_SQLString As String = sql.ToString & vl_sql_filtro.ToString
+
+        ObjList = list(vl_S_SQLString, Conexion, "Matrix")
+
+        Return ObjList
+
+    End Function
 #End Region
 
 End Class

@@ -122,12 +122,12 @@ Public Class SucursalServicioSQLClass
         "SS_FechaActualizacion)")
         sql.AppendLine("VALUES (")
         sql.AppendLine("'" & vp_Obj.Nit_ID & "',")
-        sql.AppendLine("'" & vp_Obj.Codigo_ID & "',")
-        sql.AppendLine("'" & vp_Obj.Surcursal_ID & "',")
-        sql.AppendLine("'" & vp_Obj.Cod_Moneda & "',")
-        sql.AppendLine("'" & vp_Obj.Costo & "',")
-        sql.AppendLine("'" & vp_Obj.Capacidad & "',")
-        sql.AppendLine("'" & vp_Obj.Calendario_ID & "',")
+        sql.AppendLine("" & vp_Obj.Codigo_ID & ",")
+        sql.AppendLine("" & vp_Obj.Surcursal_ID & ",")
+        sql.AppendLine("" & vp_Obj.Cod_Moneda & ",")
+        sql.AppendLine("" & vp_Obj.Costo & ",")
+        sql.AppendLine("" & vp_Obj.Capacidad & ",")
+        sql.AppendLine("" & vp_Obj.Calendario_ID & ",")
         sql.AppendLine("'" & vp_Obj.UsuarioCreacion & "',")
         sql.AppendLine("'" & vp_Obj.FechaCreacion & "',")
         sql.AppendLine("'" & vp_Obj.UsuarioActualizacion & "',")
@@ -155,10 +155,10 @@ Public Class SucursalServicioSQLClass
         Dim sql As New StringBuilder
         Dim StrQuery As String = ""
         sql.AppendLine("UPDATE SUCURSAL_SERVICIO SET " & _
-                          " SS_Moneda_ID ='" & vp_Obj.Cod_Moneda & "', " & _
-                          " SS_Costo ='" & vp_Obj.Costo & "', " & _
-                          " SS_Capacidad ='" & vp_Obj.Capacidad & "', " & _
-                          " SS_Calendario_ID =" & vp_Obj.Calendario_ID & ", " & _
+                          " SS_Moneda_ID = '" & vp_Obj.Cod_Moneda & "', " & _
+                          " SS_Costo = '" & vp_Obj.Costo & "', " & _
+                          " SS_Capacidad = '" & vp_Obj.Capacidad & "', " & _
+                          " SS_Calendario_ID = " & vp_Obj.Calendario_ID & " " & _
                           " WHERE  SS_Nit_ID  = '" & vp_Obj.Nit_ID & "' AND SS_Servicio_ID = '" & vp_Obj.Codigo_ID & "'")
         StrQuery = sql.ToString
 

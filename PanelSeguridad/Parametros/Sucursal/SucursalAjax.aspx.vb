@@ -28,6 +28,9 @@ Public Class SucursalAjax
 
                 Case "elimina"
                     DeleteSucursal()
+
+                Case "MatrixCalendarios"
+                    CargarCalendarios()
             End Select
 
         End If
@@ -179,6 +182,21 @@ Public Class SucursalAjax
 
 #End Region
 
+    ''' <summary>
+    ''' funcion que carga el objeto DDL consulta
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarCalendarios()
 
+        Dim SQL As New CalendarioSQLClass
+        Dim ObjListDroplist As New List(Of CalendarioClass)
+        Dim obj As New ClienteClass
+        obj.Nit_ID = Request.Form("Nit")
+        obj.TipoSQL = "Calendar"
+
+        ObjListDroplist = SQL.Read_Matrix_Calendarios(obj)
+        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
+
+    End Sub
 
 End Class

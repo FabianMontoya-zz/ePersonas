@@ -76,7 +76,7 @@
                     </tr>
                     <tr>
                         <td colspan="4">
-                            <div id="container_TServicio">
+                            <div id="container_TSucursalSer">
                             </div>
                         </td>
                     </tr>
@@ -101,54 +101,54 @@
                     </table>
                     <table id="Tabla_2" style="width: 1000px; text-align: left;">
                         <tr>
-                            <td style="width: 150px;" class="Label_Bold">Código Servicio
+                            <td style="width: 17%;" class="Label_Bold">Código Servicio
                             </td>
                             <td style="width: 150px;">
                                 <span class="cssToolTip_Form">
                                     <input type="text" id="Txt_ID" maxlength="5" class="Numeric" style="width: 70px;" />
                                     <span class="Spam_AN"></span></span>
                             </td>
-                            <td style="padding-bottom: 25px; width: 245px;">
+                            <td style="padding-bottom: 25px; width: 45%;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img2"
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
-                           <td style="width: 7.2%;" class="Label_Bold">Sucursal Oficina
-                                </td>
-                                <td style="width: 20%;">
-                                    <select id="Select_Sucursal" class="C_Chosen">
-                                    </select>
-                                </td>
-                                <td style="width: 41%; padding-bottom: 25px;">
-                                    <span class="cssToolTip">
-                                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img3"
-                                            src="../../images/error.png" />
-                                        <span class="SpamEG"></span></span>
-                                </td>
+                            <td style="width: 11%;" class="Label_Bold">Sucursal Oficina
+                            </td>
+                            <td style="width: 20%;">
+                                <select id="Select_Sucursal" class="C_Chosen">
+                                </select>
+                            </td>
+                            <td style="width: 41%; padding-bottom: 25px;">
+                                <span class="cssToolTip">
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img3"
+                                        src="../../images/error.png" />
+                                    <span class="SpamEG"></span></span>
+                            </td>
                         </tr>
                     </table>
-                    <table id="Table_Moneda" style="width: 700px; text-align: left;">
+                    <table id="Table_Moneda" style="width: 1000px; text-align: left;">
                         <tr>
-                            <td style="width: 148px;" class="Label_Bold">Moneda
+                            <td style="width: 15.7%;" class="Label_Bold">Moneda
                             </td>
-                            <td>
+                            <td style="width: 30%;">
                                 <select id="Select_Moneda_Cod" class="C_Chosen">
                                 </select>
                             </td>
-                            <td style="padding-bottom: 25px; width: 250px;">
+                            <td style="padding-bottom: 25px; width: 18.5%;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img7"
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
-                            <td style="width: 15%;" class="Label_Bold">Calendario
+                            <td style="width: 10.5%;" class="Label_Bold">Calendario
                             </td>
                             <td>
-                                <select id="Select_Calendario" class="C_Chosen">
+                                <select id="Select_Calendario_SS" class="C_Chosen">
                                 </select>
                             </td>
-                            <td style="padding-bottom: 22px; width: 10%;">
+                            <td style="padding-bottom: 22px; width: 1%;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgCal"
                                         src="../../images/error.png" />
@@ -166,13 +166,13 @@
                                     <input type="text" id="TxtCosto" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
                                     <span class="Spam_AVal"></span></span>
                             </td>
-                            <td style="padding-bottom: 25px; width: 235px;">
+                            <td style="padding-bottom: 25px; width: 24%;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img12"
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
-                            <td class="Label_Bold" style="width: 4.8%;">Capacidad
+                            <td class="Label_Bold" style="width: 9%;">Capacidad
                             </td>
                             <td style="width: 12%;">
                                 <span class="cssToolTip_Form">
@@ -199,7 +199,7 @@
             </div>
         </div>
     </div>
-    
+
     <div id="dialog" title="Basic dialog">
         <table style="width: 100%; text-align: center;">
             <tr>

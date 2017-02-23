@@ -55,6 +55,36 @@ function transacionAjax_EmpresaNit(State) {
     });
 }
 
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_Calendario(State) {
+    $.ajax({
+        url: "SucursalServicioAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'CALENDARIOS',
+            "Nit": $("#Select_EmpresaNit").val()
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_Calendarios = [];
+            }
+            else {
+                Matrix_Calendarios = JSON.parse(result);
+            }
+        },
+        error: function () {
+
+        },
+        async: false,
+        cache: false
+    }).done(function () {
+        CargaCalendarios(Matrix_Calendarios, "Select_Calendario", "");
+    });
+}
+
 /*------------------------------ consulta ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax_Calendario(State, filtro, opcion) {
