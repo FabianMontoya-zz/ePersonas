@@ -45,8 +45,9 @@ Public Class CargoSQLClass
                              " FechaActualizacion, " & _
                              " DescripDependecia, " & _
                              " DescripSeguridad, " & _
-                             " DescripEmpresa " & _
-                       " FROM T_AREA_CARGO ")
+                             " DescripEmpresa, " & _
+                             " ROW_NUMBER() OVER(ORDER BY AREA_CARGO_ID ASC) AS Index_Cargo " & _
+                      " FROM T_AREA_CARGO ")
         Else
 
             If vp_S_Contenido = "ALL" Then
@@ -61,8 +62,9 @@ Public Class CargoSQLClass
                              " FechaActualizacion, " & _
                              " DescripDependecia, " & _
                              " DescripSeguridad, " & _
-                             " DescripEmpresa " & _
-                       " FROM T_AREA_CARGO ")
+                             " DescripEmpresa, " & _
+                              " ROW_NUMBER() OVER(ORDER BY AREA_CARGO_ID ASC) AS Index_Cargo " & _
+                      " FROM T_AREA_CARGO ")
             Else
                 sql.Append(" SELECT Nit_ID, " & _
                              " Area_Cargo_ID, " & _
@@ -75,8 +77,9 @@ Public Class CargoSQLClass
                              " FechaActualizacion, " & _
                              " DescripDependecia, " & _
                              " DescripSeguridad, " & _
-                             " DescripEmpresa " & _
-                       " FROM T_AREA_CARGO " & _
+                             " DescripEmpresa, " & _
+                             " ROW_NUMBER() OVER(ORDER BY AREA_CARGO_ID ASC) AS Index_Cargo " & _
+                     " FROM T_AREA_CARGO " & _
                       "WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
             End If
         End If
@@ -84,17 +87,15 @@ Public Class CargoSQLClass
 
         If vp_S_Nit_User <> "N" Then
             If vp_S_Contenido = "ALL" Then
-                vl_sql_filtro.Append("WHERE  Nit_ID ='" & vp_S_Nit_User & "' ORDER BY Nit_ID, Area_Cargo_ID ASC")
+                vl_sql_filtro.Append("WHERE  Nit_ID ='" & vp_S_Nit_User & "' ORDER BY Index_Cargo, Nit_ID, Area_Cargo_ID ASC")
             Else
-                vl_sql_filtro.Append("AND  Nit_ID ='" & vp_S_Nit_User & "' ORDER BY Nit_ID, Area_Cargo_ID ASC")
+                vl_sql_filtro.Append("AND  Nit_ID ='" & vp_S_Nit_User & "' ORDER BY Index_Cargo, Nit_ID, Area_Cargo_ID ASC")
             End If
         Else
-            vl_sql_filtro.Append(" ORDER BY Nit_ID, Area_Cargo_ID ASC")
+            vl_sql_filtro.Append(" ORDER BY Index_Cargo, Nit_ID, Area_Cargo_ID ASC")
         End If
 
-
         StrQuery = sql.ToString & vl_sql_filtro.ToString
-
         ObjListCargo = listCargo(StrQuery, Conexion, "List")
 
         Return ObjListCargo
@@ -306,6 +307,7 @@ Public Class CargoSQLClass
                     If Not (IsDBNull(ReadConsulta.GetValue(9))) Then objCargo.DescripCargoDepen = ReadConsulta.GetValue(9) Else objCargo.DescripCargoDepen = ""
                     If Not (IsDBNull(ReadConsulta.GetValue(10))) Then objCargo.DescripPolitica = ReadConsulta.GetValue(10) Else objCargo.DescripPolitica = ""
                     objCargo.DescripEmpresa = ReadConsulta.GetValue(11)
+                    objCargo.Index = ReadConsulta.GetValue(12)
 
                     'agregamos a la lista
                     ObjListCargo.Add(objCargo)

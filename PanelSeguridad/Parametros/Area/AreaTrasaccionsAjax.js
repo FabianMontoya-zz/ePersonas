@@ -80,6 +80,8 @@ function transacionAjax_AreaDepend(State, Index) {
         error: function () {
 
         },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     }).done(function () {
         charge_CatalogList(ArrayAreaDep, "Select_AreaDepent", 1);
     });
@@ -108,6 +110,8 @@ function transacionAjax_Seguridad(State, vp_Nit) {
         error: function () {
 
         },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     }).done(function () {
         charge_CatalogList(ArraySeguridad, "Select_Politica", 1);
     });

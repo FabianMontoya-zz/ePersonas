@@ -77,9 +77,11 @@ function transacionAjax_CargoDepend(State, Index) {
                 ArrayCargoDep = JSON.parse(result);
             }
         },
-        error: function () {
+         error: function () {
 
         },
+         async: false, // La petición es síncrona
+         cache: false // No queremos usar la caché del navegador
     }).done(function () {
         charge_CatalogList(ArrayCargoDep, "Select_CargoDepent", 1);
     });
@@ -108,6 +110,8 @@ function transacionAjax_Seguridad(State, vp_Nit) {
         error: function () {
 
         },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     }).done(function () {
         charge_CatalogList(ArraySeguridad, "Select_Politica", 1);
     });

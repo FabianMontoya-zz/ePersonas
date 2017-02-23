@@ -29,6 +29,9 @@ $(document).ready(function () {
     Change_Select_Nit();
 });
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                 REGION INICIO DE COMPONENTES                                                                                                    ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //funcion para las ventanas emergentes
 function Ventanas_Emergentes() {
 
@@ -68,7 +71,64 @@ function Ocultar_Tablas() {
     $("#TablaConsulta").css("display", "none");
 }
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                 REGION BOTONES                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//consulta del del crud(READ)
+function BtnConsulta() {
 
+    var filtro;
+    var ValidateSelect = ValidarDroplist();
+    var opcion;
+
+    OpenControl(); //Abrimos el load de espera con el logo
+
+    if (ValidateSelect == 1) {
+        filtro = "N";
+        opcion = "ALL";
+        transacionAjax_Area("consulta", filtro, opcion);
+    }
+    else {
+        filtro = "S";
+        opcion = $("#DDLColumns").val();
+        transacionAjax_Area("consulta", filtro, opcion);
+    }
+
+}
+
+//crear link en la BD
+function BtnCrear() {
+
+    var validate;
+    validate = validarCamposCrear();
+
+    if (validate == 0) {
+        if ($("#Btnguardar").val() == "Guardar") {
+            transacionAjax_Area_create("crear");
+        }
+        else {
+            transacionAjax_Area_create("modificar");
+        }
+    }
+}
+
+//elimina de la BD
+function BtnElimina() {
+    OpenControl(); //Abrimos el load de espera con el logo
+    transacionAjax_Area_delete("elimina");
+    filtro = "N";
+    opcion = "ALL";
+    transacionAjax_Area("consulta", filtro, opcion);
+}
+
+//evento del boton salir
+function x() {
+    $("#dialog").dialog("close");
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                 PROCESOS GENERALES DE LA PAGINA                                                                                  ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //carga el combo de Area dependiente
 function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {
@@ -78,13 +138,13 @@ function Change_Select_Nit() {
     });
 }
 
+//Carga los combos de los registros relacionados con Select_Nit
 function TransaccionesSegunNIT(index_ID) {
     if (index_ID != "-1") {
         transacionAjax_AreaDepend('Area_Dep', index_ID);
         transacionAjax_Seguridad('Seguridad', index_ID);
     }
 }
-
 
 //habilita el panel de crear o consulta
 function HabilitarPanel(opcion) {
@@ -138,54 +198,9 @@ function HabilitarPanel(opcion) {
     }
 }
 
-//consulta del del crud(READ)
-function BtnConsulta() {
-
-    var filtro;
-    var ValidateSelect = ValidarDroplist();
-    var opcion;
-
-    OpenControl(); //Abrimos el load de espera con el logo
-
-    if (ValidateSelect == 1) {
-        filtro = "N";
-        opcion = "ALL";
-        transacionAjax_Area("consulta", filtro, opcion);
-    }
-    else {
-        filtro = "S";
-        opcion = $("#DDLColumns").val();
-        transacionAjax_Area("consulta", filtro, opcion);
-    }
-
-}
-
-//crear link en la BD
-function BtnCrear() {
-
-    var validate;
-    validate = validarCamposCrear();
-
-    if (validate == 0) {
-        if ($("#Btnguardar").val() == "Guardar") {
-            transacionAjax_Area_create("crear");
-        }
-        else {
-            transacionAjax_Area_create("modificar");
-        }
-    }
-}
-
-//elimina de la BD
-function BtnElimina() {
-    OpenControl(); //Abrimos el load de espera con el logo
-    transacionAjax_Area_delete("elimina");
-    filtro = "N";
-    opcion = "ALL";
-    transacionAjax_Area("consulta", filtro, opcion);
-}
-
-
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                      REGION VALIDACIONES DEL PROCESO                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //validamos campos para la creacion del link
 function validarCamposCrear() {
 
@@ -241,56 +256,63 @@ function ValidarDroplist() {
     return flag;
 }
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                  TABLA DE AREA                                                                                  ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 // crea la tabla en el cliente
 function Table_Area() {
+
+    var vl_Index_Area;
+    var vl_dependencia;
+    var html_Area;
 
     switch (estado) {
 
         case "buscar":
-            var html_Area = "<table id='TArea' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Empresa</th><th>Codigo</th><th>Descripción</th><th>Area Que Depende</th><th>Politica de Seguridad</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
+            html_Area = "<table id='TArea' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Empresa</th><th>Codigo</th><th>Descripción</th><th>Area Que Depende</th><th>Politica de Seguridad</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
             for (itemArray in ArrayArea) {
 
                 if (ArrayArea[itemArray].Area_ID != 0) {
-                    var dependencia;
 
                     if (ArrayArea[itemArray].AreaDependencia == 0)
-                        dependencia = "";
+                        vl_dependencia = "";
                     else
-                        dependencia = ArrayArea[itemArray].DescripAreaDepen;
+                        vl_dependencia = ArrayArea[itemArray].DescripAreaDepen;
 
-                    html_Area += "<tr id= 'TArea_" + ArrayArea[itemArray].Area_ID + "'><td>" + ArrayArea[itemArray].Nit_ID + " - " + ArrayArea[itemArray].DescripEmpresa + "</td><td>" + ArrayArea[itemArray].Area_ID + "</td><td>" + ArrayArea[itemArray].Descripcion + "</td><td>" + dependencia + "</td><td>" + ArrayArea[itemArray].DescripPolitica + "</td><td>" + ArrayArea[itemArray].UsuarioCreacion + "</td><td>" + ArrayArea[itemArray].FechaCreacion + "</td><td>" + ArrayArea[itemArray].UsuarioActualizacion + "</td><td>" + ArrayArea[itemArray].FechaActualizacion + "</td></tr>";
+                    html_Area += "<tr id= 'TArea_" + ArrayArea[itemArray].Area_ID + "'><td>" + ArrayArea[itemArray].Nit_ID + " - " + ArrayArea[itemArray].DescripEmpresa + "</td><td>" + ArrayArea[itemArray].Area_ID + "</td><td>" + ArrayArea[itemArray].Descripcion + "</td><td>" + vl_dependencia + "</td><td>" + ArrayArea[itemArray].DescripPolitica + "</td><td>" + ArrayArea[itemArray].UsuarioCreacion + "</td><td>" + ArrayArea[itemArray].FechaCreacion + "</td><td>" + ArrayArea[itemArray].UsuarioActualizacion + "</td><td>" + ArrayArea[itemArray].FechaActualizacion + "</td></tr>";
                 }
             }
             break;
 
         case "modificar":
-            var html_Area = "<table id='TArea' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Empresa</th><th>Codigo</th><th>Descripción</th><th>Area Que Depende</th><th>Politica de Seguridad</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
+            html_Area = "<table id='TArea' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Empresa</th><th>Codigo</th><th>Descripción</th><th>Area Que Depende</th><th>Politica de Seguridad</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
             for (itemArray in ArrayArea) {
                 if (ArrayArea[itemArray].Area_ID != 0) {
-                    var dependencia;
 
+                    vl_Index_Area = parseInt(ArrayArea[itemArray].Index) - 1;
                     if (ArrayArea[itemArray].AreaDependencia == 0)
-                        dependencia = "";
+                        vl_dependencia = "";
                     else
-                        dependencia = ArrayArea[itemArray].DescripAreaDepen;
+                        vl_dependencia = ArrayArea[itemArray].DescripAreaDepen;
 
-                    html_Area += "<tr id= 'TArea_" + ArrayArea[itemArray].Area_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + ArrayArea[itemArray].Nit_ID + "','" + ArrayArea[itemArray].Area_ID + "')\"></img><span>Editar Area</span></span></td><td>" + ArrayArea[itemArray].Nit_ID + " - " + ArrayArea[itemArray].DescripEmpresa + "</td><td>" + ArrayArea[itemArray].Area_ID + "</td><td>" + ArrayArea[itemArray].Descripcion + "</td><td>" + dependencia + "</td><td>" + ArrayArea[itemArray].DescripPolitica + "</td><td>" + ArrayArea[itemArray].UsuarioCreacion + "</td><td>" + ArrayArea[itemArray].FechaCreacion + "</td><td>" + ArrayArea[itemArray].UsuarioActualizacion + "</td><td>" + ArrayArea[itemArray].FechaActualizacion + "</td></tr>";
+                    html_Area += "<tr id= 'TArea_" + ArrayArea[itemArray].Area_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + vl_Index_Area + "')\"></img><span>Editar Area</span></span></td><td>" + ArrayArea[itemArray].Nit_ID + " - " + ArrayArea[itemArray].DescripEmpresa + "</td><td>" + ArrayArea[itemArray].Area_ID + "</td><td>" + ArrayArea[itemArray].Descripcion + "</td><td>" + vl_dependencia + "</td><td>" + ArrayArea[itemArray].DescripPolitica + "</td><td>" + ArrayArea[itemArray].UsuarioCreacion + "</td><td>" + ArrayArea[itemArray].FechaCreacion + "</td><td>" + ArrayArea[itemArray].UsuarioActualizacion + "</td><td>" + ArrayArea[itemArray].FechaActualizacion + "</td></tr>";
                 }
             }
             break;
 
         case "eliminar":
-            var html_Area = "<table id='TArea' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Empresa</th><th>Codigo</th><th>Descripción</th><th>Area Que Depende</th><th>Politica de Seguridad</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
+            html_Area = "<table id='TArea' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Empresa</th><th>Codigo</th><th>Descripción</th><th>Area Que Depende</th><th>Politica de Seguridad</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
             for (itemArray in ArrayArea) {
                 if (ArrayArea[itemArray].Area_ID != 0) {
-                    var dependencia;
+
+                    vl_Index_Area = parseInt(ArrayArea[itemArray].Index) - 1;
 
                     if (ArrayArea[itemArray].AreaDependencia == 0)
-                        dependencia = "";
+                        vl_dependencia = "";
                     else
-                        dependencia = ArrayArea[itemArray].DescripAreaDepen;
+                        vl_dependencia = ArrayArea[itemArray].DescripAreaDepen;
 
-                    html_Area += "<tr id= 'TArea_" + ArrayArea[itemArray].Area_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArrayArea[itemArray].Nit_ID + "','" + ArrayArea[itemArray].Area_ID + "')\"></img><span>Eliminar Area</span></td><td>" + ArrayArea[itemArray].Nit_ID + " - " + ArrayArea[itemArray].DescripEmpresa + "</td><td>" + ArrayArea[itemArray].Area_ID + "</td><td>" + ArrayArea[itemArray].Descripcion + "</td><td>" + dependencia + "</td><td>" + ArrayArea[itemArray].DescripPolitica + "</td><td>" + ArrayArea[itemArray].UsuarioCreacion + "</td><td>" + ArrayArea[itemArray].FechaCreacion + "</td><td>" + ArrayArea[itemArray].UsuarioActualizacion + "</td><td>" + ArrayArea[itemArray].FechaActualizacion + "</td></tr>";
+                    html_Area += "<tr id= 'TArea_" + ArrayArea[itemArray].Area_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + vl_Index_Area + "')\"></img><span>Eliminar Area</span></td><td>" + ArrayArea[itemArray].Nit_ID + " - " + ArrayArea[itemArray].DescripEmpresa + "</td><td>" + ArrayArea[itemArray].Area_ID + "</td><td>" + ArrayArea[itemArray].Descripcion + "</td><td>" + vl_dependencia + "</td><td>" + ArrayArea[itemArray].DescripPolitica + "</td><td>" + ArrayArea[itemArray].UsuarioCreacion + "</td><td>" + ArrayArea[itemArray].FechaCreacion + "</td><td>" + ArrayArea[itemArray].UsuarioActualizacion + "</td><td>" + ArrayArea[itemArray].FechaActualizacion + "</td></tr>";
                 }
             }
             break;
@@ -307,70 +329,58 @@ function Table_Area() {
 }
 
 //muestra el registro a eliminar
-function Eliminar(index_Nit, index_Area) {
+function Eliminar(vp_index) {
 
-    for (itemArray in ArrayArea) {
-        if (index_Nit == ArrayArea[itemArray].Nit_ID && index_Area == ArrayArea[itemArray].Area_ID) {
-            editID = ArrayArea[itemArray].Area_ID;
-            editNit_ID = ArrayArea[itemArray].Nit_ID;
-            $("#dialog_eliminar").dialog("option", "title", "Eliminar?");
-            $("#dialog_eliminar").dialog("open");
-        }
-    }
+    editID = ArrayArea[vp_index].Area_ID;
+    editNit_ID = ArrayArea[vp_index].Nit_ID;
+    $("#dialog_eliminar").dialog("option", "title", "Eliminar?");
+    $("#dialog_eliminar").dialog("open");
 
 }
 
 // muestra el registro a editar
-function Editar(index_Nit, index_Area) {
+function Editar(vp_index) {
 
     $("#TablaDatos_D").css("display", "inline-table");
     $("#TablaConsulta").css("display", "none");
-    var vl_index_Area;
-    var vl_index_Politica;
 
-    for (itemArray in ArrayArea) {
-        if (index_Nit == ArrayArea[itemArray].Nit_ID && index_Area == ArrayArea[itemArray].Area_ID) {
+    editNit_ID = ArrayArea[vp_index].Nit_ID;
+    TransaccionesSegunNIT(editNit_ID);
+    editID = ArrayArea[vp_index].Area_ID;
 
-            editNit_ID = ArrayArea[itemArray].Nit_ID;
-            editID = ArrayArea[itemArray].Area_ID;
+    $("#Select_EmpresaNit").val(ArrayArea[vp_index].Nit_ID).trigger('chosen:updated');
+    $("#Txt_ID").val(ArrayArea[vp_index].Area_ID);
+    $("#TxtDescription").val(ArrayArea[vp_index].Descripcion);
 
-            $("#Select_EmpresaNit").val(ArrayArea[itemArray].Nit_ID);
-            $("#Txt_ID").val(ArrayArea[itemArray].Area_ID);
+    $("#Select_EmpresaNit").attr("disabled", "disabled");
+    $("#Txt_ID").attr("disabled", "disabled");
 
-            setTimeout("Change_Select_Nit();", 200);
+    setTimeout("CargaCombos('" + ArrayArea[vp_index].AreaDependencia + "', '" + ArrayArea[vp_index].Politica_ID + "')", 400);
+    $("#Btnguardar").attr("value", "Actualizar");
 
-            $("#Select_EmpresaNit").attr("disabled", "disabled");
-            $("#Txt_ID").attr("disabled", "disabled");
+}
 
-            $("#TxtDescription").val(ArrayArea[itemArray].Descripcion);
+//carga combos que dependen de una trnasaccion
+function CargaCombos(vp_AreaDepen, vp_Politica) {
 
-            if (ArrayArea[itemArray].AreaDependencia == 0) {
-                setTimeout("$('#Select_AreaDepent').val('-1').trigger('chosen:updated');", 400);
-            } else {
-                vl_index_Area = ArrayArea[itemArray].AreaDependencia;
-                console.log(vl_index_Area);
-                setTimeout("$('#Select_AreaDepent').val('" + vl_index_Area + "').trigger('chosen:updated');", 400);
-            }
+    if (vp_AreaDepen == 0) {
+        $('#Select_AreaDepent').val('-1').trigger('chosen:updated');
+    }
+    else {
+        $('#Select_AreaDepent').val(vp_AreaDepen).trigger('chosen:updated');
+    }
 
-            if (ArrayArea[itemArray].Politica_ID == 0) {
-                setTimeout("$('#Select_Politica').val('-1').trigger('chosen:updated');", 400);
-            } else {
-                vl_index_Politica = ArrayArea[itemArray].Politica_ID;
-                setTimeout("$('#Select_Politica').val('" + vl_index_Politica + "').trigger('chosen:updated');", 400);
-            }
-            $("#Btnguardar").attr("value", "Actualizar");
-            $('.C_Chosen').trigger('chosen:updated');
-        }
+    if (vp_Politica == 0) {
+        $('#Select_Politica').val('-1').trigger('chosen:updated');
+    }
+    else {
+        $('#Select_Politica').val(vp_Politica).trigger('chosen:updated');
     }
 }
 
-
-
-//evento del boton salir
-function x() {
-    $("#dialog").dialog("close");
-}
-
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                              MENSAJES, VISUALIZACION Y LIMPIEZA                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //limpiar campos
 function Clear() {
 
