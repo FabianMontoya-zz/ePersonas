@@ -17,6 +17,7 @@ var RutaTemporal;
 var RutaRelativa;
 var Nit_ID_proccess;
 var DescripFormato;
+var StrConsecutivo;
 /*--------------- region de variables globales --------------------*/
 
 //Evento load JS
@@ -35,7 +36,7 @@ $(document).ready(function () {
     transacionAjax_EmpresaNit('Cliente');
     transacionAjax_Formato('Formato');
     transaccionAjax_RutasOperacion('Rutas_Operacion');
-    
+    transaccionAjax_MDocumento('Matrx_Documento', Array_G_Usuario[0].Nit_ID);
 
     $(function () {
         $("#Text_Tiempo_Sesion").timepicker();
@@ -167,7 +168,7 @@ function BtnCrear() {
         if ($("#Btnguardar").val() == "Guardar") {
             $("#Dialog_Imagen").dialog("open");
             transacionAjax_TipoServicio_create("crear");
-            
+
         }
         else {
             transacionAjax_TipoServicio_create("modificar");
@@ -194,18 +195,22 @@ function BtnRelacion() {
 
 //traer el formado del documento
 function BuscarFormato(vp_Formato) {
-    
-    var vl_ID_Doc = vp_Formato[0];
-    //$("#Select_Documento").val();
-    var vl_StrFormato = "1";
-    
+    var vl_ID_Doc;
     for (item in Matrix_Documento) {
-        if (Matrix_Documento[item].Documento_ID == vl_ID_Doc.Documento_ID)
+        if (Matrix_Documento[item].DescripFormato == "JPG")
+            vl_ID_Doc = Matrix_Documento[item].Documento_ID;
+    }
+    
+    console.log(vl_ID_Doc);
+    var vl_StrFormato = "1";
+
+    for (item in Matrix_Documento) {
+        if (Matrix_Documento[item].Documento_ID == vl_ID_Doc)
             vl_StrFormato = Matrix_Documento[item].DescripFormato;
     }
     for (item in Matrix_Documento) {
         if (Matrix_Documento[item].Nit_ID == Nit_ID_proccess)
-        StrConsecutivo = Matrix_Documento[item].Consecutivo;
+            StrConsecutivo = Matrix_Documento[item].Consecutivo;
     }
     return vl_StrFormato;
 }
@@ -260,7 +265,7 @@ function HabilitarPanel(opcion) {
             estado = opcion;
             ResetError();
             Clear();
-           
+
             break;
 
         case "eliminar":
@@ -301,7 +306,7 @@ function validarCamposCrear() {
         $("#Img3").css("display", "none");
         $("#Img5").css("display", "none");
     }
-    
+
     return validar;
 }
 
@@ -505,10 +510,11 @@ function Clear() {
 
     $('.C_Chosen').trigger('chosen:updated');
 
+    Clear_Agregar();
+
     var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
 
     if (OnlyEmpresa == true) {
         TransaccionesSegunNIT($("#Select_EmpresaNit").val());
     }
-    Clear_Agregar();
 }

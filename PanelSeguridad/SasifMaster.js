@@ -1496,6 +1496,16 @@ function CargaCalendarios(Matrix, Selector, Index_Edit) {
                 $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Index + " - " + Matrix[Item].Descripcion + "</option>");
             }
             break;
+        case "Select_Calendario_TS": //Calendario de Tipo Servicio
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Index + " - " + Matrix[Item].Descripcion + "</option>");
+            }
+            break;
+        case "Select_Calendario_SS": //Calendario de Sucursal Servicio
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Index + " - " + Matrix[Item].Descripcion + " - " + Matrix[Item].Tipo_Tabla + "</option>");
+            }
+            break;
     }
 
     $('#' + Selector).append("<option value='-1'>Seleccione...</option>");

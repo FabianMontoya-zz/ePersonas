@@ -215,6 +215,7 @@ function transacionAjax_Sucursal_create(vp_State) {
                     if (estado == "modificar") {
                         Mensaje_General("¡Exito!", "La Sucursal " + vl_ID + " se ha modificado exitosamente.", "S");
                         HabilitarPanel('modificar');
+                        Clear();
                     }
                     else {
                         Mensaje_General("¡Exito!", "La Sucursal " + vl_ID + " se ha registrado exitosamente en el sistema.", "S");
@@ -254,6 +255,8 @@ function transacionAjax_Sucursal_delete(vp_State) {
             else {
                 Mensaje_General("¡Exito!", "El Estado de la Sucursal " + vl_ID + " se ha actualizado correctamente.", "S");
                 HabilitarPanel('eliminar');
+                transacionAjax_Sucursal("consulta", "N", "ALL");
+                Clear();
             }
         },
         error: function () {

@@ -90,12 +90,6 @@ function transaccionAjax_RutasOperacion(State) {
 
         },
     }).done(function () {
-        var vl_OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
-
-        if (vl_OnlyEmpresa == true) {
-            Nit_ID_proccess = $("#Select_EmpresaNit").val();
-            TransaccionesSegunNIT(Nit_ID_proccess);
-        }
     });
 }
 
@@ -175,8 +169,6 @@ function transacionAjax_Calendario(State, vp_Nit) {
             }
             else {
                 Matrix_Calendarios = JSON.parse(result);
-                
-                CargaCalendarios(Matrix_Calendarios, "Select_Calendario_TS", "");
             }
         },
         error: function () {

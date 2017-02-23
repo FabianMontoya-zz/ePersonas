@@ -368,7 +368,6 @@ function Clear() {
     $("#Select_EmpresaNit").val("-1");
     $("#Txt_ID").val("");
     $("#Select_Sucursal").val("-1");
-    $("#Select_Calendario_SS").val("-1");
     $("#Select_Moneda_Cod").val("-1");
     $("#TxtCosto").val("");
     $("#Text_Capacidad").val("");

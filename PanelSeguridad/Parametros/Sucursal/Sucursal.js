@@ -331,6 +331,7 @@ function Clear() {
     $("#DDLColumns").val("-1").trigger("chosen:updated");
     VerificarNIT("Select_EmpresaNit");
     $("#Select_Direccion").val("-1").trigger("chosen:updated");
+    $("#Select_Calendario").val("-1").trigger("chosen:updated");
     
     var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
 
