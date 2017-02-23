@@ -8,6 +8,7 @@ var estado;
 var editNit_ID;
 var index_ID;
 var editID;
+var Nit_ID_proccess;
 /*--------------- region de variables globales --------------------*/
 
 //Evento load JS
@@ -72,7 +73,8 @@ function Ocultar_Tablas() {
 function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {
         index_ID = $(this).val();
-        TransaccionesSegunNIT(index_ID);
+        Nit_ID_proccess = $(this).val();
+        TransaccionesSegunNIT(Nit_ID_proccess);
     });
 }
 
@@ -371,16 +373,24 @@ function x() {
 
 //limpiar campos
 function Clear() {
-    $("#Select_EmpresaNit").val("-1");
+
+    var vl_Estado = $('#Select_EmpresaNit').is(':disabled');
+
+    if (vl_Estado == true) {
+        $("#Select_EmpresaNit").val(Nit_ID_proccess).trigger('chosen:updated');
+    }
+    else {
+        $("#Select_EmpresaNit").val("-1").trigger('chosen:updated');
+    }
+
+    $("#Select_AreaDepent").empty().trigger('chosen:updated');
+    $("#Select_Politica").empty().trigger('chosen:updated');
+
     $("#Txt_ID").val("");
     $("#TxtDescription").val("");
-    $("#Select_AreaDepent").val("-1");
-    $("#Select_Politica").val("-1");
 
     $("#TxtRead").val("");
-    $("#DDLColumns").val("-1");
-
-    $('.C_Chosen').trigger('chosen:updated');
+    $("#DDLColumns").val("-1").trigger('chosen:updated');
 
     var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
 

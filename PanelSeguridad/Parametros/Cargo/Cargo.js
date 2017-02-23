@@ -365,7 +365,6 @@ function Editar(index_Nit, index_Cargo) {
     }
 }
 
-
 //funcion de carga de la dependecia para edicion
 function ChargeDependencia(index, item) {
     $('#Select_CargoDepent').val(index);
@@ -379,7 +378,6 @@ function ChargeDependencia(index, item) {
     $('.C_Chosen').trigger('chosen:updated');
 }
 
-
 //evento del boton salir
 function x() {
     $("#dialog").dialog("close");
@@ -387,17 +385,23 @@ function x() {
 
 //limpiar campos
 function Clear() {
-    $("#Select_EmpresaNit").val("-1");
+    var vl_Estado = $('#Select_EmpresaNit').is(':disabled');
+
+    if (vl_Estado == true) {
+        $("#Select_EmpresaNit").val(Nit_ID_proccess).trigger('chosen:updated');
+    }
+    else {
+        $("#Select_EmpresaNit").val("-1").trigger('chosen:updated');
+    }
+
     $("#Txt_ID").val("");
     $("#TxtDescription").val("");
-    $("#Select_CargoDepent").val("-1");
-    $("#Select_Politica").val("-1");
+    $("#Select_CargoDepent").empty().trigger('chosen:updated');
+    $("#Select_Politica").empty().trigger('chosen:updated');
 
     $("#TxtRead").val("");
     $("#DDLColumns").val("-1").trigger('chosen:updated');
-
-    $('.C_Chosen').trigger('chosen:updated');
-
+      
     var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
 
     if (OnlyEmpresa == true) {

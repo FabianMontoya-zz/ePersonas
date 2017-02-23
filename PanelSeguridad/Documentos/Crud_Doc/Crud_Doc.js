@@ -423,9 +423,9 @@ function HabilitarControl() {
 //limpiar campos
 function Clear() {
 
-    vl_Estado = $('#Select_EmpresaNit').is(':disabled');
+    var vl_Estado = $('#Select_EmpresaNit').is(':disabled');
 
-    if (vl_Estado = true) {
+    if (vl_Estado ¡= true) {
         $("#Select_EmpresaNit").val(Nit_ID_proccess).trigger('chosen:updated');
     }
     else {
