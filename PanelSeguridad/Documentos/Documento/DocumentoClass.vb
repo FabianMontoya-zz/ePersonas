@@ -19,6 +19,7 @@ Public Class DocumentoClass
     Private _Documento_ID As String
     Private _GrpDocumentos_ID As Integer
 
+    Private _TypeRuta As String
     Private _RutaDocumento As String
     Private _RutaDocumentoDestino As String
     Private _RutaRelativaDocumento As String
@@ -132,6 +133,14 @@ Public Class DocumentoClass
             Me._Documento_ID = value
         End Set
     End Property
+    Public Property TypeRuta() As String
+        Get
+            Return Me._TypeRuta
+        End Get
+        Set(ByVal value As String)
+            Me._TypeRuta = value
+        End Set
+    End Property
     Public Property RutaDocumento() As String
         Get
             Return Me._RutaDocumento
@@ -172,6 +181,7 @@ Public Class DocumentoClass
             Me._RutaDocumentoVisualizacion = value
         End Set
     End Property
+
     Public Property Formato() As Integer
         Get
             Return Me._Formato

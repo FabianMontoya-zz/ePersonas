@@ -1,6 +1,12 @@
 ﻿/*--------------- region de variables globales --------------------*/
 var ArrayEmpresaNit = [];
 var ArrayDedos = [];
+var arrayNameFiles = [];
+
+var RutasOperacion = [];
+var RutaTemporal = "";
+var RutaRelativa = "";
+var RutaDestino = "";
 
 var namePersona = ""
 
@@ -23,8 +29,9 @@ $(document).ready(function () {
     /*Llamado de transacciones AJAX iniciales*/
     transacionAjax_EmpresaNit('Cliente');
     transacionAjax_Documento('Documento');
+    transaccionAjax_RutasOperacion('RUTAS_OPERACION');
     /*=============== END ====================*/
-    
+
     Change_Select_Nit();
     Change_Select_Documento();
 
@@ -99,9 +106,9 @@ function btnOk() {
         var Dedos = CargarArrayDedos();
         if (Dedos == true) {
             BloquearChecks();
-
+            CargarNames();
             $("#Select_EmpresaNit").prop('disabled', true).trigger("chosen:updated");
-            $("#Select_Documento").prop('disabled', true).trigger("chosen:updated"); 
+            $("#Select_Documento").prop('disabled', true).trigger("chosen:updated");
             $("#TxtDoc").prop('disabled', true);
 
             transacionAjax_Ok("DescargarEjecutable");
@@ -118,7 +125,7 @@ function CargarArrayDedos() {
     var Result = false;
     //Pulgares
     if ($("#Check_PulgarIZ").prop("checked")) {
-        ArrayDedos.push($("#Check_PulgarIZ").val());        
+        ArrayDedos.push($("#Check_PulgarIZ").val());
         Result = true;
     }
     if ($("#Check_PulgarDER").prop("checked")) {
@@ -290,7 +297,18 @@ function ValidaCamposPeople() {
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*----                                                                                                                     PROCESOS DE CHANGES EN CONTHuellasES                                                                                                                                        ----*/
+/*----                                                                                                                     PROCESOS DE CARGA DE ARCHIVOS HUELLAS                                                                                                                                    ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+//Función que genera los nombres con los que deben quedar los archivos que van a cargar
+function CargarNames() {
+    for (item in ArrayDedos) {
+        arrayNameFiles.push(ArrayDedos[item] + "_" + $("#Select_Documento").val() + "_" + $("#TxtDoc").val());
+    }
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                     PROCESOS DE CHANGES EN Huellas                                                                                                                                     ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 function Change_Select_Nit() {
@@ -300,7 +318,7 @@ function Change_Select_Nit() {
             $("#Img1").css("display", "inline-table");
             $("#Select_Documento").prop('disabled', true); //No se agrega el trigger porque se hace al seleccionar el val
             $("#Select_Documento").val("-1").trigger("chosen:updated");
-            
+
         } else {
             $("#Img1").css("display", "none");
             $("#Select_Documento").prop('disabled', false); //No se agrega el trigger porque se hace al seleccionar el val

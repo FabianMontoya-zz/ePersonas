@@ -34,7 +34,7 @@ Matrix_Mes[11] = [12, "Diciembre", 31];
 /*--------------- region de variables globales --------------------*/
 
 $(document).ready(function () {
-    clearConsole();
+    //clearConsole();
 
     fecha();
 
@@ -1862,6 +1862,67 @@ function VerDocumento() {
     $("#IF_Visor").attr("width", "100%");
     $("#IF_Visor").attr("height", "100%");
     $("#IF_Visor").attr("src", "../../Repository_Document/TEMP/" + Doc_name);
+}
+
+
+//carga de multiples archivos global
+function UpLoad_MultipleFiles(NameAjax, NameFile_ID, Form) {
+    var arrayData = [];
+    //validamos si seleccionaron un archivo
+    if ($("#" + NameFile_ID).val() != "") {
+
+        //Añadimos la imagen de carga en el contenedor
+        $('#ctl00_cphPrincipal_gif_charge_Container').css("display", "block");
+
+        //inicializamos el fordata para transferencia de archivos
+        var data = new FormData();
+        
+        //capturamos los datos del input file
+        for (var i = 0, f; f = $("#" + NameFile_ID)[0].files[i]; i++) {
+            data.append('archivo'+i, $("#" + NameFile_ID)[0].files[i]);
+            console.log("File: "+i + " " + escape(f.name));
+        }
+       
+        data.append('RutaTemporal', RutaTemporal); //Declara local en js
+        
+        if (form = "Huellas"){
+            data.append('NameArchivos', arrayNameFiles); //Declara local en js
+            data.append('action', 'CargarHuellas');
+        }
+        
+        //data.ajaxStart(inicioEnvio);
+        //transacion ajax
+        $.ajax({
+            url: NameAjax + "Ajax.aspx",
+            type: "POST",
+            contentType: false,
+            data: data,
+            processData: false,
+            success: function (result) {
+                
+                var files = JSON.parse(result);
+                console.log("Result de Multicarga:");
+                console.table(files);
+
+                //var filename = result;
+                // //creamos variables
+                //        filename = $.trim(filename)
+                //        filename = filename.replace(/\s/g, '_');
+                //        Doc_name = filename;
+                //        var objectfile = data;
+                //        var description = "No description file";
+                //        console.log("File Name [Huellas]: " + filename);
+                //        $("#" + NameFile_ID).val("");
+
+            },
+            error: function (error) {
+                alert("Ocurrió un error inesperado, por favor intente de nuevo mas tarde: " + error);
+            }
+        });
+    }
+    else {
+
+    }
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/

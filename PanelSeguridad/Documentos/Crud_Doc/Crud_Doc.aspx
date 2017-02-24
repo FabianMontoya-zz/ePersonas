@@ -329,7 +329,7 @@
             <tr>
                 <td class="Label_Bold" style="width: 200px;">
                     <input id="fileupload" type="file" name="files[]" />
-                    <a id="lnkAttch" style="cursor: pointer" onclick="AddFileInput(F1)" visible="false"></a>
+                    <!--<a id="lnkAttch" style="cursor: pointer" onclick="AddFileInput(F1)" visible="false"></a>-->
                 </td>
                 <td style="width: 300px;">
                     <input id="Btncharge_file" type="button" value="Adjuntar un archivo" name="Add_files"

@@ -27,7 +27,7 @@
     </asp:ContentPlaceHolder>
 </head>
 <body onload="No_Back_Button();">
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" enctype="multipart/form-data">
         <div class="page">
             <div id="Header" class="header ">
                 <div class="Dimencion_Header">

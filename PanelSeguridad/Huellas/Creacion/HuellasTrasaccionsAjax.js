@@ -140,3 +140,39 @@ function transacionAjax_Ok(vp_State) {
         }
     });
 }
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_RutasOperacion(State) {
+    console.log("asdasd");
+    $.ajax({
+        url: "HuellasAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'RUTA'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                RutasOperacion = [];
+                RutaTemporal = "";
+                RutaRelativa = ""
+            }
+            else {
+                RutasOperacion = JSON.parse(result);
+                for (item in RutasOperacion) {
+                    if (RutasOperacion[item].TypeRuta == "F") {
+                        RutaTemporal = RutasOperacion[item].RutaDocumentoTemporal;
+                        RutaRelativa = RutasOperacion[item].RutaRelativaDocumento;
+                        break;
+                    }
+                }
+            }
+        },
+        error: function () {
+
+        },
+    });
+}

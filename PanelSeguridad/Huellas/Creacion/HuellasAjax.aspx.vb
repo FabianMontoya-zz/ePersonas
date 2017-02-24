@@ -9,14 +9,16 @@ Public Class HuellasAjax
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+        Dim asss As Integer = Request.Files.Count()
+
+
         'trae el jquery para hacer todo por debajo del servidor
         If Request.Form("action") <> Nothing Then
             'aterrizamos las opciones del proceso
             Dim vl_S_option_login As String = Request.Form("action")
 
             Select Case vl_S_option_login
-
-                Case "cargar_droplist_busqueda"
 
                 Case "Cliente"
                     CargarCliente()
@@ -29,6 +31,12 @@ Public Class HuellasAjax
 
                 Case "DescargarEjecutable"
                     Descargar()
+
+                Case "RUTAS_OPERACION"
+                    CargarRutasOp()
+
+                Case "CargarHuellas"
+                    CargaTemplatesHuellas()
 
             End Select
 
@@ -47,7 +55,7 @@ Public Class HuellasAjax
 #Region "DROP LIST"
 
     ''' <summary>
-    ''' funcion que carga el objeto DDL consulta
+    ''' Función que carga el objeto DDL consulta
     ''' </summary>
     ''' <remarks></remarks>
     Protected Sub CargarCliente()
@@ -62,7 +70,7 @@ Public Class HuellasAjax
     End Sub
 
     ''' <summary>
-    ''' funcion que carga el objeto DDL consulta
+    ''' Función que carga el objeto DDL consulta
     ''' </summary>
     ''' <remarks></remarks>
     Protected Sub CargarDocumento()
@@ -94,6 +102,19 @@ Public Class HuellasAjax
 
         Dim Str_People As String = SQL.SearchPeople_Exists(vl_S_Nit, vl_S_TD, vl_S_D)
         Response.Write(Str_People)
+
+    End Sub
+
+    ''' <summary>
+    ''' Función que carga rutas operación
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarRutasOp()
+        Dim SQL As New DocumentoSQLClass
+        Dim ObjList As New List(Of DocumentoClass)
+
+        ObjList = SQL.RutasOpe()
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
 
@@ -231,6 +252,128 @@ Public Class HuellasAjax
 
         Return v_l_Texto
     End Function
+
+    ''' <summary>
+    ''' Función Inicial para el cargue de los archivo .fpt que contienen las huellas
+    ''' </summary>
+    ''' <remarks></remarks>
+    Public Sub CargaTemplatesHuellas()
+        Dim Doc As New DocumentoClass
+        If Request.Files.Count() > 0 Then
+            Dim vl_S_RutaTemporal As String = Request.Form("RutaTemporal")
+            Dim vl_S_NombreFile As String = Request.Form("NameTemporal")
+            Dim NameFile As String = UpLoad_File(Request.Files, vl_S_RutaTemporal, vl_S_NombreFile)
+
+            If NameFile <> "" Then
+                If NameFile = "N" Then
+                    Response.Write("NO_FORMAT")
+                Else
+                    Dim AFileDoc = Split(NameFile, "|")
+                    Dim ADoc = Split(AFileDoc(0), ".")
+                    Dim vl_S_NameFormat As String = ADoc(0).Replace(" ", "")
+                    vl_S_NameFormat = vl_S_NameFormat.Replace("_", "")
+                    Dim NewNameDoc = AFileDoc(1).Replace("TEMP", UCase(vl_S_NameFormat))
+
+                    Doc.Rename_doc(vl_S_RutaTemporal, NewNameDoc, NameFile)
+                    Response.Write(NewNameDoc)
+                End If
+            End If
+
+            Exit Sub
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' subir documentos al servidor
+    ''' </summary>
+    ''' <param name="vp_H_files"></param>
+    ''' <param name="vp_S_Ruta"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function UpLoad_File(ByVal vp_H_files As HttpFileCollection, ByVal vp_S_Ruta As String, ByVal vl_S_NombreDoc As String)
+
+        Dim strFileName() As String
+        Dim fileName As String = String.Empty
+        Dim DocumentsTmpList As New List(Of DocumentoClass)
+        Dim Up_Document As Integer = 0
+        Dim DocVal As String = ""
+
+        'Se recorre la lista de archivos cargados al servidor
+        For i As Integer = 0 To vp_H_files.Count - 1
+
+            Dim file As HttpPostedFile = vp_H_files(i)
+
+            If file.ContentLength > 0 Then
+
+                strFileName = file.FileName.Split("\".ToCharArray)
+                ' capturar nombre original
+                fileName = strFileName(strFileName.Length - 1)
+
+                Dim vl_S_Correcto = ValidaFormato_Documento(vl_S_NombreDoc, fileName)
+
+                If vl_S_Correcto = "S" Then
+                    ' determinanado la ruta destino
+                    Dim sFullPath As String = vp_S_Ruta & vl_S_NombreDoc
+                    'Subiendo el archivo al server
+                    file.SaveAs(sFullPath)
+
+                    'Se instancia un objeto de tipo documento y se pobla con la info. reuqerida.
+                    Dim objDocument As New DocumentoClass()
+                    objDocument.namefile = vl_S_NombreDoc
+
+                    'Se agrega el objeto de tipo documento a la lista de documentos
+                    DocumentsTmpList.Add(objDocument)
+                    DocVal = fileName & "|" & vl_S_NombreDoc
+                Else
+                    DocVal = vl_S_Correcto
+                End If
+            End If
+        Next
+
+        Return DocVal
+    End Function
+
+    ''' <summary>
+    ''' validar el formato del documento contra el parametrizado
+    ''' </summary>
+    ''' <param name="vp_S_Ext_Asignado"></param>
+    ''' <param name="vp_S_Ext_File"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function ValidaFormato_Documento(ByVal vp_S_Ext_Asignado As String, ByVal vp_S_Ext_File As String)
+
+        Dim StrExt_Asignado = Split(vp_S_Ext_Asignado, ".")
+        Dim StrExt_File = Split(vp_S_Ext_File, ".")
+        Dim Estado As String = "N"
+
+        Select Case StrExt_Asignado(1)
+
+            Case "JPG"
+                If StrExt_Asignado(1) = UCase(StrExt_File(1)) Then
+                    Estado = "S"
+                End If
+                If UCase(StrExt_File(1)) = "PNG" Then
+                    Estado = "S"
+                End If
+
+            Case "PNG"
+                If StrExt_Asignado(1) = UCase(StrExt_File(1)) Then
+                    Estado = "S"
+                End If
+                If UCase(StrExt_File(1)) = "JPG" Then
+                    Estado = "S"
+                End If
+
+            Case Else
+                If StrExt_Asignado(1) = UCase(StrExt_File(1)) Then
+                    Estado = "S"
+                End If
+
+        End Select
+
+        Return Estado
+    End Function
+
 
 #End Region
 

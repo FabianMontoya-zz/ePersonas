@@ -528,9 +528,10 @@ Public Class DocumentoSQLClass
 
                     Dim objDocumento As New DocumentoClass
                     'cargamos datos sobre el objeto de login
-                    objDocumento.RutaDocumentoTemporal = ReadConsulta.GetValue(0)
-                    objDocumento.RutaRelativaDocumento = ReadConsulta.GetValue(1)
-                    objDocumento.RutaDocumentoVisualizacion = ReadConsulta.GetValue(2)
+                    If Not (IsDBNull(ReadConsulta.GetValue(0))) Then objDocumento.TypeRuta = ReadConsulta.GetValue(0) Else objDocumento.TypeRuta = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(1))) Then objDocumento.RutaDocumentoTemporal = ReadConsulta.GetValue(1) Else objDocumento.RutaDocumentoTemporal = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(2))) Then objDocumento.RutaRelativaDocumento = ReadConsulta.GetValue(2) Else objDocumento.RutaRelativaDocumento = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(3))) Then objDocumento.RutaDocumentoVisualizacion = ReadConsulta.GetValue(3) Else objDocumento.RutaDocumentoVisualizacion = ""
 
                     'agregamos a la lista
                     ObjListDocumento.Add(objDocumento)
@@ -847,7 +848,7 @@ Public Class DocumentoSQLClass
 
         Dim sql As New StringBuilder
 
-        sql.AppendLine(" SELECT TR_Ruta_Temporal,  TR_Ruta_Relativa,TR_Ruta_Visualizacion FROM RUTAS_OPERACION ")
+        sql.AppendLine(" SELECT TR_Ruta_ID, TR_Ruta_Temporal,  TR_Ruta_Relativa, TR_Ruta_Visualizacion FROM RUTAS_OPERACION ")
         StrQuery = sql.ToString
 
         ObjList = listDocumento(StrQuery, Conexion, "RutasOpe")
