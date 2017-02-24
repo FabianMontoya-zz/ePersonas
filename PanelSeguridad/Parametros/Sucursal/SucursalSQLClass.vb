@@ -203,8 +203,8 @@ Public Class SucursalSQLClass
                     obj.Nit_ID = ReadConsulta.GetValue(0)
                     obj.Sucursal_ID = ReadConsulta.GetValue(1)
                     obj.Descripcion = ReadConsulta.GetValue(2)
-                    obj.Direcccion_ID = ReadConsulta.GetValue(3)
-                    obj.Calendario_ID = ReadConsulta.GetValue(4)
+                    If Not (IsDBNull(ReadConsulta.GetValue(3))) Then obj.Direcccion_ID = ReadConsulta.GetValue(3) Else obj.Direcccion_ID = 0
+                    If Not (IsDBNull(ReadConsulta.GetValue(4))) Then obj.Calendario_ID = ReadConsulta.GetValue(4) Else obj.Calendario_ID = 0
                     obj.UsuarioCreacion = ReadConsulta.GetValue(5)
                     obj.FechaCreacion = ReadConsulta.GetValue(6)
                     obj.UsuarioActualizacion = ReadConsulta.GetValue(7)
