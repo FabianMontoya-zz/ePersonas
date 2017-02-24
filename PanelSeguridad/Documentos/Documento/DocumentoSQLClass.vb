@@ -972,7 +972,7 @@ Public Class DocumentoSQLClass
                                 " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D2 ON D2.DDL_ID = D.DOC_TipoContenido AND D2.DDL_Tabla = 'TIPO_CONTENIDO' " & _
                                 " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D3 ON D3.DDL_ID = D.DOC_TipoVersion AND D3.DDL_Tabla = 'TIPO_VERSION' " & _
                                 " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D4 ON D4.DDL_ID = DE.DE_Verificado AND D4.DDL_Tabla = 'VERIFICACION' " & _
-                                " LEFT JOIN RUTAS_OPERACION R ON R.TR_Ruta_Temporal <> DE.DE_RutaDocumento " & _
+                                " LEFT JOIN RUTAS_OPERACION R ON R.TR_Ruta_ID = 'D' " & _
                                 " LEFT JOIN " & BD_Param & ".dbo.CLIENTE C ON C.CLI_Document_ID = AD.A_Document_ID AND DE.DE_Nit_ID = C.CLI_Nit_ID ")
 
         Select Case vp_Obj_persona.TipoSQL

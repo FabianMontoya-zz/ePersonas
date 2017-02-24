@@ -267,6 +267,27 @@ function camposvalidar() {
     return validar;
 }
 
+//validamos campos para la creacion del link
+function validarCamposCrear() {
+
+    var Campo_1 = $("#Select_EmpresaNit").val();
+   
+    var validar = 0;
+
+    if (Campo_1 == "-1" ) {
+        validar = 1;
+        if (Campo_1 == "-1")
+            $("#Img1").css("display", "inline-table");
+        else
+            $("#Img1").css("display", "none");
+    }
+    else {
+        $("#Img1").css("display", "none");
+    }
+    return validar;
+}
+
+
 //validamos campos filtros para consulta y muestre info
 function ValidaFiltros() {
     Flitro_Empresa = $("#Select_EmpresaNit").val();
