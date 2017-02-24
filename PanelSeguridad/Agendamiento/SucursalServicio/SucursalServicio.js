@@ -133,7 +133,6 @@ function BtnConsulta() {
     var ValidateSelect = ValidarDroplist();
     var opcion;
 
-    OpenControl();
 
     if (ValidateSelect == 1) {
         filtro = "N";
@@ -166,7 +165,6 @@ function BtnCrear() {
 
 //elimina de la BD
 function BtnElimina() {
-    OpenControl();
     transacionAjax_SucursalServicio_delete("elimina");
 }
 

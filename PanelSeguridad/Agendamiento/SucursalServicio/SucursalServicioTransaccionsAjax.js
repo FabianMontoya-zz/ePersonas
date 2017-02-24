@@ -82,7 +82,6 @@ function transacionAjax_Calendario(State, vp_Nit) {
             }
             else {
                 Matrix_Calendarios = JSON.parse(result);
-                CargaCalendarios(Matrix_Calendarios, "Select_Calendario_SS", "");
             }
         },
         error: function () {
@@ -146,8 +145,6 @@ function transaccionAjax_MSucursal(State) {
             }
             else {
                 Matrix_Sucursal = JSON.parse(result);
-                //Charge_Combos_Depend_Nit(Matrix_Sucursal, "Select_Sucursal", $("#Select_EmpresaNit").val(), "");
-                console.log("sucursal" + Matrix_Sucursal[1].Sucursal_ID)
             }
         },
         error: function () {
@@ -217,11 +214,11 @@ function transacionAjax_SucursalServicio_create(State) {
         Nit_ID = $("#Select_EmpresaNit").val();
         ID = $("#Txt_ID").val();
     }
-    if ($("#Select_Calendario_SS").val() == null) {
-        calendario_id = 0;
-    } else {
-        calendario_id = $("#Select_Calendario_SS").val();
-    }
+    //if ($("#Select_Calendario_SS").val() == null) {
+    //    calendario_id = 0;
+    //} else {
+    //    calendario_id = $("#Select_Calendario_SS").val();
+    //}
 
     $.ajax({
         url: "SucursalServicioAjax.aspx",
@@ -235,7 +232,7 @@ function transacionAjax_SucursalServicio_create(State) {
             "Mon": $("#Select_Moneda_Cod").val(),
             "Cos": $("#TxtCosto").val(),
             "Cap": $("#Text_Capacidad").val(),
-            "calendario": calendario_id,
+            "calendario": $("#Select_Calendario_SS").val(),
             "user": User.toUpperCase()
         },
         //Transaccion Ajax en proceso

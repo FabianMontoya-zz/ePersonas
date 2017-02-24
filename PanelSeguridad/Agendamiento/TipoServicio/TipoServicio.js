@@ -201,7 +201,6 @@ function BuscarFormato(vp_Formato) {
             vl_ID_Doc = Matrix_Documento[item].Documento_ID;
     }
     
-    console.log(vl_ID_Doc);
     var vl_StrFormato = "1";
 
     for (item in Matrix_Documento) {

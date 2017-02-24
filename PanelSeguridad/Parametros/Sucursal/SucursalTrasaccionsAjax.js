@@ -30,7 +30,6 @@ function transacionAjax_CargaBusqueda(vp_State) {
 
         if (vl_OnlyEmpresa == true) {
             Nit_ID_proccess = $("#Select_EmpresaNit").val();
-            console.log("Salio : " + Nit_ID_proccess);
             TransaccionesSegunNIT(Nit_ID_proccess);
         }
     });
