@@ -100,19 +100,9 @@
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
-                            <td style="width: 7%;" class="Label_Bold">Nombre
-                            </td>
-                            <td style="width: 34%;">
-                                <span class="cssToolTip_Form">
-                                    <input class="Letter" type="text" id="TxtName" maxlength="49" style="width: 100%;" />
-                                    <span class="Spam_AST"></span></span>
-                            </td>
-                            <td style="padding-bottom: 25px; width: 9%;">
-                                <span class="cssToolTip_L">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgName"
-                                        src="../../images/error.png" />
-                                    <span class="SpamEG"></span></span>
-                            </td>
+                            <td style="width: 7%;" class="Label_Bold"></td>
+                            <td style="width: 34%;"></td>
+                            <td style="padding-bottom: 25px; width: 9%;"></td>
                         </tr>
                     </table>
                     <table id="T_Type_Document" style="width: 100%;">
@@ -123,16 +113,12 @@
                                 <select id="Select_TypeDocument" class="C_Chosen">
                                 </select>
                             </td>
-                            <td style="padding-bottom: 25px; width: 60%;">
+                            <td style="padding-bottom: 25px; width: 10%;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img_TypeDoc"
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
-                        </tr>
-                    </table>
-                    <table id="T_Doc_Rol" style="width: 100%;" border="0">
-                        <tr>
                             <td style="width: 10.5%;" class="Label_Bold">Documento
                             </td>
                             <td id="TD_Tdocument" style="width: 17%;">
@@ -146,6 +132,30 @@
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
+                        </tr>
+                    </table>
+                    <table id="T_Doc_Rol" style="width: 100%;" border="0">
+                        <tr>
+                            <td style="width: 9.8%;" class="Label_Bold">Nombre
+                            </td>
+                            <td style="width: 17%;">
+                                <span class="cssToolTip_Form">
+                                    <input class="Letter" type="text" id="TxtName" maxlength="49" style="width: 100%;" />
+                                    <span class="Spam_AST"></span></span>
+                            </td>
+                            <td style="padding-bottom: 25px; width: 9%;">
+                                <span class="cssToolTip_L">
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgName"
+                                        src="../../images/error.png" />
+                                    <span class="SpamEG"></span></span>
+                            </td>
+                            <td class="Label_Bold" style="width: 7%;"></td>
+                            <td id="TD6" style="width: 34%;"></td>
+                            <td style="padding-bottom: 25px; width: 9%;"></td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
                             <td class="Label_Bold" style="width: 7%;">Rol
                             </td>
                             <td id="TD_Trol" style="width: 34%;">
@@ -160,6 +170,7 @@
                             </td>
                         </tr>
                     </table>
+
                     <table id="T_AccesoInfo_PoliticSeguriGrupo" style="width: 100%;" border="0">
                         <tr>
                             <td style="width: 10.5%;" class="Label_Bold">Acceso a Información
