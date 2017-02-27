@@ -113,7 +113,6 @@ function transacionAjax_MMoneda(State) {
             }
             else {
                 Matrix_Moneda = JSON.parse(result);
-                Charge_Combos_Depend_Nit(Matrix_Moneda, "Select_Moneda_Cod", "", "");
             }
         },
         error: function () {
@@ -212,14 +211,7 @@ function transacionAjax_SucursalServicio_create(State) {
     }
     else {
         Nit_ID = $("#Select_EmpresaNit").val();
-        ID = $("#Txt_ID").val();
     }
-    //if ($("#Select_Calendario_SS").val() == null) {
-    //    calendario_id = 0;
-    //} else {
-    //    calendario_id = $("#Select_Calendario_SS").val();
-    //}
-
     $.ajax({
         url: "SucursalServicioAjax.aspx",
         type: "POST",
@@ -227,7 +219,7 @@ function transacionAjax_SucursalServicio_create(State) {
         data: {
             "action": State,
             "Nit_ID": Nit_ID,
-            "ID": ID,
+            "ID": $("#Txt_ID").val(),
             "Suc": $("#Select_Sucursal").val(),
             "Mon": $("#Select_Moneda_Cod").val(),
             "Cos": $("#TxtCosto").val(),

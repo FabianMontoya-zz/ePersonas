@@ -37,6 +37,7 @@ $(document).ready(function () {
     transacionAjax_Formato('Formato');
     transaccionAjax_RutasOperacion('Rutas_Operacion');
     transaccionAjax_MDocumento('Matrx_Documento', Array_G_Usuario[0].Nit_ID);
+    transacionAjax_MMoneda('Moneda');
 
     $(function () {
         $("#Text_Tiempo_Sesion").timepicker();
@@ -116,7 +117,6 @@ function Change_Select_Nit() {
 
 function TransaccionesSegunNIT(vp_index_ID) {
     if (vp_index_ID != "-1") {
-        transacionAjax_MMoneda('Moneda');
         transacionAjax_Calendario('MatrixCalendarios', vp_index_ID);
         transaccionAjax_MDocumento('Matrx_Documento', vp_index_ID);
     }

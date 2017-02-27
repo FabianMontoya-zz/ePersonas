@@ -36,10 +36,10 @@
     End Property
     Public Property Surcursal_ID() As Integer
         Get
-            Return Me._Codigo_ID
+            Return Me._Surcursal_ID
         End Get
         Set(ByVal value As Integer)
-            Me._Codigo_ID = value
+            Me._Surcursal_ID = value
         End Set
     End Property
     Public Property Cod_Moneda() As Integer

@@ -110,8 +110,8 @@ Public Class SucursalServicioSQLClass
 
         sql.AppendLine("INSERT INTO SUCURSAL_SERVICIO( " & _
         "SS_Nit_ID, " & _
-        "SS_Sucursal_ID, " & _
         "SS_Servicio_ID, " & _
+        "SS_Sucursal_ID, " & _
         "SS_Moneda_ID, " & _
         "SS_Costo," & _
         "SS_Capacidad," & _
@@ -155,6 +155,7 @@ Public Class SucursalServicioSQLClass
         Dim sql As New StringBuilder
         Dim StrQuery As String = ""
         sql.AppendLine("UPDATE SUCURSAL_SERVICIO SET " & _
+                          " SS_Sucursal_ID = " & vp_Obj.Surcursal_ID & ", " & _
                           " SS_Moneda_ID = '" & vp_Obj.Cod_Moneda & "', " & _
                           " SS_Costo = '" & vp_Obj.Costo & "', " & _
                           " SS_Capacidad = '" & vp_Obj.Capacidad & "', " & _

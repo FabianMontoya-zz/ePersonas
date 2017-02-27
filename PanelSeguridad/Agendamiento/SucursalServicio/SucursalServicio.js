@@ -95,7 +95,7 @@ function Change_Select_Nit() {
 function TransaccionesSegunNIT(vp_index_ID) {
     if (vp_index_ID != "-1") {
         transacionAjax_Calendario('MatrixCalendarios', vp_index_ID);
-        Charge_Combos_Depend_Nit(Matrix_Sucursal, "Select_Sucursal", vp_index_ID, "");
+        
     }
 }
 
