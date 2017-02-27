@@ -34,7 +34,7 @@ Matrix_Mes[11] = [12, "Diciembre", 31];
 /*--------------- region de variables globales --------------------*/
 
 $(document).ready(function () {
-    //clearConsole();
+    clearConsole();
 
     fecha();
 
@@ -1866,6 +1866,10 @@ function VerDocumento() {
 
 
 //carga de multiples archivos global
+//Parámetros
+// - NameAjax = Nombre de la página de la cual se llama la función
+// - NameFile_ID = ID que utiliza el Input tipo File desde el cual hace la carga
+// - 
 function UpLoad_MultipleFiles(NameAjax, NameFile_ID, Form) {
     var arrayData = [];
     //validamos si seleccionaron un archivo
@@ -1874,24 +1878,29 @@ function UpLoad_MultipleFiles(NameAjax, NameFile_ID, Form) {
         //Añadimos la imagen de carga en el contenedor
         $('#ctl00_cphPrincipal_gif_charge_Container').css("display", "block");
 
-        //inicializamos el fordata para transferencia de archivos
+        //inicializamos el formdata para transferencia de archivos
         var data = new FormData();
-        
+        var numFilesSended = 0;
         //capturamos los datos del input file
         for (var i = 0, f; f = $("#" + NameFile_ID)[0].files[i]; i++) {
-            data.append('archivo'+i, $("#" + NameFile_ID)[0].files[i]);
-            console.log("File: "+i + " " + escape(f.name));
+            data.append('archivo'+i, $("#" + NameFile_ID)[0].files[i]); //Cargamos cada uno de los archivos en los Data
+            console.log("File: "+i + " - " + escape(f.name));
+            numFilesSended = numFilesSended + 1;
         }
        
         data.append('RutaTemporal', RutaTemporal); //Declara local en js
         
-        if (form = "Huellas"){
-            data.append('NameArchivos', arrayNameFiles); //Declara local en js
+        if (form = "Huellas"){ //Utilizado para cuando los archivos provienen del modulo de huellas
+            var NameFiles = "";
+            for (i in arrayNameFiles){
+                NameFiles = NameFiles + "," + arrayNameFiles[i];
+            }
+            NameFiles = NameFiles.substr(1);
+            data.append('NameArchivos', NameFiles); 
             data.append('action', 'CargarHuellas');
         }
         
-        //data.ajaxStart(inicioEnvio);
-        //transacion ajax
+        //Transacción ajax
         $.ajax({
             url: NameAjax + "Ajax.aspx",
             type: "POST",
@@ -1902,26 +1911,30 @@ function UpLoad_MultipleFiles(NameAjax, NameFile_ID, Form) {
                 
                 var files = JSON.parse(result);
                 console.log("Result de Multicarga:");
-                console.table(files);
+                console.log(files);
 
-                //var filename = result;
-                // //creamos variables
-                //        filename = $.trim(filename)
-                //        filename = filename.replace(/\s/g, '_');
-                //        Doc_name = filename;
-                //        var objectfile = data;
-                //        var description = "No description file";
-                //        console.log("File Name [Huellas]: " + filename);
-                //        $("#" + NameFile_ID).val("");
-
+                if (files[0] == "NO FILES"){
+                    Mensaje_General("Sin Archivos", "No se han encontrado peticiones de carga de archivos al servidor, la operación de carga se ha cancelado.", "W");
+                }else{
+                    console.log("Tamaño result: " + files.length + "\nTamaño Enviados: " +numFilesSended);
+                    if (files.length < numFilesSended){
+                        if ( (numFilesSended - files.length) > 1){
+                            Mensaje_General("Archivos no cargados", "El sistema no ha cargado la totalidad de archivos que usted dispuso, esto sucedió porque no cumplieron con los parámetros permitidos. No se cargaron "+ (numFilesSended - files.length) + " archivos.", "W");
+                        }else if ( (numFilesSended - files.length) == 1){
+                            Mensaje_General("Archivo no cargado", "El sistema no ha cargado la totalidad de archivos que usted dispuso, esto sucedió porque no cumplió con los parámetros permitidos. No se cargó "+ (numFilesSended - files.length) + " archivo.", "W");
+                        }else if ( (numFilesSended - files.length) == numFilesSended){
+                            Mensaje_General("Carga Fallida", "El sistema no cargó ninguno de los archivos seleccionado, esto sucedió porque ningún archivo cumplia con los parametros de archivo aceptado.", "E");
+                        }
+                    }
+                }
             },
             error: function (error) {
-                alert("Ocurrió un error inesperado, por favor intente de nuevo mas tarde: " + error);
+                Mensaje_General("Error durante la Carga", "Lo sentimos, ocurrió un error y no se logró completar el proceso. Por favor recarga la página e intentalo más tarde.", "W");
             }
         });
     }
     else {
-
+        Mensaje_General("Carga de Archivos Múltiples", "Debes seleccionar como mínimo un archivo para realizar la respectiva carga.", "E");
     }
 }
 

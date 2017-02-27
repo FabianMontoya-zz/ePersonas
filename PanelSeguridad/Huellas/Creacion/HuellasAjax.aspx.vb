@@ -86,7 +86,7 @@ Public Class HuellasAjax
 
 #End Region
 
-    
+
 
 #Region "FUNCIONES"
     ''' <summary>
@@ -259,44 +259,37 @@ Public Class HuellasAjax
     ''' <remarks></remarks>
     Public Sub CargaTemplatesHuellas()
         Dim Doc As New DocumentoClass
+        Dim vl_L_FilesUploaded As New List(Of String)
         If Request.Files.Count() > 0 Then
             Dim vl_S_RutaTemporal As String = Request.Form("RutaTemporal")
-            Dim vl_S_NombreFile As String = Request.Form("NameTemporal")
-            Dim NameFile As String = UpLoad_File(Request.Files, vl_S_RutaTemporal, vl_S_NombreFile)
-
-            If NameFile <> "" Then
-                If NameFile = "N" Then
-                    Response.Write("NO_FORMAT")
-                Else
-                    Dim AFileDoc = Split(NameFile, "|")
-                    Dim ADoc = Split(AFileDoc(0), ".")
-                    Dim vl_S_NameFormat As String = ADoc(0).Replace(" ", "")
-                    vl_S_NameFormat = vl_S_NameFormat.Replace("_", "")
-                    Dim NewNameDoc = AFileDoc(1).Replace("TEMP", UCase(vl_S_NameFormat))
-
-                    Doc.Rename_doc(vl_S_RutaTemporal, NewNameDoc, NameFile)
-                    Response.Write(NewNameDoc)
-                End If
-            End If
-
-            Exit Sub
+            Dim vl_S_NombresFiles As String = Request.Form("NameArchivos")
+            vl_L_FilesUploaded = UpLoad_File(Request.Files, vl_S_RutaTemporal, vl_S_NombresFiles)
+        Else
+            vl_L_FilesUploaded.Add("NO FILES")
         End If
+        Response.Write(JsonConvert.SerializeObject(vl_L_FilesUploaded.ToArray()))
     End Sub
 
     ''' <summary>
-    ''' subir documentos al servidor
+    ''' Función que realiza la carga de los archivos al servidor e indica cuales se han subido
     ''' </summary>
     ''' <param name="vp_H_files"></param>
     ''' <param name="vp_S_Ruta"></param>
+    ''' <param name="vl_S_NombresFiles"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function UpLoad_File(ByVal vp_H_files As HttpFileCollection, ByVal vp_S_Ruta As String, ByVal vl_S_NombreDoc As String)
+    Public Function UpLoad_File(ByVal vp_H_files As HttpFileCollection, ByVal vp_S_Ruta As String, ByVal vl_S_NombresFiles As String)
 
-        Dim strFileName() As String
         Dim fileName As String = String.Empty
-        Dim DocumentsTmpList As New List(Of DocumentoClass)
-        Dim Up_Document As Integer = 0
-        Dim DocVal As String = ""
+        Dim vl_A_NamesFiles As String() = Nothing
+        Dim vl_L_FilesUploaded As New List(Of String)
+
+        'Cargamos los nombres de archivos que debe cargar en un array para luego validar
+        vl_A_NamesFiles = vl_S_NombresFiles.Split(",")
+
+        For Each fichero As String In Directory.GetFiles(vp_S_Ruta)
+            System.IO.File.Delete(fichero)
+        Next
 
         'Se recorre la lista de archivos cargados al servidor
         For i As Integer = 0 To vp_H_files.Count - 1
@@ -304,72 +297,45 @@ Public Class HuellasAjax
             Dim file As HttpPostedFile = vp_H_files(i)
 
             If file.ContentLength > 0 Then
-
-                strFileName = file.FileName.Split("\".ToCharArray)
                 ' capturar nombre original
-                fileName = strFileName(strFileName.Length - 1)
+                fileName = file.FileName
 
-                Dim vl_S_Correcto = ValidaFormato_Documento(vl_S_NombreDoc, fileName)
+                Dim vl_S_Correcto = ValidaFormato_Template(fileName)
 
                 If vl_S_Correcto = "S" Then
-                    ' determinanado la ruta destino
-                    Dim sFullPath As String = vp_S_Ruta & vl_S_NombreDoc
-                    'Subiendo el archivo al server
-                    file.SaveAs(sFullPath)
-
-                    'Se instancia un objeto de tipo documento y se pobla con la info. reuqerida.
-                    Dim objDocument As New DocumentoClass()
-                    objDocument.namefile = vl_S_NombreDoc
-
-                    'Se agrega el objeto de tipo documento a la lista de documentos
-                    DocumentsTmpList.Add(objDocument)
-                    DocVal = fileName & "|" & vl_S_NombreDoc
-                Else
-                    DocVal = vl_S_Correcto
+                    For Each item As String In vl_A_NamesFiles
+                        'Validamos si el nombre del archivo está dentro de los que se espera obtener
+                        If fileName.Equals(item & ".fpt") Then
+                            ' Creamos la ruta de destino final
+                            Dim sFullPath As String = vp_S_Ruta & fileName
+                            'Se sube el archivo al servidor
+                            file.SaveAs(sFullPath)
+                            vl_L_FilesUploaded.Add(fileName)
+                            Exit For
+                        End If
+                    Next
+                    
                 End If
             End If
         Next
 
-        Return DocVal
+        Return vl_L_FilesUploaded
     End Function
 
     ''' <summary>
-    ''' validar el formato del documento contra el parametrizado
+    ''' Función que valida el nombre del archivo de huellas
     ''' </summary>
-    ''' <param name="vp_S_Ext_Asignado"></param>
-    ''' <param name="vp_S_Ext_File"></param>
+    ''' <param name="vp_S_File_Name"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function ValidaFormato_Documento(ByVal vp_S_Ext_Asignado As String, ByVal vp_S_Ext_File As String)
+    Public Function ValidaFormato_Template(ByVal vp_S_File_Name As String)
 
-        Dim StrExt_Asignado = Split(vp_S_Ext_Asignado, ".")
-        Dim StrExt_File = Split(vp_S_Ext_File, ".")
+        Dim StrExt_File = Split(vp_S_File_Name, ".")
         Dim Estado As String = "N"
-
-        Select Case StrExt_Asignado(1)
-
-            Case "JPG"
-                If StrExt_Asignado(1) = UCase(StrExt_File(1)) Then
-                    Estado = "S"
-                End If
-                If UCase(StrExt_File(1)) = "PNG" Then
-                    Estado = "S"
-                End If
-
-            Case "PNG"
-                If StrExt_Asignado(1) = UCase(StrExt_File(1)) Then
-                    Estado = "S"
-                End If
-                If UCase(StrExt_File(1)) = "JPG" Then
-                    Estado = "S"
-                End If
-
-            Case Else
-                If StrExt_Asignado(1) = UCase(StrExt_File(1)) Then
-                    Estado = "S"
-                End If
-
-        End Select
+        ' Valida que el archivo Cargado sea el de las HUellas (.fpt)
+        If "FPT" = UCase(StrExt_File(1)) Then
+            Estado = "S"
+        End If
 
         Return Estado
     End Function

@@ -2,6 +2,7 @@
 var ArrayEmpresaNit = [];
 var ArrayDedos = [];
 var arrayNameFiles = [];
+var arrayFingersStatus = [];
 
 var RutasOperacion = [];
 var RutaTemporal = "";
@@ -98,6 +99,7 @@ function DialogDedos() {
 function Ocultar_Tablas() {
     $("#TablaDatos").css("display", "none");
     $("#TablaConsulta").css("display", "none");
+    $("#T_Files").css("display", "none");
 }
 
 //Función que ejecuta la carga de los dedos y la generación del ejecutable
@@ -106,12 +108,13 @@ function btnOk() {
         var Dedos = CargarArrayDedos();
         if (Dedos == true) {
             BloquearChecks();
-            CargarNames();
             $("#Select_EmpresaNit").prop('disabled', true).trigger("chosen:updated");
             $("#Select_Documento").prop('disabled', true).trigger("chosen:updated");
             $("#TxtDoc").prop('disabled', true);
 
             transacionAjax_Ok("DescargarEjecutable");
+            CargarNames();
+
         } else {
             Mensaje_General("¡ERROR! - Sin Selección", "Debes seleccionar como mínimo uno de los dedos que capturarás de la persona.", "E");
         }
@@ -299,12 +302,43 @@ function ValidaCamposPeople() {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                     PROCESOS DE CARGA DE ARCHIVOS HUELLAS                                                                                                                                    ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+function CargaArchivos(ID_FileInput) {
+    if (Ejecutable == true) {
+        UpLoad_MultipleFiles('Huellas', ID_FileInput, 'Huellas');
+    } else {
+        Mensaje_General("Ejecutable no Generado", "No puedes ejecutar esta opción ya que no se ha generado el respectivo ejecutable necesario para validar esta operación", "E");
+        $("#" + ID_FileInput).val("");
+    }
+}
 
 //Función que genera los nombres con los que deben quedar los archivos que van a cargar
 function CargarNames() {
-    for (item in ArrayDedos) {
-        arrayNameFiles.push(ArrayDedos[item] + "_" + $("#Select_Documento").val() + "_" + $("#TxtDoc").val());
+    if (Ejecutable == true) {
+        for (item in ArrayDedos) {
+            arrayNameFiles.push(ArrayDedos[item] + "_" + $("#Select_Documento").val() + "_" + $("#TxtDoc").val());
+            var JSONFingers = { Nombre: ArrayDedos[item], Estado: "Wait" };
+            arrayFingersStatus.push(JSONFingers);
+        }
+    } else {
+        Mensaje_General("Ejecutable no Generado", "No puedes ejecutar esta opción ya que no se ha generado el respectivo ejecutable necesario para validar esta operación", "E");
     }
+}
+
+function ArmarTabla() {
+    html_TFingers = "<table id='TFingers' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>NIT Empresa</th><th>Usuario</th><th>Tipo Documento</th><th>Documento</th><th>Nombre</th><th>Rol</th></th></th><th>Estado</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
+    for (itemArray in ArrayUser) {
+        //html_TUser += "<tr id= 'TUser_" + ArrayUser[itemArray].Index + "'><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Editar('" + ArrayUser[itemArray].Usuario_ID + "')\"></input></td><td>" + ArrayUser[itemArray].Usuario_ID + "</td><td>" + ArrayUser[itemArray].Documento + "</td><td>" + ArrayUser[itemArray].Nombre + "</td><td>" + ArrayUser[itemArray].Rol_ID + "</td><td> " + ArrayUser[itemArray].Estado + " </td></tr>";
+        html_TFingers += "<tr id= 'TFingers_" + ArrayUser[itemArray].Index + "'><td>" + ArrayUser[itemArray].Nit_ID + "</td><td>" + ArrayUser[itemArray].Usuario_ID + "</td><td>" + ArrayUser[itemArray].TypeDocument + "</td><td>" + ArrayUser[itemArray].Documento + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].Nombre + "</td><td>" + ArrayUser[itemArray].Rol_ID + "</td><td> " + ArrayUser[itemArray].Estado + " </td><td>" + ArrayUser[itemArray].UsuarioCreacion + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].FechaCreacion + "</td><td>" + ArrayUser[itemArray].UsuarioActualizacion + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].FechaActualizacion + "</td></tr>";
+    }
+
+    html_TUser += "</tbody></table>";
+    $("#Div_TableFingers").html("");
+    $("#Div_TableFingers").html(html_TFingers);
+
+    $("#TFingers").dataTable({
+        "bJQueryUI": true, "iDisplayLength": 1000,
+        "bDestroy": true
+    });
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/

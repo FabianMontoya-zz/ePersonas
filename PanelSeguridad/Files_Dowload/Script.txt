@@ -11,7 +11,7 @@ If fso.FileExists(Archivo) Then
    TypeDocument = "1"
    Document = "1032494911"
    Name_Client = "Fabian Dario Montoya Ballesteros"
-   Fingers = "IndiceDER,AnularDER"
+   Fingers = "PulgarDER,IndiceDER,MedioDER"
 
    Titulo = "Autorización de Acceso"
    Mensaje = "AUTORIZACIÓN DE ACCESO A ARCHIVOS DEL EQUIPO"+ vbCrLf + vbCrLf 

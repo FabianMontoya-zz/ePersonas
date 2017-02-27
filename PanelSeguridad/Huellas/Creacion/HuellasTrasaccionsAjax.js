@@ -133,11 +133,14 @@ function transacionAjax_Ok(vp_State) {
             if (Resultado = true) {
                 Ejecutable = true;
                 Mensaje_General("Cargar Archivo de Huella","Ejecute el archivo descargado, este ejecutará el capturador de huellas, luego cargue el archivo *.fpt al servidor.","W")
+                $("#T_Files").css("display", "inline-table");
             }
         },
         error: function () {
 
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     });
 }
 
