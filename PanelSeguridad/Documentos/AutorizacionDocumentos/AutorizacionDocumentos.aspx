@@ -53,7 +53,12 @@
                                 <select id="Select_EmpresaNit" class="C_Chosen">
                                 </select>
                             </td>
-                            <td style="padding-bottom: 25px; width: 250px;"></td>
+                            <td style="padding-bottom: 25px; width: 250px;">
+                                <span class="cssToolTip">
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img5"
+                                        src="../../images/error.png" />
+                                    <span class="SpamEG"></span></span>
+                            </td>
                         </tr>
                     </table>
                     <table id="Tabla_2" style="width: 700px; text-align: left;">

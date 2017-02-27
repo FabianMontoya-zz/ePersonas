@@ -192,7 +192,15 @@ function InicializaPagina() {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //dispara la consulta a la matriz
 function BtnCrear() {
-    ValidaFiltros();
+
+    var validate;
+    validate = validarCamposCrear();
+
+    if (validate == 0) {
+        ValidaFiltros();
+    }
+
+    
 }
 
 //regresar proceso
@@ -277,16 +285,15 @@ function validarCamposCrear() {
     if (Campo_1 == "-1" ) {
         validar = 1;
         if (Campo_1 == "-1")
-            $("#Img1").css("display", "inline-table");
+            $("#Img5").css("display", "inline-table");
         else
-            $("#Img1").css("display", "none");
+            $("#Img5").css("display", "none");
     }
     else {
-        $("#Img1").css("display", "none");
+        $("#Img5").css("display", "none");
     }
     return validar;
 }
-
 
 //validamos campos filtros para consulta y muestre info
 function ValidaFiltros() {
