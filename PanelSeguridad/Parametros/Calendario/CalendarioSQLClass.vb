@@ -538,7 +538,7 @@ Public Class CalendarioSQLClass
                     "T.Descripcion, " & _
                     "T.TipoCalendario, " & _
                     "T.TipoTabla, " & _
-                    " ROW_NUMBER() OVER(ORDER BY T.Nit_ID, T.TipoCalendario ASC) AS Index_Calendario " & _
+                    " ROW_NUMBER() OVER(ORDER BY T.Nit_ID, T.TipoTabla ASC) AS Index_Calendario " & _
                     "FROM T_TIPO_SERVICIO T ")
 
         Dim vl_S_SQLString As String = sql.ToString
