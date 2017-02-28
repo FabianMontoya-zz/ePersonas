@@ -89,13 +89,13 @@
                 </tr>
             </table>
             <div id="Div_BTNDedos" style="width: 100%; margin-top: 15px;">
-                <input id="Button1" type="button" value="Dedos a Capturar" onclick="DialogDedos();" style="cursor: pointer; cursor: hand; width: 26%;" />
+                <input id="Btn_CapturaDedos" type="button" value="Dedos a Capturar" onclick="DialogDedos();" style="cursor: pointer; cursor: hand; width: 26%;" />
             </div>
-            <table id="Div1" style="width: 75%; text-align: center; margin-top: 30px;">
-            <tr>
-            <td class="Label_Bold">IDENTIFICACIÓN
+            <table id="T_TitleTableFiles" style="width: 100%; text-align: center; margin-top: 30px;">
+                <tr>
+                    <td class="Label_Bold">ARCHIVOS HUELLAS CLIENTE
                     </td>
-            </tr>
+                </tr>
             </table>
             <table id="T_Files" style="width: 100%; margin-top: 15px;">
                 <tr>
@@ -109,10 +109,10 @@
                     </td>
                 </tr>
             </table>
-            <div id="Div_TableFingers" style="width: 100%;">
+            <div id="Div_TableFingers">
             </div>
             <div id="Div_BTN_Guardar" style="width: 100%; text-align: center; margin-top: 30px;">
-                <input id="Btnguardar" type="button" value="Guardar" onclick="" />
+                <input id="Btnguardar" type="button" value="Guardar" onclick="GuardarHuellas();" />
             </div>
         </div>
 
@@ -216,7 +216,7 @@
                 </tr>
                 <tr>
                     <td colspan="2" align="center">
-                        <input id="BTN_Capturar" type="button" style="cursor: pointer; cursor: hand;" value="Capturar" onclick="btnOk();" />
+                        <input id="BTN_Capturar" type="button" style="cursor: pointer; cursor: hand;" value="Capturar" onclick="GenerarEjecutable();" />
                     </td>
                 </tr>
             </table>

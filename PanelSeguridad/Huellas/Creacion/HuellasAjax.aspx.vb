@@ -7,6 +7,7 @@ Imports System.IO
 
 Public Class HuellasAjax
     Inherits System.Web.UI.Page
+    Public vg_T_Template As DPFP.Template 'Template que guarda el mapa de la huella
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
@@ -38,6 +39,9 @@ Public Class HuellasAjax
                 Case "CargarHuellas"
                     CargaTemplatesHuellas()
 
+                Case "Crear_Huellas"
+                    Insert_Huellas()
+
             End Select
 
         End If
@@ -48,7 +52,36 @@ Public Class HuellasAjax
 
 #Region "CRUD"
 
+    Protected Sub Insert_Huellas()
+        Dim objC_Huellas As New HuellasClass
+        Dim SQL_C_Huellas As New HuellasSQLClass
+        Dim ObjListC_Huellas As New List(Of HuellasClass)
 
+        Dim result As String
+        Dim vl_s_IDxiste As String
+
+        objC_Huellas.Nit_ID = Request.Form("Nit_ID")
+        objC_Huellas.TypeDocument_ID = Request.Form("TypeDocument")
+        objC_Huellas.Document_ID = Request.Form("Document")
+
+        'Validamos si la llave existe
+        vl_s_IDxiste = SQL_C_Huellas.Consulta_Repetido(objC_Huellas)
+
+        If vl_s_IDxiste = 0 Then
+
+            objC_Huellas = CargarTemplates(objC_Huellas)
+
+            objC_Huellas.UsuarioCreacion = Request.Form("user")
+            objC_Huellas.FechaCreacion = Date.Now
+            objC_Huellas.UsuarioActualizacion = Request.Form("user")
+            objC_Huellas.FechaActualizacion = Date.Now
+            result = SQL_C_Huellas.InsertHuellas(objC_Huellas)
+        Else
+            DeleteAllDirectoryFiles()
+            result = "Existe"
+        End If
+        Response.Write(result)
+    End Sub
 
 #End Region
 
@@ -89,6 +122,9 @@ Public Class HuellasAjax
 
 
 #Region "FUNCIONES"
+
+
+
     ''' <summary>
     ''' Consulta si existe la persona digitada 
     ''' </summary>
@@ -118,6 +154,7 @@ Public Class HuellasAjax
 
     End Sub
 
+#Region "GENERAR EJECUTABLE"
     ''' <summary>
     ''' Función que da los datos para la descarga del archivo
     ''' </summary>
@@ -252,6 +289,9 @@ Public Class HuellasAjax
 
         Return v_l_Texto
     End Function
+#End Region
+
+#Region "CARGA ARCHIVOS HUELLAS A SERVIDOR"
 
     ''' <summary>
     ''' Función Inicial para el cargue de los archivo .fpt que contienen las huellas
@@ -287,10 +327,6 @@ Public Class HuellasAjax
         'Cargamos los nombres de archivos que debe cargar en un array para luego validar
         vl_A_NamesFiles = vl_S_NombresFiles.Split(",")
 
-        For Each fichero As String In Directory.GetFiles(vp_S_Ruta)
-            System.IO.File.Delete(fichero)
-        Next
-
         'Se recorre la lista de archivos cargados al servidor
         For i As Integer = 0 To vp_H_files.Count - 1
 
@@ -314,7 +350,7 @@ Public Class HuellasAjax
                             Exit For
                         End If
                     Next
-                    
+
                 End If
             End If
         Next
@@ -340,6 +376,103 @@ Public Class HuellasAjax
         Return Estado
     End Function
 
+#End Region
+
+#Region "CONVERTIR ARCHIVOS TEMPLATE"
+    ''' <summary>
+    ''' Función que toma los archivos del servidor y los transforma a Templates Serializados
+    ''' Devuelve el Class de Huellas cargado
+    ''' </summary>
+    ''' <param name="vp_Obj_Huellas"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Protected Function CargarTemplates(ByVal vp_Obj_Huellas As HuellasClass)
+
+        Dim vl_S_RutaTemporal As String = Request.Form("RutaTemporal")
+        Dim vl_S_NombresFiles As String = Request.Form("NameArchivos")
+        Dim vl_S_PathArchivo As String = Nothing
+        Dim vl_A_NamesFiles As String() = Nothing
+
+        'Cargamos los nombres de archivos que debe cargar en un array para luego validar
+        vl_A_NamesFiles = vl_S_NombresFiles.Split(",")
+
+        For Each file As String In vl_A_NamesFiles
+            vl_S_PathArchivo = vl_S_RutaTemporal & file & ".fpt"
+            Using vl_FS_fs As System.IO.FileStream = System.IO.File.OpenRead(vl_S_PathArchivo) 'Leemos el archivo
+                Dim vl_T_template As New DPFP.Template(vl_FS_fs) 'Convertimos el archivo al Template
+                vg_T_Template = vl_T_template 'Igualamos con la Variable Global
+            End Using
+            Dim vl_MS_mst As New MemoryStream
+            vg_T_Template.Serialize(vl_MS_mst) 'Serializamos el Template en el MemoryStream
+            Dim vl_B_serializedTemplate As Byte() = vl_MS_mst.ToArray() 'Serializamos el memory Stream
+            vp_Obj_Huellas = CargarserializedTemplate(vp_Obj_Huellas, vl_B_serializedTemplate, file)
+            System.IO.File.Delete(vl_S_PathArchivo) 'Borramos el archivo de la carpeta
+        Next
+        Return vp_Obj_Huellas
+    End Function
+
+    ''' <summary>
+    ''' Función que Revisa que archivo se ha serializado y lo añade al respectivo dedo asignado
+    ''' </summary>
+    ''' <param name="vp_Obj_Huellas"></param>
+    ''' <param name="vp_B_serializedTemplate"></param>
+    ''' <param name="vp_S_NameFile"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Protected Function CargarserializedTemplate(ByVal vp_Obj_Huellas As HuellasClass, ByVal vp_B_serializedTemplate As Byte(), ByVal vp_S_NameFile As String)
+        Dim vl_A_NameFinger As String() = Nothing
+        vl_A_NameFinger = vp_S_NameFile.Split("_")
+
+        Dim vl_S_Finger = vl_A_NameFinger(0)
+
+        Select Case vl_S_Finger
+            'Mano Izquierda
+            Case "MeniqueIZ"
+                vp_Obj_Huellas.Menique_IZ = vp_B_serializedTemplate
+            Case "AnularIZ"
+                vp_Obj_Huellas.Anular_IZ = vp_B_serializedTemplate
+            Case "MedioIZ"
+                vp_Obj_Huellas.Medio_IZ = vp_B_serializedTemplate
+            Case "IndiceIZ"
+                vp_Obj_Huellas.Indice_IZ = vp_B_serializedTemplate
+            Case "PulgarIZ"
+                vp_Obj_Huellas.Pulgar_IZ = vp_B_serializedTemplate
+                'Mano Derecha
+            Case "MeniqueDER"
+                vp_Obj_Huellas.Menique_DER = vp_B_serializedTemplate
+            Case "AnularDER"
+                vp_Obj_Huellas.Anular_DER = vp_B_serializedTemplate
+            Case "MedioDER"
+                vp_Obj_Huellas.Medio_DER = vp_B_serializedTemplate
+            Case "IndiceDER"
+                vp_Obj_Huellas.Indice_DER = vp_B_serializedTemplate
+            Case "PulgarDER"
+                vp_Obj_Huellas.Pulgar_DER = vp_B_serializedTemplate
+        End Select
+
+        Return vp_Obj_Huellas
+    End Function
+
+#End Region
+
+    ''' <summary>
+    ''' Función que elimina todos los archivos que se cargaron al servidor y que no se utilizaran
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub DeleteAllDirectoryFiles()
+        Dim vl_S_RutaTemporal As String = Request.Form("RutaTemporal")
+        Dim vl_S_NombresFiles As String = Request.Form("NameArchivos")
+        Dim vl_S_PathArchivo As String = Nothing
+        Dim vl_A_NamesFiles As String() = Nothing
+
+        'Cargamos los nombres de archivos que debe cargar en un array para luego validar
+        vl_A_NamesFiles = vl_S_NombresFiles.Split(",")
+
+        For Each file As String In vl_A_NamesFiles
+            vl_S_PathArchivo = vl_S_RutaTemporal & file & ".fpt"
+            System.IO.File.Delete(vl_S_PathArchivo) 'Borramos el archivo de la carpeta
+        Next
+    End Sub
 
 #End Region
 
