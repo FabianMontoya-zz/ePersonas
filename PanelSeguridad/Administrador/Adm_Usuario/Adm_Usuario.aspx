@@ -138,10 +138,7 @@
                         <tr>
                             <td style="width: 9.8%;" class="Label_Bold">Nombre
                             </td>
-                            <td style="width: 17%;">
-                                <span class="cssToolTip_Form">
-                                    <input class="Letter" type="text" id="TxtName" maxlength="49" style="width: 100%;" />
-                                    <span class="Spam_AST"></span></span>
+                            <td style="width: 27%;" id="TxtName">
                             </td>
                             <td style="padding-bottom: 25px; width: 9%;">
                                 <span class="cssToolTip_L">
@@ -150,7 +147,7 @@
                                     <span class="SpamEG"></span></span>
                             </td>
                             <td class="Label_Bold" style="width: 7%;"></td>
-                            <td id="TD6" style="width: 34%;"></td>
+                            <td id="TD6" style="width: 24%;"></td>
                             <td style="padding-bottom: 25px; width: 9%;"></td>
                         </tr>
                     </table>

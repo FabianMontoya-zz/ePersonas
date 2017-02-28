@@ -41,6 +41,10 @@ Public Class Adm_UsuarioAjax
                 Case "modificar"
                     UpdateUser()
 
+                Case "Buscar_Persona"
+                    Search_People()
+
+
             End Select
 
         End If
@@ -292,6 +296,22 @@ Public Class Adm_UsuarioAjax
 #End Region
 
 #Region "FUNCIONES"
+
+    ''' <summary>
+    ''' consulta si existe la persona digitada 
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub Search_People()
+
+        Dim SQL As New ClienteSQLClass
+        Dim vl_S_Nit As String = Request.Form("NIT")
+        Dim vl_S_TD As String = Request.Form("TD")
+        Dim vl_S_D As String = Request.Form("D")
+
+        Dim Str_People As String = SQL.SearchPeople_Exists(vl_S_Nit, vl_S_TD, vl_S_D)
+        Response.Write(Str_People)
+
+    End Sub
 
 #End Region
 

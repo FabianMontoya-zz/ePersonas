@@ -14,6 +14,7 @@ var editID;
 var editNIT;
 var EstadoUsu;
 var IntentosFallidos = 0;
+var vg_Persona_Exist;
 /*== END VAR MODIFY USER ==*/
 /*--------------- region de variables globales --------------------*/
 
@@ -49,6 +50,7 @@ $(document).ready(function () {
     Change_Select_GroupReports();
     Change_Select_TypeAccess();
     Change_Select_EstadoUser();
+    Date_Document();
     /*==========================FIN CHANGE SELECT'S====================*/    
 });
 
@@ -196,18 +198,18 @@ function ValidarDroplist() {
 //valida campo y consulta datos de persona
 function Date_Document() {
 
-    $("#TxtDoc").blur(function () {
+    $("#TxtDocument").blur(function () {
 
-        var valida_people = ValidaCamposPeople();
-        if (valida_people == 1) {
+        var vl_valida_people = ValidaCamposPeople();
+        if (vl_valida_people == 1) {
             Mensaje_General("campos Incompletos!", "los campos (Nit Empresa),(Tipo de documento) y (documento) NO han sido diligenciados", "E");
         }
         else {
-            var C_TD = $("#Select_Documento").val();
-            var C_D = $("#TxtDoc").val();
-            var Nit = $("#Select_EmpresaNit").val();
+            var vl_C_TD = $("#Select_TypeDocument").val();
+            var vl_C_D = $("#TxtDocument").val();
+            var vl_Nit = $("#Select_EmpresaNit").val();
 
-            transacionAjax_ShearchPeople("Buscar_Persona", C_TD, C_D, Nit, "V_Responsable", "Persona_Exist");
+            transacionAjax_ShearchPeople("Buscar_Persona", vl_C_TD, vl_C_D, vl_Nit, "TxtName", "Persona_Exist");
         }
 
     });
@@ -432,6 +434,27 @@ function ValidarGRDocuments_GRReportes(accessDocumentos, accessReportes) {
     }
 
     return Valido;
+}
+
+//valida campos de documentos para buscar persona
+function ValidaCamposPeople() {
+    var valida = 0;
+    var C_Nit_ID = $("#Select_EmpresaNit").val();
+    var C_TD = $("#Select_TypeDocument").val();
+    var C_D = $("#TxtTxtDocumentDoc").val();
+
+    if (C_Nit_ID == "-1" || C_TD == "-1" || C_D == "") {
+        valida = 1;
+        if (C_TD == "-1") { $("#Img_TypeDoc").css("display", "inline-table"); } else { $("#Img_TypeDoc").css("display", "none"); }
+        if (C_D == "") { $("#ImgDoc").css("display", "inline-table"); } else { $("#ImgDoc").css("display", "none"); }
+        if (C_Nit_ID == "-1") { $("#ImgNIT").css("display", "inline-table"); } else { $("#ImgNIT").css("display", "none"); }
+    }
+    else {
+        $("#ImgNIT").css("display", "none");
+        $("#ImgDoc").css("display", "none");
+        $("#Img_TypeDoc").css("display", "none");
+    }
+    return valida;
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/

@@ -374,3 +374,40 @@ function transacionAjax_Create_User(State) {
 
 /*------------------------------ eliminar ---------------------------*/
 //No hay eliminación, solo se le cambia el estado al usuario
+
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_ShearchPeople(vp_State, vp_TD, vp_D, vp_NIT, vp_Vista, vp_Variable) {
+    $.ajax({
+        url: "Adm_UsuarioAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": vp_State,
+            "TD": vp_TD,
+            "D": vp_D,
+            "NIT": vp_NIT
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            switch (result) {
+                case "NO":
+                    Mensaje_General("No existe", "Los datos diligenciados No coinciden con las personas registradas en el sitema", "W");
+                    $("#" + vp_Vista).html("------");
+                    if (vp_Variable == "Persona_Exist") {
+                        vg_Persona_Exist = false;
+                    }
+                    break;
+
+                default:
+                    $("#" + vp_Vista).html(result);
+                    if (vp_Variable == "Persona_Exist") {
+                        vg_Persona_Exist = true;
+                    }
+                    break;
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
