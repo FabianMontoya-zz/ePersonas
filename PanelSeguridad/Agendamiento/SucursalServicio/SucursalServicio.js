@@ -30,7 +30,6 @@ $(document).ready(function () {
 
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_EmpresaNit('Cliente');
-    transaccionAjax_MSucursal('MatrixSucursal');
     transacionAjax_MMoneda('Moneda');
     
     Change_Select_Nit();
@@ -95,7 +94,7 @@ function Change_Select_Nit() {
 function TransaccionesSegunNIT(vp_index_ID) {
     if (vp_index_ID != "-1") {
         transacionAjax_Calendario('MatrixCalendarios', vp_index_ID);
-        
+        transaccionAjax_MSucursal('MatrixSucursal');
     }
 }
 
@@ -334,14 +333,15 @@ function Editar(index_Nit, index_Servicio) {
 
     for (itemArray in ArraySucursalServicio) {
         if (index_Nit == ArraySucursalServicio[itemArray].Nit_ID && index_Servicio == ArraySucursalServicio[itemArray].Codigo_ID) {
+            $("#Select_EmpresaNit").val(ArraySucursalServicio[itemArray].Nit_ID).trigger("chosen:updated");
             editNit_ID = ArraySucursalServicio[itemArray].Nit_ID;
-            editID = ArraySucursalServicio[itemArray].Codigo_ID;
-
-            $("#Select_EmpresaNit").val(ArraySucursalServicio[itemArray].Nit_ID);
-            $("#Txt_ID").val(ArraySucursalServicio[itemArray].Codigo_ID);
+            TransaccionesSegunNIT(editNit_ID);
             
-            $("#Select_EmpresaNit").attr("disabled", "disabled");
+            $("#Select_EmpresaNit").prop('disabled', true).trigger("chosen:updated");
+
+            $("#Txt_ID").val(ArraySucursalServicio[itemArray].Codigo_ID);
             $("#Txt_ID").attr("disabled", "disabled");
+            editID = ArraySucursalServicio[itemArray].Codigo_ID;
 
             $("#Select_Sucursal").val(ArraySucursalServicio[itemArray].Surcursal_ID);
             $("#Select_Moneda_Cod").val(ArraySucursalServicio[itemArray].Cod_Moneda);

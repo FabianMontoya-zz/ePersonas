@@ -128,21 +128,21 @@
                             </td>
                         </tr>
                     </table>
-                    <table id="Table_Moneda" style="width: 1100px; text-align: left;">
+                    <table id="Table_Moneda" style="width: 1000px; text-align: left;">
                         <tr>
-                            <td style="width: 14%;" class="Label_Bold">Moneda
+                            <td style="width: 15.6%;" class="Label_Bold">Moneda
                             </td>
                             <td style="width: 30%;">
                                 <select id="Select_Moneda_Cod" class="C_Chosen">
                                 </select>
                             </td>
-                            <td style="padding-bottom: 25px; width: 14.5%;">
+                            <td style="padding-bottom: 25px; width: 18.8%;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img7"
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
-                            <td style="width: 9.4%;" class="Label_Bold">Calendario
+                            <td style="width: 10.3%;" class="Label_Bold">Calendario
                             </td>
                             <td>
                                 <select id="Select_Calendario_SS" class="C_Chosen">
