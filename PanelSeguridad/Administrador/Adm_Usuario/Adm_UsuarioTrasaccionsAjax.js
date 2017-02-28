@@ -45,6 +45,7 @@ function transacionAjax_EmpresaNit(State) {
             else {
                 ArrayEmpresaNit = JSON.parse(result);
                 charge_CatalogList(ArrayEmpresaNit, "Select_EmpresaNit", 1); //Carga el Combo con el genérico
+                charge_CatalogList(ArrayEmpresaNit, "Select_EmpresaNit_2", "Generico"); //Carga el Combo con el genérico
             }
         },
         error: function () {
@@ -85,14 +86,14 @@ function transacionAjax_Documento(State) {
 
 /*-------------------- carga rol---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_CargaRol(State) {
+function transacionAjax_CargaRol(vp_State, vp_Nit) {
     $.ajax({
         url: "Adm_UsuarioAjax.aspx",
         type: "POST",
         //crear json
         data: {
-            "action": State
-
+            "action": vp_State,
+            "Nit": vp_Nit,
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -101,12 +102,16 @@ function transacionAjax_CargaRol(State) {
             }
             else {
                 ArrayComboRol = JSON.parse(result);
-                CargaRoles(ArrayComboRol, "DDLRol", "");
             }
         },
         error: function () {
 
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador 
+
+    }).done(function () {
+        CargaRoles(ArrayComboRol, "DDLRol", "");
     });
 }
 
@@ -285,14 +290,17 @@ function transacionAjax_Create_User(State) {
         intentos = 0;
     }
 
+    var Str_Nit_R = $("#Select_EmpresaNit_2 option:selected").html();
+    var SplitNit_R = Str_Nit_R.split(" - ");
+    var Nit_Rol = SplitNit_R[0];
+    Nit_Rol = Nit_Rol.replace("_", "");
+
     var Str_C_R = $("#DDLRol option:selected").html();
     var SplitCR = Str_C_R.split(" - ");
-    var NIT_Rol = SplitCR[0];
-    var Rol = SplitCR[1];
+    var Rol = SplitCR[0];
 
     var PolSeguridad = ArrayPoliticasSeguridad[$("#Select_PoliticaSeguridad_U").val() - 1].Politica_ID;
-
-
+    
     if ($("#Select_AccessDocument").val() == 4) {
         var Index_GRDocumentos = $("#Select_Grupo_Documentos_U").val();
         GRDocumentos = ArrayGrupoDocumentos[Index_GRDocumentos - 1].Grp_Documento_ID;
@@ -316,8 +324,8 @@ function transacionAjax_Create_User(State) {
             "UsuarioID": ID.toUpperCase(),
             "TypeDocument": $("#Select_TypeDocument").val(),
             "Documento": $("#TxtDocument").val(),
-            "Nombre": $("#TxtName").val().toUpperCase(),
-            "Rol_NIT_ID": NIT_Rol.trim(),
+            "Nombre": $("#TxtName").html().toUpperCase(),
+            "Rol_NIT_ID": Nit_Rol.trim(),
             "RolID": Rol.trim(),
             "AccessInformation": $("#Select_Acces_Information").val(),
             "PolSegurityGroup": $("#Select_PolSegurGrupo").val(),

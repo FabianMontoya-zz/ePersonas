@@ -1678,7 +1678,12 @@ function CargaRoles(Matrix, Selector, Index_Edit) {
 
         case "DDLRol": //Combo Roles en Adm_Usuario
             for (Item in Matrix) {
-                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Nit_ID + " - " + Matrix[Item].Rol_ID + " - " + Matrix[Item].Descripcion + "</option>");
+                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> "  + Matrix[Item].Rol_ID + " - " + Matrix[Item].Descripcion + "</option>");
+            }
+            break;
+        case "DDLRol": //Combo Roles en Adm_Usuario
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> "  + Matrix[Item].Rol_ID + " - " + Matrix[Item].Descripcion + "</option>");
             }
             break;
 

@@ -87,7 +87,7 @@
                     </table>
                     <table id="T_Usuario" style="width: 100%;" border="0">
                         <tr>
-                            <td style="width: 10.5%;" class="Label_Bold">Usuario
+                            <td style="width: 10%;" class="Label_Bold">Usuario
                             </td>
                             <td style="width: 17%;">
                                 <span class="cssToolTip_Form">
@@ -100,8 +100,9 @@
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
-                            <td style="width: 7%;" class="Label_Bold"></td>
-                            <td style="width: 34%;"></td>
+                            <td style="width: 9.8%;" class="Label_Bold">Nombre
+                            </td>
+                            <td style="width: 27%;" id="TxtName"></td>
                             <td style="padding-bottom: 25px; width: 9%;"></td>
                         </tr>
                     </table>
@@ -134,32 +135,28 @@
                             </td>
                         </tr>
                     </table>
-                    <table id="T_Doc_Rol" style="width: 100%;" border="0">
+                    <table id="T_NIT_2" style="width: 100%;">
                         <tr>
-                            <td style="width: 9.8%;" class="Label_Bold">Nombre
+                            <td style="width: 10.5%;" class="Label_Bold">NIT Empresa</td>
+                            <td style="width: 40%; padding-left: 0.5em;">
+                                <select style="width: 100%;" id="Select_EmpresaNit_2" class="C_Chosen">
+                                </select>
                             </td>
-                            <td style="width: 27%;" id="TxtName">
-                            </td>
-                            <td style="padding-bottom: 25px; width: 9%;">
-                                <span class="cssToolTip_L">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgName"
+                            <td style="width: 60%; padding-bottom: 25px;">
+                                <span class="cssToolTip">
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgNIT_2"
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
-                            <td class="Label_Bold" style="width: 7%;"></td>
-                            <td id="TD6" style="width: 24%;"></td>
-                            <td style="padding-bottom: 25px; width: 9%;"></td>
                         </tr>
-                    </table>
-                    <table>
                         <tr>
-                            <td class="Label_Bold" style="width: 7%;">Rol
+                            <td class="Label_Bold" style="width: 11%;">Rol
                             </td>
-                            <td id="TD_Trol" style="width: 34%;">
+                            <td id="TD_Trol" style="width: 40%;">
                                 <select id="DDLRol" class="C_Chosen">
                                 </select>
                             </td>
-                            <td style="padding-bottom: 25px; width: 9%;">
+                            <td style="width: 60%; padding-bottom: 25px;">
                                 <span class="cssToolTip_L">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgRol"
                                         src="../../images/error.png" />
@@ -167,25 +164,27 @@
                             </td>
                         </tr>
                     </table>
-
                     <table id="T_AccesoInfo_PoliticSeguriGrupo" style="width: 100%;" border="0">
                         <tr>
-                            <td style="width: 10.5%;" class="Label_Bold">Acceso a Información
+                            <td class="Title_Bold" style="width: 10.5%;">POLITICAS
                             </td>
-                            <td style="width: 17%;">
-                                <select id="Select_Acces_Information" class="C_Chosen">
-                                    <option value="-1">Seleccione...</option>
-                                    <option value="0">0 - Toda</option>
-                                    <option value="1">1 - Solo de Empresa</option>
+                        </tr>
+                        <tr>
+                            <td style="width: 11%;" class="Label_Bold">Seguridad
+                            </td>
+                            <td style="width: 20%;">
+                                <select id="Select_PoliticaSeguridad_U" class="C_Chosen">
                                 </select>
                             </td>
-                            <td style="padding-bottom: 25px; width: 15%;">
+                            <td style="padding-bottom: 25px; width: 80%;">
                                 <span class="cssToolTip">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgAccessInfo"
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgPolSecurity"
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
-                            <td class="Label_Bold" style="width: 7%;">Política Seguridad de Grupo
+                        </tr>
+                        <tr>
+                            <td class="Label_Bold">Seguridad de Grupo
                             </td>
                             <td style="width: 34%;">
                                 <select id="Select_PolSegurGrupo" class="C_Chosen">
@@ -198,7 +197,7 @@
                                     <option value="5">5 - Individual</option>
                                 </select>
                             </td>
-                            <td style="padding-bottom: 25px; width: 9%;">
+                            <td style="padding-bottom: 25px;">
                                 <span class="cssToolTip_L">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgPolSeguGrupo"
                                         src="../../images/error.png" />
@@ -208,15 +207,22 @@
                     </table>
                     <table id="T_PoliticaSeguridad" style="width: 100%;">
                         <tr>
-                            <td class="Label_Bold" style="width: 10.5%;">Política de Seguridad
+                            <td class="Title_Bold" style="width: 150px;">ACCESOS
                             </td>
-                            <td id="TD2" style="width: 40%; padding-left: 0.5em;">
-                                <select id="Select_PoliticaSeguridad_U" class="C_Chosen">
+                        </tr>
+                        <tr>
+                            <td class="Label_Bold" style="width: 10.5%;">A Información
+                            </td>
+                            <td id="TD2" style="width: 20%; padding-left: 0.5em;">
+                                <select id="Select_Acces_Information" class="C_Chosen">
+                                    <option value="-1">Seleccione...</option>
+                                    <option value="0">0 - Toda</option>
+                                    <option value="1">1 - Solo de Empresa</option>
                                 </select>
                             </td>
-                            <td style="padding-bottom: 25px; width: 60%;">
+                            <td style="padding-bottom: 25px; width: 80%;">
                                 <span class="cssToolTip">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgPolSecurity"
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgAccessInfo"
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
@@ -224,9 +230,9 @@
                     </table>
                     <table id="T_Acceso_Documents_InfoDocuments" style="width: 100%;" border="0">
                         <tr>
-                            <td style="width: 10.5%;" class="Label_Bold">Acceso Información Documentos
+                            <td style="width: 11%;" class="Label_Bold">Información Documentos
                             </td>
-                            <td style="width: 17%; padding-left: 0.2em;">
+                            <td style="width: 20%; padding-left: 0.2em;">
                                 <select id="Select_AccesInfoDocument" class="C_Chosen">
                                     <option value="-1">Seleccione...</option>
                                     <option value="0">0 - Toda</option>
@@ -235,15 +241,17 @@
                                     <option value="3">3 - Empresa/Área</option>
                                 </select>
                             </td>
-                            <td style="padding-bottom: 25px; width: 15%;">
+                            <td style="padding-bottom: 25px; width: 80%;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgAccesInfoDocument"
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
-                            <td class="Label_Bold" style="width: 7%;">Acceso a Documentos
+                        </tr>
+                        <tr>
+                            <td class="Label_Bold">A Documentos
                             </td>
-                            <td style="width: 34%;">
+                            <td>
                                 <select id="Select_AccessDocument" class="C_Chosen">
                                     <option value="-1">Seleccione...</option>
                                     <option value="0">0 - Todos los Documentos</option>
@@ -253,7 +261,7 @@
                                     <option value="4">4 - Grupo de Documentos</option>
                                 </select>
                             </td>
-                            <td style="padding-bottom: 25px; width: 9%;">
+                            <td style="padding-bottom: 25px;">
                                 <span class="cssToolTip_L">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgAccessDocuments"
                                         src="../../images/error.png" />
@@ -279,9 +287,9 @@
                     </table>
                     <table id="T_Acceso_Reportes_InfoReportes" style="width: 100%;" border="0">
                         <tr>
-                            <td style="width: 10.5%;" class="Label_Bold">Acceso Información Reportes
+                            <td style="width: 11%;" class="Label_Bold">Información Reportes
                             </td>
-                            <td style="width: 17%; padding-left: 0.2em;">
+                            <td style="width: 20%; padding-left: 0.2em;">
                                 <select id="SelectAccessInfoReports" class="C_Chosen">
                                     <option value="-1">Seleccione...</option>
                                     <option value="0">0 - Toda</option>
@@ -290,15 +298,17 @@
                                     <option value="3">3 - Empresa/Área</option>
                                 </select>
                             </td>
-                            <td style="padding-bottom: 25px; width: 15%;">
+                            <td style="padding-bottom: 25px; width: 80%;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgAccessInfoReports"
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
-                            <td class="Label_Bold" style="width: 7%;">Acceso a Reportes
+                        </tr>
+                        <tr>
+                            <td class="Label_Bold">A Reportes
                             </td>
-                            <td style="width: 34%;">
+                            <td>
                                 <select id="Select_AccessReports" class="C_Chosen">
                                     <option value="-1">Seleccione...</option>
                                     <option value="0">0 - Todos los Reportes</option>
@@ -308,7 +318,7 @@
                                     <option value="4">4 - Grupo de Reportes</option>
                                 </select>
                             </td>
-                            <td style="padding-bottom: 25px; width: 9%;">
+                            <td style="padding-bottom: 25px;">
                                 <span class="cssToolTip_L">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgAccessReports"
                                         src="../../images/error.png" />
@@ -386,7 +396,6 @@
                             </td>
                         </tr>
                     </table>
-
                     <table id="T_BTNGuardar" style="width: 100%;" border="0">
                         <tr>
                             <td colspan="4" align="center">&nbsp;

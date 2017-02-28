@@ -31,13 +31,14 @@ $(document).ready(function () {
 
     /*Llamado a las diferentes Trasacciones necesarias al iniciar el proceso de carga de la página*/
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
-    transacionAjax_CargaRol('cargar_Rol');
+
     transacionAjax_EmpresaNit('Cliente'); //Carga Droplist de Empresa NIT
     transacionAjax_Documento('Documento'); //Carga los tipos de documento
     /*=======================FIN LLAMADO TRANSACCIONES AJAX======================================*/
 
     /*Llamado a todos los procesos de Change de los diferentes Select*/
     Change_Select_Nit();
+    Change_Select_Nit_2();
     Change_Select_TypeDocument();
     Change_DDLRol();
     Change_Select_Acces_Information();
@@ -51,7 +52,7 @@ $(document).ready(function () {
     Change_Select_TypeAccess();
     Change_Select_EstadoUser();
     Date_Document();
-    /*==========================FIN CHANGE SELECT'S====================*/    
+    /*==========================FIN CHANGE SELECT'S====================*/
 });
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -64,6 +65,7 @@ function Ocultar_Errores() {
     $("#SE").css("display", "none");
     $("#WA").css("display", "none");
     $("#ImgDelete").css("display", "none");
+    $("#ImgNIT_2").css("display", "none");
 
     /*====Los demás errores se ocultan en ResetError(); de la SasifMaster.js===*/
 }
@@ -105,7 +107,7 @@ function HabilitarPanel(opcion) {
             estado = opcion;
             Clear();
             var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
-            
+
             if (OnlyEmpresa == true) {
                 TransaccionesSegunNIT($("#Select_EmpresaNit").val());
             }
@@ -240,7 +242,6 @@ function ValidarBasicos() {
 
     var NIT = $("#Select_EmpresaNit").val(); //ImgNIT
     var ID = $("#Txt_ID").val(); //ImgID
-    var nombre = $("#TxtName").val(); //ImgName
     var typeDocument = $("#Select_TypeDocument").val(); //Img_TypeDoc
     var documento = $("#TxtDocument").val(); //ImgDoc
     var rol = $("#DDLRol").val(); //ImgRol
@@ -255,109 +256,34 @@ function ValidarBasicos() {
     //Validación Adicional si accessReportes == 4 Se debe validar Grupo Reportes
     var token = $("#TXT_Token").val(); //ImgToken
     var typeAccess = $("#Select_TypeAccess").val(); //ImgTypeAccess   
+    var Rol_NIT = $("#Select_EmpresaNit_2").val(); //ImgNIT_2
 
-    if (NIT == "-1" || NIT == null || ID == "" || nombre == "" || typeDocument == "-1" || typeDocument == null ||
+    if (NIT == "-1" || NIT == null || ID == "" || typeDocument == "-1" || typeDocument == null ||
         documento == "" || rol == "-1" || rol == null || accessInformation == "-1" || accessInformation == null ||
         accessInformation == "-1" || accessInformation == null || PoliticaSeguridad == "-1" || PoliticaSeguridad == null ||
         accessInfoDocument == "-1" || accessInfoDocument == null || accessDocumentos == "-1" || accessDocumentos == null ||
         accessInfoReportes == "-1" || accessInfoReportes == null || accessReportes == "-1" || accessReportes == null ||
-        token == "" || typeAccess == "-1" || typeAccess == null) {
+        token == "" || typeAccess == "-1" || typeAccess == null || Rol_NIT == "-1" || Rol_NIT == null) {
 
         Mensaje_General("¡Campos Incompletos! (1)", "Debe completar los campos obligatorios para poder crear un nuevo usuario.", "E");
         /* -- Muestra de errores según dato faltante -- */
-        if (NIT == "-1" || NIT == null) {
-            $("#ImgNIT").css("display", "inline-table");
-        } else {
-            $("#ImgNIT").css("display", "none");
-        }
-        //
-        if (ID == "") {
-            $("#ImgID").css("display", "inline-table");
-        } else {
-            $("#ImgID").css("display", "none");
-        }
-        //
-        if (nombre == "") {
-            $("#ImgName").css("display", "inline-table");
-        } else {
-            $("#ImgName").css("display", "none");
-        }
-        //
-        if (typeDocument == "-1" || typeDocument == null) {
-            $("#Img_TypeDoc").css("display", "inline-table");
-        } else {
-            $("#Img_TypeDoc").css("display", "none");
-        }
-        //
-        if (documento == "") {
-            $("#ImgDoc").css("display", "inline-table");
-        } else {
-            $("#ImgDoc").css("display", "none");
-        }
-        //
-        if (rol == "-1" || rol == null) {
-            $("#ImgRol").css("display", "inline-table");
-        } else {
-            $("#ImgRol").css("display", "none");
-        }
-        //
-        if (accessInformation == "-1" || accessInformation == null) {
-            $("#ImgAccessInfo").css("display", "inline-table");
-        } else {
-            $("#ImgAccessInfo").css("display", "none");
-        }
-        //
-        if (accessInformation == "-1" || accessInformation == null) {
-            $("#ImgPolSeguGrupo").css("display", "inline-table");
-        } else {
-            $("#ImgPolSeguGrupo").css("display", "none");
-        }
-        //
-        if (PoliticaSeguridad == "-1" || PoliticaSeguridad == null) {
-            $("#ImgPolSecurity").css("display", "inline-table");
-        } else {
-            $("#ImgPolSecurity").css("display", "none");
-        }
-        //
-        if (accessInfoDocument == "-1" || accessInfoDocument == null) {
-            $("#ImgAccesInfoDocument").css("display", "inline-table");
-        } else {
-            $("#ImgAccesInfoDocument").css("display", "none");
-        }
-        //
-        if (accessDocumentos == "-1" || accessDocumentos == null) {
-            $("#ImgAccessDocuments").css("display", "inline-table");
-        } else {
-            $("#ImgAccessDocuments").css("display", "none");
-        }
-        //
-        if (accessInfoReportes == "-1" || accessInfoReportes == null) {
-            $("#ImgAccessInfoReports").css("display", "inline-table");
-        } else {
-            $("#ImgAccessInfoReports").css("display", "none");
-        }
-        //
-        if (accessReportes == "-1" || accessReportes == null) {
-            $("#ImgAccessReports").css("display", "inline-table");
-        } else {
-            $("#ImgAccessReports").css("display", "none");
-        }
-        //
-        if (token == "") {
-            $("#ImgToken").css("display", "inline-table");
-        } else {
-            $("#ImgToken").css("display", "none");
-        }
-        //
-        if (typeAccess == "-1" || typeAccess == null) {
-            $("#ImgTypeAccess").css("display", "inline-table");
-        } else {
-            $("#ImgTypeAccess").css("display", "none");
-        }
-
+        if (Rol_NIT == "-1" || NIT == null) { $("#ImgNIT_2").css("display", "inline-table"); } else { $("#ImgNIT_2").css("display", "none"); }
+        if (NIT == "-1" || NIT == null) { $("#ImgNIT").css("display", "inline-table"); } else { $("#ImgNIT").css("display", "none"); }
+        if (ID == "") { $("#ImgID").css("display", "inline-table"); } else { $("#ImgID").css("display", "none"); }
+        if (typeDocument == "-1" || typeDocument == null) { $("#Img_TypeDoc").css("display", "inline-table"); } else { $("#Img_TypeDoc").css("display", "none"); }
+        if (documento == "") { $("#ImgDoc").css("display", "inline-table"); } else { $("#ImgDoc").css("display", "none"); }
+        if (rol == "-1" || rol == null) { $("#ImgRol").css("display", "inline-table"); } else { $("#ImgRol").css("display", "none"); }
+        if (accessInformation == "-1" || accessInformation == null) { $("#ImgAccessInfo").css("display", "inline-table"); } else { $("#ImgAccessInfo").css("display", "none"); }
+        if (accessInformation == "-1" || accessInformation == null) { $("#ImgPolSeguGrupo").css("display", "inline-table"); } else { $("#ImgPolSeguGrupo").css("display", "none"); }
+        if (PoliticaSeguridad == "-1" || PoliticaSeguridad == null) { $("#ImgPolSecurity").css("display", "inline-table"); } else { $("#ImgPolSecurity").css("display", "none"); }
+        if (accessInfoDocument == "-1" || accessInfoDocument == null) { $("#ImgAccesInfoDocument").css("display", "inline-table"); } else { $("#ImgAccesInfoDocument").css("display", "none"); }
+        if (accessDocumentos == "-1" || accessDocumentos == null) { $("#ImgAccessDocuments").css("display", "inline-table"); } else { $("#ImgAccessDocuments").css("display", "none"); }
+        if (accessInfoReportes == "-1" || accessInfoReportes == null) { $("#ImgAccessInfoReports").css("display", "inline-table"); } else { $("#ImgAccessInfoReports").css("display", "none"); }
+        if (accessReportes == "-1" || accessReportes == null) { $("#ImgAccessReports").css("display", "inline-table"); } else { $("#ImgAccessReports").css("display", "none"); }
+        if (token == "") { $("#ImgToken").css("display", "inline-table"); } else { $("#ImgToken").css("display", "none"); }
+        if (typeAccess == "-1" || typeAccess == null) { $("#ImgTypeAccess").css("display", "inline-table"); } else { $("#ImgTypeAccess").css("display", "none"); }
     }
     else {
-
         valido = ValidarGRDocuments_GRReportes(accessDocumentos, accessReportes);
     }
 
@@ -441,7 +367,7 @@ function ValidaCamposPeople() {
     var valida = 0;
     var C_Nit_ID = $("#Select_EmpresaNit").val();
     var C_TD = $("#Select_TypeDocument").val();
-    var C_D = $("#TxtTxtDocumentDoc").val();
+    var C_D = $("#TxtDocument").val();
 
     if (C_Nit_ID == "-1" || C_TD == "-1" || C_D == "") {
         valida = 1;
@@ -464,22 +390,23 @@ function ValidaCamposPeople() {
 function Table_User() {
 
     var html_TUser;
+    var Index_User;
 
     switch (estado) {
 
         case "buscar":
             html_TUser = "<table id='TUser' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>NIT Empresa</th><th>Usuario</th><th>Tipo Documento</th><th>Documento</th><th>Nombre</th><th>Rol</th></th></th><th>Estado</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
             for (itemArray in ArrayUser) {
-                //html_TUser += "<tr id= 'TUser_" + ArrayUser[itemArray].Index + "'><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Editar('" + ArrayUser[itemArray].Usuario_ID + "')\"></input></td><td>" + ArrayUser[itemArray].Usuario_ID + "</td><td>" + ArrayUser[itemArray].Documento + "</td><td>" + ArrayUser[itemArray].Nombre + "</td><td>" + ArrayUser[itemArray].Rol_ID + "</td><td> " + ArrayUser[itemArray].Estado + " </td></tr>";
-                html_TUser += "<tr id= 'TUser_" + ArrayUser[itemArray].Index + "'><td>" + ArrayUser[itemArray].Nit_ID + "</td><td>" + ArrayUser[itemArray].Usuario_ID + "</td><td>" + ArrayUser[itemArray].TypeDocument + "</td><td>" + ArrayUser[itemArray].Documento + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].Nombre + "</td><td>" + ArrayUser[itemArray].Rol_ID + "</td><td> " + ArrayUser[itemArray].Estado + " </td><td>" + ArrayUser[itemArray].UsuarioCreacion + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].FechaCreacion + "</td><td>" + ArrayUser[itemArray].UsuarioActualizacion + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].FechaActualizacion + "</td></tr>";
+                Index_User = parseInt(ArrayUser[itemArray].Index) - 1;
+                html_TUser += "<tr id= 'TUser_" + Index_User + "'><td>" + ArrayUser[itemArray].Nit_ID + "</td><td>" + ArrayUser[itemArray].Usuario_ID + "</td><td>" + ArrayUser[itemArray].TypeDocument + "</td><td>" + ArrayUser[itemArray].Documento + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].Nombre + "</td><td>" + ArrayUser[itemArray].Rol_ID + "</td><td> " + ArrayUser[itemArray].Estado + " </td><td>" + ArrayUser[itemArray].UsuarioCreacion + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].FechaCreacion + "</td><td>" + ArrayUser[itemArray].UsuarioActualizacion + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].FechaActualizacion + "</td></tr>";
             }
             break;
 
         case "modificar":
             html_TUser = "<table id='TUser' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>NIT Empresa</th><th>Usuario</th><th>Tipo Documento</th><th>Documento</th><th>Nombre</th><th>Rol</th></th></th><th>Estado</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
             for (itemArray in ArrayUser) {
-                //html_TUser += "<tr id= 'TUser_" + ArrayUser[itemArray].Index + "'><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Editar('" + ArrayUser[itemArray].Usuario_ID + "')\"></input></td><td>" + ArrayUser[itemArray].Usuario_ID + "</td><td>" + ArrayUser[itemArray].Documento + "</td><td>" + ArrayUser[itemArray].Nombre + "</td><td>" + ArrayUser[itemArray].Rol_ID + "</td><td> " + ArrayUser[itemArray].Estado + " </td></tr>";
-                html_TUser += "<tr id= 'TUser_" + ArrayUser[itemArray].Index + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + ArrayUser[itemArray].Index + "')\"></img><span>Editar Usuario</span></span></td><td>" + ArrayUser[itemArray].Nit_ID + "</td><td>" + ArrayUser[itemArray].Usuario_ID + "</td><td>" + ArrayUser[itemArray].TypeDocument + "</td><td>" + ArrayUser[itemArray].Documento + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].Nombre + "</td><td>" + ArrayUser[itemArray].Rol_ID + "</td><td> " + ArrayUser[itemArray].Estado + " </td><td>" + ArrayUser[itemArray].UsuarioCreacion + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].FechaCreacion + "</td><td>" + ArrayUser[itemArray].UsuarioActualizacion + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].FechaActualizacion + "</td></tr>";
+                Index_User = parseInt(ArrayUser[itemArray].Index) - 1;
+                html_TUser += "<tr id= 'TUser_" + Index_User + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + Index_User + "')\"></img><span>Editar Usuario</span></span></td><td>" + ArrayUser[itemArray].Nit_ID + "</td><td>" + ArrayUser[itemArray].Usuario_ID + "</td><td>" + ArrayUser[itemArray].TypeDocument + "</td><td>" + ArrayUser[itemArray].Documento + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].Nombre + "</td><td>" + ArrayUser[itemArray].Rol_ID + "</td><td> " + ArrayUser[itemArray].Estado + " </td><td>" + ArrayUser[itemArray].UsuarioCreacion + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].FechaCreacion + "</td><td>" + ArrayUser[itemArray].UsuarioActualizacion + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].FechaActualizacion + "</td></tr>";
             }
             break;
 
@@ -500,43 +427,41 @@ function Editar(index_User) {
     $("#TablaDatos").css("display", "inline-table");
     $("#TablaConsulta").css("display", "none");
 
-    for (itemArray in ArrayUser) {
-        if (index_User == ArrayUser[itemArray].Index) {
-            $("#Select_EmpresaNit").val(ArrayUser[itemArray].Nit_ID).trigger("chosen:updated");
-            editNIT = ArrayUser[itemArray].Nit_ID;
-            TransaccionesSegunNIT(editNIT); //Llenamos los combos dependientes de NIT
-            $("#Select_EmpresaNit").prop('disabled', true);
-            $("#Txt_ID").val(ArrayUser[itemArray].Usuario_ID);
-            editID = ArrayUser[itemArray].Usuario_ID;
-            $("#Txt_ID").prop("disabled", true);
-            $("#TxtName").val(ArrayUser[itemArray].Nombre);
-            $("#Select_TypeDocument").val(ArrayUser[itemArray].TypeDocument).trigger("chosen:updated");
-            $("#TxtDocument").val(ArrayUser[itemArray].Documento);
-            //Rol se llena en BuscarValuesArray            
-            $("#Select_Acces_Information").val(ArrayUser[itemArray].Acceso_Informacion).trigger("chosen:updated");
-            $("#Select_PolSegurGrupo").val(ArrayUser[itemArray].Nivel_Politica_Seguridad_Grupo).trigger("chosen:updated");
-            //PoliticaSeguridad se llena en BuscarValuesArray
-            $("#Select_AccesInfoDocument").val(ArrayUser[itemArray].Acceso_Informacion_Documentos).trigger("chosen:updated");
-            $("#Select_AccessDocument").val(ArrayUser[itemArray].Acceso_Documentos).trigger("chosen:updated");
-            //Grupo Documentos se llena en BuscarValuesArray            
-            $("#SelectAccessInfoReports").val(ArrayUser[itemArray].Acceso_Informacion_Reportes).trigger("chosen:updated");
-            $("#Select_AccessReports").val(ArrayUser[itemArray].Acceso_Reportes).trigger("chosen:updated");
-            //Grupo Reportes se llena en BuscarValuesArray
-            $("#TXT_Token").val(ArrayUser[itemArray].Token);
-            $("#Select_TypeAccess").val(ArrayUser[itemArray].Tipo_Acceso).trigger("chosen:updated");
-            $("#Select_EstadoUser").val(ArrayUser[itemArray].Estado).trigger("chosen:updated");
-            EstadoUsu = ArrayUser[itemArray].Estado;
-            IntentosFallidos = ArrayUser[itemArray].Intentos_Fallidos;
-            $("#Btnguardar").attr("value", "Actualizar");
+    $("#Select_EmpresaNit").val(ArrayUser[index_User].Nit_ID).trigger("chosen:updated");
+    $("#Select_EmpresaNit").prop('disabled', true);
+    $("#Select_EmpresaNit_2").val(ArrayUser[index_User].Rol_Nit_ID).trigger("chosen:updated");
+    $("#Txt_ID").val(ArrayUser[index_User].Usuario_ID);
+    $("#Txt_ID").prop("disabled", true);
 
-            BuscarValuesArray(ArrayUser[itemArray]);
-            ValidarTipoAcceso("Documentos");
-            ValidarTipoAcceso("Reportes");
+    editNIT = ArrayUser[index_User].Nit_ID;
+    TransaccionesSegunNIT(editNIT); //Llenamos los combos dependientes de NIT
+    editID = ArrayUser[index_User].Usuario_ID;
+    $("#TxtName").html(ArrayUser[index_User].Nombre);
+    $("#Select_TypeDocument").val(ArrayUser[index_User].TypeDocument).trigger("chosen:updated");
+    $("#TxtDocument").val(ArrayUser[index_User].Documento);
+    //Rol se llena en BuscarValuesArray            
+    $("#Select_Acces_Information").val(ArrayUser[index_User].Acceso_Informacion).trigger("chosen:updated");
+    $("#Select_PolSegurGrupo").val(ArrayUser[index_User].Nivel_Politica_Seguridad_Grupo).trigger("chosen:updated");
+    //PoliticaSeguridad se llena en BuscarValuesArray
+    $("#Select_AccesInfoDocument").val(ArrayUser[index_User].Acceso_Informacion_Documentos).trigger("chosen:updated");
+    $("#Select_AccessDocument").val(ArrayUser[index_User].Acceso_Documentos).trigger("chosen:updated");
+    //Grupo Documentos se llena en BuscarValuesArray            
+    $("#SelectAccessInfoReports").val(ArrayUser[index_User].Acceso_Informacion_Reportes).trigger("chosen:updated");
+    $("#Select_AccessReports").val(ArrayUser[index_User].Acceso_Reportes).trigger("chosen:updated");
+    //Grupo Reportes se llena en BuscarValuesArray
+    $("#TXT_Token").val(ArrayUser[index_User].Token);
+    $("#Select_TypeAccess").val(ArrayUser[index_User].Tipo_Acceso).trigger("chosen:updated");
+    $("#Select_EstadoUser").val(ArrayUser[index_User].Estado).trigger("chosen:updated");
+    EstadoUsu = ArrayUser[index_User].Estado;
+    IntentosFallidos = ArrayUser[index_User].Intentos_Fallidos;
+    $("#Btnguardar").attr("value", "Actualizar");
 
-            $('.C_Chosen').trigger('chosen:updated');
-            break;
-        }
-    }
+    BuscarValuesArray(ArrayUser[index_User]);
+    ValidarTipoAcceso("Documentos");
+    ValidarTipoAcceso("Reportes");
+
+    $('.C_Chosen').trigger('chosen:updated');
+
 }
 
 //Función que se encarga de buscar dentro de los array los index para llenar los combos dependientes de NIT
@@ -544,6 +469,8 @@ function BuscarValuesArray(ArrayUsuario) {
     /*Llenamos el ROL*/
     var rol = ArrayUsuario.Rol_ID;
     var rolNit = ArrayUsuario.Rol_Nit_ID;
+
+    transacionAjax_CargaRol('cargar_Rol', rolNit);
 
     for (itemRol in ArrayComboRol) {
         if (rol == ArrayComboRol[itemRol].Rol_ID && rolNit == ArrayComboRol[itemRol].Nit_ID) {
@@ -625,8 +552,9 @@ function Clear() {
 
     $("#Select_EmpresaNit").prop('disabled', false); //No se agrega el trigger porque se hace al seleccionar el val
     $("#Select_EmpresaNit").val("-1").trigger("chosen:updated");
+    $("#Select_EmpresaNit_2").val("-1").trigger("chosen:updated");
     $("#Txt_ID").val("");
-    $("#TxtName").val("");
+    $("#TxtName").html("");
     $("#Select_TypeDocument").val("-1").trigger("chosen:updated");
     $("#TxtDocument").val("");
     $("#DDLRol").val("-1");
@@ -727,6 +655,16 @@ function ValidarTipoAcceso(AccessTo) {
 
 }
 
+//al mover el combo de nit 2 para traer los roles
+function Change_Select_Nit_2() {
+    $("#Select_EmpresaNit_2").change(function () {
+
+        var vl_Nit_index = this.value;
+        transacionAjax_CargaRol('cargar_Rol', vl_Nit_index);
+    });
+}
+
+//al mover el combo de nit traer datos presedentes
 function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {
         /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/

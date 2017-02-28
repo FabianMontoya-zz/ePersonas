@@ -288,7 +288,12 @@ Public Class Adm_UsuarioAjax
         Dim SQL_User As New Adm_RolesSQLClass
         Dim ObjListDroplist As New List(Of Adm_RolesClass)
 
-        ObjListDroplist = SQL_User.MatrixAll_Roles()
+        Dim Obj As New ClienteClass
+
+        Obj.Nit_ID = Request.Form("Nit")
+        Obj.TipoSQL = "Usuario"
+       
+        ObjListDroplist = SQL_User.MatrixAll_Roles(Obj)
         Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
 
     End Sub

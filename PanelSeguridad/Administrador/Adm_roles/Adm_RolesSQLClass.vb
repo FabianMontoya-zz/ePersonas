@@ -312,24 +312,36 @@ Public Class Adm_RolesSQLClass
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function MatrixAll_Roles()
+    Public Function MatrixAll_Roles(ByVal vp_O_Obj As ClienteClass)
         Dim ObjListRoles As New List(Of Adm_RolesClass)
         Dim StrQuery As String = ""
         Dim conex As New Conector
         Dim Conexion As String = conex.typeConexion("1")
 
         Dim sql As New StringBuilder
+        Dim vl_sql_filtro As New StringBuilder
 
         sql.AppendLine(" SELECT  R_Nit_ID,  " & _
-                               " R_Rol_ID, " & _
-                               " R_Descripcion, " & _
-                               " R_Sigla, " & _
-                               " R_Estado, " & _
-                               " ROW_NUMBER() OVER(ORDER BY R_Nit_ID, R_Rol_ID ASC) AS Index_Roles " & _
-                               " FROM ROLES " & _
-                               " ORDER BY R_Nit_ID, R_Rol_ID ASC") 'Trae los roles
+                               "                     R_Rol_ID, " & _
+                               "                     R_Descripcion, " & _
+                               "                     R_Sigla, " & _
+                               "                     R_Estado, " & _
+                               "                     ROW_NUMBER() OVER(ORDER BY R_Nit_ID, R_Rol_ID ASC) AS Index_Roles " & _
+                               "       FROM ROLES ") 'Trae los roles
 
-        StrQuery = sql.ToString
+      
+        Select Case vp_O_Obj.TipoSQL
+
+            Case "Usuario"
+                vl_sql_filtro.Append(" WHERE R_Nit_ID ='" & vp_O_Obj.Nit_ID & "'" & _
+                                                     " ORDER BY R_Nit_ID, R_Rol_ID ASC  ")
+
+            Case "All"
+                vl_sql_filtro.Append(" ORDER BY R_Nit_ID, R_Rol_ID ASC  ")
+
+        End Select
+
+        StrQuery = sql.ToString & vl_sql_filtro.ToString
 
         ObjListRoles = listrol(StrQuery, Conexion, "MatrixAll")
 
