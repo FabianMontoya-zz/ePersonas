@@ -108,9 +108,9 @@ function btnOk() {
         var Dedos = CargarArrayDedos();
         if (Dedos == true) {
             BloquearChecks();
-            $("#Select_EmpresaNit").prop('disabled', true).trigger("chosen:updated");
+            /*$("#Select_EmpresaNit").prop('disabled', true).trigger("chosen:updated");
             $("#Select_Documento").prop('disabled', true).trigger("chosen:updated");
-            $("#TxtDoc").prop('disabled', true);
+            $("#TxtDoc").prop('disabled', true);*/
 
             transacionAjax_Ok("DescargarEjecutable");
             CargarNames();
