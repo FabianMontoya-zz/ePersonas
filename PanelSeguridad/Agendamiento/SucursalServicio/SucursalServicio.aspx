@@ -101,7 +101,7 @@
                     </table>
                     <table id="Tabla_2" style="width: 1000px; text-align: left;">
                         <tr>
-                            <td style="width: 17%;" class="Label_Bold">Código Servicio
+                            <td style="width: 17%;" class="Label_Bold">Código Sucursal Servicio
                             </td>
                             <td style="width: 150px;">
                                 <span class="cssToolTip_Form">

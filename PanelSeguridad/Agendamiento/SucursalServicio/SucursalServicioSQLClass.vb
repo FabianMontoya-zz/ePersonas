@@ -26,8 +26,8 @@ Public Class SucursalServicioSQLClass
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
             sql.Append("  SELECT SS_Nit_ID, " & _
-                            "SS_Sucursal_ID, " & _
                             "SS_Servicio_ID, " & _
+                            "SS_Sucursal_ID, " & _
                             "SS_Moneda_ID, " & _
                             "SS_Costo, " & _
                             "SS_Capacidad, " & _
@@ -43,8 +43,8 @@ Public Class SucursalServicioSQLClass
 
             If vp_S_Contenido = "ALL" Then
                 sql.Append("  SELECT SS_Nit_ID, " & _
-                            "SS_Sucursal_ID, " & _
                             "SS_Servicio_ID, " & _
+                            "SS_Sucursal_ID, " & _
                             "SS_Moneda_ID, " & _
                             "SS_Costo, " & _
                             "SS_Capacidad, " & _
@@ -58,8 +58,8 @@ Public Class SucursalServicioSQLClass
                             "LEFT JOIN CLIENTE C ON C.CLI_Nit_ID = TS.SS_Nit_ID AND C.CLI_Document_ID = SUBSTRING(TS.SS_Nit_ID,0,LEN(TS.SS_Nit_ID)) ")
             Else
                 sql.Append("    SELECT SS_Nit_ID, " & _
-                            "SS_Sucursal_ID, " & _
                             "SS_Servicio_ID, " & _
+                            "SS_Sucursal_ID, " & _
                             "SS_Moneda_ID, " & _
                             "SS_Costo, " & _
                             "SS_Capacidad, " & _

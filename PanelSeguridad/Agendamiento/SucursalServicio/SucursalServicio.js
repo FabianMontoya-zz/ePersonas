@@ -182,6 +182,7 @@ function HabilitarPanel(opcion) {
             $("#Txt_ID").removeAttr("disabled");
             $("#Btnguardar").attr("value", "Guardar");
             $('.C_Chosen').trigger('chosen:updated');
+            $("#V_Sigla_1").html("");
             ResetError();
             Clear();
             estado = opcion;
@@ -197,6 +198,7 @@ function HabilitarPanel(opcion) {
             $("#TablaDatos_D").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TSucursalSer").html("");
+            $("#V_Sigla_1").html("");
             estado = opcion;
             Clear();
             break;
@@ -205,6 +207,7 @@ function HabilitarPanel(opcion) {
             $("#TablaDatos_D").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TSucursalSer").html("");
+            $("#V_Sigla_1").html("");
             estado = opcion;
             ResetError();
             Clear();
@@ -214,6 +217,7 @@ function HabilitarPanel(opcion) {
             $("#TablaDatos_D").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TSucursalSer").html("");
+            $("#V_Sigla_1").html("");
             estado = opcion;
             Clear();
             break;
@@ -272,7 +276,7 @@ function Table_Servicio() {
     switch (estado) {
 
         case "buscar":
-            html_Servicio = "<table id='TSucursalSer' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Empresa</th><th>Servicio</th><th>Sucursal</th><th>Moneda</th><th>Costo</th><th>Capacidad</th><th>Calendario</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
+            html_Servicio = "<table id='TSucursalSer' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Empresa</th><th>Cod Sucursal Servicio</th><th>Sucursal</th><th>Moneda</th><th>Costo</th><th>Capacidad</th><th>Calendario</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
             for (itemArray in ArraySucursalServicio) {
                 if (ArraySucursalServicio[itemArray].Codigo_ID != 0) {
                     html_Servicio += "<tr id= 'TSucursalSer_" + ArraySucursalServicio[itemArray].Codigo_ID + "'><td>" + ArraySucursalServicio[itemArray].Nit_ID + " - " + ArraySucursalServicio[itemArray].DescripEmpresa + "</td><td>" + ArraySucursalServicio[itemArray].Codigo_ID + "</td><td>" + ArraySucursalServicio[itemArray].Surcursal_ID + "</td><td>" + ArraySucursalServicio[itemArray].Cod_Moneda + "</td><td>" + ArraySucursalServicio[itemArray].Costo + "</td><td>" + ArraySucursalServicio[itemArray].Capacidad + "</td><td>" + ArraySucursalServicio[itemArray].Calendario_ID + "</td><td>" + ArraySucursalServicio[itemArray].UsuarioCreacion + "</td><td>" + ArraySucursalServicio[itemArray].FechaCreacion + "</td><td>" + ArraySucursalServicio[itemArray].UsuarioActualizacion + "</td><td>" + ArraySucursalServicio[itemArray].FechaActualizacion + "</td></tr>";
@@ -281,7 +285,7 @@ function Table_Servicio() {
             break;
 
         case "modificar":
-            html_Servicio = "<table id='TSucursalSer' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Empresa</th><th>Servicio</th><th>Sucursal</th><th>Moneda</th><th>Costo</th><th>Capacidad</th><th>Calendario</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
+            html_Servicio = "<table id='TSucursalSer' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Empresa</th><th>Cod Sucursal Servicio</th><th>Sucursal</th><th>Moneda</th><th>Costo</th><th>Capacidad</th><th>Calendario</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
             for (itemArray in ArraySucursalServicio) {
                 if (ArraySucursalServicio[itemArray].Codigo_ID != 0) {
                     html_Servicio += "<tr id= 'TSucursalSer_" + ArraySucursalServicio[itemArray].Codigo_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + ArraySucursalServicio[itemArray].Nit_ID + "','" + ArraySucursalServicio[itemArray].Codigo_ID + "')\"></img><span>Editar Sucursal Sevicio</span></span></td><td>" + ArraySucursalServicio[itemArray].Nit_ID + " - " + ArraySucursalServicio[itemArray].DescripEmpresa + "</td><td>" + ArraySucursalServicio[itemArray].Codigo_ID + "</td><td>" + ArraySucursalServicio[itemArray].Surcursal_ID + "</td><td>" + ArraySucursalServicio[itemArray].Cod_Moneda + "</td><td>" + ArraySucursalServicio[itemArray].Costo + "</td><td>" + ArraySucursalServicio[itemArray].Capacidad + "</td><td>" + ArraySucursalServicio[itemArray].Calendario_ID + "</td><td>" + ArraySucursalServicio[itemArray].UsuarioCreacion + "</td><td>" + ArraySucursalServicio[itemArray].FechaCreacion + "</td><td>" + ArraySucursalServicio[itemArray].UsuarioActualizacion + "</td><td>" + ArraySucursalServicio[itemArray].FechaActualizacion + "</td></tr>";
@@ -290,7 +294,7 @@ function Table_Servicio() {
             break;
 
         case "eliminar":
-            html_Servicio = "<table id='TSucursalSer' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Empresa</th><th>Servicio</th><th>Sucursal</th><th>Moneda</th><th>Costo</th><th>Capacidad</th><th>Calendario</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
+            html_Servicio = "<table id='TSucursalSer' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Empresa</th><th>Cod Sucursal Servicio</th><th>Sucursal</th><th>Moneda</th><th>Costo</th><th>Capacidad</th><th>Calendario</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
             for (itemArray in ArraySucursalServicio) {
                 if (ArraySucursalServicio[itemArray].Codigo_ID != 0) {
                     html_Servicio += "<tr id= 'TSucursalSer_" + ArraySucursalServicio[itemArray].Codigo_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArraySucursalServicio[itemArray].Nit_ID + "','" + ArraySucursalServicio[itemArray].Codigo_ID + "')\"></img><span>Eliminar Sucursal Servicio</span></td><td>" + ArraySucursalServicio[itemArray].Nit_ID + " - " + ArraySucursalServicio[itemArray].DescripEmpresa + "</td><td>" + ArraySucursalServicio[itemArray].Codigo_ID + "</td><td>" + ArraySucursalServicio[itemArray].Surcursal_ID + "</td><td>" + ArraySucursalServicio[itemArray].Cod_Moneda + "</td><td>" + ArraySucursalServicio[itemArray].Costo + "</td><td>" + ArraySucursalServicio[itemArray].Capacidad + "</td><td>" + ArraySucursalServicio[itemArray].Calendario_ID + "</td><td>" + ArraySucursalServicio[itemArray].UsuarioCreacion + "</td><td>" + ArraySucursalServicio[itemArray].FechaCreacion + "</td><td>" + ArraySucursalServicio[itemArray].UsuarioActualizacion + "</td><td>" + ArraySucursalServicio[itemArray].FechaActualizacion + "</td></tr>";
@@ -370,7 +374,8 @@ function Clear() {
     $("#TxtCosto").val("");
     $("#Text_Capacidad").val("");
     $("#Select_Calendario_SS").val("-1");
-
+    $("#V_Sigla_1").html("");
+    
     $("#TxtRead").val("");
     $("#DDLColumns").val("-1");
 
