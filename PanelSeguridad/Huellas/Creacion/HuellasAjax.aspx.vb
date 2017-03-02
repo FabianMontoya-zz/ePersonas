@@ -199,7 +199,7 @@ Public Class HuellasAjax
     Protected Function CrearTXT()
         Dim v_l_Texto As String = Nothing
 
-        Dim Encriptador As EncriptarClass
+        Dim Encriptador As New EncriptarClass
 
         v_l_Texto = "Set fso = CreateObject(""Scripting.FileSystemObject"")" & vbCrLf
         v_l_Texto = v_l_Texto + "Set ws = CreateObject(""WScript.Shell"")" & vbCrLf
@@ -208,13 +208,13 @@ Public Class HuellasAjax
         v_l_Texto = v_l_Texto + "If fso.FileExists(Archivo) Then" & vbCrLf & vbCrLf
 
         v_l_Texto = v_l_Texto + "   anno = Year(Date)" & vbCrLf
-        v_l_Texto = v_l_Texto + "   User = """ & Request.Form("user") & """" & vbCrLf
-        v_l_Texto = v_l_Texto + "   Name_User = """ & Request.Form("Name_User") & """" & vbCrLf
-        v_l_Texto = v_l_Texto + "   NIT = """ & Request.Form("Nit") & """" & vbCrLf
-        v_l_Texto = v_l_Texto + "   TypeDocument = """ & Request.Form("TypeDocument") & """" & vbCrLf
-        v_l_Texto = v_l_Texto + "   Document = """ & Request.Form("Document") & """" & vbCrLf
-        v_l_Texto = v_l_Texto + "   Name_Client = """ & Request.Form("Name_Client") & """" & vbCrLf
-        v_l_Texto = v_l_Texto + "   Fingers = """ & Request.Form("Dedos") & """" & vbCrLf & vbCrLf
+        v_l_Texto = v_l_Texto + "   User = """ & Encriptador.encriptaDato(Request.Form("user")) & """" & vbCrLf
+        v_l_Texto = v_l_Texto + "   Name_User = """ & Encriptador.encriptaDato(Request.Form("Name_User")) & """" & vbCrLf
+        v_l_Texto = v_l_Texto + "   NIT = """ & Encriptador.encriptaDato(Request.Form("Nit")) & """" & vbCrLf
+        v_l_Texto = v_l_Texto + "   TypeDocument = """ & Encriptador.encriptaDato(Request.Form("TypeDocument")) & """" & vbCrLf
+        v_l_Texto = v_l_Texto + "   Document = """ & Encriptador.encriptaDato(Request.Form("Document")) & """" & vbCrLf
+        v_l_Texto = v_l_Texto + "   Name_Client = """ & Encriptador.encriptaDato(Request.Form("Name_Client")) & """" & vbCrLf
+        v_l_Texto = v_l_Texto + "   Fingers = """ & Encriptador.encriptaDato(Request.Form("Dedos")) & """" & vbCrLf & vbCrLf
 
         v_l_Texto = v_l_Texto + "   Titulo = ""Autorización de Acceso""" & vbCrLf
         v_l_Texto = v_l_Texto + "   Mensaje = ""AUTORIZACIÓN DE ACCESO A ARCHIVOS DEL EQUIPO""+ vbCrLf + vbCrLf " & vbCrLf
@@ -278,18 +278,18 @@ Public Class HuellasAjax
         v_l_Texto = v_l_Texto + "       Return = WshShell.Run(""cmd /c start """""""" """"C:\Program Files\SASIF FingerPrint\Enroller\EnrollermentApp.exe"""""", 0, false)" & vbCrLf
         v_l_Texto = v_l_Texto + "   else" & vbCrLf
         v_l_Texto = v_l_Texto + "       Msgbox ""Se canceló la ejecución automática."", vbOKOnly+64+vbSystemModal, ""Ejecución Automática Cancelada""" & vbCrLf
-        v_l_Texto = v_l_Texto + "   end if" & vbCrLf
+        v_l_Texto = v_l_Texto + "   end if" & vbCrLf & vbCrLf
+
+        v_l_Texto = v_l_Texto + "   Set PV4 = CreateObject(""Scripting.FileSystemObject"")" & vbCrLf
+        v_l_Texto = v_l_Texto + "   PV4.deletefile Wscript.ScriptFullName" & vbCrLf & vbCrLf
 
         v_l_Texto = v_l_Texto + "   Else" & vbCrLf
-        v_l_Texto = v_l_Texto + "       Msgbox ""El programa no se encuentra instalado en el equipo.""+ vbCrLf + vbCrLf + ""Por favor ejecute el instalador del aplicativo necesario para ejecutar esta acción."", vbOKOnly+64+vbSystemModal, ""Aplicativo no instalado""" & vbCrLf
+        v_l_Texto = v_l_Texto + "       Msgbox ""El programa no se encuentra instalado en el equipo.""+ vbCrLf + vbCrLf + ""Por favor ejecute el instalador del aplicativo, necesario para ejecutar esta acción, y vuelva a ejecutar este archivo nuevamente al finalizar la instalación."", vbOKOnly+64+vbSystemModal, ""Aplicativo no instalado""" & vbCrLf
         v_l_Texto = v_l_Texto + "       Dim wShell" & vbCrLf
         v_l_Texto = v_l_Texto + "       Set wShell = CreateObject(""WScript.Shell"")" & vbCrLf
-        v_l_Texto = v_l_Texto + "       URL = """ & Request.Url.Authority & "/Files_Dowload/EnrollerSetup.exe" & """" & vbCrLf
+        v_l_Texto = v_l_Texto + "       URL = ""http://" & Request.Url.Authority & "/Files_Dowload/EnrollerSetup.exe" & """" & vbCrLf
         v_l_Texto = v_l_Texto + "       wShell.Run URL,9" & vbCrLf
         v_l_Texto = v_l_Texto + "   End If" & vbCrLf & vbCrLf
-
-        v_l_Texto = v_l_Texto + "Set PV4 = CreateObject(""Scripting.FileSystemObject"")" & vbCrLf
-        v_l_Texto = v_l_Texto + "PV4.deletefile Wscript.ScriptFullName" & vbCrLf
 
         Return v_l_Texto
     End Function
