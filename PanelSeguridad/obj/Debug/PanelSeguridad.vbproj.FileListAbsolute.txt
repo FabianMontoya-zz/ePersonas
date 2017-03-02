@@ -182,3 +182,4 @@ D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.
 D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.dll
 D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.xml
 D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.pdb
+D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.vbprojResolveAssemblyReference.cache

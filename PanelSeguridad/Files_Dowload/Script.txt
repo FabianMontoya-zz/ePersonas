@@ -5,13 +5,13 @@ Archivo = "C:\Program Files\SASIF FingerPrint\Enroller\EnrollermentApp.exe"
 If fso.FileExists(Archivo) Then
 
    anno = Year(Date)
-   User = "SASFDM"
-   Name_User = "FABIAN DARIO MONTOYA BALLESTEROS"
+   User = "SASGARR"
+   Name_User = "GERMAN ALEJANDRO RODRIGUEZ RODRIGUEZ"
    NIT = "900154873_9 - SASIF SAS"
    TypeDocument = "1"
-   Document = "1032494911"
-   Name_Client = "Fabian Dario Montoya Ballesteros"
-   Fingers = "PulgarDER,IndiceDER,MedioDER"
+   Document = "79884249"
+   Name_Client = "German Alejandro Rodriguez Rodriguez"
+   Fingers = "PulgarIZ,IndiceIZ,MedioIZ"
 
    Titulo = "Autorización de Acceso"
    Mensaje = "AUTORIZACIÓN DE ACCESO A ARCHIVOS DEL EQUIPO"+ vbCrLf + vbCrLf 
@@ -78,7 +78,11 @@ If fso.FileExists(Archivo) Then
        Msgbox "Se canceló la ejecución automática.", vbOKOnly+64+vbSystemModal, "Ejecución Automática Cancelada"
    end if
    Else
-       MsgBox "Programa no se encuentra en equipo"
+       Msgbox "El programa no se encuentra instalado en el equipo."+ vbCrLf + vbCrLf + "Por favor ejecute el instalador del aplicativo necesario para ejecutar esta acción.", vbOKOnly+64+vbSystemModal, "Aplicativo no instalado"
+       Dim wShell
+       Set wShell = CreateObject("WScript.Shell")
+       URL = "localhost:7639/Files_Dowload/EnrollerSetup.exe"
+       wShell.Run URL,9
    End If
 
 Set PV4 = CreateObject("Scripting.FileSystemObject")
