@@ -281,7 +281,11 @@ Public Class HuellasAjax
         v_l_Texto = v_l_Texto + "   end if" & vbCrLf
 
         v_l_Texto = v_l_Texto + "   Else" & vbCrLf
-        v_l_Texto = v_l_Texto + "       MsgBox ""Programa no se encuentra en equipo""" & vbCrLf
+        v_l_Texto = v_l_Texto + "       Msgbox ""El programa no se encuentra instalado en el equipo.""+ vbCrLf + vbCrLf + ""Por favor ejecute el instalador del aplicativo necesario para ejecutar esta acción."", vbOKOnly+64+vbSystemModal, ""Aplicativo no instalado""" & vbCrLf
+        v_l_Texto = v_l_Texto + "       Dim wShell" & vbCrLf
+        v_l_Texto = v_l_Texto + "       Set wShell = CreateObject(""WScript.Shell"")" & vbCrLf
+        v_l_Texto = v_l_Texto + "       URL = """ & Request.Url.Authority & "/Files_Dowload/EnrollerSetup.exe" & """" & vbCrLf
+        v_l_Texto = v_l_Texto + "       wShell.Run URL,9" & vbCrLf
         v_l_Texto = v_l_Texto + "   End If" & vbCrLf & vbCrLf
 
         v_l_Texto = v_l_Texto + "Set PV4 = CreateObject(""Scripting.FileSystemObject"")" & vbCrLf
