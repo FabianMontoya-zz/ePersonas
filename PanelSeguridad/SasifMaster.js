@@ -9,13 +9,12 @@ var Encrip;
 var g_NitEmpresa_User;
 var NameTemporal;
 var Doc_name;
-var Matrix_Mes = [];
-
 var Mensaje_NO_Permitido = "";
 
 var Control_Work;
 var Suma_Valor_Inicial = 0;
 
+var Matrix_Mes = [];
 Matrix_Mes[0] = [1, "Enero", 31];
 Matrix_Mes[1] = [2, "Febrero", 28];
 Matrix_Mes[2] = [3, "Marzo", 31];
@@ -28,13 +27,10 @@ Matrix_Mes[8] = [9, "Septiembre", 30];
 Matrix_Mes[9] = [10, "Octubre", 31];
 Matrix_Mes[10] = [11, "Noviembre", 30];
 Matrix_Mes[11] = [12, "Diciembre", 31];
-
-
-
 /*--------------- region de variables globales --------------------*/
 
 $(document).ready(function () {
-    clearConsole();
+   // clearConsole();
 
     fecha();
 
@@ -127,20 +123,20 @@ function Reload() {
     })();      
 }
 
-//Función que borra el log generado en la consola según el navegador
-function clearConsole() {
-    if (typeof console._commandLineAPI !== 'undefined') {
-        console.API = console._commandLineAPI;
-    } else if (typeof console._inspectorCommandLineAPI !== 'undefined') {
-        console.API = console._inspectorCommandLineAPI;
-    } else if (typeof console.clear !== 'undefined') {
-        console.API = console;
-    }
-    if (console.API) {
-        setTimeout(console.API.clear.bind(console)); //No muestra la ruta donde se genera el console        
-    }
-    setTimeout(console.clear.bind());
-}
+////Función que borra el log generado en la consola según el navegador
+//function clearConsole() {
+//    if (typeof console._commandLineAPI !== 'undefined') {
+//        console.API = console._commandLineAPI;
+//    } else if (typeof console._inspectorCommandLineAPI !== 'undefined') {
+//        console.API = console._inspectorCommandLineAPI;
+//    } else if (typeof console.clear !== 'undefined') {
+//        console.API = console;
+//    }
+//    if (console.API) {
+//        setTimeout(console.API.clear.bind(console)); //No muestra la ruta donde se genera el console        
+//    }
+//    setTimeout(console.clear.bind());
+//}
 
 //salida del formulario
 function btnSalir() {
@@ -938,7 +934,7 @@ function Charge_Combos_Depend_Verificacion(Matrix, Selector, P_1, P_2, Index_Edi
 
 }
 
-//carga los combps dependiendo del nit
+//carga los combps dependiendo del nit sirve genericamente para toda carga
 function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
 
     $('#' + Selector).empty();
@@ -1242,6 +1238,24 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
         case "Select_Factura":
             for (Item in Matrix) {
                 $("#" + Selector).append("<option value='" + Matrix[Item].Ref_1 + "_" + Matrix[Item].Ref_2 + "_" + Matrix[Item].Ref_3 + "_" + Matrix[Item].Fact_Oct_ID + "'> " + Matrix[Item].Ref_1 + " " + Matrix[Item].Ref_2 + " " + Matrix[Item].Ref_3 + " - " + Matrix[Item].Fact_Oct_ID + "</option>");
+            }
+            break;
+
+        case "DDL_Padre": //Combo Padre en Adm_OpcRol
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].Rol_ID + "'> " + Matrix[Item].Rol_ID + " - " + Matrix[Item].Descripcion + "</option>");
+            }
+            break;
+
+        case "DDL_Hijo": //Combo SubRol o Rol en Adm_OpcRol
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].Rol_ID + "'> " + Matrix[Item].Rol_ID + " - " + Matrix[Item].Descripcion + "</option>");
+            }
+            break;
+ 
+        case "DDLLink_ID": //Combo Links en Adm_OpcRol
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].ID + "'> " + Matrix[Item].ID + " - " + Matrix[Item].descripcion + "</option>");
             }
             break;
     }
@@ -1687,53 +1701,7 @@ function CargaRoles(Matrix, Selector, Index_Edit) {
             }
             break;
 
-        case "DDL_ID": //Combo Padre en Adm_OpcRol
-            for (Item in Matrix) {
-                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Nit_ID + " - " + Matrix[Item].Rol_ID + " - " + Matrix[Item].Descripcion + "</option>");
-            }
-            break;
-
-        case "DDLSubRol_Rol": //Combo SubRol o Rol en Adm_OpcRol
-            for (Item in Matrix) {
-                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Nit_ID + " - " + Matrix[Item].Rol_ID + " - " + Matrix[Item].Descripcion + "</option>");
-            }
-            break;
-    }
-
-    $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
-
-    switch (Index_Edit) {
-        case "":
-            $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
-            break;
-
-        case "0":
-            $("#" + Selector + " option[value= '0'] ").attr("selected", true);
-            break;
-
-        default:
-            $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
-            break;
-    }
-
-    $("#" + Selector).trigger("liszt:updated");
-    $('.C_Chosen').trigger('chosen:updated');
-}
-
-//Carga los Links
-function CargaLinks(Matrix, Selector, Index_Edit) {
-
-    $('#' + Selector).empty();
-    var objList = $("[id$='" + Selector + "']");
-
-    switch (Selector) {
-
-        case "DDLLink_ID": //Combo Links en Adm_OpcRol
-            for (Item in Matrix) {
-                $("#" + Selector).append("<option value='" + Matrix[Item].ID + "'> " + Matrix[Item].ID + " - " + Matrix[Item].descripcion + "</option>");
-            }
-            break;
-    }
+       }
 
     $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
 
@@ -1869,12 +1837,10 @@ function VerDocumento() {
     $("#IF_Visor").attr("src", "../../Repository_Document/TEMP/" + Doc_name);
 }
 
-
 //carga de multiples archivos global
 //Parámetros
 // - NameAjax = Nombre de la página de la cual se llama la función
 // - NameFile_ID = ID que utiliza el Input tipo File desde el cual hace la carga
-// - 
 function UpLoad_MultipleFiles(NameAjax, NameFile_ID, Form) {
     var arrayData = [];
     //validamos si seleccionaron un archivo

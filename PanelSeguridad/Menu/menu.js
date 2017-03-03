@@ -10,10 +10,10 @@ var Json_Arbol_carpetas;
 
 //evento load del menu
 $(document).ready(function () {
-    // VentanasEmergentes();
+    VentanasEmergentes();
     ConsultaParametrosURL();
-    //traemos los datos
-    transacionAjax("consulta");
+    //traemos los datos del usuario logeado
+    transacionAjax_InfoUser("Date_User", Encrip, User);
 });
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -83,7 +83,7 @@ function arbol() {
                     IDFinal = ArrayMenu[itemArray].IDRol;
                     HtmlTree_Interno = "";
                 }
-                HtmlTree_Interno += "<ol><li><span class='cssToolTip_ver'><label for='C_" + ArrayMenu[itemArray].Sub_Rol + "'>" + ArrayMenu[itemArray].Sub_Rol + "</label><span>" + ArrayMenu[itemArray].DescripcionLink + "</span></span><input type='checkbox' id='C_" + ArrayMenu[itemArray].Sub_Rol + "' /><ol><li id='Container_" + ArrayMenu[itemArray].Sub_Rol + "'></li></ol></li></ol>";
+                HtmlTree_Interno += "<ol><li><span class='cssToolTip_ver'><label for='C_" + ArrayMenu[itemArray].Sub_Rol + "'>" + ArrayMenu[itemArray].Sub_Rol + "</label><span>" + ArrayMenu[itemArray].DescripcionSubRol + "</span></span><input type='checkbox' id='C_" + ArrayMenu[itemArray].Sub_Rol + "' /><ol><li id='Container_" + ArrayMenu[itemArray].Sub_Rol + "'></li></ol></li></ol>";
                 contP = contP + 1;
                 //pintar carpetas
                 $("#Container_" + ArrayMenu[itemArray].IDRol).html(HtmlTree_Interno);
@@ -167,16 +167,49 @@ function Advertencia() {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                          CONSULTAS EN PROCESO                                                                                                                ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//*-------------------- Hace JSON con Todos los datos del User y da acceso al sistema ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_InfoUser(vp_State, vp_Nit_ID_Encrip, vp_User_ID) {
 
-//hacemos la transaccion al code behind por medio de Ajax
-function transacionAjax(State) {
     $.ajax({
         url: "menuAjax.aspx",
         type: "POST",
         //crear json
         data: {
-            "action": State,
-            "user": $("#User").html(),
+            "action": vp_State,
+            "NIT": vp_Nit_ID_Encrip,
+            "Usuario": vp_User_ID
+        },
+        success: function (result) {
+            if (result == "") {
+                Array_G_Usuario = [];
+            }
+            else {
+                Array_G_Usuario = JSON.parse(result);
+            }
+        },
+        error: function () {
+            Mensaje_General("¡Disculpenos!", "Se generó un error al realizar la transacción y no se completó la tarea.", "E");
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
+    }).done(function () {
+        transacionAjax("consulta");
+
+    });
+}
+
+//hacemos la transaccion al code behind por medio de Ajax
+function transacionAjax(vp_State) {
+    $.ajax({
+        url: "menuAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": vp_State,
+            "User": Array_G_Usuario[0].Usuario_ID,
+            "Rol_User": Array_G_Usuario[0].Rol_ID,
+            "Nit_Rol_User": Array_G_Usuario[0].Rol_Nit_ID,
             "Encrip": Encrip
         },
         //Transaccion Ajax en proceso
@@ -195,38 +228,8 @@ function transacionAjax(State) {
         async: false,
         cache: false
     }).done(function () {
-        transacionAjax_InfoUser("Date_User", ArrayMenu[0].Nit, User);
-    });
-}
-
-//*-------------------- Hace JSON con Todos los datos del User y da acceso al sistema ---------------------------*/
-//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_InfoUser(vp_State, vp_Nit_ID, vp_User_ID) {
-
-    $.ajax({
-        url: "menuAjax.aspx",
-        type: "POST",
-        //crear json
-        data: {
-            "action": vp_State,
-            "NIT": vp_Nit_ID,
-            "Usuario": vp_User_ID
-        },
-        success: function (result) {
-            if (result == "") {
-                Array_G_Usuario = [];
-            }
-            else {
-                Array_G_Usuario = JSON.parse(result);
-            }
-        },
-        error: function () {
-            Mensaje_General("¡Disculpenos!", "Se generó un error al realizar la transacción y no se completó la tarea.", "E");
-        },
-        async: false, // La petición es síncrona
-        cache: false // No queremos usar la caché del navegador
-    }).done(function () {
         Capture_Nit_User();
     });
 }
+
 

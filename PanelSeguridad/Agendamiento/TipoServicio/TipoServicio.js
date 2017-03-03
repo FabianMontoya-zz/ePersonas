@@ -347,25 +347,6 @@ function ValidarDroplist() {
 /*----                                                                                              PROCESO DE CARGUE GRID Servicio                                                                                   ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-//grid de Servicio asignados
-function TGridCalendar() {
-
-    var html_Servicio;
-    html_Servicio = "<table id='TServicio' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th colspan='2' class='Grid_Head' >Lunes</th><th colspan='2' class='Grid_Head' >Martes</th><th colspan='2' class='Grid_Head' >Miercoles</th><th colspan='2' class='Grid_Head' >Jueves</th><th colspan='2' class='Grid_Head' >Viernes</th><th colspan='2' class='Grid_Head' >Sabado</th><th colspan='2' class='Grid_Head' >Domingo</th><th colspan='2' class='Grid_Head' >Festivo</th></tr><tr><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th></tr><tr><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th></tr></thead><tbody>";
-    for (itemArray in ArrayTipoServicio) {
-        html_Servicio += "<tr id= 'TServicio_" + ArrayTipoServicio[itemArray].Servicio_ID + "'><td>" + ArrayTipoServicio[itemArray].IniLun + "</td><td>" + ArrayTipoServicio[itemArray].FinLun + "</td><td>" + ArrayTipoServicio[itemArray].IniMar + "</td><td>" + ArrayTipoServicio[itemArray].FinMar + "</td><td>" + ArrayTipoServicio[itemArray].IniMie + "</td><td>" + ArrayTipoServicio[itemArray].FinMie + "</td><td>" + ArrayTipoServicio[itemArray].IniJue + "</td><td>" + ArrayTipoServicio[itemArray].FinJue + "</td><td>" + ArrayTipoServicio[itemArray].IniVie + "</td><td>" + ArrayTipoServicio[itemArray].FinVie + "</td><td>" + ArrayTipoServicio[itemArray].IniSab + "</td><td>" + ArrayTipoServicio[itemArray].FinSab + "</td><td>" + ArrayTipoServicio[itemArray].IniDom + "</td><td>" + ArrayTipoServicio[itemArray].FinDom + "</td><td>" + ArrayTipoServicio[itemArray].IniF + "</td><td>" + ArrayTipoServicio[itemArray].FinF + "</td></tr>";
-    }
-
-    html_Servicio += "</tbody></table>";
-    $("#container_TGrid_2").html("");
-    $("#container_TGrid_2").html(html_Servicio);
-
-    $("#TServicio").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
-}
-
 //limpieza de campos despues de agregar un Servicio al grid
 function Clear_Agregar() {
 
@@ -386,7 +367,6 @@ function Clear_Agregar() {
 
     $('.C_Chosen').trigger('chosen:updated');
 }
-
 
 // crea la tabla de consulta
 function Table_Servicio() {
@@ -493,8 +473,6 @@ function ChargeDependencia(index) {
     $('#Select_ServicioDepent').val(index);
     $('.C_Chosen').trigger('chosen:updated');
 }
-
-
 
 //limpiar campos
 function Clear() {

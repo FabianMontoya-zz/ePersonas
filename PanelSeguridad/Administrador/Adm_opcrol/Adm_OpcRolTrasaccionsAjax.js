@@ -6,7 +6,8 @@ function transacionAjax_CargaBusqueda(State) {
         url: "Adm_OpcRolAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'OPTION_ROL'
         },
         //Transaccion Ajax en proceso
@@ -44,6 +45,7 @@ function transacionAjax_EmpresaNit(State) {
             else {
                 ArrayEmpresaNit = JSON.parse(result);
                 charge_CatalogList(ArrayEmpresaNit, "Select_EmpresaNit", "Generico");
+                charge_CatalogList(ArrayEmpresaNit, "Select_EmpresaNit_2", "Generico");
             }
         },
         error: function () {
@@ -56,7 +58,7 @@ function transacionAjax_EmpresaNit(State) {
 
 /*-------------------- carga subrol---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_CargaRol(vp_State, vp_Nit_ID) {
+function transacionAjax_CargaRol(vp_State, vp_Nit_ID, vp_Type) {
     $.ajax({
         url: "Adm_OpcRolAjax.aspx",
         type: "POST",
@@ -73,27 +75,33 @@ function transacionAjax_CargaRol(vp_State, vp_Nit_ID) {
             }
             else {
                 ArrayComboSubRol = JSON.parse(result);
-                CargaRoles(ArrayComboSubRol, "DDLSubRol_Rol", "");
-                CargaRoles(ArrayComboSubRol, "DDL_ID", "");
             }
         },
         error: function () {
 
+        }
+
+    }).done(function () {
+
+        if (vp_Type == "P") {
+            Charge_Combos_Depend_Nit(ArrayComboSubRol, "DDL_Padre", "");
+        }
+        else {
+            Charge_Combos_Depend_Nit(ArrayComboSubRol, "DDL_Hijo", "");
         }
     });
 }
 
 /*-------------------- carga subrol---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_CargaLinks(State, tipo_link) {
+function transacionAjax_CargaLinks(vp_State) {
 
     $.ajax({
         url: "Adm_OpcRolAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
-            "tipo_link": tipo_link
-
+        data: {
+            "action": vp_State
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -102,12 +110,12 @@ function transacionAjax_CargaLinks(State, tipo_link) {
             }
             else {
                 ArrayComboLinks = JSON.parse(result);
-                CargaLinks(ArrayComboLinks, "DDLLink_ID", "");
             }
         },
         error: function () {
-
         }
+    }).done(function () {
+        Charge_Combos_Depend_Nit(ArrayComboLinks, "DDLLink_ID", "");
     });
 
 }
@@ -129,7 +137,8 @@ function transacionAjax_opcRol(State, filtro, opcion) {
         url: "Adm_OpcRolAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "filtro": filtro,
             "opcion": opcion,
             "contenido": contenido,
@@ -159,43 +168,21 @@ function transacionAjax_opcRol_create(State) {
     var Nit_ID;
     var ID_SubRol_Rol;
     var Nit_ID_SubRol_Rol;
-    var Index_Padre;
-    var Index_SubRol_Rol;
     var param;
-
-    Index_Padre = $("#DDL_ID").val();
-    Index_SubRol_Rol = $("#DDLSubRol_Rol").val();
-
-    for (Item in ArrayComboSubRol) {
-        if (ArrayComboSubRol[Item].Index == Index_Padre) {
-            ID = ArrayComboSubRol[Item].Rol_ID;
-            Nit_ID = ArrayComboSubRol[Item].Nit_ID;
-            break;
-        }
-    }
-
-    for (Item in ArrayComboSubRol) {
-        if (ArrayComboSubRol[Item].Index == Index_SubRol_Rol) {
-            ID_SubRol_Rol = ArrayComboSubRol[Item].Rol_ID;
-            Nit_ID_SubRol_Rol = ArrayComboSubRol[Item].Nit_ID;
-            break;
-        }
-    }
-   
 
 
     $.ajax({
         url: "Adm_OpcRolAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
-            "ID": ID,
-            "ID_Nit_ID": Nit_ID,
-            "NIT": $("#Select_EmpresaNit").val(),
+        data: {
+            "action": State,
+            "NIT_Padre": $("#Select_EmpresaNit").val(),
+            "Padre": $("#DDL_Padre").val(),
             "consecutivo": $("#TxtConsecutivo").val(),
             "tipo": $("#DDLTipo").val(),
-            "Nit_ID_subrol_rol": Nit_ID_SubRol_Rol,
-            "subrol_rol": ID_SubRol_Rol,
+            "Nit_ID_Hijo": $("#Select_EmpresaNit_2").val(),
+            "Hijo": $("#DDL_Hijo").val(),
             "link_ID": $("#DDLLink_ID").val(),
             "user": User.toUpperCase()
         },
@@ -217,8 +204,7 @@ function transacionAjax_opcRol_create(State) {
                 case "Exito":
                     if (estado == "modificar") {
                         Mensaje_General("¡Exito!", "La Opción Perfil se ha modificado exitosamente.", "S");
-                        //HabilitarPanel('modificar');
-                    }
+                     }
                     else {
                         Mensaje_General("¡Exito!", "La Opción Perfil se ha registrado exitosamente en el sistema.", "S");
                         HabilitarPanel('crear');
@@ -251,7 +237,8 @@ function transacionAjax_opcRol_delete(State) {
         url: "Adm_OpcRolAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "ID": ID,
             "ID_Nit_ID": ID_Nit_ID,
             "NIT": NIT,

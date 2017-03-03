@@ -33,10 +33,12 @@ Public Class menuAjax
         Dim Encrip As New EncriptarClass
 
         Dim vl_S_User = Request.Form("user")
+        Dim vl_S_Rol_User = Request.Form("Rol_User")
+        Dim vl_S_Nit_Rol_User = Request.Form("Nit_Rol_User")
         Dim vl_S_Encriptado = Request.Form("Encrip")
         Dim vl_S_Nit = Encrip.desencriptaDato(vl_S_Encriptado)
 
-        ObjListMenu = SQL_Menu.Read_AllOptionsMenu(vl_S_User, vl_S_Nit, vl_S_Encriptado)
+        ObjListMenu = SQL_Menu.Read_AllOptionsMenu(vl_S_User, vl_S_Nit_Rol_User, vl_S_Rol_User, vl_S_Encriptado)
         'serializamos el objeto
         Response.Write(JsonConvert.SerializeObject(ObjListMenu.ToArray()))
 

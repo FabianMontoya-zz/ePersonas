@@ -349,36 +349,6 @@ Public Class Adm_RolesSQLClass
 
     End Function
 
-    ''' <summary>
-    ''' Carga matrix de Roles por empresa [NIT y Genericos]
-    ''' </summary>
-    ''' <returns></returns>
-    ''' <remarks></remarks>
-    Public Function Matrix_Roles_NIT(ByVal Nit_ID As String)
-        Dim ObjListRoles As New List(Of Adm_RolesClass)
-        Dim StrQuery As String = ""
-        Dim conex As New Conector
-        Dim Conexion As String = conex.typeConexion("1")
-
-        Dim sql As New StringBuilder
-
-        sql.AppendLine(" SELECT  R_Nit_ID,  " & _
-                               " R_Rol_ID, " & _
-                               " R_Descripcion, " & _
-                               " R_Sigla, " & _
-                               " R_Estado, " & _
-                               " ROW_NUMBER() OVER(ORDER BY R_Nit_ID, R_Rol_ID ASC) AS Index_Roles " & _
-                               " FROM ROLES WHERE R_Nit_ID = '" & Nit_ID & "' OR R_Nit_ID = '0' " & _
-                               " ORDER BY R_Nit_ID, R_Rol_ID ASC") 'Trae los roles
-
-        StrQuery = sql.ToString
-
-        ObjListRoles = listrol(StrQuery, Conexion, "MatrixAll")
-
-        Return ObjListRoles
-
-    End Function
-
 #End Region
 
 

@@ -72,9 +72,8 @@ Public Class Adm_OpcRolAjax
         Dim result As String
         Dim vl_s_IDxiste As String
 
-        objOpcRol.Nit_ID = Request.Form("NIT")
-        objOpcRol.OPRol_Nit_ID = Request.Form("ID_Nit_ID")
-        objOpcRol.OPRol_ID = Request.Form("ID")
+        objOpcRol.Nit_ID = Request.Form("NIT_Padre")
+        objOpcRol.OPRol_ID = Request.Form("Padre")
         objOpcRol.Consecutivo = Request.Form("consecutivo")
 
         'validamos si la llave existe
@@ -83,8 +82,8 @@ Public Class Adm_OpcRolAjax
         If vl_s_IDxiste = 0 Then
 
             objOpcRol.Tipo = Request.Form("tipo")
-            objOpcRol.Subrol_rol_Nit_ID = Request.Form("Nit_ID_subrol_rol")
-            objOpcRol.Subrol_rol = Request.Form("subrol_rol")
+            objOpcRol.Subrol_rol_Nit_ID = Request.Form("Nit_ID_Hijo")
+            objOpcRol.Subrol_rol = Request.Form("Hijo")
             objOpcRol.Link_ID = Request.Form("link_ID")
             objOpcRol.UsuarioCreacion = Request.Form("user")
             objOpcRol.FechaCreacion = Date.Now
@@ -183,9 +182,12 @@ Public Class Adm_OpcRolAjax
         Dim SQL_Roles As New Adm_RolesSQLClass
         Dim ObjListDroplist As New List(Of Adm_RolesClass)
 
-        Dim vl_Nit_ID = Request.Form("NIT")
+        Dim Obj As New ClienteClass
 
-        ObjListDroplist = SQL_Roles.Matrix_Roles_NIT(vl_Nit_ID)
+        Obj.Nit_ID = Request.Form("Nit")
+        Obj.TipoSQL = "Usuario"
+
+        ObjListDroplist = SQL_Roles.MatrixAll_Roles(Obj)
         Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
 
     End Sub
@@ -199,9 +201,7 @@ Public Class Adm_OpcRolAjax
         Dim SQL_OpcRol As New Adm_OpcRolSQLClass
         Dim ObjListDroplist As New List(Of Droplist_Class)
 
-        Dim vl_S_tipo = Request.Form("tipo_link")
-
-        ObjListDroplist = SQL_OpcRol.ReadCharge_DL_Links(vl_S_tipo)
+        ObjListDroplist = SQL_OpcRol.ReadCharge_DL_Links()
         Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
 
     End Sub

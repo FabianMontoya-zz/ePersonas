@@ -76,10 +76,9 @@
                     </tr>
                 </table>
                 <div id="TablaDatos_D">
-
                     <table id="T_NIT" style="width: 90%; margin-left: 8%;">
                         <tr>
-                            <td id="TD_ID" style="width: 14%;" class="Label_Bold">NIT Empresa</td>
+                            <td id="TD_ID" style="width: 14%;" class="Label_Bold">NIT Empresa Padre</td>
                             <td id="TD1" style="width: 40%;">
                                 <select style="width: 100%;" id="Select_EmpresaNit" class="C_Chosen">
                                 </select>
@@ -92,13 +91,12 @@
                             </td>
                         </tr>
                     </table>
-
                     <table id="Tabla_1" style="width: 90%; margin-left: 8%;">
                         <tr>
                             <td class="Label_Bold" style="width: 14%;">Padre
                             </td>
                             <td style="width: 40%;">
-                                <select style="width: 100%;" id="DDL_ID" class="C_Chosen">
+                                <select style="width: 100%;" id="DDL_Padre" class="C_Chosen">
                                 </select>
                             </td>
                             <td style="padding-bottom: 25px; width: 60%;">
@@ -127,25 +125,9 @@
                             </td>
                         </tr>
                     </table>
-                    <table id="Tabla_3" style="width: 90%; margin-left: 8%;">
-                        <tr>
-                            <td class="Label_Bold" style="width: 14%;">SubRol o Rol
-                            </td>
-                            <td style="width: 40%;">
-                                <select id="DDLSubRol_Rol" class="C_Chosen">
-                                </select>
-                            </td>
-                            <td style="padding-bottom: 25px; width: 60%;">
-                                <span class="cssToolTip">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img3"
-                                        src="../../images/error.png" />
-                                    <span class="SpamEG"></span></span>
-                            </td>
-                        </tr>
-                    </table>
                     <table id="Tabla_4" style="width: 90%; margin-left: 8%;">
                         <tr>
-                            <td class="Label_Bold" style="width: 14%;">Tipo (Carpeta o Link)
+                            <td class="Label_Bold" style="width: 14%;">Tipo (Carpeta o Página)
                             </td>
                             <td id="TD_Ttipo" style="width: 40%;">
                                 <select id="DDLTipo" class="C_Chosen">
@@ -157,6 +139,37 @@
                             <td style="padding-bottom: 25px; width: 60%;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img2"
+                                        src="../../images/error.png" />
+                                    <span class="SpamEG"></span></span>
+                            </td>
+                        </tr>
+                    </table>
+                    <table id="T_NIT_2" style="width: 90%; margin-left: 8%;">
+                        <tr>
+                            <td id="TD2" style="width: 14%;" class="Label_Bold">NIT Empresa Hijo</td>
+                            <td id="TD4" style="width: 40%;">
+                                <select style="width: 100%;" id="Select_EmpresaNit_2" class="C_Chosen">
+                                </select>
+                            </td>
+                            <td style="width: 60%; padding-bottom: 25px;">
+                                <span class="cssToolTip">
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgNIT_2"
+                                        src="../../images/error.png" />
+                                    <span class="SpamEG"></span></span>
+                            </td>
+                        </tr>
+                    </table>
+                    <table id="Tabla_3" style="width: 90%; margin-left: 8%;">
+                        <tr>
+                            <td class="Label_Bold" style="width: 14%;">Hijo
+                            </td>
+                            <td style="width: 40%;">
+                                <select id="DDL_Hijo" class="C_Chosen">
+                                </select>
+                            </td>
+                            <td style="padding-bottom: 25px; width: 60%;">
+                                <span class="cssToolTip">
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img3"
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>

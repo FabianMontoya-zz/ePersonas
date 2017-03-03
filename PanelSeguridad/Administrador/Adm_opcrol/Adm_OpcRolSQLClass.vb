@@ -81,8 +81,7 @@ Public Class Adm_OpcRolSQLClass
 
         sql.AppendLine("INSERT OPTION_ROL (" & _
             "OR_Nit_ID," & _
-            "OR_OPRol_Nit_ID," & _
-            "OR_OPRol_ID," & _
+           "OR_OPRol_ID," & _
             "OR_Consecutivo," & _
             "OR_Tipo," & _
             "[OR_Subrol/rol_Nit_ID]," & _
@@ -95,7 +94,6 @@ Public Class Adm_OpcRolSQLClass
             ")")
         sql.AppendLine("VALUES (")
         sql.AppendLine("'" & vp_Obj_OpcRol.Nit_ID & "',")
-        sql.AppendLine("'" & vp_Obj_OpcRol.OPRol_Nit_ID & "',")
         sql.AppendLine("'" & vp_Obj_OpcRol.OPRol_ID & "',")
         sql.AppendLine("'" & vp_Obj_OpcRol.Consecutivo & "',")
         sql.AppendLine("'" & vp_Obj_OpcRol.Tipo & "',")
@@ -200,7 +198,7 @@ Public Class Adm_OpcRolSQLClass
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function ReadCharge_DL_Links(ByVal vp_S_tipo As String)
+    Public Function ReadCharge_DL_Links()
 
         Dim ObjListDroplist As New List(Of Droplist_Class)
         Dim StrQuery As String = ""
@@ -211,13 +209,7 @@ Public Class Adm_OpcRolSQLClass
         Dim sql As New StringBuilder
 
         sql.Append(" SELECT L_Link_ID AS ID, L_Descripcion AS descripcion FROM LINKS ")
-
-        If vp_S_tipo = 1 Then
-            sql.Append(" WHERE l_LinkPag = '' ")
-        Else
-            sql.Append(" WHERE l_LinkPag <> '' ")
-        End If
-
+        sql.Append(" WHERE l_LinkPag <> '' ")
 
         StrQuery = sql.ToString
 
@@ -317,8 +309,7 @@ Public Class Adm_OpcRolSQLClass
 
         sql.AppendLine(" SELECT COUNT(1) FROM OPTION_ROL " & _
                        " WHERE OR_Nit_ID = '" & vp_O_Obj.Nit_ID & "'" & _
-                       " AND OR_OPRol_Nit_ID = '" & vp_O_Obj.OPRol_Nit_ID & "'" & _
-                       " AND OR_OPRol_ID = '" & vp_O_Obj.OPRol_ID & "'" & _
+                      " AND OR_OPRol_ID = '" & vp_O_Obj.OPRol_ID & "'" & _
                        " AND OR_Consecutivo = '" & vp_O_Obj.Consecutivo & "'")
 
         StrQuery = sql.ToString

@@ -25,13 +25,17 @@ $(document).ready(function () {
     /*================== FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN ==============*/
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_EmpresaNit('Cliente'); //Carga Droplist de Empresa NIT    
+    transacionAjax_CargaLinks('cargar_Links');
 
     Change_DDLTipo();
     Change_Select_Nit();
+    Change_Select_Nit_2();
 
-    
 });
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                 REGION INICIO DE COMPONENTES                                                                                                    ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //funcion para las ventanas emergentes
 function Ventanas_Emergentes() {
 
@@ -57,6 +61,10 @@ function Ocultar_Errores() {
     $("#ESelect").css("display", "none");
     $("#DE").css("display", "none");
     $("#DS").css("display", "none");
+    $("#T_NIT_2").css("display", "none");
+    $("#Tabla_3").css("display", "none");
+    $("#Tabla_5").css("display", "none");
+    $("#ImgNIT_2").css("display", "none");
     /*Los demás se ocultan en la SASIF Master*/
 }
 
@@ -64,13 +72,6 @@ function Ocultar_Errores() {
 function Ocultar_Tablas() {
     $("#TablaDatos_D").css("display", "none");
     $("#TablaConsulta").css("display", "none");
-}
-
-//fucion que carga desde ddl tipo que tipo es(carpeta o link)
-function loadChildrenlinks(obj) {
-    var tipo_link = $(obj).val();
-    $("#DDLLink_ID").empty();
-    transacionAjax_CargaLinks('cargar_Links', tipo_link);
 }
 
 //habilita el panel de crear o consulta
@@ -81,7 +82,7 @@ function HabilitarPanel(opcion) {
         case "crear":
             $("#TablaDatos_D").css("display", "inline-table");
             $("#TablaConsulta").css("display", "none");
-            $("#DDL_ID").removeAttr("disabled");
+            $("#DDL_Padre").removeAttr("disabled");
             $("#TxtConsecutivo").removeAttr("disabled");
             $("#Btnguardar").attr("value", "Guardar");
             estado = opcion;
@@ -104,7 +105,7 @@ function HabilitarPanel(opcion) {
             ResetError();
             Clear();
             break;
-                   
+
         case "eliminar":
             $("#TablaDatos_D").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
@@ -116,7 +117,9 @@ function HabilitarPanel(opcion) {
 
     }
 }
-
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                 REGION BOTONES                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //consulta del del crud(READ)
 function BtnConsulta() {
 
@@ -160,67 +163,69 @@ function BtnElimina() {
     transacionAjax_opcRol_delete("elimina");
 }
 
+//evento del boton salir
+function x() {
+    $("#dialog").dialog("close");
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                      REGION VALIDACIONES DEL PROCESO                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //validamos campos para la creacion del link
 function validarCamposCrear() {
 
-    var NIT = $("#Select_EmpresaNit").val(); //ImgNIT
-    var valID = $("#DDL_ID").val();
-    var consecutivo = $("#TxtConsecutivo").val();
-    var tipo = $("#DDLTipo").val();
-    var sub_rol = $("#DDLSubRol_Rol").val();
-    var link = $("#DDLLink_ID").val();
+    var vl_C_Nit_Padre = $("#Select_EmpresaNit").val(); //ImgNIT
+    var vl_C_Padre = $("#DDL_Padre").val();
+    var vl_C_Concecutivo = $("#TxtConsecutivo").val();
+    var vl_C_Tipo = $("#DDLTipo").val();
+    var vl_C_Nit_Hijo = $("#Select_EmpresaNit_2").val(); //ImgNIT_2
+    var vl_C_Hijo = $("#DDL_Hijo").val();
+    var vl_C_Link = $("#DDLLink_ID").val();
 
-    var validar = 0;
+    var vl_Validar = 0;
 
-    if (NIT == "-1" || NIT == null || tipo == "-1" || tipo == null || sub_rol == "-1" || sub_rol == null || link == "-1" || link == null ||
-        consecutivo == "" || valID == "-1" || valID == null) {
-        validar = 1;
-        /* -- Muestra de errores según dato faltante -- */
-        if (NIT == "-1" || NIT == null) {
-            $("#ImgNIT").css("display", "inline-table");
-        } else {
-            $("#ImgNIT").css("display", "none");
-        }
-        //
-        if (valID == "-1" || valID == null) {
-            $("#ImgID").css("display", "inline-table");
-        }
-        else {
-            $("#ImgID").css("display", "none");
-        }
-        //
-        if (tipo == "-1" || tipo == null) {
-            $("#Img2").css("display", "inline-table");
+    if (vl_C_Tipo == "1") {
+
+        if (vl_C_Nit_Padre == "-1" || vl_C_Nit_Padre == null ||
+       vl_C_Padre == "-1" || vl_C_Padre == null ||
+       vl_C_Concecutivo == "" ||
+       vl_C_Tipo == "-1" || vl_C_Tipo == null ||
+       vl_C_Nit_Hijo == "-1" || vl_C_Nit_Hijo == null ||
+       vl_C_Hijo == "-1" || vl_C_Hijo == null
+       ) {
+            vl_Validar = 1;
+            /* -- Muestra de errores según dato faltante -- */
+            if (vl_C_Nit_Padre == "-1" || vl_C_Nit_Padre == null) { $("#ImgNIT").css("display", "inline-table"); } else { $("#ImgNIT").css("display", "none"); }
+            if (vl_C_Padre == "-1" || vl_C_Padre == null) { $("#ImgID").css("display", "inline-table"); } else { $("#ImgID").css("display", "none"); }
+            if (vl_C_Concecutivo == "") { $("#Img1").css("display", "inline-table"); } else { $("#Img1").css("display", "none"); }
+            if (vl_C_Tipo == "-1" || vl_C_Tipo == null) { $("#Img2").css("display", "inline-table"); } else { $("#Img2").css("display", "none"); }
+            if (vl_C_Nit_Hijo == "-1" || vl_C_Nit_Hijo == null) { $("#ImgNIT_2").css("display", "inline-table"); } else { $("#ImgNIT_2").css("display", "none"); }
+            if (vl_C_Hijo == "-1" || vl_C_Hijo == null) { $("#Img3").css("display", "inline-table"); } else { $("#Img3").css("display", "none"); }
         }
         else {
-            $("#Img2").css("display", "none");
-        }
-        //
-        if (sub_rol == "-1" || sub_rol == null) {
-            $("#Img3").css("display", "inline-table");
-        }
-        else {
-            $("#Img3").css("display", "none");
-        }
-        //
-        if (link == "-1" || link == null) {
-            $("#Img5").css("display", "inline-table");
-        }
-        else {
-            $("#Img5").css("display", "none");
-        }
-        //
-        if (consecutivo == "") {
-            $("#Img1").css("display", "inline-table");
-        }
-        else {
-            $("#Img1").css("display", "none");
+            Ocultar_Errores();
         }
     }
     else {
-        Ocultar_Errores();
+        if (vl_C_Nit_Padre == "-1" || vl_C_Nit_Padre == null ||
+      vl_C_Padre == "-1" || vl_C_Padre == null ||
+      vl_C_Concecutivo == "" ||
+      vl_C_Tipo == "-1" || vl_C_Tipo == null ||
+      vl_C_Link == "-1" || vl_C_Link == null
+      ) {
+            vl_Validar = 1;
+            /* -- Muestra de errores según dato faltante -- */
+            if (vl_C_Nit_Padre == "-1" || vl_C_Nit_Padre == null) { $("#ImgNIT").css("display", "inline-table"); } else { $("#ImgNIT").css("display", "none"); }
+            if (vl_C_Padre == "-1" || vl_C_Padre == null) { $("#ImgID").css("display", "inline-table"); } else { $("#ImgID").css("display", "none"); }
+            if (vl_C_Concecutivo == "") { $("#Img1").css("display", "inline-table"); } else { $("#Img1").css("display", "none"); }
+            if (vl_C_Tipo == "-1" || vl_C_Tipo == null) { $("#Img2").css("display", "inline-table"); } else { $("#Img2").css("display", "none"); }
+            if (vl_C_Link == "-1" || vl_C_Link == null) { $("#Img5").css("display", "inline-table"); } else { $("#Img5").css("display", "none"); }
+        }
+        else {
+            Ocultar_Errores();
+        }
     }
-    return validar;
+    return vl_Validar;
 }
 
 //validamos si han escogido una columna
@@ -237,6 +242,9 @@ function ValidarDroplist() {
     return flag;
 }
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                  TABLA DE AREA                                                                                  ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 // crea la tabla en el cliente
 function Table_opcRol() {
 
@@ -250,7 +258,7 @@ function Table_opcRol() {
                 html_Topcrol += "<tr id= 'TOpcRol_" + ArrayOpcRol[itemArray].Index + "'><td>" + ArrayOpcRol[itemArray].Nit_ID + "</td><td>" + ArrayOpcRol[itemArray].OPRol_Nit_ID + "</td><td>" + ArrayOpcRol[itemArray].OPRol_ID + "</td><td>" + ArrayOpcRol[itemArray].Consecutivo + "</td><td style='white-space: nowrap;'>" + ArrayOpcRol[itemArray].Tipo + "</td><td>" + ArrayOpcRol[itemArray].Subrol_rol_Nit_ID + "</td><td>" + ArrayOpcRol[itemArray].Subrol_rol + "</td><td> " + ArrayOpcRol[itemArray].Link_ID + " </td><td style='white-space: nowrap;'> " + ArrayOpcRol[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArrayOpcRol[itemArray].FechaCreacion + " </td></tr>";
             }
             break;
-   
+
         case "eliminar":
             var html_Topcrol = "<table id='TOpcRol' border='1' cellpadding='1' cellspacing='1' style='width: 100%'><thead><tr><th>Eliminar</th><th>NIT Empresa</th><th style='white-space: nowrap;'>NIT Empresa Código</th><th>Código</th><th>Consecutivo</th><th>Tipo</th><th style='white-space: nowrap;'>NIT Empresa Sub-Rol/Rol</th><th style='white-space: nowrap;'>Sub-Rol/Rol</th><th>Llave Tabla Links</th><th>Usuario Creación</th><th>Fecha Creación</th></tr></thead><tbody>";
             for (itemArray in ArrayOpcRol) {
@@ -286,37 +294,6 @@ function Eliminar(index_consecutivo) {
 
 }
 
-//evento del boton salir
-function x() {
-    $("#dialog").dialog("close");
-}
-
-//limpiar campos
-function Clear() {
-    Ocultar_Errores();
-    $("#Select_EmpresaNit").prop('disabled', false); //No se agrega el trigger porque se hace al seleccionar el val
-    $("#Select_EmpresaNit").val("-1").trigger("chosen:updated");
-    $("#DDL_ID").val("-1");
-    $("#DDL_ID").empty().trigger("chosen:updated");
-    $("#TxtConsecutivo").val("");
-    $("#DDLTipo").val("-1");
-    $("#DDLSubRol_Rol").val("-1");
-    $("#DDLSubRol_Rol").empty().trigger("chosen:updated");
-    $("#DDLLink_ID").val("-1");
-    $("#DDLLink_ID").empty().trigger("chosen:updated");
-    $("#TxtRead").val("");
-    $("#DDLColumns").val("-1");
-
-    $('.C_Chosen').trigger('chosen:updated');
-
-    var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
-
-    if (OnlyEmpresa == true) {
-        TransaccionesSegunNIT($("#Select_EmpresaNit").val());
-    }
-
-}
-
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                     PROCESOS DE CHANGES EN CONTROLES                                                                                                                                        ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -329,30 +306,83 @@ function Change_Select_Nit() {
         } else {
             OpenControl();
             $("#ImgNIT").css("display", "none");
-            $("#Select_EmpresaNit").prop('disabled', true).trigger("chosen:updated");
         }
-        index_NIT_ID = this.value;
-        TransaccionesSegunNIT(index_NIT_ID);
+        var vl_index_NIT_ID = this.value;
+        TransaccionesSegunNIT(vl_index_NIT_ID, "P");
     });
 }
 
-function TransaccionesSegunNIT(index_NIT_ID) {
-    if (index_NIT_ID != "-1") {
-        transacionAjax_CargaRol('Carga_Rol', index_NIT_ID);
+function Change_Select_Nit_2() {
+    $("#Select_EmpresaNit_2").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_EmpresaNit_2").val() == "-1") {
+            $("#ImgNIT_2").css("display", "inline-table");
+        } else {
+            $("#ImgNIT_2").css("display", "none");
+        }
+        vl_index_NIT_ID = this.value;
+        TransaccionesSegunNIT(vl_index_NIT_ID, "H");
+    });
+}
+
+function TransaccionesSegunNIT(vp_index_NIT_ID, vp_Type) {
+    if (vp_index_NIT_ID != "-1") {
+        transacionAjax_CargaRol('Carga_Rol', vp_index_NIT_ID, vp_Type);
     }
 }
 
 //funcion que dispara elcombo del tipo
 function Change_DDLTipo() {
     $("#DDLTipo").change(function () {
-        var Seleccion = $("#DDLTipo").val();
-        if (Seleccion != "-1") {
-            OpenControl();
-            ArrayComboLinks = [];
-            loadChildrenlinks($(this));
-        } else {
-            $("#DDLLink_ID").empty().trigger("chosen:updated");
-            ArrayComboLinks = [];
+        var Seleccion = $(this).val();
+
+        switch (Seleccion) {
+            case "1":
+                $("#T_NIT_2").css("display", "inline-table");
+                $("#Tabla_3").css("display", "inline-table");
+                $("#Tabla_5").css("display", "none");
+                break;
+
+            case "2":
+                $("#T_NIT_2").css("display", "none");
+                $("#Tabla_3").css("display", "none");
+                $("#Tabla_5").css("display", "inline-table");
+                break;
+
+            case "-1":
+                $("#T_NIT_2").css("display", "none");
+                $("#Tabla_3").css("display", "none");
+                $("#Tabla_5").css("display", "none");
+                break;
+
         }
     });
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                              MENSAJES, VISUALIZACION Y LIMPIEZA                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//limpiar campos
+function Clear() {
+    Ocultar_Errores();
+    $("#Select_EmpresaNit").prop('disabled', false); //No se agrega el trigger porque se hace al seleccionar el val
+    $("#Select_EmpresaNit").val("-1").trigger("chosen:updated");
+    $("#DDL_Padre").val("-1");
+    $("#DDL_Padre").empty().trigger("chosen:updated");
+    $("#TxtConsecutivo").val("");
+    $("#DDLTipo").val("-1");
+    $("#DDL_Hijo").val("-1");
+    $("#DDL_Hijo").empty().trigger("chosen:updated");
+    $("#DDLLink_ID").val("-1");
+    $("#TxtRead").val("");
+    $("#DDLColumns").val("-1");
+
+    $('.C_Chosen').trigger('chosen:updated');
+
+    var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+    if (OnlyEmpresa == true) {
+        TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+    }
+
 }
