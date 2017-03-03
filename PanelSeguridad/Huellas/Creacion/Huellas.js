@@ -27,7 +27,7 @@ $(document).ready(function () {
     Ocultar_Errores();
     Ocultar_Tablas();
     /*==================FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN==============*/
-
+    
     /*Llamado de transacciones AJAX iniciales*/
     transacionAjax_EmpresaNit('Cliente');
     transacionAjax_Documento('Documento');
@@ -35,10 +35,13 @@ $(document).ready(function () {
     /*=============== END ====================*/
 
     Clear();
-
+    var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");//Bloquear o no el combo de Nit Empresa según acceso de usuario
+    if (OnlyEmpresa == true) {
+        $("#Select_Documento").prop('disabled', false); //No se agrega el trigger porque se hace al seleccionar el val
+        $("#Select_Documento").val("-1").trigger("chosen:updated");
+    } 
     Change_Select_Nit();
     Change_Select_Documento();
-
     Consult_Document();    
 });
 
