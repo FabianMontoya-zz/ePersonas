@@ -368,6 +368,8 @@
     <Content Include="Documentos\SasifMaster_Cosult.js" />
     <Content Include="Factura\menu.js" />
     <Content Include="Factura\SasifMaster_Cosult.js" />
+    <Content Include="Files_Dowload\DowloadEnroller.aspx" />
+    <Content Include="Files_Dowload\EnrollerSetup.exe" />
     <Content Include="Global.asax" />
     <Content Include="Huellas\Creacion\Huellas.aspx" />
     <Content Include="Huellas\Creacion\Huellas.js" />
@@ -436,6 +438,7 @@
     <Content Include="Images\search_red.png" />
     <Content Include="Images\settings.png" />
     <Content Include="Images\success.png" />
+    <Content Include="Images\waiting.png" />
     <Content Include="Ingreso_New\Entrada\Ingreso.aspx" />
     <Content Include="Ingreso_New\Entrada\Ingreso.js" />
     <Content Include="Ingreso_New\Entrada\IngresoAjax.aspx" />
@@ -1043,6 +1046,13 @@
     <Compile Include="encriptracion\EncriptarClass.vb" />
     <Compile Include="Factura\Creacion\FacturaClass.vb" />
     <Compile Include="Factura\Creacion\FacturaSQLClass.vb" />
+    <Compile Include="Files_Dowload\DowloadEnroller.aspx.designer.vb">
+      <DependentUpon>DowloadEnroller.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Files_Dowload\DowloadEnroller.aspx.vb">
+      <DependentUpon>DowloadEnroller.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Files_Dowload\File_DowloadClass.vb" />
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1624,6 +1634,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Repository_Document\TEMP\" />
+    <Folder Include="Repository_Files\TEMP\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

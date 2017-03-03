@@ -30,7 +30,7 @@ Matrix_Mes[11] = [12, "Diciembre", 31];
 /*--------------- region de variables globales --------------------*/
 
 $(document).ready(function () {
-   // clearConsole();
+    clearConsole();
 
     fecha();
 
@@ -124,19 +124,19 @@ function Reload() {
 }
 
 ////Función que borra el log generado en la consola según el navegador
-//function clearConsole() {
-//    if (typeof console._commandLineAPI !== 'undefined') {
-//        console.API = console._commandLineAPI;
-//    } else if (typeof console._inspectorCommandLineAPI !== 'undefined') {
-//        console.API = console._inspectorCommandLineAPI;
-//    } else if (typeof console.clear !== 'undefined') {
-//        console.API = console;
-//    }
-//    if (console.API) {
-//        setTimeout(console.API.clear.bind(console)); //No muestra la ruta donde se genera el console        
-//    }
-//    setTimeout(console.clear.bind());
-//}
+function clearConsole() {
+    if (typeof console._commandLineAPI !== 'undefined') {
+        console.API = console._commandLineAPI;
+    } else if (typeof console._inspectorCommandLineAPI !== 'undefined') {
+        console.API = console._inspectorCommandLineAPI;
+    } else if (typeof console.clear !== 'undefined') {
+        console.API = console;
+    }
+    if (console.API) {
+        setTimeout(console.API.clear.bind(console)); //No muestra la ruta donde se genera el console        
+    }
+    setTimeout(console.clear.bind());
+}
 
 //salida del formulario
 function btnSalir() {
@@ -1724,7 +1724,7 @@ function CargaRoles(Matrix, Selector, Index_Edit) {
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*----                                                                         FUNCIONES PARA CARGA DE DOCUMENTOS AL SERVIDOR                                                                                  ----*/
+/*----                                                                         FUNCIONES PARA CARGA DE DOCUMENTOS Y ARCHIVOS AL SERVIDOR                                                                                  ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //costruimos el nombre del documento temporal
 function ContruyeName_Temp(StrDocument, StrConsecutivo_Empresa, StrConsecutivo) {
@@ -1837,10 +1837,11 @@ function VerDocumento() {
     $("#IF_Visor").attr("src", "../../Repository_Document/TEMP/" + Doc_name);
 }
 
-//carga de multiples archivos global
-//Parámetros
-// - NameAjax = Nombre de la página de la cual se llama la función
-// - NameFile_ID = ID que utiliza el Input tipo File desde el cual hace la carga
+//Carga de múltiples archivos global
+//** Parámetros:
+// • NameAjax = Nombre de la página de la cual se llama la función
+// • NameFile_ID = ID que utiliza el Input tipo File desde el cual hace la carga
+// • Form = Un ID que se puede utilizar para envio de datos únicos de este form o similar
 function UpLoad_MultipleFiles(NameAjax, NameFile_ID, Form) {
     var arrayData = [];
     //validamos si seleccionaron un archivo
@@ -1855,7 +1856,6 @@ function UpLoad_MultipleFiles(NameAjax, NameFile_ID, Form) {
         //capturamos los datos del input file
         for (var i = 0, f; f = $("#" + NameFile_ID)[0].files[i]; i++) {
             data.append('archivo'+i, $("#" + NameFile_ID)[0].files[i]); //Cargamos cada uno de los archivos en los Data
-            console.log("File: "+i + " - " + escape(f.name));
             numFilesSended = numFilesSended + 1;
         }
        
@@ -1881,27 +1881,37 @@ function UpLoad_MultipleFiles(NameAjax, NameFile_ID, Form) {
             success: function (result) {
                 
                 var files = JSON.parse(result);
-                console.log("Result de Multicarga:");
-                console.log(files);
 
                 if (files[0] == "NO FILES"){
                     Mensaje_General("Sin Archivos", "No se han encontrado peticiones de carga de archivos al servidor, la operación de carga se ha cancelado.", "W");
                 }else{
-                    console.log("Tamaño result: " + files.length + "\nTamaño Enviados: " +numFilesSended);
                     if (files.length < numFilesSended){
                         if ( (numFilesSended - files.length) > 1){
-                            Mensaje_General("Archivos no cargados", "El sistema no ha cargado la totalidad de archivos que usted dispuso, esto sucedió porque no cumplieron con los parámetros permitidos. No se cargaron "+ (numFilesSended - files.length) + " archivos.", "W");
+                            Mensaje_General("Archivos Cargados: "+files.length+"/"+numFilesSended, "El sistema no ha cargado la totalidad de archivos que usted dispuso, esto sucedió porque no cumplieron con los parámetros permitidos. No se cargaron "+ (numFilesSended - files.length) + " archivos.", "W");
                         }else if ( (numFilesSended - files.length) == 1){
-                            Mensaje_General("Archivo no cargado", "El sistema no ha cargado la totalidad de archivos que usted dispuso, esto sucedió porque no cumplió con los parámetros permitidos. No se cargó "+ (numFilesSended - files.length) + " archivo.", "W");
+                            Mensaje_General("Archivos Cargados: "+files.length+"/"+numFilesSended, "El sistema no ha cargado la totalidad de archivos que usted dispuso, esto sucedió porque no cumplió con los parámetros permitidos. No se cargó "+ (numFilesSended - files.length) + " archivo.", "W");
                         }else if ( (numFilesSended - files.length) == numFilesSended){
-                            Mensaje_General("Carga Fallida", "El sistema no cargó ninguno de los archivos seleccionado, esto sucedió porque ningún archivo cumplia con los parametros de archivo aceptado.", "E");
+                            Mensaje_General("Archivos Cargados: "+files.length+"/"+numFilesSended, "El sistema no cargó ninguno de los archivos seleccionado, esto sucedió porque ningún archivo cumplia con los parametros de archivo aceptado.", "E");
                         }
+                    }else{
+                        Mensaje_General("Archivos Cargados: "+files.length+"/"+numFilesSended, "Se han cargado todos los archivos correctamente al servidor.","S");
                     }
+
+                    /* === Solo necesario para módulo de carga de huellas == */
+                    if (form == "Huellas"){
+                        CheckFiles(files);
+                        ArmarTabla();
+                    }
+                    /*==END==*/
                 }
+
+                $("#" + NameFile_ID).val("");
             },
             error: function (error) {
                 Mensaje_General("Error durante la Carga", "Lo sentimos, ocurrió un error y no se logró completar el proceso. Por favor recarga la página e intentalo más tarde.", "W");
-            }
+            },
+            async: false, // La petición es síncrona
+            cache: false // No queremos usar la caché del navegador
         });
     }
     else {

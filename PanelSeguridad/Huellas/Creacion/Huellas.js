@@ -11,8 +11,9 @@ var RutaDestino = "";
 
 var namePersona = ""
 
-var Persona = false;
+var Persona = false; //Si consultaron correctamente una persona del sistema
 var Ejecutable = false; //Indica si el ejecutable ya fué generado
+var ArchivosOK = false; //Si se han subido todos los archivos requeridos
 /*--------------- region de variables globales --------------------*/
 
 //Evento load JS
@@ -26,27 +27,27 @@ $(document).ready(function () {
     Ocultar_Errores();
     Ocultar_Tablas();
     /*==================FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN==============*/
-
+    
     /*Llamado de transacciones AJAX iniciales*/
     transacionAjax_EmpresaNit('Cliente');
     transacionAjax_Documento('Documento');
     transaccionAjax_RutasOperacion('RUTAS_OPERACION');
     /*=============== END ====================*/
 
+    Clear();
+    var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");//Bloquear o no el combo de Nit Empresa según acceso de usuario
+    if (OnlyEmpresa == true) {
+        $("#Select_Documento").prop('disabled', false); //No se agrega el trigger porque se hace al seleccionar el val
+        $("#Select_Documento").val("-1").trigger("chosen:updated");
+    } 
     Change_Select_Nit();
     Change_Select_Documento();
-
-    Consult_Document();
-
-    Clear();
+    Consult_Document();    
 });
 
 //Función que oculta todas las IMG de los errores en pantalla
 function Ocultar_Errores() {
     ResetError();
-    $("#DE").css("display", "none");
-    $("#SE").css("display", "none");
-    $("#WA").css("display", "none");
     $("#Img_TD").css("display", "none");
     $("#Img_D").css("display", "none");
     /*Se ocultan en la SASIF Master*/
@@ -83,6 +84,7 @@ function Ventanas_Emergentes() {
     });
 }
 
+//Función que llama el Dialog de captura de Dedos
 function DialogDedos() {
     if (Persona == true) {
         $("#Dialog_Dedos").dialog("open");
@@ -97,13 +99,13 @@ function DialogDedos() {
 
 //Función que oculta las tablas
 function Ocultar_Tablas() {
-    $("#TablaDatos").css("display", "none");
-    $("#TablaConsulta").css("display", "none");
     $("#T_Files").css("display", "none");
+    $("#T_TitleTableFiles").css("display", "none");
+    $("#Div_TableFingers").css("display", "none");    
 }
 
 //Función que ejecuta la carga de los dedos y la generación del ejecutable
-function btnOk() {
+function GenerarEjecutable() {
     if (Ejecutable == false) {
         var Dedos = CargarArrayDedos();
         if (Dedos == true) {
@@ -114,7 +116,7 @@ function btnOk() {
 
             transacionAjax_Ok("DescargarEjecutable");
             CargarNames();
-
+            ArmarTabla();
         } else {
             Mensaje_General("¡ERROR! - Sin Selección", "Debes seleccionar como mínimo uno de los dedos que capturarás de la persona.", "E");
         }
@@ -188,59 +190,83 @@ function BloquearChecks() {
     $("#Check_MeniqueDER").prop('disabled', true);
 }
 
-//validamos campos para la creacion del Huellas
+//Función que reinicia los checks de los dedos a su forma default
+function ReiniciarChecks() {
+    $("#Check_PulgarIZ").prop('disabled', false);
+    $("#Check_PulgarDER").prop('disabled', false);
+    $("#Check_IndiceIZ").prop('disabled', false);
+    $("#Check_IndiceDER").prop('disabled', false);
+    $("#Check_MedioIZ").prop('disabled', false);
+    $("#Check_MedioDER").prop('disabled', false);
+    $("#Check_AnularIZ").prop('disabled', false);
+    $("#Check_AnularDER").prop('disabled', false);
+    $("#Check_MeniqueIZ").prop('disabled', false);
+    $("#Check_MeniqueDER").prop('disabled', false);
+    $("#Check_PulgarIZ").prop("checked", false);
+    $("#Check_PulgarDER").prop("checked", false);
+    $("#Check_IndiceIZ").prop("checked", false);
+    $("#Check_IndiceDER").prop("checked", false);
+    $("#Check_MedioIZ").prop("checked", false);
+    $("#Check_MedioDER").prop("checked", false);
+    $("#Check_AnularIZ").prop("checked", false);
+    $("#Check_AnularDER").prop("checked", false);
+    $("#Check_MeniqueIZ").prop("checked", false);
+    $("#Check_MeniqueDER").prop("checked", false);
+}
+
+//Validamos campos para la creacion del Huellas
 function validarCamposCrear() {
-
-    var NIT = $("#Select_EmpresaNit").val(); //ImgNIT
-    var valID = $("#Txt_ID").val();
-    var descrip = $("#TxtDescription").val();
-    var validar = 0;
-
-    if (NIT == "-1" || NIT == null || descrip == "" || valID == "") {
-        validar = 1;
-        /* -- Muestra de errores según dato faltante -- */
-        if (NIT == "-1" || NIT == null) {
-            $("#ImgNIT").css("display", "inline-table");
-        } else {
-            $("#ImgNIT").css("display", "none");
-        }
-        //
-        if (valID == "") {
-            $("#ImgID").css("display", "inline-table");
-        }
-        else {
-            $("#ImgID").css("display", "none");
-        }
-        //
-        if (descrip == "") {
-            $("#Img1").css("display", "inline-table");
-        }
-        else {
-            $("#Img1").css("display", "none");
-        }
-
-
+    var validar = false;
+    VerificarFiles();
+    if (Persona == true && ArchivosOK == true && Ejecutable == true) {
+        validar = true;
+    } else if (Persona == false) {
+        Mensaje_General("Sin Persona Relacionada", "Primero debes relacionar una persona existente en el sistema para acceder a esta opción.", "E");
+        $("#Img1").css("display", "inline-table");
+        $("#Img_TD").css("display", "inline-table");
+        $("#Img_D").css("display", "inline-table");
+    } else if (ArchivosOK == false) {
+        Mensaje_General("Archivos no Cargados", "Primero debes cargar todos los archivos solicitados para ejecutar esta función.", "W");
+    } else if (Ejecutable == false) {
+        Mensaje_General("Archivos no Cargados", "Debes hacer la generación del ejecutable y posterior carga de los archivos para acceder a esta opción.", "W");
     }
-    else {
-        ResetError();
-    }
+
     return validar;
 }
 
-//evento del boton salir
+//Función llamada para guardar todo en BD
+function GuardarHuellas() {
+    var valido = validarCamposCrear();
+    if (valido == true) {
+        transacionAjax_Huellas_Create("Crear_Huellas");
+    }
+}
+
+//Evento del boton salir
 function x() {
     $("#dialog").dialog("close");
 }
 
-//limpiar campos
+//Reinicia todos los campos del formulario
 function Clear() {
     Ocultar_Errores();
+    Ocultar_Tablas();
+    ReiniciarChecks();
     $("#Select_EmpresaNit").prop('disabled', false); //No se agrega el trigger porque se hace al seleccionar el val
     $("#Select_EmpresaNit").val("-1").trigger("chosen:updated");
     $("#Select_Documento").prop('disabled', true); //No se agrega el trigger porque se hace al seleccionar el val
     $("#Select_Documento").val("-1").trigger("chosen:updated");
+    $("#TxtDoc").val("");
     $("#TxtDoc").prop('disabled', true);
-    $("#V_Persona").html(" ");
+    $("#V_Persona").html("");
+    $("#fileupload").val("");
+    ArrayDedos = [];
+    arrayNameFiles = [];
+    arrayFingersStatus = [];
+    Persona = false; 
+    Ejecutable = false; 
+    ArchivosOK = false;
+    namePersona = ""
 }
 
 //valida campo y consulta datos de persona
@@ -302,6 +328,8 @@ function ValidaCamposPeople() {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                     PROCESOS DE CARGA DE ARCHIVOS HUELLAS                                                                                                                                    ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+//Función Inicial para la carga de los archivos
 function CargaArchivos(ID_FileInput) {
     if (Ejecutable == true) {
         UpLoad_MultipleFiles('Huellas', ID_FileInput, 'Huellas');
@@ -316,7 +344,7 @@ function CargarNames() {
     if (Ejecutable == true) {
         for (item in ArrayDedos) {
             arrayNameFiles.push(ArrayDedos[item] + "_" + $("#Select_Documento").val() + "_" + $("#TxtDoc").val());
-            var JSONFingers = { Nombre: ArrayDedos[item], Estado: "Wait" };
+            var JSONFingers = { Index: item, Nombre: ArrayDedos[item] + "_" + $("#Select_Documento").val() + "_" + $("#TxtDoc").val() + ".fpt", Estado: "Wait" };
             arrayFingersStatus.push(JSONFingers);
         }
     } else {
@@ -324,19 +352,46 @@ function CargarNames() {
     }
 }
 
+//Función que valida si todos los archivos requeridos ya fueron subidos
+function VerificarFiles() {
+    ArchivosOK = true;
+    for (item in arrayFingersStatus) {
+        if (arrayFingersStatus[item].Estado == "Wait") {
+            ArchivosOK = false;
+            break;
+        }
+    }
+}
+
+//Función que valida que archivos ya se subieron y actualiza el estado en el array
+function CheckFiles(ArraySubidosOK) {
+    for (item in arrayFingersStatus) {
+        for (i in ArraySubidosOK) {
+            if (arrayFingersStatus[item].Nombre == ArraySubidosOK[i]) {
+                arrayFingersStatus[item].Estado = "Ready";
+            }
+        }
+    }
+}
+
+//Función que se encarga de armar la tabla validando si se cargarón o no los archivos
 function ArmarTabla() {
-    html_TFingers = "<table id='TFingers' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>NIT Empresa</th><th>Usuario</th><th>Tipo Documento</th><th>Documento</th><th>Nombre</th><th>Rol</th></th></th><th>Estado</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
-    for (itemArray in ArrayUser) {
-        //html_TUser += "<tr id= 'TUser_" + ArrayUser[itemArray].Index + "'><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Editar('" + ArrayUser[itemArray].Usuario_ID + "')\"></input></td><td>" + ArrayUser[itemArray].Usuario_ID + "</td><td>" + ArrayUser[itemArray].Documento + "</td><td>" + ArrayUser[itemArray].Nombre + "</td><td>" + ArrayUser[itemArray].Rol_ID + "</td><td> " + ArrayUser[itemArray].Estado + " </td></tr>";
-        html_TFingers += "<tr id= 'TFingers_" + ArrayUser[itemArray].Index + "'><td>" + ArrayUser[itemArray].Nit_ID + "</td><td>" + ArrayUser[itemArray].Usuario_ID + "</td><td>" + ArrayUser[itemArray].TypeDocument + "</td><td>" + ArrayUser[itemArray].Documento + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].Nombre + "</td><td>" + ArrayUser[itemArray].Rol_ID + "</td><td> " + ArrayUser[itemArray].Estado + " </td><td>" + ArrayUser[itemArray].UsuarioCreacion + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].FechaCreacion + "</td><td>" + ArrayUser[itemArray].UsuarioActualizacion + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].FechaActualizacion + "</td></tr>";
+    var html_TFingers = "<table id='TUser' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Archivo Requerido</th><th>Estado</th></tr></thead><tbody>";
+    for (itemArray in arrayFingersStatus) {
+        if (arrayFingersStatus[itemArray].Estado == "Wait") {
+            html_TFingers += "<tr id= 'TFingers_" + arrayFingersStatus[itemArray].Index + "'><td style='white-space: nowrap;'>" + arrayFingersStatus[itemArray].Nombre + "</td><td style='white-space: nowrap;' align='center'><span class='cssToolTip_ver'><img alt='Wait' title='' style='height: 21px; width: 21px;' src='../../images/waiting.png' /><span>En espera de carga</span></span></td></tr>";
+        } else if (arrayFingersStatus[itemArray].Estado == "Ready") {
+            html_TFingers += "<tr id= 'TFingers_" + arrayFingersStatus[itemArray].Index + "'><td style='white-space: nowrap;'>" + arrayFingersStatus[itemArray].Nombre + "</td><td style='white-space: nowrap;' align='center'><span class='cssToolTip_ver'><img alt='Ready' title='' style='height: 21px; width: 21px;' src='../../images/C_GREEN.png' /><span>Archivo listo</span></span></td></tr>";
+        }
     }
 
-    html_TUser += "</tbody></table>";
+    html_TFingers += "</tbody></table>";
+    $("#Div_TableFingers").css("display", "inline");
     $("#Div_TableFingers").html("");
     $("#Div_TableFingers").html(html_TFingers);
 
-    $("#TFingers").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
+    $("#TUser").dataTable({
+        "bJQueryUI": true, "iDisplayLength": 900,
         "bDestroy": true
     });
 }

@@ -6,6 +6,7 @@ Public Class EncriptarClass
 #Region "Variables Globales"
     Private vg_b_mbytKey(7) As Byte
     Private vg_b_mbytIV(7) As Byte
+    Private vg_S_Llave As String = "FabianM"
 #End Region
 
     ''' <summary>
@@ -51,10 +52,12 @@ Public Class EncriptarClass
 
     End Function
 
-#Region "Enciptación de URL"
+#Region "Encriptación de URL"
+
+    '****IMPORTANTE: Estos métodos tambien se utilizan en la aplicación de escritorio EnrollermetAPP utilizada en el módulo de huellas
 
     ''' <summary>
-    ''' convierte valor llave
+    ''' Transformamos la llave que se usará para la Encriptación/Desencriptación
     ''' </summary>
     ''' <param name="vp_s_Llave"></param>
     ''' <returns></returns>
@@ -84,7 +87,7 @@ Public Class EncriptarClass
     End Function
 
     ''' <summary>
-    ''' encriptar el dato
+    ''' Función que encripta la cadena que recibe
     ''' </summary>
     ''' <param name="vp_s_Dato"></param>
     ''' <returns></returns>
@@ -97,7 +100,7 @@ Public Class EncriptarClass
             Return vl_s_Resultado
         End If
 
-        If Not (convierteLlave("FabianM")) Then
+        If Not (convierteLlave(vg_S_Llave)) Then
             vl_s_Resultado = "Error. Fail to generate key for encryption"
             Return vl_s_Resultado
         End If
@@ -135,7 +138,7 @@ Public Class EncriptarClass
     End Function
 
     ''' <summary>
-    ''' desemcripta el dato
+    ''' Función que desencripta la cadena recibida
     ''' </summary>
     ''' <param name="vp_s_Dato"></param>
     ''' <returns></returns>
@@ -144,7 +147,7 @@ Public Class EncriptarClass
 
         Dim vl_s_Resultado As String
 
-        If Not (convierteLlave("FabianM")) Then
+        If Not (convierteLlave(vg_S_Llave)) Then
             vl_s_Resultado = "Error. Fail to generate key for decryption"
             Return vl_s_Resultado
         End If
@@ -190,6 +193,7 @@ Public Class EncriptarClass
         End Try
         Return vl_s_Resultado
     End Function
+
 #End Region
 
 End Class

@@ -45,7 +45,7 @@ function transacionAjax_Documento(State) {
             }
             else {
                 ArrayTdoc = JSON.parse(result);
-                charge_CatalogList(ArrayTdoc, "Select_Documento", 1); 
+                charge_CatalogList(ArrayTdoc, "Select_Documento", 1);
             }
         },
         error: function () {
@@ -132,7 +132,8 @@ function transacionAjax_Ok(vp_State) {
             var Resultado = DowloadFile(result);
             if (Resultado = true) {
                 Ejecutable = true;
-                Mensaje_General("Cargar Archivo de Huella","Ejecute el archivo descargado, este ejecutará el capturador de huellas, luego cargue el archivo *.fpt al servidor.","W")
+                Mensaje_General("Cargar Archivo de Huella", "Ejecute el archivo descargado, este ejecutará el capturador de huellas, luego cargue el archivo *.fpt al servidor.", "W")
+                $("#T_TitleTableFiles").css("display", "inline-table");
                 $("#T_Files").css("display", "inline-table");
             }
         },
@@ -147,7 +148,6 @@ function transacionAjax_Ok(vp_State) {
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transaccionAjax_RutasOperacion(State) {
-    console.log("asdasd");
     $.ajax({
         url: "HuellasAjax.aspx",
         type: "POST",
@@ -177,5 +177,54 @@ function transaccionAjax_RutasOperacion(State) {
         error: function () {
 
         },
+    });
+}
+
+
+
+/*------------------------------ crear ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax
+function transacionAjax_Huellas_Create(State) {
+
+    var NameFiles = "";
+    for (i in arrayNameFiles) {
+        NameFiles = NameFiles + "," + arrayNameFiles[i];
+    }
+    NameFiles = NameFiles.substr(1);
+
+    $.ajax({
+        url: "HuellasAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "Nit_ID": $("#Select_EmpresaNit").val(),
+            "TypeDocument": $("#Select_Documento").val(),
+            "Document": $("#TxtDoc").val(),
+            "RutaTemporal": RutaTemporal,
+            "NameArchivos": NameFiles,
+            "user": User.toUpperCase()
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            switch (result) {
+
+                case "Error":
+                    Mensaje_General("Disculpenos :(", "Ocurrió un error durante la transacción y no se realizó el ingreso de la nueva persona ni sus huellas. REcarga la página e intenta de nuevo.", "E");
+                    break;
+
+                case "Existe":
+                    Mensaje_General("¡Persona ya Existe!", "La persona que desea ingresar ya se encuentra registrada en el sistema de huellas. El formulario se reiniciará.", "W");
+                    Clear();
+                    break;
+
+                case "Exito":
+                    Mensaje_General("¡Persona Ingresada!", "Se ha registrado la información dactilar de " + namePersona + " correctamente.", "S");
+                    Clear();
+                    break;
+            }
+        },
+        error: function () {
+        }
     });
 }

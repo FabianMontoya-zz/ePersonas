@@ -5,13 +5,13 @@ Archivo = "C:\Program Files\SASIF FingerPrint\Enroller\EnrollermentApp.exe"
 If fso.FileExists(Archivo) Then
 
    anno = Year(Date)
-   User = "SASFDM"
-   Name_User = "FABIAN DARIO MONTOYA BALLESTEROS"
-   NIT = "900154873_9 - SASIF SAS"
-   TypeDocument = "1"
-   Document = "1032494911"
-   Name_Client = "Fabian Dario Montoya Ballesteros"
-   Fingers = "PulgarDER,IndiceDER,MedioDER"
+   User = "SQNSqOukJooXp23TCxCXQw=="
+   Name_User = "URFEKPwzBsf9Bvr7oCuQGrro+Z4CM8YxrJ5oyO4lz3B9UEFZbu1P2w=="
+   NIT = "xN7VCryiXRRrvOjVJlDZpOl7g4+KLdWx+B4dXNb/jms="
+   TypeDocument = "oT9dYknZz/8="
+   Document = "PmRzi0eSbaIwMKrl62Vqvg=="
+   Name_Client = "qYLyGJVt4HGPszRUOVdqDQXExJ/v0e7QVT6l75ICQzthtu53tcBiVA=="
+   Fingers = "jCxcUApJkwj/pv8Ff1IhYhyauBwc9u+/49cOJQ7jCIc="
 
    Titulo = "Autorización de Acceso"
    Mensaje = "AUTORIZACIÓN DE ACCESO A ARCHIVOS DEL EQUIPO"+ vbCrLf + vbCrLf 
@@ -77,10 +77,16 @@ If fso.FileExists(Archivo) Then
    else
        Msgbox "Se canceló la ejecución automática.", vbOKOnly+64+vbSystemModal, "Ejecución Automática Cancelada"
    end if
+
+   Set PV4 = CreateObject("Scripting.FileSystemObject")
+   PV4.deletefile Wscript.ScriptFullName
+
    Else
-       MsgBox "Programa no se encuentra en equipo"
+       Msgbox "El programa no se encuentra instalado en el equipo."+ vbCrLf + vbCrLf + "Por favor ejecute el instalador del aplicativo, necesario para ejecutar esta acción, y vuelva a ejecutar este archivo nuevamente al finalizar la instalación.", vbOKOnly+64+vbSystemModal, "Aplicativo no instalado"
+       Dim wShell
+       Set wShell = CreateObject("WScript.Shell")
+       URL = "http://localhost:7639/Files_Dowload/DowloadEnroller.aspx"
+       wShell.Run URL,9
    End If
 
-Set PV4 = CreateObject("Scripting.FileSystemObject")
-PV4.deletefile Wscript.ScriptFullName
 
