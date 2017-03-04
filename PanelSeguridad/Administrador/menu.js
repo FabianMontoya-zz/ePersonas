@@ -10,9 +10,7 @@ var Json_Arbol_carpetas;
 $(document).ready(function () {
     VentanasEmergentes();
     ConsultaParametrosURL();
-    //traemos los datos del usuario logeado
-   
-});
+   });
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                 REGION INICIO DE COMPONENTES                                                                                                    ----*/
