@@ -114,8 +114,7 @@ Public Class Adm_OpcRolAjax
         Dim result As String
 
         objOpcRol.Nit_ID = Request.Form("NIT")
-        objOpcRol.OPRol_Nit_ID = Request.Form("ID_Nit_ID")
-        objOpcRol.OPRol_ID = Request.Form("ID")
+       objOpcRol.OPRol_ID = Request.Form("ID")
         objOpcRol.Consecutivo = Request.Form("Consecutivo")
 
         ObjListOpcRol.Add(objOpcRol)

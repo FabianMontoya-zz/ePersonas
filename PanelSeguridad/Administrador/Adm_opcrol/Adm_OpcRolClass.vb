@@ -15,6 +15,9 @@
     Private _FechaCreacion As String
     Private _UsuarioActualizacion As String
     Private _FechaActualizacion As String
+    Private _DescripTipo As String
+    Private _DescripPagina As String
+    Private _DescripRol As String
 #End Region
 
 #Region "propiedades"
@@ -90,7 +93,6 @@
             Me._Link_ID = value
         End Set
     End Property
-    '------
     Public Property UsuarioCreacion() As String
         Get
             Return Me._UsuarioCreacion
@@ -123,6 +125,32 @@
             Me._FechaActualizacion = value
         End Set
     End Property
+    Public Property DescripTipo() As String
+        Get
+            Return Me._DescripTipo
+        End Get
+        Set(ByVal value As String)
+            Me._DescripTipo = value
+        End Set
+    End Property
+    Public Property DescripPagina() As String
+        Get
+            Return Me._DescripPagina
+        End Get
+        Set(ByVal value As String)
+            Me._DescripPagina = value
+        End Set
+    End Property
+    Public Property DescripRol() As String
+        Get
+            Return Me._DescripRol
+        End Get
+        Set(ByVal value As String)
+            Me._DescripRol = value
+        End Set
+    End Property
+
+
 #End Region
 
 

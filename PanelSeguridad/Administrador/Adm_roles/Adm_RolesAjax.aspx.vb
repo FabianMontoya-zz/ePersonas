@@ -86,31 +86,12 @@ Public Class Adm_RolesAjax
             objRol.FechaActualizacion = Date.Now
 
             ObjListRol.Add(objRol)
-
             result = SQL_Rol.InsertRol(objRol)
 
-            Dim SQL_link As New Adm_LinksSQLClass
-            Dim objLink As New Adm_LinksClass
-            Dim objListLink As New List(Of Adm_LinksClass)
-            Dim resultLink As String
-
-            objLink.Link_ID = Request.Form("ID")
-            objLink.Descripcion = Request.Form("descripcion")
-            objLink.Estado = "1"
-
-            objListLink.Add(objLink)
-
-            resultLink = SQL_link.InsertLinks(objLink)
-
-            If resultLink <> "Exito" Then
-                result = "Error"
-            End If
-
-            Response.Write(result)
         Else
             result = "Existe"
-            Response.Write(result)
         End If
+        Response.Write(result)
 
     End Sub
 

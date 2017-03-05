@@ -26,23 +26,68 @@ Public Class Adm_OpcRolSQLClass
 
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
-            sql.Append("SELECT OR_Nit_ID, OR_OPRol_Nit_ID, OR_OPRol_ID, OR_Consecutivo, OR_Tipo, [OR_Subrol/rol_Nit_ID], [OR_Subrol/rol], OR_Link_ID, " & _
-                       "OR_Usuario_Creacion, OR_FechaCreacion, OR_Usuario_Actualizacion, OR_FechaActualizacion, " & _
-                       "ROW_NUMBER() OVER(ORDER BY OR_Nit_ID, OR_OPRol_ID, OR_Consecutivo ASC) AS Index_OptionRoles " & _
-                       "FROM OPTION_ROL ")
+            sql.Append(" SELECT OR_Nit_ID, " & _
+                                     "              OR_OPRol_ID, " & _
+                                     "              OR_Consecutivo, " & _
+                                     "              OR_Tipo, " & _
+                                     "              [OR_Subrol/rol_Nit_ID], " & _
+                                     "              [OR_Subrol/rol], " & _
+                                     "              OR_Link_ID, " & _
+                                     "              OR_Usuario_Creacion, " & _
+                                     "              OR_FechaCreacion, " & _
+                                     "              OR_Usuario_Actualizacion, " & _
+                                     "              OR_FechaActualizacion, " & _
+                                     "              ROW_NUMBER() OVER(ORDER BY OR_Nit_ID, OR_OPRol_ID, OR_Consecutivo ASC) AS Index_OptionRoles, " & _
+                                     "              TC.DDLL_Descripcion, " & _
+                                     "              L.L_Descripcion, " & _
+                                     "              R.R_Descripcion " & _
+                                     "  FROM OPTION_ROL ROP " & _
+                                     " 	INNER JOIN   TC_DDL_TIPO TC ON  TC.DDL_ID = ROP.OR_Tipo AND TC.DDL_Tabla='OPTION_ROL'  " & _
+                                     " 	LEFT JOIN  ROLES R ON  R.R_Rol_ID = ROP.[OR_Subrol/rol] AND R.R_Nit_ID = ROP.[OR_Subrol/rol_Nit_ID]  " & _
+                                     " 	LEFT JOIN  LINKS L ON  L.L_Link_ID = ROP.OR_Link_ID  ")
         Else
 
             If vp_S_Contenido = "ALL" Then
-                sql.Append("SELECT OR_Nit_ID, OR_OPRol_Nit_ID, OR_OPRol_ID, OR_Consecutivo, OR_Tipo, [OR_Subrol/rol_Nit_ID], [OR_Subrol/rol], OR_Link_ID, " & _
-                       "OR_Usuario_Creacion, OR_FechaCreacion, OR_Usuario_Actualizacion, OR_FechaActualizacion, " & _
-                       "ROW_NUMBER() OVER(ORDER BY OR_Nit_ID, OR_OPRol_ID, OR_Consecutivo ASC) AS Index_OptionRoles " & _
-                       "FROM OPTION_ROL ")
+                sql.Append(" SELECT OR_Nit_ID, " & _
+                                         "              OR_OPRol_ID, " & _
+                                         "              OR_Consecutivo, " & _
+                                         "              OR_Tipo, " & _
+                                         "              [OR_Subrol/rol_Nit_ID], " & _
+                                         "              [OR_Subrol/rol], " & _
+                                         "              OR_Link_ID, " & _
+                                         "              OR_Usuario_Creacion, " & _
+                                         "              OR_FechaCreacion, " & _
+                                         "              OR_Usuario_Actualizacion, " & _
+                                         "              OR_FechaActualizacion, " & _
+                                         "              ROW_NUMBER() OVER(ORDER BY OR_Nit_ID, OR_OPRol_ID, OR_Consecutivo ASC) AS Index_OptionRoles, " & _
+                                         "              TC.DDLL_Descripcion, " & _
+                                         "              L.L_Descripcion, " & _
+                                         "              R.R_Descripcion " & _
+                                         "  FROM OPTION_ROL ROP " & _
+                                         " 	INNER JOIN   TC_DDL_TIPO TC ON  TC.DDL_ID = ROP.OR_Tipo AND TC.DDL_Tabla='OPTION_ROL'  " & _
+                                         " 	LEFT JOIN  ROLES R ON  R.R_Rol_ID = ROP.[OR_Subrol/rol] AND R.R_Nit_ID = ROP.[OR_Subrol/rol_Nit_ID]  " & _
+                                         " 	LEFT JOIN  LINKS L ON  L.L_Link_ID = ROP.OR_Link_ID  ")
             Else
-                sql.Append("SELECT OR_Nit_ID, OR_OPRol_Nit_ID, OR_OPRol_ID, OR_Consecutivo, OR_Tipo, [OR_Subrol/rol_Nit_ID], [OR_Subrol/rol], OR_Link_ID, " & _
-                       "OR_Usuario_Creacion, OR_FechaCreacion, OR_Usuario_Actualizacion, OR_FechaActualizacion, " & _
-                       "ROW_NUMBER() OVER(ORDER BY OR_Nit_ID, OR_OPRol_ID, OR_Consecutivo ASC) AS Index_OptionRoles " & _
-                       "FROM OPTION_ROL " & _
-                      "WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%' ")
+                sql.Append(" SELECT OR_Nit_ID, " & _
+                                         "              OR_OPRol_ID, " & _
+                                         "              OR_Consecutivo, " & _
+                                         "              OR_Tipo, " & _
+                                         "              [OR_Subrol/rol_Nit_ID], " & _
+                                         "              [OR_Subrol/rol], " & _
+                                         "              OR_Link_ID, " & _
+                                         "              OR_Usuario_Creacion, " & _
+                                         "              OR_FechaCreacion, " & _
+                                         "              OR_Usuario_Actualizacion, " & _
+                                         "              OR_FechaActualizacion, " & _
+                                         "              ROW_NUMBER() OVER(ORDER BY OR_Nit_ID, OR_OPRol_ID, OR_Consecutivo ASC) AS Index_OptionRoles, " & _
+                                         "              TC.DDLL_Descripcion, " & _
+                                         "              L.L_Descripcion, " & _
+                                         "              R.R_Descripcion " & _
+                                         "  FROM OPTION_ROL ROP " & _
+                                         " 	INNER JOIN   TC_DDL_TIPO TC ON  TC.DDL_ID = ROP.OR_Tipo AND TC.DDL_Tabla='OPTION_ROL'  " & _
+                                         " 	LEFT JOIN  ROLES R ON  R.R_Rol_ID = ROP.[OR_Subrol/rol] AND R.R_Nit_ID = ROP.[OR_Subrol/rol_Nit_ID]  " & _
+                                         " 	LEFT JOIN  LINKS L ON  L.L_Link_ID = ROP.OR_Link_ID  " & _
+                                         " WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%' ")
             End If
         End If
 
@@ -128,7 +173,9 @@ Public Class Adm_OpcRolSQLClass
         Dim StrQuery As String
         Dim SQL_general As New GeneralSQLClass
 
-        sql.AppendLine("DELETE OPTION_ROL WHERE OR_Nit_ID = '" & vp_Obj_OpcRol.Nit_ID & "' AND OR_OPRol_Nit_ID = '" & vp_Obj_OpcRol.OPRol_Nit_ID & "' AND OR_OPRol_ID = '" & vp_Obj_OpcRol.OPRol_ID & "' AND OR_Consecutivo = '" & vp_Obj_OpcRol.Consecutivo & "'")
+        sql.AppendLine("DELETE OPTION_ROL WHERE OR_Nit_ID = '" & vp_Obj_OpcRol.Nit_ID & _
+                                        "' AND OR_OPRol_ID = '" & vp_Obj_OpcRol.OPRol_ID & _
+                                        "' AND OR_Consecutivo = '" & vp_Obj_OpcRol.Consecutivo & "'")
         StrQuery = sql.ToString
         Result = conex.StrInsert_and_Update_All(StrQuery, "1")
 
@@ -259,20 +306,22 @@ Public Class Adm_OpcRolSQLClass
                     Dim objOpcRol As New Adm_OpcRolClass
                     'cargamos datos sobre el objeto de login
                     objOpcRol.Nit_ID = ReadConsulta.GetValue(0)
-                    objOpcRol.OPRol_Nit_ID = ReadConsulta.GetValue(1)
-                    objOpcRol.OPRol_ID = ReadConsulta.GetValue(2)
-                    objOpcRol.Consecutivo = ReadConsulta.GetValue(3)
-                    objOpcRol.Tipo = ReadConsulta.GetValue(4)
-                    objOpcRol.Subrol_rol_Nit_ID = ReadConsulta.GetValue(5)
-                    objOpcRol.Subrol_rol = ReadConsulta.GetValue(6)
-                    objOpcRol.Link_ID = ReadConsulta.GetValue(7)
+                    objOpcRol.OPRol_ID = ReadConsulta.GetValue(1)
+                    objOpcRol.Consecutivo = ReadConsulta.GetValue(2)
+                    objOpcRol.Tipo = ReadConsulta.GetValue(3)
+                    objOpcRol.Subrol_rol_Nit_ID = ReadConsulta.GetValue(4)
+                    objOpcRol.Subrol_rol = ReadConsulta.GetValue(5)
+                    objOpcRol.Link_ID = ReadConsulta.GetValue(6)
 
-                    objOpcRol.UsuarioCreacion = ReadConsulta.GetValue(8)
-                    objOpcRol.FechaCreacion = ReadConsulta.GetValue(9)
-                    objOpcRol.UsuarioActualizacion = ReadConsulta.GetValue(10)
-                    objOpcRol.FechaActualizacion = ReadConsulta.GetValue(11)
+                    objOpcRol.UsuarioCreacion = ReadConsulta.GetValue(7)
+                    objOpcRol.FechaCreacion = ReadConsulta.GetValue(8)
+                    objOpcRol.UsuarioActualizacion = ReadConsulta.GetValue(9)
+                    objOpcRol.FechaActualizacion = ReadConsulta.GetValue(10)
 
-                    objOpcRol.Index = ReadConsulta.GetValue(12)
+                    objOpcRol.Index = ReadConsulta.GetValue(11)
+                    objOpcRol.DescripTipo = ReadConsulta.GetValue(12)
+                    If Not (IsDBNull(ReadConsulta.GetValue(13))) Then objOpcRol.DescripPagina = ReadConsulta.GetValue(13) Else objOpcRol.DescripPagina = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(14))) Then objOpcRol.DescripRol = ReadConsulta.GetValue(14) Else objOpcRol.DescripRol = ""
 
                     'agregamos a la lista
                     ObjListOpcRol.Add(objOpcRol)

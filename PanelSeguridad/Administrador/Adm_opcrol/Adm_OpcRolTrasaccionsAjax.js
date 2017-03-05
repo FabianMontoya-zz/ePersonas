@@ -163,13 +163,21 @@ function transacionAjax_opcRol(State, filtro, opcion) {
 /*------------------------------ crear ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax_opcRol_create(State) {
+    var vl_Nit_Hijo;
+    var vl_Hijo;
+    var vl_pagina;
+    var vl_Tipo = $("#DDLTipo").val();
 
-    var ID;
-    var Nit_ID;
-    var ID_SubRol_Rol;
-    var Nit_ID_SubRol_Rol;
-    var param;
-
+    if (vl_Tipo == 1) {
+        vl_Nit_Hijo = $("#Select_EmpresaNit_2").val();
+        vl_Hijo = $("#DDL_Hijo").val();
+        vl_pagina = $("#DDL_Padre").val();
+    }
+    else {
+        vl_Nit_Hijo = $("#Select_EmpresaNit").val();
+        vl_Hijo = $("#DDL_Padre").val();
+        vl_pagina = $("#DDLLink_ID").val();
+    }
 
     $.ajax({
         url: "Adm_OpcRolAjax.aspx",
@@ -180,10 +188,10 @@ function transacionAjax_opcRol_create(State) {
             "NIT_Padre": $("#Select_EmpresaNit").val(),
             "Padre": $("#DDL_Padre").val(),
             "consecutivo": $("#TxtConsecutivo").val(),
-            "tipo": $("#DDLTipo").val(),
-            "Nit_ID_Hijo": $("#Select_EmpresaNit_2").val(),
-            "Hijo": $("#DDL_Hijo").val(),
-            "link_ID": $("#DDLLink_ID").val(),
+            "tipo": vl_Tipo,
+            "Nit_ID_Hijo": vl_Nit_Hijo,
+            "Hijo": vl_Hijo,
+            "link_ID":  vl_pagina,
             "user": User.toUpperCase()
         },
         //Transaccion Ajax en proceso
@@ -204,7 +212,7 @@ function transacionAjax_opcRol_create(State) {
                 case "Exito":
                     if (estado == "modificar") {
                         Mensaje_General("¡Exito!", "La Opción Perfil se ha modificado exitosamente.", "S");
-                     }
+                    }
                     else {
                         Mensaje_General("¡Exito!", "La Opción Perfil se ha registrado exitosamente en el sistema.", "S");
                         HabilitarPanel('crear');
@@ -240,7 +248,6 @@ function transacionAjax_opcRol_delete(State) {
         data: {
             "action": State,
             "ID": ID,
-            "ID_Nit_ID": ID_Nit_ID,
             "NIT": NIT,
             "Consecutivo": Consecutive
         },

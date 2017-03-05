@@ -243,27 +243,40 @@ function ValidarDroplist() {
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*----                                                                                                  TABLA DE AREA                                                                                  ----*/
+/*----                                                                                                  TABLA DE OPCION ROLES                                                                                  ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 // crea la tabla en el cliente
 function Table_opcRol() {
 
     var html_Topcrol;
-
+    var vl_descripcion;
     switch (estado) {
 
         case "buscar":
-            html_Topcrol = "<table id='TOpcRol' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>NIT Empresa</th><th style='white-space: nowrap;'>NIT Empresa Código</th><th>Código</th><th>Consecutivo</th><th>Tipo</th><th style='white-space: nowrap;'>NIT Empresa Sub-Rol/Rol</th><th style='white-space: nowrap;'>Sub-Rol/Rol</th><th>Llave Tabla Links</th><th>Usuario Creación</th><th>Fecha Creación</th></tr></thead><tbody>";
+            html_Topcrol = "<table id='TOpcRol' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>NIT Empresa Padre</th><th>Padre</th><th>Consecutivo</th><th>Tipo</th><th style='white-space: nowrap;'>NIT Empresa Hijo</th><th style='white-space: nowrap;'>Hijo</th><th>Pagina de Referencia</th><th>Usuario Creación</th><th>Fecha Creación</th></tr></thead><tbody>";
             for (itemArray in ArrayOpcRol) {
-                html_Topcrol += "<tr id= 'TOpcRol_" + ArrayOpcRol[itemArray].Index + "'><td>" + ArrayOpcRol[itemArray].Nit_ID + "</td><td>" + ArrayOpcRol[itemArray].OPRol_Nit_ID + "</td><td>" + ArrayOpcRol[itemArray].OPRol_ID + "</td><td>" + ArrayOpcRol[itemArray].Consecutivo + "</td><td style='white-space: nowrap;'>" + ArrayOpcRol[itemArray].Tipo + "</td><td>" + ArrayOpcRol[itemArray].Subrol_rol_Nit_ID + "</td><td>" + ArrayOpcRol[itemArray].Subrol_rol + "</td><td> " + ArrayOpcRol[itemArray].Link_ID + " </td><td style='white-space: nowrap;'> " + ArrayOpcRol[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArrayOpcRol[itemArray].FechaCreacion + " </td></tr>";
+
+                if (ArrayOpcRol[itemArray].DescripPagina != "") {
+                    vl_descripcion = ArrayOpcRol[itemArray].Link_ID + " - " + ArrayOpcRol[itemArray].DescripPagina;
+                }
+                else {
+                    vl_descripcion = ArrayOpcRol[itemArray].Link_ID + " - " + ArrayOpcRol[itemArray].DescripRol;
+                }
+                html_Topcrol += "<tr id= 'TOpcRol_" + ArrayOpcRol[itemArray].Index + "'><td>" + ArrayOpcRol[itemArray].Nit_ID + "</td><td>" + ArrayOpcRol[itemArray].OPRol_ID + "</td><td>" + ArrayOpcRol[itemArray].Consecutivo + "</td><td style='white-space: nowrap;'>" + ArrayOpcRol[itemArray].Tipo + " - " + ArrayOpcRol[itemArray].DescripTipo + "</td><td>" + ArrayOpcRol[itemArray].Subrol_rol_Nit_ID + "</td><td>" + ArrayOpcRol[itemArray].Subrol_rol + "</td><td> " + vl_descripcion + " </td><td style='white-space: nowrap;'> " + ArrayOpcRol[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArrayOpcRol[itemArray].FechaCreacion + " </td></tr>";
             }
             break;
 
         case "eliminar":
-            var html_Topcrol = "<table id='TOpcRol' border='1' cellpadding='1' cellspacing='1' style='width: 100%'><thead><tr><th>Eliminar</th><th>NIT Empresa</th><th style='white-space: nowrap;'>NIT Empresa Código</th><th>Código</th><th>Consecutivo</th><th>Tipo</th><th style='white-space: nowrap;'>NIT Empresa Sub-Rol/Rol</th><th style='white-space: nowrap;'>Sub-Rol/Rol</th><th>Llave Tabla Links</th><th>Usuario Creación</th><th>Fecha Creación</th></tr></thead><tbody>";
+            var html_Topcrol = "<table id='TOpcRol' border='1' cellpadding='1' cellspacing='1' style='width: 100%'><thead><tr><th>Eliminar</th><th>NIT Empresa Padre</th><th>Padre</th><th>Consecutivo</th><th>Tipo</th><th style='white-space: nowrap;'>NIT Empresa Hijo</th><th style='white-space: nowrap;'>Hijo</th><th>Pagina de Referencia</th><th>Usuario Creación</th><th>Fecha Creación</th></tr></thead><tbody>";
             for (itemArray in ArrayOpcRol) {
 
-                html_Topcrol += "<tr id= 'TOpcRol_" + ArrayOpcRol[itemArray].Index + "'><td style='white-space: nowrap;'><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArrayOpcRol[itemArray].Index + "')\"></img><span>Eliminar Opción Perfil</span></span></td><td>" + ArrayOpcRol[itemArray].Nit_ID + "</td><td>" + ArrayOpcRol[itemArray].OPRol_Nit_ID + "</td><td>" + ArrayOpcRol[itemArray].OPRol_ID + "</td><td>" + ArrayOpcRol[itemArray].Consecutivo + "</td><td>" + ArrayOpcRol[itemArray].Tipo + "</td><td>" + ArrayOpcRol[itemArray].Subrol_rol_Nit_ID + "</td><td>" + ArrayOpcRol[itemArray].Subrol_rol + "</td><td> " + ArrayOpcRol[itemArray].Link_ID + " </td><td style='white-space: nowrap;'> " + ArrayOpcRol[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArrayOpcRol[itemArray].FechaCreacion + " </td></tr>";
+                if (ArrayOpcRol[itemArray].DescripPagina != "") {
+                    vl_descripcion = ArrayOpcRol[itemArray].Link_ID + " - " + ArrayOpcRol[itemArray].DescripPagina;
+                }
+                else {
+                    vl_descripcion = ArrayOpcRol[itemArray].Link_ID + " - " + ArrayOpcRol[itemArray].DescripRol;
+                }
+                html_Topcrol += "<tr id= 'TOpcRol_" + ArrayOpcRol[itemArray].Index + "'><td style='white-space: nowrap;'><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArrayOpcRol[itemArray].Index + "')\"></img><span>Eliminar Opción Perfil</span></span></td><td>" + ArrayOpcRol[itemArray].Nit_ID + "</td><td>" + ArrayOpcRol[itemArray].OPRol_ID + "</td><td>" + ArrayOpcRol[itemArray].Consecutivo + "</td><td>" + ArrayOpcRol[itemArray].Tipo + " - " + ArrayOpcRol[itemArray].DescripTipo + "</td><td>" + ArrayOpcRol[itemArray].Subrol_rol_Nit_ID + "</td><td>" + ArrayOpcRol[itemArray].Subrol_rol + "</td><td> " + vl_descripcion + " </td><td style='white-space: nowrap;'> " + ArrayOpcRol[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArrayOpcRol[itemArray].FechaCreacion + " </td></tr>";
             }
             break;
     }
@@ -279,19 +292,13 @@ function Table_opcRol() {
 }
 
 //muestra el registro a eliminar
-function Eliminar(index_consecutivo) {
-
-    for (itemArray in ArrayOpcRol) {
-        if (ArrayOpcRol[itemArray].Index == index_consecutivo) {
-            editNIT = ArrayOpcRol[itemArray].Nit_ID;
-            editID_Nit_ID = ArrayOpcRol[itemArray].OPRol_Nit_ID;
-            editID = ArrayOpcRol[itemArray].OPRol_ID;
-            editConsecutivo = ArrayOpcRol[itemArray].Consecutivo;
-            $("#dialog_eliminar").dialog("option", "title", "¿Desea Eliminar?");
-            $("#dialog_eliminar").dialog("open");
-        }
-    }
-
+function Eliminar(index) {
+    index = parseInt(index) - 1;
+    editNIT = ArrayOpcRol[index].Nit_ID;
+    editID = ArrayOpcRol[index].OPRol_ID;
+    editConsecutivo = ArrayOpcRol[index].Consecutivo;
+    $("#dialog_eliminar").dialog("option", "title", "¿Desea Eliminar?");
+    $("#dialog_eliminar").dialog("open");
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
