@@ -375,6 +375,7 @@
     <Content Include="Huellas\Creacion\Huellas.js" />
     <Content Include="Huellas\Creacion\HuellasAjax.aspx" />
     <Content Include="Huellas\Creacion\HuellasTrasaccionsAjax.js" />
+    <Content Include="Huellas\Install_Finger\Setup.exe" />
     <Content Include="Huellas\menu.js" />
     <Content Include="Huellas\SasifMaster_Cosult.js" />
     <Content Include="Images\add.png" />
@@ -589,6 +590,7 @@
     <Content Include="Ingreso_New\Sasif_menu.Master" />
     <Content Include="Agendamiento\Sasif_menu.Master" />
     <Content Include="Huellas\Sasif_menu.Master" />
+    <Content Include="Huellas\Install_Finger\Setup.msi" />
     <None Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
