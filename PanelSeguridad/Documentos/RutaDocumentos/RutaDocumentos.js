@@ -12,7 +12,6 @@ var editID;
 
 //Evento load JS
 $(document).ready(function () {
-
     //Jhon
     $("#Marco_trabajo_Form").css("height", "490px");
     $("#container_TRutaDocumentos").css("height", "380px");

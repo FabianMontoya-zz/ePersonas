@@ -34,7 +34,7 @@ Public Class RutaDocumentosSQLClass
                         "      R_Usuario_Actualizacion, " & _
                         "      R_FechaActualizacion, " & _
                         "      C.CLI_Nombre, " & _
-                        "      ROW_NUMBER() OVER(ORDER BY R_Nit_ID DESC) AS Index_RutaDocumentos " & _
+                        "      ROW_NUMBER() OVER(ORDER BY R_Nit_ID, R_Ruta_ID ASC) AS Index_RutaDocumentos " & _
                         " FROM RUTA R " & _
                         " LEFT JOIN " & BD_Param & ".dbo.CLIENTE C ON C.CLI_Document_ID = " & _
                         " CASE	 SUBSTRING((R.R_Nit_ID),0,LEN(R.R_Nit_ID )) " & _
@@ -52,7 +52,7 @@ Public Class RutaDocumentosSQLClass
                         "      R_Usuario_Actualizacion, " & _
                         "      R_FechaActualizacion, " & _
                         "      C.CLI_Nombre, " & _
-                        "      ROW_NUMBER() OVER(ORDER BY R_Nit_ID DESC) AS Index_RutaDocumentos " & _
+                        "      ROW_NUMBER() OVER(ORDER BY R_Nit_ID, R_Ruta_ID ASC) AS Index_RutaDocumentos " & _
                         " FROM RUTA R " & _
                         " LEFT JOIN " & BD_Param & ".dbo.CLIENTE C ON C.CLI_Document_ID = " & _
                         " CASE	 SUBSTRING((R.R_Nit_ID),0,LEN(R.R_Nit_ID )) " & _
@@ -68,7 +68,7 @@ Public Class RutaDocumentosSQLClass
                         "      R_Usuario_Actualizacion, " & _
                         "      R_FechaActualizacion, " & _
                         "      C.CLI_Nombre, " & _
-                        "      ROW_NUMBER() OVER(ORDER BY R_Nit_ID DESC) AS Index_RutaDocumentos " & _
+                        "      ROW_NUMBER() OVER(ORDER BY R_Nit_ID, R_Ruta_ID ASC) AS Index_RutaDocumentos " & _
                         " FROM RUTA R " & _
                         " LEFT JOIN " & BD_Param & ".dbo.CLIENTE C ON C.CLI_Document_ID = " & _
                        "  CASE	 SUBSTRING((R.R_Nit_ID),0,LEN(R.R_Nit_ID )) " & _
