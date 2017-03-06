@@ -3,21 +3,18 @@
 /* --------------------------------------------------------------------------- */
 
 /* -------       Label Usuario          ------*/
-#User, #Name_User
-{
+#User, #Name_User {
     color: #b70d0d;
     font-weight: bold;
 }
 
 /* -------       Label Titulo          ------*/
-#tituloPrincipal
-{
+#tituloPrincipal {
     color: #b70d0d;
 }
 
 /* -------       Label Hora           ------*/
-#Hours
-{
+#Hours {
     top: 4em;
     right: 1em;
     color: #b70d0d;
@@ -26,8 +23,7 @@
 }
 
 /* -------       div encabezado      ------*/
-#Header
-{
+#Header {
     float: none;
     background: -webkit-linear-gradient(#f6f6f6, #e8e8e8); /*For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#f6f6f6, #e8e8e8); /* For Opera 11.1 to 12.0 */
@@ -38,20 +34,17 @@
 }
 
 /* -------         fondo            ------*/
-.header
-{
+.header {
     background-position: center;
 }
 
-.Dimencion_Header
-{
-    height: 50px;
+.Dimencion_Header {
+    height: 48px;
     transition: all 0.8s ease;
 }
 
-    .Dimencion_Header:hover
-    {
-        height: 110px;
+    .Dimencion_Header:hover {
+        height: 105px;
         transition: all 0.8s ease;
     }
 
@@ -60,8 +53,7 @@
 /* --------------------------------------------------------------------------- */
 
 /* -------         fondo            ------*/
-.Bar
-{
+.Bar {
     background: -webkit-linear-gradient(#b70d0d, #631111); /*For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#b70d0d, #631111); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#b70d0d, #631111); /* For Firefox 3.6 to 15 */
@@ -73,47 +65,44 @@
     z-index: 50;
 }
 
-
 /* --------------------------------------------------------------------------- */
 /* ------------------------- CONTENT MASTER PAGE ------_---------------------- */
 /* --------------------------------------------------------------------------- */
 
 /* -------         fondo            ------*/
-.main
-{
+.main {
     margin-top: 48px;
 }
 
 /* -------         dimencion panel 1            ------*/
-#panel_menu
-{
+#panel_menu {
     height: 70%;
     vertical-align: text-top;
     padding-left: 1px;
 }
 
-.Dimencion_Menu
-{
-    width: 48px;
-    transition: all 0.8s ease;
-}
-
-    .Dimencion_Menu:hover
-    {
-        width: 350px;
-        transition: all 0.8s ease;
-    }
-
-/* -------         dimencion panel            ------*/
-#container_menu
-{
-    height: 79%;
+.Dimencion_Menu {
+    width: 53px;
     background: -webkit-linear-gradient(#f6f6f6, #e8e8e8); /*For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#f6f6f6, #e8e8e8); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#f6f6f6, #e8e8e8); /* For Firefox 3.6 to 15 */
     background: linear-gradient(#f6f6f6, #e8e8e8); /* Standard syntax (must be last)*/
-    overflow-x: scroll;
-    overflow-y: scroll;
+    transition: all 0.8s ease;
+}
+
+    .Dimencion_Menu:hover {
+        width: 350px;
+        background: -webkit-linear-gradient(#f6f6f6, #e8e8e8); /*For Safari 5.1 to 6.0 */
+        background: -o-linear-gradient(#f6f6f6, #e8e8e8); /* For Opera 11.1 to 12.0 */
+        background: -moz-linear-gradient(#f6f6f6, #e8e8e8); /* For Firefox 3.6 to 15 */
+        background: linear-gradient(#f6f6f6, #e8e8e8); /* Standard syntax (must be last)*/
+        transition: all 0.8s ease;
+    }
+
+/* -------         dimencion panel            ------*/
+#container_menu {
+    height: 79%;
+    overflow: auto;
     border-radius: 3px;
     border: solid 1px #ccc;
     position: absolute;
@@ -122,8 +111,7 @@
     margin-top: 4px;
 }
 
-#Bar_TMenu
-{
+#Bar_TMenu {
     background: -webkit-linear-gradient(#b70d0d, #921919); /*For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#b70d0d, #921919); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#b70d0d, #921919); /* For Firefox 3.6 to 15 */
@@ -132,10 +120,10 @@
     float: left;
     width: 20px;
     height: 74%;
-    padding-right: 10px;
     color: #FFFFFF;
     text-align: right;
     padding-top: 40px;
+    padding-right: 10px;
     position: absolute;
     z-index: 50;
     margin-top: 4px;
@@ -146,8 +134,7 @@
 /* --------------------------------------------------------------------------- */
 
 /* -------         fondo            ------*/
-#Footer
-{
+#Footer {
     background: -webkit-linear-gradient(#b70d0d, #631111); /*For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#b70d0d, #631111); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#b70d0d, #631111); /* For Firefox 3.6 to 15 */
@@ -162,21 +149,18 @@
 }
 
 
-.Dimencion_Footer
-{
+.Dimencion_Footer {
     height: 40px;
     transition: all 0.8s ease;
 }
 
-    .Dimencion_Footer:hover
-    {
+    .Dimencion_Footer:hover {
         height: 100px;
         transition: all 0.8s ease;
     }
 
 /* -------         parrafos            ------*/
-#Parraf_1, #Parraf_2, #Parraf_3
-{
+#Parraf_1, #Parraf_2, #Parraf_3 {
     color: #ffffff;
     font-weight: bold;
     font-size: small;
