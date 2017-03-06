@@ -176,6 +176,11 @@ function transacionAjax(vp_State) {
             }
             else {
                 ArrayMenu = JSON.parse(result);
+                for (ItemArray in ArrayMenu) {
+                    if (Link == ArrayMenu[ItemArray].IDlink) {
+                        $("#Title_form").html(ArrayMenu[ItemArray].DescripcionLink);
+                    }
+                }
                 arbol();
             }
         },

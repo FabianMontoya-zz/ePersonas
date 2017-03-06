@@ -21,7 +21,8 @@ function transacionAjax_Titulo(State, TypeMaster) {
         url: "/procesos_generales/SasifMasterAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "ID": TypeMaster
         },
         //Transaccion Ajax en proceso
@@ -54,7 +55,8 @@ function transacionAjax_Men(State) {
         url: "/procesos_generales/SasifMasterAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State
+        data: {
+            "action": State
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -78,7 +80,8 @@ function transacionAjax_Ayu(State) {
         url: "/procesos_generales/SasifMasterAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State
+        data: {
+            "action": State
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -146,6 +149,11 @@ function transacionAjax(vp_State) {
             }
             else {
                 ArrayMenu = JSON.parse(result);
+                for (ItemArray in ArrayMenu) {
+                    if (Link == ArrayMenu[ItemArray].IDlink) {
+                        $("#Title_form").html(ArrayMenu[ItemArray].DescripcionLink);
+                    }
+                }
                 arbol();
             }
         },
