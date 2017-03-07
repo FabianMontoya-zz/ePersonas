@@ -137,7 +137,7 @@
                     </table>
                     <table id="T_NIT_2" style="width: 100%;">
                         <tr>
-                            <td style="width: 10.5%;" class="Label_Bold">NIT Empresa</td>
+                            <td style="width: 10.5%;" class="Label_Bold">NIT Rol</td>
                             <td style="width: 40%; padding-left: 0.5em;">
                                 <select style="width: 100%;" id="Select_EmpresaNit_2" class="C_Chosen">
                                 </select>

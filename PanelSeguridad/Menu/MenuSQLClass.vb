@@ -43,7 +43,7 @@ Public Class MenuSQLClass
                     "       Usuario, " & _
                     "       NIT, " & _
                     "       DescripcionSubRol " & _
-                    " FROM T_TEMPORAL " & _
+                     " FROM T_TEMPORAL " & _
                     " ORDER BY Tipo, IDOpcionRol asc, CAST(Consecutivo AS BIGINT )")
 
         StrQuery = sql.ToString
@@ -99,7 +99,7 @@ Public Class MenuSQLClass
             If Not (IsDBNull(ReadConsulta.GetValue(14))) Then objMenu.Usuario = ReadConsulta.GetValue(14) Else objMenu.Usuario = ""
             If Not (IsDBNull(ReadConsulta.GetValue(15))) Then objMenu.Nit = ReadConsulta.GetValue(15) Else objMenu.Nit = ""
             If Not (IsDBNull(ReadConsulta.GetValue(16))) Then objMenu.DescripcionSubRol = ReadConsulta.GetValue(16) Else objMenu.DescripcionSubRol = ""
-
+         
             'agregamos a la lista
             ObjListMenu.Add(objMenu)
 
