@@ -78,7 +78,7 @@
                 <div id="TablaDatos_D">
                     <table id="T_NIT" style="width: 90%; margin-left: 8%;">
                         <tr>
-                            <td id="TD_ID" style="width: 14%;" class="Label_Bold">NIT Empresa Padre</td>
+                            <td id="TD_ID" style="width: 14%;" class="Label_Bold">NIT Padre</td>
                             <td id="TD1" style="width: 40%;">
                                 <select style="width: 100%;" id="Select_EmpresaNit" class="C_Chosen">
                                 </select>
@@ -146,7 +146,7 @@
                     </table>
                     <table id="T_NIT_2" style="width: 90%; margin-left: 8%;">
                         <tr>
-                            <td id="TD2" style="width: 14%;" class="Label_Bold">NIT Empresa Hijo</td>
+                            <td id="TD2" style="width: 14%;" class="Label_Bold">NIT Hijo</td>
                             <td id="TD4" style="width: 40%;">
                                 <select style="width: 100%;" id="Select_EmpresaNit_2" class="C_Chosen">
                                 </select>
@@ -177,7 +177,7 @@
                     </table>
                     <table id="Tabla_5" style="width: 90%; margin-left: 8%;">
                         <tr>
-                            <td class="Label_Bold" style="width: 14%;">Links disponibles
+                            <td class="Label_Bold" style="width: 14%;">Paginas disponibles
                             </td>
                             <td style="width: 40%;">
                                 <select id="DDLLink_ID" class="C_Chosen">
