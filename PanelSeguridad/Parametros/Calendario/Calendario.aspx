@@ -22,11 +22,11 @@
     <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/Dialog/datepicker.js" type="text/javascript"></script>
     <script src="../../Scripts/Dialog/timepicker.js" type="text/javascript"></script>
-    
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
 
-    
+
     <div id="Dialog_Control" style="width: 100%; text-align: center;">
         <div class="cssload-container" style="margin-top: 25%;">
             <div class="cssload-whirlpool"></div>
@@ -65,7 +65,7 @@
                         </td>
                         <td id="TD2" style="width: 65%;">
                             <span class="cssToolTip_Form">
-                                <input id="TxtRead" type="text" style="width: 60%; margin-left: 10%;"/>
+                                <input id="TxtRead" type="text" style="width: 60%; margin-left: 10%;" />
                                 <span class="Spam_AST"></span></span>
                         </td>
                         <td colspan="4" align="center" id="TD3" style="width: 20%;">
@@ -213,52 +213,52 @@
                 <tbody>
                     <tr style="text-align: center;">
                         <td align="center" colspan="2">
-                                <select id="Select_StateLun" class="C_Chosen">
-                                    <option value="L">Laboral</option>
-                                    <option value="F">Festivo</option>
-                                </select>
+                            <select id="Select_StateLun" class="C_Chosen">
+                                <option value="L">Laboral</option>
+                                <option value="F">Festivo</option>
+                            </select>
                         </td>
                         <td align="center" colspan="2">
-                                <select id="Select_StateMar" class="C_Chosen">
-                                    <option value="L">Laboral</option>
-                                    <option value="F">Festivo</option>
-                                </select>
+                            <select id="Select_StateMar" class="C_Chosen">
+                                <option value="L">Laboral</option>
+                                <option value="F">Festivo</option>
+                            </select>
                         </td>
                         <td align="center" colspan="2">
-                                <select id="Select_StateMie" class="C_Chosen">
-                                    <option value="L">Laboral</option>
-                                    <option value="F">Festivo</option>
-                                </select>
+                            <select id="Select_StateMie" class="C_Chosen">
+                                <option value="L">Laboral</option>
+                                <option value="F">Festivo</option>
+                            </select>
                         </td>
                         <td align="center" colspan="2">
-                                <select id="Select_StateJue" class="C_Chosen">
-                                    <option value="L">Laboral</option>
-                                    <option value="F">Festivo</option>
-                                </select>
+                            <select id="Select_StateJue" class="C_Chosen">
+                                <option value="L">Laboral</option>
+                                <option value="F">Festivo</option>
+                            </select>
                         </td>
                         <td align="center" colspan="2">
-                                <select id="Select_StateVie" class="C_Chosen">
-                                    <option value="L">Laboral</option>
-                                    <option value="F">Festivo</option>
-                                </select>
+                            <select id="Select_StateVie" class="C_Chosen">
+                                <option value="L">Laboral</option>
+                                <option value="F">Festivo</option>
+                            </select>
                         </td>
                         <td align="center" colspan="2">
-                                <select id="Select_StateSab" class="C_Chosen">
-                                    <option value="L">Laboral</option>
-                                    <option value="F">Festivo</option>
-                                </select>
+                            <select id="Select_StateSab" class="C_Chosen">
+                                <option value="L">Laboral</option>
+                                <option value="F">Festivo</option>
+                            </select>
                         </td>
                         <td align="center" colspan="2">
-                                <select id="Select_StateDom" class="C_Chosen">
-                                    <option value="L">Laboral</option>
-                                    <option value="F">Festivo</option>
-                                </select>
+                            <select id="Select_StateDom" class="C_Chosen">
+                                <option value="L">Laboral</option>
+                                <option value="F">Festivo</option>
+                            </select>
                         </td>
                         <td align="center" colspan="2">
-                                <select id="Select_Festivo" class="C_Chosen">
-                                    <option value="L">Laboral</option>
-                                    <option value="F">Festivo</option>
-                                </select>
+                            <select id="Select_Festivo" class="C_Chosen">
+                                <option value="L">Laboral</option>
+                                <option value="F">Festivo</option>
+                            </select>
                         </td>
                     </tr>
                     <tr style="text-align: center;" class="Label_Bold">
@@ -406,16 +406,6 @@
                         <td>
                             <span class="cssToolTip_Form">
                                 <input id="TxtFinDom" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
-                                    class="Spam_AH"></span></span>
-                        </td>
-                        <td>
-                            <span class="cssToolTip_Form">
-                                <input id="TxtIniF" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
-                                    class="Spam_AH"></span></span>
-                        </td>
-                        <td>
-                            <span class="cssToolTip_Form">
-                                <input id="TxtFinF" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
                                     class="Spam_AH"></span></span>
                         </td>
                     </tr>

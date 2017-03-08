@@ -92,7 +92,7 @@ function HabilitarPanel(opcion) {
             var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
 
             if (OnlyEmpresa == true) {
-                TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+                TransaccionesSegunNIT($("#Select_EmpresaNit").val(), "P");
             }
 
             break;
@@ -389,7 +389,7 @@ function Clear() {
     var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
 
     if (OnlyEmpresa == true) {
-        TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+        TransaccionesSegunNIT($("#Select_EmpresaNit").val(), "P");
     }
 
 }

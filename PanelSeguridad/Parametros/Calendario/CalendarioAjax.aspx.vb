@@ -81,7 +81,7 @@ Public Class CalendarioAjax
         Dim SQL_Calendario As New CalendarioSQLClass
         Dim ObjListCalendario As New List(Of CalendarioClass)
 
-        Dim result As String
+        Dim result, result_CSemana As String
         Dim vl_s_IDxiste As String
 
         objCalendario.Nit_ID = Request.Form("Nit_ID")
@@ -94,7 +94,7 @@ Public Class CalendarioAjax
 
             objCalendario.Descripcion = Request.Form("descripcion")
             objCalendario.TipoCalendario = Request.Form("TipoCalendario")
-      
+
             objCalendario.UsuarioCreacion = Request.Form("user")
             objCalendario.FechaCreacion = Date.Now
             objCalendario.UsuarioActualizacion = Request.Form("user")
@@ -103,14 +103,47 @@ Public Class CalendarioAjax
             ObjListCalendario.Add(objCalendario)
 
             result = SQL_Calendario.InsertCalendario(objCalendario)
-
-            Response.Write(result)
+            If result = "Exito" Then
+                result_CSemana = Insert_CaledarioSemana()
+                Response.Write(result)
+            End If
         Else
             result = "Existe"
             Response.Write(result)
         End If
 
     End Sub
+
+    ''' <summary>
+    ''' crea metodo de insercion en la tabla CALENDARIO_SEMANAS
+    ''' </summary>
+    ''' <remarks></remarks>
+    Private Function Insert_CaledarioSemana()
+
+        Dim SQL As New CalendarioSemanaSQLClass
+        Dim ObjList As New List(Of CalendarioSemanaClass)
+
+        Dim Result_list As String = "Exito"
+        Dim vl_S_list As String = Request.Form("List_Semana").ToString
+
+        Dim vl_L_List As New List(Of CalendarioSemanaClass)
+        vl_L_List = SQL.Create_List(vl_S_list)
+
+        For Each item_list As CalendarioSemanaClass In vl_L_List
+            Dim Result As String = SQL.Insert_C_Semana(item_list)
+
+            If Result = "Exito" Then
+                Result_list = "Exito"
+            Else
+                Result_list = "Error"
+                Exit For
+            End If
+        Next
+
+        Return Result_list
+    End Function
+
+
 
     ''' <summary>
     ''' funcion que actualiza en la tabla Calendario (UPDATE)
@@ -130,7 +163,7 @@ Public Class CalendarioAjax
 
         objCalendario.Descripcion = Request.Form("descripcion")
         objCalendario.TipoCalendario = Request.Form("TipoCalendario")
-     
+
         objCalendario.UsuarioActualizacion = Request.Form("user")
         objCalendario.FechaActualizacion = Date.Now
 
