@@ -855,6 +855,8 @@
     </Compile>
     <Compile Include="Administrador\Adm_Usuario\Adm_UsuarioClass.vb" />
     <Compile Include="Administrador\Adm_Usuario\Adm_UsuarioSQLClass.vb" />
+    <Compile Include="Agendamiento\CalendarioSemana\CalendarioSemanaClass.vb" />
+    <Compile Include="Agendamiento\CalendarioSemana\CalendarioSemanaSQLClass.vb" />
     <Compile Include="Agendamiento\SucursalServicio\SucursalServicio.aspx.designer.vb">
       <DependentUpon>SucursalServicio.aspx</DependentUpon>
     </Compile>
