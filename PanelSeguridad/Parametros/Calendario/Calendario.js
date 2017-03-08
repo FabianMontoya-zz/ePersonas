@@ -1,13 +1,14 @@
 ﻿/*--------------- region de variables globales --------------------*/
+var ArrayCalendario_Grid = [];
 var ArrayCalendario = [];
 var ArrayCombo = [];
 var ArrayCalendarioDep = [];
 var ArraySeguridad = [];
 var Matrix_Calendarios = [];
+var ArrayC_Semana = [];
 
 var MensajeHora = "";
 var V_ONE = 0;
-var JsonCalendario;
 
 var estado;
 var editNit_ID;
@@ -468,40 +469,17 @@ function ValidaHoras() {
         }
 
     }
-    //FESTIVO
-    if ($("#TxtIniF").val() != "" || $("#TxtFinF").val() != "") {
-        V_ONE = 1;
-        V_H = Validahora($("#TxtIniF").val(), $("#TxtFinF").val());
-
-        switch (V_H) {
-            case 1:
-                validate = 1;
-                if (MensajeHora == "")
-                    MensajeHora = MensajeHora + " FESTIVO"
-                else
-                    MensajeHora = MensajeHora + ", FESTIVO"
-
-            case 2:
-                validate = 2;
-                if (MensajeHora == "")
-                    MensajeHora = MensajeHora + " FESTIVO"
-                else
-                    MensajeHora = MensajeHora + ", FESTIVO"
-                break
-        }
-
-    }
+   
     return validate;
 }
 
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*----                                                                                              PROCESO DE CARGUE GRID CALENDARIO                                                                                   ----*/
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//valida el tio de clendario para el proceso
 function validaTipoC() {
     var Ingresa;
 
     switch ($("#Select_TipoCalendario").val()) {
         case "1":
+
             CargeJson();
             break;
 
@@ -510,50 +488,80 @@ function validaTipoC() {
             console.log(Ingresa);
             if (Ingresa == 0) {
                 CargeJson();
-             }
+            }
             break;
     }
 }
-
-//construye el Json con los datos proporcionados
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                              PROCESO DE CARGUE GRID CALENDARIO                                                                                   ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//construye el Json con los datos proporcionados para la vista
 function CargeJson() {
 
-    JsonCalendario = {
+    var JsonCalendario_View = {
         "Nit_ID": $("#Select_EmpresaNit").val(),
         "Calendario_ID": $("#Txt_ID").val(),
         "Descripcion": $("#Txt_ID").val(),
         "TipoCalendario": $("#Select_TipoCalendario").val(),
-        "IniLun": $("#TxtIniLun").val(),
-        "FinLun": $("#TxtFinLun").val(),
-        "IniMar": $("#TxtIniMar").val(),
-        "FinMar": $("#TxtFinMar").val(),
-        "IniMie": $("#TxtIniMie").val(),
-        "FinMie": $("#TxtFinMie").val(),
-        "IniJue": $("#TxtIniJue").val(),
-        "FinJue": $("#TxtFinJue").val(),
-        "IniVie": $("#TxtIniVie").val(),
-        "FinVie": $("#TxtFinVie").val(),
-        "IniSab": $("#TxtIniSab").val(),
-        "FinSab": $("#TxtFinSab").val(),
-        "IniDom": $("#TxtIniDom").val(),
-        "FinDom": $("#TxtFinDom").val(),
-        "IniF": $("#TxtIniF").val(),
-        "FinF": $("#TxtFinF").val()
+        "IniLun": ValidaCamposJson($("#TxtIniLun").val()),
+        "FinLun": ValidaCamposJson($("#TxtFinLun").val()),
+        "IniMar": ValidaCamposJson($("#TxtIniMar").val()),
+        "FinMar": ValidaCamposJson($("#TxtFinMar").val()),
+        "IniMie": ValidaCamposJson($("#TxtIniMie").val()),
+        "FinMie": ValidaCamposJson($("#TxtFinMie").val()),
+        "IniJue": ValidaCamposJson($("#TxtIniJue").val()),
+        "FinJue": ValidaCamposJson($("#TxtFinJue").val()),
+        "IniVie": ValidaCamposJson($("#TxtIniVie").val()),
+        "FinVie": ValidaCamposJson($("#TxtFinVie").val()),
+        "IniSab": ValidaCamposJson($("#TxtIniSab").val()),
+        "FinSab": ValidaCamposJson($("#TxtFinSab").val()),
+        "IniDom": ValidaCamposJson($("#TxtIniDom").val()),
+        "FinDom": ValidaCamposJson($("#TxtFinDom").val()),
     };
+    InsertJson_Day("1", ValidaCamposJson($("#TxtIniLun").val()), ValidaCamposJson($("#TxtFinLun").val())); //lunes
+    InsertJson_Day("2", ValidaCamposJson($("#TxtIniMar").val()), ValidaCamposJson($("#TxtFinMar").val())); //martes
+    InsertJson_Day("3", ValidaCamposJson($("#TxtIniMie").val()), ValidaCamposJson($("#TxtFinMie").val())); //Miercoles
+    InsertJson_Day("4", ValidaCamposJson($("#TxtIniJue").val()), ValidaCamposJson($("#TxtFinJue").val())); //Jueves
+    InsertJson_Day("5", ValidaCamposJson($("#TxtIniVie").val()), ValidaCamposJson($("#TxtFinVie").val())); //Viernes
+    InsertJson_Day("6", ValidaCamposJson($("#TxtIniSab").val()), ValidaCamposJson($("#TxtFinSab").val())); //Sabado
+    InsertJson_Day("7", ValidaCamposJson($("#TxtIniDom").val()), ValidaCamposJson($("#TxtFinDom").val())); //Domingo
+    InsertJson_Day($("#Select_Festivo").val(), "F", "F"); //festivo
 
-    ArrayCalendario.push(JsonCalendario);
+    ArrayCalendario_Grid.push(JsonCalendario_View);
     TGridCalendar();
     Clear_Agregar();
+}
 
+//carga jsonde insercion para BD
+function InsertJson_Day(vp_NumberDay, vp_H_In, vp_H_Fi) {
+    var JsonDayCalendar = {
+        "Nit_ID": $("#Select_EmpresaNit").val(),
+        "Calendario_ID": $("#Txt_ID").val(),
+        "Dia_1_8": vp_NumberDay,
+        "IndicativoFoto": "N",
+        "HoraInicial": vp_H_In,
+        "HoraFinal": vp_H_Fi,
+        "UsuarioCreacion": User.toUpperCase(),
+    };
+    ArrayC_Semana.push(JsonDayCalendar);
+}
+
+//valida camposvacios por cero
+function ValidaCamposJson(vp_Campo) {
+    var vl_CampoValue = 0;
+
+    if (vp_Campo != "") {
+        vl_CampoValue = vp_Campo;
+    }
+    return vl_CampoValue;
 }
 
 //grid de calendario asignados
 function TGridCalendar() {
 
-    var html_Calendario;
-    html_Calendario = "<table id='TCalendario' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th colspan='2' class='Grid_Head' >Lunes</th><th colspan='2' class='Grid_Head' >Martes</th><th colspan='2' class='Grid_Head' >Miercoles</th><th colspan='2' class='Grid_Head' >Jueves</th><th colspan='2' class='Grid_Head' >Viernes</th><th colspan='2' class='Grid_Head' >Sabado</th><th colspan='2' class='Grid_Head' >Domingo</th><th colspan='2' class='Grid_Head' >Festivo</th></tr><tr><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th></tr><tr><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th></tr></thead><tbody>";
-    for (itemArray in ArrayCalendario) {
-        html_Calendario += "<tr id= 'TCalendario_" + ArrayCalendario[itemArray].Calendario_ID + "'><td>" + ArrayCalendario[itemArray].IniLun + "</td><td>" + ArrayCalendario[itemArray].FinLun + "</td><td>" + ArrayCalendario[itemArray].IniMar + "</td><td>" + ArrayCalendario[itemArray].FinMar + "</td><td>" + ArrayCalendario[itemArray].IniMie + "</td><td>" + ArrayCalendario[itemArray].FinMie + "</td><td>" + ArrayCalendario[itemArray].IniJue + "</td><td>" + ArrayCalendario[itemArray].FinJue + "</td><td>" + ArrayCalendario[itemArray].IniVie + "</td><td>" + ArrayCalendario[itemArray].FinVie + "</td><td>" + ArrayCalendario[itemArray].IniSab + "</td><td>" + ArrayCalendario[itemArray].FinSab + "</td><td>" + ArrayCalendario[itemArray].IniDom + "</td><td>" + ArrayCalendario[itemArray].FinDom + "</td><td>" + ArrayCalendario[itemArray].IniF + "</td><td>" + ArrayCalendario[itemArray].FinF + "</td></tr>";
+    var html_Calendario = "<table id='TCalendario' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th colspan='2' class='Grid_Head' >Lunes</th><th colspan='2' class='Grid_Head' >Martes</th><th colspan='2' class='Grid_Head' >Miercoles</th><th colspan='2' class='Grid_Head' >Jueves</th><th colspan='2' class='Grid_Head' >Viernes</th><th colspan='2' class='Grid_Head' >Sabado</th><th colspan='2' class='Grid_Head' >Domingo</th></tr><tr><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th></tr><tr><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th></tr></thead><tbody>";
+    for (itemArray in ArrayCalendario_Grid) {
+        html_Calendario += "<tr id= 'TCalendario_" + ArrayCalendario_Grid[itemArray].Calendario_ID + "'><td>" + ArrayCalendario_Grid[itemArray].IniLun + "</td><td>" + ArrayCalendario_Grid[itemArray].FinLun + "</td><td>" + ArrayCalendario_Grid[itemArray].IniMar + "</td><td>" + ArrayCalendario_Grid[itemArray].FinMar + "</td><td>" + ArrayCalendario_Grid[itemArray].IniMie + "</td><td>" + ArrayCalendario_Grid[itemArray].FinMie + "</td><td>" + ArrayCalendario_Grid[itemArray].IniJue + "</td><td>" + ArrayCalendario_Grid[itemArray].FinJue + "</td><td>" + ArrayCalendario_Grid[itemArray].IniVie + "</td><td>" + ArrayCalendario_Grid[itemArray].FinVie + "</td><td>" + ArrayCalendario_Grid[itemArray].IniSab + "</td><td>" + ArrayCalendario_Grid[itemArray].FinSab + "</td><td>" + ArrayCalendario_Grid[itemArray].IniDom + "</td><td>" + ArrayCalendario_Grid[itemArray].FinDom + "</td></tr>";
     }
 
     html_Calendario += "</tbody></table>";
@@ -566,18 +574,11 @@ function TGridCalendar() {
     });
 }
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                              PROCESO DE CARGUE GRID CALENDARIO                                                                                   ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //limpieza de campos despues de agregar un calendario al grid
 function Clear_Agregar() {
-
-    /*$("#Select_StateLun").val("L");
-    $("#Select_StateMar").val("L");
-    $("#Select_StateMie").val("L");
-    $("#Select_StateJue").val("L");
-    $("#Select_StateVie").val("L");
-    $("#Select_StateSab").val("L");
-    $("#Select_StateDom").val("L");
-    $("#Select_Festivo").val("L");*/
-
     $("#TxtIniLun").val("");
     $("#TxtFinLun").val("");
     $("#TxtIniMar").val("");
@@ -592,12 +593,9 @@ function Clear_Agregar() {
     $("#TxtFinSab").val("");
     $("#TxtIniDom").val("");
     $("#TxtFinDom").val("");
-    $("#TxtIniF").val("");
-    $("#TxtFinF").val("");
-
+    
     $('.C_Chosen').trigger('chosen:updated');
 }
-
 
 // crea la tabla de consulta
 function Table_Calendario() {
@@ -697,8 +695,6 @@ function ChargeDependencia(index) {
     $('#Select_CalendarioDepent').val(index);
     $('.C_Chosen').trigger('chosen:updated');
 }
-
-
 
 //limpiar campos
 function Clear() {

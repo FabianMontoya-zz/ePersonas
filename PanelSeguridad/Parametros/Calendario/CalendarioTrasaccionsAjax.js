@@ -142,6 +142,7 @@ function transacionAjax_Calendario_create(State) {
         ID = $("#Txt_ID").val();
     }
 
+    ListC_Semana = JSON.stringify(ArrayC_Semana);
     $.ajax({
         url: "CalendarioAjax.aspx",
         type: "POST",
@@ -152,6 +153,7 @@ function transacionAjax_Calendario_create(State) {
             "ID": ID,
             "descripcion": $("#TxtDescription").val(),
             "TipoCalendario": $("#Select_TipoCalendario").val(),
+            "List_Semana":ListC_Semana,
             "user": User.toUpperCase()
         },
         //Transaccion Ajax en proceso
