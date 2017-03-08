@@ -133,7 +133,7 @@
                                 <select id="DDLTipo" class="C_Chosen">
                                     <option value="-1">Seleccione...</option>
                                     <option value="1">1 - Carpeta</option>
-                                    <option value="2">2 - Link</option>
+                                    <option value="2">2 - Pagina</option>
                                 </select>
                             </td>
                             <td style="padding-bottom: 25px; width: 60%;">
