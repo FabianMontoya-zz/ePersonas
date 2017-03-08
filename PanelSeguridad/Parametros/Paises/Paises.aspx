@@ -177,7 +177,7 @@
             <tr>
                 <td>
                     <p class="Label_Bold" id="P1">
-                        Desea eliminar el siguiente registro?
+                        ¿Desea eliminar el registro seleccionado?
                     </p>
                 </td>
                 <td>

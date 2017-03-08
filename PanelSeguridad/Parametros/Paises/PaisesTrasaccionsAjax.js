@@ -6,7 +6,8 @@ function transacionAjax_CargaBusqueda(State) {
         url: "PaisesAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'PAISES'
         },
         //Transaccion Ajax en proceso
@@ -32,7 +33,8 @@ function transacionAjax_Moneda(State) {
         url: "PaisesAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": "Moneda"
         },
         //Transaccion Ajax en proceso
@@ -94,7 +96,8 @@ function transacionAjax_Paises(State, filtro, opcion) {
         url: "PaisesAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "filtro": filtro,
             "opcion": opcion,
             "contenido": contenido
@@ -130,27 +133,24 @@ function transacionAjax_Paises_create(State) {
         ID = $("#Txt_Codigo").val();
     }
 
-    if ($("#Select_moneda").val() == null) {
-        moneda = 0;
-    } else {
-        moneda = $("#Select_moneda").val();
+
+    for (item in Matrix_Calendarios) {
+        if (Matrix_Calendarios[item].Index == $("#Select_Calendario").val()) {
+            calendario_id = Matrix_Calendarios[item].Calendario_ID;
+            break;
+        }
     }
 
-    if ($("#Select_Calendario").val() == null) {
-        calendario_id = 0;
-    } else {
-        calendario_id = $("#Select_Calendario").val();
-    }
-        
 
     $.ajax({
         url: "PaisesAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "ID": ID,
             "Pais": $("#Txt_Pais").val(),
-            "Moneda": moneda,
+            "Moneda": $("#Select_moneda").val(),
             "SWIFT": $("#TxtSWIFT").val(),
             "Calendario_ID": calendario_id,
             "user": User
@@ -172,7 +172,7 @@ function transacionAjax_Paises_create(State) {
                     break;
 
                 case "Exito":
-                    if (estado == "modificar") {                       
+                    if (estado == "modificar") {
                         Mensaje_General("¡País Modificado!", "El país se ha modificado correctamente.", "S");
                         Clear();
                     }
@@ -197,7 +197,8 @@ function transacionAjax_Paises_delete(State) {
         url: "PaisesAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "ID": editID,
             "pais": $("#Txt_Pais").val(),
             "user": User
@@ -207,11 +208,11 @@ function transacionAjax_Paises_delete(State) {
 
             switch (result) {
 
-                case "Error":                   
+                case "Error":
                     Mensaje_General("Disculpenos :(", "Ocurrio un error al intentar eliminar este país.", "E");
                     break;
 
-                case "Exito":                   
+                case "Exito":
                     Mensaje_General("¡Registro Eliminado!", "El país se ha eliminado correctamente.", "S");
                     Clear();
                     break;

@@ -22,41 +22,57 @@ Public Class PaisesSQLClass
         Dim sql As New StringBuilder
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
-            sql.Append(" SELECT P_Cod, " & _
-                       " P_Name, " & _
-                       " P_Calendario_ID," & _
-                       " P_UsuarioCreacion, " & _
-                       " P_FechaCreacion,  " & _
-                       " P_UsuarioActualizacion, " & _
-                       " P_FechaActualizacion,  " & _
-                       " P_Moneda, " & _
-                       " P_SWIFT " & _
-                       " FROM PAISES ")
+            sql.Append(" SELECT P.P_Cod, " & _
+                       " P.P_Name, " & _
+                       " P.P_Moneda," & _
+                       " M.CM_Descripcion,  " & _
+                       " P.P_SWIFT, " & _
+                       " P.P_Calendario_ID, " & _
+                       " C.CA_Descripcion,  " & _
+                       " P.P_UsuarioCreacion, " & _
+                       " P.P_FechaCreacion, " & _
+                       " P.P_UsuarioActualizacion, " & _
+                       " P.P_FechaActualizacion " & _
+                       " FROM PAISES P  " & _
+                       " LEFT JOIN MONEDA_COD M ON M.CM_Cod_Moneda_ID = P.P_Moneda " & _
+                       " LEFT JOIN CALENDARIOS C ON C.CA_Nit_ID = '0' AND C.CA_Calendario_ID = P.P_Calendario_ID " & _
+                       " ORDER BY P.P_Cod ASC ")
+
         Else
 
             If vp_S_Contenido = "ALL" Then
-                sql.Append(" SELECT P_Cod, " & _
-                          " P_Name, " & _
-                          " P_Calendario_ID," & _
-                          " P_UsuarioCreacion, " & _
-                          " P_FechaCreacion,  " & _
-                          " P_UsuarioActualizacion, " & _
-                          " P_FechaActualizacion,  " & _
-                          " P_Moneda, " & _
-                          " P_SWIFT " & _
-                          " FROM PAISES ")
+                sql.Append("SELECT P.P_Cod, " & _
+                       " P.P_Name, " & _
+                       " P.P_Moneda," & _
+                       " M.CM_Descripcion,  " & _
+                       " P.P_SWIFT, " & _
+                       " P.P_Calendario_ID, " & _
+                       " C.CA_Descripcion,  " & _
+                       " P.P_UsuarioCreacion, " & _
+                       " P.P_FechaCreacion, " & _
+                       " P.P_UsuarioActualizacion, " & _
+                       " P.P_FechaActualizacion " & _
+                       " FROM PAISES P  " & _
+                       " LEFT JOIN MONEDA_COD M ON M.CM_Cod_Moneda_ID = P.P_Moneda " & _
+                       " LEFT JOIN CALENDARIOS C ON C.CA_Nit_ID = '0' AND C.CA_Calendario_ID = P.P_Calendario_ID " & _
+                       " ORDER BY P.P_Cod ASC ")
             Else
-                sql.Append(" SELECT P_Cod, " & _
-                          " P_Name, " & _
-                          " P_Calendario_ID," & _
-                          " P_UsuarioCreacion, " & _
-                          " P_FechaCreacion,  " & _
-                          " P_UsuarioActualizacion, " & _
-                          " P_FechaActualizacion,  " & _
-                          " P_Moneda, " & _
-                          " P_SWIFT " & _
-                          " FROM PAISES " & _
-                          "WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
+                sql.Append("  SELECT P.P_Cod, " & _
+                       " P.P_Name, " & _
+                       " P.P_Moneda," & _
+                       " M.CM_Descripcion,  " & _
+                       " P.P_SWIFT, " & _
+                       " P.P_Calendario_ID, " & _
+                       " C.CA_Descripcion,  " & _
+                       " P.P_UsuarioCreacion, " & _
+                       " P.P_FechaCreacion, " & _
+                       " P.P_UsuarioActualizacion, " & _
+                       " P.P_FechaActualizacion " & _
+                       " FROM PAISES P  " & _
+                       " LEFT JOIN MONEDA_COD M ON M.CM_Cod_Moneda_ID = P.P_Moneda " & _
+                       " LEFT JOIN CALENDARIOS C ON C.CA_Nit_ID = '0' AND C.CA_Calendario_ID = P.P_Calendario_ID " & _
+                       " WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%' " & _
+                       " ORDER BY P.P_Cod ASC ")
             End If
         End If
 
@@ -276,18 +292,22 @@ Public Class PaisesSQLClass
             Case "List"
                 'recorremos la consulta por la cantidad de datos en la BD
                 While ReadConsulta.Read
-                    
+
                     Dim objPaises As New PaisesClass
                     'cargamos datos sobre el objeto de login
                     objPaises.Cod = ReadConsulta.GetValue(0)
                     objPaises.Name = ReadConsulta.GetValue(1)
-                    If Not (IsDBNull(ReadConsulta.GetValue(2))) Then objPaises.Calendario_ID = ReadConsulta.GetValue(2) Else objPaises.Calendario_ID = 0
+                    If Not (IsDBNull(ReadConsulta.GetValue(2))) Then objPaises.Moneda = ReadConsulta.GetValue(2) Else objPaises.Moneda = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(3))) Then objPaises.Moneda_Descripcion = ReadConsulta.GetValue(3) Else objPaises.Moneda_Descripcion = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(4))) Then objPaises.SWIFT = ReadConsulta.GetValue(4) Else objPaises.SWIFT = ""
+
+                    If Not (IsDBNull(ReadConsulta.GetValue(2))) Then objPaises.Calendario_ID = ReadConsulta.GetValue(2) Else objPaises.Calendario_ID = 1
                     If Not (IsDBNull(ReadConsulta.GetValue(3))) Then objPaises.UsuarioCreacion = ReadConsulta.GetValue(3) Else objPaises.UsuarioCreacion = ""
                     If Not (IsDBNull(ReadConsulta.GetValue(4))) Then objPaises.FechaCreacion = ReadConsulta.GetValue(4) Else objPaises.FechaCreacion = ""
                     If Not (IsDBNull(ReadConsulta.GetValue(5))) Then objPaises.UsuarioActualizacion = ReadConsulta.GetValue(5) Else objPaises.UsuarioCreacion = ""
                     If Not (IsDBNull(ReadConsulta.GetValue(6))) Then objPaises.FechaActualizacion = ReadConsulta.GetValue(6) Else objPaises.FechaActualizacion = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(7))) Then objPaises.Moneda = ReadConsulta.GetValue(7) Else objPaises.Moneda = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(8))) Then objPaises.SWIFT = ReadConsulta.GetValue(8) Else objPaises.SWIFT = ""
+
+
 
                     'agregamos a la lista
                     ObjListPaises.Add(objPaises)
@@ -296,7 +316,7 @@ Public Class PaisesSQLClass
 
         End Select
 
-   
+
         'cerramos conexiones
         ReadConsulta.Close()
         objConexBD.Close()
