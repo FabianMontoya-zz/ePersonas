@@ -16,8 +16,8 @@
     <link href="../css/css_controles.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
-    <div id="Container_title">
-        <h2 id="titulo_login">CAMBIO DE CONTRASEÑA</h2>
+    <div class="Container_title">
+        <h2 class="titulo_login">CAMBIO DE CONTRASEÑA</h2>
     </div>
     <div id="marco_CC">
         <table id="TablaContraseña">
@@ -62,13 +62,6 @@
             <tr>
                 <td id="TdHelpConfirmPassword"></td>
             </tr>
-            <%--<tr>
-                    <td id="TdCheck">
-                        <input type="checkbox" id="show" />
-                        <label id="LblShow" for="show">
-                            Mostrar password.</label>
-                    </td>
-                </tr>--%>
             <tr>
                 <td></td>
             </tr>
@@ -79,7 +72,7 @@
             </tr>
         </table>
     </div>
-    <div id="dialog" title="Basic dialog">
+    <div id="dialog">
         <table>
             <tr>
                 <td>
