@@ -300,14 +300,13 @@ Public Class PaisesSQLClass
                     If Not (IsDBNull(ReadConsulta.GetValue(2))) Then objPaises.Moneda = ReadConsulta.GetValue(2) Else objPaises.Moneda = ""
                     If Not (IsDBNull(ReadConsulta.GetValue(3))) Then objPaises.Moneda_Descripcion = ReadConsulta.GetValue(3) Else objPaises.Moneda_Descripcion = ""
                     If Not (IsDBNull(ReadConsulta.GetValue(4))) Then objPaises.SWIFT = ReadConsulta.GetValue(4) Else objPaises.SWIFT = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(5))) Then objPaises.Calendario_ID = ReadConsulta.GetValue(5) Else objPaises.Calendario_ID = 0
+                    If Not (IsDBNull(ReadConsulta.GetValue(6))) Then objPaises.Calendario_Descripcion = ReadConsulta.GetValue(6) Else objPaises.Calendario_Descripcion = ""
 
-                    If Not (IsDBNull(ReadConsulta.GetValue(2))) Then objPaises.Calendario_ID = ReadConsulta.GetValue(2) Else objPaises.Calendario_ID = 1
-                    If Not (IsDBNull(ReadConsulta.GetValue(3))) Then objPaises.UsuarioCreacion = ReadConsulta.GetValue(3) Else objPaises.UsuarioCreacion = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(4))) Then objPaises.FechaCreacion = ReadConsulta.GetValue(4) Else objPaises.FechaCreacion = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(5))) Then objPaises.UsuarioActualizacion = ReadConsulta.GetValue(5) Else objPaises.UsuarioCreacion = ""
-                    If Not (IsDBNull(ReadConsulta.GetValue(6))) Then objPaises.FechaActualizacion = ReadConsulta.GetValue(6) Else objPaises.FechaActualizacion = ""
-
-
+                    If Not (IsDBNull(ReadConsulta.GetValue(7))) Then objPaises.UsuarioCreacion = ReadConsulta.GetValue(7) Else objPaises.UsuarioCreacion = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(8))) Then objPaises.FechaCreacion = ReadConsulta.GetValue(8) Else objPaises.FechaCreacion = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(9))) Then objPaises.UsuarioActualizacion = ReadConsulta.GetValue(9) Else objPaises.UsuarioCreacion = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(10))) Then objPaises.FechaActualizacion = ReadConsulta.GetValue(10) Else objPaises.FechaActualizacion = ""
 
                     'agregamos a la lista
                     ObjListPaises.Add(objPaises)
@@ -315,7 +314,6 @@ Public Class PaisesSQLClass
                 End While
 
         End Select
-
 
         'cerramos conexiones
         ReadConsulta.Close()

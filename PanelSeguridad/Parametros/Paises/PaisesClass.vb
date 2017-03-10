@@ -7,7 +7,7 @@
     Private _Moneda_Descripcion As String
     Private _SWIFT As String
     Private _Calendario_ID As Integer
-    Private _Calendario_Descripcion As Integer
+    Private _Calendario_Descripcion As String
     Private _FechaCreacion As String
     Private _UsuarioCreacion As String
     Private _FechaActualizacion As String
@@ -64,11 +64,11 @@
             Me._Calendario_ID = value
         End Set
     End Property
-    Public Property Calendario_Descripcion As Integer
+    Public Property Calendario_Descripcion As String
         Get
             Return Me._Calendario_Descripcion
         End Get
-        Set(ByVal value As Integer)
+        Set(ByVal value As String)
             Me._Calendario_Descripcion = value
         End Set
     End Property

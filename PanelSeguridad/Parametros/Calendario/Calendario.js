@@ -3,8 +3,6 @@ var ArrayCalendario_Grid = [];
 var ArrayCalendario = [];
 var ArrayCombo = [];
 var ArrayCalendarioDep = [];
-var ArraySeguridad = [];
-var Matrix_Calendarios = [];
 var ArrayC_Semana = [];
 
 var MensajeHora = "";
@@ -54,6 +52,11 @@ $(document).ready(function () {
         $("#TxtFinF").timepicker();
     });
     Change_Tipo_Calendario();
+
+    Change_Select_Nit();
+    Change_TipoCalendario();
+
+    Clear();
 });
 
 
@@ -108,6 +111,8 @@ function Ocultar_Errores() {
 
 //Función que oculta las tablas
 function Ocultar_Tablas() {
+    $("#TablaHoras").css("display", "none"); //Table que contiene el capturador de horas
+    $("#container_TGrid_2").css("display", "none"); //Tabla que dibuja el grid con las horas ya capturadas
     $("#TablaConsulta").css("display", "none");
     $("#Tabla_10").css("display", "none");
 }
@@ -207,7 +212,6 @@ function HabilitarPanel(opcion) {
             Clear();
             estado = opcion;
             $("#Dialog_Calendar").dialog("open");
-            VerificarNIT("Select_EmpresaNit");
             break;
 
         case "buscar":
@@ -701,11 +705,49 @@ function Clear() {
     $("#Select_EmpresaNit").val("-1");
     $("#Txt_ID").val("");
     $("#TxtDescription").val("");
-    $("#Select_TipoCalendario").val("-1");
+
+    $("#Select_TipoCalendario").prop('disabled', true); //No se agrega el trigger porque se hace al seleccionar el val
+    $("#Select_TipoCalendario").val("-1").trigger("chosen:updated");
 
     $("#TxtRead").val("");
     $("#DDLColumns").val("-1");
 
     $('.C_Chosen').trigger('chosen:updated');
+
     VerificarNIT("Select_EmpresaNit");
+
+    ArrayCalendario_Grid = [];
+    ArrayCombo = [];
+    ArrayCalendarioDep = [];
+    ArrayC_Semana = [];
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                     PROCESOS DE CHANGES EN Huellas                                                                                                                                     ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+//Proceso de Change para el NIT Empresa
+function Change_Select_Nit() {
+    $("#Select_EmpresaNit").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_EmpresaNit").val() == "-1") {
+            $("#Img1").css("display", "inline-table");
+        } else {
+            $("#Img1").css("display", "none");
+        }
+    });
+}
+
+//Proceso de Change para el Tipo Calendario
+function Change_TipoCalendario() {
+    $("#Select_TipoCalendario").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_TipoCalendario").val() == "-1") {
+            $("#Img5").css("display", "inline-table");
+            $("#TablaHoras").css("display", "inline-table"); //Table que contiene el capturador de horas
+        } else {
+            $("#Img5").css("display", "none");
+            $("#TablaHoras").css("display", "none"); //Table que contiene el capturador de horas
+        }
+    });
 }
