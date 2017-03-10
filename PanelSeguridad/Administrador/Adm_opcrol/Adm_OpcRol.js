@@ -375,11 +375,11 @@ function Clear() {
     $("#Select_EmpresaNit").prop('disabled', false); //No se agrega el trigger porque se hace al seleccionar el val
     $("#Select_EmpresaNit").val("-1").trigger("chosen:updated");
     $("#DDL_Padre").val("-1");
-    $("#DDL_Padre").empty().trigger("chosen:updated");
+   // $("#DDL_Padre").empty().trigger("chosen:updated");
     $("#TxtConsecutivo").val("");
     $("#DDLTipo").val("-1");
     $("#DDL_Hijo").val("-1");
-    $("#DDL_Hijo").empty().trigger("chosen:updated");
+   // $("#DDL_Hijo").empty().trigger("chosen:updated");
     $("#DDLLink_ID").val("-1");
     $("#TxtRead").val("");
     $("#DDLColumns").val("-1");
