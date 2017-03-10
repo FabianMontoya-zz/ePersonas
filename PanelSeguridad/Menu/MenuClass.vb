@@ -19,6 +19,8 @@
     Private _Nit As String
     Private _DescripcionSubRol As String
     Private _EstadoRol As String
+    Private _Sub_Sigla As String
+
 #End Region
 
 #Region "propiedades"
@@ -164,6 +166,14 @@
         End Get
         Set(ByVal value As String)
             Me._EstadoRol = value
+        End Set
+    End Property
+    Public Property Sub_Sigla() As String
+        Get
+            Return Me._Sub_Sigla
+        End Get
+        Set(ByVal value As String)
+            Me._Sub_Sigla = value
         End Set
     End Property
 #End Region

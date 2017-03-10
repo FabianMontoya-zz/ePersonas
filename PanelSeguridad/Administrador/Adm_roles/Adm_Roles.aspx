@@ -114,7 +114,7 @@
                             </td>
                             <td style="width: 10%;">
                                 <span class="cssToolTip_Form">
-                                    <input type="text" id="TxtSigla" title="Sigla" maxlength="5" style="width: 100%;" />
+                                    <input type="text" id="TxtSigla" title="Sigla" maxlength="10" style="width: 100%;" />
                                     <span class="Spam_AST"></span></span>
                             </td>
                             <td style="padding-bottom: 25px; width: 47%;">
