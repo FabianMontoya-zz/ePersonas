@@ -16,12 +16,8 @@
     <link href="../css/css_login.css" rel="stylesheet" type="text/css" />
     <link href="../css/css_controles.css" rel="stylesheet" type="text/css" />
     <meta http-equiv="pragma" content="no-cache" />
-    <style type="text/css">
-        html, body {
-            overflow: hidden;
-        }
-    </style>
-</asp:Content>
+    <meta name="viewport" content="width=device−width, initial−scale=1.0" />
+ </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
     <div class="Container_title">
         <h2 class="titulo_login">CUENTA DE USUARIOS</h2>

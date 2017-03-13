@@ -131,6 +131,8 @@ function validarCamposCrear() {
     var T_Persona = ValidatorCampos;
     var validar_banco = 0;
     var validar_Empleado = 0;
+    var vl_validar_Relacion = 0;
+    var vl_CamposRelacion;
 
     if (T_Persona == 1) {
         Campo_1 = $("#Select_EmpresaNit").val();
@@ -184,10 +186,21 @@ function validarCamposCrear() {
                 validar_Empleado = 1;
         }
 
-        if (validar_banco == 0 && validar_Empleado == 0)
+        //validamos si tiene almenos una relacion
+        vl_CamposRelacion = valida_Relacion();
+
+        if (vl_CamposRelacion == 1) {
+            Mensaje_General("Atención", "Debe tener asignado almenos una relación!", "W");
+            vl_validar_Relacion = 1;
+        }
+
+        if (validar_banco == 0 && validar_Empleado == 0 && vl_validar_Relacion == 0) {
             validar = 0;
-        else
+        }
+        else {
             validar = 1;
+        }
+
     }
     return validar;
 }
@@ -380,10 +393,27 @@ function valida_Empleados() {
     return validar;
 }
 
+//validar si tiene una relacion
+function valida_Relacion() {
+    var vl_validar = 1;
+    if ($('#Check_Cliente').prop('checked')) { vl_validar = 0; }
+    if ($('#Check_Avaluador').prop('checked')) { vl_validar = 0; }
+    if ($('#Check_Transito').prop('checked')) { vl_validar = 0; }
+    if ($('#Check_Hacienda').prop('checked')) { vl_validar = 0; }
+    if ($('#Check_MultiEmpresa').prop('checked')) { vl_validar = 0; }
+    if ($('#Check_Empleado').prop('checked')) { vl_validar = 0; }
+    if ($('#Check_Asesor').prop('checked')) { vl_validar = 0; }
+    if ($('#Check_Proveedor').prop('checked')) { vl_validar = 0; }
+    if ($('#Check_EntBancaria').prop('checked')) { vl_validar = 0; }
+    if ($('#Check_Visitante').prop('checked')) { vl_validar = 0; }
+    if ($('#Check_RepLegal').prop('checked')) { vl_validar = 0; }
+    if ($('#Check_Socio').prop('checked')) { vl_validar = 0; }
+
+    return vl_validar;
+}
+
 //captura el nombre de la persona
 function String_Nombre() {
-
-
     if ($("#TxtNombre").val() == "") {
         Nombre_Persona = $("#TxtNombreNit").val();
     }
