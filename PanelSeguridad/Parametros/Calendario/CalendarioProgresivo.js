@@ -1,20 +1,4 @@
-﻿//MUESTRA CAMPOS ANEXOS PARA LAFECHAS PROGRESIVAS
-function Change_Tipo_Calendario() {
-    $("#Select_TipoCalendario").change(function () {
-        index_ID = $(this).val();
-        switch (index_ID) {
-
-            case "1":
-                $("#Tabla_10").css("display", "none");
-                break;
-
-            case "2":
-                $("#Tabla_10").css("display", "inline-table");
-                break;
-        }
-    });
-}
-
+﻿
 //validamos fechas
 function ValidaFechas() {
 

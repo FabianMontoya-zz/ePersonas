@@ -4,6 +4,8 @@ var ArrayCalendario = [];
 var ArrayCombo = [];
 var ArrayCalendarioDep = [];
 var ArrayC_Semana = [];
+var ArraySeguridad = [];
+var Matrix_Calendarios = [];
 
 var MensajeHora = "";
 var V_ONE = 0;
@@ -51,12 +53,10 @@ $(document).ready(function () {
         $("#TxtIniF").timepicker();
         $("#TxtFinF").timepicker();
     });
-    Change_Tipo_Calendario();
 
     Change_Select_Nit();
     Change_TipoCalendario();
 
-    Clear();
 });
 
 
@@ -91,6 +91,17 @@ function Ventanas_Emergentes() {
         }
     });
 
+    $("#Dialog_time").dialog({
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true,
+        width: 700,
+        height: 250,
+        overlay: {
+            opacity: 0.5,
+            background: "black"
+        }
+    });
 }
 
 //Función que oculta todas las IMG de los errores en pantalla
@@ -473,7 +484,7 @@ function ValidaHoras() {
         }
 
     }
-   
+
     return validate;
 }
 
@@ -597,7 +608,7 @@ function Clear_Agregar() {
     $("#TxtFinSab").val("");
     $("#TxtIniDom").val("");
     $("#TxtFinDom").val("");
-    
+
     $('.C_Chosen').trigger('chosen:updated');
 }
 
@@ -704,10 +715,11 @@ function ChargeDependencia(index) {
 function Clear() {
     $("#Select_EmpresaNit").val("-1");
     $("#Txt_ID").val("");
+    $("#Txt_ID").prop('disabled', true);
     $("#TxtDescription").val("");
-
-    $("#Select_TipoCalendario").prop('disabled', true); //No se agrega el trigger porque se hace al seleccionar el val
-    $("#Select_TipoCalendario").val("-1").trigger("chosen:updated");
+    $("#TxtDescription").prop('disabled', true);
+    VerifyTextID(""); //Decir que se borró todo
+    VerifyTextDescription(""); //Para decir que borramos todo
 
     $("#TxtRead").val("");
     $("#DDLColumns").val("-1");
@@ -715,15 +727,35 @@ function Clear() {
     $('.C_Chosen').trigger('chosen:updated');
 
     VerificarNIT("Select_EmpresaNit");
-
-    ArrayCalendario_Grid = [];
-    ArrayCombo = [];
-    ArrayCalendarioDep = [];
-    ArrayC_Semana = [];
 }
 
+//Proceso para detectar que han llenado en ID
+function VerifyTextID(value) {
+    if (value.length == 0) {
+        $("#TxtDescription").val("");
+        $("#TxtDescription").prop('disabled', true);
+        VerifyTextDescription(""); //Para decir que borramos todo
+    } else {
+        $("#TxtDescription").prop('disabled', false);
+    }
+}
+
+//Proceso para detectar que han llenado en Descripción
+function VerifyTextDescription(value) {
+    if (value.length == 0) {
+        $("#Select_TipoCalendario").prop('disabled', true); //No se agrega el trigger porque se hace al seleccionar el val
+        $("#Select_TipoCalendario").val("-1").trigger("chosen:updated");
+        $("#Tabla_10").css("display", "none");
+        $("#TablaHoras").css("display", "none"); //Table que contiene el capturador de horas
+        $("#container_TGrid_2").css("display", "none"); //Tabla que dibuja el grid con las horas ya capturadas
+    } else {
+        $("#Select_TipoCalendario").prop('disabled', false).trigger("chosen:updated");
+    }
+}
+
+
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*----                                                                                                                     PROCESOS DE CHANGES EN Huellas                                                                                                                                     ----*/
+/*----                                                                                                                     PROCESOS DE CHANGES                                                                                                                                    ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 //Proceso de Change para el NIT Empresa
@@ -732,8 +764,15 @@ function Change_Select_Nit() {
         /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
         if ($("#Select_EmpresaNit").val() == "-1") {
             $("#Img1").css("display", "inline-table");
+            $("#Txt_ID").val("");
+            $("#Txt_ID").prop('disabled', true);
+            $("#TxtDescription").val("");
+            $("#TxtDescription").prop('disabled', true);
+            VerifyTextID(""); //Decir que se borró todo
+            VerifyTextDescription(""); //Para decir que borramos todo
         } else {
             $("#Img1").css("display", "none");
+            $("#Txt_ID").prop('disabled', false);
         }
     });
 }
@@ -744,10 +783,23 @@ function Change_TipoCalendario() {
         /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
         if ($("#Select_TipoCalendario").val() == "-1") {
             $("#Img5").css("display", "inline-table");
-            $("#TablaHoras").css("display", "inline-table"); //Table que contiene el capturador de horas
+            $("#Tabla_10").css("display", "none");
+            $("#TablaHoras").css("display", "none"); //Table que contiene el capturador de horas
         } else {
             $("#Img5").css("display", "none");
-            $("#TablaHoras").css("display", "none"); //Table que contiene el capturador de horas
+            $("#TablaHoras").css("display", "inline-table"); //Table que contiene el capturador de horas
+            $("#TxtF_Start").val("");
+            $("#TxtF_End").val("");
+            index_ID = $(this).val();
+            switch (index_ID) {
+                case "1":  
+                    $("#Tabla_10").css("display", "none");
+                    break;
+
+                case "2":
+                    $("#Tabla_10").css("display", "inline-table");
+                    break;
+            }
         }
     });
 }

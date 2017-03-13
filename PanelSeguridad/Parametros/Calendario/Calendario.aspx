@@ -104,40 +104,7 @@
                     </td>
                 </tr>
             </table>
-            
-            <table id="Tabla_2" style="width: 700px; text-align: left;">
-                <tr>
-                    <td style="width: 100px;" class="Label_Bold">Código
-                    </td>
-                    <td style="width: 150px;">
-                        <span class="cssToolTip_Form">
-                            <input type="text" id="Txt_ID" maxlength="5" class="Numeric" style="width: 70px;" />
-                            <span class="Spam_AN"></span></span>
-                    </td>
-                    <td style="padding-bottom: 25px; width: 340px;">
-                        <span class="cssToolTip">
-                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img2"
-                                src="../../images/error.png" />
-                            <span class="SpamEG"></span></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="Label_Bold" style="width: 150px;">Descripción
-                    </td>
-                    <td style="width: 50px;">
-                        <span class="cssToolTip_Form">
-                            <input type="text" id="TxtDescription" maxlength="50" style="width: 200px;" />
-                            <span class="Spam_AST"></span></span>
-                    </td>
-                    <td style="padding-bottom: 25px;">
-                        <span class="cssToolTip">
-                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img3"
-                                src="../../images/error.png" />
-                            <span class="SpamEG"></span></span>
-                    </td>
-                </tr>
-            </table>
-             <table id="Tabla_10" style="width: 500px; text-align: left; position: absolute; margin-left: 600px; margin-bottom: 100px;">
+            <table id="Tabla_10" style="width: 500px; text-align: left; position: absolute; margin-left: 600px; margin-bottom: 100px;">
                 <tr>
                     <td class="Label_Bold">Fecha Inicial
                     </td>
@@ -171,18 +138,53 @@
                     </td>
                 </tr>
             </table>
-            <table id="Tabla_3" style="width: 700px; text-align: left;">
+            <table id="Tabla_2" style="width: 100%; text-align: left;">
                 <tr>
-                    <td style="width: 153px;" class="Label_Bold">Tipo Calendario
+                    <td style="width: 10.5%;" class="Label_Bold">Código
                     </td>
-                    <td style="width: 230px;">
-                        <select id="Select_TipoCalendario" style="width: 230px;" class="C_Chosen">
+                    <td style="width: 6%; min-width: 60px;">
+                        <span class="cssToolTip_Form">
+                            <input type="text" id="Txt_ID" maxlength="5" class="Numeric" style="width: 100%;" onkeyup="VerifyTextID(this.value)" />
+                            <span class="Spam_AN"></span></span>
+                    </td>
+                    <td style="padding-bottom: 25px; width: 98%;">
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img2"
+                                src="../../images/error.png" />
+                            <span class="SpamEG"></span></span>
+                    </td>
+                </tr>
+            </table>
+            <table id="Tabla_Desc" style="width: 100%; text-align: left;">
+                <tr>
+                    <td class="Label_Bold" style="width: 10.5%;">Descripción
+                    </td>
+                    <td style="width: 30%; min-width: 100px;">
+                        <span class="cssToolTip_Form">
+                            <input type="text" id="TxtDescription" maxlength="50" style="width: 100%;" onkeyup="VerifyTextDescription(this.value)" />
+                            <span class="Spam_AST"></span></span>
+                    </td>
+                    <td style="padding-bottom: 25px; width: 80%;">
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img3"
+                                src="../../images/error.png" />
+                            <span class="SpamEG"></span></span>
+                    </td>
+                </tr>
+            </table>
+
+            <table id="Tabla_3" style="width: 100%; text-align: left;">
+                <tr>
+                    <td style="width: 10.5%;" class="Label_Bold">Tipo Calendario
+                    </td>
+                    <td style="width: 31%;">
+                        <select id="Select_TipoCalendario" style="width: 100%;" class="C_Chosen">
                             <option value="-1">Seleccione...</option>
                             <option value="1">Por día de la semana</option>
                             <option value="2">Fechas progresivas</option>
                         </select>
                     </td>
-                    <td style="padding-bottom: 25px; width: 350px;">
+                    <td style="padding-bottom: 25px; width: 70%;">
                         <span class="cssToolTip">
                             <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img5"
                                 src="../../images/error.png" />
@@ -190,7 +192,7 @@
                     </td>
                 </tr>
             </table>
-           
+
             <table id="TablaHoras">
                 <thead>
                     <tr style="text-align: center;" class="Label_Bold">
@@ -259,7 +261,7 @@
                         <td align="center" colspan="2">
                             <select id="Select_Festivo" class="C_Chosen">
                                 <option value="L">Laboral</option>
-                                <option value="F">Festivo</option>
+                                <option value="F" selected>Festivo</option>
                             </select>
                         </td>
                     </tr>
@@ -285,9 +287,7 @@
                         <td align="center" colspan="2">
                             <b>Hora</b>
                         </td>
-                        <td align="center" colspan="2">
-                            <b>Hora</b>
-                        </td>
+
                     </tr>
                     <tr style="text-align: center;" class="Label_Bold">
                         <td>
@@ -332,12 +332,7 @@
                         <td>
                             <b>Final</b>
                         </td>
-                        <td>
-                            <b>Inicial</b>
-                        </td>
-                        <td>
-                            <b>Final</b>
-                        </td>
+
                     </tr>
                     <tr>
                         <td>
@@ -467,7 +462,7 @@
             <tr>
                 <td>
                     <p class="Label_Bold" id="P1">
-                        Desea eliminar el siguiente registro?
+                        ¿Está seguro de eliminar este Calendario?
                     </p>
                 </td>
                 <td>
@@ -477,6 +472,54 @@
             <tr>
                 <td colspan="2" align="center">
                     <input id="BtnElimin" type="button" value="Confirmar" onclick="BtnElimina();" />
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="Dialog_time" title="Basic dialog">
+        <table style="width: 100%;">
+            <tr>
+                <td class="Label_Bold" style="width: 100%; text-align: center;" colspan="3">Digite los campos correspondientes, recuerde que el formato es en 24H.
+                    <br />
+                    Ejemplo, las 3:23 p.m. son las 15:23<br />
+                </td>
+            </tr>
+            <tr>
+                <td class="Label_Bold" style="width: 10.5%; text-align: center;">Horas
+                </td>
+                <td style="width: 6%; min-width: 60px;">
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="TXTHours" maxlength="2" class="Numeric" style="width: 100%;" onkeyup="ValidaHour(this.value, this);"/>
+                        <span class="Spam_AN"></span></span>
+                </td>
+                <td style="padding-bottom: 25px; width: 80%;">
+                    <span class="cssToolTip">
+                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgHours"
+                            src="../../images/error.png" />
+                        <span class="SpamEG"></span></span>
+                </td>
+
+            </tr>
+            <tr>
+                <td class="Label_Bold" style="width: 10.5%; text-align: center;">Minutos
+                </td>
+                <td style="width: 6%; min-width: 60px;">
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="TXTMinutes" maxlength="2" class="Numeric" style="width: 100%;" onkeyup="ValidaMinutes(this.value, this);"/>
+                        <span class="Spam_AN"></span></span>
+                </td>
+                <td style="padding-bottom: 25px; width: 80%;">
+                    <span class="cssToolTip">
+                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgMinutes"
+                            src="../../images/error.png" />
+                        <span class="SpamEG"></span></span>
+                </td>
+
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input id="BtnOk" type="button" value="Aceptar" onclick="AddTime();" />
                 </td>
             </tr>
         </table>
