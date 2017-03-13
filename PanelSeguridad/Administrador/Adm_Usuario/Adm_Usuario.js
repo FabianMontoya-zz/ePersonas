@@ -258,12 +258,20 @@ function ValidarBasicos() {
     var typeAccess = $("#Select_TypeAccess").val(); //ImgTypeAccess   
     var Rol_NIT = $("#Select_EmpresaNit_2").val(); //ImgNIT_2
 
-    if (NIT == "-1" || NIT == null || ID == "" || typeDocument == "-1" || typeDocument == null ||
-        documento == "" || rol == "-1" || rol == null || accessInformation == "-1" || accessInformation == null ||
-        accessInformation == "-1" || accessInformation == null || PoliticaSeguridad == "-1" || PoliticaSeguridad == null ||
-        accessInfoDocument == "-1" || accessInfoDocument == null || accessDocumentos == "-1" || accessDocumentos == null ||
-        accessInfoReportes == "-1" || accessInfoReportes == null || accessReportes == "-1" || accessReportes == null ||
-        token == "" || typeAccess == "-1" || typeAccess == null || Rol_NIT == "-1" || Rol_NIT == null) {
+    if (NIT == "-1" || NIT == null || ID == "" ||
+        typeDocument == "-1" || typeDocument == null ||
+        documento == "" ||
+        rol == "-1" || rol == null ||
+        accessInformation == "-1" || accessInformation == null ||
+        PolSegurGrupo == "-1" || PolSegurGrupo == null ||
+        PoliticaSeguridad == "-1" || PoliticaSeguridad == null ||
+        accessInfoDocument == "-1" || accessInfoDocument == null ||
+        accessDocumentos == "-1" || accessDocumentos == null ||
+        accessInfoReportes == "-1" || accessInfoReportes == null ||
+        accessReportes == "-1" || accessReportes == null ||
+        token == "" ||
+        typeAccess == "-1" || typeAccess == null ||
+        Rol_NIT == "-1" || Rol_NIT == null) {
 
         Mensaje_General("¡Campos Incompletos! (1)", "Debe completar los campos obligatorios para poder crear un nuevo usuario.", "E");
         /* -- Muestra de errores según dato faltante -- */
@@ -274,7 +282,7 @@ function ValidarBasicos() {
         if (documento == "") { $("#ImgDoc").css("display", "inline-table"); } else { $("#ImgDoc").css("display", "none"); }
         if (rol == "-1" || rol == null) { $("#ImgRol").css("display", "inline-table"); } else { $("#ImgRol").css("display", "none"); }
         if (accessInformation == "-1" || accessInformation == null) { $("#ImgAccessInfo").css("display", "inline-table"); } else { $("#ImgAccessInfo").css("display", "none"); }
-        if (accessInformation == "-1" || accessInformation == null) { $("#ImgPolSeguGrupo").css("display", "inline-table"); } else { $("#ImgPolSeguGrupo").css("display", "none"); }
+        if (PolSegurGrupo == "-1" || PolSegurGrupo == null) { $("#ImgPolSeguGrupo").css("display", "inline-table"); } else { $("#ImgPolSeguGrupo").css("display", "none"); }
         if (PoliticaSeguridad == "-1" || PoliticaSeguridad == null) { $("#ImgPolSecurity").css("display", "inline-table"); } else { $("#ImgPolSecurity").css("display", "none"); }
         if (accessInfoDocument == "-1" || accessInfoDocument == null) { $("#ImgAccesInfoDocument").css("display", "inline-table"); } else { $("#ImgAccesInfoDocument").css("display", "none"); }
         if (accessDocumentos == "-1" || accessDocumentos == null) { $("#ImgAccessDocuments").css("display", "inline-table"); } else { $("#ImgAccessDocuments").css("display", "none"); }

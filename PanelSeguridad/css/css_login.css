@@ -7,7 +7,7 @@ h1, h2, h3, h4, table, tr, td
 
 /*----------------------- TITULO ---------------------------*/
 /*personalizacion del titulo*/
-#titulo_login
+.titulo_login
 {
     text-align: center;
     padding-bottom: 2%;
@@ -50,22 +50,21 @@ h1, h2, h3, h4, table, tr, td
 /*----------------------- FORMULARIO LOGIN ---------------------------*/
 /*ajuste de tamaño en los td*/
 
-#Container_title
+.Container_title
 {
-    padding-top: 120px;
+    padding-top: 1%;
 }
 /*encasulado del tablaregistro*/
-#marco
+.marco
 {
     padding-bottom: 19.5%;
     padding-left: 35%;
     padding-right: 35%;
 }
 /*personalizacion de la tabla de entrada */
-#TablaRegistro
+.TablaRegistro
 {
-    
-    padding: 20px 26px;
+    padding: 5% 5%;
     background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */

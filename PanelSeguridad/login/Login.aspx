@@ -17,18 +17,17 @@
     <link href="../css/css_controles.css" rel="stylesheet" type="text/css" />
     <meta http-equiv="pragma" content="no-cache" />
     <style type="text/css">
-        html, body
-        {
+        html, body {
             overflow: hidden;
         }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
-    <div id="Container_title">
-        <h2 id="titulo_login">CUENTA DE USUARIOS</h2>
+    <div class="Container_title">
+        <h2 class="titulo_login">CUENTA DE USUARIOS</h2>
     </div>
-    <div id="marco">
-        <div id="TablaRegistro">
+    <div class="marco">
+        <div class="TablaRegistro">
 
             <table id="User_Name2" style="width: 100%;">
                 <tr>
@@ -103,7 +102,7 @@
         </div>
     </div>
 
-    <div id="dialog" title="Basic dialog">
+    <div id="dialog">
         <table style="width: 100%; text-align: center;">
             <tr>
                 <td class="Label_Bold">

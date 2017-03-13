@@ -84,10 +84,10 @@ function transacionAjax_CargaRol(vp_State, vp_Nit_ID, vp_Type) {
     }).done(function () {
 
         if (vp_Type == "P") {
-            Charge_Combos_Depend_Nit(ArrayComboSubRol, "DDL_Padre", "");
+            Charge_Combos_Depend_Nit(ArrayComboSubRol, "DDL_Padre", "","");
         }
         else {
-            Charge_Combos_Depend_Nit(ArrayComboSubRol, "DDL_Hijo", "");
+            Charge_Combos_Depend_Nit(ArrayComboSubRol, "DDL_Hijo", "","");
         }
     });
 }
@@ -115,7 +115,7 @@ function transacionAjax_CargaLinks(vp_State) {
         error: function () {
         }
     }).done(function () {
-        Charge_Combos_Depend_Nit(ArrayComboLinks, "DDLLink_ID", "");
+        Charge_Combos_Depend_Nit(ArrayComboLinks, "DDLLink_ID", "","");
     });
 
 }
