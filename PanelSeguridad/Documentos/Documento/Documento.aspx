@@ -57,7 +57,7 @@
                         </td>
                         <td id="TD2" style="width: 65%;">
                             <span class="cssToolTip_Form">
-                                <input id="TxtRead" type="text" style="width: 60%; margin-left: 10%;"/>
+                                <input id="TxtRead" type="text" style="width: 60%; margin-left: 10%;" />
                                 <span class="Spam_AST"></span></span>
                         </td>
                         <td colspan="4" align="center" id="TD3" style="width: 20%;">
@@ -128,8 +128,8 @@
                             </td>
                             <td style="width: 110px;">
                                 <select id="Select_CheckVigencia" class="C_Chosen" style="width: 80px;">
-                                    <option value="N">No</option>
                                     <option value="S">Si</option>
+                                    <option value="N">No</option>
                                 </select>
                             </td>
                             <td style="padding-bottom: 25px; width: 200px;"></td>

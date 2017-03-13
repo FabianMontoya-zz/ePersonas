@@ -29,7 +29,8 @@ $(document).ready(function () {
     transacionAjax_EmpresaNit('Cliente');
     transacionAjax_Formato('Formato');
     Change_Select_Nit();
-    
+    Change_Select_Vigencia();
+
 });
 
 //Función que oculta todas las IMG de los errores en pantalla
@@ -78,6 +79,7 @@ function Ocultar_Tablas() {
     $("#TablaDatos_D").css("display", "none");
     $("#TablaDatos_D_Vista").css("display", "none");
     $("#TablaConsulta").css("display", "none");
+    $("#TxtDiaVigencia").attr("disabled", "disabled");
 }
 
 //habilita el panel de crear o consulta
@@ -144,9 +146,22 @@ function Change_Select_Nit() {
     });
 }
 
+//bloquear campos inecesario
+function Change_Select_Vigencia() {
+    $("#Select_CheckVigencia").change(function () {
+        var vl_index = $(this).val();
+        if (vl_index == "N") {
+            $("#TxtDiaVigencia").attr("disabled", "disabled");
+        }
+        else {
+            $("#TxtDiaVigencia").removeAttr("disabled");
+        }
+    });
+}
+
 //carga combo relacionados al nit
 function TransaccionesSegunNIT(index_ID) {
-     if (index_ID != "-1") {
+    if (index_ID != "-1") {
         Charge_Combos_Depend_Nit(Matrix_Ruta, "Select_RutaDocumento", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Ruta, "Select_RutaPlantilla", index_ID, "");
     }
@@ -353,7 +368,7 @@ function Table_Documento() {
 function Select_Option_Documento(Select_control, Index_Pos, Type) {
 
     var Select_Value = $(Select_control).val();
-  
+
     switch (Select_Value) {
         case "M": //modificar
             Editar(Index_Pos, Type);
