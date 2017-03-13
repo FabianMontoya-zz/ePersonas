@@ -1,44 +1,37 @@
 ﻿/*-----------------------CAMPOS GENERALES ---------------------------*/
 /*fuente para todos los campos*/
-h1, h2, h3, h4, table, tr, td
-{
+h1, h2, h3, h4, table, tr, td {
     font-family: CenturyGothic, CenturyGothic, sans-serif;
 }
 
 /*----------------------- TITULO ---------------------------*/
 /*personalizacion del titulo*/
-.titulo_login
-{
+.titulo_login {
     text-align: center;
     padding-bottom: 2%;
     color: #b70d0d;
 }
 
-.Title_Bold
-{
+.Title_Bold {
     font: 20px/28px CenturyGothic,sans-serif;
     font-weight: bold;
     color: #2C2C2C;
 }
 
-.Label_Bold
-{
+.Label_Bold {
     font: 12px/20px CenturyGothic,sans-serif;
     font-weight: bold;
 }
 
 
-.topform
-{
+.topform {
     border: gray solid 2px;
     border-style: outset;
     border-radius: 3px;
     width: 150px;
-
 }
 
-.Dialog_Sasif
-{
+.Dialog_Sasif {
     border-radius: 10px;
     background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
@@ -50,20 +43,17 @@ h1, h2, h3, h4, table, tr, td
 /*----------------------- FORMULARIO LOGIN ---------------------------*/
 /*ajuste de tamaño en los td*/
 
-.Container_title
-{
+.Container_title {
     padding-top: 1%;
 }
 /*encasulado del tablaregistro*/
-.marco
-{
+.marco {
     padding-bottom: 19.5%;
     padding-left: 35%;
     padding-right: 35%;
 }
 /*personalizacion de la tabla de entrada */
-.TablaRegistro
-{
+.TablaRegistro {
     padding: 5% 5%;
     background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
@@ -73,20 +63,17 @@ h1, h2, h3, h4, table, tr, td
     border-radius: 10px;
 }
 /*perzonalizacion de labels*/
-#LblPassword, #Lbluser, #lblConfirmPassword, #LblShow, #TD_Nit_ID
-{
+#LblPassword, #Lbluser, #lblConfirmPassword, #LblShow, #TD_Nit_ID {
     font-weight: bold;
     padding-left: 2em;
 }
 /*perzonalizacion de cajas de texto*/
-#TdPassword, #TdUser, #TdConfirmPassword, #TdCheck
-{
+#TdPassword, #TdUser, #TdConfirmPassword, #TdCheck {
     padding-left: 2em;
     padding-right: 1em;
 }
 /*perzonalizacion de cajas de texto*/
-#TxtUser, #TxtPassword
-{
+#TxtUser, #TxtPassword {
     -webkit-appearance: none;
     border: none;
     width: 100%;
@@ -95,8 +82,7 @@ h1, h2, h3, h4, table, tr, td
 /*----------------------------------------------------------------------------*/
 /*----------------------- PAG CAMBIO DE CONTRASEÑA ---------------------------*/
 /*personalizacion de la tabla de entrada */
-#TablaContraseña
-{
+#TablaContraseña {
     width: 100%;
     padding: 20px 26px;
     background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
@@ -107,24 +93,40 @@ h1, h2, h3, h4, table, tr, td
     border-radius: 10px;
 }
 
-#marco_CC
-{
+#marco_CC {
     padding-bottom: 16%;
     padding-left: 35%;
     padding-right: 35%;
 }
 
-#marco_RC
-{
+#marco_RC {
     padding-top: 15%;
     padding-bottom: 16%;
     padding-left: 35%;
     padding-right: 35%;
 }
 
-#txtConfirmPassword
-{
+#txtConfirmPassword {
     width: 80%;
     -webkit-appearance: none;
     border: none;
 }
+
+
+/* para 980px o menos </code>
+
+#pagewrap {
+
+width: 94%;
+}
+
+#content {
+
+width: 65%;
+}
+
+#sidebar {
+
+width: 30%;
+}
+    */
