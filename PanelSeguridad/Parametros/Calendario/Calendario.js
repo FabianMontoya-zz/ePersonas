@@ -6,6 +6,14 @@ var ArrayCalendarioDep = [];
 var ArrayC_Semana = [];
 var ArraySeguridad = [];
 
+var MatrizMonday = [];
+var MatrizThuesday = [];
+var MatrizWednesday = [];
+var MatrizThursday = [];
+var MatrizFriday = [];
+var MatrizSaturday = [];
+var MatrizSunday = [];
+
 
 var MensajeHora = "";
 var V_ONE = 0;
@@ -34,7 +42,14 @@ $(document).ready(function () {
     IniciarTimeFormat();
     Change_Select_Nit();
     Change_TipoCalendario();
-    
+
+    Change_StateDay("Select_StateLun");
+    Change_StateDay("Select_StateMar");
+    Change_StateDay("Select_StateMie");
+    Change_StateDay("Select_StateJue");
+    Change_StateDay("Select_StateVie");
+    Change_StateDay("Select_StateSab");
+    Change_StateDay("Select_StateDom");
 });
 
 //Función que inicializa todos los label que contendran horas
@@ -59,7 +74,6 @@ function IniciarTimeFormat() {
 function Ventanas_Emergentes() {
 
     Load_Charge_Sasif(); //Carga de "SasifMaster.js" el Control de Carga
-
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
@@ -90,7 +104,7 @@ function Ventanas_Emergentes() {
         autoOpen: false,
         dialogClass: "Dialog_Sasif",
         modal: true,
-        width: 323  ,
+        width: 323,
         height: 300,
         overlay: {
             opacity: 0.5,
@@ -181,6 +195,15 @@ function BtnAgregaCalendario() {
                 Mensaje_General("Advertencia!", "Debe minimo seleccionar un agendamiento", "W");
             else
                 validaTipoC();
+            $("#Select_StateLun").prop('disabled', true).trigger("chosen:updated");
+            $("#Select_StateMar").prop('disabled', true).trigger("chosen:updated");
+            $("#Select_StateMie").prop('disabled', true).trigger("chosen:updated");
+            $("#Select_StateJue").prop('disabled', true).trigger("chosen:updated");
+            $("#Select_StateVie").prop('disabled', true).trigger("chosen:updated");
+            $("#Select_StateSab").prop('disabled', true).trigger("chosen:updated");
+            $("#Select_StateDom").prop('disabled', true).trigger("chosen:updated");
+            $("#Select_Festivo").prop('disabled', true).trigger("chosen:updated");
+            $("#container_TGrid_2").css("display", "inline-table"); //Tabla que dibuja el grid con las horas ya capturadas
             break;
 
         case 1:
@@ -546,7 +569,7 @@ function CargeJson() {
 }
 
 //carga jsonde insercion para BD
-function InsertJson_Day(vp_NumberDay, vp_H_In, vp_H_Fi,vp_Estado_Day) {
+function InsertJson_Day(vp_NumberDay, vp_H_In, vp_H_Fi, vp_Estado_Day) {
     var JsonDayCalendar = {
         "Nit_ID": $("#Select_EmpresaNit").val(),
         "Calendario_ID": $("#Txt_ID").val(),
@@ -711,6 +734,16 @@ function ChargeDependencia(index) {
 
 //limpiar campos
 function Clear() {
+    ArrayCalendario_Grid = [];
+
+    MatrizMonday = [];
+    MatrizThuesday = [];
+    MatrizWednesday = [];
+    MatrizThursday = [];
+    MatrizFriday = [];
+    MatrizSaturday = [];
+    MatrizSunday = [];
+
     $("#Select_EmpresaNit").val("-1");
     $("#Txt_ID").val("");
     $("#Txt_ID").prop('disabled', true);
@@ -724,7 +757,56 @@ function Clear() {
 
     $('.C_Chosen').trigger('chosen:updated');
 
-    VerificarNIT("Select_EmpresaNit");
+    $("#Select_StateLun").prop('disabled', false);
+    $("#Select_StateLun").val("N").trigger("chosen:updated");
+    $("#TxtIniLun").prop('disabled', false);
+    $("#TxtFinLun").prop('disabled', false);
+    $("#TxtIniLun").val("");
+    $("#TxtFinLun").val("");
+    $("#Select_StateMar").prop('disabled', false);
+    $("#Select_StateMar").val("N").trigger("chosen:updated");
+    $("#TxtIniMar").prop('disabled', false);
+    $("#TxtFinMar").prop('disabled', false);
+    $("#TxtIniMar").val("");
+    $("#TxtFinMar").val("");
+    $("#Select_StateMie").prop('disabled', false);
+    $("#Select_StateMie").val("N").trigger("chosen:updated");
+    $("#TxtIniMie").prop('disabled', false);
+    $("#TxtFinMie").prop('disabled', false);
+    $("#TxtIniMie").val("");
+    $("#TxtFinMie").val("");
+    $("#Select_StateJue").prop('disabled', false);
+    $("#Select_StateJue").val("N").trigger("chosen:updated");
+    $("#TxtIniJue").prop('disabled', false);
+    $("#TxtFinJue").prop('disabled', false);
+    $("#TxtIniJue").val("");
+    $("#TxtFinJue").val("");
+    $("#Select_StateVie").prop('disabled', false);
+    $("#Select_StateVie").val("N").trigger("chosen:updated");
+    $("#TxtIniVie").prop('disabled', false);
+    $("#TxtFinVie").prop('disabled', false);
+    $("#TxtIniVie").val("");
+    $("#TxtFinVie").val("");
+    $("#Select_StateSab").prop('disabled', false);
+    $("#Select_StateSab").val("N").trigger("chosen:updated");
+    $("#TxtIniSab").prop('disabled', false);
+    $("#TxtFinSab").prop('disabled', false);
+    $("#TxtIniSab").val("");
+    $("#TxtFinSab").val("");
+    $("#Select_StateDom").prop('disabled', false);
+    $("#Select_StateDom").val("N").trigger("chosen:updated");
+    $("#TxtIniDom").prop('disabled', false);
+    $("#TxtFinDom").prop('disabled', false);
+    $("#TxtIniDom").val("");
+    $("#TxtFinDom").val("");
+    $("#Select_Festivo").prop('disabled', false);
+    $("#Select_Festivo").val("S").trigger("chosen:updated");
+
+    var Only_Empresa = VerificarNIT("Select_EmpresaNit");
+
+    if (Only_Empresa == true) {
+        $("#Txt_ID").prop('disabled', false);
+    }
 }
 
 //Proceso para detectar que han llenado en ID
@@ -790,12 +872,97 @@ function Change_TipoCalendario() {
             $("#TxtF_End").val("");
             index_ID = $(this).val();
             switch (index_ID) {
-                case "1":  
+                case "1":
                     $("#Tabla_10").css("display", "none");
                     break;
 
                 case "2":
                     $("#Tabla_10").css("display", "inline-table");
+                    break;
+            }
+        }
+    });
+}
+
+//Función que recibe por parametro el choosen del estado de cada día para hacer los cambios respectivos
+function Change_StateDay(Obj) {
+    $("#" + Obj).change(function () {
+        //Validamos si no va a ser laboral y bloqueamos las horas de ese día
+        if ($(this).val() == "S") {
+            switch (Obj) {
+                case "Select_StateLun":
+                    $("#TxtIniLun").prop('disabled', true);
+                    $("#TxtFinLun").prop('disabled', true);
+                    $("#TxtIniLun").val("");
+                    $("#TxtFinLun").val("");
+                    break;
+                case "Select_StateMar":
+                    $("#TxtIniMar").prop('disabled', true);
+                    $("#TxtFinMar").prop('disabled', true);
+                    $("#TxtIniMar").val("");
+                    $("#TxtFinMar").val("");
+                    break;
+                case "Select_StateMie":
+                    $("#TxtIniMie").prop('disabled', true);
+                    $("#TxtFinMie").prop('disabled', true);
+                    $("#TxtIniMie").val("");
+                    $("#TxtFinMie").val("");
+                    break;
+                case "Select_StateJue":
+                    $("#TxtIniJue").prop('disabled', true);
+                    $("#TxtFinJue").prop('disabled', true);
+                    $("#TxtIniJue").val("");
+                    $("#TxtFinJue").val("");
+                    break;
+                case "Select_StateVie":
+                    $("#TxtIniVie").prop('disabled', true);
+                    $("#TxtFinVie").prop('disabled', true);
+                    $("#TxtIniVie").val("");
+                    $("#TxtFinVie").val("");
+                    break;
+                case "Select_StateSab":
+                    $("#TxtIniSab").prop('disabled', true);
+                    $("#TxtFinSab").prop('disabled', true);
+                    $("#TxtIniSab").val("");
+                    $("#TxtFinSab").val("");
+                    break;
+                case "Select_StateDom":
+                    $("#TxtIniDom").prop('disabled', true);
+                    $("#TxtFinDom").prop('disabled', true);
+                    $("#TxtIniDom").val("");
+                    $("#TxtFinDom").val("");
+                    break;
+            }
+            //Sino desbloqueamos si antes se habia bloqueado
+        } else if ($(this).val() == "N") {
+            switch (Obj) {
+                case "Select_StateLun":
+                    $("#TxtIniLun").prop('disabled', false);
+                    $("#TxtFinLun").prop('disabled', false);
+                    break;
+                case "Select_StateMar":
+                    $("#TxtIniMar").prop('disabled', false);
+                    $("#TxtFinMar").prop('disabled', false);
+                    break;
+                case "Select_StateMie":
+                    $("#TxtIniMie").prop('disabled', false);
+                    $("#TxtFinMie").prop('disabled', false);
+                    break;
+                case "Select_StateJue":
+                    $("#TxtIniJue").prop('disabled', false);
+                    $("#TxtFinJue").prop('disabled', false);
+                    break;
+                case "Select_StateVie":
+                    $("#TxtIniVie").prop('disabled', false);
+                    $("#TxtFinVie").prop('disabled', false);
+                    break;
+                case "Select_StateSab":
+                    $("#TxtIniSab").prop('disabled', false);
+                    $("#TxtFinSab").prop('disabled', false);
+                    break;
+                case "Select_StateDom":
+                    $("#TxtIniDom").prop('disabled', false);
+                    $("#TxtFinDom").prop('disabled', false);
                     break;
             }
         }
