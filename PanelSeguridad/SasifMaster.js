@@ -14,6 +14,11 @@ var Mensaje_NO_Permitido = "";
 var Control_Work;
 var Suma_Valor_Inicial = 0;
 
+var ControlTime = "";
+var TimeWrote = "";
+var Hours = "";
+var Minutes = "";
+
 var Matrix_Mes = [];
 Matrix_Mes[0] = [1, "Enero", 31];
 Matrix_Mes[1] = [2, "Febrero", 28];
@@ -30,7 +35,7 @@ Matrix_Mes[11] = [12, "Diciembre", 31];
 /*--------------- region de variables globales --------------------*/
 
 $(document).ready(function () {
-    clearConsole();
+    //clearConsole();
 
     fecha();
 
@@ -65,7 +70,7 @@ $(document).ready(function () {
     });
 
     ready();
-    
+
 });
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -90,18 +95,21 @@ function ready() {
     var seconds = Digital.getSeconds();
 
 
-    if (hours <= 9){
-        hours = "0" + hours;}
-    if (minutes <= 9){
-        minutes = "0" + minutes;}
-    if (seconds <= 9){
-        seconds = "0" + seconds;}
+    if (hours <= 9) {
+        hours = "0" + hours;
+    }
+    if (minutes <= 9) {
+        minutes = "0" + minutes;
+    }
+    if (seconds <= 9) {
+        seconds = "0" + seconds;
+    }
 
     setTimeout(console.log.bind(console, "" + Day + "/" + Matrix_Mes[Month][1] + "/" + Year + " " + hours + ":" + minutes + ":" + seconds + "")); //No muestra la ruta donde se genera el console
     setTimeout(console.log.bind(console, "%cAll is ready, enjoy!", "color: #b70d0d; font-size: x-large")); //No muestra la ruta donde se genera el console
-    setTimeout(console.log.bind(console, "%cDesarrollado por SASIF® 2016. Todos los derechos reservados.\nContacto sistemas@sasif.com.co | Bogotá D.C. - Colombia \n© SASIF S.A.S. "+ Year + "", "color: #b70d0d; font-size: x"));
+    setTimeout(console.log.bind(console, "%cDesarrollado por SASIF® 2016. Todos los derechos reservados.\nContacto sistemas@sasif.com.co | Bogotá D.C. - Colombia \n© SASIF S.A.S. " + Year + "", "color: #b70d0d; font-size: x"));
 
-    Reload();    
+    Reload();
 }
 
 /*Función que recarga la página y exige que se traigan los nuevos cambios desde el servidor*/
@@ -120,7 +128,7 @@ function Reload() {
             sessionStorage.setItem(page, true);
             window.location.reload(true);
         }
-    })();      
+    })();
 }
 
 ////Función que borra el log generado en la consola según el navegador
@@ -264,6 +272,10 @@ function ResetError() {
     $("#Img11").css("display", "none");
     $("#Img12").css("display", "none");
 
+    /*IMGs Div Horarios*/
+    $("#ImgHours").css("display", "none");
+    $("#ImgMinutes").css("display", "none");
+
     /*Errores Administración Adm_Usuario*/
     $("#ImgNIT").css("display", "none");
     $("#ImgID").css("display", "none");
@@ -402,7 +414,7 @@ function No_Back_Button() {
     }
 
     document.oncontextmenu = new Function("return false");
-    
+
 }
 
 //funcion para control de carga
@@ -1053,7 +1065,7 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
 
         case "Select_Contrato":
             for (Item in Matrix) {
-                $("#" + Selector).append("<option value='" + Matrix[Item].Colocacion_ID + "'>" +Matrix[Item].Colocacion_ID +" - " + Matrix[Item].Descripcion + "</option>");
+                $("#" + Selector).append("<option value='" + Matrix[Item].Colocacion_ID + "'>" + Matrix[Item].Colocacion_ID + " - " + Matrix[Item].Descripcion + "</option>");
             }
             break;
 
@@ -1231,7 +1243,7 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
 
         case "Select_Activo":
             for (Item in Matrix) {
-                $("#" + Selector).append("<option value='" + Matrix[Item].Ref_1 + "_" + Matrix[Item].Ref_2 + "_" + Matrix[Item].Ref_3 + "'> " + Matrix[Item].Ref_1 + " " + Matrix[Item].Ref_2 + " " + Matrix[Item].Ref_3 + " - " + Matrix[Item].Descripcion  + "</option>");
+                $("#" + Selector).append("<option value='" + Matrix[Item].Ref_1 + "_" + Matrix[Item].Ref_2 + "_" + Matrix[Item].Ref_3 + "'> " + Matrix[Item].Ref_1 + " " + Matrix[Item].Ref_2 + " " + Matrix[Item].Ref_3 + " - " + Matrix[Item].Descripcion + "</option>");
             }
             break;
 
@@ -1252,7 +1264,7 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
                 $("#" + Selector).append("<option value='" + Matrix[Item].Rol_ID + "'> " + Matrix[Item].Rol_ID + " - " + Matrix[Item].Descripcion + "</option>");
             }
             break;
- 
+
         case "DDLLink_ID": //Combo Links en Adm_OpcRol
             for (Item in Matrix) {
                 $("#" + Selector).append("<option value='" + Matrix[Item].ID + "'> " + Matrix[Item].ID + " - " + Matrix[Item].descripcion + "</option>");
@@ -1692,16 +1704,16 @@ function CargaRoles(Matrix, Selector, Index_Edit) {
 
         case "DDLRol": //Combo Roles en Adm_Usuario
             for (Item in Matrix) {
-                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> "  + Matrix[Item].Rol_ID + " - " + Matrix[Item].Descripcion + "</option>");
+                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Rol_ID + " - " + Matrix[Item].Descripcion + "</option>");
             }
             break;
         case "DDLRol": //Combo Roles en Adm_Usuario
             for (Item in Matrix) {
-                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> "  + Matrix[Item].Rol_ID + " - " + Matrix[Item].Descripcion + "</option>");
+                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Rol_ID + " - " + Matrix[Item].Descripcion + "</option>");
             }
             break;
 
-       }
+    }
 
     $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
 
@@ -1855,22 +1867,22 @@ function UpLoad_MultipleFiles(NameAjax, NameFile_ID, Form) {
         var numFilesSended = 0;
         //capturamos los datos del input file
         for (var i = 0, f; f = $("#" + NameFile_ID)[0].files[i]; i++) {
-            data.append('archivo'+i, $("#" + NameFile_ID)[0].files[i]); //Cargamos cada uno de los archivos en los Data
+            data.append('archivo' + i, $("#" + NameFile_ID)[0].files[i]); //Cargamos cada uno de los archivos en los Data
             numFilesSended = numFilesSended + 1;
         }
-       
+
         data.append('RutaTemporal', RutaTemporal); //Declara local en js
-        
-        if (form = "Huellas"){ //Utilizado para cuando los archivos provienen del modulo de huellas
+
+        if (form = "Huellas") { //Utilizado para cuando los archivos provienen del modulo de huellas
             var NameFiles = "";
-            for (i in arrayNameFiles){
+            for (i in arrayNameFiles) {
                 NameFiles = NameFiles + "," + arrayNameFiles[i];
             }
             NameFiles = NameFiles.substr(1);
-            data.append('NameArchivos', NameFiles); 
+            data.append('NameArchivos', NameFiles);
             data.append('action', 'CargarHuellas');
         }
-        
+
         //Transacción ajax
         $.ajax({
             url: NameAjax + "Ajax.aspx",
@@ -1879,26 +1891,26 @@ function UpLoad_MultipleFiles(NameAjax, NameFile_ID, Form) {
             data: data,
             processData: false,
             success: function (result) {
-                
+
                 var files = JSON.parse(result);
 
-                if (files[0] == "NO FILES"){
+                if (files[0] == "NO FILES") {
                     Mensaje_General("Sin Archivos", "No se han encontrado peticiones de carga de archivos al servidor, la operación de carga se ha cancelado.", "W");
-                }else{
-                    if (files.length < numFilesSended){
-                        if ( (numFilesSended - files.length) > 1){
-                            Mensaje_General("Archivos Cargados: "+files.length+"/"+numFilesSended, "El sistema no ha cargado la totalidad de archivos que usted dispuso, esto sucedió porque no cumplieron con los parámetros permitidos. No se cargaron "+ (numFilesSended - files.length) + " archivos.", "W");
-                        }else if ( (numFilesSended - files.length) == 1){
-                            Mensaje_General("Archivos Cargados: "+files.length+"/"+numFilesSended, "El sistema no ha cargado la totalidad de archivos que usted dispuso, esto sucedió porque no cumplió con los parámetros permitidos. No se cargó "+ (numFilesSended - files.length) + " archivo.", "W");
-                        }else if ( (numFilesSended - files.length) == numFilesSended){
-                            Mensaje_General("Archivos Cargados: "+files.length+"/"+numFilesSended, "El sistema no cargó ninguno de los archivos seleccionado, esto sucedió porque ningún archivo cumplia con los parametros de archivo aceptado.", "E");
+                } else {
+                    if (files.length < numFilesSended) {
+                        if ((numFilesSended - files.length) > 1) {
+                            Mensaje_General("Archivos Cargados: " + files.length + "/" + numFilesSended, "El sistema no ha cargado la totalidad de archivos que usted dispuso, esto sucedió porque no cumplieron con los parámetros permitidos. No se cargaron " + (numFilesSended - files.length) + " archivos.", "W");
+                        } else if ((numFilesSended - files.length) == 1) {
+                            Mensaje_General("Archivos Cargados: " + files.length + "/" + numFilesSended, "El sistema no ha cargado la totalidad de archivos que usted dispuso, esto sucedió porque no cumplió con los parámetros permitidos. No se cargó " + (numFilesSended - files.length) + " archivo.", "W");
+                        } else if ((numFilesSended - files.length) == numFilesSended) {
+                            Mensaje_General("Archivos Cargados: " + files.length + "/" + numFilesSended, "El sistema no cargó ninguno de los archivos seleccionado, esto sucedió porque ningún archivo cumplia con los parametros de archivo aceptado.", "E");
                         }
-                    }else{
-                        Mensaje_General("Archivos Cargados: "+files.length+"/"+numFilesSended, "Se han cargado todos los archivos correctamente al servidor.","S");
+                    } else {
+                        Mensaje_General("Archivos Cargados: " + files.length + "/" + numFilesSended, "Se han cargado todos los archivos correctamente al servidor.", "S");
                     }
 
                     /* === Solo necesario para módulo de carga de huellas == */
-                    if (form == "Huellas"){
+                    if (form == "Huellas") {
                         CheckFiles(files);
                         ArmarTabla();
                     }
@@ -1925,30 +1937,123 @@ function UpLoad_MultipleFiles(NameAjax, NameFile_ID, Form) {
 //habilita la ventana emergente de Horas
 function Time_Format(ObjText) {
     $("#" + ObjText).click(function () {
-        Control_Work = ObjText;
+        ControlTime = ObjText;
         if ($("#" + ObjText).val == "") {
         } else {
-            Clear_Adress();
-            $("#Txt_End_Adress").val($("#" + ObjText).val());
+            ClearTime();
+            TimeWrote = $("#" + ObjText).val();
+            var time = TimeWrote.split(":");
+            Hours = time[0];
+            Minutes = time[1];
+            $("#TXTHours").val(Hours);
+            $("#TXTMinutes").val(Minutes);
+            $("#TXTHours").focus();
         }
-
-        $("#Txt_Special").css("display", "none");
         $("#Dialog_time").dialog("open");
         $("#Dialog_time").dialog("option", "title", "Ingrese Hora");
+    });
 
-        lego_Adress();
+    $("#TXTHours").blur(function () {
+        ValidaHour($(this).val(), $(this))
+    });
+
+    $("#TXTMinutes").blur(function () {
+        ValidaMinute($(this).val(), $(this))
     });
 }
 
-function ValidaHour(val, obj) {
-
+//Función que limpia los campos del dialog horas
+function ClearTime() {
+    Hours = "";
+    Minutes = "";
+    $("#TXTHours").val("");
+    $("#TXTMinutes").val("");
+    $("#ImgHours").css("display", "none");
+    $("#ImgMinutes").css("display", "none");
 }
 
-function ValidaMinute(val, obj) {
+//Función que valida que solo se escriban horas entre las 0 y 24 H
+function ValidaHour(val, obj) {
+    if (val >= 0 && val <= 23) {
+        $("#ImgHours").css("display", "none");
+        Hours = $("#" + $(obj).attr("id")).val();
+        return true;
+    } else {
+        Hours = "";
+        $("#" + $(obj).attr("id")).val("");
+        $("#" + $(obj).attr("id")).focus();
+        $("#" + $(obj).attr("id")).select();
+        $("#ImgHours").css("display", "inline-table");
+        Mensaje_General("Error - Hora no valida", val + " no se encuentra dentro del rango valido, el rango permitido está entre las 00 y 23 horas.", "E");
+        return false;
+    }
+}
 
+//Función que valida que solo se escriban minutos entre los 0 y 60
+function ValidaMinute(val, obj) {
+    if (val >= 0 && val <= 59) {
+        $("#ImgMinutes").css("display", "none");
+        Minutes = $("#" + $(obj).attr("id")).val();
+        return true;
+    } else {
+        Minutes = "";
+        $("#" + $(obj).attr("id")).val("");
+        $("#" + $(obj).attr("id")).focus();
+        $("#" + $(obj).attr("id")).select();
+        $("#ImgMinutes").css("display", "inline-table");
+        Mensaje_General("Error - Minutos no validos", val + " no se encuentra dentro del rango, el rango permitido está entre los 00 y 59 minutos.", "E");
+        return false;
+    }
+}
+
+//Arma la hora digitada y llena el campo de hora 
+function AddTime() {
+    Hours = $("#TXTHours").val();
+    Minutes = $("#TXTMinutes").val();
+    if (Hours != "" && Minutes != "" && ControlTime != "") {
+        if (Hours.length == 1) {
+            Hours = "0" + Hours;
+        }
+        if (Minutes.length == 1) {
+            Minutes = "0" + Minutes;
+        }
+
+        if ((Hours.length == 2 && Minutes.length == 2) && (parseInt(Hours) >= 0 && parseInt(Hours) <= 23) && (parseInt(Minutes) >= 0 && parseInt(Minutes) <= 59)) {
+            TimeWrote = Hours + ":" + Minutes;
+            $("#" + ControlTime).val("" + TimeWrote);
+            $("#Dialog_time").dialog("close");
+        } else {
+            Mensaje_General("Error - Hora no valida", "Lo sentimos, por alguna razón la hora no cumple el formato y contiene números invalidos, verifique los datos digitados. Recomendamos volver a digitar cada uno de los datos.", "W");
+
+            if (Hours.length != 2 || parseInt(Hours) < 0 || parseInt(Hours) > 23) {
+                $("#TXTHours").focus();
+                $("#TXTHours").select();
+                $("#ImgHours").css("display", "inline-table");
+            } else {
+                $("#TXTMinutes").focus();
+                $("#TXTMinutes").select();
+            }
+
+            if (Minutes.length != 2 || parseInt(Minutes) < 0 || parseInt(Minutes) > 59) {
+                $("#ImgMinutes").css("display", "inline-table");
+            }
+        }
+    } else {
+        if (ControlTime == "") {
+            Mensaje_General("Control Perdido", "Lo sentimos, se ha perdido la referencia del Control y no podemos escribir la hora digitada.", "W");
+        } else {
+            Mensaje_General("Campos Incompletos", "Debes completar los campos para poder agregar la hora.", "E");
+            if (Hours == "") {
+                $("#ImgHours").css("display", "inline-table");
+            }
+            if (Minutes == "") {
+                $("#ImgMinutes").css("display", "inline-table");
+            }
+        }
+    }
 }
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*----                                                                                                                     PROCESO DE FORMATEO DE DIRECCIONES                                                                   ----*/
+/*----                                                      PROCESO DE FORMATEO DE DIRECCIONES                                                                   ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //habilita la ventana emergente de direciones
 function Format_Adress(ObjText) {
@@ -2085,7 +2190,6 @@ function StrLego() {
 
 //llena el campo de direccion con el string armado
 function Add_Adress() {
-
     if ($("#Txt_End_Adress").val() != "")
         $("#" + Control_Work).val($("#Txt_End_Adress").val());
 
@@ -2424,7 +2528,7 @@ function Capture_Nit_User() {
 /*----                                                                                 PROCESO PARA DESCARGAS AUTOMÁTICAS DE ARCHIVOS                                                                                                            ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*Función que recibe un Array traido desde código VB y lo convierte para descargarlo automáticamente*/
-function DowloadFile(result){
+function DowloadFile(result) {
     var Correcto = false;
     var ArrayInformationFile = [];
     ArrayInformationFile = JSON.parse(result);

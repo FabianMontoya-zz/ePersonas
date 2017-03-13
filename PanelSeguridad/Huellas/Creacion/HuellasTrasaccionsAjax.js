@@ -76,7 +76,11 @@ function transacionAjax_ShearchPeople(State, TD, D, NIT, Vista) {
                     $("#Img_TD").css("display", "inline-table");
                     $("#Img_D").css("display", "inline-table");
                     break;
-
+                case "Existe":
+                    Persona = false;
+                    Mensaje_General("¡Persona ya Existe!", "La persona que consultó ya se encuentra registrada en el sistema de huellas, no puede usarla para trabajar. El formulario se reiniciará.", "W");
+                    Clear();
+                    break;
                 default:
                     $("#" + Vista).html(result);
                     namePersona = result;

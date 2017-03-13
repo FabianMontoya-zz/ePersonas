@@ -54,7 +54,7 @@ function transacionAjax(vp_State) {
                     transacionAjax_AllInfoUser("Loggear", $("#Select_EmpresaNit").val(), $("#TxtUser").val().toUpperCase(), "LG");
                      break;
                 case 1: //contraseña incorrecta
-                    $("#EUser").css("display", "none");
+                    $("#EUser").css("display", "inline-table");
                     $("#ImgNIT").css("display", "none");
                     $("#EPassword").css("display", "inline-table");
                     $("#S_Pass").html(ArrayMensajes[4].Mensajes_ID + ": " + ArrayMensajes[4].Descripcion);
@@ -62,7 +62,7 @@ function transacionAjax(vp_State) {
                     $("#TxtPassword").select();
                     break;
                 case 2: //no existe usuario
-                    $("#EPassword").css("display", "none");
+                    $("#EPassword").css("display", "inline-table");
                     $("#EUser").css("display", "inline-table");
                     $("#ImgNIT").css("display", "inline-table");
                     $("#S_User").html(ArrayMensajes[6].Mensajes_ID + ": " + ArrayMensajes[6].Descripcion);

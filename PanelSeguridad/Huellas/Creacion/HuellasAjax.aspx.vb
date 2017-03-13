@@ -130,6 +130,8 @@ Public Class HuellasAjax
     ''' </summary>
     ''' <remarks></remarks>
     Protected Sub Search_People()
+        Dim vl_C_Class As New HuellasClass
+        Dim SQL_C_Huellas As New HuellasSQLClass
 
         Dim SQL As New ClienteSQLClass
         Dim vl_S_Nit As String = Request.Form("NIT")
@@ -137,7 +139,25 @@ Public Class HuellasAjax
         Dim vl_S_D As String = Request.Form("D")
 
         Dim Str_People As String = SQL.SearchPeople_Exists(vl_S_Nit, vl_S_TD, vl_S_D)
-        Response.Write(Str_People)
+
+        If Str_People <> "NO" Then
+            vl_C_Class.Nit_ID = Request.Form("NIT")
+            vl_C_Class.TypeDocument_ID = Request.Form("TD")
+            vl_C_Class.Document_ID = Request.Form("D")
+            'Validamos si la llave existe
+            Dim vl_s_IDxiste As String = SQL_C_Huellas.Consulta_Repetido(vl_C_Class)
+
+            If vl_s_IDxiste = 0 Then
+                Response.Write(Str_People)
+            Else
+                Str_People = "Existe"
+                Response.Write(Str_People)
+            End If
+        Else
+            Response.Write(Str_People)
+        End If
+
+
 
     End Sub
 

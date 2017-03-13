@@ -5,7 +5,7 @@ var ArrayCombo = [];
 var ArrayCalendarioDep = [];
 var ArrayC_Semana = [];
 var ArraySeguridad = [];
-var Matrix_Calendarios = [];
+
 
 var MensajeHora = "";
 var V_ONE = 0;
@@ -18,8 +18,6 @@ var editID;
 
 //Evento load JS
 $(document).ready(function () {
-
-
     $("#Marco_trabajo_Form").css("height", "490px");
     $("#container_TGrid").css("height", "380px");
 
@@ -27,38 +25,35 @@ $(document).ready(function () {
     Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
     Ocultar_Errores();
     Ocultar_Tablas();
-    /*================== FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN ==============*/
+    /*================== FIN LLAMADO INICIAL DE MÉTODOS DE INICIALIZACIÓN ==============*/
 
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_EmpresaNit('Cliente');
     transacionAjax_Calendario('MatrixCalendarios');
 
-    $(function () {
-        $("#TxtF_Start").datepicker({ dateFormat: 'yy-mm-dd' });
-        $("#TxtF_End").datepicker({ dateFormat: 'yy-mm-dd' });
-        $("#TxtIniLun").timepicker();
-        $("#TxtFinLun").timepicker();
-        $("#TxtIniMar").timepicker();
-        $("#TxtFinMar").timepicker();
-        $("#TxtIniMie").timepicker();
-        $("#TxtFinMie").timepicker();
-        $("#TxtIniJue").timepicker();
-        $("#TxtFinJue").timepicker();
-        $("#TxtIniVie").timepicker();
-        $("#TxtFinVie").timepicker();
-        $("#TxtIniSab").timepicker();
-        $("#TxtFinSab").timepicker();
-        $("#TxtIniDom").timepicker();
-        $("#TxtFinDom").timepicker();
-        $("#TxtIniF").timepicker();
-        $("#TxtFinF").timepicker();
-    });
-
+    IniciarTimeFormat();
     Change_Select_Nit();
     Change_TipoCalendario();
-
+    
 });
 
+//Función que inicializa todos los label que contendran horas
+function IniciarTimeFormat() {
+    Time_Format("TxtIniLun");
+    Time_Format("TxtFinLun");
+    Time_Format("TxtIniMar");
+    Time_Format("TxtFinMar");
+    Time_Format("TxtIniMie");
+    Time_Format("TxtFinMie");
+    Time_Format("TxtIniJue");
+    Time_Format("TxtFinJue");
+    Time_Format("TxtIniVie");
+    Time_Format("TxtFinVie");
+    Time_Format("TxtIniSab");
+    Time_Format("TxtFinSab");
+    Time_Format("TxtIniDom");
+    Time_Format("TxtFinDom");
+}
 
 //funcion para las ventanas emergentes
 function Ventanas_Emergentes() {
@@ -95,8 +90,8 @@ function Ventanas_Emergentes() {
         autoOpen: false,
         dialogClass: "Dialog_Sasif",
         modal: true,
-        width: 700,
-        height: 250,
+        width: 323  ,
+        height: 300,
         overlay: {
             opacity: 0.5,
             background: "black"
@@ -223,6 +218,7 @@ function HabilitarPanel(opcion) {
             Clear();
             estado = opcion;
             $("#Dialog_Calendar").dialog("open");
+            $("#Dialog_Calendar").dialog("option", "title", "Crear Calendario");
             break;
 
         case "buscar":
@@ -533,6 +529,8 @@ function CargeJson() {
         "IniDom": ValidaCamposJson($("#TxtIniDom").val()),
         "FinDom": ValidaCamposJson($("#TxtFinDom").val()),
     };
+
+
     InsertJson_Day("1", ValidaCamposJson($("#TxtIniLun").val()), ValidaCamposJson($("#TxtFinLun").val())); //lunes
     InsertJson_Day("2", ValidaCamposJson($("#TxtIniMar").val()), ValidaCamposJson($("#TxtFinMar").val())); //martes
     InsertJson_Day("3", ValidaCamposJson($("#TxtIniMie").val()), ValidaCamposJson($("#TxtFinMie").val())); //Miercoles
@@ -548,12 +546,12 @@ function CargeJson() {
 }
 
 //carga jsonde insercion para BD
-function InsertJson_Day(vp_NumberDay, vp_H_In, vp_H_Fi) {
+function InsertJson_Day(vp_NumberDay, vp_H_In, vp_H_Fi,vp_Estado_Day) {
     var JsonDayCalendar = {
         "Nit_ID": $("#Select_EmpresaNit").val(),
         "Calendario_ID": $("#Txt_ID").val(),
         "Dia_1_8": vp_NumberDay,
-        "IndicativoFoto": "N",
+        "IndicativoFoto": vp_Estado_Day,
         "HoraInicial": vp_H_In,
         "HoraFinal": vp_H_Fi,
         "UsuarioCreacion": User.toUpperCase(),

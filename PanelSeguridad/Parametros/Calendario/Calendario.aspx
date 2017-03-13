@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Parametros/Sasif_menu.Master"
+﻿<%@ Page Title="Calendarios" Language="vb" AutoEventWireup="false" MasterPageFile="~/Parametros/Sasif_menu.Master"
     CodeBehind="Calendario.aspx.vb" Inherits="PanelSeguridad.Calendario" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -210,7 +210,7 @@
                         </th>
                         <th align="center" colspan="2">Domingo
                         </th>
-                        <th align="center" colspan="2">Festivo
+                        <th align="center" colspan="2">Festivos
                         </th>
                     </tr>
                 </thead>
@@ -218,50 +218,50 @@
                     <tr style="text-align: center;">
                         <td align="center" colspan="2">
                             <select id="Select_StateLun" class="C_Chosen">
-                                <option value="L">Laboral</option>
-                                <option value="F">Festivo</option>
+                                <option value="N">Laboral</option>
+                                <option value="S">No Laboral</option>
                             </select>
                         </td>
                         <td align="center" colspan="2">
                             <select id="Select_StateMar" class="C_Chosen">
-                                <option value="L">Laboral</option>
-                                <option value="F">Festivo</option>
+                                <option value="N">Laboral</option>
+                                <option value="S">No Laboral</option>
                             </select>
                         </td>
                         <td align="center" colspan="2">
                             <select id="Select_StateMie" class="C_Chosen">
-                                <option value="L">Laboral</option>
-                                <option value="F">Festivo</option>
+                                <option value="N">Laboral</option>
+                                <option value="S">No Laboral</option>
                             </select>
                         </td>
                         <td align="center" colspan="2">
                             <select id="Select_StateJue" class="C_Chosen">
-                                <option value="L">Laboral</option>
-                                <option value="F">Festivo</option>
+                                <option value="N">Laboral</option>
+                                <option value="S">No Laboral</option>
                             </select>
                         </td>
                         <td align="center" colspan="2">
                             <select id="Select_StateVie" class="C_Chosen">
-                                <option value="L">Laboral</option>
-                                <option value="F">Festivo</option>
+                                <option value="N">Laboral</option>
+                                <option value="S">No Laboral</option>
                             </select>
                         </td>
                         <td align="center" colspan="2">
                             <select id="Select_StateSab" class="C_Chosen">
-                                <option value="L">Laboral</option>
-                                <option value="F">Festivo</option>
+                                <option value="N">Laboral</option>
+                                <option value="S">No Laboral</option>
                             </select>
                         </td>
                         <td align="center" colspan="2">
                             <select id="Select_StateDom" class="C_Chosen">
-                                <option value="L">Laboral</option>
-                                <option value="F">Festivo</option>
+                                <option value="N">Laboral</option>
+                                <option value="S">No Laboral</option>
                             </select>
                         </td>
                         <td align="center" colspan="2">
                             <select id="Select_Festivo" class="C_Chosen">
-                                <option value="L">Laboral</option>
-                                <option value="F" selected>Festivo</option>
+                                <option value="N">Laboral</option>
+                                <option value="S" selected>No Laboral</option>
                             </select>
                         </td>
                     </tr>
@@ -337,72 +337,72 @@
                     <tr>
                         <td>
                             <span class="cssToolTip_Form">
-                                <input id="TxtIniLun" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                <input id="TxtIniLun" type="text" style="width: 50px;" readonly="readonly" /><span
                                     class="Spam_AH"></span></span>
                         </td>
                         <td>
                             <span class="cssToolTip_Form">
-                                <input id="TxtFinLun" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                <input id="TxtFinLun" type="text" style="width: 50px;" readonly="readonly" /><span
                                     class="Spam_AH"></span></span>
                         </td>
                         <td>
                             <span class="cssToolTip_Form">
-                                <input id="TxtIniMar" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                <input id="TxtIniMar" type="text" style="width: 50px;" readonly="readonly" /><span
                                     class="Spam_AH"></span></span>
                         </td>
                         <td>
                             <span class="cssToolTip_Form">
-                                <input id="TxtFinMar" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                <input id="TxtFinMar" type="text" style="width: 50px;" readonly="readonly" /><span
                                     class="Spam_AH"></span></span>
                         </td>
                         <td>
                             <span class="cssToolTip_Form">
-                                <input id="TxtIniMie" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                <input id="TxtIniMie" type="text" style="width: 50px;" readonly="readonly" /><span
                                     class="Spam_AH"></span></span>
                         </td>
                         <td>
                             <span class="cssToolTip_Form">
-                                <input id="TxtFinMie" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                <input id="TxtFinMie" type="text" style="width: 50px;" readonly="readonly" /><span
                                     class="Spam_AH"></span></span>
                         </td>
                         <td>
                             <span class="cssToolTip_Form">
-                                <input id="TxtIniJue" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                <input id="TxtIniJue" type="text" style="width: 50px;" readonly="readonly" /><span
                                     class="Spam_AH"></span></span>
                         </td>
                         <td>
                             <span class="cssToolTip_Form">
-                                <input id="TxtFinJue" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                <input id="TxtFinJue" type="text" style="width: 50px;" readonly="readonly" /><span
                                     class="Spam_AH"></span></span>
                         </td>
                         <td>
                             <span class="cssToolTip_Form">
-                                <input id="TxtIniVie" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                <input id="TxtIniVie" type="text" style="width: 50px;" readonly="readonly" /><span
                                     class="Spam_AH"></span></span>
                         </td>
                         <td>
                             <span class="cssToolTip_Form">
-                                <input id="TxtFinVie" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                <input id="TxtFinVie" type="text" style="width: 50px;" readonly="readonly" /><span
                                     class="Spam_AH"></span></span>
                         </td>
                         <td>
                             <span class="cssToolTip_Form">
-                                <input id="TxtIniSab" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                <input id="TxtIniSab" type="text" style="width: 50px;" readonly="readonly" /><span
                                     class="Spam_AH"></span></span>
                         </td>
                         <td>
                             <span class="cssToolTip_Form">
-                                <input id="TxtFinSab" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                <input id="TxtFinSab" type="text" style="width: 50px;" readonly="readonly" /><span
                                     class="Spam_AH"></span></span>
                         </td>
                         <td>
                             <span class="cssToolTip_Form">
-                                <input id="TxtIniDom" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                <input id="TxtIniDom" type="text" style="width: 50px;" readonly="readonly" /><span
                                     class="Spam_AH"></span></span>
                         </td>
                         <td>
                             <span class="cssToolTip_Form">
-                                <input id="TxtFinDom" type="text" style="width: 50px;" class="Hours" readonly="readonly" /><span
+                                <input id="TxtFinDom" type="text" style="width: 50px;" readonly="readonly" /><span
                                     class="Spam_AH"></span></span>
                         </td>
                     </tr>
@@ -414,7 +414,7 @@
                     </tr>
                     <tr>
                         <td colspan="20" align="center">
-                            <input id="BtnAgregar" type="button" value="Agregar" onclick="BtnAgregaCalendario();" />
+                            <input id="BtnAgregar" type="button" value="Agregar" onclick="BtnAgregaCalendario();" style="cursor: pointer; cursor: hand;"/>
                         </td>
                     </tr>
                 </tbody>
@@ -431,12 +431,13 @@
                 </tr>
                 <tr>
                     <td colspan="4" align="center">
-                        <input id="Btnguardar" type="button" value="Guardar" onclick="BtnCrear();" />
+                        <input id="Btnguardar" type="button" value="Guardar" onclick="BtnCrear();" style="cursor: pointer; cursor: hand;"/>
                     </td>
                 </tr>
             </table>
         </div>
     </div>
+
     <div id="dialog" title="Basic dialog">
         <table style="width: 100%; text-align: center;">
             <tr>
@@ -452,11 +453,12 @@
             </tr>
             <tr>
                 <td colspan="2" align="center">
-                    <input id="BtnExitD" type="button" value="Salir" style="width: 40%;" onclick="x();" />
+                    <input id="BtnExitD" type="button" value="Salir" style="width: 40%;" onclick="x();" style="cursor: pointer; cursor: hand;"/>
                 </td>
             </tr>
         </table>
     </div>
+
     <div id="dialog_eliminar" title="Basic dialog">
         <table style="width: 100%; text-align: center;">
             <tr>
@@ -471,7 +473,7 @@
             </tr>
             <tr>
                 <td colspan="2" align="center">
-                    <input id="BtnElimin" type="button" value="Confirmar" onclick="BtnElimina();" />
+                    <input id="BtnElimin" type="button" value="Confirmar" onclick="BtnElimina();" style="cursor: pointer; cursor: hand;"/>
                 </td>
             </tr>
         </table>
@@ -480,46 +482,54 @@
     <div id="Dialog_time" title="Basic dialog">
         <table style="width: 100%;">
             <tr>
-                <td class="Label_Bold" style="width: 100%; text-align: center;" colspan="3">Digite los campos correspondientes, recuerde que el formato es en 24H.
+                <td class="Label_Bold" style="width: 100%; text-align: center;" colspan="4">Digite los campos correspondientes, recuerde que el formato es en 24H.
                     <br />
                     Ejemplo, las 3:23 p.m. son las 15:23<br />
                 </td>
             </tr>
             <tr>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="Label_Bold" style="width: 15%; text-align: center;"></td>
                 <td class="Label_Bold" style="width: 10.5%; text-align: center;">Horas
                 </td>
                 <td style="width: 6%; min-width: 60px;">
                     <span class="cssToolTip_Form">
-                        <input type="text" id="TXTHours" maxlength="2" class="Numeric" style="width: 100%;" onkeyup="ValidaHour(this.value, this);"/>
+                        <input type="text" id="TXTHours" maxlength="2" class="Numeric" style="width: 100%;" onkeyup="ValidaHour(this.value, this);" />
                         <span class="Spam_AN"></span></span>
                 </td>
-                <td style="padding-bottom: 25px; width: 80%;">
+                <td style="padding-bottom: 25px; width: 40%;">
                     <span class="cssToolTip">
                         <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgHours"
                             src="../../images/error.png" />
-                        <span class="SpamEG"></span></span>
+                        <span>Ingrese hora valida</span></span>
                 </td>
 
             </tr>
             <tr>
+                <td class="Label_Bold" style="width: 15%; text-align: center;"></td>
                 <td class="Label_Bold" style="width: 10.5%; text-align: center;">Minutos
                 </td>
                 <td style="width: 6%; min-width: 60px;">
                     <span class="cssToolTip_Form">
-                        <input type="text" id="TXTMinutes" maxlength="2" class="Numeric" style="width: 100%;" onkeyup="ValidaMinutes(this.value, this);"/>
+                        <input type="text" id="TXTMinutes" maxlength="2" class="Numeric" style="width: 100%;" onkeyup="ValidaMinute(this.value, this);" />
                         <span class="Spam_AN"></span></span>
                 </td>
-                <td style="padding-bottom: 25px; width: 80%;">
+                <td style="padding-bottom: 25px; width: 40%;">
                     <span class="cssToolTip">
                         <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgMinutes"
                             src="../../images/error.png" />
-                        <span class="SpamEG"></span></span>
+                        <span>Ingrese minutos validos</span></span>
                 </td>
 
             </tr>
             <tr>
-                <td colspan="2" align="center">
-                    <input id="BtnOk" type="button" value="Aceptar" onclick="AddTime();" />
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="4" align="center">
+                    <input id="BtnOk" type="button" value="Aceptar" onclick="AddTime();" style="cursor: pointer; cursor: hand;" />
                 </td>
             </tr>
         </table>

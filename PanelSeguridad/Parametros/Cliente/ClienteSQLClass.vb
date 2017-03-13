@@ -1502,7 +1502,6 @@ Public Class ClienteSQLClass
             Case ""
                 People = "NO"
                 Return People
-
             Case Else
                 Return People
         End Select
