@@ -105,8 +105,6 @@ function transacionAjax_Formato(State) {
     });
 }
 
-
-
 /*------------------------------ consulta ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax_Documento(State, filtro, opcion) {

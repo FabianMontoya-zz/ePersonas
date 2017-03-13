@@ -152,6 +152,7 @@ function Change_Select_Vigencia() {
         var vl_index = $(this).val();
         if (vl_index == "N") {
             $("#TxtDiaVigencia").attr("disabled", "disabled");
+            $("#TxtDiaVigencia").val("");
         }
         else {
             $("#TxtDiaVigencia").removeAttr("disabled");
