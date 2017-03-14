@@ -1,10 +1,8 @@
-﻿/*-----------------------CAMPOS GENERALES ---------------------------*/
-/*fuente para todos los campos*/
-h1, h2, h3, h4, table, tr, td {
-    font-family: CenturyGothic, CenturyGothic, sans-serif;
-}
+﻿
 
-/*----------------------- TITULO ---------------------------*/
+/************************************************************************************
+                                                   TITULO
+/************************************************************************************
 /*personalizacion del titulo*/
 .titulo_login {
     text-align: center;
@@ -23,7 +21,6 @@ h1, h2, h3, h4, table, tr, td {
     font-weight: bold;
 }
 
-
 .topform {
     border: gray solid 2px;
     border-style: outset;
@@ -40,18 +37,15 @@ h1, h2, h3, h4, table, tr, td {
     border: solid 1px #921919;
 }
 
-/*----------------------- FORMULARIO LOGIN ---------------------------*/
+/************************************************************************************
+                                   FORMULARIO LOGIN 
+/************************************************************************************
 /*ajuste de tamaño en los td*/
-
 .Container_title {
     padding-top: 1%;
 }
-/*encasulado del tablaregistro*/
-.marco {
-    padding-bottom: 19.5%;
-    padding-left: 35%;
-    padding-right: 35%;
-}
+
+
 /*personalizacion de la tabla de entrada */
 .TablaRegistro {
     padding: 5% 5%;
@@ -79,8 +73,9 @@ h1, h2, h3, h4, table, tr, td {
     width: 100%;
 }
 
-/*----------------------------------------------------------------------------*/
-/*----------------------- PAG CAMBIO DE CONTRASEÑA ---------------------------*/
+/************************************************************************************
+                                  PAG CAMBIO DE CONTRASEÑA 
+/************************************************************************************
 /*personalizacion de la tabla de entrada */
 #TablaContraseña {
     width: 100%;
@@ -111,22 +106,3 @@ h1, h2, h3, h4, table, tr, td {
     -webkit-appearance: none;
     border: none;
 }
-
-
-/* para 980px o menos </code>
-
-#pagewrap {
-
-width: 94%;
-}
-
-#content {
-
-width: 65%;
-}
-
-#sidebar {
-
-width: 30%;
-}
-    */

@@ -316,20 +316,6 @@
     <Content Include="css\icons\folder.png" />
     <Content Include="css\icons\right1.png" />
     <Content Include="css\PIE.htc" />
-    <Content Include="css\theme_blue_Sky\images\active.png" />
-    <Content Include="css\theme_blue_Sky\images\default.png" />
-    <Content Include="css\theme_blue_Sky\images\header.png" />
-    <Content Include="css\theme_blue_Sky\images\ui-bg_diagonals-thick_90_eeeeee_40x40.png" />
-    <Content Include="css\theme_blue_Sky\images\ui-bg_flat_15_cd0a0a_40x100.png" />
-    <Content Include="css\theme_blue_Sky\images\ui-bg_highlight-hard_100_f2f5f7_1x100.png" />
-    <Content Include="css\theme_blue_Sky\images\ui-bg_highlight-hard_70_000000_1x100.png" />
-    <Content Include="css\theme_blue_Sky\images\ui-bg_highlight-soft_100_deedf7_1x100.png" />
-    <Content Include="css\theme_blue_Sky\images\ui-bg_highlight-soft_25_ffef8f_1x100.png" />
-    <Content Include="css\theme_blue_Sky\images\ui-icons_2e83ff_256x240.png" />
-    <Content Include="css\theme_blue_Sky\images\ui-icons_3d80b3_256x240.png" />
-    <Content Include="css\theme_blue_Sky\images\ui-icons_72a7cf_256x240.png" />
-    <Content Include="css\theme_blue_Sky\images\ui-icons_ffffff_256x240.png" />
-    <Content Include="css\theme_blue_Sky\theme.css" />
     <Content Include="Documentos\AutorizacionDocumentos\AutorizacionDocumentos.aspx" />
     <Content Include="Documentos\AutorizacionDocumentos\AutorizacionDocumentos.js" />
     <Content Include="Documentos\AutorizacionDocumentos\AutorizacionDocumentosAjax.aspx" />
@@ -635,7 +621,6 @@
     <Content Include="css\Chosen\Thumbs.db" />
     <Content Include="css\datatables\images\Sorting icons.psd" />
     <Content Include="css\datatables\images\Thumbs.db" />
-    <Content Include="css\theme_blue_Sky\images\Thumbs.db" />
     <Content Include="Documentos\Sasif_menu.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
