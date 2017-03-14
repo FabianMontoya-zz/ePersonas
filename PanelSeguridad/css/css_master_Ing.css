@@ -132,7 +132,7 @@ MEDIA QUERIES
 }
 
 /* para 600px o menos vertical */
-@media screen and (max-height: 600px) {
+@media screen and (max-height: 800px) {
 
     html {
         overflow: auto;
@@ -145,6 +145,12 @@ MEDIA QUERIES
 
     #Medium {
         width: auto;
+    }
+
+     .marco {
+        padding-bottom: 1%;
+        padding-left: 15%;
+        padding-right: 15%;
     }
 }
 
