@@ -7,13 +7,20 @@ var ArrayC_Semana = [];
 var ArraySeguridad = [];
 
 var MatrizMonday = [];
-var MatrizThuesday = [];
+var MatrizTuesday = [];
 var MatrizWednesday = [];
 var MatrizThursday = [];
 var MatrizFriday = [];
 var MatrizSaturday = [];
 var MatrizSunday = [];
 
+var WorkMonday = true;
+var WorkTuesday = true;
+var WorkWednesday = true;
+var WorkThursday = true;
+var WorkFriday = true;
+var WorkSaturday = true;
+var WorkSunday = true;
 
 var MensajeHora = "";
 var V_ONE = 0;
@@ -126,7 +133,6 @@ function Ocultar_Errores() {
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
     $("#WA").css("display", "none");
-    /*Los demás se ocultan en la SASIF Master*/
 }
 
 //Función que oculta las tablas
@@ -191,19 +197,20 @@ function BtnAgregaCalendario() {
     var validate = ValidaHoras();
     switch (validate) {
         case 0:
-            if (V_ONE == 0)
+            if (V_ONE == 0) {
                 Mensaje_General("Advertencia!", "Debe minimo seleccionar un agendamiento", "W");
-            else
+            } else {
                 validaTipoC();
-            $("#Select_StateLun").prop('disabled', true).trigger("chosen:updated");
-            $("#Select_StateMar").prop('disabled', true).trigger("chosen:updated");
-            $("#Select_StateMie").prop('disabled', true).trigger("chosen:updated");
-            $("#Select_StateJue").prop('disabled', true).trigger("chosen:updated");
-            $("#Select_StateVie").prop('disabled', true).trigger("chosen:updated");
-            $("#Select_StateSab").prop('disabled', true).trigger("chosen:updated");
-            $("#Select_StateDom").prop('disabled', true).trigger("chosen:updated");
-            $("#Select_Festivo").prop('disabled', true).trigger("chosen:updated");
-            $("#container_TGrid_2").css("display", "inline-table"); //Tabla que dibuja el grid con las horas ya capturadas
+                $("#Select_StateLun").prop('disabled', true).trigger("chosen:updated"); //Bloqueamos los chosen de estado del día
+                $("#Select_StateMar").prop('disabled', true).trigger("chosen:updated");
+                $("#Select_StateMie").prop('disabled', true).trigger("chosen:updated");
+                $("#Select_StateJue").prop('disabled', true).trigger("chosen:updated");
+                $("#Select_StateVie").prop('disabled', true).trigger("chosen:updated");
+                $("#Select_StateSab").prop('disabled', true).trigger("chosen:updated");
+                $("#Select_StateDom").prop('disabled', true).trigger("chosen:updated");
+                $("#Select_Festivo").prop('disabled', true).trigger("chosen:updated");
+                $("#container_TGrid_2").css("display", "inline-table"); //Tabla que dibuja el grid con las horas ya capturadas
+            }
             break;
 
         case 1:
@@ -335,173 +342,181 @@ function ValidarDroplist() {
     return flag;
 }
 
-//valida horas
+//valida horas ingresadas
 function ValidaHoras() {
     var validate = 0;
     var V_H;
 
     //Lunes
-    if ($("#TxtIniLun").val() != "" || $("#TxtFinLun").val() != "") {
-        V_ONE = 1;
-        V_H = Validahora($("#TxtIniLun").val(), $("#TxtFinLun").val());
+    if (WorkMonday == true) {
+        if ($("#TxtIniLun").val() != "" || $("#TxtFinLun").val() != "") {
+            V_ONE = 1;
+            V_H = Validahora($("#TxtIniLun").val(), $("#TxtFinLun").val());
 
-        switch (V_H) {
-            case 1:
-                validate = 1;
-                if (MensajeHora == "")
-                    MensajeHora = MensajeHora + " Lunes"
-                else
-                    MensajeHora = MensajeHora + ", Lunes"
-                break
+            switch (V_H) {
+                case 1:
+                    validate = 1;
+                    if (MensajeHora == "")
+                        MensajeHora = MensajeHora + " Lunes"
+                    else
+                        MensajeHora = MensajeHora + ", Lunes"
+                    break
 
-            case 2:
-                validate = 2;
-                if (MensajeHora == "")
-                    MensajeHora = MensajeHora + " Lunes"
-                else
-                    MensajeHora = MensajeHora + ", Lunes"
-                break
+                case 2:
+                    validate = 2;
+                    if (MensajeHora == "")
+                        MensajeHora = MensajeHora + " Lunes"
+                    else
+                        MensajeHora = MensajeHora + ", Lunes"
+                    break
+            }
         }
-
     }
+    
     //Martes
-    if ($("#TxtIniMar").val() != "" || $("#TxtFinMar").val() != "") {
-        V_ONE = 1;
-        V_H = Validahora($("#TxtIniMar").val(), $("#TxtFinMar").val());
+    if (WorkTuesday == true) {
+        if ($("#TxtIniMar").val() != "" || $("#TxtFinMar").val() != "") {
+            V_ONE = 1;
+            V_H = Validahora($("#TxtIniMar").val(), $("#TxtFinMar").val());
 
-        switch (V_H) {
-            case 1:
-                validate = 1;
-                if (MensajeHora == "")
-                    MensajeHora = MensajeHora + " Martes"
-                else
-                    MensajeHora = MensajeHora + ", Martes"
-                break
+            switch (V_H) {
+                case 1:
+                    validate = 1;
+                    if (MensajeHora == "")
+                        MensajeHora = MensajeHora + " Martes"
+                    else
+                        MensajeHora = MensajeHora + ", Martes"
+                    break
 
-            case 2:
-                validate = 2;
-                if (MensajeHora == "")
-                    MensajeHora = MensajeHora + " Martes"
-                else
-                    MensajeHora = MensajeHora + ", Martes"
-                break
+                case 2:
+                    validate = 2;
+                    if (MensajeHora == "")
+                        MensajeHora = MensajeHora + " Martes"
+                    else
+                        MensajeHora = MensajeHora + ", Martes"
+                    break
+            }
         }
-
     }
     //Miercoles
-    if ($("#TxtIniMie").val() != "" || $("#TxtFinMie").val() != "") {
-        V_ONE = 1;
-        V_H = Validahora($("#TxtIniMie").val(), $("#TxtFinMie").val());
+    if (WorkWednesday == true) {
+        if ($("#TxtIniMie").val() != "" || $("#TxtFinMie").val() != "") {
+            V_ONE = 1;
+            V_H = Validahora($("#TxtIniMie").val(), $("#TxtFinMie").val());
 
-        switch (V_H) {
-            case 1:
-                validate = 1;
-                if (MensajeHora == "")
-                    MensajeHora = MensajeHora + " Miercoles"
-                else
-                    MensajeHora = MensajeHora + ", Miercoles"
+            switch (V_H) {
+                case 1:
+                    validate = 1;
+                    if (MensajeHora == "")
+                        MensajeHora = MensajeHora + " Miercoles"
+                    else
+                        MensajeHora = MensajeHora + ", Miercoles"
 
-            case 2:
-                validate = 2;
-                if (MensajeHora == "")
-                    MensajeHora = MensajeHora + " Miercoles"
-                else
-                    MensajeHora = MensajeHora + ", Miercoles"
-                break
+                case 2:
+                    validate = 2;
+                    if (MensajeHora == "")
+                        MensajeHora = MensajeHora + " Miercoles"
+                    else
+                        MensajeHora = MensajeHora + ", Miercoles"
+                    break
+            }
         }
-
     }
     //Jueves
-    if ($("#TxtIniJue").val() != "" || $("#TxtFinJue").val() != "") {
-        V_ONE = 1;
-        V_H = Validahora($("#TxtIniJue").val(), $("#TxtFinJue").val());
+    if (WorkThursday == true) {
+        if ($("#TxtIniJue").val() != "" || $("#TxtFinJue").val() != "") {
+            V_ONE = 1;
+            V_H = Validahora($("#TxtIniJue").val(), $("#TxtFinJue").val());
 
-        switch (V_H) {
-            case 1:
-                validate = 1;
-                if (MensajeHora == "")
-                    MensajeHora = MensajeHora + " Jueves"
-                else
-                    MensajeHora = MensajeHora + ", Jueves"
+            switch (V_H) {
+                case 1:
+                    validate = 1;
+                    if (MensajeHora == "")
+                        MensajeHora = MensajeHora + " Jueves"
+                    else
+                        MensajeHora = MensajeHora + ", Jueves"
 
-            case 2:
-                validate = 2;
-                if (MensajeHora == "")
-                    MensajeHora = MensajeHora + " Jueves"
-                else
-                    MensajeHora = MensajeHora + ", Jueves"
-                break
+                case 2:
+                    validate = 2;
+                    if (MensajeHora == "")
+                        MensajeHora = MensajeHora + " Jueves"
+                    else
+                        MensajeHora = MensajeHora + ", Jueves"
+                    break
+            }
         }
-
     }
     //Viernes
-    if ($("#TxtIniVie").val() != "" || $("#TxtFinVie").val() != "") {
-        V_ONE = 1;
-        V_H = Validahora($("#TxtIniVie").val(), $("#TxtFinVie").val());
+    if (WorkFriday == true) {
+        if ($("#TxtIniVie").val() != "" || $("#TxtFinVie").val() != "") {
+            V_ONE = 1;
+            V_H = Validahora($("#TxtIniVie").val(), $("#TxtFinVie").val());
 
-        switch (V_H) {
-            case 1:
-                validate = 1;
-                if (MensajeHora == "")
-                    MensajeHora = MensajeHora + " Viernes"
-                else
-                    MensajeHora = MensajeHora + ", Viernes"
+            switch (V_H) {
+                case 1:
+                    validate = 1;
+                    if (MensajeHora == "")
+                        MensajeHora = MensajeHora + " Viernes"
+                    else
+                        MensajeHora = MensajeHora + ", Viernes"
 
-            case 2:
-                validate = 2;
-                if (MensajeHora == "")
-                    MensajeHora = MensajeHora + " Viernes"
-                else
-                    MensajeHora = MensajeHora + ", Viernes"
-                break
+                case 2:
+                    validate = 2;
+                    if (MensajeHora == "")
+                        MensajeHora = MensajeHora + " Viernes"
+                    else
+                        MensajeHora = MensajeHora + ", Viernes"
+                    break
+            }
         }
-
     }
-    //Sabado
-    if ($("#TxtIniSab").val() != "" || $("#TxtFinSab").val() != "") {
-        V_ONE = 1;
-        V_H = Validahora($("#TxtIniSab").val(), $("#TxtFinSab").val());
+    //Sábado
+    if (WorkSaturday == true) {
+        if ($("#TxtIniSab").val() != "" || $("#TxtFinSab").val() != "") {
+            V_ONE = 1;
+            V_H = Validahora($("#TxtIniSab").val(), $("#TxtFinSab").val());
 
-        switch (V_H) {
-            case 1:
-                validate = 1;
-                if (MensajeHora == "")
-                    MensajeHora = MensajeHora + " Sabado"
-                else
-                    MensajeHora = MensajeHora + ", Sabado"
+            switch (V_H) {
+                case 1:
+                    validate = 1;
+                    if (MensajeHora == "")
+                        MensajeHora = MensajeHora + " Sabado"
+                    else
+                        MensajeHora = MensajeHora + ", Sabado"
 
-            case 2:
-                validate = 2;
-                if (MensajeHora == "")
-                    MensajeHora = MensajeHora + " Sabado"
-                else
-                    MensajeHora = MensajeHora + ", Sabado"
-                break
+                case 2:
+                    validate = 2;
+                    if (MensajeHora == "")
+                        MensajeHora = MensajeHora + " Sabado"
+                    else
+                        MensajeHora = MensajeHora + ", Sabado"
+                    break
+            }
         }
-
     }
     //Domingo
-    if ($("#TxtIniDom").val() != "" || $("#TxtFinDom").val() != "") {
-        V_ONE = 1;
-        V_H = Validahora($("#TxtIniDom").val(), $("#TxtFinDom").val());
+    if (WorkSunday == true) {
+        if ($("#TxtIniDom").val() != "" || $("#TxtFinDom").val() != "") {
+            V_ONE = 1;
+            V_H = Validahora($("#TxtIniDom").val(), $("#TxtFinDom").val());
 
-        switch (V_H) {
-            case 1:
-                validate = 1;
-                if (MensajeHora == "")
-                    MensajeHora = MensajeHora + " Domingo"
-                else
-                    MensajeHora = MensajeHora + ", Domingo"
+            switch (V_H) {
+                case 1:
+                    validate = 1;
+                    if (MensajeHora == "")
+                        MensajeHora = MensajeHora + " Domingo"
+                    else
+                        MensajeHora = MensajeHora + ", Domingo"
 
-            case 2:
-                validate = 2;
-                if (MensajeHora == "")
-                    MensajeHora = MensajeHora + " Domingo"
-                else
-                    MensajeHora = MensajeHora + ", Domingo"
-                break
+                case 2:
+                    validate = 2;
+                    if (MensajeHora == "")
+                        MensajeHora = MensajeHora + " Domingo"
+                    else
+                        MensajeHora = MensajeHora + ", Domingo"
+                    break
+            }
         }
-
     }
 
     return validate;
@@ -605,7 +620,14 @@ function TGridCalendar() {
     $("#container_TGrid_2").html(html_Calendario);
 
     $("#TCalendario").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
+        "paging": false,
+        "ordering": false,
+        "info": false,
+        "aoColumnDefs": [
+          { 'bSortable': false, 'aTargets': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13] }
+        ],
+        "bJQueryUI": true,
+        "iDisplayLength": 1000,
         "bDestroy": true
     });
 }
@@ -743,6 +765,14 @@ function Clear() {
     MatrizFriday = [];
     MatrizSaturday = [];
     MatrizSunday = [];
+
+    WorkMonday = true;
+    WorkTuesday = true;
+    WorkWednesday = true;
+    WorkThursday = true;
+    WorkFriday = true;
+    WorkSaturday = true;
+    WorkSunday = true;
 
     $("#Select_EmpresaNit").val("-1");
     $("#Txt_ID").val("");
@@ -895,74 +925,102 @@ function Change_StateDay(Obj) {
                     $("#TxtFinLun").prop('disabled', true);
                     $("#TxtIniLun").val("");
                     $("#TxtFinLun").val("");
+                    WorkMonday = false;
                     break;
                 case "Select_StateMar":
                     $("#TxtIniMar").prop('disabled', true);
                     $("#TxtFinMar").prop('disabled', true);
                     $("#TxtIniMar").val("");
                     $("#TxtFinMar").val("");
+                    WorkTuesday = false;
                     break;
                 case "Select_StateMie":
                     $("#TxtIniMie").prop('disabled', true);
                     $("#TxtFinMie").prop('disabled', true);
                     $("#TxtIniMie").val("");
                     $("#TxtFinMie").val("");
+                    WorkWednesday = false;
                     break;
                 case "Select_StateJue":
                     $("#TxtIniJue").prop('disabled', true);
                     $("#TxtFinJue").prop('disabled', true);
                     $("#TxtIniJue").val("");
                     $("#TxtFinJue").val("");
+                    WorkThursday = false;
                     break;
                 case "Select_StateVie":
                     $("#TxtIniVie").prop('disabled', true);
                     $("#TxtFinVie").prop('disabled', true);
                     $("#TxtIniVie").val("");
                     $("#TxtFinVie").val("");
+                    WorkFriday = false;
                     break;
                 case "Select_StateSab":
                     $("#TxtIniSab").prop('disabled', true);
                     $("#TxtFinSab").prop('disabled', true);
                     $("#TxtIniSab").val("");
                     $("#TxtFinSab").val("");
+                    WorkSaturday = false;
                     break;
                 case "Select_StateDom":
                     $("#TxtIniDom").prop('disabled', true);
                     $("#TxtFinDom").prop('disabled', true);
                     $("#TxtIniDom").val("");
                     $("#TxtFinDom").val("");
+                    WorkSunday = false;
                     break;
             }
-            //Sino desbloqueamos si antes se habia bloqueado
+            //Sino desbloqueamos si antes se habia bloqueado y cambiamos la variable
         } else if ($(this).val() == "N") {
             switch (Obj) {
                 case "Select_StateLun":
                     $("#TxtIniLun").prop('disabled', false);
                     $("#TxtFinLun").prop('disabled', false);
+                    $("#TxtIniLun").val("");
+                    $("#TxtFinLun").val("");
+                    WorkMonday = true;
                     break;
                 case "Select_StateMar":
                     $("#TxtIniMar").prop('disabled', false);
                     $("#TxtFinMar").prop('disabled', false);
+                    $("#TxtIniMar").val("");
+                    $("#TxtFinMar").val("");
+                    WorkTuesday = true;
                     break;
                 case "Select_StateMie":
                     $("#TxtIniMie").prop('disabled', false);
                     $("#TxtFinMie").prop('disabled', false);
+                    $("#TxtIniMie").val("");
+                    $("#TxtFinMie").val("");
+                    WorkWednesday = true;
                     break;
                 case "Select_StateJue":
                     $("#TxtIniJue").prop('disabled', false);
                     $("#TxtFinJue").prop('disabled', false);
+                    $("#TxtIniJue").val("");
+                    $("#TxtFinJue").val("");
+                    WorkThursday = true;
                     break;
                 case "Select_StateVie":
                     $("#TxtIniVie").prop('disabled', false);
                     $("#TxtFinVie").prop('disabled', false);
+                    $("#TxtIniVie").val("");
+                    $("#TxtFinVie").val("");
+                    WorkFriday = true;
                     break;
                 case "Select_StateSab":
                     $("#TxtIniSab").prop('disabled', false);
                     $("#TxtFinSab").prop('disabled', false);
+                    $("#TxtIniSab").val("");
+                    $("#TxtFinSab").val("");
+                    WorkSaturday = true;
                     break;
                 case "Select_StateDom":
                     $("#TxtIniDom").prop('disabled', false);
                     $("#TxtFinDom").prop('disabled', false);
+                    $("#TxtIniDom").val("");
+                    $("#TxtFinDom").val("");
+                    WorkSunday = true;
                     break;
             }
         }

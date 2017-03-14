@@ -144,7 +144,7 @@
                     </td>
                     <td style="width: 6%; min-width: 60px;">
                         <span class="cssToolTip_Form">
-                            <input type="text" id="Txt_ID" maxlength="5" class="Numeric" style="width: 100%;" onkeyup="VerifyTextID(this.value)" />
+                            <input type="text" id="Txt_ID" maxlength="5" class="Numeric" style="width: 100%;" onkeypress="return OnlyNumbers(event);" onkeyup="VerifyTextID(this.value)" />
                             <span class="Spam_AN"></span></span>
                     </td>
                     <td style="padding-bottom: 25px; width: 98%;">
@@ -161,7 +161,7 @@
                     </td>
                     <td style="width: 30%; min-width: 100px;">
                         <span class="cssToolTip_Form">
-                            <input type="text" id="TxtDescription" maxlength="50" style="width: 100%;" onkeyup="VerifyTextDescription(this.value)" />
+                            <input type="text" id="TxtDescription" maxlength="50" style="width: 100%;" onkeypress="return LettersNumbersSpecial(event);" onkeyup="VerifyTextDescription(this.value)" />
                             <span class="Spam_AST"></span></span>
                     </td>
                     <td style="padding-bottom: 25px; width: 80%;">
@@ -496,7 +496,7 @@
                 </td>
                 <td style="width: 6%; min-width: 60px;">
                     <span class="cssToolTip_Form">
-                        <input type="text" id="TXTHours" maxlength="2" class="Numeric" style="width: 100%;" onkeyup="ValidaHour(this.value, this);" />
+                        <input type="text" id="TXTHours" maxlength="2" class="Numeric" onkeypress="return OnlyNumbers(event);" style="width: 100%;" onkeyup="ValidaHour(this.value, this);" />
                         <span class="Spam_AN"></span></span>
                 </td>
                 <td style="padding-bottom: 25px; width: 40%;">
@@ -513,7 +513,7 @@
                 </td>
                 <td style="width: 6%; min-width: 60px;">
                     <span class="cssToolTip_Form">
-                        <input type="text" id="TXTMinutes" maxlength="2" class="Numeric" style="width: 100%;" onkeyup="ValidaMinute(this.value, this);" />
+                        <input type="text" id="TXTMinutes" maxlength="2" onkeypress="return OnlyNumbers(event);" class="Numeric" style="width: 100%;" onkeyup="ValidaMinute(this.value, this);" />
                         <span class="Spam_AN"></span></span>
                 </td>
                 <td style="padding-bottom: 25px; width: 40%;">

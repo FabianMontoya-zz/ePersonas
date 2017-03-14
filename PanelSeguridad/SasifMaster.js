@@ -41,7 +41,7 @@ $(document).ready(function () {
 
     $(".C_Chosen").chosen({
         width: "100%",
-        placeholder: 'Select an option',
+        placeholder: 'Seleccione una opción',
         search_contains: true
     });
 
@@ -72,6 +72,107 @@ $(document).ready(function () {
     ready();
 
 });
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                      VALIDADORES EN ONKEYPRESS                                                                                                          ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+//Se utiliza para que el campo de texto solo acepte numeros
+function OnlyNumbers(evt) {
+    if (window.event) {//asignamos el valor de la tecla a keynum
+        keynum = evt.keyCode; //IE
+    }
+    else {
+        keynum = evt.which; //FF
+    }
+    //comprobamos si se encuentra en el rango numérico y que teclas no recibirá.
+    if ((keynum > 47 && keynum < 58) || keynum == 8 || keynum == 13 || keynum == 6) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+//Se utiliza para que el campo de texto solo acepte letras(Abecedario latino)-espacios
+function OnlyLetters(e) {
+    key = e.keyCode || e.which;
+    tecla = String.fromCharCode(key).toString();
+    letras = " áéíóúabcdefghijklmnñopqrstuvwxyzÁÉÍÓÚABCDEFGHIJKLMNÑOPQRSTUVWXYZ";//Se define todo el abecedario que se quiere que se muestre.
+    especiales = [8, 37, 39, 46, 6]; //Es la validación del KeyCodes, que teclas recibe el campo de texto.
+
+    tecla_especial = false
+    for (var i in especiales) {
+        if (key == especiales[i]) {
+            tecla_especial = true;
+            break;
+        }
+    }
+
+    if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+        return false;
+    }
+}
+
+//Se utiliza para que el campo de texto solo acepte letras-letras especiales-espacios
+function OnlySpecialLetters(e) {
+    key = e.keyCode || e.which;
+    tecla = String.fromCharCode(key).toString();
+    letras = " ÁÉÍÓÚABCDEFGHIJKLMNÑOPQRSTUVWXYZÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛabcdefghijklmnñopqrstuvwxyzãàáäâèéëêìíïîòóöôùúüûÑñÇç";//Se define todo el abecedario que se quiere que se muestre.
+    especiales = [8, 37, 39, 46, 6]; //Es la validación del KeyCodes, que teclas recibe el campo de texto.
+
+    tecla_especial = false
+    for (var i in especiales) {
+        if (key == especiales[i]) {
+            tecla_especial = true;
+            break;
+        }
+    }
+
+    if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+        return false;
+    }
+}
+
+//Se utiliza para que el campo de texto solo acepte letras(Abecedario latino)-números
+function OnlyLettersNumbers(e) {
+    key = e.keyCode || e.which;
+    tecla = String.fromCharCode(key).toString();
+    letras = "0123456789áéíóúabcdefghijklmnñopqrstuvwxyzÁÉÍÓÚABCDEFGHIJKLMNÑOPQRSTUVWXYZ";//Se define todo el abecedario que se quiere que se muestre.
+    especiales = [8, 37, 39, 46, 6]; //Es la validación del KeyCodes, que teclas recibe el campo de texto.
+
+    tecla_especial = false
+    for (var i in especiales) {
+        if (key == especiales[i]) {
+            tecla_especial = true;
+            break;
+        }
+    }
+
+    if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+        return false;
+    }
+}
+
+//Se utiliza para que el campo de texto acepte letras-letras especiales-números-espacios
+function LettersNumbersSpecial(e) {
+    key = e.keyCode || e.which;
+    tecla = String.fromCharCode(key).toString();
+    letras = " 0123456789ÁÉÍÓÚABCDEFGHIJKLMNÑOPQRSTUVWXYZÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛabcdefghijklmnñopqrstuvwxyzãàáäâèéëêìíïîòóöôùúüûÇç";//Se define todo el abecedario que se quiere que se muestre.
+    especiales = [8, 37, 39, 46, 6]; //Es la validación del KeyCodes, que teclas recibe el campo de texto.
+
+    tecla_especial = false
+    for (var i in especiales) {
+        if (key == especiales[i]) {
+            tecla_especial = true;
+            break;
+        }
+    }
+
+    if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+        return false;
+    }
+}
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                 BOTONES GLOBALES                                                                                                            ----*/
