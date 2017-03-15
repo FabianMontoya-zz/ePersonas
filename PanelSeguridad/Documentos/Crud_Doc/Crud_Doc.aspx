@@ -41,8 +41,8 @@
             </tr>
         </table>
     </div>
-    <div id="Marco_Container">
-        <div id="Marco_trabajo_Form">
+    <div class="Marco_Container">
+        <div class="Marco_trabajo_Form">
             <div id="Container_controls">
                 <div id="TablaDatos_D">
                     <table id="Tabla_1" style="width: 700px; text-align: left;">

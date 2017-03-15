@@ -31,7 +31,7 @@
             </tr>
         </table>
     </div>
-    <div id="Marco_Container">
+    <div class="Marco_Container">
         <div id="Container_controls">
             <div id="TablaDatos_D">
                 <table id="Tabla_1" style="width: 100%; text-align: left;">

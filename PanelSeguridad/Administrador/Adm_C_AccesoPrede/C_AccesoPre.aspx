@@ -44,14 +44,14 @@
             </tr>
         </table>
     </div>
-    <div id="Marco_Container">
-        <div id="Marco_btn_Form">
+    <div class="Marco_Container">
+        <div class="Marco_btn_Form">>
             <input id="BtnShearh" type="button" value="Consulta" onclick="HabilitarPanel('buscar');" />
             <input id="BtnCreate" type="button" value="Crear" onclick="HabilitarPanel('crear');" />
             <input id="BtnUpdate" type="button" value="Actualizar" onclick="HabilitarPanel('modificar');" />
             <input id="BtnDelete" type="button" value="Eliminar" onclick="HabilitarPanel('eliminar');" />
         </div>
-        <div id="Marco_trabajo_Form">
+        <div class="Marco_trabajo_Form">
             <div id="Container_controls">
                 <table id="TablaConsulta">
                     <tr>

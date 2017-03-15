@@ -32,15 +32,15 @@
             </tr>
         </table>
     </div>
-    <div id="Marco_Container">
+    <div class="Marco_Container">
 
-        <div id="Marco_btn_Form">
+        <div class="Marco_btn_Form">>
             <input id="BtnShearh" type="button" value="Consulta" onclick="HabilitarPanel('buscar');" />
             <input id="BtnCreate" type="button" value="Crear" onclick="HabilitarPanel('crear');" />
             <input id="BtnUpdate" type="button" value="Actualizar" onclick="HabilitarPanel('modificar');" />
         </div>
 
-        <div id="Marco_trabajo_Form" style="height: 85%;">
+        <div class="Marco_trabajo_Form" style="height: 85%;">
             <div id="Container_controls">
                 <table id="TablaConsulta">
                     <tr>

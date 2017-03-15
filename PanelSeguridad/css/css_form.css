@@ -1,4 +1,13 @@
-﻿/*----------------------- TITULO ---------------------------*/
+﻿/*-- DIV PARTE CONTAINER PAGINA ---*/
+#panel_pag {
+    vertical-align: text-top;
+    padding-left: 30px;
+    width: 100%;
+}
+
+/************************************************************************************
+BARRA DE TITULO 
+*************************************************************************************/
 /*personalizacion de la barra de titulo*/
 .Container_title_Form {
     background: -webkit-linear-gradient(#b70d0d, #631111); /*For Safari 5.1 to 6.0 */
@@ -15,22 +24,145 @@
     position: absolute;
 }
 
+/*-- TABLE TITULO CONTENT---*/
 #Tabla_Title_form {
     width: 100%;
 }
 
+/************************************************************************************
+CONTENEDOR DE FORMULARIO
+*************************************************************************************/
+/*-- DIV CONTENT PRINCIPAL---*/
+.Marco_Container {
+    margin-top: 35px;
+    margin-left: 25px;
+    padding: 14px 14px;
+    background: -webkit-linear-gradient(#f6f6f6, #e8e8e8); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#f6f6f6, #e8e8e8); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#f6f6f6, #e8e8e8); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#f6f6f6, #e8e8e8); /* Standard syntax (must be last)*/
+    border-radius: 5px;
+    border: solid 1px #ccc;
+    width: 92.5%;
+    height: 72%;
+    position: absolute;
+}
+
+/*-- DIV CONTENT BOTONES ADMINISTRACION---*/
+.Marco_btn_Form {
+    margin-top: 1px;
+    padding: 20px 20px;
+    background-color: silver;
+    border-radius: 10px;
+    background: -webkit-linear-gradient(#f6f6f6, #e8e8e8); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#f6f6f6, #e8e8e8); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#f6f6f6, #e8e8e8); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#f6f6f6, #e8e8e8); /* Standard syntax (must be last)*/
+    border: solid 1px #ccc;
+    width: 97%;
+    height: 7%;
+    text-align: center;
+}
+
+
+/*-- DIV CONTENT AREA DE TRABAJO---*/
+.Marco_trabajo_Form {
+    position: relative;
+    margin-top: 10px;
+    padding: 20px 20px;
+    border-radius: 10px;
+    background: -webkit-linear-gradient(#f6f6f6, #e8e8e8); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#f6f6f6, #e8e8e8); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#f6f6f6, #e8e8e8); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#f6f6f6, #e8e8e8); /* Standard syntax (must be last)*/
+    border: solid 1px #ccc;
+    width: 97%;
+    height: 430px;
+    overflow: auto;
+}
+/************************************************************************************
+MEDIA QUERIES
+*************************************************************************************/
 /* para 980px o menos horizontal*/
 @media screen and (max-width: 980px) {
     .Container_title_Form {
-        width: 94.5%;
+        width: 92%;
+    }
+
+    .Marco_Container {
+        width: 89%;
+    }
+
+    .Marco_btn_Form {
+        width: 95%;
+    }
+
+    .Marco_trabajo_Form {
+        width: 95%;
+    }
+}
+
+/* para 700px o menos */
+@media screen and (max-width: 700px) {
+    .Container_title_Form {
+        width: 89%;
+    }
+
+    .Marco_Container {
+        width: 85.7%;
+    }
+
+    .Marco_btn_Form {
+        width: 92%;
+    }
+
+    .Marco_trabajo_Form {
+        width: 92%;
+    }
+}
+
+/* para 550px o menos */
+@media screen and (max-width: 550px) {
+    .Container_title_Form {
+        width: 87%;
+    }
+
+    .Marco_Container {
+        width: 82.7%;
+    }
+
+    .Marco_btn_Form {
+        width: 90%;
+        height: 10%;
+    }
+
+    .Marco_trabajo_Form {
+        width: 90%;
     }
 }
 
 /* para 480px o menos */
 @media screen and (max-width: 480px) {
     .Container_title_Form {
-        width: 96.5%;
+        width: 95.5%;
         margin-left: -30px;
+    }
+
+    .Marco_Container {
+        width: 86.5%;
+        margin-left: -30px;
+    }
+
+    .Marco_btn_Form {
+        width: 83%;
+    }
+
+    .Marco_trabajo_Form {
+        width: 83%;
+    }
+
+    input[type='button'] {
+        width: 80px;
     }
 }
 
@@ -50,16 +182,8 @@
     content: url("../../images/agenda.png");
 }
 
-
-
-
 #image_exit {
     text-align: end;
-}
-
-#panel_pag {
-    vertical-align: text-top;
-    padding-left: 30px;
 }
 
 .T_head {
@@ -78,50 +202,8 @@
 /*----------------------- TITULO ---------------------------*/
 /*personalizacion marco del formulario*/
 
-#Marco_Container {
-    margin-top: 35px;
-    margin-left: 25px;
-    padding: 14px 14px;
-    background: -webkit-linear-gradient(#f6f6f6, #e8e8e8); /*For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#f6f6f6, #e8e8e8); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#f6f6f6, #e8e8e8); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#f6f6f6, #e8e8e8); /* Standard syntax (must be last)*/
-    border-radius: 5px;
-    border: solid 1px #ccc;
-    width: 92.5%;
-    height: 40%;
-    position: absolute;
-}
 
-#Marco_btn_Form {
-    margin-top: 1px;
-    padding: 20px 20px;
-    background-color: silver;
-    border-radius: 10px;
-    background: -webkit-linear-gradient(#f6f6f6, #e8e8e8); /*For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#f6f6f6, #e8e8e8); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#f6f6f6, #e8e8e8); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#f6f6f6, #e8e8e8); /* Standard syntax (must be last)*/
-    border: solid 1px #ccc;
-    width: 97%;
-    height: 10%;
-    text-align: center;
-}
 
-#Marco_trabajo_Form {
-    position: relative;
-    margin-top: 10px;
-    padding: 20px 20px;
-    border-radius: 10px;
-    background: -webkit-linear-gradient(#f6f6f6, #e8e8e8); /*For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#f6f6f6, #e8e8e8); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#f6f6f6, #e8e8e8); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#f6f6f6, #e8e8e8); /* Standard syntax (must be last)*/
-    border: solid 1px #ccc;
-    width: 97%;
-    height: 430px;
-    overflow: auto;
-}
 
 #Marco_trabajo_Huella {
     position: relative;
