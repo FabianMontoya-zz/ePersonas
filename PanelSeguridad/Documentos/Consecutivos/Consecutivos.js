@@ -61,7 +61,7 @@ function Ventanas_Emergentes() {
 
 //Función que oculta las tablas
 function Ocultar_Tablas() {
-    $("#TablaDatos_D").css("display", "none");
+    $(".Dialog_Datos").css("display", "none");
     $("#TablaConsulta").css("display", "none");
 }
 
@@ -71,7 +71,7 @@ function HabilitarPanel(opcion) {
     switch (opcion) {
 
         case "crear":
-            $("#TablaDatos_D").css("display", "inline-table");
+            $(".Dialog_Datos").css("display", "inline-table");
             $("#TablaConsulta").css("display", "none");
             $("#Select_EmpresaNit").removeAttr("disabled");
             $("#Txt_ID").removeAttr("disabled");
@@ -84,7 +84,7 @@ function HabilitarPanel(opcion) {
             break;
 
         case "buscar":
-            $("#TablaDatos_D").css("display", "none");
+            $(".Dialog_Datos").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TConsecutivos").html("");
             estado = opcion;
@@ -92,7 +92,7 @@ function HabilitarPanel(opcion) {
             break;
 
         case "modificar":
-            $("#TablaDatos_D").css("display", "none");
+            $(".Dialog_Datos").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TConsecutivos").html("");
             estado = opcion;
@@ -101,7 +101,7 @@ function HabilitarPanel(opcion) {
             break;
 
         case "eliminar":
-            $("#TablaDatos_D").css("display", "none");
+            $(".Dialog_Datos").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TConsecutivos").html("");
             estado = opcion;
@@ -280,7 +280,7 @@ function Eliminar(Index) {
 // muestra el registro a editar
 function Editar(Index) {
 
-    $("#TablaDatos_D").css("display", "inline-table");
+    $(".Dialog_Datos").css("display", "inline-table");
     $("#TablaConsulta").css("display", "none");
 
     editNit_ID = ArrayConsecutivos[Index].Nit_ID;

@@ -49,14 +49,14 @@
         </table>
     </div>
     <div class="Marco_Container">
-        <div class="Marco_btn_Form">>
+       <div class="Marco_btn_Form">
             <input id="BtnShearh" type="button" value="Consulta" onclick="HabilitarPanel('buscar');" />
             <input id="BtnCreate" type="button" value="Crear" onclick="HabilitarPanel('crear');" />
             <input id="BtnUpdate" type="button" value="Actualizar" onclick="HabilitarPanel('modificar');" />
             <input id="BtnDelete" type="button" value="Eliminar" onclick="HabilitarPanel('eliminar');" />
         </div>
         <div class="Marco_trabajo_Form">
-            <div id="Container_controls">
+            <div class="Container_controls">
                 <table id="TablaConsulta">
                     <tr>
                         <td id="TD1" style="width: 25%;">
@@ -87,7 +87,7 @@
         </div>
     </div>
     <div id="Dialog_Calendar">
-        <div id="TablaDatos_D_Calen">
+        <div class="Dialog_Datos_Calen">
             <table id="Tabla_1" style="width: 100%; text-align: left;">
                 <tr>
                     <td style="width: 10.5%;" class="Label_Bold">NIT Empresa

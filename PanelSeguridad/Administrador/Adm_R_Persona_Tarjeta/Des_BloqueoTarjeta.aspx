@@ -32,8 +32,8 @@
         </table>
     </div>
     <div class="Marco_Container">
-        <div id="Container_controls">
-            <div id="TablaDatos_D">
+        <div class="Container_controls">
+            <div class="Dialog_Datos">
                 <table id="Tabla_1" style="width: 100%; text-align: left;">
                     <tr>
                         <td style="width: 5%;" class="Label_Bold">Empresa 

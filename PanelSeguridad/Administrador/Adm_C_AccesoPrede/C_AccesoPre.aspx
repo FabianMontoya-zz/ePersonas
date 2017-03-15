@@ -21,7 +21,7 @@
     <script src="../../Scripts/Dialog/datepicker.js" type="text/javascript"></script>
     <script src="../../Scripts/Dialog/timepicker.js" type="text/javascript"></script>
     <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
-    <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" type="text/css" /> 
+    <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" type="text/css" />
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
@@ -45,14 +45,14 @@
         </table>
     </div>
     <div class="Marco_Container">
-        <div class="Marco_btn_Form">>
+        <div class="Marco_btn_Form">
             <input id="BtnShearh" type="button" value="Consulta" onclick="HabilitarPanel('buscar');" />
             <input id="BtnCreate" type="button" value="Crear" onclick="HabilitarPanel('crear');" />
             <input id="BtnUpdate" type="button" value="Actualizar" onclick="HabilitarPanel('modificar');" />
             <input id="BtnDelete" type="button" value="Eliminar" onclick="HabilitarPanel('eliminar');" />
         </div>
         <div class="Marco_trabajo_Form">
-            <div id="Container_controls">
+            <div class="Container_controls">
                 <table id="TablaConsulta">
                     <tr>
                         <td style="width: 25%;">
@@ -79,56 +79,7 @@
                         </td>
                     </tr>
                 </table>
-                <div id="TablaDatos_D">
-                    <table id="TablaDatos1" style="width: 700px;">
-                        <tr>
-                            <td class="Label_Bold" style="width: 80px;">Pais
-                            </td>
-                            <td colspan="2">
-                                <select id="Select_Pais" class="C_Chosen">
-                                </select>
-                            </td>
-                            <td style="width: 100px; padding-bottom: 25px;">
-                                <span class="cssToolTip_L">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img14"
-                                        src="../../images/error.png" />
-                                    <span class="SpamEG"></span></span>
-                            </td>
-                        </tr>
-                    </table>
-                    <table id="TableDatos2" style="width: 700px;">
-                        <tr>
-                            <td class="Label_Bold" style="width: 80px;">Codigo
-                            </td>
-                            <td style="width: 80px;">
-                                <span class="cssToolTip_Form">
-                                    <input type="text" id="Txt_ID" maxlength="5" class="Numeric" style="width: 80px;" />
-                                    <span class="Spam_AN"></span></span>
-                            </td>
-                            <td style="width: 50px; padding-bottom: 25px;">
-                                <span class="cssToolTip">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img15"
-                                        src="../../images/error.png" />
-                                    <span class="SpamEG"></span></span>
-                            </td>
-                            <td class="Label_Bold" style="width: 20px;">Nombre
-                            </td>
-                            <td style="width: 330px;">
-                                <span class="cssToolTip_Form">
-                                    <input type="text" id="TxtDescription" maxlength="50" style="width: 280px;" />
-                                    <span class="Spam_AST"></span></span>
-                            </td>
-                            <td style="width: 50px; padding-bottom: 25px;">
-                                <span class="cssToolTip">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img16"
-                                        src="../../images/error.png" />
-                                    <span class="SpamEG"></span></span>
-                            </td>
-                        </tr>
-                    </table>
-                    <div id="controls_X" style="width: 90%; text-align: center; margin: 20px;">
-                        <input id="Button1" type="button" value="Guardar" onclick="BtnCrear();" />
-                    </div>
+                <div class="Dialog_Datos">
                 </div>
             </div>
         </div>

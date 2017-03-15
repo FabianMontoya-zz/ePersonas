@@ -124,7 +124,7 @@
                     </tr>
                 </table>
             </div>
-            <div id="Container_controls">
+            <div class="Container_controls">
                 <div id="Acordeon_Salida" style="width: 100%;">
                     <h3>Registros De Ingreso 
                     </h3>

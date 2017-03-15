@@ -64,7 +64,6 @@ CONTENEDOR DE FORMULARIO
     text-align: center;
 }
 
-
 /*-- DIV CONTENT AREA DE TRABAJO---*/
 .Marco_trabajo_Form {
     position: relative;
@@ -78,6 +77,49 @@ CONTENEDOR DE FORMULARIO
     border: solid 1px #ccc;
     width: 97%;
     height: 430px;
+    overflow: auto;
+}
+
+/*-- DIV CONTENT AREA DE DATOS CONSULTA---*/
+.Container_controls {
+    width: 100%;
+}
+
+/*-- TABLA FILTRO DE CONSULTA---*/
+#TablaConsulta {
+    width: 100%;
+    padding: 20px 26px;
+    border-radius: 10px;
+    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+    border: solid 1px #921919;
+}
+
+/*-- TABLA CREACION DE DATOS---*/
+#TablaDatos {
+    width: 100%;
+    padding: 20px 26px;
+    border-radius: 10px;
+    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+    border: solid 1px #921919;
+}
+
+/*-- DIALOGO CREACION DE DATOS---*/
+.Dialog_Datos, .Dialog_Datos_Vista {
+    width: 96%;
+    height: 100%;
+    padding: 2%;
+    border-radius: 10px;
+    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+    border: solid 1px #921919;
     overflow: auto;
 }
 /************************************************************************************
@@ -166,10 +208,23 @@ MEDIA QUERIES
     }
 }
 
-
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*                                                               ADMININSTRACION PARAMETRIZABLE                                                               */
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+.Dialog_Datos_Calen {
+    width: 1120px;
+    height: 350px;
+    overflow: auto;
+    padding: 40px 30px;
+    border-radius: 10px;
+    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+    border: solid 1px #921919;
+}
 
 /*CONTROL IMAGEN DIRECCION*/
 #logoExt:hover .Ext {
@@ -220,31 +275,8 @@ MEDIA QUERIES
 /*personalizacion de los formularios internos*/
 
 
-#TablaDatos {
-    width: 100%;
-    padding: 20px 26px;
-    border-radius: 10px;
-    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
-    border: solid 1px #921919;
-}
 
-#TablaDatos_D, #TablaDatos_D_Vista {
-    width: 96%;
-    height: 100%;
-    padding: 2%;
-    border-radius: 10px;
-    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
-    border: solid 1px #921919;
-    overflow: auto;
-}
-
-#TablaDatos_D_Max {
+.Dialog_Datos_Max {
     width: 860px;
     height: 380px;
     overflow: auto;
@@ -257,18 +289,6 @@ MEDIA QUERIES
     border: solid 1px #921919;
 }
 
-#TablaDatos_D_Calen {
-    width: 1120px;
-    height: 350px;
-    overflow: auto;
-    padding: 40px 30px;
-    border-radius: 10px;
-    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
-    border: solid 1px #921919;
-}
 
 #TablaProductos_D {
     width: 985px;
@@ -293,16 +313,7 @@ MEDIA QUERIES
     border: solid 1px #921919;
 }
 
-#TablaConsulta {
-    width: 100%;
-    padding: 20px 26px;
-    border-radius: 10px;
-    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
-    border: solid 1px #921919;
-}
+
 
 /*personalizacion de las cajas de texto */
 #TxtRuta {
@@ -353,10 +364,6 @@ MEDIA QUERIES
     border: solid 1px #CACACA;
     font: 12px/20px CenturyGothic,sans-serif;
     text-align: center;
-}
-
-#Container_controls {
-    width: 100%;
 }
 
 #Container_Consulta, #Container_Facturas, #container_TCiclo {

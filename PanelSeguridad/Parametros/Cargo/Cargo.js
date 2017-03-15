@@ -67,7 +67,7 @@ function Ocultar_Errores() {
 
 //Función que oculta las tablas
 function Ocultar_Tablas() {
-    $("#TablaDatos_D").css("display", "none");
+    $(".Dialog_Datos").css("display", "none");
     $("#TablaConsulta").css("display", "none");
 }
 
@@ -154,7 +154,7 @@ function HabilitarPanel(opcion) {
     switch (opcion) {
 
         case "crear":
-            $("#TablaDatos_D").css("display", "inline-table");
+            $(".Dialog_Datos").css("display", "inline-table");
             $("#TablaConsulta").css("display", "none");
             $("#Select_EmpresaNit").removeAttr("disabled");
             $("#Txt_ID").removeAttr("disabled");
@@ -173,7 +173,7 @@ function HabilitarPanel(opcion) {
             break;
 
         case "buscar":
-            $("#TablaDatos_D").css("display", "none");
+            $(".Dialog_Datos").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TCargo").html("");
             estado = opcion;
@@ -181,7 +181,7 @@ function HabilitarPanel(opcion) {
             break;
 
         case "modificar":
-            $("#TablaDatos_D").css("display", "none");
+            $(".Dialog_Datos").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TCargo").html("");
             estado = opcion;
@@ -190,7 +190,7 @@ function HabilitarPanel(opcion) {
             break;
 
         case "eliminar":
-            $("#TablaDatos_D").css("display", "none");
+            $(".Dialog_Datos").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TCargo").html("");
             estado = opcion;
@@ -342,7 +342,7 @@ function Eliminar(vp_index) {
 // muestra el registro a editar
 function Editar(vp_index) {
 
-    $("#TablaDatos_D").css("display", "inline-table");
+    $(".Dialog_Datos").css("display", "inline-table");
     $("#TablaConsulta").css("display", "none");
 
     editNit_ID = ArrayCargo[vp_index].Nit_ID;

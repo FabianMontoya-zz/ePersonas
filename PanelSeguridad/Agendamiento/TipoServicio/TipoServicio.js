@@ -103,7 +103,7 @@ function Ocultar_Errores() {
 //Función que oculta las tablas
 function Ocultar_Tablas() {
     $("#TablaConsulta").css("display", "none");
-    $("#TablaDatos_D").css("display", "none");
+    $(".Dialog_Datos").css("display", "none");
 }
 
 //carga el combo de Cargo dependiente
@@ -223,7 +223,7 @@ function HabilitarPanel(opcion) {
     switch (opcion) {
 
         case "crear":
-            $("#TablaDatos_D").css("display", "inline-table");
+            $(".Dialog_Datos").css("display", "inline-table");
             $("#TablaConsulta").css("display", "none");
             $("#Select_EmpresaNit").removeAttr("disabled");
             $("#Txt_ID").removeAttr("disabled");
@@ -247,7 +247,7 @@ function HabilitarPanel(opcion) {
             break;
 
         case "buscar":
-            $("#TablaDatos_D").css("display", "none");
+            $(".Dialog_Datos").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TServicio").html("");
             $("#foto_servicio").css("display", "none");
@@ -258,7 +258,7 @@ function HabilitarPanel(opcion) {
         case "modificar":
             $("#IF_Visor").css("display", "none");
             $("#foto_servicio").css("display", "none");
-            $("#TablaDatos_D").css("display", "none");
+            $(".Dialog_Datos").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TServicio").html("");
             estado = opcion;
@@ -268,7 +268,7 @@ function HabilitarPanel(opcion) {
             break;
 
         case "eliminar":
-            $("#TablaDatos_D").css("display", "none");
+            $(".Dialog_Datos").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TServicio").html("");
             $("#foto_servicio").css("display", "none");
@@ -430,7 +430,7 @@ function Eliminar(index_Nit, index_Servicio) {
 // muestra el registro a editar
 function Editar(index_Nit, index_Servicio) {
 
-    $("#TablaDatos_D").css("display", "inline-table");
+    $(".Dialog_Datos").css("display", "inline-table");
     $("#TablaConsulta").css("display", "none");
     $("#IF_Visor").css("display", "inline-table");
     $("#foto_servicio").css("display", "inline-table");

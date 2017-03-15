@@ -76,8 +76,8 @@ function Ventanas_Emergentes() {
 
 //Función que oculta las tablas
 function Ocultar_Tablas() {
-    $("#TablaDatos_D").css("display", "none");
-    $("#TablaDatos_D_Vista").css("display", "none");
+    $(".Dialog_Datos").css("display", "none");
+    $(".Dialog_Datos_Vista").css("display", "none");
     $("#TablaConsulta").css("display", "none");
     $("#TxtDiaVigencia").attr("disabled", "disabled");
 }
@@ -88,8 +88,8 @@ function HabilitarPanel(opcion) {
     switch (opcion) {
 
         case "crear":
-            $("#TablaDatos_D").css("display", "inline-table");
-            $("#TablaDatos_D_Vista").css("display", "none");
+            $(".Dialog_Datos").css("display", "inline-table");
+            $(".Dialog_Datos_Vista").css("display", "none");
             $("#TablaConsulta").css("display", "none");
             $("#Select_EmpresaNit").removeAttr("disabled");
             $("#Txt_ID").removeAttr("disabled");
@@ -108,8 +108,8 @@ function HabilitarPanel(opcion) {
             break;
 
         case "buscar":
-            $("#TablaDatos_D").css("display", "none");
-            $("#TablaDatos_D_Vista").css("display", "none");
+            $(".Dialog_Datos").css("display", "none");
+            $(".Dialog_Datos_Vista").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TDocumento").html("");
             estado = opcion;
@@ -117,8 +117,8 @@ function HabilitarPanel(opcion) {
             break;
 
         case "modificar":
-            $("#TablaDatos_D").css("display", "none");
-            $("#TablaDatos_D_Vista").css("display", "none");
+            $(".Dialog_Datos").css("display", "none");
+            $(".Dialog_Datos_Vista").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TDocumento").html("");
             estado = opcion;
@@ -127,8 +127,8 @@ function HabilitarPanel(opcion) {
             break;
 
         case "eliminar":
-            $("#TablaDatos_D").css("display", "none");
-            $("#TablaDatos_D_Vista").css("display", "none");
+            $(".Dialog_Datos").css("display", "none");
+            $(".Dialog_Datos_Vista").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TDocumento").html("");
             estado = opcion;
@@ -404,13 +404,13 @@ function Eliminar(Index_Documento) {
 function Editar(Index_Documento, Type) {
 
     if (Type == 'V') {
-        $("#TablaDatos_D_Vista").css("display", "inline-table");
-        $("#TablaDatos_D").css("display", "none");
+        $(".Dialog_Datos_Vista").css("display", "inline-table");
+        $(".Dialog_Datos").css("display", "none");
         ConsultaDocumento(Index_Documento);
     }
     else {
-        $("#TablaDatos_D").css("display", "inline-table");
-        $("#TablaDatos_D_Vista").css("display", "none");
+        $(".Dialog_Datos").css("display", "inline-table");
+        $(".Dialog_Datos_Vista").css("display", "none");
     }
 
     $("#TablaConsulta").css("display", "none");

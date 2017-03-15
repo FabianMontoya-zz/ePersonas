@@ -251,7 +251,7 @@ function HabilitarPanel(opcion) {
     switch (opcion) {
 
         case "crear":
-            $("#TablaDatos_D_Calen").css("display", "inline-table");
+            $(".Dialog_Datos_Calen").css("display", "inline-table");
             $("#TablaConsulta").css("display", "none");
             $("#Select_EmpresaNit").removeAttr("disabled");
             $("#Txt_ID").removeAttr("disabled");
@@ -265,7 +265,7 @@ function HabilitarPanel(opcion) {
             break;
 
         case "buscar":
-            $("#TablaDatos_D_Calen").css("display", "none");
+            $(".Dialog_Datos_Calen").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TGrid").html("");
             estado = opcion;
@@ -273,7 +273,7 @@ function HabilitarPanel(opcion) {
             break;
 
         case "modificar":
-            $("#TablaDatos_D_Calen").css("display", "none");
+            $(".Dialog_Datos_Calen").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TGrid").html("");
             estado = opcion;
@@ -282,7 +282,7 @@ function HabilitarPanel(opcion) {
             break;
 
         case "eliminar":
-            $("#TablaDatos_D_Calen").css("display", "none");
+            $(".Dialog_Datos_Calen").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TGrid").html("");
             estado = opcion;
@@ -956,7 +956,7 @@ function Eliminar(index_Nit, index_Calendario) {
 // muestra el registro a editar
 function Editar(index_Nit, index_Calendario) {
 
-    $("#TablaDatos_D").css("display", "inline-table");
+    $(".Dialog_Datos").css("display", "inline-table");
     $("#TablaConsulta").css("display", "none");
 
     for (itemArray in ArrayCalendario) {

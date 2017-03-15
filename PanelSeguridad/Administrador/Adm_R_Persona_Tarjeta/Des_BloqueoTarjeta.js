@@ -65,7 +65,7 @@ function Ocultar_Errores() {
 
 //Función que oculta las tablas
 function Ocultar_Tablas() {
-    $("#TablaDatos_D").css("padding-bottom", "25%");
+    $(".Dialog_Datos").css("padding-bottom", "25%");
     $("#TablaConsulta").css("display", "none");
 }
 

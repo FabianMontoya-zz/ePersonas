@@ -46,7 +46,7 @@
     </div>
     <div id="Marco_Contrato">
         <div id="Marco_trabajo_Contrato">
-            <div id="Container_controls">
+            <div class="Container_controls">
                 <div id="Acordeon_Activo" style="width: 100%">
                     <h3>Datos Activos
                     </h3>

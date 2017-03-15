@@ -47,7 +47,7 @@
         </table>
     </div>
     <div class="Marco_Container">
-        <div class="Marco_btn_Form">>
+       <div class="Marco_btn_Form">
             <input id="BtnShearh" type="button" value="Consulta" onclick="HabilitarPanel('buscar');" />
             <input id="BtnCreate" type="button" value="Crear" onclick="HabilitarPanel('crear');" />
             <input id="BtnUpdate" type="button" value="Actualizar" onclick="HabilitarPanel('modificar');" />
@@ -90,7 +90,7 @@
                 <img alt="foto" title="" style="height: 120px; width: 100px; position: absolute; border-radius: 4px; border-color: #921919; border-width: 2px; border-style: outset;"
                     id="Imgfoto" src="../../images/avatar.png" />
             </div>
-            <div id="Container_controls">
+            <div class="Container_controls">
                 <table id="TablaConsulta">
                     <tr>
                         <td style="width: 25%;">
@@ -117,7 +117,7 @@
                         </td>
                     </tr>
                 </table>
-                <div id="TablaDatos_D">
+                <div class="Dialog_Datos">
                     <table id="Tabla_1" style="width: 100%; text-align: left; margin-top: 5%">
                         <tr>
                             <td style="width: 15%;" class="Label_Bold">NIT Empresa
@@ -379,7 +379,7 @@
                         </tr>
                     </table>
                 </div>
-                <div id="TablaDatos_D_Vista" style="padding-top: 5%; padding-left: 10%;">
+                <div class="Dialog_Datos_Vista" style="padding-top: 5%; padding-left: 10%;">
                     <table id="Table2" style="width: 700px; text-align: left;">
                         <tr>
                             <td style="width: 120px;" class="Label_Bold">Multi - Empresa

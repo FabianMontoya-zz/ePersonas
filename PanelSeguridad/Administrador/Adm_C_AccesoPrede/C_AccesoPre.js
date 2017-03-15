@@ -111,8 +111,7 @@ function Ventanas_Emergentes() {
 
 //Función que oculta las tablas
 function Ocultar_Tablas() {
-    $("#TablaDatos_D").css("display", "none");
-    $("#TablaConsulta").css("display", "none");
+       $("#TablaConsulta").css("display", "none");
 }
 
 //elimina de la BD
@@ -149,7 +148,7 @@ function HabilitarPanel(opcion) {
             break;
 
         case "buscar":
-            $("#TablaDatos_D").css("display", "none");
+            $(".Dialog_Datos").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TGrid").html("");
             $("#Dialog_Create").dialog("close");
@@ -158,7 +157,7 @@ function HabilitarPanel(opcion) {
             break;
 
         case "modificar":
-            $("#TablaDatos_D").css("display", "none");
+            $(".Dialog_Datos").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TGrid").html("");
             $("#Dialog_Create").dialog("close");
@@ -168,7 +167,7 @@ function HabilitarPanel(opcion) {
             break;
 
         case "eliminar":
-            $("#TablaDatos_D").css("display", "none");
+            $(".Dialog_Datos").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TGrid").html("");
             $("#Dialog_Create").dialog("close");

@@ -43,14 +43,14 @@
         </table>
     </div>
     <div class="Marco_Container">
-        <div class="Marco_btn_Form">>
+       <div class="Marco_btn_Form">
             <input id="BtnShearh" type="button" value="Consulta" onclick="HabilitarPanel('buscar');" />
             <input id="BtnCreate" type="button" value="Crear" onclick="HabilitarPanel('crear');" />
             <input id="BtnUpdate" type="button" value="Actualizar" onclick="HabilitarPanel('modificar');" />
             <input id="BtnDelete" type="button" value="Eliminar" onclick="HabilitarPanel('eliminar');" />
         </div>
         <div class="Marco_trabajo_Form">
-            <div id="Container_controls">
+            <div class="Container_controls">
                 <table id="TablaConsulta">
                     <tr>
                         <td id="TD1" style="width: 25%;">
@@ -77,7 +77,7 @@
                         </td>
                     </tr>
                 </table>
-                <div id="TablaDatos_D">
+                <div class="Dialog_Datos">
                     <table id="T_Cod_Name" style="margin-left: 80px;">
                         <tr>
                             <td style="width: 90px;" class="Label_Bold">Codigo

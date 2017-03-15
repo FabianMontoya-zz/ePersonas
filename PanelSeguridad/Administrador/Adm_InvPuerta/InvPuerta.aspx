@@ -34,8 +34,8 @@
     </div>
     <div class="Marco_Container">
         <div class="Marco_trabajo_Form">
-            <div id="Container_controls">
-                <div id="TablaDatos_D">
+            <div class="Container_controls">
+                <div class="Dialog_Datos">
                     <table id="Tabla_4" style="width: 700px; text-align: left;">
                         <tr>
                             <td style="width: 105px;" class="Label_Bold">ID Tarjeta

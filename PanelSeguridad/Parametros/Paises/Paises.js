@@ -65,7 +65,7 @@ function Ocultar_Errores() {
 
 //Función que oculta las tablas
 function Ocultar_Tablas() {
-    $("#TablaDatos_D").css("display", "none");
+    $(".Dialog_Datos").css("display", "none");
     $("#TablaConsulta").css("display", "none");
 }
 
@@ -76,7 +76,7 @@ function HabilitarPanel(opcion) {
 
         case "crear":
 
-            $("#TablaDatos_D").css("display", "inline-table");
+            $(".Dialog_Datos").css("display", "inline-table");
             $("#TablaConsulta").css("display", "none");
             $("#Txt_ID").removeAttr("disabled");
             $("#Btnguardar").attr("value", "Guardar");
@@ -88,7 +88,7 @@ function HabilitarPanel(opcion) {
             break;
 
         case "buscar":
-            $("#TablaDatos_D").css("display", "none");
+            $(".Dialog_Datos").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TPaises").html("");
             estado = opcion;
@@ -96,7 +96,7 @@ function HabilitarPanel(opcion) {
             break;
 
         case "modificar":
-            $("#TablaDatos_D").css("display", "none");
+            $(".Dialog_Datos").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TPaises").html("");
             estado = opcion;
@@ -106,7 +106,7 @@ function HabilitarPanel(opcion) {
             break;
 
         case "eliminar":
-            $("#TablaDatos_D").css("display", "none");
+            $(".Dialog_Datos").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TPaises").html("");
             estado = opcion;
@@ -278,7 +278,7 @@ function Eliminar(index_Paises) {
 // muestra el registro a editar
 function Editar(index_Paises) {
     Search_Pais(index_Paises);
-    $("#TablaDatos_D").css("display", "inline-table");
+    $(".Dialog_Datos").css("display", "inline-table");
     $("#TablaConsulta").css("display", "none");
 
     $("#Btnguardar").attr("value", "Actualizar");
@@ -291,7 +291,7 @@ function Ver(index_Paises) {
     Disabled_Pais();
     Search_Pais(index_Paises);
 
-    $("#TablaDatos_D").css("display", "inline-table");
+    $(".Dialog_Datos").css("display", "inline-table");
     $("#TablaHoras").css("display", "inline-table");
     $("#TablaConsulta").css("display", "none");
 

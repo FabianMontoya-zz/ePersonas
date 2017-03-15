@@ -126,7 +126,7 @@
                     </tr>
                 </table>
             </div>
-            <div id="Container_controls">
+            <div class="Container_controls">
                 <div id="Acordeon_Ingreso" style="width: 100%;">
                     <h3>Documentos  
                     </h3>

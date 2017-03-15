@@ -54,7 +54,7 @@ function Ventanas_Emergentes() {
 
 //Función que oculta las tablas
 function Ocultar_Tablas() {
-    $("#TablaDatos_D").css("padding-bottom", "35%");
+    $(".Dialog_Datos").css("padding-bottom", "35%");
     $("#TablaConsulta").css("display", "none");
 }
 

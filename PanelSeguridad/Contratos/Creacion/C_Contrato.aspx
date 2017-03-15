@@ -843,7 +843,7 @@
             </tr>
         </table>
         <div id="Div1">
-            <div id="Container_controls">
+            <div class="Container_controls">
                 <div id="Acordeon_Activo" style="width: 100%">
                     <h3>Datos Activos
                     </h3>

@@ -274,8 +274,8 @@ function InicializaPagina() {
     $("#SE").css("display", "none");
     $("#WA").css("display", "none");
 
-    $("#TablaDatos_D").css("display", "none");
-    $("#TablaDatos_D_Vista").css("display", "none");
+    $(".Dialog_Datos").css("display", "none");
+    $(".Dialog_Datos_Vista").css("display", "none");
 
     $("#Admin_Anexos").css("display", "none");
     $("#Foto_Persona").css("display", "none");
@@ -468,12 +468,12 @@ function Editar(Index_Cliente, Type) {
     Change_Select_TPersona(ArrayCliente[Index_Cliente].TipoPersona, ArrayCliente[Index_Cliente].Regimen);
 
     if (Type == 'V') {
-        $("#TablaDatos_D_Vista").css("display", "inline-table");
-        $("#TablaDatos_D").css("display", "none");
+        $(".Dialog_Datos_Vista").css("display", "inline-table");
+        $(".Dialog_Datos").css("display", "none");
     }
     else {
-        $("#TablaDatos_D").css("display", "inline-table");
-        $("#TablaDatos_D_Vista").css("display", "none");
+        $(".Dialog_Datos").css("display", "inline-table");
+        $(".Dialog_Datos_Vista").css("display", "none");
     }
 
     $("#Controls").css("display", "inline-table");
@@ -596,8 +596,8 @@ function HabilitarPanel(opcion) {
         case "crear":
             ResetError();
             CargaYear("Select_Year", 80, 17, "");
-            $("#TablaDatos_D").css("display", "inline-table");
-            $("#TablaDatos_D_Vista").css("display", "none");
+            $(".Dialog_Datos").css("display", "inline-table");
+            $(".Dialog_Datos_Vista").css("display", "none");
             $("#Admin_Anexos").css("display", "none");
             $("#Foto_Persona").css("display", "inline-table");
 
@@ -631,8 +631,8 @@ function HabilitarPanel(opcion) {
 
         case "buscar":
             $("#Admin_Anexos").css("display", "none");
-            $("#TablaDatos_D").css("display", "none");
-            $("#TablaDatos_D_Vista").css("display", "none");
+            $(".Dialog_Datos").css("display", "none");
+            $(".Dialog_Datos_Vista").css("display", "none");
             $("#Foto_Persona").css("display", "none");
 
             $("#Controls").css("display", "none");
@@ -647,8 +647,8 @@ function HabilitarPanel(opcion) {
 
         case "modificar":
             ResetError();
-            $("#TablaDatos_D").css("display", "none");
-            $("#TablaDatos_D_Vista").css("display", "none");
+            $(".Dialog_Datos").css("display", "none");
+            $(".Dialog_Datos_Vista").css("display", "none");
             $("#Admin_Anexos").css("display", "none");
             $("#Foto_Persona").css("display", "none");
 
@@ -666,8 +666,8 @@ function HabilitarPanel(opcion) {
             break;
 
         case "eliminar":
-            $("#TablaDatos_D").css("display", "none");
-            $("#TablaDatos_D_Vista").css("display", "none");
+            $(".Dialog_Datos").css("display", "none");
+            $(".Dialog_Datos_Vista").css("display", "none");
             $("#Admin_Anexos").css("display", "none");
             $("#Foto_Persona").css("display", "none");
 
