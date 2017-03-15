@@ -1,4 +1,4 @@
-﻿/*--------------- region de variables globales --------------------*/
+﻿/*--------------- Región de variables globales --------------------*/
 var ArrayCalendario_Grid = [];
 var ArrayCalendario = [];
 var ArrayCombo = [];
@@ -14,6 +14,8 @@ var MatrizFriday = [];
 var MatrizSaturday = [];
 var MatrizSunday = [];
 
+var Lineas = 0; //Contador de filas que tendrán las matrices
+
 var WorkMonday = true;
 var WorkTuesday = true;
 var WorkWednesday = true;
@@ -22,7 +24,17 @@ var WorkFriday = true;
 var WorkSaturday = true;
 var WorkSunday = true;
 
+var FirstMonday = false;
+var FirstTuesday = false;
+var FirstWednesday = false;
+var FirstThursday = false;
+var FirstFriday = false;
+var FirstSaturday = false;
+var FirstSunday = false;
+
 var MensajeHora = "";
+var MensajeVacio = "";
+var MensajeRepetido = "";
 var V_ONE = 0;
 
 var estado;
@@ -198,8 +210,9 @@ function BtnAgregaCalendario() {
     switch (validate) {
         case 0:
             if (V_ONE == 0) {
-                Mensaje_General("Advertencia!", "Debe minimo seleccionar un agendamiento", "W");
+                Mensaje_General("Error - Campos Vacios", "Debe completar mínimo el horario de uno de los días de la semana.", "W");
             } else {
+                Lineas = Lineas + 1;
                 validaTipoC();
                 $("#Select_StateLun").prop('disabled', true).trigger("chosen:updated"); //Bloqueamos los chosen de estado del día
                 $("#Select_StateMar").prop('disabled', true).trigger("chosen:updated");
@@ -214,11 +227,11 @@ function BtnAgregaCalendario() {
             break;
 
         case 1:
-            Mensaje_General("Advertencia!", "La hora inicial es mayor que la hora final! en el dia (" + MensajeHora + ")", "W");
+            Mensaje_General("Error - Hora Inconsistente", "La hora inicial es mayor que la hora final en los días: " + MensajeHora + "", "E");
             break;
 
         case 2:
-            Mensaje_General("Advertencia!", "La hora inicial ó  la hora final! en el dia (" + MensajeHora + ")", "W");
+            Mensaje_General("Error - Campos Incompletos", "El campo de hora inicial u hora final no se completó en los días: " + MensajeVacio + "", "W");
             break;
     }
 }
@@ -308,7 +321,7 @@ function validarCamposCrear() {
     return validar;
 }
 
-//validamos campos para la creacion del calendario
+//validamos campos para la creación del calendario
 function validarCamposFechas() {
 
     var Campo_1 = $("#TxtF_Start").val();
@@ -345,8 +358,10 @@ function ValidarDroplist() {
 //valida horas ingresadas
 function ValidaHoras() {
     var validate = 0;
-    var V_H;
-
+    var V_H = 0;
+    V_ONE = 0;
+    MensajeHora = "";
+    MensajeVacio = "";
     //Lunes
     if (WorkMonday == true) {
         if ($("#TxtIniLun").val() != "" || $("#TxtFinLun").val() != "") {
@@ -356,23 +371,25 @@ function ValidaHoras() {
             switch (V_H) {
                 case 1:
                     validate = 1;
-                    if (MensajeHora == "")
-                        MensajeHora = MensajeHora + " Lunes"
-                    else
-                        MensajeHora = MensajeHora + ", Lunes"
-                    break
+                    if (MensajeHora == "") {
+                        MensajeHora = MensajeHora + " Lunes";
+                    } else {
+                        MensajeHora = MensajeHora + ", Lunes";
+                    }
+                    break;
 
                 case 2:
                     validate = 2;
-                    if (MensajeHora == "")
-                        MensajeHora = MensajeHora + " Lunes"
-                    else
-                        MensajeHora = MensajeHora + ", Lunes"
-                    break
+                    if (MensajeVacio == "") {
+                        MensajeVacio = MensajeVacio + " Lunes";
+                    } else {
+                        MensajeVacio = MensajeVacio + ", Lunes";
+                    }
+                    break;
             }
         }
     }
-    
+
     //Martes
     if (WorkTuesday == true) {
         if ($("#TxtIniMar").val() != "" || $("#TxtFinMar").val() != "") {
@@ -382,23 +399,25 @@ function ValidaHoras() {
             switch (V_H) {
                 case 1:
                     validate = 1;
-                    if (MensajeHora == "")
-                        MensajeHora = MensajeHora + " Martes"
-                    else
-                        MensajeHora = MensajeHora + ", Martes"
-                    break
+                    if (MensajeHora == "") {
+                        MensajeHora = MensajeHora + " Martes";
+                    } else {
+                        MensajeHora = MensajeHora + ", Martes";
+                    }
+                    break;
 
-                case 2:
+                case 2: //Hay alguno vacio
                     validate = 2;
-                    if (MensajeHora == "")
-                        MensajeHora = MensajeHora + " Martes"
-                    else
-                        MensajeHora = MensajeHora + ", Martes"
-                    break
+                    if (MensajeVacio == "") {
+                        MensajeVacio = MensajeVacio + " Martes";
+                    } else {
+                        MensajeVacio = MensajeVacio + ", Martes";
+                    }
+                    break;
             }
         }
     }
-    //Miercoles
+    //Miércoles
     if (WorkWednesday == true) {
         if ($("#TxtIniMie").val() != "" || $("#TxtFinMie").val() != "") {
             V_ONE = 1;
@@ -407,18 +426,20 @@ function ValidaHoras() {
             switch (V_H) {
                 case 1:
                     validate = 1;
-                    if (MensajeHora == "")
-                        MensajeHora = MensajeHora + " Miercoles"
-                    else
-                        MensajeHora = MensajeHora + ", Miercoles"
-
+                    if (MensajeHora == "") {
+                        MensajeHora = MensajeHora + " Miércoles";
+                    } else {
+                        MensajeHora = MensajeHora + ", Miércoles";
+                    }
+                    break;
                 case 2:
                     validate = 2;
-                    if (MensajeHora == "")
-                        MensajeHora = MensajeHora + " Miercoles"
-                    else
-                        MensajeHora = MensajeHora + ", Miercoles"
-                    break
+                    if (MensajeVacio == "") {
+                        MensajeVacio = MensajeVacio + " Miércoles";
+                    } else {
+                        MensajeVacio = MensajeVacio + ", Miércoles";
+                    }
+                    break;
             }
         }
     }
@@ -431,18 +452,20 @@ function ValidaHoras() {
             switch (V_H) {
                 case 1:
                     validate = 1;
-                    if (MensajeHora == "")
-                        MensajeHora = MensajeHora + " Jueves"
-                    else
-                        MensajeHora = MensajeHora + ", Jueves"
-
+                    if (MensajeHora == "") {
+                        MensajeHora = MensajeHora + " Jueves";
+                    } else {
+                        MensajeHora = MensajeHora + ", Jueves";
+                    }
+                    break;
                 case 2:
                     validate = 2;
-                    if (MensajeHora == "")
-                        MensajeHora = MensajeHora + " Jueves"
-                    else
-                        MensajeHora = MensajeHora + ", Jueves"
-                    break
+                    if (MensajeVacio == "") {
+                        MensajeVacio = MensajeVacio + " Jueves";
+                    } else {
+                        MensajeVacio = MensajeVacio + ", Jueves";
+                    }
+                    break;
             }
         }
     }
@@ -455,18 +478,20 @@ function ValidaHoras() {
             switch (V_H) {
                 case 1:
                     validate = 1;
-                    if (MensajeHora == "")
-                        MensajeHora = MensajeHora + " Viernes"
-                    else
-                        MensajeHora = MensajeHora + ", Viernes"
-
+                    if (MensajeHora == "") {
+                        MensajeHora = MensajeHora + " Viernes";
+                    } else {
+                        MensajeHora = MensajeHora + ", Viernes";
+                    }
+                    break;
                 case 2:
                     validate = 2;
-                    if (MensajeHora == "")
-                        MensajeHora = MensajeHora + " Viernes"
-                    else
-                        MensajeHora = MensajeHora + ", Viernes"
-                    break
+                    if (MensajeVacio == "") {
+                        MensajeVacio = MensajeVacio + " Viernes";
+                    } else {
+                        MensajeVacio = MensajeVacio + ", Viernes";
+                    }
+                    break;
             }
         }
     }
@@ -479,18 +504,20 @@ function ValidaHoras() {
             switch (V_H) {
                 case 1:
                     validate = 1;
-                    if (MensajeHora == "")
-                        MensajeHora = MensajeHora + " Sabado"
-                    else
-                        MensajeHora = MensajeHora + ", Sabado"
-
+                    if (MensajeHora == "") {
+                        MensajeHora = MensajeHora + " Sábado";
+                    } else {
+                        MensajeHora = MensajeHora + ", Sábado";
+                    }
+                    break;
                 case 2:
                     validate = 2;
-                    if (MensajeHora == "")
-                        MensajeHora = MensajeHora + " Sabado"
-                    else
-                        MensajeHora = MensajeHora + ", Sabado"
-                    break
+                    if (MensajeVacio == "") {
+                        MensajeVacio = MensajeVacio + " Sábado";
+                    } else {
+                        MensajeVacio = MensajeVacio + ", Sábado";
+                    }
+                    break;
             }
         }
     }
@@ -503,18 +530,20 @@ function ValidaHoras() {
             switch (V_H) {
                 case 1:
                     validate = 1;
-                    if (MensajeHora == "")
-                        MensajeHora = MensajeHora + " Domingo"
-                    else
-                        MensajeHora = MensajeHora + ", Domingo"
-
+                    if (MensajeHora == "") {
+                        MensajeHora = MensajeHora + " Domingo";
+                    } else {
+                        MensajeHora = MensajeHora + ", Domingo";
+                    }
+                    break;
                 case 2:
                     validate = 2;
-                    if (MensajeHora == "")
-                        MensajeHora = MensajeHora + " Domingo"
-                    else
-                        MensajeHora = MensajeHora + ", Domingo"
-                    break
+                    if (MensajeVacio == "") {
+                        MensajeVacio = MensajeVacio + " Domingo";
+                    } else {
+                        MensajeVacio = MensajeVacio + ", Domingo";
+                    }
+                    break;
             }
         }
     }
@@ -528,13 +557,10 @@ function validaTipoC() {
 
     switch ($("#Select_TipoCalendario").val()) {
         case "1":
-
             CargeJson();
             break;
-
         case "2":
             Ingresa = ValidaFechas();
-            console.log(Ingresa);
             if (Ingresa == 0) {
                 CargeJson();
             }
@@ -546,12 +572,138 @@ function validaTipoC() {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //construye el Json con los datos proporcionados para la vista
 function CargeJson() {
+    var Repetido = ValidaDatosMatriz();
+    if (Repetido == false) {    
+        //Lunes (1)
+        if (WorkMonday == true) { //Si es laboral validamos normal           
+                var JSONDay = {
+                    "IniLun": $("#TxtIniLun").val(),
+                    "FinLun": $("#TxtFinLun").val()
+                };
+                MatrizMonday.push(JSONDay);
+                InsertJson_Day("1", "N", $("#TxtIniLun").val(), $("#TxtFinLun").val());
+            
+        } else if (WorkMonday == false && FirstMonday == false) { //Si no laboral y es la primera vez
+            var JSONDay = {
+                "IniLun": "",
+                "FinLun": ""
+            };
+            MatrizMonday.push(JSONDay);
+            InsertJson_Day("1", "S", "0", "0");
+            FirstMonday = true;
+        } else { //Si no laboral y no es la primera vez
+            var JSONDay = {
+                "IniLun": "",
+                "FinLun": ""
+            };
+            MatrizMonday.push(JSONDay);
+        }
+        //--------
+        //Martes (2)
+        if (WorkTuesday == true) { //Si es laboral validamos normal           
+            var JSONDay = {
+                "IniMar": $("#TxtIniMar").val(),
+                "FinMar": $("#TxtFinMar").val()
+            };
+            MatrizMonday.push(JSONDay);
+            InsertJson_Day("2", "N", $("#TxtIniMar").val(), $("#TxtFinMar").val());
 
+        } else if (WorkTuesday == false && FirstTuesday == false) { //Si no laboral y es la primera vez
+            var JSONDay = {
+                "IniMar": "",
+                "FinMar": ""
+            };
+            MatrizTuesday.push(JSONDay);
+            InsertJson_Day("2", "S", "0", "0");
+            FirstTuesday = true;
+        } else { //Si no laboral y no es la primera vez
+            var JSONDay = {
+                "IniMar": "",
+                "FinMar": ""
+            };
+            MatrizTuesday.push(JSONDay);
+        }
+        //--------
+        //Miércoles (3)
+        if (WorkWednesday == true) { //Si es laboral validamos normal           
+            var JSONDay = {
+                "IniMie": $("#TxtIniMie").val(),
+                "FinMie": $("#TxtFinMie").val()
+            };
+            MatrizWednesday.push(JSONDay);
+            InsertJson_Day("3", "N", $("#TxtIniMie").val(), $("#TxtFinMie").val());
+
+        } else if (WorkWednesday == false && FirstWednesday == false) { //Si no laboral y es la primera vez
+            var JSONDay = {
+                "IniMie": "",
+                "FinMie": ""
+            };
+            MatrizWednesday.push(JSONDay);
+            InsertJson_Day("3", "S", "0", "0");
+            FirstWednesday = true;
+        } else { //Si no laboral y no es la primera vez
+            var JSONDay = {
+                "IniMie": "",
+                "FinMie": ""
+            };
+            MatrizWednesday.push(JSONDay);
+        }
+        //--------
+        //Jueves (4)
+        if (WorkThursday == true) { //Si es laboral validamos normal           
+            var JSONDay = {
+                "IniJue": $("#TxtIniJue").val(),
+                "FinJue": $("#TxtFinJue").val()
+            };
+            MatrizThursday.push(JSONDay);
+            InsertJson_Day("4", "N", $("#TxtIniJue").val(), $("#TxtFinJue").val());
+
+        } else if (WorkThursday == false && FirstThursday == false) { //Si no laboral y es la primera vez
+            var JSONDay = {
+                "IniJue": "",
+                "FinJue": ""
+            };
+            MatrizThursday.push(JSONDay);
+            InsertJson_Day("4", "S", "0", "0");
+            FirstThursday = true;
+        } else { //Si no laboral y no es la primera vez
+            var JSONDay = {
+                "IniJue": "",
+                "FinJue": ""
+            };
+            MatrizThursday.push(JSONDay);
+        }
+        //--------
+        //Viernes (5)
+        if (WorkFriday == true) { //Si es laboral validamos normal           
+            var JSONDay = {
+                "IniVie": $("#TxtIniVie").val(),
+                "FinVie": $("#TxtFinVie").val()
+            };
+            MatrizFriday.push(JSONDay);
+            InsertJson_Day("5", "N", $("#TxtIniVie").val(), $("#TxtFinVie").val());
+
+        } else if (WorkFriday == false && FirstFriday == false) { //Si no laboral y es la primera vez
+            var JSONDay = {
+                "IniVie": "",
+                "FinVie": ""
+            };
+            MatrizFriday.push(JSONDay);
+            InsertJson_Day("5", "S", "0", "0");
+            FirstFriday = true;
+        } else { //Si no laboral y no es la primera vez
+            var JSONDay = {
+                "IniVie": "",
+                "FinVie": ""
+            };
+            MatrizFriday.push(JSONDay);
+        }
+
+    } else {
+        Mensaje_General("Error - Horario Existe", "No puedes ingresar dos veces una misma combinación de horarios, esto sucedio en los siguientes días: "+ MensajeRepetido+ "", "W");
+    }
+        
     var JsonCalendario_View = {
-        "Nit_ID": $("#Select_EmpresaNit").val(),
-        "Calendario_ID": $("#Txt_ID").val(),
-        "Descripcion": $("#Txt_ID").val(),
-        "TipoCalendario": $("#Select_TipoCalendario").val(),
         "IniLun": ValidaCamposJson($("#TxtIniLun").val()),
         "FinLun": ValidaCamposJson($("#TxtFinLun").val()),
         "IniMar": ValidaCamposJson($("#TxtIniMar").val()),
@@ -569,30 +721,108 @@ function CargeJson() {
     };
 
 
-    InsertJson_Day("1", ValidaCamposJson($("#TxtIniLun").val()), ValidaCamposJson($("#TxtFinLun").val())); //lunes
-    InsertJson_Day("2", ValidaCamposJson($("#TxtIniMar").val()), ValidaCamposJson($("#TxtFinMar").val())); //martes
-    InsertJson_Day("3", ValidaCamposJson($("#TxtIniMie").val()), ValidaCamposJson($("#TxtFinMie").val())); //Miercoles
+    InsertJson_Day("1", ValidaCamposJson($("#TxtIniLun").val()), ValidaCamposJson($("#TxtFinLun").val())); //Lunes
+    InsertJson_Day("2", ValidaCamposJson($("#TxtIniMar").val()), ValidaCamposJson($("#TxtFinMar").val())); //Martes
+    InsertJson_Day("3", ValidaCamposJson($("#TxtIniMie").val()), ValidaCamposJson($("#TxtFinMie").val())); //Miércoles
     InsertJson_Day("4", ValidaCamposJson($("#TxtIniJue").val()), ValidaCamposJson($("#TxtFinJue").val())); //Jueves
     InsertJson_Day("5", ValidaCamposJson($("#TxtIniVie").val()), ValidaCamposJson($("#TxtFinVie").val())); //Viernes
-    InsertJson_Day("6", ValidaCamposJson($("#TxtIniSab").val()), ValidaCamposJson($("#TxtFinSab").val())); //Sabado
+    InsertJson_Day("6", ValidaCamposJson($("#TxtIniSab").val()), ValidaCamposJson($("#TxtFinSab").val())); //Sábado
     InsertJson_Day("7", ValidaCamposJson($("#TxtIniDom").val()), ValidaCamposJson($("#TxtFinDom").val())); //Domingo
-    InsertJson_Day($("#Select_Festivo").val(), "F", "F"); //festivo
+    InsertJson_Day($("#Select_Festivo").val(), "F", "F"); //Festivo
 
     ArrayCalendario_Grid.push(JsonCalendario_View);
     TGridCalendar();
     Clear_Agregar();
 }
 
-//carga jsonde insercion para BD
-function InsertJson_Day(vp_NumberDay, vp_H_In, vp_H_Fi, vp_Estado_Day) {
+//Función que valida que los nuevos datos de cualquiera de los días no estén repetidos en la matriz
+function ValidaDatosMatriz() {
+    var repetido = false;
+    MensajeRepetido = "";
+
+    if (WorkMonday == true) {
+        if ($("#TxtIniLun").val() != "" && $("#TxtFinLun").val() != "") {
+            repetido = ValidarHoras("1", $("#TxtIniLun").val(), $("#TxtFinLun").val());
+            if (repetido == true) {
+                MensajeRepetido = MensajeRepetido + ", Lunes";
+            }
+        }        
+    }
+    if (WorkTuesday == true) {
+        if ($("#TxtIniMar").val() != "" && $("#TxtFinMar").val() != "") {
+            repetido = ValidarHoras("2", $("#TxtIniMar").val(), $("#TxtFinMar").val());
+            if (repetido == true) {
+                MensajeRepetido = MensajeRepetido + ", Martes";
+            }
+        }
+    }
+    if (WorkWednesday == true) {
+        if ($("#TxtIniMie").val() != "" && $("#TxtFinMie").val() != "") {
+            repetido = ValidarHoras("3", $("#TxtIniMie").val(), $("#TxtFinMie").val());
+            if (repetido == true) {
+                MensajeRepetido = MensajeRepetido + ", Miércoles";
+            }
+        }
+    }
+    if (WorkThursday == true) {
+        if ($("#TxtIniJue").val() != "" && $("#TxtFinJue").val() != "") {
+            repetido = ValidarHoras("4", $("#TxtIniJue").val(), $("#TxtFinJue").val());
+            if (repetido == true) {
+                MensajeRepetido = MensajeRepetido + ", Jueves";
+            }
+        }
+    }
+    if (WorkFriday == true) {
+        if ($("#TxtIniVie").val() != "" && $("#TxtFinVie").val() != "") {
+            repetido = ValidarHoras("5", $("#TxtIniVie").val(), $("#TxtFinVie").val());
+            if (repetido == true) {
+                MensajeRepetido = MensajeRepetido + ", Viernes";
+            }
+        }
+    }
+    if (WorkSaturday == true) {
+        if ($("#TxtIniSab").val() != "" && $("#TxtFinSab").val() != "") {
+            repetido = ValidarHoras("6", $("#TxtIniSab").val(), $("#TxtFinSab").val());
+            if (repetido == true) {
+                MensajeRepetido = MensajeRepetido + ", Sábado";
+            }
+        }
+    }
+    if (WorkSaturday == true) {
+        if ($("#TxtIniDom").val() != "" && $("#TxtFinDom").val() != "") {
+            repetido = ValidarHoras("7", $("#TxtIniDom").val(), $("#TxtFinDom").val());
+            if (repetido == true) {
+                MensajeRepetido = MensajeRepetido + ", Domingo";
+            }
+        }
+    }
+    if (MensajeRepetido != "") {
+        MensajeRepetido = MensajeRepetido.substr(1);
+    }
+    return repetido;
+}
+
+//Función que valida si la combinación de horas ya existe en el array armado
+function ValidarHoras(numDia, horaIni, horaFini) {
+    var Encontrado = false;
+    for (i in ArrayC_Semana) {//Recorremos el array que contiene los datos de los horarios día
+        if (ArrayC_Semana[i].NumDia == numDia) { //Entramos a revisar solo los datos que contienen el día que se quiere verificar
+            if (ArrayC_Semana[i].HoraInicial == horaIni && ArrayC_Semana[i].HoraFinal == horaFini) { //Verificamos si la combinación de horas ya existe
+                Encontrado = true;
+                break;
+            }
+        }
+    }
+    return Encontrado;
+}
+
+//Carga JSON para Tabla de Semanas
+function InsertJson_Day(vp_NumberDay, vp_Estado_Day, vp_H_In, vp_H_Fi) {
     var JsonDayCalendar = {
-        "Nit_ID": $("#Select_EmpresaNit").val(),
-        "Calendario_ID": $("#Txt_ID").val(),
-        "Dia_1_8": vp_NumberDay,
-        "IndicativoFoto": vp_Estado_Day,
+        "NumDia": vp_NumberDay,
+        "IndicativoFestivo": vp_Estado_Day,
         "HoraInicial": vp_H_In,
         "HoraFinal": vp_H_Fi,
-        "UsuarioCreacion": User.toUpperCase(),
     };
     ArrayC_Semana.push(JsonDayCalendar);
 }
@@ -610,7 +840,10 @@ function ValidaCamposJson(vp_Campo) {
 //grid de calendario asignados
 function TGridCalendar() {
 
-    var html_Calendario = "<table id='TCalendario' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th colspan='2' class='Grid_Head' >Lunes</th><th colspan='2' class='Grid_Head' >Martes</th><th colspan='2' class='Grid_Head' >Miercoles</th><th colspan='2' class='Grid_Head' >Jueves</th><th colspan='2' class='Grid_Head' >Viernes</th><th colspan='2' class='Grid_Head' >Sabado</th><th colspan='2' class='Grid_Head' >Domingo</th></tr><tr><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th></tr><tr><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th></tr></thead><tbody>";
+
+    var html_Calendario = "<table id='TCalendario' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><tbody>";
+
+    var html_Calendario = "<table id='TCalendario' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th colspan='2' class='Grid_Head' >Lunes</th><th colspan='2' class='Grid_Head' >Martes</th><th colspan='2' class='Grid_Head' >Miércoles</th><th colspan='2' class='Grid_Head' >Jueves</th><th colspan='2' class='Grid_Head' >Viernes</th><th colspan='2' class='Grid_Head' >Sábado</th><th colspan='2' class='Grid_Head' >Domingo</th></tr><tr><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th></tr><tr><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th></tr></thead><tbody>";
     for (itemArray in ArrayCalendario_Grid) {
         html_Calendario += "<tr id= 'TCalendario_" + ArrayCalendario_Grid[itemArray].Calendario_ID + "'><td>" + ArrayCalendario_Grid[itemArray].IniLun + "</td><td>" + ArrayCalendario_Grid[itemArray].FinLun + "</td><td>" + ArrayCalendario_Grid[itemArray].IniMar + "</td><td>" + ArrayCalendario_Grid[itemArray].FinMar + "</td><td>" + ArrayCalendario_Grid[itemArray].IniMie + "</td><td>" + ArrayCalendario_Grid[itemArray].FinMie + "</td><td>" + ArrayCalendario_Grid[itemArray].IniJue + "</td><td>" + ArrayCalendario_Grid[itemArray].FinJue + "</td><td>" + ArrayCalendario_Grid[itemArray].IniVie + "</td><td>" + ArrayCalendario_Grid[itemArray].FinVie + "</td><td>" + ArrayCalendario_Grid[itemArray].IniSab + "</td><td>" + ArrayCalendario_Grid[itemArray].FinSab + "</td><td>" + ArrayCalendario_Grid[itemArray].IniDom + "</td><td>" + ArrayCalendario_Grid[itemArray].FinDom + "</td></tr>";
     }
@@ -766,6 +999,8 @@ function Clear() {
     MatrizSaturday = [];
     MatrizSunday = [];
 
+    Lineas = 0; //Contador de filas que tendrán las matrices
+
     WorkMonday = true;
     WorkTuesday = true;
     WorkWednesday = true;
@@ -773,6 +1008,14 @@ function Clear() {
     WorkFriday = true;
     WorkSaturday = true;
     WorkSunday = true;
+
+    FirstMonday = false;
+    FirstTuesday = false;
+    FirstWednesday = false;
+    FirstThursday = false;
+    FirstFriday = false;
+    FirstSaturday = false;
+    FirstSunday = false;
 
     $("#Select_EmpresaNit").val("-1");
     $("#Txt_ID").val("");
