@@ -1,6 +1,7 @@
 ﻿/************************************************************************************
                                             ESTRUCTURA
 *************************************************************************************/
+/*-- CUERPO PAGINA ---*/
 html, body {
     overflow: hidden;
 }
@@ -11,20 +12,6 @@ html, body {
 /*fuente para todos los campos*/
 h1, h2, h3, h4, table, tr, td {
     font-family: CenturyGothic, CenturyGothic, sans-serif;
-}
-
-/*encasulado del tablaregistro*/
-.marco {
-    padding-bottom: 19.5%;
-    padding-left: 35%;
-    padding-right: 35%;
-}
-
-/*-- DIV PAGINA ---*/
-#Page {
-    width: 100%;
-    margin: 2% auto;
-    position: relative;
 }
 
 /*-- LABEL USUARIO ---*/
@@ -46,6 +33,22 @@ h1, h2, h3, h4, table, tr, td {
     color: #b70d0d;
     font: 14px/20px CenturyGothic,sans-serif;
     font-weight: bold;
+}
+
+/*encasulado del tablaregistro*/
+.marco {
+    padding-bottom: 19.5%;
+    padding-left: 35%;
+    padding-right: 35%;
+}
+
+/************************************************************************************
+PAGE MASTER PAGE 
+*************************************************************************************/
+/*-- DIV PAGINA ---*/
+#Page {
+    width: 100%;
+    position: relative;
 }
 
 /************************************************************************************
@@ -87,7 +90,6 @@ h1, h2, h3, h4, table, tr, td {
     border-radius: 3px;
     position: absolute;
     clear: both;
-    margin-top: 1%;
     width: 100%;
     bottom: 0;
     z-index: 100;
@@ -147,7 +149,7 @@ MEDIA QUERIES
         width: auto;
     }
 
-     .marco {
+    .marco {
         padding-bottom: 1%;
         padding-left: 15%;
         padding-right: 15%;

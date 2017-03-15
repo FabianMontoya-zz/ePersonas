@@ -1,19 +1,38 @@
-﻿/* --------------------------------------------------------------------------- */
-/* --------------------------- HEADER MASTER PAGE ---------------------------- */
-/* --------------------------------------------------------------------------- */
+﻿/************************************************************************************
+                                            ESTRUCTURA
+*************************************************************************************/
+/*-- CUERPO PAGINA ---*/
+html, body {
+    overflow: hidden;
+}
 
-/* -------       Label Usuario          ------*/
+#DivMenu {
+    display: none;
+}
+
+/************************************************************************************
+                                       CAMPOS GENERALES 
+/************************************************************************************
+/*fuente para todos los campos*/
+h1, h2, h3, h4, table, tr, td {
+    font-family: CenturyGothic, CenturyGothic, sans-serif;
+}
+
+/*-- LABEL USUARIO ---*/
 #User, #Name_User {
     color: #b70d0d;
     font-weight: bold;
+    width: 70%;
+    text-align: center;
 }
 
-/* -------       Label Titulo          ------*/
+/*-- LABEL TITULO ---*/
 #tituloPrincipal {
     color: #b70d0d;
+    font: CenturyGothic,sans-serif;
 }
 
-/* -------       Label Hora           ------*/
+/*-- LABEL FECHA ---*/
 #Hours {
     top: 4em;
     right: 1em;
@@ -22,7 +41,19 @@
     font-weight: bold;
 }
 
-/* -------       div encabezado      ------*/
+/************************************************************************************
+PAGE MASTER PAGE 
+*************************************************************************************/
+/*-- DIV PAGINA ---*/
+#Page {
+    width: 100%;
+    position: relative;
+}
+
+/************************************************************************************
+ HEADER MASTER PAGE 
+*************************************************************************************/
+/*-- DIV ENCABEZADO ---*/
 #Header {
     float: none;
     background: -webkit-linear-gradient(#f6f6f6, #e8e8e8); /*For Safari 5.1 to 6.0 */
@@ -30,29 +61,101 @@
     background: -moz-linear-gradient(#f6f6f6, #e8e8e8); /* For Firefox 3.6 to 15 */
     background: linear-gradient(#f6f6f6, #e8e8e8); /* Standard syntax (must be last)*/
     border-radius: 3px;
-    border: solid 1px #ccc;
-}
-
-/* -------         fondo            ------*/
-.header {
+    border: solid 1px #b3b3b3;
     background-position: center;
 }
 
-.Dimencion_Header {
-    height: 48px;
-    transition: all 0.8s ease;
+/*-- TABLE  HEADER CONTENT---*/
+#M_header {
+    width: 100%;
 }
 
+/*-- EVENTO HEADER ---*/
+.Dimencion_Header {
+    height: 2%;
+    transition: all 0.8s ease;
+}
+    /*-- EVENTO HEADER HOVER---*/
     .Dimencion_Header:hover {
-        height: 105px;
+        height: 12%;
         transition: all 0.8s ease;
     }
 
-/* --------------------------------------------------------------------------- */
-/* ------------------------- BAR MENU MASTER PAGE ---------------------------- */
-/* --------------------------------------------------------------------------- */
+/*-- TITULO 1 HEADER ---*/
+.Titulo_1 {
+    font-size: 0px;
+    transition: all 0.8s ease;
+}
 
-/* -------         fondo            ------*/
+/*-- TITULO 2 HEADER ---*/
+.Titulo_2 {
+    font-size: 25px;
+    transition: all 0.8s ease;
+}
+
+/*-- EVENTO MENU HOVER TITULO 2---*/
+#Header:hover .Titulo_2 {
+    font-size: 0px;
+    transition: all 0.8s ease;
+}
+
+/*-- EVENTO MENU HOVER TITULO 1---*/
+#Header:hover .Titulo_1 {
+    font-size: 25px;
+    transition: all 0.8s ease;
+}
+
+/*-- LOGO 1 HEADER ---*/
+.Logo_1 {
+    height: 0px;
+    width: 0px;
+    transition: all 0.8s ease;
+}
+
+/*-- LOGO 2 HEADER ---*/
+.Logo_2 {
+    height: 35px;
+    width: 35px;
+    transition: all 0.8s ease;
+}
+
+/*-- LOGO 3 HEADER ---*/
+.Logo_3 {
+    height: 55px;
+    width: 55px;
+    transition: all 0.8s ease;
+}
+
+/*-- EVENTO LOGO HOVER TITULO 2---*/
+#Header:hover .Logo_2 {
+    height: 0px;
+    width: 0px;
+    transition: all 0.8s ease;
+}
+
+/*-- EVENTO LOGO HOVER TITULO 1---*/
+#Header:hover .Logo_1 {
+    height: 85px;
+    width: 70px;
+    transition: all 0.8s ease;
+}
+
+/************************************************************************************
+ CONTENT MASTER PAGE 
+*************************************************************************************/
+/*-- DIV MEDIUM ---*/
+#Medium {
+    width: 100%;
+    float: left;
+    float: none;
+    height: 750px;
+    margin-top: 51px;
+}
+
+/************************************************************************************
+ BAR TITLE MASTER PAGE 
+*************************************************************************************/
+/*-- DIV BAR TITLE ---*/
 .Bar {
     background: -webkit-linear-gradient(#b70d0d, #631111); /*For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#b70d0d, #631111); /* For Opera 11.1 to 12.0 */
@@ -61,47 +164,42 @@
     border-radius: 3px;
     border: solid 1px #b3b3b3;
     position: absolute;
-    width: 98.9%;
+    width: 100%;
     z-index: 50;
 }
 
-/* --------------------------------------------------------------------------- */
-/* ------------------------- CONTENT MASTER PAGE ------_---------------------- */
-/* --------------------------------------------------------------------------- */
-
-/* -------         fondo            ------*/
-.main {
-    margin-top: 48px;
+/*-- TABLE  BAR CONTENT---*/
+#M_Bar {
+    width: 100%;
+    height: 53px;
 }
 
-/* -------         dimencion panel 1            ------*/
-#panel_menu {
-    height: 70%;
+/*-- TABLE BAR TD LOGO---*/
+#TMenu {
+    width: 15%;
+    text-align: left;
+    padding-left: 25px;
+}
+
+/*--TABLE BAR TD EXIT ---*/
+#Exit {
+    padding-right: 15px;
+    text-align: end;
+}
+
+/************************************************************************************
+ MENU MASTER PAGE 
+*************************************************************************************/
+/*-- DIV MENU CONTENT ---*/
+.panel_menu {
+    height: 720px;
     vertical-align: text-top;
     padding-left: 1px;
 }
 
-.Dimencion_Menu {
-    width: 53px;
-    background: -webkit-linear-gradient(#f6f6f6, #e8e8e8); /*For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#f6f6f6, #e8e8e8); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#f6f6f6, #e8e8e8); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#f6f6f6, #e8e8e8); /* Standard syntax (must be last)*/
-    transition: all 0.8s ease;
-}
-
-    .Dimencion_Menu:hover {
-        width: 350px;
-        background: -webkit-linear-gradient(#f6f6f6, #e8e8e8); /*For Safari 5.1 to 6.0 */
-        background: -o-linear-gradient(#f6f6f6, #e8e8e8); /* For Opera 11.1 to 12.0 */
-        background: -moz-linear-gradient(#f6f6f6, #e8e8e8); /* For Firefox 3.6 to 15 */
-        background: linear-gradient(#f6f6f6, #e8e8e8); /* Standard syntax (must be last)*/
-        transition: all 0.8s ease;
-    }
-
-/* -------         dimencion panel            ------*/
+/*-- DIV MENU ---*/
 #container_menu {
-    height: 79%;
+    height: 690px;
     overflow: auto;
     border-radius: 3px;
     border: solid 1px #ccc;
@@ -111,6 +209,27 @@
     margin-top: 4px;
 }
 
+/*-- EVENTO MENU ---*/
+.Dimencion_Menu {
+    width: 53px;
+    background: -webkit-linear-gradient(#f6f6f6, #e8e8e8); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#f6f6f6, #e8e8e8); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#f6f6f6, #e8e8e8); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#f6f6f6, #e8e8e8); /* Standard syntax (must be last)*/
+    transition: all 0.8s ease;
+}
+
+    /*-- EVENTO MENU HOVER---*/
+    .Dimencion_Menu:hover {
+        width: 310px;
+        background: -webkit-linear-gradient(#f6f6f6, #e8e8e8); /*For Safari 5.1 to 6.0 */
+        background: -o-linear-gradient(#f6f6f6, #e8e8e8); /* For Opera 11.1 to 12.0 */
+        background: -moz-linear-gradient(#f6f6f6, #e8e8e8); /* For Firefox 3.6 to 15 */
+        background: linear-gradient(#f6f6f6, #e8e8e8); /* Standard syntax (must be last)*/
+        transition: all 0.8s ease;
+    }
+
+/*-- DIV FRONTAL MENU---*/
 #Bar_TMenu {
     background: -webkit-linear-gradient(#b70d0d, #921919); /*For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#b70d0d, #921919); /* For Opera 11.1 to 12.0 */
@@ -119,7 +238,7 @@
     border: solid 1px #ccc;
     float: left;
     width: 20px;
-    height: 74%;
+    height: 650px;
     color: #FFFFFF;
     text-align: right;
     padding-top: 40px;
@@ -127,13 +246,13 @@
     position: absolute;
     z-index: 50;
     margin-top: 4px;
+    border-radius: 0 5px 5px 0;
 }
 
-/* --------------------------------------------------------------------------- */
-/* ------------------------- FOOTER MASTER PAGE ---------------------------- */
-/* --------------------------------------------------------------------------- */
-
-/* -------         fondo            ------*/
+/************************************************************************************
+ FOOTER MASTER PAGE 
+*************************************************************************************/
+/*-- DIV FOOTER---*/
 #Footer {
     background: -webkit-linear-gradient(#b70d0d, #631111); /*For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#b70d0d, #631111); /* For Opera 11.1 to 12.0 */
@@ -141,27 +260,157 @@
     background: linear-gradient(#b70d0d, #631111); /* Standard syntax (must be last)*/
     border-radius: 3px;
     position: absolute;
-    margin-top: 5px;
-    width: 95%;
-    margin-left: 25px;
+    width: 100%;
     bottom: 0;
     z-index: 100;
+    clear: both;
 }
 
+/*-- TABLE FOOTER CONTENT---*/
+#M_Footer {
+    width: 100%;
+}
 
+/*-- EVENTO FOOTER ---*/
 .Dimencion_Footer {
-    height: 40px;
+    height: 5%;
     transition: all 0.8s ease;
 }
 
+    /*-- EVENTO FOOTER HOVER---*/
     .Dimencion_Footer:hover {
-        height: 100px;
+        height: 13%;
         transition: all 0.8s ease;
     }
 
-/* -------         parrafos            ------*/
+/*-- PARRAFOS ---*/
 #Parraf_1, #Parraf_2, #Parraf_3 {
     color: #ffffff;
     font-weight: bold;
-    font-size: small;
+    font: 14px/20px CenturyGothic,sans-serif;
+}
+
+/************************************************************************************
+MEDIA QUERIES
+*************************************************************************************/
+/* para 980px o menos horizontal*/
+@media screen and (max-width: 980px) {
+
+    #Page {
+        width: 100%;
+    }
+
+    #Medium {
+        width: 100%;
+    }
+
+    .panel_menu {
+        display: block;
+    }
+}
+
+/* para 600px o menos vertical */
+@media screen and (max-height: 800px) {
+    html {
+        overflow: auto;
+    }
+}
+
+/* para 700px o menos */
+@media screen and (max-width: 700px) {
+    #Medium {
+        width: 100%;
+    }
+
+    #Footer {
+        display: none;
+    }
+
+    .Dimencion_Menu {
+        width: 53px;
+        transition: all 0.8s ease;
+    }
+
+        /*-- EVENTO MENU HOVER---*/
+        .Dimencion_Menu:hover {
+            width: 310px;
+            transition: all 0.8s ease;
+        }
+
+    .panel_menu {
+        display: block;
+    }
+}
+
+/* para 550px o menos */
+@media screen and (max-width: 550px) {
+    #Medium {
+        width: 100%;
+    }
+
+    #Header {
+        height: auto;
+        font: 14px CenturyGothic,sans-serif;
+    }
+
+    .panel_menu {
+        display: block;
+    }
+
+    /*-- TITULO 1, 2 HEADER ---*/
+    .Titulo_1, .Titulo_2 {
+        font: 14px CenturyGothic,sans-serif;
+    }
+
+    /*-- EVENTO MENU ---*/
+    .Dimencion_Menu {
+        width: 53px;
+        transition: all 0.8s ease;
+    }
+
+        /*-- EVENTO MENU HOVER---*/
+        .Dimencion_Menu:hover {
+            width: 310px;
+            transition: all 0.8s ease;
+        }
+}
+
+/* para 480px o menos */
+@media screen and (max-width: 480px) {
+    #Header {
+        height: auto;
+        font: 12px CenturyGothic,sans-serif;
+    }
+
+    /*-- TITULO 1, 2 HEADER ---*/
+    .Titulo_1, .Titulo_2 {
+        font: 11px CenturyGothic,sans-serif;
+    }
+
+    /*-- TITULO  2 HEADER ---*/
+    .Titulo_2 {
+        display: none;
+    }
+
+    /*-- LOGO 1,2,3 HEADER ---*/
+    .Logo_1, .Logo_2, .Logo_3 {
+        display: none;
+    }
+
+    /*-- EVENTO MENU HOVER---*/
+    .Dimencion_Menu:hover {
+        width: 244px;
+        transition: all 0.8s ease;
+    }
+
+    /*-- LOGO MENU ACTIVO --*/
+    #DivMenu {
+        display: inline-table;
+        cursor: pointer;
+        cursor: hand; /*internet explorer*/
+    }
+
+    .panel_menu {
+        display: none;
+    }
 }
