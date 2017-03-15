@@ -1,22 +1,6 @@
-﻿/*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*                                                               ADMININSTRACION PARAMETRIZABLE                                                               */
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
-/*CONTROL IMAGEN DIRECCION*/
-#logoExt:hover .Ext
-{
-    content: url("../../images/agenda_gray.png");
-}
-
-.Ext
-{
-    content: url("../../images/agenda.png");
-}
-
-/*----------------------- TITULO ---------------------------*/
+﻿/*----------------------- TITULO ---------------------------*/
 /*personalizacion de la barra de titulo*/
-#Container_title_Form
-{
+.Container_title_Form {
     background: -webkit-linear-gradient(#b70d0d, #631111); /*For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#b70d0d, #631111); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#b70d0d, #631111); /* For Firefox 3.6 to 15 */
@@ -27,27 +11,58 @@
     padding-right: 0.5em;
     font-weight: bold;
     color: #ffffff;
-    width: 97.5%;
+    width: 94.5%;
+    position: absolute;
 }
 
-#Tabla_Title_form
-{
+#Tabla_Title_form {
     width: 100%;
 }
 
-#image_exit
-{
+/* para 980px o menos horizontal*/
+@media screen and (max-width: 980px) {
+    .Container_title_Form {
+        width: 94.5%;
+    }
+}
+
+/* para 480px o menos */
+@media screen and (max-width: 480px) {
+    .Container_title_Form {
+        width: 96.5%;
+        margin-left: -30px;
+    }
+}
+
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*                                                               ADMININSTRACION PARAMETRIZABLE                                                               */
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*CONTROL IMAGEN DIRECCION*/
+#logoExt:hover .Ext {
+    content: url("../../images/agenda_gray.png");
+    cursor: pointer;
+    cursor: hand; /*internet explorer*/
+}
+
+.Ext {
+    content: url("../../images/agenda.png");
+}
+
+
+
+
+#image_exit {
     text-align: end;
 }
 
-#panel_pag
-{
+#panel_pag {
     vertical-align: text-top;
     padding-left: 30px;
 }
 
-.T_head
-{
+.T_head {
     border-radius: 5px 5px 0 0;
     background: -webkit-linear-gradient(#b70d0d, #631111); /*For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#b70d0d, #631111); /* For Opera 11.1 to 12.0 */
@@ -63,9 +78,8 @@
 /*----------------------- TITULO ---------------------------*/
 /*personalizacion marco del formulario*/
 
-#Marco_Container
-{
-    margin-top: 10px;
+#Marco_Container {
+    margin-top: 35px;
     margin-left: 25px;
     padding: 14px 14px;
     background: -webkit-linear-gradient(#f6f6f6, #e8e8e8); /*For Safari 5.1 to 6.0 */
@@ -74,12 +88,12 @@
     background: linear-gradient(#f6f6f6, #e8e8e8); /* Standard syntax (must be last)*/
     border-radius: 5px;
     border: solid 1px #ccc;
-    width: 95.5%;
+    width: 92.5%;
     height: 40%;
+    position: absolute;
 }
 
-#Marco_btn_Form
-{
+#Marco_btn_Form {
     margin-top: 1px;
     padding: 20px 20px;
     background-color: silver;
@@ -94,8 +108,7 @@
     text-align: center;
 }
 
-#Marco_trabajo_Form
-{
+#Marco_trabajo_Form {
     position: relative;
     margin-top: 10px;
     padding: 20px 20px;
@@ -110,8 +123,7 @@
     overflow: auto;
 }
 
-#Marco_trabajo_Huella
-{
+#Marco_trabajo_Huella {
     position: relative;
     margin-top: 10px;
     padding: 20px 20px;
@@ -126,8 +138,7 @@
 /*personalizacion de los formularios internos*/
 
 
-#TablaDatos
-{
+#TablaDatos {
     width: 100%;
     padding: 20px 26px;
     border-radius: 10px;
@@ -138,8 +149,7 @@
     border: solid 1px #921919;
 }
 
-#TablaDatos_D, #TablaDatos_D_Vista
-{
+#TablaDatos_D, #TablaDatos_D_Vista {
     width: 96%;
     height: 100%;
     padding: 2%;
@@ -152,8 +162,7 @@
     overflow: auto;
 }
 
-#TablaDatos_D_Max
-{
+#TablaDatos_D_Max {
     width: 860px;
     height: 380px;
     overflow: auto;
@@ -166,8 +175,7 @@
     border: solid 1px #921919;
 }
 
-#TablaDatos_D_Calen
-{
+#TablaDatos_D_Calen {
     width: 1120px;
     height: 350px;
     overflow: auto;
@@ -180,8 +188,7 @@
     border: solid 1px #921919;
 }
 
-#TablaProductos_D
-{
+#TablaProductos_D {
     width: 985px;
     padding: 40px 30px;
     border-radius: 10px;
@@ -192,8 +199,7 @@
     border: solid 1px #921919;
 }
 
-#Datos_Direc_D, #Datos_Bank_D
-{
+#Datos_Direc_D, #Datos_Bank_D {
     margin-top: 20px;
     width: 90%;
     padding: 40px 30px;
@@ -205,8 +211,7 @@
     border: solid 1px #921919;
 }
 
-#TablaConsulta
-{
+#TablaConsulta {
     width: 100%;
     padding: 20px 26px;
     border-radius: 10px;
@@ -218,8 +223,7 @@
 }
 
 /*personalizacion de las cajas de texto */
-#TxtRuta
-{
+#TxtRuta {
     -webkit-appearance: none;
     border: none;
     width: 97%;
@@ -234,8 +238,7 @@
 
 
 /*------------------- ajuste de grid administracion -----------------------------------------------*/
-#TLink, #TOpcRol, #TRol, #TUser
-{
+#TLink, #TOpcRol, #TRol, #TUser {
     font: 12px/20px CenturyGothic,sans-serif;
 }
 
@@ -244,8 +247,7 @@
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /*------------------- ajuste de grid parametrizacion -----------------------------------------------*/
-#TArea, #TEmpleado, #TFestivo
-{
+#TArea, #TEmpleado, #TFestivo {
     font: 12px/20px CenturyGothic,sans-serif;
 }
 
@@ -253,8 +255,7 @@
 /*                                                           ESTILOS PAISES                                                               */
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-#container_TGrid, #container_TSucursalSer, #container_TSucursal, #container_TRDoc_Verificacion, #container_TR_PuertaAcc_Area, #container_TPuertaAcceso, #container_TConsecutivos_General, #container_TConsecutivos, #container_TRGrpDoc_Doc, #container_TDocumento, #container_TRutaDocumentos, #container_TGrpDocumentos, #container_TCargo, #container_TProductos, #container_TTransacciones, #container_TTP_Activo, #container_TTP_Leasing, #container_TSActivo, #container_TActivo, #container_TSTP_Leasing, #container_TFasecolda, #container_TMonedaCot, #container_TPaises, #container_TMensajes, #container_TAyudas, #container_TCiudades, #container_TImpuesto_Gasto, #container_Tlink, #container_Trol, #container_TopcRol, #container_TUser, #container_TInf_Impuesto, #container_TPorcen_Descuentos, #container_TCliente, #container_TMonedaCod, #container_TArea, #container_TEmpleado, #container_TFestivo, #container_TServicio
-{
+#container_TGrid, #container_TSucursalSer, #container_TSucursal, #container_TRDoc_Verificacion, #container_TR_PuertaAcc_Area, #container_TPuertaAcceso, #container_TConsecutivos_General, #container_TConsecutivos, #container_TRGrpDoc_Doc, #container_TDocumento, #container_TRutaDocumentos, #container_TGrpDocumentos, #container_TCargo, #container_TProductos, #container_TTransacciones, #container_TTP_Activo, #container_TTP_Leasing, #container_TSActivo, #container_TActivo, #container_TSTP_Leasing, #container_TFasecolda, #container_TMonedaCot, #container_TPaises, #container_TMensajes, #container_TAyudas, #container_TCiudades, #container_TImpuesto_Gasto, #container_Tlink, #container_Trol, #container_TopcRol, #container_TUser, #container_TInf_Impuesto, #container_TPorcen_Descuentos, #container_TCliente, #container_TMonedaCod, #container_TArea, #container_TEmpleado, #container_TFestivo, #container_TServicio {
     width: 1050px;
     height: 238px;
     overflow: auto;
@@ -263,8 +264,7 @@
     text-align: center;
 }
 
-#container_TGrid_New
-{
+#container_TGrid_New {
     width: 100%;
     height: 100%;
     overflow: auto;
@@ -273,21 +273,18 @@
     text-align: center;
 }
 
-#Container_controls
-{
+#Container_controls {
     width: 100%;
 }
 
-#Container_Consulta, #Container_Facturas, #container_TCiclo
-{
+#Container_Consulta, #Container_Facturas, #container_TCiclo {
     width: 100%;
     overflow: auto;
     font: 12px/20px CenturyGothic,sans-serif;
     text-align: center;
 }
 
-#container_Document, #container_direccion, #container_Bank, #container_TGrid_2
-{
+#container_Document, #container_direccion, #container_Bank, #container_TGrid_2 {
     width: 970px;
     height: 340px;
     overflow: auto;
@@ -296,8 +293,7 @@
     text-align: center;
 }
 
-#container_TGrid_2
-{
+#container_TGrid_2 {
     width: 1120px;
     height: 190px;
     overflow: auto;
@@ -307,8 +303,7 @@
     margin-top: 5px;
 }
 
-#container_TDoc_H
-{
+#container_TDoc_H {
     width: 930px;
     height: 150px;
     overflow: auto;
@@ -317,8 +312,7 @@
     text-align: center;
 }
 
-#container_Autorizacion
-{
+#container_Autorizacion {
     width: 1160px;
     height: 360px;
     overflow: auto;
@@ -328,8 +322,7 @@
 }
 
 
-.Dialog_Sasif
-{
+.Dialog_Sasif {
     border-radius: 10px;
     padding: 20px 26px;
     background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
@@ -339,26 +332,22 @@
     border: solid 1px #921919;
 }
 
-#D_Impuestos
-{
+#D_Impuestos {
     font: 12px/20px CenturyGothic,sans-serif;
 }
 
-.Title_Bold
-{
+.Title_Bold {
     font: 20px/28px CenturyGothic,sans-serif;
     font-weight: bold;
     color: #2C2C2C;
 }
 
-.Label_Bold
-{
+.Label_Bold {
     font: 12px/20px CenturyGothic,sans-serif;
     font-weight: bold;
 }
 
-#Relacion, #Complementos, #Complementos_Read, #Vencimiento, #Complementos_Read_Cliente, #Anexos, #Blo_Inmuebles, #Blo_Fasecolda
-{
+#Relacion, #Complementos, #Complementos_Read, #Vencimiento, #Complementos_Read_Cliente, #Anexos, #Blo_Inmuebles, #Blo_Fasecolda {
     margin-top: 1%;
     margin-bottom: 1%;
     width: 100%;
@@ -371,8 +360,7 @@
     border: solid 1px #921919;
 }
 
-#Bloque_datosIngreso, #T_Datos_Identificacion_blin, #Bloque_datos_activos, #Bloque_Datos_Factura
-{
+#Bloque_datosIngreso, #T_Datos_Identificacion_blin, #Bloque_datos_activos, #Bloque_Datos_Factura {
     margin-top: 1%;
     margin-bottom: 1%;
     width: 95%;
@@ -385,8 +373,7 @@
     border: solid 1px #921919;
 }
 
-#Bloque_datos_Terceros1, #Bloque_datos_Terceros2
-{
+#Bloque_datos_Terceros1, #Bloque_datos_Terceros2 {
     margin-top: 1%;
     margin-bottom: 1%;
     width: 95%;
@@ -399,34 +386,29 @@
     border: solid 1px #921919;
 }
 
-#Controls
-{
+#Controls {
     text-align: center;
     width: 100%;
     margin: 10px;
 }
 
-.topform
-{
+.topform {
     border: gray solid 2px;
     border-style: outset;
     border-radius: 3px;
     width: 150px;
 }
 
-.Select_tiny
-{
+.Select_tiny {
     width: 50px;
 }
 
-.Select_medium
-{
+.Select_medium {
     width: 90px;
 }
 
 
-#Tabla_Info_Dic, #Tabla_Ubic, #Tabla_Direccion, #Tabla_Correo, #Tabla_Telefono
-{
+#Tabla_Info_Dic, #Tabla_Ubic, #Tabla_Direccion, #Tabla_Correo, #Tabla_Telefono {
     margin-top: 10px;
     width: 740px;
     border-radius: 20px;
@@ -434,8 +416,7 @@
     font: 12px/20px CenturyGothic,sans-serif;
 }
 
-#D_Impuestos, #D_Clientes_Z
-{
+#D_Impuestos, #D_Clientes_Z {
     margin-top: 15px;
     padding: 20px 26px;
     border-radius: 10px;
@@ -447,14 +428,12 @@
     font: 12px/20px CenturyGothic,sans-serif;
 }
 
-#container_direccion
-{
+#container_direccion {
     font: 12px/20px CenturyGothic,sans-serif;
     text-align: center;
 }
 
-#Blo_Transacciones, #Blo_Cuentas, #TablaHoras
-{
+#Blo_Transacciones, #Blo_Cuentas, #TablaHoras {
     margin-top: 10px;
     width: 100%;
     padding: 20px 26px;
@@ -466,13 +445,11 @@
     border: solid 1px #921919;
 }
 
-#T_Valores, #T_Saldos
-{
+#T_Valores, #T_Saldos {
     width: 100%;
 }
 
-#Marco_Contrato
-{
+#Marco_Contrato {
     margin-top: 10px;
     padding: 20px 48px;
     border-radius: 10px;
@@ -485,8 +462,7 @@
     margin-left: 25px;
 }
 
-#Marco_trabajo_Contrato
-{
+#Marco_trabajo_Contrato {
     margin-top: 10px;
     padding: 20px 20px;
     border-radius: 10px;
@@ -499,8 +475,7 @@
     overflow: auto;
 }
 
-#Container_Complementos
-{
+#Container_Complementos {
     height: 45%;
     width: 20%;
     position: absolute;
@@ -516,8 +491,7 @@
     margin-top: 10px;
 }
 
-.Option_Cliente
-{
+.Option_Cliente {
     background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
@@ -529,8 +503,7 @@
     color: gray;
 }
 
-    .Option_Cliente:hover
-    {
+    .Option_Cliente:hover {
         background: -webkit-linear-gradient(#b70d0d, #631111);
         background: -o-linear-gradient(#b70d0d, #631111);
         background: -moz-linear-gradient(#b70d0d, #631111);
@@ -540,20 +513,17 @@
         cursor: pointer;
     }
 
-.C_Image
-{
+.C_Image {
     padding-left: 10px;
     position: absolute;
 }
 
-.C_Text
-{
+.C_Text {
     padding-left: 60px;
     margin-top: 15px;
 }
 
-.T_options
-{
+.T_options {
     margin-top: 25px;
     margin-left: 50px;
     position: absolute;
@@ -561,40 +531,33 @@
 }
 
 /*CONTROL IMAGEN DIRECCION*/
-#DivA:hover .ImaAddress
-{
+#DivA:hover .ImaAddress {
     content: url("../../images/adress_book_w.png");
 }
 
-.ImaAddress
-{
+.ImaAddress {
     content: url("../../images/adress_book.png");
 }
 
 /*CONTROL IMAGEN BANCO*/
-#DivB:hover .ImaBank
-{
+#DivB:hover .ImaBank {
     content: url("../../images/bank_w.png");
 }
 
-.ImaBank
-{
+.ImaBank {
     content: url("../../images/bank.png");
 }
 
 /*CONTROL IMAGEN BANCO*/
-#DivD:hover .ImaDoc
-{
+#DivD:hover .ImaDoc {
     content: url("../../images/documentos_w.png");
 }
 
-.ImaDoc
-{
+.ImaDoc {
     content: url("../../images/documentos.png");
 }
 
-#Foto_Persona
-{
+#Foto_Persona {
     width: 86%;
     height: 120px;
     position: absolute;
@@ -603,8 +566,7 @@
     margin-top: 10px;
 }
 
-#Footer_Det
-{
+#Footer_Det {
     position: absolute;
     margin-top: 55px;
     border: solid 1px;
@@ -612,20 +574,17 @@
     border-style: outset;
 }
 
-.Sigla
-{
+.Sigla {
     text-align: left;
     font-size: 10px;
     font-weight: bold;
 }
 
 /*CONTROL IMAGEN BANCO*/
-#Div_R:hover .ImaRelation, #Div_RC:hover .ImaRelation
-{
+#Div_R:hover .ImaRelation, #Div_RC:hover .ImaRelation {
     content: url("../../images/Relation_Gray.png");
 }
 
-.ImaRelation
-{
+.ImaRelation {
     content: url("../../images/Relation_Red.png");
 }

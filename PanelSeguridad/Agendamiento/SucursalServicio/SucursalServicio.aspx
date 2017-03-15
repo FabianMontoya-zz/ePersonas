@@ -35,7 +35,7 @@
         </div>
     </div>
 
-    <div id="Container_title_Form">
+    <div class="Container_title_Form">
         <table id="Tabla_Title_form">
             <tr>
                 <td id="Title_form"></td>

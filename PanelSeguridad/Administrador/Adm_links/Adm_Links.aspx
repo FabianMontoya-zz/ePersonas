@@ -21,7 +21,6 @@
     <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
-
     <div id="Dialog_Control" style="width: 100%; text-align: center;">
         <div class="cssload-container" style="margin-top: 25%;">
             <div class="cssload-whirlpool"></div>
@@ -30,8 +29,7 @@
             </div>
         </div>
     </div>
-
-    <div id="Container_title_Form">
+    <div class="Container_title_Form">
         <table id="Tabla_Title_form">
             <tr>
                 <td id="Title_form"></td>
