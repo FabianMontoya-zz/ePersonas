@@ -34,9 +34,6 @@ var StrPolitica;
 //Evento load JS
 $(document).ready(function () {
 
-    $("#Marco_trabajo_Form").css("height", "490px");
-    $("#container_TCliente").css("height", "380px");
-
     transaccionAjax_MPaises_Ciudades('MATRIX_PAIS_CIUDAD');
     transaccionAjax_MArea('MATRIX_AREA');
     transaccionAjax_MCargo('MATRIX_CARGO');
@@ -442,8 +439,8 @@ function Table_Cliente() {
     }
 
     html_Cliente += "</tbody></table>";
-    $("#container_TCliente").html("");
-    $("#container_TCliente").html(html_Cliente);
+    $(".container_TGrid").html("");
+    $(".container_TGrid").html(html_Cliente);
 
     $(".Opciones").click(function () {
     });
@@ -484,7 +481,7 @@ function Editar(Index_Cliente, Type) {
     OpcWordComplementos = Type;
 
     D_Nit = ArrayCliente[Index_Cliente].Nit_ID;
-  
+
     D_TDocumento = ArrayCliente[Index_Cliente].TypeDocument_ID;
     D_Documento = ArrayCliente[Index_Cliente].Document_ID;
     editNit_ID = ArrayCliente[Index_Cliente].Nit_ID;
@@ -640,7 +637,7 @@ function HabilitarPanel(opcion) {
             $("#BtnLimpiar").css("display", "none");
 
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TCliente").html("");
+            $(".container_TGrid").html("");
             estado = opcion;
             Clear();
             break;
@@ -659,7 +656,7 @@ function HabilitarPanel(opcion) {
             $("#BtnLimpiar").css("display", "none");
 
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TCliente").html("");
+            $(".container_TGrid").html("");
             estado = opcion;
             Clear();
             Enabled_Client();
@@ -676,7 +673,7 @@ function HabilitarPanel(opcion) {
             $("#BtnLimpiar").css("display", "none");
 
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TCliente").html("");
+            $(".container_TGrid").html("");
             estado = opcion;
             Clear();
             break;
@@ -896,7 +893,7 @@ function Clear() {
 
     $("#TxtRead").val("");
     $("#DDLColumns").val("-1");
-    
+
     $("#Check_Cliente").prop("checked", false);
     $("#Check_Avaluador").prop("checked", false);
     $("#Check_Transito").prop("checked", false);

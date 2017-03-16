@@ -8,9 +8,6 @@ var editID;
 //Evento load JS
 $(document).ready(function () {
 
-    $("#Marco_trabajo_Form").css("height", "490px");
-    $("#container_TMonedaCod").css("height", "380px");
-
     /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
     Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
     Ocultar_Errores();
@@ -18,7 +15,7 @@ $(document).ready(function () {
     /*==================FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN==============*/
 
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
-    
+
 });
 
 //Función que oculta todas las IMG de los errores en pantalla
@@ -76,7 +73,7 @@ function HabilitarPanel(opcion) {
         case "buscar":
             $("#TablaDatos").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TMonedaCod").html("");
+            $(".container_TGrid").html("");
             estado = opcion;
             Clear();
             break;
@@ -84,7 +81,7 @@ function HabilitarPanel(opcion) {
         case "modificar":
             $("#TablaDatos").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TMonedaCod").html("");
+            $(".container_TGrid").html("");
             estado = opcion;
             ResetError();
             Clear();
@@ -93,7 +90,7 @@ function HabilitarPanel(opcion) {
         case "eliminar":
             $("#TablaDatos").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TMonedaCod").html("");
+            $(".container_TGrid").html("");
             estado = opcion;
             Clear();
             break;
@@ -148,10 +145,10 @@ function validarCamposCrear() {
 
     var Campo_1 = $("#Txt_ID").val();
     var Campo_2 = $("#Txt_Descripcion").val();
-    
+
     var validar = 0;
 
-    if ( Campo_2 == "" || Campo_1 == "") {
+    if (Campo_2 == "" || Campo_1 == "") {
         validar = 1;
         if (Campo_1 == "") {
             $("#ImgID").css("display", "inline-table");
@@ -223,8 +220,8 @@ function Table_MonedaCod() {
     }
 
     html_MonedaCod += "</tbody></table>";
-    $("#container_TMonedaCod").html("");
-    $("#container_TMonedaCod").html(html_MonedaCod);
+    $(".container_TGrid").html("");
+    $(".container_TGrid").html(html_MonedaCod);
 
     $("#TMonedaCod").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,
@@ -257,7 +254,7 @@ function Editar(index_MonedaCod) {
             $("#Txt_ID").attr("disabled", "disabled");
             $("#Txt_Descripcion").val(ArrayMonedaCod[itemArray].Descripcion);
             $("#Txt_Sigla").val(ArrayMonedaCod[itemArray].Sigla);
-             editID = ArrayMonedaCod[itemArray].MonedaCod_ID;
+            editID = ArrayMonedaCod[itemArray].MonedaCod_ID;
             $("#Btnguardar").attr("value", "Actualizar");
         }
     }

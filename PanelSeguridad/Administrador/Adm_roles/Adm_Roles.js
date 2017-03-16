@@ -10,9 +10,6 @@ var editNIT;
 //Evento load JS
 $(document).ready(function () {
 
-    $("#Marco_trabajo_Form").css("height", "490px");
-    $("#container_Trol").css("height", "380px");
-
     /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
     Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
     Ocultar_Errores();
@@ -79,7 +76,7 @@ function HabilitarPanel(opcion) {
         case "buscar":
             $("#TablaDatos").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_Trol").html("");
+            $(".container_TGrid").html("");
             estado = opcion;
             Clear();
             break;
@@ -87,7 +84,7 @@ function HabilitarPanel(opcion) {
         case "modificar":
             $("#TablaDatos").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_Trol").html("");
+            $(".container_TGrid").html("");
             estado = opcion;
             ResetError();
             Clear();
@@ -96,7 +93,7 @@ function HabilitarPanel(opcion) {
         case "eliminar":
             $("#TablaDatos").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_Trol").html("");
+            $(".container_TGrid").html("");
             estado = opcion;
             Clear();
             break;
@@ -241,8 +238,8 @@ function Table_rol() {
     }
 
     html_TRol += "</tbody></table>";
-    $("#container_Trol").html("");
-    $("#container_Trol").html(html_TRol);
+    $(".container_TGrid").html("");
+    $(".container_TGrid").html(html_TRol);
 
     $("#TRol").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,

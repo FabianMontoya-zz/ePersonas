@@ -28,10 +28,7 @@ var D_String_Contacto;
 
 //Evento load JS
 $(document).ready(function () {
-
-    $("#Marco_trabajo_Form").css("height", "490px");
-    $("#container_TInf_Impuesto").css("height", "380px");
-
+        
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_Pais('Pais');
     transacionAjax_Impuesto('Impuesto');
@@ -223,7 +220,7 @@ function HabilitarPanel(opcion) {
 
             $("#controls_X").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TInf_Impuesto").html("");
+            $(".container_TGrid").html("");
             estado = opcion;
             Clear();
             break;
@@ -236,7 +233,7 @@ function HabilitarPanel(opcion) {
             $("#TablaCliente").css("display", "none");
             $("#controls_X").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TInf_Impuesto").html("");
+            $(".container_TGrid").html("");
             estado = opcion;
             Clear();
             break;
@@ -379,8 +376,8 @@ function Tabla_eliminar() {
         }
     }
     html_Inf_Impuesto += "</tbody></table>";
-    $("#container_TInf_Impuesto").html("");
-    $("#container_TInf_Impuesto").html(html_Inf_Impuesto);
+    $(".container_TGrid").html("");
+    $(".container_TGrid").html(html_Inf_Impuesto);
 
     $(".Eliminar").click(function () {
     });
@@ -427,8 +424,8 @@ function Tabla_consulta() {
         }
     }
     html_Inf_Impuesto += "</tbody></table>";
-    $("#container_TInf_Impuesto").html("");
-    $("#container_TInf_Impuesto").html(html_Inf_Impuesto);
+    $(".container_TGrid").html("");
+    $(".container_TGrid").html(html_Inf_Impuesto);
 
     $(".Ver").click(function () {
     });

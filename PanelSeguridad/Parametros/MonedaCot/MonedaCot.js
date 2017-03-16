@@ -10,10 +10,7 @@ var editID;
 //Evento load JS
 $(document).ready(function () {
 
-    $("#Marco_trabajo_Form").css("height", "490px");
-    $("#container_TMonedaCot").css("height", "380px");
-
-    /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
+   /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
     Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
     Ocultar_Errores();
     Ocultar_Tablas();
@@ -87,7 +84,7 @@ function HabilitarPanel(opcion) {
         case "buscar":
             $(".Dialog_Datos").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TMonedaCot").html("");
+            $(".container_TGrid").html("");
             estado = opcion;
             Clear();
             break;
@@ -95,7 +92,7 @@ function HabilitarPanel(opcion) {
         case "modificar":
             $(".Dialog_Datos").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TMonedaCot").html("");
+            $(".container_TGrid").html("");
             estado = opcion;
             ResetError();
             Clear();
@@ -104,7 +101,7 @@ function HabilitarPanel(opcion) {
         case "eliminar":
             $(".Dialog_Datos").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TMonedaCot").html("");
+            $(".container_TGrid").html("");
             estado = opcion;
             Clear();
             break;
@@ -245,8 +242,8 @@ function Table_MonedaCot() {
     }
 
     html_MonedaCot += "</tbody></table>";
-    $("#container_TMonedaCot").html("");
-    $("#container_TMonedaCot").html(html_MonedaCot);
+    $(".container_TGrid").html("");
+    $(".container_TGrid").html(html_MonedaCot);
 
     $("#TMonedaCot").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,

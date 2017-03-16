@@ -288,7 +288,7 @@ function Grid_Doc_People_Business(Matrix, Val_GrpDoc, Type) {
 
     switch (Type) {
         case "Empleado":
-            html_DP = "<table id='TDP' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th class='T_head' colspan='6'>Documentación Empleado</th></tr><tr><th>Documento</th><th>Existe</th><th>Verificado</th><th>Vigencia</th><th>Fecha Vencimiento</th><th>Ver</th></tr></thead><tbody>";
+            html_DP = "<table id='TDP' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th class='Grid_Head' colspan='6'>Documentación Empleado</th></tr><tr><th>Documento</th><th>Existe</th><th>Verificado</th><th>Vigencia</th><th>Fecha Vencimiento</th><th>Ver</th></tr></thead><tbody>";
             var JsonVerifDoc;
             var TotalEstado = 0;
 
@@ -346,7 +346,7 @@ function Grid_Doc_People_Business(Matrix, Val_GrpDoc, Type) {
             break;
 
         case "Empresa":
-            html_DP = "<table id='TDE' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th class='T_head' colspan='6'>Documentación Empresa</th></tr><tr><th>Documento</th><th>Existe</th><th>Verificado</th><th>Vigencia</th><th>Fecha Vencimiento</th><th>Ver</th></tr></thead><tbody>";
+            html_DP = "<table id='TDE' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th class='Grid_Head' colspan='6'>Documentación Empresa</th></tr><tr><th>Documento</th><th>Existe</th><th>Verificado</th><th>Vigencia</th><th>Fecha Vencimiento</th><th>Ver</th></tr></thead><tbody>";
             var JsonVerifDoc;
 
             for (itemArray in Matrix) {
@@ -516,7 +516,7 @@ function Tabla_AccesosPredeterminados() {
     var html_AP;
     var Flag_ingreso;
 
-    html_AP = "<table id='TAP' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th class='T_head' colspan='10' style='margin-top: 5px;' >AccesosPredetermminados</th></tr><tr><th style='width: 2%;'>Selección</th><th></th><th>Acceso</th><th>Area</th><th>Persona Encargada</th><th style='width: 10%;'>Fecha inicial</th><th style='width: 10%;'>Fecha final</th><th style='width: 12%;'>Hora Entrada</th><th style='width: 12%;'>Hora Salida</th><th>Horario de ingreso</th></tr></thead><tbody>";
+    html_AP = "<table id='TAP' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th class='Grid_Head' colspan='10' style='margin-top: 5px;' >AccesosPredetermminados</th></tr><tr><th style='width: 2%;'>Selección</th><th></th><th>Acceso</th><th>Area</th><th>Persona Encargada</th><th style='width: 10%;'>Fecha inicial</th><th style='width: 10%;'>Fecha final</th><th style='width: 12%;'>Hora Entrada</th><th style='width: 12%;'>Hora Salida</th><th>Horario de ingreso</th></tr></thead><tbody>";
     for (item in List_Acceso_Predeterminado) {
         if (List_Acceso_Predeterminado[item].Document_ID == Array_People[0].Document_ID &&
             List_Acceso_Predeterminado[item].Estado == "1") {
@@ -673,8 +673,8 @@ function Table_Extenciones() {
     }
 
     html += "</tbody></table>";
-    $("#container_TGrid_New").html("");
-    $("#container_TGrid_New").html(html);
+    $(".container_TGrid_New").html("");
+    $(".container_TGrid_New").html(html);
 
     $("#TGridExtencion").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,

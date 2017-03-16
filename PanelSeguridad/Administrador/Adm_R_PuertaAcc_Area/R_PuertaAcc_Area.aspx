@@ -69,7 +69,7 @@
                     </tr>
                     <tr>
                         <td colspan="4">
-                            <div id="container_TR_PuertaAcc_Area">
+                            <div class="container_TGrid">
                             </div>
                         </td>
                     </tr>

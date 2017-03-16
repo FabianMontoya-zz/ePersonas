@@ -46,7 +46,7 @@ var editID;
 //Evento load JS
 $(document).ready(function () {
     $("#Marco_trabajo_Form").css("height", "490px");
-    $("#container_TGrid").css("height", "380px");
+    $(".container_TGrid").css("height", "380px");
 
     /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
     Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
@@ -150,7 +150,7 @@ function Ocultar_Errores() {
 //Función que oculta las tablas
 function Ocultar_Tablas() {
     $("#TablaHoras").css("display", "none"); //Table que contiene el capturador de horas
-    $("#container_TGrid_2").css("display", "none"); //Tabla que dibuja el grid con las horas ya capturadas
+    $(".container_TGrid_Create").css("display", "none"); //Tabla que dibuja el grid con las horas ya capturadas
     $("#TablaConsulta").css("display", "none");
     $("#Tabla_10").css("display", "none");
 }
@@ -221,7 +221,7 @@ function BtnAgregaCalendario() {
                 $("#Select_StateSab").prop('disabled', true).trigger("chosen:updated");
                 $("#Select_StateDom").prop('disabled', true).trigger("chosen:updated");
                 $("#Select_Festivo").prop('disabled', true).trigger("chosen:updated");
-                $("#container_TGrid_2").css("display", "inline-table"); //Tabla que dibuja el grid con las horas ya capturadas
+                $(".container_TGrid_Create").css("display", "inline-table"); //Tabla que dibuja el grid con las horas ya capturadas
             }
             break;
 
@@ -266,7 +266,7 @@ function HabilitarPanel(opcion) {
         case "buscar":
             $(".Dialog_Datos_Calen").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TGrid").html("");
+            $(".container_TGrid").html("");
             estado = opcion;
             Clear();
             break;
@@ -274,7 +274,7 @@ function HabilitarPanel(opcion) {
         case "modificar":
             $(".Dialog_Datos_Calen").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TGrid").html("");
+            $(".container_TGrid").html("");
             estado = opcion;
             ResetError();
             Clear();
@@ -283,7 +283,7 @@ function HabilitarPanel(opcion) {
         case "eliminar":
             $(".Dialog_Datos_Calen").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TGrid").html("");
+            $(".container_TGrid").html("");
             estado = opcion;
             Clear();
             break;
@@ -962,9 +962,11 @@ function TGridCalendar() {
     }
     html_Calendario += "</tbody></table></td>"; //Cerramos tabla Domingo
 
+
     html_Calendario += "</tr></tbody></table>";//Cerramos tabla principal
-    $("#container_TGrid_2").html("");
-    $("#container_TGrid_2").html(html_Calendario);
+   
+    $(".container_TGrid_Create").html("");
+    $(".container_TGrid_Create").html(html_Calendario);
 
     $("#TCalendario").dataTable({
         "paging": false,
@@ -1123,8 +1125,8 @@ function Table_Calendario() {
     }
 
     html_Calendario += "</tbody></table>";
-    $("#container_TGrid").html("");
-    $("#container_TGrid").html(html_Calendario);
+    $(".container_TGrid").html("");
+    $(".container_TGrid").html(html_Calendario);
 
     $(".Eliminar").click(function () {
     });
@@ -1300,7 +1302,7 @@ function VerifyTextDescription(value) {
         $("#Select_TipoCalendario").val("-1").trigger("chosen:updated");
         $("#Tabla_10").css("display", "none");
         $("#TablaHoras").css("display", "none"); //Table que contiene el capturador de horas
-        $("#container_TGrid_2").css("display", "none"); //Tabla que dibuja el grid con las horas ya capturadas
+        $(".container_TGrid_Create").css("display", "none"); //Tabla que dibuja el grid con las horas ya capturadas
     } else {
         $("#Select_TipoCalendario").prop('disabled', false).trigger("chosen:updated");
     }

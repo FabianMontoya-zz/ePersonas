@@ -76,7 +76,7 @@
                     </tr>
                     <tr>
                         <td colspan="4">
-                            <div id="container_TSucursalSer">
+                            <div class="container_TGrid">
                             </div>
                         </td>
                     </tr>

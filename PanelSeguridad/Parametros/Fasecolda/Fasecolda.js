@@ -8,8 +8,6 @@ var Edit_ID;
 
 //Evento load JS
 $(document).ready(function () {
-    $("#Marco_trabajo_Form").css("height", "490px");
-    $("#container_TFasecolda").css("height", "380px");
     Load_Charge_Sasif();
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     $("#ESelect").css("display", "none");
@@ -104,7 +102,7 @@ function HabilitarPanel(opcion) {
         case "buscar":
             $("#Dialog_Fasecolda").dialog("close");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TFasecolda").html("");
+            $(".container_TGrid").html("");
             $("#Select_Estado").removeAttr("disabled");
             $('.C_Chosen').trigger('chosen:updated');
 
@@ -116,7 +114,7 @@ function HabilitarPanel(opcion) {
         case "modificar":
             $("#Dialog_Fasecolda").dialog("close");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TFasecolda").html("");
+            $(".container_TGrid").html("");
             $("#Select_Estado").removeAttr("disabled");
             $('.C_Chosen').trigger('chosen:updated');
             estado = opcion;
@@ -128,7 +126,7 @@ function HabilitarPanel(opcion) {
         case "eliminar":
             $("#Dialog_Fasecolda").dialog("close");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TFasecolda").html("");
+            $(".container_TGrid").html("");
             $("#Select_Estado").removeAttr("disabled");
             $('.C_Chosen').trigger('chosen:updated');
 
@@ -265,8 +263,8 @@ function Tabla_modificar() {
         }
     }
     html_Fasecolda += "</tbody></table>";
-    $("#container_TFasecolda").html("");
-    $("#container_TFasecolda").html(html_Fasecolda);
+    $(".container_TGrid").html("");
+    $(".container_TGrid").html(html_Fasecolda);
 
     $(".Eliminar").click(function () {
     });
@@ -349,8 +347,8 @@ function Tabla_eliminar() {
         }
     }
     html_Fasecolda += "</tbody></table>";
-    $("#container_TFasecolda").html("");
-    $("#container_TFasecolda").html(html_Fasecolda);
+    $(".container_TGrid").html("");
+    $(".container_TGrid").html(html_Fasecolda);
 
     $(".Eliminar").click(function () {
     });
@@ -387,8 +385,8 @@ function Tabla_consulta() {
         }
     }
     html_Fasecolda += "</tbody></table>";
-    $("#container_TFasecolda").html("");
-    $("#container_TFasecolda").html(html_Fasecolda);
+    $(".container_TGrid").html("");
+    $(".container_TGrid").html(html_Fasecolda);
 
     $(".Ver").click(function () {
     });

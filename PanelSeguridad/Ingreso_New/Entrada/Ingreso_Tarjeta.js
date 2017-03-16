@@ -344,7 +344,7 @@ function CreateJSON_IngresoLog() {
 
 //crea el grid de ingreso
 function Tabla_Ingreso() {
-    var html = "<table id='TIng' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th class='T_head' colspan='7' style='margin-top: 5px;' >Registro de Ingresos</th></tr><tr><th style='width: 2%;'>Eliminar</th><th>Puerta</th><th>Area</th><th>Persona Encargada</th><th>Tiempo Visita</th><th>Fecha/Hora Ingreso</th><th>Fecha/Hora Estimada Salida</th></tr></thead><tbody>";
+    var html = "<table id='TIng' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th class='Grid_Head' colspan='7' style='margin-top: 5px;' >Registro de Ingresos</th></tr><tr><th style='width: 2%;'>Eliminar</th><th>Puerta</th><th>Area</th><th>Persona Encargada</th><th>Tiempo Visita</th><th>Fecha/Hora Ingreso</th><th>Fecha/Hora Estimada Salida</th></tr></thead><tbody>";
 
     for (item in Array_IngresoLog) {
         html += "<tr id= 'TIng_" + Array_IngresoLog[item].Index + "'><td><input type='radio' name='Asig' id='Check_" + Array_IngresoLog[item].Index + "' value='TR" + Array_IngresoLog[item].Index + "' onclick=\"EliminarIngreso('" + Array_IngresoLog[item].Index + "')\"/></td><td>" + Array_IngresoLog[item].PuertaAcceso_ID + " - " + Array_IngresoLog[item].DescripPuertaAcceso + "</td><td>" + Array_IngresoLog[item].Area_ID + " - " + Array_IngresoLog[item].DescripAreaAcceso + "</td><td>" + Array_IngresoLog[item].DescripPersona_Enc + "</td><td>" + Array_IngresoLog[item].Tiempo_PlanVisita + "</td><td>" + Array_IngresoLog[item].FechaIngreso + "</td><td>" + Array_IngresoLog[item].Fecha_PlanSalida + "  " + Array_IngresoLog[item].Hora_PlanSalida + "</td></tr>";

@@ -137,6 +137,40 @@ CONTENEDOR DE FORMULARIO
     border: solid 1px #921919;
 }
 
+/*-- CONTENEDOR DE LAS GRILLAS DE CONSULTA DE ADMINISTRACION ---*/
+.container_TGrid {
+    width: 1050px;
+    height: 348px;
+    overflow: auto;
+    border: solid 1px #CACACA;
+    font: 12px/20px CenturyGothic,sans-serif;
+    text-align: center;
+}
+
+/*-- CONTENEDOR DE LAS GRILLAS DE OPERACION EN LOS MODULOS ---*/
+.container_TGrid_Create {
+    width: 1120px;
+    height: 190px;
+    overflow: auto;
+    border: solid 1px #CACACA;
+    font: 12px/20px CenturyGothic,sans-serif;
+    text-align: center;
+    margin-top: 5px;
+}
+
+/*-- CONTENEDOR POR BLOQUES EN TABLAS ---*/
+.Table_Header_Block{
+    margin-top: 10px;
+    width: 100%;
+    padding: 20px 26px;
+    border-radius: 10px;
+    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+    border: solid 1px #921919;
+}
+
 
 /************************************************************************************
 MEDIA QUERIES
@@ -250,50 +284,6 @@ MEDIA QUERIES
     text-align: end;
 }
 
-.T_head {
-    border-radius: 5px 5px 0 0;
-    background: -webkit-linear-gradient(#b70d0d, #631111); /*For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#b70d0d, #631111); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#b70d0d, #631111); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#b70d0d, #631111); /* Standard syntax (must be last)*/
-    font: 14px/20px CenturyGothic,sans-serif;
-    font-weight: bold;
-    color: #ffffff;
-    border-color: White;
-}
-
-
-
-/*----------------------- TITULO ---------------------------*/
-/*personalizacion de los formularios internos*/
-
-
-
-.Dialog_Datos_Max {
-    width: 860px;
-    height: 380px;
-    overflow: auto;
-    padding: 40px 30px;
-    border-radius: 10px;
-    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
-    border: solid 1px #921919;
-}
-
-
-#TablaProductos_D {
-    width: 985px;
-    padding: 40px 30px;
-    border-radius: 10px;
-    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
-    border: solid 1px #921919;
-}
-
 #Datos_Direc_D, #Datos_Bank_D {
     margin-top: 20px;
     width: 90%;
@@ -306,45 +296,13 @@ MEDIA QUERIES
     border: solid 1px #921919;
 }
 
-
-
-
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*                                                           CGA ADMININSTRACION PARAMETRIZABLE                                                               */
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
-
-/*----------------------- TITULO ---------------------------*/
-
-
 /*------------------- ajuste de grid administracion -----------------------------------------------*/
-#TLink, #TOpcRol, #TRol, #TUser {
-    font: 12px/20px CenturyGothic,sans-serif;
-}
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*                                                           PARAMETRIZACION PROCESOS                                                               */
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-/*------------------- ajuste de grid parametrizacion -----------------------------------------------*/
-#TArea, #TEmpleado, #TFestivo {
-    font: 12px/20px CenturyGothic,sans-serif;
-}
-
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*                                                           ESTILOS PAISES                                                               */
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
-#container_TGrid, #container_TSucursalSer, #container_TSucursal, #container_TRDoc_Verificacion, #container_TR_PuertaAcc_Area, #container_TPuertaAcceso, #container_TConsecutivos_General, #container_TConsecutivos, #container_TRGrpDoc_Doc, #container_TDocumento, #container_TRutaDocumentos, #container_TGrpDocumentos, #container_TCargo, #container_TProductos, #container_TTransacciones, #container_TTP_Activo, #container_TTP_Leasing, #container_TSActivo, #container_TActivo, #container_TSTP_Leasing, #container_TFasecolda, #container_TMonedaCot, #container_TPaises, #container_TMensajes, #container_TAyudas, #container_TCiudades, #container_TImpuesto_Gasto, #container_Tlink, #container_Trol, #container_TopcRol, #container_TUser, #container_TInf_Impuesto, #container_TPorcen_Descuentos, #container_TCliente, #container_TMonedaCod, #container_TArea, #container_TEmpleado, #container_TFestivo, #container_TServicio {
-    width: 1050px;
-    height: 238px;
-    overflow: auto;
-    border: solid 1px #CACACA;
-    font: 12px/20px CenturyGothic,sans-serif;
-    text-align: center;
-}
-
-#container_TGrid_New {
+.container_TGrid_New {
     width: 100%;
     height: 100%;
     overflow: auto;
@@ -360,7 +318,7 @@ MEDIA QUERIES
     text-align: center;
 }
 
-#container_Document, #container_direccion, #container_Bank, #container_TGrid_2 {
+#container_Document, #container_direccion, #container_Bank {
     width: 970px;
     height: 340px;
     overflow: auto;
@@ -369,15 +327,7 @@ MEDIA QUERIES
     text-align: center;
 }
 
-#container_TGrid_2 {
-    width: 1120px;
-    height: 190px;
-    overflow: auto;
-    border: solid 1px #CACACA;
-    font: 12px/20px CenturyGothic,sans-serif;
-    text-align: center;
-    margin-top: 5px;
-}
+
 
 #container_TDoc_H {
     width: 930px;
@@ -498,17 +448,7 @@ MEDIA QUERIES
     text-align: center;
 }
 
-#Blo_Transacciones, #Blo_Cuentas, #TablaHoras {
-    margin-top: 10px;
-    width: 100%;
-    padding: 20px 26px;
-    border-radius: 10px;
-    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
-    border: solid 1px #921919;
-}
+
 
 #T_Valores, #T_Saldos {
     width: 100%;

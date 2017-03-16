@@ -12,8 +12,6 @@ var editDia;
 
 //Evento load JS
 $(document).ready(function () {
-    $("#Marco_trabajo_Form").css("height", "490px");
-    $("#container_TPaises").css("height", "380px");
 
     /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
     Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
@@ -23,9 +21,7 @@ $(document).ready(function () {
     /*================== FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN ==============*/
 
     transacionAjax_CargaBusqueda("cargar_droplist_busqueda");
-
     transacionAjax_Moneda("Moneda");
-
     transacionAjax_Calendario("MatrixCalendarios");
 });
 
@@ -90,7 +86,7 @@ function HabilitarPanel(opcion) {
         case "buscar":
             $(".Dialog_Datos").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TPaises").html("");
+            $(".container_TGrid").html("");
             estado = opcion;
             Clear();
             break;
@@ -98,7 +94,7 @@ function HabilitarPanel(opcion) {
         case "modificar":
             $(".Dialog_Datos").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TPaises").html("");
+            $(".container_TGrid").html("");
             estado = opcion;
             Enabled_Pais();
             ResetError();
@@ -108,7 +104,7 @@ function HabilitarPanel(opcion) {
         case "eliminar":
             $(".Dialog_Datos").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TPaises").html("");
+            $(".container_TGrid").html("");
             estado = opcion;
             Clear();
             break;
@@ -254,8 +250,8 @@ function Table_Paises() {
     }
 
     html_TPaises += "</tbody></table>";
-    $("#container_TPaises").html("");
-    $("#container_TPaises").html(html_TPaises);
+    $(".container_TGrid").html("");
+    $(".container_TGrid").html(html_TPaises);
 
     $("#TPaises").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,
