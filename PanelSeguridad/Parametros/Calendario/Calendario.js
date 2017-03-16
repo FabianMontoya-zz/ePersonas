@@ -149,7 +149,7 @@ function Ocultar_Errores() {
 
 //Función que oculta las tablas
 function Ocultar_Tablas() {
-    $("#TablaHoras").css("display", "none"); //Table que contiene el capturador de horas
+    $(".Table_Header_Block").css("display", "none"); //Table que contiene el capturador de horas
     $(".container_TGrid_Create").css("display", "none"); //Tabla que dibuja el grid con las horas ya capturadas
     $("#TablaConsulta").css("display", "none");
     $("#Tabla_10").css("display", "none");
@@ -564,6 +564,8 @@ function validaTipoC() {
                 CargeJson();
             }
             break;
+        default:
+            Mensaje_General("Sin Selección Completa","No se ha seleccionado ningún tipo de Calendario, no podemos proseguir", "W");
     }
 }
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -900,10 +902,10 @@ function ValidaCamposJson(vp_Campo) {
 function TGridCalendar() {
 
     //Tabla Principal
-    var html_Calendario = "<table id='TCalendario' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead>" +
-                          "<tr><th class='Grid_Head' >Lunes</th><th  class='Grid_Head' >Martes</th><th  class='Grid_Head' >Miércoles</th><th  class='Grid_Head' >Jueves</th><th class='Grid_Head' >Viernes</th><th  class='Grid_Head' >Sábado</th><th  class='Grid_Head' >Domingo</th></tr></thead><tbody>";
+   // var html_Calendario = "<table id='TCalendario' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead>" +
+   //                       "<tr><th class='Grid_Head' >Lunes</th><th  class='Grid_Head' >Martes</th><th  class='Grid_Head' >Miércoles</th><th  class='Grid_Head' >Jueves</th><th class='Grid_Head' >Viernes</th><th  class='Grid_Head' >Sábado</th><th  class='Grid_Head' >Domingo</th></tr></thead><tbody>";
     //var html_Calendario = "<table id='TCalendario' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th colspan='2' class='Grid_Head' >Lunes</th><th colspan='2' class='Grid_Head' >Martes</th><th colspan='2' class='Grid_Head' >Miércoles</th><th colspan='2' class='Grid_Head' >Jueves</th><th colspan='2' class='Grid_Head' >Viernes</th><th colspan='2' class='Grid_Head' >Sábado</th><th colspan='2' class='Grid_Head' >Domingo</th></tr><tr><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th></tr><tr><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th></tr></thead><tbody>";
-
+    var html_Calendario = "<table id='TCalendario' border='1' style='width: 100%'><tbody>";
     //Comenzamos a anidar tablas
     //Tabla Lunes
     html_Calendario += "<tr><td id='ID_Lunes' align='left'> <table id='TLunes' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th colspan='2' class='Grid_Head' >Lunes</th></tr><tr><th colspan='2' class='Grid_Head' >Hora</th></tr><tr><th>Inicial</th><th>Final</th></tr></thead><tbody>";
@@ -955,7 +957,7 @@ function TGridCalendar() {
     html_Calendario += "</tbody></table></td>"; //Cerramos tabla Sábado
     //------------
     //Tabla Domingo
-    html_Calendario += "<td id='ID_Domingo' align='left'> <table id='TDomingo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th colspan='2' class='Grid_Head' >Domingo</th></tr><tr><th colspan='2' class='Grid_Head' >Hora</th></tr><tr><th>Inicial</th><th>Final</th></tr></thead><tbody>";
+    html_Calendario += "<td id='ID_Domingo' align='left'> <table id='TDomingo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th colspan='2' class='Grid_Head' >Domingo</th></tr><tr><th colspan='2' class='Grid_Head' >Hora</th></tr><tr><th class='Grid_Head'>Inicial</th><th class='Grid_Head'>Final</th></tr></thead><tbody>";
     //Domingo [6]
     for (i in ArrayCalendario_Grid[6]) {
         html_Calendario += "<tr id= 'TDomingo_" + ArrayCalendario_Grid[6][i].Index + "'><td>" + ArrayCalendario_Grid[6][i].IniDom + "</td><td>" + ArrayCalendario_Grid[6][i].FinDom + "</td></tr>";
@@ -967,21 +969,12 @@ function TGridCalendar() {
    
     $(".container_TGrid_Create").html("");
     $(".container_TGrid_Create").html(html_Calendario);
-
-    $("#TCalendario").dataTable({
-        "paging": false,
-        "ordering": false,
-        "info": false,
-        "aoColumnDefs": [
-          { 'bSortable': false, 'aTargets': [0] }
-        ],
-        "bJQueryUI": true,
-        "iDisplayLength": 1000,
-        "bDestroy": true
-    });
+      
 
     //
     $("#TLunes").dataTable({
+        "bFilter": false, 
+        "bInfo": false,
         "paging": false,
         "ordering": false,
         "info": false,
@@ -994,6 +987,8 @@ function TGridCalendar() {
     });
     //
     $("#TMartes").dataTable({
+        "bFilter": false,
+        "bInfo": false,
         "paging": false,
         "ordering": false,
         "info": false,
@@ -1006,6 +1001,8 @@ function TGridCalendar() {
     });
     //
     $("#TMiercoles").dataTable({
+        "bFilter": false,
+        "bInfo": false,
         "paging": false,
         "ordering": false,
         "info": false,
@@ -1018,6 +1015,8 @@ function TGridCalendar() {
     });
     //
     $("#TJueves").dataTable({
+        "bFilter": false,
+        "bInfo": false,
         "paging": false,
         "ordering": false,
         "info": false,
@@ -1030,6 +1029,8 @@ function TGridCalendar() {
     });
     //
     $("#TViernes").dataTable({
+        "bFilter": false,
+        "bInfo": false,
         "paging": false,
         "ordering": false,
         "info": false,
@@ -1042,6 +1043,8 @@ function TGridCalendar() {
     });
     //
     $("#TSabado").dataTable({
+        "bFilter": false,
+        "bInfo": false,
         "paging": false,
         "ordering": false,
         "info": false,
@@ -1054,6 +1057,8 @@ function TGridCalendar() {
     });
     //
     $("#TDOmingo").dataTable({
+        "bFilter": false,
+        "bInfo": false,
         "paging": false,
         "ordering": false,
         "info": false,
@@ -1301,7 +1306,7 @@ function VerifyTextDescription(value) {
         $("#Select_TipoCalendario").prop('disabled', true); //No se agrega el trigger porque se hace al seleccionar el val
         $("#Select_TipoCalendario").val("-1").trigger("chosen:updated");
         $("#Tabla_10").css("display", "none");
-        $("#TablaHoras").css("display", "none"); //Table que contiene el capturador de horas
+        $(".Table_Header_Block").css("display", "none"); //Table que contiene el capturador de horas
         $(".container_TGrid_Create").css("display", "none"); //Tabla que dibuja el grid con las horas ya capturadas
     } else {
         $("#Select_TipoCalendario").prop('disabled', false).trigger("chosen:updated");
@@ -1339,10 +1344,10 @@ function Change_TipoCalendario() {
         if ($("#Select_TipoCalendario").val() == "-1") {
             $("#Img5").css("display", "inline-table");
             $("#Tabla_10").css("display", "none");
-            $("#TablaHoras").css("display", "none"); //Table que contiene el capturador de horas
+            $(".Table_Header_Block").css("display", "none"); //Table que contiene el capturador de horas
         } else {
             $("#Img5").css("display", "none");
-            $("#TablaHoras").css("display", "inline-table"); //Table que contiene el capturador de horas
+            $(".Table_Header_Block").css("display", "inline-table"); //Table que contiene el capturador de horas
             $("#TxtF_Start").val("");
             $("#TxtF_End").val("");
             index_ID = $(this).val();

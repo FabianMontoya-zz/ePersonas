@@ -83,7 +83,7 @@
         </div>
     </div>
     <div id="Dialog_Calendar">
-        <div class="Header_Datos_Max ">
+        <div class="Header_Datos_Max">
             <table id="Tabla_1" style="width: 100%; text-align: left;">
                 <tr>
                     <td style="width: 10.5%;" class="Label_Bold">NIT Empresa
