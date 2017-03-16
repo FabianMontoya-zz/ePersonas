@@ -20,7 +20,25 @@ input[id='Circulo'] {
     color: gray;
 }
 
-.Label_bold {
+/*personalizacion de las cajas de texto */
+.Text_Long {
+    -webkit-appearance: none;
+    border: none;
+    width: 97%;
+}
+
+/************************************************************************************
+CONTROLES LABEL                                                                                 
+*************************************************************************************/
+
+.Title_Bold {
+    font: 20px/28px CenturyGothic,sans-serif;
+    font-weight: bold;
+    color: #2C2C2C;
+}
+
+.Label_Bold {
+    font: 12px/20px CenturyGothic,sans-serif;
     font-weight: bold;
 }
 

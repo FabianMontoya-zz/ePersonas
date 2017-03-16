@@ -127,7 +127,7 @@
                         </td>
                         <td colspan="4">
                             <span class="cssToolTip_Form">
-                                <input type="text" id="TxtRuta" title="Ruta" maxlength="200" />
+                                <input type="text" id="TxtRuta" title="Ruta" class="Text_Long" maxlength="200" />
                                 <span class="Spam_ALink"></span></span>
                         </td>
                         <td style="width: 150px; padding-bottom: 25px;">
