@@ -24,14 +24,14 @@
     <div id="marco_CC">
         <table id="TablaContraseña">
             <tr>
-                <td class="Label_bold">Nombre de Usuario
+                <td class="Label_Bold">Nombre de Usuario
                 </td>
             </tr>
             <tr>
-                <td id="TdUser" class="Label_bold"></td>
+                <td id="TdUser" class="Label_Bold"></td>
             </tr>
             <tr>
-                <td class="Label_bold">Digite Contraseña
+                <td class="Label_Bold">Digite Contraseña
                 </td>
             </tr>
             <tr>
@@ -48,7 +48,7 @@
                 <td id="TdHelpPassword"></td>
             </tr>
             <tr>
-                <td class="Label_bold">Confirme Contraseña
+                <td class="Label_Bold">Confirme Contraseña
                 </td>
             </tr>
             <tr>

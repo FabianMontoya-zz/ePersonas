@@ -26,7 +26,7 @@
 
             <table id="User_Name2" style="width: 100%;">
                 <tr>
-                    <td id="TD_Nit_ID" class="Label_bold">NIT Empresa</td>
+                    <td id="TD_Nit_ID" class="Label_Bold">NIT Empresa</td>
                 </tr>
                 <tr>
                     <td style="width: 40%; padding-left: 30px;">
@@ -42,7 +42,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td id="Lbluser" class="Label_bold">Nombre de Usuario
+                    <td id="Lbluser" class="Label_Bold">Nombre de Usuario
                     </td>
                 </tr>
                 <tr>
@@ -61,7 +61,7 @@
                     <td id="TdHelpUser"></td>
                 </tr>
                 <tr>
-                    <td id="LblPassword" class="Label_bold">Contraseña
+                    <td id="LblPassword" class="Label_Bold">Contraseña
                     </td>
                 </tr>
                 <tr>

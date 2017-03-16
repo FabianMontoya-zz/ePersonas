@@ -36,7 +36,7 @@
 
     <!--Dialog que contiene la pantalla de las colocaciones/Huellas -->
     <div id="Marco_Contrato">
-        <div id="Marco_trabajo_Huella">
+        <div class="Marco_trabajo_Form">
             <table id="T_Encabezado" style="width: 100%;">
                 <tr>
                     <td id="TD_ID" style="width: 10.5%;" class="Label_Bold">NIT Empresa</td>
