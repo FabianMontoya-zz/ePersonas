@@ -137,10 +137,20 @@ CONTENEDOR DE FORMULARIO
     border: solid 1px #921919;
 }
 
-/*-- CONTENEDOR DE LAS GRILLAS DE CONSULTA DE ADMINISTRACION ---*/
+/*-- CONTENEDOR DE LAS GRILLAS DE CONSULTA CON ADMINISTRACION ---*/
 .container_TGrid {
     width: 1050px;
     height: 348px;
+    overflow: auto;
+    border: solid 1px #CACACA;
+    font: 12px/20px CenturyGothic,sans-serif;
+    text-align: center;
+}
+
+/*-- CONTENEDOR DE LAS GRILLAS DE CONSULTA SIN ADMINISTRACION ---*/
+.container_TGrid_New {
+    width: 100%;
+    height: 100%;
     overflow: auto;
     border: solid 1px #CACACA;
     font: 12px/20px CenturyGothic,sans-serif;
@@ -158,8 +168,18 @@ CONTENEDOR DE FORMULARIO
     margin-top: 5px;
 }
 
+/*-- CONTENEDOR DE LAS GRILLAS DE OPERACION EN EL MODULO CLIENTE ---*/
+#container_Document, #container_direccion, #container_Bank {
+    width: 970px;
+    height: 340px;
+    overflow: auto;
+    border: solid 1px #CACACA;
+    font: 12px/20px CenturyGothic,sans-serif;
+    text-align: center;
+}
+
 /*-- CONTENEDOR POR BLOQUES EN TABLAS ---*/
-.Table_Header_Block{
+.Table_Header_Block {
     margin-top: 10px;
     width: 100%;
     padding: 20px 26px;
@@ -171,6 +191,18 @@ CONTENEDOR DE FORMULARIO
     border: solid 1px #921919;
 }
 
+/*-- CONTENEDOR POR BLOQUES EN DIV---*/
+.Div_Complement_Block {
+    margin-top: 20px;
+    width: 90%;
+    padding: 40px 30px;
+    border-radius: 10px;
+    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+    border: solid 1px #921919;
+}
 
 /************************************************************************************
 MEDIA QUERIES
@@ -258,16 +290,9 @@ MEDIA QUERIES
     }
 }
 
-
-
-
-
-
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*                                                               ADMININSTRACION PARAMETRIZABLE                                                               */
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
-
 
 /*CONTROL IMAGEN DIRECCION*/
 #logoExt:hover .Ext {
@@ -284,32 +309,10 @@ MEDIA QUERIES
     text-align: end;
 }
 
-#Datos_Direc_D, #Datos_Bank_D {
-    margin-top: 20px;
-    width: 90%;
-    padding: 40px 30px;
-    border-radius: 10px;
-    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
-    border: solid 1px #921919;
-}
-
-/*------------------- ajuste de grid administracion -----------------------------------------------*/
-
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*                                                           PARAMETRIZACION PROCESOS                                                               */
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-.container_TGrid_New {
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    border: solid 1px #CACACA;
-    font: 12px/20px CenturyGothic,sans-serif;
-    text-align: center;
-}
 
 #Container_Consulta, #Container_Facturas, #container_TCiclo {
     width: 100%;
@@ -317,17 +320,6 @@ MEDIA QUERIES
     font: 12px/20px CenturyGothic,sans-serif;
     text-align: center;
 }
-
-#container_Document, #container_direccion, #container_Bank {
-    width: 970px;
-    height: 340px;
-    overflow: auto;
-    border: solid 1px #CACACA;
-    font: 12px/20px CenturyGothic,sans-serif;
-    text-align: center;
-}
-
-
 
 #container_TDoc_H {
     width: 930px;

@@ -320,6 +320,6 @@
         </div>
     </div>
     <div id="Dialog_Extencion">
-        <div id="container_TGrid_New"></div>
+        <div class="container_TGrid_New"></div>
     </div>
 </asp:Content>

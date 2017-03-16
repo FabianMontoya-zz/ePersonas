@@ -47,7 +47,7 @@
         </table>
     </div>
     <div class="Marco_Container">
-       <div class="Marco_btn_Form">
+        <div class="Marco_btn_Form">
             <input id="BtnShearh" type="button" value="Consulta" onclick="HabilitarPanel('buscar');" />
             <input id="BtnCreate" type="button" value="Crear" onclick="HabilitarPanel('crear');" />
             <input id="BtnUpdate" type="button" value="Actualizar" onclick="HabilitarPanel('modificar');" />
@@ -928,7 +928,7 @@
                 </td>
             </tr>
         </table>
-        <div id="Datos_Direc_D">
+        <div class="Div_Complement_Block">
             <table id="Tabla_Info_Dic">
                 <tr>
                     <td class="Label_Bold" style="width: 100px;">Consecutivo
@@ -1333,7 +1333,7 @@
                 </td>
             </tr>
         </table>
-        <div id="Datos_Bank_D">
+        <div class="Div_Complement_Block">
             <table id="Tabla_1_Bank" style="width: 500px;">
                 <tr>
                     <td class="Label_Bold" style="width: 100px;">Ent. Financiera
