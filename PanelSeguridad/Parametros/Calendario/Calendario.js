@@ -212,7 +212,6 @@ function BtnAgregaCalendario() {
             if (V_ONE == 0) {
                 Mensaje_General("Error - Campos Vacios", "Debe completar mínimo el horario de uno de los días de la semana.", "W");
             } else {
-                Lineas = Lineas + 1;
                 validaTipoC();
                 $("#Select_StateLun").prop('disabled', true).trigger("chosen:updated"); //Bloqueamos los chosen de estado del día
                 $("#Select_StateMar").prop('disabled', true).trigger("chosen:updated");
@@ -574,9 +573,11 @@ function validaTipoC() {
 function CargeJson() {
     var Repetido = ValidaDatosMatriz();
     if (Repetido == false) {
+        Lineas = Lineas + 1;
         //Lunes (1)
         if (WorkMonday == true) { //Si es laboral validamos normal           
             var JSONDay = {
+                "Index": Lineas,
                 "IniLun": $("#TxtIniLun").val(),
                 "FinLun": $("#TxtFinLun").val()
             };
@@ -585,6 +586,7 @@ function CargeJson() {
 
         } else if (WorkMonday == false && FirstMonday == false) { //Si no laboral y es la primera vez
             var JSONDay = {
+                "Index": Lineas,
                 "IniLun": "",
                 "FinLun": ""
             };
@@ -593,6 +595,7 @@ function CargeJson() {
             FirstMonday = true;
         } else { //Si no laboral y no es la primera vez
             var JSONDay = {
+                "Index": Lineas,
                 "IniLun": "",
                 "FinLun": ""
             };
@@ -602,6 +605,7 @@ function CargeJson() {
         //Martes (2)
         if (WorkTuesday == true) { //Si es laboral validamos normal           
             var JSONDay = {
+                "Index": Lineas,
                 "IniMar": $("#TxtIniMar").val(),
                 "FinMar": $("#TxtFinMar").val()
             };
@@ -610,6 +614,7 @@ function CargeJson() {
 
         } else if (WorkTuesday == false && FirstTuesday == false) { //Si no laboral y es la primera vez
             var JSONDay = {
+                "Index": Lineas,
                 "IniMar": "",
                 "FinMar": ""
             };
@@ -618,6 +623,7 @@ function CargeJson() {
             FirstTuesday = true;
         } else { //Si no laboral y no es la primera vez
             var JSONDay = {
+                "Index": Lineas,
                 "IniMar": "",
                 "FinMar": ""
             };
@@ -627,6 +633,7 @@ function CargeJson() {
         //Miércoles (3)
         if (WorkWednesday == true) { //Si es laboral validamos normal           
             var JSONDay = {
+                "Index": Lineas,
                 "IniMie": $("#TxtIniMie").val(),
                 "FinMie": $("#TxtFinMie").val()
             };
@@ -635,6 +642,7 @@ function CargeJson() {
 
         } else if (WorkWednesday == false && FirstWednesday == false) { //Si no laboral y es la primera vez
             var JSONDay = {
+                "Index": Lineas,
                 "IniMie": "",
                 "FinMie": ""
             };
@@ -643,6 +651,7 @@ function CargeJson() {
             FirstWednesday = true;
         } else { //Si no laboral y no es la primera vez
             var JSONDay = {
+                "Index": Lineas,
                 "IniMie": "",
                 "FinMie": ""
             };
@@ -652,6 +661,7 @@ function CargeJson() {
         //Jueves (4)
         if (WorkThursday == true) { //Si es laboral validamos normal           
             var JSONDay = {
+                "Index": Lineas,
                 "IniJue": $("#TxtIniJue").val(),
                 "FinJue": $("#TxtFinJue").val()
             };
@@ -660,6 +670,7 @@ function CargeJson() {
 
         } else if (WorkThursday == false && FirstThursday == false) { //Si no laboral y es la primera vez
             var JSONDay = {
+                "Index": Lineas,
                 "IniJue": "",
                 "FinJue": ""
             };
@@ -668,6 +679,7 @@ function CargeJson() {
             FirstThursday = true;
         } else { //Si no laboral y no es la primera vez
             var JSONDay = {
+                "Index": Lineas,
                 "IniJue": "",
                 "FinJue": ""
             };
@@ -677,6 +689,7 @@ function CargeJson() {
         //Viernes (5)
         if (WorkFriday == true) { //Si es laboral validamos normal           
             var JSONDay = {
+                "Index": Lineas,
                 "IniVie": $("#TxtIniVie").val(),
                 "FinVie": $("#TxtFinVie").val()
             };
@@ -685,6 +698,7 @@ function CargeJson() {
 
         } else if (WorkFriday == false && FirstFriday == false) { //Si no laboral y es la primera vez
             var JSONDay = {
+                "Index": Lineas,
                 "IniVie": "",
                 "FinVie": ""
             };
@@ -693,6 +707,7 @@ function CargeJson() {
             FirstFriday = true;
         } else { //Si no laboral y no es la primera vez
             var JSONDay = {
+                "Index": Lineas,
                 "IniVie": "",
                 "FinVie": ""
             };
@@ -702,6 +717,7 @@ function CargeJson() {
         //Sábado (6)
         if (WorkSaturday == true) { //Si es laboral validamos normal           
             var JSONDay = {
+                "Index": Lineas,
                 "IniSab": $("#TxtIniSab").val(),
                 "FinSab": $("#TxtFinSab").val()
             };
@@ -710,6 +726,7 @@ function CargeJson() {
 
         } else if (WorkSaturday == false && FirstSaturday == false) { //Si no laboral y es la primera vez
             var JSONDay = {
+                "Index": Lineas,
                 "IniSab": "",
                 "FinSab": ""
             };
@@ -718,6 +735,7 @@ function CargeJson() {
             FirstSaturday = true;
         } else { //Si no laboral y no es la primera vez
             var JSONDay = {
+                "Index": Lineas,
                 "IniSab": "",
                 "FinSab": ""
             };
@@ -727,6 +745,7 @@ function CargeJson() {
         //Domingo (7)
         if (WorkSunday == true) { //Si es laboral validamos normal           
             var JSONDay = {
+                "Index": Lineas,
                 "IniDom": $("#TxtIniDom").val(),
                 "FinDom": $("#TxtFinDom").val()
             };
@@ -735,6 +754,7 @@ function CargeJson() {
 
         } else if (WorkSunday == false && FirstSunday == false) { //Si no laboral y es la primera vez
             var JSONDay = {
+                "Index": Lineas,
                 "IniDom": "",
                 "FinDom": ""
             };
@@ -743,6 +763,7 @@ function CargeJson() {
             FirstSunday = true;
         } else { //Si no laboral y no es la primera vez
             var JSONDay = {
+                "Index": Lineas,
                 "IniDom": "",
                 "FinDom": ""
             };
@@ -762,7 +783,7 @@ function CargeJson() {
 
     } else {
         Mensaje_General("Error - Horario Existe", "No puedes ingresar dos veces una misma combinación de horarios, esto sucedio en los siguientes días: " + MensajeRepetido + "", "W");
-    }    
+    }
 }
 
 //Función que valida que los nuevos datos de cualquiera de los días no estén repetidos en la matriz
@@ -832,7 +853,7 @@ function ValidaDatosMatriz() {
                     break Inicio;
                 }
             }
-        }        
+        }
     } while (0);
     if (MensajeRepetido != "") {
         MensajeRepetido = MensajeRepetido.substr(1);
@@ -878,13 +899,70 @@ function ValidaCamposJson(vp_Campo) {
 //grid de calendario asignados
 function TGridCalendar() {
 
+    //Tabla Principal
+    var html_Calendario = "<table id='TCalendario' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead>" +
+                          "<tr><th class='Grid_Head' >Lunes</th><th  class='Grid_Head' >Martes</th><th  class='Grid_Head' >Miércoles</th><th  class='Grid_Head' >Jueves</th><th class='Grid_Head' >Viernes</th><th  class='Grid_Head' >Sábado</th><th  class='Grid_Head' >Domingo</th></tr></thead><tbody>";
+    //var html_Calendario = "<table id='TCalendario' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th colspan='2' class='Grid_Head' >Lunes</th><th colspan='2' class='Grid_Head' >Martes</th><th colspan='2' class='Grid_Head' >Miércoles</th><th colspan='2' class='Grid_Head' >Jueves</th><th colspan='2' class='Grid_Head' >Viernes</th><th colspan='2' class='Grid_Head' >Sábado</th><th colspan='2' class='Grid_Head' >Domingo</th></tr><tr><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th></tr><tr><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th></tr></thead><tbody>";
 
-    var html_Calendario = "<table id='TCalendario' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th colspan='2' class='Grid_Head' >Lunes</th><th colspan='2' class='Grid_Head' >Martes</th><th colspan='2' class='Grid_Head' >Miércoles</th><th colspan='2' class='Grid_Head' >Jueves</th><th colspan='2' class='Grid_Head' >Viernes</th><th colspan='2' class='Grid_Head' >Sábado</th><th colspan='2' class='Grid_Head' >Domingo</th></tr><tr><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th><th colspan='2' class='Grid_Head' >Hora</th></tr><tr><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th><th>Inicial</th><th>Final</th></tr></thead><tbody>";
-    for (itemArray in ArrayCalendario_Grid) {
-        html_Calendario += "<tr id= 'TCalendario_" + ArrayCalendario_Grid[itemArray].Calendario_ID + "'><td>" + ArrayCalendario_Grid[itemArray].IniLun + "</td><td>" + ArrayCalendario_Grid[itemArray].FinLun + "</td><td>" + ArrayCalendario_Grid[itemArray].IniMar + "</td><td>" + ArrayCalendario_Grid[itemArray].FinMar + "</td><td>" + ArrayCalendario_Grid[itemArray].IniMie + "</td><td>" + ArrayCalendario_Grid[itemArray].FinMie + "</td><td>" + ArrayCalendario_Grid[itemArray].IniJue + "</td><td>" + ArrayCalendario_Grid[itemArray].FinJue + "</td><td>" + ArrayCalendario_Grid[itemArray].IniVie + "</td><td>" + ArrayCalendario_Grid[itemArray].FinVie + "</td><td>" + ArrayCalendario_Grid[itemArray].IniSab + "</td><td>" + ArrayCalendario_Grid[itemArray].FinSab + "</td><td>" + ArrayCalendario_Grid[itemArray].IniDom + "</td><td>" + ArrayCalendario_Grid[itemArray].FinDom + "</td></tr>";
+    //Comenzamos a anidar tablas
+    //Tabla Lunes
+    html_Calendario += "<tr><td id='ID_Lunes' align='left'> <table id='TLunes' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th colspan='2' class='Grid_Head' >Lunes</th></tr><tr><th colspan='2' class='Grid_Head' >Hora</th></tr><tr><th>Inicial</th><th>Final</th></tr></thead><tbody>";
+    //-----------
+    //Lunes [0]
+    for (i in ArrayCalendario_Grid[0]) {
+        html_Calendario += "<tr id= 'TLunes_" + ArrayCalendario_Grid[0][i].Index + "'><td>" + ArrayCalendario_Grid[0][i].IniLun + "</td><td>" + ArrayCalendario_Grid[0][i].FinLun + "</td></tr>";
     }
+    html_Calendario += "</tbody></table></td>"; //Cerramos tabla Lunes
+    //------------
+    //Tabla Martes
+    html_Calendario += "<td id='ID_Martes' align='left'> <table id='TMartes' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th colspan='2' class='Grid_Head' >Martes</th></tr><tr><th colspan='2' class='Grid_Head' >Hora</th></tr><tr><th>Inicial</th><th>Final</th></tr></thead><tbody>";
+    //Martes [1]
+    for (i in ArrayCalendario_Grid[1]) {
+        html_Calendario += "<tr id= 'TMartes_" + ArrayCalendario_Grid[1][i].Index + "'><td>" + ArrayCalendario_Grid[1][i].IniMar + "</td><td>" + ArrayCalendario_Grid[1][i].FinMar + "</td></tr>";
+    }
+    html_Calendario += "</tbody></table></td>"; //Cerramos tabla Martes
+    //------------
+    //Tabla Miércoles
+    html_Calendario += "<td id='ID_Miercoles' align='left'> <table id='TMiercoles' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th colspan='2' class='Grid_Head' >Miércoles</th></tr><tr><th colspan='2' class='Grid_Head' >Hora</th></tr><tr><th>Inicial</th><th>Final</th></tr></thead><tbody>";
+    //Miércoles [2]
+    for (i in ArrayCalendario_Grid[2]) {
+        html_Calendario += "<tr id= 'TMiercoles_" + ArrayCalendario_Grid[2][i].Index + "'><td>" + ArrayCalendario_Grid[2][i].IniMie + "</td><td>" + ArrayCalendario_Grid[2][i].FinMie + "</td></tr>";
+    }
+    html_Calendario += "</tbody></table></td>"; //Cerramos tabla Miércoles
+    //------------
+    //Tabla Jueves
+    html_Calendario += "<td id='ID_Jueves' align='left'> <table id='TJueves' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th colspan='2' class='Grid_Head' >Jueves</th></tr><tr><th colspan='2' class='Grid_Head' >Hora</th></tr><tr><th>Inicial</th><th>Final</th></tr></thead><tbody>";
+    //Jueves [3]
+    for (i in ArrayCalendario_Grid[3]) {
+        html_Calendario += "<tr id= 'TJueves_" + ArrayCalendario_Grid[3][i].Index + "'><td>" + ArrayCalendario_Grid[3][i].IniJue + "</td><td>" + ArrayCalendario_Grid[3][i].FinJue + "</td></tr>";
+    }
+    html_Calendario += "</tbody></table></td>"; //Cerramos tabla Jueves
+    //------------
+    //Tabla Viernes
+    html_Calendario += "<td id='ID_Viernes' align='left'> <table id='TViernes' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th colspan='2' class='Grid_Head' >Viernes</th></tr><tr><th colspan='2' class='Grid_Head' >Hora</th></tr><tr><th>Inicial</th><th>Final</th></tr></thead><tbody>";
+    //Viernes [4]
+    for (i in ArrayCalendario_Grid[4]) {
+        html_Calendario += "<tr id= 'TViernes_" + ArrayCalendario_Grid[4][i].Index + "'><td>" + ArrayCalendario_Grid[4][i].IniVie + "</td><td>" + ArrayCalendario_Grid[4][i].FinVie + "</td></tr>";
+    }
+    html_Calendario += "</tbody></table></td>"; //Cerramos tabla Viernes
+    //------------
+    //Tabla Sábado
+    html_Calendario += "<td id='ID_Sabado' align='left'> <table id='TSabado' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th colspan='2' class='Grid_Head' >Sábado</th></tr><tr><th colspan='2' class='Grid_Head' >Hora</th></tr><tr><th>Inicial</th><th>Final</th></tr></thead><tbody>";
+    //Sábado [5]
+    for (i in ArrayCalendario_Grid[5]) {
+        html_Calendario += "<tr id= 'TSabado_" + ArrayCalendario_Grid[5][i].Index + "'><td>" + ArrayCalendario_Grid[5][i].IniSab + "</td><td>" + ArrayCalendario_Grid[5][i].FinSab + "</td></tr>";
+    }
+    html_Calendario += "</tbody></table></td>"; //Cerramos tabla Sábado
+    //------------
+    //Tabla Domingo
+    html_Calendario += "<td id='ID_Domingo' align='left'> <table id='TDomingo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th colspan='2' class='Grid_Head' >Domingo</th></tr><tr><th colspan='2' class='Grid_Head' >Hora</th></tr><tr><th>Inicial</th><th>Final</th></tr></thead><tbody>";
+    //Domingo [6]
+    for (i in ArrayCalendario_Grid[6]) {
+        html_Calendario += "<tr id= 'TDomingo_" + ArrayCalendario_Grid[6][i].Index + "'><td>" + ArrayCalendario_Grid[6][i].IniDom + "</td><td>" + ArrayCalendario_Grid[6][i].FinDom + "</td></tr>";
+    }
+    html_Calendario += "</tbody></table></td>"; //Cerramos tabla Domingo
 
-    html_Calendario += "</tbody></table>";
+    html_Calendario += "</tr></tbody></table>";//Cerramos tabla principal
     $("#container_TGrid_2").html("");
     $("#container_TGrid_2").html(html_Calendario);
 
@@ -893,12 +971,98 @@ function TGridCalendar() {
         "ordering": false,
         "info": false,
         "aoColumnDefs": [
-          { 'bSortable': false, 'aTargets': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13] }
+          { 'bSortable': false, 'aTargets': [0] }
         ],
         "bJQueryUI": true,
         "iDisplayLength": 1000,
         "bDestroy": true
     });
+
+    //
+    $("#TLunes").dataTable({
+        "paging": false,
+        "ordering": false,
+        "info": false,
+        "aoColumnDefs": [
+          { 'bSortable': false, 'aTargets': [0, 1] }
+        ],
+        "bJQueryUI": true,
+        "iDisplayLength": 1000,
+        "bDestroy": true
+    });
+    //
+    $("#TMartes").dataTable({
+        "paging": false,
+        "ordering": false,
+        "info": false,
+        "aoColumnDefs": [
+          { 'bSortable': false, 'aTargets': [0, 1] }
+        ],
+        "bJQueryUI": true,
+        "iDisplayLength": 1000,
+        "bDestroy": true
+    });
+    //
+    $("#TMiercoles").dataTable({
+        "paging": false,
+        "ordering": false,
+        "info": false,
+        "aoColumnDefs": [
+          { 'bSortable': false, 'aTargets': [0, 1] }
+        ],
+        "bJQueryUI": true,
+        "iDisplayLength": 1000,
+        "bDestroy": true
+    });
+    //
+    $("#TJueves").dataTable({
+        "paging": false,
+        "ordering": false,
+        "info": false,
+        "aoColumnDefs": [
+          { 'bSortable': false, 'aTargets': [0, 1] }
+        ],
+        "bJQueryUI": true,
+        "iDisplayLength": 1000,
+        "bDestroy": true
+    });
+    //
+    $("#TViernes").dataTable({
+        "paging": false,
+        "ordering": false,
+        "info": false,
+        "aoColumnDefs": [
+          { 'bSortable': false, 'aTargets': [0, 1] }
+        ],
+        "bJQueryUI": true,
+        "iDisplayLength": 1000,
+        "bDestroy": true
+    });
+    //
+    $("#TSabado").dataTable({
+        "paging": false,
+        "ordering": false,
+        "info": false,
+        "aoColumnDefs": [
+          { 'bSortable': false, 'aTargets': [0, 1] }
+        ],
+        "bJQueryUI": true,
+        "iDisplayLength": 1000,
+        "bDestroy": true
+    });
+    //
+    $("#TDOmingo").dataTable({
+        "paging": false,
+        "ordering": false,
+        "info": false,
+        "aoColumnDefs": [
+          { 'bSortable': false, 'aTargets': [0, 1] }
+        ],
+        "bJQueryUI": true,
+        "iDisplayLength": 1000,
+        "bDestroy": true
+    });
+
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
