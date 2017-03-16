@@ -61,7 +61,7 @@
                     </tr>
                     <tr>
                         <td colspan="4">
-                            <div id="container_TInf_Impuesto">
+                            <div class="container_TGrid">
                             </div>
                         </td>
                     </tr>

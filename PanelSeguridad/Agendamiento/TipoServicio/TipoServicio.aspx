@@ -75,7 +75,7 @@
                     </tr>
                     <tr>
                         <td colspan="4">
-                            <div id="container_TServicio">
+                            <div class="container_TGrid">
                             </div>
                         </td>
                     </tr>

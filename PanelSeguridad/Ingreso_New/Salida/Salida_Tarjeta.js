@@ -265,7 +265,7 @@ function CreateJSON_SalidaLog() {
 
 //crea el grid de Salida
 function Tabla_Salida() {
-    var html = "<table id='TIng' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th class='T_head' colspan='7' style='margin-top: 5px;' >Registro de Salidas</th></tr><tr><th>Puerta</th><th>Area</th><th>Persona Encargada</th><th>Tiempo Visita</th><th>Fecha/Hora Entrada</th></tr></thead><tbody>";
+    var html = "<table id='TIng' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th class='Grid_Head' colspan='7' style='margin-top: 5px;' >Registro de Salidas</th></tr><tr><th>Puerta</th><th>Area</th><th>Persona Encargada</th><th>Tiempo Visita</th><th>Fecha/Hora Entrada</th></tr></thead><tbody>";
 
     for (item in Array_SalidaLog) {
         html += "<tr id= 'TIng_" + item + "'><td>" + Array_SalidaLog[item].PuertaAcceso_ID + " - " + Array_SalidaLog[item].DescripPuertaAcceso + "</td><td>" + Array_SalidaLog[item].Area_ID + " - " + Array_SalidaLog[item].DescripAreaAcceso + "</td><td>" + Array_SalidaLog[item].DescripPersona_Enc + "</td><td>" + Array_SalidaLog[item].Tiempo_PlanVisita + "</td><td>" + Array_SalidaLog[item].FechaEntrada + " " + Array_SalidaLog[item].HoraEntrada + "</td></tr>";

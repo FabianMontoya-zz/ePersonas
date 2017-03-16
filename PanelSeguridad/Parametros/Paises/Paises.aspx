@@ -72,7 +72,7 @@
                     </tr>
                     <tr>
                         <td colspan="4">
-                            <div id="container_TPaises">
+                            <div class="container_TGrid">
                             </div>
                         </td>
                     </tr>

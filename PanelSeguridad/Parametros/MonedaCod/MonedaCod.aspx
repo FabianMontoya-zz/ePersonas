@@ -72,7 +72,7 @@
                     </tr>
                     <tr>
                         <td colspan="4">
-                            <div id="container_TMonedaCod">
+                            <div class="container_TGrid">
                             </div>
                         </td>
                     </tr>

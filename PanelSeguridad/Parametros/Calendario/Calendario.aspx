@@ -25,8 +25,6 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
-
-
     <div id="Dialog_Control" style="width: 100%; text-align: center;">
         <div class="cssload-container" style="margin-top: 25%;">
             <div class="cssload-whirlpool"></div>
@@ -35,8 +33,6 @@
             </div>
         </div>
     </div>
-
-
     <div class="Container_title_Form">
         <table id="Tabla_Title_form">
             <tr>
@@ -49,7 +45,7 @@
         </table>
     </div>
     <div class="Marco_Container">
-       <div class="Marco_btn_Form">
+        <div class="Marco_btn_Form">
             <input id="BtnShearh" type="button" value="Consulta" onclick="HabilitarPanel('buscar');" />
             <input id="BtnCreate" type="button" value="Crear" onclick="HabilitarPanel('crear');" />
             <input id="BtnUpdate" type="button" value="Actualizar" onclick="HabilitarPanel('modificar');" />
@@ -78,7 +74,7 @@
                     </tr>
                     <tr>
                         <td colspan="4">
-                            <div id="container_TGrid">
+                            <div class="container_TGrid">
                             </div>
                         </td>
                     </tr>
@@ -172,7 +168,6 @@
                     </td>
                 </tr>
             </table>
-
             <table id="Tabla_3" style="width: 100%; text-align: left;">
                 <tr>
                     <td style="width: 10.5%;" class="Label_Bold">Tipo Calendario
@@ -192,8 +187,7 @@
                     </td>
                 </tr>
             </table>
-
-            <table id="TablaHoras">
+            <table class="Table_Header_Block">
                 <thead>
                     <tr style="text-align: center;" class="Label_Bold">
                         <th align="center" colspan="2">Lunes
@@ -414,13 +408,12 @@
                     </tr>
                     <tr>
                         <td colspan="20" align="center">
-                            <input id="BtnAgregar" type="button" value="Agregar" onclick="BtnAgregaCalendario();" style="cursor: pointer; cursor: hand;"/>
+                            <input id="BtnAgregar" type="button" value="Agregar" onclick="BtnAgregaCalendario();" style="cursor: pointer; cursor: hand;" />
                         </td>
                     </tr>
                 </tbody>
             </table>
-
-            <div id="container_TGrid_2">
+            <div class="container_TGrid_Create">
             </div>
             <table style="width: 100%;">
                 <tr>
@@ -431,7 +424,7 @@
                 </tr>
                 <tr>
                     <td colspan="4" align="center">
-                        <input id="Btnguardar" type="button" value="Guardar" onclick="BtnCrear();" style="cursor: pointer; cursor: hand;"/>
+                        <input id="Btnguardar" type="button" value="Guardar" onclick="BtnCrear();" style="cursor: pointer; cursor: hand;" />
                     </td>
                 </tr>
             </table>
@@ -453,7 +446,7 @@
             </tr>
             <tr>
                 <td colspan="2" align="center">
-                    <input id="BtnExitD" type="button" value="Salir" style="width: 40%;" onclick="x();" style="cursor: pointer; cursor: hand;"/>
+                    <input id="BtnExitD" type="button" value="Salir" style="width: 40%;" onclick="x();" style="cursor: pointer; cursor: hand;" />
                 </td>
             </tr>
         </table>
@@ -473,7 +466,7 @@
             </tr>
             <tr>
                 <td colspan="2" align="center">
-                    <input id="BtnElimin" type="button" value="Confirmar" onclick="BtnElimina();" style="cursor: pointer; cursor: hand;"/>
+                    <input id="BtnElimin" type="button" value="Confirmar" onclick="BtnElimina();" style="cursor: pointer; cursor: hand;" />
                 </td>
             </tr>
         </table>

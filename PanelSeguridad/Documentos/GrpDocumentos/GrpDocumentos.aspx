@@ -70,7 +70,7 @@
                     </tr>
                     <tr>
                         <td colspan="4">
-                            <div id="container_TGrpDocumentos">
+                            <div class="container_TGrid">
                             </div>
                         </td>
                     </tr>

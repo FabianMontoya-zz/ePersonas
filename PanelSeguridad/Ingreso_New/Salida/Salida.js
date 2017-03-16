@@ -246,8 +246,8 @@ function Table_Extenciones() {
     }
 
     html += "</tbody></table>";
-    $("#container_TGrid_New").html("");
-    $("#container_TGrid_New").html(html);
+    $(".container_TGrid_New").html("");
+    $(".container_TGrid_New").html(html);
 
     $("#TGridExtencion").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,

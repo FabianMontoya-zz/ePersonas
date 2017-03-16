@@ -9,9 +9,6 @@ var editDia;
 //Evento load JS
 $(document).ready(function () {
 
-    $("#Marco_trabajo_Form").css("height", "490px");
-    $("#container_TFestivo").css("height", "380px");
-
     /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
     Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
     Ocultar_Errores();
@@ -83,7 +80,7 @@ function HabilitarPanel(opcion) {
         case "buscar":
             $("#TablaDatos").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TFestivo").html("");
+            $(".container_TGrid").html("");
             estado = opcion;
             Clear();
             break;
@@ -91,7 +88,7 @@ function HabilitarPanel(opcion) {
         case "eliminar":
             $("#TablaDatos").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TFestivo").html("");
+            $(".container_TGrid").html("");
             estado = opcion;
             Clear();
             break;
@@ -248,8 +245,8 @@ function Table_Festivo() {
             break;
     }
     html_TFestivo += "</tbody></table>";
-    $("#container_TFestivo").html("");
-    $("#container_TFestivo").html(html_TFestivo);
+    $(".container_TGrid").html("");
+    $(".container_TGrid").html(html_TFestivo);
 
     $("#TFestivo").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,
@@ -276,8 +273,8 @@ function Eliminar(index_Festivo, index_dia) {
 function Tabla_consulta() {
     
     html_TFestivo += "</tbody></table>";
-    $("#container_TFestivo").html("");
-    $("#container_TFestivo").html(html_TFestivo);
+    $(".container_TGrid").html("");
+    $(".container_TGrid").html(html_TFestivo);
 
     $("#TFestivo").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,

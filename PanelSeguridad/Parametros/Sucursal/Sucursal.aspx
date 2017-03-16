@@ -20,7 +20,7 @@
     <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
-    
+
     <div id="Dialog_Control" style="width: 100%; text-align: center;">
         <div class="cssload-container" style="margin-top: 25%;">
             <div class="cssload-whirlpool"></div>
@@ -42,7 +42,7 @@
         </table>
     </div>
     <div class="Marco_Container">
-       <div class="Marco_btn_Form">
+        <div class="Marco_btn_Form">
             <input id="BtnShearh" type="button" value="Consulta" onclick="HabilitarPanel('buscar');" />
             <input id="BtnCreate" type="button" value="Crear" onclick="HabilitarPanel('crear');" />
             <input id="BtnUpdate" type="button" value="Actualizar" onclick="HabilitarPanel('modificar');" />
@@ -58,7 +58,7 @@
                         </td>
                         <td>
                             <span class="cssToolTip_Form">
-                                <input id="TxtRead" type="text" style="width: 60%; margin-left: 10%;"/>
+                                <input id="TxtRead" type="text" style="width: 60%; margin-left: 10%;" />
                                 <span class="Spam_AST"></span></span>
                         </td>
                         <td colspan="4" align="center" id="TD3" style="width: 20%;">
@@ -71,7 +71,7 @@
                     </tr>
                     <tr>
                         <td colspan="4">
-                            <div id="container_TSucursal">
+                            <div class="container_TGrid">
                             </div>
                         </td>
                     </tr>
@@ -129,7 +129,7 @@
                                     <span class="SpamEG"></span></span>
                             </td>
                         </tr>
-                        
+
                     </table>
                     <table id="T_Direccion" style="width: 90%; margin-left: 8%;">
                         <tr>

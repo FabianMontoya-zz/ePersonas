@@ -1230,7 +1230,7 @@ function ConsultaRepetido() {
 }
 
 function Table_Activos() {
-    $("#container_TActivos").html("");
+    $(".container_TGrids").html("");
     Cargar_Variables(); /*C_Contrato_Activos.js*/
 }
 

@@ -71,7 +71,7 @@
                     </tr>
                     <tr>
                         <td colspan="4">
-                            <div id="container_TRDoc_Verificacion">
+                            <div class="container_TGrid">
                             </div>
                         </td>
                     </tr>

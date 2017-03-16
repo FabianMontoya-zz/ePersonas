@@ -69,7 +69,7 @@
                     </tr>
                     <tr>
                         <td colspan="4">
-                            <div id="container_TFasecolda">
+                            <div class="container_TGrid">
                             </div>
                         </td>
                     </tr>
@@ -201,7 +201,7 @@
                 </td>
             </tr>
         </table>
-        <table id="Blo_Cuentas">
+        <table class="Table_Header_Block">
             <tr>
                 <td colspan="25" align="center" class="Title_Bold">Periodo
                 </td>
