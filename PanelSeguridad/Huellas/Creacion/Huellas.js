@@ -19,9 +19,6 @@ var ArchivosOK = false; //Si se han subido todos los archivos requeridos
 //Evento load JS
 $(document).ready(function () {
 
-    $("#Marco_trabajo_Form").css("height", "490px");
-    $("#Marco_trabajo_Huella").css("height", "380px");
-
     /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
     Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
     Ocultar_Errores();

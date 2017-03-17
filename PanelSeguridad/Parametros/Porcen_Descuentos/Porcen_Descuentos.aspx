@@ -43,7 +43,7 @@
         </table>
     </div>
     <div class="Marco_Container">
-       <div class="Marco_btn_Form">
+        <div class="Marco_btn_Form">
             <input id="BtnShearh" type="button" value="Consulta" onclick="HabilitarPanel('buscar');" />
             <input id="BtnCreate" type="button" value="Crear" onclick="HabilitarPanel('crear');" />
             <input id="BtnUpdate" type="button" value="Actualizar" onclick="HabilitarPanel('modificar');" />
@@ -59,7 +59,7 @@
                         </td>
                         <td id="TD2" style="width: 65%;">
                             <span class="cssToolTip_Form">
-                                <input id="TxtRead" type="text" style="width: 60%; margin-left: 10%;"/>
+                                <input id="TxtRead" type="text" style="width: 60%; margin-left: 10%;" />
                                 <span class="Spam_AST"></span></span>
                         </td>
                         <td colspan="4" align="center" id="TD3" style="width: 20%;">
@@ -177,7 +177,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <table id="Vencimiento" style="margin-left: 90px; width: 50%; padding-left: 100px; padding-right: 100px; text-align: center;">
+                            <table class="container_Grid_Flex" style="margin-left: 90px; width: 50%; padding-left: 100px; padding-right: 100px; text-align: center;">
                                 <tr>
                                     <td align="center" class="Title_Bold" colspan="4">Vencimientos
                                     </td>

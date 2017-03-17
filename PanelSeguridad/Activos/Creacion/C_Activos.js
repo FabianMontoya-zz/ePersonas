@@ -30,9 +30,6 @@ var Con_Clase;
 //Evento load JS
 $(document).ready(function () {
 
-    $("#Marco_trabajo_Contrato").css("height", "490px");
-    $("#V_TFacturas").html(Suma_Valor_Inicial);
-
     Load_Charge_Sasif();
     Picker_Fechas();
     VentanasEmergentes();

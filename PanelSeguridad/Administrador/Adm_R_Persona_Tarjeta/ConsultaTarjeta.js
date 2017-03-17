@@ -96,8 +96,8 @@ function Table_Tarjetas() {
     }
 
     html_Consulta += "</tbody></table>";
-    $("#Container_Consulta").html("");
-    $("#Container_Consulta").html(html_Consulta);
+    $(".Div_Full_Block").html("");
+    $(".Div_Full_Block").html(html_Consulta);
 
     $("#TConsulta").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,

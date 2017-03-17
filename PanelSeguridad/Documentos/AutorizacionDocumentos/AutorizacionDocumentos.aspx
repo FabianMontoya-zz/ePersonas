@@ -201,7 +201,7 @@
                 </td>
             </tr>
         </table>
-        <div id="container_Autorizacion">
+        <div class="container_TGrid_Create">
         </div>
         <div id="Dialog_Visor_View_Validacion" style="text-align: center;">
             <table style="width: 100%; height: 400px;">
@@ -525,7 +525,7 @@
                 </td>
             </tr>
         </table>
-        <div id="container_TDoc_H" style="margin-top: 10px; margin-bottom: 10px;">
+        <div class="container_TGrid_Compact">
         </div>
         <div id="D_Controls" style="text-align: center; width: 100%;">
             <table id="Controls">

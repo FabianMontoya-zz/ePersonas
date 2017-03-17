@@ -42,8 +42,8 @@
             </tr>
         </table>
     </div>
-    <div id="Marco_Contrato">
-        <div id="Marco_trabajo_Contrato">
+    <div class="Marco_Container_Flex">
+        <div class="Marco_trabajo_Flex">
             <table width="100%">
                 <tr>
                     <td class="Label_Bold" style="width: 80%; text-align: end; color: #b70d0d;">Hora <span id="liveclock" style="left: 0; top: 0;"></span>

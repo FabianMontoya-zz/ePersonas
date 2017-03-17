@@ -45,7 +45,7 @@
                         <td style="padding-bottom: 25px; width: 50%;"></td>
                     </tr>
                 </table>
-                <div id="Container_Consulta">
+                <div class="Div_Full_Block">
                 </div>
             </div>
         </div>

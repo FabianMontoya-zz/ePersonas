@@ -48,6 +48,23 @@ CONTENEDOR DE FORMULARIO
     position: absolute;
 }
 
+/*DIV CONTENT PRINCIPAL SIN ADMINISTRACION*/
+.Marco_Container_Flex {
+    margin-top: 35px;
+    margin-left: 25px;
+    padding: 14px 14px;
+    background: -webkit-linear-gradient(#f6f6f6, #e8e8e8); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#f6f6f6, #e8e8e8); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#f6f6f6, #e8e8e8); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#f6f6f6, #e8e8e8); /* Standard syntax (must be last)*/
+    border-radius: 5px;
+    border: solid 1px #ccc;
+    width: 92.5%;
+    height: 68%;
+    overflow: auto;
+    position: absolute;
+}
+
 /*-- DIV CONTENT BOTONES ADMINISTRACION---*/
 .Marco_btn_Form {
     margin-top: 1px;
@@ -62,6 +79,22 @@ CONTENEDOR DE FORMULARIO
     width: 97%;
     height: 7%;
     text-align: center;
+}
+
+/*-- DIV CONTENT AREA DE TRABAJO---*/
+.Marco_trabajo_Flex {
+    position: relative;
+    margin-top: 10px;
+    padding: 20px 20px;
+    border-radius: 10px;
+    background: -webkit-linear-gradient(#f6f6f6, #e8e8e8); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#f6f6f6, #e8e8e8); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#f6f6f6, #e8e8e8); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#f6f6f6, #e8e8e8); /* Standard syntax (must be last)*/
+    border: solid 1px #ccc;
+    width: 97%;
+    height: 550px;
+    overflow: auto;
 }
 
 /*-- DIV CONTENT AREA DE TRABAJO---*/
@@ -160,7 +193,7 @@ CONTENEDOR DE FORMULARIO
 /*-- CONTENEDOR DE LAS GRILLAS DE OPERACION EN LOS MODULOS ---*/
 .container_TGrid_Create {
     width: 1120px;
-    height: 190px;
+    height: 360px;
     overflow: auto;
     border: solid 1px #CACACA;
     font: 12px/20px CenturyGothic,sans-serif;
@@ -177,6 +210,34 @@ CONTENEDOR DE FORMULARIO
     font: 12px/20px CenturyGothic,sans-serif;
     text-align: center;
 }
+
+/*-- CONTENEDOR DE LAS GRILLAS DE CONSULTA PEQUENAS ---*/
+.container_TGrid_Compact {
+    width: 930px;
+    height: 150px;
+    overflow: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: solid 1px #CACACA;
+    font: 12px/20px CenturyGothic,sans-serif;
+    text-align: center;
+}
+
+/*-- CONTENEDOR DE LAS GRILLAS EN MODULOS ESPECIALES ---*/
+.container_Grid_Flex, #Blo_Inmuebles, #Blo_Fasecolda {
+    margin-top: 1%;
+    margin-bottom: 1%;
+    width: 100%;
+    overflow: auto;
+    padding: 20px 26px;
+    border-radius: 10px;
+    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+    border: solid 1px #921919;
+}
+
 
 /*-- CONTENEDOR POR BLOQUES EN TABLAS ---*/
 .Table_Header_Block {
@@ -204,6 +265,77 @@ CONTENEDOR DE FORMULARIO
     border: solid 1px #921919;
 }
 
+/*-- CONTENEDOR POR BLOQUES EN DIV FULL ESPACIO---*/
+.Div_Full_Block {
+    width: 100%;
+    overflow: auto;
+    font: 12px/20px CenturyGothic,sans-serif;
+    text-align: center;
+}
+
+/************************************************************************************
+FUNCIONALIDADES GLOBLARES
+*************************************************************************************/
+
+/*--- BOTONES DE GUARDADO DE FORMULARIOS ---*/
+#Controls {
+    text-align: center;
+    width: 100%;
+    margin: 10px;
+}
+
+/*--- ESTILO SASIF PARA LOS DIALOGOS O VENTANAS EMERGENTES ---*/
+.Dialog_Sasif {
+    border-radius: 10px;
+    padding: 20px 26px;
+    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+    border: solid 1px #921919;
+}
+
+/************************************************************************************
+FUNCIONALIDADES SUB MENU CLIENTES
+*************************************************************************************/
+
+/*CONTROL IMAGEN DIRECCION*/
+#DivA:hover .ImaAddress {
+    content: url("../../images/adress_book_w.png");
+}
+
+.ImaAddress {
+    content: url("../../images/adress_book.png");
+}
+
+/*CONTROL IMAGEN BANCO*/
+#DivB:hover .ImaBank {
+    content: url("../../images/bank_w.png");
+}
+
+.ImaBank {
+    content: url("../../images/bank.png");
+}
+
+/*CONTROL IMAGEN DOCUMENTO*/
+#DivD:hover .ImaDoc {
+    content: url("../../images/documentos_w.png");
+}
+
+.ImaDoc {
+    content: url("../../images/documentos.png");
+}
+
+/*CONTROL IMAGEN RELACION*/
+#Div_R:hover .ImaRelation, #Div_RC:hover .ImaRelation {
+    content: url("../../images/Relation_Gray.png");
+}
+
+.ImaRelation {
+    content: url("../../images/Relation_Red.png");
+}
+
+
 /************************************************************************************
 MEDIA QUERIES
 *************************************************************************************/
@@ -217,11 +349,19 @@ MEDIA QUERIES
         width: 89%;
     }
 
+    .Marco_Container_Flex {
+        width: 89%;
+    }
+
     .Marco_btn_Form {
         width: 95%;
     }
 
     .Marco_trabajo_Form {
+        width: 95%;
+    }
+
+    .Marco_trabajo_Flex {
         width: 95%;
     }
 }
@@ -236,11 +376,19 @@ MEDIA QUERIES
         width: 85.7%;
     }
 
+    .Marco_Container_Flex {
+        width: 85.7%;
+    }
+
     .Marco_btn_Form {
         width: 92%;
     }
 
     .Marco_trabajo_Form {
+        width: 92%;
+    }
+
+    .Marco_trabajo_Flex {
         width: 92%;
     }
 }
@@ -255,12 +403,20 @@ MEDIA QUERIES
         width: 82.7%;
     }
 
+    .Marco_Container_Flex {
+        width: 82.7%;
+    }
+
     .Marco_btn_Form {
         width: 90%;
         height: 10%;
     }
 
     .Marco_trabajo_Form {
+        width: 90%;
+    }
+
+    .Marco_trabajo_Flex {
         width: 90%;
     }
 }
@@ -277,11 +433,20 @@ MEDIA QUERIES
         margin-left: -30px;
     }
 
+    .Marco_Container_Flex {
+        width: 86.5%;
+        margin-left: -30px;
+    }
+
     .Marco_btn_Form {
         width: 83%;
     }
 
     .Marco_trabajo_Form {
+        width: 83%;
+    }
+
+    .Marco_trabajo_Flex {
         width: 83%;
     }
 
@@ -291,73 +456,12 @@ MEDIA QUERIES
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*                                                               ADMININSTRACION PARAMETRIZABLE                                                               */
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
-/*CONTROL IMAGEN DIRECCION*/
-#logoExt:hover .Ext {
-    content: url("../../images/agenda_gray.png");
-    cursor: pointer;
-    cursor: hand; /*internet explorer*/
-}
-
-.Ext {
-    content: url("../../images/agenda.png");
-}
-
-#image_exit {
-    text-align: end;
-}
-
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*                                                           PARAMETRIZACION PROCESOS                                                               */
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-
-#Container_Consulta, #Container_Facturas, #container_TCiclo {
-    width: 100%;
-    overflow: auto;
-    font: 12px/20px CenturyGothic,sans-serif;
-    text-align: center;
-}
-
-#container_TDoc_H {
-    width: 930px;
-    height: 150px;
-    overflow: auto;
-    border: solid 1px #CACACA;
-    font: 12px/20px CenturyGothic,sans-serif;
-    text-align: center;
-}
-
-#container_Autorizacion {
-    width: 1160px;
-    height: 360px;
-    overflow: auto;
-    border: solid 1px #CACACA;
-    font: 12px/20px CenturyGothic,sans-serif;
-    text-align: center;
-}
-
-
-.Dialog_Sasif {
-    border-radius: 10px;
-    padding: 20px 26px;
-    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
-    border: solid 1px #921919;
-}
-
-#D_Impuestos {
-    font: 12px/20px CenturyGothic,sans-serif;
-}
-
-#Relacion, #Complementos, #Complementos_Read, #Vencimiento, #Complementos_Read_Cliente, #Anexos, #Blo_Inmuebles, #Blo_Fasecolda {
-    margin-top: 1%;
-    margin-bottom: 1%;
-    width: 100%;
+/* pendiente por fallas en el modulo informe impuesto*/
+#D_Impuestos, #D_Clientes_Z {
+    margin-top: 15px;
     padding: 20px 26px;
     border-radius: 10px;
     background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
@@ -365,7 +469,11 @@ MEDIA QUERIES
     background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
     background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
     border: solid 1px #921919;
+    font: 12px/20px CenturyGothic,sans-serif;
 }
+/* pendiente por fallas en el modulo informe impuesto*/
+
+
 
 #Bloque_datosIngreso, #T_Datos_Identificacion_blin, #Bloque_datos_activos, #Bloque_Datos_Factura {
     margin-top: 1%;
@@ -393,12 +501,6 @@ MEDIA QUERIES
     border: solid 1px #921919;
 }
 
-#Controls {
-    text-align: center;
-    width: 100%;
-    margin: 10px;
-}
-
 .topform {
     border: gray solid 2px;
     border-style: outset;
@@ -423,22 +525,6 @@ MEDIA QUERIES
     font: 12px/20px CenturyGothic,sans-serif;
 }
 
-#D_Impuestos, #D_Clientes_Z {
-    margin-top: 15px;
-    padding: 20px 26px;
-    border-radius: 10px;
-    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
-    border: solid 1px #921919;
-    font: 12px/20px CenturyGothic,sans-serif;
-}
-
-#container_direccion {
-    font: 12px/20px CenturyGothic,sans-serif;
-    text-align: center;
-}
 
 
 
@@ -446,31 +532,6 @@ MEDIA QUERIES
     width: 100%;
 }
 
-#Marco_Contrato {
-    margin-top: 10px;
-    padding: 20px 48px;
-    border-radius: 10px;
-    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
-    border: solid 1px #921919;
-    width: 90%;
-    margin-left: 25px;
-}
-
-#Marco_trabajo_Contrato {
-    margin-top: 10px;
-    padding: 20px 20px;
-    border-radius: 10px;
-    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
-    border: solid 1px #921919;
-    width: 95%;
-    overflow: auto;
-}
 
 #Container_Complementos {
     height: 45%;
@@ -527,32 +588,6 @@ MEDIA QUERIES
     z-index: 50;
 }
 
-/*CONTROL IMAGEN DIRECCION*/
-#DivA:hover .ImaAddress {
-    content: url("../../images/adress_book_w.png");
-}
-
-.ImaAddress {
-    content: url("../../images/adress_book.png");
-}
-
-/*CONTROL IMAGEN BANCO*/
-#DivB:hover .ImaBank {
-    content: url("../../images/bank_w.png");
-}
-
-.ImaBank {
-    content: url("../../images/bank.png");
-}
-
-/*CONTROL IMAGEN BANCO*/
-#DivD:hover .ImaDoc {
-    content: url("../../images/documentos_w.png");
-}
-
-.ImaDoc {
-    content: url("../../images/documentos.png");
-}
 
 #Foto_Persona {
     width: 86%;
@@ -577,11 +612,18 @@ MEDIA QUERIES
     font-weight: bold;
 }
 
-/*CONTROL IMAGEN BANCO*/
-#Div_R:hover .ImaRelation, #Div_RC:hover .ImaRelation {
-    content: url("../../images/Relation_Gray.png");
+/*CONTROL IMAGEN DIRECCION*/
+#logoExt:hover .Ext {
+    content: url("../../images/agenda_gray.png");
+    cursor: pointer;
+    cursor: hand; /*internet explorer*/
 }
 
-.ImaRelation {
-    content: url("../../images/Relation_Red.png");
+.Ext {
+    content: url("../../images/agenda.png");
 }
+
+#image_exit {
+    text-align: end;
+}
+

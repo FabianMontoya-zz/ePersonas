@@ -52,9 +52,7 @@ var ContTerceros = 0;
 
 //Evento load JS
 $(document).ready(function () {
-    $("#Marco_trabajo_Contrato").css("height", "440px");
-    $("#Marco_trabajo_Contrato").css("width", "95%");
-
+   
     /*Funciones para configuración inicial de campos en vista*/
     VentanasEmergentes();
     Ocultar_IMGS_Errores();

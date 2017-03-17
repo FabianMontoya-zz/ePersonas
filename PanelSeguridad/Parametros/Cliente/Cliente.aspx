@@ -558,7 +558,7 @@
                         </tr>
                     </table>
                 </div>
-                <table id="Anexos">
+                <table class="container_Grid_Flex">
                     <tr>
                         <td>
                             <table id="Tabla_TC" style="width: 100%">

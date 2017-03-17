@@ -35,8 +35,8 @@
     </div>
 
     <!--Dialog que contiene la pantalla de las colocaciones/Huellas -->
-    <div id="Marco_Contrato">
-        <div class="Marco_trabajo_Form">
+    <div class="Marco_Container_Flex">
+        <div class="Marco_trabajo_Flex">
             <table id="T_Encabezado" style="width: 100%;">
                 <tr>
                     <td id="TD_ID" style="width: 10.5%;" class="Label_Bold">NIT Empresa</td>
@@ -115,131 +115,131 @@
                 <input id="Btnguardar" type="button" value="Guardar" onclick="GuardarHuellas();" />
             </div>
         </div>
+    </div>
 
+    <div id="Dialog_Dedos" title="Dedos Solicitados">
+        <table id="T_Fingers" style="width: 100%;" border="0">
+            <tr>
+                <td align="center">
+                    <table id="T_Checks_Fingers" cellspacing="2" cellpadding="2" style="width: 100%;" border="0">
+                        <tr style="width: 100%;">
 
-        <div id="Dialog_Dedos" title="Dedos Solicitados">
-            <table id="T_Fingers" style="width: 100%;" border="0">
-                <tr>
-                    <td align="center">
-                        <table id="T_Checks_Fingers" cellspacing="2" cellpadding="2" style="width: 100%;" border="0">
-                            <tr style="width: 100%;">
+                            <td class="Label_Bold" colspan="2" align="center">
+                                <h3>Mano Izquierda</h3>
+                            </td>
+                            <td class="Label_Bold"></td>
+                            <td class="Label_Bold" colspan="2" align="center">
+                                <h3>Mano Derecha</h3>
+                            </td>
+                            <td class="Label_Bold"></td>
+                        </tr>
 
-                                <td class="Label_Bold" colspan="2" align="center">
-                                    <h3>Mano Izquierda</h3>
-                                </td>
-                                <td class="Label_Bold"></td>
-                                <td class="Label_Bold" colspan="2" align="center">
-                                    <h3>Mano Derecha</h3>
-                                </td>
-                                <td class="Label_Bold"></td>
-                            </tr>
+                        <tr>
+                            <td style="width: 5%;">
+                                <input type="checkbox" style="cursor: pointer; cursor: hand;" id="Check_PulgarIZ" value="PulgarIZ" />
+                            </td>
+                            <td class="Label_Bold">Pulgar
+                            </td>
+                            <td class="Label_Bold" style="width: 10%;"></td>
+                            <td style="width: 5%;">
+                                <input type="checkbox" style="cursor: pointer; cursor: hand;" id="Check_PulgarDER" value="PulgarDER" />
+                            </td>
+                            <td class="Label_Bold">Pulgar
+                            </td>
+                            <td class="Label_Bold" style="width: 10%;"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" style="cursor: pointer; cursor: hand;" id="Check_IndiceIZ" value="IndiceIZ" />
+                            </td>
+                            <td class="Label_Bold">Índice
+                            </td>
+                            <td class="Label_Bold"></td>
+                            <td>
+                                <input type="checkbox" style="cursor: pointer; cursor: hand;" id="Check_IndiceDER" value="IndiceDER" />
+                            </td>
+                            <td class="Label_Bold">Índice
+                            </td>
+                            <td class="Label_Bold"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" style="cursor: pointer; cursor: hand;" id="Check_MedioIZ" value="MedioIZ" />
+                            </td>
+                            <td class="Label_Bold">Dedo Medio
+                            </td>
+                            <td class="Label_Bold"></td>
+                            <td>
+                                <input type="checkbox" style="cursor: pointer; cursor: hand;" id="Check_MedioDER" value="MedioDER" />
+                            </td>
+                            <td class="Label_Bold">Dedo Medio
+                            </td>
+                            <td class="Label_Bold"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" style="cursor: pointer; cursor: hand;" id="Check_AnularIZ" value="AnularIZ" />
+                            </td>
+                            <td class="Label_Bold">Anular
+                            </td>
+                            <td class="Label_Bold"></td>
+                            <td>
+                                <input type="checkbox" style="cursor: pointer; cursor: hand;" id="Check_AnularDER" value="AnularDER" />
+                            </td>
+                            <td class="Label_Bold">Anular
+                            </td>
+                            <td class="Label_Bold"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" style="cursor: pointer; cursor: hand;" id="Check_MeniqueIZ" value="MeniqueIZ" />
+                            </td>
+                            <td class="Label_Bold">Meñique
+                            </td>
+                            <td class="Label_Bold"></td>
+                            <td>
+                                <input type="checkbox" style="cursor: pointer; cursor: hand;" id="Check_MeniqueDER" value="MeniqueDER" />
+                            </td>
+                            <td class="Label_Bold">Meñique
+                            </td>
+                            <td class="Label_Bold"></td>
+                        </tr>
+                        <tr>
+                            <td class="Label_Bold" colspan="6" align="center">&nbsp;</td>
+                        </tr>
 
-                            <tr>
-                                <td style="width: 5%;">
-                                    <input type="checkbox" style="cursor: pointer; cursor: hand;" id="Check_PulgarIZ" value="PulgarIZ" />
-                                </td>
-                                <td class="Label_Bold">Pulgar
-                                </td>
-                                <td class="Label_Bold" style="width: 10%;"></td>
-                                <td style="width: 5%;">
-                                    <input type="checkbox" style="cursor: pointer; cursor: hand;" id="Check_PulgarDER" value="PulgarDER" />
-                                </td>
-                                <td class="Label_Bold">Pulgar
-                                </td>
-                                <td class="Label_Bold" style="width: 10%;"></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" style="cursor: pointer; cursor: hand;" id="Check_IndiceIZ" value="IndiceIZ" />
-                                </td>
-                                <td class="Label_Bold">Índice
-                                </td>
-                                <td class="Label_Bold"></td>
-                                <td>
-                                    <input type="checkbox" style="cursor: pointer; cursor: hand;" id="Check_IndiceDER" value="IndiceDER" />
-                                </td>
-                                <td class="Label_Bold">Índice
-                                </td>
-                                <td class="Label_Bold"></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" style="cursor: pointer; cursor: hand;" id="Check_MedioIZ" value="MedioIZ" />
-                                </td>
-                                <td class="Label_Bold">Dedo Medio
-                                </td>
-                                <td class="Label_Bold"></td>
-                                <td>
-                                    <input type="checkbox" style="cursor: pointer; cursor: hand;" id="Check_MedioDER" value="MedioDER" />
-                                </td>
-                                <td class="Label_Bold">Dedo Medio
-                                </td>
-                                <td class="Label_Bold"></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" style="cursor: pointer; cursor: hand;" id="Check_AnularIZ" value="AnularIZ" />
-                                </td>
-                                <td class="Label_Bold">Anular
-                                </td>
-                                <td class="Label_Bold"></td>
-                                <td>
-                                    <input type="checkbox" style="cursor: pointer; cursor: hand;" id="Check_AnularDER" value="AnularDER" />
-                                </td>
-                                <td class="Label_Bold">Anular
-                                </td>
-                                <td class="Label_Bold"></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" style="cursor: pointer; cursor: hand;" id="Check_MeniqueIZ" value="MeniqueIZ" />
-                                </td>
-                                <td class="Label_Bold">Meñique
-                                </td>
-                                <td class="Label_Bold"></td>
-                                <td>
-                                    <input type="checkbox" style="cursor: pointer; cursor: hand;" id="Check_MeniqueDER" value="MeniqueDER" />
-                                </td>
-                                <td class="Label_Bold">Meñique
-                                </td>
-                                <td class="Label_Bold"></td>
-                            </tr>
-                            <tr>
-                                <td class="Label_Bold" colspan="6" align="center">&nbsp;</td>
-                            </tr>
+                    </table>
+                </td>
+                <td class="Label_Bold" align="center">
+                    <img alt="Nombre Dedos Manos" style="background-image: url(../../images/manos_dedos.png); background-size: 215px 240px; background-repeat: no-repeat;" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" width="215px" height="240px" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input id="BTN_Capturar" type="button" style="cursor: pointer; cursor: hand;" value="Capturar" onclick="GenerarEjecutable();" />
+                </td>
+            </tr>
+        </table>
+    </div>
 
-                        </table>
-                    </td>
-                    <td class="Label_Bold" align="center">
-                        <img alt="Nombre Dedos Manos" style="background-image: url(../../images/manos_dedos.png); background-size: 215px 240px; background-repeat: no-repeat;" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" width="215px" height="240px" />
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2" align="center">
-                        <input id="BTN_Capturar" type="button" style="cursor: pointer; cursor: hand;" value="Capturar" onclick="GenerarEjecutable();" />
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-        <div id="dialog" title="Basic dialog">
-            <table style="width: 100%; text-align: center;">
-                <tr>
-                    <td class="Label_Bold">
-                        <p id="Mensaje_alert">
-                        </p>
-                    </td>
-                    <td>
-                        <img alt="error" id="DE" src="../../images/error_2.png" />
-                        <img alt="success" id="SE" src="../../images/success.png" />
-                        <img alt="Warning" id="WA" src="../../images/alert.png" />
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2" align="center">
-                        <input id="BtnExitD" type="button" value="Salir" style="width: 40%;" onclick="x();" />
-                    </td>
-                </tr>
-            </table>
-        </div>
+    <div id="dialog" title="Basic dialog">
+        <table style="width: 100%; text-align: center;">
+            <tr>
+                <td class="Label_Bold">
+                    <p id="Mensaje_alert">
+                    </p>
+                </td>
+                <td>
+                    <img alt="error" id="DE" src="../../images/error_2.png" />
+                    <img alt="success" id="SE" src="../../images/success.png" />
+                    <img alt="Warning" id="WA" src="../../images/alert.png" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input id="BtnExitD" type="button" value="Salir" style="width: 40%;" onclick="x();" />
+                </td>
+            </tr>
+        </table>
+    </div>
 </asp:Content>

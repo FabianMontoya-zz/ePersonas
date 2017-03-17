@@ -236,7 +236,7 @@
                 <td id="V_Document"></td>
             </tr>
         </table>
-        <table id="Complementos_Read">
+        <table class="container_Grid_Flex">
             <tr>
                 <td colspan="4" align="left">
                     <span class="cssToolTip_ver"><a href="javascript:ShearCliente('Nit','TD','D');">
@@ -317,7 +317,7 @@
                 </table>
             </div>
         </div>
-        <table id="Complementos_Read_Cliente">
+        <table class="container_Grid_Flex">
             <tr>
                 <td colspan="4" align="left">
                     <span class="cssToolTip_ver"><a href="javascript:Direcciones('Read');">

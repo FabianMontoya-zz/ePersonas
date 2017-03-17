@@ -44,8 +44,8 @@
             </tr>
         </table>
     </div>
-    <div id="Marco_Contrato">
-        <div id="Marco_trabajo_Contrato">
+    <div class="Marco_Container_Flex">
+        <div class="Marco_trabajo_Flex">
             <div class="Container_controls">
                 <div id="Acordeon_Activo" style="width: 100%">
                     <h3>Datos Activos
@@ -407,8 +407,6 @@
                                             <td class="Label_Bold" style="width: 7.7%;">Notaria
                                             </td>
                                             <td style="width: 20%;">
-                                                <%--        <select id="Select_Notaria_R" class="C_Chosen">
-                                                </select>--%>
                                                 <span class="cssToolTip_Form_T">
                                                     <input type="text" class="Numeric" id="Text_Num_Notaria" maxlength="3" style="width: 50px;" />
                                                     <span class="Spam_AN"></span></span>
@@ -844,10 +842,10 @@
                         </table>
                     </div>
                 </div>
-                <table id="Complementos">
+                <table class="container_Grid_Flex">
                     <tr>
                         <td>
-                            <div id="Container_Facturas" style="width: 100%;">
+                            <div class="Div_Full_Block" style="width: 100%;">
                                 <table id="T_Factura_Grid" border="1" cellpadding="1" cellspacing="1">
                                     <thead>
                                         <tr>

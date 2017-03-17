@@ -51,7 +51,7 @@ $(document).ready(function () {
     transaccionAjax_RutasOperacion('RUTAS_OPERACION');
     transaccionAjax_MVerificacion('MATRIX_VERIFICAR');
     transacionAjax_EmpresaNit('Cliente');
-        
+
     Change_Select_Nit();
     VentanasEmergentes();
     ComplementosJquery();
@@ -200,7 +200,7 @@ function BtnCrear() {
         ValidaFiltros();
     }
 
-    
+
 }
 
 //regresar proceso
@@ -236,7 +236,7 @@ function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {
         vl_Nit_ID_proccess = $(this).val();
         TransaccionesSegunNIT(vl_Nit_ID_proccess);
-     });
+    });
 }
 
 //mostramos el fileupload de documentos anexos 
@@ -279,10 +279,10 @@ function camposvalidar() {
 function validarCamposCrear() {
 
     var Campo_1 = $("#Select_EmpresaNit").val();
-   
+
     var validar = 0;
 
-    if (Campo_1 == "-1" ) {
+    if (Campo_1 == "-1") {
         validar = 1;
         if (Campo_1 == "-1")
             $("#Img5").css("display", "inline-table");
@@ -733,8 +733,8 @@ function Tabla_General_Document(Opc_Link) {
     }
 
     html += "</tbody></table>";
-    $("#container_Autorizacion").html("");
-    $("#container_Autorizacion").html(html);
+    $(".container_TGrid_Create").html("");
+    $(".container_TGrid_Create").html(html);
 
     $(".AddDocument").click(function () {
     });
@@ -758,8 +758,8 @@ function Table_Doc_H() {
         }
     }
     Html += "</tbody></table>";
-    $("#container_TDoc_H").html("");
-    $("#container_TDoc_H").html(Html);
+    $(".container_TGrid_Compact").html("");
+    $(".container_TGrid_Compact").html(Html);
 
     $(".Eliminar").click(function () {
     });
