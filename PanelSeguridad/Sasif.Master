@@ -4,12 +4,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <meta http-equiv="cache-control" content="max-age=0" />
     <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="pragma" content="no-cache" />
     <meta http-equiv="expires" content="0" />
-    <meta http-equiv="expires" content="Thu, 01 Dec 1994 16:00:00 GMT" />
-    <meta name="viewport" content="width=device−width, initial−scale=1.0" />
     <link href="css/css_master_Ing.css" rel="stylesheet" type="text/css" />
     <script src="<% = ResolveClientUrl("~/Scripts/Refresh.js")%>" type="text/javascript"></script>
     <asp:ContentPlaceHolder ID="head" runat="server">
