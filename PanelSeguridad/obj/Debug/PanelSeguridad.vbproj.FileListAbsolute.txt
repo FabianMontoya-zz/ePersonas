@@ -164,6 +164,7 @@ D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\Microsoft.Web.Infrast
 D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\System.Web.Optimization.dll
 D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\System.Web.Providers.dll
 D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\WebGrease.dll
+D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\System.Net.Http.dll
 D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\EntityFramework.xml
 D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\DotNetOpenAuth.Core.xml
 D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\DotNetOpenAuth.OAuth.xml
@@ -171,10 +172,11 @@ D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\DotNetOpenAuth.OAuth.
 D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\DotNetOpenAuth.OpenId.xml
 D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
 D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\DotNetOpenAuth.AspNet.xml
+D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\System.Net.Http.xml
 D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\es\EntityFramework.resources.dll
 D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\es\System.Web.Optimization.resources.dll
 D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\es\System.Web.Providers.resources.dll
-D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.vbprojResolveAssemblyReference.cache
+D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\bin\es\System.Net.Http.resources.dll
 D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.Resources.resources
 D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.vbproj.GenerateResource.Cache
 D:\VERSIONAMIENTO_GITHUB\SASIF_PERSONAS\PanelSeguridad\obj\Debug\PanelSeguridad.dll
