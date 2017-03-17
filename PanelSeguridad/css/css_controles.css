@@ -9,8 +9,7 @@ input[type='text'], input[type='password'] {
     font-size: inherit;
     font-weight: inherit;
     line-height: inherit;
-    width: 160px;
-}
+ }
 
 input[id='Circulo'] {
     height: 20px;
@@ -20,7 +19,7 @@ input[id='Circulo'] {
     color: gray;
 }
 
-/*personalizacion de las cajas de texto */
+/*CAJA DE TEXTO LARGA*/
 .Text_Long {
     -webkit-appearance: none;
     border: none;
