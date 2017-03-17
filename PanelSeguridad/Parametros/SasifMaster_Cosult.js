@@ -3,8 +3,6 @@ var ArraySasif = [];
 var ArrayMensajes = [];
 var ArrayAyudas = [];
 var ListDocument = [];
-var ArrayMenu = [];
-var Array_G_Usuario = [];
 /*--------------- region de variables globales --------------------*/
 
 //evento load de los master page
@@ -153,6 +151,7 @@ function transacionAjax_InfoUser(vp_State, vp_Nit_ID_Encrip, vp_User_ID) {
         async: false, // La petición es síncrona
         cache: false // No queremos usar la caché del navegador
     }).done(function () {
+       
         transacionAjax("consulta");
 
     });

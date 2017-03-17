@@ -1,5 +1,7 @@
 ﻿/*--------------- region de variables globales --------------------*/
 var Estructura = [];
+var Array_G_Usuario = [];
+var ArrayMenu = [];
 
 var HtmlTree;
 var HtmlTree_Interno = "";

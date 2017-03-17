@@ -2,8 +2,6 @@
 var ArraySasif = [];
 var ArrayMensajes = [];
 var ArrayAyudas = [];
-var ArrayMenu = [];
-var Array_G_Usuario = [];
 /*--------------- region de variables globales --------------------*/
 
 //evento load de los master page
