@@ -208,8 +208,8 @@ function VentanasEmergentes() {
         autoOpen: false,
         dialogClass: "Dialog_Sasif",
         modal: true,
-        width: 760,
-        height: 480,
+        width: 900,
+        height: 400,
         overlay: {
             opacity: 0.5,
             background: "black"

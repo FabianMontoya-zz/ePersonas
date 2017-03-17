@@ -55,6 +55,13 @@ label {
     color: black;
 }
 
+.Sigla
+{
+    text-align: left;
+    font-size: 10px;
+    font-weight: bold;
+}
+
 /************************************************************************************
 CONTROLES INPUT TYPE BUTTON                                                                                 
 *************************************************************************************/
@@ -162,6 +169,14 @@ option {
     width: 350px;
     color: White;
     font: 14px/20px CenturyGothic,sans-serif;
+}
+
+.Select_tiny {
+    width: 50px;
+}
+
+.Select_medium {
+    width: 90px;
 }
 
 /************************************************************************************

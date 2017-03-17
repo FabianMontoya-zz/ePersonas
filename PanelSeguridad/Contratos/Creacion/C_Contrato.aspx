@@ -760,7 +760,7 @@
     </div>
 
     <div id="Dialog_Terceros">
-        <div id="Bloque_datos_Terceros1">
+        <div class="container_Grid_Flex_95">
             <table id="T_DatosColocacion" style="width: 100%;">
                 <tr>
                     <td id="TD1" style="width: 10.5%;" class="Label_Bold">Empresa</td>
@@ -770,7 +770,7 @@
                 </tr>
             </table>
         </div>
-        <div id="Bloque_datos_Terceros2">
+        <div class="container_Grid_Flex_95">
             <table id="T_Documento" style="width: 100%; padding-top: 20px;">
                 <tr>
                     <td class="Label_Bold" style="width: 10.5%;">Documento</td>

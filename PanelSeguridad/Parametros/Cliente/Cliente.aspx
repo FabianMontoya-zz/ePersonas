@@ -929,7 +929,7 @@
             </tr>
         </table>
         <div class="Div_Complement_Block">
-            <table id="Tabla_Info_Dic">
+            <table class="Container_Direccion">
                 <tr>
                     <td class="Label_Bold" style="width: 100px;">Consecutivo
                     </td>
@@ -953,7 +953,7 @@
                     </td>
                 </tr>
             </table>
-            <table id="Tabla_Ubic">
+            <table class="Container_Direccion">
                 <tr>
                     <td class="Label_Bold" style="width: 100px;">Pais
                     </td>
@@ -998,7 +998,7 @@
                     <td style="width: 40%;"></td>
                 </tr>
             </table>
-            <table id="Tabla_Direccion">
+            <table class="Container_Direccion">
                 <tr>
                     <td class="Label_Bold" style="width: 100px;">Dirección
                     </td>
@@ -1022,7 +1022,7 @@
                     </td>
                 </tr>
             </table>
-            <table id="Tabla_Correo">
+            <table class="Container_Direccion">
                 <tr>
                     <td class="Label_Bold" style="width: 100px;">Correo 1
                     </td>
@@ -1052,7 +1052,7 @@
                     </td>
                 </tr>
             </table>
-            <table id="Tabla_Telefono" style="width: 100%; padding-left: 50px;">
+            <table class="Container_Direccion" style="width: 100%; padding-left: 50px;">
                 <tr align="left">
                     <td class="Label_Bold" style="width: 70px;"></td>
                     <td class="Label_Bold" style="width: 20px;">Ind.</td>
