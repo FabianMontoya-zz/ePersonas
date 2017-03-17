@@ -175,8 +175,8 @@
                     <td style="width: 31%;">
                         <select id="Select_TipoCalendario" style="width: 100%;" class="C_Chosen">
                             <option value="-1">Seleccione...</option>
-                            <option value="1">Por día de la semana</option>
-                            <option value="2">Fechas progresivas</option>
+                            <option value="1">1 - Por día de la semana</option>
+                            <option value="2">2 - Fechas progresivas</option>
                         </select>
                     </td>
                     <td style="padding-bottom: 25px; width: 70%;">
@@ -424,7 +424,7 @@
                 </tr>
                 <tr>
                     <td colspan="4" align="center">
-                        <input id="Btnguardar" type="button" value="Guardar" onclick="BtnCrear();" style="cursor: pointer; cursor: hand;" />
+                        <input id="Btnguardar" type="button" value="Guardar" onclick="BtnCrear();" style="cursor: pointer; cursor: hand;" /> 
                     </td>
                 </tr>
             </table>

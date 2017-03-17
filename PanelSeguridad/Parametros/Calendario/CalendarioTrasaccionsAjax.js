@@ -130,8 +130,6 @@ function transacionAjax_Calendario_create(State) {
 
     var ID;
     var Nit_ID;
-    var CalendarioDepen = 0;
-    var Politica = 0;
 
     if (State == "modificar") {
         Nit_ID = editNit_ID;
@@ -151,7 +149,7 @@ function transacionAjax_Calendario_create(State) {
             "action": State,
             "Nit_ID": Nit_ID,
             "ID": ID,
-            "descripcion": $("#TxtDescription").val(),
+            "Descripcion": $("#TxtDescription").val(),
             "TipoCalendario": $("#Select_TipoCalendario").val(),
             "List_Semana":ListC_Semana,
             "user": User.toUpperCase()

@@ -5,8 +5,8 @@
     Private _Index As Long
     Private _Nit_ID As String
     Private _Calendario_ID As Integer
-    Private _Dia_1_8 As String
-    Private _IndicativoFoto As String
+    Private _Dia As String
+    Private _IndicativoFestivo As String
     Private _HoraInicial As String
     Private _HoraFinal As String
 
@@ -41,20 +41,20 @@
             Me._Calendario_ID = value
         End Set
     End Property
-    Public Property Dia_1_8() As String
+    Public Property Dia() As String
         Get
-            Return Me._Dia_1_8
+            Return Me._Dia
         End Get
         Set(ByVal value As String)
-            Me._Dia_1_8 = value
+            Me._Dia = value
         End Set
     End Property
-    Public Property IndicativoFoto() As String
+    Public Property IndicativoFestivo() As String
         Get
-            Return Me._IndicativoFoto
+            Return Me._IndicativoFestivo
         End Get
         Set(ByVal value As String)
-            Me._IndicativoFoto = value
+            Me._IndicativoFestivo = value
         End Set
     End Property
     Public Property HoraInicial() As String

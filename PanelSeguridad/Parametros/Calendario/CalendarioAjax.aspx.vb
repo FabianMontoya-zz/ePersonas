@@ -79,7 +79,6 @@ Public Class CalendarioAjax
 
         Dim objCalendario As New CalendarioClass
         Dim SQL_Calendario As New CalendarioSQLClass
-        Dim ObjListCalendario As New List(Of CalendarioClass)
 
         Dim result, result_CSemana As String
         Dim vl_s_IDxiste As String
@@ -92,15 +91,13 @@ Public Class CalendarioAjax
 
         If vl_s_IDxiste = 0 Then
 
-            objCalendario.Descripcion = Request.Form("descripcion")
+            objCalendario.Descripcion = Request.Form("Descripcion")
             objCalendario.TipoCalendario = Request.Form("TipoCalendario")
 
             objCalendario.UsuarioCreacion = Request.Form("user")
             objCalendario.FechaCreacion = Date.Now
             objCalendario.UsuarioActualizacion = Request.Form("user")
             objCalendario.FechaActualizacion = Date.Now
-
-            ObjListCalendario.Add(objCalendario)
 
             result = SQL_Calendario.InsertCalendario(objCalendario)
             If result = "Exito" Then
@@ -120,17 +117,30 @@ Public Class CalendarioAjax
     ''' <remarks></remarks>
     Private Function Insert_CaledarioSemana()
 
-        Dim SQL As New CalendarioSemanaSQLClass
-        Dim ObjList As New List(Of CalendarioSemanaClass)
-
-        Dim Result_list As String = "Exito"
+        Dim Result_list As String = ""
         Dim vl_S_list As String = Request.Form("List_Semana").ToString
 
-        Dim vl_L_List As New List(Of CalendarioSemanaClass)
-        vl_L_List = SQL.Create_List(vl_S_list)
+        Dim vl_L_DaysList = JsonConvert.DeserializeObject(Of List(Of CalendarioSemanaClass))(vl_S_list)
 
-        For Each item_list As CalendarioSemanaClass In vl_L_List
-            Dim Result As String = SQL.Insert_C_Semana(item_list)
+        For Each item As CalendarioSemanaClass In vl_L_DaysList
+
+            Dim objCalendarioSemana As New CalendarioSemanaClass
+            Dim SQL As New CalendarioSemanaSQLClass
+
+            objCalendarioSemana.Nit_ID = Request.Form("Nit_ID")
+            objCalendarioSemana.Calendario_ID = Request.Form("ID")
+            ''
+            objCalendarioSemana.Dia = item.Dia
+            objCalendarioSemana.IndicativoFestivo = item.IndicativoFestivo
+            objCalendarioSemana.HoraInicial = item.HoraInicial
+            objCalendarioSemana.HoraFinal = item.HoraFinal
+            ''
+            objCalendarioSemana.UsuarioCreacion = Request.Form("user")
+            objCalendarioSemana.FechaCreacion = Date.Now
+            objCalendarioSemana.UsuarioActualizacion = Request.Form("user")
+            objCalendarioSemana.FechaActualizacion = Date.Now
+            ''
+            Dim Result As String = SQL.Insert_C_Semana(objCalendarioSemana)
 
             If Result = "Exito" Then
                 Result_list = "Exito"
