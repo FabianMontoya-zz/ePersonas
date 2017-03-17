@@ -289,7 +289,7 @@ function InicializaPagina() {
     $("#Controls").css("display", "none");
     $("#TablaConsulta").css("display", "none");
 
-    $("#Anexos").css("display", "none");
+    $(".container_Grid_Flex").css("display", "none");
     $("#TR_Nit").css("display", "none");
 
 
@@ -362,7 +362,7 @@ function BtnElimina() {
 function BtnLimpia() {
     Clear();
     Enabled_Client();
-    $("#Anexos").css("display", "none");
+    $(".container_Grid_Flex").css("display", "none");
 }
 
 //evento del boton salir
@@ -600,7 +600,7 @@ function HabilitarPanel(opcion) {
 
             $("#Controls").css("display", "inline-table");
             $("#TablaConsulta").css("display", "none");
-            $("#Anexos").css("display", "none");
+            $(".container_Grid_Flex").css("display", "none");
             $("#C_Banco").css("display", "none");
             $("#C_Empleado").css("display", "none");
 
@@ -633,7 +633,7 @@ function HabilitarPanel(opcion) {
             $("#Foto_Persona").css("display", "none");
 
             $("#Controls").css("display", "none");
-            $("#Anexos").css("display", "none");
+            $(".container_Grid_Flex").css("display", "none");
             $("#BtnLimpiar").css("display", "none");
 
             $("#TablaConsulta").css("display", "inline-table");
@@ -650,7 +650,7 @@ function HabilitarPanel(opcion) {
             $("#Foto_Persona").css("display", "none");
 
             $("#Controls").css("display", "none");
-            $("#Anexos").css("display", "none");
+            $(".container_Grid_Flex").css("display", "none");
             $("#C_Banco").css("display", "none");
             $("#C_Empleado").css("display", "none");
             $("#BtnLimpiar").css("display", "none");
@@ -669,7 +669,7 @@ function HabilitarPanel(opcion) {
             $("#Foto_Persona").css("display", "none");
 
             $("#Controls").css("display", "none");
-            $("#Anexos").css("display", "none");
+            $(".container_Grid_Flex").css("display", "none");
             $("#BtnLimpiar").css("display", "none");
 
             $("#TablaConsulta").css("display", "inline-table");
@@ -807,9 +807,9 @@ function Carga_Relaciones(Index_Cliente, Type) {
         $("#C_Banco_Vista").css("display", "inline-table");
 
         if (Type == "V")
-            $("#Anexos").css("display", "none");
+            $(".container_Grid_Flex").css("display", "none");
         else
-            $("#Anexos").css("display", "inline-table");
+            $(".container_Grid_Flex").css("display", "inline-table");
 
     }
     else {
@@ -824,9 +824,9 @@ function Carga_Relaciones(Index_Cliente, Type) {
         $("#C_Empleado_Vista").css("display", "inline-table");
 
         if (Type == "V")
-            $("#Anexos").css("display", "none");
+            $(".container_Grid_Flex").css("display", "none");
         else
-            $("#Anexos").css("display", "inline-table");
+            $(".container_Grid_Flex").css("display", "inline-table");
 
 
     }
@@ -842,9 +842,9 @@ function Carga_Relaciones(Index_Cliente, Type) {
         $("#C_Socio_Vista").css("display", "inline-table");
 
         if (Type == "V")
-            $("#Anexos").css("display", "none");
+            $(".container_Grid_Flex").css("display", "none");
         else
-            $("#Anexos").css("display", "inline-table");
+            $(".container_Grid_Flex").css("display", "inline-table");
 
 
     }
