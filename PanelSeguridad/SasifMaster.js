@@ -269,12 +269,12 @@ function btnSalir() {
 //visualiza el menu version responsive
 function VerMenu(){
     //$(".Dimencion_Menu").width("240px");
-if(vg_Flag_menu==0){
-    $(".panel_menu").show("fast"); 
+    if(vg_Flag_menu==0){
+        $(".panel_menu").show("fast"); 
         vg_Flag_menu = 1;
     }
-else{
-    $(".panel_menu").hide("fast");
+    else{
+        $(".panel_menu").hide("fast");
         vg_Flag_menu = 0;
     }
     
@@ -420,117 +420,116 @@ function ResetError() {
 
 //Función que bloquea el retorno entre páginas
 function No_Back_Button() {
-    /*  window.location.hash = "no-back-button";
-      window.location.hash = "Again-No-back-button" //chrome    
-      window.onhashchange = function () { window.location.hash = "no-back-button"; }
+    window.location.hash = "no-back-button";
+    window.location.hash = "Again-No-back-button" //chrome    
+    window.onhashchange = function () { window.location.hash = "no-back-button"; }
   
-      document.onkeydown = mykeyhandler;
+    document.onkeydown = mykeyhandler;
   
-      function mykeyhandler(event) {
+    function mykeyhandler(event) {
   
-          //keyCode 116 = F5 
-          //keyCode 122 = F11
-          //keyCode 16 = Shift
-          //keyCode 8 = Backspace
-          //keyCode 37 = LEFT ROW
-          //keyCode 78 = N
-          //keyCode 39 = RIGHT ROW
-          //keyCode 67 = C
-          //keyCode 73 = I
-          //keyCode 82 = R
-          //keyCode 83 = S
-          //keyCode 86 = V
-          //keyCode 85 = U 
-          //keyCode 87 = W 
-          //keyCode 45 = Insert
+        //keyCode 116 = F5 
+        //keyCode 122 = F11
+        //keyCode 16 = Shift
+        //keyCode 8 = Backspace
+        //keyCode 37 = LEFT ROW
+        //keyCode 78 = N
+        //keyCode 39 = RIGHT ROW
+        //keyCode 67 = C
+        //keyCode 73 = I
+        //keyCode 82 = R
+        //keyCode 83 = S
+        //keyCode 86 = V
+        //keyCode 85 = U 
+        //keyCode 87 = W 
+        //keyCode 45 = Insert
   
-          event = event || window.event;
-          var tgt = event.target || event.srcElement;
-          if ((event.altKey && event.keyCode == 37) || (event.altKey && event.keyCode == 39) ||
-          (event.ctrlKey && event.keyCode == 78) || (event.ctrlKey && event.keyCode == 82) ||
-          (event.ctrlKey && event.keyCode == 83) || (event.ctrlKey && event.keyCode == 85) ||
-          (event.ctrlKey && event.keyCode == 45) || (event.shiftKey && event.keyCode == 45) ||
-          (event.ctrlKey && event.keyCode == 87) || (event.ctrlKey && event.shiftKey && event.keyCode == 73)) {
-              event.cancelBubble = true;
-              event.returnValue = false;
-              alert("¡Función no permitida!");
-              return false;
-          }
+        event = event || window.event;
+        var tgt = event.target || event.srcElement;
+        if ((event.altKey && event.keyCode == 37) || (event.altKey && event.keyCode == 39) ||
+        (event.ctrlKey && event.keyCode == 78) || (event.ctrlKey && event.keyCode == 82) ||
+        (event.ctrlKey && event.keyCode == 83) || (event.ctrlKey && event.keyCode == 85) ||
+        (event.ctrlKey && event.keyCode == 45) || (event.shiftKey && event.keyCode == 45) ||
+        (event.ctrlKey && event.keyCode == 87) || (event.ctrlKey && event.shiftKey && event.keyCode == 73)) {
+            event.cancelBubble = true;
+            event.returnValue = false;
+            alert("¡Función no permitida!");
+            return false;
+        }
   
-          if (event.keyCode == 18 && tgt.type != "text" && tgt.type != "password" && tgt.type != "textarea") {
-              return false;
-          }
+        if (event.keyCode == 18 && tgt.type != "text" && tgt.type != "password" && tgt.type != "textarea") {
+            return false;
+        }
   
-          if (event.keyCode == 8 && tgt.type != "text" && tgt.type != "password" && tgt.type != "textarea") {
-              return false;
-          }
+        if (event.keyCode == 8 && tgt.type != "text" && tgt.type != "password" && tgt.type != "textarea") {
+            return false;
+        }
   
-          if ((event.keyCode == 116) ||
-              (event.keyCode == 123) || //Línea F12
-              (event.keyCode == 122)) {
-              if (navigator.appName == "Microsoft Internet Explorer") {
-                  window.event.keyCode = 0;
-              }
-              return false;
-          }
-      }
+        if ((event.keyCode == 116) ||
+            (event.keyCode == 123) || //Línea F12
+            (event.keyCode == 122)) {
+            if (navigator.appName == "Microsoft Internet Explorer") {
+                window.event.keyCode = 0;
+            }
+            return false;
+        }
+    }
   
-      function mouseDown(e) {
-          var ctrlPressed = 0;
-          var altPressed = 0;
-          var shiftPressed = 0;
-          if (parseInt(navigator.appVersion) > 3) {
-              if (navigator.appName == "Netscape") {
-                  var mString = (e.modifiers + 32).toString(2).substring(3, 6);
-                  shiftPressed = (mString.charAt(0) == "1");
-                  ctrlPressed = (mString.charAt(1) == "1");
-                  altPressed = (mString.charAt(2) == "1");
-                  self.status = "modifiers=" + e.modifiers + " (" + mString + ")"
-              }
-              else {
-                  shiftPressed = event.shiftKey;
-                  altPressed = event.altKey;
-                  ctrlPressed = event.ctrlKey;
-              }
-              if (shiftPressed || altPressed || ctrlPressed)
-                  alert("Función no permitida");
-          }
-          return true;
-      }
+    function mouseDown(e) {
+        var ctrlPressed = 0;
+        var altPressed = 0;
+        var shiftPressed = 0;
+        if (parseInt(navigator.appVersion) > 3) {
+            if (navigator.appName == "Netscape") {
+                var mString = (e.modifiers + 32).toString(2).substring(3, 6);
+                shiftPressed = (mString.charAt(0) == "1");
+                ctrlPressed = (mString.charAt(1) == "1");
+                altPressed = (mString.charAt(2) == "1");
+                self.status = "modifiers=" + e.modifiers + " (" + mString + ")"
+            }
+            else {
+                shiftPressed = event.shiftKey;
+                altPressed = event.altKey;
+                ctrlPressed = event.ctrlKey;
+            }
+            if (shiftPressed || altPressed || ctrlPressed)
+                alert("Función no permitida");
+        }
+        return true;
+    }
   
-      if (parseInt(navigator.appVersion) > 3) {
-          document.onmousedown = mouseDown;
-          if (navigator.appName == "Netscape")
-              document.captureEvents(Event.MOUSEDOWN);
-      }
+    if (parseInt(navigator.appVersion) > 3) {
+        document.onmousedown = mouseDown;
+        if (navigator.appName == "Netscape")
+            document.captureEvents(Event.MOUSEDOWN);
+    }
   
-      var message = "";
+    var message = "";
   
-      function clickIE() {
-          if (document.all) {
-              (message);
-              return false;
-          }
-      }
+    function clickIE() {
+        if (document.all) {
+            (message);
+            return false;
+        }
+    }
   
-      function clickNS(e) {
-          if (document.layers || (document.getElementById && !document.all)) {
-              if (e.which == 2 || e.which == 3) {
-                  (message); return false;
-              }
-          }
-      }
+    function clickNS(e) {
+        if (document.layers || (document.getElementById && !document.all)) {
+            if (e.which == 2 || e.which == 3) {
+                (message); return false;
+            }
+        }
+    }
   
-      if (document.layers) {
-          document.captureEvents(Event.MOUSEDOWN);
-          document.onmousedown = clickNS;
-      } else {
-          document.onmouseup = clickNS; document.oncontextmenu = clickIE;
+    if (document.layers) {
+        document.captureEvents(Event.MOUSEDOWN);
+        document.onmousedown = clickNS;
+    } else {
+        document.onmouseup = clickNS; document.oncontextmenu = clickIE;
   
-      }
+    }
   
-      document.oncontextmenu = new Function("return false");
-      */
+    document.oncontextmenu = new Function("return false");
 }
 
 //funcion para control de carga
