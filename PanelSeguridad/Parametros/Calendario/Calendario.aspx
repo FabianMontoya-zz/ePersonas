@@ -424,7 +424,7 @@
                 </tr>
                 <tr>
                     <td colspan="4" align="center">
-                        <input id="Btnguardar" type="button" value="Guardar" onclick="BtnCrear();" style="cursor: pointer; cursor: hand;" /> 
+                        <input id="Btnguardar" type="button" value="Guardar" onclick="BtnCrear();" style="cursor: pointer; cursor: hand;" />
                     </td>
                 </tr>
             </table>
@@ -523,6 +523,49 @@
             <tr>
                 <td colspan="4" align="center">
                     <input id="BtnOk" type="button" value="Aceptar" onclick="AddTime();" style="cursor: pointer; cursor: hand;" />
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="Dialog_Edit_time" title="Basic dialog">
+        <table style="width: 100%;">
+            <tr>
+                <td class="Label_Bold" style="width: 100%; text-align: center;" colspan="4">Modifique las horas seleccionadas, el cambio se reflejará inmediatamente.
+                    
+                </td>
+            </tr>
+            <tr>
+                <td><center>
+                    <table style="width: 50%;" border="0">
+                        <tr>
+                            <td align="center" colspan="2"><b>Hora</b></td>
+                        </tr>
+                        <tr>
+                            <td align="center"><b>Inicial</b></td>
+                            <td align="center"><b>Final</b></td>
+                        </tr>                       
+                        <tr>
+                            <td align="center">
+                                <span class="cssToolTip_Form">
+                                    <input id="TxtEditIni" type="text" style="width: 50px;" readonly="readonly" /><span
+                                        class="Spam_AH"></span></span>
+                            </td>
+                            <td align="center">
+                                <span class="cssToolTip_Form">
+                                    <input id="TxtEditFin" type="text" style="width: 50px;" readonly="readonly" /><span
+                                        class="Spam_AH"></span></span>
+                            </td>
+                        </tr>
+                    </table></center>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="4" align="center">
+                    <input id="BtnEditOk" type="button" value="Aceptar" onclick="EditArraysTime();" style="cursor: pointer; cursor: hand;" />
                 </td>
             </tr>
         </table>

@@ -1,5 +1,4 @@
-﻿Imports System.Data.SqlClient
-Imports System.Data.OleDb
+﻿Imports System.Data.OleDb
 
 Public Class CalendarioSQLClass
 
@@ -26,23 +25,23 @@ Public Class CalendarioSQLClass
         Dim vl_sql_filtro As New StringBuilder
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
-            sql.Append(" SELECT CA_Nit_ID, " & _
-                             " CA_Calendario_ID, " & _
-                             " CA_Descripcion, " & _
-                             " CA_TipoCalendario, " & _
-                              " CA_Usuario_Creacion, " & _
-                             " CA_FechaCreacion, " & _
-                             " CA_Usuario_Actualizacion, " & _
-                             " CA_FechaActualizacion, " & _
-                             " C.CLI_Nombre +' '+ C.CLI_Nombre_2  +' '+ C.CLI_Apellido_1 +' '+ C.CLI_Apellido_2,  " & _
-                             " TC.DDLL_Descripcion, " & _
-                             " ROW_NUMBER() OVER(ORDER BY CA_Calendario_ID ASC) AS Index_Calendario " & _
-                        " FROM CALENDARIOS CA " & _
-                      "  LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO TC ON TC.DDL_ID = CA.CA_TipoCalendario AND TC.DDL_Tabla = 'TIPO_CALENDARIO' " & _
-                       " LEFT JOIN CLIENTE C ON C.CLI_Document_ID = " & _
-                             " CASE	 SUBSTRING(CA.CA_Nit_ID,0,LEN(CA.CA_Nit_ID))" & _
-                             " WHEN '' THEN 0 " & _
-                             " ELSE SUBSTRING(CA.CA_Nit_ID,0,LEN(CA.CA_Nit_ID)) " & _
+            sql.Append(" SELECT CA_Nit_ID, " &
+                             " CA_Calendario_ID, " &
+                             " CA_Descripcion, " &
+                             " CA_TipoCalendario, " &
+                             " CA_Usuario_Creacion, " &
+                             " CA_FechaCreacion, " &
+                             " CA_Usuario_Actualizacion, " &
+                             " CA_FechaActualizacion, " &
+                             " C.CLI_Nombre +' '+ C.CLI_Nombre_2  +' '+ C.CLI_Apellido_1 +' '+ C.CLI_Apellido_2,  " &
+                             " TC.DDLL_Descripcion, " &
+                             " ROW_NUMBER() OVER(ORDER BY CA_Calendario_ID ASC) AS Index_Calendario " &
+                        " FROM CALENDARIOS CA " &
+                      "  LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO TC ON TC.DDL_ID = CA.CA_TipoCalendario AND TC.DDL_Tabla = 'TIPO_CALENDARIO' " &
+                       " LEFT JOIN CLIENTE C ON C.CLI_Document_ID = " &
+                             " CASE	 SUBSTRING(CA.CA_Nit_ID,0,LEN(CA.CA_Nit_ID))" &
+                             " WHEN '' THEN 0 " &
+                             " ELSE SUBSTRING(CA.CA_Nit_ID,0,LEN(CA.CA_Nit_ID)) " &
                        " END ")
         Else
 
@@ -192,11 +191,35 @@ Public Class CalendarioSQLClass
         Dim StrQuery As String
         Dim SQL_general As New GeneralSQLClass
 
-        sql.AppendLine("DELETE CALENDARIOS WHERE CA_Nit_ID = '" & vp_Obj_Calendario.Nit_ID & "' AND CA_Calendario_ID = '" & vp_Obj_Calendario.Calendario_ID & "'")
-        StrQuery = sql.ToString
-        Dim Result As String = conex.StrInsert_and_Update_All(StrQuery, "2")
+        Dim CalendarioSemana As New CalendarioSemanaClass
+        Dim SQLCalendarioSemana As New CalendarioSemanaSQLClass
 
-        Return Result
+        Dim Result As String = ""
+        Dim Result2 As String = ""
+
+        If vp_Obj_Calendario.TipoCalendario.Equals("1") Then
+
+            CalendarioSemana.Calendario_ID = vp_Obj_Calendario.Calendario_ID
+            CalendarioSemana.Nit_ID = vp_Obj_Calendario.Nit_ID
+
+            Result = SQLCalendarioSemana.Delete_C_Semana(CalendarioSemana)
+
+            If Result.Equals("Exito") Then
+                sql.AppendLine("DELETE CALENDARIOS WHERE CA_Nit_ID = '" & vp_Obj_Calendario.Nit_ID & "' AND CA_Calendario_ID = '" & vp_Obj_Calendario.Calendario_ID & "'")
+                StrQuery = sql.ToString
+                Result2 = conex.StrInsert_and_Update_All(StrQuery, "2")
+                Return Result2
+            Else
+                Return Result
+            End If
+
+        ElseIf vp_Obj_Calendario.TipoCalendario.Equals("2") Then
+
+        End If
+
+
+
+
 
     End Function
 

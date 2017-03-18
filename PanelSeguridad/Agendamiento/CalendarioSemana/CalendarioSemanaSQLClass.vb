@@ -50,6 +50,28 @@ Public Class CalendarioSemanaSQLClass
 
     End Function
 
+    ''' <summary>
+    ''' Función que elimina los calendarios en Calendario Semanas
+    ''' </summary>
+    ''' <param name="vp_Obj"></param>
+    ''' <returns></returns>
+    Public Function Delete_C_Semana(ByVal vp_Obj As CalendarioSemanaClass)
+        Dim conex As New Conector
+        Dim Result As String
+        ' definiendo los objetos
+        Dim sql As New StringBuilder
+
+        sql.AppendLine("DELETE FROM CALENDARIO_SEMANAS " &
+            " WHERE CAS_Nit_ID = '" & vp_Obj.Nit_ID & "'" &
+            " AND CAS_Calendario_ID = '" & vp_Obj.Calendario_ID & "'")
+
+        Dim StrQuery As String = sql.ToString()
+
+        Result = conex.StrInsert_and_Update_All(StrQuery, "2")
+
+        Return Result
+    End Function
+
 #End Region
 
 #Region "OTRAS CONSULTAS"

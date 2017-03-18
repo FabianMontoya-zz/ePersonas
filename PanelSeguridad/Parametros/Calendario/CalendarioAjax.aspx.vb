@@ -193,13 +193,12 @@ Public Class CalendarioAjax
 
         Dim objCalendario As New CalendarioClass
         Dim SQL_Calendario As New CalendarioSQLClass
-        Dim ObjListCalendario As New List(Of CalendarioClass)
 
         Dim result As String
 
         objCalendario.Nit_ID = Request.Form("Nit_ID")
         objCalendario.Calendario_ID = Request.Form("ID")
-        ObjListCalendario.Add(objCalendario)
+        objCalendario.TipoCalendario = Request.Form("TipoCalendario")
 
         result = SQL_Calendario.EraseCalendario(objCalendario)
         Response.Write(result)

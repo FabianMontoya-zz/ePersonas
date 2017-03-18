@@ -1,7 +1,7 @@
 ﻿/*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_CargaBusqueda(State) {
-    OpenControl(); 
+    OpenControl();
     $.ajax({
         url: "CalendarioAjax.aspx",
         type: "POST",
@@ -57,6 +57,7 @@ function transacionAjax_EmpresaNit(State) {
 
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_Calendario(State) {
+    Matrix_Calendarios = [];
     $.ajax({
         url: "SucursalServicioAjax.aspx",
         type: "POST",
@@ -151,7 +152,7 @@ function transacionAjax_Calendario_create(State) {
             "ID": ID,
             "Descripcion": $("#TxtDescription").val(),
             "TipoCalendario": $("#Select_TipoCalendario").val(),
-            "List_Semana":ListC_Semana,
+            "List_Semana": ListC_Semana,
             "user": User.toUpperCase()
         },
         //Transaccion Ajax en proceso
@@ -172,11 +173,11 @@ function transacionAjax_Calendario_create(State) {
 
                 case "Exito":
                     if (estado == "modificar") {
-                        Mensaje_General("Exito", "El Calendario fue modificado exitosamente!", "S");
+                        Mensaje_General("Exito", "El Calendario " + ID + " - " + $("#TxtDescription").val() + " fue modificado exitosamente!", "S");
                         Clear();
                     }
                     else {
-                        Mensaje_General("Exito", "El Calendario fue creado exitosamente!", "S");
+                        Mensaje_General("Exito", "El Calendario " + ID + " - " + $("#TxtDescription").val() + " fue creado exitosamente!", "S");
                         Clear();
                     }
                     break;
@@ -201,6 +202,7 @@ function transacionAjax_Calendario_delete(State) {
             "action": State,
             "Nit_ID": editNit_ID,
             "ID": editID,
+            "TipoCalendario": TipoCalendar,
             "user": User
         },
         //Transaccion Ajax en proceso
@@ -208,18 +210,20 @@ function transacionAjax_Calendario_delete(State) {
             switch (result) {
 
                 case "Error":
-                    Mensaje_General("Disculpenos :(", "No se elimino el Calendario!", "E");
                     $("#dialog_eliminar").dialog("close");
+                    Mensaje_General("Disculpenos :(", "Ocurrió un error y no se pudo eliminar el Calendario " + editID + ", por favor intente más tarde.", "E");
+                    
                     break;
 
                 case "Exist_O":
-                    Mensaje_General("Integridad referencial", "No se elimino el Calendario, para eliminarlo debe eliminar primero el registro en la tabla Empleado", "W");
                     $("#dialog_eliminar").dialog("close");
+                    Mensaje_General("Integridad referencial", "No se elimino el Calendario, para eliminarlo debe eliminar primero el registro en la tabla de los días del calendario asignado", "W");
+                    
                     break;
 
                 case "Exito":
                     $("#dialog_eliminar").dialog("close");
-                    Mensaje_General("Exito", "El Calendario fue eliminado exitosamente!", "S");
+                    Mensaje_General("Exito", "El Calendario " + editID + " fue eliminado exitosamente.", "S");
                     transacionAjax_Calendario("consulta", "N", "ALL");
                     Clear();
                     break;

@@ -36,7 +36,7 @@ Matrix_Mes[11] = [12, "Diciembre", 31];
 /*--------------- region de variables globales --------------------*/
 
 $(document).ready(function () {
-    //clearConsole();
+    clearConsole();
 
     fecha();
 
