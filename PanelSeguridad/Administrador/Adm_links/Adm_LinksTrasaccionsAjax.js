@@ -5,10 +5,11 @@ function transacionAjax_CargaBusqueda(State) {
         url: "Adm_LinksAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'LINKS'
         },
-       //Transaccion Ajax en proceso
+        //Transaccion Ajax en proceso
         success: function (result) {
             if (result == "") {
                 ArrayCombo = [];
@@ -41,7 +42,8 @@ function transacionAjax_link(State, filtro, opcion) {
         url: "Adm_LinksAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "filtro": filtro,
             "opcion": opcion,
             "contenido": contenido
@@ -67,7 +69,7 @@ function transacionAjax_link(State, filtro, opcion) {
 function transacionAjax_link_create(State) {
 
     var ID;
- 
+
     if (State == "modificar") {
         ID = editID;
     } else {
@@ -78,48 +80,33 @@ function transacionAjax_link_create(State) {
         url: "Adm_LinksAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "ID": ID,
             "descripcion": $("#TxtDescription").val(),
             "param1": $("#TxtParam1").val(),
             "paran2": $("#TxtParam2").val(),
             "link": $("#TxtRuta").val()
         },
-       //Transaccion Ajax en proceso
+        //Transaccion Ajax en proceso
         success: function (result) {
             switch (result) {
 
                 case "Error":
-                    $("#dialog").dialog("option", "title", "Disculpenos :(");
-                    $("#Mensaje_alert").html("No se realizo El ingreso del link!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "block");
-                    $("#SE").css("display", "none");
+                    Mensaje_General("Disculpenos :(", "No se realizo El ingreso del link! ", "E");
                     break;
 
                 case "Existe":
-                    $("#dialog").dialog("option", "title", "Ya Existe");
-                    $("#Mensaje_alert").html("El codigo ingresado ya existe en la base de datos!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "block");
-                    $("#SE").css("display", "none");
+                    Mensaje_General("Ya Existe", "El codigo ingresado ya existe en la base de datos!  ", "W");
                     break;
 
                 case "Exito":
                     if (estado == "modificar") {
-                        $("#dialog").dialog("option", "title", "Exito");
-                        $("#Mensaje_alert").html("El link fue modificado exitosamente! ");
-                        $("#dialog").dialog("open");
-                        $("#DE").css("display", "none");
-                        $("#SE").css("display", "block");
+                        Mensaje_General("Exito", "El link fue modificado exitosamente!  ", "S");
                         Clear();
                     }
                     else {
-                        $("#dialog").dialog("option", "title", "Exito");
-                        $("#Mensaje_alert").html("El link fue creado exitosamente! ");
-                        $("#dialog").dialog("open");
-                        $("#DE").css("display", "none");
-                        $("#SE").css("display", "block");
+                        Mensaje_General("Exito", "El link fue creado exitosamente!  ", "S");
                         Clear();
                     }
                     break;
@@ -140,23 +127,19 @@ function transacionAjax_link_delete(State) {
         url: "Adm_LinksAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "ID": editID
         },
-       //Transaccion Ajax en proceso
+        //Transaccion Ajax en proceso
         success: function (result) {
             if (result == "Error") {
-                $("#dialog").dialog("option", "title", "Disculpenos :(");
-                $("#Mensaje_alert").text("No se realizo la eliminación del link!");
-                $("#dialog").dialog("open");
-                $("#DE").css("display", "block");
+                $("#dialog_eliminar").dialog("close");
+                Mensaje_General("Disculpenos :(", "No se realizo la eliminación del link!", "E");
             }
             else {
                 $("#dialog_eliminar").dialog("close");
-                $("#dialog").dialog("option", "title", "Exito");
-                $("#Mensaje_alert").text("El link fue eliminado exitosamente! ");
-                $("#dialog").dialog("open");
-                $("#DS").css("display", "block");
+                Mensaje_General("Exito", "El link fue eliminado exitosamente!", "S");
                 Clear();
             }
         },
