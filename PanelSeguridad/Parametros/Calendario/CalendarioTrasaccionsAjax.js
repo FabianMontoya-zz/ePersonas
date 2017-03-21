@@ -236,3 +236,33 @@ function transacionAjax_Calendario_delete(State) {
     });
 
 }
+
+/*-------------------- carga arrays por día ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_ArrayC_Semana(State) {
+    OpenControl();
+    $.ajax({
+        url: "CalendarioAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "ID_Calendario": editID,
+            "Nit_ID": editNit_ID
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                ArrayC_Semana_Edit = [];
+            }
+            else {
+                ArrayC_Semana_Edit = JSON.parse(result);
+            }
+        },
+        error: function () {
+
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
+    });
+}

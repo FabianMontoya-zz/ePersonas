@@ -4,6 +4,7 @@ var ArrayCalendario = [];
 var ArrayCombo = [];
 var ArrayCalendarioDep = [];
 var ArrayC_Semana = [];
+var ArrayC_Semana_Edit = [];
 
 var MatrizMonday = [];
 var MatrizTuesday = [];
@@ -211,10 +212,10 @@ function BtnCrear() {
     if (validate == 0) {
         var LeghtArray = ArrayC_Semana.length;
         if (LeghtArray > 0) {
-            if (WorkFestivo == true) { //Dejamos para el final el guardar si los festivos es laboral o no
-                InsertJson_Day("8", "S", "0", "0");
-            } else {
+            if (WorkFestivo == true) { //Dejamos para el final el guardar si los festivos es laboral o no (N para NO festivo S para que SI es festivo)
                 InsertJson_Day("8", "N", "0", "0");
+            } else {
+                InsertJson_Day("8", "S", "0", "0");
             }
 
             if ($("#Btnguardar").val() == "Guardar") {
@@ -245,7 +246,11 @@ function BtnAgregaCalendario() {
             if (V_ONE == 0) {
                 Mensaje_General("Error - Campos Vacios", "Debe completar mínimo el horario de uno de los días de la semana.", "W");
             } else {
-                $(".container_TGrid_Create").css("display", "none"); //Tabla que dibuja el grid con las horas ya capturadas
+
+                if ($("#Btnguardar").val() == "Actualizar") {
+
+                }
+
                 validaTipoC();
                 $("#Select_StateLun").prop('disabled', true).trigger("chosen:updated"); //Bloqueamos los chosen de estado del día
                 $("#Select_StateMar").prop('disabled', true).trigger("chosen:updated");
@@ -255,7 +260,6 @@ function BtnAgregaCalendario() {
                 $("#Select_StateSab").prop('disabled', true).trigger("chosen:updated");
                 $("#Select_StateDom").prop('disabled', true).trigger("chosen:updated");
                 $("#Select_Festivo").prop('disabled', true).trigger("chosen:updated");
-                $(".container_TGrid_Create").css("display", "inline-table"); //Tabla que dibuja el grid con las horas ya capturadas
             }
             break;
 
@@ -327,6 +331,31 @@ function HabilitarPanel(opcion) {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                           REGION DE VALIDACIONES                                                                                                   ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+//Función que valida si han cambiado el estado del día en caso de que sea actualizar
+function ValidarStatusEditar() {
+    //Lunes
+    if (WorkMonday == false) {
+        for (i in ArrayC_Semana) {
+            if (ArrayC_Semana[i].Dia == "1") {//Validamos si antes era si era laboral
+                if (ArrayC_Semana[i].IndicativoFestivo == "N") {
+                    //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
+                }
+                break;
+            }
+        }
+    } else if (WorkMonday == true) {
+        for (i in ArrayC_Semana) {
+            if (ArrayC_Semana[i].Dia == "1") {//Validamos si antes era no laboral
+                if (ArrayC_Semana[i].IndicativoFestivo == "S") {
+
+                }
+                break;
+            }
+        }
+    }
+}
+
 //validamos campos para la creacion del calendario
 function validarCamposCrear() {
     var Campo_1 = $("#Select_EmpresaNit").val();
@@ -948,6 +977,7 @@ function ValidaCamposJson(vp_Campo) {
 
 //Función que crea la tabla donde se mostrarán los horarios ingresados
 function TGridCalendar() {
+    $(".container_TGrid_Create").css("display", "none"); //Tabla que dibuja el grid con las horas ya capturadas
     var html_Calendario = "";
 
     html_Calendario = "<table id='TCalendarios' style='width: 100%'><tbody>";
@@ -1012,8 +1042,7 @@ function TGridCalendar() {
 
     html_Calendario += "</tr></tbody></table>";//Cerramos tabla principal
 
-    $(".container_TGrid_Create").offsetHeight;
-    $(".container_TGrid_Create").html("");
+    //$(".container_TGrid_Create").html("");
     $(".container_TGrid_Create").html(html_Calendario);
 
     //
@@ -1101,6 +1130,7 @@ function TGridCalendar() {
         "bDestroy": true
     });
 
+    $(".container_TGrid_Create").css("display", "inline-table"); //Tabla que dibuja el grid con las horas ya capturadas
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -1340,8 +1370,10 @@ function EditArraysTime() {
         case 0:
             var Repetido = ValidarMatrizEditHorario();
             if (Repetido == false) {
+
                 ModifyArrays();
                 CargarMatricesHorarios(); //Dibujamos nuevamente la tabla
+
             } else {
                 Mensaje_General("Error - Horario Existe", "No puedes ingresar dos veces una misma combinación de horarios para el este día.", "W");
             }
@@ -1537,7 +1569,6 @@ function ModifyArrays() {
     } while (0);
 
 }
-
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                              ELIMINAR HORARIOS DEL CALENDARIO                                                                                  ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -1922,15 +1953,20 @@ function Eliminar(index_Nit, index_Calendario) {
 
 // muestra el registro a editar
 function Editar(index_Nit, index_Calendario) {
-
-    $(".Dialog_Datos").css("display", "inline-table");
+    Clear();
+    $(".Dialog_Datos_Calen").css("display", "inline-table");
     $("#TablaConsulta").css("display", "none");
-
+    $("#Dialog_Calendar").dialog("open");
+    $("#Dialog_Calendar").dialog("option", "title", "Actualizar Calendario");
+    $("#Btnguardar").attr("value", "Actualizar");
+    OpenControl();
     for (itemArray in ArrayCalendario) {
         if (index_Nit == ArrayCalendario[itemArray].Nit_ID && index_Calendario == ArrayCalendario[itemArray].Calendario_ID) {
 
             editNit_ID = ArrayCalendario[itemArray].Nit_ID;
             editID = ArrayCalendario[itemArray].Calendario_ID;
+
+            transacionAjax_ArrayC_Semana("MatrizDiasSemana");
 
             $("#Select_EmpresaNit").val(ArrayCalendario[itemArray].Nit_ID);
             $("#Txt_ID").val(ArrayCalendario[itemArray].Calendario_ID);
@@ -1941,11 +1977,16 @@ function Editar(index_Nit, index_Calendario) {
             $("#TxtDescription").val(ArrayCalendario[itemArray].Descripcion);
             $("#Select_TipoCalendario").val(ArrayCalendario[itemArray].TipoCalendario);
 
-            $("#Btnguardar").attr("value", "Actualizar");
+            VerifyTextID("Ok"); //Decir se llenó el campo
+            VerifyTextDescription("Ok"); //Decir se llenó el campo
+            $(".Table_Header_Block").css("display", "inline-table"); //Table que contiene el capturador de horas
 
             $('.C_Chosen').trigger('chosen:updated');
         }
     }
+
+    ArmarMatricesDias();
+
 }
 
 //funcion de carga de la dependecia para edicion
@@ -1956,16 +1997,37 @@ function ChargeDependencia(index) {
 
 //limpiar campos
 function Clear() {
+    ClearArraySemana();
+
+    MensajeHora = "";
+    MensajeVacio = "";
+    MensajeRepetido = "";
+    V_ONE = 0;
+
+    $("#Select_EmpresaNit").val("-1");
+    $("#Txt_ID").val("");
+    $("#Txt_ID").prop('disabled', true);
+    $("#TxtDescription").val("");
+    $("#TxtDescription").prop('disabled', true);
+    VerifyTextID(""); //Decir que se borró todo
+    VerifyTextDescription(""); //Para decir que borramos todo
+
+    $("#TxtRead").val("");
+    $("#DDLColumns").val("-1");
+
+    $('.C_Chosen').trigger('chosen:updated');
+
+    var Only_Empresa = VerificarNIT("Select_EmpresaNit");
+
+    if (Only_Empresa == true) {
+        $("#Txt_ID").prop('disabled', false);
+    }
+}
+
+//Función que borra todos los datos usados para el array de horarios semana
+function ClearArraySemana() {
     ArrayCalendario_Grid = [];
     ArrayC_Semana = [];
-
-    MatrizMonday = [];
-    MatrizTuesday = [];
-    MatrizWednesday = [];
-    MatrizThursday = [];
-    MatrizFriday = [];
-    MatrizSaturday = [];
-    MatrizSunday = [];
 
     MatrizMonday = [];
     MatrizTuesday = [];
@@ -1993,24 +2055,6 @@ function Clear() {
     FirstFriday = false;
     FirstSaturday = false;
     FirstSunday = false;
-
-    MensajeHora = "";
-    MensajeVacio = "";
-    MensajeRepetido = "";
-    V_ONE = 0;
-
-    $("#Select_EmpresaNit").val("-1");
-    $("#Txt_ID").val("");
-    $("#Txt_ID").prop('disabled', true);
-    $("#TxtDescription").val("");
-    $("#TxtDescription").prop('disabled', true);
-    VerifyTextID(""); //Decir que se borró todo
-    VerifyTextDescription(""); //Para decir que borramos todo
-
-    $("#TxtRead").val("");
-    $("#DDLColumns").val("-1");
-
-    $('.C_Chosen').trigger('chosen:updated');
 
     $("#Select_StateLun").prop('disabled', false);
     $("#Select_StateLun").val("N").trigger("chosen:updated");
@@ -2056,12 +2100,6 @@ function Clear() {
     $("#TxtFinDom").val("");
     $("#Select_Festivo").prop('disabled', false);
     $("#Select_Festivo").val("S").trigger("chosen:updated");
-
-    var Only_Empresa = VerificarNIT("Select_EmpresaNit");
-
-    if (Only_Empresa == true) {
-        $("#Txt_ID").prop('disabled', false);
-    }
 }
 
 //Proceso para detectar que han llenado en ID
@@ -2088,6 +2126,282 @@ function VerifyTextDescription(value) {
     }
 }
 
+//Función encargada de filtrar el array semana traido de la BD y cargar las respectivas matrices de los días
+function ArmarMatricesDias() {
+    var Lun = 0;
+    var Mar = 0;
+    var Mie = 0;
+    var Jue = 0;
+    var Vie = 0;
+    var Sab = 0;
+    var Dom = 0;
+
+    for (i in ArrayC_Semana_Edit) {
+        switch (ArrayC_Semana_Edit[i].Dia) {
+            case "1":
+                Lun = Lun + 1;
+                var JSONDay = {
+                    "Index": Lun,
+                    "IniLun": ArrayC_Semana_Edit[i].HoraInicial,
+                    "FinLun": ArrayC_Semana_Edit[i].HoraFinal
+                };
+                MatrizMonday.push(JSONDay);
+                if (ArrayC_Semana_Edit[i].IndicativoFestivo == "N") {
+                    WorkMonday = true;
+                } else {
+                    WorkMonday = false;
+                    FirstMonday = true;
+                    $("#Select_StateLun").val("S").trigger("chosen:updated");
+                    $("#TxtIniLun").prop('disabled', true);
+                    $("#TxtFinLun").prop('disabled', true);
+                }
+                InsertJson_Day(ArrayC_Semana_Edit[i].Dia, ArrayC_Semana_Edit[i].IndicativoFestivo, ArrayC_Semana_Edit[i].HoraInicial, ArrayC_Semana_Edit[i].HoraFinal);
+                break;
+            case "2":
+                Mar = Mar + 1;
+                var JSONDay = {
+                    "Index": Mar,
+                    "IniMar": ArrayC_Semana_Edit[i].HoraInicial,
+                    "FinMar": ArrayC_Semana_Edit[i].HoraFinal
+                };
+                MatrizTuesday.push(JSONDay);
+                if (ArrayC_Semana_Edit[i].IndicativoFestivo == "N") {
+                    WorkTuesday = true;
+                } else {
+                    WorkTuesday = false;
+                    FirstTuesday = true;
+                    $("#Select_StateMar").val("S").trigger("chosen:updated");
+                    $("#TxtIniMar").prop('disabled', true);
+                    $("#TxtFinMar").prop('disabled', true);
+                }
+                InsertJson_Day(ArrayC_Semana_Edit[i].Dia, ArrayC_Semana_Edit[i].IndicativoFestivo, ArrayC_Semana_Edit[i].HoraInicial, ArrayC_Semana_Edit[i].HoraFinal);
+                break;
+            case "3":
+                Mie = Mie + 1;
+                var JSONDay = {
+                    "Index": Mie,
+                    "IniMie": ArrayC_Semana_Edit[i].HoraInicial,
+                    "FinMie": ArrayC_Semana_Edit[i].HoraFinal
+                };
+                MatrizWednesday.push(JSONDay);
+                if (ArrayC_Semana_Edit[i].IndicativoFestivo == "N") {
+                    WorkWednesday = true;
+                } else {
+                    WorkWednesday = false;
+                    FirstWednesday = true;
+                    $("#Select_StateMie").val("S").trigger("chosen:updated");
+                    $("#TxtIniMie").prop('disabled', true);
+                    $("#TxtFinMie").prop('disabled', true);
+                }
+                InsertJson_Day(ArrayC_Semana_Edit[i].Dia, ArrayC_Semana_Edit[i].IndicativoFestivo, ArrayC_Semana_Edit[i].HoraInicial, ArrayC_Semana_Edit[i].HoraFinal);
+                break;
+            case "4":
+                Jue = Jue + 1;
+                var JSONDay = {
+                    "Index": Jue,
+                    "IniJue": ArrayC_Semana_Edit[i].HoraInicial,
+                    "FinJue": ArrayC_Semana_Edit[i].HoraFinal
+                };
+                MatrizThursday.push(JSONDay);
+                if (ArrayC_Semana_Edit[i].IndicativoFestivo == "N") {
+                    WorkThursday = true;
+                } else {
+                    WorkThursday = false;
+                    FirstThursday = true;
+                    $("#Select_StateJue").val("S").trigger("chosen:updated");
+                    $("#TxtIniJue").prop('disabled', true);
+                    $("#TxtFinJue").prop('disabled', true);
+                }
+                InsertJson_Day(ArrayC_Semana_Edit[i].Dia, ArrayC_Semana_Edit[i].IndicativoFestivo, ArrayC_Semana_Edit[i].HoraInicial, ArrayC_Semana_Edit[i].HoraFinal);
+                break;
+            case "5":
+                Vie = Vie + 1;
+                var JSONDay = {
+                    "Index": Vie,
+                    "IniVie": ArrayC_Semana_Edit[i].HoraInicial,
+                    "FinVie": ArrayC_Semana_Edit[i].HoraFinal
+                };
+                MatrizFriday.push(JSONDay);
+                if (ArrayC_Semana_Edit[i].IndicativoFestivo == "N") {
+                    WorkFriday = true;
+                } else {
+                    WorkFriday = false;
+                    FirstFriday = true;
+                    $("#Select_StateVie").val("S").trigger("chosen:updated");
+                    $("#TxtIniVie").prop('disabled', true);
+                    $("#TxtFinVie").prop('disabled', true);
+                }
+                InsertJson_Day(ArrayC_Semana_Edit[i].Dia, ArrayC_Semana_Edit[i].IndicativoFestivo, ArrayC_Semana_Edit[i].HoraInicial, ArrayC_Semana_Edit[i].HoraFinal);
+                break;
+            case "6":
+                Sab = Sab + 1;
+                var JSONDay = {
+                    "Index": Sab,
+                    "IniSab": ArrayC_Semana_Edit[i].HoraInicial,
+                    "FinSab": ArrayC_Semana_Edit[i].HoraFinal
+                };
+                MatrizSaturday.push(JSONDay);
+                if (ArrayC_Semana_Edit[i].IndicativoFestivo == "N") {
+                    WorkSaturday = true;
+                } else {
+                    WorkSaturday = false;
+                    FirstSaturday = true;
+                    $("#Select_StateSab").val("S").trigger("chosen:updated");
+                    $("#TxtIniSab").prop('disabled', true);
+                    $("#TxtFinSab").prop('disabled', true);
+                }
+                InsertJson_Day(ArrayC_Semana_Edit[i].Dia, ArrayC_Semana_Edit[i].IndicativoFestivo, ArrayC_Semana_Edit[i].HoraInicial, ArrayC_Semana_Edit[i].HoraFinal);
+                break;
+            case "7":
+                Dom = Dom + 1;
+                var JSONDay = {
+                    "Index": Dom,
+                    "IniDom": ArrayC_Semana_Edit[i].HoraInicial,
+                    "FinDom": ArrayC_Semana_Edit[i].HoraFinal
+                };
+                MatrizSunday.push(JSONDay);
+                if (ArrayC_Semana_Edit[i].IndicativoFestivo == "N") {
+                    WorkSunday = true;
+                } else {
+                    WorkSunday = false;
+                    FirstSunday = true;
+                    $("#Select_StateDom").val("S").trigger("chosen:updated");
+                    $("#TxtIniDom").prop('disabled', true);
+                    $("#TxtFinDom").prop('disabled', true);
+                }
+                InsertJson_Day(ArrayC_Semana_Edit[i].Dia, ArrayC_Semana_Edit[i].IndicativoFestivo, ArrayC_Semana_Edit[i].HoraInicial, ArrayC_Semana_Edit[i].HoraFinal);
+                break;
+            case "8":
+                if (ArrayC_Semana_Edit[i].IndicativoFestivo == "N") {
+                    WorkFestivo = true;
+                    $("#Select_Festivo").val("S").trigger("chosen:updated");
+                } else {
+                    WorkFestivo = false;
+                }
+                break;
+        }
+    }
+    var NumFilas = [];
+    NumFilas.push(Vie);
+    NumFilas.push(Sab);
+    NumFilas.push(Dom);
+    NumFilas.push(Lun);
+    NumFilas.push(Mar);
+    NumFilas.push(Mie);
+    NumFilas.push(Jue);
+    //Funciones que ordenan los números
+    function deMenorAMayor(elem1, elem2) { return elem1 - elem2; }
+    function deMayorAMenor(elem1, elem2) { return elem2 - elem1; }
+    NumFilas = NumFilas.sort(deMayorAMenor);
+    //Tomamos el número que salió ser el mayor
+    var Mayor = NumFilas[0];
+    RellenarMatrices(Mayor);
+    CargarMatricesHorarios();
+    $(".container_TGrid_Create").css("display", "inline-table"); //Tabla que dibuja el grid con las horas ya capturadas
+}
+
+//Función que completa las matrices de los días en función con un número al que deben estar
+function RellenarMatrices(numMax) {
+    var index = 0;
+    //Lunes
+    if (MatrizMonday.length < numMax) {
+        index = 0;
+        while (index != numMax) {
+            index = (MatrizMonday.length) + 1;
+            var JSONDay = {
+                "Index": index,
+                "IniLun": "0",
+                "FinLun": "0"
+            };
+            MatrizMonday.push(JSONDay);
+
+        }
+    }
+    //Martes
+    if (MatrizTuesday.length < numMax) {
+        index = 0;
+        while (index != numMax) {
+            index = (MatrizTuesday.length) + 1;
+            var JSONDay = {
+                "Index": index,
+                "IniMar": "0",
+                "FinMar": "0"
+            };
+            MatrizTuesday.push(JSONDay);
+
+        }
+    }
+    //Miércoles
+    if (MatrizWednesday.length < numMax) {
+        index = 0;
+        while (index != numMax) {
+            index = (MatrizWednesday.length) + 1;
+            var JSONDay = {
+                "Index": index,
+                "IniMie": "0",
+                "FinMie": "0"
+            };
+            MatrizWednesday.push(JSONDay);
+
+        }
+    }
+    //Jueves
+    if (MatrizThursday.length < numMax) {
+        index = 0;
+        while (index != numMax) {
+            index = (MatrizThursday.length) + 1;
+            var JSONDay = {
+                "Index": index,
+                "IniJue": "0",
+                "FinJue": "0"
+            };
+            MatrizThursday.push(JSONDay);
+
+        }
+    }
+    //Viernes
+    if (MatrizFriday.length < numMax) {
+        index = 0;
+        while (index != numMax) {
+            index = (MatrizFriday.length) + 1;
+            var JSONDay = {
+                "Index": index,
+                "IniVie": "0",
+                "FinVie": "0"
+            };
+            MatrizFriday.push(JSONDay);
+
+        }
+    }
+    //Sábado
+    if (MatrizSaturday.length < numMax) {
+        index = 0;
+        while (index != numMax) {
+            index = (MatrizSaturday.length) + 1;
+            var JSONDay = {
+                "Index": index,
+                "IniSab": "0",
+                "FinSab": "0"
+            };
+            MatrizSaturday.push(JSONDay);
+
+        }
+    }
+    //Domingo
+    if (MatrizSunday.length < numMax) {
+        index = 0;
+        while (index != numMax) {
+            index = (MatrizSunday.length) + 1;
+            var JSONDay = {
+                "Index": index,
+                "IniDom": "0",
+                "FinDom": "0"
+            };
+            MatrizSunday.push(JSONDay);
+
+        }
+    }
+}
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                     PROCESOS DE CHANGES                                                                                                                                    ----*/
@@ -2121,6 +2435,7 @@ function Change_TipoCalendario() {
             $("#Tabla_10").css("display", "none");
             $(".Table_Header_Block").css("display", "none"); //Table que contiene el capturador de horas
         } else {
+            ClearArraySemana();
             $("#Img5").css("display", "none");
             $(".Table_Header_Block").css("display", "inline-table"); //Table que contiene el capturador de horas
             $("#TxtF_Start").val("");

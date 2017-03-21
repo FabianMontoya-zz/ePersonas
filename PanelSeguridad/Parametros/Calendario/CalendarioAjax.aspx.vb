@@ -31,6 +31,9 @@ Public Class CalendarioAjax
 
                 Case "MatrixCalendarios"
                     CargarCalendarios()
+
+                Case "MatrizDiasSemana"
+                    CargarMatrizDiasSemana()
             End Select
 
         End If
@@ -258,7 +261,16 @@ Public Class CalendarioAjax
 #End Region
 
 #Region "FUNCIONES"
+    Protected Sub CargarMatrizDiasSemana()
+        Dim SQL As New CalendarioSemanaSQLClass
+        Dim ObjListDroplist As New List(Of CalendarioSemanaClass)
+        Dim obj As New CalendarioSemanaClass
+        obj.Nit_ID = Request.Form("Nit_ID")
+        obj.Calendario_ID = Request.Form("ID_Calendario")
 
+        ObjListDroplist = SQL.Consult_AllHorarioDias(obj)
+        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
+    End Sub
 #End Region
 
 End Class
