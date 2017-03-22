@@ -13,6 +13,7 @@
     Private _FechaCreacion As String
     Private _UsuarioActualizacion As String
     Private _FechaActualizacion As String
+    Private _DescripEstado As String
 #End Region
 
 #Region "propiedades"
@@ -95,6 +96,14 @@
         End Get
         Set(ByVal value As String)
             Me._FechaActualizacion = value
+        End Set
+    End Property
+    Public Property DescripEstado() As String
+        Get
+            Return Me._DescripEstado
+        End Get
+        Set(ByVal value As String)
+            Me._DescripEstado = value
         End Set
     End Property
 #End Region
