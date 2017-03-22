@@ -1,7 +1,6 @@
 ﻿/*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_CargaBusqueda(State) {
-    OpenControl();
     $.ajax({
         url: "CalendarioAjax.aspx",
         type: "POST",
@@ -174,6 +173,12 @@ function transacionAjax_Calendario_create(State) {
                 case "Exito":
                     if (estado == "modificar") {
                         Mensaje_General("Exito", "El Calendario " + ID + " - " + $("#TxtDescription").val() + " fue modificado exitosamente!", "S");
+                        $("#Dialog_Calendar").dialog("close");
+                        $(".Dialog_Datos_Calen").css("display", "none");
+                        $("#TablaConsulta").css("display", "inline-table");
+                        $(".container_TGrid").html("");
+                        estado = "modificar";
+                        ResetError();
                         Clear();
                     }
                     else {

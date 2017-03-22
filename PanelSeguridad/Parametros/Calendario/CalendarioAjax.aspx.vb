@@ -105,13 +105,11 @@ Public Class CalendarioAjax
             result = SQL_Calendario.InsertCalendario(objCalendario)
             If result = "Exito" Then
                 result_CSemana = Insert_CaledarioSemana()
-                Response.Write(result)
             End If
         Else
             result = "Existe"
-            Response.Write(result)
         End If
-
+        Response.Write(result)
     End Sub
 
     ''' <summary>
@@ -166,26 +164,34 @@ Public Class CalendarioAjax
 
         Dim objCalendario As New CalendarioClass
         Dim SQL_Calendario As New CalendarioSQLClass
-        Dim ObjListCalendario As New List(Of CalendarioClass)
+
+        Dim objCalendarioSemana As New CalendarioSemanaClass
+        Dim SQL_CalendarioSemana As New CalendarioSemanaSQLClass
 
         Dim result As String
 
-        objCalendario.Nit_ID = Request.Form("Nit_ID")
-        objCalendario.Calendario_ID = Request.Form("ID")
-        objCalendario.Descripcion = Request.Form("descripcion")
+        objCalendarioSemana.Nit_ID = Request.Form("Nit_ID")
+        objCalendarioSemana.Calendario_ID = Request.Form("ID")
 
-        objCalendario.Descripcion = Request.Form("descripcion")
-        objCalendario.TipoCalendario = Request.Form("TipoCalendario")
+        result = SQL_CalendarioSemana.Delete_C_Semana(objCalendarioSemana)
 
-        objCalendario.UsuarioActualizacion = Request.Form("user")
-        objCalendario.FechaActualizacion = Date.Now
+        If result.Equals("Exito") Then
+            objCalendario.Nit_ID = Request.Form("Nit_ID")
+            objCalendario.Calendario_ID = Request.Form("ID")
 
-        ObjListCalendario.Add(objCalendario)
+            objCalendario.Descripcion = Request.Form("descripcion")
+            objCalendario.TipoCalendario = Request.Form("TipoCalendario")
 
-        result = SQL_Calendario.UpdateCalendario(objCalendario)
+            objCalendario.UsuarioActualizacion = Request.Form("user")
+            objCalendario.FechaActualizacion = Date.Now
+            result = SQL_Calendario.UpdateCalendario(objCalendario)
 
+            If result = "Exito" Then
+                Insert_CaledarioSemana()
+            End If
+
+        End If
         Response.Write(result)
-
     End Sub
 
     ''' <summary>

@@ -248,7 +248,7 @@ function BtnAgregaCalendario() {
             } else {
 
                 if ($("#Btnguardar").val() == "Actualizar") {
-
+                    ValidarStatusEditar();
                 }
 
                 validaTipoC();
@@ -331,30 +331,6 @@ function HabilitarPanel(opcion) {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                           REGION DE VALIDACIONES                                                                                                   ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
-//Función que valida si han cambiado el estado del día en caso de que sea actualizar
-function ValidarStatusEditar() {
-    //Lunes
-    if (WorkMonday == false) {
-        for (i in ArrayC_Semana) {
-            if (ArrayC_Semana[i].Dia == "1") {//Validamos si antes era si era laboral
-                if (ArrayC_Semana[i].IndicativoFestivo == "N") {
-                    //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
-                }
-                break;
-            }
-        }
-    } else if (WorkMonday == true) {
-        for (i in ArrayC_Semana) {
-            if (ArrayC_Semana[i].Dia == "1") {//Validamos si antes era no laboral
-                if (ArrayC_Semana[i].IndicativoFestivo == "S") {
-
-                }
-                break;
-            }
-        }
-    }
-}
 
 //validamos campos para la creacion del calendario
 function validarCamposCrear() {
@@ -1131,6 +1107,248 @@ function TGridCalendar() {
     });
 
     $(".container_TGrid_Create").css("display", "inline-table"); //Tabla que dibuja el grid con las horas ya capturadas
+}
+
+//Función que valida si han cambiado el estado del día en caso de que sea actualizar las matrices
+function ValidarStatusEditar() {
+    //Lunes
+    if (WorkMonday == false) {
+        for (i in ArrayC_Semana) {
+            if (ArrayC_Semana[i].Dia == "1") {//Validamos si antes era laboral
+                if (ArrayC_Semana[i].IndicativoFestivo == "N") {
+                    for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
+                        if (ArrayC_Semana[j].Dia == "1") {
+                            ArrayC_Semana.splice(j, 1);
+                        }
+                    }
+                    MatrizMonday = [];
+                    RellenarMatrices(Lineas); //Borramos la matriz y la rellenamos con ceros para dibujarla
+                    //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
+                }
+                break;
+            }
+        }
+    } else if (WorkMonday == true) {
+        for (i in ArrayC_Semana) {
+            if (ArrayC_Semana[i].Dia == "1") {//Validamos si antes era no laboral
+                if (ArrayC_Semana[i].IndicativoFestivo == "S") {
+                    for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
+                        if (ArrayC_Semana[j].Dia == "1") {
+                            ArrayC_Semana.splice(j, 1);
+                        }
+                    }
+                    MatrizMonday = [];
+                    RellenarMatrices(Lineas); //Reiniciamos la Matriz nuevamente con ceros
+                    //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
+                }
+                break;
+            }
+        }
+    }
+    //Martes
+    if (WorkTuesday == false) {
+        for (i in ArrayC_Semana) {
+            if (ArrayC_Semana[i].Dia == "2") {//Validamos si antes era laboral
+                if (ArrayC_Semana[i].IndicativoFestivo == "N") {
+                    for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
+                        if (ArrayC_Semana[j].Dia == "2") {
+                            ArrayC_Semana.splice(j, 1);
+                        }
+                    }
+                    MatrizTuesday = [];
+                    RellenarMatrices(Lineas); //Borramos la matriz y la rellenamos con ceros para dibujarla
+                    //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
+                }
+                break;
+            }
+        }
+    } else if (WorkTuesday == true) {
+        for (i in ArrayC_Semana) {
+            if (ArrayC_Semana[i].Dia == "2") {//Validamos si antes era no laboral
+                if (ArrayC_Semana[i].IndicativoFestivo == "S") {
+                    for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
+                        if (ArrayC_Semana[j].Dia == "2") {
+                            ArrayC_Semana.splice(j, 1);
+                        }
+                    }
+                    MatrizTuesday = [];
+                    RellenarMatrices(Lineas); //Reiniciamos la Matriz nuevamente con ceros
+                    //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
+                }
+                break;
+            }
+        }
+    }
+    //Miércoles
+    if (WorkWednesday == false) {
+        for (i in ArrayC_Semana) {
+            if (ArrayC_Semana[i].Dia == "3") {//Validamos si antes era laboral
+                if (ArrayC_Semana[i].IndicativoFestivo == "N") {
+                    for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
+                        if (ArrayC_Semana[j].Dia == "3") {
+                            ArrayC_Semana.splice(j, 1);
+                        }
+                    }
+                    MatrizWednesday = [];
+                    RellenarMatrices(Lineas); //Borramos la matriz y la rellenamos con ceros para dibujarla
+                    //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
+                }
+                break;
+            }
+        }
+    } else if (WorkWednesday == true) {
+        for (i in ArrayC_Semana) {
+            if (ArrayC_Semana[i].Dia == "3") {//Validamos si antes era no laboral
+                if (ArrayC_Semana[i].IndicativoFestivo == "S") {
+                    for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
+                        if (ArrayC_Semana[j].Dia == "3") {
+                            ArrayC_Semana.splice(j, 1);
+                        }
+                    }
+                    MatrizWednesday = [];
+                    RellenarMatrices(Lineas); //Reiniciamos la Matriz nuevamente con ceros
+                    //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
+                }
+                break;
+            }
+        }
+    }
+    //Jueves
+    if (WorkThursday == false) {
+        for (i in ArrayC_Semana) {
+            if (ArrayC_Semana[i].Dia == "4") {//Validamos si antes era laboral
+                if (ArrayC_Semana[i].IndicativoFestivo == "N") {
+                    for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
+                        if (ArrayC_Semana[j].Dia == "4") {
+                            ArrayC_Semana.splice(j, 1);
+                        }
+                    }
+                    MatrizThursday = [];
+                    RellenarMatrices(Lineas); //Borramos la matriz y la rellenamos con ceros para dibujarla
+                    //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
+                }
+                break;
+            }
+        }
+    } else if (WorkThursday == true) {
+        for (i in ArrayC_Semana) {
+            if (ArrayC_Semana[i].Dia == "4") {//Validamos si antes era no laboral
+                if (ArrayC_Semana[i].IndicativoFestivo == "S") {
+                    for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
+                        if (ArrayC_Semana[j].Dia == "4") {
+                            ArrayC_Semana.splice(j, 1);
+                        }
+                    }
+                    MatrizThursday = [];
+                    RellenarMatrices(Lineas); //Reiniciamos la Matriz nuevamente con ceros
+                    //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
+                }
+                break;
+            }
+        }
+    }
+    //Viernes
+    if (WorkFriday == false) {
+        for (i in ArrayC_Semana) {
+            if (ArrayC_Semana[i].Dia == "5") {//Validamos si antes era laboral
+                if (ArrayC_Semana[i].IndicativoFestivo == "N") {
+                    for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
+                        if (ArrayC_Semana[j].Dia == "5") {
+                            ArrayC_Semana.splice(j, 1);
+                        }
+                    }
+                    MatrizFriday = [];
+                    RellenarMatrices(Lineas); //Borramos la matriz y la rellenamos con ceros para dibujarla
+                    //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
+                }
+                break;
+            }
+        }
+    } else if (WorkFriday == true) {
+        for (i in ArrayC_Semana) {
+            if (ArrayC_Semana[i].Dia == "5") {//Validamos si antes era no laboral
+                if (ArrayC_Semana[i].IndicativoFestivo == "S") {
+                    for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
+                        if (ArrayC_Semana[j].Dia == "5") {
+                            ArrayC_Semana.splice(j, 1);
+                        }
+                    }
+                    MatrizFriday = [];
+                    RellenarMatrices(Lineas); //Reiniciamos la Matriz nuevamente con ceros
+                    //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
+                }
+                break;
+            }
+        }
+    }
+    //Sábado
+    if (WorkSaturday == false) {
+        for (i in ArrayC_Semana) {
+            if (ArrayC_Semana[i].Dia == "6") {//Validamos si antes era laboral
+                if (ArrayC_Semana[i].IndicativoFestivo == "N") {
+                    for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
+                        if (ArrayC_Semana[j].Dia == "6") {
+                            ArrayC_Semana.splice(j, 1);
+                        }
+                    }
+                    MatrizSaturday = [];
+                    RellenarMatrices(Lineas); //Borramos la matriz y la rellenamos con ceros para dibujarla
+                    //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
+                }
+                break;
+            }
+        }
+    } else if (WorkSaturday == true) {
+        for (i in ArrayC_Semana) {
+            if (ArrayC_Semana[i].Dia == "6") {//Validamos si antes era no laboral
+                if (ArrayC_Semana[i].IndicativoFestivo == "S") {
+                    for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
+                        if (ArrayC_Semana[j].Dia == "6") {
+                            ArrayC_Semana.splice(j, 1);
+                        }
+                    }
+                    MatrizSaturday = [];
+                    RellenarMatrices(Lineas); //Reiniciamos la Matriz nuevamente con ceros
+                    //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
+                }
+                break;
+            }
+        }
+    }
+    //Domingo
+    if (WorkSunday == false) {
+        for (i in ArrayC_Semana) {
+            if (ArrayC_Semana[i].Dia == "7") {//Validamos si antes era laboral
+                if (ArrayC_Semana[i].IndicativoFestivo == "N") {
+                    for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
+                        if (ArrayC_Semana[j].Dia == "7") {
+                            ArrayC_Semana.splice(j, 1);
+                        }
+                    }
+                    MatrizSunday = [];
+                    RellenarMatrices(Lineas); //Borramos la matriz y la rellenamos con ceros para dibujarla
+                    //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
+                }
+                break;
+            }
+        }
+    } else if (WorkSunday == true) {
+        for (i in ArrayC_Semana) {
+            if (ArrayC_Semana[i].Dia == "7") {//Validamos si antes era no laboral
+                if (ArrayC_Semana[i].IndicativoFestivo == "S") {
+                    for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
+                        if (ArrayC_Semana[j].Dia == "7") {
+                            ArrayC_Semana.splice(j, 1);
+                        }
+                    }
+                    MatrizSunday = [];
+                    RellenarMatrices(Lineas); //Reiniciamos la Matriz nuevamente con ceros
+                    //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
+                }
+                break;
+            }
+        }
+    }
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -2274,9 +2492,10 @@ function ArmarMatricesDias() {
             case "8":
                 if (ArrayC_Semana_Edit[i].IndicativoFestivo == "N") {
                     WorkFestivo = true;
-                    $("#Select_Festivo").val("S").trigger("chosen:updated");
+                    $("#Select_Festivo").val("N").trigger("chosen:updated");
                 } else {
                     WorkFestivo = false;
+                    $("#Select_Festivo").val("S").trigger("chosen:updated");
                 }
                 break;
         }
@@ -2294,9 +2513,11 @@ function ArmarMatricesDias() {
     function deMayorAMenor(elem1, elem2) { return elem2 - elem1; }
     NumFilas = NumFilas.sort(deMayorAMenor);
     //Tomamos el número que salió ser el mayor
+    
     var Mayor = NumFilas[0];
     RellenarMatrices(Mayor);
     CargarMatricesHorarios();
+    Lineas = Mayor;
     $(".container_TGrid_Create").css("display", "inline-table"); //Tabla que dibuja el grid con las horas ya capturadas
 }
 
