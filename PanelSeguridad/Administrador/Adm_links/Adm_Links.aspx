@@ -170,7 +170,7 @@
             </tr>
         </table>
     </div>
-    <div id="dialog_eliminar" title="Basic dialog">
+    <div id="dialog_eliminar" >
         <table style="width: 100%; text-align: center;">
             <tr>
                 <td>

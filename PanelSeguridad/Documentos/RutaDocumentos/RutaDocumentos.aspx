@@ -112,7 +112,7 @@
                             <td style="width: 400px;">
                                 <span class="cssToolTip_Form">
                                     <input type="text" id="TxtDescription" maxlength="200" style="width: 400px;" />
-                                    <span class="Spam_AST"></span></span>
+                                    <span class="Spam_ARuta"></span></span>
                             </td>
                             <td style="padding-bottom: 25px;">
                                 <span class="cssToolTip_L">

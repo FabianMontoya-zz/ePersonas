@@ -339,7 +339,8 @@ function RevisarAyudas() {
     $(".Spam_A_Addres").html(ArrayAyudas[24].Ayudas_ID + ": " + ArrayAyudas[24].Descripcion);
 
     $(".Spam_AWords").html(ArrayAyudas[25].Ayudas_ID + ": " + ArrayAyudas[25].Descripcion);
-
+    $(".Spam_ARuta").html(ArrayAyudas[26].Ayudas_ID + ": " + ArrayAyudas[26].Descripcion);
+    
     $(".Spam_CT1").html(ArrayAyudas[6].Descripcion);
     $(".Spam_CT2").html(ArrayAyudas[7].Descripcion);
     $(".Spam_CT4").html(ArrayAyudas[19].Descripcion);
