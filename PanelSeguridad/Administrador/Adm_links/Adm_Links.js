@@ -82,9 +82,7 @@ function BtnConsulta() {
     var ValidateSelect = ValidarDroplist();
     var opcion;
 
-    OpenControl(); //Abrimos el load de espera con el logo
-
-    if (ValidateSelect == 1) {
+     if (ValidateSelect == 1) {
         filtro = "N";
         opcion = "ALL";
         transacionAjax_link("consulta", filtro, opcion);
