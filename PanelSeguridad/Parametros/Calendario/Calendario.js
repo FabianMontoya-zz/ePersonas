@@ -2171,7 +2171,6 @@ function Eliminar(index_Nit, index_Calendario) {
 
 // muestra el registro a editar
 function Editar(index_Nit, index_Calendario) {
-    Clear();
     $(".Dialog_Datos_Calen").css("display", "inline-table");
     $("#TablaConsulta").css("display", "none");
     $("#Dialog_Calendar").dialog("open");
