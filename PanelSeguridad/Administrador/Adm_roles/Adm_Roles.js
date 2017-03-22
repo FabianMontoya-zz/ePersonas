@@ -20,9 +20,12 @@ $(document).ready(function () {
     transacionAjax_EmpresaNit('Cliente'); //Carga Droplist de Empresa NIT
 
     Change_Select_Nit();
-  
+
 });
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                 REGION INICIO DE COMPONENTES                                                                                                    ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //Función que oculta todas las IMG de los errores en pantalla
 function Ocultar_Errores() {
     ResetError();
@@ -56,59 +59,15 @@ function Ocultar_Tablas() {
     $("#TablaConsulta").css("display", "none");
 }
 
-
-//habilita el panel de crear o consulta
-function HabilitarPanel(opcion) {
-
-    switch (opcion) {
-
-        case "crear":
-            $("#TablaDatos").css("display", "inline-table");
-            $("#TablaConsulta").css("display", "none");
-            $("#Txt_ID").removeAttr("disabled");
-            $("#Btnguardar").attr("value", "Guardar");
-            estado = opcion;
-            ResetError();
-            Clear();
-            VerificarNIT("Select_EmpresaNit");
-            break;
-
-        case "buscar":
-            $("#TablaDatos").css("display", "none");
-            $("#TablaConsulta").css("display", "inline-table");
-            $(".container_TGrid").html("");
-            estado = opcion;
-            Clear();
-            break;
-
-        case "modificar":
-            $("#TablaDatos").css("display", "none");
-            $("#TablaConsulta").css("display", "inline-table");
-            $(".container_TGrid").html("");
-            estado = opcion;
-            ResetError();
-            Clear();
-            break;
-
-        case "eliminar":
-            $("#TablaDatos").css("display", "none");
-            $("#TablaConsulta").css("display", "inline-table");
-            $(".container_TGrid").html("");
-            estado = opcion;
-            Clear();
-            break;
-
-    }
-}
-
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                 REGION BOTONES                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //consulta del del crud(READ)
 function BtnConsulta() {
 
     var filtro;
     var ValidateSelect = ValidarDroplist();
     var opcion;
-
-    OpenControl(); //Abrimos el load de espera con el logo
 
     if (ValidateSelect == 1) {
         filtro = "N";
@@ -145,6 +104,14 @@ function BtnElimina() {
     transacionAjax_Rol_delete("elimina");
 }
 
+//evento del boton salir
+function x() {
+    $("#dialog").dialog("close");
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                      REGION VALIDACIONES DEL PROCESO                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //validamos campos para la creacion del rol
 function validarCamposCrear() {
 
@@ -206,24 +173,86 @@ function ValidarDroplist() {
     return flag;
 }
 
+//carga el combo de nit  dependiente
+function Change_Select_Nit() {
+    $("#Select_EmpresaNit").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_EmpresaNit").val() == "-1") {
+            $("#ImgNIT").css("display", "inline-table");
+        } else {
+            $("#ImgNIT").css("display", "none");
+        }
+    });
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                      PROCESOS DE VALIDACION PAGINAS                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//habilita el panel de crear o consulta
+function HabilitarPanel(opcion) {
+
+    switch (opcion) {
+
+        case "crear":
+            $("#TablaDatos").css("display", "inline-table");
+            $("#TablaConsulta").css("display", "none");
+            $("#Txt_ID").removeAttr("disabled");
+            $("#Btnguardar").attr("value", "Guardar");
+            estado = opcion;
+            ResetError();
+            Clear();
+            VerificarNIT("Select_EmpresaNit");
+            break;
+
+        case "buscar":
+            $("#TablaDatos").css("display", "none");
+            $("#TablaConsulta").css("display", "inline-table");
+            $(".container_TGrid").html("");
+            estado = opcion;
+            Clear();
+            break;
+
+        case "modificar":
+            $("#TablaDatos").css("display", "none");
+            $("#TablaConsulta").css("display", "inline-table");
+            $(".container_TGrid").html("");
+            estado = opcion;
+            ResetError();
+            Clear();
+            break;
+
+        case "eliminar":
+            $("#TablaDatos").css("display", "none");
+            $("#TablaConsulta").css("display", "inline-table");
+            $(".container_TGrid").html("");
+            estado = opcion;
+            Clear();
+            break;
+
+    }
+}
+
 // crea la tabla en el cliente
 function Table_rol() {
 
     var html_TRol;
+    var Index_Rol;
 
     switch (estado) {
 
         case "buscar":
             html_TRol = "<table id='TRol' border='1'  cellpadding='1' cellspacing='1' style='width: 100%'><thead><tr><th>NIT Empresa</th><th>Código</th><th>Descripción</th><th>Sigla</th><th>Estado</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
             for (itemArray in ArrayRoles) {
-                html_TRol += "<tr id= 'TRol_" + ArrayRoles[itemArray].Index + "'><td>" + ArrayRoles[itemArray].Nit_ID + "</td><td>" + ArrayRoles[itemArray].Rol_ID + "</td><td>" + ArrayRoles[itemArray].Descripcion + "</td><td>" + ArrayRoles[itemArray].Sigla + "</td><td> " + ArrayRoles[itemArray].Estado + " </td><td style='white-space: nowrap;'> " + ArrayRoles[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArrayRoles[itemArray].FechaCreacion + " </td><td style='white-space: nowrap;'> " + ArrayRoles[itemArray].UsuarioActualizacion + " </td><td  style='white-space: nowrap;'> " + ArrayRoles[itemArray].FechaActualizacion + " </td></tr>";
+                Index_Rol = parseInt(ArrayRoles[itemArray].Index) - 1;
+                html_TRol += "<tr id= 'TRol_" + ArrayRoles[itemArray].Index + "'><td>" + ArrayRoles[itemArray].Nit_ID + "</td><td>" + ArrayRoles[itemArray].Rol_ID + "</td><td>" + ArrayRoles[itemArray].Descripcion + "</td><td>" + ArrayRoles[itemArray].Sigla + "</td><td> " + ArrayRoles[itemArray].Estado + " - " + ArrayRoles[itemArray].DescripEstado + " </td><td style='white-space: nowrap;'> " + ArrayRoles[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArrayRoles[itemArray].FechaCreacion + " </td><td style='white-space: nowrap;'> " + ArrayRoles[itemArray].UsuarioActualizacion + " </td><td  style='white-space: nowrap;'> " + ArrayRoles[itemArray].FechaActualizacion + " </td></tr>";
             }
             break;
 
         case "modificar":
             html_TRol = "<table id='TRol' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>NIT Empresa</th><th>Código</th><th>Descripción</th><th>Sigla</th><th>Estado</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
             for (itemArray in ArrayRoles) {
-                html_TRol += "<tr id= 'TRol_" + ArrayRoles[itemArray].Index + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + ArrayRoles[itemArray].Index + "')\"></img><span>Editar Perfil</span></span></td><td>" + ArrayRoles[itemArray].Nit_ID + "</td><td>" + ArrayRoles[itemArray].Rol_ID + "</td><td style='white-space: nowrap;'>" + ArrayRoles[itemArray].Descripcion + "</td><td>" + ArrayRoles[itemArray].Sigla + "</td><td> " + ArrayRoles[itemArray].Estado + " </td><td style='white-space: nowrap;'> " + ArrayRoles[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArrayRoles[itemArray].FechaCreacion + " </td><td style='white-space: nowrap;'> " + ArrayRoles[itemArray].UsuarioActualizacion + " </td><td  style='white-space: nowrap;'> " + ArrayRoles[itemArray].FechaActualizacion + " </td></tr>";
+                Index_Rol = parseInt(ArrayRoles[itemArray].Index) - 1;
+                html_TRol += "<tr id= 'TRol_" + ArrayRoles[itemArray].Index + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + Index_Rol + "')\"></img><span>Editar Perfil</span></span></td><td>" + ArrayRoles[itemArray].Nit_ID + "</td><td>" + ArrayRoles[itemArray].Rol_ID + "</td><td style='white-space: nowrap;'>" + ArrayRoles[itemArray].Descripcion + "</td><td>" + ArrayRoles[itemArray].Sigla + "</td><td> " + ArrayRoles[itemArray].Estado + " - " + ArrayRoles[itemArray].DescripEstado + " </td><td style='white-space: nowrap;'> " + ArrayRoles[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArrayRoles[itemArray].FechaCreacion + " </td><td style='white-space: nowrap;'> " + ArrayRoles[itemArray].UsuarioActualizacion + " </td><td  style='white-space: nowrap;'> " + ArrayRoles[itemArray].FechaActualizacion + " </td></tr>";
             }
             break;
 
@@ -231,7 +260,8 @@ function Table_rol() {
             html_TRol = "<table id='TRol' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>NIT Empresa</th><th>Código</th><th>Descripción</th><th>Sigla</th><th>Estado</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
             for (itemArray in ArrayRoles) {
                 if (ArrayRoles[itemArray].Estado != 2) {
-                    html_TRol += "<tr id= 'TRol_" + ArrayRoles[itemArray].Index + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArrayRoles[itemArray].Index + "')\"></img><span>Eliminar Perfil</span></span></td><td>" + ArrayRoles[itemArray].Nit_ID + "</td><td>" + ArrayRoles[itemArray].Rol_ID + "</td><td style='white-space: nowrap;'>" + ArrayRoles[itemArray].Descripcion + "</td><td>" + ArrayRoles[itemArray].Sigla + "</td><td> " + ArrayRoles[itemArray].Estado + " </td><td style='white-space: nowrap;'> " + ArrayRoles[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArrayRoles[itemArray].FechaCreacion + " </td><td style='white-space: nowrap;'> " + ArrayRoles[itemArray].UsuarioActualizacion + " </td><td  style='white-space: nowrap;'> " + ArrayRoles[itemArray].FechaActualizacion + " </td></tr>";
+                    Index_Rol = parseInt(ArrayRoles[itemArray].Index) - 1;
+                    html_TRol += "<tr id= 'TRol_" + ArrayRoles[itemArray].Index + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + Index_Rol + "')\"></img><span>Eliminar Perfil</span></span></td><td>" + ArrayRoles[itemArray].Nit_ID + "</td><td>" + ArrayRoles[itemArray].Rol_ID + "</td><td style='white-space: nowrap;'>" + ArrayRoles[itemArray].Descripcion + "</td><td>" + ArrayRoles[itemArray].Sigla + "</td><td> " + ArrayRoles[itemArray].Estado + " - " + ArrayRoles[itemArray].DescripEstado + " </td><td style='white-space: nowrap;'> " + ArrayRoles[itemArray].UsuarioCreacion + " </td><td  style='white-space: nowrap;'> " + ArrayRoles[itemArray].FechaCreacion + " </td><td style='white-space: nowrap;'> " + ArrayRoles[itemArray].UsuarioActualizacion + " </td><td  style='white-space: nowrap;'> " + ArrayRoles[itemArray].FechaActualizacion + " </td></tr>";
                 }
             }
             break;
@@ -249,16 +279,10 @@ function Table_rol() {
 
 //muestra el registro a eliminar
 function Eliminar(index_rol) {
-
-    for (itemArray in ArrayRoles) {
-        if (index_rol == ArrayRoles[itemArray].Index) {
-            editID = ArrayRoles[itemArray].Rol_ID;
-            editNIT = ArrayRoles[itemArray].Nit_ID;
-            $("#dialog_eliminar").dialog("option", "title", "¿Cambiar Estado a Perfil?");
-            $("#dialog_eliminar").dialog("open");
-        }
-    }
-
+    editID = ArrayRoles[index_rol].Rol_ID;
+    editNIT = ArrayRoles[index_rol].Nit_ID;
+    $("#dialog_eliminar").dialog("option", "title", "¿Cambiar Estado a Perfil?");
+    $("#dialog_eliminar").dialog("open");
 }
 
 // muestra el registro a editar
@@ -267,26 +291,20 @@ function Editar(index_rol) {
     $("#TablaDatos").css("display", "inline-table");
     $("#TablaConsulta").css("display", "none");
 
-    for (itemArray in ArrayRoles) {
-        if (index_rol == ArrayRoles[itemArray].Index) {
-            $("#Select_EmpresaNit").val(ArrayRoles[itemArray].Nit_ID).trigger("chosen:updated");
-            editNIT = ArrayRoles[itemArray].Nit_ID;
-            $("#Select_EmpresaNit").prop('disabled', true).trigger("chosen:updated");
-            $("#Txt_ID").val(ArrayRoles[itemArray].Rol_ID);
-            $("#Txt_ID").attr("disabled", "disabled");
-            editID = ArrayRoles[itemArray].Rol_ID;
-            $("#TxtDescription").val(ArrayRoles[itemArray].Descripcion);
-            $("#TxtSigla").val(ArrayRoles[itemArray].Sigla);
-            $("#Btnguardar").attr("value", "Actualizar");
-        }
-    }
+    $("#Select_EmpresaNit").val(ArrayRoles[index_rol].Nit_ID).trigger("chosen:updated");
+    editNIT = ArrayRoles[index_rol].Nit_ID;
+    $("#Select_EmpresaNit").prop('disabled', true).trigger("chosen:updated");
+    $("#Txt_ID").val(ArrayRoles[index_rol].Rol_ID);
+    $("#Txt_ID").attr("disabled", "disabled");
+    editID = ArrayRoles[index_rol].Rol_ID;
+    $("#TxtDescription").val(ArrayRoles[index_rol].Descripcion);
+    $("#TxtSigla").val(ArrayRoles[index_rol].Sigla);
+    $("#Btnguardar").attr("value", "Actualizar");
 }
 
-//evento del boton salir
-function x() {
-    $("#dialog").dialog("close");
-}
-
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                              MENSAJES, VISUALIZACION Y LIMPIEZA                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //limpiar campos
 function Clear() {
     Ocultar_Errores();
@@ -298,19 +316,4 @@ function Clear() {
     $("#TxtRead").val("");
     $("#DDLColumns").val("-1").trigger("chosen:updated");
     VerificarNIT("Select_EmpresaNit");
-}
-
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*----                                                                                                                     PROCESOS DE CHANGES EN CONTROLES                                                                                                                                        ----*/
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
-function Change_Select_Nit() {
-    $("#Select_EmpresaNit").change(function () {
-        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
-        if ($("#Select_EmpresaNit").val() == "-1") {
-            $("#ImgNIT").css("display", "inline-table");
-        } else {
-            $("#ImgNIT").css("display", "none");
-        }
-    });
 }
