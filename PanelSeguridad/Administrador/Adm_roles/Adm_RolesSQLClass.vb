@@ -337,7 +337,7 @@ Public Class Adm_RolesSQLClass
         Select Case vp_O_Obj.TipoSQL
 
             Case "Usuario"
-                vl_sql_filtro.Append(" WHERE R_Nit_ID ='" & vp_O_Obj.Nit_ID & "'" & _
+                vl_sql_filtro.Append(" WHERE R_Nit_ID ='" & vp_O_Obj.Nit_ID & "' AND R_Estado = '1' " & _
                                                      " ORDER BY R_Nit_ID, R_Rol_ID ASC  ")
 
             Case "All"
