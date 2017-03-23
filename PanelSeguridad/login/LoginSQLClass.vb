@@ -2,6 +2,8 @@
 Imports System.Data.OleDb
 Public Class LoginSQLClass
 
+#Region "CRUD"
+
     ''' <summary>
     ''' funcion query para la actualizacion de la contrazeña desde el login
     ''' </summary>
@@ -32,22 +34,29 @@ Public Class LoginSQLClass
     ''' <summary>
     ''' funcion query para la actualizacion de la contraseña desde el panel administrativo
     ''' </summary>
-    ''' <param name="pl_obj_User"></param>
+    ''' <param name="vp_obj_User"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Update_PasswordADM(ByVal pl_obj_User As LoginClass)
+    Public Function Update_PasswordADM(ByVal vp_obj_User As LoginClass)
 
         Dim vl_S_processUpdate As String
         Dim StrQuery As String = ""
         Dim conex As New Conector
 
         Dim sql As New StringBuilder
-        sql.Append(" UPDATE Usuarios SET " & _
-                   " U_password = '" & pl_obj_User.Password & "'," & _
-                   " U_Estado = '" & pl_obj_User.Estado & "', " & _
-                   " U_Intentos_Fallidos = '0' " & _
-                   " WHERE  U_Nit_ID = '" & pl_obj_User.Nit_ID & "'" & _
-                   " AND  U_Usuario_ID = '" & UCase(pl_obj_User.Usuario_ID) & "'")
+
+        If vp_obj_User.Estado = "3" Then
+            sql.Append(" UPDATE Usuarios SET " & _
+                                  " U_password = '" & vp_obj_User.Password & "'," & _
+                                  " U_Intentos_Fallidos = '0' " & _
+                                  " WHERE  U_Nit_ID = '" & vp_obj_User.Nit_ID & "' AND  U_Usuario_ID = '" & UCase(vp_obj_User.Usuario_ID) & "'")
+        Else
+            sql.Append(" UPDATE Usuarios SET " & _
+                                  " U_Estado = '" & vp_obj_User.Estado & "', " & _
+                                  " U_Intentos_Fallidos = '0' " & _
+                                  " WHERE  U_Nit_ID = '" & vp_obj_User.Nit_ID & "' AND  U_Usuario_ID = '" & UCase(vp_obj_User.Usuario_ID) & "'")
+        End If
+
 
         StrQuery = sql.ToString
 
@@ -57,61 +66,9 @@ Public Class LoginSQLClass
 
     End Function
 
-    ''' <summary>
-    ''' Función que trae el estado y contraseña del usuario para hacer la validación en Login
-    ''' </summary>
-    ''' <param name="vp_S_NitID"></param>
-    ''' <param name="vp_S_UserID"></param>
-    ''' <returns></returns>
-    ''' <remarks></remarks>
-    Public Function Verify_User(ByVal vp_S_NitID As String, ByVal vp_S_UserID As String)
+#End Region
 
-        Dim objUser As New LoginClass
-        Dim ObjListLogin As New List(Of LoginClass)
-        Dim StrQuery As String = ""
-        Dim conex As New Conector
-
-        Dim Conexion As String = conex.typeConexion("1")
-
-        Dim sql As New StringBuilder
-        sql.Append("SELECT U_Estado, U_password FROM USUARIOS " & _
-                   "WHERE U_Nit_ID = '" & vp_S_NitID & "' AND U_Usuario_ID = '" & vp_S_UserID & "'")
-        StrQuery = sql.ToString
-
-        ObjListLogin = ListLogin(StrQuery, Conexion, "Verificar")
-
-        Return ObjListLogin
-
-    End Function
-
-    ''' <summary>
-    ''' Función encargada de buscar si existe un usuario con los datos registrado
-    ''' </summary>
-    ''' <param name="vp_S_StrQuery"></param>
-    ''' <returns></returns>
-    ''' <remarks></remarks>
-    Public Function ConsultarExiste(ByVal vp_S_StrQuery As LoginClass)
-
-        Dim StrQuery As String = ""
-        Dim Result As String = ""
-        Dim conex As New Conector
-
-        Dim Conexion As String = conex.typeConexion("1")
-
-        Dim sql As New StringBuilder
-        sql.AppendLine("SELECT COUNT(1) FROM USUARIOS " & _
-                       " WHERE U_Nit_ID = '" & vp_S_StrQuery.Nit_ID & "' " & _
-                       " AND U_Usuario_ID = '" & vp_S_StrQuery.Usuario_ID & "'")
-        StrQuery = sql.ToString
-
-        StrQuery = sql.ToString
-
-        Result = conex.IDis(StrQuery, "1")
-
-        Return Result
-
-    End Function
-
+    
 #Region "CARGAR LISTAS"
 
     ''' <summary>
@@ -205,7 +162,7 @@ Public Class LoginSQLClass
     ''' <returns></returns>
     ''' <remarks></remarks>
     Public Function InformacionUser(ByVal vp_S_User As LoginClass)
-        
+
         Dim objUser As New LoginClass
         Dim ObjListLogin As New List(Of LoginClass)
         Dim StrQuery As String = ""
@@ -242,6 +199,89 @@ Public Class LoginSQLClass
         ObjListLogin = ListLogin(StrQuery, Conexion, "AllInformation")
 
         Return ObjListLogin
+    End Function
+
+    ''' <summary>
+    ''' Función que trae el estado y contraseña del usuario para hacer la validación en Login
+    ''' </summary>
+    ''' <param name="vp_S_NitID"></param>
+    ''' <param name="vp_S_UserID"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Verify_User(ByVal vp_S_NitID As String, ByVal vp_S_UserID As String)
+
+        Dim objUser As New LoginClass
+        Dim ObjListLogin As New List(Of LoginClass)
+        Dim StrQuery As String = ""
+        Dim conex As New Conector
+
+        Dim Conexion As String = conex.typeConexion("1")
+
+        Dim sql As New StringBuilder
+        sql.Append("SELECT U_Estado, U_password FROM USUARIOS " & _
+                   "WHERE U_Nit_ID = '" & vp_S_NitID & "' AND U_Usuario_ID = '" & vp_S_UserID & "'")
+        StrQuery = sql.ToString
+
+        ObjListLogin = ListLogin(StrQuery, Conexion, "Verificar")
+
+        Return ObjListLogin
+
+    End Function
+
+    ''' <summary>
+    ''' Función encargada de buscar si existe un usuario con los datos registrado
+    ''' </summary>
+    ''' <param name="vp_S_StrQuery"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function ConsultarExiste(ByVal vp_S_StrQuery As LoginClass)
+
+        Dim StrQuery As String = ""
+        Dim Result As String = ""
+        Dim conex As New Conector
+
+        Dim Conexion As String = conex.typeConexion("1")
+
+        Dim sql As New StringBuilder
+        sql.AppendLine("SELECT COUNT(1) FROM USUARIOS " & _
+                       " WHERE U_Nit_ID = '" & vp_S_StrQuery.Nit_ID & "' " & _
+                       " AND U_Usuario_ID = '" & vp_S_StrQuery.Usuario_ID & "'")
+        StrQuery = sql.ToString
+
+        StrQuery = sql.ToString
+
+        Result = conex.IDis(StrQuery, "1")
+
+        Return Result
+
+    End Function
+
+    ''' <summary>
+    ''' Función encargada de buscar si existe un usuario con los datos registrado
+    ''' </summary>
+    ''' <param name="vp_S_StrQuery"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function ConsultarEstado(ByVal vp_S_StrQuery As LoginClass)
+
+        Dim StrQuery As String = ""
+        Dim Result As String = ""
+        Dim conex As New Conector
+
+        Dim Conexion As String = conex.typeConexion("1")
+
+        Dim sql As New StringBuilder
+        sql.AppendLine(" SELECT U_Estado FROM USUARIOS " & _
+                       " WHERE U_Nit_ID = '" & vp_S_StrQuery.Nit_ID & "' " & _
+                       " AND U_Usuario_ID = '" & vp_S_StrQuery.Usuario_ID & "'")
+        StrQuery = sql.ToString
+
+        StrQuery = sql.ToString
+
+        Result = conex.IDis(StrQuery, "1")
+
+        Return Result
+
     End Function
 
 #End Region

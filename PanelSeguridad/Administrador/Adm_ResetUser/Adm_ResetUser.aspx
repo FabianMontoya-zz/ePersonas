@@ -6,6 +6,7 @@
     <script src="../../SasifMaster.js" type="text/javascript"></script>
     <script src="../SasifMaster_Cosult.js" type="text/javascript"></script>
     <script src="Adm_ResetUser.js" type="text/javascript"></script>
+    <script src="Adm_ResetUserTrasaccionsAjax.js" type="text/javascript"></script>
     <link href="../../css/css_login.css" rel="stylesheet" type="text/css" />
     <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
@@ -76,6 +77,7 @@
                         <option value="0">0 - Activo</option>
                         <option value="1">1 - Inactivo / Deshabilitado</option>
                         <option value="2">2 - Eliminado</option>
+                          <option value="3">Reseteo Contraseña</option>
                     </select>
                 </td>
                 <td style="padding-bottom: 25px; width: 2%;">
