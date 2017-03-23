@@ -65,8 +65,7 @@ function transacionAjax_Reset(State) {
 /*-------------------- Carga combo NIT ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_EmpresaNit(State) {
-    OpenControl();
-    $.ajax({
+     $.ajax({
         url: "Adm_ResetUserAjax.aspx",
         type: "POST",
         //crear json
