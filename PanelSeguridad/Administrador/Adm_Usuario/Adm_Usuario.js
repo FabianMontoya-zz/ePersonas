@@ -179,6 +179,222 @@ function x() {
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                     PROCESOS DE CHANGES EN CONTROLES                                                                                                                                        ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//Función que valida que tipo de acceso a información se requiere y muestra o no los combos de Grupo Documentos - Reportes
+function ValidarTipoAcceso(AccessTo) {
+
+    var valor = 0;
+
+    switch (AccessTo) {
+        case "Documentos":
+
+            valor = $("#Select_AccessDocument").val();
+            if (valor == 4) {
+                $("#T_GrupoDocuments").show();
+            } else {
+                $("#Select_Grupo_Documentos_U").val("-1").trigger('chosen:updated');
+                $("#T_GrupoDocuments").hide(); //Se coloca de ultimas para que los cambios que se quieran hacer tengan efecto            
+            }
+
+            break;
+        case "Reportes":
+
+            valor = $("#Select_AccessReports").val();
+            if (valor == 4) {
+                $("#T_GrupoReportes").show();
+            } else {
+                $("#Select_GroupReports").val("-1").trigger('chosen:updated');
+                $("#T_GrupoReportes").hide(); //Se coloca de ultimas para que los cambios que se quieran hacer tengan efecto
+            }
+
+            break;
+    }
+
+    $('.C_Chosen').trigger('chosen:updated');
+
+}
+
+//al mover el combo de nit 2 para traer los roles
+function Change_Select_Nit_2() {
+    $("#Select_EmpresaNit_2").change(function () {
+
+        var vl_Nit_index = this.value;
+        transacionAjax_CargaRol('cargar_Rol', vl_Nit_index);
+    });
+}
+
+//al mover el combo de nit traer datos presedentes
+function Change_Select_Nit() {
+    $("#Select_EmpresaNit").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_EmpresaNit").val() == "-1") {
+            $("#ImgNIT").css("display", "inline-table");
+        } else {
+            $("#ImgNIT").css("display", "none");
+        }
+        index = this.value;
+        TransaccionesSegunNIT(index);
+    });
+}
+
+function TransaccionesSegunNIT(index_NIT_ID) {
+    if (index_NIT_ID != "-1") {
+        OpenControl();
+        transacionAjax_PoliticasSeguridad('PoliticasSeguridad', index_NIT_ID); //Carga las politicas de seguridad
+        transacionAjax_GrupoReportes('GrupoReportes', index_NIT_ID); //Carga los grupos de reportes (Genéricos y de la empresa)
+        transacionAjax_GrupoDocumentos('GrupoDocumentos', index_NIT_ID); //Carga los grupos de Documentos (Genéricos y de la empresa)
+    }
+}
+
+function Change_Select_TypeDocument() {
+    $("#Select_TypeDocument").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_TypeDocument").val() == "-1") {
+            $("#Img_TypeDoc").css("display", "inline-table");
+        } else {
+            $("#Img_TypeDoc").css("display", "none");
+        }
+    });
+}
+
+function Change_DDLRol() {
+    $("#DDLRol").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#DDLRol").val() == "-1") {
+            $("#ImgRol").css("display", "inline-table");
+        } else {
+            $("#ImgRol").css("display", "none");
+        }
+    });
+}
+
+function Change_Select_Acces_Information() {
+    $("#Select_Acces_Information").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_Acces_Information").val() == "-1") {
+            $("#ImgAccessInfo").css("display", "inline-table");
+        } else {
+            $("#ImgAccessInfo").css("display", "none");
+        }
+    });
+}
+
+function Change_Select_PolSegurGrupo() {
+    $("#Select_PolSegurGrupo").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_PolSegurGrupo").val() == "-1") {
+            $("#ImgPolSeguGrupo").css("display", "inline-table");
+        } else {
+            $("#ImgPolSeguGrupo").css("display", "none");
+        }
+    });
+}
+
+function Change_Select_PoliticaSeguridad_U() {
+    $("#Select_PoliticaSeguridad_U").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_PoliticaSeguridad_U").val() == "-1") {
+            $("#ImgPolSecurity").css("display", "inline-table");
+        } else {
+            $("#ImgPolSecurity").css("display", "none");
+        }
+    });
+}
+
+function Change_Select_AccesInfoDocument() {
+    $("#Select_AccesInfoDocument").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_AccesInfoDocument").val() == "-1") {
+            $("#ImgAccesInfoDocument").css("display", "inline-table");
+        } else {
+            $("#ImgAccesInfoDocument").css("display", "none");
+        }
+    });
+}
+
+function Change_Select_AccessDocument() {
+    $("#Select_AccessDocument").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_AccessDocument").val() == "-1") {
+            $("#ImgAccessDocuments").css("display", "inline-table");
+        } else {
+            $("#ImgAccessDocuments").css("display", "none");
+        }
+        ValidarTipoAcceso("Documentos"); //Validamos si selecciona 4 - Grupo de documentos para mostrar selección de grupo
+    });
+}
+
+function Change_Select_Grupo_Documentos_U() {
+    $("#Select_Grupo_Documentos_U").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_Grupo_Documentos_U").val() == "-1") {
+            $("#ImgGroupDocuments").css("display", "inline-table");
+        } else {
+            $("#ImgGroupDocuments").css("display", "none");
+        }
+    });
+}
+
+function Change_SelectAccessInfoReports() {
+    $("#SelectAccessInfoReports").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#SelectAccessInfoReports").val() == "-1") {
+            $("#ImgAccessInfoReports").css("display", "inline-table");
+        } else {
+            $("#ImgAccessInfoReports").css("display", "none");
+        }
+    });
+}
+
+function Change_Select_AccessReports() {
+    $("#Select_AccessReports").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_AccessReports").val() == "-1") {
+            $("#ImgAccessReports").css("display", "inline-table");
+        } else {
+            $("#ImgAccessReports").css("display", "none");
+        }
+        ValidarTipoAcceso("Reportes"); //Validamos si selecciona 4 - Grupo de documentos para mostrar selección de grupo
+    });
+}
+
+function Change_Select_GroupReports() {
+    $("#Select_GroupReports").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_GroupReports").val() == "-1") {
+            $("#ImgGroupReport").css("display", "inline-table");
+        } else {
+            $("#ImgGroupReport").css("display", "none");
+        }
+    });
+}
+
+function Change_Select_TypeAccess() {
+    $("#Select_TypeAccess").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_TypeAccess").val() == "-1") {
+            $("#ImgTypeAccess").css("display", "inline-table");
+        } else {
+            $("#ImgTypeAccess").css("display", "none");
+        }
+    });
+}
+
+function Change_Select_EstadoUser() {
+    $("#Select_EstadoUser").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_EstadoUser").val() == "-1") {
+            $("#ImgEstadoUser").css("display", "inline-table");
+        } else {
+            $("#ImgEstadoUser").css("display", "none");
+        }
+    });
+}
+
+
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                      REGION VALIDACIONES DEL PROCESO                                                                                                                ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //validamos si han escogido una columna
@@ -622,221 +838,6 @@ function Clear() {
     if (OnlyEmpresa == true) {
         TransaccionesSegunNIT($("#Select_EmpresaNit").val());
     }
-}
-
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*----                                                                                                                     PROCESOS DE CHANGES EN CONTROLES                                                                                                                                        ----*/
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-//Función que valida que tipo de acceso a información se requiere y muestra o no los combos de Grupo Documentos - Reportes
-function ValidarTipoAcceso(AccessTo) {
-
-    var valor = 0;
-
-    switch (AccessTo) {
-        case "Documentos":
-
-            valor = $("#Select_AccessDocument").val();
-            if (valor == 4) {
-                $("#T_GrupoDocuments").show();
-            } else {
-                $("#Select_Grupo_Documentos_U").val("-1").trigger('chosen:updated');
-                $("#T_GrupoDocuments").hide(); //Se coloca de ultimas para que los cambios que se quieran hacer tengan efecto            
-            }
-
-            break;
-        case "Reportes":
-
-            valor = $("#Select_AccessReports").val();
-            if (valor == 4) {
-                $("#T_GrupoReportes").show();
-            } else {
-                $("#Select_GroupReports").val("-1").trigger('chosen:updated');
-                $("#T_GrupoReportes").hide(); //Se coloca de ultimas para que los cambios que se quieran hacer tengan efecto
-            }
-
-            break;
-    }
-
-    $('.C_Chosen').trigger('chosen:updated');
-
-}
-
-//al mover el combo de nit 2 para traer los roles
-function Change_Select_Nit_2() {
-    $("#Select_EmpresaNit_2").change(function () {
-
-        var vl_Nit_index = this.value;
-        transacionAjax_CargaRol('cargar_Rol', vl_Nit_index);
-    });
-}
-
-//al mover el combo de nit traer datos presedentes
-function Change_Select_Nit() {
-    $("#Select_EmpresaNit").change(function () {
-        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
-        if ($("#Select_EmpresaNit").val() == "-1") {
-            $("#ImgNIT").css("display", "inline-table");
-        } else {
-            $("#ImgNIT").css("display", "none");
-            $("#Select_EmpresaNit").prop('disabled', true); //Desactivamos el Chosen
-        }
-        index = this.value;
-        TransaccionesSegunNIT(index);
-    });
-}
-
-function TransaccionesSegunNIT(index_NIT_ID) {
-    if (index_NIT_ID != "-1") {
-        OpenControl();
-        transacionAjax_PoliticasSeguridad('PoliticasSeguridad', index_NIT_ID); //Carga las politicas de seguridad
-        transacionAjax_GrupoReportes('GrupoReportes', index_NIT_ID); //Carga los grupos de reportes (Genéricos y de la empresa)
-        transacionAjax_GrupoDocumentos('GrupoDocumentos', index_NIT_ID); //Carga los grupos de Documentos (Genéricos y de la empresa)
-    }
-}
-
-function Change_Select_TypeDocument() {
-    $("#Select_TypeDocument").change(function () {
-        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
-        if ($("#Select_TypeDocument").val() == "-1") {
-            $("#Img_TypeDoc").css("display", "inline-table");
-        } else {
-            $("#Img_TypeDoc").css("display", "none");
-        }
-    });
-}
-
-function Change_DDLRol() {
-    $("#DDLRol").change(function () {
-        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
-        if ($("#DDLRol").val() == "-1") {
-            $("#ImgRol").css("display", "inline-table");
-        } else {
-            $("#ImgRol").css("display", "none");
-        }
-    });
-}
-
-function Change_Select_Acces_Information() {
-    $("#Select_Acces_Information").change(function () {
-        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
-        if ($("#Select_Acces_Information").val() == "-1") {
-            $("#ImgAccessInfo").css("display", "inline-table");
-        } else {
-            $("#ImgAccessInfo").css("display", "none");
-        }
-    });
-}
-
-function Change_Select_PolSegurGrupo() {
-    $("#Select_PolSegurGrupo").change(function () {
-        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
-        if ($("#Select_PolSegurGrupo").val() == "-1") {
-            $("#ImgPolSeguGrupo").css("display", "inline-table");
-        } else {
-            $("#ImgPolSeguGrupo").css("display", "none");
-        }
-    });
-}
-
-function Change_Select_PoliticaSeguridad_U() {
-    $("#Select_PoliticaSeguridad_U").change(function () {
-        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
-        if ($("#Select_PoliticaSeguridad_U").val() == "-1") {
-            $("#ImgPolSecurity").css("display", "inline-table");
-        } else {
-            $("#ImgPolSecurity").css("display", "none");
-        }
-    });
-}
-
-function Change_Select_AccesInfoDocument() {
-    $("#Select_AccesInfoDocument").change(function () {
-        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
-        if ($("#Select_AccesInfoDocument").val() == "-1") {
-            $("#ImgAccesInfoDocument").css("display", "inline-table");
-        } else {
-            $("#ImgAccesInfoDocument").css("display", "none");
-        }
-    });
-}
-
-function Change_Select_AccessDocument() {
-    $("#Select_AccessDocument").change(function () {
-        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
-        if ($("#Select_AccessDocument").val() == "-1") {
-            $("#ImgAccessDocuments").css("display", "inline-table");
-        } else {
-            $("#ImgAccessDocuments").css("display", "none");
-        }
-        ValidarTipoAcceso("Documentos"); //Validamos si selecciona 4 - Grupo de documentos para mostrar selección de grupo
-    });
-}
-
-function Change_Select_Grupo_Documentos_U() {
-    $("#Select_Grupo_Documentos_U").change(function () {
-        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
-        if ($("#Select_Grupo_Documentos_U").val() == "-1") {
-            $("#ImgGroupDocuments").css("display", "inline-table");
-        } else {
-            $("#ImgGroupDocuments").css("display", "none");
-        }
-    });
-}
-
-function Change_SelectAccessInfoReports() {
-    $("#SelectAccessInfoReports").change(function () {
-        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
-        if ($("#SelectAccessInfoReports").val() == "-1") {
-            $("#ImgAccessInfoReports").css("display", "inline-table");
-        } else {
-            $("#ImgAccessInfoReports").css("display", "none");
-        }
-    });
-}
-
-function Change_Select_AccessReports() {
-    $("#Select_AccessReports").change(function () {
-        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
-        if ($("#Select_AccessReports").val() == "-1") {
-            $("#ImgAccessReports").css("display", "inline-table");
-        } else {
-            $("#ImgAccessReports").css("display", "none");
-        }
-        ValidarTipoAcceso("Reportes"); //Validamos si selecciona 4 - Grupo de documentos para mostrar selección de grupo
-    });
-}
-
-function Change_Select_GroupReports() {
-    $("#Select_GroupReports").change(function () {
-        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
-        if ($("#Select_GroupReports").val() == "-1") {
-            $("#ImgGroupReport").css("display", "inline-table");
-        } else {
-            $("#ImgGroupReport").css("display", "none");
-        }
-    });
-}
-
-function Change_Select_TypeAccess() {
-    $("#Select_TypeAccess").change(function () {
-        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
-        if ($("#Select_TypeAccess").val() == "-1") {
-            $("#ImgTypeAccess").css("display", "inline-table");
-        } else {
-            $("#ImgTypeAccess").css("display", "none");
-        }
-    });
-}
-
-function Change_Select_EstadoUser() {
-    $("#Select_EstadoUser").change(function () {
-        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
-        if ($("#Select_EstadoUser").val() == "-1") {
-            $("#ImgEstadoUser").css("display", "inline-table");
-        } else {
-            $("#ImgEstadoUser").css("display", "none");
-        }
-    });
 }
 
 
