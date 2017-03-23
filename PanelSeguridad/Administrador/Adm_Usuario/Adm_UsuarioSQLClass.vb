@@ -53,12 +53,16 @@ Public Class Adm_UsuarioSQLClass
                                " U_FechaCreacion, " & _
                                " U_Usuario_Actualizacion, " & _
                                " U_FechaActualizacion, " & _
-                               " ROW_NUMBER() OVER(ORDER BY U_Nit_ID, U_Usuario_ID ASC) AS Index_Usuarios " & _
-                               " FROM USUARIOS " )
+                               " ROW_NUMBER() OVER(ORDER BY U_Nit_ID, U_Usuario_ID ASC) AS Index_Usuarios, " & _
+                               " TC.DDLL_Descripcion, " & _
+                               " TD.TD_Descripcion " & _
+                               " FROM USUARIOS U " & _
+                               " INNER JOIN  TC_DDL_TIPO TC ON  TC.DDL_ID = U.U_Estado AND TC.DDL_Tabla='ESTADO_USUARIO' " & _
+                               " INNER JOIN  TC_TIPO_DOCUMENTO TD ON  TD.TD_ID_TDoc = U.U_Type_Document ")
         Else
 
             If vp_S_Contenido = "ALL" Then
-                sql.Append("SELECT  U_Nit_ID,  " & _
+                sql.Append(" SELECT  U_Nit_ID,  " & _
                                " U_Usuario_ID, " & _
                                " U_Type_Document, " & _
                                " U_Documento, " & _
@@ -86,8 +90,12 @@ Public Class Adm_UsuarioSQLClass
                                " U_FechaCreacion, " & _
                                " U_Usuario_Actualizacion, " & _
                                " U_FechaActualizacion, " & _
-                               " ROW_NUMBER() OVER(ORDER BY U_Nit_ID, U_Usuario_ID ASC) AS Index_Usuarios " & _
-                               " FROM USUARIOS ")
+                               " ROW_NUMBER() OVER(ORDER BY U_Nit_ID, U_Usuario_ID ASC) AS Index_Usuarios, " & _
+                               " TC.DDLL_Descripcion, " & _
+                               " TD.TD_Descripcion " & _
+                               " FROM USUARIOS U " & _
+                               " INNER JOIN  TC_DDL_TIPO TC ON  TC.DDL_ID = U.U_Estado AND TC.DDL_Tabla='ESTADO_USUARIO' " & _
+                               " INNER JOIN  TC_TIPO_DOCUMENTO TD ON  TD.TD_ID_TDoc = U.U_Type_Document ")
             Else
                 sql.Append(" SELECT  U_Nit_ID,  " & _
                                " U_Usuario_ID, " & _
@@ -117,8 +125,12 @@ Public Class Adm_UsuarioSQLClass
                                " U_FechaCreacion, " & _
                                " U_Usuario_Actualizacion, " & _
                                " U_FechaActualizacion, " & _
-                               " ROW_NUMBER() OVER(ORDER BY U_Nit_ID, U_Usuario_ID ASC) AS Index_Usuarios " & _
-                               " FROM USUARIOS " & _
+                               " ROW_NUMBER() OVER(ORDER BY U_Nit_ID, U_Usuario_ID ASC) AS Index_Usuarios, " & _
+                               " TC.DDLL_Descripcion, " & _
+                               " TD.TD_Descripcion " & _
+                               " FROM USUARIOS U " & _
+                               " INNER JOIN  TC_DDL_TIPO TC ON  TC.DDL_ID = U.U_Estado AND TC.DDL_Tabla='ESTADO_USUARIO' " & _
+                               " INNER JOIN  TC_TIPO_DOCUMENTO TD ON  TD.TD_ID_TDoc = U.U_Type_Document " & _
                       " WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%' ")
             End If
         End If
@@ -373,6 +385,8 @@ Public Class Adm_UsuarioSQLClass
                     objUser.UsuarioActualizacion = ReadConsulta.GetValue(26)
                     objUser.FechaActualizacion = ReadConsulta.GetValue(27)
                     objUser.Index = ReadConsulta.GetValue(28)
+                    objUser.DescripEstado = ReadConsulta.GetValue(29)
+                    objUser.DescripDocumento = ReadConsulta.GetValue(30)
 
                     'agregamos a la lista
                     ObjListUser.Add(objUser)

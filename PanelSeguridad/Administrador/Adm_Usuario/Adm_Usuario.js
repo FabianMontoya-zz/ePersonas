@@ -141,8 +141,6 @@ function BtnConsulta() {
     var ValidateSelect = ValidarDroplist();
     var opcion;
 
-    OpenControl(); //Abrimos el load de espera con el logo
-
     if (ValidateSelect == 1) {
         filtro = "N";
         opcion = "ALL";
@@ -240,7 +238,6 @@ function Change_Select_Nit() {
 
 function TransaccionesSegunNIT(index_NIT_ID) {
     if (index_NIT_ID != "-1") {
-        OpenControl();
         transacionAjax_PoliticasSeguridad('PoliticasSeguridad', index_NIT_ID); //Carga las politicas de seguridad
         transacionAjax_GrupoReportes('GrupoReportes', index_NIT_ID); //Carga los grupos de reportes (Genéricos y de la empresa)
         transacionAjax_GrupoDocumentos('GrupoDocumentos', index_NIT_ID); //Carga los grupos de Documentos (Genéricos y de la empresa)
@@ -391,8 +388,6 @@ function Change_Select_EstadoUser() {
         }
     });
 }
-
-
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                      REGION VALIDACIONES DEL PROCESO                                                                                                                ----*/
@@ -620,7 +615,7 @@ function Table_User() {
             html_TUser = "<table id='TUser' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>NIT Empresa</th><th>Usuario</th><th>Tipo Documento</th><th>Documento</th><th>Nombre</th><th>Rol</th></th></th><th>Estado</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
             for (itemArray in ArrayUser) {
                 Index_User = parseInt(ArrayUser[itemArray].Index) - 1;
-                html_TUser += "<tr id= 'TUser_" + Index_User + "'><td>" + ArrayUser[itemArray].Nit_ID + "</td><td>" + ArrayUser[itemArray].Usuario_ID + "</td><td>" + ArrayUser[itemArray].TypeDocument + "</td><td>" + ArrayUser[itemArray].Documento + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].Nombre + "</td><td>" + ArrayUser[itemArray].Rol_ID + "</td><td> " + ArrayUser[itemArray].Estado + " </td><td>" + ArrayUser[itemArray].UsuarioCreacion + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].FechaCreacion + "</td><td>" + ArrayUser[itemArray].UsuarioActualizacion + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].FechaActualizacion + "</td></tr>";
+                html_TUser += "<tr id= 'TUser_" + Index_User + "'><td>" + ArrayUser[itemArray].Nit_ID + "</td><td>" + ArrayUser[itemArray].Usuario_ID + "</td><td>"+ ArrayUser[itemArray].TypeDocument + " - " + ArrayUser[itemArray].DescripDocumento + "</td><td>" + ArrayUser[itemArray].Documento + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].Nombre + "</td><td>" + ArrayUser[itemArray].Rol_ID + "</td><td> " + ArrayUser[itemArray].Estado + " - " + ArrayUser[itemArray].DescripEstado + " </td><td>" + ArrayUser[itemArray].UsuarioCreacion + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].FechaCreacion + "</td><td>" + ArrayUser[itemArray].UsuarioActualizacion + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].FechaActualizacion + "</td></tr>";
             }
             break;
 
@@ -628,7 +623,7 @@ function Table_User() {
             html_TUser = "<table id='TUser' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>NIT Empresa</th><th>Usuario</th><th>Tipo Documento</th><th>Documento</th><th>Nombre</th><th>Rol</th></th></th><th>Estado</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
             for (itemArray in ArrayUser) {
                 Index_User = parseInt(ArrayUser[itemArray].Index) - 1;
-                html_TUser += "<tr id= 'TUser_" + Index_User + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + Index_User + "')\"></img><span>Editar Usuario</span></span></td><td>" + ArrayUser[itemArray].Nit_ID + "</td><td>" + ArrayUser[itemArray].Usuario_ID + "</td><td>" + ArrayUser[itemArray].TypeDocument + "</td><td>" + ArrayUser[itemArray].Documento + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].Nombre + "</td><td>" + ArrayUser[itemArray].Rol_ID + "</td><td> " + ArrayUser[itemArray].Estado + " </td><td>" + ArrayUser[itemArray].UsuarioCreacion + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].FechaCreacion + "</td><td>" + ArrayUser[itemArray].UsuarioActualizacion + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].FechaActualizacion + "</td></tr>";
+                html_TUser += "<tr id= 'TUser_" + Index_User + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + Index_User + "')\"></img><span>Editar Usuario</span></span></td><td>" + ArrayUser[itemArray].Nit_ID + "</td><td>" + ArrayUser[itemArray].Usuario_ID + "</td><td>"+ ArrayUser[itemArray].TypeDocument + " - " + ArrayUser[itemArray].DescripDocumento + "</td><td>" + ArrayUser[itemArray].Documento + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].Nombre + "</td><td>" + ArrayUser[itemArray].Rol_ID + "</td><td> " + ArrayUser[itemArray].Estado + " - " + ArrayUser[itemArray].DescripEstado + " </td><td>" + ArrayUser[itemArray].UsuarioCreacion + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].FechaCreacion + "</td><td>" + ArrayUser[itemArray].UsuarioActualizacion + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].FechaActualizacion + "</td></tr>";
             }
             break;
 
