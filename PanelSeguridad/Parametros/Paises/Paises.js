@@ -25,6 +25,9 @@ $(document).ready(function () {
     transacionAjax_Calendario("MatrixCalendarios");
 });
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                 REGION INICIO DE COMPONENTES                                                                                                    ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //funcion para las ventanas emergentes
 function Ventanas_Emergentes() {
 
@@ -64,54 +67,9 @@ function Ocultar_Tablas() {
     $(".Dialog_Datos").css("display", "none");
     $("#TablaConsulta").css("display", "none");
 }
-
-//habilita el panel de crear o consulta
-function HabilitarPanel(opcion) {
-
-    switch (opcion) {
-
-        case "crear":
-
-            $(".Dialog_Datos").css("display", "inline-table");
-            $("#TablaConsulta").css("display", "none");
-            $("#Txt_ID").removeAttr("disabled");
-            $("#Btnguardar").attr("value", "Guardar");
-            $("#Btnguardar").css("display", "inline-table");
-            Enabled_Pais();
-            ResetError();
-            Clear();
-            estado = opcion;
-            break;
-
-        case "buscar":
-            $(".Dialog_Datos").css("display", "none");
-            $("#TablaConsulta").css("display", "inline-table");
-            $(".container_TGrid").html("");
-            estado = opcion;
-            Clear();
-            break;
-
-        case "modificar":
-            $(".Dialog_Datos").css("display", "none");
-            $("#TablaConsulta").css("display", "inline-table");
-            $(".container_TGrid").html("");
-            estado = opcion;
-            Enabled_Pais();
-            ResetError();
-            Clear();
-            break;
-
-        case "eliminar":
-            $(".Dialog_Datos").css("display", "none");
-            $("#TablaConsulta").css("display", "inline-table");
-            $(".container_TGrid").html("");
-            estado = opcion;
-            Clear();
-            break;
-
-    }
-}
-
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                 REGION BOTONES                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //consulta del del crud(READ)
 function BtnConsulta() {
 
@@ -153,7 +111,14 @@ function BtnElimina() {
     transacionAjax_Paises_delete("elimina");
 }
 
+//evento del boton salir
+function x() {
+    $("#dialog").dialog("close");
+}
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                      REGION VALIDACIONES DEL PROCESO                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //validamos campos para la creacion del link
 function validarCamposCrear() {
 
@@ -214,36 +179,89 @@ function ValidarDroplist() {
     return flag;
 }
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                      PROCESOS DE VALIDACION Y GRID PAISES                                                                                                              ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//habilita el panel de crear o consulta
+function HabilitarPanel(opcion) {
+
+    switch (opcion) {
+
+        case "crear":
+
+            $(".Dialog_Datos").css("display", "inline-table");
+            $("#TablaConsulta").css("display", "none");
+            $("#Txt_ID").removeAttr("disabled");
+            $("#Btnguardar").attr("value", "Guardar");
+            $("#Btnguardar").css("display", "inline-table");
+            Enabled_Pais();
+            ResetError();
+            Clear();
+            estado = opcion;
+            break;
+
+        case "buscar":
+            $(".Dialog_Datos").css("display", "none");
+            $("#TablaConsulta").css("display", "inline-table");
+            $(".container_TGrid").html("");
+            estado = opcion;
+            Clear();
+            break;
+
+        case "modificar":
+            $(".Dialog_Datos").css("display", "none");
+            $("#TablaConsulta").css("display", "inline-table");
+            $(".container_TGrid").html("");
+            estado = opcion;
+            Enabled_Pais();
+            ResetError();
+            Clear();
+            break;
+
+        case "eliminar":
+            $(".Dialog_Datos").css("display", "none");
+            $("#TablaConsulta").css("display", "inline-table");
+            $(".container_TGrid").html("");
+            estado = opcion;
+            Clear();
+            break;
+
+    }
+}
+
 // crea la tabla en el cliente
 function Table_Paises() {
 
     var html_TPaises;
-
+    var Index_Paises;
     switch (estado) {
 
         case "buscar":
-            html_TPaises = "<table id='TPaises' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Ver</th><th>Codigo</th><th>Nombre</th></tr></thead><tbody>";
+            html_TPaises = "<table id='TPaises' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Codigo</th><th>Pais</th><th>Moneda</th><th>Calendario</th><th>SWIFT</th></tr></thead><tbody>";
             for (itemArray in ArrayPaises) {
                 if (ArrayPaises[itemArray].Cod != 0) {
-                    html_TPaises += "<tr id= 'TPaises_" + ArrayPaises[itemArray].Cod + "'><td><input type ='radio' class= 'Ver' name='ver' onclick=\"Ver('" + ArrayPaises[itemArray].Cod + "')\"></input></td><td>" + ArrayPaises[itemArray].Cod + "</td><td>" + ArrayPaises[itemArray].Name + "</td></tr>";
+                    Index_Paises = parseInt(ArrayPaises[itemArray].Index) - 1;
+                    html_TPaises += "<tr id= 'TPaises_" + Index_Paises + "'><td>" + ArrayPaises[itemArray].Cod + "</td><td>" + ArrayPaises[itemArray].Name + "</td><td>" + ArrayPaises[itemArray].Moneda + " - " + ArrayPaises[itemArray].Moneda_Descripcion + "</td><td>" + ArrayPaises[itemArray].Calendario_ID + " - " + ArrayPaises[itemArray].Calendario_Descripcion + "</td><td>" + ArrayPaises[itemArray].SWIFT + "</td></tr>";
                 }
             }
             break;
 
         case "modificar":
-            html_TPaises = "<table id='TPaises' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Ver</th><th>Editar</th><th>Codigo</th><th>Nombre</th></tr></thead><tbody>";
+            html_TPaises = "<table id='TPaises' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Codigo</th><th>Pais</th><th>Moneda</th><th>Calendario</th><th>SWIFT</th></tr></thead><tbody>";
             for (itemArray in ArrayPaises) {
                 if (ArrayPaises[itemArray].Cod != 0) {
-                    html_TPaises += "<tr id= 'TPaises_" + ArrayPaises[itemArray].Cod + "'><td><input type ='radio' class= 'Ver' name='ver' onclick=\"Ver('" + ArrayPaises[itemArray].Cod + "')\"></input></td><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Editar('" + ArrayPaises[itemArray].Cod + "')\"></input></td><td>" + ArrayPaises[itemArray].Cod + "</td><td>" + ArrayPaises[itemArray].Name + "</td></tr>";
+                    Index_Paises = parseInt(ArrayPaises[itemArray].Index) - 1;
+                    html_TPaises += "<tr id= 'TPaises_" + Index_Paises + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + Index_Paises + "')\"></img><span>Editar Pais</span></span></td><td>" + ArrayPaises[itemArray].Cod + "</td><td>" + ArrayPaises[itemArray].Name + "</td><td>" + ArrayPaises[itemArray].Moneda + " - " + ArrayPaises[itemArray].Moneda_Descripcion + "</td><td>" + ArrayPaises[itemArray].Calendario_ID + " - " + ArrayPaises[itemArray].Calendario_Descripcion + "</td><td>" + ArrayPaises[itemArray].SWIFT + "</td></tr>";
                 }
             }
             break;
 
         case "eliminar":
-            html_TPaises = "<table id='TPaises' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Ver</th><th>Eliminar</th><th>Codigo</th><th>Nombre</th></tr></thead><tbody>";
+            html_TPaises = "<table id='TPaises' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Codigo</th><th>Pais</th><th>Moneda</th><th>Calendario</th><th>SWIFT</th></tr></thead><tbody>";
             for (itemArray in ArrayPaises) {
                 if (ArrayPaises[itemArray].Cod != 0) {
-                    html_TPaises += "<tr id= 'TPaises_" + ArrayPaises[itemArray].Cod + "'><td><input type ='radio' class= 'Ver' name='ver' onclick=\"Ver('" + ArrayPaises[itemArray].Cod + "')\"></input></td><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar('" + ArrayPaises[itemArray].Cod + "')\"></input></td><td>" + ArrayPaises[itemArray].Cod + "</td><td>" + ArrayPaises[itemArray].Name + "</td></tr>";
+                    Index_Paises = parseInt(ArrayPaises[itemArray].Index) - 1;
+                    html_TPaises += "<tr id= 'TPaises_" + Index_Paises + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + Index_Paises + "')\"></img><span>Eliminar Pais</span></span></td><td>" + ArrayPaises[itemArray].Cod + "</td><td>" + ArrayPaises[itemArray].Name + "</td><td>" + ArrayPaises[itemArray].Moneda + " - " + ArrayPaises[itemArray].Moneda_Descripcion + "</td><td>" + ArrayPaises[itemArray].Calendario_ID + " - " + ArrayPaises[itemArray].Calendario_Descripcion + "</td><td>" + ArrayPaises[itemArray].SWIFT + "</td></tr>";
                 }
             }
             break;
@@ -260,15 +278,10 @@ function Table_Paises() {
 }
 
 //muestra el registro a eliminar
-function Eliminar(index_Paises) {
-    for (itemArray in ArrayPaises) {
-        if (index_Paises == ArrayPaises[itemArray].Cod) {
-            editID = ArrayPaises[itemArray].Cod;
-            $("#dialog_eliminar").dialog("option", "title", "Eliminar?");
-            $("#dialog_eliminar").dialog("open");
-        }
-    }
-
+function Eliminar(vp_index) {
+    editID = ArrayPaises[vp_index].Cod;
+    $("#dialog_eliminar").dialog("option", "title", "Eliminar?");
+    $("#dialog_eliminar").dialog("open");
 }
 
 // muestra el registro a editar
@@ -281,23 +294,36 @@ function Editar(index_Paises) {
     $("#Btnguardar").css("display", "inline-table");
 }
 
-// muestra el registro 
-function Ver(index_Paises) {
 
-    Disabled_Pais();
-    Search_Pais(index_Paises);
+// muestra el registro selccionado
+function Search_Pais(vp_index) {
 
-    $(".Dialog_Datos").css("display", "inline-table");
-    $("#TablaHoras").css("display", "inline-table");
-    $("#TablaConsulta").css("display", "none");
+    $("#Txt_Codigo").val(ArrayPaises[vp_index].Cod);
+    $("#Txt_Codigo").attr("disabled", "disabled");
+    $("#Txt_Pais").val(ArrayPaises[vp_index].Name);
+    editID = ArrayPaises[vp_index].Cod;
+    $("#TxtSWIFT").val(ArrayPaises[vp_index].SWIFT);
 
-    $("#Btnguardar").css("display", "none");
-
+    setTimeout("CargaCombos('" + ArrayPaises[vp_index].Moneda  + "', '" + ArrayPaises[vp_index].Calendario_ID + "')", 400);
+    
 }
 
-//evento del boton salir
-function x() {
-    $("#dialog").dialog("close");
+//carga combos que dependen de una transaccion
+function CargaCombos(vp_Moneda, vp_Calendario) {
+
+    if (vp_Moneda == "") {
+        $("#Select_moneda").val("-1").trigger('chosen:updated');
+    }
+    else {
+        $('#Select_moneda').val(vp_Moneda).trigger('chosen:updated');
+    }
+
+    if (vp_Calendario == "") {
+        $('#Select_Calendario').val('-1').trigger('chosen:updated');
+    }
+    else {
+        $('#Select_Calendario').val(vp_Calendario).trigger('chosen:updated');
+    }
 }
 
 //limpiar campos
@@ -312,38 +338,6 @@ function Clear() {
     $("#DDLColumns").val("-1");
 
     $('.C_Chosen').trigger('chosen:updated');
-}
-
-// muestra el registro selccionado
-function Search_Pais(index_Paises) {
-
-    for (itemArray in ArrayPaises) {
-        if (index_Paises == ArrayPaises[itemArray].Cod) {
-            $("#Txt_Codigo").val(ArrayPaises[itemArray].Cod);
-            $("#Txt_Codigo").attr("disabled", "disabled");
-            $("#Txt_Pais").val(ArrayPaises[itemArray].Name);
-            editID = ArrayPaises[itemArray].Cod;
-
-            if (ArrayPaises[itemArray].Moneda == "") {
-                $("#Select_moneda").val("-1");
-            }
-            else {
-                $("#Select_moneda").val(ArrayPaises[itemArray].Moneda);
-            }
-
-            $("#TxtSWIFT").val(ArrayPaises[itemArray].SWIFT);
-
-            if (ArrayPaises[itemArray].Moneda == "") {
-                $("#Select_Calendario").val("-1");
-            }
-            else {
-                $("#Select_Calendario").val(ArrayPaises[itemArray].Calendario_ID);
-            }
-
-            $('.C_Chosen').trigger('chosen:updated');
-
-        }
-    }
 }
 
 //BLOQUEA LOS CONTROLES

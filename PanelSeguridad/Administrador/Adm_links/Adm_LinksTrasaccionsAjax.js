@@ -140,6 +140,7 @@ function transacionAjax_link_delete(State) {
             else {
                 $("#dialog_eliminar").dialog("close");
                 Mensaje_General("Exito", "El link fue eliminado exitosamente!", "S");
+                $(".container_TGrid").html("");
                 Clear();
             }
         },

@@ -23,51 +23,52 @@ Public Class PaisesSQLClass
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
             sql.Append(" SELECT P.P_Cod, " & _
-                       " P.P_Name, " & _
-                       " P.P_Moneda," & _
-                       " M.CM_Descripcion,  " & _
-                       " P.P_SWIFT, " & _
-                       " P.P_Calendario_ID, " & _
-                       " C.CA_Descripcion,  " & _
-                       " P.P_UsuarioCreacion, " & _
-                       " P.P_FechaCreacion, " & _
-                       " P.P_UsuarioActualizacion, " & _
-                       " P.P_FechaActualizacion " & _
+                                                   " P.P_Name, " & _
+                                                   " P.P_Moneda," & _
+                                                   " M.CM_Descripcion,  " & _
+                                                   " P.P_SWIFT, " & _
+                                                   " P.P_Calendario_ID, " & _
+                                                   " C.CA_Descripcion,  " & _
+                                                   " P.P_UsuarioCreacion, " & _
+                                                   " P.P_FechaCreacion, " & _
+                                                   " P.P_UsuarioActualizacion, " & _
+                                                   " P.P_FechaActualizacion, " & _
+                                                   " ROW_NUMBER()OVER(ORDER BY P.P_Cod ASC) AS Index_Paises " & _
                        " FROM PAISES P  " & _
                        " LEFT JOIN MONEDA_COD M ON M.CM_Cod_Moneda_ID = P.P_Moneda " & _
                        " LEFT JOIN CALENDARIOS C ON C.CA_Nit_ID = '0' AND C.CA_Calendario_ID = P.P_Calendario_ID " & _
                        " ORDER BY P.P_Cod ASC ")
-
         Else
-
             If vp_S_Contenido = "ALL" Then
-                sql.Append("SELECT P.P_Cod, " & _
-                       " P.P_Name, " & _
-                       " P.P_Moneda," & _
-                       " M.CM_Descripcion,  " & _
-                       " P.P_SWIFT, " & _
-                       " P.P_Calendario_ID, " & _
-                       " C.CA_Descripcion,  " & _
-                       " P.P_UsuarioCreacion, " & _
-                       " P.P_FechaCreacion, " & _
-                       " P.P_UsuarioActualizacion, " & _
-                       " P.P_FechaActualizacion " & _
+                sql.Append(" SELECT P.P_Cod, " & _
+                                                   " P.P_Name, " & _
+                                                   " P.P_Moneda," & _
+                                                   " M.CM_Descripcion,  " & _
+                                                   " P.P_SWIFT, " & _
+                                                   " P.P_Calendario_ID, " & _
+                                                   " C.CA_Descripcion,  " & _
+                                                   " P.P_UsuarioCreacion, " & _
+                                                   " P.P_FechaCreacion, " & _
+                                                   " P.P_UsuarioActualizacion, " & _
+                                                   " P.P_FechaActualizacion, " & _
+                                                   " ROW_NUMBER()OVER(ORDER BY P.P_Cod ASC) AS Index_Paises " & _
                        " FROM PAISES P  " & _
                        " LEFT JOIN MONEDA_COD M ON M.CM_Cod_Moneda_ID = P.P_Moneda " & _
                        " LEFT JOIN CALENDARIOS C ON C.CA_Nit_ID = '0' AND C.CA_Calendario_ID = P.P_Calendario_ID " & _
                        " ORDER BY P.P_Cod ASC ")
             Else
-                sql.Append("  SELECT P.P_Cod, " & _
-                       " P.P_Name, " & _
-                       " P.P_Moneda," & _
-                       " M.CM_Descripcion,  " & _
-                       " P.P_SWIFT, " & _
-                       " P.P_Calendario_ID, " & _
-                       " C.CA_Descripcion,  " & _
-                       " P.P_UsuarioCreacion, " & _
-                       " P.P_FechaCreacion, " & _
-                       " P.P_UsuarioActualizacion, " & _
-                       " P.P_FechaActualizacion " & _
+                sql.Append(" SELECT P.P_Cod, " & _
+                                                   " P.P_Name, " & _
+                                                   " P.P_Moneda," & _
+                                                   " M.CM_Descripcion,  " & _
+                                                   " P.P_SWIFT, " & _
+                                                   " P.P_Calendario_ID, " & _
+                                                   " C.CA_Descripcion,  " & _
+                                                   " P.P_UsuarioCreacion, " & _
+                                                   " P.P_FechaCreacion, " & _
+                                                   " P.P_UsuarioActualizacion, " & _
+                                                   " P.P_FechaActualizacion, " & _
+                                                   " ROW_NUMBER()OVER(ORDER BY P.P_Cod ASC) AS Index_Paises " & _
                        " FROM PAISES P  " & _
                        " LEFT JOIN MONEDA_COD M ON M.CM_Cod_Moneda_ID = P.P_Moneda " & _
                        " LEFT JOIN CALENDARIOS C ON C.CA_Nit_ID = '0' AND C.CA_Calendario_ID = P.P_Calendario_ID " & _
@@ -307,6 +308,7 @@ Public Class PaisesSQLClass
                     If Not (IsDBNull(ReadConsulta.GetValue(8))) Then objPaises.FechaCreacion = ReadConsulta.GetValue(8) Else objPaises.FechaCreacion = ""
                     If Not (IsDBNull(ReadConsulta.GetValue(9))) Then objPaises.UsuarioActualizacion = ReadConsulta.GetValue(9) Else objPaises.UsuarioCreacion = ""
                     If Not (IsDBNull(ReadConsulta.GetValue(10))) Then objPaises.FechaActualizacion = ReadConsulta.GetValue(10) Else objPaises.FechaActualizacion = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(11))) Then objPaises.Index = ReadConsulta.GetValue(11) Else objPaises.Index = ""
 
                     'agregamos a la lista
                     ObjListPaises.Add(objPaises)

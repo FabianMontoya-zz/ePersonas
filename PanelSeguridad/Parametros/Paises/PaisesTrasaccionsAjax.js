@@ -209,11 +209,14 @@ function transacionAjax_Paises_delete(State) {
             switch (result) {
 
                 case "Error":
+                    $("#dialog_eliminar").dialog("close");
                     Mensaje_General("Disculpenos :(", "Ocurrio un error al intentar eliminar este país.", "E");
                     break;
 
                 case "Exito":
-                    Mensaje_General("¡Registro Eliminado!", "El país se ha eliminado correctamente.", "S");
+                    $("#dialog_eliminar").dialog("close");
+                    Mensaje_General("¡Registro Eliminado!", "El país  se ha eliminado correctamente.", "S");
+                    $(".container_TGrid").html("");
                     Clear();
                     break;
             }
