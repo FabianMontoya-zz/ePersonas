@@ -23,6 +23,12 @@ function transacionAjax_Reset(State) {
                     $("#ImgID").css("display", "inline-table");
                     break;
 
+                case "INACTIVO":
+                    Mensaje_General("¡Esta desabilitado!", "El usuario (" + $("#Txt_ID").val() + ") ya esta Inactivo o Deshabilitado.", "W");
+                    $("#ImgNIT").css("display", "inline-table");
+                    $("#ImgID").css("display", "inline-table");
+                    break;
+
                 case "NO_EXISTE":
                     Mensaje_General("¡No Existe!", "No existe ningún usuario registrado con estos datos. Por favor verifique la información.", "E");
                     $("#ImgNIT").css("display", "inline-table");
