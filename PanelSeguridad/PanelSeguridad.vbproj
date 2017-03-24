@@ -213,6 +213,7 @@
     <Content Include="Administrador\Adm_ResetUser\Adm_ResetUser.aspx" />
     <Content Include="Administrador\Adm_ResetUser\Adm_ResetUser.js" />
     <Content Include="Administrador\Adm_ResetUser\Adm_ResetUserAjax.aspx" />
+    <Content Include="Administrador\Adm_ResetUser\Adm_ResetUserTrasaccionsAjax.js" />
     <Content Include="Administrador\Adm_roles\Adm_Roles.aspx" />
     <Content Include="Administrador\Adm_roles\Adm_Roles.js" />
     <Content Include="Administrador\Adm_roles\Adm_RolesAjax.aspx" />
