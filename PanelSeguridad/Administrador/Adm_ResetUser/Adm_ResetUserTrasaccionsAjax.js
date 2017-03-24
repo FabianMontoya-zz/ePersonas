@@ -17,6 +17,12 @@ function transacionAjax_Reset(State) {
 
             switch (result) {
 
+                case "ACTIVO":
+                    Mensaje_General("¡Esta activo!", "El usuario (" + $("#Txt_ID").val() + ") ya esta activo.", "W");
+                    $("#ImgNIT").css("display", "inline-table");
+                    $("#ImgID").css("display", "inline-table");
+                    break;
+
                 case "NO_EXISTE":
                     Mensaje_General("¡No Existe!", "No existe ningún usuario registrado con estos datos. Por favor verifique la información.", "E");
                     $("#ImgNIT").css("display", "inline-table");
