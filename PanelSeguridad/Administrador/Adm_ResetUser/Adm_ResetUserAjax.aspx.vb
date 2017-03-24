@@ -87,7 +87,16 @@ Public Class Adm_ResetUserAjax
                         result = SQL_Reset.Update_PasswordADM(objReset)
 
                     Case 0 'NORMAL
-                        result = "ACTIVO"
+
+                        If objReset.Estado = "3" Then
+                            objReset.Password = Encriptar.Encriptacion_MD5(UCase(objReset.Usuario_ID))
+                            ' se valida si sa resetea la contraseña
+                            ObjListReset.Add(objReset)
+                            result = SQL_Reset.Update_PasswordADM(objReset)
+                        Else
+                            result = "ACTIVO"
+                        End If
+
 
                 End Select
 
