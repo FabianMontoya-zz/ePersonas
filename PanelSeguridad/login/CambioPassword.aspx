@@ -14,8 +14,6 @@
     <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <link href="../css/css_controles.css" rel="stylesheet" type="text/css" />
-    <meta http-equiv="pragma" content="no-cache" />
-    <meta name="viewport" content="width=device−width, initial−scale=1.0" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
     <div class="Container_title">
@@ -69,26 +67,27 @@
             </tr>
             <tr>
                 <td id="TdControl" colspan="2" style="text-align: center;">
-                    <input id="BtnCambiar" type="button" value="Cambiar" style="width: 40%;" />
+                    <input id="BtnCambiar" type="button" value="Cambiar" style="width: 40%;" onclick="BtnCambioPassword();" />
                 </td>
             </tr>
         </table>
     </div>
     <div id="dialog">
-        <table>
+        <table style="width: 100%; text-align: center;">
             <tr>
-                <td>
+                <td class="Label_Bold">
                     <p id="Mensaje_alert">
                     </p>
                 </td>
                 <td>
                     <img alt="error" id="DE" src="../images/error.png" />
                     <img alt="success" id="SE" src="../images/success.png" />
+                    <img alt="Warning" id="WA" src="../images/alert.png" />
                 </td>
             </tr>
             <tr>
-                <td align="center">
-                    <input id="BtnExit" type="button" value="Salir" style="width: 40%;" />
+                <td colspan="2" align="center">
+                    <input id="BtnExit" type="button" value="Salir" style="width: 40%; height:30px; padding: 5px; " onclick="BtnRedirect();" />
                 </td>
             </tr>
         </table>

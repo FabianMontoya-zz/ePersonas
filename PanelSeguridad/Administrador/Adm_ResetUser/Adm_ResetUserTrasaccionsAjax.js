@@ -33,7 +33,7 @@ function transacionAjax_Reset(State) {
                     switch ($("#DDLTipo").val()) {
 
                         case "0":
-                            Mensaje_General("Activación Exitosa", "Se ha activado el usuario (" + $("#Txt_ID").val() + ") correctamente.", "S");
+                            Mensaje_General("Activación Exitosa", "Se ha activado el usuario (" + $("#Txt_ID").val() + ") correctamente. Por seguridad se resetea la contraseña, recuerde que la nueva contraseña es el mismo nombre de usuario.", "S");
                             Clear();
                             break;
 

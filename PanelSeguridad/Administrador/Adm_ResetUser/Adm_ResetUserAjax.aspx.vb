@@ -52,7 +52,8 @@ Public Class Adm_ResetUserAjax
         Dim ObjListReset As New List(Of LoginClass)
         Dim Encriptar As New EncriptarClass
         Dim SQL_Reset As New LoginSQLClass
-        Dim vl_s_IDxiste, result, vl_s_Estado As String
+        Dim vl_s_IDxiste, vl_s_Estado As String
+        Dim result As String = ""
 
         objReset.Nit_ID = Request.Form("NIT")
         objReset.Usuario_ID = Request.Form("ID")
@@ -66,14 +67,21 @@ Public Class Adm_ResetUserAjax
             'VALIDAMOS EL ESTADO DEL USUARIO
             vl_s_Estado = SQL_Reset.ConsultarEstado(objReset)
 
-            If vl_s_Estado <> 2 Then
+            If objReset.Estado = "3" Or objReset.Estado = "0" Then
+                objReset.Password = Encriptar.Encriptacion_MD5(UCase(objReset.Usuario_ID))
+
                 ' se valida si sa resetea la contraseña
-                If objReset.Estado = "3" Then
-                    objReset.Password = Encriptar.Encriptacion_MD5(UCase(objReset.Usuario_ID))
-                End If
                 ObjListReset.Add(objReset)
                 result = SQL_Reset.Update_PasswordADM(objReset)
+
             Else
+                ' se valida si sa resetea la contraseña
+                ObjListReset.Add(objReset)
+                result = SQL_Reset.Update_PasswordADM(objReset)
+
+            End If
+
+            If vl_s_Estado = 2 Then
                 result = "ELIMINADO"
             End If
 
