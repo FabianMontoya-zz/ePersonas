@@ -77,7 +77,7 @@
                         <option value="0">0 - Activo</option>
                         <option value="1">1 - Inactivo / Deshabilitado</option>
                         <option value="2">2 - Eliminado</option>
-                          <option value="3">Reseteo Contraseña</option>
+                        <option value="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reseteo Contraseña</option>
                     </select>
                 </td>
                 <td style="padding-bottom: 25px; width: 2%;">

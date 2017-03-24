@@ -45,21 +45,35 @@ Public Class LoginSQLClass
 
         Dim sql As New StringBuilder
 
-        If vp_obj_User.Estado = "3" Then
-            sql.Append(" UPDATE Usuarios SET " & _
-                                  " U_password = '" & vp_obj_User.Password & "'," & _
-                                  " U_Intentos_Fallidos = '0' " & _
-                                  " WHERE  U_Nit_ID = '" & vp_obj_User.Nit_ID & "' AND  U_Usuario_ID = '" & UCase(vp_obj_User.Usuario_ID) & "'")
-        Else
-            sql.Append(" UPDATE Usuarios SET " & _
-                                  " U_Estado = '" & vp_obj_User.Estado & "', " & _
-                                  " U_Intentos_Fallidos = '0' " & _
-                                  " WHERE  U_Nit_ID = '" & vp_obj_User.Nit_ID & "' AND  U_Usuario_ID = '" & UCase(vp_obj_User.Usuario_ID) & "'")
-        End If
+        Select Case vp_obj_User.Estado
+            Case "3" 'reseteo de contraseña
+                sql.Append(" UPDATE Usuarios SET " & _
+                                     " U_password = '" & vp_obj_User.Password & "'," & _
+                                     " U_Intentos_Fallidos = '0' " & _
+                                     " WHERE  U_Nit_ID = '" & vp_obj_User.Nit_ID & "' AND  U_Usuario_ID = '" & UCase(vp_obj_User.Usuario_ID) & "'")
 
+            Case "2" 'usuario eliminado
+                sql.Append(" UPDATE Usuarios SET " & _
+                                      " U_Estado = '" & vp_obj_User.Estado & "', " & _
+                                      " U_Intentos_Fallidos = '0' " & _
+                                      " WHERE  U_Nit_ID = '" & vp_obj_User.Nit_ID & "' AND  U_Usuario_ID = '" & UCase(vp_obj_User.Usuario_ID) & "'")
+
+            Case "1" 'usuario inactivo
+                sql.Append(" UPDATE Usuarios SET " & _
+                                       " U_Estado = '" & vp_obj_User.Estado & "', " & _
+                                       " U_Intentos_Fallidos = '0' " & _
+                                       " WHERE  U_Nit_ID = '" & vp_obj_User.Nit_ID & "' AND  U_Usuario_ID = '" & UCase(vp_obj_User.Usuario_ID) & "'")
+
+            Case "0" 'usuario activo
+                sql.Append(" UPDATE Usuarios SET " & _
+                                      " U_Estado = '" & vp_obj_User.Estado & "', " & _
+                                      " U_password = '" & vp_obj_User.Password & "'," & _
+                                      " U_Intentos_Fallidos = '0' " & _
+                                       " WHERE  U_Nit_ID = '" & vp_obj_User.Nit_ID & "' AND  U_Usuario_ID = '" & UCase(vp_obj_User.Usuario_ID) & "'")
+
+        End Select
 
         StrQuery = sql.ToString
-
         vl_S_processUpdate = conex.StrInsert_and_Update_All(StrQuery, "1")
 
         Return vl_S_processUpdate
@@ -68,7 +82,7 @@ Public Class LoginSQLClass
 
 #End Region
 
-    
+
 #Region "CARGAR LISTAS"
 
     ''' <summary>
