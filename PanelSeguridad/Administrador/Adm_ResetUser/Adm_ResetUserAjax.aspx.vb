@@ -67,7 +67,7 @@ Public Class Adm_ResetUserAjax
             'VALIDAMOS EL ESTADO DEL USUARIO ACTUALMENTE
             vl_s_Estado = SQL_Reset.ConsultarEstado(objReset)
 
-            If objReset.Estado = "3" Or objReset.Estado = "0" Then
+            If objReset.Estado = "3" Or objReset.Estado = "0" Then 'VALIDAMOS ESTADOS DE COMBO SI ES ACTIVO O RESETEO
 
                 Select Case vl_s_Estado
 
@@ -87,7 +87,6 @@ Public Class Adm_ResetUserAjax
                         result = SQL_Reset.Update_PasswordADM(objReset)
 
                     Case 0 'NORMAL
-
                         If objReset.Estado = "3" Then
                             objReset.Password = Encriptar.Encriptacion_MD5(UCase(objReset.Usuario_ID))
                             ' se valida si sa resetea la contraseña
@@ -96,14 +95,20 @@ Public Class Adm_ResetUserAjax
                         Else
                             result = "ACTIVO"
                         End If
-
-
                 End Select
 
             Else
-                ' se valida si sa resetea la contraseña
-                ObjListReset.Add(objReset)
-                result = SQL_Reset.Update_PasswordADM(objReset)
+                If vl_s_Estado = 2 Then  'VALIDAMOS SI ESTA ELIMINADO 
+                    result = "ELIMINADO"
+                Else
+                    ' se valida si ES EL MISMO ESTADO
+                    If vl_s_Estado = objReset.Estado Then
+                        result = "INACTIVO"
+                    Else
+                        ObjListReset.Add(objReset)
+                        result = SQL_Reset.Update_PasswordADM(objReset)
+                    End If
+                End If
             End If
         Else
             result = "NO_EXISTE"

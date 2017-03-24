@@ -88,13 +88,9 @@
     border-radius: 10px;
 }
 
-#marco_CC {
-    padding-bottom: 16%;
-    padding-left: 35%;
-    padding-right: 35%;
-}
 
-#marco_RC {
+
+.marco {
     padding-top: 15%;
     padding-bottom: 16%;
     padding-left: 35%;

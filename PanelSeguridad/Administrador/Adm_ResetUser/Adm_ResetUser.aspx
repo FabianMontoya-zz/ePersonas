@@ -31,7 +31,7 @@
             </tr>
         </table>
     </div>
-    <div id="marco_RC">
+    <div class="marco">
 
         <table id="TablaContraseña">
             <tr>
