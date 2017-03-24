@@ -357,7 +357,7 @@ function Editar(vp_index) {
 
 }
 
-//carga combos que dependen de una trnasaccion
+//carga combos que dependen de una transaccion
 function CargaCombos(vp_AreaDepen, vp_Politica) {
 
     if (vp_AreaDepen == 0) {
