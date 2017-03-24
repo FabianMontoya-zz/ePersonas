@@ -20,7 +20,7 @@ var vg_Persona_Exist;
 
 //Evento load JS
 $(document).ready(function () {
-  
+
     /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
     Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
     Ocultar_Errores();
@@ -90,6 +90,8 @@ function Ventanas_Emergentes() {
 function Ocultar_Tablas() {
     $("#TablaDatos").css("display", "none");
     $("#TablaConsulta").css("display", "none");
+    $("#Detalle").css("display", "none");
+    $("#Datos").css("display", "none");
 }
 
 //habilita el panel de crear o consulta
@@ -100,6 +102,8 @@ function HabilitarPanel(opcion) {
         case "crear":
             $("#TablaDatos").css("display", "inline-table");
             $("#TablaConsulta").css("display", "none");
+            $("#Datos").css("display", "inline-table");
+            $("#Detalle").css("display", "none");
             $("#Txt_ID").removeAttr("disabled");
             $("#Btnguardar").attr("value", "Guardar");
             estado = opcion;
@@ -114,6 +118,8 @@ function HabilitarPanel(opcion) {
 
         case "buscar":
             $("#TablaDatos").css("display", "none");
+            $("#Datos").css("display", "none");
+            $("#Detalle").css("display", "inline-table");
             $("#TablaConsulta").css("display", "inline-table");
             $(".container_TGrid").html("");
             estado = opcion;
@@ -122,6 +128,8 @@ function HabilitarPanel(opcion) {
 
         case "modificar":
             $("#TablaDatos").css("display", "none");
+            $("#Datos").css("display", "inline-table");
+            $("#Detalle").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
             $(".container_TGrid").html("");
             estado = opcion;
@@ -612,10 +620,10 @@ function Table_User() {
     switch (estado) {
 
         case "buscar":
-            html_TUser = "<table id='TUser' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>NIT Empresa</th><th>Usuario</th><th>Tipo Documento</th><th>Documento</th><th>Nombre</th><th>Rol</th></th></th><th>Estado</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
+            html_TUser = "<table id='TUser' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>NIT Empresa</th><th>Detalle</th><th>Usuario</th><th>Tipo Documento</th><th>Documento</th><th>Nombre</th><th>Rol</th></th></th><th>Estado</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
             for (itemArray in ArrayUser) {
                 Index_User = parseInt(ArrayUser[itemArray].Index) - 1;
-                html_TUser += "<tr id= 'TUser_" + Index_User + "'><td>" + ArrayUser[itemArray].Nit_ID + "</td><td>" + ArrayUser[itemArray].Usuario_ID + "</td><td>"+ ArrayUser[itemArray].TypeDocument + " - " + ArrayUser[itemArray].DescripDocumento + "</td><td>" + ArrayUser[itemArray].Documento + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].Nombre + "</td><td>" + ArrayUser[itemArray].Rol_ID + "</td><td> " + ArrayUser[itemArray].Estado + " - " + ArrayUser[itemArray].DescripEstado + " </td><td>" + ArrayUser[itemArray].UsuarioCreacion + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].FechaCreacion + "</td><td>" + ArrayUser[itemArray].UsuarioActualizacion + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].FechaActualizacion + "</td></tr>";
+                html_TUser += "<tr id= 'TUser_" + Index_User + "'><td><span class='cssToolTip_ver'><img  src='../../images/search_red.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/search_black.png';\" onmouseout=\"this.src='../../images/search_red.png';\" onclick=\"Detalle('" + Index_User + "')\"></img><span>Editar Usuario</span></span></td><td>" + ArrayUser[itemArray].Nit_ID + "</td><td>" + ArrayUser[itemArray].Usuario_ID + "</td><td>" + ArrayUser[itemArray].TypeDocument + " - " + ArrayUser[itemArray].DescripDocumento + "</td><td>" + ArrayUser[itemArray].Documento + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].Nombre + "</td><td>" + ArrayUser[itemArray].Rol_ID + "</td><td> " + ArrayUser[itemArray].Estado + " - " + ArrayUser[itemArray].DescripEstado + " </td><td>" + ArrayUser[itemArray].UsuarioCreacion + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].FechaCreacion + "</td><td>" + ArrayUser[itemArray].UsuarioActualizacion + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].FechaActualizacion + "</td></tr>";
             }
             break;
 
@@ -623,7 +631,7 @@ function Table_User() {
             html_TUser = "<table id='TUser' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>NIT Empresa</th><th>Usuario</th><th>Tipo Documento</th><th>Documento</th><th>Nombre</th><th>Rol</th></th></th><th>Estado</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
             for (itemArray in ArrayUser) {
                 Index_User = parseInt(ArrayUser[itemArray].Index) - 1;
-                html_TUser += "<tr id= 'TUser_" + Index_User + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + Index_User + "')\"></img><span>Editar Usuario</span></span></td><td>" + ArrayUser[itemArray].Nit_ID + "</td><td>" + ArrayUser[itemArray].Usuario_ID + "</td><td>"+ ArrayUser[itemArray].TypeDocument + " - " + ArrayUser[itemArray].DescripDocumento + "</td><td>" + ArrayUser[itemArray].Documento + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].Nombre + "</td><td>" + ArrayUser[itemArray].Rol_ID + "</td><td> " + ArrayUser[itemArray].Estado + " - " + ArrayUser[itemArray].DescripEstado + " </td><td>" + ArrayUser[itemArray].UsuarioCreacion + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].FechaCreacion + "</td><td>" + ArrayUser[itemArray].UsuarioActualizacion + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].FechaActualizacion + "</td></tr>";
+                html_TUser += "<tr id= 'TUser_" + Index_User + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + Index_User + "')\"></img><span>Editar Usuario</span></span></td><td>" + ArrayUser[itemArray].Nit_ID + "</td><td>" + ArrayUser[itemArray].Usuario_ID + "</td><td>" + ArrayUser[itemArray].TypeDocument + " - " + ArrayUser[itemArray].DescripDocumento + "</td><td>" + ArrayUser[itemArray].Documento + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].Nombre + "</td><td>" + ArrayUser[itemArray].Rol_ID + "</td><td> " + ArrayUser[itemArray].Estado + " - " + ArrayUser[itemArray].DescripEstado + " </td><td>" + ArrayUser[itemArray].UsuarioCreacion + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].FechaCreacion + "</td><td>" + ArrayUser[itemArray].UsuarioActualizacion + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].FechaActualizacion + "</td></tr>";
             }
             break;
 
@@ -737,6 +745,39 @@ function BuscarValuesArray(ArrayUsuario) {
     }
     /*==== END REPORTS GROUP ====*/
 
+}
+
+// muestra el registro a editar
+function Detalle(index_User) {
+
+    $("#TablaDatos").css("display", "inline-table");
+    $("#TablaConsulta").css("display", "none");
+
+    $("#Ver_EmpresaNit").html(ArrayUser[index_User].Nit_ID).trigger("chosen:updated");
+    $("#Ver_EmpresaNit_2").html(ArrayUser[index_User].Rol_Nit_ID).trigger("chosen:updated");
+    $("#Ver_ID").html(ArrayUser[index_User].Usuario_ID);
+   
+    $("#Ver_Name").html(ArrayUser[index_User].Nombre);
+    $("#Ver_TypeDocument").html(ArrayUser[index_User].TypeDocument).trigger("chosen:updated");
+    $("#Ver_Document").html(ArrayUser[index_User].Documento);
+    //Rol se llena en BuscarhtmluesArray            
+    $("#Ver_Acces_Information").html(ArrayUser[index_User].Acceso_Informacion).trigger("chosen:updated");
+    $("#Ver_PolSegurGrupo").html(ArrayUser[index_User].Nivel_Politica_Seguridad_Grupo).trigger("chosen:updated");
+    //PoliticaSeguridad se llena en BuscarhtmluesArray
+    $("#Ver_AccesInfoDocument").html(ArrayUser[index_User].Acceso_Informacion_Documentos).trigger("chosen:updated");
+    $("#Ver_AccessDocument").html(ArrayUser[index_User].Acceso_Documentos).trigger("chosen:updated");
+    //Grupo Documentos se llena en BuscarhtmluesArray            
+    $("#Ver_AccessInfoReports").html(ArrayUser[index_User].Acceso_Informacion_Reportes).trigger("chosen:updated");
+    $("#Ver_AccessReports").html(ArrayUser[index_User].Acceso_Reportes).trigger("chosen:updated");
+    //Grupo Reportes se llena en BuscarhtmluesArray
+    $("#Ver_Token").html(ArrayUser[index_User].Token);
+    $("#Ver_TypeAccess").html(ArrayUser[index_User].Tipo_Acceso).trigger("chosen:updated");
+    $("#Ver_EstadoUser").html(ArrayUser[index_User].Estado).trigger("chosen:updated");
+  
+   /* BuscarValuesArray(ArrayUser[index_User]);
+    ValidarTipoAcceso("Documentos");
+    ValidarTipoAcceso("Reportes");*/
+    
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
