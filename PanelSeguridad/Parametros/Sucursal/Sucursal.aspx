@@ -77,7 +77,7 @@
                     </tr>
                 </table>
 
-                <div id="TablaDatos" style="width: 1080px;">
+                <div id="TablaDatos">
 
                     <table id="T_NIT" style="width: 80%; margin-left: 8%;">
                         <tr>
