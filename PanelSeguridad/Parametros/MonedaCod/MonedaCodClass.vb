@@ -1,5 +1,6 @@
 ﻿Public Class MonedaCodClass
-#Region "campos"
+#Region "Campos"
+    Private _Index As Long
     Private _MonedaCod_ID As Integer
     Private _Descripcion As String
     Private _Sigla As String
@@ -7,10 +8,17 @@
     Private _FechaCreacion As String
     Private _UsuarioActualizacion As String
     Private _FechaActualizacion As String
-
 #End Region
 
-#Region "proiedades"
+#Region "Propiedades"
+    Public Property Index() As Long
+        Get
+            Return Me._Index
+        End Get
+        Set(ByVal value As Long)
+            Me._Index = value
+        End Set
+    End Property
     Public Property MonedaCod_ID() As Integer
         Get
             Return Me._MonedaCod_ID
@@ -35,7 +43,7 @@
             Me._Sigla = value
         End Set
     End Property
-     Public Property UsuarioCreacion() As String
+    Public Property UsuarioCreacion() As String
         Get
             Return Me._UsuarioCreacion
         End Get

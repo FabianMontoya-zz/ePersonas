@@ -23,13 +23,13 @@ Public Class MonedaCodSQLClass
         Dim sql As New StringBuilder
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
-            sql.Append("SELECT CM_Cod_Moneda_ID,CM_Descripcion,CM_Sigla,CM_Usuario_Creacion,CM_FechaCreacion,CM_Usuario_Actualizacion,CM_FechaActualizacion FROM MONEDA_COD")
+            sql.Append("SELECT CM_Cod_Moneda_ID,CM_Descripcion,CM_Sigla,CM_Usuario_Creacion,CM_FechaCreacion,CM_Usuario_Actualizacion,CM_FechaActualizacion, ROW_NUMBER()OVER(ORDER BY CM_Cod_Moneda_ID ASC) AS Index_Moneda FROM MONEDA_COD")
         Else
 
             If vp_S_Contenido = "ALL" Then
-                sql.Append("SELECT CM_Cod_Moneda_ID,CM_Descripcion,CM_Sigla,CM_Usuario_Creacion,CM_FechaCreacion,CM_Usuario_Actualizacion,CM_FechaActualizacion FROM MONEDA_COD")
+                sql.Append("SELECT CM_Cod_Moneda_ID,CM_Descripcion,CM_Sigla,CM_Usuario_Creacion,CM_FechaCreacion,CM_Usuario_Actualizacion,CM_FechaActualizacion, ROW_NUMBER()OVER(ORDER BY CM_Cod_Moneda_ID ASC) AS Index_Moneda FROM MONEDA_COD")
             Else
-                sql.Append("SELECT CM_Cod_Moneda_ID,CM_Descripcion,CM_Sigla,CM_Usuario_Creacion,CM_FechaCreacion,CM_Usuario_Actualizacion,CM_FechaActualizacion FROM MONEDA_COD " & _
+                sql.Append("SELECT CM_Cod_Moneda_ID,CM_Descripcion,CM_Sigla,CM_Usuario_Creacion,CM_FechaCreacion,CM_Usuario_Actualizacion,CM_FechaActualizacion, ROW_NUMBER()OVER(ORDER BY CM_Cod_Moneda_ID ASC) AS Index_Moneda FROM MONEDA_COD " & _
                       "WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
             End If
         End If
@@ -210,6 +210,7 @@ Public Class MonedaCodSQLClass
                     objMonedaCod.FechaCreacion = ReadConsulta.GetValue(4)
                     objMonedaCod.UsuarioActualizacion = ReadConsulta.GetValue(5)
                     objMonedaCod.FechaActualizacion = ReadConsulta.GetValue(6)
+                    objMonedaCod.Index = ReadConsulta.GetValue(7)
 
                     'agregamos a la lista
                     ObjListMonedaCod.Add(objMonedaCod)
