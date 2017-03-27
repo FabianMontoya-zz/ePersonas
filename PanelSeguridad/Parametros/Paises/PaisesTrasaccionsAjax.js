@@ -168,16 +168,16 @@ function transacionAjax_Paises_create(State) {
                     break;
 
                 case "Existe":
-                    Mensaje_General("¡Código Duplicado!", "El código ingresado ya existe en la base de datos.", "W");
+                    Mensaje_General("¡Ya Existe!", "El código ingresado ya existe en la base de datos.", "W");
                     break;
 
                 case "Exito":
                     if (estado == "modificar") {
-                        Mensaje_General("¡País Modificado!", "El país se ha modificado correctamente.", "S");
+                        Mensaje_General("¡Exito!", "El país se ha modificado correctamente.", "S");
                         Clear();
                     }
                     else {
-                        Mensaje_General("¡País Registrado!", "Se ha ingresado el nuevo país correctamente.", "S");
+                        Mensaje_General("¡Exito!", "Se ha ingresado el nuevo país correctamente.", "S");
                         Clear();
                     }
                     break;
