@@ -233,15 +233,15 @@ function HabilitarPanel(opcion) {
 function Table_Paises() {
 
     var html_TPaises;
-    var Index_Paises;
+    var vl_Index_Paises;
     switch (estado) {
 
         case "buscar":
             html_TPaises = "<table id='TPaises' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Codigo</th><th>Pais</th><th>Moneda</th><th>Calendario</th><th>SWIFT</th></tr></thead><tbody>";
             for (itemArray in ArrayPaises) {
                 if (ArrayPaises[itemArray].Cod != 0) {
-                    Index_Paises = parseInt(ArrayPaises[itemArray].Index) - 1;
-                    html_TPaises += "<tr id= 'TPaises_" + Index_Paises + "'><td>" + ArrayPaises[itemArray].Cod + "</td><td>" + ArrayPaises[itemArray].Name + "</td><td>" + ArrayPaises[itemArray].Moneda + " - " + ArrayPaises[itemArray].Moneda_Descripcion + "</td><td>" + ArrayPaises[itemArray].Calendario_ID + " - " + ArrayPaises[itemArray].Calendario_Descripcion + "</td><td>" + ArrayPaises[itemArray].SWIFT + "</td></tr>";
+                    vl_Index_Paises = parseInt(ArrayPaises[itemArray].Index) - 1;
+                    html_TPaises += "<tr id= 'TPaises_" + vl_Index_Paises + "'><td>" + ArrayPaises[itemArray].Cod + "</td><td>" + ArrayPaises[itemArray].Name + "</td><td>" + ArrayPaises[itemArray].Moneda + " - " + ArrayPaises[itemArray].Moneda_Descripcion + "</td><td>" + ArrayPaises[itemArray].Calendario_ID + " - " + ArrayPaises[itemArray].Calendario_Descripcion + "</td><td>" + ArrayPaises[itemArray].SWIFT + "</td></tr>";
                 }
             }
             break;
@@ -250,8 +250,8 @@ function Table_Paises() {
             html_TPaises = "<table id='TPaises' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Codigo</th><th>Pais</th><th>Moneda</th><th>Calendario</th><th>SWIFT</th></tr></thead><tbody>";
             for (itemArray in ArrayPaises) {
                 if (ArrayPaises[itemArray].Cod != 0) {
-                    Index_Paises = parseInt(ArrayPaises[itemArray].Index) - 1;
-                    html_TPaises += "<tr id= 'TPaises_" + Index_Paises + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + Index_Paises + "')\"></img><span>Editar Pais</span></span></td><td>" + ArrayPaises[itemArray].Cod + "</td><td>" + ArrayPaises[itemArray].Name + "</td><td>" + ArrayPaises[itemArray].Moneda + " - " + ArrayPaises[itemArray].Moneda_Descripcion + "</td><td>" + ArrayPaises[itemArray].Calendario_ID + " - " + ArrayPaises[itemArray].Calendario_Descripcion + "</td><td>" + ArrayPaises[itemArray].SWIFT + "</td></tr>";
+                    vl_Index_Paises = parseInt(ArrayPaises[itemArray].Index) - 1;
+                    html_TPaises += "<tr id= 'TPaises_" + vl_Index_Paises + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + vl_Index_Paises + "')\"></img><span>Editar Pais</span></span></td><td>" + ArrayPaises[itemArray].Cod + "</td><td>" + ArrayPaises[itemArray].Name + "</td><td>" + ArrayPaises[itemArray].Moneda + " - " + ArrayPaises[itemArray].Moneda_Descripcion + "</td><td>" + ArrayPaises[itemArray].Calendario_ID + " - " + ArrayPaises[itemArray].Calendario_Descripcion + "</td><td>" + ArrayPaises[itemArray].SWIFT + "</td></tr>";
                 }
             }
             break;
@@ -260,8 +260,8 @@ function Table_Paises() {
             html_TPaises = "<table id='TPaises' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Codigo</th><th>Pais</th><th>Moneda</th><th>Calendario</th><th>SWIFT</th></tr></thead><tbody>";
             for (itemArray in ArrayPaises) {
                 if (ArrayPaises[itemArray].Cod != 0) {
-                    Index_Paises = parseInt(ArrayPaises[itemArray].Index) - 1;
-                    html_TPaises += "<tr id= 'TPaises_" + Index_Paises + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + Index_Paises + "')\"></img><span>Eliminar Pais</span></span></td><td>" + ArrayPaises[itemArray].Cod + "</td><td>" + ArrayPaises[itemArray].Name + "</td><td>" + ArrayPaises[itemArray].Moneda + " - " + ArrayPaises[itemArray].Moneda_Descripcion + "</td><td>" + ArrayPaises[itemArray].Calendario_ID + " - " + ArrayPaises[itemArray].Calendario_Descripcion + "</td><td>" + ArrayPaises[itemArray].SWIFT + "</td></tr>";
+                    vl_Index_Paises = parseInt(ArrayPaises[itemArray].Index) - 1;
+                    html_TPaises += "<tr id= 'TPaises_" + vl_Index_Paises + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + vl_Index_Paises + "')\"></img><span>Eliminar Pais</span></span></td><td>" + ArrayPaises[itemArray].Cod + "</td><td>" + ArrayPaises[itemArray].Name + "</td><td>" + ArrayPaises[itemArray].Moneda + " - " + ArrayPaises[itemArray].Moneda_Descripcion + "</td><td>" + ArrayPaises[itemArray].Calendario_ID + " - " + ArrayPaises[itemArray].Calendario_Descripcion + "</td><td>" + ArrayPaises[itemArray].SWIFT + "</td></tr>";
                 }
             }
             break;
@@ -294,7 +294,6 @@ function Editar(index_Paises) {
     $("#Btnguardar").css("display", "inline-table");
 }
 
-
 // muestra el registro selccionado
 function Search_Pais(vp_index) {
 
@@ -326,6 +325,9 @@ function CargaCombos(vp_Moneda, vp_Calendario) {
     }
 }
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                              MENSAJES, VISUALIZACION Y LIMPIEZA                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //limpiar campos
 function Clear() {
     $("#Txt_Codigo").val("");
@@ -336,32 +338,6 @@ function Clear() {
     $("#TxtSWIFT").val("");
 
     $("#DDLColumns").val("-1");
-
-    $('.C_Chosen').trigger('chosen:updated');
-}
-
-//BLOQUEA LOS CONTROLES
-function Disabled_Pais() {
-
-    $("#Txt_Codigo").attr("disabled", "disabled");
-    $("#Txt_Pais").attr("disabled", "disabled");
-    $("#Select_moneda").attr("disabled", "disabled");
-    $("#TxtSWIFT").attr("disabled", "disabled");
-
-    $("#Select_Calendario").attr("disabled", "disabled");
-
-    $('.C_Chosen').trigger('chosen:updated');
-
-}
-
-//DES-BLOQUEA LOS CONTROLES
-function Enabled_Pais() {
-
-    $("#Txt_Codigo").removeAttr("disabled");
-    $("#Txt_Pais").removeAttr("disabled");
-    $("#Select_moneda").removeAttr("disabled");
-    $("#TxtSWIFT").removeAttr("disabled");
-    $("#Select_Calendario").removeAttr("disabled");
 
     $('.C_Chosen').trigger('chosen:updated');
 }
