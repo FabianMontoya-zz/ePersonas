@@ -23,13 +23,13 @@ Public Class AyudasSQLClass
         Dim sql As New StringBuilder
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
-            sql.Append("SELECT AY_Codigo_ID,AY_Nombre,AY_Descripcion,AY_FechaActualizacion,AY_Usuario FROM AYUDAS")
+            sql.Append("SELECT AY_Codigo_ID,AY_Nombre,AY_Descripcion,AY_FechaActualizacion,AY_Usuario, ROW_NUMBER()OVER(ORDER BY AY_Codigo_ID ASC) AS Index_Ayuda FROM AYUDAS")
         Else
 
             If vp_S_Contenido = "ALL" Then
-                sql.Append("SELECT AY_Codigo_ID,AY_Nombre,AY_Descripcion,AY_FechaActualizacion,AY_Usuario FROM AYUDAS")
+                sql.Append("SELECT AY_Codigo_ID,AY_Nombre,AY_Descripcion,AY_FechaActualizacion,AY_Usuario, ROW_NUMBER()OVER(ORDER BY AY_Codigo_ID ASC) AS Index_Ayuda FROM AYUDAS")
             Else
-                sql.Append("SELECT AY_Codigo_ID,AY_Nombre,AY_Descripcion,AY_FechaActualizacion,AY_Usuario FROM AYUDAS " & _
+                sql.Append("SELECT AY_Codigo_ID,AY_Nombre,AY_Descripcion,AY_FechaActualizacion,AY_Usuario, ROW_NUMBER()OVER(ORDER BY AY_Codigo_ID ASC) AS Index_Ayuda FROM AYUDAS " & _
                       "WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
             End If
         End If
@@ -200,6 +200,7 @@ Public Class AyudasSQLClass
             objAyudas.Descripcion = ReadConsulta.GetValue(2)
             objAyudas.FechaActualizacion = ReadConsulta.GetValue(3)
             objAyudas.Usuario = ReadConsulta.GetValue(4)
+            objAyudas.Index = ReadConsulta.GetValue(5)
 
             'agregamos a la lista
             ObjListAyudas.Add(objAyudas)
