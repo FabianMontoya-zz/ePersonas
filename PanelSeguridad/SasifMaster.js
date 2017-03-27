@@ -53,7 +53,7 @@ $(document).ready(function () {
     $('.Decimal').keyup(function () {
         this.value = (this.value + '').replace(/[^0-9\.]/g, '');
     });
-
+    
     $('.Letter').keyup(function () {
         this.value = (this.value + '').replace(/[^a-zA-Z\s\ñ\Ñ\ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç]+/g, '');
     });
@@ -340,6 +340,7 @@ function RevisarAyudas() {
 
     $(".Spam_AWords").html(ArrayAyudas[25].Ayudas_ID + ": " + ArrayAyudas[25].Descripcion);
     $(".Spam_ARuta").html(ArrayAyudas[26].Ayudas_ID + ": " + ArrayAyudas[26].Descripcion);
+    $(".Spam_ADec_2").html(ArrayAyudas[27].Ayudas_ID + ": " + ArrayAyudas[27].Descripcion);
     
     $(".Spam_CT1").html(ArrayAyudas[6].Descripcion);
     $(".Spam_CT2").html(ArrayAyudas[7].Descripcion);
