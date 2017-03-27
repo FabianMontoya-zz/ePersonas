@@ -245,7 +245,6 @@ Public Class ConsecutivosSQLClass
                         "      CG_FechaCreacion, " & _
                         "      CG_Usuario_Actualizacion, " & _
                         "      CG_FechaActualizacion, " & _
-                        "      CLI.CLI_Nombre, " & _
                         "      ROW_NUMBER() OVER(ORDER BY CG_Consecutivo_ID DESC) AS Index_RutaDocumentos " & _
                         " FROM CONSECUTIVOS_GENERAL C " & _
                            " WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")

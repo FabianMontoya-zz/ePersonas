@@ -15,7 +15,7 @@
     Private _DescripEmpresa As String
 #End Region
 
-#Region "proiedades"
+#Region "propiedades"
     Public Property Index() As Long
         Get
             Return Me._Index

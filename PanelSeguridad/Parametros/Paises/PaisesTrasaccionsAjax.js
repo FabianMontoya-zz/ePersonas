@@ -177,7 +177,7 @@ function transacionAjax_Paises_create(State) {
                         Clear();
                     }
                     else {
-                        Mensaje_General("¡Exito!", "Se ha ingresado el nuevo país correctamente.", "S");
+                        Mensaje_General("¡Exito!", "El país se ha creado correctamente.", "S");
                         Clear();
                     }
                     break;
