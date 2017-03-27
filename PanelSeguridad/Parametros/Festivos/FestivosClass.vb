@@ -1,6 +1,7 @@
 ﻿Public Class FestivosClass
 
 #Region "campos"
+    Private _Index As Long
     Private _Year As Integer
     Private _Mes_Dia As String
     Private _FechaActualizacion As String
@@ -10,6 +11,14 @@
 #End Region
 
 #Region "proiedades"
+    Public Property Index() As Long
+        Get
+            Return Me._Index
+        End Get
+        Set(ByVal value As Long)
+            Me._Index = value
+        End Set
+    End Property
     Public Property Year() As Integer
         Get
             Return Me._Year

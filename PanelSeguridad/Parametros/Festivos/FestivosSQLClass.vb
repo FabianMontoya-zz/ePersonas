@@ -23,13 +23,13 @@ Public Class FestivosSQLClass
         Dim sql As New StringBuilder
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
-            sql.Append("SELECT F_Año, F_Mes_Dia, F_FechaActualizacion, F_Usuario, SUBSTRING(convert(nvarchar(4),F_Mes_Dia), 1, 2)as Mes, SUBSTRING(convert(nvarchar(4),F_Mes_Dia), 3, 4)as Dia FROM Festivos")
+            sql.Append("SELECT F_Año, F_Mes_Dia, F_FechaActualizacion, F_Usuario, SUBSTRING(convert(nvarchar(4),F_Mes_Dia), 1, 2)as Mes, SUBSTRING(convert(nvarchar(4),F_Mes_Dia), 3, 4)as Dia, ROW_NUMBER()OVER(ORDER BY F_Año,F_Mes_Dia ASC) AS Index_Festivo  FROM Festivos")
         Else
 
             If vp_S_Contenido = "ALL" Then
-                sql.Append("SELECT F_Año, F_Mes_Dia, F_FechaActualizacion, F_Usuario, SUBSTRING(convert(nvarchar(4),F_Mes_Dia), 1, 2)as Mes, SUBSTRING(convert(nvarchar(4),F_Mes_Dia), 3, 4)as Dia FROM Festivos")
+                sql.Append("SELECT F_Año, F_Mes_Dia, F_FechaActualizacion, F_Usuario, SUBSTRING(convert(nvarchar(4),F_Mes_Dia), 1, 2)as Mes, SUBSTRING(convert(nvarchar(4),F_Mes_Dia), 3, 4)as Dia, ROW_NUMBER()OVER(ORDER BY F_Año,F_Mes_Dia ASC) AS Index_Festivo FROM Festivos")
             Else
-                sql.Append("SELECT F_Año, F_Mes_Dia, F_FechaActualizacion, F_Usuario, SUBSTRING(convert(nvarchar(4),F_Mes_Dia), 1, 2)as Mes, SUBSTRING(convert(nvarchar(4),F_Mes_Dia), 3, 4)as Dia FROM Festivos " & _
+                sql.Append("SELECT F_Año, F_Mes_Dia, F_FechaActualizacion, F_Usuario, SUBSTRING(convert(nvarchar(4),F_Mes_Dia), 1, 2)as Mes, SUBSTRING(convert(nvarchar(4),F_Mes_Dia), 3, 4)as Dia, ROW_NUMBER()OVER(ORDER BY F_Año,F_Mes_Dia ASC) AS Index_Festivo FROM Festivos " & _
                       "WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
             End If
         End If
@@ -173,6 +173,7 @@ Public Class FestivosSQLClass
             objFestivos.Usuario = ReadConsulta.GetString(3)
             objFestivos.StrMes = ReadConsulta.GetValue(4)
             objFestivos.StrDia = ReadConsulta.GetValue(5)
+            objFestivos.Index = ReadConsulta.GetValue(6)
 
             'agregamos a la lista
             ObjListFestivos.Add(objFestivos)
