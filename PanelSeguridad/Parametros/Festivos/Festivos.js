@@ -18,6 +18,9 @@ $(document).ready(function () {
 
 });
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                 REGION INICIO DE COMPONENTES                                                                                                    ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //Función que oculta todas las IMG de los errores en pantalla
 function Ocultar_Errores() {
     ResetError();
@@ -62,48 +65,15 @@ function Ocultar_Tablas() {
     $("#TablaConsulta").css("display", "none");
 }
 
-//habilita el panel de crear o consulta
-function HabilitarPanel(opcion) {
-
-    switch (opcion) {
-
-        case "crear":
-            $("#TablaDatos").css("display", "inline-table");
-            $("#TablaConsulta").css("display", "none");
-            $("#Txt_ID").removeAttr("disabled");
-            $("#Btnguardar").attr("value", "Guardar");
-            ResetError();
-            Clear();
-            estado = opcion;
-            break;
-
-        case "buscar":
-            $("#TablaDatos").css("display", "none");
-            $("#TablaConsulta").css("display", "inline-table");
-            $(".container_TGrid").html("");
-            estado = opcion;
-            Clear();
-            break;
-
-        case "eliminar":
-            $("#TablaDatos").css("display", "none");
-            $("#TablaConsulta").css("display", "inline-table");
-            $(".container_TGrid").html("");
-            estado = opcion;
-            Clear();
-            break;
-
-    }
-}
-
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                 REGION BOTONES                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //consulta del del crud(READ)
 function BtnConsulta() {
 
     var filtro;
     var ValidateSelect = ValidarDroplist();
     var opcion;
-
-    OpenControl();
 
     if (ValidateSelect == 1) {
         filtro = "N";
@@ -136,11 +106,16 @@ function BtnCrear() {
 
 //elimina de la BD
 function BtnElimina() {
-    OpenControl();
     transacionAjax_Festivo_delete("elimina");
 }
 
-
+//evento del boton salir
+function x() {
+    $("#dialog").dialog("close");
+}
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                      REGION VALIDACIONES DEL PROCESO                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //validamos campos para la creacion del link
 function validarCamposCrear() {
 
@@ -215,10 +190,48 @@ function ValidarDroplist() {
     return flag;
 }
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                      PROCESOS DE VALIDACION Y GRID FESTIVOS                                                                                                              ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//habilita el panel de crear o consulta
+function HabilitarPanel(opcion) {
+
+    switch (opcion) {
+
+        case "crear":
+            $("#TablaDatos").css("display", "inline-table");
+            $("#TablaConsulta").css("display", "none");
+            $("#Txt_ID").removeAttr("disabled");
+            $("#Btnguardar").attr("value", "Guardar");
+            ResetError();
+            Clear();
+            estado = opcion;
+            break;
+
+        case "buscar":
+            $("#TablaDatos").css("display", "none");
+            $("#TablaConsulta").css("display", "inline-table");
+            $(".container_TGrid").html("");
+            estado = opcion;
+            Clear();
+            break;
+
+        case "eliminar":
+            $("#TablaDatos").css("display", "none");
+            $("#TablaConsulta").css("display", "inline-table");
+            $(".container_TGrid").html("");
+            estado = opcion;
+            Clear();
+            break;
+
+    }
+}
+
 // crea la tabla en el cliente
 function Table_Festivo() {
 
     var html_TFestivo
+    var vl_Index_Festivo;
 
     switch (estado) {
 
@@ -226,20 +239,18 @@ function Table_Festivo() {
             html_TFestivo = "<table id='TFestivo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Año</th><th>Mes/Dia</th></tr></thead><tbody>";
             for (itemArray in ArrayFestivo) {
                 if (ArrayFestivo[itemArray].Año != 0) {
-                    html_TFestivo += "<tr id= 'TFestivo_" + ArrayFestivo[itemArray].Year + "'><td>" + ArrayFestivo[itemArray].Year + "</td><td>" + ArrayFestivo[itemArray].StrMes + " / " + ArrayFestivo[itemArray].StrDia + "</td></tr>";
+                    vl_Index_Festivo = parseInt(ArrayFestivo[itemArray].Index) - 1;
+                    html_TFestivo += "<tr id= 'TFestivo_" + vl_Index_Festivo + "'><td>" + ArrayFestivo[itemArray].Year + "</td><td>" + ArrayFestivo[itemArray].StrMes + " / " + ArrayFestivo[itemArray].StrDia + "</td></tr>";
                 }
             }
-            break;
-
-        case "modificar":
-            Tabla_modificar();
             break;
 
         case "eliminar":
             html_TFestivo = "<table id='TFestivo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Año</th><th>Mes/Dia</th></tr></thead><tbody>";
             for (itemArray in ArrayFestivo) {
                 if (ArrayFestivo[itemArray].Year != 0) {
-                    html_TFestivo += "<tr id= 'TFestivo_" + ArrayFestivo[itemArray].Year + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArrayFestivo[itemArray].Year + "','" + ArrayFestivo[itemArray].Mes_Dia + "')\"></img><span>Eliminar Festivos</span></span></td><td>" + ArrayFestivo[itemArray].Year + "</td><td>" + ArrayFestivo[itemArray].StrMes + " / " + ArrayFestivo[itemArray].StrDia + "</td></tr>";
+                    vl_Index_Festivo = parseInt(ArrayFestivo[itemArray].Index) - 1;
+                    html_TFestivo += "<tr id= 'TFestivo_" + vl_Index_Festivo + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + vl_Index_Festivo + "')\"></img><span>Eliminar Festivos</span></span></td><td>" + ArrayFestivo[itemArray].Year + "</td><td>" + ArrayFestivo[itemArray].StrMes + " / " + ArrayFestivo[itemArray].StrDia + "</td></tr>";
                 }
             }
             break;
@@ -255,42 +266,22 @@ function Table_Festivo() {
 }
 
 //muestra el registro a eliminar
-function Eliminar(index_Festivo, index_dia) {
+function Eliminar(vp_Index) {
 
-    for (itemArray in ArrayFestivo) {
-        if (index_Festivo == ArrayFestivo[itemArray].Year && index_dia == ArrayFestivo[itemArray].Mes_Dia) {
-            editID = ArrayFestivo[itemArray].Year;
-            editDia = ArrayFestivo[itemArray].Mes_Dia;
-            $("#dialog_eliminar").dialog("option", "title", "Eliminar?");
-            $("#dialog_eliminar").dialog("open");
-        }
-    }
+    editID = ArrayFestivo[vp_Index].Year;
+    editDia = ArrayFestivo[vp_Index].Mes_Dia;
+    $("#dialog_eliminar").dialog("option", "title", "Eliminar?");
+    $("#dialog_eliminar").dialog("open");
 
 }
 
-
-//grid sin botones para ver resultado
-function Tabla_consulta() {
-    
-    html_TFestivo += "</tbody></table>";
-    $(".container_TGrid").html("");
-    $(".container_TGrid").html(html_TFestivo);
-
-    $("#TFestivo").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
-}
-
-//evento del boton salir
-function x() {
-    $("#dialog").dialog("close");
-}
-
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                              MENSAJES, VISUALIZACION Y LIMPIEZA                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //limpiar campos
 function Clear() {
     $("#Txt_Año").val("");
     $("#Txt_mes_Dia").val("");
     $("#TxtRead").val("");
-    $("#DDLColumns").val("-1");
+    $("#DDLColumns").val("-1").trigger('chosen:updated');
 }
