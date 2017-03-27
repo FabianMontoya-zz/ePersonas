@@ -212,6 +212,7 @@ function HabilitarPanel(opcion) {
 function Table_Mensajes() {
 
     var html_Mensajes;
+    var vl_Index_Mensaje;
 
     switch (estado) {
 
@@ -219,7 +220,8 @@ function Table_Mensajes() {
             html_Mensajes = "<table id='TMensajes' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Codigo</th><th>Nombre</th><th>Descripción</th></tr></thead><tbody>";
             for (itemArray in ArrayMensajes) {
                 if (ArrayMensajes[itemArray].Mensajes_ID != 0) {
-                    html_Mensajes += "<tr id= 'TMensajes_" + ArrayMensajes[itemArray].Mensajes_ID + "'><td>" + ArrayMensajes[itemArray].Mensajes_ID + "</td><td>" + ArrayMensajes[itemArray].Nombre + "</td><td>" + ArrayMensajes[itemArray].Descripcion + "</td></tr>";
+                    vl_Index_Mensaje = parseInt(ArrayMensajes[itemArray].Index) - 1;
+                    html_Mensajes += "<tr id= 'TMensajes_" + vl_Index_Mensaje + "'><td>" + ArrayMensajes[itemArray].Mensajes_ID + "</td><td>" + ArrayMensajes[itemArray].Nombre + "</td><td>" + ArrayMensajes[itemArray].Descripcion + "</td></tr>";
                 }
             }
             break;
@@ -228,7 +230,8 @@ function Table_Mensajes() {
             html_Mensajes = "<table id='TMensajes' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Codigo</th><th>Nombre</th><th>Descripción</th></tr></thead><tbody>";
             for (itemArray in ArrayMensajes) {
                 if (ArrayMensajes[itemArray].Mensajes_ID != 0) {
-                    html_Mensajes += "<tr id= 'TMensajes_" + ArrayMensajes[itemArray].Mensajes_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + ArrayMensajes[itemArray].Mensajes_ID + "')\"></img><span>Editar Mensaje</span></span></td><td>" + ArrayMensajes[itemArray].Mensajes_ID + "</td><td>" + ArrayMensajes[itemArray].Nombre + "</td><td>" + ArrayMensajes[itemArray].Descripcion + "</td></tr>";
+                    vl_Index_Mensaje = parseInt(ArrayMensajes[itemArray].Index) - 1;
+                    html_Mensajes += "<tr id= 'TMensajes_" + vl_Index_Mensaje + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + vl_Index_Mensaje + "')\"></img><span>Editar Mensaje</span></span></td><td>" + ArrayMensajes[itemArray].Mensajes_ID + "</td><td>" + ArrayMensajes[itemArray].Nombre + "</td><td>" + ArrayMensajes[itemArray].Descripcion + "</td></tr>";
                 }
             }
             break;
@@ -237,7 +240,8 @@ function Table_Mensajes() {
             html_Mensajes = "<table id='TMensajes' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Codigo</th><th>Nombre</th><th>Descripción</th></tr></thead><tbody>";
             for (itemArray in ArrayMensajes) {
                 if (ArrayMensajes[itemArray].Mensajes_ID != 0) {
-                    html_Mensajes += "<tr id= 'TMensajes_" + ArrayMensajes[itemArray].Mensajes_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArrayMensajes[itemArray].Mensajes_ID + "')\"></img><span>Eliminar Mensaje</span></span></td><td>" + ArrayMensajes[itemArray].Mensajes_ID + "</td><td>" + ArrayMensajes[itemArray].Nombre + "</td><td>" + ArrayMensajes[itemArray].Descripcion + "</td></tr>";
+                    vl_Index_Mensaje = parseInt(ArrayMensajes[itemArray].Index) - 1;
+                    html_Mensajes += "<tr id= 'TMensajes_" + vl_Index_Mensaje + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + vl_Index_Mensaje + "')\"></img><span>Eliminar Mensaje</span></span></td><td>" + ArrayMensajes[itemArray].Mensajes_ID + "</td><td>" + ArrayMensajes[itemArray].Nombre + "</td><td>" + ArrayMensajes[itemArray].Descripcion + "</td></tr>";
                 }
             }
             break;
@@ -254,34 +258,23 @@ function Table_Mensajes() {
 }
 
 //muestra el registro a eliminar
-function Eliminar(index_Mensajes) {
-
-    for (itemArray in ArrayMensajes) {
-        if (index_Mensajes == ArrayMensajes[itemArray].Mensajes_ID) {
-            editID = ArrayMensajes[itemArray].Mensajes_ID;
-            $("#dialog_eliminar").dialog("option", "title", "Eliminar?");
-            $("#dialog_eliminar").dialog("open");
-        }
-    }
-
+function Eliminar(vp_Index) {
+    editID = ArrayMensajes[vp_Index].Mensajes_ID;
+    $("#dialog_eliminar").dialog("option", "title", "Eliminar?");
+    $("#dialog_eliminar").dialog("open");
 }
 
 // muestra el registro a editar
-function Editar(index_Mensajes) {
-
+function Editar(vp_Index) {
     $("#TablaDatos").css("display", "inline-table");
     $("#TablaConsulta").css("display", "none");
 
-    for (itemArray in ArrayMensajes) {
-        if (index_Mensajes == ArrayMensajes[itemArray].Mensajes_ID) {
-            $("#Txt_ID").val(ArrayMensajes[itemArray].Mensajes_ID);
-            $("#Txt_ID").attr("disabled", "disabled");
-            $("#TxtNombre").val(ArrayMensajes[itemArray].Nombre);
-            $("#TxtArea_Descripcion").val(ArrayMensajes[itemArray].Descripcion);
-            editID = ArrayMensajes[itemArray].Mensajes_ID;
-            $("#Btnguardar").attr("value", "Actualizar");
-        }
-    }
+    $("#Txt_ID").val(ArrayMensajes[vp_Index].Mensajes_ID);
+    $("#Txt_ID").attr("disabled", "disabled");
+    $("#TxtNombre").val(ArrayMensajes[vp_Index].Nombre);
+    $("#TxtArea_Descripcion").val(ArrayMensajes[vp_Index].Descripcion);
+    editID = ArrayMensajes[vp_Index].Mensajes_ID;
+    $("#Btnguardar").attr("value", "Actualizar");
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -293,5 +286,5 @@ function Clear() {
     $("#TxtNombre").val("");
     $("#TxtArea_Descripcion").val("");
     $("#TxtRead").val("");
-    $("#DDLColumns").val("-1");
+    $("#DDLColumns").val("-1").trigger('chosen:updated');
 }
