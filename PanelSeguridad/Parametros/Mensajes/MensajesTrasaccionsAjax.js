@@ -1,7 +1,6 @@
 ﻿/*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_CargaBusqueda(State) {
-    OpenControl();
     $.ajax({
         url: "MensajesAjax.aspx",
         type: "POST",
