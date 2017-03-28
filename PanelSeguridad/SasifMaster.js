@@ -51,7 +51,7 @@ $(document).ready(function () {
     });
 
     $('.Decimal').keyup(function () {
-        this.value = (this.value + '').replace(/[^0-9\.]/g, '');
+        this.value = (this.value + '').replace(/[^0-9\,]/g, '');
     });
     
     $('.Letter').keyup(function () {
@@ -935,6 +935,14 @@ function Convert_Decimal(index) {
     }
     return Output;
 }
+
+//convierte el valor decimal con coma para mostra en las vistas
+function Convert_Decimal_Grid(vp_Index) {
+    var vl_StrCovert= vp_Index.toString();
+    var vl_Value_Coma = vl_StrCovert.replace(".", ",");
+    return vl_Value_Coma;
+}
+
 
 //validar la longitud del campo number
 function maxLengthTypeNumber(object) {
