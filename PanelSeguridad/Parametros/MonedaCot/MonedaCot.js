@@ -231,7 +231,7 @@ function Table_MonedaCot() {
             for (itemArray in ArrayMonedaCot) {
                 if (ArrayMonedaCot[itemArray].MonedaCot_ID != 0) {
                     vl_Index_MonedaCot = parseInt(ArrayMonedaCot[itemArray].Index) - 1;
-                    html_MonedaCot += "<tr id= 'TMonedaCot_" + vl_Index_MonedaCot + "'><td>" + ArrayMonedaCot[itemArray].MonedaCot_ID + " - " + ArrayMonedaCot[itemArray].DescripMoneda + "</td><td>" + valFecha(ArrayMonedaCot[itemArray].Fecha) + "</td><td>" + ArrayMonedaCot[itemArray].ValorCotizacion + "</td><td>" + ArrayMonedaCot[itemArray].UsuarioCreacion + "</td><td>" + ArrayMonedaCot[itemArray].FechaCreacion + "</td><td>" + ArrayMonedaCot[itemArray].UsuarioActualizacion + "</td><td>" + ArrayMonedaCot[itemArray].FechaActualizacion + "</td></tr>";
+                    html_MonedaCot += "<tr id= 'TMonedaCot_" + vl_Index_MonedaCot + "'><td>" + ArrayMonedaCot[itemArray].MonedaCot_ID + " - " + ArrayMonedaCot[itemArray].DescripMoneda + "</td><td>" + valFecha(ArrayMonedaCot[itemArray].Fecha) + "</td><td>" + Convert_Decimal_Grid(ArrayMonedaCot[itemArray].ValorCotizacion) + "</td><td>" + ArrayMonedaCot[itemArray].UsuarioCreacion + "</td><td>" + ArrayMonedaCot[itemArray].FechaCreacion + "</td><td>" + ArrayMonedaCot[itemArray].UsuarioActualizacion + "</td><td>" + ArrayMonedaCot[itemArray].FechaActualizacion + "</td></tr>";
                 }
             }
             break;
@@ -241,7 +241,7 @@ function Table_MonedaCot() {
             for (itemArray in ArrayMonedaCot) {
                 if (ArrayMonedaCot[itemArray].MonedaCot_ID != 0) {
                     vl_Index_MonedaCot = parseInt(ArrayMonedaCot[itemArray].Index) - 1;
-                    html_MonedaCot += "<tr id= 'TMonedaCot_" + vl_Index_MonedaCot + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + vl_Index_MonedaCot + "')\"></img><span>Editar Cotización Moneda</span></span></td><td>" + ArrayMonedaCot[itemArray].MonedaCot_ID + " - " + ArrayMonedaCot[itemArray].DescripMoneda + "</td><td>" + valFecha(ArrayMonedaCot[itemArray].Fecha) + "</td><td>" + ArrayMonedaCot[itemArray].ValorCotizacion + "</td><td>" + ArrayMonedaCot[itemArray].UsuarioCreacion + "</td><td>" + ArrayMonedaCot[itemArray].FechaCreacion + "</td><td>" + ArrayMonedaCot[itemArray].UsuarioActualizacion + "</td><td>" + ArrayMonedaCot[itemArray].FechaActualizacion + "</td></tr>";
+                    html_MonedaCot += "<tr id= 'TMonedaCot_" + vl_Index_MonedaCot + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + vl_Index_MonedaCot + "')\"></img><span>Editar Cotización Moneda</span></span></td><td>" + ArrayMonedaCot[itemArray].MonedaCot_ID + " - " + ArrayMonedaCot[itemArray].DescripMoneda + "</td><td>" + valFecha(ArrayMonedaCot[itemArray].Fecha) + "</td><td>" + Convert_Decimal_Grid(ArrayMonedaCot[itemArray].ValorCotizacion) + "</td><td>" + ArrayMonedaCot[itemArray].UsuarioCreacion + "</td><td>" + ArrayMonedaCot[itemArray].FechaCreacion + "</td><td>" + ArrayMonedaCot[itemArray].UsuarioActualizacion + "</td><td>" + ArrayMonedaCot[itemArray].FechaActualizacion + "</td></tr>";
                 }
             }
             break;
@@ -251,7 +251,7 @@ function Table_MonedaCot() {
             for (itemArray in ArrayMonedaCot) {
                 if (ArrayMonedaCot[itemArray].MonedaCot_ID != 0) {
                     vl_Index_MonedaCot = parseInt(ArrayMonedaCot[itemArray].Index) - 1;
-                    html_MonedaCot += "<tr id= 'TMonedaCot_" + vl_Index_MonedaCot + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + vl_Index_MonedaCot + "')\"></img><span>Eliminar Cotización Moneda</span></span></td><td>" + ArrayMonedaCot[itemArray].MonedaCot_ID + " - " + ArrayMonedaCot[itemArray].DescripMoneda + "</td><td>" + valFecha(ArrayMonedaCot[itemArray].Fecha) + "</td><td>" + ArrayMonedaCot[itemArray].ValorCotizacion + "</td><td>" + ArrayMonedaCot[itemArray].UsuarioCreacion + "</td><td>" + ArrayMonedaCot[itemArray].FechaCreacion + "</td><td>" + ArrayMonedaCot[itemArray].UsuarioActualizacion + "</td><td>" + ArrayMonedaCot[itemArray].FechaActualizacion + "</td></tr>";
+                    html_MonedaCot += "<tr id= 'TMonedaCot_" + vl_Index_MonedaCot + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + vl_Index_MonedaCot + "')\"></img><span>Eliminar Cotización Moneda</span></span></td><td>" + ArrayMonedaCot[itemArray].MonedaCot_ID + " - " + ArrayMonedaCot[itemArray].DescripMoneda + "</td><td>" + valFecha(ArrayMonedaCot[itemArray].Fecha) + "</td><td>" + Convert_Decimal_Grid(ArrayMonedaCot[itemArray].ValorCotizacion) + "</td><td>" + ArrayMonedaCot[itemArray].UsuarioCreacion + "</td><td>" + ArrayMonedaCot[itemArray].FechaCreacion + "</td><td>" + ArrayMonedaCot[itemArray].UsuarioActualizacion + "</td><td>" + ArrayMonedaCot[itemArray].FechaActualizacion + "</td></tr>";
                 }
             }
             break;
@@ -283,7 +283,7 @@ function Editar(vp_Index) {
     $("#Select_Moneda").val(ArrayMonedaCot[vp_Index].MonedaCot_ID);
     $("#Select_Moneda").attr("disabled", "disabled");
     $("#Txt_Fecha").val(valFecha(ArrayMonedaCot[vp_Index].Fecha));
-    $("#Txt_Valor").val(ArrayMonedaCot[vp_Index].ValorCotizacion);
+    $("#Txt_Valor").val(Convert_Decimal_Grid(ArrayMonedaCot[vp_Index].ValorCotizacion));
     editID = ArrayMonedaCot[vp_Index].MonedaCot_ID;
     $("#Btnguardar").attr("value", "Actualizar");
 
