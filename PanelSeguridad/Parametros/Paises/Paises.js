@@ -195,7 +195,6 @@ function HabilitarPanel(opcion) {
             $("#Txt_ID").removeAttr("disabled");
             $("#Btnguardar").attr("value", "Guardar");
             $("#Btnguardar").css("display", "inline-table");
-            Enabled_Pais();
             ResetError();
             Clear();
             estado = opcion;
@@ -214,7 +213,6 @@ function HabilitarPanel(opcion) {
             $("#TablaConsulta").css("display", "inline-table");
             $(".container_TGrid").html("");
             estado = opcion;
-            Enabled_Pais();
             ResetError();
             Clear();
             break;
@@ -304,8 +302,8 @@ function Search_Pais(vp_index) {
     editID = ArrayPaises[vp_index].Cod;
     $("#TxtSWIFT").val(ArrayPaises[vp_index].SWIFT);
 
-    setTimeout("CargaCombos('" + ArrayPaises[vp_index].Moneda  + "', '" + ArrayPaises[vp_index].Calendario_ID + "')", 400);
-    
+    setTimeout("CargaCombos('" + ArrayPaises[vp_index].Moneda + "', '" + ArrayPaises[vp_index].Calendario_ID + "')", 400);
+
 }
 
 //carga combos que dependen de una transaccion

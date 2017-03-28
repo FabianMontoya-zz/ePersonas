@@ -527,6 +527,13 @@ Public Class CalendarioSQLClass
         Select Case vp_Obj_Cliente.TipoSQL
             Case "Calendar"
                 vl_sql_filtro.Append("WHERE c.CA_Nit_ID = '0' OR c.CA_NIT_ID = '" & vp_Obj_Cliente.Nit_ID & "' ORDER BY c.CA_Nit_ID, c.CA_Calendario_ID ASC ")
+
+            Case "Sucursal"
+                vl_sql_filtro.Append("WHERE  c.CA_NIT_ID = '" & vp_Obj_Cliente.Nit_ID & "' ORDER BY c.CA_Nit_ID, c.CA_Calendario_ID ASC ")
+
+            Case "Paises"
+                vl_sql_filtro.Append("WHERE c.CA_NIT_ID = '0' ORDER BY c.CA_Nit_ID, c.CA_Calendario_ID ASC ")
+
         End Select
 
         Dim vl_S_SQLString As String = sql.ToString & vl_sql_filtro.ToString
