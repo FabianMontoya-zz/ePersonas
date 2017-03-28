@@ -70,12 +70,14 @@ function transacionAjax_Calendario(State) {
             }
             else {
                 Matrix_Calendarios = JSON.parse(result);
-                CargaCalendarios(Matrix_Calendarios, "Select_Calendario", "");
             }
         },
         error: function () {
 
-        }
+        },
+    }).done(function () {
+        Charge_Combos_Depend_Nit(Matrix_Calendarios, "Select_Calendario", "", "");
+
     });
 }
 
@@ -123,25 +125,13 @@ function transacionAjax_Paises(State, filtro, opcion) {
 function transacionAjax_Paises_create(State) {
 
     var ID;
-    var param;
-    var moneda;
-    var calendario_id;
-
+      
     if (State == "modificar") {
         ID = editID;
     } else {
         ID = $("#Txt_Codigo").val();
     }
-
-
-    for (item in Matrix_Calendarios) {
-        if (Matrix_Calendarios[item].Index == $("#Select_Calendario").val()) {
-            calendario_id = Matrix_Calendarios[item].Calendario_ID;
-            break;
-        }
-    }
-
-
+    
     $.ajax({
         url: "PaisesAjax.aspx",
         type: "POST",
@@ -152,7 +142,7 @@ function transacionAjax_Paises_create(State) {
             "Pais": $("#Txt_Pais").val(),
             "Moneda": $("#Select_moneda").val(),
             "SWIFT": $("#TxtSWIFT").val(),
-            "Calendario_ID": calendario_id,
+            "Calendario_ID": $("#Select_Calendario").val(),
             "user": User
         },
         //Transaccion Ajax en proceso

@@ -53,7 +53,7 @@ function transacionAjax_EmpresaNit(vp_State) {
             }
             else {
                 ArrayEmpresaNit = JSON.parse(result);
-                charge_CatalogList(ArrayEmpresaNit, "Select_EmpresaNit", "Generico");
+                charge_CatalogList(ArrayEmpresaNit, "Select_EmpresaNit", 1);
             }
         },
         error: function () {
@@ -106,13 +106,13 @@ function transacionAjax_Sucursal(vp_State, filtro, opcion) {
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transaccionAjax_MDirecciones(State, vp_Nit) {
+function transaccionAjax_MDirecciones(vp_State, vp_Nit) {
     $.ajax({
         url: "SucursalAjax.aspx",
         type: "POST",
         //crear json
         data: {
-            "action": State,
+            "action": vp_State,
             "tabla": 'Direcciones',
             "NIT": vp_Nit
         },
@@ -123,7 +123,7 @@ function transaccionAjax_MDirecciones(State, vp_Nit) {
             }
             else {
                 Matrix_Direcciones = JSON.parse(result);
-             }
+            }
         },
         error: function () {
 
@@ -136,15 +136,15 @@ function transaccionAjax_MDirecciones(State, vp_Nit) {
 }
 
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_Calendario(State) {
+function transacionAjax_Calendario(vp_State, vp_Nit) {
     $.ajax({
         url: "SucursalAjax.aspx",
         type: "POST",
         //crear json
         data: {
-            "action": State,
+            "action": vp_State,
             "tabla": 'CALENDARIOS',
-            "Nit": $("#Select_EmpresaNit").val()
+            "Nit": vp_Nit
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -161,7 +161,7 @@ function transacionAjax_Calendario(State) {
         async: false,
         cache: false
     }).done(function () {
-        CargaCalendarios(Matrix_Calendarios, "Select_Calendario", "");
+        Charge_Combos_Depend_Nit(Matrix_Calendarios, "Select_Calendario", "", "");
     });
 }
 
@@ -206,18 +206,15 @@ function transacionAjax_Sucursal_create(vp_State) {
 
                 case "Existe":
                     Mensaje_General("Sucursal Existente", "La Sucursal que desea ingresar ya existe en el sistema, favor revisar.", "E");
-                    $("#ImgNIT").css("display", "inline-table");
-                    $("#ImgID").css("display", "inline-table");
                     break;
 
                 case "Exito":
                     if (estado == "modificar") {
-                        Mensaje_General("¡Exito!", "La Sucursal " + vl_ID + " se ha modificado exitosamente.", "S");
-                        HabilitarPanel('modificar');
+                        Mensaje_General("¡Exito!", "La Sucursal  se ha modificado exitosamente.", "S");
                         Clear();
                     }
                     else {
-                        Mensaje_General("¡Exito!", "La Sucursal " + vl_ID + " se ha registrado exitosamente en el sistema.", "S");
+                        Mensaje_General("¡Exito!", "La Sucursal  se ha ingresado exitosamente en el sistema.", "S");
                         Clear();
                     }
                     break;
@@ -249,12 +246,13 @@ function transacionAjax_Sucursal_delete(vp_State) {
         //Transaccion Ajax en proceso
         success: function (result) {
             if (result == "Error") {
-                Mensaje_General("Disculpenos :(", "Ocurrió un error y no se actualizó el estado de la Sucursal.", "W");
+                $("#dialog_eliminar").dialog("close");
+                Mensaje_General("Disculpenos :(", "Ocurrió un error y no se elimino la sucursal.", "W");
             }
             else {
-                Mensaje_General("¡Exito!", "El Estado de la Sucursal " + vl_ID + " se ha actualizado correctamente.", "S");
-                HabilitarPanel('eliminar');
-                transacionAjax_Sucursal("consulta", "N", "ALL");
+                $("#dialog_eliminar").dialog("close");
+                Mensaje_General("¡Exito!", "La sucursal  se ha Eliminado correctamente.", "S");
+                $(".container_TGrid").html("");
                 Clear();
             }
         },

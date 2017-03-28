@@ -101,7 +101,7 @@
                             <td id="TD_TID" style="width: 10%;">
                                 <span class="cssToolTip_Form">
                                     <input type="text" id="Txt_ID" maxlength="5" class="Numeric" style="width: 20%;" />
-                                    <span class="Spam_AST"></span></span>
+                                    <span class="Spam_AN"></span></span>
                             </td>
                             <td style="padding-bottom: 25px; width: 12%;">
                                 <span class="cssToolTip">
@@ -112,7 +112,6 @@
 
                         </tr>
                     </table>
-
                     <table id="T_Descripcion" style="width: 80%; margin-left: 8%;">
                         <tr>
                             <td class="Label_Bold" style="width: 17.5%;">Descripción
@@ -131,17 +130,16 @@
                         </tr>
 
                     </table>
-                    <table id="T_Direccion" style="width: 90%; margin-left: 8%;">
+                    <table id="T_Direccion" style="width: 80%; margin-left: 8%;">
                         <tr>
-                            <td style="width: 10.5%;" class="Label_Bold">Dirección Asociada
-                            </td>
-                            <td style="width: 50%;">
+                            <td style="width: 17.3%;" class="Label_Bold">Dirección </td>
+                            <td style="width: 40%;">
                                 <select id="Select_Direccion" class="C_Chosen">
                                 </select>
                             </td>
-                            <td style="padding-bottom: 15px; width: 7%;">
+                            <td style="padding-bottom: 25px; width: 60%;">
                                 <span class="cssToolTip_L">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img16"
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgDirec"
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
@@ -149,13 +147,13 @@
                     </table>
                     <table id="Table_Calendario" style="width: 80%; margin-left: 8%;">
                         <tr>
-                            <td style="width: 17.4%;" class="Label_Bold">Calendario
+                            <td style="width: 17.3%;" class="Label_Bold">Calendario
                             </td>
-                            <td>
+                            <td  style="width: 40%;">
                                 <select id="Select_Calendario" class="C_Chosen">
                                 </select>
                             </td>
-                            <td style="padding-bottom: 22px; width: 10%;">
+                            <td style="padding-bottom: 25px; width: 60%;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgCal"
                                         src="../../images/error.png" />

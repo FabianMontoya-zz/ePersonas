@@ -199,7 +199,7 @@ Public Class SucursalAjax
         Dim ObjListDroplist As New List(Of CalendarioClass)
         Dim obj As New ClienteClass
         obj.Nit_ID = Request.Form("Nit")
-        obj.TipoSQL = "Calendar"
+        obj.TipoSQL = "Sucursal"
 
         ObjListDroplist = SQL.Read_Matrix_Calendarios(obj)
         Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
@@ -218,7 +218,7 @@ Public Class SucursalAjax
         obj.TipoSQL = "Sucursal"
 
         Dim ObjList_Matrix As New List(Of ClienteClass)
-        ObjList_Matrix = SQL.Matrix_Personas_Direcciones_Sucursal(obj)
+        ObjList_Matrix = SQL.Matrix_Personas_Direcciones(obj)
 
         Response.Write(JsonConvert.SerializeObject(ObjList_Matrix.ToArray()))
 

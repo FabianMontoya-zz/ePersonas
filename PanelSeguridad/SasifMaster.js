@@ -943,7 +943,6 @@ function Convert_Decimal_Grid(vp_Index) {
     return vl_Value_Coma;
 }
 
-
 //validar la longitud del campo number
 function maxLengthTypeNumber(object) {
     if (object.value.length > object.maxLength)
@@ -1391,6 +1390,13 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
                 $("#" + Selector).append("<option value='" + Matrix[Item].ID + "'> " + Matrix[Item].ID + " - " + Matrix[Item].descripcion + "</option>");
             }
             break;
+
+        case "Select_Calendario": //Calendario de Paises
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].Calendario_ID + "'> " + Matrix[Item].Calendario_ID + " - " + Matrix[Item].Descripcion + "</option>");
+            }
+            break;
+
     }
 
     $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
@@ -1449,7 +1455,7 @@ function Charge_Combo_Persona(Matrix, Selector, Nit, Index_Edit) {
 
         case "Select_Direccion"://Direcciones por persona
             for (Item in Matrix) {
-                $("#" + Selector).append("<option value='" + Matrix[Item].Index_Direccion + "'>" + Matrix[Item].Direccion + "</option>");
+                $("#" + Selector).append("<option value='" + Matrix[Item].Consecutivo + "'>"+ Matrix[Item].Consecutivo + " - " + Matrix[Item].Direccion + "</option>");
             }
             break;
     }
@@ -1638,11 +1644,6 @@ function CargaCalendarios(Matrix, Selector, Index_Edit) {
 
     switch (Selector) {
 
-        case "Select_Calendario": //Calendario de Paises
-            for (Item in Matrix) {
-                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Index + " - " + Matrix[Item].Descripcion + "</option>");
-            }
-            break;
         case "Select_Calendario_TS": //Calendario de Tipo Servicio
             for (Item in Matrix) {
                 $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Index + " - " + Matrix[Item].Descripcion + "</option>");
