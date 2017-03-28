@@ -114,8 +114,8 @@
                             </td>
                             <td style="width: 150px;">
                                 <span class="cssToolTip_Form">
-                                    <input type="text" id="Txt_Valor" maxlength="18" class="Decimal" />
-                                    <span class="Spam_ADec"></span></span>
+                                    <input type="text" id="Txt_Valor" maxlength="17" class="Decimal" />
+                                    <span class="Spam_ADec_2"></span></span>
                             </td>
                             <td style="width: 40px; padding-bottom: 25px;">
                                 <span class="cssToolTip">
