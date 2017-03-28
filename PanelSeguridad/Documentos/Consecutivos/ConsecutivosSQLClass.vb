@@ -35,7 +35,7 @@ Public Class ConsecutivosSQLClass
                         "      C_Usuario_Actualizacion, " & _
                         "      C_FechaActualizacion, " & _
                         "      CLI.CLI_Nombre, " & _
-                        "      ROW_NUMBER() OVER(ORDER BY C_Nit_ID DESC) AS Index_RutaDocumentos " & _
+                        "      ROW_NUMBER() OVER(ORDER BY C_Nit_ID ASC) AS Index_RutaDocumentos " & _
                         " FROM CONSECUTIVOS C " & _
                         " LEFT JOIN " & BD_Param & ".dbo.CLIENTE CLI ON CLI.CLI_Document_ID =  " & _
                         " CASE	 SUBSTRING(C.C_Nit_ID,0,LEN(C.C_Nit_ID)) " & _
@@ -54,7 +54,7 @@ Public Class ConsecutivosSQLClass
                         "      C_Usuario_Actualizacion, " & _
                         "      C_FechaActualizacion, " & _
                         "      CLI.CLI_Nombre, " & _
-                        "      ROW_NUMBER() OVER(ORDER BY C_Nit_ID DESC) AS Index_RutaDocumentos " & _
+                        "      ROW_NUMBER() OVER(ORDER BY C_Nit_ID ASC) AS Index_RutaDocumentos " & _
                         " FROM CONSECUTIVOS C " & _
                         " LEFT JOIN " & BD_Param & ".dbo.CLIENTE CLI ON CLI.CLI_Document_ID =  " & _
                         " CASE	 SUBSTRING(C.C_Nit_ID,0,LEN(C.C_Nit_ID)) " & _
@@ -71,7 +71,7 @@ Public Class ConsecutivosSQLClass
                         "      C_Usuario_Actualizacion, " & _
                         "      C_FechaActualizacion, " & _
                         "      CLI.CLI_Nombre, " & _
-                        "      ROW_NUMBER() OVER(ORDER BY C_Nit_ID DESC) AS Index_RutaDocumentos " & _
+                        "      ROW_NUMBER() OVER(ORDER BY C_Nit_ID ASC) AS Index_RutaDocumentos " & _
                         " FROM CONSECUTIVOS C " & _
                         " LEFT JOIN " & BD_Param & ".dbo.CLIENTE CLI ON CLI.CLI_Document_ID =  " & _
                         " CASE	 SUBSTRING(C.C_Nit_ID,0,LEN(C.C_Nit_ID)) " & _
@@ -223,7 +223,7 @@ Public Class ConsecutivosSQLClass
                         "      CG_FechaCreacion, " & _
                         "      CG_Usuario_Actualizacion, " & _
                         "      CG_FechaActualizacion, " & _
-                        "      ROW_NUMBER() OVER(ORDER BY CG_Consecutivo_ID DESC) AS Index_RutaDocumentos " & _
+                        "      ROW_NUMBER() OVER(ORDER BY CG_Consecutivo_ID ASC) AS Index_RutaDocumentos " & _
                         " FROM CONSECUTIVOS_GENERAL C ")
         Else
 
@@ -235,7 +235,7 @@ Public Class ConsecutivosSQLClass
                         "      CG_FechaCreacion, " & _
                         "      CG_Usuario_Actualizacion, " & _
                         "      CG_FechaActualizacion, " & _
-                        "      ROW_NUMBER() OVER(ORDER BY CG_Consecutivo_ID DESC) AS Index_RutaDocumentos " & _
+                        "      ROW_NUMBER() OVER(ORDER BY CG_Consecutivo_ID ASC) AS Index_RutaDocumentos " & _
                         " FROM CONSECUTIVOS_GENERAL C ")
             Else
                 sql.Append(" SELECT CG_Consecutivo_ID, " & _
@@ -245,7 +245,7 @@ Public Class ConsecutivosSQLClass
                         "      CG_FechaCreacion, " & _
                         "      CG_Usuario_Actualizacion, " & _
                         "      CG_FechaActualizacion, " & _
-                        "      ROW_NUMBER() OVER(ORDER BY CG_Consecutivo_ID DESC) AS Index_RutaDocumentos " & _
+                        "      ROW_NUMBER() OVER(ORDER BY CG_Consecutivo_ID ASC) AS Index_RutaDocumentos " & _
                         " FROM CONSECUTIVOS_GENERAL C " & _
                            " WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
             End If

@@ -1,4 +1,4 @@
-﻿/*--------------- region de variables globales --------------------*/
+﻿ /*--------------- region de variables globales --------------------*/
 var ArrayConsecutivos_General = [];
 var ArrayCombo = [];
 var ArrayConsecutivos_GeneralDep = [];
@@ -230,30 +230,30 @@ function Table_Consecutivos_General() {
     switch (estado) {
 
         case "buscar":
-            html_Consecutivos_General = "<table id='TConsecutivos_General' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Descripción</th><th>Codigo</th><th>Consecutivo</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
+            html_Consecutivos_General = "<table id='TConsecutivos_General' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Codigo</th><th>Descripción</th><th>Consecutivo</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
             for (itemArray in ArrayConsecutivos_General) {
                 if (ArrayConsecutivos_General[itemArray].Consecutivos_General_ID != 0) {
-                    html_Consecutivos_General += "<tr id= 'TConsecutivos_General_" + ArrayConsecutivos_General[itemArray].Consecutivos_General_ID + "'><td>" + ArrayConsecutivos_General[itemArray].Descripcion + "</td><td>" + ArrayConsecutivos_General[itemArray].Consecutivo_ID + "</td><td>" + ArrayConsecutivos_General[itemArray].Consecutivo + "</td><td>" + ArrayConsecutivos_General[itemArray].UsuarioCreacion + "</td><td>" + ArrayConsecutivos_General[itemArray].FechaCreacion + "</td><td>" + ArrayConsecutivos_General[itemArray].UsuarioActualizacion + "</td><td>" + ArrayConsecutivos_General[itemArray].FechaActualizacion + "</td></tr>";
+                    html_Consecutivos_General += "<tr id= 'TConsecutivos_General_" + ArrayConsecutivos_General[itemArray].Consecutivos_General_ID + "'><td>" + ArrayConsecutivos_General[itemArray].Consecutivo_ID + "</td><td>" + ArrayConsecutivos_General[itemArray].Descripcion + "</td><td>" + ArrayConsecutivos_General[itemArray].Consecutivo + "</td><td>" + ArrayConsecutivos_General[itemArray].UsuarioCreacion + "</td><td>" + ArrayConsecutivos_General[itemArray].FechaCreacion + "</td><td>" + ArrayConsecutivos_General[itemArray].UsuarioActualizacion + "</td><td>" + ArrayConsecutivos_General[itemArray].FechaActualizacion + "</td></tr>";
                 }
             }
             break;
 
         case "modificar":
-            html_Consecutivos_General = "<table id='TConsecutivos_General' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Descripción</th><th>Codigo</th><th>Consecutivo</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
+            html_Consecutivos_General = "<table id='TConsecutivos_General' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Codigo</th><th>Descripción</th><th>Consecutivo</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
             for (itemArray in ArrayConsecutivos_General) {
                 if (ArrayConsecutivos_General[itemArray].Consecutivos_General_ID != 0) {
                     Index_Pos = parseInt(ArrayConsecutivos_General[itemArray].Index) - 1;
-                    html_Consecutivos_General += "<tr id= 'TConsecutivos_General_" + ArrayConsecutivos_General[itemArray].Consecutivos_General_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + Index_Pos + "')\"></img><span>Editar Consecutivo General</span></span></td><td>" + ArrayConsecutivos_General[itemArray].Descripcion + "</td><td>" + ArrayConsecutivos_General[itemArray].Consecutivo_ID + "</td><td>" + ArrayConsecutivos_General[itemArray].Consecutivo + "</td><td>" + ArrayConsecutivos_General[itemArray].UsuarioCreacion + "</td><td>" + ArrayConsecutivos_General[itemArray].FechaCreacion + "</td><td>" + ArrayConsecutivos_General[itemArray].UsuarioActualizacion + "</td><td>" + ArrayConsecutivos_General[itemArray].FechaActualizacion + "</td></tr>";
+                    html_Consecutivos_General += "<tr id= 'TConsecutivos_General_" + ArrayConsecutivos_General[itemArray].Consecutivos_General_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + Index_Pos + "')\"></img><span>Editar Consecutivo General</span></span></td><td>" + ArrayConsecutivos_General[itemArray].Consecutivo_ID + "</td><td>" + ArrayConsecutivos_General[itemArray].Descripcion + "</td><td>" + ArrayConsecutivos_General[itemArray].Consecutivo + "</td><td>" + ArrayConsecutivos_General[itemArray].UsuarioCreacion + "</td><td>" + ArrayConsecutivos_General[itemArray].FechaCreacion + "</td><td>" + ArrayConsecutivos_General[itemArray].UsuarioActualizacion + "</td><td>" + ArrayConsecutivos_General[itemArray].FechaActualizacion + "</td></tr>";
                 }
             }
             break;
 
         case "eliminar":
-            html_Consecutivos_General = "<table id='TConsecutivos_General' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Descripción</th><th>Codigo</th><th>Consecutivo</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
+            html_Consecutivos_General = "<table id='TConsecutivos_General' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Codigo</th><th>Descripción</th><th>Consecutivo</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
             for (itemArray in ArrayConsecutivos_General) {
                 if (ArrayConsecutivos_General[itemArray].Consecutivos_General_ID != 0) {
                     Index_Pos = parseInt(ArrayConsecutivos_General[itemArray].Index) - 1;
-                    html_Consecutivos_General += "<tr id= 'TConsecutivos_General_" + ArrayConsecutivos_General[itemArray].Consecutivos_General_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + Index_Pos + "')\"></img><span>Eliminar Consecutivo General</span></span></td><td>" + ArrayConsecutivos_General[itemArray].Descripcion + "</td><td>" + ArrayConsecutivos_General[itemArray].Consecutivo_ID + "</td><td>" + ArrayConsecutivos_General[itemArray].Consecutivo + "</td><td>" + ArrayConsecutivos_General[itemArray].UsuarioCreacion + "</td><td>" + ArrayConsecutivos_General[itemArray].FechaCreacion + "</td><td>" + ArrayConsecutivos_General[itemArray].UsuarioActualizacion + "</td><td>" + ArrayConsecutivos_General[itemArray].FechaActualizacion + "</td></tr>";
+                    html_Consecutivos_General += "<tr id= 'TConsecutivos_General_" + ArrayConsecutivos_General[itemArray].Consecutivos_General_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + Index_Pos + "')\"></img><span>Eliminar Consecutivo General</span></span></td><td>" + ArrayConsecutivos_General[itemArray].Consecutivo_ID + "</td><td>" + ArrayConsecutivos_General[itemArray].Descripcion + "</td><td>" + ArrayConsecutivos_General[itemArray].Consecutivo + "</td><td>" + ArrayConsecutivos_General[itemArray].UsuarioCreacion + "</td><td>" + ArrayConsecutivos_General[itemArray].FechaCreacion + "</td><td>" + ArrayConsecutivos_General[itemArray].UsuarioActualizacion + "</td><td>" + ArrayConsecutivos_General[itemArray].FechaActualizacion + "</td></tr>";
                 }
             }
             break;
