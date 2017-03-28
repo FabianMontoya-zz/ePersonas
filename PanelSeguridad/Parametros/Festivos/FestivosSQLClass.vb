@@ -29,14 +29,14 @@ Public Class FestivosSQLClass
             If vp_S_Contenido = "ALL" Then
                 sql.Append("SELECT F_Año, F_Mes_Dia, F_FechaActualizacion, F_Usuario, SUBSTRING(convert(nvarchar(4),F_Mes_Dia), 1, 2)as Mes, SUBSTRING(convert(nvarchar(4),F_Mes_Dia), 3, 4)as Dia FROM Festivos")
             Else
-                sql.Append("SELECT F_Año, F_Mes_Dia, F_FechaActualizacion, F_Usuario, SUBSTRING(convert(nvarchar(4),F_Mes_Dia), 1, 2)as Mes, SUBSTRING(convert(nvarchar(4),F_Mes_Dia), 3, 4)as Dia FROM Festivos " & _
+                sql.Append("SELECT F_Año, F_Mes_Dia, F_FechaActualizacion, F_Usuario, SUBSTRING(convert(nvarchar(4),F_Mes_Dia), 1, 2)as Mes, SUBSTRING(convert(nvarchar(4),F_Mes_Dia), 3, 4)as Dia FROM Festivos " &
                       "WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
             End If
         End If
 
         StrQuery = sql.ToString
 
-        ObjListFestivos = listFestivos(StrQuery, CONEXION)
+        ObjListFestivos = listFestivos(StrQuery, CONEXION, "Consulta")
 
         Return ObjListFestivos
 
@@ -57,11 +57,11 @@ Public Class FestivosSQLClass
         Dim StrQueryID As String = ""
         Dim StrQuery As String = ""
 
-        sql.AppendLine("INSERT Festivos (" & _
-            "F_Año," & _
-            "F_Mes_Dia," & _
-            "F_FechaActualizacion," & _
-            "F_Usuario" & _
+        sql.AppendLine("INSERT Festivos (" &
+            "F_Año," &
+            "F_Mes_Dia," &
+            "F_FechaActualizacion," &
+            "F_Usuario" &
             ")")
         sql.AppendLine("VALUES (")
         sql.AppendLine("'" & vp_Obj_Festivos.Year & "',")
@@ -121,7 +121,7 @@ Public Class FestivosSQLClass
 
         Dim sql As New StringBuilder
 
-        sql.Append(" SELECT T_IndexColumna As ID, T_Traductor As descripcion FROM TC_TABLAS " & _
+        sql.Append(" SELECT T_IndexColumna As ID, T_Traductor As descripcion FROM TC_TABLAS " &
                    " WHERE T_Tabla = '" & vp_S_Table & "' AND T_Param = '1' ")
         StrQuery = sql.ToString
 
@@ -143,7 +143,7 @@ Public Class FestivosSQLClass
     ''' <param name="vg_S_StrConexion"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function listFestivos(ByVal vp_S_StrQuery As String, ByVal vg_S_StrConexion As String)
+    Public Function listFestivos(ByVal vp_S_StrQuery As String, ByVal vg_S_StrConexion As String, ByVal vp_S_TypeList As String)
 
         'inicializamos conexiones a la BD
         Dim objcmd As OleDbCommand = Nothing
@@ -161,24 +161,38 @@ Public Class FestivosSQLClass
         objcmd.CommandText = vp_S_StrQuery
         'ejecutamos consulta
         ReadConsulta = objcmd.ExecuteReader()
+        Select Case vp_S_TypeList
+            Case "Consulta"
+                'recorremos la consulta por la cantidad de datos en la BD
+                While ReadConsulta.Read
 
-        'recorremos la consulta por la cantidad de datos en la BD
-        While ReadConsulta.Read
+                    Dim objFestivos As New FestivosClass
+                    'cargamos datos sobre el objeto de login
+                    objFestivos.Year = ReadConsulta.GetValue(0)
+                    objFestivos.Mes_Dia = ReadConsulta.GetValue(1)
+                    objFestivos.FechaActualizacion = ReadConsulta.GetString(2)
+                    objFestivos.Usuario = ReadConsulta.GetString(3)
+                    objFestivos.StrMes = ReadConsulta.GetValue(4)
+                    objFestivos.StrDia = ReadConsulta.GetValue(5)
 
-            Dim objFestivos As New FestivosClass
-            'cargamos datos sobre el objeto de login
-            objFestivos.Year = ReadConsulta.GetValue(0)
-            objFestivos.Mes_Dia = ReadConsulta.GetValue(1)
-            objFestivos.FechaActualizacion = ReadConsulta.GetString(2)
-            objFestivos.Usuario = ReadConsulta.GetString(3)
-            objFestivos.StrMes = ReadConsulta.GetValue(4)
-            objFestivos.StrDia = ReadConsulta.GetValue(5)
+                    'agregamos a la lista
+                    ObjListFestivos.Add(objFestivos)
 
-            'agregamos a la lista
-            ObjListFestivos.Add(objFestivos)
+                End While
 
-        End While
+            Case "MatrizAll"
+                'recorremos la consulta por la cantidad de datos en la BD
+                While ReadConsulta.Read
 
+                    Dim objFestivos As New FestivosClass
+                    'cargamos datos sobre el objeto de login
+                    objFestivos.Year = ReadConsulta.GetValue(0)
+                    objFestivos.StrMes = ReadConsulta.GetValue(1)
+                    objFestivos.StrDia = ReadConsulta.GetValue(2)
+                    'agregamos a la lista
+                    ObjListFestivos.Add(objFestivos)
+                End While
+        End Select
         'cerramos conexiones
         ReadConsulta.Close()
         objConexBD.Close()
@@ -190,4 +204,26 @@ Public Class FestivosSQLClass
 
 #End Region
 
+#Region "OTRAS CONSULTAS"
+    ''' <summary>
+    ''' Función que Consulta todos los festivos que están en la tabla festivos
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function Read_All_Festivos()
+
+        Dim ObjList As New List(Of FestivosClass)
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("2")
+
+        Dim sql As New StringBuilder
+
+        sql.Append("SELECT F_Año, SUBSTRING(convert(nvarchar(4),F_Mes_Dia), 1, 2)as Mes, SUBSTRING(convert(nvarchar(4),F_Mes_Dia), 3, 4)as Dia FROM Festivos")
+        Dim StrQuery As String = sql.ToString
+
+        ObjList = listFestivos(StrQuery, Conexion, "MatrizAll")
+
+        Return ObjList
+
+    End Function
+#End Region
 End Class

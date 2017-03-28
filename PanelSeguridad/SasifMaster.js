@@ -33,11 +33,19 @@ Matrix_Mes[8] = [9, "Septiembre", 30];
 Matrix_Mes[9] = [10, "Octubre", 31];
 Matrix_Mes[10] = [11, "Noviembre", 30];
 Matrix_Mes[11] = [12, "Diciembre", 31];
+//FABIAN
+var D_Semana = [];
+D_Semana[0] = "Domingo";
+D_Semana[1] = "Lunes";
+D_Semana[2] = "Martes";
+D_Semana[3] = "Miércoles";
+D_Semana[4] = "Jueves";
+D_Semana[5] = "Viernes";
+D_Semana[6] = "Sábado";
 /*--------------- region de variables globales --------------------*/
 
 $(document).ready(function () {
     clearConsole();
-
     fecha();
 
     $(".C_Chosen").chosen({
@@ -822,6 +830,21 @@ function Change_Compara_Fecha_Menor(Selector1, Selector2) {
         $("#" + Selector2 + "").datepicker("option", "maxDate", rango);
     });
 
+}
+
+//FABIAN -- Función que valida si la fecha que se envia es o no un día festivo validando contra un array que contiene los días festivos
+function VerifyFestivo(year, month, day, ArrayFestivos) {
+    var IsFestivo = false;
+    for (var i in ArrayFestivos) {
+        var dayFestivo = parseInt(ArrayFestivos[i].StrDia);
+        var monthFestivo = parseInt(ArrayFestivos[i].StrMes);
+        var yearFestivo = parseInt(ArrayFestivos[i].Year);
+        if (yearFestivo == year && monthFestivo == month && dayFestivo == day) {
+            IsFestivo = true;
+            break;
+        }
+    }
+    return IsFestivo;
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -1641,6 +1664,11 @@ function CargaCalendarios(Matrix, Selector, Index_Edit) {
         case "Select_Calendario_SS": //Calendario de Sucursal Servicio
             for (Item in Matrix) {
                 $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Index + " - " + Matrix[Item].Descripcion + " - " + Matrix[Item].Tipo_Tabla + "</option>");
+            }
+            break;
+        case "Select_Calendario_CP": //Calendarios de Calendario Progresivo -- FABIAN
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Calendario_ID + " - " + Matrix[Item].Descripcion + "</option>");
             }
             break;
     }

@@ -2,12 +2,12 @@
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_CargaBusqueda(State) {
     $.ajax({
-        url: "CalendarioAjax.aspx",
+        url: "Calendario_ProgresivoAjax.aspx",
         type: "POST",
         //crear json
         data: {
             "action": State,
-            "tabla": 'Calendario'
+            "tabla": 'CalendarioProgresivo'
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -29,7 +29,7 @@ function transacionAjax_CargaBusqueda(State) {
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_EmpresaNit(State) {
     $.ajax({
-        url: "CalendarioAjax.aspx",
+        url: "Calendario_ProgresivoAjax.aspx",
         type: "POST",
         //crear json
         data: {
@@ -55,16 +55,40 @@ function transacionAjax_EmpresaNit(State) {
 }
 
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_Calendario(State) {
+function transacionAjax_ChargeFestivos(State) {
+    MatrizFestivos = [];
+    $.ajax({
+        url: "Calendario_ProgresivoAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                MatrizFestivos = [];
+            }
+            else {
+                MatrizFestivos = JSON.parse(result);
+            }
+        },
+        error: function () {
+            Mensaje_General("Error al consultar Festivos", "Lo sentimos, ocurrió un error mientras se cargaban los días festivos y la operación se ha cancelado. Intente más tarde la operación.", "E");
+        }
+    });
+}
+
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_ChargeCalendarios(State, NIT) {
     Matrix_Calendarios = [];
     $.ajax({
-        url: "SucursalServicioAjax.aspx",
+        url: "Calendario_ProgresivoAjax.aspx",
         type: "POST",
         //crear json
         data: {
             "action": State,
-            "tabla": 'CALENDARIOS',
-            "Nit": $("#Select_EmpresaNit").val()
+            "Nit": NIT
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -73,15 +97,12 @@ function transacionAjax_Calendario(State) {
             }
             else {
                 Matrix_Calendarios = JSON.parse(result);
+                CargaCalendarios(Matrix_Calendarios, "Select_Calendario_CP", "");
             }
         },
         error: function () {
 
-        },
-        async: false,
-        cache: false
-    }).done(function () {
-        CargaCalendarios(Matrix_Calendarios, "Select_Calendario", "");
+        }
     });
 }
 
@@ -98,7 +119,7 @@ function transacionAjax_Calendario(State, filtro, opcion) {
     }
 
     $.ajax({
-        url: "CalendarioAjax.aspx",
+        url: "Calendario_ProgresivoAjax.aspx",
         type: "POST",
         //crear json
         data: {
@@ -142,7 +163,7 @@ function transacionAjax_Calendario_create(State) {
 
     ListC_Semana = JSON.stringify(ArrayC_Semana);
     $.ajax({
-        url: "CalendarioAjax.aspx",
+        url: "Calendario_ProgresivoAjax.aspx",
         type: "POST",
         //crear json
         data: {
@@ -200,7 +221,7 @@ function transacionAjax_Calendario_create(State) {
 function transacionAjax_Calendario_delete(State) {
 
     $.ajax({
-        url: "CalendarioAjax.aspx",
+        url: "Calendario_ProgresivoAjax.aspx",
         type: "POST",
         //crear json
         data: {
@@ -245,23 +266,35 @@ function transacionAjax_Calendario_delete(State) {
 /*-------------------- carga arrays por día ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_ArrayC_Semana(State) {
-    OpenControl();
+    //OpenControl();
+    var Index_Calendar = $("#Select_Calendario_CP").val();
+    var ID_Calendar = "";
+    var Nit_ID = "";
+    //Buscamos los datos que identifican este calendario
+    for (var i in Matrix_Calendarios) {
+        if(Index_Calendar == Matrix_Calendarios[i].Index){
+            ID_Calendar = Matrix_Calendarios[i].Calendario_ID;
+            Nit_ID = Matrix_Calendarios[i].Nit_ID;
+            break;
+        }
+    }
     $.ajax({
-        url: "CalendarioAjax.aspx",
+        url: "Calendario_ProgresivoAjax.aspx",
         type: "POST",
         //crear json
         data: {
             "action": State,
-            "ID_Calendario": editID,
-            "Nit_ID": editNit_ID
+            "ID_Calendario": ID_Calendar,
+            "Nit_ID": Nit_ID
         },
         //Transaccion Ajax en proceso
         success: function (result) {
             if (result == "") {
-                ArrayC_Semana_Edit = [];
+                ArrayC_Semana = [];
             }
             else {
-                ArrayC_Semana_Edit = JSON.parse(result);
+                ArrayC_Semana = JSON.parse(result);
+                ValidarLaborales();
             }
         },
         error: function () {
