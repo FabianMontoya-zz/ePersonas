@@ -38,7 +38,7 @@ Public Class SucursalSQLClass
                                   "              D.D_Direccion,  " & _
                                   "              CA.CA_Descripcion  " & _
                                   " FROM SUCURSAL S " & _
-                                  " INNER JOIN DIRECCIONES D ON D.D_Nit_ID = S.SUC_Nit_ID " & _
+                                  " LEFT JOIN DIRECCIONES D ON D.D_Nit_ID = S.SUC_Nit_ID " & _
                                   "                                                   AND D.D_Consecutivo = S.SUC_Direccion_ID " & _
                                   "                                                   AND D.D_Document_ID = " & _
                                   "                                                   CASE SUBSTRING(SUC_Nit_ID,0,LEN(SUC_Nit_ID)) " & _
@@ -63,7 +63,7 @@ Public Class SucursalSQLClass
                                       "              D.D_Direccion,  " & _
                                       "              CA.CA_Descripcion  " & _
                                       " FROM SUCURSAL S " & _
-                                      " INNER JOIN DIRECCIONES D ON D.D_Nit_ID = S.SUC_Nit_ID " & _
+                                      " LEFT JOIN DIRECCIONES D ON D.D_Nit_ID = S.SUC_Nit_ID " & _
                                       "                                                   AND D.D_Consecutivo = S.SUC_Direccion_ID " & _
                                       "                                                   AND D.D_Document_ID = " & _
                                       "                                                   CASE SUBSTRING(SUC_Nit_ID,0,LEN(SUC_Nit_ID)) " & _
@@ -86,7 +86,7 @@ Public Class SucursalSQLClass
                                       "              D.D_Direccion,  " & _
                                       "              CA.CA_Descripcion  " & _
                                       " FROM SUCURSAL S " & _
-                                      " INNER JOIN DIRECCIONES D ON D.D_Nit_ID = S.SUC_Nit_ID " & _
+                                      " LEFT JOIN DIRECCIONES D ON D.D_Nit_ID = S.SUC_Nit_ID " & _
                                       "                                                   AND D.D_Consecutivo = S.SUC_Direccion_ID " & _
                                       "                                                   AND D.D_Document_ID = " & _
                                       "                                                   CASE SUBSTRING(SUC_Nit_ID,0,LEN(SUC_Nit_ID)) " & _
@@ -264,9 +264,9 @@ Public Class SucursalSQLClass
                     obj.UsuarioActualizacion = ReadConsulta.GetValue(7)
                     obj.FechaActualizacion = ReadConsulta.GetValue(8)
                     obj.Index = ReadConsulta.GetValue(9)
-                    obj.DescripDireccion = ReadConsulta.GetValue(10)
-                    obj.DescripCalendario = ReadConsulta.GetValue(11)
-
+                    If Not (IsDBNull(ReadConsulta.GetValue(10))) Then obj.DescripDireccion = ReadConsulta.GetValue(10) Else obj.DescripDireccion = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(11))) Then obj.DescripCalendario = ReadConsulta.GetValue(11) Else obj.DescripCalendario = ""
+         
                     'agregamos a la lista
                     ObjList.Add(obj)
 
