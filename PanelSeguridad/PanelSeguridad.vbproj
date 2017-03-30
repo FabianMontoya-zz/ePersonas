@@ -213,7 +213,6 @@
     <Content Include="Administrador\Adm_ResetUser\Adm_ResetUser.aspx" />
     <Content Include="Administrador\Adm_ResetUser\Adm_ResetUser.js" />
     <Content Include="Administrador\Adm_ResetUser\Adm_ResetUserAjax.aspx" />
-    <Content Include="Administrador\Adm_ResetUser\Adm_ResetUserTrasaccionsAjax.js" />
     <Content Include="Administrador\Adm_roles\Adm_Roles.aspx" />
     <Content Include="Administrador\Adm_roles\Adm_Roles.js" />
     <Content Include="Administrador\Adm_roles\Adm_RolesAjax.aspx" />
@@ -426,6 +425,10 @@
     <Content Include="Images\settings.png" />
     <Content Include="Images\success.png" />
     <Content Include="Images\waiting.png" />
+    <Content Include="Impuestos\Impuesto_Gasto\Impuesto_Gasto.aspx" />
+    <Content Include="Impuestos\Impuesto_Gasto\Impuesto_Gasto.js" />
+    <Content Include="Impuestos\Impuesto_Gasto\Impuesto_GastoAjax.aspx" />
+    <Content Include="Impuestos\Impuesto_Gasto\Impuesto_GastoTrasaccionsAjax.js" />
     <Content Include="Impuestos\menu.js" />
     <Content Include="Impuestos\SasifMaster_Cosult.js" />
     <Content Include="Ingreso_New\Entrada\Ingreso.aspx" />
@@ -494,10 +497,6 @@
     <Content Include="Parametros\Festivos\Festivos.js" />
     <Content Include="Parametros\Festivos\FestivosAjax.aspx" />
     <Content Include="Parametros\Festivos\FestivosTrasaccionsAjax.js" />
-    <Content Include="Impuestos\Impuesto_Gasto\Impuesto_Gasto.aspx" />
-    <Content Include="Impuestos\Impuesto_Gasto\Impuesto_Gasto.js" />
-    <Content Include="Impuestos\Impuesto_Gasto\Impuesto_GastoAjax.aspx" />
-    <Content Include="Impuestos\Impuesto_Gasto\Impuesto_GastoTrasaccionsAjax.js" />
     <Content Include="Parametros\Inf_Impuesto\Inf_Impuesto.aspx" />
     <Content Include="Parametros\Inf_Impuesto\Inf_Impuesto.js" />
     <Content Include="Parametros\Inf_Impuesto\Inf_ImpuestoAjax.aspx" />
@@ -1064,6 +1063,22 @@
     </Compile>
     <Compile Include="Huellas\Creacion\HuellasClass.vb" />
     <Compile Include="Huellas\Creacion\HuellasSQLClass.vb" />
+    <Compile Include="Impuestos\Impuesto_Gasto\Impuesto_Gasto.aspx.designer.vb">
+      <DependentUpon>Impuesto_Gasto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Impuestos\Impuesto_Gasto\Impuesto_Gasto.aspx.vb">
+      <DependentUpon>Impuesto_Gasto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Impuestos\Impuesto_Gasto\Impuesto_GastoAjax.aspx.designer.vb">
+      <DependentUpon>Impuesto_GastoAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Impuestos\Impuesto_Gasto\Impuesto_GastoAjax.aspx.vb">
+      <DependentUpon>Impuesto_GastoAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Impuestos\Impuesto_Gasto\Impuesto_GastoClass.vb" />
+    <Compile Include="Impuestos\Impuesto_Gasto\Impuesto_GastoSQLClass.vb" />
     <Compile Include="Ingreso_New\ControlAcceso\ControlAccesoClass.vb" />
     <Compile Include="Ingreso_New\ControlAcceso\ControlAccesoSQLClass.vb" />
     <Compile Include="Ingreso_New\Entrada\Ingreso.aspx.designer.vb">
@@ -1324,22 +1339,6 @@
     </Compile>
     <Compile Include="Parametros\Festivos\FestivosClass.vb" />
     <Compile Include="Parametros\Festivos\FestivosSQLClass.vb" />
-    <Compile Include="Impuestos\Impuesto_Gasto\Impuesto_Gasto.aspx.designer.vb">
-      <DependentUpon>Impuesto_Gasto.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Impuestos\Impuesto_Gasto\Impuesto_Gasto.aspx.vb">
-      <DependentUpon>Impuesto_Gasto.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Impuestos\Impuesto_Gasto\Impuesto_GastoAjax.aspx.designer.vb">
-      <DependentUpon>Impuesto_GastoAjax.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Impuestos\Impuesto_Gasto\Impuesto_GastoAjax.aspx.vb">
-      <DependentUpon>Impuesto_GastoAjax.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Impuestos\Impuesto_Gasto\Impuesto_GastoClass.vb" />
-    <Compile Include="Impuestos\Impuesto_Gasto\Impuesto_GastoSQLClass.vb" />
     <Compile Include="Parametros\Inf_Impuesto\Inf_Impuesto.aspx.designer.vb">
       <DependentUpon>Inf_Impuesto.aspx</DependentUpon>
     </Compile>
