@@ -233,6 +233,7 @@ function Table_Paises() {
 
     var html_TPaises;
     var vl_Index_Paises;
+
     switch (estado) {
 
         case "buscar":

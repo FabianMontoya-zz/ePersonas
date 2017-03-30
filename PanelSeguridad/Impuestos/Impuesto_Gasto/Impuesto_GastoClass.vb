@@ -1,12 +1,21 @@
 ﻿Public Class Impuesto_GastoClass
-#Region "campos"
+#Region "Campos"
+    Private _Index As Long
     Private _Impuesto_Gasto_ID As Integer
     Private _Descripcion As String
     Private _FechaActualizacion As String
     Private _Usuario As String
 #End Region
 
-#Region "proiedades"
+#Region "Propiedades"
+    Public Property Index() As Long
+        Get
+            Return Me._Index
+        End Get
+        Set(ByVal value As Long)
+            Me._Index = value
+        End Set
+    End Property
     Public Property Impuesto_Gasto_ID() As Integer
         Get
             Return Me._Impuesto_Gasto_ID
