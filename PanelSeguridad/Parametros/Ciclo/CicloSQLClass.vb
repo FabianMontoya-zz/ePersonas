@@ -77,110 +77,6 @@ Public Class CicloSQLClass
     End Function
 
     ''' <summary>
-    ''' funcion que crea el query para el estado del Ciclo (DELETE)
-    ''' </summary>
-    ''' <param name="vp_Obj"></param>
-    ''' <returns></returns>
-    ''' <remarks></remarks>
-    Public Function DeleteCiclo(ByVal vp_Obj As CicloClass)
-        Dim conex As New Conector
-        Dim Result As String
-        ' definiendo los objetos
-        Dim sql As New StringBuilder
-
-        Dim StrQuery As String = ""
-
-        sql.AppendLine("DELETE CICLO " & _
-                       " WHERE CIC_ID_Ciclo = '" & vp_Obj.ID_Ciclo & "'")
-
-        StrQuery = sql.ToString
-
-        Result = conex.StrInsert_and_Update_All(StrQuery, "2")
-
-        Return Result
-
-    End Function
-
-    ''' <summary>
-    ''' funcion que crea el query para el estado del Ciclo Detalle (DELETE)
-    ''' </summary>
-    ''' <param name="vp_Obj"></param>
-    ''' <returns></returns>
-    ''' <remarks></remarks>
-    Public Function DeleteCicloDetalle(ByVal vp_Obj As CicloClass)
-        Dim conex As New Conector
-        Dim Result As String
-        ' definiendo los objetos
-        Dim sql As New StringBuilder
-
-        Dim StrQuery As String = ""
-
-        sql.AppendLine("DELETE DETALLES_CICLO " & _
-                       " WHERE DCI_ID_Ciclo = '" & vp_Obj.ID_Ciclo & "'")
-
-        StrQuery = sql.ToString
-
-        Result = conex.StrInsert_and_Update_All(StrQuery, "2")
-
-        Return Result
-
-    End Function
-
-    ''' <summary>
-    ''' funcion que crea el query para la modificacion del Ciclo (UPDATE)
-    ''' </summary>
-    ''' <param name="vp_Obj"></param>
-    ''' <returns></returns>
-    ''' <remarks></remarks>
-    Public Function UpdateCiclo(ByVal vp_Obj As CicloClass)
-
-        Dim conex As New Conector
-        Dim Result As String
-        ' definiendo los objetos
-        Dim sql As New StringBuilder
-        Dim StrQueryID As String = ""
-        Dim StrQuery As String = ""
-        sql.AppendLine("UPDATE CICLO SET " & _
-                       " CIC_Descripcion ='" & vp_Obj.Descripcion & "', " & _
-                       " CIC_Usuario_Actualizacion ='" & vp_Obj.UsuarioActualizacion & "', " & _
-                       " CIC_FechaActualizacion ='" & vp_Obj.FechaActualizacion & "' " & _
-                       " WHERE CIC_ID_Ciclo = '" & vp_Obj.ID_Ciclo & "'")
-
-        StrQuery = sql.ToString
-
-        Result = conex.StrInsert_and_Update_All(StrQuery, "2")
-
-        Return Result
-
-    End Function
-
-    ''' <summary>
-    ''' funcion que crea el query para la modificacion del Ciclo Detalle (UPDATE)
-    ''' </summary>
-    ''' <param name="vp_Obj"></param>
-    ''' <returns></returns>
-    ''' <remarks></remarks>
-    Public Function UpdateCicloDetalle(ByVal vp_Obj As CicloClass)
-
-        Dim conex As New Conector
-        Dim Result As String
-        ' definiendo los objetos
-        Dim sql As New StringBuilder
-        Dim StrQueryID As String = ""
-        Dim StrQuery As String = ""
-        sql.AppendLine("UPDATE DETALLES_CICLO SET " & _
-                       " DCI_Fecha_Pago ='" & vp_Obj.Fecha_Pago & "' " & _
-                       " WHERE DCI_ID_Ciclo = '" & vp_Obj.ID_Ciclo & "' AND DCI_Fecha_Corte = '" & vp_Obj.Fecha_Corte & "'")
-
-        StrQuery = sql.ToString
-
-        Result = conex.StrInsert_and_Update_All(StrQuery, "2")
-
-        Return Result
-
-    End Function
-
-    ''' <summary>
     ''' funcion que crea el query para la insercion de nuevo Ciclo (INSERT)
     ''' </summary>
     ''' <param name="vp_Obj"></param>
@@ -220,6 +116,63 @@ Public Class CicloSQLClass
     End Function
 
     ''' <summary>
+    ''' funcion que crea el query para la modificacion del Ciclo (UPDATE)
+    ''' </summary>
+    ''' <param name="vp_Obj"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function UpdateCiclo(ByVal vp_Obj As CicloClass)
+
+        Dim conex As New Conector
+        Dim Result As String
+        ' definiendo los objetos
+        Dim sql As New StringBuilder
+        Dim StrQueryID As String = ""
+        Dim StrQuery As String = ""
+        sql.AppendLine("UPDATE CICLO SET " & _
+                       " CIC_Descripcion ='" & vp_Obj.Descripcion & "', " & _
+                       " CIC_Usuario_Actualizacion ='" & vp_Obj.UsuarioActualizacion & "', " & _
+                       " CIC_FechaActualizacion ='" & vp_Obj.FechaActualizacion & "' " & _
+                       " WHERE CIC_ID_Ciclo = '" & vp_Obj.ID_Ciclo & "'")
+
+        StrQuery = sql.ToString
+
+        Result = conex.StrInsert_and_Update_All(StrQuery, "2")
+
+        Return Result
+
+    End Function
+
+    ''' <summary>
+    ''' funcion que crea el query para el estado del Ciclo (DELETE)
+    ''' </summary>
+    ''' <param name="vp_Obj"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function DeleteCiclo(ByVal vp_Obj As CicloClass)
+        Dim conex As New Conector
+        Dim Result As String
+        ' definiendo los objetos
+        Dim sql As New StringBuilder
+
+        Dim StrQuery As String = ""
+
+        sql.AppendLine("DELETE CICLO " & _
+                       " WHERE CIC_ID_Ciclo = '" & vp_Obj.ID_Ciclo & "'")
+
+        StrQuery = sql.ToString
+
+        Result = conex.StrInsert_and_Update_All(StrQuery, "2")
+
+        Return Result
+
+    End Function
+
+#End Region
+
+#Region "CRUD_DETALLE"
+
+    ''' <summary>
     ''' funcion que crea el query para la insercion de nuevo CicloDetalle (INSERT)
     ''' </summary>
     ''' <param name="vp_Obj"></param>
@@ -251,6 +204,58 @@ Public Class CicloSQLClass
         Return Result
 
     End Function
+
+    ''' <summary>
+    ''' funcion que crea el query para la modificacion del Ciclo Detalle (UPDATE)
+    ''' </summary>
+    ''' <param name="vp_Obj"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function UpdateCicloDetalle(ByVal vp_Obj As CicloClass)
+
+        Dim conex As New Conector
+        Dim Result As String
+        ' definiendo los objetos
+        Dim sql As New StringBuilder
+        Dim StrQueryID As String = ""
+        Dim StrQuery As String = ""
+        sql.AppendLine("UPDATE DETALLES_CICLO SET " & _
+                       " DCI_Fecha_Pago ='" & vp_Obj.Fecha_Pago & "' " & _
+                       " WHERE DCI_ID_Ciclo = '" & vp_Obj.ID_Ciclo & "' AND DCI_Fecha_Corte = '" & vp_Obj.Fecha_Corte & "'")
+
+        StrQuery = sql.ToString
+
+        Result = conex.StrInsert_and_Update_All(StrQuery, "2")
+
+        Return Result
+
+    End Function
+
+    ''' <summary>
+    ''' funcion que crea el query para el estado del Ciclo Detalle (DELETE)
+    ''' </summary>
+    ''' <param name="vp_Obj"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function DeleteCicloDetalle(ByVal vp_Obj As CicloClass)
+        Dim conex As New Conector
+        Dim Result As String
+        ' definiendo los objetos
+        Dim sql As New StringBuilder
+
+        Dim StrQuery As String = ""
+
+        sql.AppendLine("DELETE DETALLES_CICLO " & _
+                       " WHERE DCI_ID_Ciclo = '" & vp_Obj.ID_Ciclo & "'")
+
+        StrQuery = sql.ToString
+
+        Result = conex.StrInsert_and_Update_All(StrQuery, "2")
+
+        Return Result
+
+    End Function
+
 
 #End Region
 
