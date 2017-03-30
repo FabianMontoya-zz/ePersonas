@@ -170,7 +170,6 @@ Public Class CicloSQLClass
 
 #End Region
 
-
 #Region "CRUD_DETALLE"
 
     ''' <summary>
