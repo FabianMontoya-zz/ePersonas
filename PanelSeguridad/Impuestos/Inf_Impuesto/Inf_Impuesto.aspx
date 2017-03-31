@@ -6,6 +6,7 @@
     <script src="../../SasifMaster.js" type="text/javascript"></script>
     <script src="../SasifMaster_Cosult.js" type="text/javascript"></script>
     <script src="Inf_Impuesto.js" type="text/javascript"></script>
+    <script src="Inf_Impuesto_Cliente.js" type="text/javascript"></script>
     <script src="Inf_ImpuestoTrasaccionsAjax.js" type="text/javascript"></script>
     <link href="../../css/css_login.css" rel="stylesheet" type="text/css" />
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
@@ -18,7 +19,28 @@
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
     <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
+    <%-- se crea ccs fijo por entar dentro de un dialog no se puede cambia de posicion --%>
+    <style type="text/css">
+        #DivCliente:hover .ImaClient {
+            content: url("../../images/Cliente_Gray.png");
+            cursor: pointer;
+            cursor: hand; /*internet explorer*/
+        }
 
+        .ImaClient {
+            content: url("../../images/Cliente_Red.png");
+        }
+
+         #DivPhone:hover .ImaPhone {
+            content: url("../../images/Phone_Gray.png");
+            cursor: pointer;
+            cursor: hand; /*internet explorer*/
+        }
+
+        .ImaPhone{
+            content: url("../../images/Phone_Red.png");
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
     <div class="Container_title_Form">
@@ -33,7 +55,7 @@
         </table>
     </div>
     <div class="Marco_Container">
-       <div class="Marco_btn_Form">
+        <div class="Marco_btn_Form">
             <input id="BtnShearh" type="button" value="Consulta" onclick="HabilitarPanel('buscar');" />
             <input id="BtnCreate" type="button" value="Crear" onclick="HabilitarPanel('crear');" />
             <input id="BtnDelete" type="button" value="Eliminar" onclick="HabilitarPanel('eliminar');" />
@@ -66,7 +88,7 @@
                         </td>
                     </tr>
                 </table>
-                <div id="Div_Imp" style="margin-top: 40px; margin-left: 50px;">
+                <div class="Dialog_Datos">
                     <table id="TablaPais" style="width: 700px; text-align: left;">
                         <tr>
                             <td class="Label_Bold" style="width: 120px;">Pais
@@ -117,7 +139,7 @@
                     </table>
                     <table id="TablaMuticliente" style="width: 700px; text-align: left;">
                         <tr>
-                            <td style="width: 120px;" class="Label_Bold">Nit Cliente
+                            <td style="width: 120px;" class="Label_Bold">Nit Empresa
                             </td>
                             <td>
                                 <select id="Select_Cliente" class="C_Chosen">
@@ -133,7 +155,7 @@
                     </table>
                     <table id="TablaCliente" style="width: 700px; text-align: left;">
                         <tr>
-                            <td style="width: 120px;" class="Label_Bold">Cliente Principal
+                            <td style="width: 120px;" class="Label_Bold">Org. transito o Hacienda
                             </td>
                             <td>
                                 <select id="Select_Cliente_H" class="C_Chosen">
@@ -216,12 +238,12 @@
                 <td id="V_Impuesto"></td>
             </tr>
             <tr>
-                <td class="Label_Bold">Nit Responsable
+                <td class="Label_Bold">Nit Empresa
                 </td>
                 <td id="V_NitResponsable"></td>
             </tr>
             <tr>
-                <td class="Label_Bold">Cliente
+                <td class="Label_Bold">Org. transito o Hacienda
                 </td>
                 <td id="V_Cliente"></td>
             </tr>
@@ -239,9 +261,11 @@
         <table class="container_Grid_Flex">
             <tr>
                 <td colspan="4" align="left">
-                    <span class="cssToolTip_ver"><a href="javascript:ShearCliente('Nit','TD','D');">
-                        <img alt="Direc" height="45px" width="45px" id="Img18" src="../../images/search.png" /></a>
-                        <span class="Spam_AT3"></span></span>
+                    <div id="DivCliente" onclick="javascript:ShearCliente('Nit','TD','D');">
+                        <span class="cssToolTip_ver">
+                            <img alt="Cliente" class="ImaClient" id="ImaClient" height="45px" width="45px" src="../../images/Cliente_Red.png" />
+                            <span class="Spam_AT3"></span></span>
+                    </div>
                 </td>
             </tr>
         </table>
@@ -278,6 +302,22 @@
             </tr>
         </table>
         <div id="Acordeon_Dat">
+            <h3>Tipo Persona
+            </h3>
+            <div>
+                <table>
+                    <tr>
+                        <td class="Label_Bold">Tipo Persona
+                        </td>
+                        <td id="V_TipoP" colspan="3"></td>
+                    </tr>
+                    <tr>
+                        <td class="Label_Bold">Regimen
+                        </td>
+                        <td id="V_Regimen"></td>
+                    </tr>
+                </table>
+            </div>
             <h3>Relación
             </h3>
             <div>
@@ -320,8 +360,10 @@
         <table class="container_Grid_Flex">
             <tr>
                 <td colspan="4" align="left">
-                    <span class="cssToolTip_ver"><a href="javascript:Direcciones('Read');">
-                        <img alt="Direc" id="Img7" src="../../images/adress_book.png" /></a> <span class="Spam_AT1"></span></span>
+                    <div id="DivPhone">
+                        <span class="cssToolTip_ver"><a href="javascript:Direcciones('Read');">
+                            <img alt="Direc" id="ImgPhone" class="ImaPhone" width="45px" height="45px" src="../../images/Phone_Red.png" /></a> <span class="Spam_AT1"></span></span>
+                    </div>
                 </td>
             </tr>
         </table>

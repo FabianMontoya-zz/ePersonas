@@ -33,7 +33,7 @@ $(document).ready(function () {
     Load_Charge_Sasif();
     Picker_Fechas();
     VentanasEmergentes();
-    DiseñaObjetos();
+    DisenaObjetos();
 
     transaccionAjax_MRTSTA("MATRIX_RTSTA");
     transaccionAjax_MPaises_Ciudades('MATRIX_PAIS_CIUDAD');
@@ -266,7 +266,7 @@ function VentanasEmergentes() {
 }
 
 //se instancias elementos alterdo de la paghina tablas  acordeon etc
-function DiseñaObjetos() {
+function DisenaObjetos() {
     $("#T_Factura_Grid").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,
         "bDestroy": true

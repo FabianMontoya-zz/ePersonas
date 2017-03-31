@@ -20,6 +20,9 @@ Public Class Inf_ImpuestoAjax
                 Case "Ciudad"
                     CargarCiudad()
 
+                Case "Documento"
+                    CargarDocumento()
+
                 Case "Impuesto"
                     CargarImpuesto()
 
@@ -232,6 +235,22 @@ Public Class Inf_ImpuestoAjax
     ''' funcion que carga el objeto DDL consulta
     ''' </summary>
     ''' <remarks></remarks>
+    Protected Sub CargarDocumento()
+
+        Dim SQL As New ClienteSQLClass
+        Dim ObjListDroplist As New List(Of Droplist_Class)
+        Dim vl_S_Tabla As String = Request.Form("tabla")
+
+        ObjListDroplist = SQL.Charge_DropListDocumento(vl_S_Tabla)
+        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
+
+    End Sub
+
+
+    ''' <summary>
+    ''' funcion que carga el objeto DDL consulta
+    ''' </summary>
+    ''' <remarks></remarks>
     Protected Sub CargarCliente_H()
 
         Dim SQL As New Inf_ImpuestoSQLClass
@@ -255,13 +274,14 @@ Public Class Inf_ImpuestoAjax
 
         Dim SQL As New ClienteSQLClass
         Dim ObjList As New List(Of ClienteClass)
+        Dim Obj As New ClienteClass
 
 
-        Dim vl_S_Nit As String = Request.Form("Nit")
-        Dim vl_S_TD As String = Request.Form("TD")
-        Dim vl_S_D As String = Request.Form("D")
+        Obj.Nit_ID = Request.Form("Nit")
+        Obj.TypeDocument_ID = Request.Form("TD")
+        Obj.Document_ID = Request.Form("D")
 
-        ObjList = SQL.Read_Client(vl_S_Nit, vl_S_TD, vl_S_D)
+        ObjList = SQL.Read_Client(Obj)
 
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
@@ -297,6 +317,10 @@ Public Class Inf_ImpuestoAjax
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
+
+#End Region
+
+#Region "FUNCIONES"
 
 #End Region
 
