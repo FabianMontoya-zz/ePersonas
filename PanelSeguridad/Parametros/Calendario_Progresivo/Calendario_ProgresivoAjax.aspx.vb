@@ -21,6 +21,7 @@ Public Class Calendario_ProgresivoAjax
                     Consulta_Calendario()
 
                 Case "crear"
+                    InsertCalendarioProgresivo()
 
                 Case "modificar"
                     UpdateCalendario()
@@ -76,12 +77,52 @@ Public Class Calendario_ProgresivoAjax
     End Sub
 
 
+    ''' <summary>
+    ''' funcion que inserta en la tabla Calendario (INSERT)
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub InsertCalendarioProgresivo()
+
+        Dim objCalendario As New CalendarioClass
+        Dim SQL_Calendario As New CalendarioSQLClass
+
+        Dim result, result_HCalendario As String
+        Dim vl_s_IDxiste As String
+
+        objCalendario.Nit_ID = Request.Form("Nit_ID")
+        objCalendario.Calendario_ID = Request.Form("ID_Calendario")
+
+        'validamos si la llave existe
+        vl_s_IDxiste = SQL_Calendario.Consulta_Repetido(objCalendario)
+
+        If vl_s_IDxiste = 0 Then
+            objCalendario.Descripcion = Request.Form("Descripcion")
+            objCalendario.TipoCalendario = Request.Form("TipoCalendario")
+            objCalendario.UsuarioCreacion = Request.Form("user")
+            objCalendario.FechaCreacion = Date.Now
+            objCalendario.UsuarioActualizacion = Request.Form("user")
+            objCalendario.FechaActualizacion = Date.Now
+            result = SQL_Calendario.InsertCalendario(objCalendario)
+            If result = "Exito" Then
+                'result_HCalendario = Insert_HorariosCalendario()
+                If result_HCalendario = "Exito" Then
+                    result = "Exito"
+                Else
+                    'EraseCalendario()
+                    'result = "Error"
+                End If
+            End If
+        Else
+            result = "Existe"
+        End If
+        Response.Write(result)
+    End Sub
 
     ''' <summary>
     ''' crea metodo de insercion en la tabla CALENDARIO_SEMANAS
     ''' </summary>
     ''' <remarks></remarks>
-    Private Function Insert_CaledarioSemana()
+    Private Function Insert_HorariosCalendario()
 
         Dim Result_list As String = ""
         Dim vl_S_list As String = Request.Form("List_Semana").ToString
@@ -121,6 +162,7 @@ Public Class Calendario_ProgresivoAjax
 
 
 
+
     ''' <summary>
     ''' funcion que actualiza en la tabla Calendario (UPDATE)
     ''' </summary>
@@ -152,7 +194,7 @@ Public Class Calendario_ProgresivoAjax
 
 
             If result = "Exito" Then
-                Insert_CaledarioSemana()
+                Insert_HorariosCalendario()
             End If
 
         End If
@@ -168,11 +210,13 @@ Public Class Calendario_ProgresivoAjax
         Dim objCalendario As New CalendarioClass
         Dim SQL_Calendario As New CalendarioSQLClass
 
-        Dim result As String = ""
+        Dim result As String
 
         objCalendario.Nit_ID = Request.Form("Nit_ID")
         objCalendario.Calendario_ID = Request.Form("ID")
         objCalendario.TipoCalendario = Request.Form("TipoCalendario")
+
+        result = SQL_Calendario.EraseCalendario(objCalendario) 'Que hacer case para que elimine de la otra tabla
 
         Response.Write(result)
     End Sub
@@ -245,6 +289,9 @@ Public Class Calendario_ProgresivoAjax
 #End Region
 
 #Region "FUNCIONES"
+    ''' <summary>
+    ''' Función que se encarga de traer el horario que se ha asignado a un calendario normal
+    ''' </summary>
     Protected Sub CargarMatrizDiasSemana()
         Dim SQL As New CalendarioSemanaSQLClass
         Dim ObjListDroplist As New List(Of CalendarioSemanaClass)

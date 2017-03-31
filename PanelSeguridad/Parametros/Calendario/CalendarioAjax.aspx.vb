@@ -93,15 +93,12 @@ Public Class CalendarioAjax
         vl_s_IDxiste = SQL_Calendario.Consulta_Repetido(objCalendario)
 
         If vl_s_IDxiste = 0 Then
-
             objCalendario.Descripcion = Request.Form("Descripcion")
             objCalendario.TipoCalendario = Request.Form("TipoCalendario")
-
             objCalendario.UsuarioCreacion = Request.Form("user")
             objCalendario.FechaCreacion = Date.Now
             objCalendario.UsuarioActualizacion = Request.Form("user")
             objCalendario.FechaActualizacion = Date.Now
-
             result = SQL_Calendario.InsertCalendario(objCalendario)
             If result = "Exito" Then
                 result_CSemana = Insert_CaledarioSemana()
@@ -178,8 +175,7 @@ Public Class CalendarioAjax
         If result.Equals("Exito") Then
             objCalendario.Nit_ID = Request.Form("Nit_ID")
             objCalendario.Calendario_ID = Request.Form("ID")
-
-            objCalendario.Descripcion = Request.Form("descripcion")
+            objCalendario.Descripcion = Request.Form("Descripcion")
             objCalendario.TipoCalendario = Request.Form("TipoCalendario")
 
             objCalendario.UsuarioActualizacion = Request.Form("user")

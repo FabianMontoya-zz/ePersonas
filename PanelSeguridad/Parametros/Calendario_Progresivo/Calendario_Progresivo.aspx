@@ -92,9 +92,43 @@
                     </td>
                 </tr>
             </table>
+             <table id="Tabla_Codigo" style="width: 100%; text-align: left;">
+                <tr>
+                    <td style="width: 10.5%;" class="Label_Bold">Código
+                    </td>
+                    <td style="width: 6%; min-width: 60px;">
+                        <span class="cssToolTip_Form">
+                            <input type="text" id="Txt_ID" maxlength="5" class="Numeric" style="width: 100%;" onkeypress="return OnlyNumbers(event);" />
+                            <span class="Spam_AN"></span></span>
+                    </td>
+                    <td style="padding-bottom: 25px; width: 98%;">
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img3"
+                                src="../../images/error.png" />
+                            <span class="SpamEG"></span></span>
+                    </td>
+                </tr>
+            </table>
+            <table id="Tabla_Desc" style="width: 100%; text-align: left;">
+                <tr>
+                    <td class="Label_Bold" style="width: 10.5%;">Descripción
+                    </td>
+                    <td style="width: 30%; min-width: 100px;">
+                        <span class="cssToolTip_Form">
+                            <input type="text" id="TxtDescription" maxlength="50" style="width: 100%;" onkeypress="return LettersNumbersSpecial(event);" />
+                            <span class="Spam_AST"></span></span>
+                    </td>
+                    <td style="padding-bottom: 25px; width: 80%;">
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img5"
+                                src="../../images/error.png" />
+                            <span class="SpamEG"></span></span>
+                    </td>
+                </tr>
+            </table>
             <table id="T_Calendario" style="width: 100%; text-align: left;">
                 <tr>
-                    <td style="width: 10.5%;" class="Label_Bold">Calendario
+                    <td style="width: 10.5%;" class="Label_Bold">Calendario Base
                     </td>
                     <td style="width: 47%;">
                         <select style="width: 100%;" id="Select_Calendario_CP" class="C_Chosen">
@@ -108,7 +142,7 @@
                     </td>
                 </tr>
             </table>
-            <table id="T_AccesoInfo_PoliticSeguriGrupo" style="width: 100%;" border="0">
+            <table id="T_Subtitle1" style="width: 100%;" border="0">
                 <tr>
                     <td class="Title_Bold" style="width: 10.5%;"><br />Rango Calendario
                     </td>
@@ -126,7 +160,7 @@
                 <tr>
                     <td>
                         <span class="cssToolTip_Form">
-                            <input type="text" id="TxtF_Start" maxlength="50" style="width: 100px;" readonly />
+                            <input type="text" id="TxtF_Start" maxlength="50" style="width: 100px; cursor: pointer; cursor: hand;" readonly />
                             <span class="Spam_AF"></span></span>
                     </td>
                     <td style="padding-bottom: 25px; width: 90px;">
@@ -137,7 +171,7 @@
                     </td>
                     <td style="width: 120px;">
                         <span class="cssToolTip_Form">
-                            <input type="text" id="TxtF_End" maxlength="50" style="width: 100px;" readonly />
+                            <input type="text" id="TxtF_End" maxlength="50" style="width: 100px; cursor: pointer; cursor: hand;" readonly />
                             <span class="Spam_AF"></span></span>
                     </td>
                     <td style="padding-bottom: 25px; width: 200px;">
@@ -151,7 +185,7 @@
             <%-- Div que contiene la tabla con el lapso seleccionado --%>
             <div class="container_TGrid_Create">
             </div>
-            <table style="width: 100%;">
+            <table id="T_BTNGuardar" style="width: 100%;">
                 <tr>
                     <td style="width: 150px;" class="Label_Bold">
                         <p>
@@ -276,7 +310,7 @@
     <div id="Dialog_Edit_time" title="Basic dialog">
         <table style="width: 100%;">
             <tr>
-                <td class="Label_Bold" style="width: 100%; text-align: center;" colspan="4">Modifique las horas seleccionadas, el cambio se reflejará inmediatamente.
+                <td class="Label_Bold" style="width: 100%; text-align: center;" colspan="4">Modifique el horario seleccionado, el cambio se reflejará inmediatamente.
                     
                 </td>
             </tr>
@@ -294,12 +328,12 @@
                             <tr>
                                 <td align="center">
                                     <span class="cssToolTip_Form">
-                                        <input id="TxtEditIni" type="text" style="width: 50px;" readonly="readonly" /><span
+                                        <input id="TxtEditIni" type="text" style="width: 50px; cursor: pointer; cursor: hand;" readonly="readonly" /><span
                                             class="Spam_AH"></span></span>
                                 </td>
                                 <td align="center">
                                     <span class="cssToolTip_Form">
-                                        <input id="TxtEditFin" type="text" style="width: 50px;" readonly="readonly" /><span
+                                        <input id="TxtEditFin" type="text" style="width: 50px; cursor: pointer; cursor: hand;" readonly="readonly" /><span
                                             class="Spam_AH"></span></span>
                                 </td>
                             </tr>

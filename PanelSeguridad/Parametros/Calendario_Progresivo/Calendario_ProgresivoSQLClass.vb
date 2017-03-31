@@ -1,6 +1,6 @@
 ﻿Imports System.Data.OleDb
 
-Public Class Calendario_ProgesivoSQLClass
+Public Class Calendario_ProgresivoSQLClass
 
 #Region "CRUD"
 

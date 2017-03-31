@@ -5,6 +5,7 @@
     Private _Calendario_ID As Integer
 
     Private _Fecha As String
+    Private _Grupo As String
     Private _HoraInicial As String
     Private _HoraFinal As String
 
@@ -48,6 +49,14 @@
         End Get
         Set(ByVal value As String)
             Me._Fecha = value
+        End Set
+    End Property
+    Public Property Grupo() As String
+        Get
+            Return Me._Grupo
+        End Get
+        Set(ByVal value As String)
+            Me._Grupo = value
         End Set
     End Property
     Public Property HoraInicial() As String
