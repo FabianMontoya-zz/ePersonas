@@ -11,11 +11,11 @@ var editCiudad_ID;
 var editInf_Impuesto_ID;
 var editRangoInicial_ID;
 var editRangoFinal_ID;
+var StrCiudad;
 
 var editTypeLimit_ID;
 var editLimit_Min_ID;
 var editLimit_Max_ID;
-
 /*--------------- region de variables globales --------------------*/
 
 //Evento load JS
@@ -25,30 +25,20 @@ $(document).ready(function () {
     Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
     Ocultar_Errores();
     Ocultar_Tablas();
+    DisenaObjetos();
     /*==================FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN==============*/
 
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_Pais('Pais');
     transacionAjax_Impuesto('Impuesto');
 
-    $(function () {
-
-        $("#TxtRFinal").datepicker({ dateFormat: 'yy-mm-dd' });
-        $("#TxtRInicial").datepicker({ dateFormat: 'yy-mm-dd' });
-        $("#TxtFecha_1").datepicker({ dateFormat: 'yy-mm-dd' });
-        $("#TxtFecha_2").datepicker({ dateFormat: 'yy-mm-dd' });
-        $("#TxtFecha_3").datepicker({ dateFormat: 'yy-mm-dd' });
-        $("#TxtFecha_4").datepicker({ dateFormat: 'yy-mm-dd' });
-
-        $("#Acordeon_Dat").accordion({
-            heightStyle: "content"
-        });
-    });
-
     Change_Select_pais();
     break_Fecha();
 });
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                 REGION INICIO DE COMPONENTES                                                                                                    ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //Función que oculta todas las IMG de los errores en pantalla
 function Ocultar_Errores() {
     ResetError();
@@ -68,8 +58,6 @@ function Ocultar_Errores() {
 
 //funcion para las ventanas emergentes
 function Ventanas_Emergentes() {
-
-    Load_Charge_Sasif(); //Carga de "SasifMaster.js" el Control de Carga
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
@@ -103,36 +91,128 @@ function Ocultar_Tablas() {
     $("#TablaConsulta").css("display", "none");
 }
 
-//limpia campos fecha
-function break_Fecha() {
+//Función que construye el acordeon
+function DisenaObjetos() {
+    $(function () {
 
-    $("#TxtRInicial").focus(function () {
-        $("#TxtRInicial").val("");
+        $("#TxtRFinal").datepicker({ dateFormat: 'yy-mm-dd' });
+        $("#TxtRInicial").datepicker({ dateFormat: 'yy-mm-dd' });
+        $("#TxtFecha_1").datepicker({ dateFormat: 'yy-mm-dd' });
+        $("#TxtFecha_2").datepicker({ dateFormat: 'yy-mm-dd' });
+        $("#TxtFecha_3").datepicker({ dateFormat: 'yy-mm-dd' });
+        $("#TxtFecha_4").datepicker({ dateFormat: 'yy-mm-dd' });
+
+        $("#Acordeon_Dat").accordion({
+            heightStyle: "content"
+        });
     });
-  
-    $("#TxtRFinal").focus(function () {
-        $("#TxtRFinal").val("");
-    });
- 
-    $("#TxtFecha_1").focus(function () {
-        $("#TxtFecha_1").val("");
-    });
-   
-    $("#TxtFecha_2").focus(function () {
-        $("#TxtFecha_2").val("");
-    });
-    
-    $("#TxtFecha_3").focus(function () {
-        $("#TxtFecha_3").val("");
-    });
-   
-    $("#TxtFecha_4").focus(function () {
-        $("#TxtFecha_4").val("");
-    });
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                 REGION BOTONES                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//consulta del del crud(READ)
+function BtnConsulta() {
+
+    var filtro;
+    var ValidateSelect = ValidarDroplist();
+    var opcion;
+
+    if (ValidateSelect == 1) {
+        filtro = "N";
+        opcion = "ALL";
+        transacionAjax_Porcen_Descuentos("consulta", filtro, opcion);
+    }
+    else {
+        filtro = "S";
+        opcion = $("#DDLColumns").val();
+        transacionAjax_Porcen_Descuentos("consulta", filtro, opcion);
+    }
 
 }
 
+//crear link en la BD
+function BtnCrear() {
 
+    var validate;
+    validate = validarCamposCrear();
+
+    if (validate == 0) {
+        var valYear = $("#TxtYear").val();
+        if (valYear < 2010 || valYear > 2025) {
+            $("#dialog").dialog("option", "title", "Atención");
+            $("#Mensaje_alert").text("El rango de años es del 2010 al 2025");
+            $("#dialog").dialog("open");
+            $("#DE").css("display", "none");
+            $("#SE").css("display", "none");
+            $("#WE").css("display", "block");
+        }
+        else {
+            if ($("#Btnguardar").val() == "Guardar") {
+                transacionAjax_Porcen_Descuentos_create("crear");
+            }
+            else {
+                transacionAjax_Porcen_Descuentos_create("modificar");
+            }
+        }
+    }
+}
+
+//elimina de la BD
+function BtnElimina() {
+    transacionAjax_Porcen_Descuentos_delete("elimina");
+}
+
+//evento del boton salir
+function x() {
+    $("#dialog").dialog("close");
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                      REGION VALIDACIONES DEL PROCESO                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//validamos campos para la creacion del link
+function validarCamposCrear() {
+
+    var vl_Campo_1 = $("#Select_Pais").val();
+    var vl_Campo_2 = $("#Select_Ciudad").val();
+    var vl_Campo_3 = $("#Select_Impuesto").val();
+
+    var validar = 0;
+
+    if (vl_Campo_3 == "-1" ||
+        vl_Campo_2 == "-1" ||
+        vl_Campo_1 == "-1") {
+        validar = 1;
+        if (Campo_1 == "-1") { $("#ImgPais").css("display", "inline-table"); } else { $("#ImgPais").css("display", "none"); }
+        if (Campo_2 == "-1") { $("#Img1").css("display", "inline-table"); } else { $("#Img1").css("display", "none"); }
+        if (Campo_3 == "-1") { $("#Img2").css("display", "inline-table"); } else { $("#Img2").css("display", "none"); }
+    }
+    else {
+        $("#ImgPais").css("display", "none");
+        $("#Img1").css("display", "none");
+        $("#Img2").css("display", "none");
+    }
+    return validar;
+}
+
+//validamos si han escogido una columna
+function ValidarDroplist() {
+    var flag;
+    var contenido = $("#DDLColumns").val();
+
+    if (contenido == '-1') {
+        flag = 1;
+    }
+    else {
+        flag = 0;
+    }
+    return flag;
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                    CHANGE DE DROP LIST                                                                                                       ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //carga el combo de paises
 function Change_Select_pais() {
     $("#Select_Pais").change(function () {
@@ -146,6 +226,9 @@ function Change_Select_pais() {
 
 }
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                      PROCESOS DE VALIDACION Y GRID INFORME IMPUESTOS                                                       ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //habilita el panel de crear o consulta
 function HabilitarPanel(opcion) {
 
@@ -199,131 +282,23 @@ function HabilitarPanel(opcion) {
     }
 }
 
-//consulta del del crud(READ)
-function BtnConsulta() {
-
-    var filtro;
-    var ValidateSelect = ValidarDroplist();
-    var opcion;
-
-    OpenControl(); //Abrimos el load de espera con el logo
-
-    if (ValidateSelect == 1) {
-        filtro = "N";
-        opcion = "ALL";
-        transacionAjax_Porcen_Descuentos("consulta", filtro, opcion);
-    }
-    else {
-        filtro = "S";
-        opcion = $("#DDLColumns").val();
-        transacionAjax_Porcen_Descuentos("consulta", filtro, opcion);
-    }
-
-}
-
-//crear link en la BD
-function BtnCrear() {
-
-    var validate;
-    validate = validarCamposCrear();
-
-    if (validate == 0) {
-        var valYear = $("#TxtYear").val();
-        if (valYear < 2010 || valYear > 2025) {
-            $("#dialog").dialog("option", "title", "Atención");
-            $("#Mensaje_alert").text("El rango de años es del 2010 al 2025");
-            $("#dialog").dialog("open");
-            $("#DE").css("display", "none");
-            $("#SE").css("display", "none");
-            $("#WE").css("display", "block");
-        }
-        else {
-            if ($("#Btnguardar").val() == "Guardar") {
-                transacionAjax_Porcen_Descuentos_create("crear");
-            }
-            else {
-                transacionAjax_Porcen_Descuentos_create("modificar");
-            }
-        }
-    }
-}
-
-//elimina de la BD
-function BtnElimina() {
-    OpenControl(); //Abrimos el load de espera con el logo
-    transacionAjax_Porcen_Descuentos_delete("elimina");
-}
-
-
-//validamos campos para la creacion del link
-function validarCamposCrear() {
-
-    var Campo_1 = $("#Select_Pais").val();
-    var Campo_2 = $("#Select_Ciudad").val();
-    var Campo_3 = $("#Select_Impuesto").val();
-
-    var validar = 0;
-
-    if (Campo_3 == "-1" || Campo_2 == "-1" || Campo_1 == "-1") {
-        validar = 1;
-        if (Campo_1 == "-1")
-            $("#ImgPais").css("display", "inline-table");
-        else
-            $("#ImgPais").css("display", "none");
-
-        if (Campo_2 == "-1")
-            $("#Img1").css("display", "inline-table");
-        else
-            $("#Img1").css("display", "none");
-
-        if (Campo_3 == "-1")
-            $("#Img2").css("display", "inline-table");
-        else
-            $("#Img2").css("display", "none");
-
-    }
-    else {
-        $("#ImgPais").css("display", "none");
-        $("#Img1").css("display", "none");
-        $("#Img2").css("display", "none");
-    }
-    return validar;
-}
-
-//validamos si han escogido una columna
-function ValidarDroplist() {
-    var flag;
-    var contenido = $("#DDLColumns").val();
-
-    if (contenido == '-1') {
-        flag = 1;
-    }
-    else {
-        flag = 0;
-    }
-    return flag;
-}
-
 // crea la tabla en el cliente
 function Table_Porcen_Descuentos() {
 
     var html_Porcen_Descuentos;
+    var StrTipo = "";
 
     switch (estado) {
 
         case "buscar":
-            var html_Porcen_Descuentos = "<table id='TPorcen_Descuentos' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Ver</th><th>Pais</th><th>Ciudad</th><th>Impuesto</th><th>Rango Inicial</th><th>Rango Final</th><th>Tipo Limite</th><th>Limite Inferior</th><th>Limite Superior</th><th>Prmera Fecha</th><th>Primer % Descuento</th><th>Primer Valor</th><th>Segunda Fecha</th><th>Segundo % Descuento</th><th>Segundo Valor</th><th>Tercera Fecha</th><th>Tercer % Descuento</th><th>Tercer Valor</th><th>Cuarta Fecha</th><th>Cuarto % Descuento</th><th>Cuarto Valor</th></tr></thead><tbody>";
+            html_Porcen_Descuentos = "<table id='TPorcen_Descuentos' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Ver</th><th>Pais</th><th>Ciudad</th><th>Impuesto</th><th>Rango Inicial</th><th>Rango Final</th><th>Tipo Limite</th><th>Limite Inferior</th><th>Limite Superior</th><th>Prmera Fecha</th><th>Primer % Descuento</th><th>Primer Valor</th><th>Segunda Fecha</th><th>Segundo % Descuento</th><th>Segundo Valor</th><th>Tercera Fecha</th><th>Tercer % Descuento</th><th>Tercer Valor</th><th>Cuarta Fecha</th><th>Cuarto % Descuento</th><th>Cuarto Valor</th></tr></thead><tbody>";
+
             for (itemArray in ArrayPorcen_Descuentos) {
                 if (ArrayPorcen_Descuentos[itemArray].Porcen_Descuentos_ID != 0) {
 
-                    var StrCiudad = ArrayPorcen_Descuentos[itemArray].DescripCiudad
-                    var ArraySplit = StrCiudad.split("_");
-
-                    var StrTipo = "";
-
-                    if (ArrayPorcen_Descuentos[itemArray].Type_Limit != 0)
+                    if (ArrayPorcen_Descuentos[itemArray].Type_Limit != 0) {
                         StrTipo = ArrayPorcen_Descuentos[itemArray].Type_Limit + " - " + ArrayPorcen_Descuentos[itemArray].DescripTipo;
-
+                    }
                     html_Porcen_Descuentos += "<tr><td><input type ='radio' class= 'Ver' name='ver' onclick=\"Ver('" + ArrayPorcen_Descuentos[itemArray].Cod_ID + "','" + ArrayPorcen_Descuentos[itemArray].Ciudad_ID + "','" + ArrayPorcen_Descuentos[itemArray].Impuesto_Gasto_ID + "', '" + ArrayPorcen_Descuentos[itemArray].RangoInicial_ID + "', '" + ArrayPorcen_Descuentos[itemArray].RangoFinal_ID + "', '" + ArrayPorcen_Descuentos[itemArray].Type_Limit + "', '" + ArrayPorcen_Descuentos[itemArray].Limit_Min + "', '" + ArrayPorcen_Descuentos[itemArray].Limit_Max + "')\"></input></td><td>" + ArrayPorcen_Descuentos[itemArray].DescripCod + "</td><td>" + ArrayPorcen_Descuentos[itemArray].DescripCiudad + "</td><td>" + ArrayPorcen_Descuentos[itemArray].Impuesto_Gasto_ID + " - " + ArrayPorcen_Descuentos[itemArray].DescripImpuesto_Gasto + "</td><td>" + valFecha(ArrayPorcen_Descuentos[itemArray].RangoInicial_ID) + "</td><td>" + valFecha(ArrayPorcen_Descuentos[itemArray].RangoFinal_ID) + "</td> <td>" + StrTipo + "</td><td>" + ArrayPorcen_Descuentos[itemArray].Limit_Min + "</td><td>" + ArrayPorcen_Descuentos[itemArray].Limit_Max + "</td><td>" + valFecha(ArrayPorcen_Descuentos[itemArray].MesDia_1) + "</td><td>" + ArrayPorcen_Descuentos[itemArray].Porcentaje_1 + " %" + "</td><td>" + dinner_format_grid(ArrayPorcen_Descuentos[itemArray].Valor_Vencimiento_1, "1") + "</td><td>" + valFecha(ArrayPorcen_Descuentos[itemArray].MesDia_2) + "</td><td>" + ArrayPorcen_Descuentos[itemArray].Porcentaje_2 + " %" + "</td><td>" + dinner_format_grid(ArrayPorcen_Descuentos[itemArray].Valor_Vencimiento_2, "1") + "</td><td>" + valFecha(ArrayPorcen_Descuentos[itemArray].MesDia_3) + "</td><td>" + ArrayPorcen_Descuentos[itemArray].Porcentaje_3 + " %" + "</td><td>" + dinner_format_grid(ArrayPorcen_Descuentos[itemArray].Valor_Vencimiento_3, "1") + "</td><td>" + valFecha(ArrayPorcen_Descuentos[itemArray].MesDia_4) + "</td><td>" + ArrayPorcen_Descuentos[itemArray].Porcentaje_4 + " %" + "</td><td>" + dinner_format_grid(ArrayPorcen_Descuentos[itemArray].Valor_Vencimiento_4, "1") + "</td></tr>";
                 }
             }
@@ -331,17 +306,13 @@ function Table_Porcen_Descuentos() {
 
         case "modificar":
 
-            var html_Porcen_Descuentos = "<table id='TPorcen_Descuentos' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Ver</th><th>Editar</th><th>Pais</th><th>Ciudad</th><th>Impuesto</th><th>Rango Inicial</th><th>Rango Final</th><th>Tipo Limite</th><th>Limite Inferior</th><th>Limite Superior</th><th>Prmera Fecha</th><th>Primer % Descuento</th><th>Primer Valor</th><th>Segunda Fecha</th><th>Segundo % Descuento</th><th>Segundo Valor</th><th>Tercera Fecha</th><th>Tercer % Descuento</th><th>Tercer Valor</th><th>Cuarta Fecha</th><th>Cuarto % Descuento</th><th>Cuarto Valor</th></tr></thead><tbody>";
+            html_Porcen_Descuentos = "<table id='TPorcen_Descuentos' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Ver</th><th>Editar</th><th>Pais</th><th>Ciudad</th><th>Impuesto</th><th>Rango Inicial</th><th>Rango Final</th><th>Tipo Limite</th><th>Limite Inferior</th><th>Limite Superior</th><th>Prmera Fecha</th><th>Primer % Descuento</th><th>Primer Valor</th><th>Segunda Fecha</th><th>Segundo % Descuento</th><th>Segundo Valor</th><th>Tercera Fecha</th><th>Tercer % Descuento</th><th>Tercer Valor</th><th>Cuarta Fecha</th><th>Cuarto % Descuento</th><th>Cuarto Valor</th></tr></thead><tbody>";
             for (itemArray in ArrayPorcen_Descuentos) {
                 if (ArrayPorcen_Descuentos[itemArray].Impuesto_Gasto_ID != 0) {
 
-                    var StrCiudad = ArrayPorcen_Descuentos[itemArray].DescripCiudad
-                    var ArraySplit = StrCiudad.split("_");
-
-                    var StrTipo = "";
-
-                    if (ArrayPorcen_Descuentos[itemArray].Type_Limit != 0)
+                    if (ArrayPorcen_Descuentos[itemArray].Type_Limit != 0) {
                         StrTipo = ArrayPorcen_Descuentos[itemArray].Type_Limit + " - " + ArrayPorcen_Descuentos[itemArray].DescripTipo;
+                    }
 
                     html_Porcen_Descuentos += "<tr><td><input type ='radio' class= 'Ver' name='ver' onclick=\"Ver('" + ArrayPorcen_Descuentos[itemArray].Cod_ID + "','" + ArrayPorcen_Descuentos[itemArray].Ciudad_ID + "','" + ArrayPorcen_Descuentos[itemArray].Impuesto_Gasto_ID + "', '" + ArrayPorcen_Descuentos[itemArray].RangoInicial_ID + "', '" + ArrayPorcen_Descuentos[itemArray].RangoFinal_ID + "', '" + ArrayPorcen_Descuentos[itemArray].Type_Limit + "', '" + ArrayPorcen_Descuentos[itemArray].Limit_Min + "', '" + ArrayPorcen_Descuentos[itemArray].Limit_Max + "')\"></input></td><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Editar('" + ArrayPorcen_Descuentos[itemArray].Cod_ID + "','" + ArrayPorcen_Descuentos[itemArray].Ciudad_ID + "','" + ArrayPorcen_Descuentos[itemArray].Impuesto_Gasto_ID + "', '" + ArrayPorcen_Descuentos[itemArray].RangoInicial_ID + "', '" + ArrayPorcen_Descuentos[itemArray].RangoFinal_ID + "', '" + ArrayPorcen_Descuentos[itemArray].Type_Limit + "', '" + ArrayPorcen_Descuentos[itemArray].Limit_Min + "', '" + ArrayPorcen_Descuentos[itemArray].Limit_Max + "')\"></input></td><td>" + ArrayPorcen_Descuentos[itemArray].DescripCod + "</td><td>" + ArrayPorcen_Descuentos[itemArray].DescripCiudad + "</td><td>" + ArrayPorcen_Descuentos[itemArray].Impuesto_Gasto_ID + " - " + ArrayPorcen_Descuentos[itemArray].DescripImpuesto_Gasto + "</td><td>" + valFecha(ArrayPorcen_Descuentos[itemArray].RangoInicial_ID) + "</td><td>" + valFecha(ArrayPorcen_Descuentos[itemArray].RangoFinal_ID) + "</td> <td>" + StrTipo + "</td><td>" + ArrayPorcen_Descuentos[itemArray].Limit_Min + "</td><td>" + ArrayPorcen_Descuentos[itemArray].Limit_Max + "</td><td>" + valFecha(ArrayPorcen_Descuentos[itemArray].MesDia_1) + "</td><td>" + ArrayPorcen_Descuentos[itemArray].Porcentaje_1 + " %" + "</td><td>" + dinner_format_grid(ArrayPorcen_Descuentos[itemArray].Valor_Vencimiento_1, "1") + "</td><td>" + valFecha(ArrayPorcen_Descuentos[itemArray].MesDia_2) + "</td><td>" + ArrayPorcen_Descuentos[itemArray].Porcentaje_2 + " %" + "</td><td>" + dinner_format_grid(ArrayPorcen_Descuentos[itemArray].Valor_Vencimiento_2, "1") + "</td><td>" + valFecha(ArrayPorcen_Descuentos[itemArray].MesDia_3) + "</td><td>" + ArrayPorcen_Descuentos[itemArray].Porcentaje_3 + " %" + "</td><td>" + dinner_format_grid(ArrayPorcen_Descuentos[itemArray].Valor_Vencimiento_4, "1") + "</td><td>" + valFecha(ArrayPorcen_Descuentos[itemArray].MesDia_4) + "</td><td>" + ArrayPorcen_Descuentos[itemArray].Porcentaje_4 + " %" + "</td><td>" + dinner_format_grid(ArrayPorcen_Descuentos[itemArray].Valor_Vencimiento_4, "1") + "</td></tr>";
                 }
@@ -353,13 +324,9 @@ function Table_Porcen_Descuentos() {
             for (itemArray in ArrayPorcen_Descuentos) {
                 if (ArrayPorcen_Descuentos[itemArray].Porcen_Descuentos_ID != 0) {
 
-                    var StrCiudad = ArrayPorcen_Descuentos[itemArray].DescripCiudad
-                    var ArraySplit = StrCiudad.split("_");
-
-                    var StrTipo = "";
-
-                    if (ArrayPorcen_Descuentos[itemArray].Type_Limit != 0)
+                    if (ArrayPorcen_Descuentos[itemArray].Type_Limit != 0) {
                         StrTipo = ArrayPorcen_Descuentos[itemArray].Type_Limit + " - " + ArrayPorcen_Descuentos[itemArray].DescripTipo;
+                    }
 
                     html_Porcen_Descuentos += "<tr><td><input type ='radio' class= 'Ver' name='ver' onclick=\"Ver('" + ArrayPorcen_Descuentos[itemArray].Cod_ID + "','" + ArrayPorcen_Descuentos[itemArray].Ciudad_ID + "','" + ArrayPorcen_Descuentos[itemArray].Impuesto_Gasto_ID + "', '" + ArrayPorcen_Descuentos[itemArray].RangoInicial_ID + "', '" + ArrayPorcen_Descuentos[itemArray].RangoFinal_ID + "', '" + ArrayPorcen_Descuentos[itemArray].Type_Limit + "', '" + ArrayPorcen_Descuentos[itemArray].Limit_Min + "', '" + ArrayPorcen_Descuentos[itemArray].Limit_Max + "')\"></input></td><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar('" + ArrayPorcen_Descuentos[itemArray].Cod_ID + "','" + ArrayPorcen_Descuentos[itemArray].Ciudad_ID + "','" + ArrayPorcen_Descuentos[itemArray].Impuesto_Gasto_ID + "', '" + ArrayPorcen_Descuentos[itemArray].RangoInicial_ID + "', '" + ArrayPorcen_Descuentos[itemArray].RangoFinal_ID + "', '" + ArrayPorcen_Descuentos[itemArray].Type_Limit + "', '" + ArrayPorcen_Descuentos[itemArray].Limit_Min + "', '" + ArrayPorcen_Descuentos[itemArray].Limit_Max + "')\"></input></td><td>" + ArrayPorcen_Descuentos[itemArray].DescripCod + "</td><td>" + ArrayPorcen_Descuentos[itemArray].DescripCiudad + "</td><td>" + ArrayPorcen_Descuentos[itemArray].Impuesto_Gasto_ID + " - " + ArrayPorcen_Descuentos[itemArray].DescripImpuesto_Gasto + "</td><td>" + valFecha(ArrayPorcen_Descuentos[itemArray].RangoInicial_ID) + "</td><td>" + valFecha(ArrayPorcen_Descuentos[itemArray].RangoFinal_ID) + "</td> <td>" + StrTipo + "</td><td>" + ArrayPorcen_Descuentos[itemArray].Limit_Min + "</td><td>" + ArrayPorcen_Descuentos[itemArray].Limit_Max + "</td><td>" + valFecha(ArrayPorcen_Descuentos[itemArray].MesDia_1) + "</td><td>" + ArrayPorcen_Descuentos[itemArray].Porcentaje_1 + " %" + "</td><td>" + dinner_format_grid(ArrayPorcen_Descuentos[itemArray].Valor_Vencimiento_1, "1") + "</td><td>" + valFecha(ArrayPorcen_Descuentos[itemArray].MesDia_2) + "</td><td>" + ArrayPorcen_Descuentos[itemArray].Porcentaje_2 + " %" + "</td><td>" + dinner_format_grid(ArrayPorcen_Descuentos[itemArray].Valor_Vencimiento_2, "1") + "</td><td>" + valFecha(ArrayPorcen_Descuentos[itemArray].MesDia_3) + "</td><td>" + ArrayPorcen_Descuentos[itemArray].Porcentaje_3 + " %" + "</td><td>" + dinner_format_grid(ArrayPorcen_Descuentos[itemArray].Valor_Vencimiento_4, "1") + "</td><td>" + valFecha(ArrayPorcen_Descuentos[itemArray].MesDia_4) + "</td><td>" + ArrayPorcen_Descuentos[itemArray].Porcentaje_4 + " %" + "</td><td>" + dinner_format_grid(ArrayPorcen_Descuentos[itemArray].Valor_Vencimiento_4, "1") + "</td></tr>";
                 }
@@ -370,12 +337,6 @@ function Table_Porcen_Descuentos() {
     html_Porcen_Descuentos += "</tbody></table>";
     $(".container_TGrid").html("");
     $(".container_TGrid").html(html_Porcen_Descuentos);
-
-    $(".Eliminar").click(function () {
-    });
-
-    $(".Ver").click(function () {
-    });
 
     $("#TPorcen_Descuentos").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,
@@ -412,7 +373,6 @@ function Eliminar(index_Pais, index_Ciudad, index_Inf_Impuesto, index_RangoInici
     }
 
 }
-var StrCiudad;
 
 // muestra el registro a editar
 function Editar(index_Pais, index_Ciudad, index_Inf_Impuesto, index_RangoInicial_ID, index_RangoFinal_ID, index_TLimit, index_Lmin, index_Lmax) {
@@ -490,74 +450,6 @@ function ChargeCiudad(index) {
     $('.C_Chosen').trigger('chosen:updated');
 }
 
-
-//grid sin botones para ver resultado
-function Tabla_consulta() {
-    var html_Porcen_Descuentos = "<table id='TPorcen_Descuentos' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Ver</th><th>Pais</th><th>Ciudad</th><th>Impuesto</th><th>Rango Inicial</th><th>Rango Final</th><th>Tipo Limite</th><th>Limite Inferior</th><th>Limite Superior</th><th>Prmera Fecha</th><th>Primer % Descuento</th><th>Primer Valor</th><th>Segunda Fecha</th><th>Segundo % Descuento</th><th>Segundo Valor</th><th>Tercera Fecha</th><th>Tercer % Descuento</th><th>Tercer Valor</th><th>Cuarta Fecha</th><th>Cuarto % Descuento</th><th>Cuarto Valor</th></tr></thead><tbody>";
-    for (itemArray in ArrayPorcen_Descuentos) {
-        if (ArrayPorcen_Descuentos[itemArray].Porcen_Descuentos_ID != 0) {
-
-            var StrCiudad = ArrayPorcen_Descuentos[itemArray].DescripCiudad
-            var ArraySplit = StrCiudad.split("_");
-
-            var StrTipo = "";
-
-            if (ArrayPorcen_Descuentos[itemArray].Type_Limit != 0)
-                StrTipo = ArrayPorcen_Descuentos[itemArray].Type_Limit + " - " + ArrayPorcen_Descuentos[itemArray].DescripTipo;
-
-            html_Porcen_Descuentos += "<tr><td><input type ='radio' class= 'Ver' name='ver' onclick=\"Ver('" + ArrayPorcen_Descuentos[itemArray].Cod_ID + "','" + ArrayPorcen_Descuentos[itemArray].Ciudad_ID + "','" + ArrayPorcen_Descuentos[itemArray].Impuesto_Gasto_ID + "', '" + ArrayPorcen_Descuentos[itemArray].RangoInicial_ID + "', '" + ArrayPorcen_Descuentos[itemArray].RangoFinal_ID + "', '" + ArrayPorcen_Descuentos[itemArray].Type_Limit + "', '" + ArrayPorcen_Descuentos[itemArray].Limit_Min + "', '" + ArrayPorcen_Descuentos[itemArray].Limit_Max + "')\"></input></td><td>" + ArrayPorcen_Descuentos[itemArray].DescripCod + "</td><td>" + ArrayPorcen_Descuentos[itemArray].DescripCiudad + "</td><td>" + ArrayPorcen_Descuentos[itemArray].Impuesto_Gasto_ID + " - " + ArrayPorcen_Descuentos[itemArray].DescripImpuesto_Gasto + "</td><td>" + valFecha(ArrayPorcen_Descuentos[itemArray].RangoInicial_ID) + "</td><td>" + valFecha(ArrayPorcen_Descuentos[itemArray].RangoFinal_ID) + "</td> <td>" + StrTipo + "</td><td>" + ArrayPorcen_Descuentos[itemArray].Limit_Min + "</td><td>" + ArrayPorcen_Descuentos[itemArray].Limit_Max + "</td><td>" + valFecha(ArrayPorcen_Descuentos[itemArray].MesDia_1) + "</td><td>" + ArrayPorcen_Descuentos[itemArray].Porcentaje_1 + " %" + "</td><td>" + dinner_format_grid(ArrayPorcen_Descuentos[itemArray].Valor_Vencimiento_1, "1") + "</td><td>" + valFecha(ArrayPorcen_Descuentos[itemArray].MesDia_2) + "</td><td>" + ArrayPorcen_Descuentos[itemArray].Porcentaje_2 + " %" + "</td><td>" + dinner_format_grid(ArrayPorcen_Descuentos[itemArray].Valor_Vencimiento_2, "1") + "</td><td>" + valFecha(ArrayPorcen_Descuentos[itemArray].MesDia_3) + "</td><td>" + ArrayPorcen_Descuentos[itemArray].Porcentaje_3 + " %" + "</td><td>" + dinner_format_grid(ArrayPorcen_Descuentos[itemArray].Valor_Vencimiento_3, "1") + "</td><td>" + valFecha(ArrayPorcen_Descuentos[itemArray].MesDia_4) + "</td><td>" + ArrayPorcen_Descuentos[itemArray].Porcentaje_4 + " %" + "</td><td>" + dinner_format_grid(ArrayPorcen_Descuentos[itemArray].Valor_Vencimiento_4, "1") + "</td></tr>";
-        }
-    }
-    html_Porcen_Descuentos += "</tbody></table>";
-    $(".container_TGrid").html("");
-    $(".container_TGrid").html(html_Porcen_Descuentos);
-
-    $(".Ver").click(function () {
-    });
-
-    $("#TPorcen_Descuentos").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
-}
-
-//evento del boton salir
-function x() {
-    $("#dialog").dialog("close");
-}
-
-//limpiar campos
-function Clear() {
-    $("#Select_Pais").val("-1");
-    $("#Select_Ciudad").val("-1");
-    $("#Select_Impuesto").val("-1");
-
-    $("#TxtRFinal").val("");
-    $("#TxtRInicial").val("");
-
-    $("#Select_LTipo").val("-1");
-    $("#Txt_LInf").val("");
-    $("#Txt_Sup").val("");
-
-    $("#TxtFecha_1").val("");
-    $("#TxtFecha_2").val("");
-    $("#TxtFecha_3").val("");
-    $("#TxtFecha_4").val("");
-    $("#TxtPorcen_1").val("");
-    $("#TxtPorcen_2").val("");
-    $("#TxtPorcen_3").val("");
-    $("#TxtPorcen_4").val("");
-    $("#TxtValor_1").val("");
-    $("#TxtValor_2").val("");
-    $("#TxtValor_3").val("");
-    $("#TxtValor_4").val("");
-
-    $("#TxtRead").val("");
-    $("#DDLColumns").val("-1");
-
-    $('.C_Chosen').trigger('chosen:updated');
-}
-
 // muestra el registro a ver
 function Ver(index_Pais, index_Ciudad, index_Inf_Impuesto, index_RangoInicial_ID, index_RangoFinal_ID, index_TLimit, index_Lmin, index_Lmax) {
 
@@ -604,3 +496,69 @@ function Ver(index_Pais, index_Ciudad, index_Inf_Impuesto, index_RangoInicial_ID
     $("#Dialog_Visualiza").dialog("open");
 }
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                              MENSAJES, VISUALIZACION Y LIMPIEZA                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//limpiar campos
+function Clear() {
+    $(".container_TGrid").html("");
+
+    $("#Select_Pais").val("-1");
+    $("#Select_Ciudad").val("-1");
+    $("#Select_Impuesto").val("-1");
+
+    $("#TxtRFinal").val("");
+    $("#TxtRInicial").val("");
+
+    $("#Select_LTipo").val("-1");
+    $("#Txt_LInf").val("");
+    $("#Txt_Sup").val("");
+
+    $("#TxtFecha_1").val("");
+    $("#TxtFecha_2").val("");
+    $("#TxtFecha_3").val("");
+    $("#TxtFecha_4").val("");
+    $("#TxtPorcen_1").val("");
+    $("#TxtPorcen_2").val("");
+    $("#TxtPorcen_3").val("");
+    $("#TxtPorcen_4").val("");
+    $("#TxtValor_1").val("");
+    $("#TxtValor_2").val("");
+    $("#TxtValor_3").val("");
+    $("#TxtValor_4").val("");
+
+    $("#TxtRead").val("");
+    $("#DDLColumns").val("-1");
+
+    $('.C_Chosen').trigger('chosen:updated');
+
+}
+
+//limpia campos fecha
+function break_Fecha() {
+
+    $("#TxtRInicial").focus(function () {
+        $("#TxtRInicial").val("");
+    });
+
+    $("#TxtRFinal").focus(function () {
+        $("#TxtRFinal").val("");
+    });
+
+    $("#TxtFecha_1").focus(function () {
+        $("#TxtFecha_1").val("");
+    });
+
+    $("#TxtFecha_2").focus(function () {
+        $("#TxtFecha_2").val("");
+    });
+
+    $("#TxtFecha_3").focus(function () {
+        $("#TxtFecha_3").val("");
+    });
+
+    $("#TxtFecha_4").focus(function () {
+        $("#TxtFecha_4").val("");
+    });
+
+}
