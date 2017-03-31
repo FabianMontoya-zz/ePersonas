@@ -372,6 +372,8 @@
     <Content Include="Images\avatar.png" />
     <Content Include="Images\bank.png" />
     <Content Include="Images\bank_w.png" />
+    <Content Include="Images\Cliente_Gray.png" />
+    <Content Include="Images\Cliente_Red.png" />
     <Content Include="Images\C_GREEN.png" />
     <Content Include="Images\C_RED.png" />
     <Content Include="Images\C_YELLOW.png" />
@@ -379,16 +381,22 @@
     <Content Include="Images\DeleteOver.png" />
     <Content Include="Images\documentos.png" />
     <Content Include="Images\documentos_w.png" />
-    <Content Include="Images\dumbbell.png" />
     <Content Include="Images\Editar1.png" />
     <Content Include="Images\EditarOver.png" />
     <Content Include="Images\error.png" />
     <Content Include="Images\error_2.png" />
+    <Content Include="Images\Folder_Gray.png" />
+    <Content Include="Images\Folder_Red.png" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\logo_2.png" />
     <Content Include="Images\LOOK_BLACK.png" />
     <Content Include="Images\LOOK_WHITE.png" />
     <Content Include="Images\manos_dedos.png" />
+    <Content Include="Images\Menu_Gray.png" />
+    <Content Include="Images\Menu_Red.png" />
+    <Content Include="Images\Menu_White.png" />
+    <Content Include="Images\N_Search_Black.png" />
+    <Content Include="Images\N_Search_Red.png" />
     <Content Include="Images\old\add.png" />
     <Content Include="Images\old\adress_book.png" />
     <Content Include="Images\old\alert.png" />
@@ -414,18 +422,28 @@
     <Content Include="Images\old\success.png" />
     <Content Include="Images\old\user.png" />
     <Content Include="Images\old\validation.png" />
+    <Content Include="Images\Phone_Gray.png" />
+    <Content Include="Images\Phone_Red.png" />
+    <Content Include="Images\question.png" />
     <Content Include="Images\Relations.gif" />
     <Content Include="Images\Relation_Gray.png" />
     <Content Include="Images\Relation_Red.png" />
     <Content Include="Images\SASIF_NEW.png" />
     <Content Include="Images\SASIF_NEW_WHITE.png" />
     <Content Include="Images\search.png" />
-    <Content Include="Images\search_black.png" />
-    <Content Include="Images\search_red.png" />
     <Content Include="Images\settings.png" />
     <Content Include="Images\success.png" />
     <Content Include="Images\waiting.png" />
+    <Content Include="Impuestos\Inf_Impuesto\Inf_Impuesto.aspx" />
+    <Content Include="Impuestos\Inf_Impuesto\Inf_Impuesto.js" />
+    <Content Include="Impuestos\Inf_Impuesto\Inf_ImpuestoAjax.aspx" />
+    <Content Include="Impuestos\Inf_Impuesto\Inf_ImpuestoTrasaccionsAjax.js" />
+    <Content Include="Impuestos\Inf_Impuesto\Inf_Impuesto_Cliente.js" />
     <Content Include="Impuestos\menu.js" />
+    <Content Include="Impuestos\Porcen_Descuentos\Porcen_Descuentos.aspx" />
+    <Content Include="Impuestos\Porcen_Descuentos\Porcen_Descuentos.js" />
+    <Content Include="Impuestos\Porcen_Descuentos\Porcen_DescuentosAjax.aspx" />
+    <Content Include="Impuestos\Porcen_Descuentos\Porcen_DescuentosTrasaccionsAjax.js" />
     <Content Include="Impuestos\SasifMaster_Cosult.js" />
     <Content Include="Ingreso_New\Entrada\Ingreso.aspx" />
     <Content Include="Ingreso_New\Entrada\Ingreso.js" />
@@ -497,10 +515,6 @@
     <Content Include="Impuestos\Impuesto_Gasto\Impuesto_Gasto.js" />
     <Content Include="Impuestos\Impuesto_Gasto\Impuesto_GastoAjax.aspx" />
     <Content Include="Impuestos\Impuesto_Gasto\Impuesto_GastoTrasaccionsAjax.js" />
-    <Content Include="Parametros\Inf_Impuesto\Inf_Impuesto.aspx" />
-    <Content Include="Parametros\Inf_Impuesto\Inf_Impuesto.js" />
-    <Content Include="Parametros\Inf_Impuesto\Inf_ImpuestoAjax.aspx" />
-    <Content Include="Parametros\Inf_Impuesto\Inf_ImpuestoTrasaccionsAjax.js" />
     <Content Include="Parametros\Mensajes\Mensajes.aspx" />
     <Content Include="Parametros\Mensajes\Mensajes.js" />
     <Content Include="Parametros\Mensajes\MensajesAjax.aspx" />
@@ -518,10 +532,6 @@
     <Content Include="Parametros\Paises\Paises.js" />
     <Content Include="Parametros\Paises\PaisesAjax.aspx" />
     <Content Include="Parametros\Paises\PaisesTrasaccionsAjax.js" />
-    <Content Include="Parametros\Porcen_Descuentos\Porcen_Descuentos.aspx" />
-    <Content Include="Parametros\Porcen_Descuentos\Porcen_Descuentos.js" />
-    <Content Include="Parametros\Porcen_Descuentos\Porcen_DescuentosAjax.aspx" />
-    <Content Include="Parametros\Porcen_Descuentos\Porcen_DescuentosTrasaccionsAjax.js" />
     <Content Include="Parametros\Productos\Productos.aspx" />
     <Content Include="Parametros\Productos\Productos.js" />
     <Content Include="Parametros\Productos\ProductosAjax.aspx" />
@@ -1063,6 +1073,38 @@
     </Compile>
     <Compile Include="Huellas\Creacion\HuellasClass.vb" />
     <Compile Include="Huellas\Creacion\HuellasSQLClass.vb" />
+    <Compile Include="Impuestos\Inf_Impuesto\Inf_Impuesto.aspx.designer.vb">
+      <DependentUpon>Inf_Impuesto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Impuestos\Inf_Impuesto\Inf_Impuesto.aspx.vb">
+      <DependentUpon>Inf_Impuesto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Impuestos\Inf_Impuesto\Inf_ImpuestoAjax.aspx.designer.vb">
+      <DependentUpon>Inf_ImpuestoAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Impuestos\Inf_Impuesto\Inf_ImpuestoAjax.aspx.vb">
+      <DependentUpon>Inf_ImpuestoAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Impuestos\Inf_Impuesto\Inf_ImpuestoClass.vb" />
+    <Compile Include="Impuestos\Inf_Impuesto\Inf_ImpuestoSQLClass.vb" />
+    <Compile Include="Impuestos\Porcen_Descuentos\Porcen_Descuentos.aspx.designer.vb">
+      <DependentUpon>Porcen_Descuentos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Impuestos\Porcen_Descuentos\Porcen_Descuentos.aspx.vb">
+      <DependentUpon>Porcen_Descuentos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Impuestos\Porcen_Descuentos\Porcen_DescuentosAjax.aspx.designer.vb">
+      <DependentUpon>Porcen_DescuentosAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Impuestos\Porcen_Descuentos\Porcen_DescuentosAjax.aspx.vb">
+      <DependentUpon>Porcen_DescuentosAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Impuestos\Porcen_Descuentos\Porcen_DescuentosClass.vb" />
+    <Compile Include="Impuestos\Porcen_Descuentos\Porcen_DescuentosSQLClass.vb" />
     <Compile Include="Ingreso_New\ControlAcceso\ControlAccesoClass.vb" />
     <Compile Include="Ingreso_New\ControlAcceso\ControlAccesoSQLClass.vb" />
     <Compile Include="Ingreso_New\Entrada\Ingreso.aspx.designer.vb">
@@ -1339,22 +1381,6 @@
     </Compile>
     <Compile Include="Impuestos\Impuesto_Gasto\Impuesto_GastoClass.vb" />
     <Compile Include="Impuestos\Impuesto_Gasto\Impuesto_GastoSQLClass.vb" />
-    <Compile Include="Parametros\Inf_Impuesto\Inf_Impuesto.aspx.designer.vb">
-      <DependentUpon>Inf_Impuesto.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Parametros\Inf_Impuesto\Inf_Impuesto.aspx.vb">
-      <DependentUpon>Inf_Impuesto.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Parametros\Inf_Impuesto\Inf_ImpuestoAjax.aspx.designer.vb">
-      <DependentUpon>Inf_ImpuestoAjax.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Parametros\Inf_Impuesto\Inf_ImpuestoAjax.aspx.vb">
-      <DependentUpon>Inf_ImpuestoAjax.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Parametros\Inf_Impuesto\Inf_ImpuestoClass.vb" />
-    <Compile Include="Parametros\Inf_Impuesto\Inf_ImpuestoSQLClass.vb" />
     <Compile Include="Parametros\Mensajes\Mensajes.aspx.designer.vb">
       <DependentUpon>Mensajes.aspx</DependentUpon>
     </Compile>
@@ -1419,22 +1445,6 @@
     </Compile>
     <Compile Include="Parametros\Paises\PaisesClass.vb" />
     <Compile Include="Parametros\Paises\PaisesSQLClass.vb" />
-    <Compile Include="Parametros\Porcen_Descuentos\Porcen_Descuentos.aspx.designer.vb">
-      <DependentUpon>Porcen_Descuentos.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Parametros\Porcen_Descuentos\Porcen_Descuentos.aspx.vb">
-      <DependentUpon>Porcen_Descuentos.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Parametros\Porcen_Descuentos\Porcen_DescuentosAjax.aspx.designer.vb">
-      <DependentUpon>Porcen_DescuentosAjax.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Parametros\Porcen_Descuentos\Porcen_DescuentosAjax.aspx.vb">
-      <DependentUpon>Porcen_DescuentosAjax.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Parametros\Porcen_Descuentos\Porcen_DescuentosClass.vb" />
-    <Compile Include="Parametros\Porcen_Descuentos\Porcen_DescuentosSQLClass.vb" />
     <Compile Include="Parametros\Productos\Productos.aspx.designer.vb">
       <DependentUpon>Productos.aspx</DependentUpon>
     </Compile>
