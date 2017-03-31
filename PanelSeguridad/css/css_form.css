@@ -446,10 +446,26 @@ FUNCIONALIDADES SUB MENU CLIENTES
 /*CONTROL IMAGEN RELACION*/
 #Div_R:hover .ImaRelation, #Div_RC:hover .ImaRelation {
     content: url("../../images/Relation_Gray.png");
+    cursor: pointer;
+    cursor: hand; /*internet explorer*/
 }
 
 .ImaRelation {
     content: url("../../images/Relation_Red.png");
+}
+
+/************************************************************************************
+FUNCIONALIDADES INFORMACION IMPUESTOS
+*************************************************************************************/
+/*CONTROL IMAGEN RELACION*/
+#DivCliente:hover .ImaClient {
+    content: url("../../images/Cliente_Gray.png");
+    cursor: pointer;
+    cursor: hand; /*internet explorer*/
+}
+
+.ImaClient {
+    content: url("../../images/Cliente_Red.png");
 }
 
 
@@ -634,4 +650,4 @@ MEDIA QUERIES
 /* pendiente por fallas en el modulo informe impuesto*/
 /************************************************************************************
 /************************************************************************************
-/************************************************************************************
+/*************************************************************************************/

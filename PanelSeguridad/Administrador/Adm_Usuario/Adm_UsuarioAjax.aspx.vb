@@ -309,11 +309,15 @@ Public Class Adm_UsuarioAjax
     Protected Sub Search_People()
 
         Dim SQL As New ClienteSQLClass
-        Dim vl_S_Nit As String = Request.Form("NIT")
-        Dim vl_S_TD As String = Request.Form("TD")
-        Dim vl_S_D As String = Request.Form("D")
+        Dim Obj As New ClienteClass
 
-        Dim Str_People As String = SQL.SearchPeople_Exists(vl_S_Nit, vl_S_TD, vl_S_D)
+        Obj.Nit_ID = Request.Form("NIT")
+        Obj.TypeDocument_ID = Request.Form("TD")
+        Obj.Document_ID = Request.Form("D")
+
+        Obj.TipoSQL = "S_Nit"
+
+        Dim Str_People As String = SQL.SearchPeople_Exists(Obj)
         Response.Write(Str_People)
 
     End Sub

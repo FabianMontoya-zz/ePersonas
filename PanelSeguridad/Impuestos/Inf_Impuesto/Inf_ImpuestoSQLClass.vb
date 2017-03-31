@@ -36,67 +36,76 @@ Public Class Inf_ImpuestoSQLClass
                         "     C.C_Descripcion, " & _
                         "     IM_G.IM_Descripcion, " & _
                         "     CLI.CLI_Nombre, " & _
-                        "     TD.TD_Descripcion " & _
-                        " FROM INF_IMPUESTO INF_IM  " & _
-                        " INNER JOIN PAISES P ON P.P_Cod = INF_IM.IIMP_Cod_ID " & _
-                        " INNER JOIN CIUDADES C ON C.C_Ciudad_ID = INF_IM.IIMP_Ciudad_ID " & _
-                        " INNER JOIN IMPUESTO_GASTO IM_G ON IM_G.IM_Impuesto_Gasto_ID = INF_IM.IIMP_Impuesto_Gasto_ID " & _
-                        " INNER JOIN M_SEGURIDAD.dbo.TC_TIPO_DOCUMENTO TD ON TD.TD_ID_TDoc = INF_IM.IIMP_TypeDocument_ID " & _
-                        " INNER JOIN CLIENTE CLI ON CLI.CLI_Document_ID = INF_IM.IIMP_Document_ID  ")
-        Else
-
-            If vp_S_Contenido = "ALL" Then
-                sql.Append(" SELECT IIMP_Cod_ID, " & _
-                        "     IIMP_Ciudad_ID, " & _
-                        "     IIMP_Impuesto_Gasto_ID, " & _
-                        "     IIMP_Nit_ID, " & _
-                        "     IIMP_TypeDocument_ID, " & _
-                        "     IIMP_Document_ID, " & _
-                        "     IIMP_FechaActualizacion, " & _
-                        "     IIMP_Usuario, " & _
-                        "     P.P_Name, " & _
-                        "     C.C_Descripcion, " & _
-                        "     IM_G.IM_Descripcion, " & _
-                        "     CLI.CLI_Nombre, " & _
-                        "     TD.TD_Descripcion " & _
-                        " FROM INF_IMPUESTO INF_IM  " & _
-                        " INNER JOIN PAISES P ON P.P_Cod = INF_IM.IIMP_Cod_ID " & _
-                        " INNER JOIN CIUDADES C ON C.C_Ciudad_ID = INF_IM.IIMP_Ciudad_ID " & _
-                        " INNER JOIN IMPUESTO_GASTO IM_G ON IM_G.IM_Impuesto_Gasto_ID = INF_IM.IIMP_Impuesto_Gasto_ID " & _
-                        " INNER JOIN M_SEGURIDAD.dbo.TC_TIPO_DOCUMENTO TD ON TD.TD_ID_TDoc = INF_IM.IIMP_TypeDocument_ID " & _
-                        " INNER JOIN CLIENTE CLI ON CLI.CLI_Document_ID = INF_IM.IIMP_Document_ID  ")
-            Else
-                sql.Append(" SELECT IIMP_Cod_ID, " & _
-                        "     IIMP_Ciudad_ID, " & _
-                        "     IIMP_Impuesto_Gasto_ID, " & _
-                        "     IIMP_Nit_ID, " & _
-                        "     IIMP_TypeDocument_ID, " & _
-                        "     IIMP_Document_ID, " & _
-                        "     IIMP_FechaActualizacion, " & _
-                        "     IIMP_Usuario, " & _
-                        "     P.P_Name, " & _
-                        "     C.C_Descripcion, " & _
-                        "     IM_G.IM_Descripcion, " & _
-                        "     CLI.CLI_Nombre, " & _
-                        "     TD.TD_Descripcion " & _
+                        "     TD.TD_Descripcion, " & _
+                        "     CLI_2.CLI_Nombre, " & _
+                        "     ROW_NUMBER()OVER(ORDER BY  IIMP_Nit_ID, IIMP_Impuesto_Gasto_ID ASC) AS Index_InfImpu " & _
                         " FROM INF_IMPUESTO INF_IM  " & _
                         " INNER JOIN PAISES P ON P.P_Cod = INF_IM.IIMP_Cod_ID " & _
                         " INNER JOIN CIUDADES C ON C.C_Ciudad_ID = INF_IM.IIMP_Ciudad_ID " & _
                         " INNER JOIN IMPUESTO_GASTO IM_G ON IM_G.IM_Impuesto_Gasto_ID = INF_IM.IIMP_Impuesto_Gasto_ID " & _
                         " INNER JOIN M_SEGURIDAD.dbo.TC_TIPO_DOCUMENTO TD ON TD.TD_ID_TDoc = INF_IM.IIMP_TypeDocument_ID " & _
                         " INNER JOIN CLIENTE CLI ON CLI.CLI_Document_ID = INF_IM.IIMP_Document_ID  " & _
+                        " INNER JOIN CLIENTE CLI_2 ON CLI_2.CLI_Document_ID = SUBSTRING(IIMP_Nit_ID,0,LEN(IIMP_Nit_ID)) ")
+        Else
+
+            If vp_S_Contenido = "ALL" Then
+                sql.Append(" SELECT IIMP_Cod_ID, " & _
+                        "     IIMP_Ciudad_ID, " & _
+                        "     IIMP_Impuesto_Gasto_ID, " & _
+                        "     IIMP_Nit_ID, " & _
+                        "     IIMP_TypeDocument_ID, " & _
+                        "     IIMP_Document_ID, " & _
+                        "     IIMP_FechaActualizacion, " & _
+                        "     IIMP_Usuario, " & _
+                        "     P.P_Name, " & _
+                        "     C.C_Descripcion, " & _
+                        "     IM_G.IM_Descripcion, " & _
+                        "     CLI.CLI_Nombre, " & _
+                        "     TD.TD_Descripcion, " & _
+                        "     CLI_2.CLI_Nombre, " & _
+                        "     ROW_NUMBER()OVER(ORDER BY  IIMP_Nit_ID, IIMP_Impuesto_Gasto_ID ASC) AS Index_InfImpu " & _
+                        " FROM INF_IMPUESTO INF_IM  " & _
+                        " INNER JOIN PAISES P ON P.P_Cod = INF_IM.IIMP_Cod_ID " & _
+                        " INNER JOIN CIUDADES C ON C.C_Ciudad_ID = INF_IM.IIMP_Ciudad_ID " & _
+                        " INNER JOIN IMPUESTO_GASTO IM_G ON IM_G.IM_Impuesto_Gasto_ID = INF_IM.IIMP_Impuesto_Gasto_ID " & _
+                        " INNER JOIN M_SEGURIDAD.dbo.TC_TIPO_DOCUMENTO TD ON TD.TD_ID_TDoc = INF_IM.IIMP_TypeDocument_ID " & _
+                        " INNER JOIN CLIENTE CLI ON CLI.CLI_Document_ID = INF_IM.IIMP_Document_ID  " & _
+                        " INNER JOIN CLIENTE CLI_2 ON CLI_2.CLI_Document_ID = SUBSTRING(IIMP_Nit_ID,0,LEN(IIMP_Nit_ID)) ")
+            Else
+                sql.Append(" SELECT IIMP_Cod_ID, " & _
+                        "     IIMP_Ciudad_ID, " & _
+                        "     IIMP_Impuesto_Gasto_ID, " & _
+                        "     IIMP_Nit_ID, " & _
+                        "     IIMP_TypeDocument_ID, " & _
+                        "     IIMP_Document_ID, " & _
+                        "     IIMP_FechaActualizacion, " & _
+                        "     IIMP_Usuario, " & _
+                        "     P.P_Name, " & _
+                        "     C.C_Descripcion, " & _
+                        "     IM_G.IM_Descripcion, " & _
+                        "     CLI.CLI_Nombre, " & _
+                        "     TD.TD_Descripcion, " & _
+                        "     CLI_2.CLI_Nombre, " & _
+                        "     ROW_NUMBER()OVER(ORDER BY  IIMP_Nit_ID, IIMP_Impuesto_Gasto_ID ASC) AS Index_InfImpu " & _
+                        " FROM INF_IMPUESTO INF_IM  " & _
+                        " INNER JOIN PAISES P ON P.P_Cod = INF_IM.IIMP_Cod_ID " & _
+                        " INNER JOIN CIUDADES C ON C.C_Ciudad_ID = INF_IM.IIMP_Ciudad_ID " & _
+                        " INNER JOIN IMPUESTO_GASTO IM_G ON IM_G.IM_Impuesto_Gasto_ID = INF_IM.IIMP_Impuesto_Gasto_ID " & _
+                        " INNER JOIN M_SEGURIDAD.dbo.TC_TIPO_DOCUMENTO TD ON TD.TD_ID_TDoc = INF_IM.IIMP_TypeDocument_ID " & _
+                        " INNER JOIN CLIENTE CLI ON CLI.CLI_Document_ID = INF_IM.IIMP_Document_ID  " & _
+                        " INNER JOIN CLIENTE CLI_2 ON CLI_2.CLI_Document_ID = SUBSTRING(IIMP_Nit_ID,0,LEN(IIMP_Nit_ID)) " & _
                         " AND " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
             End If
         End If
 
         If vp_S_Nit_User <> "N" Then
             If vp_S_Contenido = "ALL" Then
-                vl_sql_filtro.Append("WHERE  IIMP_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY IIMP_Nit_ID, IIMP_Cod_ID ASC")
+                vl_sql_filtro.Append("WHERE  IIMP_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY IIMP_Nit_ID, IIMP_Impuesto_Gasto_ID ASC")
             Else
-                vl_sql_filtro.Append("AND  IIMP_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY IIMP_Nit_ID, IIMP_Cod_ID ASC")
+                vl_sql_filtro.Append("AND  IIMP_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY IIMP_Nit_ID, IIMP_Impuesto_Gasto_ID ASC")
             End If
         Else
-            vl_sql_filtro.Append(" ORDER BY IIMP_Nit_ID, IIMP_Cod_ID ASC")
+            vl_sql_filtro.Append(" ORDER BY IIMP_Nit_ID, IIMP_Impuesto_Gasto_ID ASC")
         End If
 
         StrQuery = sql.ToString & vl_sql_filtro.ToString
@@ -328,10 +337,10 @@ Public Class Inf_ImpuestoSQLClass
         Dim sql As New StringBuilder
 
         sql.Append(" SELECT  CAST(CLI_TypeDocument_ID AS NVARCHAR(4)) + '_' + CAST(CLI_Document_ID AS NVARCHAR(20)) AS ID, " & _
-                   " CAST(CLI_TypeDocument_ID AS NVARCHAR(4)) + ' - ' + CAST(CLI_Document_ID AS NVARCHAR(20)) + ' - ' + CLI_Nombre AS Descripcion  " & _
-                   " FROM CLIENTE " & _
-                   " WHERE CLI_Document_ID IN (SELECT CLI_Document_ID  FROM CLIENTE WHERE CLI_OP_Transito ='S' OR CLI_OP_Hacienda ='S') " & _
-                   " AND CLI_Nit_ID ='" & vp_S_Nit_ID & "'")
+                               " CAST(CLI_TypeDocument_ID AS NVARCHAR(4)) + ' - ' + CAST(CLI_Document_ID AS NVARCHAR(20)) + ' - ' + CLI_Nombre AS Descripcion  " & _
+                               " FROM CLIENTE " & _
+                               " WHERE CLI_Document_ID IN (SELECT CLI_Document_ID  FROM CLIENTE WHERE CLI_OP_Transito ='S' OR CLI_OP_Hacienda ='S') " & _
+                               " AND CLI_Nit_ID ='" & vp_S_Nit_ID & "'")
         StrQuery = sql.ToString
 
         ObjListDroplist = SQLGeneral.listdrop(StrQuery, Conexion)
@@ -416,7 +425,8 @@ Public Class Inf_ImpuestoSQLClass
             objInf_Impuesto.DescripImpuesto_Gasto = ReadConsulta.GetValue(10)
             objInf_Impuesto.DescripNitResponsable = ReadConsulta.GetValue(11)
             objInf_Impuesto.DescripTypeDocument = ReadConsulta.GetValue(12)
-          
+            objInf_Impuesto.DescripEmpresa = ReadConsulta.GetValue(13)
+            objInf_Impuesto.Index = ReadConsulta.GetValue(14)
 
             'agregamos a la lista
             ObjListInf_Impuesto.Add(objInf_Impuesto)
