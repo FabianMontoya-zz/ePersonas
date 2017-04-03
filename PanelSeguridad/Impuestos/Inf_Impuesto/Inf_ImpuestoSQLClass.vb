@@ -44,8 +44,8 @@ Public Class Inf_ImpuestoSQLClass
                         " INNER JOIN CIUDADES C ON C.C_Ciudad_ID = INF_IM.IIMP_Ciudad_ID " & _
                         " INNER JOIN IMPUESTO_GASTO IM_G ON IM_G.IM_Impuesto_Gasto_ID = INF_IM.IIMP_Impuesto_Gasto_ID " & _
                         " INNER JOIN M_SEGURIDAD.dbo.TC_TIPO_DOCUMENTO TD ON TD.TD_ID_TDoc = INF_IM.IIMP_TypeDocument_ID " & _
-                        " INNER JOIN CLIENTE CLI ON CLI.CLI_Document_ID = INF_IM.IIMP_Document_ID  " & _
-                        " INNER JOIN CLIENTE CLI_2 ON CLI_2.CLI_Document_ID = SUBSTRING(IIMP_Nit_ID,0,LEN(IIMP_Nit_ID)) ")
+                        " INNER JOIN CLIENTE CLI ON CLI.CLI_Document_ID = INF_IM.IIMP_Document_ID  AND CLI.CLI_Nit_ID  = INF_IM.IIMP_Nit_ID " & _
+                        " INNER JOIN CLIENTE CLI_2 ON CLI_2.CLI_Document_ID = SUBSTRING(IIMP_Nit_ID,0,LEN(IIMP_Nit_ID)) AND CLI_2.CLI_Nit_ID  = INF_IM.IIMP_Nit_ID ")
         Else
 
             If vp_S_Contenido = "ALL" Then
@@ -69,8 +69,8 @@ Public Class Inf_ImpuestoSQLClass
                         " INNER JOIN CIUDADES C ON C.C_Ciudad_ID = INF_IM.IIMP_Ciudad_ID " & _
                         " INNER JOIN IMPUESTO_GASTO IM_G ON IM_G.IM_Impuesto_Gasto_ID = INF_IM.IIMP_Impuesto_Gasto_ID " & _
                         " INNER JOIN M_SEGURIDAD.dbo.TC_TIPO_DOCUMENTO TD ON TD.TD_ID_TDoc = INF_IM.IIMP_TypeDocument_ID " & _
-                        " INNER JOIN CLIENTE CLI ON CLI.CLI_Document_ID = INF_IM.IIMP_Document_ID  " & _
-                        " INNER JOIN CLIENTE CLI_2 ON CLI_2.CLI_Document_ID = SUBSTRING(IIMP_Nit_ID,0,LEN(IIMP_Nit_ID)) ")
+                        " INNER JOIN CLIENTE CLI ON CLI.CLI_Document_ID = INF_IM.IIMP_Document_ID  AND CLI.CLI_Nit_ID  = INF_IM.IIMP_Nit_ID " & _
+                        " INNER JOIN CLIENTE CLI_2 ON CLI_2.CLI_Document_ID = SUBSTRING(IIMP_Nit_ID,0,LEN(IIMP_Nit_ID)) AND CLI_2.CLI_Nit_ID  = INF_IM.IIMP_Nit_ID ")
             Else
                 sql.Append(" SELECT IIMP_Cod_ID, " & _
                         "     IIMP_Ciudad_ID, " & _
@@ -92,8 +92,8 @@ Public Class Inf_ImpuestoSQLClass
                         " INNER JOIN CIUDADES C ON C.C_Ciudad_ID = INF_IM.IIMP_Ciudad_ID " & _
                         " INNER JOIN IMPUESTO_GASTO IM_G ON IM_G.IM_Impuesto_Gasto_ID = INF_IM.IIMP_Impuesto_Gasto_ID " & _
                         " INNER JOIN M_SEGURIDAD.dbo.TC_TIPO_DOCUMENTO TD ON TD.TD_ID_TDoc = INF_IM.IIMP_TypeDocument_ID " & _
-                        " INNER JOIN CLIENTE CLI ON CLI.CLI_Document_ID = INF_IM.IIMP_Document_ID  " & _
-                        " INNER JOIN CLIENTE CLI_2 ON CLI_2.CLI_Document_ID = SUBSTRING(IIMP_Nit_ID,0,LEN(IIMP_Nit_ID)) " & _
+                        " INNER JOIN CLIENTE CLI ON CLI.CLI_Document_ID = INF_IM.IIMP_Document_ID  AND CLI.CLI_Nit_ID  = INF_IM.IIMP_Nit_ID " & _
+                        " INNER JOIN CLIENTE CLI_2 ON CLI_2.CLI_Document_ID = SUBSTRING(IIMP_Nit_ID,0,LEN(IIMP_Nit_ID)) AND CLI_2.CLI_Nit_ID  = INF_IM.IIMP_Nit_ID " & _
                         " AND " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
             End If
         End If

@@ -455,7 +455,7 @@ function No_Back_Button() {
         (event.ctrlKey && event.keyCode == 87) || (event.ctrlKey && event.shiftKey && event.keyCode == 73)) {
             event.cancelBubble = true;
             event.returnValue = false;
-            alert("¡Función no permitida!");
+            Mensaje_General("¡Alerta!", "¡Función no permitida!" , "W");
             return false;
         }
   
@@ -495,7 +495,7 @@ function No_Back_Button() {
                 ctrlPressed = event.ctrlKey;
             }
             if (shiftPressed || altPressed || ctrlPressed)
-                alert("Función no permitida");
+                Mensaje_General("¡Alerta!", "¡Función no permitida!" , "W");
         }
         return true;
     }
@@ -1919,12 +1919,7 @@ function UpLoad_Document(NameAjax, NameFile_ID, Form) {
                 var filename = result;
                 switch (filename) {
                     case "NO_FORMAT":
-                        $("#dialog").dialog("option", "title", "Formato Incorrecto!");
-                        $("#Mensaje_alert").text("El documento no se puede generar, el formato es diferente a la parametrización asignada! ");
-                        $("#dialog").dialog("open");
-                        $("#DE").css("display", "none");
-                        $("#SE").css("display", "none");
-                        $("#WE").css("display", "block");
+                        Mensaje_General("¡Formato Incorrecto!", "El documento no se puede generar, el formato es diferente a la parametrización asignada! " , "W");
                         break;
 
                     default:
@@ -1953,7 +1948,7 @@ function UpLoad_Document(NameAjax, NameFile_ID, Form) {
 
             },
             error: function (error) {
-                alert("Ocurrió un error inesperado, por favor intente de nuevo mas tarde: " + error);
+                Mensaje_General("¡Alerta!", "Ocurrió un error inesperado, por favor intente de nuevo mas tarde:" + error, "W");
             }
         });
     }
