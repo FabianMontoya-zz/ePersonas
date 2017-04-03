@@ -204,13 +204,13 @@ Public Class PaisesAjax
 
         Dim SQL As New CalendarioSQLClass
         Dim ObjListDroplist As New List(Of CalendarioClass)
+        Dim obj As New ClienteClass
 
-        ObjListDroplist = SQL.Read_Matrix_Calendarios_Genericos()
+        obj.TipoSQL = "Paises"
+        ObjListDroplist = SQL.Read_Matrix_Calendarios(obj)
         Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
 
     End Sub
-
-
 
 #End Region
 

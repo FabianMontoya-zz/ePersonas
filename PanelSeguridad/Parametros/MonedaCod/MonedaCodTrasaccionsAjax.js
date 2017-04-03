@@ -5,7 +5,8 @@ function transacionAjax_CargaBusqueda(State) {
         url: "MonedaCodAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'MONEDA_COD'
         },
         //Transaccion Ajax en proceso
@@ -41,7 +42,8 @@ function transacionAjax_MonedaCod(State, filtro, opcion) {
         url: "MonedaCodAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "filtro": filtro,
             "opcion": opcion,
             "contenido": contenido
@@ -79,7 +81,8 @@ function transacionAjax_MonedaCod_create(State) {
         url: "MonedaCodAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "ID": ID,
             "descripcion": $("#Txt_Descripcion").val(),
             "sigla": $("#Txt_Sigla").val(),
@@ -90,40 +93,20 @@ function transacionAjax_MonedaCod_create(State) {
             switch (result) {
 
                 case "Error":
-                    $("#dialog").dialog("option", "title", "Disculpenos :(");
-                    $("#Mensaje_alert").text("No se realizo el ingreso del MonedaCod!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "block");
-                    $("#SE").css("display", "none");
-                    $("#WA").css("display", "none");
+                    Mensaje_General("Disculpenos :(", "No se realizó el ingreso de la moneda.", "E");
                     break;
 
                 case "Existe":
-                    $("#dialog").dialog("option", "title", "Ya Existe");
-                    $("#Mensaje_alert").text("El codigo ingresado ya existe en la base de datos!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "None");
-                    $("#SE").css("display", "none");
-                    $("#WE").css("display", "block");
+                    Mensaje_General("¡Ya Existe!", "El código ingresado ya existe en la base de datos.", "W");
                     break;
 
                 case "Exito":
                     if (estado == "modificar") {
-                        $("#dialog").dialog("option", "title", "Exito");
-                        $("#Mensaje_alert").text("El MonedaCod fue modificado exitosamente! ");
-                        $("#dialog").dialog("open");
-                        $("#DE").css("display", "none");
-                        $("#SE").css("display", "block");
-                        $("#WA").css("display", "none");
+                        Mensaje_General("¡Exito!", "La moneda se ha modificado correctamente.", "S");
                         Clear();
                     }
                     else {
-                        $("#dialog").dialog("option", "title", "Exito");
-                        $("#Mensaje_alert").text("El MonedaCod fue creado exitosamente! ");
-                        $("#dialog").dialog("open");
-                        $("#DE").css("display", "none");
-                        $("#SE").css("display", "block");
-                        $("#WA").css("display", "none");
+                        Mensaje_General("¡Exito!", "La moneda se ha ingresado correctamente.", "S");
                         Clear();
                     }
                     break;
@@ -144,7 +127,8 @@ function transacionAjax_MonedaCod_delete(State) {
         url: "MonedaCodAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "ID": editID,
             "user": User.toUpperCase()
         },
@@ -153,34 +137,16 @@ function transacionAjax_MonedaCod_delete(State) {
             switch (result) {
 
                 case "Error":
-                    $("#dialog").dialog("option", "title", "Disculpenos :(");
-                    $("#Mensaje_alert").text("No se elimino el MonedaCod!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "block");
-                    $("#SE").css("display", "none");
-                    $("#WA").css("display", "none");
                     $("#dialog_eliminar").dialog("close");
-                    break;
+                    Mensaje_General("Disculpenos :(", "Ocurrio un error al intentar eliminar esta moneda.", "E");
 
-                case "Exist_O":
-                    $("#dialog").dialog("option", "title", "Integridad referencial");
-                    $("#Mensaje_alert").text("No se elimino el MonedaCod, para eliminarlo debe eliminar primero el registro en la tabla Empleado");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "none");
-                    $("#SE").css("display", "none");
-                    $("#WE").css("display", "block");
-                    $("#dialog_eliminar").dialog("close");
                     break;
 
                 case "Exito":
                     $("#dialog_eliminar").dialog("close");
-                    $("#dialog").dialog("option", "title", "Exito");
-                    $("#Mensaje_alert").text("El MonedaCod fue eliminado exitosamente! ");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "none");
-                    $("#SE").css("display", "block");
-                    $("#WA").css("display", "none");
-                    $("#dialog_eliminar").dialog("close");
+                    Mensaje_General("¡Registro Eliminado!", "La moneda se ha eliminado correctamente.", "S");
+                    $(".container_TGrid").html("");
+
                     Clear();
                     break;
             }

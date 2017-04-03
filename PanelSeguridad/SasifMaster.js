@@ -1,14 +1,26 @@
 ﻿/*--------------- region de variables globales --------------------*/
+//capturamos la url
+var URLPage = window.location.search.substring(1);
+var URLVariables = URLPage.split('&');
+
 var User;
 var Link;
+var Encrip;
+var g_NitEmpresa_User;
 var NameTemporal;
 var Doc_name;
-var Matrix_Mes = [];
-var Array_G_Usuario = [];
+var Mensaje_NO_Permitido = "";
 
 var Control_Work;
 var Suma_Valor_Inicial = 0;
 
+var ControlTime = "";
+var TimeWrote = "";
+var Hours = "";
+var Minutes = "";
+var vg_Flag_menu = 0;
+
+var Matrix_Mes = [];
 Matrix_Mes[0] = [1, "Enero", 31];
 Matrix_Mes[1] = [2, "Febrero", 28];
 Matrix_Mes[2] = [3, "Marzo", 31];
@@ -21,16 +33,16 @@ Matrix_Mes[8] = [9, "Septiembre", 30];
 Matrix_Mes[9] = [10, "Octubre", 31];
 Matrix_Mes[10] = [11, "Noviembre", 30];
 Matrix_Mes[11] = [12, "Diciembre", 31];
-
 /*--------------- region de variables globales --------------------*/
 
 $(document).ready(function () {
+    clearConsole();
+
     fecha();
-    JSON_User();
 
     $(".C_Chosen").chosen({
         width: "100%",
-        placeholder: 'Select an option',
+        placeholder: 'Seleccione una opción',
         search_contains: true
     });
 
@@ -39,9 +51,9 @@ $(document).ready(function () {
     });
 
     $('.Decimal').keyup(function () {
-        this.value = (this.value + '').replace(/[^0-9\.]/g, '');
+        this.value = (this.value + '').replace(/[^0-9\,]/g, '');
     });
-
+    
     $('.Letter').keyup(function () {
         this.value = (this.value + '').replace(/[^a-zA-Z\s\ñ\Ñ\ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç]+/g, '');
     });
@@ -58,26 +70,229 @@ $(document).ready(function () {
         this.value = "";
     });
 
+    ready();
 
 });
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                      VALIDADORES EN ONKEYPRESS                                                                                                          ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+//Se utiliza para que el campo de texto solo acepte numeros
+function OnlyNumbers(evt) {
+    if (window.event) {//asignamos el valor de la tecla a keynum
+        keynum = evt.keyCode; //IE
+    }
+    else {
+        keynum = evt.which; //FF
+    }
+    //comprobamos si se encuentra en el rango numérico y que teclas no recibirá.
+    if ((keynum > 47 && keynum < 58) || keynum == 8 || keynum == 13 || keynum == 6) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+//Se utiliza para que el campo de texto solo acepte letras(Abecedario latino)-espacios
+function OnlyLetters(e) {
+    key = e.keyCode || e.which;
+    tecla = String.fromCharCode(key).toString();
+    letras = " áéíóúabcdefghijklmnñopqrstuvwxyzÁÉÍÓÚABCDEFGHIJKLMNÑOPQRSTUVWXYZ";//Se define todo el abecedario que se quiere que se muestre.
+    especiales = [8, 37, 39, 46, 6]; //Es la validación del KeyCodes, que teclas recibe el campo de texto.
+
+    tecla_especial = false
+    for (var i in especiales) {
+        if (key == especiales[i]) {
+            tecla_especial = true;
+            break;
+        }
+    }
+
+    if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+        return false;
+    }
+}
+
+//Se utiliza para que el campo de texto solo acepte letras-letras especiales-espacios
+function OnlySpecialLetters(e) {
+    key = e.keyCode || e.which;
+    tecla = String.fromCharCode(key).toString();
+    letras = " ÁÉÍÓÚABCDEFGHIJKLMNÑOPQRSTUVWXYZÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛabcdefghijklmnñopqrstuvwxyzãàáäâèéëêìíïîòóöôùúüûÑñÇç";//Se define todo el abecedario que se quiere que se muestre.
+    especiales = [8, 37, 39, 46, 6]; //Es la validación del KeyCodes, que teclas recibe el campo de texto.
+
+    tecla_especial = false
+    for (var i in especiales) {
+        if (key == especiales[i]) {
+            tecla_especial = true;
+            break;
+        }
+    }
+
+    if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+        return false;
+    }
+}
+
+//Se utiliza para que el campo de texto solo acepte letras(Abecedario latino)-números
+function OnlyLettersNumbers(e) {
+    key = e.keyCode || e.which;
+    tecla = String.fromCharCode(key).toString();
+    letras = "0123456789áéíóúabcdefghijklmnñopqrstuvwxyzÁÉÍÓÚABCDEFGHIJKLMNÑOPQRSTUVWXYZ";//Se define todo el abecedario que se quiere que se muestre.
+    especiales = [8, 37, 39, 46, 6]; //Es la validación del KeyCodes, que teclas recibe el campo de texto.
+
+    tecla_especial = false
+    for (var i in especiales) {
+        if (key == especiales[i]) {
+            tecla_especial = true;
+            break;
+        }
+    }
+
+    if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+        return false;
+    }
+}
+
+//Se utiliza para que el campo de texto acepte letras-letras especiales-números-espacios
+function LettersNumbersSpecial(e) {
+    key = e.keyCode || e.which;
+    tecla = String.fromCharCode(key).toString();
+    letras = " 0123456789ÁÉÍÓÚABCDEFGHIJKLMNÑOPQRSTUVWXYZÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛabcdefghijklmnñopqrstuvwxyzãàáäâèéëêìíïîòóöôùúüûÇç";//Se define todo el abecedario que se quiere que se muestre.
+    especiales = [8, 37, 39, 46, 6]; //Es la validación del KeyCodes, que teclas recibe el campo de texto.
+
+    tecla_especial = false
+    for (var i in especiales) {
+        if (key == especiales[i]) {
+            tecla_especial = true;
+            break;
+        }
+    }
+
+    if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+        return false;
+    }
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                 BOTONES GLOBALES                                                                                                            ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+//Bandera que usamos para indicar por consola que todo se completó correctamente
+function ready() {
+
+    var Digital = new Date();
+
+    var Day = Digital.getDate();
+    var Month = Digital.getMonth();
+    var Year = Digital.getFullYear();
+
+    if (Day <= 9) {
+        Day = "0" + Day;
+    }
+
+    var hours = Digital.getHours();
+    var minutes = Digital.getMinutes();
+    var seconds = Digital.getSeconds();
+
+
+    if (hours <= 9) {
+        hours = "0" + hours;
+    }
+    if (minutes <= 9) {
+        minutes = "0" + minutes;
+    }
+    if (seconds <= 9) {
+        seconds = "0" + seconds;
+    }
+
+    setTimeout(console.log.bind(console, "" + Day + "/" + Matrix_Mes[Month][1] + "/" + Year + " " + hours + ":" + minutes + ":" + seconds + "")); //No muestra la ruta donde se genera el console
+    setTimeout(console.log.bind(console, "%cAll is ready, enjoy!", "color: #b70d0d; font-size: x-large")); //No muestra la ruta donde se genera el console
+    setTimeout(console.log.bind(console, "%cDesarrollado por SASIF® 2016. Todos los derechos reservados.\nContacto sistemas@sasif.com.co | Bogotá D.C. - Colombia \n© SASIF S.A.S. " + Year + "", "color: #b70d0d; font-size: x"));
+
+    Reload();
+}
+
+/*Función que recarga la página y exige que se traigan los nuevos cambios desde el servidor*/
+/*Funciona solamente cuando se cierra y nuevamente se abre el navegador*/
+function Reload() {
+    /*
+     * Obtenemos la última parte de la URL. Por ejemplo, en una URL como:
+     * https://unadireccion.com/blog
+     * se obtendrá 'blog'
+    */
+    (function () {
+        let page = location.href.substring(location.href.lastIndexOf('/') + 1);
+        let isRedirected = sessionStorage.getItem(page); //Variable por sesión de navegador
+
+        if (!isRedirected) {
+            sessionStorage.setItem(page, true);
+            window.location.reload(true);
+        }
+    })();
+}
+
+////Función que borra el log generado en la consola según el navegador
+function clearConsole() {
+    if (typeof console._commandLineAPI !== 'undefined') {
+        console.API = console._commandLineAPI;
+    } else if (typeof console._inspectorCommandLineAPI !== 'undefined') {
+        console.API = console._inspectorCommandLineAPI;
+    } else if (typeof console.clear !== 'undefined') {
+        console.API = console;
+    }
+    if (console.API) {
+        setTimeout(console.API.clear.bind(console)); //No muestra la ruta donde se genera el console        
+    }
+    setTimeout(console.clear.bind());
+}
+
+//salida del formulario
+function btnSalir() {
+
+    switch (Link) {
+        case "O_CLIENTE": //cliente
+            //transacionAjax_EraseDocument('EraseDocument');
+            break;
+        case "P_AUTODOC": //autorizacion documentos
+            //transacionAjax_EraseDocument('EraseDocument');
+            break;
+    }
+
+    window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&Key=" + ArrayMenu[0].Nit + "&LINK=" + Link;
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                 INICIO DE PROCESOS                                                                                                            ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//visualiza el menu version responsive
+function VerMenu(){
+    //$(".Dimencion_Menu").width("240px");
+    if(vg_Flag_menu==0){
+        $(".panel_menu").show("fast"); 
+        vg_Flag_menu = 1;
+    }
+    else{
+        $(".panel_menu").hide("fast");
+        vg_Flag_menu = 0;
+    }
+    
+}
+
 //capturar el link y usuario para el proceso
 function ConsultaParametrosURL() {
-
-    //capturamos la url
-    var URLPage = window.location.search.substring(1);
-    var URLVariables = URLPage.split('&');
-
-
-    if (URLVariables.length <= 1)
+    if (URLVariables.length <= 2) {
         User = URLVariables[0].replace("User=", "");
+        Encrip = URLVariables[1].replace("Key=", "");
+    }
     else {
         User = URLVariables[0].replace("User=", "");
-        Link = URLVariables[1].replace("L_L=", "");
+        Encrip = URLVariables[1].replace("Key=", "");
+        Link = URLVariables[2].replace("LINK=", "");
     }
+
+    $("#User").html(User.toUpperCase());
 
     return User;
 }
@@ -124,7 +339,9 @@ function RevisarAyudas() {
     $(".Spam_A_Addres").html(ArrayAyudas[24].Ayudas_ID + ": " + ArrayAyudas[24].Descripcion);
 
     $(".Spam_AWords").html(ArrayAyudas[25].Ayudas_ID + ": " + ArrayAyudas[25].Descripcion);
-
+    $(".Spam_ARuta").html(ArrayAyudas[26].Ayudas_ID + ": " + ArrayAyudas[26].Descripcion);
+    $(".Spam_ADec_2").html(ArrayAyudas[27].Ayudas_ID + ": " + ArrayAyudas[27].Descripcion);
+    
     $(".Spam_CT1").html(ArrayAyudas[6].Descripcion);
     $(".Spam_CT2").html(ArrayAyudas[7].Descripcion);
     $(".Spam_CT4").html(ArrayAyudas[19].Descripcion);
@@ -172,6 +389,149 @@ function ResetError() {
     $("#Img10").css("display", "none");
     $("#Img11").css("display", "none");
     $("#Img12").css("display", "none");
+
+    /*IMGs Div Horarios*/
+    $("#ImgHours").css("display", "none");
+    $("#ImgMinutes").css("display", "none");
+
+    /*Errores Administración Adm_Usuario*/
+    $("#ImgNIT").css("display", "none");
+    $("#ImgID").css("display", "none");
+    $("#ImgName").css("display", "none");
+    $("#Img_TypeDoc").css("display", "none");
+    $("#ImgDoc").css("display", "none");
+
+    $("#ImgRol").css("display", "none");
+    $("#ImgAccessInfo").css("display", "none");
+    $("#ImgPolSeguGrupo").css("display", "none");
+    $("#ImgPolSecurity").css("display", "none");
+    $("#ImgAccesInfoDocument").css("display", "none");
+
+    $("#ImgAccessDocuments").css("display", "none");
+    $("#ImgGroupDocuments").css("display", "none");
+    $("#ImgAccessInfoReports").css("display", "none");
+    $("#ImgAccessReports").css("display", "none");
+    $("#ImgGroupReport").css("display", "none");
+
+    $("#ImgToken").css("display", "none");
+    $("#ImgTypeAccess").css("display", "none");
+    $("#ImgEstadoUser").css("display", "none");
+
+    /*===FIN ERRORES ADMINSITRACIÓN Adm_Usuario ===*/
+}
+
+//Función que bloquea el retorno entre páginas
+function No_Back_Button() {
+    window.location.hash = "no-back-button";
+    window.location.hash = "Again-No-back-button" //chrome    
+    window.onhashchange = function () { window.location.hash = "no-back-button"; }
+  
+    document.onkeydown = mykeyhandler;
+  
+    function mykeyhandler(event) {
+  
+        //keyCode 116 = F5 
+        //keyCode 122 = F11
+        //keyCode 16 = Shift
+        //keyCode 8 = Backspace
+        //keyCode 37 = LEFT ROW
+        //keyCode 78 = N
+        //keyCode 39 = RIGHT ROW
+        //keyCode 67 = C
+        //keyCode 73 = I
+        //keyCode 82 = R
+        //keyCode 83 = S
+        //keyCode 86 = V
+        //keyCode 85 = U 
+        //keyCode 87 = W 
+        //keyCode 45 = Insert
+  
+        event = event || window.event;
+        var tgt = event.target || event.srcElement;
+        if ((event.altKey && event.keyCode == 37) || (event.altKey && event.keyCode == 39) ||
+        (event.ctrlKey && event.keyCode == 78) || (event.ctrlKey && event.keyCode == 82) ||
+        (event.ctrlKey && event.keyCode == 83) || (event.ctrlKey && event.keyCode == 85) ||
+        (event.ctrlKey && event.keyCode == 45) || (event.shiftKey && event.keyCode == 45) ||
+        (event.ctrlKey && event.keyCode == 87) || (event.ctrlKey && event.shiftKey && event.keyCode == 73)) {
+            event.cancelBubble = true;
+            event.returnValue = false;
+            Mensaje_General("¡Alerta!", "¡Función no permitida!" , "W");
+            return false;
+        }
+  
+        if (event.keyCode == 18 && tgt.type != "text" && tgt.type != "password" && tgt.type != "textarea") {
+            return false;
+        }
+  
+        if (event.keyCode == 8 && tgt.type != "text" && tgt.type != "password" && tgt.type != "textarea") {
+            return false;
+        }
+  
+        if ((event.keyCode == 116) ||
+            (event.keyCode == 123) || //Línea F12
+            (event.keyCode == 122)) {
+            if (navigator.appName == "Microsoft Internet Explorer") {
+                window.event.keyCode = 0;
+            }
+            return false;
+        }
+    }
+  
+    function mouseDown(e) {
+        var ctrlPressed = 0;
+        var altPressed = 0;
+        var shiftPressed = 0;
+        if (parseInt(navigator.appVersion) > 3) {
+            if (navigator.appName == "Netscape") {
+                var mString = (e.modifiers + 32).toString(2).substring(3, 6);
+                shiftPressed = (mString.charAt(0) == "1");
+                ctrlPressed = (mString.charAt(1) == "1");
+                altPressed = (mString.charAt(2) == "1");
+                self.status = "modifiers=" + e.modifiers + " (" + mString + ")"
+            }
+            else {
+                shiftPressed = event.shiftKey;
+                altPressed = event.altKey;
+                ctrlPressed = event.ctrlKey;
+            }
+            if (shiftPressed || altPressed || ctrlPressed)
+                Mensaje_General("¡Alerta!", "¡Función no permitida!" , "W");
+        }
+        return true;
+    }
+  
+    if (parseInt(navigator.appVersion) > 3) {
+        document.onmousedown = mouseDown;
+        if (navigator.appName == "Netscape")
+            document.captureEvents(Event.MOUSEDOWN);
+    }
+  
+    var message = "";
+  
+    function clickIE() {
+        if (document.all) {
+            (message);
+            return false;
+        }
+    }
+  
+    function clickNS(e) {
+        if (document.layers || (document.getElementById && !document.all)) {
+            if (e.which == 2 || e.which == 3) {
+                (message); return false;
+            }
+        }
+    }
+  
+    if (document.layers) {
+        document.captureEvents(Event.MOUSEDOWN);
+        document.onmousedown = clickNS;
+    } else {
+        document.onmouseup = clickNS; document.oncontextmenu = clickIE;
+  
+    }
+  
+    document.oncontextmenu = new Function("return false");
 }
 
 //funcion para control de carga
@@ -199,7 +559,6 @@ function Load_Charge_Sasif() {
             duration: 200
         }
     });
-
 }
 
 //Abre control de carga
@@ -220,8 +579,6 @@ function OpenControl() {
 function CloseControl() {
     $("#Dialog_Control").dialog("close");
 }
-
-
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                             VALIDACIONES FECHAS Y HORAS                                                                                                            ----*/
@@ -285,26 +642,22 @@ function validate_fechaMayorQue(fechaInicial, fechaFinal, Type) {
 
 //valida las hora inicial y final que sean coherentes
 function Validahora(V_HoraInicial, V_HoraFinal) {
-
-    var A_V_HoraInicial = V_HoraInicial.split(":");
-    var A_V_HoraFinal = V_HoraFinal.split(":");
     var Valida = 0;
 
-    if (parseInt(A_V_HoraInicial[0]) > parseInt(A_V_HoraFinal[0])) {
-        Valida = 1;
-    }
+    if (V_HoraInicial == "" || V_HoraFinal == "") {
+        Valida = 2;
+    } else {
+        var A_V_HoraInicial = V_HoraInicial.split(":");
+        var A_V_HoraFinal = V_HoraFinal.split(":");
 
-    if (parseInt(A_V_HoraInicial[0]) == parseInt(A_V_HoraFinal[0])) {
-        if (parseInt(A_V_HoraInicial[1]) > parseInt(A_V_HoraFinal[1])) {
+        if (parseInt(A_V_HoraInicial[0]) > parseInt(A_V_HoraFinal[0])) {
             Valida = 1;
+        }else if (parseInt(A_V_HoraInicial[0]) == parseInt(A_V_HoraFinal[0])) {
+            if (parseInt(A_V_HoraInicial[1]) > parseInt(A_V_HoraFinal[1])) {
+                Valida = 1;
+            }
         }
-    }
-
-    if (V_HoraInicial == "")
-        Valida = 2;
-
-    if (V_HoraFinal == "")
-        Valida = 2;
+    }  
 
     return Valida;
 }
@@ -377,7 +730,7 @@ function ValidaFechaDigitada(ObjText) {
         var SegundoGuion = Strfecha.charAt(7);
 
         var SysFecha = new Date();
-        var Year_System = parseInt(SysFecha.getFullYear()) - 17;
+        var Year_System = parseInt(SysFecha.getFullYear()) - 0;
 
         if (SegundoGuion == "-" && PrimerGuion == "-") {
             var A_FN = Strfecha.split("-");
@@ -434,11 +787,43 @@ function ValidaFechaDigitada(ObjText) {
             }
         }
         else {
-            Mensaje_General("Formato incorrecto!", "La fecha debe ser YYYY/MM/DD ", "W");
+            Mensaje_General("Formato incorrecto!", "La fecha debe ser YYYY-MM-DD ", "W");
             $("#" + ObjText).val("YYYY-MM-DD");
             $("#" + ObjText).css("color", "#921919")
         }
     });
+}
+
+//Función que agrega el rango a solo fechas a futuro de la fecha seleccionada en un picker anterior
+function Change_Compara_Fecha(Selector1, Selector2) {
+    //Crea Jhon
+    //Selector1 es el picker padre (Que envia el rango)
+    //Selector2 es el picker que hereda el rango y se bloquea
+
+    $("#" + Selector1 + "").change(function () {
+        $("#" + Selector2 + "").val("");
+        var rango = $("#" + Selector1 + "").val();
+
+        $("#" + Selector2 + "").datepicker("option", "disabled", false);
+        $("#" + Selector2 + "").datepicker("option", "minDate", rango);
+    });
+
+}
+
+//Función que agrega el rango a solo fechas a pasado de la fecha seleccionada en un picker anterior
+function Change_Compara_Fecha_Menor(Selector1, Selector2) {
+    //Crea Jhon
+    //Selector1 es el picker padre (Que envia el rango)
+    //Selector2 es el picker que hereda el rango y se bloquea
+
+    $("#" + Selector1 + "").change(function () {
+        $("#" + Selector2 + "").val("");
+        var rango = $("#" + Selector1 + "").val();
+
+        $("#" + Selector2 + "").datepicker("option", "disabled", false);
+        $("#" + Selector2 + "").datepicker("option", "maxDate", rango);
+    });
+
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -551,6 +936,13 @@ function Convert_Decimal(index) {
     return Output;
 }
 
+//convierte el valor decimal con coma para mostra en las vistas
+function Convert_Decimal_Grid(vp_Index) {
+    var vl_StrCovert= vp_Index.toString();
+    var vl_Value_Coma = vl_StrCovert.replace(".", ",");
+    return vl_Value_Coma;
+}
+
 //validar la longitud del campo number
 function maxLengthTypeNumber(object) {
     if (object.value.length > object.maxLength)
@@ -618,7 +1010,8 @@ function charge_CatalogList(objCatalog, nameList, selector) {
 
     //recorremos para llenar el combo de
     for (itemArray in objCatalog) {
-        objList[0].options[itemArray] = new Option(objCatalog[itemArray].descripcion, objCatalog[itemArray].ID);
+        objList[0].options[itemArray] = new Option(objCatalog[itemArray].descripcion, objCatalog[itemArray].ID); /*Muestra el Combo solo con [Descripción]*/
+        //objList[0].options[itemArray] = new Option(objCatalog[itemArray].ID + " - " + objCatalog[itemArray].descripcion, objCatalog[itemArray].ID); /*Muestra el Combo en orden [ID - Descripción]*/
     };
 
     //validamos si el combo lleva seleccione y posicionamos en el
@@ -629,8 +1022,8 @@ function charge_CatalogList(objCatalog, nameList, selector) {
             break;
 
         case "Generico":
+            $("#" + nameList).append("<option value='0'> 0 - Genérico</option>");
             $("#" + nameList).append("<option value='-1'>Seleccione...</option>");
-            $("#" + nameList).append("<option value='0'>Genérico</option>");
             $("#" + nameList + " option[value= '-1'] ").attr("selected", true);
             break;
     }
@@ -673,13 +1066,19 @@ function Charge_Combos_Depend_Verificacion(Matrix, Selector, P_1, P_2, Index_Edi
 
 }
 
-//carga los combps dependiendo del nit
+//carga los combps dependiendo del nit sirve genericamente para toda carga
 function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
 
     $('#' + Selector).empty();
     var objList = $("[id$='" + Selector + "']");
 
     switch (Selector) {
+
+        case "Select_Politica":
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].ID + "'>" + Matrix[Item].descripcion + "</option>");
+            }
+
         case "Select_Area":
             for (Item in Matrix) {
                 if (Matrix[Item].Nit_ID == Nit) {
@@ -786,9 +1185,7 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
 
         case "Select_Contrato":
             for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID == Nit) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Contrato_ID + "'>" + Matrix[Item].Descripcion + "</option>");
-                }
+                $("#" + Selector).append("<option value='" + Matrix[Item].Colocacion_ID + "'>" + Matrix[Item].Colocacion_ID + " - " + Matrix[Item].Descripcion + "</option>");
             }
             break;
 
@@ -915,6 +1312,14 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
             }
             break;
 
+
+        case "Select_Moneda_Cod":
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].MonedaCod_ID + "'>" + Matrix[Item].MonedaCod_ID + " - " + Matrix[Item].Descripcion + "</option>");
+            }
+            break;
+
+
         case "Select_Producto":
             for (Item in Matrix) {
                 if (Matrix[Item].Nit_ID == Nit) {
@@ -955,6 +1360,43 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
                     $("#" + Selector).append("<option value='" + Matrix[Item].Marca + "'> " + Matrix[Item].Marca + "</option>");
             }
             break;
+
+        case "Select_Activo":
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].Ref_1 + "_" + Matrix[Item].Ref_2 + "_" + Matrix[Item].Ref_3 + "'> " + Matrix[Item].Ref_1 + " " + Matrix[Item].Ref_2 + " " + Matrix[Item].Ref_3 + " - " + Matrix[Item].Descripcion + "</option>");
+            }
+            break;
+
+        case "Select_Factura":
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].Ref_1 + "_" + Matrix[Item].Ref_2 + "_" + Matrix[Item].Ref_3 + "_" + Matrix[Item].Fact_Oct_ID + "'> " + Matrix[Item].Ref_1 + " " + Matrix[Item].Ref_2 + " " + Matrix[Item].Ref_3 + " - " + Matrix[Item].Fact_Oct_ID + "</option>");
+            }
+            break;
+
+        case "DDL_Padre": //Combo Padre en Adm_OpcRol
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].Rol_ID + "'> " + Matrix[Item].Rol_ID + " - " + Matrix[Item].Descripcion + "</option>");
+            }
+            break;
+
+        case "DDL_Hijo": //Combo SubRol o Rol en Adm_OpcRol
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].Rol_ID + "'> " + Matrix[Item].Rol_ID + " - " + Matrix[Item].Descripcion + "</option>");
+            }
+            break;
+
+        case "DDLLink_ID": //Combo Links en Adm_OpcRol
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].ID + "'> " + Matrix[Item].ID + " - " + Matrix[Item].descripcion + "</option>");
+            }
+            break;
+
+        case "Select_Calendario": //Calendario de Paises
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].Calendario_ID + "'> " + Matrix[Item].Calendario_ID + " - " + Matrix[Item].Descripcion + "</option>");
+            }
+            break;
+
     }
 
     $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
@@ -1013,7 +1455,7 @@ function Charge_Combo_Persona(Matrix, Selector, Nit, Index_Edit) {
 
         case "Select_Direccion"://Direcciones por persona
             for (Item in Matrix) {
-                $("#" + Selector).append("<option value='" + Matrix[Item].Index_Direccion + "'>" + Matrix[Item].Direccion + "</option>");
+                $("#" + Selector).append("<option value='" + Matrix[Item].Consecutivo + "'>"+ Matrix[Item].Consecutivo + " - " + Matrix[Item].Direccion + "</option>");
             }
             break;
     }
@@ -1202,9 +1644,14 @@ function CargaCalendarios(Matrix, Selector, Index_Edit) {
 
     switch (Selector) {
 
-        case "Select_Calendario": //Calendario de Paises
+        case "Select_Calendario_TS": //Calendario de Tipo Servicio
             for (Item in Matrix) {
                 $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Index + " - " + Matrix[Item].Descripcion + "</option>");
+            }
+            break;
+        case "Select_Calendario_SS": //Calendario de Sucursal Servicio
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Index + " - " + Matrix[Item].Descripcion + " - " + Matrix[Item].Tipo_Tabla + "</option>");
             }
             break;
     }
@@ -1264,8 +1711,154 @@ function CargaMonedas(Matrix, Selector, Index_Edit) {
     $('.C_Chosen').trigger('chosen:updated');
 }
 
+//Carga las Políticas de Seguridad
+function CargaPoliticasSeguridad(Matrix, Selector, Index_Edit) {
+
+    $('#' + Selector).empty();
+    var objList = $("[id$='" + Selector + "']");
+
+    switch (Selector) {
+
+        case "Select_PoliticaSeguridad_U": //Combo Políticas en Adm_Usuario
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Index + " - " + Matrix[Item].Descripcion + "</option>");
+            }
+            break;
+    }
+
+    $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
+
+    switch (Index_Edit) {
+        case "":
+            $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
+            break;
+
+        case "0":
+            $("#" + Selector + " option[value= '0'] ").attr("selected", true);
+            break;
+
+        default:
+            $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
+            break;
+    }
+
+    $("#" + Selector).trigger("liszt:updated");
+    $('.C_Chosen').trigger('chosen:updated');
+}
+
+//Carga los Grupos de Reportes
+function CargaGrupoReportes(Matrix, Selector, Index_Edit) {
+
+    $('#' + Selector).empty();
+    var objList = $("[id$='" + Selector + "']");
+
+    switch (Selector) {
+
+        case "Select_GroupReports": //Combo Grupo Reportes en Adm_Usuario
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Nit_ID + " - " + Matrix[Item].Grupo_ID + " - " + Matrix[Item].Descripcion + "</option>");
+            }
+            break;
+    }
+
+    $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
+
+    switch (Index_Edit) {
+        case "":
+            $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
+            break;
+
+        case "0":
+            $("#" + Selector + " option[value= '0'] ").attr("selected", true);
+            break;
+
+        default:
+            $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
+            break;
+    }
+
+    $("#" + Selector).trigger("liszt:updated");
+    $('.C_Chosen').trigger('chosen:updated');
+}
+
+//Carga los Grupos de Documentos
+function CargaGrupoDocumentos(Matrix, Selector, Index_Edit) {
+
+    $('#' + Selector).empty();
+    var objList = $("[id$='" + Selector + "']");
+
+    switch (Selector) {
+
+        case "Select_Grupo_Documentos_U": //Combo Grupo Documentos en Adm_Usuario
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Nit_ID + " - " + Matrix[Item].Grp_Documento_ID + " - " + Matrix[Item].Descripcion + "</option>");
+            }
+            break;
+    }
+
+    $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
+
+    switch (Index_Edit) {
+        case "":
+            $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
+            break;
+
+        case "0":
+            $("#" + Selector + " option[value= '0'] ").attr("selected", true);
+            break;
+
+        default:
+            $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
+            break;
+    }
+
+    $("#" + Selector).trigger("liszt:updated");
+    $('.C_Chosen').trigger('chosen:updated');
+}
+
+//Carga los Roles
+function CargaRoles(Matrix, Selector, Index_Edit) {
+
+    $('#' + Selector).empty();
+    var objList = $("[id$='" + Selector + "']");
+
+    switch (Selector) {
+
+        case "DDLRol": //Combo Roles en Adm_Usuario
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Rol_ID + " - " + Matrix[Item].Descripcion + "</option>");
+            }
+            break;
+        case "DDLRol": //Combo Roles en Adm_Usuario
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Rol_ID + " - " + Matrix[Item].Descripcion + "</option>");
+            }
+            break;
+
+    }
+
+    $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
+
+    switch (Index_Edit) {
+        case "":
+            $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
+            break;
+
+        case "0":
+            $("#" + Selector + " option[value= '0'] ").attr("selected", true);
+            break;
+
+        default:
+            $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
+            break;
+    }
+
+    $("#" + Selector).trigger("liszt:updated");
+    $('.C_Chosen').trigger('chosen:updated');
+}
+
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*----                                                                         FUNCIONES PARA CARGA DE DOCUMENTOS AL SERVIDOR                                                                                  ----*/
+/*----                                                                         FUNCIONES PARA CARGA DE DOCUMENTOS Y ARCHIVOS AL SERVIDOR                                                                                  ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //costruimos el nombre del documento temporal
 function ContruyeName_Temp(StrDocument, StrConsecutivo_Empresa, StrConsecutivo) {
@@ -1326,12 +1919,7 @@ function UpLoad_Document(NameAjax, NameFile_ID, Form) {
                 var filename = result;
                 switch (filename) {
                     case "NO_FORMAT":
-                        $("#dialog").dialog("option", "title", "Formato Incorrecto!");
-                        $("#Mensaje_alert").text("El documento no se puede generar, el formato es diferente a la parametrización asignada! ");
-                        $("#dialog").dialog("open");
-                        $("#DE").css("display", "none");
-                        $("#SE").css("display", "none");
-                        $("#WE").css("display", "block");
+                        Mensaje_General("¡Formato Incorrecto!", "El documento no se puede generar, el formato es diferente a la parametrización asignada! " , "W");
                         break;
 
                     default:
@@ -1360,7 +1948,7 @@ function UpLoad_Document(NameAjax, NameFile_ID, Form) {
 
             },
             error: function (error) {
-                alert("Ocurrió un error inesperado, por favor intente de nuevo mas tarde: " + error);
+                Mensaje_General("¡Alerta!", "Ocurrió un error inesperado, por favor intente de nuevo mas tarde:" + error, "W");
             }
         });
     }
@@ -1378,8 +1966,211 @@ function VerDocumento() {
     $("#IF_Visor").attr("src", "../../Repository_Document/TEMP/" + Doc_name);
 }
 
+//Carga de múltiples archivos global
+//** Parámetros:
+// • NameAjax = Nombre de la página de la cual se llama la función
+// • NameFile_ID = ID que utiliza el Input tipo File desde el cual hace la carga
+// • Form = Un ID que se puede utilizar para envio de datos únicos de este form o similar
+function UpLoad_MultipleFiles(NameAjax, NameFile_ID, Form) {
+    var arrayData = [];
+    //validamos si seleccionaron un archivo
+    if ($("#" + NameFile_ID).val() != "") {
+
+        //Añadimos la imagen de carga en el contenedor
+        $('#ctl00_cphPrincipal_gif_charge_Container').css("display", "block");
+
+        //inicializamos el formdata para transferencia de archivos
+        var data = new FormData();
+        var numFilesSended = 0;
+        //capturamos los datos del input file
+        for (var i = 0, f; f = $("#" + NameFile_ID)[0].files[i]; i++) {
+            data.append('archivo' + i, $("#" + NameFile_ID)[0].files[i]); //Cargamos cada uno de los archivos en los Data
+            numFilesSended = numFilesSended + 1;
+        }
+
+        data.append('RutaTemporal', RutaTemporal); //Declara local en js
+
+        if (form = "Huellas") { //Utilizado para cuando los archivos provienen del modulo de huellas
+            var NameFiles = "";
+            for (i in arrayNameFiles) {
+                NameFiles = NameFiles + "," + arrayNameFiles[i];
+            }
+            NameFiles = NameFiles.substr(1);
+            data.append('NameArchivos', NameFiles);
+            data.append('action', 'CargarHuellas');
+        }
+
+        //Transacción ajax
+        $.ajax({
+            url: NameAjax + "Ajax.aspx",
+            type: "POST",
+            contentType: false,
+            data: data,
+            processData: false,
+            success: function (result) {
+
+                var files = JSON.parse(result);
+
+                if (files[0] == "NO FILES") {
+                    Mensaje_General("Sin Archivos", "No se han encontrado peticiones de carga de archivos al servidor, la operación de carga se ha cancelado.", "W");
+                } else {
+                    if (files.length < numFilesSended) {
+                        if ((numFilesSended - files.length) > 1) {
+                            Mensaje_General("Archivos Cargados: " + files.length + "/" + numFilesSended, "El sistema no ha cargado la totalidad de archivos que usted dispuso, esto sucedió porque no cumplieron con los parámetros permitidos. No se cargaron " + (numFilesSended - files.length) + " archivos.", "W");
+                        } else if ((numFilesSended - files.length) == 1) {
+                            Mensaje_General("Archivos Cargados: " + files.length + "/" + numFilesSended, "El sistema no ha cargado la totalidad de archivos que usted dispuso, esto sucedió porque no cumplió con los parámetros permitidos. No se cargó " + (numFilesSended - files.length) + " archivo.", "W");
+                        } else if ((numFilesSended - files.length) == numFilesSended) {
+                            Mensaje_General("Archivos Cargados: " + files.length + "/" + numFilesSended, "El sistema no cargó ninguno de los archivos seleccionado, esto sucedió porque ningún archivo cumplia con los parametros de archivo aceptado.", "E");
+                        }
+                    } else {
+                        Mensaje_General("Archivos Cargados: " + files.length + "/" + numFilesSended, "Se han cargado todos los archivos correctamente al servidor.", "S");
+                    }
+
+                    /* === Solo necesario para módulo de carga de huellas == */
+                    if (form == "Huellas") {
+                        CheckFiles(files);
+                        ArmarTabla();
+                    }
+                    /*==END==*/
+                }
+
+                $("#" + NameFile_ID).val("");
+            },
+            error: function (error) {
+                Mensaje_General("Error durante la Carga", "Lo sentimos, ocurrió un error y no se logró completar el proceso. Por favor recarga la página e intentalo más tarde.", "W");
+            },
+            async: false, // La petición es síncrona
+            cache: false // No queremos usar la caché del navegador
+        });
+    }
+    else {
+        Mensaje_General("Carga de Archivos Múltiples", "Debes seleccionar como mínimo un archivo para realizar la respectiva carga.", "E");
+    }
+}
+
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*----                                                                                                                     PROCESO DE FORMATEO DE DIRECCIONES                                                                   ----*/
+/*----                                                                                                                     PROCESO DE FORMATEO DE HORA                                                                  ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//habilita la ventana emergente de Horas
+function Time_Format(ObjText) {
+    $("#" + ObjText).click(function () {
+        ControlTime = ObjText;
+        if ($("#" + ObjText).val == "") {
+        } else {
+            ClearTime();
+            TimeWrote = $("#" + ObjText).val();
+            var time = TimeWrote.split(":");
+            Hours = time[0];
+            Minutes = time[1];
+            $("#TXTHours").val(Hours);
+            $("#TXTMinutes").val(Minutes);
+            $("#TXTHours").focus();
+        }
+        $("#Dialog_time").dialog("open");
+        $("#Dialog_time").dialog("option", "title", "Ingrese Hora");
+    });
+
+    $("#TXTHours").blur(function () {
+        ValidaHour($(this).val(), $(this))
+    });
+
+    $("#TXTMinutes").blur(function () {
+        ValidaMinute($(this).val(), $(this))
+    });
+}
+
+//Función que limpia los campos del dialog horas
+function ClearTime() {
+    Hours = "";
+    Minutes = "";
+    $("#TXTHours").val("");
+    $("#TXTMinutes").val("");
+    $("#ImgHours").css("display", "none");
+    $("#ImgMinutes").css("display", "none");
+}
+
+//Función que valida que solo se escriban horas entre las 0 y 24 H
+function ValidaHour(val, obj) {
+    if (val >= 0 && val <= 23) {
+        $("#ImgHours").css("display", "none");
+        Hours = $("#" + $(obj).attr("id")).val();
+        return true;
+    } else {
+        Hours = "";
+        $("#" + $(obj).attr("id")).val("");
+        $("#" + $(obj).attr("id")).focus();
+        $("#" + $(obj).attr("id")).select();
+        $("#ImgHours").css("display", "inline-table");
+        Mensaje_General("Error - Hora no valida", val + " no se encuentra dentro del rango valido, el rango permitido está entre las 00 y 23 horas.", "E");
+        return false;
+    }
+}
+
+//Función que valida que solo se escriban minutos entre los 0 y 60
+function ValidaMinute(val, obj) {
+    if (val >= 0 && val <= 59) {
+        $("#ImgMinutes").css("display", "none");
+        Minutes = $("#" + $(obj).attr("id")).val();
+        return true;
+    } else {
+        Minutes = "";
+        $("#" + $(obj).attr("id")).val("");
+        $("#" + $(obj).attr("id")).focus();
+        $("#" + $(obj).attr("id")).select();
+        $("#ImgMinutes").css("display", "inline-table");
+        Mensaje_General("Error - Minutos no validos", val + " no se encuentra dentro del rango, el rango permitido está entre los 00 y 59 minutos.", "E");
+        return false;
+    }
+}
+
+//Arma la hora digitada y llena el campo de hora 
+function AddTime() {
+    Hours = $("#TXTHours").val();
+    Minutes = $("#TXTMinutes").val();
+    if (Hours != "" && Minutes != "" && ControlTime != "") {
+        if (Hours.length == 1) {
+            Hours = "0" + Hours;
+        }
+        if (Minutes.length == 1) {
+            Minutes = "0" + Minutes;
+        }
+
+        if ((Hours.length == 2 && Minutes.length == 2) && (parseInt(Hours) >= 0 && parseInt(Hours) <= 23) && (parseInt(Minutes) >= 0 && parseInt(Minutes) <= 59)) {
+            TimeWrote = Hours + ":" + Minutes;
+            $("#" + ControlTime).val("" + TimeWrote);
+            $("#Dialog_time").dialog("close");
+        } else {
+            Mensaje_General("Error - Hora no valida", "Lo sentimos, por alguna razón la hora no cumple el formato y contiene números invalidos, verifique los datos digitados. Recomendamos volver a digitar cada uno de los datos.", "W");
+
+            if (Hours.length != 2 || parseInt(Hours) < 0 || parseInt(Hours) > 23) {
+                $("#TXTHours").focus();
+                $("#TXTHours").select();
+                $("#ImgHours").css("display", "inline-table");
+            } else {
+                $("#TXTMinutes").focus();
+                $("#TXTMinutes").select();
+            }
+
+            if (Minutes.length != 2 || parseInt(Minutes) < 0 || parseInt(Minutes) > 59) {
+                $("#ImgMinutes").css("display", "inline-table");
+            }
+        }
+    } else {
+        if (ControlTime == "") {
+            Mensaje_General("Control Perdido", "Lo sentimos, se ha perdido la referencia del Control y no podemos escribir la hora digitada.", "W");
+        } else {
+            Mensaje_General("Campos Incompletos", "Debes completar los campos para poder agregar la hora.", "E");
+            if (Hours == "") {
+                $("#ImgHours").css("display", "inline-table");
+            }
+            if (Minutes == "") {
+                $("#ImgMinutes").css("display", "inline-table");
+            }
+        }
+    }
+}
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                      PROCESO DE FORMATEO DE DIRECCIONES                                                                   ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //habilita la ventana emergente de direciones
 function Format_Adress(ObjText) {
@@ -1516,7 +2307,6 @@ function StrLego() {
 
 //llena el campo de direccion con el string armado
 function Add_Adress() {
-
     if ($("#Txt_End_Adress").val() != "")
         $("#" + Control_Work).val($("#Txt_End_Adress").val());
 
@@ -1828,27 +2618,59 @@ function Compara_Valor_Compra(str_v1, Obj1, str_v2, Obj2, objeto, Str_1, Str_Op,
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*----                                                                            funcion json para usurio quemado                                                                                                              ----*/
+/*----                                                                            PROCESO DE VERIFICACION DE NIT USUARIO                                                                                                          ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-function JSON_User() {
-
-    var JSON_Usuario = {
-        "Nit_ID": "9001548739",
-        "Usuario_ID": "SASGARR",
-        "Type_Document": "1",
-        "Documento": "79884249",
-        "Nombre": "German Alejandro Rodriguez Rodriguez",
-        "Rol_ID": "ADMIN",
-        "Acceso_Informacion": "",
-        "Nivel_Politica_Seguridad_Grupo": "",
-        "Politica_Seguridad": "",
-        "Acceso_Documentos": "",
-        "Grupo_Documentos": "",
-        "Acceso_Informacion_Documentos": "",
-        "Acceso_Reportes": "",
-        "Grupo_Reportes": "",
-        "Acceso_Informacion_Reportes": ""
+//verifica el usurio si tiene acceso a toda la informacion o no y bloquea accesos
+function VerificarNIT(vp_Selector) {
+    var l_NIT = false;
+    if (Array_G_Usuario[0].Acceso_Informacion != "0") {
+        $("#" + vp_Selector + "").prop('disabled', true); //No se agrega el trigger porque se hace al seleccionar el val
+        $("#" + vp_Selector + "").val("" + Array_G_Usuario[0].Nit_ID + "").trigger("chosen:updated");
+        l_NIT = true;
     }
-    Array_G_Usuario.push(JSON_Usuario);
+    return l_NIT;
+}
 
+
+function Capture_Nit_User() {
+    if (Array_G_Usuario[0].Acceso_Informacion != "0") {
+        g_NitEmpresa_User = Array_G_Usuario[0].Nit_ID;
+    }
+    else {
+        g_NitEmpresa_User = "N";
+    }
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                 PROCESO PARA DESCARGAS AUTOMÁTICAS DE ARCHIVOS                                                                                                            ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*Función que recibe un Array traido desde código VB y lo convierte para descargarlo automáticamente*/
+function DowloadFile(result) {
+    var Correcto = false;
+    var ArrayInformationFile = [];
+    ArrayInformationFile = JSON.parse(result);
+    var a = document.createElement('a');
+
+    if (typeof a.download != "undefined") {
+        var URLorigin = "http://" + ArrayInformationFile[0].RutaOrigen
+        var FileDowload = ArrayInformationFile[0].NombreDescarga + "." + ArrayInformationFile[0].TipoArchivo;
+        var save = document.createElement('a');
+        save.href = URLorigin;
+        save.target = '_blank';
+        save.download = FileDowload;
+        var clicEvent = new MouseEvent('click', {
+            'view': window,
+            'bubbles': true,
+            'cancelable': true
+        });
+        save.dispatchEvent(clicEvent);
+        (window.URL || window.webkitURL).revokeObjectURL(save.href);
+        Correcto = true;
+    }
+    else {
+        Mensaje_General("Navegador No Soportado", "El navegador actual no soporta la sentencia usada para la descarga del archivo, por favor reintenta con otro navegador.", "E");
+        Correcto = false;
+    }
+    ArrayInformationFile = [];
+    return Correcto;
 }

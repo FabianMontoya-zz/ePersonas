@@ -23,7 +23,7 @@
     <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
-    <div id="Container_title_Form">
+    <div class="Container_title_Form">
         <div id="Dialog_Control" style="width: 100%; text-align: center;">
             <div class="cssload-container" style="margin-top: 25%;">
                 <div class="cssload-whirlpool"></div>
@@ -42,13 +42,13 @@
             </tr>
         </table>
     </div>
-    <div id="Marco_Contrato">
-        <div id="Marco_trabajo_Contrato">
+    <div class="Marco_Container_Flex">
+        <div class="Marco_trabajo_Flex">
             <table width="100%">
                 <tr>
                     <td class="Label_Bold" style="width: 80%; text-align: end; color: #b70d0d;">Hora <span id="liveclock" style="left: 0; top: 0;"></span>
                     </td>
-                 <td id="logoExt" rowspan="2" style="width: 10%; text-align: end;">
+                    <td id="logoExt" rowspan="2" style="width: 10%; text-align: end;">
                         <img id="Agenda" class="Ext" src="" alt="Extenciones" style="height: 50px; width: 50px;" onclick="BtnConsulta_Persona('Empleado')" />
                     </td>
                 </tr>
@@ -126,7 +126,7 @@
                     </tr>
                 </table>
             </div>
-            <div id="Container_controls">
+            <div class="Container_controls">
                 <div id="Acordeon_Ingreso" style="width: 100%;">
                     <h3>Documentos  
                     </h3>
@@ -202,8 +202,7 @@
                                 <tr>
                                     <td class="Title_Bold" colspan="6">Tiempo de la Visita
                                     </td>
-                                    <td class="Title_Bold" colspan="4">Fecha / Hora
-                                    </td>
+                                    <td class="Title_Bold" colspan="4"></td>
                                     <td class="Title_Bold" rowspan="2" style="width: 10%">
                                         <input id="BtnIngresar" class="BWeb" type="button" value="Ingresar" onclick="BtnAgregarAcceso();" />
                                     </td>
@@ -235,10 +234,9 @@
                                                 src="../../images/error.png" />
                                             <span class="SpamEG"></span></span>
                                     </td>
-                                    <td class="Label_Bold" style="width: 5%">Ingreso
-                                    </td>
+                                    <td class="Label_Bold" style="width: 5%"></td>
                                     <td id="HA_Ingreso" style="width: 20%;"></td>
-                                    <td class="Label_Bold" style="width: 7%;">Estimado Salida</td>
+                                    <td class="Label_Bold" style="width: 7%;"></td>
                                     <td id="HE_Salida" style="width: 20%;"></td>
                                 </tr>
                             </table>
@@ -322,6 +320,6 @@
         </div>
     </div>
     <div id="Dialog_Extencion">
-        <div id="container_TGrid_New"></div>
+        <div class="container_TGrid_New"></div>
     </div>
 </asp:Content>

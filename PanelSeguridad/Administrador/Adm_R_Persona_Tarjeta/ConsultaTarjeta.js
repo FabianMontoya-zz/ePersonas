@@ -10,9 +10,20 @@ var editDocID;
 //Evento load JS
 $(document).ready(function () {
 
-    $("#TablaDatos_D").css("padding-bottom", "35%");
+    /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
+    Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
+    Ocultar_Tablas();
+    /*================== FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN ==============*/
+
     transacionAjax_EmpresaNit('Cliente');
     Change_Select_Nit();
+    
+});
+
+//funcion para las ventanas emergentes
+function Ventanas_Emergentes() {
+
+    Load_Charge_Sasif(); //Carga de "SasifMaster.js" el Control de Carga
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
@@ -38,12 +49,15 @@ $(document).ready(function () {
             background: "black"
         }
     });
-});
 
-//salida del formulario
-function btnSalir() {
-    window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
 }
+
+//Función que oculta las tablas
+function Ocultar_Tablas() {
+    $(".Dialog_Datos").css("padding-bottom", "35%");
+    $("#TablaConsulta").css("display", "none");
+}
+
 
 //evento del boton salir
 function x() {
@@ -54,14 +68,18 @@ function x() {
 function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {
         var index_ID = $(this).val();
-
-        if (index_ID == "-1")
-            index_ID = "ALL";
-
-        transacionAjax_Consulta("Read_Tarjeta", index_ID);
+        TransaccionesSegunNIT(index_ID);
     });
 }
 
+//Carga los combos que estan relacionados a Select_Nit
+function TransaccionesSegunNIT(index_ID) {
+    if (index_ID != "-1") {
+        if (index_ID == "-1")
+            index_ID = "ALL";
+        transacionAjax_Consulta("Read_Tarjeta", index_ID);
+    }
+}
 
 // crea la tabla en el cliente
 function Table_Tarjetas() {
@@ -73,13 +91,13 @@ function Table_Tarjetas() {
     for (itemArray in ArrayConsulta) {
         if (ArrayConsulta[itemArray].Tarjeta_ID != 0) {
             Index_Pos = parseInt(ArrayConsulta[itemArray].Index) - 1;
-            html_Consulta += "<tr id= 'TConsulta_" + ArrayConsulta[itemArray].Tarjeta_ID + "'><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Ver('" + Index_Pos + "')\"></input></td><td>" + ArrayConsulta[itemArray].Tarjeta_ID + "</td><td>" + ArrayConsulta[itemArray].Nit_ID_Custodia + " - " + ArrayConsulta[itemArray].DescripEmpresaCustodia + "</td><td>" + ArrayConsulta[itemArray].DescripEstado + "</td><td>" + ArrayConsulta[itemArray].UsuarioCreacion + "</td><td>" + ArrayConsulta[itemArray].FechaCreacion + "</td><td>" + ArrayConsulta[itemArray].UsuarioActualizacion + "</td><td>" + ArrayConsulta[itemArray].FechaActualizacion + "</td></tr>";
+            html_Consulta += "<tr id= 'TConsulta_" + ArrayConsulta[itemArray].Tarjeta_ID + "'><td><img  src='../../images/N_Search_Red.png' width='23px' height='23px' class= 'Ver' name='ver' onmouseover=\"this.src='../../images/N_Search_Black.png';\" onmouseout=\"this.src='../../images/N_Search_Red.png';\" onclick=\"Ver('" + Index_Pos + "')\"></img></td><td>" + ArrayConsulta[itemArray].Tarjeta_ID + "</td><td>" + ArrayConsulta[itemArray].Nit_ID_Custodia + " - " + ArrayConsulta[itemArray].DescripEmpresaCustodia + "</td><td>" + ArrayConsulta[itemArray].DescripEstado + "</td><td>" + ArrayConsulta[itemArray].UsuarioCreacion + "</td><td>" + ArrayConsulta[itemArray].FechaCreacion + "</td><td>" + ArrayConsulta[itemArray].UsuarioActualizacion + "</td><td>" + ArrayConsulta[itemArray].FechaActualizacion + "</td></tr>";
         }
     }
 
     html_Consulta += "</tbody></table>";
-    $("#Container_Consulta").html("");
-    $("#Container_Consulta").html(html_Consulta);
+    $(".Div_Full_Block").html("");
+    $(".Div_Full_Block").html(html_Consulta);
 
     $("#TConsulta").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,

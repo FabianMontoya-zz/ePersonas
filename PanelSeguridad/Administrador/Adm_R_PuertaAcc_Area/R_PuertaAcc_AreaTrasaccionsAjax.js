@@ -1,6 +1,7 @@
 ﻿/*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_CargaBusqueda(State) {
+    OpenControl(); //Jhon
     $.ajax({
         url: "R_PuertaAcc_AreaAjax.aspx",
         type: "POST",
@@ -96,7 +97,10 @@ function transacionAjax_EmpresaNit(State) {
         },
         error: function () {
 
-        }
+        },
+        //Jhon
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador 
     });
 }
 
@@ -119,7 +123,8 @@ function transacionAjax_R_PuertaAcc_Area(State, filtro, opcion) {
         data: { "action": State,
             "filtro": filtro,
             "opcion": opcion,
-            "contenido": contenido
+            "contenido": contenido,
+            "Nit_User": g_NitEmpresa_User
         },
         //Transaccion Ajax en proceso
         success: function (result) {

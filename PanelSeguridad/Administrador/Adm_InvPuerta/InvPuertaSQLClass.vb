@@ -10,7 +10,7 @@ Public Class InvPuertaSQLClass
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Read_All_Tarjetas(ByVal vp_S_Nit As String)
+    Public Function Read_All_Tarjetas(ByVal vp_S_Nit As String, ByVal vp_S_Nit_User As String)
 
         Dim ObjListCliente As New List(Of InvPuertaClass)
         Dim StrQuery As String = ""
@@ -20,6 +20,7 @@ Public Class InvPuertaSQLClass
         Dim BD_Param As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDParam").ToString
 
         Dim sql As New StringBuilder
+        Dim vl_sql_filtro As New StringBuilder
 
         If vp_S_Nit = "ALL" Then
 
@@ -77,7 +78,7 @@ Public Class InvPuertaSQLClass
                                   "                                                                                  WHEN '' THEN 0  " & _
                                   "                                                                                  ELSE SUBSTRING((IT.IT_Nit_ID_Entrega),0,LEN(IT.IT_Nit_ID_Entrega)) " & _
                                   "                                                                     END " & _
-                                  " ORDER BY IT.IT_Tarjeta_ID ASC ")
+                                  " ")
 
         Else
 
@@ -136,10 +137,20 @@ Public Class InvPuertaSQLClass
                               "                                                                                  ELSE SUBSTRING((IT.IT_Nit_ID_Entrega),0,LEN(IT.IT_Nit_ID_Entrega)) " & _
                               "                                                                     END " & _
                               "  WHERE IT_Nit_ID = '" & vp_S_Nit & "' " & _
-                              " ORDER BY IT.IT_Tarjeta_ID ASC ")
+                              "  ")
         End If
 
-        StrQuery = sql.ToString
+        If vp_S_Nit_User <> "N" Then
+            If vp_S_Nit = "ALL" Then
+                vl_sql_filtro.Append(" WHERE  IT_Nit_ID ='" & vp_S_Nit & "' ORDER BY IT_Nit_ID, IT_Tarjeta_ID ASC")
+            Else
+                vl_sql_filtro.Append(" ORDER BY IT_Nit_ID, IT_Tarjeta_ID ASC")
+            End If
+        Else
+            vl_sql_filtro.Append(" ORDER BY IT_Nit_ID, IT_Tarjeta_ID ASC")
+        End If
+
+        StrQuery = sql.ToString & vl_sql_filtro.ToString
         ObjListCliente = listInvPuerta(StrQuery, Conexion, "List")
 
         Return ObjListCliente
@@ -536,6 +547,49 @@ Public Class InvPuertaSQLClass
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
+    Public Function MatrixTarjeta(ByVal vp_Obj_Cliente As ClienteClass)
+
+        Dim ObjListCrud_Doc As New List(Of InvPuertaClass)
+        Dim StrQuery As String = ""
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("1")
+
+        Dim sql As New StringBuilder
+        Dim vl_sql_filtro As New StringBuilder
+
+        sql.Append(" SELECT  IT_Tarjeta_ID, " & _
+                                  "           IT_Nit_ID_Custodia, " & _
+                                  "           IT_TypeDocument_Asigna, " & _
+                                  "           IT_Document_ID_Asigna, " & _
+                                  "           IT_TypeDocument_Entrega, " & _
+                                  "           IT_Document_ID_Entrega, " & _
+                                  "           IT_Nit_ID_Asigna, " & _
+                                  "           IT_Estado, " & _
+                                  "           IT_MotivoBloqueo, " & _
+                                  "           IT_Observaciones, " & _
+                                  "           BT.DDLL_Descripcion, " & _
+                                  "           PE.CLI_Nombre + ' ' + PE.CLI_Nombre_2 + ' ' + PE.CLI_Apellido_1 + ' ' + PE.CLI_Apellido_2 AS P_Entrega " & _
+                                  "  FROM INVENTARIO_TARJETAS IT " & _
+                                  "  LEFT JOIN TC_DDL_TIPO BT ON BT.DDL_ID =IT.IT_MotivoBloqueo AND BT.DDL_Tabla = 'BLOQUEO' " & _
+                                  " LEFT JOIN PARAMETRIZACION_D.dbo.CLIENTE PE ON PE.CLI_Nit_ID = IT.IT_Nit_ID_Entrega AND PE.CLI_TypeDocument_ID =IT.IT_TypeDocument_Entrega AND PE.CLI_Document_ID = IT.IT_Document_ID_Entrega ")
+
+        Select Case vp_Obj_Cliente.TipoSQL
+            Case "TarjetaAcceso"
+                vl_sql_filtro.Append(" WHERE IT_Nit_ID = '" & vp_Obj_Cliente.Nit_ID & "' ORDER BY IT_Tarjeta_ID, IT_Nit_ID_Custodia, IT_Document_ID_Asigna, IT_Nit_ID_Asigna ASC; ")
+        End Select
+
+        Dim vl_S_SQLString As String = sql.ToString & vl_sql_filtro.ToString
+        ObjListCrud_Doc = listInvPuerta(vl_S_SQLString, Conexion, "Matrix_Asigna")
+
+        Return ObjListCrud_Doc
+
+    End Function
+
+    ''' <summary>
+    ''' consulta que trae los datos de asignar tarjeta
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Function MatrixTarjeta()
 
         Dim ObjListCrud_Doc As New List(Of InvPuertaClass)
@@ -567,7 +621,6 @@ Public Class InvPuertaSQLClass
         Return ObjListCrud_Doc
 
     End Function
-
 #End Region
 
 End Class

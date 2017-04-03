@@ -18,6 +18,7 @@ var Nit_Proccess = "";
 $(document).ready(function () {
 
     transacionAjax_EmpresaNit('Cliente');
+    
 
     $("#ESelect").css("display", "none");
     $("#Img1").css("display", "none");
@@ -42,15 +43,27 @@ $(document).ready(function () {
         dialogClass: "Dialog_Sasif",
         modal: true
     });
-
-    $(function () {
-        $("#TxtFechaInicial").datepicker({ dateFormat: 'yy-mm-dd' });
-        $("#TxtFechaFinal").datepicker({ dateFormat: 'yy-mm-dd' });
-    });
+    
+    
+    //$(function () {
+    //    $("#TxtFechaInicial").datepicker({ dateFormat: 'yy-mm-dd' });
+    //    $("#TxtFechaFinal").datepicker({ dateFormat: 'yy-mm-dd' });
+    //});
+    
+    Picker_Fechas();
     Capture_Tarjeta_ID();
     Change_Select_Vigencia();
+    Change_Compara_Fecha("TxtFechaInicial", "TxtFechaFinal");
     $("#TxtIDTarjeta").focus();
 });
+
+//Función de control del picker de las fechas
+function Picker_Fechas() {
+    $("#TxtFechaInicial").datepicker({ dateFormat: 'yy-mm-dd', changeYear: true, changeMonth: true });
+    $("#TxtFechaFinal").datepicker({ dateFormat: 'yy-mm-dd', changeYear: true, changeMonth: true });
+    $("#TxtFechaFinal").datepicker("option", "disabled", true);
+
+}
 
 //captura tarjeta y mustra complementos a llenar
 function Capture_Tarjeta_ID() {
@@ -66,7 +79,7 @@ function Capture_Tarjeta_ID() {
             $("#Complementos_c").css("display", "none");
         }
     });
-
+    
 }
 
 //verifica si vienen parametros por la ruta 
@@ -86,6 +99,7 @@ function ValidaParametros() {
 var TypeValida;
 //muestra el tipo de vista para el carge de niventario
 function ModalidadVista() {
+    
     switch (Nit_Proccess.length) {
         case 0:
             $("#Select_EmpresaNit").removeAttr("disabled");
@@ -97,6 +111,7 @@ function ModalidadVista() {
             $("#Select_EmpresaNit").attr("disabled", "disabled");
             break;
     }
+    
     $('.C_Chosen').trigger('chosen:updated');
 
     switch (Vigencia) {
@@ -135,11 +150,6 @@ function Change_Select_Vigencia() {
             TypeValida = 0;
         }
     });
-}
-
-//salida del formulario
-function btnSalir() {
-    window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
 }
 
 //crear link en la BD

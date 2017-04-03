@@ -23,7 +23,7 @@
     <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
-    <div id="Container_title_Form">
+    <div class="Container_title_Form">
         <div id="Dialog_Control" style="width: 100%; text-align: center;">
             <div class="cssload-container" style="margin-top: 25%;">
                 <div class="cssload-whirlpool"></div>
@@ -42,8 +42,8 @@
             </tr>
         </table>
     </div>
-    <div id="Marco_Contrato">
-        <div id="Marco_trabajo_Contrato">
+    <div class="Marco_Container_Flex">
+        <div class="Marco_trabajo_Flex">
             <table width="100%">
                 <tr>
                     <td id="logoExt" rowspan="2" style="width: 80%; text-align: end;"></td>
@@ -124,7 +124,7 @@
                     </tr>
                 </table>
             </div>
-            <div id="Container_controls">
+            <div class="Container_controls">
                 <div id="Acordeon_Salida" style="width: 100%;">
                     <h3>Registros De Ingreso 
                     </h3>
@@ -180,4 +180,4 @@
             </tr>
         </table>
     </div>
-  </asp:Content>
+</asp:Content>

@@ -1,22 +1,15 @@
-﻿/*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*                                                               ADMININSTRACION PARAMETRIZABLE                                                               */
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
-/*CONTROL IMAGEN DIRECCION*/
-#logoExt:hover .Ext
-{
-    content: url("../../images/agenda_gray.png");
+﻿/*-- DIV PARTE CONTAINER PAGINA ---*/
+#panel_pag {
+    vertical-align: text-top;
+    padding-left: 30px;
+    width: 100%;
 }
 
-.Ext
-{
-    content: url("../../images/agenda.png");
-}
-
-/*----------------------- TITULO ---------------------------*/
+/************************************************************************************
+BARRA DE TITULO 
+*************************************************************************************/
 /*personalizacion de la barra de titulo*/
-#Container_title_Form
-{
+.Container_title_Form {
     background: -webkit-linear-gradient(#b70d0d, #631111); /*For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#b70d0d, #631111); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#b70d0d, #631111); /* For Firefox 3.6 to 15 */
@@ -27,45 +20,21 @@
     padding-right: 0.5em;
     font-weight: bold;
     color: #ffffff;
-    width: 97.5%;
+    width: 94.5%;
+    position: absolute;
 }
 
-#Tabla_Title_form
-{
+/*-- TABLE TITULO CONTENT---*/
+#Tabla_Title_form {
     width: 100%;
 }
 
-#image_exit
-{
-    text-align: end;
-}
-
-#panel_pag
-{
-    vertical-align: text-top;
-    padding-left: 30px;
-}
-
-.T_head
-{
-    border-radius: 5px 5px 0 0;
-    background: -webkit-linear-gradient(#b70d0d, #631111); /*For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#b70d0d, #631111); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#b70d0d, #631111); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#b70d0d, #631111); /* Standard syntax (must be last)*/
-    font: 14px/20px CenturyGothic,sans-serif;
-    font-weight: bold;
-    color: #ffffff;
-    border-color: White;
-}
-
-
-/*----------------------- TITULO ---------------------------*/
-/*personalizacion marco del formulario*/
-
-#Marco_Container
-{
-    margin-top: 10px;
+/************************************************************************************
+CONTENEDOR DE FORMULARIO
+*************************************************************************************/
+/*-- DIV CONTENT PRINCIPAL---*/
+.Marco_Container {
+    margin-top: 35px;
     margin-left: 25px;
     padding: 14px 14px;
     background: -webkit-linear-gradient(#f6f6f6, #e8e8e8); /*For Safari 5.1 to 6.0 */
@@ -74,12 +43,30 @@
     background: linear-gradient(#f6f6f6, #e8e8e8); /* Standard syntax (must be last)*/
     border-radius: 5px;
     border: solid 1px #ccc;
-    width: 95.5%;
-    height: 40%;
+    width: 92.5%;
+    height: 72%;
+    position: absolute;
 }
 
-#Marco_btn_Form
-{
+/*DIV CONTENT PRINCIPAL SIN ADMINISTRACION*/
+.Marco_Container_Flex {
+    margin-top: 35px;
+    margin-left: 25px;
+    padding: 14px 14px;
+    background: -webkit-linear-gradient(#f6f6f6, #e8e8e8); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#f6f6f6, #e8e8e8); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#f6f6f6, #e8e8e8); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#f6f6f6, #e8e8e8); /* Standard syntax (must be last)*/
+    border-radius: 5px;
+    border: solid 1px #ccc;
+    width: 92.5%;
+    height: 68%;
+    overflow: auto;
+    position: absolute;
+}
+
+/*-- DIV CONTENT BOTONES ADMINISTRACION---*/
+.Marco_btn_Form {
     margin-top: 1px;
     padding: 20px 20px;
     background-color: silver;
@@ -90,12 +77,28 @@
     background: linear-gradient(#f6f6f6, #e8e8e8); /* Standard syntax (must be last)*/
     border: solid 1px #ccc;
     width: 97%;
-    height: 10%;
+    height: 7%;
     text-align: center;
 }
 
-#Marco_trabajo_Form
-{
+/*-- DIV CONTENT AREA DE TRABAJO---*/
+.Marco_trabajo_Flex {
+    position: relative;
+    margin-top: 10px;
+    padding: 20px 20px;
+    border-radius: 10px;
+    background: -webkit-linear-gradient(#f6f6f6, #e8e8e8); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#f6f6f6, #e8e8e8); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#f6f6f6, #e8e8e8); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#f6f6f6, #e8e8e8); /* Standard syntax (must be last)*/
+    border: solid 1px #ccc;
+    width: 97%;
+    height: 550px;
+    overflow: auto;
+}
+
+/*-- DIV CONTENT AREA DE TRABAJO---*/
+.Marco_trabajo_Form {
     position: relative;
     margin-top: 10px;
     padding: 20px 20px;
@@ -110,13 +113,13 @@
     overflow: auto;
 }
 
+/*-- DIV CONTENT AREA DE DATOS CONSULTA---*/
+.Container_controls {
+    width: 100%;
+}
 
-/*----------------------- TITULO ---------------------------*/
-/*personalizacion de los formularios internos*/
-
-
-#TablaDatos
-{
+/*-- TABLA FILTRO DE CONSULTA---*/
+#TablaConsulta {
     width: 100%;
     padding: 20px 26px;
     border-radius: 10px;
@@ -127,8 +130,20 @@
     border: solid 1px #921919;
 }
 
-#TablaDatos_D, #TablaDatos_D_Vista
-{
+/*-- TABLA CREACION DE DATOS---*/
+#TablaDatos {
+    width: 96%;
+    padding: 20px 26px;
+    border-radius: 10px;
+    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+    border: solid 1px #921919;
+}
+
+/*-- DIALOGO CREACION DE DATOS---*/
+.Dialog_Datos, .Dialog_Datos_Vista {
     width: 96%;
     height: 100%;
     padding: 2%;
@@ -141,24 +156,10 @@
     overflow: auto;
 }
 
-#TablaDatos_D_Max
-{
-    width: 860px;
-    height: 380px;
-    overflow: auto;
-    padding: 40px 30px;
-    border-radius: 10px;
-    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
-    border: solid 1px #921919;
-}
-
-#TablaDatos_D_Calen
-{
+/*-- DIALOGO TABLA DE ENCABEZAO DE DATOS PARA  DIALOGO ---*/
+.Header_Datos_Max {
     width: 1120px;
-    height: 350px;
+    height: 600px;
     overflow: auto;
     padding: 40px 30px;
     border-radius: 10px;
@@ -169,10 +170,66 @@
     border: solid 1px #921919;
 }
 
-#TablaProductos_D
-{
-    width: 985px;
-    padding: 40px 30px;
+/*-- CONTENEDOR DE LAS GRILLAS DE CONSULTA CON ADMINISTRACION ---*/
+.container_TGrid {
+    width: 1050px;
+    height: 348px;
+    overflow: auto;
+    border: solid 1px #CACACA;
+    font: 12px/20px CenturyGothic,sans-serif;
+    text-align: center;
+}
+
+/*-- CONTENEDOR DE LAS GRILLAS DE CONSULTA SIN ADMINISTRACION ---*/
+.container_TGrid_New {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    border: solid 1px #CACACA;
+    font: 12px/20px CenturyGothic,sans-serif;
+    text-align: center;
+}
+
+/*-- CONTENEDOR DE LAS GRILLAS DE OPERACION EN LOS MODULOS ---*/
+.container_TGrid_Create {
+    width: 1120px;
+    height: 360px;
+    overflow: auto;
+    border: solid 1px #CACACA;
+    font: 12px/20px CenturyGothic,sans-serif;
+    text-align: center;
+    margin-top: 5px;
+}
+
+/*-- CONTENEDOR DE LAS GRILLAS DE OPERACION EN EL MODULO CLIENTE ---*/
+#container_Document, #container_direccion, #container_Bank {
+    width: 970px;
+    height: 340px;
+    overflow: auto;
+    border: solid 1px #CACACA;
+    font: 12px/20px CenturyGothic,sans-serif;
+    text-align: center;
+}
+
+/*-- CONTENEDOR DE LAS GRILLAS DE CONSULTA PEQUENAS ---*/
+.container_TGrid_Compact {
+    width: 930px;
+    height: 150px;
+    overflow: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: solid 1px #CACACA;
+    font: 12px/20px CenturyGothic,sans-serif;
+    text-align: center;
+}
+
+/*-- CONTENEDOR DE LAS GRILLAS EN MODULOS ESPECIALES 100% ---*/
+.container_Grid_Flex, #Blo_Inmuebles, #Blo_Fasecolda {
+    margin-top: 1%;
+    margin-bottom: 1%;
+    width: 100%;
+    overflow: auto;
+    padding: 20px 26px;
     border-radius: 10px;
     background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
@@ -181,8 +238,35 @@
     border: solid 1px #921919;
 }
 
-#Datos_Direc_D, #Datos_Bank_D
-{
+/*-- CONTENEDOR DE LAS GRILLAS EN MODULOS ESPECIALES 95% ---*/
+.container_Grid_Flex_95, RID#Bloque_datosIngreso, #T_Datos_Identificacion_blin, #Bloque_datos_activos, #Bloque_Datos_Factura {
+    margin-top: 1%;
+    margin-bottom: 1%;
+    width: 95%;
+    padding: 20px 26px;
+    border-radius: 10px;
+    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+    border: solid 1px #921919;
+}
+
+/*-- CONTENEDOR POR BLOQUES EN TABLAS ---*/
+.Table_Header_Block {
+    margin-top: 10px;
+    width: 100%;
+    padding: 20px 26px;
+    border-radius: 10px;
+    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+    border: solid 1px #921919;
+}
+
+/*-- CONTENEDOR POR BLOQUES EN DIV---*/
+.Div_Complement_Block {
     margin-top: 20px;
     width: 90%;
     padding: 40px 30px;
@@ -194,224 +278,16 @@
     border: solid 1px #921919;
 }
 
-#TablaConsulta
-{
-    width: 100%;
-    padding: 20px 26px;
-    border-radius: 10px;
-    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
-    border: solid 1px #921919;
-}
-
-/*personalizacion de las cajas de texto */
-#TxtRuta
-{
-    -webkit-appearance: none;
-    border: none;
-    width: 97%;
-}
-
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*                                                           CGA ADMININSTRACION PARAMETRIZABLE                                                               */
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
-
-/*----------------------- TITULO ---------------------------*/
-
-
-/*------------------- ajuste de grid administracion -----------------------------------------------*/
-#TLink, #TOpcRol, #TRol, #TUser
-{
-    font: 12px/20px CenturyGothic,sans-serif;
-}
-
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*                                                           PARAMETRIZACION PROCESOS                                                               */
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
-/*------------------- ajuste de grid parametrizacion -----------------------------------------------*/
-#TArea, #TEmpleado, #TFestivo
-{
-    font: 12px/20px CenturyGothic,sans-serif;
-}
-
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*                                                           ESTILOS PAISES                                                               */
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
-#container_TGrid, #container_TRDoc_Verificacion, #container_TR_PuertaAcc_Area, #container_TPuertaAcceso, #container_TConsecutivos_General, #container_TConsecutivos, #container_TRGrpDoc_Doc, #container_TDocumento, #container_TRutaDocumentos, #container_TGrpDocumentos, #container_TCargo, #container_TProductos, #container_TTransacciones, #container_TTP_Activo, #container_TTP_Leasing, #container_TSActivo, #container_TActivo, #container_TSTP_Leasing, #container_TFasecolda, #container_TMonedaCot, #container_TPaises, #container_TMensajes, #container_TAyudas, #container_TCiudades, #container_TImpuesto_Gasto, #container_Tlink, #container_Trol, #container_TopcRol, #container_TUser, #container_TInf_Impuesto, #container_TPorcen_Descuentos, #container_TCliente, #container_TMonedaCod, #container_TArea, #container_TEmpleado, #container_TFestivo
-{
-    width: 1050px;
-    height: 238px;
-    overflow: auto;
-    border: solid 1px #CACACA;
-    font: 12px/20px CenturyGothic,sans-serif;
-    text-align: center;
-}
-
-#container_TGrid_New
-{
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    border: solid 1px #CACACA;
-    font: 12px/20px CenturyGothic,sans-serif;
-    text-align: center;
-}
-
-
-#Container_Consulta, #Container_Facturas
-{
+/*-- CONTENEDOR POR BLOQUES EN DIV FULL ESPACIO---*/
+.Div_Full_Block {
     width: 100%;
     overflow: auto;
     font: 12px/20px CenturyGothic,sans-serif;
     text-align: center;
 }
 
-#container_Document, #container_direccion, #container_Bank, #container_TGrid_2
-{
-    width: 970px;
-    height: 340px;
-    overflow: auto;
-    border: solid 1px #CACACA;
-    font: 12px/20px CenturyGothic,sans-serif;
-    text-align: center;
-}
-
-#container_TGrid_2
-{
-    width: 1120px;
-    height: 190px;
-    overflow: auto;
-    border: solid 1px #CACACA;
-    font: 12px/20px CenturyGothic,sans-serif;
-    text-align: center;
-    margin-top: 5px;
-}
-
-#container_TDoc_H
-{
-    width: 930px;
-    height: 150px;
-    overflow: auto;
-    border: solid 1px #CACACA;
-    font: 12px/20px CenturyGothic,sans-serif;
-    text-align: center;
-}
-
-#container_Autorizacion
-{
-    width: 1160px;
-    height: 360px;
-    overflow: auto;
-    border: solid 1px #CACACA;
-    font: 12px/20px CenturyGothic,sans-serif;
-    text-align: center;
-}
-
-
-.Dialog_Sasif
-{
-    border-radius: 10px;
-    padding: 20px 26px;
-    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
-    border: solid 1px #921919;
-}
-
-#D_Impuestos
-{
-    font: 12px/20px CenturyGothic,sans-serif;
-}
-
-.Title_Bold
-{
-    font: 20px/28px CenturyGothic,sans-serif;
-    font-weight: bold;
-    color: #2C2C2C;
-}
-
-.Label_Bold
-{
-    font: 12px/20px CenturyGothic,sans-serif;
-    font-weight: bold;
-}
-
-#Relacion, #Complementos, #Complementos_Read, #Vencimiento, #Complementos_Read_Cliente, #Anexos, #Blo_Inmuebles, #Blo_Fasecolda
-{
-    margin-top: 1%;
-    margin-bottom: 1%;
-    width: 100%;
-    padding: 20px 26px;
-    border-radius: 10px;
-    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
-    border: solid 1px #921919;
-}
-
-#Bloque_datosIngreso, #T_Datos_Identificacion_blin, #Bloque_datos_activos, #Bloque_Datos_Factura
-{
-    margin-top: 1%;
-    margin-bottom: 1%;
-    width: 95%;
-    padding: 20px 26px;
-    border-radius: 10px;
-    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
-    border: solid 1px #921919;
-}
-
-#Bloque_datos_Terceros1, #Bloque_datos_Terceros2
-{
-    margin-top: 1%;
-    margin-bottom: 1%;
-    width: 95%;
-    padding: 20px 15px;
-    border-radius: 10px;
-    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
-    border: solid 1px #921919;
-}
-
-#Controls
-{
-    text-align: center;
-    width: 100%;
-    margin: 10px;
-}
-
-.topform
-{
-    border: gray solid 2px;
-    border-style: outset;
-    border-radius: 3px;
-    width: 150px;
-}
-
-.Select_tiny
-{
-    width: 50px;
-}
-
-.Select_medium
-{
-    width: 90px;
-}
-
-
-#Tabla_Info_Dic, #Tabla_Ubic, #Tabla_Direccion, #Tabla_Correo, #Tabla_Telefono
-{
+/*-- TABLAS ESPECIALES EN AGREGAR DIRECCION---*/
+.Container_Direccion {
     margin-top: 10px;
     width: 740px;
     border-radius: 20px;
@@ -419,31 +295,22 @@
     font: 12px/20px CenturyGothic,sans-serif;
 }
 
-#D_Impuestos, #D_Clientes_Z
-{
-    margin-top: 15px;
-    padding: 20px 26px;
-    border-radius: 10px;
-    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
-    border: solid 1px #921919;
-    font: 12px/20px CenturyGothic,sans-serif;
-}
 
-#container_direccion
-{
-    font: 12px/20px CenturyGothic,sans-serif;
+/************************************************************************************
+FUNCIONALIDADES GLOBLARES
+*************************************************************************************/
+
+/*--- BOTONES DE GUARDADO DE FORMULARIOS ---*/
+#Controls {
     text-align: center;
-}
-
-#Blo_Transacciones, #Blo_Cuentas, #TablaHoras
-{
-    margin-top: 10px;
     width: 100%;
+    margin: 10px;
+}
+
+/*--- ESTILO SASIF PARA LOS DIALOGOS O VENTANAS EMERGENTES ---*/
+.Dialog_Sasif {
+    border-radius: 10px;
     padding: 20px 26px;
-    border-radius: 10px;
     background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
@@ -451,41 +318,46 @@
     border: solid 1px #921919;
 }
 
-#T_Valores, #T_Saldos
-{
-    width: 100%;
-}
-
-#Marco_Contrato
-{
+/*--- ESTILO PARA EL POSICIONAMIENTO DE FOTOS ---*/
+#Foto_Persona {
+    width: 86%;
+    height: 120px;
+    position: absolute;
+    z-index: 0;
+    text-align: right;
     margin-top: 10px;
-    padding: 20px 26px;
-    border-radius: 10px;
-    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
-    border: solid 1px #921919;
-    width: 90%;
-    margin-left: 25px;
 }
 
-#Marco_trabajo_Contrato
-{
-    margin-top: 10px;
-    padding: 20px 20px;
-    border-radius: 10px;
-    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
-    border: solid 1px #921919;
-    width: 95%;
-    overflow: auto;
+/*--- ESTILO DE LA X DE SALIDA DEL  FORMULARIO---*/
+#image_exit {
+    text-align: end;
 }
 
-#Container_Complementos
-{
+/*--- ESTILO FOOTER PARA DETALLE DE USUARIO---*/
+#Footer_Det {
+    position: absolute;
+    margin-top: 55px;
+    border: solid 1px;
+    border-radius: 3px;
+    border-style: outset;
+}
+
+/*CONTROL IMAGEN DIRECCION*/
+#logoExt:hover .Ext {
+    content: url("../../images/agenda_gray.png");
+    cursor: pointer;
+    cursor: hand; /*internet explorer*/
+}
+
+.Ext {
+    content: url("../../images/agenda.png");
+}
+/************************************************************************************
+FUNCIONALIDADES SUB MENU CLIENTES
+*************************************************************************************/
+
+/*CONTAINER SELECCION SUBMENU*/
+#Container_Complementos {
     height: 45%;
     width: 20%;
     position: absolute;
@@ -501,8 +373,8 @@
     margin-top: 10px;
 }
 
-.Option_Cliente
-{
+/*CONTROL SELECCION SUBMENU*/
+.Option_Cliente {
     background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
@@ -514,8 +386,7 @@
     color: gray;
 }
 
-    .Option_Cliente:hover
-    {
+    .Option_Cliente:hover {
         background: -webkit-linear-gradient(#b70d0d, #631111);
         background: -o-linear-gradient(#b70d0d, #631111);
         background: -moz-linear-gradient(#b70d0d, #631111);
@@ -525,81 +396,258 @@
         cursor: pointer;
     }
 
-.C_Image
-{
-    padding-left: 10px;
-    position: absolute;
-}
-
-.C_Text
-{
-    padding-left: 60px;
-    margin-top: 15px;
-}
-
-.T_options
-{
+/*CLASE DE MANEJO DE TITULO SUB MENU*/
+.T_options {
     margin-top: 25px;
     margin-left: 50px;
     position: absolute;
     z-index: 50;
 }
 
+/*CLASE DE MANEJO DE IMAGEN SUB MENU*/
+.C_Image {
+    padding-left: 10px;
+    position: absolute;
+}
+
+/*CLASE DE MANEJO DE TEXTO SUB MENU*/
+.C_Text {
+    padding-left: 60px;
+    margin-top: 15px;
+}
+
 /*CONTROL IMAGEN DIRECCION*/
-#DivA:hover .ImaAddress
-{
+#DivA:hover .ImaAddress {
     content: url("../../images/adress_book_w.png");
 }
 
-.ImaAddress
-{
+.ImaAddress {
     content: url("../../images/adress_book.png");
 }
 
 /*CONTROL IMAGEN BANCO*/
-#DivB:hover .ImaBank
-{
+#DivB:hover .ImaBank {
     content: url("../../images/bank_w.png");
 }
 
-.ImaBank
-{
+.ImaBank {
     content: url("../../images/bank.png");
 }
 
-/*CONTROL IMAGEN BANCO*/
-#DivD:hover .ImaDoc
-{
+/*CONTROL IMAGEN DOCUMENTO*/
+#DivD:hover .ImaDoc {
     content: url("../../images/documentos_w.png");
 }
 
-.ImaDoc
-{
+.ImaDoc {
     content: url("../../images/documentos.png");
 }
 
-#Foto_Persona
-{
-    width: 86%;
-    height: 120px;
-    position: absolute;
-    z-index: 0;
-    text-align: right;
-    margin-top: 10px;
+/*CONTROL IMAGEN RELACION*/
+#Div_R:hover .ImaRelation, #Div_RC:hover .ImaRelation {
+    content: url("../../images/Relation_Gray.png");
+    cursor: pointer;
+    cursor: hand; /*internet explorer*/
 }
 
-#Footer_Det
-{
-    position: absolute;
-    margin-top: 55px;
-    border: solid 1px;
-    border-radius: 3px;
-    border-style: outset;
+.ImaRelation {
+    content: url("../../images/Relation_Red.png");
 }
 
-.Sigla
-{
-    text-align: left;
-    font-size: 10px;
-    font-weight: bold;
+/************************************************************************************
+FUNCIONALIDADES INFORMACION IMPUESTOS
+*************************************************************************************/
+/*CONTROL IMAGEN RELACION*/
+#DivCliente:hover .ImaClient {
+    content: url("../../images/Cliente_Gray.png");
+    cursor: pointer;
+    cursor: hand; /*internet explorer*/
 }
+
+.ImaClient {
+    content: url("../../images/Cliente_Red.png");
+}
+
+
+/************************************************************************************
+MEDIA QUERIES
+*************************************************************************************/
+/* para 980px o menos horizontal*/
+@media screen and (max-width: 980px) {
+    .Container_title_Form {
+        width: 92%;
+    }
+
+    .Marco_Container {
+        width: 89%;
+    }
+
+    .Marco_Container_Flex {
+        width: 89%;
+    }
+
+    .Marco_btn_Form {
+        width: 95%;
+    }
+
+    .Marco_trabajo_Form {
+        width: 95%;
+    }
+
+    .Marco_trabajo_Flex {
+        width: 95%;
+    }
+
+    #panel_pag {
+        vertical-align: -webkit-baseline-middle;
+        width: 90%;
+    }
+
+    .marco {
+        margin-top: 30px;
+        padding-bottom: 15%;
+        padding-left: 20%;
+        padding-right: 20%;
+    }
+}
+
+/* para 700px o menos */
+@media screen and (max-width: 700px) {
+    .Container_title_Form {
+        width: 89%;
+    }
+
+    .Marco_Container {
+        width: 85.7%;
+    }
+
+    .Marco_Container_Flex {
+        width: 85.7%;
+    }
+
+    .Marco_btn_Form {
+        width: 92%;
+    }
+
+    .Marco_trabajo_Form {
+        width: 92%;
+    }
+
+    .Marco_trabajo_Flex {
+        width: 92%;
+    }
+
+    #panel_pag {
+        vertical-align: -webkit-baseline-middle;
+        width: 90%;
+    }
+
+    .marco {
+        margin-top: 30px;
+        padding-bottom: 8%;
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+}
+
+/* para 550px o menos */
+@media screen and (max-width: 550px) {
+    .Container_title_Form {
+        width: 87%;
+    }
+
+    .Marco_Container {
+        width: 82.7%;
+    }
+
+    .Marco_Container_Flex {
+        width: 82.7%;
+    }
+
+    .Marco_btn_Form {
+        width: 90%;
+        height: 10%;
+    }
+
+    .Marco_trabajo_Form {
+        width: 90%;
+    }
+
+    .Marco_trabajo_Flex {
+        width: 90%;
+    }
+
+    #panel_pag {
+        vertical-align: -webkit-baseline-middle;
+        width: 90%;
+    }
+
+    .marco {
+        margin-top: 30px;
+        padding-left: 7%;
+        padding-right: 7%;
+    }
+}
+
+/* para 480px o menos */
+@media screen and (max-width: 480px) {
+    .Container_title_Form {
+        width: 95.5%;
+        margin-left: -30px;
+    }
+
+    .Marco_Container {
+        width: 86.5%;
+        margin-left: -30px;
+    }
+
+    .Marco_Container_Flex {
+        width: 86.5%;
+        margin-left: -30px;
+    }
+
+    .Marco_btn_Form {
+        width: 83%;
+    }
+
+    .Marco_trabajo_Form {
+        width: 83%;
+    }
+
+    .Marco_trabajo_Flex {
+        width: 83%;
+    }
+
+    input[type='button'] {
+        width: 80px;
+    }
+
+    .marco {
+        margin-top: 30px;
+        padding-top: 5%;
+        padding-bottom: 2%;
+        padding-left: 0%;
+        padding-right: 0%;
+    }
+}
+
+
+/************************************************************************************
+/************************************************************************************
+/************************************************************************************
+/* pendiente por fallas en el modulo informe impuesto*/
+#D_Impuestos, #D_Clientes_Z {
+    margin-top: 15px;
+    padding: 20px 26px;
+    border-radius: 10px;
+    background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#e0e0e0, #dadada); /* Standard syntax (must be last)*/
+    border: solid 1px #921919;
+    font: 12px/20px CenturyGothic,sans-serif;
+}
+/* pendiente por fallas en el modulo informe impuesto*/
+/************************************************************************************
+/************************************************************************************
+/*************************************************************************************/

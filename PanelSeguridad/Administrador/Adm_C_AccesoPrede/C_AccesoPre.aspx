@@ -21,9 +21,19 @@
     <script src="../../Scripts/Dialog/datepicker.js" type="text/javascript"></script>
     <script src="../../Scripts/Dialog/timepicker.js" type="text/javascript"></script>
     <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" type="text/css" />
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
-    <div id="Container_title_Form">
+    <div id="Dialog_Control" style="width: 100%; text-align: center;">
+        <div class="cssload-container" style="margin-top: 25%;">
+            <div class="cssload-whirlpool"></div>
+            <div>
+                <img id="Sasif" class="Logo_3" src="../../images/SASIF_NEW_WHITE.png" alt="SASIF S.A.S." />
+            </div>
+        </div>
+    </div>
+    <div class="Container_title_Form">
         <table id="Tabla_Title_form">
             <tr>
                 <td id="Title_form"></td>
@@ -34,41 +44,43 @@
             </tr>
         </table>
     </div>
-    <div id="Marco_Container">
-        <div id="Marco_btn_Form">
+    <div class="Marco_Container">
+        <div class="Marco_btn_Form">
             <input id="BtnShearh" type="button" value="Consulta" onclick="HabilitarPanel('buscar');" />
             <input id="BtnCreate" type="button" value="Crear" onclick="HabilitarPanel('crear');" />
             <input id="BtnUpdate" type="button" value="Actualizar" onclick="HabilitarPanel('modificar');" />
             <input id="BtnDelete" type="button" value="Eliminar" onclick="HabilitarPanel('eliminar');" />
         </div>
-        <div id="Container_controls">
-            <table id="TablaConsulta">
-                <tr>
-                    <td id="TD1">
-                        <select id="DDLColumns" class="C_Chosen">
-                        </select>
-                    </td>
-                    <td id="TD2">
-                        <span class="cssToolTip_Form">
-                            <input id="TxtRead" type="text" />
-                            <span class="Spam_AST"></span></span>
-                    </td>
-                    <td colspan="4" align="center" id="TD3">
-                        <input id="BtnRead" type="button" value="Buscar" onclick="BtnConsulta();" />
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="4">&nbsp;
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="4">
-                        <div id="container_TGrid">
-                        </div>
-                    </td>
-                </tr>
-            </table>
-            <div id="TablaDatos_D">
+        <div class="Marco_trabajo_Form">
+            <div class="Container_controls">
+                <table id="TablaConsulta">
+                    <tr>
+                        <td style="width: 25%;">
+                            <select id="DDLColumns" class="C_Chosen">
+                            </select>
+                        </td>
+                        <td style="width: 65%;">
+                            <span class="cssToolTip_Form">
+                                <input id="TxtRead" type="text" style="width: 60%; margin-left: 10%;" />
+                                <span class="Spam_AST"></span></span>
+                        </td>
+                        <td colspan="4" align="center" style="width: 40%;">
+                            <input id="BtnRead" type="button" value="Buscar" onclick="BtnConsulta();" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">&nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <div class="container_TGrid">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <div class="Dialog_Datos">
+                </div>
             </div>
         </div>
     </div>

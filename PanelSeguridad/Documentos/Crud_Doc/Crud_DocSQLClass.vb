@@ -175,10 +175,10 @@ Public Class Crud_DocSQLClass
         sql.AppendLine("'" & vp_Obj_Crud_Doc.Crud_Doc_ID & "',")
         sql.AppendLine("'" & vp_Obj_Crud_Doc.Descripcion & "',")
         sql.AppendLine("'" & vp_Obj_Crud_Doc.TipoContenido & "',")
-        sql.AppendLine("'" & vp_Obj_Crud_Doc.Formato_ID & "',")
+        sql.AppendLine("'" & vp_Obj_Crud_Doc.Formato & "',")
         sql.AppendLine("'" & vp_Obj_Crud_Doc.TipoVersion & "',")
         sql.AppendLine("'" & vp_Obj_Crud_Doc.Ruta_ID & "',")
-        sql.AppendLine("'" & vp_Obj_Crud_Doc.IndicativoFoto & "',")
+        sql.AppendLine("'" & vp_Obj_Crud_Doc.Indicativo & "',")
         sql.AppendLine("'" & vp_Obj_Crud_Doc.Ruta_ID_Plantilla & "',")
         sql.AppendLine("'" & vp_Obj_Crud_Doc.NombrePlantilla & "',")
         sql.AppendLine("'" & vp_Obj_Crud_Doc.ChequeaVigencias & "',")
@@ -213,10 +213,10 @@ Public Class Crud_DocSQLClass
         sql.AppendLine("UPDATE Crud_DocS SET " & _
                        " DOC_Descripcion ='" & vp_Obj_Crud_Doc.Descripcion & "', " & _
                        " DOC_TipoContenido ='" & vp_Obj_Crud_Doc.TipoContenido & "', " & _
-                       " DOC_Formato ='" & vp_Obj_Crud_Doc.Formato_ID & "', " & _
+                       " DOC_Formato ='" & vp_Obj_Crud_Doc.Formato & "', " & _
                        " DOC_TipoVersion ='" & vp_Obj_Crud_Doc.TipoVersion & "', " & _
                        " DOC_Ruta_ID ='" & vp_Obj_Crud_Doc.Ruta_ID & "', " & _
-                       " DOC_IndicativoFoto ='" & vp_Obj_Crud_Doc.IndicativoFoto & "', " & _
+                       " DOC_IndicativoFoto ='" & vp_Obj_Crud_Doc.Indicativo & "', " & _
                        " DOC_Ruta_ID_Plantilla ='" & vp_Obj_Crud_Doc.Ruta_ID_Plantilla & "', " & _
                        " DOC_NombrePlantilla ='" & vp_Obj_Crud_Doc.NombrePlantilla & "', " & _
                        " DOC_ChequeaVigencias ='" & vp_Obj_Crud_Doc.ChequeaVigencias & "', " & _
@@ -381,10 +381,10 @@ Public Class Crud_DocSQLClass
                     objCrud_Doc.Descripcion = ReadConsulta.GetValue(2)
 
                     objCrud_Doc.TipoContenido = ReadConsulta.GetValue(3)
-                    objCrud_Doc.Formato_ID = ReadConsulta.GetValue(4)
+                    objCrud_Doc.Formato = ReadConsulta.GetValue(4)
                     objCrud_Doc.TipoVersion = ReadConsulta.GetValue(5)
                     objCrud_Doc.Ruta_ID = ReadConsulta.GetValue(6)
-                    objCrud_Doc.IndicativoFoto = ReadConsulta.GetValue(7)
+                    objCrud_Doc.Indicativo = ReadConsulta.GetValue(7)
                     objCrud_Doc.Ruta_ID_Plantilla = ReadConsulta.GetValue(8)
 
                     If Not (IsDBNull(ReadConsulta.GetValue(9))) Then objCrud_Doc.NombrePlantilla = ReadConsulta.GetValue(9) Else objCrud_Doc.NombrePlantilla = ""

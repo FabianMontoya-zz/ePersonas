@@ -1,39 +1,13 @@
 ﻿/*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transaccionAjax_RutasOperacion(State) {
+function transaccionAjax_MDocumento(vp_State, vp_Nit) {
     $.ajax({
         url: "AutorizacionDocumentosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
-            "tabla": 'RUTA'
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            if (result == "") {
-                RutasOperacion = [];
-            }
-            else {
-                RutasOperacion = JSON.parse(result);
-                RutaTemporal = RutasOperacion[0].RutaDocumentoTemporal;
-                RutaRelativa = RutasOperacion[0].RutaRelativaDocumento;
-            }
-        },
-        error: function () {
-
-        }
-    });
-}
-
-/*-------------------- carga ---------------------------*/
-//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transaccionAjax_MDocumento(State) {
-    $.ajax({
-        url: "AutorizacionDocumentosAjax.aspx",
-        type: "POST",
-        //crear json
-        data: { "action": State,
-            "tabla": 'RUTA'
+        data: {
+            "action": vp_State,
+            "Nit": vp_Nit
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -46,20 +20,50 @@ function transaccionAjax_MDocumento(State) {
         },
         error: function () {
 
-        }
+        },
+    }).done(function () {
+        Charge_Combos_Depend_Nit(Matrix_Documento, "Select_Documento_V", vp_Nit, "");
     });
 }
 
-
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transaccionAjax_MRDocVerif(State) {
+function transaccionAjax_MDocWork(vl_State, vp_Nit, vp_TD, vp_D, vp_Type) {
     $.ajax({
         url: "AutorizacionDocumentosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
-            "tabla": 'RUTA'
+        data: {
+            "action": vl_State,
+            "tabla": 'RUTA',
+            "Nit": vp_Nit
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_DocWork = [];
+            }
+            else {
+                Matrix_DocWork = JSON.parse(result);
+            }
+        },
+        error: function () {
+
+        },
+    }).done(function () {
+    });
+}
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_MRDocVerif(vl_State, vp_Nit) {
+    $.ajax({
+        url: "AutorizacionDocumentosAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": vl_State,
+            "Nit": vp_Nit
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -78,21 +82,25 @@ function transaccionAjax_MRDocVerif(State) {
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transaccionAjax_MDocWork(State) {
+function transaccionAjax_MConsecutivo(vp_State, vp_Nit) {
     $.ajax({
         url: "AutorizacionDocumentosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
-            "tabla": 'RUTA'
+        data: {
+            "action": vp_State,
+            "Nit": vp_Nit
         },
         //Transaccion Ajax en proceso
         success: function (result) {
             if (result == "") {
-                Matrix_DocWork = [];
+                Matrix_Consecutivo = [];
             }
             else {
-                Matrix_DocWork = JSON.parse(result);
+                Matrix_Consecutivo = JSON.parse(result);
+                if (Matrix_Consecutivo.length == 0) {
+                    Mensaje_General("Exito", "El documento no se puede crear no hay consecutivos! ", "W");
+                }
             }
         },
         error: function () {
@@ -101,6 +109,42 @@ function transaccionAjax_MDocWork(State) {
     });
 }
 
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_RutasOperacion(vp_State) {
+    OpenControl();
+    $.ajax({
+        url: "AutorizacionDocumentosAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": vp_State,
+            "tabla": 'RUTA'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                RutasOperacion = [];
+            }
+            else {
+                RutasOperacion = JSON.parse(result);
+                RutaTemporal = RutasOperacion[0].RutaDocumentoTemporal;
+                RutaRelativa = RutasOperacion[0].RutaRelativaDocumento;
+            }
+        },
+        error: function () {
+
+        },
+    }).done(function () {
+
+        var vl_OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+    
+        if (vl_OnlyEmpresa == true) {
+            Nit_ID_proccess = $("#Select_EmpresaNit").val();
+            TransaccionesSegunNIT(Nit_ID_proccess);
+        }
+    });
+}
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
@@ -109,7 +153,8 @@ function transaccionAjax_MVerificacion(State) {
         url: "AutorizacionDocumentosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'RUTA'
         },
         //Transaccion Ajax en proceso
@@ -128,7 +173,6 @@ function transaccionAjax_MVerificacion(State) {
     });
 }
 
-
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_EmpresaNit(State) {
@@ -136,7 +180,8 @@ function transacionAjax_EmpresaNit(State) {
         url: "AutorizacionDocumentosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'CLIENTE'
         },
         //Transaccion Ajax en proceso
@@ -151,10 +196,11 @@ function transacionAjax_EmpresaNit(State) {
         },
         error: function () {
 
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     });
 }
-
 
 /*------------------------------ consulta ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
@@ -173,7 +219,8 @@ function transacionAjax_AutorizacionDocumentos(State, filtro, opcion) {
         url: "AutorizacionDocumentosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "filtro": filtro,
             "opcion": opcion,
             "contenido": contenido
@@ -186,38 +233,6 @@ function transacionAjax_AutorizacionDocumentos(State, filtro, opcion) {
             else {
                 ArrayAutorizacionDocumentos = JSON.parse(result);
                 Table_AutorizacionDocumentos();
-            }
-        },
-        error: function () {
-
-        }
-    });
-}
-
-
-/*-------------------- carga ---------------------------*/
-//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transaccionAjax_MConsecutivo(State) {
-    $.ajax({
-        url: "AutorizacionDocumentosAjax.aspx",
-        type: "POST",
-        //crear json
-        data: { "action": State,
-            "tabla": 'RUTA'
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            if (result == "") {
-                Matrix_Consecutivo = [];
-                $("#dialog").dialog("option", "title", "Exito");
-                $("#Mensaje_alert").text("El documento no se puede crear no hay consecutivos! ");
-                $("#dialog").dialog("open");
-                $("#DE").css("display", "none");
-                $("#SE").css("display", "none");
-                $("#WE").css("display", "block");
-            }
-            else {
-                Matrix_Consecutivo = JSON.parse(result);
             }
         },
         error: function () {
@@ -240,7 +255,8 @@ function transaccionAjax_Update_Verificacion(State) {
         url: "AutorizacionDocumentosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Nit_ID": Nit,
             "Documento": $("#Vis_Documento_3").val(),
             "NameDocumento": Doc_name_save,
@@ -297,7 +313,8 @@ function transacionAjax_UpdateConsecutivo(State, Consecutivo) {
         url: "AutorizacionDocumentosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Consecutivo": Consecutivo,
             "Nit_ID": Nit_ID_proccess
         },
@@ -324,7 +341,8 @@ function transacionAjax_ListDocument_Anexos(State) {
         url: "AutorizacionDocumentosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "listDocAnexos": listDocAnexos
         },
         //Transaccion Ajax en proceso
@@ -370,7 +388,8 @@ function transacionAjax_DeleteDocument(State, Ruta, nombre) {
         url: "AutorizacionDocumentosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Ruta": Ruta,
             "Doc_name": nombre
         },

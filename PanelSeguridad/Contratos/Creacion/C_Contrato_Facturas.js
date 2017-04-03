@@ -79,8 +79,8 @@ function Tabla_factura() {
     }
 
     Html += "</tbody></table>";
-    $("#Container_Facturas").html("");
-    $("#Container_Facturas").html(Html);
+    $(".Div_Full_Block").html("");
+    $(".Div_Full_Block").html(Html);
 
     $("#T_Fact").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,

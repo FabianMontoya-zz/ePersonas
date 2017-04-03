@@ -28,7 +28,7 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
-    <div id="Container_title_Form">
+    <div class="Container_title_Form">
         <table id="Tabla_Title_form">
             <tr>
                 <td id="Title_form"></td>
@@ -41,8 +41,8 @@
     </div>
 
     <!--Dialog que contiene la pantalla de las colocaciones/contratos -->
-    <div id="Marco_Contrato">
-        <div id="Marco_trabajo_Contrato">
+    <div class="Marco_Container_Flex">
+        <div class="Marco_trabajo_Flex">
             <div id="Acordeon_Contrato" style="width: 100%">
                 <h3>Captura Colocación
                 </h3>
@@ -424,7 +424,7 @@
                                             <!--<td style="width: 25%;" rowspan="2"></td> -->
                                         </tr>
                                         <tr>
-                                            <td class="Label_Bold" id="L_Mora_Magnitud" style="width: 40%;">asd</td>
+                                            <td class="Label_Bold" id="L_Mora_Magnitud" style="width: 40%;"></td>
                                         </tr>
                                     </table>
                                 </center>
@@ -438,7 +438,7 @@
                                             <!--<td style="width: 35%;" rowspan="2"></td> -->
                                         </tr>
                                         <tr>
-                                            <td class="Label_Bold" id="L_Usura_Magnitud" style="width: 40%;">asd</td>
+                                            <td class="Label_Bold" id="L_Usura_Magnitud" style="width: 40%;"></td>
                                         </tr>
                                     </table>
                                 </center>
@@ -760,7 +760,7 @@
     </div>
 
     <div id="Dialog_Terceros">
-        <div id="Bloque_datos_Terceros1">
+        <div class="container_Grid_Flex_95">
             <table id="T_DatosColocacion" style="width: 100%;">
                 <tr>
                     <td id="TD1" style="width: 10.5%;" class="Label_Bold">Empresa</td>
@@ -770,7 +770,7 @@
                 </tr>
             </table>
         </div>
-        <div id="Bloque_datos_Terceros2">
+        <div class="container_Grid_Flex_95">
             <table id="T_Documento" style="width: 100%; padding-top: 20px;">
                 <tr>
                     <td class="Label_Bold" style="width: 10.5%;">Documento</td>
@@ -843,7 +843,7 @@
             </tr>
         </table>
         <div id="Div1">
-            <div id="Container_controls">
+            <div class="Container_controls">
                 <div id="Acordeon_Activo" style="width: 100%">
                     <h3>Datos Activos
                     </h3>
@@ -1017,54 +1017,51 @@
                         </table>
                         <table id="Tabla_Valor" style="width: 100%;">
                             <tr>
-                                <td class="Label_Bold" style="width: 7.5%;">Valor Bien
+                                <td class="Label_Bold" style="width: 3.4%;">Valor Bien
                                 </td>
-                                <td id="V_Sigla_1" style="width: 3%" class="Sigla"></td>
-                                <td style="width: 15%;">
+                                <td id="V_Sigla_1" style="width: 0.7%" class="Sigla"></td>
+                                <td style="width: 9.8%;">
                                     <span class="cssToolTip_Form">
                                         <input type="text" id="TxtValor_Bien" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
                                         <span class="Spam_AVal"></span></span>
                                 </td>
-                                <td class="Label_Bold" style="width: 10%;">Sumatoria Facturas
+                                <td class="Label_Bold" style="width: 3%;">Sumatoria Facturas
                                 </td>
-                                <td id="V_Sigla_2" style="width: 4%" class="Sigla"></td>
-                                <td class="Label_Bold" id="V_TFacturas" style="width: 30%;"></td>
+                                <td id="V_Sigla_2" style="width: 1%" class="Sigla"></td>
+                                <td class="Title_Bold" id="V_TFacturas" style="width: 8.9%; padding-bottom: 5px;" align="left"></td>
                             </tr>
-                        </table>
-                        <table id="Tabla_Valor_Compra" style="width: 100%;">
                             <tr>
-                                <td class="Label_Bold" style="width: 7.3%;">Valor Compra
+                                <td class="Label_Bold" style="width: 3.4%;">Valor Compra
                                 </td>
-                                <td id="V_Sigla_3" style="width: 3%" class="Sigla"></td>
-                                <td style="width: 15%;">
+                                <td id="V_Sigla_3" style="width: 0.7%" class="Sigla"></td>
+                                <td style="width: 9.8%">
                                     <span class="cssToolTip_Form_T">
                                         <input type="text" id="TxtValor_Compra" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
                                         <span class="Spam_AVal"></span></span>
                                 </td>
-                                <td class="Label_Bold" style="width: 10%;">Compra Bien</td>
-                                <td style="width: 5%">
-                                    <select id="Select_CompraBien" class="C_Chosen" style="width: 80px;">
+                                <td class="Label_Bold" style="width: 3%;"></td>
+                                <td class="Label_Bold" style="width: 1%;"></td>
+                                <td style="width: 8.9%"></td>
+                            </tr>
+                        </table>
+                        <table id="Tabla_Valor_Compra" style="width: 100%;">
+                            <tr>
+                                <td class="Label_Bold" style="width: 8.5%;">Compra Bien</td>
+                                <td style="width: 8.9%">
+                                    <select id="Select_CompraBien" class="C_Chosen" style="width: 100px;">
                                         <option value="0">No Aplica</option>
                                         <option value="1">Nuevo</option>
                                         <option value="2">Usado</option>
-                                    </select></td>
-                                <td class="Label_Bold" style="width: 25%;"></td>
+                                    </select>
+                                </td>
+                                <td class="Label_Bold" style="width: 40%;"></td>
                             </tr>
                         </table>
                         <table id="T_Datos_Final" style="width: 100%;">
                             <tr>
-                                <td class="Label_Bold" style="width: 6%;">Asegurado (S/N)
+                                <td class="Label_Bold" style="width: 8.5%;">Tipo Administración
                                 </td>
-                                <td style="width: 6%;">
-                                    <select id="Select_Asegurado" class="C_Chosen">
-                                        <option value="N">No</option>
-                                        <option value="S">Si</option>
-                                    </select>
-                                </td>
-                                <td style="width: 11.5%; padding-bottom: 25px;"></td>
-                                <td class="Label_Bold" style="width: 7.7%;">Tipo Administración
-                                </td>
-                                <td style="width: 20%;">
+                                <td style="width: 8.9%;">
                                     <select id="Select_TipoAdmin" class="C_Chosen">
                                         <option value="1">1 - Cliente paga</option>
                                         <option value="2">2 - Exento</option>
@@ -1072,13 +1069,24 @@
                                         <option value="4">4 - Pago cliente con soporte</option>
                                     </select>
                                 </td>
-                                <td style="width: 10%; padding-bottom: 25px;"></td>
+                                <td style="width: 40%; padding-bottom: 25px;"></td>
+                            </tr>
+                            <tr>
+                                <td class="Label_Bold">Asegurado (S/N)
+                                </td>
+                                <td>
+                                    <select id="Select_Asegurado" class="C_Chosen">
+                                        <option value="N">No</option>
+                                        <option value="S">Si</option>
+                                    </select>
+                                </td>
+                                <td></td>
                             </tr>
                         </table>
                         <table id="Tabla_poliza" style="width: 100%; display: inline-table;">
                             <tbody>
                                 <tr>
-                                    <td class="Label_Bold" style="width: 8%;">N° Poliza</td>
+                                    <td class="Label_Bold" style="width: 12.3%;">N° Poliza</td>
                                     <td style="width: 15%;">
                                         <span class="cssToolTip_Form_T">
                                             <input type="text" id="Txt_Num_poliza" maxlength="30" style="width: 180px;" class="Numeric_letter" />
@@ -1617,10 +1625,10 @@
                         </table>
                     </div>
                 </div>
-                <table id="Complementos">
+                <table class="container_Grid_Flex">
                     <tr>
                         <td>
-                            <div id="Container_Facturas" style="width: 100%;">
+                            <div class="Div_Full_Block" style="width: 100%;">
                                 <table id="T_Factura_Grid" border="1" cellpadding="1" cellspacing="1">
                                     <thead>
                                         <tr>

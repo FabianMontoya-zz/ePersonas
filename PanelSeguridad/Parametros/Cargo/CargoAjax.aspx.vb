@@ -54,8 +54,9 @@ Public Class CargoAjax
         Dim vl_S_filtro As String = Request.Form("filtro")
         Dim vl_S_opcion As String = Request.Form("opcion")
         Dim vl_S_contenido As String = Request.Form("contenido")
+        Dim vl_S_Nit_User As String = Request.Form("Nit_User")
 
-        ObjListCargo = SQL_Cargo.Read_AllCargo(vl_S_filtro, vl_S_opcion, vl_S_contenido)
+        ObjListCargo = SQL_Cargo.Read_AllCargo(vl_S_filtro, vl_S_opcion, vl_S_contenido, vl_S_Nit_User)
 
         If ObjListCargo Is Nothing Then
 
@@ -221,11 +222,11 @@ Public Class CargoAjax
     ''' <remarks></remarks>
     Protected Sub CargarSeguridad()
 
-        Dim SQL As New CargoSQLClass
+        Dim SQL As New Adm_Politicas_SeguridadSQLClass
         Dim ObjListDroplist As New List(Of Droplist_Class)
-        Dim vl_S_Tabla As String = Request.Form("tabla")
+        Dim vl_S_Nit As String = Request.Form("Nit")
 
-        ObjListDroplist = SQL.Charge_DropListSeguridad(vl_S_Tabla)
+        ObjListDroplist = SQL.Charge_DropListSeguridad(vl_S_Nit)
         Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
 
     End Sub

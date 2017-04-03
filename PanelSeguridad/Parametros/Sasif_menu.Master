@@ -5,33 +5,33 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta http-equiv="cache-control" content="max-age=0" />
+    <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="expires" content="Thu, 01 Dec 1994 16:00:00 GMT" />
     <script src="<% = ResolveClientUrl("~/Scripts/jquery-1.4.1.js") %>" type="text/javascript"></script>
     <script src="<% = ResolveClientUrl("~/Scripts/Refresh.js")%>" type="text/javascript"></script>
     <script src="../../SasifMaster.js" type="text/javascript"></script>
-    <link href="../css/css_menu.css" rel="stylesheet" type="text/css" />
     <script src="../menu.js" type="text/javascript"></script>
+    <link href="../css/css_menu.css" rel="stylesheet" type="text/css" />
     <link href="../css/css_controles.css" rel="stylesheet" type="text/css" />
     <link href="../css/css_master.css" rel="stylesheet" type="text/css" />
-    <style type="text/css">
-        html, body
-        {
-            overflow: hidden;
-        }
-    </style>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body>
+<body onload="No_Back_Button();">
     <form id="form1" runat="server">
-        <div class="page">
-            <div id="Header" class="header ">
+        <div id="Page" class="page">
+            <div id="Header">
                 <div class="Dimencion_Header">
                     <table id="M_header">
                         <tr>
                             <td id="logoExt" rowspan="4" style="width: 15%; text-align: center;">
                                 <img id="logo_2" class="Logo_1" src="" alt="SASIF S.A.S." />
                             </td>
-                            <td id="Name_User" colspan="3" style="width: 70%; text-align: center;"></td>
+                            <td id="Name_User" colspan="3"></td>
                             <td rowspan="4" style="width: 15%; text-align: center;">&nbsp;<img alt="" src="" />
                             </td>
                         </tr>
@@ -51,8 +51,11 @@
                 <div class="Bar">
                     <table id="M_Bar">
                         <tr>
-                            <td id="TMenu" style="width: 15%">
+                            <td id="TMenu">
                                 <img id="logo_2_W" class="Logo_2" src="" alt="SASIF S.A.S." />
+                                <div id="DivMenu" onclick="javascript:VerMenu();">
+                                    <img id="Logo_Menu" width="30px" height="30px" src="../../images/Menu_White.png" alt="menu" />
+                                </div>
                             </td>
                             <td style="width: 70%; text-align: center;" class="Titulo_2">
                                 <spam id="tituloPrincipal_2" style="color: #FFFFFF; font-weight: bold;">&nbsp;</spam>
@@ -67,7 +70,7 @@
             <div id="Medium" class="main">
                 <table id="M_Container">
                     <tr>
-                        <td id="panel_menu">
+                        <td class="panel_menu">
                             <div id="container_menu" class="Dimencion_Menu">
                             </div>
                             <div id="Bar_TMenu">

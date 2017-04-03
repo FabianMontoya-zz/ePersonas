@@ -12,11 +12,9 @@
     <script src="Cliente_EntFinan.js" type="text/javascript"></script>
     <script src="Cliente_Documento.js" type="text/javascript"></script>
     <script src="Cliente_Matrix.js" type="text/javascript"></script>
-    <script src="Cliente_DocAutorizado.js" type="text/javascript"></script>
     <link href="../../css/css_login.css" rel="stylesheet" type="text/css" />
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
     <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />
-    <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" />
     <link href="../../css/Chosen/chosen.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/jquery.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Chosen/chosen.jquery.js" type="text/javascript"></script>
@@ -25,9 +23,19 @@
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.fileupload.js" type="text/javascript"></script>
     <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" type="text/css" />
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
-    <div id="Container_title_Form">
+    <div id="Dialog_Control" style="width: 100%; text-align: center;">
+        <div class="cssload-container" style="margin-top: 25%">
+            <div class="cssload-whirlpool"></div>
+            <div>
+                <img id="Sasif" class="Logo_3" src="../../images/SASIF_NEW_WHITE.png" alt="SASIF S.A.S." />
+            </div>
+        </div>
+    </div>
+    <div class="Container_title_Form">
         <table id="Tabla_Title_form">
             <tr>
                 <td id="Title_form"></td>
@@ -38,14 +46,14 @@
             </tr>
         </table>
     </div>
-    <div id="Marco_Container">
-        <div id="Marco_btn_Form">
+    <div class="Marco_Container">
+        <div class="Marco_btn_Form">
             <input id="BtnShearh" type="button" value="Consulta" onclick="HabilitarPanel('buscar');" />
             <input id="BtnCreate" type="button" value="Crear" onclick="HabilitarPanel('crear');" />
             <input id="BtnUpdate" type="button" value="Actualizar" onclick="HabilitarPanel('modificar');" />
             <input id="BtnDelete" type="button" value="Eliminar" onclick="HabilitarPanel('eliminar');" />
         </div>
-        <div id="Marco_trabajo_Form">
+        <div class="Marco_trabajo_Form">
             <div id="Admin_Anexos">
                 <span id="T_option" class="T_options Label_Bold">Información Persona</span><a href="javascript:Complemento();">
                     <img alt="logo" title="" style="height: 38px; width: 38px; position: absolute; padding-left: 10px; padding-top: 15px; z-index: 90;"
@@ -82,19 +90,19 @@
                 <img alt="foto" title="" style="height: 120px; width: 100px; position: absolute; border-radius: 4px; border-color: #921919; border-width: 2px; border-style: outset;"
                     id="Imgfoto" src="../../images/avatar.png" />
             </div>
-            <div id="Container_controls">
+            <div class="Container_controls">
                 <table id="TablaConsulta">
                     <tr>
-                        <td>
+                        <td style="width: 25%;">
                             <select id="DDLColumns" class="C_Chosen">
                             </select>
                         </td>
-                        <td>
+                        <td style="width: 65%;">
                             <span class="cssToolTip_Form">
-                                <input id="TxtRead" type="text" />
+                                <input id="TxtRead" type="text" style="width: 60%; margin-left: 10%;" />
                                 <span class="Spam_AST"></span></span>
                         </td>
-                        <td align="center" id="TD3">
+                        <td align="center" id="TD3" style="width: 20%;">
                             <input id="BtnRead" type="button" value="Buscar" onclick="BtnConsulta();" />
                         </td>
                     </tr>
@@ -104,15 +112,15 @@
                     </tr>
                     <tr>
                         <td colspan="4">
-                            <div id="container_TCliente">
+                            <div class="container_TGrid">
                             </div>
                         </td>
                     </tr>
                 </table>
-                <div id="TablaDatos_D">
+                <div class="Dialog_Datos">
                     <table id="Tabla_1" style="width: 100%; text-align: left; margin-top: 5%">
                         <tr>
-                            <td style="width: 15%;" class="Label_Bold">Multi - Empresa
+                            <td style="width: 15%;" class="Label_Bold">NIT Empresa
                             </td>
                             <td>
                                 <select id="Select_EmpresaNit" class="C_Chosen">
@@ -362,14 +370,16 @@
                             <td style="width: 50%;" class="Label_Bold">Tipo de Relación
                             </td>
                             <td style="width: 50%;">
-                                <span class="cssToolTip_Form_L"><a href="javascript:BtnRelacion();">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 50px; width: 50px;" id="Imgrelations"
-                                        src="../../images/Relations.gif" /></a> <span class="Spam_ARel"></span></span>
+                                <div id="Div_R">
+                                    <span class="cssToolTip_Form_L"><a href="javascript:BtnRelacion();">
+                                        <img class="ImaRelation" alt="error" title="" style="padding-left: 1em; height: 50px; width: 50px;" id="Imgrelations"
+                                            src="../../images/Relation_Red.png" /></a> <span class="Spam_ARel"></span></span>
+                                </div>
                             </td>
                         </tr>
                     </table>
                 </div>
-                <div id="TablaDatos_D_Vista" style="padding-top: 5%; padding-left: 10%;">
+                <div class="Dialog_Datos_Vista" style="padding-top: 5%; padding-left: 10%;">
                     <table id="Table2" style="width: 700px; text-align: left;">
                         <tr>
                             <td style="width: 120px;" class="Label_Bold">Multi - Empresa
@@ -534,19 +544,21 @@
                             <td style="padding-bottom: 25px; width: 700px;"></td>
                         </tr>
                     </table>
-                    <table id="Table10" style="width: 700px; text-align: left;">
+                    <table id="Table10" style="width: 40%; text-align: center; margin-top: 2%; margin-left: 25%; border: solid 1px #921919; border-radius: 10px; padding-bottom: 1%; padding-top: 1%;">
                         <tr>
-                            <td style="width: 120px;" class="Label_Bold">Tipo de Relación
+                            <td style="width: 50%;" class="Label_Bold">Tipo de Relación
                             </td>
-                            <td style="width: 195px;">
-                                <span class="cssToolTip_Form_L"><a href="javascript:BtnRelacion();">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 50px; width: 50px;" id="Img18"
-                                        src="../../images/relations.png" /></a> <span class="Spam_ARel"></span></span>
+                            <td style="width: 50%;">
+                                <div id="Div_RC">
+                                    <span class="cssToolTip_Form_L"><a href="javascript:BtnRelacion();">
+                                        <img class="ImaRelation" alt="error" title="" style="padding-left: 1em; height: 50px; width: 50px;" id="igre"
+                                            src="../../images/Relation_Red.png" /></a> <span class="Spam_ARel"></span></span>
+                                </div>
                             </td>
                         </tr>
                     </table>
                 </div>
-                <table id="Anexos">
+                <table class="container_Grid_Flex">
                     <tr>
                         <td>
                             <table id="Tabla_TC" style="width: 100%">
@@ -916,8 +928,8 @@
                 </td>
             </tr>
         </table>
-        <div id="Datos_Direc_D">
-            <table id="Tabla_Info_Dic">
+        <div class="Div_Complement_Block">
+            <table class="Container_Direccion">
                 <tr>
                     <td class="Label_Bold" style="width: 100px;">Consecutivo
                     </td>
@@ -941,7 +953,7 @@
                     </td>
                 </tr>
             </table>
-            <table id="Tabla_Ubic">
+            <table class="Container_Direccion">
                 <tr>
                     <td class="Label_Bold" style="width: 100px;">Pais
                     </td>
@@ -986,7 +998,7 @@
                     <td style="width: 40%;"></td>
                 </tr>
             </table>
-            <table id="Tabla_Direccion">
+            <table class="Container_Direccion">
                 <tr>
                     <td class="Label_Bold" style="width: 100px;">Dirección
                     </td>
@@ -1010,7 +1022,7 @@
                     </td>
                 </tr>
             </table>
-            <table id="Tabla_Correo">
+            <table class="Container_Direccion">
                 <tr>
                     <td class="Label_Bold" style="width: 100px;">Correo 1
                     </td>
@@ -1040,7 +1052,7 @@
                     </td>
                 </tr>
             </table>
-            <table id="Tabla_Telefono" style="width: 100%; padding-left: 50px;">
+            <table class="Container_Direccion" style="width: 100%; padding-left: 50px;">
                 <tr align="left">
                     <td class="Label_Bold" style="width: 70px;"></td>
                     <td class="Label_Bold" style="width: 20px;">Ind.</td>
@@ -1321,7 +1333,7 @@
                 </td>
             </tr>
         </table>
-        <div id="Datos_Bank_D">
+        <div class="Div_Complement_Block">
             <table id="Tabla_1_Bank" style="width: 500px;">
                 <tr>
                     <td class="Label_Bold" style="width: 100px;">Ent. Financiera
@@ -1578,40 +1590,6 @@
             <input id="BtnSave_Document" type="button" value="Guardar" onclick="BtnSave_Document_Client()" />
         </div>
     </div>
-    <div id="Dialog_Doc_Autorizados">
-        <div id="Div1" style="width: 100%; text-align: center; font: 12px/20px CenturyGothic,sans-serif;">
-            <table style="width: 100%">
-                <tr>
-                    <td class="Label_Bold">Nit Empresa
-                    </td>
-                    <td>
-                        <span class="cssToolTip_Form">
-                            <input type="text" id="Txt_Nit_Doc_A" maxlength="20" readonly="readonly" style="width: 100px;" />
-                            <span class="Spam_ACI"></span></span>
-                    </td>
-                    <td class="Label_Bold">Tipo identificación
-                    </td>
-                    <td>
-                        <span class="cssToolTip_Form">
-                            <input type="text" id="Txt_TypeIden_Doc_A" maxlength="20" readonly="readonly" />
-                            <span class="Spam_ACI"></span></span>
-                    </td>
-                    <td class="Label_Bold">Identificación
-                    </td>
-                    <td>
-                        <span class="cssToolTip_Form">
-                            <input type="text" id="Txt_Ident_Doc_A" maxlength="20" readonly="readonly" style="width: 100px;" />
-                            <span class="Spam_ACI"></span></span>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div id="container_DocAuto">
-        </div>
-        <div id="Div7" style="width: 100%; text-align: center; margin-top: 25px; font: 12px/20px CenturyGothic,sans-serif;">
-            <input id="BtnSave_Document_A" type="button" value="Guardar" onclick="BtnSave_Document_A_Client()" />
-        </div>
-    </div>
     <div id="Dialog_Visor">
         <table style="width: 100%; height: 100%;">
             <tr>
@@ -1621,14 +1599,6 @@
             </tr>
         </table>
     </div>
-    <div id="Dialog_Control" style="width: 100%; text-align: center;">
-        <div class="cssload-container" style="margin-top: 25%">
-            <div class="cssload-whirlpool"></div>
-            <div>
-                <img id="Sasif" class="Logo_3" src="../../images/SASIF_NEW_WHITE.png" alt="SASIF S.A.S." />
-            </div>
-        </div>
-     </div>
     <div id="Dialog_Ver_Anexos">
         <div id="container_TDoc_Anexos" style="margin-top: 10px; margin-bottom: 10px;">
         </div>

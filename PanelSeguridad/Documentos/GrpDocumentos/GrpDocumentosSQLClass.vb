@@ -13,7 +13,7 @@ Public Class GrpDocumentosSQLClass
     ''' <param name="vp_S_Contenido"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Read_AllGrpDocumentos(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String)
+    Public Function Read_AllGrpDocumentos(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String, ByVal vp_S_Nit_User As String)
 
         Dim ObjListGrpDocumentos As New List(Of GrpDocumentosClass)
         Dim StrQuery As String = ""
@@ -24,7 +24,7 @@ Public Class GrpDocumentosSQLClass
         Dim BD_Param As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDParam").ToString
 
         Dim sql As New StringBuilder
-
+        Dim vl_sql_filtro As New StringBuilder
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
             sql.Append(" SELECT GD_Nit_ID," & _
@@ -89,7 +89,17 @@ Public Class GrpDocumentosSQLClass
             End If
         End If
 
-        StrQuery = sql.ToString
+        If vp_S_Nit_User <> "N" Then
+            If vp_S_Contenido = "ALL" Then
+                vl_sql_filtro.Append(" WHERE  GD_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY GD_Nit_ID, GD_Grp_Documento_ID ASC")
+            Else
+                vl_sql_filtro.Append(" AND  GD_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY GD_Nit_ID, GD_Grp_Documento_ID ASC")
+            End If
+        Else
+            vl_sql_filtro.Append(" ORDER BY GD_Nit_ID, GD_Grp_Documento_ID ASC")
+        End If
+
+        StrQuery = sql.ToString & vl_sql_filtro.ToString
 
         ObjListGrpDocumentos = listGrpDocumentos(StrQuery, Conexion, "List")
 

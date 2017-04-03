@@ -1,18 +1,33 @@
 ﻿//carga el combo de Area dependiente
 function Change_Select_Nit() {
+    
     $("#Select_EmpresaNit").change(function () {
         var index_ID = $(this).val();
-        Charge_Combos_Depend_Nit(Matrix_Persona, "Select_Persona", index_ID, "");
-        Charge_Combos_Depend_Nit(Matrix_Tarjeta, "Select_Tarjeta_AccPre", index_ID, "");
         $("#Img5").css("display", "none");
+        transaccionAjax_MPersona('MATRIX_PERSONA');
+        transaccionAjax_MTarjeta('MATRIX_TARJETA');
+        transaccionAjax_MRTP('MATRIX_RTP');
+        Charge_Combos_Depend_Nit(Matrix_Persona, "Select_Persona_Enc", index_ID, "");
     });
 
     $("#Select_EmpresaNit_Ing").change(function () {
         var index_ID = $(this).val();
+        TransaccionesSegunNIT(index_ID);
+        transaccionAjax_MPAccesos('MATRIX_PACCESOS');
+        transaccionAjax_MPAcceso_Area('MATRIX_PACCESO_AREA');
+    });
+    
+}
+
+//Valida la informacio a la que puede acceder segun el usuario
+function TransaccionesSegunNIT(index_ID) {
+    if (index_ID != "-1") {
+        transaccionAjax_MPAccesos('MATRIX_PACCESOS');
+        transaccionAjax_MPAcceso_Area('MATRIX_PACCESO_AREA');
         Charge_Combos_Depend_Nit(Matrix_PAccesos, "Select_PAcceso", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Persona, "Select_Persona_Enc", index_ID, "");
         Change_Select_RPAA();
-    });
+    }
 }
 
 //carga el combo de Area dependiente

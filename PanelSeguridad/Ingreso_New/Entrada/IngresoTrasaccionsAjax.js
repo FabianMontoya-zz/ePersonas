@@ -38,7 +38,7 @@ function transaccionAjax_Door_Access(State) {
         //crear json
         data: {
             "action": State,
-            "NIT": Nit_ID_Proccess
+            "NIT": Array_G_Usuario[0].Nit_ID
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -47,12 +47,14 @@ function transaccionAjax_Door_Access(State) {
             }
             else {
                 List_Puerta_Acceso = JSON.parse(result);
-                Charge_Combos_Depend_Nit(List_Puerta_Acceso, "Select_PAcceso", Nit_ID_Proccess, "");
+              
             }
         },
         error: function () {
 
-        }
+        },
+    }).done(function () {
+        Charge_Combos_Depend_Nit(List_Puerta_Acceso, "Select_PAcceso", Array_G_Usuario[0].Nit_ID, "");
     });
 }
 
@@ -65,7 +67,7 @@ function transaccionAjax_Door_Access_Area(State) {
         //crear json
         data: {
             "action": State,
-            "NIT": Nit_ID_Proccess
+            "NIT": Array_G_Usuario[0].Nit_ID
         },
         //Transaccion Ajax en proceso
         success: function (result) {

@@ -3,7 +3,7 @@
 
     Private _Nit_ID As String
     Private _TypeDoc_ID As Integer
-    Private _Doc_ID As Integer
+    Private _Doc_ID As Long
     Private _Consecutivo As Integer
 
     Private _Pais_ID As Integer
@@ -44,11 +44,11 @@
             Me._TypeDoc_ID = value
         End Set
     End Property
-    Public Property Doc_ID() As Integer
+    Public Property Doc_ID() As Long
         Get
             Return Me._Doc_ID
         End Get
-        Set(ByVal value As Integer)
+        Set(ByVal value As Long)
             Me._Doc_ID = value
         End Set
     End Property

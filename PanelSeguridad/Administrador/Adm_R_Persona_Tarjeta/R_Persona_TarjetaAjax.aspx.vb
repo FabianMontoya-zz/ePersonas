@@ -53,8 +53,9 @@ Public Class R_Persona_TarjetaAjax
         Dim SQL As New InvPuertaSQLClass
 
         Dim Nit_ID As String = Request.Form("Nit")
+        Dim vl_S_Nit_User As String = Request.Form("Nit_User")
 
-        ObjList_Tarjeta = SQL.Read_All_Tarjetas(Nit_ID)
+        ObjList_Tarjeta = SQL.Read_All_Tarjetas(Nit_ID, vl_S_Nit_User)
         Response.Write(JsonConvert.SerializeObject(ObjList_Tarjeta.ToArray()))
 
     End Sub
@@ -198,25 +199,15 @@ Public Class R_Persona_TarjetaAjax
         ObjInvPuerta.UsuarioActualizacion = Request.Form("user")
         ObjInvPuerta.FechaActualizacion = Date.Now
 
-        Dim user_log As Integer = 0
-        objListPersona = SQL_Persona.InformacionUsuario(ObjInvPuerta.UsuarioActualizacion)
-
-        For Each item_list As ClienteClass In objListPersona
-            user_log = 1
-            ObjInvPuerta.Nit_ID_Custodia = item_list.Nit_ID
-            ObjInvPuerta.TypeDocument_ID_Custodia = item_list.TypeDocument_ID
-            ObjInvPuerta.Document_ID_Custodia = item_list.Document_ID
-            ObjInvPuerta.FechaCustodia = Date.Now
-        Next
-
-        If user_log = 1 Then
-            ObjListInvPuerta.Add(ObjInvPuerta)
-            SQL_R_Persona_Tarjeta.DeleteRTP_Desbloqueo(Request.Form("Tarjeta").ToString())
-            result = SQLInvPuerta.UpdateDesBloqueoTarjeta(ObjInvPuerta)
-        Else
-            result = "NO_USER"
-        End If
-
+        ObjInvPuerta.Nit_ID_Custodia = Request.Form("Nit_Emp_User")
+        ObjInvPuerta.TypeDocument_ID_Custodia = Request.Form("TDoc")
+        ObjInvPuerta.Document_ID_Custodia = Request.Form("Doc")
+        ObjInvPuerta.FechaCustodia = Date.Now
+        
+        ObjListInvPuerta.Add(ObjInvPuerta)
+        SQL_R_Persona_Tarjeta.DeleteRTP_Desbloqueo(Request.Form("Tarjeta").ToString())
+        result = SQLInvPuerta.UpdateDesBloqueoTarjeta(ObjInvPuerta)
+        
         Response.Write(result)
 
     End Sub
@@ -233,8 +224,11 @@ Public Class R_Persona_TarjetaAjax
 
         Dim SQL As New ClienteSQLClass
         Dim ObjList As New List(Of ClienteClass)
+        Dim obj As New ClienteClass
+        obj.Nit_ID = Request.Form("Nit")
+        obj.TipoSQL = "AccesoPre"
 
-        ObjList = SQL.Matrix_PersonasDep()
+        ObjList = SQL.Matrix_PersonaDep(obj)
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
@@ -247,8 +241,11 @@ Public Class R_Persona_TarjetaAjax
 
         Dim SQL As New InvPuertaSQLClass
         Dim ObjList As New List(Of InvPuertaClass)
+        Dim obj As New ClienteClass
+        obj.Nit_ID = Request.Form("Nit")
+        obj.TipoSQL = "TarjetaAcceso"
 
-        ObjList = SQL.MatrixTarjeta()
+        ObjList = SQL.MatrixTarjeta(obj)
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
@@ -261,8 +258,11 @@ Public Class R_Persona_TarjetaAjax
 
         Dim SQL As New R_Persona_TarjetaSQLClass
         Dim ObjList As New List(Of R_Persona_TarjetaClass)
+        Dim obj As New ClienteClass
+        obj.Nit_ID = Request.Form("Nit")
+        obj.TipoSQL = "RtpAcceso"
 
-        ObjList = SQL.Matrix_RTP()
+        ObjList = SQL.Matrix_RTP(obj)
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub

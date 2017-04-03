@@ -67,8 +67,9 @@ Public Class C_AccesoPreAjax
         Dim vl_S_filtro As String = Request.Form("filtro")
         Dim vl_S_opcion As String = Request.Form("opcion")
         Dim vl_S_contenido As String = Request.Form("contenido")
+        Dim vl_S_Nit_User As String = Request.Form("Nit_User")
 
-        ObjList = SQL.Read_AllC_AccesoPre(vl_S_filtro, vl_S_opcion, vl_S_contenido)
+        ObjList = SQL.Read_AllC_AccesoPre(vl_S_filtro, vl_S_opcion, vl_S_contenido, vl_S_Nit_User)
 
         If ObjList Is Nothing Then
 
@@ -237,8 +238,11 @@ Public Class C_AccesoPreAjax
 
         Dim SQL As New ClienteSQLClass
         Dim ObjList As New List(Of ClienteClass)
+        Dim obj As New ClienteClass
+        obj.Nit_ID = Request.Form("Nit")
+        obj.TipoSQL = "AccesoPre"
 
-        ObjList = SQL.Matrix_PersonasDep()
+        ObjList = SQL.Matrix_PersonaDep(obj)
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
@@ -251,8 +255,11 @@ Public Class C_AccesoPreAjax
 
         Dim SQL As New InvPuertaSQLClass
         Dim ObjList As New List(Of InvPuertaClass)
+        Dim obj As New ClienteClass
+        obj.Nit_ID = Request.Form("Nit")
+        obj.TipoSQL = "TarjetaAcceso"
 
-        ObjList = SQL.MatrixTarjeta()
+        ObjList = SQL.MatrixTarjeta(obj)
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
@@ -263,10 +270,14 @@ Public Class C_AccesoPreAjax
     ''' <remarks></remarks>
     Protected Sub CargarMRTP()
 
-        Dim SQL As New C_AccesoPreSQLClass
-        Dim ObjList As New List(Of C_AccesoPreClass)
+        Dim SQL As New R_Persona_TarjetaSQLClass
 
-        ObjList = SQL.Matrix_RTP()
+        Dim ObjList As New List(Of R_Persona_TarjetaClass)
+        Dim obj As New ClienteClass
+        obj.Nit_ID = Request.Form("Nit")
+        obj.TipoSQL = "RtpAcceso"
+
+        ObjList = SQL.Matrix_RTP(obj)
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
@@ -279,8 +290,11 @@ Public Class C_AccesoPreAjax
 
         Dim SQL As New PuertaAccesoSQLClass
         Dim ObjList As New List(Of PuertaAccesoClass)
+        Dim obj As New ClienteClass
+        obj.Nit_ID = Request.Form("Nit")
+        obj.TipoSQL = "MPAcceso"
 
-        ObjList = SQL.Matrix_PuertaAcceso()
+        ObjList = SQL.Matrix_PuertaAcceso(obj)
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
@@ -293,8 +307,11 @@ Public Class C_AccesoPreAjax
 
         Dim SQL As New R_PuertaAcc_AreaSQLClass
         Dim ObjList As New List(Of R_PuertaAcc_AreaClass)
+        Dim obj As New ClienteClass
+        obj.Nit_ID = Request.Form("Nit")
+        obj.TipoSQL = "MPAcceso_Area"
 
-        ObjList = SQL.Matrix_R_PuertaAcceso_Area()
+        ObjList = SQL.Matrix_R_PuertaAcceso_Area(obj)
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub

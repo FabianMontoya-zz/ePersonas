@@ -21,7 +21,7 @@
     <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
-    <div id="Container_title_Form">
+    <div class="Container_title_Form">
         <table id="Tabla_Title_form">
             <tr>
                 <td id="Title_form"></td>
@@ -32,10 +32,10 @@
             </tr>
         </table>
     </div>
-    <div id="Marco_Container">
-        <div id="Marco_trabajo_Form">
-            <div id="Container_controls">
-                <div id="TablaDatos_D">
+    <div class="Marco_Container">
+        <div class="Marco_trabajo_Form">
+            <div class="Container_controls">
+                <div class="Dialog_Datos">
                     <table id="Tabla_4" style="width: 700px; text-align: left;">
                         <tr>
                             <td style="width: 105px;" class="Label_Bold">ID Tarjeta
@@ -51,7 +51,7 @@
                     <div id="Complementos_c">
                         <table id="Tabla_1" style="width: 700px; text-align: left;">
                             <tr>
-                                <td style="width: 105px;" class="Label_Bold">Multi - Empresa
+                                <td style="width: 105px;" class="Label_Bold">NIT Empresa
                                 </td>
                                 <td>
                                     <select id="Select_EmpresaNit" class="C_Chosen">
@@ -67,7 +67,7 @@
                         </table>
                         <table id="Tabla_2" style="width: 700px; text-align: left;">
                             <tr id="TR_Vigencia">
-                                <td style="width: 88px;" class="Label_Bold">Vigencia
+                                <td style="width: 103px;" class="Label_Bold">Vigencia
                                 </td>
                                 <td style="width: 80px;">
                                     <select id="Select_CheckVigencia" class="C_Chosen" style="width: 80px;">

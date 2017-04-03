@@ -24,13 +24,13 @@ Public Class MensajesSQLClass
         Dim sql As New StringBuilder
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
-            sql.Append("SELECT M_Codigo_ID,M_Nombre,M_Descripcion,M_FechaActualizacion,M_Usuario FROM MENSAJES")
+            sql.Append("SELECT M_Codigo_ID,M_Nombre,M_Descripcion,M_FechaActualizacion,M_Usuario, ROW_NUMBER()OVER(ORDER BY M_Codigo_ID ASC) AS Index_Mensaje FROM MENSAJES")
         Else
 
             If vp_S_Contenido = "ALL" Then
-                sql.Append("SELECT M_Codigo_ID,M_Nombre,M_Descripcion,M_FechaActualizacion,M_Usuario FROM MENSAJES")
+                sql.Append("SELECT M_Codigo_ID,M_Nombre,M_Descripcion,M_FechaActualizacion,M_Usuario, ROW_NUMBER()OVER(ORDER BY M_Codigo_ID ASC) AS Index_Mensaje FROM MENSAJES")
             Else
-                sql.Append("SELECT M_Codigo_ID,M_Nombre,M_Descripcion,M_FechaActualizacion,M_Usuario FROM MENSAJES " & _
+                sql.Append("SELECT M_Codigo_ID,M_Nombre,M_Descripcion,M_FechaActualizacion,M_Usuario, ROW_NUMBER()OVER(ORDER BY M_Codigo_ID ASC) AS Index_Mensaje FROM MENSAJES " & _
                       "WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
             End If
         End If
@@ -201,7 +201,7 @@ Public Class MensajesSQLClass
             objMensajes.Descripcion = ReadConsulta.GetValue(2)
             objMensajes.FechaActualizacion = ReadConsulta.GetValue(3)
             objMensajes.Usuario = ReadConsulta.GetValue(4)
-
+            objMensajes.Index = ReadConsulta.GetValue(5)
             'agregamos a la lista
             ObjListMensajes.Add(objMensajes)
 

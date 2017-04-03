@@ -12,24 +12,26 @@ var editDia;
 
 //Evento load JS
 $(document).ready(function () {
+
+    /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
+    Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
+    Ocultar_Errores();
+    Ocultar_Tablas();
+
+    /*================== FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN ==============*/
+
     transacionAjax_CargaBusqueda("cargar_droplist_busqueda");
-
     transacionAjax_Moneda("Moneda");
-
     transacionAjax_Calendario("MatrixCalendarios");
+});
 
-    $("#ESelect").css("display", "none");
-    $("#ImgID").css("display", "none");
-    $("#Img1").css("display", "none");
-    $("#Img2").css("display", "none");
-    $("#ImgMon").css("display", "none");
-    $("#ImgCal").css("display", "none");
-    $("#DE").css("display", "none");
-    $("#SE").css("display", "none");
-    $("#WA").css("display", "none");
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                 REGION INICIO DE COMPONENTES                                                                                                    ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//funcion para las ventanas emergentes
+function Ventanas_Emergentes() {
 
-    $("#TablaDatos_D").css("display", "none");
-    $("#TablaConsulta").css("display", "none");
+    Load_Charge_Sasif(); //Carga de "SasifMaster.js" el Control de Carga
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
@@ -42,62 +44,33 @@ $(document).ready(function () {
         autoOpen: false,
         dialogClass: "Dialog_Sasif",
         modal: true
-    });  
-
-});
-
-//salida del formulario
-function btnSalir() {
-    window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
+    });
 }
 
-//habilita el panel de crear o consulta
-function HabilitarPanel(opcion) {
-
-    switch (opcion) {
-
-        case "crear":
-
-            $("#TablaDatos_D").css("display", "inline-table");
-            $("#TablaConsulta").css("display", "none");
-            $("#Txt_ID").removeAttr("disabled");
-            $("#Btnguardar").attr("value", "Guardar");
-            $("#Btnguardar").css("display", "inline-table");
-            Enabled_Pais();
-            ResetError();
-            Clear();
-            estado = opcion;
-            break;
-
-        case "buscar":
-            $("#TablaDatos_D").css("display", "none");
-            $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TPaises").html("");
-            estado = opcion;
-            Clear();
-            break;
-
-        case "modificar":
-            $("#TablaDatos_D").css("display", "none");
-            $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TPaises").html("");
-            estado = opcion;
-            Enabled_Pais();
-            ResetError();
-            Clear();
-            break;
-
-        case "eliminar":
-            $("#TablaDatos_D").css("display", "none");
-            $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TPaises").html("");
-            estado = opcion;
-            Clear();
-            break;
-
-    }
+//Función que oculta todas las IMG de los errores en pantalla
+function Ocultar_Errores() {
+    ResetError();
+    $("#ESelect").css("display", "none");
+    $("#ImgID").css("display", "none");
+    $("#Img1").css("display", "none");
+    $("#Img2").css("display", "none");
+    $("#ImgMon").css("display", "none");
+    $("#ImgCal").css("display", "none");
+    $("#DE").css("display", "none");
+    $("#SE").css("display", "none");
+    $("#WA").css("display", "none");
+    /*Los demás se ocultan en la SASIF Master*/
 }
 
+//Función que oculta las tablas
+function Ocultar_Tablas() {
+    $(".Dialog_Datos").css("display", "none");
+    $("#TablaConsulta").css("display", "none");
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                 REGION BOTONES                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //consulta del del crud(READ)
 function BtnConsulta() {
 
@@ -139,7 +112,14 @@ function BtnElimina() {
     transacionAjax_Paises_delete("elimina");
 }
 
+//evento del boton salir
+function x() {
+    $("#dialog").dialog("close");
+}
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                      REGION VALIDACIONES DEL PROCESO                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //validamos campos para la creacion del link
 function validarCamposCrear() {
 
@@ -200,40 +180,96 @@ function ValidarDroplist() {
     return flag;
 }
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                      PROCESOS DE VALIDACION Y GRID PAISES                                                                                                              ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//habilita el panel de crear o consulta
+function HabilitarPanel(opcion) {
+
+    switch (opcion) {
+
+        case "crear":
+
+            $(".Dialog_Datos").css("display", "inline-table");
+            $("#TablaConsulta").css("display", "none");
+            $("#Txt_ID").removeAttr("disabled");
+            $("#Btnguardar").attr("value", "Guardar");
+            $("#Btnguardar").css("display", "inline-table");
+            ResetError();
+            Clear();
+            estado = opcion;
+            break;
+
+        case "buscar":
+            $(".Dialog_Datos").css("display", "none");
+            $("#TablaConsulta").css("display", "inline-table");
+            $(".container_TGrid").html("");
+            estado = opcion;
+            Clear();
+            break;
+
+        case "modificar":
+            $(".Dialog_Datos").css("display", "none");
+            $("#TablaConsulta").css("display", "inline-table");
+            $(".container_TGrid").html("");
+            estado = opcion;
+            ResetError();
+            Clear();
+            break;
+
+        case "eliminar":
+            $(".Dialog_Datos").css("display", "none");
+            $("#TablaConsulta").css("display", "inline-table");
+            $(".container_TGrid").html("");
+            estado = opcion;
+            Clear();
+            break;
+
+    }
+}
+
 // crea la tabla en el cliente
 function Table_Paises() {
+
+    var html_TPaises;
+    var vl_Index_Paises;
 
     switch (estado) {
 
         case "buscar":
-            Tabla_consulta();
+            html_TPaises = "<table id='TPaises' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Codigo</th><th>Pais</th><th>Moneda</th><th>Calendario</th><th>SWIFT</th></tr></thead><tbody>";
+            for (itemArray in ArrayPaises) {
+                if (ArrayPaises[itemArray].Cod != 0) {
+                    vl_Index_Paises = parseInt(ArrayPaises[itemArray].Index) - 1;
+                    html_TPaises += "<tr id= 'TPaises_" + vl_Index_Paises + "'><td>" + ArrayPaises[itemArray].Cod + "</td><td>" + ArrayPaises[itemArray].Name + "</td><td>" + ArrayPaises[itemArray].Moneda + " - " + ArrayPaises[itemArray].Moneda_Descripcion + "</td><td>" + ArrayPaises[itemArray].Calendario_ID + " - " + ArrayPaises[itemArray].Calendario_Descripcion + "</td><td>" + ArrayPaises[itemArray].SWIFT + "</td></tr>";
+                }
+            }
             break;
 
         case "modificar":
-            Tabla_modificar();
+            html_TPaises = "<table id='TPaises' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Codigo</th><th>Pais</th><th>Moneda</th><th>Calendario</th><th>SWIFT</th></tr></thead><tbody>";
+            for (itemArray in ArrayPaises) {
+                if (ArrayPaises[itemArray].Cod != 0) {
+                    vl_Index_Paises = parseInt(ArrayPaises[itemArray].Index) - 1;
+                    html_TPaises += "<tr id= 'TPaises_" + vl_Index_Paises + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + vl_Index_Paises + "')\"></img><span>Editar Pais</span></span></td><td>" + ArrayPaises[itemArray].Cod + "</td><td>" + ArrayPaises[itemArray].Name + "</td><td>" + ArrayPaises[itemArray].Moneda + " - " + ArrayPaises[itemArray].Moneda_Descripcion + "</td><td>" + ArrayPaises[itemArray].Calendario_ID + " - " + ArrayPaises[itemArray].Calendario_Descripcion + "</td><td>" + ArrayPaises[itemArray].SWIFT + "</td></tr>";
+                }
+            }
             break;
 
         case "eliminar":
-            Tabla_eliminar();
+            html_TPaises = "<table id='TPaises' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Codigo</th><th>Pais</th><th>Moneda</th><th>Calendario</th><th>SWIFT</th></tr></thead><tbody>";
+            for (itemArray in ArrayPaises) {
+                if (ArrayPaises[itemArray].Cod != 0) {
+                    vl_Index_Paises = parseInt(ArrayPaises[itemArray].Index) - 1;
+                    html_TPaises += "<tr id= 'TPaises_" + vl_Index_Paises + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + vl_Index_Paises + "')\"></img><span>Eliminar Pais</span></span></td><td>" + ArrayPaises[itemArray].Cod + "</td><td>" + ArrayPaises[itemArray].Name + "</td><td>" + ArrayPaises[itemArray].Moneda + " - " + ArrayPaises[itemArray].Moneda_Descripcion + "</td><td>" + ArrayPaises[itemArray].Calendario_ID + " - " + ArrayPaises[itemArray].Calendario_Descripcion + "</td><td>" + ArrayPaises[itemArray].SWIFT + "</td></tr>";
+                }
+            }
             break;
     }
 
-}
-
-//grid con el boton eliminar
-function Tabla_eliminar() {
-    var html_TPaises = "<table id='TPaises' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Ver</th><th>Eliminar</th><th>Codigo</th><th>Nombre</th></tr></thead><tbody>";
-    for (itemArray in ArrayPaises) {
-        if (ArrayPaises[itemArray].Cod != 0) {
-            html_TPaises += "<tr id= 'TPaises_" + ArrayPaises[itemArray].Cod + "'><td><input type ='radio' class= 'Ver' name='ver' onclick=\"Ver('" + ArrayPaises[itemArray].Cod + "')\"></input></td><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar('" + ArrayPaises[itemArray].Cod + "')\"></input></td><td>" + ArrayPaises[itemArray].Cod + "</td><td>" + ArrayPaises[itemArray].Name + "</td></tr>";
-        }
-    }
     html_TPaises += "</tbody></table>";
-    $("#container_TPaises").html("");
-    $("#container_TPaises").html(html_TPaises);
-
-    $(".Eliminar").click(function () {
-    });
+    $(".container_TGrid").html("");
+    $(".container_TGrid").html(html_TPaises);
 
     $("#TPaises").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,
@@ -242,85 +278,56 @@ function Tabla_eliminar() {
 }
 
 //muestra el registro a eliminar
-function Eliminar(index_Paises) {
-    for (itemArray in ArrayPaises) {
-        if (index_Paises == ArrayPaises[itemArray].Cod) {
-            editID = ArrayPaises[itemArray].Cod;
-            $("#dialog_eliminar").dialog("option", "title", "Eliminar?");
-            $("#dialog_eliminar").dialog("open");
-        }
-    }
-
-}
-
-//grid con el boton editar
-function Tabla_modificar() {
-    var html_TPaises = "<table id='TPaises' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Ver</th><th>Editar</th><th>Codigo</th><th>Nombre</th></tr></thead><tbody>";
-    for (itemArray in ArrayPaises) {
-        if (ArrayPaises[itemArray].Cod != 0) {
-            html_TPaises += "<tr id= 'TPaises_" + ArrayPaises[itemArray].Cod + "'><td><input type ='radio' class= 'Ver' name='ver' onclick=\"Ver('" + ArrayPaises[itemArray].Cod + "')\"></input></td><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Editar('" + ArrayPaises[itemArray].Cod + "')\"></input></td><td>" + ArrayPaises[itemArray].Cod + "</td><td>" + ArrayPaises[itemArray].Name + "</td></tr>";
-        }
-    }
-    html_TPaises += "</tbody></table>";
-    $("#container_TPaises").html("");
-    $("#container_TPaises").html(html_TPaises);
-
-    $(".Editar").click(function () {
-    });
-
-    $("#TPaises").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
+function Eliminar(vp_index) {
+    editID = ArrayPaises[vp_index].Cod;
+    $("#dialog_eliminar").dialog("option", "title", "Eliminar?");
+    $("#dialog_eliminar").dialog("open");
 }
 
 // muestra el registro a editar
 function Editar(index_Paises) {
-    Search_Pais(index_Paises);    
-    $("#TablaDatos_D").css("display", "inline-table");
+    Search_Pais(index_Paises);
+    $(".Dialog_Datos").css("display", "inline-table");
     $("#TablaConsulta").css("display", "none");
 
     $("#Btnguardar").attr("value", "Actualizar");
-    $("#Btnguardar").css("display", "inline-table");  
+    $("#Btnguardar").css("display", "inline-table");
 }
 
-// muestra el registro 
-function Ver(index_Paises) {
+// muestra el registro selccionado
+function Search_Pais(vp_index) {
 
-    Disabled_Pais();
-    Search_Pais(index_Paises);
+    $("#Txt_Codigo").val(ArrayPaises[vp_index].Cod);
+    $("#Txt_Codigo").attr("disabled", "disabled");
+    $("#Txt_Pais").val(ArrayPaises[vp_index].Name);
+    editID = ArrayPaises[vp_index].Cod;
+    $("#TxtSWIFT").val(ArrayPaises[vp_index].SWIFT);
 
-    $("#TablaDatos_D").css("display", "inline-table");
-    $("#TablaHoras").css("display", "inline-table");
-    $("#TablaConsulta").css("display", "none");
-   
-    $("#Btnguardar").css("display", "none");
-    
+    setTimeout("CargaCombos('" + ArrayPaises[vp_index].Moneda + "', '" + ArrayPaises[vp_index].Calendario_ID + "')", 400);
+
 }
 
-//grid sin botones para ver resultado
-function Tabla_consulta() {
-    var html_TPaises = "<table id='TPaises' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Ver</th><th>Codigo</th><th>Nombre</th></tr></thead><tbody>";
-    for (itemArray in ArrayPaises) {
-        if (ArrayPaises[itemArray].Cod != 0) {
-            html_TPaises += "<tr id= 'TPaises_" + ArrayPaises[itemArray].Cod + "'><td><input type ='radio' class= 'Ver' name='ver' onclick=\"Ver('" + ArrayPaises[itemArray].Cod + "')\"></input></td><td>" + ArrayPaises[itemArray].Cod + "</td><td>" + ArrayPaises[itemArray].Name + "</td></tr>";
-        }
+//carga combos que dependen de una transaccion
+function CargaCombos(vp_Moneda, vp_Calendario) {
+
+    if (vp_Moneda == "") {
+        $("#Select_moneda").val("-1").trigger('chosen:updated');
     }
-    html_TPaises += "</tbody></table>";
-    $("#container_TPaises").html("");
-    $("#container_TPaises").html(html_TPaises);
+    else {
+        $('#Select_moneda').val(vp_Moneda).trigger('chosen:updated');
+    }
 
-    $("#TPaises").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
+    if (vp_Calendario == "") {
+        $('#Select_Calendario').val('-1').trigger('chosen:updated');
+    }
+    else {
+        $('#Select_Calendario').val(vp_Calendario).trigger('chosen:updated');
+    }
 }
 
-//evento del boton salir
-function x() {
-    $("#dialog").dialog("close");
-}
-
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                              MENSAJES, VISUALIZACION Y LIMPIEZA                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //limpiar campos
 function Clear() {
     $("#Txt_Codigo").val("");
@@ -331,64 +338,6 @@ function Clear() {
     $("#TxtSWIFT").val("");
 
     $("#DDLColumns").val("-1");
-    
-    $('.C_Chosen').trigger('chosen:updated');
-}
-
-// muestra el registro selccionado
-function Search_Pais(index_Paises) {
-    
-    for (itemArray in ArrayPaises) {
-        if (index_Paises == ArrayPaises[itemArray].Cod) {
-            $("#Txt_Codigo").val(ArrayPaises[itemArray].Cod);
-            $("#Txt_Codigo").attr("disabled", "disabled");
-            $("#Txt_Pais").val(ArrayPaises[itemArray].Name);
-            editID = ArrayPaises[itemArray].Cod;
-           
-            if (ArrayPaises[itemArray].Moneda == "") {
-                $("#Select_moneda").val("-1");
-            }
-            else {
-                $("#Select_moneda").val(ArrayPaises[itemArray].Moneda);
-            }
-
-            $("#TxtSWIFT").val(ArrayPaises[itemArray].SWIFT);
-
-            if (ArrayPaises[itemArray].Moneda == "") {
-                $("#Select_Calendario").val("-1");
-            }
-            else {
-                $("#Select_Calendario").val(ArrayPaises[itemArray].Calendario_ID);
-            }
-
-            $('.C_Chosen').trigger('chosen:updated');
-
-        }
-    }
-}
-
-//BLOQUEA LOS CONTROLES
-function Disabled_Pais() {
-
-    $("#Txt_Codigo").attr("disabled", "disabled");
-    $("#Txt_Pais").attr("disabled", "disabled");
-    $("#Select_moneda").attr("disabled", "disabled");
-    $("#TxtSWIFT").attr("disabled", "disabled");
-
-    $("#Select_Calendario").attr("disabled", "disabled");
-
-    $('.C_Chosen').trigger('chosen:updated');
-
-}
-
-//DES-BLOQUEA LOS CONTROLES
-function Enabled_Pais() {
-
-    $("#Txt_Codigo").removeAttr("disabled");
-    $("#Txt_Pais").removeAttr("disabled");
-    $("#Select_moneda").removeAttr("disabled");
-    $("#TxtSWIFT").removeAttr("disabled");
-    $("#Select_Calendario").removeAttr("disabled");
 
     $('.C_Chosen').trigger('chosen:updated');
 }

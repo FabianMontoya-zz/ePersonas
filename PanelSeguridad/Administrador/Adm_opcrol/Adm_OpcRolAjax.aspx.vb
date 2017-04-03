@@ -14,6 +14,9 @@ Public Class Adm_OpcRolAjax
                 Case "cargar_droplist_busqueda"
                     CargarDroplist()
 
+                Case "Cliente"
+                    CargarCliente()
+
                 Case "cargar_Sub_Rol"
                     Cargar_Sub_Rol()
 
@@ -29,9 +32,8 @@ Public Class Adm_OpcRolAjax
                 Case "crear"
                     InsertOpcRol()
 
-
                 Case "elimina"
-                    EraseOpcRol()
+                    DeleteOpcRol()
             End Select
 
         End If
@@ -51,8 +53,9 @@ Public Class Adm_OpcRolAjax
         Dim vl_S_filtro As String = Request.Form("filtro")
         Dim vl_S_opcion As String = Request.Form("opcion")
         Dim vl_S_contenido As String = Request.Form("contenido")
+        Dim vl_S_Nit_User As String = Request.Form("Nit_User")
 
-        ObjListOpcRol = SQL_OpcRol.Read_AllOpcRol(vl_S_filtro, vl_S_opcion, vl_S_contenido)
+        ObjListOpcRol = SQL_OpcRol.Read_AllOpcRol(vl_S_filtro, vl_S_opcion, vl_S_contenido, vl_S_Nit_User)
         Response.Write(JsonConvert.SerializeObject(ObjListOpcRol.ToArray()))
 
     End Sub
@@ -69,17 +72,23 @@ Public Class Adm_OpcRolAjax
         Dim result As String
         Dim vl_s_IDxiste As String
 
-        objOpcRol.OPRol_ID = Request.Form("ID")
+        objOpcRol.Nit_ID = Request.Form("NIT_Padre")
+        objOpcRol.OPRol_ID = Request.Form("Padre")
         objOpcRol.Consecutivo = Request.Form("consecutivo")
 
         'validamos si la llave existe
-        vl_s_IDxiste = Consulta_Repetido(objOpcRol.OPRol_ID, objOpcRol.Consecutivo)
+        vl_s_IDxiste = SQL_OpcRol.Consulta_Repetido(objOpcRol)
 
         If vl_s_IDxiste = 0 Then
 
             objOpcRol.Tipo = Request.Form("tipo")
-            objOpcRol.Subrol_rol = Request.Form("subrol_rol")
+            objOpcRol.Subrol_rol_Nit_ID = Request.Form("Nit_ID_Hijo")
+            objOpcRol.Subrol_rol = Request.Form("Hijo")
             objOpcRol.Link_ID = Request.Form("link_ID")
+            objOpcRol.UsuarioCreacion = Request.Form("user")
+            objOpcRol.FechaCreacion = Date.Now
+            objOpcRol.UsuarioActualizacion = Request.Form("user")
+            objOpcRol.FechaActualizacion = Date.Now
 
             ObjListOpcRol.Add(objOpcRol)
 
@@ -97,15 +106,16 @@ Public Class Adm_OpcRolAjax
     ''' funcion que elimina en la tabla opcion roles (DELETE)
     ''' </summary>
     ''' <remarks></remarks>
-    Protected Sub EraseOpcRol()
+    Protected Sub DeleteOpcRol()
 
         Dim objOpcRol As New Adm_OpcRolClass
         Dim SQL_OpcRol As New Adm_OpcRolSQLClass
         Dim ObjListOpcRol As New List(Of Adm_OpcRolClass)
         Dim result As String
 
-        objOpcRol.OPRol_ID = Request.Form("ID")
-        objOpcRol.Consecutivo = Request.Form("DeleteConsecutivo")
+        objOpcRol.Nit_ID = Request.Form("NIT")
+       objOpcRol.OPRol_ID = Request.Form("ID")
+        objOpcRol.Consecutivo = Request.Form("Consecutivo")
 
         ObjListOpcRol.Add(objOpcRol)
 
@@ -134,6 +144,21 @@ Public Class Adm_OpcRolAjax
     End Sub
 
     ''' <summary>
+    ''' funcion que carga el objeto DDL consulta
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarCliente()
+
+        Dim SQL As New ClienteSQLClass
+        Dim ObjListDroplist As New List(Of Droplist_Class)
+        Dim vl_S_Tabla As String = Request.Form("tabla")
+
+        ObjListDroplist = SQL.Charge_DropListCliente(vl_S_Tabla)
+        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
+
+    End Sub
+
+    ''' <summary>
     ''' funcion que carga el objeto DDL subtipo
     ''' </summary>
     ''' <remarks></remarks>
@@ -153,10 +178,15 @@ Public Class Adm_OpcRolAjax
     ''' <remarks></remarks>
     Protected Sub Carga_Rol()
 
-        Dim SQL_OpcRol As New Adm_OpcRolSQLClass
-        Dim ObjListDroplist As New List(Of Droplist_Class)
+        Dim SQL_Roles As New Adm_RolesSQLClass
+        Dim ObjListDroplist As New List(Of Adm_RolesClass)
 
-        ObjListDroplist = SQL_OpcRol.ReadCharge_DL_Rol()
+        Dim Obj As New ClienteClass
+
+        Obj.Nit_ID = Request.Form("Nit")
+        Obj.TipoSQL = "Usuario"
+
+        ObjListDroplist = SQL_Roles.MatrixAll_Roles(Obj)
         Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
 
     End Sub
@@ -170,9 +200,7 @@ Public Class Adm_OpcRolAjax
         Dim SQL_OpcRol As New Adm_OpcRolSQLClass
         Dim ObjListDroplist As New List(Of Droplist_Class)
 
-        Dim vl_S_tipo = Request.Form("tipo_link")
-
-        ObjListDroplist = SQL_OpcRol.ReadCharge_DL_Links(vl_S_tipo)
+        ObjListDroplist = SQL_OpcRol.ReadCharge_DL_Links()
         Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
 
     End Sub

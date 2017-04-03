@@ -19,10 +19,25 @@ var edit_Ret_ID;
 
 //Evento load JS
 $(document).ready(function () {
+    
+  /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
+    Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
+    Ocultar_Errores();
+    Ocultar_Tablas();
+
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_Tipo_P('Tipo_Pro');
     transacionAjax_Transaccion('Transaccion');
     transacionAjax_EmpresaNit('Cliente')
+
+    Change_Select_Product();
+
+});
+
+
+//Función que oculta todas las IMG de los errores en pantalla
+function Ocultar_Errores() {
+    ResetError();
 
     $("#ESelect").css("display", "none");
     $("#ImgID").css("display", "none");
@@ -35,6 +50,13 @@ $(document).ready(function () {
 
 
     $("#TablaConsulta").css("display", "none");
+
+}
+
+//funcion para las ventanas emergentes
+function Ventanas_Emergentes() {
+
+    Load_Charge_Sasif(); //Carga de "SasifMaster.js" el Control de Carga
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
@@ -61,14 +83,12 @@ $(document).ready(function () {
             background: "black"
         }
     });
+}
 
-    Change_Select_Product();
-
-});
-
-//salida del formulario
-function btnSalir() {
-    window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
+//Función que oculta las tablas
+function Ocultar_Tablas() {
+    $("#TablaDatos").css("display", "none");
+    $("#TablaConsulta").css("display", "none");
 }
 
 //habilita el panel de crear o consulta
@@ -90,12 +110,13 @@ function HabilitarPanel(opcion) {
             estado = opcion;
             $('.C_Chosen').trigger('chosen:updated');
 
+            VerificarNIT("Select_EmpresaNit");
             break;
 
         case "buscar":
             $("#Dialog_Productos").dialog("close");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TProductos").html("");
+            $(".container_TGrid").html("");
             estado = opcion;
             Enabled_Controls();
             Clear();
@@ -104,7 +125,7 @@ function HabilitarPanel(opcion) {
         case "modificar":
             $("#Dialog_Productos").dialog("close");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TPorcen_Descuentos").html("");
+            $(".container_TGrid").html("");
             estado = opcion;
             Enabled_Controls();
             ResetError();
@@ -114,7 +135,7 @@ function HabilitarPanel(opcion) {
         case "eliminar":
             $("#Dialog_Productos").dialog("close");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TProductos").html("");
+            $(".container_TGrid").html("");
             estado = opcion;
             Enabled_Controls();
             Clear();
@@ -129,6 +150,8 @@ function BtnConsulta() {
     var filtro;
     var ValidateSelect = ValidarDroplist();
     var opcion;
+
+    OpenControl(); //Abrimos el load de espera con el logo
 
     if (ValidateSelect == 1) {
         filtro = "N";
@@ -161,6 +184,7 @@ function BtnCrear() {
 
 //elimina de la BD
 function BtnElimina() {
+    OpenControl(); //Abrimos el load de espera con el logo
     transacionAjax_Productos_delete("elimina");
 }
 
@@ -227,26 +251,26 @@ function Table_Productos() {
             break;
 
         case "modificar":
-            html_Productos = "<table id='TProductos' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Ver</th><th>Editar</th><th>Nit Empresa</th><th>Codigo</th><th>Descripción</th></tr></thead><tbody>";
+            html_Productos = "<table id='TProductos' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Nit Empresa</th><th>Codigo</th><th>Descripción</th></tr></thead><tbody>";
             for (itemArray in ArrayProductos) {
                 if (ArrayProductos[itemArray].Producto_ID != 0) {
-                    html_Productos += "<tr id= 'TProductos_" + ArrayProductos[itemArray].Producto_ID + "'><td><input type ='radio' class= 'Ver' name='ver' onclick=\"Ver('" + ArrayProductos[itemArray].Producto_ID + "','" + ArrayProductos[itemArray].Nit_ID + "')\"></input></td><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Editar('" + ArrayProductos[itemArray].Producto_ID + "','" + ArrayProductos[itemArray].Nit_ID + "')\"></input></td><td>" + ArrayProductos[itemArray].Nit_ID + "</td><td>" + ArrayProductos[itemArray].Producto_ID + "</td><td>" + ArrayProductos[itemArray].Descripcion + "</td></tr>";
+                    html_Productos += "<tr id= 'TProductos_" + ArrayProductos[itemArray].Producto_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + ArrayProductos[itemArray].Producto_ID + "','" + ArrayProductos[itemArray].Nit_ID + "')\"></img><span>Editar Producto</span></span></td><td>" + ArrayProductos[itemArray].Nit_ID + "</td><td>" + ArrayProductos[itemArray].Producto_ID + "</td><td>" + ArrayProductos[itemArray].Descripcion + "</td></tr>";
                 }
             }
             break;
 
         case "eliminar":
-            html_Productos = "<table id='TProductos' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Ver</th><th>Eliminar</th><th>Nit Empresa</th><th>Codigo</th><th>Descripción</th></tr></thead><tbody>";
+            html_Productos = "<table id='TProductos' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Nit Empresa</th><th>Codigo</th><th>Descripción</th></tr></thead><tbody>";
             for (itemArray in ArrayProductos) {
                 if (ArrayProductos[itemArray].Producto_ID != 0) {
-                    html_Productos += "<tr id= 'TProductos_" + ArrayProductos[itemArray].Producto_ID + "'><td><input type ='radio' class= 'Ver' name='ver' onclick=\"Ver('" + ArrayProductos[itemArray].Producto_ID + "','" + ArrayProductos[itemArray].Nit_ID + "')\"></input></td><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar('" + ArrayProductos[itemArray].Producto_ID + "','" + ArrayProductos[itemArray].Nit_ID + "')\"></input></td><td>" + ArrayProductos[itemArray].Nit_ID + "</td><td>" + ArrayProductos[itemArray].Producto_ID + "</td><td>" + ArrayProductos[itemArray].Descripcion + "</td></tr>";
+                    html_Productos += "<tr id= 'TProductos_" + ArrayProductos[itemArray].Producto_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArrayProductos[itemArray].Producto_ID + "','" + ArrayProductos[itemArray].Nit_ID + "')\"></img><span>Eliminar Producto</span></span></td><td>" + ArrayProductos[itemArray].Nit_ID + "</td><td>" + ArrayProductos[itemArray].Producto_ID + "</td><td>" + ArrayProductos[itemArray].Descripcion + "</td></tr>";
                 }
             }
             break;
     }
     html_Productos += "</tbody></table>";
-    $("#container_TProductos").html("");
-    $("#container_TProductos").html(html_Productos);
+    $(".container_TGrid").html("");
+    $(".container_TGrid").html(html_Productos);
 
     $("#TProductos").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,
@@ -480,7 +504,8 @@ function Clear() {
     $("#TxtCuenta_50").val("");
 
     $("#TxtRead").val("");
-    $("#DDLColumns").val("-1");
+    $("#DDLColumns").val("-1").trigger("chosen:updated");
+    VerificarNIT("Select_EmpresaNit");
 }
 
 //limpiar campos

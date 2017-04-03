@@ -10,7 +10,7 @@ Public Class Crud_DocAjax
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        Dim Doc As New DocumentosClass
+        Dim Doc As New DocumentoClass
         If Request.Files.Count() > 0 Then
             Dim vl_S_RutaTemporal As String = Request.Form("RutaTemporal")
             Dim vl_S_NombreDoc As String = Request.Form("NameTemporal")
@@ -84,6 +84,16 @@ Public Class Crud_DocAjax
 
                 Case "elimina"
                     EraseCrud_Doc()
+
+                Case "MATRIX_CONTRATO"
+                    CargarContratos()
+
+                Case "MATRIX_ACTIVO"
+                    CargarActivos()
+
+                Case "MATRIX_FACTURA"
+                    CargarFactura()
+
             End Select
 
         End If
@@ -138,7 +148,7 @@ Public Class Crud_DocAjax
         obj.Nit_ID = Request.Form("Nit_ID")
         obj.Secuencia_ID = Request.Form("Secuencia")
         obj.Documento_ID = Request.Form("Documento_ID")
-         Dim ANombreSave = Split(Request.Form("Nombre_Save"), ".")
+        Dim ANombreSave = Split(Request.Form("Nombre_Save"), ".")
         obj.Nombre_Save = ANombreSave(0)
         obj.RutaDocumento = Request.Form("Ruta")
         obj.Formato = Request.Form("Formato")
@@ -222,13 +232,13 @@ Public Class Crud_DocAjax
             objCrud_Doc.ChequeaVigencias = Request.Form("C_Vigencia")
             objCrud_Doc.DiasVigencia = Request.Form("D_Vigencia")
             objCrud_Doc.TipoContenido = Request.Form("TContenido")
-            objCrud_Doc.Formato_ID = Request.Form("Formato")
+            objCrud_Doc.Formato = Request.Form("Formato")
             objCrud_Doc.TipoVersion = Request.Form("TVersion")
             objCrud_Doc.Ruta_ID = Request.Form("RutaCrud_Doc")
             objCrud_Doc.Ruta_ID_Plantilla = Request.Form("RutaPlantilla")
             objCrud_Doc.NombrePlantilla = Request.Form("NamePlanilla")
             objCrud_Doc.RequiereVerificacion = Request.Form("CheckVerificacion")
-            objCrud_Doc.IndicativoFoto = Request.Form("Foto")
+            objCrud_Doc.Indicativo = Request.Form("Foto")
 
             objCrud_Doc.UsuarioCreacion = Request.Form("user")
             objCrud_Doc.FechaCreacion = Date.Now
@@ -266,13 +276,13 @@ Public Class Crud_DocAjax
         objCrud_Doc.ChequeaVigencias = Request.Form("C_Vigencia")
         objCrud_Doc.DiasVigencia = Request.Form("D_Vigencia")
         objCrud_Doc.TipoContenido = Request.Form("TContenido")
-        objCrud_Doc.Formato_ID = Request.Form("Formato")
+        objCrud_Doc.Formato = Request.Form("Formato")
         objCrud_Doc.TipoVersion = Request.Form("TVersion")
         objCrud_Doc.Ruta_ID = Request.Form("RutaCrud_Doc")
         objCrud_Doc.Ruta_ID_Plantilla = Request.Form("RutaPlantilla")
         objCrud_Doc.NombrePlantilla = Request.Form("NamePlanilla")
         objCrud_Doc.RequiereVerificacion = Request.Form("CheckVerificacion")
-        objCrud_Doc.IndicativoFoto = Request.Form("Foto")
+        objCrud_Doc.Indicativo = Request.Form("Foto")
 
         objCrud_Doc.UsuarioActualizacion = Request.Form("user")
         objCrud_Doc.FechaActualizacion = Date.Now
@@ -316,12 +326,103 @@ Public Class Crud_DocAjax
 
         Dim SQL As New ClienteSQLClass
         Dim ObjList As New List(Of ClienteClass)
+        Dim obj As New ClienteClass
+        obj.Nit_ID = Request.Form("Nit")
+        obj.TipoSQL = "Documento"
 
-        ObjList = SQL.Matrix_PersonasDep()
+        ObjList = SQL.Matrix_PersonaDep(obj)
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
 
+    ''' <summary>
+    ''' funcion que carga  Matrix contrato
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarMDocumento()
+
+        Dim SQL As New DocumentoSQLClass
+        Dim ObjList As New List(Of DocumentoClass)
+        Dim obj As New ClienteClass
+        obj.Nit_ID = Request.Form("Nit")
+        obj.TipoSQL = "Documento"
+
+        ObjList = SQL.Matrix_Documento_Filtro(obj)
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga  Matrix secuencia 
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarMSecuencia()
+
+        Dim SQL As New DocumentoSQLClass
+        Dim ObjList As New List(Of DocumentoClass)
+
+        Dim obj As New ClienteClass
+        obj.Nit_ID = Request.Form("Nit")
+        obj.TipoSQL = "Documento"
+
+        ObjList = SQL.Matrix_SecuenciaPadre(obj)
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga  Matrix secuencia 
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarContratos()
+
+        Dim SQL As New C_ContratoSQLClass
+        Dim ObjList As New List(Of C_ContratoClass)
+
+        Dim obj As New ClienteClass
+        obj.Nit_ID = Request.Form("Nit")
+        obj.TipoSQL = "Documento"
+
+        ObjList = SQL.Load_Contratos(obj)
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga  Matrix secuencia 
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarActivos()
+
+        Dim SQL As New C_ActivosSQLClass
+        Dim ObjList As New List(Of C_ActivosClass)
+
+        Dim obj As New ClienteClass
+        obj.Nit_ID = Request.Form("Nit")
+        obj.TipoSQL = "Documento"
+
+        ObjList = SQL.Load_Activos(obj)
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga  Matrix secuencia 
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarFactura()
+
+        Dim SQL As New FacturaSQLClass
+        Dim ObjList As New List(Of FacturaClass)
+
+        Dim obj As New ClienteClass
+        obj.Nit_ID = Request.Form("Nit")
+        obj.TipoSQL = "Documento"
+
+        ObjList = SQL.Load_Factura(obj)
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
 
     ''' <summary>
     ''' funcion que carga  rutas operacion
@@ -345,34 +446,11 @@ Public Class Crud_DocAjax
         Dim SQL As New ConsecutivosSQLClass
         Dim ObjList As New List(Of ConsecutivosClass)
 
-        ObjList = SQL.MatrixConcecutivo()
-        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+        Dim Obj As New ClienteClass
 
-    End Sub
+        Obj.TipoSQL = "Documento"
 
-    ''' <summary>
-    ''' funcion que carga  Matrix secuencia 
-    ''' </summary>
-    ''' <remarks></remarks>
-    Protected Sub CargarMSecuencia()
-
-        Dim SQL As New DocumentoSQLClass
-        Dim ObjList As New List(Of DocumentoClass)
-
-        ObjList = SQL.Matrix_SecuenciaPadre()
-        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
-
-    End Sub
-    ''' <summary>
-    ''' funcion que carga  Matrix contrato
-    ''' </summary>
-    ''' <remarks></remarks>
-    Protected Sub CargarMDocumento()
-
-        Dim SQL As New DocumentoSQLClass
-        Dim ObjList As New List(Of DocumentoClass)
-
-        ObjList = SQL.Matrix_Documento()
+        ObjList = SQL.MatrixConcecutivo(Obj)
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
@@ -432,7 +510,7 @@ Public Class Crud_DocAjax
     ''' <remarks></remarks>
     Protected Sub CopiaDoc_Origen()
 
-        Dim Doc As New DocumentosClass
+        Dim Doc As New DocumentoClass
 
         Dim vl_S_RutaDestino As String = Request.Form("RutaDestino")
         Dim vl_S_RutaOrigen As String = Request.Form("RutaTemporal")

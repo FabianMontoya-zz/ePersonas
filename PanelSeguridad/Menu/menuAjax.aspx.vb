@@ -13,10 +13,15 @@ Public Class menuAjax
 
                 Case "consulta"
                     Consulta_menu()
+
+                Case "Date_User"
+                    InformationUser()
+
             End Select
 
         End If
     End Sub
+
     ''' <summary>
     ''' traemos todos los datos para construir el menu
     ''' </summary>
@@ -25,12 +30,40 @@ Public Class menuAjax
 
         Dim SQL_Menu As New MenuSQLClass
         Dim ObjListMenu As New List(Of MenuClass)
+        Dim Encrip As New EncriptarClass
 
         Dim vl_S_User = Request.Form("user")
-        ObjListMenu = SQL_Menu.Read_AllOptionsMenu(vl_S_User)
+        Dim vl_S_Rol_User = Request.Form("Rol_User")
+        Dim vl_S_Nit_Rol_User = Request.Form("Nit_Rol_User")
+        Dim vl_S_Encriptado = Request.Form("Encrip")
+        Dim vl_S_Nit = Encrip.desencriptaDato(vl_S_Encriptado)
+
+        ObjListMenu = SQL_Menu.Read_AllOptionsMenu(vl_S_User, vl_S_Nit_Rol_User, vl_S_Rol_User, vl_S_Encriptado)
         'serializamos el objeto
         Response.Write(JsonConvert.SerializeObject(ObjListMenu.ToArray()))
 
     End Sub
 
+    ''' <summary>
+    ''' Función que hace la consulta de todos los parametros asociados al usuario
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub InformationUser()
+
+        Dim LoginClass As New LoginClass
+        Dim ObjListInfoUser As New List(Of LoginClass)
+        Dim SQL_Login As New LoginSQLClass
+
+        Dim Encrip As New EncriptarClass
+
+
+        LoginClass.Usuario_ID = Request.Form("Usuario")
+        LoginClass.Password = Request.Form("NIT")
+        LoginClass.Nit_ID = Encrip.desencriptaDato(LoginClass.Password)
+
+        ObjListInfoUser = SQL_Login.InformacionUser(LoginClass)
+
+        Response.Write(JsonConvert.SerializeObject(ObjListInfoUser.ToArray()))
+
+    End Sub
 End Class

@@ -84,6 +84,9 @@ function VentanasEmergentes() {
         overlay: {
             opacity: 0.5,
             background: "black"
+        },
+        close: function (event, ui) {
+            Clear_Search();
         }
     });
 
@@ -217,11 +220,6 @@ function x() {
         Process_Manual_Ingreso = 0;
 }
 
-//salida del formulario
-function btnSalir() {
-    window.location = "../../Menu/menu.aspx?User=" + User + "&L_L=" + Link;
-}
-
 //confirmacion de registro
 function Registrar_Ingreso_Log() {
     $("#dialog_eliminar").dialog("open");
@@ -290,7 +288,7 @@ function Grid_Doc_People_Business(Matrix, Val_GrpDoc, Type) {
 
     switch (Type) {
         case "Empleado":
-            html_DP = "<table id='TDP' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th class='T_head' colspan='6'>Documentación Empleado</th></tr><tr><th>Documento</th><th>Existe</th><th>Verificado</th><th>Vigencia</th><th>Fecha Vencimiento</th><th>Ver</th></tr></thead><tbody>";
+            html_DP = "<table id='TDP' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th class='Grid_Head' colspan='6'>Documentación Empleado</th></tr><tr><th>Documento</th><th>Existe</th><th>Verificado</th><th>Vigencia</th><th>Fecha Vencimiento</th><th>Ver</th></tr></thead><tbody>";
             var JsonVerifDoc;
             var TotalEstado = 0;
 
@@ -348,7 +346,7 @@ function Grid_Doc_People_Business(Matrix, Val_GrpDoc, Type) {
             break;
 
         case "Empresa":
-            html_DP = "<table id='TDE' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th class='T_head' colspan='6'>Documentación Empresa</th></tr><tr><th>Documento</th><th>Existe</th><th>Verificado</th><th>Vigencia</th><th>Fecha Vencimiento</th><th>Ver</th></tr></thead><tbody>";
+            html_DP = "<table id='TDE' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th class='Grid_Head' colspan='6'>Documentación Empresa</th></tr><tr><th>Documento</th><th>Existe</th><th>Verificado</th><th>Vigencia</th><th>Fecha Vencimiento</th><th>Ver</th></tr></thead><tbody>";
             var JsonVerifDoc;
 
             for (itemArray in Matrix) {
@@ -518,7 +516,7 @@ function Tabla_AccesosPredeterminados() {
     var html_AP;
     var Flag_ingreso;
 
-    html_AP = "<table id='TAP' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th class='T_head' colspan='10' style='margin-top: 5px;' >AccesosPredetermminados</th></tr><tr><th style='width: 2%;'>Selección</th><th></th><th>Acceso</th><th>Area</th><th>Persona Encargada</th><th style='width: 10%;'>Fecha inicial</th><th style='width: 10%;'>Fecha final</th><th style='width: 12%;'>Hora Entrada</th><th style='width: 12%;'>Hora Salida</th><th>Horario de ingreso</th></tr></thead><tbody>";
+    html_AP = "<table id='TAP' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th class='Grid_Head' colspan='10' style='margin-top: 5px;' >AccesosPredetermminados</th></tr><tr><th style='width: 2%;'>Selección</th><th></th><th>Acceso</th><th>Area</th><th>Persona Encargada</th><th style='width: 10%;'>Fecha inicial</th><th style='width: 10%;'>Fecha final</th><th style='width: 12%;'>Hora Entrada</th><th style='width: 12%;'>Hora Salida</th><th>Horario de ingreso</th></tr></thead><tbody>";
     for (item in List_Acceso_Predeterminado) {
         if (List_Acceso_Predeterminado[item].Document_ID == Array_People[0].Document_ID &&
             List_Acceso_Predeterminado[item].Estado == "1") {
@@ -610,7 +608,6 @@ function validaEntradaSalida(A_FIV, A_FFV) {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //contruye vista de Personal encargado
 function Tabla_Encargados() {
-
     var html_En;
 
     html_En = "<table id='TEnt' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th style='width: 2%;'>Selección</th><th>Documento</th><th>Persona Encargada</th></tr></thead><tbody>";
@@ -633,6 +630,7 @@ function Tabla_Encargados() {
 //captura y asigna la persona encargada
 function Selecciona_Encargado(Index_People) {
 
+    Clear_Search();
     if (Tipo_Busqueda == "Encargado")
         $("#Txt_Persona_Enc").val(List_Encargado[Index_People].TypeDocument_ID + " - " + List_Encargado[Index_People].Document_ID + " - " + List_Encargado[Index_People].Nombre);
     else
@@ -675,8 +673,8 @@ function Table_Extenciones() {
     }
 
     html += "</tbody></table>";
-    $("#container_TGrid_New").html("");
-    $("#container_TGrid_New").html(html);
+    $(".container_TGrid_New").html("");
+    $(".container_TGrid_New").html(html);
 
     $("#TGridExtencion").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,
@@ -751,7 +749,7 @@ function Clear() {
     $("#L_Cargo").html("");
 
     $("#container_T_DP").html("");
-    $("#container_T_DE").html("");
+    $("#container_T_DE").html("");("");
     $("#Container_Acceso").html("");
 
     $("#Sucess").css("display", "none");
@@ -777,3 +775,8 @@ function Clear_Ingreso() {
     $('.C_Chosen').trigger('chosen:updated');
 }
 
+//limpiar busqueda de personas
+function Clear_Search() {
+    $("#Txt_Nombre").val("");
+    $("#Container_People_Bussiness").html("");
+}

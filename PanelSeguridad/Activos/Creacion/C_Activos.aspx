@@ -25,7 +25,7 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
-    <div id="Container_title_Form">
+    <div class="Container_title_Form">
         <div id="Dialog_Control" style="width: 100%; text-align: center;">
             <div class="cssload-container" style="margin-top: 25%;">
                 <div class="cssload-whirlpool"></div>
@@ -44,9 +44,9 @@
             </tr>
         </table>
     </div>
-    <div id="Marco_Contrato">
-        <div id="Marco_trabajo_Contrato">
-            <div id="Container_controls">
+    <div class="Marco_Container_Flex">
+        <div class="Marco_trabajo_Flex">
+            <div class="Container_controls">
                 <div id="Acordeon_Activo" style="width: 100%">
                     <h3>Datos Activos
                     </h3>
@@ -85,25 +85,25 @@
                         </table>
                         <table id="T_Datos_Activo" style="width: 100%;">
                             <tr>
-                                <td class="Label_Bold" style="width: 7.7%;">Tipo de Activo
+                                <td class="Label_Bold" style="width: 7.3%;">Tipo de Activo
                                 </td>
                                 <td style="width: 20%;">
                                     <select id="Select_Tipo" class="C_Chosen">
                                     </select>
                                 </td>
-                                <td style="width: 6%; padding-bottom: 25px;">
+                                <td style="width: 10%; padding-bottom: 25px;">
                                     <span class="cssToolTip">
                                         <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img3"
                                             src="../../images/error.png" />
                                         <span class="SpamEG"></span></span>
                                 </td>
-                                <td class="Label_Bold" style="width: 10%;">Sub-Tipo de Activo
+                                <td class="Label_Bold" style="width: 9%;">Sub-Tipo de Activo
                                 </td>
                                 <td style="width: 20%;">
                                     <select id="Select_SubTipo" class="C_Chosen">
                                     </select>
                                 </td>
-                                <td style="width: 10%; padding-bottom: 25px;"></td>
+                                <td style="width: 3%; padding-bottom: 25px;"></td>
                             </tr>
                         </table>
                         <table id="Tabla_LLave_Inmueble" style="width: 100%;">
@@ -167,28 +167,28 @@
                                 </td>
                             </tr>
                         </table>
-                        <table id="T_Datos_Identificacion" style="width: 100%;">
+                        <table id="T_Datos_Identificacion" style="width: 90%;">
                             <tr>
-                                <td class="Label_Bold" style="width: 4%;">Documento
+                                <td class="Label_Bold" style="width: 6%;">Documento
                                 </td>
-                                <td style="width: 25%;">
+                                <td style="width: 30%;">
                                     <select id="Select_Documento" class="C_Chosen">
                                     </select>
                                 </td>
-                                <td style="padding-bottom: 25px; width: 3%;">
+                                <td style="padding-bottom: 25px; width: 2.5%;">
                                     <span class="cssToolTip">
                                         <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img_TD"
                                             src="../../images/error.png" />
                                         <span class="SpamEG"></span></span>
                                 </td>
-                                <td class="Label_Bold" style="width: 3%;">Identificación
+                                <td class="Label_Bold" style="width: 9%;">Identificación
                                 </td>
                                 <td style="width: 10%;">
                                     <span class="cssToolTip_Form">
                                         <input type="text" id="TxtDoc" maxlength="18" class="Numeric" style="width: 100%;" />
                                         <span class="Spam_AN"></span></span>
                                 </td>
-                                <td style="padding-bottom: 25px; width: 7%;">
+                                <td style="padding-bottom: 25px; width: 8%;">
                                     <span class="cssToolTip_L">
                                         <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img_D"
                                             src="../../images/error.png" />
@@ -236,54 +236,51 @@
                         </table>
                         <table id="Tabla_Valor" style="width: 100%;">
                             <tr>
-                                <td class="Label_Bold" style="width: 7.5%;">Valor Bien
+                                <td class="Label_Bold" style="width: 3.4%;">Valor Bien
                                 </td>
-                                <td id="V_Sigla_1" style="width: 3%" class="Sigla"></td>
-                                <td style="width: 15%;">
+                                <td id="V_Sigla_1" style="width: 0.7%" class="Sigla"></td>
+                                <td style="width: 9.8%;">
                                     <span class="cssToolTip_Form">
                                         <input type="text" id="TxtValor_Bien" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
                                         <span class="Spam_AVal"></span></span>
                                 </td>
-                                <td class="Label_Bold" style="width: 10%;">Sumatoria Facturas
+                                <td class="Label_Bold" style="width: 3%;">Sumatoria Facturas
                                 </td>
-                                <td id="V_Sigla_2" style="width: 4%" class="Sigla"></td>
-                                <td class="Title_Bold" id="V_TFacturas" style="width: 30%; padding-bottom: 5px;" align="left"></td>
+                                <td id="V_Sigla_2" style="width: 1%" class="Sigla"></td>
+                                <td class="Title_Bold" id="V_TFacturas" style="width: 8.9%; padding-bottom: 5px;" align="left"></td>
                             </tr>
-                        </table>
-                        <table id="Tabla_Valor_Compra" style="width: 100%;">
                             <tr>
-                                <td class="Label_Bold" style="width: 7.3%;">Valor Compra
+                                <td class="Label_Bold" style="width: 3.4%;">Valor Compra
                                 </td>
-                                <td id="V_Sigla_3" style="width: 3%" class="Sigla"></td>
-                                <td style="width: 15%;">
+                                <td id="V_Sigla_3" style="width: 0.7%" class="Sigla"></td>
+                                <td style="width: 9.8%">
                                     <span class="cssToolTip_Form_T">
                                         <input type="text" id="TxtValor_Compra" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
                                         <span class="Spam_AVal"></span></span>
                                 </td>
-                                <td class="Label_Bold" style="width: 10%;">Compra Bien</td>
-                                <td style="width: 5%">
-                                    <select id="Select_CompraBien" class="C_Chosen" style="width: 80px;">
+                                <td class="Label_Bold" style="width: 3%;"></td>
+                                <td class="Label_Bold" style="width: 1%;"></td>
+                                <td style="width: 8.9%"></td>
+                            </tr>
+                        </table>
+                        <table id="Tabla_Valor_Compra" style="width: 100%;">
+                            <tr>
+                                <td class="Label_Bold" style="width: 8.5%;">Compra Bien</td>
+                                <td style="width: 8.9%">
+                                    <select id="Select_CompraBien" class="C_Chosen" style="width: 100px;">
                                         <option value="0">No Aplica</option>
                                         <option value="1">Nuevo</option>
                                         <option value="2">Usado</option>
-                                    </select></td>
-                                <td class="Label_Bold" style="width: 25%;"></td>
+                                    </select>
+                                </td>
+                                <td class="Label_Bold" style="width: 40%;"></td>
                             </tr>
                         </table>
                         <table id="T_Datos_Final" style="width: 100%;">
                             <tr>
-                                <td class="Label_Bold" style="width: 6%;">Asegurado (S/N)
+                                <td class="Label_Bold" style="width: 8.5%;">Tipo Administración
                                 </td>
-                                <td style="width: 6%;">
-                                    <select id="Select_Asegurado" class="C_Chosen">
-                                        <option value="N">No</option>
-                                        <option value="S">Si</option>
-                                    </select>
-                                </td>
-                                <td style="width: 11.5%; padding-bottom: 25px;"></td>
-                                <td class="Label_Bold" style="width: 7.7%;">Tipo Administración
-                                </td>
-                                <td style="width: 20%;">
+                                <td style="width: 8.9%;">
                                     <select id="Select_TipoAdmin" class="C_Chosen">
                                         <option value="1">1 - Cliente paga</option>
                                         <option value="2">2 - Exento</option>
@@ -291,13 +288,24 @@
                                         <option value="4">4 - Pago cliente con soporte</option>
                                     </select>
                                 </td>
-                                <td style="width: 10%; padding-bottom: 25px;"></td>
+                                <td style="width: 40%; padding-bottom: 25px;"></td>
+                            </tr>
+                            <tr>
+                                <td class="Label_Bold">Asegurado (S/N)
+                                </td>
+                                <td>
+                                    <select id="Select_Asegurado" class="C_Chosen">
+                                        <option value="N">No</option>
+                                        <option value="S">Si</option>
+                                    </select>
+                                </td>
+                                <td></td>
                             </tr>
                         </table>
                         <table id="Tabla_poliza" style="width: 100%; display: inline-table;">
                             <tbody>
                                 <tr>
-                                    <td class="Label_Bold" style="width: 8%;">N° Poliza</td>
+                                    <td class="Label_Bold" style="width: 12.3%;">N° Poliza</td>
                                     <td style="width: 15%;">
                                         <span class="cssToolTip_Form_T">
                                             <input type="text" id="Txt_Num_poliza" maxlength="30" style="width: 180px;" class="Numeric_letter" />
@@ -329,9 +337,9 @@
                                             src="../../images/error.png" />
                                         <span class="SpamEG"></span></span>
                                 </td>
-                                <td class="Label_Bold" style="width: 10%; text-align: right">Ciudad
+                                <td class="Label_Bold" style="width: 5%; text-align: left">Ciudad
                                 </td>
-                                <td style="width: 20%;">
+                                <td style="width: 40%;">
                                     <select id="Select_Ciudad_U" class="C_Chosen">
                                     </select>
                                 </td>
@@ -347,7 +355,7 @@
                                 </td>
                                 <td style="width: 20%;">
                                     <span class="cssToolTip_Form">
-                                        <input type="text" id="Txt_Adress_U" maxlength="50" style="width: 400px;" readonly="readonly" />
+                                        <input type="text" id="Txt_Adress_U" maxlength="50" style="width: 450px;" readonly="readonly" />
                                         <span class="Spam_A_Addres"></span></span>
                                 </td>
                                 <td style="width: 6%; padding-bottom: 25px;" colspan="3">
@@ -399,8 +407,6 @@
                                             <td class="Label_Bold" style="width: 7.7%;">Notaria
                                             </td>
                                             <td style="width: 20%;">
-                                                <%--        <select id="Select_Notaria_R" class="C_Chosen">
-                                                </select>--%>
                                                 <span class="cssToolTip_Form_T">
                                                     <input type="text" class="Numeric" id="Text_Num_Notaria" maxlength="3" style="width: 50px;" />
                                                     <span class="Spam_AN"></span></span>
@@ -486,7 +492,7 @@
                                     </table>
                                     <table id="T_Datos_Fasecolda_4" style="width: 100%;">
                                         <tr>
-                                            <td class="Label_Bold" style="width: 7.3%;">Modelo
+                                            <td class="Label_Bold" style="width: 7.2%;">Modelo
                                             </td>
                                             <td style="width: 7%;">
                                                 <select id="Select_modelo" class="C_Chosen">
@@ -785,23 +791,23 @@
                     <div id="RegistroActivo" style="height: 240px">
                         <table id="Tabla_Registro" style="width: 100%;">
                             <tr>
-                                <td class="Label_Bold" style="width: 7.7%;">Pais
+                                <td class="Label_Bold" style="width: 2%;">Pais
                                 </td>
-                                <td style="width: 20%;">
+                                <td style="width: 35%;">
                                     <select id="Select_Pais_R" class="C_Chosen">
                                     </select>
                                 </td>
-                                <td style="width: 6%; padding-bottom: 25px; text-align: right;"></td>
-                                <td class="Label_Bold" style="width: 10%;">Ciudad
+                                <td style="width: 5%; padding-bottom: 25px; text-align: right;"></td>
+                                <td class="Label_Bold" style="width: 2%;">Ciudad
                                 </td>
-                                <td style="width: 20%;">
+                                <td style="width: 25%;">
                                     <select id="Select_Ciudad_R" class="C_Chosen">
                                     </select>
                                 </td>
-                                <td style="width: 10%; padding-bottom: 25px;"></td>
+                                <td style="width: 5%; padding-bottom: 25px;"></td>
                             </tr>
                             <tr>
-                                <td class="Label_Bold" style="width: 7.7%;">Entidad
+                                <td class="Label_Bold" style="width: 2%;">Entidad
                                 </td>
                                 <td style="width: 20%;" colspan="3">
                                     <select id="Select_Persona_R" class="C_Chosen">
@@ -836,10 +842,10 @@
                         </table>
                     </div>
                 </div>
-                <table id="Complementos">
+                <table class="container_Grid_Flex">
                     <tr>
                         <td>
-                            <div id="Container_Facturas" style="width: 100%;">
+                            <div class="Div_Full_Block" style="width: 100%;">
                                 <table id="T_Factura_Grid" border="1" cellpadding="1" cellspacing="1">
                                     <thead>
                                         <tr>

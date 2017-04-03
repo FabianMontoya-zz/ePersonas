@@ -6,8 +6,10 @@ function transaccionAjax_MTarjeta(State) {
         url: "R_Persona_TarjetaAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
-            "tabla": 'RUTA'
+        data: {
+            "action": State,
+            "tabla": 'RUTA',
+            "Nit": $("#Select_EmpresaNit").val()
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -16,11 +18,13 @@ function transaccionAjax_MTarjeta(State) {
             }
             else {
                 Matrix_Tarjeta = JSON.parse(result);
+                
             }
         },
         error: function () {
-
-        }
+        },
+    }).done(function () {
+        Charge_Combos_Depend_Nit(Matrix_Tarjeta, "Select_Tarjeta", $("#Select_EmpresaNit").val(), "");
     });
 }
 
@@ -31,8 +35,10 @@ function transaccionAjax_MPersona(State) {
         url: "R_Persona_TarjetaAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
-            "tabla": 'RUTA'
+        data: {
+            "action": State,
+            "tabla": 'RUTA',
+            "Nit": $("#Select_EmpresaNit").val()
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -44,7 +50,11 @@ function transaccionAjax_MPersona(State) {
             }
         },
         error: function () {
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
+    }).done(function () {
+        Charge_Combos_Depend_Nit(Matrix_Persona, "Select_Persona", $("#Select_EmpresaNit").val(), "");
     });
 }
 
@@ -55,8 +65,10 @@ function transacionAjax_EmpresaNit(State) {
         url: "R_Persona_TarjetaAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
-            "tabla": 'CLIENTE'
+        data: {
+            "action": State,
+            "tabla": 'CLIENTE',
+            "Nit": $("#Select_EmpresaNit").val()
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -71,6 +83,14 @@ function transacionAjax_EmpresaNit(State) {
         },
         error: function () {
 
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
+    }).done(function () {
+        var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+        if (OnlyEmpresa == true) {
+            TransaccionesSegunNIT($("#Select_EmpresaNit").val());
         }
     });
 }
@@ -80,13 +100,14 @@ function transacionAjax_EmpresaNit(State) {
 function transacionAjax_R_Persona_Tarjeta_create(State) {
     var StrPersona = $("#Select_Persona option:selected").html();
     var SPersona = StrPersona.split("  -  ");
-    
+
     undefined
     $.ajax({
         url: "R_Persona_TarjetaAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Nit_ID": $("#Select_EmpresaNit").val(),
             "Nit_ID_Asig": $("#Select_EmpresaNit_2").val(),
             "TDoc": SPersona[1],
@@ -132,6 +153,7 @@ function transacionAjax_R_Persona_Tarjeta_create(State) {
         error: function () {
 
         }
+    }).done(function () {
     });
 }
 

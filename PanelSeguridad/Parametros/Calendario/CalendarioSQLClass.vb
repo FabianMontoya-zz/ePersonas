@@ -1,5 +1,4 @@
-﻿Imports System.Data.SqlClient
-Imports System.Data.OleDb
+﻿Imports System.Data.OleDb
 
 Public Class CalendarioSQLClass
 
@@ -13,7 +12,7 @@ Public Class CalendarioSQLClass
     ''' <param name="vp_S_Contenido"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Read_AllCalendario(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String)
+    Public Function Read_AllCalendario(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String, ByVal vp_S_Nit_User As String)
 
         Dim ObjListCalendario As New List(Of CalendarioClass)
         Dim StrQuery As String = ""
@@ -23,25 +22,26 @@ Public Class CalendarioSQLClass
         Dim BD_Admin As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDAdmin").ToString
 
         Dim sql As New StringBuilder
+        Dim vl_sql_filtro As New StringBuilder
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
-            sql.Append(" SELECT CA_Nit_ID, " & _
-                             " CA_Calendario_ID, " & _
-                             " CA_Descripcion, " & _
-                             " CA_TipoCalendario, " & _
-                              " CA_Usuario_Creacion, " & _
-                             " CA_FechaCreacion, " & _
-                             " CA_Usuario_Actualizacion, " & _
-                             " CA_FechaActualizacion, " & _
-                             " C.CLI_Nombre +' '+ C.CLI_Nombre_2  +' '+ C.CLI_Apellido_1 +' '+ C.CLI_Apellido_2,  " & _
-                             " TC.DDLL_Descripcion, " & _
-                             " ROW_NUMBER() OVER(ORDER BY CA_Calendario_ID ASC) AS Index_Calendario " & _
-                        " FROM CALENDARIOS CA " & _
-                      "  LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO TC ON TC.DDL_ID = CA.CA_TipoCalendario AND TC.DDL_Tabla = 'TIPO_CALENDARIO' " & _
-                       " LEFT JOIN CLIENTE C ON C.CLI_Document_ID = " & _
-                             " CASE	 SUBSTRING(CA.CA_Nit_ID,0,LEN(CA.CA_Nit_ID))" & _
-                             " WHEN '' THEN 0 " & _
-                             " ELSE SUBSTRING(CA.CA_Nit_ID,0,LEN(CA.CA_Nit_ID)) " & _
+            sql.Append(" SELECT CA_Nit_ID, " &
+                             " CA_Calendario_ID, " &
+                             " CA_Descripcion, " &
+                             " CA_TipoCalendario, " &
+                             " CA_Usuario_Creacion, " &
+                             " CA_FechaCreacion, " &
+                             " CA_Usuario_Actualizacion, " &
+                             " CA_FechaActualizacion, " &
+                             " C.CLI_Nombre +' '+ C.CLI_Nombre_2  +' '+ C.CLI_Apellido_1 +' '+ C.CLI_Apellido_2,  " &
+                             " TC.DDLL_Descripcion, " &
+                             " ROW_NUMBER() OVER(ORDER BY CA_Calendario_ID ASC) AS Index_Calendario " &
+                        " FROM CALENDARIOS CA " &
+                      "  LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO TC ON TC.DDL_ID = CA.CA_TipoCalendario AND TC.DDL_Tabla = 'TIPO_CALENDARIO' " &
+                       " LEFT JOIN CLIENTE C ON C.CLI_Document_ID = " &
+                             " CASE	 SUBSTRING(CA.CA_Nit_ID,0,LEN(CA.CA_Nit_ID))" &
+                             " WHEN '' THEN 0 " &
+                             " ELSE SUBSTRING(CA.CA_Nit_ID,0,LEN(CA.CA_Nit_ID)) " &
                        " END ")
         Else
 
@@ -87,7 +87,18 @@ Public Class CalendarioSQLClass
             End If
         End If
 
-        StrQuery = sql.ToString
+        If vp_S_Nit_User <> "N" Then
+            If vp_S_Contenido = "ALL" Then
+                vl_sql_filtro.Append("WHERE  CA_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY CA_Nit_ID, CA_Calendario_ID ASC")
+            Else
+                vl_sql_filtro.Append("AND  CA_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY CA_Nit_ID, CA_Calendario_ID ASC")
+            End If
+        Else
+            vl_sql_filtro.Append(" ORDER BY CA_Nit_ID, CA_Calendario_ID ASC")
+        End If
+
+
+        StrQuery = sql.ToString & vl_sql_filtro.ToString
 
         ObjListCalendario = listCalendario(StrQuery, Conexion, "List")
 
@@ -180,11 +191,35 @@ Public Class CalendarioSQLClass
         Dim StrQuery As String
         Dim SQL_general As New GeneralSQLClass
 
-        sql.AppendLine("DELETE CALENDARIOS WHERE CA_Nit_ID = '" & vp_Obj_Calendario.Nit_ID & "' AND CA_Calendario_ID = '" & vp_Obj_Calendario.Calendario_ID & "'")
-        StrQuery = sql.ToString
-        Dim Result As String = conex.StrInsert_and_Update_All(StrQuery, "2")
+        Dim CalendarioSemana As New CalendarioSemanaClass
+        Dim SQLCalendarioSemana As New CalendarioSemanaSQLClass
 
-        Return Result
+        Dim Result As String = ""
+        Dim Result2 As String = ""
+
+        If vp_Obj_Calendario.TipoCalendario.Equals("1") Then
+
+            CalendarioSemana.Calendario_ID = vp_Obj_Calendario.Calendario_ID
+            CalendarioSemana.Nit_ID = vp_Obj_Calendario.Nit_ID
+
+            Result = SQLCalendarioSemana.Delete_C_Semana(CalendarioSemana)
+
+            If Result.Equals("Exito") Then
+                sql.AppendLine("DELETE CALENDARIOS WHERE CA_Nit_ID = '" & vp_Obj_Calendario.Nit_ID & "' AND CA_Calendario_ID = '" & vp_Obj_Calendario.Calendario_ID & "'")
+                StrQuery = sql.ToString
+                Result2 = conex.StrInsert_and_Update_All(StrQuery, "2")
+                Return Result2
+            Else
+                Return Result
+            End If
+
+        ElseIf vp_Obj_Calendario.TipoCalendario.Equals("2") Then
+
+        End If
+
+
+
+
 
     End Function
 
@@ -318,7 +353,8 @@ Public Class CalendarioSQLClass
                     objCalendario.UsuarioActualizacion = ReadConsulta.GetValue(6)
                     objCalendario.FechaActualizacion = ReadConsulta.GetValue(7)
 
-                    objCalendario.DescripEmpresa = ReadConsulta.GetValue(8)
+                    'objCalendario.DescripEmpresa = ReadConsulta.GetValue(8)
+                    If Not (IsDBNull(ReadConsulta.GetValue(8))) Then objCalendario.DescripEmpresa = ReadConsulta.GetValue(8) Else objCalendario.DescripEmpresa = ""
                     objCalendario.DescripTipoCalendario = ReadConsulta.GetValue(9)
                     objCalendario.Index = ReadConsulta.GetValue(10)
 
@@ -336,6 +372,7 @@ Public Class CalendarioSQLClass
                     objCalendario.Calendario_ID = ReadConsulta.GetValue(0)
                     objCalendario.Descripcion = ReadConsulta.GetValue(1)
                     objCalendario.Nit_ID = ReadConsulta.GetValue(2)
+                    objCalendario.Index = ReadConsulta.GetValue(3)
 
                     'agregamos a la lista
                     ObjListCalendario.Add(objCalendario)
@@ -358,6 +395,22 @@ Public Class CalendarioSQLClass
 
                 End While
 
+            Case "calendarioTemp"
+                'recorremos la consulta por la cantidad de datos en la BD
+                While ReadConsulta.Read
+
+                    Dim objCalendario As New CalendarioClass
+                    'cargamos datos sobre el objeto de login
+                    objCalendario.Nit_ID = ReadConsulta.GetValue(0)
+                    objCalendario.Descripcion = ReadConsulta.GetValue(1)
+                    objCalendario.Calendario_ID = ReadConsulta.GetValue(2)
+                    objCalendario.Tipo_Tabla = ReadConsulta.GetValue(3)
+                    objCalendario.Index = ReadConsulta.GetValue(4)
+
+                    'agregamos a la lista
+                    ObjListCalendario.Add(objCalendario)
+
+                End While
         End Select
 
 
@@ -446,6 +499,81 @@ Public Class CalendarioSQLClass
         Dim StrQuery As String = sql.ToString
 
         ObjList = listCalendario(StrQuery, Conexion, "MatrixGenericos")
+
+        Return ObjList
+
+    End Function
+
+    ''' <summary>
+    ''' Traemos los Calendarios para Empresa Genérica
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Read_Matrix_Calendarios(ByVal vp_Obj_Cliente As ClienteClass)
+
+        Dim ObjList As New List(Of CalendarioClass)
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("2")
+
+        Dim sql As New StringBuilder
+        Dim vl_sql_filtro As New StringBuilder
+
+        sql.Append(" SELECT c.CA_Calendario_ID, " & _
+                   " c.CA_Descripcion, " & _
+                   " c.CA_TipoCalendario, " & _
+                   " ROW_NUMBER() OVER(ORDER BY c.CA_Nit_ID, c.CA_Calendario_ID ASC) AS Index_Calendario " & _
+                   " FROM CALENDARIOS c ")
+
+        Select Case vp_Obj_Cliente.TipoSQL
+            Case "Calendar"
+                vl_sql_filtro.Append("WHERE c.CA_Nit_ID = '0' OR c.CA_NIT_ID = '" & vp_Obj_Cliente.Nit_ID & "' ORDER BY c.CA_Nit_ID, c.CA_Calendario_ID ASC ")
+
+            Case "Sucursal"
+                vl_sql_filtro.Append("WHERE  c.CA_NIT_ID = '" & vp_Obj_Cliente.Nit_ID & "' ORDER BY c.CA_Nit_ID, c.CA_Calendario_ID ASC ")
+
+            Case "Paises"
+                vl_sql_filtro.Append("WHERE c.CA_NIT_ID = '0' ORDER BY c.CA_Nit_ID, c.CA_Calendario_ID ASC ")
+
+        End Select
+
+        Dim vl_S_SQLString As String = sql.ToString & vl_sql_filtro.ToString
+
+        ObjList = listCalendario(vl_S_SQLString, Conexion, "Matrix")
+
+        Return ObjList
+
+    End Function
+
+    ''' <summary>
+    ''' Traemos los Calendarios para Empresa Genérica
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Read_Matrix_Calendarios_Temp(ByVal vp_Obj_Cliente As ClienteClass)
+
+        Dim ObjList As New List(Of CalendarioClass)
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("2")
+
+        Dim sql As New StringBuilder
+        Dim vl_sql_filtro As New StringBuilder
+
+        sql.Append("  EXEC P_TEM_TIPO_SERVICIO '" & vp_Obj_Cliente.Nit_ID & "'")
+        Dim vl_S_EXECString As String = sql.ToString
+
+        conex.StrInsert_and_Update_All(vl_S_EXECString, "2")
+
+        sql = New StringBuilder()
+        sql.Append(" SELECT T.Nit_ID, " & _
+                    "T.Descripcion, " & _
+                    "T.TipoCalendario, " & _
+                    "T.TipoTabla, " & _
+                    " ROW_NUMBER() OVER(ORDER BY T.Nit_ID, T.TipoTabla ASC) AS Index_Calendario " & _
+                    "FROM T_TIPO_SERVICIO T ")
+
+        Dim vl_S_SQLString As String = sql.ToString
+
+        ObjList = listCalendario(vl_S_SQLString, Conexion, "calendarioTemp")
 
         Return ObjList
 

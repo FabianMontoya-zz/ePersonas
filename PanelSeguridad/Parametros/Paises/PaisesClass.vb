@@ -4,8 +4,10 @@
     Private _Cod As Integer
     Private _Name As String
     Private _Moneda As String
+    Private _Moneda_Descripcion As String
     Private _SWIFT As String
     Private _Calendario_ID As Integer
+    Private _Calendario_Descripcion As String
     Private _FechaCreacion As String
     Private _UsuarioCreacion As String
     Private _FechaActualizacion As String
@@ -38,6 +40,14 @@
             Me._Moneda = value
         End Set
     End Property
+    Public Property Moneda_Descripcion As String
+        Get
+            Return Me._Moneda_Descripcion
+        End Get
+        Set(ByVal value As String)
+            Me._Moneda_Descripcion = value
+        End Set
+    End Property
     Public Property SWIFT As String
         Get
             Return Me._SWIFT
@@ -52,6 +62,14 @@
         End Get
         Set(ByVal value As Integer)
             Me._Calendario_ID = value
+        End Set
+    End Property
+    Public Property Calendario_Descripcion As String
+        Get
+            Return Me._Calendario_Descripcion
+        End Get
+        Set(ByVal value As String)
+            Me._Calendario_Descripcion = value
         End Set
     End Property
     Public Property FechaCreacion() As String

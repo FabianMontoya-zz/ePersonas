@@ -14,6 +14,7 @@
 
     Private _DescripEmpresa As String
     Private _DescripTipoCalendario As String
+    Private _Tipo_Tabla As String
 #End Region
 
 #Region "propiedades"
@@ -105,6 +106,14 @@
         End Get
         Set(ByVal value As String)
             Me._DescripTipoCalendario = value
+        End Set
+    End Property
+    Public Property Tipo_Tabla() As String
+        Get
+            Return Me._Tipo_Tabla
+        End Get
+        Set(ByVal value As String)
+            Me._Tipo_Tabla = value
         End Set
     End Property
 #End Region

@@ -1,29 +1,43 @@
-﻿//evento load del login
+﻿var ArrayEmpresaNit = [];
+//evento load del login
 $(document).ready(function () {
+
+    Ventanas_Emergentes();
+    Ocultar_Errores();
     teclaEnter();
-    //evento del boton ingresar
-    $("#BtnIngresar").click(function () {
-        //llamamos la funcion de validar
-        var flag_campos = ValidarCampos();
-        if (flag_campos === 0) {
-            //llamamos la funcion de transaccion
-            transacionAjax("Ingresar");
-        }
-    });
-    //evento del boton ingresar
 
-    $("#EPassword").css("display", "none");
-    $("#EUser").css("display", "none");
+    $("#TxtUser").prop('disabled', true);
+    $("#TxtPassword").prop('disabled', true);
 
-    //funcion para las ventanas emergentes
+    transacionAjax_EmpresaNit('Cliente'); //Carga Droplist de Empresa NIT
+
+    Change_Select_Nit();
+
+});
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                 REGION INICIO DE COMPONENTES                                                                                                    ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//instancia dialogos jquey
+function Ventanas_Emergentes() {
     $("#dialog").dialog({
         dialogClass: "Dialog_Sasif",
         modal: true,
         autoOpen: false
     });
+}
 
-
-});
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                 REGION BOTONES                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//Función que ejecuta el evento Clic del Botón Entrar
+function BtnEntrar() {
+    var flag_campos = ValidarCampos();
+    if (flag_campos === 0) {
+        //llamamos la funcion de transaccion
+        transacionAjax("Ingresar");
+    }
+}
 
 //evento de la tecla enter
 function teclaEnter() {
@@ -37,83 +51,70 @@ function teclaEnter() {
             }
         }
     });
-
 }
 
+//evento del boton salir
+function x() {
+    $("#dialog").dialog("close");
+}
 
-//hacemos la transaccion al code behind por medio de Ajax 
-function transacionAjax(State) {
-    $.ajax({
-        url: "LoginAjax.aspx",
-        type: "POST",
-        //crear json
-        data: { "action": State,
-            "user": $("#TxtUser").val(),
-            "password": $("#TxtPassword").val()
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            result = JSON.parse(result);
-
-            switch (result) {
-
-                case 0: //ingresa
-                    window.location = "../Menu/menu.aspx?User=" + $("#TxtUser").val();
-                    break;
-                case 1: //contraseña incorrecta
-                    $("#EPassword").css("display", "-webkit-inline-box");
-                    $("#EUser").css("display", "-webkit-inline-box");
-                    $("#S_User").html(ArrayMensajes[7].Mensajes_ID + ": " + ArrayMensajes[7].Descripcion);
-                    $("#S_Pass").html(ArrayMensajes[4].Mensajes_ID + ": " + ArrayMensajes[4].Descripcion);
-                    break;
-                case 2: //no existe usuario
-                    $("#EPassword").css("display", "-webkit-inline-box");
-                    $("#EUser").css("display", "-webkit-inline-box");
-                    $("#S_User").html(ArrayMensajes[6].Mensajes_ID + ": " + ArrayMensajes[6].Descripcion);
-                    $("#S_Pass").html(ArrayMensajes[5].Mensajes_ID + ": " + ArrayMensajes[5].Descripcion);
-                    break;
-                case 3: // cambio de contraseña
-                    window.location = "../login/CambioPassword.aspx?User=" + $("#TxtUser").val();
-                    break
-                case 4: //usuario deshabilitado
-                    $("#dialog").dialog("option", "title", "Desactivado!");
-                    $("#Mensaje_alert").text(ArrayMensajes[8].Mensajes_ID + ": " + ArrayMensajes[8].Descripcion);
-                    $("#dialog").dialog("open");
-                    break;
-            }
-
-        },
-        error: function () {
-            $("#dialog").dialog("option", "title", "Disculpenos :(");
-            $("#Mensaje_alert").text("Se genero error al realizar la transacción Ajax!");
-            $("#dialog").dialog("open");
-
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                     PROCESOS DE CHANGES EN CONTROLES                                                                                                                                        ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//cambio de nit
+function Change_Select_Nit() {
+    $("#Select_EmpresaNit").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_EmpresaNit").val() == "-1") {
+            $("#ImgNIT").css("display", "inline-table");
+            $("#S_NIT").html(ArrayMensajes[0].Mensajes_ID + ": " + ArrayMensajes[0].Descripcion);
+            $("#TxtUser").prop('disabled', true);
+            $("#TxtPassword").prop('disabled', true);
+        } else {
+            Ocultar_Errores();
+            $("#TxtUser").prop('disabled', false);
+            $("#TxtPassword").prop('disabled', false);
         }
-    });
 
+        $("#TxtUser").val("");
+        $("#TxtPassword").val("");
+    });
 }
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                           REGION DE VALIDACIONES                                                                                                   ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //validamos los campos de captura
 function ValidarCampos() {
     var user = $("#TxtUser").val();
     var password = $("#TxtPassword").val();
+    var NIT = $("#Select_EmpresaNit").val();
     var flag_valida = 0;
 
-    if (user === "" || password === "") {
+    if (user == "" || password == "" || NIT == "-1" || NIT == null) {
         flag_valida = 1;
         if (user === "") {
-            $("#EUser").css("display", "-webkit-inline-box");
+            $("#EUser").css("display", "inline-table");
             $("#S_User").html(ArrayMensajes[0].Mensajes_ID + ": " + ArrayMensajes[0].Descripcion);
         }
         else {
             $("#EUser").css("display", "none");
         }
+        //
         if (password === "") {
-            $("#EPassword").css("display", "-webkit-inline-box");
+            $("#EPassword").css("display", "inline-table");
             $("#S_Pass").html(ArrayMensajes[0].Mensajes_ID + ": " + ArrayMensajes[0].Descripcion);
         }
         else {
             $("#EPassword").css("display", "none");
+        }
+        //
+        if (NIT == "-1" || NIT == null) {
+            $("#ImgNIT").css("display", "inline-table");
+            $("#S_NIT").html(ArrayMensajes[0].Mensajes_ID + ": " + ArrayMensajes[0].Descripcion);
+        }
+        else {
+            $("#ImgNIT").css("display", "none");
         }
     }
     else {
@@ -123,7 +124,12 @@ function ValidarCampos() {
     return flag_valida;
 }
 
-//evento del boton salir
-function x() {
-    $("#dialog").dialog("close");
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                              MENSAJES, VISUALIZACION Y LIMPIEZA                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//Función que oculta las Imagenes de los errores
+function Ocultar_Errores() {
+    $("#EPassword").css("display", "none");
+    $("#EUser").css("display", "none");
+    $("#ImgNIT").css("display", "none");
 }

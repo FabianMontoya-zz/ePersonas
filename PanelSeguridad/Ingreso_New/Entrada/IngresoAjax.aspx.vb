@@ -138,12 +138,13 @@ Public Class IngresoAjax
     ''' <remarks></remarks>
     Protected Sub Search_Document_Foto()
 
-        Dim SQL As New DocumentosSQLClass
+        Dim SQL As New DocumentoSQLClass
         Dim Obj As New ClienteClass
-        Dim ObjList As New List(Of DocumentosClass)
+        Dim ObjList As New List(Of DocumentoClass)
 
-       Obj.TypeDocument_ID = Request.Form("TD")
+        Obj.TypeDocument_ID = Request.Form("TD")
         Obj.Document_ID = Request.Form("D")
+        Obj.TipoSQL = "Pagina"
 
         ObjList = SQL.SearchDocument_People(Obj)
 
@@ -158,7 +159,7 @@ Public Class IngresoAjax
 
         Dim SQL As New ClienteSQLClass
         Dim Obj As New ClienteClass
-        Dim ObjList As New List(Of DocumentosClass)
+        Dim ObjList As New List(Of DocumentoClass)
 
         Obj.Nit_ID = Request.Form("NIT")
         Obj.TypeDocument_ID = Request.Form("TD")
@@ -178,10 +179,10 @@ Public Class IngresoAjax
 
         Dim SQL As New ClienteSQLClass
         Dim Obj As New ClienteClass
-        Dim ObjList As New List(Of DocumentosClass)
+        Dim ObjList As New List(Of DocumentoClass)
 
         Obj.Nit_ID = Request.Form("NIT")
-         Obj.TipoSQL = Request.Form("TipoSQL")
+        Obj.TipoSQL = Request.Form("TipoSQL")
 
         ObjList = SQL.List_Personas_Documentos(Obj)
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
@@ -194,9 +195,9 @@ Public Class IngresoAjax
     ''' <remarks></remarks>
     Protected Sub List_Doc_Persona()
 
-        Dim SQL As New DocumentosSQLClass
+        Dim SQL As New DocumentoSQLClass
         Dim Obj As New ClienteClass
-        Dim ObjList As New List(Of DocumentosClass)
+        Dim ObjList As New List(Of DocumentoClass)
 
         Obj.Nit_ID = Request.Form("NIT")
         Obj.TypeDocument_ID = Request.Form("TD")
@@ -214,9 +215,9 @@ Public Class IngresoAjax
     ''' <remarks></remarks>
     Protected Sub List_Doc_Empresa()
 
-        Dim SQL As New DocumentosSQLClass
+        Dim SQL As New DocumentoSQLClass
         Dim Obj As New ClienteClass
-        Dim ObjList As New List(Of DocumentosClass)
+        Dim ObjList As New List(Of DocumentoClass)
 
         Obj.Nit_ID = Request.Form("NIT")
         Obj.TipoSQL = Request.Form("TipoSQL")

@@ -184,6 +184,7 @@ function Change_Seguro() {
 //carga marca linea segun la marca escogida 
 function Change_Select_Marca() {
     $("#Select_MarcaF").change(function () {
+        $("#TxtFasecolda_ID").attr("disabled", "disabled");
         var index_ID = this.value;
 
         switch (index_ID) {
@@ -277,6 +278,14 @@ function Change_Select_Modelo() {
     });
 }
 
+//bloqueo de combos
+function Change_Facecolda_ID() {
+    $("#TxtFasecolda_ID").blur(function () {
+        $("#Select_ClaseF").attr("disabled", "disabled");
+        $("#Select_MarcaF").attr("disabled", "disabled");
+        $("#Select_LineaF").attr("disabled", "disabled");
+    });
+}
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                     PROCESO DE CARGUE PAIS CIUDAD                                                                                                                                       ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/

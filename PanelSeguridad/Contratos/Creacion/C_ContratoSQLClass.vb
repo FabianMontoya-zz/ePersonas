@@ -3,6 +3,8 @@ Imports System.Data.OleDb
 
 Public Class C_ContratoSQLClass
 
+#Region "CRUD"
+
     ''' <summary>
     ''' funcion que crea el query para la insercion de nuevo C_Contrato (INSERT)
     ''' </summary>
@@ -74,11 +76,64 @@ Public Class C_ContratoSQLClass
 
     End Function
 
+#End Region
+
 #Region "CONSULTAS DROP LIST"
 
 #End Region
 
 #Region "CARGAR LISTAS"
+
+    ''' <summary>
+    ''' funcion que trae el listado de CONTRATOS para armar la tabla
+    ''' </summary>
+    ''' <param name="vp_S_StrQuery"></param>
+    ''' <param name="vg_S_StrConexion"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function list(ByVal vp_S_StrQuery As String, ByVal vg_S_StrConexion As String, ByVal vp_S_Type As String)
+
+        'inicializamos conexiones a la BD
+        Dim objcmd As OleDbCommand = Nothing
+        Dim objConexBD As OleDbConnection = Nothing
+        objConexBD = New OleDbConnection(vg_S_StrConexion)
+        Dim ReadConsulta As OleDbDataReader = Nothing
+
+        objcmd = objConexBD.CreateCommand
+
+        Dim ObjList As New List(Of C_ContratoClass)
+
+        'abrimos conexion
+        objConexBD.Open()
+        'cargamos consulta
+        objcmd.CommandText = vp_S_StrQuery
+        'ejecutamos consulta
+        ReadConsulta = objcmd.ExecuteReader()
+
+        Select Case vp_S_Type
+
+            Case "COMBO_LIST"
+                'recorremos la consulta por la cantidad de datos en la BD
+                While ReadConsulta.Read
+
+                    Dim obj As New C_ContratoClass
+                    'cargamos datos sobre el objeto de login
+                    obj.Colocacion_ID = ReadConsulta.GetValue(0)
+                    obj.Descripcion = ReadConsulta.GetValue(1)
+
+                    'agregamos a la lista
+                    ObjList.Add(obj)
+                End While
+
+        End Select
+
+        'cerramos conexiones
+        ReadConsulta.Close()
+        objConexBD.Close()
+        'retornamos la consulta
+        Return ObjList
+
+    End Function
 
 #End Region
 
@@ -109,6 +164,40 @@ Public Class C_ContratoSQLClass
 
         Return Result
     End Function
+
+    ''' <summary>
+    ''' CONSULTA QUE TRAE LOS CONTRATOS DE LA EMPRESA SELECCIONADA
+    ''' </summary>
+    ''' <param name="vp_Obj_persona"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Load_Contratos(ByVal vp_Obj_persona As ClienteClass)
+
+        Dim ObjList As New List(Of C_ContratoClass)
+        Dim StrQuery As String = ""
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("2")
+        Dim BD_Admin As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDAdmin").ToString
+        Dim BD_Param As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDParam").ToString
+
+        Dim sql As New StringBuilder
+        Dim vl_sql_filtro As New StringBuilder
+
+        sql.AppendLine(" SELECT CO_Colocacion_ID, CO_Descripcion FROM CONTRATOS ")
+
+        Select Case vp_Obj_persona.TipoSQL
+            Case "Documento"
+                vl_sql_filtro.Append(" WHERE CO_Nit_ID ='" & vp_Obj_persona.Nit_ID & "'" & _
+                                                     " ORDER BY CO_Colocacion_ID ASC  ")
+        End Select
+
+        StrQuery = sql.ToString & vl_sql_filtro.ToString
+
+        ObjList = list(StrQuery, Conexion, "COMBO_LIST")
+
+        Return ObjList
+    End Function
+
 #End Region
 
 End Class

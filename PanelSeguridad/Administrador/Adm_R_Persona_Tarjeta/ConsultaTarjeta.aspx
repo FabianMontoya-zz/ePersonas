@@ -20,7 +20,7 @@
     <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
-    <div id="Container_title_Form">
+    <div class="Container_title_Form">
         <table id="Tabla_Title_form">
             <tr>
                 <td id="Title_form"></td>
@@ -31,9 +31,9 @@
             </tr>
         </table>
     </div>
-    <div id="Marco_Container">
-        <div id="Container_controls">
-            <div id="TablaDatos_D">
+    <div class="Marco_Container">
+        <div class="Container_controls">
+            <div class="Dialog_Datos">
                 <table id="Tabla_1" style="width: 100%; text-align: left;">
                     <tr>
                         <td style="width: 5%;" class="Label_Bold">Empresa 
@@ -45,7 +45,7 @@
                         <td style="padding-bottom: 25px; width: 50%;"></td>
                     </tr>
                 </table>
-                <div id="Container_Consulta">
+                <div class="Div_Full_Block">
                 </div>
             </div>
         </div>

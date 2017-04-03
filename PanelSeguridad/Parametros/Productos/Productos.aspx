@@ -18,9 +18,18 @@
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
     <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
-    <div id="Container_title_Form">
+    <div id="Dialog_Control" style="width: 100%; text-align: center;">
+        <div class="cssload-container" style="margin-top: 25%;">
+            <div class="cssload-whirlpool"></div>
+            <div>
+                <img id="Sasif" class="Logo_3" src="../../images/SASIF_NEW_WHITE.png" alt="SASIF S.A.S." />
+            </div>
+        </div>
+    </div>
+    <div class="Container_title_Form">
         <table id="Tabla_Title_form">
             <tr>
                 <td id="Title_form"></td>
@@ -31,27 +40,27 @@
             </tr>
         </table>
     </div>
-    <div id="Marco_Container">
-        <div id="Marco_btn_Form">
+    <div class="Marco_Container">
+        <div class="Marco_btn_Form">
             <input id="BtnShearh" type="button" value="Consulta" onclick="HabilitarPanel('buscar');" />
             <input id="BtnCreate" type="button" value="Crear" onclick="HabilitarPanel('crear');" />
             <input id="BtnUpdate" type="button" value="Actualizar" onclick="HabilitarPanel('modificar');" />
             <input id="BtnDelete" type="button" value="Eliminar" onclick="HabilitarPanel('eliminar');" />
         </div>
-        <div id="Marco_trabajo_Form">
-            <div id="Container_controls">
+        <div class="Marco_trabajo_Form">
+            <div class="Container_controls">
                 <table id="TablaConsulta">
                     <tr>
-                        <td>
+                        <td style="width: 25%;">
                             <select id="DDLColumns" class="C_Chosen">
                             </select>
                         </td>
-                        <td>
+                        <td style="width: 65%;">
                             <span class="cssToolTip_Form">
-                                <input id="TxtRead" type="text" />
+                                <input id="TxtRead" type="text" style="width: 60%; margin-left: 10%;" />
                                 <span class="Spam_AST"></span></span>
                         </td>
-                        <td colspan="4" align="center" id="TD3">
+                        <td colspan="4" align="center" id="TD3" style="width: 20%;">
                             <input id="BtnRead" type="button" value="Buscar" onclick="BtnConsulta();" />
                         </td>
                     </tr>
@@ -61,7 +70,7 @@
                     </tr>
                     <tr>
                         <td colspan="4">
-                            <div id="container_TProductos">
+                            <div class="container_TGrid">
                             </div>
                         </td>
                     </tr>
@@ -109,147 +118,148 @@
         </table>
     </div>
     <div id="Dialog_Productos">
-        <div id="TablaProductos_D">
-            <table id="Tabla_1" style="width: 100%; margin-left: 100px;">
-                <tr>
-                    <td id="TD_ID" style="width: 150px;" class="Label_Bold">Nit Empresa
-                    </td>
-                    <td id="TD_TID">
-                        <select id="Select_EmpresaNit" class="C_Chosen" style="width: 200px;">
-                        </select>
-                    </td>
-                    <td style="width: 550px; padding-bottom: 25px;">
-                        <span class="cssToolTip">
-                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img3"
-                                src="../../images/error.png" />
-                            <span class="SpamEG"></span></span>
-                    </td>
-                </tr>
-            </table>
-            <table id="Tabla_2" style="margin-left: 100px;">
-                <tr>
-                    <td class="Label_Bold" style="width: 150px;">Codigo
-                    </td>
-                    <td style="width: 100px;">
-                        <span class="cssToolTip_Form">
-                            <input type="text" id="Txt_ID" maxlength="5" class="Numeric" />
-                            <span class="Spam_AN"></span></span>
-                    </td>
-                    <td style="width: 40px; padding-bottom: 25px;">
-                        <span class="cssToolTip">
-                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgID"
-                                src="../../images/error.png" />
-                            <span class="SpamEG"></span></span>
-                    </td>
-                    <td class="Label_Bold" style="width: 120px;">Descripción
-                    </td>
-                    <td style="width: 100px;">
-                        <span class="cssToolTip_Form">
-                            <input type="text" id="TxtDescripcion" maxlength="50" />
-                            <span class="Spam_AST"></span></span>
-                    </td>
-                    <td style="width: 40px; padding-bottom: 25px;">
-                        <span class="cssToolTip">
-                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img1"
-                                src="../../images/error.png" />
-                            <span class="SpamEG"></span></span>
-                    </td>
-                </tr>
-            </table>
-            <table id="Tabla_3" style="width: 100%; margin-left: 100px;">
-                <tr>
-                    <td class="Label_Bold" style="width: 150px;">Tipo de Producto
-                    </td>
-                    <td>
-                        <select id="Select_Tipo_P" class="C_Chosen" style="width: 250px;">
-                        </select>
-                    </td>
-                    <td style="padding-bottom: 25px;">
-                        <span class="cssToolTip">
-                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img2"
-                                src="../../images/error.png" />
-                            <span class="SpamEG"></span></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="Label_Bold">Sub-Tipo de Producto
-                    </td>
-                    <td>
-                        <select id="Select_SubTipo_P" class="C_Chosen" style="width: 200px;">
-                        </select>
-                    </td>
-                    <td style="padding-bottom: 25px; width: 500px"></td>
-                </tr>
-            </table>
-            <!-- --->
-            <table id="Table4" style="width: 100%; margin-left: 100px;">
-                <tr>
-                    <td class="Label_Bold" style="width: 150px;">Causación de Interés Corriente
-                    </td>
-                    <td>
-                        <select id="Select_Caus_Int_Cte" class="C_Chosen" style="width: 250px;">
-                            <option value="-1">Seleccione...</option>
-                            <option value="N">N - Nominal</option>
-                            <option value="E">E - Efectiva</option>
-                        </select>
-                    </td>
-                    <td style="padding-bottom: 25px;">
-                       </td>
-                </tr>
-                <tr>
-                    <td class="Label_Bold">Causación Mora
-                    </td>
-                    <td>
-                        <select id="Select_Caus_Mora" class="C_Chosen" style="width: 200px;">
-                            <option value="-1">Seleccione...</option>
-                            <option value="N">N - Nominal</option>
-                            <option value="E">E - Efectiva</option>
-                        </select>
-                    </td>
-                    <td style="padding-bottom: 25px; width: 500px"></td>
-                </tr>
-                <tr>
-                    <td class="Label_Bold">Base de Mora
-                    </td>
-                    <td>
-                        <select id="Select_Base_Mora" class="C_Chosen" style="width: 200px;">
-                            <option value="-1">Seleccione...</option>
-                            <option value="1">1 - Capital</option>
-                            <option value="2">2 - Interés</option>
-                            <option value="3">3 - Capital + Interés</option>
-                            <option value="4">4 - Capital + Interés + Otros Conceptos</option>
-                        </select>
-                    </td>
-                    <td style="padding-bottom: 25px; width: 500px"></td>
-                </tr>
-                <tr>
-                    <td class="Label_Bold">¿Capitaliza?
-                    </td>
-                    <td>
-                        <select id="Select_Capitalizacion" class="C_Chosen" style="width: 200px;">
-                            <option value="-1">Seleccione...</option>
-                            <option value="S">S - Si</option>
-                            <option value="N">N - No</option>
-                        </select>
-                    </td>
-                    <td style="padding-bottom: 25px; width: 500px"></td>
-                </tr>
-                <tr>
-                    <td class="Label_Bold">¿Control de Activos?
-                    </td>
-                    <td>
-                        <select id="Select_Control_Activos" class="C_Chosen" style="width: 200px;">
-                            <option value="-1">Seleccione...</option>
-                            <option value="S">S - Si</option>
-                            <option value="N">N - No</option>
-                        </select>
-                    </td>
-                    <td style="padding-bottom: 25px; width: 500px"></td>
-                </tr>
-            </table>
-
-        </div>
-        <table id="Blo_Transacciones">
+        <table class="Table_Header_Block">
+            <tr>
+                <td>
+                    <table id="Tabla_1" style="width: 100%; margin-left: 100px;">
+                        <tr>
+                            <td id="TD_ID" style="width: 150px;" class="Label_Bold">Nit Empresa
+                            </td>
+                            <td id="TD_TID">
+                                <select id="Select_EmpresaNit" class="C_Chosen" style="width: 200px;">
+                                </select>
+                            </td>
+                            <td style="width: 550px; padding-bottom: 25px;">
+                                <span class="cssToolTip">
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img3"
+                                        src="../../images/error.png" />
+                                    <span class="SpamEG"></span></span>
+                            </td>
+                        </tr>
+                    </table>
+                    <table id="Tabla_2" style="margin-left: 100px;">
+                        <tr>
+                            <td class="Label_Bold" style="width: 150px;">Codigo
+                            </td>
+                            <td style="width: 100px;">
+                                <span class="cssToolTip_Form">
+                                    <input type="text" id="Txt_ID" maxlength="5" class="Numeric" />
+                                    <span class="Spam_AN"></span></span>
+                            </td>
+                            <td style="width: 40px; padding-bottom: 25px;">
+                                <span class="cssToolTip">
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgID"
+                                        src="../../images/error.png" />
+                                    <span class="SpamEG"></span></span>
+                            </td>
+                            <td class="Label_Bold" style="width: 120px;">Descripción
+                            </td>
+                            <td style="width: 100px;">
+                                <span class="cssToolTip_Form">
+                                    <input type="text" id="TxtDescripcion" maxlength="50" />
+                                    <span class="Spam_AST"></span></span>
+                            </td>
+                            <td style="width: 40px; padding-bottom: 25px;">
+                                <span class="cssToolTip">
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img1"
+                                        src="../../images/error.png" />
+                                    <span class="SpamEG"></span></span>
+                            </td>
+                        </tr>
+                    </table>
+                    <table id="Tabla_3" style="width: 100%; margin-left: 100px;">
+                        <tr>
+                            <td class="Label_Bold" style="width: 150px;">Tipo de Producto
+                            </td>
+                            <td>
+                                <select id="Select_Tipo_P" class="C_Chosen" style="width: 250px;">
+                                </select>
+                            </td>
+                            <td style="padding-bottom: 25px;">
+                                <span class="cssToolTip">
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img2"
+                                        src="../../images/error.png" />
+                                    <span class="SpamEG"></span></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="Label_Bold">Sub-Tipo de Producto
+                            </td>
+                            <td>
+                                <select id="Select_SubTipo_P" class="C_Chosen" style="width: 200px;">
+                                </select>
+                            </td>
+                            <td style="padding-bottom: 25px; width: 500px"></td>
+                        </tr>
+                    </table>
+                    <table id="Table4" style="width: 100%; margin-left: 100px;">
+                        <tr>
+                            <td class="Label_Bold" style="width: 150px;">Causación de Interés Corriente
+                            </td>
+                            <td>
+                                <select id="Select_Caus_Int_Cte" class="C_Chosen" style="width: 250px;">
+                                    <option value="-1">Seleccione...</option>
+                                    <option value="N">N - Nominal</option>
+                                    <option value="E">E - Efectiva</option>
+                                </select>
+                            </td>
+                            <td style="padding-bottom: 25px;"></td>
+                        </tr>
+                        <tr>
+                            <td class="Label_Bold">Causación Mora
+                            </td>
+                            <td>
+                                <select id="Select_Caus_Mora" class="C_Chosen" style="width: 200px;">
+                                    <option value="-1">Seleccione...</option>
+                                    <option value="N">N - Nominal</option>
+                                    <option value="E">E - Efectiva</option>
+                                </select>
+                            </td>
+                            <td style="padding-bottom: 25px; width: 500px"></td>
+                        </tr>
+                        <tr>
+                            <td class="Label_Bold">Base de Mora
+                            </td>
+                            <td>
+                                <select id="Select_Base_Mora" class="C_Chosen" style="width: 200px;">
+                                    <option value="-1">Seleccione...</option>
+                                    <option value="1">1 - Capital</option>
+                                    <option value="2">2 - Interés</option>
+                                    <option value="3">3 - Capital + Interés</option>
+                                    <option value="4">4 - Capital + Interés + Otros Conceptos</option>
+                                </select>
+                            </td>
+                            <td style="padding-bottom: 25px; width: 500px"></td>
+                        </tr>
+                        <tr>
+                            <td class="Label_Bold">¿Capitaliza?
+                            </td>
+                            <td>
+                                <select id="Select_Capitalizacion" class="C_Chosen" style="width: 200px;">
+                                    <option value="-1">Seleccione...</option>
+                                    <option value="S">S - Si</option>
+                                    <option value="N">N - No</option>
+                                </select>
+                            </td>
+                            <td style="padding-bottom: 25px; width: 500px"></td>
+                        </tr>
+                        <tr>
+                            <td class="Label_Bold">¿Control de Activos?
+                            </td>
+                            <td>
+                                <select id="Select_Control_Activos" class="C_Chosen" style="width: 200px;">
+                                    <option value="-1">Seleccione...</option>
+                                    <option value="S">S - Si</option>
+                                    <option value="N">N - No</option>
+                                </select>
+                            </td>
+                            <td style="padding-bottom: 25px; width: 500px"></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <table class="Table_Header_Block">
             <tr>
                 <td colspan="6" align="center" class="Title_Bold">TRANSACCIONES
                 </td>
@@ -281,7 +291,7 @@
                 </td>
             </tr>
         </table>
-        <table id="Blo_Cuentas">
+        <table class="Table_Header_Block">
             <tr>
                 <td colspan="10" align="center" class="Title_Bold">CUENTAS CONTABLES
                 </td>

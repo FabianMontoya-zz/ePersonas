@@ -1,6 +1,7 @@
 ﻿/*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_CargaBusqueda(State) {
+    OpenControl();
     $.ajax({
         url: "CalendarioAjax.aspx",
         type: "POST",
@@ -48,7 +49,40 @@ function transacionAjax_EmpresaNit(State) {
         },
         error: function () {
 
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
+    });
+}
+
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_Calendario(State) {
+    Matrix_Calendarios = [];
+    $.ajax({
+        url: "SucursalServicioAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": State,
+            "tabla": 'CALENDARIOS',
+            "Nit": $("#Select_EmpresaNit").val()
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_Calendarios = [];
+            }
+            else {
+                Matrix_Calendarios = JSON.parse(result);
+            }
+        },
+        error: function () {
+
+        },
+        async: false,
+        cache: false
+    }).done(function () {
+        CargaCalendarios(Matrix_Calendarios, "Select_Calendario", "");
     });
 }
 
@@ -72,7 +106,8 @@ function transacionAjax_Calendario(State, filtro, opcion) {
             "action": State,
             "filtro": filtro,
             "opcion": opcion,
-            "contenido": contenido
+            "contenido": contenido,
+            "Nit_User": g_NitEmpresa_User
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -96,8 +131,6 @@ function transacionAjax_Calendario_create(State) {
 
     var ID;
     var Nit_ID;
-    var CalendarioDepen = 0;
-    var Politica = 0;
 
     if (State == "modificar") {
         Nit_ID = editNit_ID;
@@ -108,6 +141,7 @@ function transacionAjax_Calendario_create(State) {
         ID = $("#Txt_ID").val();
     }
 
+    ListC_Semana = JSON.stringify(ArrayC_Semana);
     $.ajax({
         url: "CalendarioAjax.aspx",
         type: "POST",
@@ -116,8 +150,9 @@ function transacionAjax_Calendario_create(State) {
             "action": State,
             "Nit_ID": Nit_ID,
             "ID": ID,
-            "descripcion": $("#TxtDescription").val(),
+            "Descripcion": $("#TxtDescription").val(),
             "TipoCalendario": $("#Select_TipoCalendario").val(),
+            "List_Semana": ListC_Semana,
             "user": User.toUpperCase()
         },
         //Transaccion Ajax en proceso
@@ -138,11 +173,11 @@ function transacionAjax_Calendario_create(State) {
 
                 case "Exito":
                     if (estado == "modificar") {
-                        Mensaje_General("Exito", "El Calendario fue modificado exitosamente!", "S");
+                        Mensaje_General("Exito", "El Calendario " + ID + " - " + $("#TxtDescription").val() + " fue modificado exitosamente!", "S");
                         Clear();
                     }
                     else {
-                        Mensaje_General("Exito", "El Calendario fue creado exitosamente!", "S");
+                        Mensaje_General("Exito", "El Calendario " + ID + " - " + $("#TxtDescription").val() + " fue creado exitosamente!", "S");
                         Clear();
                     }
                     break;
@@ -167,6 +202,7 @@ function transacionAjax_Calendario_delete(State) {
             "action": State,
             "Nit_ID": editNit_ID,
             "ID": editID,
+            "TipoCalendario": TipoCalendar,
             "user": User
         },
         //Transaccion Ajax en proceso
@@ -174,18 +210,20 @@ function transacionAjax_Calendario_delete(State) {
             switch (result) {
 
                 case "Error":
-                    Mensaje_General("Disculpenos :(", "No se elimino el Calendario!", "E");
                     $("#dialog_eliminar").dialog("close");
+                    Mensaje_General("Disculpenos :(", "Ocurrió un error y no se pudo eliminar el Calendario " + editID + ", por favor intente más tarde.", "E");
+                    
                     break;
 
                 case "Exist_O":
-                    Mensaje_General("Integridad referencial", "No se elimino el Calendario, para eliminarlo debe eliminar primero el registro en la tabla Empleado", "W");
                     $("#dialog_eliminar").dialog("close");
+                    Mensaje_General("Integridad referencial", "No se elimino el Calendario, para eliminarlo debe eliminar primero el registro en la tabla de los días del calendario asignado", "W");
+                    
                     break;
 
                 case "Exito":
                     $("#dialog_eliminar").dialog("close");
-                    Mensaje_General("Exito", "El Calendario fue eliminado exitosamente!", "S");
+                    Mensaje_General("Exito", "El Calendario " + editID + " fue eliminado exitosamente.", "S");
                     transacionAjax_Calendario("consulta", "N", "ALL");
                     Clear();
                     break;

@@ -16,7 +16,7 @@ Public Class IngresoSQLClass
     ''' <remarks></remarks>
     Public Function Read_AllAcceso(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String)
 
-        Dim ObjListAcceso As New List(Of AccesoClass)
+        Dim ObjListAcceso As New List(Of IngresoClass)
         Dim StrQuery As String = ""
         Dim conex As New Conector
         Dim Conexion As String = conex.typeConexion("1")
@@ -106,7 +106,7 @@ Public Class IngresoSQLClass
     ''' <param name="vp_Obj_Acceso"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function InsertAcceso(ByVal vp_Obj_Acceso As AccesoClass)
+    Public Function InsertAcceso(ByVal vp_Obj_Acceso As IngresoClass)
 
         Dim conex As New Conector
         Dim Result As String
@@ -147,7 +147,7 @@ Public Class IngresoSQLClass
     ''' <param name="vp_Obj_Acceso"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function EraseAcceso(ByVal vp_Obj_Acceso As AccesoClass)
+    Public Function EraseAcceso(ByVal vp_Obj_Acceso As IngresoClass)
 
         Dim conex As New Conector
         Dim Result As String = ""
@@ -268,7 +268,7 @@ Public Class IngresoSQLClass
 
         objcmd = objConexBD.CreateCommand
 
-        Dim ObjListAcceso As New List(Of AccesoClass)
+        Dim ObjListAcceso As New List(Of IngresoClass)
 
         'abrimos conexion
         objConexBD.Open()
@@ -283,7 +283,7 @@ Public Class IngresoSQLClass
                 'recorremos la consulta por la cantidad de datos en la BD
                 While ReadConsulta.Read
 
-                    Dim objAcceso As New AccesoClass
+                    Dim objAcceso As New IngresoClass
                     'cargamos datos sobre el objeto de login
                     objAcceso.Nit_ID = ReadConsulta.GetValue(0)
                     objAcceso.PuertaAcceso_ID = ReadConsulta.GetValue(1)
@@ -309,7 +309,7 @@ Public Class IngresoSQLClass
                 'recorremos la consulta por la cantidad de datos en la BD
                 While ReadConsulta.Read
 
-                    Dim objAcceso As New AccesoClass
+                    Dim objAcceso As New IngresoClass
                     'cargamos datos sobre el objeto de login
                     objAcceso.Nit_ID = ReadConsulta.GetValue(0)
                     objAcceso.PuertaAcceso_ID = ReadConsulta.GetValue(1)
@@ -341,7 +341,7 @@ Public Class IngresoSQLClass
     ''' <param name="vp_O_Obj"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Consulta_Repetido(ByVal vp_O_Obj As AccesoClass)
+    Public Function Consulta_Repetido(ByVal vp_O_Obj As IngresoClass)
 
         Dim StrQuery As String = ""
         Dim Result As String = ""
@@ -368,7 +368,7 @@ Public Class IngresoSQLClass
     ''' <remarks></remarks>
     Public Function Matrix_R_PuertaAcceso_Area()
 
-        Dim ObjList As New List(Of AccesoClass)
+        Dim ObjList As New List(Of IngresoClass)
         Dim conex As New Conector
         Dim Conexion As String = conex.typeConexion("1")
         Dim BD_Param As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDParam").ToString

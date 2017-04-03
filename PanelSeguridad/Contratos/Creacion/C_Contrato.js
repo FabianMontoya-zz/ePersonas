@@ -52,18 +52,16 @@ var ContTerceros = 0;
 
 //Evento load JS
 $(document).ready(function () {
+   
     /*Funciones para configuración inicial de campos en vista*/
     VentanasEmergentes();
-
     Ocultar_IMGS_Errores();
     Picker_Fechas();
     CargarAcordeons();
     AgregarTablas();
-    /*=====================================*/
-
-    $("#Marco_trabajo_Contrato").css("height", "440px");
-    $("#Marco_trabajo_Contrato").css("width", "95%");
-
+    /*================== END =========================*/
+      
+    /*Llamado de transacciones AJAX iniciales*/
     transacionAjax_EmpresaNit('Cliente');
     transacionAjax_Documento('Documento');
     transacionAjax_MMoneda('MATRIX_MONEDA');
@@ -72,10 +70,14 @@ $(document).ready(function () {
     transacionAjax_Productos('MATRIX_PRODUCTOS');
     transacionAjax_Financiacion('MATRIX_FINANCIACION');
     transaccionAjax_MTasas('MATRIX_TASAS');
+    /*=============== END ====================*/
 
+    var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
 
+    if (OnlyEmpresa == true) {
+        TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+    }
 
-    $("#Select_Base_Calculo").prop('disabled', true); //Desactivamos el Chosen
 
     /*Carga de todas las funciones para detectar el Change en los Combos y formatos en los TXT*/
     Change_Select_Nit();
@@ -91,13 +93,14 @@ $(document).ready(function () {
     Change_Select_Signo_Puntos();
 
     Change_Select_Base_Calculo();
+    /*================ END ==================*/
 
     Format_Adress("Txt_Adress_C");
     Restric_long_decimal("TXT_Puntos_Adicionales");
     ReCalcularTasas("TXT_Puntos_Adicionales");
     Date_Document();
     Date_Document2();
-
+    $("#Select_Base_Calculo").prop('disabled', true); //Desactivamos el Chosen
 });
 
 //Ocultamos las imagenes de error al iniciar la pantalla
@@ -205,8 +208,8 @@ function VentanasEmergentes() {
         autoOpen: false,
         dialogClass: "Dialog_Sasif",
         modal: true,
-        width: 760,
-        height: 480,
+        width: 900,
+        height: 400,
         overlay: {
             opacity: 0.5,
             background: "black"
@@ -219,17 +222,6 @@ function Picker_Fechas() {
     $("#TXT_Fecha_Apertura").datepicker({ dateFormat: 'yy-mm-dd', changeYear: true, changeMonth: true }); //Inicializa Datapicker
     $("#TXT_Fecha_Apertura").datepicker("option", "yearRange", "-99:+0"); //Rango años hacia atras (-99)
     $("#TXT_Fecha_Apertura").datepicker("option", "maxDate", "+0m +0d"); //Rango días (Llega hasta el actual y bloquea los futuros)
-    //$("#TXT_Fecha_Activacion").datepicker({ dateFormat: 'yy-mm-dd'});
-    //$("#TXT_Fecha_Finalizacion").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 }); //Bloquea las fechas pasadas, solo fechas futuras
-    //$("#TXT_Fecha_Cancelacion").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 });
-    //$("#TXT_Fecha_Ult_Causacion").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 });
-    //$("#TXT_Fecha_Ult_Factura").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 });
-    //$("#TXT_Fecha_Prox_Factura").datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 });
-}
-
-//salida del formulario
-function btnSalir() {
-    window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
 }
 
 //Captura el evento de cambio y vuelve a calcular las nuevas TE y TN
@@ -428,23 +420,23 @@ function Change_Select_Nit() {
             $("#Img1").css("display", "none");
             $("#Select_EmpresaNit").prop('disabled', true); //Desactivamos el Chosen
         }
-        index_NIT_ID = this.value;
+        index = this.value;
+        TransaccionesSegunNIT(index);        
+    });
+}
+
+//Carga los combos relacionados a Select_Nit
+function TransaccionesSegunNIT(index_NIT_ID) {
+    if (index_NIT_ID != "-1") {
         Charge_Combos_Depend_Nit(Matrix_Sucursal, "Select_Sucursal_C", index_NIT_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Productos, "Select_Producto", index_NIT_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Financiacion, "Select_Condicion_Financiacion", index_NIT_ID, "");
 
         /*Para Activos*/
-
         Charge_Combos_Depend_Nit(Matrix_Sucursal, "Select_Sucursal", index_NIT_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Personas, "Select_Persona_A", index_NIT_ID, "");
-        /*============*/
-
-        /*Escritura de L_Mora_ID y L_Mora_Magnitud*/
-        TasaMora();
-
-        /*Escritura de L_Usura_ID y L_Usura_Magnitud*/
-        TasaUsura();
-    });
+        /*============*/        
+    }
 }
 
 function Change_Select_Sucursal() {
@@ -709,7 +701,11 @@ function Change_Select_Condicion_Financiacion() {
         /*Escritura L_Periodo*/
         $("#L_Periodo").html(Periodo_Tasa(indexTasa)); /*Mandamos el indice de la matriz de tasas y traemos el Periodo armado*/
 
+        /*Escritura de L_Mora_ID y L_Mora_Magnitud*/
+        TasaMora();
 
+        /*Escritura de L_Usura_ID y L_Usura_Magnitud*/
+        TasaUsura();
 
     });
 }
@@ -1065,6 +1061,15 @@ function Clear() {
     Persona1 = false;
     Persona2 = false;
     ArrayTodasFacturas = [];
+
+
+    var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+    if (OnlyEmpresa == true) {
+        TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+    }
+
+
 }
 
 function Add_Activos(index) {
@@ -1082,7 +1087,7 @@ function Add_Terceros(index) {
 
     $("#Dialog_Terceros").dialog("open");
     $("#Dialog_Terceros").dialog("option", "title", "Agregar Persona");
-    
+
     ClearTerceros();
     Table_Terceros();
 }
@@ -1223,7 +1228,7 @@ function ConsultaRepetido() {
 }
 
 function Table_Activos() {
-    $("#container_TActivos").html("");
+    $(".container_TGrids").html("");
     Cargar_Variables(); /*C_Contrato_Activos.js*/
 }
 

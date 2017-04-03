@@ -19,9 +19,18 @@
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Dialog/datepicker.js" type="text/javascript"></script>
     <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
-    <div id="Container_title_Form">
+    <div id="Dialog_Control" style="width: 100%; text-align: center;">
+        <div class="cssload-container" style="margin-top: 25%;">
+            <div class="cssload-whirlpool"></div>
+            <div>
+                <img id="Sasif" class="Logo_3" src="../../images/SASIF_NEW_WHITE.png" alt="SASIF S.A.S." />
+            </div>
+        </div>
+    </div>
+    <div class="Container_title_Form">
         <table id="Tabla_Title_form">
             <tr>
                 <td id="Title_form"></td>
@@ -32,19 +41,24 @@
             </tr>
         </table>
     </div>
-    <div id="Marco_Container">
-        <div id="Marco_trabajo_Form">
-            <div id="Container_controls">
-                <div id="TablaDatos_D">
+    <div class="Marco_Container">
+        <div class="Marco_trabajo_Form">
+            <div class="Container_controls">
+                <div class="Dialog_Datos">
                     <table id="Tabla_1" style="width: 700px; text-align: left;">
                         <tr>
-                            <td style="width: 150px;" class="Label_Bold">Multi - Empresa
+                            <td style="width: 150px;" class="Label_Bold">NIT Empresa
                             </td>
                             <td>
                                 <select id="Select_EmpresaNit" class="C_Chosen">
                                 </select>
                             </td>
-                            <td style="padding-bottom: 25px; width: 250px;"></td>
+                            <td style="padding-bottom: 25px; width: 250px;">
+                                <span class="cssToolTip">
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img5"
+                                        src="../../images/error.png" />
+                                    <span class="SpamEG"></span></span>
+                            </td>
                         </tr>
                     </table>
                     <table id="Tabla_2" style="width: 700px; text-align: left;">
@@ -187,7 +201,7 @@
                 </td>
             </tr>
         </table>
-        <div id="container_Autorizacion">
+        <div class="container_TGrid_Create">
         </div>
         <div id="Dialog_Visor_View_Validacion" style="text-align: center;">
             <table style="width: 100%; height: 400px;">
@@ -511,7 +525,7 @@
                 </td>
             </tr>
         </table>
-        <div id="container_TDoc_H" style="margin-top: 10px; margin-bottom: 10px;">
+        <div class="container_TGrid_Compact">
         </div>
         <div id="D_Controls" style="text-align: center; width: 100%;">
             <table id="Controls">

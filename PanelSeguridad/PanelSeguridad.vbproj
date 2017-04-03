@@ -13,13 +13,14 @@
     <OutputType>Library</OutputType>
     <RootNamespace>PanelSeguridad</RootNamespace>
     <AssemblyName>PanelSeguridad</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MyType>Custom</MyType>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -29,6 +30,9 @@
     <OutputPath>bin\</OutputPath>
     <DocumentationFile>PanelSeguridad.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <IncludeIisSettings>false</IncludeIisSettings>
+    <FilesToIncludeForPublish>OnlyFilesToRunTheApp</FilesToIncludeForPublish>
+    <PublishDatabases>false</PublishDatabases>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -40,6 +44,31 @@
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DPFPDevNET, Version=1.6.1.0, Culture=neutral, PublicKeyToken=696774c42ee28c57, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Windows\assembly\GAC_MSIL\DPFPDevNET\1.6.1.0__696774c42ee28c57\DPFPDevNET.dll</HintPath>
+    </Reference>
+    <Reference Include="DPFPEngNET, Version=1.6.1.0, Culture=neutral, PublicKeyToken=7fe76e7adf19964b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Windows\assembly\GAC_MSIL\DPFPEngNET\1.6.1.0__7fe76e7adf19964b\DPFPEngNET.dll</HintPath>
+    </Reference>
+    <Reference Include="DPFPGuiNet, Version=1.6.1.0, Culture=neutral, PublicKeyToken=d4f4a0bd9c559145, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Windows\assembly\GAC_MSIL\DPFPGuiNET\1.6.1.0__d4f4a0bd9c559145\DPFPGuiNet.dll</HintPath>
+    </Reference>
+    <Reference Include="DPFPShrNET, Version=1.6.1.0, Culture=neutral, PublicKeyToken=d902fe275a8d6cf2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Windows\assembly\GAC_MSIL\DPFPShrNET\1.6.1.0__d902fe275a8d6cf2\DPFPShrNET.dll</HintPath>
+    </Reference>
+    <Reference Include="DPFPShrXTypeLibNET, Version=1.6.1.0, Culture=neutral, PublicKeyToken=c0c98f712d5392a7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>C:\Windows\assembly\GAC_MSIL\DPFPShrXTypeLibNET\1.6.1.0__c0c98f712d5392a7\DPFPShrXTypeLibNET.dll</HintPath>
+    </Reference>
+    <Reference Include="DPFPVerNET, Version=1.6.1.0, Culture=neutral, PublicKeyToken=4de0a9c4dcc83984, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Windows\assembly\GAC_MSIL\DPFPVerNET\1.6.1.0__4de0a9c4dcc83984\DPFPVerNET.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Newtonsoft.Json.dll</HintPath>
@@ -48,12 +77,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Core" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Runtime.Serialization.Json" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
@@ -219,6 +244,16 @@
     <Content Include="Administrador\menu.js" />
     <Content Include="Administrador\SasifMaster_Cosult.js" />
     <Content Include="AdmonActivos.Publish.xml" />
+    <Content Include="Agendamiento\menu.js" />
+    <Content Include="Agendamiento\SasifMaster_Cosult.js" />
+    <Content Include="Agendamiento\SucursalServicio\SucursalServicio.aspx" />
+    <Content Include="Agendamiento\SucursalServicio\SucursalServicio.js" />
+    <Content Include="Agendamiento\SucursalServicio\SucursalServicioAjax.aspx" />
+    <Content Include="Agendamiento\SucursalServicio\SucursalServicioTransaccionsAjax.js" />
+    <Content Include="Agendamiento\TipoServicio\TipoServicio.aspx" />
+    <Content Include="Agendamiento\TipoServicio\TipoServicio.js" />
+    <Content Include="Agendamiento\TipoServicio\TipoServicioTransaccionsAjax.js" />
+    <Content Include="Agendamiento\TipoServicio\TipoServicioAjax.aspx" />
     <Content Include="Contratos\Creacion\C_Contrato.aspx" />
     <Content Include="Contratos\Creacion\C_Contrato.js" />
     <Content Include="Contratos\Creacion\C_ContratoAjax.aspx" />
@@ -281,20 +316,6 @@
     <Content Include="css\icons\folder.png" />
     <Content Include="css\icons\right1.png" />
     <Content Include="css\PIE.htc" />
-    <Content Include="css\theme_blue_Sky\images\active.png" />
-    <Content Include="css\theme_blue_Sky\images\default.png" />
-    <Content Include="css\theme_blue_Sky\images\header.png" />
-    <Content Include="css\theme_blue_Sky\images\ui-bg_diagonals-thick_90_eeeeee_40x40.png" />
-    <Content Include="css\theme_blue_Sky\images\ui-bg_flat_15_cd0a0a_40x100.png" />
-    <Content Include="css\theme_blue_Sky\images\ui-bg_highlight-hard_100_f2f5f7_1x100.png" />
-    <Content Include="css\theme_blue_Sky\images\ui-bg_highlight-hard_70_000000_1x100.png" />
-    <Content Include="css\theme_blue_Sky\images\ui-bg_highlight-soft_100_deedf7_1x100.png" />
-    <Content Include="css\theme_blue_Sky\images\ui-bg_highlight-soft_25_ffef8f_1x100.png" />
-    <Content Include="css\theme_blue_Sky\images\ui-icons_2e83ff_256x240.png" />
-    <Content Include="css\theme_blue_Sky\images\ui-icons_3d80b3_256x240.png" />
-    <Content Include="css\theme_blue_Sky\images\ui-icons_72a7cf_256x240.png" />
-    <Content Include="css\theme_blue_Sky\images\ui-icons_ffffff_256x240.png" />
-    <Content Include="css\theme_blue_Sky\theme.css" />
     <Content Include="Documentos\AutorizacionDocumentos\AutorizacionDocumentos.aspx" />
     <Content Include="Documentos\AutorizacionDocumentos\AutorizacionDocumentos.js" />
     <Content Include="Documentos\AutorizacionDocumentos\AutorizacionDocumentosAjax.aspx" />
@@ -333,28 +354,49 @@
     <Content Include="Documentos\SasifMaster_Cosult.js" />
     <Content Include="Factura\menu.js" />
     <Content Include="Factura\SasifMaster_Cosult.js" />
+    <Content Include="Files_Dowload\DowloadEnroller.aspx" />
+    <Content Include="Files_Dowload\EnrollerSetup.exe" />
     <Content Include="Global.asax" />
+    <Content Include="Huellas\Creacion\Huellas.aspx" />
+    <Content Include="Huellas\Creacion\Huellas.js" />
+    <Content Include="Huellas\Creacion\HuellasAjax.aspx" />
+    <Content Include="Huellas\Creacion\HuellasTrasaccionsAjax.js" />
+    <Content Include="Huellas\menu.js" />
+    <Content Include="Huellas\SasifMaster_Cosult.js" />
     <Content Include="Images\add.png" />
     <Content Include="Images\adress_book.png" />
     <Content Include="Images\adress_book_w.png" />
     <Content Include="Images\agenda.png" />
-    <Content Include="Images\agenda_white.png" />
+    <Content Include="Images\agenda_gray.png" />
     <Content Include="Images\alert.png" />
     <Content Include="Images\avatar.png" />
     <Content Include="Images\bank.png" />
     <Content Include="Images\bank_w.png" />
+    <Content Include="Images\Cliente_Gray.png" />
+    <Content Include="Images\Cliente_Red.png" />
     <Content Include="Images\C_GREEN.png" />
     <Content Include="Images\C_RED.png" />
     <Content Include="Images\C_YELLOW.png" />
+    <Content Include="Images\Delete.png" />
+    <Content Include="Images\DeleteOver.png" />
     <Content Include="Images\documentos.png" />
     <Content Include="Images\documentos_w.png" />
+    <Content Include="Images\Editar1.png" />
+    <Content Include="Images\EditarOver.png" />
     <Content Include="Images\error.png" />
     <Content Include="Images\error_2.png" />
-    <Content Include="Images\exit.png" />
+    <Content Include="Images\Folder_Gray.png" />
+    <Content Include="Images\Folder_Red.png" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\logo_2.png" />
     <Content Include="Images\LOOK_BLACK.png" />
     <Content Include="Images\LOOK_WHITE.png" />
+    <Content Include="Images\manos_dedos.png" />
+    <Content Include="Images\Menu_Gray.png" />
+    <Content Include="Images\Menu_Red.png" />
+    <Content Include="Images\Menu_White.png" />
+    <Content Include="Images\N_Search_Black.png" />
+    <Content Include="Images\N_Search_Red.png" />
     <Content Include="Images\old\add.png" />
     <Content Include="Images\old\adress_book.png" />
     <Content Include="Images\old\alert.png" />
@@ -380,17 +422,33 @@
     <Content Include="Images\old\success.png" />
     <Content Include="Images\old\user.png" />
     <Content Include="Images\old\validation.png" />
-    <Content Include="Images\relations.png" />
+    <Content Include="Images\Phone_Gray.png" />
+    <Content Include="Images\Phone_Red.png" />
+    <Content Include="Images\question.png" />
+    <Content Include="Images\Relations.gif" />
+    <Content Include="Images\Relation_Gray.png" />
+    <Content Include="Images\Relation_Red.png" />
     <Content Include="Images\SASIF_NEW.png" />
     <Content Include="Images\SASIF_NEW_WHITE.png" />
+    <Content Include="Images\search.png" />
+    <Content Include="Images\settings.png" />
     <Content Include="Images\success.png" />
-    <Content Include="Ingreso\Acceso\Acceso.aspx" />
-    <Content Include="Ingreso\Acceso\Acceso.js" />
-    <Content Include="Ingreso\Acceso\AccesoAjax.aspx" />
-    <Content Include="Ingreso\Acceso\AccesoTrasaccionsAjax.js" />
-    <Content Include="Ingreso\Acceso\Acceso_Tarjeta.js" />
-    <Content Include="Ingreso\menu.js" />
-    <Content Include="Ingreso\SasifMaster_Cosult.js" />
+    <Content Include="Images\waiting.png" />
+    <Content Include="Impuestos\Impuesto_Gasto\Impuesto_Gasto.aspx" />
+    <Content Include="Impuestos\Impuesto_Gasto\Impuesto_Gasto.js" />
+    <Content Include="Impuestos\Impuesto_Gasto\Impuesto_GastoAjax.aspx" />
+    <Content Include="Impuestos\Impuesto_Gasto\Impuesto_GastoTrasaccionsAjax.js" />
+    <Content Include="Impuestos\Inf_Impuesto\Inf_Impuesto.aspx" />
+    <Content Include="Impuestos\Inf_Impuesto\Inf_Impuesto.js" />
+    <Content Include="Impuestos\Inf_Impuesto\Inf_ImpuestoAjax.aspx" />
+    <Content Include="Impuestos\Inf_Impuesto\Inf_ImpuestoTrasaccionsAjax.js" />
+    <Content Include="Impuestos\Inf_Impuesto\Inf_Impuesto_Cliente.js" />
+    <Content Include="Impuestos\menu.js" />
+    <Content Include="Impuestos\Porcen_Descuentos\Porcen_Descuentos.aspx" />
+    <Content Include="Impuestos\Porcen_Descuentos\Porcen_DescuentosAjax.aspx" />
+    <Content Include="Impuestos\Porcen_Descuentos\Porcen_DescuentosTrasaccionsAjax_New.js" />
+    <Content Include="Impuestos\Porcen_Descuentos\Porcen_Descuentos_New.js" />
+    <Content Include="Impuestos\SasifMaster_Cosult.js" />
     <Content Include="Ingreso_New\Entrada\Ingreso.aspx" />
     <Content Include="Ingreso_New\Entrada\Ingreso.js" />
     <Content Include="Ingreso_New\Entrada\IngresoAjax.aspx" />
@@ -409,28 +467,8 @@
     <Content Include="login\Login.aspx" />
     <Content Include="login\Login.js" />
     <Content Include="login\LoginAjax.aspx" />
+    <Content Include="login\LoginTransaccionsAjax.js" />
     <Content Include="Master\Sasif_Ing.js" />
-    <Content Include="McCain\Image\activo.png" />
-    <Content Include="McCain\Image\alert.png" />
-    <Content Include="McCain\Image\cabeza2.jpg" />
-    <Content Include="McCain\Image\error.png" />
-    <Content Include="McCain\Image\inactivo.png" />
-    <Content Include="McCain\Image\McCain.png" />
-    <Content Include="McCain\Image\MEN.jpg" />
-    <Content Include="McCain\Image\menu3.jpg" />
-    <Content Include="McCain\Image\sasif1.gif" />
-    <Content Include="McCain\Image\ver.png" />
-    <Content Include="McCain\Image\WOMEN.jpg" />
-    <Content Include="McCain\MCcain.html" />
-    <Content Include="McCain\Script\jquery-1.4.1.js" />
-    <Content Include="McCain\Script\jquery-ui-1.10.4.custom.js" />
-    <Content Include="McCain\Script\jquery.dataTables.min.js" />
-    <Content Include="McCain\Script\jquery.min.js" />
-    <Content Include="McCain\Script\McCain.js" />
-    <Content Include="McCain\Script\SasifMaster.js" />
-    <Content Include="McCain\Style\css_controles.css" />
-    <Content Include="McCain\Style\css_master.css" />
-    <Content Include="McCain\Style\jquery-ui-1.10.4.custom.css" />
     <Content Include="Menu\menu.aspx" />
     <Content Include="Menu\menu.js" />
     <Content Include="Menu\menuAjax.aspx" />
@@ -452,6 +490,10 @@
     <Content Include="Parametros\Cargo\Cargo.js" />
     <Content Include="Parametros\Cargo\CargoAjax.aspx" />
     <Content Include="Parametros\Cargo\CargoTrasaccionsAjax.js" />
+    <Content Include="Parametros\Ciclo\Ciclo.aspx" />
+    <Content Include="Parametros\Ciclo\Ciclo.js" />
+    <Content Include="Parametros\Ciclo\CicloAjax.aspx" />
+    <Content Include="Parametros\Ciclo\CicloTrasaccionsAjax.js" />
     <Content Include="Parametros\Ciudades\Ciudades.aspx" />
     <Content Include="Parametros\Ciudades\Ciudades.js" />
     <Content Include="Parametros\Ciudades\CiudadesAjax.aspx" />
@@ -461,7 +503,6 @@
     <Content Include="Parametros\Cliente\ClienteAjax.aspx" />
     <Content Include="Parametros\Cliente\ClienteTrasaccionsAjax.js" />
     <Content Include="Parametros\Cliente\Cliente_Direccion.js" />
-    <Content Include="Parametros\Cliente\Cliente_DocAutorizado.js" />
     <Content Include="Parametros\Cliente\Cliente_Documento.js" />
     <Content Include="Parametros\Cliente\Cliente_EntFinan.js" />
     <Content Include="Parametros\Cliente\Cliente_Matrix.js" />
@@ -474,14 +515,6 @@
     <Content Include="Parametros\Festivos\Festivos.js" />
     <Content Include="Parametros\Festivos\FestivosAjax.aspx" />
     <Content Include="Parametros\Festivos\FestivosTrasaccionsAjax.js" />
-    <Content Include="Parametros\Impuesto_Gasto\Impuesto_Gasto.aspx" />
-    <Content Include="Parametros\Impuesto_Gasto\Impuesto_Gasto.js" />
-    <Content Include="Parametros\Impuesto_Gasto\Impuesto_GastoAjax.aspx" />
-    <Content Include="Parametros\Impuesto_Gasto\Impuesto_GastoTrasaccionsAjax.js" />
-    <Content Include="Parametros\Inf_Impuesto\Inf_Impuesto.aspx" />
-    <Content Include="Parametros\Inf_Impuesto\Inf_Impuesto.js" />
-    <Content Include="Parametros\Inf_Impuesto\Inf_ImpuestoAjax.aspx" />
-    <Content Include="Parametros\Inf_Impuesto\Inf_ImpuestoTrasaccionsAjax.js" />
     <Content Include="Parametros\Mensajes\Mensajes.aspx" />
     <Content Include="Parametros\Mensajes\Mensajes.js" />
     <Content Include="Parametros\Mensajes\MensajesAjax.aspx" />
@@ -499,10 +532,6 @@
     <Content Include="Parametros\Paises\Paises.js" />
     <Content Include="Parametros\Paises\PaisesAjax.aspx" />
     <Content Include="Parametros\Paises\PaisesTrasaccionsAjax.js" />
-    <Content Include="Parametros\Porcen_Descuentos\Porcen_Descuentos.aspx" />
-    <Content Include="Parametros\Porcen_Descuentos\Porcen_Descuentos.js" />
-    <Content Include="Parametros\Porcen_Descuentos\Porcen_DescuentosAjax.aspx" />
-    <Content Include="Parametros\Porcen_Descuentos\Porcen_DescuentosTrasaccionsAjax.js" />
     <Content Include="Parametros\Productos\Productos.aspx" />
     <Content Include="Parametros\Productos\Productos.js" />
     <Content Include="Parametros\Productos\ProductosAjax.aspx" />
@@ -524,6 +553,10 @@
     <Content Include="Parametros\SubTipoProduct_Leasing\SubTipoProduct_Leasing.js" />
     <Content Include="Parametros\SubTipoProduct_Leasing\SubTipoProduct_LeasingAjax.aspx" />
     <Content Include="Parametros\SubTipoProduct_Leasing\SubTipoProduct_LeasingTrasaccionsAjax.js" />
+    <Content Include="Parametros\Sucursal\Sucursal.aspx" />
+    <Content Include="Parametros\Sucursal\Sucursal.js" />
+    <Content Include="Parametros\Sucursal\SucursalAjax.aspx" />
+    <Content Include="Parametros\Sucursal\SucursalTrasaccionsAjax.js" />
     <Content Include="Parametros\TipoActivo\TipoActivo.aspx" />
     <Content Include="Parametros\TipoActivo\TipoActivo.js" />
     <Content Include="Parametros\TipoActivo\TipoActivoAjax.aspx" />
@@ -552,6 +585,9 @@
     <Content Include="Activos\Sasif_menu.Master" />
     <Content Include="Factura\Sasif_menu.Master" />
     <Content Include="Ingreso_New\Sasif_menu.Master" />
+    <Content Include="Agendamiento\Sasif_menu.Master" />
+    <Content Include="Huellas\Sasif_menu.Master" />
+    <Content Include="Impuestos\Sasif_menu.Master" />
     <None Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
@@ -584,15 +620,13 @@
     <Content Include="Scripts\WebForms\WebForms.js" />
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\Thumbs.db" />
-    <Content Include="Ingreso\Sasif_menu.Master" />
     <Content Include="Master\Sasif_Ing.Master" />
-    <Content Include="McCain\Image\Cedula.pdf" />
-    <Content Include="McCain\Image\PasadoJudicial.pdf" />
-    <Content Include="McCain\Image\Thumbs.db" />
     <Content Include="Menu\Sasif_menu.Master" />
     <Content Include="Parametros\Sasif_menu.Master" />
     <Content Include="Administrador\Sasif_menu.Master" />
@@ -600,7 +634,6 @@
     <Content Include="css\Chosen\Thumbs.db" />
     <Content Include="css\datatables\images\Sorting icons.psd" />
     <Content Include="css\datatables\images\Thumbs.db" />
-    <Content Include="css\theme_blue_Sky\images\Thumbs.db" />
     <Content Include="Documentos\Sasif_menu.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -644,6 +677,10 @@
     </Compile>
     <Compile Include="Administrador\Adm_C_AccesoPrede\C_AccesoPreClass.vb" />
     <Compile Include="Administrador\Adm_C_AccesoPrede\C_AccesoPreSQLClass.vb" />
+    <Compile Include="Administrador\Adm_Grupo_Documentos\Adm_Grupo_DocumentosClass.vb" />
+    <Compile Include="Administrador\Adm_Grupo_Documentos\Adm_Grupo_DocumentosSQLClass.vb" />
+    <Compile Include="Administrador\Adm_Grupo_Reportes\Adm_Grupo_ReportesClass.vb" />
+    <Compile Include="Administrador\Adm_Grupo_Reportes\Adm_Grupo_ReportesSQLClass.vb" />
     <Compile Include="Administrador\Adm_InvPuerta\InvPuerta.aspx.designer.vb">
       <DependentUpon>InvPuerta.aspx</DependentUpon>
     </Compile>
@@ -692,6 +729,8 @@
     </Compile>
     <Compile Include="Administrador\Adm_opcrol\Adm_OpcRolClass.vb" />
     <Compile Include="Administrador\Adm_opcrol\Adm_OpcRolSQLClass.vb" />
+    <Compile Include="Administrador\Adm_Politicas_Seguridad\Adm_Politicas_SeguridadClass.vb" />
+    <Compile Include="Administrador\Adm_Politicas_Seguridad\Adm_Politicas_SeguridadSQLClass.vb" />
     <Compile Include="Administrador\Adm_PuertaAcceso\PuertaAcceso.aspx.designer.vb">
       <DependentUpon>PuertaAcceso.aspx</DependentUpon>
     </Compile>
@@ -814,6 +853,40 @@
     </Compile>
     <Compile Include="Administrador\Adm_Usuario\Adm_UsuarioClass.vb" />
     <Compile Include="Administrador\Adm_Usuario\Adm_UsuarioSQLClass.vb" />
+    <Compile Include="Agendamiento\CalendarioSemana\CalendarioSemanaClass.vb" />
+    <Compile Include="Agendamiento\CalendarioSemana\CalendarioSemanaSQLClass.vb" />
+    <Compile Include="Agendamiento\SucursalServicio\SucursalServicio.aspx.designer.vb">
+      <DependentUpon>SucursalServicio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Agendamiento\SucursalServicio\SucursalServicio.aspx.vb">
+      <DependentUpon>SucursalServicio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Agendamiento\SucursalServicio\SucursalServicioAjax.aspx.designer.vb">
+      <DependentUpon>SucursalServicioAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Agendamiento\SucursalServicio\SucursalServicioAjax.aspx.vb">
+      <DependentUpon>SucursalServicioAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Agendamiento\SucursalServicio\SucursalServicioClass.vb" />
+    <Compile Include="Agendamiento\SucursalServicio\SucursalServicioSQLClass.vb" />
+    <Compile Include="Agendamiento\TipoServicio\TipoServicio.aspx.designer.vb">
+      <DependentUpon>TipoServicio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Agendamiento\TipoServicio\TipoServicio.aspx.vb">
+      <DependentUpon>TipoServicio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Agendamiento\TipoServicio\TipoServicioAjax.aspx.designer.vb">
+      <DependentUpon>TipoServicioAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Agendamiento\TipoServicio\TipoServicioAjax.aspx.vb">
+      <DependentUpon>TipoServicioAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Agendamiento\TipoServicio\TipoServicioClass.vb" />
+    <Compile Include="Agendamiento\TipoServicio\TipoServicioSQLClass.vb" />
     <Compile Include="conexion_BD\Conector.vb" />
     <Compile Include="Contratos\Creacion\C_Contrato.aspx.designer.vb">
       <DependentUpon>C_Contrato.aspx</DependentUpon>
@@ -973,25 +1046,81 @@
     <Compile Include="encriptracion\EncriptarClass.vb" />
     <Compile Include="Factura\Creacion\FacturaClass.vb" />
     <Compile Include="Factura\Creacion\FacturaSQLClass.vb" />
+    <Compile Include="Files_Dowload\DowloadEnroller.aspx.designer.vb">
+      <DependentUpon>DowloadEnroller.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Files_Dowload\DowloadEnroller.aspx.vb">
+      <DependentUpon>DowloadEnroller.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Files_Dowload\File_DowloadClass.vb" />
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Ingreso\Acceso\Acceso.aspx.designer.vb">
-      <DependentUpon>Acceso.aspx</DependentUpon>
+    <Compile Include="Huellas\Creacion\Huellas.aspx.designer.vb">
+      <DependentUpon>Huellas.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Ingreso\Acceso\Acceso.aspx.vb">
-      <DependentUpon>Acceso.aspx</DependentUpon>
+    <Compile Include="Huellas\Creacion\Huellas.aspx.vb">
+      <DependentUpon>Huellas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Ingreso\Acceso\AccesoAjax.aspx.designer.vb">
-      <DependentUpon>AccesoAjax.aspx</DependentUpon>
+    <Compile Include="Huellas\Creacion\HuellasAjax.aspx.designer.vb">
+      <DependentUpon>HuellasAjax.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Ingreso\Acceso\AccesoAjax.aspx.vb">
-      <DependentUpon>AccesoAjax.aspx</DependentUpon>
+    <Compile Include="Huellas\Creacion\HuellasAjax.aspx.vb">
+      <DependentUpon>HuellasAjax.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Ingreso\Acceso\AccesoClass.vb" />
-    <Compile Include="Ingreso\Acceso\AccesoSQLClass.vb" />
+    <Compile Include="Huellas\Creacion\HuellasClass.vb" />
+    <Compile Include="Huellas\Creacion\HuellasSQLClass.vb" />
+    <Compile Include="Impuestos\Impuesto_Gasto\Impuesto_Gasto.aspx.designer.vb">
+      <DependentUpon>Impuesto_Gasto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Impuestos\Impuesto_Gasto\Impuesto_Gasto.aspx.vb">
+      <DependentUpon>Impuesto_Gasto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Impuestos\Impuesto_Gasto\Impuesto_GastoAjax.aspx.designer.vb">
+      <DependentUpon>Impuesto_GastoAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Impuestos\Impuesto_Gasto\Impuesto_GastoAjax.aspx.vb">
+      <DependentUpon>Impuesto_GastoAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Impuestos\Impuesto_Gasto\Impuesto_GastoClass.vb" />
+    <Compile Include="Impuestos\Impuesto_Gasto\Impuesto_GastoSQLClass.vb" />
+    <Compile Include="Impuestos\Inf_Impuesto\Inf_Impuesto.aspx.designer.vb">
+      <DependentUpon>Inf_Impuesto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Impuestos\Inf_Impuesto\Inf_Impuesto.aspx.vb">
+      <DependentUpon>Inf_Impuesto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Impuestos\Inf_Impuesto\Inf_ImpuestoAjax.aspx.designer.vb">
+      <DependentUpon>Inf_ImpuestoAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Impuestos\Inf_Impuesto\Inf_ImpuestoAjax.aspx.vb">
+      <DependentUpon>Inf_ImpuestoAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Impuestos\Inf_Impuesto\Inf_ImpuestoClass.vb" />
+    <Compile Include="Impuestos\Inf_Impuesto\Inf_ImpuestoSQLClass.vb" />
+    <Compile Include="Impuestos\Porcen_Descuentos\Porcen_Descuentos.aspx.designer.vb">
+      <DependentUpon>Porcen_Descuentos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Impuestos\Porcen_Descuentos\Porcen_Descuentos.aspx.vb">
+      <DependentUpon>Porcen_Descuentos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Impuestos\Porcen_Descuentos\Porcen_DescuentosAjax.aspx.designer.vb">
+      <DependentUpon>Porcen_DescuentosAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Impuestos\Porcen_Descuentos\Porcen_DescuentosAjax.aspx.vb">
+      <DependentUpon>Porcen_DescuentosAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Impuestos\Porcen_Descuentos\Porcen_DescuentosClass.vb" />
+    <Compile Include="Impuestos\Porcen_Descuentos\Porcen_DescuentosSQLClass.vb" />
     <Compile Include="Ingreso_New\ControlAcceso\ControlAccesoClass.vb" />
     <Compile Include="Ingreso_New\ControlAcceso\ControlAccesoSQLClass.vb" />
     <Compile Include="Ingreso_New\Entrada\Ingreso.aspx.designer.vb">
@@ -1166,6 +1295,20 @@
     </Compile>
     <Compile Include="Parametros\Cargo\CargoClass.vb" />
     <Compile Include="Parametros\Cargo\CargoSQLClass.vb" />
+    <Compile Include="Parametros\Ciclo\Ciclo.aspx.designer.vb">
+      <DependentUpon>Ciclo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Ciclo\Ciclo.aspx.vb">
+      <DependentUpon>Ciclo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Ciclo\CicloAjax.aspx.designer.vb">
+      <DependentUpon>CicloAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Ciclo\CicloAjax.aspx.vb">
+      <DependentUpon>CicloAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Parametros\Ciclo\CicloClass.vb" />
     <Compile Include="Parametros\Ciclo\CicloSQLClass.vb" />
     <Compile Include="Parametros\Ciudades\Ciudades.aspx.designer.vb">
@@ -1206,8 +1349,6 @@
     <Compile Include="Parametros\Financiacion\FinanciacionSQLClass.vb" />
     <Compile Include="Parametros\Direcciones\DireccionesClass.vb" />
     <Compile Include="Parametros\Direcciones\DireccionesSQLClass.vb" />
-    <Compile Include="Parametros\Documentos\DocumentosClass.vb" />
-    <Compile Include="Parametros\Documentos\DocumentosSQLClass.vb" />
     <Compile Include="Parametros\Fasecolda\Fasecolda.aspx.designer.vb">
       <DependentUpon>Fasecolda.aspx</DependentUpon>
     </Compile>
@@ -1240,38 +1381,6 @@
     </Compile>
     <Compile Include="Parametros\Festivos\FestivosClass.vb" />
     <Compile Include="Parametros\Festivos\FestivosSQLClass.vb" />
-    <Compile Include="Parametros\Impuesto_Gasto\Impuesto_Gasto.aspx.designer.vb">
-      <DependentUpon>Impuesto_Gasto.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Parametros\Impuesto_Gasto\Impuesto_Gasto.aspx.vb">
-      <DependentUpon>Impuesto_Gasto.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Parametros\Impuesto_Gasto\Impuesto_GastoAjax.aspx.designer.vb">
-      <DependentUpon>Impuesto_GastoAjax.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Parametros\Impuesto_Gasto\Impuesto_GastoAjax.aspx.vb">
-      <DependentUpon>Impuesto_GastoAjax.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Parametros\Impuesto_Gasto\Impuesto_GastoClass.vb" />
-    <Compile Include="Parametros\Impuesto_Gasto\Impuesto_GastoSQLClass.vb" />
-    <Compile Include="Parametros\Inf_Impuesto\Inf_Impuesto.aspx.designer.vb">
-      <DependentUpon>Inf_Impuesto.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Parametros\Inf_Impuesto\Inf_Impuesto.aspx.vb">
-      <DependentUpon>Inf_Impuesto.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Parametros\Inf_Impuesto\Inf_ImpuestoAjax.aspx.designer.vb">
-      <DependentUpon>Inf_ImpuestoAjax.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Parametros\Inf_Impuesto\Inf_ImpuestoAjax.aspx.vb">
-      <DependentUpon>Inf_ImpuestoAjax.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Parametros\Inf_Impuesto\Inf_ImpuestoClass.vb" />
-    <Compile Include="Parametros\Inf_Impuesto\Inf_ImpuestoSQLClass.vb" />
     <Compile Include="Parametros\Mensajes\Mensajes.aspx.designer.vb">
       <DependentUpon>Mensajes.aspx</DependentUpon>
     </Compile>
@@ -1336,22 +1445,6 @@
     </Compile>
     <Compile Include="Parametros\Paises\PaisesClass.vb" />
     <Compile Include="Parametros\Paises\PaisesSQLClass.vb" />
-    <Compile Include="Parametros\Porcen_Descuentos\Porcen_Descuentos.aspx.designer.vb">
-      <DependentUpon>Porcen_Descuentos.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Parametros\Porcen_Descuentos\Porcen_Descuentos.aspx.vb">
-      <DependentUpon>Porcen_Descuentos.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Parametros\Porcen_Descuentos\Porcen_DescuentosAjax.aspx.designer.vb">
-      <DependentUpon>Porcen_DescuentosAjax.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Parametros\Porcen_Descuentos\Porcen_DescuentosAjax.aspx.vb">
-      <DependentUpon>Porcen_DescuentosAjax.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Parametros\Porcen_Descuentos\Porcen_DescuentosClass.vb" />
-    <Compile Include="Parametros\Porcen_Descuentos\Porcen_DescuentosSQLClass.vb" />
     <Compile Include="Parametros\Productos\Productos.aspx.designer.vb">
       <DependentUpon>Productos.aspx</DependentUpon>
     </Compile>
@@ -1436,6 +1529,20 @@
     </Compile>
     <Compile Include="Parametros\SubTipoProduct_Leasing\SubTipoProduct_LeasingClass.vb" />
     <Compile Include="Parametros\SubTipoProduct_Leasing\SubTipoProduct_LeasingSQLClass.vb" />
+    <Compile Include="Parametros\Sucursal\Sucursal.aspx.designer.vb">
+      <DependentUpon>Sucursal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Sucursal\Sucursal.aspx.vb">
+      <DependentUpon>Sucursal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Sucursal\SucursalAjax.aspx.designer.vb">
+      <DependentUpon>SucursalAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Sucursal\SucursalAjax.aspx.vb">
+      <DependentUpon>SucursalAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Parametros\Sucursal\SucursalClass.vb" />
     <Compile Include="Parametros\Sucursal\SucursalSQLClass.vb" />
     <Compile Include="Parametros\Tasas\TasasClass.vb" />
@@ -1527,6 +1634,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Repository_Document\TEMP\" />
+    <Folder Include="Repository_Files\TEMP\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

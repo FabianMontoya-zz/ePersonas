@@ -163,7 +163,9 @@ function transacionAjax_EmpresaNit(State) {
         },
         error: function () {
 
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     });
 }
 
@@ -246,6 +248,12 @@ function transacionAjax_Tipo(State) {
         error: function () {
 
         }
+    }).done(function (){
+        var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+        if (OnlyEmpresa == true) {
+            TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+        }
     });
 }
 
@@ -324,12 +332,13 @@ function transacionAjax_Linea_F(State, Marca, Index, Proccess) {
             else {
                 Matrix_Linea_F = JSON.parse(result);
                 Charge_Combos_Depend_Verificacion(Matrix_Linea_F, "Select_LineaF", "", "", "");
-                if (Proccess == "ID") {
-                    setTimeout("CargarValoresCombos();", 400);
-                }
             }
         },
         error: function () {
+        }
+      }).done(function () {
+        if (Proccess == "ID") {
+           CargarValoresCombos();
         }
     });
 }

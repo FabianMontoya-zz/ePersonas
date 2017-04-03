@@ -13,7 +13,7 @@ Public Class CargoSQLClass
     ''' <param name="vp_S_Contenido"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Read_AllCargo(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String)
+    Public Function Read_AllCargo(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String, ByVal vp_S_Nit_User As String)
 
         Dim ObjListCargo As New List(Of CargoClass)
         Dim StrQuery As String = ""
@@ -24,17 +24,14 @@ Public Class CargoSQLClass
 
         Dim sql As New StringBuilder
 
-        sql.Append("DROP TABLE T_AREA_CARGO")
+        sql = New StringBuilder()
+
+        sql.Append("EXEC CONSULT_T_AREA_CARGO 'CARGO', '" & vp_S_Nit_User & "'")
         StrQuery = sql.ToString
         conex.StrInsert_and_Update_All(StrQuery, "2")
 
         sql = New StringBuilder()
-
-        sql.Append("EXEC CONSULT_T_AREA_CARGO 'Cargo'")
-        StrQuery = sql.ToString
-        conex.StrInsert_and_Update_All(StrQuery, "2")
-
-        sql = New StringBuilder()
+        Dim vl_sql_filtro As New StringBuilder
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
             sql.Append(" SELECT Nit_ID, " & _
@@ -48,8 +45,9 @@ Public Class CargoSQLClass
                              " FechaActualizacion, " & _
                              " DescripDependecia, " & _
                              " DescripSeguridad, " & _
-                             " DescripEmpresa " & _
-                       " FROM T_AREA_CARGO ")
+                             " DescripEmpresa, " & _
+                             " ROW_NUMBER() OVER(ORDER BY AREA_CARGO_ID ASC) AS Index_Cargo " & _
+                      " FROM T_AREA_CARGO ")
         Else
 
             If vp_S_Contenido = "ALL" Then
@@ -64,8 +62,9 @@ Public Class CargoSQLClass
                              " FechaActualizacion, " & _
                              " DescripDependecia, " & _
                              " DescripSeguridad, " & _
-                             " DescripEmpresa " & _
-                       " FROM T_AREA_CARGO ")
+                             " DescripEmpresa, " & _
+                              " ROW_NUMBER() OVER(ORDER BY AREA_CARGO_ID ASC) AS Index_Cargo " & _
+                      " FROM T_AREA_CARGO ")
             Else
                 sql.Append(" SELECT Nit_ID, " & _
                              " Area_Cargo_ID, " & _
@@ -78,14 +77,25 @@ Public Class CargoSQLClass
                              " FechaActualizacion, " & _
                              " DescripDependecia, " & _
                              " DescripSeguridad, " & _
-                             " DescripEmpresa " & _
-                       " FROM T_AREA_CARGO " & _
+                             " DescripEmpresa, " & _
+                             " ROW_NUMBER() OVER(ORDER BY AREA_CARGO_ID ASC) AS Index_Cargo " & _
+                     " FROM T_AREA_CARGO " & _
                       "WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
             End If
         End If
 
-        StrQuery = sql.ToString
 
+        If vp_S_Nit_User <> "N" Then
+            If vp_S_Contenido = "ALL" Then
+                vl_sql_filtro.Append("WHERE  Nit_ID ='" & vp_S_Nit_User & "' ORDER BY Index_Cargo, Nit_ID, Area_Cargo_ID ASC")
+            Else
+                vl_sql_filtro.Append("AND  Nit_ID ='" & vp_S_Nit_User & "' ORDER BY Index_Cargo, Nit_ID, Area_Cargo_ID ASC")
+            End If
+        Else
+            vl_sql_filtro.Append(" ORDER BY Index_Cargo, Nit_ID, Area_Cargo_ID ASC")
+        End If
+
+        StrQuery = sql.ToString & vl_sql_filtro.ToString
         ObjListCargo = listCargo(StrQuery, Conexion, "List")
 
         Return ObjListCargo
@@ -246,31 +256,7 @@ Public Class CargoSQLClass
 
     End Function
 
-    ''' <summary>
-    ''' crea la consulta para cargar el combo
-    ''' </summary>
-    ''' <param name="vp_S_Table"></param>
-    ''' <returns></returns>
-    ''' <remarks></remarks>
-    Public Function Charge_DropListSeguridad(ByVal vp_S_Table As String)
-
-        Dim ObjListDroplist As New List(Of Droplist_Class)
-        Dim StrQuery As String = ""
-        Dim conex As New Conector
-        Dim Conexion As String = conex.typeConexion("1")
-
-        Dim SQLGeneral As New GeneralSQLClass
-        Dim sql As New StringBuilder
-
-        sql.Append(" SELECT PS_Politica_ID AS ID,CAST(PS_Politica_ID AS NVARCHAR(5)) + ' - ' + PS_Descripcion AS DESCRIPCION FROM POLITICA_SEGURIDAD ")
-        StrQuery = sql.ToString
-
-        ObjListDroplist = SQLGeneral.listdrop(StrQuery, Conexion)
-
-        Return ObjListDroplist
-
-    End Function
-
+  
 #End Region
 
 #Region "CARGAR LISTAS"
@@ -321,6 +307,7 @@ Public Class CargoSQLClass
                     If Not (IsDBNull(ReadConsulta.GetValue(9))) Then objCargo.DescripCargoDepen = ReadConsulta.GetValue(9) Else objCargo.DescripCargoDepen = ""
                     If Not (IsDBNull(ReadConsulta.GetValue(10))) Then objCargo.DescripPolitica = ReadConsulta.GetValue(10) Else objCargo.DescripPolitica = ""
                     objCargo.DescripEmpresa = ReadConsulta.GetValue(11)
+                    objCargo.Index = ReadConsulta.GetValue(12)
 
                     'agregamos a la lista
                     ObjListCargo.Add(objCargo)

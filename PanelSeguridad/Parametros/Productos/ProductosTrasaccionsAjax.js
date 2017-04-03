@@ -1,6 +1,7 @@
 ﻿/*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_CargaBusqueda(State) {
+    OpenControl(); 
     $.ajax({
         url: "ProductosAjax.aspx",
         type: "POST",
@@ -151,7 +152,8 @@ function transacionAjax_Productos(State, filtro, opcion) {
         data: { "action": State,
             "filtro": filtro,
             "opcion": opcion,
-            "contenido": contenido
+            "contenido": contenido,
+            "Nit_User": g_NitEmpresa_User
         },
         //Transaccion Ajax en proceso
         success: function (result) {

@@ -12,8 +12,21 @@ var editID;
 
 //Evento load JS
 $(document).ready(function () {
+  
+    /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
+    Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
+    Ocultar_Errores();
+    Ocultar_Tablas();
+
+    /*================== FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN ==============*/
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_EmpresaNit('Cliente');
+
+});
+
+//Función que oculta todas las IMG de los errores en pantalla
+function Ocultar_Errores() {
+    ResetError();
 
     $("#ESelect").css("display", "none");
     $("#Img1").css("display", "none");
@@ -24,9 +37,15 @@ $(document).ready(function () {
     $("#SE").css("display", "none");
     $("#WA").css("display", "none");
 
-    $("#TablaDatos_D").css("display", "none");
+
     $("#TablaConsulta").css("display", "none");
 
+}
+
+//funcion para las ventanas emergentes
+function Ventanas_Emergentes() {
+
+    Load_Charge_Sasif(); //Carga de "SasifMaster.js" el Control de Carga
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
         autoOpen: false,
@@ -39,14 +58,12 @@ $(document).ready(function () {
         dialogClass: "Dialog_Sasif",
         modal: true
     });
+}
 
-});
-
-
-
-//salida del formulario
-function btnSalir() {
-    window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
+//Función que oculta las tablas
+function Ocultar_Tablas() {
+    $(".Dialog_Datos").css("display", "none");
+    $("#TablaConsulta").css("display", "none");
 }
 
 //habilita el panel de crear o consulta
@@ -55,7 +72,7 @@ function HabilitarPanel(opcion) {
     switch (opcion) {
 
         case "crear":
-            $("#TablaDatos_D").css("display", "inline-table");
+            $(".Dialog_Datos").css("display", "inline-table");
             $("#TablaConsulta").css("display", "none");
             $("#Select_EmpresaNit").removeAttr("disabled");
             $("#Txt_ID").removeAttr("disabled");
@@ -64,29 +81,30 @@ function HabilitarPanel(opcion) {
             ResetError();
             Clear();
             estado = opcion;
+            VerificarNIT("Select_EmpresaNit");//Jhon
             break;
 
         case "buscar":
-            $("#TablaDatos_D").css("display", "none");
+            $(".Dialog_Datos").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TRutaDocumentos").html("");
+            $(".container_TGrid").html("");
             estado = opcion;
             Clear();
             break;
 
         case "modificar":
-            $("#TablaDatos_D").css("display", "none");
+            $(".Dialog_Datos").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TRutaDocumentos").html("");
+            $(".container_TGrid").html("");
             estado = opcion;
             ResetError();
             Clear();
             break;
 
         case "eliminar":
-            $("#TablaDatos_D").css("display", "none");
+            $(".Dialog_Datos").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TRutaDocumentos").html("");
+            $(".container_TGrid").html("");
             estado = opcion;
             Clear();
             break;
@@ -100,6 +118,8 @@ function BtnConsulta() {
     var filtro;
     var ValidateSelect = ValidarDroplist();
     var opcion;
+
+    //OpenControl(); //Abrimos el load de espera con el logo
 
     if (ValidateSelect == 1) {
         filtro = "N";
@@ -132,6 +152,7 @@ function BtnCrear() {
 
 //elimina de la BD
 function BtnElimina() {
+    OpenControl(); //Abrimos el load de espera con el logo
     transacionAjax_RutaDocumentos_delete("elimina");
 }
 
@@ -211,7 +232,7 @@ function Table_RutaDocumentos() {
             for (itemArray in ArrayRutaDocumentos) {
                 if (ArrayRutaDocumentos[itemArray].RutaDocumentos_ID != 0) {
                     Index_Pos = parseInt(ArrayRutaDocumentos[itemArray].Index) - 1;
-                    html_RutaDocumentos += "<tr id= 'TRutaDocumentos_" + ArrayRutaDocumentos[itemArray].RutaDocumentos_ID + "'><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Editar('" + Index_Pos + "')\"></input></td><td>" + ArrayRutaDocumentos[itemArray].Nit_ID + " - " + ArrayRutaDocumentos[itemArray].DescripEmpresa + "</td><td>" + ArrayRutaDocumentos[itemArray].RutaDocumentos_ID + "</td><td>" + ArrayRutaDocumentos[itemArray].Ruta + "</td><td>" + ArrayRutaDocumentos[itemArray].UsuarioCreacion + "</td><td>" + ArrayRutaDocumentos[itemArray].FechaCreacion + "</td><td>" + ArrayRutaDocumentos[itemArray].UsuarioActualizacion + "</td><td>" + ArrayRutaDocumentos[itemArray].FechaActualizacion + "</td></tr>";
+                    html_RutaDocumentos += "<tr id= 'TRutaDocumentos_" + ArrayRutaDocumentos[itemArray].RutaDocumentos_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + Index_Pos + "')\"></img><span>Editar Ruta Documento</span></span></td><td>" + ArrayRutaDocumentos[itemArray].Nit_ID + " - " + ArrayRutaDocumentos[itemArray].DescripEmpresa + "</td><td>" + ArrayRutaDocumentos[itemArray].RutaDocumentos_ID + "</td><td>" + ArrayRutaDocumentos[itemArray].Ruta + "</td><td>" + ArrayRutaDocumentos[itemArray].UsuarioCreacion + "</td><td>" + ArrayRutaDocumentos[itemArray].FechaCreacion + "</td><td>" + ArrayRutaDocumentos[itemArray].UsuarioActualizacion + "</td><td>" + ArrayRutaDocumentos[itemArray].FechaActualizacion + "</td></tr>";
                 }
             }
             break;
@@ -221,15 +242,15 @@ function Table_RutaDocumentos() {
             for (itemArray in ArrayRutaDocumentos) {
                 if (ArrayRutaDocumentos[itemArray].RutaDocumentos_ID != 0) {
                     Index_Pos = parseInt(ArrayRutaDocumentos[itemArray].Index) - 1;
-                    html_RutaDocumentos += "<tr id= 'TRutaDocumentos_" + ArrayRutaDocumentos[itemArray].RutaDocumentos_ID + "'><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar('" + Index_Pos + "')\"></input></td><td>" + ArrayRutaDocumentos[itemArray].Nit_ID + " - " + ArrayRutaDocumentos[itemArray].DescripEmpresa + "</td><td>" + ArrayRutaDocumentos[itemArray].RutaDocumentos_ID + "</td><td>" + ArrayRutaDocumentos[itemArray].Ruta + "</td><td>" + ArrayRutaDocumentos[itemArray].UsuarioCreacion + "</td><td>" + ArrayRutaDocumentos[itemArray].FechaCreacion + "</td><td>" + ArrayRutaDocumentos[itemArray].UsuarioActualizacion + "</td><td>" + ArrayRutaDocumentos[itemArray].FechaActualizacion + "</td></tr>";
+                    html_RutaDocumentos += "<tr id= 'TRutaDocumentos_" + ArrayRutaDocumentos[itemArray].RutaDocumentos_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + Index_Pos + "')\"></img><span>Eliminar Ruta Documento</span></td><td>" + ArrayRutaDocumentos[itemArray].Nit_ID + " - " + ArrayRutaDocumentos[itemArray].DescripEmpresa + "</td><td>" + ArrayRutaDocumentos[itemArray].RutaDocumentos_ID + "</td><td>" + ArrayRutaDocumentos[itemArray].Ruta + "</td><td>" + ArrayRutaDocumentos[itemArray].UsuarioCreacion + "</td><td>" + ArrayRutaDocumentos[itemArray].FechaCreacion + "</td><td>" + ArrayRutaDocumentos[itemArray].UsuarioActualizacion + "</td><td>" + ArrayRutaDocumentos[itemArray].FechaActualizacion + "</td></tr>";
                 }
             }
             break;
     }
 
     html_RutaDocumentos += "</tbody></table>";
-    $("#container_TRutaDocumentos").html("");
-    $("#container_TRutaDocumentos").html(html_RutaDocumentos);
+    $(".container_TGrid").html("");
+    $(".container_TGrid").html(html_RutaDocumentos);
 
     $(".Eliminar").click(function () {
     });
@@ -259,7 +280,7 @@ function Eliminar(Index_GrpDocumento) {
 // muestra el registro a editar
 function Editar(Index_GrpDocumento) {
 
-    $("#TablaDatos_D").css("display", "inline-table");
+    $(".Dialog_Datos").css("display", "inline-table");
     $("#TablaConsulta").css("display", "none");
     
     editNit_ID = ArrayRutaDocumentos[Index_GrpDocumento].Nit_ID;
@@ -292,5 +313,5 @@ function Clear() {
     $("#DDLColumns").val("-1");
 
     $('.C_Chosen').trigger('chosen:updated');
-
+    VerificarNIT("Select_EmpresaNit");//Jhon
 }

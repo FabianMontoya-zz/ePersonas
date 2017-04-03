@@ -1,23 +1,52 @@
-﻿$(document).ready(function () {
+﻿/*--------------- region de variables globales --------------------*/
+var ArrayEmpresaNit = [];
+/*--------------- region de variables globales --------------------*/
 
-    //funcion para las ventanas emergentes
+//Evento load JS
+$(document).ready(function () {
+
+    Ventanas_Emergentes();
+    Ocultar_Errores();
+
+    transacionAjax_EmpresaNit('Cliente'); //Carga Droplist de Empresa NIT
+    VerificarNIT("Select_EmpresaNit");
+
+    $("#ImgID").css("display", "none");
+    $("#ImgEstado").css("display", "none");
+
+});
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                 REGION INICIO DE COMPONENTES                                                                                                    ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//funcion para las ventanas emergentes
+function Ventanas_Emergentes() {
+
+    Load_Charge_Sasif(); //Carga de "SasifMaster.js" el Control de Carga
+
     $("#dialog").dialog({
         autoOpen: false,
         dialogClass: "Dialog_Sasif",
         modal: true
     });
 
-    $("#ImgID").css("display", "none");
-    $("#Img2").css("display", "none");
-
-
-});
-
-//salida del formulario
-function btnSalir() {
-    window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
 }
 
+//Función para ocultar las IMG de los errores
+function Ocultar_Errores() {
+
+    $("#DE").css("display", "none");
+    $("#SE").css("display", "none");
+    $("#WA").css("display", "none");
+    $("#ImgID").css("display", "none");
+    $("#ImgNIT").css("display", "none");
+    $("#ImgEstado").css("display", "none");
+
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                 REGION BOTONES                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //crear link en la BD
 function BtnCrear() {
 
@@ -30,15 +59,27 @@ function BtnCrear() {
 
 }
 
+//evento del boton salir
+function x() {
+    $("#dialog").dialog("close");
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                      REGION VALIDACIONES DEL PROCESO                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //validamos campos para la creacion del link
 function validarCamposCrear() {
 
     var valID = $("#Txt_ID").val();
     var estado = $("#DDLTipo").val();
+    var NIT = $("#Select_EmpresaNit").val();
 
     var validar = 0;
 
-    if (estado == "-1" || valID == "") {
+    if (estado == "-1" || estado == null ||
+        valID == "" ||
+        NIT == "-1" || NIT == null) {
+
         validar = 1;
         if (valID == "") {
             $("#ImgID").css("display", "inline-table");
@@ -46,56 +87,34 @@ function validarCamposCrear() {
         else {
             $("#ImgID").css("display", "none");
         }
-        if (estado == "-1") {
-            $("#Img2").css("display", "inline-table");
+        if (estado == "-1" || estado == null) {
+            $("#ImgEstado").css("display", "inline-table");
         }
         else {
-            $("#Img2").css("display", "none");
+            $("#ImgEstado").css("display", "none");
+        }
+        if (NIT == "-1" || NIT == null) {
+            $("#ImgNIT").css("display", "inline-table");
+        }
+        else {
+            $("#ImgNIT").css("display", "none");
         }
     }
     else {
-        $("#Img2").css("display", "none");
-        $("#ImgID").css("display", "none");
+        Ocultar_Errores();
     }
     return validar;
 }
 
-
-/*-------------------- carga ---------------------------*/
-//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_Reset(State) {
-    $.ajax({
-        url: "Adm_ResetUserAjax.aspx",
-        type: "POST",
-        //crear json
-        data: { "action": State,
-            "ID": $("#Txt_ID").val(),
-            "estado": $("#DDLTipo").val()
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            if (result == "NO") {
-                $("#dialog").dialog("option", "title", "No Existe!");
-                $("#Mensaje_alert").text("El usuario no existe en la base de datos!");
-                $("#dialog").dialog("open");
-                $("#DE").css("display", "block");
-                $("#SE").css("display", "none");
-            }
-            else {
-                $("#dialog").dialog("option", "title", "No Existe!");
-                $("#Mensaje_alert").text("Se Reseteo la contraseña satifactoriamente!");
-                $("#dialog").dialog("open");
-                $("#SE").css("display", "block");
-                $("#DE").css("display", "none");
-            }
-        },
-        error: function () {
-
-        }
-    });
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                              MENSAJES, VISUALIZACION Y LIMPIEZA                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//Función que limpia todos los campos
+function Clear() {
+    $("#Select_EmpresaNit").val("-1").trigger("chosen:updated");
+    $("#Txt_ID").val("");
+    $("#DDLTipo").val("-1").trigger("chosen:updated");
+    VerificarNIT("Select_EmpresaNit");
 }
 
-//evento del boton salir
-function x() {
-    $("#dialog").dialog("close");
-}
+

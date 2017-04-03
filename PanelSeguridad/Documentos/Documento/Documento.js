@@ -13,12 +13,25 @@ var editID;
 
 //Evento load JS
 $(document).ready(function () {
+  
+    /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
+    Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
+    Ocultar_Errores();
+    Ocultar_Tablas();
+
     transaccionAjax_MRuta('MATRIX_RUTA');
 
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_EmpresaNit('Cliente');
     transacionAjax_Formato('Formato');
     Change_Select_Nit();
+    Change_Select_Vigencia();
+
+});
+
+//Función que oculta todas las IMG de los errores en pantalla
+function Ocultar_Errores() {
+    ResetError();
 
     $("#ESelect").css("display", "none");
     $("#Img1").css("display", "none");
@@ -34,10 +47,14 @@ $(document).ready(function () {
     $("#SE").css("display", "none");
     $("#WA").css("display", "none");
 
-    $("#TablaDatos_D").css("display", "none");
-    $("#TablaDatos_D_Vista").css("display", "none");
     $("#TablaConsulta").css("display", "none");
 
+}
+
+//funcion para las ventanas emergentes
+function Ventanas_Emergentes() {
+
+    Load_Charge_Sasif(); //Carga de "SasifMaster.js" el Control de Carga
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
         autoOpen: false,
@@ -51,11 +68,14 @@ $(document).ready(function () {
         modal: true
     });
 
-});
+}
 
-//salida del formulario
-function btnSalir() {
-    window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
+//Función que oculta las tablas
+function Ocultar_Tablas() {
+    $(".Dialog_Datos").css("display", "none");
+    $(".Dialog_Datos_Vista").css("display", "none");
+    $("#TablaConsulta").css("display", "none");
+    $("#TxtDiaVigencia").attr("disabled", "disabled");
 }
 
 //habilita el panel de crear o consulta
@@ -64,8 +84,8 @@ function HabilitarPanel(opcion) {
     switch (opcion) {
 
         case "crear":
-            $("#TablaDatos_D").css("display", "inline-table");
-            $("#TablaDatos_D_Vista").css("display", "none");
+            $(".Dialog_Datos").css("display", "inline-table");
+            $(".Dialog_Datos_Vista").css("display", "none");
             $("#TablaConsulta").css("display", "none");
             $("#Select_EmpresaNit").removeAttr("disabled");
             $("#Txt_ID").removeAttr("disabled");
@@ -74,32 +94,39 @@ function HabilitarPanel(opcion) {
             ResetError();
             Clear();
             estado = opcion;
+
+            var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+            if (OnlyEmpresa == true) {
+                TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+            }
+
             break;
 
         case "buscar":
-            $("#TablaDatos_D").css("display", "none");
-            $("#TablaDatos_D_Vista").css("display", "none");
+            $(".Dialog_Datos").css("display", "none");
+            $(".Dialog_Datos_Vista").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TDocumento").html("");
+            $(".container_TGrid").html("");
             estado = opcion;
             Clear();
             break;
 
         case "modificar":
-            $("#TablaDatos_D").css("display", "none");
-            $("#TablaDatos_D_Vista").css("display", "none");
+            $(".Dialog_Datos").css("display", "none");
+            $(".Dialog_Datos_Vista").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TDocumento").html("");
+            $(".container_TGrid").html("");
             estado = opcion;
             ResetError();
             Clear();
             break;
 
         case "eliminar":
-            $("#TablaDatos_D").css("display", "none");
-            $("#TablaDatos_D_Vista").css("display", "none");
+            $(".Dialog_Datos").css("display", "none");
+            $(".Dialog_Datos_Vista").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TDocumento").html("");
+            $(".container_TGrid").html("");
             estado = opcion;
             Clear();
             break;
@@ -111,9 +138,30 @@ function HabilitarPanel(opcion) {
 function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {
         var index_ID = $(this).val();
+        TransaccionesSegunNIT(index_ID);
+    });
+}
+
+//bloquear campos inecesario
+function Change_Select_Vigencia() {
+    $("#Select_CheckVigencia").change(function () {
+        var vl_index = $(this).val();
+        if (vl_index == "N") {
+            $("#TxtDiaVigencia").attr("disabled", "disabled");
+            $("#TxtDiaVigencia").val("");
+        }
+        else {
+            $("#TxtDiaVigencia").removeAttr("disabled");
+        }
+    });
+}
+
+//carga combo relacionados al nit
+function TransaccionesSegunNIT(index_ID) {
+    if (index_ID != "-1") {
         Charge_Combos_Depend_Nit(Matrix_Ruta, "Select_RutaDocumento", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Ruta, "Select_RutaPlantilla", index_ID, "");
-    });
+    }
 }
 
 //consulta del del crud(READ)
@@ -122,6 +170,8 @@ function BtnConsulta() {
     var filtro;
     var ValidateSelect = ValidarDroplist();
     var opcion;
+
+    //OpenControl();
 
     if (ValidateSelect == 1) {
         filtro = "N";
@@ -154,9 +204,9 @@ function BtnCrear() {
 
 //elimina de la BD
 function BtnElimina() {
+    OpenControl();
     transacionAjax_Documento_delete("elimina");
 }
-
 
 //validamos campos para la creacion del link
 function validarCamposCrear() {
@@ -298,8 +348,8 @@ function Table_Documento() {
     }
 
     html_Documento += "</tbody></table>";
-    $("#container_TDocumento").html("");
-    $("#container_TDocumento").html(html_Documento);
+    $(".container_TGrid").html("");
+    $(".container_TGrid").html(html_Documento);
 
     $(".Opciones").click(function () {
     });
@@ -315,7 +365,7 @@ function Table_Documento() {
 function Select_Option_Documento(Select_control, Index_Pos, Type) {
 
     var Select_Value = $(Select_control).val();
-  
+
     switch (Select_Value) {
         case "M": //modificar
             Editar(Index_Pos, Type);
@@ -350,13 +400,13 @@ function Eliminar(Index_Documento) {
 function Editar(Index_Documento, Type) {
 
     if (Type == 'V') {
-        $("#TablaDatos_D_Vista").css("display", "inline-table");
-        $("#TablaDatos_D").css("display", "none");
+        $(".Dialog_Datos_Vista").css("display", "inline-table");
+        $(".Dialog_Datos").css("display", "none");
         ConsultaDocumento(Index_Documento);
     }
     else {
-        $("#TablaDatos_D").css("display", "inline-table");
-        $("#TablaDatos_D_Vista").css("display", "none");
+        $(".Dialog_Datos").css("display", "inline-table");
+        $(".Dialog_Datos_Vista").css("display", "none");
     }
 
     $("#TablaConsulta").css("display", "none");
@@ -372,10 +422,10 @@ function Editar(Index_Documento, Type) {
     $("#Select_EmpresaNit").val(ArrayDocumento[Index_Documento].Nit_ID);
     $("#Select_CheckVigencia").val(ArrayDocumento[Index_Documento].ChequeaVigencias);
     $("#Select_TContenido").val(ArrayDocumento[Index_Documento].TipoContenido);
-    $("#Select_Formato").val(ArrayDocumento[Index_Documento].Formato_ID);
+    $("#Select_Formato").val(ArrayDocumento[Index_Documento].Formato);
     $("#Select_TVersion").val(ArrayDocumento[Index_Documento].TipoVersion);
     $("#Select_CheckVerificacion").val(ArrayDocumento[Index_Documento].RequiereVerificacion);
-    $("#Select_Foto").val(ArrayDocumento[Index_Documento].IndicativoFoto);
+    $("#Select_Foto").val(ArrayDocumento[Index_Documento].Indicativo);
 
     $("#Select_EmpresaNit").attr("disabled", "disabled");
     $("#Txt_ID").attr("disabled", "disabled");
@@ -401,7 +451,7 @@ function ConsultaDocumento(Index_Documento) {
     $("#Con_Formato").html(ArrayDocumento[Index_Documento].DescripFormato);
     $("#Con_TVersion").html(ArrayDocumento[Index_Documento].DescripVersion);
     $("#Con_CheckVerificacion").html(ArrayDocumento[Index_Documento].RequiereVerificacion);
-    $("#Con_Foto").html(ArrayDocumento[Index_Documento].IndicativoFoto);
+    $("#Con_Foto").html(ArrayDocumento[Index_Documento].Indicativo);
     $("#Con_RutaDocumento").html(ArrayDocumento[Index_Documento].DescripRuta);
     $("#Con_RutaPlantilla").html(ArrayDocumento[Index_Documento].DescripRutaPlantilla);
 }
@@ -429,8 +479,14 @@ function Clear() {
     $("#Select_Foto").val("N");
 
     $("#TxtRead").val("");
-    $("#DDLColumns").val("-1");
+    $("#DDLColumns").val("-1").trigger('chosen:updated');;
 
     $('.C_Chosen').trigger('chosen:updated');
+
+    var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+    if (OnlyEmpresa == true) {
+        TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+    }
 
 }

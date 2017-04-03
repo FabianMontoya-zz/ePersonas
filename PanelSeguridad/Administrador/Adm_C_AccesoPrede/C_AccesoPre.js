@@ -27,13 +27,15 @@ var Container_Tarjeta;
 //Evento load JS
 $(document).ready(function () {
 
-    transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
-    transaccionAjax_MPersona('MATRIX_PERSONA');
-    transaccionAjax_MTarjeta('MATRIX_TARJETA');
-    transaccionAjax_MRTP('MATRIX_RTP');
-    transaccionAjax_MPAccesos('MATRIX_PACCESOS');
-    transaccionAjax_MPAcceso_Area('MATRIX_PACCESO_AREA');
+    $("#Marco_trabajo_Form").css("height", "490px");
+    $(".container_TGrid").css("height", "400px");
 
+    /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
+    Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
+    Ocultar_Errores();
+    Ocultar_Tablas();
+
+    transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_EmpresaNit('Cliente');
     transacionAjax_Tipo_Ingreso('Tipo_Ing');
 
@@ -41,6 +43,20 @@ $(document).ready(function () {
     Change_Select_Persona();
     Change_Select_Tarjeta();
     Change_Select_Vigencia();
+
+
+
+    $(function () {
+        $("#TxtFinicial").datepicker({ dateFormat: 'yy-mm-dd' });
+        $("#txt_HIVigencia").timepicker();
+        $("#TxtFfinal").datepicker({ dateFormat: 'yy-mm-dd' });
+        $("#txt_HFVigencia").timepicker();
+    });
+});
+
+//Función que oculta todas las IMG de los errores en pantalla
+function Ocultar_Errores() {
+    ResetError();
 
     $("#ESelect").css("display", "none");
     $("#Img1").css("display", "none");
@@ -60,8 +76,12 @@ $(document).ready(function () {
     $("#WA").css("display", "none");
     $("#T_Vigencia_Ing").css("display", "none");
 
-    $("#TablaDatos_D").css("display", "none");
-    $("#TablaConsulta").css("display", "none");
+}
+
+//funcion para las ventanas emergentes
+function Ventanas_Emergentes() {
+
+    Load_Charge_Sasif(); //Carga de "SasifMaster.js" el Control de Carga
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
@@ -87,22 +107,16 @@ $(document).ready(function () {
             background: "black"
         }
     });
+}
 
-    $(function () {
-        $("#TxtFinicial").datepicker({ dateFormat: 'yy-mm-dd' });
-        $("#txt_HIVigencia").timepicker();
-        $("#TxtFfinal").datepicker({ dateFormat: 'yy-mm-dd' });
-        $("#txt_HFVigencia").timepicker();
-    });
-});
-
-//salida del formulario
-function btnSalir() {
-    window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
+//Función que oculta las tablas
+function Ocultar_Tablas() {
+       $("#TablaConsulta").css("display", "none");
 }
 
 //elimina de la BD
 function BtnElimina() {
+    OpenControl(); //Abrimos el load de espera con el logo
     transacionAjax_Delete_AccesoPredet("elimina");
 }
 
@@ -125,21 +139,27 @@ function HabilitarPanel(opcion) {
             EnableControls();
             Clear();
             estado = opcion;
+            
+            var OnlyEmpresa = VerificarNIT("Select_EmpresaNit_Ing");
+
+            if (OnlyEmpresa == true) {
+                TransaccionesSegunNIT($("#Select_EmpresaNit_Ing").val());
+            }
             break;
 
         case "buscar":
-            $("#TablaDatos_D").css("display", "none");
+            $(".Dialog_Datos").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TGrid").html("");
+            $(".container_TGrid").html("");
             $("#Dialog_Create").dialog("close");
             estado = opcion;
             Clear();
             break;
 
         case "modificar":
-            $("#TablaDatos_D").css("display", "none");
+            $(".Dialog_Datos").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TGrid").html("");
+            $(".container_TGrid").html("");
             $("#Dialog_Create").dialog("close");
             estado = opcion;
             ResetError();
@@ -147,9 +167,9 @@ function HabilitarPanel(opcion) {
             break;
 
         case "eliminar":
-            $("#TablaDatos_D").css("display", "none");
+            $(".Dialog_Datos").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TGrid").html("");
+            $(".container_TGrid").html("");
             $("#Dialog_Create").dialog("close");
             estado = opcion;
             Clear();
@@ -164,6 +184,8 @@ function BtnConsulta() {
     var filtro;
     var ValidateSelect = ValidarDroplist();
     var opcion;
+
+    OpenControl(); //Abrimos el load de espera con el logo
 
     if (ValidateSelect == 1) {
         filtro = "N";
@@ -249,8 +271,8 @@ function Table_Grid() {
     }
 
     Html_Grid += "</tbody></table>";
-    $("#container_TGrid").html("");
-    $("#container_TGrid").html(Html_Grid);
+    $(".container_TGrid").html("");
+    $(".container_TGrid").html(Html_Grid);
 
     $(".Opciones").click(function () {
     });
@@ -391,8 +413,15 @@ function Clear() {
     $("#TxtFfinal").val("");
     $("#txt_HFVigencia").val("");
     $("#T_Vigencia_Ing").css("display", "none");
+    $("#DDLColumns").val("-1").trigger("chosen:updated");
 
     $('.C_Chosen').trigger('chosen:updated');
+
+    var OnlyEmpresa = VerificarNIT("Select_EmpresaNit_Ing");
+
+    if (OnlyEmpresa == true) {
+        TransaccionesSegunNIT($("#Select_EmpresaNit_Ing").val());
+    }
 }
 
 //bloquear controles

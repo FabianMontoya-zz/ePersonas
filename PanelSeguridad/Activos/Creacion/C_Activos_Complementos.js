@@ -27,10 +27,16 @@ function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {
         $("#Select_EmpresaNit").attr("disabled", "disabled");
         Nit_Proccess = this.value;
+        TransaccionesSegunNIT(Nit_Proccess);
+    });
+}
 
+//Carga los combos relacionados a Select_Nit
+function TransaccionesSegunNIT(Nit_Proccess) {
+    if (Nit_Proccess != "-1") {
         Charge_Combos_Depend_Nit(Matrix_Sucursal, "Select_Sucursal", Nit_Proccess, "");
         Charge_Combos_Depend_Nit(Matrix_Personas, "Select_Persona_A", Nit_Proccess, "");
-    });
+    }
 }
 
 //MUESTRA LOS CAMPOS DE BLINDAJE
@@ -149,6 +155,7 @@ function Change_Seguro() {
 //carga marca linea segun la marca escogida 
 function Change_Select_Marca() {
     $("#Select_MarcaF").change(function () {
+        $("#TxtFasecolda_ID").attr("disabled", "disabled");
         var index_ID = this.value;
 
         switch (index_ID) {
@@ -198,7 +205,7 @@ function Change_Select_Linea() {
 //construye y llama la funcion de cargar el drop list modelo
 function Crear_Rango_modelo(Matrix, Index_ID, Proccess) {
     $("#Cambio_modelo").css("width", "33%");
-    
+
     if (Proccess == "Matrix")
         Index_ID = Index_ID - 1;
     else
@@ -241,6 +248,20 @@ function Change_Select_Modelo() {
     });
 }
 
+//limpia campos de fecha
+function LimpiarFechas() {
+    $("#TxtFecha_Recibo").val("");
+    $("#TxtFecha_Retiro").val("");
+}
+
+//bloqueo de combos
+function Change_Facecolda_ID() {
+    $("#TxtFasecolda_ID").blur(function () {
+            $("#Select_ClaseF").attr("disabled", "disabled");
+            $("#Select_MarcaF").attr("disabled", "disabled");
+            $("#Select_LineaF").attr("disabled", "disabled");
+    });
+}
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                     PROCESO DE CARGUE PAIS CIUDAD                                                                                                                                       ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/

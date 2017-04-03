@@ -28,15 +28,15 @@ var NitAlter = "";
 var ValidatorCampos = 1;
 var OpcComplementos = 0;
 var OpcWordComplementos;
+var StrPolitica;
 /*--------------- region de variables globales --------------------*/
 
 //Evento load JS
 $(document).ready(function () {
-    transaccionAjax_MDocWork('MATIRXDOC_WORK');
+
     transaccionAjax_MPaises_Ciudades('MATRIX_PAIS_CIUDAD');
     transaccionAjax_MArea('MATRIX_AREA');
     transaccionAjax_MCargo('MATRIX_CARGO');
-    transaccionAjax_MJefe('MATRIX_JEFE');
     transaccionAjax_MGrpDoc('MATRIX_GRP');
 
     CargaMonth("Select_Mont", "");
@@ -47,67 +47,18 @@ $(document).ready(function () {
     transacionAjax_EntFinan('Bank');
     transacionAjax_Documento('Documento');
     transacionAjax_TCuenta('TCuenta');
-    transacionAjax_Seguridad('Seguridad');
 
-    Verifica();
-    ExitComplementos();
+    VentanasEmergentes();
+    InicializaPagina();
+});
 
-    $("#ESelect").css("display", "none");
-    $("#ImgMul").css("display", "none");
-    $("#ImgPais").css("display", "none");
-    $("#ImgC_Doc").css("display", "none");
-    $("#ImgCiudad").css("display", "none");
-    $("#ImgPais_D").css("display", "none");
-    $("#Relacion").css("display", "none");
-    $("#T_option").css("display", "none");
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                 REGION INICIO DE COMPONENTES                                                                                                    ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//instancia dialogos jquey
+function VentanasEmergentes() {
 
-    $("#Img1").css("display", "none");
-    $("#Img2").css("display", "none");
-    $("#Img3").css("display", "none");
-    $("#Img5").css("display", "none");
-    $("#Img6").css("display", "none");
-    $("#Img7").css("display", "none");
-    $("#Img8").css("display", "none");
-    $("#Img9").css("display", "none");
-    $("#Img10").css("display", "none");
-    $("#Img11").css("display", "none");
-    $("#Img12").css("display", "none");
-    $("#Img13").css("display", "none");
-    $("#Img14").css("display", "none");
-    $("#Img15").css("display", "none");
-    $("#Img16").css("display", "none");
-    $("#Img19").css("display", "none");
-    $("#Img20").css("display", "none");
-    $("#Img21").css("display", "none");
-    $("#Img24").css("display", "none");
-
-    $("#Img22").css("display", "none");
-    $("#Img23").css("display", "none");
-
-    $("#DE").css("display", "none");
-    $("#SE").css("display", "none");
-    $("#WA").css("display", "none");
-
-    $("#TablaDatos_D").css("display", "none");
-    $("#TablaDatos_D_Vista").css("display", "none");
-
-    $("#Admin_Anexos").css("display", "none");
-    $("#Foto_Persona").css("display", "none");
-    $("#Container_Complementos").css("display", "none");
-    $("#C_Empleado").css("display", "none");
-    $("#C_Banco").css("display", "none");
-    $("#C_Socio").css("display", "none");
-
-    $("#C_Banco_Vista").css("display", "none");
-    $("#C_Empleado_Vista").css("display", "none");
-    $("#C_MultiEmpresa").css("display", "none");
-
-    $("#Relacion").css("display", "none");
-    $("#Controls").css("display", "none");
-    $("#TablaConsulta").css("display", "none");
-
-    $("#Anexos").css("display", "none");
-    $("#TR_Nit").css("display", "none");
+    Load_Charge_Sasif();//Carga de "SasifMaster.js" el Control de Carga
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
@@ -115,7 +66,6 @@ $(document).ready(function () {
         dialogClass: "Dialog_Sasif",
         modal: true
     });
-
 
     $("#dialog_eliminar").dialog({
         autoOpen: false,
@@ -169,19 +119,6 @@ $(document).ready(function () {
         modal: true,
         width: 1000,
         height: 700,
-        overlay: {
-            opacity: 0.5,
-            background: "black"
-        },
-        open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show(); }
-    });
-
-    $("#Dialog_Doc_Autorizados").dialog({
-        autoOpen: false,
-        dialogClass: "Dialog_Sasif",
-        modal: true,
-        width: 1000,
-        height: 520,
         overlay: {
             opacity: 0.5,
             background: "black"
@@ -292,6 +229,72 @@ $(document).ready(function () {
         },
         open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show(); }
     });
+}
+
+//instancia  componentes anexos a jquery
+function InicializaPagina() {
+    ResetError();
+
+    $("#ESelect").css("display", "none");
+    $("#ImgMul").css("display", "none");
+    $("#ImgPais").css("display", "none");
+    $("#ImgC_Doc").css("display", "none");
+    $("#ImgCiudad").css("display", "none");
+    $("#ImgPais_D").css("display", "none");
+    $("#Relacion").css("display", "none");
+    $("#T_option").css("display", "none");
+
+    $("#Img1").css("display", "none");
+    $("#Img2").css("display", "none");
+    $("#Img3").css("display", "none");
+    $("#Img5").css("display", "none");
+    $("#Img6").css("display", "none");
+    $("#Img7").css("display", "none");
+    $("#Img8").css("display", "none");
+    $("#Img9").css("display", "none");
+    $("#Img10").css("display", "none");
+    $("#Img11").css("display", "none");
+    $("#Img12").css("display", "none");
+    $("#Img13").css("display", "none");
+    $("#Img14").css("display", "none");
+    $("#Img15").css("display", "none");
+    $("#Img16").css("display", "none");
+    $("#Img19").css("display", "none");
+    $("#Img20").css("display", "none");
+    $("#Img21").css("display", "none");
+    $("#Img24").css("display", "none");
+
+    $("#Img22").css("display", "none");
+    $("#Img23").css("display", "none");
+
+    $("#DE").css("display", "none");
+    $("#SE").css("display", "none");
+    $("#WA").css("display", "none");
+
+    $(".Dialog_Datos").css("display", "none");
+    $(".Dialog_Datos_Vista").css("display", "none");
+
+    $("#Admin_Anexos").css("display", "none");
+    $("#Foto_Persona").css("display", "none");
+    $("#Container_Complementos").css("display", "none");
+    $("#C_Empleado").css("display", "none");
+    $("#C_Banco").css("display", "none");
+    $("#C_Socio").css("display", "none");
+
+    $("#C_Banco_Vista").css("display", "none");
+    $("#C_Empleado_Vista").css("display", "none");
+    $("#C_MultiEmpresa").css("display", "none");
+
+    $("#Relacion").css("display", "none");
+    $("#Controls").css("display", "none");
+    $("#TablaConsulta").css("display", "none");
+
+    $(".container_Grid_Flex").css("display", "none");
+    $("#TR_Nit").css("display", "none");
+
+
+    Verifica();
+    ExitComplementos();
 
     Format_Adress("TxtDireccion");
     Change_Select_pais();
@@ -301,149 +304,14 @@ $(document).ready(function () {
     Change_Select_Nit();
     ValidaFechaDigitada("Text_fechaNacimiento");
     ValidaPorcentaje("TxtPor_Participacion", 100);
-
-});
-
-//revisa el tipo de documento
-function Change_Select_TDoc() {
-    $("#Select_Documento").change(function () {
-        var index = $(this).val();
-
-        if (index != 2) {
-
-            ResetError();
-            $("#TR_Nit").css("display", "none");
-            $(".Desvanecer").css("display", "inline-table");
-            $(".TR_1").css("width", "100%");
-            ValidatorCampos = 1;
-
-            $("#TD_1").css("width", "15.2%");
-            $("#TD_3").css("width", "3%");
-            $("#TD_4").css("width", "3%");
-            $("#TD_5").css("width", "5%");
-            $("#TD_6").css("width", "2%");
-            $("#TD_7").css("width", "35%");
-            $("#TD_8").css("width", "15%");
-            $("#Select_Ciudad_Doc").css("width", "80%");
-
-        }
-        else {
-            $("#TD_1").css("width", "13%");
-            $("#TD_3").css("width", "1%");
-            $("#TD_4").css("width", "5%");
-            $("#TD_5").css("width", "5%");
-            $("#TD_6").css("width", "50%");
-            $("#TD_7").css("width", "50%");
-            $("#TD_8").css("width", "50%");
-
-            ResetError();
-            $("#TR_Nit").css("display", "inline-table");
-            $(".Desvanecer").css("display", "none");
-            ValidatorCampos = 2;
-        }
-    });
 }
 
-
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                 REGION BOTONES                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //muestra las relacion del cliente
 function BtnRelacion() {
     $("#Dialog_Relation").dialog("open");
-}
-
-//salida del formulario
-function btnSalir() {
-    transacionAjax_EraseDocument('EraseDocument');
-    window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
-}
-
-//habilita el panel de crear o consulta
-function HabilitarPanel(opcion) {
-
-    switch (opcion) {
-
-        case "crear":
-            ResetError();
-            CargaYear("Select_Year", 80, 17, "");
-            $("#TablaDatos_D").css("display", "inline-table");
-            $("#TablaDatos_D_Vista").css("display", "none");
-            $("#Admin_Anexos").css("display", "none");
-            $("#Foto_Persona").css("display", "inline-table");
-
-            $("#Controls").css("display", "inline-table");
-            $("#TablaConsulta").css("display", "none");
-            $("#Anexos").css("display", "none");
-            $("#C_Banco").css("display", "none");
-            $("#C_Empleado").css("display", "none");
-
-            $("#Select_EmpresaNit").removeAttr("disabled");
-            $("#Select_Documento").removeAttr("disabled");
-
-            $("#BtnLimpiar").css("display", "inline-table");
-            $("#Btnguardar").css("display", "inline-table");
-
-            $("#Txt_Nit").removeAttr("disabled");
-            $("#Txt_Ident").removeAttr("disabled");
-            $("#Btnguardar").attr("value", "Guardar");
-
-            $("#Imgfoto").attr("src", "../../images/avatar.png");
-            Enabled_Client();
-            Clear();
-            estado = opcion;
-            break;
-
-        case "buscar":
-            $("#Admin_Anexos").css("display", "none");
-            $("#TablaDatos_D").css("display", "none");
-            $("#TablaDatos_D_Vista").css("display", "none");
-            $("#Foto_Persona").css("display", "none");
-
-            $("#Controls").css("display", "none");
-            $("#Anexos").css("display", "none");
-            $("#BtnLimpiar").css("display", "none");
-
-            $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TCliente").html("");
-            estado = opcion;
-            Clear();
-            break;
-
-        case "modificar":
-            ResetError();
-            $("#TablaDatos_D").css("display", "none");
-            $("#TablaDatos_D_Vista").css("display", "none");
-            $("#Admin_Anexos").css("display", "none");
-            $("#Foto_Persona").css("display", "none");
-
-            $("#Controls").css("display", "none");
-            $("#Anexos").css("display", "none");
-            $("#C_Banco").css("display", "none");
-            $("#C_Empleado").css("display", "none");
-            $("#BtnLimpiar").css("display", "none");
-
-            $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TCliente").html("");
-            estado = opcion;
-            Clear();
-            Enabled_Client();
-            break;
-
-        case "eliminar":
-            $("#TablaDatos_D").css("display", "none");
-            $("#TablaDatos_D_Vista").css("display", "none");
-            $("#Admin_Anexos").css("display", "none");
-            $("#Foto_Persona").css("display", "none");
-
-            $("#Controls").css("display", "none");
-            $("#Anexos").css("display", "none");
-            $("#BtnLimpiar").css("display", "none");
-
-            $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TCliente").html("");
-            estado = opcion;
-            Clear();
-            break;
-
-    }
 }
 
 //consulta del del crud(READ)
@@ -452,6 +320,8 @@ function BtnConsulta() {
     var filtro;
     var ValidateSelect = ValidarDroplist();
     var opcion;
+
+    OpenControl(); //Abrimos el load de espera con el logo
 
     if (ValidateSelect == 1) {
         filtro = "N";
@@ -484,22 +354,25 @@ function BtnCrear() {
 
 //elimina de la BD
 function BtnElimina() {
+    OpenControl(); //Abrimos el load de espera con el logo
     transacionAjax_Cliente_delete("elimina");
 }
 
-//validamos si han escogido una columna
-function ValidarDroplist() {
-    var flag;
-    var contenido = $("#DDLColumns").val();
-
-    if (contenido == '-1') {
-        flag = 1;
-    }
-    else {
-        flag = 0;
-    }
-    return flag;
+//limpia los campos
+function BtnLimpia() {
+    Clear();
+    Enabled_Client();
+    $(".container_Grid_Flex").css("display", "none");
 }
+
+//evento del boton salir
+function x() {
+    $("#dialog").dialog("close");
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                  TABLA DE DOCUMENTOS PERSONA EMPRESA                                                                                  ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 // crea la tabla en el cliente
 function Table_Cliente() {
@@ -541,7 +414,6 @@ function Table_Cliente() {
                     if (ArrayCliente[itemArray].Por_Participacion != 0)
                         StrPorcentaje = ArrayCliente[itemArray].Por_Participacion + " %";
 
-                    console.log(StrPorcentaje);
                     html_Cliente += "<tr><td><select id='Select_" + ArrayCliente[itemArray].Cliente_ID + "' class='Opciones' onchange=\"Select_Option_Cliente(this,'" + ArrayCliente[itemArray].Index + "','U');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='M'>Editar</option></select></td><td>" + ArrayCliente[itemArray].Nit_ID + "</td><td>" + ArrayCliente[itemArray].DescripTypeDocument + "</td><td>" + ArrayCliente[itemArray].Document_ID + "</td><td>" + ArrayCliente[itemArray].Digito_Verificacion + "</td><td>" + ArrayCliente[itemArray].Nombre + " " + ArrayCliente[itemArray].Nombre_2 + " " + ArrayCliente[itemArray].Apellido_1 + " " + ArrayCliente[itemArray].Apellido_2 + "</td><td>" + ArrayCliente[itemArray].DescripTipoPersona + "</td><td>" + ArrayCliente[itemArray].DescripRegimen + "</td><td>" + ArrayCliente[itemArray].DescripPais + "</td><td>" + ArrayCliente[itemArray].DescripCiudad + "</td><td>" + ArrayCliente[itemArray].OP_Cliente + "</td><td>" + ArrayCliente[itemArray].OP_Avaluador + "</td><td>" + ArrayCliente[itemArray].OP_Transito + "</td><td>" + ArrayCliente[itemArray].OP_Hacienda + "</td><td>" + ArrayCliente[itemArray].OP_Empresa + "</td><td>" + ArrayCliente[itemArray].OP_Empleado + "</td><td>" + ArrayCliente[itemArray].OP_Asesor + "</td><td>" + ArrayCliente[itemArray].Other_1 + "</td><td>" + ArrayCliente[itemArray].Other_2 + "</td><td>" + ArrayCliente[itemArray].OP_Visitante + "</td><td>" + ArrayCliente[itemArray].OP_Representante + "</td><td>" + ArrayCliente[itemArray].OP_Socio + "</td><td>" + StrPorcentaje + "</td></tr>";
                 }
             }
@@ -567,8 +439,8 @@ function Table_Cliente() {
     }
 
     html_Cliente += "</tbody></table>";
-    $("#container_TCliente").html("");
-    $("#container_TCliente").html(html_Cliente);
+    $(".container_TGrid").html("");
+    $(".container_TGrid").html(html_Cliente);
 
     $(".Opciones").click(function () {
     });
@@ -580,39 +452,12 @@ function Table_Cliente() {
 
 }
 
-//selecciona que tipo de operacion desea con el registro seleccionado
-function Select_Option_Cliente(Select_control, Index_Cliente, Type) {
-
-    var Select_Value = $(Select_control).val();
-    var Index_Pos = parseInt(Index_Cliente) - 1;
-
-    switch (Select_Value) {
-        case "M": //modificar
-            Editar(Index_Pos, Type);
-            break;
-
-        case "V": //visualizar
-            Ver(Index_Pos);
-            break;
-
-        case "E": //eliminar
-            Eliminar(Index_Pos);
-            break;
-
-    }
-}
-
-
 // muestra el registro a ver
 function Ver(Index_Cliente) {
-
     Editar(Index_Cliente, "V");
-
 }
 
-var StrPolitica;
-
-
+//Edicion de cliente
 function Editar(Index_Cliente, Type) {
 
     Charge_CatalogList_Matriz_Depend(Matrix_Pais, Matrix_Ciudad, ArrayCliente[Index_Cliente].Pais_ID, "Select_Ciudad", 1, ArrayCliente[Index_Cliente].Ciudad_ID);
@@ -620,13 +465,12 @@ function Editar(Index_Cliente, Type) {
     Change_Select_TPersona(ArrayCliente[Index_Cliente].TipoPersona, ArrayCliente[Index_Cliente].Regimen);
 
     if (Type == 'V') {
-        $("#TablaDatos_D_Vista").css("display", "inline-table");
-        $("#TablaDatos_D").css("display", "none");
-
+        $(".Dialog_Datos_Vista").css("display", "inline-table");
+        $(".Dialog_Datos").css("display", "none");
     }
     else {
-        $("#TablaDatos_D").css("display", "inline-table");
-        $("#TablaDatos_D_Vista").css("display", "none");
+        $(".Dialog_Datos").css("display", "inline-table");
+        $(".Dialog_Datos_Vista").css("display", "none");
     }
 
     $("#Controls").css("display", "inline-table");
@@ -637,6 +481,7 @@ function Editar(Index_Cliente, Type) {
     OpcWordComplementos = Type;
 
     D_Nit = ArrayCliente[Index_Cliente].Nit_ID;
+
     D_TDocumento = ArrayCliente[Index_Cliente].TypeDocument_ID;
     D_Documento = ArrayCliente[Index_Cliente].Document_ID;
     editNit_ID = ArrayCliente[Index_Cliente].Nit_ID;
@@ -645,6 +490,8 @@ function Editar(Index_Cliente, Type) {
 
     D_String_Contacto = ArrayCliente[Index_Cliente].Nombre;
     D_String_TDocumento = ArrayCliente[itemArray].DescripTypeDocument;
+
+    transacionAjax_Foto('Foto', D_Nit, D_TDocumento, D_Documento, Index_Cliente, Type, ArrayCliente[Index_Cliente].Pais_ID);
 
     $("#Select_EmpresaNit").val(ArrayCliente[Index_Cliente].Nit_ID);
     $("#Select_Documento").val(ArrayCliente[Index_Cliente].TypeDocument_ID);
@@ -657,11 +504,6 @@ function Editar(Index_Cliente, Type) {
     $("#Text_fechaNacimiento").css("color", "#000000")
 
     StrPolitica = ArrayCliente[Index_Cliente].Politica_ID;
-
-    if (StrPolitica == 0)
-        $("#Select_Politica").val("-1");
-    else
-        $("#Select_Politica").val(StrPolitica);
 
     $("#Txt_Ident").val(ArrayCliente[Index_Cliente].Document_ID);
     $("#TxtVerif").val(ArrayCliente[Index_Cliente].Digito_Verificacion);
@@ -694,8 +536,6 @@ function Editar(Index_Cliente, Type) {
     $("#Complementos").css("display", "inline-table");
     $("#Admin_Anexos").css("display", "inline-table");
 
-    transacionAjax_Foto('Foto', D_Nit, D_TDocumento, D_Documento, Index_Cliente, Type, ArrayCliente[Index_Cliente].Pais_ID);
-
     if (Type == "V") {
         $("#Btnguardar").css("display", "none");
         $("#BtnLimpiar").css("display", "none");
@@ -713,9 +553,154 @@ function Editar(Index_Cliente, Type) {
 
     Charge_Combos_Depend_Nit(Matrix_Area, "Select_Area", ArrayCliente[Index_Cliente].Nit_ID, ArrayCliente[Index_Cliente].Area_ID);
     Charge_Combos_Depend_Nit(Matrix_Cargo, "Select_Cargo", ArrayCliente[Index_Cliente].Nit_ID, ArrayCliente[Index_Cliente].Cargo_ID);
-    Charge_Combos_Depend_Nit(Matrix_Jefe, "Select_Jefe", ArrayCliente[Index_Cliente].Nit_ID, ArrayCliente[Index_Cliente].Document_ID_Jefe);
     Charge_Combos_Depend_Nit(Matrix_GrpDocumentos, "Select_GrpDocument", ArrayCliente[Index_Cliente].Nit_ID, ArrayCliente[Index_Cliente].GrpDocumentos);
+    transaccionAjax_MJefe('MATRIX_JEFE', D_Nit, "Edit", ArrayCliente[Index_Cliente].Document_ID_Jefe);
+    transacionAjax_Seguridad('Seguridad', D_Nit, "Edit", ArrayCliente[Index_Cliente].Politica_ID);
 
+    if (StrPolitica == 0) {
+        setTimeout("$('#Select_Politica').val('-1').trigger('chosen:updated');", 300);
+    } else {
+        setTimeout("$('#Select_Politica').val('" + StrPolitica + "').trigger('chosen:updated');", 300);
+    }
+}
+
+//muestra el registro a eliminar
+function Eliminar(Index_Cliente) {
+
+    D_Nit = ArrayCliente[Index_Cliente].Nit_ID;
+    D_TDocumento = ArrayCliente[Index_Cliente].TypeDocument_ID;
+    D_Documento = ArrayCliente[Index_Cliente].Document_ID;
+
+    editNit_ID = ArrayCliente[Index_Cliente].Nit_ID;
+    editType_Document_ID = ArrayCliente[Index_Cliente].TypeDocument_ID;
+    editDocument_ID = ArrayCliente[Index_Cliente].Document_ID;
+
+    D_String_Contacto = ArrayCliente[Index_Cliente].Nombre;
+
+    $("#dialog_eliminar").dialog("option", "title", "Eliminar?");
+    $("#dialog_eliminar").dialog("open");
+
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                 PROCESOS GENERALES DE LA PAGINA                                                                                  ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//habilita el panel de crear o consulta
+function HabilitarPanel(opcion) {
+
+    switch (opcion) {
+
+        case "crear":
+            ResetError();
+            CargaYear("Select_Year", 80, 17, "");
+            $(".Dialog_Datos").css("display", "inline-table");
+            $(".Dialog_Datos_Vista").css("display", "none");
+            $("#Admin_Anexos").css("display", "none");
+            $("#Foto_Persona").css("display", "inline-table");
+
+            $("#Controls").css("display", "inline-table");
+            $("#TablaConsulta").css("display", "none");
+            $(".container_Grid_Flex").css("display", "none");
+            $("#C_Banco").css("display", "none");
+            $("#C_Empleado").css("display", "none");
+
+            $("#Select_EmpresaNit").removeAttr("disabled");
+            $("#Select_Documento").removeAttr("disabled");
+
+            $("#BtnLimpiar").css("display", "inline-table");
+            $("#Btnguardar").css("display", "inline-table");
+
+            $("#Txt_Nit").removeAttr("disabled");
+            $("#Txt_Ident").removeAttr("disabled");
+            $("#Btnguardar").attr("value", "Guardar");
+
+            $("#Imgfoto").attr("src", "../../images/avatar.png");
+            Enabled_Client();
+            Clear();
+            estado = opcion;
+
+            var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+            if (OnlyEmpresa == true) {
+                TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+            }
+            break;
+
+        case "buscar":
+            $("#Admin_Anexos").css("display", "none");
+            $(".Dialog_Datos").css("display", "none");
+            $(".Dialog_Datos_Vista").css("display", "none");
+            $("#Foto_Persona").css("display", "none");
+
+            $("#Controls").css("display", "none");
+            $(".container_Grid_Flex").css("display", "none");
+            $("#BtnLimpiar").css("display", "none");
+
+            $("#TablaConsulta").css("display", "inline-table");
+            $(".container_TGrid").html("");
+            estado = opcion;
+            Clear();
+            break;
+
+        case "modificar":
+            ResetError();
+            $(".Dialog_Datos").css("display", "none");
+            $(".Dialog_Datos_Vista").css("display", "none");
+            $("#Admin_Anexos").css("display", "none");
+            $("#Foto_Persona").css("display", "none");
+
+            $("#Controls").css("display", "none");
+            $(".container_Grid_Flex").css("display", "none");
+            $("#C_Banco").css("display", "none");
+            $("#C_Empleado").css("display", "none");
+            $("#BtnLimpiar").css("display", "none");
+
+            $("#TablaConsulta").css("display", "inline-table");
+            $(".container_TGrid").html("");
+            estado = opcion;
+            Clear();
+            Enabled_Client();
+            break;
+
+        case "eliminar":
+            $(".Dialog_Datos").css("display", "none");
+            $(".Dialog_Datos_Vista").css("display", "none");
+            $("#Admin_Anexos").css("display", "none");
+            $("#Foto_Persona").css("display", "none");
+
+            $("#Controls").css("display", "none");
+            $(".container_Grid_Flex").css("display", "none");
+            $("#BtnLimpiar").css("display", "none");
+
+            $("#TablaConsulta").css("display", "inline-table");
+            $(".container_TGrid").html("");
+            estado = opcion;
+            Clear();
+            break;
+
+    }
+}
+
+//selecciona que tipo de operacion desea con el registro seleccionado
+function Select_Option_Cliente(Select_control, Index_Cliente, Type) {
+
+    var Select_Value = $(Select_control).val();
+    var Index_Pos = parseInt(Index_Cliente) - 1;
+
+    switch (Select_Value) {
+        case "M": //modificar
+            Editar(Index_Pos, Type);
+            break;
+
+        case "V": //visualizar
+            Ver(Index_Pos);
+            break;
+
+        case "E": //eliminar
+            Eliminar(Index_Pos);
+            break;
+
+    }
 }
 
 //oculta los combos
@@ -822,9 +807,9 @@ function Carga_Relaciones(Index_Cliente, Type) {
         $("#C_Banco_Vista").css("display", "inline-table");
 
         if (Type == "V")
-            $("#Anexos").css("display", "none");
+            $(".container_Grid_Flex").css("display", "none");
         else
-            $("#Anexos").css("display", "inline-table");
+            $(".container_Grid_Flex").css("display", "inline-table");
 
     }
     else {
@@ -839,9 +824,9 @@ function Carga_Relaciones(Index_Cliente, Type) {
         $("#C_Empleado_Vista").css("display", "inline-table");
 
         if (Type == "V")
-            $("#Anexos").css("display", "none");
+            $(".container_Grid_Flex").css("display", "none");
         else
-            $("#Anexos").css("display", "inline-table");
+            $(".container_Grid_Flex").css("display", "inline-table");
 
 
     }
@@ -857,9 +842,9 @@ function Carga_Relaciones(Index_Cliente, Type) {
         $("#C_Socio_Vista").css("display", "inline-table");
 
         if (Type == "V")
-            $("#Anexos").css("display", "none");
+            $(".container_Grid_Flex").css("display", "none");
         else
-            $("#Anexos").css("display", "inline-table");
+            $(".container_Grid_Flex").css("display", "inline-table");
 
 
     }
@@ -871,30 +856,19 @@ function Carga_Relaciones(Index_Cliente, Type) {
 
 }
 
-//muestra el registro a eliminar
-function Eliminar(Index_Cliente) {
+//verifica el numero de verificacion DIAN
+function Verifica() {
+    $("#Txt_Ident").blur(function () {
 
-    D_Nit = ArrayCliente[Index_Cliente].Nit_ID;
-    D_TDocumento = ArrayCliente[Index_Cliente].TypeDocument_ID;
-    D_Documento = ArrayCliente[Index_Cliente].Document_ID;
+        var DigitoVerificado = DigitoVerificacion($("#Txt_Ident").val());
+        $("#TxtVerif").val(DigitoVerificado);
 
-    editNit_ID = ArrayCliente[Index_Cliente].Nit_ID;
-    editType_Document_ID = ArrayCliente[Index_Cliente].TypeDocument_ID;
-    editDocument_ID = ArrayCliente[Index_Cliente].Document_ID;
-
-    D_String_Contacto = ArrayCliente[Index_Cliente].Nombre;
-
-    $("#dialog_eliminar").dialog("option", "title", "Eliminar?");
-    $("#dialog_eliminar").dialog("open");
-
+    });
 }
 
-
-//evento del boton salir
-function x() {
-    $("#dialog").dialog("close");
-}
-
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                              MENSAJES, VISUALIZACION Y LIMPIEZA                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //limpiar campos
 function Clear() {
     $("#Select_Documento").val("-1");
@@ -902,11 +876,14 @@ function Clear() {
     $("#Select_Ciudad").val("-1");
     $("#Select_EmpresaNit").val("-1");
     $("#Select_Ciudad_Doc").val("-1");
+    $("#Select_Sex").val("-1");
 
     $("#Txt_Ident").val("");
     $("#TxtVerif").val("");
     $("#TxtNombre").val("");
     $("#TxtNombreNit").val("");
+    $("#Text_fechaNacimiento").val("YYYY-MM-DD");
+    $("#Text_fechaNacimiento").css("color", "#921919")
 
     $("#TxtNombre_2").val("");
     $("#Txt_Ape_1").val("");
@@ -916,7 +893,6 @@ function Clear() {
 
     $("#TxtRead").val("");
     $("#DDLColumns").val("-1");
-
 
     $("#Check_Cliente").prop("checked", false);
     $("#Check_Avaluador").prop("checked", false);
@@ -940,20 +916,6 @@ function Clear() {
     $('.C_Chosen').trigger('chosen:updated');
 
 }
-
-
-
-//verifica el numero de verificacion DIAN
-function Verifica() {
-    $("#Txt_Ident").blur(function () {
-
-        var DigitoVerificado = DigitoVerificacion($("#Txt_Ident").val());
-        $("#TxtVerif").val(DigitoVerificado);
-
-    });
-}
-
-
 
 //bloquea controles cliente
 function Disabled_Client() {
@@ -1050,7 +1012,9 @@ function Enabled_Client() {
 
 }
 
-
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                              PROCESOS SUBMENU                                                                                               ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //habilita barra de complementos
 function Complemento() {
     if (OpcComplementos == 0) {
@@ -1094,18 +1058,6 @@ function BlockAnexos(Modulo) {
             Documentos(OpcWordComplementos);
             break;
 
-        case "DocumentoAutrizado":
-            DocumentosAutorizados(OpcWordComplementos);
-            break;
-
     }
 
-}
-
-
-//limpia los campos
-function BtnLimpia() {
-    Clear();
-    Enabled_Client();
-    $("#Anexos").css("display", "none");
 }

@@ -23,7 +23,9 @@ function transacionAjax_EmpresaNit(State) {
         },
         error: function () {
 
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     });
 }
 
@@ -49,7 +51,9 @@ function transaccionAjax_MSucursal(State) {
         },
         error: function () {
 
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     });
 }
 
@@ -155,9 +159,7 @@ function transacionAjax_ShearchPeople(State, TD, D, NIT, Vista, Variable) {
         },
         error: function () {
 
-        },
-        async: false, // La petición es síncrona
-        cache: false // No queremos usar la caché del navegador
+        }
     });
 }
 
@@ -183,7 +185,9 @@ function transacionAjax_Productos(State) {
         },
         error: function () {
 
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     });
 }
 
@@ -209,7 +213,9 @@ function transacionAjax_Financiacion(State) {
         },
         error: function () {
 
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     });
 }
 
@@ -238,7 +244,9 @@ function transaccionAjax_MCiclo(State) {
         },
         error: function () {
 
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     });
 }
 
@@ -727,12 +735,13 @@ function transacionAjax_Linea_F(State, Marca, Index, Proccess) {
             else {
                 Matrix_Linea_F = JSON.parse(result);
                 Charge_Combos_Depend_Verificacion(Matrix_Linea_F, "Select_LineaF", "", "", "");
-                if (Proccess == "ID") {
-                    setTimeout("CargarValoresCombos();", 300);
-                }
             }
         },
         error: function () {
+        }
+    }).done(function () {
+        if (Proccess == "ID") {
+            CargarValoresCombos();
         }
     });
 }

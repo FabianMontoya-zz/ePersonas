@@ -1,11 +1,12 @@
 ﻿/*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_CargaBusqueda(State) {
-    $.ajax({
+   $.ajax({
         url: "Adm_OpcRolAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'OPTION_ROL'
         },
         //Transaccion Ajax en proceso
@@ -24,15 +25,46 @@ function transacionAjax_CargaBusqueda(State) {
     });
 }
 
-
-/*-------------------- carga subrol---------------------------*/
+/*-------------------- Carga combo NIT ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_CargaRol(State) {
+function transacionAjax_EmpresaNit(State) {
     $.ajax({
         url: "Adm_OpcRolAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State
+        data: {
+            "action": State,
+            "tabla": 'CLIENTE'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                ArrayEmpresaNit = [];
+            }
+            else {
+                ArrayEmpresaNit = JSON.parse(result);
+                charge_CatalogList(ArrayEmpresaNit, "Select_EmpresaNit", "Generico");
+                charge_CatalogList(ArrayEmpresaNit, "Select_EmpresaNit_2", "Generico");
+            }
+        },
+        error: function () {
+
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
+    });
+}
+
+/*-------------------- carga subrol---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_CargaRol(vp_State, vp_Nit_ID, vp_Type) {
+    $.ajax({
+        url: "Adm_OpcRolAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": vp_State,
+            "NIT": vp_Nit_ID
 
         },
         //Transaccion Ajax en proceso
@@ -42,30 +74,33 @@ function transacionAjax_CargaRol(State) {
             }
             else {
                 ArrayComboSubRol = JSON.parse(result);
-                charge_CatalogList(ArrayComboSubRol, "DDLSubRol_Rol", 1);
-                charge_CatalogList(ArrayComboSubRol, "DDL_ID", 1);
             }
         },
         error: function () {
 
         }
+
+    }).done(function () {
+
+        if (vp_Type == "P") {
+            Charge_Combos_Depend_Nit(ArrayComboSubRol, "DDL_Padre", "","");
+        }
+        else {
+            Charge_Combos_Depend_Nit(ArrayComboSubRol, "DDL_Hijo", "","");
+        }
     });
 }
 
-
-
-
 /*-------------------- carga subrol---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_CargaLinks(State, tipo_link) {
+function transacionAjax_CargaLinks(vp_State) {
 
     $.ajax({
         url: "Adm_OpcRolAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
-            "tipo_link": tipo_link
-
+        data: {
+            "action": vp_State
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -74,12 +109,12 @@ function transacionAjax_CargaLinks(State, tipo_link) {
             }
             else {
                 ArrayComboLinks = JSON.parse(result);
-                charge_CatalogList(ArrayComboLinks, "DDLLink_ID", 1);
             }
         },
         error: function () {
-
         }
+    }).done(function () {
+        Charge_Combos_Depend_Nit(ArrayComboLinks, "DDLLink_ID", "","");
     });
 
 }
@@ -101,10 +136,12 @@ function transacionAjax_opcRol(State, filtro, opcion) {
         url: "Adm_OpcRolAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "filtro": filtro,
             "opcion": opcion,
-            "contenido": contenido
+            "contenido": contenido,
+            "Nit_User": g_NitEmpresa_User
         },
         //mostrar resultados de la creacion de la opcion rol
         success: function (result) {
@@ -125,64 +162,59 @@ function transacionAjax_opcRol(State, filtro, opcion) {
 /*------------------------------ crear ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax_opcRol_create(State) {
+    var vl_Nit_Hijo;
+    var vl_Hijo;
+    var vl_pagina;
+    var vl_Tipo = $("#DDLTipo").val();
 
-    var ID;
-    var param;
-
-    if (State == "modificar") {
-        ID = editID;
-    } else {
-        ID = $("#DDL_ID").val();
+    if (vl_Tipo == 1) {
+        vl_Nit_Hijo = $("#Select_EmpresaNit_2").val();
+        vl_Hijo = $("#DDL_Hijo").val();
+        vl_pagina = $("#DDL_Padre").val();
     }
-
+    else {
+        vl_Nit_Hijo = $("#Select_EmpresaNit").val();
+        vl_Hijo = $("#DDL_Padre").val();
+        vl_pagina = $("#DDLLink_ID").val();
+    }
 
     $.ajax({
         url: "Adm_OpcRolAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
-            "ID": ID,
+        data: {
+            "action": State,
+            "NIT_Padre": $("#Select_EmpresaNit").val(),
+            "Padre": $("#DDL_Padre").val(),
             "consecutivo": $("#TxtConsecutivo").val(),
-            "tipo": $("#DDLTipo").val(),
-            "subrol_rol": $("#DDLSubRol_Rol").val(),
-            "link_ID": $("#DDLLink_ID").val()
+            "tipo": vl_Tipo,
+            "Nit_ID_Hijo": vl_Nit_Hijo,
+            "Hijo": vl_Hijo,
+            "link_ID":  vl_pagina,
+            "user": User.toUpperCase()
         },
         //Transaccion Ajax en proceso
         success: function (result) {
             switch (result) {
 
                 case "Error":
-                    $("#dialog").dialog("option", "title", "Disculpenos :(");
-                    $("#Mensaje_alert").text("No se realizo El ingreso de la opcion perfil!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "block");
-                    $("#SE").css("display", "none");
+                    Mensaje_General("Disculpenos :(", "Ocurrió un error y no se realizó el Ingreso de la Opción Perfil.", "W");
                     break;
 
                 case "Existe":
-                    $("#dialog").dialog("option", "title", "Ya Existe");
-                    $("#Mensaje_alert").text("El codigo ingresado ya existe en la base de datos!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "block");
-                    $("#SE").css("display", "none");
+                    Mensaje_General("¡Opción Perfil Existente!", "La Opción Perfil que desea ingresar ya existe en el sistema, favor revisar.", "E");
+                    $("#ImgNIT").css("display", "inline-table");
+                    $("#ImgID").css("display", "inline-table");
+                    $("#Img1").css("display", "inline-table");
                     break;
 
                 case "Exito":
                     if (estado == "modificar") {
-                        $("#dialog").dialog("option", "title", "Exito");
-                        $("#Mensaje_alert").text("La opcion perfil fue modificada exitosamente! ");
-                        $("#dialog").dialog("open");
-                        $("#DE").css("display", "none");
-                        $("#SE").css("display", "block");
-                        Clear();
+                        Mensaje_General("¡Exito!", "La Opción Perfil se ha modificado exitosamente.", "S");
                     }
                     else {
-                        $("#dialog").dialog("option", "title", "Exito");
-                        $("#Mensaje_alert").text("La opcion perfil fue creada exitosamente! ");
-                        $("#dialog").dialog("open");
-                        $("#DE").css("display", "none");
-                        $("#SE").css("display", "block");
-                        Clear();
+                        Mensaje_General("¡Exito!", "La Opción Perfil se ha registrado exitosamente en el sistema.", "S");
+                        HabilitarPanel('crear');
                     }
                     break;
             }
@@ -198,29 +230,37 @@ function transacionAjax_opcRol_create(State) {
 //hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax_opcRol_delete(State) {
 
+    var NIT;
+    var ID_Nit_ID;
+    var ID;
+    var Consecutive;
+
+    NIT = editNIT;
+    ID_Nit_ID = editID_Nit_ID;
+    ID = editID;
+    Consecutive = editConsecutivo
+
     $.ajax({
         url: "Adm_OpcRolAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
-            "ID": editID,
-            "DeleteConsecutivo": DeleteConsecutivo
+        data: {
+            "action": State,
+            "ID": ID,
+            "NIT": NIT,
+            "Consecutivo": Consecutive
         },
         //Transaccion Ajax en proceso
         success: function (result) {
             if (result == "Error") {
-                $("#dialog").dialog("option", "title", "Disculpenos :(");
-                $("#Mensaje_alert").text("No se realizo la eliminación de la opcion perfil!");
-                $("#dialog").dialog("open");
-                $("#DE").css("display", "block");
+                $("#dialog_eliminar").dialog("close");
+                Mensaje_General("Disculpenos :(", "Ocurrió un error y no se eliminó la Opción Perfil.", "W");
             }
             else {
                 $("#dialog_eliminar").dialog("close");
-                $("#dialog").dialog("option", "title", "Exito");
-                $("#Mensaje_alert").text("la opcion perfil fue eliminada exitosamente! ");
-                $("#dialog").dialog("open");
-                $("#SE").css("display", "block");
-                Clear();
+                Mensaje_General("¡Exito!", "La Opción Perfil se ha eliminado correctamente.", "S");
+                $(".container_TGrid").html("");
+                HabilitarPanel('eliminar');
             }
         },
         error: function () {

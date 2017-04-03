@@ -51,8 +51,9 @@ Public Class R_PuertaAcc_AreaAjax
         Dim vl_S_filtro As String = Request.Form("filtro")
         Dim vl_S_opcion As String = Request.Form("opcion")
         Dim vl_S_contenido As String = Request.Form("contenido")
+        Dim vl_S_Nit_User As String = Request.Form("Nit_User")
 
-        ObjListR_PuertaAcc_Area = SQL_R_PuertaAcc_Area.Read_AllR_PuertaAcc_Area(vl_S_filtro, vl_S_opcion, vl_S_contenido)
+        ObjListR_PuertaAcc_Area = SQL_R_PuertaAcc_Area.Read_AllR_PuertaAcc_Area(vl_S_filtro, vl_S_opcion, vl_S_contenido, vl_S_Nit_User)
 
         If ObjListR_PuertaAcc_Area Is Nothing Then
 

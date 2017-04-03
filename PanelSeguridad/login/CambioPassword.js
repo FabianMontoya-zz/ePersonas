@@ -1,33 +1,36 @@
-﻿//evento load del Cambio de password
+﻿/*--------------- region de variables globales --------------------*/
+var Array_G_Usuario = [];
+var User_ID = "";
+var Nit_ID = "";
+/*--------------- region de variables globales --------------------*/
+
+//Evento load JS
 $(document).ready(function () {
     //capturamos la url
-    var URLPage = window.location.search.substring(1);
-    var URLVariables = URLPage.split('&');
-    var User = URLVariables[0].replace("User=", "");
-    $("#TdUser").html(User.toUpperCase());
-    $("#User").html(User.toUpperCase());
+    ConsultaParametrosURL();
+    Ventanas_Emergentes();
+    Ocultar_Errores();
 
-    //evento del boton ingresar
-    $("#BtnCambiar").click(function () {
-        //llamamos la funcion de validar
-        var flag_campos = ValidarCampos();
-        if (flag_campos === 0) {
-            $('#TxtPassword').keyup(function () {
-                $("#E2").css("display", "none");
-                $("#E1").css("display", "none");
-            });
-            //llamamos la funcion de campos
-            RevisarContraseña();
-        }
-    });
+    transacionAjax_InfoUser("Information");
+  
+});
 
-    //evento del boton salir
-    $("#BtnExit").click(function () {
-        window.location = "../login/Login.aspx"
-    });
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                 REGION INICIO DE COMPONENTES                                                                                                    ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//Función que oculta todas las IMG de los errores en pantalla
+function Ocultar_Errores() {
+    $("#E1").css("display", "none");
+    $("#S1").css("display", "none");
+    $("#E2").css("display", "none");
+    $("#S2").css("display", "none");
+    $("#DE").css("display", "none");
+    $("#SE").css("display", "none");
+    $("#WA").css("display", "none");
+}
 
-
-    $('#show').attr('checked', false);
+//funcion para las ventanas emergentes
+function Ventanas_Emergentes() {
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
@@ -36,19 +39,35 @@ $(document).ready(function () {
         modal: true
     });
 
-    $("#E1").css("display", "none");
-    $("#S1").css("display", "none");
-    $("#E2").css("display", "none");
-    $("#S2").css("display", "none");
-    $("#DE").css("display", "none");
-    $("#DS").css("display", "none");
-    $("#BtnExit").css("display", "none");
 
-    /*MostarContraseña();*/
-    /*ValidarCamposIguales();*/
+}
 
-});
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                 REGION BOTONES                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//boton verifica y cambia contraseña
+function BtnCambioPassword() {
+    //llamamos la funcion de validar
+    var flag_campos = ValidarCampos();
+    if (flag_campos === 0) {
+        $('#TxtPassword').keyup(function () {
+            $("#E2").css("display", "none");
+            $("#E1").css("display", "none");
+        });
+        //llamamos la funcion de campos
+        RevisarContraseña();
+    }
+}
 
+//evento del boton salir
+function BtnRedirect() {
+    window.location = "../login/Login.aspx"
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                      REGION VALIDACIONES DEL PROCESO                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//valida comparacion de contraseñas
 function RevisarContraseña() {
     var campo_1 = $('#TxtPassword').val();
     var campo_2 = $('#txtConfirmPassword').val();
@@ -109,108 +128,71 @@ function ValidarCampos() {
     return flag_valida;
 }
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                      TRANSACCIONES AJAX                                                                                                            ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax(State) {
     $.ajax({
         url: "CambioPasswordAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
-            "user": $("#TdUser").html(),
+        data: {
+            "action": State,
+            "user": User_ID,
+            "Nit_ID": Nit_ID,
             "password": $("#TxtPassword").val()
         },
-       //Transaccion Ajax en proceso
+        //Transaccion Ajax en proceso
         success: function (result) {
+
             if (result == "Exito") {
-
-                $("#dialog").dialog("option", "title", "Exito");
-                $("#Mensaje_alert").text("Su contraseña fue modificada exitosamente! ");
-                $("#dialog").dialog("open");
-                $("#DS").css("display", "block");
-                $("#BtnExit").css("display", "block");
-
-
+                Mensaje_General("Exito", "Su contraseña fue modificada exitosamente! ", "S");
             } else {
-
-                $("#dialog").dialog("option", "title", "Disculpenos :(");
-                $("#Mensaje_alert").text("No se realizo el cambio de clave!");
-                $("#dialog").dialog("open");
-                $("#DE").css("display", "block");
-                $("#BtnExit").css("display", "block");
-
+                Mensaje_General("Disculpenos :(", "No se realizo el cambio de clave! ", "E");
             }
 
         },
         error: function () {
-            $("#dialog").dialog("option", "title", "Disculpenos :(");
-            $("#Mensaje_alert").text("Se genero error al realizar la transacción Ajax!");
-            $("#dialog").dialog("open");
-            $("#DE").css("display", "block");
+            Mensaje_General("Disculpenos :(", "Se genero error al realizar la transacción Ajax! ", "E");
         }
     });
 }
 
-//funcion para ver los campos password
-//function MostarContraseña() {
-//    $('#show').click(function () {
-//        if ($('#show').is(':checked')) {
-//            $('#txtConfirmPassword').attr("type", "text");
-//            $('#TxtPassword').attr("type", "text");
-//        }
-//        else {
-//            $('#txtConfirmPassword').attr("type", "password");
-//            $('#TxtPassword').attr("type", "password");
-//        }
-//    });
-//}
+//*-------------------- Hace JSON con Todos los datos del User y da acceso al sistema ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_InfoUser(vp_State) {
 
-//funcion que valida si los campos de la contraseña son igules soi no bloquea boton cambiar
-//function ValidarCamposIguales() {
+    $.ajax({
+        url: "CambioPasswordAjax.aspx",
+        type: "POST",
+        //crear json
+        data: {
+            "action": vp_State,
+            "NITEncrip": Encrip,
+            "Usuario": User
+        },
+        success: function (result) {
+            if (result == "") {
+                Array_G_Usuario = [];
+            }
+            else {
+                Array_G_Usuario = JSON.parse(result);
+            }
+        },
+        error: function () {
+            Mensaje_General("¡Disculpenos!", "Se generó un error al realizar la transacción y no se completó la tarea.", "E");
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
+    }).done(function () {
+        Capture_Nit_User();
+        User_ID = Array_G_Usuario[0].Usuario_ID;
+        Nit_ID = Array_G_Usuario[0].Nit_ID;
+        $("#TdUser").html(User_ID);
+        $("#User").html(User_ID);
+    });
+}
 
-//    $('#TxtPassword').keyup(function () {
-//        $("#TdHelpPassword").html("");
-//    });
 
-//    $('#txtConfirmPassword').keyup(function () {
-//        var campo_1 = $('#TxtPassword').val();
-//        var campo_2 = $('#txtConfirmPassword').val();
-//        $("#TdHelpConfirmPassword").html("");
-//        //validar si el primer campo esta diligenciado
-//        if (campo_1 == "") {
-//            $("#TxtPassword").focus();
-//            $('#TxtPassword').val("");
-//            $('#txtConfirmPassword').val("");
-//            $("#dialog").dialog("option", "title", "Advertencia!");
-//            $("#Mensaje_alert").html("debe diligenciar primero el campo (Digite Contraseña)");
-//            $("#dialog").dialog("open");
-//        }
-//        else {
-//            //validamos si los campos son iguales
-//            if (campo_1 == campo_2) {
-//                $("#S1").css("display", "-webkit-inline-box");
-//                $("#S2").css("display", "-webkit-inline-box");
-//                $("#E1").css("display", "none");
-//                $("#E2").css("display", "none");
-//                $('#TxtPassword').css("border", "solid");
-//                $('#txtConfirmPassword').css("border", "solid");
-//                $('#TxtPassword').css("border-color", "chartreuse");
-//                $('#txtConfirmPassword').css("border-color", "chartreuse");
-//                $('#BtnCambiar').removeAttr('disabled');
-//            }
-//            else {
-//                $("#E1").css("display", "-webkit-inline-box");
-//                $("#E2").css("display", "-webkit-inline-box");
-//                $("#S1").css("display", "none");
-//                $("#S2").css("display", "none");
-//                $('#TxtPassword').css("border", "solid");
-//                $('#txtConfirmPassword').css("border", "solid");
-//                $('#TxtPassword').css("border-color", "darkred");
-//                $('#txtConfirmPassword').css("border-color", "darkred");
-//                $('#BtnCambiar').attr('disabled', 'disabled');
-//            }
-//        }
-
-//    });
-
-//}
 

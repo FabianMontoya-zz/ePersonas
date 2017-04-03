@@ -6,8 +6,10 @@ function transaccionAjax_MTarjeta(State) {
         url: "R_Persona_TarjetaAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
-            "tabla": 'RUTA'
+        data: {
+            "action": State,
+            "tabla": 'RUTA',
+            "Nit": $("#Select_EmpresaNit").val()
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -20,7 +22,13 @@ function transaccionAjax_MTarjeta(State) {
         },
         error: function () {
 
-        }
+        },
+        async: false,
+        cache: false
+    }).done(function () {
+        
+        Charge_Combos_Depend_Nit(Matrix_Tarjeta, "Select_Tarjeta_Blo", $("#Select_EmpresaNit").val(), "");
+
     });
 }
 
@@ -31,8 +39,10 @@ function transaccionAjax_MPersona(State) {
         url: "R_Persona_TarjetaAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
-            "tabla": 'RUTA'
+        data: {
+            "action": State,
+            "tabla": 'RUTA',
+            "Nit": $("#Select_EmpresaNit").val()
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -44,7 +54,11 @@ function transaccionAjax_MPersona(State) {
             }
         },
         error: function () {
-        }
+        },
+        async: false,
+        cache: false
+    }).done(function () {
+        Charge_Combos_Depend_Nit(Matrix_Persona, "Select_Persona", $("#Select_EmpresaNit").val(), "");
     });
 }
 
@@ -55,8 +69,10 @@ function transaccionAjax_MRTP(State) {
         url: "R_Persona_TarjetaAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
-            "tabla": 'RUTA'
+        data: {
+            "action": State,
+            "tabla": 'RUTA',
+            "Nit": $("#Select_EmpresaNit").val()
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -80,7 +96,8 @@ function transacionAjax_EmpresaNit(State) {
         url: "R_Persona_TarjetaAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'CLIENTE'
         },
         //Transaccion Ajax en proceso
@@ -95,6 +112,15 @@ function transacionAjax_EmpresaNit(State) {
         },
         error: function () {
 
+        },
+        async: false,
+        cache: false
+    }).done(function () {
+
+        var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+        if (OnlyEmpresa == true) {
+            TransaccionesSegunNIT($("#Select_EmpresaNit").val());
         }
     });
 }
@@ -106,7 +132,8 @@ function transacionAjax_Bloqueo(State) {
         url: "R_Persona_TarjetaAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'bloqueo'
         },
         //Transaccion Ajax en proceso
@@ -137,7 +164,8 @@ function transacionAjax_UpdateBloqueo(State) {
         url: "R_Persona_TarjetaAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Tarjeta": $("#Select_Tarjeta_Blo").val(),
             "Estado": "3",
             "Bloqueo": $("#Select_Bloqueo").val(),

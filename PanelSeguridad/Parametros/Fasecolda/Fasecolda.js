@@ -78,11 +78,6 @@ function Periodos() {
     }
 }
 
-//salida del formulario
-function btnSalir() {
-    window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
-}
-
 //habilita el panel de crear o consulta
 function HabilitarPanel(opcion) {
 
@@ -107,7 +102,7 @@ function HabilitarPanel(opcion) {
         case "buscar":
             $("#Dialog_Fasecolda").dialog("close");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TFasecolda").html("");
+            $(".container_TGrid").html("");
             $("#Select_Estado").removeAttr("disabled");
             $('.C_Chosen').trigger('chosen:updated');
 
@@ -119,7 +114,7 @@ function HabilitarPanel(opcion) {
         case "modificar":
             $("#Dialog_Fasecolda").dialog("close");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TFasecolda").html("");
+            $(".container_TGrid").html("");
             $("#Select_Estado").removeAttr("disabled");
             $('.C_Chosen').trigger('chosen:updated');
             estado = opcion;
@@ -131,7 +126,7 @@ function HabilitarPanel(opcion) {
         case "eliminar":
             $("#Dialog_Fasecolda").dialog("close");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TFasecolda").html("");
+            $(".container_TGrid").html("");
             $("#Select_Estado").removeAttr("disabled");
             $('.C_Chosen').trigger('chosen:updated');
 
@@ -268,8 +263,8 @@ function Tabla_modificar() {
         }
     }
     html_Fasecolda += "</tbody></table>";
-    $("#container_TFasecolda").html("");
-    $("#container_TFasecolda").html(html_Fasecolda);
+    $(".container_TGrid").html("");
+    $(".container_TGrid").html(html_Fasecolda);
 
     $(".Eliminar").click(function () {
     });
@@ -352,8 +347,8 @@ function Tabla_eliminar() {
         }
     }
     html_Fasecolda += "</tbody></table>";
-    $("#container_TFasecolda").html("");
-    $("#container_TFasecolda").html(html_Fasecolda);
+    $(".container_TGrid").html("");
+    $(".container_TGrid").html(html_Fasecolda);
 
     $(".Eliminar").click(function () {
     });
@@ -390,8 +385,8 @@ function Tabla_consulta() {
         }
     }
     html_Fasecolda += "</tbody></table>";
-    $("#container_TFasecolda").html("");
-    $("#container_TFasecolda").html(html_Fasecolda);
+    $(".container_TGrid").html("");
+    $(".container_TGrid").html(html_Fasecolda);
 
     $(".Ver").click(function () {
     });

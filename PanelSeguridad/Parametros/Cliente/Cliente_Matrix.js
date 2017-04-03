@@ -118,7 +118,6 @@ function Charge_CatalogList_Matriz_Depend(M1, M2, Select_Pais, selector, type, S
         $("#" + selector).append("<option value='-1'>Seleccione...</option>");
         $("#" + selector + " option[value= '-1'] ").attr("selected", true);
     }
-    console.log(Select_Ciudad);
 
     if (Select_Ciudad != "") {
         $("#" + selector).append("<option value='-1'>Seleccione...</option>");
@@ -129,6 +128,10 @@ function Charge_CatalogList_Matriz_Depend(M1, M2, Select_Pais, selector, type, S
     $('.C_Chosen').trigger('chosen:updated');
 
 }
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                     PROCESO DE CARGUE DE COMBOS                                                                                                                               ----*/
+/*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 //carga el combo de regimen
 function Change_Select_TPersona(index, Regimen) {
@@ -195,9 +198,59 @@ function Change_Select_TPersona(index, Regimen) {
 function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {
         var index_ID = $(this).val();
+        TransaccionesSegunNIT(index_ID);
+    });
+}
+
+//Carga los combos de los registros relacionados con Select_Nit
+function TransaccionesSegunNIT(index_ID) {
+    if (index_ID != "-1") {
+
         Charge_Combos_Depend_Nit(Matrix_Area, "Select_Area", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Cargo, "Select_Cargo", index_ID, "");
-        Charge_Combos_Depend_Nit(Matrix_Jefe, "Select_Jefe", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_GrpDocumentos, "Select_GrpDocument", index_ID, "");
+        transacionAjax_Seguridad('Seguridad', index_ID, "Crear", "");
+        transaccionAjax_MJefe('MATRIX_JEFE', index_ID, "Crear", "");
+
+    }
+}
+
+//revisa el tipo de documento
+function Change_Select_TDoc() {
+    $("#Select_Documento").change(function () {
+        var index = $(this).val();
+
+        if (index != 2) {
+
+            ResetError();
+            $("#TR_Nit").css("display", "none");
+            $(".Desvanecer").css("display", "inline-table");
+            $(".TR_1").css("width", "100%");
+            ValidatorCampos = 1;
+
+            $("#TD_1").css("width", "15.2%");
+            $("#TD_3").css("width", "3%");
+            $("#TD_4").css("width", "3%");
+            $("#TD_5").css("width", "5%");
+            $("#TD_6").css("width", "2%");
+            $("#TD_7").css("width", "35%");
+            $("#TD_8").css("width", "15%");
+            $("#Select_Ciudad_Doc").css("width", "80%");
+
+        }
+        else {
+            $("#TD_1").css("width", "13%");
+            $("#TD_3").css("width", "1%");
+            $("#TD_4").css("width", "5%");
+            $("#TD_5").css("width", "5%");
+            $("#TD_6").css("width", "50%");
+            $("#TD_7").css("width", "50%");
+            $("#TD_8").css("width", "50%");
+
+            ResetError();
+            $("#TR_Nit").css("display", "inline-table");
+            $(".Desvanecer").css("display", "none");
+            ValidatorCampos = 2;
+        }
     });
 }

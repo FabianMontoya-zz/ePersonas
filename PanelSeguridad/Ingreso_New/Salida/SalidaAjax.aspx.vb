@@ -108,12 +108,13 @@ Public Class SalidaAjax
     ''' <remarks></remarks>
     Protected Sub Search_Document_Foto()
 
-        Dim SQL As New DocumentosSQLClass
+        Dim SQL As New DocumentoSQLClass
         Dim Obj As New ClienteClass
-        Dim ObjList As New List(Of DocumentosClass)
+        Dim ObjList As New List(Of DocumentoClass)
 
         Obj.TypeDocument_ID = Request.Form("TD")
         Obj.Document_ID = Request.Form("D")
+        Obj.TipoSQL = "Pagina"
 
         ObjList = SQL.SearchDocument_People(Obj)
 

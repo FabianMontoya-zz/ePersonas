@@ -10,7 +10,7 @@ Public Class ClienteAjax
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        Dim Doc As New DocumentosClass
+        Dim Doc As New DocumentoClass
         If Request.Files.Count() > 0 Then
             Dim vl_S_NombreDoc As String = Request.Form("NameTemporal")
             Dim Document As String = Doc.UpLoad_Document(Request.Files, "F:\DESARROLLO\CLIENTES SASIF\Desarrollos propios\DOCUMENTOS_PRESENTACION\", vl_S_NombreDoc)
@@ -117,8 +117,9 @@ Public Class ClienteAjax
         Dim vl_S_filtro As String = Request.Form("filtro")
         Dim vl_S_opcion As String = Request.Form("opcion")
         Dim vl_S_contenido As String = Request.Form("contenido")
+        Dim vl_S_Nit_User As String = Request.Form("Nit_User")
 
-        ObjListCliente = SQL.Read_All(vl_S_filtro, vl_S_opcion, vl_S_contenido)
+        ObjListCliente = SQL.Read_All(vl_S_filtro, vl_S_opcion, vl_S_contenido, vl_S_Nit_User)
 
         If ObjListCliente Is Nothing Then
 
@@ -464,8 +465,8 @@ Public Class ClienteAjax
     ''' <remarks></remarks>
     Protected Sub R_ead_Document()
 
-        Dim SQL As New DocumentosSQLClass
-        Dim ObjList As New List(Of DocumentosClass)
+        Dim SQL As New DocumentoSQLClass
+        Dim ObjList As New List(Of DocumentoClass)
 
         Dim vl_S_Nit As String = Request.Form("Nit")
         Dim vl_S_TypeDoc As String = Request.Form("TypeDoc")
@@ -475,8 +476,8 @@ Public Class ClienteAjax
 
         If ObjList Is Nothing Then
 
-            Dim obj As New DocumentosClass
-            ObjList = New List(Of DocumentosClass)
+            Dim obj As New DocumentoClass
+            ObjList = New List(Of DocumentoClass)
 
             obj.Nit_ID = ""
             obj.FechaActualizacion = ""
@@ -494,30 +495,32 @@ Public Class ClienteAjax
     ''' <remarks></remarks>
     Protected Sub Verifica_Foto()
 
-        Dim SQL As New DocumentosSQLClass
-        Dim ObjList As New List(Of DocumentosClass)
+        Dim SQL As New DocumentoSQLClass
+        Dim ObjList As New List(Of DocumentoClass)
 
-        Dim vl_S_Nit As String = Request.Form("Nit")
-        Dim vl_S_TypeDoc As String = Request.Form("TypeDoc")
-        Dim vl_S_Doc As String = Request.Form("Doc")
+        Dim Obj As New ClienteClass
 
-        ObjList = SQL.ExistFoto(vl_S_Nit, vl_S_TypeDoc, vl_S_Doc)
+        Obj.Nit_ID = Request.Form("NIT")
+        Obj.TypeDocument_ID = Request.Form("TDoc")
+        Obj.Document_ID = Request.Form("Doc")
+        Obj.TipoSQL = "Cliente"
+
+        ObjList = SQL.ExistFoto(Obj)
 
         If ObjList Is Nothing Then
 
-            Dim obj As New DocumentosClass
-            ObjList = New List(Of DocumentosClass)
+            Dim objd As New DocumentoClass
+            ObjList = New List(Of DocumentoClass)
 
-            obj.Nit_ID = ""
-            obj.FechaActualizacion = ""
+            objd.Nit_ID = ""
+            objd.FechaActualizacion = ""
 
-            ObjList.Add(obj)
+            ObjList.Add(objd)
         End If
 
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
-
 
 #End Region
 
@@ -529,10 +532,16 @@ Public Class ClienteAjax
     ''' <remarks></remarks>
     Protected Sub Carga_Matrix_DocWork()
 
-        Dim SQL As New DocumentosSQLClass
-        Dim ObjList As New List(Of DocumentosClass)
+        Dim SQL As New DocumentoSQLClass
+        Dim ObjList As New List(Of DocumentoClass)
+        Dim Obj As New ClienteClass
 
-        ObjList = SQL.MatrixDocumentWork()
+        Obj.Nit_ID = Request.Form("NIT")
+        Obj.TypeDocument_ID = Request.Form("TDoc")
+        Obj.Document_ID = Request.Form("Doc")
+        Obj.TipoSQL = "Cliente"
+
+        ObjList = SQL.SearchDocument_People(Obj)
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
@@ -589,12 +598,16 @@ Public Class ClienteAjax
     ''' <remarks></remarks>
     Protected Sub Carga_Matrix_Jefe()
 
-        Dim SQLC As New ClienteSQLClass
+        Dim SQL As New ClienteSQLClass
+        Dim ObjList As New List(Of ClienteClass)
+        Dim obj As New ClienteClass
+        obj.Nit_ID = Request.Form("Nit")
+        obj.TipoSQL = "Jefe"
 
-        Dim ObjList_MatrixJefe As New List(Of ClienteClass)
-        ObjList_MatrixJefe = SQLC.Read_Matrix_Jefe()
+        ObjList = SQL.Matrix_PersonaDep(obj)
+        '       ObjList = SQL.Read_Matrix_Jefe()
 
-        Response.Write(JsonConvert.SerializeObject(ObjList_MatrixJefe.ToArray()))
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
 
@@ -606,7 +619,7 @@ Public Class ClienteAjax
 
         Dim SQLC As New ClienteSQLClass
 
-        Dim ObjList_MatrixGRP As New List(Of DocumentosClass)
+        Dim ObjList_MatrixGRP As New List(Of DocumentoClass)
         ObjList_MatrixGRP = SQLC.Read_Matrix_GrpDocumentos()
 
         Response.Write(JsonConvert.SerializeObject(ObjList_MatrixGRP.ToArray()))
@@ -710,11 +723,11 @@ Public Class ClienteAjax
     ''' <remarks></remarks>
     Protected Sub CargarSeguridad()
 
-        Dim SQL As New CargoSQLClass
+        Dim SQL As New Adm_Politicas_SeguridadSQLClass
         Dim ObjListDroplist As New List(Of Droplist_Class)
-        Dim vl_S_Tabla As String = Request.Form("tabla")
+         Dim vl_S_Nit As String = Request.Form("Nit")
 
-        ObjListDroplist = SQL.Charge_DropListSeguridad(vl_S_Tabla)
+        ObjListDroplist = SQL.Charge_DropListSeguridad(vl_S_Nit)
         Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
 
     End Sub

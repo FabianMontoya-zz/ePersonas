@@ -13,7 +13,7 @@ Public Class RutaDocumentosSQLClass
     ''' <param name="vp_S_Contenido"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Read_AllRutaDocumentos(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String)
+    Public Function Read_AllRutaDocumentos(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String, ByVal vp_S_Nit_User As String)
 
         Dim ObjListRutaDocumentos As New List(Of RutaDocumentosClass)
         Dim StrQuery As String = ""
@@ -23,7 +23,7 @@ Public Class RutaDocumentosSQLClass
         Dim BD_Param As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDParam").ToString
 
         Dim sql As New StringBuilder
-
+        Dim vl_sql_filtro As New StringBuilder
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
             sql.Append(" SELECT R_Nit_ID, " & _
@@ -34,7 +34,7 @@ Public Class RutaDocumentosSQLClass
                         "      R_Usuario_Actualizacion, " & _
                         "      R_FechaActualizacion, " & _
                         "      C.CLI_Nombre, " & _
-                        "      ROW_NUMBER() OVER(ORDER BY R_Nit_ID DESC) AS Index_RutaDocumentos " & _
+                        "      ROW_NUMBER() OVER(ORDER BY R_Nit_ID, R_Ruta_ID ASC) AS Index_RutaDocumentos " & _
                         " FROM RUTA R " & _
                         " LEFT JOIN " & BD_Param & ".dbo.CLIENTE C ON C.CLI_Document_ID = " & _
                         " CASE	 SUBSTRING((R.R_Nit_ID),0,LEN(R.R_Nit_ID )) " & _
@@ -52,7 +52,7 @@ Public Class RutaDocumentosSQLClass
                         "      R_Usuario_Actualizacion, " & _
                         "      R_FechaActualizacion, " & _
                         "      C.CLI_Nombre, " & _
-                        "      ROW_NUMBER() OVER(ORDER BY R_Nit_ID DESC) AS Index_RutaDocumentos " & _
+                        "      ROW_NUMBER() OVER(ORDER BY R_Nit_ID, R_Ruta_ID ASC) AS Index_RutaDocumentos " & _
                         " FROM RUTA R " & _
                         " LEFT JOIN " & BD_Param & ".dbo.CLIENTE C ON C.CLI_Document_ID = " & _
                         " CASE	 SUBSTRING((R.R_Nit_ID),0,LEN(R.R_Nit_ID )) " & _
@@ -68,7 +68,7 @@ Public Class RutaDocumentosSQLClass
                         "      R_Usuario_Actualizacion, " & _
                         "      R_FechaActualizacion, " & _
                         "      C.CLI_Nombre, " & _
-                        "      ROW_NUMBER() OVER(ORDER BY R_Nit_ID DESC) AS Index_RutaDocumentos " & _
+                        "      ROW_NUMBER() OVER(ORDER BY R_Nit_ID, R_Ruta_ID ASC) AS Index_RutaDocumentos " & _
                         " FROM RUTA R " & _
                         " LEFT JOIN " & BD_Param & ".dbo.CLIENTE C ON C.CLI_Document_ID = " & _
                        "  CASE	 SUBSTRING((R.R_Nit_ID),0,LEN(R.R_Nit_ID )) " & _
@@ -79,8 +79,17 @@ Public Class RutaDocumentosSQLClass
             End If
         End If
 
-        StrQuery = sql.ToString
+        If vp_S_Nit_User <> "N" Then
+            If vp_S_Contenido = "ALL" Then
+                vl_sql_filtro.Append("WHERE  R_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY R_Nit_ID, R_Ruta_ID ASC")
+            Else
+                vl_sql_filtro.Append("AND  R_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY R_Nit_ID, R_Ruta_ID ASC")
+            End If
+        Else
+            vl_sql_filtro.Append(" ORDER BY R_Nit_ID, R_Ruta_ID ASC")
+        End If
 
+        StrQuery = sql.ToString & vl_sql_filtro.ToString
         ObjListRutaDocumentos = listRutaDocumentos(StrQuery, Conexion, "List")
 
         Return ObjListRutaDocumentos
@@ -307,7 +316,7 @@ Public Class RutaDocumentosSQLClass
                     objRutaDocumentos.UsuarioActualizacion = ReadConsulta.GetValue(5)
                     objRutaDocumentos.FechaActualizacion = ReadConsulta.GetValue(6)
 
-                     If Not (IsDBNull(ReadConsulta.GetValue(7))) Then objRutaDocumentos.DescripEmpresa = ReadConsulta.GetValue(7) Else objRutaDocumentos.DescripEmpresa = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(7))) Then objRutaDocumentos.DescripEmpresa = ReadConsulta.GetValue(7) Else objRutaDocumentos.DescripEmpresa = ""
                     objRutaDocumentos.Index = ReadConsulta.GetValue(8)
 
                     'agregamos a la lista

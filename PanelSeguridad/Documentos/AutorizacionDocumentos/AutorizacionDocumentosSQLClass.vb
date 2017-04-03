@@ -175,10 +175,10 @@ Public Class AutorizacionDocumentosSQLClass
         sql.AppendLine("'" & vp_Obj_AutorizacionDocumentos.AutorizacionDocumentos_ID & "',")
         sql.AppendLine("'" & vp_Obj_AutorizacionDocumentos.Descripcion & "',")
         sql.AppendLine("'" & vp_Obj_AutorizacionDocumentos.TipoContenido & "',")
-        sql.AppendLine("'" & vp_Obj_AutorizacionDocumentos.Formato_ID & "',")
+        sql.AppendLine("'" & vp_Obj_AutorizacionDocumentos.Formato & "',")
         sql.AppendLine("'" & vp_Obj_AutorizacionDocumentos.TipoVersion & "',")
         sql.AppendLine("'" & vp_Obj_AutorizacionDocumentos.Ruta_ID & "',")
-        sql.AppendLine("'" & vp_Obj_AutorizacionDocumentos.IndicativoFoto & "',")
+        sql.AppendLine("'" & vp_Obj_AutorizacionDocumentos.Indicativo & "',")
         sql.AppendLine("'" & vp_Obj_AutorizacionDocumentos.Ruta_ID_Plantilla & "',")
         sql.AppendLine("'" & vp_Obj_AutorizacionDocumentos.NombrePlantilla & "',")
         sql.AppendLine("'" & vp_Obj_AutorizacionDocumentos.ChequeaVigencias & "',")
@@ -203,7 +203,7 @@ Public Class AutorizacionDocumentosSQLClass
     ''' <param name="vp_Obj_AutorizacionDocumentos"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function UpdateDocumentos_Existentes(ByVal vp_Obj_AutorizacionDocumentos As DocumentosClass)
+    Public Function UpdateDocumentos_Existentes(ByVal vp_Obj_AutorizacionDocumentos As DocumentoClass)
 
         Dim conex As New Conector
         Dim Result As String
@@ -399,10 +399,10 @@ Public Class AutorizacionDocumentosSQLClass
                     objAutorizacionDocumentos.Descripcion = ReadConsulta.GetValue(2)
 
                     objAutorizacionDocumentos.TipoContenido = ReadConsulta.GetValue(3)
-                    objAutorizacionDocumentos.Formato_ID = ReadConsulta.GetValue(4)
+                    objAutorizacionDocumentos.Formato = ReadConsulta.GetValue(4)
                     objAutorizacionDocumentos.TipoVersion = ReadConsulta.GetValue(5)
                     objAutorizacionDocumentos.Ruta_ID = ReadConsulta.GetValue(6)
-                    objAutorizacionDocumentos.IndicativoFoto = ReadConsulta.GetValue(7)
+                    objAutorizacionDocumentos.Indicativo = ReadConsulta.GetValue(7)
                     objAutorizacionDocumentos.Ruta_ID_Plantilla = ReadConsulta.GetValue(8)
 
                     If Not (IsDBNull(ReadConsulta.GetValue(9))) Then objAutorizacionDocumentos.NombrePlantilla = ReadConsulta.GetValue(9) Else objAutorizacionDocumentos.NombrePlantilla = ""

@@ -1,11 +1,13 @@
 ﻿/*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_CargaBusqueda(State) {
+    OpenControl();
     $.ajax({
         url: "PaisesAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'PAISES'
         },
         //Transaccion Ajax en proceso
@@ -31,7 +33,8 @@ function transacionAjax_Moneda(State) {
         url: "PaisesAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": "Moneda"
         },
         //Transaccion Ajax en proceso
@@ -67,12 +70,14 @@ function transacionAjax_Calendario(State) {
             }
             else {
                 Matrix_Calendarios = JSON.parse(result);
-                CargaCalendarios(Matrix_Calendarios, "Select_Calendario", "");
             }
         },
         error: function () {
 
-        }
+        },
+    }).done(function () {
+        Charge_Combos_Depend_Nit(Matrix_Calendarios, "Select_Calendario", "", "");
+
     });
 }
 
@@ -93,7 +98,8 @@ function transacionAjax_Paises(State, filtro, opcion) {
         url: "PaisesAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "filtro": filtro,
             "opcion": opcion,
             "contenido": contenido
@@ -119,39 +125,24 @@ function transacionAjax_Paises(State, filtro, opcion) {
 function transacionAjax_Paises_create(State) {
 
     var ID;
-    var param;
-    var moneda;
-    var calendario_id;
-
+      
     if (State == "modificar") {
         ID = editID;
     } else {
         ID = $("#Txt_Codigo").val();
     }
-
-    if ($("#Select_moneda").val() == null) {
-        moneda = 0;
-    } else {
-        moneda = $("#Select_moneda").val();
-    }
-
-    if ($("#Select_Calendario").val() == null) {
-        calendario_id = 0;
-    } else {
-        calendario_id = $("#Select_Calendario").val();
-    }
-        
-
+    
     $.ajax({
         url: "PaisesAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "ID": ID,
             "Pais": $("#Txt_Pais").val(),
-            "Moneda": moneda,
+            "Moneda": $("#Select_moneda").val(),
             "SWIFT": $("#TxtSWIFT").val(),
-            "Calendario_ID": calendario_id,
+            "Calendario_ID": $("#Select_Calendario").val(),
             "user": User
         },
         //Transaccion Ajax en proceso
@@ -167,16 +158,16 @@ function transacionAjax_Paises_create(State) {
                     break;
 
                 case "Existe":
-                    Mensaje_General("¡Código Duplicado!", "El código ingresado ya existe en la base de datos.", "W");
+                    Mensaje_General("¡Ya Existe!", "El código ingresado ya existe en la base de datos.", "W");
                     break;
 
                 case "Exito":
-                    if (estado == "modificar") {                       
-                        Mensaje_General("¡País Modificado!", "El país se ha modificado correctamente.", "S");
+                    if (estado == "modificar") {
+                        Mensaje_General("¡Exito!", "El país se ha modificado correctamente.", "S");
                         Clear();
                     }
                     else {
-                        Mensaje_General("¡País Registrado!", "Se ha ingresado el nuevo país correctamente.", "S");
+                        Mensaje_General("¡Exito!", "El país se ha creado correctamente.", "S");
                         Clear();
                     }
                     break;
@@ -196,7 +187,8 @@ function transacionAjax_Paises_delete(State) {
         url: "PaisesAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "ID": editID,
             "pais": $("#Txt_Pais").val(),
             "user": User
@@ -206,12 +198,15 @@ function transacionAjax_Paises_delete(State) {
 
             switch (result) {
 
-                case "Error":                   
+                case "Error":
+                    $("#dialog_eliminar").dialog("close");
                     Mensaje_General("Disculpenos :(", "Ocurrio un error al intentar eliminar este país.", "E");
                     break;
 
-                case "Exito":                   
-                    Mensaje_General("¡Registro Eliminado!", "El país se ha eliminado correctamente.", "S");
+                case "Exito":
+                    $("#dialog_eliminar").dialog("close");
+                    Mensaje_General("¡Registro Eliminado!", "El país  se ha eliminado correctamente.", "S");
+                    $(".container_TGrid").html("");
                     Clear();
                     break;
             }

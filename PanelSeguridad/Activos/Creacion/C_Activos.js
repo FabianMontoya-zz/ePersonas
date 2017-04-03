@@ -30,13 +30,10 @@ var Con_Clase;
 //Evento load JS
 $(document).ready(function () {
 
-    $("#Marco_trabajo_Contrato").css("height", "490px");
-    $("#V_TFacturas").html(Suma_Valor_Inicial);
-
     Load_Charge_Sasif();
     Picker_Fechas();
     VentanasEmergentes();
-    DiseñaObjetos();
+    DisenaObjetos();
 
     transaccionAjax_MRTSTA("MATRIX_RTSTA");
     transaccionAjax_MPaises_Ciudades('MATRIX_PAIS_CIUDAD');
@@ -49,6 +46,7 @@ $(document).ready(function () {
     transacionAjax_Colores("Colores");
     transacionAjax_Tipo('Tipo');
 
+    
     //CAMPOS GENERALES
     Clear_Ima_G();
     //CAMPOS LLAVES
@@ -76,7 +74,7 @@ $(document).ready(function () {
     $("#WA").css("display", "none");
 
     $("#Seg_1").css("display", "none"); //imagen de validacion de poliza
-    
+
     $("#Tabla_LLave_Inmueble").css("display", "none");
     $("#Tabla_poliza").css("display", "none");
     $("#Tabla_LLave_Vehiculos").css("display", "inline-table");
@@ -93,6 +91,9 @@ $(document).ready(function () {
     Change_Select_Modelo();
     Change_Select_Linea();
     Change_Seguro();
+    Change_Facecolda_ID();
+
+    Change_Compara_Fecha("TxtFecha_Recibo", "TxtFecha_Retiro");
 
     Format_Adress("Txt_Adress_U");
     Date_Document();
@@ -131,11 +132,6 @@ function BtnCrear() {
     }
 }
 
-//salida del formulario
-function btnSalir() {
-    window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
-}
-
 //evento del boton salir
 function x() {
     $("#dialog").dialog("close");
@@ -150,6 +146,7 @@ function BtnBuscarFacecolda() {
         Clear_Ima_F();
         Enable_Consult_Fasecolda();
         Clear_Consulta_Fasecolda();
+        $("#Bloque_datosIngreso").css("display", "none");
     }
     else {
         var validar = ValidaCamposConsultaFasecolda();
@@ -269,7 +266,7 @@ function VentanasEmergentes() {
 }
 
 //se instancias elementos alterdo de la paghina tablas  acordeon etc
-function DiseñaObjetos() {
+function DisenaObjetos() {
     $("#T_Factura_Grid").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,
         "bDestroy": true
@@ -285,9 +282,11 @@ function DiseñaObjetos() {
 
 //Función de control del picker de las fechas
 function Picker_Fechas() {
-    $("#TxtFecha_Recibo").datepicker({ dateFormat: 'yy-mm-dd', dialogClass: "Dialog_Sasif" });
-    $("#TxtFecha_Retiro").datepicker({ dateFormat: 'yy-mm-dd' });
-    $("#Txt_Fecha_fact").datepicker({ dateFormat: 'yy-mm-dd' });
+    $("#TxtFecha_Recibo").datepicker({ dateFormat: 'yy-mm-dd', changeYear: true, changeMonth: true });
+    $("#TxtFecha_Retiro").datepicker({ dateFormat: 'yy-mm-dd', changeYear: true, changeMonth: true });
+    $("#TxtFecha_Retiro").datepicker("option", "disabled", true);
+    $("#Txt_Fecha_fact").datepicker({ dateFormat: 'yy-mm-dd', changeYear: true, changeMonth: true });
+
 }
 
 //valida campo y consulta datos de persona
@@ -349,6 +348,7 @@ function Search_Fasecolda(Type, Cod_id, Modelo) {
                 EncuentraDato = 0;
                 $("#Select_MarcaF").val(Matrix_Linea_F_ID[itemArray].Marca);
                 Index_Year = parseInt(Matrix_Linea_F_ID[itemArray].Index) - 1;
+                OpenControl();
                 transacionAjax_Clase_F("LIST_CLASE_F", Matrix_Linea_F_ID[itemArray].Marca);
                 transacionAjax_Linea_F("MATRIX_LINEA_F", Matrix_Linea_F_ID[itemArray].Marca, Matrix_Linea_F_ID[itemArray].Clase, "ID");
 
@@ -385,7 +385,7 @@ function MostrarValor_Cilindraje_Fasecolda(Matrix, Str_val, Proccess) {
 
 //muesta los valores de los combos
 function CargarValoresCombos() {
-    $("#Select_ClaseF").val(Con_Clase).attr('selected', true).trigger('chosen:updated');
+    $("#Select_ClaseF").find('option:contains("' + Con_Clase + '")').attr('selected', true).trigger('chosen:updated');
     $('#Select_LineaF').find('option:contains("' + Con_Linea + '")').attr('selected', true).trigger('chosen:updated');
 }
 
@@ -409,7 +409,7 @@ function Clear_Limpiar() {
     $('#Select_SubTipo').empty();
     $('#Select_Ciudad_U').empty();
     $('#Select_Ciudad_R').empty();
-    $('#Select_Persona_R').empty();
+    $("#Select_Persona_R").val("-1").trigger("chosen:updated");
 
     $("#TxtRef_1").val("");
     $("#TxtRef_2").val("");
@@ -423,7 +423,7 @@ function Clear_Limpiar() {
     $("#Txt_NunImobiliaria").val("");
     $("#TxtFecha_Recibo").val("");
     $("#TxtFecha_Retiro").val("");
-  
+
     $("#V_Responsable").html("");
     $("#V_Sigla_1").html("");
     $("#V_Sigla_2").html("");

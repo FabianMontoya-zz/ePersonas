@@ -30,50 +30,50 @@ function ValideAnexos() {
 
     $('#Check_Cliente').change(function () {
         if (Banco_true == 0 && Empleado_true == 0 && Socio_true == 0) {
-            $("#Anexos").css("display", "none");
+            $(".container_Grid_Flex").css("display", "none");
         }
     });
 
     $('#Check_Avaluador').change(function () {
         if (Banco_true == 0 && Empleado_true == 0 && Socio_true == 0) {
-            $("#Anexos").css("display", "none");
+            $(".container_Grid_Flex").css("display", "none");
         }
     });
 
     $('#Check_Transito').change(function () {
         if (Banco_true == 0 && Empleado_true == 0 && Socio_true == 0) {
-            $("#Anexos").css("display", "none");
+            $(".container_Grid_Flex").css("display", "none");
         }
     });
 
     $('#Check_Hacienda').change(function () {
         if (Banco_true == 0 && Empleado_true == 0 && Socio_true == 0) {
-            $("#Anexos").css("display", "none");
+            $(".container_Grid_Flex").css("display", "none");
         }
     });
 
     $('#Check_MultiEmpresa').change(function () {
         if (Banco_true == 0 && Empleado_true == 0 && Socio_true == 0) {
-            $("#Anexos").css("display", "none");
+            $(".container_Grid_Flex").css("display", "none");
         }
     });
 
     $('#Check_Asesor').change(function () {
         if (Banco_true == 0 && Empleado_true == 0 && Socio_true == 0) {
-            $("#Anexos").css("display", "none");
+            $(".container_Grid_Flex").css("display", "none");
         }
     });
 
     $('#Check_Proveedor').click(function () {
         if (Banco_true == 0 && Empleado_true == 0 && Socio_true == 0) {
-            $("#Anexos").css("display", "none");
+            $(".container_Grid_Flex").css("display", "none");
         }
     });
 
     $('#Check_Empleado').change(function () {
 
         if ($(this).is(':checked')) {
-            $("#Anexos").css("display", "inline-table");
+            $(".container_Grid_Flex").css("display", "inline-table");
             $("#C_Empleado").css("display", "inline-table");
             Empleado_true = 1;
         }
@@ -83,14 +83,14 @@ function ValideAnexos() {
         }
 
         if (Banco_true == 0 && Empleado_true == 0 && Socio_true == 0) {
-            $("#Anexos").css("display", "none");
+            $(".container_Grid_Flex").css("display", "none");
         }
 
     });
 
     $('#Check_EntBancaria').click(function () {
         if ($(this).is(':checked')) {
-            $("#Anexos").css("display", "inline-table");
+            $(".container_Grid_Flex").css("display", "inline-table");
             $("#C_Banco").css("display", "inline-table");
             Banco_true = 1;
         }
@@ -100,14 +100,14 @@ function ValideAnexos() {
         }
 
         if (Banco_true == 0 && Empleado_true == 0 && Socio_true == 0) {
-            $("#Anexos").css("display", "none");
+            $(".container_Grid_Flex").css("display", "none");
         }
     });
 
     $('#Check_Socio').change(function () {
 
         if ($(this).is(':checked')) {
-            $("#Anexos").css("display", "inline-table");
+            $(".container_Grid_Flex").css("display", "inline-table");
             $("#C_Socio").css("display", "inline-table");
 
             Socio_true = 1;
@@ -118,7 +118,7 @@ function ValideAnexos() {
         }
 
         if (Banco_true == 0 && Empleado_true == 0 && Socio_true == 0) {
-            $("#Anexos").css("display", "none");
+            $(".container_Grid_Flex").css("display", "none");
         }
 
     });
@@ -131,6 +131,8 @@ function validarCamposCrear() {
     var T_Persona = ValidatorCampos;
     var validar_banco = 0;
     var validar_Empleado = 0;
+    var vl_validar_Relacion = 0;
+    var vl_CamposRelacion;
 
     if (T_Persona == 1) {
         Campo_1 = $("#Select_EmpresaNit").val();
@@ -184,10 +186,21 @@ function validarCamposCrear() {
                 validar_Empleado = 1;
         }
 
-        if (validar_banco == 0 && validar_Empleado == 0)
+        //validamos si tiene almenos una relacion
+        vl_CamposRelacion = valida_Relacion();
+
+        if (vl_CamposRelacion == 1) {
+            Mensaje_General("Atención", "Debe tener asignado almenos una relación!", "W");
+            vl_validar_Relacion = 1;
+        }
+
+        if (validar_banco == 0 && validar_Empleado == 0 && vl_validar_Relacion == 0) {
             validar = 0;
-        else
+        }
+        else {
             validar = 1;
+        }
+
     }
     return validar;
 }
@@ -380,14 +393,45 @@ function valida_Empleados() {
     return validar;
 }
 
+//validar si tiene una relacion
+function valida_Relacion() {
+    var vl_validar = 1;
+    if ($('#Check_Cliente').prop('checked')) { vl_validar = 0; }
+    if ($('#Check_Avaluador').prop('checked')) { vl_validar = 0; }
+    if ($('#Check_Transito').prop('checked')) { vl_validar = 0; }
+    if ($('#Check_Hacienda').prop('checked')) { vl_validar = 0; }
+    if ($('#Check_MultiEmpresa').prop('checked')) { vl_validar = 0; }
+    if ($('#Check_Empleado').prop('checked')) { vl_validar = 0; }
+    if ($('#Check_Asesor').prop('checked')) { vl_validar = 0; }
+    if ($('#Check_Proveedor').prop('checked')) { vl_validar = 0; }
+    if ($('#Check_EntBancaria').prop('checked')) { vl_validar = 0; }
+    if ($('#Check_Visitante').prop('checked')) { vl_validar = 0; }
+    if ($('#Check_RepLegal').prop('checked')) { vl_validar = 0; }
+    if ($('#Check_Socio').prop('checked')) { vl_validar = 0; }
+
+    return vl_validar;
+}
+
 //captura el nombre de la persona
 function String_Nombre() {
-
-
     if ($("#TxtNombre").val() == "") {
         Nombre_Persona = $("#TxtNombreNit").val();
     }
     else {
         Nombre_Persona = $("#TxtNombre").val() + " " + $("#TxtNombre_2").val() + " " + $("#Txt_Ape_1").val() + " " + $("#Txt_Ape_2").val();
     }
+}
+
+//validamos si han escogido una columna
+function ValidarDroplist() {
+    var flag;
+    var contenido = $("#DDLColumns").val();
+
+    if (contenido == '-1') {
+        flag = 1;
+    }
+    else {
+        flag = 0;
+    }
+    return flag;
 }

@@ -10,7 +10,7 @@ Public Class AutorizacionDocumentosAjax
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        Dim Doc As New DocumentosClass
+        Dim Doc As New DocumentoClass
         If Request.Files.Count() > 0 Then
             Dim vl_S_RutaTemporal As String = Request.Form("RutaTemporal")
             Dim vl_S_NombreDoc As String = Request.Form("NameTemporal")
@@ -202,9 +202,9 @@ Public Class AutorizacionDocumentosAjax
     ''' <remarks></remarks>
     Protected Sub Update_Verificacion()
 
-        Dim objAutorizacionDocumentos As New DocumentosClass
+        Dim objAutorizacionDocumentos As New DocumentoClass
         Dim SQL_AutorizacionDocumentos As New AutorizacionDocumentosSQLClass
-        Dim ObjListAutorizacionDocumentos As New List(Of DocumentosClass)
+        Dim ObjListAutorizacionDocumentos As New List(Of DocumentoClass)
 
         Dim result As String = ""
 
@@ -251,18 +251,43 @@ Public Class AutorizacionDocumentosAjax
 #Region "DROP LIST"
 
     ''' <summary>
-    ''' funcion que carga  Matrix contrato
+    ''' funcion que carga  tipo de documentos
     ''' </summary>
     ''' <remarks></remarks>
     Protected Sub CargarMDocumento()
 
         Dim SQL As New DocumentoSQLClass
         Dim ObjList As New List(Of DocumentoClass)
+        Dim obj As New ClienteClass
+        obj.Nit_ID = Request.Form("Nit")
+        obj.TipoSQL = "Documento"
 
-        ObjList = SQL.Matrix_Documento()
+        ObjList = SQL.Matrix_Documento_Filtro(obj)
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
+
+    ''' <summary>
+    ''' cara la matriz de  verificacion documento 
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub Cargar_Matrix_R_Doc_Verificacion()
+
+        Dim SQL As New RDoc_VerificacionSQLClass
+        Dim ObjList As New List(Of RDoc_VerificacionClass)
+        Dim obj As New ClienteClass
+
+        obj.Nit_ID = Request.Form("Nit")
+        obj.TipoSQL = "Verificacion"
+
+        ObjList = SQL.Matrix_R_Documento_Verificacion(obj)
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+
+    End Sub
+
+
+
 
     ''' <summary>
     ''' funcion que carga  rutas operacion
@@ -292,31 +317,20 @@ Public Class AutorizacionDocumentosAjax
 
     End Sub
 
-    ''' <summary>
-    ''' cara la matriz de  verificacion documento 
-    ''' </summary>
-    ''' <remarks></remarks>
-    Protected Sub Cargar_Matrix_R_Doc_Verificacion()
-
-        Dim SQL As New RDoc_VerificacionSQLClass
-        Dim ObjList As New List(Of RDoc_VerificacionClass)
-
-        ObjList = SQL.Matrix_R_Documento_Verificacion()
-        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
-
-
-    End Sub
-
-    ''' <summary>
+       ''' <summary>
     ''' cara la matriz de documento para trabajo
     ''' </summary>
     ''' <remarks></remarks>
     Protected Sub Carga_Matrix_DocWork()
 
-        Dim SQL As New DocumentosSQLClass
-        Dim ObjList As New List(Of DocumentosClass)
+        Dim SQL As New DocumentoSQLClass
+        Dim ObjList As New List(Of DocumentoClass)
+        Dim Obj As New ClienteClass
 
-        ObjList = SQL.MatrixDocumentWork()
+        Obj.Nit_ID = Request.Form("NIT")
+        Obj.TipoSQL = "Verificacion"
+
+        ObjList = SQL.SearchDocument_People(Obj)
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
@@ -330,7 +344,12 @@ Public Class AutorizacionDocumentosAjax
         Dim SQL As New ConsecutivosSQLClass
         Dim ObjList As New List(Of ConsecutivosClass)
 
-        ObjList = SQL.MatrixConcecutivo()
+        Dim Obj As New ClienteClass
+
+        Obj.Nit_ID = Request.Form("NIT")
+        Obj.TipoSQL = "Verificacion"
+
+        ObjList = SQL.MatrixConcecutivo(Obj)
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
 
     End Sub
@@ -390,7 +409,7 @@ Public Class AutorizacionDocumentosAjax
     ''' <remarks></remarks>
     Protected Sub CopiaDoc_Origen()
 
-        Dim Doc As New DocumentosClass
+        Dim Doc As New DocumentoClass
 
         Dim vl_S_RutaDestino As String = Request.Form("RutaDestino")
         Dim vl_S_RutaOrigen As String = Request.Form("RutaTemporal")
@@ -409,7 +428,7 @@ Public Class AutorizacionDocumentosAjax
     ''' <remarks></remarks>
     Protected Sub DeleteDoc()
 
-        Dim Doc As New DocumentosClass
+        Dim Doc As New DocumentoClass
 
         Dim vl_S_RutaDestino As String = Request.Form("Ruta")
         Dim vl_S_Doc_name As String = Request.Form("Doc_name")
@@ -450,7 +469,7 @@ Public Class AutorizacionDocumentosAjax
 
         Dim Sql_DocExist As New DocumentosExistentesSQLClass
         Dim Sql_DocAsociados As New AsociacionDocumentosSQLClass
-        Dim Doc As New DocumentosClass
+        Dim Doc As New DocumentoClass
         Dim Flag As Integer = 0
         Dim Result As String = ""
 
@@ -460,7 +479,7 @@ Public Class AutorizacionDocumentosAjax
         Dim ListDocAsociados As New List(Of AsociacionDocumentosClass)
         ListDocAsociados = create_List_Doc_Asociados()
 
-        Dim ListDocCopy As New List(Of DocumentosClass)
+        Dim ListDocCopy As New List(Of DocumentoClass)
         ListDocCopy = create_List_CopyDocument()
 
         For Each item_list As DocumentosExistentesClass In ListDocExitentes
@@ -476,7 +495,7 @@ Public Class AutorizacionDocumentosAjax
             End If
         Next
 
-        For Each item_list As DocumentosClass In ListDocCopy
+        For Each item_list As DocumentoClass In ListDocCopy
             Doc.Copy_Document_Folder_View(item_list.RutaRelativaDocumento, item_list.RutaDocumentoDestino, item_list.Nombre_Old, item_list.Nombre_Save, item_list.Trama)
         Next
 
@@ -492,11 +511,11 @@ Public Class AutorizacionDocumentosAjax
     Public Function create_List_Doc_existente()
 
         Dim S_list As String = Request.Form("listDocAnexos").ToString
-        Dim NewList = JsonConvert.DeserializeObject(Of List(Of DocumentosClass))(S_list)
+        Dim NewList = JsonConvert.DeserializeObject(Of List(Of DocumentoClass))(S_list)
 
         Dim ObjListDocExistente As New List(Of DocumentosExistentesClass)
 
-        For Each item As DocumentosClass In NewList
+        For Each item As DocumentoClass In NewList
 
             Dim Obj As New DocumentosExistentesClass
 
@@ -531,11 +550,11 @@ Public Class AutorizacionDocumentosAjax
     Public Function create_List_Doc_Asociados()
 
         Dim S_list As String = Request.Form("listDocAnexos").ToString
-        Dim NewList = JsonConvert.DeserializeObject(Of List(Of DocumentosClass))(S_list)
+        Dim NewList = JsonConvert.DeserializeObject(Of List(Of DocumentoClass))(S_list)
 
         Dim ObjListDocAsociado As New List(Of AsociacionDocumentosClass)
 
-        For Each item As DocumentosClass In NewList
+        For Each item As DocumentoClass In NewList
 
             Dim Obj As New AsociacionDocumentosClass
 
@@ -566,13 +585,13 @@ Public Class AutorizacionDocumentosAjax
     Public Function create_List_CopyDocument()
 
         Dim S_list As String = Request.Form("listDocAnexos").ToString
-        Dim NewList = JsonConvert.DeserializeObject(Of List(Of DocumentosClass))(S_list)
+        Dim NewList = JsonConvert.DeserializeObject(Of List(Of DocumentoClass))(S_list)
 
-        Dim ObjListDocCopy As New List(Of DocumentosClass)
+        Dim ObjListDocCopy As New List(Of DocumentoClass)
 
-        For Each item As DocumentosClass In NewList
+        For Each item As DocumentoClass In NewList
 
-            Dim Obj As New DocumentosClass
+            Dim Obj As New DocumentoClass
 
             Obj.RutaDocumentoDestino = item.RutaDocumentoDestino
             Obj.RutaRelativaDocumento = item.RutaRelativaDocumento
