@@ -444,6 +444,10 @@
     <Content Include="Impuestos\Inf_Impuesto\Inf_ImpuestoTrasaccionsAjax.js" />
     <Content Include="Impuestos\Inf_Impuesto\Inf_Impuesto_Cliente.js" />
     <Content Include="Impuestos\menu.js" />
+    <Content Include="Impuestos\Porcen_Descuentos\Porcen_Descuentos.aspx" />
+    <Content Include="Impuestos\Porcen_Descuentos\Porcen_Descuentos.js" />
+    <Content Include="Impuestos\Porcen_Descuentos\Porcen_DescuentosAjax.aspx" />
+    <Content Include="Impuestos\Porcen_Descuentos\Porcen_DescuentosTrasaccionsAjax.js" />
     <Content Include="Impuestos\SasifMaster_Cosult.js" />
     <Content Include="Ingreso_New\Entrada\Ingreso.aspx" />
     <Content Include="Ingreso_New\Entrada\Ingreso.js" />
@@ -528,10 +532,6 @@
     <Content Include="Parametros\Paises\Paises.js" />
     <Content Include="Parametros\Paises\PaisesAjax.aspx" />
     <Content Include="Parametros\Paises\PaisesTrasaccionsAjax.js" />
-    <Content Include="Parametros\Porcen_Descuentos\Porcen_Descuentos.aspx" />
-    <Content Include="Parametros\Porcen_Descuentos\Porcen_Descuentos.js" />
-    <Content Include="Parametros\Porcen_Descuentos\Porcen_DescuentosAjax.aspx" />
-    <Content Include="Parametros\Porcen_Descuentos\Porcen_DescuentosTrasaccionsAjax.js" />
     <Content Include="Parametros\Productos\Productos.aspx" />
     <Content Include="Parametros\Productos\Productos.js" />
     <Content Include="Parametros\Productos\ProductosAjax.aspx" />
@@ -1105,6 +1105,22 @@
     </Compile>
     <Compile Include="Impuestos\Inf_Impuesto\Inf_ImpuestoClass.vb" />
     <Compile Include="Impuestos\Inf_Impuesto\Inf_ImpuestoSQLClass.vb" />
+    <Compile Include="Impuestos\Porcen_Descuentos\Porcen_Descuentos.aspx.designer.vb">
+      <DependentUpon>Porcen_Descuentos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Impuestos\Porcen_Descuentos\Porcen_Descuentos.aspx.vb">
+      <DependentUpon>Porcen_Descuentos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Impuestos\Porcen_Descuentos\Porcen_DescuentosAjax.aspx.designer.vb">
+      <DependentUpon>Porcen_DescuentosAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Impuestos\Porcen_Descuentos\Porcen_DescuentosAjax.aspx.vb">
+      <DependentUpon>Porcen_DescuentosAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Impuestos\Porcen_Descuentos\Porcen_DescuentosClass.vb" />
+    <Compile Include="Impuestos\Porcen_Descuentos\Porcen_DescuentosSQLClass.vb" />
     <Compile Include="Ingreso_New\ControlAcceso\ControlAccesoClass.vb" />
     <Compile Include="Ingreso_New\ControlAcceso\ControlAccesoSQLClass.vb" />
     <Compile Include="Ingreso_New\Entrada\Ingreso.aspx.designer.vb">
@@ -1429,22 +1445,6 @@
     </Compile>
     <Compile Include="Parametros\Paises\PaisesClass.vb" />
     <Compile Include="Parametros\Paises\PaisesSQLClass.vb" />
-    <Compile Include="Parametros\Porcen_Descuentos\Porcen_Descuentos.aspx.designer.vb">
-      <DependentUpon>Porcen_Descuentos.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Parametros\Porcen_Descuentos\Porcen_Descuentos.aspx.vb">
-      <DependentUpon>Porcen_Descuentos.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Parametros\Porcen_Descuentos\Porcen_DescuentosAjax.aspx.designer.vb">
-      <DependentUpon>Porcen_DescuentosAjax.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Parametros\Porcen_Descuentos\Porcen_DescuentosAjax.aspx.vb">
-      <DependentUpon>Porcen_DescuentosAjax.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Parametros\Porcen_Descuentos\Porcen_DescuentosClass.vb" />
-    <Compile Include="Parametros\Porcen_Descuentos\Porcen_DescuentosSQLClass.vb" />
     <Compile Include="Parametros\Productos\Productos.aspx.designer.vb">
       <DependentUpon>Productos.aspx</DependentUpon>
     </Compile>
