@@ -22,14 +22,6 @@
     <script src="../../Scripts/Dialog/datepicker.js" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
-    <div id="Dialog_Control" style="width: 100%; text-align: center;">
-        <div class="cssload-container" style="margin-top: 25%;">
-            <div class="cssload-whirlpool"></div>
-            <div>
-                <img id="Sasif" class="Logo_3" src="../../images/SASIF_NEW_WHITE.png" alt="SASIF S.A.S." />
-            </div>
-        </div>
-    </div>
     <div class="Container_title_Form">
         <table id="Tabla_Title_form">
             <tr>
@@ -76,213 +68,205 @@
                         </td>
                     </tr>
                 </table>
-                <table id="TablaDatos">
-                    <tr>
-                        <td>
-                            <table id="Tabla_2" style="width: 700px; text-align: left;">
-                                <tr>
-                                    <td class="Label_Bold" style="width: 120px;">Pais
-                                    </td>
-                                    <td>
-                                        <select id="Select_Pais" class="C_Chosen">
-                                        </select>
-                                    </td>
-                                    <td style="width: 100px; padding-bottom: 25px;">
-                                        <span class="cssToolTip_L">
-                                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgPais"
-                                                src="../../images/error.png" />
-                                            <span class="SpamEG"></span></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="Label_Bold">Ciudad
-                                    </td>
-                                    <td>
-                                        <select id="Select_Ciudad" class="C_Chosen">
-                                        </select>
-                                    </td>
-                                    <td style="width: 100px; padding-bottom: 25px;">
-                                        <span class="cssToolTip_L">
-                                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img1"
-                                                src="../../images/error.png" />
-                                            <span class="SpamEG"></span></span>
-                                    </td>
-                                </tr>
-                            </table>
-                            <table id="Tabla_3" style="width: 700px; text-align: left;">
-                                <tr>
-                                    <td style="width: 120px;" class="Label_Bold">Impuesto
-                                    </td>
-                                    <td>
-                                        <select id="Select_Impuesto" class="C_Chosen">
-                                        </select>
-                                    </td>
-                                    <td style="padding-bottom: 25px; width: 180px;">
-                                        <span class="cssToolTip">
-                                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img2"
-                                                src="../../images/error.png" />
-                                            <span class="SpamEG"></span></span>
-                                    </td>
-                                </tr>
-                            </table>
-                            <table id="Tabla_4" style="width: 500px; text-align: left;">
-                                <tr>
-                                    <td class="Label_Bold" style="width: 150px;">Periodo: Inferior
-                                    </td>
-                                    <td style="width: 110px;">
-                                        <span class="cssToolTip_Form">
-                                            <input id="TxtRInicial" type="text" readonly="readonly" style="width: 100px;">
-                                            <span class="Spam_AF"></span></span>
-                                    </td>
-                                    <td class="Label_Bold" style="width: 80px;">Superior
-                                    </td>
-                                    <td style="width: 200px;">
-                                        <span class="cssToolTip_Form">
-                                            <input id="TxtRFinal" type="text" readonly="readonly" style="width: 100px;">
-                                            <span class="Spam_AF"></span></span>
-                                    </td>
-                                </tr>
-                            </table>
-                            <table id="Tabla_5" style="width: 700px; text-align: left;">
-                                <tr>
-                                    <td class="Label_Bold" style="width: 110px;">Limite: Tipo
-                                    </td>
-                                    <td style="width: 120px;">
-                                        <select id="Select_LTipo" class="C_Chosen">
-                                            <option value="-1">Seleccione...</option>
-                                            <option value="1">Placas</option>
-                                            <option value="2">Identificación</option>
-                                            <option value="3">Vehículo</option>
-                                            <option value="4">Otros</option>
-                                        </select>
-                                    </td>
-                                    <td class="Label_Bold" style="width: 60px; padding-left: 20px;">Inferior
-                                    </td>
-                                    <td style="width: 120px;">
-                                        <span class="cssToolTip_Form">
-                                            <input id="Txt_LInf" type="text" maxlength="20" style="width: 110px;">
-                                            <span class="Spam_AST"></span></span>
-                                    </td>
-                                    <td class="Label_Bold" style="width: 60px;">Superior
-                                    </td>
-                                    <td style="width: 120px;">
-                                        <span class="cssToolTip_Form">
-                                            <input id="Txt_Sup" type="text" maxlength="20" style="width: 110px;">
-                                            <span class="Spam_AST"></span></span>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <table class="container_Grid_Flex" style="margin-left: 90px; width: 50%; padding-left: 100px; padding-right: 100px; text-align: center;">
-                                <tr>
-                                    <td align="center" class="Title_Bold" colspan="4">Vencimientos
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 50px" class="Label_Bold">Corte
-                                    </td>
-                                    <td style="width: 100px" class="Label_Bold">Fecha
-                                    </td>
-                                    <td style="width: 50px" class="Label_Bold">Porcentaje
-                                    </td>
-                                    <td style="width: 250px" class="Label_Bold">Valor
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="Label_Bold">1
-                                    </td>
-                                    <td>
-                                        <span class="cssToolTip_Form">
-                                            <input type="text" id="TxtFecha_1" readonly="readonly" style="width: 100px;" />
-                                            <span class="Spam_AF"></span></span>
-                                        <td>
-                                            <span class="cssToolTip_Form">
-                                                <input type="text" id="TxtPorcen_1" maxlength="5" style="width: 70px;" class="Decimal" />
-                                                <span class="Spam_ADec"></span></span>
-                                        </td>
-                                        <td>
-                                            <span class="cssToolTip_Form">
-                                                <input type="text" id="TxtValor_1" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }"
-                                                    onchange="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
-                                                <span class="Spam_AVal"></span></span>
-                                        </td>
-                                </tr>
-                                <tr>
-                                    <td class="Label_Bold">2
-                                    </td>
-                                    <td>
-                                        <span class="cssToolTip_Form">
-                                            <input type="text" id="TxtFecha_2" readonly="readonly" style="width: 100px;" />
-                                            <span class="Spam_AF"></span></span>
-                                    </td>
-                                    <td>
-                                        <span class="cssToolTip_Form">
-                                            <input type="text" id="TxtPorcen_2" maxlength="5" style="width: 70px;" class="Decimal" />
-                                            <span class="Spam_ADec"></span></span>
-                                    </td>
-                                    <td>
-                                        <span class="cssToolTip_Form">
-                                            <input type="text" id="TxtValor_2" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }"
-                                                onchange="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
-                                            <span class="Spam_AVal"></span></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="Label_Bold">3
-                                    </td>
-                                    <td>
-                                        <span class="cssToolTip_Form">
-                                            <input type="text" id="TxtFecha_3" readonly="readonly" style="width: 100px;" />
-                                            <span class="Spam_AF"></span></span>
-                                    </td>
-                                    <td>
-                                        <span class="cssToolTip_Form">
-                                            <input type="text" id="TxtPorcen_3" maxlength="5" style="width: 70px;" class="Decimal" />
-                                            <span class="Spam_ADec"></span></span>
-                                    </td>
-                                    <td>
-                                        <span class="cssToolTip_Form">
-                                            <input type="text" id="TxtValor_3" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }"
-                                                onchange="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
-                                            <span class="Spam_AVal"></span></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="Label_Bold">4
-                                    </td>
-                                    <td>
-                                        <span class="cssToolTip_Form">
-                                            <input type="text" id="TxtFecha_4" readonly="readonly" style="width: 100px;" />
-                                            <span class="Spam_AF"></span></span>
-                                    </td>
-                                    <td>
-                                        <span class="cssToolTip_Form">
-                                            <input type="text" id="TxtPorcen_4" maxlength="5" style="width: 70px;" class="Decimal" />
-                                            <span class="Spam_ADec"></span></span>
-                                    </td>
-                                    <td>
-                                        <span class="cssToolTip_Form">
-                                            <input type="text" id="TxtValor_4" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }"
-                                                onchange="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
-                                            <span class="Spam_AVal"></span></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="4" align="center">&nbsp;
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="4" align="center" id="TD_Button">
-                                        <input id="Btnguardar" type="button" value="Guardar" onclick="BtnCrear();" />
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
+                <div class="Dialog_Datos">
+                    <table id="Tabla_2" style="width: 700px; text-align: left;">
+                        <tr>
+                            <td class="Label_Bold" style="width: 120px;">Pais
+                            </td>
+                            <td>
+                                <select id="Select_Pais" class="C_Chosen">
+                                </select>
+                            </td>
+                            <td style="width: 100px; padding-bottom: 25px;">
+                                <span class="cssToolTip_L">
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgPais"
+                                        src="../../images/error.png" />
+                                    <span class="SpamEG"></span></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="Label_Bold">Ciudad
+                            </td>
+                            <td>
+                                <select id="Select_Ciudad" class="C_Chosen">
+                                </select>
+                            </td>
+                            <td style="width: 100px; padding-bottom: 25px;">
+                                <span class="cssToolTip_L">
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img1"
+                                        src="../../images/error.png" />
+                                    <span class="SpamEG"></span></span>
+                            </td>
+                        </tr>
+                    </table>
+                    <table id="Tabla_3" style="width: 700px; text-align: left;">
+                        <tr>
+                            <td style="width: 120px;" class="Label_Bold">Impuesto
+                            </td>
+                            <td>
+                                <select id="Select_Impuesto" class="C_Chosen">
+                                </select>
+                            </td>
+                            <td style="padding-bottom: 25px; width: 180px;">
+                                <span class="cssToolTip">
+                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img2"
+                                        src="../../images/error.png" />
+                                    <span class="SpamEG"></span></span>
+                            </td>
+                        </tr>
+                    </table>
+                    <table id="Tabla_4" style="width: 500px; text-align: left;">
+                        <tr>
+                            <td class="Label_Bold" style="width: 150px;">Fecha: Inicial
+                            </td>
+                            <td style="width: 110px;">
+                                <span class="cssToolTip_Form">
+                                    <input id="TxtRInicial" type="text" readonly="readonly" style="width: 100px;"/>
+                                    <span class="Spam_AF"></span></span>
+                            </td>
+                            <td class="Label_Bold" style="width: 80px;">Final
+                            </td>
+                            <td style="width: 200px;">
+                                <span class="cssToolTip_Form">
+                                    <input id="TxtRFinal" type="text" readonly="readonly" style="width: 100px;"/>
+                                    <span class="Spam_AF"></span></span>
+                            </td>
+                        </tr>
+                    </table>
+                    <table id="Tabla_5" style="width: 700px; text-align: left;">
+                        <tr>
+                            <td class="Label_Bold" style="width: 110px;">Limite: Tipo
+                            </td>
+                            <td style="width: 120px;">
+                                <select id="Select_LTipo" class="C_Chosen">
+                                    <option value="-1">Seleccione...</option>
+                                    <option value="1">Placas</option>
+                                    <option value="2">Identificación</option>
+                                    <option value="3">Vehículo</option>
+                                    <option value="4">Otros</option>
+                                </select>
+                            </td>
+                            <td class="Label_Bold" style="width: 60px; padding-left: 20px;">Inferior
+                            </td>
+                            <td style="width: 120px;">
+                                <span class="cssToolTip_Form">
+                                    <input id="Txt_LInf" type="text" maxlength="20" style="width: 110px;">
+                                    <span class="Spam_AST"></span></span>
+                            </td>
+                            <td class="Label_Bold" style="width: 60px;">Superior
+                            </td>
+                            <td style="width: 120px;">
+                                <span class="cssToolTip_Form">
+                                    <input id="Txt_Sup" type="text" maxlength="20" style="width: 110px;">
+                                    <span class="Spam_AST"></span></span>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="container_Grid_Flex" style="margin-left: 90px; width: 50%; padding-left: 100px; padding-right: 100px; text-align: center;">
+                        <tr>
+                            <td align="center" class="Title_Bold" colspan="4">Vencimientos
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 50px" class="Label_Bold">Corte
+                            </td>
+                            <td style="width: 100px" class="Label_Bold">Fecha
+                            </td>
+                            <td style="width: 50px" class="Label_Bold">Porcentaje
+                            </td>
+                            <td style="width: 250px" class="Label_Bold">Valor
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="Label_Bold">1
+                            </td>
+                            <td>
+                                <span class="cssToolTip_Form">
+                                    <input type="text" id="TxtFecha_1" readonly="readonly" style="width: 100px;" />
+                                    <span class="Spam_AF"></span></span>
+                                <td>
+                                    <span class="cssToolTip_Form">
+                                        <input type="text" id="TxtPorcen_1" maxlength="5" style="width: 70px;" class="Decimal" />
+                                        <span class="Spam_ADec"></span></span>
+                                </td>
+                                <td>
+                                    <span class="cssToolTip_Form">
+                                        <input type="text" id="TxtValor_1" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }"
+                                            onchange="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
+                                        <span class="Spam_AVal"></span></span>
+                                </td>
+                        </tr>
+                        <tr>
+                            <td class="Label_Bold">2
+                            </td>
+                            <td>
+                                <span class="cssToolTip_Form">
+                                    <input type="text" id="TxtFecha_2" readonly="readonly" style="width: 100px;" />
+                                    <span class="Spam_AF"></span></span>
+                            </td>
+                            <td>
+                                <span class="cssToolTip_Form">
+                                    <input type="text" id="TxtPorcen_2" maxlength="5" style="width: 70px;" class="Decimal" />
+                                    <span class="Spam_ADec"></span></span>
+                            </td>
+                            <td>
+                                <span class="cssToolTip_Form">
+                                    <input type="text" id="TxtValor_2" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }"
+                                        onchange="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
+                                    <span class="Spam_AVal"></span></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="Label_Bold">3
+                            </td>
+                            <td>
+                                <span class="cssToolTip_Form">
+                                    <input type="text" id="TxtFecha_3" readonly="readonly" style="width: 100px;" />
+                                    <span class="Spam_AF"></span></span>
+                            </td>
+                            <td>
+                                <span class="cssToolTip_Form">
+                                    <input type="text" id="TxtPorcen_3" maxlength="5" style="width: 70px;" class="Decimal" />
+                                    <span class="Spam_ADec"></span></span>
+                            </td>
+                            <td>
+                                <span class="cssToolTip_Form">
+                                    <input type="text" id="TxtValor_3" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }"
+                                        onchange="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
+                                    <span class="Spam_AVal"></span></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="Label_Bold">4
+                            </td>
+                            <td>
+                                <span class="cssToolTip_Form">
+                                    <input type="text" id="TxtFecha_4" readonly="readonly" style="width: 100px;" />
+                                    <span class="Spam_AF"></span></span>
+                            </td>
+                            <td>
+                                <span class="cssToolTip_Form">
+                                    <input type="text" id="TxtPorcen_4" maxlength="5" style="width: 70px;" class="Decimal" />
+                                    <span class="Spam_ADec"></span></span>
+                            </td>
+                            <td>
+                                <span class="cssToolTip_Form">
+                                    <input type="text" id="TxtValor_4" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }"
+                                        onchange="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
+                                    <span class="Spam_AVal"></span></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" align="center">&nbsp;
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" align="center" id="TD_Button">
+                                <input id="Btnguardar" type="button" value="Guardar" onclick="BtnCrear();" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
