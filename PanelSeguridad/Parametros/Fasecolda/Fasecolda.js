@@ -6,12 +6,10 @@ var Edit_ID;
 
 /*--------------- region de variables globales --------------------*/
 
-//evento load de los Links
+//Evento load JS
 $(document).ready(function () {
+    Load_Charge_Sasif();
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
-    carga_eventos("Dialog_Charge");
-
-
     $("#ESelect").css("display", "none");
     $("#ImgID").css("display", "none");
     $("#Img3").css("display", "none");
@@ -19,7 +17,7 @@ $(document).ready(function () {
     $("#Img1").css("display", "none");
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
-    $("#WE").css("display", "none");
+    $("#WA").css("display", "none");
 
     $("#TablaConsulta").css("display", "none");
 
@@ -80,11 +78,6 @@ function Periodos() {
     }
 }
 
-//salida del formulario
-function btnSalir() {
-    window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
-}
-
 //habilita el panel de crear o consulta
 function HabilitarPanel(opcion) {
 
@@ -109,7 +102,7 @@ function HabilitarPanel(opcion) {
         case "buscar":
             $("#Dialog_Fasecolda").dialog("close");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TFasecolda").html("");
+            $(".container_TGrid").html("");
             $("#Select_Estado").removeAttr("disabled");
             $('.C_Chosen').trigger('chosen:updated');
 
@@ -121,7 +114,7 @@ function HabilitarPanel(opcion) {
         case "modificar":
             $("#Dialog_Fasecolda").dialog("close");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TFasecolda").html("");
+            $(".container_TGrid").html("");
             $("#Select_Estado").removeAttr("disabled");
             $('.C_Chosen').trigger('chosen:updated');
             estado = opcion;
@@ -133,7 +126,7 @@ function HabilitarPanel(opcion) {
         case "eliminar":
             $("#Dialog_Fasecolda").dialog("close");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TFasecolda").html("");
+            $(".container_TGrid").html("");
             $("#Select_Estado").removeAttr("disabled");
             $('.C_Chosen').trigger('chosen:updated');
 
@@ -151,6 +144,7 @@ function BtnConsulta() {
     var filtro;
     var ValidateSelect = ValidarDroplist();
     var opcion;
+    OpenControl();
 
     if (ValidateSelect == 1) {
         filtro = "N";
@@ -269,8 +263,8 @@ function Tabla_modificar() {
         }
     }
     html_Fasecolda += "</tbody></table>";
-    $("#container_TFasecolda").html("");
-    $("#container_TFasecolda").html(html_Fasecolda);
+    $(".container_TGrid").html("");
+    $(".container_TGrid").html(html_Fasecolda);
 
     $(".Eliminar").click(function () {
     });
@@ -353,8 +347,8 @@ function Tabla_eliminar() {
         }
     }
     html_Fasecolda += "</tbody></table>";
-    $("#container_TFasecolda").html("");
-    $("#container_TFasecolda").html(html_Fasecolda);
+    $(".container_TGrid").html("");
+    $(".container_TGrid").html(html_Fasecolda);
 
     $(".Eliminar").click(function () {
     });
@@ -391,8 +385,8 @@ function Tabla_consulta() {
         }
     }
     html_Fasecolda += "</tbody></table>";
-    $("#container_TFasecolda").html("");
-    $("#container_TFasecolda").html(html_Fasecolda);
+    $(".container_TGrid").html("");
+    $(".container_TGrid").html(html_Fasecolda);
 
     $(".Ver").click(function () {
     });

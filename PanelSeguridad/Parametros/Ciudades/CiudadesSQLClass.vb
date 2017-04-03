@@ -23,16 +23,19 @@ Public Class CiudadesSQLClass
         Dim sql As New StringBuilder
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
-            sql.Append("SELECT C_Ciudad_ID, C_Descripcion, C_FechaActualizacion, C_Usuario, C_Pais_ID, P.P_Name FROM Ciudades C " & _
-                       " INNER JOIN PAISES P ON P.P_Cod = C.C_Pais_ID ")
+            sql.Append(" SELECT C_Ciudad_ID, C_Descripcion, C_FechaActualizacion, C_Usuario, C_Pais_ID, P.P_Name,  " & _
+                                   " ROW_NUMBER()OVER(ORDER BY C_Ciudad_ID ASC) AS Index_Ciudades FROM Ciudades C " & _
+                                   " INNER JOIN PAISES P ON P.P_Cod = C.C_Pais_ID ")
         Else
 
             If vp_S_Contenido = "ALL" Then
-                sql.Append("SELECT C_Ciudad_ID, C_Descripcion, C_FechaActualizacion, C_Usuario, C_Pais_ID, P.P_Name FROM Ciudades C " & _
-                            " INNER JOIN PAISES P ON P.P_Cod = C.C_Pais_ID ")
+                sql.Append(" SELECT C_Ciudad_ID, C_Descripcion, C_FechaActualizacion, C_Usuario, C_Pais_ID, P.P_Name,  " & _
+                                       " ROW_NUMBER()OVER(ORDER BY C_Ciudad_ID ASC) AS Index_Ciudades FROM Ciudades C " & _
+                                       " INNER JOIN PAISES P ON P.P_Cod = C.C_Pais_ID ")
             Else
-                sql.Append("SELECT C_Ciudad_ID, C_Descripcion, C_FechaActualizacion, C_Usuario, C_Pais_ID, P.P_Name FROM Ciudades C " & _
-                            " INNER JOIN PAISES P ON P.P_Cod = C.C_Pais_ID " & _
+                sql.Append(" SELECT C_Ciudad_ID, C_Descripcion, C_FechaActualizacion, C_Usuario, C_Pais_ID, P.P_Name,  " & _
+                                       " ROW_NUMBER()OVER(ORDER BY C_Ciudad_ID ASC) AS Index_Ciudades FROM Ciudades C " & _
+                                       " INNER JOIN PAISES P ON P.P_Cod = C.C_Pais_ID " & _
                             " WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
             End If
         End If
@@ -232,6 +235,7 @@ Public Class CiudadesSQLClass
                     objCiudades.Usuario = ReadConsulta.GetString(3)
                     objCiudades.Pais_ID = ReadConsulta.GetValue(4)
                     objCiudades.DescripPais = ReadConsulta.GetValue(5)
+                    objCiudades.Index = ReadConsulta.GetValue(6)
 
                     'agregamos a la lista
                     ObjListCiudades.Add(objCiudades)

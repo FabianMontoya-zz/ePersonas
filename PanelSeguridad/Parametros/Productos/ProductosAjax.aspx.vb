@@ -63,8 +63,9 @@ Public Class ProductosAjax
         Dim vl_S_filtro As String = Request.Form("filtro")
         Dim vl_S_opcion As String = Request.Form("opcion")
         Dim vl_S_contenido As String = Request.Form("contenido")
+        Dim vl_S_Nit_User As String = Request.Form("Nit_User")
 
-        ObjListProductos = SQL_Productos.Read_AllProductos(vl_S_filtro, vl_S_opcion, vl_S_contenido)
+        ObjListProductos = SQL_Productos.Read_AllProductos(vl_S_filtro, vl_S_opcion, vl_S_contenido, vl_S_Nit_User)
 
         If ObjListProductos Is Nothing Then
 
@@ -105,9 +106,7 @@ Public Class ProductosAjax
             objProductos.Descripcion = Request.Form("Descripcion")
 
             objProductos.TP_ID = Request.Form("TipoP_ID")
-            objProductos.TA_ID = Request.Form("TipoA_ID")
             objProductos.STP_ID = Request.Form("SubTipoP_ID")
-            objProductos.STA_ID = Request.Form("SubTipoA_ID")
             objProductos.Tran_ID_1 = Request.Form("Crea_ID")
             objProductos.Tran_ID_2 = Request.Form("Mod_ID")
             objProductos.Tran_ID_3 = Request.Form("Ret_ID")
@@ -170,6 +169,13 @@ Public Class ProductosAjax
             objProductos.FechaActualizacion = Date.Now
             objProductos.Usuario = Request.Form("user")
 
+
+            objProductos.Causacion_Interes = Request.Form("Causacion_Interes")
+            objProductos.Causacion_Mora = Request.Form("Causacion_Mora")
+            objProductos.Base_Mora = Request.Form("Base_Mora")
+            objProductos.Capitalizacion = Request.Form("Capitalizacion")
+            objProductos.Control_Activo = Request.Form("Control_Activo")
+
             ObjListProductos.Add(objProductos)
 
             result = SQL_Productos.InsertProductos(objProductos)
@@ -194,14 +200,8 @@ Public Class ProductosAjax
 
         Dim result As String
 
-        objProductos.Nit_ID = Request.Form("Nit_ID")
-        objProductos.Producto_ID = Request.Form("ID")
-        objProductos.Descripcion = Request.Form("Descripcion")
-
         objProductos.TP_ID = Request.Form("TipoP_ID")
-        objProductos.TA_ID = Request.Form("TipoA_ID")
         objProductos.STP_ID = Request.Form("SubTipoP_ID")
-        objProductos.STA_ID = Request.Form("SubTipoA_ID")
         objProductos.Tran_ID_1 = Request.Form("Crea_ID")
         objProductos.Tran_ID_2 = Request.Form("Mod_ID")
         objProductos.Tran_ID_3 = Request.Form("Ret_ID")
@@ -263,6 +263,13 @@ Public Class ProductosAjax
 
         objProductos.FechaActualizacion = Date.Now
         objProductos.Usuario = Request.Form("user")
+
+
+        objProductos.Causacion_Interes = Request.Form("Causacion_Interes")
+        objProductos.Causacion_Mora = Request.Form("Causacion_Mora")
+        objProductos.Base_Mora = Request.Form("Base_Mora")
+        objProductos.Capitalizacion = Request.Form("Capitalizacion")
+        objProductos.Control_Activo = Request.Form("Control_Activo")
 
         ObjListProductos.Add(objProductos)
 

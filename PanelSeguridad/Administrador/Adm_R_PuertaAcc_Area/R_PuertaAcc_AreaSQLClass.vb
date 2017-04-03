@@ -13,7 +13,7 @@ Public Class R_PuertaAcc_AreaSQLClass
     ''' <param name="vp_S_Contenido"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Read_AllR_PuertaAcc_Area(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String)
+    Public Function Read_AllR_PuertaAcc_Area(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String, ByVal vp_S_Nit_User As String)
 
         Dim ObjListR_PuertaAcc_Area As New List(Of R_PuertaAcc_AreaClass)
         Dim StrQuery As String = ""
@@ -23,7 +23,7 @@ Public Class R_PuertaAcc_AreaSQLClass
         Dim BD_Param As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDParam").ToString
 
         Dim sql As New StringBuilder
-
+        Dim vl_sql_filtro As New StringBuilder
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
             sql.Append(" SELECT  RPA_Nit_ID, " & _
@@ -91,8 +91,17 @@ Public Class R_PuertaAcc_AreaSQLClass
             End If
         End If
 
-        StrQuery = sql.ToString
+        If vp_S_Nit_User <> "N" Then
+            If vp_S_Contenido = "ALL" Then
+                vl_sql_filtro.Append("WHERE  RPA_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY RPA_Nit_ID, RPA_PuertaAcceso_ID, RPA_Area_ID ASC")
+            Else
+                vl_sql_filtro.Append("AND  RPA_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY RPA_Nit_ID, RPA_PuertaAcceso_ID, RPA_Area_ID ASC")
+            End If
+        Else
+            vl_sql_filtro.Append(" ORDER BY RPA_Nit_ID, RPA_PuertaAcceso_ID, RPA_Area_ID ASC")
+        End If
 
+        StrQuery = sql.ToString & vl_sql_filtro.ToString
         ObjListR_PuertaAcc_Area = listR_PuertaAcc_Area(StrQuery, Conexion, "List")
 
         Return ObjListR_PuertaAcc_Area
@@ -305,7 +314,20 @@ Public Class R_PuertaAcc_AreaSQLClass
                 End While
 
             Case "Matrix"
+                'recorremos la consulta por la cantidad de datos en la BD
+                While ReadConsulta.Read
 
+                    Dim objR_PuertaAcc_Area As New R_PuertaAcc_AreaClass
+                    'cargamos datos sobre el objeto de login
+                    objR_PuertaAcc_Area.Nit_ID = ReadConsulta.GetValue(0)
+                    objR_PuertaAcc_Area.PuertaAcceso_ID = ReadConsulta.GetValue(1)
+                    objR_PuertaAcc_Area.Area_ID = ReadConsulta.GetValue(2)
+                    objR_PuertaAcc_Area.DescripArea = ReadConsulta.GetValue(3)
+
+                    'agregamos a la lista
+                    ObjListR_PuertaAcc_Area.Add(objR_PuertaAcc_Area)
+
+                End While
 
         End Select
 
@@ -345,6 +367,89 @@ Public Class R_PuertaAcc_AreaSQLClass
         Result = conex.IDis(StrQuery, "1")
 
         Return Result
+    End Function
+
+    ''' <summary>
+    ''' lee la matriz de puertas de acceso
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Matrix_R_PuertaAcceso_Area()
+
+        Dim ObjList As New List(Of R_PuertaAcc_AreaClass)
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("1")
+        Dim BD_Param As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDParam").ToString
+
+        Dim sql As New StringBuilder
+
+        sql.Append(" SELECT RPA_Nit_ID, RPA_PuertaAcceso_ID, RPA_Area_ID, A.A_Descripcion  FROM R_PACCESO_AREA RPA " & _
+                                 " INNER JOIN " & BD_Param & ".dbo.AREA A ON A.A_Area_ID = RPA.RPA_Area_ID 	AND RPA.RPA_Nit_ID = A.A_Nit_ID " & _
+                                 " ORDER BY RPA_PuertaAcceso_ID ASC ")
+        Dim StrQuery As String = sql.ToString
+
+        ObjList = listR_PuertaAcc_Area(StrQuery, Conexion, "Matrix")
+
+        Return ObjList
+
+    End Function
+
+    ''' <summary>
+    ''' lee la matriz de puertas de acceso
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Matrix_R_PuertaAcceso_Area(ByVal vp_Obj_Cliente As ClienteClass)
+
+        Dim ObjList As New List(Of R_PuertaAcc_AreaClass)
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("1")
+        Dim BD_Param As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDParam").ToString
+
+        Dim sql As New StringBuilder
+        Dim vl_sql_filtro As New StringBuilder
+
+        sql.Append(" SELECT RPA_Nit_ID, RPA_PuertaAcceso_ID, RPA_Area_ID, A.A_Descripcion  FROM R_PACCESO_AREA RPA " & _
+                                 " INNER JOIN " & BD_Param & ".dbo.AREA A ON A.A_Area_ID = RPA.RPA_Area_ID 	AND RPA.RPA_Nit_ID = A.A_Nit_ID ")
+
+        Select Case vp_Obj_Cliente.TipoSQL
+            Case "MPAcceso_Area"
+                vl_sql_filtro.Append(" WHERE RPA_Nit_ID = '" & vp_Obj_Cliente.Nit_ID & "' ORDER BY RPA_PuertaAcceso_ID ASC ")
+        End Select
+
+        Dim vl_S_SQLString As String = sql.ToString & vl_sql_filtro.ToString
+
+        ObjList = listR_PuertaAcc_Area(vl_S_SQLString, Conexion, "Matrix")
+
+        Return ObjList
+
+    End Function
+
+    ''' <summary>
+    ''' consulta listas de puertas de acceso segun nit
+    ''' </summary>
+    ''' <param name="vp_S_Nit_ID"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function List_R_PuertaAcceso_Area(ByVal vp_S_Nit_ID As String)
+
+        Dim ObjList As New List(Of R_PuertaAcc_AreaClass)
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("1")
+        Dim BD_Param As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDParam").ToString
+
+        Dim sql As New StringBuilder
+
+        sql.Append(" SELECT RPA_Nit_ID, RPA_PuertaAcceso_ID, RPA_Area_ID, A.A_Descripcion  FROM R_PACCESO_AREA RPA " & _
+                                 " INNER JOIN " & BD_Param & ".dbo.AREA A ON A.A_Area_ID = RPA.RPA_Area_ID 	AND RPA.RPA_Nit_ID = A.A_Nit_ID " & _
+                                 " WHERE RPA_Nit_ID = '" & vp_S_Nit_ID & "'" & _
+                                 " ORDER BY RPA_PuertaAcceso_ID ASC ")
+        Dim StrQuery As String = sql.ToString
+
+        ObjList = listR_PuertaAcc_Area(StrQuery, Conexion, "Matrix")
+
+        Return ObjList
+
     End Function
 
 #End Region

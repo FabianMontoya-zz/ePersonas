@@ -1,11 +1,13 @@
 ﻿/*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_CargaBusqueda(State) {
+    OpenControl();
     $.ajax({
         url: "CiudadesAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'CIUDADES'
         },
         //Transaccion Ajax en proceso
@@ -31,7 +33,8 @@ function transacionAjax_Pais(State) {
         url: "CiudadesAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'CIUDADES'
         },
         //Transaccion Ajax en proceso
@@ -68,7 +71,8 @@ function transacionAjax_Ciudades(State, filtro, opcion) {
         url: "CiudadesAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "filtro": filtro,
             "opcion": opcion,
             "contenido": contenido
@@ -110,7 +114,8 @@ function transacionAjax_Ciudades_create(State) {
         url: "CiudadesAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Pais_ID": Pais_ID,
             "ID": ID,
             "descripcion": $("#TxtDescription").val(),
@@ -121,45 +126,24 @@ function transacionAjax_Ciudades_create(State) {
             switch (result) {
 
                 case "Error":
-                    $("#dialog").dialog("option", "title", "Disculpenos :(");
-                    $("#Mensaje_alert").text("No se realizo el ingreso del Ciudades!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "block");
-                    $("#SE").css("display", "none");
-                    $("#WE").css("display", "none");
+                    Mensaje_General("Disculpenos :(", "No se realizó la modificación de la Ciudad.", "E");
                     break;
 
                 case "Existe":
-                    $("#dialog").dialog("option", "title", "Ya Existe");
-                    $("#Mensaje_alert").text("El codigo ingresado ya existe en la base de datos!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "None");
-                    $("#SE").css("display", "none");
-                    $("#WE").css("display", "block");
+                    Mensaje_General("¡Ya Existe!", "El código ingresado ya existe en la base de datos.", "W");
                     break;
 
                 case "Exito":
                     if (estado == "modificar") {
-                        $("#dialog").dialog("option", "title", "Exito");
-                        $("#Mensaje_alert").text("El Ciudades fue modificado exitosamente! ");
-                        $("#dialog").dialog("open");
-                        $("#DE").css("display", "none");
-                        $("#SE").css("display", "block");
-                        $("#WE").css("display", "none");
+                        Mensaje_General("¡Exito!", "La ciudad  se ha modificado exitosamente!", "S");
                         Clear();
                     }
                     else {
-                        $("#dialog").dialog("option", "title", "Exito");
-                        $("#Mensaje_alert").text("El Ciudades fue creado exitosamente! ");
-                        $("#dialog").dialog("open");
-                        $("#DE").css("display", "none");
-                        $("#SE").css("display", "block");
-                        $("#WE").css("display", "none");
+                        Mensaje_General("¡Exito!", "La ciudad  se ha creada exitosamente!", "S");
                         Clear();
                     }
                     break;
             }
-
         },
         error: function () {
 
@@ -175,7 +159,8 @@ function transacionAjax_Ciudades_delete(State) {
         url: "CiudadesAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Pais_ID": editPais_ID,
             "ID": editID,
             "user": User
@@ -185,34 +170,21 @@ function transacionAjax_Ciudades_delete(State) {
             switch (result) {
 
                 case "Error":
-                    $("#dialog").dialog("option", "title", "Disculpenos :(");
-                    $("#Mensaje_alert").text("No se elimino el Ciudades!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "block");
-                    $("#SE").css("display", "none");
-                    $("#WE").css("display", "none");
                     $("#dialog_eliminar").dialog("close");
+                    Mensaje_General("Disculpenos :(", "No se elimino el Ciudades!", "E");
                     break;
 
                 case "Exist_O":
-                    $("#dialog").dialog("option", "title", "Integridad referencial");
-                    $("#Mensaje_alert").text("No se elimino el Ciudades, para eliminarlo debe eliminar primero el registro en la tabla Empleado");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "none");
-                    $("#SE").css("display", "none");
-                    $("#WE").css("display", "block");
                     $("#dialog_eliminar").dialog("close");
+                    Mensaje_General("¡Integridad Referencial!", "No se elimino el Ciudades, para eliminarlo debe eliminar primero el registro en la tabla Personas", "W");
+                    $(".container_TGrid").html("");
                     break;
 
                 case "Exito":
+
                     $("#dialog_eliminar").dialog("close");
-                    $("#dialog").dialog("option", "title", "Exito");
-                    $("#Mensaje_alert").text("El Ciudades fue eliminado exitosamente! ");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "none");
-                    $("#SE").css("display", "block");
-                    $("#WE").css("display", "none");
-                    $("#dialog_eliminar").dialog("close");
+                    Mensaje_General("¡Registro Eliminado!", "La Ciudad fue eliminado correctamente! .", "S");
+                    $(".container_TGrid").html("");
                     Clear();
                     break;
             }

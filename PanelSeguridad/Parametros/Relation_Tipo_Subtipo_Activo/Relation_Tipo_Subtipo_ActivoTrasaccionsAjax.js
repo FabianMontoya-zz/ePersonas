@@ -1,6 +1,7 @@
 ﻿/*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_CargaBusqueda(State) {
+    OpenControl();
     $.ajax({
         url: "Relation_Tipo_Subtipo_ActivoAjax.aspx",
         type: "POST",
@@ -141,7 +142,7 @@ function transacionAjax_TP_Activo_create(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "block");
                     $("#SE").css("display", "none");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     break;
 
                 case "Existe":
@@ -159,7 +160,7 @@ function transacionAjax_TP_Activo_create(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "none");
                     $("#SE").css("display", "block");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     Clear();
                     break;
             }
@@ -194,7 +195,7 @@ function transacionAjax_TP_Activo_delete(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "block");
                     $("#SE").css("display", "none");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     $("#dialog_eliminar").dialog("close");
                     break;
 
@@ -215,7 +216,7 @@ function transacionAjax_TP_Activo_delete(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "none");
                     $("#SE").css("display", "block");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     $("#dialog_eliminar").dialog("close");
                     Clear();
                     break;

@@ -41,7 +41,7 @@
             <asp:ContentPlaceHolder ID="main" runat="server">
             </asp:ContentPlaceHolder>
         </div>
-        <div id="Footer" class="footer">
+        <div id="Footer" class="Dimencion_Footer">
             <table width="100%">
                 <tr>
                     <td style="text-align: center;">

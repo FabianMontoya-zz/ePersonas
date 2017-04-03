@@ -8,7 +8,7 @@
     Private _DescripcionRol As String
     Private _Sigla As String
     Private _IDOpcionRol As String
-    Private _Consecutivo As Integer
+    Private _Consecutivo As String
     Private _Tipo As String
     Private _Sub_Rol As String
     Private _IDlink As String
@@ -16,6 +16,11 @@
     Private _Parametro_1 As String
     Private _Parametro_2 As String
     Private _Ruta As String
+    Private _Nit As String
+    Private _DescripcionSubRol As String
+    Private _EstadoRol As String
+    Private _Sub_Sigla As String
+
 #End Region
 
 #Region "propiedades"
@@ -75,11 +80,11 @@
             Me._IDOpcionRol = value
         End Set
     End Property
-    Public Property Consecutivo() As Integer
+    Public Property Consecutivo() As String
         Get
             Return Me._Consecutivo
         End Get
-        Set(ByVal value As Integer)
+        Set(ByVal value As String)
             Me._Consecutivo = value
         End Set
     End Property
@@ -137,6 +142,38 @@
         End Get
         Set(ByVal value As String)
             Me._Ruta = value
+        End Set
+    End Property
+    Public Property Nit() As String
+        Get
+            Return Me._Nit
+        End Get
+        Set(ByVal value As String)
+            Me._Nit = value
+        End Set
+    End Property
+    Public Property DescripcionSubRol() As String
+        Get
+            Return Me._DescripcionSubRol
+        End Get
+        Set(ByVal value As String)
+            Me._DescripcionSubRol = value
+        End Set
+    End Property
+    Public Property EstadoRol() As String
+        Get
+            Return Me._EstadoRol
+        End Get
+        Set(ByVal value As String)
+            Me._EstadoRol = value
+        End Set
+    End Property
+    Public Property Sub_Sigla() As String
+        Get
+            Return Me._Sub_Sigla
+        End Get
+        Set(ByVal value As String)
+            Me._Sub_Sigla = value
         End Set
     End Property
 #End Region

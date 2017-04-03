@@ -11,20 +11,30 @@
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
     <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />
     <link href="../../css/custom/charge.css" rel="stylesheet" type="text/css" />
-    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
     <link href="../../css/Chosen/chosen.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/jquery.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Chosen/chosen.jquery.js" type="text/javascript"></script>
     <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
+    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />   
+    <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
-    <div id="Container_title_Form">
+
+    <div id="Dialog_Control" style="width: 100%; text-align: center;">
+        <div class="cssload-container" style="margin-top: 25%;">
+            <div class="cssload-whirlpool"></div>
+            <div>
+                <img id="Sasif" class="Logo_3" src="../../images/SASIF_NEW_WHITE.png" alt="SASIF S.A.S." />
+            </div>
+        </div>
+    </div>
+
+    <div class="Container_title_Form">
         <table id="Tabla_Title_form">
             <tr>
-                <td id="Title_form">
-                </td>
+                <td id="Title_form"></td>
                 <td id="image_exit">
                     <span class="cssToolTip_Form_L">
                         <input id="BtnExit" type="button" value="X" onclick="btnSalir();" /><span class="Spam_AEXIT_MOD"></span></span>
@@ -32,47 +42,45 @@
             </tr>
         </table>
     </div>
-    <div id="Marco_link">
-        <div id="Marco_btn_Form">
+    <div class="Marco_Container">
+       <div class="Marco_btn_Form">
             <input id="BtnShearh" type="button" value="Consulta" onclick="HabilitarPanel('buscar');" />
             <input id="BtnCreate" type="button" value="Crear" onclick="HabilitarPanel('crear');" />
             <input id="BtnUpdate" type="button" value="Actualizar" onclick="HabilitarPanel('modificar');" />
             <input id="BtnDelete" type="button" value="Eliminar" onclick="HabilitarPanel('eliminar');" />
         </div>
-        <div id="Marco_trabajo_Form">
-            <div id="Container_controls">
+        <div class="Marco_trabajo_Form">
+            <div class="Container_controls">
                 <table id="TablaConsulta">
                     <tr>
-                        <td id="TD1">
-                            <select id="DDLColumns">
+                        <td id="TD1" style="width: 25%;">
+                            <select id="DDLColumns" class="C_Chosen">
                             </select>
                         </td>
-                        <td id="TD2">
+                        <td id="TD2" style="width: 65%;">
                             <span class="cssToolTip_Form">
-                                <input id="TxtRead" type="text" />
+                                <input id="TxtRead" type="text" style="width: 60%; margin-left: 10%;"/>
                                 <span class="Spam_AST"></span></span>
                         </td>
-                        <td colspan="4" align="center" id="TD3">
+                        <td colspan="4" align="center" id="TD3" style="width: 20%;">
                             <input id="BtnRead" type="button" value="Buscar" onclick="BtnConsulta();" />
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="4">
-                            &nbsp;
+                        <td colspan="4">&nbsp;
                         </td>
                     </tr>
                     <tr>
                         <td colspan="4">
-                            <div id="container_TCargo">
+                            <div class="container_TGrid">
                             </div>
                         </td>
                     </tr>
                 </table>
-                <div id="TablaDatos_D">
+                <div class="Dialog_Datos">
                     <table id="Tabla_1" style="width: 700px; text-align: left;">
                         <tr>
-                            <td style="width: 150px;" class="Label_Bold">
-                                Multi - Empresa
+                            <td style="width: 150px;" class="Label_Bold">NIT Empresa
                             </td>
                             <td>
                                 <select id="Select_EmpresaNit" class="C_Chosen">
@@ -86,24 +94,22 @@
                             </td>
                         </tr>
                     </table>
-                    <table id="Tabla_2" style="width: 700px; text-align: left;">
+                    <table id="Tabla_2" style="width: 900px; text-align: left;">
                         <tr>
-                            <td style="width: 150px;" class="Label_Bold">
-                                Codigo
+                            <td style="width: 150px;" class="Label_Bold">Codigo
                             </td>
                             <td style="width: 70px;">
                                 <span class="cssToolTip_Form">
                                     <input type="text" id="Txt_ID" maxlength="5" class="Numeric" style="width: 70px;" />
                                     <span class="Spam_AN"></span></span>
                             </td>
-                            <td style="padding-bottom: 25px; width: 40px;">
+                            <td style="padding-bottom: 25px; width: 270px;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img2"
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
-                            <td class="Label_Bold" style="width: 80px;">
-                                Nombre
+                            <td class="Label_Bold" style="width: 80px;">Nombre
                             </td>
                             <td style="width: 200px;">
                                 <span class="cssToolTip_Form">
@@ -120,28 +126,24 @@
                     </table>
                     <table id="Tabla_3" style="width: 700px; text-align: left;">
                         <tr>
-                            <td style="width: 150px;" class="Label_Bold">
-                                Área 
+                            <td style="width: 150px;" class="Label_Bold">Área 
                             </td>
                             <td>
                                 <select id="Select_CargoDepent" class="C_Chosen">
                                 </select>
                             </td>
-                            <td style="padding-bottom: 25px; width: 320px;">
-                            </td>
+                            <td style="padding-bottom: 25px; width: 320px;"></td>
                         </tr>
                     </table>
-                    <table id="Tabla_4" style="width: 700px; text-align: left;">
+                    <table id="Tabla_4" style="width: 900px; text-align: left;">
                         <tr>
-                            <td style="width: 150px;" class="Label_Bold">
-                                Politica de Seguridad
+                            <td style="width: 150px;" class="Label_Bold">Politica de Seguridad
                             </td>
                             <td>
                                 <select id="Select_Politica" class="C_Chosen">
                                 </select>
                             </td>
-                            <td style="padding-bottom: 25px; width: 320px;">
-                            </td>
+                            <td style="padding-bottom: 25px; width: 569px;"></td>
                         </tr>
                         <tr>
                             <td style="width: 150px;" class="Label_Bold">
@@ -169,7 +171,7 @@
                 <td>
                     <img alt="error" id="DE" src="../../images/error_2.png" />
                     <img alt="success" id="SE" src="../../images/success.png" />
-                    <img alt="Warning" id="WE" src="../../images/alert.png" />
+                    <img alt="Warning" id="WA" src="../../images/alert.png" />
                 </td>
             </tr>
             <tr>

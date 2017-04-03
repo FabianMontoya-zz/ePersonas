@@ -20,11 +20,13 @@ var index_ID;
 var editID;
 var Nit_ID_proccess;
 var ConsecutivoOrigen;
+var ConsecutivoNuevo;
 var NameDoc_Final;
 var Formato_ID;
 var IndicativoFoto;
 var CheckVigencias;
 var DescripFormato;
+
 
 var StrTFormato;
 var StrTNit_MultiEmpresa;
@@ -58,7 +60,7 @@ $(document).ready(function () {
     $("#Img10").css("display", "none");
     $("#IF_Visor").css("display", "none");
     $("#D_Controls").css("display", "none");
-    
+
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
     $("#WE").css("display", "none");
@@ -172,18 +174,21 @@ function BtnRegresar() {
 function BtnIngresar() {
     Matrix_Consecutivo = [];
     transaccionAjax_MConsecutivo('MATRIX_CONSECUTIVOS');
-  }
+}
 
 //trae el consecutivo y actualiza
 function CaptureConsecutivo() {
 
+    var ConsecutivoExist = 0;
+
     for (item in Matrix_Consecutivo) {
         if (Matrix_Consecutivo[item].Nit_ID == Nit_ID_proccess) {
             ConsecutivoOrigen = Matrix_Consecutivo[item].Consecutivo;
-            var ConsecutivoNuevo = parseInt(Matrix_Consecutivo[item].Consecutivo) + 1;
-            transacionAjax_UpdateConsecutivo("Update_Consecutivo", ConsecutivoNuevo);
+            ConsecutivoNuevo = parseInt(Matrix_Consecutivo[item].Consecutivo) + 1;
+            ConsecutivoExist = 1;
         }
     }
+    return ConsecutivoExist;
 }
 
 //valida los campos obligatorios
@@ -365,7 +370,7 @@ function Clear() {
     $("#IF_Visor").css("display", "none");
 
     $("#D_Controls").css("display", "none");
- 
+
     $('.C_Chosen').trigger('chosen:updated');
 }
 
@@ -375,15 +380,34 @@ function BuscarFormato() {
 
     var ID_Doc = $("#Select_Documento").val();
     var StrFormato = "";
-   
+
     for (item in Matrix_Documento) {
         if (Matrix_Documento[item].Documento_ID == ID_Doc)
             StrFormato = Matrix_Documento[item].DescripFormato;
     }
     for (item in Matrix_Documento) {
         if (Matrix_Documento[item].Nit_ID == Nit_ID_proccess)
-        StrConsecutivo = Matrix_Documento[item].Consecutivo;
+            StrConsecutivo = Matrix_Documento[item].Consecutivo;
     }
 
-     return StrFormato;
+    return StrFormato;
+}
+
+//valida existencia del consecutivo
+function ValideConsecutivo(ConsecutivoExist) {
+
+    switch (ConsecutivoExist) {
+        case 1:
+            transacionAjax_CopyDocument("Copiar_Doc");
+            break;
+
+        case 0:
+            $("#dialog").dialog("option", "title", "Exito");
+            $("#Mensaje_alert").text("El documento no se puede crear no hay consecutivos! ");
+            $("#dialog").dialog("open");
+            $("#DE").css("display", "none");
+            $("#SE").css("display", "none");
+            $("#WE").css("display", "block");
+            break;
+    }
 }

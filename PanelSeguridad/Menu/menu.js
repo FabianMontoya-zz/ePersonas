@@ -1,69 +1,44 @@
 ﻿/*--------------- region de variables globales --------------------*/
 var ArrayMenu = [];
+var Array_G_Usuario = [];
+var Estructura = [];
+
 var HtmlTree;
 var HtmlTree_Interno = "";
-var User;
 var Json_Arbol_carpetas;
-var Estructura = [];
-var Link;
 /*--------------- region de variables globales --------------------*/
 
 //evento load del menu
 $(document).ready(function () {
-
-    //capturamos la url
-    var URLPage = window.location.search.substring(1);
-    var URLVariables = URLPage.split('&');
-
-    if (URLVariables.length <= 1) {
-        User = URLVariables[0].replace("User=", "");
-    }
-    else {
-        User = URLVariables[0].replace("User=", "");
-        Link = URLVariables[1].replace("L_L=", "");
-    }
-
-    $("#User").html(User.toUpperCase());
-
-
-
-    //traemos los datos
-    transacionAjax("consulta");
-
+    VentanasEmergentes();
+    ConsultaParametrosURL();
 });
 
-//hacemos la transaccion al code behind por medio de Ajax
-function transacionAjax(State) {
-    $.ajax({
-        url: "menuAjax.aspx",
-        type: "POST",
-        //crear json
-        data: { "action": State,
-            "user": $("#User").html()
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                 REGION INICIO DE COMPONENTES                                                                                                    ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//instancia dialogos jquey
+function VentanasEmergentes() {
+    $("#Dialog_Warning").dialog({
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        show: {
+            effect: 'fade',
+            duration: 600
         },
-       //Transaccion Ajax en proceso
-        success: function (result) {
-            if (result == "") {
-                ArrayMenu = [];
-            }
-            else {
-                ArrayMenu = JSON.parse(result);
-                arbol();
-            }
+        hide: {
+            effect: 'fade',
+            duration: 600
         },
-        error: function () {
-            $("#dialog").dialog("option", "title", "Disculpenos :(");
-            $("#Mensaje_alert").text("Se genero error al realizar la transacción Ajax!");
-            $("#dialog").dialog("open");
-            $("#DE").css("display", "block");
-        }
+        modal: true
     });
 }
 
-
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                              PROCESO DE CONTRUCCION MENU ARBOL                                                                             ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //hace el menu dinamico desde la consulta de la BD
 function arbol() {
-
 
     //Raiz del arbol
     for (itemArray in ArrayMenu) {
@@ -81,7 +56,6 @@ function arbol() {
     //pintar Raiz
     $("#container_menu").html(HtmlTree);
 
-
     var contP = 0;
     var IDInicial = "";
     var IDFinal = "";
@@ -90,49 +64,51 @@ function arbol() {
     var SubFinal = "";
 
     for (itemArray in ArrayMenu) {
-        //construir Carpetas 
-        if (ArrayMenu[itemArray].Tipo == 1) {
 
-            if (contP == 0) {
-                IDInicial = ArrayMenu[itemArray].IDRol;
-                IDFinal = ArrayMenu[itemArray].IDRol;
-            }
-            else {
-                IDFinal = ArrayMenu[itemArray].IDRol;
-            }
+        switch (ArrayMenu[itemArray].Tipo) {
 
-            if (IDInicial != IDFinal) {
-                contP = 0;
-                IDInicial = ArrayMenu[itemArray].IDRol;
-                IDFinal = ArrayMenu[itemArray].IDRol;
-                HtmlTree_Interno = "";
-            }
-            HtmlTree_Interno += "<ol><li><span class='cssToolTip_ver'><label for='C_" + ArrayMenu[itemArray].Sub_Rol + "'>" + ArrayMenu[itemArray].Sub_Rol + "</label><span>" + ArrayMenu[itemArray].DescripcionLink + "</span></span><input type='checkbox' id='C_" + ArrayMenu[itemArray].Sub_Rol + "' /><ol><li id='Container_" + ArrayMenu[itemArray].Sub_Rol + "'></li></ol></li></ol>";
-            contP = contP + 1;
-            //pintar carpetas
-            $("#Container_" + ArrayMenu[itemArray].IDRol).html(HtmlTree_Interno);
-        }
-        //construir links
-        else {
-            if (cont == 0) {
-                SubInicial = ArrayMenu[itemArray].Sub_Rol;
-                SubFinal = ArrayMenu[itemArray].Sub_Rol;
-                HtmlTree_Interno = "";
-            }
-            else {
-                SubFinal = ArrayMenu[itemArray].Sub_Rol;
-            }
+            case "1":   //construir Carpetas 
+                if (contP == 0) {
+                    IDInicial = ArrayMenu[itemArray].IDRol;
+                    IDFinal = ArrayMenu[itemArray].IDRol;
+                }
+                else
+                    IDFinal = ArrayMenu[itemArray].IDRol;
 
-            if (SubInicial != SubFinal) {
-                cont = 0;
-                SubInicial = ArrayMenu[itemArray].Sub_Rol;
-                SubFinal = ArrayMenu[itemArray].Sub_Rol;
-                HtmlTree_Interno = "";
-            }
-            HtmlTree_Interno += "<li class='file'><span class='cssToolTip_ver'><a class='Pagina' href='" + ArrayMenu[itemArray].Ruta + User + "&LINK=" + ArrayMenu[itemArray].IDlink + "'>" + ArrayMenu[itemArray].DescripcionLink + "</a><span>" + ArrayMenu[itemArray].DescripcionLink + "</span></span></li>";
-            cont = cont + 1;
-            //pintar links
-            $("#Container_" + ArrayMenu[itemArray].Sub_Rol).html(HtmlTree_Interno);
+                if (IDInicial != IDFinal) {
+                    contP = 0;
+                    IDInicial = ArrayMenu[itemArray].IDRol;
+                    IDFinal = ArrayMenu[itemArray].IDRol;
+                    HtmlTree_Interno = "";
+                }
+
+                HtmlTree_Interno += "<ol><li><span class='cssToolTip_ver'><label for='C_" + ArrayMenu[itemArray].Sub_Rol + "'>" + ArrayMenu[itemArray].Sub_Sigla + "</label><span>" + ArrayMenu[itemArray].DescripcionSubRol + "</span></span><input type='checkbox' id='C_" + ArrayMenu[itemArray].Sub_Rol + "' /><ol><li id='Container_" + ArrayMenu[itemArray].Sub_Rol + "'></li></ol></li></ol>";
+                contP = contP + 1;
+                //pintar carpetas
+                $("#Container_" + ArrayMenu[itemArray].IDRol).html(HtmlTree_Interno);
+                break;
+
+            case "2": //construir links
+                if (cont == 0) {
+                    SubInicial = ArrayMenu[itemArray].Sub_Rol;
+                    SubFinal = ArrayMenu[itemArray].Sub_Rol;
+                    HtmlTree_Interno = "";
+                }
+                else
+                    SubFinal = ArrayMenu[itemArray].Sub_Rol;
+
+                if (SubInicial != SubFinal) {
+                    cont = 0;
+                    SubInicial = ArrayMenu[itemArray].Sub_Rol;
+                    SubFinal = ArrayMenu[itemArray].Sub_Rol;
+                    HtmlTree_Interno = "";
+                }
+
+                HtmlTree_Interno += "<li class='file'><span class='cssToolTip_ver'><a class='Pagina' href='" + ArrayMenu[itemArray].Ruta + User + "&Key=" + ArrayMenu[itemArray].Nit + "&LINK=" + ArrayMenu[itemArray].IDlink + "'>" + ArrayMenu[itemArray].DescripcionLink + "</a><span>" + ArrayMenu[itemArray].DescripcionLink + "</span></span></li>";
+                cont = cont + 1;
+                //pintar links
+                $("#Container_" + ArrayMenu[itemArray].Sub_Rol).html(HtmlTree_Interno);
+                break;
         }
     }
 
@@ -171,5 +147,19 @@ function Ruta_Menu() {
     for (index = L_Ruta - 1; index >= 0; index--) {
         $("#C_" + ArrayRuta[index]).prop("checked", true);
     }
-       
+    Advertencia();
 }
+
+//Informa el bloque del menu
+function Advertencia() {
+
+    $("#Tree_Menu").mouseenter(function () {
+        $("#Dialog_Warning").dialog("open");
+        $("#Mensaje_Warning").html("No puede cambiar de pagina hasta no cerrar (" + $("#Title_form").html() + ")");
+    });
+
+    $("#Tree_Menu").mouseout(function () {
+        $("#Dialog_Warning").dialog("close");
+    });
+}
+

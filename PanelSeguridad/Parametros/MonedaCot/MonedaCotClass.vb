@@ -1,5 +1,6 @@
 ﻿Public Class MonedaCotClass
 #Region "campos"
+    Private _Index As Long
     Private _MonedaCot_ID As Integer
     Private _Fecha As String
     Private _ValorCotizacion As Double
@@ -10,7 +11,15 @@
     Private _DescripMoneda As String
 #End Region
 
-#Region "proiedades"
+#Region "propiedades"
+    Public Property Index() As Long
+        Get
+            Return Me._Index
+        End Get
+        Set(ByVal value As Long)
+            Me._Index = value
+        End Set
+    End Property
     Public Property MonedaCot_ID() As Integer
         Get
             Return Me._MonedaCot_ID

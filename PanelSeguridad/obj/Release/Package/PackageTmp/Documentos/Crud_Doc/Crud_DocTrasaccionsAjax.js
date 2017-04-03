@@ -179,7 +179,6 @@ function transacionAjax_Formato(State) {
 }
 
 /*PASO 0*/
-
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transaccionAjax_MConsecutivo(State) {
@@ -203,15 +202,22 @@ function transaccionAjax_MConsecutivo(State) {
             }
             else {
                 Matrix_Consecutivo = JSON.parse(result);
+                switch (CheckVigencias) {
 
-                if (CheckVigencias != "S") {
-                    CaptureConsecutivo();
+                    case "N":
+                        var ConsecutivoExist = CaptureConsecutivo();
+                        ValideConsecutivo(ConsecutivoExist);
+                        break;
+
+                    case "S":
+                        var validar = ValidarCamposVigencia();
+                        if (validar == 0) {
+                            var ConsecutivoExist = CaptureConsecutivo();
+                            ValideConsecutivo(ConsecutivoExist);
+                        }
+                        break;
                 }
-                else {
-                    var validar = ValidarCamposVigencia();
-                    if (validar == 0)
-                        CaptureConsecutivo();
-                }
+
             }
         },
         error: function () {
@@ -222,29 +228,6 @@ function transaccionAjax_MConsecutivo(State) {
 
 
 /*PASO 1*/
-/*------------------------------ crear documento ---------------------------*/
-//hacemos la transaccion al code behind por medio de Ajax
-function transacionAjax_UpdateConsecutivo(State, Consecutivo) {
-    $.ajax({
-        url: "Crud_DocAjax.aspx",
-        type: "POST",
-        //crear json
-        data: { "action": State,
-            "Consecutivo": Consecutivo,
-            "Nit_ID": Nit_ID_proccess
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            transacionAjax_CopyDocument("Copiar_Doc");
-        },
-        error: function () {
-
-        }
-    });
-
-}
-
-/* PASO 2 */
 /*------------------------------ crear documento ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax_CopyDocument(State) {
@@ -263,6 +246,38 @@ function transacionAjax_CopyDocument(State) {
             "RutaTemporal": RutaTemporal,
             "Doc_name": Doc_name,
             "NameDoc_Final": NameDoc_Final
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == 0) {
+                transacionAjax_UpdateConsecutivo("Update_Consecutivo", ConsecutivoNuevo);
+            }
+            else {
+                $("#dialog").dialog("option", "title", "Atención!");
+                $("#Mensaje_alert").text("El documento no se puede crear la ruta NO Existe! ");
+                $("#dialog").dialog("open");
+                $("#DE").css("display", "none");
+                $("#SE").css("display", "none");
+                $("#WE").css("display", "block");
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+/* PASO 2 */
+/*------------------------------ crear documento ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax
+function transacionAjax_UpdateConsecutivo(State, Consecutivo) {
+    $.ajax({
+        url: "Crud_DocAjax.aspx",
+        type: "POST",
+        //crear json
+        data: { "action": State,
+            "Consecutivo": Consecutivo,
+            "Nit_ID": Nit_ID_proccess
         },
         //Transaccion Ajax en proceso
         success: function (result) {

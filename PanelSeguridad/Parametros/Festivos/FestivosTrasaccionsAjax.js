@@ -5,7 +5,8 @@ function transacionAjax_CargaBusqueda(State) {
         url: "FestivosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'Festivos'
         },
         //Transaccion Ajax en proceso
@@ -41,7 +42,8 @@ function transacionAjax_Festivo(State, filtro, opcion) {
         url: "FestivosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "filtro": filtro,
             "opcion": opcion,
             "contenido": contenido
@@ -79,7 +81,8 @@ function transacionAjax_Festivo_create(State) {
         url: "FestivosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "ID": ID,
             "mes_dia": $("#Txt_mes_Dia").val(),
             "user": User
@@ -89,40 +92,20 @@ function transacionAjax_Festivo_create(State) {
             switch (result) {
 
                 case "Error":
-                    $("#dialog").dialog("option", "title", "Disculpenos :(");
-                    $("#Mensaje_alert").text("No se realizo El ingreso del Festivo!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "block");
-                    $("#SE").css("display", "none");
-                    $("#WE").css("display", "none");
+                    Mensaje_General("Disculpenos :(", "No se realizó el ingreso del festivo.", "E");
                     break;
 
                 case "Existe":
-                    $("#dialog").dialog("option", "title", "Ya Existe");
-                    $("#Mensaje_alert").text("El codigo ingresado ya existe en la base de datos!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "None");
-                    $("#SE").css("display", "none");
-                    $("#WE").css("display", "block");
+                    Mensaje_General("¡Ya Existe!", "El código ingresado ya existe en la base de datos.", "W");
                     break;
 
                 case "Exito":
                     if (estado == "modificar") {
-                        $("#dialog").dialog("option", "title", "Exito");
-                        $("#Mensaje_alert").text("El Festivo fue modificado exitosamente! ");
-                        $("#dialog").dialog("open");
-                        $("#DE").css("display", "none");
-                        $("#SE").css("display", "block");
-                        $("#WE").css("display", "none");
+                        Mensaje_General("¡Exito!", "El festivo se ha modificado correctamente.", "S");
                         Clear();
                     }
                     else {
-                        $("#dialog").dialog("option", "title", "Exito");
-                        $("#Mensaje_alert").text("El Festivo fue creado exitosamente! ");
-                        $("#dialog").dialog("open");
-                        $("#DE").css("display", "none");
-                        $("#SE").css("display", "block");
-                        $("#WE").css("display", "none");
+                        Mensaje_General("¡Exito!", "Se ha ingresado el nuevo festivos correctamente.", "S");
                         Clear();
                     }
                     break;
@@ -138,12 +121,12 @@ function transacionAjax_Festivo_create(State) {
 /*------------------------------ eliminar ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax_Festivo_delete(State) {
-    alert(editDia);
     $.ajax({
         url: "FestivosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "ID": editID,
             "mes_dia": editDia,
             "user": User
@@ -154,54 +137,15 @@ function transacionAjax_Festivo_delete(State) {
             switch (result) {
 
                 case "Error":
-                    $("#dialog").dialog("option", "title", "Disculpenos :(");
-                    $("#Mensaje_alert").text("No se elimino el Festivo!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "block");
-                    $("#SE").css("display", "none");
-                    $("#WE").css("display", "none");
                     $("#dialog_eliminar").dialog("close");
+                    Mensaje_General("Disculpenos :(", "Ocurrio un error al intentar eliminar el Festivo.", "E");
                     break;
 
-                case "Exist_M":
-                    $("#dialog").dialog("option", "title", "Integridad referencial");
-                    $("#Mensaje_alert").text("No se elimino el Festivo, para eliminarlo debe eliminar primero el registro en la tabla Maquina");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "none");
-                    $("#SE").css("display", "none");
-                    $("#WE").css("display", "block");
-                    $("#dialog_eliminar").dialog("close");
-                    break;
-
-                case "Exist_O":
-                    $("#dialog").dialog("option", "title", "Integridad referencial");
-                    $("#Mensaje_alert").text("No se elimino el Festivo, para eliminarlo debe eliminar primero el registro en la tabla Empleado");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "none");
-                    $("#SE").css("display", "none");
-                    $("#WE").css("display", "block");
-                    $("#dialog_eliminar").dialog("close");
-                    break;
-
-                case "Exist_All":
-                    $("#dialog").dialog("option", "title", "Integridad referencial");
-                    $("#Mensaje_alert").text("No se elimino el Festivo, para eliminarlo debe eliminar primero el registro en la tabla Empleado y en la tabla Maquina");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "none");
-                    $("#SE").css("display", "none");
-                    $("#WE").css("display", "block");
-                    $("#dialog_eliminar").dialog("close");
-                    break;
 
                 case "Exito":
                     $("#dialog_eliminar").dialog("close");
-                    $("#dialog").dialog("option", "title", "Exito");
-                    $("#Mensaje_alert").text("El Festivo fue eliminado exitosamente! ");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "none");
-                    $("#SE").css("display", "block");
-                    $("#WE").css("display", "none");
-                    $("#dialog_eliminar").dialog("close");
+                    Mensaje_General("¡Registro Eliminado!", "El Festivo fue eliminado exitosamente!", "S");
+                    $(".container_TGrid").html("");
                     Clear();
                     break;
             }

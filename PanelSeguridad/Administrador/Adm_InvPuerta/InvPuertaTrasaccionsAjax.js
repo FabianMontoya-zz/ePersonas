@@ -21,11 +21,11 @@ function transacionAjax_EmpresaNit(State) {
         },
         error: function () {
 
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     });
 }
-
-
 
 /*------------------------------ consulta ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
@@ -38,8 +38,7 @@ function transacionAjax_InvPuerta(State, filtro, opcion) {
     else {
         contenido = $("#TxtRead").val();
     }
-
-
+    
     $.ajax({
         url: "InvPuertaAjax.aspx",
         type: "POST",
@@ -68,7 +67,6 @@ function transacionAjax_InvPuerta(State, filtro, opcion) {
 /*------------------------------ crear ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax_InvPuerta_create(State) {
-
     $.ajax({
         url: "InvPuertaAjax.aspx",
         type: "POST",
@@ -79,6 +77,9 @@ function transacionAjax_InvPuerta_create(State) {
             "Vigencia": $("#Select_CheckVigencia").val(),
             "FechaInicial": $("#TxtFechaInicial").val(),
             "FechaFinal": $("#TxtFechaFinal").val(),
+            "Nit_Emp_User": Array_G_Usuario[0].Nit_ID,
+            "TDoc": Array_G_Usuario[0].TypeDocument,
+            "Doc": Array_G_Usuario[0].Documento,
             "user": User.toUpperCase()
         },
         //Transaccion Ajax en proceso
@@ -91,7 +92,7 @@ function transacionAjax_InvPuerta_create(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "block");
                     $("#SE").css("display", "none");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     break;
 
                 case "Existe":
@@ -110,7 +111,7 @@ function transacionAjax_InvPuerta_create(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "none");
                     $("#SE").css("display", "block");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     Clear();
                     break;
 
@@ -124,6 +125,15 @@ function transacionAjax_InvPuerta_create(State) {
                     Clear();
                     break;
 
+                case "NO_USER":
+                    $("#dialog").dialog("option", "title", "Advertecia!");
+                    $("#Mensaje_alert").text("No se puede ingresar la tarjeta este usurio no esta registrado en Clientes! ");
+                    $("#dialog").dialog("open");
+                    $("#DE").css("display", "none");
+                    $("#SE").css("display", "none");
+                    $("#WE").css("display", "block");
+                    Clear();
+                    break;
             }
 
         },

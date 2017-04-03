@@ -3,7 +3,7 @@
 
     Private _Nit_ID As String
     Private _TypeDoc_ID As Integer
-    Private _Doc_ID As Integer
+    Private _Doc_ID As Long
     Private _Consecutivo As Integer
 
     Private _Pais_ID As Integer
@@ -21,10 +21,11 @@
     Private _FechaActualizacion As String
     Private _Usuario As String
 
+    Private _Tipo_1 As String
+  
     Private _DescripCiudad As String
     Private _DescripPais As String
 #End Region
-
 
 #Region "propiedades"
     Public Property Nit_ID() As String
@@ -43,11 +44,11 @@
             Me._TypeDoc_ID = value
         End Set
     End Property
-    Public Property Doc_ID() As Integer
+    Public Property Doc_ID() As Long
         Get
             Return Me._Doc_ID
         End Get
-        Set(ByVal value As Integer)
+        Set(ByVal value As Long)
             Me._Doc_ID = value
         End Set
     End Property
@@ -165,6 +166,16 @@
             Me._Usuario = value
         End Set
     End Property
+
+    Public Property Tipo_1() As String
+        Get
+            Return Me._Tipo_1
+        End Get
+        Set(ByVal value As String)
+            Me._Tipo_1 = value
+        End Set
+    End Property
+   
 
     Public Property DescripCiudad() As String
         Get

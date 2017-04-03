@@ -154,8 +154,8 @@ $(document).ready(function () {
         autoOpen: false,
         dialogClass: "Dialog_Sasif",
         modal: true,
-        width: 700,
-        height: 350,
+        width: 900,
+        height: 550,
         overlay: {
             opacity: 0.5,
             background: "black"
@@ -326,12 +326,9 @@ function Change_Select_TDoc() {
     });
 }
 
-
-
 //muestra las relacion del cliente
 function BtnRelacion() {
     $("#Dialog_Relation").dialog("open");
-
 }
 
 //salida del formulario

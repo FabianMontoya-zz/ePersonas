@@ -1,5 +1,5 @@
 ﻿Public Class ClienteClass
-#Region "Campos"
+#Region "Campos Clientes"
 
     Private _Index As Long
     Private _Nit_ID As String
@@ -10,6 +10,8 @@
     Private _Nombre_2 As String
     Private _Apellido_1 As String
     Private _Apellido_2 As String
+    Private _Sex As String
+    Private _FechaNacimiento As String
 
     Private _Pais_ID As Integer
     Private _Ciudad_ID As Integer
@@ -22,7 +24,18 @@
     Private _OP_Asesor As String
     Private _Other_1 As String
     Private _Other_2 As String
-   
+
+
+    Private _OP_Visitante As String
+    Private _OP_Representante As String
+    Private _OP_Socio As String
+    Private _Other_3 As String
+    Private _Other_4 As String
+    Private _Other_5 As String
+    Private _Other_6 As String
+    Private _Other_7 As String
+    Private _Por_Participacion As Integer
+
     Private _Cod_Bank As Long
     Private _DocCiudad As Long
     Private _TipoPersona As String
@@ -59,9 +72,40 @@
     Private _DescripJefe As String
     Private _DescripGrupoDocumentos As String
 
+    Private _Tarjeta_ID As String
+    Private _EstadoTarjeta As String
+    Private _CheckVigencia_Tarjeta As String
+    Private _FechaVencimientoTarjeta As String
+    Private _MotivoBloqueo As String
+    Private _DescripMotivoBloqueo As String
+    Private _DescripSexo As String
+
+    Private _TipoSQL As String
+
 #End Region
 
-#Region "Propiedades"
+#Region "Campos Direccion"
+    Private _PaginaWeb As String
+
+    Private _Correo_1 As String
+    Private _Correo_2 As String
+
+    Private _Contacto As String
+
+    Private _Telefono_1 As String
+    Private _Telefono_2 As String
+    Private _Telefono_3 As String
+    Private _Telefono_4 As String
+
+    Private _Direccion As String
+
+    Private _Tipo_1 As String
+
+
+    Private _Index_Direccion As Long
+#End Region
+
+#Region "Propiedades Clientes"
     Public Property Index() As Long
         Get
             Return Me._Index
@@ -76,6 +120,22 @@
         End Get
         Set(ByVal value As String)
             Me._Nit_ID = value
+        End Set
+    End Property
+    Public Property Sex() As String
+        Get
+            Return Me._Sex
+        End Get
+        Set(ByVal value As String)
+            Me._Sex = value
+        End Set
+    End Property
+    Public Property FechaNacimiento() As String
+        Get
+            Return Me._FechaNacimiento
+        End Get
+        Set(ByVal value As String)
+            Me._FechaNacimiento = value
         End Set
     End Property
     Public Property TypeDocument_ID() As Integer
@@ -216,6 +276,31 @@
             Me._Other_1 = value
         End Set
     End Property
+
+    Public Property OP_Visitante() As String
+        Get
+            Return Me._OP_Visitante
+        End Get
+        Set(ByVal value As String)
+            Me._OP_Visitante = value
+        End Set
+    End Property
+    Public Property OP_Representante() As String
+        Get
+            Return Me._OP_Representante
+        End Get
+        Set(ByVal value As String)
+            Me._OP_Representante = value
+        End Set
+    End Property
+    Public Property OP_Socio() As String
+        Get
+            Return Me._OP_Socio
+        End Get
+        Set(ByVal value As String)
+            Me._OP_Socio = value
+        End Set
+    End Property
     Public Property Other_2() As String
         Get
             Return Me._Other_2
@@ -224,6 +309,55 @@
             Me._Other_2 = value
         End Set
     End Property
+    Public Property Other_3() As String
+        Get
+            Return Me._Other_3
+        End Get
+        Set(ByVal value As String)
+            Me._Other_3 = value
+        End Set
+    End Property
+    Public Property Other_4() As String
+        Get
+            Return Me._Other_4
+        End Get
+        Set(ByVal value As String)
+            Me._Other_4 = value
+        End Set
+    End Property
+    Public Property Other_5() As String
+        Get
+            Return Me._Other_5
+        End Get
+        Set(ByVal value As String)
+            Me._Other_5 = value
+        End Set
+    End Property
+    Public Property Other_6() As String
+        Get
+            Return Me._Other_6
+        End Get
+        Set(ByVal value As String)
+            Me._Other_6 = value
+        End Set
+    End Property
+    Public Property Other_7() As String
+        Get
+            Return Me._Other_7
+        End Get
+        Set(ByVal value As String)
+            Me._Other_7 = value
+        End Set
+    End Property
+    Public Property Por_Participacion() As Integer
+        Get
+            Return Me._Por_Participacion
+        End Get
+        Set(ByVal value As Integer)
+            Me._Por_Participacion = value
+        End Set
+    End Property
+
     Public Property UsuarioCreacion() As String
         Get
             Return Me._UsuarioCreacion
@@ -456,5 +590,162 @@
         End Set
     End Property
 
+    Public Property Tarjeta_ID() As String
+        Get
+            Return Me._Tarjeta_ID
+        End Get
+        Set(ByVal value As String)
+            Me._Tarjeta_ID = value
+        End Set
+    End Property
+    Public Property EstadoTarjeta() As String
+        Get
+            Return Me._EstadoTarjeta
+        End Get
+        Set(ByVal value As String)
+            Me._EstadoTarjeta = value
+        End Set
+    End Property
+    Public Property CheckVigencia_Tarjeta() As String
+        Get
+            Return Me._CheckVigencia_Tarjeta
+        End Get
+        Set(ByVal value As String)
+            Me._CheckVigencia_Tarjeta = value
+        End Set
+    End Property
+    Public Property FechaVencimientoTarjeta() As String
+        Get
+            Return Me._FechaVencimientoTarjeta
+        End Get
+        Set(ByVal value As String)
+            Me._FechaVencimientoTarjeta = value
+        End Set
+    End Property
+    Public Property MotivoBloqueo() As String
+        Get
+            Return Me._MotivoBloqueo
+        End Get
+        Set(ByVal value As String)
+            Me._MotivoBloqueo = value
+        End Set
+    End Property
+    Public Property DescripMotivoBloqueo() As String
+        Get
+            Return Me._DescripMotivoBloqueo
+        End Get
+        Set(ByVal value As String)
+            Me._DescripMotivoBloqueo = value
+        End Set
+    End Property
+    Public Property DescripSexo() As String
+        Get
+            Return Me._DescripSexo
+        End Get
+        Set(ByVal value As String)
+            Me._DescripSexo = value
+        End Set
+    End Property
+    Public Property TipoSQL() As String
+        Get
+            Return Me._TipoSQL
+        End Get
+        Set(ByVal value As String)
+            Me._TipoSQL = value
+        End Set
+    End Property
 #End Region
+
+#Region "Propiedades Direccion"
+    Public Property PaginaWeb() As String
+        Get
+            Return Me._PaginaWeb
+        End Get
+        Set(ByVal value As String)
+            Me._PaginaWeb = value
+        End Set
+    End Property
+    Public Property Correo_1() As String
+        Get
+            Return Me._Correo_1
+        End Get
+        Set(ByVal value As String)
+            Me._Correo_1 = value
+        End Set
+    End Property
+    Public Property Correo_2() As String
+        Get
+            Return Me._Correo_2
+        End Get
+        Set(ByVal value As String)
+            Me._Correo_2 = value
+        End Set
+    End Property
+    Public Property Contacto() As String
+        Get
+            Return Me._Contacto
+        End Get
+        Set(ByVal value As String)
+            Me._Contacto = value
+        End Set
+    End Property
+    Public Property Telefono_1() As String
+        Get
+            Return Me._Telefono_1
+        End Get
+        Set(ByVal value As String)
+            Me._Telefono_1 = value
+        End Set
+    End Property
+    Public Property Telefono_2() As String
+        Get
+            Return Me._Telefono_2
+        End Get
+        Set(ByVal value As String)
+            Me._Telefono_2 = value
+        End Set
+    End Property
+    Public Property Telefono_3() As String
+        Get
+            Return Me._Telefono_3
+        End Get
+        Set(ByVal value As String)
+            Me._Telefono_3 = value
+        End Set
+    End Property
+    Public Property Telefono_4() As String
+        Get
+            Return Me._Telefono_4
+        End Get
+        Set(ByVal value As String)
+            Me._Telefono_4 = value
+        End Set
+    End Property
+    Public Property Direccion() As String
+        Get
+            Return Me._Direccion
+        End Get
+        Set(ByVal value As String)
+            Me._Direccion = value
+        End Set
+    End Property
+    Public Property Tipo_1() As String
+        Get
+            Return Me._Tipo_1
+        End Get
+        Set(ByVal value As String)
+            Me._Tipo_1 = value
+        End Set
+    End Property
+
+    Public Property Index_Direccion() As Long
+        Get
+            Return Me._Index_Direccion
+        End Get
+        Set(ByVal value As Long)
+            Me._Index_Direccion = value
+        End Set
+    End Property
+#End Region
+
 End Class

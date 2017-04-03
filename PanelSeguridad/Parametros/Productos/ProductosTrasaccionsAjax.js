@@ -1,6 +1,7 @@
 ﻿/*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_CargaBusqueda(State) {
+    OpenControl(); 
     $.ajax({
         url: "ProductosAjax.aspx",
         type: "POST",
@@ -105,32 +106,6 @@ function transacionAjax_SubTipo_P(State, Index) {
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_Tipo_A(State) {
-    $.ajax({
-        url: "ProductosAjax.aspx",
-        type: "POST",
-        //crear json
-        data: { "action": State,
-            "tabla": 'TIPO'
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            if (result == "") {
-                ArrayTipo_A = [];
-            }
-            else {
-                ArrayTipo_A = JSON.parse(result);
-                charge_CatalogList(ArrayTipo_A, "Select_Tipo_A", 1);
-            }
-        },
-        error: function () {
-
-        }
-    });
-}
-
-/*-------------------- carga ---------------------------*/
-//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_Transaccion(State) {
     $.ajax({
         url: "ProductosAjax.aspx",
@@ -149,33 +124,6 @@ function transacionAjax_Transaccion(State) {
                 charge_CatalogList(ArrayTransaccion, "Select_Crea", 1);
                 charge_CatalogList(ArrayTransaccion, "Select_Mod", 1);
                 charge_CatalogList(ArrayTransaccion, "Select_Ret", 1);
-            }
-        },
-        error: function () {
-
-        }
-    });
-}
-
-/*-------------------- carga ---------------------------*/
-//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_SubTipo_A(State, Index) {
-    $.ajax({
-        url: "ProductosAjax.aspx",
-        type: "POST",
-        //crear json
-        data: { "action": State,
-            "tabla": 'TIPO',
-            "ID": Index
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            if (result == "") {
-                ArraySubTipo_A = [];
-            }
-            else {
-                ArraySubTipo_A = JSON.parse(result);
-                charge_CatalogList(ArraySubTipo_A, "Select_SubTipo_A", 1);
             }
         },
         error: function () {
@@ -204,7 +152,8 @@ function transacionAjax_Productos(State, filtro, opcion) {
         data: { "action": State,
             "filtro": filtro,
             "opcion": opcion,
-            "contenido": contenido
+            "contenido": contenido,
+            "Nit_User": g_NitEmpresa_User
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -228,37 +177,28 @@ function transacionAjax_Productos_create(State) {
 
     var Prod_ID;
     var TipoP_ID;
-    var TipoA_ID;
-    var SubTipoP_ID;
-    var SubTipoA_ID;
+    var SubTipoP_ID;    
     var Crea_ID;
     var Mod_ID;
     var Ret_ID;
     var ID_N;
+    var Causacion_Interes;
+    var Causacion_Mora;
+    var Base_Mora;
+    var Capitalizacion;
+    var Control_Activo;
 
 
-    var index_A;
-    var index_SA;
     var index_SP;
     var index_C;
     var index_M;
-    var index_R;
-
-    if ($("#Select_Tipo_A").val() == "-1" || $("#Select_Tipo_A").val() == "")
-        index_A = 0;
-    else
-        index_A = $("#Select_Tipo_A").val();
+    var index_R;        
 
     if ($("#Select_SubTipo_P").val() == "-1" || $("#Select_SubTipo_P").val() == "")
         index_SP = 0;
     else
         index_SP = $("#Select_SubTipo_P").val();
-
-    if ($("#Select_SubTipo_A").val() == "-1" || $("#Select_SubTipo_A").val() == "")
-        index_SA = 0;
-    else
-        index_SA = $("#Select_SubTipo_A").val();
-
+    
     if ($("#Select_Crea").val() == "-1" || $("#Select_Crea").val() == "")
         index_C = 0;
     else
@@ -274,14 +214,37 @@ function transacionAjax_Productos_create(State) {
     else
         index_R = $("#Select_Ret").val();
 
+    if ($("#Select_Caus_Int_Cte").val() == "-1" || $("#Select_Caus_Int_Cte").val() == "")
+        Causacion_Interes = "0";
+    else
+        Causacion_Interes = $("#Select_Caus_Int_Cte").val();
+
+    if ($("#Select_Caus_Mora").val() == "-1" || $("#Select_Caus_Mora").val() == "")
+        Causacion_Mora = "0";
+    else
+        Causacion_Mora = $("#Select_Caus_Mora").val();
+
+    if ($("#Select_Base_Mora").val() == "-1" || $("#Select_Base_Mora").val() == "")
+        Base_Mora = "0";
+    else
+        Base_Mora = $("#Select_Base_Mora").val();
+
+    if ($("#Select_Capitalizacion").val() == "-1" || $("#Select_Capitalizacion").val() == "")
+        Capitalizacion = "N";
+    else
+        Capitalizacion = $("#Select_Capitalizacion").val();
+
+    if ($("#Select_Control_Activos").val() == "-1" || $("#Select_Control_Activos").val() == "")
+        Control_Activo = "N";
+    else
+        Control_Activo = $("#Select_Control_Activos").val();
+
 
     if (State == "modificar") {
         ID_N = editNit_ID;
         Prod_ID = ProductoID;
         TipoP_ID = $("#Select_Tipo_P").val();
-        TipoA_ID = index_A;
         SubTipoP_ID = index_SP;
-        SubTipoA_ID = index_SA;
         Crea_ID = index_C;
         Mod_ID = index_M;
         Ret_ID = index_R;
@@ -290,9 +253,7 @@ function transacionAjax_Productos_create(State) {
         ID_N = $("#Select_EmpresaNit").val();
         Prod_ID = $("#Txt_ID").val();
         TipoP_ID = $("#Select_Tipo_P").val();
-        TipoA_ID = index_A;
         SubTipoP_ID = index_SP;
-        SubTipoA_ID = index_SA;
         Crea_ID = index_C;
         Mod_ID = index_M;
         Ret_ID = index_R;
@@ -307,9 +268,7 @@ function transacionAjax_Productos_create(State) {
             "ID": Prod_ID,
             "Descripcion": $("#TxtDescripcion").val(),
             "TipoP_ID": TipoP_ID,
-            "TipoA_ID": TipoA_ID,
-            "SubTipoP_ID": SubTipoP_ID,
-            "SubTipoA_ID": SubTipoA_ID,
+            "SubTipoP_ID": SubTipoP_ID,            
             "Crea_ID": Crea_ID,
             "Mod_ID": Mod_ID,
             "Ret_ID": Ret_ID,
@@ -363,37 +322,28 @@ function transacionAjax_Productos_create(State) {
             "Cuenta_48": $("#TxtCuenta_48").val(),
             "Cuenta_49": $("#TxtCuenta_49").val(),
             "Cuenta_50": $("#TxtCuenta_50").val(),
-            "user": User
+            "Causacion_Interes": Causacion_Interes,
+            "Causacion_Mora": Causacion_Mora,
+            "Base_Mora": Base_Mora,
+            "Capitalizacion": Capitalizacion,
+            "Control_Activo": Control_Activo,
+            "user": User.toUpperCase()
         },
         //Transaccion Ajax en proceso
+        //Fin Ajax
         success: function (result) {
             switch (result) {
 
-                case "Error":
-                    $("#dialog").dialog("option", "title", "Disculpenos :(");
-                    $("#Mensaje_alert").text("No se realizo el ingreso del Productos!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "block");
-                    $("#SE").css("display", "none");
-                    $("#WE").css("display", "none");
+                case "Error":                    
+                    Mensaje_General("Disculpenos :(", "¡No se realizó el ingreso del Producto!", "E");
                     break;
 
                 case "Existe":
-                    $("#dialog").dialog("option", "title", "Ya Existe");
-                    $("#Mensaje_alert").text("El codigo ingresado ya existe en la base de datos!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "None");
-                    $("#SE").css("display", "none");
-                    $("#WE").css("display", "block");
+                    Mensaje_General("Código Duplicado", "¡El código ingresado ya existe en la base de datos!", "W");
                     break;
 
                 case "Exito":
-                    $("#dialog").dialog("option", "title", "Exito");
-                    $("#Mensaje_alert").text("El Productos fue creado exitosamente! ");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "none");
-                    $("#SE").css("display", "block");
-                    $("#WE").css("display", "none");
+                    Mensaje_General("Producto Insertado", "¡El Producto fue creado exitosamente!", "S");
                     Clear();
                     break;
             }
@@ -422,35 +372,16 @@ function transacionAjax_Productos_delete(State) {
         success: function (result) {
             switch (result) {
 
-                case "Error":
-                    $("#dialog").dialog("option", "title", "Disculpenos :(");
-                    $("#Mensaje_alert").text("No se elimino el Productos!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "block");
-                    $("#SE").css("display", "none");
-                    $("#WE").css("display", "none");
-                    $("#dialog_eliminar").dialog("close");
+                case "Error":                    
+                    Mensaje_General("Disculpenos :(", "¡No se eliminó el Producto!", "E");
                     break;
 
                 case "Exist_O":
-                    $("#dialog").dialog("option", "title", "Integridad referencial");
-                    $("#Mensaje_alert").text("No se elimino el Productos, para eliminarlo debe eliminar primero el registro en la tabla Empleado");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "none");
-                    $("#SE").css("display", "none");
-                    $("#WE").css("display", "block");
-                    $("#dialog_eliminar").dialog("close");
+                    Mensaje_General("Error en Integridad referencial", "¡No se elimino el Producto!, para eliminarlo debe eliminar primero el registro en la tabla Empleado", "W");
                     break;
 
                 case "Exito":
-                    $("#dialog_eliminar").dialog("close");
-                    $("#dialog").dialog("option", "title", "Exito");
-                    $("#Mensaje_alert").text("El Productos fue eliminado exitosamente! ");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "none");
-                    $("#SE").css("display", "block");
-                    $("#WE").css("display", "none");
-                    $("#dialog_eliminar").dialog("close");
+                    Mensaje_General("Eliminado Correctamente", "¡El Producto fue eliminado exitosamente!", "S");
                     Clear();
                     break;
             }

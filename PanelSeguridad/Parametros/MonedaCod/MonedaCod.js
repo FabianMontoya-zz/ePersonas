@@ -5,20 +5,38 @@ var estado;
 var editID;
 /*--------------- region de variables globales --------------------*/
 
-//evento load de los Links
+//Evento load JS
 $(document).ready(function () {
+
+    /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
+    Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
+    Ocultar_Errores();
+    Ocultar_Tablas();
+    /*==================FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN==============*/
+
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
+
+});
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                 REGION INICIO DE COMPONENTES                                                                                                    ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//Función que oculta todas las IMG de los errores en pantalla
+function Ocultar_Errores() {
+    ResetError();
     $("#ESelect").css("display", "none");
     $("#ImgID").css("display", "none");
     $("#Img2").css("display", "none");
     $("#Img1").css("display", "none");
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
-    $("#WE").css("display", "none");
+    $("#WA").css("display", "none");
+}
 
+//funcion para las ventanas emergentes
+function Ventanas_Emergentes() {
 
-    $("#TablaDatos").css("display", "none");
-    $("#TablaConsulta").css("display", "none");
+    Load_Charge_Sasif(); //Carga de "SasifMaster.js" el Control de Carga
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
@@ -32,57 +50,17 @@ $(document).ready(function () {
         dialogClass: "Dialog_Sasif",
         modal: true
     });
-    
-});
-
-//salida del formulario
-function btnSalir() {
-    window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
 }
 
-//habilita el panel de crear o consulta
-function HabilitarPanel(opcion) {
-
-    switch (opcion) {
-
-        case "crear":
-            $("#TablaDatos").css("display", "inline-table");
-            $("#TablaConsulta").css("display", "none");
-            $("#Txt_ID").removeAttr("disabled");
-            $("#Btnguardar").attr("value", "Guardar");
-            ResetError();
-            Clear();
-            estado = opcion;
-            break;
-
-        case "buscar":
-            $("#TablaDatos").css("display", "none");
-            $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TMonedaCod").html("");
-            estado = opcion;
-            Clear();
-            break;
-
-        case "modificar":
-            $("#TablaDatos").css("display", "none");
-            $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TMonedaCod").html("");
-            estado = opcion;
-            ResetError();
-            Clear();
-            break;
-
-        case "eliminar":
-            $("#TablaDatos").css("display", "none");
-            $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TMonedaCod").html("");
-            estado = opcion;
-            Clear();
-            break;
-
-    }
+//Función que oculta las tablas
+function Ocultar_Tablas() {
+    $("#TablaDatos").css("display", "none");
+    $("#TablaConsulta").css("display", "none");
 }
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                 REGION BOTONES                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //consulta del del crud(READ)
 function BtnConsulta() {
 
@@ -124,16 +102,23 @@ function BtnElimina() {
     transacionAjax_MonedaCod_delete("elimina");
 }
 
+//evento del boton salir
+function x() {
+    $("#dialog").dialog("close");
+}
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                 REGION BOTONES                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //validamos campos para la creacion del link
 function validarCamposCrear() {
 
     var Campo_1 = $("#Txt_ID").val();
     var Campo_2 = $("#Txt_Descripcion").val();
-    
+
     var validar = 0;
 
-    if ( Campo_2 == "" || Campo_1 == "") {
+    if (Campo_2 == "" || Campo_1 == "") {
         validar = 1;
         if (Campo_1 == "") {
             $("#ImgID").css("display", "inline-table");
@@ -169,40 +154,94 @@ function ValidarDroplist() {
     return flag;
 }
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                      PROCESOS DE VALIDACION Y GRID MONEDA                                                                                                              ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//habilita el panel de crear o consulta
+function HabilitarPanel(opcion) {
+
+    switch (opcion) {
+
+        case "crear":
+            $("#TablaDatos").css("display", "inline-table");
+            $("#TablaConsulta").css("display", "none");
+            $("#Txt_ID").removeAttr("disabled");
+            $("#Btnguardar").attr("value", "Guardar");
+            ResetError();
+            Clear();
+            estado = opcion;
+            break;
+
+        case "buscar":
+            $("#TablaDatos").css("display", "none");
+            $("#TablaConsulta").css("display", "inline-table");
+            $(".container_TGrid").html("");
+            estado = opcion;
+            Clear();
+            break;
+
+        case "modificar":
+            $("#TablaDatos").css("display", "none");
+            $("#TablaConsulta").css("display", "inline-table");
+            $(".container_TGrid").html("");
+            estado = opcion;
+            ResetError();
+            Clear();
+            break;
+
+        case "eliminar":
+            $("#TablaDatos").css("display", "none");
+            $("#TablaConsulta").css("display", "inline-table");
+            $(".container_TGrid").html("");
+            estado = opcion;
+            Clear();
+            break;
+
+    }
+}
+
 // crea la tabla en el cliente
 function Table_MonedaCod() {
+
+    var html_MonedaCod;
+    var vl_Index_Moneda;
 
     switch (estado) {
 
         case "buscar":
-            Tabla_consulta();
+            html_MonedaCod = "<table id='TMonedaCod' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Codigo</th><th>Descripción</th><th>Sigla</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
+            for (itemArray in ArrayMonedaCod) {
+                if (ArrayMonedaCod[itemArray].MonedaCod_ID != 0) {
+                    vl_Index_Moneda = parseInt(ArrayMonedaCod[itemArray].Index) - 1;
+                    html_MonedaCod += "<tr id= 'TMonedaCod_" + vl_Index_Moneda + "'><td>" + ArrayMonedaCod[itemArray].MonedaCod_ID + "</td><td>" + ArrayMonedaCod[itemArray].Descripcion + "</td><td>" + ArrayMonedaCod[itemArray].Sigla + "</td><td>" + ArrayMonedaCod[itemArray].UsuarioCreacion + "</td><td>" + ArrayMonedaCod[itemArray].FechaCreacion + "</td><td>" + ArrayMonedaCod[itemArray].UsuarioActualizacion + "</td><td>" + ArrayMonedaCod[itemArray].FechaActualizacion + "</td></tr>";
+                }
+            }
             break;
 
         case "modificar":
-            Tabla_modificar();
+            html_MonedaCod = "<table id='TMonedaCod' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Codigo</th><th>Descripción</th><th>Sigla</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
+            for (itemArray in ArrayMonedaCod) {
+                if (ArrayMonedaCod[itemArray].MonedaCod_ID != 0) {
+                    vl_Index_Moneda = parseInt(ArrayMonedaCod[itemArray].Index) - 1;
+                    html_MonedaCod += "<tr id= 'TMonedaCod_" + vl_Index_Moneda + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + vl_Index_Moneda + "')\"></img><span>Editar Moneda</span></span></td><td>" + ArrayMonedaCod[itemArray].MonedaCod_ID + "</td><td>" + ArrayMonedaCod[itemArray].Descripcion + "</td><td>" + ArrayMonedaCod[itemArray].Sigla + "</td><td>" + ArrayMonedaCod[itemArray].UsuarioCreacion + "</td><td>" + ArrayMonedaCod[itemArray].FechaCreacion + "</td><td>" + ArrayMonedaCod[itemArray].UsuarioActualizacion + "</td><td>" + ArrayMonedaCod[itemArray].FechaActualizacion + "</td></tr>";
+                }
+            }
             break;
 
         case "eliminar":
-            Tabla_eliminar();
+            html_MonedaCod = "<table id='TMonedaCod' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Codigo</th><th>Descripción</th><th>Sigla</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
+            for (itemArray in ArrayMonedaCod) {
+                if (ArrayMonedaCod[itemArray].MonedaCod_ID != 0) {
+                    vl_Index_Moneda = parseInt(ArrayMonedaCod[itemArray].Index) - 1;
+                    html_MonedaCod += "<tr id= 'TMonedaCod_" + vl_Index_Moneda + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + vl_Index_Moneda + "')\"></img><span>Eliminar Moneda</span></span></td><td>" + ArrayMonedaCod[itemArray].MonedaCod_ID + "</td><td>" + ArrayMonedaCod[itemArray].Descripcion + "</td><td>" + ArrayMonedaCod[itemArray].Sigla + "</td><td>" + ArrayMonedaCod[itemArray].UsuarioCreacion + "</td><td>" + ArrayMonedaCod[itemArray].FechaCreacion + "</td><td>" + ArrayMonedaCod[itemArray].UsuarioActualizacion + "</td><td>" + ArrayMonedaCod[itemArray].FechaActualizacion + "</td></tr>";
+                }
+            }
             break;
     }
 
-}
-
-//grid con el boton eliminar
-function Tabla_eliminar() {
-    var html_MonedaCod = "<table id='TMonedaCod' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Codigo</th><th>Descripción</th><th>Sigla</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
-    for (itemArray in ArrayMonedaCod) {
-        if (ArrayMonedaCod[itemArray].MonedaCod_ID != 0) {
-            html_MonedaCod += "<tr id= 'TMonedaCod_" + ArrayMonedaCod[itemArray].MonedaCod_ID + "'><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar('" + ArrayMonedaCod[itemArray].MonedaCod_ID + "')\"></input></td><td>" + ArrayMonedaCod[itemArray].MonedaCod_ID + "</td><td>" + ArrayMonedaCod[itemArray].Descripcion + "</td><td>" + ArrayMonedaCod[itemArray].Sigla + "</td><td>" + ArrayMonedaCod[itemArray].UsuarioCreacion + "</td><td>" + ArrayMonedaCod[itemArray].FechaCreacion + "</td><td>" + ArrayMonedaCod[itemArray].UsuarioActualizacion + "</td><td>" + ArrayMonedaCod[itemArray].FechaActualizacion + "</td></tr>";
-        }
-    }
     html_MonedaCod += "</tbody></table>";
-    $("#container_TMonedaCod").html("");
-    $("#container_TMonedaCod").html(html_MonedaCod);
-
-    $(".Eliminar").click(function () {
-    });
+    $(".container_TGrid").html("");
+    $(".container_TGrid").html(html_MonedaCod);
 
     $("#TMonedaCod").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,
@@ -211,85 +250,33 @@ function Tabla_eliminar() {
 }
 
 //muestra el registro a eliminar
-function Eliminar(index_MonedaCod) {
-
-    for (itemArray in ArrayMonedaCod) {
-        if (index_MonedaCod == ArrayMonedaCod[itemArray].MonedaCod_ID) {
-            editID = ArrayMonedaCod[itemArray].MonedaCod_ID;
-            $("#dialog_eliminar").dialog("option", "title", "Eliminar?");
-            $("#dialog_eliminar").dialog("open");
-        }
-    }
-
-}
-
-//grid con el boton editar
-function Tabla_modificar() {
-    var html_MonedaCod = "<table id='TMonedaCod' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Codigo</th><th>Descripción</th><th>Sigla</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
-    for (itemArray in ArrayMonedaCod) {
-        if (ArrayMonedaCod[itemArray].MonedaCod_ID != 0) {
-            html_MonedaCod += "<tr id= 'TMonedaCod_" + ArrayMonedaCod[itemArray].MonedaCod_ID + "'><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Editar('" + ArrayMonedaCod[itemArray].MonedaCod_ID + "')\"></input></td><td>" + ArrayMonedaCod[itemArray].MonedaCod_ID + "</td><td>" + ArrayMonedaCod[itemArray].Descripcion + "</td><td>" + ArrayMonedaCod[itemArray].Sigla + "</td><td>" + ArrayMonedaCod[itemArray].UsuarioCreacion + "</td><td>" + ArrayMonedaCod[itemArray].FechaCreacion + "</td><td>" + ArrayMonedaCod[itemArray].UsuarioActualizacion + "</td><td>" + ArrayMonedaCod[itemArray].FechaActualizacion + "</td></tr>";
-        }
-    }
-    html_MonedaCod += "</tbody></table>";
-    $("#container_TMonedaCod").html("");
-    $("#container_TMonedaCod").html(html_MonedaCod);
-
-    $(".Editar").click(function () {
-    });
-
-    $("#TMonedaCod").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
+function Eliminar(vp_Index) {
+    editID = ArrayMonedaCod[vp_Index].MonedaCod_ID;
+    $("#dialog_eliminar").dialog("option", "title", "Eliminar?");
+    $("#dialog_eliminar").dialog("open");
 }
 
 // muestra el registro a editar
-function Editar(index_MonedaCod) {
-
+function Editar(vp_Index) {
     $("#TablaDatos").css("display", "inline-table");
     $("#TablaConsulta").css("display", "none");
 
-    for (itemArray in ArrayMonedaCod) {
-        if (index_MonedaCod == ArrayMonedaCod[itemArray].MonedaCod_ID) {
-            $("#Txt_ID").val(ArrayMonedaCod[itemArray].MonedaCod_ID);
-            $("#Txt_ID").attr("disabled", "disabled");
-            $("#Txt_Descripcion").val(ArrayMonedaCod[itemArray].Descripcion);
-            $("#Txt_Sigla").val(ArrayMonedaCod[itemArray].Sigla);
-             editID = ArrayMonedaCod[itemArray].MonedaCod_ID;
-            $("#Btnguardar").attr("value", "Actualizar");
-        }
-    }
+    $("#Txt_ID").val(ArrayMonedaCod[vp_Index].MonedaCod_ID);
+    $("#Txt_ID").attr("disabled", "disabled");
+    $("#Txt_Descripcion").val(ArrayMonedaCod[vp_Index].Descripcion);
+    $("#Txt_Sigla").val(ArrayMonedaCod[vp_Index].Sigla);
+    editID = ArrayMonedaCod[vp_Index].MonedaCod_ID;
+    $("#Btnguardar").attr("value", "Actualizar");
 }
 
-//grid sin botones para ver resultado
-function Tabla_consulta() {
-    var html_MonedaCod = "<table id='TMonedaCod' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Codigo</th><th>Descripción</th><th>Sigla</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
-    for (itemArray in ArrayMonedaCod) {
-        if (ArrayMonedaCod[itemArray].MonedaCod_ID != 0) {
-            html_MonedaCod += "<tr id= 'TMonedaCod_" + ArrayMonedaCod[itemArray].MonedaCod_ID + "'><td>" + ArrayMonedaCod[itemArray].MonedaCod_ID + "</td><td>" + ArrayMonedaCod[itemArray].Descripcion + "</td><td>" + ArrayMonedaCod[itemArray].Sigla + "</td><td>" + ArrayMonedaCod[itemArray].UsuarioCreacion + "</td><td>" + ArrayMonedaCod[itemArray].FechaCreacion + "</td><td>" + ArrayMonedaCod[itemArray].UsuarioActualizacion + "</td><td>" + ArrayMonedaCod[itemArray].FechaActualizacion + "</td></tr>";
-        }
-    }
-    html_MonedaCod += "</tbody></table>";
-    $("#container_TMonedaCod").html("");
-    $("#container_TMonedaCod").html(html_MonedaCod);
-
-    $("#TMonedaCod").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
-}
-
-//evento del boton salir
-function x() {
-    $("#dialog").dialog("close");
-}
-
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                              MENSAJES, VISUALIZACION Y LIMPIEZA                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //limpiar campos
 function Clear() {
     $("#Txt_ID").val("");
     $("#Txt_Descripcion").val("");
     $("#Txt_Sigla").val("");
     $("#TxtRead").val("");
-    $("#DDLColumns").val("-1");
+    $("#DDLColumns").val("-1").trigger("chosen:updated");
 }

@@ -1,11 +1,13 @@
 ﻿/*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_CargaBusqueda(State) {
+    OpenControl();
     $.ajax({
         url: "CargoAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'Cargo'
         },
         //Transaccion Ajax en proceso
@@ -31,7 +33,8 @@ function transacionAjax_EmpresaNit(State) {
         url: "CargoAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'CLIENTE'
         },
         //Transaccion Ajax en proceso
@@ -46,19 +49,22 @@ function transacionAjax_EmpresaNit(State) {
         },
         error: function () {
 
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     });
 }
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_CargoDepend(State, Index) {
-    
+
     $.ajax({
         url: "CargoAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Index": Index,
             "tabla": 'Cargo'
         },
@@ -69,25 +75,28 @@ function transacionAjax_CargoDepend(State, Index) {
             }
             else {
                 ArrayCargoDep = JSON.parse(result);
-                charge_CatalogList(ArrayCargoDep, "Select_CargoDepent", 1);
             }
         },
-        error: function () {
+         error: function () {
 
-        }
+        },
+         async: false, // La petición es síncrona
+         cache: false // No queremos usar la caché del navegador
+    }).done(function () {
+        charge_CatalogList(ArrayCargoDep, "Select_CargoDepent", 1);
     });
 }
 
-
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_Seguridad(State) {
+function transacionAjax_Seguridad(State, vp_Nit) {
     $.ajax({
         url: "CargoAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
-            "tabla": 'SEGURIDAD'
+        data: {
+            "action": State,
+            "Nit": vp_Nit
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -96,12 +105,15 @@ function transacionAjax_Seguridad(State) {
             }
             else {
                 ArraySeguridad = JSON.parse(result);
-                charge_CatalogList(ArraySeguridad, "Select_Politica", 1);
             }
         },
         error: function () {
 
-        }
+        },
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
+    }).done(function () {
+        charge_CatalogList(ArraySeguridad, "Select_Politica", 1);
     });
 }
 
@@ -122,10 +134,12 @@ function transacionAjax_Cargo(State, filtro, opcion) {
         url: "CargoAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "filtro": filtro,
             "opcion": opcion,
-            "contenido": contenido
+            "contenido": contenido,
+            "Nit_User": g_NitEmpresa_User
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -171,7 +185,8 @@ function transacionAjax_Cargo_create(State) {
         url: "CargoAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Nit_ID": Nit_ID,
             "ID": ID,
             "descripcion": $("#TxtDescription").val(),
@@ -189,7 +204,7 @@ function transacionAjax_Cargo_create(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "block");
                     $("#SE").css("display", "none");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     break;
 
                 case "Existe":
@@ -208,7 +223,7 @@ function transacionAjax_Cargo_create(State) {
                         $("#dialog").dialog("open");
                         $("#DE").css("display", "none");
                         $("#SE").css("display", "block");
-                        $("#WE").css("display", "none");
+                        $("#WA").css("display", "none");
                         Clear();
                     }
                     else {
@@ -217,7 +232,7 @@ function transacionAjax_Cargo_create(State) {
                         $("#dialog").dialog("open");
                         $("#DE").css("display", "none");
                         $("#SE").css("display", "block");
-                        $("#WE").css("display", "none");
+                        $("#WA").css("display", "none");
                         transacionAjax_CargoDepend('Cargo_Dep', index_ID);
                         Clear();
                     }
@@ -239,7 +254,8 @@ function transacionAjax_Cargo_delete(State) {
         url: "CargoAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Nit_ID": editNit_ID,
             "ID": editID,
             "user": User
@@ -254,7 +270,7 @@ function transacionAjax_Cargo_delete(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "block");
                     $("#SE").css("display", "none");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     $("#dialog_eliminar").dialog("close");
                     break;
 
@@ -275,7 +291,7 @@ function transacionAjax_Cargo_delete(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "none");
                     $("#SE").css("display", "block");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     $("#dialog_eliminar").dialog("close");
                     Clear();
                     break;

@@ -1,0 +1,184 @@
+﻿/************************************************************************************
+                                            ESTRUCTURA
+*************************************************************************************/
+/*-- CUERPO PAGINA ---*/
+html, body {
+    overflow: hidden;
+}
+
+/************************************************************************************
+                                       CAMPOS GENERALES 
+/************************************************************************************
+/*fuente para todos los campos*/
+h1, h2, h3, h4, table, tr, td {
+    font-family: CenturyGothic, CenturyGothic, sans-serif;
+}
+
+/*-- LABEL USUARIO ---*/
+#User, #Name_User {
+    color: #b70d0d;
+    font-weight: bold;
+}
+
+/*-- LABEL TITULO ---*/
+#tituloPrincipal {
+    color: #b70d0d;
+    font: CenturyGothic,sans-serif;
+}
+
+/*-- LABEL FECHA ---*/
+#Hours {
+    top: 4em;
+    right: 1em;
+    color: #b70d0d;
+    font: 14px/20px CenturyGothic,sans-serif;
+    font-weight: bold;
+}
+
+/*encasulado del tablaregistro*/
+.marco {
+    padding-bottom: 19.5%;
+    padding-left: 35%;
+    padding-right: 35%;
+}
+
+#marco_CC {
+    padding-bottom: 16%;
+    padding-left: 35%;
+    padding-right: 35%;
+}
+/************************************************************************************
+PAGE MASTER PAGE 
+*************************************************************************************/
+/*-- DIV PAGINA ---*/
+#Page {
+    width: 100%;
+    position: relative;
+}
+
+/************************************************************************************
+ HEADER MASTER PAGE 
+*************************************************************************************/
+/*-- DIV ENCABEZADO ---*/
+#Header {
+    height: 150px;
+    background: -webkit-linear-gradient(#f6f6f6, #e8e8e8); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#f6f6f6, #e8e8e8); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#f6f6f6, #e8e8e8); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#f6f6f6, #e8e8e8); /* Standard syntax (must be last)*/
+    border-radius: 3px;
+    border: solid 1px #ccc;
+    background-position: center;
+}
+
+/************************************************************************************
+ CONTENT MASTER PAGE 
+*************************************************************************************/
+/*-- DIV MEDIUM ---*/
+#Medium {
+    width: 100%;
+    float: left;
+    margin-top: 1%;
+    float: none;
+    height: 700px;
+}
+
+/************************************************************************************
+ FOOTER MASTER PAGE 
+*************************************************************************************/
+/*-- DIV FOOTER---*/
+#Footer {
+    background: -webkit-linear-gradient(#b70d0d, #631111); /*For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#b70d0d, #631111); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#b70d0d, #631111); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#b70d0d, #631111); /* Standard syntax (must be last)*/
+    border-radius: 3px;
+    position: absolute;
+    clear: both;
+    width: 100%;
+    bottom: 0;
+    z-index: 100;
+}
+
+/*-- EVENTO FOOTER ---*/
+.Dimencion_Footer {
+    height: 5%;
+    transition: all 0.8s ease;
+}
+
+    /*-- EVENTO FOOTER HOVER---*/
+    .Dimencion_Footer:hover {
+        height: 13%;
+        transition: all 0.8s ease;
+    }
+
+/*-- PARRAFOS ---*/
+#Parraf_1, #Parraf_2, #Parraf_3 {
+    color: #ffffff;
+    font-weight: bold;
+    font: 14px/20px CenturyGothic,sans-serif;
+}
+
+/************************************************************************************
+MEDIA QUERIES
+*************************************************************************************/
+/* para 980px o menos horizontal*/
+@media screen and (max-width: 980px) {
+
+    #Page {
+        width: 100%;
+    }
+
+    #Medium {
+        width: 100%;
+    }
+
+    #Footer {
+        display: none;
+    }
+}
+
+/* para 600px o menos vertical */
+@media screen and (max-height: 800px) {
+
+    html {
+        overflow: auto;
+    }
+}
+
+
+/* para 700px o menos */
+@media screen and (max-width: 700px) {
+
+    #Medium {
+        width: auto;
+    }
+
+    .marco {
+        padding-bottom: 1%;
+        padding-left: 15%;
+        padding-right: 15%;
+    }
+}
+
+
+/* para 480px o menos */
+@media screen and (max-width: 480px) {
+
+    #Header {
+        height: auto;
+        font: 12px CenturyGothic,sans-serif;
+    }
+
+    .marco {
+        padding-bottom: 1%;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    #marco_CC {
+        width: 100%;
+        padding-left: 0%;
+        padding-right: 0%;
+    }
+}

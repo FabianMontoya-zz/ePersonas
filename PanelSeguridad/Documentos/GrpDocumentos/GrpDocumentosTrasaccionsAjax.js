@@ -1,11 +1,13 @@
 ﻿/*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_CargaBusqueda(State) {
+    OpenControl();
     $.ajax({
         url: "GrpDocumentosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'GRUPO_DOCUMENTO'
         },
         //Transaccion Ajax en proceso
@@ -31,7 +33,8 @@ function transacionAjax_EmpresaNit(State) {
         url: "GrpDocumentosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'CLIENTE'
         },
         //Transaccion Ajax en proceso
@@ -46,11 +49,12 @@ function transacionAjax_EmpresaNit(State) {
         },
         error: function () {
 
-        }
+        },
+        //Jhon
+        async: false, // La petición es síncrona
+        cache: false // No queremos usar la caché del navegador
     });
 }
-
-
 
 /*------------------------------ consulta ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
@@ -69,10 +73,12 @@ function transacionAjax_GrpDocumentos(State, filtro, opcion) {
         url: "GrpDocumentosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "filtro": filtro,
             "opcion": opcion,
-            "contenido": contenido
+            "contenido": contenido,
+            "Nit_User": g_NitEmpresa_User
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -99,7 +105,7 @@ function transacionAjax_GrpDocumentos_create(State) {
     var GrpDocumentos = 0;
     var Politica = 0;
 
-     
+
     if (State == "modificar") {
         Nit_ID = editNit_ID;
         ID = editID;
@@ -113,7 +119,8 @@ function transacionAjax_GrpDocumentos_create(State) {
         url: "GrpDocumentosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Nit_ID": Nit_ID,
             "ID": ID,
             "descripcion": $("#TxtDescription").val(),
@@ -130,7 +137,7 @@ function transacionAjax_GrpDocumentos_create(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "block");
                     $("#SE").css("display", "none");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     break;
 
                 case "Existe":
@@ -149,7 +156,7 @@ function transacionAjax_GrpDocumentos_create(State) {
                         $("#dialog").dialog("open");
                         $("#DE").css("display", "none");
                         $("#SE").css("display", "block");
-                        $("#WE").css("display", "none");
+                        $("#WA").css("display", "none");
                         Clear();
                     }
                     else {
@@ -158,7 +165,7 @@ function transacionAjax_GrpDocumentos_create(State) {
                         $("#dialog").dialog("open");
                         $("#DE").css("display", "none");
                         $("#SE").css("display", "block");
-                        $("#WE").css("display", "none");
+                        $("#WA").css("display", "none");
                         Clear();
                     }
                     break;
@@ -179,7 +186,8 @@ function transacionAjax_GrpDocumentos_delete(State) {
         url: "GrpDocumentosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Nit_ID": editNit_ID,
             "ID": editID,
             "user": User
@@ -194,7 +202,7 @@ function transacionAjax_GrpDocumentos_delete(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "block");
                     $("#SE").css("display", "none");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     $("#dialog_eliminar").dialog("close");
                     break;
 
@@ -215,7 +223,7 @@ function transacionAjax_GrpDocumentos_delete(State) {
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "none");
                     $("#SE").css("display", "block");
-                    $("#WE").css("display", "none");
+                    $("#WA").css("display", "none");
                     $("#dialog_eliminar").dialog("close");
                     transacionAjax_RutaDocumentos("consulta", "N", "ALL");
                     Clear();

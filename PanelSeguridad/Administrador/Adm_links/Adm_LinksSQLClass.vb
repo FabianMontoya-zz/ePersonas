@@ -2,7 +2,7 @@
 Imports System.Data.OleDb
 
 Public Class Adm_LinksSQLClass
-   
+
 #Region "CRUD"
 
     ''' <summary>
@@ -23,14 +23,17 @@ Public Class Adm_LinksSQLClass
         Dim sql As New StringBuilder
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
-            sql.Append("SELECT L_Link_ID,L_Descripcion,L_Param1,L_Param2,L_Img,l_LinkPag,L_Estado FROM LINKS")
+            sql.Append(" SELECT L_Link_ID,L_Descripcion,L_Param1,L_Param2,L_Img,l_LinkPag,L_Estado, ROW_NUMBER() OVER(ORDER BY L_Link_ID ASC) AS Index_Link, TC.DDLL_Descripcion  FROM LINKS L " & _
+                                  " INNER JOIN  TC_DDL_TIPO TC ON  TC.DDL_ID = L.L_Estado AND TC.DDL_Tabla='ESTADO_GENERAL' ")
         Else
 
             If vp_S_Contenido = "ALL" Then
-                sql.Append("SELECT L_Link_ID,L_Descripcion,L_Param1,L_Param2,L_Img,l_LinkPag,L_Estado FROM LINKS")
+                sql.Append(" SELECT L_Link_ID,L_Descripcion,L_Param1,L_Param2,L_Img,l_LinkPag,L_Estado, ROW_NUMBER() OVER(ORDER BY L_Link_ID ASC) AS Index_Link, TC.DDLL_Descripcion  FROM LINKS L " & _
+                                      " INNER JOIN  TC_DDL_TIPO TC ON  TC.DDL_ID = L.L_Estado AND TC.DDL_Tabla='ESTADO_GENERAL' ")
             Else
-                sql.Append("SELECT L_Link_ID,L_Descripcion,L_Param1,L_Param2,L_Img,l_LinkPag,L_Estado FROM LINKS " & _
-                      "WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
+                sql.Append(" SELECT L_Link_ID,L_Descripcion,L_Param1,L_Param2,L_Img,l_LinkPag,L_Estado, ROW_NUMBER() OVER(ORDER BY L_Link_ID ASC) AS Index_Link, TC.DDLL_Descripcion  FROM LINKS L " & _
+                                      " INNER JOIN  TC_DDL_TIPO TC ON  TC.DDL_ID = L.L_Estado AND TC.DDL_Tabla='ESTADO_GENERAL' " & _
+                                      " WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
             End If
         End If
 
@@ -99,7 +102,7 @@ Public Class Adm_LinksSQLClass
         Dim StrQuery As String = ""
         sql.AppendLine("UPDATE LINKS SET " & _
                        " L_Descripcion ='" & vp_Obj_Link.Descripcion & "', " & _
-                       " L_Param1 =" & vp_Obj_Link.Param1 & ", " & _
+                       " L_Param1 ='" & vp_Obj_Link.Param1 & "', " & _
                        " L_Param2 ='" & vp_Obj_Link.Param2 & "', " & _
                        " L_Img ='" & vp_Obj_Link.Img & "', " & _
                        " l_LinkPag ='" & vp_Obj_Link.LinkPag & "' " & _
@@ -160,7 +163,7 @@ Public Class Adm_LinksSQLClass
         Dim sql As New StringBuilder
 
         sql.Append(" SELECT T_IndexColumna As ID, T_Traductor As descripcion FROM TC_TABLAS " & _
-                   " WHERE T_Tabla = '" & vp_S_Table & "' AND T_Param = '1' ")
+                   " WHERE T_Tabla = '" & vp_S_Table & "' AND T_Param = '1' ORDER BY T_Traductor ASC")
         StrQuery = sql.ToString
 
         ObjListDroplist = SQLGeneral.listdrop(StrQuery, Conexion)
@@ -208,10 +211,12 @@ Public Class Adm_LinksSQLClass
             objLinks.Link_ID = ReadConsulta.GetString(0)
             objLinks.Descripcion = ReadConsulta.GetString(1)
             If Not (IsDBNull(ReadConsulta.GetValue(2))) Then objLinks.Param1 = ReadConsulta.GetValue(2) Else objLinks.Param1 = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(3))) Then objLinks.Param2 = ReadConsulta.GetString(3) Else objLinks.Param2 = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(4))) Then objLinks.Img = ReadConsulta.GetString(4) Else objLinks.Img = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(5))) Then objLinks.LinkPag = ReadConsulta.GetString(5) Else objLinks.LinkPag = ""
+            If Not (IsDBNull(ReadConsulta.GetValue(3))) Then objLinks.Param2 = ReadConsulta.GetValue(3) Else objLinks.Param2 = ""
+            If Not (IsDBNull(ReadConsulta.GetValue(4))) Then objLinks.Img = ReadConsulta.GetValue(4) Else objLinks.Img = ""
+            If Not (IsDBNull(ReadConsulta.GetValue(5))) Then objLinks.LinkPag = ReadConsulta.GetValue(5) Else objLinks.LinkPag = ""
             objLinks.Estado = ReadConsulta.GetString(6)
+            If Not (IsDBNull(ReadConsulta.GetValue(7))) Then objLinks.Index = ReadConsulta.GetValue(7) Else objLinks.Index = ""
+            If Not (IsDBNull(ReadConsulta.GetValue(8))) Then objLinks.DescripEstado = ReadConsulta.GetValue(8) Else objLinks.DescripEstado = ""
 
             'agregamos a la lista
             ObjListLinks.Add(objLinks)
@@ -228,5 +233,5 @@ Public Class Adm_LinksSQLClass
 
 #End Region
 
- 
+
 End Class

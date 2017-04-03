@@ -80,7 +80,7 @@ Public Class GeneralSQLClass
 
         Dim sql As New StringBuilder
 
-        sql.AppendLine("SELECT E_Titulo,E_LogoSasif,E_LogoEmpresa,E_parrafo_1,E_parrafo_2,E_parrafo_3 FROM ENCABEZADO " & _
+        sql.AppendLine("SELECT E_Titulo, E_LogoSasif, E_LogoEmpresa, E_parrafo_1, E_parrafo_2, E_parrafo_3, E_LogoSasif_2 FROM ENCABEZADO " & _
                        " WHERE E_ID = '" & vp_S_ID & "'")
 
         StrQuery = sql.ToString
@@ -180,6 +180,7 @@ Public Class GeneralSQLClass
             objEncabezado.parrafo_1 = ReadConsulta.GetString(3)
             objEncabezado.parrafo_2 = ReadConsulta.GetString(4)
             objEncabezado.parrafo_3 = ReadConsulta.GetString(5)
+            objEncabezado.LogoSasif_2 = ReadConsulta.GetString(6)
             'agregamos a la lista
             ObjListGeneral.Add(objEncabezado)
 

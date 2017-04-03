@@ -23,20 +23,20 @@ Public Class MonedaCodSQLClass
         Dim sql As New StringBuilder
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
-            sql.Append("SELECT CM_Cod_Moneda_ID,CM_Descripcion,CM_Sigla,CM_Usuario_Creacion,CM_FechaCreacion,CM_Usuario_Actualizacion,CM_FechaActualizacion FROM MONEDA_COD")
+            sql.Append("SELECT CM_Cod_Moneda_ID,CM_Descripcion,CM_Sigla,CM_Usuario_Creacion,CM_FechaCreacion,CM_Usuario_Actualizacion,CM_FechaActualizacion, ROW_NUMBER()OVER(ORDER BY CM_Cod_Moneda_ID ASC) AS Index_Moneda FROM MONEDA_COD")
         Else
 
             If vp_S_Contenido = "ALL" Then
-                sql.Append("SELECT CM_Cod_Moneda_ID,CM_Descripcion,CM_Sigla,CM_Usuario_Creacion,CM_FechaCreacion,CM_Usuario_Actualizacion,CM_FechaActualizacion FROM MONEDA_COD")
+                sql.Append("SELECT CM_Cod_Moneda_ID,CM_Descripcion,CM_Sigla,CM_Usuario_Creacion,CM_FechaCreacion,CM_Usuario_Actualizacion,CM_FechaActualizacion, ROW_NUMBER()OVER(ORDER BY CM_Cod_Moneda_ID ASC) AS Index_Moneda FROM MONEDA_COD")
             Else
-                sql.Append("SELECT CM_Cod_Moneda_ID,CM_Descripcion,CM_Sigla,CM_Usuario_Creacion,CM_FechaCreacion,CM_Usuario_Actualizacion,CM_FechaActualizacion FROM MONEDA_COD " & _
+                sql.Append("SELECT CM_Cod_Moneda_ID,CM_Descripcion,CM_Sigla,CM_Usuario_Creacion,CM_FechaCreacion,CM_Usuario_Actualizacion,CM_FechaActualizacion, ROW_NUMBER()OVER(ORDER BY CM_Cod_Moneda_ID ASC) AS Index_Moneda FROM MONEDA_COD " & _
                       "WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
             End If
         End If
 
         StrQuery = sql.ToString
 
-        ObjListMonedaCod = listMonedaCod(StrQuery, Conexion)
+        ObjListMonedaCod = listMonedaCod(StrQuery, Conexion, "List")
 
         Return ObjListMonedaCod
 
@@ -175,7 +175,7 @@ Public Class MonedaCodSQLClass
     ''' <param name="vg_S_StrConexion"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function listMonedaCod(ByVal vp_S_StrQuery As String, ByVal vg_S_StrConexion As String)
+    Public Function listMonedaCod(ByVal vp_S_StrQuery As String, ByVal vg_S_StrConexion As String, ByVal vp_S_TypeList As String)
 
         'inicializamos conexiones a la BD
         Dim objcmd As OleDbCommand = Nothing
@@ -194,31 +194,78 @@ Public Class MonedaCodSQLClass
         'ejecutamos consulta
         ReadConsulta = objcmd.ExecuteReader()
 
-        'recorremos la consulta por la cantidad de datos en la BD
-        While ReadConsulta.Read
+        Select Case vp_S_TypeList
+            Case "List"
+                'recorremos la consulta por la cantidad de datos en la BD
+                While ReadConsulta.Read
 
-            Dim objMonedaCod As New MonedaCodClass
-            'cargamos datos sobre el objeto de login
-            objMonedaCod.MonedaCod_ID = ReadConsulta.GetValue(0)
-            objMonedaCod.Descripcion = ReadConsulta.GetValue(1)
+                    Dim objMonedaCod As New MonedaCodClass
+                    'cargamos datos sobre el objeto de login
+                    objMonedaCod.MonedaCod_ID = ReadConsulta.GetValue(0)
+                    objMonedaCod.Descripcion = ReadConsulta.GetValue(1)
 
-            If Not (IsDBNull(ReadConsulta.GetValue(2))) Then objMonedaCod.Sigla = ReadConsulta.GetValue(2) Else objMonedaCod.Sigla = ""
-         
-            objMonedaCod.UsuarioCreacion = ReadConsulta.GetValue(3)
-            objMonedaCod.FechaCreacion = ReadConsulta.GetValue(4)
-            objMonedaCod.UsuarioActualizacion = ReadConsulta.GetValue(5)
-            objMonedaCod.FechaActualizacion = ReadConsulta.GetValue(6)
+                    If Not (IsDBNull(ReadConsulta.GetValue(2))) Then objMonedaCod.Sigla = ReadConsulta.GetValue(2) Else objMonedaCod.Sigla = ""
 
-            'agregamos a la lista
-            ObjListMonedaCod.Add(objMonedaCod)
+                    objMonedaCod.UsuarioCreacion = ReadConsulta.GetValue(3)
+                    objMonedaCod.FechaCreacion = ReadConsulta.GetValue(4)
+                    objMonedaCod.UsuarioActualizacion = ReadConsulta.GetValue(5)
+                    objMonedaCod.FechaActualizacion = ReadConsulta.GetValue(6)
+                    objMonedaCod.Index = ReadConsulta.GetValue(7)
 
-        End While
+                    'agregamos a la lista
+                    ObjListMonedaCod.Add(objMonedaCod)
+
+                End While
+
+            Case "Matrix"
+                'recorremos la consulta por la cantidad de datos en la BD
+                While ReadConsulta.Read
+
+                    Dim objMonedaCod As New MonedaCodClass
+                    'cargamos datos sobre el objeto de login
+                    objMonedaCod.MonedaCod_ID = ReadConsulta.GetValue(0)
+                    objMonedaCod.Descripcion = ReadConsulta.GetValue(1)
+                    If Not (IsDBNull(ReadConsulta.GetValue(2))) Then objMonedaCod.Sigla = ReadConsulta.GetValue(2) Else objMonedaCod.Sigla = ""
+
+                    'agregamos a la lista
+                    ObjListMonedaCod.Add(objMonedaCod)
+
+                End While
+
+        End Select
 
         'cerramos conexiones
         ReadConsulta.Close()
         objConexBD.Close()
         'retornamos la consulta
         Return ObjListMonedaCod
+
+    End Function
+
+#End Region
+
+#Region "OTRAS CONSULTAS"
+
+    ''' <summary>
+    ''' lee la matriz de Grupo documentos
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Matrix_Moneda()
+
+        Dim ObjList As New List(Of MonedaCodClass)
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("2")
+
+        Dim sql As New StringBuilder
+
+        sql.Append("  SELECT CM_Cod_Moneda_ID, CM_Descripcion, CM_Sigla FROM MONEDA_COD  " & _
+                                "  ORDER BY CM_Cod_Moneda_ID ASC ")
+        Dim StrQuery As String = sql.ToString
+
+        ObjList = listMonedaCod(StrQuery, Conexion, "Matrix")
+
+        Return ObjList
 
     End Function
 

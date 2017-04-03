@@ -90,40 +90,21 @@ function transacionAjax_Mensajes_create(State) {
             switch (result) {
 
                 case "Error":
-                    $("#dialog").dialog("option", "title", "Disculpenos :(");
-                    $("#Mensaje_alert").text("No se realizo el ingreso del Mensajes!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "block");
-                    $("#SE").css("display", "none");
-                    $("#WE").css("display", "none");
+                     Mensaje_General("Disculpenos :(", "No se realizó el ingreso del mensaje.", "E");
+
                     break;
 
                 case "Existe":
-                    $("#dialog").dialog("option", "title", "Ya Existe");
-                    $("#Mensaje_alert").text("El codigo ingresado ya existe en la base de datos!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "None");
-                    $("#SE").css("display", "none");
-                    $("#WE").css("display", "block");
+                    Mensaje_General("¡Ya Existe!", "El código ingresado ya existe en la base de datos.", "W");
                     break;
 
                 case "Exito":
                     if (estado == "modificar") {
-                        $("#dialog").dialog("option", "title", "Exito");
-                        $("#Mensaje_alert").text("El Mensajes fue modificado exitosamente! ");
-                        $("#dialog").dialog("open");
-                        $("#DE").css("display", "none");
-                        $("#SE").css("display", "block");
-                        $("#WE").css("display", "none");
+                        Mensaje_General("¡Exito!", "El mensaje se ha modificado correctamente.", "S");
                         Clear();
                     }
                     else {
-                        $("#dialog").dialog("option", "title", "Exito");
-                        $("#Mensaje_alert").text("El Mensajes fue creado exitosamente! ");
-                        $("#dialog").dialog("open");
-                        $("#DE").css("display", "none");
-                        $("#SE").css("display", "block");
-                        $("#WE").css("display", "none");
+                        Mensaje_General("¡Exito!", "El mensaje se ha creado correctamente.", "S");
                         Clear();
                     }
                     break;
@@ -153,34 +134,14 @@ function transacionAjax_Mensajes_delete(State) {
             switch (result) {
 
                 case "Error":
-                    $("#dialog").dialog("option", "title", "Disculpenos :(");
-                    $("#Mensaje_alert").text("No se elimino el Mensajes!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "block");
-                    $("#SE").css("display", "none");
-                    $("#WE").css("display", "none");
                     $("#dialog_eliminar").dialog("close");
+                    Mensaje_General("Disculpenos :(", "Ocurrio un error al intentar eliminar este mensaje.", "E");
                     break;
-
-                case "Exist_O":
-                    $("#dialog").dialog("option", "title", "Integridad referencial");
-                    $("#Mensaje_alert").text("No se elimino el Mensajes, para eliminarlo debe eliminar primero el registro en la tabla Empleado");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "none");
-                    $("#SE").css("display", "none");
-                    $("#WE").css("display", "block");
-                    $("#dialog_eliminar").dialog("close");
-                    break;
-
+                             
                 case "Exito":
                     $("#dialog_eliminar").dialog("close");
-                    $("#dialog").dialog("option", "title", "Exito");
-                    $("#Mensaje_alert").text("El Mensajes fue eliminado exitosamente! ");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "none");
-                    $("#SE").css("display", "block");
-                    $("#WE").css("display", "none");
-                    $("#dialog_eliminar").dialog("close");
+                    Mensaje_General("¡Registro Eliminado!", "El mensaje se ha eliminado correctamente.", "S");
+                    $(".container_TGrid").html("");
                     Clear();
                     break;
             }

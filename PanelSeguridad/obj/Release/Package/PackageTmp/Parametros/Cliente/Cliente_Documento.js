@@ -17,8 +17,7 @@ function Documentos(Option_Document) {
         $("#BtnSave_Document").css("display", "none");
     else
         $("#BtnSave_Document").css("display", "inline-table");
-
-
+        
     switch (Option_Document) {
         case "V":
             $("#Txt_Nit_Doc").val(D_Nit);
@@ -82,29 +81,29 @@ function Tabla_General_Document(Opc_Link) {
              Matrix_DocWork[itemArray].TypeDocument_ID == $("#Select_Documento").val() &&
              Matrix_DocWork[itemArray].Document_ID == $("#Txt_Ident").val()) {
 
-            var StrRutadocument = Matrix_DocWork[itemArray].RutaRelativaDocumento + Matrix_DocWork[itemArray].Nombre_Save + "','" + Matrix_DocWork[itemArray].Nit_ID + "." + Matrix_DocWork[itemArray].DescripFormato;
+            var StrRutadocument = Matrix_DocWork[itemArray].RutaRelativaDocumento + Matrix_DocWork[itemArray].Nombre_Save + "." + Matrix_DocWork[itemArray].DescripFormato;
 
             switch (Opc_Link) {
                 case "V":
                     if (estado == "eliminar") {
                         if (Matrix_DocWork[itemArray].Secuencia_Doc == Matrix_DocWork[itemArray].Secuencia_ID)
-                            html += "<tr><td><select id='Select_" + Matrix_DocWork[itemArray].Secuencia_ID + "' class='Opciones' onchange=\"Select_Option_Document(this,'" + Matrix_DocWork[itemArray].Secuencia_ID + "','" + StrRutadocument + "','" + Matrix_DocWork[itemArray].Nombre_Save + "','" + Matrix_DocWork[itemArray].Nit_ID + "','PRIMARIO');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='R'>Detalle</option><option value='DA'>Ver Documentos Anexos</option></select></td><td>" + Matrix_DocWork[itemArray].Nombre_Save +  "</td><td>" + Matrix_DocWork[itemArray].DescripFormato + "</td><td>" + Matrix_DocWork[itemArray].UsuarioCreacion + "</td><td>" + Matrix_DocWork[itemArray].FechaCreacion + "</td><td>" + Matrix_DocWork[itemArray].UsuarioActualizacion + "</td><td>" + Matrix_DocWork[itemArray].FechaActualizacion + "</td></tr>";
+                            html += "<tr><td><select id='Select_" + Matrix_DocWork[itemArray].Secuencia_ID + "' class='Opciones' onchange=\"Select_Option_Document(this,'" + Matrix_DocWork[itemArray].Secuencia_ID + "','" + StrRutadocument + "','" + Matrix_DocWork[itemArray].Nombre_Save + "','" + Matrix_DocWork[itemArray].Nit_ID + "','PRIMARIO');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='R'>Detalle</option><option value='DA'>Ver Documentos Anexos</option></select></td><td>" + Matrix_DocWork[itemArray].Descripcion + "</td><td>" + Matrix_DocWork[itemArray].DescripFormato + "</td><td>" + Matrix_DocWork[itemArray].UsuarioCreacion + "</td><td>" + Matrix_DocWork[itemArray].FechaCreacion + "</td><td>" + Matrix_DocWork[itemArray].UsuarioActualizacion + "</td><td>" + Matrix_DocWork[itemArray].FechaActualizacion + "</td></tr>";
                         else
-                            html += "<tr><td><select id='Select_" + Matrix_DocWork[itemArray].Secuencia_ID + "' class='Opciones' onchange=\"Select_Option_Document(this,'" + Matrix_DocWork[itemArray].Secuencia_ID + "','" + StrRutadocument + "','" + Matrix_DocWork[itemArray].Nombre_Save + "','" + Matrix_DocWork[itemArray].Nit_ID + "','PRIMARIO');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='R'>Detalle</option></select></td><td>" + Matrix_DocWork[itemArray].Nombre_Save  + "</td><td>" + Matrix_DocWork[itemArray].DescripFormato + "</td><td>" + Matrix_DocWork[itemArray].UsuarioCreacion + "</td><td>" + Matrix_DocWork[itemArray].FechaCreacion + "</td><td>" + Matrix_DocWork[itemArray].UsuarioActualizacion + "</td><td>" + Matrix_DocWork[itemArray].FechaActualizacion + "</td></tr>";
+                            html += "<tr><td><select id='Select_" + Matrix_DocWork[itemArray].Secuencia_ID + "' class='Opciones' onchange=\"Select_Option_Document(this,'" + Matrix_DocWork[itemArray].Secuencia_ID + "','" + StrRutadocument + "','" + Matrix_DocWork[itemArray].Nombre_Save + "','" + Matrix_DocWork[itemArray].Nit_ID + "','PRIMARIO');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='R'>Detalle</option></select></td><td>" + Matrix_DocWork[itemArray].Descripcion + "</td><td>" + Matrix_DocWork[itemArray].DescripFormato + "</td><td>" + Matrix_DocWork[itemArray].UsuarioCreacion + "</td><td>" + Matrix_DocWork[itemArray].FechaCreacion + "</td><td>" + Matrix_DocWork[itemArray].UsuarioActualizacion + "</td><td>" + Matrix_DocWork[itemArray].FechaActualizacion + "</td></tr>";
                     }
                     else {
                         if (Matrix_DocWork[itemArray].Secuencia_Doc == Matrix_DocWork[itemArray].Secuencia_ID)
-                            html += "<tr><td><select id='Select_" + Matrix_DocWork[itemArray].Secuencia_ID + "' class='Opciones' onchange=\"Select_Option_Document(this,'" + Matrix_DocWork[itemArray].Secuencia_ID + "','" + StrRutadocument + "','" + Matrix_DocWork[itemArray].Nombre_Save + "','" + Matrix_DocWork[itemArray].Nit_ID + "','PRIMARIO');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='R'>Detalle</option><option value='DA'>Ver Documentos Anexos</option></select></td><td>" + Matrix_DocWork[itemArray].Nombre_Save +  "</td><td>" + Matrix_DocWork[itemArray].DescripFormato + "</td><td>" + Matrix_DocWork[itemArray].UsuarioCreacion + "</td><td>" + Matrix_DocWork[itemArray].FechaCreacion + "</td><td>" + Matrix_DocWork[itemArray].UsuarioActualizacion + "</td><td>" + Matrix_DocWork[itemArray].FechaActualizacion + "</td></tr>";
+                            html += "<tr><td><select id='Select_" + Matrix_DocWork[itemArray].Secuencia_ID + "' class='Opciones' onchange=\"Select_Option_Document(this,'" + Matrix_DocWork[itemArray].Secuencia_ID + "','" + StrRutadocument + "','" + Matrix_DocWork[itemArray].Nombre_Save + "','" + Matrix_DocWork[itemArray].Nit_ID + "','PRIMARIO');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='R'>Detalle</option><option value='DA'>Ver Documentos Anexos</option></select></td><td>" + Matrix_DocWork[itemArray].Descripcion + "</td><td>" + Matrix_DocWork[itemArray].DescripFormato + "</td><td>" + Matrix_DocWork[itemArray].UsuarioCreacion + "</td><td>" + Matrix_DocWork[itemArray].FechaCreacion + "</td><td>" + Matrix_DocWork[itemArray].UsuarioActualizacion + "</td><td>" + Matrix_DocWork[itemArray].FechaActualizacion + "</td></tr>";
                         else
-                            html += "<tr><td><select id='Select_" + Matrix_DocWork[itemArray].Secuencia_ID + "' class='Opciones' onchange=\"Select_Option_Document(this,'" + Matrix_DocWork[itemArray].Secuencia_ID + "','" + StrRutadocument + "','" + Matrix_DocWork[itemArray].Nombre_Save + "','" + Matrix_DocWork[itemArray].Nit_ID + "','PRIMARIO');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='R'>Detalle</option></select></td><td>" + Matrix_DocWork[itemArray].Nombre_Save  + "</td><td>" + Matrix_DocWork[itemArray].DescripFormato + "</td><td>" + Matrix_DocWork[itemArray].UsuarioCreacion + "</td><td>" + Matrix_DocWork[itemArray].FechaCreacion + "</td><td>" + Matrix_DocWork[itemArray].UsuarioActualizacion + "</td><td>" + Matrix_DocWork[itemArray].FechaActualizacion + "</td></tr>";
+                            html += "<tr><td><select id='Select_" + Matrix_DocWork[itemArray].Secuencia_ID + "' class='Opciones' onchange=\"Select_Option_Document(this,'" + Matrix_DocWork[itemArray].Secuencia_ID + "','" + StrRutadocument + "','" + Matrix_DocWork[itemArray].Nombre_Save + "','" + Matrix_DocWork[itemArray].Nit_ID + "','PRIMARIO');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='R'>Detalle</option></select></td><td>" + Matrix_DocWork[itemArray].Descripcion + "</td><td>" + Matrix_DocWork[itemArray].DescripFormato + "</td><td>" + Matrix_DocWork[itemArray].UsuarioCreacion + "</td><td>" + Matrix_DocWork[itemArray].FechaCreacion + "</td><td>" + Matrix_DocWork[itemArray].UsuarioActualizacion + "</td><td>" + Matrix_DocWork[itemArray].FechaActualizacion + "</td></tr>";
                     }
                     break;
 
                 case "U":
                     if (Matrix_DocWork[itemArray].Secuencia_Doc == Matrix_DocWork[itemArray].Secuencia_ID)
-                        html += "<tr><td><select id='Select_" + Matrix_DocWork[itemArray].Secuencia_ID + "' class='Opciones' onchange=\"Select_Option_Document(this,'" + Matrix_DocWork[itemArray].Secuencia_ID + "','" + StrRutadocument + "','" + Matrix_DocWork[itemArray].Nombre_Save + "','" + Matrix_DocWork[itemArray].Nit_ID + "','PRIMARIO');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='R'>Detalle</option><option value='DA'>Ver Documentos Anexos</option></select></td><td>" + Matrix_DocWork[itemArray].Nombre_Save + "','" + Matrix_DocWork[itemArray].Nit_ID + "</td><td>" + Matrix_DocWork[itemArray].DescripFormato + "</td><td>" + Matrix_DocWork[itemArray].UsuarioCreacion + "</td><td>" + Matrix_DocWork[itemArray].FechaCreacion + "</td><td>" + Matrix_DocWork[itemArray].UsuarioActualizacion + "</td><td>" + Matrix_DocWork[itemArray].FechaActualizacion + "</td></tr>";
+                        html += "<tr><td><select id='Select_" + Matrix_DocWork[itemArray].Secuencia_ID + "' class='Opciones' onchange=\"Select_Option_Document(this,'" + Matrix_DocWork[itemArray].Secuencia_ID + "','" + StrRutadocument + "','" + Matrix_DocWork[itemArray].Nombre_Save + "','" + Matrix_DocWork[itemArray].Nit_ID + "','PRIMARIO');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='R'>Detalle</option><option value='DA'>Ver Documentos Anexos</option></select></td><td>" + Matrix_DocWork[itemArray].Descripcion + "</td><td>" + Matrix_DocWork[itemArray].DescripFormato + "</td><td>" + Matrix_DocWork[itemArray].UsuarioCreacion + "</td><td>" + Matrix_DocWork[itemArray].FechaCreacion + "</td><td>" + Matrix_DocWork[itemArray].UsuarioActualizacion + "</td><td>" + Matrix_DocWork[itemArray].FechaActualizacion + "</td></tr>";
                     else
-                        html += "<tr><td><select id='Select_" + Matrix_DocWork[itemArray].Secuencia_ID + "' class='Opciones' onchange=\"Select_Option_Document(this,'" + Matrix_DocWork[itemArray].Secuencia_ID + "','" + StrRutadocument + "','" + Matrix_DocWork[itemArray].Nombre_Save + "','" + Matrix_DocWork[itemArray].Nit_ID + "','PRIMARIO');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='R'>Detalle</option></select></td><td>" + Matrix_DocWork[itemArray].Nombre_Save + "','" + Matrix_DocWork[itemArray].Nit_ID + "</td><td>" + Matrix_DocWork[itemArray].DescripFormato + "</td><td>" + Matrix_DocWork[itemArray].UsuarioCreacion + "</td><td>" + Matrix_DocWork[itemArray].FechaCreacion + "</td><td>" + Matrix_DocWork[itemArray].UsuarioActualizacion + "</td><td>" + Matrix_DocWork[itemArray].FechaActualizacion + "</td></tr>";
+                        html += "<tr><td><select id='Select_" + Matrix_DocWork[itemArray].Secuencia_ID + "' class='Opciones' onchange=\"Select_Option_Document(this,'" + Matrix_DocWork[itemArray].Secuencia_ID + "','" + StrRutadocument + "','" + Matrix_DocWork[itemArray].Nombre_Save + "','" + Matrix_DocWork[itemArray].Nit_ID + "','PRIMARIO');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='R'>Detalle</option></select></td><td>" + Matrix_DocWork[itemArray].Descripcion + "</td><td>" + Matrix_DocWork[itemArray].DescripFormato + "</td><td>" + Matrix_DocWork[itemArray].UsuarioCreacion + "</td><td>" + Matrix_DocWork[itemArray].FechaCreacion + "</td><td>" + Matrix_DocWork[itemArray].UsuarioActualizacion + "</td><td>" + Matrix_DocWork[itemArray].FechaActualizacion + "</td></tr>";
                     break;
             }
 
@@ -127,6 +126,7 @@ function Tabla_General_Document(Opc_Link) {
     });
 }
 
+//ver documento en pantalla
 function VerDocumento(RutaDocumento, Documento) {
 
     $("#IF_Visor").attr("width", "100%");
@@ -136,8 +136,6 @@ function VerDocumento(RutaDocumento, Documento) {
     $("#Dialog_Visor").dialog("open");
     $("#Dialog_Visor").dialog("option", "title", Documento + " de: " + Nombre_Persona);
 }
-
-
 
 /*---------------------------------------------------------------------------------------------------------------*/
 /*                      CASOS DE LLAMADO SEGUN LA OPERACION DE DOCUMENTOS                             */
@@ -199,7 +197,6 @@ function Select_Option_Document(Select_control, Secuencia, Ruta, Nombre, Nit, ty
     }
 
 }
-
 
 /*---------------------------------------------------------------------------------------------------------------*/
 /*                                        CREAR DE DOCUMENTOS                                                                       */
@@ -356,10 +353,18 @@ function Search_Document(secuencia, Nit, type) {
     if (type == "ANEXO") {
         for (itemArray in Matrix_DocWork) {
             if (Matrix_DocWork[itemArray].Nit_ID == Nit &&
-              Matrix_DocWork[itemArray].Secuencia_ID == secuencia) {
+               Matrix_DocWork[itemArray].Secuencia_ID == secuencia) {
+
+                $("#Vis_MultiEmpresa_2").val(Matrix_DocWork[itemArray].Nit_ID);
+                $("#Vis_MultiEmpresa_3").val(Matrix_DocWork[itemArray].Nit_ID);
+
+                $("#Vis_Persona_2").val(Matrix_DocWork[itemArray].TypeDocument_ID + " - " + Matrix_DocWork[itemArray].Document_ID + " - " + Matrix_DocWork[itemArray].DescripEmpresa);
+                $("#Vis_Persona_3").val(Matrix_DocWork[itemArray].TypeDocument_ID + " - " + Matrix_DocWork[itemArray].Document_ID + " - " + Matrix_DocWork[itemArray].DescripEmpresa);
+                $("#Vis_Documento_2").val(Matrix_DocWork[itemArray].Descripcion);
+                $("#Vis_Documento_3").val(Matrix_DocWork[itemArray].Descripcion);
 
                 $("#Vista_Secuencia").html(Matrix_DocWork[itemArray].Secuencia_ID);
-                $("#Vista_Documento").html(Matrix_DocWork[itemArray].Nombre_Save);
+                $("#Vista_Documento").html(Matrix_DocWork[itemArray].Descripcion);
                 $("#Vista_Formato").html(Matrix_DocWork[itemArray].DescripFormato);
 
                 $("#Vista_Indcativo").html(Matrix_DocWork[itemArray].Indicativo);
@@ -379,21 +384,35 @@ function Search_Document(secuencia, Nit, type) {
 
                 if (Matrix_DocWork[itemArray].Secuencia_Doc == 0)
                     $("#BtnPadre").css("display", "none");
-                else
-                    $("#BtnPadre").css("display", "inline-table");
-
+                else {
+                    if (Matrix_DocWork[itemArray].Secuencia_Doc != Matrix_DocWork[itemArray].Secuencia_ID) {
+                        $("#BtnPadre").css("display", "inline-table");
+                        SearchPadre(Matrix_DocWork[itemArray].Secuencia_Doc, Matrix_DocWork[itemArray].Nit_ID);
+                    }
+                    else
+                        $("#BtnPadre").css("display", "none");
+                }
             }
         }
     }
     else {
+        $("#BtnPadre").css("display", "none");
         for (itemArray in Matrix_DocWork) {
             if (Matrix_DocWork[itemArray].Nit_ID == Nit &&
-             Matrix_DocWork[itemArray].TypeDocument_ID == $("#Select_Documento").val() &&
-             Matrix_DocWork[itemArray].Document_ID == $("#Txt_Ident").val() &&
-             Matrix_DocWork[itemArray].Secuencia_ID == secuencia) {
+                 Matrix_DocWork[itemArray].TypeDocument_ID == $("#Select_Documento").val() &&
+                 Matrix_DocWork[itemArray].Document_ID == $("#Txt_Ident").val() &&
+                 Matrix_DocWork[itemArray].Secuencia_ID == secuencia) {
+
+                $("#Vis_MultiEmpresa_2").val(Matrix_DocWork[itemArray].Nit_ID);
+                $("#Vis_MultiEmpresa_3").val(Matrix_DocWork[itemArray].Nit_ID);
+
+                $("#Vis_Persona_2").val(Matrix_DocWork[itemArray].TypeDocument_ID + " - " + Matrix_DocWork[itemArray].Document_ID + " - " + Matrix_DocWork[itemArray].DescripEmpresa);
+                $("#Vis_Persona_3").val(Matrix_DocWork[itemArray].TypeDocument_ID + " - " + Matrix_DocWork[itemArray].Document_ID + " - " + Matrix_DocWork[itemArray].DescripEmpresa);
+                $("#Vis_Documento_2").val(Matrix_DocWork[itemArray].Descripcion);
+                $("#Vis_Documento_3").val(Matrix_DocWork[itemArray].Descripcion);
 
                 $("#Vista_Secuencia").html(Matrix_DocWork[itemArray].Secuencia_ID);
-                $("#Vista_Documento").html(Matrix_DocWork[itemArray].Nombre_Save);
+                $("#Vista_Documento").html(Matrix_DocWork[itemArray].Descripcion);
                 $("#Vista_Formato").html(Matrix_DocWork[itemArray].DescripFormato);
 
                 $("#Vista_Indcativo").html(Matrix_DocWork[itemArray].Indicativo);
@@ -410,16 +429,37 @@ function Search_Document(secuencia, Nit, type) {
 
                 $("#Vista_FechaCreacion").html(Matrix_DocWork[itemArray].UsuarioCreacion + "   " + Matrix_DocWork[itemArray].FechaCreacion);
                 $("#Vista_FechaActualizacion").html(Matrix_DocWork[itemArray].UsuarioActualizacion + "    " + Matrix_DocWork[itemArray].FechaActualizacion);
-
-                if (Matrix_DocWork[itemArray].Secuencia_Doc == 0)
-                    $("#BtnPadre").css("display", "none");
-                else
-                    $("#BtnPadre").css("display", "inline-table");
-
             }
         }
     }
 }
+
+
+var RutaPadre;
+var NombrePadre;
+
+//buscamos los datos del padre para manejo de boton y datos
+function SearchPadre(Index_Padre, Nit) {
+    for (itemArray in Matrix_DocWork) {
+        if (Matrix_DocWork[itemArray].Secuencia_ID == Index_Padre && Matrix_DocWork[itemArray].Nit_ID == Nit) {
+            $("#Vis_Persona_2").val(Matrix_DocWork[itemArray].TypeDocument_ID + " - " + Matrix_DocWork[itemArray].Document_ID + " - " + Matrix_DocWork[itemArray].DescripEmpresa);
+            $("#Vis_Persona_3").val(Matrix_DocWork[itemArray].TypeDocument_ID + " - " + Matrix_DocWork[itemArray].Document_ID + " - " + Matrix_DocWork[itemArray].DescripEmpresa);
+            $("#Vis_Secuencia_2").val(Matrix_DocWork[itemArray].TypeDocument_ID + " - " + Matrix_DocWork[itemArray].Document_ID + " - " + Matrix_DocWork[itemArray].Secuencia_Doc);
+            $("#Vis_Secuencia_3").val(Matrix_DocWork[itemArray].TypeDocument_ID + " - " + Matrix_DocWork[itemArray].Document_ID + " - " + Matrix_DocWork[itemArray].Secuencia_Doc);
+            $("#Vis_Documento_2").val(Matrix_DocWork[itemArray].Descripcion);
+            $("#Vis_Documento_3").val(Matrix_DocWork[itemArray].Descripcion);
+
+            RutaPadre = Matrix_DocWork[itemArray].RutaRelativaDocumento + Matrix_DocWork[itemArray].Nombre_Save + "." + Matrix_DocWork[itemArray].DescripFormato;
+            NombrePadre = Matrix_DocWork[itemArray].Nombre_Save;
+        }
+    }
+}
+
+//boton que llama al padre
+function VerDocPadre() {
+    VerDocumento(RutaPadre, NombrePadre);
+}
+
 
 //elimina del array el dato seleccionado
 function Delete_Document(Nit_Document, TC_Document, Cuenta_Document) {
@@ -440,9 +480,11 @@ function TableDocument_Anexos(Secuencia) {
 
     Html = "<table id='TDoc_Anexo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Opcionres</th><th>Nombre</th></tr></thead><tbody>";
     for (itemArray in Matrix_DocWork) {
-        if ((Matrix_DocWork[itemArray].Secuencia_Doc == Secuencia) != (Matrix_DocWork[itemArray].Secuencia_Doc == Matrix_DocWork[itemArray].Secuencia_ID)) {
-            var StrRutadocument = Matrix_DocWork[itemArray].RutaRelativaDocumento + Matrix_DocWork[itemArray].Nombre_Save + "." + Matrix_DocWork[itemArray].DescripFormato;
-            Html += "<tr id= 'TDoc_H_" + Matrix_DocWork[itemArray].Index + "'><td><select id='Select_" + Matrix_DocWork[itemArray].Secuencia_ID + "' class='Opciones' onchange=\"Select_Option_Document(this,'" + Matrix_DocWork[itemArray].Secuencia_ID + "','" + StrRutadocument + "','" + Matrix_DocWork[itemArray].Nombre_Save + "','" + Matrix_DocWork[itemArray].Nit_ID + "','ANEXO');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='R'>Detalle</option></select></td><td>" + Matrix_DocWork[itemArray].Nombre_Save + "</td></tr>";
+        if (Matrix_DocWork[itemArray].Secuencia_Doc == Secuencia) {
+            if (Matrix_DocWork[itemArray].Secuencia_Doc != Matrix_DocWork[itemArray].Secuencia_ID) {
+                var StrRutadocument = Matrix_DocWork[itemArray].RutaRelativaDocumento + Matrix_DocWork[itemArray].Nombre_Save + "." + Matrix_DocWork[itemArray].DescripFormato;
+                Html += "<tr id= 'TDoc_H_" + Matrix_DocWork[itemArray].Index + "'><td><select id='Select_" + Matrix_DocWork[itemArray].Secuencia_ID + "' class='Opciones' onchange=\"Select_Option_Document(this,'" + Matrix_DocWork[itemArray].Secuencia_ID + "','" + StrRutadocument + "','" + Matrix_DocWork[itemArray].Nombre_Save + "','" + Matrix_DocWork[itemArray].Nit_ID + "','ANEXO');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='R'>Detalle</option></select></td><td>" + Matrix_DocWork[itemArray].Descripcion + "</td></tr>";
+            }
         }
     }
     Html += "</tbody></table>";
@@ -556,7 +598,7 @@ function ViewFoto() {
     var StrSrc;
 
     if (ArrayFoto.length != 0)
-        StrSrc = ArrayFoto[0].RutaDocumento + ArrayFoto[0].Nombre_Save + '.' + ArrayFoto[0].DescripFormato;
+        StrSrc = Matrix_DocWork[0].RutaRelativaDocumento + ArrayFoto[0].Nombre_Save + '.' + ArrayFoto[0].DescripFormato;
     else
         StrSrc = "../../images/avatar.png";
 

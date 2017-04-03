@@ -14,14 +14,26 @@ var editID;
 var editDocID;
 /*--------------- region de variables globales --------------------*/
 
-//evento load de los Links
+//Evento load JS
 $(document).ready(function () {
+
+    /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
+    Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
+    Ocultar_Errores();
+    Ocultar_Tablas();
+    /*==================FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN==============*/
+
     transaccionAjax_MGrpDoc('MATRIX_GRPDOC');
     transaccionAjax_MDoc('MATRIX_DOC');
     Change_Select_Nit();
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_EmpresaNit('Cliente');
 
+});
+
+//Función que oculta todas las IMG de los errores en pantalla
+function Ocultar_Errores() {
+    ResetError();
     $("#ESelect").css("display", "none");
     $("#Img1").css("display", "none");
     $("#Img2").css("display", "none");
@@ -29,10 +41,13 @@ $(document).ready(function () {
     $("#Img5").css("display", "none");
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
-    $("#WE").css("display", "none");
+    $("#WA").css("display", "none");
+}
 
-    $("#TablaDatos_D").css("display", "none");
-    $("#TablaConsulta").css("display", "none");
+//funcion para las ventanas emergentes
+function Ventanas_Emergentes() {
+
+    Load_Charge_Sasif(); //Carga de "SasifMaster.js" el Control de Carga
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
@@ -46,21 +61,27 @@ $(document).ready(function () {
         dialogClass: "Dialog_Sasif",
         modal: true
     });
+}
 
-});
+//Función que oculta las tablas
+function Ocultar_Tablas() {
+    $(".Dialog_Datos").css("display", "none");
+    $("#TablaConsulta").css("display", "none");
+}
 
 //carga el combo de Area dependiente
 function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {
         var index_ID = $(this).val();
-        Charge_Combos_Depend_Nit(Matrix_GrpDoc, "Select_GrpDocumento", index_ID, "");
-        Charge_Combos_Depend_Nit(Matrix_Doc, "Select_Documento", index_ID, "");
+        TransaccionesSegunNIT(index_ID);
     });
 }
 
-//salida del formulario
-function btnSalir() {
-    window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
+function TransaccionesSegunNIT(index_NIT_ID) {
+    if (index_NIT_ID != "-1") {
+        Charge_Combos_Depend_Nit(Matrix_GrpDoc, "Select_GrpDocumento", index_NIT_ID, "");
+        Charge_Combos_Depend_Nit(Matrix_Doc, "Select_Documento", index_NIT_ID, "");
+    }
 }
 
 //habilita el panel de crear o consulta
@@ -69,7 +90,7 @@ function HabilitarPanel(opcion) {
     switch (opcion) {
 
         case "crear":
-            $("#TablaDatos_D").css("display", "inline-table");
+            $(".Dialog_Datos").css("display", "inline-table");
             $("#TablaConsulta").css("display", "none");
             $("#Select_EmpresaNit").removeAttr("disabled");
             $("#Txt_ID").removeAttr("disabled");
@@ -78,20 +99,27 @@ function HabilitarPanel(opcion) {
             ResetError();
             Clear();
             estado = opcion;
+
+            var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+            if (OnlyEmpresa == true) {
+                TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+            }
+
             break;
 
         case "buscar":
-            $("#TablaDatos_D").css("display", "none");
+            $(".Dialog_Datos").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TRGrpDoc_Doc").html("");
+            $(".container_TGrid").html("");
             estado = opcion;
             Clear();
             break;
 
         case "eliminar":
-            $("#TablaDatos_D").css("display", "none");
+            $(".Dialog_Datos").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TRGrpDoc_Doc").html("");
+            $(".container_TGrid").html("");
             estado = opcion;
             Clear();
             break;
@@ -105,6 +133,8 @@ function BtnConsulta() {
     var filtro;
     var ValidateSelect = ValidarDroplist();
     var opcion;
+
+    //OpenControl(); //Abrimos el load de espera con el logo
 
     if (ValidateSelect == 1) {
         filtro = "N";
@@ -134,6 +164,7 @@ function BtnCrear() {
 
 //elimina de la BD
 function BtnElimina() {
+    OpenControl(); //Abrimos el load de espera con el logo
     transacionAjax_RGrpDoc_Doc_delete("elimina");
 }
 
@@ -213,15 +244,15 @@ function Table_RGrpDoc_Doc() {
             for (itemArray in ArrayRGrpDoc_Doc) {
                 if (ArrayRGrpDoc_Doc[itemArray].RGrpDoc_Doc_ID != 0) {
                     Index_Pos = parseInt(ArrayRGrpDoc_Doc[itemArray].Index) - 1;
-                    html_RGrpDoc_Doc += "<tr id= 'TRGrpDoc_Doc_" + ArrayRGrpDoc_Doc[itemArray].GrpDoc_ID + "'><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar('" + Index_Pos + "')\"></input></td><td>" + ArrayRGrpDoc_Doc[itemArray].Nit_ID + " - " + ArrayRGrpDoc_Doc[itemArray].DescripEmpresa + "</td><td>" + ArrayRGrpDoc_Doc[itemArray].GrpDoc_ID + " - " + ArrayRGrpDoc_Doc[itemArray].DescripGrupoDoc + "</td><td>" + ArrayRGrpDoc_Doc[itemArray].Doc_ID + " - " + ArrayRGrpDoc_Doc[itemArray].DescripDoc + "</td><td>" + ArrayRGrpDoc_Doc[itemArray].UsuarioCreacion + "</td><td>" + ArrayRGrpDoc_Doc[itemArray].FechaCreacion + "</td><td>" + ArrayRGrpDoc_Doc[itemArray].UsuarioActualizacion + "</td><td>" + ArrayRGrpDoc_Doc[itemArray].FechaActualizacion + "</td></tr>";
+                    html_RGrpDoc_Doc += "<tr id= 'TRGrpDoc_Doc_" + ArrayRGrpDoc_Doc[itemArray].GrpDoc_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + Index_Pos + "')\"></img><span>Eliminar Relación Grupo / Documento</span></span></td><td>" + ArrayRGrpDoc_Doc[itemArray].Nit_ID + " - " + ArrayRGrpDoc_Doc[itemArray].DescripEmpresa + "</td><td>" + ArrayRGrpDoc_Doc[itemArray].GrpDoc_ID + " - " + ArrayRGrpDoc_Doc[itemArray].DescripGrupoDoc + "</td><td>" + ArrayRGrpDoc_Doc[itemArray].Doc_ID + " - " + ArrayRGrpDoc_Doc[itemArray].DescripDoc + "</td><td>" + ArrayRGrpDoc_Doc[itemArray].UsuarioCreacion + "</td><td>" + ArrayRGrpDoc_Doc[itemArray].FechaCreacion + "</td><td>" + ArrayRGrpDoc_Doc[itemArray].UsuarioActualizacion + "</td><td>" + ArrayRGrpDoc_Doc[itemArray].FechaActualizacion + "</td></tr>";
                 }
             }
             break;
     }
 
     html_RGrpDoc_Doc += "</tbody></table>";
-    $("#container_TRGrpDoc_Doc").html("");
-    $("#container_TRGrpDoc_Doc").html(html_RGrpDoc_Doc);
+    $(".container_TGrid").html("");
+    $(".container_TGrid").html(html_RGrpDoc_Doc);
 
     $(".Eliminar").click(function () {
     });
@@ -263,5 +294,11 @@ function Clear() {
     $("#DDLColumns").val("-1");
 
     $('.C_Chosen').trigger('chosen:updated');
+
+    var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+    if (OnlyEmpresa == true) {
+        TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+    }
 
 }

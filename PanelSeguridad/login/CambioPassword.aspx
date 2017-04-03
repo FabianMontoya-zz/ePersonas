@@ -8,32 +8,28 @@
     <link href="../css/css_login.css" rel="stylesheet" type="text/css" />
     <script src="../SasifMaster_Cosult.js" type="text/javascript"></script>
     <link href="../css/custom/charge.css" rel="stylesheet" type="text/css" />
-    <link href="../css/css_controles.css" rel="stylesheet" type="text/css" />
     <link href="../../css/Chosen/chosen.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/jquery.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Chosen/chosen.jquery.js" type="text/javascript"></script>
     <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
+    <link href="../css/css_controles.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
-    <div id="Container_title">
-        <h2 id="titulo_login">
-            CAMBIO DE CONTRASEÑA</h2>
+    <div class="Container_title">
+        <h2 class="titulo_login">CAMBIO DE CONTRASEÑA</h2>
     </div>
     <div id="marco_CC">
         <table id="TablaContraseña">
             <tr>
-                <td class="Label_bold">
-                    Nombre de Usuario
+                <td class="Label_Bold">Nombre de Usuario
                 </td>
             </tr>
             <tr>
-                <td id="TdUser" class="Label_bold">
-                </td>
+                <td id="TdUser" class="Label_Bold"></td>
             </tr>
             <tr>
-                <td class="Label_bold">
-                    Digite Contraseña
+                <td class="Label_Bold">Digite Contraseña
                 </td>
             </tr>
             <tr>
@@ -47,12 +43,10 @@
                 </td>
             </tr>
             <tr>
-                <td id="TdHelpPassword">
-                </td>
+                <td id="TdHelpPassword"></td>
             </tr>
             <tr>
-                <td class="Label_bold">
-                    Confirme Contraseña
+                <td class="Label_Bold">Confirme Contraseña
                 </td>
             </tr>
             <tr>
@@ -66,42 +60,34 @@
                 </td>
             </tr>
             <tr>
-                <td id="TdHelpConfirmPassword">
-                </td>
+                <td id="TdHelpConfirmPassword"></td>
             </tr>
-            <%--<tr>
-                    <td id="TdCheck">
-                        <input type="checkbox" id="show" />
-                        <label id="LblShow" for="show">
-                            Mostrar password.</label>
-                    </td>
-                </tr>--%>
             <tr>
-                <td>
-                </td>
+                <td></td>
             </tr>
             <tr>
                 <td id="TdControl" colspan="2" style="text-align: center;">
-                    <input id="BtnCambiar" type="button" value="Cambiar" style="width: 40%;" />
+                    <input id="BtnCambiar" type="button" value="Cambiar" style="width: 40%;" onclick="BtnCambioPassword();" />
                 </td>
             </tr>
         </table>
     </div>
-    <div id="dialog" title="Basic dialog">
-        <table>
+    <div id="dialog">
+        <table style="width: 100%; text-align: center;">
             <tr>
-                <td>
+                <td class="Label_Bold">
                     <p id="Mensaje_alert">
                     </p>
                 </td>
                 <td>
                     <img alt="error" id="DE" src="../images/error.png" />
                     <img alt="success" id="SE" src="../images/success.png" />
+                    <img alt="Warning" id="WA" src="../images/alert.png" />
                 </td>
             </tr>
             <tr>
-                <td align="center">
-                    <input id="BtnExit" type="button" value="Salir" style="width: 40%;" />
+                <td colspan="2" align="center">
+                    <input id="BtnExit" type="button" value="Salir" style="width: 40%; height:30px; padding: 5px; " onclick="BtnRedirect();" />
                 </td>
             </tr>
         </table>

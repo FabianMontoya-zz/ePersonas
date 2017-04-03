@@ -10,21 +10,28 @@
     <link href="../../css/css_login.css" rel="stylesheet" type="text/css" />
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
     <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />
-    <link href="../../css/custom/charge.css" rel="stylesheet" type="text/css" />
-    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
     <link href="../../css/Chosen/chosen.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/jquery.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Chosen/chosen.jquery.js" type="text/javascript"></script>
     <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
+    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" /> 
+    <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
-    <div id="Container_title_Form">
+    <div class="Container_title_Form">
+        <div id="Dialog_Control" style="width: 100%; text-align: center;">
+            <div class="cssload-container" style="margin-top: 25%;">
+                <div class="cssload-whirlpool"></div>
+                <div>
+                    <img id="Sasif" class="Logo_3" src="../../images/SASIF_NEW_WHITE.png" alt="SASIF S.A.S." />
+                </div>
+            </div>
+        </div>
         <table id="Tabla_Title_form">
             <tr>
-                <td id="Title_form">
-                </td>
+                <td id="Title_form"></td>
                 <td id="image_exit">
                     <span class="cssToolTip_Form_L">
                         <input id="BtnExit" type="button" value="X" onclick="btnSalir();" /><span class="Spam_AEXIT_MOD"></span></span>
@@ -32,38 +39,37 @@
             </tr>
         </table>
     </div>
-    <div id="Marco_link">
-        <div id="Marco_btn_Form">
+    <div class="Marco_Container">
+       <div class="Marco_btn_Form">
             <input id="BtnShearh" type="button" value="Consulta" onclick="HabilitarPanel('buscar');" />
             <input id="BtnCreate" type="button" value="Crear" onclick="HabilitarPanel('crear');" />
             <input id="BtnUpdate" type="button" value="Actualizar" onclick="HabilitarPanel('modificar');" />
             <input id="BtnDelete" type="button" value="Eliminar" onclick="HabilitarPanel('eliminar');" />
         </div>
-        <div id="Marco_trabajo_Form">
-            <div id="Container_controls">
+        <div class="Marco_trabajo_Form">
+            <div class="Container_controls">
                 <table id="TablaConsulta">
                     <tr>
-                        <td id="TD1">
-                            <select id="DDLColumns">
+                        <td id="TD1" style="width: 25%;">
+                            <select id="DDLColumns" class="C_Chosen">
                             </select>
                         </td>
-                        <td id="TD2">
+                        <td id="TD2" style="width: 65%;">
                             <span class="cssToolTip_Form">
-                                <input id="TxtRead" type="text" />
+                                <input id="TxtRead" type="text" style="width: 60%; margin-left: 10%;"/>
                                 <span class="Spam_AST"></span></span>
                         </td>
-                        <td colspan="4" align="center" id="TD3">
+                        <td colspan="4" align="center" id="TD3" style="width: 20%;">
                             <input id="BtnRead" type="button" value="Buscar" onclick="BtnConsulta();" />
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="4">
-                            &nbsp;
+                        <td colspan="4">&nbsp;
                         </td>
                     </tr>
                     <tr>
                         <td colspan="4">
-                            <div id="container_TFasecolda">
+                            <div class="container_TGrid">
                             </div>
                         </td>
                     </tr>
@@ -81,7 +87,7 @@
                 <td>
                     <img alt="error" id="DE" src="../../images/error_2.png" />
                     <img alt="success" id="SE" src="../../images/success.png" />
-                    <img alt="Warning" id="WE" src="../../images/alert.png" />
+                    <img alt="Warning" id="WA" src="../../images/alert.png" />
                 </td>
             </tr>
             <tr>
@@ -116,8 +122,7 @@
                 <td>
                     <table id="Tabla_1" style="width: 700px; margin-left: 100px;">
                         <tr style="height: 40px;">
-                            <td class="Label_Bold" style="width: 100px;">
-                                Codigo
+                            <td class="Label_Bold" style="width: 100px;">Codigo
                             </td>
                             <td style="width: 100px;">
                                 <span class="cssToolTip_Form">
@@ -130,20 +135,17 @@
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
-                            <td class="Label_Bold" style="width: 120px;">
-                                Clase
+                            <td class="Label_Bold" style="width: 120px;">Clase
                             </td>
                             <td style="width: 100px;">
                                 <span class="cssToolTip_Form">
                                     <input type="text" id="TxtDescripcion" maxlength="50" />
                                     <span class="Spam_AST"></span></span>
                             </td>
-                            <td style="width: 40px; padding-bottom: 25px;">
-                            </td>
+                            <td style="width: 40px; padding-bottom: 25px;"></td>
                         </tr>
                         <tr>
-                            <td class="Label_Bold">
-                                Marca
+                            <td class="Label_Bold">Marca
                             </td>
                             <td>
                                 <span class="cssToolTip_Form">
@@ -156,8 +158,7 @@
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
-                            <td class="Label_Bold" style="width: 70px;">
-                                Linea
+                            <td class="Label_Bold" style="width: 70px;">Linea
                             </td>
                             <td>
                                 <span class="cssToolTip_Form">
@@ -178,18 +179,15 @@
                 <td>
                     <table id="Tabla_2" style="width: 700px; margin-left: 100px;">
                         <tr>
-                            <td class="Label_Bold" style="width: 125px;">
-                                Cilindraje
+                            <td class="Label_Bold" style="width: 125px;">Cilindraje
                             </td>
                             <td style="width: 100px;">
                                 <span class="cssToolTip_Form">
                                     <input type="text" id="TxtCilindraje" maxlength="6" class="Numeric" />
                                     <span class="Spam_AN"></span></span>
                             </td>
-                            <td style="width: 40px; padding-bottom: 25px;">
-                            </td>
-                            <td class="Label_Bold" style="width: 180px;">
-                                Borrado ó Modificado
+                            <td style="width: 40px; padding-bottom: 25px;"></td>
+                            <td class="Label_Bold" style="width: 180px;">Borrado ó Modificado
                             </td>
                             <td align="center" style="width: 70px;">
                                 <select id="Select_Estado" class="Select_tiny C_Chosen">
@@ -197,38 +195,27 @@
                                     <option value="S">Si</option>
                                 </select>
                             </td>
-                            <td style="padding-bottom: 25px; width: 225px">
-                            </td>
+                            <td style="padding-bottom: 25px; width: 225px"></td>
                         </tr>
                     </table>
                 </td>
             </tr>
         </table>
-        <table id="Blo_Cuentas">
+        <table class="Table_Header_Block">
             <tr>
-                <td colspan="25" align="center" class="Title_Bold">
-                    Periodo
+                <td colspan="25" align="center" class="Title_Bold">Periodo
                 </td>
             </tr>
             <tr>
-                <td id="P_1" class="Label_Bold" align="center">
-                </td>
-                <td id="P_2" class="Label_Bold" align="center">
-                </td>
-                <td id="P_3" class="Label_Bold" align="center">
-                </td>
-                <td id="P_4" class="Label_Bold" align="center">
-                </td>
-                <td id="P_5" class="Label_Bold" align="center">
-                </td>
-                <td id="P_6" class="Label_Bold" align="center">
-                </td>
-                <td id="P_7" class="Label_Bold" align="center">
-                </td>
-                <td id="P_8" class="Label_Bold" align="center">
-                </td>
-                <td id="P_9" class="Label_Bold" align="center">
-                </td>
+                <td id="P_1" class="Label_Bold" align="center"></td>
+                <td id="P_2" class="Label_Bold" align="center"></td>
+                <td id="P_3" class="Label_Bold" align="center"></td>
+                <td id="P_4" class="Label_Bold" align="center"></td>
+                <td id="P_5" class="Label_Bold" align="center"></td>
+                <td id="P_6" class="Label_Bold" align="center"></td>
+                <td id="P_7" class="Label_Bold" align="center"></td>
+                <td id="P_8" class="Label_Bold" align="center"></td>
+                <td id="P_9" class="Label_Bold" align="center"></td>
             </tr>
             <tr>
                 <td>
@@ -296,24 +283,15 @@
                 </td>
             </tr>
             <tr>
-                <td id="P_10" class="Label_Bold" align="center">
-                </td>
-                <td id="P_11" class="Label_Bold" align="center">
-                </td>
-                <td id="P_12" class="Label_Bold" align="center">
-                </td>
-                <td id="P_13" class="Label_Bold" align="center">
-                </td>
-                <td id="P_14" class="Label_Bold" align="center">
-                </td>
-                <td id="P_15" class="Label_Bold" align="center">
-                </td>
-                <td id="P_16" class="Label_Bold" align="center">
-                </td>
-                <td id="P_17" class="Label_Bold" align="center">
-                </td>
-                <td id="P_18" class="Label_Bold" align="center">
-                </td>
+                <td id="P_10" class="Label_Bold" align="center"></td>
+                <td id="P_11" class="Label_Bold" align="center"></td>
+                <td id="P_12" class="Label_Bold" align="center"></td>
+                <td id="P_13" class="Label_Bold" align="center"></td>
+                <td id="P_14" class="Label_Bold" align="center"></td>
+                <td id="P_15" class="Label_Bold" align="center"></td>
+                <td id="P_16" class="Label_Bold" align="center"></td>
+                <td id="P_17" class="Label_Bold" align="center"></td>
+                <td id="P_18" class="Label_Bold" align="center"></td>
             </tr>
             <tr>
                 <td>
@@ -381,20 +359,13 @@
                 </td>
             </tr>
             <tr>
-                <td id="P_19" class="Label_Bold" align="center">
-                </td>
-                <td id="P_20" class="Label_Bold" align="center">
-                </td>
-                <td id="P_21" class="Label_Bold" align="center">
-                </td>
-                <td id="P_22" class="Label_Bold" align="center">
-                </td>
-                <td id="P_23" class="Label_Bold" align="center">
-                </td>
-                <td id="P_24" class="Label_Bold" align="center">
-                </td>
-                <td id="P_25" class="Label_Bold" align="center">
-                </td>
+                <td id="P_19" class="Label_Bold" align="center"></td>
+                <td id="P_20" class="Label_Bold" align="center"></td>
+                <td id="P_21" class="Label_Bold" align="center"></td>
+                <td id="P_22" class="Label_Bold" align="center"></td>
+                <td id="P_23" class="Label_Bold" align="center"></td>
+                <td id="P_24" class="Label_Bold" align="center"></td>
+                <td id="P_25" class="Label_Bold" align="center"></td>
             </tr>
             <tr>
                 <td>
@@ -451,19 +422,5 @@
         <div style="width: 100%; text-align: center; margin-top: 25px;">
             <input id="Btnguardar" type="button" value="Guardar" onclick="BtnCrear();" />
         </div>
-    </div>
-    <div id="Dialog_Charge">
-        <div class="cssload-circle">
-            <div class="cssload-up">
-                <div class="cssload-innera">
-                </div>
-            </div>
-            <div class="cssload-down">
-                <div class="cssload-innerb">
-                </div>
-            </div>
-        </div>
-        <h5 style="text-align: center;">
-            Generando información espere un momento...</h5>
     </div>
 </asp:Content>

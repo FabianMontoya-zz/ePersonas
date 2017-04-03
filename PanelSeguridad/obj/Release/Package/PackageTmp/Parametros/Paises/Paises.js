@@ -96,16 +96,7 @@ $(document).ready(function () {
         $("#TxtFinDom4").timepicker();
     });
 
-    Break_hora();
 });
-
-function Break_hora() {
-
-    $('.Hours').focus(function () {
-        this.value = "";
-    });
-
-}
 
 //salida del formulario
 function btnSalir() {

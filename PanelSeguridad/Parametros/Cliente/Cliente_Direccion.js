@@ -23,7 +23,7 @@ function Direcciones(Option_Adress) {
         $("#BtnSave_Adress").css("display", "none");
     else
         $("#BtnSave_Adress").css("display", "inline-table");
-        
+
     switch (Option_Adress) {
         case "V":
             $("#Txt_Nit_V").val(D_Nit);
@@ -59,7 +59,6 @@ function Direcciones(Option_Adress) {
     }
 
 }
-
 
 //grid direcciones cliente
 function Tabla_General(Opc_Link) {
@@ -140,7 +139,7 @@ function Add_Array_Adress() {
     $("#dialog").dialog("open");
     $("#DE").css("display", "none");
     $("#SE").css("display", "block");
-    $("#WE").css("display", "none");
+    $("#WA").css("display", "none");
     $("#Dialog_C_R_U_D").dialog("close");
     clearDireccion();
 
@@ -241,7 +240,7 @@ function Update_Array_Adress() {
     $("#dialog").dialog("open");
     $("#DE").css("display", "none");
     $("#SE").css("display", "block");
-    $("#WE").css("display", "none");
+    $("#WA").css("display", "none");
     $("#Dialog_C_R_U_D").dialog("close");
     clearDireccion();
 
@@ -275,7 +274,7 @@ function Confirm_Adress(Confirm) {
         $("#dialog").dialog("open");
         $("#DE").css("display", "none");
         $("#SE").css("display", "block");
-        $("#WE").css("display", "none");
+        $("#WA").css("display", "none");
         $("#Dialog_C_R_U_D").dialog("close");
         $("#Dialog_Delete_Adress").dialog("close");
 
@@ -358,7 +357,11 @@ function Convert_and_Valide_Json() {
         "Pais_ID": $("#Select_Pais_D").val(),
         "DescripPais": $("#Select_Pais_D option:selected").html(),
         "Ciudad_ID": $("#Select_Ciudad_D").val(),
-        "DescripCiudad": $("#Select_Ciudad_D option:selected").html()
+        "DescripCiudad": $("#Select_Ciudad_D option:selected").html(),
+        "Tipo_1": $("#Select_TypeTel_1").val(),
+        "Tipo_2": $("#Select_TypeTel_2").val(),
+        "Tipo_3": $("#Select_TypeTel_3").val(),
+        "Tipo_4": $("#Select_TypeTel_4").val()
     }
 
     return Json_Direccion;
@@ -392,7 +395,6 @@ function lego_Phone(Index) {
 
 var StrCiudad_D;
 
-
 //busca los datos por el consecutivo seleccionado
 function Search_Adress(Index_Adress) {
 
@@ -404,14 +406,19 @@ function Search_Adress(Index_Adress) {
             $("#TxtCorreo_1").val(ArrayDirecciones[itemArray].Correo_1);
             $("#TxtCorreo_2").val(ArrayDirecciones[itemArray].Correo_2);
             $("#TxtDireccion").val(ArrayDirecciones[itemArray].Direccion);
-            $("#TxtWeb").val(ArrayDirecciones[itemArray].PaginaWeb);
+
+            $("#Select_TypeTel_1").val(ArrayDirecciones[itemArray].Tipo_1);
+            $("#Select_TypeTel_2").val(ArrayDirecciones[itemArray].Tipo_2);
+            $("#Select_TypeTel_3").val(ArrayDirecciones[itemArray].Tipo_3);
+            $("#Select_TypeTel_4").val(ArrayDirecciones[itemArray].Tipo_4);
+
+            $("#TxtDireccion").val(ArrayDirecciones[itemArray].Direccion);
 
             $("#Select_Pais_D").val(ArrayDirecciones[itemArray].Pais_ID);
             StrCiudad_D = ArrayDirecciones[itemArray].Ciudad_ID;
 
             setTimeout("$('#Select_Pais_D').trigger('change');", 200);
-
-
+            
             ArrayStrPhones[0] = ArrayDirecciones[itemArray].Telefono_1;
             ArrayStrPhones[1] = ArrayDirecciones[itemArray].Telefono_2;
             ArrayStrPhones[2] = ArrayDirecciones[itemArray].Telefono_3;
@@ -471,7 +478,6 @@ function LegoView_Phone() {
     }
 }
 
-
 //elimina del array el dato seleccionado
 function Delete_Adress(Index_Adress) {
     for (itemArray in ArrayDirecciones) {
@@ -480,166 +486,6 @@ function Delete_Adress(Index_Adress) {
         }
     }
 }
-
-//habilita la ventana emergente de direciones
-function Format_Adress() {
-    $("#TxtDireccion").mouseover(function () {
-
-        $("#Txt_Special").css("display", "none");
-        $("#Dialog_Format_Adress").dialog("open");
-        $("#Dialog_Format_Adress").dialog("option", "title", "Ingrese Dirección");
-
-        lego_Adress();
-    });
-}
-
-//construye el string de la direccion
-function lego_Adress() {
-
-    var Str_Adress = "";
-
-    $("#Select_Type_Adress").change(function () {
-        ArrayStrAdress[0] = $("#Select_Type_Adress").val();
-        if (ArrayStrAdress[0] == "Kl") {
-            $("#Txt_Special").css("display", "block");
-
-            $("#Select_Letter_1").css("display", "none");
-            $("#Txt_N2").css("display", "none");
-            $("#Select_Letter_2").css("display", "none");
-            $("#Txt_N3").css("display", "none");
-            $("#Select_Orientacion").css("display", "none");
-            $("#Select_Type_Cons").css("display", "none");
-            $("#Txt_N4").css("display", "none");
-            $("#Select_Type_Cons2").css("display", "none");
-            $("#Txt_N5").css("display", "none");
-            $("#Txt_Texto").css("display", "none");
-
-        }
-        else {
-            $("#Txt_Special").css("display", "none");
-
-            $("#Select_Letter_1").css("display", "block");
-            $("#Txt_N2").css("display", "block");
-            $("#Select_Letter_2").css("display", "block");
-            $("#Txt_N3").css("display", "block");
-            $("#Select_Orientacion").css("display", "block");
-            $("#Select_Type_Cons").css("display", "block");
-            $("#Txt_N4").css("display", "block");
-            $("#Select_Type_Cons2").css("display", "block");
-            $("#Txt_N5").css("display", "block");
-            $("#Txt_Texto").css("display", "block");
-
-        }
-        StrLego();
-    });
-
-    $("#Txt_N1").change(function () {
-        ArrayStrAdress[1] = " " + $("#Txt_N1").val();
-        StrLego();
-    });
-
-    $("#Select_Letter_1").change(function () {
-        ArrayStrAdress[2] = $("#Select_Letter_1").val();
-        StrLego();
-    });
-
-    $("#Txt_Special").change(function () {
-        ArrayStrAdress[2] = " " + $("#Txt_Special").val().toUpperCase();
-        StrLego();
-    });
-
-    $("#Txt_N2").change(function () {
-        ArrayStrAdress[3] = " " + $("#Txt_N2").val();
-        StrLego();
-    });
-
-    $("#Select_Letter_2").change(function () {
-        ArrayStrAdress[4] = $("#Select_Letter_2").val();
-        StrLego();
-    });
-
-    $("#Txt_N3").change(function () {
-        ArrayStrAdress[5] = " - " + $("#Txt_N3").val();
-        StrLego();
-    });
-
-    $("#Select_Orientacion").change(function () {
-        ArrayStrAdress[6] = " " + $("#Select_Orientacion").val();
-        StrLego();
-    });
-
-    $("#Select_Type_Cons").change(function () {
-        ArrayStrAdress[7] = " " + $("#Select_Type_Cons").val();
-        StrLego();
-    });
-
-    $("#Txt_N4").change(function () {
-        ArrayStrAdress[8] = " " + $("#Txt_N4").val();
-        StrLego();
-    });
-
-    $("#Select_Type_Cons2").change(function () {
-        ArrayStrAdress[9] = " " + $("#Select_Type_Cons2").val();
-        StrLego();
-    });
-
-    $("#Txt_N5").change(function () {
-        ArrayStrAdress[10] = " " + $("#Txt_N5").val();
-        StrLego();
-    });
-
-    $("#Txt_Texto").change(function () {
-        ArrayStrAdress[11] = " " + $("#Txt_Texto").val().toUpperCase();
-        StrLego();
-    });
-}
-
-
-//limpia los campos de direccion
-function Clear_Adress() {
-
-    ArrayStrAdress = [];
-    $("#Select_Type_Adress").val("");
-    $("#Select_Letter_1").val("");
-    $("#Txt_N1").val("");
-    $("#Txt_Special").val("");
-    $("#Txt_N2").val("");
-    $("#Select_Letter_2").val("");
-    $("#Txt_N3").val("");
-    $("#Select_Orientacion").val("");
-    $("#Select_Type_Cons").val("");
-    $("#Txt_N4").val("");
-    $("#Select_Type_Cons2").val("");
-    $("#Txt_N5").val("");
-    $("#Txt_Texto").val("");
-
-    $("#Txt_End_Adress").val("");
-}
-
-//recorre el vector para construir la direccion
-function StrLego() {
-
-    var Str_Adress = "";
-
-    for (item in ArrayStrAdress) {
-
-        if (ArrayStrAdress[item] != "") {
-            Str_Adress = Str_Adress + ArrayStrAdress[item];
-            $("#Txt_End_Adress").val(Str_Adress);
-        }
-    }
-}
-
-//llena el campo de direccion con el string armado
-function Add_Adress() {
-
-    if ($("#Txt_End_Adress").val() != "") {
-        $("#TxtDireccion").val($("#Txt_End_Adress").val());
-    }
-
-    $("#Dialog_Format_Adress").dialog("close");
-}
-
 
 /*---------------------------------------------------------------------------------------------------------------*/
 /*                           FUNCIONES VALIDACION  Y LIMPIEZA DE CAMPOS                                                                      */
@@ -726,7 +572,6 @@ function ValidaDireccion() {
     return validar;
 }
 
-
 //limpiar campos de direcciones
 function clearDireccion() {
     $("#TxtContact").val("");
@@ -757,7 +602,6 @@ function clearDireccion() {
 /*---------------------------------------------------------------------------------------------------------------*/
 /*                           FUNCIONES BLOQUEO Y DESBLOQUEO DE CAMPOS                                                                      */
 /*---------------------------------------------------------------------------------------------------------------*/
-
 
 //bloquear campos de direcciones
 function Disabled_Direccion() {

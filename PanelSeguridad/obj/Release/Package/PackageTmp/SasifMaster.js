@@ -1,4 +1,10 @@
-﻿
+﻿/*--------------- region de variables globales --------------------*/
+var User;
+var Link;
+var NameTemporal;
+var Doc_name;
+/*--------------- region de variables globales --------------------*/
+
 $(document).ready(function () {
     fecha();
 
@@ -24,12 +30,31 @@ $(document).ready(function () {
         this.value = (this.value + '').replace(/[^0-9a-zA-Z]/g, '');
     });
 
+    $('.Hours').focus(function () {
+        this.value = "";
+    });
 });
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                 INICIO DE PROCESOS                                                                                                            ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//capturar el link y usuario para el proceso
+function ConsultaParametrosURL() {
+    //capturamos la url
+    var URLPage = window.location.search.substring(1);
+    var URLVariables = URLPage.split('&');
+
+
+    if (URLVariables.length <= 1)
+        User = URLVariables[0].replace("User=", "");
+    else {
+        User = URLVariables[0].replace("User=", "");
+        Link = URLVariables[1].replace("L_L=", "");
+    }
+}
 
 //integra los mensajes de error en la pagina
 function RevisarMensajes() {
-
     $(".SpamEG").html(ArrayMensajes[0].Mensajes_ID + ": " + ArrayMensajes[0].Descripcion);
     $(".SpamEC").html(ArrayMensajes[1].Mensajes_ID + ": " + ArrayMensajes[1].Descripcion);
     $(".SpamEFY").html(ArrayMensajes[2].Mensajes_ID + ": " + ArrayMensajes[2].Descripcion);
@@ -39,7 +64,6 @@ function RevisarMensajes() {
 
 //integra las Ayudas en la pagina
 function RevisarAyudas() {
-
     $(".Spam_AN").html(ArrayAyudas[0].Ayudas_ID + ": " + ArrayAyudas[0].Descripcion);
     $(".Spam_ANL").html(ArrayAyudas[1].Ayudas_ID + ": " + ArrayAyudas[1].Descripcion);
     $(".Spam_AST").html(ArrayAyudas[2].Ayudas_ID + ": " + ArrayAyudas[2].Descripcion);
@@ -64,174 +88,58 @@ function RevisarAyudas() {
     $(".Spam_ACliente").html(ArrayAyudas[20].Ayudas_ID + ": " + ArrayAyudas[20].Descripcion);
     $(".Spam_AT5").html(ArrayAyudas[21].Ayudas_ID + ": " + ArrayAyudas[21].Descripcion);
     $(".Spam_ARel").html(ArrayAyudas[22].Ayudas_ID + ": " + ArrayAyudas[22].Descripcion);
+    $(".SpamALEC").html(ArrayAyudas[23].Ayudas_ID + ": " + ArrayAyudas[23].Descripcion);
 
     $(".Spam_CT1").html(ArrayAyudas[6].Descripcion);
     $(".Spam_CT2").html(ArrayAyudas[7].Descripcion);
     $(".Spam_CT4").html(ArrayAyudas[19].Descripcion);
     $(".Spam_CT5").html(ArrayAyudas[21].Descripcion);
-
 }
 
+//llamado de mensajes
+function Mensaje_General(Title, Msn, Type) {
+    $("#dialog").dialog("open");
+    $("#dialog").dialog("option", "title", Title);
+    $("#Mensaje_alert").text(Msn);
 
-//funcion para capturar la fecha
-function fecha() {
-    var d = new Date();
-
-    var month = d.getMonth() + 1;
-    var day = d.getDate();
-
-    var output = d.getFullYear() + '-' +
-    (('' + month).length < 2 ? '0' : '') + month + '-' +
-    (('' + day).length < 2 ? '0' : '') + day;
-    $("#Hours").html(output);
-
-}
-
-//cargar combos
-function charge_CatalogList(objCatalog, nameList, selector) {
-
-    var objList = $('[id$=' + nameList + ']');
-    //recorremos para llenar el combo de
-    for (itemArray in objCatalog) {
-        objList[0].options[itemArray] = new Option(objCatalog[itemArray].descripcion, objCatalog[itemArray].ID);
-    };
-
-    //validamos si el combo lleva seleccione y posicionamos en el
-    switch (selector) {
-        case 1:
-            $("#" + nameList).append("<option value='-1'>Seleccione...</option>");
-            $("#" + nameList + " option[value= '-1'] ").attr("selected", true);
+    switch (Type) {
+        case "E":
+            $("#DE").css("display", "block");
+            $("#SE").css("display", "none");
+            $("#WE").css("display", "none");
             break;
 
-        case "Generico":
-            $("#" + nameList).append("<option value='-1'>Seleccione...</option>");
-            $("#" + nameList).append("<option value='0'>Genérico</option>");
-            $("#" + nameList + " option[value= '-1'] ").attr("selected", true);
+        case "W":
+            $("#DE").css("display", "none");
+            $("#SE").css("display", "none");
+            $("#WE").css("display", "block");
+            break;
+
+        case "S":
+            $("#DE").css("display", "none");
+            $("#SE").css("display", "block");
+            $("#WE").css("display", "none");
             break;
     }
-
-    $("#" + nameList).trigger("liszt:updated");
-    $('.C_Chosen').trigger('chosen:updated');
 }
 
-
-//carga los combps dependiendo del nit
-function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
-
-    $('#' + Selector).empty();
-    var objList = $("[id$='" + Selector + "']");
-
-    switch (Selector) {
-        case "Select_Area":
-            for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID == Nit) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Area_ID + "'>" + Matrix[Item].Descripcion + "</option>");
-                }
-            }
-            break;
-
-        case "Select_Cargo":
-            for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID == Nit) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Cargo_ID + "'>" + Matrix[Item].Descripcion + "</option>");
-                }
-            }
-            break;
-
-        case "Select_Jefe":
-            for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID == Nit) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Document_ID + "'>" + Matrix[Item].Nombre + "</option>");
-                }
-            }
-            break;
-
-        case "Select_GrpDocument":
-            for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID == Nit) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Document_ID + "'>" + Matrix[Item].namefile + "</option>");
-                }
-            }
-            break;
-
-        case "Select_RutaDocumento":
-            for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID == Nit) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].RutaDocumentos_ID + "'>" + Matrix[Item].Ruta + "</option>");
-                }
-            }
-            break;
-
-        case "Select_RutaPlantilla":
-            for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID == Nit) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].RutaDocumentos_ID + "'>" + Matrix[Item].Ruta + "</option>");
-                }
-            }
-            break;
-
-        case "Select_GrpDocumento":
-            for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID == Nit) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].GrpDocumentos_ID + "'>" + Matrix[Item].Descripcion + "</option>");
-                }
-            }
-            break;
-
-        case "Select_Documento":
-            for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID == Nit || Matrix[Item].Nit_ID == "0") {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Documento_ID + "'>" + Matrix[Item].Descripcion + "</option>");
-                }
-            }
-            break;
-
-        case "Select_Documento_V":
-            for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID == Nit) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Secuencia_ID + "'>" + Matrix[Item].Nombre_Save + "</option>");
-                }
-            }
-            break;
-
-        case "Select_Persona":
-            for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID == Nit) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Document_ID + "'>" + Matrix[Item].Nombre + "</option>");
-                }
-            }
-            break;
-
-        case "Select_Contrato":
-            for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID == Nit) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Contrato_ID + "'>" + Matrix[Item].Descripcion + "</option>");
-                }
-            }
-            break;
-
-        case "Select_Secuencia":
-            for (Item in Matrix) {
-                if (Matrix[Item].Nit_ID == Nit) {
-                    $("#" + Selector).append("<option value='" + Matrix[Item].Documento_ID + "'>" + Matrix[Item].Descripcion + "</option>");
-                }
-            }
-            break;
-    }
-
-    $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
-
-    if (Index_Edit == "")
-        $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
-    else
-        $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
-
-    $("#" + Selector).trigger("liszt:updated");
-    $('.C_Chosen').trigger('chosen:updated');
-
+//escondemos los iconos obligatorios
+function ResetError() {
+    $("#ImgC_Doc").css("display", "none");
+    $("#ImgMul").css("display", "none");
+    $("#ImgPais").css("display", "none");
+    $("#ImgID").css("display", "none");
+    $("#Img1").css("display", "none");
+    $("#Img2").css("display", "none");
+    $("#Img3").css("display", "none");
+    $("#Img5").css("display", "none");
+    $("#Img9").css("display", "none");
+    $("#Img10").css("display", "none");
+    $("#Img11").css("display", "none");
+    $("#Img12").css("display", "none");
 }
 
-//funcion para las ventanas emergentes
+//funcion para control de carga
 function carga_eventos(str_objeto) {
 
     $("#" + str_objeto).dialog({
@@ -262,6 +170,126 @@ function carga_eventos(str_objeto) {
     });
 }
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                             VALIDACIONES FECHAS Y HORAS                                                                                                            ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//funcion para capturar la fecha
+function fecha() {
+
+    var d = new Date();
+    var month = d.getMonth() + 1;
+    var day = d.getDate();
+
+    var output = d.getFullYear() + '-' +
+    (('' + month).length < 2 ? '0' : '') + month + '-' +
+    (('' + day).length < 2 ? '0' : '') + day;
+    $("#Hours").html(output);
+
+}
+
+//Valida que la fecha inicial y final sean coherentes
+function validate_fechaMayorQue(fechaInicial, fechaFinal, Type) {
+
+    var Resultado;
+    var valuesStart;
+    var valuesEnd;
+    var dateStart;
+    var dateEnd;
+
+    switch (Type) {
+
+        case "SystemCompare":
+            var SysFecha = new Date();
+            var Fecha_System = SysFecha.getDate() + "-" + (SysFecha.getMonth() + 1) + "-" + SysFecha.getFullYear();
+            valuesStart = fechaInicial.split("-");
+            valuesEnd = Fecha_System.split("-");
+
+            dateStart = new Date(valuesStart[0], (valuesStart[1] - 1), valuesStart[2]);
+            dateEnd = new Date(valuesEnd[2], (valuesEnd[1] - 1), valuesEnd[0]);
+
+            console.log(dateStart + ">=" + dateEnd);
+            if (dateStart >= dateEnd)
+                Resultado = "Menor";
+            else
+                Resultado = "Mayor";
+            break;
+
+        case "DefaultCompare":
+            valuesStart = fechaInicial.split("-");
+            valuesEnd = fechaFinal.split("-");
+
+            // Verificamos que la fecha no sea posterior a la actual
+            dateStart = new Date(valuesStart[0], (valuesStart[1] - 1), valuesStart[2]);
+            dateEnd = new Date(valuesEnd[0], (valuesEnd[1] - 1), valuesEnd[2]);
+            console.log(dateStart + " >= " + dateEnd);
+            if (dateStart >= dateEnd)
+                Resultado = "Menor";
+            else
+                Resultado = "Mayor";
+            break;
+
+    }
+    return Resultado;
+}
+
+//valida las hora inicial y final que sean coherentes
+function Validahora(V_HoraInicial, V_HoraFinal) {
+
+    var A_V_HoraInicial = V_HoraInicial.split(":");
+    var A_V_HoraFinal = V_HoraFinal.split(":");
+    var Valida = 0;
+
+    if (parseInt(A_V_HoraInicial[0]) > parseInt(A_V_HoraFinal[0])) {
+         Valida = 1;
+    }
+
+    if (parseInt(A_V_HoraInicial[0]) == parseInt(A_V_HoraFinal[0])) {
+        if (parseInt(A_V_HoraInicial[1]) > parseInt(A_V_HoraFinal[1])) {
+           Valida = 1;
+        }
+    }
+
+    if (V_HoraInicial == "")
+        Valida = 2;
+
+    if (V_HoraFinal == "")
+        Valida = 2;
+
+    return Valida;
+}
+
+//VALIDAR FORMATO DE LA FECHA PARA LOS GRID
+function valFecha(str) {
+    var Result;
+
+    if (str == '1900-01-01')
+        Result = "";
+    else
+        Result = str;
+    return Result;
+}
+
+// Función que suma o resta días a la fecha indicada
+sumaFecha = function (d, fecha) {
+    var Fecha = new Date();
+    var sFecha = fecha || (Fecha.getDate() + "/" + (Fecha.getMonth() + 1) + "/" + Fecha.getFullYear());
+    var sep = sFecha.indexOf('/') != -1 ? '/' : '-';
+    var aFecha = sFecha.split(sep);
+    var fecha = aFecha[2] + '/' + aFecha[1] + '/' + aFecha[0];
+    fecha = new Date(fecha);
+    fecha.setDate(fecha.getDate() + parseInt(d));
+    var anno = fecha.getFullYear();
+    var mes = fecha.getMonth() + 1;
+    var dia = fecha.getDate();
+    mes = (mes < 10) ? ("0" + mes) : mes;
+    dia = (dia < 10) ? ("0" + dia) : dia;
+    var fechaFinal = dia + sep + mes + sep + anno;
+    return (fechaFinal);
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                             VALIDACIONES DE CAMPOS Y NUMERICOS                                                                                         ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //formato de miles en tiempo real
 function dinner_format(input) {
     var valida = 0;
@@ -347,17 +375,6 @@ function ValidarEmail(email) {
     return validate;
 }
 
-//VALIDAR FORMATO DE LA FECHA PARA LOS GRID
-function valFecha(str) {
-    var Result;
-
-    if (str == '1900-01-01')
-        Result = "";
-    else
-        Result = str;
-    return Result;
-}
-
 //funcion de formateo para la insercion en la Base de Datos
 function F_NumericBD(Index) {
 
@@ -380,51 +397,260 @@ function Convert_Decimal(index) {
     return Output;
 }
 
-//escondemos los iconos obligatorios
-function ResetError() {
-    $("#ImgC_Doc").css("display", "none");
-    $("#ImgMul").css("display", "none");
-    $("#ImgPais").css("display", "none");
-    $("#ImgID").css("display", "none");
-    $("#Img1").css("display", "none");
-    $("#Img2").css("display", "none");
-    $("#Img3").css("display", "none");
-    $("#Img5").css("display", "none");
-    $("#Img9").css("display", "none");
-    $("#Img10").css("display", "none");
-    $("#Img11").css("display", "none");
-    $("#Img12").css("display", "none");
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                             FUNCIONES PARA CARGA DE DROP LIST                                                                                               ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//cargar combos
+function charge_CatalogList(objCatalog, nameList, selector) {
+
+    var objList = $('[id$=' + nameList + ']');
+    //recorremos para llenar el combo de
+    for (itemArray in objCatalog) {
+        objList[0].options[itemArray] = new Option(objCatalog[itemArray].descripcion, objCatalog[itemArray].ID);
+    };
+
+    //validamos si el combo lleva seleccione y posicionamos en el
+    switch (selector) {
+        case 1:
+            $("#" + nameList).append("<option value='-1'>Seleccione...</option>");
+            $("#" + nameList + " option[value= '-1'] ").attr("selected", true);
+            break;
+
+        case "Generico":
+            $("#" + nameList).append("<option value='-1'>Seleccione...</option>");
+            $("#" + nameList).append("<option value='0'>Genérico</option>");
+            $("#" + nameList + " option[value= '-1'] ").attr("selected", true);
+            break;
+    }
+
+    $("#" + nameList).trigger("liszt:updated");
+    $('.C_Chosen').trigger('chosen:updated');
 }
 
+//carga los combps dependiendo del nit
+function Charge_Combos_Depend_Verificacion(Matrix, Selector, Nit, Doc_ID, Index_Edit) {
 
-//muestra el documento cargado inicialmente
-function VerDocumento() {
-    $("#IF_Visor").css("display", "inline-table");
-    $("#IF_Visor").attr("width", "100%");
-    $("#IF_Visor").attr("height", "100%");
-    $("#IF_Visor").attr("src", "../../Repository_Document/TEMP/" + Doc_name);
+    $('#' + Selector).empty();
+    var objList = $("[id$='" + Selector + "']");
+    for (Item in Matrix) {
+        if (Matrix[Item].Nit_ID == Nit && Matrix[Item].Doc_ID == Doc_ID) {
+            $("#" + Selector).append("<option value='" + Matrix[Item].Doc_ID_Verif + "'>" + Matrix[Item].Doc_ID_Verif + " - " + Matrix[Item].DescripDoc_Verif + "</option>");
+        }
+    }
+    $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
+
+    if (Index_Edit == "")
+        $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
+    else
+        $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
+
+    $("#" + Selector).trigger("liszt:updated");
+    $('.C_Chosen').trigger('chosen:updated');
+
 }
 
-// Función que suma o resta días a la fecha indicada
-sumaFecha = function (d, fecha) {
-    var Fecha = new Date();
-    var sFecha = fecha || (Fecha.getDate() + "/" + (Fecha.getMonth() + 1) + "/" + Fecha.getFullYear());
-    var sep = sFecha.indexOf('/') != -1 ? '/' : '-';
-    var aFecha = sFecha.split(sep);
-    var fecha = aFecha[2] + '/' + aFecha[1] + '/' + aFecha[0];
-    fecha = new Date(fecha);
-    fecha.setDate(fecha.getDate() + parseInt(d));
-    var anno = fecha.getFullYear();
-    var mes = fecha.getMonth() + 1;
-    var dia = fecha.getDate();
-    mes = (mes < 10) ? ("0" + mes) : mes;
-    dia = (dia < 10) ? ("0" + dia) : dia;
-    var fechaFinal = dia + sep + mes + sep + anno;
-    return (fechaFinal);
+//carga los combps dependiendo del nit
+function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
+
+    $('#' + Selector).empty();
+    var objList = $("[id$='" + Selector + "']");
+
+    switch (Selector) {
+        case "Select_Area":
+            for (Item in Matrix) {
+                if (Matrix[Item].Nit_ID == Nit) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Area_ID + "'>" + Matrix[Item].Descripcion + "</option>");
+                }
+            }
+            break;
+
+        case "Select_Cargo":
+            for (Item in Matrix) {
+                if (Matrix[Item].Nit_ID == Nit) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Cargo_ID + "'>" + Matrix[Item].Descripcion + "</option>");
+                }
+            }
+            break;
+
+        case "Select_Jefe":
+            for (Item in Matrix) {
+                if (Matrix[Item].Nit_ID == Nit) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Document_ID + "'>" + Matrix[Item].Nombre + "</option>");
+                }
+            }
+            break;
+
+        case "Select_GrpDocument":
+            for (Item in Matrix) {
+                if (Matrix[Item].Nit_ID == Nit) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Document_ID + "'>" + Matrix[Item].namefile + "</option>");
+                }
+            }
+            break;
+
+        case "Select_RutaDocumento":
+            for (Item in Matrix) {
+                if (Matrix[Item].Nit_ID == Nit) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].RutaDocumentos_ID + "'>" + Matrix[Item].Ruta + "</option>");
+                }
+            }
+            break;
+
+        case "Select_RutaPlantilla":
+            for (Item in Matrix) {
+                if (Matrix[Item].Nit_ID == Nit) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].RutaDocumentos_ID + "'>" + Matrix[Item].Ruta + "</option>");
+                }
+            }
+            break;
+
+        case "Select_GrpDocumento":
+            for (Item in Matrix) {
+                if (Matrix[Item].Nit_ID == Nit) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].GrpDocumentos_ID + "'>" + Matrix[Item].Descripcion + "</option>");
+                }
+            }
+            break;
+
+        case "Select_Documento":
+            for (Item in Matrix) {
+                if (Matrix[Item].Nit_ID == Nit || Matrix[Item].Nit_ID == "0") {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Documento_ID + "'>" + Matrix[Item].Descripcion + "</option>");
+                }
+            }
+            break;
+
+        case "Select_Documento_V":
+            for (Item in Matrix) {
+                if ((Matrix[Item].Nit_ID == Nit || Matrix[Item].Nit_ID == "0") && (Matrix[Item].RequiereVerificacion == "S")) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Documento_ID + "'>" + Matrix[Item].Descripcion + "</option>");
+                }
+            }
+            break;
+
+        case "Select_Persona":
+            for (Item in Matrix) {
+                if (Matrix[Item].Nit_ID == Nit) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Document_ID + "'>" + Matrix[Item].Nombre + "</option>");
+                }
+            }
+            break;
+
+        case "Select_Persona_Enc":
+            $('#' + Selector).append("<option value='0'>Todos</option>");
+            for (Item in Matrix) {
+                if (Matrix[Item].Nit_ID == Nit) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Document_ID + "'>" + Matrix[Item].Nombre + "</option>");
+                }
+            }
+            break;
+
+        case "Select_Contrato":
+            for (Item in Matrix) {
+                if (Matrix[Item].Nit_ID == Nit) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Contrato_ID + "'>" + Matrix[Item].Descripcion + "</option>");
+                }
+            }
+            break;
+
+        case "Select_Secuencia":
+            for (Item in Matrix) {
+                if (Matrix[Item].Nit_ID == Nit) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Documento_ID + "'>" + Matrix[Item].Descripcion + "</option>");
+                }
+            }
+            break;
+
+        case "Select_PAcceso":
+            for (Item in Matrix) {
+                if (Matrix[Item].Nit_ID == Nit) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].PuertaAcceso_ID + "'>" + Matrix[Item].Descripcion + "</option>");
+                }
+            }
+            break;
+
+        case "Select_Tarjeta":
+            for (Item in Matrix) {
+                if (Matrix[Item].Nit_ID_Custodia == Nit && Matrix[Item].Document_ID_Asigna == 0) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Tarjeta_ID + "'>" + Matrix[Item].Tarjeta_ID + "</option>");
+                }
+            }
+            break;
+
+        case "Select_Tarjeta_Ent":
+            for (Item in Matrix) {
+                if (Matrix[Item].Nit_ID_Asigna == Nit && Matrix[Item].Document_ID_Entrega == 0) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Tarjeta_ID + "'>" + Matrix[Item].Tarjeta_ID + "</option>");
+                }
+            }
+            break;
+
+        case "Select_Tarjeta_AccPre":
+            for (Item in Matrix) {
+                if (Matrix[Item].Nit_ID_Asigna == Nit && Matrix[Item].Document_ID_Entrega != 0) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Tarjeta_ID + "'>" + Matrix[Item].Tarjeta_ID + "</option>");
+                }
+            }
+            break;
+
+        case "Select_Tarjeta_Blo":
+            for (Item in Matrix) {
+                if ((Matrix[Item].Nit_ID_Asigna == Nit) && (Matrix[Item].Estado != 3 || Matrix[Item].Estado != 4)) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Tarjeta_ID + "'>" + Matrix[Item].Tarjeta_ID + "</option>");
+                }
+            }
+            break;
+
+        case "Select_Documento_1":
+            for (Item in Matrix) {
+                if ((Matrix[Item].Nit_ID == Nit) && (Matrix[Item].RequiereVerificacion == "S")) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Documento_ID + "'>" + Matrix[Item].Descripcion + "</option>");
+                }
+            }
+            break;
+
+        case "Select_Documento_2":
+            for (Item in Matrix) {
+                if ((Matrix[Item].Nit_ID == Nit) && (Matrix[Item].RequiereVerificacion == "N")) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Documento_ID + "'>" + Matrix[Item].Descripcion + "</option>");
+                }
+            }
+            break;
+
+        case "Select_AreaAcceso":
+            $('#' + Selector).append("<option value='0'>Todos</option>");
+            for (Item in Matrix) {
+                if (Matrix[Item].PuertaAcceso_ID == Nit) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Area_ID + "'>" + Matrix[Item].Area_ID + " - " + Matrix[Item].DescripArea + "</option>");
+                }
+            }
+            break;
+    }
+
+    $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
+
+    switch (Index_Edit) {
+        case "":
+            $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
+            break;
+
+        case "0":
+            $("#" + Selector + " option[value= '0'] ").attr("selected", true);
+            break;
+
+        default:
+            $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
+            break;
+    }
+
+    $("#" + Selector).trigger("liszt:updated");
+    $('.C_Chosen').trigger('chosen:updated');
+
 }
 
-var NameTemporal;
-
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                         FUNCIONES PARA CARGA DE DOCUMENTOS AL SERVIDOR                                                                                  ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //costruimos el nombre del documento temporal
 function ContruyeName_Temp(StrDocument, StrConsecutivo_Empresa, StrConsecutivo) {
 
@@ -451,9 +677,6 @@ function ContruyeName_Temp(StrDocument, StrConsecutivo_Empresa, StrConsecutivo) 
     NameTemporal = StrDoc_Name_Temp
     console.log(StrDoc_Name_Temp);
 }
-
-
-var Doc_name;
 
 //carga de documentos global
 function UpLoad_Document(NameAjax, NameFile_ID, Form) {
@@ -485,27 +708,41 @@ function UpLoad_Document(NameAjax, NameFile_ID, Form) {
             processData: false,
             success: function (result) {
 
-                //creamos variables
                 var filename = result;
-                filename = $.trim(filename)
-                filename = filename.replace(/\s/g, '_');
-                Doc_name = filename;
-                var objectfile = data;
-                var description = "xxxxx";
-
-                $("#" + NameFile_ID).val("");
-
-                switch (Form) {
-                    case "1":
-                        VerDocumento();
+                switch (filename) {
+                    case "NO_FORMAT":
+                        $("#dialog").dialog("option", "title", "Formato Incorrecto!");
+                        $("#Mensaje_alert").text("El documento no se puede generar, el formato es diferente a la parametrización asignada! ");
+                        $("#dialog").dialog("open");
+                        $("#DE").css("display", "none");
+                        $("#SE").css("display", "none");
+                        $("#WE").css("display", "block");
                         break;
 
-                    case "2":
-                        VerDocumento_Validacion();
-                        break;
                     default:
-                        VerDocumento();
+                        //creamos variables
+                        filename = $.trim(filename)
+                        filename = filename.replace(/\s/g, '_');
+                        Doc_name = filename;
+                        var objectfile = data;
+                        var description = "xxxxx";
+
+                        $("#" + NameFile_ID).val("");
+
+                        switch (Form) {
+                            case "1":
+                                VerDocumento();
+                                break;
+
+                            case "2":
+                                VerDocumento_Validacion();
+                                break;
+                            default:
+                                VerDocumento();
+                        }
+                        break;
                 }
+
             },
             error: function (error) {
                 alert("Ocurrió un error inesperado, por favor intente de nuevo mas tarde: " + error);
@@ -517,4 +754,12 @@ function UpLoad_Document(NameAjax, NameFile_ID, Form) {
 
     }
 
+}
+
+//muestra el documento cargado inicialmente
+function VerDocumento() {
+    $("#IF_Visor").css("display", "inline-table");
+    $("#IF_Visor").attr("width", "100%");
+    $("#IF_Visor").attr("height", "100%");
+    $("#IF_Visor").attr("src", "../../Repository_Document/TEMP/" + Doc_name);
 }

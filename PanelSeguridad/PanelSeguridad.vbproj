@@ -1,0 +1,1683 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>
+    </SchemaVersion>
+    <ProjectGuid>{F9CB7376-3C85-4595-B782-14E49B022CDD}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>PanelSeguridad</RootNamespace>
+    <AssemblyName>PanelSeguridad</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MyType>Custom</MyType>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>PanelSeguridad.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <IncludeIisSettings>false</IncludeIisSettings>
+    <FilesToIncludeForPublish>OnlyFilesToRunTheApp</FilesToIncludeForPublish>
+    <PublishDatabases>false</PublishDatabases>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>PanelSeguridad.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DPFPDevNET, Version=1.6.1.0, Culture=neutral, PublicKeyToken=696774c42ee28c57, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Windows\assembly\GAC_MSIL\DPFPDevNET\1.6.1.0__696774c42ee28c57\DPFPDevNET.dll</HintPath>
+    </Reference>
+    <Reference Include="DPFPEngNET, Version=1.6.1.0, Culture=neutral, PublicKeyToken=7fe76e7adf19964b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Windows\assembly\GAC_MSIL\DPFPEngNET\1.6.1.0__7fe76e7adf19964b\DPFPEngNET.dll</HintPath>
+    </Reference>
+    <Reference Include="DPFPGuiNet, Version=1.6.1.0, Culture=neutral, PublicKeyToken=d4f4a0bd9c559145, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Windows\assembly\GAC_MSIL\DPFPGuiNET\1.6.1.0__d4f4a0bd9c559145\DPFPGuiNet.dll</HintPath>
+    </Reference>
+    <Reference Include="DPFPShrNET, Version=1.6.1.0, Culture=neutral, PublicKeyToken=d902fe275a8d6cf2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Windows\assembly\GAC_MSIL\DPFPShrNET\1.6.1.0__d902fe275a8d6cf2\DPFPShrNET.dll</HintPath>
+    </Reference>
+    <Reference Include="DPFPShrXTypeLibNET, Version=1.6.1.0, Culture=neutral, PublicKeyToken=c0c98f712d5392a7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>C:\Windows\assembly\GAC_MSIL\DPFPShrXTypeLibNET\1.6.1.0__c0c98f712d5392a7\DPFPShrXTypeLibNET.dll</HintPath>
+    </Reference>
+    <Reference Include="DPFPVerNET, Version=1.6.1.0, Culture=neutral, PublicKeyToken=4de0a9c4dcc83984, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Windows\assembly\GAC_MSIL\DPFPVerNET\1.6.1.0__4de0a9c4dcc83984\DPFPVerNET.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Runtime.Serialization.Json" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="AspNet.ScriptManager.jQuery">
+      <HintPath>..\packages\AspNet.ScriptManager.jQuery.1.8.2\lib\net45\AspNet.ScriptManager.jQuery.dll</HintPath>
+    </Reference>
+    <Reference Include="AspNet.ScriptManager.jQuery.UI.Combined">
+      <HintPath>..\packages\AspNet.ScriptManager.jQuery.UI.Combined.1.8.24\lib\net45\AspNet.ScriptManager.jQuery.UI.Combined.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ScriptManager.MSAjax, Version=4.5.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\Microsoft.AspNet.ScriptManager.MSAjax.4.5.6\lib\net45\Microsoft.ScriptManager.MSAjax.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ScriptManager.WebForms, Version=4.5.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\Microsoft.AspNet.ScriptManager.WebForms.4.5.6\lib\net45\Microsoft.ScriptManager.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Providers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\Microsoft.AspNet.Providers.Core.1.2\lib\net40\System.Web.Providers.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DotNetOpenAuth.Core.4.1.4.12333\lib\net40-full\DotNetOpenAuth.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OAuth, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DotNetOpenAuth.OAuth.Core.4.1.4.12333\lib\net40-full\DotNetOpenAuth.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OAuth.Consumer, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DotNetOpenAuth.OAuth.Consumer.4.1.4.12333\lib\net40-full\DotNetOpenAuth.OAuth.Consumer.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DotNetOpenAuth.OpenId.Core.4.1.4.12333\lib\net40-full\DotNetOpenAuth.OpenId.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId.RelyingParty, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DotNetOpenAuth.OpenId.RelyingParty.4.1.4.12333\lib\net40-full\DotNetOpenAuth.OpenId.RelyingParty.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.AspNet, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DotNetOpenAuth.AspNet.4.1.4.12333\lib\net40-full\DotNetOpenAuth.AspNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Membership.OpenAuth, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\Microsoft.AspNet.Membership.OpenAuth.1.0.1\lib\net45\Microsoft.AspNet.Membership.OpenAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.1.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.1.0\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Web.Optimization.WebForms">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.WebForms.1.0.0\lib\net45\Microsoft.AspNet.Web.Optimization.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.FriendlyUrls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.0\lib\net45\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Collections.Specialized" />
+    <Import Include="System.Configuration" />
+    <Import Include="System.Text" />
+    <Import Include="System.Text.RegularExpressions" />
+    <Import Include="System.Web" />
+    <Import Include="System.Web.Caching" />
+    <Import Include="System.Web.Routing" />
+    <Import Include="System.Web.SessionState" />
+    <Import Include="System.Web.Security" />
+    <Import Include="System.Web.Profile" />
+    <Import Include="System.Web.UI" />
+    <Import Include="System.Web.UI.WebControls" />
+    <Import Include="System.Web.UI.WebControls.WebParts" />
+    <Import Include="System.Web.UI.HtmlControls" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Activos\Creacion\C_Activos_Complementos.js" />
+    <Content Include="Activos\Creacion\C_Activos.aspx" />
+    <Content Include="Activos\Creacion\C_Activos.js" />
+    <Content Include="Activos\Creacion\C_ActivosAjax.aspx" />
+    <Content Include="Activos\Creacion\C_ActivosTrasaccionsAjax.js" />
+    <Content Include="Activos\Creacion\C_Activos_Facturas.js" />
+    <Content Include="Activos\Creacion\C_Activos_Validacion.js" />
+    <Content Include="Activos\menu.js" />
+    <Content Include="Activos\SasifMaster_Cosult.js" />
+    <Content Include="Administrador\Adm_C_AccesoPrede\C_AccesoPre.aspx" />
+    <Content Include="Administrador\Adm_C_AccesoPrede\C_AccesoPre.js" />
+    <Content Include="Administrador\Adm_C_AccesoPrede\C_AccesoPreAjax.aspx" />
+    <Content Include="Administrador\Adm_C_AccesoPrede\C_AccesoPreTrasaccionsAjax.js" />
+    <Content Include="Administrador\Adm_C_AccesoPrede\C_AccesoPre_Carga_Valida.js" />
+    <Content Include="Administrador\Adm_InvPuerta\InvPuerta.aspx" />
+    <Content Include="Administrador\Adm_InvPuerta\InvPuerta.js" />
+    <Content Include="Administrador\Adm_InvPuerta\InvPuertaAjax.aspx" />
+    <Content Include="Administrador\Adm_InvPuerta\InvPuertaTrasaccionsAjax.js" />
+    <Content Include="Administrador\Adm_links\Adm_Links.aspx" />
+    <Content Include="Administrador\Adm_links\Adm_Links.js" />
+    <Content Include="Administrador\Adm_links\Adm_LinksAjax.aspx" />
+    <Content Include="Administrador\Adm_links\Adm_LinksTrasaccionsAjax.js" />
+    <Content Include="Administrador\Adm_opcrol\Adm_OpcRol.aspx" />
+    <Content Include="Administrador\Adm_opcrol\Adm_OpcRol.js" />
+    <Content Include="Administrador\Adm_opcrol\Adm_OpcRolAjax.aspx" />
+    <Content Include="Administrador\Adm_opcrol\Adm_OpcRolTrasaccionsAjax.js" />
+    <Content Include="Administrador\Adm_PuertaAcceso\PuertaAcceso.aspx" />
+    <Content Include="Administrador\Adm_PuertaAcceso\PuertaAcceso.js" />
+    <Content Include="Administrador\Adm_PuertaAcceso\PuertaAccesoAjax.aspx" />
+    <Content Include="Administrador\Adm_PuertaAcceso\PuertaAccesoTrasaccionsAjax.js" />
+    <Content Include="Administrador\Adm_ResetUser\Adm_ResetUser.aspx" />
+    <Content Include="Administrador\Adm_ResetUser\Adm_ResetUser.js" />
+    <Content Include="Administrador\Adm_ResetUser\Adm_ResetUserAjax.aspx" />
+    <Content Include="Administrador\Adm_roles\Adm_Roles.aspx" />
+    <Content Include="Administrador\Adm_roles\Adm_Roles.js" />
+    <Content Include="Administrador\Adm_roles\Adm_RolesAjax.aspx" />
+    <Content Include="Administrador\Adm_roles\Adm_RolesTrasaccionsAjax.js" />
+    <Content Include="Administrador\Adm_R_Persona_Tarjeta\BloqueoTarjeta.aspx" />
+    <Content Include="Administrador\Adm_R_Persona_Tarjeta\BloqueoTarjeta.js" />
+    <Content Include="Administrador\Adm_R_Persona_Tarjeta\BloqueoTarjetaTrasaccionsAjax.js" />
+    <Content Include="Administrador\Adm_R_Persona_Tarjeta\ConsultaTarjeta.aspx" />
+    <Content Include="Administrador\Adm_R_Persona_Tarjeta\ConsultaTarjeta.js" />
+    <Content Include="Administrador\Adm_R_Persona_Tarjeta\ConsultaTarjetaTrasaccionsAjax.js" />
+    <Content Include="Administrador\Adm_R_Persona_Tarjeta\Des_BloqueoTarjeta.aspx" />
+    <Content Include="Administrador\Adm_R_Persona_Tarjeta\Des_BloqueoTarjeta.js" />
+    <Content Include="Administrador\Adm_R_Persona_Tarjeta\Des_BloqueoTarjetaTrasaccionsAjax.js" />
+    <Content Include="Administrador\Adm_R_Persona_Tarjeta\EntregaTarjeta.aspx" />
+    <Content Include="Administrador\Adm_R_Persona_Tarjeta\EntregaTarjeta.js" />
+    <Content Include="Administrador\Adm_R_Persona_Tarjeta\EntregaTarjetaTrasaccionsAjax.js" />
+    <Content Include="Administrador\Adm_R_Persona_Tarjeta\R_Persona_Tarjeta.aspx" />
+    <Content Include="Administrador\Adm_R_Persona_Tarjeta\R_Persona_Tarjeta.js" />
+    <Content Include="Administrador\Adm_R_Persona_Tarjeta\R_Persona_TarjetaAjax.aspx" />
+    <Content Include="Administrador\Adm_R_Persona_Tarjeta\R_Persona_TarjetaTrasaccionsAjax.js" />
+    <Content Include="Administrador\Adm_R_PuertaAcc_Area\R_PuertaAcc_Area.aspx" />
+    <Content Include="Administrador\Adm_R_PuertaAcc_Area\R_PuertaAcc_Area.js" />
+    <Content Include="Administrador\Adm_R_PuertaAcc_Area\R_PuertaAcc_AreaAjax.aspx" />
+    <Content Include="Administrador\Adm_R_PuertaAcc_Area\R_PuertaAcc_AreaTrasaccionsAjax.js" />
+    <Content Include="Administrador\Adm_Usuario\Adm_Usuario.aspx" />
+    <Content Include="Administrador\Adm_Usuario\Adm_Usuario.js" />
+    <Content Include="Administrador\Adm_Usuario\Adm_UsuarioAjax.aspx" />
+    <Content Include="Administrador\Adm_Usuario\Adm_UsuarioTrasaccionsAjax.js" />
+    <Content Include="Administrador\menu.js" />
+    <Content Include="Administrador\SasifMaster_Cosult.js" />
+    <Content Include="AdmonActivos.Publish.xml" />
+    <Content Include="Agendamiento\menu.js" />
+    <Content Include="Agendamiento\SasifMaster_Cosult.js" />
+    <Content Include="Agendamiento\SucursalServicio\SucursalServicio.aspx" />
+    <Content Include="Agendamiento\SucursalServicio\SucursalServicio.js" />
+    <Content Include="Agendamiento\SucursalServicio\SucursalServicioAjax.aspx" />
+    <Content Include="Agendamiento\SucursalServicio\SucursalServicioTransaccionsAjax.js" />
+    <Content Include="Agendamiento\TipoServicio\TipoServicio.aspx" />
+    <Content Include="Agendamiento\TipoServicio\TipoServicio.js" />
+    <Content Include="Agendamiento\TipoServicio\TipoServicioTransaccionsAjax.js" />
+    <Content Include="Agendamiento\TipoServicio\TipoServicioAjax.aspx" />
+    <Content Include="Contratos\Creacion\C_Contrato.aspx" />
+    <Content Include="Contratos\Creacion\C_Contrato.js" />
+    <Content Include="Contratos\Creacion\C_ContratoAjax.aspx" />
+    <Content Include="Contratos\Creacion\C_ContratoTrasaccionsAjax.js" />
+    <Content Include="Contratos\Creacion\C_Contrato_Activos.js" />
+    <Content Include="Contratos\Creacion\C_Contrato_Activos_Complementos.js" />
+    <Content Include="Contratos\Creacion\C_Contrato_Activos_Validacion.js" />
+    <Content Include="Contratos\Creacion\C_Contrato_Facturas.js" />
+    <Content Include="Contratos\Creacion\C_Contrato_JSON.js" />
+    <Content Include="Contratos\menu.js" />
+    <Content Include="Contratos\SasifMaster_Cosult.js" />
+    <Content Include="css\Chosen\chosen-sprite%402x.png" />
+    <Content Include="css\Chosen\chosen-sprite.png" />
+    <Content Include="css\Chosen\chosen.css" />
+    <Content Include="css\Chosen\chosen.png" />
+    <Content Include="css\Chosen\oss-credit.png" />
+    <Content Include="css\Chosen\prism.css" />
+    <Content Include="css\Chosen\style.css" />
+    <Content Include="css\css_controles.css" />
+    <Content Include="css\css_form.css" />
+    <Content Include="css\css_login.css" />
+    <Content Include="css\css_master.css" />
+    <Content Include="css\css_master_Ing.css" />
+    <Content Include="css\css_menu.css" />
+    <Content Include="css\css_WebAcceso.css" />
+    <Content Include="css\custom\charge.css" />
+    <Content Include="css\custom\Control_Sasif.css" />
+    <Content Include="css\datatables\images\back_disabled.png" />
+    <Content Include="css\datatables\images\back_enabled.png" />
+    <Content Include="css\datatables\images\back_enabled_hover.png" />
+    <Content Include="css\datatables\images\favicon.ico" />
+    <Content Include="css\datatables\images\forward_disabled.png" />
+    <Content Include="css\datatables\images\forward_enabled.png" />
+    <Content Include="css\datatables\images\forward_enabled_hover.png" />
+    <Content Include="css\datatables\images\sort_asc.png" />
+    <Content Include="css\datatables\images\sort_asc_disabled.png" />
+    <Content Include="css\datatables\images\sort_both.png" />
+    <Content Include="css\datatables\images\sort_desc.png" />
+    <Content Include="css\datatables\images\sort_desc_disabled.png" />
+    <Content Include="css\datatables\jquery.dataTables.css" />
+    <Content Include="css\datatables\jquery.dataTables_themeroller.css" />
+    <Content Include="css\Dialog\images\animated-overlay.gif" />
+    <Content Include="css\Dialog\images\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="css\Dialog\images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="css\Dialog\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="css\Dialog\images\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="css\Dialog\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="css\Dialog\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="css\Dialog\images\ui-icons_217bc0_256x240.png" />
+    <Content Include="css\Dialog\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="css\Dialog\images\ui-icons_469bdd_256x240.png" />
+    <Content Include="css\Dialog\images\ui-icons_6da8d5_256x240.png" />
+    <Content Include="css\Dialog\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="css\Dialog\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="css\Dialog\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="css\Dialog\jquery-ui-1.10.4.custom.css" />
+    <Content Include="css\Dialog\jquery-ui.css" />
+    <Content Include="css\icons\arrow_down.png" />
+    <Content Include="css\icons\arrow_right.png" />
+    <Content Include="css\icons\folder.png" />
+    <Content Include="css\icons\right1.png" />
+    <Content Include="css\PIE.htc" />
+    <Content Include="Documentos\AutorizacionDocumentos\AutorizacionDocumentos.aspx" />
+    <Content Include="Documentos\AutorizacionDocumentos\AutorizacionDocumentos.js" />
+    <Content Include="Documentos\AutorizacionDocumentos\AutorizacionDocumentosAjax.aspx" />
+    <Content Include="Documentos\AutorizacionDocumentos\AutorizacionDocumentosTrasaccionsAjax.js" />
+    <Content Include="Documentos\Consecutivos\Consecutivos.aspx" />
+    <Content Include="Documentos\Consecutivos\Consecutivos.js" />
+    <Content Include="Documentos\Consecutivos\ConsecutivosAjax.aspx" />
+    <Content Include="Documentos\Consecutivos\ConsecutivosTrasaccionsAjax.js" />
+    <Content Include="Documentos\Consecutivos\Consecutivos_General.aspx" />
+    <Content Include="Documentos\Consecutivos\Consecutivos_General.js" />
+    <Content Include="Documentos\Crud_Doc\Crud_Doc.aspx" />
+    <Content Include="Documentos\Crud_Doc\Crud_Doc.js" />
+    <Content Include="Documentos\Crud_Doc\Crud_DocAjax.aspx" />
+    <Content Include="Documentos\Crud_Doc\Crud_DocTrasaccionsAjax.js" />
+    <Content Include="Documentos\Documento\Documento.aspx" />
+    <Content Include="Documentos\Documento\Documento.js" />
+    <Content Include="Documentos\Documento\DocumentoAjax.aspx" />
+    <Content Include="Documentos\Documento\DocumentoTrasaccionsAjax.js" />
+    <Content Include="Documentos\GrpDocumentos\GrpDocumentos.aspx" />
+    <Content Include="Documentos\GrpDocumentos\GrpDocumentos.js" />
+    <Content Include="Documentos\GrpDocumentos\GrpDocumentosAjax.aspx" />
+    <Content Include="Documentos\GrpDocumentos\GrpDocumentosTrasaccionsAjax.js" />
+    <Content Include="Documentos\menu.js" />
+    <Content Include="Documentos\RDoc_Verificacion\RDoc_Verificacion.aspx" />
+    <Content Include="Documentos\RDoc_Verificacion\RDoc_Verificacion.js" />
+    <Content Include="Documentos\RDoc_Verificacion\RDoc_VerificacionAjax.aspx" />
+    <Content Include="Documentos\RDoc_Verificacion\RDoc_VerificacionTrasaccionsAjax.js" />
+    <Content Include="Documentos\RGrpDoc_Doc\RGrpDoc_Doc.aspx" />
+    <Content Include="Documentos\RGrpDoc_Doc\RGrpDoc_Doc.js" />
+    <Content Include="Documentos\RGrpDoc_Doc\RGrpDoc_DocAjax.aspx" />
+    <Content Include="Documentos\RGrpDoc_Doc\RGrpDoc_DocTrasaccionsAjax.js" />
+    <Content Include="Documentos\RutaDocumentos\RutaDocumentos.aspx" />
+    <Content Include="Documentos\RutaDocumentos\RutaDocumentos.js" />
+    <Content Include="Documentos\RutaDocumentos\RutaDocumentosAjax.aspx" />
+    <Content Include="Documentos\RutaDocumentos\RutaDocumentosTrasaccionsAjax.js" />
+    <Content Include="Documentos\SasifMaster_Cosult.js" />
+    <Content Include="Factura\menu.js" />
+    <Content Include="Factura\SasifMaster_Cosult.js" />
+    <Content Include="Files_Dowload\DowloadEnroller.aspx" />
+    <Content Include="Files_Dowload\EnrollerSetup.exe" />
+    <Content Include="Global.asax" />
+    <Content Include="Huellas\Creacion\Huellas.aspx" />
+    <Content Include="Huellas\Creacion\Huellas.js" />
+    <Content Include="Huellas\Creacion\HuellasAjax.aspx" />
+    <Content Include="Huellas\Creacion\HuellasTrasaccionsAjax.js" />
+    <Content Include="Huellas\menu.js" />
+    <Content Include="Huellas\SasifMaster_Cosult.js" />
+    <Content Include="Images\add.png" />
+    <Content Include="Images\adress_book.png" />
+    <Content Include="Images\adress_book_w.png" />
+    <Content Include="Images\agenda.png" />
+    <Content Include="Images\agenda_gray.png" />
+    <Content Include="Images\alert.png" />
+    <Content Include="Images\avatar.png" />
+    <Content Include="Images\bank.png" />
+    <Content Include="Images\bank_w.png" />
+    <Content Include="Images\Cliente_Gray.png" />
+    <Content Include="Images\Cliente_Red.png" />
+    <Content Include="Images\C_GREEN.png" />
+    <Content Include="Images\C_RED.png" />
+    <Content Include="Images\C_YELLOW.png" />
+    <Content Include="Images\Delete.png" />
+    <Content Include="Images\DeleteOver.png" />
+    <Content Include="Images\documentos.png" />
+    <Content Include="Images\documentos_w.png" />
+    <Content Include="Images\Editar1.png" />
+    <Content Include="Images\EditarOver.png" />
+    <Content Include="Images\error.png" />
+    <Content Include="Images\error_2.png" />
+    <Content Include="Images\Folder_Gray.png" />
+    <Content Include="Images\Folder_Red.png" />
+    <Content Include="Images\logo.png" />
+    <Content Include="Images\logo_2.png" />
+    <Content Include="Images\LOOK_BLACK.png" />
+    <Content Include="Images\LOOK_WHITE.png" />
+    <Content Include="Images\manos_dedos.png" />
+    <Content Include="Images\Menu_Gray.png" />
+    <Content Include="Images\Menu_Red.png" />
+    <Content Include="Images\Menu_White.png" />
+    <Content Include="Images\N_Search_Black.png" />
+    <Content Include="Images\N_Search_Red.png" />
+    <Content Include="Images\old\add.png" />
+    <Content Include="Images\old\adress_book.png" />
+    <Content Include="Images\old\alert.png" />
+    <Content Include="Images\old\bank.png" />
+    <Content Include="Images\old\cabeza2.jpg" />
+    <Content Include="Images\old\Descarga.png" />
+    <Content Include="Images\old\DocAuto.png" />
+    <Content Include="Images\old\documentos.png" />
+    <Content Include="Images\old\error.png" />
+    <Content Include="Images\old\error_2.png" />
+    <Content Include="Images\old\file.jpg" />
+    <Content Include="Images\old\fondo1.jpg" />
+    <Content Include="Images\old\fondo11.jpg" />
+    <Content Include="Images\old\logo-actual.png" />
+    <Content Include="Images\old\logo_old.png" />
+    <Content Include="Images\old\menu1.jpg" />
+    <Content Include="Images\old\menu2.jpg" />
+    <Content Include="Images\old\menu3.jpg" />
+    <Content Include="Images\old\menu4.jpg" />
+    <Content Include="Images\old\relations.png" />
+    <Content Include="Images\old\sasif1.gif" />
+    <Content Include="Images\old\search.png" />
+    <Content Include="Images\old\success.png" />
+    <Content Include="Images\old\user.png" />
+    <Content Include="Images\old\validation.png" />
+    <Content Include="Images\Phone_Gray.png" />
+    <Content Include="Images\Phone_Red.png" />
+    <Content Include="Images\question.png" />
+    <Content Include="Images\Relations.gif" />
+    <Content Include="Images\Relation_Gray.png" />
+    <Content Include="Images\Relation_Red.png" />
+    <Content Include="Images\SASIF_NEW.png" />
+    <Content Include="Images\SASIF_NEW_WHITE.png" />
+    <Content Include="Images\search.png" />
+    <Content Include="Images\settings.png" />
+    <Content Include="Images\success.png" />
+    <Content Include="Images\waiting.png" />
+    <Content Include="Impuestos\Impuesto_Gasto\Impuesto_Gasto.aspx" />
+    <Content Include="Impuestos\Impuesto_Gasto\Impuesto_Gasto.js" />
+    <Content Include="Impuestos\Impuesto_Gasto\Impuesto_GastoAjax.aspx" />
+    <Content Include="Impuestos\Impuesto_Gasto\Impuesto_GastoTrasaccionsAjax.js" />
+    <Content Include="Impuestos\Inf_Impuesto\Inf_Impuesto.aspx" />
+    <Content Include="Impuestos\Inf_Impuesto\Inf_Impuesto.js" />
+    <Content Include="Impuestos\Inf_Impuesto\Inf_ImpuestoAjax.aspx" />
+    <Content Include="Impuestos\Inf_Impuesto\Inf_ImpuestoTrasaccionsAjax.js" />
+    <Content Include="Impuestos\Inf_Impuesto\Inf_Impuesto_Cliente.js" />
+    <Content Include="Impuestos\menu.js" />
+    <Content Include="Impuestos\Porcen_Descuentos\Porcen_Descuentos.aspx" />
+    <Content Include="Impuestos\Porcen_Descuentos\Porcen_DescuentosAjax.aspx" />
+    <Content Include="Impuestos\Porcen_Descuentos\Porcen_DescuentosTrasaccionsAjax_New.js" />
+    <Content Include="Impuestos\Porcen_Descuentos\Porcen_Descuentos_New.js" />
+    <Content Include="Impuestos\SasifMaster_Cosult.js" />
+    <Content Include="Ingreso_New\Entrada\Ingreso.aspx" />
+    <Content Include="Ingreso_New\Entrada\Ingreso.js" />
+    <Content Include="Ingreso_New\Entrada\IngresoAjax.aspx" />
+    <Content Include="Ingreso_New\Entrada\IngresoTrasaccionsAjax.js" />
+    <Content Include="Ingreso_New\Entrada\Ingreso_Tarjeta.js" />
+    <Content Include="Ingreso_New\menu.js" />
+    <Content Include="Ingreso_New\Salida\Salida.aspx" />
+    <Content Include="Ingreso_New\Salida\Salida.js" />
+    <Content Include="Ingreso_New\Salida\SalidaAjax.aspx" />
+    <Content Include="Ingreso_New\Salida\SalidaTrasaccionsAjax.js" />
+    <Content Include="Ingreso_New\Salida\Salida_Tarjeta.js" />
+    <Content Include="Ingreso_New\SasifMaster_Cosult.js" />
+    <Content Include="login\CambioPassword.aspx" />
+    <Content Include="login\CambioPassword.js" />
+    <Content Include="login\CambioPasswordAjax.aspx" />
+    <Content Include="login\Login.aspx" />
+    <Content Include="login\Login.js" />
+    <Content Include="login\LoginAjax.aspx" />
+    <Content Include="login\LoginTransaccionsAjax.js" />
+    <Content Include="Master\Sasif_Ing.js" />
+    <Content Include="Menu\menu.aspx" />
+    <Content Include="Menu\menu.js" />
+    <Content Include="Menu\menuAjax.aspx" />
+    <Content Include="Menu\SasifMaster_Cosult.js" />
+    <Content Include="Parametros\Area\Area.aspx" />
+    <Content Include="Parametros\Area\Area.js" />
+    <Content Include="Parametros\Area\AreaAjax.aspx" />
+    <Content Include="Parametros\Area\AreaTrasaccionsAjax.js" />
+    <Content Include="Parametros\Ayudas\Ayudas.aspx" />
+    <Content Include="Parametros\Ayudas\Ayudas.js" />
+    <Content Include="Parametros\Ayudas\AyudasAjax.aspx" />
+    <Content Include="Parametros\Ayudas\AyudasTrasaccionsAjax.js" />
+    <Content Include="Parametros\Calendario\Calendario.aspx" />
+    <Content Include="Parametros\Calendario\Calendario.js" />
+    <Content Include="Parametros\Calendario\CalendarioAjax.aspx" />
+    <Content Include="Parametros\Calendario\CalendarioProgresivo.js" />
+    <Content Include="Parametros\Calendario\CalendarioTrasaccionsAjax.js" />
+    <Content Include="Parametros\Cargo\Cargo.aspx" />
+    <Content Include="Parametros\Cargo\Cargo.js" />
+    <Content Include="Parametros\Cargo\CargoAjax.aspx" />
+    <Content Include="Parametros\Cargo\CargoTrasaccionsAjax.js" />
+    <Content Include="Parametros\Ciclo\Ciclo.aspx" />
+    <Content Include="Parametros\Ciclo\Ciclo.js" />
+    <Content Include="Parametros\Ciclo\CicloAjax.aspx" />
+    <Content Include="Parametros\Ciclo\CicloTrasaccionsAjax.js" />
+    <Content Include="Parametros\Ciudades\Ciudades.aspx" />
+    <Content Include="Parametros\Ciudades\Ciudades.js" />
+    <Content Include="Parametros\Ciudades\CiudadesAjax.aspx" />
+    <Content Include="Parametros\Ciudades\CiudadesTrasaccionsAjax.js" />
+    <Content Include="Parametros\Cliente\Cliente.aspx" />
+    <Content Include="Parametros\Cliente\Cliente.js" />
+    <Content Include="Parametros\Cliente\ClienteAjax.aspx" />
+    <Content Include="Parametros\Cliente\ClienteTrasaccionsAjax.js" />
+    <Content Include="Parametros\Cliente\Cliente_Direccion.js" />
+    <Content Include="Parametros\Cliente\Cliente_Documento.js" />
+    <Content Include="Parametros\Cliente\Cliente_EntFinan.js" />
+    <Content Include="Parametros\Cliente\Cliente_Matrix.js" />
+    <Content Include="Parametros\Cliente\Cliente_Validacion.js" />
+    <Content Include="Parametros\Fasecolda\Fasecolda.aspx" />
+    <Content Include="Parametros\Fasecolda\Fasecolda.js" />
+    <Content Include="Parametros\Fasecolda\FasecoldaAjax.aspx" />
+    <Content Include="Parametros\Fasecolda\FasecoldaTrasaccionsAjax.js" />
+    <Content Include="Parametros\Festivos\Festivos.aspx" />
+    <Content Include="Parametros\Festivos\Festivos.js" />
+    <Content Include="Parametros\Festivos\FestivosAjax.aspx" />
+    <Content Include="Parametros\Festivos\FestivosTrasaccionsAjax.js" />
+    <Content Include="Parametros\Mensajes\Mensajes.aspx" />
+    <Content Include="Parametros\Mensajes\Mensajes.js" />
+    <Content Include="Parametros\Mensajes\MensajesAjax.aspx" />
+    <Content Include="Parametros\Mensajes\MensajesTrasaccionsAjax.js" />
+    <Content Include="Parametros\menu.js" />
+    <Content Include="Parametros\MonedaCod\MonedaCod.aspx" />
+    <Content Include="Parametros\MonedaCod\MonedaCod.js" />
+    <Content Include="Parametros\MonedaCod\MonedaCodAjax.aspx" />
+    <Content Include="Parametros\MonedaCod\MonedaCodTrasaccionsAjax.js" />
+    <Content Include="Parametros\MonedaCot\MonedaCot.aspx" />
+    <Content Include="Parametros\MonedaCot\MonedaCot.js" />
+    <Content Include="Parametros\MonedaCot\MonedaCotAjax.aspx" />
+    <Content Include="Parametros\MonedaCot\MonedaCotTrasaccionsAjax.js" />
+    <Content Include="Parametros\Paises\Paises.aspx" />
+    <Content Include="Parametros\Paises\Paises.js" />
+    <Content Include="Parametros\Paises\PaisesAjax.aspx" />
+    <Content Include="Parametros\Paises\PaisesTrasaccionsAjax.js" />
+    <Content Include="Parametros\Productos\Productos.aspx" />
+    <Content Include="Parametros\Productos\Productos.js" />
+    <Content Include="Parametros\Productos\ProductosAjax.aspx" />
+    <Content Include="Parametros\Productos\ProductosTrasaccionsAjax.js" />
+    <Content Include="Parametros\Relation_Tipo_Subtipo_Activo\Relation_Tipo_Subtipo_Activo.aspx" />
+    <Content Include="Parametros\Relation_Tipo_Subtipo_Activo\Relation_Tipo_Subtipo_Activo.js" />
+    <Content Include="Parametros\Relation_Tipo_Subtipo_Activo\Relation_Tipo_Subtipo_ActivoAjax.aspx" />
+    <Content Include="Parametros\Relation_Tipo_Subtipo_Activo\Relation_Tipo_Subtipo_ActivoTrasaccionsAjax.js" />
+    <Content Include="Parametros\Relation_Tipo_Subtipo_Leasing\Relation_Tipo_Subtipo_Leasing.aspx" />
+    <Content Include="Parametros\Relation_Tipo_Subtipo_Leasing\Relation_Tipo_Subtipo_Leasing.js" />
+    <Content Include="Parametros\Relation_Tipo_Subtipo_Leasing\Relation_Tipo_Subtipo_LeasingAjax.aspx" />
+    <Content Include="Parametros\Relation_Tipo_Subtipo_Leasing\Relation_Tipo_Subtipo_LeasingTrasaccionsAjax.js" />
+    <Content Include="Parametros\SasifMaster_Cosult.js" />
+    <Content Include="Parametros\SubTipoActivo\SubTipoActivo.aspx" />
+    <Content Include="Parametros\SubTipoActivo\SubTipoActivo.js" />
+    <Content Include="Parametros\SubTipoActivo\SubTipoActivoAjax.aspx" />
+    <Content Include="Parametros\SubTipoActivo\SubTipoActivoTrasaccionsAjax.js" />
+    <Content Include="Parametros\SubTipoProduct_Leasing\SubTipoProduct_Leasing.aspx" />
+    <Content Include="Parametros\SubTipoProduct_Leasing\SubTipoProduct_Leasing.js" />
+    <Content Include="Parametros\SubTipoProduct_Leasing\SubTipoProduct_LeasingAjax.aspx" />
+    <Content Include="Parametros\SubTipoProduct_Leasing\SubTipoProduct_LeasingTrasaccionsAjax.js" />
+    <Content Include="Parametros\Sucursal\Sucursal.aspx" />
+    <Content Include="Parametros\Sucursal\Sucursal.js" />
+    <Content Include="Parametros\Sucursal\SucursalAjax.aspx" />
+    <Content Include="Parametros\Sucursal\SucursalTrasaccionsAjax.js" />
+    <Content Include="Parametros\TipoActivo\TipoActivo.aspx" />
+    <Content Include="Parametros\TipoActivo\TipoActivo.js" />
+    <Content Include="Parametros\TipoActivo\TipoActivoAjax.aspx" />
+    <Content Include="Parametros\TipoActivo\TipoActivoTrasaccionsAjax.js" />
+    <Content Include="Parametros\TipoProduct_Leasing\TipoProduct_Leasing.aspx" />
+    <Content Include="Parametros\TipoProduct_Leasing\TipoProduct_Leasing.js" />
+    <Content Include="Parametros\TipoProduct_Leasing\TipoProduct_LeasingAjax.aspx" />
+    <Content Include="Parametros\TipoProduct_Leasing\TipoProduct_LeasingTrasaccionsAjax.js" />
+    <Content Include="Parametros\Transacciones\Transacciones.aspx" />
+    <Content Include="Parametros\Transacciones\Transacciones.js" />
+    <Content Include="Parametros\Transacciones\TransaccionesAjax.aspx" />
+    <Content Include="Parametros\Transacciones\TransaccionesTrasaccionsAjax.js" />
+    <Content Include="procesos_generales\SasifMasterAjax.aspx" />
+    <Content Include="SasifMaster.js" />
+    <Content Include="SasifMaster_Cosult.js" />
+    <Content Include="Scripts\Chosen\chosen.jquery.js" />
+    <Content Include="Scripts\Chosen\chosen.jquery.min.js" />
+    <Content Include="Scripts\Chosen\prism.js" />
+    <Content Include="Scripts\Dialog\datepicker.js" />
+    <Content Include="Scripts\Dialog\jquery-1.10.2.js" />
+    <Content Include="Scripts\Dialog\jquery-ui-1.10.4.custom.js" />
+    <Content Include="Scripts\Dialog\jquery-ui-1.10.4.custom.min.js" />
+    <Content Include="Scripts\Dialog\jquery-ui.js" />
+    <Content Include="Scripts\Dialog\timepicker.js" />
+    <Content Include="Sasif.Master" />
+    <Content Include="Activos\Sasif_menu.Master" />
+    <Content Include="Factura\Sasif_menu.Master" />
+    <Content Include="Ingreso_New\Sasif_menu.Master" />
+    <Content Include="Agendamiento\Sasif_menu.Master" />
+    <Content Include="Huellas\Sasif_menu.Master" />
+    <Content Include="Impuestos\Sasif_menu.Master" />
+    <None Include="Scripts\jquery-1.4.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.4.1.js" />
+    <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="Scripts\jquery-1.6.4.min.js" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\jquery.dataTables.min.js" />
+    <Content Include="Scripts\jquery.fileupload.js" />
+    <Content Include="Scripts\jquery.js" />
+    <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\Refresh.js" />
+    <Content Include="Scripts\WebForms\DetailsView.js" />
+    <Content Include="Scripts\WebForms\Focus.js" />
+    <Content Include="Scripts\WebForms\GridView.js" />
+    <Content Include="Scripts\WebForms\Menu.js" />
+    <Content Include="Scripts\WebForms\MenuStandards.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjax.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxApplicationServices.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxComponentModel.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxCore.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxGlobalization.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxHistory.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxNetwork.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxSerialization.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxTimer.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebForms.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebServices.js" />
+    <Content Include="Scripts\WebForms\SmartNav.js" />
+    <Content Include="Scripts\WebForms\TreeView.js" />
+    <Content Include="Scripts\WebForms\WebForms.js" />
+    <Content Include="Scripts\WebForms\WebParts.js" />
+    <Content Include="Scripts\WebForms\WebUIValidation.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\Thumbs.db" />
+    <Content Include="Master\Sasif_Ing.Master" />
+    <Content Include="Menu\Sasif_menu.Master" />
+    <Content Include="Parametros\Sasif_menu.Master" />
+    <Content Include="Administrador\Sasif_menu.Master" />
+    <Content Include="Contratos\Sasif_menu.Master" />
+    <Content Include="css\Chosen\Thumbs.db" />
+    <Content Include="css\datatables\images\Sorting icons.psd" />
+    <Content Include="css\datatables\images\Thumbs.db" />
+    <Content Include="Documentos\Sasif_menu.Master" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Activos\Creacion\C_Activos.aspx.designer.vb">
+      <DependentUpon>C_Activos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Activos\Creacion\C_Activos.aspx.vb">
+      <DependentUpon>C_Activos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Activos\Creacion\C_ActivosAjax.aspx.designer.vb">
+      <DependentUpon>C_ActivosAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Activos\Creacion\C_ActivosAjax.aspx.vb">
+      <DependentUpon>C_ActivosAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Activos\Creacion\C_ActivosClass.vb" />
+    <Compile Include="Activos\Creacion\C_ActivosSQLClass.vb" />
+    <Compile Include="Activos\Vehiculos\VehiculosClass.vb" />
+    <Compile Include="Activos\Vehiculos\VehiculosSQLClass.vb" />
+    <Compile Include="Administrador\Adm_C_AccesoPrede\C_AccesoPre.aspx.designer.vb">
+      <DependentUpon>C_AccesoPre.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Adm_C_AccesoPrede\C_AccesoPre.aspx.vb">
+      <DependentUpon>C_AccesoPre.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Adm_C_AccesoPrede\C_AccesoPreAjax.aspx.designer.vb">
+      <DependentUpon>C_AccesoPreAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Adm_C_AccesoPrede\C_AccesoPreAjax.aspx.vb">
+      <DependentUpon>C_AccesoPreAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Adm_C_AccesoPrede\C_AccesoPreClass.vb" />
+    <Compile Include="Administrador\Adm_C_AccesoPrede\C_AccesoPreSQLClass.vb" />
+    <Compile Include="Administrador\Adm_Grupo_Documentos\Adm_Grupo_DocumentosClass.vb" />
+    <Compile Include="Administrador\Adm_Grupo_Documentos\Adm_Grupo_DocumentosSQLClass.vb" />
+    <Compile Include="Administrador\Adm_Grupo_Reportes\Adm_Grupo_ReportesClass.vb" />
+    <Compile Include="Administrador\Adm_Grupo_Reportes\Adm_Grupo_ReportesSQLClass.vb" />
+    <Compile Include="Administrador\Adm_InvPuerta\InvPuerta.aspx.designer.vb">
+      <DependentUpon>InvPuerta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Adm_InvPuerta\InvPuerta.aspx.vb">
+      <DependentUpon>InvPuerta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Adm_InvPuerta\InvPuertaAjax.aspx.designer.vb">
+      <DependentUpon>InvPuertaAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Adm_InvPuerta\InvPuertaAjax.aspx.vb">
+      <DependentUpon>InvPuertaAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Adm_InvPuerta\InvPuertaClass.vb" />
+    <Compile Include="Administrador\Adm_InvPuerta\InvPuertaSQLClass.vb" />
+    <Compile Include="Administrador\Adm_links\Adm_Links.aspx.designer.vb">
+      <DependentUpon>Adm_Links.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Adm_links\Adm_Links.aspx.vb">
+      <DependentUpon>Adm_Links.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Adm_links\Adm_LinksAjax.aspx.designer.vb">
+      <DependentUpon>Adm_LinksAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Adm_links\Adm_LinksAjax.aspx.vb">
+      <DependentUpon>Adm_LinksAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Adm_links\Adm_LinksClass.vb" />
+    <Compile Include="Administrador\Adm_links\Adm_LinksSQLClass.vb" />
+    <Compile Include="Administrador\Adm_opcrol\Adm_OpcRol.aspx.designer.vb">
+      <DependentUpon>Adm_OpcRol.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Adm_opcrol\Adm_OpcRol.aspx.vb">
+      <DependentUpon>Adm_OpcRol.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Adm_opcrol\Adm_OpcRolAjax.aspx.designer.vb">
+      <DependentUpon>Adm_OpcRolAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Adm_opcrol\Adm_OpcRolAjax.aspx.vb">
+      <DependentUpon>Adm_OpcRolAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Adm_opcrol\Adm_OpcRolClass.vb" />
+    <Compile Include="Administrador\Adm_opcrol\Adm_OpcRolSQLClass.vb" />
+    <Compile Include="Administrador\Adm_Politicas_Seguridad\Adm_Politicas_SeguridadClass.vb" />
+    <Compile Include="Administrador\Adm_Politicas_Seguridad\Adm_Politicas_SeguridadSQLClass.vb" />
+    <Compile Include="Administrador\Adm_PuertaAcceso\PuertaAcceso.aspx.designer.vb">
+      <DependentUpon>PuertaAcceso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Adm_PuertaAcceso\PuertaAcceso.aspx.vb">
+      <DependentUpon>PuertaAcceso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Adm_PuertaAcceso\PuertaAccesoAjax.aspx.designer.vb">
+      <DependentUpon>PuertaAccesoAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Adm_PuertaAcceso\PuertaAccesoAjax.aspx.vb">
+      <DependentUpon>PuertaAccesoAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Adm_PuertaAcceso\PuertaAccesoClass.vb" />
+    <Compile Include="Administrador\Adm_PuertaAcceso\PuertaAccesoSQLClass.vb" />
+    <Compile Include="Administrador\Adm_ResetUser\Adm_ResetUser.aspx.designer.vb">
+      <DependentUpon>Adm_ResetUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Adm_ResetUser\Adm_ResetUser.aspx.vb">
+      <DependentUpon>Adm_ResetUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Adm_ResetUser\Adm_ResetUserAjax.aspx.designer.vb">
+      <DependentUpon>Adm_ResetUserAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Adm_ResetUser\Adm_ResetUserAjax.aspx.vb">
+      <DependentUpon>Adm_ResetUserAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Adm_roles\Adm_Roles.aspx.designer.vb">
+      <DependentUpon>Adm_Roles.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Adm_roles\Adm_Roles.aspx.vb">
+      <DependentUpon>Adm_Roles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Adm_roles\Adm_RolesAjax.aspx.designer.vb">
+      <DependentUpon>Adm_RolesAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Adm_roles\Adm_RolesAjax.aspx.vb">
+      <DependentUpon>Adm_RolesAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Adm_roles\Adm_RolesClass.vb" />
+    <Compile Include="Administrador\Adm_roles\Adm_RolesSQLClass.vb" />
+    <Compile Include="Administrador\Adm_R_Persona_Tarjeta\BloqueoTarjeta.aspx.designer.vb">
+      <DependentUpon>BloqueoTarjeta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Adm_R_Persona_Tarjeta\BloqueoTarjeta.aspx.vb">
+      <DependentUpon>BloqueoTarjeta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Adm_R_Persona_Tarjeta\ConsultaTarjeta.aspx.designer.vb">
+      <DependentUpon>ConsultaTarjeta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Adm_R_Persona_Tarjeta\ConsultaTarjeta.aspx.vb">
+      <DependentUpon>ConsultaTarjeta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Adm_R_Persona_Tarjeta\Des_BloqueoTarjeta.aspx.designer.vb">
+      <DependentUpon>Des_BloqueoTarjeta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Adm_R_Persona_Tarjeta\Des_BloqueoTarjeta.aspx.vb">
+      <DependentUpon>Des_BloqueoTarjeta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Adm_R_Persona_Tarjeta\EntregaTarjeta.aspx.designer.vb">
+      <DependentUpon>EntregaTarjeta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Adm_R_Persona_Tarjeta\EntregaTarjeta.aspx.vb">
+      <DependentUpon>EntregaTarjeta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Adm_R_Persona_Tarjeta\R_Persona_Tarjeta.aspx.designer.vb">
+      <DependentUpon>R_Persona_Tarjeta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Adm_R_Persona_Tarjeta\R_Persona_Tarjeta.aspx.vb">
+      <DependentUpon>R_Persona_Tarjeta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Adm_R_Persona_Tarjeta\R_Persona_TarjetaAjax.aspx.designer.vb">
+      <DependentUpon>R_Persona_TarjetaAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Adm_R_Persona_Tarjeta\R_Persona_TarjetaAjax.aspx.vb">
+      <DependentUpon>R_Persona_TarjetaAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Adm_R_Persona_Tarjeta\R_Persona_TarjetaClass.vb" />
+    <Compile Include="Administrador\Adm_R_Persona_Tarjeta\R_Persona_TarjetaSQLClass.vb" />
+    <Compile Include="Administrador\Adm_R_PuertaAcc_Area\R_PuertaAcc_Area.aspx.designer.vb">
+      <DependentUpon>R_PuertaAcc_Area.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Adm_R_PuertaAcc_Area\R_PuertaAcc_Area.aspx.vb">
+      <DependentUpon>R_PuertaAcc_Area.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Adm_R_PuertaAcc_Area\R_PuertaAcc_AreaAjax.aspx.designer.vb">
+      <DependentUpon>R_PuertaAcc_AreaAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Adm_R_PuertaAcc_Area\R_PuertaAcc_AreaAjax.aspx.vb">
+      <DependentUpon>R_PuertaAcc_AreaAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Adm_R_PuertaAcc_Area\R_PuertaAcc_AreaClass.vb" />
+    <Compile Include="Administrador\Adm_R_PuertaAcc_Area\R_PuertaAcc_AreaSQLClass.vb" />
+    <Compile Include="Administrador\Adm_Usuario\Adm_Usuario.aspx.designer.vb">
+      <DependentUpon>Adm_Usuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Adm_Usuario\Adm_Usuario.aspx.vb">
+      <DependentUpon>Adm_Usuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Adm_Usuario\Adm_UsuarioAjax.aspx.designer.vb">
+      <DependentUpon>Adm_UsuarioAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\Adm_Usuario\Adm_UsuarioAjax.aspx.vb">
+      <DependentUpon>Adm_UsuarioAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\Adm_Usuario\Adm_UsuarioClass.vb" />
+    <Compile Include="Administrador\Adm_Usuario\Adm_UsuarioSQLClass.vb" />
+    <Compile Include="Agendamiento\CalendarioSemana\CalendarioSemanaClass.vb" />
+    <Compile Include="Agendamiento\CalendarioSemana\CalendarioSemanaSQLClass.vb" />
+    <Compile Include="Agendamiento\SucursalServicio\SucursalServicio.aspx.designer.vb">
+      <DependentUpon>SucursalServicio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Agendamiento\SucursalServicio\SucursalServicio.aspx.vb">
+      <DependentUpon>SucursalServicio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Agendamiento\SucursalServicio\SucursalServicioAjax.aspx.designer.vb">
+      <DependentUpon>SucursalServicioAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Agendamiento\SucursalServicio\SucursalServicioAjax.aspx.vb">
+      <DependentUpon>SucursalServicioAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Agendamiento\SucursalServicio\SucursalServicioClass.vb" />
+    <Compile Include="Agendamiento\SucursalServicio\SucursalServicioSQLClass.vb" />
+    <Compile Include="Agendamiento\TipoServicio\TipoServicio.aspx.designer.vb">
+      <DependentUpon>TipoServicio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Agendamiento\TipoServicio\TipoServicio.aspx.vb">
+      <DependentUpon>TipoServicio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Agendamiento\TipoServicio\TipoServicioAjax.aspx.designer.vb">
+      <DependentUpon>TipoServicioAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Agendamiento\TipoServicio\TipoServicioAjax.aspx.vb">
+      <DependentUpon>TipoServicioAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Agendamiento\TipoServicio\TipoServicioClass.vb" />
+    <Compile Include="Agendamiento\TipoServicio\TipoServicioSQLClass.vb" />
+    <Compile Include="conexion_BD\Conector.vb" />
+    <Compile Include="Contratos\Creacion\C_Contrato.aspx.designer.vb">
+      <DependentUpon>C_Contrato.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contratos\Creacion\C_Contrato.aspx.vb">
+      <DependentUpon>C_Contrato.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contratos\Creacion\C_ContratoAjax.aspx.designer.vb">
+      <DependentUpon>C_ContratoAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contratos\Creacion\C_ContratoAjax.aspx.vb">
+      <DependentUpon>C_ContratoAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contratos\Creacion\C_ContratoClass.vb" />
+    <Compile Include="Contratos\Creacion\C_ContratoSQLClass.vb" />
+    <Compile Include="Documentos\AsociacionDocumentos\AsociacionDocumentosClass.vb" />
+    <Compile Include="Documentos\AsociacionDocumentos\AsociacionDocumentosSQLClass.vb" />
+    <Compile Include="Documentos\AutorizacionDocumentos\AutorizacionDocumentos.aspx.designer.vb">
+      <DependentUpon>AutorizacionDocumentos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentos\AutorizacionDocumentos\AutorizacionDocumentos.aspx.vb">
+      <DependentUpon>AutorizacionDocumentos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentos\AutorizacionDocumentos\AutorizacionDocumentosAjax.aspx.designer.vb">
+      <DependentUpon>AutorizacionDocumentosAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentos\AutorizacionDocumentos\AutorizacionDocumentosAjax.aspx.vb">
+      <DependentUpon>AutorizacionDocumentosAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentos\AutorizacionDocumentos\AutorizacionDocumentosClass.vb" />
+    <Compile Include="Documentos\AutorizacionDocumentos\AutorizacionDocumentosSQLClass.vb" />
+    <Compile Include="Documentos\Consecutivos\Consecutivos.aspx.designer.vb">
+      <DependentUpon>Consecutivos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentos\Consecutivos\Consecutivos.aspx.vb">
+      <DependentUpon>Consecutivos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentos\Consecutivos\ConsecutivosAjax.aspx.designer.vb">
+      <DependentUpon>ConsecutivosAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentos\Consecutivos\ConsecutivosAjax.aspx.vb">
+      <DependentUpon>ConsecutivosAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentos\Consecutivos\ConsecutivosClass.vb" />
+    <Compile Include="Documentos\Consecutivos\ConsecutivosSQLClass.vb" />
+    <Compile Include="Documentos\Consecutivos\Consecutivos_General.aspx.designer.vb">
+      <DependentUpon>Consecutivos_General.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentos\Consecutivos\Consecutivos_General.aspx.vb">
+      <DependentUpon>Consecutivos_General.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentos\Crud_Doc\Crud_Doc.aspx.designer.vb">
+      <DependentUpon>Crud_Doc.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentos\Crud_Doc\Crud_Doc.aspx.vb">
+      <DependentUpon>Crud_Doc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentos\Crud_Doc\Crud_DocAjax.aspx.designer.vb">
+      <DependentUpon>Crud_DocAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentos\Crud_Doc\Crud_DocAjax.aspx.vb">
+      <DependentUpon>Crud_DocAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentos\Crud_Doc\Crud_DocClass.vb" />
+    <Compile Include="Documentos\Crud_Doc\Crud_DocSQLClass.vb" />
+    <Compile Include="Documentos\DocumentosExistentes\DocumentosExistentesClass.vb" />
+    <Compile Include="Documentos\DocumentosExistentes\DocumentosExistentesSQLClass.vb" />
+    <Compile Include="Documentos\Documento\Documento.aspx.designer.vb">
+      <DependentUpon>Documento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentos\Documento\Documento.aspx.vb">
+      <DependentUpon>Documento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentos\Documento\DocumentoAjax.aspx.designer.vb">
+      <DependentUpon>DocumentoAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentos\Documento\DocumentoAjax.aspx.vb">
+      <DependentUpon>DocumentoAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentos\Documento\DocumentoClass.vb" />
+    <Compile Include="Documentos\Documento\DocumentoSQLClass.vb" />
+    <Compile Include="Documentos\GrpDocumentos\GrpDocumentos.aspx.designer.vb">
+      <DependentUpon>GrpDocumentos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentos\GrpDocumentos\GrpDocumentos.aspx.vb">
+      <DependentUpon>GrpDocumentos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentos\GrpDocumentos\GrpDocumentosAjax.aspx.designer.vb">
+      <DependentUpon>GrpDocumentosAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentos\GrpDocumentos\GrpDocumentosAjax.aspx.vb">
+      <DependentUpon>GrpDocumentosAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentos\GrpDocumentos\GrpDocumentosClass.vb" />
+    <Compile Include="Documentos\GrpDocumentos\GrpDocumentosSQLClass.vb" />
+    <Compile Include="Documentos\RDoc_Verificacion\RDoc_Verificacion.aspx.designer.vb">
+      <DependentUpon>RDoc_Verificacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentos\RDoc_Verificacion\RDoc_Verificacion.aspx.vb">
+      <DependentUpon>RDoc_Verificacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentos\RDoc_Verificacion\RDoc_VerificacionAjax.aspx.designer.vb">
+      <DependentUpon>RDoc_VerificacionAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentos\RDoc_Verificacion\RDoc_VerificacionAjax.aspx.vb">
+      <DependentUpon>RDoc_VerificacionAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentos\RDoc_Verificacion\RDoc_VerificacionClass.vb" />
+    <Compile Include="Documentos\RDoc_Verificacion\RDoc_VerificacionSQLClass.vb" />
+    <Compile Include="Documentos\RGrpDoc_Doc\RGrpDoc_Doc.aspx.designer.vb">
+      <DependentUpon>RGrpDoc_Doc.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentos\RGrpDoc_Doc\RGrpDoc_Doc.aspx.vb">
+      <DependentUpon>RGrpDoc_Doc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentos\RGrpDoc_Doc\RGrpDoc_DocAjax.aspx.designer.vb">
+      <DependentUpon>RGrpDoc_DocAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentos\RGrpDoc_Doc\RGrpDoc_DocAjax.aspx.vb">
+      <DependentUpon>RGrpDoc_DocAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentos\RGrpDoc_Doc\RGrpDoc_DocClass.vb" />
+    <Compile Include="Documentos\RGrpDoc_Doc\RGrpDoc_DocSQLClass.vb" />
+    <Compile Include="Documentos\RutaDocumentos\RutaDocumentos.aspx.designer.vb">
+      <DependentUpon>RutaDocumentos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentos\RutaDocumentos\RutaDocumentos.aspx.vb">
+      <DependentUpon>RutaDocumentos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentos\RutaDocumentos\RutaDocumentosAjax.aspx.designer.vb">
+      <DependentUpon>RutaDocumentosAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentos\RutaDocumentos\RutaDocumentosAjax.aspx.vb">
+      <DependentUpon>RutaDocumentosAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentos\RutaDocumentos\RutaDocumentosClass.vb" />
+    <Compile Include="Documentos\RutaDocumentos\RutaDocumentosSQLClass.vb" />
+    <Compile Include="encriptracion\EncriptarClass.vb" />
+    <Compile Include="Factura\Creacion\FacturaClass.vb" />
+    <Compile Include="Factura\Creacion\FacturaSQLClass.vb" />
+    <Compile Include="Files_Dowload\DowloadEnroller.aspx.designer.vb">
+      <DependentUpon>DowloadEnroller.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Files_Dowload\DowloadEnroller.aspx.vb">
+      <DependentUpon>DowloadEnroller.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Files_Dowload\File_DowloadClass.vb" />
+    <Compile Include="Global.asax.vb">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Huellas\Creacion\Huellas.aspx.designer.vb">
+      <DependentUpon>Huellas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Huellas\Creacion\Huellas.aspx.vb">
+      <DependentUpon>Huellas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Huellas\Creacion\HuellasAjax.aspx.designer.vb">
+      <DependentUpon>HuellasAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Huellas\Creacion\HuellasAjax.aspx.vb">
+      <DependentUpon>HuellasAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Huellas\Creacion\HuellasClass.vb" />
+    <Compile Include="Huellas\Creacion\HuellasSQLClass.vb" />
+    <Compile Include="Impuestos\Impuesto_Gasto\Impuesto_Gasto.aspx.designer.vb">
+      <DependentUpon>Impuesto_Gasto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Impuestos\Impuesto_Gasto\Impuesto_Gasto.aspx.vb">
+      <DependentUpon>Impuesto_Gasto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Impuestos\Impuesto_Gasto\Impuesto_GastoAjax.aspx.designer.vb">
+      <DependentUpon>Impuesto_GastoAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Impuestos\Impuesto_Gasto\Impuesto_GastoAjax.aspx.vb">
+      <DependentUpon>Impuesto_GastoAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Impuestos\Impuesto_Gasto\Impuesto_GastoClass.vb" />
+    <Compile Include="Impuestos\Impuesto_Gasto\Impuesto_GastoSQLClass.vb" />
+    <Compile Include="Impuestos\Inf_Impuesto\Inf_Impuesto.aspx.designer.vb">
+      <DependentUpon>Inf_Impuesto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Impuestos\Inf_Impuesto\Inf_Impuesto.aspx.vb">
+      <DependentUpon>Inf_Impuesto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Impuestos\Inf_Impuesto\Inf_ImpuestoAjax.aspx.designer.vb">
+      <DependentUpon>Inf_ImpuestoAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Impuestos\Inf_Impuesto\Inf_ImpuestoAjax.aspx.vb">
+      <DependentUpon>Inf_ImpuestoAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Impuestos\Inf_Impuesto\Inf_ImpuestoClass.vb" />
+    <Compile Include="Impuestos\Inf_Impuesto\Inf_ImpuestoSQLClass.vb" />
+    <Compile Include="Impuestos\Porcen_Descuentos\Porcen_Descuentos.aspx.designer.vb">
+      <DependentUpon>Porcen_Descuentos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Impuestos\Porcen_Descuentos\Porcen_Descuentos.aspx.vb">
+      <DependentUpon>Porcen_Descuentos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Impuestos\Porcen_Descuentos\Porcen_DescuentosAjax.aspx.designer.vb">
+      <DependentUpon>Porcen_DescuentosAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Impuestos\Porcen_Descuentos\Porcen_DescuentosAjax.aspx.vb">
+      <DependentUpon>Porcen_DescuentosAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Impuestos\Porcen_Descuentos\Porcen_DescuentosClass.vb" />
+    <Compile Include="Impuestos\Porcen_Descuentos\Porcen_DescuentosSQLClass.vb" />
+    <Compile Include="Ingreso_New\ControlAcceso\ControlAccesoClass.vb" />
+    <Compile Include="Ingreso_New\ControlAcceso\ControlAccesoSQLClass.vb" />
+    <Compile Include="Ingreso_New\Entrada\Ingreso.aspx.designer.vb">
+      <DependentUpon>Ingreso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ingreso_New\Entrada\Ingreso.aspx.vb">
+      <DependentUpon>Ingreso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ingreso_New\Entrada\IngresoAjax.aspx.designer.vb">
+      <DependentUpon>IngresoAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ingreso_New\Entrada\IngresoAjax.aspx.vb">
+      <DependentUpon>IngresoAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ingreso_New\Entrada\IngresoClass.vb" />
+    <Compile Include="Ingreso_New\Entrada\IngresoSQLClass.vb" />
+    <Compile Include="Ingreso_New\Salida\Salida.aspx.designer.vb">
+      <DependentUpon>Salida.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ingreso_New\Salida\Salida.aspx.vb">
+      <DependentUpon>Salida.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ingreso_New\Salida\SalidaAjax.aspx.designer.vb">
+      <DependentUpon>SalidaAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ingreso_New\Salida\SalidaAjax.aspx.vb">
+      <DependentUpon>SalidaAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="login\CambioPassword.aspx.designer.vb">
+      <DependentUpon>CambioPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="login\CambioPassword.aspx.vb">
+      <DependentUpon>CambioPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="login\CambioPasswordAjax.aspx.designer.vb">
+      <DependentUpon>CambioPasswordAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="login\CambioPasswordAjax.aspx.vb">
+      <DependentUpon>CambioPasswordAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="login\Login.aspx.designer.vb">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="login\Login.aspx.vb">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="login\LoginAjax.aspx.designer.vb">
+      <DependentUpon>LoginAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="login\LoginAjax.aspx.vb">
+      <DependentUpon>LoginAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="login\LoginClass.vb" />
+    <Compile Include="login\LoginSQLClass.vb" />
+    <Compile Include="Master\Sasif_Ing.Master.designer.vb">
+      <DependentUpon>Sasif_Ing.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Master\Sasif_Ing.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Menu\menu.aspx.designer.vb">
+      <DependentUpon>menu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Menu\menu.aspx.vb">
+      <DependentUpon>menu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Menu\menuAjax.aspx.designer.vb">
+      <DependentUpon>menuAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Menu\menuAjax.aspx.vb">
+      <DependentUpon>menuAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Menu\MenuClass.vb" />
+    <Compile Include="Menu\MenuSQLClass.vb" />
+    <Compile Include="Menu\Sasif_menu.Master.designer.vb">
+      <DependentUpon>Sasif_menu.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Menu\Sasif_menu.Master.vb">
+      <DependentUpon>Sasif_menu.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\MyExtensions\MyWebExtension.vb">
+      <VBMyExtensionTemplateID>Microsoft.VisualBasic.Web.MyExtension</VBMyExtensionTemplateID>
+      <VBMyExtensionTemplateVersion>1.0.0.0</VBMyExtensionTemplateVersion>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Parametros\Area\Area.aspx.designer.vb">
+      <DependentUpon>Area.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Area\Area.aspx.vb">
+      <DependentUpon>Area.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Area\AreaAjax.aspx.designer.vb">
+      <DependentUpon>AreaAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Area\AreaAjax.aspx.vb">
+      <DependentUpon>AreaAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Area\AreaClass.vb" />
+    <Compile Include="Parametros\Area\AreaSQLClass.vb" />
+    <Compile Include="Parametros\Ayudas\Ayudas.aspx.designer.vb">
+      <DependentUpon>Ayudas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Ayudas\Ayudas.aspx.vb">
+      <DependentUpon>Ayudas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Ayudas\AyudasAjax.aspx.designer.vb">
+      <DependentUpon>AyudasAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Ayudas\AyudasAjax.aspx.vb">
+      <DependentUpon>AyudasAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Ayudas\AyudasClass.vb" />
+    <Compile Include="Parametros\Ayudas\AyudasSQLClass.vb" />
+    <Compile Include="Parametros\Calendario\Calendario.aspx.designer.vb">
+      <DependentUpon>Calendario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Calendario\Calendario.aspx.vb">
+      <DependentUpon>Calendario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Calendario\CalendarioAjax.aspx.designer.vb">
+      <DependentUpon>CalendarioAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Calendario\CalendarioAjax.aspx.vb">
+      <DependentUpon>CalendarioAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Calendario\CalendarioClass.vb" />
+    <Compile Include="Parametros\Calendario\CalendarioSQLClass.vb" />
+    <Compile Include="Parametros\Cargo\Cargo.aspx.designer.vb">
+      <DependentUpon>Cargo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Cargo\Cargo.aspx.vb">
+      <DependentUpon>Cargo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Cargo\CargoAjax.aspx.designer.vb">
+      <DependentUpon>CargoAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Cargo\CargoAjax.aspx.vb">
+      <DependentUpon>CargoAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Cargo\CargoClass.vb" />
+    <Compile Include="Parametros\Cargo\CargoSQLClass.vb" />
+    <Compile Include="Parametros\Ciclo\Ciclo.aspx.designer.vb">
+      <DependentUpon>Ciclo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Ciclo\Ciclo.aspx.vb">
+      <DependentUpon>Ciclo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Ciclo\CicloAjax.aspx.designer.vb">
+      <DependentUpon>CicloAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Ciclo\CicloAjax.aspx.vb">
+      <DependentUpon>CicloAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Ciclo\CicloClass.vb" />
+    <Compile Include="Parametros\Ciclo\CicloSQLClass.vb" />
+    <Compile Include="Parametros\Ciudades\Ciudades.aspx.designer.vb">
+      <DependentUpon>Ciudades.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Ciudades\Ciudades.aspx.vb">
+      <DependentUpon>Ciudades.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Ciudades\CiudadesAjax.aspx.designer.vb">
+      <DependentUpon>CiudadesAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Ciudades\CiudadesAjax.aspx.vb">
+      <DependentUpon>CiudadesAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Ciudades\CiudadesClass.vb" />
+    <Compile Include="Parametros\Ciudades\CiudadesSQLClass.vb" />
+    <Compile Include="Parametros\Cliente\Cliente.aspx.designer.vb">
+      <DependentUpon>Cliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Cliente\Cliente.aspx.vb">
+      <DependentUpon>Cliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Cliente\ClienteAjax.aspx.designer.vb">
+      <DependentUpon>ClienteAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Cliente\ClienteAjax.aspx.vb">
+      <DependentUpon>ClienteAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Cliente\ClienteClass.vb" />
+    <Compile Include="Parametros\Cliente\ClienteSQLClass.vb" />
+    <Compile Include="Parametros\Colores\ColoresClass.vb" />
+    <Compile Include="Parametros\Colores\ColoresSQLClass.vb" />
+    <Compile Include="Parametros\Financiacion\FinanciacionClass.vb" />
+    <Compile Include="Parametros\Financiacion\FinanciacionSQLClass.vb" />
+    <Compile Include="Parametros\Direcciones\DireccionesClass.vb" />
+    <Compile Include="Parametros\Direcciones\DireccionesSQLClass.vb" />
+    <Compile Include="Parametros\Fasecolda\Fasecolda.aspx.designer.vb">
+      <DependentUpon>Fasecolda.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Fasecolda\Fasecolda.aspx.vb">
+      <DependentUpon>Fasecolda.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Fasecolda\FasecoldaAjax.aspx.designer.vb">
+      <DependentUpon>FasecoldaAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Fasecolda\FasecoldaAjax.aspx.vb">
+      <DependentUpon>FasecoldaAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Fasecolda\FasecoldaClass.vb" />
+    <Compile Include="Parametros\Fasecolda\FasecoldaSQLClass.vb" />
+    <Compile Include="Parametros\Festivos\Festivos.aspx.designer.vb">
+      <DependentUpon>Festivos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Festivos\Festivos.aspx.vb">
+      <DependentUpon>Festivos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Festivos\FestivosAjax.aspx.designer.vb">
+      <DependentUpon>FestivosAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Festivos\FestivosAjax.aspx.vb">
+      <DependentUpon>FestivosAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Festivos\FestivosClass.vb" />
+    <Compile Include="Parametros\Festivos\FestivosSQLClass.vb" />
+    <Compile Include="Parametros\Mensajes\Mensajes.aspx.designer.vb">
+      <DependentUpon>Mensajes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Mensajes\Mensajes.aspx.vb">
+      <DependentUpon>Mensajes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Mensajes\MensajesAjax.aspx.designer.vb">
+      <DependentUpon>MensajesAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Mensajes\MensajesAjax.aspx.vb">
+      <DependentUpon>MensajesAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Mensajes\MensajesClass.vb" />
+    <Compile Include="Parametros\Mensajes\MensajesSQLClass.vb" />
+    <Compile Include="Parametros\MonedaCod\MonedaCod.aspx.designer.vb">
+      <DependentUpon>MonedaCod.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\MonedaCod\MonedaCod.aspx.vb">
+      <DependentUpon>MonedaCod.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\MonedaCod\MonedaCodAjax.aspx.designer.vb">
+      <DependentUpon>MonedaCodAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\MonedaCod\MonedaCodAjax.aspx.vb">
+      <DependentUpon>MonedaCodAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\MonedaCod\MonedaCodClass.vb" />
+    <Compile Include="Parametros\MonedaCod\MonedaCodSQLClass.vb" />
+    <Compile Include="Parametros\MonedaCot\MonedaCot.aspx.designer.vb">
+      <DependentUpon>MonedaCot.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\MonedaCot\MonedaCot.aspx.vb">
+      <DependentUpon>MonedaCot.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\MonedaCot\MonedaCotAjax.aspx.designer.vb">
+      <DependentUpon>MonedaCotAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\MonedaCot\MonedaCotAjax.aspx.vb">
+      <DependentUpon>MonedaCotAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\MonedaCot\MonedaCotClass.vb" />
+    <Compile Include="Parametros\MonedaCot\MonedaCotSQLClass.vb" />
+    <Compile Include="Parametros\Paises\Paises.aspx.designer.vb">
+      <DependentUpon>Paises.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Paises\Paises.aspx.vb">
+      <DependentUpon>Paises.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Paises\PaisesAjax.aspx.designer.vb">
+      <DependentUpon>PaisesAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Paises\PaisesAjax.aspx.vb">
+      <DependentUpon>PaisesAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Paises\PaisesClass.vb" />
+    <Compile Include="Parametros\Paises\PaisesSQLClass.vb" />
+    <Compile Include="Parametros\Productos\Productos.aspx.designer.vb">
+      <DependentUpon>Productos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Productos\Productos.aspx.vb">
+      <DependentUpon>Productos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Productos\ProductosAjax.aspx.designer.vb">
+      <DependentUpon>ProductosAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Productos\ProductosAjax.aspx.vb">
+      <DependentUpon>ProductosAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Productos\ProductosClass.vb" />
+    <Compile Include="Parametros\Productos\ProductosSQLClass.vb" />
+    <Compile Include="Parametros\Relaciones_Financieras\Relaciones_FinancierasClass.vb" />
+    <Compile Include="Parametros\Relaciones_Financieras\Relaciones_FinancierasSQLClass.vb" />
+    <Compile Include="Parametros\Relacion_Actores\Relacion_ActoresClass.vb" />
+    <Compile Include="Parametros\Relacion_Actores\Relacion_ActoresSQLClass.vb" />
+    <Compile Include="Parametros\Relation_Tipo_Subtipo_Activo\Relation_Tipo_Subtipo_Activo.aspx.designer.vb">
+      <DependentUpon>Relation_Tipo_Subtipo_Activo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Relation_Tipo_Subtipo_Activo\Relation_Tipo_Subtipo_Activo.aspx.vb">
+      <DependentUpon>Relation_Tipo_Subtipo_Activo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Relation_Tipo_Subtipo_Activo\Relation_Tipo_Subtipo_ActivoAjax.aspx.designer.vb">
+      <DependentUpon>Relation_Tipo_Subtipo_ActivoAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Relation_Tipo_Subtipo_Activo\Relation_Tipo_Subtipo_ActivoAjax.aspx.vb">
+      <DependentUpon>Relation_Tipo_Subtipo_ActivoAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Relation_Tipo_Subtipo_Activo\Relation_Tipo_Subtipo_ActivoClass.vb" />
+    <Compile Include="Parametros\Relation_Tipo_Subtipo_Activo\Relation_Tipo_Subtipo_ActivoSQLClass.vb" />
+    <Compile Include="Parametros\Relation_Tipo_Subtipo_Leasing\Relation_Tipo_Subtipo_Leasing.aspx.designer.vb">
+      <DependentUpon>Relation_Tipo_Subtipo_Leasing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Relation_Tipo_Subtipo_Leasing\Relation_Tipo_Subtipo_Leasing.aspx.vb">
+      <DependentUpon>Relation_Tipo_Subtipo_Leasing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Relation_Tipo_Subtipo_Leasing\Relation_Tipo_Subtipo_LeasingAjax.aspx.designer.vb">
+      <DependentUpon>Relation_Tipo_Subtipo_LeasingAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Relation_Tipo_Subtipo_Leasing\Relation_Tipo_Subtipo_LeasingAjax.aspx.vb">
+      <DependentUpon>Relation_Tipo_Subtipo_LeasingAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Relation_Tipo_Subtipo_Leasing\Relation_Tipo_Subtipo_LeasingClass.vb" />
+    <Compile Include="Parametros\Relation_Tipo_Subtipo_Leasing\Relation_Tipo_Subtipo_LeasingSQLClass.vb" />
+    <Compile Include="Parametros\SubTipoActivo\SubTipoActivo.aspx.designer.vb">
+      <DependentUpon>SubTipoActivo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\SubTipoActivo\SubTipoActivo.aspx.vb">
+      <DependentUpon>SubTipoActivo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\SubTipoActivo\SubTipoActivoAjax.aspx.designer.vb">
+      <DependentUpon>SubTipoActivoAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\SubTipoActivo\SubTipoActivoAjax.aspx.vb">
+      <DependentUpon>SubTipoActivoAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\SubTipoActivo\SubTipoActivoClass.vb" />
+    <Compile Include="Parametros\SubTipoActivo\SubTipoActivoSQLClass.vb" />
+    <Compile Include="Parametros\SubTipoProduct_Leasing\SubTipoProduct_Leasing.aspx.designer.vb">
+      <DependentUpon>SubTipoProduct_Leasing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\SubTipoProduct_Leasing\SubTipoProduct_Leasing.aspx.vb">
+      <DependentUpon>SubTipoProduct_Leasing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\SubTipoProduct_Leasing\SubTipoProduct_LeasingAjax.aspx.designer.vb">
+      <DependentUpon>SubTipoProduct_LeasingAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\SubTipoProduct_Leasing\SubTipoProduct_LeasingAjax.aspx.vb">
+      <DependentUpon>SubTipoProduct_LeasingAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\SubTipoProduct_Leasing\SubTipoProduct_LeasingClass.vb" />
+    <Compile Include="Parametros\SubTipoProduct_Leasing\SubTipoProduct_LeasingSQLClass.vb" />
+    <Compile Include="Parametros\Sucursal\Sucursal.aspx.designer.vb">
+      <DependentUpon>Sucursal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Sucursal\Sucursal.aspx.vb">
+      <DependentUpon>Sucursal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Sucursal\SucursalAjax.aspx.designer.vb">
+      <DependentUpon>SucursalAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Sucursal\SucursalAjax.aspx.vb">
+      <DependentUpon>SucursalAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Sucursal\SucursalClass.vb" />
+    <Compile Include="Parametros\Sucursal\SucursalSQLClass.vb" />
+    <Compile Include="Parametros\Tasas\TasasClass.vb" />
+    <Compile Include="Parametros\Tasas\TasasSQLClass.vb" />
+    <Compile Include="Parametros\TipoActivo\TipoActivo.aspx.designer.vb">
+      <DependentUpon>TipoActivo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\TipoActivo\TipoActivo.aspx.vb">
+      <DependentUpon>TipoActivo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\TipoActivo\TipoActivoAjax.aspx.designer.vb">
+      <DependentUpon>TipoActivoAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\TipoActivo\TipoActivoAjax.aspx.vb">
+      <DependentUpon>TipoActivoAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\TipoActivo\TipoActivoClass.vb" />
+    <Compile Include="Parametros\TipoActivo\TipoActivoSQLClass.vb" />
+    <Compile Include="Parametros\TipoProduct_Leasing\TipoProduct_Leasing.aspx.designer.vb">
+      <DependentUpon>TipoProduct_Leasing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\TipoProduct_Leasing\TipoProduct_Leasing.aspx.vb">
+      <DependentUpon>TipoProduct_Leasing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\TipoProduct_Leasing\TipoProduct_LeasingAjax.aspx.designer.vb">
+      <DependentUpon>TipoProduct_LeasingAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\TipoProduct_Leasing\TipoProduct_LeasingAjax.aspx.vb">
+      <DependentUpon>TipoProduct_LeasingAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\TipoProduct_Leasing\TipoProduct_LeasingClass.vb" />
+    <Compile Include="Parametros\TipoProduct_Leasing\TipoProduct_LeasingSQLClass.vb" />
+    <Compile Include="Parametros\Transacciones\Transacciones.aspx.designer.vb">
+      <DependentUpon>Transacciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Transacciones\Transacciones.aspx.vb">
+      <DependentUpon>Transacciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Transacciones\TransaccionesAjax.aspx.designer.vb">
+      <DependentUpon>TransaccionesAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Transacciones\TransaccionesAjax.aspx.vb">
+      <DependentUpon>TransaccionesAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Transacciones\TransaccionesClass.vb" />
+    <Compile Include="Parametros\Transacciones\TransaccionesSQLClass.vb" />
+    <Compile Include="procesos_generales\Droplist_Class.vb" />
+    <Compile Include="procesos_generales\GeneralSQLClass.vb" />
+    <Compile Include="procesos_generales\SasifMasterAjax.aspx.designer.vb">
+      <DependentUpon>SasifMasterAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="procesos_generales\SasifMasterAjax.aspx.vb">
+      <DependentUpon>SasifMasterAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sasif.Master.designer.vb">
+      <DependentUpon>Sasif.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Sasif.Master.vb">
+      <DependentUpon>Sasif.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Repository_Document\TEMP\" />
+    <Folder Include="Repository_Files\TEMP\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:7639/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

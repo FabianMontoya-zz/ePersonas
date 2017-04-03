@@ -13,7 +13,7 @@ Public Class ConsecutivosSQLClass
     ''' <param name="vp_S_Contenido"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Read_AllConsecutivos(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String)
+    Public Function Read_AllConsecutivos(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String, ByVal vp_S_Nit_User As String)
 
         Dim ObjListRutaDocumentos As New List(Of ConsecutivosClass)
         Dim StrQuery As String = ""
@@ -23,7 +23,7 @@ Public Class ConsecutivosSQLClass
         Dim BD_Param As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDParam").ToString
 
         Dim sql As New StringBuilder
-
+        Dim vl_sql_filtro As New StringBuilder
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
             sql.Append(" SELECT C_Nit_ID, " & _
@@ -35,7 +35,7 @@ Public Class ConsecutivosSQLClass
                         "      C_Usuario_Actualizacion, " & _
                         "      C_FechaActualizacion, " & _
                         "      CLI.CLI_Nombre, " & _
-                        "      ROW_NUMBER() OVER(ORDER BY C_Nit_ID DESC) AS Index_RutaDocumentos " & _
+                        "      ROW_NUMBER() OVER(ORDER BY C_Nit_ID ASC) AS Index_RutaDocumentos " & _
                         " FROM CONSECUTIVOS C " & _
                         " LEFT JOIN " & BD_Param & ".dbo.CLIENTE CLI ON CLI.CLI_Document_ID =  " & _
                         " CASE	 SUBSTRING(C.C_Nit_ID,0,LEN(C.C_Nit_ID)) " & _
@@ -54,7 +54,7 @@ Public Class ConsecutivosSQLClass
                         "      C_Usuario_Actualizacion, " & _
                         "      C_FechaActualizacion, " & _
                         "      CLI.CLI_Nombre, " & _
-                        "      ROW_NUMBER() OVER(ORDER BY C_Nit_ID DESC) AS Index_RutaDocumentos " & _
+                        "      ROW_NUMBER() OVER(ORDER BY C_Nit_ID ASC) AS Index_RutaDocumentos " & _
                         " FROM CONSECUTIVOS C " & _
                         " LEFT JOIN " & BD_Param & ".dbo.CLIENTE CLI ON CLI.CLI_Document_ID =  " & _
                         " CASE	 SUBSTRING(C.C_Nit_ID,0,LEN(C.C_Nit_ID)) " & _
@@ -71,7 +71,7 @@ Public Class ConsecutivosSQLClass
                         "      C_Usuario_Actualizacion, " & _
                         "      C_FechaActualizacion, " & _
                         "      CLI.CLI_Nombre, " & _
-                        "      ROW_NUMBER() OVER(ORDER BY C_Nit_ID DESC) AS Index_RutaDocumentos " & _
+                        "      ROW_NUMBER() OVER(ORDER BY C_Nit_ID ASC) AS Index_RutaDocumentos " & _
                         " FROM CONSECUTIVOS C " & _
                         " LEFT JOIN " & BD_Param & ".dbo.CLIENTE CLI ON CLI.CLI_Document_ID =  " & _
                         " CASE	 SUBSTRING(C.C_Nit_ID,0,LEN(C.C_Nit_ID)) " & _
@@ -82,7 +82,17 @@ Public Class ConsecutivosSQLClass
             End If
         End If
 
-        StrQuery = sql.ToString
+        If vp_S_Nit_User <> "N" Then
+            If vp_S_Contenido = "ALL" Then
+                vl_sql_filtro.Append("WHERE  C_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY C_Nit_ID, C_Consecutivo_ID ASC")
+            Else
+                vl_sql_filtro.Append("AND  C_Nit_ID ='" & vp_S_Nit_User & "' ORDER BY C_Nit_ID, C_Consecutivo_ID ASC")
+            End If
+        Else
+            vl_sql_filtro.Append(" ORDER BY C_Nit_ID, C_Consecutivo_ID ASC")
+        End If
+
+        StrQuery = sql.ToString & vl_sql_filtro.ToString
 
         ObjListRutaDocumentos = list(StrQuery, Conexion, "List")
 
@@ -213,7 +223,7 @@ Public Class ConsecutivosSQLClass
                         "      CG_FechaCreacion, " & _
                         "      CG_Usuario_Actualizacion, " & _
                         "      CG_FechaActualizacion, " & _
-                        "      ROW_NUMBER() OVER(ORDER BY CG_Consecutivo_ID DESC) AS Index_RutaDocumentos " & _
+                        "      ROW_NUMBER() OVER(ORDER BY CG_Consecutivo_ID ASC) AS Index_RutaDocumentos " & _
                         " FROM CONSECUTIVOS_GENERAL C ")
         Else
 
@@ -225,7 +235,7 @@ Public Class ConsecutivosSQLClass
                         "      CG_FechaCreacion, " & _
                         "      CG_Usuario_Actualizacion, " & _
                         "      CG_FechaActualizacion, " & _
-                        "      ROW_NUMBER() OVER(ORDER BY CG_Consecutivo_ID DESC) AS Index_RutaDocumentos " & _
+                        "      ROW_NUMBER() OVER(ORDER BY CG_Consecutivo_ID ASC) AS Index_RutaDocumentos " & _
                         " FROM CONSECUTIVOS_GENERAL C ")
             Else
                 sql.Append(" SELECT CG_Consecutivo_ID, " & _
@@ -235,8 +245,7 @@ Public Class ConsecutivosSQLClass
                         "      CG_FechaCreacion, " & _
                         "      CG_Usuario_Actualizacion, " & _
                         "      CG_FechaActualizacion, " & _
-                        "      CLI.CLI_Nombre, " & _
-                        "      ROW_NUMBER() OVER(ORDER BY CG_Consecutivo_ID DESC) AS Index_RutaDocumentos " & _
+                        "      ROW_NUMBER() OVER(ORDER BY CG_Consecutivo_ID ASC) AS Index_RutaDocumentos " & _
                         " FROM CONSECUTIVOS_GENERAL C " & _
                            " WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
             End If
@@ -530,7 +539,7 @@ Public Class ConsecutivosSQLClass
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function MatrixConcecutivo()
+    Public Function MatrixConcecutivo(ByVal vp_Obj_Cliente As ClienteClass)
 
         Dim ObjList As New List(Of ConsecutivosClass)
         Dim StrQuery As String = ""
@@ -541,12 +550,22 @@ Public Class ConsecutivosSQLClass
         Dim BD_Admin As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDAdmin").ToString
 
         Dim sql As New StringBuilder
+        Dim vl_sql_filtro As New StringBuilder
 
         sql.Append(" SELECT C_Nit_ID, C_Consecutivo_ID, C_Descripcion, C_Consecutivo  FROM CONSECUTIVOS ")
 
-        StrQuery = sql.ToString
+        Select Case vp_Obj_Cliente.TipoSQL
+            Case "Verificacion"
+                vl_sql_filtro.Append("WHERE C_Nit_ID = '" & vp_Obj_Cliente.Nit_ID & "' ORDER BY C_Nit_ID, C_Consecutivo_ID ASC; ")
 
-        ObjList = list(StrQuery, Conexion, "Matrix")
+            Case "Documento"
+                vl_sql_filtro.Append(" ORDER BY C_Nit_ID, C_Consecutivo_ID ASC; ")
+
+
+        End Select
+
+        Dim vl_S_SQLString As String = sql.ToString & vl_sql_filtro.ToString
+        ObjList = list(vl_S_SQLString, Conexion, "Matrix")
 
         Return ObjList
 

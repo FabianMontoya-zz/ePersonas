@@ -64,19 +64,25 @@ Public Class InvPuertaAjax
                 objInvPuerta.UsuarioActualizacion = Request.Form("user")
                 objInvPuerta.FechaActualizacion = Date.Now
 
-                objListPersona = SQL_Persona.InformacionUsuario(objInvPuerta.UsuarioCreacion)
+                'Dim user_log As Integer = 0
+                'objListPersona = SQL_Persona.InformacionUsuario(objInvPuerta.UsuarioCreacion)
 
-                For Each item_list As ClienteClass In objListPersona
-                    objInvPuerta.Nit_ID_Custodia = item_list.Nit_ID
-                    objInvPuerta.TypeDocument_ID_Custodia = item_list.TypeDocument_ID
-                    objInvPuerta.Document_ID_Custodia = item_list.Document_ID
-                Next
+                'For Each item_list As ClienteClass In objListPersona
+                '    user_log = 1
+                objInvPuerta.Nit_ID_Custodia = Request.Form("Nit_Emp_User")
+                objInvPuerta.TypeDocument_ID_Custodia = Request.Form("TDoc")
+                objInvPuerta.Document_ID_Custodia = Request.Form("Doc")
+                objInvPuerta.FechaCustodia = Date.Now
+                'Next
 
+                'If user_log = 1 Then
                 ObjListInvPuerta.Add(objInvPuerta)
                 result = SQL_InvPuerta.InsertInvPuerta(objInvPuerta)
+                'Else
+                'result = "NO_USER"
+                'End If
 
         End Select
-
         Response.Write(result)
 
     End Sub

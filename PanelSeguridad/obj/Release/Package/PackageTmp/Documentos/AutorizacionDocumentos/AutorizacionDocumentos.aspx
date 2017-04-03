@@ -225,7 +225,7 @@
                 <tr>
                     <td colspan="4" align="center" id="TD3">
                         <input id="Btn_G" type="button" value="Guardar" onclick="Add_Doc();" />
-                        <input id="Btn_S" type="button" value="Regresar" onclick="" />
+                        <input id="Btn_S" type="button" value="Regresar" onclick="CerrarDialogCap();" />
                     </td>
                 </tr>
             </table>
@@ -402,7 +402,7 @@
             </tr>
             <tr>
                 <td colspan="10" style="width: 180px;">
-                    <input id="BtnPadre" type="button" value="Ver Doc Padre" />
+                    <input id="BtnPadre" type="button" value="Ver Doc Padre" onclick="javascript:VerDocPadre();" />
                 </td>
             </tr>
         </table>
@@ -426,7 +426,7 @@
         </div>
     </div>
     <div id="Dialog_Ver_Anexos">
-         <div id="container_TDoc_Anexos" style="margin-top: 10px; margin-bottom: 10px;">
+        <div id="container_TDoc_Anexos" style="margin-top: 10px; margin-bottom: 10px;">
         </div>
     </div>
     <div id="Dialog_Valida_Document">
@@ -554,6 +554,19 @@
             <tr>
                 <td>
                     <iframe id="IF_Visor_View" src=""></iframe>
+                </td>
+            </tr>
+        </table>
+        <table id="Tabla_8" style="width: 700px; text-align: left;">
+            <tr>
+                <td style="width: 150px;" class="Label_Bold">
+                    Documento Verificación
+                </td>
+                <td>
+                    <select id="Select_Doc_Verif" class="C_Chosen">
+                    </select>
+                </td>
+                <td style="width: 200px; padding-bottom: 25px;">
                 </td>
             </tr>
         </table>
