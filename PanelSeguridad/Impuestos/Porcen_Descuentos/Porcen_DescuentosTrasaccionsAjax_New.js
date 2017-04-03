@@ -71,12 +71,13 @@ function transacionAjax_Ciudad(State, Index) {
             }
             else {
                 ArrayCiudades = JSON.parse(result);
-                charge_CatalogList(ArrayCiudades, "Select_Ciudad", 1);
             }
         },
         error: function () {
 
-        }
+        },
+    }).done(function () {
+        charge_CatalogList(ArrayCiudades, "Select_Ciudad", 1);
     });
 }
 

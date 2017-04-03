@@ -1,5 +1,6 @@
 ﻿Public Class Porcen_DescuentosClass
 #Region "Campos"
+    Private _Index As Long
     Private _Cod_ID As Integer
     Private _Ciudad_ID As Integer
     Private _Impuesto_Gasto_ID As Integer
@@ -28,10 +29,17 @@
     Private _DescripImpuesto_Gasto As String
     Private _DescripTipo As String
 
-    
 #End Region
 
 #Region "Propiedades"
+    Public Property Index() As Long
+        Get
+            Return Me._Index
+        End Get
+        Set(ByVal value As Long)
+            Me._Index = value
+        End Set
+    End Property
     Public Property Cod_ID() As Integer
         Get
             Return Me._Cod_ID
@@ -243,6 +251,6 @@
         End Set
     End Property
 
-   
+
 #End Region
 End Class
