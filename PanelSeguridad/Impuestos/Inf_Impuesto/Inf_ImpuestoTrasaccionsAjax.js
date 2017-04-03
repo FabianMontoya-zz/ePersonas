@@ -210,27 +210,27 @@ function transacionAjax_Inf_Impuesto(State, filtro, opcion) {
 
 /*------------------------------ crear ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
-function transacionAjax_Inf_Impuesto_create(State) {
+function transacionAjax_Inf_Impuesto_create(vp_State) {
 
-    var ID_P = $("#Select_Pais").val();
-    var ID_C = $("#Select_Ciudad").val();
-    var ID_I = $("#Select_Impuesto").val();
-    var ID_Cli = $("#Select_Cliente").val();
-    var ID_Tdoc = editTypeDocument;
-    var ID_Doc = editDocument;
+    var vl_ID_P = $("#Select_Pais").val();
+    var vl_ID_C = $("#Select_Ciudad").val();
+    var vl_ID_I = $("#Select_Impuesto").val();
+    var vl_ID_Cli = $("#Select_Cliente").val();
+    var vl_StrCliente_H = $("#Select_Cliente_H option:selected").html().split(" - ");
+    alert(vl_StrCliente_H[0] + " - " + vl_StrCliente_H[1]);
 
     $.ajax({
         url: "Inf_ImpuestoAjax.aspx",
         type: "POST",
         //crear json
         data: {
-            "action": State,
-            "Pais_ID": ID_P,
-            "Ciudad_ID": ID_C,
-            "Impuesto_ID": ID_I,
-            "Cliente_ID": ID_Cli,
-            "TipoDocumento_ID": ID_Tdoc,
-            "Documento_ID": ID_Doc,
+            "action": vp_State,
+            "Pais_ID": vl_ID_P,
+            "Ciudad_ID": vl_ID_C,
+            "Impuesto_ID": vl_ID_I,
+            "Cliente_ID": vl_ID_Cli,
+            "TipoDocumento_ID": vl_StrCliente_H[0],
+            "Documento_ID": vl_StrCliente_H[1],
             "user": User
         },
         //Transaccion Ajax en proceso
