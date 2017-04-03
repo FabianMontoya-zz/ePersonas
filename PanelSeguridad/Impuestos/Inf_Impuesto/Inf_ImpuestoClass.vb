@@ -6,7 +6,7 @@
     Private _Impuesto_Gasto_ID As Integer
     Private _Nit_ID As String
     Private _TypeDocument_ID As Integer
-    Private _Document_ID As Integer
+    Private _Document_ID As String
 
     Private _FechaActualizacion As String
     Private _Usuario As String

@@ -184,9 +184,9 @@ function validarCamposCrear() {
         vl_Campo_2 == "-1" ||
         vl_Campo_1 == "-1") {
         validar = 1;
-        if (Campo_1 == "-1") { $("#ImgPais").css("display", "inline-table"); } else { $("#ImgPais").css("display", "none"); }
-        if (Campo_2 == "-1") { $("#Img1").css("display", "inline-table"); } else { $("#Img1").css("display", "none"); }
-        if (Campo_3 == "-1") { $("#Img2").css("display", "inline-table"); } else { $("#Img2").css("display", "none"); }
+        if (vl_Campo_1 == "-1") { $("#ImgPais").css("display", "inline-table"); } else { $("#ImgPais").css("display", "none"); }
+        if (vl_Campo_2 == "-1") { $("#Img1").css("display", "inline-table"); } else { $("#Img1").css("display", "none"); }
+        if (vl_Campo_3 == "-1") { $("#Img2").css("display", "inline-table"); } else { $("#Img2").css("display", "none"); }
     }
     else {
         $("#ImgPais").css("display", "none");

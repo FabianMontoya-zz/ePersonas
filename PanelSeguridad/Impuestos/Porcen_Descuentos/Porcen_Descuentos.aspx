@@ -5,8 +5,8 @@
     <script src="../../Scripts/jquery-1.4.1.js" type="text/javascript"></script>
     <script src="../../SasifMaster.js" type="text/javascript"></script>
     <script src="../SasifMaster_Cosult.js" type="text/javascript"></script>
-    <script src="Porcen_DescuentosTrasaccionsAjax.js" type="text/javascript"></script>
-    <script src="Porcen_Descuentos.js" type="text/javascript"></script>
+    <script src="Porcen_DescuentosTrasaccionsAjax_New.js" type="text/javascript"></script>
+    <script src="Porcen_Descuentos_New.js" type="text/javascript"></script>
     <link href="../../css/css_login.css" rel="stylesheet" type="text/css" />
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
     <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />

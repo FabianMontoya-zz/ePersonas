@@ -308,7 +308,7 @@ function transacionAjax_Porcen_Descuentos_delete(State) {
                 case "Exito":
                     $("#dialog_eliminar").dialog("close");
                     Mensaje_General("¡Registro Eliminado!", "El porcentaje impuesto  se ha eliminado correctamente.", "S");
-                     Clear();
+                    Clear();
                     break;
             }
 
