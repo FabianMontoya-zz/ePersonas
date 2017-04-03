@@ -445,9 +445,9 @@
     <Content Include="Impuestos\Inf_Impuesto\Inf_Impuesto_Cliente.js" />
     <Content Include="Impuestos\menu.js" />
     <Content Include="Impuestos\Porcen_Descuentos\Porcen_Descuentos.aspx" />
-    <Content Include="Impuestos\Porcen_Descuentos\Porcen_Descuentos.js" />
     <Content Include="Impuestos\Porcen_Descuentos\Porcen_DescuentosAjax.aspx" />
-    <Content Include="Impuestos\Porcen_Descuentos\Porcen_DescuentosTrasaccionsAjax.js" />
+    <Content Include="Impuestos\Porcen_Descuentos\Porcen_DescuentosTrasaccionsAjax_New.js" />
+    <Content Include="Impuestos\Porcen_Descuentos\Porcen_Descuentos_New.js" />
     <Content Include="Impuestos\SasifMaster_Cosult.js" />
     <Content Include="Ingreso_New\Entrada\Ingreso.aspx" />
     <Content Include="Ingreso_New\Entrada\Ingreso.js" />
