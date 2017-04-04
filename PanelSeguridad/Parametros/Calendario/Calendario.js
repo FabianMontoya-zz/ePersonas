@@ -196,12 +196,12 @@ function BtnConsulta() {
     if (ValidateSelect == 1) {
         filtro = "N";
         opcion = "ALL";
-        transacionAjax_Calendario("consulta", filtro, opcion);
+        transacionAjax_ConsultCalendario("consulta", filtro, opcion);
     }
     else {
         filtro = "S";
         opcion = $("#DDLColumns").val();
-        transacionAjax_Calendario("consulta", filtro, opcion);
+        transacionAjax_ConsultCalendario("consulta", filtro, opcion);
     }
 
 }

@@ -217,6 +217,17 @@ CONTENEDOR DE FORMULARIO
     margin-top: 5px;
 }
 
+/*-- CONTENEDOR DE LAS GRILLAS DE OPERACION EN LOS MODULOS SIN ALTURA FIJA---*/
+.container_TGrid_Default
+{
+    width: 900px;
+    overflow: auto;
+    border: solid 1px #CACACA;
+    font: 12px/20px CenturyGothic,sans-serif;
+    text-align: center;
+    margin-top: 5px;
+}
+
 /*-- CONTENEDOR DE LAS GRILLAS DE OPERACION EN EL MODULO CLIENTE ---*/
 #container_Document, #container_direccion, #container_Bank
 {

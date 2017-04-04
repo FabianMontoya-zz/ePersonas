@@ -45,7 +45,7 @@ D_Semana[6] = "Sábado";
 /*--------------- region de variables globales --------------------*/
 
 $(document).ready(function () {
-    clearConsole();
+    //clearConsole();
     fecha();
 
     $(".C_Chosen").chosen({
