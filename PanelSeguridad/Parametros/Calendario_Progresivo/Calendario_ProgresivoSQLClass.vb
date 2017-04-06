@@ -141,12 +141,91 @@ Public Class Calendario_ProgresivoSQLClass
 
 #Region "CARGAR LISTAS"
 
+    Public Function listCalendarioProgresivo(ByVal vp_S_StrQuery As String, ByVal vg_S_StrConexion As String, ByVal vp_S_TypeList As String)
 
+        'inicializamos conexiones a la BD
+        Dim objcmd As OleDbCommand = Nothing
+        Dim objConexBD As OleDbConnection = Nothing
+        objConexBD = New OleDbConnection(vg_S_StrConexion)
+        Dim ReadConsulta As OleDbDataReader = Nothing
+
+        objcmd = objConexBD.CreateCommand
+
+        Dim ObjListCalendario As New List(Of Calendario_ProgresivoClass)
+
+        'abrimos conexion
+        objConexBD.Open()
+        'cargamos consulta
+        objcmd.CommandText = vp_S_StrQuery
+        'ejecutamos consulta
+        ReadConsulta = objcmd.ExecuteReader()
+
+        Select Case vp_S_TypeList
+            Case "AllHorarios"
+                'recorremos la consulta por la cantidad de datos en la BD
+                While ReadConsulta.Read
+
+                    Dim objCalendario As New Calendario_ProgresivoClass
+                    'cargamos datos sobre el objeto de login
+                    objCalendario.Nit_ID = ReadConsulta.GetValue(0)
+                    objCalendario.Calendario_ID = ReadConsulta.GetValue(1)
+                    objCalendario.Calendario_Base_ID = ReadConsulta.GetValue(2)
+                    objCalendario.Fecha = ReadConsulta.GetValue(3)
+                    objCalendario.HoraIni = ReadConsulta.GetValue(4)
+                    objCalendario.HoraFin = ReadConsulta.GetValue(5)
+                    objCalendario.Index = ReadConsulta.GetValue(6)
+                    'agregamos a la lista
+                    ObjListCalendario.Add(objCalendario)
+
+                End While
+
+
+        End Select
+
+        'cerramos conexiones
+        ReadConsulta.Close()
+        objConexBD.Close()
+        'retornamos la consulta
+        Return ObjListCalendario
+
+    End Function
 
 #End Region
 
 #Region "OTRAS CONSULTAS"
 
+    ''' <summary>
+    ''' Función que consulta todos horarios de todos los días de un calendario en especifico
+    ''' </summary>
+    ''' <param name="vp_Obj"></param>
+    ''' <returns></returns>
+    Public Function Consult_AllHorarioProgresivo(ByVal vp_Obj As Calendario_ProgresivoClass)
+
+        Dim ObjListCalendario As New List(Of Calendario_ProgresivoClass)
+        Dim StrQuery As String = ""
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("2")
+
+        Dim sql As New StringBuilder
+        'NOTA IMPORTANTE: Debe ordenarse por la fecha, ya que así se necesita para armar los rangos a la hora de editar el calendario progresivo
+        sql.AppendLine("SELECT CP_Nit_ID, " &
+                       "CP_Calendario_ID, " &
+                       "CP_Calendario_Base_ID, " &
+                       "CP_Fecha, " &
+                       "CP_HoraInicial, " &
+                       "CP_HoraFinal, " &
+                       "ROW_NUMBER() OVER(ORDER BY CP_Fecha ASC) AS Index_Horario_Calendario " &
+            "FROM CALENDARIO_PROGRESIVO " &
+            "WHERE CP_Nit_ID = '" & vp_Obj.Nit_ID & "' AND CP_Calendario_ID = '" & vp_Obj.Calendario_ID & "' " &
+            "ORDER BY CP_Nit_ID, CP_Calendario_ID, CP_Fecha ASC")
+
+        StrQuery = sql.ToString()
+
+        ObjListCalendario = listCalendarioProgresivo(StrQuery, Conexion, "AllHorarios")
+
+        Return ObjListCalendario
+
+    End Function
 
 
 #End Region

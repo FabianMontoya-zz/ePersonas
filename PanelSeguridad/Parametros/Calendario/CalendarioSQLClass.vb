@@ -233,7 +233,11 @@ Public Class CalendarioSQLClass
             Calendario.Nit_ID = vp_Obj_Calendario.Nit_ID
 
             Result = SQLCalendario.EraseH_Calendario(Calendario)
+        Else
+            'Enviamos error puesto que no existe un tipo de calendario que se desee borrar
+            Result = "Error"
         End If
+
 
         If Result.Equals("Exito") Then
             sql.AppendLine("DELETE CALENDARIOS WHERE CA_Nit_ID = '" & vp_Obj_Calendario.Nit_ID & "' AND CA_Calendario_ID = '" & vp_Obj_Calendario.Calendario_ID & "'")
@@ -243,9 +247,6 @@ Public Class CalendarioSQLClass
         Else
             Return Result
         End If
-
-
-
     End Function
 
 #End Region

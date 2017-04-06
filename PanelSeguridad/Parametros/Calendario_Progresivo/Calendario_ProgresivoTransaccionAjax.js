@@ -117,7 +117,9 @@ function transacionAjax_ChargeCalendarios(State, NIT) {
             },
             error: function () {
 
-            }
+            },
+            async: false, // La petición es síncrona
+            cache: false // No queremos usar la caché del navegador
         });
     } catch (e) {
         Mensaje_General("Error - Transacción Ajax fallida", "Lo sentimos, ocurrió un error y no se logró completar la transacción ajax solicitada, favor verifique los datos.", "E");
@@ -162,7 +164,9 @@ function transacionAjax_ConsultCalendario(State, filtro, opcion) {
             },
             error: function () {
 
-            }
+            },
+            async: false, // La petición es síncrona
+            cache: false // No queremos usar la caché del navegador
         });
     } catch (e) {
         Mensaje_General("Error - Transacción Ajax fallida", "Lo sentimos, ocurrió un error y no se logró completar la transacción ajax solicitada, favor verifique los datos.", "E");
@@ -269,7 +273,7 @@ function transacionAjax_Calendario_delete(State) {
             data: {
                 "action": State,
                 "Nit_ID": editNit_ID,
-                "ID": editID,
+                "ID_Calendario": editID,
                 "TipoCalendario": TipoCalendar,
                 "user": User
             },
@@ -335,6 +339,41 @@ function transacionAjax_ArrayC_Semana(State) {
                 else {
                     ArrayC_Semana = JSON.parse(result);
                     ValidarLaborales();
+                }
+            },
+            error: function () {
+
+            },
+            async: false, // La petición es síncrona
+            cache: false // No queremos usar la caché del navegador
+        });
+    } catch (e) {
+        Mensaje_General("Error - Transacción Ajax fallida", "Lo sentimos, ocurrió un error y no se logró completar la transacción ajax solicitada, favor verifique los datos.", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo):\n" + e));
+    }
+}
+
+/*-------------------- carga arrays por días del calendario progresivo ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_ArrayH_Calendario(State) {
+    try {
+        $.ajax({
+            url: "Calendario_ProgresivoAjax.aspx",
+            type: "POST",
+            //crear json
+            data: {
+                "action": State,
+                "ID_Calendario": editID,
+                "Nit_ID": editNit_ID
+            },
+            //Transaccion Ajax en proceso
+            success: function (result) {
+                if (result == "") {
+                    edit_ArrayH_Calendario = [];
+                }
+                else {
+                    edit_ArrayH_Calendario = JSON.parse(result);
+                    //ValidarLaborales();
                 }
             },
             error: function () {

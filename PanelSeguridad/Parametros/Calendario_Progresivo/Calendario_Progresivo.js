@@ -3,6 +3,7 @@ var MatrizCalendario = []; //Carga los horarios que estamos vamos a agregar
 var MatrizFestivos = []; //Matriz que contendrá los días festivos que verificaremos
 var ArrayC_Semana = [];
 var ArrayH_Calendario = [];
+var edit_ArrayH_Calendario = [];
 
 var ArrayCombo = [];
 
@@ -489,10 +490,7 @@ function CreateGridArrastre() {
                 Arrastre_Day();
                 break;
             case "2":
-                Arrastre_Week();
-                break;
-            case "3":
-                Arrastre_AllDays();
+                Arrastre_Week();                
                 break;
             default:
                 $(".container_TGrid_Default").html("");
@@ -716,38 +714,6 @@ function Arrastre_Week() {
         "bDestroy": true,
         "aoColumnDefs": [
           { 'bSortable': false, 'aTargets': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] }
-        ]
-    });
-}
-
-//Función para tabla de arrastre de todos los días
-function Arrastre_AllDays() {
-    $(".container_TGrid_Default").html("");
-    $(".container_TGrid_Default").css("display", "none"); //Div que contiene tabla para arrastre
-
-    var html_Arrastre = "";
-
-    html_Arrastre = "<table id='TArrastreAll' border='1' cellpadding='1' cellspacing='1' style='width: 100%'><thead> ";
-    html_Arrastre = html_Arrastre + "<tr><th class='Grid_Head' colspan='8'>Horarios</th></tr> "; //Armamos las cabeceras fijas
-    html_Arrastre = html_Arrastre + "<tr><th class='Grid_Head' colspan='2'>A</th><th class='Grid_Head' colspan='2'>B</th><th class='Grid_Head' colspan='2'>C</th><th class='Grid_Head' colspan='2'>D</th></tr> "
-    html_Arrastre = html_Arrastre + "<tr><th class='Grid_Head'>Inicial</th><th class='Grid_Head'>Final</th><th class='Grid_Head'>Inicial</th><th class='Grid_Head'>Final</th><th class='Grid_Head'>Inicial</th><th class='Grid_Head'>Final</th><th class='Grid_Head'>Inicial</th><th class='Grid_Head'>Final</th></tr> "; //Armamos las cabeceras fijas
-    html_Arrastre = html_Arrastre + "</thead><tbody> "
-
-    html_Arrastre = html_Arrastre + "<td style='cursor: pointer; cursor: hand;'><span class='cssToolTip_Boton'>" + MatrizArrastre_All[0].A_HoraIni + "<span><input type='radio' class='Ver' name='option' style='cursor: pointer; cursor: hand;' onclick=\"Arrastre_EditHoraDia('" + MatrizArrastre_All[0].Dia + "', 'A');\" />Editar<br /><input type='radio' class='Ver' name='option' style='cursor: pointer; cursor: hand;' onclick=\"Arrastre_DeleteHoraDia('" + MatrizArrastre_All[0].Dia + "','A');\" />Eliminar</span></span></td><td>" + MatrizArrastre_All[0].A_HoraFin + "</td><td style='cursor: pointer; cursor: hand;'><span class='cssToolTip_Boton'>" + MatrizArrastre_All[0].B_HoraIni + "<span><input type='radio' class='Ver' name='option' style='cursor: pointer; cursor: hand;' onclick=\"Arrastre_EditHoraDia('" + MatrizArrastre_All[0].Dia + "', 'B');\" />Editar<br /><input type='radio' class='Ver' name='option' style='cursor: pointer; cursor: hand;' onclick=\"Arrastre_DeleteHoraDia('" + MatrizArrastre_All[0].Dia + "','B');\" />Eliminar</span></span></td><td>" + MatrizArrastre_All[0].B_HoraFin + "</td><td style='cursor: pointer; cursor: hand;'><span class='cssToolTip_Boton'>" + MatrizArrastre_All[0].C_HoraIni + "<span><input type='radio' class='Ver' name='option' style='cursor: pointer; cursor: hand;' onclick=\"Arrastre_EditHoraDia('" + MatrizArrastre_All[0].Dia + "', 'C');\" />Editar<br /><input type='radio' class='Ver' name='option' style='cursor: pointer; cursor: hand;' onclick=\"Arrastre_DeleteHoraDia('" + MatrizArrastre_All[0].Dia + "','C');\" />Eliminar</span></span></td><td>" + MatrizArrastre_All[0].C_HoraFin + "</td><td style='cursor: pointer; cursor: hand;'><span class='cssToolTip_Boton'>" + MatrizArrastre_All[0].D_HoraIni + "<span><input type='radio' class='Ver' name='option' style='cursor: pointer; cursor: hand;' onclick=\"Arrastre_EditHoraDia('" + MatrizArrastre_All[0].Dia + "', 'D');\" />Editar<br /><input type='radio' class='Ver' name='option' style='cursor: pointer; cursor: hand;' onclick=\"Arrastre_DeleteHoraDia('" + MatrizArrastre_All[0].Dia + "','D');\" />Eliminar</span></span></td><td>" + MatrizArrastre_All[0].D_HoraFin + "</td>"; //Colocamos los horarios
-
-    html_Arrastre = html_Arrastre + "</tbody></table>";//Cerramos tabla principal
-
-    html_Arrastre = html_Arrastre + "<input type='button' value='Arrastrar Todo' onclick='ArrastrarHorarioAllDays();' style='cursor: pointer; cursor: hand;' />"; //Agregamos el botón
-
-    $(".container_TGrid_Default").html(html_Arrastre);
-    $(".container_TGrid_Default").css("display", "inline-table"); //Div que contiene tabla para arrastre
-
-    $("#TArrastreAll").dataTable({
-        "bJQueryUI": true,
-        "iDisplayLength": 15,
-        "bDestroy": true,
-        "aoColumnDefs": [
-          { 'bSortable': false, 'aTargets': [0, 1, 2, 3, 4, 5, 6, 7] }
         ]
     });
 }
@@ -1569,35 +1535,100 @@ function Editar(index_Nit, index_Calendario) {
         $("#Dialog_Calendar").dialog("option", "title", "Actualizar Calendario");
         $("#Btnguardar").attr("value", "Actualizar");
         OpenControl();
-        for (itemArray in ArrayCalendario) {
+        for (var itemArray in ArrayCalendario) {
             if (index_Nit == ArrayCalendario[itemArray].Nit_ID && index_Calendario == ArrayCalendario[itemArray].Calendario_ID) {
 
                 editNit_ID = ArrayCalendario[itemArray].Nit_ID;
                 editID = ArrayCalendario[itemArray].Calendario_ID;
 
-                transacionAjax_ArrayC_Semana("MatrizDiasSemana");
-
-                $("#Select_EmpresaNit").val(ArrayCalendario[itemArray].Nit_ID);
-                $("#Txt_ID").val(ArrayCalendario[itemArray].Calendario_ID);
+                //Montamos lo que ya tenemos en el array
+                $("#Select_EmpresaNit").val(editNit_ID);
+                $("#Txt_ID").val(editID);
+                $("#TxtDescription").val(ArrayCalendario[itemArray].Descripcion);
 
                 $("#Select_EmpresaNit").attr("disabled", "disabled");
                 $("#Txt_ID").attr("disabled", "disabled");
-
-                $("#TxtDescription").val(ArrayCalendario[itemArray].Descripcion);
-                $("#Select_TipoCalendario").val(ArrayCalendario[itemArray].TipoCalendario);
-
-                VerifyTextID("Ok"); //Decir se llenó el campo
-                VerifyTextDescription("Ok"); //Decir se llenó el campo
-                $(".Table_Header_Block").css("display", "inline-table"); //Table que contiene el capturador de horas
-
+                              
+                
                 $('.C_Chosen').trigger('chosen:updated');
+                break;
             }
         }
-
-        ArmarMatricesDias();
+        TransaccionesNIT($("#Select_EmpresaNit").val()); //Cargamos el Combo de los calendarios base
+        transacionAjax_ArrayH_Calendario("HorariosCalendario"); //Cargamos los horarios de ese calendario que se selecciono
+        LoadEdit();
     } catch (e) {
         Mensaje_General("Error - Actualizar", "Lo sentimos, ocurrió un error y no se logró ejecutar la acción solicitada, favor verifique los datos.", "E");
         setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo):\n" + e));
+    }
+}
+
+//Función encargada de completar todo el cargue de la función de Editar Calendario
+function LoadEdit() {
+    var TamanioArrayH_Calendario = edit_ArrayH_Calendario.length; //Tomamos cuantos datos se cargaron en la matriz
+    /*Se necesita que desde la consulta hayan quedado ordenados correctamente por fecha de menor a mayor*/
+    var editRangoIni = "";
+    var editRangoFin = "";
+    var editIDCalendarioBase = "";
+    var indexCalendarioBase = "";
+
+    for (var i in edit_ArrayH_Calendario) {
+        if (edit_ArrayH_Calendario[i].Index == 1) { //El primero será el rango inicial de fecha
+            editRangoIni = edit_ArrayH_Calendario[i].Fecha;
+            editIDCalendarioBase = edit_ArrayH_Calendario[i].Calendario_Base_ID;
+        }
+        if (edit_ArrayH_Calendario[i].Index == TamanioArrayH_Calendario) { //El último index debe ser la última fecha, es decir, la más lejana
+            editRangoFin = edit_ArrayH_Calendario[i].Fecha;
+        }
+    }
+
+    for (var j in Matrix_Calendarios) {
+        if (Matrix_Calendarios[j].Calendario_ID == editIDCalendarioBase) {
+            indexCalendarioBase = Matrix_Calendarios[j].Index;
+        }
+    }
+    
+    $("#Select_Calendario_CP").val(indexCalendarioBase).trigger("chosen:updated");
+    Event_Calendario_CP();
+    $("#TxtF_Start").val(editRangoIni);
+    IniTXTF_End_by_TXTF_Start();
+    $("#TxtF_End").val(editRangoFin);
+    $("#TxtF_Start").css("display", "inline-table");
+    $("#TxtF_End").css("display", "inline-table");
+    transacionAjax_ArrayC_Semana("MatrizDiasSemana");
+    FirstJSONCharge(editRangoIni, editRangoFin);
+    CompletarMatrices(edit_ArrayH_Calendario);
+    DibujarGrid(MatrizCalendario);
+}
+
+//Función que recibe una matriz que debe contener fechas y horarios y buscará similitudes de fechas en la matriz generada de Calendario
+function CompletarMatrices(MatrizBase) {
+    //Recorremos la matriz de calendario y comenzamos a verificar si ya existen horarios guardados antes para esa fecha
+    for (var i in MatrizCalendario) {
+        for (var j in MatrizBase) {
+            if (MatrizCalendario[i].Fecha == MatrizBase[j].Fecha) { //Si encuentra coincidencia de fechas
+                //Comenzamos a llenar los horarios de la matriz calendario con base en los horarios que tiene la matriz base
+                if (MatrizCalendario[i].A_HoraIni == "0" && MatrizCalendario[i].A_HoraFin == "0") { //A
+                    MatrizCalendario[i].A_HoraIni = MatrizBase[j].HoraIni;
+                    MatrizCalendario[i].A_HoraFin = MatrizBase[j].HoraFin;
+                    CargarJSON_HCalendario(MatrizCalendario[i].Fecha, MatrizBase[j].HoraIni, MatrizBase[j].HoraFin);
+                } else if (MatrizCalendario[i].B_HoraIni == "0" && MatrizCalendario[i].B_HoraFin == "0") { //B
+                    MatrizCalendario[i].B_HoraIni = MatrizBase[j].HoraIni;
+                    MatrizCalendario[i].B_HoraFin = MatrizBase[j].HoraFin;
+                    CargarJSON_HCalendario(MatrizCalendario[i].Fecha, MatrizBase[j].HoraIni, MatrizBase[j].HoraFin);
+                } else if (MatrizCalendario[i].C_HoraIni == "0" && MatrizCalendario[i].C_HoraFin == "0") { //C
+                    MatrizCalendario[i].C_HoraIni = MatrizBase[j].HoraIni;
+                    MatrizCalendario[i].C_HoraFin = MatrizBase[j].HoraFin;
+                    CargarJSON_HCalendario(MatrizCalendario[i].Fecha, MatrizBase[j].HoraIni, MatrizBase[j].HoraFin);
+                } else if (MatrizCalendario[i].D_HoraIni == "0" && MatrizCalendario[i].D_HoraFin == "0") { //D
+                    MatrizCalendario[i].D_HoraIni = MatrizBase[j].HoraIni;
+                    MatrizCalendario[i].D_HoraFin = MatrizBase[j].HoraFin;
+                    CargarJSON_HCalendario(MatrizCalendario[i].Fecha, MatrizBase[j].HoraIni, MatrizBase[j].HoraFin);
+                } else { //Control de Excepción
+                    Mensaje_General("Fuera de Rango", "Lo sentimos, pero este día tiene más horarios de los que se ha permitido para trabajar en la tabla principal, el registro no se cargó.", "E");
+                }
+            }
+        }
     }
 }
 
@@ -2103,9 +2134,7 @@ function FirstJSONCharge(DateIni, DateFin) {
 
             }
             year = year + 1;
-        }
-
-        DibujarGrid(MatrizCalendario);
+        }        
     } catch (e) {
         Mensaje_General("Error - No se cargó tabla", "Lo sentimos, ocurrió un error y no se logró cargar la tabla de los días dentro del rango, verifique los datos.", "E");
         setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo):\n" + e));
@@ -2221,40 +2250,45 @@ function Change_Select_Nit() {
 //Proceso de Change para el Select del Calendario
 function Change_Select_Calendario_CP() {
     $("#Select_Calendario_CP").change(function () {
-        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
-        if ($("#Select_Calendario_CP").val() == "-1") {
-            $("#Img2").css("display", "inline-table");
-            MatrizCalendario = []; //Matriz que carga las fechas del rango seleccionado
-            ArrayC_Semana = [];
-            ArrayH_Calendario = []; //Matriz que guarda los datos que guardaremos en la BD
-            IniciarMatrizArrastre();
-            $("#Select_Arrastre").prop('disabled', true).trigger("chosen:updated");
-            $("#Select_Arrastre").val("0").trigger("chosen:updated");
-            $(".container_TGrid_Default").html("");
-            $(".container_TGrid_Default").css("display", "none"); //Div que contiene tabla para arrastre
-            $("#TxtF_Start").val("");
-            $("#TxtF_End").val("");
-            $("#TxtF_Start").css("display", "none");
-            $("#TxtF_End").css("display", "none");
-            $(".container_TGrid_Create").html("");
-            $(".container_TGrid_Create").css("display", "none"); //Tabla que dibuja el grid
-        } else {
-            MatrizCalendario = []; //Matriz que carga las fechas del rango seleccionado
-            ArrayH_Calendario = []; //Matriz que guarda los datos que guardaremos en la BD
-            IniciarMatrizArrastre();
-            $("#Select_Arrastre").prop('disabled', false).trigger("chosen:updated");
-            $("#Select_Arrastre").val("0").trigger("chosen:updated");
-            $(".container_TGrid_Default").html("");
-            $(".container_TGrid_Default").css("display", "none"); //Div que contiene tabla para arrastre
-            $("#Img2").css("display", "none");
-            $("#TxtF_Start").css("display", "inline-table");
-            $("#TxtF_End").val("");
-            $("#TxtF_Start").val("");
-            $("#TxtF_End").css("display", "none");
-            $(".container_TGrid_Create").html("");
-            $(".container_TGrid_Create").css("display", "none"); //Tabla que dibuja el grid
-        }
+        Event_Calendario_CP();
     });
+}
+
+//Función que ejecuta acciones según la selección del Select_Calendario_CP
+function Event_Calendario_CP() {
+    /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+    if ($("#Select_Calendario_CP").val() == "-1" || $("#Select_Calendario_CP").val() == null) {
+        $("#Img2").css("display", "inline-table");
+        MatrizCalendario = []; //Matriz que carga las fechas del rango seleccionado
+        ArrayC_Semana = [];
+        ArrayH_Calendario = []; //Matriz que guarda los datos que guardaremos en la BD
+        IniciarMatrizArrastre();
+        $("#Select_Arrastre").prop('disabled', true).trigger("chosen:updated");
+        $("#Select_Arrastre").val("0").trigger("chosen:updated");
+        $(".container_TGrid_Default").html("");
+        $(".container_TGrid_Default").css("display", "none"); //Div que contiene tabla para arrastre
+        $("#TxtF_Start").val("");
+        $("#TxtF_End").val("");
+        $("#TxtF_Start").css("display", "none");
+        $("#TxtF_End").css("display", "none");
+        $(".container_TGrid_Create").html("");
+        $(".container_TGrid_Create").css("display", "none"); //Tabla que dibuja el grid
+    } else {
+        MatrizCalendario = []; //Matriz que carga las fechas del rango seleccionado
+        ArrayH_Calendario = []; //Matriz que guarda los datos que guardaremos en la BD
+        IniciarMatrizArrastre();
+        $("#Select_Arrastre").prop('disabled', false).trigger("chosen:updated");
+        $("#Select_Arrastre").val("0").trigger("chosen:updated");
+        $(".container_TGrid_Default").html("");
+        $(".container_TGrid_Default").css("display", "none"); //Div que contiene tabla para arrastre
+        $("#Img2").css("display", "none");
+        $("#TxtF_Start").css("display", "inline-table");
+        $("#TxtF_End").val("");
+        $("#TxtF_Start").val("");
+        $("#TxtF_End").css("display", "none");
+        $(".container_TGrid_Create").html("");
+        $(".container_TGrid_Create").css("display", "none"); //Tabla que dibuja el grid
+    }
 }
 
 //Función que detecta el change del TXT de la fecha inicial
@@ -2262,27 +2296,44 @@ function Change_TxtF_Start() {
     $("#TxtF_Start").change(function () {
         $("#Img6").css("display", "none");
         $("#TxtF_End").val("");
-        var dateFormat = 'yy-mm-dd';
-        var date = $.datepicker.parseDate(dateFormat, $("#TxtF_Start").val());
-        $("#TxtF_End").datepicker({ dateFormat: 'yy-mm-dd', changeYear: true, changeMonth: true }); //Inicializa Datapicker
-        $("#TxtF_End").datepicker("option", "minDate", date);
-        $("#TxtF_End").datepicker("option", "yearRange", "+0:+3");
-        $("#TxtF_End").css("display", "inline-table");
-        MatrizCalendario = []; //Matriz que carga las fechas del rango seleccionado
-        ArrayH_Calendario = []; //Matriz que guarda los datos que guardaremos en la BD
-        $(".container_TGrid_Create").html("");
-        $(".container_TGrid_Create").css("display", "none"); //Tabla que dibuja el grid
+        IniTXTF_End_by_TXTF_Start();
     });
+}
+
+//Función que inicializa el TXT de fecha final armando el rango según la fecha inicial seleccionada
+function IniTXTF_End_by_TXTF_Start() {
+    var dateFormat = 'yy-mm-dd';
+    var date = $.datepicker.parseDate(dateFormat, $("#TxtF_Start").val());
+    $("#TxtF_End").datepicker({ dateFormat: 'yy-mm-dd', changeYear: true, changeMonth: true }); //Inicializa Datapicker
+    $("#TxtF_End").datepicker("option", "minDate", date);
+    $("#TxtF_End").datepicker("option", "yearRange", "+0:+3");
+    $("#TxtF_End").css("display", "inline-table");
+    MatrizCalendario = []; //Matriz que carga las fechas del rango seleccionado
+    ArrayH_Calendario = []; //Matriz que guarda los datos que guardaremos en la BD
+    $(".container_TGrid_Create").html("");
+    $(".container_TGrid_Create").css("display", "none"); //Tabla que dibuja el grid
 }
 
 //Función que detecta el change del TXT de la fecha final
 function Change_TxtF_End() {
     $("#TxtF_End").change(function () {
-        $("#Img7").css("display", "none");
-        var DateIni = $("#TxtF_Start").val();
-        var DateFin = $(this).val();
-        transacionAjax_ArrayC_Semana("MatrizDiasSemana");
-        FirstJSONCharge(DateIni, DateFin);
+        if ($("#Select_Calendario_CP").val() == "-1" || $("#Select_Calendario_CP").val() == null) {
+            $("#TxtF_End").val("");
+            $("#Img2").css("display", "inline-table");
+            Event_Calendario_CP();
+            setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo):\nPor favor deja de intentar modificar el correcto funcionamiento del aplicativo, te lo agradecemos.\nAtt: Grupo Desarrolladores SASIF."));
+            Mensaje_General("Acción no valida", "Lo sentimos, no puedes ejecutar esta acción si no se ha seleccionado por lo menos un calendario base.", "E");
+        } else {
+            $("#Img7").css("display", "none");
+            var DateIni = $("#TxtF_Start").val();
+            var DateFin = $(this).val();
+            transacionAjax_ArrayC_Semana("MatrizDiasSemana");
+            FirstJSONCharge(DateIni, DateFin);
+            if (estado == "modificar") { //Si estamos modificando y cambian el rango, verificamos con los horarios existentes
+                CompletarMatrices(edit_ArrayH_Calendario);
+            }
+            DibujarGrid(MatrizCalendario);
+        }
     });
 }
 

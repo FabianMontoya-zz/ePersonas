@@ -193,7 +193,6 @@
                             <option value="0" selected="selected">0 - No tiene</option>
                             <option value="1">1 - Por Día</option>
                             <option value="2">2 - Por Semana</option>
-                            <option value="3">3 - Todos los días</option>
                         </select>
                     </td>
                     <td style="padding-bottom: 25px; width: 98%;">
