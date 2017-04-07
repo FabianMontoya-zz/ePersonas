@@ -150,9 +150,7 @@ function transacionAjax_Festivo_create(State) {
             break;
         }
     }
-
-    console.log("NIT: " + Nit_ID + " || Calendario: " + Calendario_ID + " || Year: " + Year + " || MesDia: " + MesDia);
-
+    
     $.ajax({
         url: "FestivosAjax.aspx",
         type: "POST",
