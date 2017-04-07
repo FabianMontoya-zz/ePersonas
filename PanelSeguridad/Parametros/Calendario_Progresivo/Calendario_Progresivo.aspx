@@ -92,7 +92,7 @@
                     </td>
                 </tr>
             </table>
-             <table id="Tabla_Codigo" style="width: 100%; text-align: left;">
+            <table id="Tabla_Codigo" style="width: 100%; text-align: left;">
                 <tr>
                     <td style="width: 10.5%;" class="Label_Bold">Código
                     </td>
@@ -144,7 +144,9 @@
             </table>
             <table id="T_Subtitle1" style="width: 100%;" border="0">
                 <tr>
-                    <td class="Title_Bold" style="width: 10.5%;"><br />Rango Calendario
+                    <td class="Title_Bold" style="width: 10.5%;">
+                        <br />
+                        Rango Calendario
                     </td>
                 </tr>
             </table>
@@ -182,6 +184,29 @@
                     </td>
                 </tr>
             </table>
+            <table id="T_Arrastre" style="width: 100%; text-align: left;">
+                <tr>
+                    <td style="width: 10.5%;" class="Label_Bold">Indicativo Arrastre
+                    </td>
+                    <td style="width: 30%;">
+                        <select style="width: 100%;" id="Select_Arrastre" class="C_Chosen">
+                            <option value="0" selected="selected">0 - No tiene</option>
+                            <option value="1">1 - Por Día</option>
+                            <option value="2">2 - Por Semana</option>
+                        </select>
+                    </td>
+                    <td style="padding-bottom: 25px; width: 98%;">
+                        <span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img8"
+                                src="../../images/error.png" />
+                            <span class="SpamEG"></span></span>
+                    </td>
+                </tr>
+            </table>
+
+            <%-- Div que contiene los días que usaremos para el arrastre de horarios a días --%>
+            <div class="container_TGrid_Default">
+            </div>
             <%-- Div que contiene la tabla con el lapso seleccionado --%>
             <div class="container_TGrid_Create">
             </div>

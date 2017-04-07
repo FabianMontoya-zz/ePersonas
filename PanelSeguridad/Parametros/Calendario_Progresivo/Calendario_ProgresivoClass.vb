@@ -3,11 +3,12 @@
     Private _Index As Long
     Private _Nit_ID As String
     Private _Calendario_ID As Integer
+    Private _Calendario_Base_ID As Integer
 
     Private _Fecha As String
     Private _Grupo As String
-    Private _HoraInicial As String
-    Private _HoraFinal As String
+    Private _HoraIni As String
+    Private _HoraFin As String
 
     Private _UsuarioCreacion As String
     Private _FechaCreacion As String
@@ -43,6 +44,14 @@
             Me._Calendario_ID = value
         End Set
     End Property
+    Public Property Calendario_Base_ID() As Integer
+        Get
+            Return Me._Calendario_Base_ID
+        End Get
+        Set(ByVal value As Integer)
+            Me._Calendario_Base_ID = value
+        End Set
+    End Property
     Public Property Fecha() As String
         Get
             Return Me._Fecha
@@ -59,20 +68,20 @@
             Me._Grupo = value
         End Set
     End Property
-    Public Property HoraInicial() As String
+    Public Property HoraIni() As String
         Get
-            Return Me._HoraInicial
+            Return Me._HoraIni
         End Get
         Set(ByVal value As String)
-            Me._HoraInicial = value
+            Me._HoraIni = value
         End Set
     End Property
-    Public Property HoraFinal() As String
+    Public Property HoraFin() As String
         Get
-            Return Me._HoraFinal
+            Return Me._HoraFin
         End Get
         Set(ByVal value As String)
-            Me._HoraFinal = value
+            Me._HoraFin = value
         End Set
     End Property
     ''

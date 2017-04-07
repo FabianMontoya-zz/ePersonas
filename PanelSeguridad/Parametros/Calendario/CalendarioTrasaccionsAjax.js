@@ -102,7 +102,7 @@ function transacionAjax_Calendario(State) {
 
 /*------------------------------ consulta ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
-function transacionAjax_Calendario(State, filtro, opcion) {
+function transacionAjax_ConsultCalendario(State, filtro, opcion) {
     try {
         var contenido;
 
@@ -122,6 +122,7 @@ function transacionAjax_Calendario(State, filtro, opcion) {
                 "filtro": filtro,
                 "opcion": opcion,
                 "contenido": contenido,
+                "TipoCalendario": "N",
                 "Nit_User": g_NitEmpresa_User
             },
             //Transaccion Ajax en proceso

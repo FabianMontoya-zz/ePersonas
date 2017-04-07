@@ -117,7 +117,9 @@ function transacionAjax_ChargeCalendarios(State, NIT) {
             },
             error: function () {
 
-            }
+            },
+            async: false, // La petición es síncrona
+            cache: false // No queremos usar la caché del navegador
         });
     } catch (e) {
         Mensaje_General("Error - Transacción Ajax fallida", "Lo sentimos, ocurrió un error y no se logró completar la transacción ajax solicitada, favor verifique los datos.", "E");
@@ -127,7 +129,7 @@ function transacionAjax_ChargeCalendarios(State, NIT) {
 
 /*------------------------------ consulta ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
-function transacionAjax_Calendario(State, filtro, opcion) {
+function transacionAjax_ConsultCalendario(State, filtro, opcion) {
     try {
         var contenido;
 
@@ -147,6 +149,7 @@ function transacionAjax_Calendario(State, filtro, opcion) {
                 "filtro": filtro,
                 "opcion": opcion,
                 "contenido": contenido,
+                "TipoCalendario": "2",
                 "Nit_User": g_NitEmpresa_User
             },
             //Transaccion Ajax en proceso
@@ -161,7 +164,9 @@ function transacionAjax_Calendario(State, filtro, opcion) {
             },
             error: function () {
 
-            }
+            },
+            async: false, // La petición es síncrona
+            cache: false // No queremos usar la caché del navegador
         });
     } catch (e) {
         Mensaje_General("Error - Transacción Ajax fallida", "Lo sentimos, ocurrió un error y no se logró completar la transacción ajax solicitada, favor verifique los datos.", "E");
@@ -212,8 +217,7 @@ function transacionAjax_Calendario_create(State) {
                 },
                 //Transaccion Ajax en proceso
                 success: function (result) {
-                    switch (result) {
-
+                    switch (result) {                        
                         case "Error":
                             if (estado == "modificar") {
                                 Mensaje_General("¡Error!", "¡UPS!, ocurrió un error y no logró completar la modificación del Calendario, favor verificar los datos.", "E");
@@ -223,22 +227,21 @@ function transacionAjax_Calendario_create(State) {
                             break;
 
                         case "Existe":
-                            Mensaje_General("¡Código Duplicado!", "El código ingresado para este calendario ya existe en la base de datos, favor revisar.", "W");
+                            Mensaje_General("¡Código Duplicado!", "El código ingresado para este calendario ya existe en la base de datos, favor verificar.", "W");
                             break;
 
                         case "Exito":
                             if (estado == "modificar") {
-                                Mensaje_General("Exito", "El Calendario «" + ID + " - " + $("#TxtDescription").val() + "» fue modificado exitosamente!", "S");
+                                Mensaje_General("Actualización Exitosa", "El Calendario «" + ID_Calendario + " - " + $("#TxtDescription").val() + "» se ha modificado exitosamente.", "S");
                                 $("#Dialog_Calendar").dialog("close");
                                 $(".Dialog_Datos_Calen").css("display", "none");
                                 $("#TablaConsulta").css("display", "inline-table");
                                 $(".container_TGrid").html("");
                                 estado = "modificar";
-                                ResetError();
                                 Clear();
                             }
                             else if (estado == "crear") {
-                                Mensaje_General("Exito", "El Calendario «" + ID + " - " + $("#TxtDescription").val() + "» fue creado exitosamente!", "S");
+                                Mensaje_General("Creación Exitosa", "El Calendario «" + ID_Calendario + " - " + $("#TxtDescription").val() + "» fue creado exitosamente.", "S");
                                 Clear();
                             }
                             break;
@@ -270,7 +273,7 @@ function transacionAjax_Calendario_delete(State) {
             data: {
                 "action": State,
                 "Nit_ID": editNit_ID,
-                "ID": editID,
+                "ID_Calendario": editID,
                 "TipoCalendario": TipoCalendar,
                 "user": User
             },
@@ -281,19 +284,13 @@ function transacionAjax_Calendario_delete(State) {
                     case "Error":
                         $("#dialog_eliminar").dialog("close");
                         Mensaje_General("Disculpenos :(", "Ocurrió un error y no se pudo eliminar el Calendario " + editID + ", por favor intente más tarde.", "E");
-
                         break;
-
-                    case "Exist_O":
-                        $("#dialog_eliminar").dialog("close");
-                        Mensaje_General("Integridad referencial", "No se elimino el Calendario, para eliminarlo debe eliminar primero el registro en la tabla de los días del calendario asignado", "W");
-
-                        break;
+                                        
 
                     case "Exito":
                         $("#dialog_eliminar").dialog("close");
                         Mensaje_General("Exito", "El Calendario " + editID + " fue eliminado exitosamente.", "S");
-                        transacionAjax_Calendario("consulta", "N", "ALL");
+                        transacionAjax_ConsultCalendario("consulta", "N", "ALL");
                         Clear();
                         break;
                 }
@@ -342,6 +339,41 @@ function transacionAjax_ArrayC_Semana(State) {
                 else {
                     ArrayC_Semana = JSON.parse(result);
                     ValidarLaborales();
+                }
+            },
+            error: function () {
+
+            },
+            async: false, // La petición es síncrona
+            cache: false // No queremos usar la caché del navegador
+        });
+    } catch (e) {
+        Mensaje_General("Error - Transacción Ajax fallida", "Lo sentimos, ocurrió un error y no se logró completar la transacción ajax solicitada, favor verifique los datos.", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo):\n" + e));
+    }
+}
+
+/*-------------------- carga arrays por días del calendario progresivo ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_ArrayH_Calendario(State) {
+    try {
+        $.ajax({
+            url: "Calendario_ProgresivoAjax.aspx",
+            type: "POST",
+            //crear json
+            data: {
+                "action": State,
+                "ID_Calendario": editID,
+                "Nit_ID": editNit_ID
+            },
+            //Transaccion Ajax en proceso
+            success: function (result) {
+                if (result == "") {
+                    edit_ArrayH_Calendario = [];
+                }
+                else {
+                    edit_ArrayH_Calendario = JSON.parse(result);
+                    //ValidarLaborales();
                 }
             },
             error: function () {
