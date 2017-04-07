@@ -1,6 +1,6 @@
 ﻿Imports Newtonsoft.Json
 
-Public Class CalendarioAjax
+Public Class Calendario_ProgresivoAjax
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -21,7 +21,7 @@ Public Class CalendarioAjax
                     Consulta_Calendario()
 
                 Case "crear"
-                    InsertCalendario()
+                    InsertCalendarioProgresivo()
 
                 Case "modificar"
                     UpdateCalendario()
@@ -31,6 +31,9 @@ Public Class CalendarioAjax
 
                 Case "MatrixCalendarios"
                     CargarCalendarios()
+
+                Case "MatrizFestivos"
+                    CargarFestivos()
 
                 Case "MatrizDiasSemana"
                     CargarMatrizDiasSemana()
@@ -56,7 +59,6 @@ Public Class CalendarioAjax
         Dim vl_S_contenido As String = Request.Form("contenido")
         Dim vl_S_Nit_User As String = Request.Form("Nit_User")
 
-        ObjListCalendario = SQL_Calendario.Read_AllCalendario(vl_S_filtro, vl_S_opcion, vl_S_contenido, vl_S_Nit_User)
 
         If ObjListCalendario Is Nothing Then
 
@@ -74,20 +76,21 @@ Public Class CalendarioAjax
 
     End Sub
 
+
     ''' <summary>
     ''' funcion que inserta en la tabla Calendario (INSERT)
     ''' </summary>
     ''' <remarks></remarks>
-    Protected Sub InsertCalendario()
+    Protected Sub InsertCalendarioProgresivo()
 
         Dim objCalendario As New CalendarioClass
         Dim SQL_Calendario As New CalendarioSQLClass
 
-        Dim result, result_CSemana As String
+        Dim result, result_HCalendario As String
         Dim vl_s_IDxiste As String
 
         objCalendario.Nit_ID = Request.Form("Nit_ID")
-        objCalendario.Calendario_ID = Request.Form("ID")
+        objCalendario.Calendario_ID = Request.Form("ID_Calendario")
 
         'validamos si la llave existe
         vl_s_IDxiste = SQL_Calendario.Consulta_Repetido(objCalendario)
@@ -101,7 +104,13 @@ Public Class CalendarioAjax
             objCalendario.FechaActualizacion = Date.Now
             result = SQL_Calendario.InsertCalendario(objCalendario)
             If result = "Exito" Then
-                result_CSemana = Insert_CaledarioSemana()
+                'result_HCalendario = Insert_HorariosCalendario()
+                If result_HCalendario = "Exito" Then
+                    result = "Exito"
+                Else
+                    'EraseCalendario()
+                    'result = "Error"
+                End If
             End If
         Else
             result = "Existe"
@@ -113,7 +122,7 @@ Public Class CalendarioAjax
     ''' crea metodo de insercion en la tabla CALENDARIO_SEMANAS
     ''' </summary>
     ''' <remarks></remarks>
-    Private Function Insert_CaledarioSemana()
+    Private Function Insert_HorariosCalendario()
 
         Dim Result_list As String = ""
         Dim vl_S_list As String = Request.Form("List_Semana").ToString
@@ -153,6 +162,7 @@ Public Class CalendarioAjax
 
 
 
+
     ''' <summary>
     ''' funcion que actualiza en la tabla Calendario (UPDATE)
     ''' </summary>
@@ -175,15 +185,16 @@ Public Class CalendarioAjax
         If result.Equals("Exito") Then
             objCalendario.Nit_ID = Request.Form("Nit_ID")
             objCalendario.Calendario_ID = Request.Form("ID")
-            objCalendario.Descripcion = Request.Form("Descripcion")
+
+            objCalendario.Descripcion = Request.Form("descripcion")
             objCalendario.TipoCalendario = Request.Form("TipoCalendario")
 
             objCalendario.UsuarioActualizacion = Request.Form("user")
             objCalendario.FechaActualizacion = Date.Now
-            result = SQL_Calendario.UpdateCalendario(objCalendario)
+
 
             If result = "Exito" Then
-                Insert_CaledarioSemana()
+                Insert_HorariosCalendario()
             End If
 
         End If
@@ -205,7 +216,8 @@ Public Class CalendarioAjax
         objCalendario.Calendario_ID = Request.Form("ID")
         objCalendario.TipoCalendario = Request.Form("TipoCalendario")
 
-        result = SQL_Calendario.EraseCalendario(objCalendario)
+        result = SQL_Calendario.EraseCalendario(objCalendario) 'Que hacer case para que elimine de la otra tabla
+
         Response.Write(result)
     End Sub
 
@@ -223,7 +235,6 @@ Public Class CalendarioAjax
         Dim ObjListDroplist As New List(Of Droplist_Class)
         Dim vl_S_Tabla As String = Request.Form("tabla")
 
-        ObjListDroplist = SQL_Calendario.ReadCharge_DropList(vl_S_Tabla)
         Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
 
     End Sub
@@ -251,11 +262,26 @@ Public Class CalendarioAjax
 
         Dim SQL As New CalendarioSQLClass
         Dim ObjListDroplist As New List(Of CalendarioClass)
-        Dim obj As New ClienteClass
-        obj.Nit_ID = Request.Form("Nit")
-        obj.TipoSQL = "Calendar"
+        Dim obj As New CalendarioClass
 
-        ObjListDroplist = SQL.Read_Matrix_Calendarios(obj)
+        obj.Nit_ID = Request.Form("Nit")
+
+        ObjListDroplist = SQL.Read_Matrix_Calendarios_NIT(obj)
+        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga el objeto DDL consulta
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarFestivos()
+
+        Dim SQL As New FestivosSQLClass
+        Dim ObjListDroplist As New List(Of FestivosClass)
+        Dim obj As New FestivosClass
+
+        ObjListDroplist = SQL.Read_All_Festivos
         Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
 
     End Sub
@@ -263,6 +289,9 @@ Public Class CalendarioAjax
 #End Region
 
 #Region "FUNCIONES"
+    ''' <summary>
+    ''' Función que se encarga de traer el horario que se ha asignado a un calendario normal
+    ''' </summary>
     Protected Sub CargarMatrizDiasSemana()
         Dim SQL As New CalendarioSemanaSQLClass
         Dim ObjListDroplist As New List(Of CalendarioSemanaClass)

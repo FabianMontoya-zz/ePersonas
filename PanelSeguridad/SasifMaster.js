@@ -33,11 +33,19 @@ Matrix_Mes[8] = [9, "Septiembre", 30];
 Matrix_Mes[9] = [10, "Octubre", 31];
 Matrix_Mes[10] = [11, "Noviembre", 30];
 Matrix_Mes[11] = [12, "Diciembre", 31];
+//FABIAN
+var D_Semana = [];
+D_Semana[0] = "Domingo";
+D_Semana[1] = "Lunes";
+D_Semana[2] = "Martes";
+D_Semana[3] = "Miércoles";
+D_Semana[4] = "Jueves";
+D_Semana[5] = "Viernes";
+D_Semana[6] = "Sábado";
 /*--------------- region de variables globales --------------------*/
 
 $(document).ready(function () {
     clearConsole();
-
     fecha();
 
     $(".C_Chosen").chosen({
@@ -214,8 +222,8 @@ function ready() {
     Reload();
 }
 
-/*Función que recarga la página y exige que se traigan los nuevos cambios desde el servidor*/
-/*Funciona solamente cuando se cierra y nuevamente se abre el navegador*/
+/*Función que recarga la página y exige que se traigan los nuevos cambios desde el servidor
+  Funciona solamente cuando se cierra y nuevamente se abre el navegador*/
 function Reload() {
     /*
      * Obtenemos la última parte de la URL. Por ejemplo, en una URL como:
@@ -263,21 +271,25 @@ function btnSalir() {
     window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&Key=" + ArrayMenu[0].Nit + "&LINK=" + Link;
 }
 
+//Función que genera el evento del botón salir de los dialog de información --FABIAN
+function x() {
+    $("#dialog").dialog("close");
+}
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                 INICIO DE PROCESOS                                                                                                            ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //visualiza el menu version responsive
-function VerMenu(){
+function VerMenu() {
     //$(".Dimencion_Menu").width("240px");
-    if(vg_Flag_menu==0){
-        $(".panel_menu").show("fast"); 
+    if (vg_Flag_menu == 0) {
+        $(".panel_menu").show("fast");
         vg_Flag_menu = 1;
     }
-    else{
+    else {
         $(".panel_menu").hide("fast");
         vg_Flag_menu = 0;
     }
-    
+
 }
 
 //capturar el link y usuario para el proceso
@@ -425,11 +437,11 @@ function No_Back_Button() {
     window.location.hash = "no-back-button";
     window.location.hash = "Again-No-back-button" //chrome    
     window.onhashchange = function () { window.location.hash = "no-back-button"; }
-  
+
     document.onkeydown = mykeyhandler;
-  
+
     function mykeyhandler(event) {
-  
+
         //keyCode 116 = F5 
         //keyCode 122 = F11
         //keyCode 16 = Shift
@@ -445,7 +457,7 @@ function No_Back_Button() {
         //keyCode 85 = U 
         //keyCode 87 = W 
         //keyCode 45 = Insert
-  
+
         event = event || window.event;
         var tgt = event.target || event.srcElement;
         if ((event.altKey && event.keyCode == 37) || (event.altKey && event.keyCode == 39) ||
@@ -458,15 +470,15 @@ function No_Back_Button() {
             Mensaje_General("¡Alerta!", "¡Función no permitida!" , "W");
             return false;
         }
-  
+
         if (event.keyCode == 18 && tgt.type != "text" && tgt.type != "password" && tgt.type != "textarea") {
             return false;
         }
-  
+
         if (event.keyCode == 8 && tgt.type != "text" && tgt.type != "password" && tgt.type != "textarea") {
             return false;
         }
-  
+
         if ((event.keyCode == 116) ||
             (event.keyCode == 123) || //Línea F12
             (event.keyCode == 122)) {
@@ -476,7 +488,7 @@ function No_Back_Button() {
             return false;
         }
     }
-  
+
     function mouseDown(e) {
         var ctrlPressed = 0;
         var altPressed = 0;
@@ -499,22 +511,22 @@ function No_Back_Button() {
         }
         return true;
     }
-  
+
     if (parseInt(navigator.appVersion) > 3) {
         document.onmousedown = mouseDown;
         if (navigator.appName == "Netscape")
             document.captureEvents(Event.MOUSEDOWN);
     }
-  
+
     var message = "";
-  
+
     function clickIE() {
         if (document.all) {
             (message);
             return false;
         }
     }
-  
+
     function clickNS(e) {
         if (document.layers || (document.getElementById && !document.all)) {
             if (e.which == 2 || e.which == 3) {
@@ -522,15 +534,15 @@ function No_Back_Button() {
             }
         }
     }
-  
+
     if (document.layers) {
         document.captureEvents(Event.MOUSEDOWN);
         document.onmousedown = clickNS;
     } else {
         document.onmouseup = clickNS; document.oncontextmenu = clickIE;
-  
+
     }
-  
+
     document.oncontextmenu = new Function("return false");
 }
 
@@ -652,14 +664,37 @@ function Validahora(V_HoraInicial, V_HoraFinal) {
 
         if (parseInt(A_V_HoraInicial[0]) > parseInt(A_V_HoraFinal[0])) {
             Valida = 1;
-        }else if (parseInt(A_V_HoraInicial[0]) == parseInt(A_V_HoraFinal[0])) {
+        } else if (parseInt(A_V_HoraInicial[0]) == parseInt(A_V_HoraFinal[0])) {
             if (parseInt(A_V_HoraInicial[1]) > parseInt(A_V_HoraFinal[1])) {
                 Valida = 1;
             }
         }
-    }  
+    }
 
     return Valida;
+}
+
+//vFunción que valida si una hora es mayor que otra, devuelve True o False
+function SAS_ValidarHoras(V_HoraInicial, V_HoraFinal) {
+    try{    
+    var Valida = true;
+
+    var A_V_HoraInicial = V_HoraInicial.split(":");
+    var A_V_HoraFinal = V_HoraFinal.split(":");
+
+    if (parseInt(A_V_HoraInicial[0]) > parseInt(A_V_HoraFinal[0])) {
+        Valida = false;
+    } else if (parseInt(A_V_HoraInicial[0]) == parseInt(A_V_HoraFinal[0])) {
+        if (parseInt(A_V_HoraInicial[1]) > parseInt(A_V_HoraFinal[1])) {
+            Valida = false;
+        }
+    }
+    return Valida;
+    } catch (e) {
+        Mensaje_General("Error - No se puede validar", "Lo sentimos, ocurrió un error y no se pudo validar las horas, por favor verificar los datos", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (SasifMaster):\n" + e));
+        return false;
+    }
 }
 
 //VALIDAR FORMATO DE LA FECHA PARA LOS GRID
@@ -824,6 +859,21 @@ function Change_Compara_Fecha_Menor(Selector1, Selector2) {
         $("#" + Selector2 + "").datepicker("option", "maxDate", rango);
     });
 
+}
+
+//FABIAN -- Función que valida si la fecha que se envia es o no un día festivo validando contra un array que contiene los días festivos
+function VerifyFestivo(year, month, day, ArrayFestivos) {
+    var IsFestivo = false;
+    for (var i in ArrayFestivos) {
+        var dayFestivo = parseInt(ArrayFestivos[i].StrDia);
+        var monthFestivo = parseInt(ArrayFestivos[i].StrMes);
+        var yearFestivo = parseInt(ArrayFestivos[i].Year);
+        if (yearFestivo == year && monthFestivo == month && dayFestivo == day) {
+            IsFestivo = true;
+            break;
+        }
+    }
+    return IsFestivo;
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -1652,6 +1702,11 @@ function CargaCalendarios(Matrix, Selector, Index_Edit) {
         case "Select_Calendario_SS": //Calendario de Sucursal Servicio
             for (Item in Matrix) {
                 $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Index + " - " + Matrix[Item].Descripcion + " - " + Matrix[Item].Tipo_Tabla + "</option>");
+            }
+            break;
+        case "Select_Calendario_CP": //Calendarios de Calendario Progresivo -- FABIAN
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Calendario_ID + " - " + Matrix[Item].Descripcion + "</option>");
             }
             break;
     }
