@@ -1,9 +1,13 @@
 ﻿/*--------------- region de variables globales --------------------*/
 var ArrayFestivo = [];
 var ArrayCombo = [];
+var Matrix_Calendarios = [];
 var estado;
-var editID;
-var editDia;
+
+var editNit_ID = "";
+var editCalendario_ID = "";
+var editYear = "";
+var editMesDia = "";
 /*--------------- region de variables globales --------------------*/
 
 //Evento load JS
@@ -14,8 +18,13 @@ $(document).ready(function () {
     Ocultar_Errores();
     Ocultar_Tablas();
     /*================== FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN ==============*/
-    transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
 
+    transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
+    transacionAjax_EmpresaNit('Cliente');
+
+    Change_Select_Nit();
+
+    Picker_Fechas();
 });
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -24,18 +33,12 @@ $(document).ready(function () {
 //Función que oculta todas las IMG de los errores en pantalla
 function Ocultar_Errores() {
     ResetError();
-
     $("#ESelect").css("display", "none");
-    $("#ImgID").css("display", "none");
-    $("#Img1").css("display", "none");
-    $("#Img2").css("display", "none");
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
     $("#WA").css("display", "none");
 
-
     $("#TablaConsulta").css("display", "none");
-
 }
 
 //funcion para las ventanas emergentes
@@ -65,6 +68,11 @@ function Ocultar_Tablas() {
     $("#TablaConsulta").css("display", "none");
 }
 
+//Función de control del picker de las fechas
+function Picker_Fechas() {
+    $("#Txt_Año").datepicker({ dateFormat: 'yy-mm-dd', changeYear: true, changeMonth: true }); //Inicializa Datapicker
+    $("#Txt_Año").datepicker("option", "yearRange", "-50:+20"); //Rango de los años, hacia atrás y hacia adelante
+}
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                 REGION BOTONES                                                                                                                ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -78,6 +86,7 @@ function BtnConsulta() {
     if (ValidateSelect == 1) {
         filtro = "N";
         opcion = "ALL";
+        $("#TxtRead").val("");
         transacionAjax_Festivo("consulta", filtro, opcion);
     }
     else {
@@ -90,17 +99,21 @@ function BtnConsulta() {
 
 //crear link en la BD
 function BtnCrear() {
+    try {
+        var validate;
+        validate = validarCamposCrear();
 
-    var validate;
-    validate = validarCamposCrear();
-
-    if (validate == 0) {
-        if ($("#Btnguardar").val() == "Guardar") {
-            transacionAjax_Festivo_create("crear");
+        if (validate == 0) {
+            if ($("#Btnguardar").val() == "Guardar") {
+                transacionAjax_Festivo_create("crear");            
+            } else {
+                Mensaje_General("¡Acción NO valida!", "La acción «" + $("#Btnguardar").val() + "» no es una acción valida para el sistema, favor recargar la página para solucionar este error.", "E");
+                setTimeout(console.warn.bind(console, "• Log de error generado (Festivos):\nSe intentó ejecutar una acción no valida, solo se permite creación en este módulo."));
+            }
         }
-        else {
-            transacionAjax_Festivo_create("modificar");
-        }
+    } catch (e) {
+        Mensaje_General("Error - No se logró " + $("#Btnguardar").val(), "Lo sentimos, ocurrió un error y no se logró ejecutar la acción de " + $("#Btnguardar").val() + ", favor verifique los datos.", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (Festivos):\n" + e));
     }
 }
 
@@ -109,69 +122,35 @@ function BtnElimina() {
     transacionAjax_Festivo_delete("elimina");
 }
 
-//evento del boton salir
-function x() {
-    $("#dialog").dialog("close");
-}
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                      REGION VALIDACIONES DEL PROCESO                                                                                                                ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //validamos campos para la creacion del link
 function validarCamposCrear() {
 
+    var NIT_ID = $("#Select_EmpresaNit").val();
+    var Calendario_ID = $("#Select_Calendario_CP").val();
     var valID = $("#Txt_Año").val();
-    var descrip = $("#Txt_mes_Dia").val();
 
     var validar = 0;
-    var flag_y = 0;
-    var flag_m = 0;
 
-    if (descrip == "" || valID == "" || valID.length != 4 || descrip.length != 4) {
+    if (valID == "" || NIT_ID == "-1" || NIT_ID == null || Calendario_ID == "-1" || Calendario_ID == null) {
         validar = 1;
+
+        if (NIT_ID == "-1" || NIT_ID == null) { $("#Img1").css("display", "inline-table"); } else { $("#Img1").css("display", "none"); }
+        if (Calendario_ID == "-1" || Calendario_ID == null) { $("#Img2").css("display", "inline-table"); } else { $("#Img2").css("display", "none"); }
+
         if (valID == "") {
-            $("#ImgID").css("display", "inline-table");
+            $("#Img3").css("display", "inline-table");
             $("#S_Y").html(ArrayMensajes[0].Mensajes_ID + ": " + ArrayMensajes[0].Descripcion);
-            flag_y = 1;
         }
         else {
-            $("#ImgID").css("display", "none");
-        }
-        if (descrip == "") {
-            $("#Img1").css("display", "inline-table");
-            $("#S_D").html(ArrayMensajes[0].Mensajes_ID + ": " + ArrayMensajes[0].Descripcion);
-            flag_m = 1;
-        }
-        else {
-            $("#Img1").css("display", "none");
+            $("#Img3").css("display", "none");
         }
 
-        if (flag_y == 0) {
-
-            if (valID.length != 4) {
-                $("#ImgID").css("display", "inline-table");
-                $("#S_Y").html(ArrayMensajes[2].Mensajes_ID + ": " + ArrayMensajes[2].Descripcion);
-            }
-            else {
-                $("#ImgID").css("display", "none");
-                $("#S_Y").html(ArrayMensajes[0].Mensajes_ID + ": " + ArrayMensajes[0].Descripcion);
-            }
-        }
-
-        if (flag_m == 0) {
-
-            if (descrip.length != 4) {
-                $("#Img1").css("display", "inline-table");
-                $("#S_D").html(ArrayMensajes[3].Mensajes_ID + ": " + ArrayMensajes[3].Descripcion);
-            }
-            else {
-                $("#Img1").css("display", "none");
-                $("#S_D").html(ArrayMensajes[0].Mensajes_ID + ": " + ArrayMensajes[0].Descripcion);
-            }
-        }
     }
     else {
-        $("#Img1").css("display", "none");
-        $("#ImgID").css("display", "none");
+        $("#Img3").css("display", "none");
     }
     return validar;
 }
@@ -236,21 +215,19 @@ function Table_Festivo() {
     switch (estado) {
 
         case "buscar":
-            html_TFestivo = "<table id='TFestivo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Año</th><th>Mes/Dia</th></tr></thead><tbody>";
+            html_TFestivo = "<table id='TFestivo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>NIT Empresa</th><th>Calendario</th><th>Año</th><th>Mes/Dia</th></tr></thead><tbody>";
             for (itemArray in ArrayFestivo) {
                 if (ArrayFestivo[itemArray].Año != 0) {
-                    vl_Index_Festivo = parseInt(ArrayFestivo[itemArray].Index) - 1;
-                    html_TFestivo += "<tr id= 'TFestivo_" + vl_Index_Festivo + "'><td>" + ArrayFestivo[itemArray].Year + "</td><td>" + ArrayFestivo[itemArray].StrMes + " / " + ArrayFestivo[itemArray].StrDia + "</td></tr>";
+                    html_TFestivo += "<tr id= 'TFestivo_" + ArrayFestivo[itemArray].Index + "'><td style='white-space: nowrap;'>" + ArrayFestivo[itemArray].Nit_ID + " - " + ArrayFestivo[itemArray].DescripcionEmpresa + "</td><td style='white-space: nowrap;'>" + ArrayFestivo[itemArray].Calendario_ID + " - " + ArrayFestivo[itemArray].DescripcionCalendario + "</td><td>" + ArrayFestivo[itemArray].Year + "</td><td>" + ArrayFestivo[itemArray].StrMes + " / " + ArrayFestivo[itemArray].StrDia + "</td></tr>";
                 }
             }
             break;
 
         case "eliminar":
-            html_TFestivo = "<table id='TFestivo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Año</th><th>Mes/Dia</th></tr></thead><tbody>";
+            html_TFestivo = "<table id='TFestivo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>NIT Empresa</th><th>Calendario</th><th>Año</th><th>Mes/Dia</th></tr></thead><tbody>";
             for (itemArray in ArrayFestivo) {
                 if (ArrayFestivo[itemArray].Year != 0) {
-                    vl_Index_Festivo = parseInt(ArrayFestivo[itemArray].Index) - 1;
-                    html_TFestivo += "<tr id= 'TFestivo_" + vl_Index_Festivo + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + vl_Index_Festivo + "')\"></img><span>Eliminar Festivos</span></span></td><td>" + ArrayFestivo[itemArray].Year + "</td><td>" + ArrayFestivo[itemArray].StrMes + " / " + ArrayFestivo[itemArray].StrDia + "</td></tr>";
+                    html_TFestivo += "<tr id= 'TFestivo_" + ArrayFestivo[itemArray].Index + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArrayFestivo[itemArray].Index + "')\"></img><span>Eliminar Festivos</span></span></td><td style='white-space: nowrap;'>" + ArrayFestivo[itemArray].Nit_ID + " - " + ArrayFestivo[itemArray].DescripcionEmpresa + "</td><td style='white-space: nowrap;'>" + ArrayFestivo[itemArray].Calendario_ID + " - " + ArrayFestivo[itemArray].DescripcionCalendario + "</td><td>" + ArrayFestivo[itemArray].Year + "</td><td>" + ArrayFestivo[itemArray].StrMes + " / " + ArrayFestivo[itemArray].StrDia + "</td></tr>";
                 }
             }
             break;
@@ -268,11 +245,23 @@ function Table_Festivo() {
 //muestra el registro a eliminar
 function Eliminar(vp_Index) {
 
-    editID = ArrayFestivo[vp_Index].Year;
-    editDia = ArrayFestivo[vp_Index].Mes_Dia;
-    $("#dialog_eliminar").dialog("option", "title", "Eliminar?");
+    for (var i in ArrayFestivo) {
+        if (ArrayFestivo[i].Index == vp_Index) {
+            editNit_ID = ArrayFestivo[i].Nit_ID;
+            editCalendario_ID = ArrayFestivo[i].Calendario_ID;
+            editYear = ArrayFestivo[i].Year;
+            editMesDia = ArrayFestivo[i].Mes_Dia;
+        }
+    }    
+
+    $("#dialog_eliminar").dialog("option", "title", "¿Eliminar Festivo?");
     $("#dialog_eliminar").dialog("open");
 
+}
+
+//Función que ejecuta todas las transacciones que dependen de la selección de un NIT
+function TransaccionesNIT(NIT) {
+    transacionAjax_ChargeCalendarios('MatrixCalendarios', NIT);
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -280,8 +269,40 @@ function Eliminar(vp_Index) {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //limpiar campos
 function Clear() {
+    Matrix_Calendarios = [];
+    editNit_ID = "";
+    editCalendario_ID = "";
+    editYear = "";
+    editMesDia = "";
+
+    $("#Select_EmpresaNit").val("-1").trigger('chosen:updated');
+    $("#Select_Calendario_CP").empty().trigger("chosen:updated");
     $("#Txt_Año").val("");
-    $("#Txt_mes_Dia").val("");
     $("#TxtRead").val("");
     $("#DDLColumns").val("-1").trigger('chosen:updated');
+
+    var Only_Empresa = VerificarNIT("Select_EmpresaNit");
+
+    if (Only_Empresa == true) {
+        $("#Txt_ID").val("");
+        TransaccionesNIT($("#Select_EmpresaNit").val());
+    }
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                             PROCESOS DE CHANGES                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+//Proceso de Change para el NIT Empresa
+function Change_Select_Nit() {
+    $("#Select_EmpresaNit").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_EmpresaNit").val() == "-1") {
+            $("#Img1").css("display", "inline-table");
+            $("#Select_Calendario_CP").empty().trigger("chosen:updated");
+        } else {
+            $("#Select_Calendario_CP").empty();
+            TransaccionesNIT($(this).val());
+        }
+    });
 }

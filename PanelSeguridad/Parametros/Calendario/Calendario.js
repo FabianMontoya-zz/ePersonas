@@ -196,6 +196,7 @@ function BtnConsulta() {
     if (ValidateSelect == 1) {
         filtro = "N";
         opcion = "ALL";
+        $("#TxtRead").val("");
         transacionAjax_ConsultCalendario("consulta", filtro, opcion);
     }
     else {

@@ -33,7 +33,7 @@ Matrix_Mes[8] = [9, "Septiembre", 30];
 Matrix_Mes[9] = [10, "Octubre", 31];
 Matrix_Mes[10] = [11, "Noviembre", 30];
 Matrix_Mes[11] = [12, "Diciembre", 31];
-//FABIAN
+
 var D_Semana = [];
 D_Semana[0] = "Domingo";
 D_Semana[1] = "Lunes";
@@ -42,6 +42,7 @@ D_Semana[3] = "Miércoles";
 D_Semana[4] = "Jueves";
 D_Semana[5] = "Viernes";
 D_Semana[6] = "Sábado";
+
 /*--------------- region de variables globales --------------------*/
 
 $(document).ready(function () {
@@ -77,10 +78,32 @@ $(document).ready(function () {
     $('.Hours').focus(function () {
         this.value = "";
     });
-
+    StartDatepicker();
     ready();
 
 });
+
+//Función que da los parametros para que el datepicker se inicie por defecto en español
+function StartDatepicker() {
+    $.datepicker.regional['es'] = {
+        closeText: 'Cerrar',
+        prevText: 'Anterior',
+        nextText: 'Siguiente',
+        currentText: 'Hoy',
+        monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+        monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+        dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+        dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
+        dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+        weekHeader: 'Sm',
+        dateFormat: 'dd/mm/yy',
+        firstDay: 0,
+        isRTL: false,
+        showMonthAfterYear: false,
+        yearSuffix: ''
+    };
+    $.datepicker.setDefaults($.datepicker.regional['es']);
+}
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                      VALIDADORES EN ONKEYPRESS                                                                                                          ----*/
@@ -397,6 +420,9 @@ function ResetError() {
     $("#Img2").css("display", "none");
     $("#Img3").css("display", "none");
     $("#Img5").css("display", "none");
+    $("#Img6").css("display", "none");
+    $("#Img7").css("display", "none");
+    $("#Img8").css("display", "none");
     $("#Img9").css("display", "none");
     $("#Img10").css("display", "none");
     $("#Img11").css("display", "none");
@@ -1704,7 +1730,7 @@ function CargaCalendarios(Matrix, Selector, Index_Edit) {
                 $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Index + " - " + Matrix[Item].Descripcion + " - " + Matrix[Item].Tipo_Tabla + "</option>");
             }
             break;
-        case "Select_Calendario_CP": //Calendarios de Calendario Progresivo -- FABIAN
+        case "Select_Calendario_CP": //Calendarios de Calendario Progresivo y festivos
             for (Item in Matrix) {
                 $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Calendario_ID + " - " + Matrix[Item].Descripcion + "</option>");
             }

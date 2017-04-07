@@ -8,7 +8,7 @@ function transacionAjax_CargaBusqueda(State) {
             //crear json
             data: {
                 "action": State,
-                "tabla": 'CalendarioProgresivo'
+                "tabla": 'Calendario'
             },
             //Transaccion Ajax en proceso
             success: function (result) {
@@ -67,12 +67,23 @@ function transacionAjax_EmpresaNit(State) {
 function transacionAjax_ChargeFestivos(State) {
     try {
         MatrizFestivos = [];
+        var ID_Calendario_Base = "";
+        var Index_Calendar = $("#Select_Calendario_CP").val();
+
+        for (var i in Matrix_Calendarios) {
+            if (Index_Calendar == Matrix_Calendarios[i].Index) {
+                ID_Calendario_Base = Matrix_Calendarios[i].Calendario_ID;
+                break;
+            }
+        }
         $.ajax({
-            url: "Calendario_ProgresivoAjax.aspx",
+            url: "Calendario_ProgresivoAjax.aspx",            
             type: "POST",
             //crear json
             data: {
-                "action": State
+                "action": State,
+                "Nit_ID": $("#Select_EmpresaNit").val(),
+                "Calendario_ID": ID_Calendario_Base
             },
             //Transaccion Ajax en proceso
             success: function (result) {
@@ -85,10 +96,12 @@ function transacionAjax_ChargeFestivos(State) {
             },
             error: function () {
                 Mensaje_General("Error al consultar Festivos", "Lo sentimos, ocurrió un error mientras se cargaban los días festivos y la operación se ha cancelado. Intente más tarde la operación.", "E");
-            }
+            },
+            async: false, // La petición es síncrona
+            cache: false // No queremos usar la caché del navegador
         });
     } catch (e) {
-        Mensaje_General("Error - Transacción Ajax fallida", "Lo sentimos, ocurrió un error y no se logró completar la transacción ajax solicitada, favor verifique los datos.", "E");
+        Mensaje_General("Error - Transacción Ajax fallida", "Lo sentimos, ocurrió un error y no se logró completar la transacción ajax para consulta de festivos, favor verifique los datos.", "E");
         setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo):\n" + e));
     }
 }
@@ -133,7 +146,7 @@ function transacionAjax_ConsultCalendario(State, filtro, opcion) {
     try {
         var contenido;
 
-        if ($("#TxtRead").val() == "") {
+        if (filtro == "N") {
             contenido = "ALL";
         }
         else {
