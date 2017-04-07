@@ -1,6 +1,5 @@
 ﻿/*-- DIV PARTE CONTAINER PAGINA ---*/
-#panel_pag
-{
+#panel_pag {
     vertical-align: text-top;
     padding-left: 30px;
     width: 100%;
@@ -10,8 +9,7 @@
 BARRA DE TITULO 
 *************************************************************************************/
 /*personalizacion de la barra de titulo*/
-.Container_title_Form
-{
+.Container_title_Form {
     background: -webkit-linear-gradient(#b70d0d, #631111); /*For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#b70d0d, #631111); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#b70d0d, #631111); /* For Firefox 3.6 to 15 */
@@ -27,8 +25,7 @@ BARRA DE TITULO
 }
 
 /*-- TABLE TITULO CONTENT---*/
-#Tabla_Title_form
-{
+#Tabla_Title_form {
     width: 100%;
 }
 
@@ -36,8 +33,7 @@ BARRA DE TITULO
 CONTENEDOR DE FORMULARIO
 *************************************************************************************/
 /*-- DIV CONTENT PRINCIPAL---*/
-.Marco_Container
-{
+.Marco_Container {
     margin-top: 35px;
     margin-left: 25px;
     padding: 14px 14px;
@@ -53,8 +49,7 @@ CONTENEDOR DE FORMULARIO
 }
 
 /*DIV CONTENT PRINCIPAL SIN ADMINISTRACION*/
-.Marco_Container_Flex
-{
+.Marco_Container_Flex {
     margin-top: 35px;
     margin-left: 25px;
     padding: 14px 14px;
@@ -71,8 +66,7 @@ CONTENEDOR DE FORMULARIO
 }
 
 /*-- DIV CONTENT BOTONES ADMINISTRACION---*/
-.Marco_btn_Form
-{
+.Marco_btn_Form {
     margin-top: 1px;
     padding: 20px 20px;
     background-color: silver;
@@ -88,8 +82,7 @@ CONTENEDOR DE FORMULARIO
 }
 
 /*-- DIV CONTENT AREA DE TRABAJO---*/
-.Marco_trabajo_Flex
-{
+.Marco_trabajo_Flex {
     position: relative;
     margin-top: 10px;
     padding: 20px 20px;
@@ -105,8 +98,7 @@ CONTENEDOR DE FORMULARIO
 }
 
 /*-- DIV CONTENT AREA DE TRABAJO---*/
-.Marco_trabajo_Form
-{
+.Marco_trabajo_Form {
     position: relative;
     margin-top: 10px;
     padding: 20px 20px;
@@ -122,14 +114,12 @@ CONTENEDOR DE FORMULARIO
 }
 
 /*-- DIV CONTENT AREA DE DATOS CONSULTA---*/
-.Container_controls
-{
+.Container_controls {
     width: 100%;
 }
 
 /*-- TABLA FILTRO DE CONSULTA---*/
-#TablaConsulta
-{
+#TablaConsulta {
     width: 100%;
     padding: 20px 26px;
     border-radius: 10px;
@@ -141,9 +131,8 @@ CONTENEDOR DE FORMULARIO
 }
 
 /*-- TABLA CREACION DE DATOS---*/
-#TablaDatos
-{
-    width: 100%;
+#TablaDatos {
+    width: 96%;
     padding: 20px 26px;
     border-radius: 10px;
     background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
@@ -154,8 +143,7 @@ CONTENEDOR DE FORMULARIO
 }
 
 /*-- DIALOGO CREACION DE DATOS---*/
-.Dialog_Datos, .Dialog_Datos_Vista
-{
+.Dialog_Datos, .Dialog_Datos_Vista {
     width: 96%;
     height: 100%;
     padding: 2%;
@@ -169,8 +157,7 @@ CONTENEDOR DE FORMULARIO
 }
 
 /*-- DIALOGO TABLA DE ENCABEZAO DE DATOS PARA  DIALOGO ---*/
-.Header_Datos_Max
-{
+.Header_Datos_Max {
     width: 1120px;
     height: 600px;
     overflow: auto;
@@ -184,8 +171,7 @@ CONTENEDOR DE FORMULARIO
 }
 
 /*-- CONTENEDOR DE LAS GRILLAS DE CONSULTA CON ADMINISTRACION ---*/
-.container_TGrid
-{
+.container_TGrid {
     width: 1050px;
     height: 348px;
     overflow: auto;
@@ -195,8 +181,7 @@ CONTENEDOR DE FORMULARIO
 }
 
 /*-- CONTENEDOR DE LAS GRILLAS DE CONSULTA SIN ADMINISTRACION ---*/
-.container_TGrid_New
-{
+.container_TGrid_New {
     width: 100%;
     height: 100%;
     overflow: auto;
@@ -206,8 +191,7 @@ CONTENEDOR DE FORMULARIO
 }
 
 /*-- CONTENEDOR DE LAS GRILLAS DE OPERACION EN LOS MODULOS ---*/
-.container_TGrid_Create
-{
+.container_TGrid_Create {
     width: 1120px;
     height: 360px;
     overflow: auto;
@@ -229,8 +213,7 @@ CONTENEDOR DE FORMULARIO
 }
 
 /*-- CONTENEDOR DE LAS GRILLAS DE OPERACION EN EL MODULO CLIENTE ---*/
-#container_Document, #container_direccion, #container_Bank
-{
+#container_Document, #container_direccion, #container_Bank {
     width: 970px;
     height: 340px;
     overflow: auto;
@@ -240,8 +223,7 @@ CONTENEDOR DE FORMULARIO
 }
 
 /*-- CONTENEDOR DE LAS GRILLAS DE CONSULTA PEQUENAS ---*/
-.container_TGrid_Compact
-{
+.container_TGrid_Compact {
     width: 930px;
     height: 150px;
     overflow: auto;
@@ -253,8 +235,7 @@ CONTENEDOR DE FORMULARIO
 }
 
 /*-- CONTENEDOR DE LAS GRILLAS EN MODULOS ESPECIALES 100% ---*/
-.container_Grid_Flex, #Blo_Inmuebles, #Blo_Fasecolda
-{
+.container_Grid_Flex, #Blo_Inmuebles, #Blo_Fasecolda {
     margin-top: 1%;
     margin-bottom: 1%;
     width: 100%;
@@ -269,8 +250,7 @@ CONTENEDOR DE FORMULARIO
 }
 
 /*-- CONTENEDOR DE LAS GRILLAS EN MODULOS ESPECIALES 95% ---*/
-.container_Grid_Flex_95, RID#Bloque_datosIngreso, #T_Datos_Identificacion_blin, #Bloque_datos_activos, #Bloque_Datos_Factura
-{
+.container_Grid_Flex_95, RID#Bloque_datosIngreso, #T_Datos_Identificacion_blin, #Bloque_datos_activos, #Bloque_Datos_Factura {
     margin-top: 1%;
     margin-bottom: 1%;
     width: 95%;
@@ -284,8 +264,7 @@ CONTENEDOR DE FORMULARIO
 }
 
 /*-- CONTENEDOR POR BLOQUES EN TABLAS ---*/
-.Table_Header_Block
-{
+.Table_Header_Block {
     margin-top: 10px;
     width: 100%;
     padding: 20px 26px;
@@ -298,8 +277,7 @@ CONTENEDOR DE FORMULARIO
 }
 
 /*-- CONTENEDOR POR BLOQUES EN DIV---*/
-.Div_Complement_Block
-{
+.Div_Complement_Block {
     margin-top: 20px;
     width: 90%;
     padding: 40px 30px;
@@ -312,8 +290,7 @@ CONTENEDOR DE FORMULARIO
 }
 
 /*-- CONTENEDOR POR BLOQUES EN DIV FULL ESPACIO---*/
-.Div_Full_Block
-{
+.Div_Full_Block {
     width: 100%;
     overflow: auto;
     font: 12px/20px CenturyGothic,sans-serif;
@@ -321,8 +298,7 @@ CONTENEDOR DE FORMULARIO
 }
 
 /*-- TABLAS ESPECIALES EN AGREGAR DIRECCION---*/
-.Container_Direccion
-{
+.Container_Direccion {
     margin-top: 10px;
     width: 740px;
     border-radius: 20px;
@@ -336,16 +312,14 @@ FUNCIONALIDADES GLOBLARES
 *************************************************************************************/
 
 /*--- BOTONES DE GUARDADO DE FORMULARIOS ---*/
-#Controls
-{
+#Controls {
     text-align: center;
     width: 100%;
     margin: 10px;
 }
 
 /*--- ESTILO SASIF PARA LOS DIALOGOS O VENTANAS EMERGENTES ---*/
-.Dialog_Sasif
-{
+.Dialog_Sasif {
     border-radius: 10px;
     padding: 20px 26px;
     background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
@@ -356,8 +330,7 @@ FUNCIONALIDADES GLOBLARES
 }
 
 /*--- ESTILO PARA EL POSICIONAMIENTO DE FOTOS ---*/
-#Foto_Persona
-{
+#Foto_Persona {
     width: 86%;
     height: 120px;
     position: absolute;
@@ -367,14 +340,12 @@ FUNCIONALIDADES GLOBLARES
 }
 
 /*--- ESTILO DE LA X DE SALIDA DEL  FORMULARIO---*/
-#image_exit
-{
+#image_exit {
     text-align: end;
 }
 
 /*--- ESTILO FOOTER PARA DETALLE DE USUARIO---*/
-#Footer_Det
-{
+#Footer_Det {
     position: absolute;
     margin-top: 55px;
     border: solid 1px;
@@ -383,15 +354,13 @@ FUNCIONALIDADES GLOBLARES
 }
 
 /*CONTROL IMAGEN DIRECCION*/
-#logoExt:hover .Ext
-{
+#logoExt:hover .Ext {
     content: url("../../images/agenda_gray.png");
     cursor: pointer;
     cursor: hand; /*internet explorer*/
 }
 
-.Ext
-{
+.Ext {
     content: url("../../images/agenda.png");
 }
 /************************************************************************************
@@ -399,8 +368,7 @@ FUNCIONALIDADES SUB MENU CLIENTES
 *************************************************************************************/
 
 /*CONTAINER SELECCION SUBMENU*/
-#Container_Complementos
-{
+#Container_Complementos {
     height: 45%;
     width: 20%;
     position: absolute;
@@ -417,8 +385,7 @@ FUNCIONALIDADES SUB MENU CLIENTES
 }
 
 /*CONTROL SELECCION SUBMENU*/
-.Option_Cliente
-{
+.Option_Cliente {
     background: -webkit-linear-gradient(#e0e0e0, #dadada); /*For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#e0e0e0, #dadada); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#e0e0e0, #dadada); /* For Firefox 3.6 to 15 */
@@ -430,8 +397,7 @@ FUNCIONALIDADES SUB MENU CLIENTES
     color: gray;
 }
 
-    .Option_Cliente:hover
-    {
+    .Option_Cliente:hover {
         background: -webkit-linear-gradient(#b70d0d, #631111);
         background: -o-linear-gradient(#b70d0d, #631111);
         background: -moz-linear-gradient(#b70d0d, #631111);
@@ -442,8 +408,7 @@ FUNCIONALIDADES SUB MENU CLIENTES
     }
 
 /*CLASE DE MANEJO DE TITULO SUB MENU*/
-.T_options
-{
+.T_options {
     margin-top: 25px;
     margin-left: 50px;
     position: absolute;
@@ -451,61 +416,67 @@ FUNCIONALIDADES SUB MENU CLIENTES
 }
 
 /*CLASE DE MANEJO DE IMAGEN SUB MENU*/
-.C_Image
-{
+.C_Image {
     padding-left: 10px;
     position: absolute;
 }
 
 /*CLASE DE MANEJO DE TEXTO SUB MENU*/
-.C_Text
-{
+.C_Text {
     padding-left: 60px;
     margin-top: 15px;
 }
 
 /*CONTROL IMAGEN DIRECCION*/
-#DivA:hover .ImaAddress
-{
+#DivA:hover .ImaAddress {
     content: url("../../images/adress_book_w.png");
 }
 
-.ImaAddress
-{
+.ImaAddress {
     content: url("../../images/adress_book.png");
 }
 
 /*CONTROL IMAGEN BANCO*/
-#DivB:hover .ImaBank
-{
+#DivB:hover .ImaBank {
     content: url("../../images/bank_w.png");
 }
 
-.ImaBank
-{
+.ImaBank {
     content: url("../../images/bank.png");
 }
 
 /*CONTROL IMAGEN DOCUMENTO*/
-#DivD:hover .ImaDoc
-{
+#DivD:hover .ImaDoc {
     content: url("../../images/documentos_w.png");
 }
 
-.ImaDoc
-{
+.ImaDoc {
     content: url("../../images/documentos.png");
 }
 
 /*CONTROL IMAGEN RELACION*/
-#Div_R:hover .ImaRelation, #Div_RC:hover .ImaRelation
-{
+#Div_R:hover .ImaRelation, #Div_RC:hover .ImaRelation {
     content: url("../../images/Relation_Gray.png");
+    cursor: pointer;
+    cursor: hand; /*internet explorer*/
 }
 
-.ImaRelation
-{
+.ImaRelation {
     content: url("../../images/Relation_Red.png");
+}
+
+/************************************************************************************
+FUNCIONALIDADES INFORMACION IMPUESTOS
+*************************************************************************************/
+/*CONTROL IMAGEN RELACION*/
+#DivCliente:hover .ImaClient {
+    content: url("../../images/Cliente_Gray.png");
+    cursor: pointer;
+    cursor: hand; /*internet explorer*/
+}
+
+.ImaClient {
+    content: url("../../images/Cliente_Red.png");
 }
 
 
@@ -513,147 +484,161 @@ FUNCIONALIDADES SUB MENU CLIENTES
 MEDIA QUERIES
 *************************************************************************************/
 /* para 980px o menos horizontal*/
-@media screen and (max-width: 980px)
-{
-    .Container_title_Form
-    {
+@media screen and (max-width: 980px) {
+    .Container_title_Form {
         width: 92%;
     }
 
-    .Marco_Container
-    {
+    .Marco_Container {
         width: 89%;
     }
 
-    .Marco_Container_Flex
-    {
+    .Marco_Container_Flex {
         width: 89%;
     }
 
-    .Marco_btn_Form
-    {
+    .Marco_btn_Form {
         width: 95%;
     }
 
-    .Marco_trabajo_Form
-    {
+    .Marco_trabajo_Form {
         width: 95%;
     }
 
-    .Marco_trabajo_Flex
-    {
+    .Marco_trabajo_Flex {
         width: 95%;
+    }
+
+    #panel_pag {
+        vertical-align: -webkit-baseline-middle;
+        width: 90%;
+    }
+
+    .marco {
+        margin-top: 30px;
+        padding-bottom: 15%;
+        padding-left: 20%;
+        padding-right: 20%;
     }
 }
 
 /* para 700px o menos */
-@media screen and (max-width: 700px)
-{
-    .Container_title_Form
-    {
+@media screen and (max-width: 700px) {
+    .Container_title_Form {
         width: 89%;
     }
 
-    .Marco_Container
-    {
+    .Marco_Container {
         width: 85.7%;
     }
 
-    .Marco_Container_Flex
-    {
+    .Marco_Container_Flex {
         width: 85.7%;
     }
 
-    .Marco_btn_Form
-    {
+    .Marco_btn_Form {
         width: 92%;
     }
 
-    .Marco_trabajo_Form
-    {
+    .Marco_trabajo_Form {
         width: 92%;
     }
 
-    .Marco_trabajo_Flex
-    {
+    .Marco_trabajo_Flex {
         width: 92%;
+    }
+
+    #panel_pag {
+        vertical-align: -webkit-baseline-middle;
+        width: 90%;
+    }
+
+    .marco {
+        margin-top: 30px;
+        padding-bottom: 8%;
+        padding-left: 10%;
+        padding-right: 10%;
     }
 }
 
 /* para 550px o menos */
-@media screen and (max-width: 550px)
-{
-    .Container_title_Form
-    {
+@media screen and (max-width: 550px) {
+    .Container_title_Form {
         width: 87%;
     }
 
-    .Marco_Container
-    {
+    .Marco_Container {
         width: 82.7%;
     }
 
-    .Marco_Container_Flex
-    {
+    .Marco_Container_Flex {
         width: 82.7%;
     }
 
-    .Marco_btn_Form
-    {
+    .Marco_btn_Form {
         width: 90%;
         height: 10%;
     }
 
-    .Marco_trabajo_Form
-    {
+    .Marco_trabajo_Form {
         width: 90%;
     }
 
-    .Marco_trabajo_Flex
-    {
+    .Marco_trabajo_Flex {
         width: 90%;
+    }
+
+    #panel_pag {
+        vertical-align: -webkit-baseline-middle;
+        width: 90%;
+    }
+
+    .marco {
+        margin-top: 30px;
+        padding-left: 7%;
+        padding-right: 7%;
     }
 }
 
 /* para 480px o menos */
-@media screen and (max-width: 480px)
-{
-    .Container_title_Form
-    {
+@media screen and (max-width: 480px) {
+    .Container_title_Form {
         width: 95.5%;
         margin-left: -30px;
     }
 
-    .Marco_Container
-    {
+    .Marco_Container {
         width: 86.5%;
         margin-left: -30px;
     }
 
-    .Marco_Container_Flex
-    {
+    .Marco_Container_Flex {
         width: 86.5%;
         margin-left: -30px;
     }
 
-    .Marco_btn_Form
-    {
+    .Marco_btn_Form {
         width: 83%;
     }
 
-    .Marco_trabajo_Form
-    {
+    .Marco_trabajo_Form {
         width: 83%;
     }
 
-    .Marco_trabajo_Flex
-    {
+    .Marco_trabajo_Flex {
         width: 83%;
     }
 
-    input[type='button']
-    {
+    input[type='button'] {
         width: 80px;
+    }
+
+    .marco {
+        margin-top: 30px;
+        padding-top: 5%;
+        padding-bottom: 2%;
+        padding-left: 0%;
+        padding-right: 0%;
     }
 }
 
@@ -662,8 +647,7 @@ MEDIA QUERIES
 /************************************************************************************
 /************************************************************************************
 /* pendiente por fallas en el modulo informe impuesto*/
-#D_Impuestos, #D_Clientes_Z
-{
+#D_Impuestos, #D_Clientes_Z {
     margin-top: 15px;
     padding: 20px 26px;
     border-radius: 10px;
@@ -677,4 +661,4 @@ MEDIA QUERIES
 /* pendiente por fallas en el modulo informe impuesto*/
 /************************************************************************************
 /************************************************************************************
-/************************************************************************************
+/*************************************************************************************/

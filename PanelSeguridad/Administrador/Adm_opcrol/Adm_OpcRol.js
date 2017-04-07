@@ -124,8 +124,6 @@ function BtnConsulta() {
     var ValidateSelect = ValidarDroplist();
     var opcion;
 
-    OpenControl();
-
     if (ValidateSelect == 1) {
         filtro = "N";
         opcion = "ALL";

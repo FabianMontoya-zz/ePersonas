@@ -70,12 +70,14 @@ function transacionAjax_Calendario(State) {
             }
             else {
                 Matrix_Calendarios = JSON.parse(result);
-                CargaCalendarios(Matrix_Calendarios, "Select_Calendario", "");
             }
         },
         error: function () {
 
-        }
+        },
+    }).done(function () {
+        Charge_Combos_Depend_Nit(Matrix_Calendarios, "Select_Calendario", "", "");
+
     });
 }
 
@@ -123,25 +125,13 @@ function transacionAjax_Paises(State, filtro, opcion) {
 function transacionAjax_Paises_create(State) {
 
     var ID;
-    var param;
-    var moneda;
-    var calendario_id;
-
+      
     if (State == "modificar") {
         ID = editID;
     } else {
         ID = $("#Txt_Codigo").val();
     }
-
-
-    for (item in Matrix_Calendarios) {
-        if (Matrix_Calendarios[item].Index == $("#Select_Calendario").val()) {
-            calendario_id = Matrix_Calendarios[item].Calendario_ID;
-            break;
-        }
-    }
-
-
+    
     $.ajax({
         url: "PaisesAjax.aspx",
         type: "POST",
@@ -152,7 +142,7 @@ function transacionAjax_Paises_create(State) {
             "Pais": $("#Txt_Pais").val(),
             "Moneda": $("#Select_moneda").val(),
             "SWIFT": $("#TxtSWIFT").val(),
-            "Calendario_ID": calendario_id,
+            "Calendario_ID": $("#Select_Calendario").val(),
             "user": User
         },
         //Transaccion Ajax en proceso
@@ -168,16 +158,16 @@ function transacionAjax_Paises_create(State) {
                     break;
 
                 case "Existe":
-                    Mensaje_General("¡Código Duplicado!", "El código ingresado ya existe en la base de datos.", "W");
+                    Mensaje_General("¡Ya Existe!", "El código ingresado ya existe en la base de datos.", "W");
                     break;
 
                 case "Exito":
                     if (estado == "modificar") {
-                        Mensaje_General("¡País Modificado!", "El país se ha modificado correctamente.", "S");
+                        Mensaje_General("¡Exito!", "El país se ha modificado correctamente.", "S");
                         Clear();
                     }
                     else {
-                        Mensaje_General("¡País Registrado!", "Se ha ingresado el nuevo país correctamente.", "S");
+                        Mensaje_General("¡Exito!", "El país se ha creado correctamente.", "S");
                         Clear();
                     }
                     break;
@@ -209,11 +199,14 @@ function transacionAjax_Paises_delete(State) {
             switch (result) {
 
                 case "Error":
+                    $("#dialog_eliminar").dialog("close");
                     Mensaje_General("Disculpenos :(", "Ocurrio un error al intentar eliminar este país.", "E");
                     break;
 
                 case "Exito":
-                    Mensaje_General("¡Registro Eliminado!", "El país se ha eliminado correctamente.", "S");
+                    $("#dialog_eliminar").dialog("close");
+                    Mensaje_General("¡Registro Eliminado!", "El país  se ha eliminado correctamente.", "S");
+                    $(".container_TGrid").html("");
                     Clear();
                     break;
             }

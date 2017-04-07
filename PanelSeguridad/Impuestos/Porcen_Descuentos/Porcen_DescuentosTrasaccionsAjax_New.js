@@ -1,12 +1,12 @@
 ﻿/*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_CargaBusqueda(State) {
-    OpenControl(); 
     $.ajax({
         url: "Porcen_DescuentosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'Porcen_Descuentos'
         },
         //Transaccion Ajax en proceso
@@ -32,7 +32,8 @@ function transacionAjax_Pais(State) {
         url: "Porcen_DescuentosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'PAISES'
         },
         //Transaccion Ajax en proceso
@@ -58,7 +59,8 @@ function transacionAjax_Ciudad(State, Index) {
         url: "Porcen_DescuentosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Index": Index,
             "tabla": 'CIUDADES'
         },
@@ -69,12 +71,13 @@ function transacionAjax_Ciudad(State, Index) {
             }
             else {
                 ArrayCiudades = JSON.parse(result);
-                charge_CatalogList(ArrayCiudades, "Select_Ciudad", 1);
             }
         },
         error: function () {
 
-        }
+        },
+    }).done(function () {
+        charge_CatalogList(ArrayCiudades, "Select_Ciudad", 1);
     });
 }
 
@@ -85,7 +88,8 @@ function transacionAjax_Impuesto(State) {
         url: "Porcen_DescuentosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'IMPUESTO_GASTO'
         },
         //Transaccion Ajax en proceso
@@ -120,7 +124,8 @@ function transacionAjax_Porcen_Descuentos(State, filtro, opcion) {
         url: "Porcen_DescuentosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "filtro": filtro,
             "opcion": opcion,
             "contenido": contenido
@@ -217,7 +222,8 @@ function transacionAjax_Porcen_Descuentos_create(State) {
         url: "Porcen_DescuentosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Pais_ID": ID_P,
             "Ciudad_ID": ID_C,
             "Impuesto_ID": ID_I,
@@ -245,40 +251,20 @@ function transacionAjax_Porcen_Descuentos_create(State) {
             switch (result) {
 
                 case "Error":
-                    $("#dialog").dialog("option", "title", "Disculpenos :(");
-                    $("#Mensaje_alert").text("No se realizo el ingreso del Porcen_Descuentos!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "block");
-                    $("#SE").css("display", "none");
-                    $("#WA").css("display", "none");
+                    Mensaje_General("Disculpenos :(", "No se realizó el ingreso de porcentaje descuento.", "E");
                     break;
 
                 case "Existe":
-                    $("#dialog").dialog("option", "title", "Ya Existe");
-                    $("#Mensaje_alert").text("El codigo ingresado ya existe en la base de datos!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "None");
-                    $("#SE").css("display", "none");
-                    $("#WE").css("display", "block");
+                    Mensaje_General("¡Ya Existe!", "El código ingresado ya existe en la base de datos.", "W");
                     break;
 
                 case "Exito":
                     if (estado == "modificar") {
-                        $("#dialog").dialog("option", "title", "Exito");
-                        $("#Mensaje_alert").text("El Porcen_Descuentos fue modificado exitosamente! ");
-                        $("#dialog").dialog("open");
-                        $("#DE").css("display", "none");
-                        $("#SE").css("display", "block");
-                        $("#WA").css("display", "none");
+                        Mensaje_General("¡Exito!", "El descuento impuesto se ha modificado correctamente.", "S");
                         Clear();
                     }
                     else {
-                        $("#dialog").dialog("option", "title", "Exito");
-                        $("#Mensaje_alert").text("El Porcen_Descuentos fue creado exitosamente! ");
-                        $("#dialog").dialog("open");
-                        $("#DE").css("display", "none");
-                        $("#SE").css("display", "block");
-                        $("#WA").css("display", "none");
+                        Mensaje_General("¡Exito!", "El descuento impuesto se ha creado correctamente.", "S");
                         Clear();
                     }
                     break;
@@ -299,7 +285,8 @@ function transacionAjax_Porcen_Descuentos_delete(State) {
         url: "Porcen_DescuentosAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Pais_ID": editCod_ID,
             "Ciudad_ID": editCiudad_ID,
             "Impuesto_ID": editInf_Impuesto_ID,
@@ -315,34 +302,13 @@ function transacionAjax_Porcen_Descuentos_delete(State) {
             switch (result) {
 
                 case "Error":
-                    $("#dialog").dialog("option", "title", "Disculpenos :(");
-                    $("#Mensaje_alert").text("No se elimino el Porcen_Descuentos!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "block");
-                    $("#SE").css("display", "none");
-                    $("#WA").css("display", "none");
                     $("#dialog_eliminar").dialog("close");
-                    break;
-
-                case "Exist_O":
-                    $("#dialog").dialog("option", "title", "Integridad referencial");
-                    $("#Mensaje_alert").text("No se elimino el Porcen_Descuentos, para eliminarlo debe eliminar primero el registro en la tabla Empleado");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "none");
-                    $("#SE").css("display", "none");
-                    $("#WE").css("display", "block");
-                    $("#dialog_eliminar").dialog("close");
+                    Mensaje_General("Disculpenos :(", "Ocurrio un error al intentar eliminar el porcentaje impuesto.", "E");
                     break;
 
                 case "Exito":
                     $("#dialog_eliminar").dialog("close");
-                    $("#dialog").dialog("option", "title", "Exito");
-                    $("#Mensaje_alert").text("El Porcen_Descuentos fue eliminado exitosamente! ");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "none");
-                    $("#SE").css("display", "block");
-                    $("#WA").css("display", "none");
-                    $("#dialog_eliminar").dialog("close");
+                    Mensaje_General("¡Registro Eliminado!", "El porcentaje impuesto  se ha eliminado correctamente.", "S");
                     Clear();
                     break;
             }

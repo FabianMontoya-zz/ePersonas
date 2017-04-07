@@ -256,7 +256,7 @@ Public Class Adm_OpcRolSQLClass
         Dim sql As New StringBuilder
 
         sql.Append(" SELECT L_Link_ID AS ID, L_Descripcion AS descripcion FROM LINKS ")
-        sql.Append(" WHERE l_LinkPag <> '' ")
+        sql.Append(" WHERE L_Estado = '1' ")
 
         StrQuery = sql.ToString
 

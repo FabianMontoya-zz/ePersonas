@@ -25,22 +25,25 @@ Public Class Adm_RolesSQLClass
         Dim vl_sql_filtro As New StringBuilder
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
-            sql.Append("SELECT R_Nit_ID, R_Rol_ID, R_Descripcion, R_Sigla, R_Estado, " & _
-                       "R_Usuario_Creacion, R_FechaCreacion, R_Usuario_Actualizacion, R_FechaActualizacion, " & _
-                       "ROW_NUMBER() OVER(ORDER BY R_Nit_ID, R_Rol_ID ASC) AS Index_Roles " & _
-                       "FROM ROLES ")
+            sql.Append(" SELECT R_Nit_ID, R_Rol_ID, R_Descripcion, R_Sigla, R_Estado, " & _
+                       " R_Usuario_Creacion, R_FechaCreacion, R_Usuario_Actualizacion, R_FechaActualizacion, " & _
+                       " ROW_NUMBER() OVER(ORDER BY R_Nit_ID, R_Rol_ID ASC) AS Index_Roles, TC.DDLL_Descripcion " & _
+                       " FROM ROLES  R " & _
+                       " INNER JOIN  TC_DDL_TIPO TC ON  TC.DDL_ID = R.R_Estado AND TC.DDL_Tabla='ESTADO_GENERAL' ")
         Else
 
             If vp_S_Contenido = "ALL" Then
-                sql.Append("SELECT R_Nit_ID, R_Rol_ID, R_Descripcion, R_Sigla, R_Estado, " & _
-                       "R_Usuario_Creacion, R_FechaCreacion, R_Usuario_Actualizacion, R_FechaActualizacion, " & _
-                       "ROW_NUMBER() OVER(ORDER BY R_Nit_ID, R_Rol_ID ASC) AS Index_Roles " & _
-                       "FROM ROLES ")
+                sql.Append(" SELECT R_Nit_ID, R_Rol_ID, R_Descripcion, R_Sigla, R_Estado, " & _
+                       " R_Usuario_Creacion, R_FechaCreacion, R_Usuario_Actualizacion, R_FechaActualizacion, " & _
+                       " ROW_NUMBER() OVER(ORDER BY R_Nit_ID, R_Rol_ID ASC) AS Index_Roles, TC.DDLL_Descripcion " & _
+                       " FROM ROLES  R " & _
+                       " INNER JOIN  TC_DDL_TIPO TC ON  TC.DDL_ID = R.R_Estado AND TC.DDL_Tabla='ESTADO_GENERAL' ")
             Else
-                sql.Append("SELECT R_Nit_ID, R_Rol_ID, R_Descripcion, R_Sigla, R_Estado, " & _
-                       "R_Usuario_Creacion, R_FechaCreacion, R_Usuario_Actualizacion, R_FechaActualizacion, " & _
-                       "ROW_NUMBER() OVER(ORDER BY R_Nit_ID, R_Rol_ID ASC) AS Index_Roles " & _
-                       "FROM ROLES " & _
+                sql.Append(" SELECT R_Nit_ID, R_Rol_ID, R_Descripcion, R_Sigla, R_Estado, " & _
+                       " R_Usuario_Creacion, R_FechaCreacion, R_Usuario_Actualizacion, R_FechaActualizacion, " & _
+                       " ROW_NUMBER() OVER(ORDER BY R_Nit_ID, R_Rol_ID ASC) AS Index_Roles, TC.DDLL_Descripcion " & _
+                       " FROM ROLES  R " & _
+                       " INNER JOIN  TC_DDL_TIPO TC ON  TC.DDL_ID = R.R_Estado AND TC.DDL_Tabla='ESTADO_GENERAL' " & _
                        "WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%' ")
             End If
         End If
@@ -244,6 +247,7 @@ Public Class Adm_RolesSQLClass
                     objRol.UsuarioActualizacion = ReadConsulta.GetValue(7)
                     objRol.FechaActualizacion = ReadConsulta.GetValue(8)
                     objRol.Index = ReadConsulta.GetValue(9)
+                    objRol.DescripEstado = ReadConsulta.GetValue(10)
 
                     'agregamos a la lista
                     ObjListRol.Add(objRol)
@@ -333,7 +337,7 @@ Public Class Adm_RolesSQLClass
         Select Case vp_O_Obj.TipoSQL
 
             Case "Usuario"
-                vl_sql_filtro.Append(" WHERE R_Nit_ID ='" & vp_O_Obj.Nit_ID & "'" & _
+                vl_sql_filtro.Append(" WHERE R_Nit_ID ='" & vp_O_Obj.Nit_ID & "' AND R_Estado = '1' " & _
                                                      " ORDER BY R_Nit_ID, R_Rol_ID ASC  ")
 
             Case "All"

@@ -3,88 +3,6 @@ Imports System.Data.OleDb
 
 Public Class Porcen_DescuentosSQLClass
 
-#Region "CONSULTAS DROP LIST"
-
-    ''' <summary>
-    ''' crea la consulta para cargar el combo
-    ''' </summary>
-    ''' <param name="vp_S_Table"></param>
-    ''' <returns></returns>
-    ''' <remarks></remarks>
-    Public Function ReadCharge_DropList(ByVal vp_S_Table As String)
-
-        Dim ObjListDroplist As New List(Of Droplist_Class)
-        Dim StrQuery As String = ""
-        Dim conex As New Conector
-        Dim Conexion As String = conex.typeConexion("1")
-
-        Dim SQLGeneral As New GeneralSQLClass
-        Dim sql As New StringBuilder
-
-        sql.Append(" SELECT T_IndexColumna As ID, T_Traductor As descripcion FROM TC_TABLAS " & _
-                   " WHERE T_Tabla = '" & vp_S_Table & "' AND T_Param = '1' ")
-        StrQuery = sql.ToString
-
-        ObjListDroplist = SQLGeneral.listdrop(StrQuery, Conexion)
-
-        Return ObjListDroplist
-
-
-    End Function
-
-    ''' <summary>
-    ''' crea la consulta para cargar el combo
-    ''' </summary>
-    ''' <param name="vp_S_Table"></param>
-    ''' <returns></returns>
-    ''' <remarks></remarks>
-    Public Function Charge_DropListPais(ByVal vp_S_Table As String)
-
-        Dim ObjListDroplist As New List(Of Droplist_Class)
-        Dim StrQuery As String = ""
-        Dim conex As New Conector
-        Dim Conexion As String = conex.typeConexion("2")
-
-        Dim SQLGeneral As New GeneralSQLClass
-        Dim sql As New StringBuilder
-
-        sql.Append(" SELECT  P_Cod AS ID, CAST(P_Cod  AS NVARCHAR(10)) + ' - ' + P_Name AS descripcion FROM PAISES ")
-        StrQuery = sql.ToString
-
-        ObjListDroplist = SQLGeneral.listdrop(StrQuery, Conexion)
-
-        Return ObjListDroplist
-
-    End Function
-
-   
-    ''' <summary>
-    ''' crea la consulta para cargar el combo
-    ''' </summary>
-    ''' <param name="vp_S_Table"></param>
-    ''' <returns></returns>
-    ''' <remarks></remarks>
-    Public Function Charge_DropListImpuesto(ByVal vp_S_Table As String)
-
-        Dim ObjListDroplist As New List(Of Droplist_Class)
-        Dim StrQuery As String = ""
-        Dim conex As New Conector
-        Dim Conexion As String = conex.typeConexion("2")
-
-        Dim SQLGeneral As New GeneralSQLClass
-        Dim sql As New StringBuilder
-
-        sql.Append(" SELECT IM_Impuesto_Gasto_ID AS ID,CAST(IM_Impuesto_Gasto_ID AS NVARCHAR(10)) + ' - ' + IM_Descripcion AS DESCRIPCION FROM IMPUESTO_GASTO ")
-        StrQuery = sql.ToString
-
-        ObjListDroplist = SQLGeneral.listdrop(StrQuery, Conexion)
-
-        Return ObjListDroplist
-
-    End Function
-
-#End Region
-
 #Region "CRUD"
 
     ''' <summary>
@@ -132,7 +50,8 @@ Public Class Porcen_DescuentosSQLClass
                         " 		DIM_Type_Limit, " & _
                         " 		DIM_Limit_Min, " & _
                         " 		DIM_Limit_Max, " & _
-                        " 		DDL.DDLL_Descripcion " & _
+                        " 		DDL.DDLL_Descripcion, " & _
+                        "       ROW_NUMBER()OVER(ORDER BY  DIM_Impuesto_Gasto_ID, DIM_RangoInicial_ID ASC) AS Index_Desc " & _
                         " FROM PORCEN_DESCUENTOS PD  " & _
                         " INNER JOIN PAISES P ON P.P_Cod = PD.DIM_Cod_ID  " & _
                         " INNER JOIN CIUDADES C ON C.C_Ciudad_ID = PD.DIM_Ciudad_ID  " & _
@@ -167,7 +86,8 @@ Public Class Porcen_DescuentosSQLClass
                         " 		DIM_Type_Limit, " & _
                         " 		DIM_Limit_Min, " & _
                         " 		DIM_Limit_Max, " & _
-                        " 		DDL.DDLL_Descripcion " & _
+                        " 		DDL.DDLL_Descripcion, " & _
+                        "       ROW_NUMBER()OVER(ORDER BY  DIM_Impuesto_Gasto_ID, DIM_RangoInicial_ID ASC) AS Index_Desc " & _
                         " FROM PORCEN_DESCUENTOS PD  " & _
                         " INNER JOIN PAISES P ON P.P_Cod = PD.DIM_Cod_ID  " & _
                         " INNER JOIN CIUDADES C ON C.C_Ciudad_ID = PD.DIM_Ciudad_ID  " & _
@@ -200,7 +120,8 @@ Public Class Porcen_DescuentosSQLClass
                         " 		DIM_Type_Limit, " & _
                         " 		DIM_Limit_Min, " & _
                         " 		DIM_Limit_Max, " & _
-                        " 		DDL.DDLL_Descripcion " & _
+                        " 		DDL.DDLL_Descripcion, " & _
+                        "       ROW_NUMBER()OVER(ORDER BY  DIM_Impuesto_Gasto_ID, DIM_RangoInicial_ID ASC) AS Index_Desc " & _
                         " FROM PORCEN_DESCUENTOS PD  " & _
                         " INNER JOIN PAISES P ON P.P_Cod = PD.DIM_Cod_ID  " & _
                         " INNER JOIN CIUDADES C ON C.C_Ciudad_ID = PD.DIM_Ciudad_ID  " & _
@@ -213,7 +134,7 @@ Public Class Porcen_DescuentosSQLClass
 
         StrQuery = sql.ToString
 
-        ObjListPorcen_Descuentos = List(StrQuery, Conexion)
+        ObjListPorcen_Descuentos = list(StrQuery, Conexion)
 
         Return ObjListPorcen_Descuentos
 
@@ -371,6 +292,88 @@ Public Class Porcen_DescuentosSQLClass
 
 #End Region
 
+#Region "CONSULTAS DROP LIST"
+
+    ''' <summary>
+    ''' crea la consulta para cargar el combo
+    ''' </summary>
+    ''' <param name="vp_S_Table"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function ReadCharge_DropList(ByVal vp_S_Table As String)
+
+        Dim ObjListDroplist As New List(Of Droplist_Class)
+        Dim StrQuery As String = ""
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("1")
+
+        Dim SQLGeneral As New GeneralSQLClass
+        Dim sql As New StringBuilder
+
+        sql.Append(" SELECT T_IndexColumna As ID, T_Traductor As descripcion FROM TC_TABLAS " & _
+                   " WHERE T_Tabla = '" & vp_S_Table & "' AND T_Param = '1' ")
+        StrQuery = sql.ToString
+
+        ObjListDroplist = SQLGeneral.listdrop(StrQuery, Conexion)
+
+        Return ObjListDroplist
+
+
+    End Function
+
+    ''' <summary>
+    ''' crea la consulta para cargar el combo
+    ''' </summary>
+    ''' <param name="vp_S_Table"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Charge_DropListPais(ByVal vp_S_Table As String)
+
+        Dim ObjListDroplist As New List(Of Droplist_Class)
+        Dim StrQuery As String = ""
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("2")
+
+        Dim SQLGeneral As New GeneralSQLClass
+        Dim sql As New StringBuilder
+
+        sql.Append(" SELECT  P_Cod AS ID, CAST(P_Cod  AS NVARCHAR(10)) + ' - ' + P_Name AS descripcion FROM PAISES ")
+        StrQuery = sql.ToString
+
+        ObjListDroplist = SQLGeneral.listdrop(StrQuery, Conexion)
+
+        Return ObjListDroplist
+
+    End Function
+
+
+    ''' <summary>
+    ''' crea la consulta para cargar el combo
+    ''' </summary>
+    ''' <param name="vp_S_Table"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Charge_DropListImpuesto(ByVal vp_S_Table As String)
+
+        Dim ObjListDroplist As New List(Of Droplist_Class)
+        Dim StrQuery As String = ""
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("2")
+
+        Dim SQLGeneral As New GeneralSQLClass
+        Dim sql As New StringBuilder
+
+        sql.Append(" SELECT IM_Impuesto_Gasto_ID AS ID,CAST(IM_Impuesto_Gasto_ID AS NVARCHAR(10)) + ' - ' + IM_Descripcion AS DESCRIPCION FROM IMPUESTO_GASTO ")
+        StrQuery = sql.ToString
+
+        ObjListDroplist = SQLGeneral.listdrop(StrQuery, Conexion)
+
+        Return ObjListDroplist
+
+    End Function
+
+#End Region
+
 #Region "CARGAR LISTAS"
 
     ''' <summary>
@@ -436,6 +439,7 @@ Public Class Porcen_DescuentosSQLClass
             objPorcen_Descuentos.Limit_Min = ReadConsulta.GetValue(23)
             objPorcen_Descuentos.Limit_Max = ReadConsulta.GetValue(24)
             objPorcen_Descuentos.DescripTipo = ReadConsulta.GetValue(25)
+            objPorcen_Descuentos.Index = ReadConsulta.GetValue(26)
 
             'agregamos a la lista
             ObjListPorcen_Descuentos.Add(objPorcen_Descuentos)

@@ -1,5 +1,6 @@
 ﻿Public Class Adm_LinksClass
 #Region "campos"
+    Private _Index As Long
     Private _Link_ID As String
     Private _Descripcion As String
     Private _Param1 As String
@@ -7,9 +8,18 @@
     Private _Img As String
     Private _LinkPag As String
     Private _Estado As String
+    Private _DescripEstado As String
 #End Region
 
 #Region "propiedades"
+    Public Property Index() As Long
+        Get
+            Return Me._Index
+        End Get
+        Set(ByVal value As Long)
+            Me._Index = value
+        End Set
+    End Property
     Public Property Link_ID() As String
         Get
             Return Me._Link_ID
@@ -64,6 +74,14 @@
         End Get
         Set(ByVal value As String)
             Me._Estado = value
+        End Set
+    End Property
+    Public Property DescripEstado() As String
+        Get
+            Return Me._DescripEstado
+        End Get
+        Set(ByVal value As String)
+            Me._DescripEstado = value
         End Set
     End Property
 #End Region

@@ -1,37 +1,36 @@
-﻿var Array_G_Usuario = [];
+﻿/*--------------- region de variables globales --------------------*/
+var Array_G_Usuario = [];
 var User_ID = "";
 var Nit_ID = "";
-//evento load del Cambio de password
+/*--------------- region de variables globales --------------------*/
+
+//Evento load JS
 $(document).ready(function () {
     //capturamos la url
     ConsultaParametrosURL();
+    Ventanas_Emergentes();
+    Ocultar_Errores();
+
     transacionAjax_InfoUser("Information");
-    User_ID = Array_G_Usuario[0].Usuario_ID;
-    Nit_ID = Array_G_Usuario[0].Nit_ID;
-    $("#TdUser").html(User_ID);
-    $("#User").html(User_ID);
+  
+});
 
-    //evento del boton ingresar
-    $("#BtnCambiar").click(function () {
-        //llamamos la funcion de validar
-        var flag_campos = ValidarCampos();
-        if (flag_campos === 0) {
-            $('#TxtPassword').keyup(function () {
-                $("#E2").css("display", "none");
-                $("#E1").css("display", "none");
-            });
-            //llamamos la funcion de campos
-            RevisarContraseña();
-        }
-    });
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                 REGION INICIO DE COMPONENTES                                                                                                    ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//Función que oculta todas las IMG de los errores en pantalla
+function Ocultar_Errores() {
+    $("#E1").css("display", "none");
+    $("#S1").css("display", "none");
+    $("#E2").css("display", "none");
+    $("#S2").css("display", "none");
+    $("#DE").css("display", "none");
+    $("#SE").css("display", "none");
+    $("#WA").css("display", "none");
+}
 
-    //evento del boton salir
-    $("#BtnExit").click(function () {
-        window.location = "../login/Login.aspx"
-    });
-
-
-    $('#show').attr('checked', false);
+//funcion para las ventanas emergentes
+function Ventanas_Emergentes() {
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
@@ -40,18 +39,35 @@ $(document).ready(function () {
         modal: true
     });
 
-    $("#E1").css("display", "none");
-    $("#S1").css("display", "none");
-    $("#E2").css("display", "none");
-    $("#S2").css("display", "none");
-    $("#DE").css("display", "none");
-    $("#DS").css("display", "none");
-    $("#BtnExit").css("display", "none");
 
-    /*MostarContraseña();*/
-    /*ValidarCamposIguales();*/
-});
+}
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                 REGION BOTONES                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//boton verifica y cambia contraseña
+function BtnCambioPassword() {
+    //llamamos la funcion de validar
+    var flag_campos = ValidarCampos();
+    if (flag_campos === 0) {
+        $('#TxtPassword').keyup(function () {
+            $("#E2").css("display", "none");
+            $("#E1").css("display", "none");
+        });
+        //llamamos la funcion de campos
+        RevisarContraseña();
+    }
+}
+
+//evento del boton salir
+function BtnRedirect() {
+    window.location = "../login/Login.aspx"
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                      REGION VALIDACIONES DEL PROCESO                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//valida comparacion de contraseñas
 function RevisarContraseña() {
     var campo_1 = $('#TxtPassword').val();
     var campo_2 = $('#txtConfirmPassword').val();
@@ -112,45 +128,33 @@ function ValidarCampos() {
     return flag_valida;
 }
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                      TRANSACCIONES AJAX                                                                                                            ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax(State) {
     $.ajax({
         url: "CambioPasswordAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "user": User_ID,
             "Nit_ID": Nit_ID,
             "password": $("#TxtPassword").val()
         },
-       //Transaccion Ajax en proceso
+        //Transaccion Ajax en proceso
         success: function (result) {
 
             if (result == "Exito") {
-
-                $("#dialog").dialog("option", "title", "Exito");
-                $("#Mensaje_alert").text("Su contraseña fue modificada exitosamente! ");
-                $("#dialog").dialog("open");
-                $("#DS").css("display", "block");
-                $("#BtnExit").css("display", "block");
-
-
+                Mensaje_General("Exito", "Su contraseña fue modificada exitosamente! ", "S");
             } else {
-
-                $("#dialog").dialog("option", "title", "Disculpenos :(");
-                $("#Mensaje_alert").text("No se realizo el cambio de clave!");
-                $("#dialog").dialog("open");
-                $("#DE").css("display", "block");
-                $("#BtnExit").css("display", "block");
-
+                Mensaje_General("Disculpenos :(", "No se realizo el cambio de clave! ", "E");
             }
 
         },
         error: function () {
-            $("#dialog").dialog("option", "title", "Disculpenos :(");
-            $("#Mensaje_alert").text("Se genero error al realizar la transacción Ajax!");
-            $("#dialog").dialog("open");
-            $("#DE").css("display", "block");
+            Mensaje_General("Disculpenos :(", "Se genero error al realizar la transacción Ajax! ", "E");
         }
     });
 }
@@ -183,6 +187,10 @@ function transacionAjax_InfoUser(vp_State) {
         cache: false // No queremos usar la caché del navegador
     }).done(function () {
         Capture_Nit_User();
+        User_ID = Array_G_Usuario[0].Usuario_ID;
+        Nit_ID = Array_G_Usuario[0].Nit_ID;
+        $("#TdUser").html(User_ID);
+        $("#User").html(User_ID);
     });
 }
 

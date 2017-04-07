@@ -25,23 +25,77 @@ Public Class SucursalSQLClass
         Dim vl_sql_filtro As New StringBuilder
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
-            sql.Append("SELECT SUC_Nit_ID, SUC_Surcursal_ID, SUC_Descripcion, SUC_Direccion_ID, SUC_Calendario_ID, " & _
-                       "SUC_Usuario_Creacion, SUC_FechaCreacion, SUC_Usuario_Actualizacion, SUC_FechaActualizacion, " & _
-                       "ROW_NUMBER() OVER(ORDER BY SUC_Nit_ID, SUC_Surcursal_ID ASC) AS Index_Sucursal " & _
-                       "FROM SUCURSAL ")
+            sql.Append(" SELECT SUC_Nit_ID,  " & _
+                                  "              SUC_Surcursal_ID, " & _
+                                  "              SUC_Descripcion, " & _
+                                  "              SUC_Direccion_ID, " & _
+                                  "              SUC_Calendario_ID, " & _
+                                  "              SUC_Usuario_Creacion, " & _
+                                  "              SUC_FechaCreacion, " & _
+                                  "              SUC_Usuario_Actualizacion, " & _
+                                  "              SUC_FechaActualizacion, " & _
+                                  "              ROW_NUMBER() OVER(ORDER BY SUC_Nit_ID, SUC_Surcursal_ID ASC) AS Index_Sucursal,  " & _
+                                  "              D.D_Direccion,  " & _
+                                  "              CA.CA_Descripcion  " & _
+                                  " FROM SUCURSAL S " & _
+                                  " LEFT JOIN DIRECCIONES D ON D.D_Nit_ID = S.SUC_Nit_ID " & _
+                                  "                                                   AND D.D_Consecutivo = S.SUC_Direccion_ID " & _
+                                  "                                                   AND D.D_Document_ID = " & _
+                                  "                                                   CASE SUBSTRING(SUC_Nit_ID,0,LEN(SUC_Nit_ID)) " & _
+                                  "                                                   WHEN '' THEN '0' " & _
+                                  "                                                   ELSE SUBSTRING(SUC_Nit_ID,0,LEN(SUC_Nit_ID)) " & _
+                                  "                                                   END " & _
+                                  " LEFT JOIN CALENDARIOS CA ON CA.CA_Nit_ID = S.SUC_Nit_ID " & _
+                                  "                                                   AND CA.CA_Calendario_ID = S.SUC_Calendario_ID ")
         Else
 
             If vp_S_Contenido = "ALL" Then
-                sql.Append("SELECT SUC_Nit_ID, SUC_Surcursal_ID, SUC_Descripcion, SUC_Direccion_ID, SUC_Calendario_ID, " & _
-                       "SUC_Usuario_Creacion, SUC_FechaCreacion, SUC_Usuario_Actualizacion, SUC_FechaActualizacion, " & _
-                       "ROW_NUMBER() OVER(ORDER BY SUC_Nit_ID, SUC_Surcursal_ID ASC) AS Index_Sucursal " & _
-                       "FROM SUCURSAL ")
+                sql.Append(" SELECT SUC_Nit_ID,  " & _
+                                      "              SUC_Surcursal_ID, " & _
+                                      "              SUC_Descripcion, " & _
+                                      "              SUC_Direccion_ID, " & _
+                                      "              SUC_Calendario_ID, " & _
+                                      "              SUC_Usuario_Creacion, " & _
+                                      "              SUC_FechaCreacion, " & _
+                                      "              SUC_Usuario_Actualizacion, " & _
+                                      "              SUC_FechaActualizacion, " & _
+                                      "              ROW_NUMBER() OVER(ORDER BY SUC_Nit_ID, SUC_Surcursal_ID ASC) AS Index_Sucursal,  " & _
+                                      "              D.D_Direccion,  " & _
+                                      "              CA.CA_Descripcion  " & _
+                                      " FROM SUCURSAL S " & _
+                                      " LEFT JOIN DIRECCIONES D ON D.D_Nit_ID = S.SUC_Nit_ID " & _
+                                      "                                                   AND D.D_Consecutivo = S.SUC_Direccion_ID " & _
+                                      "                                                   AND D.D_Document_ID = " & _
+                                      "                                                   CASE SUBSTRING(SUC_Nit_ID,0,LEN(SUC_Nit_ID)) " & _
+                                      "                                                   WHEN '' THEN '0' " & _
+                                      "                                                   ELSE SUBSTRING(SUC_Nit_ID,0,LEN(SUC_Nit_ID)) " & _
+                                      "                                                   END " & _
+                                      " LEFT JOIN CALENDARIOS CA ON CA.CA_Nit_ID = S.SUC_Nit_ID " & _
+                                      "                                                   AND CA.CA_Calendario_ID = S.SUC_Calendario_ID ")
             Else
-                sql.Append("SELECT SUC_Nit_ID, SUC_Surcursal_ID, SUC_Descripcion, SUC_Direccion_ID, SUC_Calendario_ID, " & _
-                       "SUC_Usuario_Creacion, SUC_FechaCreacion, SUC_Usuario_Actualizacion, SUC_FechaActualizacion, " & _
-                       "ROW_NUMBER() OVER(ORDER BY SUC_Nit_ID, SUC_Surcursal_ID ASC) AS Index_Sucursal " & _
-                       "FROM SUCURSAL " & _
-                       "WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
+                sql.Append(" SELECT SUC_Nit_ID,  " & _
+                                      "              SUC_Surcursal_ID, " & _
+                                      "              SUC_Descripcion, " & _
+                                      "              SUC_Direccion_ID, " & _
+                                      "              SUC_Calendario_ID, " & _
+                                      "              SUC_Usuario_Creacion, " & _
+                                      "              SUC_FechaCreacion, " & _
+                                      "              SUC_Usuario_Actualizacion, " & _
+                                      "              SUC_FechaActualizacion, " & _
+                                      "              ROW_NUMBER() OVER(ORDER BY SUC_Nit_ID, SUC_Surcursal_ID ASC) AS Index_Sucursal,  " & _
+                                      "              D.D_Direccion,  " & _
+                                      "              CA.CA_Descripcion  " & _
+                                      " FROM SUCURSAL S " & _
+                                      " LEFT JOIN DIRECCIONES D ON D.D_Nit_ID = S.SUC_Nit_ID " & _
+                                      "                                                   AND D.D_Consecutivo = S.SUC_Direccion_ID " & _
+                                      "                                                   AND D.D_Document_ID = " & _
+                                      "                                                   CASE SUBSTRING(SUC_Nit_ID,0,LEN(SUC_Nit_ID)) " & _
+                                      "                                                   WHEN '' THEN '0' " & _
+                                      "                                                   ELSE SUBSTRING(SUC_Nit_ID,0,LEN(SUC_Nit_ID)) " & _
+                                      "                                                   END " & _
+                                      " LEFT JOIN CALENDARIOS CA ON CA.CA_Nit_ID = S.SUC_Nit_ID " & _
+                                      "                                                   AND CA.CA_Calendario_ID = S.SUC_Calendario_ID " & _
+                                      " WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
             End If
         End If
 
@@ -210,6 +264,9 @@ Public Class SucursalSQLClass
                     obj.UsuarioActualizacion = ReadConsulta.GetValue(7)
                     obj.FechaActualizacion = ReadConsulta.GetValue(8)
                     obj.Index = ReadConsulta.GetValue(9)
+                    If Not (IsDBNull(ReadConsulta.GetValue(10))) Then obj.DescripDireccion = ReadConsulta.GetValue(10) Else obj.DescripDireccion = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(11))) Then obj.DescripCalendario = ReadConsulta.GetValue(11) Else obj.DescripCalendario = ""
+         
                     'agregamos a la lista
                     ObjList.Add(obj)
 

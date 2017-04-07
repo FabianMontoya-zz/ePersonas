@@ -1,4 +1,4 @@
-﻿/*--------------- region de variables globales --------------------*/
+﻿ /*--------------- region de variables globales --------------------*/
 var ArrayConsecutivos_General = [];
 var ArrayCombo = [];
 var ArrayConsecutivos_GeneralDep = [];
@@ -23,6 +23,9 @@ $(document).ready(function () {
 
 });
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                 REGION INICIO DE COMPONENTES                                                                                                    ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //funcion para las ventanas emergentes
 function Ventanas_Emergentes() {
 
@@ -63,59 +66,15 @@ function Ocultar_Tablas() {
     $("#TablaConsulta").css("display", "none");
 }
 
-//habilita el panel de crear o consulta
-function HabilitarPanel(opcion) {
-
-    switch (opcion) {
-
-        case "crear":
-            $(".Dialog_Datos").css("display", "inline-table");
-            $("#TablaConsulta").css("display", "none");
-            $("#Select_EmpresaNit").removeAttr("disabled");
-            $("#Txt_ID").removeAttr("disabled");
-            $("#Btnguardar").attr("value", "Guardar");
-            $('.C_Chosen').trigger('chosen:updated');
-            ResetError();
-            Clear();
-            estado = opcion;
-            break;
-
-        case "buscar":
-            $(".Dialog_Datos").css("display", "none");
-            $("#TablaConsulta").css("display", "inline-table");
-            $(".container_TGrid").html("");
-            estado = opcion;
-            Clear();
-            break;
-
-        case "modificar":
-            $(".Dialog_Datos").css("display", "none");
-            $("#TablaConsulta").css("display", "inline-table");
-            $(".container_TGrid").html("");
-            estado = opcion;
-            ResetError();
-            Clear();
-            break;
-
-        case "eliminar":
-            $(".Dialog_Datos").css("display", "none");
-            $("#TablaConsulta").css("display", "inline-table");
-            $(".container_TGrid").html("");
-            estado = opcion;
-            Clear();
-            break;
-
-    }
-}
-
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                 REGION BOTONES                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //consulta del del crud(READ)
 function BtnConsulta() {
 
     var filtro;
     var ValidateSelect = ValidarDroplist();
     var opcion;
-
-    OpenControl();
 
     if (ValidateSelect == 1) {
         filtro = "N";
@@ -148,11 +107,17 @@ function BtnCrear() {
 
 //elimina de la BD
 function BtnElimina() {
-    OpenControl();
     transacionAjax_Consecutivos_General_delete("elimina_G");
 }
 
+//evento del boton salir
+function x() {
+    $("#dialog").dialog("close");
+}
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                      REGION VALIDACIONES DEL PROCESO                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //validamos campos para la creacion del link
 function validarCamposCrear() {
 
@@ -209,6 +174,54 @@ function ValidarDroplist() {
     return flag;
 }
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                      PROCESOS DE VALIDACION Y GRID CONSECUTIVO GENERAL                                                                                                              ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//habilita el panel de crear o consulta
+function HabilitarPanel(opcion) {
+
+    switch (opcion) {
+
+        case "crear":
+            $(".Dialog_Datos").css("display", "inline-table");
+            $("#TablaConsulta").css("display", "none");
+            $("#Select_EmpresaNit").removeAttr("disabled");
+            $("#Txt_ID").removeAttr("disabled");
+            $("#Btnguardar").attr("value", "Guardar");
+            $('.C_Chosen').trigger('chosen:updated');
+            ResetError();
+            Clear();
+            estado = opcion;
+            break;
+
+        case "buscar":
+            $(".Dialog_Datos").css("display", "none");
+            $("#TablaConsulta").css("display", "inline-table");
+            $(".container_TGrid").html("");
+            estado = opcion;
+            Clear();
+            break;
+
+        case "modificar":
+            $(".Dialog_Datos").css("display", "none");
+            $("#TablaConsulta").css("display", "inline-table");
+            $(".container_TGrid").html("");
+            estado = opcion;
+            ResetError();
+            Clear();
+            break;
+
+        case "eliminar":
+            $(".Dialog_Datos").css("display", "none");
+            $("#TablaConsulta").css("display", "inline-table");
+            $(".container_TGrid").html("");
+            estado = opcion;
+            Clear();
+            break;
+
+    }
+}
+
 // crea la tabla en el cliente
 function Table_Consecutivos_General() {
 
@@ -217,30 +230,30 @@ function Table_Consecutivos_General() {
     switch (estado) {
 
         case "buscar":
-            html_Consecutivos_General = "<table id='TConsecutivos_General' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Descripción</th><th>Codigo</th><th>Consecutivo</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
+            html_Consecutivos_General = "<table id='TConsecutivos_General' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Codigo</th><th>Descripción</th><th>Consecutivo</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
             for (itemArray in ArrayConsecutivos_General) {
                 if (ArrayConsecutivos_General[itemArray].Consecutivos_General_ID != 0) {
-                    html_Consecutivos_General += "<tr id= 'TConsecutivos_General_" + ArrayConsecutivos_General[itemArray].Consecutivos_General_ID + "'><td>" + ArrayConsecutivos_General[itemArray].Descripcion + "</td><td>" + ArrayConsecutivos_General[itemArray].Consecutivo_ID + "</td><td>" + ArrayConsecutivos_General[itemArray].Consecutivo + "</td><td>" + ArrayConsecutivos_General[itemArray].UsuarioCreacion + "</td><td>" + ArrayConsecutivos_General[itemArray].FechaCreacion + "</td><td>" + ArrayConsecutivos_General[itemArray].UsuarioActualizacion + "</td><td>" + ArrayConsecutivos_General[itemArray].FechaActualizacion + "</td></tr>";
+                    html_Consecutivos_General += "<tr id= 'TConsecutivos_General_" + ArrayConsecutivos_General[itemArray].Consecutivos_General_ID + "'><td>" + ArrayConsecutivos_General[itemArray].Consecutivo_ID + "</td><td>" + ArrayConsecutivos_General[itemArray].Descripcion + "</td><td>" + ArrayConsecutivos_General[itemArray].Consecutivo + "</td><td>" + ArrayConsecutivos_General[itemArray].UsuarioCreacion + "</td><td>" + ArrayConsecutivos_General[itemArray].FechaCreacion + "</td><td>" + ArrayConsecutivos_General[itemArray].UsuarioActualizacion + "</td><td>" + ArrayConsecutivos_General[itemArray].FechaActualizacion + "</td></tr>";
                 }
             }
             break;
 
         case "modificar":
-            html_Consecutivos_General = "<table id='TConsecutivos_General' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Descripción</th><th>Codigo</th><th>Consecutivo</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
+            html_Consecutivos_General = "<table id='TConsecutivos_General' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Codigo</th><th>Descripción</th><th>Consecutivo</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
             for (itemArray in ArrayConsecutivos_General) {
                 if (ArrayConsecutivos_General[itemArray].Consecutivos_General_ID != 0) {
                     Index_Pos = parseInt(ArrayConsecutivos_General[itemArray].Index) - 1;
-                    html_Consecutivos_General += "<tr id= 'TConsecutivos_General_" + ArrayConsecutivos_General[itemArray].Consecutivos_General_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + Index_Pos + "')\"></img><span>Editar Consecutivo General</span></span></td><td>" + ArrayConsecutivos_General[itemArray].Descripcion + "</td><td>" + ArrayConsecutivos_General[itemArray].Consecutivo_ID + "</td><td>" + ArrayConsecutivos_General[itemArray].Consecutivo + "</td><td>" + ArrayConsecutivos_General[itemArray].UsuarioCreacion + "</td><td>" + ArrayConsecutivos_General[itemArray].FechaCreacion + "</td><td>" + ArrayConsecutivos_General[itemArray].UsuarioActualizacion + "</td><td>" + ArrayConsecutivos_General[itemArray].FechaActualizacion + "</td></tr>";
+                    html_Consecutivos_General += "<tr id= 'TConsecutivos_General_" + ArrayConsecutivos_General[itemArray].Consecutivos_General_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + Index_Pos + "')\"></img><span>Editar Consecutivo General</span></span></td><td>" + ArrayConsecutivos_General[itemArray].Consecutivo_ID + "</td><td>" + ArrayConsecutivos_General[itemArray].Descripcion + "</td><td>" + ArrayConsecutivos_General[itemArray].Consecutivo + "</td><td>" + ArrayConsecutivos_General[itemArray].UsuarioCreacion + "</td><td>" + ArrayConsecutivos_General[itemArray].FechaCreacion + "</td><td>" + ArrayConsecutivos_General[itemArray].UsuarioActualizacion + "</td><td>" + ArrayConsecutivos_General[itemArray].FechaActualizacion + "</td></tr>";
                 }
             }
             break;
 
         case "eliminar":
-            html_Consecutivos_General = "<table id='TConsecutivos_General' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Descripción</th><th>Codigo</th><th>Consecutivo</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
+            html_Consecutivos_General = "<table id='TConsecutivos_General' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Codigo</th><th>Descripción</th><th>Consecutivo</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
             for (itemArray in ArrayConsecutivos_General) {
                 if (ArrayConsecutivos_General[itemArray].Consecutivos_General_ID != 0) {
                     Index_Pos = parseInt(ArrayConsecutivos_General[itemArray].Index) - 1;
-                    html_Consecutivos_General += "<tr id= 'TConsecutivos_General_" + ArrayConsecutivos_General[itemArray].Consecutivos_General_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + Index_Pos + "')\"></img><span>Eliminar Consecutivo General</span></span></td><td>" + ArrayConsecutivos_General[itemArray].Descripcion + "</td><td>" + ArrayConsecutivos_General[itemArray].Consecutivo_ID + "</td><td>" + ArrayConsecutivos_General[itemArray].Consecutivo + "</td><td>" + ArrayConsecutivos_General[itemArray].UsuarioCreacion + "</td><td>" + ArrayConsecutivos_General[itemArray].FechaCreacion + "</td><td>" + ArrayConsecutivos_General[itemArray].UsuarioActualizacion + "</td><td>" + ArrayConsecutivos_General[itemArray].FechaActualizacion + "</td></tr>";
+                    html_Consecutivos_General += "<tr id= 'TConsecutivos_General_" + ArrayConsecutivos_General[itemArray].Consecutivos_General_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + Index_Pos + "')\"></img><span>Eliminar Consecutivo General</span></span></td><td>" + ArrayConsecutivos_General[itemArray].Consecutivo_ID + "</td><td>" + ArrayConsecutivos_General[itemArray].Descripcion + "</td><td>" + ArrayConsecutivos_General[itemArray].Consecutivo + "</td><td>" + ArrayConsecutivos_General[itemArray].UsuarioCreacion + "</td><td>" + ArrayConsecutivos_General[itemArray].FechaCreacion + "</td><td>" + ArrayConsecutivos_General[itemArray].UsuarioActualizacion + "</td><td>" + ArrayConsecutivos_General[itemArray].FechaActualizacion + "</td></tr>";
                 }
             }
             break;
@@ -262,7 +275,6 @@ function Table_Consecutivos_General() {
     });
 
 }
-
 
 //muestra el registro a eliminar
 function Eliminar(Index) {
@@ -297,11 +309,9 @@ function Editar(Index) {
     $('.C_Chosen').trigger('chosen:updated');
 }
 
-//evento del boton salir
-function x() {
-    $("#dialog").dialog("close");
-}
-
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                              MENSAJES, VISUALIZACION Y LIMPIEZA                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //limpiar campos
 function Clear() {
     $("#Select_EmpresaNit").val("-1");

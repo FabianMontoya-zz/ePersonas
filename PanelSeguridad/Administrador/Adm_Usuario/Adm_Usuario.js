@@ -20,7 +20,7 @@ var vg_Persona_Exist;
 
 //Evento load JS
 $(document).ready(function () {
-  
+
     /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
     Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
     Ocultar_Errores();
@@ -90,6 +90,8 @@ function Ventanas_Emergentes() {
 function Ocultar_Tablas() {
     $("#TablaDatos").css("display", "none");
     $("#TablaConsulta").css("display", "none");
+    $("#Detalle").css("display", "none");
+    $("#Datos").css("display", "none");
 }
 
 //habilita el panel de crear o consulta
@@ -98,8 +100,11 @@ function HabilitarPanel(opcion) {
     switch (opcion) {
 
         case "crear":
+            Clear_Detalle();
             $("#TablaDatos").css("display", "inline-table");
             $("#TablaConsulta").css("display", "none");
+            $("#Datos").css("display", "inline-table");
+            $("#Detalle").css("display", "none");
             $("#Txt_ID").removeAttr("disabled");
             $("#Btnguardar").attr("value", "Guardar");
             estado = opcion;
@@ -113,7 +118,10 @@ function HabilitarPanel(opcion) {
             break;
 
         case "buscar":
+            Clear_Detalle();
             $("#TablaDatos").css("display", "none");
+            $("#Datos").css("display", "none");
+            $("#Detalle").css("display", "inline-table");
             $("#TablaConsulta").css("display", "inline-table");
             $(".container_TGrid").html("");
             estado = opcion;
@@ -121,7 +129,10 @@ function HabilitarPanel(opcion) {
             break;
 
         case "modificar":
+            Clear_Detalle();
             $("#TablaDatos").css("display", "none");
+            $("#Datos").css("display", "inline-table");
+            $("#Detalle").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
             $(".container_TGrid").html("");
             estado = opcion;
@@ -140,8 +151,6 @@ function BtnConsulta() {
     var filtro;
     var ValidateSelect = ValidarDroplist();
     var opcion;
-
-    OpenControl(); //Abrimos el load de espera con el logo
 
     if (ValidateSelect == 1) {
         filtro = "N";
@@ -176,6 +185,186 @@ function BtnCrear() {
 //evento del boton salir
 function x() {
     $("#dialog").dialog("close");
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                     PROCESOS DE CHANGES EN CONTROLES                                                                                                                                        ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+//al mover el combo de nit 2 para traer los roles
+function Change_Select_Nit_2() {
+    $("#Select_EmpresaNit_2").change(function () {
+
+        var vl_Nit_index = this.value;
+        transacionAjax_CargaRol('cargar_Rol', vl_Nit_index);
+    });
+}
+
+//al mover el combo de nit traer datos presedentes
+function Change_Select_Nit() {
+    $("#Select_EmpresaNit").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_EmpresaNit").val() == "-1") {
+            $("#ImgNIT").css("display", "inline-table");
+        } else {
+            $("#ImgNIT").css("display", "none");
+        }
+        index = this.value;
+        TransaccionesSegunNIT(index);
+    });
+}
+
+function TransaccionesSegunNIT(index_NIT_ID) {
+    if (index_NIT_ID != "-1") {
+        transacionAjax_PoliticasSeguridad('PoliticasSeguridad', index_NIT_ID); //Carga las politicas de seguridad
+        transacionAjax_GrupoReportes('GrupoReportes', index_NIT_ID); //Carga los grupos de reportes (Genéricos y de la empresa)
+        transacionAjax_GrupoDocumentos('GrupoDocumentos', index_NIT_ID); //Carga los grupos de Documentos (Genéricos y de la empresa)
+    }
+}
+
+function Change_Select_TypeDocument() {
+    $("#Select_TypeDocument").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_TypeDocument").val() == "-1") {
+            $("#Img_TypeDoc").css("display", "inline-table");
+        } else {
+            $("#Img_TypeDoc").css("display", "none");
+        }
+    });
+}
+
+function Change_DDLRol() {
+    $("#DDLRol").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#DDLRol").val() == "-1") {
+            $("#ImgRol").css("display", "inline-table");
+        } else {
+            $("#ImgRol").css("display", "none");
+        }
+    });
+}
+
+function Change_Select_Acces_Information() {
+    $("#Select_Acces_Information").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_Acces_Information").val() == "-1") {
+            $("#ImgAccessInfo").css("display", "inline-table");
+        } else {
+            $("#ImgAccessInfo").css("display", "none");
+        }
+    });
+}
+
+function Change_Select_PolSegurGrupo() {
+    $("#Select_PolSegurGrupo").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_PolSegurGrupo").val() == "-1") {
+            $("#ImgPolSeguGrupo").css("display", "inline-table");
+        } else {
+            $("#ImgPolSeguGrupo").css("display", "none");
+        }
+    });
+}
+
+function Change_Select_PoliticaSeguridad_U() {
+    $("#Select_PoliticaSeguridad_U").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_PoliticaSeguridad_U").val() == "-1") {
+            $("#ImgPolSecurity").css("display", "inline-table");
+        } else {
+            $("#ImgPolSecurity").css("display", "none");
+        }
+    });
+}
+
+function Change_Select_AccesInfoDocument() {
+    $("#Select_AccesInfoDocument").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_AccesInfoDocument").val() == "-1") {
+            $("#ImgAccesInfoDocument").css("display", "inline-table");
+        } else {
+            $("#ImgAccesInfoDocument").css("display", "none");
+        }
+    });
+}
+
+function Change_Select_AccessDocument() {
+    $("#Select_AccessDocument").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_AccessDocument").val() == "-1") {
+            $("#ImgAccessDocuments").css("display", "inline-table");
+        } else {
+            $("#ImgAccessDocuments").css("display", "none");
+        }
+        ValidarTipoAcceso("Documentos"); //Validamos si selecciona 4 - Grupo de documentos para mostrar selección de grupo
+    });
+}
+
+function Change_Select_Grupo_Documentos_U() {
+    $("#Select_Grupo_Documentos_U").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_Grupo_Documentos_U").val() == "-1") {
+            $("#ImgGroupDocuments").css("display", "inline-table");
+        } else {
+            $("#ImgGroupDocuments").css("display", "none");
+        }
+    });
+}
+
+function Change_SelectAccessInfoReports() {
+    $("#SelectAccessInfoReports").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#SelectAccessInfoReports").val() == "-1") {
+            $("#ImgAccessInfoReports").css("display", "inline-table");
+        } else {
+            $("#ImgAccessInfoReports").css("display", "none");
+        }
+    });
+}
+
+function Change_Select_AccessReports() {
+    $("#Select_AccessReports").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_AccessReports").val() == "-1") {
+            $("#ImgAccessReports").css("display", "inline-table");
+        } else {
+            $("#ImgAccessReports").css("display", "none");
+        }
+        ValidarTipoAcceso("Reportes"); //Validamos si selecciona 4 - Grupo de documentos para mostrar selección de grupo
+    });
+}
+
+function Change_Select_GroupReports() {
+    $("#Select_GroupReports").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_GroupReports").val() == "-1") {
+            $("#ImgGroupReport").css("display", "inline-table");
+        } else {
+            $("#ImgGroupReport").css("display", "none");
+        }
+    });
+}
+
+function Change_Select_TypeAccess() {
+    $("#Select_TypeAccess").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_TypeAccess").val() == "-1") {
+            $("#ImgTypeAccess").css("display", "inline-table");
+        } else {
+            $("#ImgTypeAccess").css("display", "none");
+        }
+    });
+}
+
+function Change_Select_EstadoUser() {
+    $("#Select_EstadoUser").change(function () {
+        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
+        if ($("#Select_EstadoUser").val() == "-1") {
+            $("#ImgEstadoUser").css("display", "inline-table");
+        } else {
+            $("#ImgEstadoUser").css("display", "none");
+        }
+    });
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -389,6 +578,40 @@ function ValidaCamposPeople() {
     return valida;
 }
 
+//Función que valida que tipo de acceso a información se requiere y muestra o no los combos de Grupo Documentos - Reportes
+function ValidarTipoAcceso(AccessTo) {
+
+    var valor = 0;
+
+    switch (AccessTo) {
+        case "Documentos":
+
+            valor = $("#Select_AccessDocument").val();
+            if (valor == 4) {
+                $("#T_GrupoDocuments").show();
+            } else {
+                $("#Select_Grupo_Documentos_U").val("-1").trigger('chosen:updated');
+                $("#T_GrupoDocuments").hide(); //Se coloca de ultimas para que los cambios que se quieran hacer tengan efecto            
+            }
+
+            break;
+        case "Reportes":
+
+            valor = $("#Select_AccessReports").val();
+            if (valor == 4) {
+                $("#T_GrupoReportes").show();
+            } else {
+                $("#Select_GroupReports").val("-1").trigger('chosen:updated');
+                $("#T_GrupoReportes").hide(); //Se coloca de ultimas para que los cambios que se quieran hacer tengan efecto
+            }
+
+            break;
+    }
+
+    $('.C_Chosen').trigger('chosen:updated');
+
+}
+
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                  TABLA DE AREA                                                                                  ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -401,10 +624,10 @@ function Table_User() {
     switch (estado) {
 
         case "buscar":
-            html_TUser = "<table id='TUser' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>NIT Empresa</th><th>Usuario</th><th>Tipo Documento</th><th>Documento</th><th>Nombre</th><th>Rol</th></th></th><th>Estado</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
+            html_TUser = "<table id='TUser' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>NIT Empresa</th><th>Detalle</th><th>Usuario</th><th>Tipo Documento</th><th>Documento</th><th>Nombre</th><th>Rol</th></th></th><th>Estado</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
             for (itemArray in ArrayUser) {
                 Index_User = parseInt(ArrayUser[itemArray].Index) - 1;
-                html_TUser += "<tr id= 'TUser_" + Index_User + "'><td>" + ArrayUser[itemArray].Nit_ID + "</td><td>" + ArrayUser[itemArray].Usuario_ID + "</td><td>" + ArrayUser[itemArray].TypeDocument + "</td><td>" + ArrayUser[itemArray].Documento + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].Nombre + "</td><td>" + ArrayUser[itemArray].Rol_ID + "</td><td> " + ArrayUser[itemArray].Estado + " </td><td>" + ArrayUser[itemArray].UsuarioCreacion + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].FechaCreacion + "</td><td>" + ArrayUser[itemArray].UsuarioActualizacion + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].FechaActualizacion + "</td></tr>";
+                html_TUser += "<tr id= 'TUser_" + Index_User + "'><td><span class='cssToolTip_ver'><img  src='../../images/N_Search_Red.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/N_Search_Black.png';\" onmouseout=\"this.src='../../images/N_Search_Red.png';\" onclick=\"Editar('" + Index_User + "')\"></img><span>Editar Usuario</span></span></td><td>" + ArrayUser[itemArray].Nit_ID + "</td><td>" + ArrayUser[itemArray].Usuario_ID + "</td><td>" + ArrayUser[itemArray].TypeDocument + " - " + ArrayUser[itemArray].DescripDocumento + "</td><td>" + ArrayUser[itemArray].Documento + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].Nombre + "</td><td>" + ArrayUser[itemArray].Rol_ID + "</td><td> " + ArrayUser[itemArray].Estado + " - " + ArrayUser[itemArray].DescripEstado + " </td><td>" + ArrayUser[itemArray].UsuarioCreacion + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].FechaCreacion + "</td><td>" + ArrayUser[itemArray].UsuarioActualizacion + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].FechaActualizacion + "</td></tr>";
             }
             break;
 
@@ -412,7 +635,7 @@ function Table_User() {
             html_TUser = "<table id='TUser' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>NIT Empresa</th><th>Usuario</th><th>Tipo Documento</th><th>Documento</th><th>Nombre</th><th>Rol</th></th></th><th>Estado</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Última Actualización</th></tr></thead><tbody>";
             for (itemArray in ArrayUser) {
                 Index_User = parseInt(ArrayUser[itemArray].Index) - 1;
-                html_TUser += "<tr id= 'TUser_" + Index_User + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + Index_User + "')\"></img><span>Editar Usuario</span></span></td><td>" + ArrayUser[itemArray].Nit_ID + "</td><td>" + ArrayUser[itemArray].Usuario_ID + "</td><td>" + ArrayUser[itemArray].TypeDocument + "</td><td>" + ArrayUser[itemArray].Documento + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].Nombre + "</td><td>" + ArrayUser[itemArray].Rol_ID + "</td><td> " + ArrayUser[itemArray].Estado + " </td><td>" + ArrayUser[itemArray].UsuarioCreacion + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].FechaCreacion + "</td><td>" + ArrayUser[itemArray].UsuarioActualizacion + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].FechaActualizacion + "</td></tr>";
+                html_TUser += "<tr id= 'TUser_" + Index_User + "'><td><span class='cssToolTip_ver'><img  src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + Index_User + "')\"></img><span>Editar Usuario</span></span></td><td>" + ArrayUser[itemArray].Nit_ID + "</td><td>" + ArrayUser[itemArray].Usuario_ID + "</td><td>" + ArrayUser[itemArray].TypeDocument + " - " + ArrayUser[itemArray].DescripDocumento + "</td><td>" + ArrayUser[itemArray].Documento + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].Nombre + "</td><td>" + ArrayUser[itemArray].Rol_ID + "</td><td> " + ArrayUser[itemArray].Estado + " - " + ArrayUser[itemArray].DescripEstado + " </td><td>" + ArrayUser[itemArray].UsuarioCreacion + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].FechaCreacion + "</td><td>" + ArrayUser[itemArray].UsuarioActualizacion + "</td><td style='white-space: nowrap;'>" + ArrayUser[itemArray].FechaActualizacion + "</td></tr>";
             }
             break;
 
@@ -468,6 +691,7 @@ function Editar(index_User) {
 
     $('.C_Chosen').trigger('chosen:updated');
 
+    setTimeout("Detalle(" + index_User + ");", 300);
 }
 
 //Función que se encarga de buscar dentro de los array los index para llenar los combos dependientes de NIT
@@ -525,6 +749,52 @@ function BuscarValuesArray(ArrayUsuario) {
         }
     }
     /*==== END REPORTS GROUP ====*/
+
+}
+
+// muestra el registro a editar
+function Detalle(index_User) {
+
+    $("#TablaDatos").css("display", "inline-table");
+    $("#TablaConsulta").css("display", "none");
+
+    $("#Ver_EmpresaNit").html($("#Select_EmpresaNit option:selected").html());
+    $("#Ver_EmpresaNit_2").html($("#Select_EmpresaNit_2 option:selected").html());
+    $("#Ver_ID").html(ArrayUser[index_User].Usuario_ID);
+
+    $("#Ver_Name").html(ArrayUser[index_User].Nombre);
+    $("#Ver_TypeDocument").html($("#Select_TypeDocument option:selected").html());
+    $("#Ver_Document").html(ArrayUser[index_User].Documento);
+    //Rol se llena en BuscarhtmluesArray            
+    $("#Ver_Acces_Information").html($("#Select_Acces_Information option:selected").html());
+    $("#Ver_PolSegurGrupo").html($("#Select_PolSegurGrupo option:selected").html());
+    //PoliticaSeguridad se llena en BuscarhtmluesArray
+    $("#Ver_AccesInfoDocument").html($("#Select_AccesInfoDocument option:selected").html());
+    $("#Ver_AccessDocument").html($("#Select_AccessDocument option:selected").html());
+    //Grupo Documentos se llena en BuscarhtmluesArray            
+    $("#Ver_AccessInfoReports").html($("#SelectAccessInfoReports option:selected").html());
+    $("#Ver_AccessReports").html($("#Select_AccessReports option:selected").html());
+    //Grupo Reportes se llena en BuscarhtmluesArray
+    $("#Ver_Token").html(ArrayUser[index_User].Token);
+    $("#Ver_TypeAccess").html($("#Select_TypeAccess option:selected").html());
+    $("#Ver_EstadoUser").html($("#Select_EstadoUser option:selected").html());
+
+    $("#Ver_Rol").html($("#DDLRol option:selected").html());
+    $("#Ver_PoliticaSeguridad_U").html($("#Select_PoliticaSeguridad_U option:selected").html());
+
+    var vl_Valor_Doc = $("#Select_AccessDocument").val();
+    if (vl_Valor_Doc == 4) {
+        $("#Ver_Grupo_Documentos_U").html($("#Select_Grupo_Documentos_U option:selected").html());
+    } else {
+        $("#Ver_Grupo_Documentos_U").html("No Aplica");
+    }
+
+    var vl_Valor_Report = $("#Select_AccessReports").val();
+    if (vl_Valor_Report == 4) {
+        $("#Ver_GroupReports").html($("#Select_GroupReports option:selected").html());
+    } else {
+        $("#Ver_GroupReports").html("No Aplica");
+    }
 
 }
 
@@ -624,220 +894,26 @@ function Clear() {
     }
 }
 
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*----                                                                                                                     PROCESOS DE CHANGES EN CONTROLES                                                                                                                                        ----*/
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-//Función que valida que tipo de acceso a información se requiere y muestra o no los combos de Grupo Documentos - Reportes
-function ValidarTipoAcceso(AccessTo) {
-
-    var valor = 0;
-
-    switch (AccessTo) {
-        case "Documentos":
-
-            valor = $("#Select_AccessDocument").val();
-            if (valor == 4) {
-                $("#T_GrupoDocuments").show();
-            } else {
-                $("#Select_Grupo_Documentos_U").val("-1").trigger('chosen:updated');
-                $("#T_GrupoDocuments").hide(); //Se coloca de ultimas para que los cambios que se quieran hacer tengan efecto            
-            }
-
-            break;
-        case "Reportes":
-
-            valor = $("#Select_AccessReports").val();
-            if (valor == 4) {
-                $("#T_GrupoReportes").show();
-            } else {
-                $("#Select_GroupReports").val("-1").trigger('chosen:updated');
-                $("#T_GrupoReportes").hide(); //Se coloca de ultimas para que los cambios que se quieran hacer tengan efecto
-            }
-
-            break;
-    }
-
-    $('.C_Chosen').trigger('chosen:updated');
-
+//limpiar campos de consulta
+function Clear_Detalle() {
+    $("#Ver_EmpresaNit").html("");
+    $("#Ver_EmpresaNit_2").html("");
+    $("#Ver_ID").html("");
+    $("#Ver_Name").html("");
+    $("#Ver_TypeDocument").html("");
+    $("#Ver_Document").html("");
+    $("#Ver_Acces_Information").html("");
+    $("#Ver_PolSegurGrupo").html("");
+    $("#Ver_AccesInfoDocument").html("");
+    $("#Ver_AccessDocument").html("");
+    $("#Ver_AccessInfoReports").html("");
+    $("#Ver_AccessReports").html("");
+    $("#Ver_Token").html("");
+    $("#Ver_TypeAccess").html("");
+    $("#Ver_EstadoUser").html("");
+    $("#Ver_Rol").html("");
+    $("#Ver_PoliticaSeguridad_U").html("");
+    $("#Ver_Grupo_Documentos_U").html("");
+    $("#Ver_GroupReports").html("");
 }
-
-//al mover el combo de nit 2 para traer los roles
-function Change_Select_Nit_2() {
-    $("#Select_EmpresaNit_2").change(function () {
-
-        var vl_Nit_index = this.value;
-        transacionAjax_CargaRol('cargar_Rol', vl_Nit_index);
-    });
-}
-
-//al mover el combo de nit traer datos presedentes
-function Change_Select_Nit() {
-    $("#Select_EmpresaNit").change(function () {
-        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
-        if ($("#Select_EmpresaNit").val() == "-1") {
-            $("#ImgNIT").css("display", "inline-table");
-        } else {
-            $("#ImgNIT").css("display", "none");
-            $("#Select_EmpresaNit").prop('disabled', true); //Desactivamos el Chosen
-        }
-        index = this.value;
-        TransaccionesSegunNIT(index);
-    });
-}
-
-function TransaccionesSegunNIT(index_NIT_ID) {
-    if (index_NIT_ID != "-1") {
-        OpenControl();
-        transacionAjax_PoliticasSeguridad('PoliticasSeguridad', index_NIT_ID); //Carga las politicas de seguridad
-        transacionAjax_GrupoReportes('GrupoReportes', index_NIT_ID); //Carga los grupos de reportes (Genéricos y de la empresa)
-        transacionAjax_GrupoDocumentos('GrupoDocumentos', index_NIT_ID); //Carga los grupos de Documentos (Genéricos y de la empresa)
-    }
-}
-
-function Change_Select_TypeDocument() {
-    $("#Select_TypeDocument").change(function () {
-        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
-        if ($("#Select_TypeDocument").val() == "-1") {
-            $("#Img_TypeDoc").css("display", "inline-table");
-        } else {
-            $("#Img_TypeDoc").css("display", "none");
-        }
-    });
-}
-
-function Change_DDLRol() {
-    $("#DDLRol").change(function () {
-        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
-        if ($("#DDLRol").val() == "-1") {
-            $("#ImgRol").css("display", "inline-table");
-        } else {
-            $("#ImgRol").css("display", "none");
-        }
-    });
-}
-
-function Change_Select_Acces_Information() {
-    $("#Select_Acces_Information").change(function () {
-        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
-        if ($("#Select_Acces_Information").val() == "-1") {
-            $("#ImgAccessInfo").css("display", "inline-table");
-        } else {
-            $("#ImgAccessInfo").css("display", "none");
-        }
-    });
-}
-
-function Change_Select_PolSegurGrupo() {
-    $("#Select_PolSegurGrupo").change(function () {
-        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
-        if ($("#Select_PolSegurGrupo").val() == "-1") {
-            $("#ImgPolSeguGrupo").css("display", "inline-table");
-        } else {
-            $("#ImgPolSeguGrupo").css("display", "none");
-        }
-    });
-}
-
-function Change_Select_PoliticaSeguridad_U() {
-    $("#Select_PoliticaSeguridad_U").change(function () {
-        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
-        if ($("#Select_PoliticaSeguridad_U").val() == "-1") {
-            $("#ImgPolSecurity").css("display", "inline-table");
-        } else {
-            $("#ImgPolSecurity").css("display", "none");
-        }
-    });
-}
-
-function Change_Select_AccesInfoDocument() {
-    $("#Select_AccesInfoDocument").change(function () {
-        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
-        if ($("#Select_AccesInfoDocument").val() == "-1") {
-            $("#ImgAccesInfoDocument").css("display", "inline-table");
-        } else {
-            $("#ImgAccesInfoDocument").css("display", "none");
-        }
-    });
-}
-
-function Change_Select_AccessDocument() {
-    $("#Select_AccessDocument").change(function () {
-        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
-        if ($("#Select_AccessDocument").val() == "-1") {
-            $("#ImgAccessDocuments").css("display", "inline-table");
-        } else {
-            $("#ImgAccessDocuments").css("display", "none");
-        }
-        ValidarTipoAcceso("Documentos"); //Validamos si selecciona 4 - Grupo de documentos para mostrar selección de grupo
-    });
-}
-
-function Change_Select_Grupo_Documentos_U() {
-    $("#Select_Grupo_Documentos_U").change(function () {
-        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
-        if ($("#Select_Grupo_Documentos_U").val() == "-1") {
-            $("#ImgGroupDocuments").css("display", "inline-table");
-        } else {
-            $("#ImgGroupDocuments").css("display", "none");
-        }
-    });
-}
-
-function Change_SelectAccessInfoReports() {
-    $("#SelectAccessInfoReports").change(function () {
-        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
-        if ($("#SelectAccessInfoReports").val() == "-1") {
-            $("#ImgAccessInfoReports").css("display", "inline-table");
-        } else {
-            $("#ImgAccessInfoReports").css("display", "none");
-        }
-    });
-}
-
-function Change_Select_AccessReports() {
-    $("#Select_AccessReports").change(function () {
-        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
-        if ($("#Select_AccessReports").val() == "-1") {
-            $("#ImgAccessReports").css("display", "inline-table");
-        } else {
-            $("#ImgAccessReports").css("display", "none");
-        }
-        ValidarTipoAcceso("Reportes"); //Validamos si selecciona 4 - Grupo de documentos para mostrar selección de grupo
-    });
-}
-
-function Change_Select_GroupReports() {
-    $("#Select_GroupReports").change(function () {
-        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
-        if ($("#Select_GroupReports").val() == "-1") {
-            $("#ImgGroupReport").css("display", "inline-table");
-        } else {
-            $("#ImgGroupReport").css("display", "none");
-        }
-    });
-}
-
-function Change_Select_TypeAccess() {
-    $("#Select_TypeAccess").change(function () {
-        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
-        if ($("#Select_TypeAccess").val() == "-1") {
-            $("#ImgTypeAccess").css("display", "inline-table");
-        } else {
-            $("#ImgTypeAccess").css("display", "none");
-        }
-    });
-}
-
-function Change_Select_EstadoUser() {
-    $("#Select_EstadoUser").change(function () {
-        /*Validamos si el cambio es para seleccionar un valor, sino, mostramos el error*/
-        if ($("#Select_EstadoUser").val() == "-1") {
-            $("#ImgEstadoUser").css("display", "inline-table");
-        } else {
-            $("#ImgEstadoUser").css("display", "none");
-        }
-    });
-}
-
-
 

@@ -916,6 +916,7 @@ Public Class ClienteSQLClass
                     If Not (IsDBNull(ReadConsulta.GetValue(16))) Then objCliente.Correo_2 = ReadConsulta.GetValue(16) Else objCliente.Correo_2 = ""
 
                     objCliente.Index_Direccion = ReadConsulta.GetValue(17)
+                    objCliente.Consecutivo = ReadConsulta.GetValue(18)
 
                     'agregamos a la lista
                     ObjListCliente.Add(objCliente)
@@ -1006,48 +1007,91 @@ Public Class ClienteSQLClass
     ''' <param name="vp_S_Document"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Read_Client(ByVal vp_S_Nit As String, ByVal vp_S_TypeDocument As String, ByVal vp_S_Document As String)
+    Public Function Read_Client(ByVal vp_Obj As ClienteClass)
 
         Dim ObjListCliente As New List(Of ClienteClass)
         Dim StrQuery As String = ""
         Dim conex As New Conector
         Dim Conexion As String = conex.typeConexion("2")
 
+        Dim BD_Admin As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDAdmin").ToString
+        Dim BD_Documentos As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDDocument").ToString
+
         Dim sql As New StringBuilder
 
-        sql.Append(" SELECT CLI_Nit_ID, " & _
-                    " CLI_TypeDocument_ID, " & _
-                    " CLI_Document_ID, " & _
-                    " CLI_Digito_Verificacion, " & _
-                    " CLI_Nombre, " & _
-                    " CLI_Ciudad_ID, " & _
-                    " CLI_OP_Cliente, " & _
-                    " CLI_OP_Avaluador, " & _
-                    " CLI_OP_Transito, " & _
-                    " CLI_OP_Hacienda, " & _
-                    " CLI_OP_Empresa, " & _
-                    " CLI_OP_Empleado, " & _
-                    " CLI_OP_Asesor, " & _
-                    " CLI_Other_1, " & _
-                    " CLI_Other_2, " & _
-                    " CLI_FechaActualizacion, " & _
-                    " CLI_Usuario_Creacion, " & _
-                    " C.C_Descripcion, " & _
-                    " TD.TD_Descripcion, " & _
-                    " CLI_Pais_ID, " & _
-                    " P.P_Name, " & _
-                    " CLI_Nombre_2, " & _
-                    " CLI_Apellido_1, " & _
-                    " CLI_Apellido_2, " & _
-                    " CLI_Cod_Bank, " & _
-                    " CLI_DocCiudad " & _
-                " FROM CLIENTE CLI " & _
-                " INNER JOIN PAISES P ON P.P_Cod = CLI.CLI_Pais_ID " & _
-                " INNER JOIN CIUDADES C ON C.C_Ciudad_ID = CLI.CLI_Ciudad_ID " & _
-                " INNER JOIN M_SEGURIDAD.dbo.TC_TIPO_DOCUMENTO TD ON TD.TD_ID_TDoc = CLI.CLI_TypeDocument_ID " & _
-                " WHERE CLI_Nit_ID = '" & vp_S_Nit & "' " & _
-                " AND CLI_TypeDocument_ID = '" & vp_S_TypeDocument & "'" & _
-                " AND CLI_Document_ID = '" & vp_S_Document & "'")
+        sql.Append(" SELECT CLI.CLI_Nit_ID, " & _
+                        "       CLI.CLI_TypeDocument_ID, " & _
+                        "       CLI.CLI_Document_ID, " & _
+                        "       CLI.CLI_Digito_Verificacion, " & _
+                        "       CLI.CLI_Nombre, " & _
+                        "       CLI.CLI_Ciudad_ID, " & _
+                        "       CLI.CLI_OP_Cliente, " & _
+                        "       CLI.CLI_OP_Avaluador, " & _
+                        "       CLI.CLI_OP_Transito, " & _
+                        "       CLI.CLI_OP_Hacienda, " & _
+                        "       CLI.CLI_OP_Empresa, " & _
+                        "       CLI.CLI_OP_Empleado, " & _
+                        "       CLI.CLI_OP_Asesor, " & _
+                        "       CLI.CLI_Other_1, " & _
+                        "       CLI.CLI_Other_2, " & _
+                        "       CLI.CLI_FechaActualizacion, " & _
+                        "       CLI.CLI_Usuario_Creacion, " & _
+                        "       C.C_Descripcion, " & _
+                        "       TD.TD_Descripcion, " & _
+                        "       CLI.CLI_Pais_ID, " & _
+                        "       P.P_Name, " & _
+                        "       CLI.CLI_Nombre_2, " & _
+                        "       CLI.CLI_Apellido_1, " & _
+                        "       CLI.CLI_Apellido_2, " & _
+                        "       CLI.CLI_Cod_Bank, " & _
+                        "       CLI.CLI_DocCiudad, " & _
+                        "       CLI.CLI_TipoPersona, " & _
+                        "       CLI.CLI_Regimen, " & _
+                        "       D1.DDLL_Descripcion AS DescripTPersona, " & _
+                        "       D2.DDLL_Descripcion AS DescripRegimen, " & _
+                        "       CLI.CLI_AccesoSistema, " & _
+                        "       CLI.CLI_Area_ID, " & _
+                        "       CLI.CLI_Cargo_ID, " & _
+                        "       CLI.CLI_TypeDocument_ID_Jefe, " & _
+                        "       CLI.CLI_Document_ID_Jefe, " & _
+                        "       CLI.CLI_Politica_ID, " & _
+                        "       CLI.CLI_FechaCreacion, " & _
+                        "       CLI.CLI_Usuario_Actualizacion, " & _
+                        "        A.A_Descripcion, " & _
+                        "       CA.C_Descripcion, " & _
+                        "        PO.PS_Descripcion, " & _
+                        "       CLI.CLI_GrpDocumentos, " & _
+                        "       CLI_2.CLI_Nombre, " & _
+                        "       C2.C_Descripcion, " & _
+                        "       CLI_3.CLI_Nombre + ' ' + CLI_3.CLI_Nombre_2 + ' ' + CLI_3.CLI_Apellido_1 + ' ' + CLI_3.CLI_Apellido_2, " & _
+                        "      	GD.GD_Descripcion, " & _
+                        "      	CLI.CLI_N_Consecutivo, " & _
+                        "      	ROW_NUMBER() OVER(ORDER BY CLI.CLI_Nit_ID ASC) AS Index_Cliente,  " & _
+                        "      	CLI.CLI_Sex, " & _
+                        "      	CLI.CLI_FechaNacimiento, " & _
+                        "       SEX.DDLL_Descripcion AS DescripSex, " & _
+                         "      CLI.CLI_OP_Visitante, " & _
+                        "       CLI.CLI_OP_Representante, " & _
+                        "       CLI.CLI_OP_socio, " & _
+                        "       CLI.CLI_Por_Participacion " & _
+                        " FROM CLIENTE CLI " & _
+                        " INNER JOIN PAISES P ON P.P_Cod = CLI.CLI_Pais_ID " & _
+                        " INNER JOIN CIUDADES C ON C.C_Ciudad_ID = CLI.CLI_Ciudad_ID " & _
+                        " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO SEX ON SEX.DDL_ID = CLI.CLI_Sex AND SEX.DDL_Tabla = 'SEXO' " & _
+                        " LEFT JOIN " & BD_Admin & ".dbo.TC_TIPO_DOCUMENTO TD ON TD.TD_ID_TDoc = CLI.CLI_TypeDocument_ID " & _
+                        " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D1 ON D1.DDL_ID = CLI.CLI_TipoPersona AND D1.DDL_Tabla = 'TIPO_PERSONA' " & _
+                        " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D2 ON D2.DDL_ID = CLI.CLI_Regimen AND D2.DDL_Tabla = 'REGIMEN' " & _
+                        " LEFT JOIN AREA A ON A.A_Area_ID = CLI.CLI_Area_ID AND  A.A_Nit_ID = CLI.CLI_Nit_ID" & _
+                        " LEFT JOIN CARGO CA ON CA.C_Cargo_ID = CLI.CLI_Cargo_ID AND CA.C_Nit_ID = CLI.CLI_Nit_ID" & _
+                        " LEFT JOIN " & BD_Admin & ".dbo.POLITICA_SEGURIDAD PO ON PO.PS_Politica_ID = CLI.CLI_Politica_ID AND PO.PS_Nit_ID = CLI.CLI_Nit_ID " & _
+                        " INNER JOIN CLIENTE CLI_2 ON CLI_2.CLI_Document_ID = SUBSTRING(CLI.CLI_Nit_ID,0,LEN(CLI.CLI_Nit_ID)) /*AND CLI_2.CLI_Nit_ID = CLI.CLI_Nit_ID*/ " & _
+                        " LEFT JOIN CIUDADES C2 ON C2.C_Ciudad_ID = CLI.CLI_DocCiudad  " & _
+                        " LEFT JOIN CLIENTE CLI_3 ON CLI_3.CLI_Document_ID = CLI.CLI_Document_ID_Jefe AND CLI_3.CLI_Nit_ID = CLI.CLI_Nit_ID " & _
+                        " LEFT JOIN " & BD_Documentos & ".dbo.GRUPO_DOCUMENTO GD ON GD.GD_Grp_Documento_ID = CLI.CLI_GrpDocumentos AND GD.GD_Nit_ID = CLI.CLI_Nit_ID " & _
+                        " WHERE CLI.CLI_TypeDocument_ID ='" & vp_Obj.TypeDocument_ID & "'" & _
+                        " AND CLI.CLI_Document_ID = '" & vp_Obj.Document_ID & "'" & _
+                        " AND CLI.CLI_Nit_ID = '" & vp_Obj.Nit_ID & "'")
+
 
         StrQuery = sql.ToString
 
@@ -1373,55 +1417,10 @@ Public Class ClienteSQLClass
     ''' <summary>
     ''' lee matrix para Direccion de las personas
     ''' </summary>
+    ''' <param name="vp_Obj"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Matrix_Personas_Direcciones(ByVal vp_S_TDoc, ByVal vp_S_Doc, ByVal vp_S_NIT)
-
-        Dim ObjList As New List(Of ClienteClass)
-        Dim conex As New Conector
-        Dim Conexion As String = conex.typeConexion("2")
-
-        Dim sql As New StringBuilder
-
-        sql.Append("SELECT  c.CLI_Nit_ID, " & _
-                        " c.CLI_TypeDocument_ID, " & _
-                        " c.CLI_Document_ID, " & _
-                        " c.CLI_Digito_Verificacion, " & _
-                        " c.CLI_Nombre, " & _
-                        " c.CLI_Nombre_2, " & _
-                        " c.CLI_Apellido_1, " & _
-                        " c.CLI_Apellido_2, " & _
-                        " c.CLI_Ciudad_ID, " & _
-                        " d.D_PaginaWeb, " & _
-                        " d.D_Direccion, " & _
-                        " d.D_Telefono_1, " & _
-                        " d.D_Telefono_2, " & _
-                        " d.D_Telefono_3, " & _
-                        " d.D_Telefono_4, " & _
-                        " d.D_Correo_1, " & _
-                        " d.D_Correo_2, " & _
-                        " ROW_NUMBER() OVER(ORDER BY c.CLI_Nit_ID ASC) AS Index_Direcciones " & _
-                        "  FROM CLIENTE c " & _
-                        "  LEFT JOIN DIRECCIONES d " & _
-                        "  ON d.D_Document_ID = c.CLI_Document_ID " & _
-                        " WHERE CLI_TypeDocument_ID ='" & vp_S_TDoc & "'" & _
-                        " AND CLI_Document_ID = '" & vp_S_Doc & "'" & _
-                        " AND c.CLI_Nit_ID = '" & vp_S_NIT & "'" & _
-                        "  ORDER BY c.CLI_Nit_ID, c.CLI_Document_ID ASC")
-
-        Dim StrQuery As String = sql.ToString
-
-        ObjList = list(StrQuery, Conexion, "Matrix_Personas_Direcciones")
-
-        Return ObjList
-    End Function
-
-    ''' <summary>
-    ''' lee matrix para Direccion de las personas
-    ''' </summary>
-    ''' <returns></returns>
-    ''' <remarks></remarks>
-    Public Function Matrix_Personas_Direcciones_Sucursal(ByVal vp_Obj_Cliente As ClienteClass)
+    Public Function Matrix_Personas_Direcciones(ByVal vp_Obj As ClienteClass)
 
         Dim ObjList As New List(Of ClienteClass)
         Dim conex As New Conector
@@ -1447,16 +1446,31 @@ Public Class ClienteSQLClass
                         " d.D_Telefono_4, " & _
                         " d.D_Correo_1, " & _
                         " d.D_Correo_2, " & _
-                        " ROW_NUMBER() OVER(ORDER BY c.CLI_Nit_ID ASC) AS Index_Direcciones " & _
-                        "  FROM CLIENTE c " & _
-                        " LEFT JOIN DIRECCIONES d " & _
-                        "  ON d.D_Document_ID = c.CLI_Document_ID " & _
-                        " ORDER BY c.CLI_Nit_ID, c.CLI_Document_ID ASC ")
+                        " ROW_NUMBER() OVER(ORDER BY c.CLI_Nit_ID ASC) AS Index_Direcciones, " & _
+                         " d.D_Consecutivo " & _
+                       "  FROM CLIENTE c " & _
+                        "  LEFT JOIN DIRECCIONES d  ON d.D_Document_ID = c.CLI_Document_ID ")
 
-        'Select Case vp_Obj_Cliente.TipoSQL
-        '    Case "Sucursal"
-        '        vl_sql_filtro.Append("WHERE c.CLI_Nit_ID = '" & vp_Obj_Cliente.Nit_ID & "' ORDER BY c.CLI_Nit_ID, c.CLI_Document_ID ASC ")
-        'End Select
+        Select Case vp_Obj.TipoSQL
+
+            Case "Sucursal"
+                vl_sql_filtro.Append(" WHERE c.CLI_Document_ID = " & _
+                                                     " CASE SUBSTRING('" & vp_Obj.Nit_ID & "',0,LEN('" & vp_Obj.Nit_ID & "')) " & _
+                                                     "                                 WHEN '' THEN '0'   " & _
+                                                     " ELSE SUBSTRING('" & vp_Obj.Nit_ID & "',0,LEN('" & vp_Obj.Nit_ID & "')) " & _
+                                                     "  END " & _
+                                                     "  ORDER BY c.CLI_Nit_ID, c.CLI_Document_ID ASC ")
+
+            Case "Cliente"
+                vl_sql_filtro.Append(" WHERE CLI_TypeDocument_ID ='" & vp_Obj.TypeDocument_ID & "'" & _
+                                                    " AND CLI_Document_ID = '" & vp_Obj.Document_ID & "'" & _
+                                                    " AND c.CLI_Nit_ID = '" & vp_Obj.Nit_ID & "'" & _
+                                                    "  ORDER BY c.CLI_Nit_ID, c.CLI_Document_ID ASC")
+
+            Case Else
+                vl_sql_filtro.Append(" ORDER BY c.CLI_Nit_ID, c.CLI_Document_ID ASC ")
+
+        End Select
 
         Dim vl_S_SQLString As String = sql.ToString & vl_sql_filtro.ToString
 
@@ -1464,46 +1478,52 @@ Public Class ClienteSQLClass
 
         Return ObjList
     End Function
+
     ''' <summary>
     ''' trae el nombre del cliente segun el filtro por tipo de documento, documento y nit empresa
     ''' </summary>
-    ''' <param name="vp_S_Nit_ID"></param>
-    ''' <param name="vp_S_TDoc"></param>
-    ''' <param name="vp_S_Doc"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function SearchPeople_Exists(ByVal vp_S_Nit_ID As String, ByVal vp_S_TDoc As String, ByVal vp_S_Doc As String)
+    Public Function SearchPeople_Exists(ByVal vp_Obj As ClienteClass)
 
         Dim conex As New Conector
         Dim Conexion As String = conex.typeConexion("2")
-        Dim StrQuery As String
+        Dim ObjList As New List(Of ClienteClass)
 
-        Dim sql_body As New StringBuilder
-        Dim sql_Filter As New StringBuilder
+        Dim sql As New StringBuilder
+        Dim vl_sql_filtro As New StringBuilder
 
-        sql_body.Append(" SELECT CLI_Nombre + ' ' + " & _
-                                          "             CASE  WHEN  CLI_Nombre_2  IS NULL THEN ''  ELSE CLI_Nombre_2 END  + ' ' + " & _
-                                          "             CASE  WHEN  CLI_Apellido_1  IS NULL THEN ''  ELSE CLI_Apellido_1 END  + ' ' + " & _
-                                          "             CASE  WHEN  CLI_Apellido_2  IS NULL THEN ''  ELSE CLI_Apellido_2 END AS DESCRIPCION" & _
-                                          " FROM CLIENTE " & _
-                                          " WHERE CLI_TypeDocument_ID ='" & vp_S_TDoc & "'" & _
-                                          " AND CLI_Document_ID = '" & vp_S_Doc & "'")
+        sql.Append(" SELECT CLI_Nombre + ' ' + " & _
+                            "             CASE  WHEN  CLI_Nombre_2  IS NULL THEN ''  ELSE CLI_Nombre_2 END  + ' ' + " & _
+                            "             CASE  WHEN  CLI_Apellido_1  IS NULL THEN ''  ELSE CLI_Apellido_1 END  + ' ' + " & _
+                            "             CASE  WHEN  CLI_Apellido_2  IS NULL THEN ''  ELSE CLI_Apellido_2 END AS DESCRIPCION" & _
+                            " FROM CLIENTE ")
 
-        If vp_S_Nit_ID <> "" Then
-            sql_Filter.Append(" AND CLI_Nit_ID  = '" & vp_S_Nit_ID & "'")
-            StrQuery = sql_body.ToString & sql_Filter.ToString
-        Else
-            StrQuery = sql_body.ToString
-        End If
+        'case para construir el filtro de la consulta
+        Select Case vp_Obj.TipoSQL
 
-        Dim People As String = conex.Shearch_Date_String(StrQuery, "2")
 
-        Select Case People
+            Case "S_Nit"
+                vl_sql_filtro.Append(" WHERE CLI_TypeDocument_ID ='" & vp_Obj.TypeDocument_ID & "'" & _
+                                                    " AND CLI_Document_ID = '" & vp_Obj.Document_ID & "'" & _
+                                                    " AND CLI_Nit_ID = '" & vp_Obj.Nit_ID & "'")
+            Case "N_Nit"
+                vl_sql_filtro.Append(" WHERE CLI_TypeDocument_ID ='" & vp_Obj.TypeDocument_ID & "'" & _
+                                                    " AND CLI_Document_ID = '" & vp_Obj.Document_ID & "'")
+
+        End Select
+
+        Dim vl_S_SQLString As String = sql.ToString & vl_sql_filtro.ToString
+
+        Dim vl_People As String = conex.Shearch_Date_String(vl_S_SQLString, "2")
+
+        'case para retornar el resultado de la consulta
+        Select Case vl_People
             Case ""
-                People = "NO"
-                Return People
+                vl_People = "NO"
+                Return vl_People
             Case Else
-                Return People
+                Return vl_People
         End Select
 
     End Function

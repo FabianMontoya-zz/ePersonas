@@ -23,17 +23,20 @@ Public Class MonedaCotSQLClass
         Dim sql As New StringBuilder
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
-            sql.Append("SELECT COTM_Cod_Moneda_ID,COTM_Fecha,COTM_ValorCotizacion,COTM_Usuario_Creacion,COTM_FechaCreacion,COTM_Usuario_Actualizacion,COTM_FechaActualizacion,CM_Descripcion FROM MONEDA_COTIZA MCOT " & _
-                       " INNER JOIN MONEDA_COD MC ON MC.CM_Cod_Moneda_ID = MCOT.COTM_Cod_Moneda_ID ")
+            sql.Append(" SELECT COTM_Cod_Moneda_ID,COTM_Fecha,COTM_ValorCotizacion,COTM_Usuario_Creacion,COTM_FechaCreacion,COTM_Usuario_Actualizacion,COTM_FechaActualizacion,CM_Descripcion, " & _
+                                   " ROW_NUMBER()OVER(ORDER BY COTM_Cod_Moneda_ID ASC) AS Index_CotMoneda   FROM MONEDA_COTIZA MCOT " & _
+                                   " INNER JOIN MONEDA_COD MC ON MC.CM_Cod_Moneda_ID = MCOT.COTM_Cod_Moneda_ID ")
         Else
 
             If vp_S_Contenido = "ALL" Then
-                sql.Append("SELECT COTM_Cod_Moneda_ID,COTM_Fecha,COTM_ValorCotizacion,COTM_Usuario_Creacion,COTM_FechaCreacion,COTM_Usuario_Actualizacion,COTM_FechaActualizacion,CM_Descripcion FROM MONEDA_COTIZA MCOT " & _
-                           " INNER JOIN MONEDA_COD MC ON MC.CM_Cod_Moneda_ID = MCOT.COTM_Cod_Moneda_ID ")
+                sql.Append(" SELECT COTM_Cod_Moneda_ID,COTM_Fecha,COTM_ValorCotizacion,COTM_Usuario_Creacion,COTM_FechaCreacion,COTM_Usuario_Actualizacion,COTM_FechaActualizacion,CM_Descripcion, " & _
+                                       " ROW_NUMBER()OVER(ORDER BY COTM_Cod_Moneda_ID ASC) AS Index_CotMoneda   FROM MONEDA_COTIZA MCOT " & _
+                                       " INNER JOIN MONEDA_COD MC ON MC.CM_Cod_Moneda_ID = MCOT.COTM_Cod_Moneda_ID ")
             Else
-                sql.Append("SELECT COTM_Cod_Moneda_ID,COTM_Fecha,COTM_ValorCotizacion,COTM_Usuario_Creacion,COTM_FechaCreacion,COTM_Usuario_Actualizacion,COTM_FechaActualizacion,CM_Descripcion FROM MONEDA_COTIZA MCOT " & _
-                           " INNER JOIN MONEDA_COD MC ON MC.CM_Cod_Moneda_ID = MCOT.COTM_Cod_Moneda_ID " & _
-                      "WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
+                sql.Append(" SELECT COTM_Cod_Moneda_ID,COTM_Fecha,COTM_ValorCotizacion,COTM_Usuario_Creacion,COTM_FechaCreacion,COTM_Usuario_Actualizacion,COTM_FechaActualizacion,CM_Descripcion, " & _
+                                       " ROW_NUMBER()OVER(ORDER BY COTM_Cod_Moneda_ID ASC) AS Index_CotMoneda   FROM MONEDA_COTIZA MCOT " & _
+                                       " INNER JOIN MONEDA_COD MC ON MC.CM_Cod_Moneda_ID = MCOT.COTM_Cod_Moneda_ID " & _
+                                       " WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
             End If
         End If
 
@@ -235,6 +238,7 @@ Public Class MonedaCotSQLClass
             objMonedaCot.UsuarioActualizacion = ReadConsulta.GetValue(5)
             objMonedaCot.FechaActualizacion = ReadConsulta.GetValue(6)
             objMonedaCot.DescripMoneda = ReadConsulta.GetValue(7)
+            objMonedaCot.Index = ReadConsulta.GetValue(8)
 
             'agregamos a la lista
             ObjListMonedaCot.Add(objMonedaCot)

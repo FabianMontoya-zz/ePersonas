@@ -1,7 +1,6 @@
 ﻿/*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_CargaBusqueda(State) {
-    OpenControl();
     $.ajax({
         url: "Adm_RolesAjax.aspx",
         type: "POST",
@@ -178,7 +177,9 @@ function transacionAjax_Rol_delete(State) {
                 Mensaje_General("Disculpenos :(", "Ocurrió un error y no se actualizó el estado del Perfil.", "W");
             }
             else {
+                $("#dialog_eliminar").dialog("close");
                 Mensaje_General("¡Exito!", "El Estado del perfil " + ID + " se ha actualizado correctamente.", "S");
+                $(".container_TGrid").html("");
                 HabilitarPanel('eliminar');
             }
         },

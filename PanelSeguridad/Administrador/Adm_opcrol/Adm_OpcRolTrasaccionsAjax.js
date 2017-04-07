@@ -1,8 +1,7 @@
 ﻿/*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_CargaBusqueda(State) {
-    OpenControl();
-    $.ajax({
+   $.ajax({
         url: "Adm_OpcRolAjax.aspx",
         type: "POST",
         //crear json
@@ -254,11 +253,13 @@ function transacionAjax_opcRol_delete(State) {
         //Transaccion Ajax en proceso
         success: function (result) {
             if (result == "Error") {
+                $("#dialog_eliminar").dialog("close");
                 Mensaje_General("Disculpenos :(", "Ocurrió un error y no se eliminó la Opción Perfil.", "W");
             }
             else {
-                Mensaje_General("¡Exito!", "La Opción Perfil se ha eliminado correctamente.", "S");
                 $("#dialog_eliminar").dialog("close");
+                Mensaje_General("¡Exito!", "La Opción Perfil se ha eliminado correctamente.", "S");
+                $(".container_TGrid").html("");
                 HabilitarPanel('eliminar');
             }
         },

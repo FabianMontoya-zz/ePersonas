@@ -23,14 +23,17 @@ Public Class Impuesto_GastoSQLClass
         Dim sql As New StringBuilder
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
-            sql.Append("SELECT IM_Impuesto_Gasto_ID, IM_Descripcion, IM_FechaActualizacion, IM_Usuario FROM Impuesto_Gasto")
+            sql.Append(" SELECT IM_Impuesto_Gasto_ID, IM_Descripcion, IM_FechaActualizacion, IM_Usuario, " & _
+                                  " ROW_NUMBER()OVER(ORDER BY IM_Impuesto_Gasto_ID ASC) AS Index_Impuesto FROM Impuesto_Gasto")
         Else
 
             If vp_S_Contenido = "ALL" Then
-                sql.Append("SELECT IM_Impuesto_Gasto_ID, IM_Descripcion, IM_FechaActualizacion, IM_Usuario FROM Impuesto_Gasto")
+                sql.Append(" SELECT IM_Impuesto_Gasto_ID, IM_Descripcion, IM_FechaActualizacion, IM_Usuario, " & _
+                                      " ROW_NUMBER()OVER(ORDER BY IM_Impuesto_Gasto_ID ASC) AS Index_Impuesto FROM Impuesto_Gasto")
             Else
-                sql.Append("SELECT IM_Impuesto_Gasto_ID, IM_Descripcion, IM_FechaActualizacion, IM_Usuario FROM Impuesto_Gasto " & _
-                      "WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
+                sql.Append(" SELECT IM_Impuesto_Gasto_ID, IM_Descripcion, IM_FechaActualizacion, IM_Usuario, " & _
+                                      " ROW_NUMBER()OVER(ORDER BY IM_Impuesto_Gasto_ID ASC) AS Index_Impuesto FROM Impuesto_Gasto" & _
+                                      " WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
             End If
         End If
 
@@ -194,9 +197,10 @@ Public Class Impuesto_GastoSQLClass
             Dim objImpuesto_Gasto As New Impuesto_GastoClass
             'cargamos datos sobre el objeto de login
             objImpuesto_Gasto.Impuesto_Gasto_ID = ReadConsulta.GetValue(0)
-            objImpuesto_Gasto.Descripcion = ReadConsulta.GetString(1)
-            objImpuesto_Gasto.FechaActualizacion = ReadConsulta.GetString(2)
-            objImpuesto_Gasto.Usuario = ReadConsulta.GetString(3)
+            objImpuesto_Gasto.Descripcion = ReadConsulta.GetValue(1)
+            objImpuesto_Gasto.FechaActualizacion = ReadConsulta.GetValue(2)
+            objImpuesto_Gasto.Usuario = ReadConsulta.GetValue(3)
+            objImpuesto_Gasto.Index = ReadConsulta.GetValue(4)
 
             'agregamos a la lista
             ObjListImpuesto_Gasto.Add(objImpuesto_Gasto)

@@ -59,9 +59,9 @@ $(document).ready(function () {
     });
 
     $('.Decimal').keyup(function () {
-        this.value = (this.value + '').replace(/[^0-9\.]/g, '');
+        this.value = (this.value + '').replace(/[^0-9\,]/g, '');
     });
-
+    
     $('.Letter').keyup(function () {
         this.value = (this.value + '').replace(/[^a-zA-Z\s\ñ\Ñ\ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç]+/g, '');
     });
@@ -351,7 +351,9 @@ function RevisarAyudas() {
     $(".Spam_A_Addres").html(ArrayAyudas[24].Ayudas_ID + ": " + ArrayAyudas[24].Descripcion);
 
     $(".Spam_AWords").html(ArrayAyudas[25].Ayudas_ID + ": " + ArrayAyudas[25].Descripcion);
-
+    $(".Spam_ARuta").html(ArrayAyudas[26].Ayudas_ID + ": " + ArrayAyudas[26].Descripcion);
+    $(".Spam_ADec_2").html(ArrayAyudas[27].Ayudas_ID + ": " + ArrayAyudas[27].Descripcion);
+    
     $(".Spam_CT1").html(ArrayAyudas[6].Descripcion);
     $(".Spam_CT2").html(ArrayAyudas[7].Descripcion);
     $(".Spam_CT4").html(ArrayAyudas[19].Descripcion);
@@ -465,7 +467,7 @@ function No_Back_Button() {
         (event.ctrlKey && event.keyCode == 87) || (event.ctrlKey && event.shiftKey && event.keyCode == 73)) {
             event.cancelBubble = true;
             event.returnValue = false;
-            alert("¡Función no permitida!");
+            Mensaje_General("¡Alerta!", "¡Función no permitida!" , "W");
             return false;
         }
 
@@ -505,7 +507,7 @@ function No_Back_Button() {
                 ctrlPressed = event.ctrlKey;
             }
             if (shiftPressed || altPressed || ctrlPressed)
-                alert("Función no permitida");
+                Mensaje_General("¡Alerta!", "¡Función no permitida!" , "W");
         }
         return true;
     }
@@ -984,6 +986,13 @@ function Convert_Decimal(index) {
     return Output;
 }
 
+//convierte el valor decimal con coma para mostra en las vistas
+function Convert_Decimal_Grid(vp_Index) {
+    var vl_StrCovert= vp_Index.toString();
+    var vl_Value_Coma = vl_StrCovert.replace(".", ",");
+    return vl_Value_Coma;
+}
+
 //validar la longitud del campo number
 function maxLengthTypeNumber(object) {
     if (object.value.length > object.maxLength)
@@ -1431,6 +1440,13 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
                 $("#" + Selector).append("<option value='" + Matrix[Item].ID + "'> " + Matrix[Item].ID + " - " + Matrix[Item].descripcion + "</option>");
             }
             break;
+
+        case "Select_Calendario": //Calendario de Paises
+            for (Item in Matrix) {
+                $("#" + Selector).append("<option value='" + Matrix[Item].Calendario_ID + "'> " + Matrix[Item].Calendario_ID + " - " + Matrix[Item].Descripcion + "</option>");
+            }
+            break;
+
     }
 
     $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
@@ -1489,7 +1505,7 @@ function Charge_Combo_Persona(Matrix, Selector, Nit, Index_Edit) {
 
         case "Select_Direccion"://Direcciones por persona
             for (Item in Matrix) {
-                $("#" + Selector).append("<option value='" + Matrix[Item].Index_Direccion + "'>" + Matrix[Item].Direccion + "</option>");
+                $("#" + Selector).append("<option value='" + Matrix[Item].Consecutivo + "'>"+ Matrix[Item].Consecutivo + " - " + Matrix[Item].Direccion + "</option>");
             }
             break;
     }
@@ -1678,11 +1694,6 @@ function CargaCalendarios(Matrix, Selector, Index_Edit) {
 
     switch (Selector) {
 
-        case "Select_Calendario": //Calendario de Paises
-            for (Item in Matrix) {
-                $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Index + " - " + Matrix[Item].Descripcion + "</option>");
-            }
-            break;
         case "Select_Calendario_TS": //Calendario de Tipo Servicio
             for (Item in Matrix) {
                 $("#" + Selector).append("<option value='" + Matrix[Item].Index + "'> " + Matrix[Item].Index + " - " + Matrix[Item].Descripcion + "</option>");
@@ -1963,12 +1974,7 @@ function UpLoad_Document(NameAjax, NameFile_ID, Form) {
                 var filename = result;
                 switch (filename) {
                     case "NO_FORMAT":
-                        $("#dialog").dialog("option", "title", "Formato Incorrecto!");
-                        $("#Mensaje_alert").text("El documento no se puede generar, el formato es diferente a la parametrización asignada! ");
-                        $("#dialog").dialog("open");
-                        $("#DE").css("display", "none");
-                        $("#SE").css("display", "none");
-                        $("#WE").css("display", "block");
+                        Mensaje_General("¡Formato Incorrecto!", "El documento no se puede generar, el formato es diferente a la parametrización asignada! " , "W");
                         break;
 
                     default:
@@ -1997,7 +2003,7 @@ function UpLoad_Document(NameAjax, NameFile_ID, Form) {
 
             },
             error: function (error) {
-                alert("Ocurrió un error inesperado, por favor intente de nuevo mas tarde: " + error);
+                Mensaje_General("¡Alerta!", "Ocurrió un error inesperado, por favor intente de nuevo mas tarde:" + error, "W");
             }
         });
     }

@@ -1,17 +1,19 @@
 ﻿Public Class Inf_ImpuestoClass
-#Region "campos"
+#Region "Campos"
+    Private _Index As Long
     Private _Cod_ID As Integer
     Private _Ciudad_ID As Integer
     Private _Impuesto_Gasto_ID As Integer
     Private _Nit_ID As String
     Private _TypeDocument_ID As Integer
-    Private _Document_ID As Integer
+    Private _Document_ID As String
 
     Private _FechaActualizacion As String
     Private _Usuario As String
 
     Private _DescripCod As String
     Private _DescripCiudad As String
+    Private _DescripEmpresa As String
     Private _DescripImpuesto_Gasto As String
     Private _DescripNitResponsable As String
     Private _DescripTypeDocument As String
@@ -19,7 +21,15 @@
 
 #End Region
 
-#Region "propiedades"
+#Region "Propiedades"
+    Public Property Index() As Long
+        Get
+            Return Me._Index
+        End Get
+        Set(ByVal value As Long)
+            Me._Index = value
+        End Set
+    End Property
     Public Property Cod_ID() As Integer
         Get
             Return Me._Cod_ID
@@ -134,5 +144,14 @@
             Me._DescripDocument = value
         End Set
     End Property
+    Public Property DescripEmpresa() As String
+        Get
+            Return Me._DescripEmpresa
+        End Get
+        Set(ByVal value As String)
+            Me._DescripEmpresa = value
+        End Set
+    End Property
+
 #End Region
 End Class

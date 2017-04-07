@@ -23,14 +23,15 @@ Public Class FestivosSQLClass
         Dim sql As New StringBuilder
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
-            sql.Append("SELECT F_Año, F_Mes_Dia, F_FechaActualizacion, F_Usuario, SUBSTRING(convert(nvarchar(4),F_Mes_Dia), 1, 2)as Mes, SUBSTRING(convert(nvarchar(4),F_Mes_Dia), 3, 4)as Dia FROM Festivos")
+            sql.Append("SELECT F_Año, F_Mes_Dia, F_FechaActualizacion, F_Usuario, SUBSTRING(convert(nvarchar(4),F_Mes_Dia), 1, 2)as Mes, SUBSTRING(convert(nvarchar(4),F_Mes_Dia), 3, 4)as Dia, ROW_NUMBER()OVER(ORDER BY F_Año,F_Mes_Dia ASC) AS Index_Festivo  FROM Festivos")
         Else
 
             If vp_S_Contenido = "ALL" Then
-                sql.Append("SELECT F_Año, F_Mes_Dia, F_FechaActualizacion, F_Usuario, SUBSTRING(convert(nvarchar(4),F_Mes_Dia), 1, 2)as Mes, SUBSTRING(convert(nvarchar(4),F_Mes_Dia), 3, 4)as Dia FROM Festivos")
+                sql.Append("SELECT F_Año, F_Mes_Dia, F_FechaActualizacion, F_Usuario, SUBSTRING(convert(nvarchar(4),F_Mes_Dia), 1, 2)as Mes, SUBSTRING(convert(nvarchar(4),F_Mes_Dia), 3, 4)as Dia, ROW_NUMBER()OVER(ORDER BY F_Año,F_Mes_Dia ASC) AS Index_Festivo FROM Festivos")
             Else
-                sql.Append("SELECT F_Año, F_Mes_Dia, F_FechaActualizacion, F_Usuario, SUBSTRING(convert(nvarchar(4),F_Mes_Dia), 1, 2)as Mes, SUBSTRING(convert(nvarchar(4),F_Mes_Dia), 3, 4)as Dia FROM Festivos " &
-                      "WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
+
+                sql.Append("SELECT F_Año, F_Mes_Dia, F_FechaActualizacion, F_Usuario, SUBSTRING(convert(nvarchar(4),F_Mes_Dia), 1, 2)as Mes, SUBSTRING(convert(nvarchar(4),F_Mes_Dia), 3, 4)as Dia, ROW_NUMBER()OVER(ORDER BY F_Año,F_Mes_Dia ASC) AS Index_Festivo FROM Festivos " & _
+                                      "WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
             End If
         End If
 
@@ -161,6 +162,7 @@ Public Class FestivosSQLClass
         objcmd.CommandText = vp_S_StrQuery
         'ejecutamos consulta
         ReadConsulta = objcmd.ExecuteReader()
+
         Select Case vp_S_TypeList
             Case "Consulta"
                 'recorremos la consulta por la cantidad de datos en la BD

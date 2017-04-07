@@ -1,8 +1,7 @@
 ﻿/*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_CargaBusqueda(vp_State) {
-    OpenControl(); 
-    $.ajax({
+   $.ajax({
         url: "CicloAjax.aspx",
         type: "POST",
         //crear json
@@ -95,22 +94,20 @@ function transacionAjax_Ciclo_create(vp_State) {
             switch (result) {
 
                 case "Error":
-                    Mensaje_General("Disculpenos :(", "Ocurrió un error y no se realizó el Ingreso del Nuevo Ciclo.", "W");
+                    Mensaje_General("Disculpenos :(", "No se realizó el ingreso del ciclo.", "W");
                     break;
 
                 case "Existe":
-                    Mensaje_General("Ciclo Existente", "El Ciclo que desea ingresar ya existe en el sistema, favor revisar.", "E");
-                    $("#ImgNIT").css("display", "inline-table");
-                    $("#ImgID").css("display", "inline-table");
+                    Mensaje_General("¡Ya Existe!", "El código ingresado ya existe en la base de datos.", "E");
                     break;
 
                 case "Exito":
                     if (estado == "modificar") {
-                        Mensaje_General("¡Exito!", "El Ciclo " + vl_ID + " se ha modificado exitosamente.", "S");
-                        HabilitarPanel('modificar');
+                        Mensaje_General("¡Exito!", "El iclo se ha modificado exitosamente.", "S");
+                        Clear();
                     }
                     else {
-                        Mensaje_General("¡Exito!", "El Ciclo " + vl_ID + " se ha registrado exitosamente en el sistema.", "S");
+                        Mensaje_General("¡Exito!", "El Ciclo se ha ingresado exitosamente.", "S");
                         Clear();
                     }
                     break;
@@ -140,11 +137,14 @@ function transacionAjax_Ciclo_delete(vp_State) {
         //Transaccion Ajax en proceso
         success: function (result) {
             if (result == "Error") {
-                Mensaje_General("Disculpenos :(", "Ocurrió un error y no se actualizó el estado de la Ciclo.", "W");
+                $("#dialog_eliminar").dialog("close");
+                Mensaje_General("Disculpenos :(", "Ocurrió un error y no se elimino el Ciclo.", "W");
             }
             else {
-                Mensaje_General("¡Exito!", "El Estado de la Ciclo " + vl_ID + " se ha actualizado correctamente.", "S");
-                HabilitarPanel('eliminar');
+                $("#dialog_eliminar").dialog("close");
+                Mensaje_General("¡Exito!", "El Ciclo  se elimino correctamente.", "S");
+                $(".container_TGrid").html("");
+                Clear();
             }
         },
         error: function () {
