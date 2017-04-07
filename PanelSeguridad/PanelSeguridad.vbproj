@@ -486,6 +486,10 @@
     <Content Include="Parametros\Calendario\CalendarioAjax.aspx" />
     <Content Include="Parametros\Calendario\CalendarioProgresivo.js" />
     <Content Include="Parametros\Calendario\CalendarioTrasaccionsAjax.js" />
+    <Content Include="Parametros\Calendario_Progresivo\Calendario_Progresivo.aspx" />
+    <Content Include="Parametros\Calendario_Progresivo\Calendario_Progresivo.js" />
+    <Content Include="Parametros\Calendario_Progresivo\Calendario_ProgresivoAjax.aspx" />
+    <Content Include="Parametros\Calendario_Progresivo\Calendario_ProgresivoTransaccionAjax.js" />
     <Content Include="Parametros\Cargo\Cargo.aspx" />
     <Content Include="Parametros\Cargo\Cargo.js" />
     <Content Include="Parametros\Cargo\CargoAjax.aspx" />
@@ -1279,6 +1283,22 @@
     </Compile>
     <Compile Include="Parametros\Calendario\CalendarioClass.vb" />
     <Compile Include="Parametros\Calendario\CalendarioSQLClass.vb" />
+    <Compile Include="Parametros\Calendario_Progresivo\Calendario_Progresivo.aspx.designer.vb">
+      <DependentUpon>Calendario_Progresivo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Calendario_Progresivo\Calendario_Progresivo.aspx.vb">
+      <DependentUpon>Calendario_Progresivo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Calendario_Progresivo\Calendario_ProgresivoAjax.aspx.designer.vb">
+      <DependentUpon>Calendario_ProgresivoAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Calendario_Progresivo\Calendario_ProgresivoAjax.aspx.vb">
+      <DependentUpon>Calendario_ProgresivoAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Calendario_Progresivo\Calendario_ProgresivoClass.vb" />
+    <Compile Include="Parametros\Calendario_Progresivo\Calendario_ProgresivoSQLClass.vb" />
     <Compile Include="Parametros\Cargo\Cargo.aspx.designer.vb">
       <DependentUpon>Cargo.aspx</DependentUpon>
     </Compile>

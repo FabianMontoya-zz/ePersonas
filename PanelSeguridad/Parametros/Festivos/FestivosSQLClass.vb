@@ -31,8 +31,7 @@ Public Class FestivosSQLClass
             Else
 
                 sql.Append("SELECT F_Año, F_Mes_Dia, F_FechaActualizacion, F_Usuario, SUBSTRING(convert(nvarchar(4),F_Mes_Dia), 1, 2)as Mes, SUBSTRING(convert(nvarchar(4),F_Mes_Dia), 3, 4)as Dia, ROW_NUMBER()OVER(ORDER BY F_Año,F_Mes_Dia ASC) AS Index_Festivo FROM Festivos " & _
-
-                      "WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
+                                      "WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
             End If
         End If
 
