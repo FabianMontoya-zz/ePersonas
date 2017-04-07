@@ -37,9 +37,8 @@ $(document).ready(function () {
     Ocultar_Tablas();
     /*================== FIN LLAMADO INICIAL DE MÉTODOS DE INICIALIZACIÓN ==============*/
 
-    //transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
+    transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_EmpresaNit('Cliente');
-    transacionAjax_ChargeFestivos('MatrizFestivos');
 
     CargarMatricesIniciales();
     Picker_Fechas();
@@ -287,6 +286,7 @@ function BtnConsulta() {
         if (ValidateSelect == 1) {
             filtro = "N";
             opcion = "ALL";
+            $("#TxtRead").val("");
             transacionAjax_ConsultCalendario("consulta", filtro, opcion);
         }
         else {
@@ -2327,6 +2327,7 @@ function Change_TxtF_End() {
             $("#Img7").css("display", "none");
             var DateIni = $("#TxtF_Start").val();
             var DateFin = $(this).val();
+            transacionAjax_ChargeFestivos('MatrizFestivos');
             transacionAjax_ArrayC_Semana("MatrizDiasSemana");
             FirstJSONCharge(DateIni, DateFin);
             if (estado == "modificar") { //Si estamos modificando y cambian el rango, verificamos con los horarios existentes

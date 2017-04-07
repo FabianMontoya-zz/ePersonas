@@ -8,7 +8,7 @@ function transacionAjax_CargaBusqueda(State) {
             //crear json
             data: {
                 "action": State,
-                "tabla": 'Calendario'
+                "tabla": 'Calendarios'
             },
             //Transaccion Ajax en proceso
             success: function (result) {
@@ -106,7 +106,7 @@ function transacionAjax_ConsultCalendario(State, filtro, opcion) {
     try {
         var contenido;
 
-        if ($("#TxtRead").val() == "") {
+        if (filtro == "N") {
             contenido = "ALL";
         }
         else {

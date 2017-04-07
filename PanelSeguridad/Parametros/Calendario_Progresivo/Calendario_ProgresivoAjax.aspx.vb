@@ -237,7 +237,7 @@ Public Class Calendario_ProgresivoAjax
         Dim SQL_Calendario As New CalendarioSQLClass
         Dim ObjListDroplist As New List(Of Droplist_Class)
         Dim vl_S_Tabla As String = Request.Form("tabla")
-
+        ObjListDroplist = SQL_Calendario.ReadCharge_DropList(vl_S_Tabla)
         Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
 
     End Sub
@@ -284,7 +284,10 @@ Public Class Calendario_ProgresivoAjax
         Dim ObjListDroplist As New List(Of FestivosClass)
         Dim obj As New FestivosClass
 
-        ObjListDroplist = SQL.Read_All_Festivos
+        obj.Nit_ID = Request.Form("Nit_ID")
+        obj.Calendario_ID = Request.Form("Calendario_ID")
+
+        ObjListDroplist = SQL.Read_All_Festivos(obj)
         Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
 
     End Sub

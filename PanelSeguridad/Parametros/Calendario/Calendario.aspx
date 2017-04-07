@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Calendarios" Language="vb" AutoEventWireup="false" MasterPageFile="~/Parametros/Sasif_menu.Master"
+﻿<%@ Page Title="Calendarios - SASIF Personas" Language="vb" AutoEventWireup="false" MasterPageFile="~/Parametros/Sasif_menu.Master"
     CodeBehind="Calendario.aspx.vb" Inherits="PanelSeguridad.Calendario" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">

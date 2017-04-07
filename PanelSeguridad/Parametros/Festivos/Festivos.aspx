@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Parametros/Sasif_menu.Master"
+﻿<%@ Page Title="Festivos - SASIF Personas" Language="vb" AutoEventWireup="false" MasterPageFile="~/Parametros/Sasif_menu.Master"
     CodeBehind="Festivos.aspx.vb" Inherits="PanelSeguridad.Festivos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -17,19 +17,10 @@
     <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
-    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" /> 
+    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
     <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
-    <div id="Dialog_Control" style="width: 100%; text-align: center;">
-        <div class="cssload-container" style="margin-top: 25%;">
-            <div class="cssload-whirlpool"></div>
-            <div>
-                <img id="Sasif" class="Logo_3" src="../../images/SASIF_NEW_WHITE.png" alt="SASIF S.A.S." />
-            </div>
-        </div>
-    </div>
-
     <div class="Container_title_Form">
         <table id="Tabla_Title_form">
             <tr>
@@ -42,7 +33,7 @@
         </table>
     </div>
     <div class="Marco_Container">
-       <div class="Marco_btn_Form">
+        <div class="Marco_btn_Form">
             <input id="BtnShearh" type="button" value="Consulta" onclick="HabilitarPanel('buscar');" />
             <input id="BtnCreate" type="button" value="Crear" onclick="HabilitarPanel('crear');" />
             <input id="BtnDelete" type="button" value="Eliminar" onclick="HabilitarPanel('eliminar');" />
@@ -57,7 +48,7 @@
                         </td>
                         <td id="TD2" style="width: 65%;">
                             <span class="cssToolTip_Form">
-                                <input id="TxtRead" type="text" style="width: 60%; margin-left: 10%;"/>
+                                <input id="TxtRead" type="text" style="width: 60%; margin-left: 10%;" />
                                 <span class="Spam_AST"></span></span>
                         </td>
                         <td colspan="4" align="center" id="TD3" style="width: 20%;">
@@ -77,31 +68,61 @@
                 </table>
                 <table id="TablaDatos">
                     <tr>
-                        <td class="Label_Bold">Año
+                        <td colspan="6">
+                            <table id="T_Nit" style="width: 100%; text-align: left;">
+                                <tr>
+                                    <td style="width: 10.5%;" class="Label_Bold">NIT Empresa
+                                    </td>
+                                    <td style="width: 47%;">
+                                        <select style="width: 100%;" id="Select_EmpresaNit" class="C_Chosen">
+                                        </select>
+                                    </td>
+                                    <td style="padding-bottom: 25px; width: 60%;">
+                                        <span class="cssToolTip">
+                                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img1"
+                                                src="../../images/error.png" />
+                                            <span class="SpamEG"></span></span>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table id="T_Calendario" style="width: 100%; text-align: left;">
+                                <tr>
+                                    <td style="width: 10.5%;" class="Label_Bold">Calendario Base
+                                    </td>
+                                    <td style="width: 47%;">
+                                        <select style="width: 100%;" id="Select_Calendario_CP" class="C_Chosen">
+                                        </select>
+                                    </td>
+                                    <td style="padding-bottom: 25px; width: 98%;">
+                                        <span class="cssToolTip">
+                                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img2"
+                                                src="../../images/error.png" />
+                                            <span class="SpamEG"></span></span>
+                                    </td>
+                                </tr>
+                            </table>
                         </td>
+                    </tr>
+                    <tr>
                         <td>
-                            <span class="cssToolTip_Form">
-                                <input type="text" id="Txt_Año" maxlength="4" class="Numeric" />
-                                <span class="Spam_AN"></span></span>
-                        </td>
-                        <td style="padding-bottom: 25px; width: 50px;">
-                            <span class="cssToolTip">
-                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgID"
-                                    src="../../images/error.png" />
-                                <span id="S_Y"></span></span>
-                        </td>
-                        <td class="Label_Bold">Mes/Dia
-                        </td>
-                        <td>
-                            <span class="cssToolTip_Form">
-                                <input type="text" id="Txt_mes_Dia" maxlength="4" />
-                                <span class="Spam_AForF"></span></span>
-                        </td>
-                        <td style="padding-bottom: 25px; width: 50px;">
-                            <span class="cssToolTip_L">
-                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img1"
-                                    src="../../images/error.png" />
-                                <span id="S_D"></span></span>
+                            <table id="T_Fecha" style="width: 100%; text-align: left;">
+                                <tr>
+
+                                    <td style="width: 11.6%;" class="Label_Bold">Fecha Festiva
+                                    </td>
+                                    <td style="width: 100px;">
+                                        <span class="cssToolTip_Form">
+                                            <input type="text" id="Txt_Año" maxlength="4" class="Numeric" onkeypress="return OnlyNumbers(event);" readonly="readonly" style="width: 100px; cursor: pointer; cursor: hand;" />
+                                            <span class="Spam_AF"></span></span>
+                                    </td>
+                                    <td style="padding-bottom: 25px; width: 98%;">
+                                        <span class="cssToolTip">
+                                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img3"
+                                                src="../../images/error.png" />
+                                            <span id="S_Y"></span></span>
+                                    </td>
+                                </tr>
+                            </table>
                         </td>
                     </tr>
                     <tr>
@@ -142,7 +163,7 @@
             <tr>
                 <td>
                     <p class="Label_Bold" id="P1">
-                        Desea eliminar el siguiente registro?
+                        Pulse Confirmar para eliminar el registro seleccionado.
                     </p>
                 </td>
                 <td>
@@ -155,5 +176,13 @@
                 </td>
             </tr>
         </table>
+    </div>
+    <div id="Dialog_Control" style="width: 100%; text-align: center;">
+        <div class="cssload-container" style="margin-top: 25%;">
+            <div class="cssload-whirlpool"></div>
+            <div>
+                <img id="Sasif" class="Logo_3" src="../../images/SASIF_NEW_WHITE.png" alt="SASIF S.A.S." />
+            </div>
+        </div>
     </div>
 </asp:Content>
