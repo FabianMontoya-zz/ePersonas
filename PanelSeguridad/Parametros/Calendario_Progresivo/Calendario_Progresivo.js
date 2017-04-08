@@ -1595,6 +1595,7 @@ function LoadEdit() {
     $("#TxtF_End").val(editRangoFin);
     $("#TxtF_Start").css("display", "inline-table");
     $("#TxtF_End").css("display", "inline-table");
+    transacionAjax_ChargeFestivos('MatrizFestivos');
     transacionAjax_ArrayC_Semana("MatrizDiasSemana");
     FirstJSONCharge(editRangoIni, editRangoFin);
     CompletarMatrices(edit_ArrayH_Calendario);
