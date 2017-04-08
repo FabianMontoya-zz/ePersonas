@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Calendarios" Language="vb" AutoEventWireup="false" MasterPageFile="~/Parametros/Sasif_menu.Master"
+﻿<%@ Page Title="Calendarios - SASIF Personas" Language="vb" AutoEventWireup="false" MasterPageFile="~/Parametros/Sasif_menu.Master"
     CodeBehind="Calendario.aspx.vb" Inherits="PanelSeguridad.Calendario" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -25,14 +25,7 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
-    <div id="Dialog_Control" style="width: 100%; text-align: center;">
-        <div class="cssload-container" style="margin-top: 25%;">
-            <div class="cssload-whirlpool"></div>
-            <div>
-                <img id="Sasif" class="Logo_3" src="../../images/SASIF_NEW_WHITE.png" alt="SASIF S.A.S." />
-            </div>
-        </div>
-    </div>
+    
     <div class="Container_title_Form">
         <table id="Tabla_Title_form">
             <tr>
@@ -569,5 +562,13 @@
                 </td>
             </tr>
         </table>
+    </div>
+    <div id="Dialog_Control" style="width: 100%; text-align: center;">
+        <div class="cssload-container" style="margin-top: 25%;">
+            <div class="cssload-whirlpool"></div>
+            <div>
+                <img id="Sasif" class="Logo_3" src="../../images/SASIF_NEW_WHITE.png" alt="SASIF S.A.S." />
+            </div>
+        </div>
     </div>
 </asp:Content>

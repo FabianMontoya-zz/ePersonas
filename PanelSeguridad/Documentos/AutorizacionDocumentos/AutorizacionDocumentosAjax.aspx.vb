@@ -1,8 +1,4 @@
 ﻿Imports Newtonsoft.Json
-Imports System.Data
-Imports System.Data.SqlClient
-Imports System.Web.Script.Serialization
-Imports System.IO
 
 
 Public Class AutorizacionDocumentosAjax
@@ -317,7 +313,7 @@ Public Class AutorizacionDocumentosAjax
 
     End Sub
 
-       ''' <summary>
+    ''' <summary>
     ''' cara la matriz de documento para trabajo
     ''' </summary>
     ''' <remarks></remarks>

@@ -17,6 +17,12 @@ Public Class FestivosAjax
                 Case "consulta"
                     Consulta_Festivos()
 
+                Case "Cliente"
+                    CargarCliente()
+
+                Case "MatrixCalendarios"
+                    CargarCalendarios()
+
                 Case "crear"
                     InsertFestivos()
 
@@ -42,8 +48,9 @@ Public Class FestivosAjax
         Dim vl_S_filtro As String = Request.Form("filtro")
         Dim vl_S_opcion As String = Request.Form("opcion")
         Dim vl_S_contenido As String = Request.Form("contenido")
+        Dim vl_S_Nit_ID As String = Request.Form("Nit_User")
 
-        ObjListFestivos = SQL_Festivos.Read_AllFestivos(vl_S_filtro, vl_S_opcion, vl_S_contenido)
+        ObjListFestivos = SQL_Festivos.Read_AllFestivos(vl_S_filtro, vl_S_opcion, vl_S_contenido, vl_S_Nit_ID)
 
         If ObjListFestivos Is Nothing Then
 
@@ -52,7 +59,7 @@ Public Class FestivosAjax
 
             objFestivos.Year = 0
             objFestivos.Mes_Dia = 0
-            objFestivos.Usuario = ""
+            objFestivos.UsuarioCreacion = ""
 
             ObjListFestivos.Add(objFestivos)
         End If
@@ -69,23 +76,22 @@ Public Class FestivosAjax
 
         Dim objFestivos As New FestivosClass
         Dim SQL_Festivos As New FestivosSQLClass
-        Dim ObjListFestivos As New List(Of FestivosClass)
 
         Dim result As String
         Dim vl_s_IDxiste As String
 
-        objFestivos.Year = Request.Form("ID")
+        objFestivos.Nit_ID = Request.Form("Nit_ID")
+        objFestivos.Calendario_ID = Request.Form("Calendario_ID")
+        objFestivos.Year = Request.Form("Year")
         objFestivos.Mes_Dia = Request.Form("mes_dia")
 
         'validamos si la llave existe
-        vl_s_IDxiste = Consulta_Repetido(objFestivos.Year, objFestivos.Mes_Dia)
+        vl_s_IDxiste = Consulta_Repetido(objFestivos)
 
         If vl_s_IDxiste = 0 Then
 
-            objFestivos.FechaActualizacion = Date.Now
-            objFestivos.Usuario = Request.Form("user")
-
-            ObjListFestivos.Add(objFestivos)
+            objFestivos.FechaCreacion = Date.Now
+            objFestivos.UsuarioCreacion = Request.Form("user")
 
             result = SQL_Festivos.InsertFestivos(objFestivos)
 
@@ -105,14 +111,13 @@ Public Class FestivosAjax
 
         Dim objFestivos As New FestivosClass
         Dim SQL_Festivos As New FestivosSQLClass
-        Dim ObjListFestivos As New List(Of FestivosClass)
 
         Dim result As String
 
-        objFestivos.Year = Request.Form("ID")
-        objFestivos.Mes_Dia = Request.Form("mes_dia")
-
-        ObjListFestivos.Add(objFestivos)
+        objFestivos.Nit_ID = Request.Form("Nit_ID")
+        objFestivos.Calendario_ID = Request.Form("Calendario_ID")
+        objFestivos.Year = Request.Form("Year")
+        objFestivos.Mes_Dia = Request.Form("Mes_Dia")
 
         result = SQL_Festivos.EraseFestivos(objFestivos)
         Response.Write(result)
@@ -137,25 +142,65 @@ Public Class FestivosAjax
 
     End Sub
 
+    ''' <summary>
+    ''' funcion que carga el objeto DDL consulta
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarCliente()
+
+        Dim SQL As New ClienteSQLClass
+        Dim ObjListDroplist As New List(Of Droplist_Class)
+        Dim vl_S_Tabla As String = Request.Form("tabla")
+
+        ObjListDroplist = SQL.Charge_DropListCliente(vl_S_Tabla)
+        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga el objeto DDL consulta
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarCalendarios()
+
+        Dim SQL As New CalendarioSQLClass
+        Dim ObjListDroplist As New List(Of CalendarioClass)
+        Dim obj As New CalendarioClass
+
+        obj.Nit_ID = Request.Form("Nit")
+
+        ObjListDroplist = SQL.Read_Matrix_Calendarios_NIT(obj)
+        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
+
+    End Sub
 #End Region
 
 #Region "FUNCIONES"
 
     ''' <summary>
-    ''' funcion que valida si el id esta en la BD
+    ''' Validamos si ya existe en la BD
     ''' </summary>
-    ''' <param name="vp_S_ID"></param>
+    ''' <param name="vp_O_Obj"></param>
     ''' <returns></returns>
-    ''' <remarks></remarks>
-    Protected Function Consulta_Repetido(ByVal vp_S_ID As String, ByVal vp_S_ID_2 As String)
+    Protected Function Consulta_Repetido(ByVal vp_O_Obj As FestivosClass)
 
-        Dim SQL_General As New GeneralSQLClass
-        Dim result As String
+        Dim StrQuery As String = ""
+        Dim Result As String = ""
+        Dim conex As New Conector
 
-        result = SQL_General.ReadExist_VariantKeys("Festivos", "F_Año", "F_Mes_Dia", "", vp_S_ID, vp_S_ID_2, "", "2")
+        Dim sql As New StringBuilder
 
+        sql.AppendLine(" SELECT COUNT(1) FROM FESTIVOS " &
+                       " WHERE F_Nit_ID = '" & vp_O_Obj.Nit_ID & "'" &
+                       " AND F_Calendario_ID = '" & vp_O_Obj.Calendario_ID & "'" &
+                       " AND F_Año = '" & vp_O_Obj.Year & "'" &
+                       " AND F_Mes_Dia = '" & vp_O_Obj.Mes_Dia & "'")
 
-        Return result
+        StrQuery = sql.ToString
+
+        Result = conex.IDis(StrQuery, "2")
+
+        Return Result
 
     End Function
 

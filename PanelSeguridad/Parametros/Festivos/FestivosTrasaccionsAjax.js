@@ -24,13 +24,79 @@ function transacionAjax_CargaBusqueda(State) {
         }
     });
 }
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_EmpresaNit(State) {
+    try {
+        $.ajax({
+            url: "FestivosAjax.aspx",
+            type: "POST",
+            //crear json
+            data: {
+                "action": State,
+                "tabla": 'CLIENTE'
+            },
+            //Transaccion Ajax en proceso
+            success: function (result) {
+                if (result == "") {
+                    ArrayEmpresaNit = [];
+                }
+                else {
+                    ArrayEmpresaNit = JSON.parse(result);
+                    charge_CatalogList(ArrayEmpresaNit, "Select_EmpresaNit", "Generico");
+                }
+            },
+            error: function () {
+
+            },
+            async: false, // La petición es síncrona
+            cache: false // No queremos usar la caché del navegador
+        });
+    } catch (e) {
+        Mensaje_General("Error - Transacción Ajax fallida", "Lo sentimos, ocurrió un error y no se logró completar la transacción ajax solicitada, favor verifique los datos.", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (Festivos):\n" + e));
+    }
+}
+
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_ChargeCalendarios(State, NIT) {
+    try {
+        $.ajax({
+            url: "FestivosAjax.aspx",
+            type: "POST",
+            //crear json
+            data: {
+                "action": State,
+                "Nit": NIT
+            },
+            //Transaccion Ajax en proceso
+            success: function (result) {
+                if (result == "") {
+                    Matrix_Calendarios = [];
+                }
+                else {
+                    Matrix_Calendarios = JSON.parse(result);
+                    CargaCalendarios(Matrix_Calendarios, "Select_Calendario_CP", "");
+                }
+            },
+            error: function () {
+
+            },
+            async: false, // La petición es síncrona
+            cache: false // No queremos usar la caché del navegador
+        });
+    } catch (e) {
+        Mensaje_General("Error - Transacción Ajax fallida", "Lo sentimos, ocurrió un error y no se logró completar la transacción ajax solicitada, favor verifique los datos.", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (Festivos):\n" + e));
+    }
+}
 
 /*------------------------------ consulta ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax_Festivo(State, filtro, opcion) {
     var contenido;
 
-    if ($("#TxtRead").val() == "") {
+    if (filtro == "N") {
         contenido = "ALL";
     }
     else {
@@ -46,7 +112,8 @@ function transacionAjax_Festivo(State, filtro, opcion) {
             "action": State,
             "filtro": filtro,
             "opcion": opcion,
-            "contenido": contenido
+            "contenido": contenido,
+            "Nit_User": g_NitEmpresa_User
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -68,23 +135,32 @@ function transacionAjax_Festivo(State, filtro, opcion) {
 //hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax_Festivo_create(State) {
 
-    var ID;
-    var param;
+    var Nit_ID = $("#Select_EmpresaNit").val();
+    var Calendario_ID = "";
+    var Year = "";
+    var MesDia = "";
+    var Fecha = $("#Txt_Año").val().split("-");
+    
+    Year = Fecha[0];
+    MesDia = Fecha[1] + "" + Fecha[2];
 
-    if (State == "modificar") {
-        ID = editID;
-    } else {
-        ID = $("#Txt_Año").val();
+    for (var i in Matrix_Calendarios) {
+        if (Matrix_Calendarios[i].Index == $("#Select_Calendario_CP").val()) {
+            Calendario_ID = Matrix_Calendarios[i].Calendario_ID;
+            break;
+        }
     }
-
+    
     $.ajax({
         url: "FestivosAjax.aspx",
         type: "POST",
         //crear json
         data: {
             "action": State,
-            "ID": ID,
-            "mes_dia": $("#Txt_mes_Dia").val(),
+            "Nit_ID": Nit_ID,
+            "Calendario_ID": Calendario_ID,
+            "Year": Year,
+            "mes_dia": MesDia,
             "user": User
         },
         //Transaccion Ajax en proceso
@@ -127,8 +203,10 @@ function transacionAjax_Festivo_delete(State) {
         //crear json
         data: {
             "action": State,
-            "ID": editID,
-            "mes_dia": editDia,
+            "Nit_ID": editNit_ID,
+            "Calendario_ID": editCalendario_ID,
+            "Year": editYear,
+            "Mes_Dia": editMesDia,
             "user": User
         },
         //Transaccion Ajax en proceso

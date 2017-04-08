@@ -9,7 +9,7 @@ input[type='text'], input[type='password'] {
     font-size: inherit;
     font-weight: inherit;
     line-height: inherit;
- }
+}
 
 input[id='Circulo'] {
     height: 20px;
@@ -54,8 +54,7 @@ label {
     color: black;
 }
 
-.Sigla
-{
+.Sigla {
     text-align: left;
     font-size: 10px;
     font-weight: bold;
@@ -421,6 +420,7 @@ TOOL TIP
     color: #ffffff; /* Color del texto */
 }
 
+
     /* El tooltip */
     .cssToolTip_Form_L span {
         background: rgba(20,20,20,0.7);
@@ -470,6 +470,34 @@ TOOL TIP
 
     /* El tooltip cuando se muestra */
     .cssToolTip_Form_T:hover span {
+        display: inline; /* Para mostrarlo simplemente usamos display block por ejemplo */
+    }
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* Clase que tendra el tooltip */
+.cssToolTip_Boton {
+    position: relative; /* Esta clase tiene que tener posicion relativa */
+    color: #000000; /* Color del texto */
+}
+    /* El tooltip */
+    .cssToolTip_Boton span {
+        background: rgba(20,20,20,0.9) ;
+        border: 2px solid #ffffff;
+        border-radius: 5px;
+        box-shadow: 5px 5px 5px #333;
+        color: #ffffff;
+        display: none; /* El tooltip por defecto estara oculto */
+        font-size: 0.8em;
+        padding: 10px 10px 10px 10px;
+        max-width: 8000px;
+        position: absolute; /* El tooltip se posiciona de forma absoluta para no modificar el aspezto del resto de la pagina */
+        top: 5px; /* Posicion apartir de la parte superior del primer elemento padre con posicion relativa */
+        left: 5px; /* Posicion apartir de la parte izquierda del primer elemento padre con posicion relativa */
+        z-index: 10000; /* Poner un z-index alto para que aparezca por encima del resto de elementos */
+    }
+
+    /* El tooltip cuando se muestra */
+    .cssToolTip_Boton:hover span {
         display: inline; /* Para mostrarlo simplemente usamos display block por ejemplo */
     }
 

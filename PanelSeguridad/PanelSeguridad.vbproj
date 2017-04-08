@@ -434,6 +434,10 @@
     <Content Include="Images\settings.png" />
     <Content Include="Images\success.png" />
     <Content Include="Images\waiting.png" />
+    <Content Include="Impuestos\Impuesto_Gasto\Impuesto_Gasto.aspx" />
+    <Content Include="Impuestos\Impuesto_Gasto\Impuesto_Gasto.js" />
+    <Content Include="Impuestos\Impuesto_Gasto\Impuesto_GastoAjax.aspx" />
+    <Content Include="Impuestos\Impuesto_Gasto\Impuesto_GastoTrasaccionsAjax.js" />
     <Content Include="Impuestos\Inf_Impuesto\Inf_Impuesto.aspx" />
     <Content Include="Impuestos\Inf_Impuesto\Inf_Impuesto.js" />
     <Content Include="Impuestos\Inf_Impuesto\Inf_ImpuestoAjax.aspx" />
@@ -482,6 +486,10 @@
     <Content Include="Parametros\Calendario\CalendarioAjax.aspx" />
     <Content Include="Parametros\Calendario\CalendarioProgresivo.js" />
     <Content Include="Parametros\Calendario\CalendarioTrasaccionsAjax.js" />
+    <Content Include="Parametros\Calendario_Progresivo\Calendario_Progresivo.aspx" />
+    <Content Include="Parametros\Calendario_Progresivo\Calendario_Progresivo.js" />
+    <Content Include="Parametros\Calendario_Progresivo\Calendario_ProgresivoAjax.aspx" />
+    <Content Include="Parametros\Calendario_Progresivo\Calendario_ProgresivoTransaccionAjax.js" />
     <Content Include="Parametros\Cargo\Cargo.aspx" />
     <Content Include="Parametros\Cargo\Cargo.js" />
     <Content Include="Parametros\Cargo\CargoAjax.aspx" />
@@ -511,10 +519,6 @@
     <Content Include="Parametros\Festivos\Festivos.js" />
     <Content Include="Parametros\Festivos\FestivosAjax.aspx" />
     <Content Include="Parametros\Festivos\FestivosTrasaccionsAjax.js" />
-    <Content Include="Impuestos\Impuesto_Gasto\Impuesto_Gasto.aspx" />
-    <Content Include="Impuestos\Impuesto_Gasto\Impuesto_Gasto.js" />
-    <Content Include="Impuestos\Impuesto_Gasto\Impuesto_GastoAjax.aspx" />
-    <Content Include="Impuestos\Impuesto_Gasto\Impuesto_GastoTrasaccionsAjax.js" />
     <Content Include="Parametros\Mensajes\Mensajes.aspx" />
     <Content Include="Parametros\Mensajes\Mensajes.js" />
     <Content Include="Parametros\Mensajes\MensajesAjax.aspx" />
@@ -1073,6 +1077,22 @@
     </Compile>
     <Compile Include="Huellas\Creacion\HuellasClass.vb" />
     <Compile Include="Huellas\Creacion\HuellasSQLClass.vb" />
+    <Compile Include="Impuestos\Impuesto_Gasto\Impuesto_Gasto.aspx.designer.vb">
+      <DependentUpon>Impuesto_Gasto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Impuestos\Impuesto_Gasto\Impuesto_Gasto.aspx.vb">
+      <DependentUpon>Impuesto_Gasto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Impuestos\Impuesto_Gasto\Impuesto_GastoAjax.aspx.designer.vb">
+      <DependentUpon>Impuesto_GastoAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Impuestos\Impuesto_Gasto\Impuesto_GastoAjax.aspx.vb">
+      <DependentUpon>Impuesto_GastoAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Impuestos\Impuesto_Gasto\Impuesto_GastoClass.vb" />
+    <Compile Include="Impuestos\Impuesto_Gasto\Impuesto_GastoSQLClass.vb" />
     <Compile Include="Impuestos\Inf_Impuesto\Inf_Impuesto.aspx.designer.vb">
       <DependentUpon>Inf_Impuesto.aspx</DependentUpon>
     </Compile>
@@ -1263,6 +1283,22 @@
     </Compile>
     <Compile Include="Parametros\Calendario\CalendarioClass.vb" />
     <Compile Include="Parametros\Calendario\CalendarioSQLClass.vb" />
+    <Compile Include="Parametros\Calendario_Progresivo\Calendario_Progresivo.aspx.designer.vb">
+      <DependentUpon>Calendario_Progresivo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Calendario_Progresivo\Calendario_Progresivo.aspx.vb">
+      <DependentUpon>Calendario_Progresivo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Calendario_Progresivo\Calendario_ProgresivoAjax.aspx.designer.vb">
+      <DependentUpon>Calendario_ProgresivoAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Calendario_Progresivo\Calendario_ProgresivoAjax.aspx.vb">
+      <DependentUpon>Calendario_ProgresivoAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Calendario_Progresivo\Calendario_ProgresivoClass.vb" />
+    <Compile Include="Parametros\Calendario_Progresivo\Calendario_ProgresivoSQLClass.vb" />
     <Compile Include="Parametros\Cargo\Cargo.aspx.designer.vb">
       <DependentUpon>Cargo.aspx</DependentUpon>
     </Compile>
@@ -1365,22 +1401,6 @@
     </Compile>
     <Compile Include="Parametros\Festivos\FestivosClass.vb" />
     <Compile Include="Parametros\Festivos\FestivosSQLClass.vb" />
-    <Compile Include="Impuestos\Impuesto_Gasto\Impuesto_Gasto.aspx.designer.vb">
-      <DependentUpon>Impuesto_Gasto.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Impuestos\Impuesto_Gasto\Impuesto_Gasto.aspx.vb">
-      <DependentUpon>Impuesto_Gasto.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Impuestos\Impuesto_Gasto\Impuesto_GastoAjax.aspx.designer.vb">
-      <DependentUpon>Impuesto_GastoAjax.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Impuestos\Impuesto_Gasto\Impuesto_GastoAjax.aspx.vb">
-      <DependentUpon>Impuesto_GastoAjax.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Impuestos\Impuesto_Gasto\Impuesto_GastoClass.vb" />
-    <Compile Include="Impuestos\Impuesto_Gasto\Impuesto_GastoSQLClass.vb" />
     <Compile Include="Parametros\Mensajes\Mensajes.aspx.designer.vb">
       <DependentUpon>Mensajes.aspx</DependentUpon>
     </Compile>
