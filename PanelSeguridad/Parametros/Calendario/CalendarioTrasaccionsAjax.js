@@ -69,7 +69,7 @@ function transacionAjax_Calendario(State) {
     try {
         Matrix_Calendarios = [];
         $.ajax({
-            url: "SucursalServicioAjax.aspx",
+            url: "CalendarioAjax.aspx",
             type: "POST",
             //crear json
             data: {
@@ -253,7 +253,10 @@ function transacionAjax_Calendario_delete(State) {
                     case "Exito":
                         $("#dialog_eliminar").dialog("close");
                         Mensaje_General("Exito", "El Calendario « " + editID + " » fue eliminado exitosamente.", "S");
-                        transacionAjax_Calendario("consulta", "N", "ALL");
+                        $(".Dialog_Datos_Calen").css("display", "none");
+                        $("#TablaConsulta").css("display", "inline-table");
+                        $(".container_TGrid").html("");
+                        estado = "eliminar";
                         Clear();
                         break;
                 }

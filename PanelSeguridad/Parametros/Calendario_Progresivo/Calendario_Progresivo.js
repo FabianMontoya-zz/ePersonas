@@ -4,6 +4,7 @@ var MatrizFestivos = []; //Matriz que contendrá los días festivos que verifica
 var ArrayC_Semana = [];
 var ArrayH_Calendario = [];
 var edit_ArrayH_Calendario = [];
+var indexCalendarioBase = "";
 
 var ArrayCombo = [];
 
@@ -1570,7 +1571,7 @@ function LoadEdit() {
     var editRangoIni = "";
     var editRangoFin = "";
     var editIDCalendarioBase = "";
-    var indexCalendarioBase = "";
+    indexCalendarioBase = "";
 
     for (var i in edit_ArrayH_Calendario) {
         if (edit_ArrayH_Calendario[i].Index == 1) { //El primero será el rango inicial de fecha
@@ -2278,6 +2279,12 @@ function Event_Calendario_CP() {
         MatrizCalendario = []; //Matriz que carga las fechas del rango seleccionado
         ArrayH_Calendario = []; //Matriz que guarda los datos que guardaremos en la BD
         IniciarMatrizArrastre();
+        if (estado == "modificar") {
+            if ($("#Select_Calendario_CP").val() != indexCalendarioBase) {
+                edit_ArrayH_Calendario = [];
+                indexCalendarioBase = "-1";
+            }
+        }
         $("#Select_Arrastre").prop('disabled', false).trigger("chosen:updated");
         $("#Select_Arrastre").val("0").trigger("chosen:updated");
         $(".container_TGrid_Default").html("");
