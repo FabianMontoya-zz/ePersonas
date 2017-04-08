@@ -8,7 +8,7 @@ function transacionAjax_CargaBusqueda(State) {
             //crear json
             data: {
                 "action": State,
-                "tabla": 'Calendarios'
+                "tabla": 'Calendario'
             },
             //Transaccion Ajax en proceso
             success: function (result) {
