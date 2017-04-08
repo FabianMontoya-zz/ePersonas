@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Agendamiento/Sasif_menu.Master"
+﻿<%@ Page Title="Tipo - Clase Servicio - SASIF Persona" Language="vb" AutoEventWireup="false" MasterPageFile="~/Agendamiento/Sasif_menu.Master"
     CodeBehind="TipoServicio.aspx.vb" Inherits="PanelSeguridad.TipoServicio" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -46,7 +46,7 @@
         </table>
     </div>
     <div class="Marco_Container">
-       <div class="Marco_btn_Form">
+        <div class="Marco_btn_Form">
             <input id="BtnShearh" type="button" value="Consulta" onclick="HabilitarPanel('buscar');" />
             <input id="BtnCreate" type="button" value="Crear" onclick="HabilitarPanel('crear');" />
             <input id="BtnUpdate" type="button" value="Actualizar" onclick="HabilitarPanel('modificar');" />
@@ -81,7 +81,7 @@
                     </tr>
                 </table>
 
-                <div id="foto_servicio">
+                <%--                <div id="foto_servicio">
                     <table style="width: 10%;">
                         <tr>
                             <td id="Foto_Persona" style="width: 84%; height: 10%;">
@@ -93,48 +93,54 @@
                             </td>
                         </tr>
                     </table>
-                </div>
+                </div>--%>
                 <div class="Dialog_Datos">
-
-                    <table id="Tabla_1" style="width: 700px; text-align: left;">
+                    <table id="T_Subtitle1" style="width: 100%;" border="0">
                         <tr>
-                            <td style="width: 150px;" class="Label_Bold">NIT Empresa
+                            <td class="Title_Bold" style="width: 10.5%;">
+                                Identificación Servicio
                             </td>
-                            <td>
-                                <select id="Select_EmpresaNit" class="C_Chosen">
+                        </tr>
+                    </table>
+                    <table id="Tabla_NIT" style="width: 100%; text-align: left;">
+                        <tr>
+                            <td style="width: 14.5%;" class="Label_Bold">NIT Empresa
+                            </td>
+                            <td style="width: 47%;">
+                                <select id="Select_EmpresaNit" style="width: 100%;" class="C_Chosen">
                                 </select>
                             </td>
-                            <td style="padding-bottom: 25px; width: 250px;">
+                            <td style="width: 60%; padding-bottom: 25px;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img1"
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
                         </tr>
-                    </table>
-                    <table id="Tabla_2" style="width: 1000px; text-align: left;">
+                    </table>                    
+                    <table id="Tabla_Identificacion" style="width: 100%; text-align: left;">
                         <tr>
-                            <td style="width: 150px;" class="Label_Bold">Codigo
+                            <td style="width: 14.5%;" class="Label_Bold">Código
                             </td>
-                            <td style="width: 150px;">
+                            <td style="width: 15%;">
                                 <span class="cssToolTip_Form">
-                                    <input type="text" id="Txt_ID" maxlength="5" class="Numeric" style="width: 70px;" />
+                                    <input type="text" id="Txt_ID" maxlength="5" class="Numeric" />
                                     <span class="Spam_AN"></span></span>
                             </td>
-                            <td style="padding-bottom: 25px; width: 245px;">
+                            <td style="padding-bottom: 25px; width: 21%;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img2"
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
-                            <td class="Label_Bold" style="width: 159px;">Nombre
+                            <td class="Label_Bold" style="width: 10%;">Nombre
                             </td>
-                            <td style="width: 50px;">
+                            <td style="width: 35%;">
                                 <span class="cssToolTip_Form">
                                     <input type="text" id="TxtNombre" maxlength="50" style="width: 200px;" />
                                     <span class="Spam_AST"></span></span>
                             </td>
-                            <td style="padding-bottom: 25px;">
+                            <td style="width: 15%; padding-bottom: 25px;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img3"
                                         src="../../images/error.png" />
@@ -147,13 +153,15 @@
                             <td style="width: 190px;" class="Label_Bold">Tipo Servicio
                             </td>
                             <td style="width: 200px;">
+                                <%-- Estos están inscritos en la tabla M_Seguridad -> TC_DDL_TIPO para las consultas --%>
+                                <%-- Si se modifican se debe cambiar también en esa tabla, en todas las BD --%>
                                 <select id="Select_TipoServicio" style="width: 230px;" class="C_Chosen">
                                     <option value="-1">Seleccione...</option>
-                                    <option value="1">Agenda gimnasio</option>
-                                    <option value="2">Agenda Medica</option>
-                                    <option value="3">Agenda vehículos</option>
-                                    <option value="3">Agenda visitas</option>
-                                    <option value="3">Otros</option>
+                                    <option value="1">1 - Agenda Gimnasio</option>
+                                    <option value="2">2 - Agenda Médica</option>
+                                    <option value="3">3 - Agenda Vehículos</option>
+                                    <option value="4">4 - Agenda Visitas</option>
+                                    <option value="5">5 - Otros</option>
                                 </select>
                             </td>
                             <td style="padding-bottom: 25px; width: 300px;">
@@ -174,6 +182,13 @@
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img6"
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
+                            </td>
+                        </tr>
+                    </table>
+                    <table id="T_Subtitle2" style="width: 100%;" border="0">
+                        <tr>
+                            <td class="Title_Bold" style="width: 10.5%;">
+                                Datos Servicio
                             </td>
                         </tr>
                     </table>
@@ -250,9 +265,8 @@
                             </td>
                             <td style="width: 230px;">
                                 <select id="Select_Calculo" style="width: 230px;" class="C_Chosen">
-                                    <option value="-1">Seleccione...</option>
-                                    <option value="F">Fijo</option>
-                                    <option value="A">Solicitud</option>
+                                    <option value="F" selected="selected">F - Fijo</option>
+                                    <option value="A">A - A Solicitud</option>
                                 </select>
                             </td>
                             <td style="padding-bottom: 25px; width: 350px;">

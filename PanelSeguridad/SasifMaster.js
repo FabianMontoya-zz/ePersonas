@@ -332,6 +332,32 @@ function ConsultaParametrosURL() {
     return User;
 }
 
+//Función que busca y retorna el parametro 1 que se haya parametrizado para esa página
+function ConsultaParam1_Pag() {
+    var param = "";
+    for (item in ArrayMenu) {
+        if (ArrayMenu[item].Tipo == 2) {
+            if (ArrayMenu[item].IDlink == Link) {
+                param = ArrayMenu[item].Parametro_1;
+            }
+        }
+    }
+    return param;
+}
+
+//Función que busca y retorna el parametro 2 que se haya parametrizado para esa página
+function ConsultaParam2_Pag() {
+    var param = "";
+    for (item in ArrayMenu) {
+        if (ArrayMenu[item].Tipo == 2) {
+            if (ArrayMenu[item].IDlink == Link) {
+                param = ArrayMenu[item].Parametro_2;
+            }
+        }
+    }
+    return param;
+}
+
 //integra los mensajes de error en la pagina
 function RevisarMensajes() {
     $(".SpamEG").html(ArrayMensajes[0].Mensajes_ID + ": " + ArrayMensajes[0].Descripcion);
