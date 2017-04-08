@@ -1,12 +1,12 @@
 ﻿/*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_CargaBusqueda(State) {
-    OpenControl(); //Jhon
     $.ajax({
         url: "PuertaAccesoAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'PUERTAS_ACCESO'
         },
         //Transaccion Ajax en proceso
@@ -32,7 +32,8 @@ function transacionAjax_EmpresaNit(State) {
         url: "PuertaAccesoAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "tabla": 'CLIENTE'
         },
         //Transaccion Ajax en proceso
@@ -67,12 +68,13 @@ function transacionAjax_PuertaAcceso(State, filtro, opcion) {
     else {
         contenido = $("#TxtRead").val();
     }
-    
+
     $.ajax({
         url: "PuertaAccesoAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "filtro": filtro,
             "opcion": opcion,
             "contenido": contenido,
@@ -118,7 +120,8 @@ function transacionAjax_PuertaAcceso_create(State) {
         url: "PuertaAccesoAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Nit_ID": Nit_ID,
             "ID": ID,
             "descripcion": $("#TxtDescription").val(),
@@ -131,40 +134,20 @@ function transacionAjax_PuertaAcceso_create(State) {
             switch (result) {
 
                 case "Error":
-                    $("#dialog").dialog("option", "title", "Disculpenos :(");
-                    $("#Mensaje_alert").text("No se realizo el ingreso de la Puerta Acceso!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "block");
-                    $("#SE").css("display", "none");
-                    $("#WA").css("display", "none");
+                    Mensaje_General("Disculpenos :(", "No se realizó la ingreso de la Puerta Acceso.", "E");
                     break;
 
                 case "Existe":
-                    $("#dialog").dialog("option", "title", "Ya Existe");
-                    $("#Mensaje_alert").text("El codigo ingresado ya existe en la base de datos!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "None");
-                    $("#SE").css("display", "none");
-                    $("#WE").css("display", "block");
+                    Mensaje_General("¡Ya Existe!", "El código ingresado ya existe en la base de datos.", "W");
                     break;
 
                 case "Exito":
                     if (estado == "modificar") {
-                        $("#dialog").dialog("option", "title", "Exito");
-                        $("#Mensaje_alert").text("La Puerta Acceso fue modificada exitosamente! ");
-                        $("#dialog").dialog("open");
-                        $("#DE").css("display", "none");
-                        $("#SE").css("display", "block");
-                        $("#WA").css("display", "none");
+                          Mensaje_General("¡Exito!", "La Puerta Acceso se ha modificado correctamente.", "S");
                         Clear();
                     }
                     else {
-                        $("#dialog").dialog("option", "title", "Exito");
-                        $("#Mensaje_alert").text("La Puerta Acceso fue creada exitosamente! ");
-                        $("#dialog").dialog("open");
-                        $("#DE").css("display", "none");
-                        $("#SE").css("display", "block");
-                        $("#WA").css("display", "none");
+                        Mensaje_General("¡Exito!", "La Puerta Acceso se ha creado correctamente.", "S");
                         Clear();
                     }
                     break;
@@ -185,7 +168,8 @@ function transacionAjax_PuertaAcceso_delete(State) {
         url: "PuertaAccesoAjax.aspx",
         type: "POST",
         //crear json
-        data: { "action": State,
+        data: {
+            "action": State,
             "Nit_ID": editNit_ID,
             "ID": editID,
             "user": User
@@ -195,35 +179,15 @@ function transacionAjax_PuertaAcceso_delete(State) {
             switch (result) {
 
                 case "Error":
-                    $("#dialog").dialog("option", "title", "Disculpenos :(");
-                    $("#Mensaje_alert").text("No se elimino el PuertaAcceso!");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "block");
-                    $("#SE").css("display", "none");
-                    $("#WA").css("display", "none");
                     $("#dialog_eliminar").dialog("close");
-                    break;
+                    Mensaje_General("Disculpenos :(", "Ocurrio un error al intentar eliminar esta puerta de acceso.", "E");
 
-                case "Exist_O":
-                    $("#dialog").dialog("option", "title", "Integridad referencial");
-                    $("#Mensaje_alert").text("No se elimino el PuertaAcceso, para eliminarlo debe eliminar primero el registro en la tabla Empleado");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "none");
-                    $("#SE").css("display", "none");
-                    $("#WE").css("display", "block");
-                    $("#dialog_eliminar").dialog("close");
                     break;
 
                 case "Exito":
                     $("#dialog_eliminar").dialog("close");
-                    $("#dialog").dialog("option", "title", "Exito");
-                    $("#Mensaje_alert").text("El PuertaAcceso fue eliminado exitosamente! ");
-                    $("#dialog").dialog("open");
-                    $("#DE").css("display", "none");
-                    $("#SE").css("display", "block");
-                    $("#WA").css("display", "none");
-                    $("#dialog_eliminar").dialog("close");
-                    transacionAjax_PuertaAcceso("consulta", "N", "ALL");
+                    Mensaje_General("¡Registro Eliminado!", "la puert  se ha eliminado correctamente.", "S");
+                    $(".container_TGrid").html("");
                     Clear();
                     break;
             }

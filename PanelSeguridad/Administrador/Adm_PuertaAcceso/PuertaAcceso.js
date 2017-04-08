@@ -23,6 +23,9 @@ $(document).ready(function () {
 
 });
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                 REGION INICIO DE COMPONENTES                                                                                                    ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //Función que oculta todas las IMG de los errores en pantalla
 function Ocultar_Errores() {
     ResetError();
@@ -65,60 +68,15 @@ function Ocultar_Tablas() {
     $("#TablaConsulta").css("display", "none");
 }
 
-//habilita el panel de crear o consulta
-function HabilitarPanel(opcion) {
-
-    switch (opcion) {
-
-        case "crear":
-            $(".Dialog_Datos").css("display", "inline-table");
-            $("#TablaConsulta").css("display", "none");
-            $("#Select_EmpresaNit").removeAttr("disabled");
-            $("#Txt_ID").removeAttr("disabled");
-            $("#Btnguardar").attr("value", "Guardar");
-            $('.C_Chosen').trigger('chosen:updated');
-            ResetError();
-            Clear();
-            estado = opcion;
-            VerificarNIT("Select_EmpresaNit");
-            break;
-
-        case "buscar":
-            $(".Dialog_Datos").css("display", "none");
-            $("#TablaConsulta").css("display", "inline-table");
-            $(".container_TGrid").html("");
-            estado = opcion;
-            Clear();
-            break;
-
-        case "modificar":
-            $(".Dialog_Datos").css("display", "none");
-            $("#TablaConsulta").css("display", "inline-table");
-            $(".container_TGrid").html("");
-            estado = opcion;
-            ResetError();
-            Clear();
-            break;
-
-        case "eliminar":
-            $(".Dialog_Datos").css("display", "none");
-            $("#TablaConsulta").css("display", "inline-table");
-            $(".container_TGrid").html("");
-            estado = opcion;
-            Clear();
-            break;
-
-    }
-}
-
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                 REGION BOTONES                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //consulta del del crud(READ)
 function BtnConsulta() {
 
     var filtro;
     var ValidateSelect = ValidarDroplist();
     var opcion;
-
-    OpenControl(); //Abrimos el load de espera con el logo
 
     if (ValidateSelect == 1) {
         filtro = "N";
@@ -151,11 +109,17 @@ function BtnCrear() {
 
 //elimina de la BD
 function BtnElimina() {
-    OpenControl(); //Abrimos el load de espera con el logo
-    transacionAjax_PuertaAcceso_delete("elimina");
+     transacionAjax_PuertaAcceso_delete("elimina");
 }
 
+//evento del boton salir
+function x() {
+    $("#dialog").dialog("close");
+}
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                      REGION VALIDACIONES DEL PROCESO                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //validamos campos para la creacion del link
 function validarCamposCrear() {
 
@@ -200,6 +164,55 @@ function ValidarDroplist() {
         flag = 0;
     }
     return flag;
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                      PROCESOS DE VALIDACION Y GRID PUERTA DE ACCESO                                                                                                              ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//habilita el panel de crear o consulta
+function HabilitarPanel(opcion) {
+
+    switch (opcion) {
+
+        case "crear":
+            $(".Dialog_Datos").css("display", "inline-table");
+            $("#TablaConsulta").css("display", "none");
+            $("#Select_EmpresaNit").removeAttr("disabled");
+            $("#Txt_ID").removeAttr("disabled");
+            $("#Btnguardar").attr("value", "Guardar");
+            $('.C_Chosen').trigger('chosen:updated');
+            ResetError();
+            Clear();
+            estado = opcion;
+            VerificarNIT("Select_EmpresaNit");
+            break;
+
+        case "buscar":
+            $(".Dialog_Datos").css("display", "none");
+            $("#TablaConsulta").css("display", "inline-table");
+            $(".container_TGrid").html("");
+            estado = opcion;
+            Clear();
+            break;
+
+        case "modificar":
+            $(".Dialog_Datos").css("display", "none");
+            $("#TablaConsulta").css("display", "inline-table");
+            $(".container_TGrid").html("");
+            estado = opcion;
+            ResetError();
+            Clear();
+            break;
+
+        case "eliminar":
+            $(".Dialog_Datos").css("display", "none");
+            $("#TablaConsulta").css("display", "inline-table");
+            $(".container_TGrid").html("");
+            estado = opcion;
+            Clear();
+            break;
+
+    }
 }
 
 // crea la tabla en el cliente
@@ -256,7 +269,6 @@ function Table_PuertaAcceso() {
 
 }
 
-
 //muestra el registro a eliminar
 function Eliminar(Index_GrpDocumento) {
 
@@ -291,11 +303,9 @@ function Editar(Index_GrpDocumento) {
     $('.C_Chosen').trigger('chosen:updated');
 }
 
-//evento del boton salir
-function x() {
-    $("#dialog").dialog("close");
-}
-
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                              MENSAJES, VISUALIZACION Y LIMPIEZA                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //limpiar campos
 function Clear() {
     $("#Select_EmpresaNit").val("-1");

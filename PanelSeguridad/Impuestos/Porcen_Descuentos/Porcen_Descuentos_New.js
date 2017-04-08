@@ -215,6 +215,60 @@ function ValidarDroplist() {
     return flag;
 }
 
+//valida y bloquea fechas de corte si la fecha final esta vencida
+function ValidaFecha_Edit(vp_FechaFinal) {
+    var vl_SysFecha = new Date();
+
+    var vl_ValueEnd = vp_FechaFinal.split("-");
+    var vl_DateEnd = new Date(vl_ValueEnd[0], (vl_ValueEnd[1] - 1), vl_ValueEnd[2]);
+
+    if (vl_DateEnd <= vl_SysFecha) {
+        Mensaje_General("Edición no permitida", "La fecha final ya esta vencida no se puede editar las fechas de corte", "W");
+        DisabledEdit();
+    }
+    else {
+        ValidaFechaCortes();
+    }
+}
+
+// valida campos que esten  llenos
+function ValidaFechaCortes() {
+    var vl_type_Disabled = 0;
+    if ($("#TxtFecha_1").val() != "") { vl_type_Disabled = 3; }
+    if ($("#TxtFecha_2").val() != "") { vl_type_Disabled = 2; }
+    if ($("#TxtFecha_3").val() != "") { vl_type_Disabled = 1; }
+    if ($("#TxtFecha_4").val() != "") { vl_type_Disabled = 0; }
+
+    switch (vl_type_Disabled) {
+        case 1:
+            $("#TxtFecha_4").attr("disabled", "disabled");
+            $("#TxtPorcen_4").attr("disabled", "disabled");
+            $("#TxtValor_4").attr("disabled", "disabled");
+            break;
+        case 2:
+            $("#TxtFecha_3").attr("disabled", "disabled");
+            $("#TxtPorcen_3").attr("disabled", "disabled");
+            $("#TxtValor_3").attr("disabled", "disabled");
+            $("#TxtFecha_4").attr("disabled", "disabled");
+            $("#TxtPorcen_4").attr("disabled", "disabled");
+            $("#TxtValor_4").attr("disabled", "disabled");
+            break;
+
+        case 3:
+            $("#TxtFecha_2").attr("disabled", "disabled");
+            $("#TxtPorcen_2").attr("disabled", "disabled");
+            $("#TxtValor_2").attr("disabled", "disabled");
+            $("#TxtFecha_3").attr("disabled", "disabled");
+            $("#TxtPorcen_3").attr("disabled", "disabled");
+            $("#TxtValor_3").attr("disabled", "disabled");
+            $("#TxtFecha_4").attr("disabled", "disabled");
+            $("#TxtPorcen_4").attr("disabled", "disabled");
+            $("#TxtValor_4").attr("disabled", "disabled");
+            break;
+
+    }
+}
+
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                    CHANGE DE DROP LIST                                                                                                       ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -226,9 +280,7 @@ function Change_Select_pais() {
 
         $('#Select_Ciudad').empty();
         transacionAjax_Ciudad('Ciudad', SplitPais[0]);
-
     });
-
 }
 
 //Función que detecta el change del TXT de la fecha inicial
@@ -482,6 +534,7 @@ function Editar(vp_Index) {
     $("#Btnguardar").attr("value", "Actualizar");
 
     EnableControls("E");
+    ValidaFecha_Edit(editRangoFinal_ID);
     setTimeout("CargaCombos('" + ArrayPorcen_Descuentos[vp_Index].Ciudad_ID + "')", 400);
 }
 
@@ -646,7 +699,7 @@ function DisabledControls(vp_Type) {
         $("#TxtValor_2").attr("disabled", "disabled");
         $("#TxtValor_3").attr("disabled", "disabled");
         $("#TxtValor_4").attr("disabled", "disabled");
-  
+
         $("#Select_Pais").removeAttr("disabled");
         $("#Select_Ciudad").removeAttr("disabled");
         $("#Select_Impuesto").removeAttr("disabled");
@@ -657,4 +710,22 @@ function DisabledControls(vp_Type) {
         $("#Txt_Sup").removeAttr("disabled");
     }
     $('.C_Chosen').trigger('chosen:updated');
+}
+
+//funcion bloquea controles fecha vencida
+function DisabledEdit() {
+    $("#TxtFecha_1").attr("disabled", "disabled");
+    $("#TxtFecha_2").attr("disabled", "disabled");
+    $("#TxtFecha_3").attr("disabled", "disabled");
+    $("#TxtFecha_4").attr("disabled", "disabled");
+
+    $("#TxtPorcen_1").attr("disabled", "disabled");
+    $("#TxtPorcen_2").attr("disabled", "disabled");
+    $("#TxtPorcen_3").attr("disabled", "disabled");
+    $("#TxtPorcen_4").attr("disabled", "disabled");
+
+    $("#TxtValor_1").attr("disabled", "disabled");
+    $("#TxtValor_2").attr("disabled", "disabled");
+    $("#TxtValor_3").attr("disabled", "disabled");
+    $("#TxtValor_4").attr("disabled", "disabled");
 }

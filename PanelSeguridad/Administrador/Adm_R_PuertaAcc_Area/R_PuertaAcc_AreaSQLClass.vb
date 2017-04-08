@@ -36,7 +36,7 @@ Public Class R_PuertaAcc_AreaSQLClass
                                     " 			   PA.PA_Descripcion, " & _
                                     " 			   A.A_Descripcion, " & _
                                     "              C.CLI_Nombre, " & _
-                                    " 			  ROW_NUMBER() OVER(ORDER BY RPA_Nit_ID  DESC) AS Index_R_PuertaAcc_Area " & _
+                                    " 			  ROW_NUMBER() OVER(ORDER BY RPA_Nit_ID  ASC) AS Index_R_PuertaAcc_Area " & _
                                     " FROM R_PACCESO_AREA RPA " & _
                                     " INNER JOIN PUERTAS_ACCESO PA ON PA.PA_PuertaAcceso_ID = RPA.RPA_PuertaAcceso_ID AND RPA.RPA_Nit_ID = PA.PA_Nit_ID " & _
                                     " INNER JOIN " & BD_Param & ".dbo.AREA A ON A.A_Area_ID = RPA.RPA_Area_ID 	AND RPA.RPA_Nit_ID = A.A_Nit_ID " & _
@@ -58,7 +58,7 @@ Public Class R_PuertaAcc_AreaSQLClass
                                     " 			   PA.PA_Descripcion, " & _
                                     " 			   A.A_Descripcion, " & _
                                     "              C.CLI_Nombre, " & _
-                                    " 			  ROW_NUMBER() OVER(ORDER BY RPA_Nit_ID  DESC) AS Index_R_PuertaAcc_Area " & _
+                                    " 			  ROW_NUMBER() OVER(ORDER BY RPA_Nit_ID  ASC) AS Index_R_PuertaAcc_Area " & _
                                     " FROM R_PACCESO_AREA RPA " & _
                                     " INNER JOIN PUERTAS_ACCESO PA ON PA.PA_PuertaAcceso_ID = RPA.RPA_PuertaAcceso_ID AND RPA.RPA_Nit_ID = PA.PA_Nit_ID " & _
                                     " INNER JOIN " & BD_Param & ".dbo.AREA A ON A.A_Area_ID = RPA.RPA_Area_ID 	AND RPA.RPA_Nit_ID = A.A_Nit_ID " & _
@@ -78,7 +78,7 @@ Public Class R_PuertaAcc_AreaSQLClass
                                     " 			   PA.PA_Descripcion, " & _
                                     " 			   A.A_Descripcion, " & _
                                     "              C.CLI_Nombre, " & _
-                                    " 			  ROW_NUMBER() OVER(ORDER BY RPA_Nit_ID  DESC) AS Index_R_PuertaAcc_Area " & _
+                                    " 			  ROW_NUMBER() OVER(ORDER BY RPA_Nit_ID  ASC) AS Index_R_PuertaAcc_Area " & _
                                     " FROM R_PACCESO_AREA RPA " & _
                                     " INNER JOIN PUERTAS_ACCESO PA ON PA.PA_PuertaAcceso_ID = RPA.RPA_PuertaAcceso_ID AND RPA.RPA_Nit_ID = PA.PA_Nit_ID " & _
                                     " INNER JOIN " & BD_Param & ".dbo.AREA A ON A.A_Area_ID = RPA.RPA_Area_ID 	AND RPA.RPA_Nit_ID = A.A_Nit_ID " & _

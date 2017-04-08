@@ -121,14 +121,14 @@
                             </td>
                             <td style="width: 110px;">
                                 <span class="cssToolTip_Form">
-                                    <input id="TxtRInicial" type="text" readonly="readonly" style="width: 100px;"/>
+                                    <input id="TxtRInicial" type="text" readonly="readonly" style="width: 100px;" />
                                     <span class="Spam_AF"></span></span>
                             </td>
                             <td class="Label_Bold" style="width: 80px;">Final
                             </td>
                             <td style="width: 200px;">
                                 <span class="cssToolTip_Form">
-                                    <input id="TxtRFinal" type="text" readonly="readonly" style="width: 100px;"/>
+                                    <input id="TxtRFinal" type="text" readonly="readonly" style="width: 100px;" />
                                     <span class="Spam_AF"></span></span>
                             </td>
                         </tr>
@@ -150,14 +150,14 @@
                             </td>
                             <td style="width: 120px;">
                                 <span class="cssToolTip_Form">
-                                    <input id="Txt_LInf" type="text" maxlength="20" style="width: 110px;">
+                                    <input id="Txt_LInf" type="text" maxlength="20" style="width: 110px;" />
                                     <span class="Spam_AST"></span></span>
                             </td>
                             <td class="Label_Bold" style="width: 60px;">Superior
                             </td>
                             <td style="width: 120px;">
                                 <span class="cssToolTip_Form">
-                                    <input id="Txt_Sup" type="text" maxlength="20" style="width: 110px;">
+                                    <input id="Txt_Sup" type="text" maxlength="20" style="width: 110px;" />
                                     <span class="Spam_AST"></span></span>
                             </td>
                         </tr>
@@ -184,17 +184,18 @@
                                 <span class="cssToolTip_Form">
                                     <input type="text" id="TxtFecha_1" readonly="readonly" style="width: 100px;" />
                                     <span class="Spam_AF"></span></span>
-                                <td>
-                                    <span class="cssToolTip_Form">
-                                        <input type="text" id="TxtPorcen_1" maxlength="5" style="width: 70px;" class="Decimal" />
-                                        <span class="Spam_ADec"></span></span>
-                                </td>
-                                <td>
-                                    <span class="cssToolTip_Form">
-                                        <input type="text" id="TxtValor_1" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }"
-                                            onchange="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
-                                        <span class="Spam_AVal"></span></span>
-                                </td>
+                            </td>
+                            <td>
+                                <span class="cssToolTip_Form">
+                                    <input type="text" id="TxtPorcen_1" maxlength="5" style="width: 70px;" class="Decimal" />
+                                    <span class="Spam_ADec_3"></span></span>
+                            </td>
+                            <td>
+                                <span class="cssToolTip_Form">
+                                    <input type="text" id="TxtValor_1" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ Mensaje_General('Atencion!', 'Solo se permiten numeros.' , 'W'); }"
+                                        onchange="var valida = dinner_format(this); if(valida == 1){ Mensaje_General('Atencion!', 'Solo se permiten numeros.' , 'W'); }" />
+                                    <span class="Spam_AVal"></span></span>
+                            </td>
                         </tr>
                         <tr>
                             <td class="Label_Bold">2
@@ -207,12 +208,12 @@
                             <td>
                                 <span class="cssToolTip_Form">
                                     <input type="text" id="TxtPorcen_2" maxlength="5" style="width: 70px;" class="Decimal" />
-                                    <span class="Spam_ADec"></span></span>
+                                    <span class="Spam_ADec_3"></span></span>
                             </td>
                             <td>
                                 <span class="cssToolTip_Form">
-                                    <input type="text" id="TxtValor_2" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }"
-                                        onchange="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
+                                    <input type="text" id="TxtValor_2" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ Mensaje_General('Atencion!', 'Solo se permiten numeros.' , 'W'); }"
+                                        onchange="var valida = dinner_format(this); if(valida == 1){ Mensaje_General('Atencion!', 'Solo se permiten numeros.' , 'W'); }" />
                                     <span class="Spam_AVal"></span></span>
                             </td>
                         </tr>
@@ -227,12 +228,12 @@
                             <td>
                                 <span class="cssToolTip_Form">
                                     <input type="text" id="TxtPorcen_3" maxlength="5" style="width: 70px;" class="Decimal" />
-                                    <span class="Spam_ADec"></span></span>
+                                    <span class="Spam_ADec_3"></span></span>
                             </td>
                             <td>
                                 <span class="cssToolTip_Form">
-                                    <input type="text" id="TxtValor_3" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }"
-                                        onchange="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
+                                    <input type="text" id="TxtValor_3" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ Mensaje_General('Atencion!', 'Solo se permiten numeros.' , 'W'); }"
+                                        onchange="var valida = dinner_format(this); if(valida == 1){ Mensaje_General('Atencion!', 'Solo se permiten numeros.' , 'W'); }" />
                                     <span class="Spam_AVal"></span></span>
                             </td>
                         </tr>
@@ -247,12 +248,12 @@
                             <td>
                                 <span class="cssToolTip_Form">
                                     <input type="text" id="TxtPorcen_4" maxlength="5" style="width: 70px;" class="Decimal" />
-                                    <span class="Spam_ADec"></span></span>
+                                    <span class="Spam_ADec_3"></span></span>
                             </td>
                             <td>
                                 <span class="cssToolTip_Form">
-                                    <input type="text" id="TxtValor_4" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }"
-                                        onchange="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
+                                    <input type="text" id="TxtValor_4" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ Mensaje_General('Atencion!', 'Solo se permiten numeros.' , 'W'); }"
+                                        onchange="var valida = dinner_format(this); if(valida == 1){ Mensaje_General('Atencion!', 'Solo se permiten numeros.' , 'W'); }" />
                                     <span class="Spam_AVal"></span></span>
                             </td>
                         </tr>

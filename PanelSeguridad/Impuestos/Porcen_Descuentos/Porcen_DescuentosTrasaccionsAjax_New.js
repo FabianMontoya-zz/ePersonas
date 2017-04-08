@@ -165,10 +165,10 @@ function transacionAjax_Porcen_Descuentos_create(State) {
     var L_Inf = "";
     var L_Sup = "";
 
-    var F_1 = '1900-01-01';
-    var F_2 = '1900-01-01';
-    var F_3 = '1900-01-01';
-    var F_4 = '1900-01-01';
+    var F_1 = '';
+    var F_2 = '';
+    var F_3 = '';
+    var F_4 = '';
 
     if ($("#TxtValor_1").val() != "")
         Val_1 = $("#TxtValor_1").val();

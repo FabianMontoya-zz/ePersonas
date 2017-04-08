@@ -200,7 +200,7 @@
                             <td id="V_Sigla_1" style="width: 5%" class="Sigla"></td>
                             <td style="width: 9.8%;">
                                 <span class="cssToolTip_Form">
-                                    <input type="text" id="TxtCosto" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
+                                    <input type="text" id="TxtCosto" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ Mensaje_General('Atencion!', 'Solo se permiten numeros.' , 'W'); }" />
                                     <span class="Spam_AVal"></span></span>
                             </td>
                             <td style="padding-bottom: 25px; width: 235px;">
@@ -214,7 +214,7 @@
                             <td id="V_Sigla_2" style="width: 5%" class="Sigla"></td>
                             <td style="width: 9.8%">
                                 <span class="cssToolTip_Form_T">
-                                    <input type="text" id="TxtValor" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
+                                    <input type="text" id="TxtValor" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ Mensaje_General('Atencion!', 'Solo se permiten numeros.' , 'W'); }" />
                                     <span class="Spam_AVal"></span></span>
                             </td>
                             <td style="padding-bottom: 25px; width: 250px;">
@@ -231,7 +231,7 @@
                             </td>
                             <td style="width: 12%;">
                                 <span class="cssToolTip_Form">
-                                    <input type="text" id="Text_Capacidad" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
+                                    <input type="text" id="Text_Capacidad" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ Mensaje_General('Atencion!', 'Solo se permiten numeros.' , 'W'); }" />
                                     <span class="Spam_AVal"></span></span>
                             </td>
                             <td class="Label_Bold" style="width: 3.4%;">Num. servicios no pagos para bloqueo    
@@ -239,7 +239,7 @@
                             <td id="Td5" style="width: 1.5%" class="Sigla"></td>
                             <td style="width: 9.8%;">
                                 <span class="cssToolTip_Form">
-                                    <input type="text" id="Text_Bloqueo" maxlength="5" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
+                                    <input type="text" id="Text_Bloqueo" maxlength="5" onkeyup="var valida = dinner_format(this); if(valida == 1){ Mensaje_General('Atencion!', 'Solo se permiten numeros.' , 'W'); }" />
                                     <span class="Spam_AVal"></span></span>
                             </td>
                         </tr>
