@@ -36,7 +36,7 @@ Public Class PuertaAccesoSQLClass
                         "      PA_Usuario_Actualizacion, " & _
                         "      PA_FechaActualizacion, " & _
                         "      C.CLI_Nombre, " & _
-                        "      ROW_NUMBER() OVER(ORDER BY PA_Nit_ID DESC) AS Index_PuertaAcceso " & _
+                        "      ROW_NUMBER() OVER(ORDER BY PA_Nit_ID ASC) AS Index_PuertaAcceso " & _
                         " FROM PUERTAS_ACCESO PA " & _
                         " LEFT JOIN " & BD_Param & ".dbo.CLIENTE C ON C.CLI_Document_ID = " & _
                         " CASE	 SUBSTRING((PA.PA_Nit_ID),0,LEN(PA.PA_Nit_ID )) " & _
@@ -56,7 +56,7 @@ Public Class PuertaAccesoSQLClass
                         "      PA_Usuario_Actualizacion, " & _
                         "      PA_FechaActualizacion, " & _
                         "      C.CLI_Nombre, " & _
-                        "      ROW_NUMBER() OVER(ORDER BY PA_Nit_ID DESC) AS Index_PuertaAcceso " & _
+                        "      ROW_NUMBER() OVER(ORDER BY PA_Nit_ID ASC) AS Index_PuertaAcceso " & _
                         " FROM PUERTAS_ACCESO PA " & _
                         " LEFT JOIN " & BD_Param & ".dbo.CLIENTE C ON C.CLI_Document_ID = " & _
                         " CASE	 SUBSTRING((PA.PA_Nit_ID),0,LEN(PA.PA_Nit_ID )) " & _
@@ -74,7 +74,7 @@ Public Class PuertaAccesoSQLClass
                         "      PA_Usuario_Actualizacion, " & _
                         "      PA_FechaActualizacion, " & _
                         "      C.CLI_Nombre, " & _
-                        "      ROW_NUMBER() OVER(ORDER BY PA_Nit_ID DESC) AS Index_PuertaAcceso " & _
+                        "      ROW_NUMBER() OVER(ORDER BY PA_Nit_ID ASC) AS Index_PuertaAcceso " & _
                         " FROM PUERTAS_ACCESO PA " & _
                         " LEFT JOIN " & BD_Param & ".dbo.CLIENTE C ON C.CLI_Document_ID = " & _
                         " CASE	 SUBSTRING((PA.PA_Nit_ID),0,LEN(PA.PA_Nit_ID )) " & _

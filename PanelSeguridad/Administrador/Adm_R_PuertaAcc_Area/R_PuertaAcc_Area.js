@@ -16,7 +16,7 @@ var editDocID;
 
 //Evento load JS
 $(document).ready(function () {
-  
+
     /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
     Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
     Ocultar_Errores();
@@ -27,9 +27,11 @@ $(document).ready(function () {
     Change_Select_Nit();
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_EmpresaNit('Cliente');
-    console.log("aa");
 });
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                 REGION INICIO DE COMPONENTES                                                                                                    ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //Función que oculta todas las IMG de los errores en pantalla
 function Ocultar_Errores() {
     ResetError();
@@ -72,74 +74,15 @@ function Ocultar_Tablas() {
     $("#TablaConsulta").css("display", "none");
 }
 
-//carga el combo de Area dependiente
-function Change_Select_Nit() {
-    $("#Select_EmpresaNit").change(function () {
-        var index_ID = $(this).val();
-        
-        TransaccionesSegunNIT(index_ID);
-    });
-}
-
-function TransaccionesSegunNIT(index_ID) {
-    if (index_ID != "-1") {
-        Charge_Combos_Depend_Nit(Matrix_PAcceso, "Select_PAcceso", index_ID, "");
-        Charge_Combos_Depend_Nit(Matrix_Area, "Select_Area", index_ID, "");
-    }
-}
-
-//habilita el panel de crear o consulta
-function HabilitarPanel(opcion) {
-
-    switch (opcion) {
-
-        case "crear":
-            $(".Dialog_Datos").css("display", "inline-table");
-            $("#TablaConsulta").css("display", "none");
-            $("#Select_EmpresaNit").removeAttr("disabled");
-            $("#Txt_ID").removeAttr("disabled");
-            $("#Btnguardar").attr("value", "Guardar");
-            $('.C_Chosen').trigger('chosen:updated');
-            ResetError();
-            Clear();
-            estado = opcion;
-
-            var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
-
-            if (OnlyEmpresa == true) {
-                TransaccionesSegunNIT($("#Select_EmpresaNit").val());
-            }
-
-
-            break;
-
-        case "buscar":
-            $(".Dialog_Datos").css("display", "none");
-            $("#TablaConsulta").css("display", "inline-table");
-            $(".container_TGrid").html("");
-            estado = opcion;
-            Clear();
-            break;
-
-        case "eliminar":
-            $(".Dialog_Datos").css("display", "none");
-            $("#TablaConsulta").css("display", "inline-table");
-            $(".container_TGrid").html("");
-            estado = opcion;
-            Clear();
-            break;
-
-    }
-}
-
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                 REGION BOTONES                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //consulta del del crud(READ)
 function BtnConsulta() {
 
     var filtro;
     var ValidateSelect = ValidarDroplist();
     var opcion;
-
-    OpenControl(); //Abrimos el load de espera con el logo
 
     if (ValidateSelect == 1) {
         filtro = "N";
@@ -169,11 +112,17 @@ function BtnCrear() {
 
 //elimina de la BD
 function BtnElimina() {
-    OpenControl(); //Abrimos el load de espera con el logo
     transacionAjax_R_PuertaAcc_Area_delete("elimina");
 }
 
+//evento del boton salir
+function x() {
+    $("#dialog").dialog("close");
+}
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                      REGION VALIDACIONES DEL PROCESO                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //validamos campos para la creacion del link
 function validarCamposCrear() {
 
@@ -228,6 +177,69 @@ function ValidarDroplist() {
     return flag;
 }
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                      PROCESOS DE VALIDACION Y GRID RELACION PUERTA-PERSONA                                                                                                              ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//habilita el panel de crear o consulta
+function HabilitarPanel(opcion) {
+
+    switch (opcion) {
+
+        case "crear":
+            $(".Dialog_Datos").css("display", "inline-table");
+            $("#TablaConsulta").css("display", "none");
+            $("#Select_EmpresaNit").removeAttr("disabled");
+            $("#Txt_ID").removeAttr("disabled");
+            $("#Btnguardar").attr("value", "Guardar");
+            $('.C_Chosen').trigger('chosen:updated');
+            ResetError();
+            Clear();
+            estado = opcion;
+
+            var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+
+            if (OnlyEmpresa == true) {
+                TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+            }
+
+
+            break;
+
+        case "buscar":
+            $(".Dialog_Datos").css("display", "none");
+            $("#TablaConsulta").css("display", "inline-table");
+            $(".container_TGrid").html("");
+            estado = opcion;
+            Clear();
+            break;
+
+        case "eliminar":
+            $(".Dialog_Datos").css("display", "none");
+            $("#TablaConsulta").css("display", "inline-table");
+            $(".container_TGrid").html("");
+            estado = opcion;
+            Clear();
+            break;
+
+    }
+}
+
+//carga el combo de Area dependiente
+function Change_Select_Nit() {
+    $("#Select_EmpresaNit").change(function () {
+        var index_ID = $(this).val();
+
+        TransaccionesSegunNIT(index_ID);
+    });
+}
+
+function TransaccionesSegunNIT(index_ID) {
+    if (index_ID != "-1") {
+        Charge_Combos_Depend_Nit(Matrix_PAcceso, "Select_PAcceso", index_ID, "");
+        Charge_Combos_Depend_Nit(Matrix_Area, "Select_Area", index_ID, "");
+    }
+}
+
 // crea la tabla en el cliente
 function Table_R_PuertaAcc_Area() {
 
@@ -239,7 +251,7 @@ function Table_R_PuertaAcc_Area() {
             html_R_PuertaAcc_Area = "<table id='TR_PuertaAcc_Area' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Empresa</th><th>Puerta de Acceso</th><th>Área</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
             for (itemArray in ArrayR_PuertaAcc_Area) {
                 if (ArrayR_PuertaAcc_Area[itemArray].R_PuertaAcc_Area_ID != 0) {
-                    html_R_PuertaAcc_Area += "<tr id= 'TR_PuertaAcc_Area_" + ArrayR_PuertaAcc_Area[itemArray].PuertaAcceso_ID + "'><td>" + ArrayR_PuertaAcc_Area[itemArray].Nit_ID + " - " + ArrayR_PuertaAcc_Area[itemArray].DescripEmpresa + "</td><td>" + ArrayR_PuertaAcc_Area[itemArray].PuertaAcceso_ID + " - " + ArrayR_PuertaAcc_Area[itemArray].DescripPAcceso + "</td><td>" + + ArrayR_PuertaAcc_Area[itemArray].Area_ID + " - " + ArrayR_PuertaAcc_Area[itemArray].DescripArea+ "</td><td>" + ArrayR_PuertaAcc_Area[itemArray].UsuarioCreacion + "</td><td>" + ArrayR_PuertaAcc_Area[itemArray].FechaCreacion + "</td><td>" + ArrayR_PuertaAcc_Area[itemArray].UsuarioActualizacion + "</td><td>" + ArrayR_PuertaAcc_Area[itemArray].FechaActualizacion + "</td></tr>";
+                    html_R_PuertaAcc_Area += "<tr id= 'TR_PuertaAcc_Area_" + ArrayR_PuertaAcc_Area[itemArray].PuertaAcceso_ID + "'><td>" + ArrayR_PuertaAcc_Area[itemArray].Nit_ID + " - " + ArrayR_PuertaAcc_Area[itemArray].DescripEmpresa + "</td><td>" + ArrayR_PuertaAcc_Area[itemArray].PuertaAcceso_ID + " - " + ArrayR_PuertaAcc_Area[itemArray].DescripPAcceso + "</td><td>" + +ArrayR_PuertaAcc_Area[itemArray].Area_ID + " - " + ArrayR_PuertaAcc_Area[itemArray].DescripArea + "</td><td>" + ArrayR_PuertaAcc_Area[itemArray].UsuarioCreacion + "</td><td>" + ArrayR_PuertaAcc_Area[itemArray].FechaCreacion + "</td><td>" + ArrayR_PuertaAcc_Area[itemArray].UsuarioActualizacion + "</td><td>" + ArrayR_PuertaAcc_Area[itemArray].FechaActualizacion + "</td></tr>";
                 }
             }
             break;
@@ -275,7 +287,7 @@ function Table_R_PuertaAcc_Area() {
 function Eliminar(Index_GrpDocumento) {
 
     editNit_ID = ArrayR_PuertaAcc_Area[Index_GrpDocumento].Nit_ID;
-    editID = ArrayR_PuertaAcc_Area[Index_GrpDocumento].PuertaAcceso_ID ;
+    editID = ArrayR_PuertaAcc_Area[Index_GrpDocumento].PuertaAcceso_ID;
     editDocID = ArrayR_PuertaAcc_Area[Index_GrpDocumento].Area_ID;
 
     $("#dialog_eliminar").dialog("option", "title", "Eliminar?");
@@ -283,11 +295,9 @@ function Eliminar(Index_GrpDocumento) {
 
 }
 
-//evento del boton salir
-function x() {
-    $("#dialog").dialog("close");
-}
-
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                              MENSAJES, VISUALIZACION Y LIMPIEZA                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //limpiar campos
 function Clear() {
     $("#Select_EmpresaNit").val("-1");
