@@ -159,6 +159,13 @@ MEDIA QUERIES
         padding-left: 15%;
         padding-right: 15%;
     }
+
+    .marco_Reset {
+        padding-top: 15%;
+        padding-bottom: 1%;
+        padding-left: 15%;
+        padding-right: 15%;
+    }
 }
 
 
@@ -171,6 +178,13 @@ MEDIA QUERIES
     }
 
     .marco {
+        padding-bottom: 1%;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .marco_Reset {
+        padding-top: 15%;
         padding-bottom: 1%;
         padding-left: 0px;
         padding-right: 0px;

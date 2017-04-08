@@ -55,7 +55,7 @@ Public Class C_AccesoPreSQLClass
                                     "              PA.PA_Descripcion, " & _
                                     "              A.A_Descripcion, " & _
                                     "              DDL.DDLL_Descripcion, " & _
-                                    " 			  ROW_NUMBER() OVER(ORDER BY RPAP_Nit_ID  DESC) AS Index_C_AccesoPre " & _
+                                    " 			  ROW_NUMBER() OVER(ORDER BY RPAP_Nit_ID  ASC) AS Index_C_AccesoPre " & _
                                     " FROM R_PERSONAS_ACCESOS_PREDETER  RPAP " & _
                                     " LEFT JOIN  PUERTAS_ACCESO PA ON PA.PA_PuertaAcceso_ID = RPAP.RPAP_PuertaAcceso_ID AND PA.PA_Nit_ID = RPAP.RPAP_Nit_ID " & _
                                     " LEFT JOIN   TC_DDL_TIPO DDL ON DDL.DDL_ID = RPAP.RPAP_HorarioIngreso AND DDL.DDL_Tabla='TIPO_INGRESO' " & _
@@ -71,7 +71,7 @@ Public Class C_AccesoPreSQLClass
                                     " CASE	 SUBSTRING(RPAP.RPAP_Nit_ID_EmpVisita,0,LEN(RPAP.RPAP_Nit_ID_EmpVisita)) " & _
                                     "   WHEN '' THEN 0 " & _
                                     "   ELSE SUBSTRING(RPAP.RPAP_Nit_ID_EmpVisita,0,LEN(RPAP.RPAP_Nit_ID_EmpVisita))  " & _
-                                    " END  AND C3.CLI_Nit_ID  = RPAP.RPAP_Nit_ID_EmpVisita " )
+                                    " END  AND C3.CLI_Nit_ID  = RPAP.RPAP_Nit_ID_EmpVisita ")
         Else
 
             If vp_S_Contenido = "ALL" Then
@@ -104,7 +104,7 @@ Public Class C_AccesoPreSQLClass
                                     "              PA.PA_Descripcion, " & _
                                     "              A.A_Descripcion, " & _
                                     "              DDL.DDLL_Descripcion, " & _
-                                    " 			  ROW_NUMBER() OVER(ORDER BY RPAP_Nit_ID  DESC) AS Index_C_AccesoPre " & _
+                                    " 			  ROW_NUMBER() OVER(ORDER BY RPAP_Nit_ID  ASC) AS Index_C_AccesoPre " & _
                                     " FROM R_PERSONAS_ACCESOS_PREDETER  RPAP " & _
                                     " LEFT JOIN  PUERTAS_ACCESO PA ON PA.PA_PuertaAcceso_ID = RPAP.RPAP_PuertaAcceso_ID AND PA.PA_Nit_ID = RPAP.RPAP_Nit_ID " & _
                                     " LEFT JOIN   TC_DDL_TIPO DDL ON DDL.DDL_ID = RPAP.RPAP_HorarioIngreso AND DDL.DDL_Tabla='TIPO_INGRESO' " & _
@@ -120,7 +120,7 @@ Public Class C_AccesoPreSQLClass
                                     " CASE	 SUBSTRING(RPAP.RPAP_Nit_ID_EmpVisita,0,LEN(RPAP.RPAP_Nit_ID_EmpVisita)) " & _
                                     "   WHEN '' THEN 0 " & _
                                     "   ELSE SUBSTRING(RPAP.RPAP_Nit_ID_EmpVisita,0,LEN(RPAP.RPAP_Nit_ID_EmpVisita))  " & _
-                                    " END  AND C3.CLI_Nit_ID  = RPAP.RPAP_Nit_ID_EmpVisita " )
+                                    " END  AND C3.CLI_Nit_ID  = RPAP.RPAP_Nit_ID_EmpVisita ")
             Else
                 sql.Append(" SELECT  RPAP_Nit_ID, " & _
                                     " 			   RPAP_TypeDocument_ID, " & _
@@ -151,7 +151,7 @@ Public Class C_AccesoPreSQLClass
                                     "              PA.PA_Descripcion, " & _
                                     "              A.A_Descripcion, " & _
                                     "              DDL.DDLL_Descripcion, " & _
-                                    " 			  ROW_NUMBER() OVER(ORDER BY RPAP_Nit_ID  DESC) AS Index_C_AccesoPre " & _
+                                    " 			  ROW_NUMBER() OVER(ORDER BY RPAP_Nit_ID  ASC) AS Index_C_AccesoPre " & _
                                     " FROM R_PERSONAS_ACCESOS_PREDETER  RPAP " & _
                                     " LEFT JOIN  PUERTAS_ACCESO PA ON PA.PA_PuertaAcceso_ID = RPAP.RPAP_PuertaAcceso_ID AND PA.PA_Nit_ID = RPAP.RPAP_Nit_ID " & _
                                     " LEFT JOIN   TC_DDL_TIPO DDL ON DDL.DDL_ID = RPAP.RPAP_HorarioIngreso AND DDL.DDL_Tabla='TIPO_INGRESO' " & _

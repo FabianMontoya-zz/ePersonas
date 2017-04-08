@@ -88,9 +88,13 @@
     border-radius: 10px;
 }
 
-
-
 .marco {
+    padding-bottom: 16%;
+    padding-left: 35%;
+    padding-right: 35%;
+}
+
+.marco_Reset {
     padding-top: 15%;
     padding-bottom: 16%;
     padding-left: 35%;

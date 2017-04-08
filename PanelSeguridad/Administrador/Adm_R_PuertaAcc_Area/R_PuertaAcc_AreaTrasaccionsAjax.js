@@ -163,7 +163,7 @@ function transacionAjax_R_PuertaAcc_Area_create(State) {
             switch (result) {
 
                 case "Error":
-                    Mensaje_General("Disculpenos :(", "No se realizó el ingreso de la relación puerta persona.", "E");
+                    Mensaje_General("Disculpenos :(", "No se realizó el ingreso de la relación puerta área.", "E");
                     break;
 
                 case "Existe":
@@ -171,7 +171,7 @@ function transacionAjax_R_PuertaAcc_Area_create(State) {
                     break;
 
                 case "Exito":
-                    Mensaje_General("¡Exito!", "La relación puerta persona se ha creado correctamente.", "S");
+                    Mensaje_General("¡Exito!", "La relación puerta área se ha creado correctamente.", "S");
                     Clear();
                     break;
             }
@@ -203,12 +203,12 @@ function transacionAjax_R_PuertaAcc_Area_delete(State) {
 
                 case "Error":
                     $("#dialog_eliminar").dialog("close");
-                    Mensaje_General("Disculpenos :(", "Ocurrio un error al intentar eliminar la relación puerta persona.", "E");
+                    Mensaje_General("Disculpenos :(", "Ocurrio un error al intentar eliminar la relación puerta área.", "E");
                     break;
 
                 case "Exito":
                     $("#dialog_eliminar").dialog("close");
-                    Mensaje_General("¡Registro Eliminado!", "la relación puerta persona se ha eliminado correctamente.", "S");
+                    Mensaje_General("¡Registro Eliminado!", "la relación puerta área se ha eliminado correctamente.", "S");
                     $(".container_TGrid").html("");
                     Clear();
                     break;
