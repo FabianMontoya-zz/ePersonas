@@ -79,6 +79,36 @@ function Change_Select_Persona() {
 
 }
 
+//valida los cambios del combo de Persona y carga
+function Change_Select_Tarjeta() {
+    $("#Select_Tarjeta_AccPre").change(function () {
+        var index_ID = $(this).val();
+        for (item in Matrix_RTP) {
+            if (Matrix_RTP[item].Tarjeta_ID == index_ID) {
+                $("#Select_Persona").val(Matrix_RTP[item].Document_ID);
+                $('.C_Chosen').trigger('chosen:updated');
+            }
+        }
+    });
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                      REGION VALIDACIONES DEL PROCESO                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+//validamos si han escogido una columna
+function ValidarDroplist() {
+    var flag;
+    var contenido = $("#DDLColumns").val();
+
+    if (contenido == '-1') {
+        flag = 1;
+    }
+    else {
+        flag = 0;
+    }
+    return flag;
+}
+
 //valida si tiene tarjeta asignada
 function ValidarAsignacion(Container_Tarjeta) {
 
@@ -102,19 +132,6 @@ function ValidarAsignacion(Container_Tarjeta) {
             break;
     }
 
-}
-
-//valida los cambios del combo de Persona y carga
-function Change_Select_Tarjeta() {
-    $("#Select_Tarjeta_AccPre").change(function () {
-        var index_ID = $(this).val();
-        for (item in Matrix_RTP) {
-            if (Matrix_RTP[item].Tarjeta_ID == index_ID) {
-                $("#Select_Persona").val(Matrix_RTP[item].Document_ID);
-                $('.C_Chosen').trigger('chosen:updated');
-            }
-        }
-    });
 }
 
 //validamos campos para la creacion del link

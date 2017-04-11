@@ -54,6 +54,9 @@ $(document).ready(function () {
     });
 });
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                 REGION INICIO DE COMPONENTES                                                                                                    ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //Función que oculta todas las IMG de los errores en pantalla
 function Ocultar_Errores() {
     ResetError();
@@ -114,12 +117,55 @@ function Ocultar_Tablas() {
        $("#TablaConsulta").css("display", "none");
 }
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                                 REGION BOTONES                                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //elimina de la BD
 function BtnElimina() {
-    OpenControl(); //Abrimos el load de espera con el logo
     transacionAjax_Delete_AccesoPredet("elimina");
 }
 
+//consulta del del crud(READ)
+function BtnConsulta() {
+
+    var filtro;
+    var ValidateSelect = ValidarDroplist();
+    var opcion;
+
+    if (ValidateSelect == 1) {
+        filtro = "N";
+        opcion = "ALL";
+        transacionAjax_AccesoPredet("consulta", filtro, opcion);
+    }
+    else {
+        filtro = "S";
+        opcion = $("#DDLColumns").val();
+        transacionAjax_AccesoPredet("consulta", filtro, opcion);
+    }
+
+}
+
+//crear link en la BD
+function BtnCrear() {
+    var validate;
+    validate = validarCamposCrear();
+
+    if (validate == 0) {
+        if ($("#Btnguardar").val() == "Guardar")
+            transacionAjax_Insert_AccesoPredet("crear");
+        else
+            transacionAjax_Insert_AccesoPredet("modificar");
+    }
+}
+
+//evento del boton salir
+function x() {
+    $("#dialog").dialog("close");
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                                      PROCESOS DE VALIDACION Y GRID PAISES                                                                                                              ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //habilita el panel de crear o consulta
 function HabilitarPanel(opcion) {
 
@@ -139,7 +185,7 @@ function HabilitarPanel(opcion) {
             EnableControls();
             Clear();
             estado = opcion;
-            
+
             var OnlyEmpresa = VerificarNIT("Select_EmpresaNit_Ing");
 
             if (OnlyEmpresa == true) {
@@ -176,60 +222,6 @@ function HabilitarPanel(opcion) {
             break;
 
     }
-}
-
-//consulta del del crud(READ)
-function BtnConsulta() {
-
-    var filtro;
-    var ValidateSelect = ValidarDroplist();
-    var opcion;
-
-    OpenControl(); //Abrimos el load de espera con el logo
-
-    if (ValidateSelect == 1) {
-        filtro = "N";
-        opcion = "ALL";
-        transacionAjax_AccesoPredet("consulta", filtro, opcion);
-    }
-    else {
-        filtro = "S";
-        opcion = $("#DDLColumns").val();
-        transacionAjax_AccesoPredet("consulta", filtro, opcion);
-    }
-
-}
-
-//validamos si han escogido una columna
-function ValidarDroplist() {
-    var flag;
-    var contenido = $("#DDLColumns").val();
-
-    if (contenido == '-1') {
-        flag = 1;
-    }
-    else {
-        flag = 0;
-    }
-    return flag;
-}
-
-//crear link en la BD
-function BtnCrear() {
-    var validate;
-    validate = validarCamposCrear();
-
-    if (validate == 0) {
-        if ($("#Btnguardar").val() == "Guardar")
-            transacionAjax_Insert_AccesoPredet("crear");
-        else
-            transacionAjax_Insert_AccesoPredet("modificar");
-    }
-}
-
-//evento del boton salir
-function x() {
-    $("#dialog").dialog("close");
 }
 
 // crea la tabla en el cliente
@@ -327,6 +319,9 @@ function Ver(Index_Cliente) {
     Editar(Index_Cliente, "V");
 }
 
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                              MENSAJES, VISUALIZACION Y LIMPIEZA                                                                                                ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 // muestra el registro a editar
 function Editar(Index, Type) {
 

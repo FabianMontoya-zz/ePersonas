@@ -31,7 +31,7 @@
             </tr>
         </table>
     </div>
-    <div class="marco">
+    <div class="marco_Reset">
 
         <table id="TablaContraseña">
             <tr>

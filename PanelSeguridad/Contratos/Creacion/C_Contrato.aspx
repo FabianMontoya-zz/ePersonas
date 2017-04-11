@@ -295,8 +295,8 @@
                             <td id="L_Moneda" class="Sigla" style="width: 7%"></td>
                             <td style="width: 13.5%;">
                                 <span class="cssToolTip_Form_T">
-                                    <input style="width: 100%;" type="text" id="TXT_Valor_Total" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }"
-                                        onchange="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
+                                    <input style="width: 100%;" type="text" id="TXT_Valor_Total" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ Mensaje_General('Atencion!', 'Solo se permiten numeros.' , 'W'); }"
+                                        onchange="var valida = dinner_format(this); if(valida == 1){ Mensaje_General('Atencion!', 'Solo se permiten numeros.' , 'W'); }" />
                                     <span class="Spam_AVal"></span></span>
                             </td>
                             <td style="padding-bottom: 25px; width: 16%;">
@@ -317,8 +317,8 @@
                             <td id="L_Moneda_3" class="Sigla" style="width: 7%"></td>
                             <td style="width: 13.5%;">
                                 <span class="cssToolTip_Form_T">
-                                    <input style="width: 100%;" type="text" id="TXT_Valor_Financiado" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }"
-                                        onchange="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
+                                    <input style="width: 100%;" type="text" id="TXT_Valor_Financiado" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ Mensaje_General('Atencion!', 'Solo se permiten numeros.' , 'W'); }"
+                                        onchange="var valida = dinner_format(this); if(valida == 1){ Mensaje_General('Atencion!', 'Solo se permiten numeros.' , 'W'); }" />
                                     <span class="Spam_AVal"></span></span>
                             </td>
                             <td style="padding-bottom: 25px; width: 16%;">
@@ -331,8 +331,8 @@
                             <td id="L_Moneda_4" class="Sigla" style="width: 7%"></td>
                             <td style="width: 13.5%;">
                                 <span class="cssToolTip_Form_T">
-                                    <input style="width: 100%;" type="text" id="TXT_Valor_Opcion_Compra" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }"
-                                        onchange="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
+                                    <input style="width: 100%;" type="text" id="TXT_Valor_Opcion_Compra" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ Mensaje_General('Atencion!', 'Solo se permiten numeros.' , 'W'); }"
+                                        onchange="var valida = dinner_format(this); if(valida == 1){ Mensaje_General('Atencion!', 'Solo se permiten numeros.' , 'W'); }" />
                                     <span class="Spam_AVal"></span></span>
                             </td>
                             <td style="padding-bottom: 25px; width: 40%;">
@@ -1022,7 +1022,7 @@
                                 <td id="V_Sigla_1" style="width: 0.7%" class="Sigla"></td>
                                 <td style="width: 9.8%;">
                                     <span class="cssToolTip_Form">
-                                        <input type="text" id="TxtValor_Bien" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
+                                        <input type="text" id="TxtValor_Bien" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ Mensaje_General('Atencion!', 'Solo se permiten numeros.' , 'W'); }" />
                                         <span class="Spam_AVal"></span></span>
                                 </td>
                                 <td class="Label_Bold" style="width: 3%;">Sumatoria Facturas
@@ -1036,7 +1036,7 @@
                                 <td id="V_Sigla_3" style="width: 0.7%" class="Sigla"></td>
                                 <td style="width: 9.8%">
                                     <span class="cssToolTip_Form_T">
-                                        <input type="text" id="TxtValor_Compra" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
+                                        <input type="text" id="TxtValor_Compra" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ Mensaje_General('Atencion!', 'Solo se permiten numeros.' , 'W'); }" />
                                         <span class="Spam_AVal"></span></span>
                                 </td>
                                 <td class="Label_Bold" style="width: 3%;"></td>
@@ -1361,7 +1361,7 @@
                                                 <td id="V_Sigla_4" style="width: 2%" class="Sigla"></td>
                                                 <td style="width: 5%">
                                                     <span class="cssToolTip_Form_T">
-                                                        <input type="text" id="TxtValor_Chasis" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
+                                                        <input type="text" id="TxtValor_Chasis" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ Mensaje_General('Atencion!', 'Solo se permiten numeros.' , 'W'); }" />
                                                         <span class="Spam_AVal"></span></span>
                                                 </td>
                                                 <td class="Label_Bold" style="width: 4.9%;"></td>
@@ -1750,7 +1750,7 @@
                     <td id="V_Sigla_6" style="width: 3%" class="Sigla"></td>
                     <td style="width: 10%;">
                         <span class="cssToolTip_Form">
-                            <input type="text" id="Txt_ValFactura" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
+                            <input type="text" id="Txt_ValFactura" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ Mensaje_General('Atencion!', 'Solo se permiten numeros.' , 'W'); }" />
                             <span class="Spam_AVal"></span></span>
                     </td>
                     <td style="padding-bottom: 25px; width: 3%;">
@@ -1764,7 +1764,7 @@
                     <td id="V_Sigla_7" style="width: 3%" class="Sigla"></td>
                     <td style="width: 10%;">
                         <span class="cssToolTip_Form">
-                            <input type="text" id="Text_Val_Sin_IVA" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ $('#dialog').dialog('option','title','Atencion!'); $('#Mensaje_alert').text('Solo se permiten numeros'); $('#dialog').dialog('open'); $('#DE').css('display','block'); }" />
+                            <input type="text" id="Text_Val_Sin_IVA" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ Mensaje_General('Atencion!', 'Solo se permiten numeros.' , 'W'); }" />
                             <span class="Spam_AVal"></span></span>
                     </td>
                     <td style="padding-bottom: 25px; width: 3%;">
