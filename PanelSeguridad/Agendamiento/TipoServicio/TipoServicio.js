@@ -8,6 +8,7 @@ var Matrix_Moneda = [];
 var Matrix_Calendarios = [];
 var Matrix_Documento = [];
 var ArrayFormato = [];
+var ParamMoneda = "" //Para tomar la moneda que llega por parámetro (Param 1)
 
 var estado;
 var editNit_ID;
@@ -35,6 +36,8 @@ $(document).ready(function () {
     transaccionAjax_RutasOperacion('Rutas_Operacion');
     transaccionAjax_MDocumento('Matrx_Documento', Array_G_Usuario[0].Nit_ID);
     transacionAjax_MMoneda('Moneda');
+
+    //ParamMoneda = ConsultaParam1_Pag();
 
     $(function () {
         $("#Text_Tiempo_Sesion").timepicker();
@@ -102,6 +105,7 @@ function Ocultar_Tablas() {
     $("#TablaConsulta").css("display", "none");
     $(".Dialog_Datos").css("display", "none");
 }
+
 
 //carga el combo de Cargo dependiente
 function Change_Select_Nit() {

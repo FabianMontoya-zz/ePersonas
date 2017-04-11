@@ -40,7 +40,7 @@
         </table>
     </div>
 
-    <!--Dialog que contiene la pantalla de las colocaciones/contratos -->
+    <%--Dialog que contiene la pantalla de las colocaciones/contratos --%>
     <div class="Marco_Container_Flex">
         <div class="Marco_trabajo_Flex">
             <div id="Acordeon_Contrato" style="width: 100%">

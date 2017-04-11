@@ -56,31 +56,36 @@ var editNumDia = "";
 
 //Evento load JS
 $(document).ready(function () {
-    $("#Marco_trabajo_Form").css("height", "490px");
-    $(".container_TGrid").css("height", "380px");
+    try {
+        $("#Marco_trabajo_Form").css("height", "490px");
+        $(".container_TGrid").css("height", "380px");
 
-    /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
-    Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
-    Ocultar_Errores();
-    Ocultar_Tablas();
-    /*================== FIN LLAMADO INICIAL DE MÉTODOS DE INICIALIZACIÓN ==============*/
+        /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
+        Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
+        Ocultar_Errores();
+        Ocultar_Tablas();
+        /*================== FIN LLAMADO INICIAL DE MÉTODOS DE INICIALIZACIÓN ==============*/
 
-    transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
-    transacionAjax_EmpresaNit('Cliente');
-    transacionAjax_Calendario('MatrixCalendarios');
+        transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
+        transacionAjax_EmpresaNit('Cliente');
+        transacionAjax_Calendario('MatrixCalendarios');
 
-    IniciarTimeFormat();
-    Change_Select_Nit();
-    Change_TipoCalendario();
+        IniciarTimeFormat();
+        Change_Select_Nit();
+        Change_TipoCalendario();
 
-    Change_StateDay("Select_StateLun");
-    Change_StateDay("Select_StateMar");
-    Change_StateDay("Select_StateMie");
-    Change_StateDay("Select_StateJue");
-    Change_StateDay("Select_StateVie");
-    Change_StateDay("Select_StateSab");
-    Change_StateDay("Select_StateDom");
-    Change_StateDay("Select_Festivo");
+        Change_StateDay("Select_StateLun");
+        Change_StateDay("Select_StateMar");
+        Change_StateDay("Select_StateMie");
+        Change_StateDay("Select_StateJue");
+        Change_StateDay("Select_StateVie");
+        Change_StateDay("Select_StateSab");
+        Change_StateDay("Select_StateDom");
+        Change_StateDay("Select_Festivo");
+    } catch (e) {
+        Mensaje_General("Error - No se logró hacer el cargue", "Lo sentimos, ocurrió un error y no se logró cargar correctamente la página.", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario):\n" + e));
+    }
 });
 
 //Función que inicializa todos los label que contendran horas
@@ -186,94 +191,109 @@ function Ocultar_Tablas() {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //consulta del del crud(READ)
 function BtnConsulta() {
+    try {
+        var filtro;
+        var ValidateSelect = ValidarDroplist();
+        var opcion;
 
-    var filtro;
-    var ValidateSelect = ValidarDroplist();
-    var opcion;
+        OpenControl();
 
-    OpenControl();
-
-    if (ValidateSelect == 1) {
-        filtro = "N";
-        opcion = "ALL";
-        $("#TxtRead").val("");
-        transacionAjax_ConsultCalendario("consulta", filtro, opcion);
+        if (ValidateSelect == 1) {
+            filtro = "N";
+            opcion = "ALL";
+            $("#TxtRead").val("");
+            transacionAjax_ConsultCalendario("consulta", filtro, opcion);
+        }
+        else {
+            filtro = "S";
+            opcion = $("#DDLColumns").val();
+            transacionAjax_ConsultCalendario("consulta", filtro, opcion);
+        }
+    } catch (e) {
+        Mensaje_General("Error - No se logró consultar", "Lo sentimos, ocurrió un error y no se logró ejecutar correctamente la acción de busqueda.", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario):\n" + e));
     }
-    else {
-        filtro = "S";
-        opcion = $("#DDLColumns").val();
-        transacionAjax_ConsultCalendario("consulta", filtro, opcion);
-    }
-
 }
 
 //crear link en la BD
 function BtnCrear() {
+    try {
+        var validate;
+        validate = validarCamposCrear();
 
-    var validate;
-    validate = validarCamposCrear();
+        if (validate == 0) {
+            var LeghtArray = ArrayC_Semana.length;
+            if (LeghtArray > 0) {
+                if (WorkFestivo == true) { //Dejamos para el final el guardar si los festivos es laboral o no (N para NO festivo S para que SI es festivo)
+                    InsertJson_Day("8", "N", "0", "0");
+                } else {
+                    InsertJson_Day("8", "S", "0", "0");
+                }
 
-    if (validate == 0) {
-        var LeghtArray = ArrayC_Semana.length;
-        if (LeghtArray > 0) {
-            if (WorkFestivo == true) { //Dejamos para el final el guardar si los festivos es laboral o no (N para NO festivo S para que SI es festivo)
-                InsertJson_Day("8", "N", "0", "0");
+                if ($("#Btnguardar").val() == "Guardar") {
+                    transacionAjax_Calendario_create("crear");
+                }
+                else {
+                    transacionAjax_Calendario_create("modificar");
+                }
             } else {
-                InsertJson_Day("8", "S", "0", "0");
+                Mensaje_General("¡Sin Horarios!", "Debes ingresar por lo menos un horario para este calendario, no puedes guardar un calendario vacio.", "W");
             }
 
-            if ($("#Btnguardar").val() == "Guardar") {
-                transacionAjax_Calendario_create("crear");
-            }
-            else {
-                transacionAjax_Calendario_create("modificar");
-            }
-        } else {
-            Mensaje_General("¡Sin Horarios!", "Debes ingresar por lo menos un horario para este calendario, no puedes guardar un calendario vacio.", "W");
         }
-
+    } catch (e) {
+        Mensaje_General("Error - No se logró ejecutar Acción", "Lo sentimos, ocurrió un error y no se logró ejecutar correctamente la acción de « " + $("#Btnguardar").val() + " ».", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario):\n" + e));
     }
 }
 
 //elimina de la BD
 function BtnElimina() {
-    OpenControl();
-    transacionAjax_Calendario_delete("elimina");
+    try {
+        OpenControl();
+        transacionAjax_Calendario_delete("elimina");
+    } catch (e) {
+        Mensaje_General("Error - No se logró ejecutar la acción", "Lo sentimos, ocurrió un error y no se logró ejecutar correctamente la acción de « Eliminar ».", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario):\n" + e));
+    }
 }
 
 //agrega calendario a un array
 function BtnAgregaCalendario() {
-
-    var validate = ValidaHoras();
-    switch (validate) {
-        case 0:
-            if (V_ONE == 0) {
-                Mensaje_General("Error - Campos Vacios", "Debe completar mínimo el horario de uno de los días de la semana.", "W");
-            } else {
-
+    try {
+        var validate = ValidaHoras();
+        switch (validate) {
+            case 0:
+                var ChangeStatus = false;
                 if ($("#Btnguardar").val() == "Actualizar") {
-                    ValidarStatusEditar();
+                    ChangeStatus = ValidarStatusEditar();
                 }
+                if (V_ONE == 0 && ChangeStatus == false) {
+                    Mensaje_General("Error - Campos Vacios", "Debe completar mínimo el horario de uno de los días de la semana.", "W");
+                } else {
+                    validaTipoC();
+                    $("#Select_StateLun").prop('disabled', true).trigger("chosen:updated"); //Bloqueamos los chosen de estado del día
+                    $("#Select_StateMar").prop('disabled', true).trigger("chosen:updated");
+                    $("#Select_StateMie").prop('disabled', true).trigger("chosen:updated");
+                    $("#Select_StateJue").prop('disabled', true).trigger("chosen:updated");
+                    $("#Select_StateVie").prop('disabled', true).trigger("chosen:updated");
+                    $("#Select_StateSab").prop('disabled', true).trigger("chosen:updated");
+                    $("#Select_StateDom").prop('disabled', true).trigger("chosen:updated");
+                    $("#Select_Festivo").prop('disabled', true).trigger("chosen:updated");
+                }
+                break;
 
-                validaTipoC();
-                $("#Select_StateLun").prop('disabled', true).trigger("chosen:updated"); //Bloqueamos los chosen de estado del día
-                $("#Select_StateMar").prop('disabled', true).trigger("chosen:updated");
-                $("#Select_StateMie").prop('disabled', true).trigger("chosen:updated");
-                $("#Select_StateJue").prop('disabled', true).trigger("chosen:updated");
-                $("#Select_StateVie").prop('disabled', true).trigger("chosen:updated");
-                $("#Select_StateSab").prop('disabled', true).trigger("chosen:updated");
-                $("#Select_StateDom").prop('disabled', true).trigger("chosen:updated");
-                $("#Select_Festivo").prop('disabled', true).trigger("chosen:updated");
-            }
-            break;
+            case 1:
+                Mensaje_General("Error - Hora Inconsistente", "La hora inicial es mayor que la hora final en los días: " + MensajeHora + "", "E");
+                break;
 
-        case 1:
-            Mensaje_General("Error - Hora Inconsistente", "La hora inicial es mayor que la hora final en los días: " + MensajeHora + "", "E");
-            break;
-
-        case 2:
-            Mensaje_General("Error - Campos Incompletos", "El campo de hora inicial u hora final no se completó en los días: " + MensajeVacio + "", "W");
-            break;
+            case 2:
+                Mensaje_General("Error - Campos Incompletos", "El campo de hora inicial u hora final no se completó en los días: " + MensajeVacio + "", "W");
+                break;
+        }
+    } catch (e) {
+        Mensaje_General("Error - No se logró ejecutar la acción", "Lo sentimos, ocurrió un error y no se logró ejecutar correctamente la acción solicitada.", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario):\n" + e));
     }
 }
 
@@ -287,48 +307,52 @@ function x() {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //habilita el panel de crear o consulta
 function HabilitarPanel(opcion) {
+    try {
+        switch (opcion) {
 
-    switch (opcion) {
+            case "crear":
+                $(".Dialog_Datos_Calen").css("display", "inline-table");
+                $("#TablaConsulta").css("display", "none");
+                $("#Select_EmpresaNit").removeAttr("disabled");
+                $("#Txt_ID").removeAttr("disabled");
+                $("#Btnguardar").attr("value", "Guardar");
+                $('.C_Chosen').trigger('chosen:updated');
+                ResetError();
+                Clear();
+                estado = opcion;
+                $("#Dialog_Calendar").dialog("open");
+                $("#Dialog_Calendar").dialog("option", "title", "Crear Calendario");
+                break;
 
-        case "crear":
-            $(".Dialog_Datos_Calen").css("display", "inline-table");
-            $("#TablaConsulta").css("display", "none");
-            $("#Select_EmpresaNit").removeAttr("disabled");
-            $("#Txt_ID").removeAttr("disabled");
-            $("#Btnguardar").attr("value", "Guardar");
-            $('.C_Chosen').trigger('chosen:updated');
-            ResetError();
-            Clear();
-            estado = opcion;
-            $("#Dialog_Calendar").dialog("open");
-            $("#Dialog_Calendar").dialog("option", "title", "Crear Calendario");
-            break;
+            case "buscar":
+                $(".Dialog_Datos_Calen").css("display", "none");
+                $("#TablaConsulta").css("display", "inline-table");
+                $(".container_TGrid").html("");
+                estado = opcion;
+                Clear();
+                break;
 
-        case "buscar":
-            $(".Dialog_Datos_Calen").css("display", "none");
-            $("#TablaConsulta").css("display", "inline-table");
-            $(".container_TGrid").html("");
-            estado = opcion;
-            Clear();
-            break;
+            case "modificar":
+                $(".Dialog_Datos_Calen").css("display", "none");
+                $("#TablaConsulta").css("display", "inline-table");
+                $(".container_TGrid").html("");
+                estado = opcion;
+                ResetError();
+                Clear();
+                break;
 
-        case "modificar":
-            $(".Dialog_Datos_Calen").css("display", "none");
-            $("#TablaConsulta").css("display", "inline-table");
-            $(".container_TGrid").html("");
-            estado = opcion;
-            ResetError();
-            Clear();
-            break;
+            case "eliminar":
+                $(".Dialog_Datos_Calen").css("display", "none");
+                $("#TablaConsulta").css("display", "inline-table");
+                $(".container_TGrid").html("");
+                estado = opcion;
+                Clear();
+                break;
 
-        case "eliminar":
-            $(".Dialog_Datos_Calen").css("display", "none");
-            $("#TablaConsulta").css("display", "inline-table");
-            $(".container_TGrid").html("");
-            estado = opcion;
-            Clear();
-            break;
-
+        }
+    } catch (e) {
+        Mensaje_General("Error - No se logró ejecutar la acción", "Lo sentimos, ocurrió un error y no se logró ejecutar correctamente la acción solicitada.", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario):\n" + e));
     }
 }
 
@@ -397,217 +421,224 @@ function ValidarDroplist() {
 
 //valida horas ingresadas
 function ValidaHoras() {
-    var validate = 0;
-    var V_H = 0;
-    V_ONE = 0;
-    MensajeHora = "";
-    MensajeVacio = "";
-    //Lunes
-    if (WorkMonday == true) {
-        if ($("#TxtIniLun").val() != "" || $("#TxtFinLun").val() != "") {
-            V_ONE = 1;
-            V_H = Validahora($("#TxtIniLun").val(), $("#TxtFinLun").val());
+    try {
+        var validate = 0;
+        var V_H = 0;
+        V_ONE = 0;
+        MensajeHora = "";
+        MensajeVacio = "";
+        //Lunes
+        if (WorkMonday == true) {
+            if ($("#TxtIniLun").val() != "" || $("#TxtFinLun").val() != "") {
+                V_ONE = 1;
+                V_H = Validahora($("#TxtIniLun").val(), $("#TxtFinLun").val());
 
-            switch (V_H) {
-                case 1:
-                    validate = 1;
-                    if (MensajeHora == "") {
-                        MensajeHora = MensajeHora + " Lunes";
-                    } else {
-                        MensajeHora = MensajeHora + ", Lunes";
-                    }
-                    break;
+                switch (V_H) {
+                    case 1:
+                        validate = 1;
+                        if (MensajeHora == "") {
+                            MensajeHora = MensajeHora + " Lunes";
+                        } else {
+                            MensajeHora = MensajeHora + ", Lunes";
+                        }
+                        break;
 
-                case 2:
-                    validate = 2;
-                    if (MensajeVacio == "") {
-                        MensajeVacio = MensajeVacio + " Lunes";
-                    } else {
-                        MensajeVacio = MensajeVacio + ", Lunes";
-                    }
-                    break;
+                    case 2:
+                        validate = 2;
+                        if (MensajeVacio == "") {
+                            MensajeVacio = MensajeVacio + " Lunes";
+                        } else {
+                            MensajeVacio = MensajeVacio + ", Lunes";
+                        }
+                        break;
+                }
             }
         }
-    }
 
-    //Martes
-    if (WorkTuesday == true) {
-        if ($("#TxtIniMar").val() != "" || $("#TxtFinMar").val() != "") {
-            V_ONE = 1;
-            V_H = Validahora($("#TxtIniMar").val(), $("#TxtFinMar").val());
+        //Martes
+        if (WorkTuesday == true) {
+            if ($("#TxtIniMar").val() != "" || $("#TxtFinMar").val() != "") {
+                V_ONE = 1;
+                V_H = Validahora($("#TxtIniMar").val(), $("#TxtFinMar").val());
 
-            switch (V_H) {
-                case 1:
-                    validate = 1;
-                    if (MensajeHora == "") {
-                        MensajeHora = MensajeHora + " Martes";
-                    } else {
-                        MensajeHora = MensajeHora + ", Martes";
-                    }
-                    break;
+                switch (V_H) {
+                    case 1:
+                        validate = 1;
+                        if (MensajeHora == "") {
+                            MensajeHora = MensajeHora + " Martes";
+                        } else {
+                            MensajeHora = MensajeHora + ", Martes";
+                        }
+                        break;
 
-                case 2: //Hay alguno vacio
-                    validate = 2;
-                    if (MensajeVacio == "") {
-                        MensajeVacio = MensajeVacio + " Martes";
-                    } else {
-                        MensajeVacio = MensajeVacio + ", Martes";
-                    }
-                    break;
+                    case 2: //Hay alguno vacio
+                        validate = 2;
+                        if (MensajeVacio == "") {
+                            MensajeVacio = MensajeVacio + " Martes";
+                        } else {
+                            MensajeVacio = MensajeVacio + ", Martes";
+                        }
+                        break;
+                }
             }
         }
-    }
-    //Miércoles
-    if (WorkWednesday == true) {
-        if ($("#TxtIniMie").val() != "" || $("#TxtFinMie").val() != "") {
-            V_ONE = 1;
-            V_H = Validahora($("#TxtIniMie").val(), $("#TxtFinMie").val());
+        //Miércoles
+        if (WorkWednesday == true) {
+            if ($("#TxtIniMie").val() != "" || $("#TxtFinMie").val() != "") {
+                V_ONE = 1;
+                V_H = Validahora($("#TxtIniMie").val(), $("#TxtFinMie").val());
 
-            switch (V_H) {
-                case 1:
-                    validate = 1;
-                    if (MensajeHora == "") {
-                        MensajeHora = MensajeHora + " Miércoles";
-                    } else {
-                        MensajeHora = MensajeHora + ", Miércoles";
-                    }
-                    break;
-                case 2:
-                    validate = 2;
-                    if (MensajeVacio == "") {
-                        MensajeVacio = MensajeVacio + " Miércoles";
-                    } else {
-                        MensajeVacio = MensajeVacio + ", Miércoles";
-                    }
-                    break;
+                switch (V_H) {
+                    case 1:
+                        validate = 1;
+                        if (MensajeHora == "") {
+                            MensajeHora = MensajeHora + " Miércoles";
+                        } else {
+                            MensajeHora = MensajeHora + ", Miércoles";
+                        }
+                        break;
+                    case 2:
+                        validate = 2;
+                        if (MensajeVacio == "") {
+                            MensajeVacio = MensajeVacio + " Miércoles";
+                        } else {
+                            MensajeVacio = MensajeVacio + ", Miércoles";
+                        }
+                        break;
+                }
             }
         }
-    }
-    //Jueves
-    if (WorkThursday == true) {
-        if ($("#TxtIniJue").val() != "" || $("#TxtFinJue").val() != "") {
-            V_ONE = 1;
-            V_H = Validahora($("#TxtIniJue").val(), $("#TxtFinJue").val());
+        //Jueves
+        if (WorkThursday == true) {
+            if ($("#TxtIniJue").val() != "" || $("#TxtFinJue").val() != "") {
+                V_ONE = 1;
+                V_H = Validahora($("#TxtIniJue").val(), $("#TxtFinJue").val());
 
-            switch (V_H) {
-                case 1:
-                    validate = 1;
-                    if (MensajeHora == "") {
-                        MensajeHora = MensajeHora + " Jueves";
-                    } else {
-                        MensajeHora = MensajeHora + ", Jueves";
-                    }
-                    break;
-                case 2:
-                    validate = 2;
-                    if (MensajeVacio == "") {
-                        MensajeVacio = MensajeVacio + " Jueves";
-                    } else {
-                        MensajeVacio = MensajeVacio + ", Jueves";
-                    }
-                    break;
+                switch (V_H) {
+                    case 1:
+                        validate = 1;
+                        if (MensajeHora == "") {
+                            MensajeHora = MensajeHora + " Jueves";
+                        } else {
+                            MensajeHora = MensajeHora + ", Jueves";
+                        }
+                        break;
+                    case 2:
+                        validate = 2;
+                        if (MensajeVacio == "") {
+                            MensajeVacio = MensajeVacio + " Jueves";
+                        } else {
+                            MensajeVacio = MensajeVacio + ", Jueves";
+                        }
+                        break;
+                }
             }
         }
-    }
-    //Viernes
-    if (WorkFriday == true) {
-        if ($("#TxtIniVie").val() != "" || $("#TxtFinVie").val() != "") {
-            V_ONE = 1;
-            V_H = Validahora($("#TxtIniVie").val(), $("#TxtFinVie").val());
+        //Viernes
+        if (WorkFriday == true) {
+            if ($("#TxtIniVie").val() != "" || $("#TxtFinVie").val() != "") {
+                V_ONE = 1;
+                V_H = Validahora($("#TxtIniVie").val(), $("#TxtFinVie").val());
 
-            switch (V_H) {
-                case 1:
-                    validate = 1;
-                    if (MensajeHora == "") {
-                        MensajeHora = MensajeHora + " Viernes";
-                    } else {
-                        MensajeHora = MensajeHora + ", Viernes";
-                    }
-                    break;
-                case 2:
-                    validate = 2;
-                    if (MensajeVacio == "") {
-                        MensajeVacio = MensajeVacio + " Viernes";
-                    } else {
-                        MensajeVacio = MensajeVacio + ", Viernes";
-                    }
-                    break;
+                switch (V_H) {
+                    case 1:
+                        validate = 1;
+                        if (MensajeHora == "") {
+                            MensajeHora = MensajeHora + " Viernes";
+                        } else {
+                            MensajeHora = MensajeHora + ", Viernes";
+                        }
+                        break;
+                    case 2:
+                        validate = 2;
+                        if (MensajeVacio == "") {
+                            MensajeVacio = MensajeVacio + " Viernes";
+                        } else {
+                            MensajeVacio = MensajeVacio + ", Viernes";
+                        }
+                        break;
+                }
             }
         }
-    }
-    //Sábado
-    if (WorkSaturday == true) {
-        if ($("#TxtIniSab").val() != "" || $("#TxtFinSab").val() != "") {
-            V_ONE = 1;
-            V_H = Validahora($("#TxtIniSab").val(), $("#TxtFinSab").val());
+        //Sábado
+        if (WorkSaturday == true) {
+            if ($("#TxtIniSab").val() != "" || $("#TxtFinSab").val() != "") {
+                V_ONE = 1;
+                V_H = Validahora($("#TxtIniSab").val(), $("#TxtFinSab").val());
 
-            switch (V_H) {
-                case 1:
-                    validate = 1;
-                    if (MensajeHora == "") {
-                        MensajeHora = MensajeHora + " Sábado";
-                    } else {
-                        MensajeHora = MensajeHora + ", Sábado";
-                    }
-                    break;
-                case 2:
-                    validate = 2;
-                    if (MensajeVacio == "") {
-                        MensajeVacio = MensajeVacio + " Sábado";
-                    } else {
-                        MensajeVacio = MensajeVacio + ", Sábado";
-                    }
-                    break;
+                switch (V_H) {
+                    case 1:
+                        validate = 1;
+                        if (MensajeHora == "") {
+                            MensajeHora = MensajeHora + " Sábado";
+                        } else {
+                            MensajeHora = MensajeHora + ", Sábado";
+                        }
+                        break;
+                    case 2:
+                        validate = 2;
+                        if (MensajeVacio == "") {
+                            MensajeVacio = MensajeVacio + " Sábado";
+                        } else {
+                            MensajeVacio = MensajeVacio + ", Sábado";
+                        }
+                        break;
+                }
             }
         }
-    }
-    //Domingo
-    if (WorkSunday == true) {
-        if ($("#TxtIniDom").val() != "" || $("#TxtFinDom").val() != "") {
-            V_ONE = 1;
-            V_H = Validahora($("#TxtIniDom").val(), $("#TxtFinDom").val());
+        //Domingo
+        if (WorkSunday == true) {
+            if ($("#TxtIniDom").val() != "" || $("#TxtFinDom").val() != "") {
+                V_ONE = 1;
+                V_H = Validahora($("#TxtIniDom").val(), $("#TxtFinDom").val());
 
-            switch (V_H) {
-                case 1:
-                    validate = 1;
-                    if (MensajeHora == "") {
-                        MensajeHora = MensajeHora + " Domingo";
-                    } else {
-                        MensajeHora = MensajeHora + ", Domingo";
-                    }
-                    break;
-                case 2:
-                    validate = 2;
-                    if (MensajeVacio == "") {
-                        MensajeVacio = MensajeVacio + " Domingo";
-                    } else {
-                        MensajeVacio = MensajeVacio + ", Domingo";
-                    }
-                    break;
+                switch (V_H) {
+                    case 1:
+                        validate = 1;
+                        if (MensajeHora == "") {
+                            MensajeHora = MensajeHora + " Domingo";
+                        } else {
+                            MensajeHora = MensajeHora + ", Domingo";
+                        }
+                        break;
+                    case 2:
+                        validate = 2;
+                        if (MensajeVacio == "") {
+                            MensajeVacio = MensajeVacio + " Domingo";
+                        } else {
+                            MensajeVacio = MensajeVacio + ", Domingo";
+                        }
+                        break;
+                }
             }
         }
-    }
 
-    return validate;
+        return validate;
+    } catch (e) {
+        Mensaje_General("Error - No se logró validar", "Lo sentimos, ocurrió un error y no se logró ejecutar correctamente la acción de validación de horarios.", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario):\n" + e));
+    }
 }
 
 //valida el tio de clendario para el proceso
 function validaTipoC() {
-    var Ingresa;
+    try {
+        var Ingresa;
 
-    switch ($("#Select_TipoCalendario").val()) {
-        case "1":
-            CargeJson();
-            break;
-        case "2":
-            //Ingresa = ValidaFechas();
-            //if (Ingresa == 0) {
-            //    CargeJson();
-            //}
-            break;
-        default:
-            Mensaje_General("Sin Selección Completa", "No se ha seleccionado ningún tipo de Calendario, no podemos proseguir", "W");
-            break;
+        switch ($("#Select_TipoCalendario").val()) {
+            case "1":
+                CargeJson();
+                break;
+            case "2":
+                Mensaje_General("Opción no Disponible", "Lo sentimos, la creación de calendarios progresivos desde este módulo aún no se encuentra disponible, por favor usa la opción disponible en el menú principal.");
+                break;
+            default:
+                Mensaje_General("Sin Selección Completa", "No se ha seleccionado ningún tipo de Calendario, no podemos proseguir", "W");
+                break;
+        }
+    } catch (e) {
+        Mensaje_General("Error - No se logró ejecutar la acción", "Lo sentimos, ocurrió un error y no se logró ejecutar correctamente la acción solicitada.", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario):\n" + e));
     }
 }
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -830,24 +861,29 @@ function CargeJson() {
             Mensaje_General("Error - Horario Existe", "No puedes ingresar dos veces una misma combinación de horarios, esto sucedio en los siguientes días: " + MensajeRepetido + "", "W");
         }
     } catch (e) {
-        Mensaje_General("Error - No se logró hacer el cargue", "Lo sentimos, ocurrió un error y no se logró vhacer el cargue de los horarios que desea ingresar, favor verifique los datos.", "E");
+        Mensaje_General("Error - No se logró hacer el cargue", "Lo sentimos, ocurrió un error y no se logró hacer el cargue de los horarios que desea ingresar, favor verifique los datos.", "E");
         setTimeout(console.error.bind(console, "• Log de error generado (Calendario):\n" + e));
     }
 }
 
 //Función que crea el array que contendrá los datos para dibujar en la tabla de horarios
 function CargarMatricesHorarios() {
-    ArrayCalendario_Grid = [];
-    ArrayCalendario_Grid.push(MatrizMonday);
-    ArrayCalendario_Grid.push(MatrizTuesday);
-    ArrayCalendario_Grid.push(MatrizWednesday);
-    ArrayCalendario_Grid.push(MatrizThursday);
-    ArrayCalendario_Grid.push(MatrizFriday);
-    ArrayCalendario_Grid.push(MatrizSaturday);
-    ArrayCalendario_Grid.push(MatrizSunday);
-    $(".container_TGrid_Create").offsetHeight;
-    $(".container_TGrid_Create").html("");
-    TGridCalendar();
+    try {
+        ArrayCalendario_Grid = [];
+        ArrayCalendario_Grid.push(MatrizMonday);
+        ArrayCalendario_Grid.push(MatrizTuesday);
+        ArrayCalendario_Grid.push(MatrizWednesday);
+        ArrayCalendario_Grid.push(MatrizThursday);
+        ArrayCalendario_Grid.push(MatrizFriday);
+        ArrayCalendario_Grid.push(MatrizSaturday);
+        ArrayCalendario_Grid.push(MatrizSunday);
+        $(".container_TGrid_Create").offsetHeight;
+        $(".container_TGrid_Create").html("");
+        TGridCalendar();
+    } catch (e) {
+        Mensaje_General("Error - No se logró ejecutar la acción", "Lo sentimos, ocurrió un error y no se logró cargar correctamente la matriz principal, favor verifique los datos.", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario):\n" + e));
+    }
 }
 
 //Función que valida que los nuevos datos de cualquiera de los días no estén repetidos en la matriz
@@ -932,16 +968,21 @@ function ValidaDatosMatriz() {
 
 //Función que valida si la combinación de horas ya existe en el array armado
 function ValidarHoras(numDia, horaIni, horaFini) {
-    var Encontrado = false;
-    for (i in ArrayC_Semana) {//Recorremos el array que contiene los datos de los horarios día
-        if (ArrayC_Semana[i].Dia == numDia) { //Entramos a revisar solo los datos que contienen el día que se quiere verificar
-            if (ArrayC_Semana[i].HoraInicial == horaIni && ArrayC_Semana[i].HoraFinal == horaFini) { //Verificamos si la combinación de horas ya existe
-                Encontrado = true;
-                break;
+    try {
+        var Encontrado = false;
+        for (i in ArrayC_Semana) {//Recorremos el array que contiene los datos de los horarios día
+            if (ArrayC_Semana[i].Dia == numDia) { //Entramos a revisar solo los datos que contienen el día que se quiere verificar
+                if (ArrayC_Semana[i].HoraInicial == horaIni && ArrayC_Semana[i].HoraFinal == horaFini) { //Verificamos si la combinación de horas ya existe
+                    Encontrado = true;
+                    break;
+                }
             }
         }
+        return Encontrado;
+    } catch (e) {
+        Mensaje_General("Error - No se logró ejecutar la acción", "Lo sentimos, ocurrió un error y no se logró validar correctamente los horarios, favor verificar los datos.", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario):\n" + e));
     }
-    return Encontrado;
 }
 
 //Carga JSON para Tabla de Semanas
@@ -1130,243 +1171,265 @@ function TGridCalendar() {
 
 //Función que valida si han cambiado el estado del día en caso de que sea actualizar las matrices
 function ValidarStatusEditar() {
-    //Lunes
-    if (WorkMonday == false) {
-        for (i in ArrayC_Semana) {
-            if (ArrayC_Semana[i].Dia == "1") {//Validamos si antes era laboral
-                if (ArrayC_Semana[i].IndicativoFestivo == "N") {
-                    for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
-                        if (ArrayC_Semana[j].Dia == "1") {
-                            ArrayC_Semana.splice(j, 1);
+    try {
+        var anyChange = false;
+        //Lunes
+        if (WorkMonday == false) {
+            for (i in ArrayC_Semana) {
+                if (ArrayC_Semana[i].Dia == "1") {//Validamos si antes era laboral
+                    if (ArrayC_Semana[i].IndicativoFestivo == "N") {
+                        for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
+                            if (ArrayC_Semana[j].Dia == "1") {
+                                ArrayC_Semana.splice(j, 1);
+                            }
                         }
+                        MatrizMonday = [];
+                        RellenarMatrices(Lineas); //Borramos la matriz y la rellenamos con ceros para dibujarla
+                        anyChange = true;
+                        //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
                     }
-                    MatrizMonday = [];
-                    RellenarMatrices(Lineas); //Borramos la matriz y la rellenamos con ceros para dibujarla
-                    //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
+                    break;
                 }
-                break;
+            }
+        } else if (WorkMonday == true) {
+            for (i in ArrayC_Semana) {
+                if (ArrayC_Semana[i].Dia == "1") {//Validamos si antes era no laboral
+                    if (ArrayC_Semana[i].IndicativoFestivo == "S") {
+                        for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
+                            if (ArrayC_Semana[j].Dia == "1") {
+                                ArrayC_Semana.splice(j, 1);
+                            }
+                        }
+                        MatrizMonday = [];
+                        RellenarMatrices(Lineas); //Reiniciamos la Matriz nuevamente con ceros
+                        anyChange = true;
+                        //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
+                    }
+                    break;
+                }
             }
         }
-    } else if (WorkMonday == true) {
-        for (i in ArrayC_Semana) {
-            if (ArrayC_Semana[i].Dia == "1") {//Validamos si antes era no laboral
-                if (ArrayC_Semana[i].IndicativoFestivo == "S") {
-                    for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
-                        if (ArrayC_Semana[j].Dia == "1") {
-                            ArrayC_Semana.splice(j, 1);
+        //Martes
+        if (WorkTuesday == false) {
+            for (i in ArrayC_Semana) {
+                if (ArrayC_Semana[i].Dia == "2") {//Validamos si antes era laboral
+                    if (ArrayC_Semana[i].IndicativoFestivo == "N") {
+                        for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
+                            if (ArrayC_Semana[j].Dia == "2") {
+                                ArrayC_Semana.splice(j, 1);
+                            }
                         }
+                        MatrizTuesday = [];
+                        RellenarMatrices(Lineas); //Borramos la matriz y la rellenamos con ceros para dibujarla
+                        anyChange = true;
+                        //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
                     }
-                    MatrizMonday = [];
-                    RellenarMatrices(Lineas); //Reiniciamos la Matriz nuevamente con ceros
-                    //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
+                    break;
                 }
-                break;
+            }
+        } else if (WorkTuesday == true) {
+            for (i in ArrayC_Semana) {
+                if (ArrayC_Semana[i].Dia == "2") {//Validamos si antes era no laboral
+                    if (ArrayC_Semana[i].IndicativoFestivo == "S") {
+                        for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
+                            if (ArrayC_Semana[j].Dia == "2") {
+                                ArrayC_Semana.splice(j, 1);
+                            }
+                        }
+                        MatrizTuesday = [];
+                        RellenarMatrices(Lineas); //Reiniciamos la Matriz nuevamente con ceros
+                        anyChange = true;
+                        //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
+                    }
+                    break;
+                }
             }
         }
-    }
-    //Martes
-    if (WorkTuesday == false) {
-        for (i in ArrayC_Semana) {
-            if (ArrayC_Semana[i].Dia == "2") {//Validamos si antes era laboral
-                if (ArrayC_Semana[i].IndicativoFestivo == "N") {
-                    for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
-                        if (ArrayC_Semana[j].Dia == "2") {
-                            ArrayC_Semana.splice(j, 1);
+        //Miércoles
+        if (WorkWednesday == false) {
+            for (i in ArrayC_Semana) {
+                if (ArrayC_Semana[i].Dia == "3") {//Validamos si antes era laboral
+                    if (ArrayC_Semana[i].IndicativoFestivo == "N") {
+                        for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
+                            if (ArrayC_Semana[j].Dia == "3") {
+                                ArrayC_Semana.splice(j, 1);
+                            }
                         }
+                        MatrizWednesday = [];
+                        RellenarMatrices(Lineas); //Borramos la matriz y la rellenamos con ceros para dibujarla
+                        anyChange = true;
+                        //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
                     }
-                    MatrizTuesday = [];
-                    RellenarMatrices(Lineas); //Borramos la matriz y la rellenamos con ceros para dibujarla
-                    //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
+                    break;
                 }
-                break;
+            }
+        } else if (WorkWednesday == true) {
+            for (i in ArrayC_Semana) {
+                if (ArrayC_Semana[i].Dia == "3") {//Validamos si antes era no laboral
+                    if (ArrayC_Semana[i].IndicativoFestivo == "S") {
+                        for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
+                            if (ArrayC_Semana[j].Dia == "3") {
+                                ArrayC_Semana.splice(j, 1);
+                            }
+                        }
+                        MatrizWednesday = [];
+                        RellenarMatrices(Lineas); //Reiniciamos la Matriz nuevamente con ceros
+                        anyChange = true;
+                        //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
+                    }
+                    break;
+                }
             }
         }
-    } else if (WorkTuesday == true) {
-        for (i in ArrayC_Semana) {
-            if (ArrayC_Semana[i].Dia == "2") {//Validamos si antes era no laboral
-                if (ArrayC_Semana[i].IndicativoFestivo == "S") {
-                    for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
-                        if (ArrayC_Semana[j].Dia == "2") {
-                            ArrayC_Semana.splice(j, 1);
+        //Jueves
+        if (WorkThursday == false) {
+            for (i in ArrayC_Semana) {
+                if (ArrayC_Semana[i].Dia == "4") {//Validamos si antes era laboral
+                    if (ArrayC_Semana[i].IndicativoFestivo == "N") {
+                        for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
+                            if (ArrayC_Semana[j].Dia == "4") {
+                                ArrayC_Semana.splice(j, 1);
+                            }
                         }
+                        MatrizThursday = [];
+                        RellenarMatrices(Lineas); //Borramos la matriz y la rellenamos con ceros para dibujarla
+                        anyChange = true;
+                        //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
                     }
-                    MatrizTuesday = [];
-                    RellenarMatrices(Lineas); //Reiniciamos la Matriz nuevamente con ceros
-                    //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
+                    break;
                 }
-                break;
+            }
+        } else if (WorkThursday == true) {
+            for (i in ArrayC_Semana) {
+                if (ArrayC_Semana[i].Dia == "4") {//Validamos si antes era no laboral
+                    if (ArrayC_Semana[i].IndicativoFestivo == "S") {
+                        for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
+                            if (ArrayC_Semana[j].Dia == "4") {
+                                ArrayC_Semana.splice(j, 1);
+                            }
+                        }
+                        MatrizThursday = [];
+                        RellenarMatrices(Lineas); //Reiniciamos la Matriz nuevamente con ceros
+                        anyChange = true;
+                        //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
+                    }
+                    break;
+                }
             }
         }
-    }
-    //Miércoles
-    if (WorkWednesday == false) {
-        for (i in ArrayC_Semana) {
-            if (ArrayC_Semana[i].Dia == "3") {//Validamos si antes era laboral
-                if (ArrayC_Semana[i].IndicativoFestivo == "N") {
-                    for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
-                        if (ArrayC_Semana[j].Dia == "3") {
-                            ArrayC_Semana.splice(j, 1);
+        //Viernes
+        if (WorkFriday == false) {
+            for (i in ArrayC_Semana) {
+                if (ArrayC_Semana[i].Dia == "5") {//Validamos si antes era laboral
+                    if (ArrayC_Semana[i].IndicativoFestivo == "N") {
+                        for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
+                            if (ArrayC_Semana[j].Dia == "5") {
+                                ArrayC_Semana.splice(j, 1);
+                            }
                         }
+                        MatrizFriday = [];
+                        RellenarMatrices(Lineas); //Borramos la matriz y la rellenamos con ceros para dibujarla
+                        anyChange = true;
+                        //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
                     }
-                    MatrizWednesday = [];
-                    RellenarMatrices(Lineas); //Borramos la matriz y la rellenamos con ceros para dibujarla
-                    //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
+                    break;
                 }
-                break;
+            }
+        } else if (WorkFriday == true) {
+            for (i in ArrayC_Semana) {
+                if (ArrayC_Semana[i].Dia == "5") {//Validamos si antes era no laboral
+                    if (ArrayC_Semana[i].IndicativoFestivo == "S") {
+                        for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
+                            if (ArrayC_Semana[j].Dia == "5") {
+                                ArrayC_Semana.splice(j, 1);
+                            }
+                        }
+                        MatrizFriday = [];
+                        RellenarMatrices(Lineas); //Reiniciamos la Matriz nuevamente con ceros
+                        anyChange = true;
+                        //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
+                    }
+                    break;
+                }
             }
         }
-    } else if (WorkWednesday == true) {
-        for (i in ArrayC_Semana) {
-            if (ArrayC_Semana[i].Dia == "3") {//Validamos si antes era no laboral
-                if (ArrayC_Semana[i].IndicativoFestivo == "S") {
-                    for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
-                        if (ArrayC_Semana[j].Dia == "3") {
-                            ArrayC_Semana.splice(j, 1);
+        //Sábado
+        if (WorkSaturday == false) {
+            for (i in ArrayC_Semana) {
+                if (ArrayC_Semana[i].Dia == "6") {//Validamos si antes era laboral
+                    if (ArrayC_Semana[i].IndicativoFestivo == "N") {
+                        for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
+                            if (ArrayC_Semana[j].Dia == "6") {
+                                ArrayC_Semana.splice(j, 1);
+                            }
                         }
+                        MatrizSaturday = [];
+                        RellenarMatrices(Lineas); //Borramos la matriz y la rellenamos con ceros para dibujarla
+                        anyChange = true;
+                        //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
                     }
-                    MatrizWednesday = [];
-                    RellenarMatrices(Lineas); //Reiniciamos la Matriz nuevamente con ceros
-                    //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
+                    break;
                 }
-                break;
+            }
+        } else if (WorkSaturday == true) {
+            for (i in ArrayC_Semana) {
+                if (ArrayC_Semana[i].Dia == "6") {//Validamos si antes era no laboral
+                    if (ArrayC_Semana[i].IndicativoFestivo == "S") {
+                        for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
+                            if (ArrayC_Semana[j].Dia == "6") {
+                                ArrayC_Semana.splice(j, 1);
+                            }
+                        }
+                        MatrizSaturday = [];
+                        RellenarMatrices(Lineas); //Reiniciamos la Matriz nuevamente con ceros
+                        anyChange = true;
+                        //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
+                    }
+                    break;
+                }
             }
         }
-    }
-    //Jueves
-    if (WorkThursday == false) {
-        for (i in ArrayC_Semana) {
-            if (ArrayC_Semana[i].Dia == "4") {//Validamos si antes era laboral
-                if (ArrayC_Semana[i].IndicativoFestivo == "N") {
-                    for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
-                        if (ArrayC_Semana[j].Dia == "4") {
-                            ArrayC_Semana.splice(j, 1);
+        //Domingo
+        if (WorkSunday == false) {
+            for (i in ArrayC_Semana) {
+                if (ArrayC_Semana[i].Dia == "7") {//Validamos si antes era laboral
+                    if (ArrayC_Semana[i].IndicativoFestivo == "N") {
+                        for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
+                            if (ArrayC_Semana[j].Dia == "7") {
+                                ArrayC_Semana.splice(j, 1);
+                            }
                         }
+                        MatrizSunday = [];
+                        RellenarMatrices(Lineas); //Borramos la matriz y la rellenamos con ceros para dibujarla
+                        anyChange = true;
+                        //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
                     }
-                    MatrizThursday = [];
-                    RellenarMatrices(Lineas); //Borramos la matriz y la rellenamos con ceros para dibujarla
-                    //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
+                    break;
                 }
-                break;
+            }
+        } else if (WorkSunday == true) {
+            for (i in ArrayC_Semana) {
+                if (ArrayC_Semana[i].Dia == "7") {//Validamos si antes era no laboral
+                    if (ArrayC_Semana[i].IndicativoFestivo == "S") {
+                        for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
+                            if (ArrayC_Semana[j].Dia == "7") {
+                                ArrayC_Semana.splice(j, 1);
+                            }
+                        }
+                        MatrizSunday = [];
+                        RellenarMatrices(Lineas); //Reiniciamos la Matriz nuevamente con ceros
+                        anyChange = true;
+                        //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
+                    }
+                    break;
+                }
             }
         }
-    } else if (WorkThursday == true) {
-        for (i in ArrayC_Semana) {
-            if (ArrayC_Semana[i].Dia == "4") {//Validamos si antes era no laboral
-                if (ArrayC_Semana[i].IndicativoFestivo == "S") {
-                    for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
-                        if (ArrayC_Semana[j].Dia == "4") {
-                            ArrayC_Semana.splice(j, 1);
-                        }
-                    }
-                    MatrizThursday = [];
-                    RellenarMatrices(Lineas); //Reiniciamos la Matriz nuevamente con ceros
-                    //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
-                }
-                break;
-            }
-        }
-    }
-    //Viernes
-    if (WorkFriday == false) {
-        for (i in ArrayC_Semana) {
-            if (ArrayC_Semana[i].Dia == "5") {//Validamos si antes era laboral
-                if (ArrayC_Semana[i].IndicativoFestivo == "N") {
-                    for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
-                        if (ArrayC_Semana[j].Dia == "5") {
-                            ArrayC_Semana.splice(j, 1);
-                        }
-                    }
-                    MatrizFriday = [];
-                    RellenarMatrices(Lineas); //Borramos la matriz y la rellenamos con ceros para dibujarla
-                    //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
-                }
-                break;
-            }
-        }
-    } else if (WorkFriday == true) {
-        for (i in ArrayC_Semana) {
-            if (ArrayC_Semana[i].Dia == "5") {//Validamos si antes era no laboral
-                if (ArrayC_Semana[i].IndicativoFestivo == "S") {
-                    for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
-                        if (ArrayC_Semana[j].Dia == "5") {
-                            ArrayC_Semana.splice(j, 1);
-                        }
-                    }
-                    MatrizFriday = [];
-                    RellenarMatrices(Lineas); //Reiniciamos la Matriz nuevamente con ceros
-                    //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
-                }
-                break;
-            }
-        }
-    }
-    //Sábado
-    if (WorkSaturday == false) {
-        for (i in ArrayC_Semana) {
-            if (ArrayC_Semana[i].Dia == "6") {//Validamos si antes era laboral
-                if (ArrayC_Semana[i].IndicativoFestivo == "N") {
-                    for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
-                        if (ArrayC_Semana[j].Dia == "6") {
-                            ArrayC_Semana.splice(j, 1);
-                        }
-                    }
-                    MatrizSaturday = [];
-                    RellenarMatrices(Lineas); //Borramos la matriz y la rellenamos con ceros para dibujarla
-                    //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
-                }
-                break;
-            }
-        }
-    } else if (WorkSaturday == true) {
-        for (i in ArrayC_Semana) {
-            if (ArrayC_Semana[i].Dia == "6") {//Validamos si antes era no laboral
-                if (ArrayC_Semana[i].IndicativoFestivo == "S") {
-                    for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
-                        if (ArrayC_Semana[j].Dia == "6") {
-                            ArrayC_Semana.splice(j, 1);
-                        }
-                    }
-                    MatrizSaturday = [];
-                    RellenarMatrices(Lineas); //Reiniciamos la Matriz nuevamente con ceros
-                    //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
-                }
-                break;
-            }
-        }
-    }
-    //Domingo
-    if (WorkSunday == false) {
-        for (i in ArrayC_Semana) {
-            if (ArrayC_Semana[i].Dia == "7") {//Validamos si antes era laboral
-                if (ArrayC_Semana[i].IndicativoFestivo == "N") {
-                    for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
-                        if (ArrayC_Semana[j].Dia == "7") {
-                            ArrayC_Semana.splice(j, 1);
-                        }
-                    }
-                    MatrizSunday = [];
-                    RellenarMatrices(Lineas); //Borramos la matriz y la rellenamos con ceros para dibujarla
-                    //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
-                }
-                break;
-            }
-        }
-    } else if (WorkSunday == true) {
-        for (i in ArrayC_Semana) {
-            if (ArrayC_Semana[i].Dia == "7") {//Validamos si antes era no laboral
-                if (ArrayC_Semana[i].IndicativoFestivo == "S") {
-                    for (j in ArrayC_Semana) { //Borramos todos los datos que contengan este día
-                        if (ArrayC_Semana[j].Dia == "7") {
-                            ArrayC_Semana.splice(j, 1);
-                        }
-                    }
-                    MatrizSunday = [];
-                    RellenarMatrices(Lineas); //Reiniciamos la Matriz nuevamente con ceros
-                    //Hay que borrar primero en el ArrayC_Semana y luego modificar la matriz
-                }
-                break;
-            }
-        }
+
+        return anyChange;
+    } catch (e) {
+        Mensaje_General("Error - No se logró validar Status", "Lo sentimos, ocurrió un error y no se logró validar correctamente el estado de los días de la semana, favor verificar los datos.", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario):\n" + e));
     }
 }
 
@@ -1526,82 +1589,87 @@ function ValidarHorasEdit() {
 
 //Función que valida que el horario a modificar no exista dentro del array ya creado
 function ValidarMatrizEditHorario() {
-    var repetido = false;
-    EDIT: do {
-        if (editNumDia == "1") { //Lunes
-            if (WorkMonday == true) {
-                repetido = ValidarHoras(editNumDia, $("#TxtEditIni").val(), $("#TxtEditFin").val());
-                if (repetido == true) {
+    try {
+        var repetido = false;
+        EDIT: do {
+            if (editNumDia == "1") { //Lunes
+                if (WorkMonday == true) {
+                    repetido = ValidarHoras(editNumDia, $("#TxtEditIni").val(), $("#TxtEditFin").val());
+                    if (repetido == true) {
+                        break EDIT;
+                    }
+                } else {
+                    Mensaje_General("Día NO Laboral", "No puedes modificar un horario para un día no laboral, únicamente los de los días laborales.", "W");
                     break EDIT;
                 }
-            } else {
-                Mensaje_General("Día NO Laboral", "No puedes modificar un horario para un día no laboral, únicamente los de los días laborales.", "W");
-                break EDIT;
-            }
-        } else if (editNumDia == "2") { //Martes
-            if (WorkTuesday == true) {
-                repetido = ValidarHoras(editNumDia, $("#TxtEditIni").val(), $("#TxtEditFin").val());
-                if (repetido == true) {
+            } else if (editNumDia == "2") { //Martes
+                if (WorkTuesday == true) {
+                    repetido = ValidarHoras(editNumDia, $("#TxtEditIni").val(), $("#TxtEditFin").val());
+                    if (repetido == true) {
+                        break EDIT;
+                    }
+                } else {
+                    Mensaje_General("Día NO Laboral", "No puedes modificar un horario para un día no laboral, únicamente los de los días laborales.", "W");
                     break EDIT;
                 }
-            } else {
-                Mensaje_General("Día NO Laboral", "No puedes modificar un horario para un día no laboral, únicamente los de los días laborales.", "W");
-                break EDIT;
-            }
-        } else if (editNumDia == "3") { //Miércoles
-            if (WorkWednesday == true) {
-                repetido = ValidarHoras(editNumDia, $("#TxtEditIni").val(), $("#TxtEditFin").val());
-                if (repetido == true) {
+            } else if (editNumDia == "3") { //Miércoles
+                if (WorkWednesday == true) {
+                    repetido = ValidarHoras(editNumDia, $("#TxtEditIni").val(), $("#TxtEditFin").val());
+                    if (repetido == true) {
+                        break EDIT;
+                    }
+                } else {
+                    Mensaje_General("Día NO Laboral", "No puedes modificar un horario para un día no laboral, únicamente los de los días laborales.", "W");
                     break EDIT;
                 }
-            } else {
-                Mensaje_General("Día NO Laboral", "No puedes modificar un horario para un día no laboral, únicamente los de los días laborales.", "W");
-                break EDIT;
-            }
-        } else if (editNumDia == "4") { //Jueves
-            if (WorkThursday == true) {
-                repetido = ValidarHoras(editNumDia, $("#TxtEditIni").val(), $("#TxtEditFin").val());
-                if (repetido == true) {
+            } else if (editNumDia == "4") { //Jueves
+                if (WorkThursday == true) {
+                    repetido = ValidarHoras(editNumDia, $("#TxtEditIni").val(), $("#TxtEditFin").val());
+                    if (repetido == true) {
+                        break EDIT;
+                    }
+                } else {
+                    Mensaje_General("Día NO Laboral", "No puedes modificar un horario para un día no laboral, únicamente los de los días laborales.", "W");
                     break EDIT;
                 }
-            } else {
-                Mensaje_General("Día NO Laboral", "No puedes modificar un horario para un día no laboral, únicamente los de los días laborales.", "W");
-                break EDIT;
-            }
-        } else if (editNumDia == "5") { //Viernes
-            if (WorkFriday == true) {
-                repetido = ValidarHoras(editNumDia, $("#TxtEditIni").val(), $("#TxtEditFin").val());
-                if (repetido == true) {
+            } else if (editNumDia == "5") { //Viernes
+                if (WorkFriday == true) {
+                    repetido = ValidarHoras(editNumDia, $("#TxtEditIni").val(), $("#TxtEditFin").val());
+                    if (repetido == true) {
+                        break EDIT;
+                    }
+                } else {
+                    Mensaje_General("Día NO Laboral", "No puedes modificar un horario para un día no laboral, únicamente los de los días laborales.", "W");
                     break EDIT;
                 }
-            } else {
-                Mensaje_General("Día NO Laboral", "No puedes modificar un horario para un día no laboral, únicamente los de los días laborales.", "W");
-                break EDIT;
-            }
-        } else if (editNumDia == "6") { //Sábado
-            if (WorkSaturday == true) {
-                repetido = ValidarHoras(editNumDia, $("#TxtEditIni").val(), $("#TxtEditFin").val());
-                if (repetido == true) {
+            } else if (editNumDia == "6") { //Sábado
+                if (WorkSaturday == true) {
+                    repetido = ValidarHoras(editNumDia, $("#TxtEditIni").val(), $("#TxtEditFin").val());
+                    if (repetido == true) {
+                        break EDIT;
+                    }
+                } else {
+                    Mensaje_General("Día NO Laboral", "No puedes modificar un horario para un día no laboral, únicamente los de los días laborales.", "W");
                     break EDIT;
                 }
-            } else {
-                Mensaje_General("Día NO Laboral", "No puedes modificar un horario para un día no laboral, únicamente los de los días laborales.", "W");
-                break EDIT;
-            }
-        } else if (editNumDia == "7") { //Domingo
-            if (WorkSunday == true) {
-                frepetido = ValidarHoras(editNumDia, $("#TxtEditIni").val(), $("#TxtEditFin").val());
-                if (repetido == true) {
+            } else if (editNumDia == "7") { //Domingo
+                if (WorkSunday == true) {
+                    frepetido = ValidarHoras(editNumDia, $("#TxtEditIni").val(), $("#TxtEditFin").val());
+                    if (repetido == true) {
+                        break EDIT;
+                    }
+                } else {
+                    Mensaje_General("Día NO Laboral", "No puedes modificar un horario para un día no laboral, únicamente los de los días laborales.", "W");
                     break EDIT;
                 }
-            } else {
-                Mensaje_General("Día NO Laboral", "No puedes modificar un horario para un día no laboral, únicamente los de los días laborales.", "W");
-                break EDIT;
             }
-        }
-        break EDIT;
-    } while (0);
-    return repetido;
+            break EDIT;
+        } while (0);
+        return repetido;
+    } catch (e) {
+        Mensaje_General("Error - No se logró validar", "Lo sentimos, ocurrió un error y no se logró validar correctamente el horario de este día, favor verificar la información.", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario):\n" + e));
+    }
 }
 
 //Función que valida el nuevo horario al editarlo antes de mandar a modificar los arrays
@@ -1637,183 +1705,187 @@ function EditArraysTime() {
 
 //Función que modifca los arrays con los nuevos datos
 function ModifyArrays() {
-    var NewIni = $("#TxtEditIni").val();
-    var NewFin = $("#TxtEditFin").val();
+    try {
+        var NewIni = $("#TxtEditIni").val();
+        var NewFin = $("#TxtEditFin").val();
 
-    MODIFY: do {
-        if (editNumDia == "1") { //Lunes
-            if (WorkMonday == true) {
-                for (i in MatrizMonday) {
-                    if (MatrizMonday[i].Index == editIndex) { //Cambiamos Matriz del Día
-                        MatrizMonday[i].IniLun = NewIni;
-                        MatrizMonday[i].FinLun = NewFin;
-                        if (editHoraIni != "0" || editHoraFin != "0") {//Validamos si habia sido guardado en el array de semana
-                            for (x in ArrayC_Semana) { //Cambiamos el Dato en la Matriz que guardará en la BD
-                                if (ArrayC_Semana[x].Dia == editNumDia && ArrayC_Semana[x].HoraInicial == editHoraIni && ArrayC_Semana[x].HoraFinal == editHoraFin) {
-                                    ArrayC_Semana[x].HoraInicial = NewIni;
-                                    ArrayC_Semana[x].HoraFinal = NewFin;
-                                    break;
+        MODIFY: do {
+            if (editNumDia == "1") { //Lunes
+                if (WorkMonday == true) {
+                    for (i in MatrizMonday) {
+                        if (MatrizMonday[i].Index == editIndex) { //Cambiamos Matriz del Día
+                            MatrizMonday[i].IniLun = NewIni;
+                            MatrizMonday[i].FinLun = NewFin;
+                            if (editHoraIni != "0" || editHoraFin != "0") {//Validamos si habia sido guardado en el array de semana
+                                for (x in ArrayC_Semana) { //Cambiamos el Dato en la Matriz que guardará en la BD
+                                    if (ArrayC_Semana[x].Dia == editNumDia && ArrayC_Semana[x].HoraInicial == editHoraIni && ArrayC_Semana[x].HoraFinal == editHoraFin) {
+                                        ArrayC_Semana[x].HoraInicial = NewIni;
+                                        ArrayC_Semana[x].HoraFinal = NewFin;
+                                        break;
+                                    }
                                 }
+                            } else { //Sino, lo agregamos, dado que se cambia el horario
+                                InsertJson_Day(editNumDia, "N", NewIni, NewFin);
                             }
-                        } else { //Sino, lo agregamos, dado que se cambia el horario
-                            InsertJson_Day(editNumDia, "N", NewIni, NewFin);
+                            break;
                         }
-                        break;
                     }
+                } else {
+                    Mensaje_General("Día NO Laboral", "No puedes modificar un horario para un día no laboral, únicamente los de los días laborales.", "W");
+                    break MODIFY;
                 }
-            } else {
-                Mensaje_General("Día NO Laboral", "No puedes modificar un horario para un día no laboral, únicamente los de los días laborales.", "W");
-                break MODIFY;
-            }
-        } else if (editNumDia == "2") { //Martes
-            if (WorkTuesday == true) {
-                for (i in MatrizTuesday) {
-                    if (MatrizTuesday[i].Index == editIndex) {
-                        MatrizTuesday[i].IniMar = NewIni;
-                        MatrizTuesday[i].FinMar = NewFin;
-                        if (editHoraIni != "0" || editHoraFin != "0") {//Validamos si habia sido guardado en el array de semana
-                            for (x in ArrayC_Semana) { //Cambiamos el Dato en la Matriz que guardará en la BD
-                                if (ArrayC_Semana[x].Dia == editNumDia && ArrayC_Semana[x].HoraInicial == editHoraIni && ArrayC_Semana[x].HoraFinal == editHoraFin) {
-                                    ArrayC_Semana[x].HoraInicial = NewIni;
-                                    ArrayC_Semana[x].HoraFinal = NewFin;
-                                    break;
+            } else if (editNumDia == "2") { //Martes
+                if (WorkTuesday == true) {
+                    for (i in MatrizTuesday) {
+                        if (MatrizTuesday[i].Index == editIndex) {
+                            MatrizTuesday[i].IniMar = NewIni;
+                            MatrizTuesday[i].FinMar = NewFin;
+                            if (editHoraIni != "0" || editHoraFin != "0") {//Validamos si habia sido guardado en el array de semana
+                                for (x in ArrayC_Semana) { //Cambiamos el Dato en la Matriz que guardará en la BD
+                                    if (ArrayC_Semana[x].Dia == editNumDia && ArrayC_Semana[x].HoraInicial == editHoraIni && ArrayC_Semana[x].HoraFinal == editHoraFin) {
+                                        ArrayC_Semana[x].HoraInicial = NewIni;
+                                        ArrayC_Semana[x].HoraFinal = NewFin;
+                                        break;
+                                    }
                                 }
+                            } else { //Sino, lo agregamos, dado que se cambia el horario
+                                InsertJson_Day(editNumDia, "N", NewIni, NewFin);
                             }
-                        } else { //Sino, lo agregamos, dado que se cambia el horario
-                            InsertJson_Day(editNumDia, "N", NewIni, NewFin);
+                            break;
                         }
-                        break;
                     }
+                } else {
+                    Mensaje_General("Día NO Laboral", "No puedes modificar un horario para un día no laboral, únicamente los de los días laborales.", "W");
+                    break MODIFY;
                 }
-            } else {
-                Mensaje_General("Día NO Laboral", "No puedes modificar un horario para un día no laboral, únicamente los de los días laborales.", "W");
-                break MODIFY;
-            }
-        } else if (editNumDia == "3") { //Miércoles
-            if (WorkWednesday == true) {
-                for (i in MatrizWednesday) {
-                    if (MatrizWednesday[i].Index == editIndex) {
-                        MatrizWednesday[i].IniMie = NewIni;
-                        MatrizWednesday[i].FinMie = NewFin;
-                        if (editHoraIni != "0" || editHoraFin != "0") {//Validamos si habia sido guardado en el array de semana
-                            for (x in ArrayC_Semana) { //Cambiamos el Dato en la Matriz que guardará en la BD
-                                if (ArrayC_Semana[x].Dia == editNumDia && ArrayC_Semana[x].HoraInicial == editHoraIni && ArrayC_Semana[x].HoraFinal == editHoraFin) {
-                                    ArrayC_Semana[x].HoraInicial = NewIni;
-                                    ArrayC_Semana[x].HoraFinal = NewFin;
-                                    break;
+            } else if (editNumDia == "3") { //Miércoles
+                if (WorkWednesday == true) {
+                    for (i in MatrizWednesday) {
+                        if (MatrizWednesday[i].Index == editIndex) {
+                            MatrizWednesday[i].IniMie = NewIni;
+                            MatrizWednesday[i].FinMie = NewFin;
+                            if (editHoraIni != "0" || editHoraFin != "0") {//Validamos si habia sido guardado en el array de semana
+                                for (x in ArrayC_Semana) { //Cambiamos el Dato en la Matriz que guardará en la BD
+                                    if (ArrayC_Semana[x].Dia == editNumDia && ArrayC_Semana[x].HoraInicial == editHoraIni && ArrayC_Semana[x].HoraFinal == editHoraFin) {
+                                        ArrayC_Semana[x].HoraInicial = NewIni;
+                                        ArrayC_Semana[x].HoraFinal = NewFin;
+                                        break;
+                                    }
                                 }
+                            } else { //Sino, lo agregamos, dado que se cambia el horario
+                                InsertJson_Day(editNumDia, "N", NewIni, NewFin);
                             }
-                        } else { //Sino, lo agregamos, dado que se cambia el horario
-                            InsertJson_Day(editNumDia, "N", NewIni, NewFin);
+                            break;
                         }
-                        break;
                     }
+                } else {
+                    Mensaje_General("Día NO Laboral", "No puedes modificar un horario para un día no laboral, únicamente los de los días laborales.", "W");
+                    break MODIFY;
                 }
-            } else {
-                Mensaje_General("Día NO Laboral", "No puedes modificar un horario para un día no laboral, únicamente los de los días laborales.", "W");
-                break MODIFY;
-            }
-        } else if (editNumDia == "4") { //Jueves
-            if (WorkThursday == true) {
-                for (i in MatrizThursday) {
-                    if (MatrizThursday[i].Index == editIndex) {
-                        MatrizThursday[i].IniJue = NewIni;
-                        MatrizThursday[i].FinJue = NewFin;
-                        if (editHoraIni != "0" || editHoraFin != "0") {//Validamos si habia sido guardado en el array de semana
-                            for (x in ArrayC_Semana) { //Cambiamos el Dato en la Matriz que guardará en la BD
-                                if (ArrayC_Semana[x].Dia == editNumDia && ArrayC_Semana[x].HoraInicial == editHoraIni && ArrayC_Semana[x].HoraFinal == editHoraFin) {
-                                    ArrayC_Semana[x].HoraInicial = NewIni;
-                                    ArrayC_Semana[x].HoraFinal = NewFin;
-                                    break;
+            } else if (editNumDia == "4") { //Jueves
+                if (WorkThursday == true) {
+                    for (i in MatrizThursday) {
+                        if (MatrizThursday[i].Index == editIndex) {
+                            MatrizThursday[i].IniJue = NewIni;
+                            MatrizThursday[i].FinJue = NewFin;
+                            if (editHoraIni != "0" || editHoraFin != "0") {//Validamos si habia sido guardado en el array de semana
+                                for (x in ArrayC_Semana) { //Cambiamos el Dato en la Matriz que guardará en la BD
+                                    if (ArrayC_Semana[x].Dia == editNumDia && ArrayC_Semana[x].HoraInicial == editHoraIni && ArrayC_Semana[x].HoraFinal == editHoraFin) {
+                                        ArrayC_Semana[x].HoraInicial = NewIni;
+                                        ArrayC_Semana[x].HoraFinal = NewFin;
+                                        break;
+                                    }
                                 }
+                            } else { //Sino, lo agregamos, dado que se cambia el horario
+                                InsertJson_Day(editNumDia, "N", NewIni, NewFin);
                             }
-                        } else { //Sino, lo agregamos, dado que se cambia el horario
-                            InsertJson_Day(editNumDia, "N", NewIni, NewFin);
+                            break;
                         }
-                        break;
                     }
+                } else {
+                    Mensaje_General("Día NO Laboral", "No puedes modificar un horario para un día no laboral, únicamente los de los días laborales.", "W");
+                    break MODIFY;
                 }
-            } else {
-                Mensaje_General("Día NO Laboral", "No puedes modificar un horario para un día no laboral, únicamente los de los días laborales.", "W");
-                break MODIFY;
-            }
-        } else if (editNumDia == "5") { //Viernes
-            if (WorkFriday == true) {
-                for (i in MatrizFriday) {
-                    if (MatrizFriday[i].Index == editIndex) {
-                        MatrizFriday[i].IniVie = NewIni;
-                        MatrizFriday[i].FinVie = NewFin;
-                        if (editHoraIni != "0" || editHoraFin != "0") {//Validamos si habia sido guardado en el array de semana
-                            for (x in ArrayC_Semana) { //Cambiamos el Dato en la Matriz que guardará en la BD
-                                if (ArrayC_Semana[x].Dia == editNumDia && ArrayC_Semana[x].HoraInicial == editHoraIni && ArrayC_Semana[x].HoraFinal == editHoraFin) {
-                                    ArrayC_Semana[x].HoraInicial = NewIni;
-                                    ArrayC_Semana[x].HoraFinal = NewFin;
-                                    break;
+            } else if (editNumDia == "5") { //Viernes
+                if (WorkFriday == true) {
+                    for (i in MatrizFriday) {
+                        if (MatrizFriday[i].Index == editIndex) {
+                            MatrizFriday[i].IniVie = NewIni;
+                            MatrizFriday[i].FinVie = NewFin;
+                            if (editHoraIni != "0" || editHoraFin != "0") {//Validamos si habia sido guardado en el array de semana
+                                for (x in ArrayC_Semana) { //Cambiamos el Dato en la Matriz que guardará en la BD
+                                    if (ArrayC_Semana[x].Dia == editNumDia && ArrayC_Semana[x].HoraInicial == editHoraIni && ArrayC_Semana[x].HoraFinal == editHoraFin) {
+                                        ArrayC_Semana[x].HoraInicial = NewIni;
+                                        ArrayC_Semana[x].HoraFinal = NewFin;
+                                        break;
+                                    }
                                 }
+                            } else { //Sino, lo agregamos, dado que se cambia el horario
+                                InsertJson_Day(editNumDia, "N", NewIni, NewFin);
                             }
-                        } else { //Sino, lo agregamos, dado que se cambia el horario
-                            InsertJson_Day(editNumDia, "N", NewIni, NewFin);
+                            break;
                         }
-                        break;
                     }
+                } else {
+                    Mensaje_General("Día NO Laboral", "No puedes modificar un horario para un día no laboral, únicamente los de los días laborales.", "W");
+                    break MODIFY;
                 }
-            } else {
-                Mensaje_General("Día NO Laboral", "No puedes modificar un horario para un día no laboral, únicamente los de los días laborales.", "W");
-                break MODIFY;
-            }
-        } else if (editNumDia == "6") { //Sábado
-            if (WorkSaturday == true) {
-                for (i in MatrizSaturday) {
-                    if (MatrizSaturday[i].Index == editIndex) {
-                        MatrizSaturday[i].IniSab = NewIni;
-                        MatrizSaturday[i].FinSab = NewFin;
-                        if (editHoraIni != "0" || editHoraFin != "0") {//Validamos si habia sido guardado en el array de semana
-                            for (x in ArrayC_Semana) { //Cambiamos el Dato en la Matriz que guardará en la BD
-                                if (ArrayC_Semana[x].Dia == editNumDia && ArrayC_Semana[x].HoraInicial == editHoraIni && ArrayC_Semana[x].HoraFinal == editHoraFin) {
-                                    ArrayC_Semana[x].HoraInicial = NewIni;
-                                    ArrayC_Semana[x].HoraFinal = NewFin;
-                                    break;
+            } else if (editNumDia == "6") { //Sábado
+                if (WorkSaturday == true) {
+                    for (i in MatrizSaturday) {
+                        if (MatrizSaturday[i].Index == editIndex) {
+                            MatrizSaturday[i].IniSab = NewIni;
+                            MatrizSaturday[i].FinSab = NewFin;
+                            if (editHoraIni != "0" || editHoraFin != "0") {//Validamos si habia sido guardado en el array de semana
+                                for (x in ArrayC_Semana) { //Cambiamos el Dato en la Matriz que guardará en la BD
+                                    if (ArrayC_Semana[x].Dia == editNumDia && ArrayC_Semana[x].HoraInicial == editHoraIni && ArrayC_Semana[x].HoraFinal == editHoraFin) {
+                                        ArrayC_Semana[x].HoraInicial = NewIni;
+                                        ArrayC_Semana[x].HoraFinal = NewFin;
+                                        break;
+                                    }
                                 }
+                            } else { //Sino, lo agregamos, dado que se cambia el horario
+                                InsertJson_Day(editNumDia, "N", NewIni, NewFin);
                             }
-                        } else { //Sino, lo agregamos, dado que se cambia el horario
-                            InsertJson_Day(editNumDia, "N", NewIni, NewFin);
+                            break;
                         }
-                        break;
                     }
+                } else {
+                    Mensaje_General("Día NO Laboral", "No puedes modificar un horario para un día no laboral, únicamente los de los días laborales.", "W");
+                    break MODIFY;
                 }
-            } else {
-                Mensaje_General("Día NO Laboral", "No puedes modificar un horario para un día no laboral, únicamente los de los días laborales.", "W");
-                break MODIFY;
-            }
-        } else if (editNumDia == "7") { //Domingo
-            if (WorkSunday == true) {
-                for (i in MatrizSunday) {
-                    if (MatrizSunday[i].Index == editIndex) {
-                        MatrizSunday[i].IniDom = NewIni;
-                        MatrizSunday[i].FinDom = NewFin;
-                        if (editHoraIni != "0" || editHoraFin != "0") {//Validamos si habia sido guardado en el array de semana
-                            for (x in ArrayC_Semana) { //Cambiamos el Dato en la Matriz que guardará en la BD
-                                if (ArrayC_Semana[x].Dia == editNumDia && ArrayC_Semana[x].HoraInicial == editHoraIni && ArrayC_Semana[x].HoraFinal == editHoraFin) {
-                                    ArrayC_Semana[x].HoraInicial = NewIni;
-                                    ArrayC_Semana[x].HoraFinal = NewFin;
-                                    break;
+            } else if (editNumDia == "7") { //Domingo
+                if (WorkSunday == true) {
+                    for (i in MatrizSunday) {
+                        if (MatrizSunday[i].Index == editIndex) {
+                            MatrizSunday[i].IniDom = NewIni;
+                            MatrizSunday[i].FinDom = NewFin;
+                            if (editHoraIni != "0" || editHoraFin != "0") {//Validamos si habia sido guardado en el array de semana
+                                for (x in ArrayC_Semana) { //Cambiamos el Dato en la Matriz que guardará en la BD
+                                    if (ArrayC_Semana[x].Dia == editNumDia && ArrayC_Semana[x].HoraInicial == editHoraIni && ArrayC_Semana[x].HoraFinal == editHoraFin) {
+                                        ArrayC_Semana[x].HoraInicial = NewIni;
+                                        ArrayC_Semana[x].HoraFinal = NewFin;
+                                        break;
+                                    }
                                 }
+                            } else { //Sino, lo agregamos, dado que se cambia el horario
+                                InsertJson_Day(editNumDia, "N", NewIni, NewFin);
                             }
-                        } else { //Sino, lo agregamos, dado que se cambia el horario
-                            InsertJson_Day(editNumDia, "N", NewIni, NewFin);
+                            break;
                         }
-                        break;
                     }
+                } else {
+                    Mensaje_General("Día NO Laboral", "No puedes modificar un horario para un día no laboral, únicamente los de los días laborales.", "W");
+                    break MODIFY;
                 }
-            } else {
-                Mensaje_General("Día NO Laboral", "No puedes modificar un horario para un día no laboral, únicamente los de los días laborales.", "W");
-                break MODIFY;
             }
-        }
-        $("#Dialog_Edit_time").dialog("close");
-        break MODIFY;
-    } while (0);
-
+            $("#Dialog_Edit_time").dialog("close");
+            break MODIFY;
+        } while (0);
+    } catch (e) {
+        Mensaje_General("Error - No se logró Modificar", "Lo sentimos, ocurrió un error y no se logró Modificar correctamente el horarios, favor verifique los datos.", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario):\n" + e));
+    }
 }
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                              ELIMINAR HORARIOS DEL CALENDARIO                                                                                  ----*/
@@ -1942,172 +2014,176 @@ function DeleteHoraDia(IndexDia, numDia) {
 function DeleteArraysTime() {
     var NewIni = "0";
     var NewFin = "0";
-
-    MODIFY: do {
-        if (editNumDia == "1") { //Lunes
-            if (WorkMonday == true) {
-                for (i in MatrizMonday) {
-                    if (MatrizMonday[i].Index == editIndex) { //Cambiamos Matriz del Día
-                        MatrizMonday[i].IniLun = NewIni;
-                        MatrizMonday[i].FinLun = NewFin;
-                        if (editHoraIni != "0" || editHoraFin != "0") {//Validamos si habia sido guardado en el array de semana
-                            for (x in ArrayC_Semana) { //Cambiamos el Dato en la Matriz que guardará en la BD
-                                if (ArrayC_Semana[x].Dia == editNumDia && ArrayC_Semana[x].HoraInicial == editHoraIni && ArrayC_Semana[x].HoraFinal == editHoraFin) {
-                                    ArrayC_Semana.splice(x, 1);
-                                    break;
+    try {
+        MODIFY: do {
+            if (editNumDia == "1") { //Lunes
+                if (WorkMonday == true) {
+                    for (i in MatrizMonday) {
+                        if (MatrizMonday[i].Index == editIndex) { //Cambiamos Matriz del Día
+                            MatrizMonday[i].IniLun = NewIni;
+                            MatrizMonday[i].FinLun = NewFin;
+                            if (editHoraIni != "0" || editHoraFin != "0") {//Validamos si habia sido guardado en el array de semana
+                                for (x in ArrayC_Semana) { //Cambiamos el Dato en la Matriz que guardará en la BD
+                                    if (ArrayC_Semana[x].Dia == editNumDia && ArrayC_Semana[x].HoraInicial == editHoraIni && ArrayC_Semana[x].HoraFinal == editHoraFin) {
+                                        ArrayC_Semana.splice(x, 1);
+                                        break;
+                                    }
                                 }
+                            } else { //Sino, lo dejamos igual
+                                //No se hace nada, pues el dato no existe
                             }
-                        } else { //Sino, lo dejamos igual
-                            //No se hace nada, pues el dato no existe
+                            break;
                         }
-                        break;
                     }
+                } else {
+                    Mensaje_General("Día NO Laboral", "No puedes eliminar un horario para un día no laboral, únicamente los de los días laborales.", "W");
+                    break MODIFY;
                 }
-            } else {
-                Mensaje_General("Día NO Laboral", "No puedes eliminar un horario para un día no laboral, únicamente los de los días laborales.", "W");
-                break MODIFY;
-            }
-        } else if (editNumDia == "2") { //Martes
-            if (WorkTuesday == true) {
-                for (i in MatrizTuesday) {
-                    if (MatrizTuesday[i].Index == editIndex) {
-                        MatrizTuesday[i].IniMar = NewIni;
-                        MatrizTuesday[i].FinMar = NewFin;
-                        if (editHoraIni != "0" || editHoraFin != "0") {//Validamos si habia sido guardado en el array de semana
-                            for (x in ArrayC_Semana) { //Cambiamos el Dato en la Matriz que guardará en la BD
-                                if (ArrayC_Semana[x].Dia == editNumDia && ArrayC_Semana[x].HoraInicial == editHoraIni && ArrayC_Semana[x].HoraFinal == editHoraFin) {
-                                    ArrayC_Semana.splice(x, 1);
-                                    break;
+            } else if (editNumDia == "2") { //Martes
+                if (WorkTuesday == true) {
+                    for (i in MatrizTuesday) {
+                        if (MatrizTuesday[i].Index == editIndex) {
+                            MatrizTuesday[i].IniMar = NewIni;
+                            MatrizTuesday[i].FinMar = NewFin;
+                            if (editHoraIni != "0" || editHoraFin != "0") {//Validamos si habia sido guardado en el array de semana
+                                for (x in ArrayC_Semana) { //Cambiamos el Dato en la Matriz que guardará en la BD
+                                    if (ArrayC_Semana[x].Dia == editNumDia && ArrayC_Semana[x].HoraInicial == editHoraIni && ArrayC_Semana[x].HoraFinal == editHoraFin) {
+                                        ArrayC_Semana.splice(x, 1);
+                                        break;
+                                    }
                                 }
+                            } else { //Sino, lo dejamos igual
+                                //No se hace nada, pues el dato no existe
                             }
-                        } else { //Sino, lo dejamos igual
-                            //No se hace nada, pues el dato no existe
+                            break;
                         }
-                        break;
                     }
+                } else {
+                    Mensaje_General("Día NO Laboral", "No puedes eliminar un horario para un día no laboral, únicamente los de los días laborales.", "W");
+                    break MODIFY;
                 }
-            } else {
-                Mensaje_General("Día NO Laboral", "No puedes eliminar un horario para un día no laboral, únicamente los de los días laborales.", "W");
-                break MODIFY;
-            }
-        } else if (editNumDia == "3") { //Miércoles
-            if (WorkWednesday == true) {
-                for (i in MatrizWednesday) {
-                    if (MatrizWednesday[i].Index == editIndex) {
-                        MatrizWednesday[i].IniMie = NewIni;
-                        MatrizWednesday[i].FinMie = NewFin;
-                        if (editHoraIni != "0" || editHoraFin != "0") {//Validamos si habia sido guardado en el array de semana
-                            for (x in ArrayC_Semana) { //Cambiamos el Dato en la Matriz que guardará en la BD
-                                if (ArrayC_Semana[x].Dia == editNumDia && ArrayC_Semana[x].HoraInicial == editHoraIni && ArrayC_Semana[x].HoraFinal == editHoraFin) {
-                                    ArrayC_Semana.splice(x, 1);
-                                    break;
+            } else if (editNumDia == "3") { //Miércoles
+                if (WorkWednesday == true) {
+                    for (i in MatrizWednesday) {
+                        if (MatrizWednesday[i].Index == editIndex) {
+                            MatrizWednesday[i].IniMie = NewIni;
+                            MatrizWednesday[i].FinMie = NewFin;
+                            if (editHoraIni != "0" || editHoraFin != "0") {//Validamos si habia sido guardado en el array de semana
+                                for (x in ArrayC_Semana) { //Cambiamos el Dato en la Matriz que guardará en la BD
+                                    if (ArrayC_Semana[x].Dia == editNumDia && ArrayC_Semana[x].HoraInicial == editHoraIni && ArrayC_Semana[x].HoraFinal == editHoraFin) {
+                                        ArrayC_Semana.splice(x, 1);
+                                        break;
+                                    }
                                 }
+                            } else { //Sino, lo dejamos igual
+                                //No se hace nada, pues el dato no existe
                             }
-                        } else { //Sino, lo dejamos igual
-                            //No se hace nada, pues el dato no existe
+                            break;
                         }
-                        break;
                     }
+                } else {
+                    Mensaje_General("Día NO Laboral", "No puedes eliminar un horario para un día no laboral, únicamente los de los días laborales.", "W");
+                    break MODIFY;
                 }
-            } else {
-                Mensaje_General("Día NO Laboral", "No puedes eliminar un horario para un día no laboral, únicamente los de los días laborales.", "W");
-                break MODIFY;
-            }
-        } else if (editNumDia == "4") { //Jueves
-            if (WorkThursday == true) {
-                for (i in MatrizThursday) {
-                    if (MatrizThursday[i].Index == editIndex) {
-                        MatrizThursday[i].IniJue = NewIni;
-                        MatrizThursday[i].FinJue = NewFin;
-                        if (editHoraIni != "0" || editHoraFin != "0") {//Validamos si habia sido guardado en el array de semana
-                            for (x in ArrayC_Semana) { //Cambiamos el Dato en la Matriz que guardará en la BD
-                                if (ArrayC_Semana[x].Dia == editNumDia && ArrayC_Semana[x].HoraInicial == editHoraIni && ArrayC_Semana[x].HoraFinal == editHoraFin) {
-                                    ArrayC_Semana.splice(x, 1);
-                                    break;
+            } else if (editNumDia == "4") { //Jueves
+                if (WorkThursday == true) {
+                    for (i in MatrizThursday) {
+                        if (MatrizThursday[i].Index == editIndex) {
+                            MatrizThursday[i].IniJue = NewIni;
+                            MatrizThursday[i].FinJue = NewFin;
+                            if (editHoraIni != "0" || editHoraFin != "0") {//Validamos si habia sido guardado en el array de semana
+                                for (x in ArrayC_Semana) { //Cambiamos el Dato en la Matriz que guardará en la BD
+                                    if (ArrayC_Semana[x].Dia == editNumDia && ArrayC_Semana[x].HoraInicial == editHoraIni && ArrayC_Semana[x].HoraFinal == editHoraFin) {
+                                        ArrayC_Semana.splice(x, 1);
+                                        break;
+                                    }
                                 }
+                            } else { //Sino, lo dejamos igual
+                                //No se hace nada, pues el dato no existe
                             }
-                        } else { //Sino, lo dejamos igual
-                            //No se hace nada, pues el dato no existe
+                            break;
                         }
-                        break;
                     }
+                } else {
+                    Mensaje_General("Día NO Laboral", "No puedes eliminar un horario para un día no laboral, únicamente los de los días laborales.", "W");
+                    break MODIFY;
                 }
-            } else {
-                Mensaje_General("Día NO Laboral", "No puedes eliminar un horario para un día no laboral, únicamente los de los días laborales.", "W");
-                break MODIFY;
-            }
-        } else if (editNumDia == "5") { //Viernes
-            if (WorkFriday == true) {
-                for (i in MatrizFriday) {
-                    if (MatrizFriday[i].Index == editIndex) {
-                        MatrizFriday[i].IniVie = NewIni;
-                        MatrizFriday[i].FinVie = NewFin;
-                        if (editHoraIni != "0" || editHoraFin != "0") {//Validamos si habia sido guardado en el array de semana
-                            for (x in ArrayC_Semana) { //Cambiamos el Dato en la Matriz que guardará en la BD
-                                if (ArrayC_Semana[x].Dia == editNumDia && ArrayC_Semana[x].HoraInicial == editHoraIni && ArrayC_Semana[x].HoraFinal == editHoraFin) {
-                                    ArrayC_Semana.splice(x, 1);
-                                    break;
+            } else if (editNumDia == "5") { //Viernes
+                if (WorkFriday == true) {
+                    for (i in MatrizFriday) {
+                        if (MatrizFriday[i].Index == editIndex) {
+                            MatrizFriday[i].IniVie = NewIni;
+                            MatrizFriday[i].FinVie = NewFin;
+                            if (editHoraIni != "0" || editHoraFin != "0") {//Validamos si habia sido guardado en el array de semana
+                                for (x in ArrayC_Semana) { //Cambiamos el Dato en la Matriz que guardará en la BD
+                                    if (ArrayC_Semana[x].Dia == editNumDia && ArrayC_Semana[x].HoraInicial == editHoraIni && ArrayC_Semana[x].HoraFinal == editHoraFin) {
+                                        ArrayC_Semana.splice(x, 1);
+                                        break;
+                                    }
                                 }
+                            } else { //Sino, lo dejamos igual
+                                //No se hace nada, pues el dato no existe
                             }
-                        } else { //Sino, lo dejamos igual
-                            //No se hace nada, pues el dato no existe
+                            break;
                         }
-                        break;
                     }
+                } else {
+                    Mensaje_General("Día NO Laboral", "No puedes eliminar un horario para un día no laboral, únicamente los de los días laborales.", "W");
+                    break MODIFY;
                 }
-            } else {
-                Mensaje_General("Día NO Laboral", "No puedes eliminar un horario para un día no laboral, únicamente los de los días laborales.", "W");
-                break MODIFY;
-            }
-        } else if (editNumDia == "6") { //Sábado
-            if (WorkSaturday == true) {
-                for (i in MatrizSaturday) {
-                    if (MatrizSaturday[i].Index == editIndex) {
-                        MatrizSaturday[i].IniSab = NewIni;
-                        MatrizSaturday[i].FinSab = NewFin;
-                        if (editHoraIni != "0" || editHoraFin != "0") {//Validamos si habia sido guardado en el array de semana
-                            for (x in ArrayC_Semana) { //Cambiamos el Dato en la Matriz que guardará en la BD
-                                if (ArrayC_Semana[x].Dia == editNumDia && ArrayC_Semana[x].HoraInicial == editHoraIni && ArrayC_Semana[x].HoraFinal == editHoraFin) {
-                                    ArrayC_Semana.splice(x, 1);
-                                    break;
+            } else if (editNumDia == "6") { //Sábado
+                if (WorkSaturday == true) {
+                    for (i in MatrizSaturday) {
+                        if (MatrizSaturday[i].Index == editIndex) {
+                            MatrizSaturday[i].IniSab = NewIni;
+                            MatrizSaturday[i].FinSab = NewFin;
+                            if (editHoraIni != "0" || editHoraFin != "0") {//Validamos si habia sido guardado en el array de semana
+                                for (x in ArrayC_Semana) { //Cambiamos el Dato en la Matriz que guardará en la BD
+                                    if (ArrayC_Semana[x].Dia == editNumDia && ArrayC_Semana[x].HoraInicial == editHoraIni && ArrayC_Semana[x].HoraFinal == editHoraFin) {
+                                        ArrayC_Semana.splice(x, 1);
+                                        break;
+                                    }
                                 }
+                            } else { //Sino, lo dejamos igual
+                                //No se hace nada, pues el dato no existe
                             }
-                        } else { //Sino, lo dejamos igual
-                            //No se hace nada, pues el dato no existe
+                            break;
                         }
-                        break;
                     }
+                } else {
+                    Mensaje_General("Día NO Laboral", "No puedes eliminar un horario para un día no laboral, únicamente los de los días laborales.", "W");
+                    break MODIFY;
                 }
-            } else {
-                Mensaje_General("Día NO Laboral", "No puedes eliminar un horario para un día no laboral, únicamente los de los días laborales.", "W");
-                break MODIFY;
-            }
-        } else if (editNumDia == "7") { //Domingo
-            if (WorkSunday == true) {
-                for (i in MatrizSunday) {
-                    if (MatrizSunday[i].Index == editIndex) {
-                        MatrizSunday[i].IniDom = NewIni;
-                        MatrizSunday[i].FinDom = NewFin;
-                        if (editHoraIni != "0" || editHoraFin != "0") {//Validamos si habia sido guardado en el array de semana
-                            for (x in ArrayC_Semana) { //Cambiamos el Dato en la Matriz que guardará en la BD
-                                if (ArrayC_Semana[x].Dia == editNumDia && ArrayC_Semana[x].HoraInicial == editHoraIni && ArrayC_Semana[x].HoraFinal == editHoraFin) {
-                                    ArrayC_Semana.splice(x, 1);
-                                    break;
+            } else if (editNumDia == "7") { //Domingo
+                if (WorkSunday == true) {
+                    for (i in MatrizSunday) {
+                        if (MatrizSunday[i].Index == editIndex) {
+                            MatrizSunday[i].IniDom = NewIni;
+                            MatrizSunday[i].FinDom = NewFin;
+                            if (editHoraIni != "0" || editHoraFin != "0") {//Validamos si habia sido guardado en el array de semana
+                                for (x in ArrayC_Semana) { //Cambiamos el Dato en la Matriz que guardará en la BD
+                                    if (ArrayC_Semana[x].Dia == editNumDia && ArrayC_Semana[x].HoraInicial == editHoraIni && ArrayC_Semana[x].HoraFinal == editHoraFin) {
+                                        ArrayC_Semana.splice(x, 1);
+                                        break;
+                                    }
                                 }
+                            } else { //Sino, lo dejamos igual
+                                //No se hace nada, pues el dato no existe
                             }
-                        } else { //Sino, lo dejamos igual
-                            //No se hace nada, pues el dato no existe
+                            break;
                         }
-                        break;
                     }
+                } else {
+                    Mensaje_General("Día NO Laboral", "No puedes eliminar un horario para un día no laboral, únicamente los de los días laborales.", "W");
+                    break MODIFY;
                 }
-            } else {
-                Mensaje_General("Día NO Laboral", "No puedes eliminar un horario para un día no laboral, únicamente los de los días laborales.", "W");
-                break MODIFY;
             }
-        }
-        break MODIFY;
-    } while (0);
+            break MODIFY;
+        } while (0);
+    } catch (e) {
+        Mensaje_General("Error - No se logró eliminar", "Lo sentimos, ocurrió un error y no se logró eliminar correctamente el horario solicitado, favor verificar los datos.", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario):\n" + e));
+    }
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -2135,60 +2211,58 @@ function Clear_Agregar() {
 
 // crea la tabla de consulta
 function Table_Calendario() {
+    try {
+        var html_TableCalendario = "";
+        $(".container_TGrid").html("");
 
-    var html_TableCalendario = "";
-    $(".container_TGrid").html("");
+        switch (estado) {
 
-    switch (estado) {
-
-        case "buscar":
-            html_TableCalendario = "<table id='TCalendario' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>NIT Empresa</th><th>Código</th><th>Descripción</th><th>Tipo Calendario</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Actualización</th></tr></thead><tbody>";
-            for (itemArray in ArrayCalendario) {
-                if (ArrayCalendario[itemArray].Calendario_ID != 0) {
-                    html_TableCalendario += "<tr id= 'TCalendario_" + ArrayCalendario[itemArray].Calendario_ID + "'><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].Nit_ID + " - " + ArrayCalendario[itemArray].DescripEmpresa + "</td><td>" + ArrayCalendario[itemArray].Calendario_ID + "</td><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].Descripcion + "</td><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].TipoCalendario + " - " + ArrayCalendario[itemArray].DescripTipoCalendario + "</td><td>" + ArrayCalendario[itemArray].UsuarioCreacion + "</td><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].FechaCreacion + "</td><td>" + ArrayCalendario[itemArray].UsuarioActualizacion + "</td><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].FechaActualizacion + "</td></tr>";
+            case "buscar":
+                html_TableCalendario = "<table id='TCalendario' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>NIT Empresa</th><th>Código</th><th>Descripción</th><th>Tipo Calendario</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Actualización</th></tr></thead><tbody>";
+                for (itemArray in ArrayCalendario) {
+                    if (ArrayCalendario[itemArray].Calendario_ID != 0) {
+                        html_TableCalendario += "<tr id= 'TCalendario_" + ArrayCalendario[itemArray].Calendario_ID + "'><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].Nit_ID + " - " + ArrayCalendario[itemArray].DescripEmpresa + "</td><td>" + ArrayCalendario[itemArray].Calendario_ID + "</td><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].Descripcion + "</td><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].TipoCalendario + " - " + ArrayCalendario[itemArray].DescripTipoCalendario + "</td><td>" + ArrayCalendario[itemArray].UsuarioCreacion + "</td><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].FechaCreacion + "</td><td>" + ArrayCalendario[itemArray].UsuarioActualizacion + "</td><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].FechaActualizacion + "</td></tr>";
+                    }
                 }
-            }
-            break;
+                break;
 
-        case "modificar":
-            html_TableCalendario = "<table id='TCalendario' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>NIT Empresa</th><th>Código</th><th>Descripción</th><th>Tipo Calendario</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Actualización</th></tr></thead><tbody>";
-            for (itemArray in ArrayCalendario) {
-                if (ArrayCalendario[itemArray].Calendario_ID != 0) {
-                    html_TableCalendario += "<tr id= 'TCalendario_" + ArrayCalendario[itemArray].Calendario_ID + "'><td><span class='cssToolTip_ver'><img src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + ArrayCalendario[itemArray].Nit_ID + "','" + ArrayCalendario[itemArray].Calendario_ID + "')\"></img><span>Editar Calendario</span></span></td><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].Nit_ID + " - " + ArrayCalendario[itemArray].DescripEmpresa + "</td><td>" + ArrayCalendario[itemArray].Calendario_ID + "</td><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].Descripcion + "</td><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].TipoCalendario + " - " + ArrayCalendario[itemArray].DescripTipoCalendario + "</td><td>" + ArrayCalendario[itemArray].UsuarioCreacion + "</td><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].FechaCreacion + "</td><td>" + ArrayCalendario[itemArray].UsuarioActualizacion + "</td><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].FechaActualizacion + "</td></tr>";
+            case "modificar":
+                html_TableCalendario = "<table id='TCalendario' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>NIT Empresa</th><th>Código</th><th>Descripción</th><th>Tipo Calendario</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Actualización</th></tr></thead><tbody>";
+                for (itemArray in ArrayCalendario) {
+                    if (ArrayCalendario[itemArray].Calendario_ID != 0) {
+                        html_TableCalendario += "<tr id= 'TCalendario_" + ArrayCalendario[itemArray].Calendario_ID + "'><td><span class='cssToolTip_ver'><img src='../../images/Editar1.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/EditarOver.png';\" onmouseout=\"this.src='../../images/Editar1.png';\" onclick=\"Editar('" + ArrayCalendario[itemArray].Nit_ID + "','" + ArrayCalendario[itemArray].Calendario_ID + "')\"></img><span>Editar Calendario</span></span></td><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].Nit_ID + " - " + ArrayCalendario[itemArray].DescripEmpresa + "</td><td>" + ArrayCalendario[itemArray].Calendario_ID + "</td><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].Descripcion + "</td><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].TipoCalendario + " - " + ArrayCalendario[itemArray].DescripTipoCalendario + "</td><td>" + ArrayCalendario[itemArray].UsuarioCreacion + "</td><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].FechaCreacion + "</td><td>" + ArrayCalendario[itemArray].UsuarioActualizacion + "</td><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].FechaActualizacion + "</td></tr>";
+                    }
                 }
-            }
-            break;
+                break;
 
-        case "eliminar":
-            html_TableCalendario = "<table id='TCalendario' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>NIT Empresa</th><th>Código</th><th>Descripción</th><th>Tipo Calendario</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Actualización</th></tr></thead><tbody>";
-            for (itemArray in ArrayCalendario) {
-                if (ArrayCalendario[itemArray].Calendario_ID != 0) {
-                    html_TableCalendario += "<tr id= 'TCalendario_" + ArrayCalendario[itemArray].Calendario_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArrayCalendario[itemArray].Nit_ID + "','" + ArrayCalendario[itemArray].Calendario_ID + "')\"></img><span>Eliminar Calendario</span></span></td><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].Nit_ID + " - " + ArrayCalendario[itemArray].DescripEmpresa + "</td><td>" + ArrayCalendario[itemArray].Calendario_ID + "</td><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].Descripcion + "</td><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].TipoCalendario + " - " + ArrayCalendario[itemArray].DescripTipoCalendario + "</td><td>" + ArrayCalendario[itemArray].UsuarioCreacion + "</td><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].FechaCreacion + "</td><td>" + ArrayCalendario[itemArray].UsuarioActualizacion + "</td><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].FechaActualizacion + "</td></tr>";
+            case "eliminar":
+                html_TableCalendario = "<table id='TCalendario' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>NIT Empresa</th><th>Código</th><th>Descripción</th><th>Tipo Calendario</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Actualización</th></tr></thead><tbody>";
+                for (itemArray in ArrayCalendario) {
+                    if (ArrayCalendario[itemArray].Calendario_ID != 0) {
+                        html_TableCalendario += "<tr id= 'TCalendario_" + ArrayCalendario[itemArray].Calendario_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArrayCalendario[itemArray].Nit_ID + "','" + ArrayCalendario[itemArray].Calendario_ID + "')\"></img><span>Eliminar Calendario</span></span></td><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].Nit_ID + " - " + ArrayCalendario[itemArray].DescripEmpresa + "</td><td>" + ArrayCalendario[itemArray].Calendario_ID + "</td><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].Descripcion + "</td><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].TipoCalendario + " - " + ArrayCalendario[itemArray].DescripTipoCalendario + "</td><td>" + ArrayCalendario[itemArray].UsuarioCreacion + "</td><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].FechaCreacion + "</td><td>" + ArrayCalendario[itemArray].UsuarioActualizacion + "</td><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].FechaActualizacion + "</td></tr>";
+                    }
                 }
-            }
-            break;
+                break;
+        }
+
+        html_TableCalendario += "</tbody></table>";
+        $(".container_TGrid").html("");
+        $(".container_TGrid").html(html_TableCalendario);
+
+        $("#TCalendario").dataTable({
+            "bJQueryUI": true,
+            "iDisplayLength": 1000,
+            "bDestroy": true
+        });
+    } catch (e) {
+        Mensaje_General("Error - No se logró DIbujar tabla", "Lo sentimos, ocurrió un error y no se logró dibujar correctamente la información solicitada.", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario):\n" + e));
     }
-
-    html_TableCalendario += "</tbody></table>";
-    $(".container_TGrid").html("");
-    $(".container_TGrid").html(html_TableCalendario);
-
-    $(".Eliminar").click(function () {
-    });
-
-    $(".Editar").click(function () {
-    });
-
-    $("#TCalendario").dataTable({
-        "bJQueryUI": true,
-        "iDisplayLength": 1000,
-        "bDestroy": true
-    });
 }
 
 //muestra el registro a eliminar
 function Eliminar(index_Nit, index_Calendario) {
-
+    try{
     for (itemArray in ArrayCalendario) {
         if (index_Nit == ArrayCalendario[itemArray].Nit_ID && index_Calendario == ArrayCalendario[itemArray].Calendario_ID) {
             editNit_ID = ArrayCalendario[itemArray].Nit_ID;
@@ -2198,11 +2272,15 @@ function Eliminar(index_Nit, index_Calendario) {
             $("#dialog_eliminar").dialog("open");
         }
     }
-
+    } catch (e) {
+        Mensaje_General("Error - No se logró ejecutar la acción", "Lo sentimos, ocurrió un error y no se logró desplegar correctamente el dialogo de eliminación.", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario):\n" + e));
+    }
 }
 
 // muestra el registro a editar
 function Editar(index_Nit, index_Calendario) {
+    try{
     $(".Dialog_Datos_Calen").css("display", "inline-table");
     $("#TablaConsulta").css("display", "none");
     $("#Dialog_Calendar").dialog("open");
@@ -2235,17 +2313,15 @@ function Editar(index_Nit, index_Calendario) {
     }
 
     ArmarMatricesDias();
-
-}
-
-//funcion de carga de la dependecia para edicion
-function ChargeDependencia(index) {
-    $('#Select_CalendarioDepent').val(index);
-    $('.C_Chosen').trigger('chosen:updated');
+    } catch (e) {
+        Mensaje_General("Error - No se logró ejecutar la acción", "Lo sentimos, ocurrió un error y no se logró ejecutar correctamente la acción solicitada.", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario):\n" + e));
+    }
 }
 
 //limpiar campos
 function Clear() {
+    try{
     ClearArraySemana();
 
     MensajeHora = "";
@@ -2270,6 +2346,10 @@ function Clear() {
 
     if (Only_Empresa == true) {
         $("#Txt_ID").prop('disabled', false);
+    }
+    } catch (e) {
+        Mensaje_General("Error - No se logró ejecutar la acción", "Lo sentimos, ocurrió un error y no se logró limpiar todos los campos correctamente.", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario):\n" + e));
     }
 }
 
@@ -2377,6 +2457,7 @@ function VerifyTextDescription(value) {
 
 //Función encargada de filtrar el array semana traido de la BD y cargar las respectivas matrices de los días
 function ArmarMatricesDias() {
+    try{
     var Lun = 0;
     var Mar = 0;
     var Mie = 0;
@@ -2550,10 +2631,15 @@ function ArmarMatricesDias() {
     CargarMatricesHorarios();
     Lineas = Mayor;
     $(".container_TGrid_Create").css("display", "inline-table"); //Tabla que dibuja el grid con las horas ya capturadas
+    } catch (e) {
+        Mensaje_General("Error - No se logró ejecutar la acción", "Lo sentimos, ocurrió un error y no se logró armar correctamente los datos necesarios para los días.", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario):\n" + e));
+    }
 }
 
 //Función que completa las matrices de los días en función con un número al que deben estar
 function RellenarMatrices(numMax) {
+    try{
     var index = 0;
     //Lunes
     if (MatrizMonday.length < numMax) {
@@ -2652,6 +2738,10 @@ function RellenarMatrices(numMax) {
             MatrizSunday.push(JSONDay);
 
         }
+    }
+    } catch (e) {
+        Mensaje_General("Error - No se logró ejecutar la acción", "Lo sentimos, ocurrió un error y no se logró trasladar la información correctamente.", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario):\n" + e));
     }
 }
 
