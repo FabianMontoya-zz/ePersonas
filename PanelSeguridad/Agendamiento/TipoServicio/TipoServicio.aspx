@@ -104,9 +104,9 @@
                     </table>
                     <table id="Tabla_NIT" style="width: 100%; text-align: left;">
                         <tr>
-                            <td style="width: 14.5%;" class="Label_Bold">NIT Empresa
+                            <td style="width: 13.5%;" class="Label_Bold">NIT Empresa
                             </td>
-                            <td style="width: 47%;">
+                            <td style="width: 49%;">
                                 <select id="Select_EmpresaNit" style="width: 100%;" class="C_Chosen">
                                 </select>
                             </td>
@@ -120,27 +120,27 @@
                     </table>                    
                     <table id="Tabla_Identificacion" style="width: 100%; text-align: left;">
                         <tr>
-                            <td style="width: 14.5%;" class="Label_Bold">Código
+                            <td style="width: 13.5%;" class="Label_Bold">Código
                             </td>
-                            <td style="width: 15%;">
+                            <td style="width: 10%;">
                                 <span class="cssToolTip_Form">
-                                    <input type="text" id="Txt_ID" maxlength="5" class="Numeric" />
+                                    <input type="text" id="Txt_ID" maxlength="5" class="Numeric" onkeypress="return OnlyNumbers(event);" style="width: 100%;"/>
                                     <span class="Spam_AN"></span></span>
                             </td>
-                            <td style="padding-bottom: 25px; width: 21%;">
+                            <td style="padding-bottom: 25px; width: 29.5%;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img2"
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
-                            <td class="Label_Bold" style="width: 10%;">Nombre
+                            <td class="Label_Bold" style="width: 8%;">Nombre
                             </td>
-                            <td style="width: 35%;">
+                            <td style="width: 30%;">
                                 <span class="cssToolTip_Form">
-                                    <input type="text" id="TxtNombre" maxlength="50" style="width: 200px;" />
+                                    <input type="text" id="TxtNombre" maxlength="50" style="width: 100%;"/>
                                     <span class="Spam_AST"></span></span>
                             </td>
-                            <td style="width: 15%; padding-bottom: 25px;">
+                            <td style="width: 10%; padding-bottom: 25px;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img3"
                                         src="../../images/error.png" />
@@ -148,11 +148,11 @@
                             </td>
                         </tr>
                     </table>
-                    <table id="Tabla_3" style="width: 900px; text-align: left;">
+                    <table id="T_TipoService_Referencia" style="width: 100%; text-align: left;">
                         <tr>
-                            <td style="width: 190px;" class="Label_Bold">Tipo Servicio
+                            <td style="width: 11.8%;" class="Label_Bold">Tipo Servicio
                             </td>
-                            <td style="width: 200px;">
+                            <td style="width: 24%;">
                                 <%-- Estos están inscritos en la tabla M_Seguridad -> TC_DDL_TIPO para las consultas --%>
                                 <%-- Si se modifican se debe cambiar también en esa tabla, en todas las BD --%>
                                 <select id="Select_TipoServicio" style="width: 230px;" class="C_Chosen">
@@ -164,20 +164,20 @@
                                     <option value="5">5 - Otros</option>
                                 </select>
                             </td>
-                            <td style="padding-bottom: 25px; width: 300px;">
+                            <td style="padding-bottom: 25px; width: 10%;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img5"
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
-                            <td style="width: 198px;" class="Label_Bold">Referecia
+                            <td style="width: 7.5%;" class="Label_Bold">Referecia
                             </td>
-                            <td style="width: 100px;">
+                            <td style="width: 15%;">
                                 <span class="cssToolTip_Form">
-                                    <input type="text" id="Text_Referencia" style="width: 70px;" />
+                                    <input type="text" id="Text_Referencia" style="width: 100%;" />
                                     <span class="Spam_AN"></span></span>
                             </td>
-                            <td style="padding-bottom: 25px; width: 100px;">
+                            <td style="padding-bottom: 25px; width: 18.7%;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img6"
                                         src="../../images/error.png" />
@@ -192,15 +192,15 @@
                             </td>
                         </tr>
                     </table>
-                    <table id="Table_Moneda" style="width: 700px; text-align: left;">
+                    <table id="T_Moneda" style="width: 100%; text-align: left;">
                         <tr>
-                            <td style="width: 148px;" class="Label_Bold">Moneda
+                            <td style="width: 13.5%;" class="Label_Bold">Moneda
                             </td>
-                            <td>
+                            <td style="width: 49%;">
                                 <select id="Select_Moneda_Cod" class="C_Chosen">
                                 </select>
                             </td>
-                            <td style="padding-bottom: 25px; width: 250px;">
+                            <td style="padding-bottom: 25px; width: 60%;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img7"
                                         src="../../images/error.png" />
@@ -215,7 +215,7 @@
                             <td id="V_Sigla_1" style="width: 5%" class="Sigla"></td>
                             <td style="width: 9.8%;">
                                 <span class="cssToolTip_Form">
-                                    <input type="text" id="TxtCosto" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ Mensaje_General('Atencion!', 'Solo se permiten numeros.' , 'W'); }" />
+                                    <input type="text" id="TxtCosto" maxlength="21" onkeyup="ValidaDecimales(this, this.value);" onkeypress="return DecimalNumber(event);"/>
                                     <span class="Spam_AVal"></span></span>
                             </td>
                             <td style="padding-bottom: 25px; width: 235px;">

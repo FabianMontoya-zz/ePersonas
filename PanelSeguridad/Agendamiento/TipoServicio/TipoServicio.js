@@ -23,7 +23,7 @@ var StrConsecutivo;
 
 //Evento load JS
 $(document).ready(function () {
-       
+
     /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
     Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
     Ocultar_Errores();
@@ -106,6 +106,38 @@ function Ocultar_Tablas() {
     $(".Dialog_Datos").css("display", "none");
 }
 
+function ValidaDecimales(input, val) {
+    try{
+        var decimal = false;
+        var value = val;
+        var splitValue = value.split(",");
+        console.log("Value: " + value);
+        console.log("Split: " + splitValue);
+    
+        if (splitValue.length <= 2) {
+            if (splitValue.length == 2) {
+                if (splitValue[1].length <= 2) {
+
+                } else {
+                    Mensaje_General("Decimal No valido", "Solo se permiten dos números despues de la coma decimal, favor verifique el dato.", "E");
+                    value = value.substring(0, value.length - 1);
+                    $(input).val(value);
+                }
+            }
+        } else {
+            value = value.replace(",", "");
+            $(input).val(value);
+            Mensaje_General("Decimal No valido", "El campo solo admite números decimales validos EJ: « 1234,56 » , favor verifique la entrada.", "E");        
+        }
+
+
+        return decimal;
+    } catch (e) {
+        Mensaje_General("Error - Validación Dato Decimal", "Lo sentimos, ocurrió un error y no se logró verificar si el número es o no valido, el campo se limpiará.", "E");
+        $(input).val("");
+        setTimeout(console.error.bind(console, "• Log de error generado (TipoServicio):\n" + e));
+    }
+}
 
 //carga el combo de Cargo dependiente
 function Change_Select_Nit() {
@@ -201,7 +233,7 @@ function BuscarFormato(vp_Formato) {
         if (Matrix_Documento[item].DescripFormato == "JPG")
             vl_ID_Doc = Matrix_Documento[item].Documento_ID;
     }
-    
+
     var vl_StrFormato = "1";
 
     for (item in Matrix_Documento) {
