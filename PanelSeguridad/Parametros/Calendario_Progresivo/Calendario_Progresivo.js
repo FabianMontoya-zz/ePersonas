@@ -74,7 +74,6 @@ function Ventanas_Emergentes() {
 
     Load_Charge_Sasif(); //Carga de "SasifMaster.js" el Control de Carga
 
-    //funcion para las ventanas emergentes
     $("#dialog").dialog({
         autoOpen: false,
         dialogClass: "Dialog_Sasif",
@@ -281,9 +280,7 @@ function BtnConsulta() {
         var filtro;
         var ValidateSelect = ValidarDroplist();
         var opcion;
-
-        OpenControl();
-
+        
         if (ValidateSelect == 1) {
             filtro = "N";
             opcion = "ALL";
@@ -332,7 +329,6 @@ function BtnCrear() {
 //elimina de la BD
 function BtnElimina() {
     try {
-        OpenControl();
         transacionAjax_Calendario_delete("elimina");
     } catch (e) {
         Mensaje_General("Error - No se logró eliminar", "Lo sentimos, ocurrió un error y no se logró completar operación de eliminación del calendario, favor verifique los datos.", "E");

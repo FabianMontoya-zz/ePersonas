@@ -323,7 +323,6 @@ function transacionAjax_Calendario_delete(State) {
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_ArrayC_Semana(State) {
     try {
-        //OpenControl();
         var Index_Calendar = $("#Select_Calendario_CP").val();
         var ID_Calendar = "";
         var Nit_ID = "";

@@ -123,7 +123,7 @@ function transacionAjax_ConsultCalendario(State, filtro, opcion) {
                 "filtro": filtro,
                 "opcion": opcion,
                 "contenido": contenido,
-                "TipoCalendario": "N",
+                "TipoCalendario": "1",
                 "Nit_User": g_NitEmpresa_User
             },
             //Transaccion Ajax en proceso
