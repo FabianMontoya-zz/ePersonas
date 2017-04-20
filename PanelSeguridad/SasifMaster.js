@@ -46,7 +46,7 @@ D_Semana[6] = "Sábado";
 /*--------------- region de variables globales --------------------*/
 
 $(document).ready(function () {
-    clearConsole();
+    //clearConsole();
     fecha();
 
     $(".C_Chosen").chosen({
@@ -365,7 +365,12 @@ function btnSalir() {
 
 //Función que genera el evento del botón salir de los dialog de información --FABIAN
 function x() {
-    $("#dialog").dialog("close");
+    try {
+        $("#dialog").dialog("close");
+    } catch (e) {
+        setTimeout(console.error.bind(console, "• Log de error generado (SasifMaster.x):\n" + e));
+        return false;
+    }
 }
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                 INICIO DE PROCESOS                                                                                                            ----*/

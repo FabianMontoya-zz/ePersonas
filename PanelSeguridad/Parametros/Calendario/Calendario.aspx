@@ -22,7 +22,17 @@
     <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/Dialog/datepicker.js" type="text/javascript"></script>
     <script src="../../Scripts/Dialog/timepicker.js" type="text/javascript"></script>
-
+    <script type="text/javascript">
+        //evento del boton salir
+        function x() {
+            try {
+                $("#dialog").dialog("close");
+            } catch (e) {
+                setTimeout(console.error.bind(console, "• Log de error generado (Calendarioaspx.x):\n" + e));
+                return false;
+            }
+        }
+   </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
     
@@ -401,7 +411,7 @@
                     </tr>
                     <tr>
                         <td colspan="20" align="center">
-                            <input id="BtnAgregar" type="button" value="Agregar" onclick="BtnAgregaCalendario();" style="cursor: pointer; cursor: hand;" />
+                            <input id="BtnAgregar" type="button" value="Adicionar" onclick="BtnAgregaCalendario();" style="cursor: pointer; cursor: hand;" />
                         </td>
                     </tr>
                 </tbody>
