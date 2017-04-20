@@ -62,7 +62,7 @@ $(document).ready(function () {
     $('.Decimal').keyup(function () {
         this.value = (this.value + '').replace(/[^0-9\,]/g, '');
     });
-    
+
     $('.Letter').keyup(function () {
         this.value = (this.value + '').replace(/[^a-zA-Z\s\ñ\Ñ\ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç]+/g, '');
     });
@@ -85,24 +85,29 @@ $(document).ready(function () {
 
 //Función que da los parametros para que el datepicker se inicie por defecto en español
 function StartDatepicker() {
-    $.datepicker.regional['es'] = {
-        closeText: 'Cerrar',
-        prevText: 'Anterior',
-        nextText: 'Siguiente',
-        currentText: 'Hoy',
-        monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-        monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-        dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-        dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
-        dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
-        weekHeader: 'Sm',
-        dateFormat: 'dd/mm/yy',
-        firstDay: 0,
-        isRTL: false,
-        showMonthAfterYear: false,
-        yearSuffix: ''
-    };
-    $.datepicker.setDefaults($.datepicker.regional['es']);
+    try {
+        $.datepicker.regional['es'] = {
+            closeText: 'Cerrar',
+            prevText: '< Anterior',
+            nextText: 'Siguiente >',
+            currentText: 'Hoy',
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
+            dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+            weekHeader: 'Sm',
+            dateFormat: 'dd/mm/yy',
+            firstDay: 0,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: ''
+        };
+        $.datepicker.setDefaults($.datepicker.regional['es']);
+    } catch (e) {
+        setTimeout(console.error.bind(console, "• Log de error generado (SasifMaster.StartDatepicker):\n" + e));
+        $.datepicker.setDefaults($.datepicker.regional['en']);
+    }
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -111,97 +116,152 @@ function StartDatepicker() {
 
 //Se utiliza para que el campo de texto solo acepte numeros
 function OnlyNumbers(evt) {
-    if (window.event) {//asignamos el valor de la tecla a keynum
-        keynum = evt.keyCode; //IE
+    try {
+        if (window.event) {//asignamos el valor de la tecla a keynum
+            keynum = evt.keyCode; //IE
+        }
+        else {
+            keynum = evt.which; //FF
+        }
+        //comprobamos si se encuentra en el rango numérico y que teclas no recibirá.
+        if ((keynum > 47 && keynum < 58) || keynum == 8 || keynum == 13 || keynum == 6) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    } catch (e) {
+        Mensaje_General("Error - Validación Dato Numérico", "Lo sentimos, ocurrió un error y no se logró verificar si el dato ingresado es valido.", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (SasifMaster.OnlyNumbers):\n" + e));
+        return false;
     }
-    else {
-        keynum = evt.which; //FF
-    }
-    //comprobamos si se encuentra en el rango numérico y que teclas no recibirá.
-    if ((keynum > 47 && keynum < 58) || keynum == 8 || keynum == 13 || keynum == 6) {
-        return true;
-    }
-    else {
+}
+
+//Se utiliza para que el campo de texto que acepta solo números y la coma(,)
+function DecimalNumber(e) {
+    try {
+        key = e.keyCode || e.which;
+        tecla = String.fromCharCode(key).toString();
+        letras = "0123456789,";//Se define todo el abecedario que se quiere que se muestre.
+        especiales = []; //Es la validación del KeyCodes, que teclas recibe el campo de texto.
+        tecla_especial = false
+        for (var i in especiales) {
+            if (key == especiales[i]) {
+                tecla_especial = true;
+                break;
+            }
+        }
+
+        if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+            return false;
+        }
+    } catch (e) {
+        Mensaje_General("Error - Validación Dato Decimal", "Lo sentimos, ocurrió un error y no se logró verificar si el dato ingresado es valido.", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (SasifMaster.DecimalNumber):\n" + e));
         return false;
     }
 }
 
 //Se utiliza para que el campo de texto solo acepte letras(Abecedario latino)-espacios
 function OnlyLetters(e) {
-    key = e.keyCode || e.which;
-    tecla = String.fromCharCode(key).toString();
-    letras = " áéíóúabcdefghijklmnñopqrstuvwxyzÁÉÍÓÚABCDEFGHIJKLMNÑOPQRSTUVWXYZ";//Se define todo el abecedario que se quiere que se muestre.
-    especiales = [8, 37, 39, 46, 6]; //Es la validación del KeyCodes, que teclas recibe el campo de texto.
+    try {
+        key = e.keyCode || e.which;
+        tecla = String.fromCharCode(key).toString();
+        letras = " áéíóúabcdefghijklmnñopqrstuvwxyzÁÉÍÓÚABCDEFGHIJKLMNÑOPQRSTUVWXYZ";//Se define todo el abecedario que se quiere que se muestre.
+        especiales = [8, 37, 39, 46, 6]; //Es la validación del KeyCodes, que teclas recibe el campo de texto.
 
-    tecla_especial = false
-    for (var i in especiales) {
-        if (key == especiales[i]) {
-            tecla_especial = true;
-            break;
+        tecla_especial = false
+        for (var i in especiales) {
+            if (key == especiales[i]) {
+                tecla_especial = true;
+                break;
+            }
         }
-    }
 
-    if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+        if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+            return false;
+        }
+    } catch (e) {
+        Mensaje_General("Error - Validación Dato Decimal", "Lo sentimos, ocurrió un error y no se logró verificar si el dato ingresado es valido.", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (SasifMaster.DecimalNumber):\n" + e));
         return false;
     }
 }
 
 //Se utiliza para que el campo de texto solo acepte letras-letras especiales-espacios
 function OnlySpecialLetters(e) {
-    key = e.keyCode || e.which;
-    tecla = String.fromCharCode(key).toString();
-    letras = " ÁÉÍÓÚABCDEFGHIJKLMNÑOPQRSTUVWXYZÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛabcdefghijklmnñopqrstuvwxyzãàáäâèéëêìíïîòóöôùúüûÑñÇç";//Se define todo el abecedario que se quiere que se muestre.
-    especiales = [8, 37, 39, 46, 6]; //Es la validación del KeyCodes, que teclas recibe el campo de texto.
+    try {
+        key = e.keyCode || e.which;
+        tecla = String.fromCharCode(key).toString();
+        letras = " ÁÉÍÓÚABCDEFGHIJKLMNÑOPQRSTUVWXYZÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛabcdefghijklmnñopqrstuvwxyzãàáäâèéëêìíïîòóöôùúüûÑñÇç";//Se define todo el abecedario que se quiere que se muestre.
+        especiales = [8, 37, 39, 46, 6]; //Es la validación del KeyCodes, que teclas recibe el campo de texto.
 
-    tecla_especial = false
-    for (var i in especiales) {
-        if (key == especiales[i]) {
-            tecla_especial = true;
-            break;
+        tecla_especial = false
+        for (var i in especiales) {
+            if (key == especiales[i]) {
+                tecla_especial = true;
+                break;
+            }
         }
-    }
 
-    if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+        if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+            return false;
+        }
+    } catch (e) {
+        Mensaje_General("Error - Validación Dato", "Lo sentimos, ocurrió un error y no se logró verificar si el dato ingresado es valido.", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (SasifMaster.OnlySpecialLetters):\n" + e));
         return false;
     }
 }
 
 //Se utiliza para que el campo de texto solo acepte letras(Abecedario latino)-números
 function OnlyLettersNumbers(e) {
-    key = e.keyCode || e.which;
-    tecla = String.fromCharCode(key).toString();
-    letras = "0123456789áéíóúabcdefghijklmnñopqrstuvwxyzÁÉÍÓÚABCDEFGHIJKLMNÑOPQRSTUVWXYZ";//Se define todo el abecedario que se quiere que se muestre.
-    especiales = [8, 37, 39, 46, 6]; //Es la validación del KeyCodes, que teclas recibe el campo de texto.
+    try {
+        key = e.keyCode || e.which;
+        tecla = String.fromCharCode(key).toString();
+        letras = "0123456789áéíóúabcdefghijklmnñopqrstuvwxyzÁÉÍÓÚABCDEFGHIJKLMNÑOPQRSTUVWXYZ";//Se define todo el abecedario que se quiere que se muestre.
+        especiales = [8, 37, 39, 46, 6]; //Es la validación del KeyCodes, que teclas recibe el campo de texto.
 
-    tecla_especial = false
-    for (var i in especiales) {
-        if (key == especiales[i]) {
-            tecla_especial = true;
-            break;
+        tecla_especial = false
+        for (var i in especiales) {
+            if (key == especiales[i]) {
+                tecla_especial = true;
+                break;
+            }
         }
-    }
 
-    if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+        if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+            return false;
+        }
+    } catch (e) {
+        Mensaje_General("Error - Validación Dato", "Lo sentimos, ocurrió un error y no se logró verificar si el dato ingresado es valido.", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (SasifMaster.OnlyLettersNumbers):\n" + e));
         return false;
     }
 }
 
 //Se utiliza para que el campo de texto acepte letras-letras especiales-números-espacios
 function LettersNumbersSpecial(e) {
-    key = e.keyCode || e.which;
-    tecla = String.fromCharCode(key).toString();
-    letras = " 0123456789ÁÉÍÓÚABCDEFGHIJKLMNÑOPQRSTUVWXYZÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛabcdefghijklmnñopqrstuvwxyzãàáäâèéëêìíïîòóöôùúüûÇç";//Se define todo el abecedario que se quiere que se muestre.
-    especiales = [8, 37, 39, 46, 6]; //Es la validación del KeyCodes, que teclas recibe el campo de texto.
+    try {
+        key = e.keyCode || e.which;
+        tecla = String.fromCharCode(key).toString();
+        letras = " 0123456789ÁÉÍÓÚABCDEFGHIJKLMNÑOPQRSTUVWXYZÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛabcdefghijklmnñopqrstuvwxyzãàáäâèéëêìíïîòóöôùúüûÇç";//Se define todo el abecedario que se quiere que se muestre.
+        especiales = [8, 37, 39, 46, 6]; //Es la validación del KeyCodes, que teclas recibe el campo de texto.
 
-    tecla_especial = false
-    for (var i in especiales) {
-        if (key == especiales[i]) {
-            tecla_especial = true;
-            break;
+        tecla_especial = false
+        for (var i in especiales) {
+            if (key == especiales[i]) {
+                tecla_especial = true;
+                break;
+            }
         }
-    }
 
-    if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+        if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+            return false;
+        }
+    } catch (e) {
+        Mensaje_General("Error - Validación Dato", "Lo sentimos, ocurrió un error y no se logró verificar si el dato ingresado es valido.", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (SasifMaster.LettersNumberSpecial):\n" + e));
         return false;
     }
 }
@@ -212,37 +272,41 @@ function LettersNumbersSpecial(e) {
 
 //Bandera que usamos para indicar por consola que todo se completó correctamente
 function ready() {
+    try {
+        var Digital = new Date();
 
-    var Digital = new Date();
+        var Day = Digital.getDate();
+        var Month = Digital.getMonth();
+        var Year = Digital.getFullYear();
 
-    var Day = Digital.getDate();
-    var Month = Digital.getMonth();
-    var Year = Digital.getFullYear();
+        if (Day <= 9) {
+            Day = "0" + Day;
+        }
 
-    if (Day <= 9) {
-        Day = "0" + Day;
+        var hours = Digital.getHours();
+        var minutes = Digital.getMinutes();
+        var seconds = Digital.getSeconds();
+
+
+        if (hours <= 9) {
+            hours = "0" + hours;
+        }
+        if (minutes <= 9) {
+            minutes = "0" + minutes;
+        }
+        if (seconds <= 9) {
+            seconds = "0" + seconds;
+        }
+
+        setTimeout(console.log.bind(console, "" + Day + "/" + Matrix_Mes[Month][1] + "/" + Year + " " + hours + ":" + minutes + ":" + seconds + "")); //No muestra la ruta donde se genera el console
+        setTimeout(console.log.bind(console, "%cAll is ready, enjoy!", "color: #b70d0d; font-size: x-large")); //No muestra la ruta donde se genera el console
+        setTimeout(console.log.bind(console, "%cDesarrollado por SASIF® 2016. Todos los derechos reservados.\nContacto sistemas@sasif.com.co | Bogotá D.C. - Colombia \n© SASIF S.A.S. " + Year + "", "color: #b70d0d; font-size: x"));
+
+        Reload();
+    } catch (e) {
+        Mensaje_General("Error - Cargue Secuencia", "Lo sentimos, ocurrió un error y no se logró completar la secuencia de procesos iniciales.", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (SasifMaster.ready):\n" + e));
     }
-
-    var hours = Digital.getHours();
-    var minutes = Digital.getMinutes();
-    var seconds = Digital.getSeconds();
-
-
-    if (hours <= 9) {
-        hours = "0" + hours;
-    }
-    if (minutes <= 9) {
-        minutes = "0" + minutes;
-    }
-    if (seconds <= 9) {
-        seconds = "0" + seconds;
-    }
-
-    setTimeout(console.log.bind(console, "" + Day + "/" + Matrix_Mes[Month][1] + "/" + Year + " " + hours + ":" + minutes + ":" + seconds + "")); //No muestra la ruta donde se genera el console
-    setTimeout(console.log.bind(console, "%cAll is ready, enjoy!", "color: #b70d0d; font-size: x-large")); //No muestra la ruta donde se genera el console
-    setTimeout(console.log.bind(console, "%cDesarrollado por SASIF® 2016. Todos los derechos reservados.\nContacto sistemas@sasif.com.co | Bogotá D.C. - Colombia \n© SASIF S.A.S. " + Year + "", "color: #b70d0d; font-size: x"));
-
-    Reload();
 }
 
 /*Función que recarga la página y exige que se traigan los nuevos cambios desde el servidor
@@ -266,17 +330,22 @@ function Reload() {
 
 ////Función que borra el log generado en la consola según el navegador
 function clearConsole() {
-    if (typeof console._commandLineAPI !== 'undefined') {
-        console.API = console._commandLineAPI;
-    } else if (typeof console._inspectorCommandLineAPI !== 'undefined') {
-        console.API = console._inspectorCommandLineAPI;
-    } else if (typeof console.clear !== 'undefined') {
-        console.API = console;
+    try {
+        if (typeof console._commandLineAPI !== 'undefined') {
+            console.API = console._commandLineAPI;
+        } else if (typeof console._inspectorCommandLineAPI !== 'undefined') {
+            console.API = console._inspectorCommandLineAPI;
+        } else if (typeof console.clear !== 'undefined') {
+            console.API = console;
+        }
+        if (console.API) {
+            setTimeout(console.API.clear.bind(console)); //No muestra la ruta donde se genera el console        
+        }
+        setTimeout(console.clear.bind());
+    } catch (e) {
+        setTimeout(console.error.bind(console, "• Log de error generado (SasifMaster.clearConsole):\n" + e));
+        return false;
     }
-    if (console.API) {
-        setTimeout(console.API.clear.bind(console)); //No muestra la ruta donde se genera el console        
-    }
-    setTimeout(console.clear.bind());
 }
 
 //salida del formulario
@@ -296,7 +365,12 @@ function btnSalir() {
 
 //Función que genera el evento del botón salir de los dialog de información --FABIAN
 function x() {
-    $("#dialog").dialog("close");
+    try {
+        $("#dialog").dialog("close");
+    } catch (e) {
+        setTimeout(console.error.bind(console, "• Log de error generado (SasifMaster.x):\n" + e));
+        return false;
+    }
 }
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                 INICIO DE PROCESOS                                                                                                            ----*/
@@ -334,28 +408,40 @@ function ConsultaParametrosURL() {
 
 //Función que busca y retorna el parametro 1 que se haya parametrizado para esa página
 function ConsultaParam1_Pag() {
-    var param = "";
-    for (item in ArrayMenu) {
-        if (ArrayMenu[item].Tipo == 2) {
-            if (ArrayMenu[item].IDlink == Link) {
-                param = ArrayMenu[item].Parametro_1;
+    try {
+        var param = "";
+        for (item in ArrayMenu) {
+            if (ArrayMenu[item].Tipo == 2) {
+                if (ArrayMenu[item].IDlink == Link) {
+                    param = ArrayMenu[item].Parametro_1;
+                }
             }
         }
+        return param;
+    } catch (e) {
+        Mensaje_General("Error - Consulta Parámetros", "Lo sentimos, ocurrió un error y no se logró leer correctamente el parámetro 1 de esta página.", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (SasifMaster.ConsultaParam1_Pag):\n" + e));
+        return null;
     }
-    return param;
 }
 
 //Función que busca y retorna el parametro 2 que se haya parametrizado para esa página
 function ConsultaParam2_Pag() {
-    var param = "";
-    for (item in ArrayMenu) {
-        if (ArrayMenu[item].Tipo == 2) {
-            if (ArrayMenu[item].IDlink == Link) {
-                param = ArrayMenu[item].Parametro_2;
+    try {
+        var param = "";
+        for (item in ArrayMenu) {
+            if (ArrayMenu[item].Tipo == 2) {
+                if (ArrayMenu[item].IDlink == Link) {
+                    param = ArrayMenu[item].Parametro_2;
+                }
             }
         }
+        return param;
+    } catch (e) {
+        Mensaje_General("Error - Consulta Parámetros", "Lo sentimos, ocurrió un error y no se logró leer correctamente el parámetro 2 de esta página.", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (SasifMaster.ConsultaParam2_Pag):\n" + e));
+        return null;
     }
-    return param;
 }
 
 //integra los mensajes de error en la pagina
@@ -403,7 +489,7 @@ function RevisarAyudas() {
     $(".Spam_ARuta").html(ArrayAyudas[26].Ayudas_ID + ": " + ArrayAyudas[26].Descripcion);
     $(".Spam_ADec_2").html(ArrayAyudas[27].Ayudas_ID + ": " + ArrayAyudas[27].Descripcion);
     $(".Spam_ADec_3").html(ArrayAyudas[28].Ayudas_ID + ": " + ArrayAyudas[28].Descripcion);
-    
+
     $(".Spam_CT1").html(ArrayAyudas[6].Descripcion);
     $(".Spam_CT2").html(ArrayAyudas[7].Descripcion);
     $(".Spam_CT4").html(ArrayAyudas[19].Descripcion);
@@ -412,28 +498,33 @@ function RevisarAyudas() {
 
 //llamado de mensajes
 function Mensaje_General(Title, Msn, Type) {
-    $("#dialog").dialog("open");
-    $("#dialog").dialog("option", "title", Title);
-    $("#Mensaje_alert").text(Msn);
+    try {
+        $("#dialog").dialog("open");
+        $("#dialog").dialog("option", "title", Title);
+        $("#Mensaje_alert").text(Msn);
 
-    switch (Type) {
-        case "E":
-            $("#DE").css("display", "block");
-            $("#SE").css("display", "none");
-            $("#WA").css("display", "none");
-            break;
+        switch (Type) {
+            case "E":
+                $("#DE").css("display", "block");
+                $("#SE").css("display", "none");
+                $("#WA").css("display", "none");
+                break;
 
-        case "W":
-            $("#DE").css("display", "none");
-            $("#SE").css("display", "none");
-            $("#WA").css("display", "block");
-            break;
+            case "W":
+                $("#DE").css("display", "none");
+                $("#SE").css("display", "none");
+                $("#WA").css("display", "block");
+                break;
 
-        case "S":
-            $("#DE").css("display", "none");
-            $("#SE").css("display", "block");
-            $("#WA").css("display", "none");
-            break;
+            case "S":
+                $("#DE").css("display", "none");
+                $("#SE").css("display", "block");
+                $("#WA").css("display", "none");
+                break;
+        }
+    } catch (e) {
+        setTimeout(console.error.bind(console, "• Log de error generado (SasifMaster.Mensaje_General):\n" + e));
+        return null;
     }
 }
 
@@ -487,116 +578,120 @@ function ResetError() {
 
 //Función que bloquea el retorno entre páginas
 function No_Back_Button() {
-    window.location.hash = "no-back-button";
-    window.location.hash = "Again-No-back-button" //chrome    
-    window.onhashchange = function () { window.location.hash = "no-back-button"; }
+    try {
+        window.location.hash = "no-back-button";
+        window.location.hash = "Again-No-back-button" //chrome    
+        window.onhashchange = function () { window.location.hash = "no-back-button"; }
 
-    document.onkeydown = mykeyhandler;
+        document.onkeydown = mykeyhandler;
 
-    function mykeyhandler(event) {
+        function mykeyhandler(event) {
 
-        //keyCode 116 = F5 
-        //keyCode 122 = F11
-        //keyCode 16 = Shift
-        //keyCode 8 = Backspace
-        //keyCode 37 = LEFT ROW
-        //keyCode 78 = N
-        //keyCode 39 = RIGHT ROW
-        //keyCode 67 = C
-        //keyCode 73 = I
-        //keyCode 82 = R
-        //keyCode 83 = S
-        //keyCode 86 = V
-        //keyCode 85 = U 
-        //keyCode 87 = W 
-        //keyCode 45 = Insert
+            //keyCode 116 = F5 
+            //keyCode 122 = F11
+            //keyCode 16 = Shift
+            //keyCode 8 = Backspace
+            //keyCode 37 = LEFT ROW
+            //keyCode 78 = N
+            //keyCode 39 = RIGHT ROW
+            //keyCode 67 = C
+            //keyCode 73 = I
+            //keyCode 82 = R
+            //keyCode 83 = S
+            //keyCode 86 = V
+            //keyCode 85 = U 
+            //keyCode 87 = W 
+            //keyCode 45 = Insert
 
-        event = event || window.event;
-        var tgt = event.target || event.srcElement;
-        if ((event.altKey && event.keyCode == 37) || (event.altKey && event.keyCode == 39) ||
-        (event.ctrlKey && event.keyCode == 78) || (event.ctrlKey && event.keyCode == 82) ||
-        (event.ctrlKey && event.keyCode == 83) || (event.ctrlKey && event.keyCode == 85) ||
-        (event.ctrlKey && event.keyCode == 45) || (event.shiftKey && event.keyCode == 45) ||
-        (event.ctrlKey && event.keyCode == 87) || (event.ctrlKey && event.shiftKey && event.keyCode == 73)) {
-            event.cancelBubble = true;
-            event.returnValue = false;
-            Mensaje_General("¡Alerta!", "¡Función no permitida!" , "W");
-            return false;
-        }
-
-        if (event.keyCode == 18 && tgt.type != "text" && tgt.type != "password" && tgt.type != "textarea") {
-            return false;
-        }
-
-        if (event.keyCode == 8 && tgt.type != "text" && tgt.type != "password" && tgt.type != "textarea") {
-            return false;
-        }
-
-        if ((event.keyCode == 116) ||
-            (event.keyCode == 123) || //Línea F12
-            (event.keyCode == 122)) {
-            if (navigator.appName == "Microsoft Internet Explorer") {
-                window.event.keyCode = 0;
+            event = event || window.event;
+            var tgt = event.target || event.srcElement;
+            if ((event.altKey && event.keyCode == 37) || (event.altKey && event.keyCode == 39) ||
+            (event.ctrlKey && event.keyCode == 78) || (event.ctrlKey && event.keyCode == 82) ||
+            (event.ctrlKey && event.keyCode == 83) || (event.ctrlKey && event.keyCode == 85) ||
+            (event.ctrlKey && event.keyCode == 45) || (event.shiftKey && event.keyCode == 45) ||
+            (event.ctrlKey && event.keyCode == 87) || (event.ctrlKey && event.shiftKey && event.keyCode == 73)) {
+                event.cancelBubble = true;
+                event.returnValue = false;
+                Mensaje_General("¡Alerta!", "¡Función no permitida!", "W");
+                return false;
             }
-            return false;
-        }
-    }
 
-    function mouseDown(e) {
-        var ctrlPressed = 0;
-        var altPressed = 0;
-        var shiftPressed = 0;
+            if (event.keyCode == 18 && tgt.type != "text" && tgt.type != "password" && tgt.type != "textarea") {
+                return false;
+            }
+
+            if (event.keyCode == 8 && tgt.type != "text" && tgt.type != "password" && tgt.type != "textarea") {
+                return false;
+            }
+
+            if ((event.keyCode == 116) ||
+                (event.keyCode == 123) || //Línea F12
+                (event.keyCode == 122)) {
+                if (navigator.appName == "Microsoft Internet Explorer") {
+                    window.event.keyCode = 0;
+                }
+                return false;
+            }
+        }
+
+        function mouseDown(e) {
+            var ctrlPressed = 0;
+            var altPressed = 0;
+            var shiftPressed = 0;
+            if (parseInt(navigator.appVersion) > 3) {
+                if (navigator.appName == "Netscape") {
+                    var mString = (e.modifiers + 32).toString(2).substring(3, 6);
+                    shiftPressed = (mString.charAt(0) == "1");
+                    ctrlPressed = (mString.charAt(1) == "1");
+                    altPressed = (mString.charAt(2) == "1");
+                    self.status = "modifiers=" + e.modifiers + " (" + mString + ")"
+                }
+                else {
+                    shiftPressed = event.shiftKey;
+                    altPressed = event.altKey;
+                    ctrlPressed = event.ctrlKey;
+                }
+                if (shiftPressed || altPressed || ctrlPressed)
+                    Mensaje_General("¡Alerta!", "¡Función no permitida!", "W");
+            }
+            return true;
+        }
+
         if (parseInt(navigator.appVersion) > 3) {
-            if (navigator.appName == "Netscape") {
-                var mString = (e.modifiers + 32).toString(2).substring(3, 6);
-                shiftPressed = (mString.charAt(0) == "1");
-                ctrlPressed = (mString.charAt(1) == "1");
-                altPressed = (mString.charAt(2) == "1");
-                self.status = "modifiers=" + e.modifiers + " (" + mString + ")"
-            }
-            else {
-                shiftPressed = event.shiftKey;
-                altPressed = event.altKey;
-                ctrlPressed = event.ctrlKey;
-            }
-            if (shiftPressed || altPressed || ctrlPressed)
-                Mensaje_General("¡Alerta!", "¡Función no permitida!" , "W");
+            document.onmousedown = mouseDown;
+            if (navigator.appName == "Netscape")
+                document.captureEvents(Event.MOUSEDOWN);
         }
-        return true;
-    }
 
-    if (parseInt(navigator.appVersion) > 3) {
-        document.onmousedown = mouseDown;
-        if (navigator.appName == "Netscape")
+        var message = "";
+
+        function clickIE() {
+            if (document.all) {
+                (message);
+                return false;
+            }
+        }
+
+        function clickNS(e) {
+            if (document.layers || (document.getElementById && !document.all)) {
+                if (e.which == 2 || e.which == 3) {
+                    (message); return false;
+                }
+            }
+        }
+
+        if (document.layers) {
             document.captureEvents(Event.MOUSEDOWN);
-    }
+            document.onmousedown = clickNS;
+        } else {
+            document.onmouseup = clickNS; document.oncontextmenu = clickIE;
 
-    var message = "";
-
-    function clickIE() {
-        if (document.all) {
-            (message);
-            return false;
         }
+
+        document.oncontextmenu = new Function("return false");
+    } catch (e) {
+        setTimeout(console.error.bind(console, "• Log de error generado (SasifMaster.No_Back_Button):\n" + e));
     }
-
-    function clickNS(e) {
-        if (document.layers || (document.getElementById && !document.all)) {
-            if (e.which == 2 || e.which == 3) {
-                (message); return false;
-            }
-        }
-    }
-
-    if (document.layers) {
-        document.captureEvents(Event.MOUSEDOWN);
-        document.onmousedown = clickNS;
-    } else {
-        document.onmouseup = clickNS; document.oncontextmenu = clickIE;
-
-    }
-
-    document.oncontextmenu = new Function("return false");
 }
 
 //funcion para control de carga
@@ -729,23 +824,23 @@ function Validahora(V_HoraInicial, V_HoraFinal) {
 
 //vFunción que valida si una hora es mayor que otra, devuelve True o False
 function SAS_ValidarHoras(V_HoraInicial, V_HoraFinal) {
-    try{    
-    var Valida = true;
+    try {
+        var Valida = true;
 
-    var A_V_HoraInicial = V_HoraInicial.split(":");
-    var A_V_HoraFinal = V_HoraFinal.split(":");
+        var A_V_HoraInicial = V_HoraInicial.split(":");
+        var A_V_HoraFinal = V_HoraFinal.split(":");
 
-    if (parseInt(A_V_HoraInicial[0]) > parseInt(A_V_HoraFinal[0])) {
-        Valida = false;
-    } else if (parseInt(A_V_HoraInicial[0]) == parseInt(A_V_HoraFinal[0])) {
-        if (parseInt(A_V_HoraInicial[1]) > parseInt(A_V_HoraFinal[1])) {
+        if (parseInt(A_V_HoraInicial[0]) > parseInt(A_V_HoraFinal[0])) {
             Valida = false;
+        } else if (parseInt(A_V_HoraInicial[0]) == parseInt(A_V_HoraFinal[0])) {
+            if (parseInt(A_V_HoraInicial[1]) > parseInt(A_V_HoraFinal[1])) {
+                Valida = false;
+            }
         }
-    }
-    return Valida;
+        return Valida;
     } catch (e) {
         Mensaje_General("Error - No se puede validar", "Lo sentimos, ocurrió un error y no se pudo validar las horas, por favor verificar los datos", "E");
-        setTimeout(console.error.bind(console, "• Log de error generado (SasifMaster):\n" + e));
+        setTimeout(console.error.bind(console, "• Log de error generado (SasifMaster.SAS_ValidarHoras):\n" + e));
         return false;
     }
 }
@@ -943,7 +1038,7 @@ function dinner_format(input) {
     }
     else {
         valida = 1;
-        input.value = input.value.replace(/[^\d\.]*/g, "");
+        input.value = input.value.replace(/[^\d\.\,]*/g, "");
     }
     return valida;
 }
@@ -1041,7 +1136,7 @@ function Convert_Decimal(index) {
 
 //convierte el valor decimal con coma para mostra en las vistas
 function Convert_Decimal_Grid(vp_Index) {
-    var vl_StrCovert= vp_Index.toString();
+    var vl_StrCovert = vp_Index.toString();
     var vl_Value_Coma = vl_StrCovert.replace(".", ",");
     return vl_Value_Coma;
 }
@@ -1558,7 +1653,7 @@ function Charge_Combo_Persona(Matrix, Selector, Nit, Index_Edit) {
 
         case "Select_Direccion"://Direcciones por persona
             for (Item in Matrix) {
-                $("#" + Selector).append("<option value='" + Matrix[Item].Consecutivo + "'>"+ Matrix[Item].Consecutivo + " - " + Matrix[Item].Direccion + "</option>");
+                $("#" + Selector).append("<option value='" + Matrix[Item].Consecutivo + "'>" + Matrix[Item].Consecutivo + " - " + Matrix[Item].Direccion + "</option>");
             }
             break;
     }
@@ -2027,7 +2122,7 @@ function UpLoad_Document(NameAjax, NameFile_ID, Form) {
                 var filename = result;
                 switch (filename) {
                     case "NO_FORMAT":
-                        Mensaje_General("¡Formato Incorrecto!", "El documento no se puede generar, el formato es diferente a la parametrización asignada! " , "W");
+                        Mensaje_General("¡Formato Incorrecto!", "El documento no se puede generar, el formato es diferente a la parametrización asignada! ", "W");
                         break;
 
                     default:

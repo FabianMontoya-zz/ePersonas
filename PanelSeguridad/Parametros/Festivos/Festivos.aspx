@@ -177,12 +177,4 @@
             </tr>
         </table>
     </div>
-    <div id="Dialog_Control" style="width: 100%; text-align: center;">
-        <div class="cssload-container" style="margin-top: 25%;">
-            <div class="cssload-whirlpool"></div>
-            <div>
-                <img id="Sasif" class="Logo_3" src="../../images/SASIF_NEW_WHITE.png" alt="SASIF S.A.S." />
-            </div>
-        </div>
-    </div>
 </asp:Content>

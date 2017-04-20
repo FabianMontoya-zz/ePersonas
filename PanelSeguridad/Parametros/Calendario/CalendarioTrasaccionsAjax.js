@@ -1,4 +1,5 @@
-﻿/*-------------------- carga ---------------------------*/
+﻿
+/*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_CargaBusqueda(State) {
     try {
@@ -122,7 +123,7 @@ function transacionAjax_ConsultCalendario(State, filtro, opcion) {
                 "filtro": filtro,
                 "opcion": opcion,
                 "contenido": contenido,
-                "TipoCalendario": "N",
+                "TipoCalendario": "1",
                 "Nit_User": g_NitEmpresa_User
             },
             //Transaccion Ajax en proceso

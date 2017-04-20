@@ -43,9 +43,7 @@ function Ocultar_Errores() {
 
 //funcion para las ventanas emergentes
 function Ventanas_Emergentes() {
-
-    Load_Charge_Sasif(); //Carga de "SasifMaster.js" el Control de Carga
-
+    
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
         autoOpen: false,
@@ -108,12 +106,12 @@ function BtnCrear() {
                 transacionAjax_Festivo_create("crear");            
             } else {
                 Mensaje_General("¡Acción NO valida!", "La acción «" + $("#Btnguardar").val() + "» no es una acción valida para el sistema, favor recargar la página para solucionar este error.", "E");
-                setTimeout(console.warn.bind(console, "• Log de error generado (Festivos):\nSe intentó ejecutar una acción no valida, solo se permite creación en este módulo."));
+                setTimeout(console.warn.bind(console, "• Log de error generado (Festivos.BtnCrear):\nSe intentó ejecutar una acción no valida, solo se permite creación en este módulo."));
             }
         }
     } catch (e) {
         Mensaje_General("Error - No se logró " + $("#Btnguardar").val(), "Lo sentimos, ocurrió un error y no se logró ejecutar la acción de " + $("#Btnguardar").val() + ", favor verifique los datos.", "E");
-        setTimeout(console.error.bind(console, "• Log de error generado (Festivos):\n" + e));
+        setTimeout(console.error.bind(console, "• Log de error generado (Festivos.BtnCrear):\n" + e));
     }
 }
 
@@ -215,19 +213,19 @@ function Table_Festivo() {
     switch (estado) {
 
         case "buscar":
-            html_TFestivo = "<table id='TFestivo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>NIT Empresa</th><th>Calendario</th><th>Año</th><th>Mes/Dia</th></tr></thead><tbody>";
+            html_TFestivo = "<table id='TFestivo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>NIT Empresa</th><th>Calendario</th><th>Año</th><th>Mes/Día</th></tr></thead><tbody>";
             for (itemArray in ArrayFestivo) {
                 if (ArrayFestivo[itemArray].Año != 0) {
-                    html_TFestivo += "<tr id= 'TFestivo_" + ArrayFestivo[itemArray].Index + "'><td style='white-space: nowrap;'>" + ArrayFestivo[itemArray].Nit_ID + " - " + ArrayFestivo[itemArray].DescripcionEmpresa + "</td><td style='white-space: nowrap;'>" + ArrayFestivo[itemArray].Calendario_ID + " - " + ArrayFestivo[itemArray].DescripcionCalendario + "</td><td>" + ArrayFestivo[itemArray].Year + "</td><td>" + ArrayFestivo[itemArray].StrMes + " / " + ArrayFestivo[itemArray].StrDia + "</td></tr>";
+                    html_TFestivo += "<tr id= 'TFestivo_" + ArrayFestivo[itemArray].Index + "'><td style='white-space: nowrap;'>" + ArrayFestivo[itemArray].Nit_ID + " - " + ArrayFestivo[itemArray].DescripcionEmpresa + "</td><td style='white-space: nowrap;'>" + ArrayFestivo[itemArray].Calendario_ID + " - " + ArrayFestivo[itemArray].DescripcionCalendario + "</td><td>" + ArrayFestivo[itemArray].Year + "</td><td>" + ArrayFestivo[itemArray].StrMes + "" + ArrayFestivo[itemArray].StrDia + "</td></tr>";
                 }
             }
             break;
 
         case "eliminar":
-            html_TFestivo = "<table id='TFestivo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>NIT Empresa</th><th>Calendario</th><th>Año</th><th>Mes/Dia</th></tr></thead><tbody>";
+            html_TFestivo = "<table id='TFestivo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>NIT Empresa</th><th>Calendario</th><th>Año</th><th>Mes/Día</th></tr></thead><tbody>";
             for (itemArray in ArrayFestivo) {
                 if (ArrayFestivo[itemArray].Year != 0) {
-                    html_TFestivo += "<tr id= 'TFestivo_" + ArrayFestivo[itemArray].Index + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArrayFestivo[itemArray].Index + "')\"></img><span>Eliminar Festivos</span></span></td><td style='white-space: nowrap;'>" + ArrayFestivo[itemArray].Nit_ID + " - " + ArrayFestivo[itemArray].DescripcionEmpresa + "</td><td style='white-space: nowrap;'>" + ArrayFestivo[itemArray].Calendario_ID + " - " + ArrayFestivo[itemArray].DescripcionCalendario + "</td><td>" + ArrayFestivo[itemArray].Year + "</td><td>" + ArrayFestivo[itemArray].StrMes + " / " + ArrayFestivo[itemArray].StrDia + "</td></tr>";
+                    html_TFestivo += "<tr id= 'TFestivo_" + ArrayFestivo[itemArray].Index + "'><td><span class='cssToolTip_ver'><img  src='../../images/Delete.png' width='23px' height='23px' class= 'Eliminar' name='eliminar' onmouseover=\"this.src='../../images/DeleteOver.png';\" onmouseout=\"this.src='../../images/Delete.png';\" onclick=\"Eliminar('" + ArrayFestivo[itemArray].Index + "')\"></img><span>Eliminar Festivos</span></span></td><td style='white-space: nowrap;'>" + ArrayFestivo[itemArray].Nit_ID + " - " + ArrayFestivo[itemArray].DescripcionEmpresa + "</td><td style='white-space: nowrap;'>" + ArrayFestivo[itemArray].Calendario_ID + " - " + ArrayFestivo[itemArray].DescripcionCalendario + "</td><td>" + ArrayFestivo[itemArray].Year + "</td><td>" + ArrayFestivo[itemArray].StrMes + "" + ArrayFestivo[itemArray].StrDia + "</td></tr>";
                 }
             }
             break;

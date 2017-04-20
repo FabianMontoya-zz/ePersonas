@@ -68,7 +68,7 @@
                         </td>
                     </tr>
                 </table>
-                <!-- Div que contiene todo el form de creación y actualización de usuario -->
+               <%--Div que contiene todo el form de creación y actualización de usuario--%> 
                 <div id="TablaDatos">
                     <div id="Datos" style="width:100%;">
                         <table id="T_NIT" style="width: 100%;">
@@ -378,7 +378,7 @@
                                             src="../../images/error.png" />
                                         <span class="SpamEG"></span></span>
                                 </td>
-                                <!-- Solo se muestra cuando es Actualizar -->
+                                 <%--Solo se muestra cuando es Actualizar--%>
                                 <td id="TD_Estado1" class="Label_Bold" style="width: 6%;">Estado del Usuario
                                 </td>
                                 <td id="TD_Estado2" style="width: 20%;">

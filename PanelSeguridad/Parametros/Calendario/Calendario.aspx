@@ -22,10 +22,20 @@
     <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/Dialog/datepicker.js" type="text/javascript"></script>
     <script src="../../Scripts/Dialog/timepicker.js" type="text/javascript"></script>
-
+    <script type="text/javascript">
+        //evento del boton salir
+        function x() {
+            try {
+                $("#dialog").dialog("close");
+            } catch (e) {
+                setTimeout(console.error.bind(console, "• Log de error generado (Calendarioaspx.x):\n" + e));
+                return false;
+            }
+        }
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
-    
+
     <div class="Container_title_Form">
         <table id="Tabla_Title_form">
             <tr>
@@ -401,7 +411,7 @@
                     </tr>
                     <tr>
                         <td colspan="20" align="center">
-                            <input id="BtnAgregar" type="button" value="Agregar" onclick="BtnAgregaCalendario();" style="cursor: pointer; cursor: hand;" />
+                            <input id="BtnAgregar" type="button" value="Adicionar" onclick="BtnAgregaCalendario();" style="cursor: pointer; cursor: hand;" />
                         </td>
                     </tr>
                 </tbody>
@@ -418,6 +428,128 @@
                 <tr>
                     <td colspan="4" align="center">
                         <input id="Btnguardar" type="button" value="Guardar" onclick="BtnCrear();" style="cursor: pointer; cursor: hand;" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div id="Dialog_Calendar_View">
+        <div class="Header_Datos_Max">
+            <table id="Ver_Tabla_1" style="width: 100%; text-align: left;">
+                <tr>
+                    <td style="width: 10.5%;" class="Label_Bold">NIT Empresa
+                    </td>
+                    <td style="width: 47%;" id="Ver_Select_EmpresaNit"></td>
+                    <td style="padding-bottom: 25px; width: 60%;"></td>
+                </tr>
+            </table>
+
+            <table id="Ver_Tabla_2" style="width: 100%; text-align: left;">
+                <tr>
+                    <td style="width: 10.5%;" class="Label_Bold">Código
+                    </td>
+                    <td style="width: 6%; min-width: 60px;" id="Ver_Txt_ID"></td>
+                    <td style="padding-bottom: 25px; width: 98%;"></td>
+                </tr>
+            </table>
+            <table id="Ver_Tabla_Desc" style="width: 100%; text-align: left;">
+                <tr>
+                    <td class="Label_Bold" style="width: 10.5%;">Descripción
+                    </td>
+                    <td style="width: 30%; min-width: 100px;" id="Ver_TxtDescription"></td>
+                    <td style="padding-bottom: 25px; width: 80%;"></td>
+                </tr>
+            </table>
+            <table id="Ver_Tabla_3" style="width: 100%; text-align: left;">
+                <tr>
+                    <td style="width: 10.5%;" class="Label_Bold">Tipo Calendario
+                    </td>
+                    <td style="width: 31%;" id="Ver_Select_TipoCalendario"></td>
+                    <td style="padding-bottom: 25px; width: 70%;"></td>
+                </tr>
+            </table>
+             <table class="Table_Header_Block">
+                <thead>
+                    <tr style="text-align: center;" class="Label_Bold">
+                        <th align="center" colspan="2">Lunes
+                        </th>
+                        <th align="center" colspan="2">Martes
+                        </th>
+                        <th align="center" colspan="2">Miércoles
+                        </th>
+                        <th align="center" colspan="2">Jueves
+                        </th>
+                        <th align="center" colspan="2">Viernes
+                        </th>
+                        <th align="center" colspan="2">Sábado
+                        </th>
+                        <th align="center" colspan="2">Domingo
+                        </th>
+                        <th align="center" colspan="2">Festivos
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="text-align: center;">
+                        <td align="center" colspan="2">
+                            <select id="Ver_Select_StateLun" class="C_Chosen">
+                                <option value="N">Laboral</option>
+                                <option value="S">No Laboral</option>
+                            </select>
+                        </td>
+                        <td align="center" colspan="2">
+                            <select id="Ver_Select_StateMar" class="C_Chosen">
+                                <option value="N">Laboral</option>
+                                <option value="S">No Laboral</option>
+                            </select>
+                        </td>
+                        <td align="center" colspan="2">
+                            <select id="Ver_Select_StateMie" class="C_Chosen">
+                                <option value="N">Laboral</option>
+                                <option value="S">No Laboral</option>
+                            </select>
+                        </td>
+                        <td align="center" colspan="2">
+                            <select id="Ver_Select_StateJue" class="C_Chosen">
+                                <option value="N">Laboral</option>
+                                <option value="S">No Laboral</option>
+                            </select>
+                        </td>
+                        <td align="center" colspan="2">
+                            <select id="Ver_Select_StateVie" class="C_Chosen">
+                                <option value="N">Laboral</option>
+                                <option value="S">No Laboral</option>
+                            </select>
+                        </td>
+                        <td align="center" colspan="2">
+                            <select id="Ver_Select_StateSab" class="C_Chosen">
+                                <option value="N">Laboral</option>
+                                <option value="S">No Laboral</option>
+                            </select>
+                        </td>
+                        <td align="center" colspan="2">
+                            <select id="Ver_Select_StateDom" class="C_Chosen">
+                                <option value="N">Laboral</option>
+                                <option value="S">No Laboral</option>
+                            </select>
+                        </td>
+                        <td align="center" colspan="2">
+                            <select id="Ver_Select_Festivo" class="C_Chosen">
+                                <option value="N">Laboral</option>
+                                <option value="S" selected>No Laboral</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div id="Div_Ver" class="container_TGrid_Create">
+            </div>
+            <table style="width: 100%;">
+                <tr>
+                    <td style="width: 150px;" class="Label_Bold">
+                        <p>
+                        </p>
                     </td>
                 </tr>
             </table>
@@ -529,28 +661,30 @@
                 </td>
             </tr>
             <tr>
-                <td><center>
-                    <table style="width: 50%;" border="0">
-                        <tr>
-                            <td align="center" colspan="2"><b>Hora</b></td>
-                        </tr>
-                        <tr>
-                            <td align="center"><b>Inicial</b></td>
-                            <td align="center"><b>Final</b></td>
-                        </tr>                       
-                        <tr>
-                            <td align="center">
-                                <span class="cssToolTip_Form">
-                                    <input id="TxtEditIni" type="text" style="width: 50px;" readonly="readonly" /><span
-                                        class="Spam_AH"></span></span>
-                            </td>
-                            <td align="center">
-                                <span class="cssToolTip_Form">
-                                    <input id="TxtEditFin" type="text" style="width: 50px;" readonly="readonly" /><span
-                                        class="Spam_AH"></span></span>
-                            </td>
-                        </tr>
-                    </table></center>
+                <td>
+                    <center>
+                        <table style="width: 50%;" border="0">
+                            <tr>
+                                <td align="center" colspan="2"><b>Hora</b></td>
+                            </tr>
+                            <tr>
+                                <td align="center"><b>Inicial</b></td>
+                                <td align="center"><b>Final</b></td>
+                            </tr>
+                            <tr>
+                                <td align="center">
+                                    <span class="cssToolTip_Form">
+                                        <input id="TxtEditIni" type="text" style="width: 50px;" readonly="readonly" /><span
+                                            class="Spam_AH"></span></span>
+                                </td>
+                                <td align="center">
+                                    <span class="cssToolTip_Form">
+                                        <input id="TxtEditFin" type="text" style="width: 50px;" readonly="readonly" /><span
+                                            class="Spam_AH"></span></span>
+                                </td>
+                            </tr>
+                        </table>
+                    </center>
                 </td>
             </tr>
             <tr>
