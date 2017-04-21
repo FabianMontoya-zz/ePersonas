@@ -404,7 +404,7 @@
                     </tr>
                 </tbody>
             </table>
-            <div class="container_TGrid_Create">
+            <div id="Div_Horarios" class="container_TGrid_Create">
             </div>
             <table style="width: 100%;">
                 <tr>
