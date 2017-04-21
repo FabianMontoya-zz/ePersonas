@@ -1,9 +1,20 @@
 ﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="Sasif.master.vb" Inherits="PanelSeguridad.Sasif" %>
-
+<%  Response.Cache.SetCacheability(HttpCacheability.NoCache)
+    Response.Cache.SetAllowResponseInBrowserHistory(False)
+    Response.AddHeader("cache-control", "private")
+    Response.AddHeader("pragma", "no-cache")
+    Response.CacheControl = "Private"
+    Response.ExpiresAbsolute = #1/5/2000 12:12:12#
+    Response.AddHeader("Cache-Control", "no-cache, no-store, must-revalidate") ' HTTP 1.1.
+    Response.AddHeader("Pragma", "no-cache") ' HTTP 1.0.
+    Response.AddHeader("Expires", "0") ' Proxies.
+    Response.Expires = -1
+    Response.Buffer = True%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>SASIF Personas</title>
+    <%--<link rel="icon" type="image/png" href="../Images/LOGO_WEB.png" />--%>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <meta http-equiv="cache-control" content="max-age=0" />
     <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate" />
