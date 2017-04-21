@@ -194,7 +194,7 @@ function Ocultar_Errores() {
 //Función que oculta las tablas
 function Ocultar_Tablas() {
     $(".Table_Header_Block").css("display", "none"); //Table que contiene el capturador de horas
-    $(".container_TGrid_Create").css("display", "none"); //Tabla que dibuja el grid con las horas ya capturadas
+    $("#Div_Horarios").css("display", "none"); //Tabla que dibuja el grid con las horas ya capturadas
     $("#TablaConsulta").css("display", "none");
     $("#Tabla_10").css("display", "none");
 }
@@ -1422,8 +1422,8 @@ function CargarMatricesHorarios() {
         ArrayCalendario_Grid.push(MatrizFriday);
         ArrayCalendario_Grid.push(MatrizSaturday);
         ArrayCalendario_Grid.push(MatrizSunday);
-        $(".container_TGrid_Create").offsetHeight;
-        $(".container_TGrid_Create").html("");
+        $("#Div_Horarios").offsetHeight;
+        $("#Div_Horarios").html("");
         TGridCalendar();
     } catch (e) {
         Mensaje_General("Error - No se logró ejecutar la acción", "Lo sentimos, ocurrió un error y no se logró cargar correctamente la matriz principal, favor verifique los datos.", "E");
@@ -1455,7 +1455,7 @@ function ValidaCamposJson(vp_Campo) {
 //Función que crea la tabla donde se mostrarán los horarios ingresados
 function TGridCalendar() {
     try {
-        $(".container_TGrid_Create").css("display", "none"); //Tabla que dibuja el grid con las horas ya capturadas
+        $("#Div_Horarios").css("display", "none"); //Tabla que dibuja el grid con las horas ya capturadas
         var html_Calendario = "";
 
         html_Calendario = "<table id='TCalendarios' style='width: 100%'><tbody>";
@@ -1465,7 +1465,7 @@ function TGridCalendar() {
         //-----------
         //Lunes [0]
         for (i in ArrayCalendario_Grid[0]) {
-            html_Calendario += "<tr id= 'TLunes_" + ArrayCalendario_Grid[0][i].Index + "'><td><span class='cssToolTip_Boton'>" + ArrayCalendario_Grid[0][i].IniLun + "<span><input type='radio' class='Ver' name='option' onclick=\"EditHoraDia('" + ArrayCalendario_Grid[0][i].Index + "','1');\" >Editar<br><input type='radio' class='Ver' name='option' onclick=\"DeleteHoraDia('" + ArrayCalendario_Grid[0][i].Index + "','1');\">Eliminar</span></span></td><td>" + ArrayCalendario_Grid[0][i].FinLun + "</td></tr>";
+            html_Calendario += "<tr id= 'TLunesEdit_" + ArrayCalendario_Grid[0][i].Index + "'><td><span class='cssToolTip_Boton'>" + ArrayCalendario_Grid[0][i].IniLun + "<span><input type='radio' class='Ver' name='option' onclick=\"EditHoraDia('" + ArrayCalendario_Grid[0][i].Index + "','1');\" >Editar<br><input type='radio' class='Ver' name='option' onclick=\"DeleteHoraDia('" + ArrayCalendario_Grid[0][i].Index + "','1');\">Eliminar</span></span></td><td>" + ArrayCalendario_Grid[0][i].FinLun + "</td></tr>";
         }
         html_Calendario += "</tbody></table></td>"; //Cerramos tabla Lunes
         //------------
@@ -1473,7 +1473,7 @@ function TGridCalendar() {
         html_Calendario += "<td id='ID_Martes' align='left' > <table id='TMartes' border='1' cellpadding='1' cellspacing='1' style='width: 100%'   ><thead><tr><th colspan='2' class='Grid_Head' >Martes</th></tr><tr><th colspan='2' class='Grid_Head' >Hora</th></tr><tr><th>Inicial</th><th>Final</th></tr></thead><tbody>";
         //Martes [1]
         for (i in ArrayCalendario_Grid[1]) {
-            html_Calendario += "<tr id= 'TMartes_" + ArrayCalendario_Grid[1][i].Index + "'><td><span class='cssToolTip_Boton'>" + ArrayCalendario_Grid[1][i].IniMar + "<span><input type='radio' class='Ver' name='option' onclick=\"EditHoraDia('" + ArrayCalendario_Grid[1][i].Index + "','2');\">Editar<br><input type='radio' class='Ver' name='option' onclick=\"DeleteHoraDia('" + ArrayCalendario_Grid[1][i].Index + "','2');\">Eliminar</span></span></td><td>" + ArrayCalendario_Grid[1][i].FinMar + "</td></tr>";
+            html_Calendario += "<tr id= 'TMartesEdit_" + ArrayCalendario_Grid[1][i].Index + "'><td><span class='cssToolTip_Boton'>" + ArrayCalendario_Grid[1][i].IniMar + "<span><input type='radio' class='Ver' name='option' onclick=\"EditHoraDia('" + ArrayCalendario_Grid[1][i].Index + "','2');\">Editar<br><input type='radio' class='Ver' name='option' onclick=\"DeleteHoraDia('" + ArrayCalendario_Grid[1][i].Index + "','2');\">Eliminar</span></span></td><td>" + ArrayCalendario_Grid[1][i].FinMar + "</td></tr>";
         }
         html_Calendario += "</tbody></table></td>"; //Cerramos tabla Martes
         //------------
@@ -1481,7 +1481,7 @@ function TGridCalendar() {
         html_Calendario += "<td id='ID_Miercoles' align='left' > <table id='TMiercoles' border='1' cellpadding='1' cellspacing='1' style='width: 100%'   ><thead><tr><th colspan='2' class='Grid_Head' >Miércoles</th></tr><tr><th colspan='2' class='Grid_Head' >Hora</th></tr><tr><th>Inicial</th><th>Final</th></tr></thead><tbody>";
         //Miércoles [2]
         for (i in ArrayCalendario_Grid[2]) {
-            html_Calendario += "<tr id= 'TMiercoles_" + ArrayCalendario_Grid[2][i].Index + "'><td><span class='cssToolTip_Boton'>" + ArrayCalendario_Grid[2][i].IniMie + "<span><input type='radio' class='Ver' name='option' onclick=\"EditHoraDia('" + ArrayCalendario_Grid[2][i].Index + "','3');\">Editar<br><input type='radio' class='Ver' name='option' onclick=\"DeleteHoraDia('" + ArrayCalendario_Grid[2][i].Index + "','3');\">Eliminar</span></span></td><td>" + ArrayCalendario_Grid[2][i].FinMie + "</td></tr>";
+            html_Calendario += "<tr id= 'TMiercolesEdit_" + ArrayCalendario_Grid[2][i].Index + "'><td><span class='cssToolTip_Boton'>" + ArrayCalendario_Grid[2][i].IniMie + "<span><input type='radio' class='Ver' name='option' onclick=\"EditHoraDia('" + ArrayCalendario_Grid[2][i].Index + "','3');\">Editar<br><input type='radio' class='Ver' name='option' onclick=\"DeleteHoraDia('" + ArrayCalendario_Grid[2][i].Index + "','3');\">Eliminar</span></span></td><td>" + ArrayCalendario_Grid[2][i].FinMie + "</td></tr>";
         }
         html_Calendario += "</tbody></table></td>"; //Cerramos tabla Miércoles
         //------------
@@ -1489,7 +1489,7 @@ function TGridCalendar() {
         html_Calendario += "<td id='ID_Jueves' align='left' > <table id='TJueves' border='1' cellpadding='1' cellspacing='1' style='width: 100%'   ><thead><tr><th colspan='2' class='Grid_Head' >Jueves</th></tr><tr><th colspan='2' class='Grid_Head' >Hora</th></tr><tr><th>Inicial</th><th>Final</th></tr></thead><tbody>";
         //Jueves [3]
         for (i in ArrayCalendario_Grid[3]) {
-            html_Calendario += "<tr id= 'TJueves_" + ArrayCalendario_Grid[3][i].Index + "'><td><span class='cssToolTip_Boton'>" + ArrayCalendario_Grid[3][i].IniJue + "<span><input type='radio' class='Ver' name='option' onclick=\"EditHoraDia('" + ArrayCalendario_Grid[3][i].Index + "','4');\">Editar<br><input type='radio' class='Ver' name='option' onclick=\"DeleteHoraDia('" + ArrayCalendario_Grid[3][i].Index + "','4');\">Eliminar</span></span></td><td>" + ArrayCalendario_Grid[3][i].FinJue + "</td></tr>";
+            html_Calendario += "<tr id= 'TJuevesEdit_" + ArrayCalendario_Grid[3][i].Index + "'><td><span class='cssToolTip_Boton'>" + ArrayCalendario_Grid[3][i].IniJue + "<span><input type='radio' class='Ver' name='option' onclick=\"EditHoraDia('" + ArrayCalendario_Grid[3][i].Index + "','4');\">Editar<br><input type='radio' class='Ver' name='option' onclick=\"DeleteHoraDia('" + ArrayCalendario_Grid[3][i].Index + "','4');\">Eliminar</span></span></td><td>" + ArrayCalendario_Grid[3][i].FinJue + "</td></tr>";
         }
         html_Calendario += "</tbody></table></td>"; //Cerramos tabla Jueves
         //------------
@@ -1497,7 +1497,7 @@ function TGridCalendar() {
         html_Calendario += "<td id='ID_Viernes' align='left' > <table id='TViernes' border='1' cellpadding='1' cellspacing='1' style='width: 100%'   ><thead><tr><th colspan='2' class='Grid_Head' >Viernes</th></tr><tr><th colspan='2' class='Grid_Head' >Hora</th></tr><tr><th>Inicial</th><th>Final</th></tr></thead><tbody>";
         //Viernes [4]
         for (i in ArrayCalendario_Grid[4]) {
-            html_Calendario += "<tr id= 'TViernes_" + ArrayCalendario_Grid[4][i].Index + "'><td><span class='cssToolTip_Boton'>" + ArrayCalendario_Grid[4][i].IniVie + "<span><input type='radio' class='Ver' name='option' onclick=\"EditHoraDia('" + ArrayCalendario_Grid[4][i].Index + "','5');\">Editar<br><input type='radio' class='Ver' name='option' onclick=\"DeleteHoraDia('" + ArrayCalendario_Grid[4][i].Index + "','5');\">Eliminar</span></span></td><td>" + ArrayCalendario_Grid[4][i].FinVie + "</td></tr>";
+            html_Calendario += "<tr id= 'TViernesEdit_" + ArrayCalendario_Grid[4][i].Index + "'><td><span class='cssToolTip_Boton'>" + ArrayCalendario_Grid[4][i].IniVie + "<span><input type='radio' class='Ver' name='option' onclick=\"EditHoraDia('" + ArrayCalendario_Grid[4][i].Index + "','5');\">Editar<br><input type='radio' class='Ver' name='option' onclick=\"DeleteHoraDia('" + ArrayCalendario_Grid[4][i].Index + "','5');\">Eliminar</span></span></td><td>" + ArrayCalendario_Grid[4][i].FinVie + "</td></tr>";
         }
         html_Calendario += "</tbody></table></td>"; //Cerramos tabla Viernes
         //------------
@@ -1505,7 +1505,7 @@ function TGridCalendar() {
         html_Calendario += "<td id='ID_Sabado' align='left' > <table id='TSabado' border='1' cellpadding='1' cellspacing='1' style='width: 100%'   ><thead><tr><th colspan='2' class='Grid_Head' >Sábado</th></tr><tr><th colspan='2' class='Grid_Head' >Hora</th></tr><tr><th>Inicial</th><th>Final</th></tr></thead><tbody>";
         //Sábado [5]
         for (i in ArrayCalendario_Grid[5]) {
-            html_Calendario += "<tr id= 'TSabado_" + ArrayCalendario_Grid[5][i].Index + "'><td><span class='cssToolTip_Boton'>" + ArrayCalendario_Grid[5][i].IniSab + "<span><input type='radio' class='Ver' name='option' onclick=\"EditHoraDia('" + ArrayCalendario_Grid[5][i].Index + "','6');\">Editar<br><input type='radio' class='Ver' name='option' onclick=\"DeleteHoraDia('" + ArrayCalendario_Grid[5][i].Index + "','6');\">Eliminar</span></span></td><td>" + ArrayCalendario_Grid[5][i].FinSab + "</td></tr>";
+            html_Calendario += "<tr id= 'TSabadoEdit_" + ArrayCalendario_Grid[5][i].Index + "'><td><span class='cssToolTip_Boton'>" + ArrayCalendario_Grid[5][i].IniSab + "<span><input type='radio' class='Ver' name='option' onclick=\"EditHoraDia('" + ArrayCalendario_Grid[5][i].Index + "','6');\">Editar<br><input type='radio' class='Ver' name='option' onclick=\"DeleteHoraDia('" + ArrayCalendario_Grid[5][i].Index + "','6');\">Eliminar</span></span></td><td>" + ArrayCalendario_Grid[5][i].FinSab + "</td></tr>";
         }
         html_Calendario += "</tbody></table></td>"; //Cerramos tabla Sábado
         //------------
@@ -1513,15 +1513,15 @@ function TGridCalendar() {
         html_Calendario += "<td id='ID_Domingo' align='left' > <table id='TDomingo' border='1' cellpadding='1' cellspacing='1' style='width: 100%'   ><thead><tr><th colspan='2' class='Grid_Head' >Domingo</th></tr><tr><th colspan='2' class='Grid_Head' >Hora</th></tr><tr><th class='Grid_Head'>Inicial</th><th class='Grid_Head'>Final</th></tr></thead><tbody>";
         //Domingo [6]
         for (i in ArrayCalendario_Grid[6]) {
-            html_Calendario += "<tr id= 'TDomingo_" + ArrayCalendario_Grid[6][i].Index + "'><td><span class='cssToolTip_Boton'>" + ArrayCalendario_Grid[6][i].IniDom + "<span><input type='radio' class='Ver' name='option' onclick=\"EditHoraDia('" + ArrayCalendario_Grid[6][i].Index + "','7');\">Editar<br><input type='radio' class='Ver' name='option' onclick=\"DeleteHoraDia('" + ArrayCalendario_Grid[6][i].Index + "','7');\">Eliminar</span></span></td><td>" + ArrayCalendario_Grid[6][i].FinDom + "</td></tr>";
+            html_Calendario += "<tr id= 'TDomingoEdit_" + ArrayCalendario_Grid[6][i].Index + "'><td><span class='cssToolTip_Boton'>" + ArrayCalendario_Grid[6][i].IniDom + "<span><input type='radio' class='Ver' name='option' onclick=\"EditHoraDia('" + ArrayCalendario_Grid[6][i].Index + "','7');\">Editar<br><input type='radio' class='Ver' name='option' onclick=\"DeleteHoraDia('" + ArrayCalendario_Grid[6][i].Index + "','7');\">Eliminar</span></span></td><td>" + ArrayCalendario_Grid[6][i].FinDom + "</td></tr>";
         }
         html_Calendario += "</tbody></table></td>"; //Cerramos tabla Domingo
 
 
         html_Calendario += "</tr></tbody></table>";//Cerramos tabla principal
 
-        //$(".container_TGrid_Create").html("");
-        $(".container_TGrid_Create").html(html_Calendario);
+        $("#Div_Horarios").html("");
+        $("#Div_Horarios").html(html_Calendario);
 
         //
         $("#TLunes").dataTable({
@@ -1608,7 +1608,7 @@ function TGridCalendar() {
             "bDestroy": true
         });
 
-        $(".container_TGrid_Create").css("display", "inline-table"); //Tabla que dibuja el grid con las horas ya capturadas
+        $("#Div_Horarios").css("display", "inline-table"); //Tabla que dibuja el grid con las horas ya capturadas
     } catch (e) {
         Mensaje_General("Error - No se logró dibujar tabla", "Lo sentimos, ocurrió un error y no se logró dibujar la tabla con los horarios ingresados, favor verifique los datos.", "E");
         setTimeout(console.error.bind(console, "• Log de error generado (Calendario.TGridCalendar):\n" + e));
@@ -2691,8 +2691,8 @@ function ClearDetalle() {
         $("#Ver_Txt_ID").html("");
         $("#Ver_TxtDescription").html("");
         $("#Ver_Select_TipoCalendario").html("");
-        $(".container_TGrid_Create").offsetHeight;
-        $(".container_TGrid_Create").html("");
+        $("#Div_Horarios").offsetHeight;
+        $("#Div_Horarios").html("");
     } catch (e) {
         Mensaje_General("Error - No se logró ejecutar la acción", "Lo sentimos, ocurrió un error y no se logró limpiar todos los campos correctamente.", "E");
         setTimeout(console.error.bind(console, "• Log de error generado (Calendario.Clear):\n" + e));
@@ -2717,7 +2717,7 @@ function VerifyTextDescription(value) {
         $("#Select_TipoCalendario").val("-1").trigger("chosen:updated");
         $("#Tabla_10").css("display", "none");
         $(".Table_Header_Block").css("display", "none"); //Table que contiene el capturador de horas
-        $(".container_TGrid_Create").css("display", "none"); //Tabla que dibuja el grid con las horas ya capturadas
+        $("#Div_Horarios").css("display", "none"); //Tabla que dibuja el grid con las horas ya capturadas
     } else {
         $("#Select_TipoCalendario").prop('disabled', false).trigger("chosen:updated");
     }
@@ -2898,7 +2898,7 @@ function ArmarMatricesDias() {
         RellenarMatrices(Mayor);
         CargarMatricesHorarios();
         Lineas = Mayor;
-        $(".container_TGrid_Create").css("display", "inline-table"); //Tabla que dibuja el grid con las horas ya capturadas
+        $("#Div_Horarios").css("display", "inline-table"); //Tabla que dibuja el grid con las horas ya capturadas
     } catch (e) {
         Mensaje_General("Error - No se logró ejecutar la acción", "Lo sentimos, ocurrió un error y no se logró armar correctamente los datos necesarios para los días.", "E");
         setTimeout(console.error.bind(console, "• Log de error generado (Calendario.ArmarMatricesDias):\n" + e));
@@ -3535,14 +3535,14 @@ function Change_TipoCalendario() {
             $("#Img5").css("display", "inline-table");
             $("#Tabla_10").css("display", "none");
             $(".Table_Header_Block").css("display", "none"); //Table que contiene el capturador de horas
-            $(".container_TGrid_Create").css("display", "none");
+            $("#Div_Horarios").css("display", "none");
         } else {
             ClearArraySemana();
             $("#Img5").css("display", "none");
             $(".Table_Header_Block").css("display", "inline-table"); //Table que contiene el capturador de horas
             $("#TxtF_Start").val("");
             $("#TxtF_End").val("");
-            $(".container_TGrid_Create").css("display", "none");
+            $("#Div_Horarios").css("display", "none");
             index_ID = $(this).val();
             switch (index_ID) {
                 case "1":
@@ -3554,7 +3554,7 @@ function Change_TipoCalendario() {
                     validaTipoCalendario = false;
                     Mensaje_General("Calendarios Progresivos", "Lo sentimos, por el momento, si desea crear un calendario progresivo debe utilizar la opción disponible en el menú principal.", "W");
                     $(".Table_Header_Block").css("display", "none"); //Table que contiene el capturador de horas
-                    $(".container_TGrid_Create").css("display", "none");
+                    $("#Div_Horarios").css("display", "none");
                     //$("#Tabla_10").css("display", "inline-table");
                     break;
             }
