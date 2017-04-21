@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Creación Huellas" Language="vb" AutoEventWireup="false" MasterPageFile="~/Parametros/Sasif_menu.Master" CodeBehind="Huellas.aspx.vb" Inherits="PanelSeguridad.Huellas" %>
+﻿<%@ Page Title="Creación Huellas - SASIF Personas" Language="vb" AutoEventWireup="false" MasterPageFile="~/Parametros/Sasif_menu.Master" CodeBehind="Huellas.aspx.vb" Inherits="PanelSeguridad.Huellas" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script src="../../Scripts/jquery-1.4.1.js" type="text/javascript"></script>
@@ -34,7 +34,7 @@
         </table>
     </div>
 
-    <!--Dialog que contiene la pantalla de las colocaciones/Huellas -->
+    <%--Dialog que contiene la pantalla de las colocaciones/Huellas --%>
     <div class="Marco_Container_Flex">
         <div class="Marco_trabajo_Flex">
             <table id="T_Encabezado" style="width: 100%;">

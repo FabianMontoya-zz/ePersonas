@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Menu/Sasif_menu.Master"
+﻿<%@ Page Title="Inicio - SASIF Personas" Language="vb" AutoEventWireup="false" MasterPageFile="~/Menu/Sasif_menu.Master"
     CodeBehind="menu.aspx.vb" Inherits="PanelSeguridad.menu" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">

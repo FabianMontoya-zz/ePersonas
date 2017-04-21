@@ -167,26 +167,32 @@ Public Class CalendarioAjax
         Dim SQL_CalendarioSemana As New CalendarioSemanaSQLClass
 
         Dim result As String
+        Dim ExitsInProgresive As String
 
-        objCalendarioSemana.Nit_ID = Request.Form("Nit_ID")
-        objCalendarioSemana.Calendario_ID = Request.Form("ID")
+        objCalendario.Nit_ID = Request.Form("Nit_ID")
+        objCalendario.Calendario_ID = Request.Form("ID")
 
-        result = SQL_CalendarioSemana.Delete_C_Semana(objCalendarioSemana)
+        ExitsInProgresive = SQL_Calendario.Consult_ExistsIn_CalendarioProgresivo(objCalendario)
 
-        If result.Equals("Exito") Then
-            objCalendario.Nit_ID = Request.Form("Nit_ID")
-            objCalendario.Calendario_ID = Request.Form("ID")
-            objCalendario.Descripcion = Request.Form("Descripcion")
-            objCalendario.TipoCalendario = Request.Form("TipoCalendario")
+        If ExitsInProgresive = 0 Then
+            objCalendarioSemana.Nit_ID = Request.Form("Nit_ID")
+            objCalendarioSemana.Calendario_ID = Request.Form("ID")
+            result = SQL_CalendarioSemana.Delete_C_Semana(objCalendarioSemana)
+            If result.Equals("Exito") Then
+                objCalendario.Descripcion = Request.Form("Descripcion")
+                objCalendario.TipoCalendario = Request.Form("TipoCalendario")
 
-            objCalendario.UsuarioActualizacion = Request.Form("user")
-            objCalendario.FechaActualizacion = Date.Now
-            result = SQL_Calendario.UpdateCalendario(objCalendario)
+                objCalendario.UsuarioActualizacion = Request.Form("user")
+                objCalendario.FechaActualizacion = Date.Now
+                result = SQL_Calendario.UpdateCalendario(objCalendario)
 
-            If result = "Exito" Then
-                Insert_CaledarioSemana()
+                If result = "Exito" Then
+                    Insert_CaledarioSemana()
+                End If
+
             End If
-
+        Else
+            result = "Exist_CP"
         End If
         Response.Write(result)
     End Sub
@@ -201,12 +207,19 @@ Public Class CalendarioAjax
         Dim SQL_Calendario As New CalendarioSQLClass
 
         Dim result As String
+        Dim ExitsInProgresive As String
 
         objCalendario.Nit_ID = Request.Form("Nit_ID")
         objCalendario.Calendario_ID = Request.Form("ID")
         objCalendario.TipoCalendario = Request.Form("TipoCalendario")
 
-        result = SQL_Calendario.EraseCalendario(objCalendario)
+        ExitsInProgresive = SQL_Calendario.Consult_ExistsIn_CalendarioProgresivo(objCalendario)
+
+        If ExitsInProgresive = 0 Then
+            result = SQL_Calendario.EraseCalendario(objCalendario)
+        Else
+            result = "Exist_CP"
+        End If
         Response.Write(result)
     End Sub
 
