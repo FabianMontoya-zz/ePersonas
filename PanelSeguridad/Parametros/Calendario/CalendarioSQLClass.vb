@@ -497,6 +497,30 @@ Public Class CalendarioSQLClass
     End Function
 
     ''' <summary>
+    ''' Función que consulta si el calendario semana está enlazado con algún calendario progresivo
+    ''' </summary>
+    ''' <param name="vp_O_Obj"></param>
+    ''' <returns></returns>
+    Public Function Consult_ExistsIn_CalendarioProgresivo(ByVal vp_O_Obj As CalendarioClass)
+
+        Dim StrQuery As String = ""
+        Dim Result As String = ""
+        Dim conex As New Conector
+
+        Dim sql As New StringBuilder
+
+        sql.AppendLine(" SELECT COUNT(*) FROM CALENDARIO_PROGRESIVO " &
+                       " WHERE CP_Nit_ID = '" & vp_O_Obj.Nit_ID & "'" &
+                       " AND CP_Calendario_Base_ID = '" & vp_O_Obj.Calendario_ID & "'")
+
+        StrQuery = sql.ToString
+
+        Result = conex.IDis(StrQuery, "2")
+
+        Return Result
+    End Function
+
+    ''' <summary>
     ''' lee la matriz de Calendarios
     ''' </summary>
     ''' <returns></returns>

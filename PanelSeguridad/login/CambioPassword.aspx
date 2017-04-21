@@ -1,7 +1,8 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Sasif.Master"
+﻿<%@ Page Title="Cambio Contraseña - SASIF Personas" Language="vb" AutoEventWireup="false" MasterPageFile="~/Sasif.Master"
     CodeBehind="CambioPassword.aspx.vb" Inherits="PanelSeguridad.CambioPassword" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link rel="icon" type="image/png" href="../Images/LOGO_WEB.png" />
     <script src="../Scripts/jquery-1.4.1.js" type="text/javascript"></script>
     <script src="CambioPassword.js" type="text/javascript"></script>
     <script src="../SasifMaster.js" type="text/javascript"></script>

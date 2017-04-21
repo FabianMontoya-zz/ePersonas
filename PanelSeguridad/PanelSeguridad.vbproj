@@ -21,6 +21,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <TargetFrameworkProfile />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -389,6 +390,7 @@
     <Content Include="Images\Folder_Red.png" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\logo_2.png" />
+    <Content Include="Images\LOGO_WEB.png" />
     <Content Include="Images\LOOK_BLACK.png" />
     <Content Include="Images\LOOK_WHITE.png" />
     <Content Include="Images\manos_dedos.png" />
