@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Perfiles - SASIF Personas" Language="vb" AutoEventWireup="false" MasterPageFile="~/Administrador/Sasif_menu.Master"
+﻿<%@ Page Title="Admon Perfiles - SASIF Personas" Language="vb" AutoEventWireup="false" MasterPageFile="~/Administrador/Sasif_menu.Master"
     CodeBehind="Adm_Roles.aspx.vb" Inherits="PanelSeguridad.Adm_Roles" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">

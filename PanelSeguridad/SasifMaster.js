@@ -301,8 +301,8 @@ function ready() {
         setTimeout(console.log.bind(console, "" + Day + "/" + Matrix_Mes[Month][1] + "/" + Year + " " + hours + ":" + minutes + ":" + seconds + "")); //No muestra la ruta donde se genera el console
         setTimeout(console.log.bind(console, "%cAll is ready, enjoy!", "color: #b70d0d; font-size: x-large")); //No muestra la ruta donde se genera el console
         setTimeout(console.log.bind(console, "%cDesarrollado por SASIF® 2016. Todos los derechos reservados.\nContacto sistemas@sasif.com.co | Bogotá D.C. - Colombia \n© SASIF S.A.S. " + Year + "", "color: #b70d0d; font-size: x"));
-        
-        //Reload();
+
+        Reload();
     } catch (e) {
         Mensaje_General("Error - Cargue Secuencia", "Lo sentimos, ocurrió un error y no se logró completar la secuencia de procesos iniciales.", "E");
         setTimeout(console.error.bind(console, "• Log de error generado (SasifMaster.ready):\n" + e));
@@ -311,7 +311,6 @@ function ready() {
 
 /*Función que recarga la página y exige que se traigan los nuevos cambios desde el servidor
   Funciona solamente cuando se cierra y nuevamente se abre el navegador*/
-/*DESHABILITADA POR ACTUALIZACIÓN DE CHROME, YA NO FORZA AL NAVEGADOR*/
 function Reload() {
     /*
      * Obtenemos la última parte de la URL. Por ejemplo, en una URL como:
@@ -324,7 +323,7 @@ function Reload() {
 
         if (!isRedirected) {
             sessionStorage.setItem(page, true);
-            location.reload(true);
+            window.location.reload(true);
         }
     })();
 }
@@ -802,12 +801,11 @@ function validate_fechaMayorQue(fechaInicial, fechaFinal, Type) {
 }
 
 //valida las hora inicial y final que sean coherentes
-function Validahora(V_HoraInicial, V_HoraFinal) {    
+function Validahora(V_HoraInicial, V_HoraFinal) {
     var Valida = 0;
+
     if (V_HoraInicial == "" || V_HoraFinal == "") {
         Valida = 2;
-    } else if (V_HoraInicial == V_HoraFinal) {
-        Valida = 3;
     } else {
         var A_V_HoraInicial = V_HoraInicial.split(":");
         var A_V_HoraFinal = V_HoraFinal.split(":");
