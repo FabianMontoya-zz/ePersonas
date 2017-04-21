@@ -21,9 +21,21 @@
     <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
     <link href="../../css/custom/Control_Sasif.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/Dialog/datepicker.js" type="text/javascript"></script>
-    <script src="../../Scripts/Dialog/timepicker.js" type="text/javascript"></script>    
+    <script src="../../Scripts/Dialog/timepicker.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        //evento del boton salir
+        function x() {
+            try {
+                $("#dialog").dialog("close");
+            } catch (e) {
+                setTimeout(console.error.bind(console, "• Log de error generado (Calendarioaspx.x):\n" + e));
+                return false;
+            }
+        }
+    </script>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">    
+<asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
+
     <div class="Container_title_Form">
         <table id="Tabla_Title_form">
             <tr>
@@ -559,8 +571,7 @@
             </tr>
             <tr>
                 <td colspan="2" align="center">
-                    <%-- El onclick tiene directamente dado que este módulo presenta a veces problemas al llamar la función x(); favor no modificarlo --%>
-                    <input id="BtnExitD" type="button" value="Salir" style="width: 40%; cursor: pointer; cursor: hand;" onclick='$("#dialog").dialog("close");'/>
+                    <input id="BtnExitD" type="button" value="Salir" style="width: 40%;" onclick="x();" style="cursor: pointer; cursor: hand;" />
                 </td>
             </tr>
         </table>

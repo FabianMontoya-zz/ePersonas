@@ -262,7 +262,7 @@ function BtnCrear() {
                     }
 
                 }
-            } else {
+            } else{
                 Mensaje_General("Opción no Disponible", "Lo sentimos, la creación de calendarios progresivos desde este módulo aún no se encuentra disponible, por favor usa la opción disponible en el menú principal.", "W");
                 setTimeout(console.error.bind(console, "• Log de error generado (Calendario.BtnCrear):\nSe intentó vulnerar el proceso normal de validación del sistema, pero esto fue controlado, favor deja de intentar modificar el correcto funcionamiento del aplicativo, te lo agradecemos.\nAtt: Grupo Desarrolladores SASIF."));
             }
@@ -1397,10 +1397,8 @@ function CargeJson() {
                 };
                 MatrizSunday.push(JSONDay);
             }
-            if ($("#Btnguardar").val() == "Guardar") {
-                CargarMatricesHorarios();
-                Clear_Agregar();
-            }
+            CargarMatricesHorarios();
+            Clear_Agregar();
             validaTipoCalendario = true;
         } else {
             Mensaje_General("Error - Horario Existe", "No puedes ingresar dos veces una misma combinación de horarios, esto sucedio en los siguientes días: " + MensajeRepetido + "", "W");
@@ -1779,10 +1777,20 @@ function ValidarHorasEdit() {
     var validoEdit = 0;
 
     if ($("#TxtEditIni").val() != "" || $("#TxtEditFin").val() != "") {
-        validoEdit = Validahora($("#TxtEditIni").val(), $("#TxtEditFin").val());        
+        V_H = Validahora($("#TxtEditIni").val(), $("#TxtEditFin").val());
+
+        switch (V_H) {
+            case 1:
+                validoEdit = 1;
+                break;
+
+            case 2:
+                validoEdit = 2;
+                break;
+        }
     } else {
         Mensaje_General("ERROR - Campos Vacios", "No puedes dejar los campos vacios, debe ingresar un horario valido.", "E");
-        validoEdit = 4;
+        validoEdit = 3;
     }
 
     return validoEdit;
@@ -1896,9 +1904,6 @@ function EditArraysTime() {
 
             case 2:
                 Mensaje_General("Error - Campos Incompletos", "El campo de hora inicial u hora final no se completó.", "W");
-                break;
-            case 3:
-                Mensaje_General("Error - Horas Iguales", "La hora inicial no puede ser la misma que la hora final.", "W");
                 break;
         }
     } catch (e) {
@@ -2487,17 +2492,7 @@ function Editar(index_Nit, index_Calendario) {
     try {
         $(".Dialog_Datos_Calen").css("display", "inline-table");
         $("#TablaConsulta").css("display", "none");
-        if (estado == "buscar") { //Si se va a mostrar el detalle
-            $("#Dialog_Calendar").dialog("close");
-            $("#Dialog_Calendar_View").dialog("open");
-            $("#Dialog_Calendar_View").dialog("option", "title", "Vista Calendario");
-            $("#Btnguardar").attr("value", "No Action");
-        } else { //Sino, es una actualización, se sigue normal
-            $("#Dialog_Calendar_View").dialog("close");
-            $("#Dialog_Calendar").dialog("open");
-            $("#Dialog_Calendar").dialog("option", "title", "Actualizar Calendario");
-            $("#Btnguardar").attr("value", "Actualizar");
-        }
+                
         OpenControl();
         for (itemArray in ArrayCalendario) {
             if (index_Nit == ArrayCalendario[itemArray].Nit_ID && index_Calendario == ArrayCalendario[itemArray].Calendario_ID) {
@@ -2522,11 +2517,19 @@ function Editar(index_Nit, index_Calendario) {
                 $('.C_Chosen').trigger('chosen:updated');
             }
         }
-
+        
         $(".Table_Header_Block").css("display", "inline-table"); //Table que contiene el capturador de horas
         if (estado == "buscar") { //Si se va a mostrar el detalle
+            $("#Dialog_Calendar").dialog("close");
+            $("#Dialog_Calendar_View").dialog("open");
+            $("#Dialog_Calendar_View").dialog("option", "title", "Vista Calendario");
+            $("#Btnguardar").attr("value", "No Action");
             Detalle(index_Nit, index_Calendario);
         } else { //Sino, es una actualización, se sigue normal
+            $("#Dialog_Calendar_View").dialog("close");
+            $("#Dialog_Calendar").dialog("open");
+            $("#Dialog_Calendar").dialog("option", "title", "Actualizar Calendario");
+            $("#Btnguardar").attr("value", "Actualizar");
             validaTipoCalendario = true;
             ArmarMatricesDias();
         }
@@ -2539,16 +2542,16 @@ function Editar(index_Nit, index_Calendario) {
 
 // Función que muestra el detalle del calendario en VER
 function Detalle(index_Nit, index_Calendario) {
-    try {
+    try {        
         for (itemArray in ArrayCalendario) {
             if (index_Nit == ArrayCalendario[itemArray].Nit_ID && index_Calendario == ArrayCalendario[itemArray].Calendario_ID) {
-
+                
                 $("#Ver_Select_EmpresaNit").html($("#Select_EmpresaNit option:selected").html());
                 $("#Ver_Txt_ID").html(ArrayCalendario[itemArray].Calendario_ID);
 
                 $("#Ver_TxtDescription").html(ArrayCalendario[itemArray].Descripcion);
                 $("#Ver_Select_TipoCalendario").html($("#Select_TipoCalendario option:selected").html());
-
+          
             }
         }
         ArmarMatricesDias_Ver();
@@ -3381,7 +3384,7 @@ function TGridCalendar_Ver() {
 
         html_Calendario += "</tr></tbody></table>";//Cerramos tabla principal
 
-
+        
         $("#Div_Ver").html(html_Calendario);
 
         //
@@ -3394,11 +3397,7 @@ function TGridCalendar_Ver() {
             "info": false,
             "bJQueryUI": true,
             "iDisplayLength": 1000,
-            "bDestroy": true,
-            "aaSorting": [],
-            "aoColumnDefs": [
-          { 'bSortable': false, 'aTargets': [0, 1] }
-            ]
+            "bDestroy": true
         });
         //
         $("#TMartesVer").dataTable({
@@ -3410,11 +3409,7 @@ function TGridCalendar_Ver() {
             "info": false,
             "bJQueryUI": true,
             "iDisplayLength": 1000,
-            "bDestroy": true,
-            "aaSorting": [],
-            "aoColumnDefs": [
-          { 'bSortable': false, 'aTargets': [0, 1] }
-            ]
+            "bDestroy": true
         });
         //
         $("#TMiercolesVer").dataTable({
@@ -3426,11 +3421,7 @@ function TGridCalendar_Ver() {
             "info": false,
             "bJQueryUI": true,
             "iDisplayLength": 1000,
-            "bDestroy": true,
-            "aaSorting": [],
-            "aoColumnDefs": [
-          { 'bSortable': false, 'aTargets': [0, 1] }
-            ]
+            "bDestroy": true
         });
         //
         $("#TJuevesVer").dataTable({
@@ -3442,11 +3433,7 @@ function TGridCalendar_Ver() {
             "info": false,
             "bJQueryUI": true,
             "iDisplayLength": 1000,
-            "bDestroy": true,
-            "aaSorting": [],
-            "aoColumnDefs": [
-          { 'bSortable': false, 'aTargets': [0, 1] }
-            ]
+            "bDestroy": true
         });
         //
         $("#TViernesVer").dataTable({
@@ -3458,11 +3445,7 @@ function TGridCalendar_Ver() {
             "info": false,
             "bJQueryUI": true,
             "iDisplayLength": 1000,
-            "bDestroy": true,
-            "aaSorting": [],
-            "aoColumnDefs": [
-          { 'bSortable': false, 'aTargets': [0, 1] }
-            ]
+            "bDestroy": true
         });
         //
         $("#TSabadoVer").dataTable({
@@ -3474,11 +3457,7 @@ function TGridCalendar_Ver() {
             "info": false,
             "bJQueryUI": true,
             "iDisplayLength": 1000,
-            "bDestroy": true,
-            "aaSorting": [],
-            "aoColumnDefs": [
-          { 'bSortable': false, 'aTargets': [0, 1] }
-            ]
+            "bDestroy": true
         });
         //
         $("#TDomingoVer").dataTable({
@@ -3490,11 +3469,7 @@ function TGridCalendar_Ver() {
             "info": false,
             "bJQueryUI": true,
             "iDisplayLength": 1000,
-            "bDestroy": true,
-            "aaSorting": [],
-            "aoColumnDefs": [
-          { 'bSortable': false, 'aTargets': [0, 1] }
-            ]
+            "bDestroy": true
         });
 
         $("#Div_Ver").css("display", "inline-table"); //Tabla que dibuja el grid con las horas ya capturadas

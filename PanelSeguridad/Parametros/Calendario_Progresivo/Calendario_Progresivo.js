@@ -665,8 +665,7 @@ function Arrastre_Day() {
         "bDestroy": true,
         "aoColumnDefs": [
           { 'bSortable': false, 'aTargets': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] }
-        ],
-        "aaSorting": []
+        ]
     });
 }
 
@@ -712,8 +711,7 @@ function Arrastre_Week() {
         "bDestroy": true,
         "aoColumnDefs": [
           { 'bSortable': false, 'aTargets': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] }
-        ],
-        "aaSorting": []
+        ]
     });
 }
 
@@ -1218,7 +1216,17 @@ function ValidarHorasEdit() {
     var validoEdit = 0;
 
     if ($("#TxtEditIni").val() != "" || $("#TxtEditFin").val() != "") {
-        validoEdit = Validahora($("#TxtEditIni").val(), $("#TxtEditFin").val());
+        V_H = Validahora($("#TxtEditIni").val(), $("#TxtEditFin").val());
+
+        switch (V_H) {
+            case 1:
+                validoEdit = 1;
+                break;
+
+            case 2:
+                validoEdit = 2;
+                break;
+        }
     } else {
         Mensaje_General("ERROR - Campos Vacios", "No puedes dejar los campos vacios, debe ingresar un horario valido.", "E");
         validoEdit = 3;
@@ -1259,9 +1267,6 @@ function EditArraysTime() {
 
             case 2:
                 Mensaje_General("Error - Campos Incompletos", "El campo de hora inicial u hora final no se completó.", "W");
-                break;
-            case 3:
-                Mensaje_General("Error - Horas Iguales", "La hora inicial no puede ser la misma que la hora final.", "W");
                 break;
         }
     } catch (e) {

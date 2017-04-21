@@ -2,7 +2,6 @@
     CodeBehind="Login.aspx.vb" Inherits="PanelSeguridad.Login" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <link rel="icon" type="image/png" href="../Images/LOGO_WEB.png" />
     <script src="../Scripts/jquery-1.4.1.js" type="text/javascript"></script>
     <script src="Login.js" type="text/javascript"></script>
     <script src="LoginTransaccionsAjax.js" type="text/javascript"></script>

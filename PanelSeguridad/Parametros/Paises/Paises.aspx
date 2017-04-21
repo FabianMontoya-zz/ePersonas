@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Países - SASIF Personas" Language="vb" AutoEventWireup="false" MasterPageFile="~/Parametros/Sasif_menu.Master"
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Parametros/Sasif_menu.Master"
     CodeBehind="Paises.aspx.vb" Inherits="PanelSeguridad.Paises" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
