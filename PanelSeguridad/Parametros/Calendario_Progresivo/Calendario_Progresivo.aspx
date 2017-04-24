@@ -208,7 +208,7 @@
             <div class="container_TGrid_Default">
             </div>
             <%-- Div que contiene la tabla con el lapso seleccionado --%>
-            <div class="container_TGrid_Create">
+            <div id="Div_Horarios" class="container_TGrid_Create">
             </div>
             <table id="T_BTNGuardar" style="width: 100%;">
                 <tr>
