@@ -74,6 +74,7 @@
             </div>
         </div>
     </div>
+    <%-- Dialog para Creación y Modificación --%>
     <div id="Dialog_Calendar">
         <div class="Header_Datos_Max">
             <table id="T_Nit" style="width: 100%; text-align: left;">
@@ -223,6 +224,92 @@
                     </td>
                 </tr>
             </table>
+        </div>
+    </div>
+    <%-- Div de Vista --%>
+    <div id="Ver_Dialog_Calendar">
+        <div class="Header_Datos_Max">
+            <table id="Ver_T_Nit" style="width: 100%; text-align: left;">
+                <tr>
+                    <td style="width: 10.5%;" class="Label_Bold">NIT Empresa
+                    </td>
+                    <td id="Ver_Select_EmpresaNit" style="width: 47%;">
+                       
+                    </td>
+                    <td style="padding-bottom: 25px; width: 60%;">
+                        
+                    </td>
+                </tr>
+            </table>
+            <table id="Ver_Tabla_Codigo" style="width: 100%; text-align: left;">
+                <tr>
+                    <td style="width: 10.5%;" class="Label_Bold">Código
+                    </td>
+                    <td style="width: 6%; min-width: 60px;" id="Ver_Txt_ID">
+                        
+                    </td>
+                    <td style="padding-bottom: 25px; width: 98%;">
+                       
+                    </td>
+                </tr>
+            </table>
+            <table id="Ver_Tabla_Desc" style="width: 100%; text-align: left;">
+                <tr>
+                    <td class="Label_Bold" style="width: 10.5%;">Descripción
+                    </td>
+                    <td style="width: 30%; min-width: 100px;" id="Ver_TxtDescription">                        
+                    </td>
+                    <td style="padding-bottom: 25px; width: 80%;">
+                        
+                    </td>
+                </tr>
+            </table>
+            <table id="Ver_T_Calendario" style="width: 100%; text-align: left;">
+                <tr>
+                    <td style="width: 10.5%;" class="Label_Bold">Calendario Base
+                    </td>
+                    <td style="width: 47%;" id="Ver_Select_Calendario_CP">
+                        
+                    </td>
+                    <td style="padding-bottom: 25px; width: 98%;">
+                        
+                    </td>
+                </tr>
+            </table>
+            <table id="Ver_T_Subtitle1" style="width: 100%;" border="0">
+                <tr>
+                    <td class="Title_Bold" style="width: 10.5%;">
+                        <br />
+                        Rango Calendario
+                    </td>
+                </tr>
+            </table>
+            <table id="Ver_T_Rango" style="width: 50%; text-align: left;">
+                <tr>
+                    <td class="Label_Bold">Fecha Inicial
+                    </td>
+                    <td></td>
+                    <td class="Label_Bold">Fecha Final
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td id="Ver_TxtF_Start">                      
+                            
+                    </td>
+                    <td style="padding-bottom: 25px; width: 90px;">
+                        
+                    </td>
+                    <td style="width: 120px;" id="Ver_TxtF_End">                        
+                    </td>
+                    <td style="padding-bottom: 25px; width: 200px;">                        
+                    </td>
+                </tr>
+            </table>
+                                 
+            <%-- Div que contiene la tabla con el lapso seleccionado --%>
+            <div id="Ver_Div_Horarios" class="container_TGrid_Create">
+            </div>
         </div>
     </div>
     <%-- Dialog de mensajes --%>

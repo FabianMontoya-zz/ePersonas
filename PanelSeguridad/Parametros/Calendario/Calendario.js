@@ -319,7 +319,7 @@ function BtnAgregaCalendario() {
                 Mensaje_General("Error - Campos Incompletos", "El campo de hora inicial u hora final no se completó en los días: " + MensajeVacio + "", "W");
                 break;
             case 3:
-                Mensaje_General("Error - Horas Iguales", "La hora inicial no puede ser la misma que la hora final en los días: " + MensajeIgual + "", "W");
+                Mensaje_General("Error - Horas Iguales", "La hora inicial no puede ser igual que la hora final en los días: " + MensajeIgual + "", "W");
                 break;
         }
     } catch (e) {
@@ -1959,7 +1959,7 @@ function EditArraysTime() {
                 Mensaje_General("Error - Campos Incompletos", "El campo de hora inicial u hora final no se completó.", "W");
                 break;
             case 3:
-                Mensaje_General("Error - Horas Iguales", "La hora inicial no puede ser la misma que la hora final.", "W");
+                Mensaje_General("Error - Horas Iguales", "La hora inicial no puede ser igual que la hora final.", "W");
                 break;
         }
     } catch (e) {
