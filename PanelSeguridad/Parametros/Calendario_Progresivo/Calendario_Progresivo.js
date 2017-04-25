@@ -98,6 +98,18 @@ function Ventanas_Emergentes() {
         }
     });
 
+    $("#Ver_Dialog_Calendar").dialog({
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true,
+        width: 1220,
+        height: 760,
+        overlay: {
+            opacity: 0.5,
+            background: "black"
+        }
+    });
+
     $("#Dialog_time").dialog({
         autoOpen: false,
         dialogClass: "Dialog_Sasif",
@@ -141,8 +153,8 @@ function Ocultar_Errores() {
 //Función que oculta las tablas
 function Ocultar_Tablas() {
     $(".Table_Header_Block").css("display", "none"); //Table que contiene el capturador de horas
-    $(".container_TGrid_Create").html("");
-    $(".container_TGrid_Create").css("display", "none"); //Tabla que dibuja el grid
+    $("#Div_Horarios").html("");
+    $("#Div_Horarios").css("display", "none"); //Tabla que dibuja el grid
     $(".container_TGrid_Default").html("");
     $(".container_TGrid_Default").css("display", "none"); //Div que contiene tabla para arrastre
     $("#TablaConsulta").css("display", "none");
@@ -280,7 +292,7 @@ function BtnConsulta() {
         var filtro;
         var ValidateSelect = ValidarDroplist();
         var opcion;
-        
+
         if (ValidateSelect == 1) {
             filtro = "N";
             opcion = "ALL";
@@ -294,7 +306,7 @@ function BtnConsulta() {
         }
     } catch (e) {
         Mensaje_General("Error - No se logró consultar", "Lo sentimos, ocurrió un error y no se logró completar consultar los calendarios, favor verifique los datos.", "E");
-        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo):\n" + e));
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo.BtnConsulta):\n" + e));
     }
 }
 
@@ -322,7 +334,7 @@ function BtnCrear() {
         }
     } catch (e) {
         Mensaje_General("Error - No se logró " + $("#Btnguardar").val(), "Lo sentimos, ocurrió un error y no se logró ejecutar la acción de " + $("#Btnguardar").val() + ", favor verifique los datos.", "E");
-        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo):\n" + e));
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo.BtnCrear):\n" + e));
     }
 }
 
@@ -332,7 +344,7 @@ function BtnElimina() {
         transacionAjax_Calendario_delete("elimina");
     } catch (e) {
         Mensaje_General("Error - No se logró eliminar", "Lo sentimos, ocurrió un error y no se logró completar operación de eliminación del calendario, favor verifique los datos.", "E");
-        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo):\n" + e));
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo.BtnElimina):\n" + e));
     }
 }
 
@@ -487,7 +499,7 @@ function CreateGridArrastre() {
                 Arrastre_Day();
                 break;
             case "2":
-                Arrastre_Week();                
+                Arrastre_Week();
                 break;
             default:
                 $(".container_TGrid_Default").html("");
@@ -496,7 +508,7 @@ function CreateGridArrastre() {
         }
     } catch (e) {
         Mensaje_General("Error - Arrastre", "Lo sentimos, ocurrió un error y no se completó correctamente el proceso necesario para utilizar la función de arrastre de horarios, favor verifique los datos.", "E");
-        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo):\n" + e));
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo.CreateGridArrastre):\n" + e));
     }
 }
 
@@ -505,7 +517,7 @@ function CantArrastre(nameDay) {
     try {
         Mensaje_General("Error - Día No Laboral", "Lo sentimos, no puedes arrastrar valores para un día no laboral, esto se estableció en el calendario «" + $("#Select_Calendario_CP option:selected").html() + " » para el día " + nameDay + ".", "W");
     } catch (e) {
-        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo):\n" + e));
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo.CantArrastre):\n" + e));
     }
 }
 
@@ -552,7 +564,7 @@ function ArrastrarHorarioDay(numDay) {
         Mensaje_General("Exito - Arrastre completo", "El horario se ha arrastrado correctamente a la tabla de horarios.", "S");
     } catch (e) {
         Mensaje_General("Error - No se logró arrastrar", "Lo sentimos, ocurrió un error y no se logró completar correctamente la acción de arrastre, verifique los datos.", "E");
-        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo):\n" + e));
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo.ArrastrarHorarioDay):\n" + e));
     }
 }
 
@@ -599,7 +611,7 @@ function ArrastrarHorarioWeek() {
         Mensaje_General("Exito - Arrastre completo", "El horario se ha arrastrado correctamente a la tabla de horarios.", "S");
     } catch (e) {
         Mensaje_General("Error - No se logró arrastrar", "Lo sentimos, ocurrió un error y no se logró completar correctamente la acción de arrastre, verifique los datos.", "E");
-        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo):\n" + e));
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo.ArrastrarHorarioWeek):\n" + e));
     }
 }
 
@@ -768,7 +780,7 @@ function Arrastre_EditHoraDia(ID_Dia, Horario) {
         $("#TxtEditIni").focus();
     } catch (e) {
         Mensaje_General("Error - No se logró actualizar", "Lo sentimos, ocurrió un error y no se logró ejecutar la opción de editar, verifique los datos.", "E");
-        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo):\n" + e));
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo.Arrastre_EditHoraDia):\n" + e));
     }
 }
 
@@ -815,10 +827,14 @@ function Arrastre_EditArraysTime() {
             case 2:
                 Mensaje_General("Error - Campos Incompletos", "El campo de hora inicial u hora final no se completó.", "W");
                 break;
+
+            case 3:
+                Mensaje_General("Error - Horas Iguales", "La hora inicial no puede ser igual que la hora final.", "W");
+                break;
         }
     } catch (e) {
         Mensaje_General("Error - No se logró actualizar", "Lo sentimos, ocurrió un error y no se logró actualizar el horario, intente más tarde.", "E");
-        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo):\n" + e));
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo.Arrastre_EditArraysTime):\n" + e));
     }
 }
 
@@ -930,7 +946,7 @@ function Arrastre_EditHoraAllDias(Horario) {
         $("#TxtEditIni").focus();
     } catch (e) {
         Mensaje_General("Error - No se logró actualizar", "Lo sentimos, ocurrió un error y no se logró ejecutar la opción de editar, verifique los datos.", "E");
-        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo):\n" + e));
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario_Progresivo.Arrastre_EditHoraAllDias):\n" + e));
     }
 }
 
@@ -977,10 +993,14 @@ function Arrastre_EditArraysTimeAllDays() {
             case 2:
                 Mensaje_General("Error - Campos Incompletos", "El campo de hora inicial u hora final no se completó.", "W");
                 break;
+
+            case 3:
+                Mensaje_General("Error - Horas Iguales", "La hora inicial no puede ser igual que la hora final.", "W");
+                break;
         }
     } catch (e) {
         Mensaje_General("Error - No se logró actualizar", "Lo sentimos, ocurrió un error y no se logró actualizar el horario, intente más tarde.", "E");
-        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo):\n" + e));
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo.Arrastre_EditArraysTimeAllDays):\n" + e));
     }
 }
 
@@ -1098,7 +1118,7 @@ function Arrastre_DeleteHoraDia(numDia, Horario) {
         editGrupoHorario = "";
     } catch (e) {
         Mensaje_General("Error - No se logró eliminar", "Lo sentimos, ocurrió un error y no se logró ejecutar la opción de eliminar, verifique los datos.", "E");
-        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo):\n" + e));
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo.Arrastre_DeleteHoraDia):\n" + e));
     }
 }
 
@@ -1192,7 +1212,7 @@ function EditHoraDia(ID_Dia, Horario) {
         $("#TxtEditIni").focus();
     } catch (e) {
         Mensaje_General("Error - No se logró actualizar", "Lo sentimos, ocurrió un error y no se logró ejecutar la opción de editar, verifique los datos.", "E");
-        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo):\n" + e));
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo.EditHoraDia):\n" + e));
     }
 }
 
@@ -1260,13 +1280,14 @@ function EditArraysTime() {
             case 2:
                 Mensaje_General("Error - Campos Incompletos", "El campo de hora inicial u hora final no se completó.", "W");
                 break;
+
             case 3:
                 Mensaje_General("Error - Horas Iguales", "La hora inicial no puede ser la misma que la hora final.", "W");
                 break;
         }
     } catch (e) {
         Mensaje_General("Error - No se logró actualizar", "Lo sentimos, ocurrió un error y no se logró actualizar el horario, intente más tarde.", "E");
-        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo):\n" + e));
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo.EditArraysTime):\n" + e));
     }
 }
 
@@ -1393,7 +1414,7 @@ function DeleteHoraDia(ID_Dia, Horario) {
         editGrupoHorario = "";
     } catch (e) {
         Mensaje_General("Error - No se logró eliminar", "Lo sentimos, ocurrió un error y no se logró ejecutar la opción de eliminar, verifique los datos.", "E");
-        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo):\n" + e));
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo.DeleteHoraDia):\n" + e));
     }
 }
 
@@ -1452,10 +1473,10 @@ function Table_Calendario() {
         switch (estado) {
 
             case "buscar":
-                html_TableCalendario = "<table id='TCalendario' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>NIT Empresa</th><th>Código</th><th>Descripción</th><th>Tipo Calendario</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Actualización</th></tr></thead><tbody>";
+                html_TableCalendario = "<table id='TCalendario' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Ver</th><th>NIT Empresa</th><th>Código</th><th>Descripción</th><th>Tipo Calendario</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Usuario Actualización</th><th>Fecha Actualización</th></tr></thead><tbody>";
                 for (itemArray in ArrayCalendario) {
                     if (ArrayCalendario[itemArray].Calendario_ID != 0) {
-                        html_TableCalendario += "<tr id= 'TCalendario_" + ArrayCalendario[itemArray].Calendario_ID + "'><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].Nit_ID + " - " + ArrayCalendario[itemArray].DescripEmpresa + "</td><td>" + ArrayCalendario[itemArray].Calendario_ID + "</td><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].Descripcion + "</td><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].TipoCalendario + " - " + ArrayCalendario[itemArray].DescripTipoCalendario + "</td><td>" + ArrayCalendario[itemArray].UsuarioCreacion + "</td><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].FechaCreacion + "</td><td>" + ArrayCalendario[itemArray].UsuarioActualizacion + "</td><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].FechaActualizacion + "</td></tr>";
+                        html_TableCalendario += "<tr id= 'TCalendario_" + ArrayCalendario[itemArray].Calendario_ID + "'><td><span class='cssToolTip_ver'><img  src='../../images/N_Search_Red.png' width='23px' height='23px' class= 'Editar' name='editar' onmouseover=\"this.src='../../images/N_Search_Black.png';\" onmouseout=\"this.src='../../images/N_Search_Red.png';\" onclick=\"Editar('" + ArrayCalendario[itemArray].Nit_ID + "','" + ArrayCalendario[itemArray].Calendario_ID + "')\"></img><span>Ver Calendario</span></span></td><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].Nit_ID + " - " + ArrayCalendario[itemArray].DescripEmpresa + "</td><td>" + ArrayCalendario[itemArray].Calendario_ID + "</td><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].Descripcion + "</td><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].TipoCalendario + " - " + ArrayCalendario[itemArray].DescripTipoCalendario + "</td><td>" + ArrayCalendario[itemArray].UsuarioCreacion + "</td><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].FechaCreacion + "</td><td>" + ArrayCalendario[itemArray].UsuarioActualizacion + "</td><td style='white-space: nowrap;'>" + ArrayCalendario[itemArray].FechaActualizacion + "</td></tr>";
                     }
                 }
                 break;
@@ -1496,7 +1517,7 @@ function Table_Calendario() {
         });
     } catch (e) {
         Mensaje_General("Error - Dibujar tabla", "Lo sentimos, ocurrió un error y no se logró dibujar la tabla con los datos solicitados, favor verifique los datos.", "E");
-        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo):\n" + e));
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo.Table_Calendario):\n" + e));
     }
 }
 
@@ -1514,7 +1535,7 @@ function Eliminar(index_Nit, index_Calendario) {
         }
     } catch (e) {
         Mensaje_General("Error - Eliminar", "Lo sentimos, ocurrió un error y no se logró ejecutar la acción solicitada, favor verifique los datos.", "E");
-        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo):\n" + e));
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo.Eliminar):\n" + e));
     }
 }
 
@@ -1523,9 +1544,18 @@ function Editar(index_Nit, index_Calendario) {
     try {
         $(".Dialog_Datos_Calen").css("display", "inline-table");
         $("#TablaConsulta").css("display", "none");
-        $("#Dialog_Calendar").dialog("open");
-        $("#Dialog_Calendar").dialog("option", "title", "Actualizar Calendario");
-        $("#Btnguardar").attr("value", "Actualizar");
+
+        if (estado == "modificar") {
+            $("#Ver_Dialog_Calendar").dialog("close");
+            $("#Dialog_Calendar").dialog("open");
+            $("#Dialog_Calendar").dialog("option", "title", "Actualizar Calendario");
+            $("#Btnguardar").attr("value", "Actualizar");
+        } else if (estado == "buscar") {
+            $("#Dialog_Calendar").dialog("close");
+            $("#Ver_Dialog_Calendar").dialog("open");
+            $("#Ver_Dialog_Calendar").dialog("option", "title", "Consulta Calendario");
+            $("#Btnguardar").attr("value", "No Action");
+        }        
         OpenControl();
         for (var itemArray in ArrayCalendario) {
             if (index_Nit == ArrayCalendario[itemArray].Nit_ID && index_Calendario == ArrayCalendario[itemArray].Calendario_ID) {
@@ -1540,8 +1570,8 @@ function Editar(index_Nit, index_Calendario) {
 
                 $("#Select_EmpresaNit").attr("disabled", "disabled");
                 $("#Txt_ID").attr("disabled", "disabled");
-                              
-                
+
+
                 $('.C_Chosen').trigger('chosen:updated');
                 break;
             }
@@ -1551,7 +1581,7 @@ function Editar(index_Nit, index_Calendario) {
         LoadEdit();
     } catch (e) {
         Mensaje_General("Error - Actualizar", "Lo sentimos, ocurrió un error y no se logró ejecutar la acción solicitada, favor verifique los datos.", "E");
-        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo):\n" + e));
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo.Editar):\n" + e));
     }
 }
 
@@ -1579,7 +1609,7 @@ function LoadEdit() {
             indexCalendarioBase = Matrix_Calendarios[j].Index;
         }
     }
-    
+
     $("#Select_Calendario_CP").val(indexCalendarioBase).trigger("chosen:updated");
     Event_Calendario_CP();
     $("#TxtF_Start").val(editRangoIni);
@@ -1591,7 +1621,22 @@ function LoadEdit() {
     transacionAjax_ArrayC_Semana("MatrizDiasSemana");
     FirstJSONCharge(editRangoIni, editRangoFin);
     CompletarMatrices(edit_ArrayH_Calendario);
-    DibujarGrid(MatrizCalendario);
+    if (estado == "modificar") {        
+        DibujarGrid(MatrizCalendario);
+    } else if (estado == "buscar") {
+        Detalle();
+        DibujarGrid_View(MatrizCalendario);
+    }    
+}
+
+//Función que se encarga de escribir la información del calendario consultado dentro del dialog
+function Detalle() {
+    $("#Ver_Select_EmpresaNit").html($("#Select_EmpresaNit option:selected").html());
+    $("#Ver_Txt_ID").html($("#Txt_ID").val());
+    $("#Ver_TxtDescription").html($("#TxtDescription").val());
+    $("#Ver_Select_Calendario_CP").html($("#Select_Calendario_CP option:selected").html());
+    $("#Ver_TxtF_Start").html($("#TxtF_Start").val());
+    $("#Ver_TxtF_End").html($("#TxtF_End").val());
 }
 
 //Función que recibe una matriz que debe contener fechas y horarios y buscará similitudes de fechas en la matriz generada de Calendario
@@ -1662,8 +1707,8 @@ function Clear() {
     $("#TxtF_End").val("");
     $("#TxtF_Start").css("display", "none");
     $("#TxtF_End").css("display", "none");
-    $(".container_TGrid_Create").html("");
-    $(".container_TGrid_Create").css("display", "none");
+    $("#Div_Horarios").html("");
+    $("#Div_Horarios").css("display", "none");
 
     var Only_Empresa = VerificarNIT("Select_EmpresaNit");
 
@@ -1744,7 +1789,7 @@ function ValidarLaborales() {
         }
     } catch (e) {
         Mensaje_General("Error - Validación Laborales", "Lo sentimos, ocurrió un error y no se logró completar la verificación de los días que son laborales según el calendario, favor verifique los datos.", "E");
-        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo):\n" + e));
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo.ValidarLaborales):\n" + e));
     }
 }
 
@@ -2127,10 +2172,10 @@ function FirstJSONCharge(DateIni, DateFin) {
 
             }
             year = year + 1;
-        }        
+        }
     } catch (e) {
         Mensaje_General("Error - No se cargó tabla", "Lo sentimos, ocurrió un error y no se logró cargar la tabla de los días dentro del rango, verifique los datos.", "E");
-        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo):\n" + e));
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo.FirstJSONCharge):\n" + e));
     }
 }
 
@@ -2144,7 +2189,7 @@ function toJSONLocal(date) {
 //Función que recibe la matriz con las fechas y se encarga de armarla en la tabla
 function DibujarGrid(Matriz) {
     try {
-        $(".container_TGrid_Create").css("display", "none"); //Tabla que dibuja el grid
+        $("#Div_Horarios").css("display", "none"); //Tabla que dibuja el grid
 
         var html_Calendario = "";
 
@@ -2187,8 +2232,8 @@ function DibujarGrid(Matriz) {
 
         html_Calendario = html_Calendario + "</tbody></table>";//Cerramos tabla principal
 
-        $(".container_TGrid_Create").html(html_Calendario);
-        $(".container_TGrid_Create").css("display", "inline-table"); //Tabla que dibuja el grid
+        $("#Div_Horarios").html(html_Calendario);
+        $("#Div_Horarios").css("display", "inline-table"); //Tabla que dibuja el grid
 
         $("#TCalendarioRango").dataTable({
             "bJQueryUI": true,
@@ -2200,7 +2245,70 @@ function DibujarGrid(Matriz) {
         });
     } catch (e) {
         Mensaje_General("Error - No se logró dibujar", "Lo sentimos, ocurrió un error y no se logró dibujar la tabla, verifique los datos.", "E");
-        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo):\n" + e));
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo.DibujarGrid):\n" + e));
+    }
+}
+
+//Función que recibe la matriz con las fechas y se encarga de armarla en la tabla
+function DibujarGrid_View(Matriz) {
+    try {
+        $("#Ver_Div_Horarios").css("display", "none"); //Tabla que dibuja el grid
+
+        var html_Calendario = "";
+
+        html_Calendario = "<table id='TCalendarioRangoVer' border='1' cellpadding='1' cellspacing='1' style='width: 100%'><thead> ";
+        html_Calendario = html_Calendario + "<tr id='VerCabecera_1'><th class='Grid_Head' rowspan='3'>Año</th><th class='Grid_Head' rowspan='3'>Mes</th><th class='Grid_Head' rowspan='3'>Día</th><th class='Grid_Head' rowspan='3'>Nombre Día</th><th class='Grid_Head' colspan='8'>Horario</th></tr> "; //Armamos las cabeceras fijas
+        html_Calendario = html_Calendario + "<tr><th class='Grid_Head' colspan='2'>A</th><th class='Grid_Head' colspan='2'>B</th><th class='Grid_Head' colspan='2'>C</th><th class='Grid_Head' colspan='2'>D</th></tr> "
+        html_Calendario = html_Calendario + "<tr id='VerCabecera_2'><th class='Grid_Head'>Inicial</th><th class='Grid_Head'>Final</th><th class='Grid_Head'>Inicial</th><th class='Grid_Head'>Final</th><th class='Grid_Head'>Inicial</th><th class='Grid_Head'>Final</th><th class='Grid_Head'>Inicial</th><th class='Grid_Head'>Final</th></tr> "; //Armamos las cabeceras fijas
+        html_Calendario = html_Calendario + "</thead><tbody> "
+
+        for (var i in Matriz) {
+            var isFestivo = VerifyFestivo(Matriz[i].Year, Matriz[i].Month, Matriz[i].Day, MatrizFestivos);
+            html_Calendario = html_Calendario + "<tr id='Ver" + Matriz[i].ID + "'>"; //ID del TR
+
+            if (isFestivo == true && ArrayDayWork[7][2] == false) { //Pintamos en verde si es un día festivo y en el calendario se dice que festivos no se labora y lo colocamos en la matriz del calendario
+                html_Calendario = html_Calendario + "<td>" + Matriz[i].Year + "</td><td>" + Matriz[i].NameMonth + "</td><td>" + Matriz[i].Day + "</td><td><span class='cssToolTip_Form'><b style='color: #086308; cursor: pointer; cursor: hand;'><u>" + Matriz[i].DayName + "</u></b><span>Día Festivo</span></span></td>"; //Armamos la identificación del Día
+                Matriz[i].Festivo = "S";
+                html_Calendario = html_Calendario + "<td> - </td><td> - </td><td> - </td><td> - </td><td> - </td><td> - </td><td> - </td><td> - </td></tr>"; //Colocamos los horarios
+            } else if (isFestivo == true && ArrayDayWork[7][2] == true) { //Pintamos un * de verde y en negrilla para que sepan que es festivo pero es laboral
+                html_Calendario = html_Calendario + "<td>" + Matriz[i].Year + "</td><td>" + Matriz[i].NameMonth + "</td><td>" + Matriz[i].Day + "</td><td><span class='cssToolTip_Form'><b style='color: #000000; cursor: pointer; cursor: hand;'><u>" + Matriz[i].DayName + "</u></b><b style='color: #086308'>*</b><span>Festivo Laboral</span></span></td>"; //Armamos la identificación del Día
+                Matriz[i].Festivo = "S";
+                html_Calendario = html_Calendario + "<td>" + Matriz[i].A_HoraIni + "</td><td>" + Matriz[i].A_HoraFin + "</td><td>" + Matriz[i].B_HoraIni + "</td><td>" + Matriz[i].B_HoraFin + "</td><td>" + Matriz[i].C_HoraIni + "</td><td>" + Matriz[i].C_HoraFin + "</td><td>" + Matriz[i].D_HoraIni + "</td><td>" + Matriz[i].D_HoraFin + "</td></tr>"; //Colocamos los horarios
+            } else { //Si el día no es un día festivo
+                for (var j in ArrayDayWork) { //Recorremos el array que contiene los días laborales y los que no
+                    if (Matriz[i].Dia == ArrayDayWork[j][0]) {
+                        if (ArrayDayWork[j][2] == false) { //SI ese día no es laboral colocamos en ROJO
+                            html_Calendario = html_Calendario + "<td>" + Matriz[i].Year + "</td><td>" + Matriz[i].NameMonth + "</td><td>" + Matriz[i].Day + "</td><td><span class='cssToolTip_Form'><b style='color: #6B1010; cursor: pointer; cursor: hand;'>" + Matriz[i].DayName + "</b><span>Día no Laboral</span></span></td>"; //Armamos la identificación del Día
+                            html_Calendario = html_Calendario + "<td> - </td><td> - </td><td> - </td><td> - </td><td> - </td><td> - </td><td> - </td><td> - </td></tr>"; //Colocamos los horarios
+                            break;
+                        } else if (ArrayDayWork[j][2] == true) { //Si ese día si es laboral pintamos normal
+                            html_Calendario = html_Calendario + "<td>" + Matriz[i].Year + "</td><td>" + Matriz[i].NameMonth + "</td><td>" + Matriz[i].Day + "</td><td>" + Matriz[i].DayName + "</td>"; //Armamos la identificación del Día
+                            html_Calendario = html_Calendario + "<td>" + Matriz[i].A_HoraIni + "</td><td>" + Matriz[i].A_HoraFin + "</td><td>" + Matriz[i].B_HoraIni + "</td><td>" + Matriz[i].B_HoraFin + "</td><td>" + Matriz[i].C_HoraIni + "</td><td>" + Matriz[i].C_HoraFin + "</td><td>" + Matriz[i].D_HoraIni + "</td><td>" + Matriz[i].D_HoraFin + "</td></tr>"; //Colocamos los horarios
+                            break;
+                        }
+                    }
+                }
+
+            }
+
+        }
+
+        html_Calendario = html_Calendario + "</tbody></table>";//Cerramos tabla principal
+
+        $("#Ver_Div_Horarios").html(html_Calendario);
+        $("#Ver_Div_Horarios").css("display", "inline-table"); //Tabla que dibuja el grid
+
+        $("#TCalendarioRangoVer").dataTable({
+            "bJQueryUI": true,
+            "iDisplayLength": 365,
+            "bDestroy": true,
+            "aoColumnDefs": [
+              { 'bSortable': false, 'aTargets': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] }
+            ]
+        });
+    } catch (e) {
+        Mensaje_General("Error - No se logró dibujar", "Lo sentimos, ocurrió un error y no se logró dibujar la tabla, verifique los datos.", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (Calendario Progresivo.DibujarGrid_View):\n" + e));
     }
 }
 
@@ -2264,8 +2372,8 @@ function Event_Calendario_CP() {
         $("#TxtF_End").val("");
         $("#TxtF_Start").css("display", "none");
         $("#TxtF_End").css("display", "none");
-        $(".container_TGrid_Create").html("");
-        $(".container_TGrid_Create").css("display", "none"); //Tabla que dibuja el grid
+        $("#Div_Horarios").html("");
+        $("#Div_Horarios").css("display", "none"); //Tabla que dibuja el grid
     } else {
         MatrizCalendario = []; //Matriz que carga las fechas del rango seleccionado
         ArrayH_Calendario = []; //Matriz que guarda los datos que guardaremos en la BD
@@ -2285,8 +2393,8 @@ function Event_Calendario_CP() {
         $("#TxtF_End").val("");
         $("#TxtF_Start").val("");
         $("#TxtF_End").css("display", "none");
-        $(".container_TGrid_Create").html("");
-        $(".container_TGrid_Create").css("display", "none"); //Tabla que dibuja el grid
+        $("#Div_Horarios").html("");
+        $("#Div_Horarios").css("display", "none"); //Tabla que dibuja el grid
     }
 }
 
@@ -2309,8 +2417,8 @@ function IniTXTF_End_by_TXTF_Start() {
     $("#TxtF_End").css("display", "inline-table");
     MatrizCalendario = []; //Matriz que carga las fechas del rango seleccionado
     ArrayH_Calendario = []; //Matriz que guarda los datos que guardaremos en la BD
-    $(".container_TGrid_Create").html("");
-    $(".container_TGrid_Create").css("display", "none"); //Tabla que dibuja el grid
+    $("#Div_Horarios").html("");
+    $("#Div_Horarios").css("display", "none"); //Tabla que dibuja el grid
 }
 
 //Función que detecta el change del TXT de la fecha final

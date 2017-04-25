@@ -37,6 +37,7 @@ var validaTipoCalendario = false;
 
 var MensajeHora = "";
 var MensajeVacio = "";
+var MensajeIgual = "";
 var MensajeRepetido = "";
 var V_ONE = 0;
 
@@ -317,6 +318,9 @@ function BtnAgregaCalendario() {
             case 2:
                 Mensaje_General("Error - Campos Incompletos", "El campo de hora inicial u hora final no se completó en los días: " + MensajeVacio + "", "W");
                 break;
+            case 3:
+                Mensaje_General("Error - Horas Iguales", "La hora inicial no puede ser igual que la hora final en los días: " + MensajeIgual + "", "W");
+                break;
         }
     } catch (e) {
         Mensaje_General("Error - No se logró ejecutar la acción", "Lo sentimos, ocurrió un error y no se logró ejecutar correctamente la acción solicitada.", "E");
@@ -465,6 +469,7 @@ function ValidaHoras() {
         V_ONE = 0;
         MensajeHora = "";
         MensajeVacio = "";
+        MensajeIgual = "";
         //Lunes
         if (WorkMonday == true) {
             if ($("#TxtIniLun").val() != "" || $("#TxtFinLun").val() != "") {
@@ -487,6 +492,14 @@ function ValidaHoras() {
                             MensajeVacio = MensajeVacio + " Lunes";
                         } else {
                             MensajeVacio = MensajeVacio + ", Lunes";
+                        }
+                        break;
+                    case 3:
+                        validate = 3;
+                        if (MensajeIgual == "") {
+                            MensajeIgual = MensajeIgual + " Lunes";
+                        } else {
+                            MensajeIgual = MensajeIgual + ", Lunes";
                         }
                         break;
                 }
@@ -517,6 +530,14 @@ function ValidaHoras() {
                             MensajeVacio = MensajeVacio + ", Martes";
                         }
                         break;
+                    case 3:
+                        validate = 3;
+                        if (MensajeIgual == "") {
+                            MensajeIgual = MensajeIgual + " Martes";
+                        } else {
+                            MensajeIgual = MensajeIgual + ", Martes";
+                        }
+                        break;
                 }
             }
         }
@@ -541,6 +562,14 @@ function ValidaHoras() {
                             MensajeVacio = MensajeVacio + " Miércoles";
                         } else {
                             MensajeVacio = MensajeVacio + ", Miércoles";
+                        }
+                        break;
+                    case 3:
+                        validate = 3;
+                        if (MensajeIgual == "") {
+                            MensajeIgual = MensajeIgual + " Miércoles";
+                        } else {
+                            MensajeIgual = MensajeIgual + ", Miércoles";
                         }
                         break;
                 }
@@ -569,6 +598,14 @@ function ValidaHoras() {
                             MensajeVacio = MensajeVacio + ", Jueves";
                         }
                         break;
+                    case 3:
+                        validate = 3;
+                        if (MensajeIgual == "") {
+                            MensajeIgual = MensajeIgual + " Jueves";
+                        } else {
+                            MensajeIgual = MensajeIgual + ", Jueves";
+                        }
+                        break;
                 }
             }
         }
@@ -593,6 +630,14 @@ function ValidaHoras() {
                             MensajeVacio = MensajeVacio + " Viernes";
                         } else {
                             MensajeVacio = MensajeVacio + ", Viernes";
+                        }
+                        break;
+                    case 3:
+                        validate = 3;
+                        if (MensajeIgual == "") {
+                            MensajeIgual = MensajeIgual + " Viernes";
+                        } else {
+                            MensajeIgual = MensajeIgual + ", Viernes";
                         }
                         break;
                 }
@@ -621,6 +666,14 @@ function ValidaHoras() {
                             MensajeVacio = MensajeVacio + ", Sábado";
                         }
                         break;
+                    case 3:
+                        validate = 3;
+                        if (MensajeIgual == "") {
+                            MensajeIgual = MensajeIgual + " Sábado";
+                        } else {
+                            MensajeIgual = MensajeIgual + ", Sábado";
+                        }
+                        break;
                 }
             }
         }
@@ -647,10 +700,18 @@ function ValidaHoras() {
                             MensajeVacio = MensajeVacio + ", Domingo";
                         }
                         break;
+                    case 3:
+                        validate = 3;
+                        if (MensajeIgual == "") {
+                            MensajeIgual = MensajeIgual + " Domingo";
+                        } else {
+                            MensajeIgual = MensajeIgual + ", Domingo";
+                        }
+                        break;
                 }
             }
         }
-
+        console.log(validate);
         return validate;
     } catch (e) {
         Mensaje_General("Error - No se logró validar", "Lo sentimos, ocurrió un error y no se logró ejecutar correctamente la acción de validación de horarios.", "E");
@@ -1898,7 +1959,7 @@ function EditArraysTime() {
                 Mensaje_General("Error - Campos Incompletos", "El campo de hora inicial u hora final no se completó.", "W");
                 break;
             case 3:
-                Mensaje_General("Error - Horas Iguales", "La hora inicial no puede ser la misma que la hora final.", "W");
+                Mensaje_General("Error - Horas Iguales", "La hora inicial no puede ser igual que la hora final.", "W");
                 break;
         }
     } catch (e) {
