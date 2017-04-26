@@ -231,6 +231,7 @@ function BtnConsulta() {
 function BtnCrear() {
     try {
         if ($("#Select_TipoCalendario").val() == "1") {
+            Clear_Agregar();
             if (validaTipoCalendario == true) {
                 var validate;
                 validate = validarCamposCrear();
