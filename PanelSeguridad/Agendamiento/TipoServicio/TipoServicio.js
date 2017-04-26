@@ -115,9 +115,24 @@ function ValidaDecimales(input, val) {
         if (splitValue.length <= 2) {
             if (splitValue.length == 2) {
                 if (splitValue[1].length <= 2) {
-
+                    //No hacemos nada, está ok
                 } else {
                     Mensaje_General("Decimal No valido", "Solo se permiten dos números despues de la coma decimal, favor verifique el dato.", "E");
+                    value = value.substring(0, value.length - 1);
+                    $(input).val(value);
+                }
+                if (splitValue[0].length <= 18) {
+                    //No se hace nada, todo OK
+                } else {
+                    Mensaje_General("Número No valido", "El número digitado no puede exceder los 18 dígitos antes de la coma, favor verifique el dato.", "E");
+                    value = splitValue[0].substring(0, splitValue[0].length - 1) + "," + splitValue[1];
+                    $(input).val(value);
+                }
+            } else if (splitValue.length == 1) {
+                if (splitValue[0].length <= 18) {
+                    //No se hace nada, todo OK
+                } else {
+                    Mensaje_General("Número No valido", "El número digitado no puede exceder los 18 dígitos antes de la coma, favor verifique el dato.", "E");
                     value = value.substring(0, value.length - 1);
                     $(input).val(value);
                 }

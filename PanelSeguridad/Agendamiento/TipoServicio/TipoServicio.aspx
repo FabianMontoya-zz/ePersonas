@@ -229,7 +229,7 @@
                             <td id="V_Sigla_2" style="width: 5%" class="Sigla"></td>
                             <td style="width: 9.8%">
                                 <span class="cssToolTip_Form_T">
-                                    <input type="text" id="TxtValor" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ Mensaje_General('Atencion!', 'Solo se permiten numeros.' , 'W'); }" />
+                                    <input type="text" id="TxtValor" maxlength="21" onkeyup="ValidaDecimales(this, this.value);" onkeypress="return DecimalNumber(event);" />
                                     <span class="Spam_AVal"></span></span>
                             </td>
                             <td style="padding-bottom: 25px; width: 250px;">
