@@ -117,8 +117,6 @@ function BtnConsulta() {
         opcion = $("#DDLColumns").val();
         transacionAjax_TP_Leasing("consulta", filtro, opcion);
     }
-    console.log(opcion);
-    console.log(ValidateSelect);
 }
 
 //crear link en la BD
@@ -186,7 +184,6 @@ function ValidarDroplist() {
         flag = 0;
     }
     return flag;
-    console.log(contenido)
 }
 
 // crea la tabla en el cliente

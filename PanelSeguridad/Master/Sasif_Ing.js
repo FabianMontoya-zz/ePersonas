@@ -585,7 +585,6 @@ function ContruyeName_Temp(StrDocument, StrConsecutivo_Empresa, StrConsecutivo) 
            Output_Date + "." + StrConsecutivo;
 
     NameTemporal = StrDoc_Name_Temp
-    console.log(StrDoc_Name_Temp);
 }
 
 
@@ -659,7 +658,6 @@ function UpLoad_Document(NameAjax, NameFile_ID, Form) {
             },
             error: function (error) {
                 alert("Ocurrió un error inesperado, por favor intente de nuevo mas tarde: " + error);
-                console.log(error);
             }
         });
     }

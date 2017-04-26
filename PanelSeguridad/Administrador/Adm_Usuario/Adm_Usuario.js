@@ -173,7 +173,6 @@ function BtnCrear() {
 
     if (validate == 0) {
         if ($("#Btnguardar").val() == "Guardar") {
-            console.log("EXITO!");
             transacionAjax_Create_User("crear");
         }
         else {
