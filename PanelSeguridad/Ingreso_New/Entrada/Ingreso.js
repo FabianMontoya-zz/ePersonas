@@ -587,9 +587,7 @@ function validaEntradaSalida(A_FIV, A_FFV) {
     }
     else
         EstadoSal = "VERDE";
-
-    //console.log("EstadoEnt: " + EstadoEnt + "  EstadoSal : " + EstadoSal);
-
+    
     if (EstadoEnt == "VERDE" && EstadoSal == "VERDE")
         Estado = "VERDE";
     else if (EstadoEnt == "VERDE" && EstadoSal == "ROJO")

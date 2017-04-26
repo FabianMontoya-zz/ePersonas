@@ -711,7 +711,6 @@ function ValidaHoras() {
                 }
             }
         }
-        console.log(validate);
         return validate;
     } catch (e) {
         Mensaje_General("Error - No se logró validar", "Lo sentimos, ocurrió un error y no se logró ejecutar correctamente la acción de validación de horarios.", "E");
@@ -723,11 +722,9 @@ function ValidaHoras() {
 //valida el tio de clendario para el proceso
 function validaTipoC() {
     try {
-        var Ingresa;
-        validaTipoCalendario = false;
         switch ($("#Select_TipoCalendario").val()) {
             case "1":
-                CargeJson();
+                CargeJson("OK");
                 break;
             case "2":
                 Mensaje_General("Opción no Disponible", "Lo sentimos, la creación de calendarios progresivos desde este módulo aún no se encuentra disponible, por favor usa la opción disponible en el menú principal.");
@@ -1248,7 +1245,7 @@ function ValidarDatosHorariosDias() {
 /*----                                                                                              PROCESO DE CARGUE GRID CALENDARIO                                                                                   ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //construye el Json con los datos proporcionados para la vista
-function CargeJson() {
+function CargeJson(bandera) {
     try {
         var Repetido = ValidaDatosMatriz();
         if (Repetido == false) {
@@ -1458,11 +1455,10 @@ function CargeJson() {
                 };
                 MatrizSunday.push(JSONDay);
             }
-            if ($("#Btnguardar").val() == "Guardar") {
+            if (bandera == "OK") {
                 CargarMatricesHorarios();
-                Clear_Agregar();
             }
-            validaTipoCalendario = true;
+            Clear_Agregar();
         } else {
             Mensaje_General("Error - Horario Existe", "No puedes ingresar dos veces una misma combinación de horarios, esto sucedio en los siguientes días: " + MensajeRepetido + "", "W");
         }
@@ -1840,7 +1836,7 @@ function ValidarHorasEdit() {
     var validoEdit = 0;
 
     if ($("#TxtEditIni").val() != "" || $("#TxtEditFin").val() != "") {
-        validoEdit = Validahora($("#TxtEditIni").val(), $("#TxtEditFin").val());        
+        validoEdit = Validahora($("#TxtEditIni").val(), $("#TxtEditFin").val());
     } else {
         Mensaje_General("ERROR - Campos Vacios", "No puedes dejar los campos vacios, debe ingresar un horario valido.", "E");
         validoEdit = 4;
@@ -2470,7 +2466,6 @@ function Clear_Agregar() {
     $("#TxtFinSab").val("");
     $("#TxtIniDom").val("");
     $("#TxtFinDom").val("");
-
     $('.C_Chosen').trigger('chosen:updated');
 }
 

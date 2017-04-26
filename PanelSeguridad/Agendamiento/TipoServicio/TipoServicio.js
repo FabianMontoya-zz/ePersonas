@@ -111,8 +111,6 @@ function ValidaDecimales(input, val) {
         var decimal = false;
         var value = val;
         var splitValue = value.split(",");
-        console.log("Value: " + value);
-        console.log("Split: " + splitValue);
     
         if (splitValue.length <= 2) {
             if (splitValue.length == 2) {

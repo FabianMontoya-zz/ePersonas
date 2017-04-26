@@ -80,7 +80,6 @@ function Change_Select_Nit() {
 }
 
 function TransaccionesSegunNIT(index_ID) {
-    console.log("A");
     if (index_ID != "-1") {
         Charge_Combos_Depend_Nit(Matrix_Doc, "Select_Documento_1", index_ID, "");
         Charge_Combos_Depend_Nit(Matrix_Doc, "Select_Documento_2", index_ID, "");

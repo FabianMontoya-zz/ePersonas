@@ -143,7 +143,6 @@ function BtnElimina() {
     transacionAjax_Activo_delete("elimina");
     opcion = "ALL";
     BtnConsulta();
-    console.log(opcion);
 }
 
 
