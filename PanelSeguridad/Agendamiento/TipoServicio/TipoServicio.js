@@ -16,36 +16,42 @@ var index_ID;
 var editID;
 var RutaTemporal;
 var RutaRelativa;
-var Nit_ID_proccess;
 var DescripFormato;
 var StrConsecutivo;
 /*--------------- region de variables globales --------------------*/
 
 //Evento load JS
 $(document).ready(function () {
+    try {
+        /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
+        Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
+        Ocultar_Errores();
+        Ocultar_Tablas();
+        /*================== FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN ==============*/
 
-    /*Llamado de metodos para ocultar elementos al inicio de la operación de la pantalla*/
-    Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
-    Ocultar_Errores();
-    Ocultar_Tablas();
-    /*================== FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN ==============*/
+        transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
+        transacionAjax_EmpresaNit('Cliente');
+        transacionAjax_Formato('Formato');
+        transaccionAjax_RutasOperacion('Rutas_Operacion');
+        transaccionAjax_MDocumento('Matrx_Documento', Array_G_Usuario[0].Nit_ID);
+        transacionAjax_MMoneda('Moneda');
 
-    transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
-    transacionAjax_EmpresaNit('Cliente');
-    transacionAjax_Formato('Formato');
-    transaccionAjax_RutasOperacion('Rutas_Operacion');
-    transaccionAjax_MDocumento('Matrx_Documento', Array_G_Usuario[0].Nit_ID);
-    transacionAjax_MMoneda('Moneda');
+        ParamMoneda = ConsultaParam1_Pag();
+        SelectMoneda(ParamMoneda);
 
-    //ParamMoneda = ConsultaParam1_Pag();
+        $(function () {
+            $("#Text_Tiempo_Sesion").timepicker();
+            $("#Text_Tiempo_Entre_Sesiones").timepicker();
+            $("#Tiempo_Max_Agenda").timepicker();
+        });
 
-    $(function () {
-        $("#Text_Tiempo_Sesion").timepicker();
-        $("#Text_Tiempo_Entre_Sesiones").timepicker();
-        $("#Tiempo_Max_Agenda").timepicker();
-    });
-    Change_Select_Nit();
-
+        Change_Select_Nit();
+        Change_Select_TipoServicio();
+        Change_Select_Moneda();
+    } catch (e) {
+        setTimeout(console.error.bind(console, "• Log de error generado (TipoServicio.ready):\n" + e));
+        return false;
+    }
 });
 
 //muestra controles de guardado
@@ -82,14 +88,6 @@ function Ventanas_Emergentes() {
 //Función que oculta todas las IMG de los errores en pantalla
 function Ocultar_Errores() {
     ResetError();
-    $("#ESelect").css("display", "none");
-    $("#Img1").css("display", "none");
-    $("#Img2").css("display", "none");
-    $("#Img3").css("display", "none");
-    $("#Img5").css("display", "none");
-    $("#Img6").css("display", "none");
-    $("#Img7").css("display", "none");
-    $("#Img12").css("display", "none");
     $("#Img13").css("display", "none");
     $("#ImgCal").css("display", "none");
     $("#DE").css("display", "none");
@@ -106,137 +104,59 @@ function Ocultar_Tablas() {
     $(".Dialog_Datos").css("display", "none");
 }
 
-function ValidaDecimales(input, val) {
-    try{
-        var decimal = false;
-        var value = val;
-        var splitValue = value.split(",");
-    
-        if (splitValue.length <= 2) {
-            if (splitValue.length == 2) {
-                if (splitValue[1].length <= 2) {
-                    //No hacemos nada, está ok
-                } else {
-                    Mensaje_General("Decimal No valido", "Solo se permiten dos números despues de la coma decimal, favor verifique el dato.", "E");
-                    value = value.substring(0, value.length - 1);
-                    $(input).val(value);
-                }
-                if (splitValue[0].length <= 18) {
-                    //No se hace nada, todo OK
-                } else {
-                    Mensaje_General("Número No valido", "El número digitado no puede exceder los 18 dígitos antes de la coma, favor verifique el dato.", "E");
-                    value = splitValue[0].substring(0, splitValue[0].length - 1) + "," + splitValue[1];
-                    $(input).val(value);
-                }
-            } else if (splitValue.length == 1) {
-                if (splitValue[0].length <= 18) {
-                    //No se hace nada, todo OK
-                } else {
-                    Mensaje_General("Número No valido", "El número digitado no puede exceder los 18 dígitos antes de la coma, favor verifique el dato.", "E");
-                    value = value.substring(0, value.length - 1);
-                    $(input).val(value);
-                }
-            }
-        } else {
-            value = value.replace(",", "");
-            $(input).val(value);
-            Mensaje_General("Decimal No valido", "El campo solo admite números decimales validos EJ: « 1234,56 » , favor verifique la entrada.", "E");        
-        }
 
-
-        return decimal;
-    } catch (e) {
-        Mensaje_General("Error - Validación Dato Decimal", "Lo sentimos, ocurrió un error y no se logró verificar si el número es o no valido, el campo se limpiará.", "E");
-        $(input).val("");
-        setTimeout(console.error.bind(console, "• Log de error generado (TipoServicio):\n" + e));
-    }
-}
-
-//carga el combo de Cargo dependiente
-function Change_Select_Nit() {
-    $("#Select_EmpresaNit").change(function () {
-        Nit_ID_proccess = $(this).val();
-        TransaccionesSegunNIT(Nit_ID_proccess);
-    });
-    Change_Select_Moneda();
-}
-
-function TransaccionesSegunNIT(vp_index_ID) {
-    if (vp_index_ID != "-1") {
-        transacionAjax_Calendario('MatrixCalendarios', vp_index_ID);
-        transaccionAjax_MDocumento('Matrx_Documento', vp_index_ID);
-    }
-}
-
-//coloca la sigla de la moneda
-function Change_Select_Moneda() {
-    $("#Select_Moneda_Cod").change(function () {
-        var index_ID = this.value;
-        for (item in Matrix_Moneda) {
-            if (Matrix_Moneda[item].MonedaCod_ID == index_ID) {
-                $("#V_Sigla_1").html(Matrix_Moneda[item].Sigla);
-                $("#V_Sigla_2").html(Matrix_Moneda[item].Sigla);
-            }
-        }
-    });
-}
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                 REGION BOTONES                                                                                                                ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //consulta del del crud(READ)
 function BtnConsulta() {
+    try {
+        var filtro;
+        var ValidateSelect = ValidarDroplist();
+        var opcion;
 
-    var filtro;
-    var ValidateSelect = ValidarDroplist();
-    var opcion;
-
-    if (ValidateSelect == 1) {
-        filtro = "N";
-        opcion = "ALL";
-        transacionAjax_TipoServicio("consulta", filtro, opcion);
+        if (ValidateSelect == 1) {
+            filtro = "N";
+            opcion = "ALL";
+            transacionAjax_TipoServicio("consulta", filtro, opcion);
+        }
+        else {
+            filtro = "S";
+            opcion = $("#DDLColumns").val();
+            transacionAjax_TipoServicio("consulta", filtro, opcion);
+        }
+    } catch (e) {
+        Mensaje_General("Error - No se logró consultar", "Lo sentimos, ocurrió un error y no se logró ejecutar correctamente la acción de busqueda.", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (TipoServicio.BtnConsulta):\n" + e));
     }
-    else {
-        filtro = "S";
-        opcion = $("#DDLColumns").val();
-        transacionAjax_TipoServicio("consulta", filtro, opcion);
-    }
-
 }
 
 //crear link en la BD
 function BtnCrear() {
+    try {
+        var validate;
+        validate = validarCamposCrear();
 
-    var validate;
-    validate = validarCamposCrear();
+        if (validate == 0) {
+            if ($("#Btnguardar").val() == "Guardar") {
+                $("#Dialog_Imagen").dialog("open");
+                transacionAjax_TipoServicio_create("crear");
 
-    if (validate == 0) {
-        if ($("#Btnguardar").val() == "Guardar") {
-            $("#Dialog_Imagen").dialog("open");
-            transacionAjax_TipoServicio_create("crear");
-
+            }
+            else {
+                transacionAjax_TipoServicio_create("modificar");
+            }
         }
-        else {
-            transacionAjax_TipoServicio_create("modificar");
-        }
+    } catch (e) {
+        Mensaje_General("Error - No se logró ejecutar Acción", "Lo sentimos, ocurrió un error y no se logró ejecutar correctamente la acción de « " + $("#Btnguardar").val() + " ».", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (TipoServicio.BtnCrear):\n" + e));
     }
 }
 
 //elimina de la BD
 function BtnElimina() {
     transacionAjax_TipoServicio_delete("elimina");
-}
-
-//evento del boton salir
-function x() {
-    $("#dialog").dialog("close");
-    $("#Dialog_Imagen").dialog("close");
-    //MensajeHora = "";
-}
-
-//muestra dialog de 
-function BtnRelacion() {
-    $("#Dialog_Imagen").dialog("open");
 }
 
 //traer el formado del documento
@@ -265,63 +185,67 @@ function BuscarFormato(vp_Formato) {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 //habilita el panel de crear o consulta
 function HabilitarPanel(opcion) {
+    try {
+        switch (opcion) {
 
-    switch (opcion) {
+            case "crear":
+                $(".Dialog_Datos").css("display", "inline-table");
+                $("#TablaConsulta").css("display", "none");
+                $("#Select_EmpresaNit").removeAttr("disabled");
+                $("#Txt_ID").removeAttr("disabled");
+                $("#Btnguardar").attr("value", "Guardar");
+                $('.C_Chosen').trigger('chosen:updated');
+                $("#IF_Visor").css("display", "inline-table");
+                $("#foto_servicio").css("display", "inline-table");
+                Ocultar_Errores();
+                Clear();
+                estado = opcion;
+                //$("#Dialog_Calendar").dialog("open");
 
-        case "crear":
-            $(".Dialog_Datos").css("display", "inline-table");
-            $("#TablaConsulta").css("display", "none");
-            $("#Select_EmpresaNit").removeAttr("disabled");
-            $("#Txt_ID").removeAttr("disabled");
-            $("#Btnguardar").attr("value", "Guardar");
-            $('.C_Chosen').trigger('chosen:updated');
-            $("#IF_Visor").css("display", "inline-table");
-            $("#foto_servicio").css("display", "inline-table");
-            ResetError();
-            Clear();
-            estado = opcion;
-            //$("#Dialog_Calendar").dialog("open");
+                var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
 
-            var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
+                if (OnlyEmpresa == true) {
+                    TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+                }
 
-            if (OnlyEmpresa == true) {
-                TransaccionesSegunNIT($("#Select_EmpresaNit").val());
-            }
+                //StrTFormato = BuscarFormato(Matrix_Documento);
+                //ContruyeName_Temp("TEMP", StrConsecutivo, StrTFormato);
+                break;
 
-            StrTFormato = BuscarFormato(Matrix_Documento);
-            ContruyeName_Temp("TEMP", StrConsecutivo, StrTFormato);
-            break;
+            case "buscar":
+                $(".Dialog_Datos").css("display", "none");
+                $("#TablaConsulta").css("display", "inline-table");
+                $(".container_TGrid").html("");
+                $("#foto_servicio").css("display", "none");
+                estado = opcion;
+                Clear();
+                break;
 
-        case "buscar":
-            $(".Dialog_Datos").css("display", "none");
-            $("#TablaConsulta").css("display", "inline-table");
-            $(".container_TGrid").html("");
-            $("#foto_servicio").css("display", "none");
-            estado = opcion;
-            Clear();
-            break;
+            case "modificar":
+                $("#IF_Visor").css("display", "none");
+                $("#foto_servicio").css("display", "none");
+                $(".Dialog_Datos").css("display", "none");
+                $("#TablaConsulta").css("display", "inline-table");
+                $(".container_TGrid").html("");
+                estado = opcion;
+                Ocultar_Errores();
+                Clear();
 
-        case "modificar":
-            $("#IF_Visor").css("display", "none");
-            $("#foto_servicio").css("display", "none");
-            $(".Dialog_Datos").css("display", "none");
-            $("#TablaConsulta").css("display", "inline-table");
-            $(".container_TGrid").html("");
-            estado = opcion;
-            ResetError();
-            Clear();
+                break;
 
-            break;
+            case "eliminar":
+                $(".Dialog_Datos").css("display", "none");
+                $("#TablaConsulta").css("display", "inline-table");
+                $(".container_TGrid").html("");
+                $("#foto_servicio").css("display", "none");
+                estado = opcion;
+                Clear();
+                break;
 
-        case "eliminar":
-            $(".Dialog_Datos").css("display", "none");
-            $("#TablaConsulta").css("display", "inline-table");
-            $(".container_TGrid").html("");
-            $("#foto_servicio").css("display", "none");
-            estado = opcion;
-            Clear();
-            break;
-
+        }
+    } catch (e) {
+        Mensaje_General("Error - Cambio Panel", "Lo sentimos, ocurrió un error y no se logró ejecutar la acción solicitada, favor recargue la página.", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (TipoServicio.HabilitarPanel):\n" + e));
     }
 }
 
@@ -389,30 +313,56 @@ function ValidarDroplist() {
     return flag;
 }
 
+//Función que valida que el número decimal recibido sea valido, sirve para recibir decimales (18,2)
+function ValidaDecimales(input, val) {
+    try {
+        var decimal = false;
+        var value = val;
+        var splitValue = value.split(",");
+
+        if (splitValue.length <= 2) {
+            if (splitValue.length == 2) {
+                if (splitValue[1].length <= 2) {
+                    //No hacemos nada, está ok
+                } else {
+                    Mensaje_General("Decimal No valido", "Solo se permiten dos números despues de la coma decimal, favor verifique el dato.", "E");
+                    value = value.substring(0, value.length - 1);
+                    $(input).val(value);
+                }
+                if (splitValue[0].length <= 16) {
+                    //No se hace nada, todo OK
+                } else {
+                    Mensaje_General("Número No valido", "El número digitado no puede exceder los 16 dígitos antes de la coma, favor verifique el dato.", "E");
+                    value = splitValue[0].substring(0, splitValue[0].length - 1) + "," + splitValue[1];
+                    $(input).val(value);
+                }
+            } else if (splitValue.length == 1) {
+                if (splitValue[0].length <= 16) {
+                    //No se hace nada, todo OK
+                } else {
+                    Mensaje_General("Número No valido", "El número digitado no puede exceder los 16 dígitos antes de la coma, favor verifique el dato.", "E");
+                    value = value.substring(0, value.length - 1);
+                    $(input).val(value);
+                }
+            }
+        } else {
+            value = value.replace(",", "");
+            $(input).val(value);
+            Mensaje_General("Decimal No valido", "El campo solo admite números decimales validos EJ: « 1234,56 » , favor verifique la entrada.", "E");
+        }
+        return decimal;
+    } catch (e) {
+        Mensaje_General("Error - Validación Dato Decimal", "Lo sentimos, ocurrió un error y no se logró verificar si el número es o no valido, el campo se limpiará.", "E");
+        $(input).val("");
+        setTimeout(console.error.bind(console, "• Log de error generado (TipoServicio.ValidaDecimales):\n" + e));
+        return false;
+    }
+}
+
+
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                              PROCESO DE CARGUE GRID Servicio                                                                                   ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
-//limpieza de campos despues de agregar un Servicio al grid
-function Clear_Agregar() {
-
-    $("#TxtNombre").val("");
-    $("#Select_TipoServicio").val("");
-    $("#Text_Referencia").val("");
-    $("#Select_Moneda_Cod").val("");
-    $("#TxtCosto").val("");
-    $("#TxtValor").val("");
-    $("#Txt_Detalle").val("");
-    $("#Text_Capacidad").val("");
-    $("#Text_Bloqueo").val("");
-    $("#Select_Calculo").val("");
-    $("#Text_Tiempo_Sesion").val("");
-    $("#Text_Tiempo_Entre_Sesiones").val("");
-    $("#Tiempo_Max_Agenda").val("");
-    $("#Select_Calendario_TS").val("-1");
-
-    $('.C_Chosen').trigger('chosen:updated');
-}
 
 // crea la tabla de consulta
 function Table_Servicio() {
@@ -466,7 +416,7 @@ function Eliminar(index_Nit, index_Servicio) {
 
             editNit_ID = ArrayTipoServicio[itemArray].Nit_ID;
             editID = ArrayTipoServicio[itemArray].Codigo_ID;
-            $("#dialog_eliminar").dialog("option", "title", "Eliminar?");
+            $("#dialog_eliminar").dialog("option", "title", "¿Eliminar Servicio?");
             $("#dialog_eliminar").dialog("open");
         }
     }
@@ -522,22 +472,127 @@ function ChargeDependencia(index) {
 
 //limpiar campos
 function Clear() {
-    $("#Select_EmpresaNit").val("-1");
-    $("#Txt_ID").val("");
-    $("#TxtDescription").val("");
-    $("#Select_TipoServicio").val("-1");
-    $("#Select_Moneda_Cod").val("-1");
+    try {
+        $("#TxtRead").val("");
+        $("#DDLColumns").val("-1");
 
-    $("#TxtRead").val("");
-    $("#DDLColumns").val("-1");
+        $("#Select_EmpresaNit").val("-1");
+        $("#Txt_ID").val("");
+        $("#TxtDescription").val("");
+        $("#Select_TipoServicio").val("-1");
+        $("#TxtNombre").val("");
+        $("#Select_TipoServicio").val("");
+        $("#Text_Referencia").val("");
+        SelectMoneda(ParamMoneda);
+        $("#TxtCosto").val("");
+        $("#TxtValor").val("");
+        $("#Txt_Detalle").val("");
+        $("#Text_Capacidad").val("");
+        $("#Text_Bloqueo").val("");
+        $("#Select_Calculo").val("");
+        $("#Text_Tiempo_Sesion").val("");
+        $("#Text_Tiempo_Entre_Sesiones").val("");
+        $("#Tiempo_Max_Agenda").val("");
+        $("#Select_Calendario_TS").empty();
 
-    $('.C_Chosen').trigger('chosen:updated');
+        $('.C_Chosen').trigger('chosen:updated');
 
-    Clear_Agregar();
+        var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
 
-    var OnlyEmpresa = VerificarNIT("Select_EmpresaNit");
-
-    if (OnlyEmpresa == true) {
-        TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+        if (OnlyEmpresa == true) {
+            TransaccionesSegunNIT($("#Select_EmpresaNit").val());
+        }
+    } catch (e) {
+        Mensaje_General("Error - Sigla Moneda", "Lo sentimos, ocurrió un error y no se logró completar el proceso de limpieza de los campos. Favor verifique los datos.", "E");
+        $("#V_Sigla_1").html("----");
+        $("#V_Sigla_2").html("----");
+        setTimeout(console.error.bind(console, "• Log de error generado (TipoServicio.Clear):\n" + e));
     }
+}
+
+function TransaccionesSegunNIT(vp_index_ID) {
+    if (vp_index_ID != "-1") {
+        transacionAjax_Calendario('MatrixCalendarios', vp_index_ID);
+        transaccionAjax_MDocumento('Matrx_Documento', vp_index_ID);
+    }
+}
+
+//Función que coloca el combo de moneda en el valor enviado
+function SelectMoneda(id_Moneda) {
+    try{
+        if (id_Moneda != null && id_Moneda.length > 0) {
+            $("#Select_Moneda_Cod").val(id_Moneda).trigger('chosen:updated');
+        } else {
+            $("#Select_Moneda_Cod").val("-1").trigger('chosen:updated');
+        }
+        WriteSiglaMoneda();
+    } catch (e) {
+        Mensaje_General("Error - Selección Moneda", "Lo sentimos, ocurrió un error y no se logró seleccionar la moneda parametrizada. Favor verifique los datos.", "E");
+        $("#V_Sigla_1").html("----");
+        $("#V_Sigla_2").html("----");
+        setTimeout(console.error.bind(console, "• Log de error generado (TipoServicio.SelectMoneda):\n" + e));
+    }
+}
+
+//Función que escribe la sigla de la moneda que se usará según sea la selección del combo de moneda
+function WriteSiglaMoneda() {
+    try {
+        var index_ID = $("#Select_Moneda_Cod").val();
+        if (index_ID != "-1" && index_ID != null) {
+            $("#Img7").css("display", "none");
+            for (item in Matrix_Moneda) {
+                if (Matrix_Moneda[item].MonedaCod_ID == index_ID) {
+                    $("#V_Sigla_1").html(Matrix_Moneda[item].Sigla);
+                    $("#V_Sigla_2").html(Matrix_Moneda[item].Sigla);
+                    break;
+                }
+            }
+        } else {
+            $("#Img7").css("display", "inline-table");
+            $("#V_Sigla_1").html("----");
+            $("#V_Sigla_2").html("----");
+        }
+    } catch (e) {
+        Mensaje_General("Error - Sigla Moneda", "Lo sentimos, ocurrió un error y no se logró escribir correctamente la sigla de la moneda seleccionada. Favor verifique los datos.", "E");
+        $("#V_Sigla_1").html("----");
+        $("#V_Sigla_2").html("----");
+        setTimeout(console.error.bind(console, "• Log de error generado (TipoServicio.WriteSiglaMoneda):\n" + e));
+    }
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----                                                                                              PROCESO DE CHANGES PARA SELECTS                                                                               ----*/
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+//Detección del change del combo Select_EmpresaNit
+function Change_Select_Nit() {
+    $("#Select_EmpresaNit").change(function () {
+        var index_ID = $(this).val();
+        if (index_ID == "-1") {
+            $("#Img1").css("display", "inline-table");
+            $("#Select_Calendario_TS").empty().trigger('chosen:updated');
+        } else {
+            $("#Img1").css("display", "none");
+            TransaccionesSegunNIT(index_ID);
+        }
+    });
+}
+
+//Detección del change del combo Select_EmpresaNit
+function Change_Select_TipoServicio() {
+    $("#Select_TipoServicio").change(function () {
+        var index_ID = $(this).val();
+        if (index_ID == "-1") {
+            $("#Img5").css("display", "inline-table");
+        } else {
+            $("#Img5").css("display", "none");
+        }
+    });
+}
+
+//Detección del change del combo Select_Moneda_Cod
+function Change_Select_Moneda() {
+    $("#Select_Moneda_Cod").change(function () {
+        WriteSiglaMoneda();
+    });
 }

@@ -2451,24 +2451,6 @@ function DeleteArraysTime() {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                              PROCESO DE CARGUE GRID CALENDARIO                                                                                   ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-//limpieza de campos despues de agregar un calendario al grid
-function Clear_Agregar() {
-    $("#TxtIniLun").val("");
-    $("#TxtFinLun").val("");
-    $("#TxtIniMar").val("");
-    $("#TxtFinMar").val("");
-    $("#TxtIniMie").val("");
-    $("#TxtFinMie").val("");
-    $("#TxtIniJue").val("");
-    $("#TxtFinJue").val("");
-    $("#TxtIniVie").val("");
-    $("#TxtFinVie").val("");
-    $("#TxtIniSab").val("");
-    $("#TxtFinSab").val("");
-    $("#TxtIniDom").val("");
-    $("#TxtFinDom").val("");
-    $('.C_Chosen').trigger('chosen:updated');
-}
 
 // crea la tabla de consulta
 function Table_Calendario() {
@@ -2621,6 +2603,25 @@ function Detalle(index_Nit, index_Calendario) {
         Mensaje_General("Error - No se logró ejecutar la acción", "Lo sentimos, ocurrió un error y no se logró ejecutar correctamente la acción solicitada.", "E");
         setTimeout(console.error.bind(console, "• Log de error generado (Calendario.Detalle):\n" + e));
     }
+}
+
+//limpieza de campos despues de agregar un calendario al grid
+function Clear_Agregar() {
+    $("#TxtIniLun").val("");
+    $("#TxtFinLun").val("");
+    $("#TxtIniMar").val("");
+    $("#TxtFinMar").val("");
+    $("#TxtIniMie").val("");
+    $("#TxtFinMie").val("");
+    $("#TxtIniJue").val("");
+    $("#TxtFinJue").val("");
+    $("#TxtIniVie").val("");
+    $("#TxtFinVie").val("");
+    $("#TxtIniSab").val("");
+    $("#TxtFinSab").val("");
+    $("#TxtIniDom").val("");
+    $("#TxtFinDom").val("");
+    $('.C_Chosen').trigger('chosen:updated');
 }
 
 //limpiar campos
