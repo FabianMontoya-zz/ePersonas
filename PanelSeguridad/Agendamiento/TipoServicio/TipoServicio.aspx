@@ -24,16 +24,7 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
-
-    <div id="Dialog_Control" style="width: 100%; text-align: center;">
-        <div class="cssload-container" style="margin-top: 25%;">
-            <div class="cssload-whirlpool"></div>
-            <div>
-                <img id="Sasif" class="Logo_3" src="../../images/SASIF_NEW_WHITE.png" alt="SASIF S.A.S." />
-            </div>
-        </div>
-    </div>
-
+      
     <div class="Container_title_Form">
         <table id="Tabla_Title_form">
             <tr>
@@ -97,8 +88,7 @@
                 <div class="Dialog_Datos">
                     <table id="T_Subtitle1" style="width: 100%;" border="0">
                         <tr>
-                            <td class="Title_Bold" style="width: 10.5%;">
-                                Identificación Servicio
+                            <td class="Title_Bold" style="width: 10.5%;">Identificación Servicio
                             </td>
                         </tr>
                     </table>
@@ -117,14 +107,14 @@
                                     <span class="SpamEG"></span></span>
                             </td>
                         </tr>
-                    </table>                    
+                    </table>
                     <table id="Tabla_Identificacion" style="width: 100%; text-align: left;">
                         <tr>
                             <td style="width: 13.5%;" class="Label_Bold">Código
                             </td>
                             <td style="width: 10%;">
                                 <span class="cssToolTip_Form">
-                                    <input type="text" id="Txt_ID" maxlength="5" class="Numeric" onkeypress="return OnlyNumbers(event);" style="width: 100%;"/>
+                                    <input type="text" id="Txt_ID" maxlength="5" class="Numeric" onkeypress="return OnlyNumbers(event);" style="width: 100%;" />
                                     <span class="Spam_AN"></span></span>
                             </td>
                             <td style="padding-bottom: 25px; width: 29.5%;">
@@ -137,7 +127,7 @@
                             </td>
                             <td style="width: 30%;">
                                 <span class="cssToolTip_Form">
-                                    <input type="text" id="TxtNombre" maxlength="49" style="width: 100%;"/>
+                                    <input type="text" id="TxtNombre" maxlength="49" style="width: 100%;" />
                                     <span class="Spam_AST"></span></span>
                             </td>
                             <td style="width: 10%; padding-bottom: 25px;">
@@ -174,21 +164,15 @@
                             </td>
                             <td style="width: 30%;">
                                 <span class="cssToolTip_Form">
-                                    <input type="text" id="Text_Referencia" maxlength="49" style="width: 100%;" />
+                                    <input type="text" id="Text_Referencia" placeholder="(Opcional)" maxlength="49" style="width: 100%;" />
                                     <span class="Spam_AST"></span></span>
                             </td>
-                            <td style="padding-bottom: 25px; width: 10%;">
-                                <span class="cssToolTip">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img6"
-                                        src="../../images/error.png" />
-                                    <span class="SpamEG"></span></span>
-                            </td>
+                            <td style="padding-bottom: 25px; width: 10%;"></td>
                         </tr>
                     </table>
                     <table id="T_Subtitle2" style="width: 100%;" border="0">
                         <tr>
-                            <td class="Title_Bold" style="width: 10.5%;">
-                                Datos Servicio
+                            <td class="Title_Bold" style="width: 10.5%;">Datos Servicio
                             </td>
                         </tr>
                     </table>
@@ -210,15 +194,15 @@
                     </table>
                     <table id="Tabla_Servicio" style="width: 100%;">
                         <tr>
-                            <td class="Label_Bold" style="width: 14.5%;">Costo del servicio
+                            <td class="Label_Bold" style="width: 14%;">Costo del servicio
                             </td>
-                            <td id="V_Sigla_1" style="width: 5%" class="Sigla"></td>
-                            <td style="width: 9.8%;">
+                            <td id="V_Sigla_1" style="width: 5%; text-align: center;" class="Sigla"></td>
+                            <td style="width: 9%;">
                                 <span class="cssToolTip_Form">
-                                    <input type="text" id="TxtCosto" maxlength="19" onkeyup="ValidaDecimales(this, this.value);" onkeypress="return DecimalNumber(event);"/>
+                                    <input type="text" id="TxtCosto" placeholder="(Opcional)" maxlength="19" onkeyup="ValidaDecimales(this, this.value);" onkeypress="return DecimalNumber(event);" />
                                     <span class="Spam_ADEC"></span></span>
                             </td>
-                            <td style="padding-bottom: 25px; width: 235px;">
+                            <td style="padding-bottom: 25px; width: 12%;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img12"
                                         src="../../images/error.png" />
@@ -226,13 +210,13 @@
                             </td>
                             <td class="Label_Bold" style="width: 10%;">Valor del servicio 
                             </td>
-                            <td id="V_Sigla_2" style="width: 5%" class="Sigla"></td>
-                            <td style="width: 9.8%">
+                            <td id="V_Sigla_2" style="width: 5%; text-align: center;" class="Sigla"></td>
+                            <td style="width: 9%">
                                 <span class="cssToolTip_Form">
-                                    <input type="text" id="TxtValor" maxlength="19" onkeyup="ValidaDecimales(this, this.value);" onkeypress="return DecimalNumber(event);" />
+                                    <input type="text" id="TxtValor" maxlength="19" placeholder="(Opcional)" onkeyup="ValidaDecimales(this, this.value);" onkeypress="return DecimalNumber(event);" />
                                     <span class="Spam_ADEC"></span></span>
                             </td>
-                            <td style="padding-bottom: 25px; width: 250px;">
+                            <td style="padding-bottom: 25px; width: 14%;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img13"
                                         src="../../images/error.png" />
@@ -242,34 +226,35 @@
                     </table>
                     <table id="Table_Capacidad" style="width: 100%;">
                         <tr>
-                            <td class="Label_Bold" style="width: 4.8%;">Capacidad
+                            <td class="Label_Bold" style="width: 13.5%;">Capacidad
                             </td>
-                            <td style="width: 12%;">
+                            <td style="width: 10%;">
                                 <span class="cssToolTip_Form">
-                                    <input type="text" id="Text_Capacidad" maxlength="17" onkeyup="var valida = dinner_format(this); if(valida == 1){ Mensaje_General('Atencion!', 'Solo se permiten numeros.' , 'W'); }" />
-                                    <span class="Spam_AVal"></span></span>
+                                    <input type="text" id="Text_Capacidad" maxlength="5" placeholder="(Opcional)" class="Numeric" onkeypress="return OnlyNumbers(event);" style="width: 100%;" />
+                                    <span class="Spam_AN"></span></span>
                             </td>
-                            <td class="Label_Bold" style="width: 3.4%;">Num. servicios no pagos para bloqueo    
+                            <td class="Label_Bold" style="width: 26%;"></td>
+                            <td class="Label_Bold" style="width: 11%;">Num. servicios no pagos para bloqueo    
                             </td>
-                            <td id="Td5" style="width: 1.5%" class="Sigla"></td>
-                            <td style="width: 9.8%;">
+                            <td style="width: 10%;">
                                 <span class="cssToolTip_Form">
-                                    <input type="text" id="Text_Bloqueo" maxlength="5" onkeyup="var valida = dinner_format(this); if(valida == 1){ Mensaje_General('Atencion!', 'Solo se permiten numeros.' , 'W'); }" />
-                                    <span class="Spam_AVal"></span></span>
+                                    <input type="text" id="Text_Bloqueo" maxlength="5" placeholder="(Opcional)" class="Numeric" onkeypress="return OnlyNumbers(event);" style="width: 100%;" />
+                                    <span class="Spam_AN"></span></span>
                             </td>
+                            <td class="Label_Bold" style="width: 27%;"></td>
                         </tr>
                     </table>
-                    <table id="Table_Tipo_Calculo" style="width: 700px; text-align: left;">
+                    <table id="Table_Tipo_Calculo" style="width: 100%; text-align: left;">
                         <tr>
-                            <td style="width: 161px;" class="Label_Bold">Tipo de cálculo sesión
+                            <td style="width: 13.5%;" class="Label_Bold">Tipo de cálculo sesión
                             </td>
-                            <td style="width: 230px;">
+                            <td style="width: 23%;">
                                 <select id="Select_Calculo" style="width: 230px;" class="C_Chosen">
                                     <option value="F" selected="selected">F - Fijo</option>
                                     <option value="A">A - A Solicitud</option>
                                 </select>
                             </td>
-                            <td style="padding-bottom: 25px; width: 350px;">
+                            <td style="padding-bottom: 25px; width: 62%;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img9"
                                         src="../../images/error.png" />
@@ -277,29 +262,29 @@
                             </td>
                         </tr>
                     </table>
-                    <table id="Table_Tiempo_sesion" style="width: 100%;">
+                    <table id="Table_Tiempo_sesion" style="width: 100%; text-align: left;">
                         <tr>
-                            <td class="Label_Bold" style="width: 150px;">Tiempo de sesión
+                            <td class="Label_Bold" style="width: 13.5%;">Tiempo de sesión
                             </td>
-                            <td style="width: 20%;">
+                            <td style="width: 10%;">
                                 <span class="cssToolTip_Form">
-                                    <input id="Text_Tiempo_Sesion" type="text" class="Hours" readonly="readonly" /><span
-                                        class="Spam_AH"></span></span>
+                                    <input id="TXT_TiempoSesion" type="text" readonly="readonly" style="width: 100%;"/>
+                                    <span class="Spam_AH"></span></span>
                             </td>
-                            <td style="padding-bottom: 25px;">
+                            <td style="width: 26%; padding-bottom: 25px;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img10"
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
-                            <td class="Label_Bold" style="width: 160px;">Tiempo entre sesiones
+                            <td class="Label_Bold" style="width: 11%;">Tiempo entre sesiones
                             </td>
                             <td style="width: 10%;">
                                 <span class="cssToolTip_Form">
-                                    <input id="Text_Tiempo_Entre_Sesiones" type="text" class="Hours" readonly="readonly" /><span
+                                    <input id="TXT_TiempoEntreSesiones" type="text" readonly="readonly" style="width: 100%;"/><span
                                         class="Spam_AH"></span></span>
                             </td>
-                            <td style="padding-bottom: 25px;">
+                            <td style="padding-bottom: 25px; width: 27%;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img11"
                                         src="../../images/error.png" />
@@ -313,12 +298,16 @@
                             </td>
                             <td style="width: 38%;">
                                 <span class="cssToolTip_Form">
-                                    <input id="Tiempo_Max_Agenda" type="text" class="Hours" readonly="readonly" /><span
+                                    <input type="text" id="Tiempo_Max_Agenda" maxlength="5" placeholder="(Opcional)" class="Numeric" onkeypress="return OnlyNumbers(event);" style="width: 100%;" /><span
                                         class="Spam_AH"></span></span>
                             </td>
-                            <td style="width: 15%;" class="Label_Bold">Calendario
+                        </tr>
+                    </table>
+                    <table id="T_Calendario" style="width: 100%;">
+                        <tr>
+                            <td style="width: 14.5%;" class="Label_Bold">Calendario
                             </td>
-                            <td>
+                            <td style="width: 30%;">
                                 <select id="Select_Calendario_TS" class="C_Chosen">
                                 </select>
                             </td>
@@ -328,6 +317,7 @@
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
+
                         </tr>
                     </table>
                     <table id="Table_Detalle" style="width: 100%;">
@@ -346,10 +336,8 @@
                             </td>
                         </tr>
                     </table>
-                    <table id="T_Calendario" style="margin-left: 80px;">
-                    </table>
-                    <table style="width: 100%;">
 
+                    <table id="T_BtnGuardar" style="width: 100%;">
                         <tr>
                             <td colspan="4" align="center">
                                 <input id="Btnguardar" type="button" value="Guardar" onclick="BtnCrear();" />
@@ -362,6 +350,7 @@
     </div>
     <div id="Dialog_Calendar">
     </div>
+    <%-- Div para dialogos generales --%>
     <div id="dialog" title="Basic dialog">
         <table style="width: 100%; text-align: center;">
             <tr>
@@ -382,6 +371,7 @@
             </tr>
         </table>
     </div>
+    <%-- Dialog Eliminar --%>
     <div id="dialog_eliminar" title="Basic dialog">
         <table style="width: 100%; text-align: center;">
             <tr>
@@ -401,6 +391,7 @@
             </tr>
         </table>
     </div>
+
     <div id="Dialog_Imagen" title="Imagen del servicio">
         <table id="TFile" style="width: 100%;">
             <tr>
@@ -416,6 +407,71 @@
                 </td>
             </tr>
         </table>
+    </div>
+
+    <%-- Dialog que captura el tiempo en Horas:minutos --%>
+    <div id="Dialog_time" title="Basic dialog">
+        <table style="width: 100%;">
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="Label_Bold" style="width: 15%; text-align: center;"></td>
+                <td class="Label_Bold" style="width: 10.5%; text-align: center;">Horas
+                </td>
+                <td style="width: 6%; min-width: 60px;">
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="TXTHours" maxlength="2" class="Numeric" onkeypress="return OnlyNumbers(event);" style="width: 100%;" onkeyup="WriteTime()" />
+                        <span class="Spam_AN"></span></span>
+                </td>
+                <td style="padding-bottom: 25px; width: 40%;"> <span class="cssToolTip">
+                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgHours"
+                            src="../../images/error.png" />
+                        <span>Ingrese hora valida</span></span>
+
+                </td>
+
+            </tr>
+            <tr>
+                <td class="Label_Bold" style="width: 15%; text-align: center;"></td>
+                <td class="Label_Bold" style="width: 10.5%; text-align: center;">Minutos
+                </td>
+                <td style="width: 6%; min-width: 60px;">
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="TXTMinutes" maxlength="2" onkeypress="return OnlyNumbers(event);" class="Numeric" style="width: 100%;" onkeyup="ValidaMinute(this.value, this); WriteTime()" />
+                        <span class="Spam_AN"></span></span>
+                </td>
+                <td style="padding-bottom: 25px; width: 40%;">
+                    <span class="cssToolTip">
+                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgMinutes"
+                            src="../../images/error.png" />
+                        <span>Ingrese minutos validos</span></span>
+                </td>
+
+            </tr>
+            <tr>
+                <td class="Label_Bold" style="width: 100%; text-align: center;" colspan="4" id="L_Hours_Min">El tiempo será de 0 horas y 0 minutos.
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="4" align="center">
+                    <input id="BtnOk" type="button" value="Aceptar" onclick="IngresarTime();" style="cursor: pointer; cursor: hand;" />
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <%-- Div con dialog de cargue --%>
+    <div id="Dialog_Control" style="width: 100%; text-align: center;">
+        <div class="cssload-container" style="margin-top: 25%;">
+            <div class="cssload-whirlpool"></div>
+            <div>
+                <img id="Sasif" class="Logo_3" src="../../images/SASIF_NEW_WHITE.png" alt="SASIF S.A.S." />
+            </div>
+        </div>
     </div>
 
 </asp:Content>

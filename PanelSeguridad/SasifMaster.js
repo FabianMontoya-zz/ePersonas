@@ -301,7 +301,7 @@ function ready() {
         setTimeout(console.log.bind(console, "" + Day + "/" + Matrix_Mes[Month][1] + "/" + Year + " " + hours + ":" + minutes + ":" + seconds + "")); //No muestra la ruta donde se genera el console
         setTimeout(console.log.bind(console, "%cAll is ready, enjoy!", "color: #b70d0d; font-size: x-large")); //No muestra la ruta donde se genera el console
         setTimeout(console.log.bind(console, "%cDesarrollado por SASIF® 2016. Todos los derechos reservados.\nContacto sistemas@sasif.com.co | Bogotá D.C. - Colombia \n© SASIF S.A.S. " + Year + "", "color: #b70d0d; font-size: x"));
-        
+
         //Reload();
     } catch (e) {
         Mensaje_General("Error - Cargue Secuencia", "Lo sentimos, ocurrió un error y no se logró completar la secuencia de procesos iniciales.", "E");
@@ -803,7 +803,7 @@ function validate_fechaMayorQue(fechaInicial, fechaFinal, Type) {
 }
 
 //valida las hora inicial y final que sean coherentes
-function Validahora(V_HoraInicial, V_HoraFinal) {    
+function Validahora(V_HoraInicial, V_HoraFinal) {
     var Valida = 0;
     if (V_HoraInicial == "" || V_HoraFinal == "") {
         Valida = 2;
@@ -2257,8 +2257,8 @@ function UpLoad_MultipleFiles(NameAjax, NameFile_ID, Form) {
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                     PROCESO DE FORMATEO DE HORA                                                                  ----*/
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-//habilita la ventana emergente de Horas
-function Time_Format(ObjText) {
+//habilita la ventana emergente de captura de Hora en formato 24h
+function Time_Format(ObjText, titulo) {
     $("#" + ObjText).click(function () {
         ControlTime = ObjText;
         if ($("#" + ObjText).val == "") {
@@ -2273,7 +2273,11 @@ function Time_Format(ObjText) {
             $("#TXTHours").focus();
         }
         $("#Dialog_time").dialog("open");
-        $("#Dialog_time").dialog("option", "title", "Ingrese Hora");
+        if (titulo == null || titulo.length == 0 || !titulo) {
+            $("#Dialog_time").dialog("option", "title", "Ingrese Hora");
+        } else {
+            $("#Dialog_time").dialog("option", "title", titulo);
+        }
     });
 
     $("#TXTHours").blur(function () {
@@ -2331,48 +2335,53 @@ function ValidaMinute(val, obj) {
 
 //Arma la hora digitada y llena el campo de hora 
 function AddTime() {
-    Hours = $("#TXTHours").val();
-    Minutes = $("#TXTMinutes").val();
-    if (Hours != "" && Minutes != "" && ControlTime != "") {
-        if (Hours.length == 1) {
-            Hours = "0" + Hours;
-        }
-        if (Minutes.length == 1) {
-            Minutes = "0" + Minutes;
-        }
+    try {
+        Hours = $("#TXTHours").val();
+        Minutes = $("#TXTMinutes").val();
+        if (Hours != "" && Minutes != "" && ControlTime != "") {
+            if (Hours.length == 1) {
+                Hours = "0" + Hours;
+            }
+            if (Minutes.length == 1) {
+                Minutes = "0" + Minutes;
+            }
 
-        if ((Hours.length == 2 && Minutes.length == 2) && (parseInt(Hours) >= 0 && parseInt(Hours) <= 23) && (parseInt(Minutes) >= 0 && parseInt(Minutes) <= 59)) {
-            TimeWrote = Hours + ":" + Minutes;
-            $("#" + ControlTime).val("" + TimeWrote);
-            $("#Dialog_time").dialog("close");
-        } else {
-            Mensaje_General("Error - Hora no valida", "Lo sentimos, por alguna razón la hora no cumple el formato y contiene números invalidos, verifique los datos digitados. Recomendamos volver a digitar cada uno de los datos.", "W");
-
-            if (Hours.length != 2 || parseInt(Hours) < 0 || parseInt(Hours) > 23) {
-                $("#TXTHours").focus();
-                $("#TXTHours").select();
-                $("#ImgHours").css("display", "inline-table");
+            if ((Hours.length == 2 && Minutes.length == 2) && (parseInt(Hours) >= 0 && parseInt(Hours) <= 23) && (parseInt(Minutes) >= 0 && parseInt(Minutes) <= 59)) {
+                TimeWrote = Hours + ":" + Minutes;
+                $("#" + ControlTime).val("" + TimeWrote);
+                $("#Dialog_time").dialog("close");
             } else {
-                $("#TXTMinutes").focus();
-                $("#TXTMinutes").select();
-            }
+                Mensaje_General("Error - Hora no valida", "Lo sentimos, por alguna razón la hora no cumple el formato y contiene números invalidos, verifique los datos digitados. Recomendamos volver a digitar cada uno de los datos.", "W");
 
-            if (Minutes.length != 2 || parseInt(Minutes) < 0 || parseInt(Minutes) > 59) {
-                $("#ImgMinutes").css("display", "inline-table");
+                if (Hours.length != 2 || parseInt(Hours) < 0 || parseInt(Hours) > 23) {
+                    $("#TXTHours").focus();
+                    $("#TXTHours").select();
+                    $("#ImgHours").css("display", "inline-table");
+                } else {
+                    $("#TXTMinutes").focus();
+                    $("#TXTMinutes").select();
+                }
+
+                if (Minutes.length != 2 || parseInt(Minutes) < 0 || parseInt(Minutes) > 59) {
+                    $("#ImgMinutes").css("display", "inline-table");
+                }
             }
-        }
-    } else {
-        if (ControlTime == "") {
-            Mensaje_General("Control Perdido", "Lo sentimos, se ha perdido la referencia del Control y no podemos escribir la hora digitada.", "W");
         } else {
-            Mensaje_General("Campos Incompletos", "Debes completar los campos para poder agregar la hora.", "E");
-            if (Hours == "") {
-                $("#ImgHours").css("display", "inline-table");
-            }
-            if (Minutes == "") {
-                $("#ImgMinutes").css("display", "inline-table");
+            if (ControlTime == "") {
+                Mensaje_General("Control Perdido", "Lo sentimos, se ha perdido la referencia del Control y no podemos escribir la hora digitada.", "W");
+            } else {
+                Mensaje_General("Campos Incompletos", "Debes completar los campos para poder agregar la hora.", "E");
+                if (Hours == "") {
+                    $("#ImgHours").css("display", "inline-table");
+                }
+                if (Minutes == "") {
+                    $("#ImgMinutes").css("display", "inline-table");
+                }
             }
         }
+    } catch (e) {
+        Mensaje_General("Error - No se completó acción", "Lo sentimos, ocurrió un error y no se logró añadir la hora digitada.", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (SasifMasters.AddTime):\n" + e));
     }
 }
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/

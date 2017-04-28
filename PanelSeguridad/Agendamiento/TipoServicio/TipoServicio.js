@@ -39,12 +39,7 @@ $(document).ready(function () {
         ParamMoneda = ConsultaParam1_Pag();
         SelectMoneda(ParamMoneda);
 
-        $(function () {
-            $("#Text_Tiempo_Sesion").timepicker();
-            $("#Text_Tiempo_Entre_Sesiones").timepicker();
-            $("#Tiempo_Max_Agenda").timepicker();
-        });
-
+        IniciarTimeFormat();
         Change_Select_Nit();
         Change_Select_TipoServicio();
         Change_Select_Moneda();
@@ -59,6 +54,11 @@ function HabilitarControl() {
     $("#D_Controls").css("display", "inline-table");
 }
 
+//Función que inicializa todos los label que contendran horas
+function IniciarTimeFormat() {
+    Format_DialogTime("TXT_TiempoSesion");
+    Format_DialogTime("TXT_TiempoEntreSesiones");
+}
 //funcion para las ventanas emergentes
 function Ventanas_Emergentes() {
 
@@ -83,6 +83,18 @@ function Ventanas_Emergentes() {
         dialogClass: "Dialog_Sasif",
         modal: true
     });
+
+    $("#Dialog_time").dialog({
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true,
+        width: 323,
+        height: 250,
+        overlay: {
+            opacity: 0.5,
+            background: "black"
+        }
+    });
 }
 
 //Función que oculta todas las IMG de los errores en pantalla
@@ -104,7 +116,31 @@ function Ocultar_Tablas() {
     $(".Dialog_Datos").css("display", "none");
 }
 
+//habilita la ventana emergente de Horas
+function Format_DialogTime(ObjText) {
+    $("#" + ObjText).click(function () {
+        ControlTime = ObjText; //Se inicializó en SasifMaster
+        if ($("#" + ObjText).val == "") {
+        } else {
+            ClearTime();
+            TimeWrote = $("#" + ObjText).val();
+            var time = TimeWrote.split(":");
+            Hours = time[0];
+            Minutes = time[1];
+            $("#TXTHours").val(Hours);
+            $("#TXTMinutes").val(Minutes);
+            WriteTime();
+            $("#TXTHours").focus();
+        }
+        $("#Dialog_time").dialog("open");
+        $("#Dialog_time").dialog("option", "title", "Ingrese Tiempo");
 
+    });
+
+    $("#TXTMinutes").blur(function () {
+        ValidaMinute($(this).val(), $(this))
+    });
+}
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----                                                                                                                 REGION BOTONES                                                                                                                ----*/
@@ -178,6 +214,95 @@ function BuscarFormato(vp_Formato) {
             StrConsecutivo = Matrix_Documento[item].Consecutivo;
     }
     return vl_StrFormato;
+}
+
+//Función que escribe en el td el tiempo que se ha digitado
+function WriteTime() {
+    try {
+        var h = $("#TXTHours").val();
+        var m = $("#TXTMinutes").val();
+
+        if (h.length == 0 || m.length == 0) {
+            if (h.length == 0) {
+                h = "0";
+            }
+            if (m.length == 0) {
+                m = "0";
+            }
+        }
+
+        if (parseInt(h) != 1 && parseInt(m) != 1) {
+            $("#L_Hours_Min").html("El tiempo será de " + parseInt(h) + " horas y " + parseInt(m) + " minutos.");
+        } else if (parseInt(h) == 1 && parseInt(m) != 1) {
+            $("#L_Hours_Min").html("El tiempo será de " + parseInt(h) + " hora y " + parseInt(m) + " minutos.");
+        } else if (parseInt(h) != 1 && parseInt(m) == 1) {
+            $("#L_Hours_Min").html("El tiempo será de " + parseInt(h) + " horas y " + parseInt(m) + " minuto.");
+        } else if (parseInt(h) == 1 && parseInt(m) == 1) {
+            $("#L_Hours_Min").html("El tiempo será de " + parseInt(h) + " hora y " + parseInt(m) + " minuto.");
+        }
+    } catch (e) {
+        Mensaje_General("Error - No se completó acción", "Lo sentimos, ocurrió un error y no se logró aescribir correctamente el tiempo digitado, verifique los datos.", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (TipoServicio.WriteTime):\n" + e));
+    }
+}
+
+//Función que añade el tiempo digitado
+function IngresarTime() {
+    try {
+        Minutes = "";
+        Hours = "";
+        Hours = $("#TXTHours").val(); //Inicializado en SasifMaster
+        Minutes = $("#TXTMinutes").val(); //Inicializado en SasifMaster
+        if (Hours == "") {
+            $("#TXTHours").val("00");
+            Hours = "00"; //Inicializado en SasifMaster
+        }
+
+        if (Hours != "" && Minutes != "" && ControlTime != "") {
+            if (Hours.length == 1) {
+                Hours = "0" + Hours;
+            }
+            if (Minutes.length == 1) {
+                Minutes = "0" + Minutes;
+            }
+
+            if ((Hours.length == 2 && Minutes.length == 2) && (parseInt(Hours) >= 0) && (parseInt(Minutes) >= 0 && parseInt(Minutes) <= 59)) {
+                TimeWrote = Hours + ":" + Minutes;
+                $("#" + ControlTime).val("" + TimeWrote);
+                $("#Dialog_time").dialog("close");
+            } else {
+                Mensaje_General("Error - Hora no valida", "Lo sentimos, por alguna razón la hora no cumple el formato y contiene números invalidos, verifique los datos digitados. Recomendamos volver a digitar cada uno de los datos.", "W");
+
+                if (Hours.length != 2 || parseInt(Hours) < 0) {
+                    $("#TXTHours").focus();
+                    $("#TXTHours").select();
+                    $("#ImgHours").css("display", "inline-table");
+                } else {
+                    $("#TXTMinutes").focus();
+                    $("#TXTMinutes").select();
+                }
+
+                if (Minutes.length != 2 || parseInt(Minutes) < 0 || parseInt(Minutes) > 59) {
+                    $("#ImgMinutes").css("display", "inline-table");
+                }
+            }
+        } else {
+            if (ControlTime == "") {
+                Mensaje_General("Control Perdido", "Lo sentimos, se ha perdido la referencia del Control y no podemos escribir la hora digitada.", "W");
+            } else {
+                Mensaje_General("Campos Incompletos", "Debes completar los campos para poder agregar la hora.", "E");
+                if (Hours == "") {
+                    $("#ImgHours").css("display", "inline-table");
+                }
+                if (Minutes == "") {
+                    $("#ImgMinutes").css("display", "inline-table");
+                }
+            }
+        }
+    } catch (e) {
+        Mensaje_General("Error - No se completó acción", "Lo sentimos, ocurrió un error y no se logró añadir el tiempo digitado.", "E");
+        setTimeout(console.error.bind(console, "• Log de error generado (TipoServicio.IngresarTiempo):\n" + e));
+    }
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -519,7 +644,7 @@ function TransaccionesSegunNIT(vp_index_ID) {
 
 //Función que coloca el combo de moneda en el valor enviado
 function SelectMoneda(id_Moneda) {
-    try{
+    try {
         if (id_Moneda != null && id_Moneda.length > 0) {
             $("#Select_Moneda_Cod").val(id_Moneda).trigger('chosen:updated');
         } else {
