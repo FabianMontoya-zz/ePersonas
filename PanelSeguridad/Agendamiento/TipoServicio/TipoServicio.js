@@ -27,13 +27,12 @@ $(document).ready(function () {
         Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
         Ocultar_Errores();
         Ocultar_Tablas();
-        /*================== FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN ==============*/
-
+        /*================== FIN LLAMADO INICIAL DE MÉTODOS DE INICIALIZACIÓN ==============*/
         transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
         transacionAjax_EmpresaNit('Cliente');
-        transacionAjax_Formato('Formato');
-        transaccionAjax_RutasOperacion('Rutas_Operacion');
-        transaccionAjax_MDocumento('Matrx_Documento', Array_G_Usuario[0].Nit_ID);
+        //transacionAjax_Formato('Formato');
+        //transaccionAjax_RutasOperacion('Rutas_Operacion');
+        //transaccionAjax_MDocumento('Matrx_Documento', Array_G_Usuario[0].Nit_ID);
         transacionAjax_MMoneda('Moneda');
 
         ParamMoneda = ConsultaParam1_Pag();
@@ -49,16 +48,12 @@ $(document).ready(function () {
     }
 });
 
-//muestra controles de guardado
-function HabilitarControl() {
-    $("#D_Controls").css("display", "inline-table");
-}
-
 //Función que inicializa todos los label que contendran horas
 function IniciarTimeFormat() {
     Format_DialogTime("TXT_TiempoSesion");
     Format_DialogTime("TXT_TiempoEntreSesiones");
 }
+
 //funcion para las ventanas emergentes
 function Ventanas_Emergentes() {
 

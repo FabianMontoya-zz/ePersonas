@@ -25,7 +25,7 @@ $(document).ready(function () {
     Ventanas_Emergentes(); //Ventanas_Emergentes Va primero pues es la que llama al load de espera al inicio de los AJAX
     Ocultar_Errores();
     Ocultar_Tablas();
-    /*==================FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN==============*/
+    /*==================FIN LLAMADO INICIAL DE MÉTODOS DE INICIALIZACIÓN==============*/
 
     /*Llamado a las diferentes Trasacciones necesarias al iniciar el proceso de carga de la página*/
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');

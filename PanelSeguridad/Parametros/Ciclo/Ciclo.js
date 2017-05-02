@@ -14,7 +14,7 @@ $(document).ready(function () {
     Ocultar_Errores();
     Ocultar_Tablas();
     Picker_Fechas();
-    /*==================FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN==============*/
+    /*==================FIN LLAMADO INICIAL DE MÉTODOS DE INICIALIZACIÓN==============*/
 
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
 

@@ -18,7 +18,7 @@ $(document).ready(function () {
     Ocultar_Errores();
     Ocultar_Tablas();
 
-    /*================== FIN LLAMADO INICIAL DE METODOS DE INICIALIZACIÓN ==============*/
+    /*================== FIN LLAMADO INICIAL DE MÉTODOS DE INICIALIZACIÓN ==============*/
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_EmpresaNit('Cliente');
 
